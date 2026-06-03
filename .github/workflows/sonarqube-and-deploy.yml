@@ -1,0 +1,51 @@
+name: SonarQube Scan and Deploy
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  sonar:
+    name: SonarQube analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Run SonarScanner (Docker image)
+        env:
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_LOGIN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          docker run --rm -e SONAR_HOST_URL="$SONAR_HOST_URL" -e SONAR_LOGIN="$SONAR_LOGIN" -v "${{ github.workspace }}":/usr/src sonarsource/sonar-scanner-cli
+
+  deploy:
+    name: Deploy (runs on main)
+    needs: sonar
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build (placeholder)
+        run: |
+          echo "Replace this with your build commands (npm ci && npm run build, dotnet publish, etc.)"
+          mkdir -p artifact
+          echo "artifact" > artifact/readme.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: deploy-artifact
+          path: artifact
+
+      - name: Deploy (placeholder)
+        run: |
+          echo "Replace this step with your deploy commands (scp/docker/kubectl/az cli)."
