@@ -19,6 +19,14 @@ Read all instructions from:
 .skills/*
 docs/*
 
+**Agent Priority Guidance**
+
+- **Consult in this order:**
+	1. Dot-prefixed folders/files (e.g., `.agents`, `.skills`) — consult these first.
+	2. Existing top-level folders and their README/Markdown templates (for example, `docs/`, `datasources/`, `references/`) — treat these as canonical templates.
+	3. Individual Markdown template files (`*.md`) elsewhere in the repository.
+
+
 Before implementing:
 
 1. Understand business goals
