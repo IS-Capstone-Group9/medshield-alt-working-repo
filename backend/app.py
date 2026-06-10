@@ -70,6 +70,15 @@ def load_snapshot() -> dict[str, Any]:
     return warehouse_snapshot()
 
 
+def supabase_rpc(function_name: str, params: dict) -> Any:
+    """Call a Supabase Postgres RPC function via the REST API."""
+    from services.shared_snapshot import supabase_base_url, supabase_headers
+    url = f"{supabase_base_url()}/rest/v1/rpc/{function_name}"
+    response = requests.post(url, headers=supabase_headers(), json=params, timeout=20)
+    response.raise_for_status()
+    return response.json()
+
+
 @app.after_request
 def add_cors(response):
     response.headers["Access-Control-Allow-Origin"] = "*"
@@ -116,6 +125,80 @@ def year_summary():
 def seasonality():
     data = load_snapshot()
     return jsonify(data["seasonality"])
+
+
+@app.route("/api/auth/login", methods=["POST", "OPTIONS"])
+def auth_login():
+    if request.method == "OPTIONS":
+        return jsonify({}), 200
+    body = request.get_json(force=True, silent=True) or {}
+    username = (body.get("username") or "").strip()
+    password = (body.get("password") or "").strip()
+
+    if not username or not password:
+        return jsonify({"error": "Username and password are required"}), 400
+
+    if not supabase_enabled():
+        return jsonify({"error": "Auth service unavailable"}), 503
+
+    try:
+        rows = supabase_rpc("verify_login", {"p_username": username, "p_password": password})
+        if not rows:
+            return jsonify({"error": "Invalid username or password"}), 401
+        user = rows[0]
+        if not user.get("is_active"):
+            return jsonify({"error": "Account is disabled"}), 403
+        return jsonify({
+            "account_id": user["account_id"],
+            "username": user["username"],
+            "email": user["email"],
+            "role": user["role"],
+        })
+    except Exception as exc:
+        app.logger.error("Login error: %s", exc)
+        return jsonify({"error": "Authentication service error"}), 500
+
+
+@app.route("/api/auth/signup", methods=["POST", "OPTIONS"])
+def auth_signup():
+    if request.method == "OPTIONS":
+        return jsonify({}), 200
+    body = request.get_json(force=True, silent=True) or {}
+    username = (body.get("username") or "").strip()
+    email = (body.get("email") or "").strip()
+    password = (body.get("password") or "").strip()
+
+    if not username or not email or not password:
+        return jsonify({"error": "Username, email and password are required"}), 400
+
+    if len(password) < 8:
+        return jsonify({"error": "Password must be at least 8 characters"}), 400
+
+    if not supabase_enabled():
+        return jsonify({"error": "Auth service unavailable"}), 503
+
+    try:
+        rows = supabase_rpc("create_account", {
+            "p_username": username,
+            "p_email": email,
+            "p_password": password,
+            "p_role": "viewer",
+        })
+        if not rows:
+            return jsonify({"error": "Failed to create account"}), 500
+        result = rows[0]
+        if result.get("error_msg"):
+            return jsonify({"error": result["error_msg"]}), 409
+        return jsonify({
+            "account_id": result["account_id"],
+            "username": result["username"],
+            "email": result["email"],
+            "role": result["role"],
+            "message": "Account created successfully",
+        }), 201
+    except Exception as exc:
+        app.logger.error("Signup error: %s", exc)
+        return jsonify({"error": "Account creation failed"}), 500
 
 
 @app.route("/api/health", methods=["GET"])
