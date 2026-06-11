@@ -5,7 +5,7 @@ Capstone workspace for the MedShield Pharma Corp. business analytics system.
 ## Workspace layout
 
 - `frontend/` - Next.js + TypeScript dashboard UI
-- `backend/` - API gateway for the dashboard
+- `backend/` - TypeScript API gateway for the dashboard
 - `services/analytics_service/` - analytics microservice
 - `services/product_service/` - product microservice
 - `services/shared_snapshot.py` - shared Supabase warehouse reader for dashboard views
@@ -27,8 +27,8 @@ Capstone workspace for the MedShield Pharma Corp. business analytics system.
 
 ```powershell
 cd backend
-pip install -r requirements.txt
-python app.py
+npm install
+npm run dev
 ```
 
 3. Run the frontend:
@@ -39,7 +39,7 @@ npm install
 npm run dev
 ```
 
-4. In Supabase, run `supabase/migrations/001_init.sql` and then load `supabase/seed.sql` to create the connected warehouse schema and seed it with the current MedShield dataset.
+4. In Supabase, run `supabase/migrations/001_init.sql`, `supabase/migrations/002_accounts.sql`, and `supabase/migrations/003_auth_rpc.sql`, then load `supabase/seed.sql` to create the connected warehouse schema, auth tables, and current MedShield dataset.
 
 ## Reference clone
 

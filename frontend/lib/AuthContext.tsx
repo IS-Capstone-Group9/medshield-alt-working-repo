@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, ReactNode } from 'react'
 
-const API_BASE = (process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000').replace(/\/$/, '')
+const API_BASE = (process.env.NEXT_PUBLIC_API_BASE_URL || 'http://[::1]:5000').replace(/\/$/, '')
 
 interface User {
   accountId: number

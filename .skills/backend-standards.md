@@ -1,7 +1,7 @@
 # Backend Standards
 
 ## Description
-Defines backend expectations for the MedShield Flask services and API gateway. Use these rules for request handling, validation, logging, service boundaries, and performance-sensitive changes. The backend should stay predictable: receive input, validate it, process it in the correct layer, and return a response that is consistent enough for the frontend and service consumers to rely on. In the capstone, the backend is also part of the evidence chain that the dashboard is built on a sound technical foundation.
+Defines backend expectations for the MedShield TypeScript API gateway and supporting services. Use these rules for request handling, validation, logging, service boundaries, and performance-sensitive changes. The backend should stay predictable: receive input, validate it, process it in the correct layer, and return a response that is consistent enough for the frontend and service consumers to rely on. In the capstone, the backend is also part of the evidence chain that the dashboard is built on a sound technical foundation.
 
 ## Workflow
 1. Confirm the API contract and data source before changing backend code.
@@ -22,6 +22,6 @@ Defines backend expectations for the MedShield Flask services and API gateway. U
 - Keep backend behavior aligned with the warehouse schema and dashboard metrics.
 
 ## Project Conventions
-- Align with the Flask-based service layer described in `docs/SETUP.md`.
+- Align with the TypeScript API gateway described in `docs/SETUP.md`.
 - Prefer explicit, readable control flow over clever abstractions.
 - Keep dependency boundaries clear between gateway, services, and data access.

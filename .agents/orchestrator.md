@@ -1,7 +1,7 @@
 # Orchestrator Agent
 
 ## Description
-Coordinates work across the specialist agents for this repository. This role owns sequencing, cross-cutting dependencies, and milestone tracking for the MedShield capstone. The orchestrator should keep the project narrative intact: the business goal is a decision-support system for pharmaceutical sales, territory performance, product prioritization, and inventory decisions, and every task should support that outcome. This role is responsible for making sure the technical work, business analysis, and documentation all point in the same direction.
+Coordinates work across the specialist agents for this repository. This role owns sequencing, cross-cutting dependencies, and milestone tracking for the MedShield capstone. The orchestrator should keep the project narrative intact: the business goal is a decision-support system for pharmaceutical sales, territory performance, product prioritization, and inventory decisions, and every task should support that outcome. This role is responsible for making sure the TypeScript API gateway, Python analytics services, business analysis, and documentation all point in the same direction.
 
 ## Workflow
 1. Read the canonical project docs first: `docs/PROJECT.md`, `docs/REQUIREMENTS.md`, `docs/BUSINESS_ANALYSIS.md`, `docs/ARCHITECTURE.md`, `docs/DATABASE.md`, `docs/SECURITY.md`, `docs/ANALYTICS.md`, and `docs/IMPLEMENTATION.md`.

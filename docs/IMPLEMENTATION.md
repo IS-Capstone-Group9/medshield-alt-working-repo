@@ -5,9 +5,9 @@ This document describes the current implementation of the MedShield Business Ana
 ## 4.1 System Overview
 
 - Frontend: Next.js App Router, React, and TypeScript in `frontend/`.
-- Backend: Flask API gateway in `backend/` with two Flask microservices in `services/`.
+- Backend: TypeScript API gateway in `backend/` with two Python Flask microservices in `services/`.
 - Database: Supabase PostgreSQL using a connected warehouse schema in `supabase/`.
-- Source of truth: warehouse fact tables and dimension tables. When Supabase credentials are unavailable in the workspace, the services can fall back to the checked-in reference export for local execution.
+- Source of truth: warehouse fact tables and dimension tables. When Supabase credentials are unavailable in the workspace, the gateway and services can fall back to the checked-in reference export for local execution.
 
 ## 4.2 Warehouse Design
 
@@ -44,15 +44,16 @@ These tables are linked through foreign keys and are exposed through dashboard v
 
 ## 4.4 Runtime Behavior
 
-- The backend first tries the microservices.
-- If the microservices are unavailable, it reads the same warehouse views directly.
-- The runtime prefers the warehouse views. If the warehouse is unavailable in this workspace, the shared helper can fall back to the checked-in reference export so the dashboard still runs locally.
+- The TypeScript backend first tries the Python analytics microservices.
+- If the microservices are unavailable, it reads the same warehouse views through the reference export.
+- The runtime prefers the warehouse views. If the warehouse is unavailable in this workspace, the gateway and analytics helpers can fall back to the checked-in reference export so the dashboard still runs locally.
 
 ## 4.5 Current Deliverables
 
 - `frontend/` renders the MedShield dashboard in Next.js + TypeScript.
-- `backend/` exposes the dashboard API.
-- `services/shared_snapshot.py` reads the warehouse views.
+- `backend/` exposes the dashboard API in TypeScript.
+- `backend/src/snapshot.ts` mirrors the analytics fallback for the TypeScript gateway.
+- `services/shared_snapshot.py` reads the warehouse views for the Python analytics services.
 - `supabase/seed.sql` seeds the current data into the connected schema.
 
 ## 4.6 Next Data Pipeline Step

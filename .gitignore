@@ -7,6 +7,8 @@ frontend/dist/
 frontend/.next/
 backend/__pycache__/
 backend/.pytest_cache/
+backend/data/local_accounts.json
+backend/$log
 __pycache__/
 .pytest_cache/
 .vscode/

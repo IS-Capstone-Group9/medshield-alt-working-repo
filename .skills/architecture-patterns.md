@@ -22,6 +22,6 @@ Defines the architecture patterns that best fit the MedShield project. Use these
 
 ## MedShield Fit
 - Frontend: page/component structure with typed data access.
-- Backend: API gateway plus focused services.
+- Backend: TypeScript API gateway plus focused Python analytics services.
 - Data: warehouse tables, dimensions, facts, and views.
 - Delivery: environment-based deployment with repeatable build and release steps.

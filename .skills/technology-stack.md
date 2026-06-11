@@ -12,8 +12,8 @@ This file defines the canonical stack for the MedShield capstone. Use it to keep
 - CSS variables and responsive layout
 
 ### Backend
-- Python Flask API gateway
-- Python Flask microservices for domain-specific logic
+- TypeScript API gateway in `backend/`
+- Python Flask microservices for domain-specific analytics logic
 
 ### Database
 - Supabase PostgreSQL
@@ -46,6 +46,11 @@ This file defines the canonical stack for the MedShield capstone. Use it to keep
 
 ### Analytics
 - PostHog or the repository's documented analytics tool
+
+### Service Split
+- Keep the HTTP gateway in TypeScript
+- Keep analytics and reporting services in Python
+- Keep the boundary explicit so the frontend talks to one API layer and the analytical workloads stay isolated
 
 ### CI/CD
 - GitHub Actions
