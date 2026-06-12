@@ -26,3 +26,23 @@ Defines and validates the test strategy for MedShield so that changes are verifi
 - Bug reports
 - Coverage gaps
 - Verification notes
+
+## Reusable Assignment Details
+
+Use this worker when behavior changes, a defect is fixed, acceptance criteria need proof, regression risk exists, or release confidence must be established.
+
+Required inputs:
+- Requirements, acceptance criteria, user workflows, and risk areas.
+- Changed files, affected APIs, data sources, and environments.
+- Existing tests, known flaky checks, and required quality gates.
+- Defect reports, reproduction steps, and expected results.
+
+Detailed workflow:
+1. Convert acceptance criteria into executable or manually verifiable checks.
+2. Choose the lowest useful test layer first: unit, integration, end-to-end, or exploratory.
+3. Cover happy paths, edge cases, error states, permissions, and regression scenarios.
+4. Run targeted checks and record exact commands or manual steps.
+5. Report defects with reproduction steps, actual result, expected result, and severity.
+6. Hand off gaps, risks, and verification evidence to reviewers and release owners.
+
+Done means the changed behavior has credible evidence, unresolved defects are visible, and remaining test risk is explicit.

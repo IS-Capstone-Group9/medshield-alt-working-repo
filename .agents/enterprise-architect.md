@@ -26,3 +26,23 @@ Aligns the MedShield solution with business goals across business, application, 
 - Layer review notes
 - Target-state recommendations
 - Transition roadmap input
+
+## Reusable Assignment Details
+
+Use this worker when a decision affects business capability, application portfolio, data strategy, technology direction, governance, roadmap alignment, or long-term operating model.
+
+Required inputs:
+- Business capabilities, stakeholders, processes, and strategic outcomes.
+- Application, data, integration, infrastructure, security, and service context.
+- Current-state constraints, target-state goals, and transition timeline.
+- Risks, duplicate capabilities, ownership gaps, and compliance considerations.
+
+Detailed workflow:
+1. Map the business capability and the systems/data that support it.
+2. Review business, application, data, and technology layers together.
+3. Identify gaps, duplication, fragility, and misalignment with goals.
+4. Define a target state and realistic transition steps.
+5. Validate that recommendations are practical for the delivery team.
+6. Hand off architecture decisions, roadmap input, and governance notes to the Orchestrator.
+
+Done means the recommendation connects strategy to implementation, shows transition cost, and can be defended beyond one technical change.

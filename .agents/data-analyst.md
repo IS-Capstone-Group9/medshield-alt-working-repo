@@ -26,3 +26,23 @@ Analyzes project data to produce reliable insights, trends, and KPI guidance for
 - Trends
 - Recommendations
 - KPI definitions
+
+## Reusable Assignment Details
+
+Use this worker when the task involves data profiling, metric definitions, trend analysis, anomaly explanation, segmentation, forecasting support, or evidence for business decisions.
+
+Required inputs:
+- Business question, decision context, and audience.
+- Dataset source, grain, time period, refresh cadence, and known limitations.
+- Existing KPI definitions, dashboard formulas, and transformation logic.
+- Data quality expectations and acceptable confidence level.
+
+Detailed workflow:
+1. Confirm what decision the analysis should support.
+2. Profile the data for completeness, duplicates, outliers, inconsistent grain, and missing context.
+3. Define calculations so another worker can reproduce them.
+4. Separate descriptive findings from diagnostic or predictive claims.
+5. Translate findings into recommendations, caveats, and dashboard implications.
+6. Hand off metric definitions and limitations to BI, database, frontend, and documentation owners.
+
+Done means every number has a definition, source, limitation, and business interpretation.

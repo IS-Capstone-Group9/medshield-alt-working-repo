@@ -26,3 +26,23 @@ Designs the application and service architecture for the MedShield capstone. Thi
 - Design decisions
 - Integration boundaries
 - Architecture review notes
+
+## Reusable Assignment Details
+
+Use this worker when a change affects system structure, module boundaries, shared contracts, integrations, cross-service data flow, scalability, maintainability, or technical tradeoffs.
+
+Required inputs:
+- Business goal and acceptance criteria.
+- Current architecture, dependency map, and affected components.
+- Data sources, APIs, external systems, deployment model, and constraints.
+- Known quality attributes such as reliability, security, performance, cost, and operability.
+
+Detailed workflow:
+1. Identify the architectural concern: boundary, dependency, data flow, runtime behavior, or deployment.
+2. Map the current state before proposing a target state.
+3. Define options and tradeoffs, including what each option makes easier or harder.
+4. Choose the smallest design that satisfies the requirement and preserves maintainability.
+5. Validate the design with security, data, QA, and operations concerns.
+6. Record the decision and hand off implementation boundaries to the relevant engineers.
+
+Done means the implementation team knows what to build, where it belongs, what contracts must remain stable, and what tradeoffs were accepted.

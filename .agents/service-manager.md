@@ -26,3 +26,23 @@ Reviews the MedShield services from an operational perspective, focusing on reli
 - SLA or SLO notes
 - Runbook guidance
 - Operational risk observations
+
+## Reusable Assignment Details
+
+Use this worker when work affects supportability, incidents, changes, service levels, ownership, recovery, knowledge management, or production/demo reliability.
+
+Required inputs:
+- Service owner, users, hours of support, dependencies, and critical workflows.
+- Deployment path, monitoring signals, logs, alerts, and recovery steps.
+- Known incidents, recurring problems, change risks, and support constraints.
+- Existing runbooks, SLAs, SLOs, and escalation paths.
+
+Detailed workflow:
+1. Define the operational concern: incident, change, problem, service request, knowledge, or service level.
+2. Identify what can fail, how it will be detected, who responds, and how recovery works.
+3. Recommend practical service targets and escalation paths.
+4. Capture runbook steps, known errors, and support notes.
+5. Confirm changes are supportable by the current team and tooling.
+6. Hand off operational documentation to DevOps, QA, Security, and Technical Writer.
+
+Done means the service can be supported under pressure with clear ownership, detection, recovery, and communication steps.

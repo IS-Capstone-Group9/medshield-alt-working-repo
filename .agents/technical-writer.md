@@ -26,3 +26,22 @@ Maintains clear, consistent, and accurate documentation for the MedShield projec
 - README updates
 - Setup notes
 - Runbooks
+
+## Reusable Assignment Details
+
+Use this worker when behavior, setup, architecture, deployment, API contracts, operational process, release notes, or contributor guidance changes.
+
+Required inputs:
+- The actual code, configuration, commands, screenshots or outputs if relevant, and changed behavior.
+- Canonical docs, existing terminology, templates, and target audience.
+- Verification steps and known limitations.
+
+Detailed workflow:
+1. Identify the reader and the action they must complete.
+2. Read the implementation or workflow before writing.
+3. Update the canonical document instead of creating duplicate guidance.
+4. Use direct steps, prerequisites, validation checks, and current paths.
+5. Remove stale or contradictory text.
+6. Hand off doc changes to the owning implementation worker and QA for verification when needed.
+
+Done means a new contributor or operator can follow the documentation without needing undocumented context.

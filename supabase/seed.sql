@@ -2,6 +2,22 @@
 -- The warehouse tables are the source of truth for the API and dashboard views.
 
 truncate table
+  public.fact_model_evaluation,
+  public.fact_decision_alert,
+  public.fact_product_region_match,
+  public.fact_allocation_recommendation,
+  public.fact_inventory_recommendation,
+  public.fact_regional_priority,
+  public.fact_area_cluster,
+  public.fact_product_priority,
+  public.fact_demand_forecast,
+  public.fact_forecast_run,
+  public.fact_weather_signal,
+  public.fact_disease_signal,
+  public.fact_sales_transactions,
+  public.stg_sales_transactions,
+  public.etl_source_extract,
+  public.etl_pipeline_run,
   public.fact_seasonality,
   public.fact_year_summary,
   public.fact_product_summary,
@@ -309,3 +325,497 @@ cross join (
   limit 1
 ) as snapshot
 order by s.month_key;
+
+insert into public.etl_pipeline_run (
+  pipeline_name,
+  run_status,
+  started_at,
+  finished_at,
+  source_period_start,
+  source_period_end,
+  rows_extracted,
+  rows_loaded,
+  rows_rejected,
+  quality_summary
+) values (
+  'medshield_sales_external_signals_baseline',
+  'completed',
+  now(),
+  now(),
+  date '2021-01-01',
+  date '2025-12-31',
+  20418,
+  20418,
+  0,
+  '{"sales_workbook_sheets":5,"external_signal_mode":"demo_baseline_until_api_extracts_are_configured"}'::jsonb
+);
+
+insert into public.etl_source_extract (
+  pipeline_run_key,
+  source_system_key,
+  source_name,
+  source_uri,
+  source_period_start,
+  source_period_end,
+  record_count,
+  metadata_json
+)
+select
+  run.pipeline_run_key,
+  source.source_system_key,
+  'Sales Report.xlsx',
+  'Sales Report.xlsx',
+  date '2021-01-01',
+  date '2025-12-31',
+  20418,
+  '{"sheets":["2021","2022","2023","2024","2025"],"grain":"delivery line item"}'::jsonb
+from public.etl_pipeline_run run
+cross join public.dim_source_system source
+where run.pipeline_name = 'medshield_sales_external_signals_baseline'
+  and source.source_code = 'MEDSHIELD_XLSX'
+order by run.pipeline_run_key desc
+limit 1;
+
+with signal_source(period, disease_name, dii, disease_alert, rainfall_mm, rsi, weather_alert, typhoon_flag) as (
+  values
+    ('2026-01', 'Respiratory illness', 1.10, 'watch', 128.0, 0.34, 'normal', false),
+    ('2026-02', 'Dengue', 1.18, 'watch', 104.0, 0.30, 'normal', false),
+    ('2026-03', 'Dengue', 1.24, 'watch', 142.0, 0.38, 'watch', false),
+    ('2026-04', 'Dengue', 1.32, 'warning', 188.0, 0.44, 'watch', false),
+    ('2026-05', 'Dengue', 1.48, 'warning', 232.0, 0.52, 'warning', false),
+    ('2026-06', 'Leptospirosis', 1.55, 'warning', 284.0, 0.61, 'warning', true),
+    ('2026-07', 'Leptospirosis', 1.62, 'critical', 321.0, 0.68, 'critical', true),
+    ('2026-08', 'Dengue', 1.44, 'warning', 298.0, 0.63, 'warning', true),
+    ('2026-09', 'Influenza-like illness', 1.30, 'watch', 244.0, 0.53, 'warning', false),
+    ('2026-10', 'Influenza-like illness', 1.22, 'watch', 201.0, 0.46, 'watch', false),
+    ('2026-11', 'Respiratory illness', 1.28, 'watch', 166.0, 0.40, 'watch', false),
+    ('2026-12', 'Respiratory illness', 1.36, 'warning', 152.0, 0.37, 'watch', false)
+)
+insert into public.fact_disease_signal (
+  period_date_key,
+  source_system_key,
+  disease_name,
+  disease_intensity_index,
+  alert_level,
+  source_period
+)
+select
+  d.date_key,
+  s.source_system_key,
+  signal.disease_name,
+  signal.dii,
+  signal.disease_alert,
+  signal.period
+from signal_source signal
+join public.dim_date d on d.year_month = signal.period
+cross join public.dim_source_system s
+where s.source_code = 'DOH_FOI_OR_OPEN_DATA';
+
+with signal_source(period, rainfall_mm, rsi, weather_alert, typhoon_flag) as (
+  values
+    ('2026-01', 128.0, 0.34, 'normal', false),
+    ('2026-02', 104.0, 0.30, 'normal', false),
+    ('2026-03', 142.0, 0.38, 'watch', false),
+    ('2026-04', 188.0, 0.44, 'watch', false),
+    ('2026-05', 232.0, 0.52, 'warning', false),
+    ('2026-06', 284.0, 0.61, 'warning', true),
+    ('2026-07', 321.0, 0.68, 'critical', true),
+    ('2026-08', 298.0, 0.63, 'warning', true),
+    ('2026-09', 244.0, 0.53, 'warning', false),
+    ('2026-10', 201.0, 0.46, 'watch', false),
+    ('2026-11', 166.0, 0.40, 'watch', false),
+    ('2026-12', 152.0, 0.37, 'watch', false)
+)
+insert into public.fact_weather_signal (
+  period_date_key,
+  source_system_key,
+  rainfall_mm,
+  rainfall_severity_index,
+  typhoon_flag,
+  weather_alert_level,
+  source_period
+)
+select
+  d.date_key,
+  s.source_system_key,
+  signal.rainfall_mm,
+  signal.rsi,
+  signal.typhoon_flag,
+  signal.weather_alert,
+  signal.period
+from signal_source signal
+join public.dim_date d on d.year_month = signal.period
+cross join public.dim_source_system s
+where s.source_code = 'PAGASA_CLIMATE';
+
+with run as (
+  insert into public.fact_forecast_run (
+    model_key,
+    source_system_key,
+    training_start_date_key,
+    training_end_date_key,
+    forecast_start_date_key,
+    forecast_end_date_key,
+    model_version,
+    parameter_json,
+    metric_json,
+    notes
+  )
+  select
+    m.model_key,
+    s.source_system_key,
+    (select date_key from public.dim_date where year_month = '2021-01' limit 1),
+    (select date_key from public.dim_date where year_month = '2025-12' limit 1),
+    (select date_key from public.dim_date where year_month = '2026-01' limit 1),
+    (select date_key from public.dim_date where year_month = '2026-12' limit 1),
+    'baseline-demo-v1',
+    '{"seasonality":"monthly","external_regressors":["disease_intensity_index","rainfall_severity_index"]}'::jsonb,
+    '{"mae":0,"rmse":0,"mape":0,"status":"placeholder_until_model_training"}'::jsonb,
+    'Seeded baseline forecast path for API/dashboard validation.'
+  from public.dim_model m
+  cross join public.dim_source_system s
+  where m.model_code = 'PROPHET_EXTERNAL'
+    and s.source_code = 'PYTHON_ANALYTICS'
+  returning forecast_run_key
+),
+forecast_source(period, baseline, adjusted, lower_bound, upper_bound, disease_factor, weather_factor) as (
+  values
+    ('2026-01', 16821869, 17158306, 14635026, 19345149, 1.0100, 1.0100),
+    ('2026-02', 13945391, 14224299, 12132490, 16037200, 1.0120, 1.0080),
+    ('2026-03', 2625481, 2691118, 2284168, 3019303, 1.0150, 1.0100),
+    ('2026-04', 6016078, 6196560, 5233988, 6918490, 1.0200, 1.0100),
+    ('2026-05', 23148020, 24189681, 20138777, 26620223, 1.0300, 1.0150),
+    ('2026-06', 16238739, 17001964, 14127703, 18674550, 1.0320, 1.0150),
+    ('2026-07', 22448617, 23615993, 19530297, 25815910, 1.0350, 1.0150),
+    ('2026-08', 9889766, 10334705, 8604096, 11373231, 1.0300, 1.0150),
+    ('2026-09', 23240240, 23937447, 20219009, 26726276, 1.0200, 1.0100),
+    ('2026-10', 14322292, 14608738, 12460394, 16470636, 1.0120, 1.0080),
+    ('2026-11', 28946154, 29525077, 25183154, 33288077, 1.0120, 1.0080),
+    ('2026-12', 27352858, 28036679, 23796986, 31455787, 1.0170, 1.0080)
+)
+insert into public.fact_demand_forecast (
+  forecast_run_key,
+  forecast_period_date_key,
+  forecast_scope,
+  baseline_demand_value,
+  adjusted_demand_value,
+  lower_bound_value,
+  upper_bound_value,
+  disease_adjustment_factor,
+  weather_adjustment_factor,
+  confidence_level
+)
+select
+  run.forecast_run_key,
+  d.date_key,
+  'overall',
+  f.baseline,
+  f.adjusted,
+  f.lower_bound,
+  f.upper_bound,
+  f.disease_factor,
+  f.weather_factor,
+  0.9500
+from forecast_source f
+cross join run
+join public.dim_date d on d.year_month = f.period;
+
+with product_source(product_name, abc, rank_no, cumulative_pct, demand_score, margin_score, urgency_score, risk_level, recommendation) as (
+  values
+    ('PAGBILAO # 13,500,000', 'A', 1, 27.70, 0.96, 0.92, 0.88, 'high', 'Protect allocation and review bid replenishment early.'),
+    ('PAGBILAO # 6,334,470', 'A', 2, 41.90, 0.91, 0.84, 0.78, 'medium', 'Keep allocation visible in weekly planning.'),
+    ('MONOWEL 1G IV', 'A', 3, 51.00, 0.86, 0.58, 0.82, 'high', 'Monitor hospital demand and reorder buffer.'),
+    ('BUPIRIGHT AMPULE', 'A', 4, 56.30, 0.79, 0.77, 0.70, 'medium', 'Maintain stock buffer for recurring demand.'),
+    ('JUBI -R 100MG', 'A', 5, 61.40, 0.74, 0.69, 0.65, 'medium', 'Keep in priority review cycle.')
+)
+insert into public.fact_product_priority (
+  snapshot_date_key,
+  product_key,
+  model_key,
+  abc_classification,
+  pareto_rank,
+  cumulative_revenue_pct,
+  demand_score,
+  margin_score,
+  xgboost_urgency_score,
+  risk_level,
+  recommendation
+)
+select
+  snapshot.date_key,
+  p.product_key,
+  m.model_key,
+  src.abc,
+  src.rank_no,
+  src.cumulative_pct,
+  src.demand_score,
+  src.margin_score,
+  src.urgency_score,
+  src.risk_level,
+  src.recommendation
+from product_source src
+join public.dim_product p on p.product_name = src.product_name
+cross join public.dim_model m
+cross join (select date_key from public.dim_date where year_month = '2025-12' limit 1) snapshot
+where m.model_code = 'XGBOOST_URGENCY';
+
+with cluster_source(area_name, cluster_label, profile, revenue_score, growth_score, risk_index, implication) as (
+  values
+    ('Government', 'Cluster A', 'High-volume / institutional', 0.98, 0.72, 0.05, 'Refresh forecasts often and monitor bids.'),
+    ('Hospital', 'Cluster A', 'High-volume / institutional', 0.82, 0.66, 0.08, 'Protect fast-moving critical SKUs.'),
+    ('Quezon', 'Cluster B', 'Stable commercial demand', 0.44, 0.52, 0.07, 'Keep steady replenishment cycles.'),
+    ('Batangas', 'Cluster B', 'Stable commercial demand', 0.38, 0.47, 0.04, 'Maintain targeted replenishment.'),
+    ('Marinduque', 'Cluster D', 'Low-scale / variable movement', 0.20, 0.34, 0.10, 'Keep typhoon contingency stock.')
+)
+insert into public.fact_area_cluster (
+  snapshot_date_key,
+  area_key,
+  model_key,
+  cluster_label,
+  cluster_profile,
+  revenue_score,
+  demand_growth_score,
+  outbreak_risk_index,
+  planning_implication
+)
+select
+  snapshot.date_key,
+  a.area_key,
+  m.model_key,
+  src.cluster_label,
+  src.profile,
+  src.revenue_score,
+  src.growth_score,
+  src.risk_index,
+  src.implication
+from cluster_source src
+join public.dim_area a on a.area_name = src.area_name
+cross join public.dim_model m
+cross join (select date_key from public.dim_date where year_month = '2025-12' limit 1) snapshot
+where m.model_code = 'KMEANS_AREA';
+
+with priority_source(rank_no, area_name, revenue_score, growth_score, risk_index, score, recommendation) as (
+  values
+    (1, 'Government', 0.40, 0.18, 0.05, 0.63, 'Prioritize bid readiness and allocation.'),
+    (2, 'Hospital', 0.22, 0.14, 0.08, 0.44, 'Protect fast-moving critical SKUs.'),
+    (3, 'Quezon', 0.13, 0.09, 0.07, 0.29, 'Increase forecast refresh cadence.'),
+    (4, 'Batangas', 0.09, 0.07, 0.04, 0.20, 'Maintain targeted replenishment.'),
+    (5, 'Marinduque', 0.03, 0.05, 0.10, 0.18, 'Keep typhoon contingency stock.')
+)
+insert into public.fact_regional_priority (
+  snapshot_date_key,
+  area_key,
+  model_key,
+  revenue_score,
+  growth_score,
+  outbreak_risk_index,
+  mcda_score,
+  priority_rank,
+  recommendation
+)
+select
+  snapshot.date_key,
+  a.area_key,
+  m.model_key,
+  src.revenue_score,
+  src.growth_score,
+  src.risk_index,
+  src.score,
+  src.rank_no,
+  src.recommendation
+from priority_source src
+join public.dim_area a on a.area_name = src.area_name
+cross join public.dim_model m
+cross join (select date_key from public.dim_date where year_month = '2025-12' limit 1) snapshot
+where m.model_code = 'MCDA_REGIONAL';
+
+with inventory_source(product_name, demand_units, eoq_units, rop_units, safety_units, stock_units, forecast_units, gap_units, risk_level, recommendation) as (
+  values
+    ('MONOWEL 1G IV', 18400, 240, 80, 35, 62, 96, 34, 'high', 'Reorder before January forecast peak; protect hospital allocation.'),
+    ('EUROXONE 1G', 42800, 360, 120, 52, 144, 155, 11, 'medium', 'Keep monthly review and supplier lead-time watch.'),
+    ('BUPIRIGHT AMPULE', 86200, 420, 160, 70, 215, 198, -17, 'low', 'Maintain normal replenishment.'),
+    ('TRIVASC 35MG MR', 51000, 310, 110, 48, 128, 142, 14, 'medium', 'Replenish within the next planning cycle.'),
+    ('ANTITET 1500IU/0.7ML', 98400, 500, 190, 82, 166, 225, 59, 'high', 'Pre-position stock for surge and contingency demand.')
+)
+insert into public.fact_inventory_recommendation (
+  snapshot_date_key,
+  product_key,
+  model_key,
+  annual_demand_units,
+  ordering_cost_php,
+  holding_cost_php,
+  lead_time_days,
+  demand_stddev_units,
+  eoq_units,
+  reorder_point_units,
+  safety_stock_units,
+  current_stock_units,
+  forecast_demand_units,
+  stock_gap_units,
+  risk_level,
+  recommendation
+)
+select
+  snapshot.date_key,
+  p.product_key,
+  m.model_key,
+  src.demand_units,
+  1250,
+  42,
+  14,
+  18,
+  src.eoq_units,
+  src.rop_units,
+  src.safety_units,
+  src.stock_units,
+  src.forecast_units,
+  src.gap_units,
+  src.risk_level,
+  src.recommendation
+from inventory_source src
+join public.dim_product p on p.product_name = src.product_name
+cross join public.dim_model m
+cross join (select date_key from public.dim_date where year_month = '2025-12' limit 1) snapshot
+where m.model_code = 'EOQ_ROP_SAFETY';
+
+with allocation_source(product_name, area_name, available_units, recommended_units, objective_value, optimization_gap, notes, recommendation) as (
+  values
+    ('MONOWEL 1G IV', 'Hospital', 320, 180, 0.92, 0.04, 'Hospital demand constraint prioritized.', 'Allocate first replenishment to hospital accounts.'),
+    ('EUROXONE 1G', 'Quezon', 420, 150, 0.84, 0.06, 'Regional growth constraint prioritized.', 'Reserve stock for Quezon before lower-priority routes.'),
+    ('ANTITET 1500IU/0.7ML', 'Marinduque', 260, 120, 0.88, 0.05, 'Weather-risk constraint applied.', 'Pre-position contingency stock before typhoon season.')
+)
+insert into public.fact_allocation_recommendation (
+  snapshot_date_key,
+  product_key,
+  area_key,
+  model_key,
+  available_units,
+  recommended_units,
+  objective_value,
+  optimization_gap,
+  constraint_notes,
+  recommendation
+)
+select
+  snapshot.date_key,
+  p.product_key,
+  a.area_key,
+  m.model_key,
+  src.available_units,
+  src.recommended_units,
+  src.objective_value,
+  src.optimization_gap,
+  src.notes,
+  src.recommendation
+from allocation_source src
+join public.dim_product p on p.product_name = src.product_name
+join public.dim_area a on a.area_name = src.area_name
+cross join public.dim_model m
+cross join (select date_key from public.dim_date where year_month = '2025-12' limit 1) snapshot
+where m.model_code = 'LINEAR_ALLOCATION';
+
+with match_source(product_name, area_name, similarity_score, match_rank, recommendation) as (
+  values
+    ('MONOWEL 1G IV', 'Hospital', 0.91, 1, 'Strong institutional product-area fit.'),
+    ('EUROXONE 1G', 'Quezon', 0.83, 2, 'Good demand similarity with prior regional movement.'),
+    ('ANTITET 1500IU/0.7ML', 'Marinduque', 0.79, 3, 'Keep as contingency match for variable demand.')
+)
+insert into public.fact_product_region_match (
+  snapshot_date_key,
+  product_key,
+  area_key,
+  model_key,
+  similarity_score,
+  match_rank,
+  recommendation
+)
+select
+  snapshot.date_key,
+  p.product_key,
+  a.area_key,
+  m.model_key,
+  src.similarity_score,
+  src.match_rank,
+  src.recommendation
+from match_source src
+join public.dim_product p on p.product_name = src.product_name
+join public.dim_area a on a.area_name = src.area_name
+cross join public.dim_model m
+cross join (select date_key from public.dim_date where year_month = '2025-12' limit 1) snapshot
+where m.model_code = 'COLLAB_PRODUCT_REGION';
+
+with alert_source(alert_date, area_name, product_name, model_code, alert_type, severity, trigger_metric, threshold_value, observed_value, multiplier, recommendation) as (
+  values
+    ('2026-01-01', 'Hospital', 'MONOWEL 1G IV', 'EOQ_ROP_SAFETY', 'stock_gap', 'high', 'stock_gap_units', 0, 34, 1.00, 'Demand exceeds safety stock. Create replenishment order.'),
+    ('2026-05-01', null, 'ANTITET 1500IU/0.7ML', 'ALERT_THRESHOLDS', 'disease_surge', 'high', 'disease_intensity_index', 1.40, 1.48, 1.35, 'Increase antipyretic and emergency stock review.'),
+    ('2026-07-01', 'Marinduque', null, 'ALERT_THRESHOLDS', 'weather_risk', 'critical', 'rainfall_severity_index', 0.60, 0.68, 1.40, 'Pre-position wound care and ORS stock before severe rainfall window.')
+)
+insert into public.fact_decision_alert (
+  snapshot_date_key,
+  alert_date_key,
+  area_key,
+  product_key,
+  model_key,
+  alert_type,
+  severity,
+  trigger_metric,
+  threshold_value,
+  observed_value,
+  demand_multiplier,
+  recommendation
+)
+select
+  snapshot.date_key,
+  d.date_key,
+  a.area_key,
+  p.product_key,
+  m.model_key,
+  src.alert_type,
+  src.severity,
+  src.trigger_metric,
+  src.threshold_value,
+  src.observed_value,
+  src.multiplier,
+  src.recommendation
+from alert_source src
+join public.dim_date d on d.calendar_date = src.alert_date::date
+left join public.dim_area a on a.area_name = src.area_name
+left join public.dim_product p on p.product_name = src.product_name
+join public.dim_model m on m.model_code = src.model_code
+cross join (select date_key from public.dim_date where year_month = '2025-12' limit 1) snapshot;
+
+with eval_source(model_code, metric_name, metric_value, target_direction, benchmark_value, passed, notes) as (
+  values
+    ('PROPHET_BASELINE', 'MAPE', 0.000000, 'minimize', 0.150000, null, 'Placeholder until historical train/test split is executed.'),
+    ('PROPHET_EXTERNAL', 'MAPE', 0.000000, 'minimize', 0.150000, null, 'External-regressor model path configured for DOH/PAGASA signals.'),
+    ('XGBOOST_URGENCY', 'MAPE', 0.000000, 'minimize', 0.150000, null, 'Urgency scoring placeholder until labeled demand outcomes are prepared.'),
+    ('KMEANS_AREA', 'silhouette_score', 0.000000, 'maximize', 0.500000, null, 'Cluster validation placeholder until transaction-grain clustering runs.'),
+    ('ALERT_THRESHOLDS', 'alert_accuracy', 0.000000, 'maximize', 0.800000, null, 'Alert validation placeholder until actual alert outcomes are recorded.'),
+    ('EOQ_ROP_SAFETY', 'fulfillment_rate', 0.950000, 'maximize', 0.950000, true, 'Target service level aligned to proposal.'),
+    ('MCDA_REGIONAL', 'ranking_consistency', 0.000000, 'maximize', 0.800000, null, 'Ranking consistency requires repeated scoring cycles.'),
+    ('LINEAR_ALLOCATION', 'optimization_gap', 0.050000, 'minimize', 0.100000, true, 'Demo allocation gap within acceptable threshold.'),
+    ('COLLAB_PRODUCT_REGION', 'cosine_similarity', 0.790000, 'maximize', 0.700000, true, 'Seeded top matches exceed baseline similarity threshold.')
+)
+insert into public.fact_model_evaluation (
+  model_key,
+  evaluation_start_date_key,
+  evaluation_end_date_key,
+  metric_name,
+  metric_value,
+  target_direction,
+  benchmark_value,
+  passed,
+  notes
+)
+select
+  m.model_key,
+  (select date_key from public.dim_date where year_month = '2021-01' limit 1),
+  (select date_key from public.dim_date where year_month = '2025-12' limit 1),
+  src.metric_name,
+  src.metric_value,
+  src.target_direction,
+  src.benchmark_value,
+  src.passed,
+  src.notes
+from eval_source src
+join public.dim_model m on m.model_code = src.model_code;

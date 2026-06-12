@@ -19,6 +19,8 @@ Read all instructions from:
 .skills/*
 docs/*
 
+Start with `.agents/worker-operating-model.md` when assigning or coordinating specialist workers. Then apply the specific worker file for the role doing the work.
+
 **Agent Priority Guidance**
 
 - **Consult in this order:**

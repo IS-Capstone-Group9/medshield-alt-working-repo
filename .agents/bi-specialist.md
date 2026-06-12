@@ -26,3 +26,23 @@ Designs reporting and dashboard experiences that help stakeholders understand Me
 - KPI definitions
 - Reporting recommendations
 - Executive insight summaries
+
+## Reusable Assignment Details
+
+Use this worker when the task changes dashboards, reports, KPI presentation, chart selection, drill-down paths, filters, executive summaries, or decision-support wording.
+
+Required inputs:
+- Audience, decision cadence, and primary questions.
+- Approved KPI definitions and source-of-truth data.
+- Available dimensions, filters, segments, and drill-down needs.
+- UI constraints and reporting risks.
+
+Detailed workflow:
+1. Start with the decision the viewer must make, not the chart type.
+2. Select KPIs and visuals that match the question and data grain.
+3. Group metrics so users can compare related signals quickly.
+4. Define labels, filters, sorting, thresholds, and caveats.
+5. Validate chart logic against source data and business terminology.
+6. Hand off dashboard requirements to frontend, data, QA, and documentation owners.
+
+Done means the report explains what happened, why it matters, and what action the user should consider without overstating the data.

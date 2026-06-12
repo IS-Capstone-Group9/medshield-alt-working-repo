@@ -1,0 +1,100 @@
+{
+  "dataset_name": "MedShield Pharmaceutical Sales",
+  "source_file": "2024s.csv",
+  "source_files": [
+    "2021s.csv",
+    "2023s.csv",
+    "2024s.csv"
+  ],
+  "checksum": "023f1672b5a77ab7b96742feffdc2c491cb5d3c677e1d80076482f1790e70f0c",
+  "received_at": "2026-06-12T06:08:03.364457+00:00",
+  "cleaning_status": "cleaned",
+  "quality_summary": {
+    "input_stage": "raw_tabular",
+    "rows_extracted": 12251,
+    "rows_accepted": 11638,
+    "rows_rejected": 613,
+    "rows_with_warnings": 37,
+    "duplicate_rows": 13,
+    "valid_rows": 11601,
+    "years": {
+      "2021": 3415,
+      "2023": 5387,
+      "2024": 2836
+    },
+    "source_period_start": "2021-01-02",
+    "source_period_end": "2024-12-31",
+    "standardizations": {
+      "dr_number: standardized identifier format": 6162,
+      "discount: blank converted to 0": 11368,
+      "unit_cost: blank converted to 0": 791,
+      "total_cost: blank converted to 0": 788,
+      "net_cost: blank converted to 0": 788,
+      "quantity: blank converted to 0": 41,
+      "total_trade_price: blank converted to 0": 677,
+      "net_income: blank converted to 0": 97,
+      "trade_price_unit: blank converted to 0": 678,
+      "margin_pct: derived from net income / net cost": 3
+    },
+    "issues": {
+      "margin_percentage_is_outside_the_expected_range": 24,
+      "exact_duplicate_transaction": 13,
+      "missing_product": 612,
+      "missing_area": 4,
+      "invalid_or_missing_delivery_date": 4
+    },
+    "columns_received": [
+      "area",
+      "dr_number",
+      "date_delivered",
+      "product",
+      "quantity",
+      "unit_cost",
+      "total_cost",
+      "discount",
+      "net_cost",
+      "trade_price_unit",
+      "total_trade_price",
+      "net_income",
+      "margin_pct"
+    ],
+    "unique_products": 2700,
+    "unique_dr_numbers": 3845,
+    "sku_count": 2700,
+    "headers_detected": [
+      "area",
+      "dr_number",
+      "date_delivered",
+      "product",
+      "quantity",
+      "unit_cost",
+      "total_cost",
+      "discount",
+      "net_cost",
+      "trade_price_unit",
+      "total_trade_price",
+      "net_income",
+      "margin_pct"
+    ],
+    "checksum": "023f1672b5a77ab7b96742feffdc2c491cb5d3c677e1d80076482f1790e70f0c",
+    "merge_strategy": "replaced_uploaded_years",
+    "merged_years": [
+      "2024"
+    ]
+  },
+  "canonical_columns": [
+    "area",
+    "dr_number",
+    "date_delivered",
+    "product",
+    "quantity",
+    "unit_cost",
+    "total_cost",
+    "discount",
+    "net_cost",
+    "trade_price_unit",
+    "total_trade_price",
+    "net_income",
+    "margin_pct"
+  ]
+}

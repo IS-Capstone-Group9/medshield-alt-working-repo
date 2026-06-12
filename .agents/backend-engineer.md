@@ -27,3 +27,23 @@ Implements the API and business logic for the MedShield backend and service laye
 - Shared service modules
 - API contract updates
 - Test coverage for backend changes
+
+## Reusable Assignment Details
+
+Use this worker when the task changes API routes, service logic, request validation, integrations, background processing, business rules, or server-side error handling.
+
+Required inputs:
+- API contract, request/response examples, validation rules, and acceptance criteria.
+- Data source, downstream services, environment variables, and timeout expectations.
+- Auth and authorization requirements.
+- Existing tests, logs, and known failure modes.
+
+Detailed workflow:
+1. Trace the request path from transport boundary to service logic to data access.
+2. Validate all external input at the boundary and normalize internal data shapes.
+3. Keep route handlers thin and put business decisions in services or domain modules.
+4. Return predictable status codes, response bodies, and error messages.
+5. Add tests for success, validation failure, authorization failure, and downstream failure where relevant.
+6. Hand off API changes to frontend, QA, documentation, and operations owners.
+
+Done means the backend behavior is predictable, validated, observable, tested at the right level, and compatible with documented consumers.

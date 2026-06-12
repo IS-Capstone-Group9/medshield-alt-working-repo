@@ -1,3 +1,66 @@
 # Database
 
-Schema, migrations, backups, and scaling notes.
+The Supabase PostgreSQL warehouse is the source of truth for persisted MedShield analytics data.
+
+## Current Migration Order
+
+1. `supabase/migrations/001_init.sql`
+2. `supabase/migrations/002_accounts.sql`
+3. `supabase/migrations/003_auth_rpc.sql`
+4. `supabase/migrations/004_dss_schema.sql`
+5. `supabase/migrations/005_sales_ingestion_weather.sql`
+6. `supabase/seed.sql`
+
+## Schema Direction
+
+The schema now supports three layers:
+
+| Layer | Tables / Views | Purpose |
+|---|---|---|
+| Source/staging | `stg_sales_transactions`, `etl_pipeline_run`, `etl_source_extract` | Preserve workbook and external extract lineage. |
+| Warehouse facts | `fact_sales_transactions`, `fact_monthly_sales`, `fact_area_summary`, `fact_product_summary`, `fact_year_summary`, `fact_seasonality` | Store sales facts and dashboard aggregates. |
+| DSS outputs | `fact_demand_forecast`, `fact_product_priority`, `fact_inventory_recommendation`, `fact_regional_priority`, `fact_decision_alert`, and related views | Store model outputs used by the decision-support dashboard. |
+
+The obsolete flat `analytics_*` tables are dropped by `004_dss_schema.sql` because the `vw_dashboard_*` and `vw_dss_*` views are now the API surface.
+
+## Workbook Grain
+
+`Sales Report.xlsx` contains one delivered product line per row across sheets `2021` to `2025`. The normalized transaction fact stores:
+
+- Area
+- DR number
+- Delivery date
+- Product
+- Quantity
+- Cost, discount, net cost, trade price, total trade price
+- Net income and margin
+- Source workbook, sheet, row number, and source hash
+
+Rows with missing or messy values should land in `stg_sales_transactions` first, then only valid normalized records should move into `fact_sales_transactions`.
+
+Migration `005` fixes legacy date/snapshot uniqueness, adds pipeline lineage, creates `vw_sales_transactions`, and installs `refresh_sales_aggregates`.
+
+## External Signals
+
+External disease and weather values are supporting signals, not replacements for sales data:
+
+- `fact_disease_signal`: disease intensity indicator, case count, incidence rate, alert level.
+- `fact_weather_signal`: rainfall, rainy days, temperature, humidity, wind, provider, high-wind watch, bounded adjustment factor, and `rainfall_severity_proxy`.
+
+Each external value must have a `source_system_key` and source period.
+
+Raw staging, transaction facts, and ETL ledgers have no anonymous read policy. Writes use the server-only service-role key.
+
+## Model Output Tables
+
+| Model | Table |
+|---|---|
+| Prophet / Prophet with external regressors | `fact_forecast_run`, `fact_demand_forecast` |
+| ABC/Pareto and XGBoost urgency | `fact_product_priority` |
+| K-Means area clustering | `fact_area_cluster` |
+| MCDA regional ranking | `fact_regional_priority` |
+| EOQ, ROP, safety stock | `fact_inventory_recommendation` |
+| Linear programming allocation | `fact_allocation_recommendation` |
+| Collaborative filtering product-region matching | `fact_product_region_match` |
+| Rule-based alerts | `fact_decision_alert` |
+| Model validation | `fact_model_evaluation` |

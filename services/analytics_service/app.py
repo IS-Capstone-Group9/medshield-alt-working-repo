@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 import sys
+from datetime import date
 from pathlib import Path
 
 from flask import Flask, jsonify, request
@@ -13,9 +14,19 @@ if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
 from services.shared_snapshot import snapshot
+from services.data_pipeline import (
+    AREA_COORDINATES,
+    ingest_sales_bytes,
+    refresh_weather,
+    sales_dataset_status,
+    sales_page,
+    sales_summary,
+    weather_effects,
+)
 
 
 app = Flask(__name__)
+app.config["MAX_CONTENT_LENGTH"] = 30 * 1024 * 1024
 CORS(app)
 
 
@@ -54,5 +65,130 @@ def seasonality():
     return jsonify(snapshot()["seasonality"])
 
 
+@app.get("/forecasts")
+def forecasts():
+    return jsonify(snapshot().get("forecasts", []))
+
+
+@app.get("/external_signals")
+def external_signals():
+    return jsonify(snapshot().get("external_signals", []))
+
+
+@app.get("/regional_priorities")
+def regional_priorities():
+    return jsonify(snapshot().get("regional_priorities", []))
+
+
+@app.get("/area_clusters")
+def area_clusters():
+    return jsonify(snapshot().get("area_clusters", []))
+
+
+@app.get("/decision_alerts")
+def decision_alerts():
+    return jsonify(snapshot().get("decision_alerts", []))
+
+
+@app.get("/model_evaluation")
+def model_evaluation():
+    return jsonify(snapshot().get("model_evaluation", []))
+
+
+@app.get("/sales/status")
+def sales_status():
+    return jsonify(sales_dataset_status())
+
+
+@app.get("/sales/transactions")
+def sales_transactions():
+    year = request.args.get("year")
+    page = request.args.get("page", "1")
+    page_size = request.args.get("page_size", "25")
+    quality_status = request.args.get("quality_status")
+    try:
+        parsed_page = int(page)
+        parsed_page_size = int(page_size)
+    except ValueError:
+        return jsonify({"error": "page and page_size must be integers"}), 400
+    if year and year != "all" and (not year.isdigit() or len(year) != 4):
+        return jsonify({"error": "year must be a four-digit year or all"}), 400
+    if quality_status and quality_status not in {"all", "valid", "warning", "rejected"}:
+        return jsonify({"error": "quality_status is invalid"}), 400
+    return jsonify(sales_page(
+        year=year,
+        page=parsed_page,
+        page_size=parsed_page_size,
+        search=request.args.get("search", ""),
+        quality_status=quality_status,
+    ))
+
+
+@app.get("/sales/summary")
+def get_sales_summary():
+    year = request.args.get("year")
+    quality_status = request.args.get("quality_status")
+    if year and year != "all" and (not year.isdigit() or len(year) != 4):
+        return jsonify({"error": "year must be a four-digit year or all"}), 400
+    if quality_status and quality_status not in {"all", "valid", "warning", "rejected"}:
+        return jsonify({"error": "quality_status is invalid"}), 400
+    return jsonify(sales_summary(
+        year=year,
+        search=request.args.get("search", ""),
+        quality_status=quality_status,
+    ))
+
+
+@app.post("/sales/ingest")
+def sales_ingest():
+    file_name = request.args.get("file_name", "").strip()
+    if not file_name:
+        return jsonify({"error": "file_name is required"}), 400
+    try:
+        result = ingest_sales_bytes(request.get_data(cache=False), file_name)
+        return jsonify(result), 201
+    except ValueError as error:
+        return jsonify({"error": str(error)}), 400
+
+
+@app.get("/weather/effects")
+def get_weather_effects():
+    try:
+        return jsonify(weather_effects(
+            year=request.args.get("year"),
+            area=request.args.get("area"),
+            grain=request.args.get("grain", "monthly"),
+        ))
+    except ValueError as error:
+        return jsonify({"error": str(error)}), 400
+
+
+@app.post("/weather/refresh")
+def weather_refresh():
+    payload = request.get_json(silent=True) or {}
+    try:
+        start = date.fromisoformat(str(payload.get("start", "")))
+        end = date.fromisoformat(str(payload.get("end", "")))
+        areas = payload.get("areas")
+        if areas is not None and not isinstance(areas, list):
+            raise ValueError("areas must be an array")
+        result = refresh_weather(
+            start=start,
+            end=end,
+            areas=areas,
+            provider=str(payload.get("provider", "nasa_power")),
+        )
+        return jsonify(result)
+    except (TypeError, ValueError) as error:
+        return jsonify({
+            "error": str(error),
+            "supported_areas": sorted(AREA_COORDINATES),
+        }), 400
+
+
 if __name__ == "__main__":
-    app.run(port=int(os.getenv("PORT", "5101")), debug=True)
+    app.run(
+        port=int(os.getenv("ANALYTICS_SERVICE_PORT", "5101")),
+        debug=os.getenv("FLASK_DEBUG", "").strip().lower() in {"1", "true", "yes"},
+        use_reloader=False,
+    )

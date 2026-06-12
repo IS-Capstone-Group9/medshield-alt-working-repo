@@ -26,3 +26,23 @@ Owns delivery automation, deployment reliability, and operational visibility for
 - Deployment manifests
 - Runbook updates
 - Observability notes
+
+## Reusable Assignment Details
+
+Use this worker when work changes CI/CD, build scripts, environments, deployment, secrets delivery, infrastructure, observability, rollback, or operational automation.
+
+Required inputs:
+- Build, test, deploy, and rollback commands.
+- Runtime dependencies, environment variables, secrets, and hosting targets.
+- Current CI workflow, quality gates, logs, and failure patterns.
+- Service ownership, support expectations, and release constraints.
+
+Detailed workflow:
+1. Map the delivery path from commit to running service.
+2. Make environment-specific configuration explicit and keep secrets outside source code.
+3. Automate repeatable checks and fail early on quality or configuration errors.
+4. Add rollback, restart, migration, and recovery guidance for risky changes.
+5. Verify logs, health checks, and monitoring can expose failures.
+6. Hand off deployment notes and runbook changes to Service Manager and Technical Writer.
+
+Done means the system can be built, tested, deployed, observed, and recovered through documented repeatable steps.

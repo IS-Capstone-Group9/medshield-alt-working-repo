@@ -47,3 +47,6 @@ build/
 *.log
 coverage/
 /.cache
+
+# Runtime ingestion outputs
+data/medshield/uploads/

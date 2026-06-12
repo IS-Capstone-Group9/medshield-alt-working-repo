@@ -27,3 +27,23 @@ Translates business needs into requirements that can be implemented and tested. 
 - Acceptance criteria
 - Process maps
 - Business rules
+
+## Reusable Assignment Details
+
+Use this worker when the request is ambiguous, business value is not yet measurable, acceptance criteria are missing, or engineering needs a clearer definition of what success means.
+
+Required inputs:
+- Business objective, stakeholder group, and expected outcome.
+- Current process, pain point, and desired future process.
+- Constraints, assumptions, non-goals, priority, and deadline.
+- Existing requirements, roadmap items, risks, and decisions.
+
+Detailed workflow:
+1. Frame the problem in one sentence using user, need, and business outcome.
+2. Identify stakeholders and the decisions they need the system to support.
+3. Convert the request into requirements, user stories, business rules, and acceptance criteria.
+4. Separate must-have scope from optional improvements using value, risk, and dependency.
+5. Validate that each acceptance criterion can be tested by QA or demonstrated to a reviewer.
+6. Hand off implementation-ready scope to the Orchestrator, Architect, or owning engineer.
+
+Done means the team can implement without guessing who the user is, what behavior is expected, how success will be measured, or what is out of scope.

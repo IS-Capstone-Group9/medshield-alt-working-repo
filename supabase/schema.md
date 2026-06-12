@@ -1,49 +1,6 @@
 -- WARNING: This schema is for context only and is not meant to be run.
 -- Table order and constraints may not be valid for execution.
 
-CREATE TABLE public.analytics_totals (
-  total_revenue numeric NOT NULL,
-  total_income numeric NOT NULL,
-  total_transactions integer NOT NULL CHECK (total_transactions >= 0),
-  top_product text NOT NULL,
-  top_area text NOT NULL,
-  avg_margin numeric NOT NULL,
-  updated_at timestamp with time zone NOT NULL DEFAULT now()
-);
-CREATE TABLE public.analytics_monthly (
-  period text NOT NULL,
-  revenue numeric NOT NULL,
-  income numeric NOT NULL,
-  CONSTRAINT analytics_monthly_pkey PRIMARY KEY (period)
-);
-CREATE TABLE public.analytics_by_area (
-  area text NOT NULL,
-  revenue numeric NOT NULL,
-  income numeric NOT NULL,
-  CONSTRAINT analytics_by_area_pkey PRIMARY KEY (area)
-);
-CREATE TABLE public.analytics_top_products (
-  product text NOT NULL,
-  revenue numeric NOT NULL,
-  qty numeric NOT NULL,
-  income numeric NOT NULL,
-  abc text NOT NULL,
-  pct_of_total numeric NOT NULL,
-  CONSTRAINT analytics_top_products_pkey PRIMARY KEY (product)
-);
-CREATE TABLE public.analytics_year_summary (
-  year text NOT NULL,
-  revenue numeric NOT NULL,
-  income numeric NOT NULL,
-  transactions integer NOT NULL,
-  CONSTRAINT analytics_year_summary_pkey PRIMARY KEY (year)
-);
-CREATE TABLE public.analytics_seasonality (
-  month_num smallint NOT NULL,
-  month text NOT NULL,
-  avg_revenue numeric NOT NULL,
-  CONSTRAINT analytics_seasonality_pkey PRIMARY KEY (month_num)
-);
 CREATE TABLE public.dim_date (
   date_key integer NOT NULL,
   calendar_date date NOT NULL UNIQUE,
@@ -154,4 +111,353 @@ CREATE TABLE public.accounts (
   created_at timestamp with time zone NOT NULL DEFAULT now(),
   updated_at timestamp with time zone NOT NULL DEFAULT now(),
   CONSTRAINT accounts_pkey PRIMARY KEY (account_id)
+);
+CREATE TABLE public.dim_source_system (
+  source_system_key bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  source_code text NOT NULL UNIQUE,
+  source_name text NOT NULL,
+  source_type text NOT NULL CHECK (source_type = ANY (ARRAY['internal'::text, 'external_api'::text, 'external_dataset'::text, 'model'::text, 'manual'::text])),
+  base_url text,
+  refresh_cadence text,
+  credibility_note text NOT NULL,
+  is_active boolean NOT NULL DEFAULT true,
+  created_at timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT dim_source_system_pkey PRIMARY KEY (source_system_key)
+);
+CREATE TABLE public.dim_model (
+  model_key bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  model_code text NOT NULL UNIQUE,
+  model_name text NOT NULL,
+  analytics_layer text NOT NULL CHECK (analytics_layer = ANY (ARRAY['descriptive'::text, 'predictive'::text, 'prescriptive'::text, 'evaluation'::text])),
+  model_family text NOT NULL,
+  purpose text NOT NULL,
+  expected_metrics ARRAY NOT NULL DEFAULT '{}'::text[],
+  is_in_scope boolean NOT NULL DEFAULT true,
+  created_at timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT dim_model_pkey PRIMARY KEY (model_key)
+);
+CREATE TABLE public.stg_sales_transactions (
+  staging_key bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  source_workbook text NOT NULL,
+  source_sheet text NOT NULL,
+  source_row_number integer NOT NULL,
+  area_raw text,
+  dr_number_raw text,
+  date_delivered_raw text,
+  product_raw text,
+  quantity_raw text,
+  unit_cost_raw text,
+  total_cost_raw text,
+  discount_raw text,
+  net_cost_raw text,
+  trade_price_unit_raw text,
+  total_trade_price_raw text,
+  net_income_raw text,
+  margin_pct_raw text,
+  row_quality_status text NOT NULL DEFAULT 'pending'::text CHECK (row_quality_status = ANY (ARRAY['pending'::text, 'valid'::text, 'warning'::text, 'rejected'::text])),
+  row_quality_notes text,
+  source_hash text NOT NULL UNIQUE,
+  loaded_at timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT stg_sales_transactions_pkey PRIMARY KEY (staging_key)
+);
+CREATE TABLE public.fact_sales_transactions (
+  sales_transaction_key bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  delivery_date_key integer NOT NULL,
+  area_key bigint,
+  product_key bigint,
+  source_system_key bigint,
+  dr_number text,
+  quantity_sold numeric NOT NULL DEFAULT 0,
+  unit_cost_amount numeric NOT NULL DEFAULT 0,
+  total_cost_amount numeric NOT NULL DEFAULT 0,
+  discount_amount numeric NOT NULL DEFAULT 0,
+  net_cost_amount numeric NOT NULL DEFAULT 0,
+  trade_price_unit_amount numeric NOT NULL DEFAULT 0,
+  total_trade_price_amount numeric NOT NULL DEFAULT 0,
+  net_income_amount numeric NOT NULL DEFAULT 0,
+  margin_pct numeric,
+  source_workbook text NOT NULL DEFAULT 'Sales Report.xlsx'::text,
+  source_sheet text NOT NULL,
+  source_row_number integer NOT NULL,
+  source_hash text NOT NULL UNIQUE,
+  loaded_at timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT fact_sales_transactions_pkey PRIMARY KEY (sales_transaction_key),
+  CONSTRAINT fact_sales_transactions_delivery_date_key_fkey FOREIGN KEY (delivery_date_key) REFERENCES public.dim_date(date_key),
+  CONSTRAINT fact_sales_transactions_area_key_fkey FOREIGN KEY (area_key) REFERENCES public.dim_area(area_key),
+  CONSTRAINT fact_sales_transactions_product_key_fkey FOREIGN KEY (product_key) REFERENCES public.dim_product(product_key),
+  CONSTRAINT fact_sales_transactions_source_system_key_fkey FOREIGN KEY (source_system_key) REFERENCES public.dim_source_system(source_system_key)
+);
+CREATE TABLE public.fact_disease_signal (
+  disease_signal_key bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  period_date_key integer NOT NULL,
+  area_key bigint,
+  source_system_key bigint,
+  disease_name text NOT NULL,
+  case_count numeric,
+  incidence_rate numeric,
+  disease_intensity_index numeric NOT NULL DEFAULT 0,
+  alert_level text NOT NULL DEFAULT 'normal'::text CHECK (alert_level = ANY (ARRAY['normal'::text, 'watch'::text, 'warning'::text, 'critical'::text])),
+  source_period text NOT NULL,
+  loaded_at timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT fact_disease_signal_pkey PRIMARY KEY (disease_signal_key),
+  CONSTRAINT fact_disease_signal_period_date_key_fkey FOREIGN KEY (period_date_key) REFERENCES public.dim_date(date_key),
+  CONSTRAINT fact_disease_signal_area_key_fkey FOREIGN KEY (area_key) REFERENCES public.dim_area(area_key),
+  CONSTRAINT fact_disease_signal_source_system_key_fkey FOREIGN KEY (source_system_key) REFERENCES public.dim_source_system(source_system_key)
+);
+CREATE TABLE public.fact_weather_signal (
+  weather_signal_key bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  period_date_key integer NOT NULL,
+  area_key bigint,
+  source_system_key bigint,
+  rainfall_mm numeric,
+  rainfall_severity_index numeric NOT NULL DEFAULT 0,
+  rainfall_severity_proxy numeric NOT NULL DEFAULT 0,
+  rainy_days integer NOT NULL DEFAULT 0,
+  avg_temperature_c numeric,
+  avg_relative_humidity_pct numeric,
+  max_wind_speed_kph numeric,
+  weather_adjustment_factor numeric NOT NULL DEFAULT 1,
+  typhoon_flag boolean NOT NULL DEFAULT false,
+  high_wind_watch boolean NOT NULL DEFAULT false,
+  weather_alert_level text NOT NULL DEFAULT 'normal'::text CHECK (weather_alert_level = ANY (ARRAY['normal'::text, 'watch'::text, 'warning'::text, 'critical'::text])),
+  provider_code text,
+  source_period text NOT NULL,
+  loaded_at timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT fact_weather_signal_pkey PRIMARY KEY (weather_signal_key),
+  CONSTRAINT fact_weather_signal_period_date_key_fkey FOREIGN KEY (period_date_key) REFERENCES public.dim_date(date_key),
+  CONSTRAINT fact_weather_signal_area_key_fkey FOREIGN KEY (area_key) REFERENCES public.dim_area(area_key),
+  CONSTRAINT fact_weather_signal_source_system_key_fkey FOREIGN KEY (source_system_key) REFERENCES public.dim_source_system(source_system_key)
+);
+CREATE UNIQUE INDEX uq_fact_weather_signal_period_area_source ON public.fact_weather_signal (period_date_key, area_key, source_system_key);
+CREATE TABLE public.fact_forecast_run (
+  forecast_run_key bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  model_key bigint NOT NULL,
+  source_system_key bigint,
+  run_at timestamp with time zone NOT NULL DEFAULT now(),
+  training_start_date_key integer,
+  training_end_date_key integer,
+  forecast_start_date_key integer,
+  forecast_end_date_key integer,
+  model_version text NOT NULL DEFAULT 'v1'::text,
+  parameter_json jsonb NOT NULL DEFAULT '{}'::jsonb,
+  metric_json jsonb NOT NULL DEFAULT '{}'::jsonb,
+  run_status text NOT NULL DEFAULT 'completed'::text CHECK (run_status = ANY (ARRAY['queued'::text, 'running'::text, 'completed'::text, 'failed'::text])),
+  notes text,
+  CONSTRAINT fact_forecast_run_pkey PRIMARY KEY (forecast_run_key),
+  CONSTRAINT fact_forecast_run_model_key_fkey FOREIGN KEY (model_key) REFERENCES public.dim_model(model_key),
+  CONSTRAINT fact_forecast_run_source_system_key_fkey FOREIGN KEY (source_system_key) REFERENCES public.dim_source_system(source_system_key),
+  CONSTRAINT fact_forecast_run_training_start_date_key_fkey FOREIGN KEY (training_start_date_key) REFERENCES public.dim_date(date_key),
+  CONSTRAINT fact_forecast_run_training_end_date_key_fkey FOREIGN KEY (training_end_date_key) REFERENCES public.dim_date(date_key),
+  CONSTRAINT fact_forecast_run_forecast_start_date_key_fkey FOREIGN KEY (forecast_start_date_key) REFERENCES public.dim_date(date_key),
+  CONSTRAINT fact_forecast_run_forecast_end_date_key_fkey FOREIGN KEY (forecast_end_date_key) REFERENCES public.dim_date(date_key)
+);
+CREATE TABLE public.fact_demand_forecast (
+  demand_forecast_key bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  forecast_run_key bigint NOT NULL,
+  forecast_period_date_key integer NOT NULL,
+  area_key bigint,
+  product_key bigint,
+  forecast_scope text NOT NULL CHECK (forecast_scope = ANY (ARRAY['overall'::text, 'area'::text, 'product'::text, 'product_area'::text])),
+  baseline_demand_value numeric NOT NULL DEFAULT 0,
+  adjusted_demand_value numeric NOT NULL DEFAULT 0,
+  lower_bound_value numeric,
+  upper_bound_value numeric,
+  disease_adjustment_factor numeric NOT NULL DEFAULT 1,
+  weather_adjustment_factor numeric NOT NULL DEFAULT 1,
+  confidence_level numeric,
+  created_at timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT fact_demand_forecast_pkey PRIMARY KEY (demand_forecast_key),
+  CONSTRAINT fact_demand_forecast_forecast_run_key_fkey FOREIGN KEY (forecast_run_key) REFERENCES public.fact_forecast_run(forecast_run_key),
+  CONSTRAINT fact_demand_forecast_forecast_period_date_key_fkey FOREIGN KEY (forecast_period_date_key) REFERENCES public.dim_date(date_key),
+  CONSTRAINT fact_demand_forecast_area_key_fkey FOREIGN KEY (area_key) REFERENCES public.dim_area(area_key),
+  CONSTRAINT fact_demand_forecast_product_key_fkey FOREIGN KEY (product_key) REFERENCES public.dim_product(product_key)
+);
+CREATE TABLE public.fact_product_priority (
+  product_priority_key bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  snapshot_date_key integer NOT NULL,
+  product_key bigint NOT NULL,
+  model_key bigint,
+  abc_classification text NOT NULL CHECK (abc_classification = ANY (ARRAY['A'::text, 'B'::text, 'C'::text])),
+  pareto_rank integer NOT NULL,
+  cumulative_revenue_pct numeric NOT NULL DEFAULT 0,
+  demand_score numeric NOT NULL DEFAULT 0,
+  margin_score numeric NOT NULL DEFAULT 0,
+  xgboost_urgency_score numeric NOT NULL DEFAULT 0,
+  risk_level text NOT NULL DEFAULT 'low'::text CHECK (risk_level = ANY (ARRAY['low'::text, 'medium'::text, 'high'::text, 'critical'::text])),
+  recommendation text,
+  loaded_at timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT fact_product_priority_pkey PRIMARY KEY (product_priority_key),
+  CONSTRAINT fact_product_priority_snapshot_date_key_fkey FOREIGN KEY (snapshot_date_key) REFERENCES public.dim_date(date_key),
+  CONSTRAINT fact_product_priority_product_key_fkey FOREIGN KEY (product_key) REFERENCES public.dim_product(product_key),
+  CONSTRAINT fact_product_priority_model_key_fkey FOREIGN KEY (model_key) REFERENCES public.dim_model(model_key)
+);
+CREATE TABLE public.fact_area_cluster (
+  area_cluster_key bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  snapshot_date_key integer NOT NULL,
+  area_key bigint NOT NULL,
+  model_key bigint,
+  cluster_label text NOT NULL,
+  cluster_profile text NOT NULL,
+  revenue_score numeric NOT NULL DEFAULT 0,
+  demand_growth_score numeric NOT NULL DEFAULT 0,
+  outbreak_risk_index numeric NOT NULL DEFAULT 0,
+  planning_implication text,
+  loaded_at timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT fact_area_cluster_pkey PRIMARY KEY (area_cluster_key),
+  CONSTRAINT fact_area_cluster_snapshot_date_key_fkey FOREIGN KEY (snapshot_date_key) REFERENCES public.dim_date(date_key),
+  CONSTRAINT fact_area_cluster_area_key_fkey FOREIGN KEY (area_key) REFERENCES public.dim_area(area_key),
+  CONSTRAINT fact_area_cluster_model_key_fkey FOREIGN KEY (model_key) REFERENCES public.dim_model(model_key)
+);
+CREATE TABLE public.fact_regional_priority (
+  regional_priority_key bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  snapshot_date_key integer NOT NULL,
+  area_key bigint NOT NULL,
+  model_key bigint,
+  revenue_weight numeric NOT NULL DEFAULT 0.40,
+  growth_weight numeric NOT NULL DEFAULT 0.35,
+  outbreak_risk_weight numeric NOT NULL DEFAULT 0.25,
+  revenue_score numeric NOT NULL DEFAULT 0,
+  growth_score numeric NOT NULL DEFAULT 0,
+  outbreak_risk_index numeric NOT NULL DEFAULT 0,
+  mcda_score numeric NOT NULL DEFAULT 0,
+  priority_rank integer NOT NULL,
+  recommendation text,
+  loaded_at timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT fact_regional_priority_pkey PRIMARY KEY (regional_priority_key),
+  CONSTRAINT fact_regional_priority_snapshot_date_key_fkey FOREIGN KEY (snapshot_date_key) REFERENCES public.dim_date(date_key),
+  CONSTRAINT fact_regional_priority_area_key_fkey FOREIGN KEY (area_key) REFERENCES public.dim_area(area_key),
+  CONSTRAINT fact_regional_priority_model_key_fkey FOREIGN KEY (model_key) REFERENCES public.dim_model(model_key)
+);
+CREATE TABLE public.fact_inventory_recommendation (
+  inventory_recommendation_key bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  snapshot_date_key integer NOT NULL,
+  product_key bigint NOT NULL,
+  area_key bigint,
+  model_key bigint,
+  annual_demand_units numeric NOT NULL DEFAULT 0,
+  ordering_cost_php numeric NOT NULL DEFAULT 0,
+  holding_cost_php numeric NOT NULL DEFAULT 0,
+  lead_time_days numeric NOT NULL DEFAULT 0,
+  demand_stddev_units numeric NOT NULL DEFAULT 0,
+  service_level numeric NOT NULL DEFAULT 0.95,
+  eoq_units numeric NOT NULL DEFAULT 0,
+  reorder_point_units numeric NOT NULL DEFAULT 0,
+  safety_stock_units numeric NOT NULL DEFAULT 0,
+  current_stock_units numeric,
+  forecast_demand_units numeric,
+  stock_gap_units numeric,
+  risk_level text NOT NULL DEFAULT 'low'::text CHECK (risk_level = ANY (ARRAY['low'::text, 'medium'::text, 'high'::text, 'critical'::text])),
+  recommendation text,
+  loaded_at timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT fact_inventory_recommendation_pkey PRIMARY KEY (inventory_recommendation_key),
+  CONSTRAINT fact_inventory_recommendation_snapshot_date_key_fkey FOREIGN KEY (snapshot_date_key) REFERENCES public.dim_date(date_key),
+  CONSTRAINT fact_inventory_recommendation_product_key_fkey FOREIGN KEY (product_key) REFERENCES public.dim_product(product_key),
+  CONSTRAINT fact_inventory_recommendation_area_key_fkey FOREIGN KEY (area_key) REFERENCES public.dim_area(area_key),
+  CONSTRAINT fact_inventory_recommendation_model_key_fkey FOREIGN KEY (model_key) REFERENCES public.dim_model(model_key)
+);
+CREATE TABLE public.fact_allocation_recommendation (
+  allocation_recommendation_key bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  snapshot_date_key integer NOT NULL,
+  product_key bigint NOT NULL,
+  area_key bigint NOT NULL,
+  model_key bigint,
+  available_units numeric NOT NULL DEFAULT 0,
+  recommended_units numeric NOT NULL DEFAULT 0,
+  objective_value numeric,
+  optimization_gap numeric,
+  constraint_notes text,
+  recommendation text,
+  loaded_at timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT fact_allocation_recommendation_pkey PRIMARY KEY (allocation_recommendation_key),
+  CONSTRAINT fact_allocation_recommendation_area_key_fkey FOREIGN KEY (area_key) REFERENCES public.dim_area(area_key),
+  CONSTRAINT fact_allocation_recommendation_snapshot_date_key_fkey FOREIGN KEY (snapshot_date_key) REFERENCES public.dim_date(date_key),
+  CONSTRAINT fact_allocation_recommendation_product_key_fkey FOREIGN KEY (product_key) REFERENCES public.dim_product(product_key),
+  CONSTRAINT fact_allocation_recommendation_model_key_fkey FOREIGN KEY (model_key) REFERENCES public.dim_model(model_key)
+);
+CREATE TABLE public.fact_product_region_match (
+  product_region_match_key bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  snapshot_date_key integer NOT NULL,
+  product_key bigint NOT NULL,
+  area_key bigint NOT NULL,
+  model_key bigint,
+  similarity_score numeric NOT NULL DEFAULT 0,
+  match_rank integer NOT NULL,
+  recommendation text,
+  loaded_at timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT fact_product_region_match_pkey PRIMARY KEY (product_region_match_key),
+  CONSTRAINT fact_product_region_match_snapshot_date_key_fkey FOREIGN KEY (snapshot_date_key) REFERENCES public.dim_date(date_key),
+  CONSTRAINT fact_product_region_match_product_key_fkey FOREIGN KEY (product_key) REFERENCES public.dim_product(product_key),
+  CONSTRAINT fact_product_region_match_area_key_fkey FOREIGN KEY (area_key) REFERENCES public.dim_area(area_key),
+  CONSTRAINT fact_product_region_match_model_key_fkey FOREIGN KEY (model_key) REFERENCES public.dim_model(model_key)
+);
+CREATE TABLE public.fact_decision_alert (
+  decision_alert_key bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  snapshot_date_key integer NOT NULL,
+  alert_date_key integer NOT NULL,
+  area_key bigint,
+  product_key bigint,
+  model_key bigint,
+  alert_type text NOT NULL CHECK (alert_type = ANY (ARRAY['stock_gap'::text, 'disease_surge'::text, 'weather_risk'::text, 'allocation'::text, 'forecast_variance'::text])),
+  severity text NOT NULL CHECK (severity = ANY (ARRAY['low'::text, 'medium'::text, 'high'::text, 'critical'::text])),
+  trigger_metric text NOT NULL,
+  threshold_value numeric,
+  observed_value numeric,
+  demand_multiplier numeric NOT NULL DEFAULT 1,
+  recommendation text NOT NULL,
+  status text NOT NULL DEFAULT 'open'::text CHECK (status = ANY (ARRAY['open'::text, 'acknowledged'::text, 'closed'::text])),
+  loaded_at timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT fact_decision_alert_pkey PRIMARY KEY (decision_alert_key),
+  CONSTRAINT fact_decision_alert_snapshot_date_key_fkey FOREIGN KEY (snapshot_date_key) REFERENCES public.dim_date(date_key),
+  CONSTRAINT fact_decision_alert_alert_date_key_fkey FOREIGN KEY (alert_date_key) REFERENCES public.dim_date(date_key),
+  CONSTRAINT fact_decision_alert_area_key_fkey FOREIGN KEY (area_key) REFERENCES public.dim_area(area_key),
+  CONSTRAINT fact_decision_alert_product_key_fkey FOREIGN KEY (product_key) REFERENCES public.dim_product(product_key),
+  CONSTRAINT fact_decision_alert_model_key_fkey FOREIGN KEY (model_key) REFERENCES public.dim_model(model_key)
+);
+CREATE TABLE public.fact_model_evaluation (
+  model_evaluation_key bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  model_key bigint NOT NULL,
+  evaluation_start_date_key integer,
+  evaluation_end_date_key integer,
+  metric_name text NOT NULL,
+  metric_value numeric NOT NULL,
+  target_direction text NOT NULL CHECK (target_direction = ANY (ARRAY['minimize'::text, 'maximize'::text, 'monitor'::text])),
+  benchmark_value numeric,
+  passed boolean,
+  notes text,
+  evaluated_at timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT fact_model_evaluation_pkey PRIMARY KEY (model_evaluation_key),
+  CONSTRAINT fact_model_evaluation_model_key_fkey FOREIGN KEY (model_key) REFERENCES public.dim_model(model_key),
+  CONSTRAINT fact_model_evaluation_evaluation_start_date_key_fkey FOREIGN KEY (evaluation_start_date_key) REFERENCES public.dim_date(date_key),
+  CONSTRAINT fact_model_evaluation_evaluation_end_date_key_fkey FOREIGN KEY (evaluation_end_date_key) REFERENCES public.dim_date(date_key)
+);
+CREATE TABLE public.etl_pipeline_run (
+  pipeline_run_key bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  pipeline_name text NOT NULL,
+  run_status text NOT NULL CHECK (run_status = ANY (ARRAY['queued'::text, 'running'::text, 'completed'::text, 'failed'::text])),
+  started_at timestamp with time zone NOT NULL DEFAULT now(),
+  finished_at timestamp with time zone,
+  source_period_start date,
+  source_period_end date,
+  rows_extracted integer NOT NULL DEFAULT 0,
+  rows_loaded integer NOT NULL DEFAULT 0,
+  rows_rejected integer NOT NULL DEFAULT 0,
+  quality_summary jsonb NOT NULL DEFAULT '{}'::jsonb,
+  error_message text,
+  CONSTRAINT etl_pipeline_run_pkey PRIMARY KEY (pipeline_run_key)
+);
+CREATE TABLE public.etl_source_extract (
+  source_extract_key bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  pipeline_run_key bigint,
+  source_system_key bigint,
+  source_name text NOT NULL,
+  source_uri text,
+  extracted_at timestamp with time zone NOT NULL DEFAULT now(),
+  source_period_start date,
+  source_period_end date,
+  record_count integer NOT NULL DEFAULT 0,
+  checksum text,
+  metadata_json jsonb NOT NULL DEFAULT '{}'::jsonb,
+  CONSTRAINT etl_source_extract_pkey PRIMARY KEY (source_extract_key),
+  CONSTRAINT etl_source_extract_pipeline_run_key_fkey FOREIGN KEY (pipeline_run_key) REFERENCES public.etl_pipeline_run(pipeline_run_key),
+  CONSTRAINT etl_source_extract_source_system_key_fkey FOREIGN KEY (source_system_key) REFERENCES public.dim_source_system(source_system_key)
 );

@@ -26,3 +26,32 @@ Coordinates work across the specialist agents for this repository. This role own
 - Milestone checkpoints
 - Integration notes
 - Cross-team dependency summaries
+
+## Reusable Assignment Details
+
+Use this worker when work crosses multiple roles, multiple system layers, unclear sequencing, competing priorities, or release/demo coordination.
+
+Required inputs:
+- Business objective, priority, constraints, and target date.
+- Affected workers, systems, documents, dependencies, and quality gates.
+- Known risks, unresolved decisions, and implementation assumptions.
+- Required evidence for completion.
+
+Detailed workflow:
+1. Restate the objective and define the concrete outcome.
+2. Assign one primary accountable worker for each workstream.
+3. Sequence discovery, design, implementation, verification, security review, documentation, and release work.
+4. Identify what can happen in parallel and what must wait for a decision.
+5. Track blockers, decisions, and handoffs until the work is closed.
+6. Publish a final integration summary with verification and follow-up ownership.
+
+Worker assignment protocol:
+- Business Analyst owns scope and acceptance criteria.
+- Architect owns cross-layer design and boundaries.
+- Frontend, Backend, Database, and DevOps own implementation in their layers.
+- Data Analyst and BI Specialist own metric meaning and dashboard decision support.
+- Security Engineer and QA Engineer provide independent risk and verification checks.
+- Technical Writer updates canonical documentation.
+- Code Reviewer checks the final diff before merge or release.
+
+Done means all assigned workers have completed their handoffs, integration risks are visible, and the final outcome can be explained end to end.

@@ -442,6 +442,82 @@
       "avg_revenue": 36272
     }
   ],
+  "forecasts": [
+    { "period": "2026-01", "area": "All", "product": "All", "model_code": "PROPHET_EXTERNAL", "forecast_scope": "overall", "baseline_forecast": 16821869, "adjusted_forecast": 17158306, "lower_bound": 14635026, "upper_bound": 19345149 },
+    { "period": "2026-02", "area": "All", "product": "All", "model_code": "PROPHET_EXTERNAL", "forecast_scope": "overall", "baseline_forecast": 13945391, "adjusted_forecast": 14224299, "lower_bound": 12132490, "upper_bound": 16037200 },
+    { "period": "2026-03", "area": "All", "product": "All", "model_code": "PROPHET_EXTERNAL", "forecast_scope": "overall", "baseline_forecast": 2625481, "adjusted_forecast": 2691118, "lower_bound": 2284168, "upper_bound": 3019303 },
+    { "period": "2026-04", "area": "All", "product": "All", "model_code": "PROPHET_EXTERNAL", "forecast_scope": "overall", "baseline_forecast": 6016078, "adjusted_forecast": 6196560, "lower_bound": 5233988, "upper_bound": 6918490 },
+    { "period": "2026-05", "area": "All", "product": "All", "model_code": "PROPHET_EXTERNAL", "forecast_scope": "overall", "baseline_forecast": 23148020, "adjusted_forecast": 24189681, "lower_bound": 20138777, "upper_bound": 26620223 },
+    { "period": "2026-06", "area": "All", "product": "All", "model_code": "PROPHET_EXTERNAL", "forecast_scope": "overall", "baseline_forecast": 16238739, "adjusted_forecast": 17001964, "lower_bound": 14127703, "upper_bound": 18674550 },
+    { "period": "2026-07", "area": "All", "product": "All", "model_code": "PROPHET_EXTERNAL", "forecast_scope": "overall", "baseline_forecast": 22448617, "adjusted_forecast": 23615993, "lower_bound": 19530297, "upper_bound": 25815910 },
+    { "period": "2026-08", "area": "All", "product": "All", "model_code": "PROPHET_EXTERNAL", "forecast_scope": "overall", "baseline_forecast": 9889766, "adjusted_forecast": 10334705, "lower_bound": 8604096, "upper_bound": 11373231 },
+    { "period": "2026-09", "area": "All", "product": "All", "model_code": "PROPHET_EXTERNAL", "forecast_scope": "overall", "baseline_forecast": 23240240, "adjusted_forecast": 23937447, "lower_bound": 20219009, "upper_bound": 26726276 },
+    { "period": "2026-10", "area": "All", "product": "All", "model_code": "PROPHET_EXTERNAL", "forecast_scope": "overall", "baseline_forecast": 14322292, "adjusted_forecast": 14608738, "lower_bound": 12460394, "upper_bound": 16470636 },
+    { "period": "2026-11", "area": "All", "product": "All", "model_code": "PROPHET_EXTERNAL", "forecast_scope": "overall", "baseline_forecast": 28946154, "adjusted_forecast": 29525077, "lower_bound": 25183154, "upper_bound": 33288077 },
+    { "period": "2026-12", "area": "All", "product": "All", "model_code": "PROPHET_EXTERNAL", "forecast_scope": "overall", "baseline_forecast": 27352858, "adjusted_forecast": 28036679, "lower_bound": 23796986, "upper_bound": 31455787 }
+  ],
+  "external_signals": [
+    { "period": "2026-01", "area": "All", "disease_names": "Respiratory illness", "disease_intensity_index": 1.1, "rainfall_severity_index": 0.34, "disease_alert_level": "watch", "weather_alert_level": "normal", "typhoon_flag": false },
+    { "period": "2026-02", "area": "All", "disease_names": "Dengue", "disease_intensity_index": 1.18, "rainfall_severity_index": 0.3, "disease_alert_level": "watch", "weather_alert_level": "normal", "typhoon_flag": false },
+    { "period": "2026-03", "area": "All", "disease_names": "Dengue", "disease_intensity_index": 1.24, "rainfall_severity_index": 0.38, "disease_alert_level": "watch", "weather_alert_level": "watch", "typhoon_flag": false },
+    { "period": "2026-04", "area": "All", "disease_names": "Dengue", "disease_intensity_index": 1.32, "rainfall_severity_index": 0.44, "disease_alert_level": "warning", "weather_alert_level": "watch", "typhoon_flag": false },
+    { "period": "2026-05", "area": "All", "disease_names": "Dengue", "disease_intensity_index": 1.48, "rainfall_severity_index": 0.52, "disease_alert_level": "warning", "weather_alert_level": "warning", "typhoon_flag": false },
+    { "period": "2026-06", "area": "All", "disease_names": "Leptospirosis", "disease_intensity_index": 1.55, "rainfall_severity_index": 0.61, "disease_alert_level": "warning", "weather_alert_level": "warning", "typhoon_flag": true },
+    { "period": "2026-07", "area": "All", "disease_names": "Leptospirosis", "disease_intensity_index": 1.62, "rainfall_severity_index": 0.68, "disease_alert_level": "critical", "weather_alert_level": "critical", "typhoon_flag": true },
+    { "period": "2026-08", "area": "All", "disease_names": "Dengue", "disease_intensity_index": 1.44, "rainfall_severity_index": 0.63, "disease_alert_level": "warning", "weather_alert_level": "warning", "typhoon_flag": true },
+    { "period": "2026-09", "area": "All", "disease_names": "Influenza-like illness", "disease_intensity_index": 1.3, "rainfall_severity_index": 0.53, "disease_alert_level": "watch", "weather_alert_level": "warning", "typhoon_flag": false },
+    { "period": "2026-10", "area": "All", "disease_names": "Influenza-like illness", "disease_intensity_index": 1.22, "rainfall_severity_index": 0.46, "disease_alert_level": "watch", "weather_alert_level": "watch", "typhoon_flag": false },
+    { "period": "2026-11", "area": "All", "disease_names": "Respiratory illness", "disease_intensity_index": 1.28, "rainfall_severity_index": 0.4, "disease_alert_level": "watch", "weather_alert_level": "watch", "typhoon_flag": false },
+    { "period": "2026-12", "area": "All", "disease_names": "Respiratory illness", "disease_intensity_index": 1.36, "rainfall_severity_index": 0.37, "disease_alert_level": "warning", "weather_alert_level": "watch", "typhoon_flag": false }
+  ],
+  "inventory_recommendations": [
+    { "product": "MONOWEL 1G IV", "area": "All", "annual_demand_units": 18400, "eoq_units": 240, "reorder_point_units": 80, "safety_stock_units": 35, "current_stock_units": 62, "forecast_demand_units": 96, "stock_gap_units": 34, "risk_level": "high", "recommendation": "Reorder before January forecast peak; protect hospital allocation." },
+    { "product": "EUROXONE 1G", "area": "All", "annual_demand_units": 42800, "eoq_units": 360, "reorder_point_units": 120, "safety_stock_units": 52, "current_stock_units": 144, "forecast_demand_units": 155, "stock_gap_units": 11, "risk_level": "medium", "recommendation": "Keep monthly review and supplier lead-time watch." },
+    { "product": "BUPIRIGHT AMPULE", "area": "All", "annual_demand_units": 86200, "eoq_units": 420, "reorder_point_units": 160, "safety_stock_units": 70, "current_stock_units": 215, "forecast_demand_units": 198, "stock_gap_units": -17, "risk_level": "low", "recommendation": "Maintain normal replenishment." },
+    { "product": "TRIVASC 35MG MR", "area": "All", "annual_demand_units": 51000, "eoq_units": 310, "reorder_point_units": 110, "safety_stock_units": 48, "current_stock_units": 128, "forecast_demand_units": 142, "stock_gap_units": 14, "risk_level": "medium", "recommendation": "Replenish within the next planning cycle." },
+    { "product": "ANTITET 1500IU/0.7ML", "area": "All", "annual_demand_units": 98400, "eoq_units": 500, "reorder_point_units": 190, "safety_stock_units": 82, "current_stock_units": 166, "forecast_demand_units": 225, "stock_gap_units": 59, "risk_level": "high", "recommendation": "Pre-position stock for surge and contingency demand." }
+  ],
+  "regional_priorities": [
+    { "area": "Government", "priority_rank": 1, "revenue_score": 0.4, "growth_score": 0.18, "outbreak_risk_index": 0.05, "mcda_score": 0.63, "recommendation": "Prioritize bid readiness and allocation." },
+    { "area": "Hospital", "priority_rank": 2, "revenue_score": 0.22, "growth_score": 0.14, "outbreak_risk_index": 0.08, "mcda_score": 0.44, "recommendation": "Protect fast-moving critical SKUs." },
+    { "area": "Quezon", "priority_rank": 3, "revenue_score": 0.13, "growth_score": 0.09, "outbreak_risk_index": 0.07, "mcda_score": 0.29, "recommendation": "Increase forecast refresh cadence." },
+    { "area": "Batangas", "priority_rank": 4, "revenue_score": 0.09, "growth_score": 0.07, "outbreak_risk_index": 0.04, "mcda_score": 0.2, "recommendation": "Maintain targeted replenishment." },
+    { "area": "Marinduque", "priority_rank": 5, "revenue_score": 0.03, "growth_score": 0.05, "outbreak_risk_index": 0.1, "mcda_score": 0.18, "recommendation": "Keep typhoon contingency stock." }
+  ],
+  "area_clusters": [
+    { "area": "Government", "model_code": "KMEANS_AREA", "cluster_label": "Cluster A", "cluster_profile": "High-volume / institutional", "planning_implication": "Refresh forecasts often and monitor bids." },
+    { "area": "Hospital", "model_code": "KMEANS_AREA", "cluster_label": "Cluster A", "cluster_profile": "High-volume / institutional", "planning_implication": "Protect fast-moving critical SKUs." },
+    { "area": "Quezon", "model_code": "KMEANS_AREA", "cluster_label": "Cluster B", "cluster_profile": "Stable commercial demand", "planning_implication": "Keep steady replenishment cycles." },
+    { "area": "Batangas", "model_code": "KMEANS_AREA", "cluster_label": "Cluster B", "cluster_profile": "Stable commercial demand", "planning_implication": "Maintain targeted replenishment." },
+    { "area": "Marinduque", "model_code": "KMEANS_AREA", "cluster_label": "Cluster D", "cluster_profile": "Low-scale / variable movement", "planning_implication": "Keep typhoon contingency stock." }
+  ],
+  "product_priorities": [
+    { "product": "PAGBILAO # 13,500,000", "model_code": "XGBOOST_URGENCY", "abc_classification": "A", "pareto_rank": 1, "cumulative_revenue_pct": 27.7, "xgboost_urgency_score": 0.88, "risk_level": "high", "recommendation": "Protect allocation and review bid replenishment early." },
+    { "product": "PAGBILAO # 6,334,470", "model_code": "XGBOOST_URGENCY", "abc_classification": "A", "pareto_rank": 2, "cumulative_revenue_pct": 41.9, "xgboost_urgency_score": 0.78, "risk_level": "medium", "recommendation": "Keep allocation visible in weekly planning." },
+    { "product": "MONOWEL 1G IV", "model_code": "XGBOOST_URGENCY", "abc_classification": "A", "pareto_rank": 3, "cumulative_revenue_pct": 51, "xgboost_urgency_score": 0.82, "risk_level": "high", "recommendation": "Monitor hospital demand and reorder buffer." }
+  ],
+  "allocation_recommendations": [
+    { "product": "MONOWEL 1G IV", "area": "Hospital", "model_code": "LINEAR_ALLOCATION", "available_units": 320, "recommended_units": 180, "optimization_gap": 0.04, "recommendation": "Allocate first replenishment to hospital accounts." },
+    { "product": "EUROXONE 1G", "area": "Quezon", "model_code": "LINEAR_ALLOCATION", "available_units": 420, "recommended_units": 150, "optimization_gap": 0.06, "recommendation": "Reserve stock for Quezon before lower-priority routes." },
+    { "product": "ANTITET 1500IU/0.7ML", "area": "Marinduque", "model_code": "LINEAR_ALLOCATION", "available_units": 260, "recommended_units": 120, "optimization_gap": 0.05, "recommendation": "Pre-position contingency stock before typhoon season." }
+  ],
+  "product_region_matches": [
+    { "product": "MONOWEL 1G IV", "area": "Hospital", "model_code": "COLLAB_PRODUCT_REGION", "similarity_score": 0.91, "match_rank": 1, "recommendation": "Strong institutional product-area fit." },
+    { "product": "EUROXONE 1G", "area": "Quezon", "model_code": "COLLAB_PRODUCT_REGION", "similarity_score": 0.83, "match_rank": 2, "recommendation": "Good demand similarity with prior regional movement." },
+    { "product": "ANTITET 1500IU/0.7ML", "area": "Marinduque", "model_code": "COLLAB_PRODUCT_REGION", "similarity_score": 0.79, "match_rank": 3, "recommendation": "Keep as contingency match for variable demand." }
+  ],
+  "decision_alerts": [
+    { "alert_date": "2026-01-01", "area": "Hospital", "product": "MONOWEL 1G IV", "model_code": "EOQ_ROP_SAFETY", "alert_type": "stock_gap", "severity": "high", "trigger_metric": "stock_gap_units", "threshold_value": 0, "observed_value": 34, "demand_multiplier": 1, "recommendation": "Demand exceeds safety stock. Create replenishment order.", "status": "open" },
+    { "alert_date": "2026-05-01", "area": "All", "product": "ANTITET 1500IU/0.7ML", "model_code": "ALERT_THRESHOLDS", "alert_type": "disease_surge", "severity": "high", "trigger_metric": "disease_intensity_index", "threshold_value": 1.4, "observed_value": 1.48, "demand_multiplier": 1.35, "recommendation": "Increase antipyretic and emergency stock review.", "status": "open" },
+    { "alert_date": "2026-07-01", "area": "Marinduque", "product": "All", "model_code": "ALERT_THRESHOLDS", "alert_type": "weather_risk", "severity": "critical", "trigger_metric": "rainfall_severity_index", "threshold_value": 0.6, "observed_value": 0.68, "demand_multiplier": 1.4, "recommendation": "Pre-position wound care and ORS stock before severe rainfall window.", "status": "open" }
+  ],
+  "model_evaluation": [
+    { "model_code": "PROPHET_BASELINE", "model_name": "Facebook Prophet baseline forecast", "analytics_layer": "predictive", "metric_name": "MAPE", "metric_value": 0, "target_direction": "minimize", "benchmark_value": 0.15, "passed": null, "notes": "Placeholder until historical train/test split is executed." },
+    { "model_code": "PROPHET_EXTERNAL", "model_name": "Prophet with DOH and PAGASA regressors", "analytics_layer": "predictive", "metric_name": "MAPE", "metric_value": 0, "target_direction": "minimize", "benchmark_value": 0.15, "passed": null, "notes": "External-regressor model path configured for DOH/PAGASA signals." },
+    { "model_code": "XGBOOST_URGENCY", "model_name": "XGBoost demand urgency scoring", "analytics_layer": "predictive", "metric_name": "MAPE", "metric_value": 0, "target_direction": "minimize", "benchmark_value": 0.15, "passed": null, "notes": "Urgency scoring placeholder until labeled demand outcomes are prepared." },
+    { "model_code": "KMEANS_AREA", "model_name": "K-Means area clustering", "analytics_layer": "descriptive", "metric_name": "silhouette_score", "metric_value": 0, "target_direction": "maximize", "benchmark_value": 0.5, "passed": null, "notes": "Cluster validation placeholder until transaction-grain clustering runs." },
+    { "model_code": "EOQ_ROP_SAFETY", "model_name": "EOQ, reorder point, and safety stock", "analytics_layer": "prescriptive", "metric_name": "fulfillment_rate", "metric_value": 0.95, "target_direction": "maximize", "benchmark_value": 0.95, "passed": true, "notes": "Target service level aligned to proposal." }
+  ],
   "totals": {
     "total_revenue": 438927880,
     "total_income": 243915436,

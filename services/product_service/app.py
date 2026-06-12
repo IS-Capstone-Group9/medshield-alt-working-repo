@@ -30,5 +30,29 @@ def products():
     return jsonify(rows[:limit])
 
 
+@app.get("/inventory_recommendations")
+def inventory_recommendations():
+    return jsonify(snapshot().get("inventory_recommendations", []))
+
+
+@app.get("/product_priorities")
+def product_priorities():
+    return jsonify(snapshot().get("product_priorities", []))
+
+
+@app.get("/allocation_recommendations")
+def allocation_recommendations():
+    return jsonify(snapshot().get("allocation_recommendations", []))
+
+
+@app.get("/product_region_matches")
+def product_region_matches():
+    return jsonify(snapshot().get("product_region_matches", []))
+
+
 if __name__ == "__main__":
-    app.run(port=int(os.getenv("PORT", "5102")), debug=True)
+    app.run(
+        port=int(os.getenv("PRODUCT_SERVICE_PORT", "5102")),
+        debug=os.getenv("FLASK_DEBUG", "").strip().lower() in {"1", "true", "yes"},
+        use_reloader=False,
+    )

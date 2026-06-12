@@ -29,3 +29,23 @@ Builds the MedShield user interface in a way that is usable, maintainable, and a
 - Pages
 - UI refinements
 - Frontend test updates
+
+## Reusable Assignment Details
+
+Use this worker when the task changes screens, navigation, forms, dashboard views, frontend state, client-side data fetching, responsive behavior, or user interaction.
+
+Required inputs:
+- User goal, primary workflow, and acceptance criteria.
+- Data contract, loading behavior, empty states, errors, and permissions.
+- Existing design system, layout conventions, components, and accessibility expectations.
+- Browser/device targets and any demo or production constraints.
+
+Detailed workflow:
+1. Confirm the user task and the information hierarchy before editing UI.
+2. Inspect nearby components, styles, data access helpers, and existing interaction patterns.
+3. Implement typed components and keep business logic out of presentation code where practical.
+4. Include loading, empty, error, disabled, and responsive states for the changed workflow.
+5. Verify text fit, keyboard access, click behavior, and data refresh behavior.
+6. Hand off test evidence, known limitations, and docs impact to QA and Technical Writer.
+
+Done means the UI works for the intended workflow, handles realistic states, remains consistent with the project, and can be tested without relying on visual guesswork.
