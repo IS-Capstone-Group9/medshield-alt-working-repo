@@ -53,3 +53,6 @@ data/medshield/uploads/
 
 # Obsolete local export superseded by complete yearly daily CSVs
 outputs/contract_backward_allocation_20260623/yearly_daily/sales_transactions_area_allocated_undated_review.csv
+
+# Superseded by yearly_daily_clean_sales exports
+outputs/contract_backward_allocation_20260623/yearly_daily/
