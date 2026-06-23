@@ -58,7 +58,7 @@ Charts can render from the bundled fallback file at `frontend/public/data/sales_
 
 If a chart says it is unavailable, first confirm that Chart.js is installed and loaded, then confirm that `frontend/public/data/sales_data.json` or the API response contains the dataset used by that chart. Missing model-output datasets should show empty decision tables, but they should not prevent core sales charts from rendering.
 
-View Sales Data computations should use the server summary endpoint rather than the current page of transactions. Required filtered KPIs are total quantity, net cost, net income, discount, average unit cost, average margin, row counts, unique DR numbers, and SKU count.
+View Sales Data computations should use the server summary endpoint rather than the current page of transactions. Required filtered KPIs are total quantity, net cost, workbook gross profit from `net_income`, discount, average unit cost, average margin, row counts, unique DR numbers, and SKU count.
 
 Because operating expense data is not available, analytics must label `net_income` as workbook gross margin/profit unless the group later provides expense data and approves a full profitability definition. EOQ, ROP, safety stock, allocation, and dead-stock outputs remain scenario or formula outputs until inventory, lead-time, and cost-policy inputs are provided.
 
@@ -69,6 +69,7 @@ Use these preparation documents before model training:
 - `docs/SKU_ALIAS_MAPPING_PLAN.md`
 - `docs/MODEL_LIBRARIES_AND_ORCHESTRATION.md`
 - `docs/AREA_SUMMARY_BACKWARD_ALLOCATION.md`
+- `docs/DASHBOARD_MODEL_PUBLICATION_GUIDE.md`
 
 For product-level analysis, use `data/medshield/processed/sales_transactions_area_allocated.json.gz` when contract-name rows such as `PAGBILAO # ...` or `QMC # ...` would otherwise be treated as product names. The adjusted dataset preserves source totals but marks estimated child rows with `allocation_status = estimated_backward_allocation`.
 
@@ -96,7 +97,7 @@ The Weather API Validation dashboard view is the operational check for this scop
 
 | Dashboard Area | Chart / Table | Model or Method | Decision Supported |
 |---|---|---|---|
-| Overview | Revenue and net income baseline | Descriptive trend | Is demand growing, declining, or volatile? |
+| Overview | Revenue and gross profit baseline | Descriptive trend | Is demand growing, declining, or volatile? |
 | Overview | 2026 demand forecast | Prophet baseline and external-regressor forecast | What demand should stock planning expect next? |
 | Sales diagnostics | Monthly revenue trend | Time-series descriptive analysis | Which months require planning attention? |
 | Product prioritization | Top product revenue and ABC table | ABC/Pareto | Which products deserve priority control? |

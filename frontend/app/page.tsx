@@ -131,8 +131,12 @@ html[data-theme="dark"] body {
   padding-bottom: 14px;
 }
 .filterbar-note {
-  max-width: 460px;
-  line-height: 1.45;
+  max-width: 380px;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .topbar {
   background: var(--bg-surface);
@@ -144,6 +148,8 @@ html[data-theme="dark"] body {
 }
 .page-sub {
   color: var(--text-secondary);
+  max-width: 820px;
+  line-height: 1.4;
 }
 .nav-toggle {
   color: var(--text-primary);
@@ -159,8 +165,8 @@ html[data-theme="dark"] body {
   background: var(--bg-elevated);
 }
 .kpi-grid {
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
 }
 .kpi-card,
 .chart-card,
@@ -168,11 +174,11 @@ html[data-theme="dark"] body {
   border-radius: 8px;
 }
 .kpi-card {
-  min-height: 128px;
-  padding: 16px 18px;
+  min-height: 100px;
+  padding: 12px 14px;
 }
 .kpi-value {
-  font-size: clamp(24px, 3vw, 34px);
+  font-size: clamp(21px, 2.2vw, 29px);
   letter-spacing: 0;
 }
 .chart-grid-2,
@@ -182,7 +188,7 @@ html[data-theme="dark"] body {
 .chart-card {
   min-width: 0;
   overflow: hidden;
-  padding: 18px;
+  padding: 14px;
   background: var(--bg-surface);
   border-color: var(--border);
 }
@@ -195,15 +201,15 @@ html[data-theme="dark"] body {
 .chart-card[data-model]::before {
   content: attr(data-model);
   position: absolute;
-  top: 14px;
-  right: 16px;
-  max-width: 180px;
-  padding: 4px 8px;
+  top: 12px;
+  right: 12px;
+  max-width: 132px;
+  padding: 3px 7px;
   border: 1px solid var(--border);
   border-radius: 999px;
   background: var(--bg-elevated);
   color: var(--text-secondary);
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 800;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -213,7 +219,7 @@ html[data-theme="dark"] body {
 }
 .uploaded-data-panel {
   margin-top: 14px;
-  padding: 18px;
+  padding: 14px;
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--bg-surface);
@@ -239,7 +245,10 @@ html[data-theme="dark"] body {
   margin-top: 4px;
   color: var(--text-secondary);
   font-size: 11px;
-  line-height: 1.5;
+  line-height: 1.4;
+}
+.uploaded-data-copy {
+  max-width: 760px;
 }
 .uploaded-data-toolbar {
   margin: 16px 0 12px;
@@ -335,12 +344,12 @@ html[data-theme="dark"] body {
 }
 .sales-status-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 10px;
-  margin: 14px 0;
+  grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+  gap: 8px;
+  margin: 10px 0;
 }
 .sales-status-card {
-  padding: 12px;
+  padding: 10px;
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--bg-elevated);
@@ -355,7 +364,7 @@ html[data-theme="dark"] body {
 .sales-status-value {
   margin-top: 5px;
   color: var(--text-primary);
-  font-size: 19px;
+  font-size: 17px;
   font-weight: 800;
 }
 .sales-quality {
@@ -380,12 +389,12 @@ html[data-theme="dark"] body {
 }
 .sales-primary-button:disabled { opacity: .55; cursor: wait; }
 .sales-note {
-  padding: 11px 12px;
+  padding: 9px 11px;
   border-left: 3px solid var(--accent);
   background: var(--accent-light);
   color: var(--text-secondary);
   font-size: 11px;
-  line-height: 1.5;
+  line-height: 1.4;
 }
 @media (max-width: 680px) {
   .uploaded-data-field,
@@ -396,8 +405,8 @@ html[data-theme="dark"] body {
 }
 .chart-header {
   align-items: center;
-  min-height: 42px;
-  padding-right: 104px;
+  min-height: 36px;
+  padding-right: 86px;
 }
 .chart-title {
   line-height: 1.25;
@@ -406,7 +415,7 @@ html[data-theme="dark"] body {
   line-height: 1.35;
 }
 .chart-wrap {
-  min-height: 220px;
+  min-height: 200px;
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--bg-elevated);
@@ -431,8 +440,8 @@ td {
 .model-readiness-panel,
 .audit-log-panel,
 .dashboard-help-modal {
-  margin-bottom: 14px;
-  padding: 18px;
+  margin-bottom: 12px;
+  padding: 14px;
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--bg-surface);
@@ -443,7 +452,7 @@ td {
 .audit-log-title,
 .dashboard-help-title {
   color: var(--text-primary);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 800;
   margin-bottom: 6px;
 }
@@ -451,22 +460,22 @@ td {
 .model-readiness-copy,
 .audit-log-copy,
 .dashboard-help-copy {
-  max-width: 920px;
+  max-width: 760px;
   color: var(--text-secondary);
   font-size: 12px;
-  line-height: 1.55;
+  line-height: 1.4;
 }
 .analytics-workflow-grid,
 .model-readiness-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 10px;
-  margin-top: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 8px;
+  margin-top: 10px;
 }
 .analytics-step,
 .model-card {
-  min-height: 96px;
-  padding: 13px;
+  min-height: 78px;
+  padding: 10px 11px;
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--bg-elevated);
@@ -483,7 +492,7 @@ td {
 .model-card-title {
   margin-top: 5px;
   color: var(--text-primary);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 800;
 }
 .analytics-step-copy,
@@ -491,7 +500,22 @@ td {
   margin-top: 5px;
   color: var(--text-secondary);
   font-size: 11px;
-  line-height: 1.45;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.analytics-workflow-panel {
+  border-left: 3px solid var(--accent);
+}
+.analytics-step[data-status="blocked"] .analytics-step-kicker,
+.model-card[data-status="blocked"] .model-card-kicker {
+  color: var(--amber);
+}
+.analytics-step[data-status="pass"] .analytics-step-kicker,
+.model-card[data-status="pass"] .model-card-kicker {
+  color: #15803d;
 }
 .upload-zone {
   border-radius: 8px;
@@ -529,7 +553,7 @@ td {
 .audit-log-list {
   display: grid;
   gap: 8px;
-  max-height: 220px;
+  max-height: 170px;
   overflow: auto;
   margin-top: 12px;
 }
@@ -789,8 +813,7 @@ function enhanceDashboardContent(root: HTMLElement) {
             <div>
               <div class="uploaded-data-title" id="salesDataTitle">Cleaned Sales Transactions</div>
               <div class="uploaded-data-copy">
-                Server-backed view of all 13 MedShield workbook columns. Raw values are retained in staging;
-                this table shows standardized records and row-level quality results.
+                Accepted sales rows with lineage, quality status, and filtered totals.
               </div>
             </div>
             <span class="mini-badge" id="salesDatasetBadge">Loading Dataset...</span>
@@ -799,12 +822,11 @@ function enhanceDashboardContent(root: HTMLElement) {
             <button class="sales-primary-button" id="salesDataUploadButton" type="button">Upload Messy XLSX/CSV</button>
             <input id="salesDataUploadInput" type="file" accept=".xlsx,.csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv" hidden />
             <div class="uploaded-data-status" id="salesDataUploadStatus">
-              Upload raw MedShield files here or from Data Upload. Cleaning runs before records are shown.
+              Upload raw MedShield files. Cleaning runs before records are shown.
             </div>
           </div>
           <div class="sales-note" id="salesPipelineNote">
-            Detection runs on every upload. Raw XLSX/CSV files are header-mapped, standardized, quality checked,
-            written to the local processed dataset, and written to Supabase when the service-role connection is configured.
+            Uploads are header-mapped, standardized, quality checked, then published only as accepted cleaned rows.
           </div>
           <div class="sales-status-grid" id="salesStatusGrid"></div>
           <div class="uploaded-data-toolbar">
@@ -872,8 +894,7 @@ function enhanceDashboardContent(root: HTMLElement) {
             <div>
               <div class="uploaded-data-title" id="weatherEffectTitle">Weather API Validation</div>
               <div class="uploaded-data-copy">
-                Validates NASA POWER or Open-Meteo historical observations before they are used as a weather
-                regressor/proxy in the DSS. The severity value is a planning proxy, not official PAGASA RSI or a typhoon warning.
+                Provider weather proxy for historical validation. Not an official PAGASA alert.
               </div>
             </div>
             <button class="sales-primary-button" id="refreshWeatherButton" type="button">Refresh Weather</button>
@@ -919,9 +940,7 @@ function enhanceDashboardContent(root: HTMLElement) {
           </div>
           <div class="sales-status-grid" id="weatherValidationSummary"></div>
           <div class="sales-note">
-            Capstone scope: use official PAGASA/DOH signals when available. NASA POWER and Open-Meteo are historical
-            meteorological backfill and validation sources only; the table reports association with same-month sales,
-            not causation.
+            Weather API rows are contextual regressors only. Use PAGASA rows as official historical reference when uploaded.
           </div>
           <div class="uploaded-data-table-wrap">
             <table class="uploaded-data-table" id="weatherEffectTable">
@@ -940,27 +959,26 @@ function enhanceDashboardContent(root: HTMLElement) {
     overview.insertAdjacentHTML(
       'afterbegin',
       `
-      <section class="analytics-workflow-panel" aria-label="Analytics operating workflow">
-        <div class="analytics-workflow-title">Analytics Operating Workflow</div>
+      <section class="analytics-workflow-panel" aria-label="Model publication status">
+        <div class="analytics-workflow-title">Model Publication Status</div>
         <div class="analytics-workflow-copy">
-          MedShield DSS works as a SaaS analytics loop: ingest source data, validate quality,
-          generate model outputs, then convert those outputs into inventory and regional decisions.
+          Dashboard outputs are historical decision support. Sales-only outputs are draft; disease, PAGASA, and operational inventory models stay blocked or scenario-only until source data is loaded.
         </div>
         <div class="analytics-workflow-grid">
-          <div class="analytics-step">
-            <div class="analytics-step-kicker">1. Data Intake</div>
-            <div class="analytics-step-title">Sales, Inventory, DOH, PAGASA</div>
-            <div class="analytics-step-copy">Upload clean 2021-2025 sales first, then add stock, lead-time, disease, and weather signals.</div>
+          <div class="analytics-step" data-status="pass">
+            <div class="analytics-step-kicker">Ready</div>
+            <div class="analytics-step-title">Clean Sales + ABC/Pareto</div>
+            <div class="analytics-step-copy">2021-2025 cleaned sales, mapped territories, estimated contract-name allocations.</div>
           </div>
           <div class="analytics-step">
-            <div class="analytics-step-kicker">2. Modeling</div>
-            <div class="analytics-step-title">Descriptive, Predictive, Prescriptive</div>
-            <div class="analytics-step-copy">ABC, clustering, Prophet, XGBoost, EOQ/ROP, MCDA, allocation, and alert rules each feed a decision view.</div>
+            <div class="analytics-step-kicker">Draft</div>
+            <div class="analytics-step-title">Sales Baseline Forecast</div>
+            <div class="analytics-step-copy">Seasonal naive baseline with MAE, RMSE, MAPE, and partial-period limitation notes.</div>
           </div>
-          <div class="analytics-step">
-            <div class="analytics-step-kicker">3. Decision Output</div>
-            <div class="analytics-step-title">What to Buy, Where to Allocate</div>
-            <div class="analytics-step-copy">The dashboard should always explain the recommendation, reason, risk level, and next action.</div>
+          <div class="analytics-step" data-status="blocked">
+            <div class="analytics-step-kicker">Blocked</div>
+            <div class="analytics-step-title">External + Inventory Models</div>
+            <div class="analytics-step-copy">Needs DOH, PAGASA/API coverage, inventory, lead time, ordering cost, and holding cost inputs.</div>
           </div>
         </div>
       </section>
@@ -978,7 +996,7 @@ function enhanceDashboardContent(root: HTMLElement) {
     if (title) title.textContent = 'Upload Sales Workbook or CSV'
     if (hint) {
       hint.textContent =
-        'Accepted: MedShield .xlsx workbook or .csv export. The system detects raw/cleaned stage, preserves all 13 columns, standardizes rows, and publishes a quality report.'
+        'Accepted: MedShield .xlsx workbook or .csv export. The system detects the stage, standardizes rows, and publishes a quality report.'
     }
   }
   if (dataPage && !dataPage.querySelector('.model-readiness-panel')) {
@@ -989,27 +1007,26 @@ function enhanceDashboardContent(root: HTMLElement) {
       <section class="model-readiness-panel" aria-label="Model readiness checklist">
         <div class="model-readiness-title">Dataset Readiness for All Models</div>
         <div class="model-readiness-copy">
-          Use the upload area for demo validation. For production SaaS use, persist uploads to staging tables,
-          validate them, and only publish model outputs after QA checks pass.
+          Publish only reviewed outputs. Missing external and operational inputs must remain blocked, draft, or scenario-only.
         </div>
         <div class="model-readiness-grid">
-          <div class="model-card">
-            <div class="model-card-kicker">Required Now</div>
+          <div class="model-card" data-status="pass">
+            <div class="model-card-kicker">Ready</div>
             <div class="model-card-title">Sales Workbook</div>
             <div class="model-card-copy">period, product, area, quantity, revenue, income, margin, transaction count.</div>
           </div>
-          <div class="model-card">
-            <div class="model-card-kicker">Inventory Models</div>
+          <div class="model-card" data-status="blocked">
+            <div class="model-card-kicker">Scenario Only</div>
             <div class="model-card-title">Stock and Cost Inputs</div>
             <div class="model-card-copy">current stock, lead time, holding cost, ordering cost, service level, demand variation.</div>
           </div>
-          <div class="model-card">
-            <div class="model-card-kicker">External Regressors</div>
+          <div class="model-card" data-status="blocked">
+            <div class="model-card-kicker">Blocked</div>
             <div class="model-card-title">DOH and PAGASA signals</div>
             <div class="model-card-copy">disease intensity, rainfall severity, typhoon flags, area and month alignment.</div>
           </div>
           <div class="model-card">
-            <div class="model-card-kicker">Validation</div>
+            <div class="model-card-kicker">Review</div>
             <div class="model-card-title">Decision Outcomes</div>
             <div class="model-card-copy">accepted actions, actual demand, stockouts, fulfillment and allocation results.</div>
           </div>
@@ -1026,7 +1043,7 @@ function enhanceDashboardContent(root: HTMLElement) {
       <section class="audit-log-panel" aria-label="Dashboard audit log">
         <div class="audit-log-title">Audit Log</div>
         <div class="audit-log-copy">
-          Local audit trail for dashboard actions in this browser session. Production SaaS should persist these entries to the backend with user, tenant, and request metadata.
+          Browser-session audit trail. Production should persist user, tenant, and request metadata in the backend.
         </div>
         <div class="audit-log-actions">
           <span class="mini-badge">Browser Audit</span>
@@ -1046,13 +1063,13 @@ function enhanceDashboardContent(root: HTMLElement) {
         <section class="dashboard-help-modal">
           <div class="dashboard-help-title" id="dashboardHelpTitle">Dashboard Help</div>
           <div class="dashboard-help-copy">
-            Use this dashboard as a decision-support workflow, not just a reporting page.
+            Use the views in decision order.
           </div>
           <div class="dashboard-help-list">
-            <div><strong>Overview:</strong> read baseline demand and forecast direction first.</div>
-            <div><strong>Sales and Products:</strong> find demand, margin, ABC, and priority signals.</div>
-            <div><strong>Forecast and Planning:</strong> review model outputs before reorder or allocation decisions.</div>
-            <div><strong>Data Upload:</strong> validate source files before publishing model outputs.</div>
+            <div><strong>Overview:</strong> demand, margin, forecast direction.</div>
+            <div><strong>Sales and Products:</strong> accepted rows, ABC, priority signals.</div>
+            <div><strong>Forecast and Planning:</strong> draft model outputs and scenarios.</div>
+            <div><strong>Data Upload:</strong> source checks before publication.</div>
           </div>
           <div class="dashboard-help-footer">
             <button class="dashboard-help-close" type="button" id="closeDashboardHelpButton">Close</button>
@@ -1063,16 +1080,16 @@ function enhanceDashboardContent(root: HTMLElement) {
     )
   }
 
-  setCardModel(root, 'overviewBaselineChart', 'Sales Baseline', 'Historical demand and profit base for descriptive analytics.')
-  setCardModel(root, 'overviewForecastChart', 'Prophet', 'Forward demand signal used by stock planning and allocation.')
-  setCardModel(root, 'monthlyChart', 'Time Series', 'Raw monthly sales signal before forecasting.')
-  setCardModel(root, 'areaDonut', 'Territory Mix', 'Area concentration used by clustering and regional priority scoring.')
-  setCardModel(root, 'forecastChart', 'Prophet + Regressors', '2026 projection with disease and weather adjustment path.')
-  setCardModel(root, 'seasonIndexChart', 'Seasonality/STL', 'Monthly demand multiplier used by the forecast model.')
-  setCardModel(root, 'externalChart', 'DOH/PAGASA', 'Weather and disease signals used to adjust forecasts and alerts.')
-  setCardModel(root, 'areaBarChart', 'K-Means input', 'Territory revenue ranking used for area segmentation.')
-  setCardModel(root, 'areaIncomeChart', 'Profitability', 'Shows which territories convert sales into profit.')
-  setCardModel(root, 'areaMarginChart', 'MCDA input', 'Margin trade-offs used with revenue, growth, and risk.')
+  setCardModel(root, 'overviewBaselineChart', 'Actual Sales', 'Historical sales baseline.')
+  setCardModel(root, 'overviewForecastChart', 'Draft Forecast', 'Sales-only planning signal.')
+  setCardModel(root, 'monthlyChart', 'Time Series', 'Monthly sales trend.')
+  setCardModel(root, 'areaDonut', 'Territory Mix', 'Area concentration.')
+  setCardModel(root, 'forecastChart', 'Forecast Draft', 'External regressors pending.')
+  setCardModel(root, 'seasonIndexChart', 'Seasonality', 'Monthly demand pattern.')
+  setCardModel(root, 'externalChart', 'External Pending', 'DOH/PAGASA/API inputs required.')
+  setCardModel(root, 'areaBarChart', 'Area Rank', 'Territory revenue ranking.')
+  setCardModel(root, 'areaIncomeChart', 'Gross Profit', 'Workbook gross margin/profit.')
+  setCardModel(root, 'areaMarginChart', 'MCDA Input', 'Margin signal for priority scoring.')
   renderAuditLog(root)
 }
 
@@ -1269,8 +1286,8 @@ function renderSalesDatasetStatus(root: HTMLElement, status: SalesDatasetStatus)
   if (badge) badge.textContent = `${status.source_file} - ${status.cleaning_status}`
   if (note) {
     note.textContent =
-      `Detected as ${summary.input_stage}. ${summary.rows_extracted.toLocaleString()} rows were extracted; ` +
-      `${summary.rows_accepted.toLocaleString()} passed required-field validation. Raw source values remain in staging.`
+      `${summary.input_stage}: ${summary.rows_accepted.toLocaleString()} accepted of ` +
+      `${summary.rows_extracted.toLocaleString()} extracted rows. Source values remain in staging.`
   }
   if (grid) {
     const metrics = [
@@ -1328,7 +1345,7 @@ function renderSalesComputation(root: HTMLElement, summary: SalesSummary, mode: 
       ? [
           ['Sum Quantity', number(summary.sums.quantity)],
           ['Sum Net CP', money(summary.sums.net_cost)],
-          ['Sum Net Income', money(summary.sums.net_income)],
+          ['Sum Gross Profit', money(summary.sums.net_income)],
           ['Sum Discount', money(summary.sums.discount)],
           ['Sum Total TP', money(summary.sums.total_trade_price)],
           ['Accepted Rows', number(summary.counts.accepted_rows)],
@@ -1338,7 +1355,7 @@ function renderSalesComputation(root: HTMLElement, summary: SalesSummary, mode: 
             ['Avg Quantity', number(summary.averages.quantity)],
             ['Avg Unit CP', money(summary.averages.unit_cost)],
             ['Avg Net CP', money(summary.averages.net_cost)],
-            ['Avg Net Income', money(summary.averages.net_income)],
+            ['Avg Gross Profit', money(summary.averages.net_income)],
             ['Avg Margin', percent(summary.averages.margin_pct)],
             ['Warning Rows', number(summary.counts.warning_rows)],
           ]
@@ -1353,7 +1370,7 @@ function renderSalesComputation(root: HTMLElement, summary: SalesSummary, mode: 
             ]
           : [
               ['Net CP', money(summary.sums.net_cost)],
-              ['Net Income', money(summary.sums.net_income)],
+              ['Gross Profit', money(summary.sums.net_income)],
               ['Average Margin', percent(summary.averages.margin_pct)],
               ['SKU Count', number(summary.counts.sku_count)],
               ['Unique DR Numbers', number(summary.counts.unique_dr_numbers)],
@@ -1390,7 +1407,7 @@ function renderSalesPage(root: HTMLElement, result: SalesPage) {
     ['Net CP', 'net_cost', 'money'],
     ['TP/Unit', 'trade_price_unit', 'money'],
     ['Total TP', 'total_trade_price', 'money'],
-    ['Net Income', 'net_income', 'money'],
+    ['Gross Profit', 'net_income', 'money'],
     ['%', 'margin_pct', 'percent'],
   ]
   table.replaceChildren()
