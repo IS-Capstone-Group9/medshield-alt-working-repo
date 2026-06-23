@@ -1,0 +1,47 @@
+[
+  {
+    "year": "2021",
+    "sales_report_nonempty_rows_excluding_header": 3419,
+    "clean_accepted_rows": 3412,
+    "excluded_rows_from_source_workbook": 4,
+    "clean_minus_sales_report_rows": -7,
+    "note": "lower count means source rows were excluded by clean-sales rules",
+    "top_exclusion_reasons": "non_positive_total_trade_price (2); missing_product; missing_area; missing_or_invalid_date_delivered; non_positive_quantity (1); non_positive_quantity; non_positive_total_trade_price (1)"
+  },
+  {
+    "year": "2022",
+    "sales_report_nonempty_rows_excluding_header": 4032,
+    "clean_accepted_rows": 3999,
+    "excluded_rows_from_source_workbook": 30,
+    "clean_minus_sales_report_rows": -33,
+    "note": "lower count means source rows were excluded by clean-sales rules",
+    "top_exclusion_reasons": "missing_product; non_positive_total_trade_price (12); non_positive_quantity; non_positive_total_trade_price (7); missing_product; non_positive_quantity; non_positive_total_trade_price (5)"
+  },
+  {
+    "year": "2023",
+    "sales_report_nonempty_rows_excluding_header": 5893,
+    "clean_accepted_rows": 5323,
+    "excluded_rows_from_source_workbook": 567,
+    "clean_minus_sales_report_rows": -570,
+    "note": "lower count means source rows were excluded by clean-sales rules",
+    "top_exclusion_reasons": "missing_product; non_positive_total_trade_price (468); non_positive_total_trade_price (63); missing_product; non_positive_quantity; non_positive_total_trade_price (34)"
+  },
+  {
+    "year": "2024",
+    "sales_report_nonempty_rows_excluding_header": 2948,
+    "clean_accepted_rows": 3328,
+    "excluded_rows_from_source_workbook": 109,
+    "clean_minus_sales_report_rows": 380,
+    "note": "clean rows can exceed workbook rows when contract rows are backward-allocated into child product rows",
+    "top_exclusion_reasons": "missing_product; non_positive_total_trade_price (106); missing_product; missing_area; missing_or_invalid_date_delivered; non_positive_quantity (1); missing_area; missing_or_invalid_date_delivered; non_positive_quantity; non_positive_total_trade_price (1)"
+  },
+  {
+    "year": "2025",
+    "sales_report_nonempty_rows_excluding_header": 4141,
+    "clean_accepted_rows": 4899,
+    "excluded_rows_from_source_workbook": 131,
+    "clean_minus_sales_report_rows": 758,
+    "note": "clean rows can exceed workbook rows when contract rows are backward-allocated into child product rows",
+    "top_exclusion_reasons": "missing_product; missing_or_invalid_date_delivered; non_positive_total_trade_price (60); missing_product; non_positive_total_trade_price (41); non_positive_quantity; non_positive_total_trade_price (13)"
+  }
+]

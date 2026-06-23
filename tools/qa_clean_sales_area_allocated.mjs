@@ -20,7 +20,9 @@ const ADDITIVE_FIELDS = [
   'net_income',
 ];
 
-const SOURCE_HEAD = process.argv.includes('--source-head');
+const sourceRefArg = process.argv.find((arg) => arg.startsWith('--source-ref='));
+const SOURCE_REF = sourceRefArg ? sourceRefArg.split('=').slice(1).join('=') : null;
+const SOURCE_HEAD = process.argv.includes('--source-head') || Boolean(SOURCE_REF);
 
 const CSV_PRIORITY_FIELDS = [
   'date_delivered',
@@ -71,13 +73,18 @@ const CSV_PRIORITY_FIELDS = [
 
 const isBlank = (value) => value === null || value === undefined || String(value).trim() === '';
 const isValidDate = (value) => /^\d{4}-\d{2}-\d{2}$/.test(String(value || ''));
+const workbookYear = (row) => {
+  const match = String(row.source_workbook || row.source_sheet || '').match(/(20\d{2})/);
+  return match ? match[1] : '';
+};
 const round2 = (value) => Math.round((Number(value) + Number.EPSILON) * 100) / 100;
 const round6 = (value) => Math.round((Number(value) + Number.EPSILON) * 1_000_000) / 1_000_000;
 
 function readPayload(filePath) {
   if (SOURCE_HEAD) {
     const repoPath = path.relative(ROOT, filePath).replace(/\\/g, '/');
-    return JSON.parse(zlib.gunzipSync(execFileSync('git', ['show', `HEAD:${repoPath}`], {
+    const ref = SOURCE_REF || 'HEAD';
+    return JSON.parse(zlib.gunzipSync(execFileSync('git', ['show', `${ref}:${repoPath}`], {
       maxBuffer: 20 * 1024 * 1024,
     }), 'utf8'));
   }
@@ -92,11 +99,9 @@ function getQuality(row) {
   return String(row.quality_status || row.row_quality_status || '').trim().toLowerCase();
 }
 
-function getRejectionReasons(row) {
+function getBaseRejectionReasons(row) {
   const reasons = [];
-  const quality = getQuality(row);
 
-  if (quality === 'rejected') reasons.push('quality_status_rejected');
   if (isBlank(row.product)) reasons.push('missing_product');
   if (isBlank(row.area)) reasons.push('missing_area');
   if (!isValidDate(row.date_delivered)) reasons.push('missing_or_invalid_date_delivered');
@@ -104,6 +109,55 @@ function getRejectionReasons(row) {
   if (!(Number(row.total_trade_price) > 0)) reasons.push('non_positive_total_trade_price');
 
   return reasons;
+}
+
+function buildDateEstimator(rows) {
+  const datedByWorkbook = new Map();
+  for (const row of rows) {
+    if (!isValidDate(row.date_delivered)) continue;
+    const workbook = row.source_workbook || workbookYear(row) || String(row.date_delivered).slice(0, 4);
+    if (!datedByWorkbook.has(workbook)) datedByWorkbook.set(workbook, []);
+    datedByWorkbook.get(workbook).push({
+      source_row_number: Number(row.source_row_number) || 0,
+      date_delivered: String(row.date_delivered),
+    });
+  }
+
+  for (const candidates of datedByWorkbook.values()) {
+    candidates.sort((a, b) => a.source_row_number - b.source_row_number);
+  }
+
+  return (row) => {
+    const workbook = row.source_workbook || workbookYear(row);
+    const candidates = datedByWorkbook.get(workbook) || [];
+    const rowNumber = Number(row.source_row_number) || 0;
+
+    if (candidates.length > 0) {
+      let best = candidates[0];
+      let bestDistance = Math.abs(best.source_row_number - rowNumber);
+      for (const candidate of candidates) {
+        const distance = Math.abs(candidate.source_row_number - rowNumber);
+        if (distance < bestDistance) {
+          best = candidate;
+          bestDistance = distance;
+        }
+      }
+      return {
+        date: best.date_delivered,
+        method: 'estimated_nearest_dated_row_same_workbook',
+        nearestSourceRowNumber: best.source_row_number,
+        sourceRowDistance: bestDistance,
+      };
+    }
+
+    const year = workbookYear(row) || '2025';
+    return {
+      date: `${year}-07-01`,
+      method: 'estimated_midyear_fallback_from_source_workbook',
+      nearestSourceRowNumber: '',
+      sourceRowDistance: '',
+    };
+  };
 }
 
 function summarize(rows) {
@@ -208,14 +262,43 @@ function sortSalesRows(rows) {
 
 const payload = readPayload(INPUT_PATH);
 const rows = payload.rows || [];
+const estimateDate = buildDateEstimator(rows);
 const acceptedRows = [];
 const rejectedRows = [];
 const rejectionReasons = {};
 
 for (const row of rows) {
-  const reasons = getRejectionReasons(row);
+  const reasons = getBaseRejectionReasons(row);
+  const hasOnlyMissingDateIssue = reasons.length === 1 && reasons[0] === 'missing_or_invalid_date_delivered';
+
+  if (hasOnlyMissingDateIssue) {
+    const estimate = estimateDate(row);
+    acceptedRows.push(enrichAccepted({
+      ...row,
+      original_date_delivered: row.date_delivered || '',
+      date_delivered: estimate.date,
+      date_is_estimated: 'true',
+      date_estimation_method: estimate.method,
+      nearest_dated_source_row_number: estimate.nearestSourceRowNumber,
+      date_source_row_distance: estimate.sourceRowDistance,
+      quality_status: getQuality(row) === 'rejected' ? 'warning' : row.quality_status,
+      quality_notes: [
+        row.quality_notes,
+        'accepted after estimated date repair from nearby source row',
+      ].filter(Boolean).join('; '),
+    }));
+    continue;
+  }
+
   if (reasons.length === 0) {
-    acceptedRows.push(enrichAccepted(row));
+    acceptedRows.push(enrichAccepted({
+      ...row,
+      original_date_delivered: row.date_delivered || '',
+      date_is_estimated: 'false',
+      date_estimation_method: 'source_date_delivered',
+      nearest_dated_source_row_number: '',
+      date_source_row_distance: '',
+    }));
   } else {
     const rejectedRow = enrichRejected(row, reasons);
     rejectedRows.push(rejectedRow);
@@ -236,15 +319,15 @@ const cleanPayload = {
     cleaning_status: 'accepted_clean_sales_only',
     generated_at: new Date().toISOString(),
     source_dataset_before_sales_qa: SOURCE_HEAD
-      ? 'HEAD:data/medshield/processed/sales_transactions_area_allocated.json.gz'
+      ? `${SOURCE_REF || 'HEAD'}:data/medshield/processed/sales_transactions_area_allocated.json.gz`
       : 'data/medshield/processed/sales_transactions_area_allocated.json.gz',
     sales_qa_rules: [
-      'Exclude rows with quality_status = rejected.',
       'Exclude rows with missing product.',
       'Exclude rows with missing area.',
-      'Exclude rows without a valid YYYY-MM-DD date_delivered.',
       'Exclude rows with non-positive quantity.',
       'Exclude rows with non-positive total_trade_price.',
+      'Accept rows with missing delivery date only when product, area, quantity, and sales value are otherwise valid.',
+      'Repair accepted missing-date rows with the nearest dated row in the same source workbook and mark date_is_estimated = true.',
       'Retain warning rows when the row still has product, area, date, quantity, and sales value.',
       'Retain estimated_backward_allocation rows when they satisfy clean-sales rules.',
     ],
