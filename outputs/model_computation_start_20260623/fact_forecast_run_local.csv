@@ -1,0 +1,2 @@
+forecast_run_id,model_code,model_version,training_period_start,training_period_end,forecast_period_start,forecast_period_end,input_dataset_version,status,limitations
+sales_only_baseline_v1_2026,SEASONAL_NAIVE_BASELINE,sales_only_v1,2021-01,2025-12,2026-01,2026-12,sales_transactions_area_allocated_cleaned_20260623,draft,Sales-only baseline. 2025 is partial and external signals are not fully loaded.

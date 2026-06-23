@@ -1,0 +1,19 @@
+{
+  "generated_at": "2026-06-23T15:59:34Z",
+  "sales_rows": 20961,
+  "monthly_overall_rows": 55,
+  "monthly_territory_rows": 250,
+  "monthly_product_rows": 11656,
+  "monthly_product_territory_dense_rows": 3049,
+  "product_priority_rows": 3335,
+  "forecast_rows": 12,
+  "model_evaluation_rows": 1,
+  "blocked_items": 4,
+  "review_status": "draft",
+  "limitations": [
+    "DOH and PAGASA datasets are not yet uploaded.",
+    "Weather API file is partial and should remain contextual.",
+    "Product master classification is not fully approved.",
+    "Inventory/cost data is unavailable, so prescriptive outputs remain scenario-only."
+  ]
+}
