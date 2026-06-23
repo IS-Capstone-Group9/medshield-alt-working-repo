@@ -1,0 +1,116 @@
+{
+  "source_file": "data\\medshield\\processed\\sales_transactions.json.gz",
+  "row_count": 20418,
+  "by_year": {
+    "2021": 3415,
+    "2022": 4026,
+    "2023": 5889,
+    "2024": 2943,
+    "2025": 1082,
+    "missing": 3063
+  },
+  "quality_status": {
+    "rejected": 3732,
+    "valid": 16621,
+    "warning": 65
+  },
+  "top_issues": [
+    [
+      "invalid or missing delivery date",
+      2982
+    ],
+    [
+      "missing product",
+      669
+    ],
+    [
+      "invalid or missing delivery date; missing product",
+      66
+    ],
+    [
+      "exact duplicate transaction",
+      35
+    ],
+    [
+      "margin percentage is outside the expected range",
+      30
+    ],
+    [
+      "invalid or missing delivery date; margin percentage is outside the expected range",
+      7
+    ],
+    [
+      "missing area; invalid or missing delivery date; missing product",
+      5
+    ],
+    [
+      "missing area; invalid or missing delivery date",
+      3
+    ]
+  ],
+  "month_coverage_2025": [
+    {
+      "month": "2025-01",
+      "row_count": 0,
+      "status": "missing_accepted_rows"
+    },
+    {
+      "month": "2025-02",
+      "row_count": 24,
+      "status": "has_accepted_rows"
+    },
+    {
+      "month": "2025-03",
+      "row_count": 0,
+      "status": "missing_accepted_rows"
+    },
+    {
+      "month": "2025-04",
+      "row_count": 0,
+      "status": "missing_accepted_rows"
+    },
+    {
+      "month": "2025-05",
+      "row_count": 1,
+      "status": "has_accepted_rows"
+    },
+    {
+      "month": "2025-06",
+      "row_count": 68,
+      "status": "has_accepted_rows"
+    },
+    {
+      "month": "2025-07",
+      "row_count": 0,
+      "status": "missing_accepted_rows"
+    },
+    {
+      "month": "2025-08",
+      "row_count": 4,
+      "status": "has_accepted_rows"
+    },
+    {
+      "month": "2025-09",
+      "row_count": 94,
+      "status": "has_accepted_rows"
+    },
+    {
+      "month": "2025-10",
+      "row_count": 0,
+      "status": "missing_accepted_rows"
+    },
+    {
+      "month": "2025-11",
+      "row_count": 184,
+      "status": "has_accepted_rows"
+    },
+    {
+      "month": "2025-12",
+      "row_count": 707,
+      "status": "has_accepted_rows"
+    }
+  ],
+  "unique_products": 3722,
+  "unique_areas": 17,
+  "generated_at": "2026-06-23T07:47:19.652Z"
+}

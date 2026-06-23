@@ -60,6 +60,18 @@ If a chart says it is unavailable, first confirm that Chart.js is installed and 
 
 View Sales Data computations should use the server summary endpoint rather than the current page of transactions. Required filtered KPIs are total quantity, net cost, net income, discount, average unit cost, average margin, row counts, unique DR numbers, and SKU count.
 
+Because operating expense data is not available, analytics must label `net_income` as workbook gross margin/profit unless the group later provides expense data and approves a full profitability definition. EOQ, ROP, safety stock, allocation, and dead-stock outputs remain scenario or formula outputs until inventory, lead-time, and cost-policy inputs are provided.
+
+Use these preparation documents before model training:
+
+- `docs/BUSINESS_DEFINITIONS.md`
+- `docs/2025_DATA_ISSUE_REMEDIATION.md`
+- `docs/SKU_ALIAS_MAPPING_PLAN.md`
+- `docs/MODEL_LIBRARIES_AND_ORCHESTRATION.md`
+- `docs/AREA_SUMMARY_BACKWARD_ALLOCATION.md`
+
+For product-level analysis, use `data/medshield/processed/sales_transactions_area_allocated.json.gz` when contract-name rows such as `PAGBILAO # ...` or `QMC # ...` would otherwise be treated as product names. The adjusted dataset preserves source totals but marks estimated child rows with `allocation_status = estimated_backward_allocation`.
+
 ## Analytics Workflow
 
 1. Data Analyst profiles `Sales Report.xlsx` for missing dates, duplicate lines, inconsistent product names, area naming, quantity outliers, and margin anomalies.

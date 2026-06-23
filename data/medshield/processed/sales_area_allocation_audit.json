@@ -104,7 +104,7 @@
     ],
     "source_dataset": "data/medshield/processed/sales_transactions.json.gz",
     "transformation": "Recognized area-summary rows were replaced with deterministic product-level estimates using only prior comparable transactions.",
-    "generated_at": "2026-06-15T16:33:56.508Z",
+    "generated_at": "2026-06-23T07:58:20.918Z",
     "area_summary_rows_replaced": 346,
     "estimated_child_rows_created": 1730,
     "original_row_count": 20418,

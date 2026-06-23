@@ -665,6 +665,8 @@ Before prescriptive execution, request these files or integrations:
 | Capacity | Warehouse/location capacity |
 | Service policy | Target service level by ABC class |
 
+Current constraint: the workspace does not include operating expense data. Until expense, inventory, lead-time, and procurement files are provided, prescriptive outputs must remain scenarios or formula demonstrations. The dashboard must not label them as cost-minimizing procurement recommendations.
+
 ### Lead-Time Calculation
 
 Calculate actual supplier lead time from:
@@ -1185,4 +1187,3 @@ The first review session should produce:
 8. Approved forecast and service-level thresholds.
 
 No model implementation should begin until items 1 through 4 are resolved.
-

@@ -29,7 +29,7 @@ Build a modern business analytics dashboard with a Next.js frontend, Python micr
 | `services/product_service/` | Product microservice |
 | `supabase/` | SQL migrations and seed data |
 | `docs/` | Capstone and setup documentation |
-| `references/` | Source papers and cloned reference project |
+| `references/` | Source papers and capstone reference materials |
 
 ## 5. Environment Variables
 
@@ -56,8 +56,11 @@ Build a modern business analytics dashboard with a Next.js frontend, Python micr
 |---|---|
 | Backend gateway | `cd backend` then `npm install` |
 | Analytics service | `cd services/analytics_service` then `pip install -r requirements.txt` |
+| Analytics modeling jobs | `cd services/analytics_service` then `pip install -r requirements-modeling.txt` |
 | Product service | `cd services/product_service` then `pip install -r requirements.txt` |
 | Frontend | `cd frontend` then `npm install` |
+
+Use `requirements-modeling.txt` only when running model-training or optimization jobs. The normal Flask service remains on `requirements.txt` so the dashboard demo can run without heavy forecasting libraries.
 
 ## 7. Run Commands
 
@@ -101,7 +104,7 @@ Build a modern business analytics dashboard with a Next.js frontend, Python micr
 
 | Topic | Guidance |
 |---|---|
-| Reference project | `external/medshield_frontend` is a guide only |
+| Reference materials | Use `references/` and `docs/` as the canonical project references |
 | Setup docs | This file is the single canonical setup document |
 | Tech direction | Use Next.js + TypeScript for the frontend and Python for the service layer |
 | Local auth | Set `USE_SUPABASE=false` when Supabase credentials are not configured. The gateway will use the local demo auth store and issue bearer tokens. |
@@ -109,3 +112,6 @@ Build a modern business analytics dashboard with a Next.js frontend, Python micr
 | Service-role key | Put `SUPABASE_SERVICE_ROLE_KEY` in ignored local `.env` only. Never commit it, paste it into frontend variables, or expose it in screenshots. |
 | Messy sales upload | Use Data Upload or View Sales Data -> Upload messy XLSX/CSV. The file is cleaned by the server pipeline before it appears in the paginated table. Year uploads merge into history by replacing only their year. |
 | Weather validation | Use Weather API Validation to refresh NASA POWER or Open-Meteo data. Select `All territories` to load every configured capstone territory, then use daily grain for API validation and monthly grain for planning/regressor summaries. |
+| Business definitions | Use `docs/BUSINESS_DEFINITIONS.md` before training models or updating dashboard labels. The current workspace has no operating expense data, so `net_income` must be treated as workbook gross margin/profit, not company net profit. |
+| Mapping templates | Use `datasources/templates/product_master_mapping.csv` and `datasources/templates/area_classification_mapping.csv` as the first controlled mappings before creating database master tables. |
+| Model orchestration | Use `docs/MODEL_LIBRARIES_AND_ORCHESTRATION.md` for the planned job boundary. Dashboard requests should read published outputs, not train models synchronously. |

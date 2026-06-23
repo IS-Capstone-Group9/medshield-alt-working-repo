@@ -11,7 +11,7 @@ Capstone workspace for the MedShield Pharma Corp. business analytics system.
 - `services/shared_snapshot.py` - shared Supabase warehouse reader for dashboard views
 - `supabase/` - SQL migration and seed files for the Supabase project
 - `docs/` - setup and capstone documentation
-- `references/` - source documents and the cloned reference frontend
+- `references/` - source documents and capstone reference materials
 
 ## Documentation index
 
@@ -41,6 +41,6 @@ npm run dev
 
 4. In Supabase, run `supabase/migrations/001_init.sql`, `supabase/migrations/002_accounts.sql`, `supabase/migrations/003_auth_rpc.sql`, and `supabase/migrations/004_dss_schema.sql`, then load `supabase/seed.sql` to create the connected warehouse schema, auth tables, DSS model-output layer, and current MedShield dataset.
 
-## Reference clone
+## Reference Materials
 
-The local clone under `external/medshield_frontend` is a guide only. It is not the canonical repository for this workspace.
+Use `references/` and `docs/` as the canonical capstone references for this workspace.
