@@ -1,11 +1,11 @@
 {
   "totals": {
-    "total_revenue": 191260571.57,
-    "total_income": 138858735.25,
-    "total_transactions": 11638,
+    "total_revenue": 292099686.11,
+    "total_income": 196968364.2,
+    "total_transactions": 16686,
     "top_product": "PAGBILAO # 6,334,470",
     "top_area": "Government",
-    "avg_margin": 0.726019
+    "avg_margin": 0.674319
   },
   "monthly": [
     {
@@ -67,6 +67,66 @@
       "period": "2021-12",
       "revenue": 2781596.91,
       "income": 1742056.27
+    },
+    {
+      "period": "2022-01",
+      "revenue": 2460196.23,
+      "income": 1811995.95
+    },
+    {
+      "period": "2022-02",
+      "revenue": 9554232.23,
+      "income": 6284459.61
+    },
+    {
+      "period": "2022-03",
+      "revenue": 9447042.16,
+      "income": 6342342.63
+    },
+    {
+      "period": "2022-04",
+      "revenue": 2621829.63,
+      "income": 1668960.63
+    },
+    {
+      "period": "2022-05",
+      "revenue": 4541521.01,
+      "income": 2914688.12
+    },
+    {
+      "period": "2022-06",
+      "revenue": 10395468.03,
+      "income": 7419485.99
+    },
+    {
+      "period": "2022-07",
+      "revenue": 3719115.58,
+      "income": 2638013.09
+    },
+    {
+      "period": "2022-08",
+      "revenue": 2808192.24,
+      "income": 1651889.69
+    },
+    {
+      "period": "2022-09",
+      "revenue": 2907592.88,
+      "income": 1737073.4
+    },
+    {
+      "period": "2022-10",
+      "revenue": 7117371.04,
+      "income": 4972578.17
+    },
+    {
+      "period": "2022-11",
+      "revenue": 5010554.22,
+      "income": 3533906.3
+    },
+    {
+      "period": "2022-12",
+      "revenue": 2976924.63,
+      "income": 1809811.75
     },
     {
       "period": "2023-01",
@@ -187,93 +247,128 @@
       "period": "2024-12",
       "revenue": 16564393.76,
       "income": 8633391.7
+    },
+    {
+      "period": "2025-02",
+      "revenue": 149217.13,
+      "income": 91351.53
+    },
+    {
+      "period": "2025-05",
+      "revenue": 2156.0,
+      "income": 1096.0
+    },
+    {
+      "period": "2025-06",
+      "revenue": 662706.48,
+      "income": 419036.74
+    },
+    {
+      "period": "2025-08",
+      "revenue": 140912.0,
+      "income": 100932.0
+    },
+    {
+      "period": "2025-09",
+      "revenue": 6106321.7,
+      "income": 2311177.46
+    },
+    {
+      "period": "2025-11",
+      "revenue": 9116493.94,
+      "income": 3774364.35
+    },
+    {
+      "period": "2025-12",
+      "revenue": 21101267.41,
+      "income": 8626465.54
     }
   ],
   "by_area": [
     {
       "area": "Government",
-      "revenue": 100315120.76,
-      "income": 64146273.74
+      "revenue": 154838070.29,
+      "income": 95873365.24
     },
     {
       "area": "Hospital",
-      "revenue": 44486254.8,
-      "income": 41651155.38
-    },
-    {
-      "area": "Equipment",
-      "revenue": 12999459.73,
-      "income": 8134221.63
+      "revenue": 70281490.31,
+      "income": 55177762.66
     },
     {
       "area": "Quezon",
-      "revenue": 11037185.65,
-      "income": 9157511.71
+      "revenue": 15013207.52,
+      "income": 11799161.55
+    },
+    {
+      "area": "Equipment",
+      "revenue": 13030659.73,
+      "income": 8144847.97
     },
     {
       "area": "Batangas",
-      "revenue": 8242331.54,
-      "income": 6217530.13
-    },
-    {
-      "area": "Admin",
-      "revenue": 4247374.13,
-      "income": 2349566.9
+      "revenue": 11372216.8,
+      "income": 8338282.14
     },
     {
       "area": "Marinduque",
-      "revenue": 3106396.66,
-      "income": 1860219.81
+      "revenue": 8783862.71,
+      "income": 5107250.47
+    },
+    {
+      "area": "Admin",
+      "revenue": 6905819.34,
+      "income": 3831697.79
     },
     {
       "area": "Camarines Norte",
-      "revenue": 1629307.82,
-      "income": 1487138.21
-    },
-    {
-      "area": "Laguna",
-      "revenue": 1529740.0,
-      "income": 699001.08
-    },
-    {
-      "area": "Cavite",
-      "revenue": 1045524.85,
-      "income": 1044066.87
+      "revenue": 3120024.82,
+      "income": 2358725.69
     },
     {
       "area": "Supplies",
-      "revenue": 828192.0,
-      "income": 806618.95
+      "revenue": 2402522.0,
+      "income": 1905927.77
+    },
+    {
+      "area": "Cavite",
+      "revenue": 1655025.76,
+      "income": 1475316.71
     },
     {
       "area": "Camarines Sur",
-      "revenue": 704977.5,
-      "income": 521342.36
+      "revenue": 1634572.5,
+      "income": 1149261.52
     },
     {
-      "area": "Albay",
-      "revenue": 495844.57,
-      "income": 332552.97
+      "area": "Laguna",
+      "revenue": 1608953.4,
+      "income": 750155.98
     },
     {
       "area": "Pharma",
-      "revenue": 387380.0,
-      "income": 290550.45
+      "revenue": 594455.0,
+      "income": 459010.13
+    },
+    {
+      "area": "Albay",
+      "revenue": 517862.97,
+      "income": 343562.17
     },
     {
       "area": "Lower Cavite",
-      "revenue": 204026.24,
-      "income": 156713.94
+      "revenue": 336087.64,
+      "income": 247915.29
+    },
+    {
+      "area": "Personal",
+      "revenue": 3967.0,
+      "income": 2021.0
     },
     {
       "area": "Losses",
       "revenue": 888.32,
       "income": 4100.12
-    },
-    {
-      "area": "Personal",
-      "revenue": 567.0,
-      "income": 171.0
     }
   ],
   "top_products": [
@@ -283,17 +378,62 @@
       "qty": 1.0,
       "income": 3183000.0,
       "abc": "A",
-      "pct_of_total": 3.3112,
+      "pct_of_total": 2.1681,
       "rank": 1
     },
     {
-      "product": "JUBI -R 100MG",
-      "revenue": 3375000.0,
-      "qty": 500.0,
-      "income": 1475000.0,
+      "product": "BUPIRIGHT AMPULE",
+      "revenue": 4711236.74,
+      "qty": 7550.0,
+      "income": 3458391.74,
       "abc": "A",
-      "pct_of_total": 1.7646,
+      "pct_of_total": 1.6129,
       "rank": 2
+    },
+    {
+      "product": "JUBI -R 100MG",
+      "revenue": 4592500.0,
+      "qty": 750.0,
+      "income": 2217500.0,
+      "abc": "A",
+      "pct_of_total": 1.5722,
+      "rank": 3
+    },
+    {
+      "product": "EVAPROST 250MCG/ML",
+      "revenue": 4480397.0,
+      "qty": 1190.0,
+      "income": 4351697.0,
+      "abc": "A",
+      "pct_of_total": 1.5339,
+      "rank": 4
+    },
+    {
+      "product": "PESO # 3,450,000.00",
+      "revenue": 3448500.0,
+      "qty": 1.0,
+      "income": 1179387.0,
+      "abc": "A",
+      "pct_of_total": 1.1806,
+      "rank": 5
+    },
+    {
+      "product": "EUROXONE 1G",
+      "revenue": 3412396.0,
+      "qty": 8968.0,
+      "income": 2772186.0,
+      "abc": "A",
+      "pct_of_total": 1.1682,
+      "rank": 6
+    },
+    {
+      "product": "SITIXON 1G",
+      "revenue": 3072868.78,
+      "qty": 11330.0,
+      "income": 2690992.78,
+      "abc": "A",
+      "pct_of_total": 1.052,
+      "rank": 7
     },
     {
       "product": "ALBUMINAR-20 20% 50ML",
@@ -301,35 +441,26 @@
       "qty": 1000.0,
       "income": 1297000.0,
       "abc": "A",
-      "pct_of_total": 1.4101,
-      "rank": 3
+      "pct_of_total": 0.9233,
+      "rank": 8
     },
     {
-      "product": "EVAPROST 250MCG/ML",
-      "revenue": 2640700.0,
-      "qty": 936.0,
-      "income": 3420050.0,
+      "product": "MONOWEL 1G IV",
+      "revenue": 2637485.0,
+      "qty": 4100.0,
+      "income": 756521.4,
       "abc": "A",
-      "pct_of_total": 1.3807,
-      "rank": 4
+      "pct_of_total": 0.9029,
+      "rank": 9
     },
     {
       "product": "BUPIRIGHT 5MG/ML 0.5% IN 8% 4ML",
-      "revenue": 2503539.0,
-      "qty": 5977.0,
-      "income": 1424044.0,
+      "revenue": 2587535.25,
+      "qty": 6088.0,
+      "income": 1489705.27,
       "abc": "A",
-      "pct_of_total": 1.309,
-      "rank": 5
-    },
-    {
-      "product": "BUPIRIGHT AMPULE",
-      "revenue": 2470540.72,
-      "qty": 4246.0,
-      "income": 1828935.72,
-      "abc": "A",
-      "pct_of_total": 1.2917,
-      "rank": 6
+      "pct_of_total": 0.8858,
+      "rank": 10
     },
     {
       "product": "VAXIGRIP TETRA INFLUENZA VACCINE",
@@ -337,79 +468,43 @@
       "qty": 1408.0,
       "income": 1439224.95,
       "abc": "A",
-      "pct_of_total": 1.2678,
-      "rank": 7
-    },
-    {
-      "product": "EUROXONE 1G",
-      "revenue": 2187160.0,
-      "qty": 5762.0,
-      "income": 1780988.0,
-      "abc": "A",
-      "pct_of_total": 1.1435,
-      "rank": 8
-    },
-    {
-      "product": "PROHAB 10MG/ML 20ML",
-      "revenue": 2110000.0,
-      "qty": 500.0,
-      "income": 1360000.0,
-      "abc": "A",
-      "pct_of_total": 1.1032,
-      "rank": 9
-    },
-    {
-      "product": "PAGBILAO # 2,316,267",
-      "revenue": 2084640.3,
-      "qty": 1.0,
-      "income": 424640.3,
-      "abc": "A",
-      "pct_of_total": 1.0899,
-      "rank": 10
-    },
-    {
-      "product": "PAGBILAO # 2,070,000",
-      "revenue": 2069000.0,
-      "qty": 1.0,
-      "income": 695000.0,
-      "abc": "A",
-      "pct_of_total": 1.0818,
+      "pct_of_total": 0.8301,
       "rank": 11
     },
     {
-      "product": "MAXIFER 20MG/ML",
-      "revenue": 1917800.0,
-      "qty": 701.0,
-      "income": 1306423.72,
+      "product": "TRIVASC 35MG MR",
+      "revenue": 2415781.59,
+      "qty": 2345.0,
+      "income": 1496594.09,
       "abc": "A",
-      "pct_of_total": 1.0027,
+      "pct_of_total": 0.827,
       "rank": 12
     },
     {
-      "product": "FACE MASK",
-      "revenue": 1913781.0,
-      "qty": 4730.0,
-      "income": 1682197.0,
+      "product": "PAGBILAO # 2,316,267-1",
+      "revenue": 2314000.0,
+      "qty": 1.0,
+      "income": 981610.0,
       "abc": "A",
-      "pct_of_total": 1.0006,
+      "pct_of_total": 0.7922,
       "rank": 13
     },
     {
-      "product": "SHARJVAX 1500 I.U. / 0.7ML",
-      "revenue": 1798960.0,
-      "qty": 2439.0,
-      "income": 1812140.0,
+      "product": "MERAZOL 40MG",
+      "revenue": 2282840.45,
+      "qty": 743.03,
+      "income": 2105139.95,
       "abc": "A",
-      "pct_of_total": 0.9406,
+      "pct_of_total": 0.7815,
       "rank": 14
     },
     {
-      "product": "MONOWEL 1G IV",
-      "revenue": 1671485.0,
-      "qty": 2600.0,
-      "income": 478683.0,
+      "product": "HYCLENS SKIN CLEANSER (60ML)",
+      "revenue": 2180712.0,
+      "qty": 8535.0,
+      "income": 1382262.6,
       "abc": "A",
-      "pct_of_total": 0.8739,
+      "pct_of_total": 0.7466,
       "rank": 15
     }
   ],
@@ -419,6 +514,12 @@
       "revenue": 78445814.84,
       "income": 52012518.87,
       "transactions": 3415
+    },
+    {
+      "year": "2022",
+      "revenue": 63560039.88,
+      "income": 42785205.33,
+      "transactions": 4007
     },
     {
       "year": "2023",
@@ -431,56 +532,62 @@
       "revenue": 50422905.88,
       "income": 27713100.78,
       "transactions": 2836
+    },
+    {
+      "year": "2025",
+      "revenue": 37279074.66,
+      "income": 15324423.62,
+      "transactions": 1041
     }
   ],
   "seasonality": [
     {
       "month": "Jan",
-      "avg_revenue": 5210612.85
+      "avg_revenue": 4523008.69
     },
     {
       "month": "Feb",
-      "avg_revenue": 2102334.59
+      "avg_revenue": 3202090.63
     },
     {
       "month": "Mar",
-      "avg_revenue": 2316894.41
+      "avg_revenue": 4099431.35
     },
     {
       "month": "Apr",
-      "avg_revenue": 2687106.03
+      "avg_revenue": 2670786.93
     },
     {
       "month": "May",
-      "avg_revenue": 7355451.52
+      "avg_revenue": 5322006.31
     },
     {
       "month": "Jun",
-      "avg_revenue": 6098742.9
+      "avg_revenue": 5870880.64
     },
     {
       "month": "Jul",
-      "avg_revenue": 4656564.78
+      "avg_revenue": 4422202.48
     },
     {
       "month": "Aug",
-      "avg_revenue": 5564228.92
+      "avg_revenue": 3928358.2
     },
     {
       "month": "Sep",
-      "avg_revenue": 5133091.24
+      "avg_revenue": 4882637.66
     },
     {
       "month": "Oct",
-      "avg_revenue": 6389900.86
+      "avg_revenue": 6571768.4
     },
     {
       "month": "Nov",
-      "avg_revenue": 9644430.54
+      "avg_revenue": 8612067.96
     },
     {
       "month": "Dec",
-      "avg_revenue": 6594165.22
+      "avg_revenue": 8772137.54
     }
   ]
 }
