@@ -85,6 +85,14 @@ For product-level analysis, use `data/medshield/processed/sales_transactions_are
 8. Frontend Engineer exposes the resulting recommendations with reason text, risk level, and action guidance.
 9. Technical Writer records data source date ranges, model assumptions, API limitations, and demo-versus-production status.
 
+Run the dedicated descriptive layer with:
+
+```powershell
+python services\analytics_service\jobs\run_descriptive.py
+```
+
+See `docs/DESCRIPTIVE_ANALYTICS_LOGIC.md` for the exact descriptive logic, required inputs, output files, and Chapter 4 wording.
+
 ## Weather Effect Interpretation
 
 The current implementation keeps daily API observations for validation because transaction sales are delivered at daily grain. It also reports a bounded 0-20% planning scenario from an observed monthly weather severity proxy matched to sales for the same geographic area and month.
