@@ -9,16 +9,18 @@ The Supabase PostgreSQL warehouse is the source of truth for persisted MedShield
 3. `supabase/migrations/003_auth_rpc.sql`
 4. `supabase/migrations/004_dss_schema.sql`
 5. `supabase/migrations/005_sales_ingestion_weather.sql`
-6. `supabase/seed.sql`
+6. `supabase/migrations/006_business_rules_master_data.sql`
+7. `supabase/seed.sql`
 
 ## Schema Direction
 
-The schema now supports three layers:
+The schema now supports four layers:
 
 | Layer | Tables / Views | Purpose |
 |---|---|---|
-| Source/staging | `stg_sales_transactions`, `etl_pipeline_run`, `etl_source_extract` | Preserve workbook and external extract lineage. |
-| Warehouse facts | `fact_sales_transactions`, `fact_monthly_sales`, `fact_area_summary`, `fact_product_summary`, `fact_year_summary`, `fact_seasonality` | Store sales facts and dashboard aggregates. |
+| Master data control | `dim_product_alias`, `vw_product_master_status`, `vw_area_mapping_status` | Control SKU alias approval, contract-name breakdown, and area classification. |
+| Source/staging | `stg_sales_transactions`, `stg_doh_historical`, `stg_pagasa_historical`, `stg_weather_api_observations`, `etl_pipeline_run`, `etl_source_extract` | Preserve workbook and external extract lineage. |
+| Warehouse facts | `fact_sales_transactions`, `fact_monthly_sales`, `fact_area_summary`, `fact_product_summary`, `fact_year_summary`, `fact_seasonality`, `fact_data_completeness` | Store sales facts, dashboard aggregates, and period-level source completeness. |
 | DSS outputs | `fact_demand_forecast`, `fact_product_priority`, `fact_inventory_recommendation`, `fact_regional_priority`, `fact_decision_alert`, and related views | Store model outputs used by the decision-support dashboard. |
 
 The obsolete flat `analytics_*` tables are dropped by `004_dss_schema.sql` because the `vw_dashboard_*` and `vw_dss_*` views are now the API surface.
@@ -39,6 +41,14 @@ The obsolete flat `analytics_*` tables are dropped by `004_dss_schema.sql` becau
 Rows with missing or messy values should land in `stg_sales_transactions` first, then only valid normalized records should move into `fact_sales_transactions`.
 
 Migration `005` fixes legacy date/snapshot uniqueness, adds pipeline lineage, creates `vw_sales_transactions`, and installs `refresh_sales_aggregates`.
+
+Migration `006` aligns the warehouse with approved business definitions:
+
+- Dashboard and model revenue aggregates use `total_trade_price_amount`.
+- `net_income_amount` is documented as workbook gross margin/profit, not company net profit.
+- Product aliases and contract-name `#` rows have a controlled mapping table.
+- Area mappings separate `territory`, `customer_type`, and `business_line`.
+- 2025 completeness status is stored so partial months are not treated as complete holdout data.
 
 ## External Signals
 

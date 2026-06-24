@@ -2,6 +2,11 @@
 -- The warehouse tables are the source of truth for the API and dashboard views.
 
 truncate table
+  public.stg_weather_api_observations,
+  public.stg_pagasa_historical,
+  public.stg_doh_historical,
+  public.fact_data_completeness,
+  public.dim_product_alias,
   public.fact_model_evaluation,
   public.fact_decision_alert,
   public.fact_product_region_match,
@@ -109,6 +114,55 @@ insert into public.dim_product (product_name, abc_classification, product_group)
 select distinct product_name, abc_classification, 'product'
 from product_source
 order by product_name;
+
+update public.dim_product
+set
+  canonical_sku = coalesce(canonical_sku, product_name),
+  product_category = case when product_name like '%#%' then 'contract_name' else product_category end,
+  forecast_eligible = case when product_name like '%#%' then false else forecast_eligible end,
+  mapping_status = 'needs_review',
+  review_notes = case
+    when product_name like '%#%'
+      then 'Contract-name row, not a direct sellable product. Requires backward allocation before product-level modeling.'
+    else 'Seeded product master candidate. Requires group approval before SKU-level modeling.'
+  end;
+
+insert into public.dim_product_alias (
+  raw_product,
+  product_key,
+  canonical_sku,
+  product_category,
+  forecast_eligible,
+  mapping_status,
+  is_contract_name,
+  allocation_method,
+  review_notes
+)
+select
+  p.product_name,
+  p.product_key,
+  p.product_name,
+  case when p.product_name like '%#%' then 'contract_name' else 'needs_review' end,
+  false,
+  'needs_review',
+  p.product_name like '%#%',
+  case when p.product_name like '%#%' then 'backward_approximation' else 'none' end,
+  case
+    when p.product_name like '%#%'
+      then 'Contract-name row, not a direct sellable product. Requires backward allocation before product-level modeling.'
+    else 'Seeded product alias candidate. Requires group approval before SKU-level modeling.'
+  end
+from public.dim_product p
+on conflict (raw_product) do update set
+  product_key = excluded.product_key,
+  canonical_sku = excluded.canonical_sku,
+  product_category = excluded.product_category,
+  forecast_eligible = excluded.forecast_eligible,
+  mapping_status = excluded.mapping_status,
+  is_contract_name = excluded.is_contract_name,
+  allocation_method = excluded.allocation_method,
+  review_notes = excluded.review_notes,
+  updated_at = now();
 
 with monthly_source(period, revenue_amount, income_amount) as (
   values
@@ -375,6 +429,55 @@ where run.pipeline_name = 'medshield_sales_external_signals_baseline'
   and source.source_code = 'MEDSHIELD_XLSX'
 order by run.pipeline_run_key desc
 limit 1;
+
+insert into public.fact_data_completeness (
+  dataset_code,
+  period_date_key,
+  completeness_status,
+  expected_record_count,
+  actual_record_count,
+  rejected_record_count,
+  issue_summary,
+  source_system_key,
+  approved_for_modeling,
+  notes
+)
+select
+  'sales_2025',
+  d.date_key,
+  case
+    when d.calendar_month in (1, 3, 4, 7, 10) then 'missing'
+    else 'partial'
+  end,
+  null,
+  case d.calendar_month
+    when 2 then 24
+    when 5 then 1
+    when 6 then 68
+    when 8 then 4
+    when 9 then 94
+    when 11 then 184
+    when 12 then 707
+    else 0
+  end,
+  null,
+  'Known 2025 completeness issue from processed sales profile. Do not use 2025 as full holdout until reconciled.',
+  s.source_system_key,
+  false,
+  'Use 2021-2024 for primary training; use 2025 only as partial secondary validation until approved.'
+from public.dim_date d
+left join public.dim_source_system s on s.source_code = 'MEDSHIELD_XLSX'
+where d.calendar_year = 2025
+  and d.day_of_month = 1
+on conflict (dataset_code, period_date_key, area_key) do update set
+  completeness_status = excluded.completeness_status,
+  expected_record_count = excluded.expected_record_count,
+  actual_record_count = excluded.actual_record_count,
+  issue_summary = excluded.issue_summary,
+  source_system_key = excluded.source_system_key,
+  approved_for_modeling = excluded.approved_for_modeling,
+  notes = excluded.notes,
+  loaded_at = now();
 
 with signal_source(period, disease_name, dii, disease_alert, rainfall_mm, rsi, weather_alert, typhoon_flag) as (
   values

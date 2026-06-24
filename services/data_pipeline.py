@@ -525,7 +525,7 @@ def build_dashboard_snapshot(rows: list[dict[str, Any]]) -> dict[str, Any]:
     for row in accepted:
         period = str(row["date_delivered"])[:7]
         year = str(row["year"])
-        revenue = float(row["net_cost"] or 0)
+        revenue = float(row["total_trade_price"] or 0)
         income = float(row["net_income"] or 0)
         quantity = float(row["quantity"] or 0)
         monthly[period]["revenue"] += revenue
@@ -1167,7 +1167,7 @@ def sales_summary(
     area_revenue: Counter[str] = Counter()
     product_revenue: Counter[str] = Counter()
     for row in accepted:
-        revenue = float(row.get("net_cost") or 0)
+        revenue = float(row.get("total_trade_price") or 0)
         if row.get("area"):
             area_revenue[str(row["area"])] += revenue
         if row.get("product"):

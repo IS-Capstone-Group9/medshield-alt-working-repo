@@ -82,6 +82,7 @@ Use `requirements-modeling.txt` only when running model-training or optimization
 | `supabase/migrations/001_init.sql` | Creates analytics tables and public read policies |
 | `supabase/migrations/004_dss_schema.sql` | Adds transaction staging, external signals, DSS model outputs, model registry, and ETL lineage |
 | `supabase/migrations/005_sales_ingestion_weather.sql` | Adds canonical transaction publication, aggregate refresh, weather provenance, and restricted policies |
+| `supabase/migrations/006_business_rules_master_data.sql` | Adds SKU alias control, area classification, external staging, data completeness, and revenue aggregation fix |
 | `supabase/seed.sql` | Inserts the current analytics snapshot |
 
 | Step | Action |
@@ -91,8 +92,9 @@ Use `requirements-modeling.txt` only when running model-training or optimization
 | 3 | Run `supabase/migrations/003_auth_rpc.sql` |
 | 4 | Run `supabase/migrations/004_dss_schema.sql` |
 | 5 | Run `supabase/migrations/005_sales_ingestion_weather.sql` |
-| 6 | Run `supabase/seed.sql` |
-| 7 | Verify the gateway and frontend can read dashboard, transaction, and DSS views |
+| 6 | Run `supabase/migrations/006_business_rules_master_data.sql` |
+| 7 | Run `supabase/seed.sql` |
+| 8 | Verify the gateway and frontend can read dashboard, transaction, master-data, completeness, and DSS views |
 
 ## 9. Setup Flow
 

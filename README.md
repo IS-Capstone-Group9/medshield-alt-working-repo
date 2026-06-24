@@ -50,7 +50,7 @@ npm install
 npm run dev
 ```
 
-4. In Supabase, run `supabase/migrations/001_init.sql`, `supabase/migrations/002_accounts.sql`, `supabase/migrations/003_auth_rpc.sql`, and `supabase/migrations/004_dss_schema.sql`, then load `supabase/seed.sql` to create the connected warehouse schema, auth tables, DSS model-output layer, and current MedShield dataset.
+4. In Supabase, run `supabase/migrations/001_init.sql` through `supabase/migrations/006_business_rules_master_data.sql` in order, then load `supabase/seed.sql` to create the connected warehouse schema, auth tables, DSS model-output layer, business-rule controls, and current MedShield dataset.
 
 ### Docker quick start
 
