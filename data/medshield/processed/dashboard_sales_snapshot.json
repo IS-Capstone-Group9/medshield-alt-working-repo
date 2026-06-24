@@ -1,593 +1,618 @@
 {
   "totals": {
-    "total_revenue": 292099686.11,
-    "total_income": 196968364.2,
-    "total_transactions": 16686,
-    "top_product": "PAGBILAO # 6,334,470",
+    "total_revenue": 203363302.28,
+    "total_income": 224915208.68,
+    "total_transactions": 19674,
+    "top_product": "PAGBILAO # 13,500,000",
     "top_area": "Government",
-    "avg_margin": 0.674319
+    "avg_margin": 1.105977
   },
   "monthly": [
     {
       "period": "2021-01",
-      "revenue": 8789896.23,
-      "income": 6268892.09
+      "revenue": 1877230.39,
+      "income": 3487149.86
     },
     {
       "period": "2021-02",
-      "revenue": 3067470.64,
-      "income": 1876557.41
+      "revenue": 1638141.5,
+      "income": 2044340.64
     },
     {
       "period": "2021-03",
-      "revenue": 2642814.24,
-      "income": 1778655.66
+      "revenue": 764865.62,
+      "income": 1553495.1
     },
     {
       "period": "2021-04",
-      "revenue": 4446869.07,
-      "income": 2814742.51
+      "revenue": 1476184.84,
+      "income": 3452714.96
     },
     {
       "period": "2021-05",
-      "revenue": 5097442.98,
-      "income": 3516188.48
+      "revenue": 893112.49,
+      "income": 1119804.34
     },
     {
       "period": "2021-06",
-      "revenue": 5004047.79,
-      "income": 3789214.33
+      "revenue": 1472123.08,
+      "income": 3753375.12
     },
     {
       "period": "2021-07",
-      "revenue": 5870496.46,
-      "income": 4165528.98
+      "revenue": 2728688.23,
+      "income": 6844972.1
     },
     {
       "period": "2021-08",
-      "revenue": 10262506.25,
-      "income": 6114492.31
+      "revenue": 4556636.53,
+      "income": 5977103.0
     },
     {
       "period": "2021-09",
-      "revenue": 8215366.32,
-      "income": 5349791.61
+      "revenue": 3023739.91,
+      "income": 5263319.69
     },
     {
       "period": "2021-10",
-      "revenue": 12381539.54,
-      "income": 7254358.03
+      "revenue": 5925674.82,
+      "income": 9408928.82
     },
     {
       "period": "2021-11",
-      "revenue": 9885768.41,
-      "income": 7342041.19
+      "revenue": 1970003.48,
+      "income": 4874163.56
     },
     {
       "period": "2021-12",
-      "revenue": 2781596.91,
-      "income": 1742056.27
+      "revenue": 1261487.76,
+      "income": 2818313.42
     },
     {
       "period": "2022-01",
-      "revenue": 2460196.23,
-      "income": 1811995.95
+      "revenue": 1383889.29,
+      "income": 3985744.46
     },
     {
       "period": "2022-02",
-      "revenue": 9554232.23,
-      "income": 6284459.61
+      "revenue": 3465057.62,
+      "income": 7107524.11
     },
     {
       "period": "2022-03",
-      "revenue": 9447042.16,
-      "income": 6342342.63
+      "revenue": 1674968.26,
+      "income": 4116569.37
     },
     {
       "period": "2022-04",
-      "revenue": 2621829.63,
-      "income": 1668960.63
+      "revenue": 1784248.43,
+      "income": 3854641.28
     },
     {
       "period": "2022-05",
-      "revenue": 4541521.01,
-      "income": 2914688.12
+      "revenue": 1407669.06,
+      "income": 2463909.96
     },
     {
       "period": "2022-06",
-      "revenue": 10395468.03,
-      "income": 7419485.99
+      "revenue": 3009019.44,
+      "income": 7419201.59
     },
     {
       "period": "2022-07",
-      "revenue": 3719115.58,
-      "income": 2638013.09
+      "revenue": 1106942.94,
+      "income": 1942979.49
     },
     {
       "period": "2022-08",
-      "revenue": 2808192.24,
-      "income": 1651889.69
+      "revenue": 765704.16,
+      "income": 1372820.96
     },
     {
       "period": "2022-09",
-      "revenue": 2907592.88,
-      "income": 1737073.4
+      "revenue": 2453379.94,
+      "income": 4045590.6
     },
     {
       "period": "2022-10",
-      "revenue": 7117371.04,
-      "income": 4972578.17
+      "revenue": 1351916.18,
+      "income": 1436241.3
     },
     {
       "period": "2022-11",
-      "revenue": 5010554.22,
-      "income": 3533906.3
+      "revenue": 1515612.15,
+      "income": 2126579.48
     },
     {
       "period": "2022-12",
-      "revenue": 2976924.63,
-      "income": 1809811.75
+      "revenue": 1359533.74,
+      "income": 2265930.87
     },
     {
       "period": "2023-01",
-      "revenue": 5126545.2,
-      "income": 3517526.03
+      "revenue": 3434774.84,
+      "income": 4409776.36
     },
     {
       "period": "2023-02",
-      "revenue": 1248841.5,
-      "income": 598507.74
+      "revenue": 6726958.03,
+      "income": 7067120.15
     },
     {
       "period": "2023-03",
-      "revenue": 2315228.88,
-      "income": 1283919.5
+      "revenue": 983171.36,
+      "income": 1361575.08
     },
     {
       "period": "2023-04",
-      "revenue": 1515817.95,
-      "income": 930116.84
+      "revenue": 596374.08,
+      "income": 963228.87
     },
     {
       "period": "2023-05",
-      "revenue": 14071250.3,
-      "income": 8335222.73
+      "revenue": 7040991.78,
+      "income": 7500488.52
     },
     {
       "period": "2023-06",
-      "revenue": 6416046.23,
-      "income": 22544391.01
+      "revenue": 4923370.66,
+      "income": 1987564.57
     },
     {
       "period": "2023-07",
-      "revenue": 4954092.8,
-      "income": 3098190.88
+      "revenue": 1326655.45,
+      "income": 1013943.05
     },
     {
       "period": "2023-08",
-      "revenue": 2850482.5,
-      "income": 1630778.12
+      "revenue": 1126997.26,
+      "income": 1461929.64
     },
     {
       "period": "2023-09",
-      "revenue": 5020290.6,
-      "income": 4194954.51
+      "revenue": 862620.13,
+      "income": 4167040.47
     },
     {
       "period": "2023-10",
-      "revenue": 2838304.4,
-      "income": 1657954.75
+      "revenue": 1026638.26,
+      "income": 1385122.14
     },
     {
       "period": "2023-11",
-      "revenue": 15598445.49,
-      "income": 11059305.68
+      "revenue": 889834.36,
+      "income": 1085573.29
     },
     {
       "period": "2023-12",
-      "revenue": 436505.0,
-      "income": 282247.81
+      "revenue": 307151.46,
+      "income": 588599.04
     },
     {
       "period": "2024-01",
-      "revenue": 1715397.11,
-      "income": 1155435.7
+      "revenue": 689260.1,
+      "income": 1434941.77
     },
     {
       "period": "2024-02",
-      "revenue": 1990691.64,
-      "income": 1267124.8
+      "revenue": 366526.18,
+      "income": 713238.23
     },
     {
       "period": "2024-03",
-      "revenue": 1992640.11,
-      "income": 1317230.14
+      "revenue": 638724.73,
+      "income": 1421285.06
     },
     {
       "period": "2024-04",
-      "revenue": 2098631.08,
-      "income": 1057349.08
+      "revenue": 1041773.4,
+      "income": 1036507.37
     },
     {
       "period": "2024-05",
-      "revenue": 2897661.28,
-      "income": 2012922.84
+      "revenue": 1632890.31,
+      "income": 1975996.51
     },
     {
       "period": "2024-06",
-      "revenue": 6876134.67,
-      "income": 3596851.73
+      "revenue": 4005598.86,
+      "income": 2993342.8
     },
     {
       "period": "2024-07",
-      "revenue": 3145105.07,
-      "income": 1800800.55
+      "revenue": 3208523.33,
+      "income": 856620.78
     },
     {
       "period": "2024-08",
-      "revenue": 3579698.01,
-      "income": 1866755.49
+      "revenue": 2394197.38,
+      "income": 1368074.96
     },
     {
       "period": "2024-09",
-      "revenue": 2163616.8,
-      "income": 1214044.75
+      "revenue": 1354346.17,
+      "income": 1284224.4
     },
     {
       "period": "2024-10",
-      "revenue": 3949858.63,
-      "income": 1872584.64
+      "revenue": 1657595.0,
+      "income": 1372641.03
     },
     {
       "period": "2024-11",
-      "revenue": 3449077.72,
-      "income": 1918609.36
+      "revenue": 1131915.29,
+      "income": 948525.71
     },
     {
       "period": "2024-12",
-      "revenue": 16564393.76,
-      "income": 8633391.7
+      "revenue": 12384653.75,
+      "income": 4367636.76
+    },
+    {
+      "period": "2025-01",
+      "revenue": 6954559.51,
+      "income": 9419532.67
     },
     {
       "period": "2025-02",
-      "revenue": 149217.13,
-      "income": 91351.53
+      "revenue": 8009644.4,
+      "income": 2299806.92
+    },
+    {
+      "period": "2025-03",
+      "revenue": 1323106.33,
+      "income": 1154868.77
+    },
+    {
+      "period": "2025-04",
+      "revenue": 2863686.17,
+      "income": 2685172.7
     },
     {
       "period": "2025-05",
-      "revenue": 2156.0,
-      "income": 1096.0
+      "revenue": 11978114.3,
+      "income": 8640448.95
     },
     {
       "period": "2025-06",
-      "revenue": 662706.48,
-      "income": 419036.74
+      "revenue": 7222855.62,
+      "income": 7066393.81
+    },
+    {
+      "period": "2025-07",
+      "revenue": 8178558.98,
+      "income": 12080411.83
     },
     {
       "period": "2025-08",
-      "revenue": 140912.0,
-      "income": 100932.0
+      "revenue": 4313786.78,
+      "income": 3848872.53
     },
     {
       "period": "2025-09",
-      "revenue": 6106321.7,
-      "income": 2311177.46
+      "revenue": 11718200.64,
+      "income": 8912588.53
+    },
+    {
+      "period": "2025-10",
+      "revenue": 7374922.58,
+      "income": 4660694.73
     },
     {
       "period": "2025-11",
-      "revenue": 9116493.94,
-      "income": 3774364.35
+      "revenue": 12222850.13,
+      "income": 9727895.07
     },
     {
       "period": "2025-12",
-      "revenue": 21101267.41,
-      "income": 8626465.54
+      "revenue": 12585644.81,
+      "income": 8918111.53
     }
   ],
   "by_area": [
     {
       "area": "Government",
-      "revenue": 154838070.29,
-      "income": 95873365.24
+      "revenue": 116491205.46,
+      "income": 122585998.8
     },
     {
       "area": "Hospital",
-      "revenue": 70281490.31,
-      "income": 55177762.66
+      "revenue": 56285804.48,
+      "income": 56808746.25
     },
     {
       "area": "Quezon",
-      "revenue": 15013207.52,
-      "income": 11799161.55
+      "revenue": 6419730.62,
+      "income": 11824348.69
     },
     {
       "area": "Equipment",
-      "revenue": 13030659.73,
-      "income": 8144847.97
+      "revenue": 5717863.66,
+      "income": 7312796.07
     },
     {
       "area": "Batangas",
-      "revenue": 11372216.8,
-      "income": 8338282.14
+      "revenue": 4766594.15,
+      "income": 9592370.04
     },
     {
       "area": "Marinduque",
-      "revenue": 8783862.71,
-      "income": 5107250.47
+      "revenue": 4705220.52,
+      "income": 5648702.19
     },
     {
       "area": "Admin",
-      "revenue": 6905819.34,
-      "income": 3831697.79
+      "revenue": 3920327.62,
+      "income": 4679541.64
     },
     {
       "area": "Camarines Norte",
-      "revenue": 3120024.82,
-      "income": 2358725.69
+      "revenue": 1601767.93,
+      "income": 1448486.89
     },
     {
       "area": "Supplies",
-      "revenue": 2402522.0,
-      "income": 1905927.77
-    },
-    {
-      "area": "Cavite",
-      "revenue": 1655025.76,
-      "income": 1475316.71
-    },
-    {
-      "area": "Camarines Sur",
-      "revenue": 1634572.5,
-      "income": 1149261.52
+      "revenue": 1079592.03,
+      "income": 1322929.97
     },
     {
       "area": "Laguna",
-      "revenue": 1608953.4,
-      "income": 750155.98
+      "revenue": 875043.42,
+      "income": 733909.98
     },
     {
-      "area": "Pharma",
-      "revenue": 594455.0,
-      "income": 459010.13
+      "area": "Cavite",
+      "revenue": 629277.93,
+      "income": 941913.83
+    },
+    {
+      "area": "Camarines Sur",
+      "revenue": 477692.64,
+      "income": 996663.86
     },
     {
       "area": "Albay",
-      "revenue": 517862.97,
+      "revenue": 174300.8,
       "income": 343562.17
     },
     {
-      "area": "Lower Cavite",
-      "revenue": 336087.64,
-      "income": 247915.29
+      "area": "Pharma",
+      "revenue": 133134.87,
+      "income": 448720.13
     },
     {
-      "area": "Personal",
-      "revenue": 3967.0,
-      "income": 2021.0
+      "area": "Lower Cavite",
+      "revenue": 80572.35,
+      "income": 228613.29
     },
     {
       "area": "Losses",
-      "revenue": 888.32,
-      "income": 4100.12
+      "revenue": 3211.8,
+      "income": -4100.12
+    },
+    {
+      "area": "Personal",
+      "revenue": 1962.0,
+      "income": 2005.0
     }
   ],
   "top_products": [
     {
-      "product": "PAGBILAO # 6,334,470",
-      "revenue": 6333000.0,
-      "qty": 1.0,
-      "income": 3183000.0,
+      "product": "PAGBILAO # 13,500,000",
+      "revenue": 8458698.88,
+      "qty": 2.0,
+      "income": 16338881.12,
       "abc": "A",
-      "pct_of_total": 2.1681,
+      "pct_of_total": 4.1594,
       "rank": 1
     },
     {
-      "product": "BUPIRIGHT AMPULE",
-      "revenue": 4711236.74,
-      "qty": 7550.0,
-      "income": 3458391.74,
+      "product": "PAGBILAO # 6,334,470",
+      "revenue": 6066065.28,
+      "qty": 2.0,
+      "income": 6599934.72,
       "abc": "A",
-      "pct_of_total": 1.6129,
+      "pct_of_total": 2.9829,
       "rank": 2
     },
     {
-      "product": "JUBI -R 100MG",
-      "revenue": 4592500.0,
-      "qty": 750.0,
-      "income": 2217500.0,
+      "product": "MONOWEL 1G IV",
+      "revenue": 5780546.0,
+      "qty": 12600.0,
+      "income": 2331189.0,
       "abc": "A",
-      "pct_of_total": 1.5722,
+      "pct_of_total": 2.8425,
       "rank": 3
     },
     {
-      "product": "EVAPROST 250MCG/ML",
-      "revenue": 4480397.0,
-      "qty": 1190.0,
-      "income": 4351697.0,
+      "product": "PAGBILAO # 3,658,000",
+      "revenue": 5078697.59,
+      "qty": 2.0,
+      "income": -3549497.59,
       "abc": "A",
-      "pct_of_total": 1.5339,
+      "pct_of_total": 2.4974,
       "rank": 4
     },
     {
-      "product": "PESO # 3,450,000.00",
-      "revenue": 3448500.0,
-      "qty": 1.0,
-      "income": 1179387.0,
+      "product": "PAGBILAO # 2,070,000",
+      "revenue": 2748000.0,
+      "qty": 2.0,
+      "income": 1390000.0,
       "abc": "A",
-      "pct_of_total": 1.1806,
+      "pct_of_total": 1.3513,
       "rank": 5
     },
     {
-      "product": "EUROXONE 1G",
-      "revenue": 3412396.0,
-      "qty": 8968.0,
-      "income": 2772186.0,
+      "product": "EVAPROST 250MCG/ML",
+      "revenue": 2423850.0,
+      "qty": 678.0,
+      "income": 2056547.0,
       "abc": "A",
-      "pct_of_total": 1.1682,
+      "pct_of_total": 1.1919,
       "rank": 6
     },
     {
-      "product": "SITIXON 1G",
-      "revenue": 3072868.78,
-      "qty": 11330.0,
-      "income": 2690992.78,
+      "product": "JUBI -R 100MG",
+      "revenue": 2375000.0,
+      "qty": 750.0,
+      "income": 2217500.0,
       "abc": "A",
-      "pct_of_total": 1.052,
+      "pct_of_total": 1.1679,
       "rank": 7
     },
     {
-      "product": "ALBUMINAR-20 20% 50ML",
-      "revenue": 2697000.0,
-      "qty": 1000.0,
-      "income": 1297000.0,
+      "product": "PESO # 3,450,000.00",
+      "revenue": 2269113.0,
+      "qty": 1.0,
+      "income": 1179387.0,
       "abc": "A",
-      "pct_of_total": 0.9233,
+      "pct_of_total": 1.1158,
       "rank": 8
     },
     {
-      "product": "MONOWEL 1G IV",
-      "revenue": 2637485.0,
-      "qty": 4100.0,
-      "income": 756521.4,
+      "product": "SPEEDA 2.5IU/0.5ML",
+      "revenue": 2004500.0,
+      "qty": 425.0,
+      "income": 970810.0,
       "abc": "A",
-      "pct_of_total": 0.9029,
+      "pct_of_total": 0.9857,
       "rank": 9
     },
     {
-      "product": "BUPIRIGHT 5MG/ML 0.5% IN 8% 4ML",
-      "revenue": 2587535.25,
-      "qty": 6088.0,
-      "income": 1489705.27,
+      "product": "ANTITET 1500IU/0.7ML",
+      "revenue": 1722512.5,
+      "qty": 1447.5,
+      "income": 2112380.0,
       "abc": "A",
-      "pct_of_total": 0.8858,
+      "pct_of_total": 0.847,
       "rank": 10
     },
     {
-      "product": "VAXIGRIP TETRA INFLUENZA VACCINE",
-      "revenue": 2424824.95,
-      "qty": 1408.0,
-      "income": 1439224.95,
+      "product": "PAGBILAO # 2,316,267",
+      "revenue": 1660000.0,
+      "qty": 1.0,
+      "income": 424640.3,
       "abc": "A",
-      "pct_of_total": 0.8301,
+      "pct_of_total": 0.8163,
       "rank": 11
     },
     {
-      "product": "TRIVASC 35MG MR",
-      "revenue": 2415781.59,
-      "qty": 2345.0,
-      "income": 1496594.09,
+      "product": "PAGBILAO # 3,273,976",
+      "revenue": 1530222.43,
+      "qty": 1.0,
+      "income": 531905.57,
       "abc": "A",
-      "pct_of_total": 0.827,
+      "pct_of_total": 0.7525,
       "rank": 12
     },
     {
-      "product": "PAGBILAO # 2,316,267-1",
-      "revenue": 2314000.0,
+      "product": "PAGBILAO # 3,072,944",
+      "revenue": 1512820.96,
       "qty": 1.0,
-      "income": 981610.0,
+      "income": 660629.04,
       "abc": "A",
-      "pct_of_total": 0.7922,
+      "pct_of_total": 0.7439,
       "rank": 13
     },
     {
-      "product": "MERAZOL 40MG",
-      "revenue": 2282840.45,
-      "qty": 743.03,
-      "income": 2105139.95,
+      "product": "BUPIRIGHT 5MG/ML 0.5% IN 8% 4ML",
+      "revenue": 1402587.08,
+      "qty": 7933.0,
+      "income": 1817758.17,
       "abc": "A",
-      "pct_of_total": 0.7815,
+      "pct_of_total": 0.6897,
       "rank": 14
     },
     {
-      "product": "HYCLENS SKIN CLEANSER (60ML)",
-      "revenue": 2180712.0,
-      "qty": 8535.0,
-      "income": 1382262.6,
+      "product": "SHARJVAX 1500 I.U. / 0.7ML",
+      "revenue": 1400460.0,
+      "qty": 1539.0,
+      "income": 662670.0,
       "abc": "A",
-      "pct_of_total": 0.7466,
+      "pct_of_total": 0.6886,
       "rank": 15
     }
   ],
   "year_summary": [
     {
       "year": "2021",
-      "revenue": 78445814.84,
-      "income": 52012518.87,
+      "revenue": 27587888.65,
+      "income": 50597680.61,
       "transactions": 3415
     },
     {
       "year": "2022",
-      "revenue": 63560039.88,
-      "income": 42785205.33,
+      "revenue": 21277941.21,
+      "income": 42137733.47,
       "transactions": 4007
     },
     {
       "year": "2023",
-      "revenue": 62391850.85,
-      "income": 59133115.6,
+      "revenue": 29245537.67,
+      "income": 32991961.18,
       "transactions": 5387
     },
     {
       "year": "2024",
-      "revenue": 50422905.88,
-      "income": 27713100.78,
+      "revenue": 30506004.5,
+      "income": 19773035.38,
       "transactions": 2836
     },
     {
       "year": "2025",
-      "revenue": 37279074.66,
-      "income": 15324423.62,
-      "transactions": 1041
+      "revenue": 94745930.25,
+      "income": 79414798.04,
+      "transactions": 4029
     }
   ],
   "seasonality": [
     {
       "month": "Jan",
-      "avg_revenue": 4523008.69
+      "avg_revenue": 2867942.83
     },
     {
       "month": "Feb",
-      "avg_revenue": 3202090.63
+      "avg_revenue": 4041265.55
     },
     {
       "month": "Mar",
-      "avg_revenue": 4099431.35
+      "avg_revenue": 1076967.26
     },
     {
       "month": "Apr",
-      "avg_revenue": 2670786.93
+      "avg_revenue": 1552453.38
     },
     {
       "month": "May",
-      "avg_revenue": 5322006.31
+      "avg_revenue": 4590555.59
     },
     {
       "month": "Jun",
-      "avg_revenue": 5870880.64
+      "avg_revenue": 4126593.53
     },
     {
       "month": "Jul",
-      "avg_revenue": 4422202.48
+      "avg_revenue": 3309873.79
     },
     {
       "month": "Aug",
-      "avg_revenue": 3928358.2
+      "avg_revenue": 2631464.42
     },
     {
       "month": "Sep",
-      "avg_revenue": 4882637.66
+      "avg_revenue": 3882457.36
     },
     {
       "month": "Oct",
-      "avg_revenue": 6571768.4
+      "avg_revenue": 3467349.37
     },
     {
       "month": "Nov",
-      "avg_revenue": 8612067.96
+      "avg_revenue": 3546043.08
     },
     {
       "month": "Dec",
-      "avg_revenue": 8772137.54
+      "avg_revenue": 5579694.3
     }
   ]
 }
