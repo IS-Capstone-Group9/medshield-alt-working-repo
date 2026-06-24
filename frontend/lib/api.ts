@@ -67,6 +67,20 @@ export type ModelEvaluation = {
   notes: string
 }
 
+type DashboardData = {
+  summary: Summary
+  monthly: MonthlyPoint[]
+  byArea: AreaPoint[]
+  products: ProductPoint[]
+  yearSummary: YearPoint[]
+  seasonality: SeasonalityPoint[]
+  forecasts: ForecastPoint[]
+  externalSignals: ExternalSignalPoint[]
+  inventoryRecommendations: InventoryRecommendation[]
+  regionalPriorities: RegionalPriority[]
+  modelEvaluation: ModelEvaluation[]
+}
+
 export type SalesTransaction = {
   year: number | null
   area: string | null
@@ -315,6 +329,55 @@ async function getPublicJson<T>(path: string): Promise<T> {
   return (await response.json()) as T
 }
 
+function finiteNumber(value: unknown): boolean {
+  return typeof value === 'number' && Number.isFinite(value)
+}
+
+function hasValidMonthlyData(rows: MonthlyPoint[]): boolean {
+  return Array.isArray(rows) && rows.length >= 12 && rows.every(
+    (row) => row.period && finiteNumber(row.revenue) && finiteNumber(row.income),
+  )
+}
+
+function hasValidYearSummaryData(rows: YearPoint[]): boolean {
+  return Array.isArray(rows) && rows.length >= 3 && rows.every(
+    (row) => row.year && finiteNumber(row.revenue) && finiteNumber(row.income),
+  )
+}
+
+function hasValidAreaData(rows: AreaPoint[]): boolean {
+  return Array.isArray(rows) && rows.length > 0 && rows.every(
+    (row) => row.area && finiteNumber(row.revenue) && finiteNumber(row.income),
+  )
+}
+
+function hasValidProductData(rows: ProductPoint[]): boolean {
+  return Array.isArray(rows) && rows.length > 0 && rows.every(
+    (row) => row.product && finiteNumber(row.revenue) && finiteNumber(row.income),
+  )
+}
+
+function hasValidSeasonalityData(rows: SeasonalityPoint[]): boolean {
+  return Array.isArray(rows) && rows.length >= 12 && rows.every(
+    (row) => row.month && finiteNumber(row.avg_revenue),
+  )
+}
+
+function assertDashboardCoreData(data: DashboardData, source: string): DashboardData {
+  const invalid: string[] = []
+  if (!hasValidMonthlyData(data.monthly)) invalid.push('monthly')
+  if (!hasValidYearSummaryData(data.yearSummary)) invalid.push('year summary')
+  if (!hasValidAreaData(data.byArea)) invalid.push('area')
+  if (!hasValidProductData(data.products)) invalid.push('product')
+  if (!hasValidSeasonalityData(data.seasonality)) invalid.push('seasonality')
+
+  if (invalid.length) {
+    throw new Error(`${source} dashboard data is incomplete: ${invalid.join(', ')}`)
+  }
+
+  return data
+}
+
 export async function loadDashboardData() {
   try {
     const [
@@ -342,7 +405,7 @@ export async function loadDashboardData() {
       getJson<RegionalPriority[]>('/api/regional_priorities'),
       getJson<ModelEvaluation[]>('/api/model_evaluation'),
     ])
-    return {
+    return assertDashboardCoreData({
       summary,
       monthly,
       byArea,
@@ -354,11 +417,11 @@ export async function loadDashboardData() {
       inventoryRecommendations,
       regionalPriorities,
       modelEvaluation,
-    }
+    }, 'Gateway')
   } catch (err) {
     // fallback to public dataset bundled with the frontend
     const data = await getPublicJson<any>('/data/sales_data.json')
-    return {
+    return assertDashboardCoreData({
       summary: data.totals as Summary,
       monthly: data.monthly as MonthlyPoint[],
       byArea: data.by_area as AreaPoint[],
@@ -370,6 +433,6 @@ export async function loadDashboardData() {
       inventoryRecommendations: (data.inventory_recommendations ?? []) as InventoryRecommendation[],
       regionalPriorities: (data.regional_priorities ?? []) as RegionalPriority[],
       modelEvaluation: (data.model_evaluation ?? []) as ModelEvaluation[],
-    }
+    }, 'Bundled fallback')
   }
 }
