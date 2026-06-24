@@ -20,7 +20,7 @@ Consequences:
 Context:
 - `supabase/schema.md` showed older flat `analytics_*` tables alongside the connected warehouse tables.
 - The capstone paper requires more than dashboard aggregates: ABC/Pareto, K-Means, Prophet with external regressors, XGBoost urgency scoring, EOQ/ROP/safety stock, MCDA, linear programming, collaborative filtering, and rule-based alerts.
-- `Sales Report.xlsx` is transaction-grain data for 2021-2025, while DOH and PAGASA/OpenWeather signals are external supporting inputs.
+- `data/medshield/raw/sales/Sales Report.xlsx` is transaction-grain data for 2021-2025, while DOH and PAGASA/OpenWeather signals are external supporting inputs.
 
 Decision:
 - Keep the connected warehouse tables from `001_init.sql`.

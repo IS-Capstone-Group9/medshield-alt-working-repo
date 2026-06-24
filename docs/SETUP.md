@@ -49,6 +49,8 @@ Build a modern business analytics dashboard with a Next.js frontend, Python micr
 | `USE_SUPABASE` | `false` for local, `true` with real keys | Enables Supabase before local fallback |
 | `NASA_POWER_DAILY_URL` | NASA POWER point endpoint | Historical meteorological source |
 | `OPEN_METEO_ARCHIVE_URL` | Open-Meteo archive endpoint | Historical validation/fallback |
+| `SONAR_HOST_URL` | `http://localhost:9000` | Local SonarQube server URL |
+| `SONAR_TOKEN` | generated in SonarQube | Token used by the scanner; keep it out of Git |
 
 ## 6. Installation
 
@@ -70,6 +72,8 @@ Use `requirements-modeling.txt` only when running model-training or optimization
 | Analytics service only, optional manual mode | `python -m services.analytics_service.app` |
 | Product service only, optional manual mode | `python -m services.product_service.app` |
 | Frontend | `cd frontend` then `npm run dev` |
+| Docker app stack | `docker compose build` then `docker compose up` |
+| Local SonarQube | `docker compose -f docker-compose.sonar.yml up -d sonarqube-db sonarqube` |
 
 ## 8. Database Setup
 
@@ -115,3 +119,4 @@ Use `requirements-modeling.txt` only when running model-training or optimization
 | Business definitions | Use `docs/BUSINESS_DEFINITIONS.md` before training models or updating dashboard labels. The current workspace has no operating expense data, so `net_income` must be treated as workbook gross margin/profit, not company net profit. |
 | Mapping templates | Use `datasources/templates/product_master_mapping.csv` and `datasources/templates/area_classification_mapping.csv` as the first controlled mappings before creating database master tables. |
 | Model orchestration | Use `docs/MODEL_LIBRARIES_AND_ORCHESTRATION.md` for the planned job boundary. Dashboard requests should read published outputs, not train models synchronously. |
+| Docker and SonarQube | Use `docs/DEVOPS_DOCKER_SONARQUBE.md` for container health checks, local quality scans, and AWS-readiness notes. |

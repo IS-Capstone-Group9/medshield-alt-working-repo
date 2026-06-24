@@ -110,12 +110,12 @@ Do not proceed until Finance and Supply Planning agree on demand, revenue, cost,
 
 Use:
 
-- `2021s.csv`
-- `2022s.csv`
-- `2023s.csv`
-- `2024s.csv`
-- `2025s.csv`
-- `Sales Report.xlsx`
+- `data/medshield/raw/sales/yearly_csv/2021s.csv`
+- `data/medshield/raw/sales/yearly_csv/2022s.csv`
+- `data/medshield/raw/sales/yearly_csv/2023s.csv`
+- `data/medshield/raw/sales/yearly_csv/2024s.csv`
+- `data/medshield/raw/sales/yearly_csv/2025s.csv`
+- `data/medshield/raw/sales/Sales Report.xlsx`
 
 Perform the following:
 

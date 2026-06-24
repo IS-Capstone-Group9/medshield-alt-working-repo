@@ -47,6 +47,8 @@ build/
 *.log
 coverage/
 /.cache
+docs/~$*.docx
+docs/MedShield_Chapter_4_5_Draft.docx
 
 # Runtime ingestion outputs
 data/medshield/uploads/

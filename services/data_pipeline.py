@@ -29,13 +29,14 @@ from openpyxl import load_workbook
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT_DIR / "data" / "medshield"
+RAW_SALES_DIR = DATA_DIR / "raw" / "sales"
 UPLOAD_DIR = DATA_DIR / "uploads"
 PROCESSED_DIR = DATA_DIR / "processed"
 SALES_DATASET_PATH = PROCESSED_DIR / "sales_transactions.json.gz"
 SALES_STATUS_PATH = PROCESSED_DIR / "sales_dataset_status.json"
 SALES_SNAPSHOT_PATH = PROCESSED_DIR / "dashboard_sales_snapshot.json"
 WEATHER_DATASET_PATH = PROCESSED_DIR / "weather_signals.json"
-DEFAULT_WORKBOOK_PATH = ROOT_DIR / "Sales Report.xlsx"
+DEFAULT_WORKBOOK_PATH = RAW_SALES_DIR / "Sales Report.xlsx"
 
 load_dotenv(ROOT_DIR / ".env")
 

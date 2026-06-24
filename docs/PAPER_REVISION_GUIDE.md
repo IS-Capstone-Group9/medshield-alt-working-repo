@@ -72,7 +72,7 @@ Revise the methodology to match the actual pipeline and system workflow.
 
 | Source | Current System Use | Paper Revision Needed |
 |---|---|---|
-| `Sales Report.xlsx` / yearly `.csv` files | Main internal sales source, 2021-2025, transaction-level rows. | Explain that sales are ingested from workbook or CSV, cleaned, standardized, and stored at transaction grain. |
+| `data/medshield/raw/sales/Sales Report.xlsx` / yearly `.csv` files under `data/medshield/raw/sales/yearly_csv/` | Main internal sales source, 2021-2025, transaction-level rows. | Explain that sales are ingested from workbook or CSV, cleaned, standardized, and stored at transaction grain. |
 | Supabase PostgreSQL | Warehouse source of truth when configured. | Add database persistence, staging, facts, views, and ETL lineage. |
 | NASA POWER Daily API | Historical meteorological backfill and validation. | Describe as external weather validation/backfill only. |
 | Open-Meteo Historical API | Secondary historical fallback/validation. | Describe as backup or comparison source. |

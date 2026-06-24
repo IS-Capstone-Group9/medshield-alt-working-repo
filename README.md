@@ -10,7 +10,12 @@ Capstone workspace for the MedShield Pharma Corp. business analytics system.
 - `services/product_service/` - product microservice
 - `services/shared_snapshot.py` - shared Supabase warehouse reader for dashboard views
 - `supabase/` - SQL migration and seed files for the Supabase project
+- `data/medshield/raw/` - canonical raw sales and external source files
+- `data/medshield/processed/` - local processed fallback datasets
+- `outputs/` - generated QA reports, model outputs, and evidence exports
 - `docs/` - setup and capstone documentation
+- `docs/drafts/` - generated draft paper files and Word deliverables
+- `datasources/templates/` - CSV templates for product, area, DOH, PAGASA, and weather preparation
 - `references/` - source documents and capstone reference materials
 
 ## Documentation index
@@ -23,6 +28,8 @@ Capstone workspace for the MedShield Pharma Corp. business analytics system.
 | [docs/BUSINESS_RULES_APPROVAL_CHECKLIST.md](docs/BUSINESS_RULES_APPROVAL_CHECKLIST.md) | Group approval checklist for KPI, SKU, 2025, and scenario rules |
 | [docs/EXTERNAL_DATA_PREPARATION_GUIDE.md](docs/EXTERNAL_DATA_PREPARATION_GUIDE.md) | PAGASA, DOH, and weather API cleaning guide |
 | [docs/CHAPTER_4_5_EVIDENCE_PLAN.md](docs/CHAPTER_4_5_EVIDENCE_PLAN.md) | Chapter 4 and Chapter 5 evidence checklist |
+| [docs/GROUP_TASK_ASSIGNMENT_PLAN.md](docs/GROUP_TASK_ASSIGNMENT_PLAN.md) | Four-member work allocation and handoff plan |
+| [docs/DEVOPS_DOCKER_SONARQUBE.md](docs/DEVOPS_DOCKER_SONARQUBE.md) | Docker Compose and local SonarQube runbook |
 
 ## Quick start
 
@@ -44,6 +51,15 @@ npm run dev
 ```
 
 4. In Supabase, run `supabase/migrations/001_init.sql`, `supabase/migrations/002_accounts.sql`, `supabase/migrations/003_auth_rpc.sql`, and `supabase/migrations/004_dss_schema.sql`, then load `supabase/seed.sql` to create the connected warehouse schema, auth tables, DSS model-output layer, and current MedShield dataset.
+
+### Docker quick start
+
+```powershell
+docker compose build
+docker compose up
+```
+
+Then open `http://localhost:3000`. Use [docs/DEVOPS_DOCKER_SONARQUBE.md](docs/DEVOPS_DOCKER_SONARQUBE.md) for health checks and SonarQube scanning.
 
 ## Reference Materials
 

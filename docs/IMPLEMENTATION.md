@@ -68,7 +68,7 @@ The DSS extension adds:
 
 ## 4.3 Data Flow
 
-1. Raw sales rows from `Sales Report.xlsx` land in `stg_sales_transactions`.
+1. Raw sales rows from `data/medshield/raw/sales/Sales Report.xlsx` land in `stg_sales_transactions`.
 2. The ETL validates dates, products, areas, quantities, costs, and row quality.
 3. Valid rows are loaded into `fact_sales_transactions`; aggregate facts are refreshed from that grain.
 4. DOH and official PAGASA extracts remain authoritative for disease, RSI, and typhoon signals; NASA POWER and Open-Meteo observations provide a separately labeled weather proxy.

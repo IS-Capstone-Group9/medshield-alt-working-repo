@@ -25,7 +25,7 @@ The obsolete flat `analytics_*` tables are dropped by `004_dss_schema.sql` becau
 
 ## Workbook Grain
 
-`Sales Report.xlsx` contains one delivered product line per row across sheets `2021` to `2025`. The normalized transaction fact stores:
+`data/medshield/raw/sales/Sales Report.xlsx` contains one delivered product line per row across sheets `2021` to `2025`. The normalized transaction fact stores:
 
 - Area
 - DR number

@@ -22,7 +22,7 @@ MedShield is a decision-support system, so analytics outputs must lead to decisi
 
 | Source | Use | Notes |
 |---|---|---|
-| `Sales Report.xlsx` | Historical 2021-2025 sales, product, area, margin, and quantity signals. | Internal source of truth for sales demand. |
+| `data/medshield/raw/sales/Sales Report.xlsx` | Historical 2021-2025 sales, product, area, margin, and quantity signals. | Internal source of truth for sales demand. |
 | DOH FOI/Open Data exports | Disease intensity indicator and outbreak alert context. | Use official DOH data exports when a stable API is unavailable. |
 | DOST-PAGASA products | Official rainfall probability/RSI and typhoon context. | Keep official fields distinct from derived proxies. |
 | NASA POWER Daily | Historical 2021-2025 meteorological features. | Backfill precipitation, temperature, humidity, and wind. |
@@ -75,7 +75,7 @@ For product-level analysis, use `data/medshield/processed/sales_transactions_are
 
 ## Analytics Workflow
 
-1. Data Analyst profiles `Sales Report.xlsx` for missing dates, duplicate lines, inconsistent product names, area naming, quantity outliers, and margin anomalies.
+1. Data Analyst profiles `data/medshield/raw/sales/Sales Report.xlsx` for missing dates, duplicate lines, inconsistent product names, area naming, quantity outliers, and margin anomalies.
 2. Database Engineer loads cleaned rows into staging, then warehouse dimensions and fact tables.
 3. BI Specialist confirms KPI definitions, chart grain, sorting, and thresholds against the business decision each view supports.
 4. Analytics Engineer runs descriptive models first: ABC/Pareto, seasonality, and area clustering.

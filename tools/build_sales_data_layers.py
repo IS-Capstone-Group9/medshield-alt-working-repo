@@ -12,7 +12,7 @@ from openpyxl import load_workbook
 
 
 ROOT = Path(__file__).resolve().parents[1]
-RAW_WORKBOOK = ROOT / "Sales Report.xlsx"
+RAW_WORKBOOK = ROOT / "data" / "medshield" / "raw" / "sales" / "Sales Report.xlsx"
 ALLOCATED_DATASET = ROOT / "data" / "medshield" / "processed" / "sales_transactions_area_allocated.json.gz"
 LAYER_DIR = ROOT / "outputs" / "sales_data_layers"
 

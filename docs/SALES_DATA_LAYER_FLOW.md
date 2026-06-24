@@ -8,6 +8,8 @@ This document defines the sales data layers used for MedShield analysis. It sepa
 
 Location:
 
+- `data/medshield/raw/sales/Sales Report.xlsx`
+- `data/medshield/raw/sales/yearly_csv/`
 - `outputs/sales_data_layers/raw_sales_report/`
 
 Meaning:

@@ -1,0 +1,90 @@
+services:
+  analytics-service:
+    build:
+      context: .
+      dockerfile: services/Dockerfile
+    command: python -m services.analytics_service.app
+    environment:
+      USE_SUPABASE: ${USE_SUPABASE:-false}
+      ANALYTICS_SERVICE_PORT: 5101
+      FLASK_DEBUG: ${FLASK_DEBUG:-false}
+      SUPABASE_URL: ${SUPABASE_URL:-}
+      SUPABASE_ANON_KEY: ${SUPABASE_ANON_KEY:-}
+      SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY:-}
+    ports:
+      - "5101:5101"
+    volumes:
+      - ./data/medshield/processed:/app/data/medshield/processed
+      - ./data/medshield/uploads:/app/data/medshield/uploads
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5101/health', timeout=5)"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  product-service:
+    build:
+      context: .
+      dockerfile: services/Dockerfile
+    command: python -m services.product_service.app
+    environment:
+      USE_SUPABASE: ${USE_SUPABASE:-false}
+      PRODUCT_SERVICE_PORT: 5102
+      FLASK_DEBUG: ${FLASK_DEBUG:-false}
+      SUPABASE_URL: ${SUPABASE_URL:-}
+      SUPABASE_ANON_KEY: ${SUPABASE_ANON_KEY:-}
+      SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY:-}
+    ports:
+      - "5102:5102"
+    volumes:
+      - ./data/medshield/processed:/app/data/medshield/processed:ro
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5102/health', timeout=5)"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      PORT: 5000
+      USE_SUPABASE: ${USE_SUPABASE:-false}
+      START_PYTHON_SERVICES: "false"
+      ANALYTICS_SERVICE_URL: http://analytics-service:5101
+      PRODUCT_SERVICE_URL: http://product-service:5102
+      SESSION_SECRET: ${SESSION_SECRET:-local-docker-session-secret-change-me}
+      SUPABASE_URL: ${SUPABASE_URL:-}
+      SUPABASE_ANON_KEY: ${SUPABASE_ANON_KEY:-}
+    ports:
+      - "5000:5000"
+    depends_on:
+      analytics-service:
+        condition: service_healthy
+      product-service:
+        condition: service_healthy
+    volumes:
+      - ./frontend/public/data:/frontend/public/data:ro
+      - ./data/medshield/processed:/data/medshield/processed:ro
+      - ./backend/data:/app/data
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:5000/api/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:5000}
+    environment:
+      PORT: 3000
+      NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:5000}
+    ports:
+      - "3000:3000"
+    depends_on:
+      backend:
+        condition: service_healthy
