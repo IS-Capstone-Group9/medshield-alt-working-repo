@@ -396,11 +396,106 @@ html[data-theme="dark"] body {
   font-size: 11px;
   line-height: 1.4;
 }
+#page-sales-data .uploaded-data-panel,
+#page-weather-validation .uploaded-data-panel {
+  padding: 0;
+  overflow: hidden;
+}
+#page-sales-data .uploaded-data-header,
+#page-weather-validation .uploaded-data-header {
+  align-items: flex-start;
+  padding: 18px 22px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.sales-header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+#page-sales-data .sales-filter-toolbar,
+#page-weather-validation .weather-filter-toolbar {
+  align-items: end;
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 14px 22px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-elevated);
+}
+#page-sales-data .sales-filter-toolbar {
+  grid-template-columns: repeat(4, minmax(150px, 1fr)) minmax(280px, 2fr);
+}
+#page-weather-validation .weather-filter-toolbar {
+  grid-template-columns: repeat(4, minmax(160px, 1fr));
+}
+#page-sales-data .sales-filter-toolbar .uploaded-data-field,
+#page-weather-validation .weather-filter-toolbar .uploaded-data-field {
+  min-width: 0;
+}
+#page-sales-data #salesPipelineNote,
+#page-weather-validation #weatherEffectStatus {
+  margin: 0 22px 12px;
+  border-left-width: 4px;
+  border-radius: 0 8px 8px 0;
+}
+#page-sales-data #salesComputationGrid {
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
+  gap: 10px;
+  margin: 12px 22px;
+}
+#page-sales-data #salesComputationGrid .sales-status-card {
+  min-height: 64px;
+}
+#page-sales-data .uploaded-data-table-wrap {
+  max-height: calc(100vh - 330px);
+  min-height: 430px;
+  margin: 8px 22px 0;
+}
+#page-weather-validation .uploaded-data-table-wrap {
+  max-height: calc(100vh - 255px);
+  min-height: 520px;
+  margin: 0 22px;
+}
+#page-sales-data .uploaded-data-table th:first-child,
+#page-sales-data .uploaded-data-table td:first-child,
+#page-weather-validation .uploaded-data-table th:first-child,
+#page-weather-validation .uploaded-data-table td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  min-width: 96px;
+}
+#page-sales-data .uploaded-data-table th:first-child,
+#page-weather-validation .uploaded-data-table th:first-child {
+  z-index: 3;
+}
 @media (max-width: 680px) {
   .uploaded-data-field,
   .uploaded-data-search {
     width: 100%;
     min-width: 0;
+  }
+  #page-sales-data .uploaded-data-header,
+  #page-weather-validation .uploaded-data-header,
+  #page-sales-data .sales-filter-toolbar,
+  #page-weather-validation .weather-filter-toolbar {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  #page-sales-data #salesPipelineNote,
+  #page-weather-validation #weatherEffectStatus,
+  #page-sales-data #salesComputationGrid,
+  #page-sales-data .uploaded-data-table-wrap,
+  #page-weather-validation .uploaded-data-table-wrap {
+    margin-left: 14px;
+    margin-right: 14px;
+  }
+  #page-sales-data .sales-filter-toolbar,
+  #page-weather-validation .weather-filter-toolbar,
+  #page-sales-data #salesComputationGrid {
+    grid-template-columns: 1fr;
   }
 }
 .chart-header {
@@ -816,20 +911,16 @@ function enhanceDashboardContent(root: HTMLElement) {
                 Accepted sales rows with lineage, quality status, and filtered totals.
               </div>
             </div>
-            <span class="mini-badge" id="salesDatasetBadge">Loading Dataset...</span>
-          </div>
-          <div class="uploaded-data-toolbar">
-            <button class="sales-primary-button" id="salesDataUploadButton" type="button">Upload Messy XLSX/CSV</button>
-            <input id="salesDataUploadInput" type="file" accept=".xlsx,.csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv" hidden />
-            <div class="uploaded-data-status" id="salesDataUploadStatus">
-              Upload raw MedShield files. Cleaning runs before records are shown.
+            <div class="sales-header-actions">
+              <span class="mini-badge" id="salesDatasetBadge">Loading Dataset...</span>
+              <button class="sales-primary-button" id="salesDataUploadButton" type="button">Upload XLSX/CSV</button>
+              <input id="salesDataUploadInput" type="file" accept=".xlsx,.csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv" hidden />
             </div>
           </div>
           <div class="sales-note" id="salesPipelineNote">
             Uploads are header-mapped, standardized, quality checked, then published only as accepted cleaned rows.
           </div>
-          <div class="sales-status-grid" id="salesStatusGrid"></div>
-          <div class="uploaded-data-toolbar">
+          <div class="uploaded-data-toolbar sales-filter-toolbar">
             <div class="uploaded-data-field">
               <label for="salesDataYear">Year</label>
               <select id="salesDataYear"><option value="all">All Years</option></select>
@@ -899,7 +990,7 @@ function enhanceDashboardContent(root: HTMLElement) {
             </div>
             <button class="sales-primary-button" id="refreshWeatherButton" type="button">Refresh Weather</button>
           </div>
-          <div class="uploaded-data-toolbar">
+          <div class="uploaded-data-toolbar weather-filter-toolbar">
             <div class="uploaded-data-field">
               <label for="weatherProvider">Provider</label>
               <select id="weatherProvider">
@@ -938,16 +1029,12 @@ function enhanceDashboardContent(root: HTMLElement) {
               </select>
             </div>
           </div>
-          <div class="sales-status-grid" id="weatherValidationSummary"></div>
-          <div class="sales-note">
-            Weather API rows are contextual regressors only. Use PAGASA rows as official historical reference when uploaded.
-          </div>
+          <div class="uploaded-data-status sales-note" id="weatherEffectStatus">Choose a territory and year, then refresh weather.</div>
           <div class="uploaded-data-table-wrap">
             <table class="uploaded-data-table" id="weatherEffectTable">
               <tbody><tr><td class="uploaded-data-empty">No Weather Data Loaded Yet.</td></tr></tbody>
             </table>
           </div>
-          <div class="uploaded-data-status" id="weatherEffectStatus">Choose a territory and year, then refresh weather.</div>
         </section>
       </div>
       `,
@@ -1279,37 +1366,16 @@ async function loadUploadedCsvTable(root: HTMLElement, file: File, state: CsvTab
 
 function renderSalesDatasetStatus(root: HTMLElement, status: SalesDatasetStatus) {
   const summary = status.quality_summary
-  const grid = root.querySelector<HTMLElement>('#salesStatusGrid')
   const badge = root.querySelector<HTMLElement>('#salesDatasetBadge')
   const note = root.querySelector<HTMLElement>('#salesPipelineNote')
   const yearSelect = root.querySelector<HTMLSelectElement>('#salesDataYear')
   if (badge) badge.textContent = `${status.source_file} - ${status.cleaning_status}`
   if (note) {
     note.textContent =
-      `${summary.input_stage}: ${summary.rows_accepted.toLocaleString()} accepted of ` +
-      `${summary.rows_extracted.toLocaleString()} extracted rows. Source values remain in staging.`
-  }
-  if (grid) {
-    const metrics = [
-      ['Extracted', summary.rows_extracted],
-      ['Accepted', summary.rows_accepted],
-      ['Warnings', summary.rows_with_warnings],
-      ['Rejected', summary.rows_rejected],
-      ['Duplicates Flagged', summary.duplicate_rows],
-      ['SKU Count', summary.sku_count ?? summary.unique_products ?? 0],
-      ['Unique DRs', summary.unique_dr_numbers ?? 0],
-      ['Columns Matched', status.canonical_columns.length],
-    ]
-    grid.innerHTML = metrics
-      .map(
-        ([label, value]) => `
-          <div class="sales-status-card">
-            <div class="sales-status-label">${label}</div>
-            <div class="sales-status-value">${Number(value).toLocaleString()}</div>
-          </div>
-        `,
-      )
-      .join('')
+      `${summary.rows_accepted.toLocaleString()} accepted of ${summary.rows_extracted.toLocaleString()} extracted rows` +
+      ` • ${summary.rows_with_warnings.toLocaleString()} warnings` +
+      ` • ${summary.rows_rejected.toLocaleString()} rejected` +
+      ` • ${status.canonical_columns.length} columns matched`
   }
   if (yearSelect) {
     const current = yearSelect.value || 'all'
@@ -1343,37 +1409,29 @@ function renderSalesComputation(root: HTMLElement, summary: SalesSummary, mode: 
   const cards =
     mode === 'sum'
       ? [
-          ['Sum Quantity', number(summary.sums.quantity)],
-          ['Sum Net CP', money(summary.sums.net_cost)],
-          ['Sum Gross Profit', money(summary.sums.net_income)],
-          ['Sum Discount', money(summary.sums.discount)],
-          ['Sum Total TP', money(summary.sums.total_trade_price)],
-          ['Accepted Rows', number(summary.counts.accepted_rows)],
+          ['Quantity', number(summary.sums.quantity)],
+          ['Net CP', money(summary.sums.net_cost)],
+          ['Gross Profit', money(summary.sums.net_income)],
+          ['Total TP', money(summary.sums.total_trade_price)],
         ]
       : mode === 'average'
         ? [
             ['Avg Quantity', number(summary.averages.quantity)],
             ['Avg Unit CP', money(summary.averages.unit_cost)],
-            ['Avg Net CP', money(summary.averages.net_cost)],
             ['Avg Gross Profit', money(summary.averages.net_income)],
             ['Avg Margin', percent(summary.averages.margin_pct)],
-            ['Warning Rows', number(summary.counts.warning_rows)],
           ]
         : mode === 'count'
           ? [
               ['Filtered Rows', number(summary.counts.rows)],
               ['Accepted Rows', number(summary.counts.accepted_rows)],
-              ['Rejected Rows', number(summary.counts.rejected_rows)],
-              ['Unique Products / SKUs', number(summary.counts.sku_count)],
-              ['Unique DR Numbers', number(summary.counts.unique_dr_numbers)],
-              ['Years Included', number(summary.counts.years)],
+              ['SKUs', number(summary.counts.sku_count)],
+              ['DR Numbers', number(summary.counts.unique_dr_numbers)],
             ]
           : [
               ['Net CP', money(summary.sums.net_cost)],
               ['Gross Profit', money(summary.sums.net_income)],
               ['Average Margin', percent(summary.averages.margin_pct)],
-              ['SKU Count', number(summary.counts.sku_count)],
-              ['Unique DR Numbers', number(summary.counts.unique_dr_numbers)],
               ['Top Area', summary.top.area || '-'],
             ]
 
@@ -1504,42 +1562,19 @@ async function loadSalesDataView(root: HTMLElement, state: SalesViewState) {
 function renderWeatherEffects(root: HTMLElement, result: WeatherEffects) {
   const table = root.querySelector<HTMLTableElement>('#weatherEffectTable')
   const status = root.querySelector<HTMLElement>('#weatherEffectStatus')
-  const summaryGrid = root.querySelector<HTMLElement>('#weatherValidationSummary')
   if (!table || !status) return
   const metadata = result.metadata ?? {}
   const grain = String(metadata.grain ?? root.querySelector<HTMLSelectElement>('#weatherGrain')?.value ?? 'monthly')
-  if (summaryGrid) {
-    const provider = String(metadata.provider ?? 'not refreshed')
-    const refreshedAt = metadata.refreshed_at ? new Date(String(metadata.refreshed_at)).toLocaleString() : 'Not Refreshed'
-    const period = metadata.period_start && metadata.period_end
-      ? `${String(metadata.period_start)} to ${String(metadata.period_end)}`
-      : 'No Period Loaded'
-    const summary = result.summary?.[0] ?? {}
-    const periods = String(metadata.rows_returned ?? summary.periods ?? result.rows.length)
-    const salesMatches = String(metadata.sales_matched_rows ?? summary.sales_matched_periods ?? 0)
-    const averageSeverity = Number(summary.avg_rainfall_severity_proxy ?? 0)
-    const correlation = summary.rainfall_revenue_correlation == null
-      ? 'Not Enough Matched Months'
-      : String(summary.rainfall_revenue_correlation)
-    const cards = [
-      ['Provider', weatherProviderLabel(provider)],
-      ['Grain', grain === 'daily' ? 'Daily API Rows' : 'Monthly Planning Aggregate'],
-      ['Refresh Time', refreshedAt],
-      ['Loaded Period', period],
-      ['Weather Rows Loaded', periods],
-      ['Sales-Matched Rows', salesMatches],
-      ['Avg Severity Proxy', averageSeverity.toFixed(3)],
-      ['Rainfall-Sales Association', correlation],
-    ]
-    summaryGrid.innerHTML = cards
-      .map(([label, value]) => `
-        <div class="sales-status-card">
-          <div class="sales-status-label">${label}</div>
-          <div class="sales-status-value">${value}</div>
-        </div>
-      `)
-      .join('')
-  }
+  const provider = String(metadata.provider ?? 'not refreshed')
+  const period = metadata.period_start && metadata.period_end
+    ? `${String(metadata.period_start)} to ${String(metadata.period_end)}`
+    : 'no period loaded'
+  const summary = result.summary?.[0] ?? {}
+  const periods = String(metadata.rows_returned ?? summary.periods ?? result.rows.length)
+  const salesMatches = String(metadata.sales_matched_rows ?? summary.sales_matched_periods ?? 0)
+  const correlation = summary.rainfall_revenue_correlation == null
+    ? 'association needs more matched months'
+    : `association ${String(summary.rainfall_revenue_correlation)}`
   table.replaceChildren()
   const isDaily = grain === 'daily'
   const headers = isDaily
@@ -1583,8 +1618,8 @@ function renderWeatherEffects(root: HTMLElement, result: WeatherEffects) {
     }
   }
   status.textContent = result.rows.length
-    ? `${result.rows.length} ${isDaily ? 'daily API validation rows' : 'monthly weather-to-sales rows'} loaded. ${String(metadata.message ?? 'Association only; no causal claim.')}`
-    : 'No weather data loaded for this selection.'
+    ? `${weatherProviderLabel(provider)} • ${grain === 'daily' ? 'Daily rows' : 'Monthly aggregate'} • ${period} • ${periods} weather rows • ${salesMatches} sales matches • ${correlation}`
+    : 'No weather rows match the selected territory and year.'
 }
 
 async function loadWeatherEffectView(root: HTMLElement) {
@@ -1792,7 +1827,7 @@ function installDashboardEnhancements(root: HTMLElement) {
 
   const processSalesUpload = (input: HTMLInputElement, file: File) => {
     const uploadLog = root.querySelector<HTMLElement>('#uploadLog')
-    const salesUploadStatus = root.querySelector<HTMLElement>('#salesDataUploadStatus')
+    const salesUploadStatus = root.querySelector<HTMLElement>('#salesPipelineNote')
     const pendingMessage = `Uploading and Cleaning ${file.name}...`
     if (uploadLog) uploadLog.textContent = pendingMessage
     if (salesUploadStatus) salesUploadStatus.textContent = pendingMessage
