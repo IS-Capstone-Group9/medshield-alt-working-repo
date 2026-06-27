@@ -16,7 +16,7 @@ This checklist tracks what was accomplished and what remains to be completed for
 * **Goal**: Group products, territories, and customers by behavior.
 - [x] **Accomplished**: Separate geographic territories from customer channels and admin accounts.
 - [x] **Accomplished**: Ingest product master mappings to separate medicines from operational/office overhead.
-- [x] **Accomplished**: Design a fallback regex classifier to auto-sort unmapped products.
+- [x] **Accomplished**: Design a fallback regex parser/grouper to auto-sort unmapped products.
 - [ ] **To Be Accomplished**: Secure formal stakeholder approval on the draft SKU categories in `product_master_mapping.csv` and area codes in `area_classification_mapping.csv`.
 
 ---
@@ -29,9 +29,9 @@ This checklist tracks what was accomplished and what remains to be completed for
 ---
 
 ## 4. Revenue Contribution (North Star Node 4A)
-* **Goal**: Compute revenue contribution and ABC/Pareto class.
+* **Goal**: Compute revenue contribution and ABC/Pareto tier.
 - [x] **Accomplished**: Sort SKUs descending by total sales revenue.
-- [x] **Accomplished**: Segregate medical items from office overhead and perform separate ABC rankings (Class A: 80%, Class B: 15%, Class C: 5%).
+- [x] **Accomplished**: Segregate medical items from office overhead and perform separate ABC rankings (Tier A: 80%, Tier B: 15%, Tier C: 5%).
 
 ---
 
