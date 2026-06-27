@@ -14,6 +14,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_SALES_PATH = ROOT / "data" / "medshield" / "processed" / "sales_transactions_area_allocated.json.gz"
 DEFAULT_AREA_MAPPING_PATH = ROOT / "datasources" / "templates" / "area_classification_mapping.csv"
+DEFAULT_PRODUCT_MAPPING_PATH = ROOT / "datasources" / "templates" / "product_master_mapping.csv"
 DEFAULT_OUTPUT_DIR = ROOT / "outputs" / f"descriptive_analytics_{date.today():%Y%m%d}"
 ADDITIVE_FIELDS = ("quantity", "total_trade_price", "net_income", "net_cost", "discount", "total_cost")
 MONTHS = tuple(f"{month:02d}" for month in range(1, 13))
@@ -76,6 +77,19 @@ def read_area_mapping(path: Path) -> dict[str, dict[str, str]]:
     return mapping
 
 
+def read_product_mapping(path: Path) -> dict[str, dict[str, str]]:
+    if not path.exists():
+        return {}
+
+    mapping: dict[str, dict[str, str]] = {}
+    with path.open("r", encoding="utf-8-sig", newline="") as handle:
+        for row in csv.DictReader(handle):
+            raw_product = str(row.get("raw_product", "")).strip()
+            if raw_product:
+                mapping[raw_product] = {key: str(value or "").strip() for key, value in row.items()}
+    return mapping
+
+
 def area_info(area: object, mapping: dict[str, dict[str, str]]) -> dict[str, str]:
     area_text = str(area or "").strip()
     mapped = mapping.get(area_text.lower())
@@ -91,9 +105,60 @@ def area_info(area: object, mapping: dict[str, dict[str, str]]) -> dict[str, str
         "weather_eligible": "false",
         "mapping_status": "unmapped",
     }
+def classify_product_is_medicine(product_name: str) -> tuple[bool, str]:
+    import re
+    p_lower = str(product_name or "").strip().lower()
+    if not p_lower:
+        return True, ""
+
+    # Non-medical patterns (match word boundaries or specific suffixes)
+    non_med_patterns = [
+        r'\bballpen\b', r'\btape\b', r'\bshirt\b', r'\bpaper\b', r'\bclear\s+book\b',
+        r'\bstaple\b', r'\bink\b', r'\brecord\s+book\b', r'\btrash\s+bag\b', r'\bpen\b',
+        r'\benvelope\b', r'\bfolder\b', r'\bpencil\b', r'\bmarker\b', r'\bglue\b',
+        r'\bscissors\b', r'\bruler\b', r'\bclip\b', r'\bnotebook\b', r'\bt-shirt\b',
+        r'\bstamp\b', r'\bsticker\b', r'\bhighlighter\b', r'\beraser\b', r'\bpush\s+pin\b',
+        r'\bwhiteboard\b', r'\bcalculator\b', r'\bmarker\s+ink\b'
+    ]
+
+    # Medical exclusions: if these words are present, it is a medical item
+    medical_keywords = [
+        'bandage', 'autoclave', 'surgical', 'injection', 'infusion', 'tube',
+        'catheter', 'syringe', 'needle', 'dialysis', 'cannula', 'cotton',
+        'gauze', 'gloves', 'mask', 'thermometer', 'plaster', 'cautery', 'ecg'
+    ]
+
+    # Specific medicine exclusions (e.g. penicillin, pent, penem)
+    medicine_indicators = ['penicillin', 'pent', 'penem', 'pen-']
+
+    is_non_med = False
+    for pat in non_med_patterns:
+        if re.search(pat, p_lower):
+            is_non_med = True
+            break
+
+    if is_non_med:
+        # Check if it has any medical indicators
+        if any(m_word in p_lower for m_word in medical_keywords):
+            return True, "medical_supplies"
+        if any(med_ind in p_lower for med_ind in medicine_indicators):
+            return True, "medicine"
+        
+        # Category mapping
+        if "shirt" in p_lower or "t-shirt" in p_lower:
+            return False, "promotional"
+        if "trash bag" in p_lower:
+            return False, "supplies"
+        return False, "office_supplies"
+
+    return True, "medicine"
 
 
-def enrich_rows(rows: list[dict[str, Any]], area_mapping: dict[str, dict[str, str]]) -> list[dict[str, Any]]:
+def enrich_rows(
+    rows: list[dict[str, Any]],
+    area_mapping: dict[str, dict[str, str]],
+    product_mapping: dict[str, dict[str, str]],
+) -> list[dict[str, Any]]:
     enriched: list[dict[str, Any]] = []
     for row in rows:
         parsed = parse_date(row.get("date_delivered"))
@@ -104,6 +169,9 @@ def enrich_rows(rows: list[dict[str, Any]], area_mapping: dict[str, dict[str, st
                 continue
 
         info = area_info(row.get("area"), area_mapping)
+        prod_text = str(row.get("product") or "").strip()
+        prod_info = product_mapping.get(prod_text)
+
         item = dict(row)
         item["period"] = parsed.strftime("%Y-%m")
         item["calendar_year"] = parsed.year
@@ -118,6 +186,18 @@ def enrich_rows(rows: list[dict[str, Any]], area_mapping: dict[str, dict[str, st
         item["area_weather_eligible"] = info.get("weather_eligible", "false")
         item["is_estimated_contract_allocation"] = item.get("allocation_status") == "estimated_backward_allocation"
         item["is_estimated_date"] = str(item.get("date_is_estimated", "")).lower() == "true"
+
+        # Product Enrichment
+        if prod_info:
+            item["is_medicine"] = str(prod_info.get("is_medicine", "true")).lower() == "true"
+            item["product_category"] = prod_info.get("product_category", "")
+            item["product_mapping_status"] = prod_info.get("mapping_status", "approved")
+        else:
+            is_med, category = classify_product_is_medicine(prod_text)
+            item["is_medicine"] = is_med
+            item["product_category"] = category
+            item["product_mapping_status"] = "auto_classified"
+
         enriched.append(item)
     return enriched
 
@@ -360,23 +440,32 @@ def build_summary(rows: list[dict[str, Any]], product_abc: list[dict[str, Any]],
     }
 
 
-def run(sales_path: Path, area_mapping_path: Path, output_dir: Path) -> dict[str, Any]:
+def run(sales_path: Path, area_mapping_path: Path, product_mapping_path: Path, output_dir: Path) -> dict[str, Any]:
     sales_path = sales_path if sales_path.is_absolute() else ROOT / sales_path
     area_mapping_path = area_mapping_path if area_mapping_path.is_absolute() else ROOT / area_mapping_path
+    product_mapping_path = product_mapping_path if product_mapping_path.is_absolute() else ROOT / product_mapping_path
     output_dir = output_dir if output_dir.is_absolute() else ROOT / output_dir
 
     payload = read_json_gz(sales_path)
     raw_rows = payload.get("rows", [])
     area_mapping = read_area_mapping(area_mapping_path)
-    rows = enrich_rows(raw_rows, area_mapping)
+    product_mapping = read_product_mapping(product_mapping_path)
+    rows = enrich_rows(raw_rows, area_mapping, product_mapping)
 
     monthly_trends = aggregate(rows, ("period",))
     yearly_summary = aggregate(rows, ("calendar_year",))
     area_summary = aggregate(rows, ("area_type", "standard_area"))
     area_type_summary = aggregate(rows, ("area_type",))
     territory_rows = [row for row in rows if row.get("area_type") == "territory"]
-    product_abc = abc_pareto(rows, "product", "product")
+
+    # Segregate 80/20 analysis for Medicines vs Non-Medical Items
+    medical_rows = [row for row in rows if row.get("is_medicine") is True]
+    non_medical_rows = [row for row in rows if row.get("is_medicine") is False]
+
+    product_abc = abc_pareto(medical_rows, "product", "product")
+    non_medical_abc = abc_pareto(non_medical_rows, "product", "product")
     area_abc = abc_pareto(territory_rows, "territory", "area")
+
     seasonality_overall = seasonality(monthly_trends)
     seasonality_territory = seasonality(aggregate(territory_rows, ("period", "territory")), "territory")
     yoy_overall = yoy_growth(monthly_trends)
@@ -389,6 +478,7 @@ def run(sales_path: Path, area_mapping_path: Path, output_dir: Path) -> dict[str
     write_csv(output_dir / "descriptive_area_summary.csv", area_summary)
     write_csv(output_dir / "descriptive_area_type_summary.csv", area_type_summary)
     write_csv(output_dir / "descriptive_product_abc_pareto.csv", product_abc)
+    write_csv(output_dir / "descriptive_non_medical_abc_pareto.csv", non_medical_abc)
     write_csv(output_dir / "descriptive_territory_abc_pareto.csv", area_abc)
     write_csv(output_dir / "descriptive_seasonality_overall.csv", seasonality_overall)
     write_csv(output_dir / "descriptive_seasonality_territory.csv", seasonality_territory)
@@ -413,13 +503,14 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run MedShield descriptive analytics outputs.")
     parser.add_argument("--sales-path", type=Path, default=DEFAULT_SALES_PATH)
     parser.add_argument("--area-mapping-path", type=Path, default=DEFAULT_AREA_MAPPING_PATH)
+    parser.add_argument("--product-mapping-path", type=Path, default=DEFAULT_PRODUCT_MAPPING_PATH)
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
-    summary = run(args.sales_path, args.area_mapping_path, args.output_dir)
+    summary = run(args.sales_path, args.area_mapping_path, args.product_mapping_path, args.output_dir)
     print(json.dumps(summary, indent=2))
 
 
