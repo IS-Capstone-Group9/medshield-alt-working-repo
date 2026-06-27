@@ -1,44 +1,60 @@
-# MedShield Descriptive Analytics Task Checklist
+# MedShield Descriptive Analytics: Implementation Checklist
 
-This checklist tracks the accomplished tasks and the remaining steps needed to fully build, run, and productionise the descriptive analytics logic for MedShield.
-
----
-
-## 1. Accomplished Tasks (Completed)
-
-### A. Data Ingestion & Quality Filtering
-- [x] **Date Validation Filter**: Skip any transactions with missing or invalid date formats in `enrich_rows()`.
-- [x] **Quality Audit Enforcement**: Exclude records marked as `"rejected"` in `quality_status` to keep the analytics baseline clean.
-- [x] **Sales Acceptance Check**: Retain only clean transactions by filtering out entries that do not carry `"accepted_clean_sales"` in `sales_acceptance_status`.
-
-### B. Segment Enrichment & Classification
-- [x] **Area Roll-up & Classification**: Standardize and map arbitrary location strings to standard territories, customer channels (e.g., Government), or business lines.
-- [x] **Product Master Ingestion**: Load canonical SKU names, categories, and medicine flags directly from `product_master_mapping.csv`.
-- [x] **Heuristic SKU Classifier**: Implement a fallback regex classifier (`classify_product_is_medicine`) to isolate non-medical overhead (stationery, promotional apparel) from active drugs.
-
-### C. Analytical Logic & Algorithms
-- [x] **Segregated ABC/Pareto Sorting**: Split transactions into medical and non-medical streams to perform separate 80/20 revenue concentration rankings.
-- [x] **Seasonality Indexing**: Aggregate quantities per month to calculate index coefficients and seasonal strength factors.
-- [x] **Year-over-Year Growth Trends**: Implement temporal YoY calculations comparing current-month transactions to prior-year equivalents.
-- [x] **Output File Generation**: Save clean descriptive outputs as CSV files (`descriptive_product_abc_pareto.csv`, etc.) in the outputs folder.
-
-### D. DSS Dashboard & UI Fixes
-- [x] **Canvas Reuse Collision Fix**: Resolve the Chart.js `"Canvas is already in use"` error by checking for and destroying existing chart bindings (`Chart.getChart(canvas).destroy()`).
-- [x] **Transition Resize Safeguard**: Wrap chart resizing in checks (`document.body.contains()`) and `try...catch` blocks to prevent unhandled TypeErrors when switching tabs.
-- [x] **Remote Synchronisation**: Push all committed refactoring changes and fixes to the alt repository branch (`feature/mod` on `https://github.com/IS-Capstone-Group9/medshield-alt-working-repo`).
+This checklist tracks what was accomplished and what remains to be completed for the descriptive analytics logic, structured directly around the **MedShield North Star Diagram** nodes.
 
 ---
 
-## 2. Outstanding Tasks (Remaining Work)
+## 1. Quality Gatekeeper (Data Ingestion & Cleaning)
+- [x] **Accomplished**: Skip transactions with missing or invalid date formats.
+- [x] **Accomplished**: Exclude records marked as `"rejected"` in `quality_status`.
+- [x] **Accomplished**: Retain only officially accepted clean records, filtering out billing corrections and adjustments.
+- [ ] **To Be Accomplished**: Address financial audit flags (e.g. database rows where net income is negative or exceeds total trade price).
 
-### A. Template Approvals
-- [ ] **Stakeholder Mapping Sign-off**: Review and approve "proposed" and "needs_review" mappings in `product_master_mapping.csv` and `area_classification_mapping.csv`.
-- [ ] **Remove Draft Labels**: Transition outputs from draft to approved status once mappings are finalized.
+---
 
-### B. Data Cleansing & Anomaly Resolution
-- [ ] **Financial Auditing**: Address warning rows flagged in the database (e.g. transactions where `net_income` exceeds `total_trade_price` or results in negative values).
-- [ ] **2025 Data Completeness**: Complete the partial 2025 sales transaction records to avoid skewing YoY comparisons.
+## 2. Business Groupings (North Star Node 2A)
+* **Goal**: Group products, territories, and customers by behavior.
+- [x] **Accomplished**: Separate geographic territories from customer channels and admin accounts.
+- [x] **Accomplished**: Ingest product master mappings to separate medicines from operational/office overhead.
+- [x] **Accomplished**: Design a fallback regex classifier to auto-sort unmapped products.
+- [ ] **To Be Accomplished**: Secure formal stakeholder approval on the draft SKU categories in `product_master_mapping.csv` and area codes in `area_classification_mapping.csv`.
 
-### C. Future Modeling Integrations
-- [ ] **Ingest DOH & PAGASA Data**: Retrieve and format historical disease outbreak cases and rainfall measurements to unblock the predictive adjustments path.
-- [ ] **Urgency Target Labeling**: Define concrete supervised classification targets (e.g. stockout threshold) to train and enable the `XGBOOST_URGENCY` model.
+---
+
+## 3. Seasonal Demand Cycles (North Star Node 3A)
+* **Goal**: Identify monthly seasonal cycles.
+- [x] **Accomplished**: Compute monthly seasonal demand index multipliers against the overall average benchmark.
+- [x] **Accomplished**: Calculate seasonal strength metrics to identify highly volatile products.
+
+---
+
+## 4. Revenue Contribution (North Star Node 4A)
+* **Goal**: Compute revenue contribution and ABC/Pareto class.
+- [x] **Accomplished**: Sort SKUs descending by total sales revenue.
+- [x] **Accomplished**: Segregate medical items from office overhead and perform separate ABC rankings (Class A: 80%, Class B: 15%, Class C: 5%).
+
+---
+
+## 5. Year-over-Year Growth Trends (North Star Node 5A)
+* **Goal**: Compute YoY revenue and quantity trends.
+- [x] **Accomplished**: Compare matching calendar months directly to their prior-year equivalents.
+- [ ] **To Be Accomplished**: Complete the partial 2025 sales transaction records to prevent YoY baseline distortion.
+
+---
+
+## 6. Territory Performance (North Star Node 6A)
+* **Goal**: Identify territories generating the most revenue and net income.
+- [x] **Accomplished**: Exclude non-geographic labels and rank actual geographic territories by revenue and gross margin.
+
+---
+
+## 7. Customer Concentration (North Star Node 7A)
+* **Goal**: Identify high-value institutional clients driving 80% of revenue.
+- [x] **Accomplished**: Group and rank customer buyer types (Government, Hospital, Pharma) by total sales volume.
+
+---
+
+## 8. Dashboard Contracts & UI Stability
+- [x] **Accomplished**: Resolve canvas collisions by destroying active Chart.js instances before rendering new ones.
+- [x] **Accomplished**: Safeguard page transitions against detached DOM nodes by adding parent element checks and try-catch blocks to the resize handler.
+- [ ] **To Be Accomplished**: Transition model analytics jobs to write outputs directly to DSS database tables instead of local files.
