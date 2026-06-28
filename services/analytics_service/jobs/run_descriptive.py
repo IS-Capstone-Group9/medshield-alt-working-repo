@@ -14,10 +14,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_SALES_PATH = ROOT / "data" / "medshield" / "processed" / "sales_transactions_area_allocated.json.gz"
 DEFAULT_AREA_MAPPING_PATH = ROOT / "datasources" / "templates" / "area_classification_mapping.csv"
-<<<<<<< HEAD
 DEFAULT_PRODUCT_MAPPING_PATH = ROOT / "datasources" / "templates" / "product_master_mapping.csv"
-=======
->>>>>>> d95787eaf44abb861199f4500d18cbc659a79cf6
 DEFAULT_OUTPUT_DIR = ROOT / "outputs" / f"descriptive_analytics_{date.today():%Y%m%d}"
 ADDITIVE_FIELDS = ("quantity", "total_trade_price", "net_income", "net_cost", "discount", "total_cost")
 MONTHS = tuple(f"{month:02d}" for month in range(1, 13))
@@ -80,7 +77,6 @@ def read_area_mapping(path: Path) -> dict[str, dict[str, str]]:
     return mapping
 
 
-<<<<<<< HEAD
 def read_product_mapping(path: Path) -> dict[str, dict[str, str]]:
     if not path.exists():
         return {}
@@ -92,10 +88,6 @@ def read_product_mapping(path: Path) -> dict[str, dict[str, str]]:
             if raw_product:
                 mapping[raw_product] = {key: str(value or "").strip() for key, value in row.items()}
     return mapping
-
-
-=======
->>>>>>> d95787eaf44abb861199f4500d18cbc659a79cf6
 def area_info(area: object, mapping: dict[str, dict[str, str]]) -> dict[str, str]:
     area_text = str(area or "").strip()
     mapped = mapping.get(area_text.lower())
@@ -111,7 +103,7 @@ def area_info(area: object, mapping: dict[str, dict[str, str]]) -> dict[str, str
         "weather_eligible": "false",
         "mapping_status": "unmapped",
     }
-<<<<<<< HEAD
+
 def classify_product_is_medicine(product_name: str) -> tuple[bool, str]:
     import re
     p_lower = str(product_name or "").strip().lower()
@@ -166,11 +158,6 @@ def enrich_rows(
     area_mapping: dict[str, dict[str, str]],
     product_mapping: dict[str, dict[str, str]],
 ) -> list[dict[str, Any]]:
-=======
-
-
-def enrich_rows(rows: list[dict[str, Any]], area_mapping: dict[str, dict[str, str]]) -> list[dict[str, Any]]:
->>>>>>> d95787eaf44abb861199f4500d18cbc659a79cf6
     enriched: list[dict[str, Any]] = []
     for row in rows:
         parsed = parse_date(row.get("date_delivered"))
@@ -181,12 +168,8 @@ def enrich_rows(rows: list[dict[str, Any]], area_mapping: dict[str, dict[str, st
                 continue
 
         info = area_info(row.get("area"), area_mapping)
-<<<<<<< HEAD
         prod_text = str(row.get("product") or "").strip()
         prod_info = product_mapping.get(prod_text)
-
-=======
->>>>>>> d95787eaf44abb861199f4500d18cbc659a79cf6
         item = dict(row)
         item["period"] = parsed.strftime("%Y-%m")
         item["calendar_year"] = parsed.year
@@ -201,8 +184,6 @@ def enrich_rows(rows: list[dict[str, Any]], area_mapping: dict[str, dict[str, st
         item["area_weather_eligible"] = info.get("weather_eligible", "false")
         item["is_estimated_contract_allocation"] = item.get("allocation_status") == "estimated_backward_allocation"
         item["is_estimated_date"] = str(item.get("date_is_estimated", "")).lower() == "true"
-<<<<<<< HEAD
-
         # Product Enrichment
         if prod_info:
             item["is_medicine"] = str(prod_info.get("is_medicine", "true")).lower() == "true"
@@ -213,9 +194,6 @@ def enrich_rows(rows: list[dict[str, Any]], area_mapping: dict[str, dict[str, st
             item["is_medicine"] = is_med
             item["product_category"] = category
             item["product_mapping_status"] = "auto_classified"
-
-=======
->>>>>>> d95787eaf44abb861199f4500d18cbc659a79cf6
         enriched.append(item)
     return enriched
 
@@ -458,35 +436,23 @@ def build_summary(rows: list[dict[str, Any]], product_abc: list[dict[str, Any]],
     }
 
 
-<<<<<<< HEAD
 def run(sales_path: Path, area_mapping_path: Path, product_mapping_path: Path, output_dir: Path) -> dict[str, Any]:
     sales_path = sales_path if sales_path.is_absolute() else ROOT / sales_path
     area_mapping_path = area_mapping_path if area_mapping_path.is_absolute() else ROOT / area_mapping_path
     product_mapping_path = product_mapping_path if product_mapping_path.is_absolute() else ROOT / product_mapping_path
-=======
-def run(sales_path: Path, area_mapping_path: Path, output_dir: Path) -> dict[str, Any]:
-    sales_path = sales_path if sales_path.is_absolute() else ROOT / sales_path
-    area_mapping_path = area_mapping_path if area_mapping_path.is_absolute() else ROOT / area_mapping_path
->>>>>>> d95787eaf44abb861199f4500d18cbc659a79cf6
     output_dir = output_dir if output_dir.is_absolute() else ROOT / output_dir
 
     payload = read_json_gz(sales_path)
     raw_rows = payload.get("rows", [])
     area_mapping = read_area_mapping(area_mapping_path)
-<<<<<<< HEAD
     product_mapping = read_product_mapping(product_mapping_path)
     rows = enrich_rows(raw_rows, area_mapping, product_mapping)
-=======
-    rows = enrich_rows(raw_rows, area_mapping)
->>>>>>> d95787eaf44abb861199f4500d18cbc659a79cf6
 
     monthly_trends = aggregate(rows, ("period",))
     yearly_summary = aggregate(rows, ("calendar_year",))
     area_summary = aggregate(rows, ("area_type", "standard_area"))
     area_type_summary = aggregate(rows, ("area_type",))
     territory_rows = [row for row in rows if row.get("area_type") == "territory"]
-<<<<<<< HEAD
-
     # Segregate 80/20 analysis for Medicines vs Non-Medical Items
     medical_rows = [row for row in rows if row.get("is_medicine") is True]
     non_medical_rows = [row for row in rows if row.get("is_medicine") is False]
@@ -494,11 +460,6 @@ def run(sales_path: Path, area_mapping_path: Path, output_dir: Path) -> dict[str
     product_abc = abc_pareto(medical_rows, "product", "product")
     non_medical_abc = abc_pareto(non_medical_rows, "product", "product")
     area_abc = abc_pareto(territory_rows, "territory", "area")
-
-=======
-    product_abc = abc_pareto(rows, "product", "product")
-    area_abc = abc_pareto(territory_rows, "territory", "area")
->>>>>>> d95787eaf44abb861199f4500d18cbc659a79cf6
     seasonality_overall = seasonality(monthly_trends)
     seasonality_territory = seasonality(aggregate(territory_rows, ("period", "territory")), "territory")
     yoy_overall = yoy_growth(monthly_trends)
@@ -511,10 +472,7 @@ def run(sales_path: Path, area_mapping_path: Path, output_dir: Path) -> dict[str
     write_csv(output_dir / "descriptive_area_summary.csv", area_summary)
     write_csv(output_dir / "descriptive_area_type_summary.csv", area_type_summary)
     write_csv(output_dir / "descriptive_product_abc_pareto.csv", product_abc)
-<<<<<<< HEAD
     write_csv(output_dir / "descriptive_non_medical_abc_pareto.csv", non_medical_abc)
-=======
->>>>>>> d95787eaf44abb861199f4500d18cbc659a79cf6
     write_csv(output_dir / "descriptive_territory_abc_pareto.csv", area_abc)
     write_csv(output_dir / "descriptive_seasonality_overall.csv", seasonality_overall)
     write_csv(output_dir / "descriptive_seasonality_territory.csv", seasonality_territory)
@@ -539,21 +497,14 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run MedShield descriptive analytics outputs.")
     parser.add_argument("--sales-path", type=Path, default=DEFAULT_SALES_PATH)
     parser.add_argument("--area-mapping-path", type=Path, default=DEFAULT_AREA_MAPPING_PATH)
-<<<<<<< HEAD
     parser.add_argument("--product-mapping-path", type=Path, default=DEFAULT_PRODUCT_MAPPING_PATH)
-=======
->>>>>>> d95787eaf44abb861199f4500d18cbc659a79cf6
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
-<<<<<<< HEAD
     summary = run(args.sales_path, args.area_mapping_path, args.product_mapping_path, args.output_dir)
-=======
-    summary = run(args.sales_path, args.area_mapping_path, args.output_dir)
->>>>>>> d95787eaf44abb861199f4500d18cbc659a79cf6
     print(json.dumps(summary, indent=2))
 
 
