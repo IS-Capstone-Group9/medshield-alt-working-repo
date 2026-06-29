@@ -1098,5 +1098,10 @@
     "top_product": "MONOWEL 1G IV",
     "top_area": "Quezon",
     "avg_margin": 117.6
-  }
+  },
+  "abc_distribution": [
+    146607352.17000005,
+    27584417.76999999,
+    9180911.469999999
+  ]
 }
