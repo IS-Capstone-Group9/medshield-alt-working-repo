@@ -109,6 +109,8 @@ def classify_product_is_medicine(product_name: str) -> tuple[bool, str]:
     p_lower = str(product_name or "").strip().lower()
     if not p_lower:
         return True, ""
+    if "#" in p_lower:
+        return False, "contract"
 
     # Non-medical patterns (match word boundaries or specific suffixes)
     non_med_patterns = [
@@ -174,6 +176,15 @@ def enrich_rows(
         item["period"] = parsed.strftime("%Y-%m")
         item["calendar_year"] = parsed.year
         item["calendar_month"] = f"{parsed.month:02d}"
+        # Isolate margin anomalies at individual transaction level
+        net_inc = safe_float(row.get("net_income"))
+        tot_trade = safe_float(row.get("total_trade_price"))
+        item["original_net_income"] = net_inc
+        if net_inc > tot_trade or net_inc < 0:
+            item["net_income"] = max(0.0, min(net_inc, tot_trade))
+        else:
+            item["net_income"] = net_inc
+
         item["standard_area"] = info.get("standard_area", item.get("area", ""))
         item["area_type"] = info.get("area_type", "unmapped")
         item["territory"] = info.get("territory", "")
@@ -396,9 +407,13 @@ def build_summary(rows: list[dict[str, Any]], product_abc: list[dict[str, Any]],
     gross_margin_exceeds_revenue_rows = sum(
         1
         for row in rows
-        if safe_float(row.get("net_income")) > safe_float(row.get("total_trade_price"))
+        if safe_float(row.get("original_net_income", row.get("net_income"))) > safe_float(row.get("total_trade_price"))
     )
-    negative_gross_margin_rows = sum(1 for row in rows if safe_float(row.get("net_income")) < 0)
+    negative_gross_margin_rows = sum(
+        1
+        for row in rows
+        if safe_float(row.get("original_net_income", row.get("net_income"))) < 0
+    )
     return {
         "generated_at": datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
         "source_dataset": str(DEFAULT_SALES_PATH.relative_to(ROOT)),
