@@ -52,6 +52,7 @@ def product_region_matches():
 
 if __name__ == "__main__":
     app.run(
+        host="0.0.0.0",
         port=int(os.getenv("PRODUCT_SERVICE_PORT", "5102")),
         debug=os.getenv("FLASK_DEBUG", "").strip().lower() in {"1", "true", "yes"},
         use_reloader=False,
