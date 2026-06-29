@@ -276,7 +276,148 @@
       "income": 13509343.63
     }
   ],
-  "by_area": [],
+  "by_area": [
+    {
+      "area": "Admin",
+      "revenue": 3940321.94,
+      "income": 4819060.76
+    },
+    {
+      "area": "Equipment",
+      "revenue": 5717863.66,
+      "income": 8144847.97
+    },
+    {
+      "area": "Losses",
+      "revenue": 3211.8,
+      "income": 4100.12
+    },
+    {
+      "area": "Personal",
+      "revenue": 1962.0,
+      "income": 2021.0
+    },
+    {
+      "area": "Supplies",
+      "revenue": 1478308.43,
+      "income": 1905927.77
+    },
+    {
+      "area": "Government",
+      "revenue": 58913723.25,
+      "income": 91023631.29
+    },
+    {
+      "area": "Hospital",
+      "revenue": 63760198.08,
+      "income": 69594584.71
+    },
+    {
+      "area": "Pharma",
+      "revenue": 135444.87,
+      "income": 459010.13
+    },
+    {
+      "area": "Batangas",
+      "revenue": 5198977.99,
+      "income": 10411814.26
+    },
+    {
+      "area": "Camarines Norte",
+      "revenue": 1635095.13,
+      "income": 2358725.69
+    },
+    {
+      "area": "Camarines Sur",
+      "revenue": 572877.96,
+      "income": 1149261.52
+    },
+    {
+      "area": "Cavite",
+      "revenue": 820321.52,
+      "income": 1723232.0
+    },
+    {
+      "area": "Laguna",
+      "revenue": 1059773.42,
+      "income": 750155.98
+    },
+    {
+      "area": "Marinduque",
+      "revenue": 4712382.36,
+      "income": 5718447.85
+    },
+    {
+      "area": "Quezon",
+      "revenue": 7708883.18,
+      "income": 13948986.69
+    },
+    {
+      "area": "Aboitiz",
+      "revenue": 44400.0,
+      "income": 23907.69
+    },
+    {
+      "area": "Albay",
+      "revenue": 174300.8,
+      "income": 343562.17
+    },
+    {
+      "area": "Gulang Gulang",
+      "revenue": 80151.0,
+      "income": 38704.0
+    },
+    {
+      "area": "PESO",
+      "revenue": 2317160.16,
+      "income": 1204359.84
+    },
+    {
+      "area": "PESO Provincial",
+      "revenue": 710699.22,
+      "income": 359870.78
+    },
+    {
+      "area": "PHO",
+      "revenue": 109077.31,
+      "income": 57710.69
+    },
+    {
+      "area": "PPDC",
+      "revenue": 614539.86,
+      "income": 322389.89
+    },
+    {
+      "area": "PPOC",
+      "revenue": 64000.0,
+      "income": 52500.0
+    },
+    {
+      "area": "Padre Burgos",
+      "revenue": 50889.0,
+      "income": 23491.0
+    },
+    {
+      "area": "Pagbilao",
+      "revenue": 51826339.93,
+      "income": 39708600.23
+    },
+    {
+      "area": "Provincial Tourism Office",
+      "revenue": 855305.26,
+      "income": 373249.74
+    },
+    {
+      "area": "QMC",
+      "revenue": 7530374.88,
+      "income": 4749955.72
+    },
+    {
+      "area": "Tourism",
+      "revenue": 921686.79,
+      "income": 494989.21
+    }
+  ],
   "top_products": [
     {
       "product": "MONOWEL 1G IV",
