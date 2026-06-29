@@ -351,67 +351,67 @@
       "pct_of_total": 1.09
     },
     {
-      "product": "BUPIRIGHT AMPULE",
-      "revenue": 1948969.01,
-      "qty": 7553.8986,
-      "income": 3770355.26,
-      "abc": "A",
-      "focus": "A",
-      "pct_of_total": 1.06
+      "product": "FIRSTMED VITAMIN B COMPLEX 100MG/5MG/50MCG",
+      "revenue": 107865.0,
+      "qty": 1269.0,
+      "income": 112096.0,
+      "abc": "B",
+      "focus": "B",
+      "pct_of_total": 0.06
     },
     {
-      "product": "ANTITET 1500IU/0.7ML",
-      "revenue": 1856413.99,
-      "qty": 1448.5902,
-      "income": 2143819.5,
-      "abc": "A",
-      "focus": "A",
-      "pct_of_total": 1.01
+      "product": "SAMPLE VESSELS 120ML WITH SODIUM THIOSULFATE",
+      "revenue": 107800.0,
+      "qty": 11.0,
+      "income": 89340.0,
+      "abc": "B",
+      "focus": "B",
+      "pct_of_total": 0.06
     },
     {
-      "product": "MICROPORE 1\" - 1530-1 - 3M",
-      "revenue": 1631166.63,
-      "qty": 1751.8816,
-      "income": 1488763.79,
-      "abc": "A",
-      "focus": "A",
-      "pct_of_total": 0.89
+      "product": "DANOXIME 750MG",
+      "revenue": 107512.5,
+      "qty": 3525.0,
+      "income": 679167.5,
+      "abc": "B",
+      "focus": "B",
+      "pct_of_total": 0.06
     },
     {
-      "product": "EVAPROST 250MCG/ML IV",
-      "revenue": 1570479.09,
-      "qty": 287.6221,
-      "income": 1020618.99,
-      "abc": "A",
-      "focus": "A",
-      "pct_of_total": 0.86
+      "product": "TRIZINE SYRUP",
+      "revenue": 105420.0,
+      "qty": 534.0,
+      "income": 61470.0,
+      "abc": "B",
+      "focus": "B",
+      "pct_of_total": 0.06
     },
     {
-      "product": "BUPIRIGHT 5MG/ML 0.5% IN 8% 4ML",
-      "revenue": 1494974.36,
-      "qty": 7933.5703,
-      "income": 1907522.03,
-      "abc": "A",
-      "focus": "A",
-      "pct_of_total": 0.82
+      "product": "SURGICAL BLADE #20 SURGITECH",
+      "revenue": 16800.0,
+      "qty": 60.0,
+      "income": 14674.0,
+      "abc": "C",
+      "focus": "C",
+      "pct_of_total": 0.01
     },
     {
-      "product": "RANICLAV 625MG",
-      "revenue": 1483348.57,
-      "qty": 4037.6382,
-      "income": 1294942.17,
-      "abc": "A",
-      "focus": "A",
-      "pct_of_total": 0.81
+      "product": "DEXTROSE PLAIN LACTATED RINGERS PLR 1000ML (EUROMED)",
+      "revenue": 16800.0,
+      "qty": 240.0,
+      "income": 5510.4,
+      "abc": "C",
+      "focus": "C",
+      "pct_of_total": 0.01
     },
     {
-      "product": "HAIXONE WITH DILUENT 1G",
-      "revenue": 1425484.65,
-      "qty": 53614.3374,
-      "income": 1362364.87,
-      "abc": "A",
-      "focus": "A",
-      "pct_of_total": 0.78
+      "product": "AUTOMATIC BIOPSY NEEDLE G14 X 10CM (CURWAY) 5'S",
+      "revenue": 16791.0,
+      "qty": 1.0,
+      "income": 16699.0,
+      "abc": "C",
+      "focus": "C",
+      "pct_of_total": 0.01
     }
   ],
   "year_summary": [
