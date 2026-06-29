@@ -15,3 +15,5 @@ Supplies,Supplies,business_line,,,Supplies,false,false,needs_review,Classify sep
 Equipment,Equipment,business_line,,,Equipment,false,false,needs_review,Classify separately from medicine SKUs.
 Personal,Personal,business_line,,,Personal,false,false,needs_review,Exclude from demand forecasting unless approved.
 Losses,Losses,business_line,,,Losses,false,false,needs_review,Exclude from demand forecasting unless approved.
+Albay,Albay,territory,Albay,,,true,true,approved,
+
