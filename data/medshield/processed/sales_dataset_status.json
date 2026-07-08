@@ -2,21 +2,16 @@
   "dataset_name": "MedShield Pharmaceutical Sales",
   "source_file": "Sales_Report.xlsx",
   "source_files": [
-    "2021s.csv",
-    "2022s.csv",
-    "2023s.csv",
-    "2024s.csv",
-    "2025s.csv",
     "Sales_Report.xlsx"
   ],
   "checksum": "04e5f303eb8fe4f3fb441a233adb4603c992c198653b9ca8b6dfb5c4fd0fe107",
-  "received_at": "2026-06-25T07:31:35.784048+00:00",
+  "received_at": "2026-06-30T08:16:09.964376+00:00",
   "cleaning_status": "cleaned",
   "quality_summary": {
     "input_stage": "raw_medshield",
-    "rows_extracted": 23481,
+    "rows_extracted": 20418,
     "rows_accepted": 19674,
-    "rows_rejected": 3807,
+    "rows_rejected": 744,
     "rows_with_warnings": 443,
     "duplicate_rows": 44,
     "valid_rows": 19231,
@@ -30,16 +25,16 @@
     "source_period_start": "2021-01-11",
     "source_period_end": "2025-12-31",
     "standardizations": {
-      "dr_number: standardized identifier format": 23219,
-      "trade_price_unit: blank converted to 0": 888,
-      "total_trade_price: blank converted to 0": 876,
-      "unit_cost: blank converted to 0": 854,
-      "total_cost: blank converted to 0": 848,
-      "quantity: blank converted to 0": 16,
-      "margin_pct: derived from net income / net cost": 14,
-      "discount: blank converted to 0": 8,
-      "net_cost: blank converted to 0": 5,
-      "net_income: blank converted to 0": 5
+      "dr_number: standardized identifier format": 20164,
+      "trade_price_unit: blank converted to 0": 810,
+      "total_trade_price: blank converted to 0": 803,
+      "unit_cost: blank converted to 0": 842,
+      "total_cost: blank converted to 0": 839,
+      "quantity: blank converted to 0": 8,
+      "margin_pct: derived from net income / net cost": 7,
+      "discount: blank converted to 0": 4,
+      "net_cost: blank converted to 0": 2,
+      "net_income: blank converted to 0": 2
     },
     "issues": {
       "unit_cost_is_negative": 18,
@@ -47,11 +42,11 @@
       "net_cost_is_negative": 96,
       "quantity_is_negative": 346,
       "total_trade_price_is_negative": 343,
-      "margin_percentage_is_outside_the_expected_range": 44,
+      "margin_percentage_is_outside_the_expected_range": 37,
       "exact_duplicate_transaction": 44,
-      "missing_product": 811,
-      "missing_area": 16,
-      "invalid_or_missing_delivery_date": 3072
+      "missing_product": 740,
+      "missing_area": 8,
+      "invalid_or_missing_delivery_date": 9
     },
     "columns_received": [
       "area",
@@ -87,7 +82,7 @@
       "margin_pct"
     ],
     "checksum": "04e5f303eb8fe4f3fb441a233adb4603c992c198653b9ca8b6dfb5c4fd0fe107",
-    "merge_strategy": "replaced_uploaded_years",
+    "merge_strategy": "created_new_history",
     "merged_years": [
       "2021",
       "2022",

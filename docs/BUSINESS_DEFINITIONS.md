@@ -20,6 +20,7 @@ The workbook supports sales revenue, product quantity, transaction cost fields, 
 | Gross margin amount | Transaction sales value less net cost, using the workbook field when supplied. | `net_income`; reconcile against `total_trade_price - net_cost` | Transaction, month, SKU, territory | Finance / Business Analyst | Proposed for approval |
 | Margin percentage | Gross margin divided by net cost or workbook-provided margin percent. | `margin_pct`; validate against `net_income / net_cost` | Transaction, SKU, territory | Data Analyst | Needs validation |
 | Net income | Not available as company net income. Use `gross_margin_amount` wording instead. | Not applicable | Not applicable | Business Analyst | Approved terminology rule |
+| Service Contract | A bulk package or contract containing an unknown mix of medicines/supplies (indicated by '#' in raw product name). | `is_service_contract` (boolean) | Transaction, SKU | Business Analyst | Approved |
 | Canonical SKU | One sellable product identity after alias cleanup. | Product alias map from `product` raw value to `canonical_sku` | SKU | Data Analyst | Needs mapping |
 | Product alias | A raw product string that points to a canonical SKU. | `product_raw` -> `canonical_sku` | Product string | Data Analyst | Needs mapping |
 | Territory | Geographic delivery area only. | Area map where `area_type = territory` | Territory | Business Analyst | Needs mapping |

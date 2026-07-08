@@ -39,6 +39,11 @@ const DASHBOARD_GLOBAL_HANDLERS = [
   'refreshComparison',
   'applyDatasetPatch',
   'buildCharts',
+  'toggleProductTab',
+  'setGranularity',
+  'filterFullProductList',
+  'sortFullProductList',
+  'selectProductFromFullList',
 ] as const
 
 const CSV_TABLE_PAGE_SIZE = 25
@@ -1389,8 +1394,9 @@ function renderSalesDatasetStatus(root: HTMLElement, status: SalesDatasetStatus)
   }
 }
 
-function formatSalesValue(value: unknown, type: 'text' | 'number' | 'money' | 'percent' = 'text') {
+function formatSalesValue(value: unknown, type: 'text' | 'number' | 'money' | 'percent' | 'boolean' = 'text') {
   if (value === null || value === undefined || value === '') return '-'
+  if (type === 'boolean') return value === true || String(value).toLowerCase() === 'true' ? 'Yes' : 'No'
   if (type === 'number') return Number(value).toLocaleString(undefined, { maximumFractionDigits: 4 })
   if (type === 'money') {
     return Number(value).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
@@ -1453,11 +1459,12 @@ function renderSalesPage(root: HTMLElement, result: SalesPage) {
   const next = root.querySelector<HTMLButtonElement>('#salesDataNext')
   if (!table || !status || !pageLabel || !previous || !next) return
 
-  const columns: Array<[string, keyof SalesPage['rows'][number], 'text' | 'number' | 'money' | 'percent']> = [
+  const columns: Array<[string, keyof SalesPage['rows'][number], 'text' | 'number' | 'money' | 'percent' | 'boolean']> = [
     ['Area', 'area', 'text'],
     ['DR Number', 'dr_number', 'text'],
     ['Date Delivered', 'date_delivered', 'text'],
     ['Product', 'product', 'text'],
+    ['Contract?', 'is_service_contract', 'boolean'],
     ['Qty', 'quantity', 'number'],
     ['CP', 'unit_cost', 'money'],
     ['Total CP', 'total_cost', 'money'],

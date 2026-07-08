@@ -24,11 +24,24 @@
     * It scans the product name for office supply terms (such as pen, paper, folder, tape).
     * If an office supply term matches, it checks against a medical word whitelist (such as bandage, syringe, penicillin).
     * If no whitelist words are found, the product is categorized as a Non-Medical Operational Item; otherwise, it defaults to a Medicine or Medical Supply.
+    * **Service Contracts**: If a product name contains a `#` (e.g., `PAGBILAO # 13,500,000`), it is classified as a bulk service contract (`is_service_contract = true`) rather than a direct medicine or supply.
 * **Downstream Model Impact**: Segregates office overhead and internal losses so they do not distort downstream forecasting and prioritization models.
 
 ---
 
-### 3. The Seasonal Demand Cycle
+### 3. Bulk Service Contract Breakdown (Backward Approximation)
+* **Goal**: Convert bulk area-summary service contracts into detailed product-mix estimates without inflating historical revenue totals.
+* **The Process**:
+  1. The system identifies parent contract rows using the `is_service_contract` flag (e.g., rows containing `#` like `PAGBILAO # 13,500,000`).
+  2. Because these rows represent bulk packages of unknown medicines or supplies, they cannot be modeled as individual SKUs. 
+  3. The system scans the previous three years of transactions for the same area and channel to build a historical product-mix profile.
+  4. It allocates the bulk contract's total quantity and revenue into five estimated child product rows (e.g., specific medicines and supplies) based on those historical weights.
+  5. The child rows are flagged as `estimated_backward_allocation` so they contribute to accurate product-mix analytics but remain clearly marked as estimates.
+* **Downstream Model Impact**: Allows product-level exploratory analysis and descriptive statistics to include revenue from bulk service contracts, while keeping the data limitations visible.
+
+---
+
+### 4. The Seasonal Demand Cycle
 * **Goal**: Calculate historical monthly demand index multipliers to identify recurring seasonal fluctuations.
 * **Variables**:
   * Let Q be the sales quantity of a transaction.
@@ -58,7 +71,7 @@
 
 ---
 
-### 4. Revenue Contribution (80/20 Analysis)
+### 5. Revenue Contribution (80/20 Analysis)
 * **Goal**: Analyze the distribution of sales across established products to identify revenue concentration patterns.
 * **Variables**:
   * Let R be the product revenue (total trade price).
@@ -80,7 +93,7 @@
 
 ---
 
-### 5. Year-over-Year (YoY) Growth Trends
+### 6. Year-over-Year (YoY) Growth Trends
 * **Goal**: Measure structural demand growth or decline while removing normal seasonal effects.
 * **Variables**:
   * Let S_current be the sales value of the current target month.
@@ -97,7 +110,7 @@
 
 ---
 
-### 6. Territory Performance
+### 7. Territory Performance
 * **Goal**: Rank physical delivery regions by revenue and gross margin contribution.
 * **Variables**:
   * Let Revenue be the total revenue of a territory.
@@ -116,7 +129,7 @@
 
 ---
 
-### 7. Customer Concentration
+### 8. Customer Concentration
 * **Goal**: Map and rank the distribution of sales volumes across buyer channels.
 * **The Process**:
   1. The system groups transactions by the institutional buyer channel (Government, Hospital, or Pharmacy).

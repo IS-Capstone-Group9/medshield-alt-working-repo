@@ -62,12 +62,25 @@ def local_snapshot() -> dict[str, Any]:
         for key in (
             "totals",
             "monthly",
+            "weekly",
             "by_area",
             "top_products",
             "year_summary",
             "seasonality",
         ):
             data[key] = sales.get(key, data.get(key))
+        for key in (
+            "forecasts",
+            "external_signals",
+            "inventory_recommendations",
+            "regional_priorities",
+            "area_clusters",
+            "product_priorities",
+            "allocation_recommendations",
+            "product_region_matches",
+            "decision_alerts",
+        ):
+            data[key] = []
     return data
 
 
@@ -108,8 +121,9 @@ def normalize_snapshot(data: dict[str, Any]) -> dict[str, Any]:
         return normalized
 
     data["monthly"] = normalize_rows(data.get("monthly", []), ["revenue", "income"])
+    data["weekly"] = normalize_rows(data.get("weekly", []), ["revenue", "income"])
     data["by_area"] = normalize_rows(data.get("by_area", []), ["revenue", "income"])
-    data["top_products"] = normalize_rows(data.get("top_products", []), ["revenue", "income", "qty", "pct_of_total"])
+    data["top_products"] = normalize_rows(data.get("top_products", []), ["revenue", "income", "qty", "pct_of_total", "cumulative_pct"], {"rank"})
     data["year_summary"] = normalize_rows(data.get("year_summary", []), ["revenue", "income"], {"transactions"})
     data["seasonality"] = normalize_rows(data.get("seasonality", []), ["avg_revenue"])
     data["forecasts"] = normalize_rows(data.get("forecasts", []), [
@@ -181,8 +195,9 @@ def warehouse_snapshot() -> dict[str, Any]:
     return normalize_snapshot({
         "totals": (supabase_fetch("vw_dashboard_kpis", {"select": "*", "limit": 1}) or [{}])[0],
         "monthly": supabase_fetch("vw_dashboard_monthly", {"select": "*", "order": "period.asc"}),
+        "weekly": [],
         "by_area": supabase_fetch("vw_dashboard_by_area", {"select": "*", "order": "revenue.desc"}),
-        "top_products": supabase_fetch("vw_dashboard_top_products", {"select": "*", "order": "revenue.desc", "limit": 15}),
+        "top_products": supabase_fetch("vw_dashboard_top_products", {"select": "*", "order": "revenue.desc"}),
         "year_summary": supabase_fetch("vw_dashboard_year_summary", {"select": "*", "order": "year.asc"}),
         "seasonality": supabase_fetch("vw_dashboard_seasonality", {"select": "*", "order": "month_num.asc"}),
         "forecasts": supabase_fetch("vw_dss_forecasts", {"select": "*", "order": "period.asc"}),

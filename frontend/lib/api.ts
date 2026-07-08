@@ -11,8 +11,18 @@ export type Summary = {
 }
 
 export type MonthlyPoint = { period: string; revenue: number; income: number }
+export type WeeklyPoint = { period: string; revenue: number; income: number }
 export type AreaPoint = { area: string; revenue: number; income: number }
-export type ProductPoint = { product: string; revenue: number; qty: number; income: number; abc: string; pct_of_total: number }
+export type ProductPoint = {
+  product: string
+  revenue: number
+  qty: number
+  income: number
+  abc: string
+  pct_of_total: number
+  cumulative_pct?: number
+  rank?: number
+}
 export type YearPoint = { year: string; revenue: number; income: number; transactions: number }
 export type SeasonalityPoint = { month: string; avg_revenue: number }
 export type ForecastPoint = {
@@ -70,6 +80,7 @@ export type ModelEvaluation = {
 type DashboardData = {
   summary: Summary
   monthly: MonthlyPoint[]
+  weekly: WeeklyPoint[]
   byArea: AreaPoint[]
   products: ProductPoint[]
   yearSummary: YearPoint[]
@@ -96,6 +107,7 @@ export type SalesTransaction = {
   total_trade_price: number
   net_income: number
   margin_pct: number
+  is_service_contract?: boolean | null
   quality_status: 'valid' | 'warning' | 'rejected'
   quality_notes: string
   source_sheet: string
@@ -339,6 +351,12 @@ function hasValidMonthlyData(rows: MonthlyPoint[]): boolean {
   )
 }
 
+function hasValidWeeklyData(rows: WeeklyPoint[]): boolean {
+  return Array.isArray(rows) && rows.every(
+    (row) => row.period && finiteNumber(row.revenue) && finiteNumber(row.income),
+  )
+}
+
 function hasValidYearSummaryData(rows: YearPoint[]): boolean {
   return Array.isArray(rows) && rows.length >= 3 && rows.every(
     (row) => row.year && finiteNumber(row.revenue) && finiteNumber(row.income),
@@ -366,6 +384,7 @@ function hasValidSeasonalityData(rows: SeasonalityPoint[]): boolean {
 function assertDashboardCoreData(data: DashboardData, source: string): DashboardData {
   const invalid: string[] = []
   if (!hasValidMonthlyData(data.monthly)) invalid.push('monthly')
+  if (!hasValidWeeklyData(data.weekly)) invalid.push('weekly')
   if (!hasValidYearSummaryData(data.yearSummary)) invalid.push('year summary')
   if (!hasValidAreaData(data.byArea)) invalid.push('area')
   if (!hasValidProductData(data.products)) invalid.push('product')
@@ -383,6 +402,7 @@ export async function loadDashboardData() {
     const [
       summary,
       monthly,
+      weekly,
       byArea,
       products,
       yearSummary,
@@ -395,8 +415,9 @@ export async function loadDashboardData() {
     ] = await Promise.all([
       getJson<Summary>('/api/summary'),
       getJson<MonthlyPoint[]>('/api/monthly'),
+      getJson<WeeklyPoint[]>('/api/weekly'),
       getJson<AreaPoint[]>('/api/by_area'),
-      getJson<ProductPoint[]>('/api/products?limit=15'),
+      getJson<ProductPoint[]>('/api/products'),
       getJson<YearPoint[]>('/api/year_summary'),
       getJson<SeasonalityPoint[]>('/api/seasonality'),
       getJson<ForecastPoint[]>('/api/forecasts'),
@@ -408,6 +429,7 @@ export async function loadDashboardData() {
     return assertDashboardCoreData({
       summary,
       monthly,
+      weekly,
       byArea,
       products,
       yearSummary,
@@ -424,6 +446,7 @@ export async function loadDashboardData() {
     return assertDashboardCoreData({
       summary: data.totals as Summary,
       monthly: data.monthly as MonthlyPoint[],
+      weekly: (data.weekly ?? []) as WeeklyPoint[],
       byArea: data.by_area as AreaPoint[],
       products: data.top_products as ProductPoint[],
       yearSummary: data.year_summary as YearPoint[],

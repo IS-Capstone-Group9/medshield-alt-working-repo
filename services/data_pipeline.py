@@ -507,13 +507,82 @@ def clean_sales_rows(
     }
     return cleaned_rows, quality_summary, staging_rows
 
-
 def build_dashboard_snapshot(rows: list[dict[str, Any]]) -> dict[str, Any]:
-    accepted = [
-        row for row in rows
-        if row["quality_status"] != "rejected"
-    ]
+    # Load mappings
+    area_mapping_path = ROOT_DIR / "datasources" / "templates" / "area_classification_mapping.csv"
+    product_mapping_path = ROOT_DIR / "datasources" / "templates" / "product_master_mapping.csv"
+    
+    # Read area mapping
+    area_mapping = {}
+    if area_mapping_path.exists():
+        try:
+            with area_mapping_path.open("r", encoding="utf-8-sig", newline="") as handle:
+                for row in csv.DictReader(handle):
+                    raw_area = str(row.get("raw_area", "")).strip().lower()
+                    if raw_area:
+                        area_mapping[raw_area] = {k: str(v or "").strip() for k, v in row.items()}
+        except Exception:
+            pass
+
+    # Read product mapping
+    product_mapping = {}
+    if product_mapping_path.exists():
+        try:
+            with product_mapping_path.open("r", encoding="utf-8-sig", newline="") as handle:
+                for row in csv.DictReader(handle):
+                    raw_product = str(row.get("raw_product", "")).strip()
+                    if raw_product:
+                        product_mapping[raw_product] = {k: str(v or "").strip() for k, v in row.items()}
+        except Exception:
+            pass
+
+    def classify_product_is_medicine(product_name: str) -> tuple[bool, str]:
+        p_lower = str(product_name or "").strip().lower()
+        if not p_lower:
+            return True, "Medicine"
+        if "#" in p_lower:
+            return False, "contract"
+
+        office_supply_terms = ["pen", "paper", "folder", "tape"]
+        medical_whitelist = ["bandage", "syringe", "penicillin", "pent", "penem", "pen-"]
+
+        has_office = any(term in p_lower for term in office_supply_terms)
+        if has_office:
+            has_whitelist = any(white in p_lower for white in medical_whitelist)
+            if not has_whitelist:
+                return False, "Non-Medical Operational Item"
+            else:
+                if "bandage" in p_lower or "syringe" in p_lower:
+                    return True, "Medical Supply"
+                return True, "Medicine"
+
+        medical_supplies_terms = ["bandage", "syringe", "needle", "catheter", "gauze", "gloves", "mask", "tube"]
+        if any(term in p_lower for term in medical_supplies_terms):
+            return True, "Medical Supply"
+        return True, "Medicine"
+
+    accepted = []
+    for row in rows:
+        # Ingestion & Quality Gatekeeper constraints
+        dd = row.get("date_delivered")
+        if not dd or not str(dd).strip():
+            continue
+        try:
+            parsed_dt = datetime.strptime(str(dd)[:10], "%Y-%m-%d").date()
+            if parsed_dt.year < 2017:
+                continue
+        except (TypeError, ValueError):
+            continue
+
+        if row.get("quality_status") == "rejected":
+            continue
+        sas = row.get("sales_acceptance_status")
+        if sas not in (None, "", "accepted_clean_sales"):
+            continue
+        accepted.append(row)
+
     monthly: dict[str, dict[str, float]] = defaultdict(lambda: {"revenue": 0.0, "income": 0.0})
+    weekly: dict[str, dict[str, float]] = defaultdict(lambda: {"revenue": 0.0, "income": 0.0})
     by_area: dict[str, dict[str, float]] = defaultdict(lambda: {"revenue": 0.0, "income": 0.0})
     by_product: dict[str, dict[str, float]] = defaultdict(
         lambda: {"revenue": 0.0, "income": 0.0, "qty": 0.0}
@@ -522,19 +591,73 @@ def build_dashboard_snapshot(rows: list[dict[str, Any]]) -> dict[str, Any]:
         lambda: {"revenue": 0.0, "income": 0.0, "transactions": 0.0}
     )
 
+    total_revenue_clean = 0.0
+    total_income_clean = 0.0
+
     for row in accepted:
-        period = str(row["date_delivered"])[:7]
+        # standard year and period
         year = str(row["year"])
-        revenue = float(row["total_trade_price"] or 0)
-        income = float(row["net_income"] or 0)
-        quantity = float(row["quantity"] or 0)
+        period = str(row["date_delivered"])[:7]
+        try:
+            delivered_date = datetime.strptime(str(row["date_delivered"])[:10], "%Y-%m-%d").date()
+            iso_year, iso_week, _ = delivered_date.isocalendar()
+            week_period = f"{iso_year}-W{iso_week:02d}"
+        except (TypeError, ValueError):
+            week_period = ""
+            
+        revenue = float(row.get("total_trade_price") or 0)
+        net_inc = float(row.get("net_income") or 0)
+        quantity = float(row.get("quantity") or 0)
+        
+        # Gross Margin Anomalies - Cap/isolate anomalies
+        is_anomaly = (net_inc < 0) or (net_inc > revenue)
+        if is_anomaly:
+            income = max(0.0, min(net_inc, revenue))
+        else:
+            income = net_inc
+
+        if not is_anomaly:
+            total_revenue_clean += revenue
+            total_income_clean += net_inc
+
+        # Location Mapping & Grouping
+        area_raw = str(row.get("area") or "").strip()
+        mapped_area = area_mapping.get(area_raw.lower())
+        if mapped_area:
+            standard_area = mapped_area.get("standard_area", area_raw)
+            area_type = mapped_area.get("area_type", "unmapped")
+        else:
+            standard_area = area_raw
+            area_type = "unmapped"
+
+        # Product Mapping & Grouping
+        prod_raw = str(row.get("product") or "").strip()
+        mapped_prod = product_mapping.get(prod_raw)
+        if mapped_prod:
+            is_med = str(mapped_prod.get("is_medicine", "true")).lower() == "true"
+            is_contract = str(mapped_prod.get("is_service_contract", "false")).lower() == "true" or "#" in prod_raw
+        else:
+            is_med, category = classify_product_is_medicine(prod_raw)
+            is_contract = category == "contract" or "#" in prod_raw
+
+        # Aggregations
         monthly[period]["revenue"] += revenue
         monthly[period]["income"] += income
-        by_area[str(row["area"])]["revenue"] += revenue
-        by_area[str(row["area"])]["income"] += income
-        by_product[str(row["product"])]["revenue"] += revenue
-        by_product[str(row["product"])]["income"] += income
-        by_product[str(row["product"])]["qty"] += quantity
+        if week_period:
+            weekly[week_period]["revenue"] += revenue
+            weekly[week_period]["income"] += income
+            
+        # Territory Performance - Exclude non-geographic records
+        if area_type == "territory":
+            by_area[standard_area]["revenue"] += revenue
+            by_area[standard_area]["income"] += income
+        
+        # Product prioritisations (Medicines or Medical Supplies only)
+        if not is_contract and is_med:
+            by_product[prod_raw]["revenue"] += revenue
+            by_product[prod_raw]["income"] += income
+            by_product[prod_raw]["qty"] += quantity
+
         yearly[year]["revenue"] += revenue
         yearly[year]["income"] += income
         yearly[year]["transactions"] += 1
@@ -542,10 +665,11 @@ def build_dashboard_snapshot(rows: list[dict[str, Any]]) -> dict[str, Any]:
     total_revenue = sum(item["revenue"] for item in monthly.values())
     total_income = sum(item["income"] for item in monthly.values())
     ranked_products = sorted(by_product.items(), key=lambda item: item[1]["revenue"], reverse=True)
+    total_product_revenue = sum(item["revenue"] for item in by_product.values())
     cumulative = 0.0
     top_products = []
     for rank, (product, values) in enumerate(ranked_products, start=1):
-        share = values["revenue"] / total_revenue if total_revenue else 0
+        share = values["revenue"] / total_product_revenue if total_product_revenue else 0
         cumulative += share
         abc = "A" if cumulative <= 0.8 else ("B" if cumulative <= 0.95 else "C")
         top_products.append({
@@ -555,6 +679,7 @@ def build_dashboard_snapshot(rows: list[dict[str, Any]]) -> dict[str, Any]:
             "income": round(values["income"], 2),
             "abc": abc,
             "pct_of_total": round(share * 100, 4),
+            "cumulative_pct": round(cumulative * 100, 4),
             "rank": rank,
         })
 
@@ -570,17 +695,21 @@ def build_dashboard_snapshot(rows: list[dict[str, Any]]) -> dict[str, Any]:
             "total_transactions": len(accepted),
             "top_product": ranked_products[0][0] if ranked_products else "",
             "top_area": max(by_area, key=lambda key: by_area[key]["revenue"]) if by_area else "",
-            "avg_margin": round(total_income / total_revenue, 6) if total_revenue else 0,
+            "avg_margin": round(total_income_clean / total_revenue_clean, 6) if total_revenue_clean else 0.0,
         },
         "monthly": [
             {"period": period, "revenue": round(values["revenue"], 2), "income": round(values["income"], 2)}
             for period, values in sorted(monthly.items())
         ],
+        "weekly": [
+            {"period": period, "revenue": round(values["revenue"], 2), "income": round(values["income"], 2)}
+            for period, values in sorted(weekly.items())
+        ],
         "by_area": [
             {"area": area, "revenue": round(values["revenue"], 2), "income": round(values["income"], 2)}
             for area, values in sorted(by_area.items(), key=lambda item: item[1]["revenue"], reverse=True)
         ],
-        "top_products": top_products[:15],
+        "top_products": top_products,
         "year_summary": [
             {
                 "year": year,

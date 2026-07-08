@@ -50,9 +50,33 @@ def monthly():
     return jsonify(rows)
 
 
+@app.get("/weekly")
+def weekly():
+    data = snapshot()
+    year = request.args.get("year")
+    rows = data.get("weekly", [])
+    if year:
+        rows = [row for row in rows if str(row.get("period", "")).startswith(year)]
+    return jsonify(rows)
+
+
 @app.get("/by_area")
 def by_area():
     return jsonify(snapshot()["by_area"])
+
+
+@app.get("/products")
+def products():
+    rows = snapshot()["top_products"]
+    limit = request.args.get("limit")
+    if limit:
+        try:
+            parsed_limit = int(limit)
+        except ValueError:
+            return jsonify({"error": "limit must be an integer"}), 400
+        if parsed_limit > 0:
+            rows = rows[:parsed_limit]
+    return jsonify(rows)
 
 
 @app.get("/year_summary")
@@ -75,6 +99,11 @@ def external_signals():
     return jsonify(snapshot().get("external_signals", []))
 
 
+@app.get("/inventory_recommendations")
+def inventory_recommendations():
+    return jsonify(snapshot().get("inventory_recommendations", []))
+
+
 @app.get("/regional_priorities")
 def regional_priorities():
     return jsonify(snapshot().get("regional_priorities", []))
@@ -83,6 +112,21 @@ def regional_priorities():
 @app.get("/area_clusters")
 def area_clusters():
     return jsonify(snapshot().get("area_clusters", []))
+
+
+@app.get("/product_priorities")
+def product_priorities():
+    return jsonify(snapshot().get("product_priorities", []))
+
+
+@app.get("/allocation_recommendations")
+def allocation_recommendations():
+    return jsonify(snapshot().get("allocation_recommendations", []))
+
+
+@app.get("/product_region_matches")
+def product_region_matches():
+    return jsonify(snapshot().get("product_region_matches", []))
 
 
 @app.get("/decision_alerts")

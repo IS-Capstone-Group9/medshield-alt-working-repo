@@ -68,7 +68,7 @@ Descriptive analytics is ready for Chapter 4 when:
 2. Revenue uses `total_trade_price`.
 3. Gross margin/profit uses `net_income` and is not labeled company net profit.
 4. Product-level analysis uses the area-allocated cleaned sales dataset.
-5. `#` contract-name breakdown and estimated-date rows are counted as estimated.
+5. `#` contract-name breakdown and estimated-date rows are tracked via the `is_service_contract` flag and counted as estimated.
 6. Territory summaries use approved or proposed area mapping.
 7. 2025 outputs are marked carefully because the 2025 completeness issue is not fully resolved.
 8. The dashboard and paper present descriptive outputs as historical evidence, not forecasts.
@@ -77,7 +77,7 @@ Descriptive analytics is ready for Chapter 4 when:
 
 Use this simple explanation:
 
-> The descriptive analytics layer summarized historical MedShield sales to show what happened before forecasting or scenario planning. The system grouped accepted cleaned sales records by month, year, product, and area. Revenue was computed from total trade price, while workbook net income was treated as gross margin/profit. Product and territory priority were described using ABC/Pareto classification, and seasonal patterns were described using a monthly demand index. Estimated contract-allocation rows were retained with flags so that totals remained traceable and limitations remained visible.
+> The descriptive analytics layer summarized historical MedShield sales to show what happened before forecasting or scenario planning. The system grouped accepted cleaned sales records by month, year, product, and area. Revenue was computed from total trade price, while workbook net income was treated as gross margin/profit. Bulk service contracts were flagged using the `is_service_contract` database identifier, allowing their backward allocation into estimated product-level sales. Product and territory priority were described using ABC/Pareto classification, and seasonal patterns were described using a monthly demand index. Estimated contract-allocation rows were retained with flags so that totals remained traceable and limitations remained visible.
 
 ## What Comes Next
 

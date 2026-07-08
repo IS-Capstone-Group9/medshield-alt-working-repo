@@ -12,7 +12,7 @@ Use this checklist before running final models or writing final Chapter 4 and Ch
 | Revenue | What field represents sales revenue? | Use `total_trade_price`. | Pending |  |  |
 | Gross margin/profit | What does `net_income` mean? | Treat as workbook gross margin/profit, not company net income. | Pending |  |  |
 | Medicine/product scope | What counts as a medicine product? | Use `is_medicine = true` and `forecast_eligible = true` from product mapping. | Pending |  |  |
-| Contract-name rows | How are `#` rows handled? | Use documented backward allocation and mark rows as estimated. | Pending |  |  |
+| Contract-name rows | How are `#` rows handled? | Use documented backward allocation, set is_service_contract flag, and mark rows as estimated. | Approved | Supply Planner | 2026-06-30 |
 | SKU aliases | How are duplicate product names mapped? | Map raw names to approved `canonical_sku`; do not merge different strength/form/pack. | Pending |  |  |
 | 2025 completeness | Can 2025 be used for holdout testing? | Use only as partial secondary validation until all months are proven complete. | Pending |  |  |
 | Weather source labels | How should weather API data be named? | Label as provider-derived weather proxy. | Pending |  |  |

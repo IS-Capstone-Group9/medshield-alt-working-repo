@@ -3,7 +3,7 @@
     "total_revenue": 203363302.28,
     "total_income": 224915208.68,
     "total_transactions": 19674,
-    "top_product": "PAGBILAO # 13,500,000",
+    "top_product": "MONOWEL 1G IV",
     "top_area": "Government",
     "avg_margin": 1.105977
   },
@@ -398,49 +398,13 @@
   ],
   "top_products": [
     {
-      "product": "PAGBILAO # 13,500,000",
-      "revenue": 8458698.88,
-      "qty": 2.0,
-      "income": 16338881.12,
-      "abc": "A",
-      "pct_of_total": 4.1594,
-      "rank": 1
-    },
-    {
-      "product": "PAGBILAO # 6,334,470",
-      "revenue": 6066065.28,
-      "qty": 2.0,
-      "income": 6599934.72,
-      "abc": "A",
-      "pct_of_total": 2.9829,
-      "rank": 2
-    },
-    {
       "product": "MONOWEL 1G IV",
       "revenue": 5780546.0,
       "qty": 12600.0,
       "income": 2331189.0,
       "abc": "A",
       "pct_of_total": 2.8425,
-      "rank": 3
-    },
-    {
-      "product": "PAGBILAO # 3,658,000",
-      "revenue": 5078697.59,
-      "qty": 2.0,
-      "income": -3549497.59,
-      "abc": "A",
-      "pct_of_total": 2.4974,
-      "rank": 4
-    },
-    {
-      "product": "PAGBILAO # 2,070,000",
-      "revenue": 2748000.0,
-      "qty": 2.0,
-      "income": 1390000.0,
-      "abc": "A",
-      "pct_of_total": 1.3513,
-      "rank": 5
+      "rank": 1
     },
     {
       "product": "EVAPROST 250MCG/ML",
@@ -449,7 +413,7 @@
       "income": 2056547.0,
       "abc": "A",
       "pct_of_total": 1.1919,
-      "rank": 6
+      "rank": 2
     },
     {
       "product": "JUBI -R 100MG",
@@ -458,16 +422,7 @@
       "income": 2217500.0,
       "abc": "A",
       "pct_of_total": 1.1679,
-      "rank": 7
-    },
-    {
-      "product": "PESO # 3,450,000.00",
-      "revenue": 2269113.0,
-      "qty": 1.0,
-      "income": 1179387.0,
-      "abc": "A",
-      "pct_of_total": 1.1158,
-      "rank": 8
+      "rank": 3
     },
     {
       "product": "SPEEDA 2.5IU/0.5ML",
@@ -476,7 +431,7 @@
       "income": 970810.0,
       "abc": "A",
       "pct_of_total": 0.9857,
-      "rank": 9
+      "rank": 4
     },
     {
       "product": "ANTITET 1500IU/0.7ML",
@@ -485,34 +440,7 @@
       "income": 2112380.0,
       "abc": "A",
       "pct_of_total": 0.847,
-      "rank": 10
-    },
-    {
-      "product": "PAGBILAO # 2,316,267",
-      "revenue": 1660000.0,
-      "qty": 1.0,
-      "income": 424640.3,
-      "abc": "A",
-      "pct_of_total": 0.8163,
-      "rank": 11
-    },
-    {
-      "product": "PAGBILAO # 3,273,976",
-      "revenue": 1530222.43,
-      "qty": 1.0,
-      "income": 531905.57,
-      "abc": "A",
-      "pct_of_total": 0.7525,
-      "rank": 12
-    },
-    {
-      "product": "PAGBILAO # 3,072,944",
-      "revenue": 1512820.96,
-      "qty": 1.0,
-      "income": 660629.04,
-      "abc": "A",
-      "pct_of_total": 0.7439,
-      "rank": 13
+      "rank": 5
     },
     {
       "product": "BUPIRIGHT 5MG/ML 0.5% IN 8% 4ML",
@@ -521,7 +449,7 @@
       "income": 1817758.17,
       "abc": "A",
       "pct_of_total": 0.6897,
-      "rank": 14
+      "rank": 6
     },
     {
       "product": "SHARJVAX 1500 I.U. / 0.7ML",
@@ -530,6 +458,78 @@
       "income": 662670.0,
       "abc": "A",
       "pct_of_total": 0.6886,
+      "rank": 7
+    },
+    {
+      "product": "ALBUMINAR-20 20% 50ML",
+      "revenue": 1400000.0,
+      "qty": 1000.0,
+      "income": 1297000.0,
+      "abc": "A",
+      "pct_of_total": 0.6884,
+      "rank": 8
+    },
+    {
+      "product": "HAIXONE WITH DILUENT 1G",
+      "revenue": 1393964.0,
+      "qty": 53614.0,
+      "income": 1345981.8,
+      "abc": "A",
+      "pct_of_total": 0.6855,
+      "rank": 9
+    },
+    {
+      "product": "ENOXAGET-40 40MG/0.4ML",
+      "revenue": 1372800.0,
+      "qty": 2145.0,
+      "income": 1285798.8,
+      "abc": "A",
+      "pct_of_total": 0.675,
+      "rank": 10
+    },
+    {
+      "product": "BUPIRIGHT AMPULE",
+      "revenue": 1331325.0,
+      "qty": 7232.0,
+      "income": 3379911.74,
+      "abc": "A",
+      "pct_of_total": 0.6547,
+      "rank": 11
+    },
+    {
+      "product": "TROYNOXA-60 60MG/0.6ML",
+      "revenue": 1119080.0,
+      "qty": 2770.0,
+      "income": 1767952.5,
+      "abc": "A",
+      "pct_of_total": 0.5503,
+      "rank": 12
+    },
+    {
+      "product": "VOLUMETRIC SOLUTION INFUSION SET 150ML (POLYVOL)",
+      "revenue": 1116000.0,
+      "qty": 7200.0,
+      "income": 405144.0,
+      "abc": "A",
+      "pct_of_total": 0.5488,
+      "rank": 13
+    },
+    {
+      "product": "ZINACARE 750MG W/ DILUENT",
+      "revenue": 1094600.0,
+      "qty": 42100.0,
+      "income": 1004120.0,
+      "abc": "A",
+      "pct_of_total": 0.5382,
+      "rank": 14
+    },
+    {
+      "product": "EVAPROST 250MCG/ML IV",
+      "revenue": 1018875.0,
+      "qty": 285.0,
+      "income": 637090.0,
+      "abc": "A",
+      "pct_of_total": 0.501,
       "rank": 15
     }
   ],

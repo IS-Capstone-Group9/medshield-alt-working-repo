@@ -105,54 +105,29 @@ def area_info(area: object, mapping: dict[str, dict[str, str]]) -> dict[str, str
     }
 
 def classify_product_is_medicine(product_name: str) -> tuple[bool, str]:
-    import re
     p_lower = str(product_name or "").strip().lower()
     if not p_lower:
-        return True, ""
+        return True, "Medicine"
     if "#" in p_lower:
         return False, "contract"
 
-    # Non-medical patterns (match word boundaries or specific suffixes)
-    non_med_patterns = [
-        r'\bballpen\b', r'\btape\b', r'\bshirt\b', r'\bpaper\b', r'\bclear\s+book\b',
-        r'\bstaple\b', r'\bink\b', r'\brecord\s+book\b', r'\btrash\s+bag\b', r'\bpen\b',
-        r'\benvelope\b', r'\bfolder\b', r'\bpencil\b', r'\bmarker\b', r'\bglue\b',
-        r'\bscissors\b', r'\bruler\b', r'\bclip\b', r'\bnotebook\b', r'\bt-shirt\b',
-        r'\bstamp\b', r'\bsticker\b', r'\bhighlighter\b', r'\beraser\b', r'\bpush\s+pin\b',
-        r'\bwhiteboard\b', r'\bcalculator\b', r'\bmarker\s+ink\b'
-    ]
+    office_supply_terms = ["pen", "paper", "folder", "tape"]
+    medical_whitelist = ["bandage", "syringe", "penicillin", "pent", "penem", "pen-"]
 
-    # Medical exclusions: if these words are present, it is a medical item
-    medical_keywords = [
-        'bandage', 'autoclave', 'surgical', 'injection', 'infusion', 'tube',
-        'catheter', 'syringe', 'needle', 'dialysis', 'cannula', 'cotton',
-        'gauze', 'gloves', 'mask', 'thermometer', 'plaster', 'cautery', 'ecg'
-    ]
+    has_office = any(term in p_lower for term in office_supply_terms)
+    if has_office:
+        has_whitelist = any(white in p_lower for white in medical_whitelist)
+        if not has_whitelist:
+            return False, "Non-Medical Operational Item"
+        else:
+            if "bandage" in p_lower or "syringe" in p_lower:
+                return True, "Medical Supply"
+            return True, "Medicine"
 
-    # Specific medicine exclusions (e.g. penicillin, pent, penem)
-    medicine_indicators = ['penicillin', 'pent', 'penem', 'pen-']
-
-    is_non_med = False
-    for pat in non_med_patterns:
-        if re.search(pat, p_lower):
-            is_non_med = True
-            break
-
-    if is_non_med:
-        # Check if it has any medical indicators
-        if any(m_word in p_lower for m_word in medical_keywords):
-            return True, "medical_supplies"
-        if any(med_ind in p_lower for med_ind in medicine_indicators):
-            return True, "medicine"
-        
-        # Category mapping
-        if "shirt" in p_lower or "t-shirt" in p_lower:
-            return False, "promotional"
-        if "trash bag" in p_lower:
-            return False, "supplies"
-        return False, "office_supplies"
-
-    return True, "medicine"
+    medical_supplies_terms = ["bandage", "syringe", "needle", "catheter", "gauze", "gloves", "mask", "tube"]
+    if any(term in p_lower for term in medical_supplies_terms):
+        return True, "Medical Supply"
+    return True, "Medicine"
 
 
 def enrich_rows(
@@ -165,9 +140,14 @@ def enrich_rows(
         parsed = parse_date(row.get("date_delivered"))
         if not parsed:
             continue
-        if row.get("quality_status") == "rejected" or row.get("sales_acceptance_status") not in ("", "accepted_clean_sales", None):
-            if row.get("sales_acceptance_status") != "accepted_clean_sales":
-                continue
+        # Ingestion & Quality Gatekeeper constraints
+        if parsed.year < 2017:
+            continue
+        if row.get("quality_status") == "rejected":
+            continue
+        sas = row.get("sales_acceptance_status")
+        if sas not in (None, "", "accepted_clean_sales"):
+            continue
 
         info = area_info(row.get("area"), area_mapping)
         prod_text = str(row.get("product") or "").strip()
@@ -176,11 +156,14 @@ def enrich_rows(
         item["period"] = parsed.strftime("%Y-%m")
         item["calendar_year"] = parsed.year
         item["calendar_month"] = f"{parsed.month:02d}"
-        # Isolate margin anomalies at individual transaction level
+        
+        # Gross Margin Anomalies - cap/flag anomalies
         net_inc = safe_float(row.get("net_income"))
         tot_trade = safe_float(row.get("total_trade_price"))
         item["original_net_income"] = net_inc
-        if net_inc > tot_trade or net_inc < 0:
+        is_anomaly = (net_inc < 0) or (net_inc > tot_trade)
+        item["is_margin_anomaly"] = is_anomaly
+        if is_anomaly:
             item["net_income"] = max(0.0, min(net_inc, tot_trade))
         else:
             item["net_income"] = net_inc
@@ -195,14 +178,17 @@ def enrich_rows(
         item["area_weather_eligible"] = info.get("weather_eligible", "false")
         item["is_estimated_contract_allocation"] = item.get("allocation_status") == "estimated_backward_allocation"
         item["is_estimated_date"] = str(item.get("date_is_estimated", "")).lower() == "true"
+        
         # Product Enrichment
         if prod_info:
             item["is_medicine"] = str(prod_info.get("is_medicine", "true")).lower() == "true"
+            item["is_service_contract"] = str(prod_info.get("is_service_contract", "false")).lower() == "true" or "#" in prod_text
             item["product_category"] = prod_info.get("product_category", "")
             item["product_mapping_status"] = prod_info.get("mapping_status", "approved")
         else:
             is_med, category = classify_product_is_medicine(prod_text)
             item["is_medicine"] = is_med
+            item["is_service_contract"] = category == "contract" or "#" in prod_text
             item["product_category"] = category
             item["product_mapping_status"] = "auto_classified"
         enriched.append(item)
@@ -221,6 +207,8 @@ def aggregate(rows: list[dict[str, Any]], keys: tuple[str, ...]) -> list[dict[st
                 "estimated_date_rows": 0,
                 "unique_products": set(),
                 "unique_dr_numbers": set(),
+                "net_income_clean": 0.0,
+                "revenue_clean": 0.0,
             }
             for field in ADDITIVE_FIELDS:
                 grouped[key][field] = 0.0
@@ -234,14 +222,18 @@ def aggregate(rows: list[dict[str, Any]], keys: tuple[str, ...]) -> list[dict[st
         for field in ADDITIVE_FIELDS:
             group[field] += safe_float(row.get(field))
 
+        if not row.get("is_margin_anomaly"):
+            group["net_income_clean"] += safe_float(row.get("net_income"))
+            group["revenue_clean"] += safe_float(row.get("total_trade_price"))
+
     output: list[dict[str, Any]] = []
     for group in grouped.values():
         group["unique_products"] = len({value for value in group["unique_products"] if value})
         group["unique_dr_numbers"] = len({value for value in group["unique_dr_numbers"] if value})
         group["gross_margin_rate"] = (
-            round_num(group["net_income"] / group["total_trade_price"], 6)
-            if group["total_trade_price"]
-            else 0
+            round_num(group["net_income_clean"] / group["revenue_clean"], 6)
+            if group["revenue_clean"]
+            else 0.0
         )
         for field in ADDITIVE_FIELDS:
             group[field] = round_num(group[field], 4)
@@ -265,6 +257,8 @@ def abc_pareto(rows: list[dict[str, Any]], group_field: str, output_field: str) 
                 "row_count": 0,
                 "active_months": set(),
                 "estimated_contract_rows": 0,
+                "net_income_clean": 0.0,
+                "revenue_clean": 0.0,
             }
         item = grouped[key]
         item["quantity"] += safe_float(row.get("quantity"))
@@ -273,6 +267,10 @@ def abc_pareto(rows: list[dict[str, Any]], group_field: str, output_field: str) 
         item["row_count"] += 1
         item["active_months"].add(row["period"])
         item["estimated_contract_rows"] += 1 if row.get("is_estimated_contract_allocation") else 0
+
+        if not row.get("is_margin_anomaly"):
+            item["net_income_clean"] += safe_float(row.get("net_income"))
+            item["revenue_clean"] += safe_float(row.get("total_trade_price"))
 
     total_revenue = sum(item["revenue"] for item in grouped.values()) or 1.0
     ranked = sorted(grouped.values(), key=lambda item: item["revenue"], reverse=True)
@@ -285,9 +283,9 @@ def abc_pareto(rows: list[dict[str, Any]], group_field: str, output_field: str) 
         item["revenue"] = round_num(item["revenue"], 4)
         item["gross_margin_amount"] = round_num(item["gross_margin_amount"], 4)
         item["gross_margin_rate"] = (
-            round_num(item["gross_margin_amount"] / item["revenue"], 6)
-            if item["revenue"]
-            else 0
+            round_num(item["net_income_clean"] / item["revenue_clean"], 6)
+            if item["revenue_clean"]
+            else 0.0
         )
         item["revenue_share"] = round_num(item["revenue"] / total_revenue, 6)
         item["cumulative_revenue_share"] = round_num(cumulative_share, 6)
@@ -307,7 +305,8 @@ def seasonality(rows: list[dict[str, Any]], scope_field: str | None = None) -> l
     output: list[dict[str, Any]] = []
     for scope, values_by_month in by_scope.items():
         all_values = [value for values in values_by_month.values() for value in values]
-        baseline = statistics.mean(all_values) if all_values else 0.0
+        # Baseline (B) = Sum of Q / N where N = 108 months in training period 2017-2025
+        baseline = sum(all_values) / 108.0 if all_values else 0.0
         if baseline <= 0:
             continue
         month_indexes = {}
@@ -338,6 +337,7 @@ def yoy_growth(monthly_rows: list[dict[str, Any]], keys: tuple[str, ...] = ()) -
         prior_period = f"{current_year - 1}-{str(row['period'])[5:7]}"
         prior = lookup.get(tuple(row.get(key, "") for key in keys) + (prior_period,))
         result = {key: row.get(key, "") for key in keys}
+        is_partial = str(row["period"]).startswith("2025") and int(str(row["period"])[5:7]) >= 7
         result.update({
             "period": row["period"],
             "prior_period": prior_period,
@@ -349,6 +349,7 @@ def yoy_growth(monthly_rows: list[dict[str, Any]], keys: tuple[str, ...] = ()) -
             "quantity_yoy_growth": round_num((row["quantity"] - prior["quantity"]) / prior["quantity"], 6) if prior and prior["quantity"] else "",
             "revenue_yoy_growth": round_num((row["total_trade_price"] - prior["total_trade_price"]) / prior["total_trade_price"], 6) if prior and prior["total_trade_price"] else "",
             "is_2025_partial": str(row["period"]).startswith("2025"),
+            "is_partial_period": is_partial,
         })
         output.append(result)
     return output
@@ -404,6 +405,12 @@ def build_summary(rows: list[dict[str, Any]], product_abc: list[dict[str, Any]],
     dates = sorted(str(row["date_delivered"]) for row in rows)
     total_revenue = sum(safe_float(row.get("total_trade_price")) for row in rows)
     total_gross_margin = sum(safe_float(row.get("net_income")) for row in rows)
+    
+    # Calculate company-wide margin rate excluding anomalous records
+    clean_rev = sum(safe_float(row.get("total_trade_price")) for row in rows if not row.get("is_margin_anomaly"))
+    clean_margin = sum(safe_float(row.get("net_income")) for row in rows if not row.get("is_margin_anomaly"))
+    gross_margin_rate = round_num(clean_margin / clean_rev, 6) if clean_rev else 0.0
+
     gross_margin_exceeds_revenue_rows = sum(
         1
         for row in rows
@@ -423,7 +430,7 @@ def build_summary(rows: list[dict[str, Any]], product_abc: list[dict[str, Any]],
         "total_quantity": round_num(sum(safe_float(row.get("quantity")) for row in rows), 4),
         "total_revenue": round_num(total_revenue, 4),
         "total_gross_margin": round_num(total_gross_margin, 4),
-        "gross_margin_rate": round_num(total_gross_margin / total_revenue, 6) if total_revenue else 0,
+        "gross_margin_rate": gross_margin_rate,
         "unique_products": len({row.get("product") for row in rows if row.get("product")}),
         "unique_areas": len({row.get("area") for row in rows if row.get("area")}),
         "estimated_contract_rows": sum(1 for row in rows if row.get("is_estimated_contract_allocation")),
@@ -475,6 +482,11 @@ def run(sales_path: Path, area_mapping_path: Path, product_mapping_path: Path, o
     product_abc = abc_pareto(medical_rows, "product", "product")
     non_medical_abc = abc_pareto(non_medical_rows, "product", "product")
     area_abc = abc_pareto(territory_rows, "territory", "area")
+    
+    # Customer Concentration
+    customer_rows = [row for row in rows if row.get("area_type") == "customer_type"]
+    customer_abc = abc_pareto(customer_rows, "standard_area", "customer_channel")
+
     seasonality_overall = seasonality(monthly_trends)
     seasonality_territory = seasonality(aggregate(territory_rows, ("period", "territory")), "territory")
     yoy_overall = yoy_growth(monthly_trends)
@@ -489,6 +501,7 @@ def run(sales_path: Path, area_mapping_path: Path, product_mapping_path: Path, o
     write_csv(output_dir / "descriptive_product_abc_pareto.csv", product_abc)
     write_csv(output_dir / "descriptive_non_medical_abc_pareto.csv", non_medical_abc)
     write_csv(output_dir / "descriptive_territory_abc_pareto.csv", area_abc)
+    write_csv(output_dir / "descriptive_customer_concentration.csv", customer_abc)
     write_csv(output_dir / "descriptive_seasonality_overall.csv", seasonality_overall)
     write_csv(output_dir / "descriptive_seasonality_territory.csv", seasonality_territory)
     write_csv(output_dir / "descriptive_yoy_overall.csv", yoy_overall)

@@ -3,13 +3,14 @@ import json
 from pathlib import Path
 
 # Paths
-outputs_root = Path(r"c:\Users\Ethan\medshield-ver-23\outputs")
+ROOT_DIR = Path(__file__).resolve().parent.parent
+outputs_root = ROOT_DIR / "outputs"
 descriptive_dirs = sorted(list(outputs_root.glob("descriptive_analytics_*")))
 if not descriptive_dirs:
     raise FileNotFoundError("No descriptive_analytics_* directories found in outputs/")
 OUTPUT_DIR = descriptive_dirs[-1]
 print(f"Dynamically selected latest descriptive output directory: {OUTPUT_DIR.name}")
-FRONTEND_JSON = Path(r"c:\Users\Ethan\medshield-ver-23\frontend\public\data\sales_data.json")
+FRONTEND_JSON = ROOT_DIR / "frontend" / "public" / "data" / "sales_data.json"
 
 def load_csv(name):
     path = OUTPUT_DIR / name
