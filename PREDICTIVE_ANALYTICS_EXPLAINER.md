@@ -35,6 +35,12 @@ This explainer outlines the mathematical models, data integration pathways, and 
      * **Moderate Risk ($40\% \le RSI < 44\%$)**: Triggers mild demand adjustments for vitamins and OTC flu medications.
      * **High Risk ($RSI \ge 45\%$)**: Triggers higher adjustments for antibiotics and anti-leptospirosis medications.
      * *Real-world Case*: If **Batangas** registers an RSI of 48% (High Risk) for July, it triggers a warning flag and scales demand estimates for matched items like **MONOWEL 1G IV**.
+  5. **Disease Data Fallback & Seasonality Logic**: In the absence of live DOH API feeds, resolve disease intensity regressors using a Weather-Seasonal Boolean mapping rule:
+     * Define the seasonal surge boolean $is\_seasonal\_surge\_active(r, d, t)$:
+       $$is\_seasonal\_surge\_active(r, d, t) = (RSI(r, t) \ge 45\%) \land (month(t) \in seasonal\_months(d))$$
+     * Assign a baseline index fallback value if no manual DOH data upload exists:
+       $$DII_{fallback} = \begin{cases} 1.5, & \text{if } is\_seasonal\_surge\_active = \text{True} \\ 1.0, & \text{if } is\_seasonal\_surge\_active = \text{False} \end{cases}$$
+     * *Real-world Case*: For **Dengue** (where $seasonal\_months = [\text{June}, \text{July}, \text{August}, \text{September}, \text{October}]$), if a forecast run for **Quezon** in August has no DOH upload but has a high weather risk ($RSI = 46\%$), $is\_seasonal\_surge\_active$ evaluates to **True**, and the model applies a fallback DII of **1.5** to simulate the outbreak regressor.
 
 ---
 
