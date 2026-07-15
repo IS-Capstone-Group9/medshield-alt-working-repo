@@ -8,10 +8,12 @@ This explainer outlines the mathematical models, data integration pathways, and 
 * **Goal**: Establish the sequential correlation patterns connecting meteorological triggers to disease surges and corresponding therapeutic medicine demand.
 * **The Process**:
   1. **Meteorological Trigger Assessment**: The system monitors monthly weather and climate signals (such as rainfall probability, wind flags, and temperature deviations) as the leading environmental indicator.
+     * *Example*: The Rainfall Severity Index (RSI) for the **Batangas** territory rises above 45% during the monsoon season.
   2. **Epidemiological Shift Detection**: Elevated meteorological risks are mapped to disease transmission vectors and infection rates (measured via the Disease Intensity Indicator).
+     * *Example*: The standing water from heavy rainfall in **Batangas** correlates with a surge in **Dengue** and **Leptospirosis** cases.
   3. **Therapeutic Demand Mapping**: Verified disease surges trigger localized planning lifts for specific categories of pharmaceuticals:
      * **Dengue surges** trigger adjustments for Antipyretics (Paracetamol) and Intravenous (IV) fluids.
-     * **Leptospirosis surges** trigger adjustments for Antibiotics (Doxycycline) and anti-leptospirosis medications.
+     * **Leptospirosis surges** trigger adjustments for Antibiotics (like **MONOWEL 1G IV** or Doxycycline) and anti-leptospirosis medications.
      * **Influenza/Respiratory surges** trigger adjustments for Cough/cold medications, antihistamines, and vitamins.
 
 ---
@@ -22,13 +24,17 @@ This explainer outlines the mathematical models, data integration pathways, and 
   1. **DII Calculation**: Group raw weekly case counts from DOH by region $r$ and disease $d$ for time period $t$, and divide by the monthly historical baseline average:
      $$DII(r, d, t) = \frac{Cases(r, d, t)}{AvgCases(r, d)}$$
      where $AvgCases(r, d)$ is computed from the 2021–2025 baseline period.
+     * *Real-world Case*: In **Quezon** during September, if there are 240 reported Dengue cases, and the historical baseline average for September in Quezon is 100 cases, the $DII(\text{Quezon}, \text{Dengue}, \text{September})$ is calculated as:
+       $$DII = \frac{240}{100} = 2.4$$
   2. **Temporal Lag Application**: Apply a lag factor $k$ (expressed in weeks or months based on replenishment cycles) to align disease triggers with procurement lead times:
      $$DII_{lag}(r, d, t) = DII(r, d, t - k)$$
+     * *Real-world Case*: With a 1-month procurement lag ($k = 1$), the $DII_{lag}$ for October demand planning is set to the September DII of 2.4.
   3. **RSI Cross-Validation**: Cross-check PAGASA probabilistic rainfall forecasts against historical daily readings from independent weather archives (NASA POWER/Open-Meteo).
   4. **RSI Risk Classification**: Compute the probability of above-normal rainfall ($RSI(r, t) = P(\text{above-normal rainfall} \mid r, t)$) and categorize into discrete risk tiers:
      * **Low Risk ($RSI < 40\%$)**: No demand modifications.
      * **Moderate Risk ($40\% \le RSI < 44\%$)**: Triggers mild demand adjustments for vitamins and OTC flu medications.
      * **High Risk ($RSI \ge 45\%$)**: Triggers higher adjustments for antibiotics and anti-leptospirosis medications.
+     * *Real-world Case*: If **Batangas** registers an RSI of 48% (High Risk) for July, it triggers a warning flag and scales demand estimates for matched items like **MONOWEL 1G IV**.
 
 ---
 
@@ -41,7 +47,9 @@ This explainer outlines the mathematical models, data integration pathways, and 
   4. **Forecast Inference**: Execute the Prophet model to compute the expected demand quantity $y(t)$:
      $$y(t) = g(t) + s(t) + h(t) + \beta_1 \cdot DII_{lag}(r, d, t) + \beta_2 \cdot RSI(r, t) + \epsilon_t$$
      where $\beta_1$ and $\beta_2$ are coefficients estimated from the training data.
-  5. **Baseline Model Fallback**: If external API feeds are missing, set regression coefficients $\beta_1$ and $\beta_2$ to zero to generate a purely historical sales-only baseline forecast.
+     * *Real-world Case*: If the baseline monthly forecast for **MONOWEL 1G IV** in **Quezon** is 500 units ($g(t) + s(t) + h(t) = 500$), and the model estimates $\beta_1 = 30$ and $\beta_2 = 120$:
+       $$y(\text{Oct}) = 500 + 30 \cdot 2.4 \text{ (DII Dengue Lag)} + 120 \cdot 1.0 \text{ (High RSI Flag)} = 692 \text{ units}$$
+  5. **Baseline Model Fallback**: If external API feeds are missing, set regression coefficients $\beta_1$ and $\beta_2$ to zero to generate a purely historical sales-only baseline forecast of 500 units.
 
 ---
 
@@ -51,8 +59,12 @@ This explainer outlines the mathematical models, data integration pathways, and 
   1. **Feature Vector Assembly**: For each product $i$, construct a feature vector $x_i$:
      $$x_i = [SalesVolume_i, RevenueContribution_i, CVdemand_i, TherapeuticCategory_i, DIIscore_i, RSIflag_i]$$
      incorporating average monthly sales, Pareto revenue share, demand volatility (coefficient of variation), therapeutic group, active regional disease score, and rainfall risk flags.
+     * *Real-world Case*: For **SPEEDA 2.5IU/0.5ML** (Rabies vaccine, Rank 15 in overall sales):
+       $$x_{\text{SPEEDA}} = [425.0 \text{ units/mo}, 0.009072 \text{ rev\_share}, 0.35 \text{ volatility}, \text{Vaccines}, 1.2 \text{ DII}, 0.0 \text{ RSI}]$$
   2. **Supervised ABC Classification Training**: Train the XGBoost supervised classifier using the historical Pareto classification (A: top 80% cumulative share, B: 80–95%, C: bottom 5%) of established products.
+     * *Real-world Case*: High-revenue medicines like **MONOWEL 1G IV** (Rank 1, 2.6% share) and **SPEEDA 2.5IU/0.5ML** (Rank 15, 0.9% share) are labeled as Class A to train the model.
   3. **ABC Priority Inference**: Pass feature vectors of new or low-history ("cold-start") products through the trained classifier to predict their A, B, or C category.
+     * *Real-world Case*: A newly introduced rabies vaccine variant with only 2 months of history is classified as **Class A** based on its feature similarity to **SPEEDA 2.5IU/0.5ML**.
   4. **Urgency Score Computation**: Evaluate the product features using the gradient boosting ensemble of regression trees to output a continuous numerical Demand Urgency Score:
      $$Score(i) = \sum f_k(x_i), \quad f_k \in F$$
      where $f_k$ represents individual trees in the ensemble $F$, flagging high-risk products needing immediate review.
