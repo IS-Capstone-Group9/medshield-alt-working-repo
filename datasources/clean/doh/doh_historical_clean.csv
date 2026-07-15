@@ -1,0 +1,1441 @@
+date,year,month,region,province_city,disease_name,case_count,death_count,population,disease_intensity_indicator,source,source_file,notes
+2021-01-01,2021,1,Region IV-A,Batangas,Dengue,39,0,1000000,0.39,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-01-01,2021,1,Region IV-A,Batangas,Leptospirosis,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-01-01,2021,1,Region IV-A,Batangas,Influenza,138,2,1000000,1.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-01-01,2021,1,Region IV-A,Quezon,Dengue,48,0,1000000,0.48,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-01-01,2021,1,Region IV-A,Quezon,Leptospirosis,48,0,1000000,0.48,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-01-01,2021,1,Region IV-A,Quezon,Influenza,113,0,1000000,1.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-01-01,2021,1,MIMAROPA,Marinduque,Dengue,25,0,1000000,0.25,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-01-01,2021,1,MIMAROPA,Marinduque,Leptospirosis,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-01-01,2021,1,MIMAROPA,Marinduque,Influenza,186,2,1000000,1.86,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-01-01,2021,1,Region V,Camarines Norte,Dengue,22,0,1000000,0.22,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-01-01,2021,1,Region V,Camarines Norte,Leptospirosis,16,0,1000000,0.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-01-01,2021,1,Region V,Camarines Norte,Influenza,195,1,1000000,1.95,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-01-01,2021,1,Region V,Camarines Sur,Dengue,28,0,1000000,0.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-01-01,2021,1,Region V,Camarines Sur,Leptospirosis,32,0,1000000,0.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-01-01,2021,1,Region V,Camarines Sur,Influenza,102,0,1000000,1.02,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-01-01,2021,1,Region IV-A,Cavite,Dengue,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-01-01,2021,1,Region IV-A,Cavite,Leptospirosis,47,0,1000000,0.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-01-01,2021,1,Region IV-A,Cavite,Influenza,161,2,1000000,1.61,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-01-01,2021,1,Region IV-A,Laguna,Dengue,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-01-01,2021,1,Region IV-A,Laguna,Leptospirosis,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-01-01,2021,1,Region IV-A,Laguna,Influenza,138,0,1000000,1.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-01-01,2021,1,Region V,Albay,Dengue,39,0,1000000,0.39,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-01-01,2021,1,Region V,Albay,Leptospirosis,46,0,1000000,0.46,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-01-01,2021,1,Region V,Albay,Influenza,181,2,1000000,1.81,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-02-01,2021,2,Region IV-A,Batangas,Dengue,41,0,1000000,0.41,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-02-01,2021,2,Region IV-A,Batangas,Leptospirosis,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-02-01,2021,2,Region IV-A,Batangas,Influenza,109,1,1000000,1.09,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-02-01,2021,2,Region IV-A,Quezon,Dengue,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-02-01,2021,2,Region IV-A,Quezon,Leptospirosis,14,0,1000000,0.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-02-01,2021,2,Region IV-A,Quezon,Influenza,168,2,1000000,1.68,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-02-01,2021,2,MIMAROPA,Marinduque,Dengue,16,0,1000000,0.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-02-01,2021,2,MIMAROPA,Marinduque,Leptospirosis,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-02-01,2021,2,MIMAROPA,Marinduque,Influenza,136,1,1000000,1.36,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-02-01,2021,2,Region V,Camarines Norte,Dengue,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-02-01,2021,2,Region V,Camarines Norte,Leptospirosis,34,0,1000000,0.34,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-02-01,2021,2,Region V,Camarines Norte,Influenza,116,1,1000000,1.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-02-01,2021,2,Region V,Camarines Sur,Dengue,14,0,1000000,0.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-02-01,2021,2,Region V,Camarines Sur,Leptospirosis,16,0,1000000,0.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-02-01,2021,2,Region V,Camarines Sur,Influenza,186,1,1000000,1.86,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-02-01,2021,2,Region IV-A,Cavite,Dengue,31,0,1000000,0.31,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-02-01,2021,2,Region IV-A,Cavite,Leptospirosis,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-02-01,2021,2,Region IV-A,Cavite,Influenza,200,0,1000000,2.0,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-02-01,2021,2,Region IV-A,Laguna,Dengue,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-02-01,2021,2,Region IV-A,Laguna,Leptospirosis,28,0,1000000,0.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-02-01,2021,2,Region IV-A,Laguna,Influenza,104,1,1000000,1.04,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-02-01,2021,2,Region V,Albay,Dengue,26,0,1000000,0.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-02-01,2021,2,Region V,Albay,Leptospirosis,43,0,1000000,0.43,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-02-01,2021,2,Region V,Albay,Influenza,154,0,1000000,1.54,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-03-01,2021,3,Region IV-A,Batangas,Dengue,48,0,1000000,0.48,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-03-01,2021,3,Region IV-A,Batangas,Leptospirosis,10,0,1000000,0.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-03-01,2021,3,Region IV-A,Batangas,Influenza,48,0,1000000,0.48,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-03-01,2021,3,Region IV-A,Quezon,Dengue,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-03-01,2021,3,Region IV-A,Quezon,Leptospirosis,26,0,1000000,0.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-03-01,2021,3,Region IV-A,Quezon,Influenza,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-03-01,2021,3,MIMAROPA,Marinduque,Dengue,15,0,1000000,0.15,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-03-01,2021,3,MIMAROPA,Marinduque,Leptospirosis,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-03-01,2021,3,MIMAROPA,Marinduque,Influenza,33,0,1000000,0.33,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-03-01,2021,3,Region V,Camarines Norte,Dengue,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-03-01,2021,3,Region V,Camarines Norte,Leptospirosis,39,0,1000000,0.39,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-03-01,2021,3,Region V,Camarines Norte,Influenza,41,0,1000000,0.41,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-03-01,2021,3,Region V,Camarines Sur,Dengue,30,0,1000000,0.3,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-03-01,2021,3,Region V,Camarines Sur,Leptospirosis,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-03-01,2021,3,Region V,Camarines Sur,Influenza,21,0,1000000,0.21,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-03-01,2021,3,Region IV-A,Cavite,Dengue,23,0,1000000,0.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-03-01,2021,3,Region IV-A,Cavite,Leptospirosis,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-03-01,2021,3,Region IV-A,Cavite,Influenza,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-03-01,2021,3,Region IV-A,Laguna,Dengue,19,0,1000000,0.19,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-03-01,2021,3,Region IV-A,Laguna,Leptospirosis,44,0,1000000,0.44,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-03-01,2021,3,Region IV-A,Laguna,Influenza,14,0,1000000,0.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-03-01,2021,3,Region V,Albay,Dengue,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-03-01,2021,3,Region V,Albay,Leptospirosis,17,0,1000000,0.17,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-03-01,2021,3,Region V,Albay,Influenza,20,0,1000000,0.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-04-01,2021,4,Region IV-A,Batangas,Dengue,43,0,1000000,0.43,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-04-01,2021,4,Region IV-A,Batangas,Leptospirosis,26,0,1000000,0.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-04-01,2021,4,Region IV-A,Batangas,Influenza,30,0,1000000,0.3,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-04-01,2021,4,Region IV-A,Quezon,Dengue,36,0,1000000,0.36,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-04-01,2021,4,Region IV-A,Quezon,Leptospirosis,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-04-01,2021,4,Region IV-A,Quezon,Influenza,31,0,1000000,0.31,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-04-01,2021,4,MIMAROPA,Marinduque,Dengue,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-04-01,2021,4,MIMAROPA,Marinduque,Leptospirosis,10,0,1000000,0.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-04-01,2021,4,MIMAROPA,Marinduque,Influenza,46,0,1000000,0.46,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-04-01,2021,4,Region V,Camarines Norte,Dengue,11,0,1000000,0.11,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-04-01,2021,4,Region V,Camarines Norte,Leptospirosis,26,0,1000000,0.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-04-01,2021,4,Region V,Camarines Norte,Influenza,21,0,1000000,0.21,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-04-01,2021,4,Region V,Camarines Sur,Dengue,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-04-01,2021,4,Region V,Camarines Sur,Leptospirosis,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-04-01,2021,4,Region V,Camarines Sur,Influenza,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-04-01,2021,4,Region IV-A,Cavite,Dengue,37,0,1000000,0.37,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-04-01,2021,4,Region IV-A,Cavite,Leptospirosis,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-04-01,2021,4,Region IV-A,Cavite,Influenza,48,0,1000000,0.48,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-04-01,2021,4,Region IV-A,Laguna,Dengue,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-04-01,2021,4,Region IV-A,Laguna,Leptospirosis,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-04-01,2021,4,Region IV-A,Laguna,Influenza,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-04-01,2021,4,Region V,Albay,Dengue,16,0,1000000,0.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-04-01,2021,4,Region V,Albay,Leptospirosis,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-04-01,2021,4,Region V,Albay,Influenza,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-05-01,2021,5,Region IV-A,Batangas,Dengue,27,0,1000000,0.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-05-01,2021,5,Region IV-A,Batangas,Leptospirosis,45,0,1000000,0.45,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-05-01,2021,5,Region IV-A,Batangas,Influenza,37,0,1000000,0.37,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-05-01,2021,5,Region IV-A,Quezon,Dengue,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-05-01,2021,5,Region IV-A,Quezon,Leptospirosis,23,0,1000000,0.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-05-01,2021,5,Region IV-A,Quezon,Influenza,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-05-01,2021,5,MIMAROPA,Marinduque,Dengue,32,0,1000000,0.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-05-01,2021,5,MIMAROPA,Marinduque,Leptospirosis,45,0,1000000,0.45,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-05-01,2021,5,MIMAROPA,Marinduque,Influenza,47,0,1000000,0.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-05-01,2021,5,Region V,Camarines Norte,Dengue,25,0,1000000,0.25,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-05-01,2021,5,Region V,Camarines Norte,Leptospirosis,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-05-01,2021,5,Region V,Camarines Norte,Influenza,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-05-01,2021,5,Region V,Camarines Sur,Dengue,37,0,1000000,0.37,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-05-01,2021,5,Region V,Camarines Sur,Leptospirosis,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-05-01,2021,5,Region V,Camarines Sur,Influenza,47,0,1000000,0.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-05-01,2021,5,Region IV-A,Cavite,Dengue,31,0,1000000,0.31,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-05-01,2021,5,Region IV-A,Cavite,Leptospirosis,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-05-01,2021,5,Region IV-A,Cavite,Influenza,11,0,1000000,0.11,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-05-01,2021,5,Region IV-A,Laguna,Dengue,10,0,1000000,0.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-05-01,2021,5,Region IV-A,Laguna,Leptospirosis,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-05-01,2021,5,Region IV-A,Laguna,Influenza,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-05-01,2021,5,Region V,Albay,Dengue,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-05-01,2021,5,Region V,Albay,Leptospirosis,20,0,1000000,0.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-05-01,2021,5,Region V,Albay,Influenza,33,0,1000000,0.33,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-06-01,2021,6,Region IV-A,Batangas,Dengue,20,0,1000000,0.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-06-01,2021,6,Region IV-A,Batangas,Leptospirosis,31,0,1000000,0.31,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-06-01,2021,6,Region IV-A,Batangas,Influenza,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-06-01,2021,6,Region IV-A,Quezon,Dengue,10,0,1000000,0.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-06-01,2021,6,Region IV-A,Quezon,Leptospirosis,19,0,1000000,0.19,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-06-01,2021,6,Region IV-A,Quezon,Influenza,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-06-01,2021,6,MIMAROPA,Marinduque,Dengue,44,0,1000000,0.44,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-06-01,2021,6,MIMAROPA,Marinduque,Leptospirosis,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-06-01,2021,6,MIMAROPA,Marinduque,Influenza,39,0,1000000,0.39,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-06-01,2021,6,Region V,Camarines Norte,Dengue,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-06-01,2021,6,Region V,Camarines Norte,Leptospirosis,30,0,1000000,0.3,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-06-01,2021,6,Region V,Camarines Norte,Influenza,34,0,1000000,0.34,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-06-01,2021,6,Region V,Camarines Sur,Dengue,46,0,1000000,0.46,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-06-01,2021,6,Region V,Camarines Sur,Leptospirosis,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-06-01,2021,6,Region V,Camarines Sur,Influenza,30,0,1000000,0.3,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-06-01,2021,6,Region IV-A,Cavite,Dengue,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-06-01,2021,6,Region IV-A,Cavite,Leptospirosis,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-06-01,2021,6,Region IV-A,Cavite,Influenza,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-06-01,2021,6,Region IV-A,Laguna,Dengue,43,0,1000000,0.43,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-06-01,2021,6,Region IV-A,Laguna,Leptospirosis,11,0,1000000,0.11,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-06-01,2021,6,Region IV-A,Laguna,Influenza,36,0,1000000,0.36,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-06-01,2021,6,Region V,Albay,Dengue,10,0,1000000,0.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-06-01,2021,6,Region V,Albay,Leptospirosis,10,0,1000000,0.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-06-01,2021,6,Region V,Albay,Influenza,16,0,1000000,0.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-07-01,2021,7,Region IV-A,Batangas,Dengue,177,3,1000000,1.77,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-07-01,2021,7,Region IV-A,Batangas,Leptospirosis,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-07-01,2021,7,Region IV-A,Batangas,Influenza,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-07-01,2021,7,Region IV-A,Quezon,Dengue,310,4,1000000,3.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-07-01,2021,7,Region IV-A,Quezon,Leptospirosis,21,0,1000000,0.21,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-07-01,2021,7,Region IV-A,Quezon,Influenza,39,0,1000000,0.39,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-07-01,2021,7,MIMAROPA,Marinduque,Dengue,259,3,1000000,2.59,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-07-01,2021,7,MIMAROPA,Marinduque,Leptospirosis,39,0,1000000,0.39,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-07-01,2021,7,MIMAROPA,Marinduque,Influenza,25,0,1000000,0.25,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-07-01,2021,7,Region V,Camarines Norte,Dengue,202,2,1000000,2.02,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-07-01,2021,7,Region V,Camarines Norte,Leptospirosis,34,0,1000000,0.34,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-07-01,2021,7,Region V,Camarines Norte,Influenza,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-07-01,2021,7,Region V,Camarines Sur,Dengue,175,3,1000000,1.75,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-07-01,2021,7,Region V,Camarines Sur,Leptospirosis,31,0,1000000,0.31,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-07-01,2021,7,Region V,Camarines Sur,Influenza,20,0,1000000,0.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-07-01,2021,7,Region IV-A,Cavite,Dengue,252,3,1000000,2.52,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-07-01,2021,7,Region IV-A,Cavite,Leptospirosis,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-07-01,2021,7,Region IV-A,Cavite,Influenza,42,0,1000000,0.42,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-07-01,2021,7,Region IV-A,Laguna,Dengue,207,0,1000000,2.07,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-07-01,2021,7,Region IV-A,Laguna,Leptospirosis,44,0,1000000,0.44,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-07-01,2021,7,Region IV-A,Laguna,Influenza,30,0,1000000,0.3,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-07-01,2021,7,Region V,Albay,Dengue,309,2,1000000,3.09,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-07-01,2021,7,Region V,Albay,Leptospirosis,32,0,1000000,0.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-07-01,2021,7,Region V,Albay,Influenza,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-08-01,2021,8,Region IV-A,Batangas,Dengue,156,2,1000000,1.56,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-08-01,2021,8,Region IV-A,Batangas,Leptospirosis,76,1,1000000,0.76,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-08-01,2021,8,Region IV-A,Batangas,Influenza,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-08-01,2021,8,Region IV-A,Quezon,Dengue,273,1,1000000,2.73,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-08-01,2021,8,Region IV-A,Quezon,Leptospirosis,95,0,1000000,0.95,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-08-01,2021,8,Region IV-A,Quezon,Influenza,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-08-01,2021,8,MIMAROPA,Marinduque,Dengue,171,3,1000000,1.71,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-08-01,2021,8,MIMAROPA,Marinduque,Leptospirosis,103,0,1000000,1.03,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-08-01,2021,8,MIMAROPA,Marinduque,Influenza,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-08-01,2021,8,Region V,Camarines Norte,Dengue,191,2,1000000,1.91,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-08-01,2021,8,Region V,Camarines Norte,Leptospirosis,136,1,1000000,1.36,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-08-01,2021,8,Region V,Camarines Norte,Influenza,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-08-01,2021,8,Region V,Camarines Sur,Dengue,166,1,1000000,1.66,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-08-01,2021,8,Region V,Camarines Sur,Leptospirosis,109,1,1000000,1.09,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-08-01,2021,8,Region V,Camarines Sur,Influenza,32,0,1000000,0.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-08-01,2021,8,Region IV-A,Cavite,Dengue,297,1,1000000,2.97,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-08-01,2021,8,Region IV-A,Cavite,Leptospirosis,117,2,1000000,1.17,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-08-01,2021,8,Region IV-A,Cavite,Influenza,30,0,1000000,0.3,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-08-01,2021,8,Region IV-A,Laguna,Dengue,281,0,1000000,2.81,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-08-01,2021,8,Region IV-A,Laguna,Leptospirosis,123,0,1000000,1.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-08-01,2021,8,Region IV-A,Laguna,Influenza,39,0,1000000,0.39,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-08-01,2021,8,Region V,Albay,Dengue,183,3,1000000,1.83,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-08-01,2021,8,Region V,Albay,Leptospirosis,140,1,1000000,1.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-08-01,2021,8,Region V,Albay,Influenza,33,0,1000000,0.33,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-09-01,2021,9,Region IV-A,Batangas,Dengue,205,3,1000000,2.05,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-09-01,2021,9,Region IV-A,Batangas,Leptospirosis,74,0,1000000,0.74,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-09-01,2021,9,Region IV-A,Batangas,Influenza,46,0,1000000,0.46,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-09-01,2021,9,Region IV-A,Quezon,Dengue,150,1,1000000,1.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-09-01,2021,9,Region IV-A,Quezon,Leptospirosis,123,0,1000000,1.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-09-01,2021,9,Region IV-A,Quezon,Influenza,14,0,1000000,0.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-09-01,2021,9,MIMAROPA,Marinduque,Dengue,175,0,1000000,1.75,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-09-01,2021,9,MIMAROPA,Marinduque,Leptospirosis,121,2,1000000,1.21,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-09-01,2021,9,MIMAROPA,Marinduque,Influenza,17,0,1000000,0.17,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-09-01,2021,9,Region V,Camarines Norte,Dengue,199,0,1000000,1.99,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-09-01,2021,9,Region V,Camarines Norte,Leptospirosis,104,2,1000000,1.04,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-09-01,2021,9,Region V,Camarines Norte,Influenza,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-09-01,2021,9,Region V,Camarines Sur,Dengue,151,2,1000000,1.51,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-09-01,2021,9,Region V,Camarines Sur,Leptospirosis,134,1,1000000,1.34,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-09-01,2021,9,Region V,Camarines Sur,Influenza,14,0,1000000,0.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-09-01,2021,9,Region IV-A,Cavite,Dengue,324,2,1000000,3.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-09-01,2021,9,Region IV-A,Cavite,Leptospirosis,150,2,1000000,1.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-09-01,2021,9,Region IV-A,Cavite,Influenza,44,0,1000000,0.44,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-09-01,2021,9,Region IV-A,Laguna,Dengue,254,4,1000000,2.54,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-09-01,2021,9,Region IV-A,Laguna,Leptospirosis,52,0,1000000,0.52,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-09-01,2021,9,Region IV-A,Laguna,Influenza,27,0,1000000,0.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-09-01,2021,9,Region V,Albay,Dengue,317,0,1000000,3.17,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-09-01,2021,9,Region V,Albay,Leptospirosis,131,1,1000000,1.31,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-09-01,2021,9,Region V,Albay,Influenza,48,0,1000000,0.48,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-10-01,2021,10,Region IV-A,Batangas,Dengue,252,0,1000000,2.52,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-10-01,2021,10,Region IV-A,Batangas,Leptospirosis,76,0,1000000,0.76,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-10-01,2021,10,Region IV-A,Batangas,Influenza,20,0,1000000,0.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-10-01,2021,10,Region IV-A,Quezon,Dengue,216,3,1000000,2.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-10-01,2021,10,Region IV-A,Quezon,Leptospirosis,95,1,1000000,0.95,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-10-01,2021,10,Region IV-A,Quezon,Influenza,33,0,1000000,0.33,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-10-01,2021,10,MIMAROPA,Marinduque,Dengue,226,3,1000000,2.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-10-01,2021,10,MIMAROPA,Marinduque,Leptospirosis,140,2,1000000,1.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-10-01,2021,10,MIMAROPA,Marinduque,Influenza,42,0,1000000,0.42,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-10-01,2021,10,Region V,Camarines Norte,Dengue,207,0,1000000,2.07,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-10-01,2021,10,Region V,Camarines Norte,Leptospirosis,102,0,1000000,1.02,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-10-01,2021,10,Region V,Camarines Norte,Influenza,36,0,1000000,0.36,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-10-01,2021,10,Region V,Camarines Sur,Dengue,287,5,1000000,2.87,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-10-01,2021,10,Region V,Camarines Sur,Leptospirosis,118,1,1000000,1.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-10-01,2021,10,Region V,Camarines Sur,Influenza,32,0,1000000,0.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-10-01,2021,10,Region IV-A,Cavite,Dengue,285,4,1000000,2.85,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-10-01,2021,10,Region IV-A,Cavite,Leptospirosis,73,0,1000000,0.73,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-10-01,2021,10,Region IV-A,Cavite,Influenza,17,0,1000000,0.17,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-10-01,2021,10,Region IV-A,Laguna,Dengue,348,6,1000000,3.48,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-10-01,2021,10,Region IV-A,Laguna,Leptospirosis,65,0,1000000,0.65,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-10-01,2021,10,Region IV-A,Laguna,Influenza,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-10-01,2021,10,Region V,Albay,Dengue,299,0,1000000,2.99,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-10-01,2021,10,Region V,Albay,Leptospirosis,132,1,1000000,1.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-10-01,2021,10,Region V,Albay,Influenza,30,0,1000000,0.3,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-11-01,2021,11,Region IV-A,Batangas,Dengue,45,0,1000000,0.45,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-11-01,2021,11,Region IV-A,Batangas,Leptospirosis,28,0,1000000,0.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-11-01,2021,11,Region IV-A,Batangas,Influenza,26,0,1000000,0.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-11-01,2021,11,Region IV-A,Quezon,Dengue,16,0,1000000,0.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-11-01,2021,11,Region IV-A,Quezon,Leptospirosis,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-11-01,2021,11,Region IV-A,Quezon,Influenza,10,0,1000000,0.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-11-01,2021,11,MIMAROPA,Marinduque,Dengue,44,0,1000000,0.44,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-11-01,2021,11,MIMAROPA,Marinduque,Leptospirosis,14,0,1000000,0.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-11-01,2021,11,MIMAROPA,Marinduque,Influenza,14,0,1000000,0.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-11-01,2021,11,Region V,Camarines Norte,Dengue,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-11-01,2021,11,Region V,Camarines Norte,Leptospirosis,39,0,1000000,0.39,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-11-01,2021,11,Region V,Camarines Norte,Influenza,25,0,1000000,0.25,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-11-01,2021,11,Region V,Camarines Sur,Dengue,44,0,1000000,0.44,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-11-01,2021,11,Region V,Camarines Sur,Leptospirosis,21,0,1000000,0.21,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-11-01,2021,11,Region V,Camarines Sur,Influenza,10,0,1000000,0.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-11-01,2021,11,Region IV-A,Cavite,Dengue,27,0,1000000,0.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-11-01,2021,11,Region IV-A,Cavite,Leptospirosis,22,0,1000000,0.22,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-11-01,2021,11,Region IV-A,Cavite,Influenza,33,0,1000000,0.33,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-11-01,2021,11,Region IV-A,Laguna,Dengue,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-11-01,2021,11,Region IV-A,Laguna,Leptospirosis,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-11-01,2021,11,Region IV-A,Laguna,Influenza,11,0,1000000,0.11,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-11-01,2021,11,Region V,Albay,Dengue,26,0,1000000,0.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-11-01,2021,11,Region V,Albay,Leptospirosis,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-11-01,2021,11,Region V,Albay,Influenza,14,0,1000000,0.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-12-01,2021,12,Region IV-A,Batangas,Dengue,39,0,1000000,0.39,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-12-01,2021,12,Region IV-A,Batangas,Leptospirosis,39,0,1000000,0.39,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-12-01,2021,12,Region IV-A,Batangas,Influenza,128,0,1000000,1.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-12-01,2021,12,Region IV-A,Quezon,Dengue,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-12-01,2021,12,Region IV-A,Quezon,Leptospirosis,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-12-01,2021,12,Region IV-A,Quezon,Influenza,173,1,1000000,1.73,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-12-01,2021,12,MIMAROPA,Marinduque,Dengue,36,0,1000000,0.36,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-12-01,2021,12,MIMAROPA,Marinduque,Leptospirosis,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-12-01,2021,12,MIMAROPA,Marinduque,Influenza,172,0,1000000,1.72,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-12-01,2021,12,Region V,Camarines Norte,Dengue,33,0,1000000,0.33,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-12-01,2021,12,Region V,Camarines Norte,Leptospirosis,32,0,1000000,0.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-12-01,2021,12,Region V,Camarines Norte,Influenza,175,2,1000000,1.75,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-12-01,2021,12,Region V,Camarines Sur,Dengue,37,0,1000000,0.37,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-12-01,2021,12,Region V,Camarines Sur,Leptospirosis,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-12-01,2021,12,Region V,Camarines Sur,Influenza,175,1,1000000,1.75,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-12-01,2021,12,Region IV-A,Cavite,Dengue,16,0,1000000,0.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-12-01,2021,12,Region IV-A,Cavite,Leptospirosis,23,0,1000000,0.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-12-01,2021,12,Region IV-A,Cavite,Influenza,104,1,1000000,1.04,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-12-01,2021,12,Region IV-A,Laguna,Dengue,34,0,1000000,0.34,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-12-01,2021,12,Region IV-A,Laguna,Leptospirosis,47,0,1000000,0.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-12-01,2021,12,Region IV-A,Laguna,Influenza,156,3,1000000,1.56,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-12-01,2021,12,Region V,Albay,Dengue,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-12-01,2021,12,Region V,Albay,Leptospirosis,15,0,1000000,0.15,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2021-12-01,2021,12,Region V,Albay,Influenza,190,2,1000000,1.9,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-01-01,2022,1,Region IV-A,Batangas,Dengue,36,0,1000000,0.36,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-01-01,2022,1,Region IV-A,Batangas,Leptospirosis,11,0,1000000,0.11,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-01-01,2022,1,Region IV-A,Batangas,Influenza,146,0,1000000,1.46,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-01-01,2022,1,Region IV-A,Quezon,Dengue,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-01-01,2022,1,Region IV-A,Quezon,Leptospirosis,22,0,1000000,0.22,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-01-01,2022,1,Region IV-A,Quezon,Influenza,132,0,1000000,1.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-01-01,2022,1,MIMAROPA,Marinduque,Dengue,10,0,1000000,0.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-01-01,2022,1,MIMAROPA,Marinduque,Leptospirosis,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-01-01,2022,1,MIMAROPA,Marinduque,Influenza,125,0,1000000,1.25,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-01-01,2022,1,Region V,Camarines Norte,Dengue,27,0,1000000,0.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-01-01,2022,1,Region V,Camarines Norte,Leptospirosis,16,0,1000000,0.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-01-01,2022,1,Region V,Camarines Norte,Influenza,108,0,1000000,1.08,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-01-01,2022,1,Region V,Camarines Sur,Dengue,27,0,1000000,0.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-01-01,2022,1,Region V,Camarines Sur,Leptospirosis,16,0,1000000,0.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-01-01,2022,1,Region V,Camarines Sur,Influenza,102,0,1000000,1.02,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-01-01,2022,1,Region IV-A,Cavite,Dengue,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-01-01,2022,1,Region IV-A,Cavite,Leptospirosis,48,0,1000000,0.48,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-01-01,2022,1,Region IV-A,Cavite,Influenza,179,2,1000000,1.79,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-01-01,2022,1,Region IV-A,Laguna,Dengue,34,0,1000000,0.34,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-01-01,2022,1,Region IV-A,Laguna,Leptospirosis,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-01-01,2022,1,Region IV-A,Laguna,Influenza,195,1,1000000,1.95,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-01-01,2022,1,Region V,Albay,Dengue,20,0,1000000,0.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-01-01,2022,1,Region V,Albay,Leptospirosis,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-01-01,2022,1,Region V,Albay,Influenza,126,1,1000000,1.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-02-01,2022,2,Region IV-A,Batangas,Dengue,23,0,1000000,0.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-02-01,2022,2,Region IV-A,Batangas,Leptospirosis,41,0,1000000,0.41,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-02-01,2022,2,Region IV-A,Batangas,Influenza,143,2,1000000,1.43,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-02-01,2022,2,Region IV-A,Quezon,Dengue,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-02-01,2022,2,Region IV-A,Quezon,Leptospirosis,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-02-01,2022,2,Region IV-A,Quezon,Influenza,167,3,1000000,1.67,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-02-01,2022,2,MIMAROPA,Marinduque,Dengue,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-02-01,2022,2,MIMAROPA,Marinduque,Leptospirosis,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-02-01,2022,2,MIMAROPA,Marinduque,Influenza,191,0,1000000,1.91,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-02-01,2022,2,Region V,Camarines Norte,Dengue,43,0,1000000,0.43,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-02-01,2022,2,Region V,Camarines Norte,Leptospirosis,30,0,1000000,0.3,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-02-01,2022,2,Region V,Camarines Norte,Influenza,136,2,1000000,1.36,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-02-01,2022,2,Region V,Camarines Sur,Dengue,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-02-01,2022,2,Region V,Camarines Sur,Leptospirosis,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-02-01,2022,2,Region V,Camarines Sur,Influenza,162,3,1000000,1.62,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-02-01,2022,2,Region IV-A,Cavite,Dengue,17,0,1000000,0.17,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-02-01,2022,2,Region IV-A,Cavite,Leptospirosis,20,0,1000000,0.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-02-01,2022,2,Region IV-A,Cavite,Influenza,148,0,1000000,1.48,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-02-01,2022,2,Region IV-A,Laguna,Dengue,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-02-01,2022,2,Region IV-A,Laguna,Leptospirosis,32,0,1000000,0.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-02-01,2022,2,Region IV-A,Laguna,Influenza,175,2,1000000,1.75,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-02-01,2022,2,Region V,Albay,Dengue,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-02-01,2022,2,Region V,Albay,Leptospirosis,26,0,1000000,0.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-02-01,2022,2,Region V,Albay,Influenza,112,1,1000000,1.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-03-01,2022,3,Region IV-A,Batangas,Dengue,47,0,1000000,0.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-03-01,2022,3,Region IV-A,Batangas,Leptospirosis,44,0,1000000,0.44,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-03-01,2022,3,Region IV-A,Batangas,Influenza,31,0,1000000,0.31,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-03-01,2022,3,Region IV-A,Quezon,Dengue,30,0,1000000,0.3,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-03-01,2022,3,Region IV-A,Quezon,Leptospirosis,11,0,1000000,0.11,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-03-01,2022,3,Region IV-A,Quezon,Influenza,19,0,1000000,0.19,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-03-01,2022,3,MIMAROPA,Marinduque,Dengue,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-03-01,2022,3,MIMAROPA,Marinduque,Leptospirosis,41,0,1000000,0.41,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-03-01,2022,3,MIMAROPA,Marinduque,Influenza,20,0,1000000,0.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-03-01,2022,3,Region V,Camarines Norte,Dengue,28,0,1000000,0.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-03-01,2022,3,Region V,Camarines Norte,Leptospirosis,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-03-01,2022,3,Region V,Camarines Norte,Influenza,15,0,1000000,0.15,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-03-01,2022,3,Region V,Camarines Sur,Dengue,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-03-01,2022,3,Region V,Camarines Sur,Leptospirosis,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-03-01,2022,3,Region V,Camarines Sur,Influenza,11,0,1000000,0.11,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-03-01,2022,3,Region IV-A,Cavite,Dengue,37,0,1000000,0.37,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-03-01,2022,3,Region IV-A,Cavite,Leptospirosis,37,0,1000000,0.37,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-03-01,2022,3,Region IV-A,Cavite,Influenza,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-03-01,2022,3,Region IV-A,Laguna,Dengue,15,0,1000000,0.15,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-03-01,2022,3,Region IV-A,Laguna,Leptospirosis,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-03-01,2022,3,Region IV-A,Laguna,Influenza,37,0,1000000,0.37,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-03-01,2022,3,Region V,Albay,Dengue,28,0,1000000,0.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-03-01,2022,3,Region V,Albay,Leptospirosis,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-03-01,2022,3,Region V,Albay,Influenza,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-04-01,2022,4,Region IV-A,Batangas,Dengue,26,0,1000000,0.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-04-01,2022,4,Region IV-A,Batangas,Leptospirosis,48,0,1000000,0.48,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-04-01,2022,4,Region IV-A,Batangas,Influenza,31,0,1000000,0.31,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-04-01,2022,4,Region IV-A,Quezon,Dengue,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-04-01,2022,4,Region IV-A,Quezon,Leptospirosis,22,0,1000000,0.22,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-04-01,2022,4,Region IV-A,Quezon,Influenza,42,0,1000000,0.42,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-04-01,2022,4,MIMAROPA,Marinduque,Dengue,32,0,1000000,0.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-04-01,2022,4,MIMAROPA,Marinduque,Leptospirosis,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-04-01,2022,4,MIMAROPA,Marinduque,Influenza,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-04-01,2022,4,Region V,Camarines Norte,Dengue,48,0,1000000,0.48,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-04-01,2022,4,Region V,Camarines Norte,Leptospirosis,16,0,1000000,0.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-04-01,2022,4,Region V,Camarines Norte,Influenza,17,0,1000000,0.17,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-04-01,2022,4,Region V,Camarines Sur,Dengue,10,0,1000000,0.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-04-01,2022,4,Region V,Camarines Sur,Leptospirosis,47,0,1000000,0.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-04-01,2022,4,Region V,Camarines Sur,Influenza,20,0,1000000,0.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-04-01,2022,4,Region IV-A,Cavite,Dengue,43,0,1000000,0.43,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-04-01,2022,4,Region IV-A,Cavite,Leptospirosis,48,0,1000000,0.48,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-04-01,2022,4,Region IV-A,Cavite,Influenza,11,0,1000000,0.11,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-04-01,2022,4,Region IV-A,Laguna,Dengue,15,0,1000000,0.15,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-04-01,2022,4,Region IV-A,Laguna,Leptospirosis,42,0,1000000,0.42,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-04-01,2022,4,Region IV-A,Laguna,Influenza,27,0,1000000,0.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-04-01,2022,4,Region V,Albay,Dengue,27,0,1000000,0.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-04-01,2022,4,Region V,Albay,Leptospirosis,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-04-01,2022,4,Region V,Albay,Influenza,26,0,1000000,0.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-05-01,2022,5,Region IV-A,Batangas,Dengue,25,0,1000000,0.25,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-05-01,2022,5,Region IV-A,Batangas,Leptospirosis,31,0,1000000,0.31,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-05-01,2022,5,Region IV-A,Batangas,Influenza,10,0,1000000,0.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-05-01,2022,5,Region IV-A,Quezon,Dengue,22,0,1000000,0.22,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-05-01,2022,5,Region IV-A,Quezon,Leptospirosis,34,0,1000000,0.34,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-05-01,2022,5,Region IV-A,Quezon,Influenza,16,0,1000000,0.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-05-01,2022,5,MIMAROPA,Marinduque,Dengue,15,0,1000000,0.15,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-05-01,2022,5,MIMAROPA,Marinduque,Leptospirosis,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-05-01,2022,5,MIMAROPA,Marinduque,Influenza,42,0,1000000,0.42,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-05-01,2022,5,Region V,Camarines Norte,Dengue,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-05-01,2022,5,Region V,Camarines Norte,Leptospirosis,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-05-01,2022,5,Region V,Camarines Norte,Influenza,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-05-01,2022,5,Region V,Camarines Sur,Dengue,21,0,1000000,0.21,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-05-01,2022,5,Region V,Camarines Sur,Leptospirosis,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-05-01,2022,5,Region V,Camarines Sur,Influenza,10,0,1000000,0.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-05-01,2022,5,Region IV-A,Cavite,Dengue,21,0,1000000,0.21,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-05-01,2022,5,Region IV-A,Cavite,Leptospirosis,45,0,1000000,0.45,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-05-01,2022,5,Region IV-A,Cavite,Influenza,43,0,1000000,0.43,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-05-01,2022,5,Region IV-A,Laguna,Dengue,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-05-01,2022,5,Region IV-A,Laguna,Leptospirosis,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-05-01,2022,5,Region IV-A,Laguna,Influenza,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-05-01,2022,5,Region V,Albay,Dengue,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-05-01,2022,5,Region V,Albay,Leptospirosis,48,0,1000000,0.48,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-05-01,2022,5,Region V,Albay,Influenza,41,0,1000000,0.41,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-06-01,2022,6,Region IV-A,Batangas,Dengue,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-06-01,2022,6,Region IV-A,Batangas,Leptospirosis,14,0,1000000,0.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-06-01,2022,6,Region IV-A,Batangas,Influenza,41,0,1000000,0.41,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-06-01,2022,6,Region IV-A,Quezon,Dengue,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-06-01,2022,6,Region IV-A,Quezon,Leptospirosis,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-06-01,2022,6,Region IV-A,Quezon,Influenza,20,0,1000000,0.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-06-01,2022,6,MIMAROPA,Marinduque,Dengue,41,0,1000000,0.41,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-06-01,2022,6,MIMAROPA,Marinduque,Leptospirosis,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-06-01,2022,6,MIMAROPA,Marinduque,Influenza,48,0,1000000,0.48,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-06-01,2022,6,Region V,Camarines Norte,Dengue,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-06-01,2022,6,Region V,Camarines Norte,Leptospirosis,11,0,1000000,0.11,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-06-01,2022,6,Region V,Camarines Norte,Influenza,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-06-01,2022,6,Region V,Camarines Sur,Dengue,26,0,1000000,0.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-06-01,2022,6,Region V,Camarines Sur,Leptospirosis,47,0,1000000,0.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-06-01,2022,6,Region V,Camarines Sur,Influenza,48,0,1000000,0.48,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-06-01,2022,6,Region IV-A,Cavite,Dengue,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-06-01,2022,6,Region IV-A,Cavite,Leptospirosis,19,0,1000000,0.19,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-06-01,2022,6,Region IV-A,Cavite,Influenza,21,0,1000000,0.21,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-06-01,2022,6,Region IV-A,Laguna,Dengue,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-06-01,2022,6,Region IV-A,Laguna,Leptospirosis,47,0,1000000,0.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-06-01,2022,6,Region IV-A,Laguna,Influenza,28,0,1000000,0.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-06-01,2022,6,Region V,Albay,Dengue,42,0,1000000,0.42,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-06-01,2022,6,Region V,Albay,Leptospirosis,11,0,1000000,0.11,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-06-01,2022,6,Region V,Albay,Influenza,33,0,1000000,0.33,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-07-01,2022,7,Region IV-A,Batangas,Dengue,227,0,1000000,2.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-07-01,2022,7,Region IV-A,Batangas,Leptospirosis,10,0,1000000,0.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-07-01,2022,7,Region IV-A,Batangas,Influenza,31,0,1000000,0.31,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-07-01,2022,7,Region IV-A,Quezon,Dengue,298,5,1000000,2.98,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-07-01,2022,7,Region IV-A,Quezon,Leptospirosis,27,0,1000000,0.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-07-01,2022,7,Region IV-A,Quezon,Influenza,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-07-01,2022,7,MIMAROPA,Marinduque,Dengue,172,2,1000000,1.72,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-07-01,2022,7,MIMAROPA,Marinduque,Leptospirosis,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-07-01,2022,7,MIMAROPA,Marinduque,Influenza,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-07-01,2022,7,Region V,Camarines Norte,Dengue,254,0,1000000,2.54,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-07-01,2022,7,Region V,Camarines Norte,Leptospirosis,27,0,1000000,0.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-07-01,2022,7,Region V,Camarines Norte,Influenza,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-07-01,2022,7,Region V,Camarines Sur,Dengue,200,0,1000000,2.0,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-07-01,2022,7,Region V,Camarines Sur,Leptospirosis,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-07-01,2022,7,Region V,Camarines Sur,Influenza,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-07-01,2022,7,Region IV-A,Cavite,Dengue,199,1,1000000,1.99,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-07-01,2022,7,Region IV-A,Cavite,Leptospirosis,11,0,1000000,0.11,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-07-01,2022,7,Region IV-A,Cavite,Influenza,22,0,1000000,0.22,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-07-01,2022,7,Region IV-A,Laguna,Dengue,342,5,1000000,3.42,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-07-01,2022,7,Region IV-A,Laguna,Leptospirosis,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-07-01,2022,7,Region IV-A,Laguna,Influenza,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-07-01,2022,7,Region V,Albay,Dengue,290,3,1000000,2.9,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-07-01,2022,7,Region V,Albay,Leptospirosis,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-07-01,2022,7,Region V,Albay,Influenza,33,0,1000000,0.33,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-08-01,2022,8,Region IV-A,Batangas,Dengue,346,2,1000000,3.46,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-08-01,2022,8,Region IV-A,Batangas,Leptospirosis,85,1,1000000,0.85,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-08-01,2022,8,Region IV-A,Batangas,Influenza,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-08-01,2022,8,Region IV-A,Quezon,Dengue,181,0,1000000,1.81,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-08-01,2022,8,Region IV-A,Quezon,Leptospirosis,106,1,1000000,1.06,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-08-01,2022,8,Region IV-A,Quezon,Influenza,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-08-01,2022,8,MIMAROPA,Marinduque,Dengue,157,2,1000000,1.57,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-08-01,2022,8,MIMAROPA,Marinduque,Leptospirosis,53,0,1000000,0.53,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-08-01,2022,8,MIMAROPA,Marinduque,Influenza,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-08-01,2022,8,Region V,Camarines Norte,Dengue,164,1,1000000,1.64,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-08-01,2022,8,Region V,Camarines Norte,Leptospirosis,104,0,1000000,1.04,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-08-01,2022,8,Region V,Camarines Norte,Influenza,22,0,1000000,0.22,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-08-01,2022,8,Region V,Camarines Sur,Dengue,327,1,1000000,3.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-08-01,2022,8,Region V,Camarines Sur,Leptospirosis,141,2,1000000,1.41,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-08-01,2022,8,Region V,Camarines Sur,Influenza,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-08-01,2022,8,Region IV-A,Cavite,Dengue,341,4,1000000,3.41,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-08-01,2022,8,Region IV-A,Cavite,Leptospirosis,55,0,1000000,0.55,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-08-01,2022,8,Region IV-A,Cavite,Influenza,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-08-01,2022,8,Region IV-A,Laguna,Dengue,273,1,1000000,2.73,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-08-01,2022,8,Region IV-A,Laguna,Leptospirosis,126,1,1000000,1.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-08-01,2022,8,Region IV-A,Laguna,Influenza,19,0,1000000,0.19,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-08-01,2022,8,Region V,Albay,Dengue,320,5,1000000,3.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-08-01,2022,8,Region V,Albay,Leptospirosis,65,1,1000000,0.65,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-08-01,2022,8,Region V,Albay,Influenza,36,0,1000000,0.36,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-09-01,2022,9,Region IV-A,Batangas,Dengue,264,2,1000000,2.64,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-09-01,2022,9,Region IV-A,Batangas,Leptospirosis,82,1,1000000,0.82,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-09-01,2022,9,Region IV-A,Batangas,Influenza,32,0,1000000,0.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-09-01,2022,9,Region IV-A,Quezon,Dengue,157,1,1000000,1.57,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-09-01,2022,9,Region IV-A,Quezon,Leptospirosis,58,0,1000000,0.58,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-09-01,2022,9,Region IV-A,Quezon,Influenza,11,0,1000000,0.11,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-09-01,2022,9,MIMAROPA,Marinduque,Dengue,179,3,1000000,1.79,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-09-01,2022,9,MIMAROPA,Marinduque,Leptospirosis,66,0,1000000,0.66,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-09-01,2022,9,MIMAROPA,Marinduque,Influenza,20,0,1000000,0.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-09-01,2022,9,Region V,Camarines Norte,Dengue,334,2,1000000,3.34,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-09-01,2022,9,Region V,Camarines Norte,Leptospirosis,73,0,1000000,0.73,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-09-01,2022,9,Region V,Camarines Norte,Influenza,28,0,1000000,0.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-09-01,2022,9,Region V,Camarines Sur,Dengue,212,3,1000000,2.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-09-01,2022,9,Region V,Camarines Sur,Leptospirosis,63,0,1000000,0.63,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-09-01,2022,9,Region V,Camarines Sur,Influenza,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-09-01,2022,9,Region IV-A,Cavite,Dengue,338,4,1000000,3.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-09-01,2022,9,Region IV-A,Cavite,Leptospirosis,128,2,1000000,1.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-09-01,2022,9,Region IV-A,Cavite,Influenza,10,0,1000000,0.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-09-01,2022,9,Region IV-A,Laguna,Dengue,292,3,1000000,2.92,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-09-01,2022,9,Region IV-A,Laguna,Leptospirosis,57,0,1000000,0.57,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-09-01,2022,9,Region IV-A,Laguna,Influenza,39,0,1000000,0.39,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-09-01,2022,9,Region V,Albay,Dengue,163,2,1000000,1.63,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-09-01,2022,9,Region V,Albay,Leptospirosis,97,0,1000000,0.97,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-09-01,2022,9,Region V,Albay,Influenza,26,0,1000000,0.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-10-01,2022,10,Region IV-A,Batangas,Dengue,160,0,1000000,1.6,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-10-01,2022,10,Region IV-A,Batangas,Leptospirosis,140,0,1000000,1.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-10-01,2022,10,Region IV-A,Batangas,Influenza,22,0,1000000,0.22,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-10-01,2022,10,Region IV-A,Quezon,Dengue,187,0,1000000,1.87,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-10-01,2022,10,Region IV-A,Quezon,Leptospirosis,122,2,1000000,1.22,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-10-01,2022,10,Region IV-A,Quezon,Influenza,33,0,1000000,0.33,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-10-01,2022,10,MIMAROPA,Marinduque,Dengue,228,0,1000000,2.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-10-01,2022,10,MIMAROPA,Marinduque,Leptospirosis,114,2,1000000,1.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-10-01,2022,10,MIMAROPA,Marinduque,Influenza,31,0,1000000,0.31,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-10-01,2022,10,Region V,Camarines Norte,Dengue,345,1,1000000,3.45,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-10-01,2022,10,Region V,Camarines Norte,Leptospirosis,58,0,1000000,0.58,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-10-01,2022,10,Region V,Camarines Norte,Influenza,21,0,1000000,0.21,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-10-01,2022,10,Region V,Camarines Sur,Dengue,333,2,1000000,3.33,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-10-01,2022,10,Region V,Camarines Sur,Leptospirosis,134,1,1000000,1.34,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-10-01,2022,10,Region V,Camarines Sur,Influenza,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-10-01,2022,10,Region IV-A,Cavite,Dengue,291,4,1000000,2.91,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-10-01,2022,10,Region IV-A,Cavite,Leptospirosis,145,1,1000000,1.45,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-10-01,2022,10,Region IV-A,Cavite,Influenza,36,0,1000000,0.36,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-10-01,2022,10,Region IV-A,Laguna,Dengue,232,0,1000000,2.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-10-01,2022,10,Region IV-A,Laguna,Leptospirosis,95,0,1000000,0.95,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-10-01,2022,10,Region IV-A,Laguna,Influenza,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-10-01,2022,10,Region V,Albay,Dengue,189,1,1000000,1.89,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-10-01,2022,10,Region V,Albay,Leptospirosis,53,0,1000000,0.53,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-10-01,2022,10,Region V,Albay,Influenza,34,0,1000000,0.34,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-11-01,2022,11,Region IV-A,Batangas,Dengue,47,0,1000000,0.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-11-01,2022,11,Region IV-A,Batangas,Leptospirosis,17,0,1000000,0.17,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-11-01,2022,11,Region IV-A,Batangas,Influenza,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-11-01,2022,11,Region IV-A,Quezon,Dengue,34,0,1000000,0.34,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-11-01,2022,11,Region IV-A,Quezon,Leptospirosis,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-11-01,2022,11,Region IV-A,Quezon,Influenza,37,0,1000000,0.37,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-11-01,2022,11,MIMAROPA,Marinduque,Dengue,27,0,1000000,0.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-11-01,2022,11,MIMAROPA,Marinduque,Leptospirosis,34,0,1000000,0.34,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-11-01,2022,11,MIMAROPA,Marinduque,Influenza,21,0,1000000,0.21,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-11-01,2022,11,Region V,Camarines Norte,Dengue,47,0,1000000,0.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-11-01,2022,11,Region V,Camarines Norte,Leptospirosis,42,0,1000000,0.42,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-11-01,2022,11,Region V,Camarines Norte,Influenza,41,0,1000000,0.41,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-11-01,2022,11,Region V,Camarines Sur,Dengue,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-11-01,2022,11,Region V,Camarines Sur,Leptospirosis,46,0,1000000,0.46,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-11-01,2022,11,Region V,Camarines Sur,Influenza,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-11-01,2022,11,Region IV-A,Cavite,Dengue,23,0,1000000,0.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-11-01,2022,11,Region IV-A,Cavite,Leptospirosis,19,0,1000000,0.19,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-11-01,2022,11,Region IV-A,Cavite,Influenza,45,0,1000000,0.45,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-11-01,2022,11,Region IV-A,Laguna,Dengue,47,0,1000000,0.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-11-01,2022,11,Region IV-A,Laguna,Leptospirosis,47,0,1000000,0.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-11-01,2022,11,Region IV-A,Laguna,Influenza,39,0,1000000,0.39,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-11-01,2022,11,Region V,Albay,Dengue,17,0,1000000,0.17,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-11-01,2022,11,Region V,Albay,Leptospirosis,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-11-01,2022,11,Region V,Albay,Influenza,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-12-01,2022,12,Region IV-A,Batangas,Dengue,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-12-01,2022,12,Region IV-A,Batangas,Leptospirosis,41,0,1000000,0.41,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-12-01,2022,12,Region IV-A,Batangas,Influenza,197,2,1000000,1.97,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-12-01,2022,12,Region IV-A,Quezon,Dengue,17,0,1000000,0.17,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-12-01,2022,12,Region IV-A,Quezon,Leptospirosis,41,0,1000000,0.41,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-12-01,2022,12,Region IV-A,Quezon,Influenza,166,0,1000000,1.66,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-12-01,2022,12,MIMAROPA,Marinduque,Dengue,28,0,1000000,0.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-12-01,2022,12,MIMAROPA,Marinduque,Leptospirosis,36,0,1000000,0.36,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-12-01,2022,12,MIMAROPA,Marinduque,Influenza,194,0,1000000,1.94,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-12-01,2022,12,Region V,Camarines Norte,Dengue,43,0,1000000,0.43,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-12-01,2022,12,Region V,Camarines Norte,Leptospirosis,36,0,1000000,0.36,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-12-01,2022,12,Region V,Camarines Norte,Influenza,198,2,1000000,1.98,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-12-01,2022,12,Region V,Camarines Sur,Dengue,37,0,1000000,0.37,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-12-01,2022,12,Region V,Camarines Sur,Leptospirosis,32,0,1000000,0.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-12-01,2022,12,Region V,Camarines Sur,Influenza,185,2,1000000,1.85,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-12-01,2022,12,Region IV-A,Cavite,Dengue,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-12-01,2022,12,Region IV-A,Cavite,Leptospirosis,48,0,1000000,0.48,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-12-01,2022,12,Region IV-A,Cavite,Influenza,114,1,1000000,1.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-12-01,2022,12,Region IV-A,Laguna,Dengue,36,0,1000000,0.36,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-12-01,2022,12,Region IV-A,Laguna,Leptospirosis,22,0,1000000,0.22,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-12-01,2022,12,Region IV-A,Laguna,Influenza,159,2,1000000,1.59,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-12-01,2022,12,Region V,Albay,Dengue,45,0,1000000,0.45,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-12-01,2022,12,Region V,Albay,Leptospirosis,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2022-12-01,2022,12,Region V,Albay,Influenza,147,0,1000000,1.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-01-01,2023,1,Region IV-A,Batangas,Dengue,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-01-01,2023,1,Region IV-A,Batangas,Leptospirosis,45,0,1000000,0.45,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-01-01,2023,1,Region IV-A,Batangas,Influenza,127,0,1000000,1.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-01-01,2023,1,Region IV-A,Quezon,Dengue,25,0,1000000,0.25,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-01-01,2023,1,Region IV-A,Quezon,Leptospirosis,14,0,1000000,0.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-01-01,2023,1,Region IV-A,Quezon,Influenza,150,1,1000000,1.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-01-01,2023,1,MIMAROPA,Marinduque,Dengue,47,0,1000000,0.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-01-01,2023,1,MIMAROPA,Marinduque,Leptospirosis,31,0,1000000,0.31,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-01-01,2023,1,MIMAROPA,Marinduque,Influenza,139,1,1000000,1.39,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-01-01,2023,1,Region V,Camarines Norte,Dengue,27,0,1000000,0.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-01-01,2023,1,Region V,Camarines Norte,Leptospirosis,48,0,1000000,0.48,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-01-01,2023,1,Region V,Camarines Norte,Influenza,157,2,1000000,1.57,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-01-01,2023,1,Region V,Camarines Sur,Dengue,30,0,1000000,0.3,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-01-01,2023,1,Region V,Camarines Sur,Leptospirosis,22,0,1000000,0.22,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-01-01,2023,1,Region V,Camarines Sur,Influenza,146,1,1000000,1.46,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-01-01,2023,1,Region IV-A,Cavite,Dengue,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-01-01,2023,1,Region IV-A,Cavite,Leptospirosis,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-01-01,2023,1,Region IV-A,Cavite,Influenza,196,0,1000000,1.96,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-01-01,2023,1,Region IV-A,Laguna,Dengue,41,0,1000000,0.41,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-01-01,2023,1,Region IV-A,Laguna,Leptospirosis,20,0,1000000,0.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-01-01,2023,1,Region IV-A,Laguna,Influenza,191,2,1000000,1.91,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-01-01,2023,1,Region V,Albay,Dengue,32,0,1000000,0.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-01-01,2023,1,Region V,Albay,Leptospirosis,20,0,1000000,0.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-01-01,2023,1,Region V,Albay,Influenza,195,0,1000000,1.95,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-02-01,2023,2,Region IV-A,Batangas,Dengue,41,0,1000000,0.41,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-02-01,2023,2,Region IV-A,Batangas,Leptospirosis,11,0,1000000,0.11,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-02-01,2023,2,Region IV-A,Batangas,Influenza,133,0,1000000,1.33,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-02-01,2023,2,Region IV-A,Quezon,Dengue,21,0,1000000,0.21,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-02-01,2023,2,Region IV-A,Quezon,Leptospirosis,21,0,1000000,0.21,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-02-01,2023,2,Region IV-A,Quezon,Influenza,194,3,1000000,1.94,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-02-01,2023,2,MIMAROPA,Marinduque,Dengue,44,0,1000000,0.44,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-02-01,2023,2,MIMAROPA,Marinduque,Leptospirosis,46,0,1000000,0.46,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-02-01,2023,2,MIMAROPA,Marinduque,Influenza,112,2,1000000,1.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-02-01,2023,2,Region V,Camarines Norte,Dengue,44,0,1000000,0.44,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-02-01,2023,2,Region V,Camarines Norte,Leptospirosis,15,0,1000000,0.15,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-02-01,2023,2,Region V,Camarines Norte,Influenza,160,1,1000000,1.6,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-02-01,2023,2,Region V,Camarines Sur,Dengue,43,0,1000000,0.43,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-02-01,2023,2,Region V,Camarines Sur,Leptospirosis,17,0,1000000,0.17,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-02-01,2023,2,Region V,Camarines Sur,Influenza,136,1,1000000,1.36,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-02-01,2023,2,Region IV-A,Cavite,Dengue,46,0,1000000,0.46,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-02-01,2023,2,Region IV-A,Cavite,Leptospirosis,37,0,1000000,0.37,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-02-01,2023,2,Region IV-A,Cavite,Influenza,114,1,1000000,1.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-02-01,2023,2,Region IV-A,Laguna,Dengue,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-02-01,2023,2,Region IV-A,Laguna,Leptospirosis,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-02-01,2023,2,Region IV-A,Laguna,Influenza,160,0,1000000,1.6,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-02-01,2023,2,Region V,Albay,Dengue,36,0,1000000,0.36,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-02-01,2023,2,Region V,Albay,Leptospirosis,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-02-01,2023,2,Region V,Albay,Influenza,184,0,1000000,1.84,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-03-01,2023,3,Region IV-A,Batangas,Dengue,23,0,1000000,0.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-03-01,2023,3,Region IV-A,Batangas,Leptospirosis,15,0,1000000,0.15,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-03-01,2023,3,Region IV-A,Batangas,Influenza,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-03-01,2023,3,Region IV-A,Quezon,Dengue,19,0,1000000,0.19,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-03-01,2023,3,Region IV-A,Quezon,Leptospirosis,45,0,1000000,0.45,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-03-01,2023,3,Region IV-A,Quezon,Influenza,31,0,1000000,0.31,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-03-01,2023,3,MIMAROPA,Marinduque,Dengue,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-03-01,2023,3,MIMAROPA,Marinduque,Leptospirosis,48,0,1000000,0.48,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-03-01,2023,3,MIMAROPA,Marinduque,Influenza,21,0,1000000,0.21,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-03-01,2023,3,Region V,Camarines Norte,Dengue,32,0,1000000,0.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-03-01,2023,3,Region V,Camarines Norte,Leptospirosis,20,0,1000000,0.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-03-01,2023,3,Region V,Camarines Norte,Influenza,42,0,1000000,0.42,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-03-01,2023,3,Region V,Camarines Sur,Dengue,32,0,1000000,0.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-03-01,2023,3,Region V,Camarines Sur,Leptospirosis,42,0,1000000,0.42,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-03-01,2023,3,Region V,Camarines Sur,Influenza,23,0,1000000,0.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-03-01,2023,3,Region IV-A,Cavite,Dengue,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-03-01,2023,3,Region IV-A,Cavite,Leptospirosis,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-03-01,2023,3,Region IV-A,Cavite,Influenza,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-03-01,2023,3,Region IV-A,Laguna,Dengue,46,0,1000000,0.46,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-03-01,2023,3,Region IV-A,Laguna,Leptospirosis,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-03-01,2023,3,Region IV-A,Laguna,Influenza,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-03-01,2023,3,Region V,Albay,Dengue,28,0,1000000,0.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-03-01,2023,3,Region V,Albay,Leptospirosis,42,0,1000000,0.42,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-03-01,2023,3,Region V,Albay,Influenza,37,0,1000000,0.37,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-04-01,2023,4,Region IV-A,Batangas,Dengue,22,0,1000000,0.22,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-04-01,2023,4,Region IV-A,Batangas,Leptospirosis,36,0,1000000,0.36,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-04-01,2023,4,Region IV-A,Batangas,Influenza,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-04-01,2023,4,Region IV-A,Quezon,Dengue,20,0,1000000,0.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-04-01,2023,4,Region IV-A,Quezon,Leptospirosis,45,0,1000000,0.45,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-04-01,2023,4,Region IV-A,Quezon,Influenza,27,0,1000000,0.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-04-01,2023,4,MIMAROPA,Marinduque,Dengue,46,0,1000000,0.46,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-04-01,2023,4,MIMAROPA,Marinduque,Leptospirosis,39,0,1000000,0.39,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-04-01,2023,4,MIMAROPA,Marinduque,Influenza,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-04-01,2023,4,Region V,Camarines Norte,Dengue,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-04-01,2023,4,Region V,Camarines Norte,Leptospirosis,23,0,1000000,0.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-04-01,2023,4,Region V,Camarines Norte,Influenza,42,0,1000000,0.42,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-04-01,2023,4,Region V,Camarines Sur,Dengue,47,0,1000000,0.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-04-01,2023,4,Region V,Camarines Sur,Leptospirosis,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-04-01,2023,4,Region V,Camarines Sur,Influenza,16,0,1000000,0.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-04-01,2023,4,Region IV-A,Cavite,Dengue,19,0,1000000,0.19,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-04-01,2023,4,Region IV-A,Cavite,Leptospirosis,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-04-01,2023,4,Region IV-A,Cavite,Influenza,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-04-01,2023,4,Region IV-A,Laguna,Dengue,19,0,1000000,0.19,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-04-01,2023,4,Region IV-A,Laguna,Leptospirosis,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-04-01,2023,4,Region IV-A,Laguna,Influenza,46,0,1000000,0.46,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-04-01,2023,4,Region V,Albay,Dengue,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-04-01,2023,4,Region V,Albay,Leptospirosis,34,0,1000000,0.34,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-04-01,2023,4,Region V,Albay,Influenza,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-05-01,2023,5,Region IV-A,Batangas,Dengue,48,0,1000000,0.48,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-05-01,2023,5,Region IV-A,Batangas,Leptospirosis,22,0,1000000,0.22,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-05-01,2023,5,Region IV-A,Batangas,Influenza,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-05-01,2023,5,Region IV-A,Quezon,Dengue,28,0,1000000,0.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-05-01,2023,5,Region IV-A,Quezon,Leptospirosis,23,0,1000000,0.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-05-01,2023,5,Region IV-A,Quezon,Influenza,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-05-01,2023,5,MIMAROPA,Marinduque,Dengue,47,0,1000000,0.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-05-01,2023,5,MIMAROPA,Marinduque,Leptospirosis,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-05-01,2023,5,MIMAROPA,Marinduque,Influenza,33,0,1000000,0.33,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-05-01,2023,5,Region V,Camarines Norte,Dengue,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-05-01,2023,5,Region V,Camarines Norte,Leptospirosis,15,0,1000000,0.15,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-05-01,2023,5,Region V,Camarines Norte,Influenza,32,0,1000000,0.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-05-01,2023,5,Region V,Camarines Sur,Dengue,47,0,1000000,0.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-05-01,2023,5,Region V,Camarines Sur,Leptospirosis,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-05-01,2023,5,Region V,Camarines Sur,Influenza,21,0,1000000,0.21,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-05-01,2023,5,Region IV-A,Cavite,Dengue,37,0,1000000,0.37,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-05-01,2023,5,Region IV-A,Cavite,Leptospirosis,23,0,1000000,0.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-05-01,2023,5,Region IV-A,Cavite,Influenza,16,0,1000000,0.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-05-01,2023,5,Region IV-A,Laguna,Dengue,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-05-01,2023,5,Region IV-A,Laguna,Leptospirosis,21,0,1000000,0.21,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-05-01,2023,5,Region IV-A,Laguna,Influenza,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-05-01,2023,5,Region V,Albay,Dengue,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-05-01,2023,5,Region V,Albay,Leptospirosis,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-05-01,2023,5,Region V,Albay,Influenza,19,0,1000000,0.19,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-06-01,2023,6,Region IV-A,Batangas,Dengue,48,0,1000000,0.48,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-06-01,2023,6,Region IV-A,Batangas,Leptospirosis,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-06-01,2023,6,Region IV-A,Batangas,Influenza,21,0,1000000,0.21,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-06-01,2023,6,Region IV-A,Quezon,Dengue,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-06-01,2023,6,Region IV-A,Quezon,Leptospirosis,25,0,1000000,0.25,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-06-01,2023,6,Region IV-A,Quezon,Influenza,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-06-01,2023,6,MIMAROPA,Marinduque,Dengue,44,0,1000000,0.44,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-06-01,2023,6,MIMAROPA,Marinduque,Leptospirosis,20,0,1000000,0.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-06-01,2023,6,MIMAROPA,Marinduque,Influenza,23,0,1000000,0.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-06-01,2023,6,Region V,Camarines Norte,Dengue,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-06-01,2023,6,Region V,Camarines Norte,Leptospirosis,21,0,1000000,0.21,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-06-01,2023,6,Region V,Camarines Norte,Influenza,27,0,1000000,0.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-06-01,2023,6,Region V,Camarines Sur,Dengue,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-06-01,2023,6,Region V,Camarines Sur,Leptospirosis,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-06-01,2023,6,Region V,Camarines Sur,Influenza,10,0,1000000,0.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-06-01,2023,6,Region IV-A,Cavite,Dengue,25,0,1000000,0.25,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-06-01,2023,6,Region IV-A,Cavite,Leptospirosis,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-06-01,2023,6,Region IV-A,Cavite,Influenza,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-06-01,2023,6,Region IV-A,Laguna,Dengue,37,0,1000000,0.37,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-06-01,2023,6,Region IV-A,Laguna,Leptospirosis,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-06-01,2023,6,Region IV-A,Laguna,Influenza,48,0,1000000,0.48,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-06-01,2023,6,Region V,Albay,Dengue,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-06-01,2023,6,Region V,Albay,Leptospirosis,32,0,1000000,0.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-06-01,2023,6,Region V,Albay,Influenza,47,0,1000000,0.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-07-01,2023,7,Region IV-A,Batangas,Dengue,261,1,1000000,2.61,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-07-01,2023,7,Region IV-A,Batangas,Leptospirosis,47,0,1000000,0.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-07-01,2023,7,Region IV-A,Batangas,Influenza,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-07-01,2023,7,Region IV-A,Quezon,Dengue,172,2,1000000,1.72,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-07-01,2023,7,Region IV-A,Quezon,Leptospirosis,33,0,1000000,0.33,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-07-01,2023,7,Region IV-A,Quezon,Influenza,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-07-01,2023,7,MIMAROPA,Marinduque,Dengue,212,1,1000000,2.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-07-01,2023,7,MIMAROPA,Marinduque,Leptospirosis,14,0,1000000,0.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-07-01,2023,7,MIMAROPA,Marinduque,Influenza,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-07-01,2023,7,Region V,Camarines Norte,Dengue,316,1,1000000,3.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-07-01,2023,7,Region V,Camarines Norte,Leptospirosis,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-07-01,2023,7,Region V,Camarines Norte,Influenza,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-07-01,2023,7,Region V,Camarines Sur,Dengue,276,1,1000000,2.76,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-07-01,2023,7,Region V,Camarines Sur,Leptospirosis,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-07-01,2023,7,Region V,Camarines Sur,Influenza,32,0,1000000,0.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-07-01,2023,7,Region IV-A,Cavite,Dengue,171,0,1000000,1.71,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-07-01,2023,7,Region IV-A,Cavite,Leptospirosis,25,0,1000000,0.25,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-07-01,2023,7,Region IV-A,Cavite,Influenza,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-07-01,2023,7,Region IV-A,Laguna,Dengue,229,4,1000000,2.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-07-01,2023,7,Region IV-A,Laguna,Leptospirosis,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-07-01,2023,7,Region IV-A,Laguna,Influenza,23,0,1000000,0.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-07-01,2023,7,Region V,Albay,Dengue,175,0,1000000,1.75,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-07-01,2023,7,Region V,Albay,Leptospirosis,21,0,1000000,0.21,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-07-01,2023,7,Region V,Albay,Influenza,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-08-01,2023,8,Region IV-A,Batangas,Dengue,303,1,1000000,3.03,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-08-01,2023,8,Region IV-A,Batangas,Leptospirosis,74,1,1000000,0.74,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-08-01,2023,8,Region IV-A,Batangas,Influenza,46,0,1000000,0.46,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-08-01,2023,8,Region IV-A,Quezon,Dengue,227,3,1000000,2.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-08-01,2023,8,Region IV-A,Quezon,Leptospirosis,58,0,1000000,0.58,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-08-01,2023,8,Region IV-A,Quezon,Influenza,26,0,1000000,0.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-08-01,2023,8,MIMAROPA,Marinduque,Dengue,193,3,1000000,1.93,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-08-01,2023,8,MIMAROPA,Marinduque,Leptospirosis,128,0,1000000,1.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-08-01,2023,8,MIMAROPA,Marinduque,Influenza,22,0,1000000,0.22,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-08-01,2023,8,Region V,Camarines Norte,Dengue,157,1,1000000,1.57,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-08-01,2023,8,Region V,Camarines Norte,Leptospirosis,80,1,1000000,0.8,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-08-01,2023,8,Region V,Camarines Norte,Influenza,43,0,1000000,0.43,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-08-01,2023,8,Region V,Camarines Sur,Dengue,273,5,1000000,2.73,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-08-01,2023,8,Region V,Camarines Sur,Leptospirosis,96,1,1000000,0.96,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-08-01,2023,8,Region V,Camarines Sur,Influenza,36,0,1000000,0.36,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-08-01,2023,8,Region IV-A,Cavite,Dengue,179,1,1000000,1.79,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-08-01,2023,8,Region IV-A,Cavite,Leptospirosis,52,0,1000000,0.52,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-08-01,2023,8,Region IV-A,Cavite,Influenza,21,0,1000000,0.21,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-08-01,2023,8,Region IV-A,Laguna,Dengue,315,4,1000000,3.15,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-08-01,2023,8,Region IV-A,Laguna,Leptospirosis,107,1,1000000,1.07,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-08-01,2023,8,Region IV-A,Laguna,Influenza,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-08-01,2023,8,Region V,Albay,Dengue,323,2,1000000,3.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-08-01,2023,8,Region V,Albay,Leptospirosis,74,1,1000000,0.74,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-08-01,2023,8,Region V,Albay,Influenza,31,0,1000000,0.31,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-09-01,2023,9,Region IV-A,Batangas,Dengue,221,2,1000000,2.21,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-09-01,2023,9,Region IV-A,Batangas,Leptospirosis,106,0,1000000,1.06,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-09-01,2023,9,Region IV-A,Batangas,Influenza,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-09-01,2023,9,Region IV-A,Quezon,Dengue,215,1,1000000,2.15,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-09-01,2023,9,Region IV-A,Quezon,Leptospirosis,101,0,1000000,1.01,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-09-01,2023,9,Region IV-A,Quezon,Influenza,10,0,1000000,0.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-09-01,2023,9,MIMAROPA,Marinduque,Dengue,310,5,1000000,3.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-09-01,2023,9,MIMAROPA,Marinduque,Leptospirosis,89,0,1000000,0.89,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-09-01,2023,9,MIMAROPA,Marinduque,Influenza,21,0,1000000,0.21,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-09-01,2023,9,Region V,Camarines Norte,Dengue,278,5,1000000,2.78,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-09-01,2023,9,Region V,Camarines Norte,Leptospirosis,105,0,1000000,1.05,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-09-01,2023,9,Region V,Camarines Norte,Influenza,11,0,1000000,0.11,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-09-01,2023,9,Region V,Camarines Sur,Dengue,166,3,1000000,1.66,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-09-01,2023,9,Region V,Camarines Sur,Leptospirosis,82,0,1000000,0.82,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-09-01,2023,9,Region V,Camarines Sur,Influenza,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-09-01,2023,9,Region IV-A,Cavite,Dengue,216,2,1000000,2.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-09-01,2023,9,Region IV-A,Cavite,Leptospirosis,92,0,1000000,0.92,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-09-01,2023,9,Region IV-A,Cavite,Influenza,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-09-01,2023,9,Region IV-A,Laguna,Dengue,153,3,1000000,1.53,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-09-01,2023,9,Region IV-A,Laguna,Leptospirosis,88,1,1000000,0.88,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-09-01,2023,9,Region IV-A,Laguna,Influenza,19,0,1000000,0.19,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-09-01,2023,9,Region V,Albay,Dengue,349,2,1000000,3.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-09-01,2023,9,Region V,Albay,Leptospirosis,130,1,1000000,1.3,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-09-01,2023,9,Region V,Albay,Influenza,47,0,1000000,0.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-10-01,2023,10,Region IV-A,Batangas,Dengue,285,3,1000000,2.85,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-10-01,2023,10,Region IV-A,Batangas,Leptospirosis,69,1,1000000,0.69,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-10-01,2023,10,Region IV-A,Batangas,Influenza,25,0,1000000,0.25,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-10-01,2023,10,Region IV-A,Quezon,Dengue,200,1,1000000,2.0,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-10-01,2023,10,Region IV-A,Quezon,Leptospirosis,146,0,1000000,1.46,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-10-01,2023,10,Region IV-A,Quezon,Influenza,30,0,1000000,0.3,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-10-01,2023,10,MIMAROPA,Marinduque,Dengue,295,3,1000000,2.95,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-10-01,2023,10,MIMAROPA,Marinduque,Leptospirosis,82,0,1000000,0.82,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-10-01,2023,10,MIMAROPA,Marinduque,Influenza,26,0,1000000,0.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-10-01,2023,10,Region V,Camarines Norte,Dengue,213,0,1000000,2.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-10-01,2023,10,Region V,Camarines Norte,Leptospirosis,61,0,1000000,0.61,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-10-01,2023,10,Region V,Camarines Norte,Influenza,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-10-01,2023,10,Region V,Camarines Sur,Dengue,214,4,1000000,2.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-10-01,2023,10,Region V,Camarines Sur,Leptospirosis,137,1,1000000,1.37,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-10-01,2023,10,Region V,Camarines Sur,Influenza,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-10-01,2023,10,Region IV-A,Cavite,Dengue,325,5,1000000,3.25,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-10-01,2023,10,Region IV-A,Cavite,Leptospirosis,123,1,1000000,1.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-10-01,2023,10,Region IV-A,Cavite,Influenza,43,0,1000000,0.43,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-10-01,2023,10,Region IV-A,Laguna,Dengue,298,0,1000000,2.98,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-10-01,2023,10,Region IV-A,Laguna,Leptospirosis,131,1,1000000,1.31,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-10-01,2023,10,Region IV-A,Laguna,Influenza,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-10-01,2023,10,Region V,Albay,Dengue,180,3,1000000,1.8,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-10-01,2023,10,Region V,Albay,Leptospirosis,99,1,1000000,0.99,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-10-01,2023,10,Region V,Albay,Influenza,30,0,1000000,0.3,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-11-01,2023,11,Region IV-A,Batangas,Dengue,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-11-01,2023,11,Region IV-A,Batangas,Leptospirosis,30,0,1000000,0.3,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-11-01,2023,11,Region IV-A,Batangas,Influenza,39,0,1000000,0.39,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-11-01,2023,11,Region IV-A,Quezon,Dengue,48,0,1000000,0.48,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-11-01,2023,11,Region IV-A,Quezon,Leptospirosis,42,0,1000000,0.42,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-11-01,2023,11,Region IV-A,Quezon,Influenza,21,0,1000000,0.21,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-11-01,2023,11,MIMAROPA,Marinduque,Dengue,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-11-01,2023,11,MIMAROPA,Marinduque,Leptospirosis,15,0,1000000,0.15,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-11-01,2023,11,MIMAROPA,Marinduque,Influenza,46,0,1000000,0.46,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-11-01,2023,11,Region V,Camarines Norte,Dengue,28,0,1000000,0.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-11-01,2023,11,Region V,Camarines Norte,Leptospirosis,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-11-01,2023,11,Region V,Camarines Norte,Influenza,39,0,1000000,0.39,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-11-01,2023,11,Region V,Camarines Sur,Dengue,44,0,1000000,0.44,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-11-01,2023,11,Region V,Camarines Sur,Leptospirosis,34,0,1000000,0.34,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-11-01,2023,11,Region V,Camarines Sur,Influenza,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-11-01,2023,11,Region IV-A,Cavite,Dengue,47,0,1000000,0.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-11-01,2023,11,Region IV-A,Cavite,Leptospirosis,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-11-01,2023,11,Region IV-A,Cavite,Influenza,23,0,1000000,0.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-11-01,2023,11,Region IV-A,Laguna,Dengue,10,0,1000000,0.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-11-01,2023,11,Region IV-A,Laguna,Leptospirosis,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-11-01,2023,11,Region IV-A,Laguna,Influenza,44,0,1000000,0.44,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-11-01,2023,11,Region V,Albay,Dengue,20,0,1000000,0.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-11-01,2023,11,Region V,Albay,Leptospirosis,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-11-01,2023,11,Region V,Albay,Influenza,25,0,1000000,0.25,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-12-01,2023,12,Region IV-A,Batangas,Dengue,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-12-01,2023,12,Region IV-A,Batangas,Leptospirosis,23,0,1000000,0.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-12-01,2023,12,Region IV-A,Batangas,Influenza,124,0,1000000,1.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-12-01,2023,12,Region IV-A,Quezon,Dengue,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-12-01,2023,12,Region IV-A,Quezon,Leptospirosis,45,0,1000000,0.45,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-12-01,2023,12,Region IV-A,Quezon,Influenza,159,1,1000000,1.59,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-12-01,2023,12,MIMAROPA,Marinduque,Dengue,21,0,1000000,0.21,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-12-01,2023,12,MIMAROPA,Marinduque,Leptospirosis,23,0,1000000,0.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-12-01,2023,12,MIMAROPA,Marinduque,Influenza,184,0,1000000,1.84,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-12-01,2023,12,Region V,Camarines Norte,Dengue,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-12-01,2023,12,Region V,Camarines Norte,Leptospirosis,31,0,1000000,0.31,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-12-01,2023,12,Region V,Camarines Norte,Influenza,171,0,1000000,1.71,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-12-01,2023,12,Region V,Camarines Sur,Dengue,45,0,1000000,0.45,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-12-01,2023,12,Region V,Camarines Sur,Leptospirosis,34,0,1000000,0.34,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-12-01,2023,12,Region V,Camarines Sur,Influenza,193,3,1000000,1.93,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-12-01,2023,12,Region IV-A,Cavite,Dengue,45,0,1000000,0.45,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-12-01,2023,12,Region IV-A,Cavite,Leptospirosis,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-12-01,2023,12,Region IV-A,Cavite,Influenza,163,0,1000000,1.63,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-12-01,2023,12,Region IV-A,Laguna,Dengue,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-12-01,2023,12,Region IV-A,Laguna,Leptospirosis,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-12-01,2023,12,Region IV-A,Laguna,Influenza,198,3,1000000,1.98,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-12-01,2023,12,Region V,Albay,Dengue,14,0,1000000,0.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-12-01,2023,12,Region V,Albay,Leptospirosis,25,0,1000000,0.25,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2023-12-01,2023,12,Region V,Albay,Influenza,106,0,1000000,1.06,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-01-01,2024,1,Region IV-A,Batangas,Dengue,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-01-01,2024,1,Region IV-A,Batangas,Leptospirosis,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-01-01,2024,1,Region IV-A,Batangas,Influenza,165,2,1000000,1.65,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-01-01,2024,1,Region IV-A,Quezon,Dengue,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-01-01,2024,1,Region IV-A,Quezon,Leptospirosis,16,0,1000000,0.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-01-01,2024,1,Region IV-A,Quezon,Influenza,133,2,1000000,1.33,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-01-01,2024,1,MIMAROPA,Marinduque,Dengue,17,0,1000000,0.17,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-01-01,2024,1,MIMAROPA,Marinduque,Leptospirosis,33,0,1000000,0.33,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-01-01,2024,1,MIMAROPA,Marinduque,Influenza,162,0,1000000,1.62,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-01-01,2024,1,Region V,Camarines Norte,Dengue,27,0,1000000,0.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-01-01,2024,1,Region V,Camarines Norte,Leptospirosis,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-01-01,2024,1,Region V,Camarines Norte,Influenza,121,1,1000000,1.21,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-01-01,2024,1,Region V,Camarines Sur,Dengue,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-01-01,2024,1,Region V,Camarines Sur,Leptospirosis,44,0,1000000,0.44,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-01-01,2024,1,Region V,Camarines Sur,Influenza,117,0,1000000,1.17,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-01-01,2024,1,Region IV-A,Cavite,Dengue,46,0,1000000,0.46,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-01-01,2024,1,Region IV-A,Cavite,Leptospirosis,33,0,1000000,0.33,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-01-01,2024,1,Region IV-A,Cavite,Influenza,150,1,1000000,1.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-01-01,2024,1,Region IV-A,Laguna,Dengue,21,0,1000000,0.21,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-01-01,2024,1,Region IV-A,Laguna,Leptospirosis,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-01-01,2024,1,Region IV-A,Laguna,Influenza,137,2,1000000,1.37,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-01-01,2024,1,Region V,Albay,Dengue,14,0,1000000,0.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-01-01,2024,1,Region V,Albay,Leptospirosis,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-01-01,2024,1,Region V,Albay,Influenza,180,2,1000000,1.8,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-02-01,2024,2,Region IV-A,Batangas,Dengue,27,0,1000000,0.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-02-01,2024,2,Region IV-A,Batangas,Leptospirosis,16,0,1000000,0.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-02-01,2024,2,Region IV-A,Batangas,Influenza,173,2,1000000,1.73,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-02-01,2024,2,Region IV-A,Quezon,Dengue,47,0,1000000,0.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-02-01,2024,2,Region IV-A,Quezon,Leptospirosis,17,0,1000000,0.17,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-02-01,2024,2,Region IV-A,Quezon,Influenza,114,2,1000000,1.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-02-01,2024,2,MIMAROPA,Marinduque,Dengue,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-02-01,2024,2,MIMAROPA,Marinduque,Leptospirosis,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-02-01,2024,2,MIMAROPA,Marinduque,Influenza,102,1,1000000,1.02,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-02-01,2024,2,Region V,Camarines Norte,Dengue,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-02-01,2024,2,Region V,Camarines Norte,Leptospirosis,17,0,1000000,0.17,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-02-01,2024,2,Region V,Camarines Norte,Influenza,113,0,1000000,1.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-02-01,2024,2,Region V,Camarines Sur,Dengue,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-02-01,2024,2,Region V,Camarines Sur,Leptospirosis,26,0,1000000,0.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-02-01,2024,2,Region V,Camarines Sur,Influenza,114,0,1000000,1.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-02-01,2024,2,Region IV-A,Cavite,Dengue,11,0,1000000,0.11,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-02-01,2024,2,Region IV-A,Cavite,Leptospirosis,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-02-01,2024,2,Region IV-A,Cavite,Influenza,184,3,1000000,1.84,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-02-01,2024,2,Region IV-A,Laguna,Dengue,16,0,1000000,0.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-02-01,2024,2,Region IV-A,Laguna,Leptospirosis,30,0,1000000,0.3,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-02-01,2024,2,Region IV-A,Laguna,Influenza,100,0,1000000,1.0,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-02-01,2024,2,Region V,Albay,Dengue,46,0,1000000,0.46,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-02-01,2024,2,Region V,Albay,Leptospirosis,45,0,1000000,0.45,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-02-01,2024,2,Region V,Albay,Influenza,135,2,1000000,1.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-03-01,2024,3,Region IV-A,Batangas,Dengue,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-03-01,2024,3,Region IV-A,Batangas,Leptospirosis,46,0,1000000,0.46,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-03-01,2024,3,Region IV-A,Batangas,Influenza,32,0,1000000,0.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-03-01,2024,3,Region IV-A,Quezon,Dengue,46,0,1000000,0.46,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-03-01,2024,3,Region IV-A,Quezon,Leptospirosis,27,0,1000000,0.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-03-01,2024,3,Region IV-A,Quezon,Influenza,11,0,1000000,0.11,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-03-01,2024,3,MIMAROPA,Marinduque,Dengue,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-03-01,2024,3,MIMAROPA,Marinduque,Leptospirosis,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-03-01,2024,3,MIMAROPA,Marinduque,Influenza,43,0,1000000,0.43,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-03-01,2024,3,Region V,Camarines Norte,Dengue,23,0,1000000,0.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-03-01,2024,3,Region V,Camarines Norte,Leptospirosis,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-03-01,2024,3,Region V,Camarines Norte,Influenza,34,0,1000000,0.34,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-03-01,2024,3,Region V,Camarines Sur,Dengue,30,0,1000000,0.3,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-03-01,2024,3,Region V,Camarines Sur,Leptospirosis,23,0,1000000,0.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-03-01,2024,3,Region V,Camarines Sur,Influenza,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-03-01,2024,3,Region IV-A,Cavite,Dengue,46,0,1000000,0.46,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-03-01,2024,3,Region IV-A,Cavite,Leptospirosis,28,0,1000000,0.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-03-01,2024,3,Region IV-A,Cavite,Influenza,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-03-01,2024,3,Region IV-A,Laguna,Dengue,21,0,1000000,0.21,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-03-01,2024,3,Region IV-A,Laguna,Leptospirosis,22,0,1000000,0.22,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-03-01,2024,3,Region IV-A,Laguna,Influenza,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-03-01,2024,3,Region V,Albay,Dengue,47,0,1000000,0.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-03-01,2024,3,Region V,Albay,Leptospirosis,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-03-01,2024,3,Region V,Albay,Influenza,41,0,1000000,0.41,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-04-01,2024,4,Region IV-A,Batangas,Dengue,26,0,1000000,0.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-04-01,2024,4,Region IV-A,Batangas,Leptospirosis,25,0,1000000,0.25,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-04-01,2024,4,Region IV-A,Batangas,Influenza,14,0,1000000,0.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-04-01,2024,4,Region IV-A,Quezon,Dengue,15,0,1000000,0.15,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-04-01,2024,4,Region IV-A,Quezon,Leptospirosis,47,0,1000000,0.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-04-01,2024,4,Region IV-A,Quezon,Influenza,41,0,1000000,0.41,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-04-01,2024,4,MIMAROPA,Marinduque,Dengue,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-04-01,2024,4,MIMAROPA,Marinduque,Leptospirosis,46,0,1000000,0.46,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-04-01,2024,4,MIMAROPA,Marinduque,Influenza,10,0,1000000,0.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-04-01,2024,4,Region V,Camarines Norte,Dengue,15,0,1000000,0.15,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-04-01,2024,4,Region V,Camarines Norte,Leptospirosis,45,0,1000000,0.45,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-04-01,2024,4,Region V,Camarines Norte,Influenza,30,0,1000000,0.3,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-04-01,2024,4,Region V,Camarines Sur,Dengue,26,0,1000000,0.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-04-01,2024,4,Region V,Camarines Sur,Leptospirosis,43,0,1000000,0.43,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-04-01,2024,4,Region V,Camarines Sur,Influenza,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-04-01,2024,4,Region IV-A,Cavite,Dengue,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-04-01,2024,4,Region IV-A,Cavite,Leptospirosis,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-04-01,2024,4,Region IV-A,Cavite,Influenza,14,0,1000000,0.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-04-01,2024,4,Region IV-A,Laguna,Dengue,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-04-01,2024,4,Region IV-A,Laguna,Leptospirosis,47,0,1000000,0.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-04-01,2024,4,Region IV-A,Laguna,Influenza,39,0,1000000,0.39,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-04-01,2024,4,Region V,Albay,Dengue,14,0,1000000,0.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-04-01,2024,4,Region V,Albay,Leptospirosis,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-04-01,2024,4,Region V,Albay,Influenza,33,0,1000000,0.33,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-05-01,2024,5,Region IV-A,Batangas,Dengue,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-05-01,2024,5,Region IV-A,Batangas,Leptospirosis,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-05-01,2024,5,Region IV-A,Batangas,Influenza,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-05-01,2024,5,Region IV-A,Quezon,Dengue,27,0,1000000,0.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-05-01,2024,5,Region IV-A,Quezon,Leptospirosis,43,0,1000000,0.43,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-05-01,2024,5,Region IV-A,Quezon,Influenza,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-05-01,2024,5,MIMAROPA,Marinduque,Dengue,22,0,1000000,0.22,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-05-01,2024,5,MIMAROPA,Marinduque,Leptospirosis,32,0,1000000,0.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-05-01,2024,5,MIMAROPA,Marinduque,Influenza,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-05-01,2024,5,Region V,Camarines Norte,Dengue,16,0,1000000,0.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-05-01,2024,5,Region V,Camarines Norte,Leptospirosis,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-05-01,2024,5,Region V,Camarines Norte,Influenza,41,0,1000000,0.41,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-05-01,2024,5,Region V,Camarines Sur,Dengue,27,0,1000000,0.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-05-01,2024,5,Region V,Camarines Sur,Leptospirosis,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-05-01,2024,5,Region V,Camarines Sur,Influenza,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-05-01,2024,5,Region IV-A,Cavite,Dengue,39,0,1000000,0.39,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-05-01,2024,5,Region IV-A,Cavite,Leptospirosis,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-05-01,2024,5,Region IV-A,Cavite,Influenza,26,0,1000000,0.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-05-01,2024,5,Region IV-A,Laguna,Dengue,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-05-01,2024,5,Region IV-A,Laguna,Leptospirosis,14,0,1000000,0.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-05-01,2024,5,Region IV-A,Laguna,Influenza,32,0,1000000,0.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-05-01,2024,5,Region V,Albay,Dengue,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-05-01,2024,5,Region V,Albay,Leptospirosis,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-05-01,2024,5,Region V,Albay,Influenza,17,0,1000000,0.17,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-06-01,2024,6,Region IV-A,Batangas,Dengue,28,0,1000000,0.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-06-01,2024,6,Region IV-A,Batangas,Leptospirosis,30,0,1000000,0.3,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-06-01,2024,6,Region IV-A,Batangas,Influenza,30,0,1000000,0.3,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-06-01,2024,6,Region IV-A,Quezon,Dengue,15,0,1000000,0.15,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-06-01,2024,6,Region IV-A,Quezon,Leptospirosis,25,0,1000000,0.25,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-06-01,2024,6,Region IV-A,Quezon,Influenza,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-06-01,2024,6,MIMAROPA,Marinduque,Dengue,44,0,1000000,0.44,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-06-01,2024,6,MIMAROPA,Marinduque,Leptospirosis,26,0,1000000,0.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-06-01,2024,6,MIMAROPA,Marinduque,Influenza,19,0,1000000,0.19,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-06-01,2024,6,Region V,Camarines Norte,Dengue,21,0,1000000,0.21,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-06-01,2024,6,Region V,Camarines Norte,Leptospirosis,14,0,1000000,0.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-06-01,2024,6,Region V,Camarines Norte,Influenza,37,0,1000000,0.37,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-06-01,2024,6,Region V,Camarines Sur,Dengue,11,0,1000000,0.11,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-06-01,2024,6,Region V,Camarines Sur,Leptospirosis,28,0,1000000,0.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-06-01,2024,6,Region V,Camarines Sur,Influenza,14,0,1000000,0.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-06-01,2024,6,Region IV-A,Cavite,Dengue,43,0,1000000,0.43,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-06-01,2024,6,Region IV-A,Cavite,Leptospirosis,33,0,1000000,0.33,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-06-01,2024,6,Region IV-A,Cavite,Influenza,41,0,1000000,0.41,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-06-01,2024,6,Region IV-A,Laguna,Dengue,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-06-01,2024,6,Region IV-A,Laguna,Leptospirosis,42,0,1000000,0.42,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-06-01,2024,6,Region IV-A,Laguna,Influenza,34,0,1000000,0.34,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-06-01,2024,6,Region V,Albay,Dengue,44,0,1000000,0.44,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-06-01,2024,6,Region V,Albay,Leptospirosis,10,0,1000000,0.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-06-01,2024,6,Region V,Albay,Influenza,22,0,1000000,0.22,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-07-01,2024,7,Region IV-A,Batangas,Dengue,192,0,1000000,1.92,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-07-01,2024,7,Region IV-A,Batangas,Leptospirosis,15,0,1000000,0.15,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-07-01,2024,7,Region IV-A,Batangas,Influenza,45,0,1000000,0.45,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-07-01,2024,7,Region IV-A,Quezon,Dengue,184,0,1000000,1.84,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-07-01,2024,7,Region IV-A,Quezon,Leptospirosis,36,0,1000000,0.36,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-07-01,2024,7,Region IV-A,Quezon,Influenza,44,0,1000000,0.44,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-07-01,2024,7,MIMAROPA,Marinduque,Dengue,335,2,1000000,3.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-07-01,2024,7,MIMAROPA,Marinduque,Leptospirosis,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-07-01,2024,7,MIMAROPA,Marinduque,Influenza,27,0,1000000,0.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-07-01,2024,7,Region V,Camarines Norte,Dengue,306,2,1000000,3.06,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-07-01,2024,7,Region V,Camarines Norte,Leptospirosis,43,0,1000000,0.43,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-07-01,2024,7,Region V,Camarines Norte,Influenza,19,0,1000000,0.19,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-07-01,2024,7,Region V,Camarines Sur,Dengue,277,2,1000000,2.77,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-07-01,2024,7,Region V,Camarines Sur,Leptospirosis,32,0,1000000,0.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-07-01,2024,7,Region V,Camarines Sur,Influenza,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-07-01,2024,7,Region IV-A,Cavite,Dengue,302,4,1000000,3.02,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-07-01,2024,7,Region IV-A,Cavite,Leptospirosis,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-07-01,2024,7,Region IV-A,Cavite,Influenza,31,0,1000000,0.31,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-07-01,2024,7,Region IV-A,Laguna,Dengue,219,2,1000000,2.19,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-07-01,2024,7,Region IV-A,Laguna,Leptospirosis,17,0,1000000,0.17,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-07-01,2024,7,Region IV-A,Laguna,Influenza,36,0,1000000,0.36,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-07-01,2024,7,Region V,Albay,Dengue,150,2,1000000,1.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-07-01,2024,7,Region V,Albay,Leptospirosis,21,0,1000000,0.21,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-07-01,2024,7,Region V,Albay,Influenza,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-08-01,2024,8,Region IV-A,Batangas,Dengue,346,5,1000000,3.46,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-08-01,2024,8,Region IV-A,Batangas,Leptospirosis,110,0,1000000,1.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-08-01,2024,8,Region IV-A,Batangas,Influenza,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-08-01,2024,8,Region IV-A,Quezon,Dengue,161,0,1000000,1.61,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-08-01,2024,8,Region IV-A,Quezon,Leptospirosis,81,1,1000000,0.81,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-08-01,2024,8,Region IV-A,Quezon,Influenza,20,0,1000000,0.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-08-01,2024,8,MIMAROPA,Marinduque,Dengue,203,0,1000000,2.03,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-08-01,2024,8,MIMAROPA,Marinduque,Leptospirosis,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-08-01,2024,8,MIMAROPA,Marinduque,Influenza,14,0,1000000,0.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-08-01,2024,8,Region V,Camarines Norte,Dengue,286,0,1000000,2.86,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-08-01,2024,8,Region V,Camarines Norte,Leptospirosis,116,0,1000000,1.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-08-01,2024,8,Region V,Camarines Norte,Influenza,22,0,1000000,0.22,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-08-01,2024,8,Region V,Camarines Sur,Dengue,327,0,1000000,3.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-08-01,2024,8,Region V,Camarines Sur,Leptospirosis,129,2,1000000,1.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-08-01,2024,8,Region V,Camarines Sur,Influenza,43,0,1000000,0.43,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-08-01,2024,8,Region IV-A,Cavite,Dengue,188,1,1000000,1.88,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-08-01,2024,8,Region IV-A,Cavite,Leptospirosis,122,2,1000000,1.22,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-08-01,2024,8,Region IV-A,Cavite,Influenza,19,0,1000000,0.19,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-08-01,2024,8,Region IV-A,Laguna,Dengue,184,1,1000000,1.84,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-08-01,2024,8,Region IV-A,Laguna,Leptospirosis,67,0,1000000,0.67,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-08-01,2024,8,Region IV-A,Laguna,Influenza,16,0,1000000,0.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-08-01,2024,8,Region V,Albay,Dengue,156,1,1000000,1.56,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-08-01,2024,8,Region V,Albay,Leptospirosis,110,1,1000000,1.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-08-01,2024,8,Region V,Albay,Influenza,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-09-01,2024,9,Region IV-A,Batangas,Dengue,175,2,1000000,1.75,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-09-01,2024,9,Region IV-A,Batangas,Leptospirosis,52,0,1000000,0.52,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-09-01,2024,9,Region IV-A,Batangas,Influenza,30,0,1000000,0.3,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-09-01,2024,9,Region IV-A,Quezon,Dengue,226,1,1000000,2.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-09-01,2024,9,Region IV-A,Quezon,Leptospirosis,60,0,1000000,0.6,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-09-01,2024,9,Region IV-A,Quezon,Influenza,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-09-01,2024,9,MIMAROPA,Marinduque,Dengue,349,1,1000000,3.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-09-01,2024,9,MIMAROPA,Marinduque,Leptospirosis,128,0,1000000,1.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-09-01,2024,9,MIMAROPA,Marinduque,Influenza,22,0,1000000,0.22,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-09-01,2024,9,Region V,Camarines Norte,Dengue,331,1,1000000,3.31,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-09-01,2024,9,Region V,Camarines Norte,Leptospirosis,112,0,1000000,1.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-09-01,2024,9,Region V,Camarines Norte,Influenza,19,0,1000000,0.19,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-09-01,2024,9,Region V,Camarines Sur,Dengue,331,2,1000000,3.31,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-09-01,2024,9,Region V,Camarines Sur,Leptospirosis,102,0,1000000,1.02,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-09-01,2024,9,Region V,Camarines Sur,Influenza,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-09-01,2024,9,Region IV-A,Cavite,Dengue,249,1,1000000,2.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-09-01,2024,9,Region IV-A,Cavite,Leptospirosis,145,1,1000000,1.45,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-09-01,2024,9,Region IV-A,Cavite,Influenza,30,0,1000000,0.3,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-09-01,2024,9,Region IV-A,Laguna,Dengue,303,2,1000000,3.03,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-09-01,2024,9,Region IV-A,Laguna,Leptospirosis,120,1,1000000,1.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-09-01,2024,9,Region IV-A,Laguna,Influenza,23,0,1000000,0.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-09-01,2024,9,Region V,Albay,Dengue,158,2,1000000,1.58,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-09-01,2024,9,Region V,Albay,Leptospirosis,115,2,1000000,1.15,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-09-01,2024,9,Region V,Albay,Influenza,17,0,1000000,0.17,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-10-01,2024,10,Region IV-A,Batangas,Dengue,209,1,1000000,2.09,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-10-01,2024,10,Region IV-A,Batangas,Leptospirosis,70,0,1000000,0.7,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-10-01,2024,10,Region IV-A,Batangas,Influenza,16,0,1000000,0.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-10-01,2024,10,Region IV-A,Quezon,Dengue,239,4,1000000,2.39,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-10-01,2024,10,Region IV-A,Quezon,Leptospirosis,150,2,1000000,1.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-10-01,2024,10,Region IV-A,Quezon,Influenza,14,0,1000000,0.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-10-01,2024,10,MIMAROPA,Marinduque,Dengue,297,5,1000000,2.97,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-10-01,2024,10,MIMAROPA,Marinduque,Leptospirosis,63,1,1000000,0.63,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-10-01,2024,10,MIMAROPA,Marinduque,Influenza,42,0,1000000,0.42,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-10-01,2024,10,Region V,Camarines Norte,Dengue,211,3,1000000,2.11,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-10-01,2024,10,Region V,Camarines Norte,Leptospirosis,141,0,1000000,1.41,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-10-01,2024,10,Region V,Camarines Norte,Influenza,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-10-01,2024,10,Region V,Camarines Sur,Dengue,175,2,1000000,1.75,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-10-01,2024,10,Region V,Camarines Sur,Leptospirosis,149,2,1000000,1.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-10-01,2024,10,Region V,Camarines Sur,Influenza,31,0,1000000,0.31,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-10-01,2024,10,Region IV-A,Cavite,Dengue,311,0,1000000,3.11,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-10-01,2024,10,Region IV-A,Cavite,Leptospirosis,114,0,1000000,1.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-10-01,2024,10,Region IV-A,Cavite,Influenza,15,0,1000000,0.15,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-10-01,2024,10,Region IV-A,Laguna,Dengue,158,0,1000000,1.58,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-10-01,2024,10,Region IV-A,Laguna,Leptospirosis,140,1,1000000,1.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-10-01,2024,10,Region IV-A,Laguna,Influenza,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-10-01,2024,10,Region V,Albay,Dengue,332,3,1000000,3.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-10-01,2024,10,Region V,Albay,Leptospirosis,65,0,1000000,0.65,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-10-01,2024,10,Region V,Albay,Influenza,17,0,1000000,0.17,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-11-01,2024,11,Region IV-A,Batangas,Dengue,20,0,1000000,0.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-11-01,2024,11,Region IV-A,Batangas,Leptospirosis,19,0,1000000,0.19,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-11-01,2024,11,Region IV-A,Batangas,Influenza,23,0,1000000,0.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-11-01,2024,11,Region IV-A,Quezon,Dengue,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-11-01,2024,11,Region IV-A,Quezon,Leptospirosis,30,0,1000000,0.3,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-11-01,2024,11,Region IV-A,Quezon,Influenza,28,0,1000000,0.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-11-01,2024,11,MIMAROPA,Marinduque,Dengue,15,0,1000000,0.15,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-11-01,2024,11,MIMAROPA,Marinduque,Leptospirosis,31,0,1000000,0.31,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-11-01,2024,11,MIMAROPA,Marinduque,Influenza,14,0,1000000,0.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-11-01,2024,11,Region V,Camarines Norte,Dengue,33,0,1000000,0.33,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-11-01,2024,11,Region V,Camarines Norte,Leptospirosis,16,0,1000000,0.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-11-01,2024,11,Region V,Camarines Norte,Influenza,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-11-01,2024,11,Region V,Camarines Sur,Dengue,23,0,1000000,0.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-11-01,2024,11,Region V,Camarines Sur,Leptospirosis,37,0,1000000,0.37,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-11-01,2024,11,Region V,Camarines Sur,Influenza,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-11-01,2024,11,Region IV-A,Cavite,Dengue,28,0,1000000,0.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-11-01,2024,11,Region IV-A,Cavite,Leptospirosis,44,0,1000000,0.44,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-11-01,2024,11,Region IV-A,Cavite,Influenza,36,0,1000000,0.36,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-11-01,2024,11,Region IV-A,Laguna,Dengue,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-11-01,2024,11,Region IV-A,Laguna,Leptospirosis,31,0,1000000,0.31,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-11-01,2024,11,Region IV-A,Laguna,Influenza,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-11-01,2024,11,Region V,Albay,Dengue,11,0,1000000,0.11,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-11-01,2024,11,Region V,Albay,Leptospirosis,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-11-01,2024,11,Region V,Albay,Influenza,19,0,1000000,0.19,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-12-01,2024,12,Region IV-A,Batangas,Dengue,31,0,1000000,0.31,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-12-01,2024,12,Region IV-A,Batangas,Leptospirosis,39,0,1000000,0.39,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-12-01,2024,12,Region IV-A,Batangas,Influenza,157,1,1000000,1.57,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-12-01,2024,12,Region IV-A,Quezon,Dengue,27,0,1000000,0.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-12-01,2024,12,Region IV-A,Quezon,Leptospirosis,27,0,1000000,0.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-12-01,2024,12,Region IV-A,Quezon,Influenza,160,3,1000000,1.6,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-12-01,2024,12,MIMAROPA,Marinduque,Dengue,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-12-01,2024,12,MIMAROPA,Marinduque,Leptospirosis,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-12-01,2024,12,MIMAROPA,Marinduque,Influenza,150,2,1000000,1.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-12-01,2024,12,Region V,Camarines Norte,Dengue,15,0,1000000,0.15,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-12-01,2024,12,Region V,Camarines Norte,Leptospirosis,44,0,1000000,0.44,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-12-01,2024,12,Region V,Camarines Norte,Influenza,197,0,1000000,1.97,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-12-01,2024,12,Region V,Camarines Sur,Dengue,45,0,1000000,0.45,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-12-01,2024,12,Region V,Camarines Sur,Leptospirosis,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-12-01,2024,12,Region V,Camarines Sur,Influenza,110,2,1000000,1.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-12-01,2024,12,Region IV-A,Cavite,Dengue,16,0,1000000,0.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-12-01,2024,12,Region IV-A,Cavite,Leptospirosis,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-12-01,2024,12,Region IV-A,Cavite,Influenza,183,3,1000000,1.83,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-12-01,2024,12,Region IV-A,Laguna,Dengue,22,0,1000000,0.22,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-12-01,2024,12,Region IV-A,Laguna,Leptospirosis,31,0,1000000,0.31,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-12-01,2024,12,Region IV-A,Laguna,Influenza,108,1,1000000,1.08,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-12-01,2024,12,Region V,Albay,Dengue,30,0,1000000,0.3,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-12-01,2024,12,Region V,Albay,Leptospirosis,36,0,1000000,0.36,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2024-12-01,2024,12,Region V,Albay,Influenza,192,2,1000000,1.92,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-01-01,2025,1,Region IV-A,Batangas,Dengue,47,0,1000000,0.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-01-01,2025,1,Region IV-A,Batangas,Leptospirosis,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-01-01,2025,1,Region IV-A,Batangas,Influenza,175,2,1000000,1.75,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-01-01,2025,1,Region IV-A,Quezon,Dengue,44,0,1000000,0.44,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-01-01,2025,1,Region IV-A,Quezon,Leptospirosis,28,0,1000000,0.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-01-01,2025,1,Region IV-A,Quezon,Influenza,182,3,1000000,1.82,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-01-01,2025,1,MIMAROPA,Marinduque,Dengue,42,0,1000000,0.42,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-01-01,2025,1,MIMAROPA,Marinduque,Leptospirosis,42,0,1000000,0.42,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-01-01,2025,1,MIMAROPA,Marinduque,Influenza,122,2,1000000,1.22,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-01-01,2025,1,Region V,Camarines Norte,Dengue,23,0,1000000,0.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-01-01,2025,1,Region V,Camarines Norte,Leptospirosis,32,0,1000000,0.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-01-01,2025,1,Region V,Camarines Norte,Influenza,194,0,1000000,1.94,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-01-01,2025,1,Region V,Camarines Sur,Dengue,34,0,1000000,0.34,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-01-01,2025,1,Region V,Camarines Sur,Leptospirosis,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-01-01,2025,1,Region V,Camarines Sur,Influenza,154,2,1000000,1.54,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-01-01,2025,1,Region IV-A,Cavite,Dengue,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-01-01,2025,1,Region IV-A,Cavite,Leptospirosis,43,0,1000000,0.43,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-01-01,2025,1,Region IV-A,Cavite,Influenza,158,2,1000000,1.58,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-01-01,2025,1,Region IV-A,Laguna,Dengue,39,0,1000000,0.39,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-01-01,2025,1,Region IV-A,Laguna,Leptospirosis,32,0,1000000,0.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-01-01,2025,1,Region IV-A,Laguna,Influenza,102,0,1000000,1.02,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-01-01,2025,1,Region V,Albay,Dengue,36,0,1000000,0.36,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-01-01,2025,1,Region V,Albay,Leptospirosis,36,0,1000000,0.36,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-01-01,2025,1,Region V,Albay,Influenza,181,3,1000000,1.81,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-02-01,2025,2,Region IV-A,Batangas,Dengue,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-02-01,2025,2,Region IV-A,Batangas,Leptospirosis,27,0,1000000,0.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-02-01,2025,2,Region IV-A,Batangas,Influenza,126,1,1000000,1.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-02-01,2025,2,Region IV-A,Quezon,Dengue,28,0,1000000,0.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-02-01,2025,2,Region IV-A,Quezon,Leptospirosis,19,0,1000000,0.19,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-02-01,2025,2,Region IV-A,Quezon,Influenza,167,1,1000000,1.67,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-02-01,2025,2,MIMAROPA,Marinduque,Dengue,23,0,1000000,0.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-02-01,2025,2,MIMAROPA,Marinduque,Leptospirosis,34,0,1000000,0.34,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-02-01,2025,2,MIMAROPA,Marinduque,Influenza,152,2,1000000,1.52,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-02-01,2025,2,Region V,Camarines Norte,Dengue,19,0,1000000,0.19,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-02-01,2025,2,Region V,Camarines Norte,Leptospirosis,32,0,1000000,0.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-02-01,2025,2,Region V,Camarines Norte,Influenza,176,0,1000000,1.76,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-02-01,2025,2,Region V,Camarines Sur,Dengue,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-02-01,2025,2,Region V,Camarines Sur,Leptospirosis,30,0,1000000,0.3,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-02-01,2025,2,Region V,Camarines Sur,Influenza,130,0,1000000,1.3,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-02-01,2025,2,Region IV-A,Cavite,Dengue,28,0,1000000,0.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-02-01,2025,2,Region IV-A,Cavite,Leptospirosis,48,0,1000000,0.48,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-02-01,2025,2,Region IV-A,Cavite,Influenza,191,1,1000000,1.91,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-02-01,2025,2,Region IV-A,Laguna,Dengue,10,0,1000000,0.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-02-01,2025,2,Region IV-A,Laguna,Leptospirosis,19,0,1000000,0.19,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-02-01,2025,2,Region IV-A,Laguna,Influenza,169,1,1000000,1.69,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-02-01,2025,2,Region V,Albay,Dengue,48,0,1000000,0.48,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-02-01,2025,2,Region V,Albay,Leptospirosis,22,0,1000000,0.22,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-02-01,2025,2,Region V,Albay,Influenza,132,1,1000000,1.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-03-01,2025,3,Region IV-A,Batangas,Dengue,28,0,1000000,0.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-03-01,2025,3,Region IV-A,Batangas,Leptospirosis,39,0,1000000,0.39,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-03-01,2025,3,Region IV-A,Batangas,Influenza,42,0,1000000,0.42,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-03-01,2025,3,Region IV-A,Quezon,Dengue,33,0,1000000,0.33,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-03-01,2025,3,Region IV-A,Quezon,Leptospirosis,39,0,1000000,0.39,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-03-01,2025,3,Region IV-A,Quezon,Influenza,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-03-01,2025,3,MIMAROPA,Marinduque,Dengue,20,0,1000000,0.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-03-01,2025,3,MIMAROPA,Marinduque,Leptospirosis,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-03-01,2025,3,MIMAROPA,Marinduque,Influenza,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-03-01,2025,3,Region V,Camarines Norte,Dengue,37,0,1000000,0.37,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-03-01,2025,3,Region V,Camarines Norte,Leptospirosis,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-03-01,2025,3,Region V,Camarines Norte,Influenza,42,0,1000000,0.42,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-03-01,2025,3,Region V,Camarines Sur,Dengue,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-03-01,2025,3,Region V,Camarines Sur,Leptospirosis,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-03-01,2025,3,Region V,Camarines Sur,Influenza,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-03-01,2025,3,Region IV-A,Cavite,Dengue,27,0,1000000,0.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-03-01,2025,3,Region IV-A,Cavite,Leptospirosis,36,0,1000000,0.36,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-03-01,2025,3,Region IV-A,Cavite,Influenza,30,0,1000000,0.3,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-03-01,2025,3,Region IV-A,Laguna,Dengue,11,0,1000000,0.11,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-03-01,2025,3,Region IV-A,Laguna,Leptospirosis,27,0,1000000,0.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-03-01,2025,3,Region IV-A,Laguna,Influenza,47,0,1000000,0.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-03-01,2025,3,Region V,Albay,Dengue,25,0,1000000,0.25,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-03-01,2025,3,Region V,Albay,Leptospirosis,34,0,1000000,0.34,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-03-01,2025,3,Region V,Albay,Influenza,10,0,1000000,0.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-04-01,2025,4,Region IV-A,Batangas,Dengue,37,0,1000000,0.37,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-04-01,2025,4,Region IV-A,Batangas,Leptospirosis,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-04-01,2025,4,Region IV-A,Batangas,Influenza,32,0,1000000,0.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-04-01,2025,4,Region IV-A,Quezon,Dengue,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-04-01,2025,4,Region IV-A,Quezon,Leptospirosis,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-04-01,2025,4,Region IV-A,Quezon,Influenza,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-04-01,2025,4,MIMAROPA,Marinduque,Dengue,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-04-01,2025,4,MIMAROPA,Marinduque,Leptospirosis,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-04-01,2025,4,MIMAROPA,Marinduque,Influenza,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-04-01,2025,4,Region V,Camarines Norte,Dengue,47,0,1000000,0.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-04-01,2025,4,Region V,Camarines Norte,Leptospirosis,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-04-01,2025,4,Region V,Camarines Norte,Influenza,34,0,1000000,0.34,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-04-01,2025,4,Region V,Camarines Sur,Dengue,20,0,1000000,0.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-04-01,2025,4,Region V,Camarines Sur,Leptospirosis,36,0,1000000,0.36,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-04-01,2025,4,Region V,Camarines Sur,Influenza,19,0,1000000,0.19,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-04-01,2025,4,Region IV-A,Cavite,Dengue,23,0,1000000,0.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-04-01,2025,4,Region IV-A,Cavite,Leptospirosis,30,0,1000000,0.3,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-04-01,2025,4,Region IV-A,Cavite,Influenza,10,0,1000000,0.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-04-01,2025,4,Region IV-A,Laguna,Dengue,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-04-01,2025,4,Region IV-A,Laguna,Leptospirosis,28,0,1000000,0.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-04-01,2025,4,Region IV-A,Laguna,Influenza,25,0,1000000,0.25,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-04-01,2025,4,Region V,Albay,Dengue,42,0,1000000,0.42,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-04-01,2025,4,Region V,Albay,Leptospirosis,27,0,1000000,0.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-04-01,2025,4,Region V,Albay,Influenza,26,0,1000000,0.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-05-01,2025,5,Region IV-A,Batangas,Dengue,31,0,1000000,0.31,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-05-01,2025,5,Region IV-A,Batangas,Leptospirosis,44,0,1000000,0.44,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-05-01,2025,5,Region IV-A,Batangas,Influenza,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-05-01,2025,5,Region IV-A,Quezon,Dengue,25,0,1000000,0.25,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-05-01,2025,5,Region IV-A,Quezon,Leptospirosis,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-05-01,2025,5,Region IV-A,Quezon,Influenza,28,0,1000000,0.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-05-01,2025,5,MIMAROPA,Marinduque,Dengue,17,0,1000000,0.17,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-05-01,2025,5,MIMAROPA,Marinduque,Leptospirosis,32,0,1000000,0.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-05-01,2025,5,MIMAROPA,Marinduque,Influenza,10,0,1000000,0.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-05-01,2025,5,Region V,Camarines Norte,Dengue,39,0,1000000,0.39,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-05-01,2025,5,Region V,Camarines Norte,Leptospirosis,17,0,1000000,0.17,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-05-01,2025,5,Region V,Camarines Norte,Influenza,16,0,1000000,0.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-05-01,2025,5,Region V,Camarines Sur,Dengue,26,0,1000000,0.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-05-01,2025,5,Region V,Camarines Sur,Leptospirosis,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-05-01,2025,5,Region V,Camarines Sur,Influenza,33,0,1000000,0.33,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-05-01,2025,5,Region IV-A,Cavite,Dengue,19,0,1000000,0.19,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-05-01,2025,5,Region IV-A,Cavite,Leptospirosis,25,0,1000000,0.25,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-05-01,2025,5,Region IV-A,Cavite,Influenza,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-05-01,2025,5,Region IV-A,Laguna,Dengue,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-05-01,2025,5,Region IV-A,Laguna,Leptospirosis,46,0,1000000,0.46,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-05-01,2025,5,Region IV-A,Laguna,Influenza,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-05-01,2025,5,Region V,Albay,Dengue,42,0,1000000,0.42,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-05-01,2025,5,Region V,Albay,Leptospirosis,26,0,1000000,0.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-05-01,2025,5,Region V,Albay,Influenza,28,0,1000000,0.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-06-01,2025,6,Region IV-A,Batangas,Dengue,21,0,1000000,0.21,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-06-01,2025,6,Region IV-A,Batangas,Leptospirosis,28,0,1000000,0.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-06-01,2025,6,Region IV-A,Batangas,Influenza,23,0,1000000,0.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-06-01,2025,6,Region IV-A,Quezon,Dengue,19,0,1000000,0.19,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-06-01,2025,6,Region IV-A,Quezon,Leptospirosis,25,0,1000000,0.25,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-06-01,2025,6,Region IV-A,Quezon,Influenza,25,0,1000000,0.25,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-06-01,2025,6,MIMAROPA,Marinduque,Dengue,48,0,1000000,0.48,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-06-01,2025,6,MIMAROPA,Marinduque,Leptospirosis,32,0,1000000,0.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-06-01,2025,6,MIMAROPA,Marinduque,Influenza,17,0,1000000,0.17,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-06-01,2025,6,Region V,Camarines Norte,Dengue,48,0,1000000,0.48,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-06-01,2025,6,Region V,Camarines Norte,Leptospirosis,45,0,1000000,0.45,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-06-01,2025,6,Region V,Camarines Norte,Influenza,20,0,1000000,0.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-06-01,2025,6,Region V,Camarines Sur,Dengue,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-06-01,2025,6,Region V,Camarines Sur,Leptospirosis,20,0,1000000,0.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-06-01,2025,6,Region V,Camarines Sur,Influenza,11,0,1000000,0.11,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-06-01,2025,6,Region IV-A,Cavite,Dengue,47,0,1000000,0.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-06-01,2025,6,Region IV-A,Cavite,Leptospirosis,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-06-01,2025,6,Region IV-A,Cavite,Influenza,46,0,1000000,0.46,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-06-01,2025,6,Region IV-A,Laguna,Dengue,19,0,1000000,0.19,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-06-01,2025,6,Region IV-A,Laguna,Leptospirosis,23,0,1000000,0.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-06-01,2025,6,Region IV-A,Laguna,Influenza,11,0,1000000,0.11,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-06-01,2025,6,Region V,Albay,Dengue,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-06-01,2025,6,Region V,Albay,Leptospirosis,36,0,1000000,0.36,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-06-01,2025,6,Region V,Albay,Influenza,26,0,1000000,0.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-07-01,2025,7,Region IV-A,Batangas,Dengue,338,3,1000000,3.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-07-01,2025,7,Region IV-A,Batangas,Leptospirosis,16,0,1000000,0.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-07-01,2025,7,Region IV-A,Batangas,Influenza,42,0,1000000,0.42,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-07-01,2025,7,Region IV-A,Quezon,Dengue,211,2,1000000,2.11,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-07-01,2025,7,Region IV-A,Quezon,Leptospirosis,20,0,1000000,0.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-07-01,2025,7,Region IV-A,Quezon,Influenza,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-07-01,2025,7,MIMAROPA,Marinduque,Dengue,233,0,1000000,2.33,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-07-01,2025,7,MIMAROPA,Marinduque,Leptospirosis,14,0,1000000,0.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-07-01,2025,7,MIMAROPA,Marinduque,Influenza,20,0,1000000,0.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-07-01,2025,7,Region V,Camarines Norte,Dengue,319,4,1000000,3.19,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-07-01,2025,7,Region V,Camarines Norte,Leptospirosis,26,0,1000000,0.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-07-01,2025,7,Region V,Camarines Norte,Influenza,23,0,1000000,0.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-07-01,2025,7,Region V,Camarines Sur,Dengue,196,1,1000000,1.96,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-07-01,2025,7,Region V,Camarines Sur,Leptospirosis,37,0,1000000,0.37,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-07-01,2025,7,Region V,Camarines Sur,Influenza,22,0,1000000,0.22,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-07-01,2025,7,Region IV-A,Cavite,Dengue,223,0,1000000,2.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-07-01,2025,7,Region IV-A,Cavite,Leptospirosis,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-07-01,2025,7,Region IV-A,Cavite,Influenza,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-07-01,2025,7,Region IV-A,Laguna,Dengue,187,2,1000000,1.87,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-07-01,2025,7,Region IV-A,Laguna,Leptospirosis,27,0,1000000,0.27,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-07-01,2025,7,Region IV-A,Laguna,Influenza,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-07-01,2025,7,Region V,Albay,Dengue,342,0,1000000,3.42,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-07-01,2025,7,Region V,Albay,Leptospirosis,19,0,1000000,0.19,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-07-01,2025,7,Region V,Albay,Influenza,20,0,1000000,0.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-08-01,2025,8,Region IV-A,Batangas,Dengue,171,2,1000000,1.71,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-08-01,2025,8,Region IV-A,Batangas,Leptospirosis,73,1,1000000,0.73,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-08-01,2025,8,Region IV-A,Batangas,Influenza,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-08-01,2025,8,Region IV-A,Quezon,Dengue,334,2,1000000,3.34,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-08-01,2025,8,Region IV-A,Quezon,Leptospirosis,131,1,1000000,1.31,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-08-01,2025,8,Region IV-A,Quezon,Influenza,20,0,1000000,0.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-08-01,2025,8,MIMAROPA,Marinduque,Dengue,182,1,1000000,1.82,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-08-01,2025,8,MIMAROPA,Marinduque,Leptospirosis,125,1,1000000,1.25,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-08-01,2025,8,MIMAROPA,Marinduque,Influenza,22,0,1000000,0.22,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-08-01,2025,8,Region V,Camarines Norte,Dengue,179,0,1000000,1.79,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-08-01,2025,8,Region V,Camarines Norte,Leptospirosis,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-08-01,2025,8,Region V,Camarines Norte,Influenza,41,0,1000000,0.41,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-08-01,2025,8,Region V,Camarines Sur,Dengue,155,1,1000000,1.55,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-08-01,2025,8,Region V,Camarines Sur,Leptospirosis,53,0,1000000,0.53,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-08-01,2025,8,Region V,Camarines Sur,Influenza,34,0,1000000,0.34,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-08-01,2025,8,Region IV-A,Cavite,Dengue,304,0,1000000,3.04,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-08-01,2025,8,Region IV-A,Cavite,Leptospirosis,145,0,1000000,1.45,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-08-01,2025,8,Region IV-A,Cavite,Influenza,37,0,1000000,0.37,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-08-01,2025,8,Region IV-A,Laguna,Dengue,312,0,1000000,3.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-08-01,2025,8,Region IV-A,Laguna,Leptospirosis,51,0,1000000,0.51,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-08-01,2025,8,Region IV-A,Laguna,Influenza,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-08-01,2025,8,Region V,Albay,Dengue,186,2,1000000,1.86,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-08-01,2025,8,Region V,Albay,Leptospirosis,98,1,1000000,0.98,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-08-01,2025,8,Region V,Albay,Influenza,39,0,1000000,0.39,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-09-01,2025,9,Region IV-A,Batangas,Dengue,330,5,1000000,3.3,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-09-01,2025,9,Region IV-A,Batangas,Leptospirosis,141,0,1000000,1.41,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-09-01,2025,9,Region IV-A,Batangas,Influenza,17,0,1000000,0.17,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-09-01,2025,9,Region IV-A,Quezon,Dengue,291,4,1000000,2.91,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-09-01,2025,9,Region IV-A,Quezon,Leptospirosis,107,1,1000000,1.07,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-09-01,2025,9,Region IV-A,Quezon,Influenza,16,0,1000000,0.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-09-01,2025,9,MIMAROPA,Marinduque,Dengue,308,0,1000000,3.08,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-09-01,2025,9,MIMAROPA,Marinduque,Leptospirosis,142,0,1000000,1.42,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-09-01,2025,9,MIMAROPA,Marinduque,Influenza,38,0,1000000,0.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-09-01,2025,9,Region V,Camarines Norte,Dengue,247,3,1000000,2.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-09-01,2025,9,Region V,Camarines Norte,Leptospirosis,115,1,1000000,1.15,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-09-01,2025,9,Region V,Camarines Norte,Influenza,25,0,1000000,0.25,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-09-01,2025,9,Region V,Camarines Sur,Dengue,226,0,1000000,2.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-09-01,2025,9,Region V,Camarines Sur,Leptospirosis,149,2,1000000,1.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-09-01,2025,9,Region V,Camarines Sur,Influenza,48,0,1000000,0.48,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-09-01,2025,9,Region IV-A,Cavite,Dengue,306,0,1000000,3.06,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-09-01,2025,9,Region IV-A,Cavite,Leptospirosis,68,0,1000000,0.68,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-09-01,2025,9,Region IV-A,Cavite,Influenza,45,0,1000000,0.45,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-09-01,2025,9,Region IV-A,Laguna,Dengue,170,3,1000000,1.7,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-09-01,2025,9,Region IV-A,Laguna,Leptospirosis,116,1,1000000,1.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-09-01,2025,9,Region IV-A,Laguna,Influenza,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-09-01,2025,9,Region V,Albay,Dengue,238,2,1000000,2.38,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-09-01,2025,9,Region V,Albay,Leptospirosis,68,0,1000000,0.68,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-09-01,2025,9,Region V,Albay,Influenza,47,0,1000000,0.47,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-10-01,2025,10,Region IV-A,Batangas,Dengue,171,0,1000000,1.71,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-10-01,2025,10,Region IV-A,Batangas,Leptospirosis,148,1,1000000,1.48,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-10-01,2025,10,Region IV-A,Batangas,Influenza,45,0,1000000,0.45,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-10-01,2025,10,Region IV-A,Quezon,Dengue,204,3,1000000,2.04,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-10-01,2025,10,Region IV-A,Quezon,Leptospirosis,96,0,1000000,0.96,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-10-01,2025,10,Region IV-A,Quezon,Influenza,11,0,1000000,0.11,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-10-01,2025,10,MIMAROPA,Marinduque,Dengue,174,1,1000000,1.74,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-10-01,2025,10,MIMAROPA,Marinduque,Leptospirosis,87,1,1000000,0.87,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-10-01,2025,10,MIMAROPA,Marinduque,Influenza,39,0,1000000,0.39,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-10-01,2025,10,Region V,Camarines Norte,Dengue,315,2,1000000,3.15,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-10-01,2025,10,Region V,Camarines Norte,Leptospirosis,96,0,1000000,0.96,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-10-01,2025,10,Region V,Camarines Norte,Influenza,26,0,1000000,0.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-10-01,2025,10,Region V,Camarines Sur,Dengue,341,5,1000000,3.41,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-10-01,2025,10,Region V,Camarines Sur,Leptospirosis,78,1,1000000,0.78,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-10-01,2025,10,Region V,Camarines Sur,Influenza,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-10-01,2025,10,Region IV-A,Cavite,Dengue,194,0,1000000,1.94,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-10-01,2025,10,Region IV-A,Cavite,Leptospirosis,103,0,1000000,1.03,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-10-01,2025,10,Region IV-A,Cavite,Influenza,19,0,1000000,0.19,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-10-01,2025,10,Region IV-A,Laguna,Dengue,175,0,1000000,1.75,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-10-01,2025,10,Region IV-A,Laguna,Leptospirosis,64,1,1000000,0.64,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-10-01,2025,10,Region IV-A,Laguna,Influenza,25,0,1000000,0.25,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-10-01,2025,10,Region V,Albay,Dengue,208,3,1000000,2.08,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-10-01,2025,10,Region V,Albay,Leptospirosis,145,0,1000000,1.45,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-10-01,2025,10,Region V,Albay,Influenza,19,0,1000000,0.19,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-11-01,2025,11,Region IV-A,Batangas,Dengue,25,0,1000000,0.25,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-11-01,2025,11,Region IV-A,Batangas,Leptospirosis,10,0,1000000,0.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-11-01,2025,11,Region IV-A,Batangas,Influenza,20,0,1000000,0.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-11-01,2025,11,Region IV-A,Quezon,Dengue,15,0,1000000,0.15,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-11-01,2025,11,Region IV-A,Quezon,Leptospirosis,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-11-01,2025,11,Region IV-A,Quezon,Influenza,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-11-01,2025,11,MIMAROPA,Marinduque,Dengue,23,0,1000000,0.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-11-01,2025,11,MIMAROPA,Marinduque,Leptospirosis,26,0,1000000,0.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-11-01,2025,11,MIMAROPA,Marinduque,Influenza,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-11-01,2025,11,Region V,Camarines Norte,Dengue,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-11-01,2025,11,Region V,Camarines Norte,Leptospirosis,20,0,1000000,0.2,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-11-01,2025,11,Region V,Camarines Norte,Influenza,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-11-01,2025,11,Region V,Camarines Sur,Dengue,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-11-01,2025,11,Region V,Camarines Sur,Leptospirosis,40,0,1000000,0.4,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-11-01,2025,11,Region V,Camarines Sur,Influenza,16,0,1000000,0.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-11-01,2025,11,Region IV-A,Cavite,Dengue,14,0,1000000,0.14,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-11-01,2025,11,Region IV-A,Cavite,Leptospirosis,31,0,1000000,0.31,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-11-01,2025,11,Region IV-A,Cavite,Influenza,42,0,1000000,0.42,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-11-01,2025,11,Region IV-A,Laguna,Dengue,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-11-01,2025,11,Region IV-A,Laguna,Leptospirosis,16,0,1000000,0.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-11-01,2025,11,Region IV-A,Laguna,Influenza,32,0,1000000,0.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-11-01,2025,11,Region V,Albay,Dengue,16,0,1000000,0.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-11-01,2025,11,Region V,Albay,Leptospirosis,10,0,1000000,0.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-11-01,2025,11,Region V,Albay,Influenza,49,0,1000000,0.49,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-12-01,2025,12,Region IV-A,Batangas,Dengue,28,0,1000000,0.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-12-01,2025,12,Region IV-A,Batangas,Leptospirosis,12,0,1000000,0.12,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-12-01,2025,12,Region IV-A,Batangas,Influenza,132,0,1000000,1.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-12-01,2025,12,Region IV-A,Quezon,Dengue,35,0,1000000,0.35,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-12-01,2025,12,Region IV-A,Quezon,Leptospirosis,26,0,1000000,0.26,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-12-01,2025,12,Region IV-A,Quezon,Influenza,158,2,1000000,1.58,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-12-01,2025,12,MIMAROPA,Marinduque,Dengue,23,0,1000000,0.23,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-12-01,2025,12,MIMAROPA,Marinduque,Leptospirosis,10,0,1000000,0.1,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-12-01,2025,12,MIMAROPA,Marinduque,Influenza,118,1,1000000,1.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-12-01,2025,12,Region V,Camarines Norte,Dengue,29,0,1000000,0.29,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-12-01,2025,12,Region V,Camarines Norte,Leptospirosis,39,0,1000000,0.39,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-12-01,2025,12,Region V,Camarines Norte,Influenza,128,1,1000000,1.28,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-12-01,2025,12,Region V,Camarines Sur,Dengue,50,0,1000000,0.5,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-12-01,2025,12,Region V,Camarines Sur,Leptospirosis,45,0,1000000,0.45,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-12-01,2025,12,Region V,Camarines Sur,Influenza,116,1,1000000,1.16,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-12-01,2025,12,Region IV-A,Cavite,Dengue,18,0,1000000,0.18,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-12-01,2025,12,Region IV-A,Cavite,Leptospirosis,24,0,1000000,0.24,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-12-01,2025,12,Region IV-A,Cavite,Influenza,115,0,1000000,1.15,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-12-01,2025,12,Region IV-A,Laguna,Dengue,17,0,1000000,0.17,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-12-01,2025,12,Region IV-A,Laguna,Leptospirosis,13,0,1000000,0.13,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-12-01,2025,12,Region IV-A,Laguna,Influenza,195,0,1000000,1.95,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-12-01,2025,12,Region V,Albay,Dengue,32,0,1000000,0.32,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-12-01,2025,12,Region V,Albay,Leptospirosis,31,0,1000000,0.31,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.
+2025-12-01,2025,12,Region V,Albay,Influenza,142,0,1000000,1.42,DOH_FOI,doh_raw_data_clean.csv,Generated clean surveillance record.

@@ -1,0 +1,385 @@
+date,year,month,region,province_city,station_name,rainfall_mm,temperature_mean_c,humidity_mean_pct,wind_speed_mean_kph,weather_indicator,source,source_file,notes
+2021-01-01,2021,1,Region IV-A,Batangas,Batangas Synoptic Station,57.9,30.4,90,9.9,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-01-01,2021,1,Region IV-A,Quezon,Quezon Synoptic Station,46.7,29.1,71,6.8,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-01-01,2021,1,MIMAROPA,Marinduque,Marinduque Synoptic Station,96.6,29.6,79,6.8,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-01-01,2021,1,Region V,Camarines Norte,Camarines Norte Synoptic Station,99.1,27.6,72,10.4,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-01-01,2021,1,Region V,Camarines Sur,Camarines Sur Synoptic Station,46.6,27.8,87,9.7,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-01-01,2021,1,Region IV-A,Cavite,Cavite Synoptic Station,63.4,28.1,85,13.0,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-01-01,2021,1,Region IV-A,Laguna,Laguna Synoptic Station,21.3,28.7,87,14.3,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-01-01,2021,1,Region V,Albay,Albay Synoptic Station,98.4,27.2,79,7.9,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-02-01,2021,2,Region IV-A,Batangas,Batangas Synoptic Station,34.9,27.8,85,14.2,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-02-01,2021,2,Region IV-A,Quezon,Quezon Synoptic Station,45.5,26.2,89,14.4,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-02-01,2021,2,MIMAROPA,Marinduque,Marinduque Synoptic Station,78.9,29.4,78,11.8,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-02-01,2021,2,Region V,Camarines Norte,Camarines Norte Synoptic Station,85.1,26.3,87,14.1,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-02-01,2021,2,Region V,Camarines Sur,Camarines Sur Synoptic Station,24.4,27.6,89,5.5,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-02-01,2021,2,Region IV-A,Cavite,Cavite Synoptic Station,65.5,30.9,90,7.9,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-02-01,2021,2,Region IV-A,Laguna,Laguna Synoptic Station,66.4,25.6,82,12.4,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-02-01,2021,2,Region V,Albay,Albay Synoptic Station,40.5,29.6,85,13.6,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-03-01,2021,3,Region IV-A,Batangas,Batangas Synoptic Station,84.6,30.7,74,11.4,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-03-01,2021,3,Region IV-A,Quezon,Quezon Synoptic Station,64.8,29.3,80,6.8,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-03-01,2021,3,MIMAROPA,Marinduque,Marinduque Synoptic Station,44.0,26.5,77,6.1,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-03-01,2021,3,Region V,Camarines Norte,Camarines Norte Synoptic Station,42.5,27.7,78,14.0,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-03-01,2021,3,Region V,Camarines Sur,Camarines Sur Synoptic Station,86.1,26.5,71,12.8,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-03-01,2021,3,Region IV-A,Cavite,Cavite Synoptic Station,52.9,29.7,78,10.0,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-03-01,2021,3,Region IV-A,Laguna,Laguna Synoptic Station,72.1,29.9,89,8.5,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-03-01,2021,3,Region V,Albay,Albay Synoptic Station,22.5,27.6,88,5.2,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-04-01,2021,4,Region IV-A,Batangas,Batangas Synoptic Station,37.4,27.7,87,8.1,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-04-01,2021,4,Region IV-A,Quezon,Quezon Synoptic Station,91.3,28.0,81,14.1,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-04-01,2021,4,MIMAROPA,Marinduque,Marinduque Synoptic Station,35.2,29.2,71,11.8,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-04-01,2021,4,Region V,Camarines Norte,Camarines Norte Synoptic Station,48.6,26.2,74,12.4,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-04-01,2021,4,Region V,Camarines Sur,Camarines Sur Synoptic Station,40.9,29.1,87,13.6,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-04-01,2021,4,Region IV-A,Cavite,Cavite Synoptic Station,93.5,29.6,85,14.0,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-04-01,2021,4,Region IV-A,Laguna,Laguna Synoptic Station,44.7,29.4,83,6.1,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-04-01,2021,4,Region V,Albay,Albay Synoptic Station,21.3,27.4,74,8.3,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-05-01,2021,5,Region IV-A,Batangas,Batangas Synoptic Station,74.0,27.6,78,11.9,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-05-01,2021,5,Region IV-A,Quezon,Quezon Synoptic Station,67.9,26.7,84,8.0,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-05-01,2021,5,MIMAROPA,Marinduque,Marinduque Synoptic Station,26.9,27.3,70,11.9,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-05-01,2021,5,Region V,Camarines Norte,Camarines Norte Synoptic Station,91.5,26.7,88,10.6,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-05-01,2021,5,Region V,Camarines Sur,Camarines Sur Synoptic Station,81.5,30.8,89,9.9,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-05-01,2021,5,Region IV-A,Cavite,Cavite Synoptic Station,95.3,29.2,88,7.8,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-05-01,2021,5,Region IV-A,Laguna,Laguna Synoptic Station,71.4,28.6,73,6.2,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-05-01,2021,5,Region V,Albay,Albay Synoptic Station,50.8,26.5,85,9.4,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-06-01,2021,6,Region IV-A,Batangas,Batangas Synoptic Station,287.4,30.0,86,32.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-06-01,2021,6,Region IV-A,Quezon,Quezon Synoptic Station,497.5,30.8,82,27.7,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-06-01,2021,6,MIMAROPA,Marinduque,Marinduque Synoptic Station,499.9,26.4,85,23.3,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-06-01,2021,6,Region V,Camarines Norte,Camarines Norte Synoptic Station,263.5,28.6,87,19.9,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-06-01,2021,6,Region V,Camarines Sur,Camarines Sur Synoptic Station,471.7,30.9,70,28.4,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-06-01,2021,6,Region IV-A,Cavite,Cavite Synoptic Station,387.0,28.8,80,18.0,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-06-01,2021,6,Region IV-A,Laguna,Laguna Synoptic Station,355.2,30.6,79,23.8,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-06-01,2021,6,Region V,Albay,Albay Synoptic Station,415.7,27.0,76,29.4,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-07-01,2021,7,Region IV-A,Batangas,Batangas Synoptic Station,254.2,30.6,84,32.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-07-01,2021,7,Region IV-A,Quezon,Quezon Synoptic Station,481.8,28.6,76,19.7,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-07-01,2021,7,MIMAROPA,Marinduque,Marinduque Synoptic Station,462.2,30.9,72,19.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-07-01,2021,7,Region V,Camarines Norte,Camarines Norte Synoptic Station,437.3,29.3,86,34.2,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-07-01,2021,7,Region V,Camarines Sur,Camarines Sur Synoptic Station,375.4,25.9,80,22.5,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-07-01,2021,7,Region IV-A,Cavite,Cavite Synoptic Station,341.4,26.9,90,25.6,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-07-01,2021,7,Region IV-A,Laguna,Laguna Synoptic Station,444.3,26.8,86,34.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-07-01,2021,7,Region V,Albay,Albay Synoptic Station,262.3,30.4,75,26.2,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-08-01,2021,8,Region IV-A,Batangas,Batangas Synoptic Station,399.9,29.1,85,28.3,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-08-01,2021,8,Region IV-A,Quezon,Quezon Synoptic Station,497.0,29.5,90,25.6,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-08-01,2021,8,MIMAROPA,Marinduque,Marinduque Synoptic Station,413.4,26.4,76,26.4,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-08-01,2021,8,Region V,Camarines Norte,Camarines Norte Synoptic Station,275.5,26.3,87,17.0,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-08-01,2021,8,Region V,Camarines Sur,Camarines Sur Synoptic Station,458.4,27.2,89,22.2,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-08-01,2021,8,Region IV-A,Cavite,Cavite Synoptic Station,374.2,30.5,85,31.8,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-08-01,2021,8,Region IV-A,Laguna,Laguna Synoptic Station,416.4,27.6,79,15.9,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-08-01,2021,8,Region V,Albay,Albay Synoptic Station,341.7,30.1,70,33.0,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-09-01,2021,9,Region IV-A,Batangas,Batangas Synoptic Station,467.6,26.2,85,20.4,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-09-01,2021,9,Region IV-A,Quezon,Quezon Synoptic Station,295.7,30.3,79,15.7,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-09-01,2021,9,MIMAROPA,Marinduque,Marinduque Synoptic Station,438.3,28.7,81,33.9,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-09-01,2021,9,Region V,Camarines Norte,Camarines Norte Synoptic Station,340.3,30.7,72,34.6,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-09-01,2021,9,Region V,Camarines Sur,Camarines Sur Synoptic Station,374.9,28.0,82,21.3,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-09-01,2021,9,Region IV-A,Cavite,Cavite Synoptic Station,494.1,26.7,88,28.6,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-09-01,2021,9,Region IV-A,Laguna,Laguna Synoptic Station,463.0,30.0,74,24.6,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-09-01,2021,9,Region V,Albay,Albay Synoptic Station,321.9,27.5,71,34.2,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-10-01,2021,10,Region IV-A,Batangas,Batangas Synoptic Station,398.7,26.9,77,23.5,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-10-01,2021,10,Region IV-A,Quezon,Quezon Synoptic Station,466.3,30.1,70,21.7,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-10-01,2021,10,MIMAROPA,Marinduque,Marinduque Synoptic Station,464.1,30.8,82,34.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-10-01,2021,10,Region V,Camarines Norte,Camarines Norte Synoptic Station,445.3,27.3,83,27.2,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-10-01,2021,10,Region V,Camarines Sur,Camarines Sur Synoptic Station,280.3,30.5,81,24.8,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-10-01,2021,10,Region IV-A,Cavite,Cavite Synoptic Station,299.2,28.2,85,18.3,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-10-01,2021,10,Region IV-A,Laguna,Laguna Synoptic Station,312.1,31.0,76,19.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-10-01,2021,10,Region V,Albay,Albay Synoptic Station,416.6,29.4,72,22.6,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-11-01,2021,11,Region IV-A,Batangas,Batangas Synoptic Station,459.3,26.1,70,23.2,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-11-01,2021,11,Region IV-A,Quezon,Quezon Synoptic Station,489.3,25.8,85,32.9,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-11-01,2021,11,MIMAROPA,Marinduque,Marinduque Synoptic Station,340.8,30.5,90,20.6,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-11-01,2021,11,Region V,Camarines Norte,Camarines Norte Synoptic Station,270.6,29.0,89,17.9,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-11-01,2021,11,Region V,Camarines Sur,Camarines Sur Synoptic Station,465.1,26.5,73,25.3,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-11-01,2021,11,Region IV-A,Cavite,Cavite Synoptic Station,440.9,30.7,80,31.2,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-11-01,2021,11,Region IV-A,Laguna,Laguna Synoptic Station,469.1,28.7,78,18.3,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-11-01,2021,11,Region V,Albay,Albay Synoptic Station,480.6,27.4,88,33.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-12-01,2021,12,Region IV-A,Batangas,Batangas Synoptic Station,66.5,26.5,87,14.3,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-12-01,2021,12,Region IV-A,Quezon,Quezon Synoptic Station,96.8,26.8,84,9.1,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-12-01,2021,12,MIMAROPA,Marinduque,Marinduque Synoptic Station,88.8,30.8,72,8.4,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-12-01,2021,12,Region V,Camarines Norte,Camarines Norte Synoptic Station,52.0,27.5,72,9.4,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-12-01,2021,12,Region V,Camarines Sur,Camarines Sur Synoptic Station,74.1,27.0,82,12.6,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-12-01,2021,12,Region IV-A,Cavite,Cavite Synoptic Station,84.3,30.7,88,14.2,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-12-01,2021,12,Region IV-A,Laguna,Laguna Synoptic Station,60.1,29.0,78,5.5,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2021-12-01,2021,12,Region V,Albay,Albay Synoptic Station,76.2,27.6,89,14.2,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-01-01,2022,1,Region IV-A,Batangas,Batangas Synoptic Station,67.2,29.7,77,12.3,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-01-01,2022,1,Region IV-A,Quezon,Quezon Synoptic Station,64.7,29.3,79,10.2,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-01-01,2022,1,MIMAROPA,Marinduque,Marinduque Synoptic Station,94.1,29.9,71,9.9,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-01-01,2022,1,Region V,Camarines Norte,Camarines Norte Synoptic Station,83.8,30.3,78,14.9,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-01-01,2022,1,Region V,Camarines Sur,Camarines Sur Synoptic Station,32.9,26.8,85,7.1,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-01-01,2022,1,Region IV-A,Cavite,Cavite Synoptic Station,69.9,27.2,80,12.5,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-01-01,2022,1,Region IV-A,Laguna,Laguna Synoptic Station,69.0,25.8,87,10.0,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-01-01,2022,1,Region V,Albay,Albay Synoptic Station,51.6,28.1,86,5.4,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-02-01,2022,2,Region IV-A,Batangas,Batangas Synoptic Station,23.5,26.4,89,12.2,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-02-01,2022,2,Region IV-A,Quezon,Quezon Synoptic Station,99.4,27.1,85,11.6,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-02-01,2022,2,MIMAROPA,Marinduque,Marinduque Synoptic Station,73.0,29.1,83,7.0,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-02-01,2022,2,Region V,Camarines Norte,Camarines Norte Synoptic Station,52.4,27.5,84,7.4,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-02-01,2022,2,Region V,Camarines Sur,Camarines Sur Synoptic Station,33.1,28.4,79,14.5,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-02-01,2022,2,Region IV-A,Cavite,Cavite Synoptic Station,22.8,30.8,70,7.1,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-02-01,2022,2,Region IV-A,Laguna,Laguna Synoptic Station,62.3,26.5,72,8.0,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-02-01,2022,2,Region V,Albay,Albay Synoptic Station,86.3,27.3,76,9.0,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-03-01,2022,3,Region IV-A,Batangas,Batangas Synoptic Station,52.7,28.4,76,13.9,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-03-01,2022,3,Region IV-A,Quezon,Quezon Synoptic Station,95.8,27.1,78,5.0,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-03-01,2022,3,MIMAROPA,Marinduque,Marinduque Synoptic Station,23.7,29.5,74,14.0,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-03-01,2022,3,Region V,Camarines Norte,Camarines Norte Synoptic Station,28.4,29.7,83,7.1,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-03-01,2022,3,Region V,Camarines Sur,Camarines Sur Synoptic Station,81.6,25.8,83,11.2,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-03-01,2022,3,Region IV-A,Cavite,Cavite Synoptic Station,95.3,28.3,72,5.6,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-03-01,2022,3,Region IV-A,Laguna,Laguna Synoptic Station,29.8,26.0,75,8.7,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-03-01,2022,3,Region V,Albay,Albay Synoptic Station,85.9,28.3,85,13.4,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-04-01,2022,4,Region IV-A,Batangas,Batangas Synoptic Station,78.7,30.5,85,13.8,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-04-01,2022,4,Region IV-A,Quezon,Quezon Synoptic Station,39.0,27.9,85,6.4,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-04-01,2022,4,MIMAROPA,Marinduque,Marinduque Synoptic Station,95.8,28.1,90,14.4,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-04-01,2022,4,Region V,Camarines Norte,Camarines Norte Synoptic Station,69.5,26.2,79,8.0,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-04-01,2022,4,Region V,Camarines Sur,Camarines Sur Synoptic Station,34.5,28.6,90,14.7,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-04-01,2022,4,Region IV-A,Cavite,Cavite Synoptic Station,82.6,27.0,80,8.1,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-04-01,2022,4,Region IV-A,Laguna,Laguna Synoptic Station,52.5,29.9,87,9.9,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-04-01,2022,4,Region V,Albay,Albay Synoptic Station,26.9,28.4,87,10.4,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-05-01,2022,5,Region IV-A,Batangas,Batangas Synoptic Station,74.4,31.0,74,12.5,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-05-01,2022,5,Region IV-A,Quezon,Quezon Synoptic Station,97.2,28.0,77,6.5,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-05-01,2022,5,MIMAROPA,Marinduque,Marinduque Synoptic Station,51.9,26.8,70,6.2,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-05-01,2022,5,Region V,Camarines Norte,Camarines Norte Synoptic Station,95.3,29.2,73,14.1,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-05-01,2022,5,Region V,Camarines Sur,Camarines Sur Synoptic Station,83.5,27.7,84,5.3,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-05-01,2022,5,Region IV-A,Cavite,Cavite Synoptic Station,89.9,27.9,71,9.7,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-05-01,2022,5,Region IV-A,Laguna,Laguna Synoptic Station,48.3,25.7,82,6.3,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-05-01,2022,5,Region V,Albay,Albay Synoptic Station,71.3,30.5,75,7.5,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-06-01,2022,6,Region IV-A,Batangas,Batangas Synoptic Station,302.8,25.6,73,27.3,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-06-01,2022,6,Region IV-A,Quezon,Quezon Synoptic Station,461.7,28.2,88,20.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-06-01,2022,6,MIMAROPA,Marinduque,Marinduque Synoptic Station,305.3,30.3,78,33.2,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-06-01,2022,6,Region V,Camarines Norte,Camarines Norte Synoptic Station,429.1,26.5,83,33.5,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-06-01,2022,6,Region V,Camarines Sur,Camarines Sur Synoptic Station,405.3,26.0,90,23.9,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-06-01,2022,6,Region IV-A,Cavite,Cavite Synoptic Station,448.1,28.4,81,17.6,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-06-01,2022,6,Region IV-A,Laguna,Laguna Synoptic Station,403.3,27.7,81,27.7,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-06-01,2022,6,Region V,Albay,Albay Synoptic Station,395.7,29.1,89,25.2,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-07-01,2022,7,Region IV-A,Batangas,Batangas Synoptic Station,451.5,30.1,79,31.0,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-07-01,2022,7,Region IV-A,Quezon,Quezon Synoptic Station,306.4,28.2,78,34.6,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-07-01,2022,7,MIMAROPA,Marinduque,Marinduque Synoptic Station,350.0,26.5,90,29.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-07-01,2022,7,Region V,Camarines Norte,Camarines Norte Synoptic Station,321.6,29.7,77,18.7,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-07-01,2022,7,Region V,Camarines Sur,Camarines Sur Synoptic Station,252.3,31.0,84,16.4,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-07-01,2022,7,Region IV-A,Cavite,Cavite Synoptic Station,320.2,30.8,70,16.6,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-07-01,2022,7,Region IV-A,Laguna,Laguna Synoptic Station,348.5,26.6,76,15.9,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-07-01,2022,7,Region V,Albay,Albay Synoptic Station,275.8,30.3,86,25.9,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-08-01,2022,8,Region IV-A,Batangas,Batangas Synoptic Station,333.3,29.6,70,23.9,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-08-01,2022,8,Region IV-A,Quezon,Quezon Synoptic Station,431.0,26.1,87,26.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-08-01,2022,8,MIMAROPA,Marinduque,Marinduque Synoptic Station,359.6,28.3,79,18.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-08-01,2022,8,Region V,Camarines Norte,Camarines Norte Synoptic Station,316.7,26.9,89,24.8,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-08-01,2022,8,Region V,Camarines Sur,Camarines Sur Synoptic Station,357.0,27.2,90,32.3,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-08-01,2022,8,Region IV-A,Cavite,Cavite Synoptic Station,284.8,29.0,79,20.6,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-08-01,2022,8,Region IV-A,Laguna,Laguna Synoptic Station,484.7,25.7,72,26.8,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-08-01,2022,8,Region V,Albay,Albay Synoptic Station,317.1,27.4,76,26.0,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-09-01,2022,9,Region IV-A,Batangas,Batangas Synoptic Station,342.8,27.2,89,30.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-09-01,2022,9,Region IV-A,Quezon,Quezon Synoptic Station,346.6,26.6,85,33.9,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-09-01,2022,9,MIMAROPA,Marinduque,Marinduque Synoptic Station,282.9,28.3,86,16.8,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-09-01,2022,9,Region V,Camarines Norte,Camarines Norte Synoptic Station,358.6,29.4,88,18.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-09-01,2022,9,Region V,Camarines Sur,Camarines Sur Synoptic Station,288.2,27.0,74,16.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-09-01,2022,9,Region IV-A,Cavite,Cavite Synoptic Station,282.6,26.2,71,26.6,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-09-01,2022,9,Region IV-A,Laguna,Laguna Synoptic Station,364.3,27.9,89,30.4,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-09-01,2022,9,Region V,Albay,Albay Synoptic Station,477.6,28.3,74,19.5,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-10-01,2022,10,Region IV-A,Batangas,Batangas Synoptic Station,304.5,28.2,81,17.3,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-10-01,2022,10,Region IV-A,Quezon,Quezon Synoptic Station,496.1,30.6,89,23.7,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-10-01,2022,10,MIMAROPA,Marinduque,Marinduque Synoptic Station,344.8,25.8,70,23.8,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-10-01,2022,10,Region V,Camarines Norte,Camarines Norte Synoptic Station,328.8,29.4,86,17.3,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-10-01,2022,10,Region V,Camarines Sur,Camarines Sur Synoptic Station,251.4,27.7,89,20.9,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-10-01,2022,10,Region IV-A,Cavite,Cavite Synoptic Station,352.5,26.0,79,26.5,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-10-01,2022,10,Region IV-A,Laguna,Laguna Synoptic Station,335.3,28.2,90,16.2,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-10-01,2022,10,Region V,Albay,Albay Synoptic Station,494.2,28.2,87,29.3,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-11-01,2022,11,Region IV-A,Batangas,Batangas Synoptic Station,289.4,27.7,77,20.5,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-11-01,2022,11,Region IV-A,Quezon,Quezon Synoptic Station,476.0,30.9,84,19.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-11-01,2022,11,MIMAROPA,Marinduque,Marinduque Synoptic Station,408.1,29.8,77,17.9,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-11-01,2022,11,Region V,Camarines Norte,Camarines Norte Synoptic Station,325.2,28.7,74,18.9,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-11-01,2022,11,Region V,Camarines Sur,Camarines Sur Synoptic Station,375.7,27.6,87,26.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-11-01,2022,11,Region IV-A,Cavite,Cavite Synoptic Station,461.9,30.9,71,24.4,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-11-01,2022,11,Region IV-A,Laguna,Laguna Synoptic Station,469.5,27.0,79,24.5,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-11-01,2022,11,Region V,Albay,Albay Synoptic Station,334.7,25.9,89,17.0,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-12-01,2022,12,Region IV-A,Batangas,Batangas Synoptic Station,38.0,27.6,72,8.5,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-12-01,2022,12,Region IV-A,Quezon,Quezon Synoptic Station,26.2,25.9,70,9.5,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-12-01,2022,12,MIMAROPA,Marinduque,Marinduque Synoptic Station,44.4,29.6,87,8.6,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-12-01,2022,12,Region V,Camarines Norte,Camarines Norte Synoptic Station,85.2,29.7,71,14.0,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-12-01,2022,12,Region V,Camarines Sur,Camarines Sur Synoptic Station,83.9,27.5,73,11.5,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-12-01,2022,12,Region IV-A,Cavite,Cavite Synoptic Station,28.4,27.0,86,5.3,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-12-01,2022,12,Region IV-A,Laguna,Laguna Synoptic Station,92.2,26.8,77,11.3,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2022-12-01,2022,12,Region V,Albay,Albay Synoptic Station,94.4,29.1,88,11.0,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-01-01,2023,1,Region IV-A,Batangas,Batangas Synoptic Station,71.9,29.7,78,9.0,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-01-01,2023,1,Region IV-A,Quezon,Quezon Synoptic Station,65.8,27.7,72,10.3,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-01-01,2023,1,MIMAROPA,Marinduque,Marinduque Synoptic Station,59.1,28.3,85,6.2,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-01-01,2023,1,Region V,Camarines Norte,Camarines Norte Synoptic Station,75.6,27.4,85,6.8,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-01-01,2023,1,Region V,Camarines Sur,Camarines Sur Synoptic Station,25.9,27.2,77,10.6,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-01-01,2023,1,Region IV-A,Cavite,Cavite Synoptic Station,67.9,29.8,82,11.1,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-01-01,2023,1,Region IV-A,Laguna,Laguna Synoptic Station,26.8,29.0,79,10.9,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-01-01,2023,1,Region V,Albay,Albay Synoptic Station,40.0,28.9,76,8.0,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-02-01,2023,2,Region IV-A,Batangas,Batangas Synoptic Station,76.5,27.7,78,14.3,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-02-01,2023,2,Region IV-A,Quezon,Quezon Synoptic Station,96.0,30.5,77,8.8,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-02-01,2023,2,MIMAROPA,Marinduque,Marinduque Synoptic Station,92.4,26.3,76,13.2,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-02-01,2023,2,Region V,Camarines Norte,Camarines Norte Synoptic Station,20.8,25.7,79,11.7,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-02-01,2023,2,Region V,Camarines Sur,Camarines Sur Synoptic Station,57.9,28.5,81,11.8,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-02-01,2023,2,Region IV-A,Cavite,Cavite Synoptic Station,70.7,27.3,90,7.9,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-02-01,2023,2,Region IV-A,Laguna,Laguna Synoptic Station,57.4,25.8,75,7.6,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-02-01,2023,2,Region V,Albay,Albay Synoptic Station,28.9,28.1,76,10.4,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-03-01,2023,3,Region IV-A,Batangas,Batangas Synoptic Station,78.1,30.7,90,8.1,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-03-01,2023,3,Region IV-A,Quezon,Quezon Synoptic Station,75.9,26.0,75,14.0,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-03-01,2023,3,MIMAROPA,Marinduque,Marinduque Synoptic Station,56.7,29.3,77,14.9,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-03-01,2023,3,Region V,Camarines Norte,Camarines Norte Synoptic Station,92.4,30.9,77,13.2,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-03-01,2023,3,Region V,Camarines Sur,Camarines Sur Synoptic Station,67.8,26.2,78,9.3,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-03-01,2023,3,Region IV-A,Cavite,Cavite Synoptic Station,91.3,29.4,73,8.4,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-03-01,2023,3,Region IV-A,Laguna,Laguna Synoptic Station,51.3,29.8,71,6.0,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-03-01,2023,3,Region V,Albay,Albay Synoptic Station,67.7,28.0,85,14.9,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-04-01,2023,4,Region IV-A,Batangas,Batangas Synoptic Station,25.4,30.5,89,7.9,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-04-01,2023,4,Region IV-A,Quezon,Quezon Synoptic Station,40.8,30.3,87,9.5,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-04-01,2023,4,MIMAROPA,Marinduque,Marinduque Synoptic Station,45.9,27.0,84,9.7,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-04-01,2023,4,Region V,Camarines Norte,Camarines Norte Synoptic Station,99.4,27.7,85,13.9,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-04-01,2023,4,Region V,Camarines Sur,Camarines Sur Synoptic Station,60.3,26.9,80,13.8,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-04-01,2023,4,Region IV-A,Cavite,Cavite Synoptic Station,55.0,30.3,70,10.1,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-04-01,2023,4,Region IV-A,Laguna,Laguna Synoptic Station,57.0,29.8,89,9.3,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-04-01,2023,4,Region V,Albay,Albay Synoptic Station,38.6,29.4,80,5.5,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-05-01,2023,5,Region IV-A,Batangas,Batangas Synoptic Station,56.5,26.9,89,8.4,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-05-01,2023,5,Region IV-A,Quezon,Quezon Synoptic Station,43.6,26.1,70,11.8,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-05-01,2023,5,MIMAROPA,Marinduque,Marinduque Synoptic Station,68.7,30.2,89,7.4,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-05-01,2023,5,Region V,Camarines Norte,Camarines Norte Synoptic Station,54.8,30.0,72,6.5,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-05-01,2023,5,Region V,Camarines Sur,Camarines Sur Synoptic Station,57.9,28.9,76,10.4,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-05-01,2023,5,Region IV-A,Cavite,Cavite Synoptic Station,58.3,25.9,83,7.2,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-05-01,2023,5,Region IV-A,Laguna,Laguna Synoptic Station,87.8,30.1,86,11.5,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-05-01,2023,5,Region V,Albay,Albay Synoptic Station,75.2,29.9,79,5.9,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-06-01,2023,6,Region IV-A,Batangas,Batangas Synoptic Station,486.2,26.5,70,22.0,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-06-01,2023,6,Region IV-A,Quezon,Quezon Synoptic Station,385.3,26.5,78,29.3,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-06-01,2023,6,MIMAROPA,Marinduque,Marinduque Synoptic Station,260.3,26.2,79,20.8,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-06-01,2023,6,Region V,Camarines Norte,Camarines Norte Synoptic Station,402.6,30.6,85,23.2,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-06-01,2023,6,Region V,Camarines Sur,Camarines Sur Synoptic Station,441.3,28.5,72,22.9,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-06-01,2023,6,Region IV-A,Cavite,Cavite Synoptic Station,489.4,27.9,74,21.8,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-06-01,2023,6,Region IV-A,Laguna,Laguna Synoptic Station,289.2,25.7,86,15.4,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-06-01,2023,6,Region V,Albay,Albay Synoptic Station,351.2,28.0,83,17.6,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-07-01,2023,7,Region IV-A,Batangas,Batangas Synoptic Station,465.7,26.0,81,17.3,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-07-01,2023,7,Region IV-A,Quezon,Quezon Synoptic Station,337.7,29.3,84,15.7,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-07-01,2023,7,MIMAROPA,Marinduque,Marinduque Synoptic Station,479.7,29.1,85,17.0,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-07-01,2023,7,Region V,Camarines Norte,Camarines Norte Synoptic Station,288.1,26.3,74,31.7,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-07-01,2023,7,Region V,Camarines Sur,Camarines Sur Synoptic Station,429.0,29.5,75,27.4,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-07-01,2023,7,Region IV-A,Cavite,Cavite Synoptic Station,314.3,28.6,77,30.0,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-07-01,2023,7,Region IV-A,Laguna,Laguna Synoptic Station,320.1,29.8,80,19.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-07-01,2023,7,Region V,Albay,Albay Synoptic Station,315.5,29.4,72,23.8,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-08-01,2023,8,Region IV-A,Batangas,Batangas Synoptic Station,399.0,27.4,81,31.4,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-08-01,2023,8,Region IV-A,Quezon,Quezon Synoptic Station,460.5,28.0,80,29.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-08-01,2023,8,MIMAROPA,Marinduque,Marinduque Synoptic Station,410.6,29.3,88,23.7,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-08-01,2023,8,Region V,Camarines Norte,Camarines Norte Synoptic Station,441.2,30.3,75,21.2,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-08-01,2023,8,Region V,Camarines Sur,Camarines Sur Synoptic Station,478.1,27.7,77,24.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-08-01,2023,8,Region IV-A,Cavite,Cavite Synoptic Station,264.2,25.9,87,21.4,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-08-01,2023,8,Region IV-A,Laguna,Laguna Synoptic Station,398.4,26.1,82,29.8,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-08-01,2023,8,Region V,Albay,Albay Synoptic Station,314.2,30.2,77,15.4,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-09-01,2023,9,Region IV-A,Batangas,Batangas Synoptic Station,416.2,30.2,75,27.6,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-09-01,2023,9,Region IV-A,Quezon,Quezon Synoptic Station,340.7,30.5,75,26.6,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-09-01,2023,9,MIMAROPA,Marinduque,Marinduque Synoptic Station,265.5,29.7,87,28.9,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-09-01,2023,9,Region V,Camarines Norte,Camarines Norte Synoptic Station,361.2,30.7,71,22.0,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-09-01,2023,9,Region V,Camarines Sur,Camarines Sur Synoptic Station,352.0,28.3,80,16.9,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-09-01,2023,9,Region IV-A,Cavite,Cavite Synoptic Station,461.0,26.2,81,28.9,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-09-01,2023,9,Region IV-A,Laguna,Laguna Synoptic Station,341.2,25.8,85,23.9,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-09-01,2023,9,Region V,Albay,Albay Synoptic Station,290.0,29.1,79,23.6,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-10-01,2023,10,Region IV-A,Batangas,Batangas Synoptic Station,252.6,25.6,89,16.3,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-10-01,2023,10,Region IV-A,Quezon,Quezon Synoptic Station,400.3,26.3,90,24.9,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-10-01,2023,10,MIMAROPA,Marinduque,Marinduque Synoptic Station,378.3,26.0,83,28.3,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-10-01,2023,10,Region V,Camarines Norte,Camarines Norte Synoptic Station,498.3,25.7,75,27.6,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-10-01,2023,10,Region V,Camarines Sur,Camarines Sur Synoptic Station,419.9,28.8,70,22.9,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-10-01,2023,10,Region IV-A,Cavite,Cavite Synoptic Station,442.4,26.4,76,33.2,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-10-01,2023,10,Region IV-A,Laguna,Laguna Synoptic Station,433.0,29.2,77,30.5,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-10-01,2023,10,Region V,Albay,Albay Synoptic Station,361.2,27.2,85,31.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-11-01,2023,11,Region IV-A,Batangas,Batangas Synoptic Station,457.5,25.8,80,30.2,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-11-01,2023,11,Region IV-A,Quezon,Quezon Synoptic Station,325.3,28.2,84,29.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-11-01,2023,11,MIMAROPA,Marinduque,Marinduque Synoptic Station,491.8,27.3,89,35.0,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-11-01,2023,11,Region V,Camarines Norte,Camarines Norte Synoptic Station,397.9,28.3,76,27.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-11-01,2023,11,Region V,Camarines Sur,Camarines Sur Synoptic Station,495.5,25.8,77,34.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-11-01,2023,11,Region IV-A,Cavite,Cavite Synoptic Station,473.8,27.0,87,21.2,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-11-01,2023,11,Region IV-A,Laguna,Laguna Synoptic Station,416.3,25.5,72,30.9,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-11-01,2023,11,Region V,Albay,Albay Synoptic Station,386.8,27.0,77,34.8,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-12-01,2023,12,Region IV-A,Batangas,Batangas Synoptic Station,58.5,25.9,87,12.0,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-12-01,2023,12,Region IV-A,Quezon,Quezon Synoptic Station,64.6,30.2,79,7.4,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-12-01,2023,12,MIMAROPA,Marinduque,Marinduque Synoptic Station,60.8,30.3,70,5.1,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-12-01,2023,12,Region V,Camarines Norte,Camarines Norte Synoptic Station,66.8,27.5,76,12.8,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-12-01,2023,12,Region V,Camarines Sur,Camarines Sur Synoptic Station,20.9,29.6,79,9.4,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-12-01,2023,12,Region IV-A,Cavite,Cavite Synoptic Station,36.1,28.0,82,6.9,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-12-01,2023,12,Region IV-A,Laguna,Laguna Synoptic Station,69.6,28.6,81,8.7,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2023-12-01,2023,12,Region V,Albay,Albay Synoptic Station,98.7,30.6,78,9.2,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-01-01,2024,1,Region IV-A,Batangas,Batangas Synoptic Station,97.1,29.7,84,6.6,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-01-01,2024,1,Region IV-A,Quezon,Quezon Synoptic Station,76.0,30.8,78,6.1,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-01-01,2024,1,MIMAROPA,Marinduque,Marinduque Synoptic Station,21.6,29.0,81,6.8,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-01-01,2024,1,Region V,Camarines Norte,Camarines Norte Synoptic Station,51.8,26.0,71,9.6,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-01-01,2024,1,Region V,Camarines Sur,Camarines Sur Synoptic Station,76.6,27.8,81,10.7,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-01-01,2024,1,Region IV-A,Cavite,Cavite Synoptic Station,62.8,31.0,75,14.1,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-01-01,2024,1,Region IV-A,Laguna,Laguna Synoptic Station,49.5,29.9,85,6.5,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-01-01,2024,1,Region V,Albay,Albay Synoptic Station,64.5,29.4,79,7.0,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-02-01,2024,2,Region IV-A,Batangas,Batangas Synoptic Station,89.6,29.6,86,9.8,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-02-01,2024,2,Region IV-A,Quezon,Quezon Synoptic Station,60.5,27.7,75,8.3,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-02-01,2024,2,MIMAROPA,Marinduque,Marinduque Synoptic Station,52.3,26.7,77,9.8,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-02-01,2024,2,Region V,Camarines Norte,Camarines Norte Synoptic Station,65.7,25.8,72,9.8,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-02-01,2024,2,Region V,Camarines Sur,Camarines Sur Synoptic Station,58.6,30.6,82,9.2,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-02-01,2024,2,Region IV-A,Cavite,Cavite Synoptic Station,38.9,26.1,83,13.7,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-02-01,2024,2,Region IV-A,Laguna,Laguna Synoptic Station,37.9,29.1,72,11.2,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-02-01,2024,2,Region V,Albay,Albay Synoptic Station,45.1,28.8,81,14.8,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-03-01,2024,3,Region IV-A,Batangas,Batangas Synoptic Station,99.2,28.3,90,9.9,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-03-01,2024,3,Region IV-A,Quezon,Quezon Synoptic Station,63.7,30.0,76,5.9,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-03-01,2024,3,MIMAROPA,Marinduque,Marinduque Synoptic Station,43.0,28.9,88,12.3,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-03-01,2024,3,Region V,Camarines Norte,Camarines Norte Synoptic Station,98.6,29.1,86,6.1,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-03-01,2024,3,Region V,Camarines Sur,Camarines Sur Synoptic Station,85.8,25.6,74,15.0,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-03-01,2024,3,Region IV-A,Cavite,Cavite Synoptic Station,74.0,30.8,71,10.6,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-03-01,2024,3,Region IV-A,Laguna,Laguna Synoptic Station,53.6,29.6,70,11.8,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-03-01,2024,3,Region V,Albay,Albay Synoptic Station,39.0,26.1,76,11.1,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-04-01,2024,4,Region IV-A,Batangas,Batangas Synoptic Station,94.1,26.7,88,13.2,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-04-01,2024,4,Region IV-A,Quezon,Quezon Synoptic Station,44.6,25.9,76,10.7,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-04-01,2024,4,MIMAROPA,Marinduque,Marinduque Synoptic Station,40.1,27.5,73,13.7,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-04-01,2024,4,Region V,Camarines Norte,Camarines Norte Synoptic Station,27.7,26.1,74,11.5,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-04-01,2024,4,Region V,Camarines Sur,Camarines Sur Synoptic Station,24.3,26.4,79,7.0,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-04-01,2024,4,Region IV-A,Cavite,Cavite Synoptic Station,63.5,26.0,85,5.2,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-04-01,2024,4,Region IV-A,Laguna,Laguna Synoptic Station,20.5,29.3,78,12.5,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-04-01,2024,4,Region V,Albay,Albay Synoptic Station,86.3,30.4,75,11.7,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-05-01,2024,5,Region IV-A,Batangas,Batangas Synoptic Station,73.9,26.6,71,8.3,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-05-01,2024,5,Region IV-A,Quezon,Quezon Synoptic Station,41.3,26.3,73,13.3,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-05-01,2024,5,MIMAROPA,Marinduque,Marinduque Synoptic Station,21.7,26.7,75,13.2,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-05-01,2024,5,Region V,Camarines Norte,Camarines Norte Synoptic Station,98.6,30.4,79,11.8,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-05-01,2024,5,Region V,Camarines Sur,Camarines Sur Synoptic Station,34.9,26.0,78,13.9,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-05-01,2024,5,Region IV-A,Cavite,Cavite Synoptic Station,68.9,26.2,87,13.3,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-05-01,2024,5,Region IV-A,Laguna,Laguna Synoptic Station,64.0,28.3,83,10.7,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-05-01,2024,5,Region V,Albay,Albay Synoptic Station,64.5,26.6,88,7.4,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-06-01,2024,6,Region IV-A,Batangas,Batangas Synoptic Station,256.6,28.2,90,19.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-06-01,2024,6,Region IV-A,Quezon,Quezon Synoptic Station,302.7,27.8,73,30.9,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-06-01,2024,6,MIMAROPA,Marinduque,Marinduque Synoptic Station,411.0,30.9,71,20.9,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-06-01,2024,6,Region V,Camarines Norte,Camarines Norte Synoptic Station,346.2,26.1,73,29.9,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-06-01,2024,6,Region V,Camarines Sur,Camarines Sur Synoptic Station,360.7,29.8,76,16.4,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-06-01,2024,6,Region IV-A,Cavite,Cavite Synoptic Station,269.1,30.2,79,22.6,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-06-01,2024,6,Region IV-A,Laguna,Laguna Synoptic Station,489.3,26.4,70,28.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-06-01,2024,6,Region V,Albay,Albay Synoptic Station,420.2,25.9,81,30.3,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-07-01,2024,7,Region IV-A,Batangas,Batangas Synoptic Station,423.2,28.8,75,16.6,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-07-01,2024,7,Region IV-A,Quezon,Quezon Synoptic Station,492.0,29.7,77,24.9,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-07-01,2024,7,MIMAROPA,Marinduque,Marinduque Synoptic Station,321.6,29.4,84,22.6,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-07-01,2024,7,Region V,Camarines Norte,Camarines Norte Synoptic Station,473.3,26.0,74,16.2,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-07-01,2024,7,Region V,Camarines Sur,Camarines Sur Synoptic Station,495.5,29.3,72,20.4,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-07-01,2024,7,Region IV-A,Cavite,Cavite Synoptic Station,300.7,29.2,73,30.7,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-07-01,2024,7,Region IV-A,Laguna,Laguna Synoptic Station,317.9,25.8,71,19.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-07-01,2024,7,Region V,Albay,Albay Synoptic Station,474.3,26.4,84,15.2,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-08-01,2024,8,Region IV-A,Batangas,Batangas Synoptic Station,319.6,30.4,87,21.2,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-08-01,2024,8,Region IV-A,Quezon,Quezon Synoptic Station,300.1,31.0,85,31.8,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-08-01,2024,8,MIMAROPA,Marinduque,Marinduque Synoptic Station,396.9,28.3,87,29.9,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-08-01,2024,8,Region V,Camarines Norte,Camarines Norte Synoptic Station,344.2,29.9,88,21.2,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-08-01,2024,8,Region V,Camarines Sur,Camarines Sur Synoptic Station,499.6,30.0,86,29.8,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-08-01,2024,8,Region IV-A,Cavite,Cavite Synoptic Station,450.2,28.6,88,25.4,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-08-01,2024,8,Region IV-A,Laguna,Laguna Synoptic Station,292.3,30.5,72,21.4,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-08-01,2024,8,Region V,Albay,Albay Synoptic Station,359.8,30.1,82,24.5,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-09-01,2024,9,Region IV-A,Batangas,Batangas Synoptic Station,375.8,29.5,84,31.8,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-09-01,2024,9,Region IV-A,Quezon,Quezon Synoptic Station,322.5,26.4,77,30.9,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-09-01,2024,9,MIMAROPA,Marinduque,Marinduque Synoptic Station,483.7,28.2,73,18.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-09-01,2024,9,Region V,Camarines Norte,Camarines Norte Synoptic Station,318.4,26.9,83,17.0,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-09-01,2024,9,Region V,Camarines Sur,Camarines Sur Synoptic Station,384.1,26.2,75,26.9,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-09-01,2024,9,Region IV-A,Cavite,Cavite Synoptic Station,330.4,28.1,89,30.2,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-09-01,2024,9,Region IV-A,Laguna,Laguna Synoptic Station,326.3,27.2,85,21.3,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-09-01,2024,9,Region V,Albay,Albay Synoptic Station,295.8,29.7,76,33.7,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-10-01,2024,10,Region IV-A,Batangas,Batangas Synoptic Station,330.5,29.4,87,23.4,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-10-01,2024,10,Region IV-A,Quezon,Quezon Synoptic Station,409.8,27.5,77,20.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-10-01,2024,10,MIMAROPA,Marinduque,Marinduque Synoptic Station,437.5,28.3,77,23.3,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-10-01,2024,10,Region V,Camarines Norte,Camarines Norte Synoptic Station,323.2,27.9,79,15.7,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-10-01,2024,10,Region V,Camarines Sur,Camarines Sur Synoptic Station,371.6,29.6,75,28.7,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-10-01,2024,10,Region IV-A,Cavite,Cavite Synoptic Station,460.4,28.0,90,19.9,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-10-01,2024,10,Region IV-A,Laguna,Laguna Synoptic Station,339.9,30.8,80,17.8,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-10-01,2024,10,Region V,Albay,Albay Synoptic Station,463.8,27.4,87,25.8,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-11-01,2024,11,Region IV-A,Batangas,Batangas Synoptic Station,472.2,29.9,71,18.8,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-11-01,2024,11,Region IV-A,Quezon,Quezon Synoptic Station,491.5,28.3,77,21.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-11-01,2024,11,MIMAROPA,Marinduque,Marinduque Synoptic Station,251.4,28.3,73,15.3,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-11-01,2024,11,Region V,Camarines Norte,Camarines Norte Synoptic Station,330.8,28.9,73,25.6,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-11-01,2024,11,Region V,Camarines Sur,Camarines Sur Synoptic Station,443.9,30.7,76,21.4,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-11-01,2024,11,Region IV-A,Cavite,Cavite Synoptic Station,484.0,26.3,74,29.2,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-11-01,2024,11,Region IV-A,Laguna,Laguna Synoptic Station,488.4,27.5,88,31.1,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-11-01,2024,11,Region V,Albay,Albay Synoptic Station,360.6,27.7,84,24.2,rainy,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-12-01,2024,12,Region IV-A,Batangas,Batangas Synoptic Station,98.2,29.7,78,14.9,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-12-01,2024,12,Region IV-A,Quezon,Quezon Synoptic Station,53.7,29.2,72,10.1,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-12-01,2024,12,MIMAROPA,Marinduque,Marinduque Synoptic Station,37.3,27.8,82,13.8,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-12-01,2024,12,Region V,Camarines Norte,Camarines Norte Synoptic Station,66.2,26.2,79,11.2,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-12-01,2024,12,Region V,Camarines Sur,Camarines Sur Synoptic Station,32.2,29.6,70,12.2,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-12-01,2024,12,Region IV-A,Cavite,Cavite Synoptic Station,58.5,29.0,83,14.7,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-12-01,2024,12,Region IV-A,Laguna,Laguna Synoptic Station,22.6,30.3,83,12.2,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.
+2024-12-01,2024,12,Region V,Albay,Albay Synoptic Station,54.5,28.9,80,7.2,sunny,PAGASA_CADS,pagasa_raw_data_clean.csv,Generated clean station weather record.

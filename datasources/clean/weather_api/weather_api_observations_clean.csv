@@ -1,0 +1,481 @@
+date,year,month,target_region,province_city,latitude,longitude,provider,rainfall_mm,temperature_mean_c,humidity_mean_pct,wind_speed_mean_kph,severity_proxy,source_url,notes
+2021-01-01,2021,1,Region IV-A,Batangas,14.2942,121.1627,Open-Meteo,21.8,25.9,75,10.4,0.03,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-01-01,2021,1,Region IV-A,Quezon,14.1108,121.1190,Open-Meteo,45.4,29.3,76,9.6,0.01,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-01-01,2021,1,MIMAROPA,Marinduque,13.8421,120.7949,Open-Meteo,65.3,26.6,80,8.6,0.2,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-01-01,2021,1,Region V,Camarines Norte,13.7905,120.8859,Open-Meteo,18.8,25.2,82,8.1,0.25,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-01-01,2021,1,Region V,Camarines Sur,13.9770,120.7847,Open-Meteo,90.8,29.5,69,11.2,0.33,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-01-01,2021,1,Region IV-A,Cavite,13.9130,121.4316,Open-Meteo,92.4,26.2,78,6.5,0.33,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-01-01,2021,1,Region IV-A,Laguna,13.8832,121.3128,Open-Meteo,49.0,26.9,75,11.8,0.02,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-01-01,2021,1,Region V,Albay,14.2780,121.3144,Open-Meteo,45.4,25.9,82,7.4,0.2,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-02-01,2021,2,Region IV-A,Batangas,13.5405,121.3034,Open-Meteo,59.7,29.0,77,11.6,0.04,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-02-01,2021,2,Region IV-A,Quezon,13.7438,121.1270,Open-Meteo,57.2,25.5,77,7.7,0.32,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-02-01,2021,2,MIMAROPA,Marinduque,14.0260,121.0928,Open-Meteo,19.6,27.6,74,8.5,0.11,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-02-01,2021,2,Region V,Camarines Norte,13.5594,120.6439,Open-Meteo,93.1,26.9,72,9.1,0.05,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-02-01,2021,2,Region V,Camarines Sur,13.6488,120.7444,Open-Meteo,85.9,26.3,80,7.9,0.05,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-02-01,2021,2,Region IV-A,Cavite,13.7312,120.7445,Open-Meteo,66.8,25.9,85,6.3,0.21,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-02-01,2021,2,Region IV-A,Laguna,13.8872,121.0730,Open-Meteo,39.7,26.8,68,11.9,0.1,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-02-01,2021,2,Region V,Albay,14.1358,120.9608,Open-Meteo,43.0,26.3,70,5.9,0.15,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-03-01,2021,3,Region IV-A,Batangas,14.3873,120.6316,Open-Meteo,62.8,29.6,79,13.0,0.11,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-03-01,2021,3,Region IV-A,Quezon,13.8024,120.7188,Open-Meteo,29.8,27.5,77,13.8,0.18,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-03-01,2021,3,MIMAROPA,Marinduque,14.3941,121.2712,Open-Meteo,39.7,29.1,75,6.8,0.22,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-03-01,2021,3,Region V,Camarines Norte,14.0509,120.9620,Open-Meteo,78.9,27.3,71,7.2,0.15,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-03-01,2021,3,Region V,Camarines Sur,13.5584,120.7888,Open-Meteo,80.4,25.9,86,7.8,0.14,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-03-01,2021,3,Region IV-A,Cavite,14.2324,121.5015,Open-Meteo,63.4,29.5,85,13.7,0.17,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-03-01,2021,3,Region IV-A,Laguna,14.0719,121.0560,Open-Meteo,27.6,28.7,86,9.3,0.11,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-03-01,2021,3,Region V,Albay,13.8983,121.3379,Open-Meteo,33.4,28.4,76,6.0,0.11,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-04-01,2021,4,Region IV-A,Batangas,14.0229,121.4355,Open-Meteo,94.7,29.4,74,7.6,0.19,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-04-01,2021,4,Region IV-A,Quezon,13.7945,120.8167,Open-Meteo,50.8,29.9,70,13.6,0.17,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-04-01,2021,4,MIMAROPA,Marinduque,13.4790,121.4360,Open-Meteo,50.1,26.2,82,6.4,0.2,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-04-01,2021,4,Region V,Camarines Norte,14.1646,120.7251,Open-Meteo,52.1,28.7,81,11.8,0.02,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-04-01,2021,4,Region V,Camarines Sur,13.4872,121.0304,Open-Meteo,54.2,26.2,78,7.7,0.2,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-04-01,2021,4,Region IV-A,Cavite,13.8767,120.6898,Open-Meteo,70.6,29.4,85,9.4,0.23,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-04-01,2021,4,Region IV-A,Laguna,13.5374,120.8841,Open-Meteo,49.7,30.2,69,13.3,0.14,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-04-01,2021,4,Region V,Albay,13.9612,121.5480,Open-Meteo,77.1,26.5,72,13.8,0.22,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-05-01,2021,5,Region IV-A,Batangas,13.4213,120.8776,Open-Meteo,19.5,29.1,76,9.6,0.09,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-05-01,2021,5,Region IV-A,Quezon,14.3714,121.3592,Open-Meteo,34.7,26.4,70,13.5,0.25,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-05-01,2021,5,MIMAROPA,Marinduque,13.4358,121.0015,Open-Meteo,88.1,26.0,75,11.1,0.06,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-05-01,2021,5,Region V,Camarines Norte,14.3587,121.0029,Open-Meteo,29.5,27.8,80,6.3,0.3,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-05-01,2021,5,Region V,Camarines Sur,13.7438,120.7004,Open-Meteo,74.9,26.3,78,5.7,0.16,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-05-01,2021,5,Region IV-A,Cavite,14.3092,121.2607,Open-Meteo,34.8,26.2,70,10.4,0.28,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-05-01,2021,5,Region IV-A,Laguna,13.9282,121.1937,Open-Meteo,26.4,25.8,69,11.3,0.02,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-05-01,2021,5,Region V,Albay,13.6554,121.1746,Open-Meteo,93.9,27.2,78,13.2,0.02,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-06-01,2021,6,Region IV-A,Batangas,13.6967,121.3403,Open-Meteo,287.5,29.2,73,25.5,0.64,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-06-01,2021,6,Region IV-A,Quezon,14.1488,121.1104,Open-Meteo,453.2,27.5,83,20.4,0.41,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-06-01,2021,6,MIMAROPA,Marinduque,13.8262,121.2178,Open-Meteo,409.9,29.7,82,24.0,0.62,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-06-01,2021,6,Region V,Camarines Norte,13.7790,121.5870,Open-Meteo,367.3,27.4,77,17.4,0.6,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-06-01,2021,6,Region V,Camarines Sur,14.0783,120.6305,Open-Meteo,242.4,25.5,70,31.2,0.85,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-06-01,2021,6,Region IV-A,Cavite,14.0240,120.6084,Open-Meteo,391.9,25.3,82,31.1,0.51,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-06-01,2021,6,Region IV-A,Laguna,14.0122,121.5434,Open-Meteo,322.3,28.2,76,23.7,0.82,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-06-01,2021,6,Region V,Albay,14.3937,121.3064,Open-Meteo,348.5,30.4,74,28.8,0.7,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-07-01,2021,7,Region IV-A,Batangas,13.5901,120.7367,Open-Meteo,384.0,27.9,88,28.5,0.41,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-07-01,2021,7,Region IV-A,Quezon,14.0218,121.3317,Open-Meteo,281.7,29.3,78,23.2,0.68,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-07-01,2021,7,MIMAROPA,Marinduque,13.5358,121.5543,Open-Meteo,370.3,27.4,78,17.2,0.66,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-07-01,2021,7,Region V,Camarines Norte,13.9996,121.0176,Open-Meteo,258.8,28.7,88,14.9,0.45,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-07-01,2021,7,Region V,Camarines Sur,13.7311,121.0248,Open-Meteo,259.8,25.4,73,28.2,0.66,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-07-01,2021,7,Region IV-A,Cavite,13.4064,120.7884,Open-Meteo,357.8,29.5,74,21.9,0.8,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-07-01,2021,7,Region IV-A,Laguna,13.6841,120.7023,Open-Meteo,290.0,29.6,72,23.4,0.8,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-07-01,2021,7,Region V,Albay,14.3203,121.0142,Open-Meteo,341.2,27.8,79,21.7,0.56,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-08-01,2021,8,Region IV-A,Batangas,13.6562,120.6471,Open-Meteo,322.5,26.8,87,28.2,0.85,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-08-01,2021,8,Region IV-A,Quezon,13.5730,121.0708,Open-Meteo,435.2,27.8,81,19.8,0.83,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-08-01,2021,8,MIMAROPA,Marinduque,14.0271,121.4447,Open-Meteo,259.9,25.0,74,24.1,0.72,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-08-01,2021,8,Region V,Camarines Norte,14.0414,120.9085,Open-Meteo,393.2,29.4,72,29.8,0.42,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-08-01,2021,8,Region V,Camarines Sur,13.8866,121.4539,Open-Meteo,314.0,25.1,79,25.3,0.55,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-08-01,2021,8,Region IV-A,Cavite,14.1101,121.5753,Open-Meteo,424.9,27.5,70,25.5,0.48,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-08-01,2021,8,Region IV-A,Laguna,13.4873,121.4466,Open-Meteo,262.0,25.8,82,27.7,0.4,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-08-01,2021,8,Region V,Albay,14.2467,121.0030,Open-Meteo,445.6,25.7,69,16.4,0.74,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-09-01,2021,9,Region IV-A,Batangas,14.3654,121.5120,Open-Meteo,380.3,30.5,87,19.5,0.66,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-09-01,2021,9,Region IV-A,Quezon,13.5516,121.4000,Open-Meteo,381.0,30.3,72,30.5,0.71,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-09-01,2021,9,MIMAROPA,Marinduque,14.1628,120.7479,Open-Meteo,304.7,29.8,72,20.7,0.72,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-09-01,2021,9,Region V,Camarines Norte,14.3170,121.5251,Open-Meteo,380.5,28.9,80,30.6,0.57,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-09-01,2021,9,Region V,Camarines Sur,13.4221,121.3611,Open-Meteo,310.4,26.2,73,22.3,0.54,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-09-01,2021,9,Region IV-A,Cavite,13.9293,121.2197,Open-Meteo,387.7,27.6,83,28.0,0.6,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-09-01,2021,9,Region IV-A,Laguna,13.4131,121.3578,Open-Meteo,412.4,27.1,82,25.3,0.77,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-09-01,2021,9,Region V,Albay,14.0430,121.1082,Open-Meteo,448.0,29.3,73,15.2,0.71,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-10-01,2021,10,Region IV-A,Batangas,13.9614,121.4621,Open-Meteo,378.8,25.9,88,20.5,0.82,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-10-01,2021,10,Region IV-A,Quezon,14.1023,121.2710,Open-Meteo,398.0,26.6,75,19.6,0.42,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-10-01,2021,10,MIMAROPA,Marinduque,14.1767,120.6599,Open-Meteo,463.7,27.1,68,24.2,0.43,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-10-01,2021,10,Region V,Camarines Norte,13.4497,120.8986,Open-Meteo,383.3,28.7,85,30.2,0.78,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-10-01,2021,10,Region V,Camarines Sur,14.1238,121.4630,Open-Meteo,475.0,28.0,77,17.5,0.46,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-10-01,2021,10,Region IV-A,Cavite,13.8100,121.5217,Open-Meteo,294.9,27.5,87,15.7,0.51,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-10-01,2021,10,Region IV-A,Laguna,13.4152,121.3389,Open-Meteo,260.4,28.2,73,28.8,0.71,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-10-01,2021,10,Region V,Albay,14.0076,121.3287,Open-Meteo,356.2,29.8,84,18.1,0.54,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-11-01,2021,11,Region IV-A,Batangas,14.0105,121.1433,Open-Meteo,351.5,29.1,72,23.5,0.57,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-11-01,2021,11,Region IV-A,Quezon,14.3386,121.3517,Open-Meteo,371.8,29.8,70,23.4,0.55,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-11-01,2021,11,MIMAROPA,Marinduque,13.9530,120.9382,Open-Meteo,350.2,29.8,87,29.3,0.8,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-11-01,2021,11,Region V,Camarines Norte,13.6644,121.4739,Open-Meteo,323.4,29.6,88,21.5,0.76,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-11-01,2021,11,Region V,Camarines Sur,14.1446,121.1657,Open-Meteo,395.4,28.9,73,31.9,0.55,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-11-01,2021,11,Region IV-A,Cavite,14.0900,121.5715,Open-Meteo,473.9,29.9,73,31.2,0.73,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-11-01,2021,11,Region IV-A,Laguna,13.8444,121.4721,Open-Meteo,318.9,26.7,74,16.6,0.41,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-11-01,2021,11,Region V,Albay,14.2696,120.7058,Open-Meteo,300.5,28.2,84,19.3,0.57,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-12-01,2021,12,Region IV-A,Batangas,14.0359,121.3100,Open-Meteo,26.4,29.0,83,10.8,0.1,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-12-01,2021,12,Region IV-A,Quezon,14.0229,121.3123,Open-Meteo,69.0,27.8,87,13.7,0.11,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-12-01,2021,12,MIMAROPA,Marinduque,14.3965,120.7843,Open-Meteo,88.6,29.5,79,11.6,0.21,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-12-01,2021,12,Region V,Camarines Norte,14.3860,120.7434,Open-Meteo,77.7,29.3,73,6.0,0.23,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-12-01,2021,12,Region V,Camarines Sur,14.0498,120.6148,Open-Meteo,32.2,26.7,80,7.5,0.27,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-12-01,2021,12,Region IV-A,Cavite,14.3054,120.8707,Open-Meteo,36.9,30.3,72,8.3,0.32,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-12-01,2021,12,Region IV-A,Laguna,13.5069,120.9388,Open-Meteo,87.8,25.8,68,9.9,0.19,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2021-12-01,2021,12,Region V,Albay,14.2914,121.4341,Open-Meteo,59.5,26.5,75,4.8,0.34,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-01-01,2022,1,Region IV-A,Batangas,13.7216,121.2808,Open-Meteo,63.3,29.3,87,13.1,0.07,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-01-01,2022,1,Region IV-A,Quezon,13.8214,120.6546,Open-Meteo,31.6,26.7,70,13.1,0.1,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-01-01,2022,1,MIMAROPA,Marinduque,13.9366,120.9982,Open-Meteo,62.0,27.7,78,14.2,0.24,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-01-01,2022,1,Region V,Camarines Norte,14.1269,121.2112,Open-Meteo,80.1,27.4,84,13.1,0.32,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-01-01,2022,1,Region V,Camarines Sur,14.1625,120.9412,Open-Meteo,23.2,28.4,79,13.1,0.14,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-01-01,2022,1,Region IV-A,Cavite,13.8365,120.6626,Open-Meteo,53.7,26.9,82,5.2,0.04,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-01-01,2022,1,Region IV-A,Laguna,14.3277,120.6410,Open-Meteo,59.2,29.9,84,13.5,0.23,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-01-01,2022,1,Region V,Albay,13.9703,121.4095,Open-Meteo,18.8,28.9,81,14.4,0.23,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-02-01,2022,2,Region IV-A,Batangas,13.6752,121.2744,Open-Meteo,56.8,30.4,71,8.4,0.07,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-02-01,2022,2,Region IV-A,Quezon,14.1140,121.4925,Open-Meteo,57.0,25.5,82,6.8,0.29,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-02-01,2022,2,MIMAROPA,Marinduque,14.3498,120.9036,Open-Meteo,83.1,29.1,78,4.6,0.09,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-02-01,2022,2,Region V,Camarines Norte,14.2279,120.7806,Open-Meteo,59.6,27.7,88,8.0,0.04,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-02-01,2022,2,Region V,Camarines Sur,13.4767,121.0529,Open-Meteo,50.7,27.3,72,10.5,0.1,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-02-01,2022,2,Region IV-A,Cavite,13.7821,121.3074,Open-Meteo,74.2,25.9,75,6.4,0.18,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-02-01,2022,2,Region IV-A,Laguna,13.8714,121.5592,Open-Meteo,68.0,29.4,71,12.1,0.15,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-02-01,2022,2,Region V,Albay,14.2554,120.7751,Open-Meteo,54.9,26.2,74,5.7,0.15,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-03-01,2022,3,Region IV-A,Batangas,13.6393,121.5070,Open-Meteo,18.2,28.6,88,6.0,0.02,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-03-01,2022,3,Region IV-A,Quezon,14.0760,120.8483,Open-Meteo,40.7,27.5,84,9.0,0.27,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-03-01,2022,3,MIMAROPA,Marinduque,13.4994,121.5075,Open-Meteo,48.1,25.9,86,6.8,0.19,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-03-01,2022,3,Region V,Camarines Norte,13.7439,121.0807,Open-Meteo,44.6,29.8,85,4.6,0.3,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-03-01,2022,3,Region V,Camarines Sur,13.8899,120.9063,Open-Meteo,68.4,25.2,70,11.0,0.29,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-03-01,2022,3,Region IV-A,Cavite,13.5200,121.4753,Open-Meteo,38.3,28.5,86,13.7,0.07,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-03-01,2022,3,Region IV-A,Laguna,13.4953,121.1118,Open-Meteo,58.5,27.2,73,12.7,0.35,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-03-01,2022,3,Region V,Albay,14.1844,121.1892,Open-Meteo,81.4,27.2,72,9.1,0.31,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-04-01,2022,4,Region IV-A,Batangas,13.5673,120.7460,Open-Meteo,27.9,26.1,80,13.9,0.3,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-04-01,2022,4,Region IV-A,Quezon,13.7110,121.4047,Open-Meteo,38.8,30.3,81,7.4,0.08,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-04-01,2022,4,MIMAROPA,Marinduque,13.7006,120.6373,Open-Meteo,78.2,29.0,87,9.6,0.32,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-04-01,2022,4,Region V,Camarines Norte,14.1864,120.9929,Open-Meteo,19.7,29.4,83,7.8,0.31,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-04-01,2022,4,Region V,Camarines Sur,14.3049,121.3531,Open-Meteo,86.0,29.1,73,4.7,0.1,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-04-01,2022,4,Region IV-A,Cavite,13.6016,121.1154,Open-Meteo,36.0,27.7,88,11.4,0.19,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-04-01,2022,4,Region IV-A,Laguna,13.4782,121.3879,Open-Meteo,34.3,26.4,86,8.2,0.28,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-04-01,2022,4,Region V,Albay,14.3971,121.0503,Open-Meteo,51.9,30.3,86,9.0,0.34,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-05-01,2022,5,Region IV-A,Batangas,13.6401,120.6676,Open-Meteo,46.2,26.8,78,7.8,0.1,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-05-01,2022,5,Region IV-A,Quezon,14.3771,121.5756,Open-Meteo,25.0,28.7,71,5.3,0.08,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-05-01,2022,5,MIMAROPA,Marinduque,13.4385,121.1487,Open-Meteo,39.4,27.6,78,11.3,0.02,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-05-01,2022,5,Region V,Camarines Norte,14.1965,120.6183,Open-Meteo,81.6,26.7,77,4.7,0.18,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-05-01,2022,5,Region V,Camarines Sur,14.1408,121.5489,Open-Meteo,88.0,28.1,81,11.5,0.12,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-05-01,2022,5,Region IV-A,Cavite,13.7939,121.0445,Open-Meteo,61.4,26.5,86,4.7,0.3,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-05-01,2022,5,Region IV-A,Laguna,14.3821,120.9328,Open-Meteo,48.9,26.7,87,6.8,0.26,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-05-01,2022,5,Region V,Albay,13.9401,120.7878,Open-Meteo,41.9,30.4,79,7.5,0.11,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-06-01,2022,6,Region IV-A,Batangas,13.5609,121.0905,Open-Meteo,379.9,27.7,71,18.7,0.79,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-06-01,2022,6,Region IV-A,Quezon,13.9886,121.2801,Open-Meteo,295.5,25.2,70,21.1,0.77,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-06-01,2022,6,MIMAROPA,Marinduque,13.7950,120.6976,Open-Meteo,333.6,30.4,81,27.2,0.55,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-06-01,2022,6,Region V,Camarines Norte,13.6739,121.0230,Open-Meteo,360.9,29.2,70,24.0,0.53,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-06-01,2022,6,Region V,Camarines Sur,14.2181,121.0577,Open-Meteo,342.1,27.6,72,17.8,0.78,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-06-01,2022,6,Region IV-A,Cavite,14.3998,121.2479,Open-Meteo,280.3,29.5,75,23.7,0.57,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-06-01,2022,6,Region IV-A,Laguna,14.1871,121.0994,Open-Meteo,363.7,30.4,80,25.1,0.67,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-06-01,2022,6,Region V,Albay,13.8106,121.2466,Open-Meteo,411.3,27.8,74,18.9,0.81,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-07-01,2022,7,Region IV-A,Batangas,13.7252,120.7265,Open-Meteo,280.3,27.5,68,25.8,0.75,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-07-01,2022,7,Region IV-A,Quezon,13.8081,121.3169,Open-Meteo,299.5,26.0,68,30.4,0.69,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-07-01,2022,7,MIMAROPA,Marinduque,13.5814,121.0391,Open-Meteo,308.7,25.3,82,32.3,0.58,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-07-01,2022,7,Region V,Camarines Norte,14.2981,121.3368,Open-Meteo,301.3,28.9,76,17.8,0.71,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-07-01,2022,7,Region V,Camarines Sur,14.1131,120.7114,Open-Meteo,308.2,28.5,71,17.6,0.72,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-07-01,2022,7,Region IV-A,Cavite,13.5278,121.5717,Open-Meteo,255.0,26.7,68,17.1,0.64,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-07-01,2022,7,Region IV-A,Laguna,14.2321,120.7566,Open-Meteo,244.7,26.3,70,31.0,0.52,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-07-01,2022,7,Region V,Albay,13.8728,120.6006,Open-Meteo,264.9,29.1,82,22.0,0.73,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-08-01,2022,8,Region IV-A,Batangas,13.7360,121.2853,Open-Meteo,398.5,25.1,76,31.5,0.81,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-08-01,2022,8,Region IV-A,Quezon,13.4125,121.2617,Open-Meteo,364.8,29.9,75,17.3,0.66,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-08-01,2022,8,MIMAROPA,Marinduque,13.6217,121.1092,Open-Meteo,299.6,25.8,87,28.3,0.59,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-08-01,2022,8,Region V,Camarines Norte,13.7722,120.6169,Open-Meteo,244.3,28.4,68,23.0,0.56,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-08-01,2022,8,Region V,Camarines Sur,14.0056,120.7472,Open-Meteo,440.0,27.8,87,17.1,0.83,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-08-01,2022,8,Region IV-A,Cavite,13.5797,120.6991,Open-Meteo,446.7,28.9,85,31.6,0.52,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-08-01,2022,8,Region IV-A,Laguna,13.5426,120.9468,Open-Meteo,435.7,26.3,86,30.6,0.69,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-08-01,2022,8,Region V,Albay,14.0226,121.4301,Open-Meteo,262.1,29.6,84,14.1,0.76,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-09-01,2022,9,Region IV-A,Batangas,13.4922,120.9579,Open-Meteo,395.5,27.5,81,26.0,0.53,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-09-01,2022,9,Region IV-A,Quezon,14.3823,121.2719,Open-Meteo,350.5,27.7,70,28.0,0.79,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-09-01,2022,9,MIMAROPA,Marinduque,14.1006,120.6816,Open-Meteo,301.4,27.5,86,29.1,0.5,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-09-01,2022,9,Region V,Camarines Norte,13.5326,120.7368,Open-Meteo,428.6,28.7,71,16.2,0.43,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-09-01,2022,9,Region V,Camarines Sur,13.8075,120.7381,Open-Meteo,413.7,26.1,68,31.1,0.79,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-09-01,2022,9,Region IV-A,Cavite,14.2349,120.7822,Open-Meteo,294.3,27.3,83,25.2,0.77,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-09-01,2022,9,Region IV-A,Laguna,13.5667,121.1212,Open-Meteo,299.2,26.0,69,16.1,0.72,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-09-01,2022,9,Region V,Albay,13.5471,120.9618,Open-Meteo,299.3,26.0,77,28.1,0.44,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-10-01,2022,10,Region IV-A,Batangas,14.3408,120.6382,Open-Meteo,370.4,29.0,76,28.9,0.7,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-10-01,2022,10,Region IV-A,Quezon,13.7166,121.1500,Open-Meteo,241.6,25.8,77,24.1,0.55,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-10-01,2022,10,MIMAROPA,Marinduque,14.1794,121.5152,Open-Meteo,353.6,25.1,74,24.3,0.76,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-10-01,2022,10,Region V,Camarines Norte,14.3695,121.0148,Open-Meteo,375.1,25.9,72,23.6,0.47,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-10-01,2022,10,Region V,Camarines Sur,13.8184,121.3421,Open-Meteo,336.5,30.3,76,20.8,0.48,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-10-01,2022,10,Region IV-A,Cavite,14.1577,120.8091,Open-Meteo,255.7,26.9,87,16.4,0.66,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-10-01,2022,10,Region IV-A,Laguna,13.6673,120.9978,Open-Meteo,465.1,27.1,83,24.1,0.81,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-10-01,2022,10,Region V,Albay,13.6140,121.3696,Open-Meteo,286.5,28.5,83,14.9,0.64,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-11-01,2022,11,Region IV-A,Batangas,14.3285,121.0613,Open-Meteo,289.0,27.3,81,29.1,0.46,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-11-01,2022,11,Region IV-A,Quezon,14.2996,120.6874,Open-Meteo,451.4,26.8,68,23.9,0.41,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-11-01,2022,11,MIMAROPA,Marinduque,14.0498,121.1335,Open-Meteo,378.7,28.6,81,24.8,0.62,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-11-01,2022,11,Region V,Camarines Norte,14.1953,121.3009,Open-Meteo,321.3,26.8,88,24.6,0.74,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-11-01,2022,11,Region V,Camarines Sur,13.6469,121.2793,Open-Meteo,245.6,26.9,88,26.7,0.72,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-11-01,2022,11,Region IV-A,Cavite,13.9998,121.2750,Open-Meteo,290.2,25.1,82,27.2,0.61,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-11-01,2022,11,Region IV-A,Laguna,13.6177,120.6733,Open-Meteo,437.9,28.8,76,16.8,0.65,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-11-01,2022,11,Region V,Albay,14.2517,120.8492,Open-Meteo,287.6,29.5,72,32.0,0.78,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-12-01,2022,12,Region IV-A,Batangas,14.2879,121.2897,Open-Meteo,56.8,28.2,81,8.9,0.07,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-12-01,2022,12,Region IV-A,Quezon,13.8222,121.5885,Open-Meteo,40.2,25.2,85,12.8,0.26,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-12-01,2022,12,MIMAROPA,Marinduque,13.6878,120.6618,Open-Meteo,34.7,28.7,85,13.0,0.28,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-12-01,2022,12,Region V,Camarines Norte,13.4647,120.6647,Open-Meteo,53.2,26.9,75,13.6,0.29,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-12-01,2022,12,Region V,Camarines Sur,13.7535,121.2062,Open-Meteo,36.4,25.3,70,13.6,0.06,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-12-01,2022,12,Region IV-A,Cavite,13.9727,120.9387,Open-Meteo,61.2,28.2,71,10.8,0.13,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-12-01,2022,12,Region IV-A,Laguna,14.0220,120.7052,Open-Meteo,55.8,28.4,77,6.1,0.03,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2022-12-01,2022,12,Region V,Albay,14.3650,121.5345,Open-Meteo,86.1,27.6,81,11.1,0.02,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-01-01,2023,1,Region IV-A,Batangas,14.1345,121.2489,Open-Meteo,53.5,30.0,84,14.0,0.3,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-01-01,2023,1,Region IV-A,Quezon,13.6229,120.8961,Open-Meteo,30.6,26.0,73,6.5,0.1,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-01-01,2023,1,MIMAROPA,Marinduque,13.7969,121.4872,Open-Meteo,86.0,25.5,79,13.7,0.29,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-01-01,2023,1,Region V,Camarines Norte,13.9764,120.6155,Open-Meteo,49.5,29.3,70,10.9,0.07,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-01-01,2023,1,Region V,Camarines Sur,14.3159,121.1514,Open-Meteo,82.8,29.0,87,8.6,0.06,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-01-01,2023,1,Region IV-A,Cavite,13.4819,121.4626,Open-Meteo,84.3,25.7,77,10.3,0.0,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-01-01,2023,1,Region IV-A,Laguna,14.0986,120.8289,Open-Meteo,84.3,30.0,68,12.0,0.19,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-01-01,2023,1,Region V,Albay,13.6037,121.3620,Open-Meteo,26.5,27.6,80,12.4,0.17,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-02-01,2023,2,Region IV-A,Batangas,13.6568,121.1233,Open-Meteo,67.0,30.3,70,9.2,0.31,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-02-01,2023,2,Region IV-A,Quezon,13.5246,120.8291,Open-Meteo,87.4,28.8,77,6.9,0.06,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-02-01,2023,2,MIMAROPA,Marinduque,13.4959,121.5080,Open-Meteo,43.2,28.4,79,5.0,0.24,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-02-01,2023,2,Region V,Camarines Norte,13.9522,120.9432,Open-Meteo,46.2,27.3,70,12.0,0.14,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-02-01,2023,2,Region V,Camarines Sur,13.6588,120.9098,Open-Meteo,55.6,28.0,82,9.7,0.28,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-02-01,2023,2,Region IV-A,Cavite,13.4250,121.2375,Open-Meteo,73.2,25.5,79,9.2,0.17,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-02-01,2023,2,Region IV-A,Laguna,13.7548,121.1267,Open-Meteo,73.8,29.0,87,4.5,0.31,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-02-01,2023,2,Region V,Albay,14.3420,121.1646,Open-Meteo,61.7,30.1,84,10.2,0.3,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-03-01,2023,3,Region IV-A,Batangas,13.4493,120.6416,Open-Meteo,91.5,26.2,78,5.2,0.23,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-03-01,2023,3,Region IV-A,Quezon,13.7581,121.1742,Open-Meteo,63.8,25.6,83,10.5,0.3,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-03-01,2023,3,MIMAROPA,Marinduque,14.3440,120.7505,Open-Meteo,50.4,26.4,72,9.3,0.19,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-03-01,2023,3,Region V,Camarines Norte,14.1054,121.3377,Open-Meteo,88.7,29.4,82,11.0,0.33,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-03-01,2023,3,Region V,Camarines Sur,14.0590,120.7049,Open-Meteo,66.1,30.4,78,8.5,0.13,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-03-01,2023,3,Region IV-A,Cavite,14.2966,120.9122,Open-Meteo,32.4,26.5,82,9.8,0.34,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-03-01,2023,3,Region IV-A,Laguna,13.5097,121.2303,Open-Meteo,48.7,27.9,74,7.3,0.14,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-03-01,2023,3,Region V,Albay,14.0933,121.2770,Open-Meteo,36.8,27.6,86,12.9,0.11,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-04-01,2023,4,Region IV-A,Batangas,13.6589,120.7572,Open-Meteo,46.7,29.0,72,8.5,0.31,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-04-01,2023,4,Region IV-A,Quezon,13.4769,120.8329,Open-Meteo,55.5,29.2,69,5.6,0.29,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-04-01,2023,4,MIMAROPA,Marinduque,13.4668,120.8599,Open-Meteo,88.8,29.8,77,6.2,0.16,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-04-01,2023,4,Region V,Camarines Norte,14.0484,120.9455,Open-Meteo,32.7,29.0,80,11.5,0.04,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-04-01,2023,4,Region V,Camarines Sur,14.1980,120.7382,Open-Meteo,46.7,25.9,81,12.9,0.19,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-04-01,2023,4,Region IV-A,Cavite,13.9737,120.7480,Open-Meteo,40.4,30.2,73,5.6,0.14,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-04-01,2023,4,Region IV-A,Laguna,13.8707,120.7546,Open-Meteo,63.5,26.5,68,14.0,0.14,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-04-01,2023,4,Region V,Albay,14.2949,121.1343,Open-Meteo,81.5,25.4,81,7.9,0.32,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-05-01,2023,5,Region IV-A,Batangas,14.1964,121.2471,Open-Meteo,78.2,26.2,76,9.8,0.15,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-05-01,2023,5,Region IV-A,Quezon,13.9160,121.3045,Open-Meteo,28.7,29.4,72,14.4,0.24,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-05-01,2023,5,MIMAROPA,Marinduque,14.1990,121.0112,Open-Meteo,54.3,27.3,75,11.7,0.23,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-05-01,2023,5,Region V,Camarines Norte,13.8952,121.4742,Open-Meteo,28.6,30.0,70,9.9,0.02,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-05-01,2023,5,Region V,Camarines Sur,13.9595,120.6464,Open-Meteo,61.3,29.4,71,7.6,0.14,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-05-01,2023,5,Region IV-A,Cavite,14.1115,121.0804,Open-Meteo,71.9,29.9,78,9.4,0.3,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-05-01,2023,5,Region IV-A,Laguna,13.8752,121.4440,Open-Meteo,23.9,26.6,75,7.0,0.12,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-05-01,2023,5,Region V,Albay,14.1114,121.4071,Open-Meteo,38.5,29.3,69,5.5,0.09,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-06-01,2023,6,Region IV-A,Batangas,13.8477,121.5046,Open-Meteo,342.3,27.8,78,27.4,0.48,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-06-01,2023,6,Region IV-A,Quezon,14.2823,120.9575,Open-Meteo,255.0,29.2,80,28.1,0.77,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-06-01,2023,6,MIMAROPA,Marinduque,13.6325,121.2739,Open-Meteo,321.7,29.7,80,26.9,0.65,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-06-01,2023,6,Region V,Camarines Norte,13.7519,121.1843,Open-Meteo,371.2,26.6,77,28.1,0.59,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-06-01,2023,6,Region V,Camarines Sur,13.7287,121.0879,Open-Meteo,417.3,26.0,78,32.8,0.47,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-06-01,2023,6,Region IV-A,Cavite,13.4003,121.4894,Open-Meteo,383.2,27.2,85,16.2,0.66,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-06-01,2023,6,Region IV-A,Laguna,14.1406,120.9751,Open-Meteo,264.7,25.4,83,29.3,0.8,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-06-01,2023,6,Region V,Albay,14.3882,121.5734,Open-Meteo,262.8,26.6,86,14.1,0.47,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-07-01,2023,7,Region IV-A,Batangas,13.9843,121.5543,Open-Meteo,296.0,25.5,83,14.2,0.78,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-07-01,2023,7,Region IV-A,Quezon,13.9778,121.0972,Open-Meteo,442.9,29.6,73,31.4,0.84,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-07-01,2023,7,MIMAROPA,Marinduque,13.7798,120.9040,Open-Meteo,375.2,30.0,82,30.1,0.68,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-07-01,2023,7,Region V,Camarines Norte,14.2929,121.3353,Open-Meteo,392.6,28.0,68,20.6,0.55,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-07-01,2023,7,Region V,Camarines Sur,13.9687,121.3453,Open-Meteo,401.6,25.4,87,23.1,0.69,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-07-01,2023,7,Region IV-A,Cavite,13.5978,120.8730,Open-Meteo,370.4,27.2,87,26.6,0.5,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-07-01,2023,7,Region IV-A,Laguna,13.6785,121.1963,Open-Meteo,435.4,26.0,72,26.8,0.62,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-07-01,2023,7,Region V,Albay,13.6817,120.8826,Open-Meteo,242.0,26.2,73,16.9,0.57,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-08-01,2023,8,Region IV-A,Batangas,14.3169,121.1867,Open-Meteo,270.9,29.6,80,16.0,0.77,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-08-01,2023,8,Region IV-A,Quezon,13.9098,120.6181,Open-Meteo,274.0,26.0,78,26.5,0.69,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-08-01,2023,8,MIMAROPA,Marinduque,13.8548,120.7410,Open-Meteo,277.8,25.7,75,23.6,0.51,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-08-01,2023,8,Region V,Camarines Norte,13.8483,121.5426,Open-Meteo,323.6,26.1,73,24.3,0.6,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-08-01,2023,8,Region V,Camarines Sur,13.8806,121.1207,Open-Meteo,342.0,25.3,77,19.7,0.46,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-08-01,2023,8,Region IV-A,Cavite,13.4398,121.1850,Open-Meteo,257.4,29.2,74,19.4,0.45,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-08-01,2023,8,Region IV-A,Laguna,13.7657,121.0071,Open-Meteo,323.8,25.8,75,26.4,0.46,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-08-01,2023,8,Region V,Albay,13.9134,121.0877,Open-Meteo,328.1,26.7,79,29.9,0.62,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-09-01,2023,9,Region IV-A,Batangas,13.7021,121.5842,Open-Meteo,286.7,28.5,78,28.0,0.57,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-09-01,2023,9,Region IV-A,Quezon,13.5872,120.8799,Open-Meteo,359.4,27.1,78,15.4,0.68,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-09-01,2023,9,MIMAROPA,Marinduque,14.0704,121.4597,Open-Meteo,382.9,28.3,70,28.4,0.61,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-09-01,2023,9,Region V,Camarines Norte,13.5501,120.6258,Open-Meteo,296.5,27.3,71,26.4,0.62,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-09-01,2023,9,Region V,Camarines Sur,13.4047,120.7553,Open-Meteo,355.5,29.8,80,18.9,0.74,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-09-01,2023,9,Region IV-A,Cavite,13.5640,121.1523,Open-Meteo,277.8,28.7,81,30.6,0.74,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-09-01,2023,9,Region IV-A,Laguna,13.9383,120.8706,Open-Meteo,413.7,26.3,79,24.0,0.45,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-09-01,2023,9,Region V,Albay,13.9080,120.7098,Open-Meteo,452.3,29.8,84,21.9,0.81,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-10-01,2023,10,Region IV-A,Batangas,14.0953,121.3219,Open-Meteo,343.2,30.5,75,24.4,0.61,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-10-01,2023,10,Region IV-A,Quezon,13.8186,121.0098,Open-Meteo,447.0,30.0,70,29.5,0.82,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-10-01,2023,10,MIMAROPA,Marinduque,14.2722,121.3205,Open-Meteo,280.3,27.4,88,29.3,0.68,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-10-01,2023,10,Region V,Camarines Norte,13.4482,121.3794,Open-Meteo,279.5,26.0,68,27.9,0.42,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-10-01,2023,10,Region V,Camarines Sur,14.0420,121.5817,Open-Meteo,470.4,26.8,69,31.0,0.54,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-10-01,2023,10,Region IV-A,Cavite,13.7705,121.1054,Open-Meteo,444.2,27.5,82,30.5,0.41,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-10-01,2023,10,Region IV-A,Laguna,13.8368,121.3244,Open-Meteo,263.6,29.8,80,23.7,0.74,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-10-01,2023,10,Region V,Albay,14.1459,121.1300,Open-Meteo,462.8,29.0,84,19.1,0.62,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-11-01,2023,11,Region IV-A,Batangas,13.8423,120.9302,Open-Meteo,432.9,28.7,77,30.4,0.63,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-11-01,2023,11,Region IV-A,Quezon,14.3620,120.6682,Open-Meteo,315.5,27.4,79,29.6,0.44,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-11-01,2023,11,MIMAROPA,Marinduque,13.4578,121.1242,Open-Meteo,391.4,25.4,76,19.7,0.79,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-11-01,2023,11,Region V,Camarines Norte,13.7840,121.3946,Open-Meteo,312.8,29.2,76,31.4,0.72,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-11-01,2023,11,Region V,Camarines Sur,14.2256,121.4434,Open-Meteo,279.1,30.0,68,28.0,0.83,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-11-01,2023,11,Region IV-A,Cavite,14.0090,121.4822,Open-Meteo,407.7,26.9,74,29.4,0.63,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-11-01,2023,11,Region IV-A,Laguna,14.2645,121.0351,Open-Meteo,361.1,26.0,75,18.7,0.62,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-11-01,2023,11,Region V,Albay,13.7897,120.9398,Open-Meteo,413.8,27.1,70,17.8,0.85,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-12-01,2023,12,Region IV-A,Batangas,13.4683,121.4225,Open-Meteo,34.6,28.5,72,7.2,0.04,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-12-01,2023,12,Region IV-A,Quezon,13.5508,120.7004,Open-Meteo,94.1,27.9,70,10.6,0.34,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-12-01,2023,12,MIMAROPA,Marinduque,13.6116,120.7323,Open-Meteo,79.1,25.8,82,9.0,0.14,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-12-01,2023,12,Region V,Camarines Norte,14.3594,121.1061,Open-Meteo,20.4,29.9,82,12.9,0.0,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-12-01,2023,12,Region V,Camarines Sur,13.8324,120.6059,Open-Meteo,40.3,28.6,71,7.5,0.22,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-12-01,2023,12,Region IV-A,Cavite,13.5855,120.9514,Open-Meteo,23.0,27.0,71,11.7,0.02,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-12-01,2023,12,Region IV-A,Laguna,13.9859,121.4294,Open-Meteo,65.6,30.2,84,13.4,0.25,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2023-12-01,2023,12,Region V,Albay,13.7234,121.3127,Open-Meteo,93.3,29.6,81,6.4,0.11,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-01-01,2024,1,Region IV-A,Batangas,14.1188,120.6968,Open-Meteo,23.4,27.7,68,5.2,0.25,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-01-01,2024,1,Region IV-A,Quezon,14.3967,121.1371,Open-Meteo,70.2,25.3,69,13.9,0.32,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-01-01,2024,1,MIMAROPA,Marinduque,13.5477,121.3457,Open-Meteo,36.1,25.5,72,9.4,0.02,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-01-01,2024,1,Region V,Camarines Norte,14.1485,121.0114,Open-Meteo,47.0,30.4,77,10.3,0.03,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-01-01,2024,1,Region V,Camarines Sur,14.2814,121.5139,Open-Meteo,62.1,26.6,87,8.0,0.25,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-01-01,2024,1,Region IV-A,Cavite,13.5519,121.3034,Open-Meteo,52.7,25.0,78,13.2,0.09,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-01-01,2024,1,Region IV-A,Laguna,14.2917,120.9824,Open-Meteo,56.7,25.3,86,7.1,0.08,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-01-01,2024,1,Region V,Albay,13.6793,121.3569,Open-Meteo,36.7,28.6,75,9.4,0.34,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-02-01,2024,2,Region IV-A,Batangas,13.7505,121.0265,Open-Meteo,18.4,30.5,73,9.3,0.24,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-02-01,2024,2,Region IV-A,Quezon,13.4042,120.7738,Open-Meteo,20.6,27.0,71,5.1,0.09,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-02-01,2024,2,MIMAROPA,Marinduque,14.3490,120.6458,Open-Meteo,22.1,27.7,85,6.3,0.12,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-02-01,2024,2,Region V,Camarines Norte,14.1393,121.3113,Open-Meteo,36.5,28.2,68,12.6,0.05,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-02-01,2024,2,Region V,Camarines Sur,13.6930,121.4736,Open-Meteo,47.7,27.2,72,9.2,0.13,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-02-01,2024,2,Region IV-A,Cavite,14.3039,121.5336,Open-Meteo,92.4,26.6,72,11.6,0.15,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-02-01,2024,2,Region IV-A,Laguna,14.2837,121.1904,Open-Meteo,85.0,27.9,70,11.3,0.02,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-02-01,2024,2,Region V,Albay,14.3344,120.6637,Open-Meteo,63.4,27.1,70,12.2,0.08,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-03-01,2024,3,Region IV-A,Batangas,13.9785,120.8894,Open-Meteo,52.0,25.9,68,11.9,0.27,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-03-01,2024,3,Region IV-A,Quezon,13.5355,121.0112,Open-Meteo,57.9,26.6,71,6.4,0.17,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-03-01,2024,3,MIMAROPA,Marinduque,14.1608,121.5553,Open-Meteo,78.9,26.7,72,5.9,0.01,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-03-01,2024,3,Region V,Camarines Norte,13.9028,121.0365,Open-Meteo,37.8,29.8,72,13.5,0.26,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-03-01,2024,3,Region V,Camarines Sur,13.7442,120.6455,Open-Meteo,55.5,27.6,77,11.8,0.02,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-03-01,2024,3,Region IV-A,Cavite,13.7922,120.7223,Open-Meteo,53.5,27.3,88,11.1,0.21,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-03-01,2024,3,Region IV-A,Laguna,13.7950,121.3410,Open-Meteo,70.9,28.1,84,7.1,0.27,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-03-01,2024,3,Region V,Albay,13.6078,121.1154,Open-Meteo,39.9,28.6,70,14.4,0.2,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-04-01,2024,4,Region IV-A,Batangas,13.8990,121.0023,Open-Meteo,37.7,30.3,75,7.3,0.26,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-04-01,2024,4,Region IV-A,Quezon,13.7481,121.1862,Open-Meteo,33.0,26.0,75,14.0,0.03,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-04-01,2024,4,MIMAROPA,Marinduque,13.5920,120.6358,Open-Meteo,74.9,27.5,75,13.2,0.17,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-04-01,2024,4,Region V,Camarines Norte,13.6416,121.2946,Open-Meteo,86.7,27.2,68,5.0,0.08,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-04-01,2024,4,Region V,Camarines Sur,13.6746,121.3381,Open-Meteo,80.3,26.3,73,5.8,0.22,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-04-01,2024,4,Region IV-A,Cavite,14.2516,121.1762,Open-Meteo,88.9,28.1,79,12.2,0.26,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-04-01,2024,4,Region IV-A,Laguna,13.6971,120.9361,Open-Meteo,51.7,27.1,72,10.8,0.09,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-04-01,2024,4,Region V,Albay,13.6839,121.2652,Open-Meteo,80.4,29.0,85,13.2,0.08,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-05-01,2024,5,Region IV-A,Batangas,13.7782,121.5643,Open-Meteo,26.1,30.1,83,13.3,0.12,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-05-01,2024,5,Region IV-A,Quezon,13.5053,120.8048,Open-Meteo,81.0,25.2,86,6.4,0.1,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-05-01,2024,5,MIMAROPA,Marinduque,13.4866,121.3965,Open-Meteo,28.7,26.6,78,5.2,0.1,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-05-01,2024,5,Region V,Camarines Norte,13.5409,121.1746,Open-Meteo,62.7,28.9,82,5.6,0.17,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-05-01,2024,5,Region V,Camarines Sur,14.0226,121.1212,Open-Meteo,43.1,29.0,75,7.1,0.09,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-05-01,2024,5,Region IV-A,Cavite,13.6600,121.1276,Open-Meteo,20.7,29.7,74,4.7,0.2,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-05-01,2024,5,Region IV-A,Laguna,14.0459,121.3640,Open-Meteo,27.9,25.4,75,9.0,0.11,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-05-01,2024,5,Region V,Albay,13.5040,120.6696,Open-Meteo,30.6,26.9,70,8.4,0.21,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-06-01,2024,6,Region IV-A,Batangas,13.9765,121.2757,Open-Meteo,472.3,30.0,87,17.0,0.52,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-06-01,2024,6,Region IV-A,Quezon,13.6867,120.7514,Open-Meteo,424.2,27.1,87,29.2,0.71,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-06-01,2024,6,MIMAROPA,Marinduque,14.3907,121.2475,Open-Meteo,437.4,26.9,73,27.6,0.64,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-06-01,2024,6,Region V,Camarines Norte,14.0160,120.6479,Open-Meteo,282.7,26.0,79,21.8,0.78,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-06-01,2024,6,Region V,Camarines Sur,14.2323,121.2166,Open-Meteo,355.7,26.2,75,18.2,0.74,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-06-01,2024,6,Region IV-A,Cavite,13.8229,120.7346,Open-Meteo,295.5,29.7,70,29.6,0.41,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-06-01,2024,6,Region IV-A,Laguna,14.0722,121.4280,Open-Meteo,333.7,25.3,81,26.5,0.75,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-06-01,2024,6,Region V,Albay,13.9356,120.7312,Open-Meteo,441.4,25.2,80,20.5,0.78,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-07-01,2024,7,Region IV-A,Batangas,13.5258,120.9507,Open-Meteo,336.3,28.1,78,25.1,0.8,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-07-01,2024,7,Region IV-A,Quezon,13.6675,120.6880,Open-Meteo,243.7,27.0,69,17.0,0.71,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-07-01,2024,7,MIMAROPA,Marinduque,13.9267,121.2840,Open-Meteo,413.0,28.4,85,26.5,0.53,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-07-01,2024,7,Region V,Camarines Norte,13.5707,120.8143,Open-Meteo,409.5,29.7,80,15.0,0.71,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-07-01,2024,7,Region V,Camarines Sur,14.3136,121.0028,Open-Meteo,333.9,28.6,80,30.0,0.52,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-07-01,2024,7,Region IV-A,Cavite,14.2879,120.6616,Open-Meteo,350.0,27.8,71,18.8,0.78,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-07-01,2024,7,Region IV-A,Laguna,13.7381,120.9203,Open-Meteo,317.5,26.2,84,32.7,0.61,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-07-01,2024,7,Region V,Albay,14.1943,121.0221,Open-Meteo,267.1,27.7,69,29.7,0.58,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-08-01,2024,8,Region IV-A,Batangas,13.9260,121.5003,Open-Meteo,285.8,30.5,71,26.1,0.71,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-08-01,2024,8,Region IV-A,Quezon,14.2032,121.3227,Open-Meteo,437.6,26.4,79,19.1,0.65,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-08-01,2024,8,MIMAROPA,Marinduque,13.4539,120.6107,Open-Meteo,358.9,28.7,76,25.5,0.53,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-08-01,2024,8,Region V,Camarines Norte,13.5220,121.4836,Open-Meteo,273.1,30.3,79,15.4,0.84,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-08-01,2024,8,Region V,Camarines Sur,14.0602,121.2237,Open-Meteo,448.6,26.4,70,20.1,0.57,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-08-01,2024,8,Region IV-A,Cavite,14.0969,120.6887,Open-Meteo,461.8,28.0,77,29.5,0.51,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-08-01,2024,8,Region IV-A,Laguna,13.4563,120.9187,Open-Meteo,282.2,25.5,85,16.0,0.5,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-08-01,2024,8,Region V,Albay,13.8479,120.6288,Open-Meteo,381.3,30.1,84,32.8,0.44,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-09-01,2024,9,Region IV-A,Batangas,13.4819,120.7551,Open-Meteo,299.7,25.8,81,20.7,0.77,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-09-01,2024,9,Region IV-A,Quezon,14.3401,121.1133,Open-Meteo,328.7,27.0,71,32.8,0.49,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-09-01,2024,9,MIMAROPA,Marinduque,13.7213,121.4728,Open-Meteo,396.4,29.3,80,15.0,0.79,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-09-01,2024,9,Region V,Camarines Norte,14.1375,120.8241,Open-Meteo,350.6,27.3,84,25.0,0.65,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-09-01,2024,9,Region V,Camarines Sur,14.1317,121.2780,Open-Meteo,266.4,26.7,79,21.4,0.63,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-09-01,2024,9,Region IV-A,Cavite,14.3940,121.5860,Open-Meteo,302.1,27.5,79,19.6,0.82,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-09-01,2024,9,Region IV-A,Laguna,13.4130,120.6643,Open-Meteo,306.6,28.7,70,27.0,0.61,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-09-01,2024,9,Region V,Albay,13.7308,120.8581,Open-Meteo,432.1,28.9,79,22.1,0.5,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-10-01,2024,10,Region IV-A,Batangas,14.2549,120.7160,Open-Meteo,451.1,28.2,87,21.6,0.83,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-10-01,2024,10,Region IV-A,Quezon,13.8329,120.8176,Open-Meteo,368.8,27.0,83,31.0,0.56,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-10-01,2024,10,MIMAROPA,Marinduque,13.7443,121.3215,Open-Meteo,319.5,25.5,77,26.7,0.55,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-10-01,2024,10,Region V,Camarines Norte,13.4602,121.0096,Open-Meteo,399.6,29.2,74,32.3,0.56,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-10-01,2024,10,Region V,Camarines Sur,13.9006,121.3963,Open-Meteo,442.0,25.7,85,30.6,0.69,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-10-01,2024,10,Region IV-A,Cavite,13.6737,121.1255,Open-Meteo,388.3,28.7,76,17.6,0.48,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-10-01,2024,10,Region IV-A,Laguna,14.2412,121.2530,Open-Meteo,265.8,29.7,71,31.9,0.59,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-10-01,2024,10,Region V,Albay,13.9595,121.4110,Open-Meteo,426.7,29.2,70,28.7,0.52,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-11-01,2024,11,Region IV-A,Batangas,13.5728,121.4848,Open-Meteo,358.1,27.6,81,32.2,0.74,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-11-01,2024,11,Region IV-A,Quezon,14.1580,121.1686,Open-Meteo,476.2,26.5,81,32.2,0.46,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-11-01,2024,11,MIMAROPA,Marinduque,13.8430,121.0494,Open-Meteo,465.9,25.4,80,19.1,0.55,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-11-01,2024,11,Region V,Camarines Norte,14.2453,121.0045,Open-Meteo,477.3,25.9,73,26.3,0.76,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-11-01,2024,11,Region V,Camarines Sur,13.4206,120.9452,Open-Meteo,292.1,27.1,72,16.0,0.79,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-11-01,2024,11,Region IV-A,Cavite,13.5256,121.4400,Open-Meteo,360.3,27.7,84,14.3,0.58,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-11-01,2024,11,Region IV-A,Laguna,13.5561,121.0782,Open-Meteo,277.3,29.9,87,18.2,0.6,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-11-01,2024,11,Region V,Albay,14.2923,121.1932,Open-Meteo,300.6,27.0,69,32.4,0.65,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-12-01,2024,12,Region IV-A,Batangas,13.5012,121.5457,Open-Meteo,85.4,26.5,79,6.2,0.27,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-12-01,2024,12,Region IV-A,Quezon,14.3275,121.3399,Open-Meteo,21.0,27.7,70,12.0,0.01,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-12-01,2024,12,MIMAROPA,Marinduque,13.8613,120.9228,Open-Meteo,19.0,25.1,81,13.4,0.33,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-12-01,2024,12,Region V,Camarines Norte,13.7974,121.4825,Open-Meteo,75.6,27.1,87,5.1,0.17,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-12-01,2024,12,Region V,Camarines Sur,13.5323,120.6291,Open-Meteo,43.6,30.3,81,5.5,0.16,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-12-01,2024,12,Region IV-A,Cavite,13.6140,121.4190,Open-Meteo,87.6,25.2,70,9.9,0.24,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-12-01,2024,12,Region IV-A,Laguna,14.3380,121.0450,Open-Meteo,28.4,27.9,72,13.5,0.24,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2024-12-01,2024,12,Region V,Albay,13.6705,120.9833,Open-Meteo,44.5,26.0,87,8.5,0.2,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-01-01,2025,1,Region IV-A,Batangas,13.5073,121.4195,Open-Meteo,93.7,26.3,81,9.2,0.31,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-01-01,2025,1,Region IV-A,Quezon,13.8833,120.6518,Open-Meteo,58.9,26.2,72,9.0,0.07,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-01-01,2025,1,MIMAROPA,Marinduque,13.9559,120.7795,Open-Meteo,42.7,28.5,88,7.8,0.04,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-01-01,2025,1,Region V,Camarines Norte,13.6419,120.6992,Open-Meteo,80.0,27.4,75,8.3,0.29,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-01-01,2025,1,Region V,Camarines Sur,13.9170,121.1750,Open-Meteo,33.9,27.2,83,12.7,0.17,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-01-01,2025,1,Region IV-A,Cavite,13.5762,121.3142,Open-Meteo,86.2,29.6,74,11.0,0.33,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-01-01,2025,1,Region IV-A,Laguna,14.2529,120.8424,Open-Meteo,59.5,27.8,81,14.3,0.26,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-01-01,2025,1,Region V,Albay,13.6783,121.3260,Open-Meteo,63.8,29.0,85,7.7,0.13,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-02-01,2025,2,Region IV-A,Batangas,14.3182,120.9864,Open-Meteo,71.0,26.5,71,12.0,0.18,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-02-01,2025,2,Region IV-A,Quezon,14.1464,120.9582,Open-Meteo,33.0,30.3,74,11.1,0.33,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-02-01,2025,2,MIMAROPA,Marinduque,13.8375,121.4648,Open-Meteo,89.4,25.2,78,8.7,0.24,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-02-01,2025,2,Region V,Camarines Norte,14.2408,120.8539,Open-Meteo,26.2,30.0,88,13.2,0.33,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-02-01,2025,2,Region V,Camarines Sur,13.4065,121.0945,Open-Meteo,89.9,26.7,88,9.3,0.01,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-02-01,2025,2,Region IV-A,Cavite,13.7882,121.2786,Open-Meteo,27.5,25.9,73,6.8,0.03,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-02-01,2025,2,Region IV-A,Laguna,14.2867,120.9161,Open-Meteo,72.4,27.8,78,5.0,0.26,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-02-01,2025,2,Region V,Albay,14.1651,121.4212,Open-Meteo,37.7,25.4,84,7.5,0.1,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-03-01,2025,3,Region IV-A,Batangas,13.6614,120.9363,Open-Meteo,47.1,30.3,82,11.6,0.23,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-03-01,2025,3,Region IV-A,Quezon,13.7536,120.6208,Open-Meteo,86.2,29.5,76,4.6,0.35,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-03-01,2025,3,MIMAROPA,Marinduque,13.9743,120.6891,Open-Meteo,24.7,26.8,86,13.8,0.12,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-03-01,2025,3,Region V,Camarines Norte,13.9375,121.4017,Open-Meteo,31.6,29.8,69,9.6,0.13,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-03-01,2025,3,Region V,Camarines Sur,13.5796,120.8777,Open-Meteo,84.5,27.2,80,13.1,0.33,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-03-01,2025,3,Region IV-A,Cavite,14.0722,120.9510,Open-Meteo,20.1,27.8,79,7.0,0.3,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-03-01,2025,3,Region IV-A,Laguna,14.0505,121.0541,Open-Meteo,21.8,26.2,80,14.2,0.07,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-03-01,2025,3,Region V,Albay,13.9490,121.2511,Open-Meteo,33.8,25.7,85,6.8,0.24,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-04-01,2025,4,Region IV-A,Batangas,13.4539,121.5664,Open-Meteo,41.4,30.2,70,8.8,0.24,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-04-01,2025,4,Region IV-A,Quezon,14.3916,121.4874,Open-Meteo,24.2,26.0,75,10.8,0.35,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-04-01,2025,4,MIMAROPA,Marinduque,13.9174,120.7473,Open-Meteo,91.7,25.4,80,13.8,0.06,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-04-01,2025,4,Region V,Camarines Norte,13.8641,120.6737,Open-Meteo,76.1,27.6,82,8.2,0.34,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-04-01,2025,4,Region V,Camarines Sur,13.6511,120.6449,Open-Meteo,46.7,27.7,81,7.1,0.04,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-04-01,2025,4,Region IV-A,Cavite,13.7500,120.7275,Open-Meteo,49.0,26.5,77,6.9,0.21,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-04-01,2025,4,Region IV-A,Laguna,14.3661,121.3053,Open-Meteo,33.6,30.4,77,4.8,0.01,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-04-01,2025,4,Region V,Albay,13.6153,121.3431,Open-Meteo,71.5,25.4,78,5.7,0.0,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-05-01,2025,5,Region IV-A,Batangas,13.7647,120.8811,Open-Meteo,72.7,27.8,71,5.2,0.04,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-05-01,2025,5,Region IV-A,Quezon,14.3868,121.2087,Open-Meteo,37.6,29.5,86,4.9,0.02,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-05-01,2025,5,MIMAROPA,Marinduque,14.1497,120.8329,Open-Meteo,58.9,27.1,83,13.4,0.28,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-05-01,2025,5,Region V,Camarines Norte,13.7312,121.1268,Open-Meteo,92.1,28.9,80,5.2,0.21,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-05-01,2025,5,Region V,Camarines Sur,13.4521,121.3214,Open-Meteo,71.6,26.5,85,8.8,0.04,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-05-01,2025,5,Region IV-A,Cavite,13.9398,121.2093,Open-Meteo,50.9,27.3,88,8.9,0.21,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-05-01,2025,5,Region IV-A,Laguna,13.9179,121.4732,Open-Meteo,77.2,27.5,79,9.4,0.27,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-05-01,2025,5,Region V,Albay,14.3671,121.3506,Open-Meteo,56.8,25.9,73,5.2,0.28,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-06-01,2025,6,Region IV-A,Batangas,13.5637,121.4601,Open-Meteo,300.5,29.9,72,22.0,0.7,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-06-01,2025,6,Region IV-A,Quezon,13.6523,121.2796,Open-Meteo,376.5,29.2,76,17.9,0.59,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-06-01,2025,6,MIMAROPA,Marinduque,14.3755,121.0402,Open-Meteo,271.8,25.6,83,26.1,0.74,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-06-01,2025,6,Region V,Camarines Norte,13.5580,121.5400,Open-Meteo,438.4,26.8,83,15.4,0.54,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-06-01,2025,6,Region V,Camarines Sur,14.0749,121.1560,Open-Meteo,303.2,25.2,68,21.0,0.63,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-06-01,2025,6,Region IV-A,Cavite,13.8047,121.4154,Open-Meteo,346.4,27.6,85,32.1,0.68,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-06-01,2025,6,Region IV-A,Laguna,13.8575,120.9701,Open-Meteo,279.0,27.1,86,17.2,0.49,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-06-01,2025,6,Region V,Albay,13.4931,120.8663,Open-Meteo,286.5,25.3,88,19.8,0.55,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-07-01,2025,7,Region IV-A,Batangas,14.1393,121.3473,Open-Meteo,423.7,25.2,79,26.3,0.47,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-07-01,2025,7,Region IV-A,Quezon,14.3605,120.8962,Open-Meteo,282.1,26.4,85,19.0,0.56,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-07-01,2025,7,MIMAROPA,Marinduque,13.4221,120.6313,Open-Meteo,431.8,29.3,70,20.0,0.41,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-07-01,2025,7,Region V,Camarines Norte,13.6709,121.4239,Open-Meteo,396.7,27.4,81,16.7,0.5,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-07-01,2025,7,Region V,Camarines Sur,14.2198,120.6761,Open-Meteo,295.8,25.3,74,31.2,0.83,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-07-01,2025,7,Region IV-A,Cavite,14.3910,121.2207,Open-Meteo,325.7,30.2,70,18.3,0.79,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-07-01,2025,7,Region IV-A,Laguna,14.3371,120.8643,Open-Meteo,402.2,28.4,72,24.1,0.42,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-07-01,2025,7,Region V,Albay,13.6183,120.7991,Open-Meteo,368.0,25.3,70,16.0,0.76,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-08-01,2025,8,Region IV-A,Batangas,13.6777,120.8483,Open-Meteo,294.7,30.4,75,32.8,0.82,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-08-01,2025,8,Region IV-A,Quezon,13.8142,120.8162,Open-Meteo,438.0,27.4,71,19.6,0.65,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-08-01,2025,8,MIMAROPA,Marinduque,14.3027,121.4350,Open-Meteo,326.0,27.1,78,21.7,0.57,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-08-01,2025,8,Region V,Camarines Norte,13.4524,121.2046,Open-Meteo,355.9,28.7,70,28.4,0.78,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-08-01,2025,8,Region V,Camarines Sur,14.0671,121.4759,Open-Meteo,256.9,29.1,88,24.2,0.84,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-08-01,2025,8,Region IV-A,Cavite,14.3036,120.9202,Open-Meteo,434.0,26.7,69,14.3,0.65,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-08-01,2025,8,Region IV-A,Laguna,13.8473,121.2071,Open-Meteo,365.5,27.5,68,14.7,0.75,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-08-01,2025,8,Region V,Albay,13.6072,121.0812,Open-Meteo,425.2,25.4,87,24.8,0.75,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-09-01,2025,9,Region IV-A,Batangas,14.1669,120.8283,Open-Meteo,303.2,28.8,75,21.6,0.69,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-09-01,2025,9,Region IV-A,Quezon,14.0797,120.6364,Open-Meteo,348.1,28.0,76,18.6,0.73,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-09-01,2025,9,MIMAROPA,Marinduque,13.4013,120.9985,Open-Meteo,377.5,25.3,68,23.3,0.43,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-09-01,2025,9,Region V,Camarines Norte,13.4244,120.6893,Open-Meteo,421.4,26.1,79,16.1,0.54,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-09-01,2025,9,Region V,Camarines Sur,13.8284,120.9799,Open-Meteo,361.3,28.8,78,16.3,0.53,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-09-01,2025,9,Region IV-A,Cavite,14.3705,121.3187,Open-Meteo,324.9,27.2,73,28.0,0.58,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-09-01,2025,9,Region IV-A,Laguna,13.7647,120.6719,Open-Meteo,331.0,30.0,85,23.8,0.66,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-09-01,2025,9,Region V,Albay,13.5579,120.8951,Open-Meteo,399.9,29.1,68,31.6,0.76,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-10-01,2025,10,Region IV-A,Batangas,14.2722,121.1895,Open-Meteo,342.0,29.9,70,20.3,0.54,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-10-01,2025,10,Region IV-A,Quezon,13.4183,120.6527,Open-Meteo,435.8,26.1,68,14.4,0.65,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-10-01,2025,10,MIMAROPA,Marinduque,13.8938,121.2279,Open-Meteo,341.3,26.0,81,17.2,0.48,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-10-01,2025,10,Region V,Camarines Norte,14.3225,120.7348,Open-Meteo,446.0,26.0,72,21.2,0.61,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-10-01,2025,10,Region V,Camarines Sur,13.8678,120.8893,Open-Meteo,469.9,26.4,80,20.0,0.61,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-10-01,2025,10,Region IV-A,Cavite,13.4726,120.8237,Open-Meteo,348.6,25.3,71,30.9,0.71,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-10-01,2025,10,Region IV-A,Laguna,14.1794,120.8506,Open-Meteo,249.9,26.6,78,30.0,0.84,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-10-01,2025,10,Region V,Albay,13.7716,121.1690,Open-Meteo,418.8,26.2,78,18.5,0.76,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-11-01,2025,11,Region IV-A,Batangas,13.5621,121.0547,Open-Meteo,364.7,25.4,78,25.9,0.74,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-11-01,2025,11,Region IV-A,Quezon,13.4069,121.0425,Open-Meteo,340.4,28.0,88,20.6,0.57,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-11-01,2025,11,MIMAROPA,Marinduque,14.2875,120.9903,Open-Meteo,412.7,28.6,83,27.5,0.58,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-11-01,2025,11,Region V,Camarines Norte,13.8853,121.0497,Open-Meteo,337.8,27.1,68,29.3,0.71,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-11-01,2025,11,Region V,Camarines Sur,13.9864,121.3721,Open-Meteo,264.8,30.5,74,20.7,0.63,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-11-01,2025,11,Region IV-A,Cavite,14.0163,120.8904,Open-Meteo,474.9,29.8,81,22.0,0.79,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-11-01,2025,11,Region IV-A,Laguna,13.6329,120.9124,Open-Meteo,347.5,28.3,78,19.2,0.79,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-11-01,2025,11,Region V,Albay,14.1981,121.1473,Open-Meteo,294.4,25.0,75,22.9,0.7,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-12-01,2025,12,Region IV-A,Batangas,13.6863,121.5578,Open-Meteo,88.5,25.3,88,11.0,0.23,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-12-01,2025,12,Region IV-A,Quezon,14.2322,121.3320,Open-Meteo,50.9,29.0,79,13.9,0.22,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-12-01,2025,12,MIMAROPA,Marinduque,13.8715,121.3327,Open-Meteo,41.4,29.3,72,11.1,0.09,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-12-01,2025,12,Region V,Camarines Norte,13.7158,121.3122,Open-Meteo,32.5,26.1,73,13.7,0.32,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-12-01,2025,12,Region V,Camarines Sur,13.6318,120.7496,Open-Meteo,81.8,29.3,71,14.0,0.02,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-12-01,2025,12,Region IV-A,Cavite,14.3219,120.6814,Open-Meteo,61.4,29.8,74,10.8,0.22,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-12-01,2025,12,Region IV-A,Laguna,13.5488,121.3909,Open-Meteo,37.9,29.0,73,6.0,0.01,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
+2025-12-01,2025,12,Region V,Albay,14.1379,120.9359,Open-Meteo,33.1,29.1,88,14.4,0.26,https://archive-api.open-meteo.com,Generated clean reanalysis weather proxy record.
