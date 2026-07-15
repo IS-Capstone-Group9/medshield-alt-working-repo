@@ -1,6 +1,6 @@
-# MedShield Predictive & Prescriptive Analytics: Technical Logic, Process, and Checklist
+# MedShield Predictive Analytics: Technical Logic, Process, and Checklist
 
-This explainer outlines the mathematical models, data integration pathways, and inventory decision logic utilized in the predictive and prescriptive layers of the MedShield Decision Support System (DSS). It serves as a verification baseline to ensure system implementation matches the methodology and equations documented in the capstone manuscript (**`PRIVATE_SUMMER_CAPSTONE_2 - GROUP9_ISB (1).docx`**).
+This explainer outlines the mathematical models, data integration pathways, and classification patterns utilized in the predictive modeling layer of the MedShield Decision Support System (DSS). It serves as a verification baseline to ensure system implementation matches the methodology and equations documented in the capstone manuscript (**`PRIVATE_SUMMER_CAPSTONE_2 - GROUP9_ISB (1).docx`**).
 
 ---
 
@@ -81,35 +81,9 @@ By defining these sequential patterns, the system uses weather indices not just 
 
 ---
 
-### 4. Prescriptive Inventory & Allocation Adjustments
-* **Goal**: Translate predictive demand forecasts into replenishment order points and stock allocation recommendations.
-* **Replenishment Parameters (EOQ, ROP, Safety Stock)**:
-  * Annualized demand $D$ is computed from the forecasting model's output $y(t)$.
-  * **Economic Order Quantity (EOQ)**:
-    $$EOQ = \sqrt{\frac{2 \cdot D \cdot S}{H}}$$
-    where $S$ is the ordering cost per procurement cycle, and $H$ is the unit holding cost per year.
-  * **Safety Stock (SS)**:
-    $$SS = z \cdot \sqrt{L \cdot var_d + d_{avg}^2 \cdot var_L}$$
-    where $z$ is the standard service level factor, $L$ is lead time, $d_{avg}$ is average daily demand, $var_d$ is demand variance, and $var_L$ is lead time variance.
-  * **Reorder Point (ROP)**:
-    $$ROP = (d_{avg} \cdot L) + SS$$
+### 4. Predictive Analytics Checklist
 
-* **Alert-Adjusted Demand Multipliers**:
-  * When regional alerts fire (typhoons or disease surges), demand is scaled dynamically to preempt stockouts:
-    $$y_{adjusted}(t) = y(t) \cdot (1 + \alpha \cdot RSI_{flag} + \gamma \cdot DII_{lag})$$
-    where $\alpha$ is the weather adjustment factor (0.10–0.15 for moderate, 0.20–0.30 for high, and 0.35–0.50 for sustained warnings) and $\gamma$ is the disease adjustment factor.
-
-* **Linear Programming Stock Allocation**:
-  * When warehouse supply is constrained, the allocation optimization engine distributes limited stock to maximize fulfillment. It minimizes unmet demand weighted by Multi-Criteria Decision Analysis (MCDA) regional priority scores:
-    $$\text{Minimize} \quad \sum_{r} w_r \cdot (\text{Demand}_r - \text{Allocation}_r)$$
-    where regional weight $w_r$ represents the MCDA score:
-    $$w_r = w_1 \cdot RevenueRank(r) + w_2 \cdot Growth(r) + w_3 \cdot DiseaseSurgeRisk(r)$$
-
----
-
-### 5. Predictive & Prescriptive Analytics Checklist
-
-Use this checklist to verify that models, data sources, and output validations conform to business requirements before presenting findings or publishing reports:
+Use this checklist to verify that forecasting models, classification pipelines, data sources, and accuracy metrics conform to business requirements:
 
 #### Data Preparation & Alignment
 - [ ] Confirm sales transactions are loaded from `sales_transactions_area_allocated` to isolate bulk service contract noise.
@@ -125,15 +99,9 @@ Use this checklist to verify that models, data sources, and output validations c
 - [ ] Check that XGBoost ABC classifier achieves adequate precision, recall, and F1-score across all categories (A, B, C).
 - [ ] Ensure new/low-history products are successfully classified into ABC priority classes instead of showing empty metrics.
 
-#### Prescriptive Decision Validation
-- [ ] Confirm alert-adjusted demand multipliers match the approved risk bands (e.g., 20-30% uplift for high-risk antibiotics).
-- [ ] Validate EOQ, ROP, and Safety Stock calculations use approved procurement costs and lead times.
-- [ ] Ensure LP allocation runs correctly under inventory constraints without allocating more stock than is available.
-- [ ] Confirm that MCDA regional priority scores update dynamically in response to elevated DII outbreak levels.
-
 ---
 
-### 6. Final QA Cross-Analysis Against Your Capstone Paper
+### 5. Final QA Cross-Analysis Against Your Capstone Paper
 We verified the mathematical and methodology alignment of these equations against your capstone manuscript (**`PRIVATE_SUMMER_CAPSTONE_2 - GROUP9_ISB (1).docx`**):
 
 1. **Section 3.4.2 (Predictive Modeling Horizons)**:
