@@ -21,59 +21,59 @@ This explainer outlines the mathematical models, data integration pathways, and 
 ### 2. External Signal Feature Engineering (DII & RSI)
 * **Goal**: Process and transform raw epidemiological counts and meteorological forecasts into normalized, model-compatible index regressors.
 * **The Process**:
-  1. **DII Calculation**: Group raw weekly case counts from DOH by region $r$ and disease $d$ for time period $t$, and divide by the monthly historical baseline average:
-     $$DII(r, d, t) = \frac{Cases(r, d, t)}{AvgCases(r, d)}$$
-     where $AvgCases(r, d)$ is computed from the 2021–2025 baseline period.
-     * *Real-world Case*: In **Quezon** during September, if there are 240 reported Dengue cases, and the historical baseline average for September in Quezon is 100 cases, the $DII(\text{Quezon}, \text{Dengue}, \text{September})$ is calculated as:
-       $$DII = \frac{240}{100} = 2.4$$
-  2. **Temporal Lag Application**: Apply a lag factor $k$ (expressed in weeks or months based on replenishment cycles) to align disease triggers with procurement lead times:
-     $$DII_{lag}(r, d, t) = DII(r, d, t - k)$$
-     * *Real-world Case*: With a 1-month procurement lag ($k = 1$), the $DII_{lag}$ for October demand planning is set to the September DII of 2.4.
+  1. **DII Calculation**: Group raw weekly case counts from DOH by region `r` and disease `d` for time period `t`, and divide by the monthly historical baseline average:
+     `DII(r, d, t) = Cases(r, d, t) / AvgCases(r, d)`
+     where `AvgCases(r, d)` is computed from the 2021–2025 baseline period.
+     * *Real-world Case*: In **Quezon** during September, if there are 240 reported Dengue cases, and the historical baseline average for September in Quezon is 100 cases, the `DII(Quezon, Dengue, September)` is calculated as:
+       `DII = 240 / 100 = 2.4`
+  2. **Temporal Lag Application**: Apply a lag factor `k` (expressed in weeks or months based on replenishment cycles) to align disease triggers with procurement lead times:
+     `DII_lag(r, d, t) = DII(r, d, t - k)`
+     * *Real-world Case*: With a 1-month procurement lag (`k = 1`), the `DII_lag` for October demand planning is set to the September DII of 2.4.
   3. **RSI Cross-Validation**: Cross-check PAGASA probabilistic rainfall forecasts against historical daily readings from independent weather archives (NASA POWER/Open-Meteo).
-  4. **RSI Risk Classification**: Compute the probability of above-normal rainfall ($RSI(r, t) = P(\text{above-normal rainfall} \mid r, t)$) and categorize into discrete risk tiers:
-     * **Low Risk ($RSI < 40\%$)**: No demand modifications.
-     * **Moderate Risk ($40\% \le RSI < 44\%$)**: Triggers mild demand adjustments for vitamins and OTC flu medications.
-     * **High Risk ($RSI \ge 45\%$)**: Triggers higher adjustments for antibiotics and anti-leptospirosis medications.
+  4. **RSI Risk Classification**: Compute the probability of above-normal rainfall (`RSI(r, t) = P(above-normal rainfall | r, t)`) and categorize into discrete risk tiers:
+     * **Low Risk (`RSI < 40%`)**: No demand modifications.
+     * **Moderate Risk (`40% <= RSI < 44%`)**: Triggers mild demand adjustments for vitamins and OTC flu medications.
+     * **High Risk (`RSI >= 45%`)**: Triggers higher adjustments for antibiotics and anti-leptospirosis medications.
      * *Real-world Case*: If **Batangas** registers an RSI of 48% (High Risk) for July, it triggers a warning flag and scales demand estimates for matched items like **MONOWEL 1G IV**.
   5. **Disease Data Fallback & Seasonality Logic**: In the absence of live DOH API feeds, resolve disease intensity regressors using a Weather-Seasonal Boolean mapping rule:
-     * Define the seasonal surge boolean $is\_seasonal\_surge\_active(r, d, t)$:
-       $$is\_seasonal\_surge\_active(r, d, t) = (RSI(r, t) \ge 45\%) \land (month(t) \in seasonal\_months(d))$$
+     * Define the seasonal surge boolean `is_seasonal_surge_active(r, d, t)`:
+       `is_seasonal_surge_active(r, d, t) = (RSI(r, t) >= 45%) AND (month(t) in seasonal_months(d))`
      * Assign a baseline index fallback value if no manual DOH data upload exists:
-       $$DII_{fallback} = \begin{cases} 1.5, & \text{if } is\_seasonal\_surge\_active = \text{True} \\ 1.0, & \text{if } is\_seasonal\_surge\_active = \text{False} \end{cases}$$
-     * *Real-world Case*: For **Dengue** (where $seasonal\_months = [\text{June}, \text{July}, \text{August}, \text{September}, \text{October}]$), if a forecast run for **Quezon** in August has no DOH upload but has a high weather risk ($RSI = 46\%$), $is\_seasonal\_surge\_active$ evaluates to **True**, and the model applies a fallback DII of **1.5** to simulate the outbreak regressor.
+       `DII_fallback = 1.5 if is_seasonal_surge_active is True else 1.0`
+     * *Real-world Case*: For **Dengue** (where `seasonal_months = [June, July, August, September, October]`), if a forecast run for **Quezon** in August has no DOH upload but has a high weather risk (`RSI = 46%`), `is_seasonal_surge_active` evaluates to **True**, and the model applies a fallback DII of **1.5** to simulate the outbreak regressor.
 
 ---
 
 ### 3. Time-Series Forecasting (Facebook Prophet with Regressors)
 * **Goal**: Generate macro-level and territory-specific monthly demand forecasts using historical sales combined with weather and disease regressors.
 * **The Process**:
-  1. **STL Decomposition Initialization**: Decompose the historical monthly sales quantity (2021–2025) into trend ($g(t)$) and seasonality ($s(t)$) components to seed the Prophet model configuration.
-  2. **Exogenous Regressor Addition**: Add the engineered $DII_{lag}(r, d, t)$ and $RSI(r, t)$ signals as independent linear regressors into the Prophet model.
-  3. **Event Effect Mapping**: Configure holiday/event parameters ($h(t)$) to account for irregular demand drivers such as regional government bidding cycles.
-  4. **Forecast Inference**: Execute the Prophet model to compute the expected demand quantity $y(t)$:
-     $$y(t) = g(t) + s(t) + h(t) + \beta_1 \cdot DII_{lag}(r, d, t) + \beta_2 \cdot RSI(r, t) + \epsilon_t$$
-     where $\beta_1$ and $\beta_2$ are coefficients estimated from the training data.
-     * *Real-world Case*: If the baseline monthly forecast for **MONOWEL 1G IV** in **Quezon** is 500 units ($g(t) + s(t) + h(t) = 500$), and the model estimates $\beta_1 = 30$ and $\beta_2 = 120$:
-       $$y(\text{Oct}) = 500 + 30 \cdot 2.4 \text{ (DII Dengue Lag)} + 120 \cdot 1.0 \text{ (High RSI Flag)} = 692 \text{ units}$$
-  5. **Baseline Model Fallback**: If external API feeds are missing, set regression coefficients $\beta_1$ and $\beta_2$ to zero to generate a purely historical sales-only baseline forecast of 500 units.
+  1. **STL Decomposition Initialization**: Decompose the historical monthly sales quantity (2021–2025) into trend (`g(t)`) and seasonality (`s(t)`) components to seed the Prophet model configuration.
+  2. **Exogenous Regressor Addition**: Add the engineered `DII_lag(r, d, t)` and `RSI(r, t)` signals as independent linear regressors into the Prophet model.
+  3. **Event Effect Mapping**: Configure holiday/event parameters (`h(t)`) to account for irregular demand drivers such as regional government bidding cycles.
+  4. **Forecast Inference**: Execute the Prophet model to compute the expected demand quantity `y(t)`:
+     `y(t) = g(t) + s(t) + h(t) + beta_1 * DII_lag(r, d, t) + beta_2 * RSI_flag(r, t) + epsilon_t`
+     where `beta_1` and `beta_2` are coefficients estimated from the training data.
+     * *Real-world Case*: If the baseline monthly forecast for **MONOWEL 1G IV** in **Quezon** is 500 units (`g(t) + s(t) + h(t) = 500`), and the model estimates `beta_1 = 30` and `beta_2 = 120`:
+       `y(Oct) = 500 + 30 * 2.4 (DII Dengue Lag) + 120 * 1.0 (High RSI Flag) = 692 units`
+  5. **Baseline Model Fallback**: If external API feeds are missing, set regression coefficients `beta_1` and `beta_2` to zero to generate a purely historical sales-only baseline forecast of 500 units.
 
 ---
 
 ### 4. Tabular Product Prioritization & Urgency Scoring (XGBoost)
 * **Goal**: Predict priority categories (ABC classes) for new or low-history SKUs and score product-level procurement urgency.
 * **The Process**:
-  1. **Feature Vector Assembly**: For each product $i$, construct a feature vector $x_i$:
-     $$x_i = [SalesVolume_i, RevenueContribution_i, CVdemand_i, TherapeuticCategory_i, DIIscore_i, RSIflag_i]$$
+  1. **Feature Vector Assembly**: For each product `i`, construct a feature vector `x_i`:
+     `x_i = [SalesVolume_i, RevenueContribution_i, CVdemand_i, TherapeuticCategory_i, DIIscore_i, RSIflag_i]`
      incorporating average monthly sales, Pareto revenue share, demand volatility (coefficient of variation), therapeutic group, active regional disease score, and rainfall risk flags.
      * *Real-world Case*: For **SPEEDA 2.5IU/0.5ML** (Rabies vaccine, Rank 15 in overall sales):
-       $$x_{\text{SPEEDA}} = [425.0 \text{ units/mo}, 0.009072 \text{ rev\_share}, 0.35 \text{ volatility}, \text{Vaccines}, 1.2 \text{ DII}, 0.0 \text{ RSI}]$$
+       `x_SPEEDA = [425.0 units/mo, 0.009072 rev_share, 0.35 volatility, Vaccines, 1.2 DII, 0.0 RSI]`
   2. **Supervised ABC Classification Training**: Train the XGBoost supervised classifier using the historical Pareto classification (A: top 80% cumulative share, B: 80–95%, C: bottom 5%) of established products.
      * *Real-world Case*: High-revenue medicines like **MONOWEL 1G IV** (Rank 1, 2.6% share) and **SPEEDA 2.5IU/0.5ML** (Rank 15, 0.9% share) are labeled as Class A to train the model.
   3. **ABC Priority Inference**: Pass feature vectors of new or low-history ("cold-start") products through the trained classifier to predict their A, B, or C category.
      * *Real-world Case*: A newly introduced rabies vaccine variant with only 2 months of history is classified as **Class A** based on its feature similarity to **SPEEDA 2.5IU/0.5ML**.
   4. **Urgency Score Computation**: Evaluate the product features using the gradient boosting ensemble of regression trees to output a continuous numerical Demand Urgency Score:
-     $$Score(i) = \sum f_k(x_i), \quad f_k \in F$$
-     where $f_k$ represents individual trees in the ensemble $F$, flagging high-risk products needing immediate review.
+     `Score(i) = sum(f_k(x_i)) for f_k in F`
+     where `f_k` represents individual trees in the ensemble `F`, flagging high-risk products needing immediate review.
 
 ---
 
@@ -89,8 +89,8 @@ Use this checklist to verify that forecasting models, classification pipelines, 
 - [ ] Validate weather-disease-medicine correlation patterns (e.g., verifying that seasonal rain triggers disease index surges, which map directly to target therapeutic categories).
 
 #### Forecasting & Modeling
-- [ ] Verify Prophet baseline forecast is generated with external coefficients set to zero ($\beta_1 = 0, \beta_2 = 0$).
-- [ ] Verify DII regression coefficients ($\beta_1$) and weather indicators ($\beta_2$) are calculated and statistically significant.
+- [ ] Verify Prophet baseline forecast is generated with external coefficients set to zero (`beta_1 = 0, beta_2 = 0`).
+- [ ] Verify DII regression coefficients (`beta_1`) and weather indicators (`beta_2`) are calculated and statistically significant.
 - [ ] Run rolling-validation tests on 2021–2025 training data and compute MAE, RMSE, and MAPE against 2026 actuals.
 - [ ] Check that XGBoost ABC classifier achieves adequate precision, recall, and F1-score across all categories (A, B, C).
 - [ ] Ensure new/low-history products are successfully classified into ABC priority classes instead of showing empty metrics.
@@ -104,14 +104,14 @@ We verified the mathematical and methodology alignment of these equations agains
    * Training is performed on 2021–2025 data, evaluation is verified against 2026 actuals, and forecasts are generated for 2027.
    * Prophet models and evaluations in the analytics service mirror this chronological sequence.
 2. **Equation (3) - Prophet with External Regressors**:
-   * $y(t) = g(t) + s(t) + h(t) + \beta_1 \cdot DII_{lag}(r, d, t) + \beta_2 \cdot RSI_{flag}(r, t) + \epsilon_t$.
-   * Formulations are verified; $\beta_1$ scales the epidemiological lag, and $\beta_2$ scales the rainfall proxy category flag.
+   * `y(t) = g(t) + s(t) + h(t) + beta_1 * DII_lag(r, d, t) + beta_2 * RSI_flag(r, t) + epsilon_t`.
+   * Formulations are verified; `beta_1` scales the epidemiological lag, and `beta_2` scales the rainfall proxy category flag.
 3. **Equation (4) & (5) - Disease Intensity Indicator**:
-   * $DII(r, d, t) = Cases(r, d, t) / AvgCases(r, d)$, with lag adjustment $DII(r, d, t - k)$.
+   * `DII(r, d, t) = Cases(r, d, t) / AvgCases(r, d)`, with lag adjustment `DII(r, d, t - k)`.
    * Matches the engineered feature parameters built during data transformation.
 4. **Equation (6) - Rainfall Severity Index**:
-   * $RSI(r, t) = P(\text{above-normal rainfall} \mid r, t)$, categorized into Low (<40%), Moderate (40-44%), and High (>=45%).
+   * `RSI(r, t) = P(above-normal rainfall | r, t)`, categorized into Low (<40%), Moderate (40-44%), and High (>=45%).
    * This classification matches the alert multipliers mapped in the decision engine.
 5. **Equation (8) - XGBoost Urgency Score**:
-   * $Score(i) = \sum f_k(x_i)$, utilizing tabular sales features, Pareto share, CV, DII, and RSI.
+   * `Score(i) = sum(f_k(x_i))`, utilizing tabular sales features, Pareto share, CV, DII, and RSI.
    * Captures product-specific risk parameters separately from aggregate time series.
