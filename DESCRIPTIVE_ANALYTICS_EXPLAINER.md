@@ -13,7 +13,7 @@
 
 ---
 
-### 2. Business Taxonomy Mapping (Rule-Based Encoding)
+### 2. Business Taxonomy Mapping (Rule-Based Encoding) [North Star 2A: Product, Territory, and Customer Grouping]
 * **Goal**: Standardize raw transaction fields into geographic territories, customer channels, and product categories.
 * **The Process**:
   * **Location Grouping**: The system looks up each location name in the area classification directory:
@@ -29,7 +29,7 @@
 
 ---
 
-### 3. Bulk Service Contract Breakdown (Backward Approximation)
+### 3. Bulk Service Contract Breakdown (Backward Approximation) [North Star 2A: Product, Territory, and Customer Grouping - Service Contracts]
 * **Goal**: Convert bulk area-summary service contracts into detailed product-mix estimates without inflating historical revenue totals.
 * **The Process**:
   1. The system identifies parent contract rows using the `is_service_contract` flag (e.g., rows containing `#` like `PAGBILAO # 13,500,000`).
@@ -41,7 +41,7 @@
 
 ---
 
-### 4. The Seasonal Demand Cycle
+### 4. The Seasonal Demand Cycle [North Star 3A: Seasonal Demand Cycles]
 * **Goal**: Calculate historical monthly demand index multipliers to identify recurring seasonal fluctuations.
 * **Variables**:
   * Let Q be the sales quantity of a transaction.
@@ -71,7 +71,7 @@
 
 ---
 
-### 5. Revenue Contribution (80/20 Analysis)
+### 5. Revenue Contribution (80/20 Analysis) [North Star 4A: Revenue Contribution]
 * **Goal**: Analyze the distribution of sales across established products to identify revenue concentration patterns.
 * **Variables**:
   * Let R be the product revenue (total trade price).
@@ -93,7 +93,7 @@
 
 ---
 
-### 6. Year-over-Year (YoY) Growth Trends
+### 6. Year-over-Year (YoY) Growth Trends [North Star 5A: Year-over-Year Growth]
 * **Goal**: Measure structural demand growth or decline while removing normal seasonal effects.
 * **Variables**:
   * Let S_current be the sales value of the current target month.
@@ -110,7 +110,7 @@
 
 ---
 
-### 7. Territory Performance
+### 7. Territory Performance [North Star 6A: Territory Revenue and Net Income]
 * **Goal**: Rank physical delivery regions by revenue and gross margin contribution.
 * **Variables**:
   * Let Revenue be the total revenue of a territory.
@@ -129,7 +129,7 @@
 
 ---
 
-### 8. Customer Concentration
+### 8. Customer Concentration [North Star 7A: High-Value Institutional Clients]
 * **Goal**: Map and rank the distribution of sales volumes across buyer channels.
 * **The Process**:
   1. The system groups transactions by the institutional buyer channel (Government, Hospital, or Pharmacy).

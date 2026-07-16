@@ -14,6 +14,33 @@ An executive DSS dashboard must support **critical decisions, not display raw da
 
 ---
 
+## Consolidated Analytics Pipeline Outputs
+
+To ensure the executive DSS dashboard functions as a unified decision engine, it consolidates and exposes the **entire set of outputs** generated across all three analytical stages, mapped directly to our North Star Mind Map items:
+
+### 1. Descriptive Analytics Outputs (Historical Baseline)
+* **Ingestion Quality Logs**: Total rows processed vs. accepted clean rows, highlighting isolated margin anomalies.
+* **Geographic & Channel Segmentations** `[North Star 2A & 6A & 7A]`: Clean actual sales vs. sales with backward-allocated service contracts (clearly flagged as `estimated_backward_allocation`).
+* **Seasonality Indices** `[North Star 3A]`: Calculated monthly historical demand multipliers via STL decomposition (e.g., historical Dengue seasonal surges).
+* **YoY Demand Growth Trends** `[North Star 5A]`: Comparative monthly growth percentages between consecutive baseline years (2021–2025).
+* **Pareto Revenue Share bands** `[North Star 4A]`: Categorized product groups (A, B, C bands based on historical sales concentration).
+
+### 2. Predictive Analytics Outputs (Forecasting & Risk Scoring)
+* **Prophet Demand Forecasts** `[North Star 2B]`: Monthly expected demand volumes `y(t)` for the target planning period (2026/2027), mapped with upper and lower confidence intervals.
+* **Forecast Accuracy Metrics** `[North Star 3B]`: Display of MAPE, RMSE, MAE, and naive seasonal benchmarks to establish trust.
+* **Model Fallback Indicators** `[North Star 4B & 5B]`: Visual flags showing whether forecast calculations are using active exogenous regressors (`DLI/DII` for disease-driven demand, `RSI` for rainfall-driven demand) or have safely downgraded to a historical naive baseline.
+* **XGBoost Classifications & Scores** `[North Star 6B & 7B]`: Predicted ABC class designations and continuous numerical Demand Urgency Scores for cold-start (new/low-history) and existing SKUs.
+
+### 3. Prescriptive Analytics Outputs (Optimization & Action)
+* **MCDA Priority Scores** `[North Star 6C]`: Unified territory priority scores calculated via weighted multi-criteria ranks (revenue, growth, and epidemiological risk).
+* **Inventory Control Parameters** `[North Star 2C & 3C]`: Cost-minimized Economic Order Quantities (EOQ), reorder triggers (Reorder Points - ROP), and target Safety Stock buffers.
+* **LP Allocation Matrices** `[North Star 2C & 6C]`: Optimized stock distribution quantities mapped by product and province, detailing active binding constraints (e.g., budget limits or capacity ceilings).
+* **Collaborative Filtering Recommendations** `[North Star 7C]`: Recommended product-territory expansion pairings with matching cosine similarity metrics.
+* **Stop-Purchasing Flag** `[North Star 8C]`: System flag isolating dead-stock Class C items based on the trailing 6-month transaction velocity.
+* **System Override Records** `[North Star 4C & 5C]`: High-contrast typhoon and outbreak alert banners overriding default parameters, paired with mandatory planner comments in the immutable audit log.
+
+---
+
 ## Weather & Disease Data Integration (Baselines & Context)
 
 To support environmental decision models, the dashboard relies on the following clean external datasets. The interface must explicitly present their parameters and limitations:

@@ -1,5 +1,8 @@
 # MedShield Predictive Analytics: Technical Logic, Process, and Checklist
 
+> [!NOTE]
+> **Prerequisite Phase Completed**: Descriptive analytics (including data quality gates, business taxonomy mapping, bulk service contract breakdown, historical seasonality indexing, and Pareto revenue contribution analysis) has been successfully executed, establishing the clean historical baseline and feature foundations for the predictive models.
+
 This explainer outlines the mathematical models, data integration pathways, and classification processes utilized in the predictive modeling layer of the MedShield Decision Support System (DSS). It serves as a verification baseline to ensure system implementation matches the methodology and equations documented in the capstone manuscript (**`PRIVATE_SUMMER_CAPSTONE_2 - GROUP9_ISB (1).docx`**).
 
 ---
@@ -18,12 +21,12 @@ This explainer outlines the mathematical models, data integration pathways, and 
 
 ---
 
-### 2. External Signal Feature Engineering (DII & RSI)
+### 2. External Signal Feature Engineering (DLI/DII & RSI) [North Star 4B: Disease-Driven Demand & 5B: Rainfall-Driven Demand]
 * **Goal**: Process and transform raw epidemiological counts and meteorological forecasts into normalized, model-compatible index regressors.
 * **The Process**:
-  1. **DII Calculation**: Group raw weekly case counts from DOH by region `r` and disease `d` for time period `t`, and divide by the monthly historical baseline average:
+  1. **DLI/DII (Disease-Driven) Calculation**: Group raw weekly case counts from DOH by region `r` and disease `d` for time period `t`, and divide by the monthly historical baseline average:
      `DII(r, d, t) = Cases(r, d, t) / AvgCases(r, d)`
-     where `AvgCases(r, d)` is computed from the 2021–2025 baseline period.
+     where `AvgCases(r, d)` is computed from the 2021–2025 baseline period. (Note: The Disease Intensity Indicator, or DII, is mapped directly as the Disease/Epidemiological indicator regressor, or DLI, in the Prophet model).
      * *Real-world Case*: In **Quezon** during September, if there are 240 reported Dengue cases, and the historical baseline average for September in Quezon is 100 cases, the `DII(Quezon, Dengue, September)` is calculated as:
        `DII = 240 / 100 = 2.4`
   2. **Temporal Lag Application**: Apply a lag factor `k` (expressed in weeks or months based on replenishment cycles) to align disease triggers with procurement lead times:
@@ -44,7 +47,7 @@ This explainer outlines the mathematical models, data integration pathways, and 
 
 ---
 
-### 3. Time-Series Forecasting (Facebook Prophet with Regressors)
+### 3. Time-Series Forecasting (Facebook Prophet with Regressors) [North Star 2B: Monthly Product Demand]
 * **Goal**: Generate macro-level and territory-specific monthly demand forecasts using historical sales combined with weather and disease regressors.
 * **The Process**:
   1. **STL Decomposition Initialization**: Decompose the historical monthly sales quantity (2021–2025) into trend (`g(t)`) and seasonality (`s(t)`) components to seed the Prophet model configuration.
@@ -59,7 +62,20 @@ This explainer outlines the mathematical models, data integration pathways, and 
 
 ---
 
-### 4. Tabular Product Prioritization & Urgency Scoring (XGBoost)
+### 3.5. Forecast Accuracy Evaluation [North Star 3B: Forecast Accuracy]
+* **Goal**: Rigorously evaluate and track the accuracy of the Prophet forecasting models against actual sales and naive baselines.
+* **Metrics and Benchmark Methods**:
+  1. **Naive Seasonal Benchmark**: Generate baseline predictions using historical seasonal averages for comparison.
+  2. **Mean Absolute Percentage Error (MAPE)**: Measure the average percentage difference between predicted and actual demand.
+     `MAPE = (1/n) * sum(|(Actual - Forecast) / Actual|) * 100`
+  3. **Root Mean Squared Error (RMSE)**: Measure the standard deviation of residuals, penalizing larger forecast errors.
+     `RMSE = sqrt((1/n) * sum((Actual - Forecast)^2))`
+  4. **Mean Absolute Error (MAE)**: Track absolute errors to evaluate magnitude without direction.
+     `MAE = (1/n) * sum(|Actual - Forecast|)`
+
+---
+
+### 4. Tabular Product Prioritization & Urgency Scoring (XGBoost) [North Star 6B: Forecasting Urgency & 7B: Future SKU Classification]
 * **Goal**: Predict priority categories (ABC classes) for new or low-history SKUs and score product-level procurement urgency.
 * **The Process**:
   1. **Feature Vector Assembly**: For each product `i`, construct a feature vector `x_i`:

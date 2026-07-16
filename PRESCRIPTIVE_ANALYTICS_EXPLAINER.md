@@ -1,10 +1,13 @@
 # MedShield Prescriptive Analytics: Technical Logic, Process, and Checklist
 
+> [!NOTE]
+> **Prerequisite Phases Completed**: Both descriptive analytics (establishing historical baselines, cleaning taxonomy, allocating service contracts, and historical growth trends) and predictive analytics (FB Prophet time-series forecasts with exogenous regressors, and XGBoost-based priority classification and demand urgency scoring) have been completed. The prescriptive layer builds directly on top of these historical and forecasting outputs to optimize inventory parameters and territory allocations.
+
 This explainer outlines the mathematical models, operational constraints, and optimization processes utilized in the prescriptive analytics layer of the MedShield Decision Support System (DSS). It serves as a verification baseline to ensure system implementation matches the methodology and equations documented in the capstone manuscript (**`PRIVATE_SUMMER_CAPSTONE_2 - GROUP9_ISB (1).docx`**).
 
 ---
 
-### 1. Multi-Criteria Decision Analysis (MCDA) for Regional Prioritization
+### 1. Multi-Criteria Decision Analysis (MCDA) for Regional Prioritization [North Star 6C: Constrained Procurement Priority]
 * **Goal**: Score and rank MedShield's delivery territories by procurement priority, incorporating commercial and epidemiological metrics.
 * **Timing**: Runs before the Linear Programming (LP) allocation model because priority scores serve as objective weights.
 * **The Process**:
@@ -29,7 +32,7 @@ This explainer outlines the mathematical models, operational constraints, and op
 ### 2. Core Inventory Control Parameters
 Three modules compute the operational inventory boundaries monthly:
 
-#### A. Economic Order Quantity (EOQ)
+#### A. Economic Order Quantity (EOQ) [North Star 2C: Cost-Minimizing Reorder Quantity]
 * **Goal**: Determine the cost-minimizing order quantity by balancing ordering and holding costs.
 * **Formula**:
   `EOQ = sqrt((2 * D * S) / H)`
@@ -46,9 +49,9 @@ Three modules compute the operational inventory boundaries monthly:
     `EOQ = sqrt((2 * 12,000 * 1,500) / 40)`
     `EOQ = sqrt(36,000,000 / 40) = sqrt(900,000) = 948.68 (approx. 949 vials)`
 
-#### B. Safety Stock
-* **Goal**: Maintain buffer stock to absorb demand uncertainty during replenishment lead times, keeping expiry-driven wastage at or below the 5% ceiling.
-* **Formula**:
+#### B. Safety Stock & C. Reorder Point (ROP) [North Star 3C: Reorder Trigger]
+* **Goal**: Maintain buffer stock to absorb demand uncertainty during replenishment lead times and trigger new orders.
+* **Safety Stock Formula**:
   `Safety Stock = Z * std_dev_daily_demand * sqrt(Lead Time)`
   where:
   * `Z` = service factor (calibrated to maintain safety targets)
@@ -63,9 +66,7 @@ Three modules compute the operational inventory boundaries monthly:
     `Safety Stock = 1.96 * 15 * sqrt(14)`
     `Safety Stock = 1.96 * 15 * 3.74 = 109.95 (approx. 110 vials)`
 
-#### C. Reorder Point (ROP)
-* **Goal**: Define the inventory level at which a new purchase order must be placed.
-* **Formula**:
+* **Reorder Point (ROP) Formula**:
   `ROP = (Average Daily Demand * Lead Time) + Safety Stock`
   where:
   * `Average Daily Demand` = Prophet forecast disaggregated to daily level
@@ -81,7 +82,7 @@ Three modules compute the operational inventory boundaries monthly:
 
 ---
 
-### 3. Linear Programming (LP) for Stock Allocation Optimization
+### 3. Linear Programming (LP) for Stock Allocation Optimization [North Star 2C: Cost-Minimizing Reorder Quantity & 6C: Constrained Procurement Priority]
 * **Goal**: Maximize regional demand fulfillment under constrained supply and capacity.
 * **Objective Function**:
   `Maximize Z = sum(Priority Score_i * x_i)`
@@ -113,7 +114,7 @@ Three modules compute the operational inventory boundaries monthly:
 
 ---
 
-### 4. Collaborative Filtering for Product-Region Matching
+### 4. Collaborative Filtering for Product-Region Matching [North Star 7C: Product-Region Expansion]
 * **Goal**: Identify historically successful product-region pairings to recommend stocking in new areas.
 * **Method**: Cosine similarity between monthly demand vectors:
   `Cosine Similarity = (A . B) / (||A|| * ||B||)`
@@ -128,7 +129,7 @@ Three modules compute the operational inventory boundaries monthly:
 
 ---
 
-### 5. Parallel Alert-Based Overrides
+### 5. Parallel Alert-Based Overrides [North Star 4C: Disease Emergency Alert & 5C: Typhoon Emergency Stock Response]
 * **Goal**: Issue condition-triggered procurement alerts that override normal parameters during outbreaks or typhoons.
 * **Rule-Based Thresholding (Disease Outbreaks)**:
   * *Trigger*: `reported weekly cases > historical mean + 2 * historical standard deviation`
@@ -154,8 +155,21 @@ Three modules compute the operational inventory boundaries monthly:
 
 ---
 
+### 5.5. Stop-Purchasing Flag [North Star 8C: Stop-Purchasing Flag]
+* **Goal**: Identify low-movement or zero-movement SKUs and flag them to halt procurement, minimizing warehouse congestion and expiry risk.
+* **Method**: Dead-stock flagging driven by the predicted **XGBoost ABC classification** and historical velocity analysis:
+  * *Trigger*: If a product is classified under the bottom Pareto category (**Class C**) AND has registered zero sales transactions over the trailing 6-month period, the system flags the SKU as `stop_purchasing = true` (Dead Stock).
+  * **Real-World Example**:
+    * Product: A legacy surgical tape brand has been displaced by a new hypo-allergenic alternative.
+    * Class: XGBoost predicts Class C (revenue share < 1%).
+    * Movement: Trailing 6 months shows 0 sales.
+    * *Action*: System automatically flags this SKU for administrative review, setting the reorder recommendation to zero and warning against additional purchasing.
+
+---
+
 ### 6. Prescriptive Analytics Checklist
 * [ ] Confirm that MCDA weights are normalized and sum to 1.
 * [ ] Verify that EOQ values are recalculated monthly as new forecasts are generated.
 * [ ] Ensure that safety stock minimums are enforced as hard constraints in the LP model.
 * [ ] Validate that emergency multipliers override normal EOQ/ROP parameters during active alerts.
+* [ ] Ensure that the Stop-Purchasing flag correctly isolates dead stock Class C items based on the trailing 6-month transaction velocity.
