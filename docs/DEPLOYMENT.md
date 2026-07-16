@@ -47,7 +47,9 @@ Secrets to configure outside source control:
 
 ## Future AWS Deployment
 
-If AWS is required, confirm the professor's exact target service before implementation. Reasonable AWS options are:
+If AWS is required, confirm the professor's exact target service before implementation. See the comprehensive [AWS Integration Plan](file:///c:/Users/Ethan/medshield-alt-working-repo/docs/AWS_INTEGRATION_PLAN.md) for architecture maps, IAM policies, and VPC topologies. 
+
+Reasonable AWS options are:
 
 | AWS option | Fit |
 |---|---|
