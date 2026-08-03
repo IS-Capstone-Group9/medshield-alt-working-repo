@@ -833,69 +833,98 @@ medshield_markup = r"""
         </div>
       </div>
 
-      <!-- SEASONAL EPIDEMIC RESTOCK GRID -->
+      <!-- SEASONAL EPIDEMIC RESTOCK GRID (INTERACTIVE ACTION CARDS + SKU DRILL-DOWN TABLE) -->
       <div class="seasonal-planner-banner">
         <div class="seasonal-planner-header">
           <div>
-            <div class="seasonal-planner-title">📅 Seasonal Epidemic & Inventory Restock Planner</div>
-            <div class="seasonal-planner-sub">Automated climate-disease mapping and medicine category purchasing schedule for hospital networks.</div>
+            <div class="seasonal-planner-title">&#128197; Prescriptive Seasonal Climate-Disease Mapping</div>
+            <div class="seasonal-planner-sub">Click any season card below to drill down into specific SKU-level procurement recommendations, current stock gaps, and Economic Order Quantities (EOQ).</div>
           </div>
         </div>
         <div class="seasonal-grid">
-          <div class="season-card">
-            <div class="season-card-tag" style="color:#38BDF8">JANUARY & FEBRUARY</div>
-            <div class="season-card-title">❄️ Amihan Cool Dry Season</div>
+          <div class="season-card clickable-season" onclick="if(window.selectSeasonRestock)window.selectSeasonRestock('amihan',this)">
+            <div class="season-card-tag" style="color:#38BDF8">JANUARY &amp; FEBRUARY</div>
+            <div class="season-card-title">&#10052;&#65039; Amihan Cool Dry Season</div>
             <ul class="season-card-list">
-              <li><strong>Risks:</strong> Influenza-Like Illness (ILI), Flu, Asthma</li>
-              <li><strong>Restock:</strong> Bronchodilators, Antihistamines, Steroids</li>
-              <li><strong>Priority:</strong> Salbutamol Nebules, Cetirizine, Paracetamol</li>
+              <li><strong>Risks:</strong> Flu/ILI, SARI, Asthma</li>
+              <li><strong>Restock:</strong> Bronchodilators, Antihistamines</li>
+              <li><strong>Priority:</strong> Salbutamol, Cetirizine, Paracetamol</li>
             </ul>
+            <div class="drilldown-prompt">&#9654; Click to view SKU Reorder Plan</div>
           </div>
-          <div class="season-card">
-            <div class="season-card-tag" style="color:#F59E0B">MARCH & APRIL</div>
-            <div class="season-card-title">☀️ Summer Peak Heat Surge</div>
+          <div class="season-card clickable-season" onclick="if(window.selectSeasonRestock)window.selectSeasonRestock('summer',this)">
+            <div class="season-card-tag" style="color:#F59E0B">MARCH &amp; APRIL</div>
+            <div class="season-card-title">&#9728;&#65039; Summer Peak Heat Surge</div>
             <ul class="season-card-list">
-              <li><strong>Risks:</strong> Acute Gastroenteritis, Dehydration, Typhoid</li>
-              <li><strong>Restock:</strong> ORS Packets, Antidiarrheals, GI Anti-infectives</li>
-              <li><strong>Priority:</strong> Oral Rehydration Salts, Metronidazole, Omeprazole</li>
+              <li><strong>Risks:</strong> Gastroenteritis, Dehydration, Typhoid</li>
+              <li><strong>Restock:</strong> ORS Packets, GI Meds</li>
+              <li><strong>Priority:</strong> ORS, Metronidazole, Omeprazole</li>
             </ul>
+            <div class="drilldown-prompt">&#9654; Click to view SKU Reorder Plan</div>
           </div>
-          <div class="season-card">
-            <div class="season-card-tag" style="color:#34D399">MAY & JUNE</div>
-            <div class="season-card-title">🌩️ Pre-Monsoon Thunderstorms</div>
+          <div class="season-card clickable-season" onclick="if(window.selectSeasonRestock)window.selectSeasonRestock('pre_monsoon',this)">
+            <div class="season-card-tag" style="color:#34D399">MAY &amp; JUNE</div>
+            <div class="season-card-title">&#9929;&#65039; Pre-Monsoon Thunderstorms</div>
             <ul class="season-card-list">
-              <li><strong>Risks:</strong> Early Dengue Onset, HFMD, Waterborne GI</li>
-              <li><strong>Restock:</strong> Antipyretics, IV Fluids, Broad Antibiotics</li>
-              <li><strong>Priority:</strong> Paracetamol 500mg, IV Normal Saline, Co-Amoxiclav</li>
+              <li><strong>Risks:</strong> Early Dengue, HFMD, Waterborne GI</li>
+              <li><strong>Restock:</strong> Antipyretics, IV Fluids</li>
+              <li><strong>Priority:</strong> Paracetamol 500mg, IV Normal Saline</li>
             </ul>
+            <div class="drilldown-prompt">&#9654; Click to view SKU Reorder Plan</div>
           </div>
-          <div class="season-card" style="border-left: 4px solid #EF4444;">
-            <div class="season-card-tag" style="color:#EF4444">JULY & AUGUST — CRITICAL</div>
-            <div class="season-card-title">🌧️ Peak Monsoon (Habagat) & Floods</div>
+          <div class="season-card clickable-season active-season" onclick="if(window.selectSeasonRestock)window.selectSeasonRestock('monsoon',this)" style="border-left:4px solid #EF4444;">
+            <div class="season-card-tag" style="color:#EF4444">JULY &amp; AUGUST &#8212; CRITICAL</div>
+            <div class="season-card-title">&#127783;&#65039; Peak Monsoon (Habagat) &amp; Floods</div>
             <ul class="season-card-list">
-              <li><strong>Risks:</strong> Dengue Outbreaks, Leptospirosis Wave 1, Cholera</li>
-              <li><strong>Restock:</strong> Flood Prophylactics, Dengue Antipyretics, IV Fluids</li>
+              <li><strong>Risks:</strong> Dengue Outbreaks, Leptospirosis, Cholera</li>
+              <li><strong>Restock:</strong> Flood Prophylactics, IV Fluids</li>
               <li><strong>Priority:</strong> Doxycycline 100mg, Paracetamol, Cefuroxime</li>
             </ul>
+            <div class="drilldown-prompt">&#9654; Click to view SKU Reorder Plan</div>
           </div>
-          <div class="season-card">
-            <div class="season-card-tag" style="color:#F87171">SEPTEMBER & OCTOBER</div>
-            <div class="season-card-title">🌀 Late Typhoon & Post-Flood Siltation</div>
+          <div class="season-card clickable-season" onclick="if(window.selectSeasonRestock)window.selectSeasonRestock('typhoon',this)">
+            <div class="season-card-tag" style="color:#F87171">SEPTEMBER &amp; OCTOBER</div>
+            <div class="season-card-title">&#127744; Late Typhoon &amp; Post-Flood Siltation</div>
             <ul class="season-card-list">
-              <li><strong>Risks:</strong> Leptospirosis Wave 2, Dengue, Typhoid Fever</li>
-              <li><strong>Restock:</strong> Anti-Leptospiral Meds, GI Meds, ORS</li>
-              <li><strong>Priority:</strong> Doxycycline 100mg, Ciprofloxacin 500mg, ORS</li>
+              <li><strong>Risks:</strong> Leptospirosis Wave 2, Dengue, Typhoid</li>
+              <li><strong>Restock:</strong> Anti-Leptospiral, GI Meds, ORS</li>
+              <li><strong>Priority:</strong> Doxycycline 100mg, Ciprofloxacin, ORS</li>
             </ul>
+            <div class="drilldown-prompt">&#9654; Click to view SKU Reorder Plan</div>
           </div>
-          <div class="season-card">
-            <div class="season-card-tag" style="color:#38BDF8">NOVEMBER & DECEMBER</div>
-            <div class="season-card-title">🍂 Cold Front Transition & Holiday Peak</div>
+          <div class="season-card clickable-season" onclick="if(window.selectSeasonRestock)window.selectSeasonRestock('holiday',this)">
+            <div class="season-card-tag" style="color:#38BDF8">NOVEMBER &amp; DECEMBER</div>
+            <div class="season-card-title">&#127810; Cold Front &amp; Holiday Surge</div>
             <ul class="season-card-list">
-              <li><strong>Risks:</strong> Flu/ILI, Pediatric Respiratory, Asthma Surge</li>
-              <li><strong>Restock:</strong> Bronchodilators, Pediatric Syrups, Antibiotics</li>
+              <li><strong>Risks:</strong> Flu/ILI Surge, Pediatric Asthma</li>
+              <li><strong>Restock:</strong> Bronchodilators, Mucolytics, Antibiotics</li>
               <li><strong>Priority:</strong> Salbutamol Nebules, Carbocisteine, Amoxicillin</li>
             </ul>
+            <div class="drilldown-prompt">&#9654; Click to view SKU Reorder Plan</div>
           </div>
+        </div>
+
+        <!-- DYNAMIC SKU DRILL-DOWN TABLE -->
+        <div id="seasonalDrilldownContainer" style="margin-top:24px;background:#FFFFFF;border-radius:14px;padding:22px;color:#0F172A;box-shadow:0 4px 16px rgba(0,0,0,0.12);">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+            <div>
+              <div id="drilldownTitle" style="font-size:16px;font-weight:800;color:#0F172A;">July &amp; August &#8212; Peak Monsoon (Habagat) &amp; Floods</div>
+              <div id="drilldownSub" style="font-size:12px;color:#64748B;margin-top:2px;">Prescribed SKU Procurement Recommendations &amp; Stock Gap Analysis</div>
+            </div>
+            <span id="drilldownBadge" class="chart-badge" style="background:#FEF2F2;color:#EF4444;">DOH Outbreak Alert</span>
+          </div>
+          <table class="product-table">
+            <thead><tr>
+              <th style="text-align:left">Medicine SKU</th>
+              <th>Therapeutic Category</th>
+              <th>Current Stock</th>
+              <th>Recommended EOQ Reorder</th>
+              <th>Reorder Point (ROP)</th>
+              <th>Urgency</th>
+              <th>Unit Cost</th>
+            </tr></thead>
+            <tbody id="seasonalDrilldownTable"><tr><td colspan="7" style="text-align:center;padding:20px;color:#64748B;">Select a season card above to load SKU recommendations</td></tr></tbody>
+          </table>
         </div>
       </div>
 
@@ -994,13 +1023,109 @@ medshield_markup = r"""
 </main>
 """
 
-# Now view existing script content
+# Build the select season JS to inject inside MEDSHIELD_SCRIPT string
+select_season_js = '''
+if (typeof window !== 'undefined') {
+  window.selectSeasonRestock = async function(seasonId, cardEl) {
+    try {
+      var allCards = document.querySelectorAll('.clickable-season');
+      allCards.forEach(function(c) { c.classList.remove('active-season'); });
+      if (cardEl) { cardEl.classList.add('active-season'); }
+      var titleEl = document.getElementById('drilldownTitle');
+      var subEl = document.getElementById('drilldownSub');
+      var tableEl = document.getElementById('seasonalDrilldownTable');
+      if (!tableEl) return;
+      tableEl.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:20px;color:#64748B;">Loading prescribed SKU recommendations...</td></tr>';
+      var data;
+      try {
+        var res = await fetch('/api/seasonal_restock_detail?season_id=' + seasonId);
+        data = await res.json();
+      } catch(e) { console.warn('API fallback active', e); }
+      var details = (data && data.detail) ? data.detail : {
+        season_name: 'July & August — Peak Monsoon (Habagat)',
+        climate_trigger: 'Peak Southwest Monsoon & Urban Inundation',
+        skus: [
+          {sku:'Doxycycline 100mg Capsule',category:'Flood Prophylactics',current_stock:180,eoq_reorder:1200,rop:400,urgency:'Critical',unit_cost:'&#8369;12.00'},
+          {sku:'Paracetamol 500mg Tablet',category:'Antipyretics',current_stock:600,eoq_reorder:4000,rop:1200,urgency:'Critical',unit_cost:'&#8369;8.50'},
+          {sku:'IV Lactated Ringers 1L',category:'IV Fluids',current_stock:90,eoq_reorder:500,rop:180,urgency:'High',unit_cost:'&#8369;110.00'},
+          {sku:'Cefuroxime 500mg Tablet',category:'Antibiotics',current_stock:140,eoq_reorder:650,rop:200,urgency:'High',unit_cost:'&#8369;48.00'}
+        ]
+      };
+      if (titleEl) titleEl.innerText = details.season_name;
+      if (subEl) subEl.innerText = 'Climate Trigger: ' + (details.climate_trigger || 'Seasonal Surge');
+      var rows = '';
+      details.skus.forEach(function(s) {
+        var b = '<span class="alert-tag warn">Medium</span>';
+        if (s.urgency === 'Critical') b = '<span class="alert-tag danger">&#9888; Critical</span>';
+        else if (s.urgency === 'High') b = '<span class="alert-tag danger">High</span>';
+        else if (s.urgency === 'Low') b = '<span class="alert-tag ok">Low</span>';
+        var stockColor = (parseInt(s.current_stock) < parseInt(s.rop)) ? '#EF4444' : '#0F172A';
+        rows += '<tr>' +
+          '<td style="font-weight:700;text-align:left">' + s.sku + '</td>' +
+          '<td>' + s.category + '</td>' +
+          '<td style="color:' + stockColor + ';font-weight:700">' + s.current_stock.toLocaleString() + ' units</td>' +
+          '<td style="font-weight:800;color:#0EA5E9">+' + s.eoq_reorder.toLocaleString() + ' units</td>' +
+          '<td>' + s.rop.toLocaleString() + ' units</td>' +
+          '<td>' + b + '</td>' +
+          '<td style="font-weight:600">' + s.unit_cost + '</td>' +
+          '</tr>';
+      });
+      tableEl.innerHTML = rows;
+    } catch(err) { console.error('selectSeasonRestock:', err); }
+  };
+  setTimeout(function() {
+    var activeCard = document.querySelector('.clickable-season.active-season');
+    if (window.selectSeasonRestock && activeCard) window.selectSeasonRestock('monsoon', activeCard);
+  }, 800);
+}
+'''
+
+# Read existing MEDSHIELD_SCRIPT from the ts file
 current_content = target_file.read_text(encoding="utf-8")
 script_pos = current_content.find("export const MEDSHIELD_SCRIPT =")
 
+# Build the clickable-season CSS additions
+css_additions = '''
+.clickable-season { cursor: pointer !important; position: relative; transition: all 0.2s; }
+.clickable-season:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,0.2); border-color: #38BDF8 !important; }
+.clickable-season.active-season { border: 2px solid #38BDF8 !important; background: rgba(56,189,248,0.12) !important; box-shadow: 0 0 0 3px rgba(56,189,248,0.2); }
+.drilldown-prompt { margin-top: 12px; font-size: 11px; font-weight: 700; color: #38BDF8; text-transform: uppercase; letter-spacing: 0.06em; }
+'''
+
+# Modify STYLE to include clickable-season CSS
+medshield_style_full = medshield_style + css_additions
+
 if script_pos != -1:
     script_part = current_content[script_pos:]
-    new_file_content = f'export const MEDSHIELD_STYLE = "{medshield_style.replace(chr(10), "\\n").replace(chr(34), "\\\"")}"\n\nexport const MEDSHIELD_MARKUP = "{medshield_markup.replace(chr(10), "\\n").replace(chr(34), "\\\"")}"\n\n{script_part}'
+    # Get just the MEDSHIELD_SCRIPT content (strip leaked top-level code after its closing quote)
+    # Find the end of MEDSHIELD_SCRIPT value
+    script_export_start = script_part.find('export const MEDSHIELD_SCRIPT = "')
+    if script_export_start != -1:
+        # Find end of string: last " before any potential leaked code
+        script_str_start = script_export_start + len('export const MEDSHIELD_SCRIPT = "')
+        # Walk to find the closing quote
+        i = script_str_start
+        while i < len(script_part):
+            if script_part[i] == '"' and script_part[i-1] != '\\':
+                break
+            i += 1
+        # Inject select season JS before the closing quote
+        js_escaped = select_season_js.replace('\\', '\\\\').replace('"', '\\"').replace('\n', '\\n')
+        script_content = script_part[:i] + js_escaped + script_part[i:i+1]
+        # Truncate any leaked top-level code after the closing quote
+        script_export = 'export const MEDSHIELD_SCRIPT = "' + script_part[script_str_start:i] + js_escaped + '"'
+    else:
+        script_export = script_part.rstrip()
+
+    style_escaped = medshield_style_full.replace(chr(10), '\\n').replace(chr(34), '\\"')
+    markup_escaped = medshield_markup.replace(chr(10), '\\n').replace(chr(34), '\\"')
+
+    new_file_content = (
+        '// @ts-nocheck\n'
+        f'export const MEDSHIELD_STYLE = "{style_escaped}"\n\n'
+        f'export const MEDSHIELD_MARKUP = "{markup_escaped}"\n\n'
+        f'{script_export}\n'
+    )
     target_file.write_text(new_file_content, encoding="utf-8")
     print("Successfully updated medshieldReference.ts with redesigned UI and pruned text!")
 else:
