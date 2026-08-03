@@ -2171,6 +2171,7 @@ function Dashboard({ onLogout }: { onLogout: () => Promise<void> }) {
   const rootRef = useRef<HTMLDivElement>(null)
   const onLogoutRef = useRef(onLogout)
   const [isLoggingOut, setIsLoggingOut] = useState(false)
+  const [portalContainer, setPortalContainer] = useState<HTMLElement | null>(null)
 
   onLogoutRef.current = onLogout
 
@@ -2205,6 +2206,16 @@ function Dashboard({ onLogout }: { onLogout: () => Promise<void> }) {
           return
         }
         installDashboardEnhancements(root)
+        const contentEl = root.querySelector('.content')
+        if (contentEl) {
+          const container = document.createElement('div')
+          container.id = 'model-dashboard-portal-container'
+          container.style.marginTop = '32px'
+          container.style.marginBottom = '32px'
+          contentEl.appendChild(container)
+          setPortalContainer(container)
+        }
+
         const logoutBtn = root.querySelector('#sidebarLogoutBtn')
         if (logoutBtn) {
           logoutBtn.addEventListener('click', handleLogout)
@@ -2220,6 +2231,7 @@ function Dashboard({ onLogout }: { onLogout: () => Promise<void> }) {
 
     return () => {
       disposed = true
+      setPortalContainer(null)
       for (const { target, type, listener, options } of activeListeners) {
         target.removeEventListener(type, listener, options)
       }
@@ -2238,9 +2250,7 @@ function Dashboard({ onLogout }: { onLogout: () => Promise<void> }) {
     <>
       <style dangerouslySetInnerHTML={{ __html: `${MEDSHIELD_STYLE}\n${MEDSHIELD_STYLE_OVERRIDES}` }} />
       <div ref={rootRef} className="medshield-root" />
-      <div id="model-dashboard-root" style={{ padding: '24px', background: '#EEF4F8', minHeight: '100px' }}>
-        <ModelDashboard />
-      </div>
+      {portalContainer && createPortal(<ModelDashboard />, portalContainer)}
     </>
   )
 }
