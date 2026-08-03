@@ -297,11 +297,12 @@ async function analyticsJson(
   return { status: response.status, body }
 }
 
-function analyticsFailure(res: Response, error: unknown): Response {
-  console.error('Analytics service request failed:', error)
-  return res.status(502).json({
-    error: 'Analytics service is unavailable. The gateway tried to auto-start the Python service; check the backend terminal for Python dependency or port errors.',
-  })
+async function serviceGetJson(baseUrl: string, pathName: string): Promise<unknown> {
+  const response = await fetch(`${baseUrl}${pathName}`)
+  if (!response.ok) {
+    throw new Error(`Service at ${baseUrl}${pathName} returned status ${response.status}`)
+  }
+  return await response.json()
 }
 
 app.get('/api/health', (_req: Request, res: Response) => {
