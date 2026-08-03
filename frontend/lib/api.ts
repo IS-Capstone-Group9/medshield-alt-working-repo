@@ -1,4 +1,6 @@
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:5000'
+import { getSupabaseAccessToken, isSupabaseBrowserConfigured } from './supabase/client'
+
+export const API_BASE_URL = (process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:5000').replace(/\/$/, '')
 const TOKEN_KEY = 'medshield.accessToken'
 
 export type Summary = {
@@ -219,10 +221,11 @@ export type WeatherEffects = {
   summary: Array<Record<string, unknown>>
 }
 
-function authHeaders(extra?: HeadersInit): Headers {
+async function authHeaders(extra?: HeadersInit): Promise<Headers> {
   const headers = new Headers(extra)
-  const token =
-    typeof window === 'undefined'
+  const token = isSupabaseBrowserConfigured()
+    ? await getSupabaseAccessToken()
+    : typeof window === 'undefined'
       ? null
       : localStorage.getItem(TOKEN_KEY) || sessionStorage.getItem(TOKEN_KEY)
   if (token) headers.set('Authorization', `Bearer ${token}`)
@@ -233,7 +236,7 @@ async function getJson<T>(path: string): Promise<T> {
   try {
     const response = await fetch(`${API_BASE_URL}${path}`, {
       cache: 'no-store',
-      headers: authHeaders(),
+      headers: await authHeaders(),
     })
     if (!response.ok) throw new Error(`Request failed: ${response.status} ${response.statusText}`)
     return (await response.json()) as T
@@ -247,7 +250,7 @@ async function authenticatedJson<T>(path: string, init: RequestInit): Promise<T>
   const response = await fetch(`${API_BASE_URL}${path}`, {
     ...init,
     cache: 'no-store',
-    headers: authHeaders(init.headers),
+    headers: await authHeaders(init.headers),
   })
   const body = await response.json().catch(() => ({}))
   if (!response.ok) {

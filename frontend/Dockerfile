@@ -6,9 +6,13 @@ RUN npm ci
 FROM node:20-alpine AS build
 WORKDIR /app
 ARG NEXT_PUBLIC_API_BASE_URL=http://localhost:5000
+ARG NEXT_PUBLIC_SUPABASE_URL=
+ARG NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=
 ENV NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL
+ENV NEXT_PUBLIC_SUPABASE_URL=$NEXT_PUBLIC_SUPABASE_URL
+ENV NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=$NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
 COPY --from=deps /app/node_modules ./node_modules
-COPY package*.json next.config.mjs tsconfig.json .eslintrc.json ./
+COPY package*.json next.config.mjs tsconfig.json .eslintrc.json middleware.ts ./
 COPY app ./app
 COPY assets ./assets
 COPY components ./components

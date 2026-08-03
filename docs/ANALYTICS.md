@@ -2,6 +2,8 @@
 
 MedShield is a decision-support system, so analytics outputs must lead to decisions about demand, product priority, territory focus, stock planning, and alerts.
 
+For implementation logic, data gates, publication labels, and worker responsibilities, use `docs/DESCRIPTIVE_PREDICTIVE_PRESCRIPTIVE_GUIDE.md` as the consolidated execution guide.
+
 ## Model Coverage
 
 | Analytics Layer | Model / Method | DSS Output |

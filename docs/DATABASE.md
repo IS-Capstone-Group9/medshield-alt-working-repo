@@ -2,6 +2,8 @@
 
 The Supabase PostgreSQL warehouse is the source of truth for persisted MedShield analytics data.
 
+For the current `.env` boundary, Supabase schema inventory, and analytics table-gap checklist, see `docs/ENV_SCHEMA_ALIGNMENT_GUIDE.md`.
+
 ## Current Migration Order
 
 1. `supabase/migrations/001_init.sql`
@@ -10,7 +12,8 @@ The Supabase PostgreSQL warehouse is the source of truth for persisted MedShield
 4. `supabase/migrations/004_dss_schema.sql`
 5. `supabase/migrations/005_sales_ingestion_weather.sql`
 6. `supabase/migrations/006_business_rules_master_data.sql`
-7. `supabase/seed.sql`
+7. `supabase/migrations/007_namespaced_schema_alignment.sql`
+8. `supabase/seed.sql` or app ingestion for the target schema
 
 ## Schema Direction
 
@@ -18,10 +21,10 @@ The schema now supports four layers:
 
 | Layer | Tables / Views | Purpose |
 |---|---|---|
-| Master data control | `dim_product_alias`, `vw_product_master_status`, `vw_area_mapping_status` | Control SKU alias approval, contract-name breakdown, and area classification. |
-| Source/staging | `stg_sales_transactions`, `stg_doh_historical`, `stg_pagasa_historical`, `stg_weather_api_observations`, `etl_pipeline_run`, `etl_source_extract` | Preserve workbook and external extract lineage. |
-| Warehouse facts | `fact_sales_transactions`, `fact_monthly_sales`, `fact_area_summary`, `fact_product_summary`, `fact_year_summary`, `fact_seasonality`, `fact_data_completeness` | Store sales facts, dashboard aggregates, and period-level source completeness. |
-| DSS outputs | `fact_demand_forecast`, `fact_product_priority`, `fact_inventory_recommendation`, `fact_regional_priority`, `fact_decision_alert`, and related views | Store model outputs used by the decision-support dashboard. |
+| Master data control | `medshield_common.dim_product_alias`, `public.vw_product_master_status`, `public.vw_area_mapping_status` | Control SKU alias approval, contract-name breakdown, and area classification. |
+| Source/staging | `medshield_sales.stg_sales_transactions`, `medshield_external.stg_doh_historical`, `medshield_external.stg_pagasa_historical`, `medshield_external.stg_weather_api_observations`, `medshield_etl.etl_pipeline_run`, `medshield_etl.etl_source_extract` | Preserve workbook and external extract lineage. |
+| Warehouse facts | `medshield_sales.fact_sales_transactions`, `medshield_sales.fact_monthly_sales`, `medshield_sales.fact_area_summary`, `medshield_sales.fact_product_summary`, `medshield_sales.fact_year_summary`, `medshield_sales.fact_seasonality`, `medshield_sales.fact_data_completeness` | Store sales facts, dashboard aggregates, and period-level source completeness. |
+| DSS outputs | `medshield_analytics.fact_demand_forecast`, `medshield_analytics.fact_product_priority`, `medshield_analytics.fact_inventory_recommendation`, `medshield_analytics.fact_regional_priority`, `medshield_analytics.fact_decision_alert`, and related views | Store model outputs used by the decision-support dashboard. |
 
 The obsolete flat `analytics_*` tables are dropped by `004_dss_schema.sql` because the `vw_dashboard_*` and `vw_dss_*` views are now the API surface.
 

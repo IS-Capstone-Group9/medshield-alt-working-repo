@@ -26,7 +26,12 @@ def health():
 @app.get("/products")
 def products():
     rows = snapshot()["top_products"]
-    limit = int(request.args.get("limit", 15))
+    try:
+        limit = int(request.args.get("limit", 15))
+    except (TypeError, ValueError):
+        return jsonify({"error": "limit must be an integer"}), 400
+    if limit < 1 or limit > 100:
+        return jsonify({"error": "limit must be between 1 and 100"}), 400
     return jsonify(rows[:limit])
 
 

@@ -13,6 +13,7 @@ During local development the gateway probes the Python `/health` endpoints and s
 
 - `POST /api/auth/login`
   - Body: `{ "username": "...", "password": "...", "remember": true | false }`
+  - In Supabase mode, `username` must be the user's email address and the returned access token is the Supabase Auth access token.
   - Returns: `{ "access_token": "...", "token_type": "Bearer", "expires_at": "...", "user": { ... } }`
 - `GET /api/auth/me`
   - Requires `Authorization: Bearer <token>`.
@@ -22,7 +23,7 @@ During local development the gateway probes the Python `/health` endpoints and s
   - Revokes the gateway session token.
 - `POST /api/auth/signup`
 
-The gateway issues a session token after successful Supabase RPC or local fallback authentication. Frontend clients must send the token as a bearer token for dashboard and model endpoints.
+In Supabase mode, the frontend signs in through Supabase Auth and sends the Supabase access token as a bearer token for dashboard and model endpoints. In local fallback mode, the gateway issues its own development bearer token.
 
 ## Dashboard Contract
 

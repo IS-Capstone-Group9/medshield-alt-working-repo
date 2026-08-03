@@ -11,7 +11,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[3]
-SALES_PATH = ROOT / "data" / "medshield" / "processed" / "sales_transactions_area_allocated.json.gz"
+FULL_SALES_PATH = ROOT / "data" / "medshield" / "processed" / "sales_transactions_area_allocated.json.gz"
+MEDICAL_SALES_PATH = ROOT / "data" / "medshield" / "processed" / "sales_transactions_medical_demand.json.gz"
 WEATHER_PATH = ROOT / "data" / "medshield" / "processed" / "weather_signals.json"
 AREA_MAPPING_PATH = ROOT / "datasources" / "templates" / "area_classification_mapping.csv"
 OUTPUT_DIR = ROOT / "outputs" / "model_computation_start_20260623"
@@ -71,6 +72,20 @@ def safe_float(value: object) -> float:
 
 def round_num(value: float, digits: int = 4) -> float:
     return round(value + 0.0, digits)
+
+
+def model_input_path() -> tuple[Path, str, str]:
+    if MEDICAL_SALES_PATH.exists():
+        return (
+            MEDICAL_SALES_PATH,
+            "provisional_medical_demand",
+            "Uses generated medical-demand split; product master approval is still required before publication.",
+        )
+    return (
+        FULL_SALES_PATH,
+        "full_adjusted_sales",
+        "Medical-demand split has not been generated; results may include non-medical business items.",
+    )
 
 
 def load_area_mapping() -> dict[str, dict]:
@@ -336,7 +351,8 @@ def data_contract(sales_rows: list[dict], weather: dict | None) -> dict:
 
 def main() -> None:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    sales_payload = read_json_gz(SALES_PATH)
+    sales_path, input_dataset_type, input_dataset_limitation = model_input_path()
+    sales_payload = read_json_gz(sales_path)
     rows = sales_payload.get("rows", [])
     area_mapping = load_area_mapping()
 
@@ -399,9 +415,10 @@ def main() -> None:
         "training_period_end": max(row["period"] for row in monthly_overall),
         "forecast_period_start": forecast_rows[0]["forecast_period"] if forecast_rows else "",
         "forecast_period_end": forecast_rows[-1]["forecast_period"] if forecast_rows else "",
-        "input_dataset_version": "sales_transactions_area_allocated_cleaned_20260623",
+        "input_dataset_version": sales_payload.get("metadata", {}).get("dataset_name", sales_path.stem),
+        "input_dataset_type": input_dataset_type,
         "status": "draft",
-        "limitations": "Sales-only baseline. 2025 is partial and external signals are not fully loaded.",
+        "limitations": f"Sales-only baseline. 2025 is partial and external signals are not fully loaded. {input_dataset_limitation}",
     }])
 
     priority_rows = []
@@ -452,6 +469,8 @@ def main() -> None:
 
     summary = {
         "generated_at": datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
+        "input_dataset": str(sales_path.relative_to(ROOT)),
+        "input_dataset_type": input_dataset_type,
         "sales_rows": len(enriched),
         "monthly_overall_rows": len(monthly_overall),
         "monthly_territory_rows": len(monthly_territory),
@@ -463,6 +482,7 @@ def main() -> None:
         "blocked_items": len(blocked),
         "review_status": "draft",
         "limitations": [
+            input_dataset_limitation,
             "DOH and PAGASA datasets are not yet uploaded.",
             "Weather API file is partial and should remain contextual.",
             "Product master classification is not fully approved.",

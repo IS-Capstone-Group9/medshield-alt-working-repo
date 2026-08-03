@@ -67,31 +67,6 @@ function supabaseEnabled(): boolean {
   return envBool('USE_SUPABASE', true) && Boolean(process.env.SUPABASE_URL?.trim()) && Boolean(process.env.SUPABASE_ANON_KEY?.trim())
 }
 
-async function supabaseRpc(functionName: string, params: Record<string, unknown>): Promise<unknown> {
-  const url = `${process.env.SUPABASE_URL?.replace(/\/$/, '')}/rest/v1/rpc/${functionName}`
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      apikey: process.env.SUPABASE_ANON_KEY ?? '',
-      Authorization: `Bearer ${process.env.SUPABASE_ANON_KEY ?? ''}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(params),
-  })
-
-  if (!response.ok) {
-    const body = await response.text()
-    const error = new Error(`Supabase RPC failed with status ${response.status}: ${body}`)
-    ;(error as { response?: { status: number; body: string } }).response = {
-      status: response.status,
-      body,
-    }
-    throw error
-  }
-
-  return await response.json()
-}
-
 function authBackendUnavailable(error: unknown): boolean {
   if (!(error instanceof Error)) {
     return false
@@ -119,6 +94,7 @@ app.use((_, res, next) => {
 interface AuthenticatedRequest extends Request {
   user?: SessionUser
   accessToken?: string
+  authSource?: 'local' | 'supabase'
 }
 
 function bearerToken(req: Request): string | null {
@@ -131,19 +107,176 @@ function bearerToken(req: Request): string | null {
   return token
 }
 
-function requireAuth(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+type SupabaseAuthUser = {
+  id: string
+  email?: string
+  app_metadata?: {
+    role?: string
+    medshield_role?: string
+  }
+}
+
+function toSessionUserFromSupabase(user: SupabaseAuthUser): SessionUser {
+  const email = user.email ?? ''
+  return {
+    account_id: 0,
+    username: email ? email.split('@')[0] : user.id,
+    email,
+    role: user.app_metadata?.medshield_role ?? user.app_metadata?.role ?? 'viewer',
+  }
+}
+
+async function supabaseAuthFetch(pathName: string, init: RequestInit): Promise<globalThis.Response> {
+  const baseUrl = process.env.SUPABASE_URL?.replace(/\/$/, '')
+  const anonKey = process.env.SUPABASE_ANON_KEY ?? ''
+  if (!baseUrl || !anonKey) {
+    throw new Error('Supabase Auth is not configured')
+  }
+
+  const headers = new globalThis.Headers(init.headers)
+  headers.set('apikey', anonKey)
+  if (!headers.has('Content-Type') && init.body) {
+    headers.set('Content-Type', 'application/json')
+  }
+
+  return fetch(`${baseUrl}/auth/v1${pathName}`, {
+    ...init,
+    headers,
+  })
+}
+
+async function getSupabaseAuthUser(token: string): Promise<SessionUser | null> {
+  const response = await supabaseAuthFetch('/user', {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  if (!response.ok) {
+    return null
+  }
+
+  const user = (await response.json()) as SupabaseAuthUser
+  if (!user.id) {
+    return null
+  }
+
+  return toSessionUserFromSupabase(user)
+}
+
+async function signInWithSupabasePassword(email: string, password: string): Promise<{
+  access_token: string
+  token_type: 'Bearer'
+  expires_at: string
+  user: SessionUser
+} | null> {
+  const response = await supabaseAuthFetch('/token?grant_type=password', {
+    method: 'POST',
+    body: JSON.stringify({ email, password }),
+  })
+
+  const body = (await response.json().catch(() => ({}))) as Record<string, unknown>
+  if (!response.ok) {
+    if (response.status >= 500 || response.status === 429) {
+      const error = new Error(`Supabase Auth sign-in failed with status ${response.status}`)
+      ;(error as { response?: { status: number; body: string } }).response = {
+        status: response.status,
+        body: JSON.stringify(body),
+      }
+      throw error
+    }
+    return null
+  }
+
+  const authUser = body.user as SupabaseAuthUser | undefined
+  const expiresIn = Number(body.expires_in ?? 3600)
+  if (!body.access_token || !authUser?.id) {
+    return null
+  }
+
+  return {
+    access_token: String(body.access_token),
+    token_type: 'Bearer',
+    expires_at: new Date(Date.now() + expiresIn * 1000).toISOString(),
+    user: toSessionUserFromSupabase(authUser),
+  }
+}
+
+async function signUpWithSupabase(email: string, password: string): Promise<{
+  account_id: number
+  username: string
+  email: string
+  role: string
+  message: string
+} | null> {
+  const response = await supabaseAuthFetch('/signup', {
+    method: 'POST',
+    body: JSON.stringify({ email, password }),
+  })
+
+  const body = (await response.json().catch(() => ({}))) as Record<string, unknown>
+  if (!response.ok) {
+    if (response.status >= 500 || response.status === 429) {
+      const error = new Error(`Supabase Auth signup failed with status ${response.status}`)
+      ;(error as { response?: { status: number; body: string } }).response = {
+        status: response.status,
+        body: JSON.stringify(body),
+      }
+      throw error
+    }
+    return null
+  }
+
+  const authUser = (body.user ?? body) as SupabaseAuthUser
+  if (!authUser.id) {
+    return null
+  }
+
+  const user = toSessionUserFromSupabase(authUser)
+  return {
+    account_id: user.account_id,
+    username: user.username,
+    email: user.email,
+    role: user.role,
+    message: 'Account created successfully. Check the Supabase Auth email settings for confirmation requirements.',
+  }
+}
+
+async function revokeSupabaseToken(token: string): Promise<void> {
+  await supabaseAuthFetch('/logout', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).catch(() => undefined)
+}
+
+async function requireAuth(req: AuthenticatedRequest, res: Response, next: NextFunction) {
   const token = bearerToken(req)
   if (!token) {
     return res.status(401).json({ error: 'Authentication token is required' })
   }
 
-  const user = verifySessionToken(token)
+  let user = verifySessionToken(token)
+  let authSource: AuthenticatedRequest['authSource'] = user ? 'local' : undefined
+  if (!user && supabaseEnabled()) {
+    try {
+      user = await getSupabaseAuthUser(token)
+      authSource = user ? 'supabase' : undefined
+    } catch (error) {
+      console.error('Supabase token validation failed:', error)
+      return res.status(503).json({ error: 'Authentication service is unavailable' })
+    }
+  }
+
   if (!user) {
     return res.status(401).json({ error: 'Session expired or invalid' })
   }
 
   req.user = user
   req.accessToken = token
+  req.authSource = authSource
   next()
 }
 
@@ -178,7 +311,7 @@ app.get('/api/health', (_req: Request, res: Response) => {
     architecture: 'typescript-api-gateway',
     source: supabaseEnabled() ? 'warehouse' : 'reference-export',
     runtime: 'typescript',
-    auth_mode: supabaseEnabled() ? 'supabase-rpc-with-gateway-session' : 'local-session',
+    auth_mode: supabaseEnabled() ? 'supabase-auth-jwt' : 'local-session',
     analytics_services: {
       analytics: analyticsServiceUrl,
       product: productServiceUrl,
@@ -207,8 +340,12 @@ app.get('/api/by_area', requireAuth, async (_req: Request, res: Response) => {
 
 app.get('/api/products', requireAuth, async (req: Request, res: Response) => {
   const snapshot = await loadSnapshot()
-  const limit = Number(req.query.limit ?? 15)
-  res.json(snapshot.top_products.slice(0, Number.isFinite(limit) ? limit : 15))
+  const rawLimit = req.query.limit ?? 15
+  const limit = Number(rawLimit)
+  if (!Number.isInteger(limit) || limit < 1 || limit > 100) {
+    return res.status(400).json({ error: 'limit must be an integer between 1 and 100' })
+  }
+  res.json(snapshot.top_products.slice(0, limit))
 })
 
 app.get('/api/year_summary', requireAuth, async (_req: Request, res: Response) => {
@@ -374,7 +511,11 @@ app.get('/api/auth/me', requireAuth, (req: AuthenticatedRequest, res: Response) 
 
 app.post('/api/auth/logout', requireAuth, (req: AuthenticatedRequest, res: Response) => {
   if (req.accessToken) {
-    revokeSessionToken(req.accessToken)
+    if (req.authSource === 'supabase') {
+      void revokeSupabaseToken(req.accessToken)
+    } else {
+      revokeSessionToken(req.accessToken)
+    }
   }
 
   res.json({ ok: true })
@@ -391,28 +532,11 @@ app.post('/api/auth/login', async (req: Request, res: Response) => {
 
   if (supabaseEnabled()) {
     try {
-      const rows = (await supabaseRpc('verify_login', {
-        p_username: username,
-        p_password: password,
-      })) as Array<Record<string, unknown>>
-
-      if (!rows.length) {
+      const session = await signInWithSupabasePassword(username, password)
+      if (!session) {
         return res.status(401).json({ error: 'Invalid username or password' })
       }
-
-      const account = rows[0]
-      if (!account.is_active) {
-        return res.status(403).json({ error: 'Account is disabled' })
-      }
-
-      const user = {
-        account_id: Number(account.account_id),
-        username: String(account.username),
-        email: String(account.email),
-        role: String(account.role),
-      } as SessionUser
-
-      return res.json(createSession(user, remember))
+      return res.json(session)
     } catch (error) {
       if (!authBackendUnavailable(error)) {
         console.error('Login error:', error)
@@ -450,29 +574,11 @@ app.post('/api/auth/signup', async (req: Request, res: Response) => {
 
   if (supabaseEnabled()) {
     try {
-      const rows = (await supabaseRpc('create_account', {
-        p_username: username,
-        p_email: email,
-        p_password: password,
-        p_role: 'viewer',
-      })) as Array<Record<string, unknown>>
-
-      if (!rows.length) {
+      const result = await signUpWithSupabase(email, password)
+      if (!result) {
         return res.status(500).json({ error: 'Failed to create account' })
       }
-
-      const result = rows[0]
-      if (result.error_msg) {
-        return res.status(409).json({ error: result.error_msg })
-      }
-
-      return res.status(201).json({
-        account_id: result.account_id,
-        username: result.username,
-        email: result.email,
-        role: result.role,
-        message: 'Account created successfully',
-      })
+      return res.status(201).json(result)
     } catch (error) {
       if (!authBackendUnavailable(error)) {
         console.error('Signup error:', error)

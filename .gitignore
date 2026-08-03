@@ -52,6 +52,9 @@ docs/MedShield_Chapter_4_5_Draft.docx
 
 # Runtime ingestion outputs
 data/medshield/uploads/
+data/medshield/processed/sales_transactions_medical_demand.json.gz
+data/medshield/processed/sales_transactions_non_medical_excluded.json.gz
+outputs/medical_demand_cleaning_*/
 
 # Obsolete local export superseded by complete yearly daily CSVs
 outputs/contract_backward_allocation_20260623/yearly_daily/sales_transactions_area_allocated_undated_review.csv

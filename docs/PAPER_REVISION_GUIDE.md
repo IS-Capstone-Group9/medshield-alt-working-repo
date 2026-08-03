@@ -22,7 +22,7 @@ MedShield is now implemented as a business analytics decision-support system wit
 - A TypeScript API gateway in `backend/`.
 - Python Flask analytics and product microservices in `services/`.
 - Supabase PostgreSQL warehouse migrations and seed data.
-- Authentication through Supabase RPC when configured, with local fallback auth for demo use.
+- Authentication through Supabase Auth when configured, with local fallback auth for demo use.
 - Server-side upload and cleaning of MedShield sales `.xlsx` and `.csv` files.
 - A canonical transaction view showing all 13 standardized sales columns.
 - Year-aware ingestion so uploading one year replaces only that year instead of overwriting all history.

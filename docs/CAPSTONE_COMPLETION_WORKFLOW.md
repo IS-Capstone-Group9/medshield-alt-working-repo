@@ -1,5 +1,7 @@
 # MedShield Capstone Completion Workflow
 
+For the detailed task tracker that combines environment, schema, medical-demand cleaning, RRL, modeling, dashboard, QA, and paper work, use `docs/REMAINING_WORK_DETAILED_CHECKLIST.md`.
+
 ## Positioning
 
 The capstone should be completed as a historical decision-support system. The available external data is historical:

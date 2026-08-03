@@ -1,6 +1,7 @@
 'use client'
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
+import { createClient, isSupabaseBrowserConfigured } from './supabase/client'
 
 const API_BASE = (process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000').replace(/\/$/, '')
 const TOKEN_KEY = 'medshield.accessToken'
@@ -61,6 +62,16 @@ function toUser(data: any): User {
   }
 }
 
+function toUserFromSupabase(data: any): User {
+  const email = String(data.email ?? '')
+  return {
+    accountId: 0,
+    username: email ? email.split('@')[0] : String(data.id ?? 'user'),
+    email,
+    role: String(data.app_metadata?.medshield_role ?? data.app_metadata?.role ?? 'viewer'),
+  }
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isAuthLoading, setIsAuthLoading] = useState(true)
@@ -68,6 +79,46 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [accessToken, setAccessToken] = useState<string | null>(null)
 
   useEffect(() => {
+    if (isSupabaseBrowserConfigured()) {
+      const supabase = createClient()
+      let cancelled = false
+
+      async function restoreSupabaseSession() {
+        try {
+          const {
+            data: { session },
+          } = await supabase.auth.getSession()
+
+          if (!cancelled && session?.user) {
+            setAccessToken(session.access_token)
+            setUser(toUserFromSupabase(session.user))
+            setIsAuthenticated(true)
+          }
+        } finally {
+          if (!cancelled) {
+            setIsAuthLoading(false)
+          }
+        }
+      }
+
+      void restoreSupabaseSession()
+
+      const {
+        data: { subscription },
+      } = supabase.auth.onAuthStateChange((_event, session) => {
+        if (cancelled) return
+        setAccessToken(session?.access_token ?? null)
+        setUser(session?.user ? toUserFromSupabase(session.user) : null)
+        setIsAuthenticated(Boolean(session?.user))
+        setIsAuthLoading(false)
+      })
+
+      return () => {
+        cancelled = true
+        subscription.unsubscribe()
+      }
+    }
+
     const token = getStoredToken()
     if (!token) {
       setIsAuthLoading(false)
@@ -109,6 +160,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const login = async (username: string, password: string, remember = false) => {
+    if (isSupabaseBrowserConfigured()) {
+      try {
+        const supabase = createClient()
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email: username,
+          password,
+        })
+
+        if (error || !data.session?.user) {
+          return { ok: false, error: error?.message || 'Login failed' }
+        }
+
+        setAccessToken(data.session.access_token)
+        setIsAuthenticated(true)
+        setUser(toUserFromSupabase(data.session.user))
+        return { ok: true }
+      } catch {
+        return { ok: false, error: 'Cannot connect to Supabase Auth' }
+      }
+    }
+
     try {
       const res = await fetch(`${API_BASE}/api/auth/login`, {
         method: 'POST',
@@ -128,6 +200,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   const signup = async (username: string, email: string, password: string) => {
+    if (isSupabaseBrowserConfigured()) {
+      try {
+        const supabase = createClient()
+        const { error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            data: { username },
+          },
+        })
+
+        if (error) return { ok: false, error: error.message }
+        return { ok: true }
+      } catch {
+        return { ok: false, error: 'Cannot connect to Supabase Auth' }
+      }
+    }
+
     try {
       const res = await fetch(`${API_BASE}/api/auth/signup`, {
         method: 'POST',
@@ -143,6 +233,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   const logout = async () => {
+    if (isSupabaseBrowserConfigured()) {
+      const supabase = createClient()
+      await supabase.auth.signOut()
+      clearStoredToken()
+      setAccessToken(null)
+      setIsAuthenticated(false)
+      setUser(null)
+      return
+    }
+
     const token = accessToken ?? getStoredToken()
     if (token) {
       try {

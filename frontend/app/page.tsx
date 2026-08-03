@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Chart from 'chart.js/auto'
 import { MEDSHIELD_MARKUP, MEDSHIELD_SCRIPT, MEDSHIELD_STYLE } from '../lib/medshieldReference'
 import { AuthProvider, useAuth } from '../lib/AuthContext'
@@ -67,6 +67,7 @@ type SalesViewState = {
   page: number
   pageSize: number
   computation: 'overview' | 'sum' | 'average' | 'count'
+  detailLevel: 'compact' | 'full'
 }
 
 const MEDSHIELD_STYLE_OVERRIDES = `
@@ -425,7 +426,7 @@ html[data-theme="dark"] body {
   background: var(--bg-elevated);
 }
 #page-sales-data .sales-filter-toolbar {
-  grid-template-columns: repeat(4, minmax(150px, 1fr)) minmax(280px, 2fr);
+  grid-template-columns: repeat(5, minmax(140px, 1fr)) minmax(240px, 1.6fr);
 }
 #page-weather-validation .weather-filter-toolbar {
   grid-template-columns: repeat(4, minmax(160px, 1fr));
@@ -452,6 +453,67 @@ html[data-theme="dark"] body {
   max-height: calc(100vh - 330px);
   min-height: 430px;
   margin: 8px 22px 0;
+}
+.dashboard-focus-panel {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.9fr) minmax(0, 1.7fr);
+  gap: 12px;
+  align-items: stretch;
+  margin-bottom: 12px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-sm);
+}
+.dashboard-focus-title {
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 800;
+}
+.dashboard-focus-copy {
+  margin-top: 6px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.4;
+}
+.dashboard-focus-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(150px, 1fr));
+  gap: 8px;
+}
+.dashboard-focus-card {
+  min-height: 70px;
+  padding: 10px 11px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-elevated);
+}
+.dashboard-focus-kicker {
+  color: var(--accent);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+.dashboard-focus-value {
+  margin-top: 5px;
+  color: var(--text-primary);
+  font-size: 12px;
+  font-weight: 800;
+}
+.dashboard-focus-note {
+  margin-top: 4px;
+  color: var(--text-secondary);
+  font-size: 11px;
+  line-height: 1.3;
+}
+@media (max-width: 980px) {
+  .dashboard-focus-panel,
+  .dashboard-focus-grid {
+    grid-template-columns: 1fr;
+  }
 }
 #page-weather-validation .uploaded-data-table-wrap {
   max-height: calc(100vh - 255px);
@@ -742,6 +804,41 @@ html[data-theme="dark"] .chart-wrap::before {
   outline: 2px solid #7dd3fc;
   outline-offset: 2px;
 }
+.react-sidebar-logout-btn {
+  position: fixed;
+  left: 14px;
+  bottom: 14px;
+  z-index: 160;
+  width: 200px;
+  margin-top: 12px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.08);
+  color: #D5E4EC;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: all 0.22s ease;
+}
+.react-sidebar-logout-btn:hover:not(:disabled) {
+  background: rgba(255,255,255,0.16);
+  color: #FFFFFF;
+}
+.react-sidebar-logout-btn:disabled {
+  cursor: progress;
+  opacity: 0.72;
+}
+body.nav-collapsed .react-sidebar-logout-btn {
+  left: 10px;
+  width: 64px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+body.nav-hidden .react-sidebar-logout-btn {
+  display: none;
+}
 @media (max-width: 820px) {
   .topbar {
     padding: 0 16px;
@@ -777,6 +874,15 @@ function getExecutableDashboardScript() {
     .replaceAll("'#335F78'", "dashboardThemeColor('--chart-label', '#335F78')")
     .replaceAll("'#67879A'", "dashboardThemeColor('--chart-muted', '#67879A')")
     .replaceAll("'rgba(201,219,229,0.65)'", "dashboardThemeColor('--chart-grid', 'rgba(201,219,229,0.65)')")
+    .replace('if (document.startViewTransition &&', 'if (false && document.startViewTransition &&')
+    .replace('chart.resize();', "if (!chart.canvas || !chart.canvas.isConnected) return;\n      chart.resize();")
+    .replace(
+      "if (charts[id]) charts[id].destroy();",
+      `
+    const existingChart = Chart.getChart ? Chart.getChart(canvas) : charts[id];
+    if (existingChart) existingChart.destroy();
+    if (charts[id] && charts[id] !== existingChart) charts[id].destroy();`,
+    )
     .replace(/\n}\);\s*$/, `\n})();\n${globalHandlerBridge}`)
 
   return `
@@ -951,6 +1057,13 @@ function enhanceDashboardContent(root: HTMLElement) {
                 <option value="count">Counts / SKU</option>
               </select>
             </div>
+            <div class="uploaded-data-field">
+              <label for="salesDataDetail">Detail</label>
+              <select id="salesDataDetail">
+                <option value="compact">Compact</option>
+                <option value="full">Full Ledger</option>
+              </select>
+            </div>
             <div class="uploaded-data-field uploaded-data-search">
               <label for="salesDataSearch">Search</label>
               <input id="salesDataSearch" type="search" placeholder="Area, Product, DR Number..." />
@@ -1024,8 +1137,8 @@ function enhanceDashboardContent(root: HTMLElement) {
             <div class="uploaded-data-field">
               <label for="weatherGrain">Validation Grain</label>
               <select id="weatherGrain">
-                <option value="daily">Daily API Rows</option>
                 <option value="monthly">Monthly Planning Aggregate</option>
+                <option value="daily">Daily API Rows</option>
               </select>
             </div>
           </div>
@@ -1042,6 +1155,36 @@ function enhanceDashboardContent(root: HTMLElement) {
   }
 
   const overview = root.querySelector('#page-overview')
+  if (overview && !overview.querySelector('.dashboard-focus-panel')) {
+    overview.insertAdjacentHTML(
+      'afterbegin',
+      `
+      <section class="dashboard-focus-panel" aria-label="Dashboard focus guide">
+        <div>
+          <div class="dashboard-focus-title">Decision Focus</div>
+          <div class="dashboard-focus-copy">Start with these three signals. Open detailed pages only when a number needs evidence.</div>
+        </div>
+        <div class="dashboard-focus-grid">
+          <div class="dashboard-focus-card">
+            <div class="dashboard-focus-kicker">Primary</div>
+            <div class="dashboard-focus-value">Demand and revenue trend</div>
+            <div class="dashboard-focus-note">Use overview charts before drilling into ledgers.</div>
+          </div>
+          <div class="dashboard-focus-card">
+            <div class="dashboard-focus-kicker">Review</div>
+            <div class="dashboard-focus-value">Product and territory priority</div>
+            <div class="dashboard-focus-note">Treat ABC/Pareto as planning signals.</div>
+          </div>
+          <div class="dashboard-focus-card">
+            <div class="dashboard-focus-kicker">Guardrail</div>
+            <div class="dashboard-focus-value">Forecasts and scenarios need review</div>
+            <div class="dashboard-focus-note">External and inventory outputs are not automatic procurement decisions.</div>
+          </div>
+        </div>
+      </section>
+      `,
+    )
+  }
   if (overview && !overview.querySelector('.analytics-workflow-panel')) {
     overview.insertAdjacentHTML(
       'afterbegin',
@@ -1373,9 +1516,9 @@ function renderSalesDatasetStatus(root: HTMLElement, status: SalesDatasetStatus)
   if (note) {
     note.textContent =
       `${summary.rows_accepted.toLocaleString()} accepted of ${summary.rows_extracted.toLocaleString()} extracted rows` +
-      ` • ${summary.rows_with_warnings.toLocaleString()} warnings` +
-      ` • ${summary.rows_rejected.toLocaleString()} rejected` +
-      ` • ${status.canonical_columns.length} columns matched`
+      ` | ${summary.rows_with_warnings.toLocaleString()} warnings` +
+      ` | ${summary.rows_rejected.toLocaleString()} rejected` +
+      ` | ${status.canonical_columns.length} columns matched`
   }
   if (yearSelect) {
     const current = yearSelect.value || 'all'
@@ -1453,7 +1596,15 @@ function renderSalesPage(root: HTMLElement, result: SalesPage) {
   const next = root.querySelector<HTMLButtonElement>('#salesDataNext')
   if (!table || !status || !pageLabel || !previous || !next) return
 
-  const columns: Array<[string, keyof SalesPage['rows'][number], 'text' | 'number' | 'money' | 'percent']> = [
+  const compactColumns: Array<[string, keyof SalesPage['rows'][number], 'text' | 'number' | 'money' | 'percent']> = [
+    ['Date', 'date_delivered', 'text'],
+    ['Area', 'area', 'text'],
+    ['Product', 'product', 'text'],
+    ['Qty', 'quantity', 'number'],
+    ['Total TP', 'total_trade_price', 'money'],
+    ['Gross Profit', 'net_income', 'money'],
+  ]
+  const fullColumns: Array<[string, keyof SalesPage['rows'][number], 'text' | 'number' | 'money' | 'percent']> = [
     ['Area', 'area', 'text'],
     ['DR Number', 'dr_number', 'text'],
     ['Date Delivered', 'date_delivered', 'text'],
@@ -1468,6 +1619,8 @@ function renderSalesPage(root: HTMLElement, result: SalesPage) {
     ['Gross Profit', 'net_income', 'money'],
     ['%', 'margin_pct', 'percent'],
   ]
+  const detailLevel = root.querySelector<HTMLSelectElement>('#salesDataDetail')?.value === 'full' ? 'full' : 'compact'
+  const columns = detailLevel === 'full' ? fullColumns : compactColumns
   table.replaceChildren()
   const head = table.createTHead()
   const headerRow = head.insertRow()
@@ -1618,14 +1771,14 @@ function renderWeatherEffects(root: HTMLElement, result: WeatherEffects) {
     }
   }
   status.textContent = result.rows.length
-    ? `${weatherProviderLabel(provider)} • ${grain === 'daily' ? 'Daily rows' : 'Monthly aggregate'} • ${period} • ${periods} weather rows • ${salesMatches} sales matches • ${correlation}`
+    ? `${weatherProviderLabel(provider)} | ${grain === 'daily' ? 'Daily rows' : 'Monthly aggregate'} | ${period} | ${periods} weather rows | ${salesMatches} sales matches | ${correlation}`
     : 'No weather rows match the selected territory and year.'
 }
 
 async function loadWeatherEffectView(root: HTMLElement) {
   const year = root.querySelector<HTMLSelectElement>('#weatherYear')?.value ?? '2025'
   const area = root.querySelector<HTMLSelectElement>('#weatherArea')?.value ?? 'all'
-  const grain = (root.querySelector<HTMLSelectElement>('#weatherGrain')?.value ?? 'daily') as 'daily' | 'monthly'
+  const grain = (root.querySelector<HTMLSelectElement>('#weatherGrain')?.value ?? 'monthly') as 'daily' | 'monthly'
   renderWeatherEffects(root, await getWeatherEffects({ year, area, grain }))
 }
 
@@ -1717,6 +1870,7 @@ function installDashboardEnhancements(root: HTMLElement) {
     page: 1,
     pageSize: 25,
     computation: 'overview',
+    detailLevel: 'compact',
   }
 
   const refreshSalesView = () =>
@@ -1807,6 +1961,11 @@ function installDashboardEnhancements(root: HTMLElement) {
     salesState.computation = ['overview', 'sum', 'average', 'count'].includes(value)
       ? (value as SalesViewState['computation'])
       : 'overview'
+    void refreshSalesView()
+  })
+  root.querySelector('#salesDataDetail')?.addEventListener('change', (event) => {
+    const value = (event.target as HTMLSelectElement).value
+    salesState.detailLevel = value === 'full' ? 'full' : 'compact'
     void refreshSalesView()
   })
   let searchTimer = 0
@@ -2000,11 +2159,22 @@ async function runDashboardScript(script: string): Promise<ListenerRecord[]> {
   }
 }
 
-function Dashboard({ onLogout }: { onLogout: () => void }) {
+function Dashboard({ onLogout }: { onLogout: () => Promise<void> }) {
   const rootRef = useRef<HTMLDivElement>(null)
   const onLogoutRef = useRef(onLogout)
+  const [isLoggingOut, setIsLoggingOut] = useState(false)
 
   onLogoutRef.current = onLogout
+
+  const handleLogout = () => {
+    if (isLoggingOut) return
+    const root = rootRef.current
+    if (root) {
+      recordAudit(root, 'Logout', 'User requested logout from the dashboard sidebar.')
+    }
+    setIsLoggingOut(true)
+    void onLogoutRef.current().finally(() => setIsLoggingOut(false))
+  }
 
   useEffect(() => {
     const root = rootRef.current
@@ -2016,39 +2186,6 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
     root.innerHTML = MEDSHIELD_MARKUP
     window.Chart = Chart
     enhanceDashboardContent(root)
-
-    const sidebarFooter = root.querySelector('.sidebar-footer')
-    if (sidebarFooter) {
-      const logoutButton = document.createElement('button')
-      logoutButton.type = 'button'
-      logoutButton.textContent = 'Log Out'
-      logoutButton.className = 'sidebar-logout-btn'
-      logoutButton.style.width = '100%'
-      logoutButton.style.marginTop = '12px'
-      logoutButton.style.padding = '10px 14px'
-      logoutButton.style.borderRadius = '10px'
-      logoutButton.style.background = 'rgba(255,255,255,0.08)'
-      logoutButton.style.border = '1px solid rgba(255,255,255,0.12)'
-      logoutButton.style.color = '#D5E4EC'
-      logoutButton.style.fontSize = '12px'
-      logoutButton.style.fontWeight = '700'
-      logoutButton.style.letterSpacing = '0.02em'
-      logoutButton.style.cursor = 'pointer'
-      logoutButton.style.transition = 'all 0.22s ease'
-      logoutButton.addEventListener('click', () => {
-        recordAudit(root, 'Logout', 'User requested logout from the dashboard sidebar.')
-        onLogoutRef.current()
-      })
-      logoutButton.addEventListener('mouseenter', () => {
-        logoutButton.style.background = 'rgba(255,255,255,0.16)'
-        logoutButton.style.color = '#FFFFFF'
-      })
-      logoutButton.addEventListener('mouseleave', () => {
-        logoutButton.style.background = 'rgba(255,255,255,0.08)'
-        logoutButton.style.color = '#D5E4EC'
-      })
-      sidebarFooter.appendChild(logoutButton)
-    }
 
     void runDashboardScript(getExecutableDashboardScript())
       .then((listeners) => {
@@ -2087,6 +2224,9 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: `${MEDSHIELD_STYLE}\n${MEDSHIELD_STYLE_OVERRIDES}` }} />
+      <button className="sidebar-logout-btn react-sidebar-logout-btn" type="button" onClick={handleLogout} disabled={isLoggingOut}>
+        {isLoggingOut ? 'Logging Out...' : 'Log Out'}
+      </button>
       <div ref={rootRef} className="medshield-root" />
     </>
   )

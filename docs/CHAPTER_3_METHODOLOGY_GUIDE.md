@@ -43,6 +43,8 @@ The system used historical data only. The sales dataset covers 2021 to 2025, the
 
 Use these sources in Chapter 2 or Chapter 3 when explaining the methodology and data sources:
 
+Use `docs/RRL_DISEASE_WEATHER_PHARMA_DEMAND_GUIDE.md` for the literature-backed argument connecting disease, weather, and pharmaceutical demand forecasting.
+
 | Topic | Source | How to use it |
 |---|---|---|
 | CRISP-DM | Chapman et al., CRISP-DM 1.0, and IBM SPSS Modeler CRISP-DM documentation | Supports the six-phase project lifecycle used in the capstone. |

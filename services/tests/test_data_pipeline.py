@@ -13,6 +13,8 @@ from services.data_pipeline import (
     _alert_level,
     _normalize_headers,
     _read_csv,
+    _supabase_headers,
+    _supabase_resource_schema,
     _severity_index,
     clean_sales_rows,
     weather_effects,
@@ -256,6 +258,23 @@ class WeatherSeverityTests(unittest.TestCase):
             self.assertEqual(result["metadata"]["grain"], "daily")
             self.assertEqual(result["metadata"]["sales_matched_rows"], 1)
             self.assertEqual(result["rows"][0]["sales_revenue"], 150)
+
+
+class SupabaseSchemaRoutingTests(unittest.TestCase):
+    def test_resources_route_to_namespaced_schemas(self) -> None:
+        self.assertEqual(_supabase_resource_schema("dim_product"), "medshield_common")
+        self.assertEqual(_supabase_resource_schema("etl_pipeline_run"), "medshield_etl")
+        self.assertEqual(_supabase_resource_schema("fact_sales_transactions"), "medshield_sales")
+        self.assertEqual(_supabase_resource_schema("fact_weather_signal"), "medshield_external")
+        self.assertEqual(_supabase_resource_schema("rpc/refresh_sales_aggregates"), "medshield_sales")
+
+    def test_headers_include_postgrest_schema_profile(self) -> None:
+        with patch.dict("os.environ", {"SUPABASE_SERVICE_ROLE_KEY": "test-key"}):
+            headers = _supabase_headers("return=representation", "medshield_sales")
+
+        self.assertEqual(headers["Accept-Profile"], "medshield_sales")
+        self.assertEqual(headers["Content-Profile"], "medshield_sales")
+        self.assertEqual(headers["Prefer"], "return=representation")
 
 
 if __name__ == "__main__":

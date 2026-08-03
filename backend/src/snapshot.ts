@@ -37,10 +37,20 @@ const REFERENCE_DATA_PATH = path.resolve(
   'data',
   'sales_data.json',
 )
+function envNumber(name: string, fallback: number): number {
+  const value = Number(process.env[name])
+  return Number.isFinite(value) && value > 0 ? value : fallback
+}
+
+const SERVICE_TIMEOUT_MS = envNumber('DASHBOARD_SERVICE_TIMEOUT_MS', 2500)
+const SNAPSHOT_CACHE_TTL_MS = envNumber('DASHBOARD_SNAPSHOT_CACHE_TTL_MS', 30000)
+
+let snapshotCache: { data: DashboardSnapshot; expiresAt: number } | null = null
+let snapshotLoad: Promise<DashboardSnapshot> | null = null
 
 async function fetchJson<T>(url: string): Promise<T> {
   const controller = new AbortController()
-  const timeout = setTimeout(() => controller.abort(), 20000)
+  const timeout = setTimeout(() => controller.abort(), SERVICE_TIMEOUT_MS)
 
   try {
     const response = await fetch(url, { signal: controller.signal })
@@ -58,7 +68,7 @@ async function loadReferenceSnapshot(): Promise<DashboardSnapshot> {
   return JSON.parse(raw) as DashboardSnapshot
 }
 
-export async function loadSnapshot(): Promise<DashboardSnapshot> {
+async function loadFreshSnapshot(): Promise<DashboardSnapshot> {
   try {
     const [
       totals,
@@ -147,4 +157,27 @@ export async function loadSnapshot(): Promise<DashboardSnapshot> {
   } catch {
     return await loadReferenceSnapshot()
   }
+}
+
+export async function loadSnapshot(): Promise<DashboardSnapshot> {
+  const now = Date.now()
+  if (snapshotCache && snapshotCache.expiresAt > now) {
+    return snapshotCache.data
+  }
+
+  if (!snapshotLoad) {
+    snapshotLoad = loadFreshSnapshot()
+      .then((data) => {
+        snapshotCache = {
+          data,
+          expiresAt: Date.now() + SNAPSHOT_CACHE_TTL_MS,
+        }
+        return data
+      })
+      .finally(() => {
+        snapshotLoad = null
+      })
+  }
+
+  return snapshotLoad
 }

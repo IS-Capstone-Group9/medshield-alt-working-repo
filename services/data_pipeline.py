@@ -794,13 +794,47 @@ def warehouse_write_enabled() -> bool:
     return bool(os.getenv("SUPABASE_URL", "").strip() and _service_role_key())
 
 
-def _supabase_headers(prefer: str | None = None) -> dict[str, str]:
+SUPABASE_SCHEMA_BY_RESOURCE = {
+    "dim_date": "medshield_common",
+    "dim_month": "medshield_common",
+    "dim_area": "medshield_common",
+    "dim_product": "medshield_common",
+    "dim_product_alias": "medshield_common",
+    "dim_source_system": "medshield_etl",
+    "etl_pipeline_run": "medshield_etl",
+    "etl_source_extract": "medshield_etl",
+    "stg_sales_transactions": "medshield_sales",
+    "fact_sales_transactions": "medshield_sales",
+    "fact_monthly_sales": "medshield_sales",
+    "fact_area_summary": "medshield_sales",
+    "fact_product_summary": "medshield_sales",
+    "fact_year_summary": "medshield_sales",
+    "fact_seasonality": "medshield_sales",
+    "fact_data_completeness": "medshield_sales",
+    "stg_doh_historical": "medshield_external",
+    "stg_pagasa_historical": "medshield_external",
+    "stg_weather_api_observations": "medshield_external",
+    "fact_disease_signal": "medshield_external",
+    "fact_weather_signal": "medshield_external",
+    "refresh_sales_aggregates": "medshield_sales",
+}
+
+
+def _supabase_resource_schema(resource: str) -> str | None:
+    normalized = resource.removeprefix("rpc/")
+    return SUPABASE_SCHEMA_BY_RESOURCE.get(normalized)
+
+
+def _supabase_headers(prefer: str | None = None, schema: str | None = None) -> dict[str, str]:
     key = _service_role_key()
     headers = {
         "apikey": key,
         "Authorization": f"Bearer {key}",
         "Content-Type": "application/json",
     }
+    if schema:
+        headers["Accept-Profile"] = schema
+        headers["Content-Profile"] = schema
     if prefer:
         headers["Prefer"] = prefer
     return headers
@@ -815,10 +849,11 @@ def _supabase_request(
     prefer: str | None = None,
 ) -> Any:
     base_url = os.getenv("SUPABASE_URL", "").rstrip("/")
+    schema = _supabase_resource_schema(resource)
     response = requests.request(
         method,
         f"{base_url}/rest/v1/{resource}",
-        headers=_supabase_headers(prefer),
+        headers=_supabase_headers(prefer, schema),
         params=params,
         json=payload,
         timeout=60,

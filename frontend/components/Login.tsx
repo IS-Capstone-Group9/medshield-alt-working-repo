@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useAuth } from '../lib/AuthContext'
+import { isSupabaseBrowserConfigured } from '../lib/supabase/client'
 
 interface LoginProps {
   onLoginSuccess: () => void
@@ -57,13 +58,19 @@ export default function Login({ onLoginSuccess }: LoginProps) {
   const [loginError, setLoginError] = useState('')
   const [loginLoading, setLoginLoading] = useState(false)
   const { login } = useAuth()
+  const useSupabaseAuth = isSupabaseBrowserConfigured()
 
   const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault()
     setLoginError('')
 
     if (!username || !password) {
-      setLoginError('Please enter both username and password.')
+      setLoginError(useSupabaseAuth ? 'Please enter both email and password.' : 'Please enter both username and password.')
+      return
+    }
+
+    if (useSupabaseAuth && !username.includes('@')) {
+      setLoginError('Supabase Auth sign-in requires an email address.')
       return
     }
 
@@ -493,7 +500,7 @@ export default function Login({ onLoginSuccess }: LoginProps) {
 
             <div className="login-field-group">
               <label className="login-label" htmlFor="username">
-                Username or Email
+                {useSupabaseAuth ? 'Email' : 'Username or Email'}
               </label>
               <div className="login-input-wrap">
                 <span className="login-input-icon">
@@ -505,7 +512,7 @@ export default function Login({ onLoginSuccess }: LoginProps) {
                   type="text"
                   value={username}
                   onChange={(event) => setUsername(event.target.value)}
-                  placeholder="Enter your username"
+                  placeholder={useSupabaseAuth ? 'Enter your email' : 'Enter your username'}
                   autoComplete="username"
                 />
               </div>

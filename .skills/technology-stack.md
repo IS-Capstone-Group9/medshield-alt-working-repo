@@ -1,7 +1,7 @@
 # Technology Stack Standards
 
 ## Description
-This file defines the canonical stack for the MedShield capstone. Use it to keep implementation choices aligned across frontend, backend, database, deployment, and observability work. The stack should support the paper’s business narrative: a dashboard for pharmaceutical sales analysis, territory performance, product prioritization, and inventory decision support. When there is a choice between a new tool and the documented stack, default to the documented stack unless the change solves a real problem that the current stack cannot address.
+This file defines the canonical stack for the MedShield capstone. Use it to keep implementation choices aligned across frontend, backend, database, deployment, and observability work. The stack should support the paper's business narrative: a dashboard for pharmaceutical sales analysis, territory performance, product prioritization, and inventory decision support. When there is a choice between a new tool and the documented stack, default to the documented stack unless the change solves a real problem that the current stack cannot address.
 
 ## Canonical Stack
 

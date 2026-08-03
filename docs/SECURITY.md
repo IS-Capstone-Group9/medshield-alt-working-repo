@@ -6,11 +6,12 @@ MedShield should be treated as a SaaS-style decision-support system. Even during
 
 | Area | Control |
 |---|---|
-| Login | Gateway validates credentials through Supabase RPC when configured, otherwise through the local demo auth store. |
-| Session | Gateway issues random bearer tokens with expiration after successful login. |
-| Reload behavior | Frontend stores the token in `sessionStorage` by default or `localStorage` when "remember me" is selected, then restores the user through `/api/auth/me`. |
-| Logout | Frontend calls `/api/auth/logout` and clears browser token storage. |
-| Dashboard APIs | Analytics and model endpoints require `Authorization: Bearer <token>`. |
+| Login | Frontend uses Supabase Auth email/password when `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` are configured; otherwise local demo auth can be used for development. |
+| Session | Supabase Auth manages the browser session for the production-style path. Local fallback mode still uses gateway-issued bearer tokens. |
+| Route protection | Next.js middleware redirects unauthenticated users away from protected app routes when Supabase Auth is configured. |
+| Reload behavior | Supabase sessions are restored through the Supabase client. Local fallback mode restores the gateway token through `/api/auth/me`. |
+| Logout | Supabase logout clears the Supabase browser session. Local fallback mode calls `/api/auth/logout` and clears browser token storage. |
+| Dashboard APIs | Analytics and model endpoints require `Authorization: Bearer <token>` and the gateway validates Supabase Auth tokens before serving data. |
 | Dashboard audit | The dashboard records local browser audit entries for navigation, theme changes, filters, uploads, help, dataset refreshes, and logout. |
 | Password storage | Local fallback accounts use salted scrypt password hashes. |
 | External data | DOH, PAGASA, and weather API keys must stay server-side or in ETL jobs, never in frontend code. |
@@ -19,7 +20,7 @@ MedShield should be treated as a SaaS-style decision-support system. Even during
 
 ## Local Development
 
-Use `USE_SUPABASE=false` when Supabase credentials are not configured. If `USE_SUPABASE=true` with invalid or placeholder keys, the gateway will fall back to local auth and log a warning.
+Use `USE_SUPABASE=false` when Supabase credentials are not configured. To test Supabase Auth locally, configure the public Next.js variables and server-side Supabase variables with the same `medshield` project, then set `USE_SUPABASE=true`.
 
 Default local admin account:
 
@@ -35,12 +36,10 @@ Change or disable the demo admin before any shared deployment.
 
 Before real SaaS deployment:
 
-1. Replace local in-memory gateway sessions with Supabase Auth or signed JWT validation.
-2. Move token storage to secure, HttpOnly, SameSite cookies if the deployment model allows it.
-3. Enforce Supabase row-level security by tenant, role, and organization.
-4. Persist uploads to private storage and staging tables, not public frontend files.
-5. Validate file type, size, row counts, required columns, and malformed values on upload.
-6. Persist audit logs server-side for login, logout, upload, model run, and recommendation publish events.
-7. Keep external API keys in environment variables or secret storage only.
-8. Allowlist weather provider hosts, record provenance, and retain last-known-good data on provider failure.
-9. Rotate any Supabase service-role key that has been pasted into chat, screenshots, issue trackers, or shared terminals.
+1. Enforce Supabase row-level security by tenant, role, and organization.
+2. Persist uploads to private storage and staging tables, not public frontend files.
+3. Validate file type, size, row counts, required columns, and malformed values on upload.
+4. Persist audit logs server-side for login, logout, upload, model run, and recommendation publish events.
+5. Keep external API keys in environment variables or secret storage only.
+6. Allowlist weather provider hosts, record provenance, and retain last-known-good data on provider failure.
+7. Rotate any Supabase service-role key that has been pasted into chat, screenshots, issue trackers, or shared terminals.

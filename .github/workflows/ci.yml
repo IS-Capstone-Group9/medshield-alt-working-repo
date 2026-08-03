@@ -1,26 +1,127 @@
 name: CI
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
 
 jobs:
-  build:
-    name: Basic CI
+  backend:
+    name: Backend TypeScript build
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-      - name: Install (if package.json present)
+          node-version: 20
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build gateway
+        run: npm run build
+
+  frontend:
+    name: Frontend Next.js build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build dashboard
+        env:
+          NEXT_PUBLIC_API_BASE_URL: http://localhost:5000
+          NEXT_PUBLIC_SUPABASE_URL: ""
+          NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ""
+        run: npm run build
+
+  python:
+    name: Python services and analytics jobs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Cache pip downloads
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-${{ runner.os }}-${{ hashFiles('services/analytics_service/requirements.txt', 'services/product_service/requirements.txt') }}
+          restore-keys: |
+            pip-${{ runner.os }}-
+
+      - name: Install service dependencies
         run: |
-          if [ -f package.json ]; then npm ci; else echo "no package.json, skipping"; fi
-      - name: Run tests (placeholder)
-        run: |
-          if [ -f package.json ] && grep -q "test" package.json; then npm test; else echo "no tests configured"; fi
-      - name: Lint check (placeholder)
-        run: echo "Add lint commands to the workflow as needed"
+          python -m pip install --upgrade pip
+          pip install -r services/analytics_service/requirements.txt -r services/product_service/requirements.txt
+
+      - name: Run Python unit tests
+        run: python -m unittest discover services/tests
+
+      - name: Build medical-demand split
+        run: python services/analytics_service/jobs/build_medical_demand_dataset.py
+
+      - name: Run model computation smoke test
+        run: python services/analytics_service/jobs/run_model_computation_start.py
+
+      - name: Upload analytics evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: analytics-smoke-output
+          if-no-files-found: error
+          path: |
+            outputs/model_computation_start_20260623/model_computation_start_summary.json
+            outputs/model_computation_start_20260623/fact_model_evaluation_local.csv
+            outputs/medical_demand_cleaning_*/medical_demand_cleaning_report.json
+
+  docker:
+    name: Docker image build
+    runs-on: ubuntu-latest
+    needs: [backend, frontend, python]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build backend image
+        run: docker build -t medshield-backend:test ./backend
+
+      - name: Build frontend image
+        run: docker build -t medshield-frontend:test ./frontend
+
+      - name: Build services image
+        run: docker build -t medshield-services:test -f services/Dockerfile .

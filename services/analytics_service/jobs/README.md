@@ -31,6 +31,20 @@ Use this job before predictive or prescriptive model runs. It answers what happe
 
 ## Model Computation Start
 
+Before running model computation for pharmaceutical demand, build the provisional medical-demand split:
+
+```powershell
+python services\analytics_service\jobs\build_medical_demand_dataset.py
+```
+
+This writes:
+
+- `data/medshield/processed/sales_transactions_medical_demand.json.gz`,
+- `data/medshield/processed/sales_transactions_non_medical_excluded.json.gz`,
+- `outputs/medical_demand_cleaning_YYYYMMDD/medical_demand_cleaning_report.json`.
+
+The split excludes likely non-medical business items from pharmaceutical model inputs while preserving a reconciliation and exclusion audit.
+
 Run:
 
 ```powershell
@@ -52,5 +66,7 @@ The current job performs the feasible sales-only computation steps:
 - year-over-year growth,
 - seasonal naive baseline forecast,
 - local DSS-style forecast, priority, and evaluation output files.
+
+When `sales_transactions_medical_demand.json.gz` exists, this job uses it as the model input. Otherwise it falls back to the full adjusted sales dataset and reports the contamination limitation.
 
 The job intentionally blocks or downgrades DOH, PAGASA, weather-adjusted, XGBoost, and real inventory optimization outputs until their required inputs are present and approved.

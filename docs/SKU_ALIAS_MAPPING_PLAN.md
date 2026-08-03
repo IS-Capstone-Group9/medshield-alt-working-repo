@@ -61,6 +61,8 @@ node tools/profile_data_readiness.mjs
 
 Review `outputs/data_readiness_profile/product_alias_candidates.csv`, then move approved mappings into `datasources/templates/product_master_mapping.csv`.
 
+Use `docs/NON_MEDICAL_PRODUCT_CLASSIFICATION_GUIDE.md` and `outputs/product_classification_review/likely_non_medical_product_candidates.csv` to review products that should be excluded from pharmaceutical disease/weather demand models.
+
 ## Acceptance Criteria
 
 The first product master is usable when:
