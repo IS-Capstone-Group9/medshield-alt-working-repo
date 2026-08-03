@@ -1,593 +1,1246 @@
 {
-  "totals": {
-    "total_revenue": 292099686.11,
-    "total_income": 196968364.2,
-    "total_transactions": 16686,
-    "top_product": "PAGBILAO # 6,334,470",
-    "top_area": "Government",
-    "avg_margin": 0.674319
-  },
   "monthly": [
     {
-      "period": "2021-01",
-      "revenue": 8789896.23,
-      "income": 6268892.09
-    },
-    {
-      "period": "2021-02",
-      "revenue": 3067470.64,
-      "income": 1876557.41
-    },
-    {
-      "period": "2021-03",
-      "revenue": 2642814.24,
-      "income": 1778655.66
-    },
-    {
-      "period": "2021-04",
-      "revenue": 4446869.07,
-      "income": 2814742.51
-    },
-    {
-      "period": "2021-05",
-      "revenue": 5097442.98,
-      "income": 3516188.48
-    },
-    {
-      "period": "2021-06",
-      "revenue": 5004047.79,
-      "income": 3789214.33
-    },
-    {
-      "period": "2021-07",
-      "revenue": 5870496.46,
-      "income": 4165528.98
-    },
-    {
-      "period": "2021-08",
-      "revenue": 10262506.25,
-      "income": 6114492.31
-    },
-    {
-      "period": "2021-09",
-      "revenue": 8215366.32,
-      "income": 5349791.61
-    },
-    {
-      "period": "2021-10",
-      "revenue": 12381539.54,
-      "income": 7254358.03
-    },
-    {
-      "period": "2021-11",
-      "revenue": 9885768.41,
-      "income": 7342041.19
-    },
-    {
-      "period": "2021-12",
-      "revenue": 2781596.91,
-      "income": 1742056.27
-    },
-    {
-      "period": "2022-01",
-      "revenue": 2460196.23,
-      "income": 1811995.95
-    },
-    {
-      "period": "2022-02",
-      "revenue": 9554232.23,
-      "income": 6284459.61
-    },
-    {
-      "period": "2022-03",
-      "revenue": 9447042.16,
-      "income": 6342342.63
-    },
-    {
-      "period": "2022-04",
-      "revenue": 2621829.63,
-      "income": 1668960.63
-    },
-    {
-      "period": "2022-05",
-      "revenue": 4541521.01,
-      "income": 2914688.12
-    },
-    {
-      "period": "2022-06",
-      "revenue": 10395468.03,
-      "income": 7419485.99
-    },
-    {
-      "period": "2022-07",
-      "revenue": 3719115.58,
-      "income": 2638013.09
-    },
-    {
-      "period": "2022-08",
-      "revenue": 2808192.24,
-      "income": 1651889.69
-    },
-    {
-      "period": "2022-09",
-      "revenue": 2907592.88,
-      "income": 1737073.4
-    },
-    {
-      "period": "2022-10",
-      "revenue": 7117371.04,
-      "income": 4972578.17
-    },
-    {
-      "period": "2022-11",
-      "revenue": 5010554.22,
-      "income": 3533906.3
-    },
-    {
-      "period": "2022-12",
-      "revenue": 2976924.63,
-      "income": 1809811.75
-    },
-    {
       "period": "2023-01",
-      "revenue": 5126545.2,
-      "income": 3517526.03
+      "revenue": 7886979,
+      "income": 4396246
     },
     {
       "period": "2023-02",
-      "revenue": 1248841.5,
-      "income": 598507.74
+      "revenue": 14524875,
+      "income": 7775425
     },
     {
       "period": "2023-03",
-      "revenue": 2315228.88,
-      "income": 1283919.5
+      "revenue": 2446808,
+      "income": 1464677
     },
     {
       "period": "2023-04",
-      "revenue": 1515817.95,
-      "income": 930116.84
+      "revenue": 1452833,
+      "income": 916579
     },
     {
       "period": "2023-05",
-      "revenue": 14071250.3,
-      "income": 8335222.73
+      "revenue": 24332170,
+      "income": 17310994
     },
     {
       "period": "2023-06",
-      "revenue": 6416046.23,
-      "income": 22544391.01
+      "revenue": 8054552,
+      "income": 3066552
     },
     {
       "period": "2023-07",
-      "revenue": 4954092.8,
-      "income": 3098190.88
+      "revenue": 2671148,
+      "income": 1307843
     },
     {
       "period": "2023-08",
-      "revenue": 2850482.5,
-      "income": 1630778.12
+      "revenue": 2864360,
+      "income": 1700406
     },
     {
       "period": "2023-09",
-      "revenue": 5020290.6,
-      "income": 4194954.51
+      "revenue": 5174588,
+      "income": 4260018
     },
     {
       "period": "2023-10",
-      "revenue": 2838304.4,
-      "income": 1657954.75
+      "revenue": 2435790,
+      "income": 1375121
     },
     {
       "period": "2023-11",
-      "revenue": 15598445.49,
-      "income": 11059305.68
+      "revenue": 2215537,
+      "income": 1295268
     },
     {
       "period": "2023-12",
-      "revenue": 436505.0,
-      "income": 282247.81
+      "revenue": 938278,
+      "income": 596216
     },
     {
       "period": "2024-01",
-      "revenue": 1715397.11,
-      "income": 1155435.7
+      "revenue": 1854032,
+      "income": 1242955
     },
     {
       "period": "2024-02",
-      "revenue": 1990691.64,
-      "income": 1267124.8
+      "revenue": 935772,
+      "income": 610016
     },
     {
       "period": "2024-03",
-      "revenue": 1992640.11,
-      "income": 1317230.14
+      "revenue": 1882468,
+      "income": 1282649
     },
     {
       "period": "2024-04",
-      "revenue": 2098631.08,
-      "income": 1057349.08
+      "revenue": 1972572,
+      "income": 966663
     },
     {
       "period": "2024-05",
-      "revenue": 2897661.28,
-      "income": 2012922.84
+      "revenue": 3968829,
+      "income": 2400178
     },
     {
       "period": "2024-06",
-      "revenue": 6876134.67,
-      "income": 3596851.73
+      "revenue": 7680483,
+      "income": 3698235
     },
     {
       "period": "2024-07",
-      "revenue": 3145105.07,
-      "income": 1800800.55
+      "revenue": 6126047,
+      "income": 3001630
     },
     {
       "period": "2024-08",
-      "revenue": 3579698.01,
-      "income": 1866755.49
+      "revenue": 4199426,
+      "income": 1884904
     },
     {
       "period": "2024-09",
-      "revenue": 2163616.8,
-      "income": 1214044.75
+      "revenue": 2741719,
+      "income": 1398804
     },
     {
       "period": "2024-10",
-      "revenue": 3949858.63,
-      "income": 1872584.64
+      "revenue": 2970389,
+      "income": 1375746
     },
     {
       "period": "2024-11",
-      "revenue": 3449077.72,
-      "income": 1918609.36
+      "revenue": 2292046,
+      "income": 1175293
     },
     {
       "period": "2024-12",
-      "revenue": 16564393.76,
-      "income": 8633391.7
+      "revenue": 20160857,
+      "income": 7839037
+    },
+    {
+      "period": "2025-01",
+      "revenue": 16174874,
+      "income": 9288834
     },
     {
       "period": "2025-02",
-      "revenue": 149217.13,
-      "income": 91351.53
+      "revenue": 13256075,
+      "income": 5275840
+    },
+    {
+      "period": "2025-03",
+      "revenue": 2467557,
+      "income": 1192572
+    },
+    {
+      "period": "2025-04",
+      "revenue": 5591151,
+      "income": 2744402
     },
     {
       "period": "2025-05",
-      "revenue": 2156.0,
-      "income": 1096.0
+      "revenue": 21275754,
+      "income": 9332939
     },
     {
       "period": "2025-06",
-      "revenue": 662706.48,
-      "income": 419036.74
+      "revenue": 14762490,
+      "income": 7602219
+    },
+    {
+      "period": "2025-07",
+      "revenue": 20187605,
+      "income": 12057620
     },
     {
       "period": "2025-08",
-      "revenue": 140912.0,
-      "income": 100932.0
+      "revenue": 8798724,
+      "income": 4527893
     },
     {
       "period": "2025-09",
-      "revenue": 6106321.7,
-      "income": 2311177.46
+      "revenue": 20457958,
+      "income": 8797095
+    },
+    {
+      "period": "2025-10",
+      "revenue": 12475864,
+      "income": 5093701
     },
     {
       "period": "2025-11",
-      "revenue": 9116493.94,
-      "income": 3774364.35
+      "revenue": 24953581,
+      "income": 12773780
     },
     {
       "period": "2025-12",
-      "revenue": 21101267.41,
-      "income": 8626465.54
+      "revenue": 23338616,
+      "income": 10804071
     }
   ],
   "by_area": [
     {
       "area": "Government",
-      "revenue": 154838070.29,
-      "income": 95873365.24
+      "revenue": 270117650,
+      "income": 153609835
     },
     {
       "area": "Hospital",
-      "revenue": 70281490.31,
-      "income": 55177762.66
+      "revenue": 114314314,
+      "income": 58028510
     },
     {
       "area": "Quezon",
-      "revenue": 15013207.52,
-      "income": 11799161.55
-    },
-    {
-      "area": "Equipment",
-      "revenue": 13030659.73,
-      "income": 8144847.97
+      "revenue": 19987352,
+      "income": 11824349
     },
     {
       "area": "Batangas",
-      "revenue": 11372216.8,
-      "income": 8338282.14
+      "revenue": 14418660,
+      "income": 9592370
     },
     {
       "area": "Marinduque",
-      "revenue": 8783862.71,
-      "income": 5107250.47
+      "revenue": 10901126,
+      "income": 5718502
     },
     {
-      "area": "Admin",
-      "revenue": 6905819.34,
-      "income": 3831697.79
-    },
-    {
-      "area": "Camarines Norte",
-      "revenue": 3120024.82,
-      "income": 2358725.69
-    },
-    {
-      "area": "Supplies",
-      "revenue": 2402522.0,
-      "income": 1905927.77
+      "area": "Cam Norte",
+      "revenue": 3107190,
+      "income": 1448487
     },
     {
       "area": "Cavite",
-      "revenue": 1655025.76,
-      "income": 1475316.71
-    },
-    {
-      "area": "Camarines Sur",
-      "revenue": 1634572.5,
-      "income": 1149261.52
+      "revenue": 1894007,
+      "income": 1170527
     },
     {
       "area": "Laguna",
-      "revenue": 1608953.4,
-      "income": 750155.98
+      "revenue": 1608953,
+      "income": 733910
+    },
+    {
+      "area": "Cam Sur",
+      "revenue": 1476852,
+      "income": 996664
     },
     {
       "area": "Pharma",
-      "revenue": 594455.0,
-      "income": 459010.13
+      "revenue": 581855,
+      "income": 448720
     },
     {
       "area": "Albay",
-      "revenue": 517862.97,
-      "income": 343562.17
-    },
-    {
-      "area": "Lower Cavite",
-      "revenue": 336087.64,
-      "income": 247915.29
-    },
-    {
-      "area": "Personal",
-      "revenue": 3967.0,
-      "income": 2021.0
-    },
-    {
-      "area": "Losses",
-      "revenue": 888.32,
-      "income": 4100.12
+      "revenue": 519920,
+      "income": 343562
     }
   ],
   "top_products": [
     {
+      "product": "PAGBILAO # 13,500,000",
+      "revenue": 24797580,
+      "qty": 2,
+      "income": 16338881,
+      "abc": "A",
+      "pct_of_total": 27.7
+    },
+    {
       "product": "PAGBILAO # 6,334,470",
-      "revenue": 6333000.0,
-      "qty": 1.0,
-      "income": 3183000.0,
+      "revenue": 12666000,
+      "qty": 2,
+      "income": 6599935,
       "abc": "A",
-      "pct_of_total": 2.1681,
-      "rank": 1
-    },
-    {
-      "product": "BUPIRIGHT AMPULE",
-      "revenue": 4711236.74,
-      "qty": 7550.0,
-      "income": 3458391.74,
-      "abc": "A",
-      "pct_of_total": 1.6129,
-      "rank": 2
-    },
-    {
-      "product": "JUBI -R 100MG",
-      "revenue": 4592500.0,
-      "qty": 750.0,
-      "income": 2217500.0,
-      "abc": "A",
-      "pct_of_total": 1.5722,
-      "rank": 3
-    },
-    {
-      "product": "EVAPROST 250MCG/ML",
-      "revenue": 4480397.0,
-      "qty": 1190.0,
-      "income": 4351697.0,
-      "abc": "A",
-      "pct_of_total": 1.5339,
-      "rank": 4
-    },
-    {
-      "product": "PESO # 3,450,000.00",
-      "revenue": 3448500.0,
-      "qty": 1.0,
-      "income": 1179387.0,
-      "abc": "A",
-      "pct_of_total": 1.1806,
-      "rank": 5
-    },
-    {
-      "product": "EUROXONE 1G",
-      "revenue": 3412396.0,
-      "qty": 8968.0,
-      "income": 2772186.0,
-      "abc": "A",
-      "pct_of_total": 1.1682,
-      "rank": 6
-    },
-    {
-      "product": "SITIXON 1G",
-      "revenue": 3072868.78,
-      "qty": 11330.0,
-      "income": 2690992.78,
-      "abc": "A",
-      "pct_of_total": 1.052,
-      "rank": 7
-    },
-    {
-      "product": "ALBUMINAR-20 20% 50ML",
-      "revenue": 2697000.0,
-      "qty": 1000.0,
-      "income": 1297000.0,
-      "abc": "A",
-      "pct_of_total": 0.9233,
-      "rank": 8
+      "pct_of_total": 14.2
     },
     {
       "product": "MONOWEL 1G IV",
-      "revenue": 2637485.0,
-      "qty": 4100.0,
-      "income": 756521.4,
+      "revenue": 8111735,
+      "qty": 12600,
+      "income": 2331189,
       "abc": "A",
-      "pct_of_total": 0.9029,
-      "rank": 9
+      "pct_of_total": 9.1
+    },
+    {
+      "product": "BUPIRIGHT AMPULE",
+      "revenue": 4744174,
+      "qty": 7232,
+      "income": 3379912,
+      "abc": "A",
+      "pct_of_total": 5.3
+    },
+    {
+      "product": "JUBI -R 100MG",
+      "revenue": 4592500,
+      "qty": 750,
+      "income": 2217500,
+      "abc": "A",
+      "pct_of_total": 5.1
+    },
+    {
+      "product": "EVAPROST 250MCG/ML",
+      "revenue": 4493050,
+      "qty": 658,
+      "income": 2128047,
+      "abc": "A",
+      "pct_of_total": 5.0
+    },
+    {
+      "product": "PAGBILAO # 2,070,000",
+      "revenue": 4138000,
+      "qty": 2,
+      "income": 1390000,
+      "abc": "B",
+      "pct_of_total": 4.6
+    },
+    {
+      "product": "ANTITET 1500IU/0.7ML",
+      "revenue": 3834892,
+      "qty": 1448,
+      "income": 2112380,
+      "abc": "B",
+      "pct_of_total": 4.3
+    },
+    {
+      "product": "PESO # 3,450,000.00",
+      "revenue": 3448500,
+      "qty": 1,
+      "income": 1179387,
+      "abc": "B",
+      "pct_of_total": 3.9
+    },
+    {
+      "product": "EUROXONE 1G",
+      "revenue": 3410596,
+      "qty": 8766,
+      "income": 2770678,
+      "abc": "B",
+      "pct_of_total": 3.8
     },
     {
       "product": "BUPIRIGHT 5MG/ML 0.5% IN 8% 4ML",
-      "revenue": 2587535.25,
-      "qty": 6088.0,
-      "income": 1489705.27,
-      "abc": "A",
-      "pct_of_total": 0.8858,
-      "rank": 10
+      "revenue": 3164845,
+      "qty": 7873,
+      "income": 1773358,
+      "abc": "B",
+      "pct_of_total": 3.5
     },
     {
-      "product": "VAXIGRIP TETRA INFLUENZA VACCINE",
-      "revenue": 2424824.95,
-      "qty": 1408.0,
-      "income": 1439224.95,
-      "abc": "A",
-      "pct_of_total": 0.8301,
-      "rank": 11
+      "product": "SITIXON 1G",
+      "revenue": 3076669,
+      "qty": 11110,
+      "income": 2690993,
+      "abc": "C",
+      "pct_of_total": 3.4
     },
     {
       "product": "TRIVASC 35MG MR",
-      "revenue": 2415781.59,
-      "qty": 2345.0,
-      "income": 1496594.09,
-      "abc": "A",
-      "pct_of_total": 0.827,
-      "rank": 12
+      "revenue": 3056145,
+      "qty": 2183,
+      "income": 1454180,
+      "abc": "C",
+      "pct_of_total": 3.4
     },
     {
-      "product": "PAGBILAO # 2,316,267-1",
-      "revenue": 2314000.0,
-      "qty": 1.0,
-      "income": 981610.0,
-      "abc": "A",
-      "pct_of_total": 0.7922,
-      "rank": 13
+      "product": "SPEEDA 2.5IU/0.5ML",
+      "revenue": 2975310,
+      "qty": 425,
+      "income": 970810,
+      "abc": "C",
+      "pct_of_total": 3.3
     },
     {
-      "product": "MERAZOL 40MG",
-      "revenue": 2282840.45,
-      "qty": 743.03,
-      "income": 2105139.95,
-      "abc": "A",
-      "pct_of_total": 0.7815,
-      "rank": 14
-    },
-    {
-      "product": "HYCLENS SKIN CLEANSER (60ML)",
-      "revenue": 2180712.0,
-      "qty": 8535.0,
-      "income": 1382262.6,
-      "abc": "A",
-      "pct_of_total": 0.7466,
-      "rank": 15
+      "product": "TROYNOXA-60 60MG/0.6ML",
+      "revenue": 2887032,
+      "qty": 2770,
+      "income": 1767952,
+      "abc": "C",
+      "pct_of_total": 3.2
     }
   ],
   "year_summary": [
     {
       "year": "2021",
-      "revenue": 78445814.84,
-      "income": 52012518.87,
-      "transactions": 3415
+      "revenue": 63341656,
+      "income": 42079675,
+      "transactions": 2855
     },
     {
       "year": "2022",
-      "revenue": 63560039.88,
-      "income": 42785205.33,
-      "transactions": 4007
+      "revenue": 60040179,
+      "income": 39994801,
+      "transactions": 3199
     },
     {
       "year": "2023",
-      "revenue": 62391850.85,
-      "income": 59133115.6,
-      "transactions": 5387
+      "revenue": 74997919,
+      "income": 45465345,
+      "transactions": 5784
     },
     {
       "year": "2024",
-      "revenue": 50422905.88,
-      "income": 27713100.78,
-      "transactions": 2836
+      "revenue": 56784640,
+      "income": 26876110,
+      "transactions": 2560
     },
     {
       "year": "2025",
-      "revenue": 37279074.66,
-      "income": 15324423.62,
-      "transactions": 1041
+      "revenue": 183763487,
+      "income": 89499505,
+      "transactions": 3751
     }
   ],
   "seasonality": [
     {
       "month": "Jan",
-      "avg_revenue": 4523008.69
+      "avg_revenue": 25368
     },
     {
       "month": "Feb",
-      "avg_revenue": 3202090.63
+      "avg_revenue": 24143
     },
     {
       "month": "Mar",
-      "avg_revenue": 4099431.35
+      "avg_revenue": 10979
     },
     {
       "month": "Apr",
-      "avg_revenue": 2670786.93
+      "avg_revenue": 18738
     },
     {
       "month": "May",
-      "avg_revenue": 5322006.31
+      "avg_revenue": 35618
     },
     {
       "month": "Jun",
-      "avg_revenue": 5870880.64
+      "avg_revenue": 15622
     },
     {
       "month": "Jul",
-      "avg_revenue": 4422202.48
+      "avg_revenue": 29403
     },
     {
       "month": "Aug",
-      "avg_revenue": 3928358.2
+      "avg_revenue": 19704
     },
     {
       "month": "Sep",
-      "avg_revenue": 4882637.66
+      "avg_revenue": 27345
     },
     {
       "month": "Oct",
-      "avg_revenue": 6571768.4
+      "avg_revenue": 26750
     },
     {
       "month": "Nov",
-      "avg_revenue": 8612067.96
+      "avg_revenue": 25312
     },
     {
       "month": "Dec",
-      "avg_revenue": 8772137.54
+      "avg_revenue": 36272
     }
-  ]
+  ],
+  "forecasts": [
+    {
+      "period": "2026-01",
+      "area": "Overall",
+      "product": "All Products",
+      "model_code": "GBR_DOH_PAGASA_V1",
+      "forecast_scope": "overall",
+      "baseline_forecast": 15917.5,
+      "adjusted_forecast": 15917.5,
+      "lower_bound": 13529.88,
+      "upper_bound": 18305.12,
+      "disease_adjustment_factor": 1.0,
+      "weather_adjustment_factor": 1.0,
+      "confidence_level": 0.95
+    },
+    {
+      "period": "2026-02",
+      "area": "Overall",
+      "product": "All Products",
+      "model_code": "GBR_DOH_PAGASA_V1",
+      "forecast_scope": "overall",
+      "baseline_forecast": 20305.0,
+      "adjusted_forecast": 20305.0,
+      "lower_bound": 17259.25,
+      "upper_bound": 23350.75,
+      "disease_adjustment_factor": 1.0,
+      "weather_adjustment_factor": 1.0,
+      "confidence_level": 0.95
+    },
+    {
+      "period": "2026-03",
+      "area": "Overall",
+      "product": "All Products",
+      "model_code": "GBR_DOH_PAGASA_V1",
+      "forecast_scope": "overall",
+      "baseline_forecast": 12310.0,
+      "adjusted_forecast": 12310.0,
+      "lower_bound": 10463.5,
+      "upper_bound": 14156.5,
+      "disease_adjustment_factor": 1.0,
+      "weather_adjustment_factor": 1.0,
+      "confidence_level": 0.95
+    },
+    {
+      "period": "2026-04",
+      "area": "Overall",
+      "product": "All Products",
+      "model_code": "GBR_DOH_PAGASA_V1",
+      "forecast_scope": "overall",
+      "baseline_forecast": 8645.0,
+      "adjusted_forecast": 8645.0,
+      "lower_bound": 7348.25,
+      "upper_bound": 9941.75,
+      "disease_adjustment_factor": 1.0,
+      "weather_adjustment_factor": 1.0,
+      "confidence_level": 0.95
+    },
+    {
+      "period": "2026-05",
+      "area": "Overall",
+      "product": "All Products",
+      "model_code": "GBR_DOH_PAGASA_V1",
+      "forecast_scope": "overall",
+      "baseline_forecast": 21927.5,
+      "adjusted_forecast": 30259.95,
+      "lower_bound": 25720.96,
+      "upper_bound": 34798.94,
+      "disease_adjustment_factor": 1.2,
+      "weather_adjustment_factor": 1.15,
+      "confidence_level": 0.95
+    },
+    {
+      "period": "2026-06",
+      "area": "Overall",
+      "product": "All Products",
+      "model_code": "GBR_DOH_PAGASA_V1",
+      "forecast_scope": "overall",
+      "baseline_forecast": 70045.0,
+      "adjusted_forecast": 96662.1,
+      "lower_bound": 82162.78,
+      "upper_bound": 111161.41,
+      "disease_adjustment_factor": 1.2,
+      "weather_adjustment_factor": 1.15,
+      "confidence_level": 0.95
+    },
+    {
+      "period": "2026-07",
+      "area": "Overall",
+      "product": "All Products",
+      "model_code": "GBR_DOH_PAGASA_V1",
+      "forecast_scope": "overall",
+      "baseline_forecast": 10922.5,
+      "adjusted_forecast": 20643.53,
+      "lower_bound": 17547.0,
+      "upper_bound": 23740.05,
+      "disease_adjustment_factor": 1.4,
+      "weather_adjustment_factor": 1.35,
+      "confidence_level": 0.95
+    },
+    {
+      "period": "2026-08",
+      "area": "Overall",
+      "product": "All Products",
+      "model_code": "GBR_DOH_PAGASA_V1",
+      "forecast_scope": "overall",
+      "baseline_forecast": 16332.5,
+      "adjusted_forecast": 30868.42,
+      "lower_bound": 26238.16,
+      "upper_bound": 35498.69,
+      "disease_adjustment_factor": 1.4,
+      "weather_adjustment_factor": 1.35,
+      "confidence_level": 0.95
+    },
+    {
+      "period": "2026-09",
+      "area": "Overall",
+      "product": "All Products",
+      "model_code": "GBR_DOH_PAGASA_V1",
+      "forecast_scope": "overall",
+      "baseline_forecast": 45465.0,
+      "adjusted_forecast": 71039.06,
+      "lower_bound": 60383.2,
+      "upper_bound": 81694.92,
+      "disease_adjustment_factor": 1.25,
+      "weather_adjustment_factor": 1.25,
+      "confidence_level": 0.95
+    },
+    {
+      "period": "2026-10",
+      "area": "Overall",
+      "product": "All Products",
+      "model_code": "GBR_DOH_PAGASA_V1",
+      "forecast_scope": "overall",
+      "baseline_forecast": 13375.0,
+      "adjusted_forecast": 20898.44,
+      "lower_bound": 17763.67,
+      "upper_bound": 24033.2,
+      "disease_adjustment_factor": 1.25,
+      "weather_adjustment_factor": 1.25,
+      "confidence_level": 0.95
+    },
+    {
+      "period": "2026-11",
+      "area": "Overall",
+      "product": "All Products",
+      "model_code": "GBR_DOH_PAGASA_V1",
+      "forecast_scope": "overall",
+      "baseline_forecast": 37182.5,
+      "adjusted_forecast": 37182.5,
+      "lower_bound": 31605.12,
+      "upper_bound": 42759.88,
+      "disease_adjustment_factor": 1.0,
+      "weather_adjustment_factor": 1.0,
+      "confidence_level": 0.95
+    },
+    {
+      "period": "2026-12",
+      "area": "Overall",
+      "product": "All Products",
+      "model_code": "GBR_DOH_PAGASA_V1",
+      "forecast_scope": "overall",
+      "baseline_forecast": 14807.5,
+      "adjusted_forecast": 14807.5,
+      "lower_bound": 12586.38,
+      "upper_bound": 17028.62,
+      "disease_adjustment_factor": 1.0,
+      "weather_adjustment_factor": 1.0,
+      "confidence_level": 0.95
+    }
+  ],
+  "external_signals": [
+    {
+      "period": "2026-01",
+      "area": "All",
+      "disease_names": "Respiratory illness",
+      "disease_intensity_index": 1.1,
+      "rainfall_severity_index": 0.34,
+      "disease_alert_level": "watch",
+      "weather_alert_level": "normal",
+      "typhoon_flag": false
+    },
+    {
+      "period": "2026-02",
+      "area": "All",
+      "disease_names": "Dengue",
+      "disease_intensity_index": 1.18,
+      "rainfall_severity_index": 0.3,
+      "disease_alert_level": "watch",
+      "weather_alert_level": "normal",
+      "typhoon_flag": false
+    },
+    {
+      "period": "2026-03",
+      "area": "All",
+      "disease_names": "Dengue",
+      "disease_intensity_index": 1.24,
+      "rainfall_severity_index": 0.38,
+      "disease_alert_level": "watch",
+      "weather_alert_level": "watch",
+      "typhoon_flag": false
+    },
+    {
+      "period": "2026-04",
+      "area": "All",
+      "disease_names": "Dengue",
+      "disease_intensity_index": 1.32,
+      "rainfall_severity_index": 0.44,
+      "disease_alert_level": "warning",
+      "weather_alert_level": "watch",
+      "typhoon_flag": false
+    },
+    {
+      "period": "2026-05",
+      "area": "All",
+      "disease_names": "Dengue",
+      "disease_intensity_index": 1.48,
+      "rainfall_severity_index": 0.52,
+      "disease_alert_level": "warning",
+      "weather_alert_level": "warning",
+      "typhoon_flag": false
+    },
+    {
+      "period": "2026-06",
+      "area": "All",
+      "disease_names": "Leptospirosis",
+      "disease_intensity_index": 1.55,
+      "rainfall_severity_index": 0.61,
+      "disease_alert_level": "warning",
+      "weather_alert_level": "warning",
+      "typhoon_flag": true
+    },
+    {
+      "period": "2026-07",
+      "area": "All",
+      "disease_names": "Leptospirosis",
+      "disease_intensity_index": 1.62,
+      "rainfall_severity_index": 0.68,
+      "disease_alert_level": "critical",
+      "weather_alert_level": "critical",
+      "typhoon_flag": true
+    },
+    {
+      "period": "2026-08",
+      "area": "All",
+      "disease_names": "Dengue",
+      "disease_intensity_index": 1.44,
+      "rainfall_severity_index": 0.63,
+      "disease_alert_level": "warning",
+      "weather_alert_level": "warning",
+      "typhoon_flag": true
+    },
+    {
+      "period": "2026-09",
+      "area": "All",
+      "disease_names": "Influenza-like illness",
+      "disease_intensity_index": 1.3,
+      "rainfall_severity_index": 0.53,
+      "disease_alert_level": "watch",
+      "weather_alert_level": "warning",
+      "typhoon_flag": false
+    },
+    {
+      "period": "2026-10",
+      "area": "All",
+      "disease_names": "Influenza-like illness",
+      "disease_intensity_index": 1.22,
+      "rainfall_severity_index": 0.46,
+      "disease_alert_level": "watch",
+      "weather_alert_level": "watch",
+      "typhoon_flag": false
+    },
+    {
+      "period": "2026-11",
+      "area": "All",
+      "disease_names": "Respiratory illness",
+      "disease_intensity_index": 1.28,
+      "rainfall_severity_index": 0.4,
+      "disease_alert_level": "watch",
+      "weather_alert_level": "watch",
+      "typhoon_flag": false
+    },
+    {
+      "period": "2026-12",
+      "area": "All",
+      "disease_names": "Respiratory illness",
+      "disease_intensity_index": 1.36,
+      "rainfall_severity_index": 0.37,
+      "disease_alert_level": "warning",
+      "weather_alert_level": "watch",
+      "typhoon_flag": false
+    }
+  ],
+  "inventory_recommendations": [
+    {
+      "product": "MONOWEL 1G IV",
+      "area": "All",
+      "annual_demand_units": 18400,
+      "eoq_units": 240,
+      "reorder_point_units": 80,
+      "safety_stock_units": 35,
+      "current_stock_units": 62,
+      "forecast_demand_units": 96,
+      "stock_gap_units": 34,
+      "risk_level": "high",
+      "recommendation": "Reorder before January forecast peak; protect hospital allocation."
+    },
+    {
+      "product": "EUROXONE 1G",
+      "area": "All",
+      "annual_demand_units": 42800,
+      "eoq_units": 360,
+      "reorder_point_units": 120,
+      "safety_stock_units": 52,
+      "current_stock_units": 144,
+      "forecast_demand_units": 155,
+      "stock_gap_units": 11,
+      "risk_level": "medium",
+      "recommendation": "Keep monthly review and supplier lead-time watch."
+    },
+    {
+      "product": "BUPIRIGHT AMPULE",
+      "area": "All",
+      "annual_demand_units": 86200,
+      "eoq_units": 420,
+      "reorder_point_units": 160,
+      "safety_stock_units": 70,
+      "current_stock_units": 215,
+      "forecast_demand_units": 198,
+      "stock_gap_units": -17,
+      "risk_level": "low",
+      "recommendation": "Maintain normal replenishment."
+    },
+    {
+      "product": "TRIVASC 35MG MR",
+      "area": "All",
+      "annual_demand_units": 51000,
+      "eoq_units": 310,
+      "reorder_point_units": 110,
+      "safety_stock_units": 48,
+      "current_stock_units": 128,
+      "forecast_demand_units": 142,
+      "stock_gap_units": 14,
+      "risk_level": "medium",
+      "recommendation": "Replenish within the next planning cycle."
+    },
+    {
+      "product": "ANTITET 1500IU/0.7ML",
+      "area": "All",
+      "annual_demand_units": 98400,
+      "eoq_units": 500,
+      "reorder_point_units": 190,
+      "safety_stock_units": 82,
+      "current_stock_units": 166,
+      "forecast_demand_units": 225,
+      "stock_gap_units": 59,
+      "risk_level": "high",
+      "recommendation": "Pre-position stock for surge and contingency demand."
+    }
+  ],
+  "regional_priorities": [
+    {
+      "area": "Government",
+      "priority_rank": 1,
+      "revenue_score": 0.4,
+      "growth_score": 0.18,
+      "outbreak_risk_index": 0.05,
+      "mcda_score": 0.63,
+      "recommendation": "Prioritize bid readiness and allocation."
+    },
+    {
+      "area": "Hospital",
+      "priority_rank": 2,
+      "revenue_score": 0.22,
+      "growth_score": 0.14,
+      "outbreak_risk_index": 0.08,
+      "mcda_score": 0.44,
+      "recommendation": "Protect fast-moving critical SKUs."
+    },
+    {
+      "area": "Quezon",
+      "priority_rank": 3,
+      "revenue_score": 0.13,
+      "growth_score": 0.09,
+      "outbreak_risk_index": 0.07,
+      "mcda_score": 0.29,
+      "recommendation": "Increase forecast refresh cadence."
+    },
+    {
+      "area": "Batangas",
+      "priority_rank": 4,
+      "revenue_score": 0.09,
+      "growth_score": 0.07,
+      "outbreak_risk_index": 0.04,
+      "mcda_score": 0.2,
+      "recommendation": "Maintain targeted replenishment."
+    },
+    {
+      "area": "Marinduque",
+      "priority_rank": 5,
+      "revenue_score": 0.03,
+      "growth_score": 0.05,
+      "outbreak_risk_index": 0.1,
+      "mcda_score": 0.18,
+      "recommendation": "Keep typhoon contingency stock."
+    }
+  ],
+  "area_clusters": [
+    {
+      "area": "Government",
+      "cluster_id": 1,
+      "cluster_label": "Tier 2 - Steady Growth Region",
+      "revenue": 270117650.0,
+      "income": 153609835.0,
+      "revenue_score": 100.0,
+      "demand_growth_score": 85.0,
+      "outbreak_risk_index": 0.55
+    },
+    {
+      "area": "Hospital",
+      "cluster_id": 2,
+      "cluster_label": "Tier 3 - Emerging Market",
+      "revenue": 114314314.0,
+      "income": 58028510.0,
+      "revenue_score": 42.3,
+      "demand_growth_score": 90.0,
+      "outbreak_risk_index": 0.65
+    },
+    {
+      "area": "Quezon",
+      "cluster_id": 0,
+      "cluster_label": "Tier 1 - High Revenue Hub",
+      "revenue": 19987352.0,
+      "income": 11824349.0,
+      "revenue_score": 7.4,
+      "demand_growth_score": 80.0,
+      "outbreak_risk_index": 0.45
+    },
+    {
+      "area": "Batangas",
+      "cluster_id": 0,
+      "cluster_label": "Tier 1 - High Revenue Hub",
+      "revenue": 14418660.0,
+      "income": 9592370.0,
+      "revenue_score": 5.3,
+      "demand_growth_score": 80.0,
+      "outbreak_risk_index": 0.45
+    },
+    {
+      "area": "Marinduque",
+      "cluster_id": 0,
+      "cluster_label": "Tier 1 - High Revenue Hub",
+      "revenue": 10901126.0,
+      "income": 5718502.0,
+      "revenue_score": 4.0,
+      "demand_growth_score": 80.0,
+      "outbreak_risk_index": 0.45
+    },
+    {
+      "area": "Cam Norte",
+      "cluster_id": 0,
+      "cluster_label": "Tier 1 - High Revenue Hub",
+      "revenue": 3107190.0,
+      "income": 1448487.0,
+      "revenue_score": 1.2,
+      "demand_growth_score": 80.0,
+      "outbreak_risk_index": 0.45
+    },
+    {
+      "area": "Cavite",
+      "cluster_id": 0,
+      "cluster_label": "Tier 1 - High Revenue Hub",
+      "revenue": 1894007.0,
+      "income": 1170527.0,
+      "revenue_score": 0.7,
+      "demand_growth_score": 80.0,
+      "outbreak_risk_index": 0.45
+    },
+    {
+      "area": "Laguna",
+      "cluster_id": 0,
+      "cluster_label": "Tier 1 - High Revenue Hub",
+      "revenue": 1608953.0,
+      "income": 733910.0,
+      "revenue_score": 0.6,
+      "demand_growth_score": 80.0,
+      "outbreak_risk_index": 0.45
+    },
+    {
+      "area": "Cam Sur",
+      "cluster_id": 0,
+      "cluster_label": "Tier 1 - High Revenue Hub",
+      "revenue": 1476852.0,
+      "income": 996664.0,
+      "revenue_score": 0.5,
+      "demand_growth_score": 80.0,
+      "outbreak_risk_index": 0.45
+    },
+    {
+      "area": "Pharma",
+      "cluster_id": 0,
+      "cluster_label": "Tier 1 - High Revenue Hub",
+      "revenue": 581855.0,
+      "income": 448720.0,
+      "revenue_score": 0.2,
+      "demand_growth_score": 80.0,
+      "outbreak_risk_index": 0.45
+    },
+    {
+      "area": "Albay",
+      "cluster_id": 0,
+      "cluster_label": "Tier 1 - High Revenue Hub",
+      "revenue": 519920.0,
+      "income": 343562.0,
+      "revenue_score": 0.2,
+      "demand_growth_score": 80.0,
+      "outbreak_risk_index": 0.45
+    }
+  ],
+  "product_priorities": [
+    {
+      "product": "PAGBILAO # 13,500,000",
+      "model_code": "XGBOOST_URGENCY",
+      "abc_classification": "A",
+      "pareto_rank": 1,
+      "cumulative_revenue_pct": 27.7,
+      "xgboost_urgency_score": 0.88,
+      "risk_level": "high",
+      "recommendation": "Protect allocation and review bid replenishment early."
+    },
+    {
+      "product": "PAGBILAO # 6,334,470",
+      "model_code": "XGBOOST_URGENCY",
+      "abc_classification": "A",
+      "pareto_rank": 2,
+      "cumulative_revenue_pct": 41.9,
+      "xgboost_urgency_score": 0.78,
+      "risk_level": "medium",
+      "recommendation": "Keep allocation visible in weekly planning."
+    },
+    {
+      "product": "MONOWEL 1G IV",
+      "model_code": "XGBOOST_URGENCY",
+      "abc_classification": "A",
+      "pareto_rank": 3,
+      "cumulative_revenue_pct": 51,
+      "xgboost_urgency_score": 0.82,
+      "risk_level": "high",
+      "recommendation": "Monitor hospital demand and reorder buffer."
+    }
+  ],
+  "allocation_recommendations": [
+    {
+      "product": "PAGBILAO # 13,500,000",
+      "available_units": 10000,
+      "recommended_units": 5000,
+      "unit_cost_php": 12398790.0,
+      "allocated_budget_php": 61993950000.0,
+      "objective_value": 250000.0,
+      "optimization_status": "FEASIBLE_APPROXIMATION",
+      "constraints_applied": "Warehouse Capacity (30,000 units) + Inventory Capital Limit (PHP 5M)"
+    },
+    {
+      "product": "PAGBILAO # 6,334,470",
+      "available_units": 10000,
+      "recommended_units": 4500,
+      "unit_cost_php": 6333000.0,
+      "allocated_budget_php": 28498500000.0,
+      "objective_value": 250000.0,
+      "optimization_status": "FEASIBLE_APPROXIMATION",
+      "constraints_applied": "Warehouse Capacity (30,000 units) + Inventory Capital Limit (PHP 5M)"
+    },
+    {
+      "product": "MONOWEL 1G IV",
+      "available_units": 10000,
+      "recommended_units": 6000,
+      "unit_cost_php": 643.79,
+      "allocated_budget_php": 3862740.0,
+      "objective_value": 250000.0,
+      "optimization_status": "FEASIBLE_APPROXIMATION",
+      "constraints_applied": "Warehouse Capacity (30,000 units) + Inventory Capital Limit (PHP 5M)"
+    },
+    {
+      "product": "BUPIRIGHT AMPULE",
+      "available_units": 10000,
+      "recommended_units": 3500,
+      "unit_cost_php": 656.0,
+      "allocated_budget_php": 2296000.0,
+      "objective_value": 250000.0,
+      "optimization_status": "FEASIBLE_APPROXIMATION",
+      "constraints_applied": "Warehouse Capacity (30,000 units) + Inventory Capital Limit (PHP 5M)"
+    },
+    {
+      "product": "JUBI -R 100MG",
+      "available_units": 10000,
+      "recommended_units": 4000,
+      "unit_cost_php": 6123.33,
+      "allocated_budget_php": 24493320.0,
+      "objective_value": 250000.0,
+      "optimization_status": "FEASIBLE_APPROXIMATION",
+      "constraints_applied": "Warehouse Capacity (30,000 units) + Inventory Capital Limit (PHP 5M)"
+    }
+  ],
+  "product_region_matches": [
+    {
+      "match_rank": 1,
+      "target_area": "Government",
+      "similar_area": "Cavite",
+      "similarity_score": 0.9958,
+      "recommended_product": "PAGBILAO # 13,500,000",
+      "rationale": "High demand similarity (99.6%) with Cavite. Recommended for expansion."
+    },
+    {
+      "match_rank": 2,
+      "target_area": "Hospital",
+      "similar_area": "Laguna",
+      "similarity_score": 0.9981,
+      "recommended_product": "BUPIRIGHT AMPULE",
+      "rationale": "High demand similarity (99.8%) with Laguna. Recommended for expansion."
+    },
+    {
+      "match_rank": 3,
+      "target_area": "Quezon",
+      "similar_area": "Albay",
+      "similarity_score": 0.9968,
+      "recommended_product": "PAGBILAO # 2,070,000",
+      "rationale": "High demand similarity (99.7%) with Albay. Recommended for expansion."
+    },
+    {
+      "match_rank": 4,
+      "target_area": "Batangas",
+      "similar_area": "Marinduque",
+      "similarity_score": 0.996,
+      "recommended_product": "EUROXONE 1G",
+      "rationale": "High demand similarity (99.6%) with Marinduque. Recommended for expansion."
+    },
+    {
+      "match_rank": 5,
+      "target_area": "Marinduque",
+      "similar_area": "Hospital",
+      "similarity_score": 0.9978,
+      "recommended_product": "TRIVASC 35MG MR",
+      "rationale": "High demand similarity (99.8%) with Hospital. Recommended for expansion."
+    },
+    {
+      "match_rank": 6,
+      "target_area": "Cam Norte",
+      "similar_area": "Cam Sur",
+      "similarity_score": 0.9983,
+      "recommended_product": "PAGBILAO # 13,500,000",
+      "rationale": "High demand similarity (99.8%) with Cam Sur. Recommended for expansion."
+    },
+    {
+      "match_rank": 7,
+      "target_area": "Cavite",
+      "similar_area": "Pharma",
+      "similarity_score": 0.9965,
+      "recommended_product": "BUPIRIGHT AMPULE",
+      "rationale": "High demand similarity (99.7%) with Pharma. Recommended for expansion."
+    },
+    {
+      "match_rank": 8,
+      "target_area": "Laguna",
+      "similar_area": "Hospital",
+      "similarity_score": 0.9981,
+      "recommended_product": "PAGBILAO # 2,070,000",
+      "rationale": "High demand similarity (99.8%) with Hospital. Recommended for expansion."
+    },
+    {
+      "match_rank": 9,
+      "target_area": "Cam Sur",
+      "similar_area": "Cam Norte",
+      "similarity_score": 0.9983,
+      "recommended_product": "EUROXONE 1G",
+      "rationale": "High demand similarity (99.8%) with Cam Norte. Recommended for expansion."
+    },
+    {
+      "match_rank": 10,
+      "target_area": "Pharma",
+      "similar_area": "Hospital",
+      "similarity_score": 0.9979,
+      "recommended_product": "TRIVASC 35MG MR",
+      "rationale": "High demand similarity (99.8%) with Hospital. Recommended for expansion."
+    },
+    {
+      "match_rank": 11,
+      "target_area": "Albay",
+      "similar_area": "Quezon",
+      "similarity_score": 0.9968,
+      "recommended_product": "PAGBILAO # 13,500,000",
+      "rationale": "High demand similarity (99.7%) with Quezon. Recommended for expansion."
+    }
+  ],
+  "decision_alerts": [
+    {
+      "alert_date": "2026-01-01",
+      "area": "Hospital",
+      "product": "MONOWEL 1G IV",
+      "model_code": "EOQ_ROP_SAFETY",
+      "alert_type": "stock_gap",
+      "severity": "high",
+      "trigger_metric": "stock_gap_units",
+      "threshold_value": 0,
+      "observed_value": 34,
+      "demand_multiplier": 1,
+      "recommendation": "Demand exceeds safety stock. Create replenishment order.",
+      "status": "open"
+    },
+    {
+      "alert_date": "2026-05-01",
+      "area": "All",
+      "product": "ANTITET 1500IU/0.7ML",
+      "model_code": "ALERT_THRESHOLDS",
+      "alert_type": "disease_surge",
+      "severity": "high",
+      "trigger_metric": "disease_intensity_index",
+      "threshold_value": 1.4,
+      "observed_value": 1.48,
+      "demand_multiplier": 1.35,
+      "recommendation": "Increase antipyretic and emergency stock review.",
+      "status": "open"
+    },
+    {
+      "alert_date": "2026-07-01",
+      "area": "Marinduque",
+      "product": "All",
+      "model_code": "ALERT_THRESHOLDS",
+      "alert_type": "weather_risk",
+      "severity": "critical",
+      "trigger_metric": "rainfall_severity_index",
+      "threshold_value": 0.6,
+      "observed_value": 0.68,
+      "demand_multiplier": 1.4,
+      "recommendation": "Pre-position wound care and ORS stock before severe rainfall window.",
+      "status": "open"
+    }
+  ],
+  "model_evaluation": [
+    {
+      "model_code": "PROPHET_BASELINE",
+      "model_name": "Facebook Prophet baseline forecast",
+      "analytics_layer": "predictive",
+      "metric_name": "MAPE",
+      "metric_value": 0,
+      "target_direction": "minimize",
+      "benchmark_value": 0.15,
+      "passed": null,
+      "notes": "Placeholder until historical train/test split is executed."
+    },
+    {
+      "model_code": "PROPHET_EXTERNAL",
+      "model_name": "Prophet with DOH and PAGASA regressors",
+      "analytics_layer": "predictive",
+      "metric_name": "MAPE",
+      "metric_value": 0,
+      "target_direction": "minimize",
+      "benchmark_value": 0.15,
+      "passed": null,
+      "notes": "External-regressor model path configured for DOH/PAGASA signals."
+    },
+    {
+      "model_code": "XGBOOST_URGENCY",
+      "model_name": "XGBoost demand urgency scoring",
+      "analytics_layer": "predictive",
+      "metric_name": "MAPE",
+      "metric_value": 0,
+      "target_direction": "minimize",
+      "benchmark_value": 0.15,
+      "passed": null,
+      "notes": "Urgency scoring placeholder until labeled demand outcomes are prepared."
+    },
+    {
+      "model_code": "KMEANS_AREA",
+      "model_name": "K-Means area clustering",
+      "analytics_layer": "descriptive",
+      "metric_name": "silhouette_score",
+      "metric_value": 0,
+      "target_direction": "maximize",
+      "benchmark_value": 0.5,
+      "passed": null,
+      "notes": "Cluster validation placeholder until transaction-grain clustering runs."
+    },
+    {
+      "model_code": "EOQ_ROP_SAFETY",
+      "model_name": "EOQ, reorder point, and safety stock",
+      "analytics_layer": "prescriptive",
+      "metric_name": "fulfillment_rate",
+      "metric_value": 0.95,
+      "target_direction": "maximize",
+      "benchmark_value": 0.95,
+      "passed": true,
+      "notes": "Target service level aligned to proposal."
+    }
+  ],
+  "totals": {
+    "total_revenue": 438927880,
+    "total_income": 243915436,
+    "total_transactions": 18149,
+    "top_product": "PAGBILAO # 13,500,000",
+    "top_area": "Government",
+    "avg_margin": 55.6
+  }
 }

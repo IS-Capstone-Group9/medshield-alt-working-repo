@@ -19,6 +19,7 @@ import {
   WeatherEffects,
 } from '../lib/api'
 import Login from '../components/Login'
+import ModelDashboard from '../components/ModelDashboard'
 
 declare global {
   interface Window {
@@ -2237,6 +2238,9 @@ function Dashboard({ onLogout }: { onLogout: () => Promise<void> }) {
     <>
       <style dangerouslySetInnerHTML={{ __html: `${MEDSHIELD_STYLE}\n${MEDSHIELD_STYLE_OVERRIDES}` }} />
       <div ref={rootRef} className="medshield-root" />
+      <div id="model-dashboard-root" style={{ padding: '24px', background: '#EEF4F8', minHeight: '100px' }}>
+        <ModelDashboard />
+      </div>
     </>
   )
 }

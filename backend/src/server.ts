@@ -640,6 +640,33 @@ app.get('/api/seasonal_epidemic_matrix', async (_req: Request, res: Response) =>
   }
 })
 
+app.get('/api/model_summary', async (_req: Request, res: Response) => {
+  try {
+    const payload = await serviceGetJson(analyticsServiceUrl, '/model_summary')
+    return res.json(payload)
+  } catch (error) {
+    return res.status(500).json({ error: 'Failed to fetch model summary' })
+  }
+})
+
+app.get('/api/mcda_territories', async (_req: Request, res: Response) => {
+  try {
+    const payload = await serviceGetJson(analyticsServiceUrl, '/mcda_territories')
+    return res.json(payload)
+  } catch (error) {
+    return res.status(500).json({ error: 'Failed to fetch MCDA territory rankings' })
+  }
+})
+
+app.get('/api/eoq_scenarios', async (_req: Request, res: Response) => {
+  try {
+    const payload = await serviceGetJson(analyticsServiceUrl, '/eoq_scenarios')
+    return res.json(payload)
+  } catch (error) {
+    return res.status(500).json({ error: 'Failed to fetch EOQ scenarios' })
+  }
+})
+
 void startPythonServices(analyticsServiceUrl, productServiceUrl).catch((error) => {
   console.error('Python service auto-start failed:', error)
 })
