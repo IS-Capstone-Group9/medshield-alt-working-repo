@@ -2204,39 +2204,6 @@ function Dashboard({ onLogout }: { onLogout: () => Promise<void> }) {
           return
         }
         installDashboardEnhancements(root)
-        const aiInput = root.querySelector<HTMLInputElement>('#aiMedicineInput')
-        const aiBtn = root.querySelector('#aiClassifyBtn')
-        const aiResult = root.querySelector<HTMLElement>('#aiClassifyResult')
-
-        if (aiBtn && aiInput && aiResult) {
-          const handleAIClassify = () => {
-            const query = aiInput.value.trim()
-            if (!query) return
-            aiResult.style.display = 'block'
-            aiResult.innerHTML = '<span style="color:#B3D9F0;">Categorizing with AI...</span>'
-            
-            fetch(`/api/classify_medicine?name=${encodeURIComponent(query)}`)
-              .then((res) => res.json())
-              .then((data) => {
-                aiResult.innerHTML = `
-                  <div style="font-weight:700; font-size:14px; color:#FFFFFF;">💊 ${data.product_name} &rarr; <span style="color:#4FD1C8;">${data.therapeutic_category}</span></div>
-                  <div style="font-size:12px; color:#D5E4EC; margin-top:4px;"><strong>Indication:</strong> ${data.primary_indication}</div>
-                  <div style="font-size:11px; color:#AAC5D4; margin-top:6px; display:flex; gap:12px; flex-wrap:wrap;">
-                    <span>🦠 <strong>Disease Triggers:</strong> ${data.disease_triggers.join(', ')}</span>
-                    <span>🌧️ <strong>Weather Drivers:</strong> ${data.weather_triggers.join(', ')}</span>
-                    <span>🎯 <strong>AI Confidence:</strong> ${(data.ai_confidence * 100).toFixed(0)}%</span>
-                  </div>
-                `
-              })
-              .catch(() => {
-                aiResult.innerHTML = '<span style="color:#FEE2E2;">Failed to classify medicine. Please check connection.</span>'
-              })
-          }
-
-          aiBtn.addEventListener('click', handleAIClassify)
-          activeListeners.push({ target: aiBtn, type: 'click', listener: handleAIClassify })
-        }
-
         const logoutBtn = root.querySelector('#sidebarLogoutBtn')
         if (logoutBtn) {
           logoutBtn.addEventListener('click', handleLogout)
