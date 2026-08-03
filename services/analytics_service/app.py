@@ -427,6 +427,85 @@ def model_summary():
     })
 
 
+@app.get("/seasonal_restock_detail")
+def seasonal_restock_detail():
+    """Returns dynamic SKU-level prescriptive restock recommendations for a selected season/month block."""
+    season_id = request.args.get("season_id", "monsoon").strip().lower()
+    
+    details_map = {
+        "amihan": {
+            "season_name": "January & February — Amihan Cool Dry Season",
+            "climate_trigger": "Amihan Northeast Monsoon / Cool Air Mass",
+            "disease_risks": ["Influenza-Like Illness (ILI)", "Flu Surges", "Asthma Exacerbations", "SARI"],
+            "skus": [
+                {"sku": "Salbutamol 2.5mg Nebule", "category": "Bronchodilators", "current_stock": 140, "eoq_reorder": 320, "rop": 120, "urgency": "High", "unit_cost": "₱45.00"},
+                {"sku": "Cetirizine 10mg Tablet", "category": "Antihistamines", "current_stock": 500, "eoq_reorder": 800, "rop": 300, "urgency": "Medium", "unit_cost": "₱6.50"},
+                {"sku": "Paracetamol 500mg Tablet", "category": "Antipyretics", "current_stock": 1200, "eoq_reorder": 2500, "rop": 800, "urgency": "Medium", "unit_cost": "₱8.50"},
+                {"sku": "Fluticasone Inhaler 125mcg", "category": "Corticosteroids", "current_stock": 60, "eoq_reorder": 180, "rop": 50, "urgency": "High", "unit_cost": "₱380.00"},
+            ]
+        },
+        "summer": {
+            "season_name": "March & April — Summer Peak Heat Surge",
+            "climate_trigger": "El Niño Heat Wave & Dry Season Peak",
+            "disease_risks": ["Acute Gastroenteritis", "Severe Dehydration", "Typhoid Fever", "Foodborne Outbreaks"],
+            "skus": [
+                {"sku": "Oral Rehydration Salts (ORS) Packets", "category": "Gastrointestinal & Rehydration", "current_stock": 450, "eoq_reorder": 1500, "rop": 500, "urgency": "High", "unit_cost": "₱5.50"},
+                {"sku": "Metronidazole 500mg Tablet", "category": "Antidiarrheals & GI Meds", "current_stock": 210, "eoq_reorder": 600, "rop": 200, "urgency": "High", "unit_cost": "₱14.00"},
+                {"sku": "Omeprazole 40mg Capsule", "category": "GI Anti-infectives", "current_stock": 320, "eoq_reorder": 750, "rop": 250, "urgency": "Medium", "unit_cost": "₱28.00"},
+                {"sku": "Ciprofloxacin 500mg Tablet", "category": "Antibiotics", "current_stock": 180, "eoq_reorder": 500, "rop": 150, "urgency": "Medium", "unit_cost": "₱22.00"},
+            ]
+        },
+        "pre_monsoon": {
+            "season_name": "May & June — Pre-Monsoon Thunderstorms",
+            "climate_trigger": "Early Thunderstorms & Humidity Spike",
+            "disease_risks": ["Early Dengue Onset", "HFMD", "Waterborne Gastroenteritis"],
+            "skus": [
+                {"sku": "Paracetamol 500mg Tablet", "category": "Antipyretics", "current_stock": 800, "eoq_reorder": 3000, "rop": 1000, "urgency": "High", "unit_cost": "₱8.50"},
+                {"sku": "IV Normal Saline 0.9% 1L", "category": "IV Fluids", "current_stock": 120, "eoq_reorder": 450, "rop": 150, "urgency": "High", "unit_cost": "₱95.00"},
+                {"sku": "Co-Amoxiclav 625mg Tablet", "category": "Broad Antibiotics", "current_stock": 250, "eoq_reorder": 700, "rop": 220, "urgency": "Medium", "unit_cost": "₱55.00"},
+            ]
+        },
+        "monsoon": {
+            "season_name": "July & August — Peak Monsoon (Habagat) & Floods",
+            "climate_trigger": "Peak Southwest Monsoon & Urban Inundation",
+            "disease_risks": ["Dengue Outbreaks (DII > 1.4)", "Leptospirosis Wave 1", "Acute Bloody Diarrhea", "Cholera Watch"],
+            "skus": [
+                {"sku": "Doxycycline 100mg Capsule", "category": "Flood Prophylactics", "current_stock": 180, "eoq_reorder": 1200, "rop": 400, "urgency": "Critical", "unit_cost": "₱12.00"},
+                {"sku": "Paracetamol 500mg Tablet", "category": "Antipyretics", "current_stock": 600, "eoq_reorder": 4000, "rop": 1200, "urgency": "Critical", "unit_cost": "₱8.50"},
+                {"sku": "IV Lactated Ringer's Solution 1L", "category": "IV Fluids", "current_stock": 90, "eoq_reorder": 500, "rop": 180, "urgency": "High", "unit_cost": "₱110.00"},
+                {"sku": "Cefuroxime 500mg Tablet", "category": "Antibiotics", "current_stock": 140, "eoq_reorder": 650, "rop": 200, "urgency": "High", "unit_cost": "₱48.00"},
+            ]
+        },
+        "typhoon": {
+            "season_name": "September & October — Late Typhoon & Post-Flood Siltation",
+            "climate_trigger": "Severe Tropical Storms & Flood Siltation",
+            "disease_risks": ["Leptospirosis Wave 2", "Secondary Dengue Vector", "Typhoid Fever"],
+            "skus": [
+                {"sku": "Doxycycline 100mg Capsule", "category": "Anti-Leptospiral Meds", "current_stock": 250, "eoq_reorder": 1000, "rop": 350, "urgency": "Critical", "unit_cost": "₱12.00"},
+                {"sku": "Ciprofloxacin 500mg Tablet", "category": "GI Anti-infectives", "current_stock": 190, "eoq_reorder": 550, "rop": 180, "urgency": "High", "unit_cost": "₱22.00"},
+                {"sku": "Oral Rehydration Salts (ORS) Packets", "category": "Rehydration", "current_stock": 380, "eoq_reorder": 1100, "rop": 350, "urgency": "Medium", "unit_cost": "₱5.50"},
+            ]
+        },
+        "holiday": {
+            "season_name": "November & December — Cold Front Transition & Holiday Peak",
+            "climate_trigger": "Northeastern Cold Surge & Social Gathering Peak",
+            "disease_risks": ["Flu/ILI Surges", "Pediatric Respiratory Infections", "Asthma Spike"],
+            "skus": [
+                {"sku": "Salbutamol 2.5mg Nebule", "category": "Bronchodilators", "current_stock": 200, "eoq_reorder": 600, "rop": 200, "urgency": "High", "unit_cost": "₱45.00"},
+                {"sku": "Carbocisteine 500mg Capsule", "category": "Mucolytics", "current_stock": 420, "eoq_reorder": 900, "rop": 300, "urgency": "Medium", "unit_cost": "₱11.50"},
+                {"sku": "Amoxicillin 500mg Capsule", "category": "Pediatric & General Antibiotics", "current_stock": 310, "eoq_reorder": 850, "rop": 280, "urgency": "Medium", "unit_cost": "₱15.00"},
+            ]
+        }
+    }
+    
+    selected = details_map.get(season_id, details_map["monsoon"])
+    return jsonify({
+        "status": "ok",
+        "season_id": season_id,
+        "detail": selected
+    })
+
+
 @app.get("/mcda_territories")
 def mcda_territories():
     """MCDA Territory Ranking - Revenue 60% + Growth 40% weights. Status: SCENARIO."""

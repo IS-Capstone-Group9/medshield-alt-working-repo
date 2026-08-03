@@ -641,6 +641,16 @@ app.get('/api/seasonal_epidemic_matrix', async (_req: Request, res: Response) =>
   }
 })
 
+app.get('/api/seasonal_restock_detail', async (req: Request, res: Response) => {
+  try {
+    const seasonId = req.query.season_id ? String(req.query.season_id) : 'monsoon'
+    const payload = await serviceGetJson(analyticsServiceUrl, `/seasonal_restock_detail?season_id=${seasonId}`)
+    res.json(payload)
+  } catch (err) {
+    res.status(500).json({ error: (err as Error).message })
+  }
+})
+
 app.get('/api/model_summary', async (_req: Request, res: Response) => {
   try {
     const payload = await serviceGetJson(analyticsServiceUrl, '/model_summary')
