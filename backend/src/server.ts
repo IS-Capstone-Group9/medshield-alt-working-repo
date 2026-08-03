@@ -603,6 +603,25 @@ app.post('/api/auth/signup', async (req: Request, res: Response) => {
   })
 })
 
+app.get('/api/classify_medicine', async (req: Request, res: Response) => {
+  const name = String(req.query.name ?? '').trim()
+  try {
+    const payload = await serviceGetJson(productServiceUrl, `/classify_medicine?name=${encodeURIComponent(name)}`)
+    return res.json(payload)
+  } catch (error) {
+    return res.status(500).json({ error: 'Failed to classify medicine' })
+  }
+})
+
+app.get('/api/therapeutic_categories', async (_req: Request, res: Response) => {
+  try {
+    const payload = await serviceGetJson(productServiceUrl, '/therapeutic_categories')
+    return res.json(payload)
+  } catch (error) {
+    return res.status(500).json({ error: 'Failed to fetch therapeutic categories' })
+  }
+})
+
 void startPythonServices(analyticsServiceUrl, productServiceUrl).catch((error) => {
   console.error('Python service auto-start failed:', error)
 })
