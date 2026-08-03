@@ -132,6 +132,73 @@ def therapeutic_categories():
     return jsonify(categories_list)
 
 
+
+@app.get("/procurement_orders")
+def procurement_orders():
+    """
+    Returns 1-Month (t+1) and 2-Month (t+2) Recommended Supplier Procurement Orders
+    grouped by Therapeutic Category and Top Medicine SKUs, incorporating DOH & Weather signals.
+    """
+    orders = [
+        {
+            "category": "Antipyretics & Analgesics (High Fever & Pain)",
+            "primary_medicines": "DOLO JAGA, PARACETAMOL 500MG, MEFENAMIC ACID",
+            "doh_weather_trigger": "🦠 Dengue Cases +22% YoY | 🌧️ Heavy Rainfall (185mm)",
+            "m1_forecast_units": 18450,
+            "m2_forecast_units": 19200,
+            "m1_m2_total_order_units": 37650,
+            "recommended_order_boxes": 377,
+            "urgency": "URGENT_REORDER",
+            "supplier_action": "Order 37,650 units immediately for Month 1 & Month 2 hospital delivery."
+        },
+        {
+            "category": "Respiratory & Antitussives (Coughs & Colds)",
+            "primary_medicines": "SALBUTAMOL 2.5MG NEBULE, CARBOCISTEINE 500MG, CETIRIZINE",
+            "doh_weather_trigger": "🦠 ILI / Flu Cases +16% | 💧 Relative Humidity 88%",
+            "m1_forecast_units": 14200,
+            "m2_forecast_units": 15800,
+            "m1_m2_total_order_units": 30000,
+            "recommended_order_boxes": 300,
+            "urgency": "HIGH_PRIORITY",
+            "supplier_action": "Stock 30,000 units before Month 2 monsoon peak."
+        },
+        {
+            "category": "Antibiotics & Anti-Infectives",
+            "primary_medicines": "EUROXONE 1G, MONOWEL 1G IV, CO-AMOXICLAV 625MG",
+            "doh_weather_trigger": "🦠 SARI / Pneumonia Cases Baseline | 🌡️ Temp Drop 24°C",
+            "m1_forecast_units": 9800,
+            "m2_forecast_units": 10500,
+            "m1_m2_total_order_units": 20300,
+            "recommended_order_boxes": 203,
+            "urgency": "MONITOR_BUFFER",
+            "supplier_action": "Maintain 20,300 units standard buffer across hospital contracts."
+        },
+        {
+            "category": "Flood Prophylactics & Anti-Leptospiral",
+            "primary_medicines": "DOXYCYCLINE 100MG CAPSULE",
+            "doh_weather_trigger": "🦠 Leptospirosis Watch | 🌀 Typhoon Signal Watch",
+            "m1_forecast_units": 4500,
+            "m2_forecast_units": 6200,
+            "m1_m2_total_order_units": 10700,
+            "recommended_order_boxes": 107,
+            "urgency": "SEASONAL_PREPAREDNESS",
+            "supplier_action": "Pre-position 10,700 units in flood-prone regional hubs (Central Luzon)."
+        },
+        {
+            "category": "Gastrointestinal & Rehydration",
+            "primary_medicines": "ORAL REHYDRATION SALTS (ORS), METRONIDAZOLE 500MG",
+            "doh_weather_trigger": "🦠 Typhoid / ABD Cases +11%",
+            "m1_forecast_units": 6100,
+            "m2_forecast_units": 6800,
+            "m1_m2_total_order_units": 12900,
+            "recommended_order_boxes": 129,
+            "urgency": "MONITOR_BUFFER",
+            "supplier_action": "Replenish 12,900 units for routine hospital inventory."
+        }
+    ]
+    return jsonify(orders)
+
+
 if __name__ == "__main__":
     app.run(
         port=int(os.getenv("PRODUCT_SERVICE_PORT", "5102")),
