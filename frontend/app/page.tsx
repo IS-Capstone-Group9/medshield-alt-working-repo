@@ -2206,13 +2206,13 @@ function Dashboard({ onLogout }: { onLogout: () => Promise<void> }) {
           return
         }
         installDashboardEnhancements(root)
-        const contentEl = root.querySelector('.content')
-        if (contentEl) {
+        const inventoryPageEl = root.querySelector('#page-inventory')
+        if (inventoryPageEl) {
           const container = document.createElement('div')
           container.id = 'model-dashboard-portal-container'
           container.style.marginTop = '32px'
           container.style.marginBottom = '32px'
-          contentEl.appendChild(container)
+          inventoryPageEl.appendChild(container)
           setPortalContainer(container)
         }
 
