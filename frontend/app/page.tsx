@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import Chart from 'chart.js/auto'
 import { MEDSHIELD_MARKUP, MEDSHIELD_SCRIPT, MEDSHIELD_STYLE } from '../lib/medshieldReference'
 import { AuthProvider, useAuth } from '../lib/AuthContext'
@@ -804,39 +805,45 @@ html[data-theme="dark"] .chart-wrap::before {
   outline: 2px solid #7dd3fc;
   outline-offset: 2px;
 }
-.react-sidebar-logout-btn {
-  position: fixed;
-  left: 14px;
-  bottom: 14px;
-  z-index: 160;
-  width: 200px;
+.sidebar-footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin-top: 12px;
-  padding: 10px 14px;
-  border: 1px solid rgba(255,255,255,0.12);
+}
+.sidebar-footer-btn {
+  width: 34px;
+  height: 34px;
   border-radius: 10px;
-  background: rgba(255,255,255,0.08);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: #D5E4EC;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  cursor: pointer;
-  transition: all 0.22s ease;
+  transition: all var(--transition);
+  flex-shrink: 0;
 }
-.react-sidebar-logout-btn:hover:not(:disabled) {
-  background: rgba(255,255,255,0.16);
+.sidebar-footer-btn.logout-btn {
+  flex: 1;
+  width: auto;
+  min-width: 0;
+  padding: 0 10px;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.sidebar-footer-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
   color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.24);
 }
-.react-sidebar-logout-btn:disabled {
-  cursor: progress;
-  opacity: 0.72;
+body.nav-collapsed .sidebar-footer-btn.logout-btn {
+  width: 34px;
+  padding: 0;
+  flex: none;
 }
-body.nav-collapsed .react-sidebar-logout-btn {
-  left: 10px;
-  width: 64px;
-  padding-left: 8px;
-  padding-right: 8px;
-}
-body.nav-hidden .react-sidebar-logout-btn {
+body.nav-collapsed .logout-text {
   display: none;
 }
 @media (max-width: 820px) {
@@ -2197,6 +2204,11 @@ function Dashboard({ onLogout }: { onLogout: () => Promise<void> }) {
           return
         }
         installDashboardEnhancements(root)
+        const logoutBtn = root.querySelector('#sidebarLogoutBtn')
+        if (logoutBtn) {
+          logoutBtn.addEventListener('click', handleLogout)
+          activeListeners.push({ target: logoutBtn, type: 'click', listener: handleLogout })
+        }
         void refreshDashboardFromGateway().catch((error) => {
           console.warn('Dashboard is using the bundled fallback dataset:', error)
         })
@@ -2224,9 +2236,6 @@ function Dashboard({ onLogout }: { onLogout: () => Promise<void> }) {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: `${MEDSHIELD_STYLE}\n${MEDSHIELD_STYLE_OVERRIDES}` }} />
-      <button className="sidebar-logout-btn react-sidebar-logout-btn" type="button" onClick={handleLogout} disabled={isLoggingOut}>
-        {isLoggingOut ? 'Logging Out...' : 'Log Out'}
-      </button>
       <div ref={rootRef} className="medshield-root" />
     </>
   )
