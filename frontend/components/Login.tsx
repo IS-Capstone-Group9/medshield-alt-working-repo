@@ -478,15 +478,37 @@ export default function Login({ onLoginSuccess }: LoginProps) {
           </div>
 
           <div className="login-brand-message">
-            <h2>Enterprise Supply Chain Intelligence</h2>
-            <p>A centralized gateway for secure pharmaceutical distribution management and real-time inventory oversight.</p>
+            <h2>Enterprise Decision Support Platform</h2>
+            <div style={{ display: 'grid', gap: '14px', marginTop: '20px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', background: 'rgba(255,255,255,0.08)', padding: '12px 16px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.14)' }}>
+                <span style={{ fontSize: '18px' }}>📊</span>
+                <div>
+                  <div style={{ fontWeight: 700, fontSize: '13px', color: '#FFFFFF' }}>Descriptive & Diagnostic Sales Analytics</div>
+                  <div style={{ fontSize: '11px', color: '#94A3B8' }}>Real-time revenue baseline & Pareto SKU ranking</div>
+                </div>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', background: 'rgba(255,255,255,0.08)', padding: '12px 16px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.14)' }}>
+                <span style={{ fontSize: '18px' }}>🔮</span>
+                <div>
+                  <div style={{ fontWeight: 700, fontSize: '13px', color: '#FFFFFF' }}>Prophet 2026 Demand Forecasting</div>
+                  <div style={{ fontSize: '11px', color: '#94A3B8' }}>Integrated PAGASA climate & DOH disease signals</div>
+                </div>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', background: 'rgba(255,255,255,0.08)', padding: '12px 16px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.14)' }}>
+                <span style={{ fontSize: '18px' }}>🎯</span>
+                <div>
+                  <div style={{ fontWeight: 700, fontSize: '13px', color: '#FFFFFF' }}>Prescriptive EOQ & ROP Replenishment</div>
+                  <div style={{ fontSize: '11px', color: '#94A3B8' }}>Automated stock alerts & MCDA territory scoring</div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="login-secure-note">
             <ShieldIcon />
-            <span>Certified Secure Infrastructure</span>
+            <span>Certified Secure Enterprise Infrastructure</span>
           </div>
-          <div className="login-copyright">(c) 2025 MedShield Pharma Corp. Authorized Personnel Only.</div>
+          <div className="login-copyright">© 2026 MedShield Pharma Corp. Authorized Personnel Only.</div>
         </div>
       </section>
 
