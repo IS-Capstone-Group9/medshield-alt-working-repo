@@ -631,6 +631,15 @@ app.get('/api/procurement_orders', async (_req: Request, res: Response) => {
   }
 })
 
+app.get('/api/seasonal_epidemic_matrix', async (_req: Request, res: Response) => {
+  try {
+    const payload = await serviceGetJson(analyticsServiceUrl, '/seasonal_epidemic_matrix')
+    return res.json(payload)
+  } catch (error) {
+    return res.status(500).json({ error: 'Failed to fetch seasonal epidemic matrix' })
+  }
+})
+
 void startPythonServices(analyticsServiceUrl, productServiceUrl).catch((error) => {
   console.error('Python service auto-start failed:', error)
 })

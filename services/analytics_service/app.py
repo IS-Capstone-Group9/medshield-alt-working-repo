@@ -186,6 +186,72 @@ def weather_refresh():
         }), 400
 
 
+
+@app.get("/seasonal_epidemic_matrix")
+def seasonal_epidemic_matrix():
+    """
+    Seasonal Epidemic & Inventory Classification Matrix (Philippine Climate & DOH Alignment)
+    Pipeline: [Target Month] -> [Expected Weather/Season] -> [Anticipated Disease Outbreaks] -> [Recommended Restock Categories]
+    """
+    matrix = [
+        {
+            "months": "January & February",
+            "season_climate": "Northeast Monsoon (Amihan) / Cool Dry Season",
+            "weather_indicators": "Cooler temperatures (20-25°C), low humidity, cold night fronts",
+            "anticipated_outbreaks": "Influenza-Like Illness (ILI), SARI, Asthma exacerbations, Allergic Rhinitis",
+            "recommended_categories": ["Bronchodilators", "Antihistamines", "Corticosteroids", "Decongestants"],
+            "priority_medicines": "Salbutamol 2.5mg Nebules, Cetirizine 10mg, Fluticasone Nasal Spray, Paracetamol",
+            "urgency_rating": "HIGH_RESPIRATORY_PRIORITY"
+        },
+        {
+            "months": "March & April",
+            "season_climate": "Dry Summer Peak / Thermal Surge",
+            "weather_indicators": "High temperatures (34-38°C), intense solar radiation, low rainfall",
+            "anticipated_outbreaks": "Heat Exhaustion, Dehydration, Acute Gastroenteritis, Food Poisoning, Typhoid Fever",
+            "recommended_categories": ["Electrolyte Rehydration (ORS)", "Antidiarrheals", "Anti-emetics", "Topical Antifungals"],
+            "priority_medicines": "Oral Rehydration Salts (ORS), Metronidazole 500mg, Omeprazole, Hyoscine N-Butylbromide",
+            "urgency_rating": "SUMMER_GASTRO_PRIORITY"
+        },
+        {
+            "months": "May & June",
+            "season_climate": "Summer Transition to Early Southwest Monsoon",
+            "weather_indicators": "Thunderstorms, rising humidity (82%+), intermittent heavy downpours",
+            "anticipated_outbreaks": "Early Dengue surge onset, Hand-Foot-Mouth Disease (HFMD), Waterborne GI infections",
+            "recommended_categories": ["Antipyretics & Analgesics", "IV Fluids & Electrolytes", "Broad-Spectrum Antibiotics"],
+            "priority_medicines": "Paracetamol 500mg, Dolo Jaga, Co-Amoxiclav 625mg, Sodium Chloride 0.9% IV",
+            "urgency_rating": "PRE_MONSOON_PREPAREDNESS"
+        },
+        {
+            "months": "July & August",
+            "season_climate": "Peak Southwest Monsoon (Habagat) & Tropical Cyclones",
+            "weather_indicators": "Heavy rainfall (>250mm/mo), high humidity (88%+), severe urban flooding",
+            "anticipated_outbreaks": "Dengue Fever Outbreaks, Leptospirosis, Acute Bloody Diarrhea (ABD), Cholera",
+            "recommended_categories": ["Flood Prophylactics", "Antipyretics", "IV Rehydration", "Penicillins/Cephalosporins"],
+            "priority_medicines": "Doxycycline 100mg (Prophylaxis), Paracetamol 500mg, Dolo Jaga, Cefuroxime 500mg, ORS",
+            "urgency_rating": "CRITICAL_EPIDEMIC_SURGE"
+        },
+        {
+            "months": "September & October",
+            "season_climate": "Late Typhoon Season & Post-Flood Siltation",
+            "weather_indicators": "Frequent typhoons, standing water ponds, high flood inundation",
+            "anticipated_outbreaks": "Secondary Leptospirosis peak, Persistent Dengue, Waterborne Typhoid",
+            "recommended_categories": ["Anti-Leptospiral Prophylactics", "Antipyretics", "Gastrointestinal Anti-infectives"],
+            "priority_medicines": "Doxycycline 100mg, Paracetamol, Ciprofloxacin 500mg, Oral Rehydration Salts",
+            "urgency_rating": "HIGH_FLOOD_RISK"
+        },
+        {
+            "months": "November & December",
+            "season_climate": "Transition to Northeast Monsoon (Amihan) & Holiday Peak",
+            "weather_indicators": "Temperature drop, cool winds, indoor crowding during holidays",
+            "anticipated_outbreaks": "Viral Respiratory Infections, ILI, Flu, Pediatric HFMD, Asthma",
+            "recommended_categories": ["Bronchodilators & Nebules", "Pediatric Antitussives", "Broad-Spectrum Antibiotics"],
+            "priority_medicines": "Salbutamol Nebules, Carbocisteine Syrup, Co-Amoxiclav, Cetirizine",
+            "urgency_rating": "HOLIDAY_RESPIRATORY_SURGE"
+        }
+    ]
+    return jsonify(matrix)
+
+
 if __name__ == "__main__":
     app.run(
         port=int(os.getenv("ANALYTICS_SERVICE_PORT", "5101")),
