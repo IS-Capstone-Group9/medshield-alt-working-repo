@@ -26,7 +26,7 @@ This explainer outlines the mathematical models, data integration pathways, and 
 * **The Process**:
   1. **DLI/DII (Disease-Driven) Calculation**: Group raw weekly case counts from DOH by region `r` and disease `d` for time period `t`, and divide by the monthly historical baseline average:
      `DII(r, d, t) = Cases(r, d, t) / AvgCases(r, d)`
-     where `AvgCases(r, d)` is computed from the 2021–2025 baseline period. (Note: The Disease Intensity Indicator, or DII, is mapped directly as the Disease/Epidemiological indicator regressor, or DLI, in the Prophet model).
+     where `AvgCases(r, d)` is computed from the official DOH baseline period (2021–2025), aligned with the 2017–2025 historical sales series. (Note: The Disease Intensity Indicator, or DII, is mapped directly as the Disease/Epidemiological indicator regressor, or DLI, in the Prophet model).
      * *Real-world Case*: In **Quezon** during September, if there are 240 reported Dengue cases, and the historical baseline average for September in Quezon is 100 cases, the `DII(Quezon, Dengue, September)` is calculated as:
        `DII = 240 / 100 = 2.4`
   2. **Temporal Lag Application**: Apply a lag factor `k` (expressed in weeks or months based on replenishment cycles) to align disease triggers with procurement lead times:
@@ -50,7 +50,7 @@ This explainer outlines the mathematical models, data integration pathways, and 
 ### 3. Time-Series Forecasting (Facebook Prophet with Regressors) [North Star 2B: Monthly Product Demand]
 * **Goal**: Generate macro-level and territory-specific monthly demand forecasts using historical sales combined with weather and disease regressors.
 * **The Process**:
-  1. **STL Decomposition Initialization**: Decompose the historical monthly sales quantity (2021–2025) into trend (`g(t)`) and seasonality (`s(t)`) components to seed the Prophet model configuration.
+  1. **STL Decomposition Initialization**: Decompose the historical monthly sales quantity across the 9-year digitized training block (2017–2025, 108 total months) into trend (`g(t)`) and seasonality (`s(t)`) components to seed the Prophet model configuration.
   2. **Exogenous Regressor Addition**: Add the engineered `DII_lag(r, d, t)` and `RSI(r, t)` signals as independent linear regressors into the Prophet model.
   3. **Event Effect Mapping**: Configure holiday/event parameters (`h(t)`) to account for irregular demand drivers such as regional government bidding cycles.
   4. **Forecast Inference**: Execute the Prophet model to compute the expected demand quantity `y(t)`:
@@ -107,7 +107,7 @@ Use this checklist to verify that forecasting models, classification pipelines, 
 #### Forecasting & Modeling
 - [ ] Verify Prophet baseline forecast is generated with external coefficients set to zero (`beta_1 = 0, beta_2 = 0`).
 - [ ] Verify DII regression coefficients (`beta_1`) and weather indicators (`beta_2`) are calculated and statistically significant.
-- [ ] Run rolling-validation tests on 2021–2025 training data and compute MAE, RMSE, and MAPE against 2026 actuals.
+- [ ] Run rolling-validation tests on 2017–2025 training data and compute MAE, RMSE, and MAPE against 2026 actuals.
 - [ ] Check that XGBoost ABC classifier achieves adequate precision, recall, and F1-score across all categories (A, B, C).
 - [ ] Ensure new/low-history products are successfully classified into ABC priority classes instead of showing empty metrics.
 
@@ -117,7 +117,7 @@ Use this checklist to verify that forecasting models, classification pipelines, 
 We verified the mathematical and methodology alignment of these equations against your capstone manuscript (**`PRIVATE_SUMMER_CAPSTONE_2 - GROUP9_ISB (1).docx`**):
 
 1. **Section 3.4.2 (Predictive Modeling Horizons)**:
-   * Training is performed on 2021–2025 data, evaluation is verified against 2026 actuals, and forecasts are generated for 2027.
+   * Training is performed on 2017–2025 data (utilizing all 9 years of digitized company sales records), evaluation is verified against 2026 actuals, and forecasts are generated for 2027.
    * Prophet models and evaluations in the analytics service mirror this chronological sequence.
 2. **Equation (3) - Prophet with External Regressors**:
    * `y(t) = g(t) + s(t) + h(t) + beta_1 * DII_lag(r, d, t) + beta_2 * RSI_flag(r, t) + epsilon_t`.

@@ -55,7 +55,7 @@ Three modules compute the operational inventory boundaries monthly:
   `Safety Stock = Z * std_dev_daily_demand * sqrt(Lead Time)`
   where:
   * `Z` = service factor (calibrated to maintain safety targets)
-  * `std_dev_daily_demand` = standard deviation of daily demand from historical sales
+  * `std_dev_daily_demand` = standard deviation of daily demand from historical sales (2017–2025 series)
   * `Lead Time` = supplier replenishment lead time in days
 * **Real-World Example**:
   * Product: **MONOWEL 1G IV**

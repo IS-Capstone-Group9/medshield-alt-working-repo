@@ -22,7 +22,7 @@ To ensure the executive DSS dashboard functions as a unified decision engine, it
 * **Ingestion Quality Logs**: Total rows processed vs. accepted clean rows, highlighting isolated margin anomalies.
 * **Geographic & Channel Segmentations** `[North Star 2A & 6A & 7A]`: Clean actual sales vs. sales with backward-allocated service contracts (clearly flagged as `estimated_backward_allocation`).
 * **Seasonality Indices** `[North Star 3A]`: Calculated monthly historical demand multipliers via STL decomposition (e.g., historical Dengue seasonal surges).
-* **YoY Demand Growth Trends** `[North Star 5A]`: Comparative monthly growth percentages between consecutive baseline years (2021–2025).
+* **YoY Demand Growth Trends** `[North Star 5A]`: Comparative monthly growth percentages between consecutive baseline years (2017–2025).
 * **Pareto Revenue Share bands** `[North Star 4A]`: Categorized product groups (A, B, C bands based on historical sales concentration).
 
 ### 2. Predictive Analytics Outputs (Forecasting & Risk Scoring)
