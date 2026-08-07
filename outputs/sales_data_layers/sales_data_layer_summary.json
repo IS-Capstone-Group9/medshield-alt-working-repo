@@ -29,6 +29,21 @@
       "rows": 3416,
       "columns": 13,
       "header_row_number": 6
+    },
+    "2020": {
+      "rows": 3988,
+      "columns": 12,
+      "header_row_number": 6
+    },
+    "2019": {
+      "rows": 10317,
+      "columns": 13,
+      "header_row_number": 5
+    },
+    "2017": {
+      "rows": 5874,
+      "columns": 13,
+      "header_row_number": 5
     }
   },
   "semi_raw_backwards_approx": {
@@ -54,26 +69,27 @@
     "net_income": 550600746.46
   },
   "cleaned_sales": {
-    "rows": 20961,
+    "rows": 26006,
     "by_year": {
-      "2021": 3412,
-      "2022": 3999,
-      "2023": 5323,
-      "2024": 3328,
-      "2025": 4899
+      "2022": 4035,
+      "2020": 4186,
+      "2025": 5034,
+      "2021": 3418,
+      "2024": 3441,
+      "2023": 5892
     },
-    "empty_product": 0,
-    "empty_area": 0,
-    "bad_date": 0,
-    "estimated_dates": 3541,
-    "estimated_backward_allocation_rows": 1725,
+    "empty_product": 752,
+    "empty_area": 26,
+    "bad_date": 423,
+    "estimated_dates": 0,
+    "estimated_backward_allocation_rows": 1730,
     "pending_cleaning_excluded": 0,
-    "quantity": 1016664.41,
-    "total_cost": 430133235.95,
-    "discount": 2428836.13,
-    "net_cost": 427704399.82,
-    "total_trade_price": 220958269.8,
-    "net_income": 259767098.7
+    "quantity": 1130758.19,
+    "total_cost": 2049502980.49,
+    "discount": 9396307.69,
+    "net_cost": 2038459222.14,
+    "total_trade_price": 867335040.8052,
+    "net_income": 1171124181.3348
   },
   "notes": [
     "Raw sales report exports are sheet data copied from Sales Report.xlsx without cleaning.",

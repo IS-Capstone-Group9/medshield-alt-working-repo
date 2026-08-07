@@ -1,6 +1,66 @@
 {
   "monthly": [
     {
+      "period": "2020-01",
+      "revenue": 2107673.34,
+      "income": 1818142.45
+    },
+    {
+      "period": "2020-02",
+      "revenue": 1138469.1,
+      "income": 997679.38
+    },
+    {
+      "period": "2020-03",
+      "revenue": 2181309.08,
+      "income": 1988890.19
+    },
+    {
+      "period": "2020-04",
+      "revenue": 488081.63,
+      "income": 421740.39
+    },
+    {
+      "period": "2020-05",
+      "revenue": 2758802.31,
+      "income": 2296236.1
+    },
+    {
+      "period": "2020-06",
+      "revenue": 1454088.61,
+      "income": 1278622.97
+    },
+    {
+      "period": "2020-07",
+      "revenue": 584563.11,
+      "income": 526186.93
+    },
+    {
+      "period": "2020-08",
+      "revenue": 1010586.47,
+      "income": 929204.68
+    },
+    {
+      "period": "2020-09",
+      "revenue": 853602.15,
+      "income": 622548.01
+    },
+    {
+      "period": "2020-10",
+      "revenue": 809458.42,
+      "income": 805595.13
+    },
+    {
+      "period": "2020-11",
+      "revenue": 1698949.56,
+      "income": 1482656.8
+    },
+    {
+      "period": "2020-12",
+      "revenue": 843729.75,
+      "income": 773200.97
+    },
+    {
       "period": "2021-01",
       "revenue": 1877230.39,
       "income": 1566118.59
@@ -304,83 +364,83 @@
   "by_area": [
     {
       "area": "Admin",
-      "revenue": 3920327.62,
-      "income": 2768199.4
+      "revenue": 5106849.97,
+      "income": 3555614.24
     },
     {
       "area": "Equipment",
-      "revenue": 5717863.66,
-      "income": 4369612.1
+      "revenue": 6058595.41,
+      "income": 4626145.35
     },
     {
       "area": "Losses",
-      "revenue": 3211.8,
-      "income": 0.0
+      "revenue": 9931.96,
+      "income": 5783.58
     },
     {
       "area": "Personal",
-      "revenue": 1962.0,
-      "income": 1182.0
+      "revenue": 13879.4,
+      "income": 5386.21
     },
     {
       "area": "Supplies",
-      "revenue": 1079592.03,
-      "income": 645558.33
+      "revenue": 1553483.29,
+      "income": 954212.38
     },
     {
       "area": "Government",
-      "revenue": 58899023.25,
-      "income": 39685006.13
+      "revenue": 65174890.0,
+      "income": 44935349.34
     },
     {
       "area": "Hospital",
-      "revenue": 48833514.28,
-      "income": 35106569.78
+      "revenue": 53459558.28,
+      "income": 39463340.8
     },
     {
       "area": "Pharma",
-      "revenue": 133134.87,
-      "income": 122449.87
+      "revenue": 200313.49,
+      "income": 189628.49
     },
     {
       "area": "Albay",
-      "revenue": 174300.8,
-      "income": 159098.8
+      "revenue": 365654.27,
+      "income": 351017.4
     },
     {
       "area": "Batangas",
-      "revenue": 4766594.15,
-      "income": 4394284.27
+      "revenue": 5184707.7,
+      "income": 4810710.44
     },
     {
       "area": "Camarines Norte",
-      "revenue": 1601767.93,
-      "income": 995630.53
+      "revenue": 2151319.47,
+      "income": 1471272.79
     },
     {
       "area": "Camarines Sur",
-      "revenue": 477692.64,
-      "income": 477468.34
+      "revenue": 570209.09,
+      "income": 646475.74
     },
     {
       "area": "Cavite",
-      "revenue": 709850.28,
-      "income": 511956.09
+      "revenue": 1246439.34,
+      "income": 1003418.11
     },
     {
       "area": "Laguna",
-      "revenue": 875043.42,
-      "income": 549271.62
+      "revenue": 785112.94,
+      "income": 604820.76
     },
     {
       "area": "Marinduque",
-      "revenue": 4705220.52,
-      "income": 3751424.94
+      "revenue": 5041871.42,
+      "income": 4041196.12
     },
     {
       "area": "Quezon",
-      "revenue": 6339579.62,
-      "income": 5564347.09
+      "revenue": 7203303.19,
+      "income": 6363914.72
     },
     {
       "area": "Aboitiz",
@@ -391,6 +451,11 @@
       "area": "Gulang Gulang",
       "revenue": 80151.0,
       "income": 38704.0
+    },
+    {
+      "area": "Mindoro",
+      "revenue": 41873.18,
+      "income": 14476.82
     },
     {
       "area": "PESO",
@@ -446,21 +511,21 @@
   "top_products": [
     {
       "product": "MONOWEL 1G IV",
-      "revenue": 5791588.87,
-      "qty": 12600.1434,
-      "income": 2342231.87,
+      "revenue": 5780546.0,
+      "qty": 12600.0,
+      "income": 2331189.0,
       "abc": "A",
       "focus": "A",
-      "pct_of_total": 3.56
+      "pct_of_total": 3.24
     },
     {
       "product": "EVAPROST 250MCG/ML",
-      "revenue": 2423850.0,
-      "qty": 678.0,
-      "income": 1550122.0,
+      "revenue": 3010150.0,
+      "qty": 842.0,
+      "income": 2080402.0,
       "abc": "A",
       "focus": "A",
-      "pct_of_total": 1.49
+      "pct_of_total": 1.69
     },
     {
       "product": "JUBI -R 100MG",
@@ -469,7 +534,7 @@
       "income": 1950000.0,
       "abc": "A",
       "focus": "A",
-      "pct_of_total": 1.46
+      "pct_of_total": 1.33
     },
     {
       "product": "SPEEDA 2.5IU/0.5ML",
@@ -478,7 +543,16 @@
       "income": 970810.0,
       "abc": "A",
       "focus": "A",
-      "pct_of_total": 1.23
+      "pct_of_total": 1.12
+    },
+    {
+      "product": "ANTITET 1500IU/0.7ML",
+      "revenue": 1996262.33,
+      "qty": 1448.6587,
+      "income": 1736911.19,
+      "abc": "A",
+      "focus": "A",
+      "pct_of_total": 1.12
     },
     {
       "product": "QMC 787,170",
@@ -487,100 +561,97 @@
       "income": 978044.01,
       "abc": "A",
       "focus": "A",
-      "pct_of_total": 1.19
+      "pct_of_total": 1.08
     },
     {
-      "product": "ANTITET 1500IU/0.7ML",
-      "revenue": 1740574.89,
-      "qty": 1447.6353,
-      "income": 1644380.0,
+      "product": "HAIXONE WITH DILUENT 1G",
+      "revenue": 1927043.99,
+      "qty": 53617.6411,
+      "income": 1550649.85,
       "abc": "A",
       "focus": "A",
-      "pct_of_total": 1.07
+      "pct_of_total": 1.08
     },
     {
-      "product": "VOLUMETRIC SOLUTION INFUSION SET 150ML (POLYVOL)",
-      "revenue": 1685853.78,
-      "qty": 7202.8225,
-      "income": 613672.15,
+      "product": "AMCETAM 150MG/ML 2ML",
+      "revenue": 1822822.4,
+      "qty": 1946.5726,
+      "income": 692699.32,
       "abc": "A",
       "focus": "A",
-      "pct_of_total": 1.04
+      "pct_of_total": 1.02
     },
     {
-      "product": "BUPIRIGHT 5MG/ML 0.5% IN 8% 4ML",
-      "revenue": 1635135.66,
-      "qty": 7934.0859,
-      "income": 1523448.9,
-      "abc": "A",
-      "focus": "A",
-      "pct_of_total": 1.01
-    },
-    {
-      "product": "OLXARIN 4000IU/0.4ML 40MG/0.4ML",
-      "revenue": 80520.0,
-      "qty": 183.0,
-      "income": 80520.0,
-      "abc": "B",
-      "focus": "B",
-      "pct_of_total": 0.05
-    },
-    {
-      "product": "DEXAMAX 4MG/ML (8MG/2ML) 2ML",
-      "revenue": 80403.9,
-      "qty": 218.3794,
-      "income": 52545.6,
-      "abc": "B",
-      "focus": "B",
-      "pct_of_total": 0.05
-    },
-    {
-      "product": "LACTAMOX 250MG/62.5MG/5ML",
-      "revenue": 80154.6,
-      "qty": 618.0,
-      "income": 64001.8,
-      "abc": "B",
-      "focus": "B",
-      "pct_of_total": 0.05
-    },
-    {
-      "product": "METACORT 4MG/ML (8MG/2ML) 2ML",
+      "product": "FUSIFRED 20MG/G (2% W/W) 10G",
       "revenue": 80000.0,
-      "qty": 160.0,
-      "income": 5000.0,
+      "qty": 1000.0,
+      "income": 80000.0,
       "abc": "B",
       "focus": "B",
-      "pct_of_total": 0.05
+      "pct_of_total": 0.04
     },
     {
-      "product": "DISPOSABLE NEEDLE G.26 100'S-ORMED",
-      "revenue": 15000.0,
-      "qty": 100.0,
-      "income": 7500.0,
+      "product": "COMOX 625MG",
+      "revenue": 79131.2,
+      "qty": 73.0,
+      "income": 67276.4,
+      "abc": "B",
+      "focus": "B",
+      "pct_of_total": 0.04
+    },
+    {
+      "product": "LACTAMOX 250MG/62.5MG/5ML 60ML",
+      "revenue": 79117.0,
+      "qty": 610.0,
+      "income": 79117.0,
+      "abc": "B",
+      "focus": "B",
+      "pct_of_total": 0.04
+    },
+    {
+      "product": "GLOVEDOL 6.25MG",
+      "revenue": 79078.71,
+      "qty": 1590.33,
+      "income": 79529.76,
+      "abc": "B",
+      "focus": "B",
+      "pct_of_total": 0.04
+    },
+    {
+      "product": "METZ SCISSOR CURVED SIZE 8'' (OLTEN)",
+      "revenue": 15174.0,
+      "qty": 27.0,
+      "income": 14050.0,
       "abc": "C",
       "focus": "C",
       "pct_of_total": 0.01
     },
     {
-      "product": "DOPNAX 40MG/ML 5ML",
-      "revenue": 15000.0,
-      "qty": 60.0,
-      "income": 15000.0,
+      "product": "OXYGEN REGULATOR - FUJIKAWA",
+      "revenue": 15166.67,
+      "qty": 10.0,
+      "income": 15166.67,
       "abc": "C",
       "focus": "C",
       "pct_of_total": 0.01
     },
     {
-      "product": "ASSESMENT FOR EDAN MONITOR",
-      "revenue": 15000.0,
-      "qty": 1.0,
-      "income": 3000.0,
+      "product": "SAPHLOPID 75MG",
+      "revenue": 15153.73,
+      "qty": 115.8,
+      "income": 13594.56,
       "abc": "C",
       "focus": "C",
       "pct_of_total": 0.01
     }
   ],
   "year_summary": [
+    {
+      "year": "2020",
+      "revenue": 15929313.53,
+      "income": 13940704.0,
+      "transactions": 3790
+    },
     {
       "year": "2021",
       "revenue": 27587888.65,
@@ -615,51 +686,51 @@
   "seasonality": [
     {
       "month": "Jan",
-      "avg_revenue": 4378330.55
+      "avg_revenue": 3521559.2
     },
     {
       "month": "Feb",
-      "avg_revenue": 9205107.69
+      "avg_revenue": 6622250.19
     },
     {
       "month": "Mar",
-      "avg_revenue": 2976960.82
+      "avg_revenue": 2827793.51
     },
     {
       "month": "Apr",
-      "avg_revenue": 3510043.82
+      "avg_revenue": 2530481.45
     },
     {
       "month": "May",
-      "avg_revenue": 4583402.11
+      "avg_revenue": 4147898.51
     },
     {
       "month": "Jun",
-      "avg_revenue": 12572658.23
+      "avg_revenue": 9074703.07
     },
     {
       "month": "Jul",
-      "avg_revenue": 5147684.43
+      "avg_revenue": 3684728.14
     },
     {
       "month": "Aug",
-      "avg_revenue": 5534274.68
+      "avg_revenue": 4036936.44
     },
     {
       "month": "Sep",
-      "avg_revenue": 11453997.38
+      "avg_revenue": 8023298.53
     },
     {
       "month": "Oct",
-      "avg_revenue": 3939086.16
+      "avg_revenue": 2873199.26
     },
     {
       "month": "Nov",
-      "avg_revenue": 5571015.65
+      "avg_revenue": 4201820.13
     },
     {
       "month": "Dec",
-      "avg_revenue": 4338223.92
+      "avg_revenue": 3278485.52
     }
   ],
   "forecasts": [
@@ -1258,12 +1329,12 @@
     }
   ],
   "totals": {
-    "total_revenue": 203363302.28,
-    "total_income": 134155954.29,
-    "total_transactions": 21058,
+    "total_revenue": 219292615.81,
+    "total_income": 148096658.29,
+    "total_transactions": 24848,
     "top_product": "MONOWEL 1G IV",
     "top_area": "Quezon",
-    "avg_margin": 66.0
+    "avg_margin": 67.5
   },
   "abc_distribution": [
     146607352.17000005,

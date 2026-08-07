@@ -16,7 +16,7 @@ RAW_WORKBOOK = ROOT / "data" / "medshield" / "raw" / "sales" / "Sales Report.xls
 ALLOCATED_DATASET = ROOT / "data" / "medshield" / "processed" / "sales_transactions_area_allocated.json.gz"
 LAYER_DIR = ROOT / "outputs" / "sales_data_layers"
 
-YEARS = ["2021", "2022", "2023", "2024", "2025"]
+YEARS = ["2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025"]
 ADDITIVE_FIELDS = [
     "quantity",
     "total_cost",
@@ -147,61 +147,73 @@ def clean_cell(value):
 
 def export_raw_workbook():
     raw_dir = LAYER_DIR / "raw_sales_report"
-    workbook = load_workbook(RAW_WORKBOOK, read_only=True, data_only=True)
+    workbooks_to_check = [
+        ROOT / "Medshield (Keith San Miguel).xlsx",
+        RAW_WORKBOOK,
+    ]
     summaries = {}
 
-    for sheet in workbook.worksheets:
-        year_match = re.search(r"(20\d{2})", sheet.title)
-        if not year_match:
+    for wb_path in workbooks_to_check:
+        if not wb_path.exists():
             continue
-        year = year_match.group(1)
-        rows = []
-        header_row_number = None
-        header_values = None
-        for row_number, row_values in enumerate(sheet.iter_rows(values_only=True), start=1):
-            normalized = [str(value).strip().lower() if value is not None else "" for value in row_values]
-            if "area" in normalized and "product" in normalized:
-                header_row_number = row_number
-                header_values = row_values
-                break
-        if header_row_number is None or header_values is None:
-            raise ValueError(f"Could not find sales header row for sheet {sheet.title}")
-        header_values = header_values[:13]
-        headers = [
-            str(value).strip() if not is_blank(value) else f"column_{index + 1}"
-            for index, value in enumerate(header_values)
-        ]
-        for source_row_number, row_values in enumerate(
-            sheet.iter_rows(min_row=header_row_number + 1, values_only=True),
-            start=header_row_number + 1,
-        ):
-            if not any(not is_blank(value) for value in row_values):
+        workbook = load_workbook(wb_path, read_only=True, data_only=True)
+        for sheet in workbook.worksheets:
+            if sheet.title.lower().startswith("exp"):
+                continue  # Skip expense sheets
+            year_match = re.search(r"(20\d{2})", sheet.title)
+            if not year_match:
                 continue
-            row = {
-                "data_layer": "raw_sales_report",
-                "source_workbook": RAW_WORKBOOK.name,
-                "source_sheet": sheet.title,
-                "source_row_number": source_row_number,
-                "source_header_row_number": header_row_number,
-            }
-            for header, value in zip(headers, row_values[:13]):
-                row[header] = clean_cell(value)
-            rows.append(row)
+            year = year_match.group(1)
+            if year in summaries:
+                continue  # Already processed this year from primary workbook
+            
+            rows = []
+            header_row_number = None
+            header_values = None
+            for row_number, row_values in enumerate(sheet.iter_rows(values_only=True), start=1):
+                normalized = [str(value).strip().lower() if value is not None else "" for value in row_values]
+                if any("area" in cell for cell in normalized) and any("product" in cell for cell in normalized):
+                    header_row_number = row_number
+                    header_values = row_values
+                    break
+            if header_row_number is None or header_values is None:
+                continue
+            header_values = header_values[:13]
+            headers = [
+                str(value).strip() if not is_blank(value) else f"column_{index + 1}"
+                for index, value in enumerate(header_values)
+            ]
+            for source_row_number, row_values in enumerate(
+                sheet.iter_rows(min_row=header_row_number + 1, values_only=True),
+                start=header_row_number + 1,
+            ):
+                if not any(not is_blank(value) for value in row_values):
+                    continue
+                row = {
+                    "data_layer": "raw_sales_report",
+                    "source_workbook": wb_path.name,
+                    "source_sheet": sheet.title,
+                    "source_row_number": source_row_number,
+                    "source_header_row_number": header_row_number,
+                }
+                for header, value in zip(headers, row_values[:13]):
+                    row[header] = clean_cell(value)
+                rows.append(row)
 
-        raw_fields = [
-            "data_layer",
-            "source_workbook",
-            "source_sheet",
-            "source_row_number",
-            "source_header_row_number",
-            *headers,
-        ]
-        write_csv(raw_dir / f"sales_report_{year}_raw.csv", rows, raw_fields)
-        summaries[year] = {
-            "rows": len(rows),
-            "columns": len(headers),
-            "header_row_number": header_row_number,
-        }
+            raw_fields = [
+                "data_layer",
+                "source_workbook",
+                "source_sheet",
+                "source_row_number",
+                "source_header_row_number",
+                *headers,
+            ]
+            write_csv(raw_dir / f"sales_report_{year}_raw.csv", rows, raw_fields)
+            summaries[year] = {
+                "rows": len(rows),
+                "columns": len(headers),
+                "header_row_number": header_row_number,
+            }
 
     return summaries
 

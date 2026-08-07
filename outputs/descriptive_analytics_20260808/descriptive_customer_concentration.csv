@@ -1,0 +1,4 @@
+customer_channel,quantity,revenue,gross_margin_amount,row_count,active_months,estimated_contract_rows,net_income_clean,revenue_clean,rank,gross_margin_rate,revenue_share,cumulative_revenue_share,abc_class,method,status
+Government,590523.14,65174889.9979,44935349.3351,6644,69,0,17939703.253600005,33142254.846399996,1,0.541294,0.54845,0.54845,A,ABC/Pareto using total_trade_price revenue,draft
+Hospital,322614.1,53459558.2796,39463340.7996,4325,71,0,19790473.279999986,31802211.48000001,2,0.622299,0.449865,0.998314,C,ABC/Pareto using total_trade_price revenue,draft
+Pharma,406.0,200313.49,189628.49,73,36,0,13880.0,25720.0,3,0.539658,0.001686,1.0,C,ABC/Pareto using total_trade_price revenue,draft

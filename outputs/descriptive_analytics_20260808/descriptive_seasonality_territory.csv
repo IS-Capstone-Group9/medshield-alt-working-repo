@@ -1,0 +1,97 @@
+scope,calendar_month,seasonal_index,seasonal_strength,interpretation,method,status
+Batangas,01,1.278331,0.607982,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Batangas,02,1.596997,0.607982,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Batangas,03,1.704551,0.607982,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Batangas,04,1.305751,0.607982,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Batangas,05,1.282475,0.607982,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Batangas,06,2.705657,0.607982,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Batangas,07,1.354586,0.607982,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Batangas,08,1.119998,0.607982,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Batangas,09,1.131864,0.607982,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Batangas,10,2.180482,0.607982,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Batangas,11,1.278641,0.607982,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Batangas,12,1.060666,0.607982,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Camarines Norte,01,2.585623,0.861466,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Camarines Norte,02,2.986746,0.861466,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Camarines Norte,03,1.103077,0.861466,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Camarines Norte,04,2.656696,0.861466,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Camarines Norte,05,2.205601,0.861466,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Camarines Norte,06,7.962523,0.861466,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Camarines Norte,07,4.529018,0.861466,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Camarines Norte,08,1.313607,0.861466,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Camarines Norte,09,2.170632,0.861466,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Camarines Norte,10,4.784712,0.861466,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Camarines Norte,11,3.250767,0.861466,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Camarines Norte,12,3.712391,0.861466,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Camarines Sur,01,4.558152,1.665264,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Camarines Sur,02,7.847728,1.665264,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Camarines Sur,03,-5.22081,1.665264,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+Camarines Sur,04,5.008493,1.665264,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Camarines Sur,05,3.016949,1.665264,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Camarines Sur,06,1.782797,1.665264,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Camarines Sur,07,4.4464,1.665264,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Camarines Sur,08,3.165714,1.665264,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Camarines Sur,09,4.606649,1.665264,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Camarines Sur,10,1.289612,1.665264,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Camarines Sur,11,2.891987,1.665264,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Camarines Sur,12,6.129108,1.665264,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Cavite,01,1.927792,0.787541,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Cavite,02,2.517556,0.787541,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Cavite,03,3.115921,0.787541,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Cavite,04,1.697784,0.787541,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Cavite,05,2.024857,0.787541,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Cavite,06,3.349493,0.787541,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Cavite,07,2.646567,0.787541,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Cavite,08,2.981996,0.787541,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Cavite,09,3.358364,0.787541,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Cavite,10,3.917018,0.787541,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Cavite,11,2.590048,0.787541,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Cavite,12,0.832207,0.787541,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+Laguna,01,6.749921,1.0,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Laguna,02,1.459698,1.0,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Laguna,03,0.997671,1.0,near_average,monthly average demand divided by overall monthly average demand,draft
+Laguna,04,0.751445,1.0,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+Laguna,05,0.0,1.0,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+Laguna,06,0.035468,1.0,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+Laguna,07,1.355659,1.0,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Laguna,08,0.0,1.0,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+Laguna,09,0.0,1.0,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+Laguna,10,27.537009,1.0,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Laguna,11,0.378323,1.0,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+Laguna,12,0.851228,1.0,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+Marinduque,01,5.961654,0.949283,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Marinduque,02,3.181178,0.949283,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Marinduque,03,0.862282,0.949283,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+Marinduque,04,0.314575,0.949283,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+Marinduque,05,0.822171,0.949283,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+Marinduque,06,0.801199,0.949283,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+Marinduque,07,0.841921,0.949283,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+Marinduque,08,2.005034,0.949283,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Marinduque,09,4.173158,0.949283,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Marinduque,10,0.302358,0.949283,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+Marinduque,11,3.410441,0.949283,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Marinduque,12,0.519201,0.949283,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+Quezon,01,2.167161,0.576212,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Quezon,02,1.522603,0.576212,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Quezon,03,1.503626,0.576212,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Quezon,04,1.209795,0.576212,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Quezon,05,1.784288,0.576212,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Quezon,06,0.918418,0.576212,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+Quezon,07,1.558379,0.576212,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Quezon,08,1.418249,0.576212,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Quezon,09,1.616465,0.576212,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Quezon,10,1.627169,0.576212,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Quezon,11,1.508165,0.576212,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Quezon,12,1.463063,0.576212,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Albay,01,0.0,1.001252,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+Albay,02,0.679245,1.001252,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+Albay,03,0.0,1.001252,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+Albay,04,0.626996,1.001252,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+Albay,05,0.0,1.001252,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+Albay,06,0.0,1.001252,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+Albay,07,41.74746,1.001252,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Albay,08,31.71553,1.001252,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+Albay,09,0.888244,1.001252,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+Albay,10,-0.05225,1.001252,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+Albay,11,0.0,1.001252,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+Albay,12,0.0,1.001252,lower_than_average,monthly average demand divided by overall monthly average demand,draft

@@ -1,0 +1,9 @@
+area,quantity,revenue,gross_margin_amount,row_count,active_months,estimated_contract_rows,net_income_clean,revenue_clean,rank,gross_margin_rate,revenue_share,cumulative_revenue_share,abc_class,method,status
+Quezon,31329.47,7203303.19,6363914.72,3074,71,0,847678.1200000001,1353716.0599999998,1,0.626186,0.319457,0.319457,A,ABC/Pareto using total_trade_price revenue,draft
+Batangas,19719.68,5184707.7028,4810710.4428,3062,72,0,263519.28,470232.51999999996,2,0.560402,0.229935,0.549391,A,ABC/Pareto using total_trade_price revenue,draft
+Marinduque,17681.0,5041871.42,4041196.12,657,56,20,1029969.8900000001,1950118.1100000003,3,0.528158,0.2236,0.772991,A,ABC/Pareto using total_trade_price revenue,draft
+Camarines Norte,6496.19,2151319.47,1471272.79,640,36,0,417946.75,698649.25,4,0.598221,0.095408,0.868399,B,ABC/Pareto using total_trade_price revenue,draft
+Cavite,7324.96,1246439.34,1003418.11,760,42,0,177448.92000000004,211424.9200000001,5,0.8393,0.055278,0.923677,B,ABC/Pareto using total_trade_price revenue,draft
+Laguna,3425.64,785112.94,604820.76,235,18,0,371564.3,769379.7000000001,6,0.48294,0.034819,0.958496,C,ABC/Pareto using total_trade_price revenue,draft
+Camarines Sur,3024.91,570209.094,646475.7436,670,32,0,169990.25,217275.24999999997,7,0.782373,0.025288,0.983784,C,ABC/Pareto using total_trade_price revenue,draft
+Albay,2067.0,365654.27,351017.4,14,8,0,32595.7,47797.7,8,0.681951,0.016216,1.0,C,ABC/Pareto using total_trade_price revenue,draft
