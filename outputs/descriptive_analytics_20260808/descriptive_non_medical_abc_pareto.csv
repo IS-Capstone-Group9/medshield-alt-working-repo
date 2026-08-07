@@ -1,177 +1,184 @@
 product,quantity,revenue,gross_margin_amount,row_count,active_months,estimated_contract_rows,net_income_clean,revenue_clean,rank,gross_margin_rate,revenue_share,cumulative_revenue_share,abc_class,method,status
-T SHIRT WITH PRINT,1688.0471,7198892.13,2971849.11,108,25,97,1103874.2699999998,2184473.12,1,0.505327,0.176251,0.176251,A,ABC/Pareto using total_trade_price revenue,draft
-HARD COPY SUB#20 (8 1/2X13) LONG,487.273,4549402.65,3791312.51,70,22,60,545488.7600000001,1169258.01,2,0.466526,0.111383,0.287634,A,ABC/Pareto using total_trade_price revenue,draft
-HARD COPY SUB#20 A4,283.6554,3655455.91,2373452.47,67,22,58,602948.2900000003,1427705.9900000002,3,0.42232,0.089497,0.37713,A,ABC/Pareto using total_trade_price revenue,draft
-CLEAR BOOK LEGAL/LONG,46.4266,2898103.32,674736.97,57,22,50,662314.8899999998,1523161.91,4,0.434829,0.070954,0.448085,A,ABC/Pareto using total_trade_price revenue,draft
-RECORD BOOK 500PAGES (VALIANT),47.4104,2323131.52,1528883.19,59,22,53,523035.26,1275207.7999999998,5,0.410157,0.056877,0.504962,A,ABC/Pareto using total_trade_price revenue,draft
-INK EPSON #003 MAGENTA,74.0463,1779974.15,1371763.6,52,18,47,230689.03000000006,576654.6200000001,6,0.400047,0.043579,0.548541,A,ABC/Pareto using total_trade_price revenue,draft
-FOLDER ORDINARY WHITE LONG 100'S,10.348,1564330.79,929372.03,39,16,36,354681.13999999996,580429.79,7,0.611066,0.0383,0.586841,A,ABC/Pareto using total_trade_price revenue,draft
-STAPLE WIRE #35,236.8622,1544905.77,935259.3,44,20,38,270775.12,643471.9700000001,8,0.420803,0.037824,0.624665,A,ABC/Pareto using total_trade_price revenue,draft
-HBW BLACK BALLPEN,217.0942,1531294.11,1088177.43,51,18,45,340410.8399999999,667589.3999999999,9,0.50991,0.037491,0.662155,A,ABC/Pareto using total_trade_price revenue,draft
-BOND PAPER LONG (HARDCOPY),38.2614,1495430.32,776918.79,40,17,36,124898.0,305280.99,10,0.409125,0.036613,0.698768,A,ABC/Pareto using total_trade_price revenue,draft
-INK EPSON #003 BLACK,284.8884,1458979.04,676792.41,57,23,51,613806.7699999999,1200869.19,11,0.511135,0.03572,0.734488,A,ABC/Pareto using total_trade_price revenue,draft
-INK EPSON #003 CYAN,72.6023,1381930.45,1019391.88,45,19,40,416906.28,722059.6599999999,12,0.577385,0.033834,0.768322,A,ABC/Pareto using total_trade_price revenue,draft
-BOND PAPER A4 (HARDCOPY),63.8107,1359128.61,904030.86,40,19,37,373149.78,784518.1700000002,13,0.475642,0.033276,0.801598,B,ABC/Pareto using total_trade_price revenue,draft
-CORRECTION TAPE 20MM,131.3332,1145257.1,404302.31,51,18,47,374125.88999999996,952798.5299999999,14,0.39266,0.028039,0.829637,B,ABC/Pareto using total_trade_price revenue,draft
-SCOTCH TAPE 1'',24.5734,1041513.7,535030.32,37,15,35,105579.98000000001,204012.94999999998,15,0.517516,0.025499,0.855136,B,ABC/Pareto using total_trade_price revenue,draft
-INK EPSON #003 YELLOW,73.8132,1015890.16,822866.68,49,19,44,171501.19,324468.35,16,0.528561,0.024872,0.880008,B,ABC/Pareto using total_trade_price revenue,draft
-MASKING TAPE 1INCH,89.9421,937329.13,463938.17,39,18,34,436000.68,792829.26,17,0.54993,0.022949,0.902957,B,ABC/Pareto using total_trade_price revenue,draft
-BALLPEN FINEPOINT,290.5684,885048.75,236476.45,41,15,35,218739.77,464440.1000000001,18,0.470975,0.021669,0.924626,B,ABC/Pareto using total_trade_price revenue,draft
-ELECTRICAL WIRE #14,54.5212,719360.62,618972.26,31,15,29,62087.729999999996,119432.48000000003,19,0.519856,0.017612,0.942238,B,ABC/Pareto using total_trade_price revenue,draft
-BOND PAPER LEGAL 80GSM (DOUBLE A),47.014,635602.43,343169.09,19,10,17,342294.5,603219.8200000001,20,0.567446,0.015561,0.957799,C,ABC/Pareto using total_trade_price revenue,draft
-CORRECTION TAPE JOY,268.3103,451304.93,156183.89,49,16,41,144629.84,319654.5,21,0.452457,0.011049,0.968849,C,ABC/Pareto using total_trade_price revenue,draft
-SODAMPEN 1G IM/IV,7811.0,335873.0,329595.0,61,26,0,0.0,0.0,22,0.0,0.008223,0.977072,C,ABC/Pareto using total_trade_price revenue,draft
-TRASH BAG - BLACK - MEDIUM,134.1814,197762.27,34649.32,29,14,23,33229.32000000001,116121.51,23,0.28616,0.004842,0.981914,C,ABC/Pareto using total_trade_price revenue,draft
-PAPER TOWEL 175PULL-UPS (FEMME),550.6227,139003.32,124779.82,19,12,4,14048.25,28271.75,24,0.496901,0.003403,0.985317,C,ABC/Pareto using total_trade_price revenue,draft
-PAPER TOWEL - JADE,2100.0,94000.0,93550.0,3,3,0,0.0,0.0,25,0.0,0.002301,0.987618,C,ABC/Pareto using total_trade_price revenue,draft
-THERMAL PAPER,23.0,74500.0,36300.0,6,6,0,18300.0,38500.0,26,0.475325,0.001824,0.989442,C,ABC/Pareto using total_trade_price revenue,draft
-HARD COPY SUB#20 SHORT,405.0,57105.0,24245.0,3,3,0,24245.0,57105.0,27,0.424569,0.001398,0.99084,C,ABC/Pareto using total_trade_price revenue,draft
-CARDIPEN 1MG/ML 2ML,10.0,23550.0,950.0,1,1,0,950.0,23550.0,28,0.04034,0.000577,0.991417,C,ABC/Pareto using total_trade_price revenue,draft
-"AUTOCLAVE TAPE 3/4""",123.0,22540.0,22540.0,5,5,0,0.0,0.0,29,0.0,0.000552,0.991969,C,ABC/Pareto using total_trade_price revenue,draft
-STERILE LATEX SURGICAL GLOVES #7,30.0,22500.0,20250.0,2,1,0,9000.0,11250.0,30,0.8,0.000551,0.99252,C,ABC/Pareto using total_trade_price revenue,draft
-AUTOCLAVE ORMED TAPE 2CM,100.0,21000.0,15000.0,1,1,0,15000.0,21000.0,31,0.714286,0.000514,0.993034,C,ABC/Pareto using total_trade_price revenue,draft
-PAPER MULTI PURPOSE (COPY) LEGAL 70GSM HARDCOPY,100.0,18900.0,4200.0,1,1,0,4200.0,18900.0,32,0.222222,0.000463,0.993497,C,ABC/Pareto using total_trade_price revenue,draft
-PAPER MULTI PURPOSE (COPY) A4 70GSM HARDCOPY,100.0,16900.0,10100.0,1,1,0,10100.0,16900.0,33,0.597633,0.000414,0.99391,C,ABC/Pareto using total_trade_price revenue,draft
-COMPUTER INK #664 EPSON,64.0,16832.0,4862.0,3,3,0,3810.0,15780.0,34,0.241445,0.000412,0.994322,C,ABC/Pareto using total_trade_price revenue,draft
-SURGICAL BLADE #20 SURGITECH,60.0,16800.0,7090.0,5,3,0,90.0,3080.0,35,0.029221,0.000411,0.994734,C,ABC/Pareto using total_trade_price revenue,draft
-PAPER MULTICOPY 80GSM 216X330 LONG (HARDCOPY),50.0,11000.0,5350.0,1,1,0,5350.0,11000.0,36,0.486364,0.000269,0.995003,C,ABC/Pareto using total_trade_price revenue,draft
-PAPER MULTICOPY 80GSM 210X297 A4 (HARDCOPY),50.0,9800.0,3450.0,1,1,0,3450.0,9800.0,37,0.352041,0.00024,0.995243,C,ABC/Pareto using total_trade_price revenue,draft
-BOND PAPER A4 80GSM (DOUBLE A),40.0,9600.0,1800.0,1,1,0,1800.0,9600.0,38,0.1875,0.000235,0.995478,C,ABC/Pareto using total_trade_price revenue,draft
-SURGICAL BLADE #21 SURGITECH,34.0,9520.0,4760.0,2,1,0,0.0,0.0,39,0.0,0.000233,0.995711,C,ABC/Pareto using total_trade_price revenue,draft
-GIGIL SAW WIRE #20,10.0,9000.0,9000.0,1,1,0,0.0,0.0,40,0.0,0.00022,0.995931,C,ABC/Pareto using total_trade_price revenue,draft
-SURGICAL BLADE #10 SURGITECH,31.0,8680.0,2890.0,4,3,0,90.0,3080.0,41,0.029221,0.000213,0.996144,C,ABC/Pareto using total_trade_price revenue,draft
-SURGICAL BLADE #11 SURGITECH,30.0,8400.0,4200.0,2,1,0,0.0,0.0,42,0.0,0.000206,0.99635,C,ABC/Pareto using total_trade_price revenue,draft
-ECG PAPER 80X20,152.0,7600.0,7350.0,5,5,0,2250.0,2500.0,43,0.9,0.000186,0.996536,C,ABC/Pareto using total_trade_price revenue,draft
-CARBON PAPER 8.5X13,10.0,7250.0,1100.0,2,2,0,1100.0,7250.0,44,0.151724,0.000178,0.996713,C,ABC/Pareto using total_trade_price revenue,draft
-THERMAL SCANNER WITH AUTOMATIC ALCOHOL DISPENSER,2.0,5400.0,5400.0,1,1,0,0.0,0.0,45,0.0,0.000132,0.996845,C,ABC/Pareto using total_trade_price revenue,draft
-BALLPEN BLACK FINE POINT PILOT,200.0,4600.0,950.0,2,1,0,950.0,4600.0,46,0.206522,0.000113,0.996958,C,ABC/Pareto using total_trade_price revenue,draft
-SODAMPEN 250MG VIAL,38.0,4560.0,4560.0,8,8,0,0.0,0.0,47,0.0,0.000112,0.99707,C,ABC/Pareto using total_trade_price revenue,draft
-MASTER PAPER GESTENER CPMT 15,4.0,4462.08,4462.08,2,2,0,0.0,0.0,48,0.0,0.000109,0.997179,C,ABC/Pareto using total_trade_price revenue,draft
-CAUTERY PENCIL (ORMED),18.0,4320.0,1980.0,3,2,0,1980.0,4320.0,49,0.458333,0.000106,0.997285,C,ABC/Pareto using total_trade_price revenue,draft
-THERMAL PAPER 110MMX20M (SONY),0.5,4100.0,1550.0,1,1,0,1550.0,4100.0,50,0.378049,0.0001,0.997385,C,ABC/Pareto using total_trade_price revenue,draft
-INK CARTRIDGE #303 (CANON),1.0,4070.0,426.0,1,1,0,426.0,4070.0,51,0.104668,0.0001,0.997485,C,ABC/Pareto using total_trade_price revenue,draft
-ECG THERMAL PAPER SIMPLEX 80MMX20MM,44.0,3740.0,3740.0,2,2,0,0.0,0.0,52,0.0,9.2e-05,0.997576,C,ABC/Pareto using total_trade_price revenue,draft
-MYRECLOX 250MG SUSPENSION 60ML,144.0,3312.0,3312.0,1,1,0,0.0,0.0,53,0.0,8.1e-05,0.997657,C,ABC/Pareto using total_trade_price revenue,draft
-DOUBLE SIDED TAPE,105.0,3150.0,1880.0,3,3,0,1880.0,3150.0,54,0.596825,7.7e-05,0.997734,C,ABC/Pareto using total_trade_price revenue,draft
-SURGICAL BLADE #15 SURGITECH,11.0,3080.0,1410.0,3,2,0,10.0,280.0,55,0.035714,7.5e-05,0.99781,C,ABC/Pareto using total_trade_price revenue,draft
-ZINC OXIDE TAPE: 2.5CM X 5CM FUJI,24.0,2640.0,2640.0,1,1,0,0.0,0.0,56,0.0,6.5e-05,0.997875,C,ABC/Pareto using total_trade_price revenue,draft
-SURGICAL BLADE SURGITECH # 22,9.0,2520.0,0.0,1,1,0,0.0,0.0,57,0.0,6.2e-05,0.997936,C,ABC/Pareto using total_trade_price revenue,draft
-SIGN PEN LIQUID GEL (DONG A),100.0,2400.0,2400.0,1,1,0,0.0,0.0,58,0.0,5.9e-05,0.997995,C,ABC/Pareto using total_trade_price revenue,draft
-FOLDER W/ TAB LEGAL 100'S/PACK,5.0,2350.0,0.0,1,1,0,0.0,0.0,59,0.0,5.8e-05,0.998053,C,ABC/Pareto using total_trade_price revenue,draft
-PAPER CLIP SMALL,22.0,2310.0,210.0,2,2,0,0.0,0.0,60,0.0,5.7e-05,0.998109,C,ABC/Pareto using total_trade_price revenue,draft
-FOLDER 14PTS LONG,7.0,2275.0,1625.0,4,3,0,975.0,1625.0,61,0.6,5.6e-05,0.998165,C,ABC/Pareto using total_trade_price revenue,draft
-CARBON PAPER LONG,3.0,2115.0,0.0,2,2,0,0.0,0.0,62,0.0,5.2e-05,0.998217,C,ABC/Pareto using total_trade_price revenue,draft
-SURGICAL BLADE #20 100'S PARTNERS,6.0,2016.0,1584.0,3,2,0,240.0,336.0,63,0.714286,4.9e-05,0.998266,C,ABC/Pareto using total_trade_price revenue,draft
-BALLPEN RETRACTABLE BLACK 50'S (MATRIX),10.0,1900.0,900.0,1,1,0,900.0,1900.0,64,0.473684,4.7e-05,0.998312,C,ABC/Pareto using total_trade_price revenue,draft
-SUPRAFIX DS 100MG/5ML SUSPENSION,20.0,1880.0,440.0,1,1,0,440.0,1880.0,65,0.234043,4.6e-05,0.998358,C,ABC/Pareto using total_trade_price revenue,draft
-FANCY FOLDER LEGAL,4.0,1800.0,355.0,3,2,0,355.0,1800.0,66,0.197222,4.4e-05,0.998403,C,ABC/Pareto using total_trade_price revenue,draft
-PENLIGHT (KINGMED),16.0,1800.0,680.0,2,2,0,80.0,1200.0,67,0.066667,4.4e-05,0.998447,C,ABC/Pareto using total_trade_price revenue,draft
-SURGICAL BLADES #20,6.0,1758.0,1734.0,2,2,0,816.0,840.0,68,0.971429,4.3e-05,0.99849,C,ABC/Pareto using total_trade_price revenue,draft
-SURGICAL TAPE 1'' 12'S SUREGUARD,7.0,1750.0,1750.0,2,1,0,0.0,0.0,69,0.0,4.3e-05,0.998532,C,ABC/Pareto using total_trade_price revenue,draft
-SUCTION CATHETER - SURGITECH - FR#8,130.0,1740.0,1111.0,2,2,0,1111.0,1740.0,70,0.638506,4.3e-05,0.998575,C,ABC/Pareto using total_trade_price revenue,draft
-SQFEN 200MG/5ML SUSPENSION,50.0,1600.0,1600.0,1,1,0,0.0,0.0,71,0.0,3.9e-05,0.998614,C,ABC/Pareto using total_trade_price revenue,draft
-CAUTERY PENCIL (ELECTRO SURGICAL PRODUCTS),4.0,1600.0,600.0,1,1,0,600.0,1600.0,72,0.375,3.9e-05,0.998653,C,ABC/Pareto using total_trade_price revenue,draft
-PAPER CUPS 50'S,42.0,1596.0,1596.0,1,1,0,0.0,0.0,73,0.0,3.9e-05,0.998693,C,ABC/Pareto using total_trade_price revenue,draft
-ZOEY PHOTO PAPER A-4 180GSM,30.0,1500.0,900.0,1,1,0,900.0,1500.0,74,0.6,3.7e-05,0.998729,C,ABC/Pareto using total_trade_price revenue,draft
-PENCIL,16.0,1431.0,6.0,4,3,0,0.0,0.0,75,0.0,3.5e-05,0.998764,C,ABC/Pareto using total_trade_price revenue,draft
-PANDA BALLPEN,13.0,1430.0,0.0,1,1,0,0.0,0.0,76,0.0,3.5e-05,0.998799,C,ABC/Pareto using total_trade_price revenue,draft
-FOLDER 14PTS SHORT,5.0,1375.0,881.0,4,3,0,606.0,1100.0,77,0.550909,3.4e-05,0.998833,C,ABC/Pareto using total_trade_price revenue,draft
-SIGN PEN,52.0,1300.0,1300.0,3,2,0,450.0,450.0,78,1.0,3.2e-05,0.998865,C,ABC/Pareto using total_trade_price revenue,draft
-SCOTCH TAPE 24X50,100.0,1300.0,1300.0,2,2,0,0.0,0.0,79,0.0,3.2e-05,0.998897,C,ABC/Pareto using total_trade_price revenue,draft
-ECG PAPER 63X30,20.0,1300.0,900.0,1,1,0,900.0,1300.0,80,0.692308,3.2e-05,0.998928,C,ABC/Pareto using total_trade_price revenue,draft
-BALLPEN G-TECH 0.3 BLACK (PILOT),20.0,1300.0,0.0,1,1,0,0.0,0.0,81,0.0,3.2e-05,0.99896,C,ABC/Pareto using total_trade_price revenue,draft
-PAPER FASTERNER PLASTIC,40.0,1280.0,720.0,2,2,0,720.0,1280.0,82,0.5625,3.1e-05,0.998992,C,ABC/Pareto using total_trade_price revenue,draft
-"AUTOCLAVE TAPE 1""",5.0,1250.0,1250.0,1,1,0,0.0,0.0,83,0.0,3.1e-05,0.999022,C,ABC/Pareto using total_trade_price revenue,draft
-BALLPEN ORDINARY FINE POINT 0.5 BLACK (FLEXSTICK),185.0,1202.5,752.5,2,2,0,525.0,975.0,84,0.538462,2.9e-05,0.999052,C,ABC/Pareto using total_trade_price revenue,draft
-SURGICAL BLADES #10,3.0,1200.0,800.0,3,3,0,0.0,0.0,85,0.0,2.9e-05,0.999081,C,ABC/Pareto using total_trade_price revenue,draft
-TISSUE PAPER,14.0,1171.28,1488.58,6,6,0,492.0,558.0,86,0.88172,2.9e-05,0.99911,C,ABC/Pareto using total_trade_price revenue,draft
-UMBILICAL CATHETER SIZE#5 (BICAKCILAS),10.0,1100.0,750.0,1,1,0,750.0,1100.0,87,0.681818,2.7e-05,0.999137,C,ABC/Pareto using total_trade_price revenue,draft
-INK #003 CYAN (EPSON),4.0,1100.0,1100.0,1,1,0,0.0,0.0,88,0.0,2.7e-05,0.999164,C,ABC/Pareto using total_trade_price revenue,draft
-INK #003 MAGENTA (EPSON),4.0,1100.0,1100.0,1,1,0,0.0,0.0,89,0.0,2.7e-05,0.99919,C,ABC/Pareto using total_trade_price revenue,draft
-INK #003 YELLOW (EPSON),4.0,1100.0,1100.0,1,1,0,0.0,0.0,90,0.0,2.7e-05,0.999217,C,ABC/Pareto using total_trade_price revenue,draft
-PENLIGHT,5.0,1050.0,0.0,1,1,0,0.0,0.0,91,0.0,2.6e-05,0.999243,C,ABC/Pareto using total_trade_price revenue,draft
-INK #003 BLACK (EPSON),4.0,1040.0,1040.0,1,1,0,0.0,0.0,92,0.0,2.5e-05,0.999269,C,ABC/Pareto using total_trade_price revenue,draft
-"BLADE HOLDER SIZE #4, 5 1/4",8.0,1040.0,1040.0,1,1,0,1040.0,1040.0,93,1.0,2.5e-05,0.999294,C,ABC/Pareto using total_trade_price revenue,draft
-PENCIL LEAD W/ ERASER 12'S/BXS (MONGOL),10.0,1020.0,0.0,1,1,0,0.0,0.0,94,0.0,2.5e-05,0.999319,C,ABC/Pareto using total_trade_price revenue,draft
-TISSUE PAPER 2PLY (FEMME),100.0,910.0,490.0,1,1,0,490.0,910.0,95,0.538462,2.2e-05,0.999341,C,ABC/Pareto using total_trade_price revenue,draft
-BOND PAPER A4 (HOKKAIDO),5.0,845.0,505.0,1,1,0,505.0,845.0,96,0.597633,2.1e-05,0.999362,C,ABC/Pareto using total_trade_price revenue,draft
-HARD COPY SUB#20 LONG,5.0,840.0,315.0,1,1,0,315.0,840.0,97,0.375,2.1e-05,0.999383,C,ABC/Pareto using total_trade_price revenue,draft
-SURGICAL BLADE #12 SURGITECH,3.0,840.0,0.0,1,1,0,0.0,0.0,98,0.0,2.1e-05,0.999403,C,ABC/Pareto using total_trade_price revenue,draft
-INK CARTRIDGE #664 CYAN (EPSON),3.0,825.0,825.0,1,1,0,0.0,0.0,99,0.0,2e-05,0.999423,C,ABC/Pareto using total_trade_price revenue,draft
-INK CARTRIDGE #664 MAGENTA (EPSON),3.0,825.0,825.0,1,1,0,0.0,0.0,100,0.0,2e-05,0.999444,C,ABC/Pareto using total_trade_price revenue,draft
-INK CARTRIDGE #664 YELLOW (EPSON),3.0,825.0,825.0,1,1,0,0.0,0.0,101,0.0,2e-05,0.999464,C,ABC/Pareto using total_trade_price revenue,draft
-EXPANDABLE FOLDER LONG GREEN,50.0,800.0,175.0,1,1,0,175.0,800.0,102,0.21875,2e-05,0.999483,C,ABC/Pareto using total_trade_price revenue,draft
-INK CARTRIDGE #664 BLACK (EPSON),3.0,780.0,780.0,1,1,0,0.0,0.0,103,0.0,1.9e-05,0.999502,C,ABC/Pareto using total_trade_price revenue,draft
-NYLON #300,2.0,760.0,760.0,1,1,0,0.0,0.0,104,0.0,1.9e-05,0.999521,C,ABC/Pareto using total_trade_price revenue,draft
-"PAPER ,MULTICOPY LEGAL SIZE (HARDCOPY)",4.0,756.0,568.0,1,1,0,568.0,756.0,105,0.751323,1.9e-05,0.99954,C,ABC/Pareto using total_trade_price revenue,draft
-ZOEY STAPLER W/ STAPLE REMOVER #35,5.0,750.0,411.0,2,2,0,111.0,450.0,106,0.246667,1.8e-05,0.999558,C,ABC/Pareto using total_trade_price revenue,draft
-MASKING TAPE 2'' (CROCO),8.0,680.0,300.0,2,2,0,300.0,425.0,107,0.705882,1.7e-05,0.999575,C,ABC/Pareto using total_trade_price revenue,draft
-PAPER TOWEL 175PULL-UPS 200MMX200MM (BONUS),15.0,671.25,671.25,1,1,0,0.0,0.0,108,0.0,1.6e-05,0.999591,C,ABC/Pareto using total_trade_price revenue,draft
-BALLPEN BLUE FINE POINT PILOT,30.0,660.0,180.0,1,1,0,180.0,660.0,109,0.272727,1.6e-05,0.999607,C,ABC/Pareto using total_trade_price revenue,draft
-BALLPEN RED FINE POINT PILOT,30.0,660.0,150.0,1,1,0,150.0,660.0,110,0.227273,1.6e-05,0.999623,C,ABC/Pareto using total_trade_price revenue,draft
-BALLPEN G-TECH 0.3 BLUE (PILOT),10.0,650.0,0.0,1,1,0,0.0,0.0,111,0.0,1.6e-05,0.999639,C,ABC/Pareto using total_trade_price revenue,draft
-HBW BLUE BALLPEN,4.0,600.0,600.0,2,2,0,0.0,0.0,112,0.0,1.5e-05,0.999654,C,ABC/Pareto using total_trade_price revenue,draft
-SURGICAL BLADE #11,2.0,560.0,115.0,2,2,0,115.0,560.0,113,0.205357,1.4e-05,0.999668,C,ABC/Pareto using total_trade_price revenue,draft
-SURGICAL BLADES SURGITECH #20,2.0,560.0,385.0,2,2,0,105.0,280.0,114,0.375,1.4e-05,0.999681,C,ABC/Pareto using total_trade_price revenue,draft
-SIGNPEN G-TECH 1.0 V10 BLACK (PILOT),10.0,554.17,245.83,1,1,0,245.83,554.17,115,0.4436,1.4e-05,0.999695,C,ABC/Pareto using total_trade_price revenue,draft
-PAPER CLIP BIG,23.0,552.0,272.0,3,3,0,224.0,504.0,116,0.444444,1.4e-05,0.999708,C,ABC/Pareto using total_trade_price revenue,draft
-FOLDER A4,53.0,530.0,483.0,3,3,0,453.0,500.0,117,0.906,1.3e-05,0.999721,C,ABC/Pareto using total_trade_price revenue,draft
-SHARPENER METAL HEAVY DUTY,2.0,530.0,470.0,1,1,0,470.0,530.0,118,0.886792,1.3e-05,0.999734,C,ABC/Pareto using total_trade_price revenue,draft
-ECG THERMAL PAPER 80MMX20M (SIMPLEX),1.2,510.0,390.0,1,1,0,390.0,510.0,119,0.764706,1.2e-05,0.999747,C,ABC/Pareto using total_trade_price revenue,draft
-STICKER PAPER MATTE A4 (VECO),10.0,500.0,0.0,1,1,0,0.0,0.0,120,0.0,1.2e-05,0.999759,C,ABC/Pareto using total_trade_price revenue,draft
-SYSTEM FOLDER LONG 14PTS,1.0,470.0,330.0,1,1,0,330.0,470.0,121,0.702128,1.2e-05,0.999771,C,ABC/Pareto using total_trade_price revenue,draft
-"DATA FOLDER, MADE OF CHIPBOARD TAGILA LOCK",4.0,460.0,76.0,1,1,0,76.0,460.0,122,0.165217,1.1e-05,0.999782,C,ABC/Pareto using total_trade_price revenue,draft
-BALLPEN FINEPOINT BLACK (PILOT),20.0,450.0,90.0,1,1,0,90.0,450.0,123,0.2,1.1e-05,0.999793,C,ABC/Pareto using total_trade_price revenue,draft
-SIGNPEN 0.4 (MYGEL),15.0,435.0,0.0,1,1,0,0.0,0.0,124,0.0,1.1e-05,0.999803,C,ABC/Pareto using total_trade_price revenue,draft
-MASKING TAPE 1'',10.0,410.0,30.0,1,1,0,30.0,410.0,125,0.073171,1e-05,0.999814,C,ABC/Pareto using total_trade_price revenue,draft
-BALLPEN 0.5 BLACK (MYGEL),15.0,405.0,405.0,1,1,0,0.0,0.0,126,0.0,1e-05,0.999823,C,ABC/Pareto using total_trade_price revenue,draft
-GUEDEL AIRWAY 80MM SIZE #2 GREEN (ORMED),10.0,380.0,270.0,1,1,0,270.0,380.0,127,0.710526,9e-06,0.999833,C,ABC/Pareto using total_trade_price revenue,draft
-GUEDEL AIRWAY 90MM SIZE #3 YELLOW (ORMED),10.0,380.0,270.0,1,1,0,270.0,380.0,128,0.710526,9e-06,0.999842,C,ABC/Pareto using total_trade_price revenue,draft
-GUEDEL AIRWAY 60MM SIZE #0 BLACK (ORMED),10.0,380.0,380.0,1,1,0,0.0,0.0,129,0.0,9e-06,0.999851,C,ABC/Pareto using total_trade_price revenue,draft
-TAPE TRANSPARENT 1'',16.0,368.0,0.0,1,1,0,0.0,0.0,130,0.0,9e-06,0.99986,C,ABC/Pareto using total_trade_price revenue,draft
-SURGICAL BLADES PARTNERS #15,1.0,310.0,75.0,1,1,0,75.0,310.0,131,0.241935,8e-06,0.999868,C,ABC/Pareto using total_trade_price revenue,draft
-FABER CASTELL BALLPEN,30.0,300.0,300.0,1,1,0,0.0,0.0,132,0.0,7e-06,0.999875,C,ABC/Pareto using total_trade_price revenue,draft
-PENCIL MONGOL NO.2,3.0,285.0,32.0,2,2,0,32.0,190.0,133,0.168421,7e-06,0.999882,C,ABC/Pareto using total_trade_price revenue,draft
-COLORED FOLDER DIVIDER LEGAL,10.0,280.0,224.0,2,2,0,0.0,0.0,134,0.0,7e-06,0.999889,C,ABC/Pareto using total_trade_price revenue,draft
-PAPER CLIP BIG 50MM (PRINCE),13.0,266.5,28.5,2,2,0,28.5,61.5,135,0.463415,7e-06,0.999896,C,ABC/Pareto using total_trade_price revenue,draft
-BLADE HOLDER #4 5 1/2,2.0,260.0,0.0,1,1,0,0.0,0.0,136,0.0,6e-06,0.999902,C,ABC/Pareto using total_trade_price revenue,draft
-PAPER CLIP VINYL 55MM 100'S 120GRAMS JOY,10.0,240.0,60.0,1,1,0,60.0,240.0,137,0.25,6e-06,0.999908,C,ABC/Pareto using total_trade_price revenue,draft
-"ELECTRIC TAPE BLACK ,VINYL 0.16MMX19MMX16M",6.0,240.0,106.0,2,2,0,106.0,240.0,138,0.441667,6e-06,0.999914,C,ABC/Pareto using total_trade_price revenue,draft
-FC FINE PEN BLACK 0.5,20.0,230.0,230.0,1,1,0,0.0,0.0,139,0.0,6e-06,0.999919,C,ABC/Pareto using total_trade_price revenue,draft
-FLEXSTICK BALLPEN,30.0,210.0,210.0,2,2,0,0.0,0.0,140,0.0,5e-06,0.999925,C,ABC/Pareto using total_trade_price revenue,draft
-STAPLE WIRE STANDARD #35 (PRINCE),4.0,208.0,64.0,1,1,0,64.0,208.0,141,0.307692,5e-06,0.99993,C,ABC/Pareto using total_trade_price revenue,draft
-ELECTRICAL TAPE,5.0,190.0,175.0,1,1,0,175.0,190.0,142,0.921053,5e-06,0.999934,C,ABC/Pareto using total_trade_price revenue,draft
-WRAPPING PAPER LIGHT BROWN 9.5X9 5'' 115GSM,2.0,183.0,183.0,1,1,0,0.0,0.0,143,0.0,4e-06,0.999939,C,ABC/Pareto using total_trade_price revenue,draft
-ELECTRIC TAPE PVC 0.155MMX19MMX16MM,4.0,160.0,20.0,1,1,0,20.0,160.0,144,0.125,4e-06,0.999943,C,ABC/Pareto using total_trade_price revenue,draft
-SUCTION CATHETER - SURGITECH - FR#5,10.0,150.0,100.0,1,1,0,100.0,150.0,145,0.666667,4e-06,0.999946,C,ABC/Pareto using total_trade_price revenue,draft
-GUEDEL AIRWAY ORMED RED #4 SIZE 100MM,2.0,150.0,20.0,1,1,0,20.0,150.0,146,0.133333,4e-06,0.99995,C,ABC/Pareto using total_trade_price revenue,draft
-GUEDEL AIRWAY SEDASENZ GREEN # 2 1-SM-GAIR02,2.0,150.0,20.0,1,1,0,20.0,150.0,147,0.133333,4e-06,0.999954,C,ABC/Pareto using total_trade_price revenue,draft
-GUEDEL AIRWAY SEDASENZ YELLOW # 3 1-SM-GAIR03,2.0,150.0,20.0,1,1,0,20.0,150.0,148,0.133333,4e-06,0.999957,C,ABC/Pareto using total_trade_price revenue,draft
-GUEDEL AIRWAY SIMPLEX BLUE #0 SIZE 50MM,2.0,150.0,20.0,1,1,0,20.0,150.0,149,0.133333,4e-06,0.999961,C,ABC/Pareto using total_trade_price revenue,draft
-GUEDEL AIRWAY WHITE ORMED # 1 SIZE 70MM,2.0,150.0,20.0,1,1,0,20.0,150.0,150,0.133333,4e-06,0.999965,C,ABC/Pareto using total_trade_price revenue,draft
-CORRECTION TAPE ODVEN,10.0,150.0,150.0,1,1,0,0.0,0.0,151,0.0,4e-06,0.999968,C,ABC/Pareto using total_trade_price revenue,draft
-PAPER CLIP SMALL 33MM (PRINCE),14.0,147.0,6.0,2,2,0,6.0,42.0,152,0.142857,4e-06,0.999972,C,ABC/Pareto using total_trade_price revenue,draft
-SPECIAL PAPER A4 CREAM,4.0,136.0,0.0,1,1,0,0.0,0.0,153,0.0,3e-06,0.999975,C,ABC/Pareto using total_trade_price revenue,draft
-GUEDEL AIRWAY #5 (ORMED),2.0,130.0,40.0,1,1,0,40.0,130.0,154,0.307692,3e-06,0.999979,C,ABC/Pareto using total_trade_price revenue,draft
-PAPER CLIP VINYL 33MM 100'S 40GRAMS JOY,10.0,129.5,0.0,1,1,0,0.0,0.0,155,0.0,3e-06,0.999982,C,ABC/Pareto using total_trade_price revenue,draft
-PAPER CLIP VINYL PLASTIC COATED 50MM (PRIME),5.0,117.5,32.5,1,1,0,32.5,117.5,156,0.276596,3e-06,0.999985,C,ABC/Pareto using total_trade_price revenue,draft
-TAPE TRANSPARENT 1'' (ARMAK),8.0,112.0,64.0,1,1,0,64.0,112.0,157,0.571429,3e-06,0.999987,C,ABC/Pareto using total_trade_price revenue,draft
-TAPE DISPENSER HEAVY DUTY,1.0,110.0,90.0,1,1,0,90.0,110.0,158,0.818182,3e-06,0.99999,C,ABC/Pareto using total_trade_price revenue,draft
-CARTOLINA PAPER WHITE,20.0,100.0,60.0,1,1,0,60.0,100.0,159,0.6,2e-06,0.999992,C,ABC/Pareto using total_trade_price revenue,draft
-TAPE TRANSPARENT WITH 24MM,3.0,69.0,0.0,1,1,0,0.0,69.0,160,0.0,2e-06,0.999994,C,ABC/Pareto using total_trade_price revenue,draft
-TAPE DISPENSER TABLE TOP (JOY),1.0,64.0,61.0,1,1,0,61.0,64.0,161,0.953125,2e-06,0.999996,C,ABC/Pareto using total_trade_price revenue,draft
-PAPER CLIP VINYL PLASTIC COATED 33MM (PRIME),5.0,62.5,0.0,1,1,0,0.0,0.0,162,0.0,2e-06,0.999997,C,ABC/Pareto using total_trade_price revenue,draft
-FILTER PAPER 24X24,2.0,48.0,0.0,1,1,0,0.0,0.0,163,0.0,1e-06,0.999998,C,ABC/Pareto using total_trade_price revenue,draft
-PACKAGING TAPE 2'' (LUCKY),3.0,45.0,45.0,1,1,0,0.0,0.0,164,0.0,1e-06,1.0,C,ABC/Pareto using total_trade_price revenue,draft
-PAPER CLIP 50MM (WELLS),2.0,37.0,23.0,1,1,0,23.0,37.0,165,0.621622,1e-06,1.0,C,ABC/Pareto using total_trade_price revenue,draft
-TAPE MASKING 1 (POLYTAPE),2.0,28.0,28.0,1,1,0,0.0,0.0,166,0.0,1e-06,1.000001,C,ABC/Pareto using total_trade_price revenue,draft
-TAPE PACKAGING 2 (ARMAK),2.0,28.0,28.0,1,1,0,0.0,0.0,167,0.0,1e-06,1.000002,C,ABC/Pareto using total_trade_price revenue,draft
-VINYL PAPER CLIPS,1.0,24.0,6.0,1,1,0,6.0,24.0,168,0.25,1e-06,1.000002,C,ABC/Pareto using total_trade_price revenue,draft
-PAPER CLIP 33MM (WELLS),2.0,15.0,9.0,1,1,0,9.0,15.0,169,0.6,0.0,1.000003,C,ABC/Pareto using total_trade_price revenue,draft
-"DR#0154,0155,0156 TERMS",1.0,0.0,0.0,1,1,0,0.0,0.0,170,0.0,0.0,1.000003,C,ABC/Pareto using total_trade_price revenue,draft
-DR#0157 SI 0181,1.0,0.0,0.0,1,1,0,0.0,0.0,171,0.0,0.0,1.000003,C,ABC/Pareto using total_trade_price revenue,draft
-FOLDER LONG,2.0,0.0,0.0,1,1,0,0.0,0.0,172,0.0,0.0,1.000003,C,ABC/Pareto using total_trade_price revenue,draft
-SURGICAL BLADE #22 SURGITECH,13.0,0.0,0.0,3,2,0,0.0,0.0,173,0.0,0.0,1.000003,C,ABC/Pareto using total_trade_price revenue,draft
-ZOEY PUNCHER HEAVY DUTY #468,3.0,0.0,0.0,1,1,0,0.0,0.0,174,0.0,0.0,1.000003,C,ABC/Pareto using total_trade_price revenue,draft
-"SIGN PEN BLACK,LIQUID/GEL INL 0.5MM NEEDLE TIP MYGEL",30.0,0.0,0.0,1,1,0,0.0,0.0,175,0.0,0.0,1.000003,C,ABC/Pareto using total_trade_price revenue,draft
-ABDOPEN,-1.0,-112.0,0.0,1,1,0,0.0,0.0,176,0.0,-3e-06,1.0,C,ABC/Pareto using total_trade_price revenue,draft
+T SHIRT WITH PRINT,1685.5399,5464174.35,1315587.55,105,25,94,1056150.4700000002,2091171.38,1,0.505052,0.147601,0.147601,A,ABC/Pareto using total_trade_price revenue,draft
+HARD COPY SUB#20 (8 1/2X13) LONG,486.3975,4646667.11,3941955.63,69,21,59,554684.5700000001,1191226.6299999997,2,0.465642,0.125518,0.273118,A,ABC/Pareto using total_trade_price revenue,draft
+HARD COPY SUB#20 A4,282.5202,3635616.76,2374214.73,63,22,54,597697.2799999999,1417341.2899999998,3,0.421703,0.098207,0.371325,A,ABC/Pareto using total_trade_price revenue,draft
+CLEAR BOOK LEGAL/LONG,44.1254,2398557.13,517537.36,49,22,42,508130.79,1023991.42,4,0.496226,0.064791,0.436116,A,ABC/Pareto using total_trade_price revenue,draft
+BOND PAPER A4 (HARDCOPY),63.8968,1930058.74,1483859.05,41,19,38,361443.28,764179.12,5,0.472982,0.052136,0.488252,A,ABC/Pareto using total_trade_price revenue,draft
+INK EPSON #003 MAGENTA,73.7527,1747318.52,1350214.65,51,18,46,246924.47000000003,612848.7400000001,6,0.402913,0.047199,0.535451,A,ABC/Pareto using total_trade_price revenue,draft
+STAPLE WIRE #35,236.4125,1627452.19,1025288.31,43,20,37,270765.98,638109.0100000001,7,0.424326,0.043961,0.579412,A,ABC/Pareto using total_trade_price revenue,draft
+HBW BLACK BALLPEN,216.6976,1495854.12,1116046.8,49,19,43,325874.42,636644.5700000001,8,0.511862,0.040407,0.619819,A,ABC/Pareto using total_trade_price revenue,draft
+BOND PAPER LONG (HARDCOPY),37.8199,1470032.46,770798.77,39,17,35,118948.32999999996,289386.07,9,0.411037,0.039709,0.659528,A,ABC/Pareto using total_trade_price revenue,draft
+INK EPSON #003 BLACK,283.6183,1347166.78,629769.63,52,22,46,566871.73,1091189.8099999998,10,0.519499,0.03639,0.695918,A,ABC/Pareto using total_trade_price revenue,draft
+INK EPSON #003 CYAN,71.9012,1307362.58,964898.9,42,19,37,399733.79,695586.9299999999,11,0.574671,0.035315,0.731233,A,ABC/Pareto using total_trade_price revenue,draft
+FOLDER ORDINARY WHITE LONG 100'S,10.659,1201401.49,919407.4,42,16,39,343884.95000000007,559919.0599999999,12,0.614169,0.032453,0.763686,A,ABC/Pareto using total_trade_price revenue,draft
+CORRECTION TAPE 20MM,130.6033,1105045.09,383445.39,50,18,46,359715.4600000001,921764.0300000001,13,0.390247,0.02985,0.793536,A,ABC/Pareto using total_trade_price revenue,draft
+SCOTCH TAPE 1'',24.413,1096064.74,594936.41,37,15,35,102780.64000000001,197921.02,14,0.519301,0.029607,0.823144,B,ABC/Pareto using total_trade_price revenue,draft
+SODAMPEN 1G IM/IV,24830.0,1054276.0,1047998.0,205,50,0,0.0,0.0,15,0.0,0.028479,0.851622,B,ABC/Pareto using total_trade_price revenue,draft
+RECORD BOOK 500PAGES (VALIANT),46.8232,1041219.38,524242.42,58,22,52,424092.0,898888.43,16,0.471796,0.028126,0.879748,B,ABC/Pareto using total_trade_price revenue,draft
+MASKING TAPE 1INCH,89.6368,897769.92,448022.05,38,17,33,420197.69,752450.06,17,0.558439,0.024251,0.903999,B,ABC/Pareto using total_trade_price revenue,draft
+BALLPEN FINEPOINT,290.3772,879664.8,232127.62,42,15,36,216590.11999999994,458111.24,18,0.472789,0.023762,0.927761,B,ABC/Pareto using total_trade_price revenue,draft
+ELECTRICAL WIRE #14,54.612,766305.4,650202.48,33,15,31,58935.280000000006,104299.34000000003,19,0.565059,0.0207,0.948461,B,ABC/Pareto using total_trade_price revenue,draft
+INK EPSON #003 YELLOW,73.3669,491598.7,254864.94,48,19,43,187346.59999999998,363627.37,20,0.515216,0.013279,0.96174,C,ABC/Pareto using total_trade_price revenue,draft
+CORRECTION TAPE JOY,267.3852,419313.72,143649.14,46,15,38,132033.94,302237.08999999997,21,0.436856,0.011327,0.973066,C,ABC/Pareto using total_trade_price revenue,draft
+TRASH BAG - BLACK - MEDIUM,133.8305,191599.77,33278.86,27,13,21,31858.86,113375.38999999998,22,0.281003,0.005176,0.978242,C,ABC/Pareto using total_trade_price revenue,draft
+PAPER TOWEL 175PULL-UPS (FEMME),556.6227,139285.38,124977.88,20,13,4,14246.25,28553.75,23,0.498927,0.003762,0.982004,C,ABC/Pareto using total_trade_price revenue,draft
+PAPER TOWEL - JADE,2100.0,94000.0,93550.0,3,3,0,0.0,0.0,24,0.0,0.002539,0.984544,C,ABC/Pareto using total_trade_price revenue,draft
+THERMAL PAPER,28.0,78300.0,39250.0,11,8,0,19350.0,40400.0,25,0.47896,0.002115,0.986659,C,ABC/Pareto using total_trade_price revenue,draft
+HARD COPY SUB#20 SHORT,405.0,57105.0,24245.0,3,3,0,24245.0,57105.0,26,0.424569,0.001543,0.988201,C,ABC/Pareto using total_trade_price revenue,draft
+"AUTOCLAVE TAPE 3/4""",202.0,38340.0,38340.0,8,8,0,11800.0,11800.0,27,1.0,0.001036,0.989237,C,ABC/Pareto using total_trade_price revenue,draft
+CARDIPEN 1MG/ML 2ML,10.0,23550.0,950.0,1,1,0,950.0,23550.0,28,0.04034,0.000636,0.989873,C,ABC/Pareto using total_trade_price revenue,draft
+STERILE LATEX SURGICAL GLOVES #7,30.0,22500.0,20250.0,2,1,0,9000.0,11250.0,29,0.8,0.000608,0.990481,C,ABC/Pareto using total_trade_price revenue,draft
+AUTOCLAVE ORMED TAPE 2CM,100.0,21000.0,15000.0,1,1,0,15000.0,21000.0,30,0.714286,0.000567,0.991048,C,ABC/Pareto using total_trade_price revenue,draft
+PAPER MULTI PURPOSE (COPY) LEGAL 70GSM HARDCOPY,100.0,18900.0,4200.0,1,1,0,4200.0,18900.0,31,0.222222,0.000511,0.991559,C,ABC/Pareto using total_trade_price revenue,draft
+BOND PAPER LEGAL 80GSM (DOUBLE A),45.1685,17109.84,6063.02,3,2,1,6063.02,15759.84,32,0.384713,0.000462,0.992021,C,ABC/Pareto using total_trade_price revenue,draft
+HARBIPEN 1M,116.0,17002.0,16472.0,5,3,0,11395.0,11925.0,33,0.955556,0.000459,0.99248,C,ABC/Pareto using total_trade_price revenue,draft
+PAPER MULTI PURPOSE (COPY) A4 70GSM HARDCOPY,100.0,16900.0,10100.0,1,1,0,10100.0,16900.0,34,0.597633,0.000457,0.992937,C,ABC/Pareto using total_trade_price revenue,draft
+COMPUTER INK #664 EPSON,64.0,16832.0,4862.0,3,3,0,3810.0,15780.0,35,0.241445,0.000455,0.993391,C,ABC/Pareto using total_trade_price revenue,draft
+SURGICAL BLADE #20 SURGITECH,60.0,16800.0,7090.0,5,3,0,90.0,3080.0,36,0.029221,0.000454,0.993845,C,ABC/Pareto using total_trade_price revenue,draft
+PAPER MULTICOPY 80GSM 216X330 LONG (HARDCOPY),50.0,11000.0,5350.0,1,1,0,5350.0,11000.0,37,0.486364,0.000297,0.994142,C,ABC/Pareto using total_trade_price revenue,draft
+PAPER MULTICOPY 80GSM 210X297 A4 (HARDCOPY),50.0,9800.0,3450.0,1,1,0,3450.0,9800.0,38,0.352041,0.000265,0.994407,C,ABC/Pareto using total_trade_price revenue,draft
+BOND PAPER A4 80GSM (DOUBLE A),40.0,9600.0,1800.0,1,1,0,1800.0,9600.0,39,0.1875,0.000259,0.994666,C,ABC/Pareto using total_trade_price revenue,draft
+SURGICAL BLADE #21 SURGITECH,34.0,9520.0,4760.0,2,1,0,0.0,0.0,40,0.0,0.000257,0.994923,C,ABC/Pareto using total_trade_price revenue,draft
+GIGIL SAW WIRE #20,10.0,9000.0,9000.0,1,1,0,0.0,0.0,41,0.0,0.000243,0.995167,C,ABC/Pareto using total_trade_price revenue,draft
+PENCHLOR 1MG/800MCG,580.0,8680.0,8680.0,41,11,0,0.0,0.0,42,0.0,0.000234,0.995401,C,ABC/Pareto using total_trade_price revenue,draft
+SURGICAL BLADE #10 SURGITECH,31.0,8680.0,2890.0,4,3,0,90.0,3080.0,43,0.029221,0.000234,0.995635,C,ABC/Pareto using total_trade_price revenue,draft
+SURGICAL BLADE #11 SURGITECH,30.0,8400.0,4200.0,2,1,0,0.0,0.0,44,0.0,0.000227,0.995862,C,ABC/Pareto using total_trade_price revenue,draft
+ECG PAPER 80X20,152.0,7600.0,7350.0,5,5,0,2250.0,2500.0,45,0.9,0.000205,0.996068,C,ABC/Pareto using total_trade_price revenue,draft
+CARBON PAPER 8.5X13,10.0,7250.0,1100.0,2,2,0,1100.0,7250.0,46,0.151724,0.000196,0.996263,C,ABC/Pareto using total_trade_price revenue,draft
+THERMAL SCANNER WITH AUTOMATIC ALCOHOL DISPENSER,2.0,5400.0,5400.0,1,1,0,0.0,0.0,47,0.0,0.000146,0.996409,C,ABC/Pareto using total_trade_price revenue,draft
+SODAMPEN 250MG VIAL,42.0,5040.0,5040.0,9,9,0,0.0,0.0,48,0.0,0.000136,0.996546,C,ABC/Pareto using total_trade_price revenue,draft
+BALLPEN BLACK FINE POINT PILOT,200.0,4600.0,950.0,2,1,0,950.0,4600.0,49,0.206522,0.000124,0.99667,C,ABC/Pareto using total_trade_price revenue,draft
+MASTER PAPER GESTENER CPMT 15,4.0,4462.08,4462.08,2,2,0,0.0,0.0,50,0.0,0.000121,0.99679,C,ABC/Pareto using total_trade_price revenue,draft
+CAUTERY PENCIL (ORMED),18.0,4320.0,1980.0,3,2,0,1980.0,4320.0,51,0.458333,0.000117,0.996907,C,ABC/Pareto using total_trade_price revenue,draft
+THERMAL PAPER 110MMX20M (SONY),0.5,4100.0,1550.0,1,1,0,1550.0,4100.0,52,0.378049,0.000111,0.997018,C,ABC/Pareto using total_trade_price revenue,draft
+INK CARTRIDGE #303 (CANON),1.0,4070.0,426.0,1,1,0,426.0,4070.0,53,0.104668,0.00011,0.997128,C,ABC/Pareto using total_trade_price revenue,draft
+ECG THERMAL PAPER SIMPLEX 80MMX20MM,44.0,3740.0,3740.0,2,2,0,0.0,0.0,54,0.0,0.000101,0.997229,C,ABC/Pareto using total_trade_price revenue,draft
+MYRECLOX 250MG SUSPENSION 60ML,144.0,3312.0,3312.0,1,1,0,0.0,0.0,55,0.0,8.9e-05,0.997318,C,ABC/Pareto using total_trade_price revenue,draft
+DOUBLE SIDED TAPE,105.0,3150.0,1880.0,3,3,0,1880.0,3150.0,56,0.596825,8.5e-05,0.997403,C,ABC/Pareto using total_trade_price revenue,draft
+SURGICAL BLADE #15 SURGITECH,11.0,3080.0,1410.0,3,2,0,10.0,280.0,57,0.035714,8.3e-05,0.997486,C,ABC/Pareto using total_trade_price revenue,draft
+ABDOPEN,25.0,2800.0,2912.0,4,3,0,0.0,0.0,58,0.0,7.6e-05,0.997562,C,ABC/Pareto using total_trade_price revenue,draft
+ZINC OXIDE TAPE: 2.5CM X 5CM FUJI,24.0,2640.0,2640.0,1,1,0,0.0,0.0,59,0.0,7.1e-05,0.997633,C,ABC/Pareto using total_trade_price revenue,draft
+SURGICAL BLADE SURGITECH # 22,9.0,2520.0,0.0,1,1,0,0.0,0.0,60,0.0,6.8e-05,0.997701,C,ABC/Pareto using total_trade_price revenue,draft
+SIGN PEN LIQUID GEL (DONG A),100.0,2400.0,2400.0,1,1,0,0.0,0.0,61,0.0,6.5e-05,0.997766,C,ABC/Pareto using total_trade_price revenue,draft
+FOLDER W/ TAB LEGAL 100'S/PACK,5.0,2350.0,0.0,1,1,0,0.0,0.0,62,0.0,6.3e-05,0.99783,C,ABC/Pareto using total_trade_price revenue,draft
+PAPER CLIP SMALL,22.0,2310.0,210.0,2,2,0,0.0,0.0,63,0.0,6.2e-05,0.997892,C,ABC/Pareto using total_trade_price revenue,draft
+FOLDER 14PTS LONG,7.0,2275.0,1625.0,4,3,0,975.0,1625.0,64,0.6,6.1e-05,0.997954,C,ABC/Pareto using total_trade_price revenue,draft
+CARBON PAPER LONG,3.0,2115.0,0.0,2,2,0,0.0,0.0,65,0.0,5.7e-05,0.998011,C,ABC/Pareto using total_trade_price revenue,draft
+SURGICAL BLADE #20 100'S PARTNERS,6.0,2016.0,1584.0,3,2,0,240.0,336.0,66,0.714286,5.4e-05,0.998065,C,ABC/Pareto using total_trade_price revenue,draft
+BALLPEN RETRACTABLE BLACK 50'S (MATRIX),10.0,1900.0,900.0,1,1,0,900.0,1900.0,67,0.473684,5.1e-05,0.998117,C,ABC/Pareto using total_trade_price revenue,draft
+SUPRAFIX DS 100MG/5ML SUSPENSION,20.0,1880.0,440.0,1,1,0,440.0,1880.0,68,0.234043,5.1e-05,0.998167,C,ABC/Pareto using total_trade_price revenue,draft
+FANCY FOLDER LEGAL,4.0,1800.0,355.0,3,2,0,355.0,1800.0,69,0.197222,4.9e-05,0.998216,C,ABC/Pareto using total_trade_price revenue,draft
+PENLIGHT (KINGMED),16.0,1800.0,680.0,2,2,0,80.0,1200.0,70,0.066667,4.9e-05,0.998265,C,ABC/Pareto using total_trade_price revenue,draft
+SURGICAL BLADES #20,6.0,1758.0,1734.0,2,2,0,816.0,840.0,71,0.971429,4.7e-05,0.998312,C,ABC/Pareto using total_trade_price revenue,draft
+SURGICAL TAPE 1'' 12'S SUREGUARD,7.0,1750.0,1750.0,2,1,0,0.0,0.0,72,0.0,4.7e-05,0.998359,C,ABC/Pareto using total_trade_price revenue,draft
+SUCTION CATHETER - SURGITECH - FR#8,130.0,1740.0,1111.0,2,2,0,1111.0,1740.0,73,0.638506,4.7e-05,0.998406,C,ABC/Pareto using total_trade_price revenue,draft
+SQFEN 200MG/5ML SUSPENSION,50.0,1600.0,1600.0,1,1,0,0.0,0.0,74,0.0,4.3e-05,0.99845,C,ABC/Pareto using total_trade_price revenue,draft
+CAUTERY PENCIL (ELECTRO SURGICAL PRODUCTS),4.0,1600.0,600.0,1,1,0,600.0,1600.0,75,0.375,4.3e-05,0.998493,C,ABC/Pareto using total_trade_price revenue,draft
+PAPER CUPS 50'S,42.0,1596.0,1596.0,1,1,0,0.0,0.0,76,0.0,4.3e-05,0.998536,C,ABC/Pareto using total_trade_price revenue,draft
+ZOEY PHOTO PAPER A-4 180GSM,30.0,1500.0,900.0,1,1,0,900.0,1500.0,77,0.6,4.1e-05,0.998576,C,ABC/Pareto using total_trade_price revenue,draft
+PENCIL,16.0,1431.0,6.0,4,3,0,0.0,0.0,78,0.0,3.9e-05,0.998615,C,ABC/Pareto using total_trade_price revenue,draft
+PANDA BALLPEN,13.0,1430.0,0.0,1,1,0,0.0,0.0,79,0.0,3.9e-05,0.998654,C,ABC/Pareto using total_trade_price revenue,draft
+FOLDER 14PTS SHORT,5.0,1375.0,881.0,4,3,0,606.0,1100.0,80,0.550909,3.7e-05,0.998691,C,ABC/Pareto using total_trade_price revenue,draft
+SIGN PEN,52.0,1300.0,1300.0,3,2,0,450.0,450.0,81,1.0,3.5e-05,0.998726,C,ABC/Pareto using total_trade_price revenue,draft
+SCOTCH TAPE 24X50,100.0,1300.0,1300.0,2,2,0,0.0,0.0,82,0.0,3.5e-05,0.998761,C,ABC/Pareto using total_trade_price revenue,draft
+ECG PAPER 63X30,20.0,1300.0,900.0,1,1,0,900.0,1300.0,83,0.692308,3.5e-05,0.998796,C,ABC/Pareto using total_trade_price revenue,draft
+BALLPEN G-TECH 0.3 BLACK (PILOT),20.0,1300.0,0.0,1,1,0,0.0,0.0,84,0.0,3.5e-05,0.998831,C,ABC/Pareto using total_trade_price revenue,draft
+PAPER FASTERNER PLASTIC,40.0,1280.0,720.0,2,2,0,720.0,1280.0,85,0.5625,3.5e-05,0.998866,C,ABC/Pareto using total_trade_price revenue,draft
+"AUTOCLAVE TAPE 1""",5.0,1250.0,1250.0,1,1,0,0.0,0.0,86,0.0,3.4e-05,0.9989,C,ABC/Pareto using total_trade_price revenue,draft
+BALLPEN ORDINARY FINE POINT 0.5 BLACK (FLEXSTICK),185.0,1202.5,752.5,2,2,0,525.0,975.0,87,0.538462,3.2e-05,0.998932,C,ABC/Pareto using total_trade_price revenue,draft
+SURGICAL BLADES #10,3.0,1200.0,800.0,3,3,0,0.0,0.0,88,0.0,3.2e-05,0.998965,C,ABC/Pareto using total_trade_price revenue,draft
+TISSUE PAPER,14.0,1171.28,1488.58,6,6,0,492.0,558.0,89,0.88172,3.2e-05,0.998996,C,ABC/Pareto using total_trade_price revenue,draft
+UMBILICAL CATHETER SIZE#5 (BICAKCILAS),10.0,1100.0,750.0,1,1,0,750.0,1100.0,90,0.681818,3e-05,0.999026,C,ABC/Pareto using total_trade_price revenue,draft
+INK #003 CYAN (EPSON),4.0,1100.0,1100.0,1,1,0,0.0,0.0,91,0.0,3e-05,0.999056,C,ABC/Pareto using total_trade_price revenue,draft
+INK #003 MAGENTA (EPSON),4.0,1100.0,1100.0,1,1,0,0.0,0.0,92,0.0,3e-05,0.999085,C,ABC/Pareto using total_trade_price revenue,draft
+INK #003 YELLOW (EPSON),4.0,1100.0,1100.0,1,1,0,0.0,0.0,93,0.0,3e-05,0.999115,C,ABC/Pareto using total_trade_price revenue,draft
+PENLIGHT,5.0,1050.0,0.0,1,1,0,0.0,0.0,94,0.0,2.8e-05,0.999143,C,ABC/Pareto using total_trade_price revenue,draft
+INK #003 BLACK (EPSON),4.0,1040.0,1040.0,1,1,0,0.0,0.0,95,0.0,2.8e-05,0.999171,C,ABC/Pareto using total_trade_price revenue,draft
+"BLADE HOLDER SIZE #4, 5 1/4",8.0,1040.0,1040.0,1,1,0,1040.0,1040.0,96,1.0,2.8e-05,0.9992,C,ABC/Pareto using total_trade_price revenue,draft
+PENCIL LEAD W/ ERASER 12'S/BXS (MONGOL),10.0,1020.0,0.0,1,1,0,0.0,0.0,97,0.0,2.8e-05,0.999227,C,ABC/Pareto using total_trade_price revenue,draft
+TISSUE PAPER 2PLY (FEMME),100.0,910.0,490.0,1,1,0,490.0,910.0,98,0.538462,2.5e-05,0.999252,C,ABC/Pareto using total_trade_price revenue,draft
+BOND PAPER A4 (HOKKAIDO),5.0,845.0,505.0,1,1,0,505.0,845.0,99,0.597633,2.3e-05,0.999275,C,ABC/Pareto using total_trade_price revenue,draft
+HARD COPY SUB#20 LONG,5.0,840.0,315.0,1,1,0,315.0,840.0,100,0.375,2.3e-05,0.999297,C,ABC/Pareto using total_trade_price revenue,draft
+SURGICAL BLADE #12 SURGITECH,3.0,840.0,0.0,1,1,0,0.0,0.0,101,0.0,2.3e-05,0.99932,C,ABC/Pareto using total_trade_price revenue,draft
+INK CARTRIDGE #664 CYAN (EPSON),3.0,825.0,825.0,1,1,0,0.0,0.0,102,0.0,2.2e-05,0.999342,C,ABC/Pareto using total_trade_price revenue,draft
+INK CARTRIDGE #664 MAGENTA (EPSON),3.0,825.0,825.0,1,1,0,0.0,0.0,103,0.0,2.2e-05,0.999364,C,ABC/Pareto using total_trade_price revenue,draft
+INK CARTRIDGE #664 YELLOW (EPSON),3.0,825.0,825.0,1,1,0,0.0,0.0,104,0.0,2.2e-05,0.999387,C,ABC/Pareto using total_trade_price revenue,draft
+EXPANDABLE FOLDER LONG GREEN,50.0,800.0,175.0,1,1,0,175.0,800.0,105,0.21875,2.2e-05,0.999408,C,ABC/Pareto using total_trade_price revenue,draft
+INK CARTRIDGE #664 BLACK (EPSON),3.0,780.0,780.0,1,1,0,0.0,0.0,106,0.0,2.1e-05,0.999429,C,ABC/Pareto using total_trade_price revenue,draft
+NYLON #300,2.0,760.0,760.0,1,1,0,0.0,0.0,107,0.0,2.1e-05,0.99945,C,ABC/Pareto using total_trade_price revenue,draft
+"PAPER ,MULTICOPY LEGAL SIZE (HARDCOPY)",4.0,756.0,568.0,1,1,0,568.0,756.0,108,0.751323,2e-05,0.99947,C,ABC/Pareto using total_trade_price revenue,draft
+ZOEY STAPLER W/ STAPLE REMOVER #35,5.0,750.0,411.0,2,2,0,111.0,450.0,109,0.246667,2e-05,0.999491,C,ABC/Pareto using total_trade_price revenue,draft
+MASKING TAPE 2'' (CROCO),8.0,680.0,300.0,2,2,0,300.0,425.0,110,0.705882,1.8e-05,0.999509,C,ABC/Pareto using total_trade_price revenue,draft
+PAPER TOWEL 175PULL-UPS 200MMX200MM (BONUS),15.0,671.25,671.25,1,1,0,0.0,0.0,111,0.0,1.8e-05,0.999527,C,ABC/Pareto using total_trade_price revenue,draft
+BALLPEN BLUE FINE POINT PILOT,30.0,660.0,180.0,1,1,0,180.0,660.0,112,0.272727,1.8e-05,0.999545,C,ABC/Pareto using total_trade_price revenue,draft
+BALLPEN RED FINE POINT PILOT,30.0,660.0,150.0,1,1,0,150.0,660.0,113,0.227273,1.8e-05,0.999563,C,ABC/Pareto using total_trade_price revenue,draft
+BALLPEN G-TECH 0.3 BLUE (PILOT),10.0,650.0,0.0,1,1,0,0.0,0.0,114,0.0,1.8e-05,0.99958,C,ABC/Pareto using total_trade_price revenue,draft
+HBW BLUE BALLPEN,4.0,600.0,600.0,2,2,0,0.0,0.0,115,0.0,1.6e-05,0.999597,C,ABC/Pareto using total_trade_price revenue,draft
+SURGICAL BLADE #11,2.0,560.0,115.0,2,2,0,115.0,560.0,116,0.205357,1.5e-05,0.999612,C,ABC/Pareto using total_trade_price revenue,draft
+SURGICAL BLADES SURGITECH #20,2.0,560.0,385.0,2,2,0,105.0,280.0,117,0.375,1.5e-05,0.999627,C,ABC/Pareto using total_trade_price revenue,draft
+SIGNPEN G-TECH 1.0 V10 BLACK (PILOT),10.0,554.17,245.83,1,1,0,245.83,554.17,118,0.4436,1.5e-05,0.999642,C,ABC/Pareto using total_trade_price revenue,draft
+PAPER CLIP BIG,23.0,552.0,272.0,3,3,0,224.0,504.0,119,0.444444,1.5e-05,0.999657,C,ABC/Pareto using total_trade_price revenue,draft
+FOLDER A4,53.0,530.0,483.0,3,3,0,453.0,500.0,120,0.906,1.4e-05,0.999671,C,ABC/Pareto using total_trade_price revenue,draft
+SHARPENER METAL HEAVY DUTY,2.0,530.0,470.0,1,1,0,470.0,530.0,121,0.886792,1.4e-05,0.999685,C,ABC/Pareto using total_trade_price revenue,draft
+ECG THERMAL PAPER 80MMX20M (SIMPLEX),1.2,510.0,390.0,1,1,0,390.0,510.0,122,0.764706,1.4e-05,0.999699,C,ABC/Pareto using total_trade_price revenue,draft
+STICKER PAPER MATTE A4 (VECO),10.0,500.0,0.0,1,1,0,0.0,0.0,123,0.0,1.4e-05,0.999713,C,ABC/Pareto using total_trade_price revenue,draft
+SYSTEM FOLDER LONG 14PTS,1.0,470.0,330.0,1,1,0,330.0,470.0,124,0.702128,1.3e-05,0.999725,C,ABC/Pareto using total_trade_price revenue,draft
+"DATA FOLDER, MADE OF CHIPBOARD TAGILA LOCK",4.0,460.0,76.0,1,1,0,76.0,460.0,125,0.165217,1.2e-05,0.999738,C,ABC/Pareto using total_trade_price revenue,draft
+BALLPEN FINEPOINT BLACK (PILOT),20.0,450.0,90.0,1,1,0,90.0,450.0,126,0.2,1.2e-05,0.99975,C,ABC/Pareto using total_trade_price revenue,draft
+SIGNPEN 0.4 (MYGEL),15.0,435.0,0.0,1,1,0,0.0,0.0,127,0.0,1.2e-05,0.999762,C,ABC/Pareto using total_trade_price revenue,draft
+MASKING TAPE 1'',10.0,410.0,30.0,1,1,0,30.0,410.0,128,0.073171,1.1e-05,0.999773,C,ABC/Pareto using total_trade_price revenue,draft
+BALLPEN 0.5 BLACK (MYGEL),15.0,405.0,405.0,1,1,0,0.0,0.0,129,0.0,1.1e-05,0.999784,C,ABC/Pareto using total_trade_price revenue,draft
+GUEDEL AIRWAY 80MM SIZE #2 GREEN (ORMED),10.0,380.0,270.0,1,1,0,270.0,380.0,130,0.710526,1e-05,0.999794,C,ABC/Pareto using total_trade_price revenue,draft
+GUEDEL AIRWAY 90MM SIZE #3 YELLOW (ORMED),10.0,380.0,270.0,1,1,0,270.0,380.0,131,0.710526,1e-05,0.999804,C,ABC/Pareto using total_trade_price revenue,draft
+GUEDEL AIRWAY 60MM SIZE #0 BLACK (ORMED),10.0,380.0,380.0,1,1,0,0.0,0.0,132,0.0,1e-05,0.999814,C,ABC/Pareto using total_trade_price revenue,draft
+TAPE TRANSPARENT 1'',16.0,368.0,0.0,1,1,0,0.0,0.0,133,0.0,1e-05,0.999824,C,ABC/Pareto using total_trade_price revenue,draft
+ORMED NEOTAPE,60.0,330.0,330.0,2,1,0,0.0,0.0,134,0.0,9e-06,0.999833,C,ABC/Pareto using total_trade_price revenue,draft
+SURGICAL BLADES PARTNERS #15,1.0,310.0,75.0,1,1,0,75.0,310.0,135,0.241935,8e-06,0.999842,C,ABC/Pareto using total_trade_price revenue,draft
+FABER CASTELL BALLPEN,30.0,300.0,300.0,1,1,0,0.0,0.0,136,0.0,8e-06,0.99985,C,ABC/Pareto using total_trade_price revenue,draft
+PENCIL MONGOL NO.2,3.0,285.0,32.0,2,2,0,32.0,190.0,137,0.168421,8e-06,0.999858,C,ABC/Pareto using total_trade_price revenue,draft
+COLORED FOLDER DIVIDER LEGAL,10.0,280.0,224.0,2,2,0,0.0,0.0,138,0.0,8e-06,0.999865,C,ABC/Pareto using total_trade_price revenue,draft
+PAPER CLIP BIG 50MM (PRINCE),13.0,266.5,28.5,2,2,0,28.5,61.5,139,0.463415,7e-06,0.999872,C,ABC/Pareto using total_trade_price revenue,draft
+BLADE HOLDER #4 5 1/2,2.0,260.0,0.0,1,1,0,0.0,0.0,140,0.0,7e-06,0.999879,C,ABC/Pareto using total_trade_price revenue,draft
+PAPER CLIP VINYL 55MM 100'S 120GRAMS JOY,10.0,240.0,60.0,1,1,0,60.0,240.0,141,0.25,6e-06,0.999886,C,ABC/Pareto using total_trade_price revenue,draft
+"ELECTRIC TAPE BLACK ,VINYL 0.16MMX19MMX16M",6.0,240.0,106.0,2,2,0,106.0,240.0,142,0.441667,6e-06,0.999892,C,ABC/Pareto using total_trade_price revenue,draft
+FC FINE PEN BLACK 0.5,20.0,230.0,230.0,1,1,0,0.0,0.0,143,0.0,6e-06,0.999898,C,ABC/Pareto using total_trade_price revenue,draft
+HARBIPEN 5M,10.0,215.0,215.0,1,1,0,0.0,0.0,144,0.0,6e-06,0.999904,C,ABC/Pareto using total_trade_price revenue,draft
+FLEXSTICK BALLPEN,30.0,210.0,210.0,2,2,0,0.0,0.0,145,0.0,6e-06,0.99991,C,ABC/Pareto using total_trade_price revenue,draft
+STAPLE WIRE STANDARD #35 (PRINCE),4.0,208.0,64.0,1,1,0,64.0,208.0,146,0.307692,6e-06,0.999916,C,ABC/Pareto using total_trade_price revenue,draft
+ELECTRICAL TAPE,5.0,190.0,175.0,1,1,0,175.0,190.0,147,0.921053,5e-06,0.999921,C,ABC/Pareto using total_trade_price revenue,draft
+WRAPPING PAPER LIGHT BROWN 9.5X9 5'' 115GSM,2.0,183.0,183.0,1,1,0,0.0,0.0,148,0.0,5e-06,0.999926,C,ABC/Pareto using total_trade_price revenue,draft
+ELECTRIC TAPE PVC 0.155MMX19MMX16MM,4.0,160.0,20.0,1,1,0,20.0,160.0,149,0.125,4e-06,0.99993,C,ABC/Pareto using total_trade_price revenue,draft
+SUCTION CATHETER - SURGITECH - FR#5,10.0,150.0,100.0,1,1,0,100.0,150.0,150,0.666667,4e-06,0.999934,C,ABC/Pareto using total_trade_price revenue,draft
+GUEDEL AIRWAY ORMED RED #4 SIZE 100MM,2.0,150.0,20.0,1,1,0,20.0,150.0,151,0.133333,4e-06,0.999938,C,ABC/Pareto using total_trade_price revenue,draft
+GUEDEL AIRWAY SEDASENZ GREEN # 2 1-SM-GAIR02,2.0,150.0,20.0,1,1,0,20.0,150.0,152,0.133333,4e-06,0.999942,C,ABC/Pareto using total_trade_price revenue,draft
+GUEDEL AIRWAY SEDASENZ YELLOW # 3 1-SM-GAIR03,2.0,150.0,20.0,1,1,0,20.0,150.0,153,0.133333,4e-06,0.999946,C,ABC/Pareto using total_trade_price revenue,draft
+GUEDEL AIRWAY SIMPLEX BLUE #0 SIZE 50MM,2.0,150.0,20.0,1,1,0,20.0,150.0,154,0.133333,4e-06,0.99995,C,ABC/Pareto using total_trade_price revenue,draft
+GUEDEL AIRWAY WHITE ORMED # 1 SIZE 70MM,2.0,150.0,20.0,1,1,0,20.0,150.0,155,0.133333,4e-06,0.999954,C,ABC/Pareto using total_trade_price revenue,draft
+CORRECTION TAPE ODVEN,10.0,150.0,150.0,1,1,0,0.0,0.0,156,0.0,4e-06,0.999958,C,ABC/Pareto using total_trade_price revenue,draft
+PAPER CLIP SMALL 33MM (PRINCE),14.0,147.0,6.0,2,2,0,6.0,42.0,157,0.142857,4e-06,0.999962,C,ABC/Pareto using total_trade_price revenue,draft
+MICROSCOPE SLIDES #31 1MM-1.2MM THICK - SAIL BRAND,2.0,140.0,140.0,1,1,0,0.0,0.0,158,0.0,4e-06,0.999966,C,ABC/Pareto using total_trade_price revenue,draft
+SPECIAL PAPER A4 CREAM,4.0,136.0,0.0,1,1,0,0.0,0.0,159,0.0,4e-06,0.99997,C,ABC/Pareto using total_trade_price revenue,draft
+GUEDEL AIRWAY #5 (ORMED),2.0,130.0,40.0,1,1,0,40.0,130.0,160,0.307692,4e-06,0.999973,C,ABC/Pareto using total_trade_price revenue,draft
+PAPER CLIP VINYL 33MM 100'S 40GRAMS JOY,10.0,129.5,0.0,1,1,0,0.0,0.0,161,0.0,3e-06,0.999977,C,ABC/Pareto using total_trade_price revenue,draft
+PAPER CLIP VINYL PLASTIC COATED 50MM (PRIME),5.0,117.5,32.5,1,1,0,32.5,117.5,162,0.276596,3e-06,0.99998,C,ABC/Pareto using total_trade_price revenue,draft
+TAPE TRANSPARENT 1'' (ARMAK),8.0,112.0,64.0,1,1,0,64.0,112.0,163,0.571429,3e-06,0.999983,C,ABC/Pareto using total_trade_price revenue,draft
+TAPE DISPENSER HEAVY DUTY,1.0,110.0,90.0,1,1,0,90.0,110.0,164,0.818182,3e-06,0.999986,C,ABC/Pareto using total_trade_price revenue,draft
+CARTOLINA PAPER WHITE,20.0,100.0,60.0,1,1,0,60.0,100.0,165,0.6,3e-06,0.999989,C,ABC/Pareto using total_trade_price revenue,draft
+TAPE TRANSPARENT WITH 24MM,3.0,69.0,0.0,1,1,0,0.0,69.0,166,0.0,2e-06,0.999991,C,ABC/Pareto using total_trade_price revenue,draft
+TAPE DISPENSER TABLE TOP (JOY),1.0,64.0,61.0,1,1,0,61.0,64.0,167,0.953125,2e-06,0.999992,C,ABC/Pareto using total_trade_price revenue,draft
+PAPER CLIP VINYL PLASTIC COATED 33MM (PRIME),5.0,62.5,0.0,1,1,0,0.0,0.0,168,0.0,2e-06,0.999994,C,ABC/Pareto using total_trade_price revenue,draft
+FILTER PAPER 24X24,2.0,48.0,0.0,1,1,0,0.0,0.0,169,0.0,1e-06,0.999995,C,ABC/Pareto using total_trade_price revenue,draft
+PACKAGING TAPE 2'' (LUCKY),3.0,45.0,45.0,1,1,0,0.0,0.0,170,0.0,1e-06,0.999996,C,ABC/Pareto using total_trade_price revenue,draft
+PAPER CLIP 50MM (WELLS),2.0,37.0,23.0,1,1,0,23.0,37.0,171,0.621622,1e-06,0.999997,C,ABC/Pareto using total_trade_price revenue,draft
+TAPE MASKING 1 (POLYTAPE),2.0,28.0,28.0,1,1,0,0.0,0.0,172,0.0,1e-06,0.999998,C,ABC/Pareto using total_trade_price revenue,draft
+TAPE PACKAGING 2 (ARMAK),2.0,28.0,28.0,1,1,0,0.0,0.0,173,0.0,1e-06,0.999999,C,ABC/Pareto using total_trade_price revenue,draft
+VINYL PAPER CLIPS,1.0,24.0,6.0,1,1,0,6.0,24.0,174,0.25,1e-06,1.0,C,ABC/Pareto using total_trade_price revenue,draft
+PAPER CLIP 33MM (WELLS),2.0,15.0,9.0,1,1,0,9.0,15.0,175,0.6,0.0,1.0,C,ABC/Pareto using total_trade_price revenue,draft
+PEN G NA 5M,6.0,0.0,0.0,1,1,0,0.0,0.0,176,0.0,0.0,1.0,C,ABC/Pareto using total_trade_price revenue,draft
+ECG PAPER 80MMX20M SIMPLEX,50.0,0.0,0.0,1,1,0,0.0,0.0,177,0.0,0.0,1.0,C,ABC/Pareto using total_trade_price revenue,draft
+"DR#0154,0155,0156 TERMS",1.0,0.0,0.0,1,1,0,0.0,0.0,178,0.0,0.0,1.0,C,ABC/Pareto using total_trade_price revenue,draft
+DR#0157 SI 0181,1.0,0.0,0.0,1,1,0,0.0,0.0,179,0.0,0.0,1.0,C,ABC/Pareto using total_trade_price revenue,draft
+FOLDER LONG,14.0,0.0,0.0,3,3,0,0.0,0.0,180,0.0,0.0,1.0,C,ABC/Pareto using total_trade_price revenue,draft
+SURGICAL BLADE #22 SURGITECH,13.0,0.0,0.0,3,2,0,0.0,0.0,181,0.0,0.0,1.0,C,ABC/Pareto using total_trade_price revenue,draft
+ZOEY PUNCHER HEAVY DUTY #468,3.0,0.0,0.0,1,1,0,0.0,0.0,182,0.0,0.0,1.0,C,ABC/Pareto using total_trade_price revenue,draft
+"SIGN PEN BLACK,LIQUID/GEL INL 0.5MM NEEDLE TIP MYGEL",30.0,0.0,0.0,1,1,0,0.0,0.0,183,0.0,0.0,1.0,C,ABC/Pareto using total_trade_price revenue,draft

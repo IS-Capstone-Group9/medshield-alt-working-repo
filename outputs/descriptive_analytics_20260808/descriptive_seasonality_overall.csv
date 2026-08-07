@@ -1,13 +1,13 @@
 scope,calendar_month,seasonal_index,seasonal_strength,interpretation,method,status
-overall,01,1.156228,0.72115,higher_than_average,monthly average demand divided by overall monthly average demand,draft
-overall,02,2.174273,0.72115,higher_than_average,monthly average demand divided by overall monthly average demand,draft
-overall,03,0.928445,0.72115,lower_than_average,monthly average demand divided by overall monthly average demand,draft
-overall,04,0.830829,0.72115,lower_than_average,monthly average demand divided by overall monthly average demand,draft
-overall,05,1.361873,0.72115,higher_than_average,monthly average demand divided by overall monthly average demand,draft
-overall,06,2.979483,0.72115,higher_than_average,monthly average demand divided by overall monthly average demand,draft
-overall,07,1.209801,0.72115,higher_than_average,monthly average demand divided by overall monthly average demand,draft
-overall,08,1.325441,0.72115,higher_than_average,monthly average demand divided by overall monthly average demand,draft
-overall,09,2.634277,0.72115,higher_than_average,monthly average demand divided by overall monthly average demand,draft
-overall,10,0.943353,0.72115,lower_than_average,monthly average demand divided by overall monthly average demand,draft
-overall,11,1.379577,0.72115,higher_than_average,monthly average demand divided by overall monthly average demand,draft
-overall,12,1.07642,0.72115,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+overall,01,0.756106,0.57632,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+overall,02,1.33947,0.57632,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+overall,03,1.020401,0.57632,near_average,monthly average demand divided by overall monthly average demand,draft
+overall,04,0.911867,0.57632,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+overall,05,0.988745,0.57632,near_average,monthly average demand divided by overall monthly average demand,draft
+overall,06,1.716125,0.57632,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+overall,07,0.916823,0.57632,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+overall,08,0.86191,0.57632,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+overall,09,1.514787,0.57632,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+overall,10,0.727088,0.57632,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+overall,11,1.019001,0.57632,near_average,monthly average demand divided by overall monthly average demand,draft
+overall,12,0.736346,0.57632,lower_than_average,monthly average demand divided by overall monthly average demand,draft

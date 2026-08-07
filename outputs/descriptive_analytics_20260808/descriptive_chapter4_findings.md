@@ -6,17 +6,17 @@ This descriptive layer explains what happened in the historical MedShield sales 
 
 ## Key Findings
 
-- Clean rows analyzed: 24,848.
-- Historical period: 2020-01-11 to 2025-12-31.
-- Total demand units: 1,061,807.15.
-- Sales revenue from `total_trade_price`: PHP 219,292,615.81.
-- Workbook gross margin/profit from `net_income`: PHP 148,096,658.29.
-- Top product by revenue: MONOWEL 1G IV with PHP 5,780,546.00.
-- Top area by revenue: Quezon with PHP 7,203,303.19.
+- Clean rows analyzed: 42,565.
+- Historical period: 2017-01-02 to 2025-12-31.
+- Total demand units: 1,475,648.03.
+- Sales revenue from `total_trade_price`: PHP 270,154,070.04.
+- Workbook gross margin/profit from `net_income`: PHP 193,224,713.21.
+- Top product by revenue: PROFUREX 750MG with PHP 7,494,549.86.
+- Top area by revenue: Batangas with PHP 10,467,470.15.
 - Estimated contract-allocation rows included: 1,730.
 - Estimated-date rows included: 0.
-- Rows where workbook gross margin/profit exceeds revenue: 16,033.
-- Rows with negative workbook gross margin/profit: 1,437.
+- Rows where workbook gross margin/profit exceeds revenue: 31,230.
+- Rows with negative workbook gross margin/profit: 1,660.
 
 ## Chapter 4 Use
 

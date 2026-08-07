@@ -58,10 +58,13 @@ CANONICAL_FIELDS = [
 
 HEADER_ALIASES = {
     "area": "area",
+    "salesrep": "area",
     "drnumber": "dr_number",
     "deliveryreceiptnumber": "dr_number",
+    "dr": "dr_number",
     "datedelivered": "date_delivered",
     "deliverydate": "date_delivered",
+    "drdate": "date_delivered",
     "date": "date_delivered",
     "product": "product",
     "qty": "quantity",
@@ -70,9 +73,13 @@ HEADER_ALIASES = {
     "cp": "unit_cost",
     "unitcost": "unit_cost",
     "unitcostamount": "unit_cost",
+    "contractprice": "unit_cost",
+    "cpunit": "unit_cost",
+    "unitprice": "unit_cost",
     "totalcp": "total_cost",
     "totalcost": "total_cost",
     "totalcostamount": "total_cost",
+    "gross": "total_cost",
     "disc": "discount",
     "discount": "discount",
     "discountamount": "discount",
@@ -82,9 +89,13 @@ HEADER_ALIASES = {
     "tpunit": "trade_price_unit",
     "tradepriceunit": "trade_price_unit",
     "tradepriceunitamount": "trade_price_unit",
+    "transferprice": "trade_price_unit",
+    "tp": "trade_price_unit",
     "totaltp": "total_trade_price",
     "totaltradeprice": "total_trade_price",
     "totaltradepriceamount": "total_trade_price",
+    "grosssales": "total_trade_price",
+    "total": "total_trade_price",
     "netincome": "net_income",
     "netincomeamount": "net_income",
     "margin": "margin_pct",
@@ -289,7 +300,7 @@ def _read_xlsx(content: bytes, file_name: str) -> tuple[list[SourceRow], str, li
                 max_row=candidate_row,
             ))]
             normalized = _normalize_headers(values)
-            if len(set(normalized) & set(CANONICAL_FIELDS)) >= 10:
+            if len(set(normalized) & set(CANONICAL_FIELDS)) >= 6:
                 header_row = candidate_row
                 headers = normalized
                 detected_headers = headers
@@ -326,7 +337,7 @@ def _read_csv(content: bytes, file_name: str) -> tuple[list[SourceRow], str, lis
     headers: list[str] = []
     for candidate_index, values in enumerate(rows[:20]):
         normalized = _normalize_headers(values)
-        if len(set(normalized) & set(CANONICAL_FIELDS)) >= 10:
+        if len(set(normalized) & set(CANONICAL_FIELDS)) >= 6:
             header_index = candidate_index
             headers = normalized
             break
@@ -363,6 +374,18 @@ def clean_sales_rows(
     source_rows: list[SourceRow],
     input_stage: str,
 ) -> tuple[list[dict[str, Any]], dict[str, Any], list[dict[str, Any]]]:
+    # Build product signature map for legacy #REF! resolution
+    sig_counts: dict[tuple[float, float], set[str]] = defaultdict(set)
+    for source in source_rows:
+        raw = source.raw
+        p = _clean_text(raw.get("product"), upper=True)
+        if p and p not in ("#REF!", "NONE", "NULL", "NAN"):
+            cp = _clean_number(raw.get("unit_cost")) or 0.0
+            tp = _clean_number(raw.get("trade_price_unit")) or 0.0
+            if cp > 0:
+                sig_counts[(round(cp, 2), round(tp, 2))].add(p)
+    signature_map = {sig: list(prods)[0] for sig, prods in sig_counts.items() if len(prods) == 1}
+
     cleaned_rows: list[dict[str, Any]] = []
     staging_rows: list[dict[str, Any]] = []
     quality_counts: Counter[str] = Counter()
@@ -373,11 +396,25 @@ def clean_sales_rows(
     for source in source_rows:
         raw = source.raw
         delivery_date = _clean_date(raw.get("date_delivered"))
+        product_val = _clean_text(raw.get("product"), upper=True)
+        transformations: list[str] = []
+
+        if not product_val or product_val in ("#REF!", "NONE", "NULL", "NAN"):
+            cp = _clean_number(raw.get("unit_cost")) or 0.0
+            tp = _clean_number(raw.get("trade_price_unit")) or 0.0
+            sig = (round(cp, 2), round(tp, 2))
+            resolved = signature_map.get(sig)
+            if resolved:
+                product_val = resolved
+                transformations.append("product: resolved legacy #REF! from cost/price signature")
+            else:
+                product_val = None
+
         row = {
             "area": _clean_area(raw.get("area")),
             "dr_number": _clean_dr_number(raw.get("dr_number")),
             "date_delivered": delivery_date.isoformat() if delivery_date else None,
-            "product": _clean_text(raw.get("product"), upper=True),
+            "product": product_val,
             "quantity": _clean_number(raw.get("quantity")),
             "unit_cost": _clean_number(raw.get("unit_cost")),
             "total_cost": _clean_number(raw.get("total_cost")),
@@ -389,7 +426,6 @@ def clean_sales_rows(
             "margin_pct": _clean_number(raw.get("margin_pct"), percent=True),
         }
         notes: list[str] = []
-        transformations: list[str] = []
 
         if not row["area"]:
             notes.append("missing area")
