@@ -1,10 +1,9 @@
 import { createBrowserClient } from '@supabase/ssr'
 
 export function isSupabaseBrowserConfigured(): boolean {
-  return Boolean(
-    process.env.NEXT_PUBLIC_SUPABASE_URL &&
-      process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
-  )
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+  return Boolean(url && key && key.trim() !== '' && !key.includes('replace-with'))
 }
 
 export function createClient() {

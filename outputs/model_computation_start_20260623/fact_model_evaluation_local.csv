@@ -1,2 +1,3 @@
-model_code,model_version,evaluation_start_period,evaluation_end_period,mae,rmse,mape,review_status,limitations
-SEASONAL_NAIVE_BASELINE,sales_only_v1,2023-01,2025-12,27279.0258,43479.4193,3.044661,validated,2025 remains partial; use rolling validation context and do not treat missing 2025 months as zero demand.
+model_code,model_version,evaluation_start_period,evaluation_end_period,mae,rmse,mape,review_status
+BASE_LAG_V1,1.0.0,2025-01,2025-12,49413.1,66783.31,1908.54,BENCHMARK
+GBR_DOH_PAGASA_V1,1.1.0,2025-01,2025-12,52163.36,69296.74,593.96,PRIMARY_CHOSEN

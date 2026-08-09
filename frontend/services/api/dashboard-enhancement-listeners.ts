@@ -102,5 +102,56 @@ export function installDashboardEnhancements(root: HTMLElement, activeListeners:
     uploadInput?.click()
   })
 
+  // Tab navigation for Sales Data and Weather API Validation
+  root.querySelector('#salesDataNavItem')?.addEventListener('click', (e) => {
+    ;(window as any).showPage('sales-data', e.currentTarget)
+  })
+  root.querySelector('#weatherValidationNavItem')?.addEventListener('click', (e) => {
+    ;(window as any).showPage('weather-validation', e.currentTarget)
+  })
+
+  // Weather page controls and refresh triggers
+  const refreshWeatherView = () => {
+    loadWeatherEffectView(root).catch((error: unknown) => {
+      console.error('Weather view load error:', error)
+    })
+  }
+
+  root.querySelector('#weatherProvider')?.addEventListener('change', refreshWeatherView)
+  root.querySelector('#weatherArea')?.addEventListener('change', refreshWeatherView)
+  root.querySelector('#weatherYear')?.addEventListener('change', refreshWeatherView)
+  root.querySelector('#weatherGrain')?.addEventListener('change', refreshWeatherView)
+
+  root.querySelector('#refreshWeatherButton')?.addEventListener('click', async (e) => {
+    const btn = e.currentTarget as HTMLButtonElement
+    const originalText = btn.innerHTML
+    btn.disabled = true
+    btn.innerHTML = '<svg class="animate-spin inline-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2v4"></path></svg> Syncing...'
+
+    const providerSelect = root.querySelector('#weatherProvider') as HTMLSelectElement | null
+    const areaSelect = root.querySelector('#weatherArea') as HTMLSelectElement | null
+    const yearSelect = root.querySelector('#weatherYear') as HTMLSelectElement | null
+
+    const provider = (providerSelect?.value === 'open_meteo' ? 'open_meteo' : 'nasa_power')
+    const area = areaSelect?.value ?? 'all'
+    const year = yearSelect?.value ?? '2025'
+
+    const start = `${year}-01-01`
+    const end = `${year}-12-31`
+    const areas = area === 'all' ? [] : [area]
+
+    try {
+      await refreshWeatherData({ start, end, areas, provider })
+      refreshWeatherView()
+    } catch (err) {
+      console.error(err)
+    } finally {
+      btn.disabled = false
+      btn.innerHTML = originalText
+    }
+  })
+
+  // Trigger initial loads
   void refreshSalesView()
+  refreshWeatherView()
 }

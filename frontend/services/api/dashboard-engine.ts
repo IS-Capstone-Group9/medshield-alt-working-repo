@@ -26,7 +26,7 @@ export function getExecutableDashboardScript(): string {
     .map((name) => `if (typeof ${name} === 'function') window.${name} = ${name};`)
     .join('\n')
 
-  const patchedScript = MEDSHIELD_SCRIPT
+  let patchedScript = MEDSHIELD_SCRIPT
     .replace("window.addEventListener('DOMContentLoaded', async () => {", '(async () => {')
     .replaceAll("'#335F78'", "dashboardThemeColor('--chart-label', '#335F78')")
     .replaceAll("'#67879A'", "dashboardThemeColor('--chart-muted', '#67879A')")
@@ -40,7 +40,16 @@ export function getExecutableDashboardScript(): string {
     if (existingChart) existingChart.destroy();
     if (charts[id] && charts[id] !== existingChart) charts[id].destroy();`,
     )
-    .replace(/\n}\);\s*$/, `\n})();\n${globalHandlerBridge}`)
+
+  // Robust closing of the (async () => { ... })() IIFE block before utility functions
+  if (patchedScript.includes("});\n\nif (typeof window !== 'undefined')")) {
+    patchedScript = patchedScript.replace("});\n\nif (typeof window !== 'undefined')", "})();\n\nif (typeof window !== 'undefined')")
+  } else if (patchedScript.includes("});\nif (typeof window !== 'undefined')")) {
+    patchedScript = patchedScript.replace("});\nif (typeof window !== 'undefined')", "})();\nif (typeof window !== 'undefined')")
+  } else {
+    // Fallback regex replacement if there are no utility functions appended
+    patchedScript = patchedScript.replace(/\n}\);\s*$/, `\n})();`)
+  }
 
   return `
 const Chart = window.Chart;
@@ -52,6 +61,7 @@ function dashboardThemeColor(name, fallback) {
   }
 }
 ${patchedScript}
+\n${globalHandlerBridge}
 `
 }
 

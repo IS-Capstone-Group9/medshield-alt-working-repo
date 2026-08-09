@@ -27,12 +27,12 @@ medshield_style = r"""
   --blue-light:    #EFF6FF;
   --emerald:       #10B981;
   --emerald-light: #ECFDF5;
-  --shadow-sm:     0 1px 3px rgba(15,23,42,0.05), 0 1px 2px rgba(15,23,42,0.03);
-  --shadow-md:     0 4px 14px rgba(15,23,42,0.08);
-  --shadow-lg:     0 10px 25px rgba(15,23,42,0.12);
-  --radius-sm:     8px;
-  --radius-md:     14px;
-  --radius-lg:     18px;
+  --shadow-sm:     0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md:     0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-lg:     0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+  --radius-sm:     6px;
+  --radius-md:     12px;
+  --radius-lg:     12px;
   --font-display:  Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-body:     Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --sidebar-expanded-w: 240px;
@@ -62,7 +62,7 @@ button { border: none; cursor: pointer; font-family: inherit; }
 .sidebar {
   width: var(--sidebar-w);
   background: #0F172A;
-  border-right: 1px solid #1E293B;
+  border-right: 1px solid rgba(255,255,255,0.06);
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -147,7 +147,6 @@ button { border: none; cursor: pointer; font-family: inherit; }
   background: #0EA5E9;
   color: #FFFFFF;
   font-weight: 600;
-  box-shadow: 0 4px 12px rgba(14,165,233,0.35);
 }
 .nav-icon { width: 18px; height: 18px; opacity: 0.8; flex-shrink: 0; }
 .nav-item.active .nav-icon { opacity: 1; stroke-width: 2.2; }
@@ -237,7 +236,7 @@ button { border: none; cursor: pointer; font-family: inherit; }
 .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 24px; }
 .kpi-card {
   background: var(--bg-surface); border: 1px solid var(--border);
-  border-radius: var(--radius-md); padding: 22px; box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-md); padding: 26px 30px; box-shadow: var(--shadow-sm);
   transition: all var(--transition); position: relative; overflow: hidden;
 }
 .kpi-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--border-strong); }
@@ -283,7 +282,7 @@ button { border: none; cursor: pointer; font-family: inherit; }
 .hero-title { font-family: var(--font-display); font-size: 24px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.25; margin-bottom: 12px; }
 .hero-copy { font-size: 13px; color: #94A3B8; line-height: 1.6; max-width: 800px; }
 .hero-summary { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
-.hero-tag { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 600; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); color: #E2E8F0; }
+.hero-tag { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 600; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: #E2E8F0; }
 
 .info-panel { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px 24px; margin-bottom: 20px; box-shadow: var(--shadow-sm); }
 .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -848,29 +847,29 @@ medshield_markup = r"""
             <ul class="season-card-list">
               <li><strong>Risks:</strong> Flu/ILI, SARI, Asthma</li>
               <li><strong>Restock:</strong> Bronchodilators, Antihistamines</li>
-              <li><strong>Priority:</strong> Salbutamol, Cetirizine, Paracetamol</li>
+              <li><strong>Priority:</strong> Inhaled Bronchodilators, Antihistamines</li>
             </ul>
-            <div class="drilldown-prompt">&#9654; Click to view SKU Reorder Plan</div>
+            <div class="drilldown-prompt">&#9654; Click to view Reorder Plan</div>
           </div>
           <div class="season-card clickable-season" onclick="if(window.selectSeasonRestock)window.selectSeasonRestock('summer',this)">
             <div class="season-card-tag" style="color:#F59E0B">MARCH &amp; APRIL</div>
             <div class="season-card-title">&#9728;&#65039; Summer Peak Heat Surge</div>
             <ul class="season-card-list">
               <li><strong>Risks:</strong> Gastroenteritis, Dehydration, Typhoid</li>
-              <li><strong>Restock:</strong> ORS Packets, GI Meds</li>
-              <li><strong>Priority:</strong> ORS, Metronidazole, Omeprazole</li>
+              <li><strong>Restock:</strong> ORS, GI Anti-Infectives, PPIs</li>
+              <li><strong>Priority:</strong> ORS, GI Anti-Infectives</li>
             </ul>
-            <div class="drilldown-prompt">&#9654; Click to view SKU Reorder Plan</div>
+            <div class="drilldown-prompt">&#9654; Click to view Reorder Plan</div>
           </div>
           <div class="season-card clickable-season" onclick="if(window.selectSeasonRestock)window.selectSeasonRestock('pre_monsoon',this)">
             <div class="season-card-tag" style="color:#34D399">MAY &amp; JUNE</div>
             <div class="season-card-title">&#9929;&#65039; Pre-Monsoon Thunderstorms</div>
             <ul class="season-card-list">
               <li><strong>Risks:</strong> Early Dengue, HFMD, Waterborne GI</li>
-              <li><strong>Restock:</strong> Antipyretics, IV Fluids</li>
-              <li><strong>Priority:</strong> Paracetamol 500mg, IV Normal Saline</li>
+              <li><strong>Restock:</strong> Antipyretics, IV Fluids, Antibiotics</li>
+              <li><strong>Priority:</strong> Non-NSAID Antipyretics, IV Fluids</li>
             </ul>
-            <div class="drilldown-prompt">&#9654; Click to view SKU Reorder Plan</div>
+            <div class="drilldown-prompt">&#9654; Click to view Reorder Plan</div>
           </div>
           <div class="season-card clickable-season active-season" onclick="if(window.selectSeasonRestock)window.selectSeasonRestock('monsoon',this)" style="border-left:4px solid #EF4444;">
             <div class="season-card-tag" style="color:#EF4444">JULY &amp; AUGUST &#8212; CRITICAL</div>
@@ -878,9 +877,9 @@ medshield_markup = r"""
             <ul class="season-card-list">
               <li><strong>Risks:</strong> Dengue Outbreaks, Leptospirosis, Cholera</li>
               <li><strong>Restock:</strong> Flood Prophylactics, IV Fluids</li>
-              <li><strong>Priority:</strong> Doxycycline 100mg, Paracetamol, Cefuroxime</li>
+              <li><strong>Priority:</strong> Non-NSAID Antipyretics, Doxycycline</li>
             </ul>
-            <div class="drilldown-prompt">&#9654; Click to view SKU Reorder Plan</div>
+            <div class="drilldown-prompt">&#9654; Click to view Reorder Plan</div>
           </div>
           <div class="season-card clickable-season" onclick="if(window.selectSeasonRestock)window.selectSeasonRestock('typhoon',this)">
             <div class="season-card-tag" style="color:#F87171">SEPTEMBER &amp; OCTOBER</div>
@@ -888,9 +887,9 @@ medshield_markup = r"""
             <ul class="season-card-list">
               <li><strong>Risks:</strong> Leptospirosis Wave 2, Dengue, Typhoid</li>
               <li><strong>Restock:</strong> Anti-Leptospiral, GI Meds, ORS</li>
-              <li><strong>Priority:</strong> Doxycycline 100mg, Ciprofloxacin, ORS</li>
+              <li><strong>Priority:</strong> Doxycycline, GI Anti-Infectives, ORS</li>
             </ul>
-            <div class="drilldown-prompt">&#9654; Click to view SKU Reorder Plan</div>
+            <div class="drilldown-prompt">&#9654; Click to view Reorder Plan</div>
           </div>
           <div class="season-card clickable-season" onclick="if(window.selectSeasonRestock)window.selectSeasonRestock('holiday',this)">
             <div class="season-card-tag" style="color:#38BDF8">NOVEMBER &amp; DECEMBER</div>
@@ -898,20 +897,23 @@ medshield_markup = r"""
             <ul class="season-card-list">
               <li><strong>Risks:</strong> Flu/ILI Surge, Pediatric Asthma</li>
               <li><strong>Restock:</strong> Bronchodilators, Mucolytics, Antibiotics</li>
-              <li><strong>Priority:</strong> Salbutamol Nebules, Carbocisteine, Amoxicillin</li>
+              <li><strong>Priority:</strong> Bronchodilators, Antihistamines</li>
             </ul>
-            <div class="drilldown-prompt">&#9654; Click to view SKU Reorder Plan</div>
+            <div class="drilldown-prompt">&#9654; Click to view Reorder Plan</div>
           </div>
         </div>
 
         <!-- DYNAMIC SKU DRILL-DOWN TABLE -->
-        <div id="seasonalDrilldownContainer" style="margin-top:24px;background:#FFFFFF;border-radius:14px;padding:22px;color:#0F172A;box-shadow:0 4px 16px rgba(0,0,0,0.12);">
+        <div id="seasonalDrilldownContainer" style="margin-top:24px;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:22px;color:var(--text-primary);box-shadow:var(--shadow-sm);">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
             <div>
-              <div id="drilldownTitle" style="font-size:16px;font-weight:800;color:#0F172A;">July &amp; August &#8212; Peak Monsoon (Habagat) &amp; Floods</div>
+              <div id="drilldownTitle" style="font-size:16px;font-weight:800;color:var(--text-primary);">July &amp; August &#8212; Peak Monsoon (Habagat) &amp; Floods</div>
               <div id="drilldownSub" style="font-size:12px;color:#64748B;margin-top:2px;">Prescribed SKU Procurement Recommendations &amp; Stock Gap Analysis</div>
             </div>
-            <span id="drilldownBadge" class="chart-badge" style="background:#FEF2F2;color:#EF4444;">DOH Outbreak Alert</span>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <button id="exportCsvBtn" onclick="exportRestockPlanToCsv()" class="btn" style="font-size:12px;padding:6px 12px;display:none;background:#0EA5E9;color:white;border:none;border-radius:6px;cursor:pointer;font-weight:600;transition:opacity 0.2s;">Download Reorder Plan (CSV)</button>
+              <span id="drilldownBadge" class="chart-badge" style="background:#FEF2F2;color:#EF4444;">DOH Outbreak Alert</span>
+            </div>
           </div>
           <table class="product-table">
             <thead><tr>
@@ -930,40 +932,41 @@ medshield_markup = r"""
 
       <!-- PRESCRIPTIVE ALERTS HERO -->
       <div class="section-title">Active Prescriptive Inventory Alerts</div>
-      <div class="alert-hero">
-        <div class="alert-banner">
-          <div class="alert-banner-kicker">Critical Action Required</div>
-          <div class="alert-banner-title">Stock Out Risk Flagged for ANTIZOAL IV</div>
-          <div class="alert-banner-copy">Projected demand will exhaust safety stock levels before Jan 2026. Automated EOQ order of 240 units with ROP trigger of 80 units recommended.</div>
+      <div class="alert-grid" style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px;">
+        <!-- CRITICAL ALERT -->
+        <div class="alert-card danger" style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-left: 4px solid var(--red); background: var(--bg-surface); border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+          <div style="display: flex; gap: 16px; align-items: center;">
+            <span class="alert-tag danger" style="padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700;">CRITICAL</span>
+            <div>
+              <div class="alert-title" style="margin: 0; font-size: 13px; font-weight: 700; color: var(--text-primary);">Stock Out Risk: Systemic Antipyretics (Non-NSAID)</div>
+              <div class="alert-body" style="margin-top: 4px; font-size: 12px; color: var(--text-secondary);">Demand spike (+45% buffer) will exhaust safety stock levels in Batangas during August monsoon.</div>
+            </div>
+          </div>
+          <button class="action-btn" style="background: var(--accent); color: #FFFFFF; font-size: 12px; font-weight: 600; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer;" onclick="showPage('planning')">Review Allocation</button>
         </div>
-        <div class="alert-summary">
-          <div class="alert-summary-label">Alert Overview</div>
-          <div class="alert-summary-row"><span class="alert-summary-key">Open Critical Flags</span><span class="alert-summary-value" style="color:#EF4444">2</span></div>
-          <div class="alert-summary-row"><span class="alert-summary-key">Outbreak Watches</span><span class="alert-summary-value" style="color:#F59E0B">1</span></div>
-          <div class="alert-summary-row"><span class="alert-summary-key">SKUs Needing Reorder</span><span class="alert-summary-value" style="color:#0EA5E9">5</span></div>
-        </div>
-      </div>
 
-      <div class="alert-grid">
-        <div class="alert-card danger">
-          <div class="alert-title">Reorder Trigger — ANTIZOAL IV</div>
-          <div class="alert-body">Demand exceeds safety stock threshold. EOQ target: 240 units. ROP: 80 units.</div>
-          <span class="alert-tag danger">Critical</span>
+        <!-- WARNING ALERT -->
+        <div class="alert-card warn" style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-left: 4px solid var(--amber); background: var(--bg-surface); border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+          <div style="display: flex; gap: 16px; align-items: center;">
+            <span class="alert-tag warn" style="padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700;">WARNING</span>
+            <div>
+              <div class="alert-title" style="margin: 0; font-size: 13px; font-weight: 700; color: var(--text-primary);">Dengue Alert Level 3 Active</div>
+              <div class="alert-body" style="margin-top: 4px; font-size: 12px; color: var(--text-secondary);">DOH surveillance indicates infection index > 1.4 in Quezon. Buffer tracking enabled.</div>
+            </div>
+          </div>
+          <button class="action-btn" style="background: #FFFFFF; border: 1px solid var(--border-strong); color: var(--text-primary); font-size: 12px; font-weight: 600; padding: 8px 16px; border-radius: 6px; cursor: pointer;" onclick="showPage('planning')">Monitor Risks</button>
         </div>
-        <div class="alert-card warn">
-          <div class="alert-title">Dengue Season Watch — Q4</div>
-          <div class="alert-body">DOH Infection Index above 1.4. Paracetamol and antipyretic demand expected +35%.</div>
-          <span class="alert-tag warn">Warning</span>
-        </div>
-        <div class="alert-card danger">
-          <div class="alert-title">Typhoon Pre-Positioning Active</div>
-          <div class="alert-body">PAGASA RSI ≥ 45%. Wound care and ORS stock multiplier (+40%) applied for Marinduque.</div>
-          <span class="alert-tag danger">High Risk</span>
-        </div>
-        <div class="alert-card ok">
-          <div class="alert-title">Hospital Territory Stock Stable</div>
-          <div class="alert-body">Current inventory covers projected hospital demand through Feb 2026.</div>
-          <span class="alert-tag ok">Stable</span>
+
+        <!-- STABLE ALERT -->
+        <div class="alert-card ok" style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-left: 4px solid var(--emerald); background: var(--bg-surface); border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+          <div style="display: flex; gap: 16px; align-items: center;">
+            <span class="alert-tag ok" style="padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700;">STABLE</span>
+            <div>
+              <div class="alert-title" style="margin: 0; font-size: 13px; font-weight: 700; color: var(--text-primary);">Inventory Safety Buffers Restored</div>
+              <div class="alert-body" style="margin-top: 4px; font-size: 12px; color: var(--text-secondary);">Recalibrated safety stock levels for Amihan/Cool dry transition are currently compliant.</div>
+            </div>
+          </div>
+          <span style="font-size: 12px; color: var(--text-muted); font-weight: 600; padding-right: 16px;">System Calibrated</span>
         </div>
       </div>
 
@@ -1038,19 +1041,25 @@ if (typeof window !== 'undefined') {
       tableEl.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:20px;color:#64748B;">Loading prescribed SKU recommendations...</td></tr>';
       var data;
       try {
-        var res = await fetch('/api/seasonal_restock_detail?season_id=' + seasonId);
+        var apiBase = window.location.port === '3000' ? 'http://' + window.location.hostname + ':5000' : '';
+        var res = await fetch(apiBase + '/api/seasonal_restock_detail?season_id=' + seasonId);
         data = await res.json();
       } catch(e) { console.warn('API fallback active', e); }
       var details = (data && data.detail) ? data.detail : {
         season_name: 'July & August — Peak Monsoon (Habagat)',
         climate_trigger: 'Peak Southwest Monsoon & Urban Inundation',
         skus: [
-          {sku:'Doxycycline 100mg Capsule',category:'Flood Prophylactics',current_stock:180,eoq_reorder:1200,rop:400,urgency:'Critical',unit_cost:'&#8369;12.00'},
-          {sku:'Paracetamol 500mg Tablet',category:'Antipyretics',current_stock:600,eoq_reorder:4000,rop:1200,urgency:'Critical',unit_cost:'&#8369;8.50'},
-          {sku:'IV Lactated Ringers 1L',category:'IV Fluids',current_stock:90,eoq_reorder:500,rop:180,urgency:'High',unit_cost:'&#8369;110.00'},
-          {sku:'Cefuroxime 500mg Tablet',category:'Antibiotics',current_stock:140,eoq_reorder:650,rop:200,urgency:'High',unit_cost:'&#8369;48.00'}
+          {sku:'Systemic Antipyretics (Non-NSAID / Paracetamol)',category:'Antipyretics',current_stock:600,eoq_reorder:4000,rop:1200,urgency:'Critical',unit_cost:'&#8369;8.50'},
+          {sku:'Flood Prophylactics & Antibiotics (Doxycycline)',category:'Flood Prophylactics',current_stock:180,eoq_reorder:1200,rop:400,urgency:'Critical',unit_cost:'&#8369;12.00'},
+          {sku:'IV Fluids & Isotonic Electrolytes',category:'IV Fluids',current_stock:90,eoq_reorder:500,rop:180,urgency:'High',unit_cost:'&#8369;110.00'},
+          {sku:'Oral Rehydration Therapy & GI Anti-Infectives',category:'GI Anti-infectives',current_stock:450,eoq_reorder:1500,rop:300,urgency:'High',unit_cost:'&#8369;22.00'},
+          {sku:'Inhaled Bronchodilators & Corticosteroids',category:'Bronchodilators',current_stock:140,eoq_reorder:650,rop:200,urgency:'Medium',unit_cost:'&#8369;45.00'}
         ]
       };
+      window.currentSeasonalDetails = details;
+      var btn = document.getElementById('exportCsvBtn');
+      if (btn) btn.style.display = 'inline-block';
+
       if (titleEl) titleEl.innerText = details.season_name;
       if (subEl) subEl.innerText = 'Climate Trigger: ' + (details.climate_trigger || 'Seasonal Surge');
       var rows = '';
@@ -1059,7 +1068,7 @@ if (typeof window !== 'undefined') {
         if (s.urgency === 'Critical') b = '<span class="alert-tag danger">&#9888; Critical</span>';
         else if (s.urgency === 'High') b = '<span class="alert-tag danger">High</span>';
         else if (s.urgency === 'Low') b = '<span class="alert-tag ok">Low</span>';
-        var stockColor = (parseInt(s.current_stock) < parseInt(s.rop)) ? '#EF4444' : '#0F172A';
+        var stockColor = (parseInt(s.current_stock) < parseInt(s.rop)) ? 'var(--red)' : 'var(--text-primary)';
         rows += '<tr>' +
           '<td style="font-weight:700;text-align:left">' + s.sku + '</td>' +
           '<td>' + s.category + '</td>' +
@@ -1073,10 +1082,53 @@ if (typeof window !== 'undefined') {
       tableEl.innerHTML = rows;
     } catch(err) { console.error('selectSeasonRestock:', err); }
   };
+
+  window.exportRestockPlanToCsv = function() {
+    var details = window.currentSeasonalDetails;
+    if (!details || !details.skus || !details.skus.length) return alert('No plan loaded to export');
+    var csv = 'Therapeutic Category (WHO),Sub-Category,Current Stock,Recommended EOQ Reorder,Reorder Point (ROP),Urgency,Unit Cost\\n';
+    details.skus.forEach(function(s) {
+      var cleanCost = s.unit_cost.replace('&#8369;', '').replace('₱', '').trim();
+      csv += '"' + s.sku.replace(/"/g, '""') + '","' + 
+                   s.category.replace(/"/g, '""') + '",' + 
+                   s.current_stock + ',' + 
+                   s.eoq_reorder + ',' + 
+                   s.rop + ',"' + 
+                   s.urgency + '",' + 
+                   cleanCost + '\\n';
+    });
+    var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    var url = URL.createObjectURL(blob);
+    var link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", "MedShield_Reorder_Plan_" + details.season_name.replace(/[^a-z0-9]/gi, '_').toLowerCase() + ".csv");
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
   setTimeout(function() {
     var activeCard = document.querySelector('.clickable-season.active-season');
     if (window.selectSeasonRestock && activeCard) window.selectSeasonRestock('monsoon', activeCard);
   }, 800);
+}
+// Expose all onclick-referenced functions to window scope for SSR/Next.js compatibility
+if (typeof window !== 'undefined') {
+  var _fnList = [
+    'showPage','toggleNavigation','closeNavigation','toggleTheme',
+    'openHelp','setYear','setYoYYear','setComparisonMode',
+    'applyTheme','buildCharts','buildTables','setUploadLog',
+    'applyPageSelection','setNavigationState','applyResponsiveNavigation',
+    'resizeCharts','updateNavigationToggle','handleNavigationResize',
+    'applyResponsiveNavigation','getResponsiveNavState','refreshComparison',
+    'bindProductTableSort','renderTable','updateFilterBar','parseCsv',
+    'applyDatasetPatch','loadBundledSalesDataset','normalizeMonthlyRows',
+    'normalizeAreaRows','normalizeYearSummaryRows','normalizeSeasonalityRows',
+    'normalizeTopProductsRows','toNumber'
+  ];
+  _fnList.forEach(function(n) {
+    try { if (typeof eval(n) === 'function') window[n] = eval(n); } catch(e) {}
+  });
 }
 '''
 

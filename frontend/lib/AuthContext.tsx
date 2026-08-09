@@ -32,36 +32,42 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (isSupabaseBrowserConfigured()) {
-      const supabase = createClient()
-      let cancelled = false
+      try {
+        const supabase = createClient()
+        let cancelled = false
 
-      async function restoreSupabaseSession() {
-        try {
-          const { data: { session } } = await supabase.auth.getSession()
-          if (!cancelled && session?.user) {
-            setAccessToken(session.access_token)
-            setUser(toUserFromSupabase(session.user))
-            setIsAuthenticated(true)
+        const restoreSupabaseSession = async () => {
+          try {
+            const { data: { session } } = await supabase.auth.getSession()
+            if (!cancelled && session?.user) {
+              setAccessToken(session.access_token)
+              setUser(toUserFromSupabase(session.user))
+              setIsAuthenticated(true)
+            }
+          } finally {
+            if (!cancelled) setIsAuthLoading(false)
           }
-        } finally {
-          if (!cancelled) setIsAuthLoading(false)
         }
-      }
 
-      void restoreSupabaseSession()
+        void restoreSupabaseSession()
 
-      const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-        if (cancelled) return
-        setAccessToken(session?.access_token ?? null)
-        setUser(session?.user ? toUserFromSupabase(session.user) : null)
-        setIsAuthenticated(Boolean(session?.user))
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+          if (cancelled) return
+          setAccessToken(session?.access_token ?? null)
+          setUser(session?.user ? toUserFromSupabase(session.user) : null)
+          setIsAuthenticated(Boolean(session?.user))
+          setIsAuthLoading(false)
+        })
+
+        return () => {
+          cancelled = true
+          subscription.unsubscribe()
+        }
+      } catch (err) {
+        console.warn('Supabase auth initialization bypassed:', err)
         setIsAuthLoading(false)
-      })
-
-      return () => {
-        cancelled = true
-        subscription.unsubscribe()
       }
+      return
     }
 
     const token = getStoredToken()
