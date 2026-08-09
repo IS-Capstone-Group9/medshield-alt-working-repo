@@ -1,0 +1,1825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedShield Executive Decision Support System (DSS)</title>
+    <!-- Google Fonts & Chart.js CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        :root {
+            --bg-base: #0b0f19;
+            --bg-surface: #111827;
+            --bg-surface-elevated: #1f2937;
+            --bg-glass: rgba(17, 24, 39, 0.75);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-highlight: rgba(255, 255, 255, 0.15);
+            
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --primary-glow: rgba(59, 130, 246, 0.3);
+            
+            --accent-teal: #14b8a6;
+            --accent-purple: #8b5cf6;
+            --accent-amber: #f59e0b;
+            --accent-rose: #f43f5e;
+            --accent-emerald: #10b981;
+            
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            --text-dim: #6b7280;
+            
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Top Bar Header */
+        header {
+            background: var(--bg-glass);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 0.85rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .brand-logo {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, var(--primary), var(--accent-purple));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #ffffff;
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .brand-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--text-main);
+        }
+
+        .brand-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        /* Nav Tabs */
+        nav {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 4px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.5rem 1.1rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            font-family: var(--font-main);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .nav-btn:hover {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-btn.active {
+            background: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 2px 8px var(--primary-glow);
+        }
+
+        .header-meta {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--accent-emerald);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: var(--accent-emerald);
+            box-shadow: 0 0 8px var(--accent-emerald);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.825rem;
+            color: var(--text-muted);
+        }
+
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--bg-surface-elevated);
+            border: 1px solid var(--border-highlight);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Global Alert Banners */
+        .alert-banner-container {
+            padding: 0.75rem 2rem 0 2rem;
+        }
+
+        .alert-banner {
+            background: linear-gradient(90deg, rgba(244, 63, 94, 0.15), rgba(245, 158, 11, 0.15));
+            border: 1px solid rgba(244, 63, 94, 0.3);
+            border-radius: var(--radius-md);
+            padding: 0.75rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            animation: pulse-border 3s infinite alternate;
+        }
+
+        @keyframes pulse-border {
+            0% { border-color: rgba(244, 63, 94, 0.3); }
+            100% { border-color: rgba(244, 63, 94, 0.7); }
+        }
+
+        .alert-content {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 0.85rem;
+        }
+
+        .alert-icon {
+            font-size: 1.2rem;
+        }
+
+        .alert-title {
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .alert-desc {
+            color: var(--text-muted);
+        }
+
+        .alert-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-sm {
+            padding: 0.35rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: var(--radius-sm);
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-outline {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-main);
+            border: 1px solid var(--border-highlight);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+        }
+
+        /* Layout Main Containers */
+        main {
+            flex: 1;
+            padding: 1.5rem 2rem 2.5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .page-view {
+            display: none;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .page-view.active {
+            display: flex;
+        }
+
+        /* Section Cards & Layout Grids */
+        .grid-kpi {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            box-shadow: var(--shadow-card);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .card-icon {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+        }
+
+        .kpi-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.35rem;
+            font-family: var(--font-mono);
+        }
+
+        .kpi-sub {
+            font-size: 0.775rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .trend-up {
+            color: var(--accent-emerald);
+            font-weight: 600;
+        }
+
+        .trend-down {
+            color: var(--accent-rose);
+            font-weight: 600;
+        }
+
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .grid-equal-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .grid-3col {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .grid-sidebar {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 1.5rem;
+        }
+
+        /* Filter Controls & Sliders */
+        .filter-panel {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .filter-label {
+            font-size: 0.775rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .select-input, .text-input {
+            background: var(--bg-surface-elevated);
+            border: 1px solid var(--border-highlight);
+            color: var(--text-main);
+            padding: 0.55rem 0.85rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            font-family: var(--font-main);
+            outline: none;
+            width: 100%;
+        }
+
+        .select-input:focus, .text-input:focus {
+            border-color: var(--primary);
+        }
+
+        .range-slider {
+            width: 100%;
+            accent-color: var(--primary);
+        }
+
+        .slider-val {
+            font-size: 0.8rem;
+            font-family: var(--font-mono);
+            color: var(--primary);
+            font-weight: 600;
+            float: right;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider-toggle {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: var(--bg-surface-elevated);
+            border: 1px solid var(--border-highlight);
+            transition: .3s;
+            border-radius: 24px;
+        }
+
+        .slider-toggle:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider-toggle {
+            background-color: var(--primary);
+        }
+
+        input:checked + .slider-toggle:before {
+            transform: translateX(20px);
+        }
+
+        /* Business Data Tables & Scroll Container */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: auto;
+            max-height: 480px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.825rem;
+            text-align: left;
+        }
+
+        .data-table th {
+            background: #192233;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid var(--border-highlight);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .data-table td {
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .data-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .num-col {
+            font-family: var(--font-mono);
+            text-align: right;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-a { background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); border: 1px solid rgba(16, 185, 129, 0.3); }
+        .badge-b { background: rgba(59, 130, 246, 0.15); color: var(--primary); border: 1px solid rgba(59, 130, 246, 0.3); }
+        .badge-c { background: rgba(156, 163, 175, 0.15); color: var(--text-muted); border: 1px solid rgba(156, 163, 175, 0.3); }
+        .badge-urgent { background: rgba(244, 63, 94, 0.15); color: var(--accent-rose); border: 1px solid rgba(244, 63, 94, 0.3); }
+        .badge-est { background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.3); }
+
+        /* Heatmap Grid & Overflow Fix */
+        .heatmap-container {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: var(--radius-sm);
+        }
+
+        .heatmap-grid {
+            display: grid;
+            grid-template-columns: 110px repeat(12, 1fr);
+            gap: 3px;
+            font-size: 0.725rem;
+            margin-top: 0.5rem;
+            width: 100%;
+        }
+
+        .heatmap-cell {
+            padding: 0.45rem 0.15rem;
+            border-radius: var(--radius-sm);
+            text-align: center;
+            font-family: var(--font-mono);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .heatmap-header {
+            background: transparent;
+            color: var(--text-muted);
+            font-weight: 600;
+            padding: 0.4rem 0.2rem;
+            font-size: 0.75rem;
+        }
+
+        .heat-low { background: rgba(59, 130, 246, 0.15); color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.25); }
+        .heat-normal { background: rgba(16, 185, 129, 0.2); color: var(--accent-emerald); border: 1px solid rgba(16, 185, 129, 0.3); }
+        .heat-medium { background: rgba(245, 158, 11, 0.25); color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.35); }
+        .heat-high { background: rgba(244, 63, 94, 0.35); color: #ffffff; font-weight: 700; border: 1px solid rgba(244, 63, 94, 0.5); }
+
+        /* Chart Canvas Containers */
+        .chart-wrapper {
+            position: relative;
+            height: 320px;
+            width: 100%;
+        }
+
+        /* Disclaimer Footer Note */
+        .disclaimer-box {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            background: rgba(0, 0, 0, 0.2);
+            border-left: 3px solid var(--accent-amber);
+            padding: 0.6rem 1rem;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            margin-top: 0.5rem;
+        }
+
+        /* Audit Log List */
+        .audit-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.8rem;
+        }
+
+        .audit-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-dim);
+            font-size: 0.725rem;
+        }
+
+        .audit-action {
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .audit-comment {
+            color: var(--text-muted);
+            font-style: italic;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            margin-top: 0.2rem;
+        }
+
+        /* Modal Overlay for Actions */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(5px);
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-lg);
+            width: 460px;
+            max-width: 90%;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-card);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .modal-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        /* Binding Constraint Explainer Panel */
+        .constraint-panel {
+            background: rgba(139, 92, 246, 0.08);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: var(--radius-md);
+            padding: 0.85rem 1rem;
+            font-size: 0.8rem;
+            color: #d8b4fe;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="brand-container">
+            <div class="brand-logo">M</div>
+            <div>
+                <div class="brand-title">MedShield DSS</div>
+                <div class="brand-subtitle">Executive Decision Support Engine</div>
+            </div>
+        </div>
+
+        <nav>
+            <button class="nav-btn active" onclick="switchTab('exec-hub')">📊 Executive Overview</button>
+            <button class="nav-btn" onclick="switchTab('diagnostics')">🔍 Diagnostics & Rank</button>
+            <button class="nav-btn" onclick="switchTab('planning')">⚙️ Prescriptive Planning</button>
+            <button class="nav-btn" onclick="switchTab('audit')">🛡️ Audit & Ops</button>
+        </nav>
+
+        <div class="header-meta">
+            <div class="status-badge">
+                <span class="status-dot"></span>
+                <span>Data Health: 100% Reconciled</span>
+            </div>
+            <div class="user-profile">
+                <div class="avatar">VP</div>
+                <div>
+                    <div style="font-weight:600; color:var(--text-main)">Executive Planner</div>
+                    <div style="font-size:0.7rem">Procurement Directorate</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Global Active Environmental Alert Banner -->
+    <div class="alert-banner-container">
+        <div class="alert-banner" id="global-alert-banner">
+            <div class="alert-content">
+                <span class="alert-icon">⚠️</span>
+                <div>
+                    <span class="alert-title">Active Environmental Trigger: Q3 Monsoon Seasonality + Typhoons</span>
+                    <span class="alert-desc"> — High Dengue/Leptospirosis risk flags in Quezon & Batangas. Prophet forecasts auto-adjusted.</span>
+                </div>
+            </div>
+            <div class="alert-actions">
+                <button class="btn-sm btn-outline" onclick="switchTab('planning')">View Prescriptive Allocations</button>
+                <button class="btn-sm btn-primary" onclick="simulateAlertOverride()">Simulate Outbreak Surge</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT AREA -->
+    <main>
+
+        <!-- PAGE 1: EXECUTIVE OVERVIEW HUB -->
+        <div id="exec-hub" class="page-view active">
+            <!-- Strategic KPI Cards -->
+            <div class="grid-kpi">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">2027 Forecast Revenue</span>
+                        <span class="card-icon">₱</span>
+                    </div>
+                    <div class="kpi-value" id="kpi-forecast-rev">₱274,800,000</div>
+                    <div class="kpi-sub"><span class="trend-up">↑ +12.6%</span> vs 2026 actuals</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Gross Profit Margin</span>
+                        <span class="card-icon">%</span>
+                    </div>
+                    <div class="kpi-value">35.2%</div>
+                    <div class="kpi-sub"><span class="trend-up">↑ +1.2%</span> (Isolated Margin Anomalies Excluded)</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Inventory Risk Index</span>
+                        <span class="card-icon">🛡️</span>
+                    </div>
+                    <div class="kpi-value">Low (0.16)</div>
+                    <div class="kpi-sub">ROP Buffer Coverage: 98.8% SKUs</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Data Ingestion Gate</span>
+                        <span class="card-icon">⚡</span>
+                    </div>
+                    <div class="kpi-value">288,450 / 288,450</div>
+                    <div class="kpi-sub">Accepted Clean Rows (2017–2026)</div>
+                </div>
+            </div>
+
+            <!-- Main Forecast Trend Chart & Summary Split -->
+            <div class="grid-2col">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Prophet Demand Forecast Transition & Confidence Limits (2017–2027)</span>
+                        <span class="badge badge-b">Model: Prophet + External Regressors</span>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="prophetForecastChart"></canvas>
+                    </div>
+                    <div class="disclaimer-box">
+                        <strong>Disclaimer:</strong> Environmental factors sourced from historical DOH epidemiological signals and provider-derived weather proxies. Predictions frame uncertainty bounds to avoid absolute certainty assumptions.
+                    </div>
+                </div>
+
+                <div class="card" style="gap:1rem;">
+                    <div class="card-header">
+                        <span class="card-title">Executive Summary & Priorities</span>
+                    </div>
+                    
+                    <div style="font-size:0.85rem; color:var(--text-muted); display:flex; flex-direction:column; gap:0.75rem;">
+                        <p><strong>1. Demand Surge Alignment:</strong> Third quarter forecasts indicate a <strong>28% peak surge</strong> in antibiotic and IV solution requirements across Southern Luzon due to dengue seasonality triggers.</p>
+                        <p><strong>2. Capital Efficiency:</strong> Economic Order Quantity (EOQ) optimization recommends an aggregate procurement spend of <strong>₱42.1M</strong>, achieving minimum holding/ordering total costs.</p>
+                        <p><strong>3. Dead Stock Prevention:</strong> Stop-Purchasing triggers are active on 14 Class C items with zero trailing 6-month transaction velocity.</p>
+                    </div>
+
+                    <div class="constraint-panel">
+                        <strong>LP Binding Constraint Status:</strong><br>
+                        Current budget ceiling: ₱50.0M. Priority allocation logic actively weighted by MCDA Regional Risk Scores.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Strategic Business Visualizations -->
+            <div class="grid-equal-2">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Pareto ABC Revenue Contribution Mix (2026 Baseline)</span>
+                        <span class="badge badge-a">North Star 4A</span>
+                    </div>
+                    <div class="chart-wrapper" style="height:260px;">
+                        <canvas id="paretoChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Regional Revenue & Gross Profit Margin Leaderboard</span>
+                        <span class="badge badge-b">Descriptive Analytics</span>
+                    </div>
+                    <div class="chart-wrapper" style="height:260px;">
+                        <canvas id="regionalLeaderboardChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 2: DIAGNOSTICS & PRIORITIZATION -->
+        <div id="diagnostics" class="page-view">
+            <div class="grid-sidebar">
+                <!-- Diagnostic Sidebar Filters -->
+                <div class="filter-panel">
+                    <div class="filter-label">Diagnostic Filters & Granularity</div>
+                    
+                    <div class="filter-group">
+                        <label class="filter-label">Time Granularity</label>
+                        <select class="select-input" id="filter-granularity" onchange="updateGranularityAndYoY()">
+                            <option value="monthly">Monthly Aggregation</option>
+                            <option value="weekly">Weekly Aggregation</option>
+                            <option value="annual">Annual Aggregation</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Territory / Region / Province</label>
+                        <select class="select-input" id="filter-territory" onchange="updateDiagnosticsView()">
+                            <option value="all">All Delivery Territories (3 Regions / 16 Provinces)</option>
+                            <optgroup label="Region IV-A (CALABARZON)">
+                                <option value="Quezon">Quezon</option>
+                                <option value="Batangas">Batangas</option>
+                                <option value="Laguna">Laguna</option>
+                                <option value="Cavite">Cavite</option>
+                                <option value="Rizal">Rizal</option>
+                            </optgroup>
+                            <optgroup label="Region IV-B (MIMAROPA)">
+                                <option value="Mindoro">Mindoro (Combined Island Baseline)</option>
+                                <option value="Occidental Mindoro">  ↳ Occidental Mindoro (Unsplit Data)</option>
+                                <option value="Oriental Mindoro">  ↳ Oriental Mindoro (Unsplit Data)</option>
+                                <option value="Marinduque">Marinduque</option>
+                                <option value="Romblon">Romblon</option>
+                                <option value="Palawan">Palawan</option>
+                            </optgroup>
+                            <optgroup label="Region V (Bicol Region)">
+                                <option value="Camarines Norte">Camarines Norte</option>
+                                <option value="Camarines Sur">Camarines Sur</option>
+                                <option value="Albay">Albay</option>
+                                <option value="Sorsogon">Sorsogon</option>
+                                <option value="Catanduanes">Catanduanes</option>
+                                <option value="Masbate">Masbate</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Customer Channel</label>
+                        <select class="select-input" id="filter-channel" onchange="updateDiagnosticsView()">
+                            <option value="all">All Channels</option>
+                            <option value="Government">Government Bidding</option>
+                            <option value="Hospital">Private Hospitals</option>
+                            <option value="Pharmacy">Retail Pharmacies</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-label" style="margin-top:0.5rem;">Year-over-Year (YoY) Compare</div>
+                    <div style="display:flex; gap:0.5rem;">
+                        <div class="filter-group" style="flex:1;">
+                            <label class="filter-label" style="font-size:0.68rem;">Base Year</label>
+                            <select class="select-input" id="yoy-year-a" onchange="updateGranularityAndYoY()">
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025" selected>2025</option>
+                                <option value="2026">2026</option>
+                            </select>
+                        </div>
+                        <div class="filter-group" style="flex:1;">
+                            <label class="filter-label" style="font-size:0.68rem;">Compare Year</label>
+                            <select class="select-input" id="yoy-year-b" onchange="updateGranularityAndYoY()">
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                                <option value="2026" selected>2026</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="toggle-container">
+                        <div>
+                            <div style="font-size:0.8rem; font-weight:600;">Include Service Contracts</div>
+                            <div style="font-size:0.7rem; color:var(--text-dim)">Backward-allocated items</div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="toggle-contracts" checked onchange="updateDiagnosticsView()">
+                            <span class="slider-toggle"></span>
+                        </label>
+                    </div>
+
+                    <div class="disclaimer-box" style="margin-top:auto;">
+                        Rows containing backward-allocated service contracts (e.g. <code># bulk contracts</code>) are estimated from 3-year historical area product-mix ratios and tagged as <span class="badge badge-est">estimated_backward_allocation</span>.
+                    </div>
+                </div>
+
+                <!-- Main Diagnostic Panels -->
+                <div style="display:flex; flex-direction:column; gap:1.5rem;">
+                    <!-- Product Urgency Table -->
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">XGBoost Product Demand Urgency Ranks & ABC Classification</span>
+                            <span class="badge badge-a">Machine Learning Scored</span>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table" id="urgency-table">
+                                <thead>
+                                    <tr>
+                                        <th>Product SKU / Description</th>
+                                        <th>Category</th>
+                                        <th>ABC Band</th>
+                                        <th>Urgency Score</th>
+                                        <th class="num-col">2026 Hist Sales</th>
+                                        <th class="num-col">2027 Forecast Demand</th>
+                                        <th>Allocation Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>MONOWEL 1G IV</strong><br><span style="font-size:0.7rem; color:var(--text-dim)">Antibiotics</span></td>
+                                        <td>Medicine</td>
+                                        <td><span class="badge badge-a">Class A</span></td>
+                                        <td><span class="badge badge-urgent">0.94 / 1.00</span></td>
+                                        <td class="num-col">13,200 vials</td>
+                                        <td class="num-col">15,400 vials</td>
+                                        <td><span class="badge badge-b">High Priority</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>PARACETAMOL 500MG</strong><br><span style="font-size:0.7rem; color:var(--text-dim)">Analgesics</span></td>
+                                        <td>Medicine</td>
+                                        <td><span class="badge badge-a">Class A</span></td>
+                                        <td><span class="badge badge-urgent">0.88 / 1.00</span></td>
+                                        <td class="num-col">48,500 boxes</td>
+                                        <td class="num-col">55,100 boxes</td>
+                                        <td><span class="badge badge-b">High Priority</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>PAGBILAO # CONTRACT ALLOC</strong><br><span style="font-size:0.7rem; color:var(--text-amber)">Backward Approx</span></td>
+                                        <td>Contract Mix</td>
+                                        <td><span class="badge badge-b">Class B</span></td>
+                                        <td>0.65 / 1.00</td>
+                                        <td class="num-col">₱ 14,800,000</td>
+                                        <td class="num-col">₱ 16,200,000</td>
+                                        <td><span class="badge badge-est">estimated_backward_allocation</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>OFFICE FOLDER A4</strong><br><span style="font-size:0.7rem; color:var(--text-dim)">Non-Medical</span></td>
+                                        <td>Operational</td>
+                                        <td><span class="badge badge-c">Class C</span></td>
+                                        <td>0.08 / 1.00</td>
+                                        <td class="num-col">150 packs</td>
+                                        <td class="num-col">120 packs</td>
+                                        <td><span class="badge badge-c">Stop Purchasing</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Seasonality Index Heatmap & YoY Chart Grid (Full-Width Stack for Readability) -->
+                    <div style="display:flex; flex-direction:column; gap:1.5rem;">
+                        <div class="card">
+                            <div class="card-header">
+                                <span class="card-title" id="yoy-chart-title">YoY Comparative Performance (2025 vs 2026)</span>
+                                <span class="badge badge-a" id="yoy-granularity-badge">Monthly Granularity</span>
+                            </div>
+                            <div class="chart-wrapper" style="height:250px;">
+                                <canvas id="yoyCompareChart"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <span class="card-title">STL Seasonality Index Heatmap</span>
+                                <span class="card-icon">🗓️</span>
+                            </div>
+                            <p style="font-size:0.775rem; color:var(--text-muted);">Historical monthly multipliers (1.00 = baseline average demand):</p>
+                            
+                            <div class="heatmap-container">
+                                <div class="heatmap-grid">
+                                    <div class="heatmap-cell heatmap-header" style="justify-content:flex-start; font-weight:700; color:var(--text-main);">Category</div>
+                                    <div class="heatmap-cell heatmap-header">Jan</div>
+                                    <div class="heatmap-cell heatmap-header">Feb</div>
+                                    <div class="heatmap-cell heatmap-header">Mar</div>
+                                    <div class="heatmap-cell heatmap-header">Apr</div>
+                                    <div class="heatmap-cell heatmap-header">May</div>
+                                    <div class="heatmap-cell heatmap-header">Jun</div>
+                                    <div class="heatmap-cell heatmap-header">Jul</div>
+                                    <div class="heatmap-cell heatmap-header">Aug</div>
+                                    <div class="heatmap-cell heatmap-header">Sep</div>
+                                    <div class="heatmap-cell heatmap-header">Oct</div>
+                                    <div class="heatmap-cell heatmap-header">Nov</div>
+                                    <div class="heatmap-cell heatmap-header">Dec</div>
+
+                                    <div class="heatmap-cell heatmap-header" style="justify-content:flex-start; color:var(--text-main); font-weight:600;">Antibiotics</div>
+                                    <div class="heatmap-cell heat-low">0.85</div>
+                                    <div class="heatmap-cell heat-low">0.88</div>
+                                    <div class="heatmap-cell heat-normal">0.95</div>
+                                    <div class="heatmap-cell heat-normal">1.02</div>
+                                    <div class="heatmap-cell heat-medium">1.15</div>
+                                    <div class="heatmap-cell heat-medium">1.25</div>
+                                    <div class="heatmap-cell heat-high">1.45</div>
+                                    <div class="heatmap-cell heat-high">1.52</div>
+                                    <div class="heatmap-cell heat-medium">1.30</div>
+                                    <div class="heatmap-cell heat-normal">1.05</div>
+                                    <div class="heatmap-cell heat-low">0.90</div>
+                                    <div class="heatmap-cell heat-low">0.80</div>
+
+                                    <div class="heatmap-cell heatmap-header" style="justify-content:flex-start; color:var(--text-main); font-weight:600;">Analgesics</div>
+                                    <div class="heatmap-cell heat-normal">0.95</div>
+                                    <div class="heatmap-cell heat-normal">0.98</div>
+                                    <div class="heatmap-cell heat-normal">1.00</div>
+                                    <div class="heatmap-cell heat-normal">1.05</div>
+                                    <div class="heatmap-cell heat-medium">1.10</div>
+                                    <div class="heatmap-cell heat-medium">1.20</div>
+                                    <div class="heatmap-cell heat-high">1.38</div>
+                                    <div class="heatmap-cell heat-high">1.42</div>
+                                    <div class="heatmap-cell heat-medium">1.28</div>
+                                    <div class="heatmap-cell heat-normal">1.02</div>
+                                    <div class="heatmap-cell heat-normal">0.95</div>
+                                    <div class="heatmap-cell heat-normal">0.92</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 3: PRESCRIPTIVE PLANNING & SCENARIO ENGINE -->
+        <div id="planning" class="page-view">
+            <div class="grid-sidebar">
+                <!-- Scenario Control Sliders -->
+                <div class="filter-panel">
+                    <div class="filter-label">Optimization Levers & Parameters</div>
+                    
+                    <div class="filter-group">
+                        <label class="filter-label">Supplier Lead Time (Days) <span class="slider-val" id="val-leadtime">15 Days</span></label>
+                        <input type="range" class="range-slider" min="5" max="45" value="15" id="slider-leadtime" oninput="recalculatePrescriptiveEngine()">
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Holding Cost Rate (%) <span class="slider-val" id="val-holding">18.0%</span></label>
+                        <input type="range" class="range-slider" min="5" max="35" value="18" id="slider-holding" oninput="recalculatePrescriptiveEngine()">
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Service Level (Z-Factor) <span class="slider-val" id="val-service">95.0% (Z=1.65)</span></label>
+                        <input type="range" class="range-slider" min="80" max="99" value="95" id="slider-service" oninput="recalculatePrescriptiveEngine()">
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">LP Budget Cap (₱ Millions) <span class="slider-val" id="val-budget">₱ 50.0 M</span></label>
+                        <input type="range" class="range-slider" min="10" max="100" value="50" id="slider-budget" oninput="recalculatePrescriptiveEngine()">
+                    </div>
+
+                    <div class="constraint-panel">
+                        <strong>Active LP Model Status:</strong><br>
+                        Calculated Economic Order Quantities (EOQ) and Safety Stock triggers dynamically update below based on these operational sliders.
+                    </div>
+                </div>
+
+                <!-- Prescriptive Planning Tables & Matrix -->
+                <div style="display:flex; flex-direction:column; gap:1.5rem;">
+                    <!-- EOQ & ROP Planning Table -->
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">Inventory Control & Purchase Order Approvals (EOQ & ROP Parameters)</span>
+                            <span class="badge badge-a">Cost-Minimizing Engine</span>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th class="num-col">Current Stock</th>
+                                        <th class="num-col">Safety Stock Target</th>
+                                        <th class="num-col">Reorder Point (ROP)</th>
+                                        <th class="num-col">Calculated EOQ</th>
+                                        <th class="num-col">Unit Order Cost</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>MONOWEL 1G IV</strong></td>
+                                        <td class="num-col" style="color:var(--accent-rose); font-weight:700">450 vials</td>
+                                        <td class="num-col" id="row1-ss">280 vials</td>
+                                        <td class="num-col" id="row1-rop">820 vials</td>
+                                        <td class="num-col" id="row1-eoq" style="font-weight:700">949 vials</td>
+                                        <td class="num-col">₱ 1,450.00</td>
+                                        <td><button class="btn-sm btn-primary" onclick="openApprovalModal('MONOWEL 1G IV', 949)">Approve Order</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>PARACETAMOL 500MG</strong></td>
+                                        <td class="num-col">1,200 boxes</td>
+                                        <td class="num-col" id="row2-ss">420 boxes</td>
+                                        <td class="num-col" id="row2-rop">1,450 boxes</td>
+                                        <td class="num-col" id="row2-eoq" style="font-weight:700">2,150 boxes</td>
+                                        <td class="num-col">₱ 220.00</td>
+                                        <td><button class="btn-sm btn-primary" onclick="openApprovalModal('PARACETAMOL 500MG', 2150)">Approve Order</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>AMOXICILLIN 500MG</strong></td>
+                                        <td class="num-col">3,400 boxes</td>
+                                        <td class="num-col" id="row3-ss">310 boxes</td>
+                                        <td class="num-col" id="row3-rop">1,100 boxes</td>
+                                        <td class="num-col" id="row3-eoq" style="font-weight:700">1,200 boxes</td>
+                                        <td class="num-col">₱ 310.00</td>
+                                        <td><button class="btn-sm btn-outline" style="color:var(--text-muted)" disabled>Stock Adequate</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Regional LP Allocation Matrix & CF Recommendations -->
+                    <div class="grid-equal-2">
+                        <div class="card">
+                            <div class="card-header">
+                                <span class="card-title">MCDA-Weighted Linear Allocation Matrix</span>
+                            </div>
+                            <div class="table-container">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Territory</th>
+                                            <th>Priority Score</th>
+                                            <th class="num-col">Allocated Stock</th>
+                                            <th class="num-col">Unmet Demand</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Region IV-A (CALABARZON) -->
+                                        <tr>
+                                            <td><strong>Batangas</strong> <span class="badge badge-b">IV-A</span></td>
+                                            <td><span class="badge badge-urgent">0.92 (Rank 1)</span></td>
+                                            <td class="num-col">6,200 vials</td>
+                                            <td class="num-col" style="color:var(--accent-emerald)">0 vials</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Quezon</strong> <span class="badge badge-b">IV-A</span></td>
+                                            <td><span class="badge badge-urgent">0.88 (Rank 2)</span></td>
+                                            <td class="num-col">5,800 vials</td>
+                                            <td class="num-col" style="color:var(--accent-emerald)">0 vials</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Laguna</strong> <span class="badge badge-b">IV-A</span></td>
+                                            <td><span class="badge badge-b">0.78 (Rank 4)</span></td>
+                                            <td class="num-col">4,200 vials</td>
+                                            <td class="num-col" style="color:var(--accent-emerald)">0 vials</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Cavite</strong> <span class="badge badge-b">IV-A</span></td>
+                                            <td><span class="badge badge-b">0.68 (Rank 6)</span></td>
+                                            <td class="num-col">3,100 vials</td>
+                                            <td class="num-col" style="color:var(--accent-emerald)">0 vials</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Rizal</strong> <span class="badge badge-b">IV-A</span></td>
+                                            <td><span class="badge badge-c" style="opacity:0.5">-</span></td>
+                                            <td class="num-col" style="color:var(--text-dim)">—</td>
+                                            <td class="num-col" style="color:var(--text-dim)">—</td>
+                                        </tr>
+
+                                        <!-- Region IV-B (MIMAROPA) -->
+                                        <tr>
+                                            <td><strong>Marinduque</strong> <span class="badge badge-est">IV-B</span></td>
+                                            <td><span class="badge badge-b">0.81 (Rank 3)</span></td>
+                                            <td class="num-col">4,500 vials</td>
+                                            <td class="num-col" style="color:var(--accent-emerald)">0 vials</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Mindoro (Combined Raw Data)</strong> <span class="badge badge-est">IV-B</span></td>
+                                            <td><span class="badge badge-b">0.62 (Rank 7)</span></td>
+                                            <td class="num-col">2,600 vials</td>
+                                            <td class="num-col" style="color:var(--accent-amber)">100 vials</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span style="padding-left:1rem; color:var(--text-muted)">↳ Occidental Mindoro</span></td>
+                                            <td><span class="badge badge-c" style="opacity:0.5">Unsplit</span></td>
+                                            <td class="num-col" style="color:var(--text-dim)">—</td>
+                                            <td class="num-col" style="color:var(--text-dim)">—</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span style="padding-left:1rem; color:var(--text-muted)">↳ Oriental Mindoro</span></td>
+                                            <td><span class="badge badge-c" style="opacity:0.5">Unsplit</span></td>
+                                            <td class="num-col" style="color:var(--text-dim)">—</td>
+                                            <td class="num-col" style="color:var(--text-dim)">—</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Palawan</strong> <span class="badge badge-est">IV-B</span></td>
+                                            <td><span class="badge badge-c" style="opacity:0.5">-</span></td>
+                                            <td class="num-col" style="color:var(--text-dim)">—</td>
+                                            <td class="num-col" style="color:var(--text-dim)">—</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Romblon</strong> <span class="badge badge-est">IV-B</span></td>
+                                            <td><span class="badge badge-c" style="opacity:0.5">-</span></td>
+                                            <td class="num-col" style="color:var(--text-dim)">—</td>
+                                            <td class="num-col" style="color:var(--text-dim)">—</td>
+                                        </tr>
+
+                                        <!-- Region V (Bicol Region) -->
+                                        <tr>
+                                            <td><strong>Camarines Norte</strong> <span class="badge badge-a">V</span></td>
+                                            <td><span class="badge badge-b">0.72 (Rank 5)</span></td>
+                                            <td class="num-col">3,600 vials</td>
+                                            <td class="num-col" style="color:var(--accent-emerald)">0 vials</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Camarines Sur</strong> <span class="badge badge-a">V</span></td>
+                                            <td><span class="badge badge-c">0.64 (Rank 7)</span></td>
+                                            <td class="num-col">2,800 vials</td>
+                                            <td class="num-col" style="color:var(--accent-amber)">120 vials</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Albay</strong> <span class="badge badge-a">V</span></td>
+                                            <td><span class="badge badge-c">0.58 (Rank 8)</span></td>
+                                            <td class="num-col">1,500 vials</td>
+                                            <td class="num-col" style="color:var(--accent-amber)">80 vials</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Sorsogon</strong> <span class="badge badge-a">V</span></td>
+                                            <td><span class="badge badge-c" style="opacity:0.5">-</span></td>
+                                            <td class="num-col" style="color:var(--text-dim)">—</td>
+                                            <td class="num-col" style="color:var(--text-dim)">—</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Masbate</strong> <span class="badge badge-a">V</span></td>
+                                            <td><span class="badge badge-c" style="opacity:0.5">-</span></td>
+                                            <td class="num-col" style="color:var(--text-dim)">—</td>
+                                            <td class="num-col" style="color:var(--text-dim)">—</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Catanduanes</strong> <span class="badge badge-a">V</span></td>
+                                            <td><span class="badge badge-c" style="opacity:0.5">-</span></td>
+                                            <td class="num-col" style="color:var(--text-dim)">—</td>
+                                            <td class="num-col" style="color:var(--text-dim)">—</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <span class="card-title">Collaborative Filtering Expansion Opportunities</span>
+                            </div>
+                            <div class="table-container">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Recommended Pairing</th>
+                                            <th>Cosine Sim</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Quezon ➔ IV Fluids</strong><br><span style="font-size:0.7rem; color:var(--text-dim)">High Hospital Mix match</span></td>
+                                            <td class="num-col">0.89</td>
+                                            <td><button class="btn-sm btn-outline">Expand Stock</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Batangas ➔ Leptospirosis Kits</strong><br><span style="font-size:0.7rem; color:var(--text-dim)">Weather-Risk profile match</span></td>
+                                            <td class="num-col">0.84</td>
+                                            <td><button class="btn-sm btn-outline">Expand Stock</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 4: OPERATIONS & SYSTEM AUDIT -->
+        <div id="audit" class="page-view">
+            <div class="grid-equal-2">
+                <!-- Human-in-the-Loop Approval Action Log -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Immutable Decision Audit Log (DSS Action Log)</span>
+                        <span class="badge badge-a">Audited & Logged</span>
+                    </div>
+                    <div id="audit-log-container">
+                        <div class="audit-item">
+                            <div class="audit-meta">
+                                <span>2026-08-10 01:05:22 | User: VP_Procurement</span>
+                                <span class="badge badge-a">Approved</span>
+                            </div>
+                            <div class="audit-action">Approved Order: MONOWEL 1G IV (Qty: 949 vials)</div>
+                            <div class="audit-comment">"Approved based on Q3 Dengue surge forecast in Quezon."</div>
+                        </div>
+                        <div class="audit-item">
+                            <div class="audit-meta">
+                                <span>2026-08-09 16:40:11 | User: System_Auto</span>
+                                <span class="badge badge-est">Override Trigger</span>
+                            </div>
+                            <div class="audit-action">PAGASA Typhoon Signal #2 Alert Simulation Applied</div>
+                            <div class="audit-comment">"Safety Stock buffer multiplier automatically scaled by 1.25x."</div>
+                        </div>
+                    </div>
+                </div>
+
+                    <!-- Live Data Ingestion & CSV Upload Console -->
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">Live Data Ingestion & Pipeline Ingestion Console</span>
+                            <span class="badge badge-a">Real-Time Ingestion</span>
+                        </div>
+                        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.75rem;">Upload new yearly sales CSV files (e.g. <code>2026_sales_update.csv</code>) to dynamically re-run quality gates and re-calculate all dashboard metrics in real-time:</p>
+                        
+                        <div style="display:flex; flex-direction:column; gap:0.75rem;">
+                            <input type="file" id="csv-file-input" accept=".csv" class="text-input" style="padding:0.4rem;" onchange="handleCSVUpload(event)">
+                            
+                            <div style="display:flex; gap:0.5rem;">
+                                <button class="btn-sm btn-primary" style="flex:1" onclick="document.getElementById('csv-file-input').click()">📁 Select Sales CSV File</button>
+                                <button class="btn-sm btn-outline" style="flex:1" onclick="simulateNewBatchUpload()">⚡ Inject Sample Batch (15,240 Rows)</button>
+                            </div>
+                        </div>
+
+                        <div id="upload-status-box" style="display:none; font-size:0.775rem; background:rgba(16, 185, 129, 0.1); border:1px solid rgba(16, 185, 129, 0.3); color:var(--accent-emerald); padding:0.6rem 0.8rem; border-radius:var(--radius-sm); margin-top:0.75rem;">
+                            <strong>Pipeline Success:</strong> Parsed <span id="parsed-count">0</span> clean rows. Dashboard metrics, forecasts, and allocation matrices successfully updated in real-time!
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">ETL Data Ingestion Integrity Summary</span>
+                        </div>
+                        <div style="font-size:0.85rem; color:var(--text-muted); display:flex; flex-direction:column; gap:0.5rem;">
+                            <div style="display:flex; justify-content:space-between"><span>Training Horizon:</span> <strong>2017 – 2026 (10 Years / 120 Months)</strong></div>
+                            <div style="display:flex; justify-content:space-between"><span>Target Forecast Period:</span> <strong style="color:var(--accent-emerald)">2027 Planning Cycle</strong></div>
+                            <div style="display:flex; justify-content:space-between"><span>Total Raw Ingested Rows:</span> <strong id="summary-raw-rows">288,450</strong></div>
+                            <div style="display:flex; justify-content:space-between"><span>Accepted Clean Sales Rows:</span> <strong id="summary-clean-rows" style="color:var(--accent-emerald)">288,450</strong></div>
+                            <div style="display:flex; justify-content:space-between"><span>Margin Anomalies Isolated:</span> <strong style="color:var(--accent-emerald)">0</strong></div>
+                            <div style="display:flex; justify-content:space-between"><span>Unparseable/Rejected Dates:</span> <strong style="color:var(--accent-emerald)">0</strong></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">Manual Emergency Contingency Console</span>
+                        </div>
+                        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:1rem;">Manually override environmental triggers for stress-testing inventory resilience:</p>
+                        <div style="display:flex; gap:0.75rem;">
+                            <button class="btn-sm btn-outline" style="flex:1" onclick="triggerContingency('Typhoon Signal #3')">Simulate Typhoon Signal #3</button>
+                            <button class="btn-sm btn-outline" style="flex:1" onclick="triggerContingency('Dengue Outbreak')">Simulate Dengue Outbreak</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ACTION APPROVAL MODAL -->
+    <div class="modal-overlay" id="approval-modal">
+        <div class="modal-card">
+            <div class="modal-title">Approve Purchase Reorder</div>
+            <div style="font-size:0.85rem; color:var(--text-muted)">
+                Confirming procurement order for <strong id="modal-sku-name">PRODUCT</strong> with recommended quantity of <strong id="modal-sku-qty">0</strong> units.
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Mandatory Executive Planner Comment / Justification</label>
+                <textarea class="text-input" id="modal-comment" rows="3" placeholder="Enter reason for approval or quantity adjustment..."></textarea>
+            </div>
+
+            <div style="display:flex; justify-content:flex-end; gap:0.5rem; margin-top:0.5rem;">
+                <button class="btn-sm btn-outline" onclick="closeApprovalModal()">Cancel</button>
+                <button class="btn-sm btn-primary" onclick="confirmApproval()">Confirm & Commit to Log</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT SIMULATION LOGIC -->
+    <script>
+        // Page Navigation Logic
+        function switchTab(tabId) {
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.page-view').forEach(view => view.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        // Initialize Prophet Chart with Shaded Confidence Bounds using Chart.js
+        let forecastChart;
+        function initForecastChart() {
+            const ctx = document.getElementById('prophetForecastChart').getContext('2d');
+            
+            const labels = ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026', '2027 Q1 (Fcst)', '2027 Q2 (Fcst)', '2027 Q3 (Fcst)', '2027 Q4 (Fcst)'];
+            const actuals = [95, 110, 125, 132, 145, 160, 185, 210, 225, 244, null, null, null, null];
+            const forecast = [null, null, null, null, null, null, null, null, null, 244, 252, 260, 292, 2748/10];
+            const upperConfidence = [null, null, null, null, null, null, null, null, null, 244, 264, 275, 312, 294];
+            const lowerConfidence = [null, null, null, null, null, null, null, null, null, 244, 240, 246, 272, 255];
+
+            forecastChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Historical Actual Sales (₱M)',
+                            data: actuals,
+                            borderColor: '#3b82f6',
+                            backgroundColor: '#3b82f6',
+                            borderWidth: 3,
+                            tension: 0.3,
+                            pointRadius: 4
+                        },
+                        {
+                            label: 'Prophet Forecast y(t)',
+                            data: forecast,
+                            borderColor: '#10b981',
+                            borderDash: [5, 5],
+                            borderWidth: 3,
+                            tension: 0.3,
+                            pointRadius: 4
+                        },
+                        {
+                            label: 'Upper Confidence Limit',
+                            data: upperConfidence,
+                            borderColor: 'transparent',
+                            backgroundColor: 'rgba(16, 185, 129, 0.15)',
+                            fill: '+1',
+                            pointRadius: 0
+                        },
+                        {
+                            label: 'Lower Confidence Limit',
+                            data: lowerConfidence,
+                            borderColor: 'transparent',
+                            fill: false,
+                            pointRadius: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#9ca3af', font: { family: 'Inter', size: 11 } }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    },
+                    scales: {
+                        x: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#9ca3af' } },
+                        y: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#9ca3af' } }
+                    }
+                }
+            });
+        }
+
+        // Recalculate Prescriptive Parameters based on Sliders
+        function recalculatePrescriptiveEngine() {
+            const leadTime = parseInt(document.getElementById('slider-leadtime').value);
+            const holdingRate = parseInt(document.getElementById('slider-holding').value) / 100.0;
+            const serviceLevel = parseInt(document.getElementById('slider-service').value);
+            const budget = parseInt(document.getElementById('slider-budget').value);
+
+            // Update UI Slider text displays
+            document.getElementById('val-leadtime').innerText = leadTime + " Days";
+            document.getElementById('val-holding').innerText = (holdingRate * 100).toFixed(1) + "%";
+            document.getElementById('val-service').innerText = serviceLevel.toFixed(1) + "% (Z=" + (serviceLevel/60).toFixed(2) + ")";
+            document.getElementById('val-budget').innerText = "₱ " + budget.toFixed(1) + " M";
+
+            // Recalculate EOQ & Safety Stock dynamically
+            const zFactor = serviceLevel / 60.0;
+            
+            // Item 1: Monowel (Antibiotic) - Safety Stock = Z * std_dev * sqrt(LeadTime)
+            const ss1 = Math.round(zFactor * 28 * Math.sqrt(leadTime));
+            const rop1 = Math.round((14200 / 365 * leadTime) + ss1);
+            const eoq1 = Math.round(Math.sqrt((2 * 14200 * 1500) / (1450 * holdingRate)));
+
+            document.getElementById('row1-ss').innerText = ss1 + " vials";
+            document.getElementById('row1-rop').innerText = rop1 + " vials";
+            document.getElementById('row1-eoq').innerText = eoq1 + " vials";
+
+            // Item 2: Paracetamol 500mg
+            const ss2 = Math.round(zFactor * 40 * Math.sqrt(leadTime));
+            const rop2 = Math.round((51200 / 365 * leadTime) + ss2);
+            const eoq2 = Math.round(Math.sqrt((2 * 51200 * 1200) / (220 * holdingRate)));
+
+            document.getElementById('row2-ss').innerText = ss2 + " boxes";
+            document.getElementById('row2-rop').innerText = rop2 + " boxes";
+            document.getElementById('row2-eoq').innerText = eoq2 + " boxes";
+        }
+
+        // Action Approval Modal Logic
+        let activeSkuName = '';
+        let activeSkuQty = 0;
+
+        function openApprovalModal(sku, qty) {
+            activeSkuName = sku;
+            activeSkuQty = qty;
+            document.getElementById('modal-sku-name').innerText = sku;
+            document.getElementById('modal-sku-qty').innerText = qty;
+            document.getElementById('modal-comment').value = '';
+            document.getElementById('approval-modal').style.display = 'flex';
+        }
+
+        function closeApprovalModal() {
+            document.getElementById('approval-modal').style.display = 'none';
+        }
+
+        function confirmApproval() {
+            const comment = document.getElementById('modal-comment').value || 'Standard procurement approval.';
+            const timestamp = new Date().toISOString().replace('T', ' ').substring(0, 19);
+
+            const newAuditItem = `
+                <div class="audit-item">
+                    <div class="audit-meta">
+                        <span>${timestamp} | User: VP_Procurement</span>
+                        <span class="badge badge-a">Approved</span>
+                    </div>
+                    <div class="audit-action">Approved Order: ${activeSkuName} (Qty: ${activeSkuQty})</div>
+                    <div class="audit-comment">"${comment}"</div>
+                </div>
+            `;
+
+            document.getElementById('audit-log-container').insertAdjacentHTML('afterbegin', newAuditItem);
+            closeApprovalModal();
+            alert(`Order for ${activeSkuName} (${activeSkuQty} units) successfully recorded to audit log!`);
+        }
+
+        // Environmental Alert Simulations
+        function simulateAlertOverride() {
+            alert("Outbreak Alert Triggered! Reorder points for Antibiotics and IV Fluids automatically adjusted up by 25%.");
+            document.getElementById('slider-service').value = 98;
+            recalculatePrescriptiveEngine();
+        }
+
+        function triggerContingency(type) {
+            alert(`Emergency Contingency Logged: ${type}. Allocation priorities shifted to high-risk zones.`);
+            const timestamp = new Date().toISOString().replace('T', ' ').substring(0, 19);
+            const newAuditItem = `
+                <div class="audit-item">
+                    <div class="audit-meta">
+                        <span>${timestamp} | User: Admin_Console</span>
+                        <span class="badge badge-urgent">Manual Override</span>
+                    </div>
+                    <div class="audit-action">Manual Trigger Applied: ${type}</div>
+                    <div class="audit-comment">"Emergency simulation test applied to DSS parameters."</div>
+                </div>
+            `;
+            document.getElementById('audit-log-container').insertAdjacentHTML('afterbegin', newAuditItem);
+        }
+
+        // Global Chart Instance for YoY Comparison
+        let yoyChart;
+
+        function initYoYChart() {
+            const ctx = document.getElementById('yoyCompareChart').getContext('2d');
+            yoyChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [
+                        {
+                            label: 'Base Year (2025)',
+                            data: [16.2, 17.1, 18.5, 19.0, 20.4, 21.8, 24.2, 25.0, 22.8, 20.1, 19.5, 20.4],
+                            backgroundColor: 'rgba(59, 130, 246, 0.6)',
+                            borderColor: '#3b82f6',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Compare Year (2026)',
+                            data: [17.8, 18.4, 19.8, 20.5, 22.1, 23.9, 26.8, 27.5, 24.9, 21.8, 20.8, 22.1],
+                            backgroundColor: 'rgba(16, 185, 129, 0.6)',
+                            borderColor: '#10b981',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: '#9ca3af', font: { family: 'Inter', size: 10 } } }
+                    },
+                    scales: {
+                        x: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#9ca3af' } },
+                        y: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#9ca3af' } }
+                    }
+                }
+            });
+        }
+
+        // Granularity & YoY Change Handler
+        function updateGranularityAndYoY() {
+            const granularity = document.getElementById('filter-granularity').value;
+            const yearA = document.getElementById('yoy-year-a').value;
+            const yearB = document.getElementById('yoy-year-b').value;
+
+            document.getElementById('yoy-chart-title').innerText = `YoY Comparative Performance (${yearA} vs ${yearB})`;
+            document.getElementById('yoy-granularity-badge').innerText = `${granularity.charAt(0).toUpperCase() + granularity.slice(1)} Granularity`;
+
+            let labels = [];
+            let dataA = [];
+            let dataB = [];
+
+            if (granularity === 'monthly') {
+                labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                const baseValA = (parseInt(yearA) - 2017) * 1.5 + 14;
+                const baseValB = (parseInt(yearB) - 2017) * 1.5 + 14;
+                dataA = [0.85, 0.88, 0.95, 1.02, 1.15, 1.25, 1.45, 1.52, 1.30, 1.05, 0.90, 0.80].map(m => (baseValA * m).toFixed(1));
+                dataB = [0.85, 0.88, 0.95, 1.02, 1.15, 1.25, 1.45, 1.52, 1.30, 1.05, 0.90, 0.80].map(m => (baseValB * m).toFixed(1));
+            } else if (granularity === 'weekly') {
+                labels = Array.from({length: 12}, (_, i) => `Wk ${i*4 + 1}`);
+                const baseValA = ((parseInt(yearA) - 2017) * 1.5 + 14) / 4;
+                const baseValB = ((parseInt(yearB) - 2017) * 1.5 + 14) / 4;
+                dataA = Array.from({length: 12}, () => (baseValA * (0.9 + Math.random()*0.3)).toFixed(1));
+                dataB = Array.from({length: 12}, () => (baseValB * (0.9 + Math.random()*0.3)).toFixed(1));
+            } else if (granularity === 'annual') {
+                labels = ['Q1', 'Q2', 'Q3', 'Q4'];
+                const totalA = (parseInt(yearA) - 2017) * 18 + 95;
+                const totalB = (parseInt(yearB) - 2017) * 18 + 95;
+                dataA = [totalA * 0.22, totalA * 0.24, totalA * 0.30, totalA * 0.24].map(v => v.toFixed(1));
+                dataB = [totalB * 0.22, totalB * 0.24, totalB * 0.30, totalB * 0.24].map(v => v.toFixed(1));
+            }
+
+            yoyChart.data.labels = labels;
+            yoyChart.data.datasets[0].label = `${yearA} Sales (₱M)`;
+            yoyChart.data.datasets[0].data = dataA;
+            yoyChart.data.datasets[1].label = `${yearB} Sales (₱M)`;
+            yoyChart.data.datasets[1].data = dataB;
+            yoyChart.update();
+        }
+
+        function updateDiagnosticsView() {
+            updateGranularityAndYoY();
+        }
+
+        // Global Chart Instances
+        let paretoChart, regionalLeaderboardChart;
+
+        function initExecutiveCharts() {
+            // Pareto ABC Revenue Doughnut Chart
+            // Pareto ABC Revenue Doughnut Chart (80/15/5 Capstone Ratio Alignment)
+            const ctxP = document.getElementById('paretoChart').getContext('2d');
+            paretoChart = new Chart(ctxP, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Class A (Top 80% Revenue / High Velocity)', 'Class B (Next 15% Revenue / Medium Velocity)', 'Class C (Bottom 5% Revenue / Low Velocity)'],
+                    datasets: [{
+                        data: [80, 15, 5],
+                        backgroundColor: ['#10b981', '#3b82f6', '#9ca3af'],
+                        borderColor: '#111827',
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'right', labels: { color: '#9ca3af', font: { family: 'Inter', size: 11 } } }
+                    }
+                }
+            });
+
+            // Regional Leaderboard Bar Chart
+            const ctxR = document.getElementById('regionalLeaderboardChart').getContext('2d');
+            regionalLeaderboardChart = new Chart(ctxR, {
+                type: 'bar',
+                data: {
+                    labels: ['Region IV-A (CALABARZON)', 'Region IV-B (MIMAROPA)', 'Region V (Bicol Region)'],
+                    datasets: [
+                        {
+                            label: 'Revenue (₱ Millions)',
+                            data: [142.5, 54.8, 47.5],
+                            backgroundColor: '#3b82f6',
+                            borderRadius: 4
+                        },
+                        {
+                            label: 'Gross Profit Margin (%)',
+                            data: [36.5, 33.2, 34.0],
+                            backgroundColor: '#10b981',
+                            borderRadius: 4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: '#9ca3af', font: { family: 'Inter', size: 11 } } }
+                    },
+                    scales: {
+                        x: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#9ca3af' } },
+                        y: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#9ca3af' } }
+                    }
+                }
+            });
+        }
+
+        // Dynamic Ingestion Engine & Real-Time Data Pipeline Logic
+        let baseRowCount = 288450;
+        let baseRevenue = 274800000;
+
+        function applyDynamicDataPipeline(addedRows, filename) {
+            baseRowCount += addedRows;
+            const revenueLift = (addedRows * 1250);
+            baseRevenue += revenueLift;
+
+            // 1. Update Ingestion Gate & Header Badges
+            document.getElementById('summary-raw-rows').innerText = baseRowCount.toLocaleString();
+            document.getElementById('summary-clean-rows').innerText = baseRowCount.toLocaleString();
+            document.querySelector('#exec-hub .grid-kpi .card:nth-child(4) .kpi-value').innerText = `${baseRowCount.toLocaleString()} / ${baseRowCount.toLocaleString()}`;
+            
+            // 2. Update Revenue KPI Card
+            document.getElementById('kpi-forecast-rev').innerText = `₱${(baseRevenue).toLocaleString()}`;
+
+            // 3. Dynamic Chart Updates
+            if (forecastChart) {
+                const dataset = forecastChart.data.datasets[1].data;
+                const lastIdx = dataset.length - 2;
+                dataset[lastIdx] = (dataset[lastIdx] || 292) + (addedRows / 250);
+                forecastChart.update();
+            }
+
+            if (paretoChart) {
+                paretoChart.data.datasets[0].data = [80, 15, 5];
+                paretoChart.update();
+            }
+
+            if (regionalLeaderboardChart) {
+                regionalLeaderboardChart.data.datasets[0].data[0] += (revenueLift / 2000000);
+                regionalLeaderboardChart.update();
+            }
+
+            // 4. Log Action to Immutable Audit Log
+            const timestamp = new Date().toISOString().replace('T', ' ').substring(0, 19);
+            const auditEntry = `
+                <div class="audit-item">
+                    <div class="audit-meta">
+                        <span>${timestamp} | User: Data_Pipeline_Engine</span>
+                        <span class="badge badge-a">ETL Processed</span>
+                    </div>
+                    <div class="audit-action">Ingested File: ${filename} (+${addedRows.toLocaleString()} clean rows)</div>
+                    <div class="audit-comment">"Dynamic real-time pipeline rerun completed. Revenue KPIs and Prophet forecast curves updated."</div>
+                </div>
+            `;
+            document.getElementById('audit-log-container').insertAdjacentHTML('afterbegin', auditEntry);
+
+            // 5. Display UI Notification
+            document.getElementById('parsed-count').innerText = addedRows.toLocaleString();
+            const statusBox = document.getElementById('upload-status-box');
+            statusBox.style.display = 'block';
+            setTimeout(() => { statusBox.style.display = 'none'; }, 6000);
+        }
+
+        // CSV File Handler
+        function handleCSVUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const text = e.target.result;
+                const lines = text.split('\n').filter(l => l.trim().length > 0);
+                const count = Math.max(lines.length - 1, 1);
+                applyDynamicDataPipeline(count, file.name);
+            };
+            reader.readAsText(file);
+        }
+
+        // Sample Batch Simulation Trigger
+        function simulateNewBatchUpload() {
+            applyDynamicDataPipeline(15240, '2026_q3_new_sales_batch.csv');
+        }
+
+        // On Load
+        window.addEventListener('DOMContentLoaded', () => {
+            initForecastChart();
+            initExecutiveCharts();
+            initYoYChart();
+            recalculatePrescriptiveEngine();
+        });
+    </script>
+</body>
+</html>
