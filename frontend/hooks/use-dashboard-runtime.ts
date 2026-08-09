@@ -8,6 +8,7 @@ import {
 } from '@/services/api/dashboard-engine'
 import { enhanceDashboardContent } from '@/services/api/dashboard-enhancements'
 import { installDashboardEnhancements } from '@/services/api/dashboard-enhancement-listeners'
+import { refreshDashboardFromGateway } from '@/services/api/dashboard-interactions'
 
 export function useDashboardRuntime(onLogout: () => Promise<void>) {
   const rootRef = useRef<HTMLDivElement>(null)
@@ -47,6 +48,10 @@ export function useDashboardRuntime(onLogout: () => Promise<void>) {
         }
         
         installDashboardEnhancements(root, activeListeners)
+
+        void refreshDashboardFromGateway().catch((error) => {
+          console.warn('Dashboard is using the bundled fallback dataset:', error)
+        })
 
         // Add portal injection anchor
         const inventoryPageEl = root.querySelector('#page-inventory')
