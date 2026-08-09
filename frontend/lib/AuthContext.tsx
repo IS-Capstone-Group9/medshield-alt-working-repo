@@ -2,17 +2,15 @@
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
 import { createClient, isSupabaseBrowserConfigured } from './supabase/client'
-
-const API_BASE = (process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000').replace(/\/$/, '')
-const TOKEN_KEY = 'medshield.accessToken'
-const TOKEN_STORAGE_KEY = 'medshield.tokenStorage'
-
-interface User {
-  accountId: number
-  username: string
-  email: string
-  role: string
-}
+import {
+  API_BASE,
+  User,
+  getStoredToken,
+  clearStoredToken,
+  toUser,
+  toUserFromSupabase,
+} from './auth-tokens'
+import { authLogin, authSignup, authLogout } from '@/services/supabase/auth.service'
 
 interface AuthContextType {
   isAuthenticated: boolean
@@ -25,52 +23,6 @@ interface AuthContextType {
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
-
-function getStoredToken(): string | null {
-  if (typeof window === 'undefined') {
-    return null
-  }
-
-  return localStorage.getItem(TOKEN_KEY) || sessionStorage.getItem(TOKEN_KEY)
-}
-
-function storeToken(token: string, remember = false): void {
-  const primaryStorage = remember ? localStorage : sessionStorage
-  const secondaryStorage = remember ? sessionStorage : localStorage
-
-  primaryStorage.setItem(TOKEN_KEY, token)
-  localStorage.setItem(TOKEN_STORAGE_KEY, remember ? 'local' : 'session')
-  secondaryStorage.removeItem(TOKEN_KEY)
-}
-
-function clearStoredToken(): void {
-  if (typeof window === 'undefined') {
-    return
-  }
-
-  localStorage.removeItem(TOKEN_KEY)
-  localStorage.removeItem(TOKEN_STORAGE_KEY)
-  sessionStorage.removeItem(TOKEN_KEY)
-}
-
-function toUser(data: any): User {
-  return {
-    accountId: Number(data.account_id),
-    username: String(data.username),
-    email: String(data.email),
-    role: String(data.role),
-  }
-}
-
-function toUserFromSupabase(data: any): User {
-  const email = String(data.email ?? '')
-  return {
-    accountId: 0,
-    username: email ? email.split('@')[0] : String(data.id ?? 'user'),
-    email,
-    role: String(data.app_metadata?.medshield_role ?? data.app_metadata?.role ?? 'viewer'),
-  }
-}
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -85,27 +37,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       async function restoreSupabaseSession() {
         try {
-          const {
-            data: { session },
-          } = await supabase.auth.getSession()
-
+          const { data: { session } } = await supabase.auth.getSession()
           if (!cancelled && session?.user) {
             setAccessToken(session.access_token)
             setUser(toUserFromSupabase(session.user))
             setIsAuthenticated(true)
           }
         } finally {
-          if (!cancelled) {
-            setIsAuthLoading(false)
-          }
+          if (!cancelled) setIsAuthLoading(false)
         }
       }
 
       void restoreSupabaseSession()
 
-      const {
-        data: { subscription },
-      } = supabase.auth.onAuthStateChange((_event, session) => {
+      const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
         if (cancelled) return
         setAccessToken(session?.access_token ?? null)
         setUser(session?.user ? toUserFromSupabase(session.user) : null)
@@ -126,135 +71,54 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     let cancelled = false
-
     async function restoreSession() {
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 4000)
       try {
         const res = await fetch(`${API_BASE}/api/auth/me`, {
           headers: { Authorization: `Bearer ${token}` },
+          signal: controller.signal,
         })
+        clearTimeout(timeoutId)
         const data = await res.json()
         if (!res.ok) {
           clearStoredToken()
           return
         }
-
         if (!cancelled) {
           setAccessToken(token)
           setUser(toUser(data.user))
           setIsAuthenticated(true)
         }
       } catch {
+        clearTimeout(timeoutId)
         clearStoredToken()
       } finally {
-        if (!cancelled) {
-          setIsAuthLoading(false)
-        }
+        if (!cancelled) setIsAuthLoading(false)
       }
     }
 
     void restoreSession()
-
-    return () => {
-      cancelled = true
-    }
+    return () => { cancelled = true }
   }, [])
 
   const login = async (username: string, password: string, remember = false) => {
-    if (isSupabaseBrowserConfigured()) {
-      try {
-        const supabase = createClient()
-        const { data, error } = await supabase.auth.signInWithPassword({
-          email: username,
-          password,
-        })
-
-        if (error || !data.session?.user) {
-          return { ok: false, error: error?.message || 'Login failed' }
-        }
-
-        setAccessToken(data.session.access_token)
-        setIsAuthenticated(true)
-        setUser(toUserFromSupabase(data.session.user))
-        return { ok: true }
-      } catch {
-        return { ok: false, error: 'Cannot connect to Supabase Auth' }
-      }
-    }
-
-    try {
-      const res = await fetch(`${API_BASE}/api/auth/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password, remember }),
-      })
-      const data = await res.json()
-      if (!res.ok) return { ok: false, error: data.error || 'Login failed' }
-      storeToken(data.access_token, remember)
-      setAccessToken(data.access_token)
+    const res = await authLogin(username, password, remember)
+    if (res.ok) {
+      setAccessToken(res.access_token ?? null)
       setIsAuthenticated(true)
-      setUser(toUser(data.user))
+      setUser(res.user ?? null)
       return { ok: true }
-    } catch {
-      return { ok: false, error: 'Cannot connect to server' }
     }
+    return { ok: false, error: res.error }
   }
 
   const signup = async (username: string, email: string, password: string) => {
-    if (isSupabaseBrowserConfigured()) {
-      try {
-        const supabase = createClient()
-        const { error } = await supabase.auth.signUp({
-          email,
-          password,
-          options: {
-            data: { username },
-          },
-        })
-
-        if (error) return { ok: false, error: error.message }
-        return { ok: true }
-      } catch {
-        return { ok: false, error: 'Cannot connect to Supabase Auth' }
-      }
-    }
-
-    try {
-      const res = await fetch(`${API_BASE}/api/auth/signup`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, email, password }),
-      })
-      const data = await res.json()
-      if (!res.ok) return { ok: false, error: data.error || 'Signup failed' }
-      return { ok: true }
-    } catch {
-      return { ok: false, error: 'Cannot connect to server' }
-    }
+    return await authSignup(username, email, password)
   }
 
   const logout = async () => {
-    if (isSupabaseBrowserConfigured()) {
-      const supabase = createClient()
-      await supabase.auth.signOut()
-      clearStoredToken()
-      setAccessToken(null)
-      setIsAuthenticated(false)
-      setUser(null)
-      return
-    }
-
-    const token = accessToken ?? getStoredToken()
-    if (token) {
-      try {
-        await fetch(`${API_BASE}/api/auth/logout`, {
-          method: 'POST',
-          headers: { Authorization: `Bearer ${token}` },
-        })
-      } catch {
-        // Local cleanup still happens if the gateway is unavailable.
-      }
-    }
-
+    await authLogout(accessToken)
     clearStoredToken()
     setAccessToken(null)
     setIsAuthenticated(false)

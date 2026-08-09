@@ -1,5 +1,6 @@
 import path from 'node:path'
 import { existsSync } from 'node:fs'
+import { appendFile, readFile } from 'node:fs/promises'
 import { config as loadDotenv } from 'dotenv'
 import cors from 'cors'
 import express, { NextFunction, Request, Response } from 'express'
@@ -88,6 +89,10 @@ function authBackendUnavailable(error: unknown): boolean {
 app.use((_, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+  res.setHeader('X-Frame-Options', 'DENY')
+  res.setHeader('X-Content-Type-Options', 'nosniff')
+  res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains')
+  res.setHeader('Referrer-Policy', 'no-referrer-when-downgrade')
   next()
 })
 
@@ -143,6 +148,66 @@ async function supabaseAuthFetch(pathName: string, init: RequestInit): Promise<g
     ...init,
     headers,
   })
+}
+
+interface AuditLogEntry {
+  username?: string
+  action: string
+  detail: string
+  ip_address?: string
+  user_agent?: string
+  created_at: string
+}
+
+async function supabaseDbFetch(
+  pathName: string,
+  init: RequestInit,
+  schema: string = 'medshield_identity'
+): Promise<globalThis.Response> {
+  const baseUrl = process.env.SUPABASE_URL?.replace(/\/$/, '')
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || ''
+  if (!baseUrl || !serviceRoleKey) {
+    throw new Error('Supabase DB is not configured')
+  }
+
+  const headers = new globalThis.Headers(init.headers)
+  headers.set('apikey', serviceRoleKey)
+  headers.set('Authorization', `Bearer ${serviceRoleKey}`)
+  headers.set('Accept-Profile', schema)
+  headers.set('Content-Profile', schema)
+  if (!headers.has('Content-Type') && init.body) {
+    headers.set('Content-Type', 'application/json')
+  }
+
+  return await fetch(`${baseUrl}/rest/v1${pathName}`, {
+    ...init,
+    headers,
+  })
+}
+
+async function persistAuditLog(entry: AuditLogEntry): Promise<void> {
+  if (supabaseEnabled()) {
+    try {
+      const response = await supabaseDbFetch('/audit_logs', {
+        method: 'POST',
+        body: JSON.stringify(entry),
+      })
+      if (response.ok) {
+        return
+      }
+      console.warn(`Supabase audit log write returned non-OK status: ${response.status}. Falling back to local file.`)
+    } catch (err) {
+      console.error('Failed to write audit log to Supabase. Falling back to local file.', err)
+    }
+  }
+
+  // Fallback to local accounts/logs folder
+  const logPath = path.resolve(__dirname, '..', 'data', 'local_audit_logs.jsonl')
+  try {
+    await appendFile(logPath, `${JSON.stringify(entry)}\n`, 'utf8')
+  } catch (err) {
+    console.error('Failed to write local audit log:', err)
+  }
 }
 
 async function getSupabaseAuthUser(token: string): Promise<SessionUser | null> {
@@ -280,11 +345,27 @@ async function requireAuth(req: AuthenticatedRequest, res: Response, next: NextF
   next()
 }
 
+async function fetchWithTimeout(url: string, options: RequestInit = {}, timeoutMs = 8000): Promise<globalThis.Response> {
+  const controller = new AbortController()
+  const id = setTimeout(() => controller.abort(), timeoutMs)
+  try {
+    const response = await fetch(url, {
+      ...options,
+      signal: controller.signal as any,
+    })
+    clearTimeout(id)
+    return response as globalThis.Response
+  } catch (error) {
+    clearTimeout(id)
+    throw error
+  }
+}
+
 async function analyticsJson(
   pathName: string,
   options?: RequestInit,
 ): Promise<{ status: number; body: unknown }> {
-  const response = await fetch(`${analyticsServiceUrl}${pathName}`, options)
+  const response: globalThis.Response = await fetchWithTimeout(`${analyticsServiceUrl}${pathName}`, options)
   const text = await response.text()
   let body: unknown = {}
   if (text) {
@@ -298,11 +379,18 @@ async function analyticsJson(
 }
 
 async function serviceGetJson(baseUrl: string, pathName: string): Promise<unknown> {
-  const response = await fetch(`${baseUrl}${pathName}`)
+  const response: globalThis.Response = await fetchWithTimeout(`${baseUrl}${pathName}`)
   if (!response.ok) {
     throw new Error(`Service at ${baseUrl}${pathName} returned status ${response.status}`)
   }
   return await response.json()
+}
+
+function analyticsFailure(res: Response, error: unknown): Response {
+  console.error('Analytics service request failed:', error)
+  return res.status(502).json({
+    error: 'Analytics service is unavailable. The gateway tried to auto-start the Python service; check the backend terminal for Python dependency or port errors.',
+  })
 }
 
 app.get('/api/health', (_req: Request, res: Response) => {
@@ -569,8 +657,11 @@ app.post('/api/auth/signup', async (req: Request, res: Response) => {
     return res.status(400).json({ error: 'Username, email and password are required' })
   }
 
-  if (password.length < 8) {
-    return res.status(400).json({ error: 'Password must be at least 8 characters' })
+  const passwordComplexityRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/
+  if (!passwordComplexityRegex.test(password)) {
+    return res.status(400).json({
+      error: 'Password must be at least 8 characters long, contain an uppercase letter, a lowercase letter, a number, and a special character.'
+    })
   }
 
   if (supabaseEnabled()) {
@@ -641,6 +732,15 @@ app.get('/api/seasonal_epidemic_matrix', async (_req: Request, res: Response) =>
   }
 })
 
+app.get('/api/dss/prescriptive', async (_req: Request, res: Response) => {
+  try {
+    const payload = await serviceGetJson(analyticsServiceUrl, '/dss/prescriptive')
+    return res.json(payload)
+  } catch (error) {
+    return res.status(500).json({ error: 'Failed to fetch prescriptive model data' })
+  }
+})
+
 app.get('/api/seasonal_restock_detail', async (req: Request, res: Response) => {
   try {
     const seasonId = req.query.season_id ? String(req.query.season_id) : 'monsoon'
@@ -675,6 +775,74 @@ app.get('/api/eoq_scenarios', async (_req: Request, res: Response) => {
     return res.json(payload)
   } catch (error) {
     return res.status(500).json({ error: 'Failed to fetch EOQ scenarios' })
+  }
+})
+
+app.post('/api/audit', async (req: Request, res: Response) => {
+  const token = bearerToken(req)
+  let username = 'unauthenticated'
+  if (token) {
+    const user = verifySessionToken(token) || (supabaseEnabled() ? await getSupabaseAuthUser(token).catch(() => null) : null)
+    if (user) {
+      username = user.username
+    }
+  }
+
+  const action = String(req.body?.action ?? '').trim()
+  const detail = String(req.body?.detail ?? '').trim()
+
+  if (!action || !detail) {
+    return res.status(400).json({ error: 'Action and detail are required' })
+  }
+
+  const ipAddress = String(req.headers['x-forwarded-for'] || req.socket.remoteAddress || '')
+  const userAgent = String(req.headers['user-agent'] || '')
+
+  const entry = {
+    username,
+    action,
+    detail,
+    ip_address: ipAddress,
+    user_agent: userAgent,
+    created_at: new Date().toISOString(),
+  }
+
+  await persistAuditLog(entry)
+  res.json({ ok: true })
+})
+
+app.get('/api/audit', requireAuth, async (req: AuthenticatedRequest, res: Response) => {
+  const role = req.user?.role ?? 'viewer'
+  if (role !== 'admin' && role !== 'manager') {
+    return res.status(403).json({ error: 'Access denied: compliance auditor role required' })
+  }
+
+  if (supabaseEnabled()) {
+    try {
+      const response = await supabaseDbFetch('/audit_logs?order=created_at.desc&limit=100', {
+        method: 'GET',
+      })
+      if (response.ok) {
+        const data = await response.json()
+        return res.json(data)
+      }
+      console.warn(`Supabase audit log read returned non-OK status: ${response.status}. Falling back to local file.`)
+    } catch (err) {
+      console.error('Failed to read audit logs from Supabase. Falling back to local file.', err)
+    }
+  }
+
+  const logPath = path.resolve(__dirname, '..', 'data', 'local_audit_logs.jsonl')
+  if (!existsSync(logPath)) {
+    return res.json([])
+  }
+  try {
+    const raw = await readFile(logPath, 'utf8')
+    const lines = raw.trim().split('\n').filter(Boolean).map(line => JSON.parse(line))
+    lines.reverse()
+    res.json(lines.slice(0, 100))
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to retrieve local audit logs' })
   }
 })
 

@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import './overrides.css'
+
 
 export const metadata: Metadata = {
   title: 'MedShield Pharma Corp. - Decision Support System',
