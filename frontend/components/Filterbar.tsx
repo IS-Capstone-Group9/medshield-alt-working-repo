@@ -4,7 +4,7 @@ import { useDashboard } from '../lib/dashboardContext'
 
 export default function Filterbar() {
   const { selectedYear, setSelectedYear } = useDashboard()
-  const years = ['2025', '2024', '2023']
+  const years = ['2025', '2024', '2023', '2022', '2021', '2020', '2019', '2018', '2017']
 
   return (
     <div className="filterbar" id="filterBar">

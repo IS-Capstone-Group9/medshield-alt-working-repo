@@ -22,7 +22,7 @@ MedShield is a decision-support system, so analytics outputs must lead to decisi
 
 | Source | Use | Notes |
 |---|---|---|
-| `data/medshield/raw/sales/Sales Report.xlsx` | Historical 2021-2025 sales, product, area, margin, and quantity signals. | Internal source of truth for sales demand. |
+| `data/medshield/raw/sales/Sales Report.xlsx` | Historical 2017 onwards sales, product, area, margin, and quantity signals. | Internal source of truth for sales demand. |
 | DOH FOI/Open Data exports | Disease intensity indicator and outbreak alert context. | Use official DOH data exports when a stable API is unavailable. |
 | DOST-PAGASA products | Official rainfall probability/RSI and typhoon context. | Keep official fields distinct from derived proxies. |
 | NASA POWER Daily | Historical 2021-2025 meteorological features. | Backfill precipitation, temperature, humidity, and wind. |

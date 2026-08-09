@@ -4,7 +4,7 @@
 
 This document answers one question:
 
-**How will the MedShield team execute the models in `references/NStar.md` using the current system and the 2021-2025 datasets?**
+**How will the MedShield team execute the models in `references/NStar.md` using the current system and the 2017 onwards datasets?**
 
 This is an execution playbook, not implementation code. It converts the design in `docs/NORTH_STAR_EXECUTION_BLUEPRINT.md` into an ordered delivery and operating procedure.
 
@@ -104,7 +104,7 @@ Create an approved business glossary containing:
 
 Do not proceed until Finance and Supply Planning agree on demand, revenue, cost, margin, SKU, territory, and customer definitions.
 
-## 5. Step 2 - Correct and Conform the 2021-2025 Data
+## 5. Step 2 - Correct and Conform the 2017 onwards Data
 
 ### 5.1 Reconcile the Year Files
 

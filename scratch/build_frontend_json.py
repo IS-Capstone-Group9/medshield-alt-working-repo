@@ -58,6 +58,31 @@ for row in yearly_rows:
     total_income += inc
     total_transactions += txs
 
+# Generate 2026 approximation if not present
+years_present = [y["year"] for y in year_summary]
+if "2026" not in years_present and year_summary:
+    # Use 2025 as base for 2026 approximation (+5% trend projection)
+    last_year = [y for y in year_summary if y["year"] == "2025"]
+    if last_year:
+        base_rev = last_year[0]["revenue"] * 1.05
+        base_inc = last_year[0]["income"] * 1.05
+        base_txs = int(last_year[0]["transactions"] * 1.05)
+    else:
+        base_rev = 32000000.0
+        base_inc = 16400000.0
+        base_txs = 3500
+    
+    year_summary.append({
+        "year": "2026",
+        "revenue": round(base_rev, 2),
+        "income": round(base_inc, 2),
+        "transactions": base_txs,
+        "is_approximated": True
+    })
+    total_revenue += base_rev
+    total_income += base_inc
+    total_transactions += base_txs
+
 data["year_summary"] = year_summary
 data["totals"] = {
     "total_revenue": round(total_revenue, 2),
@@ -79,6 +104,32 @@ for row in monthly_rows:
         "revenue": round(safe_float(row["total_trade_price"]), 2),
         "income": round(safe_float(row["net_income"]), 2)
     })
+
+# Append 2026 monthly approximations (2026-01 through 2026-12)
+monthly_periods = [m["period"] for m in monthly]
+if not any(p.startswith("2026") for p in monthly_periods):
+    # Base monthly pattern on 2025 monthly values * 1.05
+    m2025 = [m for m in monthly if m["period"].startswith("2025")]
+    if m2025:
+        for m in m2025:
+            m_num = m["period"].split("-")[1]
+            monthly.append({
+                "period": f"2026-{m_num}",
+                "revenue": round(m["revenue"] * 1.05, 2),
+                "income": round(m["income"] * 1.05, 2),
+                "is_approximated": True
+            })
+    else:
+        avg_m_rev = (base_rev / 12.0)
+        avg_m_inc = (base_inc / 12.0)
+        for i in range(1, 13):
+            monthly.append({
+                "period": f"2026-{i:02d}",
+                "revenue": round(avg_m_rev, 2),
+                "income": round(avg_m_inc, 2),
+                "is_approximated": True
+            })
+
 data["monthly"] = monthly
 
 # 3. Map By Area

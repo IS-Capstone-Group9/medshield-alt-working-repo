@@ -774,7 +774,7 @@ html[data-theme="dark"] .chart-wrap::before {
 
 function getExecutableDashboardScript() {
   const globalHandlerBridge = DASHBOARD_GLOBAL_HANDLERS
-    .map((name) => `if (typeof ${name} === 'function') window.${name} = ${name};`)
+    .map((name) => `try { if (typeof ${name} === 'function') window.${name} = ${name}; } catch (e) {}`)
     .join('\n')
 
   const patchedScript = MEDSHIELD_SCRIPT
@@ -782,7 +782,6 @@ function getExecutableDashboardScript() {
     .replaceAll("'#335F78'", "dashboardThemeColor('--chart-label', '#335F78')")
     .replaceAll("'#67879A'", "dashboardThemeColor('--chart-muted', '#67879A')")
     .replaceAll("'rgba(201,219,229,0.65)'", "dashboardThemeColor('--chart-grid', 'rgba(201,219,229,0.65)')")
-    .replace(/\n}\);\s*$/, `\n})();\n${globalHandlerBridge}`)
 
   return `
 const Chart = window.Chart;
@@ -793,7 +792,9 @@ function dashboardThemeColor(name, fallback) {
     return fallback;
   }
 }
-${patchedScript}`
+${patchedScript}
+
+${globalHandlerBridge}`
 }
 
 function setCardModel(root: HTMLElement, canvasId: string, model: string, note?: string) {
@@ -1023,7 +1024,9 @@ function enhanceDashboardContent(root: HTMLElement) {
               <select id="weatherYear">
                 <option value="2025">2025</option><option value="2024">2024</option>
                 <option value="2023">2023</option><option value="2022">2022</option>
-                <option value="2021">2021</option>
+                <option value="2021">2021</option><option value="2020">2020</option>
+                <option value="2019">2019</option><option value="2018">2018</option>
+                <option value="2017">2017</option>
               </select>
             </div>
             <div class="uploaded-data-field">
@@ -1060,7 +1063,7 @@ function enhanceDashboardContent(root: HTMLElement) {
           <div class="analytics-step" data-status="pass">
             <div class="analytics-step-kicker">Ready</div>
             <div class="analytics-step-title">Clean Sales + ABC/Pareto</div>
-            <div class="analytics-step-copy">2021-2025 cleaned sales, mapped territories, estimated contract-name allocations.</div>
+            <div class="analytics-step-copy">2017-2025 cleaned sales, mapped territories, estimated contract-name allocations.</div>
           </div>
           <div class="analytics-step">
             <div class="analytics-step-kicker">Draft</div>

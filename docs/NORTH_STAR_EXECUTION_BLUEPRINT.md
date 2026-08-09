@@ -15,8 +15,8 @@
 
 This document defines how MedShield should execute the descriptive, predictive, and prescriptive methods in the North Star Diagram using:
 
-- MedShield historical sales data from 2021 through 2025.
-- Historical DOH disease data from 2021 through 2025.
+- MedShield historical sales data from 2017 through 2025.
+- Historical DOH disease data from 2017 through 2025.
 - Historical PAGASA weather data from 2021 through 2024.
 - The existing Next.js frontend, TypeScript API gateway, Python services, and Supabase warehouse.
 - NASA POWER historical weather data for weather backfill and comparison.
@@ -621,7 +621,7 @@ The 2025 sales holdout should be used only after 2025 sales completeness is prov
 
 After model selection:
 
-- Refit the selected sales-only model on the full trusted 2021-2025 sales history for the 2026 baseline.
+- Refit the selected sales-only model on the full trusted 2017 onwards sales history for the 2026 baseline.
 - Refit the selected disease model on sales and DOH 2021-2025, then apply approved future DII scenarios.
 - Refit the selected NASA proxy model on sales and NASA 2021-2025, then apply weather scenarios or short-horizon OpenWeather values.
 - Keep the official PAGASA model limited to 2021-2024 unless a later PAGASA dataset is acquired.

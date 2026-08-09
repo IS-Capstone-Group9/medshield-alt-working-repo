@@ -26,7 +26,7 @@ Deliverables:
 
 ### Phase 2 - Fix and Conform Data
 
-1. Reconcile 2021-2025 sales files.
+1. Reconcile 2017 onwards sales files.
 2. Decide how to treat incomplete 2025 months.
 3. Review rejected rows and date issues.
 4. Use contract-name backward allocation for product-level analysis.
@@ -208,4 +208,4 @@ Deliverables:
 
 Use this framing in the paper and defense:
 
-> The system is a historical analytics-driven decision-support system for pharmaceutical demand forecasting and planning. It integrates 2021-2025 sales data, 2021-2025 DOH historical disease data, 2021-2024 PAGASA historical data, and provider-derived weather API observations to support descriptive analysis, forecast comparison, product prioritization, and scenario-based planning. It does not automate procurement or claim live official disease or weather alerts.
+> The system is a historical analytics-driven decision-support system for pharmaceutical demand forecasting and planning. It integrates 2017 onwards sales data, 2021-2025 DOH historical disease data, 2021-2024 PAGASA historical data, and provider-derived weather API observations to support descriptive analysis, forecast comparison, product prioritization, and scenario-based planning. It does not automate procurement or claim live official disease or weather alerts.

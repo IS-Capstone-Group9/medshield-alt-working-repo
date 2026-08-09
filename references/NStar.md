@@ -18,7 +18,7 @@ This document is the text reference for the MedShield North Star Diagram. It def
 
 ### 3A. Seasonal Demand Cycles
 
-**Question:** What seasonal demand cycles exist in 2021-2025 sales data?
+**Question:** What seasonal demand cycles exist in 2017 onwards sales data?
 
 **Method:** STL decomposition
 

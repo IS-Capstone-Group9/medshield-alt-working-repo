@@ -355,7 +355,7 @@ fs.writeFileSync(
   `${JSON.stringify(cleanPayload.metadata.sales_qa_summary, null, 2)}\n`,
 );
 
-for (const year of ['2021', '2022', '2023', '2024', '2025']) {
+for (const year of ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025']) {
   const yearRows = sortedAcceptedRows.filter((row) => row.year === year);
   writeCsv(path.join(YEARLY_DIR, `sales_transactions_area_allocated_${year}_daily.csv`), yearRows, allFields);
 }

@@ -68,6 +68,7 @@ create table if not exists medshield_common.dim_product (
   product_name text not null unique,
   abc_classification text,
   product_group text,
+  is_service_contract boolean not null default false,
   created_at timestamptz not null default now()
 );
 
@@ -225,6 +226,7 @@ select
 from medshield_sales.fact_product_summary f
 join latest_snapshot ls on ls.snapshot_date_key = f.snapshot_date_key
 join medshield_common.dim_product p on p.product_key = f.product_key
+where not coalesce(p.is_service_contract, false)
 order by f.revenue_amount desc, p.product_name asc
 limit 15;
 
@@ -875,7 +877,7 @@ insert into medshield_etl.dim_source_system (
   refresh_cadence,
   credibility_note
 ) values
-  ('MEDSHIELD_XLSX', 'MedShield 2021-2025 Sales Report workbook', 'internal', null, 'Manual upload per reporting cycle', 'Internal source workbook supplied by MedShield for capstone analysis.'),
+  ('MEDSHIELD_XLSX', 'MedShield 2017 onwards Sales Report workbook', 'internal', null, 'Manual upload per reporting cycle', 'Internal source workbook supplied by MedShield for capstone analysis.'),
   ('SUPABASE_WAREHOUSE', 'Supabase PostgreSQL warehouse', 'internal', null, 'Near real-time after ETL load', 'Repository-controlled analytical warehouse and dashboard source of truth.'),
   ('DOH_FOI_OR_OPEN_DATA', 'Department of Health disease surveillance data', 'external_dataset', 'https://www.foi.gov.ph/agencies/doh/', 'Monthly or per approved data request', 'Credible public-sector source for disease signals; use FOI/Open Data exports when a stable medshield API is unavailable.'),
   ('PAGASA_CLIMATE', 'DOST-PAGASA climate and rainfall products', 'external_dataset', 'https://bagong.pagasa.dost.gov.ph/', 'Daily, ten-day, monthly, or published product cadence', 'Official Philippine meteorological agency source for rainfall and typhoon risk indicators.'),
@@ -1229,7 +1231,7 @@ join medshield_analytics.dim_model m on m.model_key = f.model_key
 order by m.analytics_layer, m.model_code, f.metric_name;
 
 comment on table medshield_sales.stg_sales_transactions is 'Raw landing table for Sales Report.xlsx rows. Preserves messy source values before transformation.';
-comment on table medshield_sales.fact_sales_transactions is 'Normalized transaction-level sales fact from the 2021-2025 workbook.';
+comment on table medshield_sales.fact_sales_transactions is 'Normalized transaction-level sales fact from 2017 onwards.';
 comment on table medshield_external.fact_disease_signal is 'DOH/FOI/Open Data disease indicators used as external forecast regressors and alert inputs.';
 comment on table medshield_external.fact_weather_signal is 'PAGASA or approved weather indicators used as external forecast regressors and typhoon contingency inputs.';
 comment on table medshield_analytics.fact_demand_forecast is 'Prophet baseline and external-regressor demand forecast output.';

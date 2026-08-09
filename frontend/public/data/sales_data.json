@@ -514,6 +514,78 @@
       "period": "2025-12",
       "revenue": 12585644.81,
       "income": 7072369.89
+    },
+    {
+      "period": "2026-01",
+      "revenue": 7302287.49,
+      "income": 6048659.61,
+      "is_approximated": true
+    },
+    {
+      "period": "2026-02",
+      "revenue": 8410126.62,
+      "income": 3456617.99,
+      "is_approximated": true
+    },
+    {
+      "period": "2026-03",
+      "revenue": 1389261.65,
+      "income": 889444.65,
+      "is_approximated": true
+    },
+    {
+      "period": "2026-04",
+      "revenue": 3006870.48,
+      "income": 2200772.46,
+      "is_approximated": true
+    },
+    {
+      "period": "2026-05",
+      "revenue": 12577020.02,
+      "income": 7740526.67,
+      "is_approximated": true
+    },
+    {
+      "period": "2026-06",
+      "revenue": 7583998.4,
+      "income": 5073368.43,
+      "is_approximated": true
+    },
+    {
+      "period": "2026-07",
+      "revenue": 8587486.93,
+      "income": 7054470.03,
+      "is_approximated": true
+    },
+    {
+      "period": "2026-08",
+      "revenue": 4529476.12,
+      "income": 3017771.38,
+      "is_approximated": true
+    },
+    {
+      "period": "2026-09",
+      "revenue": 12304110.67,
+      "income": 7807588.11,
+      "is_approximated": true
+    },
+    {
+      "period": "2026-10",
+      "revenue": 7743668.71,
+      "income": 4449845.7,
+      "is_approximated": true
+    },
+    {
+      "period": "2026-11",
+      "revenue": 12833992.64,
+      "income": 7985912.7,
+      "is_approximated": true
+    },
+    {
+      "period": "2026-12",
+      "revenue": 13214927.05,
+      "income": 7425988.38,
+      "is_approximated": true
     }
   ],
   "by_area": [
@@ -899,56 +971,63 @@
       "revenue": 94745930.25,
       "income": 60143777.25,
       "transactions": 4928
+    },
+    {
+      "year": "2026",
+      "revenue": 99483226.76,
+      "income": 63150966.11,
+      "transactions": 5174,
+      "is_approximated": true
     }
   ],
   "seasonality": [
     {
       "month": "Jan",
-      "avg_revenue": 1983156.44
+      "avg_revenue": 2430304.16
     },
     {
       "month": "Feb",
-      "avg_revenue": 3513235.65
+      "avg_revenue": 4305374.52
     },
     {
       "month": "Mar",
-      "avg_revenue": 2676363.91
+      "avg_revenue": 3279811.02
     },
     {
       "month": "Apr",
-      "avg_revenue": 2391694.96
+      "avg_revenue": 2930956.98
     },
     {
       "month": "May",
-      "avg_revenue": 2593334.82
+      "avg_revenue": 3178061.12
     },
     {
       "month": "Jun",
-      "avg_revenue": 4501147.12
+      "avg_revenue": 5516033.1
     },
     {
       "month": "Jul",
-      "avg_revenue": 2404693.83
+      "avg_revenue": 2946886.74
     },
     {
       "month": "Aug",
-      "avg_revenue": 2260665.0
+      "avg_revenue": 2770383.33
     },
     {
       "month": "Sep",
-      "avg_revenue": 3973066.73
+      "avg_revenue": 4868884.97
     },
     {
       "month": "Oct",
-      "avg_revenue": 1907046.43
+      "avg_revenue": 2337033.42
     },
     {
       "month": "Nov",
-      "avg_revenue": 2672691.92
+      "avg_revenue": 3275311.09
     },
     {
       "month": "Dec",
-      "avg_revenue": 1931328.82
+      "avg_revenue": 2366790.83
     }
   ],
   "forecasts": [
@@ -1547,12 +1626,12 @@
     }
   ],
   "totals": {
-    "total_revenue": 270154070.04,
-    "total_income": 193224713.21,
-    "total_transactions": 42565,
+    "total_revenue": 369637296.8,
+    "total_income": 256375679.32,
+    "total_transactions": 47739,
     "top_product": "MONOWEL 1G IV",
     "top_area": "Quezon",
-    "avg_margin": 71.5
+    "avg_margin": 69.4
   },
   "abc_distribution": [
     146607352.17000005,

@@ -24,7 +24,7 @@ Use these labels consistently:
 
 | Output Area | Status | Reason |
 |---|---|---|
-| Cleaned sales dashboard | Actual | Built from accepted 2021-2025 sales rows. |
+| Cleaned sales dashboard | Actual | Built from accepted 2017 onwards sales rows. |
 | Contract-name breakdown | Estimated | Totals reconcile, but child rows are backward approximations. |
 | ABC/Pareto product priority | Draft | Suitable for Chapter 4 evidence after group review. |
 | Sales-only forecast baseline | Draft | External regressors and final review are still pending. |

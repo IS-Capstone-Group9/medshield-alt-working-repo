@@ -170,7 +170,7 @@ Acceptance criteria:
 ## Capstone Completion Workflow
 
 1. Approve business definitions.
-2. Reconcile and repair 2021-2025 sales data.
+2. Reconcile and repair 2017 onwards sales data.
 3. Review contract-name row backward allocation.
 4. Complete product/SKU alias mapping.
 5. Complete area, customer-type, and business-line mapping.

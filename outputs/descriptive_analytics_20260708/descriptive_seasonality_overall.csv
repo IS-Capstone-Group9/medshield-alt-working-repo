@@ -1,0 +1,13 @@
+scope,calendar_month,seasonal_index,seasonal_strength,interpretation,method,status
+overall,01,1.291776,0.76322,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+overall,02,2.715861,0.76322,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+overall,03,0.878318,0.76322,lower_than_average,monthly average demand divided by overall monthly average demand,draft
+overall,04,1.035598,0.76322,near_average,monthly average demand divided by overall monthly average demand,draft
+overall,05,1.35228,0.76322,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+overall,06,3.709418,0.76322,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+overall,07,1.518765,0.76322,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+overall,08,1.632824,0.76322,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+overall,09,3.37937,0.76322,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+overall,10,1.162182,0.76322,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+overall,11,1.643664,0.76322,higher_than_average,monthly average demand divided by overall monthly average demand,draft
+overall,12,1.279943,0.76322,higher_than_average,monthly average demand divided by overall monthly average demand,draft

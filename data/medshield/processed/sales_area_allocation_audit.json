@@ -7,13 +7,13 @@
       "Sales_Report.xlsx"
     ],
     "checksum": "20ddf32a1834b23497438748e16e4237399d6b45416fe970a1ee591d3332fb7b",
-    "received_at": "2026-08-07T18:11:45.045807+00:00",
+    "received_at": "2026-08-09T08:31:02.704189+00:00",
     "cleaning_status": "cleaned",
     "quality_summary": {
       "input_stage": "raw_medshield",
-      "rows_extracted": 45377,
+      "rows_extracted": 45643,
       "rows_accepted": 41253,
-      "rows_rejected": 4124,
+      "rows_rejected": 4390,
       "rows_with_warnings": 804,
       "duplicate_rows": 66,
       "valid_rows": 40449,
@@ -35,21 +35,21 @@
       "source_period_start": "1900-01-01",
       "source_period_end": "2025-12-31",
       "standardizations": {
-        "dr_number: standardized identifier format": 40501,
-        "net_cost: blank converted to 0": 16204,
-        "margin_pct: derived from net income / net cost": 24960,
-        "discount: blank converted to 0": 5203,
-        "unit_cost: blank converted to 0": 1138,
-        "trade_price_unit: blank converted to 0": 2575,
-        "product: resolved legacy #REF! from cost/price signature": 1063,
-        "quantity: blank converted to 0": 40,
-        "total_cost: blank converted to 0": 888,
-        "total_trade_price: blank converted to 0": 2264,
-        "net_income: blank converted to 0": 9
+        "dr_number: standardized identifier format": 40553,
+        "net_cost: blank converted to 0": 16264,
+        "margin_pct: derived from net income / net cost": 25224,
+        "discount: blank converted to 0": 5263,
+        "unit_cost: blank converted to 0": 1173,
+        "trade_price_unit: blank converted to 0": 2612,
+        "product: resolved legacy #REF! from cost/price signature": 1065,
+        "quantity: blank converted to 0": 51,
+        "total_cost: blank converted to 0": 892,
+        "total_trade_price: blank converted to 0": 2268,
+        "net_income: blank converted to 0": 12
       },
       "issues": {
-        "missing_product": 3512,
-        "missing_area": 47,
+        "missing_product": 3574,
+        "missing_area": 60,
         "quantity_is_negative": 674,
         "total_cost_is_negative": 432,
         "total_trade_price_is_negative": 654,
@@ -57,7 +57,7 @@
         "unit_cost_is_negative": 29,
         "net_cost_is_negative": 378,
         "margin_percentage_is_outside_the_expected_range": 37,
-        "invalid_or_missing_delivery_date": 689
+        "invalid_or_missing_delivery_date": 955
       },
       "columns_received": [
         "area",
@@ -129,40 +129,40 @@
     ],
     "source_dataset": "data/medshield/processed/sales_transactions.json.gz",
     "transformation": "Recognized area-summary rows were replaced with deterministic product-level estimates using only prior comparable transactions.",
-    "generated_at": "2026-08-07T18:11:59.164Z",
+    "generated_at": "2026-08-09T08:31:17.487Z",
     "area_summary_rows_replaced": 346,
     "estimated_child_rows_created": 1730,
-    "original_row_count": 45377,
-    "adjusted_row_count": 46761,
+    "original_row_count": 45643,
+    "adjusted_row_count": 47027,
     "reconciliation": {
       "quantity": {
-        "original": 1983875.6119399995,
-        "adjusted": 1983875.6119400065,
+        "original": 2375060.4598319987,
+        "adjusted": 2375060.4598320057,
         "delta": 0
       },
       "total_cost": {
-        "original": 2949599845.6486125,
-        "adjusted": 2949599845.648615,
+        "original": 3665907467.427913,
+        "adjusted": 3665907467.4279156,
         "delta": 0
       },
       "discount": {
-        "original": 15219745.620178998,
-        "adjusted": 15219745.620178998,
+        "original": 19292799.863518994,
+        "adjusted": 19292799.863518994,
         "delta": 0
       },
       "net_cost": {
-        "original": 2641792051.5251412,
-        "adjusted": 2641792051.525142,
+        "original": 3208158911.047712,
+        "adjusted": 3208158911.047713,
         "delta": 0
       },
       "total_trade_price": {
-        "original": 1205557493.1671176,
-        "adjusted": 1205557493.1671183,
+        "original": 1485863620.224975,
+        "adjusted": 1485863620.2249758,
         "delta": 0
       },
       "net_income": {
-        "original": 1727789973.6514966,
-        "adjusted": 1727789973.651497,
+        "original": 2159728653.7629433,
+        "adjusted": 2159728653.7629433,
         "delta": 0
       }
     },

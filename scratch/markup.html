@@ -1,0 +1,876 @@
+
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <div class="brand-logo">
+      <div class="brand-icon">
+        <img src="/medshield_logo.png" alt="MedShield logo">
+      </div>
+      <div class="brand-text">
+        <div class="brand-name">MedShield</div>
+        <div class="brand-sub">Pharma Corp.</div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <div class="nav-section">Analytics</div>
+    <div class="nav-item active" onclick="showPage('overview', this)" data-tooltip="Overview" aria-label="Overview">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+        <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+      </svg>
+      <span class="nav-label">Overview</span>
+    </div>
+    <div class="nav-item" onclick="showPage('revenue', this)" data-tooltip="Sales Diagnostics" aria-label="Sales Diagnostics">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+      </svg>
+      <span class="nav-label">Sales Diagnostics</span>
+    </div>
+    <div class="nav-item" onclick="showPage('products', this)" data-tooltip="Product Prioritization" aria-label="Product Prioritization">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+      </svg>
+      <span class="nav-label">Product Prioritization</span>
+    </div>
+    <div class="nav-item" onclick="showPage('territory', this)" data-tooltip="Area Prioritization" aria-label="Area Prioritization">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+        <polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+      <span class="nav-label">Area Prioritization</span>
+    </div>
+    <div class="nav-section" style="margin-top:8px;">DSS</div>
+    <div class="nav-item" onclick="showPage('forecast', this)" data-tooltip="Forecast Modeling" aria-label="Forecast Modeling">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M2 20h.01M7 20v-4"/><path d="M12 20v-8"/><path d="M17 20V8"/>
+        <path d="M22 4l-8 8-4-4-8 8"/>
+      </svg>
+      <span class="nav-label">Forecast Modeling</span>
+    </div>
+    <div class="nav-item" onclick="showPage('inventory', this)" data-tooltip="Prescriptive Planning" aria-label="Prescriptive Planning">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+        <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+      </svg>
+      <span class="nav-label">Prescriptive Planning</span>
+    </div>
+    <div class="nav-item" onclick="showPage('data', this)" data-tooltip="Data Upload" aria-label="Data Upload">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 3v12"/>
+        <path d="m7 10 5 5 5-5"/>
+        <path d="M5 21h14"/>
+      </svg>
+      <span class="nav-label">Data Upload</span>
+    </div>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="sidebar-avatar">MS</div>
+      <div class="sidebar-user-meta">
+        <div class="sidebar-user-name">Supply Planner</div>
+        <div class="sidebar-user-role">MedShield DSS Operator</div>
+      </div>
+    </div>
+    <div class="sidebar-footer-actions">
+      <button class="sidebar-footer-btn" type="button" onclick="toggleTheme()" aria-label="Toggle dark mode">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 3a1 1 0 0 1 1 1v1"/><path d="M12 19v1"/><path d="M4.22 4.22l.7.7"/><path d="M18.36 18.36l.71.71"/>
+          <path d="M3 12h1"/><path d="M19 12h1"/><path d="M4.22 19.78l.7-.7"/><path d="M18.36 5.64l.71-.71"/>
+          <circle cx="12" cy="12" r="4"/>
+        </svg>
+      </button>
+      <button class="sidebar-footer-btn" type="button" onclick="openHelp()" aria-label="Open help">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3"/><path d="M12 17h.01"/>
+        </svg>
+      </button>
+    </div>
+    <div class="sidebar-footer-meta">v2.1 Decision Support Build</div>
+  </div>
+
+</aside>
+<div class="sidebar-backdrop" onclick="closeNavigation()" aria-hidden="true"></div>
+
+<!-- MAIN -->
+<main class="main">
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="nav-toggle" type="button" onclick="toggleNavigation()" aria-label="Toggle navigation" aria-expanded="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 6h16"/>
+          <path d="M4 12h16"/>
+          <path d="M4 18h16"/>
+        </svg>
+      </button>
+      <div class="topbar-title-group">
+        <div class="page-title" id="topbar-title">Executive Overview</div>
+        <div class="page-sub" id="topbar-sub">Demand baseline, forecast, and actions</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div class="topbar-badge"><div class="live-dot"></div> Dataset loaded</div>
+    </div>
+  </div>
+
+  <div class="filterbar" id="filterBar">
+    <div class="filterbar-main">
+      <div class="filterbar-label">Granularity</div>
+      <div class="granularity-selector" style="display:inline-flex; gap:6px; margin-right:20px;">
+        <button class="comp-mode-btn active" onclick="setGranularity('monthly', this)" id="gran-monthly">Monthly</button>
+        <button class="comp-mode-btn" onclick="setGranularity('weekly', this)" id="gran-weekly">Weekly</button>
+        <button class="comp-mode-btn" onclick="setGranularity('annual', this)" id="gran-annual">Annual</button>
+      </div>
+      <div class="filterbar-label">Comparison</div>
+      <div class="comparison-selector">
+        <button class="comp-mode-btn active" onclick="setComparisonMode('single', this)">Single Year</button>
+        <button class="comp-mode-btn" onclick="setComparisonMode('yoy', this)">Y/Y Compare</button>
+        <button class="comp-mode-btn" onclick="setComparisonMode('custom', this)">Custom</button>
+      </div>
+      <div class="year-selector" id="yearSelector">
+        <button class="yr-btn active" onclick="setYear('all', this)">All</button>
+        <button class="yr-btn" onclick="setYear('2021', this)">2021</button>
+        <button class="yr-btn" onclick="setYear('2022', this)">2022</button>
+        <button class="yr-btn" onclick="setYear('2023', this)">2023</button>
+        <button class="yr-btn" onclick="setYear('2024', this)">2024</button>
+        <button class="yr-btn" onclick="setYear('2025', this)">2025</button>
+        <button class="yr-btn" onclick="setYear('2026', this)">2026</button>
+      </div>
+    </div>
+    <div class="filterbar-note" id="filterBarNote">Change the comparison view and granularity settings for baseline and trend charts.</div>
+  </div>
+
+  <div class="content">
+
+    <!-- =========================================================================
+         PAGE: OVERVIEW
+         ========================================================================= -->
+    <div class="page active fade-in" id="page-overview">
+      <div class="chart-grid-2">
+        <div class="chart-card">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">Revenue and Net Income</div>
+              <div class="chart-subtitle">2021-2026 baseline</div>
+            </div>
+            <span class="chart-badge">Baseline</span>
+          </div>
+          <div class="chart-wrap h260">
+            <canvas id="overviewBaselineChart"></canvas>
+          </div>
+          <div class="figure-note">Historical demand and profit base.</div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">2027 Demand Forecast</div>
+              <div class="chart-subtitle">Prophet projection with planning range</div>
+            </div>
+            <span class="chart-badge">Predictive</span>
+          </div>
+          <div class="chart-wrap h260">
+            <canvas id="overviewForecastChart"></canvas>
+          </div>
+          <div class="figure-note">Forward demand signal for stock planning.</div>
+        </div>
+      </div>
+
+      <div class="hero-panel">
+        <div class="hero-kicker">Overview</div>
+        <div class="hero-title">Read demand first, then act.</div>
+        <div class="hero-copy">Start with baseline demand, move to forecast, then execute stock and area actions.</div>
+        <div class="hero-summary">
+          <span class="hero-tag">Descriptive: Sales, ABC, Supervised Segmentation (2021-2026)</span>
+          <span class="hero-tag">Predictive: Prophet, DOH, PAGASA, XGBoost (2027 onwards)</span>
+          <span class="hero-tag">Prescriptive: EOQ, ROP, MCDA</span>
+        </div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card" style="--kpi-accent:#1CA4E8">
+          <div class="kpi-label">Total Revenue</div>
+          <div class="kpi-value">&#8369;236.4M</div>
+          <div class="row" style="gap:6px; margin-top:4px;">
+            <span class="kpi-tag up">+273% from 2021 to 2026</span>
+          </div>
+        </div>
+        <div class="kpi-card" style="--kpi-accent:#1585BC">
+          <div class="kpi-label">2027 Forecast Start</div>
+          <div class="kpi-value">&#8369;10.2M</div>
+          <div class="kpi-sub">January projected demand value</div>
+        </div>
+        <div class="kpi-card" style="--kpi-accent:#C69A2E">
+          <div class="kpi-label">Peak Season</div>
+          <div class="kpi-value">May &amp; Nov</div>
+          <div class="kpi-sub">Highest seasonal lift in the baseline</div>
+        </div>
+        <div class="kpi-card" style="--kpi-accent:#0E6FA6">
+          <div class="kpi-label">Top Territory</div>
+          <div class="kpi-value">Quezon</div>
+          <div class="kpi-sub">Largest revenue share for allocation planning</div>
+        </div>
+      </div>
+
+      <!-- 2-col: monthly trend + area donut -->
+      <div class="chart-grid-2">
+        <div class="chart-card">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">Monthly Revenue Trend</div>
+              <div class="chart-subtitle">Observed monthly demand pattern</div>
+            </div>
+          </div>
+          <div class="chart-wrap h220">
+            <canvas id="monthlyChart"></canvas>
+          </div>
+          <div class="figure-meta">
+            <span class="mini-badge">Descriptive</span>
+            <span class="mini-badge">Monthly Transactions</span>
+          </div>
+          <div class="figure-note">Raw sales signal before forecasting.</div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">Revenue by Territory</div>
+              <div class="chart-subtitle">Demand concentration by area</div>
+            </div>
+          </div>
+          <div class="chart-wrap h220">
+            <canvas id="areaDonut"></canvas>
+          </div>
+          <div class="figure-meta">
+            <span class="mini-badge">Segmentation Context</span>
+            <span class="mini-badge">Area Input</span>
+          </div>
+          <div class="figure-note">Shows where demand is concentrated before ranking.</div>
+        </div>
+      </div>
+
+      <!-- Seasonality -->
+      <div class="chart-full">
+        <div class="chart-card">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">Average Monthly Demand Pattern</div>
+              <div class="chart-subtitle">Seasonal index - avg transaction revenue per month across all years</div>
+            </div>
+            <span class="chart-badge">Seasonality</span>
+          </div>
+          <div class="chart-wrap h180">
+            <canvas id="seasonChart"></canvas>
+          </div>
+          <div class="figure-meta">
+            <span class="mini-badge">Seasonality Signal</span>
+            <span class="mini-badge">Predictive Input</span>
+          </div>
+          <div class="figure-note">Seasonal pattern used in the forecast layer.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+         PAGE: REVENUE TRENDS
+    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="page fade-in" id="page-revenue">
+      <div class="info-panel">
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-label">Focus</div>
+            <div class="info-val">Sales baseline</div>
+            <div class="info-sub">Historical demand picture</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Input</div>
+            <div class="info-val">2021-2025 sales records</div>
+            <div class="info-sub">Revenue, income, monthly, yearly</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Output</div>
+            <div class="info-val">Trend diagnosis</div>
+            <div class="info-sub">Growth, volatility, margin</div>
+          </div>
+        </div>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi-card" style="--kpi-accent:#1CA4E8">
+          <div class="kpi-label">2025 Revenue</div>
+          <div class="kpi-value">&#8369;94.8M</div>
+          <div class="kpi-tag up">+243% vs 2021</div>
+        </div>
+        <div class="kpi-card" style="--kpi-accent:#C69A2E">
+          <div class="kpi-label">2025 Net Income</div>
+          <div class="kpi-value">&#8369;79.1M</div>
+          <div class="kpi-sub">83.5% margin</div>
+        </div>
+        <div class="kpi-card" style="--kpi-accent:#0E6FA6">
+          <div class="kpi-label">Best Month (2025)</div>
+          <div class="kpi-value">May</div>
+          <div class="kpi-sub">Highest single-month revenue</div>
+        </div>
+        <div class="kpi-card" style="--kpi-accent:#1585BC">
+          <div class="kpi-label">Avg Monthly 2025</div>
+          <div class="kpi-value">&#8369;7.9M</div>
+          <div class="kpi-sub">Up from &#8369;5.3M in 2021</div>
+        </div>
+      </div>
+
+      <div class="chart-full">
+        <div class="chart-card">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">Monthly Revenue - 2023 to 2025</div>
+              <div class="chart-subtitle">Detailed month-by-month breakdown</div>
+            </div>
+          </div>
+          <div class="chart-wrap h300">
+            <canvas id="revenueDetailChart"></canvas>
+          </div>
+          <div class="figure-meta">
+            <span class="mini-badge">Descriptive Output</span>
+            <span class="mini-badge">Monthly Performance Series</span>
+          </div>
+          <div class="figure-note">Raw monthly signal used before forecasting.</div>
+        </div>
+      </div>
+
+      <div class="chart-grid-2">
+        <div class="chart-card">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">Revenue Growth Rate</div>
+              <div class="chart-subtitle">Year-over-year % change</div>
+            </div>
+          </div>
+          <div class="chart-wrap h220">
+            <canvas id="growthChart"></canvas>
+          </div>
+          <div class="figure-note">Quick view of yearly acceleration or slowdown.</div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">Margin Trend</div>
+              <div class="chart-subtitle">Net income as % of revenue</div>
+            </div>
+          </div>
+          <div class="chart-wrap h220">
+            <canvas id="marginChart"></canvas>
+          </div>
+          <div class="figure-note">Shows whether growth is translating into profit.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+         PAGE: PRODUCT ANALYSIS
+    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="page fade-in" id="page-products">
+      <div class="info-panel">
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-label">Focus</div>
+            <div class="info-val">Product ranking</div>
+            <div class="info-sub">Revenue concentration and SKU priority</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Method</div>
+            <div class="info-val">ABC + Pareto</div>
+            <div class="info-sub">High-impact items first</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Output</div>
+            <div class="info-val">Product prioritization</div>
+            <div class="info-sub">High-value SKUs and watchlist items</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab selectors for Product Prioritization page -->
+      <div class="comparison-selector" style="margin-bottom:14px;">
+        <button class="comp-mode-btn active" id="prodTabOverviewBtn" onclick="toggleProductTab('overview')">Prioritization Overview</button>
+        <button class="comp-mode-btn" id="prodTabFullBtn" onclick="toggleProductTab('fulllist')">View Full Product List</button>
+      </div>
+
+      <!-- Tab Content 1: Overview (containing the main prioritization layout elements) -->
+      <div id="productTabOverview">
+        <div class="kpi-grid">
+        <div class="kpi-card" style="--kpi-accent:#1CA4E8">
+          <div class="kpi-label">Unique Products</div>
+          <div class="kpi-value">3335</div>
+          <div class="kpi-sub">Across all categories</div>
+        </div>
+        <div class="kpi-card" style="--kpi-accent:#C69A2E">
+          <div class="kpi-label">Class A Products</div>
+          <div class="kpi-value">324</div>
+          <div class="kpi-sub">Drive 80% of revenue</div>
+        </div>
+        <div class="kpi-card" style="--kpi-accent:#0E6FA6">
+          <div class="kpi-label">Top Product</div>
+          <div class="kpi-value" style="font-size:14px;" id="topProductKpiValue">MONOWEL 1G IV</div>
+          <div class="kpi-sub" id="topProductKpiSub">Highest branded volume</div>
+        </div>
+        <div class="kpi-card" style="--kpi-accent:#1585BC">
+          <div class="kpi-label">ABC Coverage</div>
+          <div class="kpi-value">80/20</div>
+          <div class="kpi-sub">Pareto rule holds</div>
+        </div>
+      </div>
+
+      <div class="chart-grid-2">
+        <div class="chart-card">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">Top 10 Products by Revenue</div>
+              <div class="chart-subtitle">Cumulative 2021-2025</div>
+            </div>
+            <span class="chart-badge">Pareto</span>
+          </div>
+          <div class="chart-wrap h300">
+            <canvas id="productBarChart"></canvas>
+          </div>
+          <div class="figure-note">Top revenue drivers and Pareto concentration.</div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">ABC Classification</div>
+              <div class="chart-subtitle">Revenue contribution by class</div>
+            </div>
+          </div>
+          <div class="chart-wrap h300">
+            <canvas id="abcChart"></canvas>
+          </div>
+          <div class="figure-note">Product classes ranked by revenue contribution.</div>
+        </div>
+      </div>
+
+      <div class="chart-card chart-full">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title">Product Performance Table</div>
+            <div class="chart-subtitle">Top 12 by revenue - with ABC class and margin</div>
+          </div>
+        </div>
+        <div class="figure-note">SKU-level detail behind rankings and margins.</div>
+        <table class="product-table" id="productTable"></table>
+      </div>
+
+      <div class="section-title">Product-region matches</div>
+      <div class="chart-card">
+        <div class="figure-note">Suggested product-region fits based on demand pattern similarity.</div>
+        <table class="product-table" id="matchingTable"></table>
+      </div>
+      </div> <!-- End productTabOverview -->
+
+      <!-- Tab Content 2: View Full Product List -->
+      <div id="productTabFullList" style="display:none;">
+        <div class="chart-card chart-full">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">Complete Product Directory</div>
+              <div class="chart-subtitle">All active SKUs in the MedShield directory. Clicking on a product updates the primary prioritization charts above.</div>
+            </div>
+          </div>
+          <div style="margin: 10px 0; display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+            <input type="search" id="fullProductSearch" placeholder="Search by SKU name..." style="background:var(--bg-elevated); border:1px solid var(--border); border-radius:8px; padding:8px 12px; font-size:12px; color:var(--text-primary); flex:1; min-width:200px;" oninput="filterFullProductList()" />
+            <select id="fullProductAbcFilter" style="background:var(--bg-elevated); border:1px solid var(--border); border-radius:8px; padding:8px 12px; font-size:12px; color:var(--text-primary);" onchange="filterFullProductList()">
+              <option value="all">All ABC Classes</option>
+              <option value="A">Class A</option>
+              <option value="B">Class B</option>
+              <option value="C">Class C</option>
+            </select>
+          </div>
+          <div class="figure-note">Click any product row below to highlight and sync it to the priority list.</div>
+          <table class="product-table" id="fullProductTable">
+            <thead>
+              <tr>
+                <th style="cursor:pointer;" onclick="sortFullProductList('product')">Product ↕</th>
+                <th style="cursor:pointer;" onclick="sortFullProductList('abc')">ABC ↕</th>
+                <th style="cursor:pointer;" onclick="sortFullProductList('revenue')">Revenue ↕</th>
+                <th style="cursor:pointer;" onclick="sortFullProductList('qty')">Qty ↕</th>
+                <th style="cursor:pointer;" onclick="sortFullProductList('income')">Net Income ↕</th>
+              </tr>
+            </thead>
+            <tbody id="fullProductTableBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+         PAGE: TERRITORY
+    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="page fade-in" id="page-territory">
+      <div class="info-panel">
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-label">Focus</div>
+            <div class="info-val">Area segmentation</div>
+            <div class="info-sub">Supports territory ranking</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Method</div>
+            <div class="info-val">Supervised, MCDA</div>
+            <div class="info-sub">Supervised segmentation plus regional ranking</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Output</div>
+            <div class="info-val">Regional prioritization</div>
+            <div class="info-sub">Where supply attention should go first</div>
+          </div>
+        </div>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi-card" style="--kpi-accent:#1CA4E8">
+          <div class="kpi-label">Top Territory</div>
+          <div class="kpi-value">Quezon</div>
+          <div class="kpi-sub">Largest revenue contributor</div>
+        </div>
+        <div class="kpi-card" style="--kpi-accent:#C69A2E">
+          <div class="kpi-label">Active Territories</div>
+          <div class="kpi-value">8</div>
+          <div class="kpi-sub">Geographical provinces</div>
+        </div>
+        <div class="kpi-card" style="--kpi-accent:#0E6FA6">
+          <div class="kpi-label">Hospital Variance</div>
+          <div class="kpi-value">228%</div>
+          <div class="kpi-sub">Peak vs trough monthly swing</div>
+        </div>
+        <div class="kpi-card" style="--kpi-accent:#1585BC">
+          <div class="kpi-label">Govt Variance</div>
+          <div class="kpi-value">537%</div>
+          <div class="kpi-sub">Bidding-cycle driven</div>
+        </div>
+      </div>
+
+      <div class="chart-grid-2">
+        <div class="chart-card">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">Revenue by Territory</div>
+              <div class="chart-subtitle">Cumulative 2021-2025</div>
+            </div>
+          </div>
+          <div class="chart-wrap h280">
+            <canvas id="areaBarChart"></canvas>
+          </div>
+          <div class="figure-note">Territory revenue ranking used for regional scoring.</div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">Net Income by Territory</div>
+              <div class="chart-subtitle">Profitability comparison</div>
+            </div>
+          </div>
+          <div class="chart-wrap h280">
+            <canvas id="areaIncomeChart"></canvas>
+          </div>
+          <div class="figure-note">Shows which territories convert sales into profit.</div>
+        </div>
+      </div>
+
+      <div class="chart-card chart-full">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title">Territory Margin Comparison</div>
+            <div class="chart-subtitle">Net income / Revenue ratio per territory</div>
+          </div>
+        </div>
+        <div class="chart-wrap h200">
+          <canvas id="areaMarginChart"></canvas>
+        </div>
+        <div class="figure-meta">
+          <span class="mini-badge">MCDA Context</span>
+          <span class="mini-badge">Revenue + Growth + Risk</span>
+        </div>
+        <div class="figure-note">Margin trade-offs used with revenue, growth, and risk.</div>
+      </div>
+
+      <div class="chart-card chart-full" style="margin-top:14px;">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title">Industry Type Analysis</div>
+            <div class="chart-subtitle">Revenue contribution by customer channel (Government, Hospital, Pharma)</div>
+          </div>
+        </div>
+        <div class="chart-wrap h200">
+          <canvas id="industryTypeChart"></canvas>
+        </div>
+        <div class="figure-note">Isolates high-volume entities from geographical regional scorecards.</div>
+      </div>
+
+      <div class="chart-grid-2" style="margin-top:14px;">
+        <div class="chart-card">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">Area Segmentation Summary</div>
+              <div class="chart-subtitle">Supervised Segmentation style area segmentation context</div>
+            </div>
+          </div>
+          <div class="figure-note">Area groups by scale, stability, and buying pattern.</div>
+          <table class="product-table" id="clusterTable"></table>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">MCDA Regional Priority Ranking</div>
+              <div class="chart-subtitle">Revenue, growth, and epidemiological risk weighted view</div>
+            </div>
+          </div>
+          <div class="figure-note">Ranked regional priorities for procurement and sales action.</div>
+          <table class="product-table" id="priorityTable"></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+         PAGE: DEMAND FORECAST
+    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="page fade-in" id="page-forecast">
+      <div class="info-panel">
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-label">Model</div>
+            <div class="info-val">Facebook Prophet</div>
+            <div class="info-sub">Primary demand forecasting model</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Inputs</div>
+            <div class="info-val">2021-2026 baseline</div>
+            <div class="info-sub">Sales history with external signals</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Evaluation</div>
+            <div class="info-val">2027 outlook</div>
+            <div class="info-sub">12-month projection window</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-full">
+        <div class="chart-card">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">Simulated 2027 Demand Forecast</div>
+              <div class="chart-subtitle">Prophet projection with seasonal planning range</div>
+            </div>
+            <span class="chart-badge">Predictive</span>
+          </div>
+          <div class="chart-wrap h300">
+            <canvas id="forecastChart"></canvas>
+          </div>
+          <div class="figure-meta">
+            <span class="mini-badge">Predictive Output</span>
+            <span class="mini-badge">Model: Prophet</span>
+          </div>
+          <div class="figure-note">Main 2027 projection with upper and lower planning bounds.</div>
+        </div>
+      </div>
+
+      <div class="chart-grid-2">
+        <div class="chart-card">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">Seasonality Index</div>
+              <div class="chart-subtitle">Monthly demand multiplier used by the model</div>
+            </div>
+          </div>
+          <div class="chart-wrap h220">
+            <canvas id="seasonIndexChart"></canvas>
+          </div>
+          <div class="chart-legend" aria-label="Seasonality index legend">
+            <span class="chart-legend-item"><span class="legend-swatch" style="background:rgba(28,164,232,0.85)"></span>Peak demand</span>
+            <span class="chart-legend-item"><span class="legend-swatch" style="background:rgba(198,154,46,0.8)"></span>Near baseline</span>
+            <span class="chart-legend-item"><span class="legend-swatch" style="background:rgba(14,111,166,0.72)"></span>Below baseline</span>
+          </div>
+          <div class="figure-note">Shows which months lift or suppress baseline demand.</div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">PAGASA vs DOH Signals</div>
+              <div class="chart-subtitle">External drivers used for proactive planning</div>
+            </div>
+          </div>
+          <div class="chart-wrap h220">
+            <canvas id="externalChart"></canvas>
+          </div>
+          <div class="figure-note">Weather and disease signals used to adjust forecasts.</div>
+        </div>
+      </div>
+
+      <!-- Forecast recommendations -->
+      <div class="section-title">Priority product forecasts</div>
+      <div class="chart-card">
+        <div class="figure-note">Priority forecast summary for 2027 H1.</div>
+        <div id="forecastTable"></div>
+      </div>
+
+      <div class="section-title">Model evaluation</div>
+      <div class="chart-card">
+        <div class="figure-note">Validation metrics for forecast and ranking outputs.</div>
+        <table class="product-table" id="evalTable"></table>
+      </div>
+    </div>
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+         PAGE: INVENTORY ALERTS
+    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="page fade-in" id="page-inventory">
+      <div class="info-panel">
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-label">Action layer</div>
+            <div class="info-val">Rules, EOQ, ROP, MCDA</div>
+            <div class="info-sub">Action layer on top of forecasts</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Urgency score</div>
+            <div class="info-val">XGBoost urgency score</div>
+            <div class="info-sub">Revenue, growth, volatility, category, outbreak</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Reliability</div>
+            <div class="info-val">Precision, recall, fulfillment</div>
+            <div class="info-sub">Alert and reorder reliability checks</div>
+          </div>
+        </div>
+      </div>
+      <div class="section-title">Active alerts</div>
+      <div class="alert-hero">
+        <div class="alert-banner">
+          <div class="alert-banner-kicker">Immediate Action</div>
+          <div class="alert-banner-title">Critical stock and outbreak signals need review before the next cycle.</div>
+          <div class="alert-banner-copy">This layer converts forecast, disease, and logistics inputs into action. The most urgent stock gaps and surge signals are surfaced first so procurement and operations can respond fast.</div>
+          <div class="alert-banner-tags">
+            <span class="alert-banner-tag">2 critical</span>
+            <span class="alert-banner-tag">1 outbreak watch</span>
+            <span class="alert-banner-tag">1 logistics risk</span>
+          </div>
+        </div>
+        <div class="alert-summary">
+          <div class="alert-summary-label">Alert Snapshot</div>
+          <div class="alert-summary-row">
+            <span class="alert-summary-key">Open critical alerts</span>
+            <span class="alert-summary-value">2</span>
+          </div>
+          <div class="alert-summary-row">
+            <span class="alert-summary-key">Areas under watch</span>
+            <span class="alert-summary-value">3</span>
+          </div>
+          <div class="alert-summary-row">
+            <span class="alert-summary-key">SKUs needing reorder</span>
+            <span class="alert-summary-value">5</span>
+          </div>
+        </div>
+      </div>
+      <div class="alert-grid">
+        <div class="alert-card danger primary">
+          <div class="alert-icon danger-bg">!</div>
+          <div class="alert-title">Reorder Required - MONOWEL 1G IV</div>
+          <div class="alert-body">Demand exceeds safety stock by Jan 2026. EOQ 240, ROP 80.</div>
+          <span class="alert-tag danger pulse">Critical</span>
+        </div>
+        <div class="alert-card warn">
+          <div class="alert-icon warn-bg">&#8593;</div>
+          <div class="alert-title">Dengue Season Surge - Q4 2025</div>
+          <div class="alert-body">DOH DII above 1.4. Antipyretic demand may rise 35%.</div>
+          <span class="alert-tag warn">Warning</span>
+        </div>
+        <div class="alert-card ok">
+          <div class="alert-icon ok-bg">&#10003;</div>
+          <div class="alert-title">PAGBILAO Bid Awarded</div>
+          <div class="alert-body">Batch order confirmed and on schedule.</div>
+          <span class="alert-tag ok">On Track</span>
+        </div>
+        <div class="alert-card warn">
+          <div class="alert-icon warn-bg">&#8801;</div>
+          <div class="alert-title">Dead Stock Flag - 4 SKUs</div>
+          <div class="alert-body">4 SKUs inactive for 90+ days. Pause purchase and review expiry.</div>
+          <span class="alert-tag warn">Review</span>
+        </div>
+        <div class="alert-card danger">
+          <div class="alert-icon danger-bg">&#9888;</div>
+          <div class="alert-title">Typhoon Contingency Active</div>
+          <div class="alert-body">PAGASA RSI &ge; 45% for Marinduque. Wound care + ORS stock multiplier applied (+40%). Pre-position inventory.</div>
+          <span class="alert-tag danger pulse">High Risk</span>
+        </div>
+        <div class="alert-card ok">
+          <div class="alert-icon ok-bg">&#9635;</div>
+          <div class="alert-title">Hospital Area - Stock OK</div>
+          <div class="alert-body">Stock covers demand through Feb 2026.</div>
+          <span class="alert-tag ok">Stable</span>
+        </div>
+      </div>
+
+      <div class="section-title">Scenario actions</div>
+      <div class="chart-card">
+        <div class="figure-note">Action plan for outbreak and typhoon scenarios.</div>
+        <table class="product-table" id="scenarioTable"></table>
+      </div>
+
+      <!-- EOQ Table -->
+      <div class="section-title">EOQ reorder recommendations</div>
+      <div class="chart-card">
+        <div class="figure-note">EOQ and ROP from demand, cost, lead time, and safety stock.</div>
+        <table class="product-table" id="eoqTable"></table>
+      </div>
+    </div>
+
+    <div class="page fade-in" id="page-data">
+      <div class="info-panel">
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-label">Purpose</div>
+            <div class="info-val">Data-driven updates</div>
+            <div class="info-sub">Load CSV and JSON files into the dashboard</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Files</div>
+            <div class="info-val">CSV, JSON</div>
+            <div class="info-sub">Sales records, summary tables, and dataset exports</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Import mode</div>
+            <div class="info-val">Client-side import</div>
+            <div class="info-sub">Preview and apply updates without leaving the page</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="upload-grid">
+        <div class="upload-zone">
+          <div class="section-title" style="margin-bottom:10px;">Upload Sales CSV</div>
+          <div class="upload-hint">Expected columns: period, revenue, income. Additional columns are ignored.</div>
+          <input id="salesCsvInput" type="file" accept=".csv,text/csv">
+        </div>
+        <div class="upload-zone">
+          <div class="section-title" style="margin-bottom:10px;">Upload Dataset JSON</div>
+          <div class="upload-hint">Expected structure: keys like monthly, by_area, year_summary, seasonality, top_products.</div>
+          <input id="datasetJsonInput" type="file" accept=".json,application/json">
+        </div>
+      </div>
+
+      <div class="chart-card" style="margin-top:14px;">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title">Upload Status</div>
+            <div class="chart-subtitle">File validation and import feedback</div>
+          </div>
+        </div>
+        <div id="uploadLog" class="upload-log">No file uploaded yet.</div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</main>
+
+";
