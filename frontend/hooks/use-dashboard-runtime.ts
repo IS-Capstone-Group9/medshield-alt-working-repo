@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import Chart from 'chart.js/auto'
-import { MEDSHIELD_MARKUP } from '@/lib/medshieldReference'
+import { MEDSHIELD_MARKUP, MEDSHIELD_STYLE } from '@/lib/medshieldReference'
 import {
   getExecutableDashboardScript,
   runDashboardScript,
@@ -26,6 +26,11 @@ export function useDashboardRuntime(onLogout: () => Promise<void>) {
 
     let disposed = false
     let activeListeners: ListenerRecord[] = []
+
+    const styleEl = document.createElement('style')
+    styleEl.id = 'medshield-dashboard-styles'
+    styleEl.textContent = MEDSHIELD_STYLE
+    document.head.appendChild(styleEl)
 
     root.innerHTML = MEDSHIELD_MARKUP;
     (window as any).Chart = Chart;
@@ -72,6 +77,7 @@ export function useDashboardRuntime(onLogout: () => Promise<void>) {
         target.removeEventListener(type, listener, options)
       }
       root.innerHTML = ''
+      document.getElementById('medshield-dashboard-styles')?.remove()
       
       const handlers = [
         'showPage', 'toggleTheme', 'openHelp', 'closeNavigation', 'toggleNavigation',
