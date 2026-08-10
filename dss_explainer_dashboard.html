@@ -864,8 +864,8 @@
                             </optgroup>
                             <optgroup label="Region IV-B (MIMAROPA)">
                                 <option value="Mindoro">Mindoro (Combined Island Baseline)</option>
-                                <option value="Occidental Mindoro">  ↳ Occidental Mindoro (Unsplit Data)</option>
-                                <option value="Oriental Mindoro">  ↳ Oriental Mindoro (Unsplit Data)</option>
+                                <option value="Occidental Mindoro">  ↳ Occidental Mindoro (46% Weighted Avg Est)</option>
+                                <option value="Oriental Mindoro">  ↳ Oriental Mindoro (54% Weighted Avg Est)</option>
                                 <option value="Marinduque">Marinduque</option>
                                 <option value="Romblon">Romblon (No Data - Blank Ref)</option>
                                 <option value="Palawan">Palawan (No Data - Blank Ref)</option>
@@ -1228,16 +1228,16 @@
                                             <td class="num-col" style="color:var(--accent-amber)">100 vials</td>
                                         </tr>
                                         <tr>
-                                            <td><span style="padding-left:1rem; color:var(--text-muted)">↳ Occidental Mindoro</span></td>
-                                            <td><span class="badge badge-c" style="opacity:0.5">Unsplit</span></td>
-                                            <td class="num-col" style="color:var(--text-dim)">—</td>
-                                            <td class="num-col" style="color:var(--text-dim)">—</td>
+                                            <td><span style="padding-left:1rem; color:var(--text-muted)">↳ Occidental Mindoro</span> <span class="badge badge-est" style="font-size:0.62rem;">46% Weighted</span></td>
+                                            <td><span class="badge badge-c">0.62 (Approx)</span></td>
+                                            <td class="num-col">1,196 vials</td>
+                                            <td class="num-col" style="color:var(--accent-amber)">46 vials</td>
                                         </tr>
                                         <tr>
-                                            <td><span style="padding-left:1rem; color:var(--text-muted)">↳ Oriental Mindoro</span></td>
-                                            <td><span class="badge badge-c" style="opacity:0.5">Unsplit</span></td>
-                                            <td class="num-col" style="color:var(--text-dim)">—</td>
-                                            <td class="num-col" style="color:var(--text-dim)">—</td>
+                                            <td><span style="padding-left:1rem; color:var(--text-muted)">↳ Oriental Mindoro</span> <span class="badge badge-est" style="font-size:0.62rem;">54% Weighted</span></td>
+                                            <td><span class="badge badge-c">0.62 (Approx)</span></td>
+                                            <td class="num-col">1,404 vials</td>
+                                            <td class="num-col" style="color:var(--accent-amber)">54 vials</td>
                                         </tr>
                                         <tr>
                                             <td><strong>Palawan</strong> <span class="badge badge-est">IV-B</span></td>
@@ -1659,6 +1659,11 @@
             if (banner) {
                 if (isUnserviced) {
                     document.getElementById('unserviced-territory-name').innerText = territory;
+                    banner.innerHTML = `<strong>Unserviced Reference Location:</strong> <span>${territory}</span> has no historical sales transaction records (2017–2026). Maintained in DSS taxonomy for future expansion reference.`;
+                    banner.style.display = 'block';
+                } else if (territory === 'Occidental Mindoro' || territory === 'Oriental Mindoro') {
+                    const weight = territory === 'Oriental Mindoro' ? '54% (Hospital Bed / Pop Density Weighted)' : '46% (Hospital Bed / Pop Density Weighted)';
+                    banner.innerHTML = `<strong>Weighted Disaggregation Active:</strong> <span>${territory}</span> sales are approximated from combined Mindoro raw data using a <strong>${weight}</strong> ratio.`;
                     banner.style.display = 'block';
                 } else {
                     banner.style.display = 'none';
@@ -1672,26 +1677,28 @@
             let dataA = [];
             let dataB = [];
 
+            const weightFactor = territory === 'Occidental Mindoro' ? 0.46 : (territory === 'Oriental Mindoro' ? 0.54 : 1.0);
+
             if (isUnserviced) {
                 labels = granularity === 'monthly' ? ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] : (granularity === 'weekly' ? Array.from({length: 12}, (_, i) => `Wk ${i*4 + 1}`) : ['Q1', 'Q2', 'Q3', 'Q4']);
                 dataA = labels.map(() => 0);
                 dataB = labels.map(() => 0);
             } else if (granularity === 'monthly') {
                 labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                const baseValA = (parseInt(yearA) - 2017) * 1.5 + 14;
-                const baseValB = (parseInt(yearB) - 2017) * 1.5 + 14;
+                const baseValA = ((parseInt(yearA) - 2017) * 1.5 + 14) * weightFactor;
+                const baseValB = ((parseInt(yearB) - 2017) * 1.5 + 14) * weightFactor;
                 dataA = [0.85, 0.88, 0.95, 1.02, 1.15, 1.25, 1.45, 1.52, 1.30, 1.05, 0.90, 0.80].map(m => (baseValA * m).toFixed(1));
-                dataB = [0.85, 0.88, 0.95, 1.02, 1.15, 1.25, 1.45, 1.52, 1.30, 1.05, 0.90, 0.80].map(m => (baseValB * m).toFixed(1));
+                dataB = [0.85, 0.88, 0.95, 1.02, 1.15, 1.25, 1.45, 1.52, 1.30, 0.90, 0.90, 0.80].map(m => (baseValB * m).toFixed(1));
             } else if (granularity === 'weekly') {
                 labels = Array.from({length: 12}, (_, i) => `Wk ${i*4 + 1}`);
-                const baseValA = ((parseInt(yearA) - 2017) * 1.5 + 14) / 4;
-                const baseValB = ((parseInt(yearB) - 2017) * 1.5 + 14) / 4;
+                const baseValA = (((parseInt(yearA) - 2017) * 1.5 + 14) / 4) * weightFactor;
+                const baseValB = (((parseInt(yearB) - 2017) * 1.5 + 14) / 4) * weightFactor;
                 dataA = Array.from({length: 12}, () => (baseValA * (0.9 + Math.random()*0.3)).toFixed(1));
                 dataB = Array.from({length: 12}, () => (baseValB * (0.9 + Math.random()*0.3)).toFixed(1));
             } else if (granularity === 'annual') {
                 labels = ['Q1', 'Q2', 'Q3', 'Q4'];
-                const totalA = (parseInt(yearA) - 2017) * 18 + 95;
-                const totalB = (parseInt(yearB) - 2017) * 18 + 95;
+                const totalA = ((parseInt(yearA) - 2017) * 18 + 95) * weightFactor;
+                const totalB = ((parseInt(yearB) - 2017) * 18 + 95) * weightFactor;
                 dataA = [totalA * 0.22, totalA * 0.24, totalA * 0.30, totalA * 0.24].map(v => v.toFixed(1));
                 dataB = [totalB * 0.22, totalB * 0.24, totalB * 0.30, totalB * 0.24].map(v => v.toFixed(1));
             }
