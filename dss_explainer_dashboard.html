@@ -804,13 +804,24 @@
             <div class="grid-equal-2">
                 <div class="card">
                     <div class="card-header">
-                        <span class="card-title">Pareto ABC Revenue Contribution Mix (2026 Baseline)</span>
-                        <span class="badge badge-a">North Star 4A</span>
+                        <span class="card-title">Pareto 80/20 Cumulative Revenue Distribution (Top SKUs)</span>
+                        <span class="badge badge-a">North Star 4A: Descriptive</span>
+                    </div>
+                    <div class="chart-wrapper" style="height:260px;">
+                        <canvas id="paretoDualAxisChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Pareto ABC Revenue Category Breakdown</span>
+                        <span class="badge badge-b">Portfolio Mix</span>
                     </div>
                     <div class="chart-wrapper" style="height:260px;">
                         <canvas id="paretoChart"></canvas>
                     </div>
                 </div>
+            </div>
 
                 <div class="card">
                     <div class="card-header">
@@ -1676,9 +1687,80 @@
         }
 
         // Global Chart Instances
-        let paretoChart, regionalLeaderboardChart;
+        let paretoChart, regionalLeaderboardChart, paretoDualAxisChart;
 
         function initExecutiveCharts() {
+            // Dual-Axis Pareto 80/20 Bar + Cumulative Percentage Line Chart
+            const ctxDual = document.getElementById('paretoDualAxisChart').getContext('2d');
+            paretoDualAxisChart = new Chart(ctxDual, {
+                type: 'bar',
+                data: {
+                    labels: ['Monowel 1G', 'Paracetamol', 'Amoxicillin', 'Speeda Vaccine', 'Cefuroxime', 'IV Fluids', 'Dexamethasone', 'Other C Class'],
+                    datasets: [
+                        {
+                            type: 'bar',
+                            label: 'SKU Revenue (₱M)',
+                            data: [42.5, 38.2, 28.6, 18.4, 14.2, 12.1, 8.5, 12.3],
+                            backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                            borderColor: '#3b82f6',
+                            borderWidth: 1,
+                            yAxisID: 'y'
+                        },
+                        {
+                            type: 'line',
+                            label: 'Cumulative Revenue %',
+                            data: [24.3, 46.2, 62.5, 73.0, 81.1, 88.0, 92.9, 100.0],
+                            borderColor: '#10b981',
+                            backgroundColor: '#10b981',
+                            borderWidth: 2,
+                            pointRadius: 4,
+                            pointHoverRadius: 6,
+                            fill: false,
+                            tension: 0.2,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: '#9ca3af', font: { family: 'Inter', size: 10 } } },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    if (context.dataset.type === 'line') {
+                                        return context.dataset.label + ': ' + context.parsed.y + '%';
+                                    }
+                                    return context.dataset.label + ': ₱' + context.parsed.y + 'M';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#9ca3af', font: { size: 9 } } },
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: { display: true, text: 'Revenue (₱M)', color: '#9ca3af', font: { size: 10 } },
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                            ticks: { color: '#9ca3af' }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            min: 0,
+                            max: 100,
+                            title: { display: true, text: 'Cumulative %', color: '#10b981', font: { size: 10 } },
+                            grid: { drawOnChartArea: false },
+                            ticks: { color: '#10b981', callback: value => value + '%' }
+                        }
+                    }
+                }
+            });
+
             // Pareto ABC Revenue Doughnut Chart
             // Pareto ABC Revenue Doughnut Chart (80/15/5 Capstone Ratio Alignment)
             const ctxP = document.getElementById('paretoChart').getContext('2d');
