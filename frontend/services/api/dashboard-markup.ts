@@ -1,5 +1,5 @@
 export const SALES_DATA_NAV_ITEM = `
-  <div class="nav-item" id="salesDataNavItem" data-tooltip="View Sales Data" aria-label="View Sales Data" role="button" tabindex="0">
+  <div class="nav-item" id="salesDataNavItem" aria-label="View Sales Data" role="button" tabindex="0">
     <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <path d="M4 5h16v14H4z"/><path d="M4 10h16M9 5v14"/>
     </svg>
@@ -8,7 +8,7 @@ export const SALES_DATA_NAV_ITEM = `
 `
 
 export const WEATHER_VALIDATION_NAV_ITEM = `
-  <div class="nav-item" id="weatherValidationNavItem" data-tooltip="Weather API Validation" aria-label="Weather API Validation" role="button" tabindex="0">
+  <div class="nav-item" id="weatherValidationNavItem" aria-label="Weather API Validation" role="button" tabindex="0">
     <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <path d="M4 14a8 8 0 0 1 16 0"/><path d="M7 14h10"/><path d="M8 18h8"/><path d="M12 6v3"/>
     </svg>
