@@ -11,12 +11,16 @@ import { renderSalesPage, setSalesViewError } from './sales-page-helpers'
 import { renderWeatherEffects } from './weather-view-helpers'
 
 export function installCommonInteractions(root: HTMLElement) {
-  const backdrop = root.querySelector('#dashboardHelpBackdrop')
+  const backdrop = root.querySelector<HTMLElement>('#dashboardHelpBackdrop') || root.querySelector<HTMLElement>('#helpGuidanceModal')
   root.querySelector('#closeDashboardHelpButton')?.addEventListener('click', () => {
     backdrop?.classList.remove('is-open')
+    if (backdrop) backdrop.style.display = 'none'
   })
   backdrop?.addEventListener('click', (e) => {
-    if (e.target === e.currentTarget) backdrop?.classList.remove('is-open')
+    if (e.target === e.currentTarget) {
+      backdrop.classList.remove('is-open')
+      backdrop.style.display = 'none'
+    }
   })
 }
 

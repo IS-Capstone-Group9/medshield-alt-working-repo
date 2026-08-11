@@ -1,0 +1,92 @@
+{
+  "model_code": "PHASE4_DISEASE_ADJUSTED",
+  "model_version": "1.0.0",
+  "status": "validated",
+  "layer": "Predictive",
+  "train_period": "2021-03 to 2024-12",
+  "eval_period": "2025-02 to 2025-12",
+  "data_sources": [
+    "MedShield Internal Sales 2021-2025",
+    "DOH PIDSR Weekly Disease Reports 2021-2025 (Dengue, Leptospirosis, ILI, Typhoid, ABD)"
+  ],
+  "models": [
+    {
+      "model": "Seasonal Naive Benchmark (BASE_LAG_V1)",
+      "mae": 49526.9,
+      "rmse": 64285.4,
+      "mape": 950.7,
+      "status": "benchmark"
+    },
+    {
+      "model": "GBR + Disease Signals (GBR_DISEASE_V1)",
+      "mae": 48970.9,
+      "rmse": 64915.0,
+      "mape": 1247.3,
+      "status": "challenger"
+    },
+    {
+      "model": "Ridge + Disease Signals (RIDGE_DISEASE_V1)",
+      "mae": 52773.6,
+      "rmse": 69645.8,
+      "mape": 1345.68,
+      "status": "interpretable"
+    }
+  ],
+  "champion": "GBR + Disease Signals (GBR_DISEASE_V1)",
+  "disease_correlations": {
+    "dengue_cases": -0.0572,
+    "leptospirosis_cases": 0.0871,
+    "ili_cases": 0.0704,
+    "typhoid_cases": 0.0701,
+    "abd_cases": 0.0637
+  },
+  "feature_importance_top10": [
+    {
+      "feature": "demand_lag1",
+      "importance": 0.27390677666309143
+    },
+    {
+      "feature": "abd_cases_norm",
+      "importance": 0.1439244673352896
+    },
+    {
+      "feature": "disease_lag1",
+      "importance": 0.11618653675148789
+    },
+    {
+      "feature": "demand_lag2",
+      "importance": 0.08353052883950077
+    },
+    {
+      "feature": "disease_intensity_index",
+      "importance": 0.07080376293875563
+    },
+    {
+      "feature": "season_pre_monsoon",
+      "importance": 0.06758869523369326
+    },
+    {
+      "feature": "month_cos",
+      "importance": 0.06319712626314901
+    },
+    {
+      "feature": "typhoid_cases_norm",
+      "importance": 0.060263255642721905
+    },
+    {
+      "feature": "leptospirosis_cases_norm",
+      "importance": 0.04224778582947994
+    },
+    {
+      "feature": "ili_cases_norm",
+      "importance": 0.04218503047029527
+    }
+  ],
+  "mape_improvement_vs_naive_pct": -296.6,
+  "label": "VALIDATED - Historical disease-adjusted model. Not live outbreak surveillance.",
+  "limitations": [
+    "Disease data is weekly PIDSR aggregated to monthly national totals — not territory-level.",
+    "Weather signals are proxy (NASA POWER) — PAGASA official records used as fallback reference.",
+    "2025 holdout is partial — only months present in dataset used for evaluation."
+  ]
+}

@@ -19,6 +19,18 @@ const DASHBOARD_GLOBAL_HANDLERS = [
   'refreshComparison',
   'applyDatasetPatch',
   'buildCharts',
+  'downloadTableAsCSV',
+  'removeBadge',
+  'exportRestockPlanToCsv',
+  'selectSeasonRestock',
+  'openEoqModal',
+  'closeAuditModal',
+  'closeEoqModal',
+  'confirmAndExecuteOrder',
+  'executeEoqReorder',
+  'recalibrateModelSafetyBuffers',
+  'updateMcdaWeights',
+  'updateSurgeScenario',
 ] as const
 
 export function getExecutableDashboardScript(): string {
@@ -27,7 +39,7 @@ export function getExecutableDashboardScript(): string {
     .join('\n')
 
   let patchedScript = MEDSHIELD_SCRIPT
-    .replace("window.addEventListener('DOMContentLoaded', async () => {", '(async () => {')
+    .replace("window.addEventListener('DOMContentLoaded', async () => {", `(async () => {\n${globalHandlerBridge}\n`)
     .replaceAll("'#335F78'", "dashboardThemeColor('--chart-label', '#335F78')")
     .replaceAll("'#67879A'", "dashboardThemeColor('--chart-muted', '#67879A')")
     .replaceAll("'rgba(201,219,229,0.65)'", "dashboardThemeColor('--chart-grid', 'rgba(201,219,229,0.65)')")

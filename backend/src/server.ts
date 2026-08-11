@@ -4,6 +4,7 @@ import { appendFile, readFile } from 'node:fs/promises'
 import { config as loadDotenv } from 'dotenv'
 import cors from 'cors'
 import express, { NextFunction, Request, Response } from 'express'
+import rateLimit from 'express-rate-limit'
 
 import { createLocalAccount, verifyLocalLogin } from './localAuth'
 import { startPythonServices } from './pythonServices'
@@ -40,6 +41,16 @@ const productServiceUrl = (process.env.PRODUCT_SERVICE_URL ?? 'http://localhost:
 
 app.use(cors())
 app.use(express.json())
+
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+  message: 'Too many requests from this IP, please try again after 15 minutes',
+  standardHeaders: true,
+  legacyHeaders: false,
+})
+
+app.use(apiLimiter)
 
 let authFallbackWarningShown = false
 
