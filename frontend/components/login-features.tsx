@@ -1,29 +1,46 @@
+import { BarChart3, TrendingUp, Sparkles } from 'lucide-react'
+
 export function LoginFeatures() {
   const items = [
     {
-      title: 'Descriptive Analytics',
-      desc: 'Real-time sales aggregation and Pareto ranking across client networks.',
+      icon: BarChart3,
+      title: 'Descriptive Intelligence',
+      desc: 'Multi-year (2017–2025) sales ledger with ABC/Pareto categorization across regional distribution networks.',
+      tag: 'Multi-Year ERP',
     },
     {
-      title: 'Predictive Modeling',
-      desc: 'Prophet 2026 demand forecasting using DOH surveillance and PAGASA climate parameters.',
+      icon: TrendingUp,
+      title: 'Epidemiological Demand Forecasting',
+      desc: 'Prophet time-series models augmented with DOH disease incidence and PAGASA rainfall anomalies.',
+      tag: 'Prophet + Climate',
     },
     {
-      title: 'Prescriptive Planning',
-      desc: 'Adaptive safety stock buffers and MCDA prioritization using WHO therapeutic mappings.',
+      icon: Sparkles,
+      title: 'Prescriptive MCDA & Dynamic EOQ',
+      desc: 'Real-time multi-criteria sensitivity ranking and climate-calibrated emergency safety stock reordering.',
+      tag: 'Live Sensitivity',
     },
   ]
 
   return (
-    <ul style={{ listStyleType: 'none', padding: 0, margin: 0, display: 'grid', gap: '12px' }}>
-      {items.map((item, idx) => (
-        <li key={idx} style={{ display: 'flex', gap: '8px', alignItems: 'flex-start', fontSize: '13px', color: '#E2E8F0', lineHeight: 1.4 }}>
-          <span style={{ color: '#38BDF8', fontWeight: 'bold' }}>✓</span>
-          <span>
-            <strong>{item.title}:</strong> {item.desc}
-          </span>
-        </li>
-      ))}
-    </ul>
+    <div className="login-feature-list">
+      {items.map((item, idx) => {
+        const Icon = item.icon
+        return (
+          <div key={idx} className="login-feature-card">
+            <div className="login-feature-icon-wrap">
+              <Icon size={18} />
+            </div>
+            <div className="login-feature-content">
+              <div className="login-feature-header">
+                <span className="login-feature-title">{item.title}</span>
+                <span className="login-feature-tag">{item.tag}</span>
+              </div>
+              <p className="login-feature-desc">{item.desc}</p>
+            </div>
+          </div>
+        )
+      })}
+    </div>
   )
 }
