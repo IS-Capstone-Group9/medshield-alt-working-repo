@@ -685,10 +685,11 @@
         </div>
 
         <nav>
-            <button class="nav-btn active" onclick="switchTab('exec-hub')">📊 Executive Overview</button>
-            <button class="nav-btn" onclick="switchTab('diagnostics')">🔍 Diagnostics & Rank</button>
-            <button class="nav-btn" onclick="switchTab('planning')">⚙️ Prescriptive Planning</button>
-            <button class="nav-btn" onclick="switchTab('audit')">🛡️ Audit & Ops</button>
+            <button class="nav-btn active" onclick="switchTab('mod1-home')">🏠 Module 1: Home & Nav</button>
+            <button class="nav-btn" onclick="switchTab('mod2-sales-diag')">🔍 Module 2: Sales Diagnostic</button>
+            <button class="nav-btn" onclick="switchTab('mod3-product-area')">🎯 Module 3: Prioritization</button>
+            <button class="nav-btn" onclick="switchTab('mod4-forecast')">📈 Module 4: Forecast Modeling</button>
+            <button class="nav-btn" onclick="switchTab('mod5-prescriptive')">⚙️ Module 5: Planning & Uploads</button>
         </nav>
 
         <div class="header-meta">
@@ -706,6 +707,81 @@
         </div>
     </header>
 
+    <!-- Immediate Assignment & Objective-to-Solution Banner -->
+    <div class="assignment-banner-container" style="padding: 1rem 2rem 0 2rem;">
+        <div class="card" style="border: 1px solid rgba(59, 130, 246, 0.4); background: linear-gradient(135deg, rgba(17, 24, 39, 0.95), rgba(30, 58, 138, 0.3)); shadow: var(--shadow-card);">
+            <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="toggleAssignmentDetails()">
+                <div style="display:flex; align-items:center; gap:0.75rem;">
+                    <span style="font-size:1.4rem;">📋</span>
+                    <div>
+                        <strong style="color:var(--text-main); font-size:1.05rem;">Capstone 2 Meeting Preparation & Objective-to-Solution Mapping</strong>
+                        <div style="font-size:0.8rem; color:var(--text-muted)">Group 9 — MedShield Pharmaceutical Corporation Decision Support System</div>
+                    </div>
+                </div>
+                <div style="display:flex; align-items:center; gap:0.5rem;">
+                    <span class="badge badge-a">Manuscript Section 3.8 Alignment</span>
+                    <button class="btn-sm btn-outline" id="btn-toggle-assignment">Hide Details ▲</button>
+                </div>
+            </div>
+            
+            <div id="assignment-details-content" style="margin-top: 1rem; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+                <div class="grid-equal-2" style="margin-bottom: 1rem;">
+                    <div style="background: var(--bg-surface-elevated); padding: 0.85rem 1rem; border-radius: var(--radius-md); border-left: 4px solid var(--accent-teal);">
+                        <strong style="color:var(--accent-teal); font-size:0.88rem;">1. Immediate LMS Submissions Checklist</strong>
+                        <ul style="font-size:0.82rem; color:var(--text-main); margin-top:0.35rem; padding-left:1.2rem;">
+                            <li><strong>Updated Revised Manuscript:</strong> Upload latest post-defense Capstone 1 paper containing all adviser/panel revisions.</li>
+                            <li><strong>Panel Approval Form:</strong> Attach signed approval document/sheet from panel members.</li>
+                        </ul>
+                    </div>
+                    <div style="background: var(--bg-surface-elevated); padding: 0.85rem 1rem; border-radius: var(--radius-md); border-left: 4px solid var(--accent-purple);">
+                        <strong style="color:var(--accent-purple); font-size:0.88rem;">2. Prototype Section 3.8 Walkthrough Modules</strong>
+                        <div style="font-size:0.82rem; color:var(--text-main); margin-top:0.35rem;">
+                            <strong>Module 1:</strong> Home Page & Nav (Fig 3.11–3.18) | <strong>Module 2:</strong> Sales Diagnostic (Fig 3.19–3.22)<br>
+                            <strong>Module 3:</strong> Prioritization (Fig 3.24–3.35) | <strong>Module 4:</strong> Forecast Modeling (Fig 3.36–3.41)<br>
+                            <strong>Module 5:</strong> Prescriptive Planning & Uploads (Fig 3.42–3.48)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Objective-to-Solution Mapping Table -->
+                <div style="background: var(--bg-base); padding: 0.75rem; border-radius: var(--radius-md);">
+                    <strong style="color:var(--primary); font-size:0.88rem; display:block; margin-bottom:0.5rem;">Objective-to-Solution Analytics Mapping</strong>
+                    <table class="data-table" style="font-size:0.8rem;">
+                        <thead>
+                            <tr style="background: var(--bg-surface-elevated);">
+                                <th>Objective / Phase</th>
+                                <th>Target Outcome</th>
+                                <th>Proposed Solution / Analytics Technique</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Sales Diagnostic</strong></td>
+                                <td>Analyze 2021–2025 sales performance baseline across territories</td>
+                                <td><span class="badge badge-a">STL Decomposition</span> (descriptive layer)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Product & Area Prioritization</strong></td>
+                                <td>Identify key revenue drivers, client accounts, and slow movers</td>
+                                <td><span class="badge badge-a">80/20 Analysis</span> (descriptive) & <span class="badge badge-b">XGBoost ABC Classifier</span> (predictive)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Demand Forecasting</strong></td>
+                                <td>Forecast territory-level pharmaceutical demand & urgency scoring</td>
+                                <td><span class="badge badge-b">Facebook Prophet</span> with DII & RSI external regressors + <span class="badge badge-b">XGBoost Urgency Scoring</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Prescriptive Planning</strong></td>
+                                <td>Optimize procurement & allocation (target expiry wastage &le; 5%)</td>
+                                <td><span class="badge badge-urgent">EOQ</span>, <span class="badge badge-urgent">ROP</span>, <span class="badge badge-urgent">Safety Stock</span>, <span class="badge badge-urgent">MCDA</span>, and <span class="badge badge-urgent">Linear Programming Allocation</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Global Active Environmental Alert Banner -->
     <div class="alert-banner-container">
         <div class="alert-banner" id="global-alert-banner">
@@ -717,7 +793,7 @@
                 </div>
             </div>
             <div class="alert-actions">
-                <button class="btn-sm btn-outline" onclick="switchTab('planning')">View Prescriptive Allocations</button>
+                <button class="btn-sm btn-outline" onclick="switchTab('mod5-prescriptive')">View Prescriptive Allocations</button>
                 <button class="btn-sm btn-primary" onclick="simulateAlertOverride()">Simulate Outbreak Surge</button>
             </div>
         </div>
@@ -726,8 +802,8 @@
     <!-- MAIN CONTENT AREA -->
     <main>
 
-        <!-- PAGE 1: EXECUTIVE OVERVIEW HUB -->
-        <div id="exec-hub" class="page-view active">
+        <!-- MODULE 1: HOME PAGE & NAVIGATION (Figures 3.11–3.18) -->
+        <div id="mod1-home" class="page-view active">
             <!-- Strategic KPI Cards -->
             <div class="grid-kpi">
                 <div class="card">
@@ -767,76 +843,45 @@
                 </div>
             </div>
 
-            <!-- Main Forecast Trend Chart & Summary Split -->
+            <!-- Executive Hub Navigation & Quick Launch Grid -->
             <div class="grid-2col">
-                <div class="card">
-                    <div class="card-header">
-                        <span class="card-title">Prophet Demand Forecast Transition & Confidence Limits (2017–2027)</span>
-                        <span class="badge badge-b">Model: Prophet + External Regressors</span>
-                    </div>
-                    <div class="chart-wrapper">
-                        <canvas id="prophetForecastChart"></canvas>
-                    </div>
-                    <div class="disclaimer-box">
-                        <strong>Disclaimer:</strong> Environmental factors sourced from historical DOH epidemiological signals and provider-derived weather proxies. Predictions frame uncertainty bounds to avoid absolute certainty assumptions.
-                    </div>
-                </div>
-
                 <div class="card" style="gap:1rem;">
                     <div class="card-header">
-                        <span class="card-title">Executive Summary & Priorities</span>
+                        <span class="card-title">Executive Summary & DSS System Status</span>
+                        <span class="badge badge-a">Operational Status</span>
                     </div>
                     
                     <div style="font-size:0.85rem; color:var(--text-muted); display:flex; flex-direction:column; gap:0.75rem;">
-                        <p><strong>1. Demand Surge Alignment:</strong> Third quarter forecasts indicate a <strong>28% peak surge</strong> in antibiotic and IV solution requirements across Southern Luzon due to dengue seasonality triggers.</p>
-                        <p><strong>2. Capital Efficiency:</strong> Economic Order Quantity (EOQ) optimization recommends an aggregate procurement spend of <strong>₱42.1M</strong>, achieving minimum holding/ordering total costs.</p>
-                        <p><strong>3. Dead Stock Prevention:</strong> Stop-Purchasing triggers are active on 14 Class C items with zero trailing 6-month transaction velocity.</p>
+                        <p><strong>1. Seasonal Peak Alignment:</strong> Q3 forecasts indicate a <strong>28% demand surge</strong> in antibiotics and IV solutions across Southern Luzon driven by dengue seasonality triggers.</p>
+                        <p><strong>2. Capital Optimization:</strong> EOQ reorder models minimize holding and stockout costs with a calculated spend ceiling of <strong>₱42.1M</strong>.</p>
+                        <p><strong>3. Expiry Wastage Control:</strong> Linear Programming stock allocation enforces strict inventory cap constraints targeting <strong>expiry wastage &le; 5%</strong>.</p>
+                        <p><strong>4. Dead Stock Isolation:</strong> Automatic stop-purchasing flags active on 14 Class C SKUs with zero trailing 6-month transaction velocity.</p>
                     </div>
 
                     <div class="constraint-panel">
-                        <strong>LP Binding Constraint Status:</strong><br>
-                        Current budget ceiling: ₱50.0M. Priority allocation logic actively weighted by MCDA Regional Risk Scores.
-                    </div>
-                </div>
-            </div>
-
-            <!-- Additional Strategic Business Visualizations -->
-            <div class="grid-equal-2">
-                <div class="card">
-                    <div class="card-header">
-                        <span class="card-title">Pareto 80/20 Cumulative Revenue Distribution (Top SKUs)</span>
-                        <span class="badge badge-a">North Star 4A: Descriptive</span>
-                    </div>
-                    <div class="chart-wrapper" style="height:260px;">
-                        <canvas id="paretoDualAxisChart"></canvas>
+                        <strong>LP Binding Constraint Ceiling:</strong><br>
+                        Active allocation budget ceiling: ₱50.0M. Allocation weighted dynamically by MCDA Regional Risk Scores.
                     </div>
                 </div>
 
                 <div class="card">
                     <div class="card-header">
-                        <span class="card-title">Pareto ABC Revenue Category Breakdown</span>
-                        <span class="badge badge-b">Portfolio Mix</span>
+                        <span class="card-title">Module Walkthrough Quick Navigation</span>
+                        <span class="badge badge-b">Section 3.8 Modules</span>
                     </div>
-                    <div class="chart-wrapper" style="height:260px;">
-                        <canvas id="paretoChart"></canvas>
-                    </div>
-                </div>
-            </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <span class="card-title">Regional Revenue & Gross Profit Margin Leaderboard</span>
-                        <span class="badge badge-b">Descriptive Analytics</span>
-                    </div>
-                    <div class="chart-wrapper" style="height:260px;">
-                        <canvas id="regionalLeaderboardChart"></canvas>
+                    <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.75rem;">Jump directly to any of the 5 decision support modules:</p>
+                    <div style="display:flex; flex-direction:column; gap:0.6rem;">
+                        <button class="btn-sm btn-primary" style="justify-content:flex-start;" onclick="switchTab('mod2-sales-diag')">🔍 Module 2: Sales Diagnostic (STL & YoY Trends)</button>
+                        <button class="btn-sm btn-outline" style="justify-content:flex-start;" onclick="switchTab('mod3-product-area')">🎯 Module 3: Product & Area Prioritization (80/20 & XGBoost)</button>
+                        <button class="btn-sm btn-outline" style="justify-content:flex-start;" onclick="switchTab('mod4-forecast')">📈 Module 4: Forecast Modeling (Prophet & Urgency Scores)</button>
+                        <button class="btn-sm btn-outline" style="justify-content:flex-start;" onclick="switchTab('mod5-prescriptive')">⚙️ Module 5: Prescriptive Planning & Data Uploads (EOQ, ROP & LP)</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- PAGE 2: DIAGNOSTICS & PRIORITIZATION -->
-        <div id="diagnostics" class="page-view">
+        <!-- MODULE 2: SALES DIAGNOSTIC MODULE (Figures 3.19–3.22) -->
+        <div id="mod2-sales-diag" class="page-view">
             <div class="grid-sidebar">
                 <!-- Diagnostic Sidebar Filters -->
                 <div class="filter-panel">
@@ -947,130 +992,66 @@
 
                 <!-- Main Diagnostic Panels -->
                 <div style="display:flex; flex-direction:column; gap:1.5rem;">
-                    <!-- Product Urgency Table -->
                     <div class="card">
                         <div class="card-header">
-                            <span class="card-title">XGBoost Product Demand Urgency Ranks & ABC Classification</span>
-                            <span class="badge badge-a">Machine Learning Scored</span>
+                            <span class="card-title" id="yoy-chart-title">YoY Comparative Performance (2025 vs 2026)</span>
+                            <span class="badge badge-a" id="yoy-granularity-badge">Monthly Granularity</span>
                         </div>
-                        <div class="table-container">
-                            <table class="data-table" id="urgency-table">
-                                <thead>
-                                    <tr>
-                                        <th>Product SKU / Description</th>
-                                        <th>Category</th>
-                                        <th>ABC Band</th>
-                                        <th>Urgency Score</th>
-                                        <th class="num-col">2026 Hist Sales</th>
-                                        <th class="num-col">2027 Forecast Demand</th>
-                                        <th>Allocation Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><strong>MONOWEL 1G IV</strong><br><span style="font-size:0.7rem; color:var(--text-dim)">Antibiotics</span></td>
-                                        <td>Medicine</td>
-                                        <td><span class="badge badge-a">Class A</span></td>
-                                        <td><span class="badge badge-urgent">0.94 / 1.00</span></td>
-                                        <td class="num-col">13,200 vials</td>
-                                        <td class="num-col">15,400 vials</td>
-                                        <td><span class="badge badge-b">High Priority</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>PARACETAMOL 500MG</strong><br><span style="font-size:0.7rem; color:var(--text-dim)">Analgesics</span></td>
-                                        <td>Medicine</td>
-                                        <td><span class="badge badge-a">Class A</span></td>
-                                        <td><span class="badge badge-urgent">0.88 / 1.00</span></td>
-                                        <td class="num-col">48,500 boxes</td>
-                                        <td class="num-col">55,100 boxes</td>
-                                        <td><span class="badge badge-b">High Priority</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>PAGBILAO # CONTRACT ALLOC</strong><br><span style="font-size:0.7rem; color:var(--text-amber)">Backward Approx</span></td>
-                                        <td>Contract Mix</td>
-                                        <td><span class="badge badge-b">Class B</span></td>
-                                        <td>0.65 / 1.00</td>
-                                        <td class="num-col">₱ 14,800,000</td>
-                                        <td class="num-col">₱ 16,200,000</td>
-                                        <td><span class="badge badge-est">estimated_backward_allocation</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>OFFICE FOLDER A4</strong><br><span style="font-size:0.7rem; color:var(--text-dim)">Non-Medical</span></td>
-                                        <td>Operational</td>
-                                        <td><span class="badge badge-c">Class C</span></td>
-                                        <td>0.08 / 1.00</td>
-                                        <td class="num-col">150 packs</td>
-                                        <td class="num-col">120 packs</td>
-                                        <td><span class="badge badge-c">Stop Purchasing</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="chart-wrapper" style="height:260px;">
+                            <canvas id="yoyCompareChart"></canvas>
                         </div>
                     </div>
 
-                    <!-- Seasonality Index Heatmap & YoY Chart Grid (Full-Width Stack for Readability) -->
-                    <div style="display:flex; flex-direction:column; gap:1.5rem;">
-                        <div class="card">
-                            <div class="card-header">
-                                <span class="card-title" id="yoy-chart-title">YoY Comparative Performance (2025 vs 2026)</span>
-                                <span class="badge badge-a" id="yoy-granularity-badge">Monthly Granularity</span>
-                            </div>
-                            <div class="chart-wrapper" style="height:250px;">
-                                <canvas id="yoyCompareChart"></canvas>
-                            </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">STL Seasonality Index Heatmap</span>
+                            <span class="card-icon">🗓️</span>
                         </div>
+                        <p style="font-size:0.775rem; color:var(--text-muted);">Historical monthly multipliers (1.00 = baseline average demand via STL decomposition):</p>
+                        
+                        <div class="heatmap-container">
+                            <div class="heatmap-grid">
+                                <div class="heatmap-cell heatmap-header" style="justify-content:flex-start; font-weight:700; color:var(--text-main);">Category</div>
+                                <div class="heatmap-cell heatmap-header">Jan</div>
+                                <div class="heatmap-cell heatmap-header">Feb</div>
+                                <div class="heatmap-cell heatmap-header">Mar</div>
+                                <div class="heatmap-cell heatmap-header">Apr</div>
+                                <div class="heatmap-cell heatmap-header">May</div>
+                                <div class="heatmap-cell heatmap-header">Jun</div>
+                                <div class="heatmap-cell heatmap-header">Jul</div>
+                                <div class="heatmap-cell heatmap-header">Aug</div>
+                                <div class="heatmap-cell heatmap-header">Sep</div>
+                                <div class="heatmap-cell heatmap-header">Oct</div>
+                                <div class="heatmap-cell heatmap-header">Nov</div>
+                                <div class="heatmap-cell heatmap-header">Dec</div>
 
-                        <div class="card">
-                            <div class="card-header">
-                                <span class="card-title">STL Seasonality Index Heatmap</span>
-                                <span class="card-icon">🗓️</span>
-                            </div>
-                            <p style="font-size:0.775rem; color:var(--text-muted);">Historical monthly multipliers (1.00 = baseline average demand):</p>
-                            
-                            <div class="heatmap-container">
-                                <div class="heatmap-grid">
-                                    <div class="heatmap-cell heatmap-header" style="justify-content:flex-start; font-weight:700; color:var(--text-main);">Category</div>
-                                    <div class="heatmap-cell heatmap-header">Jan</div>
-                                    <div class="heatmap-cell heatmap-header">Feb</div>
-                                    <div class="heatmap-cell heatmap-header">Mar</div>
-                                    <div class="heatmap-cell heatmap-header">Apr</div>
-                                    <div class="heatmap-cell heatmap-header">May</div>
-                                    <div class="heatmap-cell heatmap-header">Jun</div>
-                                    <div class="heatmap-cell heatmap-header">Jul</div>
-                                    <div class="heatmap-cell heatmap-header">Aug</div>
-                                    <div class="heatmap-cell heatmap-header">Sep</div>
-                                    <div class="heatmap-cell heatmap-header">Oct</div>
-                                    <div class="heatmap-cell heatmap-header">Nov</div>
-                                    <div class="heatmap-cell heatmap-header">Dec</div>
+                                <div class="heatmap-cell heatmap-header" style="justify-content:flex-start; color:var(--text-main); font-weight:600;">Antibiotics</div>
+                                <div class="heatmap-cell heat-low">0.85</div>
+                                <div class="heatmap-cell heat-low">0.88</div>
+                                <div class="heatmap-cell heat-normal">0.95</div>
+                                <div class="heatmap-cell heat-normal">1.02</div>
+                                <div class="heatmap-cell heat-medium">1.15</div>
+                                <div class="heatmap-cell heat-medium">1.25</div>
+                                <div class="heatmap-cell heat-high">1.45</div>
+                                <div class="heatmap-cell heat-high">1.52</div>
+                                <div class="heatmap-cell heat-medium">1.30</div>
+                                <div class="heatmap-cell heat-normal">1.05</div>
+                                <div class="heatmap-cell heat-low">0.90</div>
+                                <div class="heatmap-cell heat-low">0.80</div>
 
-                                    <div class="heatmap-cell heatmap-header" style="justify-content:flex-start; color:var(--text-main); font-weight:600;">Antibiotics</div>
-                                    <div class="heatmap-cell heat-low">0.85</div>
-                                    <div class="heatmap-cell heat-low">0.88</div>
-                                    <div class="heatmap-cell heat-normal">0.95</div>
-                                    <div class="heatmap-cell heat-normal">1.02</div>
-                                    <div class="heatmap-cell heat-medium">1.15</div>
-                                    <div class="heatmap-cell heat-medium">1.25</div>
-                                    <div class="heatmap-cell heat-high">1.45</div>
-                                    <div class="heatmap-cell heat-high">1.52</div>
-                                    <div class="heatmap-cell heat-medium">1.30</div>
-                                    <div class="heatmap-cell heat-normal">1.05</div>
-                                    <div class="heatmap-cell heat-low">0.90</div>
-                                    <div class="heatmap-cell heat-low">0.80</div>
-
-                                    <div class="heatmap-cell heatmap-header" style="justify-content:flex-start; color:var(--text-main); font-weight:600;">Analgesics</div>
-                                    <div class="heatmap-cell heat-normal">0.95</div>
-                                    <div class="heatmap-cell heat-normal">0.98</div>
-                                    <div class="heatmap-cell heat-normal">1.00</div>
-                                    <div class="heatmap-cell heat-normal">1.05</div>
-                                    <div class="heatmap-cell heat-medium">1.10</div>
-                                    <div class="heatmap-cell heat-medium">1.20</div>
-                                    <div class="heatmap-cell heat-high">1.38</div>
-                                    <div class="heatmap-cell heat-high">1.42</div>
-                                    <div class="heatmap-cell heat-medium">1.28</div>
-                                    <div class="heatmap-cell heat-normal">1.02</div>
-                                    <div class="heatmap-cell heat-normal">0.95</div>
-                                    <div class="heatmap-cell heat-normal">0.92</div>
-                                </div>
+                                <div class="heatmap-cell heatmap-header" style="justify-content:flex-start; color:var(--text-main); font-weight:600;">Analgesics</div>
+                                <div class="heatmap-cell heat-normal">0.95</div>
+                                <div class="heatmap-cell heat-normal">0.98</div>
+                                <div class="heatmap-cell heat-normal">1.00</div>
+                                <div class="heatmap-cell heat-normal">1.05</div>
+                                <div class="heatmap-cell heat-medium">1.10</div>
+                                <div class="heatmap-cell heat-medium">1.20</div>
+                                <div class="heatmap-cell heat-high">1.38</div>
+                                <div class="heatmap-cell heat-high">1.42</div>
+                                <div class="heatmap-cell heat-medium">1.28</div>
+                                <div class="heatmap-cell heat-normal">1.02</div>
+                                <div class="heatmap-cell heat-normal">0.95</div>
+                                <div class="heatmap-cell heat-normal">0.92</div>
                             </div>
                         </div>
                     </div>
@@ -1078,8 +1059,144 @@
             </div>
         </div>
 
-        <!-- PAGE 3: PRESCRIPTIVE PLANNING & SCENARIO ENGINE -->
-        <div id="planning" class="page-view">
+        <!-- MODULE 3: PRODUCT & AREA PRIORITIZATION MODULES (Figures 3.24–3.35) -->
+        <div id="mod3-product-area" class="page-view">
+            <div style="display:flex; flex-direction:column; gap:1.5rem;">
+                <div class="grid-equal-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">Pareto 80/20 Cumulative Revenue Distribution</span>
+                            <span class="badge badge-a">North Star 4A: Descriptive</span>
+                        </div>
+                        <div class="chart-wrapper" style="height:260px;">
+                            <canvas id="paretoDualAxisChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">Pareto ABC Portfolio Revenue Concentration</span>
+                            <span class="badge badge-b">Portfolio Mix</span>
+                        </div>
+                        <div class="chart-wrapper" style="height:260px;">
+                            <canvas id="paretoChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+                        <div>
+                            <span class="card-title">Regional Revenue & Gross Profit Margin Leaderboard</span>
+                            <span class="badge badge-b">Descriptive Analytics</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:0.5rem;">
+                            <label class="filter-label" style="margin:0; font-size:0.75rem; color:var(--text-muted);">Time Granularity:</label>
+                            <select class="select-input" id="prioritization-granularity" style="width:auto; padding:0.25rem 0.6rem; font-size:0.75rem;" onchange="updatePrioritizationGranularity()">
+                                <option value="monthly" selected>Monthly Aggregation</option>
+                                <option value="weekly">Weekly Aggregation</option>
+                                <option value="annual">Annual Aggregation</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper" style="height:260px;">
+                        <canvas id="regionalLeaderboardChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 4: FORECAST MODELING MODULE (Figures 3.36–3.41) -->
+        <div id="mod4-forecast" class="page-view">
+            <div style="display:flex; flex-direction:column; gap:1.5rem;">
+                <div class="card">
+                    <div class="card-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+                        <div>
+                            <span class="card-title">Facebook Prophet Demand Forecast Transition & Confidence Limits</span>
+                            <span class="badge badge-b" id="forecast-model-badge">Model: Prophet + External Regressors</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:0.5rem;">
+                            <label class="filter-label" style="margin:0; font-size:0.75rem; color:var(--text-muted);">Time Granularity:</label>
+                            <select class="select-input" id="forecast-granularity" style="width:auto; padding:0.25rem 0.6rem; font-size:0.75rem;" onchange="updateForecastGranularity()">
+                                <option value="monthly" selected>Monthly Aggregation</option>
+                                <option value="weekly">Weekly Aggregation</option>
+                                <option value="annual">Annual Aggregation</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper" style="height:320px;">
+                        <canvas id="prophetForecastChart"></canvas>
+                    </div>
+                    <div class="disclaimer-box" style="margin-top:0.75rem;">
+                        <strong>Disclaimer:</strong> Environmental factors sourced from historical DOH epidemiological signals and provider-derived weather proxies. Predictions frame uncertainty bounds to avoid absolute certainty assumptions.
+                    </div>
+                </div>
+
+                <!-- Product Urgency Table -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">XGBoost Product Demand Urgency Ranks & ABC Classification</span>
+                        <span class="badge badge-a">Machine Learning Scored</span>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table" id="urgency-table">
+                            <thead>
+                                <tr>
+                                    <th>Product SKU / Description</th>
+                                    <th>Category</th>
+                                    <th>ABC Band</th>
+                                    <th>Urgency Score</th>
+                                    <th class="num-col">2026 Hist Sales</th>
+                                    <th class="num-col">2027 Forecast Demand</th>
+                                    <th>Allocation Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>MONOWEL 1G IV</strong><br><span style="font-size:0.7rem; color:var(--text-dim)">Antibiotics</span></td>
+                                    <td>Medicine</td>
+                                    <td><span class="badge badge-a">Class A</span></td>
+                                    <td><span class="badge badge-urgent">0.94 / 1.00</span></td>
+                                    <td class="num-col">13,200 vials</td>
+                                    <td class="num-col">15,400 vials</td>
+                                    <td><span class="badge badge-b">High Priority</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>PARACETAMOL 500MG</strong><br><span style="font-size:0.7rem; color:var(--text-dim)">Analgesics</span></td>
+                                    <td>Medicine</td>
+                                    <td><span class="badge badge-a">Class A</span></td>
+                                    <td><span class="badge badge-urgent">0.88 / 1.00</span></td>
+                                    <td class="num-col">48,500 boxes</td>
+                                    <td class="num-col">55,100 boxes</td>
+                                    <td><span class="badge badge-b">High Priority</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>PAGBILAO # CONTRACT ALLOC</strong><br><span style="font-size:0.7rem; color:var(--text-amber)">Backward Approx</span></td>
+                                    <td>Contract Mix</td>
+                                    <td><span class="badge badge-b">Class B</span></td>
+                                    <td>0.65 / 1.00</td>
+                                    <td class="num-col">₱ 14,800,000</td>
+                                    <td class="num-col">₱ 16,200,000</td>
+                                    <td><span class="badge badge-est">estimated_backward_allocation</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>OFFICE FOLDER A4</strong><br><span style="font-size:0.7rem; color:var(--text-dim)">Non-Medical</span></td>
+                                    <td>Operational</td>
+                                    <td><span class="badge badge-c">Class C</span></td>
+                                    <td>0.08 / 1.00</td>
+                                    <td class="num-col">150 packs</td>
+                                    <td class="num-col">120 packs</td>
+                                    <td><span class="badge badge-c">Stop Purchasing</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 5: PRESCRIPTIVE PLANNING & DATA UPLOAD MODULES (Figures 3.42–3.48) -->
+        <div id="mod5-prescriptive" class="page-view">
             <div class="grid-sidebar">
                 <!-- Scenario Control Sliders -->
                 <div class="filter-panel">
@@ -1106,8 +1223,8 @@
                     </div>
 
                     <div class="constraint-panel">
-                        <strong>Active LP Model Status:</strong><br>
-                        Calculated Economic Order Quantities (EOQ) and Safety Stock triggers dynamically update below based on these operational sliders.
+                        <strong>Active LP Model Target:</strong><br>
+                        Calculated EOQ & ROP parameters update dynamically while enforcing stock distribution targeting <strong>expiry wastage &le; 5%</strong>.
                     </div>
                 </div>
 
@@ -1222,19 +1339,19 @@
                                             <td class="num-col" style="color:var(--accent-emerald)">0 vials</td>
                                         </tr>
                                         <tr>
-                                            <td><strong>Mindoro (Combined Raw Data)</strong> <span class="badge badge-est">IV-B</span></td>
+                                            <td><strong>Mindoro (Combined Baseline)</strong> <span class="badge badge-est">IV-B</span></td>
                                             <td><span class="badge badge-b">0.62 (Rank 7)</span></td>
                                             <td class="num-col">2,600 vials</td>
                                             <td class="num-col" style="color:var(--accent-amber)">100 vials</td>
                                         </tr>
                                         <tr>
-                                            <td><span style="padding-left:1rem; color:var(--text-muted)">↳ Occidental Mindoro</span> <span class="badge badge-est" style="font-size:0.62rem;">46% Weighted</span></td>
+                                            <td><span style="padding-left:1rem; color:var(--text-muted)">↳ Occidental Mindoro</span> <span class="badge badge-est" style="font-size:0.62rem;">46% Disaggregated</span></td>
                                             <td><span class="badge badge-c">0.62 (Approx)</span></td>
                                             <td class="num-col">1,196 vials</td>
                                             <td class="num-col" style="color:var(--accent-amber)">46 vials</td>
                                         </tr>
                                         <tr>
-                                            <td><span style="padding-left:1rem; color:var(--text-muted)">↳ Oriental Mindoro</span> <span class="badge badge-est" style="font-size:0.62rem;">54% Weighted</span></td>
+                                            <td><span style="padding-left:1rem; color:var(--text-muted)">↳ Oriental Mindoro</span> <span class="badge badge-est" style="font-size:0.62rem;">54% Disaggregated</span></td>
                                             <td><span class="badge badge-c">0.62 (Approx)</span></td>
                                             <td class="num-col">1,404 vials</td>
                                             <td class="num-col" style="color:var(--accent-amber)">54 vials</td>
@@ -1323,83 +1440,53 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- PAGE 4: OPERATIONS & SYSTEM AUDIT -->
-        <div id="audit" class="page-view">
-            <div class="grid-equal-2">
-                <!-- Human-in-the-Loop Approval Action Log -->
-                <div class="card">
-                    <div class="card-header">
-                        <span class="card-title">Immutable Decision Audit Log (DSS Action Log)</span>
-                        <span class="badge badge-a">Audited & Logged</span>
-                    </div>
-                    <div id="audit-log-container">
-                        <div class="audit-item">
-                            <div class="audit-meta">
-                                <span>2026-08-10 01:05:22 | User: VP_Procurement</span>
-                                <span class="badge badge-a">Approved</span>
+                    <!-- Ingestion Audit & Action Log Grid -->
+                    <div class="grid-equal-2">
+                        <div class="card">
+                            <div class="card-header">
+                                <span class="card-title">Immutable Decision Audit Log (DSS Action Log)</span>
+                                <span class="badge badge-a">Audited & Logged</span>
                             </div>
-                            <div class="audit-action">Approved Order: MONOWEL 1G IV (Qty: 949 vials)</div>
-                            <div class="audit-comment">"Approved based on Q3 Dengue surge forecast in Quezon."</div>
-                        </div>
-                        <div class="audit-item">
-                            <div class="audit-meta">
-                                <span>2026-08-09 16:40:11 | User: System_Auto</span>
-                                <span class="badge badge-est">Override Trigger</span>
+                            <div id="audit-log-container">
+                                <div class="audit-item">
+                                    <div class="audit-meta">
+                                        <span>2026-08-10 01:05:22 | User: VP_Procurement</span>
+                                        <span class="badge badge-a">Approved</span>
+                                    </div>
+                                    <div class="audit-action">Approved Order: MONOWEL 1G IV (Qty: 949 vials)</div>
+                                    <div class="audit-comment">"Approved based on Q3 Dengue surge forecast in Quezon."</div>
+                                </div>
+                                <div class="audit-item">
+                                    <div class="audit-meta">
+                                        <span>2026-08-09 16:40:11 | User: System_Auto</span>
+                                        <span class="badge badge-est">Override Trigger</span>
+                                    </div>
+                                    <div class="audit-action">PAGASA Typhoon Signal #2 Alert Simulation Applied</div>
+                                    <div class="audit-comment">"Safety Stock buffer multiplier automatically scaled by 1.25x."</div>
+                                </div>
                             </div>
-                            <div class="audit-action">PAGASA Typhoon Signal #2 Alert Simulation Applied</div>
-                            <div class="audit-comment">"Safety Stock buffer multiplier automatically scaled by 1.25x."</div>
                         </div>
-                    </div>
-                </div>
 
-                    <!-- Live Data Ingestion & CSV Upload Console -->
-                    <div class="card">
-                        <div class="card-header">
-                            <span class="card-title">Live Data Ingestion & Pipeline Ingestion Console</span>
-                            <span class="badge badge-a">Real-Time Ingestion</span>
-                        </div>
-                        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.75rem;">Upload new yearly sales CSV files (e.g. <code>2026_sales_update.csv</code>) to dynamically re-run quality gates and re-calculate all dashboard metrics in real-time:</p>
-                        
-                        <div style="display:flex; flex-direction:column; gap:0.75rem;">
-                            <input type="file" id="csv-file-input" accept=".csv" class="text-input" style="padding:0.4rem;" onchange="handleCSVUpload(event)">
+                        <div class="card">
+                            <div class="card-header">
+                                <span class="card-title">Live Data Ingestion & Pipeline Ingestion Console</span>
+                                <span class="badge badge-a">Real-Time Ingestion</span>
+                            </div>
+                            <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.75rem;">Upload new yearly sales CSV files (e.g. <code>2026_sales_update.csv</code>) to dynamically re-run quality gates and re-calculate all dashboard metrics in real-time:</p>
                             
-                            <div style="display:flex; gap:0.5rem;">
-                                <button class="btn-sm btn-primary" style="flex:1" onclick="document.getElementById('csv-file-input').click()">📁 Select Sales CSV File</button>
-                                <button class="btn-sm btn-outline" style="flex:1" onclick="simulateNewBatchUpload()">⚡ Inject Sample Batch (15,240 Rows)</button>
+                            <div style="display:flex; flex-direction:column; gap:0.75rem;">
+                                <input type="file" id="csv-file-input" accept=".csv" class="text-input" style="padding:0.4rem;" onchange="handleCSVUpload(event)">
+                                
+                                <div style="display:flex; gap:0.5rem;">
+                                    <button class="btn-sm btn-primary" style="flex:1" onclick="document.getElementById('csv-file-input').click()">📁 Select Sales CSV File</button>
+                                    <button class="btn-sm btn-outline" style="flex:1" onclick="simulateNewBatchUpload()">⚡ Inject Sample Batch (15,240 Rows)</button>
+                                </div>
                             </div>
-                        </div>
 
-                        <div id="upload-status-box" style="display:none; font-size:0.775rem; background:rgba(16, 185, 129, 0.1); border:1px solid rgba(16, 185, 129, 0.3); color:var(--accent-emerald); padding:0.6rem 0.8rem; border-radius:var(--radius-sm); margin-top:0.75rem;">
-                            <strong>Pipeline Success:</strong> Parsed <span id="parsed-count">0</span> clean rows. Dashboard metrics, forecasts, and allocation matrices successfully updated in real-time!
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header">
-                            <span class="card-title">ETL Data Ingestion Integrity Summary</span>
-                        </div>
-                        <div style="font-size:0.85rem; color:var(--text-muted); display:flex; flex-direction:column; gap:0.5rem;">
-                            <div style="display:flex; justify-content:space-between"><span>Training Horizon:</span> <strong>2017 – 2026 (10 Years / 120 Months)</strong></div>
-                            <div style="display:flex; justify-content:space-between"><span>Target Forecast Period:</span> <strong style="color:var(--accent-emerald)">2027 Planning Cycle</strong></div>
-                            <div style="display:flex; justify-content:space-between"><span>Total Raw Ingested Rows:</span> <strong id="summary-raw-rows">288,450</strong></div>
-                            <div style="display:flex; justify-content:space-between"><span>Accepted Clean Sales Rows:</span> <strong id="summary-clean-rows" style="color:var(--accent-emerald)">288,450</strong></div>
-                            <div style="display:flex; justify-content:space-between"><span>Margin Anomalies Isolated:</span> <strong style="color:var(--accent-emerald)">0</strong></div>
-                            <div style="display:flex; justify-content:space-between"><span>Unparseable/Rejected Dates:</span> <strong style="color:var(--accent-emerald)">0</strong></div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header">
-                            <span class="card-title">Manual Emergency Contingency Console</span>
-                        </div>
-                        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:1rem;">Manually override environmental triggers for stress-testing inventory resilience:</p>
-                        <div style="display:flex; gap:0.75rem;">
-                            <button class="btn-sm btn-outline" style="flex:1" onclick="triggerContingency('Typhoon Signal #3')">Simulate Typhoon Signal #3</button>
-                            <button class="btn-sm btn-outline" style="flex:1" onclick="triggerContingency('Dengue Outbreak')">Simulate Dengue Outbreak</button>
+                            <div id="upload-status-box" style="display:none; font-size:0.775rem; background:rgba(16, 185, 129, 0.1); border:1px solid rgba(16, 185, 129, 0.3); color:var(--accent-emerald); padding:0.6rem 0.8rem; border-radius:var(--radius-sm); margin-top:0.75rem;">
+                                <strong>Pipeline Success:</strong> Parsed <span id="parsed-count">0</span> clean rows. Dashboard metrics, forecasts, and allocation matrices successfully updated in real-time!
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1430,13 +1517,43 @@
 
     <!-- JAVASCRIPT SIMULATION LOGIC -->
     <script>
+        // Toggle Assignment Details Header
+        function toggleAssignmentDetails() {
+            const content = document.getElementById('assignment-details-content');
+            const btn = document.getElementById('btn-toggle-assignment');
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                btn.innerText = 'Hide Details ▲';
+            } else {
+                content.style.display = 'none';
+                btn.innerText = 'Show Details ▼';
+            }
+        }
+
         // Page Navigation Logic
         function switchTab(tabId) {
+            const tabMap = {
+                'exec-hub': 'mod1-home',
+                'diagnostics': 'mod2-sales-diag',
+                'planning': 'mod5-prescriptive',
+                'audit': 'mod5-prescriptive'
+            };
+            const targetId = tabMap[tabId] || tabId;
+
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.page-view').forEach(view => view.classList.remove('active'));
             
-            event.target.classList.add('active');
-            document.getElementById(tabId).classList.add('active');
+            if (window.event && window.event.target && window.event.target.classList.contains('nav-btn')) {
+                window.event.target.classList.add('active');
+            } else {
+                const matchingBtn = Array.from(document.querySelectorAll('.nav-btn')).find(b => b.getAttribute('onclick')?.includes(tabId) || b.getAttribute('onclick')?.includes(targetId));
+                if (matchingBtn) matchingBtn.classList.add('active');
+            }
+
+            const targetEl = document.getElementById(targetId);
+            if (targetEl) {
+                targetEl.classList.add('active');
+            }
         }
 
         // Initialize Prophet Chart with Shaded Confidence Bounds using Chart.js
@@ -1508,6 +1625,51 @@
                     }
                 }
             });
+        }
+
+        // Forecast Time Granularity Handler (Weekly, Monthly, Annual)
+        function updateForecastGranularity() {
+            const gran = document.getElementById('forecast-granularity').value;
+            if (!forecastChart) return;
+
+            if (gran === 'weekly') {
+                forecastChart.data.labels = [
+                    'Wk 1 (2026)', 'Wk 10', 'Wk 20', 'Wk 30', 'Wk 40', 'Wk 52',
+                    'Wk 1 Fcst (2027)', 'Wk 10 Fcst', 'Wk 20 Fcst', 'Wk 30 Fcst', 'Wk 40 Fcst', 'Wk 52 Fcst'
+                ];
+                forecastChart.data.datasets[0].data = [4.8, 5.1, 5.5, 6.2, 5.8, 6.4, null, null, null, null, null, null];
+                forecastChart.data.datasets[1].data = [null, null, null, null, null, 6.4, 6.6, 6.8, 7.5, 8.2, 7.8, 7.4];
+                forecastChart.data.datasets[2].data = [null, null, null, null, null, 6.4, 7.0, 7.3, 8.1, 8.9, 8.4, 8.0];
+                forecastChart.data.datasets[3].data = [null, null, null, null, null, 6.4, 6.2, 6.3, 6.9, 7.5, 7.2, 6.8];
+            } else if (gran === 'annual') {
+                forecastChart.data.labels = ['2021 (Annual)', '2022', '2023', '2024', '2025', '2026 (Actual)', '2027 (Forecast Project)'];
+                forecastChart.data.datasets[0].data = [145, 160, 185, 210, 225, 244, null];
+                forecastChart.data.datasets[1].data = [null, null, null, null, null, 244, 274.8];
+                forecastChart.data.datasets[2].data = [null, null, null, null, null, 244, 294.0];
+                forecastChart.data.datasets[3].data = [null, null, null, null, null, 244, 255.0];
+            } else { // monthly (default)
+                forecastChart.data.labels = ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026', '2027 Q1 (Fcst)', '2027 Q2 (Fcst)', '2027 Q3 (Fcst)', '2027 Q4 (Fcst)'];
+                forecastChart.data.datasets[0].data = [95, 110, 125, 132, 145, 160, 185, 210, 225, 244, null, null, null, null];
+                forecastChart.data.datasets[1].data = [null, null, null, null, null, null, null, null, null, 244, 252, 260, 292, 274.8];
+                forecastChart.data.datasets[2].data = [null, null, null, null, null, null, null, null, null, 244, 264, 275, 312, 294.0];
+                forecastChart.data.datasets[3].data = [null, null, null, null, null, null, null, null, null, 244, 240, 246, 272, 255.0];
+            }
+            forecastChart.update();
+        }
+
+        // Prioritization Time Granularity Handler (Weekly, Monthly, Annual)
+        function updatePrioritizationGranularity() {
+            const gran = document.getElementById('prioritization-granularity').value;
+            if (!regionalLeaderboardChart) return;
+
+            if (gran === 'weekly') {
+                regionalLeaderboardChart.data.datasets[0].data = [2.74, 1.05, 0.91];
+            } else if (gran === 'annual') {
+                regionalLeaderboardChart.data.datasets[0].data = [142.5, 54.8, 47.5];
+            } else { // monthly (default)
+                regionalLeaderboardChart.data.datasets[0].data = [11.87, 4.56, 3.95];
+            }
+            regionalLeaderboardChart.update();
         }
 
         // Recalculate Prescriptive Parameters based on Sliders
@@ -1658,8 +1820,7 @@
             const banner = document.getElementById('no-data-territory-banner');
             if (banner) {
                 if (isUnserviced) {
-                    document.getElementById('unserviced-territory-name').innerText = territory;
-                    banner.innerHTML = `<strong>Unserviced Reference Location:</strong> <span>${territory}</span> has no historical sales transaction records (2017–2026). Maintained in DSS taxonomy for future expansion reference.`;
+                    banner.innerHTML = `<strong>Unserviced Reference Location:</strong> <span id="unserviced-territory-name">${territory}</span> has no historical sales transaction records (2017–2026). Maintained in DSS taxonomy for future expansion reference.`;
                     banner.style.display = 'block';
                 } else if (territory === 'Occidental Mindoro' || territory === 'Oriental Mindoro') {
                     const weight = territory === 'Oriental Mindoro' ? '54% (Hospital Bed / Pop Density Weighted)' : '46% (Hospital Bed / Pop Density Weighted)';
