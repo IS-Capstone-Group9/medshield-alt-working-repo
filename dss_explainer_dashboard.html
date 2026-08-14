@@ -267,6 +267,24 @@
             background: var(--primary-hover);
         }
 
+        .btn-logout {
+            padding: 0.35rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(244, 63, 94, 0.3);
+            background: rgba(244, 63, 94, 0.1);
+            color: var(--accent-rose);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-logout:hover {
+            background: rgba(244, 63, 94, 0.25);
+            color: #ffffff;
+            border-color: var(--accent-rose);
+        }
+
         /* Layout Main Containers */
         main {
             flex: 1;
@@ -670,9 +688,467 @@
             color: #d8b4fe;
             margin-top: 0.5rem;
         }
+
+        /* Login Page Shell Styles */
+        body.not-logged-in header,
+        body.not-logged-in .assignment-banner-container,
+        body.not-logged-in .alert-banner-container,
+        body.not-logged-in main {
+            display: none !important;
+        }
+        body:not(.not-logged-in) #login-container {
+            display: none !important;
+        }
+
+        .login-shell {
+          min-height: 100vh;
+          display: grid;
+          grid-template-columns: minmax(440px, 56%) minmax(360px, 44%);
+          background: #0b0f19;
+          color: var(--text-main);
+          font-family: var(--font-main);
+        }
+
+        .login-brand-panel {
+          position: relative;
+          display: flex;
+          min-height: 100vh;
+          overflow: hidden;
+          color: #ffffff;
+          background-image:
+            linear-gradient(90deg, rgba(11, 83, 132, 0.94), rgba(17, 91, 141, 0.9)),
+            url("https://images.unsplash.com/photo-1576669801838-1b1c52121e6a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1400");
+          background-size: cover;
+          background-position: center;
+        }
+
+        .login-brand-panel::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background:
+            linear-gradient(180deg, rgba(12, 70, 113, 0.18), rgba(9, 60, 99, 0.22)),
+            radial-gradient(circle at 72% 30%, rgba(255, 255, 255, 0.08), transparent 34%);
+          pointer-events: none;
+        }
+
+        .login-brand-inner {
+          position: relative;
+          z-index: 1;
+          width: 100%;
+          max-width: 560px;
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+          padding: 32px 35px 45px;
+        }
+
+        .login-logo-row {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+        }
+
+        .login-logo-mark {
+          width: 48px;
+          height: 48px;
+          border-radius: 12px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(255, 255, 255, 0.18);
+          border: 1px solid rgba(255, 255, 255, 0.32);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24);
+          font-size: 22px;
+          font-weight: 800;
+          letter-spacing: 0;
+          color: #ffffff;
+        }
+
+        .login-logo-title {
+          margin: 0;
+          font-size: 26px;
+          line-height: 1;
+          font-weight: 800;
+          letter-spacing: 0;
+          color: #ffffff;
+        }
+
+        .login-logo-subtitle {
+          margin-top: 6px;
+          font-size: 11px;
+          font-weight: 800;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          color: rgba(226, 239, 250, 0.88);
+        }
+
+        .login-brand-message {
+          margin-top: auto;
+          margin-bottom: 90px;
+          max-width: 470px;
+        }
+
+        .login-brand-message h2 {
+          margin: 0 0 17px;
+          font-size: 32px;
+          line-height: 1.18;
+          font-weight: 800;
+          letter-spacing: 0;
+          color: #ffffff;
+        }
+
+        .login-brand-message p {
+          margin: 0;
+          max-width: 430px;
+          font-size: 16px;
+          line-height: 1.55;
+          color: rgba(223, 237, 248, 0.92);
+        }
+
+        .login-secure-note {
+          display: flex;
+          align-items: center;
+          gap: 13px;
+          margin-top: auto;
+          color: rgba(220, 237, 250, 0.9);
+          font-size: 14px;
+          font-weight: 700;
+        }
+
+        .login-copyright {
+          margin-top: 19px;
+          font-size: 11px;
+          color: rgba(205, 225, 240, 0.58);
+        }
+
+        .login-form-panel {
+          display: flex;
+          min-height: 100vh;
+          align-items: center;
+          justify-content: center;
+          padding: 44px 30px;
+          background: var(--bg-surface);
+        }
+
+        .login-form-inner {
+          width: min(100%, 360px);
+        }
+
+        .login-heading {
+          margin: 0;
+          font-size: 27px;
+          line-height: 1.2;
+          font-weight: 600;
+          letter-spacing: 0;
+          color: var(--text-main);
+        }
+
+        .login-subheading {
+          margin: 11px 0 41px;
+          font-size: 16px;
+          color: var(--text-muted);
+        }
+
+        .login-form {
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
+        }
+
+        .login-field-group {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .login-label-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+        }
+
+        .login-label {
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          color: var(--text-muted);
+          text-transform: uppercase;
+        }
+
+        .login-input-wrap {
+          position: relative;
+          color: var(--text-muted);
+        }
+
+        .login-input-icon {
+          position: absolute;
+          left: 18px;
+          top: 50%;
+          display: inline-flex;
+          transform: translateY(-50%);
+          pointer-events: none;
+        }
+
+        .login-input {
+          width: 100%;
+          min-height: 49px;
+          padding: 0 52px 0 48px;
+          border: 1px solid var(--border-color);
+          border-radius: 12px;
+          background: var(--bg-surface-elevated);
+          color: var(--text-main);
+          font: inherit;
+          font-size: 15px;
+          outline: none;
+          transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+        }
+
+        .login-input::placeholder {
+          color: var(--text-dim);
+        }
+
+        .login-input:focus {
+          border-color: var(--primary);
+          background: var(--bg-base);
+          box-shadow: 0 0 0 4px var(--primary-glow);
+        }
+
+        .login-password-button {
+          position: absolute;
+          right: 15px;
+          top: 50%;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          transform: translateY(-50%);
+          border: 0;
+          padding: 4px;
+          background: transparent;
+          color: var(--text-muted);
+          cursor: pointer;
+        }
+
+        .login-check-row {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-top: 1px;
+          font-size: 14px;
+          color: var(--text-muted);
+          cursor: pointer;
+        }
+
+        .login-check-row input {
+          width: 21px;
+          height: 21px;
+          margin: 0;
+          accent-color: var(--primary);
+        }
+
+        .login-submit {
+          min-height: 60px;
+          border: 0;
+          border-radius: 10px;
+          background: var(--primary);
+          color: #ffffff;
+          font: inherit;
+          font-size: 20px;
+          font-weight: 800;
+          cursor: pointer;
+          box-shadow: 0 13px 24px var(--primary-glow);
+          transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .login-submit:hover {
+          background: var(--primary-hover);
+          transform: translateY(-1px);
+        }
+
+        .login-error {
+          border-left: 4px solid var(--accent-rose);
+          border-radius: 8px;
+          background: rgba(244, 63, 94, 0.1);
+          color: #f43f5e;
+          padding: 11px 13px;
+          font-size: 13px;
+          line-height: 1.4;
+        }
+
+        .login-footer {
+          margin-top: 63px;
+          padding-top: 31px;
+          border-top: 1px solid var(--border-color);
+          display: flex;
+          justify-content: center;
+          gap: 30px;
+        }
+
+        .login-footer button {
+          border: 0;
+          padding: 0;
+          background: transparent;
+          color: var(--text-dim);
+          font: inherit;
+          font-size: 13px;
+          cursor: pointer;
+        }
+
+        @media (max-width: 880px) {
+          .login-shell {
+            grid-template-columns: 1fr;
+          }
+
+          .login-brand-panel {
+            min-height: 330px;
+          }
+
+          .login-brand-inner {
+            min-height: 330px;
+            padding: 28px 24px;
+          }
+
+          .login-brand-message {
+            margin-bottom: 28px;
+          }
+
+          .login-secure-note,
+          .login-copyright {
+            display: none;
+          }
+
+          .login-form-panel {
+            min-height: auto;
+            padding: 34px 24px 44px;
+          }
+        }
     </style>
 </head>
-<body>
+<body class="not-logged-in">
+
+    <!-- Login Page Shell -->
+    <div class="login-shell" id="login-container" aria-label="MedShield sign in">
+      <section class="login-brand-panel" aria-label="MedShield enterprise identity">
+        <div class="login-brand-inner">
+          <div class="login-logo-row">
+            <div class="login-logo-mark">MS</div>
+            <div>
+              <h1 class="login-logo-title">MedShield</h1>
+              <div class="login-logo-subtitle">Pharma Corp.</div>
+            </div>
+          </div>
+
+          <div class="login-brand-message">
+            <h2>Enterprise Supply Chain Intelligence</h2>
+            <p>A centralized gateway for secure pharmaceutical distribution management and real-time inventory oversight.</p>
+          </div>
+
+          <div class="login-secure-note">
+            <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
+              <path d="M9 12l2 2 4-5" />
+            </svg>
+            <span>Certified Secure Infrastructure</span>
+          </div>
+          <div class="login-copyright">(c) 2025 MedShield Pharma Corp. Authorized Personnel Only.</div>
+        </div>
+      </section>
+
+      <section class="login-form-panel" aria-label="Account sign in form">
+        <div class="login-form-inner">
+          <h2 class="login-heading">Sign in to your account</h2>
+          <p class="login-subheading">Access your enterprise dashboard</p>
+
+          <form class="login-form" onsubmit="handleLoginSubmit(event)">
+            <div class="login-error" id="login-error-msg" style="display: none; margin-bottom: 10px;"></div>
+
+            <div class="login-field-group">
+              <label class="login-label" for="login-username">
+                Username or Email
+              </label>
+              <div class="login-input-wrap">
+                <span class="login-input-icon">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21a8 8 0 0 0-16 0" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                </span>
+                <input
+                  id="login-username"
+                  class="login-input"
+                  type="text"
+                  placeholder="Enter your username"
+                  autocomplete="username"
+                />
+              </div>
+            </div>
+
+            <div class="login-field-group">
+              <div class="login-label-row">
+                <label class="login-label" for="login-password">
+                  Password
+                </label>
+                <button
+                  class="login-link-button"
+                  type="button"
+                  onclick="alert('Password reset is administrator-managed. Contact MedShield support to verify your account.')"
+                >
+                  Forgot password?
+                </button>
+              </div>
+              <div class="login-input-wrap">
+                <span class="login-input-icon">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="5" y="11" width="14" height="10" rx="2" />
+                    <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+                  </svg>
+                </span>
+                <input
+                  id="login-password"
+                  class="login-input"
+                  type="password"
+                  placeholder="Password"
+                  autocomplete="current-password"
+                />
+                <button
+                  class="login-password-button"
+                  id="login-password-toggle"
+                  type="button"
+                  aria-label="Show password"
+                  onclick="togglePasswordVisibility()"
+                >
+                  <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m3 3 18 18" />
+                    <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8" />
+                    <path d="M9.9 5.2A10.7 10.7 0 0 1 12 5c5 0 9 4.5 10 7a13.2 13.2 0 0 1-2.2 3.3" />
+                    <path d="M6.2 6.2A13.1 13.1 0 0 0 2 12c1 2.5 5 7 10 7a10.7 10.7 0 0 0 4.1-.8" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <label class="login-check-row" for="rememberMe">
+              <input
+                id="rememberMe"
+                type="checkbox"
+              />
+              <span>Remember me for 30 days</span>
+            </label>
+
+            <button class="login-submit" type="submit">
+              Sign In
+            </button>
+          </form>
+
+          <div class="login-footer" aria-label="Login support links">
+            <button type="button" onclick="alert('MedShield DSS uses authenticated access and processes uploaded business data only for authorized analytics workflows.')">Privacy</button>
+            <button type="button" onclick="alert('Use of MedShield DSS is limited to authorized personnel and approved decision-support activities.')">Terms</button>
+            <button type="button" onclick="window.location.href = 'mailto:support@medshield.local?subject=MedShield%20DSS%20Support'">Support</button>
+          </div>
+        </div>
+      </section>
+    </div>
 
     <!-- Header Navigation -->
     <header>
@@ -703,6 +1179,7 @@
                     <div style="font-weight:600; color:var(--text-main)">Executive Planner</div>
                     <div style="font-size:0.7rem">Procurement Directorate</div>
                 </div>
+                <button class="btn-logout" onclick="handleLogout()" type="button" aria-label="Sign out">Logout</button>
             </div>
         </div>
     </header>
@@ -2085,12 +2562,73 @@
             applyDynamicDataPipeline(15240, '2026_q3_new_sales_batch.csv');
         }
 
+        // Login Script Support
+        let chartsInitialized = false;
+
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('login-password');
+            const toggleBtn = document.getElementById('login-password-toggle');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleBtn.innerHTML = `
+                    <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z" />
+                        <circle cx="12" cy="12" r="3" />
+                    </svg>
+                `;
+            } else {
+                passwordInput.type = 'password';
+                toggleBtn.innerHTML = `
+                    <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="m3 3 18 18" />
+                        <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8" />
+                        <path d="M9.9 5.2A10.7 10.7 0 0 1 12 5c5 0 9 4.5 10 7a13.2 13.2 0 0 1-2.2 3.3" />
+                        <path d="M6.2 6.2A13.1 13.1 0 0 0 2 12c1 2.5 5 7 10 7a10.7 10.7 0 0 0 4.1-.8" />
+                    </svg>
+                `;
+            }
+        }
+
+        function handleLoginSubmit(event) {
+            if (event) event.preventDefault();
+            const username = document.getElementById('login-username').value.trim();
+            const password = document.getElementById('login-password').value.trim();
+            const errorDiv = document.getElementById('login-error-msg');
+            
+            if (!username || !password) {
+                errorDiv.innerText = 'Please enter both username and password.';
+                errorDiv.style.display = 'block';
+                return;
+            }
+            
+            if ((username === 'admin' || username === 'admin@medshield.local') && password === 'medshield2025') {
+                errorDiv.style.display = 'none';
+                document.body.classList.remove('not-logged-in');
+                
+                if (!chartsInitialized) {
+                    initForecastChart();
+                    initExecutiveCharts();
+                    initYoYChart();
+                    recalculatePrescriptiveEngine();
+                    chartsInitialized = true;
+                }
+            } else {
+                errorDiv.innerText = 'Invalid username or password.';
+                errorDiv.style.display = 'block';
+            }
+        }
+
+        function handleLogout() {
+            document.body.classList.add('not-logged-in');
+            document.getElementById('login-password').value = '';
+            document.getElementById('login-error-msg').style.display = 'none';
+        }
+
         // On Load
         window.addEventListener('DOMContentLoaded', () => {
-            initForecastChart();
-            initExecutiveCharts();
-            initYoYChart();
-            recalculatePrescriptiveEngine();
+            // Auto-fill credentials for testing convenience
+            document.getElementById('login-username').value = 'admin';
+            document.getElementById('login-password').value = 'medshield2025';
         });
     </script>
 </body>
