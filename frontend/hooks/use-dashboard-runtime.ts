@@ -42,8 +42,11 @@ export function useDashboardRuntime(onLogout: () => Promise<void>) {
       if (el) el.classList.add('active')
     }
 
-    root.innerHTML = MEDSHIELD_MARKUP;
-    (window as any).Chart = Chart;
+    // Ensure robust Chart constructor resolution
+    const ChartConstructor = (Chart as any)?.Chart || (Chart as any)?.default || Chart
+    ;(window as any).Chart = (window as any).Chart || ChartConstructor
+
+    root.innerHTML = MEDSHIELD_MARKUP
     enhanceDashboardContent(root)
 
     runDashboardScript(getExecutableDashboardScript())

@@ -70,7 +70,7 @@ export function getExecutableDashboardScript(): string {
   }
 
   return `
-const Chart = window.Chart;
+const Chart = (window.Chart && (window.Chart.Chart || window.Chart.default || window.Chart)) || window.Chart;
 function dashboardThemeColor(name, fallback) {
   try {
     return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback;
