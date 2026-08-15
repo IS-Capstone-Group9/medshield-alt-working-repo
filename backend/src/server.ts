@@ -1,4 +1,5 @@
 import path from 'node:path'
+import { createHash } from 'node:crypto'
 import { existsSync } from 'node:fs'
 import { appendFile, readFile } from 'node:fs/promises'
 import { config as loadDotenv } from 'dotenv'
@@ -196,7 +197,44 @@ async function supabaseDbFetch(
   })
 }
 
-async function persistAuditLog(entry: AuditLogEntry): Promise<void> {
+let lastAuditHash = '0000000000000000000000000000000000000000000000000000000000000000'
+
+async function getLastAuditHash(): Promise<string> {
+  const logPath = path.resolve(__dirname, '..', 'data', 'local_audit_logs.jsonl')
+  if (!existsSync(logPath)) {
+    return '0000000000000000000000000000000000000000000000000000000000000000'
+  }
+  try {
+    const raw = await readFile(logPath, 'utf8')
+    const lines = raw.trim().split('\n').filter(Boolean)
+    if (lines.length > 0) {
+      const last = JSON.parse(lines[lines.length - 1])
+      if (last.entry_hash) return String(last.entry_hash)
+    }
+  } catch (err) {
+    console.error('Error reading previous audit hash:', err)
+  }
+  return '0000000000000000000000000000000000000000000000000000000000000000'
+}
+
+async function persistAuditLog(rawEntry: {
+  username: string
+  action: string
+  detail: string
+  ip_address: string
+  user_agent: string
+  created_at: string
+}): Promise<{ ok: boolean; entry_hash: string; previous_hash: string }> {
+  const previous_hash = await getLastAuditHash()
+  const hashPayload = `${previous_hash}:${rawEntry.created_at}:${rawEntry.username}:${rawEntry.action}:${rawEntry.detail}`
+  const entry_hash = createHash('sha256').update(hashPayload).digest('hex')
+  
+  const entry = {
+    ...rawEntry,
+    previous_hash,
+    entry_hash,
+    tamper_evident: true
+  }
   if (supabaseEnabled()) {
     try {
       const response = await supabaseDbFetch('/audit_logs', {
@@ -204,7 +242,7 @@ async function persistAuditLog(entry: AuditLogEntry): Promise<void> {
         body: JSON.stringify(entry),
       })
       if (response.ok) {
-        return
+        return { ok: true, entry_hash, previous_hash }
       }
       console.warn(`Supabase audit log write returned non-OK status: ${response.status}. Falling back to local file.`)
     } catch (err) {
@@ -219,6 +257,8 @@ async function persistAuditLog(entry: AuditLogEntry): Promise<void> {
   } catch (err) {
     console.error('Failed to write local audit log:', err)
   }
+
+  return { ok: true, entry_hash, previous_hash }
 }
 
 async function getSupabaseAuthUser(token: string): Promise<SessionUser | null> {
@@ -354,6 +394,20 @@ async function requireAuth(req: AuthenticatedRequest, res: Response, next: NextF
   req.accessToken = token
   req.authSource = authSource
   next()
+}
+
+function requireRole(allowedRoles: string[]) {
+  return (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    const userRole = (req.user?.role || 'viewer').toLowerCase()
+    const allowed = allowedRoles.map(r => r.toLowerCase())
+    if (!allowed.includes(userRole) && !allowed.includes('admin')) {
+      return res.status(403).json({
+        error: `Access Denied: Action requires [${allowedRoles.join(', ')}] role clearance. Current role is '${userRole}'.`,
+        code: 'FORBIDDEN_ROLE'
+      })
+    }
+    next()
+  }
 }
 
 async function fetchWithTimeout(url: string, options: RequestInit = {}, timeoutMs = 8000): Promise<globalThis.Response> {
