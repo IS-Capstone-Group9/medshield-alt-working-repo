@@ -795,3 +795,80 @@ body.nav-collapsed .logout-text {
     padding: 16px;
   }
 }
+
+
+/* ==========================================================================
+   PHASE 1: FLUID ZOOM & RESPONSIVE SCALING RULES (50% TO 200%)
+   ========================================================================== */
+
+.kpi-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)) !important;
+  gap: 16px !important;
+}
+
+.kpi-value {
+  font-size: clamp(20px, 2.2vw, 26px) !important;
+  font-weight: 800 !important;
+  line-height: 1.15 !important;
+  word-break: break-word !important;
+}
+
+.chart-grid-2 {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)) !important;
+  gap: 16px !important;
+}
+
+.chart-wrap {
+  position: relative !important;
+  width: 100% !important;
+  min-height: 220px !important;
+  height: clamp(220px, 28vh, 320px) !important;
+}
+
+.seasonal-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)) !important;
+  gap: 12px !important;
+}
+
+.topbar {
+  flex-wrap: wrap !important;
+  min-height: 64px !important;
+  height: auto !important;
+  padding: 8px 24px !important;
+  gap: 10px !important;
+}
+
+.topbar-left, .topbar-right {
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+}
+
+@media (max-width: 1100px) {
+  .chart-grid-2 {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .kpi-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .seasonal-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .topbar {
+    padding: 8px 16px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .kpi-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .seasonal-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
