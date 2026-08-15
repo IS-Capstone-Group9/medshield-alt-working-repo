@@ -33,6 +33,15 @@ export function useDashboardRuntime(onLogout: () => Promise<void>) {
     styleEl.textContent = MEDSHIELD_STYLE
     document.head.appendChild(styleEl)
 
+    // Provide immediate synchronous showPage handler before DOM markup injection
+    ;(window as any).showPage = (window as any).showPage || function(name: string, el?: HTMLElement) {
+      document.querySelectorAll('.page').forEach((p) => p.classList.remove('active'))
+      const target = document.getElementById('page-' + name)
+      if (target) target.classList.add('active')
+      document.querySelectorAll('.nav-item').forEach((n) => n.classList.remove('active'))
+      if (el) el.classList.add('active')
+    }
+
     root.innerHTML = MEDSHIELD_MARKUP;
     (window as any).Chart = Chart;
     enhanceDashboardContent(root)
