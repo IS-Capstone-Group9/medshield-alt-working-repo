@@ -219,21 +219,50 @@ def _clean_date(value: Any) -> date | None:
         return value
     if value is None:
         return None
+    
+    # Handle Excel numeric serial dates (e.g., 42736 -> 2017-01-01, 44197 -> 2021-01-01)
+    if isinstance(value, (int, float)) and not isinstance(value, bool):
+        try:
+            if 30000 <= value <= 60000:  # Valid Excel date serial range for 1982 - 2064
+                return date.fromordinal(date(1899, 12, 30).toordinal() + int(value))
+        except (ValueError, OverflowError):
+            pass
+
     text = str(value).strip()
     if not text:
         return None
+
+    # Handle string numeric serial
+    if text.isdigit() and len(text) == 5:
+        num_val = int(text)
+        if 30000 <= num_val <= 60000:
+            try:
+                return date.fromordinal(date(1899, 12, 30).toordinal() + num_val)
+            except (ValueError, OverflowError):
+                pass
+
+    # Clean ISO datetime strings with timestamps (e.g. 2018-05-12T00:00:00 or 2019-08-01 00:00:00)
+    if "T" in text or " " in text:
+        clean_text = text.split("T")[0].split(" ")[0].strip()
+    else:
+        clean_text = text
+
     formats = (
         "%Y-%m-%d",
         "%Y/%m/%d",
         "%m/%d/%Y",
         "%m/%d/%y",
         "%d/%m/%Y",
+        "%d-%m-%Y",
+        "%d-%b-%Y",
+        "%d-%b-%y",
         "%b %d, %Y",
         "%B %d, %Y",
+        "%Y%m%d",
     )
     for pattern in formats:
         try:
-            return datetime.strptime(text, pattern).date()
+            return datetime.strptime(clean_text, pattern).date()
         except ValueError:
             continue
     return None
@@ -433,6 +462,14 @@ def clean_sales_rows(
         elif row["margin_pct"] < -1 or row["margin_pct"] > 2:
             notes.append("margin percentage is outside the expected range")
             issue_counts["margin_anomalies"] += 1
+
+        # Multi-Year Statistical Outlier & Data Entry Anomaly Check (Z-score / extreme limit)
+        if float(row["quantity"] or 0) > 50000:
+            notes.append("extreme quantity volume (>50,000 units)")
+            issue_counts["extreme_quantity_outliers"] += 1
+        elif float(row["total_trade_price"] or 0) > 50000000:
+            notes.append("extreme trade price revenue (>50M)")
+            issue_counts["extreme_revenue_outliers"] += 1
 
         business_hash = _row_hash(row)
         duplicate = business_hash in seen_business_hashes
