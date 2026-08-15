@@ -34,6 +34,9 @@ const DASHBOARD_GLOBAL_HANDLERS = [
   'resetMcdaWeights',
   'updateSurgeScenario',
   'setSurgePreset',
+  'generateAiBriefing',
+  'copyAiBriefing',
+  'printExecutiveMemo',
 ] as const
 
 export function getExecutableDashboardScript(): string {
