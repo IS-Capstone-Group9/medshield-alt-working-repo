@@ -31,6 +31,7 @@ const DASHBOARD_GLOBAL_HANDLERS = [
   'recalibrateModelSafetyBuffers',
   'updateMcdaWeights',
   'updateSurgeScenario',
+  'setSurgePreset',
 ] as const
 
 export function getExecutableDashboardScript(): string {
