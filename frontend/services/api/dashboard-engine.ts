@@ -26,10 +26,12 @@ const DASHBOARD_GLOBAL_HANDLERS = [
   'openEoqModal',
   'closeAuditModal',
   'closeEoqModal',
+  'closeHelpModal',
   'confirmAndExecuteOrder',
   'executeEoqReorder',
   'recalibrateModelSafetyBuffers',
   'updateMcdaWeights',
+  'resetMcdaWeights',
   'updateSurgeScenario',
   'setSurgePreset',
 ] as const
