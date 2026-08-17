@@ -52,6 +52,20 @@ export function getExecutableDashboardScript(): string {
     .replaceAll("'rgba(201,219,229,0.65)'", "dashboardThemeColor('--chart-grid', 'rgba(201,219,229,0.65)')")
     .replace('if (document.startViewTransition &&', 'if (false && document.startViewTransition &&')
     .replace('chart.resize();', "if (!chart.canvas || !chart.canvas.isConnected) return;\n      chart.resize();")
+    // After making a page active, rebuild charts so canvases render at correct dimensions
+    .replace(
+      "if (page) page.classList.add('active');",
+      `if (page) {
+    page.classList.add('active');
+    // Rebuild charts after the newly-visible page has painted so canvases have non-zero dimensions
+    requestAnimationFrame(function() {
+      setTimeout(function() {
+        if (typeof buildCharts === 'function') buildCharts();
+        if (typeof buildTables === 'function') buildTables();
+      }, 60);
+    });
+  }`
+    )
     .replace(
       "if (charts[id]) charts[id].destroy();",
       `
@@ -123,8 +137,15 @@ function resizeCharts() {
   try {
     if (typeof charts !== 'undefined') {
       for (const id in charts) {
-        if (charts[id] && typeof charts[id].resize === 'function') {
-          charts[id].resize();
+        const ch = charts[id];
+        if (ch && typeof ch.resize === 'function') {
+          try {
+            if (!ch.canvas || !ch.canvas.isConnected) continue;
+            ch.resize();
+            if (typeof ch.update === 'function') ch.update('none');
+          } catch (e) {
+            // ignore per-chart resize errors
+          }
         }
       }
     }
