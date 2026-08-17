@@ -93,6 +93,28 @@ function dashboardThemeColor(name, fallback) {
     return fallback;
   }
 }
+// Returns the first array if it has numeric values, otherwise returns the fallback array.
+function numericSeriesOrFallback(primary, fallback) {
+  if (Array.isArray(primary) && primary.length > 0 && primary.some(function(v) { return typeof v === 'number' && isFinite(v) && v > 0; })) {
+    return primary;
+  }
+  return fallback || [];
+}
+// ARIA label map for chart canvases (accessibility)
+const CHART_ARIA_LABELS = {
+  overviewForecastChart: 'Monthly demand forecast with confidence intervals',
+  revenueDetailChart: 'Detailed monthly revenue and net income trend',
+  growthChart: 'Year-over-year revenue growth percentage',
+  marginChart: 'Gross profit margin rate by year',
+  seasonChart: 'Average revenue by calendar month (seasonality)',
+  productBarChart: 'Top 10 products by cumulative revenue',
+  abcChart: 'ABC portfolio concentration by revenue class',
+  areaBarChart: 'Revenue by delivery territory',
+  areaIncomeChart: 'Net income by delivery territory',
+  areaMarginChart: 'Gross margin rate by delivery territory',
+  forecastChart: 'Prophet demand forecast for 2027 with confidence bounds',
+  seasonIndexChart: 'Climate-disease seasonality demand index by month',
+};
 function applyTheme(theme) {
   try {
     if (theme === 'dark') {
