@@ -11,6 +11,7 @@ import {
   LogOut,
 } from 'lucide-react'
 import { ActiveTab } from '@/types/dashboard.types'
+import Image from 'next/image'
 
 interface SidebarProps {
   activeTab: ActiveTab
@@ -42,7 +43,7 @@ export function Sidebar({
       <div className="sidebar-brand">
         <div className="brand-logo">
           <div className="brand-icon">
-            <img src="/medshield_logo.png" alt="MedShield logo" />
+            <Image src="/medshield_logo.png" alt="MedShield logo" width={32} height={32} />
           </div>
           <div className="brand-text">
             <div className="brand-name">MedShield</div>
