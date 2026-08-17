@@ -1167,8 +1167,19 @@ def ensure_baseline_sales_dataset() -> dict[str, Any]:
 
 def _load_local_sales_payload() -> dict[str, Any]:
     ensure_baseline_sales_dataset()
-    with gzip.open(SALES_DATASET_PATH, "rt", encoding="utf-8") as handle:
-        return json.load(handle)
+    try:
+        with gzip.open(SALES_DATASET_PATH, "rt", encoding="utf-8") as handle:
+            return json.load(handle)
+    except Exception as e:
+        import logging
+        logging.getLogger(__name__).warning(f"Corrupted sales payload detected ({e}). Re-generating baseline.")
+        try:
+            SALES_DATASET_PATH.unlink(missing_ok=True)
+        except Exception:
+            pass
+        ensure_baseline_sales_dataset()
+        with gzip.open(SALES_DATASET_PATH, "rt", encoding="utf-8") as handle:
+            return json.load(handle)
 
 
 def sales_dataset_status() -> dict[str, Any]:

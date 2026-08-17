@@ -45,6 +45,7 @@ export function getExecutableDashboardScript(): string {
     .join('\n')
 
   let patchedScript = MEDSHIELD_SCRIPT
+    .replace(/window\.([a-zA-Z0-9_]+)\s*=\s*\1;?/g, "if (typeof $1 !== 'undefined') window.$1 = $1;")
     .replace("window.addEventListener('DOMContentLoaded', async () => {", `(async () => {\n${globalHandlerBridge}\n`)
     .replaceAll("'#335F78'", "dashboardThemeColor('--chart-label', '#335F78')")
     .replaceAll("'#67879A'", "dashboardThemeColor('--chart-muted', '#67879A')")
@@ -74,8 +75,61 @@ const Chart = (window.Chart && (window.Chart.Chart || window.Chart.default || wi
 function dashboardThemeColor(name, fallback) {
   try {
     return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback;
-  } catch {
+  } catch (error) {
     return fallback;
+  }
+}
+function applyTheme(theme) {
+  try {
+    if (theme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+function ensureMockFallbackData() {
+  // Handled by static DATA structure initialization
+}
+function setAllChartWrapStates(state) {
+  try {
+    document.querySelectorAll('.chart-wrap').forEach((wrap) => {
+      wrap.setAttribute('data-state', state);
+      if (wrap.dataset) {
+        wrap.dataset.state = state;
+      }
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
+function updateFilterBar(name) {
+  try {
+    const bar = document.getElementById('filterBar');
+    if (bar) {
+      if (['overview', 'revenue', 'products', 'territory'].includes(name)) {
+        bar.style.display = 'flex';
+      } else {
+        bar.style.display = 'none';
+      }
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+function resizeCharts() {
+  try {
+    if (typeof charts !== 'undefined') {
+      for (const id in charts) {
+        if (charts[id] && typeof charts[id].resize === 'function') {
+          charts[id].resize();
+        }
+      }
+    }
+  } catch (error) {
+    console.error(error);
   }
 }
 ${patchedScript}

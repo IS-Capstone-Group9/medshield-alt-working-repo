@@ -10,7 +10,14 @@ export async function updateSession(request: NextRequest) {
   const path = request.nextUrl.pathname
   const isPublicRoute = PUBLIC_ROUTES.has(path)
 
-  if (!supabaseUrl || !supabaseKey) {
+  const isConfigured = Boolean(
+    supabaseUrl &&
+      supabaseKey &&
+      supabaseKey.trim() !== '' &&
+      !supabaseKey.includes('replace-with')
+  )
+
+  if (!isConfigured) {
     const token = request.cookies.get('medshield.accessToken')?.value
     if (!token && !isPublicRoute) {
       const url = request.nextUrl.clone()
