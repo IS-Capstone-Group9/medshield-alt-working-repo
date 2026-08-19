@@ -10,7 +10,7 @@ export function SeasonGrid({ activeSeason, onChangeSeason }: SeasonGridProps) {
   const cards = [
     {
       id: 'amihan',
-      tag: 'Jan & Feb',
+      tag: 'Nov - Feb',
       title: 'Amihan Cool Dry',
       risks: 'Flu/ILI Surges, Pediatric Asthma',
       restock: 'Bronchodilators, Antihistamines',

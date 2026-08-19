@@ -239,7 +239,7 @@ Move unfinished or production-grade items into recommendations:
 - Persist audit logs server-side.
 - Add tenant/role-based row-level security.
 - Integrate official DOH and PAGASA data feeds when stable sources are available.
-- Train and validate Prophet, XGBoost, K-Means, MCDA, EOQ/ROP, allocation, and recommendation models using warehouse data.
+- Train and validate Prophet, XGBoost, Heuristic Tiering, MCDA, EOQ/ROP, allocation, and recommendation models using warehouse data.
 - Add full model evaluation dashboards.
 - Add deployment CI/CD and monitoring.
 

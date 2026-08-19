@@ -200,7 +200,7 @@ def weather_refresh():
 
 _SEASONAL_MATRIX = [
     {
-        "months": "January & February", "month_numbers": [1, 2],
+        "months": "November - February", "month_numbers": [1, 2],
         "season_climate": "Northeast Monsoon (Amihan) / Cool Dry Season",
         "season_emoji": "AMIHAN", "urgency_level": 3, "urgency_rating": "HIGH_RESPIRATORY_PRIORITY",
         "weather_indicators": "Cooler temperatures (20-25C), low humidity, cold night fronts",
@@ -439,7 +439,7 @@ def seasonal_restock_detail():
     
     details_map = {
         "amihan": {
-            "season_name": "January & February — Amihan Cool Dry Season",
+            "season_name": "November - February — Amihan Cool Dry Season",
             "climate_trigger": "Amihan Northeast Monsoon / Cool Air Mass",
             "disease_risks": ["Influenza-Like Illness (ILI)", "Flu Surges", "Asthma Exacerbations", "SARI"],
             "skus": [

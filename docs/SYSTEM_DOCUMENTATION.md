@@ -70,7 +70,7 @@ Vulnerability\_Score_j = W_1 \cdot Dengue\_Surge_j + W_2 \cdot Demand\_Scale_j +
 \]
 - **Live User Sliders:** Planners can adjust \(W_1\) (Disease Risk), \(W_2\) (Volume), and \(W_3\) (Logistics Friction) in real time to simulate emergency reallocation during disaster declarations.
 
-### 2.4. Territory Clustering: K-Means Segmentation
+### 2.4. Territory Clustering: Revenue Segmentation
 Groups regional territories into 4 operational archetypes based on revenue volume, purchasing consistency, and stockout vulnerability:
 - **Cluster A (Institutional / Government):** High volume, scheduled institutional replenishments.
 - **Cluster B (Stable Commercial):** Consistent retail and distributor velocity (Batangas, Quezon).

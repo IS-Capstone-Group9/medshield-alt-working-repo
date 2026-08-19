@@ -45,7 +45,7 @@ These endpoints expose the paper-aligned decision-support outputs. The TypeScrip
 | `GET /api/forecasts` | `vw_dss_forecasts` / analytics service | Prophet baseline and external-regressor demand forecast values. |
 | `GET /api/external_signals` | `vw_dss_external_signals` / analytics service | DOH disease intensity and PAGASA/weather rainfall severity signals. |
 | `GET /api/regional_priorities` | `vw_dss_regional_priorities` / analytics service | MCDA regional ranking using revenue, growth, and outbreak risk. |
-| `GET /api/area_clusters` | `vw_dss_area_clusters` / analytics service | K-Means-style area cluster outputs. |
+| `GET /api/area_clusters` | `vw_dss_area_clusters` / analytics service | Heuristic Tiering-style area cluster outputs. |
 | `GET /api/decision_alerts` | `vw_dss_decision_alerts` / analytics service | Rule-based stock, disease, weather, allocation, and forecast alerts. |
 | `GET /api/model_evaluation` | `vw_dss_model_evaluation` / analytics service | Model validation metrics and benchmark status. |
 | `GET /api/inventory_recommendations` | `vw_dss_inventory_recommendations` / product service | EOQ, reorder point, safety stock, stock gap, and risk recommendations. |

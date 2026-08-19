@@ -4,7 +4,7 @@ import { SeasonType, SeasonInfo, RestockItem } from '@/types/prescriptive.types'
 const SEASONS_DATA: Record<SeasonType, { info: SeasonInfo; rows: RestockItem[] }> = {
   amihan: {
     info: {
-      tag: 'Jan & Feb',
+      tag: 'Nov - Feb',
       title: 'Amihan Cool Dry',
       risks: 'Flu/ILI Surges, Pediatric Asthma',
       restock: 'Bronchodilators, Antihistamines',

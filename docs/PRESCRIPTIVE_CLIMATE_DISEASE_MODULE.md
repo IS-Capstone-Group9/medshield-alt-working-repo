@@ -40,7 +40,7 @@ By applying time-series forecasting algorithms (Prophet and Gradient Boosted Reg
 
 | Season / Month Block | Climate Phase (PAGASA Trigger) | Epidemiological Risk (DOH PIDSR) | Prescribed Essential Medicine Categories | High-Priority SKUs |
 |---|---|---|---|---|
-| **Jan & Feb** | Amihan (Cool Dry Season) | Influenza-Like Illness (ILI), Asthma Exacerbations, SARI | Bronchodilators, Antihistamines, Corticosteroids | Salbutamol 2.5mg Nebules, Cetirizine 10mg, Paracetamol |
+| **Nov - Feb** | Amihan (Cool Dry Season) | Influenza-Like Illness (ILI), Asthma Exacerbations, SARI | Bronchodilators, Antihistamines, Corticosteroids | Salbutamol 2.5mg Nebules, Cetirizine 10mg, Paracetamol |
 | **Mar & Apr** | Summer Peak Heat Surge | Acute Gastroenteritis, Dehydration, Typhoid Fever | Oral Rehydration Salts (ORS), Antidiarrheals, GI Meds | ORS Packets, Metronidazole 500mg, Omeprazole 40mg |
 | **May & Jun** | Pre-Monsoon Thunderstorms | Early Dengue Onset, HFMD, Waterborne GI Outbreaks | Antipyretics, IV Fluids, Broad-Spectrum Antibiotics | Paracetamol 500mg, IV Normal Saline, Co-Amoxiclav 625mg |
 | **Jul & Aug (CRITICAL)** | Peak Monsoon (Habagat) & Floods | Dengue Outbreaks, Leptospirosis Wave 1, Cholera | Flood Prophylactics, Dengue Antipyretics, IV Fluids | Doxycycline 100mg, Paracetamol 500mg, Cefuroxime |

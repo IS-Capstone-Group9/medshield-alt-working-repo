@@ -70,7 +70,7 @@ Raw staging, transaction facts, and ETL ledgers have no anonymous read policy. W
 |---|---|
 | Prophet / Prophet with external regressors | `fact_forecast_run`, `fact_demand_forecast` |
 | ABC/Pareto and XGBoost urgency | `fact_product_priority` |
-| K-Means area clustering | `fact_area_cluster` |
+| Area Revenue Clustering | `fact_area_cluster` |
 | MCDA regional ranking | `fact_regional_priority` |
 | EOQ, ROP, safety stock | `fact_inventory_recommendation` |
 | Linear programming allocation | `fact_allocation_recommendation` |

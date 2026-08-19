@@ -9,7 +9,7 @@ For implementation logic, data gates, publication labels, and worker responsibil
 | Analytics Layer | Model / Method | DSS Output |
 |---|---|---|
 | Descriptive | ABC/Pareto | Product contribution and priority class. |
-| Descriptive | K-Means area clustering | Area segments and planning implications. |
+| Descriptive | Area Revenue Clustering | Area segments and planning implications. |
 | Descriptive | STL/seasonality | Month-level seasonal demand pattern. |
 | Predictive | Prophet baseline | 2026 demand forecast from historical sales. |
 | Predictive | Prophet with external regressors | Forecast adjusted by disease and weather signals. |
@@ -37,7 +37,7 @@ For implementation logic, data gates, publication labels, and worker responsibil
 | Prophet forecast | MAE, RMSE, MAPE |
 | Prophet with external regressors | MAE, RMSE, MAPE |
 | XGBoost urgency | MAE, RMSE, MAPE or ranking accuracy, depending on label availability |
-| K-Means | Silhouette score, Davies-Bouldin index |
+| Heuristic Tiering | Silhouette score, Davies-Bouldin index |
 | Alerts | Precision, recall, alert accuracy |
 | EOQ/ROP/safety stock | Cost deviation, fulfillment rate |
 | MCDA / allocation | Ranking consistency, optimization gap |
@@ -113,7 +113,7 @@ The Weather API Validation dashboard view is the operational check for this scop
 | Product prioritization | Top product revenue and ABC table | ABC/Pareto | Which products deserve priority control? |
 | Product prioritization | Product urgency table | XGBoost urgency scoring | Which products need active review before shortages? |
 | Area prioritization | Revenue and income by territory | Descriptive territory analysis | Which areas drive demand and margin? |
-| Area prioritization | Area cluster table | K-Means | Which areas share similar planning behavior? |
+| Area prioritization | Area cluster table | Heuristic Tiering | Which areas share similar planning behavior? |
 | Area prioritization | Regional priority table | MCDA | Which regions should receive priority action? |
 | Forecast modeling | Forecast projection chart | Prophet / Prophet with regressors | What is the planning demand range? |
 | Forecast modeling | Seasonality index | STL / seasonality | Which months need demand multipliers? |

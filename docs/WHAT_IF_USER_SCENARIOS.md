@@ -82,11 +82,11 @@ A signal #3 typhoon damages roll-on/roll-off (RORO) port infrastructure to Marin
 ### 🎬 Action Flow in MedShield:
 1. Navigate to **Area Prioritization** tab.
 2. Increase the **Lead Time Factor (\(W_3\))** to **50%** and reduce Demand Scale to **20%**.
-3. Inspect the **K-Means Territory Segmentation** table (Cluster D - High Friction / Remote).
+3. Inspect the **Territory Revenue Segmentation** table (Cluster D - High Friction / Remote).
 
 ### ✅ Expected System Response & Verification:
 - Island and isolated territories (Marinduque, Camarines Norte) receive higher vulnerability scores to trigger early buffer pre-positioning before maritime routes close.
-- The K-Means table cleanly displays full planning strategies without text truncation or overflow.
+- The Heuristic Tiering table cleanly displays full planning strategies without text truncation or overflow.
 
 ---
 

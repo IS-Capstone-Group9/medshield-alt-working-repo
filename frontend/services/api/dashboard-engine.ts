@@ -73,6 +73,10 @@ export function getExecutableDashboardScript(): string {
     if (existingChart) existingChart.destroy();
     if (charts[id] && charts[id] !== existingChart) charts[id].destroy();`,
     )
+    .replace(
+      "const sortedProductRows = getSortedProductRows();",
+      "const sortedProductRows = getSortedProductRows();"
+    )
 
   // Robust closing of the (async () => { ... })() IIFE block before utility functions
   if (patchedScript.includes("});\n\nif (typeof window !== 'undefined')")) {
@@ -100,21 +104,46 @@ function numericSeriesOrFallback(primary, fallback) {
   }
   return fallback || [];
 }
-// ARIA label map for chart canvases (accessibility)
-const CHART_ARIA_LABELS = {
-  overviewForecastChart: 'Monthly demand forecast with confidence intervals',
-  revenueDetailChart: 'Detailed monthly revenue and net income trend',
-  growthChart: 'Year-over-year revenue growth percentage',
-  marginChart: 'Gross profit margin rate by year',
-  seasonChart: 'Average revenue by calendar month (seasonality)',
-  productBarChart: 'Top 10 products by cumulative revenue',
-  abcChart: 'ABC portfolio concentration by revenue class',
-  areaBarChart: 'Revenue by delivery territory',
-  areaIncomeChart: 'Net income by delivery territory',
-  areaMarginChart: 'Gross margin rate by delivery territory',
-  forecastChart: 'Prophet demand forecast for 2027 with confidence bounds',
-  seasonIndexChart: 'Climate-disease seasonality demand index by month',
-};
+
+function getSortedProductRows() {
+  if (typeof DATA === 'undefined' || !DATA || !DATA.top_products) return [];
+  return [...DATA.top_products].sort(function(a, b) {
+    var k = typeof productTableSort !== 'undefined' ? productTableSort.key : 'revenue';
+    var dir = (typeof productTableSort !== 'undefined' && productTableSort.direction === 'asc') ? 1 : -1;
+    if (a[k] < b[k]) return -1 * dir;
+    if (a[k] > b[k]) return 1 * dir;
+    return 0;
+  });
+}
+
+function renderTable(id, html) {
+  var el = document.getElementById(id);
+  if (el) el.innerHTML = html;
+}
+
+function getProductSortIndicator(key) {
+  if (typeof productTableSort === 'undefined') return '\u2195';
+  if (productTableSort.key !== key) return '\u2195';
+  return productTableSort.direction === 'asc' ? '\u2191' : '\u2193';
+}
+
+function bindProductTableSort() {
+  if (typeof productTableSort === 'undefined') return;
+  var ths = document.querySelectorAll('#productTable th.sortable');
+  for (var i = 0; i < ths.length; i++) {
+    ths[i].addEventListener('click', function(e) {
+      var key = e.currentTarget.getAttribute('data-sort-key');
+      if (productTableSort.key === key) {
+        productTableSort.direction = productTableSort.direction === 'asc' ? 'desc' : 'asc';
+      } else {
+        productTableSort.key = key;
+        productTableSort.direction = 'desc';
+      }
+      if (typeof buildTables === 'function') buildTables();
+    });
+  }
+}
+
 function applyTheme(theme) {
   try {
     if (theme === 'dark') {
