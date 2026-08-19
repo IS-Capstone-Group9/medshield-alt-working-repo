@@ -1488,7 +1488,7 @@ function refreshComparison() {
 }
 
 (async () => {
-${globalHandlerBridge}
+// ${globalHandlerBridge}
 
   console.log('DOM Content Loaded - initializing dashboard...');
   

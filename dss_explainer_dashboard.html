@@ -1166,6 +1166,7 @@
             <button class="nav-btn" onclick="switchTab('mod3-product-area')">🎯 Module 3: Prioritization</button>
             <button class="nav-btn" onclick="switchTab('mod4-forecast')">📈 Module 4: Forecast Modeling</button>
             <button class="nav-btn" onclick="switchTab('mod5-prescriptive')">⚙️ Module 5: Planning & Uploads</button>
+            <button class="nav-btn" onclick="switchTab('mod6-rolling-forecast')">🔮 Module 6: Rolling Forecast</button>
         </nav>
 
         <div class="header-meta">
@@ -1186,7 +1187,7 @@
 
     <!-- Immediate Assignment & Objective-to-Solution Banner -->
     <div class="assignment-banner-container" style="padding: 1rem 2rem 0 2rem;">
-        <div class="card" style="border: 1px solid rgba(59, 130, 246, 0.4); background: linear-gradient(135deg, rgba(17, 24, 39, 0.95), rgba(30, 58, 138, 0.3)); shadow: var(--shadow-card);">
+        <div class="card" style="border: 1px solid rgba(59, 130, 246, 0.4); background: linear-gradient(135deg, rgba(17, 24, 39, 0.95), rgba(30, 58, 138, 0.3)); box-shadow: var(--shadow-card);">
             <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="toggleAssignmentDetails()">
                 <div style="display:flex; align-items:center; gap:0.75rem;">
                     <span style="font-size:1.4rem;">📋</span>
@@ -1346,12 +1347,13 @@
                         <span class="card-title">Module Walkthrough Quick Navigation</span>
                         <span class="badge badge-b">Section 3.8 Modules</span>
                     </div>
-                    <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.75rem;">Jump directly to any of the 5 decision support modules:</p>
+                    <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.75rem;">Jump directly to any of the 6 decision support modules:</p>
                     <div style="display:flex; flex-direction:column; gap:0.6rem;">
                         <button class="btn-sm btn-primary" style="justify-content:flex-start;" onclick="switchTab('mod2-sales-diag')">🔍 Module 2: Sales Diagnostic (STL & YoY Trends)</button>
                         <button class="btn-sm btn-outline" style="justify-content:flex-start;" onclick="switchTab('mod3-product-area')">🎯 Module 3: Product & Area Prioritization (80/20 & XGBoost)</button>
                         <button class="btn-sm btn-outline" style="justify-content:flex-start;" onclick="switchTab('mod4-forecast')">📈 Module 4: Forecast Modeling (Prophet & Urgency Scores)</button>
                         <button class="btn-sm btn-outline" style="justify-content:flex-start;" onclick="switchTab('mod5-prescriptive')">⚙️ Module 5: Prescriptive Planning & Data Uploads (EOQ, ROP & LP)</button>
+                        <button class="btn-sm btn-outline" style="justify-content:flex-start;" onclick="switchTab('mod6-rolling-forecast')">🔮 Module 6: Rolling 12-Month Forecast Dashboard</button>
                     </div>
                 </div>
             </div>
@@ -1969,6 +1971,115 @@
                 </div>
             </div>
         </div>
+        <!-- MODULE 6: ROLLING 12-MONTH FORECAST DASHBOARD -->
+        <div id="mod6-rolling-forecast" class="page-view">
+            <!-- Data Provenance & Global Date Filter -->
+            <div class="card" style="margin-bottom: 0.5rem;">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+                    <div>
+                        <strong style="color:var(--text-main); font-size:1.05rem;">Rolling Forecast Dashboard</strong>
+                        <div style="font-size:0.8rem; color:var(--text-muted); margin-top:0.25rem;">
+                            Model: <span class="badge badge-b">v2.4</span> | Trained: <span class="badge badge-a">2026-07-28 14:00</span> | Data Cutoff: <span class="badge badge-a">Dec 2025</span>
+                        </div>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:0.75rem;">
+                        <label class="filter-label" style="margin:0;">Date Range:</label>
+                        <select class="select-input" style="width:auto; padding:0.4rem 0.75rem;">
+                            <option>Current month</option>
+                            <option>Last 3 months</option>
+                            <option>Last 12 months</option>
+                            <option selected>Rolling 12 months forecast</option>
+                            <option>Custom</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monthly Roll Notification Banner -->
+            <div class="alert-banner" style="background: rgba(59, 130, 246, 0.15); border-color: rgba(59, 130, 246, 0.3); animation: none; margin-bottom: 0.5rem; display: flex;">
+                <span class="alert-icon">ℹ️</span>
+                <div style="flex:1;">
+                    <span class="alert-title" style="color:var(--primary);">Month Rolled</span>
+                    <span class="alert-desc"> — Former current month added to historical; forecasts updated automatically based on new horizon.</span>
+                </div>
+            </div>
+
+            <!-- Top-level KPIs -->
+            <div class="grid-3col">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Current MTD Actuals</span>
+                        <span class="card-icon">₱</span>
+                    </div>
+                    <div class="kpi-value">₱ 45.2M</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">MoM % Change</span>
+                        <span class="card-icon">%</span>
+                    </div>
+                    <div class="kpi-value" style="color:var(--accent-emerald);">+5.2%</div>
+                    <div class="kpi-sub">vs same period last month</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Current Month Forecast</span>
+                        <span class="card-icon">🎯</span>
+                    </div>
+                    <div class="kpi-value">₱ 52.8M</div>
+                    <div class="kpi-sub">Confidence bounds: ± 2.1M</div>
+                </div>
+            </div>
+
+            <!-- Main Canvas -->
+            <div class="grid-3col">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Current Month</span>
+                        <span class="badge badge-a">Daily ▼</span>
+                    </div>
+                    <div class="chart-wrapper" style="height:280px;">
+                        <canvas id="currentMonthChart"></canvas>
+                    </div>
+                </div>
+                <div class="card" style="grid-column: span 2;">
+                    <div class="card-header">
+                        <span class="card-title">Historical & Rolling 12-Month Forecast</span>
+                        <span class="badge badge-b">Monthly ▼</span>
+                    </div>
+                    <div class="chart-wrapper" style="height:280px;">
+                        <canvas id="rollingForecastChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Secondary Canvas -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Year-by-Year Totals (Rolling 3-Year Projection)</span>
+                </div>
+                <div class="table-container">
+                    <table class="data-table" style="text-align: center;">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center;">2026 Actual + Fcst</th>
+                                <th style="text-align: center;">2027 Forecast</th>
+                                <th style="text-align: center;">2028 Forecast</th>
+                                <th style="text-align: center;">2029 Forecast</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="num-col" style="text-align: center; font-size:1.1rem; font-weight:700;">₱ 480.5M</td>
+                                <td class="num-col" style="text-align: center; font-size:1.1rem; font-weight:700; color:var(--primary);">₱ 510.2M <span style="font-size:0.75rem; color:var(--text-muted); font-weight:normal;">(±15M)</span></td>
+                                <td class="num-col" style="text-align: center; font-size:1.1rem; font-weight:700; color:var(--primary);">₱ 540.8M <span style="font-size:0.75rem; color:var(--text-muted); font-weight:normal;">(±25M)</span></td>
+                                <td class="num-col" style="text-align: center; font-size:1.1rem; font-weight:700; color:var(--primary);">₱ 565.0M <span style="font-size:0.75rem; color:var(--text-muted); font-weight:normal;">(±40M)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
     </main>
 
@@ -2573,6 +2684,86 @@
             setTimeout(() => { statusBox.style.display = 'none'; }, 6000);
         }
 
+        // Initialize Module 6 Rolling Forecast Charts
+        function initRollingForecastCharts() {
+            const ctxMonth = document.getElementById('currentMonthChart');
+            if (ctxMonth) {
+                new Chart(ctxMonth.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['Aug 1', 'Aug 8', 'Aug 15', 'Aug 22', 'Aug 29'],
+                        datasets: [{
+                            label: 'Daily Sales',
+                            data: [12000, 19000, 15000, 22000, 18000],
+                            backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                            borderRadius: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { beginAtZero: true, grid: { color: 'rgba(255, 255, 255, 0.05)' } }, x: { grid: { display: false } } }
+                    }
+                });
+            }
+
+            const ctxRolling = document.getElementById('rollingForecastChart');
+            if (ctxRolling) {
+                new Chart(ctxRolling.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                        datasets: [
+                            {
+                                label: 'Historical Actuals',
+                                data: [15, 16, 18, 17, 19, 21, 23, null, null, null, null, null, null, null, null, null, null, null, null],
+                                borderColor: '#3b82f6',
+                                backgroundColor: 'transparent',
+                                borderWidth: 2,
+                                tension: 0.3
+                            },
+                            {
+                                label: 'Forecast Median',
+                                data: [null, null, null, null, null, null, 23, 25, 24, 22, 21, 23, 24, 25, 27, 26, 28, 30, 32],
+                                borderColor: '#f59e0b',
+                                backgroundColor: 'transparent',
+                                borderWidth: 2,
+                                borderDash: [5, 5],
+                                tension: 0.3
+                            },
+                            {
+                                label: 'Confidence Upper',
+                                data: [null, null, null, null, null, null, 23, 27, 26, 24, 23, 25, 26, 27, 29, 28, 30, 32, 34],
+                                borderColor: 'transparent',
+                                backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                                tension: 0.3,
+                                fill: 1
+                            },
+                            {
+                                label: 'Confidence Lower',
+                                data: [null, null, null, null, null, null, 23, 23, 22, 20, 19, 21, 22, 23, 25, 24, 26, 28, 30],
+                                borderColor: 'transparent',
+                                backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                                tension: 0.3,
+                                fill: '-1'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: { mode: 'index', intersect: false },
+                        plugins: { legend: { labels: { color: '#9ca3af' } } },
+                        scales: {
+                            y: { grid: { color: 'rgba(255, 255, 255, 0.05)' } },
+                            x: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
+        }
+
         // CSV File Handler
         function handleCSVUpload(event) {
             const file = event.target.files[0];
@@ -2640,6 +2831,7 @@
                     initForecastChart();
                     initExecutiveCharts();
                     initYoYChart();
+                    initRollingForecastCharts();
                     recalculatePrescriptiveEngine();
                     chartsInitialized = true;
                 }
