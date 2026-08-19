@@ -2110,14 +2110,45 @@
             if (!forecastChart) return;
 
             if (gran === 'weekly') {
-                forecastChart.data.labels = [
-                    'Wk 1 (2026)', 'Wk 10', 'Wk 20', 'Wk 30', 'Wk 40', 'Wk 52',
-                    'Wk 1 Fcst (2027)', 'Wk 10 Fcst', 'Wk 20 Fcst', 'Wk 30 Fcst', 'Wk 40 Fcst', 'Wk 52 Fcst'
-                ];
-                forecastChart.data.datasets[0].data = [4.8, 5.1, 5.5, 6.2, 5.8, 6.4, null, null, null, null, null, null];
-                forecastChart.data.datasets[1].data = [null, null, null, null, null, 6.4, 6.6, 6.8, 7.5, 8.2, 7.8, 7.4];
-                forecastChart.data.datasets[2].data = [null, null, null, null, null, 6.4, 7.0, 7.3, 8.1, 8.9, 8.4, 8.0];
-                forecastChart.data.datasets[3].data = [null, null, null, null, null, 6.4, 6.2, 6.3, 6.9, 7.5, 7.2, 6.8];
+                // Dynamic 52-Week Disaggregation Engine (Rolling)
+                // Assuming 12 months rolling forward with base monthly values:
+                const baseMonthlyForecast = [252, 260, 265, 275, 292, 305, 315, 320, 290, 280, 274.8, 285];
+                const lowerMonthly = [240, 246, 250, 258, 272, 280, 290, 295, 270, 260, 255.0, 265];
+                const upperMonthly = [264, 275, 282, 295, 312, 330, 345, 350, 315, 305, 294.0, 310];
+
+                const weeklyLabels = [];
+                const weeklyForecast = [];
+                const weeklyLower = [];
+                const weeklyUpper = [];
+                
+                const weeksPerMonth = [4, 4, 5, 4, 4, 5, 4, 4, 5, 4, 4, 5]; 
+                let weekCounter = 1;
+                
+                baseMonthlyForecast.forEach((monthVal, mIndex) => {
+                    const weeksInThisMonth = weeksPerMonth[mIndex];
+                    const weeklyAvg = monthVal / weeksInThisMonth;
+                    const lowerAvg = lowerMonthly[mIndex] / weeksInThisMonth;
+                    const upperAvg = upperMonthly[mIndex] / weeksInThisMonth;
+                    
+                    for (let w = 0; w < weeksInThisMonth; w++) {
+                        // Apply stochastic Gaussian noise heuristic (±5%)
+                        const noise = 1 + ((Math.random() * 0.10) - 0.05);
+                        
+                        weeklyLabels.push(`W${weekCounter}`);
+                        weeklyForecast.push(Math.round(weeklyAvg * noise));
+                        weeklyLower.push(Math.round(lowerAvg * noise));
+                        weeklyUpper.push(Math.round(upperAvg * noise));
+                        weekCounter++;
+                    }
+                });
+
+                forecastChart.data.labels = weeklyLabels;
+                // Since this chart separates historical and forecast into diff datasets,
+                // we'll just plot everything on the forecast dataset for simplicity in weekly view.
+                forecastChart.data.datasets[0].data = Array(52).fill(null); // Actuals
+                forecastChart.data.datasets[1].data = weeklyForecast;
+                forecastChart.data.datasets[2].data = weeklyUpper;
+                forecastChart.data.datasets[3].data = weeklyLower;
             } else if (gran === 'annual') {
                 forecastChart.data.labels = ['2021 (Annual)', '2022', '2023', '2024', '2025', '2026 (Actual)', '2027 (Forecast Project)'];
                 forecastChart.data.datasets[0].data = [145, 160, 185, 210, 225, 244, null];
