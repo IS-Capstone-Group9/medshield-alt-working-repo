@@ -679,6 +679,7 @@ def eoq_scenarios():
 
 if __name__ == "__main__":
     app.run(
+        host='0.0.0.0',
         port=int(os.getenv("ANALYTICS_SERVICE_PORT", "5101")),
         debug=os.getenv("FLASK_DEBUG", "").strip().lower() in {"1", "true", "yes"},
         use_reloader=False,

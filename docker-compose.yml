@@ -16,6 +16,7 @@ services:
     volumes:
       - ./data/medshield/processed:/app/data/medshield/processed
       - ./data/medshield/uploads:/app/data/medshield/uploads
+      - ./data/medshield/raw:/app/data/medshield/raw:ro
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5101/health', timeout=5)"]
       interval: 15s
@@ -38,6 +39,7 @@ services:
       - "5102:5102"
     volumes:
       - ./data/medshield/processed:/app/data/medshield/processed:ro
+      - ./data/medshield/raw:/app/data/medshield/raw:ro
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5102/health', timeout=5)"]
       interval: 15s
