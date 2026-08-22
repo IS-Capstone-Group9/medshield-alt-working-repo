@@ -114,7 +114,7 @@ Update the architecture diagram and narrative to include:
 |---|---|
 | Frontend | Next.js, React, TypeScript dashboard |
 | Gateway | TypeScript backend API in `backend/` |
-| Services | Python Flask analytics and product services |
+| Services (DSS Core) | Python Flask analytics orchestrating the Dynamic Champion-Challenger Router (Prophet, XGBoost, SARIMA, Holt-Winters) |
 | Database | Supabase PostgreSQL warehouse |
 | Local fallback | JSON/GZIP processed data under `data/medshield/processed` |
 | External APIs | NASA POWER Daily and Open-Meteo Historical, called by backend/service logic |
@@ -229,6 +229,7 @@ Revise the conclusion to say the project now demonstrates an end-to-end analytic
 
 - The system accepts messy sales data and turns it into standardized decision-support records.
 - The system can validate historical weather observations and align them with sales grain.
+- The DSS uses a Dynamic Champion-Challenger architecture that automatically evaluates multiple predictive models (Prophet, XGBoost, SARIMA) and routes forecasting dynamically based on the lowest error rate.
 - The DSS database design can support future model outputs for forecasting, prioritization, inventory, allocation, and alerts.
 
 ### Future Work

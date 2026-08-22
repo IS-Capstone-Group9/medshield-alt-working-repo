@@ -25,8 +25,8 @@ The system used historical data only. The sales dataset covers 2021 to 2025, the
 | Business Understanding | Define the decision problem: demand planning, product prioritization, territory analysis, and inventory planning support. | Approved business definitions, Chapter 1 scope, system objectives. |
 | Data Understanding | Review sales, DOH, PAGASA, and weather API data coverage, quality, and limitations. | Data profile, 2025 completeness review, source period table. |
 | Data Preparation | Clean sales rows, standardize fields, classify products and areas, allocate contract-name rows, and prepare external signal files. | Cleaned sales dataset, product master, area mapping, external data templates. |
-| Modeling | Run descriptive analytics, baseline forecasting, optional external-regressor models, and priority/scenario scoring. | Model outputs, metrics, charts, run metadata. |
-| Evaluation | Check reconciliation, missing periods, forecast accuracy, model usefulness, and limitations. | QA checklist, evaluation table, limitations section. |
+| Modeling | Run descriptive analytics, baseline forecasting (Prophet/XGBoost as primary, Classical models as challengers), optional external-regressors, and priority scoring. | Model outputs, metrics, charts, run metadata. |
+| Evaluation | Check reconciliation, evaluate forecast accuracy (MAPE) via Dynamic Champion-Challenger feedback loop, and assess model usefulness. | QA checklist, evaluation table, limitations section. |
 | Deployment | Publish validated outputs through the API/dashboard and document the workflow. | Dashboard screenshots, API examples, Chapter 4 evidence. |
 
 ## SEMMA Application
@@ -36,8 +36,8 @@ The system used historical data only. The sales dataset covers 2021 to 2025, the
 | Sample | Select usable historical sales, DOH, PAGASA, and weather API records. | Data source table and coverage notes. |
 | Explore | Profile missing dates, rejected rows, product aliases, territory values, and trend patterns. | Data readiness profile and exploratory charts. |
 | Modify | Clean, transform, map, aggregate, and engineer features. | Analytical marts, mapping files, feature tables. |
-| Model | Apply ABC/Pareto, STL, baseline forecasting, optional regressors, and priority scoring. | Model output tables and dashboard charts. |
-| Assess | Compare models, check metrics, validate assumptions, and document whether outputs are usable. | Forecast metrics, model comparison, limitations. |
+| Model | Apply ABC/Pareto, STL, Champion-Challenger forecasting (Prophet vs Classical models), optional regressors, and priority scoring. | Model output tables and dashboard charts. |
+| Assess | Compare models using MAPE, dynamically select Champion, validate assumptions, and document whether outputs are usable. | Forecast metrics, model comparison, limitations. |
 
 ## RRL Notes
 
@@ -58,7 +58,7 @@ Use `docs/RRL_DISEASE_WEATHER_PHARMA_DEMAND_GUIDE.md` for the literature-backed 
 - The system supports decision-making using historical sales and external context data.
 - Weather API data is a provider-derived weather proxy, not official PAGASA data.
 - DOH data supports historical disease signal analysis, not live alerting.
-- Forecasts are planning estimates and must be evaluated against benchmarks.
+- Forecasts are evaluated dynamically using a Champion-Challenger architecture, allowing classical models (e.g. SARIMA) to act as failsafes if the primary model's error rate spikes.
 - Scenario outputs require human review before action.
 
 ## Claims To Avoid
@@ -78,5 +78,5 @@ Use `docs/RRL_DISEASE_WEATHER_PHARMA_DEMAND_GUIDE.md` for the literature-backed 
 5. Explain product/SKU alias mapping and area classification.
 6. Explain 2025 data limitations.
 7. Explain descriptive, predictive, and scenario analytics separately.
-8. Explain model evaluation metrics and validation.
+8. Explain the Dynamic Champion-Challenger architecture, how classical models act as challengers in the feedback loop, and validation metrics (MAPE).
 9. State that final outputs are historical decision-support outputs.

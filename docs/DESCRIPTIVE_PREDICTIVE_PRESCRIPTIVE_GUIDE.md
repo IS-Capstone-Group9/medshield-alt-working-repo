@@ -142,11 +142,10 @@ The forecast is a decision-support input for planning. It is not an automated pu
 |---|---|---|
 | 1 | Last-value benchmark | Minimal baseline. |
 | 2 | Seasonal naive benchmark | Same month from prior year. |
-| 3 | Moving average benchmark | Smooth short-term volatility. |
-| 4 | Sales-only Prophet | Main candidate forecast. |
-| 5 | Prophet with weather proxy | Challenger model when weather data improves accuracy. |
-| 6 | Prophet with DOH disease signal | Challenger model when DOH data is loaded and mapped. |
-| 7 | Combined external-regressor model | Use only if common periods support it. |
+| 3 | Prophet (Champion candidate) | Main candidate forecast, robust to missing data. |
+| 4 | Classical Models (SARIMA/Holt-Winters) | Challenger models. Act as failsafes but heavily monitored for indexing shift errors during missing data events. |
+| 5 | Dynamic Champion-Challenger Routing | System continually evaluates models via MAPE and dynamically routes forecasting to the most accurate model. |
+| 6 | Prophet with weather/disease proxies | External-regressor challenger models when DOH/PAGASA data is loaded and validated. |
 
 ### Recommended Forecast Grains
 
