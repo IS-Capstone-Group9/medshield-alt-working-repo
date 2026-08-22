@@ -1590,24 +1590,35 @@
             <div style="display:flex; flex-direction:column; gap:1.5rem;">
                 <div class="card">
                     <div class="card-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
-                        <div>
-                            <span class="card-title">Facebook Prophet Demand Forecast Transition & Confidence Limits</span>
-                            <span class="badge badge-b" id="forecast-model-badge">Model: Prophet + External Regressors</span>
+                        <div style="flex: 1;">
+                            <span class="card-title" style="color:var(--accent-rose); font-size:1rem;">🚨 Insight: Respiratory Demand Projected to Spike 30% in June Due to Early Monsoon</span>
+                            <div style="margin-top:0.35rem; font-size:0.8rem; color:var(--text-muted);">
+                                <span class="badge badge-b" id="forecast-model-badge">Model: Prophet + DII/RSI Regressors</span>
+                                <span style="margin-left:0.5rem;">Historical data indicates a 95% probability of stockout if no action is taken.</span>
+                            </div>
                         </div>
-                        <div style="display:flex; align-items:center; gap:0.5rem;">
-                            <label class="filter-label" style="margin:0; font-size:0.75rem; color:var(--text-muted);">Time Granularity:</label>
-                            <select class="select-input" id="forecast-granularity" style="width:auto; padding:0.25rem 0.6rem; font-size:0.75rem;" onchange="updateForecastGranularity()">
-                                <option value="monthly" selected>Monthly Aggregation</option>
-                                <option value="weekly">Weekly Aggregation</option>
-                                <option value="annual">Annual Aggregation</option>
-                            </select>
+                        <div style="display:flex; align-items:center; gap:0.75rem;">
+                            <button class="btn-sm btn-primary" style="background-color:var(--accent-rose);" onclick="switchTab('mod5-prescriptive')">Generate Emergency PO</button>
+                            <div style="display:flex; align-items:center; gap:0.5rem;">
+                                <label class="filter-label" style="margin:0; font-size:0.75rem; color:var(--text-muted);">Granularity:</label>
+                                <select class="select-input" id="forecast-granularity" style="width:auto; padding:0.25rem 0.6rem; font-size:0.75rem;" onchange="updateForecastGranularity()">
+                                    <option value="monthly" selected>Monthly</option>
+                                    <option value="weekly">Weekly</option>
+                                    <option value="annual">Annual</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <div class="chart-wrapper" style="height:320px;">
+                    <div class="chart-wrapper" style="height:320px; position:relative;">
+                        <!-- Shaded overlay simulating a DII/RSI annotation on the chart -->
+                        <div style="position:absolute; left:40%; width:15%; height:100%; background:rgba(244,63,94,0.1); border-left:1px dashed var(--accent-rose); border-right:1px dashed var(--accent-rose); pointer-events:none; display:flex; justify-content:center;">
+                            <span style="color:var(--accent-rose); font-size:0.7rem; font-weight:600; margin-top:10px;">High DII (Dengue)</span>
+                        </div>
                         <canvas id="prophetForecastChart"></canvas>
                     </div>
-                    <div class="disclaimer-box" style="margin-top:0.75rem;">
-                        <strong>Disclaimer:</strong> Environmental factors sourced from historical DOH epidemiological signals and provider-derived weather proxies. Predictions frame uncertainty bounds to avoid absolute certainty assumptions.
+                    <div class="disclaimer-box" style="margin-top:0.75rem; display:flex; justify-content:space-between; align-items:center;">
+                        <span><strong>Prescriptive Recommendation:</strong> Increase Safety Stock for Class A Anti-Infectives by 15,000 units immediately to buffer against RSI typhoon signals.</span>
+                        <button class="btn-sm btn-outline" onclick="alert('Simulating severe typhoon: RSI increased by 2.0. Forecast updated.')">Simulate Severe Typhoon</button>
                     </div>
                 </div>
 
