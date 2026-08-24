@@ -36,6 +36,12 @@ This document provides a comprehensive overview of the analytical models utilize
 - **Details:** Applied across multiple dimensions: it identifies the top products driving 80% of revenue, the key institutional clients (customer concentration), and the most profitable geographic territories. This focuses the company's capital on high-value areas.
 - **Test Results:** Out of 3,335 total SKUs evaluated:
   - Class A SKUs (Top 80% Revenue): 294 (8.8% of products)
+    - *Real-World Top 5 SKUs (by total historical revenue):*
+      1. CORRECTION TAPE JOY: ₱8,669,063.72 (2.01%)
+      2. MONOWEL 1G IV: ₱8,111,735.00 (1.88%)
+      3. HBW BLACK BALLPEN: ₱5,630,713.39 (1.31%)
+      4. BUPIRIGHT AMPULE: ₱5,594,365.00 (1.30%)
+      5. EVAPROST 250MCG/ML: ₱5,017,115.18 (1.16%)
   - Class C SKUs (Bottom 5% Revenue): 2,400 (72.0% of products)
 - **Interpretation:** MedShield exhibits extreme product concentration, which is highly typical of pharmaceutical distribution. Because a tiny fraction of SKUs (8.8%) drive 80% of total revenue, procurement must enforce the tightest inventory control and forecasting rigor exclusively on these Class A products.
 
