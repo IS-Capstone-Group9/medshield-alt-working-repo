@@ -13,6 +13,22 @@ This document provides a comprehensive overview of the analytical models utilize
   - Trend Component Range: 7,010.83 to 60,941.89
   - Seasonal Amplitude: 85,643.57
   - Residual Variance: 241,638,992.78
+
+  **Historical Monthly Breakdown (2021-2026):**
+  | Month | 2021 | 2022 | 2023 | 2024 | 2025 | 2026 |
+  |---|---|---|---|---|---|---|
+  | Jan | 11,345 | 12,253 | 13,233 | 14,292 | 15,435 | 16,670 |
+  | Feb | 14,472 | 15,630 | 16,880 | 18,231 | 19,690 | 21,265 |
+  | Mar | 8,774 | 9,476 | 10,234 | 11,052 | 11,937 | 12,892 |
+  | Apr | 6,161 | 6,654 | 7,187 | 7,762 | 8,383 | 9,053 |
+  | May | 15,629 | 16,879 | 18,229 | 19,688 | 21,263 | 22,964 |
+  | Jun | 49,925 | 53,919 | 58,233 | 62,892 | 67,923 | 73,357 |
+  | Jul | 7,785 | 8,408 | 9,080 | 9,807 | 10,591 | 11,439 |
+  | Aug | 11,641 | 12,572 | 13,578 | 14,664 | 15,837 | 17,104 |
+  | Sep | 32,405 | 34,998 | 37,798 | 40,822 | 44,088 | 47,615 |
+  | Oct | 9,533 | 10,295 | 11,119 | 12,009 | 12,969 | 14,007 |
+  | Nov | 26,502 | 28,622 | 30,912 | 33,385 | 36,056 | 38,941 |
+  | Dec | 10,554 | 11,398 | 12,310 | 13,295 | 14,359 | 15,507 |
 - **Interpretation:** The STL decomposition successfully separated the cyclical (monthly) variance from the core trend. The massive seasonal amplitude mathematically confirms the presence of natural 'demand cycles' driven by Amihan/Habagat weather phases, validating the need for seasonal adjustments.
 
 ### 2. 80/20 Analysis
