@@ -26,9 +26,9 @@
     },
     {
       "model": "GBR Weather+Disease (GBR_COMBINED_V1)",
-      "mae": 49411.9,
-      "rmse": 64751.9,
-      "mape": 1310.12,
+      "mae": 47804.4,
+      "rmse": 64873.4,
+      "mape": 1331.35,
       "status": "champion_candidate"
     }
   ],
@@ -41,43 +41,43 @@
   "feature_importance_top10": [
     {
       "feature": "demand_lag1",
-      "importance": 0.2423077892804851
+      "importance": 0.31493691382153755
     },
     {
       "feature": "abd_cases_norm",
-      "importance": 0.1580662841010264
-    },
-    {
-      "feature": "ili_cases_norm",
-      "importance": 0.10497917041402031
-    },
-    {
-      "feature": "typhoid_cases_norm",
-      "importance": 0.09788605307650328
-    },
-    {
-      "feature": "month_cos",
-      "importance": 0.09123871191403911
+      "importance": 0.16305686994611032
     },
     {
       "feature": "demand_lag2",
-      "importance": 0.08425103909183637
+      "importance": 0.11037393604271403
+    },
+    {
+      "feature": "month_cos",
+      "importance": 0.09618498044480576
+    },
+    {
+      "feature": "ili_cases_norm",
+      "importance": 0.08560638561234221
+    },
+    {
+      "feature": "typhoid_cases_norm",
+      "importance": 0.0801686758795392
     },
     {
       "feature": "leptospirosis_cases_norm",
-      "importance": 0.061689046534359755
+      "importance": 0.03180369296341483
     },
     {
       "feature": "season_pre_monsoon",
-      "importance": 0.061324738470743705
+      "importance": 0.031509106228165225
     },
     {
       "feature": "disease_intensity_index",
-      "importance": 0.031123068745129764
+      "importance": 0.02492270454154368
     },
     {
-      "feature": "month_sin",
-      "importance": 0.027658215742739876
+      "feature": "typhoon_flag",
+      "importance": 0.018849144601347383
     }
   ],
   "limitations": [
