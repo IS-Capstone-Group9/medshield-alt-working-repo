@@ -84,6 +84,13 @@ This document provides a comprehensive overview of the analytical models utilize
 - **Purpose:** To handle complex classification and scoring tasks that time-series models can't.
 - **Details:** Predicts ABC classification and assigns Demand Urgency Scoring to warn procurement teams before shortages occur.
 - **Test Results:** MAE = 38,536.57, MAPE = 166.79%
+  - *Real-World Feature Importance (Top Drivers of Demand):*
+    1. Historical Demand (Lag 1): 31.49%
+    2. Acute Bloody Diarrhea (ABD) Cases: 16.31%
+    3. Historical Demand (Lag 2): 11.04%
+    4. Month of Year (Seasonality): 9.62%
+    5. Influenza-like Illness (ILI) Cases: 8.56%
+    6. Typhoid Cases: 8.02%
 - **Interpretation:** XGBoost acts as an excellent classifier and non-linear regressor. It effectively catches complex patterns (like month+lag interactions) that linear models fail to see, making it highly effective for scoring urgency and stock-out risks directly.
 
 > [!NOTE] 
@@ -100,14 +107,16 @@ This document provides a comprehensive overview of the analytical models utilize
 ### 5. Economic Order Quantity (EOQ)
 - **Purpose:** To calculate the cost-minimizing reorder quantity for each product.
 - **Details:** Balances the fixed costs of ordering against the variable costs of holding inventory (spoilage/expiration risk).
-- **Test Results:** Computed EOQ for sample SKU = 5,434 units.
-- **Interpretation:** To absolutely minimize the combined cost of placing orders and holding excess inventory (which carries a risk of expiration), MedShield procurement should order exactly 5,434 units per cycle for this specific product profile.
+- **Test Results:** 
+  - *Real-World Example (Paracetamol 500mg Tablet):* Based on annualized historical sales data (2022-2024), the optimal EOQ is calculated at **5,045 units** per cycle.
+- **Interpretation:** To absolutely minimize the combined cost of placing orders and holding excess inventory (which carries a risk of expiration), MedShield procurement should order exactly 5,045 units per cycle for this specific product profile.
 
 ### 6. Reorder Point (ROP) & Safety Stock
 - **Purpose:** To determine the exact moment inventory needs replenishment.
 - **Details:** Calculates the trigger point based on lead time demand and adds a dynamic "Safety Stock" buffer that reacts to alerts.
-- **Test Results:** Safety Stock = 159 units, Reorder Point = 1,603 units.
-- **Interpretation:** When warehouse stock depletes to 1,603 units, the system signals to reorder the EOQ (5,434 units). The 159-unit safety stock buffer is scientifically calculated to absorb unexpected demand spikes during the 14-day delivery lead time.
+- **Test Results:** 
+  - *Real-World Example (Paracetamol 500mg Tablet):* The system generated a Safety Stock buffer of **137 units** and a Reorder Point of **1,382 units**.
+- **Interpretation:** When warehouse stock depletes to 1,382 units, the system signals to reorder the EOQ (5,045 units). The 137-unit safety stock buffer is scientifically calculated to absorb unexpected demand spikes during the 14-day delivery lead time.
 
 ### 7. Multi-Criteria Decision Analysis (MCDA)
 - **Purpose:** To rank regional procurement priorities when supplies are constrained.
