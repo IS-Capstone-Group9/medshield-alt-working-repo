@@ -361,11 +361,15 @@ for region, provinces in lgu_data.items():
             if "City" in lgu:
                 ctype = "CHO/LGU"
                 subtag = f"{lgu} City Health Office"
+                md_content += f"| *(System Generated Default)* | {ctype} | {region} | {province} | {lgu} | {subtag} |\n"
             else:
                 ctype = "MHO/LGU"
                 subtag = f"{lgu} Municipal Health Office"
-            
-            md_content += f"| *(System Generated Default)* | {ctype} | {region} | {province} | {lgu} | {subtag} |\n"
+                md_content += f"| *(System Generated Default)* | {ctype} | {region} | {province} | {lgu} | {subtag} |\n"
+                
+                # Also generate the RHU grain for municipalities
+                md_content += f"| *(System Generated Default)* | RHU/MHO | {region} | {province} | {lgu} | {lgu} Rural Health Unit |\n"
+
         
         # Add PDF clients for this province
         for client in pdf_clients:
