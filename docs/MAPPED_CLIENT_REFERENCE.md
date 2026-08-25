@@ -206,19 +206,19 @@ By applying the fallback logic, all generic individual accounts and hospitals ar
 | A/R - Quezon - RAKKK Prophet | Individual/A/R | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | RAKKK Prophet |
 | A/R - Quezon - Herminia Laguador | Individual/A/R | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Herminia Laguador |
 | A/R - Quezon - Madel Fetisa | Individual/A/R | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Madel Fetisa |
-| A/R - Quezon - Constancia Catarroja | Individual/A/R | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Constancia Catarroja |
+| A/R - Quezon - Constancia Catarroja | RHU/MHO | CALABARZON | Quezon | Sariaya *(Searched Location)* | Constancia Catarroja |
 | A/R - Quezon - BEMONC RHU Sariaya | RHU | CALABARZON | Quezon | Sariaya | BEMONC RHU Sariaya |
 | A/R - Quezon - Urbano Oliveros | Individual/A/R | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Urbano Oliveros |
 | A/R - Quezon - Brgy Canda Health Center | Individual/A/R | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Brgy Canda Health Center |
 | A/R - Quezon - Bricor Pharmacy | Pharmacy | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Bricor Pharmacy |
 | A/R - Quezon - Severina Nadres | Individual/A/R | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Severina Nadres |
 | A/R - Quezon - AMCA Drug | Pharmacy | CALABARZON | Quezon | Catanauan *(Searched Location)* | AMCA Drug |
-| A/R - Quezon - Dr Jessabeth Mercado | Individual/A/R | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Dr Jessabeth Mercado |
-| A/R - Quezon - Dr. Florcerel Malay | Individual/A/R | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Dr. Florcerel Malay |
-| A/R - Quezon - Dr. Teresa Tagarao | Individual/A/R | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Dr. Teresa Tagarao |
-| A/R - Quezon - Dr. Victorino Araña | Individual/A/R | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Dr. Victorino Araña |
+| A/R - Quezon - Dr Jessabeth Mercado | Govt Hospital | CALABARZON | Quezon | Lucena City *(Searched Location)* | Dr Jessabeth Mercado |
+| A/R - Quezon - Dr. Florcerel Malay | Private Hospital | CALABARZON | Quezon | Sariaya *(Searched Location)* | Dr. Florcerel Malay |
+| A/R - Quezon - Dr. Teresa Tagarao | Private Hospital | CALABARZON | Quezon | Lopez *(Searched Location)* | Dr. Teresa Tagarao |
+| A/R - Quezon - Dr. Victorino Araña | RHU | CALABARZON | Quezon | Lucban *(Searched Location)* | Dr. Victorino Araña |
 | A/R - Quezon - NSDR Birthing Home | Individual/A/R | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | NSDR Birthing Home |
-| A/R - Quezon - Dr. Gilbert Lafuente | Individual/A/R | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Dr. Gilbert Lafuente |
+| A/R - Quezon - Dr. Gilbert Lafuente | Clinic | CALABARZON | Quezon | Padre Burgos *(Searched Location)* | Dr. Gilbert Lafuente |
 | A/R - Quezon - Sampaloc Lying Inn | Lying Inn | CALABARZON | Quezon | Sampaloc | Sampaloc Lying Inn |
 | A/R - Quezon - Unihealth Quezon (Medicine) | Individual/A/R | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Unihealth Quezon (Medicine) |
 | A/R - Quezon - Tumbaga Birthing Home | Individual/A/R | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Tumbaga Birthing Home |
