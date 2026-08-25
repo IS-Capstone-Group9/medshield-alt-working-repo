@@ -860,3 +860,43 @@ body.nav-collapsed .logout-text {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* Clean Professional AI Executive Briefing Banner */
+.ai-briefing-card {
+  background: linear-gradient(135deg, #0d1b2a 0%, #152c42 100%) !important;
+  border: 1px solid rgba(217, 119, 6, 0.25) !important;
+  border-radius: 10px !important;
+  padding: 16px 20px !important;
+  margin-bottom: 20px !important;
+  box-shadow: 0 2px 12px rgba(13, 27, 42, 0.12) !important;
+}
+
+.ai-briefing-title {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  letter-spacing: -0.01em !important;
+}
+
+.btn-ai-sparkle {
+  background: #f59e0b !important;
+  color: #0d1b2a !important;
+  font-weight: 700 !important;
+  border: 1px solid #d97706 !important;
+  border-radius: 6px !important;
+  padding: 7px 16px !important;
+  font-size: 11.5px !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  transition: all 0.15s ease !important;
+  font-family: inherit !important;
+}
+
+.btn-ai-sparkle:hover {
+  background: #fbbf24 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3) !important;
+}
+
