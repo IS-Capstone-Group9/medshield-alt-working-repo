@@ -358,9 +358,8 @@ for region, provinces in lgu_data.items():
     for province, lgus in provinces.items():
         md_content += f"| *(System Generated Default)* | PHO | {region} | {province} | {capitals[province]} | {province} Provincial Health Office |\n"
         for lgu in lgus:
-            ctype = "CHO (City Health)" if "City" in lgu else "RHU/MHO"
-            subtag = f"{lgu} City Health Office" if "City" in lgu else f"{lgu} Rural Health Unit"
-            md_content += f"| *(System Generated Default)* | {ctype} | {region} | {province} | {lgu} | {subtag} |\n"
+            ctype = "CHO/LGU" if "City" in lgu else "MHO/LGU"
+            md_content += f"| *(System Generated Default)* | {ctype} | {region} | {province} | {lgu} | {lgu} Health Office |\n"
         
         # Add PDF clients for this province
         for client in pdf_clients:
