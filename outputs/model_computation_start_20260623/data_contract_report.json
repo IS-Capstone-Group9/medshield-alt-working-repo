@@ -1,7 +1,7 @@
 {
   "sales": {
     "status": "pass",
-    "rows": 20961,
+    "rows": 44391,
     "missing_required_fields": {
       "date_delivered": 0,
       "area": 0,
@@ -9,9 +9,9 @@
       "quantity": 0,
       "total_trade_price": 0
     },
-    "valid_date_rows": 20961,
-    "source_period_start": "2021-01-02",
-    "source_period_end": "2025-12-31"
+    "valid_date_rows": 44391,
+    "source_period_start": "2000-01-01",
+    "source_period_end": "2047-11-06"
   },
   "weather_api": {
     "status": "partial",

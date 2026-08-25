@@ -33,15 +33,4 @@ export function enhanceDashboardContent(root: HTMLElement) {
       content.insertAdjacentHTML('beforeend', WEATHER_VALIDATION_PAGE)
     }
   }
-
-  setCardModel(root, 'overviewBaselineChart', 'Actual Sales', 'Historical sales baseline.')
-  setCardModel(root, 'overviewForecastChart', 'Draft Forecast', 'Sales-only planning signal.')
-  setCardModel(root, 'monthlyChart', 'Time Series', 'Monthly sales trend.')
-  setCardModel(root, 'areaDonut', 'Territory Mix', 'Area concentration.')
-  setCardModel(root, 'forecastChart', 'Forecast Draft', 'Regressors pending.')
-  setCardModel(root, 'seasonIndexChart', 'Seasonality', 'Monthly pattern.')
-  setCardModel(root, 'externalChart', 'External Pending', 'DOH/PAGASA inputs pending.')
-  setCardModel(root, 'areaBarChart', 'Area Rank', 'Revenue ranking.')
-  setCardModel(root, 'areaIncomeChart', 'Gross Profit', 'Margin/profit metrics.')
-  setCardModel(root, 'areaMarginChart', 'MCDA Input', 'Margin priority signal.')
 }

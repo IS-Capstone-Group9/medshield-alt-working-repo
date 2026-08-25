@@ -93,57 +93,45 @@ html[data-theme="dark"] body {
   background: var(--bg-elevated);
 }
 .kpi-grid {
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 14px;
+  margin-bottom: 20px;
 }
 .kpi-card,
 .chart-card,
 .insight-card {
-  border-radius: 8px;
+  border-radius: 10px;
 }
 .kpi-card {
-  min-height: 100px;
-  padding: 12px 14px;
+  min-height: 108px;
+  padding: 16px 20px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
 }
 .kpi-value {
-  font-size: clamp(21px, 2.2vw, 29px);
-  letter-spacing: 0;
-}
-.chart-grid-2,
-.chart-grid-3 {
-  align-items: stretch;
+  font-size: clamp(22px, 2vw, 28px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: wrap;
 }
 .chart-card {
   min-width: 0;
   overflow: hidden;
-  padding: 14px;
+  padding: 18px 20px;
   background: var(--bg-surface);
   border-color: var(--border);
+  border-radius: 10px;
 }
 .chart-card:hover {
   transform: none;
 }
-.chart-card[data-model] {
-  position: relative;
-}
 .chart-card[data-model]::before {
-  content: attr(data-model);
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  max-width: 132px;
-  padding: 3px 7px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: var(--bg-elevated);
-  color: var(--text-secondary);
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  display: none !important;
 }
 .uploaded-data-panel {
   margin-top: 14px;

@@ -37,6 +37,7 @@ SALES_STATUS_PATH = PROCESSED_DIR / "sales_dataset_status.json"
 SALES_SNAPSHOT_PATH = PROCESSED_DIR / "dashboard_sales_snapshot.json"
 WEATHER_DATASET_PATH = PROCESSED_DIR / "weather_signals.json"
 DEFAULT_WORKBOOK_PATH = RAW_SALES_DIR / "Sales Report.xlsx"
+RAW_CSV_DIR = DATA_DIR / "dataset_csv"
 
 load_dotenv(ROOT_DIR / ".env")
 
@@ -58,31 +59,42 @@ CANONICAL_FIELDS = [
 
 HEADER_ALIASES = {
     "area": "area",
+    "salesrep": "area",
+    "dr": "dr_number",
     "drnumber": "dr_number",
     "deliveryreceiptnumber": "dr_number",
     "datedelivered": "date_delivered",
     "deliverydate": "date_delivered",
     "date": "date_delivered",
+    "drdate": "date_delivered",
     "product": "product",
     "qty": "quantity",
     "quantity": "quantity",
     "quantitysold": "quantity",
+    "grosssales": "quantity",
     "cp": "unit_cost",
+    "cpunit": "unit_cost",
+    "unitprice": "unit_cost",
+    "contractprice": "unit_cost",
     "unitcost": "unit_cost",
     "unitcostamount": "unit_cost",
     "totalcp": "total_cost",
     "totalcost": "total_cost",
     "totalcostamount": "total_cost",
+    "gross": "total_cost",
     "disc": "discount",
     "discount": "discount",
     "discountamount": "discount",
     "netcp": "net_cost",
     "netcost": "net_cost",
     "netcostamount": "net_cost",
+    "tp": "trade_price_unit",
     "tpunit": "trade_price_unit",
+    "transferprice": "trade_price_unit",
     "tradepriceunit": "trade_price_unit",
     "tradepriceunitamount": "trade_price_unit",
     "totaltp": "total_trade_price",
+    "total": "total_trade_price",
     "totaltradeprice": "total_trade_price",
     "totaltradepriceamount": "total_trade_price",
     "netincome": "net_income",
@@ -100,6 +112,13 @@ AREA_STANDARDIZATION = {
     "METRO MANILA": "Metro Manila",
     "NCR": "Metro Manila",
     "QUEZON PROVINCE": "Quezon",
+    "EASTERN QUEZON": "Quezon",
+    "BATNGAS": "Batangas",
+    "LAGUMA": "Laguna",
+    "HOPITAL": "Hospital",
+    "LAGASPI": "Legaspi",
+    "LOWER CAVITE": "Cavite",
+    "SUPPLLIES": "Supplies",
 }
 
 # Only geographic territories receive coordinate-based weather features.
@@ -159,7 +178,7 @@ def _clean_text(value: Any, *, upper: bool = False) -> str | None:
     if value is None:
         return None
     cleaned = re.sub(r"\s+", " ", str(value)).strip()
-    if not cleaned:
+    if not cleaned or cleaned.upper() in {"#REF!", "#N/A", "#VALUE!", "#NAME?", "#NULL!", "#DIV/0!", "NAN", "NULL", "NONE"}:
         return None
     return cleaned.upper() if upper else cleaned
 
@@ -569,9 +588,11 @@ def build_dashboard_snapshot(rows: list[dict[str, Any]]) -> dict[str, Any]:
         monthly[period]["income"] += income
         by_area[str(row["area"])]["revenue"] += revenue
         by_area[str(row["area"])]["income"] += income
-        by_product[str(row["product"])]["revenue"] += revenue
-        by_product[str(row["product"])]["income"] += income
-        by_product[str(row["product"])]["qty"] += quantity
+        prod_name = str(row.get("product") or "").strip()
+        if prod_name and prod_name.upper() not in {"#REF!", "#N/A", "#VALUE!", "NONE", "NULL", "NAN", "UNKNOWN", "UNSPECIFIED"}:
+            by_product[prod_name]["revenue"] += revenue
+            by_product[prod_name]["income"] += income
+            by_product[prod_name]["qty"] += quantity
         yearly[year]["revenue"] += revenue
         yearly[year]["income"] += income
         yearly[year]["transactions"] += 1
@@ -626,6 +647,7 @@ def build_dashboard_snapshot(rows: list[dict[str, Any]]) -> dict[str, Any]:
                 "transactions": int(values["transactions"]),
             }
             for year, values in sorted(yearly.items())
+            if str(year).isdigit() and 2017 <= int(year) <= 2030
         ],
         "seasonality": [
             {"month": month_names[index - 1], "avg_revenue": round(mean(month_values[index]), 2)}
@@ -1150,23 +1172,38 @@ def ingest_sales_bytes(content: bytes, file_name: str, *, persist_raw: bool = Tr
 
 
 def ensure_baseline_sales_dataset() -> dict[str, Any]:
-    if not DEFAULT_WORKBOOK_PATH.exists():
-        raise FileNotFoundError(f"Baseline workbook not found: {DEFAULT_WORKBOOK_PATH}")
-    needs_refresh = (
-        not SALES_DATASET_PATH.exists()
-        or SALES_DATASET_PATH.stat().st_mtime < DEFAULT_WORKBOOK_PATH.stat().st_mtime
-    )
-    if needs_refresh:
+    if SALES_DATASET_PATH.exists():
+        if SALES_STATUS_PATH.exists():
+            return json.loads(SALES_STATUS_PATH.read_text(encoding="utf-8"))
+        return {"status": "present", "rows": 0}
+
+    # If processed dataset is missing, attempt to build from CSV folder
+    csv_files = sorted(RAW_CSV_DIR.glob("*.csv")) if RAW_CSV_DIR.exists() else []
+    if csv_files:
+        result = None
+        for csv_file in csv_files:
+            result = ingest_sales_bytes(
+                csv_file.read_bytes(),
+                csv_file.name,
+                persist_raw=False,
+            )
+        return result or sales_dataset_status()
+
+    if DEFAULT_WORKBOOK_PATH.exists():
         return ingest_sales_bytes(
             DEFAULT_WORKBOOK_PATH.read_bytes(),
             DEFAULT_WORKBOOK_PATH.name,
             persist_raw=False,
         )
-    return sales_dataset_status()
+
+    raise FileNotFoundError(
+        f"No sales dataset found. Expected {SALES_DATASET_PATH}, {RAW_CSV_DIR}, or {DEFAULT_WORKBOOK_PATH}"
+    )
 
 
 def _load_local_sales_payload() -> dict[str, Any]:
-    ensure_baseline_sales_dataset()
+    if not SALES_DATASET_PATH.exists():
+        ensure_baseline_sales_dataset()
     try:
         with gzip.open(SALES_DATASET_PATH, "rt", encoding="utf-8") as handle:
             return json.load(handle)

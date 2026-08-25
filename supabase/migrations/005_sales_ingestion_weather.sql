@@ -69,6 +69,7 @@ on conflict (source_code) do update set
   credibility_note = excluded.credibility_note,
   is_active = true;
 
+drop view if exists public.vw_sales_transactions cascade;
 create or replace view public.vw_sales_transactions as
 select
   f.sales_transaction_key,
@@ -231,6 +232,7 @@ $$;
 revoke all on function public.refresh_sales_aggregates(integer) from public, anon, authenticated;
 grant execute on function public.refresh_sales_aggregates(integer) to service_role;
 
+drop view if exists public.vw_dss_external_signals cascade;
 create or replace view public.vw_dss_external_signals as
 with disease as (
   select

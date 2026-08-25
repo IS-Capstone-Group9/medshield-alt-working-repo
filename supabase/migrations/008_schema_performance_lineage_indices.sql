@@ -2,30 +2,19 @@
 -- Description: Applies high-performance query indexes, data lineage constraints, and audit column triggers.
 -- Apply after 007_namespaced_schema_alignment.sql.
 
--- 1. ENUM TYPES FOR IMPROVED DATA INTEGRITY
--- (Using Postgres domains or custom enums where check constraints were used)
-create type medshield_common.mapping_status_enum as enum ('proposed', 'approved', 'rejected', 'needs_review');
-create type medshield_analytics.severity_level_enum as enum ('low', 'medium', 'high', 'critical');
-create type medshield_analytics.alert_type_enum as enum ('stock_gap', 'disease_surge', 'weather_risk', 'allocation', 'forecast_variance');
-create type medshield_analytics.alert_status_enum as enum ('open', 'acknowledged', 'closed');
-
--- Note: To fully switch existing columns to enum types, we alter the columns:
-alter table medshield_common.dim_area 
-  alter column mapping_status drop default,
-  alter column mapping_status type medshield_common.mapping_status_enum using mapping_status::medshield_common.mapping_status_enum,
-  alter column mapping_status set default 'needs_review'::medshield_common.mapping_status_enum;
-
-alter table medshield_common.dim_product 
-  alter column mapping_status drop default,
-  alter column mapping_status type medshield_common.mapping_status_enum using mapping_status::medshield_common.mapping_status_enum,
-  alter column mapping_status set default 'needs_review'::medshield_common.mapping_status_enum;
-
-alter table medshield_analytics.fact_decision_alert 
-  alter column severity type medshield_analytics.severity_level_enum using severity::medshield_analytics.severity_level_enum,
-  alter column alert_type type medshield_analytics.alert_type_enum using alert_type::medshield_analytics.alert_type_enum,
-  alter column status drop default,
-  alter column status type medshield_analytics.alert_status_enum using status::medshield_analytics.alert_status_enum,
-  alter column status set default 'open'::medshield_analytics.alert_status_enum;
+-- 1. DATA INTEGRITY CONSTRAINTS
+-- Ensure check constraints exist without breaking view dependencies
+do $$
+begin
+  if not exists (select 1 from pg_constraint where conname = 'chk_dim_area_mapping_status') then
+    alter table medshield_common.dim_area add constraint chk_dim_area_mapping_status 
+      check (mapping_status in ('proposed', 'approved', 'rejected', 'needs_review'));
+  end if;
+  if not exists (select 1 from pg_constraint where conname = 'chk_dim_product_mapping_status') then
+    alter table medshield_common.dim_product add constraint chk_dim_product_mapping_status 
+      check (mapping_status in ('proposed', 'approved', 'rejected', 'needs_review'));
+  end if;
+end $$;
 
 
 -- 2. HIGH-PERFORMANCE QUERY INDEXES FOR STAR-SCHEMA JOINS
@@ -57,7 +46,7 @@ create index if not exists idx_fact_disease_signal_composite
 create index if not exists idx_fact_weather_signal_composite 
   on medshield_external.fact_weather_signal (period_date_key, area_key);
 create index if not exists idx_fact_data_completeness_composite 
-  on medshield_external.fact_data_completeness (period_date_key, area_key);
+  on medshield_sales.fact_data_completeness (period_date_key, area_key);
 
 -- Analytics & DSS tables
 create index if not exists idx_fact_demand_forecast_composite 

@@ -272,7 +272,7 @@ select
     when 12 then 707
     else 0
   end,
-  null,
+  0,
   'Known 2025 completeness issue from processed sales profile. Do not use 2025 as full holdout until reconciled.',
   s.source_system_key,
   false,
@@ -330,6 +330,11 @@ end $$;
 drop policy if exists "Public read" on public.stg_doh_historical;
 drop policy if exists "Public read" on public.stg_pagasa_historical;
 drop policy if exists "Public read" on public.stg_weather_api_observations;
+
+drop view if exists public.vw_product_master_status cascade;
+drop view if exists public.vw_area_mapping_status cascade;
+drop view if exists public.vw_data_completeness_status cascade;
+drop view if exists public.vw_sales_transactions cascade;
 
 create or replace view public.vw_product_master_status as
 select
