@@ -15,9 +15,17 @@ def generate_rhu_ledger():
     with open(LGU_LEDGER_PATH, mode='r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         
+        actual_cities = [
+            "Lipa", "Tanauan", "Santo Tomas", "Calaca",
+            "Trece Martires", "Tagaytay", "Dasmariñas", "Bacoor", "Imus", "General Trias", "Carmona",
+            "Santa Rosa", "San Pablo", "San Pedro", "Biñan", "Cabuyao", "Calamba",
+            "Tayabas", "Antipolo", "Calapan", "Puerto Princesa", "Ligao", "Tabaco", "Iriga"
+        ]
+        
         # We only want to generate RHUs for actual municipalities (MHO/LGU)
         for row in reader:
-            if row["Client Type"] == "MHO/LGU" and "City" not in row["lgu_city_muni"]:
+            is_city = "City" in row["lgu_city_muni"] or row["lgu_city_muni"] in actual_cities
+            if row["Client Type"] == "MHO/LGU" and not is_city:
                 rhu_entries.append({
                     "Region": row["Region"],
                     "Province": row["Province"],

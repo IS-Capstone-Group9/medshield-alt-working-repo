@@ -4,14 +4,12 @@ CALABARZON,Batangas,Alitagtag,Alitagtag Rural Health Unit,Yes
 CALABARZON,Batangas,Balayan,Balayan Rural Health Unit,Yes
 CALABARZON,Batangas,Balete,Balete Rural Health Unit,Yes
 CALABARZON,Batangas,Bauan,Bauan Rural Health Unit,Yes
-CALABARZON,Batangas,Calaca,Calaca Rural Health Unit,Yes
 CALABARZON,Batangas,Calatagan,Calatagan Rural Health Unit,Yes
 CALABARZON,Batangas,Cuenca,Cuenca Rural Health Unit,Yes
 CALABARZON,Batangas,Ibaan,Ibaan Rural Health Unit,Yes
 CALABARZON,Batangas,Laurel,Laurel Rural Health Unit,Yes
 CALABARZON,Batangas,Lemery,Lemery Rural Health Unit,Yes
 CALABARZON,Batangas,Lian,Lian Rural Health Unit,Yes
-CALABARZON,Batangas,Lipa,Lipa Rural Health Unit,Yes
 CALABARZON,Batangas,Lobo,Lobo Rural Health Unit,Yes
 CALABARZON,Batangas,Mabini,Mabini Rural Health Unit,Yes
 CALABARZON,Batangas,Malvar,Malvar Rural Health Unit,Yes
@@ -25,22 +23,15 @@ CALABARZON,Batangas,San Luis,San Luis Rural Health Unit,Yes
 CALABARZON,Batangas,San Nicolas,San Nicolas Rural Health Unit,Yes
 CALABARZON,Batangas,San Pascual,San Pascual Rural Health Unit,Yes
 CALABARZON,Batangas,Santa Teresita,Santa Teresita Rural Health Unit,Yes
-CALABARZON,Batangas,Santo Tomas,Santo Tomas Rural Health Unit,Yes
 CALABARZON,Batangas,Taal,Taal Rural Health Unit,Yes
 CALABARZON,Batangas,Talisay,Talisay Rural Health Unit,Yes
-CALABARZON,Batangas,Tanauan,Tanauan Rural Health Unit,Yes
 CALABARZON,Batangas,Taysan,Taysan Rural Health Unit,Yes
 CALABARZON,Batangas,Tingloy,Tingloy Rural Health Unit,Yes
 CALABARZON,Batangas,Tuy,Tuy Rural Health Unit,Yes
 CALABARZON,Cavite,Alfonso,Alfonso Rural Health Unit,Yes
 CALABARZON,Cavite,Amadeo,Amadeo Rural Health Unit,Yes
-CALABARZON,Cavite,Bacoor,Bacoor Rural Health Unit,Yes
-CALABARZON,Cavite,Carmona,Carmona Rural Health Unit,Yes
-CALABARZON,Cavite,Dasmariñas,Dasmariñas Rural Health Unit,Yes
 CALABARZON,Cavite,General Emilio Aguinaldo,General Emilio Aguinaldo Rural Health Unit,Yes
 CALABARZON,Cavite,General Mariano Alvarez,General Mariano Alvarez Rural Health Unit,Yes
-CALABARZON,Cavite,General Trias,General Trias Rural Health Unit,Yes
-CALABARZON,Cavite,Imus,Imus Rural Health Unit,Yes
 CALABARZON,Cavite,Indang,Indang Rural Health Unit,Yes
 CALABARZON,Cavite,Kawit,Kawit Rural Health Unit,Yes
 CALABARZON,Cavite,Magallanes,Magallanes Rural Health Unit,Yes
@@ -50,15 +41,10 @@ CALABARZON,Cavite,Naic,Naic Rural Health Unit,Yes
 CALABARZON,Cavite,Noveleta,Noveleta Rural Health Unit,Yes
 CALABARZON,Cavite,Rosario,Rosario Rural Health Unit,Yes
 CALABARZON,Cavite,Silang,Silang Rural Health Unit,Yes
-CALABARZON,Cavite,Tagaytay,Tagaytay Rural Health Unit,Yes
 CALABARZON,Cavite,Tanza,Tanza Rural Health Unit,Yes
 CALABARZON,Cavite,Ternate,Ternate Rural Health Unit,Yes
-CALABARZON,Cavite,Trece Martires,Trece Martires Rural Health Unit,Yes
 CALABARZON,Laguna,Alaminos,Alaminos Rural Health Unit,Yes
 CALABARZON,Laguna,Bay,Bay Rural Health Unit,Yes
-CALABARZON,Laguna,Biñan,Biñan Rural Health Unit,Yes
-CALABARZON,Laguna,Cabuyao,Cabuyao Rural Health Unit,Yes
-CALABARZON,Laguna,Calamba,Calamba Rural Health Unit,Yes
 CALABARZON,Laguna,Calauan,Calauan Rural Health Unit,Yes
 CALABARZON,Laguna,Cavinti,Cavinti Rural Health Unit,Yes
 CALABARZON,Laguna,Famy,Famy Rural Health Unit,Yes
@@ -77,11 +63,8 @@ CALABARZON,Laguna,Pakil,Pakil Rural Health Unit,Yes
 CALABARZON,Laguna,Pangil,Pangil Rural Health Unit,Yes
 CALABARZON,Laguna,Pila,Pila Rural Health Unit,Yes
 CALABARZON,Laguna,Rizal,Rizal Rural Health Unit,Yes
-CALABARZON,Laguna,San Pablo,San Pablo Rural Health Unit,Yes
-CALABARZON,Laguna,San Pedro,San Pedro Rural Health Unit,Yes
 CALABARZON,Laguna,Santa Cruz,Santa Cruz Rural Health Unit,Yes
 CALABARZON,Laguna,Santa Maria,Santa Maria Rural Health Unit,Yes
-CALABARZON,Laguna,Santa Rosa,Santa Rosa Rural Health Unit,Yes
 CALABARZON,Laguna,Siniloan,Siniloan Rural Health Unit,Yes
 CALABARZON,Laguna,Victoria,Victoria Rural Health Unit,Yes
 CALABARZON,Quezon,Agdangan,Agdangan Rural Health Unit,Yes
@@ -121,11 +104,9 @@ CALABARZON,Quezon,San Francisco,San Francisco Rural Health Unit,Yes
 CALABARZON,Quezon,San Narciso,San Narciso Rural Health Unit,Yes
 CALABARZON,Quezon,Sariaya,Sariaya Rural Health Unit,Yes
 CALABARZON,Quezon,Tagkawayan,Tagkawayan Rural Health Unit,Yes
-CALABARZON,Quezon,Tayabas,Tayabas Rural Health Unit,Yes
 CALABARZON,Quezon,Tiaong,Tiaong Rural Health Unit,Yes
 CALABARZON,Quezon,Unisan,Unisan Rural Health Unit,Yes
 CALABARZON,Rizal,Angono,Angono Rural Health Unit,Yes
-CALABARZON,Rizal,Antipolo,Antipolo Rural Health Unit,Yes
 CALABARZON,Rizal,Baras,Baras Rural Health Unit,Yes
 CALABARZON,Rizal,Binangonan,Binangonan Rural Health Unit,Yes
 CALABARZON,Rizal,Cainta,Cainta Rural Health Unit,Yes
@@ -159,7 +140,6 @@ MIMAROPA,Oriental Mindoro,Baco,Baco Rural Health Unit,Yes
 MIMAROPA,Oriental Mindoro,Bansud,Bansud Rural Health Unit,Yes
 MIMAROPA,Oriental Mindoro,Bongabong,Bongabong Rural Health Unit,Yes
 MIMAROPA,Oriental Mindoro,Bulalacao,Bulalacao Rural Health Unit,Yes
-MIMAROPA,Oriental Mindoro,Calapan,Calapan Rural Health Unit,Yes
 MIMAROPA,Oriental Mindoro,Gloria,Gloria Rural Health Unit,Yes
 MIMAROPA,Oriental Mindoro,Mansalay,Mansalay Rural Health Unit,Yes
 MIMAROPA,Oriental Mindoro,Naujan,Naujan Rural Health Unit,Yes
@@ -187,7 +167,6 @@ MIMAROPA,Palawan,Kalayaan,Kalayaan Rural Health Unit,Yes
 MIMAROPA,Palawan,Linapacan,Linapacan Rural Health Unit,Yes
 MIMAROPA,Palawan,Magsaysay,Magsaysay Rural Health Unit,Yes
 MIMAROPA,Palawan,Narra,Narra Rural Health Unit,Yes
-MIMAROPA,Palawan,Puerto Princesa,Puerto Princesa Rural Health Unit,Yes
 MIMAROPA,Palawan,Quezon,Quezon Rural Health Unit,Yes
 MIMAROPA,Palawan,Rizal,Rizal Rural Health Unit,Yes
 MIMAROPA,Palawan,Roxas,Roxas Rural Health Unit,Yes
@@ -216,7 +195,6 @@ BICOL,Albay,Daraga,Daraga Rural Health Unit,Yes
 BICOL,Albay,Guinobatan,Guinobatan Rural Health Unit,Yes
 BICOL,Albay,Jovellar,Jovellar Rural Health Unit,Yes
 BICOL,Albay,Libon,Libon Rural Health Unit,Yes
-BICOL,Albay,Ligao,Ligao Rural Health Unit,Yes
 BICOL,Albay,Malilipot,Malilipot Rural Health Unit,Yes
 BICOL,Albay,Malinao,Malinao Rural Health Unit,Yes
 BICOL,Albay,Manito,Manito Rural Health Unit,Yes
@@ -225,7 +203,6 @@ BICOL,Albay,Pio Duran,Pio Duran Rural Health Unit,Yes
 BICOL,Albay,Polangui,Polangui Rural Health Unit,Yes
 BICOL,Albay,Rapu-Rapu,Rapu-Rapu Rural Health Unit,Yes
 BICOL,Albay,Santo Domingo,Santo Domingo Rural Health Unit,Yes
-BICOL,Albay,Tabaco,Tabaco Rural Health Unit,Yes
 BICOL,Albay,Tiwi,Tiwi Rural Health Unit,Yes
 BICOL,Camarines Norte,Basud,Basud Rural Health Unit,Yes
 BICOL,Camarines Norte,Capalonga,Capalonga Rural Health Unit,Yes
@@ -254,7 +231,6 @@ BICOL,Camarines Sur,Del Gallego,Del Gallego Rural Health Unit,Yes
 BICOL,Camarines Sur,Gainza,Gainza Rural Health Unit,Yes
 BICOL,Camarines Sur,Garchitorena,Garchitorena Rural Health Unit,Yes
 BICOL,Camarines Sur,Goa,Goa Rural Health Unit,Yes
-BICOL,Camarines Sur,Iriga,Iriga Rural Health Unit,Yes
 BICOL,Camarines Sur,Lagonoy,Lagonoy Rural Health Unit,Yes
 BICOL,Camarines Sur,Libmanan,Libmanan Rural Health Unit,Yes
 BICOL,Camarines Sur,Lupi,Lupi Rural Health Unit,Yes

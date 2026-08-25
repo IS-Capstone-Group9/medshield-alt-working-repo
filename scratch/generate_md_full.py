@@ -362,8 +362,16 @@ for region, provinces in lgu_data.items():
     md_content += f"| *(System Generated Default)* | Regional Hub | {region} | Regional | {regional_hubs[region]} | DOH-CHD {region} |\n"
     for province, lgus in provinces.items():
         md_content += f"| *(System Generated Default)* | PHO | {region} | {province} | {capitals[province]} | {province} Provincial Health Office |\n"
+        # List of actual cities in the regions that might not have 'City' in their string
+        actual_cities = [
+            "Lipa", "Tanauan", "Santo Tomas", "Calaca",
+            "Trece Martires", "Tagaytay", "Dasmariñas", "Bacoor", "Imus", "General Trias", "Carmona",
+            "Santa Rosa", "San Pablo", "San Pedro", "Biñan", "Cabuyao", "Calamba",
+            "Tayabas", "Antipolo", "Calapan", "Puerto Princesa", "Ligao", "Tabaco", "Iriga"
+        ]
+
         for lgu in lgus:
-            if "City" in lgu:
+            if "City" in lgu or lgu in actual_cities:
                 ctype = "CHO/LGU"
                 subtag = f"{lgu} City Health Office"
                 md_content += f"| *(System Generated Default)* | {ctype} | {region} | {province} | {lgu} | {subtag} |\n"
@@ -374,6 +382,7 @@ for region, provinces in lgu_data.items():
                 
                 # Also generate the RHU grain for municipalities
                 md_content += f"| *(System Generated Default)* | RHU/MHO | {region} | {province} | {lgu} | {lgu} Rural Health Unit |\n"
+
 
         
         # Add PDF clients for this province

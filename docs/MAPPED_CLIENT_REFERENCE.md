@@ -23,8 +23,7 @@ By applying the fallback logic, all generic individual accounts and hospitals ar
 | *(System Generated Default)* | CHO/LGU | CALABARZON | Batangas | Batangas City | Batangas City City Health Office |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Batangas | Bauan | Bauan Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Batangas | Bauan | Bauan Rural Health Unit |
-| *(System Generated Default)* | MHO/LGU | CALABARZON | Batangas | Calaca | Calaca Municipal Health Office |
-| *(System Generated Default)* | RHU/MHO | CALABARZON | Batangas | Calaca | Calaca Rural Health Unit |
+| *(System Generated Default)* | CHO/LGU | CALABARZON | Batangas | Calaca | Calaca City Health Office |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Batangas | Calatagan | Calatagan Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Batangas | Calatagan | Calatagan Rural Health Unit |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Batangas | Cuenca | Cuenca Municipal Health Office |
@@ -37,8 +36,7 @@ By applying the fallback logic, all generic individual accounts and hospitals ar
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Batangas | Lemery | Lemery Rural Health Unit |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Batangas | Lian | Lian Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Batangas | Lian | Lian Rural Health Unit |
-| *(System Generated Default)* | MHO/LGU | CALABARZON | Batangas | Lipa | Lipa Municipal Health Office |
-| *(System Generated Default)* | RHU/MHO | CALABARZON | Batangas | Lipa | Lipa Rural Health Unit |
+| *(System Generated Default)* | CHO/LGU | CALABARZON | Batangas | Lipa | Lipa City Health Office |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Batangas | Lobo | Lobo Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Batangas | Lobo | Lobo Rural Health Unit |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Batangas | Mabini | Mabini Municipal Health Office |
@@ -65,14 +63,12 @@ By applying the fallback logic, all generic individual accounts and hospitals ar
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Batangas | San Pascual | San Pascual Rural Health Unit |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Batangas | Santa Teresita | Santa Teresita Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Batangas | Santa Teresita | Santa Teresita Rural Health Unit |
-| *(System Generated Default)* | MHO/LGU | CALABARZON | Batangas | Santo Tomas | Santo Tomas Municipal Health Office |
-| *(System Generated Default)* | RHU/MHO | CALABARZON | Batangas | Santo Tomas | Santo Tomas Rural Health Unit |
+| *(System Generated Default)* | CHO/LGU | CALABARZON | Batangas | Santo Tomas | Santo Tomas City Health Office |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Batangas | Taal | Taal Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Batangas | Taal | Taal Rural Health Unit |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Batangas | Talisay | Talisay Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Batangas | Talisay | Talisay Rural Health Unit |
-| *(System Generated Default)* | MHO/LGU | CALABARZON | Batangas | Tanauan | Tanauan Municipal Health Office |
-| *(System Generated Default)* | RHU/MHO | CALABARZON | Batangas | Tanauan | Tanauan Rural Health Unit |
+| *(System Generated Default)* | CHO/LGU | CALABARZON | Batangas | Tanauan | Tanauan City Health Office |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Batangas | Taysan | Taysan Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Batangas | Taysan | Taysan Rural Health Unit |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Batangas | Tingloy | Tingloy Municipal Health Office |
@@ -92,21 +88,16 @@ By applying the fallback logic, all generic individual accounts and hospitals ar
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Cavite | Alfonso | Alfonso Rural Health Unit |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Cavite | Amadeo | Amadeo Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Cavite | Amadeo | Amadeo Rural Health Unit |
-| *(System Generated Default)* | MHO/LGU | CALABARZON | Cavite | Bacoor | Bacoor Municipal Health Office |
-| *(System Generated Default)* | RHU/MHO | CALABARZON | Cavite | Bacoor | Bacoor Rural Health Unit |
-| *(System Generated Default)* | MHO/LGU | CALABARZON | Cavite | Carmona | Carmona Municipal Health Office |
-| *(System Generated Default)* | RHU/MHO | CALABARZON | Cavite | Carmona | Carmona Rural Health Unit |
+| *(System Generated Default)* | CHO/LGU | CALABARZON | Cavite | Bacoor | Bacoor City Health Office |
+| *(System Generated Default)* | CHO/LGU | CALABARZON | Cavite | Carmona | Carmona City Health Office |
 | *(System Generated Default)* | CHO/LGU | CALABARZON | Cavite | Cavite City | Cavite City City Health Office |
-| *(System Generated Default)* | MHO/LGU | CALABARZON | Cavite | Dasmariñas | Dasmariñas Municipal Health Office |
-| *(System Generated Default)* | RHU/MHO | CALABARZON | Cavite | Dasmariñas | Dasmariñas Rural Health Unit |
+| *(System Generated Default)* | CHO/LGU | CALABARZON | Cavite | Dasmariñas | Dasmariñas City Health Office |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Cavite | General Emilio Aguinaldo | General Emilio Aguinaldo Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Cavite | General Emilio Aguinaldo | General Emilio Aguinaldo Rural Health Unit |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Cavite | General Mariano Alvarez | General Mariano Alvarez Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Cavite | General Mariano Alvarez | General Mariano Alvarez Rural Health Unit |
-| *(System Generated Default)* | MHO/LGU | CALABARZON | Cavite | General Trias | General Trias Municipal Health Office |
-| *(System Generated Default)* | RHU/MHO | CALABARZON | Cavite | General Trias | General Trias Rural Health Unit |
-| *(System Generated Default)* | MHO/LGU | CALABARZON | Cavite | Imus | Imus Municipal Health Office |
-| *(System Generated Default)* | RHU/MHO | CALABARZON | Cavite | Imus | Imus Rural Health Unit |
+| *(System Generated Default)* | CHO/LGU | CALABARZON | Cavite | General Trias | General Trias City Health Office |
+| *(System Generated Default)* | CHO/LGU | CALABARZON | Cavite | Imus | Imus City Health Office |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Cavite | Indang | Indang Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Cavite | Indang | Indang Rural Health Unit |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Cavite | Kawit | Kawit Municipal Health Office |
@@ -125,25 +116,20 @@ By applying the fallback logic, all generic individual accounts and hospitals ar
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Cavite | Rosario | Rosario Rural Health Unit |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Cavite | Silang | Silang Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Cavite | Silang | Silang Rural Health Unit |
-| *(System Generated Default)* | MHO/LGU | CALABARZON | Cavite | Tagaytay | Tagaytay Municipal Health Office |
-| *(System Generated Default)* | RHU/MHO | CALABARZON | Cavite | Tagaytay | Tagaytay Rural Health Unit |
+| *(System Generated Default)* | CHO/LGU | CALABARZON | Cavite | Tagaytay | Tagaytay City Health Office |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Cavite | Tanza | Tanza Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Cavite | Tanza | Tanza Rural Health Unit |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Cavite | Ternate | Ternate Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Cavite | Ternate | Ternate Rural Health Unit |
-| *(System Generated Default)* | MHO/LGU | CALABARZON | Cavite | Trece Martires | Trece Martires Municipal Health Office |
-| *(System Generated Default)* | RHU/MHO | CALABARZON | Cavite | Trece Martires | Trece Martires Rural Health Unit |
+| *(System Generated Default)* | CHO/LGU | CALABARZON | Cavite | Trece Martires | Trece Martires City Health Office |
 | *(System Generated Default)* | PHO | CALABARZON | Laguna | Santa Cruz | Laguna Provincial Health Office |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Laguna | Alaminos | Alaminos Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Laguna | Alaminos | Alaminos Rural Health Unit |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Laguna | Bay | Bay Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Laguna | Bay | Bay Rural Health Unit |
-| *(System Generated Default)* | MHO/LGU | CALABARZON | Laguna | Biñan | Biñan Municipal Health Office |
-| *(System Generated Default)* | RHU/MHO | CALABARZON | Laguna | Biñan | Biñan Rural Health Unit |
-| *(System Generated Default)* | MHO/LGU | CALABARZON | Laguna | Cabuyao | Cabuyao Municipal Health Office |
-| *(System Generated Default)* | RHU/MHO | CALABARZON | Laguna | Cabuyao | Cabuyao Rural Health Unit |
-| *(System Generated Default)* | MHO/LGU | CALABARZON | Laguna | Calamba | Calamba Municipal Health Office |
-| *(System Generated Default)* | RHU/MHO | CALABARZON | Laguna | Calamba | Calamba Rural Health Unit |
+| *(System Generated Default)* | CHO/LGU | CALABARZON | Laguna | Biñan | Biñan City Health Office |
+| *(System Generated Default)* | CHO/LGU | CALABARZON | Laguna | Cabuyao | Cabuyao City Health Office |
+| *(System Generated Default)* | CHO/LGU | CALABARZON | Laguna | Calamba | Calamba City Health Office |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Laguna | Calauan | Calauan Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Laguna | Calauan | Calauan Rural Health Unit |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Laguna | Cavinti | Cavinti Municipal Health Office |
@@ -180,16 +166,13 @@ By applying the fallback logic, all generic individual accounts and hospitals ar
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Laguna | Pila | Pila Rural Health Unit |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Laguna | Rizal | Rizal Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Laguna | Rizal | Rizal Rural Health Unit |
-| *(System Generated Default)* | MHO/LGU | CALABARZON | Laguna | San Pablo | San Pablo Municipal Health Office |
-| *(System Generated Default)* | RHU/MHO | CALABARZON | Laguna | San Pablo | San Pablo Rural Health Unit |
-| *(System Generated Default)* | MHO/LGU | CALABARZON | Laguna | San Pedro | San Pedro Municipal Health Office |
-| *(System Generated Default)* | RHU/MHO | CALABARZON | Laguna | San Pedro | San Pedro Rural Health Unit |
+| *(System Generated Default)* | CHO/LGU | CALABARZON | Laguna | San Pablo | San Pablo City Health Office |
+| *(System Generated Default)* | CHO/LGU | CALABARZON | Laguna | San Pedro | San Pedro City Health Office |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Laguna | Santa Cruz | Santa Cruz Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Laguna | Santa Cruz | Santa Cruz Rural Health Unit |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Laguna | Santa Maria | Santa Maria Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Laguna | Santa Maria | Santa Maria Rural Health Unit |
-| *(System Generated Default)* | MHO/LGU | CALABARZON | Laguna | Santa Rosa | Santa Rosa Municipal Health Office |
-| *(System Generated Default)* | RHU/MHO | CALABARZON | Laguna | Santa Rosa | Santa Rosa Rural Health Unit |
+| *(System Generated Default)* | CHO/LGU | CALABARZON | Laguna | Santa Rosa | Santa Rosa City Health Office |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Laguna | Siniloan | Siniloan Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Laguna | Siniloan | Siniloan Rural Health Unit |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Laguna | Victoria | Victoria Municipal Health Office |
@@ -270,8 +253,7 @@ By applying the fallback logic, all generic individual accounts and hospitals ar
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Quezon | Sariaya | Sariaya Rural Health Unit |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Quezon | Tagkawayan | Tagkawayan Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Quezon | Tagkawayan | Tagkawayan Rural Health Unit |
-| *(System Generated Default)* | MHO/LGU | CALABARZON | Quezon | Tayabas | Tayabas Municipal Health Office |
-| *(System Generated Default)* | RHU/MHO | CALABARZON | Quezon | Tayabas | Tayabas Rural Health Unit |
+| *(System Generated Default)* | CHO/LGU | CALABARZON | Quezon | Tayabas | Tayabas City Health Office |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Quezon | Tiaong | Tiaong Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Quezon | Tiaong | Tiaong Rural Health Unit |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Quezon | Unisan | Unisan Municipal Health Office |
@@ -385,8 +367,7 @@ By applying the fallback logic, all generic individual accounts and hospitals ar
 | *(System Generated Default)* | PHO | CALABARZON | Rizal | Antipolo | Rizal Provincial Health Office |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Rizal | Angono | Angono Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Rizal | Angono | Angono Rural Health Unit |
-| *(System Generated Default)* | MHO/LGU | CALABARZON | Rizal | Antipolo | Antipolo Municipal Health Office |
-| *(System Generated Default)* | RHU/MHO | CALABARZON | Rizal | Antipolo | Antipolo Rural Health Unit |
+| *(System Generated Default)* | CHO/LGU | CALABARZON | Rizal | Antipolo | Antipolo City Health Office |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Rizal | Baras | Baras Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | CALABARZON | Rizal | Baras | Baras Rural Health Unit |
 | *(System Generated Default)* | MHO/LGU | CALABARZON | Rizal | Binangonan | Binangonan Municipal Health Office |
@@ -480,8 +461,7 @@ By applying the fallback logic, all generic individual accounts and hospitals ar
 | *(System Generated Default)* | RHU/MHO | MIMAROPA | Oriental Mindoro | Bongabong | Bongabong Rural Health Unit |
 | *(System Generated Default)* | MHO/LGU | MIMAROPA | Oriental Mindoro | Bulalacao | Bulalacao Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | MIMAROPA | Oriental Mindoro | Bulalacao | Bulalacao Rural Health Unit |
-| *(System Generated Default)* | MHO/LGU | MIMAROPA | Oriental Mindoro | Calapan | Calapan Municipal Health Office |
-| *(System Generated Default)* | RHU/MHO | MIMAROPA | Oriental Mindoro | Calapan | Calapan Rural Health Unit |
+| *(System Generated Default)* | CHO/LGU | MIMAROPA | Oriental Mindoro | Calapan | Calapan City Health Office |
 | *(System Generated Default)* | MHO/LGU | MIMAROPA | Oriental Mindoro | Gloria | Gloria Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | MIMAROPA | Oriental Mindoro | Gloria | Gloria Rural Health Unit |
 | *(System Generated Default)* | MHO/LGU | MIMAROPA | Oriental Mindoro | Mansalay | Mansalay Municipal Health Office |
@@ -537,8 +517,7 @@ By applying the fallback logic, all generic individual accounts and hospitals ar
 | *(System Generated Default)* | RHU/MHO | MIMAROPA | Palawan | Magsaysay | Magsaysay Rural Health Unit |
 | *(System Generated Default)* | MHO/LGU | MIMAROPA | Palawan | Narra | Narra Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | MIMAROPA | Palawan | Narra | Narra Rural Health Unit |
-| *(System Generated Default)* | MHO/LGU | MIMAROPA | Palawan | Puerto Princesa | Puerto Princesa Municipal Health Office |
-| *(System Generated Default)* | RHU/MHO | MIMAROPA | Palawan | Puerto Princesa | Puerto Princesa Rural Health Unit |
+| *(System Generated Default)* | CHO/LGU | MIMAROPA | Palawan | Puerto Princesa | Puerto Princesa City Health Office |
 | *(System Generated Default)* | MHO/LGU | MIMAROPA | Palawan | Quezon | Quezon Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | MIMAROPA | Palawan | Quezon | Quezon Rural Health Unit |
 | *(System Generated Default)* | MHO/LGU | MIMAROPA | Palawan | Rizal | Rizal Municipal Health Office |
@@ -600,8 +579,7 @@ By applying the fallback logic, all generic individual accounts and hospitals ar
 | *(System Generated Default)* | CHO/LGU | BICOL | Albay | Legazpi City | Legazpi City City Health Office |
 | *(System Generated Default)* | MHO/LGU | BICOL | Albay | Libon | Libon Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | BICOL | Albay | Libon | Libon Rural Health Unit |
-| *(System Generated Default)* | MHO/LGU | BICOL | Albay | Ligao | Ligao Municipal Health Office |
-| *(System Generated Default)* | RHU/MHO | BICOL | Albay | Ligao | Ligao Rural Health Unit |
+| *(System Generated Default)* | CHO/LGU | BICOL | Albay | Ligao | Ligao City Health Office |
 | *(System Generated Default)* | MHO/LGU | BICOL | Albay | Malilipot | Malilipot Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | BICOL | Albay | Malilipot | Malilipot Rural Health Unit |
 | *(System Generated Default)* | MHO/LGU | BICOL | Albay | Malinao | Malinao Municipal Health Office |
@@ -618,8 +596,7 @@ By applying the fallback logic, all generic individual accounts and hospitals ar
 | *(System Generated Default)* | RHU/MHO | BICOL | Albay | Rapu-Rapu | Rapu-Rapu Rural Health Unit |
 | *(System Generated Default)* | MHO/LGU | BICOL | Albay | Santo Domingo | Santo Domingo Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | BICOL | Albay | Santo Domingo | Santo Domingo Rural Health Unit |
-| *(System Generated Default)* | MHO/LGU | BICOL | Albay | Tabaco | Tabaco Municipal Health Office |
-| *(System Generated Default)* | RHU/MHO | BICOL | Albay | Tabaco | Tabaco Rural Health Unit |
+| *(System Generated Default)* | CHO/LGU | BICOL | Albay | Tabaco | Tabaco City Health Office |
 | *(System Generated Default)* | MHO/LGU | BICOL | Albay | Tiwi | Tiwi Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | BICOL | Albay | Tiwi | Tiwi Rural Health Unit |
 | *(System Generated Default)* | PHO | BICOL | Camarines Norte | Daet | Camarines Norte Provincial Health Office |
@@ -678,8 +655,7 @@ By applying the fallback logic, all generic individual accounts and hospitals ar
 | *(System Generated Default)* | RHU/MHO | BICOL | Camarines Sur | Garchitorena | Garchitorena Rural Health Unit |
 | *(System Generated Default)* | MHO/LGU | BICOL | Camarines Sur | Goa | Goa Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | BICOL | Camarines Sur | Goa | Goa Rural Health Unit |
-| *(System Generated Default)* | MHO/LGU | BICOL | Camarines Sur | Iriga | Iriga Municipal Health Office |
-| *(System Generated Default)* | RHU/MHO | BICOL | Camarines Sur | Iriga | Iriga Rural Health Unit |
+| *(System Generated Default)* | CHO/LGU | BICOL | Camarines Sur | Iriga | Iriga City Health Office |
 | *(System Generated Default)* | MHO/LGU | BICOL | Camarines Sur | Lagonoy | Lagonoy Municipal Health Office |
 | *(System Generated Default)* | RHU/MHO | BICOL | Camarines Sur | Lagonoy | Lagonoy Rural Health Unit |
 | *(System Generated Default)* | MHO/LGU | BICOL | Camarines Sur | Libmanan | Libmanan Municipal Health Office |
