@@ -1,0 +1,348 @@
+Client Type,Region,Province,lgu_city_muni,ui_subtag,Is_Generated_Default
+Regional Hub,CALABARZON,Regional,Quezon City *(Logistical)*,DOH-CHD CALABARZON,Yes
+PHO,CALABARZON,Batangas,Batangas City,Batangas Provincial Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,Agoncillo,Agoncillo Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,Alitagtag,Alitagtag Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,Balayan,Balayan Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,Balete,Balete Health Office,Yes
+CHO/LGU,CALABARZON,Batangas,Batangas City,Batangas City Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,Bauan,Bauan Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,Calaca,Calaca Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,Calatagan,Calatagan Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,Cuenca,Cuenca Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,Ibaan,Ibaan Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,Laurel,Laurel Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,Lemery,Lemery Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,Lian,Lian Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,Lipa,Lipa Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,Lobo,Lobo Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,Mabini,Mabini Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,Malvar,Malvar Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,Mataasnakahoy,Mataasnakahoy Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,Nasugbu,Nasugbu Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,Padre Garcia,Padre Garcia Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,Rosario,Rosario Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,San Jose,San Jose Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,San Juan,San Juan Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,San Luis,San Luis Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,San Nicolas,San Nicolas Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,San Pascual,San Pascual Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,Santa Teresita,Santa Teresita Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,Santo Tomas,Santo Tomas Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,Taal,Taal Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,Talisay,Talisay Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,Tanauan,Tanauan Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,Taysan,Taysan Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,Tingloy,Tingloy Health Office,Yes
+MHO/LGU,CALABARZON,Batangas,Tuy,Tuy Health Office,Yes
+PHO,CALABARZON,Cavite,Trece Martires,Cavite Provincial Health Office,Yes
+MHO/LGU,CALABARZON,Cavite,Alfonso,Alfonso Health Office,Yes
+MHO/LGU,CALABARZON,Cavite,Amadeo,Amadeo Health Office,Yes
+MHO/LGU,CALABARZON,Cavite,Bacoor,Bacoor Health Office,Yes
+MHO/LGU,CALABARZON,Cavite,Carmona,Carmona Health Office,Yes
+CHO/LGU,CALABARZON,Cavite,Cavite City,Cavite City Health Office,Yes
+MHO/LGU,CALABARZON,Cavite,Dasmariñas,Dasmariñas Health Office,Yes
+MHO/LGU,CALABARZON,Cavite,General Emilio Aguinaldo,General Emilio Aguinaldo Health Office,Yes
+MHO/LGU,CALABARZON,Cavite,General Mariano Alvarez,General Mariano Alvarez Health Office,Yes
+MHO/LGU,CALABARZON,Cavite,General Trias,General Trias Health Office,Yes
+MHO/LGU,CALABARZON,Cavite,Imus,Imus Health Office,Yes
+MHO/LGU,CALABARZON,Cavite,Indang,Indang Health Office,Yes
+MHO/LGU,CALABARZON,Cavite,Kawit,Kawit Health Office,Yes
+MHO/LGU,CALABARZON,Cavite,Magallanes,Magallanes Health Office,Yes
+MHO/LGU,CALABARZON,Cavite,Maragondon,Maragondon Health Office,Yes
+MHO/LGU,CALABARZON,Cavite,Mendez,Mendez Health Office,Yes
+MHO/LGU,CALABARZON,Cavite,Naic,Naic Health Office,Yes
+MHO/LGU,CALABARZON,Cavite,Noveleta,Noveleta Health Office,Yes
+MHO/LGU,CALABARZON,Cavite,Rosario,Rosario Health Office,Yes
+MHO/LGU,CALABARZON,Cavite,Silang,Silang Health Office,Yes
+MHO/LGU,CALABARZON,Cavite,Tagaytay,Tagaytay Health Office,Yes
+MHO/LGU,CALABARZON,Cavite,Tanza,Tanza Health Office,Yes
+MHO/LGU,CALABARZON,Cavite,Ternate,Ternate Health Office,Yes
+MHO/LGU,CALABARZON,Cavite,Trece Martires,Trece Martires Health Office,Yes
+PHO,CALABARZON,Laguna,Santa Cruz,Laguna Provincial Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,Alaminos,Alaminos Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,Bay,Bay Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,Biñan,Biñan Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,Cabuyao,Cabuyao Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,Calamba,Calamba Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,Calauan,Calauan Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,Cavinti,Cavinti Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,Famy,Famy Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,Kalayaan,Kalayaan Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,Liliw,Liliw Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,Los Baños,Los Baños Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,Luisiana,Luisiana Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,Lumban,Lumban Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,Mabitac,Mabitac Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,Magdalena,Magdalena Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,Majayjay,Majayjay Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,Nagcarlan,Nagcarlan Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,Paete,Paete Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,Pagsanjan,Pagsanjan Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,Pakil,Pakil Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,Pangil,Pangil Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,Pila,Pila Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,Rizal,Rizal Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,San Pablo,San Pablo Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,San Pedro,San Pedro Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,Santa Cruz,Santa Cruz Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,Santa Maria,Santa Maria Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,Santa Rosa,Santa Rosa Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,Siniloan,Siniloan Health Office,Yes
+MHO/LGU,CALABARZON,Laguna,Victoria,Victoria Health Office,Yes
+PHO,CALABARZON,Quezon,Lucena City,Quezon Provincial Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Agdangan,Agdangan Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Alabat,Alabat Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Atimonan,Atimonan Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Buenavista,Buenavista Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Burdeos,Burdeos Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Calauag,Calauag Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Candelaria,Candelaria Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Catanauan,Catanauan Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Dolores,Dolores Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,General Luna,General Luna Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,General Nakar,General Nakar Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Guinayangan,Guinayangan Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Gumaca,Gumaca Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Infanta,Infanta Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Jomalig,Jomalig Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Lopez,Lopez Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Lucban,Lucban Health Office,Yes
+CHO/LGU,CALABARZON,Quezon,Lucena City,Lucena City Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Macalelon,Macalelon Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Mauban,Mauban Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Mulanay,Mulanay Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Padre Burgos,Padre Burgos Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Pagbilao,Pagbilao Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Panukulan,Panukulan Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Patnanungan,Patnanungan Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Perez,Perez Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Pitogo,Pitogo Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Plaridel,Plaridel Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Polillo,Polillo Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Quezon,Quezon Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Real,Real Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Sampaloc,Sampaloc Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,San Andres,San Andres Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,San Antonio,San Antonio Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,San Francisco,San Francisco Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,San Narciso,San Narciso Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Sariaya,Sariaya Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Tagkawayan,Tagkawayan Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Tayabas,Tayabas Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Tiaong,Tiaong Health Office,Yes
+MHO/LGU,CALABARZON,Quezon,Unisan,Unisan Health Office,Yes
+PHO,CALABARZON,Rizal,Antipolo,Rizal Provincial Health Office,Yes
+MHO/LGU,CALABARZON,Rizal,Angono,Angono Health Office,Yes
+MHO/LGU,CALABARZON,Rizal,Antipolo,Antipolo Health Office,Yes
+MHO/LGU,CALABARZON,Rizal,Baras,Baras Health Office,Yes
+MHO/LGU,CALABARZON,Rizal,Binangonan,Binangonan Health Office,Yes
+MHO/LGU,CALABARZON,Rizal,Cainta,Cainta Health Office,Yes
+MHO/LGU,CALABARZON,Rizal,Cardona,Cardona Health Office,Yes
+MHO/LGU,CALABARZON,Rizal,Jalajala,Jalajala Health Office,Yes
+MHO/LGU,CALABARZON,Rizal,Morong,Morong Health Office,Yes
+MHO/LGU,CALABARZON,Rizal,Pililla,Pililla Health Office,Yes
+MHO/LGU,CALABARZON,Rizal,Rodriguez,Rodriguez Health Office,Yes
+MHO/LGU,CALABARZON,Rizal,San Mateo,San Mateo Health Office,Yes
+MHO/LGU,CALABARZON,Rizal,Tanay,Tanay Health Office,Yes
+MHO/LGU,CALABARZON,Rizal,Taytay,Taytay Health Office,Yes
+MHO/LGU,CALABARZON,Rizal,Teresa,Teresa Health Office,Yes
+Regional Hub,MIMAROPA,Regional,Quezon City *(Logistical)*,DOH-CHD MIMAROPA,Yes
+PHO,MIMAROPA,Marinduque,Boac,Marinduque Provincial Health Office,Yes
+MHO/LGU,MIMAROPA,Marinduque,Boac,Boac Health Office,Yes
+MHO/LGU,MIMAROPA,Marinduque,Buenavista,Buenavista Health Office,Yes
+MHO/LGU,MIMAROPA,Marinduque,Gasan,Gasan Health Office,Yes
+MHO/LGU,MIMAROPA,Marinduque,Mogpog,Mogpog Health Office,Yes
+MHO/LGU,MIMAROPA,Marinduque,Santa Cruz,Santa Cruz Health Office,Yes
+MHO/LGU,MIMAROPA,Marinduque,Torrijos,Torrijos Health Office,Yes
+PHO,MIMAROPA,Occidental Mindoro,Mamburao,Occidental Mindoro Provincial Health Office,Yes
+MHO/LGU,MIMAROPA,Occidental Mindoro,Abra de Ilog,Abra de Ilog Health Office,Yes
+MHO/LGU,MIMAROPA,Occidental Mindoro,Calintaan,Calintaan Health Office,Yes
+MHO/LGU,MIMAROPA,Occidental Mindoro,Looc,Looc Health Office,Yes
+MHO/LGU,MIMAROPA,Occidental Mindoro,Lubang,Lubang Health Office,Yes
+MHO/LGU,MIMAROPA,Occidental Mindoro,Magsaysay,Magsaysay Health Office,Yes
+MHO/LGU,MIMAROPA,Occidental Mindoro,Mamburao,Mamburao Health Office,Yes
+MHO/LGU,MIMAROPA,Occidental Mindoro,Paluan,Paluan Health Office,Yes
+MHO/LGU,MIMAROPA,Occidental Mindoro,Rizal,Rizal Health Office,Yes
+MHO/LGU,MIMAROPA,Occidental Mindoro,Sablayan,Sablayan Health Office,Yes
+MHO/LGU,MIMAROPA,Occidental Mindoro,San Jose,San Jose Health Office,Yes
+MHO/LGU,MIMAROPA,Occidental Mindoro,Santa Cruz,Santa Cruz Health Office,Yes
+PHO,MIMAROPA,Oriental Mindoro,Calapan,Oriental Mindoro Provincial Health Office,Yes
+MHO/LGU,MIMAROPA,Oriental Mindoro,Baco,Baco Health Office,Yes
+MHO/LGU,MIMAROPA,Oriental Mindoro,Bansud,Bansud Health Office,Yes
+MHO/LGU,MIMAROPA,Oriental Mindoro,Bongabong,Bongabong Health Office,Yes
+MHO/LGU,MIMAROPA,Oriental Mindoro,Bulalacao,Bulalacao Health Office,Yes
+MHO/LGU,MIMAROPA,Oriental Mindoro,Calapan,Calapan Health Office,Yes
+MHO/LGU,MIMAROPA,Oriental Mindoro,Gloria,Gloria Health Office,Yes
+MHO/LGU,MIMAROPA,Oriental Mindoro,Mansalay,Mansalay Health Office,Yes
+MHO/LGU,MIMAROPA,Oriental Mindoro,Naujan,Naujan Health Office,Yes
+MHO/LGU,MIMAROPA,Oriental Mindoro,Pinamalayan,Pinamalayan Health Office,Yes
+MHO/LGU,MIMAROPA,Oriental Mindoro,Pola,Pola Health Office,Yes
+MHO/LGU,MIMAROPA,Oriental Mindoro,Puerto Galera,Puerto Galera Health Office,Yes
+MHO/LGU,MIMAROPA,Oriental Mindoro,Roxas,Roxas Health Office,Yes
+MHO/LGU,MIMAROPA,Oriental Mindoro,San Teodoro,San Teodoro Health Office,Yes
+MHO/LGU,MIMAROPA,Oriental Mindoro,Socorro,Socorro Health Office,Yes
+MHO/LGU,MIMAROPA,Oriental Mindoro,Victoria,Victoria Health Office,Yes
+PHO,MIMAROPA,Palawan,Puerto Princesa,Palawan Provincial Health Office,Yes
+MHO/LGU,MIMAROPA,Palawan,Aborlan,Aborlan Health Office,Yes
+MHO/LGU,MIMAROPA,Palawan,Agutaya,Agutaya Health Office,Yes
+MHO/LGU,MIMAROPA,Palawan,Araceli,Araceli Health Office,Yes
+MHO/LGU,MIMAROPA,Palawan,Balabac,Balabac Health Office,Yes
+MHO/LGU,MIMAROPA,Palawan,Bataraza,Bataraza Health Office,Yes
+MHO/LGU,MIMAROPA,Palawan,Brooke's Point,Brooke's Point Health Office,Yes
+MHO/LGU,MIMAROPA,Palawan,Busuanga,Busuanga Health Office,Yes
+MHO/LGU,MIMAROPA,Palawan,Cagayancillo,Cagayancillo Health Office,Yes
+MHO/LGU,MIMAROPA,Palawan,Coron,Coron Health Office,Yes
+MHO/LGU,MIMAROPA,Palawan,Culion,Culion Health Office,Yes
+MHO/LGU,MIMAROPA,Palawan,Cuyo,Cuyo Health Office,Yes
+MHO/LGU,MIMAROPA,Palawan,Dumaran,Dumaran Health Office,Yes
+MHO/LGU,MIMAROPA,Palawan,El Nido,El Nido Health Office,Yes
+MHO/LGU,MIMAROPA,Palawan,Kalayaan,Kalayaan Health Office,Yes
+MHO/LGU,MIMAROPA,Palawan,Linapacan,Linapacan Health Office,Yes
+MHO/LGU,MIMAROPA,Palawan,Magsaysay,Magsaysay Health Office,Yes
+MHO/LGU,MIMAROPA,Palawan,Narra,Narra Health Office,Yes
+MHO/LGU,MIMAROPA,Palawan,Puerto Princesa,Puerto Princesa Health Office,Yes
+MHO/LGU,MIMAROPA,Palawan,Quezon,Quezon Health Office,Yes
+MHO/LGU,MIMAROPA,Palawan,Rizal,Rizal Health Office,Yes
+MHO/LGU,MIMAROPA,Palawan,Roxas,Roxas Health Office,Yes
+MHO/LGU,MIMAROPA,Palawan,San Vicente,San Vicente Health Office,Yes
+MHO/LGU,MIMAROPA,Palawan,Sofronio Española,Sofronio Española Health Office,Yes
+MHO/LGU,MIMAROPA,Palawan,Taytay,Taytay Health Office,Yes
+PHO,MIMAROPA,Romblon,Romblon,Romblon Provincial Health Office,Yes
+MHO/LGU,MIMAROPA,Romblon,Alcantara,Alcantara Health Office,Yes
+MHO/LGU,MIMAROPA,Romblon,Banton,Banton Health Office,Yes
+MHO/LGU,MIMAROPA,Romblon,Cajidiocan,Cajidiocan Health Office,Yes
+MHO/LGU,MIMAROPA,Romblon,Calatrava,Calatrava Health Office,Yes
+MHO/LGU,MIMAROPA,Romblon,Concepcion,Concepcion Health Office,Yes
+MHO/LGU,MIMAROPA,Romblon,Corcuera,Corcuera Health Office,Yes
+MHO/LGU,MIMAROPA,Romblon,Ferrol,Ferrol Health Office,Yes
+MHO/LGU,MIMAROPA,Romblon,Looc,Looc Health Office,Yes
+MHO/LGU,MIMAROPA,Romblon,Magdiwang,Magdiwang Health Office,Yes
+MHO/LGU,MIMAROPA,Romblon,Odiongan,Odiongan Health Office,Yes
+MHO/LGU,MIMAROPA,Romblon,Romblon,Romblon Health Office,Yes
+MHO/LGU,MIMAROPA,Romblon,San Agustin,San Agustin Health Office,Yes
+MHO/LGU,MIMAROPA,Romblon,San Andres,San Andres Health Office,Yes
+MHO/LGU,MIMAROPA,Romblon,San Fernando,San Fernando Health Office,Yes
+MHO/LGU,MIMAROPA,Romblon,San Jose,San Jose Health Office,Yes
+MHO/LGU,MIMAROPA,Romblon,Santa Fe,Santa Fe Health Office,Yes
+Regional Hub,BICOL,Regional,Legazpi City,DOH-CHD BICOL,Yes
+PHO,BICOL,Albay,Legazpi City,Albay Provincial Health Office,Yes
+MHO/LGU,BICOL,Albay,Bacacay,Bacacay Health Office,Yes
+MHO/LGU,BICOL,Albay,Camalig,Camalig Health Office,Yes
+MHO/LGU,BICOL,Albay,Daraga,Daraga Health Office,Yes
+MHO/LGU,BICOL,Albay,Guinobatan,Guinobatan Health Office,Yes
+MHO/LGU,BICOL,Albay,Jovellar,Jovellar Health Office,Yes
+CHO/LGU,BICOL,Albay,Legazpi City,Legazpi City Health Office,Yes
+MHO/LGU,BICOL,Albay,Libon,Libon Health Office,Yes
+MHO/LGU,BICOL,Albay,Ligao,Ligao Health Office,Yes
+MHO/LGU,BICOL,Albay,Malilipot,Malilipot Health Office,Yes
+MHO/LGU,BICOL,Albay,Malinao,Malinao Health Office,Yes
+MHO/LGU,BICOL,Albay,Manito,Manito Health Office,Yes
+MHO/LGU,BICOL,Albay,Oas,Oas Health Office,Yes
+MHO/LGU,BICOL,Albay,Pio Duran,Pio Duran Health Office,Yes
+MHO/LGU,BICOL,Albay,Polangui,Polangui Health Office,Yes
+MHO/LGU,BICOL,Albay,Rapu-Rapu,Rapu-Rapu Health Office,Yes
+MHO/LGU,BICOL,Albay,Santo Domingo,Santo Domingo Health Office,Yes
+MHO/LGU,BICOL,Albay,Tabaco,Tabaco Health Office,Yes
+MHO/LGU,BICOL,Albay,Tiwi,Tiwi Health Office,Yes
+PHO,BICOL,Camarines Norte,Daet,Camarines Norte Provincial Health Office,Yes
+MHO/LGU,BICOL,Camarines Norte,Basud,Basud Health Office,Yes
+MHO/LGU,BICOL,Camarines Norte,Capalonga,Capalonga Health Office,Yes
+MHO/LGU,BICOL,Camarines Norte,Daet,Daet Health Office,Yes
+MHO/LGU,BICOL,Camarines Norte,Jose Panganiban,Jose Panganiban Health Office,Yes
+MHO/LGU,BICOL,Camarines Norte,Labo,Labo Health Office,Yes
+MHO/LGU,BICOL,Camarines Norte,Mercedes,Mercedes Health Office,Yes
+MHO/LGU,BICOL,Camarines Norte,Paracale,Paracale Health Office,Yes
+MHO/LGU,BICOL,Camarines Norte,San Lorenzo Ruiz,San Lorenzo Ruiz Health Office,Yes
+MHO/LGU,BICOL,Camarines Norte,San Vicente,San Vicente Health Office,Yes
+MHO/LGU,BICOL,Camarines Norte,Santa Elena,Santa Elena Health Office,Yes
+MHO/LGU,BICOL,Camarines Norte,Talisay,Talisay Health Office,Yes
+MHO/LGU,BICOL,Camarines Norte,Vinzons,Vinzons Health Office,Yes
+PHO,BICOL,Camarines Sur,Pili,Camarines Sur Provincial Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Baao,Baao Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Balatan,Balatan Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Bato,Bato Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Bombon,Bombon Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Buhi,Buhi Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Bula,Bula Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Cabusao,Cabusao Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Calabanga,Calabanga Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Camaligan,Camaligan Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Canaman,Canaman Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Caramoan,Caramoan Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Del Gallego,Del Gallego Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Gainza,Gainza Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Garchitorena,Garchitorena Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Goa,Goa Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Iriga,Iriga Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Lagonoy,Lagonoy Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Libmanan,Libmanan Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Lupi,Lupi Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Magarao,Magarao Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Milaor,Milaor Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Minalabac,Minalabac Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Nabua,Nabua Health Office,Yes
+CHO/LGU,BICOL,Camarines Sur,Naga City,Naga City Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Ocampo,Ocampo Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Pamplona,Pamplona Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Pasacao,Pasacao Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Pili,Pili Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Presentacion,Presentacion Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Ragay,Ragay Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Sagñay,Sagñay Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,San Fernando,San Fernando Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,San Jose,San Jose Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Sipocot,Sipocot Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Siruma,Siruma Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Tigaon,Tigaon Health Office,Yes
+MHO/LGU,BICOL,Camarines Sur,Tinambac,Tinambac Health Office,Yes
+PHO,BICOL,Catanduanes,Virac,Catanduanes Provincial Health Office,Yes
+MHO/LGU,BICOL,Catanduanes,Bagamanoc,Bagamanoc Health Office,Yes
+MHO/LGU,BICOL,Catanduanes,Baras,Baras Health Office,Yes
+MHO/LGU,BICOL,Catanduanes,Bato,Bato Health Office,Yes
+MHO/LGU,BICOL,Catanduanes,Caramoran,Caramoran Health Office,Yes
+MHO/LGU,BICOL,Catanduanes,Gigmoto,Gigmoto Health Office,Yes
+MHO/LGU,BICOL,Catanduanes,Pandan,Pandan Health Office,Yes
+MHO/LGU,BICOL,Catanduanes,Panganiban,Panganiban Health Office,Yes
+MHO/LGU,BICOL,Catanduanes,San Andres,San Andres Health Office,Yes
+MHO/LGU,BICOL,Catanduanes,San Miguel,San Miguel Health Office,Yes
+MHO/LGU,BICOL,Catanduanes,Viga,Viga Health Office,Yes
+MHO/LGU,BICOL,Catanduanes,Virac,Virac Health Office,Yes
+PHO,BICOL,Masbate,Masbate City,Masbate Provincial Health Office,Yes
+MHO/LGU,BICOL,Masbate,Aroroy,Aroroy Health Office,Yes
+MHO/LGU,BICOL,Masbate,Baleno,Baleno Health Office,Yes
+MHO/LGU,BICOL,Masbate,Balud,Balud Health Office,Yes
+MHO/LGU,BICOL,Masbate,Batuan,Batuan Health Office,Yes
+MHO/LGU,BICOL,Masbate,Cataingan,Cataingan Health Office,Yes
+MHO/LGU,BICOL,Masbate,Cawayan,Cawayan Health Office,Yes
+MHO/LGU,BICOL,Masbate,Claveria,Claveria Health Office,Yes
+MHO/LGU,BICOL,Masbate,Dimasalang,Dimasalang Health Office,Yes
+MHO/LGU,BICOL,Masbate,Esperanza,Esperanza Health Office,Yes
+MHO/LGU,BICOL,Masbate,Mandaon,Mandaon Health Office,Yes
+CHO/LGU,BICOL,Masbate,Masbate City,Masbate City Health Office,Yes
+MHO/LGU,BICOL,Masbate,Milagros,Milagros Health Office,Yes
+MHO/LGU,BICOL,Masbate,Mobo,Mobo Health Office,Yes
+MHO/LGU,BICOL,Masbate,Monreal,Monreal Health Office,Yes
+MHO/LGU,BICOL,Masbate,Palanas,Palanas Health Office,Yes
+MHO/LGU,BICOL,Masbate,Pio V. Corpuz,Pio V. Corpuz Health Office,Yes
+MHO/LGU,BICOL,Masbate,Placer,Placer Health Office,Yes
+MHO/LGU,BICOL,Masbate,San Fernando,San Fernando Health Office,Yes
+MHO/LGU,BICOL,Masbate,San Jacinto,San Jacinto Health Office,Yes
+MHO/LGU,BICOL,Masbate,San Pascual,San Pascual Health Office,Yes
+MHO/LGU,BICOL,Masbate,Uson,Uson Health Office,Yes
+PHO,BICOL,Sorsogon,Sorsogon City,Sorsogon Provincial Health Office,Yes
+MHO/LGU,BICOL,Sorsogon,Barcelona,Barcelona Health Office,Yes
+MHO/LGU,BICOL,Sorsogon,Bulan,Bulan Health Office,Yes
+MHO/LGU,BICOL,Sorsogon,Bulusan,Bulusan Health Office,Yes
+MHO/LGU,BICOL,Sorsogon,Casiguran,Casiguran Health Office,Yes
+MHO/LGU,BICOL,Sorsogon,Castilla,Castilla Health Office,Yes
+MHO/LGU,BICOL,Sorsogon,Donsol,Donsol Health Office,Yes
+MHO/LGU,BICOL,Sorsogon,Gubat,Gubat Health Office,Yes
+MHO/LGU,BICOL,Sorsogon,Irosin,Irosin Health Office,Yes
+MHO/LGU,BICOL,Sorsogon,Juban,Juban Health Office,Yes
+MHO/LGU,BICOL,Sorsogon,Magallanes,Magallanes Health Office,Yes
+MHO/LGU,BICOL,Sorsogon,Matnog,Matnog Health Office,Yes
+MHO/LGU,BICOL,Sorsogon,Pilar,Pilar Health Office,Yes
+MHO/LGU,BICOL,Sorsogon,Prieto Diaz,Prieto Diaz Health Office,Yes
+MHO/LGU,BICOL,Sorsogon,Santa Magdalena,Santa Magdalena Health Office,Yes
+CHO/LGU,BICOL,Sorsogon,Sorsogon City,Sorsogon City Health Office,Yes
