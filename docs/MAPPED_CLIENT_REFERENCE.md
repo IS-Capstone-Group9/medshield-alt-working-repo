@@ -189,21 +189,21 @@ By applying the fallback logic, all generic individual accounts and hospitals ar
 | A/R - Quezon - Teresa Tan | Individual/A/R | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Teresa Tan |
 | A/R - Quezon - BLB Botika | Pharmacy | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | BLB Botika |
 | A/R - Quezon - Bon Pharmacy | Pharmacy | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Bon Pharmacy |
-| A/R - Quezon - Century Drug | Pharmacy | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Century Drug |
-| A/R - Quezon - DCP Pharmacy | Pharmacy | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | DCP Pharmacy |
-| A/R - Quezon - Eastern Drug | Pharmacy | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Eastern Drug |
+| A/R - Quezon - Century Drug | Pharmacy | CALABARZON | Quezon | Atimonan *(Searched Location)* | Century Drug |
+| A/R - Quezon - DCP Pharmacy | Pharmacy | CALABARZON | Quezon | Agdangan *(Searched Location)* | DCP Pharmacy |
+| A/R - Quezon - Eastern Drug | Pharmacy | CALABARZON | Quezon | Gumaca *(Searched Location)* | Eastern Drug |
 | A/R - Quezon - Gumaca District Cooperative | Cooperative | CALABARZON | Quezon | Gumaca | Gumaca District Cooperative |
-| A/R - Quezon - KKK Pharmacy | Pharmacy | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | KKK Pharmacy |
+| A/R - Quezon - KKK Pharmacy | Pharmacy | CALABARZON | Quezon | Padre Burgos *(Searched Location)* | KKK Pharmacy |
 | A/R - Quezon - Megawide | Individual/A/R | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Megawide |
-| A/R - Quezon - Pagkatipunan Drugstore | Pharmacy | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Pagkatipunan Drugstore |
+| A/R - Quezon - Pagkatipunan Drugstore | Pharmacy | CALABARZON | Quezon | Lucena City *(Searched Location)* | Pagkatipunan Drugstore |
 | A/R - Quezon - Perez Drug | Pharmacy | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Perez Drug |
-| A/R - Quezon - RSV Pharmacy | Pharmacy | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | RSV Pharmacy |
-| A/R - Quezon - Vickys Pharmacy | Pharmacy | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Vickys Pharmacy |
-| A/R - Quezon - Winjoy Pharmacy | Pharmacy | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Winjoy Pharmacy |
+| A/R - Quezon - RSV Pharmacy | Pharmacy | CALABARZON | Quezon | Candelaria *(Searched Location)* | RSV Pharmacy |
+| A/R - Quezon - Vickys Pharmacy | Pharmacy | CALABARZON | Quezon | Lucena City *(Searched Location)* | Vickys Pharmacy |
+| A/R - Quezon - Winjoy Pharmacy | Pharmacy | CALABARZON | Quezon | Lopez *(Searched Location)* | Winjoy Pharmacy |
 | A/R - Quezon - Ma. Cecile Aure | Individual/A/R | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Ma. Cecile Aure |
 | A/R - Quezon - Cherrylyn Barola | Individual/A/R | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Cherrylyn Barola |
 | A/R - Quezon - Mt Carmel General Hospital | Private Hospital | CALABARZON | Quezon | Lucena City | Mt Carmel General Hospital |
-| A/R - Quezon - RAKKK Prophet | Individual/A/R | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | RAKKK Prophet |
+| A/R - Quezon - RAKKK Prophet | Private Hospital | CALABARZON | Quezon | Gumaca *(Searched Location)* | RAKKK Prophet |
 | A/R - Quezon - Herminia Laguador | Clinic | CALABARZON | Quezon | Lucban *(Searched Location)* | Herminia Laguador |
 | A/R - Quezon - Madel Fetisa | Individual/A/R | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Madel Fetisa |
 | A/R - Quezon - Constancia Catarroja | RHU/MHO | CALABARZON | Quezon | Sariaya *(Searched Location)* | Constancia Catarroja |
@@ -221,16 +221,16 @@ By applying the fallback logic, all generic individual accounts and hospitals ar
 | A/R - Quezon - Dr. Gilbert Lafuente | Clinic | CALABARZON | Quezon | Padre Burgos *(Searched Location)* | Dr. Gilbert Lafuente |
 | A/R - Quezon - Sampaloc Lying Inn | Lying Inn | CALABARZON | Quezon | Sampaloc | Sampaloc Lying Inn |
 | A/R - Quezon - Unihealth Quezon (Medicine) | Individual/A/R | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Unihealth Quezon (Medicine) |
-| A/R - Quezon - Tumbaga Birthing Home | Individual/A/R | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Tumbaga Birthing Home |
+| A/R - Quezon - Tumbaga Birthing Home | Birthing Home | CALABARZON | Quezon | Sariaya *(Searched Location)* | Tumbaga Birthing Home |
 | A/R - Quezon - Brgy Health Station Sampaloc 1 | BHS | CALABARZON | Quezon | Sampaloc | Brgy Health Station Sampaloc 1 |
 | A/R - Quezon - Raquel Samodio | Individual/A/R | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Raquel Samodio |
 | A/R - Quezon - Asuncion Rañeses | Individual/A/R | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Asuncion Rañeses |
 | A/R - Quezon - Lopez St Jude General Hospital | Private Hospital | CALABARZON | Quezon | Lopez | Lopez St Jude General Hospital |
 | A/R - Quezon - Dra. Cherry Bacungan | Private Hospital | CALABARZON | Quezon | Lucena City *(Searched Location)* | Dra. Cherry Bacungan |
 | A/R - Quezon - Dr. Maribel Nosce | Clinic | CALABARZON | Quezon | Lucena City *(Searched Location)* | Dr. Maribel Nosce |
-| A/R - Quezon - Zoleta Birthing Home | Individual/A/R | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Zoleta Birthing Home |
-| A/R - Quezon - Hiyasmin Birthing Home | Individual/A/R | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Hiyasmin Birthing Home |
-| A/R - Quezon - Nativity of Jesus Birthing Clinic | Individual/A/R | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Nativity of Jesus Birthing Clinic |
+| A/R - Quezon - Zoleta Birthing Home | Birthing Home | CALABARZON | Quezon | San Antonio *(Searched Location)* | Zoleta Birthing Home |
+| A/R - Quezon - Hiyasmin Birthing Home | Birthing Home | CALABARZON | Quezon | Tayabas *(Searched Location)* | Hiyasmin Birthing Home |
+| A/R - Quezon - Nativity of Jesus Birthing Clinic | Birthing Home | CALABARZON | Quezon | Sariaya *(Searched Location)* | Nativity of Jesus Birthing Clinic |
 | A/R - Quezon - Gulang Gulang National High School | Individual/A/R | CALABARZON | Quezon | Lucena City *(Defaulted to PHO/LGU)* | Gulang Gulang National High School |
 | A/R - Hospital - Lucena MMG Hospital | Govt Hospital | CALABARZON | Quezon | Lucena City | Lucena MMG Hospital |
 | A/R - Hospital - Peter Paul Medical Center of Candelaria | Govt Hospital | CALABARZON | Quezon | Candelaria | Peter Paul Medical Center of Candelaria |

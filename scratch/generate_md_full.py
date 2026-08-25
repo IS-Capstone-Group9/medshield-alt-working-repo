@@ -237,6 +237,45 @@ def parse_client(line):
         if "Ester Vergara" in name:
             lgu = "Candelaria *(Searched Location)*"
             ctype = "Clinic"
+        if "Century Drug" in name:
+            lgu = "Atimonan *(Searched Location)*"
+            ctype = "Pharmacy"
+        if "DCP Pharmacy" in name:
+            lgu = "Agdangan *(Searched Location)*"
+            ctype = "Pharmacy"
+        if "Eastern Drug" in name:
+            lgu = "Gumaca *(Searched Location)*"
+            ctype = "Pharmacy"
+        if "KKK Pharmacy" in name:
+            lgu = "Padre Burgos *(Searched Location)*"
+            ctype = "Pharmacy"
+        if "Pagkatipunan Drugstore" in name:
+            lgu = "Lucena City *(Searched Location)*"
+            ctype = "Pharmacy"
+        if "RSV Pharmacy" in name:
+            lgu = "Candelaria *(Searched Location)*"
+            ctype = "Pharmacy"
+        if "Vickys Pharmacy" in name:
+            lgu = "Lucena City *(Searched Location)*"
+            ctype = "Pharmacy"
+        if "Winjoy Pharmacy" in name:
+            lgu = "Lopez *(Searched Location)*"
+            ctype = "Pharmacy"
+        if "RAKKK Prophet" in name:
+            lgu = "Gumaca *(Searched Location)*"
+            ctype = "Private Hospital"
+        if "Tumbaga Birthing Home" in name or "Nativity of Jesus" in name:
+            lgu = "Sariaya *(Searched Location)*"
+            ctype = "Birthing Home"
+        if "Zoleta Birthing Home" in name:
+            lgu = "San Antonio *(Searched Location)*"
+            ctype = "Birthing Home"
+        if "Hiyasmin Birthing Home" in name:
+            lgu = "Tayabas *(Searched Location)*"
+            ctype = "Birthing Home"
+        if "JRM" in name and "RMV" in name:
+            lgu = "Santa Cruz *(Searched Location)*"
+            ctype = "Pharmacy"
         if line.startswith("A/R - D3 - LGU"):
             ctype = "LGU"
             lgu = name
