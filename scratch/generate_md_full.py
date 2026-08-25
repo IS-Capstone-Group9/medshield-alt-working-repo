@@ -352,6 +352,11 @@ By applying the fallback logic, all generic individual accounts and hospitals ar
 | :--- | :--- | :--- | :--- | :--- | :--- |
 """
 
+# Inject National and Internal Admin rows
+md_content += "| **NATIONAL & INTERNAL** | | | | | |\n"
+md_content += "| A/R - Admin | Internal Admin | National | HQ | MedShield HQ | MedShield Internal Administration |\n"
+md_content += "| A/R - Government | National Govt | National | National | DOH Central | DOH Central Office |\n"
+
 for region, provinces in lgu_data.items():
     md_content += f"| **{region}** | | | | | |\n"
     md_content += f"| *(System Generated Default)* | Regional Hub | {region} | Regional | {regional_hubs[region]} | DOH-CHD {region} |\n"

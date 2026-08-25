@@ -6,6 +6,9 @@ By applying the fallback logic, all generic individual accounts and hospitals ar
 
 | Original Raw Client Name (From PDF) | Client Type | Region | Province | **`lgu_city_muni` (Model Anchor)** | **`ui_subtag` / Context** |
 | :--- | :--- | :--- | :--- | :--- | :--- |
+| **NATIONAL & INTERNAL** | | | | | |
+| A/R - Admin | Internal Admin | National | HQ | MedShield HQ | MedShield Internal Administration |
+| A/R - Government | National Govt | National | National | DOH Central | DOH Central Office |
 | **CALABARZON** | | | | | |
 | *(System Generated Default)* | Regional Hub | CALABARZON | Regional | Quezon City *(Logistical)* | DOH-CHD CALABARZON |
 | *(System Generated Default)* | PHO | CALABARZON | Batangas | Batangas City | Batangas Provincial Health Office |
