@@ -355,21 +355,15 @@ By applying the fallback logic, all generic individual accounts and hospitals ar
 for region, provinces in lgu_data.items():
     md_content += f"| **{region}** | | | | | |\n"
     md_content += f"| *(System Generated Default)* | Regional Hub | {region} | Regional | {regional_hubs[region]} | DOH-CHD {region} |\n"
-    # Placeholder list for urbanized municipalities. Add names here to classify them as MHO instead of RHU.
-    urbanized_municipalities = ["Taytay", "Cainta"] 
-
     for province, lgus in provinces.items():
         md_content += f"| *(System Generated Default)* | PHO | {region} | {province} | {capitals[province]} | {province} Provincial Health Office |\n"
         for lgu in lgus:
             if "City" in lgu:
                 ctype = "CHO/LGU"
-                subtag = f"{lgu} Health Office"
-            elif lgu in urbanized_municipalities:
-                ctype = "MHO/LGU"
-                subtag = f"{lgu} Health Office"
+                subtag = f"{lgu} City Health Office"
             else:
-                ctype = "RHU/MHO"
-                subtag = f"{lgu} Rural Health Unit"
+                ctype = "MHO/LGU"
+                subtag = f"{lgu} Municipal Health Office"
             
             md_content += f"| *(System Generated Default)* | {ctype} | {region} | {province} | {lgu} | {subtag} |\n"
         
