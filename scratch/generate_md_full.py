@@ -213,6 +213,30 @@ def parse_client(line):
         if "Jessabeth Mercado" in name:
             lgu = "Lucena City *(Searched Location)*"
             ctype = "Govt Hospital"
+        if "Maribel Nosce" in name:
+            lgu = "Lucena City *(Searched Location)*"
+            ctype = "Clinic"
+        if "Cherry Bacungan" in name:
+            lgu = "Lucena City *(Searched Location)*"
+            ctype = "Private Hospital"
+        if "Urbano Oliveros" in name:
+            lgu = "Lucena City *(Searched Location)*"
+            ctype = "Clinic"
+        if "Herminia Laguador" in name or "Rodolfo Rañola" in name or "Petronillo Faller" in name:
+            lgu = "Lucban *(Searched Location)*"
+            ctype = "Clinic"
+        if "Severina Nadres" in name or "Graciela Derada Deleon" in name:
+            lgu = "Tayabas *(Searched Location)*"
+            ctype = "Clinic"
+        if "Augustina Cabangon" in name:
+            lgu = "Lucena City *(Searched Location)*"
+            ctype = "Govt Hospital"
+        if "Aurea Cadacio" in name:
+            lgu = "Sariaya *(Searched Location)*"
+            ctype = "BHS / Midwife"
+        if "Ester Vergara" in name:
+            lgu = "Candelaria *(Searched Location)*"
+            ctype = "Clinic"
         if line.startswith("A/R - D3 - LGU"):
             ctype = "LGU"
             lgu = name
