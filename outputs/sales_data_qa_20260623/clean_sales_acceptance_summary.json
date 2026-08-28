@@ -1,0 +1,67 @@
+{
+  "input_rows": 21802,
+  "accepted_clean_sales_rows": 20961,
+  "excluded_rows": 841,
+  "accepted_summary": {
+    "rows": 20961,
+    "unique_products": 3335,
+    "unique_areas": 29,
+    "estimated_backward_allocation_rows": 1725,
+    "duplicate_rows": 33,
+    "by_year": {
+      "2021": 3412,
+      "2022": 3999,
+      "2023": 5323,
+      "2024": 3328,
+      "2025": 4899
+    },
+    "by_quality_status": {
+      "valid": 17329,
+      "warning": 3632
+    },
+    "quantity": 1016664.41,
+    "total_cost": 430133235.949998,
+    "discount": 2428836.13,
+    "net_cost": 427704399.819998,
+    "total_trade_price": 220958269.8,
+    "net_income": 259767098.700002
+  },
+  "excluded_summary": {
+    "rows": 841,
+    "unique_products": 79,
+    "unique_areas": 9,
+    "estimated_backward_allocation_rows": 5,
+    "duplicate_rows": 2,
+    "by_year": {
+      "2021": 3,
+      "2022": 27,
+      "2023": 566,
+      "2024": 107,
+      "2025": 60,
+      "(missing_date)": 78
+    },
+    "by_quality_status": {
+      "rejected": 747,
+      "valid": 92,
+      "warning": 2
+    },
+    "quantity": 59341.15,
+    "total_cost": 496641082.17,
+    "discount": 1878641.91,
+    "net_cost": 494213290.04,
+    "total_trade_price": 203379642.28,
+    "net_income": 290833647.76
+  },
+  "exclusion_reasons": {
+    "non_positive_quantity; non_positive_total_trade_price": 22,
+    "non_positive_total_trade_price": 72,
+    "missing_product; non_positive_total_trade_price": 627,
+    "missing_product": 2,
+    "missing_product; non_positive_quantity; non_positive_total_trade_price": 40,
+    "missing_product; missing_area; missing_or_invalid_date_delivered; non_positive_quantity": 5,
+    "missing_area; missing_or_invalid_date_delivered; non_positive_quantity; non_positive_total_trade_price": 3,
+    "missing_product; missing_or_invalid_date_delivered; non_positive_quantity; non_positive_total_trade_price": 6,
+    "missing_product; missing_or_invalid_date_delivered; non_positive_total_trade_price": 60,
+    "missing_or_invalid_date_delivered; non_positive_total_trade_price": 4
+  }
+}

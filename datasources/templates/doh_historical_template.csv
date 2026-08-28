@@ -1,0 +1,2 @@
+date,year,month,region,province_city,disease_name,case_count,death_count,population,disease_intensity_indicator,source,source_file,notes
+2021-01-01,2021,1,Region IV-A,Quezon,Dengue,25,0,100000,25.0,DOH,doh_raw_file.csv,example row only

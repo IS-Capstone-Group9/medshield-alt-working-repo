@@ -1,0 +1,353 @@
+{
+  "timestamp": "2026-08-09T16:54:51",
+  "summary": {
+    "passed": 57,
+    "failed": 0,
+    "total": 57,
+    "pass_rate_pct": 100.0
+  },
+  "results": [
+    {
+      "label": "Backend Gateway /api/health",
+      "status": 200,
+      "ok": true,
+      "snippet": "{'status': 'ok', 'service': 'MedShield API gateway', 'architecture': 'typescript-api-gateway', 'sour"
+    },
+    {
+      "label": "Analytics Service /health",
+      "status": 200,
+      "ok": true,
+      "snippet": "{'architecture': 'microservices', 'service': 'analytics-service', 'status': 'ok'}"
+    },
+    {
+      "label": "Product Service /health",
+      "status": 200,
+      "ok": true,
+      "snippet": "{'architecture': 'microservices', 'service': 'product-service', 'status': 'ok'}"
+    },
+    {
+      "label": "Frontend root page",
+      "status": 200,
+      "ok": true,
+      "snippet": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport"
+    },
+    {
+      "label": "POST /api/auth/login (admin)",
+      "status": 200,
+      "ok": true,
+      "snippet": "{'access_token': 'TpdEx7sdrRqxKkYLueFd4YWOQ5Gy9z2cPFTqJ0pcf_c', 'token_type': 'Bearer', 'expires_at'"
+    },
+    {
+      "label": "POST /api/auth/login (bad creds)",
+      "status": 401,
+      "ok": true,
+      "snippet": "{\"error\":\"Invalid username or password\"}"
+    },
+    {
+      "label": "GET /api/auth/me (with token)",
+      "status": 200,
+      "ok": true,
+      "snippet": "{'user': {'account_id': 2, 'username': 'admin', 'email': 'admin@medshield.local', 'role': 'admin'}}"
+    },
+    {
+      "label": "GET /api/auth/me (no token)",
+      "status": 401,
+      "ok": true,
+      "snippet": "{\"error\":\"Authentication token is required\"}"
+    },
+    {
+      "label": "GET /api/summary",
+      "status": 200,
+      "ok": true,
+      "snippet": "{'avg_margin': 55.6, 'top_area': 'Government', 'top_product': 'PAGBILAO # 13,500,000', 'total_income"
+    },
+    {
+      "label": "GET /api/monthly",
+      "status": 200,
+      "ok": true,
+      "snippet": "[{'income': 4396246, 'period': '2023-01', 'revenue': 7886979}, {'income': 7775425, 'period': '2023-0"
+    },
+    {
+      "label": "GET /api/by_area",
+      "status": 200,
+      "ok": true,
+      "snippet": "[{'area': 'Government', 'income': 153609835, 'revenue': 270117650}, {'area': 'Hospital', 'income': 5"
+    },
+    {
+      "label": "GET /api/year_summary",
+      "status": 200,
+      "ok": true,
+      "snippet": "[{'income': 42079675, 'revenue': 63341656, 'transactions': 2855, 'year': '2021'}, {'income': 3999480"
+    },
+    {
+      "label": "GET /api/seasonality",
+      "status": 200,
+      "ok": true,
+      "snippet": "[{'avg_revenue': 25368, 'month': 'Jan'}, {'avg_revenue': 24143, 'month': 'Feb'}, {'avg_revenue': 109"
+    },
+    {
+      "label": "GET /api/forecasts",
+      "status": 200,
+      "ok": true,
+      "snippet": "[{'adjusted_forecast': 17158306, 'area': 'All', 'baseline_forecast': 16821869, 'forecast_scope': 'ov"
+    },
+    {
+      "label": "GET /api/external_signals",
+      "status": 200,
+      "ok": true,
+      "snippet": "[{'area': 'All', 'disease_alert_level': 'watch', 'disease_intensity_index': 1.1, 'disease_names': 'R"
+    },
+    {
+      "label": "GET /api/inventory_recommendations",
+      "status": 200,
+      "ok": true,
+      "snippet": "[{'annual_demand_units': 18400, 'area': 'All', 'current_stock_units': 62, 'eoq_units': 240, 'forecas"
+    },
+    {
+      "label": "GET /api/regional_priorities",
+      "status": 200,
+      "ok": true,
+      "snippet": "[{'area': 'Government', 'growth_score': 0.18, 'mcda_score': 0.63, 'outbreak_risk_index': 0.05, 'prio"
+    },
+    {
+      "label": "GET /api/area_clusters",
+      "status": 200,
+      "ok": true,
+      "snippet": "[{'area': 'Government', 'cluster_label': 'Cluster A', 'cluster_profile': 'High-volume / institutiona"
+    },
+    {
+      "label": "GET /api/product_priorities",
+      "status": 200,
+      "ok": true,
+      "snippet": "[{'abc_classification': 'A', 'cumulative_revenue_pct': 27.7, 'model_code': 'XGBOOST_URGENCY', 'paret"
+    },
+    {
+      "label": "GET /api/allocation_recommendations",
+      "status": 200,
+      "ok": true,
+      "snippet": "[{'area': 'Hospital', 'available_units': 320, 'model_code': 'LINEAR_ALLOCATION', 'optimization_gap':"
+    },
+    {
+      "label": "GET /api/product_region_matches",
+      "status": 200,
+      "ok": true,
+      "snippet": "[{'area': 'Hospital', 'match_rank': 1, 'model_code': 'COLLAB_PRODUCT_REGION', 'product': 'MONOWEL 1G"
+    },
+    {
+      "label": "GET /api/decision_alerts",
+      "status": 200,
+      "ok": true,
+      "snippet": "[{'alert_date': '2026-01-01', 'alert_type': 'stock_gap', 'area': 'Hospital', 'demand_multiplier': 1,"
+    },
+    {
+      "label": "GET /api/model_evaluation",
+      "status": 200,
+      "ok": true,
+      "snippet": "[{'analytics_layer': 'predictive', 'benchmark_value': 0.15, 'metric_name': 'MAPE', 'metric_value': 0"
+    },
+    {
+      "label": "GET /api/sales/status",
+      "status": 200,
+      "ok": true,
+      "snippet": "{'canonical_columns': ['area', 'dr_number', 'date_delivered', 'product', 'quantity', 'unit_cost', 't"
+    },
+    {
+      "label": "GET /api/sales/transactions",
+      "status": 200,
+      "ok": true,
+      "snippet": "{'filters': {'quality_status': 'all', 'search': '', 'year': 'all'}, 'metadata': {'canonical_columns'"
+    },
+    {
+      "label": "GET /api/sales/summary",
+      "status": 200,
+      "ok": true,
+      "snippet": "{'averages': {'discount': 126.656612, 'margin_pct': 0.555813, 'net_cost': 17505.674584, 'net_income'"
+    },
+    {
+      "label": "GET /api/sales/transactions?year=2023",
+      "status": 200,
+      "ok": true,
+      "snippet": "{'filters': {'quality_status': 'all', 'search': '', 'year': '2023'}, 'metadata': {'canonical_columns"
+    },
+    {
+      "label": "GET /api/seasonal_epidemic_matrix",
+      "status": 200,
+      "ok": true,
+      "snippet": "[{'anticipated_outbreaks': 'Influenza-Like Illness (ILI), SARI, Asthma exacerbations, Allergic Rhini"
+    },
+    {
+      "label": "GET /api/model_summary",
+      "status": 200,
+      "ok": true,
+      "snippet": "{'data_sources': [{'name': 'MedShield Internal Sales', 'period': '2021-2025', 'rows': 20961, 'status"
+    },
+    {
+      "label": "GET /api/mcda_territories",
+      "status": 200,
+      "ok": true,
+      "snippet": "{'data_period': '2021-2025', 'label': 'SCENARIO - Review required before procurement action.', 'mode"
+    },
+    {
+      "label": "GET /api/eoq_scenarios",
+      "status": 200,
+      "ok": true,
+      "snippet": "{'assumptions': {'demand_variability_pct': 25, 'holding_cost_pct': 0.15, 'lead_time_days': 14, 'orde"
+    },
+    {
+      "label": "GET /api/therapeutic_categories",
+      "status": 200,
+      "ok": true,
+      "snippet": "[{'category_name': 'Antipyretics & Analgesics (High Fever & Pain)', 'disease_triggers': ['Dengue', '"
+    },
+    {
+      "label": "GET /api/procurement_orders",
+      "status": 200,
+      "ok": true,
+      "snippet": "[{'category': 'Antipyretics & Analgesics (High Fever & Pain)', 'doh_weather_trigger': '🦠 Dengue Case"
+    },
+    {
+      "label": "GET /api/seasonal_restock_detail?season_id=amihan",
+      "status": 200,
+      "ok": true,
+      "snippet": "{'detail': {'climate_trigger': 'Amihan Northeast Monsoon / Cool Air Mass', 'disease_risks': ['Influe"
+    },
+    {
+      "label": "GET /api/seasonal_restock_detail?season_id=summer",
+      "status": 200,
+      "ok": true,
+      "snippet": "{'detail': {'climate_trigger': 'El Niño Heat Wave & Dry Season Peak', 'disease_risks': ['Acute Gastr"
+    },
+    {
+      "label": "GET /api/seasonal_restock_detail?season_id=pre_monsoon",
+      "status": 200,
+      "ok": true,
+      "snippet": "{'detail': {'climate_trigger': 'Early Thunderstorms & Humidity Spike', 'disease_risks': ['Early Deng"
+    },
+    {
+      "label": "GET /api/seasonal_restock_detail?season_id=monsoon",
+      "status": 200,
+      "ok": true,
+      "snippet": "{'detail': {'climate_trigger': 'Peak Southwest Monsoon & Urban Inundation', 'disease_risks': ['Dengu"
+    },
+    {
+      "label": "GET /api/seasonal_restock_detail?season_id=typhoon",
+      "status": 200,
+      "ok": true,
+      "snippet": "{'detail': {'climate_trigger': 'Severe Tropical Storms & Flood Siltation', 'disease_risks': ['Leptos"
+    },
+    {
+      "label": "GET /api/seasonal_restock_detail?season_id=holiday",
+      "status": 200,
+      "ok": true,
+      "snippet": "{'detail': {'climate_trigger': 'Northeastern Cold Surge & Social Gathering Peak', 'disease_risks': ["
+    },
+    {
+      "label": "ANA /summary",
+      "status": 200,
+      "ok": true,
+      "snippet": "{'avg_margin': 55.6, 'top_area': 'Government', 'top_product': 'PAGBILAO # 13,500,000', 'total_income"
+    },
+    {
+      "label": "ANA /monthly",
+      "status": 200,
+      "ok": true,
+      "snippet": "[{'income': 4396246, 'period': '2023-01', 'revenue': 7886979}, {'income': 7775425, 'period': '2023-0"
+    },
+    {
+      "label": "ANA /seasonality",
+      "status": 200,
+      "ok": true,
+      "snippet": "[{'avg_revenue': 25368, 'month': 'Jan'}, {'avg_revenue': 24143, 'month': 'Feb'}, {'avg_revenue': 109"
+    },
+    {
+      "label": "ANA /forecasts",
+      "status": 200,
+      "ok": true,
+      "snippet": "[{'adjusted_forecast': 17158306, 'area': 'All', 'baseline_forecast': 16821869, 'forecast_scope': 'ov"
+    },
+    {
+      "label": "ANA /seasonal_epidemic_matrix",
+      "status": 200,
+      "ok": true,
+      "snippet": "[{'anticipated_outbreaks': 'Influenza-Like Illness (ILI), SARI, Asthma exacerbations, Allergic Rhini"
+    },
+    {
+      "label": "ANA /seasonal_restock_detail?season_id=monsoon",
+      "status": 200,
+      "ok": true,
+      "snippet": "{'detail': {'climate_trigger': 'Peak Southwest Monsoon & Urban Inundation', 'disease_risks': ['Dengu"
+    },
+    {
+      "label": "ANA /model_summary",
+      "status": 200,
+      "ok": true,
+      "snippet": "{'data_sources': [{'name': 'MedShield Internal Sales', 'period': '2021-2025', 'rows': 20961, 'status"
+    },
+    {
+      "label": "ANA /mcda_territories",
+      "status": 200,
+      "ok": true,
+      "snippet": "{'data_period': '2021-2025', 'label': 'SCENARIO - Review required before procurement action.', 'mode"
+    },
+    {
+      "label": "ANA /eoq_scenarios",
+      "status": 200,
+      "ok": true,
+      "snippet": "{'assumptions': {'demand_variability_pct': 25, 'holding_cost_pct': 0.15, 'lead_time_days': 14, 'orde"
+    },
+    {
+      "label": "PRD /health",
+      "status": 200,
+      "ok": true,
+      "snippet": "{'architecture': 'microservices', 'service': 'product-service', 'status': 'ok'}"
+    },
+    {
+      "label": "PRD /therapeutic_categories",
+      "status": 200,
+      "ok": true,
+      "snippet": "[{'category_name': 'Antipyretics & Analgesics (High Fever & Pain)', 'disease_triggers': ['Dengue', '"
+    },
+    {
+      "label": "PRD /procurement_orders",
+      "status": 200,
+      "ok": true,
+      "snippet": "[{'category': 'Antipyretics & Analgesics (High Fever & Pain)', 'doh_weather_trigger': '🦠 Dengue Case"
+    },
+    {
+      "label": "PRD /classify_medicine?name=Paracetamol",
+      "status": 200,
+      "ok": true,
+      "snippet": "{'ai_confidence': 0.95, 'disease_triggers': ['Dengue', 'ILI', 'COVID-19'], 'primary_indication': 'Hi"
+    },
+    {
+      "label": "GET /api/weather/effects",
+      "status": 200,
+      "ok": true,
+      "snippet": "{'metadata': {'areas': ['Cavite'], 'areas_returned': ['Cavite'], 'daily_rows_loaded': 365, 'grain': "
+    },
+    {
+      "label": "GET /api/products",
+      "status": 200,
+      "ok": true,
+      "snippet": "[{'abc': 'A', 'income': 16338881, 'pct_of_total': 27.7, 'product': 'PAGBILAO # 13,500,000', 'qty': 2"
+    },
+    {
+      "label": "Invalid products limit",
+      "status": 400,
+      "ok": true,
+      "snippet": "{\"error\":\"limit must be an integer between 1 and 100\"}"
+    },
+    {
+      "label": "Unknown season_id (fallback)",
+      "status": 200,
+      "ok": true,
+      "snippet": "{'detail': {'climate_trigger': 'Peak Southwest Monsoon & Urban Inundation', 'disease_risks': ['Dengu"
+    },
+    {
+      "label": "Missing token on /api/summary",
+      "status": 401,
+      "ok": true,
+      "snippet": "{\"error\":\"Authentication token is required\"}"
+    }
+  ]
+}

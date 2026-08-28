@@ -1,0 +1,7 @@
+raw_product,canonical_sku,brand_name,generic_name,strength,dosage_form,pack_size,product_category,is_medicine,forecast_eligible,mapping_status,review_notes
+DOLO JAGA 500MG/50MG/100MG/100MCG,DOLO JAGA 500MG/50MG/100MG/100MCG,DOLO JAGA,,500MG/50MG/100MG/100MCG,,,true,true,proposed,
+DOLO-JAGA 500MG/50MG/100MG/100MCG,DOLO JAGA 500MG/50MG/100MG/100MCG,DOLO JAGA,,500MG/50MG/100MG/100MCG,,,true,true,needs_review,Confirm hyphen variant is same SKU.
+HYCLENS WOUND SPRAY (60ML),HYCLENS WOUND SPRAY 60ML,HYCLENS,,,spray,60ML,wound care,true,true,needs_review,Confirm whether 2% version is same or separate SKU.
+HYCLENS WOUND SPRAY 2% 60ML,HYCLENS WOUND SPRAY 2% 60ML,HYCLENS,,2%,spray,60ML,wound care,true,true,needs_review,Keep separate until strength equivalence is approved.
+SANOMAX - FA,SANOMAX-FA,SANOMAX,,,,,medicine,true,true,proposed,
+SANOMAX-FA,SANOMAX-FA,SANOMAX,,,,,medicine,true,true,proposed,

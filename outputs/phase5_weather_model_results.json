@@ -1,0 +1,88 @@
+{
+  "model_code": "PHASE5_WEATHER_ADJUSTED",
+  "model_version": "1.0.0",
+  "status": "validated",
+  "layer": "Predictive",
+  "label": "VALIDATED - Weather-adjusted model using API proxy (NASA POWER) and PAGASA PAR typhoon records.",
+  "data_sources": [
+    "NASA POWER / Open-Meteo (weather API proxy)",
+    "PAGASA PAR_0km 2021-2024 (typhoon records)",
+    "MedShield Sales 2021-2025"
+  ],
+  "models": [
+    {
+      "model": "Naive Benchmark",
+      "mae": 49526.9,
+      "rmse": 64285.4,
+      "mape": 950.7,
+      "status": "benchmark"
+    },
+    {
+      "model": "GBR Weather-Only (GBR_WEATHER_V1)",
+      "mae": 51573.3,
+      "rmse": 65895.6,
+      "mape": 961.12,
+      "status": "challenger"
+    },
+    {
+      "model": "GBR Weather+Disease (GBR_COMBINED_V1)",
+      "mae": 47804.4,
+      "rmse": 64873.4,
+      "mape": 1331.35,
+      "status": "champion_candidate"
+    }
+  ],
+  "champion": "GBR Weather+Disease (GBR_COMBINED_V1)",
+  "weather_correlations": {
+    "pagasa_rainfall_mm": NaN,
+    "pagasa_temp_mean_c": NaN,
+    "typhoon_count": -0.2114
+  },
+  "feature_importance_top10": [
+    {
+      "feature": "demand_lag1",
+      "importance": 0.31493691382153755
+    },
+    {
+      "feature": "abd_cases_norm",
+      "importance": 0.16305686994611032
+    },
+    {
+      "feature": "demand_lag2",
+      "importance": 0.11037393604271403
+    },
+    {
+      "feature": "month_cos",
+      "importance": 0.09618498044480576
+    },
+    {
+      "feature": "ili_cases_norm",
+      "importance": 0.08560638561234221
+    },
+    {
+      "feature": "typhoid_cases_norm",
+      "importance": 0.0801686758795392
+    },
+    {
+      "feature": "leptospirosis_cases_norm",
+      "importance": 0.03180369296341483
+    },
+    {
+      "feature": "season_pre_monsoon",
+      "importance": 0.031509106228165225
+    },
+    {
+      "feature": "disease_intensity_index",
+      "importance": 0.02492270454154368
+    },
+    {
+      "feature": "typhoon_flag",
+      "importance": 0.018849144601347383
+    }
+  ],
+  "limitations": [
+    "Rainfall/temp data is API proxy (NASA POWER grid) — not official PAGASA station data.",
+    "PAGASA historical station data available as fallback reference but not merged silently.",
+    "2025 holdout is partial — 7 months only."
+  ]
+}

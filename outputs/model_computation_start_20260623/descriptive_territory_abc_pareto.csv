@@ -1,0 +1,8 @@
+territory,quantity,revenue,gross_margin,row_count,active_months,rank,revenue_share,cumulative_revenue_share,abc_class,model_code,model_version,review_status
+Batangas,68074.02,10956611.56,25933906.2,5648,104,1,0.258664,0.258664,A,ABC_PARETO,sales_only_v1,draft
+Quezon,52354.41,10647467.54,20088051.71,4618,103,2,0.251365,0.510029,A,ABC_PARETO,sales_only_v1,draft
+Marinduque,25042.0952,5744861.67,7992902.86,1272,84,3,0.135625,0.645654,A,ABC_PARETO,sales_only_v1,draft
+Laguna,74777.48,5744322.57,14167341.83,2492,52,4,0.135612,0.781266,A,ABC_PARETO,sales_only_v1,draft
+Camarines Norte,17193.42,4080970.32,9552611.99,2233,70,5,0.096344,0.877609,B,ABC_PARETO,sales_only_v1,draft
+Cavite,18051.2,2670696.91,6057538.51,1538,74,6,0.06305,0.940659,B,ABC_PARETO,sales_only_v1,draft
+Camarines Sur,18714.82,2513605.87,5932373.44,2549,68,7,0.059341,1.0,C,ABC_PARETO,sales_only_v1,draft

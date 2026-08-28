@@ -1,0 +1,85 @@
+scope,calendar_month,seasonal_index,seasonal_strength,interpretation,model_code,model_version,review_status
+Batangas,01,0.726874,0.82589,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Batangas,02,0.548653,0.82589,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Batangas,03,0.805837,0.82589,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Batangas,04,0.472848,0.82589,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Batangas,05,0.417075,0.82589,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Batangas,06,1.349231,0.82589,higher_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Batangas,07,2.395466,0.82589,higher_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Batangas,08,0.880073,0.82589,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Batangas,09,1.560816,0.82589,higher_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Batangas,10,0.804398,0.82589,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Batangas,11,1.034402,0.82589,near_average,SEASONAL_INDEX,sales_only_v1,draft
+Batangas,12,0.928298,0.82589,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Cavite,01,0.624483,0.562855,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Cavite,02,1.136395,0.562855,higher_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Cavite,03,0.83863,0.562855,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Cavite,04,0.875174,0.562855,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Cavite,05,0.882065,0.562855,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Cavite,06,1.401661,0.562855,higher_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Cavite,07,1.208197,0.562855,higher_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Cavite,08,1.112122,0.562855,higher_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Cavite,09,1.254432,0.562855,higher_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Cavite,10,1.11587,0.562855,higher_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Cavite,11,0.855077,0.562855,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Cavite,12,0.612728,0.562855,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Camarines Sur,01,0.905343,0.708532,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Camarines Sur,02,1.086854,0.708532,higher_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Camarines Sur,03,1.940087,0.708532,higher_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Camarines Sur,04,0.748996,0.708532,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Camarines Sur,05,0.8415,0.708532,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Camarines Sur,06,0.927628,0.708532,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Camarines Sur,07,0.984438,0.708532,near_average,SEASONAL_INDEX,sales_only_v1,draft
+Camarines Sur,08,0.953517,0.708532,near_average,SEASONAL_INDEX,sales_only_v1,draft
+Camarines Sur,09,0.970685,0.708532,near_average,SEASONAL_INDEX,sales_only_v1,draft
+Camarines Sur,10,1.156894,0.708532,higher_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Camarines Sur,11,0.932897,0.708532,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Camarines Sur,12,0.565473,0.708532,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Marinduque,01,2.617353,0.845253,higher_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Marinduque,02,1.319698,0.845253,higher_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Marinduque,03,0.705252,0.845253,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Marinduque,04,0.405028,0.845253,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Marinduque,05,1.138383,0.845253,higher_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Marinduque,06,0.585754,0.845253,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Marinduque,07,0.713562,0.845253,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Marinduque,08,0.789531,0.845253,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Marinduque,09,0.444871,0.845253,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Marinduque,10,1.01771,0.845253,near_average,SEASONAL_INDEX,sales_only_v1,draft
+Marinduque,11,0.77507,0.845253,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Marinduque,12,2.22729,0.845253,higher_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Camarines Norte,01,0.992033,0.720528,near_average,SEASONAL_INDEX,sales_only_v1,draft
+Camarines Norte,02,0.91197,0.720528,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Camarines Norte,03,0.567,0.720528,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Camarines Norte,04,1.014395,0.720528,near_average,SEASONAL_INDEX,sales_only_v1,draft
+Camarines Norte,05,0.819626,0.720528,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Camarines Norte,06,1.167394,0.720528,higher_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Camarines Norte,07,1.397837,0.720528,higher_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Camarines Norte,08,2.028823,0.720528,higher_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Camarines Norte,09,0.782997,0.720528,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Camarines Norte,10,0.776537,0.720528,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Camarines Norte,11,0.655187,0.720528,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Camarines Norte,12,0.980752,0.720528,near_average,SEASONAL_INDEX,sales_only_v1,draft
+Quezon,01,0.938554,0.677034,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Quezon,02,0.878704,0.677034,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Quezon,03,0.771446,0.677034,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Quezon,04,0.821262,0.677034,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Quezon,05,1.003463,0.677034,near_average,SEASONAL_INDEX,sales_only_v1,draft
+Quezon,06,2.249807,0.677034,higher_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Quezon,07,0.889597,0.677034,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Quezon,08,0.834036,0.677034,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Quezon,09,0.961056,0.677034,near_average,SEASONAL_INDEX,sales_only_v1,draft
+Quezon,10,0.962563,0.677034,near_average,SEASONAL_INDEX,sales_only_v1,draft
+Quezon,11,1.086967,0.677034,higher_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Quezon,12,0.726612,0.677034,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Laguna,01,0.288416,0.958558,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Laguna,02,0.718032,0.958558,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Laguna,03,5.209128,0.958558,higher_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Laguna,04,0.725197,0.958558,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Laguna,05,1.26797,0.958558,higher_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Laguna,06,0.445338,0.958558,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Laguna,07,0.436117,0.958558,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Laguna,08,0.3901,0.958558,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Laguna,09,0.215874,0.958558,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Laguna,10,0.639246,0.958558,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Laguna,11,0.523581,0.958558,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft
+Laguna,12,0.570457,0.958558,lower_than_average,SEASONAL_INDEX,sales_only_v1,draft

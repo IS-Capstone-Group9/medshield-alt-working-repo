@@ -1,0 +1,17 @@
+raw_area,standard_area,area_type,territory,customer_type,business_line,weather_eligible,forecast_eligible,mapping_status,review_notes
+Batangas,Batangas,territory,Batangas,,,true,true,approved,
+Quezon,Quezon,territory,Quezon,,,true,true,approved,
+Marinduque,Marinduque,territory,Marinduque,,,true,true,approved,
+Camarines Norte,Camarines Norte,territory,Camarines Norte,,,true,true,approved,
+Camarines Sur,Camarines Sur,territory,Camarines Sur,,,true,true,approved,
+Cavite,Cavite,territory,Cavite,,,true,true,approved,
+Lower Cavite,Cavite,territory,Cavite,,,true,true,needs_review,Confirm whether Lower Cavite should roll into Cavite.
+Laguna,Laguna,territory,Laguna,,,true,true,approved,
+Government,Government,customer_type,,Government,,false,false,needs_review,Do not use as weather territory.
+Hospital,Hospital,customer_type,,Hospital,,false,false,needs_review,Do not use as weather territory.
+Pharma,Pharma,customer_type,,Pharma,,false,false,needs_review,Do not use as weather territory.
+Admin,Admin,business_line,,,Admin,false,false,needs_review,Exclude from pharmaceutical demand models unless approved.
+Supplies,Supplies,business_line,,,Supplies,false,false,needs_review,Classify separately from medicine SKUs.
+Equipment,Equipment,business_line,,,Equipment,false,false,needs_review,Classify separately from medicine SKUs.
+Personal,Personal,business_line,,,Personal,false,false,needs_review,Exclude from demand forecasting unless approved.
+Losses,Losses,business_line,,,Losses,false,false,needs_review,Exclude from demand forecasting unless approved.

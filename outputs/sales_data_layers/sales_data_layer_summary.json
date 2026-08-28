@@ -1,0 +1,84 @@
+{
+  "flow": [
+    "raw_sales_report",
+    "semi_raw_backwards_approx",
+    "cleaned_sales"
+  ],
+  "raw_sales_report": {
+    "2025": {
+      "rows": 4138,
+      "columns": 13,
+      "header_row_number": 6
+    },
+    "2024": {
+      "rows": 2945,
+      "columns": 13,
+      "header_row_number": 6
+    },
+    "2023": {
+      "rows": 5890,
+      "columns": 13,
+      "header_row_number": 6
+    },
+    "2022": {
+      "rows": 4029,
+      "columns": 13,
+      "header_row_number": 6
+    },
+    "2021": {
+      "rows": 3416,
+      "columns": 13,
+      "header_row_number": 6
+    }
+  },
+  "semi_raw_backwards_approx": {
+    "rows": 21802,
+    "by_year": {
+      "2021": 3416,
+      "2022": 4029,
+      "2023": 5890,
+      "2024": 3437,
+      "2025": 5030
+    },
+    "empty_product": 740,
+    "empty_area": 8,
+    "bad_date": 0,
+    "estimated_dates": 3619,
+    "estimated_backward_allocation_rows": 1730,
+    "pending_cleaning_excluded": 841,
+    "quantity": 1076005.56,
+    "total_cost": 926774318.12,
+    "discount": 4307478.04,
+    "net_cost": 921917689.86,
+    "total_trade_price": 424337912.08,
+    "net_income": 550600746.46
+  },
+  "cleaned_sales": {
+    "rows": 20961,
+    "by_year": {
+      "2021": 3412,
+      "2022": 3999,
+      "2023": 5323,
+      "2024": 3328,
+      "2025": 4899
+    },
+    "empty_product": 0,
+    "empty_area": 0,
+    "bad_date": 0,
+    "estimated_dates": 3541,
+    "estimated_backward_allocation_rows": 1725,
+    "pending_cleaning_excluded": 0,
+    "quantity": 1016664.41,
+    "total_cost": 430133235.95,
+    "discount": 2428836.13,
+    "net_cost": 427704399.82,
+    "total_trade_price": 220958269.8,
+    "net_income": 259767098.7
+  },
+  "notes": [
+    "Raw sales report exports are sheet data copied from Sales Report.xlsx without cleaning.",
+    "Semi-raw backward approximation keeps all allocated rows, repairs missing dates for traceability, and flags rows that fail clean-sales rules.",
+    "Cleaned sales contains only accepted rows with product, area, valid date, positive quantity, and positive total trade price.",
+    "Contract-name rows with # are not treated as products in the cleaned analytical layer; they are represented through estimated child rows when allocation was possible."
+  ]
+}
