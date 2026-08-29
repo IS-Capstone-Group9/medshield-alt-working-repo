@@ -41,6 +41,7 @@ Build a modern business analytics dashboard with a Next.js frontend, Python micr
 | `SUPABASE_PROJECT_ID` | `ghrpgyzbjmhgoduxzdyp` | Existing `medshield` Supabase project identifier |
 | `SUPABASE_URL` | `https://ghrpgyzbjmhgoduxzdyp.supabase.co` | Server-side Supabase project URL |
 | `SUPABASE_ANON_KEY` | provided publishable or anon key | Supabase key used by the gateway for auth validation |
+| `SUPABASE_SECRET_KEY` | modern `sb_secret_...` server key | Backend-only identity resolution and Auth account administration. Never expose to the browser. |
 | `SUPABASE_SERVICE_ROLE_KEY` | server-only secret | Allows ingestion writes to staging, facts, and ETL lineage. |
 | `ANALYTICS_SERVICE_URL` | `http://localhost:5101` | Analytics microservice URL |
 | `PRODUCT_SERVICE_URL` | `http://localhost:5102` | Product microservice URL |
@@ -86,6 +87,7 @@ Use `requirements-modeling.txt` only when running model-training or optimization
 | `supabase/migrations/005_sales_ingestion_weather.sql` | Adds canonical transaction publication, aggregate refresh, weather provenance, and restricted policies |
 | `supabase/migrations/006_business_rules_master_data.sql` | Adds SKU alias control, area classification, external staging, data completeness, and revenue aggregation fix |
 | `supabase/migrations/007_namespaced_schema_alignment.sql` | Aligns the warehouse to `medshield_common`, `medshield_etl`, `medshield_identity`, `medshield_sales`, `medshield_external`, and `medshield_analytics` schemas |
+| `supabase/migrations/011_supabase_auth_account_bridge.sql` | Links application accounts to Supabase Auth, enforces first-login password changes, and revokes legacy password RPCs |
 | `supabase/seed.sql` | Inserts the current analytics snapshot |
 
 | Step | Action |
@@ -100,6 +102,7 @@ Use `requirements-modeling.txt` only when running model-training or optimization
 | 8 | In Supabase API settings, expose the MedShield schemas used by PostgREST: `medshield_common`, `medshield_etl`, `medshield_identity`, `medshield_sales`, `medshield_external`, and `medshield_analytics` |
 | 9 | Run `supabase/seed.sql` only if it has been updated for the target schema, or load data through the app ingestion flow |
 | 10 | Verify the gateway and frontend can read dashboard, transaction, master-data, completeness, and DSS views |
+| 11 | Follow `docs/SUPABASE_AUTH_MIGRATION.md` to import and link existing accounts through the Auth Admin API |
 
 ## 9. Setup Flow
 
@@ -121,7 +124,7 @@ When running the frontend directly with `cd frontend && npm run dev`, make sure 
 | Setup docs | This file is the single canonical setup document |
 | Tech direction | Use Next.js + TypeScript for the frontend and Python for the service layer |
 | Local auth | Set `USE_SUPABASE=false` when Supabase credentials are not configured. The gateway will use the local demo auth store and issue bearer tokens. |
-| SaaS auth | Configure `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_URL`, and `SUPABASE_ANON_KEY`, then set `USE_SUPABASE=true`. Supabase Auth owns browser login, and the gateway validates the Supabase bearer token for dashboard routes. |
+| SaaS auth | Configure `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_URL`, `SUPABASE_ANON_KEY`, and a backend-only Supabase server secret, then set `USE_SUPABASE=true`. The gateway privately resolves username/email and Supabase Auth owns password verification and browser sessions. |
 | Service-role key | Put `SUPABASE_SERVICE_ROLE_KEY` in ignored local `.env` only. Never commit it, paste it into frontend variables, or expose it in screenshots. |
 | Environment and schema alignment | Use `docs/ENV_SCHEMA_ALIGNMENT_GUIDE.md` after switching Supabase projects or schemas. It lists required variables by name only and maps visible schemas to analytics readiness. |
 | Messy sales upload | Use Data Upload or View Sales Data -> Upload messy XLSX/CSV. The file is cleaned by the server pipeline before it appears in the paginated table. Year uploads merge into history by replacing only their year. |

@@ -3,6 +3,7 @@
 import { createPortal } from 'react-dom'
 import { AuthProvider, useAuth } from '@/lib/AuthContext'
 import Login from '@/components/Login'
+import PasswordResetRequired from '@/components/PasswordResetRequired'
 import ModelDashboard from '@/components/ModelDashboard'
 import { useDashboardRuntime } from '@/hooks/use-dashboard-runtime'
 
@@ -18,7 +19,7 @@ function Dashboard({ onLogout }: { onLogout: () => Promise<void> }) {
 }
 
 function AppContent() {
-  const { isAuthenticated, isAuthLoading, logout } = useAuth()
+  const { isAuthenticated, isAuthLoading, user, logout } = useAuth()
 
   if (isAuthLoading) {
     return (
@@ -40,6 +41,10 @@ function AppContent() {
 
   if (!isAuthenticated) {
     return <Login onLoginSuccess={() => undefined} />
+  }
+
+  if (user?.mustResetPassword) {
+    return <PasswordResetRequired />
   }
 
   return <Dashboard onLogout={logout} />

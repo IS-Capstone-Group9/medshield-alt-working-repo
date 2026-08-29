@@ -11,6 +11,12 @@ import { createLocalAccount, verifyLocalLogin } from './localAuth'
 import { startPythonServices } from './pythonServices'
 import { createSession, revokeSessionToken, SessionUser, verifySessionToken } from './sessionAuth'
 import { loadSnapshot } from './snapshot'
+import {
+  completeRequiredPasswordReset,
+  getLinkedAccount,
+  signInWithIdentifier,
+  SupabaseServerSecretMissingError,
+} from './supabaseIdentity'
 
 function loadEnvironment(): void {
   const candidates = [
@@ -53,20 +59,6 @@ const apiLimiter = rateLimit({
 
 app.use(apiLimiter)
 
-let authFallbackWarningShown = false
-
-function warnAuthFallback(action: 'login' | 'signup'): void {
-  if (authFallbackWarningShown) {
-    return
-  }
-
-  authFallbackWarningShown = true
-  console.warn(
-    `Supabase auth unavailable, using local auth store for ${action}. ` +
-      'For local development set USE_SUPABASE=false, or configure SUPABASE_URL and SUPABASE_ANON_KEY.',
-  )
-}
-
 function envBool(name: string, defaultValue = false): boolean {
   const value = process.env[name]
   if (!value) {
@@ -78,24 +70,6 @@ function envBool(name: string, defaultValue = false): boolean {
 
 function supabaseEnabled(): boolean {
   return envBool('USE_SUPABASE', true) && Boolean(process.env.SUPABASE_URL?.trim()) && Boolean(process.env.SUPABASE_ANON_KEY?.trim())
-}
-
-function authBackendUnavailable(error: unknown): boolean {
-  if (!(error instanceof Error)) {
-    return false
-  }
-
-  const response = (error as { response?: { status: number; body: string } }).response
-  if (!response) {
-    return false
-  }
-
-  const body = response.body.toLowerCase()
-  if (body.includes('invalid api key') || body.includes('apikey') && body.includes('invalid')) {
-    return true
-  }
-
-  return [401, 403, 429, 502, 503, 504].includes(response.status)
 }
 
 app.use((_, res, next) => {
@@ -122,25 +96,6 @@ function bearerToken(req: Request): string | null {
   }
 
   return token
-}
-
-type SupabaseAuthUser = {
-  id: string
-  email?: string
-  app_metadata?: {
-    role?: string
-    medshield_role?: string
-  }
-}
-
-function toSessionUserFromSupabase(user: SupabaseAuthUser): SessionUser {
-  const email = user.email ?? ''
-  return {
-    account_id: 0,
-    username: email ? email.split('@')[0] : user.id,
-    email,
-    role: user.app_metadata?.medshield_role ?? user.app_metadata?.role ?? 'viewer',
-  }
 }
 
 async function supabaseAuthFetch(pathName: string, init: RequestInit): Promise<globalThis.Response> {
@@ -177,7 +132,11 @@ async function supabaseDbFetch(
   schema: string = 'medshield_identity'
 ): Promise<globalThis.Response> {
   const baseUrl = process.env.SUPABASE_URL?.replace(/\/$/, '')
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || ''
+  const serviceRoleKey =
+    process.env.SUPABASE_SECRET_KEY ||
+    process.env.SUPABASE_SERVICE_ROLE_KEY ||
+    process.env.SUPABASE_ANON_KEY ||
+    ''
   if (!baseUrl || !serviceRoleKey) {
     throw new Error('Supabase DB is not configured')
   }
@@ -262,100 +221,14 @@ async function persistAuditLog(rawEntry: {
 }
 
 async function getSupabaseAuthUser(token: string): Promise<SessionUser | null> {
-  const response = await supabaseAuthFetch('/user', {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
-
-  if (!response.ok) {
-    return null
-  }
-
-  const user = (await response.json()) as SupabaseAuthUser
-  if (!user.id) {
-    return null
-  }
-
-  return toSessionUserFromSupabase(user)
-}
-
-async function signInWithSupabasePassword(email: string, password: string): Promise<{
-  access_token: string
-  token_type: 'Bearer'
-  expires_at: string
-  user: SessionUser
-} | null> {
-  const response = await supabaseAuthFetch('/token?grant_type=password', {
-    method: 'POST',
-    body: JSON.stringify({ email, password }),
-  })
-
-  const body = (await response.json().catch(() => ({}))) as Record<string, unknown>
-  if (!response.ok) {
-    if (response.status >= 500 || response.status === 429) {
-      const error = new Error(`Supabase Auth sign-in failed with status ${response.status}`)
-      ;(error as { response?: { status: number; body: string } }).response = {
-        status: response.status,
-        body: JSON.stringify(body),
-      }
-      throw error
-    }
-    return null
-  }
-
-  const authUser = body.user as SupabaseAuthUser | undefined
-  const expiresIn = Number(body.expires_in ?? 3600)
-  if (!body.access_token || !authUser?.id) {
-    return null
-  }
-
+  const account = await getLinkedAccount(token)
+  if (!account) return null
   return {
-    access_token: String(body.access_token),
-    token_type: 'Bearer',
-    expires_at: new Date(Date.now() + expiresIn * 1000).toISOString(),
-    user: toSessionUserFromSupabase(authUser),
-  }
-}
-
-async function signUpWithSupabase(email: string, password: string): Promise<{
-  account_id: number
-  username: string
-  email: string
-  role: string
-  message: string
-} | null> {
-  const response = await supabaseAuthFetch('/signup', {
-    method: 'POST',
-    body: JSON.stringify({ email, password }),
-  })
-
-  const body = (await response.json().catch(() => ({}))) as Record<string, unknown>
-  if (!response.ok) {
-    if (response.status >= 500 || response.status === 429) {
-      const error = new Error(`Supabase Auth signup failed with status ${response.status}`)
-      ;(error as { response?: { status: number; body: string } }).response = {
-        status: response.status,
-        body: JSON.stringify(body),
-      }
-      throw error
-    }
-    return null
-  }
-
-  const authUser = (body.user ?? body) as SupabaseAuthUser
-  if (!authUser.id) {
-    return null
-  }
-
-  const user = toSessionUserFromSupabase(authUser)
-  return {
-    account_id: user.account_id,
-    username: user.username,
-    email: user.email,
-    role: user.role,
-    message: 'Account created successfully. Check the Supabase Auth email settings for confirmation requirements.',
+    account_id: account.account_id,
+    username: account.username,
+    email: account.email,
+    role: account.role,
+    password_reset_required: account.password_reset_required,
   }
 }
 
@@ -368,7 +241,12 @@ async function revokeSupabaseToken(token: string): Promise<void> {
   }).catch(() => undefined)
 }
 
-async function requireAuth(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+async function authenticateRequest(
+  req: AuthenticatedRequest,
+  res: Response,
+  next: NextFunction,
+  allowPasswordResetRequired: boolean,
+) {
   const token = bearerToken(req)
   if (!token) {
     return res.status(401).json({ error: 'Authentication token is required' })
@@ -393,7 +271,21 @@ async function requireAuth(req: AuthenticatedRequest, res: Response, next: NextF
   req.user = user
   req.accessToken = token
   req.authSource = authSource
+  if (user.password_reset_required && !allowPasswordResetRequired) {
+    return res.status(403).json({
+      error: 'A password change is required before accessing MedShield.',
+      code: 'PASSWORD_RESET_REQUIRED',
+    })
+  }
   next()
+}
+
+function requireAuth(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+  void authenticateRequest(req, res, next, false)
+}
+
+function requireAuthDuringPasswordReset(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+  void authenticateRequest(req, res, next, true)
 }
 
 function requireRole(allowedRoles: string[]) {
@@ -663,12 +555,21 @@ app.options('/api/auth/login', (_req: Request, res: Response) => res.json({}))
 app.options('/api/auth/signup', (_req: Request, res: Response) => res.json({}))
 app.options('/api/auth/me', (_req: Request, res: Response) => res.json({}))
 app.options('/api/auth/logout', (_req: Request, res: Response) => res.json({}))
+app.options('/api/auth/complete-password-reset', (_req: Request, res: Response) => res.json({}))
 
-app.get('/api/auth/me', requireAuth, (req: AuthenticatedRequest, res: Response) => {
+app.get('/api/auth/me', requireAuthDuringPasswordReset, (req: AuthenticatedRequest, res: Response) => {
   res.json({ user: req.user })
 })
 
-app.post('/api/auth/logout', requireAuth, (req: AuthenticatedRequest, res: Response) => {
+const authLoginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  message: { error: 'Too many login attempts. Try again after 15 minutes.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+})
+
+app.post('/api/auth/logout', requireAuthDuringPasswordReset, (req: AuthenticatedRequest, res: Response) => {
   if (req.accessToken) {
     if (req.authSource === 'supabase') {
       void revokeSupabaseToken(req.accessToken)
@@ -680,7 +581,7 @@ app.post('/api/auth/logout', requireAuth, (req: AuthenticatedRequest, res: Respo
   res.json({ ok: true })
 })
 
-app.post('/api/auth/login', async (req: Request, res: Response) => {
+app.post('/api/auth/login', authLoginLimiter, async (req: Request, res: Response) => {
   const username = String(req.body?.username ?? '').trim()
   const password = String(req.body?.password ?? '').trim()
   const remember = Boolean(req.body?.remember)
@@ -691,18 +592,29 @@ app.post('/api/auth/login', async (req: Request, res: Response) => {
 
   if (supabaseEnabled()) {
     try {
-      const session = await signInWithSupabasePassword(username, password)
+      const session = await signInWithIdentifier(username, password)
       if (!session) {
         return res.status(401).json({ error: 'Invalid username or password' })
       }
-      return res.json(session)
+      return res.json({
+        ...session,
+        user: {
+          account_id: session.user.account_id,
+          username: session.user.username,
+          email: session.user.email,
+          role: session.user.role,
+          password_reset_required: session.user.password_reset_required,
+        },
+      })
     } catch (error) {
-      if (!authBackendUnavailable(error)) {
-        console.error('Login error:', error)
-        return res.status(500).json({ error: 'Authentication service error' })
+      if (error instanceof SupabaseServerSecretMissingError) {
+        return res.status(503).json({
+          error: 'Account migration is not configured on the server. Ask an administrator to configure the Supabase server secret.',
+          code: 'SUPABASE_SERVER_SECRET_REQUIRED',
+        })
       }
-
-      warnAuthFallback('login')
+      console.error('Login error:', error)
+      return res.status(503).json({ error: 'Authentication service is unavailable' })
     }
   }
 
@@ -717,6 +629,45 @@ app.post('/api/auth/login', async (req: Request, res: Response) => {
 
   return res.json(createSession(result.account, remember))
 })
+
+app.post(
+  '/api/auth/complete-password-reset',
+  requireAuthDuringPasswordReset,
+  async (req: AuthenticatedRequest, res: Response) => {
+    if (req.authSource !== 'supabase' || !req.accessToken) {
+      return res.status(400).json({ error: 'Password migration applies only to Supabase Auth accounts' })
+    }
+
+    const currentPassword = String(req.body?.current_password ?? '')
+    const newPassword = String(req.body?.new_password ?? '')
+    const passwordComplexityRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{12,}$/
+    if (!passwordComplexityRegex.test(newPassword)) {
+      return res.status(400).json({
+        error: 'New password must be at least 12 characters and include uppercase, lowercase, number, and special characters.',
+      })
+    }
+    if (currentPassword === newPassword) {
+      return res.status(400).json({ error: 'New password must be different from the current password.' })
+    }
+
+    try {
+      const updated = await completeRequiredPasswordReset(req.accessToken, currentPassword, newPassword)
+      if (!updated) return res.status(401).json({ error: 'Current password is incorrect or reset is not required.' })
+      await persistAuditLog({
+        username: req.user?.username ?? 'unknown',
+        action: 'PASSWORD_RESET_COMPLETED',
+        detail: 'Required Supabase Auth migration password change completed.',
+        ip_address: String(req.headers['x-forwarded-for'] || req.socket.remoteAddress || ''),
+        user_agent: String(req.headers['user-agent'] || ''),
+        created_at: new Date().toISOString(),
+      })
+      return res.json({ ok: true, message: 'Password updated. Sign in again with your new password.' })
+    } catch (error) {
+      console.error('Required password reset failed:', error)
+      return res.status(503).json({ error: 'Password update could not be completed. Please try again.' })
+    }
+  },
+)
 
 app.post('/api/auth/signup', async (req: Request, res: Response) => {
   const username = String(req.body?.username ?? '').trim()
@@ -735,20 +686,10 @@ app.post('/api/auth/signup', async (req: Request, res: Response) => {
   }
 
   if (supabaseEnabled()) {
-    try {
-      const result = await signUpWithSupabase(email, password)
-      if (!result) {
-        return res.status(500).json({ error: 'Failed to create account' })
-      }
-      return res.status(201).json(result)
-    } catch (error) {
-      if (!authBackendUnavailable(error)) {
-        console.error('Signup error:', error)
-        return res.status(500).json({ error: 'Account creation failed' })
-      }
-
-      warnAuthFallback('signup')
-    }
+    return res.status(403).json({
+      error: 'Account creation is restricted to MedShield administrators.',
+      code: 'ADMIN_MANAGED_ACCOUNT_CREATION',
+    })
   }
 
   const result = await createLocalAccount({ username, email, password, role: 'viewer' })

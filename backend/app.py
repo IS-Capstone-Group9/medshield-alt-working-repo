@@ -263,24 +263,10 @@ def auth_login():
         return jsonify({"error": "Username and password are required"}), 400
 
     if supabase_enabled():
-        try:
-            rows = supabase_rpc("verify_login", {"p_username": username, "p_password": password})
-            if not rows:
-                return jsonify({"error": "Invalid username or password"}), 401
-            user = rows[0]
-            if not user.get("is_active"):
-                return jsonify({"error": "Account is disabled"}), 403
-            return jsonify({
-                "account_id": user["account_id"],
-                "username": user["username"],
-                "email": user["email"],
-                "role": user["role"],
-            })
-        except Exception as exc:
-            if not auth_backend_unavailable(exc):
-                app.logger.error("Login error: %s", exc)
-                return jsonify({"error": "Authentication service error"}), 500
-            app.logger.warning("Supabase auth unavailable, using local auth store for login: %s", exc)
+        return jsonify({
+            "error": "Supabase login is served only by the TypeScript API gateway.",
+            "code": "LEGACY_AUTH_GATEWAY_DISABLED",
+        }), 503
 
     user = local_verify_login(username, password)
     if user is None:
@@ -306,30 +292,10 @@ def auth_signup():
         return jsonify({"error": "Password must be at least 8 characters"}), 400
 
     if supabase_enabled():
-        try:
-            rows = supabase_rpc("create_account", {
-                "p_username": username,
-                "p_email": email,
-                "p_password": password,
-                "p_role": "viewer",
-            })
-            if not rows:
-                return jsonify({"error": "Failed to create account"}), 500
-            result = rows[0]
-            if result.get("error_msg"):
-                return jsonify({"error": result["error_msg"]}), 409
-            return jsonify({
-                "account_id": result["account_id"],
-                "username": result["username"],
-                "email": result["email"],
-                "role": result["role"],
-                "message": "Account created successfully",
-            }), 201
-        except Exception as exc:
-            if not auth_backend_unavailable(exc):
-                app.logger.error("Signup error: %s", exc)
-                return jsonify({"error": "Account creation failed"}), 500
-            app.logger.warning("Supabase auth unavailable, using local auth store for signup: %s", exc)
+        return jsonify({
+            "error": "Account creation is restricted to MedShield administrators.",
+            "code": "ADMIN_MANAGED_ACCOUNT_CREATION",
+        }), 403
 
     result = local_create_account(username, email, password)
     if result.get("error"):

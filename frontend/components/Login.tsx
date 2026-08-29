@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useLoginForm } from '@/hooks/use-login-form'
 import './login.css'
 
@@ -23,7 +24,14 @@ export default function Login({ onLoginSuccess, initialMessage }: LoginProps) {
           {/* Top Logo Row */}
           <div className="login-logo-row">
             <div className="login-logo-emblem-wrap">
-              <img src="/ms_logo.png" className="login-logo-img" alt="MedShield Crest" />
+              <Image
+                src="/ms_logo.png"
+                width={912}
+                height={912}
+                className="login-logo-img"
+                alt="MedShield Crest"
+                priority
+              />
             </div>
 
             <div className="login-logo-text-wrap">
@@ -63,7 +71,7 @@ export default function Login({ onLoginSuccess, initialMessage }: LoginProps) {
             {/* Email Address / Username Input with Floating Label */}
             <div className="login-input-card">
               <label htmlFor="username" className="login-card-label">
-                {f.useSupabaseAuth ? 'Email Address' : 'Username or Email'}
+                Username or Email
               </label>
               <input
                 id="username"
@@ -71,7 +79,7 @@ export default function Login({ onLoginSuccess, initialMessage }: LoginProps) {
                 className="login-card-field"
                 value={f.username}
                 onChange={(e) => f.setUsername(e.target.value)}
-                placeholder={f.useSupabaseAuth ? 'name@company.com' : 'Enter username'}
+                placeholder="Enter username or email"
                 autoComplete="username"
                 required
               />

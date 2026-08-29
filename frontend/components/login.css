@@ -383,3 +383,46 @@
     padding: 40px 24px;
   }
 }
+
+.password-reset-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: linear-gradient(145deg, #e5e7fb 0%, #d8eef0 100%);
+  font-family: Inter, "DM Sans", "Open Sans", system-ui, sans-serif;
+}
+
+.password-reset-card {
+  width: min(100%, 520px);
+  border-radius: 18px;
+  background: #fff;
+  padding: 38px;
+  box-shadow: 0 24px 70px rgba(30, 27, 75, 0.18);
+}
+
+.password-reset-card h1 {
+  margin: 8px 0 12px;
+  color: #1e1b4b;
+}
+
+.password-reset-card > p {
+  margin: 0 0 24px;
+  color: #475569;
+  line-height: 1.6;
+}
+
+.password-reset-kicker {
+  color: #0f766e;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.password-reset-requirements {
+  margin: -2px 0 2px;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.5;
+}

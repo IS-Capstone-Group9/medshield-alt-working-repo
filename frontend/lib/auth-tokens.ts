@@ -7,6 +7,7 @@ export interface User {
   username: string
   email: string
   role: string
+  mustResetPassword: boolean
 }
 
 export function getCookie(name: string): string | null {
@@ -63,15 +64,17 @@ export function toUser(data: any): User {
     username: String(data.username),
     email: String(data.email),
     role: String(data.role),
+    mustResetPassword: Boolean(data.password_reset_required),
   }
 }
 
 export function toUserFromSupabase(data: any): User {
   const email = String(data.email ?? '')
   return {
-    accountId: 0,
-    username: email ? email.split('@')[0] : String(data.id ?? 'user'),
+    accountId: Number(data.app_metadata?.account_id ?? 0),
+    username: String(data.app_metadata?.username ?? (email ? email.split('@')[0] : data.id ?? 'user')),
     email,
     role: String(data.app_metadata?.medshield_role ?? data.app_metadata?.role ?? 'viewer'),
+    mustResetPassword: Boolean(data.app_metadata?.must_reset_password),
   }
 }
