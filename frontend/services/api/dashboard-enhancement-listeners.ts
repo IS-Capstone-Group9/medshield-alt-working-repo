@@ -8,6 +8,9 @@ import {
 import { setSalesViewError } from './sales-page-helpers'
 import { weatherProviderLabel } from './weather-view-helpers'
 import { processSalesUpload } from './upload-pipeline'
+import { applyScenarioSafetyLabels } from './dashboard-enhancements'
+import { renderDecisionSupportCharts } from './dashboard-decision-charts'
+import { installMcdaSensitivity, renderMcdaSensitivity } from './dashboard-mcda'
 
 const DASHBOARD_PAGE_META = {
   overview: ['Executive Overview', 'Centralized demand intelligence, forecasting, and stock actions'],
@@ -65,6 +68,8 @@ function activateDashboardPage(root: HTMLElement, name: DashboardPageName, navIt
       ;(window as any).buildCharts?.()
       ;(window as any).buildTables?.()
       ;(window as any).renderShowcaseDOMVisuals?.()
+      renderDecisionSupportCharts(root)
+      renderMcdaSensitivity(root)
     }, 60)
   })
 }
@@ -75,6 +80,39 @@ export function installDashboardEnhancements(root: HTMLElement, activeListeners:
   ;(window as any).__medshieldAuditInstalled = true
 
   installCommonInteractions(root)
+  installMcdaSensitivity(root, activeListeners)
+
+  const legacySeasonSelector = (window as any).selectSeasonRestock
+  if (typeof legacySeasonSelector === 'function') {
+    ;(window as any).selectSeasonRestock = (...args: unknown[]) => {
+      const result = legacySeasonSelector(...args)
+      applyScenarioSafetyLabels(root)
+      return result
+    }
+  }
+
+  ;(window as any).generateAiBriefing = () => {
+    const container = root.querySelector<HTMLElement>('#aiBriefingText')
+    if (!container) return
+    const year = root.querySelector<HTMLSelectElement>('#topbarYearSelect')?.value ?? 'all available years'
+    const surge = root.querySelector<HTMLInputElement>('#surgeMultiplierSlider')?.value ?? '0'
+    container.style.display = 'block'
+    container.replaceChildren()
+
+    const heading = document.createElement('strong')
+    heading.textContent = 'Draft scenario briefing - review required'
+    const body = document.createElement('p')
+    body.textContent = `This planning scenario uses historical sales for ${year} and a user-selected ${surge}% demand uplift. It does not represent current inventory, an official DOH/PAGASA alert, or an authorized procurement instruction.`
+    const note = document.createElement('p')
+    note.textContent = 'Validate current stock, supplier lead time, costs, disease surveillance, and weather sources before approving any action.'
+    container.append(heading, body, note)
+  }
+
+  ;(window as any).printExecutiveMemo = () => {
+    window.alert('Export is unavailable until the draft scenario is backed by reviewed inventory, cost, and authoritative external-source data.')
+  }
+
+  applyScenarioSafetyLabels(root)
 
   const salesState = {
     year: 'all',
@@ -192,6 +230,23 @@ export function installDashboardEnhancements(root: HTMLElement, activeListeners:
       { target: navigation, type: 'click', listener: handleNavigation },
       { target: navigation, type: 'keydown', listener: handleNavigationKeydown }
     )
+  }
+
+  const refreshDecisionCharts = () => {
+    window.requestAnimationFrame(() => renderDecisionSupportCharts(root))
+  }
+  for (const controlId of [
+    'topbarYearSelect',
+    'yoyBaseYearSelect',
+    'yoyTargetYearSelect',
+    'btnSingleYear',
+    'btnYoyYear',
+  ]) {
+    const control = root.querySelector<HTMLElement>(`#${controlId}`)
+    if (!control) continue
+    const eventType = control instanceof HTMLButtonElement ? 'click' : 'change'
+    control.addEventListener(eventType, refreshDecisionCharts)
+    activeListeners.push({ target: control, type: eventType, listener: refreshDecisionCharts })
   }
 
   // Weather page controls and refresh triggers

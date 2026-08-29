@@ -9,6 +9,8 @@ import {
 import { renderSalesComputation, renderSalesDatasetStatus } from './sales-view-helpers'
 import { renderSalesPage, setSalesViewError } from './sales-page-helpers'
 import { renderWeatherEffects } from './weather-view-helpers'
+import { updateDashboardProvenance } from './dashboard-enhancements'
+import { setDecisionSupportChartData } from './dashboard-decision-charts'
 
 export function installCommonInteractions(root: HTMLElement) {
   const backdrop = root.querySelector<HTMLElement>('#dashboardHelpBackdrop') || root.querySelector<HTMLElement>('#helpGuidanceModal')
@@ -29,6 +31,10 @@ export async function refreshDashboardFromGateway() {
   if (typeof applyDatasetPatch !== 'function') return
 
   const data = await loadDashboardData()
+  const root = document.querySelector<HTMLElement>('.medshield-root')
+  if (root) {
+    updateDashboardProvenance(root, data.dataStatus, data.yearSummary.map((row) => row.year))
+  }
   applyDatasetPatch({
     monthly: data.monthly,
     by_area: data.byArea,
@@ -36,6 +42,7 @@ export async function refreshDashboardFromGateway() {
     year_summary: data.yearSummary,
     seasonality: data.seasonality,
   })
+  if (root) setDecisionSupportChartData(root, data)
 }
 
 export async function loadSalesDataView(root: HTMLElement, state: any) {

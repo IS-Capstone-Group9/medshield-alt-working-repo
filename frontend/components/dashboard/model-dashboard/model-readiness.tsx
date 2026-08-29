@@ -1,7 +1,7 @@
 import { ModelEntry, ModelSummary } from './types'
 
 const STATUS_COLORS: Record<string, string> = {
-  active: '#48BB78', benchmark: '#63B3ED', primary_chosen: '#4FD1C8',
+  active: '#48BB78', benchmark: '#63B3ED', challenger_rejected: '#FC8181',
   scenario: '#F6AD55', planned: '#9F7AEA', partial: '#F6AD55', blocked: '#FC8181',
 }
 
@@ -55,7 +55,7 @@ export function ModelReadiness({ summary }: ModelReadinessProps) {
     <div>
       <div style={{ background: '#F7FAFC', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '20px', marginBottom: '20px' }}>
         <h3 style={{ fontSize: '14px', fontWeight: 800, color: '#1a3a52', marginBottom: '4px' }}>Model Governance &amp; Versioning Registry</h3>
-        <p style={{ fontSize: '11px', color: '#4a6fa5' }}>Active production status and validation accuracy stats for each analytical model layer.</p>
+        <p style={{ fontSize: '11px', color: '#4a6fa5' }}>Review status, limitations, and evaluation metrics for each analytical model layer.</p>
         <div style={{ marginTop: '14px', border: '1px solid #E2E8F0', borderRadius: '8px', background: '#FFFFFF', overflow: 'hidden' }}>
           {allModels.map((m, idx) => (
             <ModelRow key={idx} m={m} />

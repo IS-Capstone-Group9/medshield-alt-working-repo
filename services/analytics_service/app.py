@@ -29,6 +29,7 @@ from services.analytics_service.medshield_engine import (
     calculate_adjusted_safety_stock,
     recalibrate_model_weights,
 )
+from services.analytics_service.commercial_mcda import build_commercial_mcda
 import numpy as np
 
 app = Flask(__name__)
@@ -350,7 +351,7 @@ def seasonal_epidemic_matrix():
 
 @app.get("/model_summary")
 def model_summary():
-    """All models used in the paper with actual computed metrics."""
+    """Model registry with evidence status and explicit publication limitations."""
     return jsonify({
         "methodology": {
             "overall": "CRISP-DM + SEMMA",
@@ -394,12 +395,12 @@ def model_summary():
              "mae": 49413.1, "rmse": 66783.31, "mape": 1908.54,
              "note": "Mandatory baseline. High MAPE due to sparse months - use MAE/RMSE for comparison.",
              "review_status": "BENCHMARK"},
-            {"model_name": "GBR with DOH + PAGASA Features", "model_code": "GBR_DOH_PAGASA_V1",
-             "model_version": "1.1.0", "layer": "Predictive", "status": "primary_chosen",
+            {"model_name": "GBR with External Proxy Features", "model_code": "GBR_DOH_PAGASA_V1",
+             "model_version": "1.1.0", "layer": "Predictive", "status": "challenger_rejected",
              "evaluation_period": "2025-01 to 2025-12",
              "mae": 52163.36, "rmse": 69296.74, "mape": 593.96,
-             "note": "Champion model. MAPE improvement: 1909% to 594%. Uses disease+weather external regressors. Proxy weather used for partial periods.",
-             "review_status": "PRIMARY_CHOSEN",
+             "note": "Rejected as champion because MAE and RMSE are worse than the seasonal-naive benchmark. External inputs include unverified proxy periods.",
+             "review_status": "NOT_PUBLISHED",
              "external_correlations": {
                  "rainfall_leptospirosis": {"r": 0.548, "p_value": "<0.001", "interpretation": "Strong positive"},
                  "rainfall_dengue": {"r": 0.429, "p_value": "<0.01", "interpretation": "Moderate positive"},
@@ -411,8 +412,8 @@ def model_summary():
         ],
         "prescriptive": [
             {"model_name": "Seasonal Epidemic & Inventory Classification Matrix",
-             "model_code": "SEASONAL_MATRIX_V1", "layer": "Prescriptive", "status": "active",
-             "note": "Month->Season->Disease->Medicine Category. Backed by DOH/PAGASA sources and computed seasonal indices."},
+             "model_code": "SEASONAL_MATRIX_V1", "layer": "Prescriptive", "status": "scenario",
+             "note": "Planning scenario only. Disease and weather relationships require reviewed authoritative source data."},
             {"model_name": "EOQ / ROP / Safety Stock (Scenario)",
              "model_code": "EOQ_ROP_SCENARIO_V1", "layer": "Prescriptive", "status": "scenario",
              "note": "Formula-based scenario using assumed cost parameters. SCENARIO label - not procurement instruction."},
@@ -425,9 +426,9 @@ def model_summary():
         ],
         "data_sources": [
             {"name": "MedShield Internal Sales", "period": "2021-2025", "rows": 20961, "status": "active"},
-            {"name": "DOH PIDSR Disease Surveillance", "period": "2021-2025", "status": "partial_proxy"},
-            {"name": "PAGASA Rainfall & Weather Records", "period": "2021-2024", "status": "partial_proxy"},
-            {"name": "NASA POWER / Open-Meteo (Weather Proxy)", "period": "2021-2025", "status": "active"},
+            {"name": "DOH PIDSR Disease Surveillance", "period": "2021-2025", "status": "not_verified"},
+            {"name": "PAGASA Rainfall & Weather Records", "period": "2021-2024", "status": "not_verified"},
+            {"name": "NASA POWER / Open-Meteo (Weather Proxy)", "period": "2021-2025", "status": "historical_proxy"},
         ],
     })
 
@@ -504,7 +505,8 @@ def seasonal_restock_detail():
     
     selected = details_map.get(season_id, details_map["monsoon"])
     return jsonify({
-        "status": "ok",
+        "status": "scenario",
+        "label": "SCENARIO - Example stock, cost, and disease-risk assumptions. Review required.",
         "season_id": season_id,
         "detail": selected
     })
@@ -582,10 +584,11 @@ def dss_prescriptive():
     ]
     
     return jsonify({
-        "status": "ok",
+        "status": "scenario",
+        "label": "SCENARIO - All climate, disease, inventory, and demand values below are assumptions, not current observations.",
         "month": "August",
         "climate_phase": "Peak Monsoon (Habagat) & Urban Inundation",
-        "doh_alert_level": "Dengue Alert Level 3",
+        "doh_alert_level": "Assumed Level 3 scenario (not a current DOH alert)",
         "metrics": {
             "rainfall_mm": rainfall_mm,
             "humidity_pct": humidity_pct,
@@ -594,41 +597,14 @@ def dss_prescriptive():
         "surge_multiplier": surge_mult,
         "feedback_loop": feedback,
         "recommendations": recs,
-        "system_rationale": "August peak Habagat features extreme rainfall (>350mm) and humidity (>80%), driving Dengue surges. NSAIDs are flagged as contraindicated due to hemorrhage risk; systemic paracetamol buffer is boosted by +45%."
+        "system_rationale": "Sensitivity scenario using assumed August rainfall, humidity, and disease-alert inputs. Validate authoritative sources, current inventory, and clinical policy before review or approval."
     })
 
 
 @app.get("/mcda_territories")
 def mcda_territories():
-    """MCDA Territory Ranking - Revenue 60% + Growth 40% weights. Status: SCENARIO."""
-    raw = [
-        {"territory": "Quezon", "revenue_share": 0.3605, "abc_class": "A",
-         "active_months": 54, "revenue_score": 100.0, "growth_score": 85.0,
-         "recommendation": "Maintain priority stock levels. Highest revenue territory."},
-        {"territory": "Batangas", "revenue_share": 0.2441, "abc_class": "A",
-         "active_months": 54, "revenue_score": 67.7, "growth_score": 90.0,
-         "recommendation": "High growth territory. Increase forward stock allocation."},
-        {"territory": "Marinduque", "revenue_share": 0.2112, "abc_class": "B",
-         "active_months": 43, "revenue_score": 58.6, "growth_score": 60.0,
-         "recommendation": "Moderate priority. Monitor stock levels."},
-        {"territory": "Camarines Norte", "revenue_share": 0.0768, "abc_class": "B",
-         "active_months": 30, "revenue_score": 21.3, "growth_score": 55.0,
-         "recommendation": "Emerging territory - 30 active months. Track growth."},
-        {"territory": "Laguna", "revenue_share": 0.0420, "abc_class": "B",
-         "active_months": 13, "revenue_score": 11.7, "growth_score": 40.0,
-         "recommendation": "New territory (13 months). Pilot stock only."},
-    ]
-    territories = []
-    for i, t in enumerate(raw):
-        mcda = round(0.60 * t["revenue_score"] + 0.40 * t["growth_score"], 2)
-        territories.append({**t, "outbreak_risk_index": 0.0, "mcda_score": mcda, "priority_rank": i + 1})
-    return jsonify({
-        "model_code": "MCDA_V1", "model_version": "1.0.0", "status": "scenario",
-        "label": "SCENARIO - Review required before procurement action.",
-        "weights": {"revenue": 0.60, "growth": 0.40, "outbreak_risk": 0.00},
-        "weight_note": "Outbreak risk weight = 0 pending validated DOH territory-level data.",
-        "data_period": "2021-2025", "territories": territories,
-    })
+    """Candidate commercial MCDA built from governed sales and territory inputs."""
+    return jsonify(build_commercial_mcda())
 
 
 @app.get("/eoq_scenarios")

@@ -8,12 +8,12 @@ interface TopbarProps {
 }
 
 const TAB_META: Record<ActiveTab, { title: string; sub: string }> = {
-  overview: { title: 'Executive Overview', sub: 'Centralized demand intelligence, forecasting, and stock actions' },
+  overview: { title: 'Executive Overview', sub: 'Historical demand intelligence and planning scenarios' },
   revenue: { title: 'Sales Diagnostics', sub: 'Historical revenue trends and gross profitability logs' },
   products: { title: 'Product Prioritization', sub: 'ABC classification analysis and prioritization clusters' },
   territory: { title: 'Area Prioritization', sub: 'Regional transaction segmentations and MCDA analysis' },
   forecast: { title: 'Forecast Modeling', sub: 'Gradient boosting and Prophet time-series calculations' },
-  inventory: { title: 'Prescriptive Planning', sub: 'Economic Order Quantities and seasonal buffer allocations' },
+  inventory: { title: 'Prescriptive Planning', sub: 'Draft EOQ and seasonal buffer scenarios for review' },
   data: { title: 'Data Upload', sub: 'CSV transaction loaders and schema catalog validation logs' },
 }
 
@@ -61,7 +61,7 @@ export function Topbar({ activeTab, filters, onUpdateFilters }: TopbarProps) {
         </div>
         <div className="topbar-badge">
           <div className="live-dot" />
-          Live System Active
+          Dataset Status Pending
         </div>
       </div>
     </div>

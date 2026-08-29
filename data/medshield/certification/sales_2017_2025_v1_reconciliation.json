@@ -1,0 +1,442 @@
+{
+  "dataset_id": "sales_2017_2025_v1",
+  "generated_at": "2026-08-29T07:35:35.480571+00:00",
+  "gate_status": "blocked_pending_reviewer_approval",
+  "raw_audit_comparison": {
+    "checklist_raw_audit_rows": 44948,
+    "csv_rows_extracted": 44954,
+    "delta": 6,
+    "explanation": "The nine supplied CSV exports contain six more parser-visible rows than the checklist audit count. Source totals and reconciliation/footer rows are now classified explicitly; the remaining six-row provenance difference requires owner confirmation."
+  },
+  "row_reconciliation": {
+    "extracted_rows": 44954,
+    "accepted_rows": 40320,
+    "rejected_rows": 4634,
+    "valid_rows": 34460,
+    "warning_rows": 5860,
+    "duplicate_occurrences": 133,
+    "accepted_duplicate_occurrences": 68,
+    "publication_candidate_rows": 38273,
+    "accepted_equals_valid_plus_warning": true,
+    "extracted_equals_accepted_plus_rejected": true
+  },
+  "record_types": {
+    "orphan_product": 1,
+    "reconciliation_summary": 2,
+    "source_total": 9,
+    "transaction_candidate": 44942
+  },
+  "quarantine": {
+    "duplicate_occurrence": 133,
+    "orphan_product": 1,
+    "reconciliation_summary": 2,
+    "rejected": 4634,
+    "source_total": 9
+  },
+  "issues": {
+    "delivery year 2000 differs from source workbook year 2017": 5,
+    "delivery year 2000 is outside the analysis range 2017–2025": 5,
+    "delivery year 2001 differs from source workbook year 2017": 2,
+    "delivery year 2001 is outside the analysis range 2017–2025": 2,
+    "delivery year 2007 differs from source workbook year 2017": 5,
+    "delivery year 2007 is outside the analysis range 2017–2025": 5,
+    "delivery year 2015 differs from source workbook year 2017": 2,
+    "delivery year 2015 is outside the analysis range 2017–2025": 2,
+    "delivery year 2016 differs from source workbook year 2017": 72,
+    "delivery year 2016 is outside the analysis range 2017–2025": 72,
+    "delivery year 2018 differs from source workbook year 2017": 4,
+    "delivery year 2018 differs from source workbook year 2019": 4857,
+    "delivery year 2020 differs from source workbook year 2017": 8,
+    "delivery year 2047 differs from source workbook year 2017": 1,
+    "delivery year 2047 is outside the analysis range 2017–2025": 1,
+    "exact duplicate transaction": 133,
+    "extreme quantity volume (>50,000 units)": 2,
+    "extreme trade price revenue (>50M)": 1,
+    "invalid or missing delivery date": 69,
+    "margin percentage is outside the expected range (-0.5 to 1.5)": 225,
+    "missing area": 21,
+    "missing product": 4558,
+    "negative quantity": 2,
+    "net_cost is negative": 98,
+    "quantity is negative": 2,
+    "zero quantity and zero total trade price": 301,
+    "zero quantity with nonzero total trade price": 7,
+    "zero total trade price with nonzero quantity": 2305
+  },
+  "year_assessment": {
+    "2017": {
+      "source_rows": 5874,
+      "accepted_delivery_rows": 1980,
+      "quality_eligible_rows": 1979,
+      "valid_rows": 1934,
+      "warning_rows": 46,
+      "rejected_rows": 3886,
+      "duplicate_rows": 10,
+      "source_year_mismatch_rows": 99,
+      "delivery_rows_from_other_source_years": 0,
+      "ref_product_rows": 3807,
+      "months_present": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "09",
+        "11",
+        "12"
+      ],
+      "missing_months": [
+        "05",
+        "06",
+        "07",
+        "08",
+        "10"
+      ],
+      "trust_grade": "excluded",
+      "trust_grade_reasons": [
+        "3807 source rows contain an Excel product reference error",
+        "3886 rows are rejected",
+        "46 accepted rows require review",
+        "10 duplicate occurrences are quarantined",
+        "99 rows are dated outside their source-file year",
+        "missing accepted months: 05, 06, 07, 08, 10"
+      ],
+      "publication_candidate_rows": 0
+    },
+    "2018": {
+      "source_rows": 4357,
+      "accepted_delivery_rows": 9213,
+      "quality_eligible_rows": 9203,
+      "valid_rows": 4309,
+      "warning_rows": 4904,
+      "rejected_rows": 1,
+      "duplicate_rows": 10,
+      "source_year_mismatch_rows": 0,
+      "delivery_rows_from_other_source_years": 4861,
+      "ref_product_rows": 0,
+      "months_present": [
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12"
+      ],
+      "missing_months": [
+        "01",
+        "02"
+      ],
+      "trust_grade": "usable_with_limitations",
+      "trust_grade_reasons": [
+        "1 rows are rejected",
+        "4904 accepted rows require review",
+        "10 duplicate occurrences are quarantined",
+        "4861 dated rows originate from another source-file year",
+        "missing accepted months: 01, 02"
+      ],
+      "publication_candidate_rows": 9203
+    },
+    "2019": {
+      "source_rows": 10317,
+      "accepted_delivery_rows": 5458,
+      "quality_eligible_rows": 5452,
+      "valid_rows": 4934,
+      "warning_rows": 524,
+      "rejected_rows": 2,
+      "duplicate_rows": 6,
+      "source_year_mismatch_rows": 4857,
+      "delivery_rows_from_other_source_years": 0,
+      "ref_product_rows": 0,
+      "months_present": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09"
+      ],
+      "missing_months": [
+        "10",
+        "11",
+        "12"
+      ],
+      "trust_grade": "usable_with_limitations",
+      "trust_grade_reasons": [
+        "2 rows are rejected",
+        "524 accepted rows require review",
+        "6 duplicate occurrences are quarantined",
+        "4857 rows are dated outside their source-file year",
+        "missing accepted months: 10, 11, 12"
+      ],
+      "publication_candidate_rows": 5452
+    },
+    "2020": {
+      "source_rows": 3988,
+      "accepted_delivery_rows": 3995,
+      "quality_eligible_rows": 3991,
+      "valid_rows": 3834,
+      "warning_rows": 161,
+      "rejected_rows": 1,
+      "duplicate_rows": 4,
+      "source_year_mismatch_rows": 0,
+      "delivery_rows_from_other_source_years": 8,
+      "ref_product_rows": 0,
+      "months_present": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12"
+      ],
+      "missing_months": [],
+      "trust_grade": "usable_with_limitations",
+      "trust_grade_reasons": [
+        "1 rows are rejected",
+        "161 accepted rows require review",
+        "4 duplicate occurrences are quarantined",
+        "8 dated rows originate from another source-file year"
+      ],
+      "publication_candidate_rows": 3991
+    },
+    "2021": {
+      "source_rows": 3416,
+      "accepted_delivery_rows": 3415,
+      "quality_eligible_rows": 3411,
+      "valid_rows": 3396,
+      "warning_rows": 19,
+      "rejected_rows": 1,
+      "duplicate_rows": 4,
+      "source_year_mismatch_rows": 0,
+      "delivery_rows_from_other_source_years": 0,
+      "ref_product_rows": 0,
+      "months_present": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12"
+      ],
+      "missing_months": [],
+      "trust_grade": "usable_with_limitations",
+      "trust_grade_reasons": [
+        "1 rows are rejected",
+        "19 accepted rows require review",
+        "4 duplicate occurrences are quarantined"
+      ],
+      "publication_candidate_rows": 3411
+    },
+    "2022": {
+      "source_rows": 4029,
+      "accepted_delivery_rows": 4007,
+      "quality_eligible_rows": 3993,
+      "valid_rows": 3965,
+      "warning_rows": 42,
+      "rejected_rows": 22,
+      "duplicate_rows": 21,
+      "source_year_mismatch_rows": 0,
+      "delivery_rows_from_other_source_years": 0,
+      "ref_product_rows": 0,
+      "months_present": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12"
+      ],
+      "missing_months": [],
+      "trust_grade": "usable_with_limitations",
+      "trust_grade_reasons": [
+        "22 rows are rejected",
+        "42 accepted rows require review",
+        "21 duplicate occurrences are quarantined"
+      ],
+      "publication_candidate_rows": 3993
+    },
+    "2023": {
+      "source_rows": 5890,
+      "accepted_delivery_rows": 5387,
+      "quality_eligible_rows": 5381,
+      "valid_rows": 5293,
+      "warning_rows": 94,
+      "rejected_rows": 503,
+      "duplicate_rows": 50,
+      "source_year_mismatch_rows": 0,
+      "delivery_rows_from_other_source_years": 0,
+      "ref_product_rows": 0,
+      "months_present": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12"
+      ],
+      "missing_months": [],
+      "trust_grade": "usable_with_limitations",
+      "trust_grade_reasons": [
+        "503 rows are rejected",
+        "94 accepted rows require review",
+        "50 duplicate occurrences are quarantined"
+      ],
+      "publication_candidate_rows": 5381
+    },
+    "2024": {
+      "source_rows": 2945,
+      "accepted_delivery_rows": 2836,
+      "quality_eligible_rows": 2833,
+      "valid_rows": 2818,
+      "warning_rows": 18,
+      "rejected_rows": 109,
+      "duplicate_rows": 4,
+      "source_year_mismatch_rows": 0,
+      "delivery_rows_from_other_source_years": 0,
+      "ref_product_rows": 0,
+      "months_present": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12"
+      ],
+      "missing_months": [],
+      "trust_grade": "usable_with_limitations",
+      "trust_grade_reasons": [
+        "109 rows are rejected",
+        "18 accepted rows require review",
+        "4 duplicate occurrences are quarantined"
+      ],
+      "publication_candidate_rows": 2833
+    },
+    "2025": {
+      "source_rows": 4138,
+      "accepted_delivery_rows": 4029,
+      "quality_eligible_rows": 4009,
+      "valid_rows": 3977,
+      "warning_rows": 52,
+      "rejected_rows": 109,
+      "duplicate_rows": 24,
+      "source_year_mismatch_rows": 0,
+      "delivery_rows_from_other_source_years": 0,
+      "ref_product_rows": 0,
+      "months_present": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12"
+      ],
+      "missing_months": [],
+      "trust_grade": "usable_with_limitations",
+      "trust_grade_reasons": [
+        "109 rows are rejected",
+        "52 accepted rows require review",
+        "24 duplicate occurrences are quarantined"
+      ],
+      "publication_candidate_rows": 4009
+    }
+  },
+  "candidate_financial_totals_by_year": {
+    "2018": {
+      "total_trade_price": 26283920.47,
+      "net_cost": 36964221.9,
+      "net_income": 53233117.96,
+      "quantity": 166024.62
+    },
+    "2019": {
+      "total_trade_price": 18651633.86,
+      "net_cost": 0.0,
+      "net_income": 46037478.05,
+      "quantity": 146768.68
+    },
+    "2020": {
+      "total_trade_price": 18319993.08,
+      "net_cost": 65576452.67,
+      "net_income": 49837672.35,
+      "quantity": 109815.39
+    },
+    "2021": {
+      "total_trade_price": 27548557.47,
+      "net_cost": 78283133.34,
+      "net_income": 51922807.37,
+      "quantity": 153323.86
+    },
+    "2022": {
+      "total_trade_price": 21284346.37,
+      "net_cost": 63469650.06,
+      "net_income": 42733144.27,
+      "quantity": 123471.35
+    },
+    "2023": {
+      "total_trade_price": 46479797.5,
+      "net_cost": 62387584.85,
+      "net_income": 58867710.65,
+      "quantity": 271033.56
+    },
+    "2024": {
+      "total_trade_price": 30497650.5,
+      "net_cost": 50411825.88,
+      "net_income": 27710920.78,
+      "quantity": 51181.8
+    },
+    "2025": {
+      "total_trade_price": 94577858.05,
+      "net_cost": 173896868.29,
+      "net_income": 79319010.24,
+      "quantity": 420690.83
+    }
+  },
+  "blocking_items": [
+    "Confirm the six-row difference between the checklist audit count and supplied CSV extracts.",
+    "Approve the 2018 policy for rows split across the 2018 and 2019 source files.",
+    "Approve year trust grades and warning-row eligibility.",
+    "Complete P2 financial reconciliation before publication.",
+    "Obtain formal dataset reviewer approval."
+  ]
+}

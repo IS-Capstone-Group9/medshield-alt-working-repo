@@ -2,6 +2,12 @@ import { readFile } from 'node:fs/promises'
 import path from 'node:path'
 
 export interface DashboardSnapshot {
+  data_status: {
+    source: 'analytics_services' | 'bundled_fallback'
+    mode: 'historical' | 'demo'
+    loaded_at: string
+    message: string
+  }
   totals: Record<string, unknown>
   monthly: Array<Record<string, unknown>>
   by_area: Array<Record<string, unknown>>
@@ -65,7 +71,15 @@ async function fetchJson<T>(url: string): Promise<T> {
 
 async function loadReferenceSnapshot(): Promise<DashboardSnapshot> {
   const raw = await readFile(REFERENCE_DATA_PATH, 'utf8')
-  return JSON.parse(raw) as DashboardSnapshot
+  return {
+    ...(JSON.parse(raw) as Omit<DashboardSnapshot, 'data_status'>),
+    data_status: {
+      source: 'bundled_fallback',
+      mode: 'demo',
+      loaded_at: new Date().toISOString(),
+      message: 'Bundled demonstration snapshot; not a live operational feed.',
+    },
+  }
 }
 
 async function loadFreshSnapshot(): Promise<DashboardSnapshot> {
@@ -137,6 +151,12 @@ async function loadFreshSnapshot(): Promise<DashboardSnapshot> {
     ])
 
     return {
+      data_status: {
+        source: 'analytics_services',
+        mode: 'historical',
+        loaded_at: new Date().toISOString(),
+        message: 'Historical analytics service data; external signals are planning context only.',
+      },
       totals,
       monthly,
       by_area: byArea,

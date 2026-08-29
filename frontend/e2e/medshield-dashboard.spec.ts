@@ -36,9 +36,9 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     await page.waitForLoadState('networkidle');
 
     // 2. Perform authenticated sign in
-    await page.fill('#username', 'adrian');
-    await page.fill('#password', 'Medshield!2025');
-    await page.click('.login-submit');
+    await page.fill('#username', 'admin');
+    await page.fill('#password', 'medshield2025');
+    await page.getByRole('button', { name: 'Login', exact: true }).click();
 
     // 3. Wait for dashboard redirection and sandbox initialization
     await page.waitForURL('**/', { timeout: 10000 });
@@ -62,7 +62,7 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     await expectChartRendered(page, 'overviewBaselineChart');
 
     // Verify Data Governance Integrity Bar
-    await expect(page.locator('.data-freshness-bar')).toContainText('Data Stream Integrity');
+    await expect(page.locator('.data-freshness-bar')).toContainText(/Analytics Services|Bundled Demo Snapshot/);
   });
 
   test('2. Navigation Matrix: Transitions seamlessly across all 7 DSS Modules', async ({ page }) => {
@@ -99,8 +99,22 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     await expect(salesDeepDive).not.toBeVisible();
     await expect(page.locator('#areaBarChart')).toBeVisible();
     await expect(page.locator('#areaIncomeChart')).toBeVisible();
+    await expect(page.locator('[data-mcda-sensitivity="commercial-candidate"]')).toContainText('Commercial Priority MCDA');
+    await expect(page.locator('#mcdaWeightSalesValue')).toHaveValue('60');
+    await expect(page.locator('#mcdaWeightCoverage')).toHaveValue('40');
+    await expect(page.locator('#mcdaWeightTotal')).toHaveText('100%');
+    await expect(page.locator('#mcdaWeightSurge')).toHaveCount(0);
+    await expect(page.locator('#mcdaWeightLead')).toHaveCount(0);
+    await expect(page.locator('#diseaseDemandChart')).toBeVisible();
+    await expect(page.locator('#territoryRadarChart')).toBeVisible();
     await expectChartRendered(page, 'areaBarChart');
     await expectChartRendered(page, 'areaIncomeChart');
+    await expectChartRendered(page, 'diseaseDemandChart');
+    await expectChartRendered(page, 'territoryRadarChart');
+    await page.locator('#mcdaWeightSalesValue').fill('75');
+    await expect(page.locator('#mcdaWeightCoverage')).toHaveValue('25');
+    await expect(page.locator('#priorityTable')).toContainText('Month-Coverage Score');
+    await expect(page.locator('#priorityTable')).not.toContainText('Lead Time Factor');
 
     // 2.4 Forecast Modeling
     await page.locator('.nav-item', { hasText: 'Forecast Modeling' }).click();
@@ -239,8 +253,8 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     // Navigate to Prescriptive Planning
     await page.locator('.nav-item', { hasText: 'Prescriptive Planning' }).click();
 
-    // Click "Create Purchase Order" button
-    const poBtn = page.locator('#seasonalDrilldownContainer button', { hasText: 'Create Purchase Order' });
+    // Open the draft planning review dialog.
+    const poBtn = page.locator('#seasonalDrilldownContainer button', { hasText: 'Review Draft Plan' });
     await poBtn.click();
 
     // Verify Modal appears

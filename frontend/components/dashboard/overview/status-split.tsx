@@ -39,7 +39,7 @@ export function StatusSplit() {
             CRITICAL: Stock-out threat on Systemic Antipyretics (Non-NSAID) during monsoon peak.
           </div>
           <div style={{ fontSize: '11px', padding: '8px 12px', borderRadius: '6px', background: '#fffbeb', border: '1px solid #fcd34d', color: '#b45309', fontWeight: 600 }}>
-            WARNING: Dengue Alert Level 3 Active in Quezon region. Monitor safety stocks.
+            SCENARIO: Assumed Level 3 disease surge in Quezon. Validate authoritative alerts and current stock before review.
           </div>
         </div>
       </Card>

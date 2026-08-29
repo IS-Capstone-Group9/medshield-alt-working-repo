@@ -12,6 +12,7 @@ import {
   InventoryRecommendation,
   RegionalPriority,
   ModelEvaluation,
+  DashboardDataStatus,
 } from '@/types/api.types'
 
 function finiteNumber(value: unknown): boolean {
@@ -65,6 +66,7 @@ function assertDashboardCoreData(data: DashboardData, source: string): Dashboard
 export async function loadDashboardData(): Promise<DashboardData> {
   try {
     const [
+      dataStatus,
       summary,
       monthly,
       byArea,
@@ -77,6 +79,7 @@ export async function loadDashboardData(): Promise<DashboardData> {
       regionalPriorities,
       modelEvaluation,
     ] = await Promise.all([
+      getJson<DashboardDataStatus>('/api/dashboard_status'),
       getJson<Summary>('/api/summary'),
       getJson<MonthlyPoint[]>('/api/monthly'),
       getJson<AreaPoint[]>('/api/by_area'),
@@ -90,6 +93,7 @@ export async function loadDashboardData(): Promise<DashboardData> {
       getJson<ModelEvaluation[]>('/api/model_evaluation'),
     ])
     return assertDashboardCoreData({
+      dataStatus,
       summary,
       monthly,
       byArea,
@@ -105,6 +109,12 @@ export async function loadDashboardData(): Promise<DashboardData> {
   } catch (err) {
     const data = await getPublicJson<any>('/data/sales_data.json')
     return assertDashboardCoreData({
+      dataStatus: {
+        source: 'bundled_fallback',
+        mode: 'demo',
+        loaded_at: new Date().toISOString(),
+        message: 'Bundled demonstration snapshot; not a live operational feed.',
+      },
       summary: data.totals as Summary,
       monthly: data.monthly as MonthlyPoint[],
       byArea: data.by_area as AreaPoint[],

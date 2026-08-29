@@ -18,16 +18,16 @@ export function AlertActions({
 
   return (
     <div style={{ marginTop: '24px' }}>
-      <div className="section-title">Active Prescriptive Inventory Alerts</div>
+      <div className="section-title">Draft Inventory Scenarios</div>
       <div className="alert-grid">
         {/* CRITICAL ALERT */}
         <div className="alert-card danger">
           <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
             <span className="alert-tag danger">CRITICAL</span>
             <div>
-              <div className="alert-title">Stock Out Risk: Systemic Antipyretics (Non-NSAID)</div>
+              <div className="alert-title">Demand Scenario: Systemic Antipyretics (Non-NSAID)</div>
               <div className="alert-body">
-                Monsoon demand spike (+45% buffer) will exhaust safety stock levels in Batangas. NSAIDs contraindicated due to Dengue risk.
+                A +45% planning assumption may exceed the example safety-stock threshold. Validate actual Batangas stock and clinical policy before action.
               </div>
             </div>
           </div>
@@ -55,8 +55,8 @@ export function AlertActions({
           <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
             <span className="alert-tag warn">WARNING</span>
             <div>
-              <div className="alert-title">Dengue Alert Level 3 Active</div>
-              <div className="alert-body">DOH infection index &gt; 1.4 in Quezon. Buffer recalibration recommended.</div>
+              <div className="alert-title">Example Disease-Surge Scenario</div>
+              <div className="alert-body">Uses an assumed disease index &gt; 1.4 for sensitivity analysis; this is not a current DOH alert.</div>
             </div>
           </div>
           <div style={{ display: 'flex', gap: '8px' }}>

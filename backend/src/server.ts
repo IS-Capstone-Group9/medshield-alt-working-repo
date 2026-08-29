@@ -443,8 +443,8 @@ async function analyticsJson(
   return { status: response.status, body }
 }
 
-async function serviceGetJson(baseUrl: string, pathName: string): Promise<unknown> {
-  const response: globalThis.Response = await fetchWithTimeout(`${baseUrl}${pathName}`)
+async function serviceGetJson(baseUrl: string, pathName: string, timeoutMs = 8000): Promise<unknown> {
+  const response: globalThis.Response = await fetchWithTimeout(`${baseUrl}${pathName}`, {}, timeoutMs)
   if (!response.ok) {
     throw new Error(`Service at ${baseUrl}${pathName} returned status ${response.status}`)
   }
@@ -476,6 +476,11 @@ app.get('/api/health', (_req: Request, res: Response) => {
 app.get('/api/summary', requireAuth, async (_req: Request, res: Response) => {
   const snapshot = await loadSnapshot()
   res.json(snapshot.totals)
+})
+
+app.get('/api/dashboard_status', requireAuth, async (_req: Request, res: Response) => {
+  const snapshot = await loadSnapshot()
+  res.json(snapshot.data_status)
 })
 
 app.get('/api/monthly', requireAuth, async (req: Request, res: Response) => {
@@ -825,9 +830,9 @@ app.get('/api/model_summary', async (_req: Request, res: Response) => {
   }
 })
 
-app.get('/api/mcda_territories', async (_req: Request, res: Response) => {
+app.get('/api/mcda_territories', requireAuth, async (_req: Request, res: Response) => {
   try {
-    const payload = await serviceGetJson(analyticsServiceUrl, '/mcda_territories')
+    const payload = await serviceGetJson(analyticsServiceUrl, '/mcda_territories', 20000)
     return res.json(payload)
   } catch (error) {
     return res.status(500).json({ error: 'Failed to fetch MCDA territory rankings' })

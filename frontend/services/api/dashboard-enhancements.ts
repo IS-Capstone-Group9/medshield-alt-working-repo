@@ -4,6 +4,102 @@ import {
   SALES_DATA_PAGE,
   WEATHER_VALIDATION_PAGE,
 } from './dashboard-markup'
+import { DashboardDataStatus } from '@/types/api.types'
+
+const UNSUPPORTED_DASHBOARD_LABELS = new Map([
+  ['Execute Purchase Order', 'Save Draft Plan'],
+  ['Confirm & Execute Order', 'Save Draft for Review'],
+])
+
+function replaceUnsupportedLabels(root: HTMLElement) {
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT)
+  let node = walker.nextNode()
+  while (node) {
+    const value = node.nodeValue?.trim()
+    if (value && UNSUPPORTED_DASHBOARD_LABELS.has(value)) {
+      node.nodeValue = node.nodeValue?.replace(value, UNSUPPORTED_DASHBOARD_LABELS.get(value)!) ?? ''
+    }
+    node = walker.nextNode()
+  }
+}
+
+function replaceSelectOptions(select: HTMLSelectElement | null, years: string[], includeAll: boolean) {
+  if (!select || years.length === 0) return
+  const previousValue = select.value
+  const fragment = document.createDocumentFragment()
+
+  if (includeAll) {
+    const option = document.createElement('option')
+    option.value = 'all'
+    option.textContent = `All Years (${years[years.length - 1]}–${years[0]})`
+    fragment.appendChild(option)
+  }
+
+  years.forEach((year) => {
+    const option = document.createElement('option')
+    option.value = year
+    option.textContent = year
+    fragment.appendChild(option)
+  })
+
+  select.replaceChildren(fragment)
+  select.value = previousValue === 'all' && includeAll
+    ? 'all'
+    : years.includes(previousValue)
+      ? previousValue
+      : years[0]
+}
+
+export function updateDashboardProvenance(
+  root: HTMLElement,
+  status: DashboardDataStatus,
+  availableYears: string[]
+) {
+  const years = [...new Set(availableYears)]
+    .filter((year) => /^\d{4}$/.test(year))
+    .sort((a, b) => Number(b) - Number(a))
+
+  replaceSelectOptions(root.querySelector<HTMLSelectElement>('#topbarYearSelect'), years, true)
+  replaceSelectOptions(root.querySelector<HTMLSelectElement>('#yoyBaseYearSelect'), years, false)
+  replaceSelectOptions(root.querySelector<HTMLSelectElement>('#yoyTargetYearSelect'), years, false)
+
+  const targetSelect = root.querySelector<HTMLSelectElement>('#yoyTargetYearSelect')
+  const baseSelect = root.querySelector<HTMLSelectElement>('#yoyBaseYearSelect')
+  if (targetSelect && baseSelect && targetSelect.value === baseSelect.value && years.length > 1) {
+    targetSelect.value = years[1]
+  }
+
+  const statusBar = root.querySelector<HTMLElement>('.data-freshness-bar')
+  if (statusBar) {
+    const sourceLabel = status.source === 'analytics_services'
+      ? 'Analytics Services'
+      : 'Bundled Demo Snapshot'
+    const loadedAt = new Date(status.loaded_at)
+    const loadedLabel = Number.isNaN(loadedAt.getTime())
+      ? 'Unavailable'
+      : loadedAt.toLocaleString('en-PH', { timeZone: 'Asia/Manila' })
+
+    statusBar.replaceChildren()
+    const summary = document.createElement('div')
+    summary.textContent = `${sourceLabel} | ${status.message}`
+    const details = document.createElement('div')
+    details.textContent = `Loaded: ${loadedLabel} PHT | Years: ${years.join(', ') || 'Unavailable'}`
+    details.style.fontWeight = '700'
+    statusBar.append(summary, details)
+    statusBar.dataset.source = status.source
+    statusBar.dataset.mode = status.mode
+  }
+
+  const badge = root.querySelector<HTMLElement>('.topbar-badge')
+  if (badge) {
+    badge.replaceChildren()
+    badge.textContent = status.mode === 'demo' ? 'Demo Dataset' : 'Historical Dataset'
+  }
+}
+
+export function applyScenarioSafetyLabels(root: HTMLElement) {
+  replaceUnsupportedLabels(root)
+}
 
 export function setCardModel(root: HTMLElement, id: string, name: string, note: string) {
   const canvas = root.querySelector(`#${id}`)
@@ -58,6 +154,8 @@ export function enhanceDashboardContent(root: HTMLElement) {
   } catch {
     // Storage can be unavailable in privacy-restricted browser contexts.
   }
+
+  replaceUnsupportedLabels(root)
 
   const navigation = root.querySelector('.nav')
   if (navigation) {

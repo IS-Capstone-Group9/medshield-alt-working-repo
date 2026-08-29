@@ -1,26 +1,7 @@
-interface McdaEntry {
-  territory: string
-  abc_class: string
-  revenue_share: number
-  active_months: number
-  revenue_score: number
-  growth_score: number
-  mcda_score: number
-  priority_rank: number
-  recommendation: string
-}
-
-interface McdaResult {
-  model_code: string
-  status: string
-  label: string
-  weights: Record<string, number>
-  weight_note: string
-  territories: McdaEntry[]
-}
+import type { CommercialMcdaResult } from '@/services/api/mcda.service'
 
 interface McdaRankingProps {
-  mcda: McdaResult | null
+  mcda: CommercialMcdaResult | null
 }
 
 export function McdaRanking({ mcda }: McdaRankingProps) {
@@ -38,7 +19,7 @@ export function McdaRanking({ mcda }: McdaRankingProps) {
         <div style={{ display: 'flex', gap: '8px' }}>
           {Object.entries(mcda.weights).map(([k, v]) => (
             <span key={k} style={{ fontSize: '10px', padding: '2px 8px', borderRadius: '4px', background: '#F0FFF4', color: '#276749', fontWeight: 700 }}>
-              {k.toUpperCase()}: {Math.round(v * 100)}%
+              {k.replaceAll('_', ' ').toUpperCase()}: {Math.round(v * 100)}%
             </span>
           ))}
         </div>
@@ -50,10 +31,10 @@ export function McdaRanking({ mcda }: McdaRankingProps) {
             <th style={{ textAlign: 'left' }}>Rank</th>
             <th style={{ textAlign: 'left' }}>Hospital Territory</th>
             <th>ABC Class</th>
-            <th>Revenue Share</th>
-            <th>Active Months</th>
-            <th>MCDA Score</th>
-            <th style={{ textAlign: 'left' }}>Prescriptive Action</th>
+            <th>Candidate Sales Share</th>
+            <th>Month Coverage</th>
+            <th>Commercial Score</th>
+            <th style={{ textAlign: 'left' }}>Candidate Planning Note</th>
           </tr>
         </thead>
         <tbody>
@@ -66,9 +47,9 @@ export function McdaRanking({ mcda }: McdaRankingProps) {
                   {row.abc_class}
                 </span>
               </td>
-              <td>{(row.revenue_share * 100).toFixed(1)}%</td>
-              <td>{row.active_months} / 12</td>
-              <td style={{ fontWeight: 800, color: '#2B6CB0' }}>{row.mcda_score.toFixed(3)}</td>
+              <td>{(row.sales_value_share * 100).toFixed(1)}%</td>
+              <td>{row.active_months} / {row.available_months}</td>
+              <td style={{ fontWeight: 800, color: '#2B6CB0' }}>{row.mcda_score.toFixed(1)}</td>
               <td style={{ textAlign: 'left', color: '#2B6CB0' }}>{row.recommendation}</td>
             </tr>
           ))}

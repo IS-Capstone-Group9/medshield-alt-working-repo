@@ -1,0 +1,186 @@
+{
+  "dataset_id": "sales_2017_2025_v1",
+  "generated_at": "2026-08-29T07:40:13.302456+00:00",
+  "approval_status": "proposed_pending_finance_owner_approval",
+  "dashboard_financial_publication_status": "blocked",
+  "tolerance_php": 0.02,
+  "rows_evaluated": 38273,
+  "mapping_comparison": {
+    "current_documented_assumption": {
+      "formula": "trade_price_minus_net_cost",
+      "rows": 38273,
+      "matched_rows": 1345,
+      "match_rate": 0.035142,
+      "aggregate_derived_margin": -247345979.69,
+      "aggregate_workbook_net_income": 409661861.67,
+      "aggregate_delta": 657007841.36,
+      "mean_absolute_row_variance": 17666.73,
+      "by_year": {
+        "2018": {
+          "rows": 9203,
+          "matched_rows": 34,
+          "match_rate": 0.003694,
+          "derived_margin": -10680301.43,
+          "workbook_net_income": 53233117.96,
+          "delta": 63913419.39
+        },
+        "2019": {
+          "rows": 5452,
+          "matched_rows": 104,
+          "match_rate": 0.019076,
+          "derived_margin": 18651633.86,
+          "workbook_net_income": 46037478.05,
+          "delta": 27385844.19
+        },
+        "2020": {
+          "rows": 3991,
+          "matched_rows": 95,
+          "match_rate": 0.023804,
+          "derived_margin": -47256459.59,
+          "workbook_net_income": 49837672.35,
+          "delta": 97094131.94
+        },
+        "2021": {
+          "rows": 3411,
+          "matched_rows": 59,
+          "match_rate": 0.017297,
+          "derived_margin": -50734575.87,
+          "workbook_net_income": 51922807.37,
+          "delta": 102657383.24
+        },
+        "2022": {
+          "rows": 3993,
+          "matched_rows": 143,
+          "match_rate": 0.035813,
+          "derived_margin": -42185303.69,
+          "workbook_net_income": 42733144.27,
+          "delta": 84918447.96
+        },
+        "2023": {
+          "rows": 5381,
+          "matched_rows": 855,
+          "match_rate": 0.158892,
+          "derived_margin": -15907787.35,
+          "workbook_net_income": 58867710.65,
+          "delta": 74775498.0
+        },
+        "2024": {
+          "rows": 2833,
+          "matched_rows": 39,
+          "match_rate": 0.013766,
+          "derived_margin": -19914175.38,
+          "workbook_net_income": 27710920.78,
+          "delta": 47625096.16
+        },
+        "2025": {
+          "rows": 4009,
+          "matched_rows": 16,
+          "match_rate": 0.003991,
+          "derived_margin": -79319010.24,
+          "workbook_net_income": 79319010.24,
+          "delta": 158638020.48
+        }
+      }
+    },
+    "workbook_supported_candidate": {
+      "formula": "net_cost_minus_trade_price",
+      "rows": 38273,
+      "matched_rows": 26788,
+      "match_rate": 0.699919,
+      "aggregate_derived_margin": 247345979.69,
+      "aggregate_workbook_net_income": 409661861.67,
+      "aggregate_delta": 162315881.98,
+      "mean_absolute_row_variance": 4241.0,
+      "by_year": {
+        "2018": {
+          "rows": 9203,
+          "matched_rows": 4352,
+          "match_rate": 0.472889,
+          "derived_margin": 10680301.43,
+          "workbook_net_income": 53233117.96,
+          "delta": 42552816.53
+        },
+        "2019": {
+          "rows": 5452,
+          "matched_rows": 4,
+          "match_rate": 0.000734,
+          "derived_margin": -18651633.86,
+          "workbook_net_income": 46037478.05,
+          "delta": 64689111.91
+        },
+        "2020": {
+          "rows": 3991,
+          "matched_rows": 3800,
+          "match_rate": 0.952142,
+          "derived_margin": 47256459.59,
+          "workbook_net_income": 49837672.35,
+          "delta": 2581212.76
+        },
+        "2021": {
+          "rows": 3411,
+          "matched_rows": 3353,
+          "match_rate": 0.982996,
+          "derived_margin": 50734575.87,
+          "workbook_net_income": 51922807.37,
+          "delta": 1188231.5
+        },
+        "2022": {
+          "rows": 3993,
+          "matched_rows": 3938,
+          "match_rate": 0.986226,
+          "derived_margin": 42185303.69,
+          "workbook_net_income": 42733144.27,
+          "delta": 547840.58
+        },
+        "2023": {
+          "rows": 5381,
+          "matched_rows": 4540,
+          "match_rate": 0.843709,
+          "derived_margin": 15907787.35,
+          "workbook_net_income": 58867710.65,
+          "delta": 42959923.3
+        },
+        "2024": {
+          "rows": 2833,
+          "matched_rows": 2792,
+          "match_rate": 0.985528,
+          "derived_margin": 19914175.38,
+          "workbook_net_income": 27710920.78,
+          "delta": 7796745.4
+        },
+        "2025": {
+          "rows": 4009,
+          "matched_rows": 4009,
+          "match_rate": 1.0,
+          "derived_margin": 79319010.24,
+          "workbook_net_income": 79319010.24,
+          "delta": 0.0
+        }
+      }
+    }
+  },
+  "proposed_mapping": "net_cost_as_sales_value_and_total_trade_price_as_cost_basis",
+  "proposed_definitions": {
+    "sales_value": "net_cost field (source NET CP / net contract price)",
+    "cost_basis": "total_trade_price field (source TOTAL TP / transfer price)",
+    "gross_margin": "net_cost - total_trade_price",
+    "gross_margin_pct": "gross_margin / net_cost when net_cost is non-zero",
+    "workbook_net_income": "source comparison field; retain unchanged for audit"
+  },
+  "anomaly_counts": {
+    "missing_net_contract_sales_value": 9661,
+    "missing_trade_price_cost_basis": 118,
+    "negative_financial_value": 98,
+    "workbook_margin_mismatch": 11485,
+    "zero_value_transaction": 22
+  },
+  "reconciled_rows": 26607,
+  "review_required_rows": 11666,
+  "blocking_items": [
+    "Finance/business owner must approve the proposed source-column semantics.",
+    "Rows flagged workbook_margin_mismatch require quarantine or documented tolerance disposition.",
+    "Dashboard revenue and gross-margin outputs must be regenerated after approval.",
+    "Zero-value, returns, credits, and accounting adjustments require approved transaction types."
+  ],
+  "row_flags_artifact": "sales_2017_2025_v1_financial_flags.json.gz"
+}

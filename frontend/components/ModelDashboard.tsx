@@ -1,7 +1,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { API_BASE_URL } from '@/lib/api'
+import { getJson } from '@/services/api/api-client'
+import type { CommercialMcdaResult } from '@/services/api/mcda.service'
 import { TabNav } from './dashboard/model-dashboard/tab-nav'
 import { SeasonCard } from './dashboard/model-dashboard/season-card'
 import { ModelReadiness } from './dashboard/model-dashboard/model-readiness'
@@ -11,9 +12,7 @@ import { ModelSummary } from './dashboard/model-dashboard/types'
 
 async function apiFetch<T>(path: string): Promise<T | null> {
   try {
-    const r = await fetch(`${API_BASE_URL}${path}`, { credentials: 'include' })
-    if (!r.ok) return null
-    return (await r.json()) as T
+    return await getJson<T>(path)
   } catch {
     return null
   }
@@ -22,7 +21,7 @@ async function apiFetch<T>(path: string): Promise<T | null> {
 export default function ModelDashboard() {
   const [matrix, setMatrix] = useState<any[]>([])
   const [summary, setSummary] = useState<ModelSummary | null>(null)
-  const [mcda, setMcda] = useState<any>(null)
+  const [mcda, setMcda] = useState<CommercialMcdaResult | null>(null)
   const [eoq, setEoq] = useState<any>(null)
   const [activeTab, setActiveTab] = useState<'seasonal' | 'models' | 'mcda' | 'eoq'>('seasonal')
   const [loading, setLoading] = useState(true)
@@ -31,7 +30,7 @@ export default function ModelDashboard() {
     Promise.all([
       apiFetch<any[]>('/api/seasonal_epidemic_matrix'),
       apiFetch<ModelSummary>('/api/model_summary'),
-      apiFetch<any>('/api/mcda_territories'),
+      apiFetch<CommercialMcdaResult>('/api/mcda_territories'),
       apiFetch<any>('/api/eoq_scenarios'),
     ]).then(([mat, sum, mc, eq]) => {
       if (mat) setMatrix(mat)
@@ -57,7 +56,7 @@ export default function ModelDashboard() {
           Decision Support System Layer
         </div>
         <h2 style={{ margin: '4px 0 0', fontSize: '20px', fontWeight: 800, color: '#1A3A52' }}>
-          Climate-Disease Outbreak Optimization &amp; Safety Stocks
+          Historical Climate-Disease Planning Scenarios
         </h2>
       </div>
 

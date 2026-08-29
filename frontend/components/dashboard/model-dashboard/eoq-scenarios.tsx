@@ -30,13 +30,13 @@ export function EoqScenarios({ eoq }: EoqScenariosProps) {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
         <div>
           <h3 style={{ fontSize: '14px', fontWeight: 800, color: '#1a3a52', marginBottom: '2px' }}>
-            Continuous EOQ Procurement Plan &amp; Reorder Points
+            Draft EOQ and Reorder-Point Scenario
           </h3>
           <p style={{ fontSize: '11px', color: '#64748B' }}>
-            Formula: <code>{eoq.formula}</code> | Lead time order cost: ₱{eoq.assumptions?.setup_cost_php?.toLocaleString()}
+            Formula: <code>{eoq.formula}</code> | Assumed order cost: ₱{eoq.assumptions?.ordering_cost_php?.toLocaleString()}
           </p>
         </div>
-        <span className="status-pill status-ready">MODEL ACTIVE</span>
+        <span className="status-pill status-draft">SCENARIO - REVIEW REQUIRED</span>
       </div>
 
       <table className="product-table">

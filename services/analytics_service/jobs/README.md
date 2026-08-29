@@ -1,5 +1,40 @@
 # Analytics Jobs
 
+## Dataset Certification Candidate
+
+Run:
+
+```powershell
+python -m services.analytics_service.jobs.certify_sales_dataset
+```
+
+This reads all nine yearly CSV files together so cross-file duplicates and the
+2018-dated rows inside the 2019 source are evaluated without replacing either
+source. It writes a versioned manifest, reconciliation report, and ignored
+compressed audit candidate under `data/medshield/certification/`. The output is
+blocked from publication until P2 financial reconciliation and formal reviewer
+approval are complete.
+
+Then run the P2 financial comparison:
+
+```powershell
+python -m services.analytics_service.jobs.reconcile_financial_metrics
+```
+
+This compares both plausible source-column mappings against workbook
+`net_income`, emits row-level financial-quality flags, and keeps dashboard
+financial publication blocked until the business/finance owner approves the
+field semantics and mismatch disposition.
+
+Build the P3 master-data candidates and coverage report:
+
+```powershell
+python -m services.analytics_service.jobs.build_master_data_candidates
+```
+
+Only explicitly approved mappings can enable product forecasting or territory
+weather joins. Proposed, needs-review, and unmapped values remain blocked.
+
 This folder contains repeatable local jobs for the MedShield model computation workflow.
 
 ## Descriptive Analytics

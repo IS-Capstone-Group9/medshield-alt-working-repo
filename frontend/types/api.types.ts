@@ -64,7 +64,15 @@ export type ModelEvaluation = {
   notes: string
 }
 
+export type DashboardDataStatus = {
+  source: 'analytics_services' | 'bundled_fallback'
+  mode: 'historical' | 'demo'
+  loaded_at: string
+  message: string
+}
+
 export type DashboardData = {
+  dataStatus: DashboardDataStatus
   summary: Summary
   monthly: MonthlyPoint[]
   byArea: AreaPoint[]

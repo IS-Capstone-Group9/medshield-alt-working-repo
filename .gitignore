@@ -58,6 +58,9 @@ frontend/playwright-report/
 data/medshield/uploads/
 data/medshield/processed/sales_transactions_medical_demand.json.gz
 data/medshield/processed/sales_transactions_non_medical_excluded.json.gz
+data/medshield/certification/*_candidate.json.gz
+data/medshield/certification/*_financial_flags.json.gz
+data/medshield/certification/*_master_candidate.csv
 outputs/medical_demand_cleaning_*/
 
 # Obsolete local export superseded by complete yearly daily CSVs

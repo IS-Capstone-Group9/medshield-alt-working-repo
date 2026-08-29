@@ -1,0 +1,29 @@
+{
+  "dataset_id": "sales_2017_2025_v1",
+  "generated_at": "2026-08-29T07:47:13.047390+00:00",
+  "governance_status": "blocked_pending_master_data_approval",
+  "product_master": {
+    "unique_raw_products": 4696,
+    "mapped_products": 5,
+    "approved_products": 0,
+    "forecast_eligible_products": 0,
+    "approved_row_coverage": 0.0,
+    "candidate_file": "sales_2017_2025_v1_product_master_candidate.csv"
+  },
+  "area_master": {
+    "unique_raw_areas": 19,
+    "mapped_areas": 15,
+    "approved_areas": 7,
+    "approved_territories": 7,
+    "weather_eligible_areas": 7,
+    "approved_row_coverage": 0.495388,
+    "candidate_file": "sales_2017_2025_v1_area_master_candidate.csv"
+  },
+  "blocking_items": [
+    "Approve canonical SKU aliases and medicine classifications.",
+    "Complete generic name, strength, dosage form, and pack-size mappings.",
+    "Approve every territory/customer/business-line classification.",
+    "Require pharmacy or clinical review before medicine forecast eligibility.",
+    "Publish unmapped-value disposition and reviewer identity."
+  ]
+}
