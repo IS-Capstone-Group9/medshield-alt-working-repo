@@ -118,11 +118,11 @@ The pipeline applies `AREA_STANDARDIZATION` to normalize raw area strings before
 | LAGASPI, LEGAZPI | Legaspi | geographic |
 | LOWER CAVITE | Cavite | geographic |
 | SUPPLLIES | Supplies | non_geographic |
-| EASTERN | East | geographic |
+| EAST, EASTERN | Quezon | geographic |
 
 ### Geographic Territories (weather/disease model eligible)
 
-Batangas, Camarines Norte, Camarines Sur, Cavite, Laguna, Marinduque, Metro Manila, Quezon, Rizal, Albay, Bicol, Legaspi, Mindoro, Lucena, East
+Batangas, Camarines Norte, Camarines Sur, Cavite, Laguna, Marinduque, Metro Manila, Quezon, Rizal, Albay, Bicol, Legaspi, Mindoro, Lucena
 
 ### Non-Geographic Labels (sales analytics only)
 

@@ -512,8 +512,8 @@
     },
     {
       "area": "Quezon",
-      "revenue": 10270601.85,
-      "income": 19188467.87
+      "revenue": 10338157.45,
+      "income": 19298424.77
     },
     {
       "area": "Batangas",
@@ -579,11 +579,6 @@
       "area": "Mindoro",
       "revenue": 136792.46,
       "income": 88481.54
-    },
-    {
-      "area": "East",
-      "revenue": 67555.6,
-      "income": 109956.9
     },
     {
       "area": "Losses",
