@@ -400,7 +400,7 @@ function canonicalTerritoryProvince(name) {
 function getDashboardTerritoryRows() {
   var source = getYearAreaSource();
   var provinceTotals = {};
-
+  
   (Array.isArray(source) ? source : []).forEach(function(row) {
     if (!row || !row.area) return;
     var prov = canonicalTerritoryProvince(row.area);
@@ -457,7 +457,7 @@ function updateAreaChartHeaders() {
 function getDynamicClusterRows() {
   var yr = getActiveDashboardYear();
   var territories = getDashboardTerritoryRows();
-
+  
   if (!territories.length) {
     return [
       { cluster: 'Tier 1 - High Volume', areas: 'Quezon, Batangas', profile: 'Primary provincial volume hubs', implication: 'Pre-allocate critical therapeutic safety stock' },
