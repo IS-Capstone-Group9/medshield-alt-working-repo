@@ -6,6 +6,7 @@ import {
   buildRollingForecastWindow,
   filterForecastRowsToWindow,
   resolveForecastCurrentMonth,
+  resolveForecastCurrentYear,
   resolveRollingForecastWindow,
 } from '../services/api/dashboard-forecast-window.ts'
 
@@ -69,6 +70,18 @@ test('metadata current month wins over browser month when available', () => {
   )
 
   assert.equal(currentMonth, '2026-09')
+})
+
+test('current analytical year is derived from forecast metadata', () => {
+  const currentYear = resolveForecastCurrentYear(
+    {
+      current_month: '2026-08',
+      forecast_window: { start: '2026-08', end: '2027-07', months: 12 },
+    },
+    new Date('2025-12-31T00:00:00+08:00'),
+  )
+
+  assert.equal(currentYear, '2026')
 })
 
 test('browser month is used when metadata is unavailable', () => {
