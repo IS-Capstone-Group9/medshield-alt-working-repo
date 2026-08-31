@@ -1,0 +1,26 @@
+bundle:
+  name: medshield_data_cleaning
+
+include:
+  - resources/*.yml
+
+variables:
+  catalog:
+    description: Unity Catalog catalog used by the MedShield pipeline.
+    default: workspace
+  year_min:
+    description: Minimum accepted delivery year.
+    default: 2017
+  year_max:
+    description: Maximum accepted delivery year.
+    default: 2025
+  financial_tolerance:
+    description: Peso tolerance for row-level financial reconciliation.
+    default: 0.02
+
+targets:
+  dev:
+    default: true
+    mode: development
+    workspace:
+      root_path: /Workspace/Users/${workspace.current_user.userName}/.bundle/${bundle.name}/${bundle.target}

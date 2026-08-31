@@ -67,10 +67,10 @@ Because operating expense data is not available, analytics must label `net_incom
 Use these preparation documents before model training:
 
 - `docs/BUSINESS_DEFINITIONS.md`
-- `docs/2025_DATA_ISSUE_REMEDIATION.md`
-- `docs/SKU_ALIAS_MAPPING_PLAN.md`
+- `databricks/docs/2025_DATA_ISSUE_REMEDIATION.md`
+- `databricks/docs/SKU_ALIAS_MAPPING_PLAN.md`
 - `docs/MODEL_LIBRARIES_AND_ORCHESTRATION.md`
-- `docs/AREA_SUMMARY_BACKWARD_ALLOCATION.md`
+- `databricks/docs/AREA_SUMMARY_BACKWARD_ALLOCATION.md`
 - `docs/DASHBOARD_MODEL_PUBLICATION_GUIDE.md`
 
 For product-level analysis, use `data/medshield/processed/sales_transactions_area_allocated.json.gz` when contract-name rows such as `PAGBILAO # ...` or `QMC # ...` would otherwise be treated as product names. The adjusted dataset preserves source totals but marks estimated child rows with `allocation_status = estimated_backward_allocation`.

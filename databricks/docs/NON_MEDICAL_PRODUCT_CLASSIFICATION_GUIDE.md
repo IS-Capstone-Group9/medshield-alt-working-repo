@@ -60,7 +60,7 @@ For each reviewed product, update the product master with:
 
 Do not include non-medical products in disease/weather pharmaceutical demand models unless the group explicitly approves a separate business-supplies model.
 
-Use `docs/MEDICAL_DEMAND_CLEANING_WORKFLOW.md` for the complete pipeline order: standard sales cleaning, backward approximation, product classification, medical-only filtering, and exclusion audit.
+Use `databricks/docs/MEDICAL_DEMAND_CLEANING_WORKFLOW.md` for the complete pipeline order: standard sales cleaning, backward approximation, product classification, medical-only filtering, and exclusion audit.
 
 Recommended split:
 

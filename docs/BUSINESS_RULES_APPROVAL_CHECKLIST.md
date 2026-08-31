@@ -29,7 +29,7 @@ Use this checklist before running final models or writing final Chapter 4 and Ch
 5. Approve mappings for A-class or high-revenue products first.
 6. Open `datasources/templates/area_classification_mapping.csv`.
 7. Approve which values are territories, customer types, and business lines.
-8. Open `docs/2025_DATA_ISSUE_REMEDIATION.md`.
+8. Open `databricks/docs/2025_DATA_ISSUE_REMEDIATION.md`.
 9. Decide whether 2025 is complete enough for model testing.
 
 ## Acceptance Criteria

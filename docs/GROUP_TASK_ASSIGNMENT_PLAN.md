@@ -9,7 +9,7 @@ This plan splits the remaining MedShield capstone work across four group members
 | Rule | Required action |
 |---|---|
 | One owner per task | Each workstream has one accountable owner even when others help. |
-| Work from source documents | Use `docs/BUSINESS_DEFINITIONS.md`, `docs/SKU_ALIAS_MAPPING_PLAN.md`, `docs/2025_DATA_ISSUE_REMEDIATION.md`, and `docs/NORTH_STAR_EXECUTION_BLUEPRINT.md` before changing logic. |
+| Work from source documents | Use `docs/BUSINESS_DEFINITIONS.md`, `databricks/docs/SKU_ALIAS_MAPPING_PLAN.md`, `databricks/docs/2025_DATA_ISSUE_REMEDIATION.md`, and `docs/NORTH_STAR_EXECUTION_BLUEPRINT.md` before changing logic. |
 | Keep raw data separate | Put raw uploads in `data/medshield/raw/`; generated cleaned files belong in `data/medshield/processed/` or `outputs/`. |
 | Historical only | The system should be described as historical decision-support, not live forecasting or alerting. |
 | Every output needs evidence | Screenshots, CSV summaries, QA reports, model metrics, and limitations must be saved for Chapter 4. |
@@ -34,9 +34,9 @@ Primary outcome: the datasets and model outputs are clean, reproducible, and def
 | Task | Specific work | Files or outputs | Acceptance criteria |
 |---|---|---|---|
 | Sales data QA | Verify yearly sales rows, missing products, missing area allocations, invalid dates, duplicate rows, and totals after contract-name breakdown. | `data/medshield/raw/sales/`, `data/medshield/processed/`, `outputs/` | Clean sales totals reconcile to source totals by year. |
-| Contract-name breakdown | Maintain the semi-raw layer where `#` contract names are allocated backward into estimated product rows. | `docs/SALES_DATA_LAYER_FLOW.md`, generated sales CSVs | Breakdown rows are documented and total value remains unchanged. |
-| Product master and SKU aliases | Fill duplicate product/SKU mapping using controlled aliases. | `datasources/templates/product_master_mapping.csv`, `docs/SKU_ALIAS_MAPPING_PLAN.md` | Dashboard and model logic use one canonical product identity. |
-| DOH and PAGASA preparation | When uploaded, clean DOH 2021-2025 and PAGASA 2021-2024 into consistent historical CSVs with source/provenance columns. | `data/medshield/raw/`, cleaned external CSVs, `docs/EXTERNAL_DATA_PREPARATION_GUIDE.md` | Every external row has date, geography, metric fields, source, and notes. |
+| Contract-name breakdown | Maintain the semi-raw layer where `#` contract names are allocated backward into estimated product rows. | `databricks/docs/SALES_DATA_LAYER_FLOW.md`, generated sales CSVs | Breakdown rows are documented and total value remains unchanged. |
+| Product master and SKU aliases | Fill duplicate product/SKU mapping using controlled aliases. | `datasources/templates/product_master_mapping.csv`, `databricks/docs/SKU_ALIAS_MAPPING_PLAN.md` | Dashboard and model logic use one canonical product identity. |
+| DOH and PAGASA preparation | When uploaded, clean DOH 2021-2025 and PAGASA 2021-2024 into consistent historical CSVs with source/provenance columns. | `data/medshield/raw/`, cleaned external CSVs, `databricks/docs/EXTERNAL_DATA_PREPARATION_GUIDE.md` | Every external row has date, geography, metric fields, source, and notes. |
 | Model computation | Run model jobs only from cleaned/published data. Save metrics and charts for Chapter 4. | `docs/MODEL_COMPUTATION_START_REPORT.md`, model outputs | Outputs include method, parameters, period covered, metrics, and limitations. |
 
 ## Member 3: Backend, Database, and API Owner

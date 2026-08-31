@@ -26,7 +26,8 @@ Capstone workspace for the MedShield Pharma Corp. business analytics system.
 | [docs/IMPLEMENTATION.md](docs/IMPLEMENTATION.md) | Chapter 4 implementation draft |
 | [docs/CHAPTER_3_METHODOLOGY_GUIDE.md](docs/CHAPTER_3_METHODOLOGY_GUIDE.md) | CRISP-DM + SEMMA methodology guide for Chapter 3 |
 | [docs/BUSINESS_RULES_APPROVAL_CHECKLIST.md](docs/BUSINESS_RULES_APPROVAL_CHECKLIST.md) | Group approval checklist for KPI, SKU, 2025, and scenario rules |
-| [docs/EXTERNAL_DATA_PREPARATION_GUIDE.md](docs/EXTERNAL_DATA_PREPARATION_GUIDE.md) | PAGASA, DOH, and weather API cleaning guide |
+| [databricks/README.md](databricks/README.md) | Databricks notebooks, PySpark code, SQL, tests, and data-cleaning documentation |
+| [databricks/docs/EXTERNAL_DATA_PREPARATION_GUIDE.md](databricks/docs/EXTERNAL_DATA_PREPARATION_GUIDE.md) | PAGASA, DOH, and weather API cleaning guide |
 | [docs/CHAPTER_4_5_EVIDENCE_PLAN.md](docs/CHAPTER_4_5_EVIDENCE_PLAN.md) | Chapter 4 and Chapter 5 evidence checklist |
 | [docs/GROUP_TASK_ASSIGNMENT_PLAN.md](docs/GROUP_TASK_ASSIGNMENT_PLAN.md) | Four-member work allocation and handoff plan |
 | [docs/DEVOPS_DOCKER_SONARQUBE.md](docs/DEVOPS_DOCKER_SONARQUBE.md) | Docker Compose and local SonarQube runbook |
