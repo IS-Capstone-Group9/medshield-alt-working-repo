@@ -224,6 +224,53 @@ export function getExecutableDashboardScript(): string {
       "createChart('revenueDetailChart', { plugins: [revenueDetailProgressPlugin],"
     )
     .replaceAll(
+      "DATA.top_products.slice(0, 10)",
+      "getYearProductRows().slice(0, 10)"
+    )
+    .replaceAll(
+      "DATA.top_products.filter((row)",
+      "getYearProductRows().filter((row)"
+    )
+    .replaceAll(
+      "DATA.seasonality.map((row) => row.month)",
+      "getSeasonalityRowsForMode().map((row) => row.month)"
+    )
+    .replaceAll(
+      "DATA.seasonality.map((row) => row.avg_revenue)",
+      "getSeasonalityRowsForMode().map((row) => row.avg_revenue)"
+    )
+    .replaceAll(
+      "DATA.seasonality.map((_, index)",
+      "getSeasonalityRowsForMode().map((_, index)"
+    )
+    .replace(
+      `const trend2025 = DATA.monthly.filter((row) => row.period.startsWith('2025')).map((row) => row.revenue);
+  const forecast2026 = trend2025.map((value, index) => Math.round(value * (1.04 + (index * 0.012))));
+  const upper2026 = forecast2026.map((value) => Math.round(value * 1.15));
+  const lower2026 = forecast2026.map((value) => Math.round(value * 0.87));
+  const forecastLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];`,
+      `const forecastSourceRows = selectedYear === 'all' ? DATA.monthly.slice(-12) : DATA.monthly.filter((row) => row.period.startsWith(selectedYear + '-'));
+  const forecastYearLabel = selectedYear === 'all' ? 'Rolling' : selectedYear;
+  const trend2025 = forecastSourceRows.map((row) => row.revenue);
+  const forecast2026 = trend2025.map((value, index) => Math.round(value * (1.04 + (index * 0.012))));
+  const upper2026 = forecast2026.map((value) => Math.round(value * 1.15));
+  const lower2026 = forecast2026.map((value) => Math.round(value * 0.87));
+  const forecastLabels = forecastSourceRows.map((row) => selectedYear === 'all' ? monthLabel(row.period) : monthLabel(row.period).split(' ')[0]);`
+    )
+    .replace(
+      "label: '2026 Forecast',",
+      "label: forecastYearLabel + ' Revenue Profile',"
+    )
+    .replace(
+      `const abcTotals = ['A', 'B', 'C'].map((bucket) =>
+    DATA.top_products.filter((row) => row.abc === bucket).reduce((sum, row) => sum + row.revenue, 0)
+  );`,
+      `const productRowsForMode = getYearProductRows();
+  const abcTotals = ['A', 'B', 'C'].map((bucket) =>
+    productRowsForMode.filter((row) => row.abc === bucket).reduce((sum, row) => sum + row.revenue, 0)
+  );`
+    )
+    .replaceAll(
       "DATA.by_area.map((row) => row.area)",
       "getDashboardTerritoryRows().map((row) => row.area)"
     )
@@ -330,6 +377,22 @@ function getYearProductRows() {
     });
   });
   return rows;
+}
+
+function getSeasonalityRowsForMode() {
+  if (typeof DATA === 'undefined' || !DATA) return [];
+  var yr = getActiveDashboardYear();
+  if (yr === 'all' || !yr) return Array.isArray(DATA.seasonality) ? DATA.seasonality : [];
+
+  var monthlyRows = (DATA.monthly || []).filter(function(row) {
+    return row.period && String(row.period).startsWith(String(yr) + '-') && Number(row.revenue) >= 0;
+  });
+  if (monthlyRows.length > 0) {
+    return monthlyRows.map(function(row) {
+      return { month: monthLabel(row.period).split(' ')[0], avg_revenue: Number(row.revenue) || 0 };
+    });
+  }
+  return Array.isArray(DATA.seasonality) ? DATA.seasonality : [];
 }
 
 const DASHBOARD_TERRITORY_LABELS = new Set([
