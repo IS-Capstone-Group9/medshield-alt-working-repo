@@ -159,6 +159,40 @@ function assignSalesDiagnosticsContent(root: HTMLElement) {
   sections.forEach((section) => deepDive?.appendChild(section))
 }
 
+function updateAreaSegmentationLabels(root: HTMLElement) {
+  const updates = [
+    {
+      canvasId: 'areaBarChart',
+      title: 'Revenue by Geographic Territory',
+      subtitle: 'Approved place-based territories only; customer/channel labels excluded',
+      badge: 'Territories',
+    },
+    {
+      canvasId: 'areaIncomeChart',
+      title: 'Gross Margin by Customer Channel',
+      subtitle: 'Government, Hospital, and Pharma grouped as customer/channel labels',
+      badge: 'Channels',
+    },
+    {
+      canvasId: 'areaMarginChart',
+      title: 'Business-Line Margin Mix',
+      subtitle: 'Admin, Supplies, Equipment, Personal, and Losses kept outside territory ranking',
+      badge: 'Business Lines',
+    },
+  ]
+
+  for (const update of updates) {
+    const card = root.querySelector(`#${update.canvasId}`)?.closest<HTMLElement>('.chart-card')
+    if (!card) continue
+    const title = card.querySelector<HTMLElement>('.chart-title')
+    const subtitle = card.querySelector<HTMLElement>('.chart-subtitle')
+    const badge = card.querySelector<HTMLElement>('.chart-badge')
+    if (title) title.textContent = update.title
+    if (subtitle) subtitle.textContent = update.subtitle
+    if (badge) badge.textContent = update.badge
+  }
+}
+
 export function enhanceDashboardContent(root: HTMLElement) {
   // MedShield is intentionally light-only. Clear any legacy preference so a
   // previously stored dark theme cannot leave the user in an unsupported mode.
@@ -171,6 +205,7 @@ export function enhanceDashboardContent(root: HTMLElement) {
   }
 
   replaceUnsupportedLabels(root)
+  updateAreaSegmentationLabels(root)
 
   const navigation = root.querySelector('.nav')
   if (navigation) {

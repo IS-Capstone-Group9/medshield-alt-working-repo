@@ -81,6 +81,37 @@ export function getExecutableDashboardScript(): string {
       "const sortedProductRows = getSortedProductRows();",
       "const sortedProductRows = getSortedProductRows();"
     )
+    .replace(
+      "if (patch.by_area) DATA.by_area = normalizeAreaRows(patch.by_area);",
+      `if (patch.by_area) DATA.by_area = normalizeAreaRows(patch.by_area);
+  if (patch.by_territory) DATA.by_territory = normalizeAreaRows(patch.by_territory);
+  if (patch.by_channel) DATA.by_channel = normalizeAreaRows(patch.by_channel);
+  if (patch.by_business_line) DATA.by_business_line = normalizeAreaRows(patch.by_business_line);`
+    )
+    .replaceAll(
+      "DATA.by_area.map((row) => row.area)",
+      "getDashboardTerritoryRows().map((row) => row.area)"
+    )
+    .replaceAll(
+      "DATA.by_area.map((row) => row.revenue)",
+      "getDashboardTerritoryRows().map((row) => row.revenue)"
+    )
+    .replace(
+      "const topAreaRevenue = (DATA.by_area.length ? DATA.by_area : MOCK_BY_AREA).slice().sort((a, b) => b.revenue - a.revenue).slice(0, 10);",
+      "const topAreaRevenue = getDashboardTerritoryRows().slice().sort((a, b) => b.revenue - a.revenue).slice(0, 10);"
+    )
+    .replace(
+      "const topAreaIncome = (DATA.by_area.length ? DATA.by_area : MOCK_BY_AREA).slice().sort((a, b) => b.income - a.income).slice(0, 10);",
+      "const topAreaIncome = getDashboardChannelRows().slice().sort((a, b) => b.income - a.income).slice(0, 10);"
+    )
+    .replace(
+      "label: 'Net Income',\\n        data: topAreaIncome.map((row) => row.income),",
+      "label: 'Gross Margin',\\n        data: topAreaIncome.map((row) => row.income),"
+    )
+    .replace(
+      "const topAreaMargin = (DATA.by_area.length ? DATA.by_area : MOCK_BY_AREA).slice().sort((a, b) => b.revenue - a.revenue).slice(0, 10);",
+      "const topAreaMargin = getDashboardBusinessLineRows().slice().sort((a, b) => b.revenue - a.revenue).slice(0, 10);"
+    )
 
   // Robust closing of the (async () => { ... })() IIFE block before utility functions
   if (patchedScript.includes("});\n\nif (typeof window !== 'undefined')")) {
@@ -118,6 +149,51 @@ function getSortedProductRows() {
     if (a[k] > b[k]) return 1 * dir;
     return 0;
   });
+}
+
+const DASHBOARD_TERRITORY_LABELS = new Set([
+  'BATANGAS', 'QUEZON', 'MARINDUQUE', 'CAMARINES NORTE', 'CAM NORTE',
+  'CAMARINES SUR', 'CAM SUR', 'CAVITE', 'LOWER CAVITE', 'LAGUNA',
+  'METRO MANILA', 'NCR', 'RIZAL', 'ALBAY', 'BICOL', 'LEGASPI',
+  'LEGAZPI', 'MINDORO', 'LUCENA', 'EAST', 'EASTERN'
+]);
+const DASHBOARD_CHANNEL_LABELS = new Set(['GOVERNMENT', 'HOSPITAL', 'PHARMA']);
+const DASHBOARD_BUSINESS_LINE_LABELS = new Set(['ADMIN', 'SUPPLIES', 'EQUIPMENT', 'PERSONAL', 'LOSSES']);
+
+function dashboardAreaKey(row) {
+  return String(row && row.area ? row.area : '').trim().toUpperCase();
+}
+
+function sortedDashboardAreaRows(rows, key) {
+  const metric = key || 'revenue';
+  return (Array.isArray(rows) ? rows : [])
+    .filter(function(row) {
+      return row && row.area && typeof row.revenue === 'number' && typeof row.income === 'number';
+    })
+    .slice()
+    .sort(function(left, right) {
+      return (right[metric] || 0) - (left[metric] || 0);
+    });
+}
+
+function dashboardRowsOrDerived(field, labels) {
+  if (typeof DATA === 'undefined' || !DATA) return [];
+  if (Array.isArray(DATA[field]) && DATA[field].length) return DATA[field];
+  return (Array.isArray(DATA.by_area) ? DATA.by_area : []).filter(function(row) {
+    return labels.has(dashboardAreaKey(row));
+  });
+}
+
+function getDashboardTerritoryRows() {
+  return sortedDashboardAreaRows(dashboardRowsOrDerived('by_territory', DASHBOARD_TERRITORY_LABELS), 'revenue');
+}
+
+function getDashboardChannelRows() {
+  return sortedDashboardAreaRows(dashboardRowsOrDerived('by_channel', DASHBOARD_CHANNEL_LABELS), 'income');
+}
+
+function getDashboardBusinessLineRows() {
+  return sortedDashboardAreaRows(dashboardRowsOrDerived('by_business_line', DASHBOARD_BUSINESS_LINE_LABELS), 'revenue');
 }
 
 function renderTable(id, html) {
