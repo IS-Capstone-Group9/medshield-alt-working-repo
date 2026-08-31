@@ -16,7 +16,7 @@ from datetime import datetime, timezone
 from typing import Any
 
 import requests
-from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.security import check_password_hash
 from dotenv import load_dotenv
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -148,37 +148,6 @@ def _serialize_account(account: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def _next_local_account_id(accounts: list[dict[str, Any]]) -> int:
-    if not accounts:
-        return 1
-    return max(int(account.get("account_id", 0)) for account in accounts) + 1
-
-
-def local_create_account(username: str, email: str, password: str, role: str = "viewer") -> dict[str, Any]:
-    now = datetime.now(timezone.utc).isoformat()
-    with LOCAL_AUTH_LOCK:
-        accounts = _load_local_accounts()
-        if any(account.get("username") == username for account in accounts):
-            return {"error": "Username already taken"}
-        if any(account.get("email") == email for account in accounts):
-            return {"error": "Email already registered"}
-
-        account = _serialize_account({
-            "account_id": _next_local_account_id(accounts),
-            "username": username,
-            "email": email,
-            "password_hash": generate_password_hash(password),
-            "role": role,
-            "is_active": True,
-            "last_login_at": None,
-            "created_at": now,
-            "updated_at": now,
-        })
-        accounts.append(account)
-        _save_local_accounts(accounts)
-        return account
-
-
 def local_verify_login(username: str, password: str) -> dict[str, Any] | None:
     with LOCAL_AUTH_LOCK:
         accounts = _load_local_accounts()
@@ -274,39 +243,6 @@ def auth_login():
     if user.get("error") == "Account is disabled":
         return jsonify({"error": "Account is disabled"}), 403
     return jsonify(user)
-
-
-@app.route("/api/auth/signup", methods=["POST", "OPTIONS"])
-def auth_signup():
-    if request.method == "OPTIONS":
-        return jsonify({}), 200
-    body = request.get_json(force=True, silent=True) or {}
-    username = (body.get("username") or "").strip()
-    email = (body.get("email") or "").strip()
-    password = (body.get("password") or "").strip()
-
-    if not username or not email or not password:
-        return jsonify({"error": "Username, email and password are required"}), 400
-
-    if len(password) < 8:
-        return jsonify({"error": "Password must be at least 8 characters"}), 400
-
-    if supabase_enabled():
-        return jsonify({
-            "error": "Account creation is restricted to MedShield administrators.",
-            "code": "ADMIN_MANAGED_ACCOUNT_CREATION",
-        }), 403
-
-    result = local_create_account(username, email, password)
-    if result.get("error"):
-        return jsonify({"error": result["error"]}), 409
-    return jsonify({
-        "account_id": result["account_id"],
-        "username": result["username"],
-        "email": result["email"],
-        "role": result["role"],
-        "message": "Account created successfully",
-    }), 201
 
 
 @app.route("/api/health", methods=["GET"])

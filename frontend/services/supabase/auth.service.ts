@@ -54,36 +54,6 @@ export async function completePasswordReset(
   }
 }
 
-export async function authSignup(
-  username: string,
-  email: string,
-  password: string
-): Promise<{ ok: boolean; error?: string }> {
-  if (isSupabaseBrowserConfigured()) {
-    try {
-      const supabase = createClient()
-      const { error } = await supabase.auth.signUp({ email, password, options: { data: { username } } })
-      if (error) return { ok: false, error: error.message }
-      return { ok: true }
-    } catch {
-      return { ok: false, error: 'Cannot connect to Supabase Auth' }
-    }
-  }
-
-  try {
-    const res = await fetch(`${API_BASE}/api/auth/signup`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, email, password }),
-    })
-    const data = await res.json()
-    if (!res.ok) return { ok: false, error: data.error || 'Signup failed' }
-    return { ok: true }
-  } catch {
-    return { ok: false, error: 'Cannot connect to server' }
-  }
-}
-
 export async function authLogout(accessToken: string | null): Promise<void> {
   if (isSupabaseBrowserConfigured()) {
     const supabase = createClient()

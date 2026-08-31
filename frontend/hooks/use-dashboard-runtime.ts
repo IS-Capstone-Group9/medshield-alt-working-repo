@@ -9,8 +9,10 @@ import {
 import { enhanceDashboardContent } from '@/services/api/dashboard-enhancements'
 import { installDashboardEnhancements } from '@/services/api/dashboard-enhancement-listeners'
 import { refreshDashboardFromGateway } from '@/services/api/dashboard-interactions'
+import { hydrateSidebarAccountCard } from '@/lib/sidebar-account-card'
+import type { User } from '@/lib/auth-tokens'
 
-export function useDashboardRuntime(onLogout: () => Promise<void>) {
+export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | null) {
   const rootRef = useRef<HTMLDivElement>(null)
   const [portalContainer, setPortalContainer] = useState<HTMLElement | null>(null)
   const [isLoggingOut, setIsLoggingOut] = useState(false)
@@ -48,6 +50,7 @@ export function useDashboardRuntime(onLogout: () => Promise<void>) {
 
     root.innerHTML = MEDSHIELD_MARKUP
     enhanceDashboardContent(root)
+    hydrateSidebarAccountCard(root, user)
 
     runDashboardScript(getExecutableDashboardScript())
       .then((listeners) => {

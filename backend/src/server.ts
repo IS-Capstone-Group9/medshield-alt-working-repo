@@ -7,7 +7,7 @@ import cors from 'cors'
 import express, { NextFunction, Request, Response } from 'express'
 import rateLimit from 'express-rate-limit'
 
-import { createLocalAccount, verifyLocalLogin } from './localAuth'
+import { verifyLocalLogin } from './localAuth'
 import { startPythonServices } from './pythonServices'
 import { createSession, revokeSessionToken, SessionUser, verifySessionToken } from './sessionAuth'
 import { loadSnapshot } from './snapshot'
@@ -21,8 +21,11 @@ import {
 function loadEnvironment(): void {
   const candidates = [
     process.env.MEDSHIELD_ENV_FILE,
-    path.resolve(__dirname, '..', '..', '.env'),
+    // Prefer the backend-specific file so server-only secrets are loaded when
+    // a repository-level .env also exists.
+    path.resolve(__dirname, '..', '.env'),
     path.resolve(process.cwd(), '.env'),
+    path.resolve(__dirname, '..', '..', '.env'),
   ].filter((entry): entry is string => Boolean(entry))
 
   for (const candidate of candidates) {
@@ -143,7 +146,11 @@ async function supabaseDbFetch(
 
   const headers = new globalThis.Headers(init.headers)
   headers.set('apikey', serviceRoleKey)
-  headers.set('Authorization', `Bearer ${serviceRoleKey}`)
+  // Supabase secret keys authenticate through apikey only; legacy
+  // service-role JWTs still need the Authorization header.
+  if (!serviceRoleKey.startsWith('sb_secret_')) {
+    headers.set('Authorization', `Bearer ${serviceRoleKey}`)
+  }
   headers.set('Accept-Profile', schema)
   headers.set('Content-Profile', schema)
   if (!headers.has('Content-Type') && init.body) {
@@ -552,7 +559,6 @@ app.post('/api/weather/refresh', requireAuth, async (req: Request, res: Response
 })
 
 app.options('/api/auth/login', (_req: Request, res: Response) => res.json({}))
-app.options('/api/auth/signup', (_req: Request, res: Response) => res.json({}))
 app.options('/api/auth/me', (_req: Request, res: Response) => res.json({}))
 app.options('/api/auth/logout', (_req: Request, res: Response) => res.json({}))
 app.options('/api/auth/complete-password-reset', (_req: Request, res: Response) => res.json({}))
@@ -583,7 +589,8 @@ app.post('/api/auth/logout', requireAuthDuringPasswordReset, (req: Authenticated
 
 app.post('/api/auth/login', authLoginLimiter, async (req: Request, res: Response) => {
   const username = String(req.body?.username ?? '').trim()
-  const password = String(req.body?.password ?? '').trim()
+  // Passwords are opaque credentials; trimming would change valid leading or trailing spaces.
+  const password = typeof req.body?.password === 'string' ? req.body.password : ''
   const remember = Boolean(req.body?.remember)
 
   if (!username || !password) {
@@ -668,43 +675,6 @@ app.post(
     }
   },
 )
-
-app.post('/api/auth/signup', async (req: Request, res: Response) => {
-  const username = String(req.body?.username ?? '').trim()
-  const email = String(req.body?.email ?? '').trim()
-  const password = String(req.body?.password ?? '').trim()
-
-  if (!username || !email || !password) {
-    return res.status(400).json({ error: 'Username, email and password are required' })
-  }
-
-  const passwordComplexityRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/
-  if (!passwordComplexityRegex.test(password)) {
-    return res.status(400).json({
-      error: 'Password must be at least 8 characters long, contain an uppercase letter, a lowercase letter, a number, and a special character.'
-    })
-  }
-
-  if (supabaseEnabled()) {
-    return res.status(403).json({
-      error: 'Account creation is restricted to MedShield administrators.',
-      code: 'ADMIN_MANAGED_ACCOUNT_CREATION',
-    })
-  }
-
-  const result = await createLocalAccount({ username, email, password, role: 'viewer' })
-  if (result.error) {
-    return res.status(409).json({ error: result.error })
-  }
-
-  return res.status(201).json({
-    account_id: result.account?.account_id,
-    username: result.account?.username,
-    email: result.account?.email,
-    role: result.account?.role,
-    message: 'Account created successfully',
-  })
-})
 
 app.get('/api/classify_medicine', async (req: Request, res: Response) => {
   const name = String(req.query.name ?? '').trim()

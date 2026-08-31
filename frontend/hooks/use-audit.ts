@@ -15,7 +15,7 @@ export function useAudit() {
   const [audit, setAudit] = useState<AuditState>({
     isOpen: false,
     actionType: '',
-    operator: 'Supply Planner (Level 2)',
+    operator: 'Authenticated User',
     previousValue: '',
     newValue: '',
     timestamp: '',
@@ -34,7 +34,7 @@ export function useAudit() {
     setAudit({
       isOpen: true,
       actionType,
-      operator: 'Supply Planner (Level 2)',
+      operator: 'Authenticated User',
       previousValue: prevVal,
       newValue: newVal,
       timestamp: new Date().toISOString(),

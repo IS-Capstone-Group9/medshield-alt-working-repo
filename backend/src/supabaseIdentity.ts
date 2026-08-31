@@ -52,7 +52,11 @@ async function authFetch(pathName: string, init: RequestInit, useServerSecret = 
   const key = useServerSecret ? serverSecret : publishableKey
   const headers = new Headers(init.headers)
   headers.set('apikey', key)
-  if (useServerSecret) headers.set('Authorization', `Bearer ${key}`)
+  // Modern sb_secret keys are opaque and must not be sent as Bearer JWTs.
+  // Legacy service-role JWTs still need Authorization for backwards compatibility.
+  if (useServerSecret && !key.startsWith('sb_secret_')) {
+    headers.set('Authorization', `Bearer ${key}`)
+  }
   if (init.body && !headers.has('Content-Type')) headers.set('Content-Type', 'application/json')
   return fetch(`${url}/auth/v1${pathName}`, { ...init, headers })
 }
@@ -62,7 +66,9 @@ async function identityDbFetch(pathName: string, init: RequestInit) {
   if (!serverSecret) throw new SupabaseServerSecretMissingError()
   const headers = new Headers(init.headers)
   headers.set('apikey', serverSecret)
-  headers.set('Authorization', `Bearer ${serverSecret}`)
+  if (!serverSecret.startsWith('sb_secret_')) {
+    headers.set('Authorization', `Bearer ${serverSecret}`)
+  }
   headers.set('Accept-Profile', 'medshield_identity')
   headers.set('Content-Profile', 'medshield_identity')
   if (init.body && !headers.has('Content-Type')) headers.set('Content-Type', 'application/json')

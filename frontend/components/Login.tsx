@@ -122,25 +122,17 @@ export default function Login({ onLoginSuccess, initialMessage }: LoginProps) {
               </button>
             </div>
 
-            {/* Side-by-side Action Buttons */}
+            {/* Login action */}
             <div className="login-buttons-row">
               <button className="login-btn-primary" type="submit" disabled={f.loginLoading}>
                 {f.loginLoading ? 'Logging in...' : 'Login'}
               </button>
-
-              <button
-                className="login-btn-secondary"
-                type="button"
-                onClick={() => f.setLoginError('Account creation is managed by MedShield system administrators.')}
-              >
-                Create account
-              </button>
             </div>
           </form>
 
-          {/* Bottom Data Policy Disclaimer */}
+          {/* Account provisioning notice */}
           <div className="login-policy-disclaimer">
-            By sign up you agree to our term and that you have read our data policy.
+            Access is limited to accounts provisioned by MedShield system administrators.
           </div>
         </div>
       </section>

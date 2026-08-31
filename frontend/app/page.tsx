@@ -6,9 +6,10 @@ import Login from '@/components/Login'
 import PasswordResetRequired from '@/components/PasswordResetRequired'
 import ModelDashboard from '@/components/ModelDashboard'
 import { useDashboardRuntime } from '@/hooks/use-dashboard-runtime'
+import type { User } from '@/lib/auth-tokens'
 
-function Dashboard({ onLogout }: { onLogout: () => Promise<void> }) {
-  const { rootRef, portalContainer } = useDashboardRuntime(onLogout)
+function Dashboard({ onLogout, user }: { onLogout: () => Promise<void>; user: User | null }) {
+  const { rootRef, portalContainer } = useDashboardRuntime(onLogout, user)
 
   return (
     <>
@@ -47,7 +48,7 @@ function AppContent() {
     return <PasswordResetRequired />
   }
 
-  return <Dashboard onLogout={logout} />
+  return <Dashboard onLogout={logout} user={user} />
 }
 
 export default function Page() {

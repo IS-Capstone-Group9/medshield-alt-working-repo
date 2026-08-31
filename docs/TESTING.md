@@ -6,7 +6,7 @@
 - Start the gateway with `cd backend && npm run dev`
 - Verify `GET /api/health`
 - Verify auth with Supabase Auth from the frontend login route when Supabase public variables are configured.
-- Verify local fallback auth with `POST /api/auth/signup` and `POST /api/auth/login` when `USE_SUPABASE=false`.
+- Verify local fallback auth with `POST /api/auth/login` when `USE_SUPABASE=false`.
 - Verify protected gateway routes reject missing or invalid bearer tokens with `401`.
 
 ## Analytics Checks
