@@ -82,6 +82,7 @@ export type DashboardData = {
   summary: Summary
   monthly: MonthlyPoint[]
   byArea: AreaPoint[]
+  byYearArea?: Record<string, AreaPoint[]>
   products: ProductPoint[]
   yearSummary: YearPoint[]
   seasonality: SeasonalityPoint[]

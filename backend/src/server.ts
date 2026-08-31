@@ -492,9 +492,18 @@ app.get('/api/monthly', requireAuth, async (req: Request, res: Response) => {
   res.json(rows)
 })
 
-app.get('/api/by_area', requireAuth, async (_req: Request, res: Response) => {
+app.get('/api/by_area', requireAuth, async (req: Request, res: Response) => {
   const snapshot = await loadSnapshot()
+  const year = typeof req.query.year === 'string' ? req.query.year : null
+  if (year && snapshot.by_year_area && snapshot.by_year_area[year]) {
+    return res.json(snapshot.by_year_area[year])
+  }
   res.json(snapshot.by_area)
+})
+
+app.get('/api/by_year_area', requireAuth, async (_req: Request, res: Response) => {
+  const snapshot = await loadSnapshot()
+  res.json(snapshot.by_year_area ?? {})
 })
 
 app.get('/api/products', requireAuth, async (req: Request, res: Response) => {

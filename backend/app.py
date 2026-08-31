@@ -229,7 +229,16 @@ def monthly():
 @app.route("/api/by_area", methods=["GET"])
 def by_area():
     data = load_snapshot()
+    year = request.args.get("year")
+    if year and "by_year_area" in data and year in data["by_year_area"]:
+        return jsonify(data["by_year_area"][year])
     return jsonify(data["by_area"])
+
+
+@app.route("/api/by_year_area", methods=["GET"])
+def by_year_area():
+    data = load_snapshot()
+    return jsonify(data.get("by_year_area", {}))
 
 
 @app.route("/api/products", methods=["GET"])

@@ -17,6 +17,7 @@ export interface DashboardSnapshot {
   totals: Record<string, unknown>
   monthly: Array<Record<string, unknown>>
   by_area: Array<Record<string, unknown>>
+  by_year_area?: Record<string, Array<Record<string, unknown>>>
   top_products: Array<Record<string, unknown>>
   year_summary: Array<Record<string, unknown>>
   seasonality: Array<Record<string, unknown>>
@@ -123,6 +124,7 @@ async function loadFreshSnapshot(): Promise<DashboardSnapshot> {
       totals,
       monthly,
       byArea,
+      byYearArea,
       yearSummary,
       seasonality,
       forecasts,
@@ -144,6 +146,9 @@ async function loadFreshSnapshot(): Promise<DashboardSnapshot> {
       fetchJson<Array<Record<string, unknown>>>(
         new URL('/by_area', ANALYTICS_SERVICE_URL).toString(),
       ),
+      fetchJson<Record<string, Array<Record<string, unknown>>>>(
+        new URL('/by_year_area', ANALYTICS_SERVICE_URL).toString(),
+      ).catch(() => ({})),
       fetchJson<Array<Record<string, unknown>>>(
         new URL('/year_summary', ANALYTICS_SERVICE_URL).toString(),
       ),
@@ -196,6 +201,7 @@ async function loadFreshSnapshot(): Promise<DashboardSnapshot> {
       totals,
       monthly,
       by_area: byArea,
+      by_year_area: byYearArea,
       top_products: topProducts,
       year_summary: yearSummary,
       seasonality,
@@ -235,5 +241,9 @@ export async function loadSnapshot(): Promise<DashboardSnapshot> {
       })
   }
 
-  return snapshotLoad
+  return await snapshotLoad
+}
+
+export function clearSnapshotCache(): void {
+  snapshotCache = null
 }

@@ -502,28 +502,38 @@
   "by_area": [
     {
       "area": "Government",
-      "revenue": 128215254.22,
-      "income": 185621044.25
+      "revenue": 111880389.91,
+      "income": 175017231.54
     },
     {
       "area": "Hospital",
-      "revenue": 90120199.82,
-      "income": 104373430.55
+      "revenue": 86998997.19,
+      "income": 105131161.58
     },
     {
       "area": "Quezon",
-      "revenue": 10338157.45,
-      "income": 19298424.77
+      "revenue": 62785632.57,
+      "income": 60115950.44
     },
     {
       "area": "Batangas",
-      "revenue": 8514558.86,
-      "income": 19910341.54
+      "revenue": 10960413.56,
+      "income": 25926190.8
     },
     {
       "area": "Admin",
-      "revenue": 6934074.83,
-      "income": 9756888.59
+      "revenue": 7694994.27,
+      "income": 11282935.33
+    },
+    {
+      "area": "Qmc",
+      "revenue": 7530374.88,
+      "income": 4749955.72
+    },
+    {
+      "area": "Marinduque",
+      "revenue": 6259066.35,
+      "income": 8241681.35
     },
     {
       "area": "Equipment",
@@ -531,44 +541,64 @@
       "income": 9303716.22
     },
     {
-      "area": "Marinduque",
-      "revenue": 5870048.75,
-      "income": 7672174.8
-    },
-    {
       "area": "Laguna",
-      "revenue": 4748072.88,
-      "income": 11571857.71
+      "revenue": 5920693.97,
+      "income": 14337824.43
     },
     {
       "area": "Camarines Norte",
-      "revenue": 3647985.41,
-      "income": 8694502.55
+      "revenue": 4076335.32,
+      "income": 9548456.99
     },
     {
       "area": "Supplies",
-      "revenue": 2865198.16,
-      "income": 3806876.68
+      "revenue": 2872917.66,
+      "income": 3816457.18
     },
     {
       "area": "Cavite",
-      "revenue": 2454990.87,
-      "income": 5744879.46
+      "revenue": 2669661.91,
+      "income": 6056273.51
     },
     {
       "area": "Camarines Sur",
-      "revenue": 2065019.64,
-      "income": 5123402.24
+      "revenue": 2504498.4,
+      "income": 5916861.91
+    },
+    {
+      "area": "Peso",
+      "revenue": 2317160.16,
+      "income": 1204359.84
+    },
+    {
+      "area": "Tourism",
+      "revenue": 921686.79,
+      "income": 494989.21
+    },
+    {
+      "area": "Provincial Tourism Office",
+      "revenue": 855305.26,
+      "income": 373249.74
+    },
+    {
+      "area": "Peso Provincial",
+      "revenue": 710699.22,
+      "income": 359870.78
+    },
+    {
+      "area": "Ppdc",
+      "revenue": 664039.86,
+      "income": 371889.89
     },
     {
       "area": "Albay",
-      "revenue": 535598.58,
-      "income": 1121640.22
+      "revenue": 541432.28,
+      "income": 1133663.52
     },
     {
       "area": "Pharma",
-      "revenue": 288965.24,
-      "income": 850014.76
+      "revenue": 304397.24,
+      "income": 881737.76
     },
     {
       "area": "Bicol",
@@ -577,8 +607,23 @@
     },
     {
       "area": "Mindoro",
-      "revenue": 136792.46,
-      "income": 88481.54
+      "revenue": 153311.76,
+      "income": 116227.24
+    },
+    {
+      "area": "Pho",
+      "revenue": 109077.31,
+      "income": 57710.69
+    },
+    {
+      "area": "Ppoc",
+      "revenue": 64000.0,
+      "income": 52500.0
+    },
+    {
+      "area": "Aboitiz",
+      "revenue": 44400.0,
+      "income": 23907.69
     },
     {
       "area": "Losses",
@@ -589,6 +634,21 @@
       "area": "Personal",
       "revenue": 13879.4,
       "income": 8988.67
+    },
+    {
+      "area": "Legaspi",
+      "revenue": 10151.6,
+      "income": 22194.4
+    },
+    {
+      "area": "Unmapped",
+      "revenue": 9105.0,
+      "income": 21975.0
+    },
+    {
+      "area": "Rakkk",
+      "revenue": 0.0,
+      "income": 0.0
     }
   ],
   "top_products": [
@@ -833,5 +893,690 @@
       "month": "Dec",
       "avg_revenue": 3632563.76
     }
-  ]
+  ],
+  "by_year_area": {
+    "2017": [
+      {
+        "area": "Hospital",
+        "revenue": 3263228.47,
+        "income": 4897809.03
+      },
+      {
+        "area": "Batangas",
+        "revenue": 2946585.47,
+        "income": 7125670.09
+      },
+      {
+        "area": "Laguna",
+        "revenue": 2020308.4,
+        "income": 4718628.23
+      },
+      {
+        "area": "Admin",
+        "revenue": 1107035.15,
+        "income": 2145294.08
+      },
+      {
+        "area": "Quezon",
+        "revenue": 806671.89,
+        "income": 1555735.32
+      },
+      {
+        "area": "Camarines Sur",
+        "revenue": 682567.32,
+        "income": 1245362.41
+      },
+      {
+        "area": "Camarines Norte",
+        "revenue": 641634.52,
+        "income": 1299719.63
+      },
+      {
+        "area": "Marinduque",
+        "revenue": 374429.15,
+        "income": 652007.0
+      },
+      {
+        "area": "Cavite",
+        "revenue": 315100.24,
+        "income": 472649.85
+      },
+      {
+        "area": "Government",
+        "revenue": 147700.0,
+        "income": 2703941.2
+      },
+      {
+        "area": "Pharma",
+        "revenue": 37702.98,
+        "income": 71552.02
+      },
+      {
+        "area": "Mindoro",
+        "revenue": 30648.1,
+        "income": 39214.9
+      },
+      {
+        "area": "Supplies",
+        "revenue": 12163.1,
+        "income": 15826.9
+      },
+      {
+        "area": "Legaspi",
+        "revenue": 10151.6,
+        "income": 22194.4
+      },
+      {
+        "area": "Unmapped",
+        "revenue": 9105.0,
+        "income": 21975.0
+      },
+      {
+        "area": "Albay",
+        "revenue": 5833.7,
+        "income": 12023.3
+      },
+      {
+        "area": "Equipment",
+        "revenue": 0.0,
+        "income": 0.0
+      },
+      {
+        "area": "Rakkk",
+        "revenue": 0.0,
+        "income": 0.0
+      }
+    ],
+    "2018": [
+      {
+        "area": "Hospital",
+        "revenue": 6134370.83,
+        "income": 9871016.17
+      },
+      {
+        "area": "Batangas",
+        "revenue": 1241330.37,
+        "income": 4086486.19
+      },
+      {
+        "area": "Laguna",
+        "revenue": 1027503.4,
+        "income": 4000740.55
+      },
+      {
+        "area": "Camarines Norte",
+        "revenue": 722701.33,
+        "income": 3361939.71
+      },
+      {
+        "area": "Admin",
+        "revenue": 651935.53,
+        "income": 1439013.41
+      },
+      {
+        "area": "Quezon",
+        "revenue": 631396.76,
+        "income": 1575755.28
+      },
+      {
+        "area": "Supplies",
+        "revenue": 603735.6,
+        "income": 1148666.1
+      },
+      {
+        "area": "Camarines Sur",
+        "revenue": 514869.1,
+        "income": 1520406.34
+      },
+      {
+        "area": "Marinduque",
+        "revenue": 439037.42,
+        "income": 752318.86
+      },
+      {
+        "area": "Cavite",
+        "revenue": 349851.52,
+        "income": 1151855.62
+      },
+      {
+        "area": "Bicol",
+        "revenue": 139641.05,
+        "income": 488468.43
+      },
+      {
+        "area": "Albay",
+        "revenue": 47149.36,
+        "income": 104375.62
+      },
+      {
+        "area": "Government",
+        "revenue": 4200.0,
+        "income": 245800.0
+      },
+      {
+        "area": "Equipment",
+        "revenue": 0.0,
+        "income": 300000.0
+      }
+    ],
+    "2019": [
+      {
+        "area": "Hospital",
+        "revenue": 7873009.81,
+        "income": 11188075.19
+      },
+      {
+        "area": "Government",
+        "revenue": 3854079.24,
+        "income": 17551360.28
+      },
+      {
+        "area": "Laguna",
+        "revenue": 1593752.79,
+        "income": 4295304.35
+      },
+      {
+        "area": "Batangas",
+        "revenue": 1147907.58,
+        "income": 3342435.93
+      },
+      {
+        "area": "Admin",
+        "revenue": 806724.04,
+        "income": 1297223.04
+      },
+      {
+        "area": "Quezon",
+        "revenue": 795169.24,
+        "income": 1727178.16
+      },
+      {
+        "area": "Cavite",
+        "revenue": 626799.57,
+        "income": 1310569.68
+      },
+      {
+        "area": "Camarines Norte",
+        "revenue": 506078.36,
+        "income": 1667317.64
+      },
+      {
+        "area": "Camarines Sur",
+        "revenue": 451720.79,
+        "income": 1465572.27
+      },
+      {
+        "area": "Marinduque",
+        "revenue": 310616.52,
+        "income": 486169.47
+      },
+      {
+        "area": "Supplies",
+        "revenue": 304819.27,
+        "income": 286039.89
+      },
+      {
+        "area": "Bicol",
+        "revenue": 131550.71,
+        "income": 440861.24
+      },
+      {
+        "area": "Albay",
+        "revenue": 121664.69,
+        "income": 336880.16
+      },
+      {
+        "area": "Mindoro",
+        "revenue": 80790.48,
+        "income": 46045.52
+      },
+      {
+        "area": "Pharma",
+        "revenue": 64070.77,
+        "income": 146954.23
+      },
+      {
+        "area": "Equipment",
+        "revenue": 0.0,
+        "income": 463000.0
+      }
+    ],
+    "2020": [
+      {
+        "area": "Government",
+        "revenue": 16775592.52,
+        "income": 31301631.87
+      },
+      {
+        "area": "Hospital",
+        "revenue": 4707744.0,
+        "income": 8319230.48
+      },
+      {
+        "area": "Admin",
+        "revenue": 1188977.61,
+        "income": 1582344.04
+      },
+      {
+        "area": "Quezon",
+        "revenue": 883891.57,
+        "income": 1535259.76
+      },
+      {
+        "area": "Camarines Norte",
+        "revenue": 570825.98,
+        "income": 860754.32
+      },
+      {
+        "area": "Cavite",
+        "revenue": 557589.06,
+        "income": 1397966.36
+      },
+      {
+        "area": "Supplies",
+        "revenue": 473891.26,
+        "income": 459996.52
+      },
+      {
+        "area": "Batangas",
+        "revenue": 418113.55,
+        "income": 952285.73
+      },
+      {
+        "area": "Equipment",
+        "revenue": 340731.75,
+        "income": 395868.25
+      },
+      {
+        "area": "Marinduque",
+        "revenue": 336650.9,
+        "income": 546788.17
+      },
+      {
+        "area": "Camarines Sur",
+        "revenue": 282463.23,
+        "income": 536259.37
+      },
+      {
+        "area": "Laguna",
+        "revenue": 219355.96,
+        "income": 572995.32
+      },
+      {
+        "area": "Albay",
+        "revenue": 192483.73,
+        "income": 336822.27
+      },
+      {
+        "area": "Pharma",
+        "revenue": 67178.62,
+        "income": 204221.38
+      },
+      {
+        "area": "Mindoro",
+        "revenue": 41873.18,
+        "income": 30966.82
+      },
+      {
+        "area": "Losses",
+        "revenue": 14920.16,
+        "income": 37033.82
+      },
+      {
+        "area": "Personal",
+        "revenue": 11917.4,
+        "income": 6967.67
+      }
+    ],
+    "2021": [
+      {
+        "area": "Government",
+        "revenue": 8966637.21,
+        "income": 23407727.82
+      },
+      {
+        "area": "Hospital",
+        "revenue": 7833090.21,
+        "income": 12213151.49
+      },
+      {
+        "area": "Equipment",
+        "revenue": 5578390.0,
+        "income": 8086771.63
+      },
+      {
+        "area": "Quezon",
+        "revenue": 995505.9,
+        "income": 2245691.74
+      },
+      {
+        "area": "Admin",
+        "revenue": 969331.18,
+        "income": 989832.09
+      },
+      {
+        "area": "Laguna",
+        "revenue": 917319.92,
+        "income": 583220.08
+      },
+      {
+        "area": "Camarines Norte",
+        "revenue": 517649.01,
+        "income": 933381.31
+      },
+      {
+        "area": "Marinduque",
+        "revenue": 507821.2,
+        "income": 639650.45
+      },
+      {
+        "area": "Batangas",
+        "revenue": 382766.6,
+        "income": 976539.4
+      },
+      {
+        "area": "Cavite",
+        "revenue": 311513.79,
+        "income": 873423.32
+      },
+      {
+        "area": "Supplies",
+        "revenue": 276362.25,
+        "income": 299087.75
+      },
+      {
+        "area": "Camarines Sur",
+        "revenue": 195965.88,
+        "income": 392900.62
+      },
+      {
+        "area": "Albay",
+        "revenue": 163291.6,
+        "income": 332552.97
+      },
+      {
+        "area": "Pharma",
+        "revenue": 8444.92,
+        "income": 34480.08
+      },
+      {
+        "area": "Losses",
+        "revenue": 3211.8,
+        "income": 4100.12
+      },
+      {
+        "area": "Personal",
+        "revenue": 220.0,
+        "income": 8.0
+      }
+    ],
+    "2022": [
+      {
+        "area": "Government",
+        "revenue": 7548396.14,
+        "income": 21745168.71
+      },
+      {
+        "area": "Hospital",
+        "revenue": 6259243.78,
+        "income": 8877690.72
+      },
+      {
+        "area": "Marinduque",
+        "revenue": 2428299.89,
+        "income": 3218476.66
+      },
+      {
+        "area": "Quezon",
+        "revenue": 1164273.07,
+        "income": 2422598.6
+      },
+      {
+        "area": "Admin",
+        "revenue": 1153789.41,
+        "income": 1332807.61
+      },
+      {
+        "area": "Batangas",
+        "revenue": 885610.5,
+        "income": 1824526.26
+      },
+      {
+        "area": "Supplies",
+        "revenue": 658411.18,
+        "income": 1099308.82
+      },
+      {
+        "area": "Camarines Norte",
+        "revenue": 619129.52,
+        "income": 871587.48
+      },
+      {
+        "area": "Camarines Sur",
+        "revenue": 303847.84,
+        "income": 627919.16
+      },
+      {
+        "area": "Cavite",
+        "revenue": 219111.12,
+        "income": 522451.19
+      },
+      {
+        "area": "Pharma",
+        "revenue": 38615.32,
+        "income": 168459.68
+      },
+      {
+        "area": "Laguna",
+        "revenue": 28058.5,
+        "income": 51154.9
+      },
+      {
+        "area": "Equipment",
+        "revenue": 20573.66,
+        "income": 10626.34
+      },
+      {
+        "area": "Albay",
+        "revenue": 11009.2,
+        "income": 11009.2
+      },
+      {
+        "area": "Personal",
+        "revenue": 1550.0,
+        "income": 1850.0
+      }
+    ],
+    "2023": [
+      {
+        "area": "Government",
+        "revenue": 33004730.51,
+        "income": 40786155.4
+      },
+      {
+        "area": "Hospital",
+        "revenue": 20122603.0,
+        "income": 20866699.24
+      },
+      {
+        "area": "Quezon",
+        "revenue": 3221322.22,
+        "income": 4618639.65
+      },
+      {
+        "area": "Batangas",
+        "revenue": 1712690.64,
+        "income": 2753419.69
+      },
+      {
+        "area": "Marinduque",
+        "revenue": 577182.5,
+        "income": 824870.0
+      },
+      {
+        "area": "Supplies",
+        "revenue": 543535.0,
+        "income": 507531.2
+      },
+      {
+        "area": "Camarines Norte",
+        "revenue": 498316.6,
+        "income": 553756.9
+      },
+      {
+        "area": "Cavite",
+        "revenue": 289696.61,
+        "income": 327357.49
+      },
+      {
+        "area": "Equipment",
+        "revenue": 118900.0,
+        "income": 47450.0
+      },
+      {
+        "area": "Laguna",
+        "revenue": 114395.0,
+        "income": 115781.0
+      },
+      {
+        "area": "Pharma",
+        "revenue": 85084.63,
+        "income": 242570.37
+      },
+      {
+        "area": "Camarines Sur",
+        "revenue": 73064.24,
+        "income": 128441.74
+      }
+    ],
+    "2024": [
+      {
+        "area": "Quezon",
+        "revenue": 16754427.12,
+        "income": 12233638.52
+      },
+      {
+        "area": "Government",
+        "revenue": 11534251.07,
+        "income": 10423604.33
+      },
+      {
+        "area": "Hospital",
+        "revenue": 6453818.87,
+        "income": 8369932.35
+      },
+      {
+        "area": "Qmc",
+        "revenue": 1176794.68,
+        "income": 558034.62
+      },
+      {
+        "area": "Batangas",
+        "revenue": 1107563.41,
+        "income": 2487571.04
+      },
+      {
+        "area": "Admin",
+        "revenue": 940110.45,
+        "income": 1359734.81
+      },
+      {
+        "area": "Provincial Tourism Office",
+        "revenue": 759092.5,
+        "income": 323242.5
+      },
+      {
+        "area": "Marinduque",
+        "revenue": 229020.15,
+        "income": 395699.36
+      },
+      {
+        "area": "Pharma",
+        "revenue": 3300.0,
+        "income": 13500.0
+      },
+      {
+        "area": "Personal",
+        "revenue": 192.0,
+        "income": 163.0
+      }
+    ],
+    "2025": [
+      {
+        "area": "Quezon",
+        "revenue": 37532974.8,
+        "income": 32201453.41
+      },
+      {
+        "area": "Government",
+        "revenue": 30044803.22,
+        "income": 26851841.93
+      },
+      {
+        "area": "Hospital",
+        "revenue": 24351888.22,
+        "income": 20527556.91
+      },
+      {
+        "area": "Qmc",
+        "revenue": 6353580.2,
+        "income": 4191921.1
+      },
+      {
+        "area": "Peso",
+        "revenue": 2317160.16,
+        "income": 1204359.84
+      },
+      {
+        "area": "Batangas",
+        "revenue": 1117845.44,
+        "income": 2377256.47
+      },
+      {
+        "area": "Marinduque",
+        "revenue": 1056008.62,
+        "income": 725701.38
+      },
+      {
+        "area": "Tourism",
+        "revenue": 921686.79,
+        "income": 494989.21
+      },
+      {
+        "area": "Admin",
+        "revenue": 877090.9,
+        "income": 1136686.25
+      },
+      {
+        "area": "Peso Provincial",
+        "revenue": 710699.22,
+        "income": 359870.78
+      },
+      {
+        "area": "Ppdc",
+        "revenue": 664039.86,
+        "income": 371889.89
+      },
+      {
+        "area": "Pho",
+        "revenue": 109077.31,
+        "income": 57710.69
+      },
+      {
+        "area": "Provincial Tourism Office",
+        "revenue": 96212.76,
+        "income": 50007.24
+      },
+      {
+        "area": "Ppoc",
+        "revenue": 64000.0,
+        "income": 52500.0
+      },
+      {
+        "area": "Aboitiz",
+        "revenue": 44400.0,
+        "income": 23907.69
+      }
+    ]
+  }
 }
