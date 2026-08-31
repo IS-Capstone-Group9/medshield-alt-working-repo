@@ -16,14 +16,11 @@ import { resolveForecastCurrentYear } from './dashboard-forecast-window'
 import {
   buildEstimatedMonthlyRowsForYear,
   buildEstimatedYearSummaryForYear,
-  hasMonthlyRowsForYear,
 } from './dashboard-year-estimates'
 import type { DashboardData } from '@/types/api.types'
 
 function dashboardDataForLegacyCharts(data: DashboardData): DashboardData {
   const currentAnalyticalYear = resolveForecastCurrentYear(data.dataStatus)
-  if (hasMonthlyRowsForYear(data.monthly, currentAnalyticalYear)) return data
-
   const estimatedMonthly = buildEstimatedMonthlyRowsForYear(data, currentAnalyticalYear)
   const estimatedYearSummary = buildEstimatedYearSummaryForYear(
     data,
@@ -32,13 +29,16 @@ function dashboardDataForLegacyCharts(data: DashboardData): DashboardData {
   )
 
   if (!estimatedMonthly.length || !estimatedYearSummary) return data
+  const existingPeriods = new Set(data.monthly.map((row) => row.period))
+  const completionRows = estimatedMonthly.filter((row) => !existingPeriods.has(row.period))
+  const yearSummaryWithoutCurrent = data.yearSummary.filter((row) => row.year !== currentAnalyticalYear)
 
   return {
     ...data,
-    monthly: [...data.monthly, ...estimatedMonthly].sort((left, right) =>
+    monthly: [...data.monthly, ...completionRows].sort((left, right) =>
       left.period.localeCompare(right.period),
     ),
-    yearSummary: [...data.yearSummary, estimatedYearSummary].sort(
+    yearSummary: [...yearSummaryWithoutCurrent, estimatedYearSummary].sort(
       (left, right) => Number(left.year) - Number(right.year),
     ),
   }

@@ -81,6 +81,38 @@ test('missing analytical year can be approximated from forecasts and trained sea
   assert.ok(rows[1].revenue > rows[2].revenue)
 })
 
+test('current analytical year keeps actual months and estimates remaining months', () => {
+  const data = {
+    ...baseData,
+    monthly: [
+      ...baseData.monthly,
+      { period: '2026-01', revenue: 90, income: 45 },
+      { period: '2026-08', revenue: 180, income: 81 },
+    ],
+    forecasts: [
+      ...baseData.forecasts,
+      {
+        period: '2026-09',
+        area: 'All',
+        product: 'All',
+        model_code: 'TEST',
+        forecast_scope: 'overall',
+        baseline_forecast: 190,
+        adjusted_forecast: 210,
+        lower_bound: 170,
+        upper_bound: 230,
+      },
+    ],
+  }
+  const rows = buildEstimatedMonthlyRowsForYear(data, '2026')
+
+  assert.equal(rows.length, 12)
+  assert.deepEqual(rows.find((row) => row.period === '2026-01'), { period: '2026-01', revenue: 90, income: 45 })
+  assert.deepEqual(rows.find((row) => row.period === '2026-08'), { period: '2026-08', revenue: 180, income: 81 })
+  assert.equal(rows.find((row) => row.period === '2026-09')?.revenue, 210)
+  assert.equal(rows.find((row) => row.period === '2026-09')?.income, 105)
+})
+
 test('actual monthly rows prevent treating a year as missing', () => {
   assert.equal(hasMonthlyRowsForYear(baseData.monthly, '2025'), true)
   assert.equal(hasMonthlyRowsForYear(baseData.monthly, '2026'), false)

@@ -139,6 +139,11 @@ export function hasMonthlyRowsForYear(rows: MonthlyPoint[], year: string | null)
 export function buildEstimatedMonthlyRowsForYear(data: DashboardData, year: string): MonthlyPoint[] {
   if (!YEAR_PATTERN.test(year)) return []
 
+  const actualByPeriod = new Map(
+    data.monthly
+      .filter((row) => row.period?.startsWith(`${year}-`) && finite(row.revenue) && finite(row.income))
+      .map((row) => [row.period, row]),
+  )
   const forecastByPeriod = new Map(
     aggregateForecastRowsByPeriod(data.forecasts)
       .filter((row) => row.period.startsWith(`${year}-`))
@@ -150,6 +155,9 @@ export function buildEstimatedMonthlyRowsForYear(data: DashboardData, year: stri
 
   return Array.from({ length: 12 }, (_, monthIndex) => {
     const period = monthPeriod(year, monthIndex)
+    const actual = actualByPeriod.get(period)
+    if (actual) return actual
+
     const forecast = forecastByPeriod.get(period)
     const month = monthIndex + 1
     const seasonalIndex = seasonalIndices.get(month) ?? 1
@@ -282,4 +290,3 @@ export function areaRowsForView(
     selectedYear: normalizedYear,
   }
 }
-
