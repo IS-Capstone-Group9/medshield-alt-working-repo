@@ -9,6 +9,7 @@ import {
 import { renderSalesComputation, renderSalesDatasetStatus } from './sales-view-helpers'
 import { renderSalesPage, setSalesViewError } from './sales-page-helpers'
 import { renderWeatherEffects } from './weather-view-helpers'
+import { splitAreaSegments } from './dashboard-area-segments'
 import { updateDashboardProvenance } from './dashboard-enhancements'
 import { setDecisionSupportChartData } from './dashboard-decision-charts'
 import { resolveForecastCurrentYear } from './dashboard-forecast-window'
@@ -63,6 +64,7 @@ export async function refreshDashboardFromGateway() {
 
   const data = await loadDashboardData()
   const legacyChartData = dashboardDataForLegacyCharts(data)
+  const areaSegments = splitAreaSegments(data.byArea)
   const root = document.querySelector<HTMLElement>('.medshield-root')
   if (root) {
     updateDashboardProvenance(root, data.dataStatus, data.yearSummary.map((row) => row.year))
@@ -70,6 +72,9 @@ export async function refreshDashboardFromGateway() {
   applyDatasetPatch({
     monthly: legacyChartData.monthly,
     by_area: data.byArea,
+    by_territory: areaSegments.territory,
+    by_channel: areaSegments.channel,
+    by_business_line: areaSegments.businessLine,
     top_products: data.products,
     year_summary: legacyChartData.yearSummary,
     seasonality: data.seasonality,
