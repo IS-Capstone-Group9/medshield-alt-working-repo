@@ -11,10 +11,13 @@ test('area segmentation separates territories from channels and business lines',
     { area: 'Admin', revenue: 70, income: 30 },
     { area: 'Quezon', revenue: 60, income: 25 },
     { area: 'Camarines Norte', revenue: 50, income: 20 },
+    { area: 'Bicol', revenue: 45, income: 18 },
+    { area: 'Mindoro', revenue: 42, income: 16 },
     { area: 'Unknown Bucket', revenue: 40, income: 10 },
   ])
 
   assert.deepEqual(segments.territory.map((row) => row.area), ['Quezon', 'Camarines Norte'])
+  assert.deepEqual(segments.geographicAggregate.map((row) => row.area), ['Bicol', 'Mindoro'])
   assert.deepEqual(segments.channel.map((row) => row.area), ['Government', 'Hospital'])
   assert.deepEqual(segments.businessLine.map((row) => row.area), ['Equipment', 'Admin'])
   assert.deepEqual(segments.unmapped.map((row) => row.area), ['Unknown Bucket'])

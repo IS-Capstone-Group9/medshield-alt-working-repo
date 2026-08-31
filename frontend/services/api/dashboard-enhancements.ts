@@ -163,9 +163,9 @@ function updateAreaSegmentationLabels(root: HTMLElement) {
   const updates = [
     {
       canvasId: 'areaBarChart',
-      title: 'Revenue by Geographic Territory',
-      subtitle: 'Approved place-based territories only; customer/channel labels excluded',
-      badge: 'Territories',
+      title: 'Revenue by Province/Local Territory',
+      subtitle: 'Province/local delivery areas only; region and island aggregates excluded',
+      badge: 'Province Grain',
     },
     {
       canvasId: 'areaIncomeChart',
