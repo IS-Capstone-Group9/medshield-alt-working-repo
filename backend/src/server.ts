@@ -8,6 +8,12 @@ import express, { NextFunction, Request, Response } from 'express'
 import rateLimit from 'express-rate-limit'
 
 import { verifyLocalLogin } from './localAuth'
+import { databricksConfigured, getDatabricksConnectionStatus } from './databricks'
+import {
+  DatabricksYearlySyncInProgressError,
+  DatabricksYearlySyncValidationError,
+  synchronizeDatabricksYearlyCandidate,
+} from './databricksYearlySync'
 import { startPythonServices } from './pythonServices'
 import { createSession, revokeSessionToken, SessionUser, verifySessionToken } from './sessionAuth'
 import { loadSnapshot } from './snapshot'
@@ -17,6 +23,7 @@ import {
   signInWithIdentifier,
   SupabaseServerSecretMissingError,
 } from './supabaseIdentity'
+import { SupabaseWarehouseError, supabaseWarehouseConfigured } from './supabaseWarehouse'
 
 function loadEnvironment(): void {
   const candidates = [
@@ -61,6 +68,17 @@ const apiLimiter = rateLimit({
 })
 
 app.use(apiLimiter)
+
+const databricksYearlySyncLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 5,
+  message: {
+    error: 'Too many Databricks yearly synchronization requests. Try again later.',
+    code: 'DATABRICKS_YEARLY_SYNC_RATE_LIMITED',
+  },
+  standardHeaders: true,
+  legacyHeaders: false,
+})
 
 function envBool(name: string, defaultValue = false): boolean {
   const value = process.env[name]
@@ -299,7 +317,7 @@ function requireRole(allowedRoles: string[]) {
   return (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     const userRole = (req.user?.role || 'viewer').toLowerCase()
     const allowed = allowedRoles.map(r => r.toLowerCase())
-    if (!allowed.includes(userRole) && !allowed.includes('admin')) {
+    if (userRole !== 'admin' && !allowed.includes(userRole)) {
       return res.status(403).json({
         error: `Access Denied: Action requires [${allowedRoles.join(', ')}] role clearance. Current role is '${userRole}'.`,
         code: 'FORBIDDEN_ROLE'
@@ -371,6 +389,116 @@ app.get('/api/health', (_req: Request, res: Response) => {
     },
   })
 })
+
+app.get(
+  '/api/integrations/databricks/status',
+  requireAuth,
+  requireRole(['admin']),
+  async (_req: AuthenticatedRequest, res: Response) => {
+    if (!databricksConfigured()) {
+      return res.status(503).json({
+        connected: false,
+        error: 'Databricks is not configured on the MedShield backend.',
+        code: 'DATABRICKS_NOT_CONFIGURED',
+      })
+    }
+
+    try {
+      return res.json(await getDatabricksConnectionStatus())
+    } catch (error) {
+      console.error(
+        'Databricks status check failed:',
+        error instanceof Error ? error.message : 'Unknown error',
+      )
+      return res.status(502).json({
+        connected: false,
+        error: 'MedShield could not reach the approved Databricks Gold view.',
+        code: 'DATABRICKS_CONNECTION_FAILED',
+      })
+    }
+  },
+)
+
+app.post(
+  '/api/integrations/databricks/sync/yearly',
+  requireAuth,
+  requireRole(['admin']),
+  databricksYearlySyncLimiter,
+  async (req: AuthenticatedRequest, res: Response) => {
+    const username = req.user?.username ?? 'unknown-admin'
+    const auditBase = {
+      username,
+      ip_address: String(req.headers['x-forwarded-for'] || req.socket.remoteAddress || ''),
+      user_agent: String(req.headers['user-agent'] || ''),
+      created_at: new Date().toISOString(),
+    }
+
+    if (!databricksConfigured() || !supabaseWarehouseConfigured()) {
+      await persistAuditLog({
+        ...auditBase,
+        action: 'DATABRICKS_YEARLY_CANDIDATE_SYNC_BLOCKED',
+        detail: 'Yearly candidate synchronization was blocked because a backend-only integration credential is missing.',
+      })
+      return res.status(503).json({
+        error: 'Databricks or the protected Supabase warehouse connection is not configured.',
+        code: 'YEARLY_SYNC_NOT_CONFIGURED',
+      })
+    }
+
+    try {
+      const result = await synchronizeDatabricksYearlyCandidate(username)
+      await persistAuditLog({
+        ...auditBase,
+        action: 'DATABRICKS_YEARLY_CANDIDATE_SYNC_COMPLETED',
+        detail: `Candidate-only yearly cache synchronized: ${result.loaded_rows} rows, ${result.period.minimum_year}-${result.period.maximum_year}, ${result.reconciliation.loaded_transaction_count} transactions, pipeline run ${result.pipeline_run_key}. Published dashboard facts were not replaced.`,
+      })
+      return res.json(result)
+    } catch (error) {
+      const code =
+        error instanceof DatabricksYearlySyncInProgressError
+          ? error.code
+          : error instanceof DatabricksYearlySyncValidationError
+            ? error.code
+            : error instanceof SupabaseWarehouseError
+              ? error.code
+              : 'DATABRICKS_YEARLY_SYNC_FAILED'
+
+      console.error(
+        'Databricks yearly candidate sync failed:',
+        error instanceof Error ? `${error.name}: ${error.message}` : 'Unknown error',
+      )
+      await persistAuditLog({
+        ...auditBase,
+        action: 'DATABRICKS_YEARLY_CANDIDATE_SYNC_FAILED',
+        detail: `Candidate-only yearly synchronization failed with code ${code}. The published dashboard facts were not changed.`,
+      })
+
+      if (error instanceof DatabricksYearlySyncInProgressError) {
+        return res.status(409).json({ error: error.message, code: error.code })
+      }
+      if (error instanceof DatabricksYearlySyncValidationError) {
+        return res.status(422).json({
+          error: error.message,
+          code: error.code,
+          candidate_cache_preserved: error.candidateCachePreserved,
+          pipeline_run_key: error.pipelineRunKey,
+        })
+      }
+      if (error instanceof SupabaseWarehouseError) {
+        return res.status(502).json({
+          error: 'The protected Supabase yearly-candidate sync is unavailable. Confirm migration 013 is applied.',
+          code: error.code,
+          candidate_cache_preserved: null,
+        })
+      }
+      return res.status(502).json({
+        error: 'MedShield could not synchronize the validated Databricks yearly candidates.',
+        code,
+        candidate_cache_preserved: null,
+      })
+    }
+  },
+)
 
 app.get('/api/summary', requireAuth, async (_req: Request, res: Response) => {
   const snapshot = await loadSnapshot()

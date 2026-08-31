@@ -62,7 +62,7 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
           return
         }
         
-        installDashboardEnhancements(root, activeListeners)
+        installDashboardEnhancements(root, activeListeners, user)
 
         void refreshDashboardFromGateway().catch((error) => {
           console.warn('Dashboard is using the bundled fallback dataset:', error)

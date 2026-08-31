@@ -11,6 +11,11 @@ import { processSalesUpload } from './upload-pipeline'
 import { applyScenarioSafetyLabels } from './dashboard-enhancements'
 import { renderDecisionSupportCharts } from './dashboard-decision-charts'
 import { installMcdaSensitivity, renderMcdaSensitivity } from './dashboard-mcda'
+import {
+  checkDatabricksConnection,
+  syncDatabricksYearlyCandidate,
+} from './integrations.service'
+import type { User } from '@/lib/auth-tokens'
 
 const DASHBOARD_PAGE_META = {
   overview: ['Executive Overview', 'Centralized demand intelligence, forecasting, and stock actions'],
@@ -74,7 +79,11 @@ function activateDashboardPage(root: HTMLElement, name: DashboardPageName, navIt
   })
 }
 
-export function installDashboardEnhancements(root: HTMLElement, activeListeners: any[]) {
+export function installDashboardEnhancements(
+  root: HTMLElement,
+  activeListeners: any[],
+  user: User | null,
+) {
   if (root.dataset.enhancementsInstalled === 'true') return
   root.dataset.enhancementsInstalled = 'true'
   ;(window as any).__medshieldAuditInstalled = true
@@ -199,6 +208,135 @@ export function installDashboardEnhancements(root: HTMLElement, activeListeners:
   root.querySelector('#salesDataUploadButton')?.addEventListener('click', () => {
     uploadInput?.click()
   })
+
+  const databricksPanel = root.querySelector<HTMLElement>('#databricksConnectionPanel')
+  const databricksButton = root.querySelector<HTMLButtonElement>('#checkDatabricksConnectionButton')
+  const databricksBadge = root.querySelector<HTMLElement>('#databricksConnectionBadge')
+  const databricksDetail = root.querySelector<HTMLElement>('#databricksConnectionDetail')
+  const databricksSyncButton = root.querySelector<HTMLButtonElement>('#syncDatabricksYearlyButton')
+  const databricksSyncResult = root.querySelector<HTMLElement>('#databricksYearlySyncResult')
+  const databricksSyncBadge = root.querySelector<HTMLElement>('#databricksYearlySyncBadge')
+  const databricksSyncDetail = root.querySelector<HTMLElement>('#databricksYearlySyncDetail')
+  const databricksSyncWarning = root.querySelector<HTMLElement>('#databricksYearlySyncWarning')
+
+  if (user?.role.toLowerCase() !== 'admin') {
+    databricksPanel?.remove()
+  } else if (
+    databricksButton &&
+    databricksBadge &&
+    databricksDetail &&
+    databricksSyncButton &&
+    databricksSyncResult &&
+    databricksSyncBadge &&
+    databricksSyncDetail &&
+    databricksSyncWarning
+  ) {
+    let databricksConnectionVerified = false
+
+    const handleDatabricksCheck = async () => {
+      databricksConnectionVerified = false
+      databricksButton.disabled = true
+      databricksButton.textContent = 'Checking...'
+      databricksSyncButton.disabled = true
+      databricksSyncButton.title = 'Verify the Databricks Gold connection first'
+      databricksBadge.textContent = 'Checking'
+      databricksPanel?.classList.remove('is-connected', 'is-error')
+      databricksPanel?.classList.add('is-checking')
+      databricksDetail.textContent = 'MedShield is checking the approved Databricks Gold view. Free Edition may need a few seconds to wake up.'
+
+      try {
+        const status = await checkDatabricksConnection()
+        if (
+          status.row_count !== 9 ||
+          status.period.year_count !== 9 ||
+          status.period.minimum_year !== 2017 ||
+          status.period.maximum_year !== 2025
+        ) {
+          throw new Error('The Gold yearly view must contain exactly one row for every year from 2017 through 2025.')
+        }
+        databricksConnectionVerified = true
+        databricksBadge.textContent = 'Connected'
+        databricksDetail.textContent = `${status.source.catalog}.${status.source.schema}.${status.source.view} is available: ${status.period.minimum_year}-${status.period.maximum_year}, ${status.period.year_count} years, ${status.row_count.toLocaleString()} yearly rows.`
+        databricksPanel?.classList.remove('is-checking', 'is-error')
+        databricksPanel?.classList.add('is-connected')
+        databricksSyncButton.disabled = false
+        databricksSyncButton.removeAttribute('title')
+        databricksSyncResult.hidden = false
+        databricksSyncResult.classList.remove('is-syncing', 'is-success', 'is-error')
+        databricksSyncBadge.textContent = 'Ready'
+        databricksSyncDetail.textContent = 'Connection verified. The nine Gold yearly candidates can now be synchronized into the protected Supabase cache.'
+        databricksSyncWarning.textContent = 'Candidate-only data will not replace approved dashboard facts.'
+      } catch (error) {
+        databricksBadge.textContent = 'Unavailable'
+        databricksDetail.textContent = error instanceof Error
+          ? error.message
+          : 'MedShield could not verify the Databricks connection.'
+        databricksPanel?.classList.remove('is-checking', 'is-connected')
+        databricksPanel?.classList.add('is-error')
+        databricksSyncButton.disabled = true
+        databricksSyncButton.title = 'Verify the Databricks Gold connection first'
+        databricksSyncResult.hidden = true
+      } finally {
+        databricksButton.disabled = false
+        databricksButton.textContent = 'Verify Again'
+      }
+    }
+
+    const handleDatabricksYearlySync = async () => {
+      if (!databricksConnectionVerified) return
+
+      databricksButton.disabled = true
+      databricksSyncButton.disabled = true
+      databricksSyncButton.classList.add('is-busy')
+      databricksSyncButton.setAttribute('aria-busy', 'true')
+      databricksSyncButton.textContent = 'Syncing...'
+      databricksSyncResult.hidden = false
+      databricksSyncResult.classList.remove('is-success', 'is-error')
+      databricksSyncResult.classList.add('is-syncing')
+      databricksSyncBadge.textContent = 'Syncing'
+      databricksSyncDetail.textContent = 'Validating the 47-column Gold contract and writing the nine yearly rows atomically.'
+      databricksSyncWarning.textContent = 'Please keep this page open while Databricks Free Edition wakes and runs the query.'
+
+      try {
+        const result = await syncDatabricksYearlyCandidate()
+        databricksSyncResult.classList.remove('is-syncing', 'is-error')
+        databricksSyncResult.classList.add('is-success')
+        databricksSyncBadge.textContent = 'Synchronized'
+        databricksSyncDetail.textContent = `${result.loaded_rows.toLocaleString()} of ${result.extracted_rows.toLocaleString()} rows loaded • ${result.period.minimum_year}-${result.period.maximum_year} • ${result.reconciliation.loaded_transaction_count.toLocaleString()} transactions reconciled • pipeline run ${result.pipeline_run_key}.`
+        databricksSyncWarning.textContent = result.warning
+        databricksSyncButton.textContent = 'Sync Again'
+      } catch (error) {
+        databricksSyncResult.classList.remove('is-syncing', 'is-success')
+        databricksSyncResult.classList.add('is-error')
+        databricksSyncBadge.textContent = 'Failed'
+        databricksSyncDetail.textContent = error instanceof Error
+          ? error.message
+          : 'The yearly candidate synchronization failed.'
+        databricksSyncWarning.textContent = 'Published dashboard facts were not changed. Check the candidate-cache validation result before retrying.'
+        databricksSyncButton.textContent = 'Try Sync Again'
+      } finally {
+        databricksButton.disabled = false
+        databricksSyncButton.disabled = !databricksConnectionVerified
+        databricksSyncButton.classList.remove('is-busy')
+        databricksSyncButton.removeAttribute('aria-busy')
+      }
+    }
+
+    databricksButton.addEventListener('click', handleDatabricksCheck)
+    databricksSyncButton.addEventListener('click', handleDatabricksYearlySync)
+    activeListeners.push(
+      {
+        target: databricksButton,
+        type: 'click',
+        listener: handleDatabricksCheck,
+      },
+      {
+        target: databricksSyncButton,
+        type: 'click',
+        listener: handleDatabricksYearlySync,
+      },
+    )
+  }
 
   // One route-aware listener controls every sidebar page. This prevents legacy
   // inline handlers and newer injected tabs from competing over active state.
