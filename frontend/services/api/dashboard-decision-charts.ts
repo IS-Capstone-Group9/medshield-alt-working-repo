@@ -19,7 +19,6 @@ import {
 import {
   areaRowsForView,
   buildEstimatedMonthlyRowsForYear,
-  hasMonthlyRowsForYear,
 } from './dashboard-year-estimates'
 
 const dashboardDataByRoot = new WeakMap<HTMLElement, DashboardData>()
@@ -100,13 +99,14 @@ function aggregateMonthly(rows: MonthlyPoint[], year: string | null): MonthlyPoi
 
 function monthlyRowsForView(data: DashboardData, year: string | null) {
   const selected = aggregateMonthly(data.monthly, year)
-  if (selected.length) return { rows: selected, isEstimated: false, selectedYear: year }
-
   const currentAnalyticalYear = resolveForecastCurrentYear(data.dataStatus)
-  if (year === currentAnalyticalYear && !hasMonthlyRowsForYear(data.monthly, year)) {
+
+  if (year === currentAnalyticalYear) {
     const estimated = buildEstimatedMonthlyRowsForYear(data, year)
-    if (estimated.length) return { rows: estimated, isEstimated: true, selectedYear: year }
+    if (estimated.length > selected.length) return { rows: estimated, isEstimated: true, selectedYear: year }
   }
+
+  if (selected.length) return { rows: selected, isEstimated: false, selectedYear: year }
 
   return { rows: aggregateMonthly(data.monthly, null), isEstimated: false, selectedYear: null }
 }
