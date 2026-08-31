@@ -9,6 +9,7 @@ import {
 import { enhanceDashboardContent } from '@/services/api/dashboard-enhancements'
 import { installDashboardEnhancements } from '@/services/api/dashboard-enhancement-listeners'
 import { refreshDashboardFromGateway } from '@/services/api/dashboard-interactions'
+import { resolveForecastCurrentMonth } from '@/services/api/dashboard-forecast-window'
 
 export function useDashboardRuntime(onLogout: () => Promise<void>) {
   const rootRef = useRef<HTMLDivElement>(null)
@@ -27,6 +28,7 @@ export function useDashboardRuntime(onLogout: () => Promise<void>) {
 
     let disposed = false
     let activeListeners: ListenerRecord[] = []
+    let monthRefreshTimer: number | null = null
 
     const styleEl = document.createElement('style')
     styleEl.id = 'medshield-dashboard-styles'
@@ -65,6 +67,18 @@ export function useDashboardRuntime(onLogout: () => Promise<void>) {
           console.warn('Dashboard is using the bundled fallback dataset:', error)
         })
 
+        let lastObservedForecastMonth = root.dataset.forecastCurrentMonth
+          ?? resolveForecastCurrentMonth(undefined, new Date())
+        monthRefreshTimer = window.setInterval(() => {
+          const currentSystemMonth = resolveForecastCurrentMonth(undefined, new Date())
+          const activeForecastMonth = root.dataset.forecastCurrentMonth ?? lastObservedForecastMonth
+          if (currentSystemMonth === activeForecastMonth) return
+          lastObservedForecastMonth = currentSystemMonth
+          void refreshDashboardFromGateway().catch((error) => {
+            console.warn('Rolling forecast refresh failed after a month boundary:', error)
+          })
+        }, 30 * 60 * 1000)
+
         // Add portal injection anchor
         const inventoryPageEl = root.querySelector('#page-inventory')
         if (inventoryPageEl) {
@@ -93,6 +107,9 @@ export function useDashboardRuntime(onLogout: () => Promise<void>) {
       for (const { target, type, listener, options } of activeListeners) {
         target.removeEventListener(type, listener, options)
       }
+      if (monthRefreshTimer !== null) {
+        window.clearInterval(monthRefreshTimer)
+      }
       root.innerHTML = ''
       document.getElementById('medshield-dashboard-styles')?.remove()
       
@@ -105,6 +122,9 @@ export function useDashboardRuntime(onLogout: () => Promise<void>) {
       }
       delete (window as any).__medshieldAuditInstalled
       delete root.dataset.enhancementsInstalled
+      delete root.dataset.forecastCurrentMonth
+      delete root.dataset.forecastWindowStart
+      delete root.dataset.forecastWindowEnd
       document.body.classList.remove('nav-collapsed', 'nav-hidden', 'nav-open')
       delete document.body.dataset.navState
     }
