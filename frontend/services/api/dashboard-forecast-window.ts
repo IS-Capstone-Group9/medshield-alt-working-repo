@@ -67,6 +67,13 @@ export function resolveForecastCurrentMonth(
   return periodKeyFromDate(browserDate)
 }
 
+export function resolveForecastCurrentYear(
+  metadata?: ForecastWindowMetadata,
+  browserDate: Date = new Date(),
+): string {
+  return resolveForecastCurrentMonth(metadata, browserDate).slice(0, 4)
+}
+
 export function buildRollingForecastWindow(currentMonth: string): RollingForecastWindow {
   if (!isPeriodKey(currentMonth)) {
     throw new Error(`Invalid current month: ${currentMonth}`)
