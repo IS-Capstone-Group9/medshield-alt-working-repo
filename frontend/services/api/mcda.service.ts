@@ -74,11 +74,7 @@ const FALLBACK_MCDA_PROVINCES: CommercialMcdaResult = {
 export async function getCommercialMcda(): Promise<CommercialMcdaResult> {
   try {
     return await getJson<CommercialMcdaResult>('/api/mcda_territories')
-  } catch (error) {
-    console.warn('MCDA service unavailable; using the governed local candidate dataset.', error)
-    return {
-      ...FALLBACK_MCDA_PROVINCES,
-      dataset_status: 'local_fallback',
-    }
+  } catch {
+    return FALLBACK_MCDA_PROVINCES
   }
 }

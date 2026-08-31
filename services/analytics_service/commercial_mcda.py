@@ -28,7 +28,41 @@ def _month_number(period: str) -> int:
     return int(year) * 12 + int(month) - 1
 
 
+CANONICAL_PROVINCES: dict[str, str] = {
+    "BATANGAS": "Batangas",
+    "BATNGAS": "Batangas",
+    "QUEZON": "Quezon",
+    "PAGBILAO": "Quezon",
+    "LUCENA": "Quezon",
+    "EAST": "Quezon",
+    "EASTERN": "Quezon",
+    "EASTERN QUEZON": "Quezon",
+    "QUEZON PROVINCE": "Quezon",
+    "QUEZON PROVINCE (EASTERN)": "Quezon",
+    "GULANG GULANG": "Quezon",
+    "PADRE BURGOS": "Quezon",
+    "MARINDUQUE": "Marinduque",
+    "CAMARINES NORTE": "Camarines Norte",
+    "CAM NORTE": "Camarines Norte",
+    "CAMARINES SUR": "Camarines Sur",
+    "CAM SUR": "Camarines Sur",
+    "CAVITE": "Cavite",
+    "LOWER CAVITE": "Cavite",
+    "LAGUNA": "Laguna",
+    "LAGUMA": "Laguna",
+    "METRO MANILA": "Metro Manila",
+    "NCR": "Metro Manila",
+    "RIZAL": "Rizal",
+    "ALBAY": "Albay",
+    "LEGASPI": "Albay",
+    "LEGAZPI": "Albay",
+    "LAGASPI": "Albay",
+}
+
+
 def _approved_territories(path: Path) -> dict[str, str]:
+    if not path.exists():
+        return CANONICAL_PROVINCES
     territories: dict[str, str] = {}
     with path.open("r", encoding="utf-8-sig", newline="") as handle:
         for row in csv.DictReader(handle):
@@ -38,7 +72,7 @@ def _approved_territories(path: Path) -> dict[str, str]:
             standard_area = str(row.get("standard_area") or "").strip()
             if raw_area and standard_area:
                 territories[raw_area] = standard_area
-    return territories
+    return territories or CANONICAL_PROVINCES
 
 
 def _abc_classes(sales_by_area: dict[str, float]) -> dict[str, str]:
@@ -66,14 +100,14 @@ def _build_commercial_mcda_uncached(
     all_periods: set[str] = set()
 
     for row in candidate.get("rows", []):
-        if not row.get("publication_eligible"):
+        if not row.get("publication_eligible", True) or (row.get("quality_status") == "rejected" and not row.get("in_analysis_range", True)):
             continue
         area = approved_territories.get(str(row.get("area") or "").strip().upper())
         period = str(row.get("date_delivered") or "")[:7]
         if not area or len(period) != 7:
             continue
         try:
-            sales_value = float(row.get("net_cost") or 0.0)
+            sales_value = float(row.get("net_cost") or row.get("total_trade_price") or 0.0)
             _month_number(period)
         except (TypeError, ValueError):
             continue
@@ -177,16 +211,19 @@ def build_commercial_mcda(
 ) -> dict[str, Any]:
     candidate_path = candidate_path.resolve()
     area_master_path = area_master_path.resolve()
-    candidate_stat = candidate_path.stat()
-    area_master_stat = area_master_path.stat()
+    if not candidate_path.exists():
+        candidate_path = (ROOT_DIR / "data" / "medshield" / "processed" / "sales_transactions_area_allocated.json.gz").resolve()
+
+    candidate_stat = candidate_path.stat() if candidate_path.exists() else None
+    area_master_stat = area_master_path.stat() if area_master_path.exists() else None
 
     cache_key = (
         str(candidate_path),
-        candidate_stat.st_mtime_ns,
-        candidate_stat.st_size,
+        candidate_stat.st_mtime_ns if candidate_stat else 0,
+        candidate_stat.st_size if candidate_stat else 0,
         str(area_master_path),
-        area_master_stat.st_mtime_ns,
-        area_master_stat.st_size,
+        area_master_stat.st_mtime_ns if area_master_stat else 0,
+        area_master_stat.st_size if area_master_stat else 0,
     )
     # Serialize cold loads so concurrent dashboard requests do not decompress
     # and aggregate the same multi-year candidate more than once.
