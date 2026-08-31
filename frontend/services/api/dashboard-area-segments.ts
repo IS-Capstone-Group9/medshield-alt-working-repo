@@ -1,6 +1,6 @@
 import type { AreaPoint } from '@/types/api.types'
 
-type AreaSegment = 'territory' | 'channel' | 'businessLine' | 'unmapped'
+type AreaSegment = 'territory' | 'geographicAggregate' | 'channel' | 'businessLine' | 'unmapped'
 
 const AREA_SEGMENT_BY_LABEL = new Map<string, AreaSegment>([
   ['BATANGAS', 'territory'],
@@ -17,10 +17,10 @@ const AREA_SEGMENT_BY_LABEL = new Map<string, AreaSegment>([
   ['NCR', 'territory'],
   ['RIZAL', 'territory'],
   ['ALBAY', 'territory'],
-  ['BICOL', 'territory'],
+  ['BICOL', 'geographicAggregate'],
   ['LEGASPI', 'territory'],
   ['LEGAZPI', 'territory'],
-  ['MINDORO', 'territory'],
+  ['MINDORO', 'geographicAggregate'],
   ['LUCENA', 'territory'],
   ['EAST', 'territory'],
   ['EASTERN', 'territory'],
@@ -45,6 +45,7 @@ function sortedByRevenue(rows: AreaPoint[]): AreaPoint[] {
 export function splitAreaSegments(rows: AreaPoint[]) {
   const segments = {
     territory: [] as AreaPoint[],
+    geographicAggregate: [] as AreaPoint[],
     channel: [] as AreaPoint[],
     businessLine: [] as AreaPoint[],
     unmapped: [] as AreaPoint[],
@@ -56,6 +57,7 @@ export function splitAreaSegments(rows: AreaPoint[]) {
 
   return {
     territory: sortedByRevenue(segments.territory),
+    geographicAggregate: sortedByRevenue(segments.geographicAggregate),
     channel: sortedByRevenue(segments.channel),
     businessLine: sortedByRevenue(segments.businessLine),
     unmapped: sortedByRevenue(segments.unmapped),
