@@ -12,6 +12,7 @@ import {
   filterForecastRowsToWindow,
   formatPeriodLabel,
   parsePeriodKey,
+  resolveForecastCurrentMonth,
   resolveForecastCurrentYear,
   resolveRollingForecastWindow,
   type RollingForecastWindow,
@@ -101,9 +102,9 @@ function monthlyRowsForView(data: DashboardData, year: string | null) {
   const selected = aggregateMonthly(data.monthly, year)
   const currentAnalyticalYear = resolveForecastCurrentYear(data.dataStatus)
 
-  if (year === currentAnalyticalYear) {
+  if (year && year >= currentAnalyticalYear) {
     const estimated = buildEstimatedMonthlyRowsForYear(data, year)
-    if (estimated.length > selected.length) return { rows: estimated, isEstimated: true, selectedYear: year }
+    if (estimated.length === 12) return { rows: estimated, isEstimated: true, selectedYear: year }
   }
 
   if (selected.length) return { rows: selected, isEstimated: false, selectedYear: year }
@@ -203,6 +204,26 @@ function replaceChart(canvas: HTMLCanvasElement, configuration: ChartConfigurati
   return new Chart(canvas, configuration)
 }
 
+function futurePeriodShadePlugin(periods: string[], currentMonth: string) {
+  return {
+    id: `future-period-shade-${currentMonth}`,
+    beforeDatasetsDraw(chart: any) {
+      const currentIndex = periods.indexOf(currentMonth)
+      if (currentIndex < 0 || currentIndex >= periods.length - 1) return
+
+      const xScale = chart.scales.x
+      const currentX = xScale.getPixelForValue(currentIndex)
+      const nextX = xScale.getPixelForValue(currentIndex + 1)
+      const startX = currentX + (nextX - currentX) / 2
+      const { ctx, chartArea } = chart
+      ctx.save()
+      ctx.fillStyle = 'rgba(217, 119, 6, 0.14)'
+      ctx.fillRect(startX, chartArea.top, chartArea.right - startX, chartArea.bottom - chartArea.top)
+      ctx.restore()
+    },
+  }
+}
+
 function rollingWindow(data: DashboardData): RollingForecastWindow {
   return resolveRollingForecastWindow(data.dataStatus, new Date())
 }
@@ -291,6 +312,7 @@ function renderDiseaseDemandChart(root: HTMLElement, data: DashboardData) {
     canvas,
     {
       type: 'bar',
+      plugins: [futurePeriodShadePlugin(monthly.map((row) => row.period), resolveForecastCurrentMonth(data.dataStatus))],
       data: {
         labels: monthly.map((row) => formatPeriod(row.period)),
         datasets,
@@ -658,6 +680,7 @@ function renderForecastChart(root: HTMLElement, data: DashboardData) {
 
   replaceChart(canvas, {
     type: 'line',
+    plugins: [futurePeriodShadePlugin(window.periods, window.currentMonth)],
     data: {
       labels: window.labels,
       datasets,
@@ -721,6 +744,7 @@ function renderExternalSignalsChart(root: HTMLElement, data: DashboardData) {
 
   replaceChart(canvas, {
     type: 'line',
+    plugins: [futurePeriodShadePlugin(window.periods, window.currentMonth)],
     data: {
       labels: window.labels,
       datasets: [
@@ -796,6 +820,7 @@ function renderSeasonalityIndexChart(root: HTMLElement, data: DashboardData) {
 
   replaceChart(canvas, {
     type: 'bar',
+    plugins: [futurePeriodShadePlugin(window.periods, window.currentMonth)],
     data: {
       labels: window.labels,
       datasets: [

@@ -88,6 +88,7 @@ test('current analytical year keeps actual months and estimates remaining months
       ...baseData.monthly,
       { period: '2026-01', revenue: 90, income: 45 },
       { period: '2026-08', revenue: 180, income: 81 },
+      { period: '2026-09', revenue: 999, income: 999 },
     ],
     forecasts: [
       ...baseData.forecasts,
@@ -111,6 +112,22 @@ test('current analytical year keeps actual months and estimates remaining months
   assert.deepEqual(rows.find((row) => row.period === '2026-08'), { period: '2026-08', revenue: 180, income: 81 })
   assert.equal(rows.find((row) => row.period === '2026-09')?.revenue, 210)
   assert.equal(rows.find((row) => row.period === '2026-09')?.income, 105)
+})
+
+test('current analytical year advances the actual cutoff with current month metadata', () => {
+  const data = {
+    ...baseData,
+    dataStatus: { ...baseData.dataStatus, current_month: '2026-09' },
+    monthly: [
+      ...baseData.monthly,
+      { period: '2026-08', revenue: 180, income: 81 },
+      { period: '2026-09', revenue: 220, income: 110 },
+    ],
+  }
+  const rows = buildEstimatedMonthlyRowsForYear(data, '2026')
+
+  assert.deepEqual(rows.find((row) => row.period === '2026-08'), { period: '2026-08', revenue: 180, income: 81 })
+  assert.deepEqual(rows.find((row) => row.period === '2026-09'), { period: '2026-09', revenue: 220, income: 110 })
 })
 
 test('actual monthly rows prevent treating a year as missing', () => {

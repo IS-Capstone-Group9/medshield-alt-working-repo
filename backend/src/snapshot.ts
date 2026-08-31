@@ -108,12 +108,12 @@ async function loadReferenceSnapshot(): Promise<DashboardSnapshot> {
     ...parsed,
     forecasts: parsed.forecasts ?? parsed.forecast ?? [],
     data_status: {
+      ...(parsed.data_status ?? {}),
       source: 'bundled_fallback',
       mode: 'demo',
       loaded_at: new Date().toISOString(),
       message: 'Bundled demonstration snapshot; not a live operational feed.',
-      ...buildForecastWindowMetadata(parsed.data_status?.current_month),
-      ...(parsed.data_status ?? {}),
+      ...buildForecastWindowMetadata(),
     },
   }
 }

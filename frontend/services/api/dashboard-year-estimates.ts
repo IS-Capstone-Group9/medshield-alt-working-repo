@@ -27,6 +27,13 @@ function monthPeriod(year: string, monthIndex: number): string {
   return `${year}-${String(monthIndex + 1).padStart(2, '0')}`
 }
 
+function currentMonthForData(data: DashboardData): string {
+  const configured = data.dataStatus?.current_month ?? data.dataStatus?.forecast_window?.start
+  if (typeof configured === 'string' && /^\d{4}-(0[1-9]|1[0-2])$/.test(configured)) return configured
+  const now = new Date()
+  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`
+}
+
 function validForwardMargin(revenue: number, income: number): number | null {
   if (!finite(revenue) || !finite(income) || revenue <= 0) return null
   const margin = income / revenue
@@ -139,9 +146,19 @@ export function hasMonthlyRowsForYear(rows: MonthlyPoint[], year: string | null)
 export function buildEstimatedMonthlyRowsForYear(data: DashboardData, year: string): MonthlyPoint[] {
   if (!YEAR_PATTERN.test(year)) return []
 
+  const currentMonth = currentMonthForData(data)
+  const currentYear = currentMonth.slice(0, 4)
+  const actualCutoff = year < currentYear ? `${year}-12` : year === currentYear ? currentMonth : null
   const actualByPeriod = new Map(
     data.monthly
-      .filter((row) => row.period?.startsWith(`${year}-`) && finite(row.revenue) && finite(row.income))
+      .filter(
+        (row) =>
+          actualCutoff !== null &&
+          row.period?.startsWith(`${year}-`) &&
+          row.period <= actualCutoff &&
+          finite(row.revenue) &&
+          finite(row.income),
+      )
       .map((row) => [row.period, row]),
   )
   const forecastByPeriod = new Map(

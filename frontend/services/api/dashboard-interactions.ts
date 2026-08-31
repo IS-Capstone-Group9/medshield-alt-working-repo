@@ -12,7 +12,7 @@ import { renderWeatherEffects } from './weather-view-helpers'
 import { splitAreaSegments } from './dashboard-area-segments'
 import { updateDashboardProvenance } from './dashboard-enhancements'
 import { setDecisionSupportChartData } from './dashboard-decision-charts'
-import { resolveForecastCurrentYear } from './dashboard-forecast-window'
+import { resolveForecastCurrentYear, resolveNextForecastYear } from './dashboard-forecast-window'
 import {
   buildEstimatedMonthlyRowsForYear,
   buildEstimatedYearSummaryForYear,
@@ -21,24 +21,31 @@ import type { DashboardData } from '@/types/api.types'
 
 function dashboardDataForLegacyCharts(data: DashboardData): DashboardData {
   const currentAnalyticalYear = resolveForecastCurrentYear(data.dataStatus)
-  const estimatedMonthly = buildEstimatedMonthlyRowsForYear(data, currentAnalyticalYear)
-  const estimatedYearSummary = buildEstimatedYearSummaryForYear(
-    data,
-    currentAnalyticalYear,
-    estimatedMonthly,
-  )
-
-  if (!estimatedMonthly.length || !estimatedYearSummary) return data
   const existingPeriods = new Set(data.monthly.map((row) => row.period))
-  const completionRows = estimatedMonthly.filter((row) => !existingPeriods.has(row.period))
-  const yearSummaryWithoutCurrent = data.yearSummary.filter((row) => row.year !== currentAnalyticalYear)
+  const forecastYears = [currentAnalyticalYear, resolveNextForecastYear(data.dataStatus)].filter(
+    (year): year is string => Boolean(year),
+  )
+  const completionRows = []
+  const estimatedSummaries = []
+
+  for (const year of forecastYears) {
+    const estimatedMonthly = buildEstimatedMonthlyRowsForYear(data, year)
+    const estimatedYearSummary = buildEstimatedYearSummaryForYear(data, year, estimatedMonthly)
+    if (!estimatedMonthly.length || !estimatedYearSummary) continue
+    completionRows.push(...estimatedMonthly.filter((row) => !existingPeriods.has(row.period)))
+    estimatedSummaries.push(estimatedYearSummary)
+  }
+
+  if (!completionRows.length && !estimatedSummaries.length) return data
+  const forecastYearSet = new Set(estimatedSummaries.map((row) => row.year))
+  const yearSummaryWithoutForecasts = data.yearSummary.filter((row) => !forecastYearSet.has(row.year))
 
   return {
     ...data,
     monthly: [...data.monthly, ...completionRows].sort((left, right) =>
       left.period.localeCompare(right.period),
     ),
-    yearSummary: [...yearSummaryWithoutCurrent, estimatedYearSummary].sort(
+    yearSummary: [...yearSummaryWithoutForecasts, ...estimatedSummaries].sort(
       (left, right) => Number(left.year) - Number(right.year),
     ),
   }
@@ -70,6 +77,7 @@ export async function refreshDashboardFromGateway() {
     updateDashboardProvenance(root, data.dataStatus, data.yearSummary.map((row) => row.year))
   }
   applyDatasetPatch({
+    data_status: data.dataStatus,
     monthly: legacyChartData.monthly,
     by_area: data.byArea,
     by_year_area: data.byYearArea,

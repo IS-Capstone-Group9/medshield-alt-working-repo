@@ -199,7 +199,7 @@ if (typeof window !== 'undefined') {
         data = await res.json();
       } catch(e) { console.warn('API fallback active', e); }
       var details = (data && data.detail) ? data.detail : {
-        season_name: 'July & August - Peak Monsoon',
+        season_name: 'July–October - Peak Monsoon',
         climate_trigger: 'Peak Southwest Monsoon & Urban Inundation',
         skus: [
           {sku:'Doxycycline 100mg Capsule',category:'Flood Prophylactics',current_stock:180,eoq_reorder:1200,rop:400,urgency:'Critical',unit_cost:'\u20b112.00'},

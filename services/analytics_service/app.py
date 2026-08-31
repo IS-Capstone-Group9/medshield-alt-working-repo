@@ -279,7 +279,7 @@ _SEASONAL_MATRIX = [
         ], "status": "draft"
     },
     {
-        "months": "July & August", "month_numbers": [7, 8],
+        "months": "July–October", "month_numbers": [7, 8, 9, 10],
         "season_climate": "Peak Southwest Monsoon (Habagat) & Tropical Cyclones",
         "season_emoji": "HABAGAT", "urgency_level": 5, "urgency_rating": "CRITICAL_EPIDEMIC_SURGE",
         "weather_indicators": "Heavy rainfall (>250mm/mo), high humidity (88%+), severe urban flooding",
@@ -479,7 +479,7 @@ def seasonal_restock_detail():
             ]
         },
         "monsoon": {
-            "season_name": "July & August — Peak Monsoon (Habagat) & Floods",
+            "season_name": "July–October — Peak Monsoon (Habagat) & Floods",
             "climate_trigger": "Peak Southwest Monsoon & Urban Inundation",
             "disease_risks": ["Dengue Outbreaks (DII > 1.4)", "Leptospirosis Wave 1", "Acute Bloody Diarrhea", "Cholera Watch"],
             "skus": [
