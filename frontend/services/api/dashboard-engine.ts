@@ -479,7 +479,20 @@ function getDashboardBusinessLineRows() {
 function updateDashboardSummary() {
   if (typeof document === 'undefined' || typeof DATA === 'undefined' || !DATA) return;
   var yr = getActiveDashboardYear();
-  var summary = yr === 'all' || !yr ? (DATA.totals || {}) : getYearSummaryRow(yr);
+  var cumulativeSummary = null;
+  if (Array.isArray(DATA.year_summary)) {
+    var summaryRows = DATA.year_summary.filter(function(row) {
+      return Number(row.revenue) > 0 || Number(row.income) > 0 || Number(row.transactions) > 0;
+    });
+    if (summaryRows.length > 0) {
+      cumulativeSummary = {
+        total_revenue: summaryRows.reduce(function(sum, row) { return sum + (Number(row.revenue) || 0); }, 0),
+        total_income: summaryRows.reduce(function(sum, row) { return sum + (Number(row.income) || 0); }, 0),
+        total_transactions: summaryRows.reduce(function(sum, row) { return sum + (Number(row.transactions) || 0); }, 0),
+      };
+    }
+  }
+  var summary = yr === 'all' || !yr ? (cumulativeSummary || DATA.totals || {}) : getYearSummaryRow(yr);
   if (!summary) return;
 
   var revenue = Number(yr === 'all' || !yr ? summary.total_revenue : summary.revenue) || 0;
