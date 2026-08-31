@@ -12,9 +12,14 @@ import {
   filterForecastRowsToWindow,
   formatPeriodLabel,
   parsePeriodKey,
+  resolveForecastCurrentYear,
   resolveRollingForecastWindow,
   type RollingForecastWindow,
 } from './dashboard-forecast-window'
+import {
+  buildEstimatedMonthlyRowsForYear,
+  hasMonthlyRowsForYear,
+} from './dashboard-year-estimates'
 
 const dashboardDataByRoot = new WeakMap<HTMLElement, DashboardData>()
 
@@ -92,9 +97,17 @@ function aggregateMonthly(rows: MonthlyPoint[], year: string | null): MonthlyPoi
     .map(([period, values]) => ({ period, ...values }))
 }
 
-function monthlyRowsForView(rows: MonthlyPoint[], year: string | null): MonthlyPoint[] {
-  const selected = aggregateMonthly(rows, year)
-  return selected.length ? selected : aggregateMonthly(rows, null)
+function monthlyRowsForView(data: DashboardData, year: string | null) {
+  const selected = aggregateMonthly(data.monthly, year)
+  if (selected.length) return { rows: selected, isEstimated: false, selectedYear: year }
+
+  const currentAnalyticalYear = resolveForecastCurrentYear(data.dataStatus)
+  if (year === currentAnalyticalYear && !hasMonthlyRowsForYear(data.monthly, year)) {
+    const estimated = buildEstimatedMonthlyRowsForYear(data, year)
+    if (estimated.length) return { rows: estimated, isEstimated: true, selectedYear: year }
+  }
+
+  return { rows: aggregateMonthly(data.monthly, null), isEstimated: false, selectedYear: null }
 }
 
 function aggregateDiseaseSignals(rows: ExternalSignalPoint[]): Map<string, number> {
@@ -201,7 +214,8 @@ function renderDiseaseDemandChart(root: HTMLElement, data: DashboardData) {
   const canvas = root.querySelector<HTMLCanvasElement>('#diseaseDemandChart')
   if (!canvas) return
 
-  const monthly = monthlyRowsForView(data.monthly, selectedYear(root))
+  const monthlyView = monthlyRowsForView(data, selectedYear(root))
+  const monthly = monthlyView.rows
   if (!monthly.length) return
 
   const signalByPeriod = aggregateDiseaseSignals(data.externalSignals)
@@ -215,7 +229,15 @@ function renderDiseaseDemandChart(root: HTMLElement, data: DashboardData) {
 
   updateChartCard(
     canvas,
-    hasDiseaseData
+    monthlyView.isEstimated
+      ? {
+          title: 'Estimated Current-Year Sales Profile',
+          subtitle: `${monthlyView.selectedYear} approximation from trained forecast outputs and historical seasonality; not closed warehouse actuals`,
+          badge: 'Estimated analytical year',
+          status: 'Approximation',
+          statusClass: 'status-draft',
+        }
+      : hasDiseaseData
       ? {
           title: 'Historical Sales vs. Disease Intensity',
           subtitle: 'Loaded monthly sales value (bars) and aligned disease intensity index (line)',
@@ -238,7 +260,7 @@ function renderDiseaseDemandChart(root: HTMLElement, data: DashboardData) {
   const datasets: ChartConfiguration<'bar' | 'line'>['data']['datasets'] = [
     {
       type: 'bar',
-      label: 'Monthly sales value',
+      label: monthlyView.isEstimated ? 'Estimated monthly sales value' : 'Monthly sales value',
       data: monthly.map((row) => row.revenue),
       backgroundColor: 'rgba(30, 58, 95, 0.72)',
       borderColor: '#1E3A5F',
