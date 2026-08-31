@@ -118,6 +118,10 @@ export function getExecutableDashboardScript(): string {
       "const clusterRows = getDynamicClusterRows(); const _unusedClusterRows = ["
     )
     .replace(
+      "const priorityRows = [",
+      "const priorityRows = getDynamicPriorityRows(); const _unusedPriorityRows = ["
+    )
+    .replace(
       "createChart('areaBarChart', {",
       "updateAreaChartHeaders(); createChart('areaBarChart', {"
     )
@@ -252,8 +256,41 @@ function dashboardRowsOrDerived(field, labels) {
   });
 }
 
+function canonicalTerritoryProvince(name) {
+  var u = String(name || '').trim().toUpperCase();
+  if (u === 'QUEZON' || u === 'PAGBILAO' || u === 'LUCENA' || u === 'EAST' || u === 'EASTERN' || u === 'EASTERN QUEZON' || u === 'QUEZON PROVINCE' || u === 'QUEZON PROVINCE (EASTERN)' || u === 'GULANG GULANG' || u === 'PADRE BURGOS') return 'Quezon';
+  if (u === 'BATANGAS' || u === 'BATNGAS') return 'Batangas';
+  if (u === 'LAGUNA' || u === 'LAGUMA') return 'Laguna';
+  if (u === 'CAVITE' || u === 'LOWER CAVITE') return 'Cavite';
+  if (u === 'MARINDUQUE') return 'Marinduque';
+  if (u === 'CAMARINES SUR' || u === 'CAM SUR') return 'Camarines Sur';
+  if (u === 'CAMARINES NORTE' || u === 'CAM NORTE') return 'Camarines Norte';
+  if (u === 'ALBAY' || u === 'LEGASPI' || u === 'LEGAZPI' || u === 'LAGASPI') return 'Albay';
+  if (u === 'RIZAL') return 'Rizal';
+  if (u === 'METRO MANILA' || u === 'NCR') return 'Metro Manila';
+  return null;
+}
+
 function getDashboardTerritoryRows() {
-  return sortedDashboardAreaRows(dashboardRowsOrDerived('by_territory', DASHBOARD_TERRITORY_LABELS), 'revenue');
+  var source = getYearAreaSource();
+  var provinceTotals = {};
+  
+  (Array.isArray(source) ? source : []).forEach(function(row) {
+    if (!row || !row.area) return;
+    var prov = canonicalTerritoryProvince(row.area);
+    if (!prov) return; // Strictly ignore channels and non-provinces
+    if (!provinceTotals[prov]) {
+      provinceTotals[prov] = { area: prov, revenue: 0, income: 0 };
+    }
+    provinceTotals[prov].revenue += (row.revenue || 0);
+    provinceTotals[prov].income += (row.income || 0);
+  });
+
+  var rows = [];
+  for (var prov in provinceTotals) {
+    rows.push(provinceTotals[prov]);
+  }
+  return rows.sort(function(a, b) { return (b.revenue || 0) - (a.revenue || 0); });
 }
 
 function getDashboardChannelRows() {
@@ -294,38 +331,66 @@ function updateAreaChartHeaders() {
 function getDynamicClusterRows() {
   var yr = getActiveDashboardYear();
   var territories = getDashboardTerritoryRows();
-  var channels = getDashboardChannelRows();
-  var allRows = territories.concat(channels);
   
-  if (!allRows.length) {
+  if (!territories.length) {
     return [
-      { cluster: 'Tier 1 - High Volume', areas: 'Government, Hospital, Pagbilao', profile: 'Core institutional demand', implication: 'Pre-allocate critical therapeutic safety stock' },
-      { cluster: 'Tier 2 - Commercial Hubs', areas: 'Quezon, Batangas', profile: 'Stable regional retail flow', implication: 'Maintain steady replenishment and monsoon buffer' },
-      { cluster: 'Tier 3 - Regional Outlets', areas: 'Marinduque, Laguna, Cavite', profile: 'Variable demand / transit sensitive', implication: 'Monitor logistics lead time and island ferries' }
+      { cluster: 'Tier 1 - High Volume', areas: 'Quezon, Batangas', profile: 'Primary provincial volume hubs', implication: 'Pre-allocate critical therapeutic safety stock' },
+      { cluster: 'Tier 2 - Regional Hubs', areas: 'Marinduque, Laguna, Cavite', profile: 'Stable regional retail flow', implication: 'Maintain steady replenishment and monsoon buffer' },
+      { cluster: 'Tier 3 - Outlying Zones', areas: 'Camarines Sur, Camarines Norte, Albay', profile: 'Transit-sensitive coastal provinces', implication: 'Stage contingency stocks before adverse weather seasons' }
     ];
   }
 
-  var sorted = allRows.slice().sort(function(a, b) { return (b.revenue || 0) - (a.revenue || 0); });
-  var uniqueNames = [];
-  var seen = {};
-  sorted.forEach(function(r) {
-    if (!seen[r.area]) {
-      seen[r.area] = true;
-      uniqueNames.push(r.area);
-    }
-  });
-
-  var tier1 = uniqueNames.slice(0, 2).join(', ');
-  var tier2 = uniqueNames.slice(2, 5).join(', ');
-  var tier3 = uniqueNames.slice(5).join(', ') || 'Peripheral zones';
+  var sortedNames = territories.map(function(r) { return r.area; });
+  var tier1 = sortedNames.slice(0, 2).join(', ');
+  var tier2 = sortedNames.slice(2, 5).join(', ');
+  var tier3 = sortedNames.slice(5).join(', ') || 'Peripheral provincial zones';
 
   var yrPrefix = yr === 'all' ? 'All-Time' : (yr === '2026' ? '2026 Projected' : yr);
 
   return [
-    { cluster: 'Tier 1 - High Volume (' + yrPrefix + ')', areas: tier1, profile: 'Core institutional & volume demand', implication: 'Prioritize automated safety buffer pre-stocking' },
-    { cluster: 'Tier 2 - Regional Hubs (' + yrPrefix + ')', areas: tier2, profile: 'Stable commercial & clinic volume', implication: 'Maintain bi-weekly replenishment and epidemic reserves' },
-    { cluster: 'Tier 3 - Outlying Zones (' + yrPrefix + ')', areas: tier3, profile: 'Variable demand / transit sensitive', implication: 'Stage contingency stocks before adverse weather seasons' }
+    { cluster: 'Tier 1 - High Volume (' + yrPrefix + ')', areas: tier1, profile: 'Primary provincial volume leaders', implication: 'Prioritize automated safety buffer pre-stocking' },
+    { cluster: 'Tier 2 - Regional Hubs (' + yrPrefix + ')', areas: tier2, profile: 'Stable commercial & clinic flow', implication: 'Maintain bi-weekly replenishment and epidemic reserves' },
+    { cluster: 'Tier 3 - Outlying Zones (' + yrPrefix + ')', areas: tier3, profile: 'Transit-sensitive coastal provinces', implication: 'Stage contingency stocks before adverse weather seasons' }
   ];
+}
+
+function getDynamicPriorityRows() {
+  var yr = getActiveDashboardYear();
+  var territories = getDashboardTerritoryRows();
+  var actions = {
+    'Quezon': 'Pre-allocate critical therapeutic safety stock & flood buffer',
+    'Batangas': 'Maintain targeted replenishment and monsoon buffer',
+    'Marinduque': 'Stage island contingency stocks prior to ferry suspension',
+    'Laguna': 'Ensure bi-weekly warehouse staging and clinic reserves',
+    'Cavite': 'Balance commercial distribution with emergency reserves',
+    'Camarines Norte': 'Pre-position antipyretics ahead of rainfall surges',
+    'Camarines Sur': 'Deploy mobile emergency distribution hubs',
+    'Albay': 'Maintain volcanic and typhoon buffer stock reserves',
+    'Rizal': 'Coordinate transit buffers with Metro Manila distribution',
+    'Metro Manila': 'Maintain rapid-dispatch central warehouse reserves'
+  };
+
+  var totalRev = territories.reduce(function(sum, r) { return sum + (r.revenue || 0); }, 0) || 1;
+  var surgeWeights = {
+    'Quezon': 0.95, 'Batangas': 0.90, 'Marinduque': 0.88, 'Laguna': 0.82,
+    'Cavite': 0.78, 'Camarines Sur': 0.85, 'Camarines Norte': 0.80,
+    'Albay': 0.82, 'Rizal': 0.75, 'Metro Manila': 0.70
+  };
+
+  return territories.map(function(t, idx) {
+    var share = (t.revenue || 0) / totalRev;
+    var risk = surgeWeights[t.area] || 0.75;
+    var score = (share * 0.45) + (risk * 0.35) + (0.20 * (1 - (idx / Math.max(territories.length, 1))));
+    return {
+      rank: idx + 1,
+      area: t.area,
+      revenue: share.toFixed(2),
+      growth: (0.10 + share * 0.2).toFixed(2),
+      risk: risk.toFixed(2),
+      score: score.toFixed(2),
+      action: actions[t.area] || 'Maintain targeted safety buffer'
+    };
+  });
 }
 
 function renderTable(id, html) {
