@@ -72,6 +72,7 @@ export async function refreshDashboardFromGateway() {
   applyDatasetPatch({
     monthly: legacyChartData.monthly,
     by_area: data.byArea,
+    by_year_area: data.byYearArea,
     by_territory: areaSegments.territory,
     by_channel: areaSegments.channel,
     by_business_line: areaSegments.businessLine,

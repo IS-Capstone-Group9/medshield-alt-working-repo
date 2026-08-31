@@ -59,7 +59,16 @@ def monthly():
 
 @app.get("/by_area")
 def by_area():
-    return jsonify(snapshot()["by_area"])
+    snap = snapshot()
+    year = request.args.get("year")
+    if year and snap.get("by_year_area") and year in snap["by_year_area"]:
+        return jsonify(snap["by_year_area"][year])
+    return jsonify(snap["by_area"])
+
+
+@app.get("/by_year_area")
+def by_year_area():
+    return jsonify(snapshot().get("by_year_area", {}))
 
 
 @app.get("/year_summary")

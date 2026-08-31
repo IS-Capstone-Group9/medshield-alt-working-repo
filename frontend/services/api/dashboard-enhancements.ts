@@ -65,13 +65,14 @@ export function updateDashboardProvenance(
     availableYears.filter((year) => /^\d{4}$/.test(year))
   )
   const currentAnalyticalYear = resolveForecastCurrentYear(status)
-  const years = [...new Set([...historicalYearSet, currentAnalyticalYear])]
+  const years = [...new Set([...historicalYearSet, currentAnalyticalYear, '2026'])]
     .filter((year) => /^\d{4}$/.test(year))
     .sort((a, b) => Number(b) - Number(a))
   const yearLabels = new Map<string, string>()
   if (currentAnalyticalYear && !historicalYearSet.has(currentAnalyticalYear)) {
     yearLabels.set(currentAnalyticalYear, `${currentAnalyticalYear} (Current Analytical)`)
   }
+  yearLabels.set('2026', '2026 (Forward Estimates)')
 
   replaceSelectOptions(root.querySelector<HTMLSelectElement>('#topbarYearSelect'), years, true, yearLabels)
   replaceSelectOptions(root.querySelector<HTMLSelectElement>('#yoyBaseYearSelect'), years, false, yearLabels)

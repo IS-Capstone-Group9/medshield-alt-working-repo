@@ -1,4 +1,5 @@
 import type {
+  AreaPoint,
   DashboardData,
   ForecastPoint,
   MonthlyPoint,
@@ -187,3 +188,98 @@ export function buildEstimatedYearSummaryForYear(
     transactions: Math.round(revenue * historicalTransactionDensity),
   }
 }
+
+export function buildEstimatedAreaRowsForYear(data: DashboardData, year: string): AreaPoint[] {
+  if (!YEAR_PATTERN.test(year)) return data.byArea ?? []
+
+  // If we already have isolated historical records for this year, use them
+  if (data.byYearArea && Array.isArray(data.byYearArea[year]) && data.byYearArea[year].length > 0) {
+    return data.byYearArea[year]
+  }
+
+  // Otherwise, compute recency-weighted forward estimates (e.g. 2026)
+  const estimatedMonthly = buildEstimatedMonthlyRowsForYear(data, year)
+  const totalEstimatedRevenue = estimatedMonthly.reduce(
+    (sum, row) => sum + (finite(row.revenue) ? row.revenue : 0),
+    0,
+  )
+  if (totalEstimatedRevenue <= 0) return data.byArea ?? []
+
+  const margin = resolveWeightedForwardProfitMargin(data)
+
+  // Use up to 3 recent historical years for recency weighting (weight: 3, 2, 1)
+  const availableYears = Object.keys(data.byYearArea ?? {})
+    .filter((yr) => YEAR_PATTERN.test(yr) && yr < year)
+    .sort()
+    .slice(-3)
+
+  if (availableYears.length > 0) {
+    const areaWeightedShares = new Map<string, number>()
+    let totalWeight = 0
+
+    availableYears.forEach((yr, idx) => {
+      const weight = idx + 1 // 1 for oldest, 2 for middle, 3 for newest
+      const rows = (data.byYearArea ?? {})[yr] ?? []
+      const yrTotal = rows.reduce((s, r) => s + (finite(r.revenue) ? r.revenue : 0), 0)
+      if (yrTotal > 0) {
+        totalWeight += weight
+        for (const row of rows) {
+          if (!row.area || !finite(row.revenue)) continue
+          const current = areaWeightedShares.get(row.area) ?? 0
+          areaWeightedShares.set(row.area, current + (row.revenue / yrTotal) * weight)
+        }
+      }
+    })
+
+    if (totalWeight > 0 && areaWeightedShares.size > 0) {
+      const result: AreaPoint[] = []
+      for (const [area, weightedShare] of areaWeightedShares.entries()) {
+        const normalizedShare = weightedShare / totalWeight
+        const revenue = Math.round(totalEstimatedRevenue * normalizedShare)
+        const income = Math.round(revenue * margin)
+        result.push({ area, revenue, income })
+      }
+      return result.sort((a, b) => b.revenue - a.revenue)
+    }
+  }
+
+  // Fallback if byYearArea is not available: use cumulative shares from data.byArea
+  const totalBaseRev = (data.byArea ?? []).reduce((s, r) => s + (finite(r.revenue) ? r.revenue : 0), 0)
+  if (totalBaseRev <= 0) return data.byArea ?? []
+
+  return (data.byArea ?? []).map((row) => {
+    const share = (finite(row.revenue) && row.revenue > 0) ? row.revenue / totalBaseRev : 0
+    const revenue = Math.round(totalEstimatedRevenue * share)
+    const income = Math.round(revenue * margin)
+    return { area: row.area, revenue, income }
+  }).sort((a, b) => b.revenue - a.revenue)
+}
+
+export function areaRowsForView(
+  data: DashboardData,
+  year: string | null,
+): { rows: AreaPoint[]; isEstimated: boolean; selectedYear: string } {
+  const normalizedYear = (year ?? '').trim()
+  if (!normalizedYear || normalizedYear.toLowerCase() === 'all' || !YEAR_PATTERN.test(normalizedYear)) {
+    return {
+      rows: data.byArea ?? [],
+      isEstimated: false,
+      selectedYear: 'All available years',
+    }
+  }
+
+  if (data.byYearArea && Array.isArray(data.byYearArea[normalizedYear]) && data.byYearArea[normalizedYear].length > 0) {
+    return {
+      rows: data.byYearArea[normalizedYear],
+      isEstimated: false,
+      selectedYear: normalizedYear,
+    }
+  }
+
+  return {
+    rows: buildEstimatedAreaRowsForYear(data, normalizedYear),
+    isEstimated: true,
+    selectedYear: normalizedYear,
+  }
+}
+

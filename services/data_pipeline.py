@@ -123,6 +123,10 @@ AREA_STANDARDIZATION = {
     "SUPPLLIES": "Supplies",
     "EASTERN": "Quezon",
     "EAST": "Quezon",
+    "PAGBILAO": "Quezon",
+    "LUCENA": "Quezon",
+    "GULANG GULANG": "Quezon",
+    "PADRE BURGOS": "Quezon",
 }
 
 # ── Year range constants ───────────────────────────────────────────────────────
@@ -149,8 +153,6 @@ GEOGRAPHIC_AREAS: frozenset[str] = frozenset({
     "Bicol",
     "Legaspi",
     "Mindoro",
-    "Lucena",
-    "East",
 })
 
 # Channel / account labels that appear in the Area column.
