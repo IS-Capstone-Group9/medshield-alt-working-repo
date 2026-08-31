@@ -59,7 +59,16 @@ def monthly():
 
 @app.get("/by_area")
 def by_area():
-    return jsonify(snapshot()["by_area"])
+    snap = snapshot()
+    year = request.args.get("year")
+    if year and snap.get("by_year_area") and year in snap["by_year_area"]:
+        return jsonify(snap["by_year_area"][year])
+    return jsonify(snap["by_area"])
+
+
+@app.get("/by_year_area")
+def by_year_area():
+    return jsonify(snapshot().get("by_year_area", {}))
 
 
 @app.get("/year_summary")
@@ -270,7 +279,7 @@ _SEASONAL_MATRIX = [
         ], "status": "draft"
     },
     {
-        "months": "July & August", "month_numbers": [7, 8],
+        "months": "July–October", "month_numbers": [7, 8, 9, 10],
         "season_climate": "Peak Southwest Monsoon (Habagat) & Tropical Cyclones",
         "season_emoji": "HABAGAT", "urgency_level": 5, "urgency_rating": "CRITICAL_EPIDEMIC_SURGE",
         "weather_indicators": "Heavy rainfall (>250mm/mo), high humidity (88%+), severe urban flooding",
@@ -470,7 +479,7 @@ def seasonal_restock_detail():
             ]
         },
         "monsoon": {
-            "season_name": "July & August — Peak Monsoon (Habagat) & Floods",
+            "season_name": "July–October — Peak Monsoon (Habagat) & Floods",
             "climate_trigger": "Peak Southwest Monsoon & Urban Inundation",
             "disease_risks": ["Dengue Outbreaks (DII > 1.4)", "Leptospirosis Wave 1", "Acute Bloody Diarrhea", "Cholera Watch"],
             "skus": [

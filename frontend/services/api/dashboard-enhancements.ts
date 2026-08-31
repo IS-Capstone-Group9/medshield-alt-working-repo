@@ -4,7 +4,8 @@ import {
   SALES_DATA_PAGE,
   WEATHER_VALIDATION_PAGE,
 } from './dashboard-markup'
-import { DashboardDataStatus } from '@/types/api.types'
+import { resolveForecastCurrentYear, resolveNextForecastYear } from './dashboard-forecast-window'
+import type { DashboardDataStatus } from '@/types/api.types'
 
 const UNSUPPORTED_DASHBOARD_LABELS = new Map([
   ['Execute Purchase Order', 'Save Draft Plan'],
@@ -23,7 +24,12 @@ function replaceUnsupportedLabels(root: HTMLElement) {
   }
 }
 
-function replaceSelectOptions(select: HTMLSelectElement | null, years: string[], includeAll: boolean) {
+function replaceSelectOptions(
+  select: HTMLSelectElement | null,
+  years: string[],
+  includeAll: boolean,
+  labels: Map<string, string> = new Map(),
+) {
   if (!select || years.length === 0) return
   const previousValue = select.value
   const fragment = document.createDocumentFragment()
@@ -38,7 +44,7 @@ function replaceSelectOptions(select: HTMLSelectElement | null, years: string[],
   years.forEach((year) => {
     const option = document.createElement('option')
     option.value = year
-    option.textContent = year
+    option.textContent = labels.get(year) ?? year
     fragment.appendChild(option)
   })
 
@@ -55,13 +61,29 @@ export function updateDashboardProvenance(
   status: DashboardDataStatus,
   availableYears: string[]
 ) {
-  const years = [...new Set(availableYears)]
+  const historicalYearSet = new Set(
+    availableYears.filter((year) => /^\d{4}$/.test(year))
+  )
+  const currentAnalyticalYear = resolveForecastCurrentYear(status)
+  const nextForecastYear = resolveNextForecastYear(status)
+  const years = [...new Set([
+    ...historicalYearSet,
+    currentAnalyticalYear,
+    ...(nextForecastYear ? [nextForecastYear] : []),
+  ])]
     .filter((year) => /^\d{4}$/.test(year))
     .sort((a, b) => Number(b) - Number(a))
+  const yearLabels = new Map<string, string>()
+  if (currentAnalyticalYear) {
+    yearLabels.set(currentAnalyticalYear, `${currentAnalyticalYear} (Current Analytical)`)
+  }
+  if (nextForecastYear) {
+    yearLabels.set(nextForecastYear, `${nextForecastYear} (Forward Forecast)`)
+  }
 
-  replaceSelectOptions(root.querySelector<HTMLSelectElement>('#topbarYearSelect'), years, true)
-  replaceSelectOptions(root.querySelector<HTMLSelectElement>('#yoyBaseYearSelect'), years, false)
-  replaceSelectOptions(root.querySelector<HTMLSelectElement>('#yoyTargetYearSelect'), years, false)
+  replaceSelectOptions(root.querySelector<HTMLSelectElement>('#topbarYearSelect'), years, true, yearLabels)
+  replaceSelectOptions(root.querySelector<HTMLSelectElement>('#yoyBaseYearSelect'), years, false, yearLabels)
+  replaceSelectOptions(root.querySelector<HTMLSelectElement>('#yoyTargetYearSelect'), years, false, yearLabels)
 
   const targetSelect = root.querySelector<HTMLSelectElement>('#yoyTargetYearSelect')
   const baseSelect = root.querySelector<HTMLSelectElement>('#yoyBaseYearSelect')
@@ -83,7 +105,8 @@ export function updateDashboardProvenance(
     const summary = document.createElement('div')
     summary.textContent = `${sourceLabel} | ${status.message}`
     const details = document.createElement('div')
-    details.textContent = `Loaded: ${loadedLabel} PHT | Years: ${years.join(', ') || 'Unavailable'}`
+    const yearSummary = years.map((year) => yearLabels.get(year) ?? year).join(', ')
+    details.textContent = `Loaded: ${loadedLabel} PHT | Years: ${yearSummary || 'Unavailable'}`
     details.style.fontWeight = '700'
     statusBar.append(summary, details)
     statusBar.dataset.source = status.source
@@ -144,6 +167,40 @@ function assignSalesDiagnosticsContent(root: HTMLElement) {
   sections.forEach((section) => deepDive?.appendChild(section))
 }
 
+function updateAreaSegmentationLabels(root: HTMLElement) {
+  const updates = [
+    {
+      canvasId: 'areaBarChart',
+      title: 'Revenue by Province/Local Territory',
+      subtitle: 'Province/local delivery areas only; region and island aggregates excluded',
+      badge: 'Province Grain',
+    },
+    {
+      canvasId: 'areaIncomeChart',
+      title: 'Gross Margin by Customer Channel',
+      subtitle: 'Government, Hospital, and Pharma grouped as customer/channel labels',
+      badge: 'Channels',
+    },
+    {
+      canvasId: 'areaMarginChart',
+      title: 'Business-Line Margin Mix',
+      subtitle: 'Admin, Supplies, Equipment, Personal, and Losses kept outside territory ranking',
+      badge: 'Business Lines',
+    },
+  ]
+
+  for (const update of updates) {
+    const card = root.querySelector(`#${update.canvasId}`)?.closest<HTMLElement>('.chart-card')
+    if (!card) continue
+    const title = card.querySelector<HTMLElement>('.chart-title')
+    const subtitle = card.querySelector<HTMLElement>('.chart-subtitle')
+    const badge = card.querySelector<HTMLElement>('.chart-badge')
+    if (title) title.textContent = update.title
+    if (subtitle) subtitle.textContent = update.subtitle
+    if (badge) badge.textContent = update.badge
+  }
+}
+
 export function enhanceDashboardContent(root: HTMLElement) {
   // MedShield is intentionally light-only. Clear any legacy preference so a
   // previously stored dark theme cannot leave the user in an unsupported mode.
@@ -156,6 +213,7 @@ export function enhanceDashboardContent(root: HTMLElement) {
   }
 
   replaceUnsupportedLabels(root)
+  updateAreaSegmentationLabels(root)
 
   const navigation = root.querySelector('.nav')
   if (navigation) {

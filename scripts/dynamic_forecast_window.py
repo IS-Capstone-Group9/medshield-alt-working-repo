@@ -11,6 +11,7 @@ with open(data_path, 'r', encoding='utf-8') as f:
 current_date = datetime.now()
 current_year = current_date.year
 current_month = current_date.month
+current_month_start = current_date.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
 
 # 1. Historical data up to previous month
 # The existing data is up to 2025-12.
@@ -34,17 +35,21 @@ for m in range(1, historical_cutoff.month + 1):
 # Sort historical data
 data['monthly'] = sorted(data['monthly'], key=lambda x: x['period'])
 
-# 2. Forecast data for rolling 12 months (current_month + 1 to current_month + 12)
-forecast_start = current_date + relativedelta(months=1)
-forecast_end = current_date + relativedelta(months=12)
+# 2. Forecast data for rolling 12 months (current_month + 0 to current_month + 11)
+forecast_start = current_month_start
+forecast_end = current_month_start + relativedelta(months=11)
 
-existing_forecast = { (item['period'], item.get('area','All'), item.get('product','All'), item.get('model_code', '')): item for item in data.get('forecast', [])}
+forecast_rows = data.get('forecasts') or data.get('forecast') or []
+existing_forecast = {
+    (item['period'], item.get('area', 'All'), item.get('product', 'All'), item.get('model_code', '')): item
+    for item in forecast_rows
+}
 
 new_forecast_list = []
-# We need to populate 12 months.
+# We need to populate exactly 12 months.
 # We'll map the required forecast month to the existing 2026 forecast data (which has the correct seasonality shape).
-for i in range(1, 13):
-    target_dt = current_date + relativedelta(months=i)
+for i in range(12):
+    target_dt = current_month_start + relativedelta(months=i)
     target_period = target_dt.strftime("%Y-%m")
     
     # We pull from the existing 2026 forecast matching the SAME MONTH so seasonality is perfect
@@ -57,7 +62,20 @@ for i in range(1, 13):
             new_item['period'] = target_period
             new_forecast_list.append(new_item)
 
-data['forecast'] = sorted(new_forecast_list, key=lambda x: (x['period'], x.get('model_code','')))
+sorted_forecasts = sorted(new_forecast_list, key=lambda x: (x['period'], x.get('model_code', '')))
+data['forecasts'] = sorted_forecasts
+if 'forecast' in data:
+    data['forecast'] = sorted_forecasts
+
+data['data_status'] = {
+    **data.get('data_status', {}),
+    'current_month': forecast_start.strftime('%Y-%m'),
+    'forecast_window': {
+        'start': forecast_start.strftime('%Y-%m'),
+        'end': forecast_end.strftime('%Y-%m'),
+        'months': 12,
+    },
+}
 
 # Write back
 with open(data_path, 'w', encoding='utf-8') as f:

@@ -7,10 +7,17 @@ export interface DashboardSnapshot {
     mode: 'historical' | 'demo'
     loaded_at: string
     message: string
+    current_month?: string
+    forecast_window?: {
+      start: string
+      end: string
+      months: number
+    }
   }
   totals: Record<string, unknown>
   monthly: Array<Record<string, unknown>>
   by_area: Array<Record<string, unknown>>
+  by_year_area?: Record<string, Array<Record<string, unknown>>>
   top_products: Array<Record<string, unknown>>
   year_summary: Array<Record<string, unknown>>
   seasonality: Array<Record<string, unknown>>
@@ -24,6 +31,28 @@ export interface DashboardSnapshot {
   product_region_matches?: Array<Record<string, unknown>>
   decision_alerts?: Array<Record<string, unknown>>
   model_evaluation?: Array<Record<string, unknown>>
+}
+
+function periodKeyFromDate(date: Date): string {
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`
+}
+
+function addMonthsToPeriod(period: string, offset: number): string {
+  const [year, month] = period.split('-').map(Number)
+  const date = new Date(Date.UTC(year, month - 1, 1))
+  date.setUTCMonth(date.getUTCMonth() + offset)
+  return `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, '0')}`
+}
+
+function buildForecastWindowMetadata(currentMonth: string = periodKeyFromDate(new Date())) {
+  return {
+    current_month: currentMonth,
+    forecast_window: {
+      start: currentMonth,
+      end: addMonthsToPeriod(currentMonth, 11),
+      months: 12,
+    },
+  }
 }
 
 const ANALYTICS_SERVICE_URL = (process.env.ANALYTICS_SERVICE_URL ?? 'http://localhost:5101').replace(
@@ -71,13 +100,20 @@ async function fetchJson<T>(url: string): Promise<T> {
 
 async function loadReferenceSnapshot(): Promise<DashboardSnapshot> {
   const raw = await readFile(REFERENCE_DATA_PATH, 'utf8')
+  const parsed = JSON.parse(raw) as Omit<DashboardSnapshot, 'data_status'> & {
+    data_status?: DashboardSnapshot['data_status']
+    forecast?: Array<Record<string, unknown>>
+  }
   return {
-    ...(JSON.parse(raw) as Omit<DashboardSnapshot, 'data_status'>),
+    ...parsed,
+    forecasts: parsed.forecasts ?? parsed.forecast ?? [],
     data_status: {
+      ...(parsed.data_status ?? {}),
       source: 'bundled_fallback',
       mode: 'demo',
       loaded_at: new Date().toISOString(),
       message: 'Bundled demonstration snapshot; not a live operational feed.',
+      ...buildForecastWindowMetadata(),
     },
   }
 }
@@ -88,6 +124,7 @@ async function loadFreshSnapshot(): Promise<DashboardSnapshot> {
       totals,
       monthly,
       byArea,
+      byYearArea,
       yearSummary,
       seasonality,
       forecasts,
@@ -109,6 +146,9 @@ async function loadFreshSnapshot(): Promise<DashboardSnapshot> {
       fetchJson<Array<Record<string, unknown>>>(
         new URL('/by_area', ANALYTICS_SERVICE_URL).toString(),
       ),
+      fetchJson<Record<string, Array<Record<string, unknown>>>>(
+        new URL('/by_year_area', ANALYTICS_SERVICE_URL).toString(),
+      ).catch(() => ({})),
       fetchJson<Array<Record<string, unknown>>>(
         new URL('/year_summary', ANALYTICS_SERVICE_URL).toString(),
       ),
@@ -156,10 +196,12 @@ async function loadFreshSnapshot(): Promise<DashboardSnapshot> {
         mode: 'historical',
         loaded_at: new Date().toISOString(),
         message: 'Historical analytics service data; external signals are planning context only.',
+        ...buildForecastWindowMetadata(),
       },
       totals,
       monthly,
       by_area: byArea,
+      by_year_area: byYearArea,
       top_products: topProducts,
       year_summary: yearSummary,
       seasonality,
@@ -199,5 +241,9 @@ export async function loadSnapshot(): Promise<DashboardSnapshot> {
       })
   }
 
-  return snapshotLoad
+  return await snapshotLoad
+}
+
+export function clearSnapshotCache(): void {
+  snapshotCache = null
 }

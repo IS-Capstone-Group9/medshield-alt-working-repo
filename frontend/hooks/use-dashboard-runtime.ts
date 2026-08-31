@@ -9,10 +9,8 @@ import {
 import { enhanceDashboardContent } from '@/services/api/dashboard-enhancements'
 import { installDashboardEnhancements } from '@/services/api/dashboard-enhancement-listeners'
 import { refreshDashboardFromGateway } from '@/services/api/dashboard-interactions'
-import { hydrateSidebarAccountCard } from '@/lib/sidebar-account-card'
-import type { User } from '@/lib/auth-tokens'
 
-export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | null) {
+export function useDashboardRuntime(onLogout: () => Promise<void>) {
   const rootRef = useRef<HTMLDivElement>(null)
   const [portalContainer, setPortalContainer] = useState<HTMLElement | null>(null)
   const [isLoggingOut, setIsLoggingOut] = useState(false)
@@ -29,6 +27,7 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
 
     let disposed = false
     let activeListeners: ListenerRecord[] = []
+    let dailyRefreshTimer: number | null = null
 
     const styleEl = document.createElement('style')
     styleEl.id = 'medshield-dashboard-styles'
@@ -48,9 +47,8 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
     const ChartConstructor = (Chart as any)?.Chart || (Chart as any)?.default || Chart
     ;(window as any).Chart = (window as any).Chart || ChartConstructor
 
-    root.innerHTML = MEDSHIELD_MARKUP
+    root.innerHTML = MEDSHIELD_MARKUP.replaceAll('July & August', 'July–October')
     enhanceDashboardContent(root)
-    hydrateSidebarAccountCard(root, user)
 
     runDashboardScript(getExecutableDashboardScript())
       .then((listeners) => {
@@ -67,6 +65,12 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
         void refreshDashboardFromGateway().catch((error) => {
           console.warn('Dashboard is using the bundled fallback dataset:', error)
         })
+
+        dailyRefreshTimer = window.setInterval(() => {
+          void refreshDashboardFromGateway().catch((error) => {
+            console.warn('Daily dashboard refresh failed:', error)
+          })
+        }, 24 * 60 * 60 * 1000)
 
         // Add portal injection anchor
         const inventoryPageEl = root.querySelector('#page-inventory')
@@ -96,6 +100,9 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
       for (const { target, type, listener, options } of activeListeners) {
         target.removeEventListener(type, listener, options)
       }
+      if (dailyRefreshTimer !== null) {
+        window.clearInterval(dailyRefreshTimer)
+      }
       root.innerHTML = ''
       document.getElementById('medshield-dashboard-styles')?.remove()
       
@@ -108,6 +115,9 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
       }
       delete (window as any).__medshieldAuditInstalled
       delete root.dataset.enhancementsInstalled
+      delete root.dataset.forecastCurrentMonth
+      delete root.dataset.forecastWindowStart
+      delete root.dataset.forecastWindowEnd
       document.body.classList.remove('nav-collapsed', 'nav-hidden', 'nav-open')
       delete document.body.dataset.navState
     }

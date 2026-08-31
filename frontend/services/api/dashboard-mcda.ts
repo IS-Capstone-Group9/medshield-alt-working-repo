@@ -52,10 +52,15 @@ function renderRankingTable(root: HTMLElement, state: McdaState) {
     subtitle.textContent = `${state.result.dataset_id} · ${state.result.data_period} · reviewer approval pending`
   }
 
-  const defaultRanks = new Map(
-    state.result.territories.map((row) => [row.territory, row.priority_rank])
+  const NON_PROVINCE_NAMES = new Set(['GOVERNMENT', 'HOSPITAL', 'PHARMA', 'ADMIN', 'SUPPLIES', 'EQUIPMENT', 'PERSONAL', 'LOSSES', 'PESO', 'QMC', 'TOURISM'])
+  const validTerritories = state.result.territories.filter(
+    (row) => !NON_PROVINCE_NAMES.has(row.territory.trim().toUpperCase())
   )
-  const ranked = state.result.territories
+
+  const defaultRanks = new Map(
+    validTerritories.map((row) => [row.territory, row.priority_rank])
+  )
+  const ranked = validTerritories
     .map((row) => ({ ...row, adjustedScore: scoreTerritory(row, state) }))
     .sort((left, right) => right.adjustedScore - left.adjustedScore || left.territory.localeCompare(right.territory))
 

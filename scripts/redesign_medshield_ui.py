@@ -1046,7 +1046,7 @@ if (typeof window !== 'undefined') {
         data = await res.json();
       } catch(e) { console.warn('API fallback active', e); }
       var details = (data && data.detail) ? data.detail : {
-        season_name: 'July & August — Peak Monsoon (Habagat)',
+        season_name: 'July–October — Peak Monsoon (Habagat)',
         climate_trigger: 'Peak Southwest Monsoon & Urban Inundation',
         skus: [
           {sku:'Systemic Antipyretics (Non-NSAID / Paracetamol)',category:'Antipyretics',current_stock:600,eoq_reorder:4000,rop:1200,urgency:'Critical',unit_cost:'&#8369;8.50'},
