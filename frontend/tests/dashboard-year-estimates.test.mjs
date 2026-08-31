@@ -5,6 +5,7 @@ import {
   buildEstimatedMonthlyRowsForYear,
   buildEstimatedYearSummaryForYear,
   hasMonthlyRowsForYear,
+  resolveWeightedForwardProfitMargin,
 } from '../services/api/dashboard-year-estimates.ts'
 
 const baseData = {
@@ -91,4 +92,33 @@ test('estimated annual summary is derived from estimated monthly rows', () => {
   assert.equal(summary?.revenue, monthlyRows.reduce((sum, row) => sum + row.revenue, 0))
   assert.equal(summary?.income, monthlyRows.reduce((sum, row) => sum + row.income, 0))
   assert.equal(summary?.transactions, Math.round(summary.revenue * 0.1))
+})
+
+test('weighted forward margin rejects impossible 100%+ income ratios', () => {
+  const margin = resolveWeightedForwardProfitMargin({
+    ...baseData,
+    yearSummary: [
+      { year: '2023', revenue: 100, income: 140, transactions: 10 },
+      { year: '2024', revenue: 100, income: 90, transactions: 10 },
+      { year: '2025', revenue: 100, income: 72, transactions: 10 },
+    ],
+  })
+
+  assert.equal(Number(margin.toFixed(4)), 0.7733)
+  assert.ok(margin < 1)
+})
+
+test('estimated annual net income remains below estimated revenue', () => {
+  const data = {
+    ...baseData,
+    yearSummary: [
+      { year: '2023', revenue: 100, income: 140, transactions: 10 },
+      { year: '2024', revenue: 100, income: 90, transactions: 10 },
+      { year: '2025', revenue: 100, income: 72, transactions: 10 },
+    ],
+  }
+  const summary = buildEstimatedYearSummaryForYear(data, '2026')
+
+  assert.ok(summary)
+  assert.ok(summary.income < summary.revenue)
 })
