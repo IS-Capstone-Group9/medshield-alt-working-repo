@@ -30,7 +30,7 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
 
     let disposed = false
     let activeListeners: ListenerRecord[] = []
-    let monthRefreshTimer: number | null = null
+    let dailyRefreshTimer: number | null = null
 
     const styleEl = document.createElement('style')
     styleEl.id = 'medshield-dashboard-styles'
@@ -70,17 +70,11 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
           console.warn('Dashboard is using the bundled fallback dataset:', error)
         })
 
-        let lastObservedForecastMonth = root.dataset.forecastCurrentMonth
-          ?? resolveForecastCurrentMonth(undefined, new Date())
-        monthRefreshTimer = window.setInterval(() => {
-          const currentSystemMonth = resolveForecastCurrentMonth(undefined, new Date())
-          const activeForecastMonth = root.dataset.forecastCurrentMonth ?? lastObservedForecastMonth
-          if (currentSystemMonth === activeForecastMonth) return
-          lastObservedForecastMonth = currentSystemMonth
+        dailyRefreshTimer = window.setInterval(() => {
           void refreshDashboardFromGateway().catch((error) => {
-            console.warn('Rolling forecast refresh failed after a month boundary:', error)
+            console.warn('Daily dashboard refresh failed:', error)
           })
-        }, 30 * 60 * 1000)
+        }, 24 * 60 * 60 * 1000)
 
         // Add portal injection anchor
         const inventoryPageEl = root.querySelector('#page-inventory')
@@ -110,8 +104,8 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
       for (const { target, type, listener, options } of activeListeners) {
         target.removeEventListener(type, listener, options)
       }
-      if (monthRefreshTimer !== null) {
-        window.clearInterval(monthRefreshTimer)
+      if (dailyRefreshTimer !== null) {
+        window.clearInterval(dailyRefreshTimer)
       }
       root.innerHTML = ''
       document.getElementById('medshield-dashboard-styles')?.remove()

@@ -7,6 +7,7 @@ import {
   filterForecastRowsToWindow,
   resolveForecastCurrentMonth,
   resolveForecastCurrentYear,
+  resolveNextForecastYear,
   resolveRollingForecastWindow,
 } from '../services/api/dashboard-forecast-window.ts'
 
@@ -88,4 +89,10 @@ test('browser month is used when metadata is unavailable', () => {
   const window = resolveRollingForecastWindow(undefined, new Date('2026-09-15T00:00:00+08:00'))
   assert.equal(window.start, '2026-09')
   assert.equal(window.end, '2027-08')
+})
+
+test('next forecast year appears only when Q4 begins', () => {
+  assert.equal(resolveNextForecastYear({ current_month: '2026-09' }), null)
+  assert.equal(resolveNextForecastYear({ current_month: '2026-10' }), '2027')
+  assert.equal(resolveNextForecastYear({ current_month: '2027-10' }), '2028')
 })

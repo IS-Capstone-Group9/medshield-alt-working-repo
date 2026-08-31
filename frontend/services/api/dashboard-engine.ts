@@ -48,6 +48,7 @@ export function getExecutableDashboardScript(): string {
     .join('\n')
 
   let patchedScript = MEDSHIELD_SCRIPT
+    .replaceAll('July & August', 'July–October')
     .replace(/window\.([a-zA-Z0-9_]+)\s*=\s*\1;?/g, "if (typeof $1 !== 'undefined') window.$1 = $1;")
     .replace("window.addEventListener('DOMContentLoaded', async () => {", `(async () => {\n${globalHandlerBridge}\n`)
     .replaceAll("'#335F78'", "dashboardThemeColor('--chart-label', '#335F78')")
@@ -83,11 +84,136 @@ export function getExecutableDashboardScript(): string {
     )
     .replace(
       "if (patch.by_area) DATA.by_area = normalizeAreaRows(patch.by_area);",
-      `if (patch.by_area) DATA.by_area = normalizeAreaRows(patch.by_area);
+      `if (patch.data_status) DATA.data_status = patch.data_status;
+  if (patch.by_area) DATA.by_area = normalizeAreaRows(patch.by_area);
   if (patch.by_year_area) DATA.by_year_area = patch.by_year_area;
   if (patch.by_territory) DATA.by_territory = normalizeAreaRows(patch.by_territory);
   if (patch.by_channel) DATA.by_channel = normalizeAreaRows(patch.by_channel);
   if (patch.by_business_line) DATA.by_business_line = normalizeAreaRows(patch.by_business_line);`
+    )
+    .replace(
+      "const stableConfig = {",
+      `const temporalChartIds = new Set(['monthlyChart', 'revenueDetailChart', 'forecastChart', 'overviewForecastChart', 'externalChart']);
+    let temporalPeriods = null;
+    let temporalCurrentMonth = null;
+    const temporalLabels = Array.isArray(config.data?.labels) ? config.data.labels : [];
+    if (temporalChartIds.has(id)) {
+      const monthNames = { jan: '01', feb: '02', mar: '03', apr: '04', may: '05', jun: '06', jul: '07', aug: '08', sep: '09', oct: '10', nov: '11', dec: '12' };
+      const configuredCurrentMonth = DATA.data_status && DATA.data_status.current_month;
+      const now = new Date();
+      temporalCurrentMonth = /^\\d{4}-(0[1-9]|1[0-2])$/.test(configuredCurrentMonth || '')
+        ? configuredCurrentMonth
+        : now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0');
+      const currentYear = temporalCurrentMonth.slice(0, 4);
+      temporalPeriods = temporalLabels.map((label) => {
+        const match = String(label).trim().toLowerCase().match(/^([a-z]{3})\\s+(\\d{2}|\\d{4})$/);
+        if (match && monthNames[match[1]]) return (match[2].length === 2 ? '20' + match[2] : match[2]) + '-' + monthNames[match[1]];
+        const month = monthNames[String(label).trim().slice(0, 3).toLowerCase()];
+        return month ? currentYear + '-' + month : null;
+      });
+      if (temporalPeriods.some((period) => !period)) temporalPeriods = null;
+      if (id === 'monthlyChart' && temporalLabels.length === DATA.monthly.length) {
+        temporalPeriods = DATA.monthly.map((row) => row.period);
+      }
+    }
+    const temporalShadePlugin = temporalPeriods ? {
+      id: 'legacy-future-period-shade-' + id,
+      beforeDatasetsDraw: (chart) => {
+        const currentIndex = temporalPeriods.indexOf(temporalCurrentMonth);
+        if (currentIndex < 0 || currentIndex >= temporalPeriods.length - 1) return;
+        const xScale = chart.scales.x;
+        const currentX = xScale.getPixelForValue(currentIndex);
+        const nextX = xScale.getPixelForValue(currentIndex + 1);
+        const startX = currentX + (nextX - currentX) / 2;
+        const context = chart.ctx;
+        context.save();
+        context.fillStyle = 'rgba(217, 119, 6, 0.14)';
+        context.fillRect(startX, chart.chartArea.top, chart.chartArea.right - startX, chart.chartArea.bottom - chart.chartArea.top);
+        context.restore();
+      },
+    } : null;
+    const stableConfig = {`
+    )
+    .replace(
+      "...config,\n      options:",
+      "...config,\n      ...(temporalShadePlugin ? { plugins: [...(config.plugins || []), temporalShadePlugin] } : {}),\n      options:"
+    )
+    .replace(
+      "const revenueDetailData = getRevenueDetailData();",
+      `const revenueDetailData = getRevenueDetailData();
+  const revenueDetailCanvas = document.getElementById('revenueDetailChart');
+  const revenueDetailSubtitle = revenueDetailCanvas && revenueDetailCanvas.closest('.chart-card')?.querySelector('.chart-subtitle');
+  const periods = DATA.monthly.map((row) => row.period).filter((period) => /^\\d{4}-\\d{2}$/.test(period)).sort();
+  const configuredCurrentMonth = DATA.data_status && DATA.data_status.current_month;
+  const now = new Date();
+  const currentMonth = /^\\d{4}-(0[1-9]|1[0-2])$/.test(configuredCurrentMonth || '')
+    ? configuredCurrentMonth
+    : now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0');
+  const detailPeriods = comparisonMode === 'single' && selectedYear !== 'all'
+    ? periods.filter((period) => period.startsWith(selectedYear + '-'))
+    : periods;
+  const futurePeriod = (period) => period > currentMonth;
+  const revenueDetailProgressPlugin = {
+    id: 'revenue-detail-current-day',
+    afterDatasetsDraw: (chart) => {
+      if (comparisonMode !== 'single' || detailPeriods.length !== revenueDetailData.labels.length) return;
+      const currentIndex = detailPeriods.indexOf(currentMonth);
+      const revenueDataset = chart.data.datasets[0];
+      if (currentIndex < 0 || currentIndex >= revenueDataset.data.length - 1) return;
+      const today = new Date();
+      const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+      const progress = Math.min(1, Math.max(0, (today.getDate() - 1) / Math.max(1, daysInMonth - 1)));
+      const xScale = chart.scales.x;
+      const yScale = chart.scales.y;
+      const firstValue = Number(revenueDataset.data[currentIndex]);
+      const nextValue = Number(revenueDataset.data[currentIndex + 1]);
+      if (!Number.isFinite(firstValue) || !Number.isFinite(nextValue)) return;
+      const x = xScale.getPixelForValue(currentIndex) +
+        (xScale.getPixelForValue(currentIndex + 1) - xScale.getPixelForValue(currentIndex)) * progress;
+      const y = yScale.getPixelForValue(firstValue + (nextValue - firstValue) * progress);
+      const context = chart.ctx;
+      context.save();
+      context.beginPath();
+      context.arc(x, y, 5, 0, Math.PI * 2);
+      context.fillStyle = '#D97706';
+      context.fill();
+      context.lineWidth = 2;
+      context.strokeStyle = '#FFFFFF';
+      context.stroke();
+      context.restore();
+    },
+  };
+  if (comparisonMode === 'single' && detailPeriods.length === revenueDetailData.labels.length) {
+    revenueDetailData.datasets.forEach((dataset) => {
+      dataset.segment = {
+        borderDash: (context) => futurePeriod(detailPeriods[context.p0DataIndex]) || futurePeriod(detailPeriods[context.p1DataIndex]) ? [7, 5] : [],
+        borderColor: (context) => futurePeriod(detailPeriods[context.p0DataIndex]) || futurePeriod(detailPeriods[context.p1DataIndex]) ? '#D97706' : dataset.borderColor,
+      };
+      dataset.pointRadius = detailPeriods.map((period) => futurePeriod(period) ? 4 : 0);
+      dataset.pointHoverRadius = detailPeriods.map((period) => futurePeriod(period) ? 6 : 3);
+      dataset.pointBackgroundColor = detailPeriods.map((period) => futurePeriod(period) ? '#D97706' : dataset.borderColor);
+    });
+  }
+  if (revenueDetailSubtitle) {
+    const currentLabel = monthLabel(currentMonth);
+    const forecastPeriods = detailPeriods.filter((period) => period > currentMonth);
+    const forecastLabel = forecastPeriods.length
+      ? 'forecasts ' + monthLabel(forecastPeriods[0]) + '–' + monthLabel(forecastPeriods[forecastPeriods.length - 1])
+      : 'no forecast months';
+    if (comparisonMode === 'single' && selectedYear !== 'all') {
+      revenueDetailSubtitle.textContent = selectedYear === currentMonth.slice(0, 4)
+        ? selectedYear + ' monthly performance; actuals through ' + currentLabel + ', ' + forecastLabel
+        : selectedYear + ' monthly performance (closed historical data)';
+    } else if (comparisonMode === 'yoy') {
+      revenueDetailSubtitle.textContent = 'Monthly comparison across selected years; current-year actuals through ' + currentLabel + ', ' + forecastLabel;
+    } else if (periods.length) {
+      revenueDetailSubtitle.textContent = 'Monthly performance (' + periods[0].slice(0, 4) + '–' + periods[periods.length - 1].slice(0, 4) + '); actuals through ' + currentLabel + ', ' + forecastLabel;
+    }
+  }`
+    )
+    .replace(
+      "createChart('revenueDetailChart', {",
+      "createChart('revenueDetailChart', { plugins: [revenueDetailProgressPlugin],"
     )
     .replaceAll(
       "DATA.by_area.map((row) => row.area)",

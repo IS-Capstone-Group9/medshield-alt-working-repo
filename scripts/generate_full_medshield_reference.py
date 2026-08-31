@@ -757,7 +757,7 @@ medshield_markup = r"""
         <div id="seasonalDrilldownContainer" style="margin-top: 24px; background: #FFFFFF; border-radius: 14px; padding: 22px; color: #0F172A; box-shadow: 0 4px 16px rgba(0,0,0,0.12);">
           <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
             <div>
-              <div id="drilldownTitle" style="font-size:16px; font-weight:800; color:#0F172A;">July & August — Peak Monsoon (Habagat) & Floods</div>
+              <div id="drilldownTitle" style="font-size:16px; font-weight:800; color:#0F172A;">July–October — Peak Monsoon (Habagat) & Floods</div>
               <div id="drilldownSub" style="font-size:12px; color:#64748B; margin-top:2px;">Prescribed Medicine Reorder Quantities & Stock Gap Analysis</div>
             </div>
             <span id="drilldownBadge" class="chart-badge" style="background:#FEF2F2; color:#EF4444;">DOH Outbreak Alert</span>
@@ -911,7 +911,7 @@ async function selectSeasonRestock(seasonId, cardEl) {
     }
 
     const details = (data && data.detail) ? data.detail : {
-      season_name: "July & August — Peak Monsoon (Habagat) & Floods",
+      season_name: "July–October — Peak Monsoon (Habagat) & Floods",
       climate_trigger: "Peak Southwest Monsoon & Urban Inundation",
       skus: [
         {sku: "Doxycycline 100mg Capsule", category: "Flood Prophylactics", current_stock: 180, eoq_reorder: 1200, rop: 400, urgency: "Critical", unit_cost: "₱12.00"},
