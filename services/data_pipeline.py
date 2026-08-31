@@ -121,7 +121,8 @@ AREA_STANDARDIZATION = {
     "LEGAZPI": "Legaspi",
     "LOWER CAVITE": "Cavite",
     "SUPPLLIES": "Supplies",
-    "EASTERN": "East",
+    "EASTERN": "Quezon",
+    "EAST": "Quezon",
 }
 
 # ── Year range constants ───────────────────────────────────────────────────────

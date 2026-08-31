@@ -2,6 +2,19 @@ import type { AreaPoint } from '@/types/api.types'
 
 type AreaSegment = 'territory' | 'geographicAggregate' | 'channel' | 'businessLine' | 'unmapped'
 
+const AREA_CANONICAL_NAME: Record<string, string> = {
+  'EAST': 'Quezon',
+  'EASTERN': 'Quezon',
+  'EASTERN QUEZON': 'Quezon',
+  'QUEZON PROVINCE': 'Quezon',
+  'CAM NORTE': 'Camarines Norte',
+  'CAM SUR': 'Camarines Sur',
+  'METRO MANILA': 'Metro Manila',
+  'NCR': 'Metro Manila',
+  'LOWER CAVITE': 'Cavite',
+  'LEGASPI': 'Legazpi',
+}
+
 const AREA_SEGMENT_BY_LABEL = new Map<string, AreaSegment>([
   ['BATANGAS', 'territory'],
   ['QUEZON', 'territory'],
@@ -22,8 +35,6 @@ const AREA_SEGMENT_BY_LABEL = new Map<string, AreaSegment>([
   ['LEGAZPI', 'territory'],
   ['MINDORO', 'geographicAggregate'],
   ['LUCENA', 'territory'],
-  ['EAST', 'territory'],
-  ['EASTERN', 'territory'],
   ['GOVERNMENT', 'channel'],
   ['HOSPITAL', 'channel'],
   ['PHARMA', 'channel'],
@@ -43,23 +54,39 @@ function sortedByRevenue(rows: AreaPoint[]): AreaPoint[] {
 }
 
 export function splitAreaSegments(rows: AreaPoint[]) {
-  const segments = {
-    territory: [] as AreaPoint[],
-    geographicAggregate: [] as AreaPoint[],
-    channel: [] as AreaPoint[],
-    businessLine: [] as AreaPoint[],
-    unmapped: [] as AreaPoint[],
+  const mergedBySegment: Record<AreaSegment, Map<string, AreaPoint>> = {
+    territory: new Map(),
+    geographicAggregate: new Map(),
+    channel: new Map(),
+    businessLine: new Map(),
+    unmapped: new Map(),
   }
 
   for (const row of rows) {
-    segments[segmentForArea(row.area)].push(row)
+    const rawArea = (row.area || '').trim()
+    const upper = rawArea.toUpperCase()
+    const canonicalArea = AREA_CANONICAL_NAME[upper] ?? rawArea
+    const segment = segmentForArea(canonicalArea)
+
+    const bucket = mergedBySegment[segment]
+    const existing = bucket.get(canonicalArea)
+    if (existing) {
+      existing.revenue += row.revenue
+      existing.income += row.income
+    } else {
+      bucket.set(canonicalArea, {
+        area: canonicalArea,
+        revenue: row.revenue,
+        income: row.income,
+      })
+    }
   }
 
   return {
-    territory: sortedByRevenue(segments.territory),
-    geographicAggregate: sortedByRevenue(segments.geographicAggregate),
-    channel: sortedByRevenue(segments.channel),
-    businessLine: sortedByRevenue(segments.businessLine),
-    unmapped: sortedByRevenue(segments.unmapped),
+    territory: sortedByRevenue(Array.from(mergedBySegment.territory.values())),
+    geographicAggregate: sortedByRevenue(Array.from(mergedBySegment.geographicAggregate.values())),
+    channel: sortedByRevenue(Array.from(mergedBySegment.channel.values())),
+    businessLine: sortedByRevenue(Array.from(mergedBySegment.businessLine.values())),
+    unmapped: sortedByRevenue(Array.from(mergedBySegment.unmapped.values())),
   }
 }

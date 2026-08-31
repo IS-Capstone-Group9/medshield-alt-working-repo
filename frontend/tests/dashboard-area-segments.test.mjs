@@ -22,3 +22,17 @@ test('area segmentation separates territories from channels and business lines',
   assert.deepEqual(segments.businessLine.map((row) => row.area), ['Equipment', 'Admin'])
   assert.deepEqual(segments.unmapped.map((row) => row.area), ['Unknown Bucket'])
 })
+
+test('merges East and Eastern into Quezon territory', () => {
+  const segments = splitAreaSegments([
+    { area: 'Quezon', revenue: 60, income: 25 },
+    { area: 'East', revenue: 10, income: 5 },
+    { area: 'Eastern', revenue: 5, income: 2 },
+  ])
+
+  assert.equal(segments.territory.length, 1)
+  assert.equal(segments.territory[0].area, 'Quezon')
+  assert.equal(segments.territory[0].revenue, 75)
+  assert.equal(segments.territory[0].income, 32)
+})
+
