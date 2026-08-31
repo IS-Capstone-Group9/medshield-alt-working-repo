@@ -1,4 +1,10 @@
-import type { DashboardData, ForecastPoint, MonthlyPoint, SeasonalityPoint } from '@/types/api.types'
+import type {
+  DashboardData,
+  ForecastPoint,
+  MonthlyPoint,
+  SeasonalityPoint,
+  YearPoint,
+} from '@/types/api.types'
 
 const YEAR_PATTERN = /^\d{4}$/
 const MONTH_NAMES = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
@@ -133,4 +139,28 @@ export function buildEstimatedMonthlyRowsForYear(data: DashboardData, year: stri
       income: Math.round(revenue * margin),
     }
   })
+}
+
+export function buildEstimatedYearSummaryForYear(
+  data: DashboardData,
+  year: string,
+  monthlyRows: MonthlyPoint[] = buildEstimatedMonthlyRowsForYear(data, year),
+): YearPoint | null {
+  if (!YEAR_PATTERN.test(year) || monthlyRows.length === 0) return null
+
+  const revenue = monthlyRows.reduce((sum, row) => sum + (finite(row.revenue) ? row.revenue : 0), 0)
+  const income = monthlyRows.reduce((sum, row) => sum + (finite(row.income) ? row.income : 0), 0)
+  const historicalTransactionDensity =
+    average(
+      data.yearSummary
+        .filter((row) => finite(row.revenue) && row.revenue > 0 && finite(row.transactions))
+        .map((row) => row.transactions / row.revenue),
+    ) ?? 0
+
+  return {
+    year,
+    revenue: Math.round(revenue),
+    income: Math.round(income),
+    transactions: Math.round(revenue * historicalTransactionDensity),
+  }
 }

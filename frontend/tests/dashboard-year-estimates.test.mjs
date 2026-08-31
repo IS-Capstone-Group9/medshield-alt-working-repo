@@ -3,6 +3,7 @@ import assert from 'node:assert/strict'
 
 import {
   buildEstimatedMonthlyRowsForYear,
+  buildEstimatedYearSummaryForYear,
   hasMonthlyRowsForYear,
 } from '../services/api/dashboard-year-estimates.ts'
 
@@ -30,7 +31,9 @@ const baseData = {
   ],
   byArea: [],
   products: [],
-  yearSummary: [],
+  yearSummary: [
+    { year: '2025', revenue: 300, income: 150, transactions: 30 },
+  ],
   seasonality: [
     { month: 'Jan', avg_revenue: 100 },
     { month: 'Feb', avg_revenue: 200 },
@@ -78,4 +81,14 @@ test('missing analytical year can be approximated from forecasts and trained sea
 test('actual monthly rows prevent treating a year as missing', () => {
   assert.equal(hasMonthlyRowsForYear(baseData.monthly, '2025'), true)
   assert.equal(hasMonthlyRowsForYear(baseData.monthly, '2026'), false)
+})
+
+test('estimated annual summary is derived from estimated monthly rows', () => {
+  const monthlyRows = buildEstimatedMonthlyRowsForYear(baseData, '2026')
+  const summary = buildEstimatedYearSummaryForYear(baseData, '2026', monthlyRows)
+
+  assert.equal(summary?.year, '2026')
+  assert.equal(summary?.revenue, monthlyRows.reduce((sum, row) => sum + row.revenue, 0))
+  assert.equal(summary?.income, monthlyRows.reduce((sum, row) => sum + row.income, 0))
+  assert.equal(summary?.transactions, Math.round(summary.revenue * 0.1))
 })
