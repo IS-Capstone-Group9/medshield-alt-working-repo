@@ -11,6 +11,37 @@ import { renderSalesPage, setSalesViewError } from './sales-page-helpers'
 import { renderWeatherEffects } from './weather-view-helpers'
 import { updateDashboardProvenance } from './dashboard-enhancements'
 import { setDecisionSupportChartData } from './dashboard-decision-charts'
+import { resolveForecastCurrentYear } from './dashboard-forecast-window'
+import {
+  buildEstimatedMonthlyRowsForYear,
+  buildEstimatedYearSummaryForYear,
+  hasMonthlyRowsForYear,
+} from './dashboard-year-estimates'
+import type { DashboardData } from '@/types/api.types'
+
+function dashboardDataForLegacyCharts(data: DashboardData): DashboardData {
+  const currentAnalyticalYear = resolveForecastCurrentYear(data.dataStatus)
+  if (hasMonthlyRowsForYear(data.monthly, currentAnalyticalYear)) return data
+
+  const estimatedMonthly = buildEstimatedMonthlyRowsForYear(data, currentAnalyticalYear)
+  const estimatedYearSummary = buildEstimatedYearSummaryForYear(
+    data,
+    currentAnalyticalYear,
+    estimatedMonthly,
+  )
+
+  if (!estimatedMonthly.length || !estimatedYearSummary) return data
+
+  return {
+    ...data,
+    monthly: [...data.monthly, ...estimatedMonthly].sort((left, right) =>
+      left.period.localeCompare(right.period),
+    ),
+    yearSummary: [...data.yearSummary, estimatedYearSummary].sort(
+      (left, right) => Number(left.year) - Number(right.year),
+    ),
+  }
+}
 
 export function installCommonInteractions(root: HTMLElement) {
   const backdrop = root.querySelector<HTMLElement>('#dashboardHelpBackdrop') || root.querySelector<HTMLElement>('#helpGuidanceModal')
@@ -31,15 +62,16 @@ export async function refreshDashboardFromGateway() {
   if (typeof applyDatasetPatch !== 'function') return
 
   const data = await loadDashboardData()
+  const legacyChartData = dashboardDataForLegacyCharts(data)
   const root = document.querySelector<HTMLElement>('.medshield-root')
   if (root) {
     updateDashboardProvenance(root, data.dataStatus, data.yearSummary.map((row) => row.year))
   }
   applyDatasetPatch({
-    monthly: data.monthly,
+    monthly: legacyChartData.monthly,
     by_area: data.byArea,
     top_products: data.products,
-    year_summary: data.yearSummary,
+    year_summary: legacyChartData.yearSummary,
     seasonality: data.seasonality,
   })
   if (root) setDecisionSupportChartData(root, data)
