@@ -11,6 +11,7 @@ import { installDashboardEnhancements } from '@/services/api/dashboard-enhanceme
 import { refreshDashboardFromGateway } from '@/services/api/dashboard-interactions'
 import { hydrateSidebarAccountCard } from '@/lib/sidebar-account-card'
 import type { User } from '@/lib/auth-tokens'
+import { resolveForecastCurrentMonth } from '@/services/api/dashboard-forecast-window'
 
 export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | null) {
   const rootRef = useRef<HTMLDivElement>(null)
@@ -29,6 +30,7 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
 
     let disposed = false
     let activeListeners: ListenerRecord[] = []
+    let monthRefreshTimer: number | null = null
 
     const styleEl = document.createElement('style')
     styleEl.id = 'medshield-dashboard-styles'
@@ -48,7 +50,7 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
     const ChartConstructor = (Chart as any)?.Chart || (Chart as any)?.default || Chart
     ;(window as any).Chart = (window as any).Chart || ChartConstructor
 
-    root.innerHTML = MEDSHIELD_MARKUP
+    root.innerHTML = MEDSHIELD_MARKUP.replaceAll('July & August', 'July–October')
     enhanceDashboardContent(root)
     hydrateSidebarAccountCard(root, user)
 
@@ -67,6 +69,18 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
         void refreshDashboardFromGateway().catch((error) => {
           console.warn('Dashboard is using the bundled fallback dataset:', error)
         })
+
+        let lastObservedForecastMonth = root.dataset.forecastCurrentMonth
+          ?? resolveForecastCurrentMonth(undefined, new Date())
+        monthRefreshTimer = window.setInterval(() => {
+          const currentSystemMonth = resolveForecastCurrentMonth(undefined, new Date())
+          const activeForecastMonth = root.dataset.forecastCurrentMonth ?? lastObservedForecastMonth
+          if (currentSystemMonth === activeForecastMonth) return
+          lastObservedForecastMonth = currentSystemMonth
+          void refreshDashboardFromGateway().catch((error) => {
+            console.warn('Rolling forecast refresh failed after a month boundary:', error)
+          })
+        }, 30 * 60 * 1000)
 
         // Add portal injection anchor
         const inventoryPageEl = root.querySelector('#page-inventory')
@@ -96,6 +110,9 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
       for (const { target, type, listener, options } of activeListeners) {
         target.removeEventListener(type, listener, options)
       }
+      if (monthRefreshTimer !== null) {
+        window.clearInterval(monthRefreshTimer)
+      }
       root.innerHTML = ''
       document.getElementById('medshield-dashboard-styles')?.remove()
       
@@ -108,6 +125,9 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
       }
       delete (window as any).__medshieldAuditInstalled
       delete root.dataset.enhancementsInstalled
+      delete root.dataset.forecastCurrentMonth
+      delete root.dataset.forecastWindowStart
+      delete root.dataset.forecastWindowEnd
       document.body.classList.remove('nav-collapsed', 'nav-hidden', 'nav-open')
       delete document.body.dataset.navState
     }

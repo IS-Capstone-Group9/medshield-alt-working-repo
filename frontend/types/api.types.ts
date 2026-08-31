@@ -69,6 +69,12 @@ export type DashboardDataStatus = {
   mode: 'historical' | 'demo'
   loaded_at: string
   message: string
+  current_month?: string
+  forecast_window?: {
+    start: string
+    end: string
+    months: number
+  }
 }
 
 export type DashboardData = {

@@ -112,7 +112,8 @@ def normalize_snapshot(data: dict[str, Any]) -> dict[str, Any]:
     data["top_products"] = normalize_rows(data.get("top_products", []), ["revenue", "income", "qty", "pct_of_total"])
     data["year_summary"] = normalize_rows(data.get("year_summary", []), ["revenue", "income"], {"transactions"})
     data["seasonality"] = normalize_rows(data.get("seasonality", []), ["avg_revenue"])
-    data["forecasts"] = normalize_rows(data.get("forecasts", []), [
+    forecast_rows = data.get("forecasts", data.get("forecast", []))
+    data["forecasts"] = normalize_rows(forecast_rows, [
         "baseline_forecast",
         "adjusted_forecast",
         "lower_bound",
