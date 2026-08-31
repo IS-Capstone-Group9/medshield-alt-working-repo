@@ -8,6 +8,9 @@ import type {
 
 const YEAR_PATTERN = /^\d{4}$/
 const MONTH_NAMES = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
+const FALLBACK_FORWARD_MARGIN = 0.48
+const MIN_FORWARD_MARGIN = 0.05
+const MAX_FORWARD_MARGIN = 0.88
 
 function finite(value: unknown): value is number {
   return typeof value === 'number' && Number.isFinite(value)
@@ -21,6 +24,20 @@ function average(values: number[]): number | null {
 
 function monthPeriod(year: string, monthIndex: number): string {
   return `${year}-${String(monthIndex + 1).padStart(2, '0')}`
+}
+
+function validForwardMargin(revenue: number, income: number): number | null {
+  if (!finite(revenue) || !finite(income) || revenue <= 0) return null
+  const margin = income / revenue
+  if (!Number.isFinite(margin) || margin <= 0 || margin >= 1) return null
+  return Math.max(MIN_FORWARD_MARGIN, Math.min(MAX_FORWARD_MARGIN, margin))
+}
+
+function weightedAverage(values: number[]): number | null {
+  if (!values.length) return null
+  const denominator = values.reduce((sum, _value, index) => sum + index + 1, 0)
+  const numerator = values.reduce((sum, value, index) => sum + value * (index + 1), 0)
+  return numerator / denominator
 }
 
 function seasonalityIndexByMonth(rows: SeasonalityPoint[]): Map<number, number> {
@@ -37,19 +54,25 @@ function seasonalityIndexByMonth(rows: SeasonalityPoint[]): Map<number, number> 
   return indices
 }
 
-function historicalProfitMargin(rows: MonthlyPoint[]): number {
-  const totals = rows.reduce(
-    (accumulator, row) => {
-      if (finite(row.revenue) && row.revenue > 0 && finite(row.income)) {
-        accumulator.revenue += row.revenue
-        accumulator.income += row.income
-      }
-      return accumulator
-    },
-    { revenue: 0, income: 0 },
-  )
+export function resolveWeightedForwardProfitMargin(data: DashboardData): number {
+  const annualMargins = data.yearSummary
+    .map((row) => ({
+      year: Number(row.year),
+      margin: validForwardMargin(row.revenue, row.income),
+    }))
+    .filter((row): row is { year: number; margin: number } => Number.isFinite(row.year) && row.margin !== null)
+    .sort((left, right) => left.year - right.year)
+    .slice(-3)
+    .map((row) => row.margin)
+  const annualMargin = weightedAverage(annualMargins)
+  if (annualMargin !== null) return annualMargin
 
-  return totals.revenue > 0 ? Math.max(0, Math.min(1, totals.income / totals.revenue)) : 0.42
+  const monthlyMargins = [...data.monthly]
+    .sort((left, right) => left.period.localeCompare(right.period))
+    .map((row) => validForwardMargin(row.revenue, row.income))
+    .filter((margin): margin is number => margin !== null)
+    .slice(-12)
+  return weightedAverage(monthlyMargins) ?? FALLBACK_FORWARD_MARGIN
 }
 
 function fallbackRevenueBaseline(data: DashboardData): number {
@@ -122,7 +145,7 @@ export function buildEstimatedMonthlyRowsForYear(data: DashboardData, year: stri
   )
   const seasonalIndices = seasonalityIndexByMonth(data.seasonality)
   const baseline = fallbackRevenueBaseline(data)
-  const margin = historicalProfitMargin(data.monthly)
+  const margin = resolveWeightedForwardProfitMargin(data)
 
   return Array.from({ length: 12 }, (_, monthIndex) => {
     const period = monthPeriod(year, monthIndex)
