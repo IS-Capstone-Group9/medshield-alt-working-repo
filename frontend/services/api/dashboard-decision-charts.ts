@@ -465,7 +465,7 @@ function renderTerritoryRadarChart(root: HTMLElement, data: DashboardData) {
       : `Territory Multi-Criteria Operational Radar (${radarData.selectedYear})`
 
   const subtitle = radarData.isEstimated
-    ? 'Recency-weighted 2026 demand allocation with epidemiological surge and transit friction indexing'
+    ? `Recency-weighted ${radarData.selectedYear} demand allocation with epidemiological surge and transit friction indexing`
     : radarData.selectedYear === 'All available years'
       ? 'Cross-regional operational profile across demand scale, margin health, and vulnerability factors'
       : `Isolated ${radarData.selectedYear} regional performance benchmarks across 5 operational dimensions`

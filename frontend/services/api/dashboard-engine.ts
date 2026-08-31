@@ -83,6 +83,14 @@ export function getExecutableDashboardScript(): string {
       "const sortedProductRows = getSortedProductRows();"
     )
     .replace(
+      "function buildCharts() {",
+      "function buildCharts() { updateDashboardSummary();"
+    )
+    .replace(
+      "function buildTables() {",
+      "function buildTables() { updateProductViewMetadata();"
+    )
+    .replace(
       "if (patch.by_area) DATA.by_area = normalizeAreaRows(patch.by_area);",
       `if (patch.data_status) DATA.data_status = patch.data_status;
   if (patch.by_area) DATA.by_area = normalizeAreaRows(patch.by_area);
@@ -281,13 +289,47 @@ function numericSeriesOrFallback(primary, fallback) {
 
 function getSortedProductRows() {
   if (typeof DATA === 'undefined' || !DATA || !DATA.top_products) return [];
-  return [...DATA.top_products].sort(function(a, b) {
+  return getYearProductRows().sort(function(a, b) {
     var k = typeof productTableSort !== 'undefined' ? productTableSort.key : 'revenue';
     var dir = (typeof productTableSort !== 'undefined' && productTableSort.direction === 'asc') ? 1 : -1;
     if (a[k] < b[k]) return -1 * dir;
     if (a[k] > b[k]) return 1 * dir;
     return 0;
   });
+}
+
+function getYearSummaryRow(year) {
+  if (typeof DATA === 'undefined' || !DATA || !Array.isArray(DATA.year_summary)) return null;
+  return DATA.year_summary.find(function(row) { return String(row.year) === String(year); }) || null;
+}
+
+function getYearProductRows() {
+  if (typeof DATA === 'undefined' || !DATA || !Array.isArray(DATA.top_products)) return [];
+  var yr = getActiveDashboardYear();
+  if (yr === 'all' || !yr) return DATA.top_products.slice();
+
+  var summary = getYearSummaryRow(yr);
+  var totalProductsRevenue = DATA.top_products.reduce(function(sum, row) {
+    return sum + (Number(row.revenue) || 0);
+  }, 0);
+  var targetRevenue = summary ? Number(summary.revenue) || 0 : 0;
+  if (totalProductsRevenue <= 0 || targetRevenue <= 0) return DATA.top_products.slice();
+
+  var scale = targetRevenue / totalProductsRevenue;
+  var selectedRevenue = 0;
+  var rows = DATA.top_products.map(function(row) {
+    var revenue = Math.round((Number(row.revenue) || 0) * scale);
+    var income = Math.round((Number(row.income) || 0) * scale);
+    var qty = Math.round((Number(row.qty) || 0) * scale);
+    selectedRevenue += revenue;
+    return Object.assign({}, row, {
+      revenue: revenue,
+      income: income,
+      qty: qty,
+      pct_of_total: targetRevenue > 0 ? Number((revenue / targetRevenue * 100).toFixed(2)) : 0,
+    });
+  });
+  return rows;
 }
 
 const DASHBOARD_TERRITORY_LABELS = new Set([
@@ -334,18 +376,25 @@ function getYearAreaSource() {
   if (DATA.by_year_area && Array.isArray(DATA.by_year_area[yr]) && DATA.by_year_area[yr].length > 0) {
     return DATA.by_year_area[yr];
   }
-  if (yr === '2026') {
+  if (yr !== 'all' && yr) {
     if (DATA.by_year_area && typeof DATA.by_year_area === 'object') {
-      var recentYears = ['2025', '2024', '2023'].filter(function(y) {
+      var recentYears = Object.keys(DATA.by_year_area).filter(function(y) {
+        return /^\d{4}$/.test(y) && y < yr;
+      }).sort().slice(-3);
+      var targetSummary = getYearSummaryRow(yr);
+      var totalForecastRev = targetSummary ? Number(targetSummary.revenue) || 0 : 0;
+      if (totalForecastRev <= 0) return Array.isArray(DATA.by_area) ? DATA.by_area : [];
+      recentYears = recentYears.filter(function(y) {
         return Array.isArray(DATA.by_year_area[y]) && DATA.by_year_area[y].length > 0;
       });
       if (recentYears.length > 0) {
-        var totalForecastRev = 212000000;
-        var forwardMargin = 0.487;
+        var forwardMargin = targetSummary && Number(targetSummary.revenue) > 0
+          ? Math.max(0.05, Math.min(0.88, Number(targetSummary.income || 0) / Number(targetSummary.revenue)))
+          : 0.487;
         var weightedShares = {};
         var totalWeight = 0;
         recentYears.forEach(function(y, idx) {
-          var weight = recentYears.length - idx; // 3 for 2025, 2 for 2024, 1 for 2023
+          var weight = idx + 1;
           totalWeight += weight;
           var rows = DATA.by_year_area[y];
           var yrTotal = rows.reduce(function(sum, r) { return sum + (r.revenue || 0); }, 0);
@@ -427,6 +476,49 @@ function getDashboardBusinessLineRows() {
   return sortedDashboardAreaRows(dashboardRowsOrDerived('by_business_line', DASHBOARD_BUSINESS_LINE_LABELS), 'revenue');
 }
 
+function updateDashboardSummary() {
+  if (typeof document === 'undefined' || typeof DATA === 'undefined' || !DATA) return;
+  var yr = getActiveDashboardYear();
+  var summary = yr === 'all' || !yr ? (DATA.totals || {}) : getYearSummaryRow(yr);
+  if (!summary) return;
+
+  var revenue = Number(yr === 'all' || !yr ? summary.total_revenue : summary.revenue) || 0;
+  var revenueEl = document.getElementById('kpiOverviewTotalRevenue');
+  if (revenueEl) revenueEl.textContent = formatCompactCurrency(revenue);
+  var revenueCard = revenueEl ? revenueEl.closest('.kpi-card') : null;
+  if (revenueCard) {
+    var revenueLabel = revenueCard.querySelector('.kpi-label');
+    var revenueTag = revenueCard.querySelector('.kpi-tag');
+    if (revenueLabel) revenueLabel.textContent = yr === 'all' || !yr ? 'Total Cumulative Revenue' : yr + ' Revenue';
+    if (revenueTag) revenueTag.textContent = yr === 'all' || !yr ? 'All Years Cumulative' : (String(yr) === String(new Date().getFullYear()) ? 'Weighted Current-Year Estimate' : (String(yr) > String(new Date().getFullYear()) ? 'Forward Forecast Estimate' : 'Historical Dataset'));
+  }
+
+  var territoryRows = getDashboardTerritoryRows();
+  var topTerritory = territoryRows[0];
+  var cards = document.querySelectorAll('.kpi-grid .kpi-card');
+  var territoryCard = cards.length > 3 ? cards[3] : null;
+  if (territoryCard && topTerritory) {
+    var territoryValue = territoryCard.querySelector('.kpi-value');
+    var territorySub = territoryCard.querySelector('.kpi-sub');
+    if (territoryValue) territoryValue.textContent = topTerritory.area;
+    if (territorySub) territorySub.textContent = yr === 'all' || !yr ? 'Primary allocation territory across all years' : yr + ' primary territory';
+  }
+}
+
+function updateProductViewMetadata() {
+  if (typeof document === 'undefined') return;
+  var yr = getActiveDashboardYear();
+  var table = document.getElementById('productTable');
+  var card = table ? table.closest('.chart-card') : null;
+  if (!card) return;
+  var subtitle = card.querySelector('.chart-subtitle');
+  var badge = card.querySelector('.chart-badge');
+  if (subtitle) subtitle.textContent = yr === 'all' || !yr
+    ? 'Cumulative product contribution across all available years'
+    : yr + ' product contribution using the trained product mix and selected-year revenue';
+  if (badge) badge.textContent = yr === 'all' || !yr ? 'All Years' : (String(yr) >= String(new Date().getFullYear()) ? 'Estimated Product Mix' : 'Historical Product View');
+}
+
 function updateAreaChartHeaders() {
   if (typeof document === 'undefined') return;
   var yr = getActiveDashboardYear();
@@ -436,20 +528,20 @@ function updateAreaChartHeaders() {
     var badge = barCard.querySelector('.chart-badge');
     var subtitle = barCard.querySelector('.chart-subtitle');
     if (badge) {
-      badge.textContent = yr === 'all' ? 'Province Grain (All Years)' : (yr === '2026' ? '2026 Forecast Estimate' : yr + ' Province Grain');
+      badge.textContent = yr === 'all' ? 'Province Grain (All Years)' : (String(yr) >= String(new Date().getFullYear()) ? yr + ' Forecast Estimate' : yr + ' Province Grain');
     }
     if (subtitle) {
-      subtitle.textContent = yr === '2026' ? 'Projected 2026 territory demand via recency-weighted historical shares' : (yr === 'all' ? 'All-time provincial sales contribution' : 'Isolated ' + yr + ' provincial sales contribution');
+      subtitle.textContent = yr !== 'all' && String(yr) >= String(new Date().getFullYear()) ? 'Projected ' + yr + ' territory demand via recency-weighted historical shares' : (yr === 'all' ? 'All-time provincial sales contribution' : 'Isolated ' + yr + ' provincial sales contribution');
     }
   }
   if (incCard) {
     var incBadge = incCard.querySelector('.chart-badge');
     var incSubtitle = incCard.querySelector('.chart-subtitle');
     if (incBadge) {
-      incBadge.textContent = yr === 'all' ? 'Profit Contribution' : (yr === '2026' ? '2026 Forward Margin' : yr + ' Net Income');
+      incBadge.textContent = yr === 'all' ? 'Profit Contribution' : (String(yr) >= String(new Date().getFullYear()) ? yr + ' Forward Margin' : yr + ' Net Income');
     }
     if (incSubtitle) {
-      incSubtitle.textContent = yr === '2026' ? 'Estimated 2026 operating margin using weighted historical forward margin' : (yr === 'all' ? 'All-time channel and territory margin' : 'Isolated ' + yr + ' territory profit contribution');
+      incSubtitle.textContent = yr !== 'all' && String(yr) >= String(new Date().getFullYear()) ? 'Estimated ' + yr + ' operating margin using weighted historical forward margin' : (yr === 'all' ? 'All-time channel and territory margin' : 'Isolated ' + yr + ' territory profit contribution');
     }
   }
 }
@@ -471,7 +563,7 @@ function getDynamicClusterRows() {
   var tier2 = sortedNames.slice(2, 5).join(', ');
   var tier3 = sortedNames.slice(5).join(', ') || 'Peripheral provincial zones';
 
-  var yrPrefix = yr === 'all' ? 'All-Time' : (yr === '2026' ? '2026 Projected' : yr);
+  var yrPrefix = yr === 'all' ? 'All-Time' : (String(yr) >= String(new Date().getFullYear()) ? yr + ' Projected' : yr);
 
   return [
     { cluster: 'Tier 1 - High Volume (' + yrPrefix + ')', areas: tier1, profile: 'Primary provincial volume leaders', implication: 'Prioritize automated safety buffer pre-stocking' },
