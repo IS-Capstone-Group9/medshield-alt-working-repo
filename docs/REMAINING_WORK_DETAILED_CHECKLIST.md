@@ -65,7 +65,7 @@ Reference:
 | Expose schemas in Supabase API settings | Add `medshield_common`, `medshield_etl`, `medshield_identity`, `medshield_sales`, `medshield_external`, `medshield_analytics`. | PostgREST can access MedShield schemas. | Service writes do not fail with schema/profile errors. | Database Engineer |
 | Confirm common dimensions | Check `dim_date`, `dim_month`, `dim_area`, `dim_product`, `dim_product_alias`. | Shared dimensions exist. | Tables are visible under `medshield_common`. | Database Engineer |
 | Confirm ETL lineage | Check `dim_source_system`, `etl_pipeline_run`, `etl_source_extract`. | ETL tables exist. | Sales/weather ingestion can create pipeline runs. | Database Engineer |
-| Confirm identity | Check `medshield_identity.accounts` and auth RPCs. | Login/signup target correct schema. | Login works with Supabase or falls back clearly. | Backend / Security |
+| Confirm identity | Check `medshield_identity.accounts` and Auth linkage. | Login targets the correct schema and accounts remain administrator-managed. | Login works with Supabase or falls back clearly. | Backend / Security |
 | Confirm sales tables | Check sales staging/fact/aggregate tables. | `medshield_sales` ready. | Upload can write rows or returns clear error. | Database / Backend |
 | Confirm external tables | Check weather/disease staging or fact tables. | `medshield_external` ready. | Weather refresh can write provider data. | Data Engineer |
 
@@ -87,7 +87,7 @@ Reference:
 
 Reference:
 
-- `docs/AREA_SUMMARY_BACKWARD_ALLOCATION.md`
+- `databricks/docs/AREA_SUMMARY_BACKWARD_ALLOCATION.md`
 - `data/medshield/processed/sales_transactions_area_allocated.json.gz`
 - `data/medshield/processed/sales_area_allocation_audit.json`
 
@@ -111,8 +111,8 @@ Current candidate totals:
 
 Reference:
 
-- `docs/MEDICAL_DEMAND_CLEANING_WORKFLOW.md`
-- `docs/NON_MEDICAL_PRODUCT_CLASSIFICATION_GUIDE.md`
+- `databricks/docs/MEDICAL_DEMAND_CLEANING_WORKFLOW.md`
+- `databricks/docs/NON_MEDICAL_PRODUCT_CLASSIFICATION_GUIDE.md`
 - `outputs/product_classification_review/likely_non_medical_product_candidates.csv`
 - `outputs/product_classification_review/medical_vs_non_medical_cost_2021_2025.md`
 
@@ -128,7 +128,7 @@ Reference:
 
 Reference:
 
-- `docs/SKU_ALIAS_MAPPING_PLAN.md`
+- `databricks/docs/SKU_ALIAS_MAPPING_PLAN.md`
 - `datasources/templates/product_master_mapping.csv`
 - `datasources/templates/area_classification_mapping.csv`
 
@@ -144,7 +144,7 @@ Reference:
 
 Reference:
 
-- `docs/EXTERNAL_DATA_PREPARATION_GUIDE.md`
+- `databricks/docs/EXTERNAL_DATA_PREPARATION_GUIDE.md`
 - `datasources/templates/doh_historical_template.csv`
 - `datasources/templates/pagasa_historical_template.csv`
 - `datasources/templates/weather_api_observations_template.csv`

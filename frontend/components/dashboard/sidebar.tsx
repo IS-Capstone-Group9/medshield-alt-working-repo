@@ -16,17 +16,20 @@ import Image from 'next/image'
 interface SidebarProps {
   activeTab: ActiveTab
   onChangeTab: (tab: ActiveTab) => void
-  userRole: 'planner' | 'viewer'
-  onChangeRole: (role: 'planner' | 'viewer') => void
   onLogout: () => void
+  accountName?: string
+  accountDetail?: string
+  /** Retained for callers that still pass role state; no role selector is rendered. */
+  userRole?: 'planner' | 'viewer'
+  onChangeRole?: (role: 'planner' | 'viewer') => void
 }
 
 export function Sidebar({
   activeTab,
   onChangeTab,
-  userRole,
-  onChangeRole,
   onLogout,
+  accountName = 'MedShield Account',
+  accountDetail = 'Secure session',
 }: SidebarProps) {
   const navItems = [
     { id: 'overview', label: 'Overview', icon: LayoutGrid, section: 'Analytics' },
@@ -75,42 +78,17 @@ export function Sidebar({
 
       <div className="sidebar-footer">
         <div className="sidebar-user">
-          <div className="sidebar-avatar">MS</div>
-          <div className="sidebar-user-meta">
-            <div className="sidebar-user-name">Supply Planner</div>
-            <div className="sidebar-user-role" id="userRoleDisplay">
-              Role:{' '}
-              {userRole === 'planner'
-                ? 'Supply Planner [Level 2 - Write Access]'
-                : 'Viewer [Level 1 - Read-Only]'}
+          <div className="sidebar-account-card" data-testid="sidebar-account-card" role="group" aria-label="Signed-in MedShield account">
+            <div className="sidebar-account-mark" aria-hidden="true">MS</div>
+            <div className="sidebar-account-content">
+              <div className="sidebar-account-kicker">Workspace access</div>
+              <div className="sidebar-account-name">{accountName}</div>
+              <div className="sidebar-account-status">
+                <span className="sidebar-account-status-dot" aria-hidden="true" />
+                <span>{accountDetail}</span>
+              </div>
             </div>
           </div>
-        </div>
-
-        <div className="role-selector-container" style={{ marginTop: '10px', paddingTop: '8px', borderTop: '1px solid #1E293B' }}>
-          <div style={{ fontSize: '9px', color: '#94A3B8', marginBottom: '4px', transform: 'uppercase', fontWeight: 700 }}>
-            Select User Role
-          </div>
-          <select
-            id="userRoleSelector"
-            value={userRole}
-            onChange={(e) => onChangeRole(e.target.value as 'planner' | 'viewer')}
-            style={{
-              width: '100%',
-              background: '#1E293B',
-              border: '1px solid #334155',
-              color: '#F8FAFC',
-              fontSize: '10px',
-              borderRadius: '4px',
-              padding: '4px',
-              fontWeight: 600,
-              cursor: 'pointer',
-              outline: 'none',
-            }}
-          >
-            <option value="planner">Supply Planner (L2 - Write)</option>
-            <option value="viewer">Viewer (L1 - Read-Only)</option>
-          </select>
         </div>
 
         <div className="sidebar-footer-actions" style={{ marginTop: '12px' }}>

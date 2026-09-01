@@ -13,7 +13,7 @@ Use this as the checklist for writing Chapter 4 and Chapter 5. Chapter 4 should 
 | Sales cleaning summary | `docs/IMPLEMENTATION.md`, processed status files | Include extracted, accepted, rejected, duplicate counts. | Pending |
 | Contract-name breakdown | `outputs/contract_backward_allocation_20260623/` | Include reconciliation and explain estimated rows. | Pending |
 | Product/SKU mapping | `datasources/templates/product_master_mapping.csv` | Add approved mapping summary after review. | Pending |
-| 2025 data issue | `docs/2025_DATA_ISSUE_REMEDIATION.md` | Explain missing months and holdout policy. | Pending |
+| 2025 data issue | `databricks/docs/2025_DATA_ISSUE_REMEDIATION.md` | Explain missing months and holdout policy. | Pending |
 | PAGASA data readiness | Clean PAGASA file after upload | Show coverage and missing values. | Pending |
 | DOH data readiness | Clean DOH file after upload | Show disease coverage and missing values. | Pending |
 | Weather API readiness | Weather API validation page/output | Show provider, region, date coverage, and limitations. | Pending |

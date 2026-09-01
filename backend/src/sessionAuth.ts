@@ -5,6 +5,7 @@ export interface SessionUser {
   username: string
   email: string
   role: string
+  password_reset_required?: boolean
 }
 
 export interface SessionRecord {

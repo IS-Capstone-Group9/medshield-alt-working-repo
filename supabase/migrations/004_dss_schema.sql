@@ -421,17 +421,6 @@ begin
   end loop;
 end $$;
 
-drop view if exists public.vw_dss_forecasts cascade;
-drop view if exists public.vw_dss_external_signals cascade;
-drop view if exists public.vw_dss_inventory_recommendations cascade;
-drop view if exists public.vw_dss_regional_priorities cascade;
-drop view if exists public.vw_dss_area_clusters cascade;
-drop view if exists public.vw_dss_product_priorities cascade;
-drop view if exists public.vw_dss_allocation_recommendations cascade;
-drop view if exists public.vw_dss_product_region_matches cascade;
-drop view if exists public.vw_dss_decision_alerts cascade;
-drop view if exists public.vw_dss_model_evaluation cascade;
-
 create or replace view public.vw_dss_forecasts as
 select
   d.year_month as period,

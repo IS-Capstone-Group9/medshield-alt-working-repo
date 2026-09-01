@@ -1,0 +1,43 @@
+resources:
+  jobs:
+    medshield_cleaning:
+      name: medshield-data-cleaning-${bundle.target}
+      description: Sequential Bronze, Silver, quality, Gold, and validation workflow for MedShield sales CSVs.
+      max_concurrent_runs: 1
+      queue:
+        enabled: true
+      parameters:
+        - name: catalog
+          default: ${var.catalog}
+        - name: import_batch_id
+          default: "{{job.run_id}}"
+        - name: year_min
+          default: "${var.year_min}"
+        - name: year_max
+          default: "${var.year_max}"
+        - name: financial_tolerance
+          default: "${var.financial_tolerance}"
+      tasks:
+        - task_key: bronze_ingestion
+          notebook_task:
+            notebook_path: ../notebooks/01_bronze.py
+        - task_key: silver_staging
+          depends_on:
+            - task_key: bronze_ingestion
+          notebook_task:
+            notebook_path: ../notebooks/02_stage.py
+        - task_key: clean_and_quality
+          depends_on:
+            - task_key: silver_staging
+          notebook_task:
+            notebook_path: ../notebooks/03_clean_quality.py
+        - task_key: build_gold
+          depends_on:
+            - task_key: clean_and_quality
+          notebook_task:
+            notebook_path: ../notebooks/04_gold.py
+        - task_key: validate_publication
+          depends_on:
+            - task_key: build_gold
+          notebook_task:
+            notebook_path: ../notebooks/05_validate.py

@@ -1,5 +1,5 @@
 import { createClient, isSupabaseBrowserConfigured } from '@/lib/supabase/client'
-import { API_BASE, getStoredToken, storeToken, toUser, toUserFromSupabase, User } from '@/lib/auth-tokens'
+import { API_BASE, getStoredToken, storeToken, toUser, User } from '@/lib/auth-tokens'
 
 export async function authLogin(
   username: string,
@@ -30,33 +30,26 @@ export async function authLogin(
   }
 }
 
-export async function authSignup(
-  username: string,
-  email: string,
-  password: string
+export async function completePasswordReset(
+  accessToken: string,
+  currentPassword: string,
+  newPassword: string,
 ): Promise<{ ok: boolean; error?: string }> {
-  if (isSupabaseBrowserConfigured()) {
-    try {
-      const supabase = createClient()
-      const { error } = await supabase.auth.signUp({ email, password, options: { data: { username } } })
-      if (error) return { ok: false, error: error.message }
-      return { ok: true }
-    } catch {
-      return { ok: false, error: 'Cannot connect to Supabase Auth' }
-    }
-  }
-
   try {
-    const res = await fetch(`${API_BASE}/api/auth/signup`, {
+    const res = await fetch(`${API_BASE}/api/auth/complete-password-reset`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, email, password }),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify({ current_password: currentPassword, new_password: newPassword }),
     })
     const data = await res.json()
-    if (!res.ok) return { ok: false, error: data.error || 'Signup failed' }
+    if (!res.ok) return { ok: false, error: data.error || 'Password update failed' }
+    if (isSupabaseBrowserConfigured()) await createClient().auth.signOut()
     return { ok: true }
   } catch {
-    return { ok: false, error: 'Cannot connect to server' }
+    return { ok: false, error: 'Cannot connect to the authentication server' }
   }
 }
 

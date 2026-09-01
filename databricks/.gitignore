@@ -1,0 +1,12 @@
+.databricks/
+.venv/
+.pytest_cache/
+__pycache__/
+*.py[cod]
+dist/
+build/
+*.whl
+
+# Raw and generated data belong in Unity Catalog volumes and Delta tables.
+data/
+artifacts/

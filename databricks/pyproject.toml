@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "medshield-databricks"
+version = "0.1.0"
+description = "Databricks data-cleaning pipeline for MedShield sales data"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "pyspark>=3.5,<4.1",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

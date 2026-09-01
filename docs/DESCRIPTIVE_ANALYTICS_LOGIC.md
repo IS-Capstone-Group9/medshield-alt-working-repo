@@ -24,7 +24,7 @@ This layer must be finished first because predictive and prescriptive outputs de
 | Cleaned sales with contract allocation | `data/medshield/processed/sales_transactions_area_allocated.json.gz` | Use this for product-level analysis so `#` contract-name rows are not treated as products. |
 | Area classification mapping | `datasources/templates/area_classification_mapping.csv` | Use this to separate territory, customer type, business line, and unmapped areas. |
 | Business definitions | `docs/BUSINESS_DEFINITIONS.md` | Revenue is `total_trade_price`; gross margin/profit is workbook `net_income`. |
-| Sales data layer rules | `docs/SALES_DATA_LAYER_FLOW.md` | Keep raw, semi-raw estimated, and cleaned data labels distinct. |
+| Sales data layer rules | `databricks/docs/SALES_DATA_LAYER_FLOW.md` | Keep raw, semi-raw estimated, and cleaned data labels distinct. |
 
 ## Descriptive Methods
 

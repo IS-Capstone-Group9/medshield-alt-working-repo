@@ -1,6 +1,5 @@
 import { useState, FormEvent } from 'react'
 import { useAuth } from '@/lib/AuthContext'
-import { isSupabaseBrowserConfigured } from '@/lib/supabase/client'
 
 interface UseLoginFormProps {
   onLoginSuccess: () => void
@@ -15,23 +14,13 @@ export function useLoginForm({ onLoginSuccess }: UseLoginFormProps) {
   const [loginLoading, setLoginLoading] = useState(false)
   
   const { login } = useAuth()
-  const useSupabaseAuth = isSupabaseBrowserConfigured()
 
   const handleLogin = async (event: FormEvent) => {
     event.preventDefault()
     setLoginError('')
 
     if (!username || !password) {
-      setLoginError(
-        useSupabaseAuth
-          ? 'Please enter both email and password.'
-          : 'Please enter both username and password.'
-      )
-      return
-    }
-
-    if (useSupabaseAuth && !username.includes('@')) {
-      setLoginError('Supabase Auth sign-in requires an email address.')
+      setLoginError('Please enter both username or email and password.')
       return
     }
 
@@ -59,7 +48,6 @@ export function useLoginForm({ onLoginSuccess }: UseLoginFormProps) {
     loginError,
     setLoginError,
     loginLoading,
-    useSupabaseAuth,
     handleLogin,
   }
 }

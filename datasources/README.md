@@ -33,4 +33,4 @@ Keep raw exports unchanged. Put cleaned, standardized copies under `datasources/
 | `templates/product_master_mapping.csv` | Product/SKU alias mapping approval |
 | `templates/area_classification_mapping.csv` | Area, customer type, and business-line classification |
 
-Follow `docs/EXTERNAL_DATA_PREPARATION_GUIDE.md` before adding PAGASA, DOH, or weather API files.
+Follow `databricks/docs/EXTERNAL_DATA_PREPARATION_GUIDE.md` before adding PAGASA, DOH, or weather API files.

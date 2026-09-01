@@ -19,7 +19,7 @@ from datetime import datetime, timezone
 from typing import Any
 
 import requests
-from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.security import check_password_hash
 from dotenv import load_dotenv
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -152,35 +152,27 @@ def _serialize_account(account: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def _next_local_account_id(accounts: list[dict[str, Any]]) -> int:
-    if not accounts:
-        return 1
-    return max(int(account.get("account_id", 0)) for account in accounts) + 1
+def _check_password_hash(password_hash: str, password: str) -> bool:
+    if not password_hash.startswith("scrypt:"):
+        return check_password_hash(password_hash, password)
 
+    try:
+        params, salt, digest_hex = password_hash.split("$", 2)
+        _, n_text, r_text, p_text = params.split(":", 3)
+        expected = bytes.fromhex(digest_hex)
+        derived = hashlib.scrypt(
+            password.encode("utf-8"),
+            salt=salt.encode("utf-8"),
+            n=int(n_text),
+            r=int(r_text),
+            p=int(p_text),
+            dklen=len(expected),
+            maxmem=128 * 1024 * 1024,
+        )
+    except (ValueError, TypeError):
+        return False
 
-def local_create_account(username: str, email: str, password: str, role: str = "viewer") -> dict[str, Any]:
-    now = datetime.now(timezone.utc).isoformat()
-    with LOCAL_AUTH_LOCK:
-        accounts = _load_local_accounts()
-        if any(account.get("username") == username for account in accounts):
-            return {"error": "Username already taken"}
-        if any(account.get("email") == email for account in accounts):
-            return {"error": "Email already registered"}
-
-        account = _serialize_account({
-            "account_id": _next_local_account_id(accounts),
-            "username": username,
-            "email": email,
-            "password_hash": generate_password_hash(password),
-            "role": role,
-            "is_active": True,
-            "last_login_at": None,
-            "created_at": now,
-            "updated_at": now,
-        })
-        accounts.append(account)
-        _save_local_accounts(accounts)
-        return account
+    return hmac.compare_digest(derived, expected)
 
 
 def _check_password_hash(password_hash: str, password: str) -> bool:
@@ -302,24 +294,10 @@ def auth_login():
         return jsonify({"error": "Username and password are required"}), 400
 
     if supabase_enabled():
-        try:
-            rows = supabase_rpc("verify_login", {"p_username": username, "p_password": password})
-            if not rows:
-                return jsonify({"error": "Invalid username or password"}), 401
-            user = rows[0]
-            if not user.get("is_active"):
-                return jsonify({"error": "Account is disabled"}), 403
-            return jsonify({
-                "account_id": user["account_id"],
-                "username": user["username"],
-                "email": user["email"],
-                "role": user["role"],
-            })
-        except Exception as exc:
-            if not auth_backend_unavailable(exc):
-                app.logger.error("Login error: %s", exc)
-                return jsonify({"error": "Authentication service error"}), 500
-            app.logger.warning("Supabase auth unavailable, using local auth store for login: %s", exc)
+        return jsonify({
+            "error": "Supabase login is served only by the TypeScript API gateway.",
+            "code": "LEGACY_AUTH_GATEWAY_DISABLED",
+        }), 503
 
     user = local_verify_login(username, password)
     if user is None:
@@ -354,57 +332,27 @@ def auth_logout():
     return jsonify({"ok": True})
 
 
-@app.route("/api/auth/signup", methods=["POST", "OPTIONS"])
-def auth_signup():
-    if request.method == "OPTIONS":
-        return jsonify({}), 200
-    body = request.get_json(force=True, silent=True) or {}
-    username = (body.get("username") or "").strip()
-    email = (body.get("email") or "").strip()
-    password = (body.get("password") or "").strip()
+def _local_session_user() -> dict[str, Any] | None:
+    authorization = request.headers.get("Authorization", "")
+    if not authorization.startswith("Bearer "):
+        return None
+    return LOCAL_SESSIONS.get(authorization[7:].strip())
 
-    if not username or not email or not password:
-        return jsonify({"error": "Username, email and password are required"}), 400
 
-    if len(password) < 8:
-        return jsonify({"error": "Password must be at least 8 characters"}), 400
+@app.route("/api/auth/me", methods=["GET"])
+def auth_me():
+    user = _local_session_user()
+    if user is None:
+        return jsonify({"error": "Unauthorized"}), 401
+    return jsonify({"user": user})
 
-    if supabase_enabled():
-        try:
-            rows = supabase_rpc("create_account", {
-                "p_username": username,
-                "p_email": email,
-                "p_password": password,
-                "p_role": "viewer",
-            })
-            if not rows:
-                return jsonify({"error": "Failed to create account"}), 500
-            result = rows[0]
-            if result.get("error_msg"):
-                return jsonify({"error": result["error_msg"]}), 409
-            return jsonify({
-                "account_id": result["account_id"],
-                "username": result["username"],
-                "email": result["email"],
-                "role": result["role"],
-                "message": "Account created successfully",
-            }), 201
-        except Exception as exc:
-            if not auth_backend_unavailable(exc):
-                app.logger.error("Signup error: %s", exc)
-                return jsonify({"error": "Account creation failed"}), 500
-            app.logger.warning("Supabase auth unavailable, using local auth store for signup: %s", exc)
 
-    result = local_create_account(username, email, password)
-    if result.get("error"):
-        return jsonify({"error": result["error"]}), 409
-    return jsonify({
-        "account_id": result["account_id"],
-        "username": result["username"],
-        "email": result["email"],
-        "role": result["role"],
-        "message": "Account created successfully",
-    }), 201
+@app.route("/api/auth/logout", methods=["POST"])
+def auth_logout():
+    authorization = request.headers.get("Authorization", "")
+    if authorization.startswith("Bearer "):
+        LOCAL_SESSIONS.pop(authorization[7:].strip(), None)
+    return jsonify({"ok": True})
 
 
 @app.route("/api/health", methods=["GET"])

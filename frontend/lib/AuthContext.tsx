@@ -10,7 +10,7 @@ import {
   toUser,
   toUserFromSupabase,
 } from './auth-tokens'
-import { authLogin, authSignup, authLogout } from '@/services/supabase/auth.service'
+import { authLogin, authLogout, completePasswordReset } from '@/services/supabase/auth.service'
 
 interface AuthContextType {
   isAuthenticated: boolean
@@ -18,7 +18,7 @@ interface AuthContextType {
   user: User | null
   accessToken: string | null
   login: (username: string, password: string, remember?: boolean) => Promise<{ ok: boolean; error?: string }>
-  signup: (username: string, email: string, password: string) => Promise<{ ok: boolean; error?: string }>
+  changeRequiredPassword: (currentPassword: string, newPassword: string) => Promise<{ ok: boolean; error?: string }>
   logout: () => Promise<void>
 }
 
@@ -119,8 +119,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { ok: false, error: res.error }
   }
 
-  const signup = async (username: string, email: string, password: string) => {
-    return await authSignup(username, email, password)
+  const changeRequiredPassword = async (currentPassword: string, newPassword: string) => {
+    if (!accessToken) return { ok: false, error: 'Your session has expired. Sign in again.' }
+    const result = await completePasswordReset(accessToken, currentPassword, newPassword)
+    if (result.ok) {
+      clearStoredToken()
+      setAccessToken(null)
+      setIsAuthenticated(false)
+      setUser(null)
+    }
+    return result
   }
 
   const logout = async () => {
@@ -132,7 +140,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, isAuthLoading, user, accessToken, login, signup, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, isAuthLoading, user, accessToken, login, changeRequiredPassword, logout }}>
       {children}
     </AuthContext.Provider>
   )

@@ -194,52 +194,6 @@ export interface LocalAuthResult {
   role: AccountRole
 }
 
-export async function createLocalAccount(input: {
-  username: string
-  email: string
-  password: string
-  role?: AccountRole
-}): Promise<{ account?: LocalAuthResult; error?: string }> {
-  const role = input.role ?? 'viewer'
-  if (!['admin', 'analyst', 'manager', 'viewer'].includes(role)) {
-    return { error: 'Invalid role' }
-  }
-
-  return await withStore(async (accounts) => {
-    if (accounts.some((account) => account.username === input.username)) {
-      return { error: 'Username already taken' }
-    }
-
-    if (accounts.some((account) => account.email === input.email)) {
-      return { error: 'Email already registered' }
-    }
-
-    const now = nowIso()
-    const account: LocalAccount = {
-      account_id: nextAccountId(accounts),
-      username: input.username,
-      email: input.email,
-      password_hash: await hashPassword(input.password),
-      role,
-      is_active: true,
-      last_login_at: null,
-      created_at: now,
-      updated_at: now,
-    }
-
-    accounts.push(account)
-
-    return {
-      account: {
-        account_id: account.account_id,
-        username: account.username,
-        email: account.email,
-        role: account.role,
-      },
-    }
-  })
-}
-
 export async function verifyLocalLogin(input: {
   username: string
   password: string
