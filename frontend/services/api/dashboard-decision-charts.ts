@@ -21,6 +21,7 @@ import {
   areaRowsForView,
   buildEstimatedMonthlyRowsForYear,
 } from './dashboard-year-estimates'
+import { splitAreaSegments } from './dashboard-area-segments'
 
 const dashboardDataByRoot = new WeakMap<HTMLElement, DashboardData>()
 
@@ -408,7 +409,7 @@ const TERRITORY_RADAR_PROFILES: Record<string, { outbreak: number; leadTime: num
 
 function yearAwareTerritoryRadarData(data: DashboardData, year: string | null) {
   const view = areaRowsForView(data, year)
-  const validRows = view.rows
+  const validRows = splitAreaSegments(view.rows).territory
     .filter((row) => row.area && finite(row.revenue) && finite(row.income))
     .sort((left, right) => right.revenue - left.revenue)
   if (!validRows.length) return null
