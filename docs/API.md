@@ -36,6 +36,55 @@ In Supabase mode, the frontend signs in through Supabase Auth and sends the Supa
 
 All dashboard contract endpoints require `Authorization: Bearer <token>` except `GET /api/health`.
 
+## Databricks Integration Contract
+
+- `GET /api/integrations/databricks/status`
+  - Requires an authenticated MedShield administrator.
+  - Uses backend-only Databricks credentials to query the approved
+    `workspace.medshield_gold.vw_dashboard_yearly_sales_candidate` view.
+  - Returns connection status, year coverage, and row count without returning tokens,
+    warehouse identifiers, or raw SQL.
+- `POST /api/integrations/databricks/sync/yearly`
+  - Requires an authenticated MedShield administrator and is limited to five requests per 15 minutes per client.
+  - Extracts the approved 47-column yearly Gold contract, then requires exactly 9 unique years covering 2017–2025, source-to-target transaction-total reconciliation, 12-month calendar scaffolds, and `CANDIDATE_PENDING_FINANCE_APPROVAL` financial labels. The current validated source total is 40,086 transactions.
+  - Calls the service-role-only Supabase RPC `public.sync_databricks_yearly_sales_candidate` to atomically replace the protected shadow table `medshield_sales.databricks_yearly_sales_candidate`.
+  - Reconciles source and target row counts, years, transaction totals, and canonical checksums. A failed database validation rolls back the replacement and preserves the previous candidate cache.
+  - Never changes `fact_year_summary`, `/api/year_summary`, or any published dashboard fact.
+  - Returns:
+
+```json
+{
+  "ok": true,
+  "status": "candidate_cache_synchronized",
+  "pipeline_run_key": 123,
+  "source": {
+    "catalog": "workspace",
+    "schema": "medshield_gold",
+    "view": "vw_dashboard_yearly_sales_candidate"
+  },
+  "extracted_rows": 9,
+  "loaded_rows": 9,
+  "period": {
+    "minimum_year": 2017,
+    "maximum_year": 2025,
+    "year_count": 9
+  },
+  "reconciliation": {
+    "source_transaction_count": 40086,
+    "loaded_transaction_count": 40086,
+    "matched": true
+  },
+  "candidate_only": true,
+  "warning": "Candidate financial measures remain pending Finance/business-owner approval and have not replaced published dashboard facts.",
+  "synced_at": "2026-09-01T00:00:00.000Z"
+}
+```
+
+Databricks does not authenticate MedShield users. Supabase Auth remains the identity and
+session provider, while the TypeScript gateway enforces MedShield roles before using the
+server-side Databricks integration. The browser must never receive `DATABRICKS_TOKEN`,
+`DATABRICKS_SQL_WAREHOUSE_ID`, `SUPABASE_SECRET_KEY`, or `SUPABASE_SERVICE_ROLE_KEY`.
+
 ## DSS Model Contract
 
 These endpoints expose the paper-aligned decision-support outputs. The TypeScript gateway reads them from the Python services first, then falls back to the checked-in reference export.
