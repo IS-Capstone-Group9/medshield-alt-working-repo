@@ -13,7 +13,14 @@ For the current `.env` boundary, Supabase schema inventory, and analytics table-
 5. `supabase/migrations/005_sales_ingestion_weather.sql`
 6. `supabase/migrations/006_business_rules_master_data.sql`
 7. `supabase/migrations/007_namespaced_schema_alignment.sql`
-8. `supabase/seed.sql` or app ingestion for the target schema
+8. `supabase/migrations/008_schema_performance_lineage_indices.sql`
+9. `supabase/migrations/009_saas_compliance_audit.sql`
+10. `supabase/migrations/010_enable_rls.sql`
+11. `supabase/migrations/011_supabase_auth_account_bridge.sql`
+12. `supabase/migrations/012_retire_legacy_auth_surface.sql`
+13. `supabase/migrations/013_databricks_yearly_candidate_sync.sql`
+14. `supabase/migrations/014_databricks_yearly_candidate_permissions.sql`
+15. `supabase/seed.sql` or app ingestion for the target schema
 
 ## Schema Direction
 
@@ -25,6 +32,25 @@ The schema now supports four layers:
 | Source/staging | `medshield_sales.stg_sales_transactions`, `medshield_external.stg_doh_historical`, `medshield_external.stg_pagasa_historical`, `medshield_external.stg_weather_api_observations`, `medshield_etl.etl_pipeline_run`, `medshield_etl.etl_source_extract` | Preserve workbook and external extract lineage. |
 | Warehouse facts | `medshield_sales.fact_sales_transactions`, `medshield_sales.fact_monthly_sales`, `medshield_sales.fact_area_summary`, `medshield_sales.fact_product_summary`, `medshield_sales.fact_year_summary`, `medshield_sales.fact_seasonality`, `medshield_sales.fact_data_completeness` | Store sales facts, dashboard aggregates, and period-level source completeness. |
 | DSS outputs | `medshield_analytics.fact_demand_forecast`, `medshield_analytics.fact_product_priority`, `medshield_analytics.fact_inventory_recommendation`, `medshield_analytics.fact_regional_priority`, `medshield_analytics.fact_decision_alert`, and related views | Store model outputs used by the decision-support dashboard. |
+
+## Databricks Yearly Candidate Pilot
+
+Migration `013` creates the protected shadow table
+`medshield_sales.databricks_yearly_sales_candidate` and the service-role-only RPC
+`public.sync_databricks_yearly_sales_candidate`.
+
+Migration `014` restores the least-privilege `service_role` schema, table, sequence,
+and function grants required by that security-invoker RPC. It does not grant access
+to `anon` or `authenticated` and does not publish candidate data to dashboard facts.
+
+The pilot stores exactly one validated row for each year from 2017 through 2025 and records
+`etl_pipeline_run` plus `etl_source_extract` lineage. Replacement occurs inside an atomic
+database block: validation, row-count, year, transaction-total, or checksum failure rolls back
+the cache change. Direct access is revoked from `anon` and `authenticated` roles.
+
+The table is deliberately not a publication fact. Candidate revenue remains
+`transfer_value_candidate`; candidate gross profit remains `gross_margin_candidate`. Neither
+field replaces the current dashboard source until Finance/business-owner approval is recorded.
 
 The obsolete flat `analytics_*` tables are dropped by `004_dss_schema.sql` because the `vw_dashboard_*` and `vw_dss_*` views are now the API surface.
 
