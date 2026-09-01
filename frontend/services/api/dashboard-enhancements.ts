@@ -56,6 +56,36 @@ function replaceSelectOptions(
       : years[0]
 }
 
+function ensureCurrentAnalyticalYear(root: HTMLElement) {
+  const select = root.querySelector<HTMLSelectElement>('#topbarYearSelect')
+  if (!select) return
+
+  const now = new Date()
+  const currentYear = String(now.getFullYear())
+  const nextYear = now.getMonth() + 1 >= 10 ? String(now.getFullYear() + 1) : null
+  const allYears = [...select.options].map((option) => option.value)
+
+  for (const year of [currentYear, nextYear].filter((value): value is string => Boolean(value))) {
+    if (allYears.includes(year)) continue
+    const option = document.createElement('option')
+    option.value = year
+    select.appendChild(option)
+  }
+
+  const allOption = select.querySelector<HTMLOptionElement>('option[value="all"]')
+  if (allOption) allOption.textContent = `All Years (2017–${nextYear ?? currentYear})`
+
+  const currentOption = select.querySelector<HTMLOptionElement>(`option[value="${currentYear}"]`)
+  if (currentOption) currentOption.textContent = `${currentYear} (Current Analytical)`
+
+  if (nextYear) {
+    const nextOption = select.querySelector<HTMLOptionElement>(`option[value="${nextYear}"]`)
+    if (nextOption) nextOption.textContent = `${nextYear} (Forward Forecast)`
+  }
+
+  if (select.value === '2025' && currentYear !== '2025') select.value = currentYear
+}
+
 export function updateDashboardProvenance(
   root: HTMLElement,
   status: DashboardDataStatus,
@@ -213,6 +243,7 @@ export function enhanceDashboardContent(root: HTMLElement) {
   }
 
   replaceUnsupportedLabels(root)
+  ensureCurrentAnalyticalYear(root)
   updateAreaSegmentationLabels(root)
 
   const navigation = root.querySelector('.nav')
