@@ -59,6 +59,15 @@ function activateDashboardPage(root: HTMLElement, name: DashboardPageName, navIt
       : 'none'
   }
 
+  const comparisonSelector = root.querySelector<HTMLElement>('.comparison-selector')
+  if (comparisonSelector) {
+    const singleYearOnly = name === 'products' || name === 'territory'
+    comparisonSelector.style.display = singleYearOnly ? 'none' : ''
+    if (singleYearOnly && typeof (window as any).setComparisonMode === 'function') {
+      ;(window as any).setComparisonMode('single', root.querySelector('#btnSingleYear'))
+    }
+  }
+
   if (document.body.classList.contains('nav-hidden')) {
     ;(window as any).closeNavigation?.()
   }
