@@ -273,7 +273,7 @@ export function installDashboardEnhancements(root: HTMLElement, activeListeners:
 
     const provider = (providerSelect?.value === 'open_meteo' ? 'open_meteo' : 'nasa_power')
     const area = areaSelect?.value ?? 'all'
-    const year = yearSelect?.value ?? '2025'
+    const year = yearSelect?.value ?? String(new Date().getFullYear())
 
     const start = `${year}-01-01`
     const end = `${year}-12-31`

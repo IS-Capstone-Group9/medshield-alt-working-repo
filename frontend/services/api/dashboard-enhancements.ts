@@ -115,6 +115,23 @@ export function updateDashboardProvenance(
   replaceSelectOptions(root.querySelector<HTMLSelectElement>('#yoyBaseYearSelect'), years, false, yearLabels)
   replaceSelectOptions(root.querySelector<HTMLSelectElement>('#yoyTargetYearSelect'), years, false, yearLabels)
 
+  const weatherYearSelect = root.querySelector<HTMLSelectElement>('#weatherYear')
+  if (weatherYearSelect) {
+    const currentYearNumber = Number(currentAnalyticalYear || new Date().getFullYear())
+    const weatherYears = [...new Set([
+      ...Array.from({ length: Math.max(0, currentYearNumber - 2017 + 1) }, (_, index) => String(2017 + index)),
+      currentAnalyticalYear,
+      ...(nextForecastYear ? [nextForecastYear] : []),
+    ])]
+      .filter((year): year is string => /^\d{4}$/.test(year))
+      .sort((left, right) => Number(right) - Number(left))
+    replaceSelectOptions(weatherYearSelect, weatherYears, false, yearLabels)
+    if (weatherYearSelect.dataset.initialized !== 'true') {
+      weatherYearSelect.value = currentAnalyticalYear || String(new Date().getFullYear())
+      weatherYearSelect.dataset.initialized = 'true'
+    }
+  }
+
   const targetSelect = root.querySelector<HTMLSelectElement>('#yoyTargetYearSelect')
   const baseSelect = root.querySelector<HTMLSelectElement>('#yoyBaseYearSelect')
   if (targetSelect && baseSelect && targetSelect.value === baseSelect.value && years.length > 1) {

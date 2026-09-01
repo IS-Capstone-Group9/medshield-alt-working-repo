@@ -114,7 +114,7 @@ export async function loadSalesDataView(root: HTMLElement, state: any) {
 }
 
 export async function loadWeatherEffectView(root: HTMLElement) {
-  const year = root.querySelector<HTMLSelectElement>('#weatherYear')?.value ?? '2025'
+  const year = root.querySelector<HTMLSelectElement>('#weatherYear')?.value ?? String(new Date().getFullYear())
   const area = root.querySelector<HTMLSelectElement>('#weatherArea')?.value ?? 'all'
   const grain = (root.querySelector<HTMLSelectElement>('#weatherGrain')?.value ?? 'monthly') as 'daily' | 'monthly'
   renderWeatherEffects(root, await getWeatherEffects({ year, area, grain }))
