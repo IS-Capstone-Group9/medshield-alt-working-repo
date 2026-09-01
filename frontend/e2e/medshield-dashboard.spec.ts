@@ -198,7 +198,7 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     const yearSelect = page.locator('#topbarYearSelect');
 
     await page.locator('.nav-item', { hasText: 'Product Prioritization' }).click();
-    await expect(page.locator('#btnYoyYear')).toBeHidden();
+    await expect(page.locator('.comparison-selector')).toBeHidden();
     await yearSelect.selectOption('2024');
     const product2024 = await page.evaluate(() => {
       const chart = (window as any).Chart.getChart(document.getElementById('productBarChart'));
@@ -212,7 +212,7 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     expect(product2024.values).not.toEqual(product2025.values);
 
     await page.locator('.nav-item', { hasText: 'Area Prioritization' }).click();
-    await expect(page.locator('#btnYoyYear')).toBeHidden();
+    await expect(page.locator('.comparison-selector')).toBeHidden();
     await yearSelect.selectOption('2024');
     const area2024 = await page.evaluate(() => {
       const chart = (window as any).Chart.getChart(document.getElementById('areaBarChart'));

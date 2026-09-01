@@ -790,10 +790,10 @@ function updateFilterBar(name) {
         bar.style.display = 'none';
       }
     }
-    const yoyButton = document.getElementById('btnYoyYear');
-    if (yoyButton) {
+    const comparisonSelector = document.querySelector('.comparison-selector');
+    if (comparisonSelector) {
       const singleYearOnly = name === 'products' || name === 'territory';
-      yoyButton.style.display = singleYearOnly ? 'none' : '';
+      comparisonSelector.style.display = singleYearOnly ? 'none' : '';
       if (singleYearOnly && typeof comparisonMode !== 'undefined' && comparisonMode === 'yoy' && typeof setComparisonMode === 'function') {
         setComparisonMode('single', document.getElementById('btnSingleYear'));
       }
