@@ -14,18 +14,17 @@ export async function authLogin(
     })
     const data = await res.json()
     if (!res.ok) return { ok: false, error: data.error || 'Login failed' }
-    if (isSupabaseBrowserConfigured()) {
-      if (!data.refresh_token) return { ok: false, error: 'The server did not return a refreshable Supabase session.' }
+    if (isSupabaseBrowserConfigured() && data.refresh_token) {
       const supabase = createClient()
       const { error } = await supabase.auth.setSession({
         access_token: data.access_token,
         refresh_token: data.refresh_token,
       })
       if (error) return { ok: false, error: 'Could not establish the secure browser session.' }
-    } else {
+    } else if (data.access_token) {
       storeToken(data.access_token, remember)
     }
-    return { ok: true, access_token: data.access_token, user: toUser(data.user) }
+    return { ok: true, access_token: data.access_token, user: toUser(data.user ?? data) }
   } catch {
     return { ok: false, error: 'Cannot connect to server' }
   }
