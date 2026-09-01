@@ -482,6 +482,13 @@ function getYearAreaSource() {
       }).sort().slice(-3);
       var targetSummary = getYearSummaryRow(yr);
       var totalForecastRev = targetSummary ? Number(targetSummary.revenue) || 0 : 0;
+      if (totalForecastRev <= 0 && Array.isArray(DATA.monthly)) {
+        totalForecastRev = DATA.monthly.reduce(function(sum, row) {
+          return String(row && row.period || '').startsWith(yr + '-')
+            ? sum + (Number(row.revenue) || 0)
+            : sum;
+        }, 0);
+      }
       if (totalForecastRev <= 0) return Array.isArray(DATA.by_area) ? DATA.by_area : [];
       recentYears = recentYears.filter(function(y) {
         return Array.isArray(DATA.by_year_area[y]) && DATA.by_year_area[y].length > 0;
