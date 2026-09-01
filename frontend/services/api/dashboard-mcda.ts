@@ -44,6 +44,13 @@ function renderRankingTable(root: HTMLElement, state: McdaState) {
   const table = root.querySelector<HTMLTableElement>('#priorityTable')
   if (!table || !state.result) return
 
+  if (!table.parentElement?.classList.contains('priority-table-scroll')) {
+    const scrollContainer = document.createElement('div')
+    scrollContainer.className = 'table-responsive-wrap priority-table-scroll'
+    table.replaceWith(scrollContainer)
+    scrollContainer.appendChild(table)
+  }
+
   const card = table.closest<HTMLElement>('.chart-card')
   const title = card?.querySelector<HTMLElement>('.chart-title')
   const subtitle = card?.querySelector<HTMLElement>('.chart-subtitle')

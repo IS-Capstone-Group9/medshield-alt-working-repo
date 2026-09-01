@@ -669,6 +669,15 @@ td {
 .product-table tbody tr:hover {
   background: var(--bg-elevated);
 }
+.priority-table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.priority-table-scroll .product-table {
+  min-width: 980px;
+}
 .comp-mode-btn,
 .yr-btn,
 .filterbar select,
