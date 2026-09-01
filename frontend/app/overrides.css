@@ -360,6 +360,18 @@ body .topbar {
   font-weight: 800;
 }
 .sales-primary-button:disabled { opacity: .55; cursor: wait; }
+.sales-secondary-button {
+  flex: 0 0 auto;
+  padding: 9px 13px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 800;
+}
+.sales-secondary-button:hover { background: var(--accent-light); }
+.sales-secondary-button:disabled { opacity: .55; cursor: wait; }
 .sales-note {
   padding: 9px 11px;
   border-left: 3px solid var(--accent);
@@ -367,6 +379,88 @@ body .topbar {
   color: var(--text-secondary);
   font-size: 11px;
   line-height: 1.4;
+}
+.databricks-connection-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 22px 12px;
+  padding: 11px 13px;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--text-secondary);
+  border-radius: 0 8px 8px 0;
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  font-size: 11px;
+  line-height: 1.45;
+}
+.databricks-connection-copy { display: grid; flex: 1 1 420px; min-width: 0; gap: 5px; }
+.databricks-connection-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-primary);
+}
+.databricks-connection-actions {
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.databricks-connection-actions .sales-primary-button,
+.databricks-connection-actions .sales-secondary-button { white-space: nowrap; }
+.databricks-connection-actions .sales-primary-button:disabled { cursor: not-allowed; }
+.databricks-connection-actions .is-busy:disabled { cursor: wait; }
+.databricks-sync-result {
+  display: grid;
+  gap: 5px;
+  margin-top: 4px;
+  padding-top: 9px;
+  border-top: 1px solid var(--border);
+}
+.databricks-sync-result[hidden] { display: none; }
+.databricks-sync-result-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-primary);
+}
+.databricks-connection-panel .databricks-sync-result.is-syncing .mini-badge,
+.databricks-connection-panel .databricks-sync-result.is-success .mini-badge {
+  border-color: rgba(245, 158, 11, .28);
+  background: rgba(245, 158, 11, .12);
+  color: #b45309;
+}
+.databricks-connection-panel .databricks-sync-result.is-error .mini-badge {
+  border-color: rgba(220, 38, 38, .24);
+  background: rgba(220, 38, 38, .10);
+  color: var(--red);
+}
+.databricks-sync-warning {
+  color: #b45309;
+  font-weight: 700;
+}
+.databricks-connection-panel.is-checking { border-left-color: var(--amber); }
+.databricks-connection-panel.is-connected { border-left-color: #16a34a; }
+.databricks-connection-panel.is-error { border-left-color: var(--red); }
+.databricks-connection-panel.is-connected .mini-badge {
+  border-color: rgba(22, 163, 74, .24);
+  background: rgba(22, 163, 74, .10);
+  color: #15803d;
+}
+.databricks-connection-panel.is-error .mini-badge {
+  border-color: rgba(220, 38, 38, .24);
+  background: rgba(220, 38, 38, .10);
+  color: var(--red);
+}
+@media (max-width: 720px) {
+  .databricks-connection-panel { align-items: stretch; flex-direction: column; }
+  .databricks-connection-actions { display: grid; grid-template-columns: 1fr; }
+  .databricks-connection-panel .sales-primary-button,
+  .databricks-connection-panel .sales-secondary-button { width: 100%; }
 }
 #page-sales-data .uploaded-data-panel,
 #page-weather-validation .uploaded-data-panel {
