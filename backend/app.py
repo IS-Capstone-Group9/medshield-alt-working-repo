@@ -332,29 +332,6 @@ def auth_logout():
     return jsonify({"ok": True})
 
 
-def _local_session_user() -> dict[str, Any] | None:
-    authorization = request.headers.get("Authorization", "")
-    if not authorization.startswith("Bearer "):
-        return None
-    return LOCAL_SESSIONS.get(authorization[7:].strip())
-
-
-@app.route("/api/auth/me", methods=["GET"])
-def auth_me():
-    user = _local_session_user()
-    if user is None:
-        return jsonify({"error": "Unauthorized"}), 401
-    return jsonify({"user": user})
-
-
-@app.route("/api/auth/logout", methods=["POST"])
-def auth_logout():
-    authorization = request.headers.get("Authorization", "")
-    if authorization.startswith("Bearer "):
-        LOCAL_SESSIONS.pop(authorization[7:].strip(), None)
-    return jsonify({"ok": True})
-
-
 @app.route("/api/health", methods=["GET"])
 def health():
     return jsonify({
