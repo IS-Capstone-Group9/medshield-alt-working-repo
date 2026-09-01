@@ -7,7 +7,10 @@ lives in ``backend/src`` as a TypeScript service.
 from __future__ import annotations
 
 import json
+import hashlib
+import hmac
 import os
+import secrets
 from json import JSONDecodeError
 from pathlib import Path
 import sys
@@ -38,6 +41,7 @@ ANALYTICS_SERVICE_URL = os.getenv("ANALYTICS_SERVICE_URL", "http://localhost:510
 PRODUCT_SERVICE_URL = os.getenv("PRODUCT_SERVICE_URL", "http://localhost:5102").rstrip("/")
 LOCAL_AUTH_STORE = ROOT_DIR / "backend" / "data" / "local_accounts.json"
 LOCAL_AUTH_LOCK = Lock()
+LOCAL_SESSIONS: dict[str, dict[str, Any]] = {}
 
 
 def env_bool(name: str, default: bool = False) -> bool:
@@ -179,13 +183,36 @@ def local_create_account(username: str, email: str, password: str, role: str = "
         return account
 
 
+def _check_password_hash(password_hash: str, password: str) -> bool:
+    if not password_hash.startswith("scrypt:"):
+        return check_password_hash(password_hash, password)
+
+    try:
+        params, salt, digest_hex = password_hash.split("$", 2)
+        _, n_text, r_text, p_text = params.split(":", 3)
+        expected = bytes.fromhex(digest_hex)
+        derived = hashlib.scrypt(
+            password.encode("utf-8"),
+            salt=salt.encode("utf-8"),
+            n=int(n_text),
+            r=int(r_text),
+            p=int(p_text),
+            dklen=len(expected),
+            maxmem=128 * 1024 * 1024,
+        )
+    except (ValueError, TypeError):
+        return False
+
+    return hmac.compare_digest(derived, expected)
+
+
 def local_verify_login(username: str, password: str) -> dict[str, Any] | None:
     with LOCAL_AUTH_LOCK:
         accounts = _load_local_accounts()
         for account in accounts:
             if account.get("username") != username and account.get("email") != username:
                 continue
-            if not check_password_hash(str(account.get("password_hash", "")), password):
+            if not _check_password_hash(str(account.get("password_hash", "")), password):
                 continue
             if not account.get("is_active", True):
                 return {"error": "Account is disabled"}
@@ -193,7 +220,10 @@ def local_verify_login(username: str, password: str) -> dict[str, Any] | None:
             now = datetime.now(timezone.utc).isoformat()
             account["last_login_at"] = now
             account["updated_at"] = now
-            _save_local_accounts(accounts)
+            try:
+                _save_local_accounts(accounts)
+            except OSError:
+                app.logger.warning("Could not persist local account login metadata.")
             return {
                 "account_id": account["account_id"],
                 "username": account["username"],
@@ -296,7 +326,32 @@ def auth_login():
         return jsonify({"error": "Invalid username or password"}), 401
     if user.get("error") == "Account is disabled":
         return jsonify({"error": "Account is disabled"}), 403
-    return jsonify(user)
+    access_token = secrets.token_urlsafe(32)
+    LOCAL_SESSIONS[access_token] = user
+    return jsonify({"access_token": access_token, "user": user})
+
+
+def _local_session_user() -> dict[str, Any] | None:
+    authorization = request.headers.get("Authorization", "")
+    if not authorization.startswith("Bearer "):
+        return None
+    return LOCAL_SESSIONS.get(authorization[7:].strip())
+
+
+@app.route("/api/auth/me", methods=["GET"])
+def auth_me():
+    user = _local_session_user()
+    if user is None:
+        return jsonify({"error": "Unauthorized"}), 401
+    return jsonify({"user": user})
+
+
+@app.route("/api/auth/logout", methods=["POST"])
+def auth_logout():
+    authorization = request.headers.get("Authorization", "")
+    if authorization.startswith("Bearer "):
+        LOCAL_SESSIONS.pop(authorization[7:].strip(), None)
+    return jsonify({"ok": True})
 
 
 @app.route("/api/auth/signup", methods=["POST", "OPTIONS"])

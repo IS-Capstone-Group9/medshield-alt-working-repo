@@ -6,21 +6,6 @@ export async function authLogin(
   password: string,
   remember = false
 ): Promise<{ ok: boolean; access_token?: string; user?: User; error?: string }> {
-  if (isSupabaseBrowserConfigured()) {
-    try {
-      const supabase = createClient()
-      const { data, error } = await supabase.auth.signInWithPassword({ email: username, password })
-      if (error || !data.session?.user) return { ok: false, error: error?.message || 'Login failed' }
-      return {
-        ok: true,
-        access_token: data.session.access_token,
-        user: toUserFromSupabase(data.session.user),
-      }
-    } catch {
-      return { ok: false, error: 'Cannot connect to Supabase Auth' }
-    }
-  }
-
   try {
     const res = await fetch(`${API_BASE}/api/auth/login`, {
       method: 'POST',
@@ -29,8 +14,17 @@ export async function authLogin(
     })
     const data = await res.json()
     if (!res.ok) return { ok: false, error: data.error || 'Login failed' }
-    storeToken(data.access_token, remember)
-    return { ok: true, access_token: data.access_token, user: toUser(data.user) }
+    if (isSupabaseBrowserConfigured() && data.refresh_token) {
+      const supabase = createClient()
+      const { error } = await supabase.auth.setSession({
+        access_token: data.access_token,
+        refresh_token: data.refresh_token,
+      })
+      if (error) return { ok: false, error: 'Could not establish the secure browser session.' }
+    } else if (data.access_token) {
+      storeToken(data.access_token, remember)
+    }
+    return { ok: true, access_token: data.access_token, user: toUser(data.user ?? data) }
   } catch {
     return { ok: false, error: 'Cannot connect to server' }
   }

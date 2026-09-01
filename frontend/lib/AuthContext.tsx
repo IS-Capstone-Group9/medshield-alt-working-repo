@@ -31,7 +31,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [accessToken, setAccessToken] = useState<string | null>(null)
 
   useEffect(() => {
-    if (isSupabaseBrowserConfigured()) {
+    if (isSupabaseBrowserConfigured() && !getStoredToken()) {
       try {
         const supabase = createClient()
         let cancelled = false
