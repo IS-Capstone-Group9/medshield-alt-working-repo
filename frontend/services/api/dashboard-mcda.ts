@@ -42,14 +42,22 @@ function scoreTerritory(row: CommercialMcdaTerritory, state: McdaState): number 
 
 function renderRankingTable(root: HTMLElement, state: McdaState) {
   const table = root.querySelector<HTMLTableElement>('#priorityTable')
-  if (!table || !state.result) return
+  if (!table) return
 
   if (!table.parentElement?.classList.contains('priority-table-scroll')) {
     const scrollContainer = document.createElement('div')
     scrollContainer.className = 'table-responsive-wrap priority-table-scroll'
+    scrollContainer.style.width = '100%'
+    scrollContainer.style.maxWidth = '100%'
+    scrollContainer.style.overflowX = 'auto'
     table.replaceWith(scrollContainer)
     scrollContainer.appendChild(table)
   }
+
+  table.style.width = 'max-content'
+  table.style.minWidth = '980px'
+
+  if (!state.result) return
 
   const card = table.closest<HTMLElement>('.chart-card')
   const title = card?.querySelector<HTMLElement>('.chart-title')

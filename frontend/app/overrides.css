@@ -676,6 +676,7 @@ td {
   -webkit-overflow-scrolling: touch;
 }
 .priority-table-scroll .product-table {
+  width: max-content;
   min-width: 980px;
 }
 .comp-mode-btn,
