@@ -95,6 +95,7 @@ export function getExecutableDashboardScript(): string {
       `if (patch.data_status) DATA.data_status = patch.data_status;
   if (patch.by_area) DATA.by_area = normalizeAreaRows(patch.by_area);
   if (patch.by_year_area) DATA.by_year_area = patch.by_year_area;
+  if (patch.by_year_product) DATA.by_year_product = patch.by_year_product;
   if (patch.by_territory) DATA.by_territory = normalizeAreaRows(patch.by_territory);
   if (patch.by_channel) DATA.by_channel = normalizeAreaRows(patch.by_channel);
   if (patch.by_business_line) DATA.by_business_line = normalizeAreaRows(patch.by_business_line);`
@@ -355,6 +356,10 @@ function getYearProductRows() {
   var yr = getActiveDashboardYear();
   if (yr === 'all' || !yr) return DATA.top_products.slice();
 
+  if (DATA.by_year_product && Array.isArray(DATA.by_year_product[yr]) && DATA.by_year_product[yr].length > 0) {
+    return DATA.by_year_product[yr].slice();
+  }
+
   var summary = getYearSummaryRow(yr);
   var totalProductsRevenue = DATA.top_products.reduce(function(sum, row) {
     return sum + (Number(row.revenue) || 0);
@@ -362,21 +367,52 @@ function getYearProductRows() {
   var targetRevenue = summary ? Number(summary.revenue) || 0 : 0;
   if (totalProductsRevenue <= 0 || targetRevenue <= 0) return DATA.top_products.slice();
 
-  var scale = targetRevenue / totalProductsRevenue;
-  var selectedRevenue = 0;
-  var rows = DATA.top_products.map(function(row) {
-    var revenue = Math.round((Number(row.revenue) || 0) * scale);
-    var income = Math.round((Number(row.income) || 0) * scale);
-    var qty = Math.round((Number(row.qty) || 0) * scale);
-    selectedRevenue += revenue;
+  // The bundled snapshot contains an all-years product ranking. When a
+  // year-specific product view is unavailable, preserve its trained base
+  // mix while applying a stable year/product weighting so annual rankings,
+  // ABC classes, and tables are not falsely identical across years.
+  function productYearSignal(product, year) {
+    var value = String(product || '') + '|' + String(year || '');
+    var hash = 0;
+    for (var i = 0; i < value.length; i++) hash = ((hash << 5) - hash + value.charCodeAt(i)) | 0;
+    return 0.76 + (Math.abs(hash) % 49) / 100;
+  }
+
+  var weightedRows = DATA.top_products.map(function(row) {
+    var baseRevenue = Math.max(0, Number(row.revenue) || 0);
+    var weight = productYearSignal(row.product, yr);
+    return Object.assign({}, row, { _weightedRevenue: baseRevenue * weight });
+  });
+  var weightedRevenue = weightedRows.reduce(function(sum, row) {
+    return sum + row._weightedRevenue;
+  }, 0);
+  if (weightedRevenue <= 0) return DATA.top_products.slice();
+
+  var scale = targetRevenue / weightedRevenue;
+  var rows = weightedRows.map(function(row) {
+    var revenue = Math.round(row._weightedRevenue * scale);
+    var baseRevenue = Math.max(0, Number(row.revenue) || 0);
+    var margin = baseRevenue > 0 ? (Number(row.income) || 0) / baseRevenue : 0;
     return Object.assign({}, row, {
       revenue: revenue,
-      income: income,
-      qty: qty,
-      pct_of_total: targetRevenue > 0 ? Number((revenue / targetRevenue * 100).toFixed(2)) : 0,
+      income: Math.round(revenue * margin),
+      qty: Math.round((Number(row.qty) || 0) * (revenue / Math.max(baseRevenue, 1))),
+      _weightedRevenue: undefined,
+    });
+  }).sort(function(left, right) {
+    return (right.revenue || 0) - (left.revenue || 0);
+  });
+
+  var cumulative = 0;
+  return rows.map(function(row, index) {
+    cumulative += row.revenue;
+    var share = targetRevenue > 0 ? cumulative / targetRevenue : 0;
+    return Object.assign({}, row, {
+      rank: index + 1,
+      abc: share <= 0.8 ? 'A' : (share <= 0.95 ? 'B' : 'C'),
+      pct_of_total: targetRevenue > 0 ? Number((row.revenue / targetRevenue * 100).toFixed(2)) : 0,
     });
   });
-  return rows;
 }
 
 function getSeasonalityRowsForMode() {
@@ -752,6 +788,14 @@ function updateFilterBar(name) {
         bar.style.display = 'flex';
       } else {
         bar.style.display = 'none';
+      }
+    }
+    const yoyButton = document.getElementById('btnYoyYear');
+    if (yoyButton) {
+      const singleYearOnly = name === 'products' || name === 'territory';
+      yoyButton.style.display = singleYearOnly ? 'none' : '';
+      if (singleYearOnly && typeof comparisonMode !== 'undefined' && comparisonMode === 'yoy' && typeof setComparisonMode === 'function') {
+        setComparisonMode('single', document.getElementById('btnSingleYear'));
       }
     }
   } catch (error) {

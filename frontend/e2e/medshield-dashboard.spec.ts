@@ -194,6 +194,41 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     })).toEqual(['2024'])
   });
 
+  test('3c. Product and Area Prioritization vary by year and keep All Years totals', async ({ page }) => {
+    const yearSelect = page.locator('#topbarYearSelect');
+
+    await page.locator('.nav-item', { hasText: 'Product Prioritization' }).click();
+    await expect(page.locator('#btnYoyYear')).toBeHidden();
+    await yearSelect.selectOption('2024');
+    const product2024 = await page.evaluate(() => {
+      const chart = (window as any).Chart.getChart(document.getElementById('productBarChart'));
+      return { labels: chart?.data?.labels ?? [], values: chart?.data?.datasets?.[0]?.data ?? [] };
+    });
+    await yearSelect.selectOption('2025');
+    const product2025 = await page.evaluate(() => {
+      const chart = (window as any).Chart.getChart(document.getElementById('productBarChart'));
+      return { labels: chart?.data?.labels ?? [], values: chart?.data?.datasets?.[0]?.data ?? [] };
+    });
+    expect(product2024.values).not.toEqual(product2025.values);
+
+    await page.locator('.nav-item', { hasText: 'Area Prioritization' }).click();
+    await expect(page.locator('#btnYoyYear')).toBeHidden();
+    await yearSelect.selectOption('2024');
+    const area2024 = await page.evaluate(() => {
+      const chart = (window as any).Chart.getChart(document.getElementById('areaBarChart'));
+      return { labels: chart?.data?.labels ?? [], values: chart?.data?.datasets?.[0]?.data ?? [] };
+    });
+    await yearSelect.selectOption('2025');
+    const area2025 = await page.evaluate(() => {
+      const chart = (window as any).Chart.getChart(document.getElementById('areaBarChart'));
+      return { labels: chart?.data?.labels ?? [], values: chart?.data?.datasets?.[0]?.data ?? [] };
+    });
+    expect(area2024.values).not.toEqual(area2025.values);
+
+    await yearSelect.selectOption('all');
+    await expect(page.locator('.chart-badge').filter({ hasText: 'Province Grain (All Years)' })).toBeVisible();
+  });
+
   test('3b. Extended data pages open and unsupported dark mode is absent', async ({ page }) => {
     const salesDeepDive = page.locator('[data-sales-diagnostics-deep-dive]');
     await expect(page.getByRole('button', { name: 'Toggle dark mode' })).toHaveCount(0);
