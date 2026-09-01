@@ -50,7 +50,14 @@ export function renderWeatherEffects(root: HTMLElement, result: WeatherEffects) 
     const cell = row.insertCell()
     cell.colSpan = headers.length
     cell.className = 'uploaded-data-empty'
-    cell.textContent = 'No weather validation data matched. Verify territory name matches database.'
+    const selectedYear = root.querySelector<HTMLSelectElement>('#weatherYear')?.value ?? ''
+    const selectedArea = root.querySelector<HTMLSelectElement>('#weatherArea')?.value ?? 'all'
+    const currentYear = String(new Date().getFullYear())
+    cell.textContent = selectedYear === currentYear
+      ? `No ${currentYear} weather observations are loaded yet. Click Refresh Weather to update through today.`
+      : selectedArea !== 'all'
+        ? `No weather observations matched ${selectedArea} for ${selectedYear}. Verify the territory or refresh the selected period.`
+        : `No weather observations are loaded for ${selectedYear}. Refresh the selected period to retrieve them.`
   } else {
     for (const item of result.rows) {
       const temperature = isDaily ? item.temperature_c : item.avg_temperature_c
@@ -79,7 +86,9 @@ export function renderWeatherEffects(root: HTMLElement, result: WeatherEffects) 
 
   status.textContent = result.rows.length
     ? `${weatherProviderLabel(provider)} | ${grain === 'daily' ? 'Daily rows' : 'Monthly aggregate'} | ${period} | ${periods} weather rows | ${salesMatches} sales matches | ${correlation}`
-    : 'No weather rows match the selected territory and year.'
+    : root.querySelector<HTMLSelectElement>('#weatherYear')?.value === String(new Date().getFullYear())
+      ? 'Current-year weather data is not loaded. Use Refresh Weather to update through today.'
+      : 'No weather observations match the selected period and territory.'
   
   if (countLabel) {
     countLabel.textContent = `Fetched ${periods} records | matched ${salesMatches} sales periods | rainfall-revenue ${correlation}`

@@ -276,7 +276,9 @@ export function installDashboardEnhancements(root: HTMLElement, activeListeners:
     const year = yearSelect?.value ?? String(new Date().getFullYear())
 
     const start = `${year}-01-01`
-    const end = `${year}-12-31`
+    const currentYear = String(new Date().getFullYear())
+    const today = new Date().toISOString().slice(0, 10)
+    const end = year === currentYear ? today : `${year}-12-31`
     const areas = area === 'all' ? [] : [area]
 
     try {
