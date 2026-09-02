@@ -774,11 +774,16 @@ td {
   min-width: 980px;
 }
 .revenue-detail-scroll {
+  width: 100%;
+  min-width: 0;
   overflow-x: auto !important;
   overflow-y: hidden;
 }
 .revenue-detail-scroll canvas {
-  min-width: 1800px;
+  display: block;
+  width: 1800px !important;
+  max-width: none !important;
+  height: 300px !important;
 }
 .comp-mode-btn,
 .yr-btn,
