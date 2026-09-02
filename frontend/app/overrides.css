@@ -781,9 +781,9 @@ td {
 }
 .revenue-detail-scroll canvas {
   display: block;
-  width: 1800px !important;
+  width: 1400px !important;
   max-width: none !important;
-  height: 300px !important;
+  height: 280px !important;
 }
 .comp-mode-btn,
 .yr-btn,
