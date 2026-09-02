@@ -31,6 +31,27 @@ export const SALES_DATA_PAGE = `
         </div>
       </div>
       <div class="sales-note" id="salesPipelineNote">Uploads are header-mapped, standardized, quality checked.</div>
+      <div class="databricks-connection-panel" id="databricksConnectionPanel" aria-live="polite">
+        <div class="databricks-connection-copy">
+          <div class="databricks-connection-heading">
+            <span class="mini-badge" id="databricksConnectionBadge">Not Checked</span>
+            <strong>Databricks Gold connection</strong>
+          </div>
+          <span id="databricksConnectionDetail">Verify the backend-only connection to the approved Gold yearly view. This does not expose the workspace token.</span>
+          <div class="databricks-sync-result" id="databricksYearlySyncResult" hidden>
+            <div class="databricks-sync-result-heading">
+              <span class="mini-badge" id="databricksYearlySyncBadge">Ready</span>
+              <strong>Yearly candidate cache</strong>
+            </div>
+            <span id="databricksYearlySyncDetail">Connection verified. The yearly Gold candidates can now be synchronized into the non-published cache.</span>
+            <span class="databricks-sync-warning" id="databricksYearlySyncWarning">Candidate-only data will not replace approved dashboard facts.</span>
+          </div>
+        </div>
+        <div class="databricks-connection-actions">
+          <button class="sales-secondary-button" id="checkDatabricksConnectionButton" type="button">Verify Gold Connection</button>
+          <button class="sales-primary-button" id="syncDatabricksYearlyButton" type="button" disabled title="Verify the Databricks Gold connection first">Sync Yearly Gold Data</button>
+        </div>
+      </div>
       <div class="uploaded-data-toolbar sales-filter-toolbar">
         <div class="uploaded-data-field"><label for="salesDataYear">Year</label><select id="salesDataYear"><option value="all">All Years</option></select></div>
         <div class="uploaded-data-field"><label for="salesDataQuality">Quality</label><select id="salesDataQuality"><option value="all">All Rows</option><option value="valid">Valid</option><option value="warning">Warning</option><option value="rejected">Rejected</option></select></div>
