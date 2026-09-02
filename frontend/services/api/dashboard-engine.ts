@@ -161,6 +161,10 @@ export function getExecutableDashboardScript(): string {
   const detailPeriods = comparisonMode === 'single' && selectedYear !== 'all'
     ? periods.filter((period) => period.startsWith(selectedYear + '-'))
     : periods;
+  const revenueDetailWrap = revenueDetailCanvas && revenueDetailCanvas.closest('.chart-wrap');
+  if (revenueDetailWrap) {
+    revenueDetailWrap.classList.toggle('revenue-detail-scroll', detailPeriods.length > 24);
+  }
   const futurePeriod = (period) => period > currentMonth;
   const revenueDetailProgressPlugin = {
     id: 'revenue-detail-current-day',

@@ -679,6 +679,13 @@ td {
   width: max-content;
   min-width: 980px;
 }
+.revenue-detail-scroll {
+  overflow-x: auto !important;
+  overflow-y: hidden;
+}
+.revenue-detail-scroll canvas {
+  min-width: 1800px;
+}
 .comp-mode-btn,
 .yr-btn,
 .filterbar select,
