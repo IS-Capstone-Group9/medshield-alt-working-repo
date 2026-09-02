@@ -233,7 +233,71 @@ export function getExecutableDashboardScript(): string {
     } else if (periods.length) {
       revenueDetailSubtitle.textContent = 'Monthly performance (' + periods[0].slice(0, 4) + '–' + periods[periods.length - 1].slice(0, 4) + '); actuals through ' + currentLabel + ', ' + forecastLabel;
     }
+      }`
+    )
+    .replace(
+      `const growthSourceRows = comparisonMode === 'single' && selectedYear !== 'all'
+    ? DATA.year_summary.filter((row) => row.year === selectedYear || row.year === String(Number(selectedYear) - 1))
+    : yearRowsForMode;
+  const growthBaseRows = growthSourceRows.length > 1 ? growthSourceRows : DATA.year_summary;
+  const growthData = growthBaseRows.slice(1).map((row, index) => (
+    ((row.revenue - growthBaseRows[index].revenue) / growthBaseRows[index].revenue) * 100
+  ));`,
+      `const singleYearMonthlyRows = comparisonMode === 'single' && selectedYear !== 'all'
+    ? DATA.monthly.filter((row) => row.period.startsWith(selectedYear + '-'))
+    : [];
+  const growthIsMonthly = singleYearMonthlyRows.length > 0;
+  const growthSourceRows = comparisonMode === 'single' && selectedYear !== 'all'
+    ? DATA.year_summary.filter((row) => row.year === selectedYear || row.year === String(Number(selectedYear) - 1))
+    : yearRowsForMode;
+  const growthBaseRows = growthSourceRows.length > 1 ? growthSourceRows : DATA.year_summary;
+  const growthData = growthIsMonthly
+    ? singleYearMonthlyRows.map((row, index) => {
+        const previousRow = DATA.monthly
+          .filter((candidate) => candidate.period < row.period)
+          .sort((left, right) => right.period.localeCompare(left.period))[0];
+        return previousRow && previousRow.revenue > 0
+          ? ((row.revenue - previousRow.revenue) / previousRow.revenue) * 100
+          : null;
+      })
+    : growthBaseRows.slice(1).map((row, index) => (
+        ((row.revenue - growthBaseRows[index].revenue) / growthBaseRows[index].revenue) * 100
+      ));
+  const growthLabels = growthIsMonthly
+    ? singleYearMonthlyRows.map((row) => monthLabel(row.period).split(' ')[0])
+    : growthBaseRows.slice(1).map((row) => row.year);
+  const growthCard = document.getElementById('growthChart')?.closest('.chart-card');
+  if (growthCard && growthIsMonthly) {
+    growthCard.querySelector('.chart-title').textContent = 'Monthly Growth %';
+    growthCard.querySelector('.chart-subtitle').textContent = selectedYear + ' month-over-month revenue movement';
+    growthCard.querySelector('.chart-badge').textContent = 'Monthly Trend';
   }`
+    )
+    .replace(
+      "labels: growthBaseRows.slice(1).map((row) => row.year),",
+      "labels: growthLabels,"
+    )
+    .replace(
+      `const marginRows = yearRowsForMode.length ? yearRowsForMode : DATA.year_summary;
+  const marginData = marginRows.map((row) => (row.income / row.revenue) * 100);`,
+      `const marginIsMonthly = singleYearMonthlyRows.length > 0;
+  const marginRows = yearRowsForMode.length ? yearRowsForMode : DATA.year_summary;
+  const marginData = marginIsMonthly
+    ? singleYearMonthlyRows.map((row) => row.revenue > 0 ? (row.income / row.revenue) * 100 : null)
+    : marginRows.map((row) => (row.income / row.revenue) * 100);
+  const marginLabels = marginIsMonthly
+    ? singleYearMonthlyRows.map((row) => monthLabel(row.period).split(' ')[0])
+    : marginRows.map((row) => row.year);
+  const marginCard = document.getElementById('marginChart')?.closest('.chart-card');
+  if (marginCard && marginIsMonthly) {
+    marginCard.querySelector('.chart-title').textContent = 'Monthly Operating Profit Margin %';
+    marginCard.querySelector('.chart-subtitle').textContent = selectedYear + ' monthly net margin movement';
+    marginCard.querySelector('.chart-badge').textContent = 'Monthly Margin';
+  }`
+    )
+    .replace(
+      "labels: marginRows.map((row) => row.year),",
+      "labels: marginLabels,"
     )
     .replace(
       "createChart('revenueDetailChart', {",
