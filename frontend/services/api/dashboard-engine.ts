@@ -381,6 +381,12 @@ export function getExecutableDashboardScript(): string {
     growthCard.querySelector('.chart-title').textContent = 'Monthly Growth %';
     growthCard.querySelector('.chart-subtitle').textContent = selectedYear + ' month-over-month revenue movement';
     growthCard.querySelector('.chart-badge').textContent = 'Monthly Trend';
+  } else if (growthCard) {
+    growthCard.querySelector('.chart-title').textContent = 'Year-over-Year (YoY) Growth %';
+    growthCard.querySelector('.chart-subtitle').textContent = comparisonMode === 'yoy'
+      ? 'Annual revenue growth across the selected comparison years'
+      : 'Annual revenue growth across all available years';
+    growthCard.querySelector('.chart-badge').textContent = 'Growth Trend';
   }`
     )
     .replace(
@@ -403,6 +409,12 @@ export function getExecutableDashboardScript(): string {
     marginCard.querySelector('.chart-title').textContent = 'Monthly Operating Profit Margin %';
     marginCard.querySelector('.chart-subtitle').textContent = selectedYear + ' monthly net margin movement';
     marginCard.querySelector('.chart-badge').textContent = 'Monthly Margin';
+  } else if (marginCard) {
+    marginCard.querySelector('.chart-title').textContent = 'Operating Profit Margin %';
+    marginCard.querySelector('.chart-subtitle').textContent = comparisonMode === 'yoy'
+      ? 'Annual operating margin across the selected comparison years'
+      : 'Annual operating margin across all available years';
+    marginCard.querySelector('.chart-badge').textContent = 'Margin Health';
   }`
     )
     .replace(
