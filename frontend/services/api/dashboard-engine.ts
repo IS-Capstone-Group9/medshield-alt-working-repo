@@ -282,7 +282,7 @@ export function getExecutableDashboardScript(): string {
     : periods;
   const revenueDetailWrap = revenueDetailCanvas && revenueDetailCanvas.closest('.chart-wrap');
   if (revenueDetailWrap) {
-    const shouldScroll = detailPeriods.length > 24 || (comparisonMode === 'single' && selectedYear !== 'all' && String(selectedYear) < detailCurrentYear && detailPeriods.length >= 12);
+    const shouldScroll = detailPeriods.length > 24;
     revenueDetailWrap.classList.toggle('revenue-detail-scroll', shouldScroll);
     if (shouldScroll && revenueDetailCanvas) {
       let scrollContent = revenueDetailWrap.querySelector('.revenue-detail-scroll-content');
@@ -346,10 +346,6 @@ export function getExecutableDashboardScript(): string {
       }`
     )
     .replace(
-      "function getRevenueDetailData() {\\n  const rows = DATA.monthly.map((row) => ({ ...row }));",
-      "function getRevenueDetailData(monthlyRows) {\\n  const rows = (monthlyRows || DATA.monthly).map((row) => ({ ...row }));"
-    )
-    .replace(
       `const growthSourceRows = comparisonMode === 'single' && selectedYear !== 'all'
     ? DATA.year_summary.filter((row) => row.year === selectedYear || row.year === String(Number(selectedYear) - 1))
     : yearRowsForMode;
@@ -385,12 +381,6 @@ export function getExecutableDashboardScript(): string {
     growthCard.querySelector('.chart-title').textContent = 'Monthly Growth %';
     growthCard.querySelector('.chart-subtitle').textContent = selectedYear + ' month-over-month revenue movement';
     growthCard.querySelector('.chart-badge').textContent = 'Monthly Trend';
-  } else if (growthCard) {
-    growthCard.querySelector('.chart-title').textContent = 'Year-over-Year (YoY) Growth %';
-    growthCard.querySelector('.chart-subtitle').textContent = comparisonMode === 'yoy'
-      ? 'Annual revenue growth across the selected comparison years'
-      : 'Annual revenue growth across all available years';
-    growthCard.querySelector('.chart-badge').textContent = 'Growth Trend';
   }`
     )
     .replace(
@@ -413,12 +403,6 @@ export function getExecutableDashboardScript(): string {
     marginCard.querySelector('.chart-title').textContent = 'Monthly Operating Profit Margin %';
     marginCard.querySelector('.chart-subtitle').textContent = selectedYear + ' monthly net margin movement';
     marginCard.querySelector('.chart-badge').textContent = 'Monthly Margin';
-  } else if (marginCard) {
-    marginCard.querySelector('.chart-title').textContent = 'Operating Profit Margin %';
-    marginCard.querySelector('.chart-subtitle').textContent = comparisonMode === 'yoy'
-      ? 'Annual operating margin across the selected comparison years'
-      : 'Annual operating margin across all available years';
-    marginCard.querySelector('.chart-badge').textContent = 'Margin Health';
   }`
     )
     .replace(
