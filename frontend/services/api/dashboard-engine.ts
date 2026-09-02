@@ -163,7 +163,18 @@ export function getExecutableDashboardScript(): string {
     : periods;
   const revenueDetailWrap = revenueDetailCanvas && revenueDetailCanvas.closest('.chart-wrap');
   if (revenueDetailWrap) {
-    revenueDetailWrap.classList.toggle('revenue-detail-scroll', detailPeriods.length > 24);
+    const shouldScroll = detailPeriods.length > 24;
+    revenueDetailWrap.classList.toggle('revenue-detail-scroll', shouldScroll);
+    if (shouldScroll && revenueDetailCanvas) {
+      let scrollContent = revenueDetailWrap.querySelector('.revenue-detail-scroll-content');
+      if (!scrollContent) {
+        scrollContent = document.createElement('div');
+        scrollContent.className = 'revenue-detail-scroll-content';
+        revenueDetailCanvas.replaceWith(scrollContent);
+        scrollContent.appendChild(revenueDetailCanvas);
+      }
+      revenueDetailWrap.scrollLeft = 0;
+    }
   }
   const futurePeriod = (period) => period > currentMonth;
   const revenueDetailProgressPlugin = {

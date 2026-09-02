@@ -779,11 +779,16 @@ td {
   overflow-x: auto !important;
   overflow-y: hidden;
 }
+.revenue-detail-scroll-content {
+  width: max(100%, 1400px);
+  height: 100%;
+  flex: 0 0 auto;
+}
 .revenue-detail-scroll canvas {
   display: block;
-  width: 1400px !important;
-  max-width: none !important;
-  height: 280px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 100% !important;
 }
 .comp-mode-btn,
 .yr-btn,
