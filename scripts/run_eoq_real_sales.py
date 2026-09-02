@@ -127,5 +127,5 @@ output = {
     "scenarios": results,
 }
 Path('outputs/eoq_from_real_sales.json').write_text(json.dumps(output,indent=2,ensure_ascii=False),encoding='utf-8')
-print("\n✅ Saved: outputs/eoq_from_real_sales.json")
+print("\n[PASS] Saved: outputs/eoq_from_real_sales.json")
 print("\nEOQ REBUILD COMPLETE")

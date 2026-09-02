@@ -5,7 +5,7 @@ import {
 import { invokeDatabricksYearlyCandidateSync } from './supabaseWarehouse'
 
 const CANDIDATE_WARNING =
-  'Candidate financial measures remain pending Finance/business-owner approval and have not replaced published dashboard facts.'
+  'Approved financial meanings are recorded: Net CP is net sales, Total TP is acquisition cost, and Net Income is transaction gross profit. The candidate cache remains separate until controlled dashboard publication.'
 
 interface SyncRpcSuccess {
   ok: true

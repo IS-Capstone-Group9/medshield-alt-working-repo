@@ -46,7 +46,7 @@ All dashboard contract endpoints require `Authorization: Bearer <token>` except 
     warehouse identifiers, or raw SQL.
 - `POST /api/integrations/databricks/sync/yearly`
   - Requires an authenticated MedShield administrator and is limited to five requests per 15 minutes per client.
-  - Extracts the approved 47-column yearly Gold contract, then requires exactly 9 unique years covering 2017–2025, source-to-target transaction-total reconciliation, 12-month calendar scaffolds, and `CANDIDATE_PENDING_FINANCE_APPROVAL` financial labels. The current validated source total is 40,086 transactions.
+  - Extracts the 47-column yearly Gold contract, then requires exactly 9 unique years covering 2017–2025, source-to-target transaction-total reconciliation, 12-month calendar scaffolds, and the legacy `CANDIDATE_PENDING_FINANCE_APPROVAL` source label. The approved MedShield mapping is Net CP → revenue, Total TP → acquisition cost, and Net Income → transaction gross profit. The source label remains part of the versioned sync contract until the Databricks view is upgraded. The current validated source total is 40,086 transactions.
   - Calls the service-role-only Supabase RPC `public.sync_databricks_yearly_sales_candidate` to atomically replace the protected shadow table `medshield_sales.databricks_yearly_sales_candidate`.
   - Reconciles source and target row counts, years, transaction totals, and canonical checksums. A failed database validation rolls back the replacement and preserves the previous candidate cache.
   - Never changes `fact_year_summary`, `/api/year_summary`, or any published dashboard fact.

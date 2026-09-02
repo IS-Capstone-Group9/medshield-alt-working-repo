@@ -16,12 +16,32 @@ from services.data_pipeline import (
     _supabase_headers,
     _supabase_resource_schema,
     _severity_index,
+    build_dashboard_snapshot,
     clean_sales_rows,
     weather_effects,
 )
 
 
 class SalesCleaningTests(unittest.TestCase):
+    def test_dashboard_revenue_uses_net_cp_not_total_tp(self):
+        snapshot = build_dashboard_snapshot([
+            {
+                "quality_status": "valid",
+                "date_delivered": "2021-07-23",
+                "year": 2021,
+                "area": "Supplies",
+                "product": "UV LIGHT",
+                "quantity": 1,
+                "net_cost": 65000,
+                "total_trade_price": 11999.75,
+                "net_income": 53000.25,
+            }
+        ])
+
+        self.assertEqual(snapshot["totals"]["total_revenue"], 65000)
+        self.assertEqual(snapshot["totals"]["total_income"], 53000.25)
+        self.assertEqual(snapshot["top_products"][0]["revenue"], 65000)
+
     def test_percent_header_maps_to_margin_column(self):
         self.assertEqual(_normalize_headers(["Net Income", "%"]), ["net_income", "margin_pct"])
 

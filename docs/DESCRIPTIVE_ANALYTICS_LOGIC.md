@@ -23,14 +23,14 @@ This layer must be finished first because predictive and prescriptive outputs de
 |---|---|---|
 | Cleaned sales with contract allocation | `data/medshield/processed/sales_transactions_area_allocated.json.gz` | Use this for product-level analysis so `#` contract-name rows are not treated as products. |
 | Area classification mapping | `datasources/templates/area_classification_mapping.csv` | Use this to separate territory, customer type, business line, and unmapped areas. |
-| Business definitions | `docs/BUSINESS_DEFINITIONS.md` | Revenue is `total_trade_price`; gross margin/profit is workbook `net_income`. |
+| Business definitions | `docs/BUSINESS_DEFINITIONS.md` | Net sales revenue is `net_cost`; total acquisition cost is `total_trade_price`; gross margin/profit is workbook `net_income`. |
 | Sales data layer rules | `databricks/docs/SALES_DATA_LAYER_FLOW.md` | Keep raw, semi-raw estimated, and cleaned data labels distinct. |
 
 ## Descriptive Methods
 
 | Method | Logic | Output |
 |---|---|---|
-| Monthly trend | Group clean rows by `YYYY-MM`; sum quantity, `total_trade_price`, `net_income`, `net_cost`, discount, and total cost. | `descriptive_monthly_trends.csv` |
+| Monthly trend | Group clean rows by `YYYY-MM`; sum quantity, net sales (`net_cost`), acquisition cost (`total_trade_price`), `net_income`, discount, and gross sales (`total_cost`). | `descriptive_monthly_trends.csv` |
 | Yearly summary | Group clean rows by calendar year; sum the same additive measures. | `descriptive_yearly_summary.csv` |
 | Area summary | Group by `area_type` and standardized area. | `descriptive_area_summary.csv` |
 | Area-type summary | Group by territory/customer/business-line/unmapped. | `descriptive_area_type_summary.csv` |
@@ -65,7 +65,7 @@ python services\analytics_service\jobs\run_descriptive.py --output-dir outputs\d
 Descriptive analytics is ready for Chapter 4 when:
 
 1. Outputs reconcile to cleaned sales totals.
-2. Revenue uses `total_trade_price`.
+2. Revenue uses Net CP (`net_cost`); Total TP (`total_trade_price`) is acquisition cost.
 3. Gross margin/profit uses `net_income` and is not labeled company net profit.
 4. Product-level analysis uses the area-allocated cleaned sales dataset.
 5. `#` contract-name breakdown and estimated-date rows are counted as estimated.

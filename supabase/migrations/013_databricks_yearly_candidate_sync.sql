@@ -327,7 +327,7 @@ begin
       select
         calendar_year,
         encode(
-          public.digest(
+          extensions.digest(
             (
               to_jsonb(input_rows)
               - 'pipeline_run_key'
@@ -344,13 +344,14 @@ begin
       from input_rows
     )
     select encode(
-      public.digest(string_agg(row_hash, '' order by calendar_year), 'sha256'),
+      extensions.digest(string_agg(row_hash, '' order by calendar_year), 'sha256'),
       'hex'
     )
     into v_canonical_source_checksum
     from row_hashes;
 
-    delete from medshield_sales.databricks_yearly_sales_candidate;
+    delete from medshield_sales.databricks_yearly_sales_candidate
+    where calendar_year between 2017 and 2025;
 
     with input_rows as (
       select *
@@ -466,7 +467,7 @@ begin
       v_source_extract_key,
       v_source_view,
       encode(
-        public.digest(
+        extensions.digest(
           (
             to_jsonb(input_rows)
             - 'pipeline_run_key'
@@ -491,10 +492,10 @@ begin
     from medshield_sales.databricks_yearly_sales_candidate;
 
     select encode(
-      public.digest(
+      extensions.digest(
         string_agg(
           encode(
-            public.digest(
+            extensions.digest(
               (
                 to_jsonb(target_rows)
                 - 'pipeline_run_key'

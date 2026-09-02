@@ -22,14 +22,14 @@ export function renderSalesComputation(root: HTMLElement, summary: SalesSummary,
     mode === 'sum'
       ? [
           ['Quantity', number(summary.sums.quantity)],
-          ['Net CP', money(summary.sums.net_cost)],
+          ['Net Sales (Net CP)', money(summary.sums.net_cost)],
           ['Gross Profit', money(summary.sums.net_income)],
-          ['Total TP', money(summary.sums.total_trade_price)],
+          ['Acquisition Cost', money(summary.sums.total_trade_price)],
         ]
       : mode === 'average'
         ? [
             ['Avg Quantity', number(summary.averages.quantity)],
-            ['Avg Unit CP', money(summary.averages.unit_cost)],
+            ['Avg Selling Price', money(summary.averages.unit_cost)],
             ['Avg Gross Profit', money(summary.averages.net_income)],
             ['Avg Margin', percent(summary.averages.margin_pct)],
           ]
@@ -41,7 +41,7 @@ export function renderSalesComputation(root: HTMLElement, summary: SalesSummary,
               ['DR Numbers', number(summary.counts.unique_dr_numbers)],
             ]
           : [
-              ['Net CP', money(summary.sums.net_cost)],
+              ['Net Sales (Net CP)', money(summary.sums.net_cost)],
               ['Gross Profit', money(summary.sums.net_income)],
               ['Average Margin', percent(summary.averages.margin_pct)],
               ['Top Area', summary.top.area || '-'],

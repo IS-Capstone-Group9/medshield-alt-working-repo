@@ -38,7 +38,7 @@ const SEASON_EMOJIS: Record<string, string> = {
 export function SeasonCard({ entry }: { entry: SeasonEntry }) {
   const [open, setOpen] = useState(false)
   const color = URGENCY_COLORS[entry.urgency_level] ?? '#888'
-  const emoji = SEASON_EMOJIS[entry.season_emoji] ?? '📅'
+  const seasonLabel = SEASON_EMOJIS[entry.season_emoji] ?? 'Season'
 
   const indexNums = Object.entries(entry.seasonal_index)
     .filter(([k]) => k !== 'interpretation' && k !== 'note')
@@ -53,7 +53,7 @@ export function SeasonCard({ entry }: { entry: SeasonEntry }) {
       <div style={{ padding: '16px 18px 12px', background: `linear-gradient(135deg, ${color}11, ${color}06)` }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
           <div>
-            <div style={{ fontSize: '20px' }}>{emoji}</div>
+            <div style={{ fontSize: '12px', fontWeight: 700, color: '#4A6FA5' }}>{seasonLabel}</div>
             <div style={{ fontSize: '13px', fontWeight: 800, color: '#1a3a52', marginTop: '4px' }}>{entry.months}</div>
             <div style={{ fontSize: '11px', color: '#4a6fa5', marginTop: '2px' }}>{entry.season_climate}</div>
           </div>
@@ -79,12 +79,12 @@ export function SeasonCard({ entry }: { entry: SeasonEntry }) {
         </div>
 
         <div style={{ marginBottom: '8px' }}>
-          <div style={{ fontSize: '10px', fontWeight: 700, color: '#E53E3E', textTransform: 'uppercase', marginBottom: '3px' }}>🦠 Disease Risk</div>
+          <div style={{ fontSize: '10px', fontWeight: 700, color: '#E53E3E', textTransform: 'uppercase', marginBottom: '3px' }}>Disease Risk</div>
           <div style={{ fontSize: '12px', color: '#2D3748' }}>{entry.anticipated_outbreaks}</div>
         </div>
 
         <div style={{ marginBottom: '8px' }}>
-          <div style={{ fontSize: '10px', fontWeight: 700, color: '#2B6CB0', textTransform: 'uppercase', marginBottom: '4px' }}>💊 Restock Categories</div>
+          <div style={{ fontSize: '10px', fontWeight: 700, color: '#2B6CB0', textTransform: 'uppercase', marginBottom: '4px' }}>Restock Categories</div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
             {entry.recommended_categories.map(cat => (
               <span key={cat} style={{ fontSize: '10px', padding: '2px 7px', borderRadius: '10px', background: '#EBF8FF', color: '#2B6CB0', border: '1px solid #BEE3F8' }}>{cat}</span>
@@ -97,7 +97,7 @@ export function SeasonCard({ entry }: { entry: SeasonEntry }) {
         </div>
 
         <div style={{ fontSize: '10px', color: '#4A5568', background: '#EDF2F7', padding: '6px 8px', borderRadius: '6px', marginBottom: '8px' }}>
-          <strong style={{ color: '#2D3748' }}>🤖 Model:</strong> {entry.model_evidence.model_used}
+          <strong style={{ color: '#2D3748' }}>Model:</strong> {entry.model_evidence.model_used}
           {entry.model_evidence.champion_mae && <span style={{ marginLeft: '6px', color: '#4FD1C8' }}>MAE: {entry.model_evidence.champion_mae.toLocaleString()}</span>}
         </div>
 

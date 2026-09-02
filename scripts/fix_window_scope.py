@@ -107,5 +107,5 @@ new_content = (
 )
 
 ts_file.write_text(new_content, encoding='utf-8')
-print(f"\n✅ Written. File length: {len(new_content)} chars")
-print("✅ Window assignments injected into MEDSHIELD_SCRIPT")
+print(f"\n[PASS] Written. File length: {len(new_content)} chars")
+print("[PASS] Window assignments injected into MEDSHIELD_SCRIPT")

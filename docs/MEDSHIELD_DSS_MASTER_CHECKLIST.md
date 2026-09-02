@@ -76,14 +76,14 @@ All differences must be reproducible and documented.
 Current gross-margin outputs are not yet defensible.
 
 - [ ] Verify header mappings separately for every yearly source format.
-- [ ] Confirm the business meaning of `total_trade_price`, `net_cost`, `total_cost`, and `net_income`.
-- [ ] Use `total_trade_price` as revenue only after reconciliation.
-- [ ] Calculate the trusted derived field `gross_margin = revenue - net_cost`.
+- [x] Confirm the business meaning of `total_trade_price`, `net_cost`, `total_cost`, and `net_income`.
+- [x] Use Net CP (`net_cost`) as revenue and Total TP (`total_trade_price`) as acquisition cost.
+- [x] Validate transaction gross margin as `net_cost - total_trade_price`.
 - [ ] Compare derived gross margin against the workbook `net_income`.
 - [ ] Quarantine rows where the difference exceeds an approved tolerance.
 - [ ] Investigate why 26,768 rows have workbook gross margin greater than revenue.
-- [ ] Do not derive margin percentage as `net_income / net_cost` if the approved definition is margin on revenue.
-- [ ] Approve one formula for gross-margin percentage.
+- [x] Derive margin percentage as `net_income / net_cost` because Net CP is approved revenue.
+- [x] Approve one formula for gross-margin percentage.
 - [ ] Separate zero-value transactions, free issues, returns, credits, and accounting adjustments.
 - [ ] Reconcile annual revenue, cost, and margin to finance-approved control totals.
 - [ ] Add financial-quality flags to dashboard calculations.
@@ -466,4 +466,3 @@ MedShield is ready for serious decision-support use when:
 - [ ] Security, builds, tests, and analytical quality gates pass.
 - [ ] Actual decision outcomes are measured.
 - [ ] The dashboard, API, database, model outputs, and capstone paper use the same definitions.
-

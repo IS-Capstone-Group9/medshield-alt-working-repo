@@ -15,10 +15,13 @@ The workbook supports sales revenue, product quantity, transaction cost fields, 
 | Metric or concept | Working definition | Source field or formula | Grain | Owner | Status |
 |---|---|---|---|---|---|
 | Demand units | Delivered quantity sold. | `quantity` / `quantity_sold` | Transaction, month, SKU, territory | Data Analyst | Approved for modeling |
-| Sales revenue | Gross sales value from delivered line items. | `total_trade_price` | Transaction, month, SKU, territory | Finance / Business Analyst | Proposed for approval |
-| Sales cost | Workbook cost after discounts when available. | `net_cost` | Transaction, month, SKU, territory | Finance / Business Analyst | Proposed for approval |
-| Gross margin amount | Transaction sales value less net cost, using the workbook field when supplied. | `net_income`; reconcile against `total_trade_price - net_cost` | Transaction, month, SKU, territory | Finance / Business Analyst | Proposed for approval |
-| Margin percentage | Gross margin divided by net cost or workbook-provided margin percent. | `margin_pct`; validate against `net_income / net_cost` | Transaction, SKU, territory | Data Analyst | Needs validation |
+| Selling price per unit | Workbook CP: the unit selling price. The legacy API field remains `unit_cost` for compatibility. | `unit_cost` / source `CP` | Transaction | Finance / Business Analyst | Approved 2026-09-02 |
+| Gross sales value | Quantity multiplied by CP before discount. The legacy API field remains `total_cost` for compatibility. | `total_cost` / source `Total CP` | Transaction, month, SKU, territory | Finance / Business Analyst | Approved 2026-09-02 |
+| Net sales revenue | Gross sales value after discount. | `net_cost` / source `Net CP` | Transaction, month, SKU, territory | Finance / Business Analyst | Approved 2026-09-02 |
+| Acquisition price per unit | Workbook TP/UNIT: MedShield's unit acquisition cost. | `trade_price_unit` / source `TP/UNIT` | Transaction | Finance / Business Analyst | Approved 2026-09-02 |
+| Total acquisition cost | Quantity multiplied by TP/UNIT. | `total_trade_price` / source `TOTAL TP` | Transaction, month, SKU, territory | Finance / Business Analyst | Approved 2026-09-02 |
+| Gross margin amount | Transaction net sales less total acquisition cost, using the workbook field when supplied. | `net_income`; reconcile against `net_cost - total_trade_price` | Transaction, month, SKU, territory | Finance / Business Analyst | Approved 2026-09-02 |
+| Margin percentage | Transaction gross margin divided by net sales revenue. | `margin_pct`; validate against `net_income / net_cost` | Transaction, SKU, territory | Data Analyst | Approved 2026-09-02 |
 | Net income | Not available as company net income. Use `gross_margin_amount` wording instead. | Not applicable | Not applicable | Business Analyst | Approved terminology rule |
 | Canonical SKU | One sellable product identity after alias cleanup. | Product alias map from `product` raw value to `canonical_sku` | SKU | Data Analyst | Needs mapping |
 | Product alias | A raw product string that points to a canonical SKU. | `product_raw` -> `canonical_sku` | Product string | Data Analyst | Needs mapping |
@@ -42,12 +45,9 @@ The workbook supports sales revenue, product quantity, transaction cost fields, 
 
 ## Decisions Needed From The Group
 
-1. Confirm `total_trade_price` as the revenue field for dashboards and model evaluation.
-2. Confirm `net_income` represents transaction gross margin/profit, not full company net income.
-3. Confirm that `quantity` is the demand unit for forecasting.
-4. Approve the first version of the product master and alias map.
-5. Approve the first version of the area classification map.
-6. Decide whether incomplete 2025 periods should be excluded, repaired, or used only as partial secondary validation.
+1. Approve the first version of the product master and alias map.
+2. Approve the first version of the area classification map.
+3. Decide whether incomplete 2025 periods should be excluded, repaired, or used only as partial secondary validation.
 
 ## Acceptance Criteria
 

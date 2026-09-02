@@ -1,11 +1,11 @@
 # MedShield Project Progress Tracker
 
-**Last updated:** 2026-09-01  
+**Last updated:** 2026-09-02
 **Purpose:** Keep one readable record of the dataset, Databricks, Supabase, and MedShield application work discussed during the project.
 
 ## Current headline
 
-Databricks Gold is reachable from the MedShield backend and has passed the yearly pilot checks. The complete application cutover is **not finished**: Supabase currently rejects the protected yearly-cache write because the backend service role is missing schema permissions, and the dashboard still displays its bundled demonstration fallback.
+Databricks Gold is reachable from the MedShield backend, and the protected Supabase yearly-candidate pilot synchronization completed successfully in pipeline run 13. The cache contains 9 yearly rows for 2017–2025 and reconciles 40,086 transactions with matching source and target checksums. The complete application cutover is **not finished**: the dashboard still displays its bundled demonstration fallback until the full transaction-level and analytical Gold outputs are published and reconciled.
 
 No existing dashboard data has been deleted.
 
@@ -62,8 +62,9 @@ Lineage and quality metadata are retained in the warehouse in addition to these 
 ### Business definitions recorded
 
 - Demand is based on quantity sold.
-- Revenue uses the workbook total trade/transfer price definition.
-- Workbook `net_income` is treated as gross margin/profit, not company net income, until a Finance owner approves the definition.
+- Net sales revenue uses workbook Net CP (`net_cost`).
+- Total TP (`total_trade_price`) is total acquisition cost.
+- Workbook `net_income` is transaction gross margin/profit, not company net income.
 - Product aliases and contract-name rows require controlled review.
 - Area values are separated into geographic territory, customer type, and business line where the source allows it.
 - Disease and weather data are historical/contextual signals, not live alerts.
@@ -205,7 +206,7 @@ Verified:
 - Years: 2017–2025.
 - One row per year.
 
-### Supabase yearly candidate cache — not yet synchronized
+### Supabase yearly candidate cache — synchronized
 
 Migration `013_databricks_yearly_candidate_sync.sql` defines:
 
@@ -213,20 +214,23 @@ Migration `013_databricks_yearly_candidate_sync.sql` defines:
 - `medshield_sales.vw_databricks_yearly_sales_candidate`
 - `public.sync_databricks_yearly_sales_candidate(...)`
 
-The RPC is visible, but the live protected write failed with:
+The first live protected writes were safely rejected and preserved the previous cache. The recorded failures identified three deployment issues:
 
 ```text
 permission denied for schema medshield_sales
+function public.digest(text, unknown) does not exist
+DELETE requires a WHERE clause
 ```
 
-That is why the MedShield panel currently shows:
+The deployed RPC was repaired to use `extensions.digest(...)` and a bounded candidate-cache delete for years 2017–2025. Pipeline run 13 then completed with:
 
 ```text
 Connected — Databricks Gold connection
-Failed — Yearly candidate cache
+Synchronized — Yearly candidate cache
+9 of 9 rows loaded — 2017–2025 — 40,086 transactions reconciled
 ```
 
-The previous candidate cache was preserved and published dashboard facts were not changed.
+The source and target checksums matched. All financial rows remain `CANDIDATE_PENDING_FINANCE_APPROVAL`, and published dashboard facts were not changed.
 
 ### Permission fix prepared
 
@@ -238,7 +242,7 @@ Migration `014_databricks_yearly_candidate_permissions.sql` was added to grant o
 - Sequence privileges for ETL identity columns.
 - Execute privilege on the protected sync function.
 
-The backend TypeScript build passed after this change. The migration still needs to be run in the Supabase SQL Editor.
+The backend TypeScript build passed after this change. Migration 014 was applied in Supabase, and the least-privilege service-role grants were verified.
 
 ### Current dashboard source — not cut over
 
@@ -272,13 +276,17 @@ The 9-row yearly candidate cache does not contain transaction-level DR numbers, 
 - [x] Added admin-only connection verification.
 - [x] Added admin-only yearly candidate synchronization workflow.
 - [x] Prepared the Supabase permission repair migration.
+- [x] Applied migration 014 in the Supabase project.
+- [x] Corrected the yearly sync to use the Supabase `extensions.digest(...)` functions and a bounded 2017–2025 cache replacement.
+- [x] Completed yearly candidate synchronization in pipeline run 13.
+- [x] Validated 9 rows, years 2017–2025, 40,086 transactions, and matching source/target checksums.
+- [x] Repeated the synchronization in pipeline run 14 and proved idempotency: the cache remained at 9 rows and 40,086 transactions with matching checksums.
 - [x] Passed the backend TypeScript build.
 
 ### In progress
 
-- [ ] Apply migration 014 in the Supabase project.
-- [ ] Run the first successful yearly candidate synchronization.
-- [ ] Validate 9 rows, years 2017–2025, and 40,086 transactions in the protected cache.
+- [x] Record project-owner approval: `net_sales_candidate` is revenue, `transfer_value_candidate` is acquisition cost, and `gross_margin_candidate` is transaction gross profit.
+- [ ] Prepare the protected monthly Gold synchronization expansion for 108 rows.
 
 ### Remaining before removing old/demo data
 
@@ -292,17 +300,13 @@ The 9-row yearly candidate cache does not contain transaction-level DR numbers, 
 
 ## Immediate next step
 
-1. Open `supabase/migrations/014_databricks_yearly_candidate_permissions.sql` in VS Code.
-2. Copy the entire file.
-3. In Supabase, open **SQL Editor → New query**.
-4. Paste the file and click **Run**.
-5. Return to MedShield → **View Sales Data**.
-6. Click **Verify Again**.
-7. Click **Try Sync Again**.
+1. Save the pipeline run 14 screenshot and database verification as capstone evidence of idempotent synchronization.
+2. Save the approved financial mapping and its reconciliation evidence with the capstone records.
+3. Extend the protected synchronization pattern to the 108-row monthly Gold candidate view.
+4. Continue in controlled order: area-year, product-year, quality rules, exclusions, and transaction-level Gold.
+5. Reconcile every dashboard metric before switching the API and analytics services to the Gold-backed source.
 
-Expected result: **Synchronized**, 9 of 9 rows, years 2017–2025, and 40,086 transactions reconciled.
-
-Do not delete the old dashboard data yet. After this pilot succeeds, the next engineering milestone is the full transaction-level Gold publication and reconciliation.
+Do not delete the old dashboard data or disable the bundled fallback yet. Create a rollback/export checkpoint and complete the full Gold-backed reconciliation first.
 
 ## Key files
 

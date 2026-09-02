@@ -211,7 +211,7 @@ for r in results:
 
 # Determine champion
 champion = min(results, key=lambda x: x['mae'])
-print(f"\n  ✅ Champion by MAE: {champion['model']}")
+print(f"\n  [PASS] Champion by MAE: {champion['model']}")
 
 mape_improvement = round(naive_mape - gbr_mape, 2)
 print(f"  MAPE improvement (Naive → GBR Disease): {mape_improvement:.1f} percentage points")
@@ -243,10 +243,10 @@ output = {
 
 out_path = OUTPUT_DIR / 'phase4_disease_model_results.json'
 out_path.write_text(json.dumps(output, indent=2, ensure_ascii=False), encoding='utf-8')
-print(f"\n✅ Results saved to: {out_path}")
+print(f"\n[PASS] Results saved to: {out_path}")
 
 importance_df.to_csv(OUTPUT_DIR / 'phase4_feature_importance.csv', index=False)
-print(f"✅ Feature importance saved to: outputs/phase4_feature_importance.csv")
+print(f"[PASS] Feature importance saved to: outputs/phase4_feature_importance.csv")
 
 # Monthly predictions table
 pred_df = test[['period', TARGET]].copy()
@@ -254,7 +254,7 @@ pred_df['naive_pred']   = naive_preds
 pred_df['gbr_disease_pred'] = gbr_preds.round(1)
 pred_df['gbr_error']    = (pred_df[TARGET] - pred_df['gbr_disease_pred']).round(1)
 pred_df.to_csv(OUTPUT_DIR / 'phase4_monthly_predictions.csv', index=False)
-print(f"✅ Monthly predictions saved to: outputs/phase4_monthly_predictions.csv")
+print(f"[PASS] Monthly predictions saved to: outputs/phase4_monthly_predictions.csv")
 
 print("\n" + "=" * 60)
 print("PHASE 4 COMPLETE")

@@ -152,8 +152,8 @@ def aggregate(rows: list[dict[str, Any]], keys: tuple[str, ...]) -> list[dict[st
         group["unique_products"] = len({value for value in group["unique_products"] if value})
         group["unique_dr_numbers"] = len({value for value in group["unique_dr_numbers"] if value})
         group["gross_margin_rate"] = (
-            round_num(group["net_income"] / group["total_trade_price"], 6)
-            if group["total_trade_price"]
+            round_num(group["net_income"] / group["net_cost"], 6)
+            if group["net_cost"]
             else 0
         )
         for field in ADDITIVE_FIELDS:
@@ -181,7 +181,7 @@ def abc_pareto(rows: list[dict[str, Any]], group_field: str, output_field: str) 
             }
         item = grouped[key]
         item["quantity"] += safe_float(row.get("quantity"))
-        item["revenue"] += safe_float(row.get("total_trade_price"))
+        item["revenue"] += safe_float(row.get("net_cost"))
         item["gross_margin_amount"] += safe_float(row.get("net_income"))
         item["row_count"] += 1
         item["active_months"].add(row["period"])
@@ -206,7 +206,7 @@ def abc_pareto(rows: list[dict[str, Any]], group_field: str, output_field: str) 
         item["cumulative_revenue_share"] = round_num(cumulative_share, 6)
         item["abc_class"] = "A" if cumulative_share <= 0.80 else "B" if cumulative_share <= 0.95 else "C"
         item["active_months"] = len(item["active_months"])
-        item["method"] = "ABC/Pareto using total_trade_price revenue"
+        item["method"] = "ABC/Pareto using Net CP (net_cost) revenue"
         item["status"] = "draft"
     return ranked
 
@@ -255,12 +255,12 @@ def yoy_growth(monthly_rows: list[dict[str, Any]], keys: tuple[str, ...] = ()) -
             "period": row["period"],
             "prior_period": prior_period,
             "quantity": row["quantity"],
-            "revenue": row["total_trade_price"],
+            "revenue": row["net_cost"],
             "gross_margin_amount": row["net_income"],
             "prior_quantity": prior["quantity"] if prior else "",
-            "prior_revenue": prior["total_trade_price"] if prior else "",
+            "prior_revenue": prior["net_cost"] if prior else "",
             "quantity_yoy_growth": round_num((row["quantity"] - prior["quantity"]) / prior["quantity"], 6) if prior and prior["quantity"] else "",
-            "revenue_yoy_growth": round_num((row["total_trade_price"] - prior["total_trade_price"]) / prior["total_trade_price"], 6) if prior and prior["total_trade_price"] else "",
+            "revenue_yoy_growth": round_num((row["net_cost"] - prior["net_cost"]) / prior["net_cost"], 6) if prior and prior["net_cost"] else "",
             "is_2025_partial": str(row["period"]).startswith("2025"),
         })
         output.append(result)
@@ -289,7 +289,7 @@ def findings_markdown(summary: dict[str, Any], output_dir: Path) -> str:
         f"- Clean rows analyzed: {summary['clean_rows']:,}.",
         f"- Historical period: {summary['period_start']} to {summary['period_end']}.",
         f"- Total demand units: {summary['total_quantity']:,.2f}.",
-        f"- Sales revenue from `total_trade_price`: PHP {summary['total_revenue']:,.2f}.",
+        f"- Net sales revenue from Net CP (`net_cost`): PHP {summary['total_revenue']:,.2f}.",
         f"- Workbook gross margin/profit from `net_income`: PHP {summary['total_gross_margin']:,.2f}.",
         f"- Top product by revenue: {top_product['product']} with PHP {top_product['revenue']:,.2f}.",
         f"- Top area by revenue: {top_area['area']} with PHP {top_area['revenue']:,.2f}.",
@@ -315,12 +315,12 @@ def findings_markdown(summary: dict[str, Any], output_dir: Path) -> str:
 
 def build_summary(rows: list[dict[str, Any]], product_abc: list[dict[str, Any]], area_abc: list[dict[str, Any]]) -> dict[str, Any]:
     dates = sorted(str(row["date_delivered"]) for row in rows)
-    total_revenue = sum(safe_float(row.get("total_trade_price")) for row in rows)
+    total_revenue = sum(safe_float(row.get("net_cost")) for row in rows)
     total_gross_margin = sum(safe_float(row.get("net_income")) for row in rows)
     gross_margin_exceeds_revenue_rows = sum(
         1
         for row in rows
-        if safe_float(row.get("net_income")) > safe_float(row.get("total_trade_price"))
+        if safe_float(row.get("net_income")) > safe_float(row.get("net_cost"))
     )
     negative_gross_margin_rows = sum(1 for row in rows if safe_float(row.get("net_income")) < 0)
     return {

@@ -538,9 +538,9 @@ medshield_markup = r"""
         <div class="hero-title">Centralized Supply Chain Intelligence</div>
         <div class="hero-copy">Monitor baseline performance, evaluate forward demand forecasts, and drive automated inventory replenishment across hospital networks.</div>
         <div class="hero-summary">
-          <span class="hero-tag">📊 Descriptive Analytics</span>
-          <span class="hero-tag">🔮 Prophet 2026 Forecast</span>
-          <span class="hero-tag">🎯 Prescriptive EOQ & ROP</span>
+          <span class="hero-tag"> Descriptive Analytics</span>
+          <span class="hero-tag"> Prophet 2026 Forecast</span>
+          <span class="hero-tag"> Prescriptive EOQ & ROP</span>
         </div>
       </div>
 

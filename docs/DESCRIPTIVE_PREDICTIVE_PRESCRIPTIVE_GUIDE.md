@@ -20,7 +20,7 @@ This is more defensible than a broad claim that the system fully optimizes inven
 |---|---|
 | Historical sales is the source of truth for demand. | Use 2021-2025 sales as the demand baseline. |
 | Demand means quantity sold. | Use `quantity` or `quantity_sold`. |
-| Revenue means sales value. | Use `total_trade_price` unless the group approves another field. |
+| Revenue means net sales value. | Use Net CP (`net_cost`); Total TP (`total_trade_price`) is acquisition cost. |
 | `net_income` is not company net income. | Label it workbook gross margin/profit. |
 | PAGASA is historical and official only for its provided period. | Do not stretch PAGASA into unavailable years. |
 | Weather API data is not PAGASA. | Label it provider-derived weather proxy. |

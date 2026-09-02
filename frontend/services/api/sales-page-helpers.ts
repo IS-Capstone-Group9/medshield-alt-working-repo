@@ -14,7 +14,7 @@ export function renderSalesPage(root: HTMLElement, result: SalesPage) {
     ['Area', 'area', 'text'],
     ['Product', 'product', 'text'],
     ['Qty', 'quantity', 'number'],
-    ['Total TP', 'total_trade_price', 'money'],
+    ['Acquisition Cost', 'total_trade_price', 'money'],
     ['Gross Profit', 'net_income', 'money'],
   ]
   const fullColumns: Array<[string, keyof SalesPage['rows'][number], 'text' | 'number' | 'money' | 'percent']> = [
@@ -23,14 +23,14 @@ export function renderSalesPage(root: HTMLElement, result: SalesPage) {
     ['Date Delivered', 'date_delivered', 'text'],
     ['Product', 'product', 'text'],
     ['Qty', 'quantity', 'number'],
-    ['CP', 'unit_cost', 'money'],
-    ['Total CP', 'total_cost', 'money'],
-    ['Disc', 'discount', 'money'],
-    ['Net CP', 'net_cost', 'money'],
-    ['TP/Unit', 'trade_price_unit', 'money'],
-    ['Total TP', 'total_trade_price', 'money'],
+    ['Selling Price (CP)', 'unit_cost', 'money'],
+    ['Gross Sales (Total CP)', 'total_cost', 'money'],
+    ['Discount', 'discount', 'money'],
+    ['Net Sales (Net CP)', 'net_cost', 'money'],
+    ['Acquisition/Unit (TP)', 'trade_price_unit', 'money'],
+    ['Acquisition Cost (Total TP)', 'total_trade_price', 'money'],
     ['Gross Profit', 'net_income', 'money'],
-    ['%', 'margin_pct', 'percent'],
+    ['Gross Margin %', 'margin_pct', 'percent'],
   ]
   const detailLevel = root.querySelector<HTMLSelectElement>('#salesDataDetail')?.value === 'full' ? 'full' : 'compact'
   const columns = detailLevel === 'full' ? fullColumns : compactColumns

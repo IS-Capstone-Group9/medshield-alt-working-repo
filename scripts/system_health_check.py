@@ -26,11 +26,11 @@ RESET = "\033[0m"
 
 def print_header(title):
     print(f"\n{BOLD}{BLUE}{'='*60}{RESET}")
-    print(f"{BOLD}{BLUE} 🛡️  {title}{RESET}")
+    print(f"{BOLD}{BLUE} {title}{RESET}")
     print(f"{BOLD}{BLUE}{'='*60}{RESET}")
 
 def print_check(name, passed, details=""):
-    status = f"{GREEN}✅ PASS{RESET}" if passed else f"{RED}❌ FAIL{RESET}"
+    status = f"{GREEN}PASS{RESET}" if passed else f"{RED}FAIL{RESET}"
     print(f"  [{status}] {BOLD}{name}{RESET}")
     if details:
         print(f"         {YELLOW}↳ {details}{RESET}")
@@ -165,10 +165,10 @@ def main():
 
     print_header("SUMMARY")
     if all_passed:
-        print(f"{GREEN}{BOLD}🎉 SYSTEM QUALITY VERIFICATION PASSED{RESET}")
+        print(f"{GREEN}{BOLD}SYSTEM QUALITY VERIFICATION PASSED{RESET}")
         print("All multi-year data files, prescriptive logic, and database schemas are verified.\n")
     else:
-        print(f"{RED}{BOLD}⚠️ SOME DIAGNOSTIC CHECKS REQUIRE ATTENTION{RESET}\n")
+        print(f"{RED}{BOLD}[WARN] SOME DIAGNOSTIC CHECKS REQUIRE ATTENTION{RESET}\n")
 
 if __name__ == "__main__":
     main()

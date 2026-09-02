@@ -403,10 +403,11 @@ The financial fields are still candidates. Preserve these mappings for later app
 | MedShield meaning | Databricks field | Current status |
 |---|---|---|
 | Demand units | `total_quantity_candidate` | Analysis candidate |
-| Sales revenue | `transfer_value_candidate` | Finance/business-owner approval required |
-| Gross margin amount | `gross_margin_candidate` | Finance/business-owner approval required |
+| Net sales revenue | `net_sales_candidate` | Approved 2026-09-02 |
+| Total acquisition cost | `transfer_value_candidate` | Approved 2026-09-02 |
+| Transaction gross margin | `gross_margin_candidate` | Approved 2026-09-02; never company net income |
 
-Do not map `net_sales_candidate` to dashboard revenue. MedShield's working definition of revenue is the workbook total trade/transfer price. Do not label `gross_margin_candidate` as company net income.
+Map `net_sales_candidate` to dashboard revenue. Treat `transfer_value_candidate` as total acquisition cost. Do not label `gross_margin_candidate` as company net income.
 
 The yearly cache should first be shown as an administrator preview. It should replace the existing `/api/year_summary` dashboard source only after reconciliation and explicit approval.
 

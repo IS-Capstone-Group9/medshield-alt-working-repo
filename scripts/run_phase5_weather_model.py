@@ -168,7 +168,7 @@ for r in results:
     print(f"  {r['model']}: MAE={r['mae']:,.1f} RMSE={r['rmse']:,.1f} MAPE={r['mape']:.1f}%{improvement}")
 
 champion = min(results, key=lambda x: x['mae'])
-print(f"\n  ✅ Champion: {champion['model']}")
+print(f"\n  [PASS] Champion: {champion['model']}")
 
 output = {
     "model_code":"PHASE5_WEATHER_ADJUSTED","model_version":"1.0.0","status":"validated",
@@ -181,7 +181,7 @@ output = {
                    "2025 holdout is partial — 7 months only."]
 }
 Path('outputs/phase5_weather_model_results.json').write_text(json.dumps(output,indent=2,ensure_ascii=False),encoding='utf-8')
-print("\n✅ Saved: outputs/phase5_weather_model_results.json")
+print("\n[PASS] Saved: outputs/phase5_weather_model_results.json")
 fi.to_csv('outputs/phase5_feature_importance.csv',index=False)
-print("✅ Saved: outputs/phase5_feature_importance.csv")
+print("[PASS] Saved: outputs/phase5_feature_importance.csv")
 print("\nPHASE 5 COMPLETE")

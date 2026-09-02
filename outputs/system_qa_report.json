@@ -203,7 +203,7 @@
       "label": "GET /api/procurement_orders",
       "status": 200,
       "ok": true,
-      "snippet": "[{'category': 'Antipyretics & Analgesics (High Fever & Pain)', 'doh_weather_trigger': '🦠 Dengue Case"
+      "snippet": "[{'category': 'Antipyretics & Analgesics (High Fever & Pain)', 'doh_weather_trigger': ' Dengue Case"
     },
     {
       "label": "GET /api/seasonal_restock_detail?season_id=amihan",
@@ -311,7 +311,7 @@
       "label": "PRD /procurement_orders",
       "status": 200,
       "ok": true,
-      "snippet": "[{'category': 'Antipyretics & Analgesics (High Fever & Pain)', 'doh_weather_trigger': '🦠 Dengue Case"
+      "snippet": "[{'category': 'Antipyretics & Analgesics (High Fever & Pain)', 'doh_weather_trigger': ' Dengue Case"
     },
     {
       "label": "PRD /classify_medicine?name=Paracetamol",
