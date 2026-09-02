@@ -333,7 +333,7 @@ function renderDiseaseDemandChart(root: HTMLElement, data: DashboardData) {
           },
         },
         scales: {
-          x: { grid: { display: false }, ticks: { maxRotation: 0, autoSkip: true } },
+          x: { grid: { display: false }, ticks: { maxRotation: 45, minRotation: 45, autoSkip: true } },
           sales: {
             type: 'linear',
             position: 'left',
@@ -703,7 +703,7 @@ function renderForecastChart(root: HTMLElement, data: DashboardData) {
       scales: {
         x: {
           grid: { display: false },
-          ticks: { maxRotation: 0, autoSkip: false, minRotation: 0 },
+          ticks: { maxRotation: 45, minRotation: 45, autoSkip: true },
         },
         y: {
           beginAtZero: true,
@@ -781,7 +781,7 @@ function renderExternalSignalsChart(root: HTMLElement, data: DashboardData) {
       scales: {
         x: {
           grid: { display: false },
-          ticks: { maxRotation: 0, autoSkip: false, minRotation: 0 },
+          ticks: { maxRotation: 45, minRotation: 45, autoSkip: true },
         },
         y: {
           beginAtZero: true,
@@ -848,7 +848,7 @@ function renderSeasonalityIndexChart(root: HTMLElement, data: DashboardData) {
       scales: {
         x: {
           grid: { display: false },
-          ticks: { maxRotation: 0, autoSkip: false, minRotation: 0 },
+          ticks: { maxRotation: 45, minRotation: 45, autoSkip: true },
         },
         y: {
           beginAtZero: true,

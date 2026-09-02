@@ -54,6 +54,14 @@ export function getExecutableDashboardScript(): string {
     .replaceAll("'#335F78'", "dashboardThemeColor('--chart-label', '#335F78')")
     .replaceAll("'#67879A'", "dashboardThemeColor('--chart-muted', '#67879A')")
     .replaceAll("'rgba(201,219,229,0.65)'", "dashboardThemeColor('--chart-grid', 'rgba(201,219,229,0.65)')")
+    .replaceAll(
+      "maxRotation: 0, autoSkip: true",
+      "maxRotation: 45, minRotation: 45, autoSkip: true"
+    )
+    .replaceAll(
+      "maxRotation: 0, autoSkip: false, minRotation: 0",
+      "maxRotation: 45, minRotation: 45, autoSkip: true"
+    )
     .replace('if (document.startViewTransition &&', 'if (false && document.startViewTransition &&')
     .replace('chart.resize();', "if (!chart.canvas || !chart.canvas.isConnected) return;\n      chart.resize();")
     // After making a page active, rebuild charts so canvases render at correct dimensions
@@ -84,7 +92,81 @@ export function getExecutableDashboardScript(): string {
     )
     .replace(
       "function buildCharts() {",
-      "function buildCharts() { updateDashboardSummary();"
+      "function buildCharts() { updateDashboardSummary(); updateRevenueSummary();"
+    )
+    .replace(
+      `  createChart('overviewBaselineChart', {
+    type: 'bar',
+    data: {
+      labels: yearRowsForMode.map((row) => row.year),
+      datasets: [
+        { label: 'Revenue', data: yearRowsForMode.map((row) => row.revenue), backgroundColor: getColor(0.88), borderRadius: 6 },
+        { label: 'Net Income', data: yearRowsForMode.map((row) => row.income), backgroundColor: getAmber(0.8), borderRadius: 6 }
+      ]
+    },
+    options: opts
+  });`,
+      `  const overviewSingleYear = comparisonMode === 'single' && selectedYear !== 'all';
+  const overviewRevenue = yearRowsForMode.reduce((sum, row) => sum + (Number(row.revenue) || 0), 0);
+  const overviewIncome = yearRowsForMode.reduce((sum, row) => sum + (Number(row.income) || 0), 0);
+  const overviewLabels = overviewSingleYear ? ['Revenue', 'Net Income'] : yearRowsForMode.map((row) => row.year);
+  const overviewDatasets = overviewSingleYear
+    ? [
+        { label: 'Revenue', data: [{ x: 0.44, y: overviewRevenue }], backgroundColor: getColor(0.88), borderRadius: 6, barThickness: 120 },
+        { label: 'Net Income', data: [{ x: 0.56, y: overviewIncome }], backgroundColor: getAmber(0.8), borderRadius: 6, barThickness: 120 }
+      ]
+    : [
+        { label: 'Revenue', data: yearRowsForMode.map((row) => row.revenue), backgroundColor: getColor(0.88), borderRadius: 6 },
+        { label: 'Net Income', data: yearRowsForMode.map((row) => row.income), backgroundColor: getAmber(0.8), borderRadius: 6 }
+      ];
+  const overviewCard = document.getElementById('overviewBaselineChart')?.closest('.chart-card');
+  if (overviewCard) {
+    const overviewSubtitle = overviewCard.querySelector('.chart-subtitle');
+    if (overviewSubtitle) overviewSubtitle.textContent = overviewSingleYear
+      ? selectedYear + ' revenue vs net income'
+      : (selectedYear === 'all' ? 'Annual revenue vs net income across all years' : 'Annual revenue vs net income across selected comparison years');
+  }
+  createChart('overviewBaselineChart', {
+    type: 'bar',
+    data: { labels: overviewLabels, datasets: overviewDatasets },
+    options: {
+      ...opts,
+      plugins: {
+        ...opts.plugins,
+        legend: { ...opts.plugins.legend, display: !overviewSingleYear },
+        tooltip: {
+          ...opts.plugins.tooltip,
+          callbacks: {
+            ...opts.plugins.tooltip.callbacks,
+            label: (context) => {
+              const value = context.parsed && context.parsed.y;
+              return value == null ? null : context.dataset.label + ': ' + formatCompactCurrency(Number(value));
+            }
+          }
+        }
+      },
+      scales: overviewSingleYear
+        ? {
+            ...opts.scales,
+            x: {
+              ...opts.scales.x,
+              type: 'linear',
+              min: 0,
+              max: 1,
+              offset: false,
+              ticks: {
+                ...opts.scales.x.ticks,
+                autoSkip: false,
+                callback: (value) => Number(value) < 0.5 ? 'Revenue' : 'Net Income'
+              },
+              afterBuildTicks: (scale) => {
+                scale.ticks = [{ value: 0.44 }, { value: 0.56 }];
+              }
+            }
+          }
+        : opts.scales
+    }
+  });`
     )
     .replace(
       "function buildTables() {",
@@ -101,7 +183,7 @@ export function getExecutableDashboardScript(): string {
     )
     .replace(
       "const stableConfig = {",
-      `const temporalChartIds = new Set(['monthlyChart', 'revenueDetailChart', 'forecastChart', 'overviewForecastChart', 'externalChart']);
+      `const temporalChartIds = new Set(['monthlyChart', 'forecastChart', 'overviewForecastChart', 'externalChart']);
     let temporalPeriods = null;
     let temporalCurrentMonth = null;
     const temporalLabels = Array.isArray(config.data?.labels) ? config.data.labels : [];
@@ -148,18 +230,70 @@ export function getExecutableDashboardScript(): string {
     )
     .replace(
       "const revenueDetailData = getRevenueDetailData();",
-      `const revenueDetailData = getRevenueDetailData();
+      `const detailConfiguredCurrentMonth = DATA.data_status && DATA.data_status.current_month;
+  const detailNow = new Date();
+  const detailSystemMonth = detailNow.getFullYear() + '-' + String(detailNow.getMonth() + 1).padStart(2, '0');
+  const detailCurrentMonth = /^\\d{4}-(0[1-9]|1[0-2])$/.test(detailConfiguredCurrentMonth || '') && String(detailConfiguredCurrentMonth).slice(0, 4) === String(detailNow.getFullYear()) && String(detailConfiguredCurrentMonth) <= detailSystemMonth
+    ? detailConfiguredCurrentMonth
+    : detailSystemMonth;
+  const detailCurrentYear = detailCurrentMonth.slice(0, 4);
+  const detailMonthlyRows = DATA.monthly.filter((row) => {
+    const period = String(row.period || '');
+    return /^\\d{4}-\\d{2}$/.test(period) && (period.slice(0, 4) < detailCurrentYear || period <= detailCurrentMonth);
+  }).map((row) => ({ ...row }));
+  const detailCompletedYears = new Set(detailMonthlyRows
+    .map((row) => String(row.period).slice(0, 4))
+    .filter((year) => year < detailCurrentYear));
+  detailCompletedYears.forEach((year) => {
+    const yearRows = detailMonthlyRows.filter((row) => String(row.period).startsWith(year + '-'));
+    const existingMonths = new Set(yearRows.map((row) => String(row.period).slice(5, 7)));
+    const missingMonths = [];
+    for (let month = 1; month <= 12; month += 1) {
+      const monthKey = String(month).padStart(2, '0');
+      if (!existingMonths.has(monthKey)) missingMonths.push(monthKey);
+    }
+    if (!missingMonths.length) return;
+    const summary = DATA.year_summary.find((row) => String(row.year) === year);
+    const knownRevenue = yearRows.reduce((sum, row) => sum + (Number(row.revenue) || 0), 0);
+    const knownIncome = yearRows.reduce((sum, row) => sum + (Number(row.income) || 0), 0);
+    const targetRevenue = summary ? Number(summary.revenue) || knownRevenue : knownRevenue;
+    const targetIncome = summary ? Number(summary.income) || knownIncome : knownIncome;
+    const monthlyRevenue = Math.max(0, targetRevenue - knownRevenue) / missingMonths.length;
+    const monthlyIncome = Math.max(0, targetIncome - knownIncome) / missingMonths.length;
+    missingMonths.forEach((monthKey) => {
+      detailMonthlyRows.push({
+        period: year + '-' + monthKey,
+        revenue: monthlyRevenue,
+        income: monthlyIncome,
+      });
+    });
+  });
+  detailMonthlyRows.sort((left, right) => String(left.period).localeCompare(String(right.period)));
+  const revenueDetailData = getRevenueDetailData(detailMonthlyRows);
   const revenueDetailCanvas = document.getElementById('revenueDetailChart');
   const revenueDetailSubtitle = revenueDetailCanvas && revenueDetailCanvas.closest('.chart-card')?.querySelector('.chart-subtitle');
-  const periods = DATA.monthly.map((row) => row.period).filter((period) => /^\\d{4}-\\d{2}$/.test(period)).sort();
+  const periods = detailMonthlyRows.map((row) => row.period).filter((period) => /^\\d{4}-\\d{2}$/.test(period)).sort();
   const configuredCurrentMonth = DATA.data_status && DATA.data_status.current_month;
   const now = new Date();
-  const currentMonth = /^\\d{4}-(0[1-9]|1[0-2])$/.test(configuredCurrentMonth || '')
-    ? configuredCurrentMonth
-    : now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0');
+  const currentMonth = detailCurrentMonth;
   const detailPeriods = comparisonMode === 'single' && selectedYear !== 'all'
     ? periods.filter((period) => period.startsWith(selectedYear + '-'))
     : periods;
+  const revenueDetailWrap = revenueDetailCanvas && revenueDetailCanvas.closest('.chart-wrap');
+  if (revenueDetailWrap) {
+    const shouldScroll = detailPeriods.length > 24 || (comparisonMode === 'single' && selectedYear !== 'all' && String(selectedYear) < detailCurrentYear && detailPeriods.length >= 12);
+    revenueDetailWrap.classList.toggle('revenue-detail-scroll', shouldScroll);
+    if (shouldScroll && revenueDetailCanvas) {
+      let scrollContent = revenueDetailWrap.querySelector('.revenue-detail-scroll-content');
+      if (!scrollContent) {
+        scrollContent = document.createElement('div');
+        scrollContent.className = 'revenue-detail-scroll-content';
+        revenueDetailCanvas.replaceWith(scrollContent);
+        scrollContent.appendChild(revenueDetailCanvas);
+      }
+      revenueDetailWrap.scrollLeft = 0;
+    }
+  }
   const futurePeriod = (period) => period > currentMonth;
   const revenueDetailProgressPlugin = {
     id: 'revenue-detail-current-day',
@@ -167,18 +301,13 @@ export function getExecutableDashboardScript(): string {
       if (comparisonMode !== 'single' || detailPeriods.length !== revenueDetailData.labels.length) return;
       const currentIndex = detailPeriods.indexOf(currentMonth);
       const revenueDataset = chart.data.datasets[0];
-      if (currentIndex < 0 || currentIndex >= revenueDataset.data.length - 1) return;
-      const today = new Date();
-      const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
-      const progress = Math.min(1, Math.max(0, (today.getDate() - 1) / Math.max(1, daysInMonth - 1)));
+      if (currentIndex < 0 || currentIndex >= revenueDataset.data.length) return;
       const xScale = chart.scales.x;
       const yScale = chart.scales.y;
       const firstValue = Number(revenueDataset.data[currentIndex]);
-      const nextValue = Number(revenueDataset.data[currentIndex + 1]);
-      if (!Number.isFinite(firstValue) || !Number.isFinite(nextValue)) return;
-      const x = xScale.getPixelForValue(currentIndex) +
-        (xScale.getPixelForValue(currentIndex + 1) - xScale.getPixelForValue(currentIndex)) * progress;
-      const y = yScale.getPixelForValue(firstValue + (nextValue - firstValue) * progress);
+      if (!Number.isFinite(firstValue)) return;
+      const x = xScale.getPixelForValue(currentIndex);
+      const y = yScale.getPixelForValue(firstValue);
       const context = chart.ctx;
       context.save();
       context.beginPath();
@@ -204,20 +333,96 @@ export function getExecutableDashboardScript(): string {
   }
   if (revenueDetailSubtitle) {
     const currentLabel = monthLabel(currentMonth);
-    const forecastPeriods = detailPeriods.filter((period) => period > currentMonth);
-    const forecastLabel = forecastPeriods.length
-      ? 'forecasts ' + monthLabel(forecastPeriods[0]) + '–' + monthLabel(forecastPeriods[forecastPeriods.length - 1])
-      : 'no forecast months';
     if (comparisonMode === 'single' && selectedYear !== 'all') {
       revenueDetailSubtitle.textContent = selectedYear === currentMonth.slice(0, 4)
-        ? selectedYear + ' monthly performance; actuals through ' + currentLabel + ', ' + forecastLabel
+        ? selectedYear + ' monthly performance; actuals through ' + currentLabel
         : selectedYear + ' monthly performance (closed historical data)';
     } else if (comparisonMode === 'yoy') {
-      revenueDetailSubtitle.textContent = 'Monthly comparison across selected years; current-year actuals through ' + currentLabel + ', ' + forecastLabel;
+      revenueDetailSubtitle.textContent = 'Monthly historical comparison; current-year actuals through ' + currentLabel;
     } else if (periods.length) {
-      revenueDetailSubtitle.textContent = 'Monthly performance (' + periods[0].slice(0, 4) + '–' + periods[periods.length - 1].slice(0, 4) + '); actuals through ' + currentLabel + ', ' + forecastLabel;
+      revenueDetailSubtitle.textContent = 'Monthly historical performance (' + periods[0].slice(0, 4) + '–' + periods[periods.length - 1].slice(0, 4) + '); actuals through ' + currentLabel;
     }
+      }`
+    )
+    .replace(
+      "function getRevenueDetailData() {\\n  const rows = DATA.monthly.map((row) => ({ ...row }));",
+      "function getRevenueDetailData(monthlyRows) {\\n  const rows = (monthlyRows || DATA.monthly).map((row) => ({ ...row }));"
+    )
+    .replace(
+      `const growthSourceRows = comparisonMode === 'single' && selectedYear !== 'all'
+    ? DATA.year_summary.filter((row) => row.year === selectedYear || row.year === String(Number(selectedYear) - 1))
+    : yearRowsForMode;
+  const growthBaseRows = growthSourceRows.length > 1 ? growthSourceRows : DATA.year_summary;
+  const growthData = growthBaseRows.slice(1).map((row, index) => (
+    ((row.revenue - growthBaseRows[index].revenue) / growthBaseRows[index].revenue) * 100
+  ));`,
+      `const singleYearMonthlyRows = comparisonMode === 'single' && selectedYear !== 'all'
+    ? DATA.monthly.filter((row) => row.period.startsWith(selectedYear + '-'))
+    : [];
+  const growthIsMonthly = singleYearMonthlyRows.length > 0;
+  const growthSourceRows = comparisonMode === 'single' && selectedYear !== 'all'
+    ? DATA.year_summary.filter((row) => row.year === selectedYear || row.year === String(Number(selectedYear) - 1))
+    : yearRowsForMode;
+  const growthBaseRows = growthSourceRows.length > 1 ? growthSourceRows : DATA.year_summary;
+  const growthData = growthIsMonthly
+    ? singleYearMonthlyRows.map((row, index) => {
+        const previousRow = DATA.monthly
+          .filter((candidate) => candidate.period < row.period)
+          .sort((left, right) => right.period.localeCompare(left.period))[0];
+        return previousRow && previousRow.revenue > 0
+          ? ((row.revenue - previousRow.revenue) / previousRow.revenue) * 100
+          : null;
+      })
+    : growthBaseRows.slice(1).map((row, index) => (
+        ((row.revenue - growthBaseRows[index].revenue) / growthBaseRows[index].revenue) * 100
+      ));
+  const growthLabels = growthIsMonthly
+    ? singleYearMonthlyRows.map((row) => monthLabel(row.period).split(' ')[0])
+    : growthBaseRows.slice(1).map((row) => row.year);
+  const growthCard = document.getElementById('growthChart')?.closest('.chart-card');
+  if (growthCard && growthIsMonthly) {
+    growthCard.querySelector('.chart-title').textContent = 'Monthly Growth %';
+    growthCard.querySelector('.chart-subtitle').textContent = selectedYear + ' month-over-month revenue movement';
+    growthCard.querySelector('.chart-badge').textContent = 'Monthly Trend';
+  } else if (growthCard) {
+    growthCard.querySelector('.chart-title').textContent = 'Year-over-Year (YoY) Growth %';
+    growthCard.querySelector('.chart-subtitle').textContent = comparisonMode === 'yoy'
+      ? 'Annual revenue growth across the selected comparison years'
+      : 'Annual revenue growth across all available years';
+    growthCard.querySelector('.chart-badge').textContent = 'Growth Trend';
   }`
+    )
+    .replace(
+      "labels: growthBaseRows.slice(1).map((row) => row.year),",
+      "labels: growthLabels,"
+    )
+    .replace(
+      `const marginRows = yearRowsForMode.length ? yearRowsForMode : DATA.year_summary;
+  const marginData = marginRows.map((row) => (row.income / row.revenue) * 100);`,
+      `const marginIsMonthly = singleYearMonthlyRows.length > 0;
+  const marginRows = yearRowsForMode.length ? yearRowsForMode : DATA.year_summary;
+  const marginData = marginIsMonthly
+    ? singleYearMonthlyRows.map((row) => row.revenue > 0 ? (row.income / row.revenue) * 100 : null)
+    : marginRows.map((row) => (row.income / row.revenue) * 100);
+  const marginLabels = marginIsMonthly
+    ? singleYearMonthlyRows.map((row) => monthLabel(row.period).split(' ')[0])
+    : marginRows.map((row) => row.year);
+  const marginCard = document.getElementById('marginChart')?.closest('.chart-card');
+  if (marginCard && marginIsMonthly) {
+    marginCard.querySelector('.chart-title').textContent = 'Monthly Operating Profit Margin %';
+    marginCard.querySelector('.chart-subtitle').textContent = selectedYear + ' monthly net margin movement';
+    marginCard.querySelector('.chart-badge').textContent = 'Monthly Margin';
+  } else if (marginCard) {
+    marginCard.querySelector('.chart-title').textContent = 'Operating Profit Margin %';
+    marginCard.querySelector('.chart-subtitle').textContent = comparisonMode === 'yoy'
+      ? 'Annual operating margin across the selected comparison years'
+      : 'Annual operating margin across all available years';
+    marginCard.querySelector('.chart-badge').textContent = 'Margin Health';
+  }`
+    )
+    .replace(
+      "labels: marginRows.map((row) => row.year),",
+      "labels: marginLabels,"
     )
     .replace(
       "createChart('revenueDetailChart', {",
@@ -579,6 +784,71 @@ function updateDashboardSummary() {
     if (territoryValue) territoryValue.textContent = topTerritory.area;
     if (territorySub) territorySub.textContent = yr === 'all' || !yr ? 'Primary allocation territory across all years' : yr + ' primary territory';
   }
+}
+
+function updateRevenueSummary() {
+  if (typeof document === 'undefined' || typeof DATA === 'undefined' || !DATA) return;
+  var page = document.getElementById('page-revenue');
+  if (!page) return;
+  var cards = page.querySelectorAll('.kpi-grid .kpi-card');
+  if (cards.length < 3) return;
+
+  var year = getActiveDashboardYear();
+  var summaries = Array.isArray(DATA.year_summary) ? DATA.year_summary.filter(function(row) {
+    return Number(row.revenue) > 0 || Number(row.income) > 0;
+  }) : [];
+  var monthly = Array.isArray(DATA.monthly) ? DATA.monthly.filter(function(row) {
+    return row && /^\\d{4}-\\d{2}$/.test(String(row.period || ''));
+  }) : [];
+  var rows = year === 'all' || !year ? monthly : monthly.filter(function(row) {
+    return String(row.period).startsWith(String(year) + '-');
+  });
+  var summary = year === 'all' || !year ? null : summaries.find(function(row) {
+    return String(row.year) === String(year);
+  });
+  var revenue = summary ? Number(summary.revenue) || 0 : rows.reduce(function(sum, row) {
+    return sum + (Number(row.revenue) || 0);
+  }, 0);
+  var income = summary ? Number(summary.income) || 0 : rows.reduce(function(sum, row) {
+    return sum + (Number(row.income) || 0);
+  }, 0);
+  if (year === 'all' || !year) {
+    revenue = summaries.reduce(function(sum, row) { return sum + (Number(row.revenue) || 0); }, 0) || revenue;
+    income = summaries.reduce(function(sum, row) { return sum + (Number(row.income) || 0); }, 0) || income;
+  }
+
+  var peak = rows.slice().sort(function(left, right) {
+    return (Number(right.revenue) || 0) - (Number(left.revenue) || 0);
+  })[0];
+  var scope = year === 'all' || !year ? 'All Years' : String(year);
+  var margin = revenue > 0 ? (income / revenue) * 100 : 0;
+  var revenueLabel = cards[0].querySelector('.kpi-label');
+  var revenueValue = cards[0].querySelector('.kpi-value');
+  var revenueTag = cards[0].querySelector('.kpi-tag');
+  var incomeLabel = cards[1].querySelector('.kpi-label');
+  var incomeValue = cards[1].querySelector('.kpi-value');
+  var incomeSub = cards[1].querySelector('.kpi-sub');
+  var peakValue = cards[2].querySelector('.kpi-value');
+  var peakSub = cards[2].querySelector('.kpi-sub');
+  if (revenueLabel) revenueLabel.textContent = scope + ' Annual Revenue';
+  if (revenueValue) revenueValue.textContent = formatCompactCurrency(revenue);
+  if (revenueTag) {
+    if (year === 'all' || !year) {
+      revenueTag.textContent = 'All Years Cumulative';
+    } else {
+      var prior = summaries.find(function(row) { return String(row.year) === String(Number(year) - 1); });
+      var priorRevenue = prior ? Number(prior.revenue) || 0 : 0;
+      var change = priorRevenue > 0 ? ((revenue - priorRevenue) / priorRevenue) * 100 : null;
+      revenueTag.textContent = change === null
+        ? (String(year) >= String(new Date().getFullYear()) ? 'Weighted Estimate' : 'Historical Dataset')
+        : (change >= 0 ? '+' : '') + change.toFixed(0) + '% vs ' + (Number(year) - 1);
+    }
+  }
+  if (incomeLabel) incomeLabel.textContent = scope + ' Net Income';
+  if (incomeValue) incomeValue.textContent = formatCompactCurrency(income);
+  if (incomeSub) incomeSub.textContent = margin.toFixed(1) + '% net profit margin';
+  if (peakValue) peakValue.textContent = peak ? monthLabel(peak.period) : 'Unavailable';
+  if (peakSub) peakSub.textContent = year === 'all' || !year ? 'Peak month across all years' : 'Peak month in ' + year;
 }
 
 function updateProductViewMetadata() {
