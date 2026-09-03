@@ -15,8 +15,48 @@ import {
   DashboardDataStatus,
 } from '@/types/api.types'
 
+const FIRST_REPORTING_YEAR = 2017
+
 function finiteNumber(value: unknown): boolean {
   return typeof value === 'number' && Number.isFinite(value)
+}
+
+function isReportingPeriod(period: string, latestYear: number): boolean {
+  const match = /^(\d{4})-(0[1-9]|1[0-2])$/.exec(period)
+  if (!match) return false
+  const year = Number(match[1])
+  return year >= FIRST_REPORTING_YEAR && year <= latestYear
+}
+
+function normalizeReportingWindow(data: DashboardData): DashboardData {
+  const latestYear = new Date().getFullYear()
+  const monthly = data.monthly.filter((row) => isReportingPeriod(row.period, latestYear))
+  const yearSummary = data.yearSummary.filter((row) => {
+    const year = Number(row.year)
+    return Number.isInteger(year) && year >= FIRST_REPORTING_YEAR && year <= latestYear
+  })
+  const totalRevenue = monthly.reduce((sum, row) => sum + row.revenue, 0)
+  const totalIncome = monthly.reduce((sum, row) => sum + row.income, 0)
+
+  return {
+    ...data,
+    summary: {
+      ...data.summary,
+      total_revenue: totalRevenue,
+      total_income: totalIncome,
+      avg_margin: totalRevenue > 0 ? (totalIncome / totalRevenue) * 100 : 0,
+    },
+    monthly,
+    byYearArea: Object.fromEntries(
+      Object.entries(data.byYearArea ?? {}).filter(([year]) => {
+        const numericYear = Number(year)
+        return Number.isInteger(numericYear) && numericYear >= FIRST_REPORTING_YEAR && numericYear <= latestYear
+      }),
+    ),
+    yearSummary,
+    forecasts: data.forecasts.filter((row) => isReportingPeriod(row.period, latestYear)),
+    externalSignals: data.externalSignals.filter((row) => isReportingPeriod(row.period, latestYear)),
+  }
 }
 
 function hasValidMonthlyData(rows: MonthlyPoint[]): boolean {
@@ -50,17 +90,18 @@ function hasValidSeasonalityData(rows: SeasonalityPoint[]): boolean {
 }
 
 function assertDashboardCoreData(data: DashboardData, source: string): DashboardData {
+  const normalized = normalizeReportingWindow(data)
   const invalid: string[] = []
-  if (!hasValidMonthlyData(data.monthly)) invalid.push('monthly')
-  if (!hasValidYearSummaryData(data.yearSummary)) invalid.push('year summary')
-  if (!hasValidAreaData(data.byArea)) invalid.push('area')
-  if (!hasValidProductData(data.products)) invalid.push('product')
-  if (!hasValidSeasonalityData(data.seasonality)) invalid.push('seasonality')
+  if (!hasValidMonthlyData(normalized.monthly)) invalid.push('monthly')
+  if (!hasValidYearSummaryData(normalized.yearSummary)) invalid.push('year summary')
+  if (!hasValidAreaData(normalized.byArea)) invalid.push('area')
+  if (!hasValidProductData(normalized.products)) invalid.push('product')
+  if (!hasValidSeasonalityData(normalized.seasonality)) invalid.push('seasonality')
 
   if (invalid.length) {
     throw new Error(`${source} dashboard data is incomplete: ${invalid.join(', ')}`)
   }
-  return data
+  return normalized
 }
 
 export async function loadDashboardData(): Promise<DashboardData> {

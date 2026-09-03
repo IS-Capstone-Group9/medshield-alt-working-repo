@@ -7,6 +7,7 @@ import {
   buildEstimatedMonthlyRowsForYear,
   buildEstimatedYearSummaryForYear,
   hasMonthlyRowsForYear,
+  resolveActualDataMonth,
   resolveWeightedForwardProfitMargin,
 } from '../services/api/dashboard-year-estimates.ts'
 
@@ -128,6 +129,44 @@ test('current analytical year advances the actual cutoff with current month meta
 
   assert.deepEqual(rows.find((row) => row.period === '2026-08'), { period: '2026-08', revenue: 180, income: 81 })
   assert.deepEqual(rows.find((row) => row.period === '2026-09'), { period: '2026-09', revenue: 220, income: 110 })
+})
+
+test('a stale completed-year cutoff does not truncate the historical January-to-December series', () => {
+  const data = {
+    ...baseData,
+    dataStatus: { ...baseData.dataStatus, current_month: '2025-08' },
+    monthly: [
+      { period: '2025-01', revenue: 90, income: 45 },
+      { period: '2025-12', revenue: 240, income: 120 },
+    ],
+  }
+
+  assert.equal(resolveActualDataMonth(data, new Date('2026-09-03T00:00:00+08:00')), '2026-09')
+
+  const rows = buildEstimatedMonthlyRowsForYear(data, '2025')
+  assert.equal(rows.length, 12)
+  assert.deepEqual(rows.at(-1), { period: '2025-12', revenue: 240, income: 120 })
+})
+
+test('incomplete historical years use weighted interpolation rather than a forward forecast baseline', () => {
+  const data = {
+    ...baseData,
+    dataStatus: { ...baseData.dataStatus, current_month: '2026-09' },
+    monthly: [
+      ...baseData.monthly,
+      { period: '2019-01', revenue: 100, income: 50 },
+      { period: '2019-03', revenue: 300, income: 150 },
+      { period: '2019-04', revenue: 400, income: 200 },
+    ],
+  }
+
+  const rows = buildEstimatedMonthlyRowsForYear(data, '2019')
+  const february = rows.find((row) => row.period === '2019-02')
+
+  assert.equal(rows.length, 12)
+  assert.equal(february?.revenue, 300)
+  assert.equal(february?.income, 150)
+  assert.notEqual(february?.revenue, 150)
 })
 
 test('actual monthly rows prevent treating a year as missing', () => {

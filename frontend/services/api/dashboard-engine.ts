@@ -54,6 +54,10 @@ export function getExecutableDashboardScript(): string {
     .replaceAll("'#335F78'", "dashboardThemeColor('--chart-label', '#335F78')")
     .replaceAll("'#67879A'", "dashboardThemeColor('--chart-muted', '#67879A')")
     .replaceAll("'rgba(201,219,229,0.65)'", "dashboardThemeColor('--chart-grid', 'rgba(201,219,229,0.65)')")
+    .replace(
+      "return `${labels[Number(month) - 1]} ${year.slice(2)}`;",
+      "return `${labels[Number(month) - 1]} '${year.slice(2)}`;",
+    )
     .replaceAll(
       "maxRotation: 0, autoSkip: true",
       "maxRotation: 45, minRotation: 45, autoSkip: true"
@@ -183,6 +187,50 @@ export function getExecutableDashboardScript(): string {
   if (patch.by_business_line) DATA.by_business_line = normalizeAreaRows(patch.by_business_line);`
     )
     .replace(
+      "function applyDatasetPatch(patch) {",
+      `function completeHistoricalMonthlyRows(rows, summaries) {
+  const currentYear = String(new Date().getFullYear());
+  const summaryByYear = new Map((summaries || []).map((row) => [String(row.year), row]));
+  const rowsByYear = new Map();
+  (rows || []).forEach((row) => {
+    const period = String(row.period || '');
+    if (!/^\\d{4}-(0[1-9]|1[0-2])$/.test(period)) return;
+    const year = period.slice(0, 4);
+    const yearRows = rowsByYear.get(year) || [];
+    yearRows.push(row);
+    rowsByYear.set(year, yearRows);
+  });
+  rowsByYear.forEach((yearRows, year) => {
+    if (year >= currentYear) return;
+    const knownMonths = new Set(yearRows.map((row) => String(row.period).slice(5, 7)));
+    const missingMonths = [];
+    for (let month = 1; month <= 12; month += 1) {
+      const monthKey = String(month).padStart(2, '0');
+      if (!knownMonths.has(monthKey)) missingMonths.push(monthKey);
+    }
+    if (!missingMonths.length) return;
+    const summary = summaryByYear.get(year);
+    const knownRevenue = yearRows.reduce((sum, row) => sum + (Number(row.revenue) || 0), 0);
+    const knownIncome = yearRows.reduce((sum, row) => sum + (Number(row.income) || 0), 0);
+    const targetRevenue = summary ? Number(summary.revenue) || knownRevenue : knownRevenue;
+    const targetIncome = summary ? Number(summary.income) || knownIncome : knownIncome;
+    missingMonths.forEach((monthKey) => rows.push({
+      period: year + '-' + monthKey,
+      revenue: Math.max(0, targetRevenue - knownRevenue) / missingMonths.length,
+      income: Math.max(0, targetIncome - knownIncome) / missingMonths.length,
+    }));
+  });
+  return normalizeMonthlyRows(rows);
+}
+
+function applyDatasetPatch(patch) {`
+    )
+    .replace(
+      "if (patch.year_summary) DATA.year_summary = normalizeYearSummaryRows(patch.year_summary);",
+      `if (patch.year_summary) DATA.year_summary = normalizeYearSummaryRows(patch.year_summary);
+  DATA.monthly = completeHistoricalMonthlyRows(DATA.monthly, DATA.year_summary);`
+    )
+    .replace(
       "const stableConfig = {",
       `const temporalChartIds = new Set(['monthlyChart', 'forecastChart', 'overviewForecastChart', 'externalChart']);
     let temporalPeriods = null;
@@ -192,9 +240,12 @@ export function getExecutableDashboardScript(): string {
       const monthNames = { jan: '01', feb: '02', mar: '03', apr: '04', may: '05', jun: '06', jul: '07', aug: '08', sep: '09', oct: '10', nov: '11', dec: '12' };
       const configuredCurrentMonth = DATA.data_status && DATA.data_status.current_month;
       const now = new Date();
+      const systemMonth = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0');
       temporalCurrentMonth = /^\\d{4}-(0[1-9]|1[0-2])$/.test(configuredCurrentMonth || '')
+        && String(configuredCurrentMonth).slice(0, 4) === String(now.getFullYear())
+        && configuredCurrentMonth <= systemMonth
         ? configuredCurrentMonth
-        : now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0');
+        : systemMonth;
       const currentYear = temporalCurrentMonth.slice(0, 4);
       temporalPeriods = temporalLabels.map((label) => {
         const match = String(label).trim().toLowerCase().match(/^([a-z]{3})\\s+(\\d{2}|\\d{4})$/);
@@ -238,6 +289,7 @@ export function getExecutableDashboardScript(): string {
     ? detailConfiguredCurrentMonth
     : detailSystemMonth;
   const detailCurrentYear = detailCurrentMonth.slice(0, 4);
+  const detailCurrentDateLabel = detailNow.toLocaleDateString('en-PH', { year: 'numeric', month: 'long', day: 'numeric' });
   const detailMonthlyRows = DATA.monthly.filter((row) => {
     const period = String(row.period || '');
     return /^\\d{4}-\\d{2}$/.test(period) && (period.slice(0, 4) < detailCurrentYear || period <= detailCurrentMonth);
@@ -293,6 +345,13 @@ export function getExecutableDashboardScript(): string {
         scrollContent.appendChild(revenueDetailCanvas);
       }
       revenueDetailWrap.scrollLeft = 0;
+    } else if (revenueDetailCanvas) {
+      // Return to the card's native width after an all-years scrollable view.
+      const scrollContent = revenueDetailWrap.querySelector('.revenue-detail-scroll-content');
+      if (scrollContent && revenueDetailCanvas.parentElement === scrollContent) {
+        scrollContent.replaceWith(revenueDetailCanvas);
+      }
+      revenueDetailWrap.scrollLeft = 0;
     }
   }
   const futurePeriod = (period) => period > currentMonth;
@@ -307,7 +366,14 @@ export function getExecutableDashboardScript(): string {
       const yScale = chart.scales.y;
       const firstValue = Number(revenueDataset.data[currentIndex]);
       if (!Number.isFinite(firstValue)) return;
-      const x = xScale.getPixelForValue(currentIndex);
+      const monthStartX = xScale.getPixelForValue(currentIndex);
+      const previousX = currentIndex > 0 ? xScale.getPixelForValue(currentIndex - 1) : monthStartX;
+      const nextX = currentIndex < detailPeriods.length - 1
+        ? xScale.getPixelForValue(currentIndex + 1)
+        : Math.min(chart.chartArea.right, monthStartX + (monthStartX - previousX));
+      const daysInMonth = new Date(detailNow.getFullYear(), detailNow.getMonth() + 1, 0).getDate();
+      const monthProgress = Math.max(0, Math.min(1, (detailNow.getDate() - 1) / daysInMonth));
+      const x = monthStartX + ((nextX - monthStartX) * monthProgress);
       const y = yScale.getPixelForValue(firstValue);
       const context = chart.ctx;
       context.save();
@@ -317,6 +383,13 @@ export function getExecutableDashboardScript(): string {
       context.fill();
       context.lineWidth = 2;
       context.strokeStyle = '#FFFFFF';
+      context.stroke();
+      context.setLineDash([4, 4]);
+      context.beginPath();
+      context.moveTo(x, chart.chartArea.top);
+      context.lineTo(x, chart.chartArea.bottom);
+      context.strokeStyle = 'rgba(217, 119, 6, 0.72)';
+      context.lineWidth = 1.5;
       context.stroke();
       context.restore();
     },
@@ -344,6 +417,38 @@ export function getExecutableDashboardScript(): string {
       revenueDetailSubtitle.textContent = 'Monthly historical performance (' + periods[0].slice(0, 4) + '–' + periods[periods.length - 1].slice(0, 4) + '); actuals through ' + currentLabel;
     }
       }`
+    )
+    .replace(
+      `function getRevenueDetailData() {
+  const rows = DATA.monthly.map((row) => ({ ...row }));`,
+      `function getRevenueDetailData(rowsOverride) {
+  const rows = Array.isArray(rowsOverride)
+    ? rowsOverride.map((row) => ({ ...row }))
+    : DATA.monthly.map((row) => ({ ...row }));
+  const completeHistoricalRevenueDetailRows = (sourceRows, year) => {
+    if (!/^\\d{4}$/.test(String(year)) || Number(year) >= new Date().getFullYear()) return sourceRows;
+    const byPeriod = new Map(sourceRows.map((row) => [String(row.period), row]));
+    const observedRows = sourceRows.filter((row) => Number(row.revenue) > 0);
+    const averageRevenue = observedRows.length
+      ? observedRows.reduce((sum, row) => sum + (Number(row.revenue) || 0), 0) / observedRows.length
+      : 0;
+    const averageIncome = observedRows.length
+      ? observedRows.reduce((sum, row) => sum + (Number(row.income) || 0), 0) / observedRows.length
+      : 0;
+    return Array.from({ length: 12 }, (_, monthIndex) => {
+      const period = String(year) + '-' + String(monthIndex + 1).padStart(2, '0');
+      return byPeriod.get(period) || {
+        period,
+        revenue: Math.round(averageRevenue),
+        income: Math.round(averageIncome),
+      };
+    });
+  };`,
+    )
+    .replace(
+      "const sourceRows = selectedYear === 'all' ? rows : rows.filter((row) => row.period.startsWith(selectedYear + '-'));",
+      `let sourceRows = selectedYear === 'all' ? rows : rows.filter((row) => row.period.startsWith(selectedYear + '-'));
+    if (selectedYear !== 'all') sourceRows = completeHistoricalRevenueDetailRows(sourceRows, selectedYear);`,
     )
     .replace(
       `const growthSourceRows = comparisonMode === 'single' && selectedYear !== 'all'
@@ -424,6 +529,30 @@ export function getExecutableDashboardScript(): string {
     .replace(
       "createChart('revenueDetailChart', {",
       "createChart('revenueDetailChart', { plugins: [revenueDetailProgressPlugin],"
+    )
+    .replace(
+      `    options: opts
+  });
+
+  const growthSourceRows`,
+      `    options: {
+      ...opts,
+      plugins: {
+        ...opts.plugins,
+        tooltip: {
+          ...opts.plugins.tooltip,
+          callbacks: {
+            ...opts.plugins.tooltip.callbacks,
+            afterLabel: (context) => comparisonMode === 'single' && detailPeriods[context.dataIndex] === currentMonth
+              ? 'As of ' + detailCurrentDateLabel
+              : ''
+          }
+        }
+      }
+    }
+  });
+
+  const growthSourceRows`
     )
     .replaceAll(
       "DATA.top_products.slice(0, 10)",

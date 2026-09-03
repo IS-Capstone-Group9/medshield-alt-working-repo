@@ -248,6 +248,27 @@ function updateAreaSegmentationLabels(root: HTMLElement) {
   }
 }
 
+function addRollingFinancialForecastCard(root: HTMLElement) {
+  if (root.querySelector('#financialForecastChart')) return
+
+  const demandForecastCard = root.querySelector('#forecastChart')?.closest<HTMLElement>('.chart-card')
+  if (!demandForecastCard) return
+
+  demandForecastCard.insertAdjacentHTML(
+    'afterend',
+    `<div class="chart-card" data-rolling-financial-forecast style="margin-bottom:20px;">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Rolling 12-Month Financial Forecast</div>
+          <div class="chart-subtitle">Revenue forecast and projected net income across the active planning horizon</div>
+        </div>
+        <span class="chart-badge">Financial outlook</span>
+      </div>
+      <div class="chart-wrap h300"><canvas id="financialForecastChart"></canvas></div>
+    </div>`,
+  )
+}
+
 export function enhanceDashboardContent(root: HTMLElement) {
   // MedShield is intentionally light-only. Clear any legacy preference so a
   // previously stored dark theme cannot leave the user in an unsupported mode.
@@ -262,6 +283,7 @@ export function enhanceDashboardContent(root: HTMLElement) {
   replaceUnsupportedLabels(root)
   ensureCurrentAnalyticalYear(root)
   updateAreaSegmentationLabels(root)
+  addRollingFinancialForecastCard(root)
 
   const navigation = root.querySelector('.nav')
   if (navigation) {

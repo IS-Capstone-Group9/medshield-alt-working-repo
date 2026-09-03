@@ -21,14 +21,21 @@ import type { DashboardData } from '@/types/api.types'
 
 function dashboardDataForLegacyCharts(data: DashboardData): DashboardData {
   const currentAnalyticalYear = resolveForecastCurrentYear(data.dataStatus)
+  const currentCalendarYear = String(new Date().getFullYear())
   const existingPeriods = new Set(data.monthly.map((row) => row.period))
-  const forecastYears = [currentAnalyticalYear, resolveNextForecastYear(data.dataStatus)].filter(
-    (year): year is string => Boolean(year),
+  const completedYears = new Set(
+    [...data.monthly.map((row) => row.period.slice(0, 4)), ...data.yearSummary.map((row) => row.year)]
+      .filter((year) => /^\d{4}$/.test(year) && year < currentCalendarYear),
   )
+  const forecastYears = [
+    ...completedYears,
+    currentAnalyticalYear,
+    resolveNextForecastYear(data.dataStatus),
+  ].filter((year): year is string => Boolean(year))
   const completionRows = []
   const estimatedSummaries = []
 
-  for (const year of forecastYears) {
+  for (const year of new Set(forecastYears)) {
     const estimatedMonthly = buildEstimatedMonthlyRowsForYear(data, year)
     const estimatedYearSummary = buildEstimatedYearSummaryForYear(data, year, estimatedMonthly)
     if (!estimatedMonthly.length || !estimatedYearSummary) continue

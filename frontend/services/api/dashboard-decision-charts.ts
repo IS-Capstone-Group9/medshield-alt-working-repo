@@ -20,6 +20,7 @@ import {
 import {
   areaRowsForView,
   buildEstimatedMonthlyRowsForYear,
+  resolveWeightedForwardProfitMargin,
 } from './dashboard-year-estimates'
 import { splitAreaSegments } from './dashboard-area-segments'
 
@@ -716,6 +717,111 @@ function renderForecastChart(root: HTMLElement, data: DashboardData) {
   })
 }
 
+function renderFinancialForecastChart(root: HTMLElement, data: DashboardData) {
+  const canvas = root.querySelector<HTMLCanvasElement>('#financialForecastChart')
+  if (!canvas) return
+
+  const window = rollingWindow(data)
+  const series = forecastSeries(window, data)
+  const margin = resolveWeightedForwardProfitMargin(data)
+  const currentMonthlyRow = data.monthly.find((row) => row.period === window.currentMonth)
+  const currentRevenue = finite(currentMonthlyRow?.revenue) ? currentMonthlyRow.revenue : null
+  const currentIncome = finite(currentMonthlyRow?.income) ? currentMonthlyRow.income : null
+  const actualRevenue = window.periods.map((period) => (period === window.currentMonth ? currentRevenue : null))
+  const actualIncome = window.periods.map((period) => (period === window.currentMonth ? currentIncome : null))
+  const horizonLabel = rollingWindowLabel(window)
+  const projectedRevenue = series.rows.map((row) => row.adjusted)
+  const projectedIncome = series.rows.map((row) => finite(row.adjusted) ? Math.round(row.adjusted * margin) : null)
+
+  updateChartCard(canvas, {
+    title: 'Rolling 12-Month Financial Forecast',
+    subtitle: `${horizonLabel} revenue outlook with projected net income at ${(margin * 100).toFixed(1)}% bounded planning margin`,
+    badge: series.isFallback ? 'Scenario fallback' : 'Financial outlook',
+    status: series.isFallback ? 'Forecast fallback' : `${series.loadedPeriods}/12 model periods loaded`,
+    statusClass: series.isFallback ? 'status-draft' : 'status-ready',
+  })
+
+  const datasets: ChartConfiguration<'line'>['data']['datasets'] = [
+    {
+      label: 'Projected revenue',
+      data: projectedRevenue,
+      borderColor: '#1E3A5F',
+      backgroundColor: 'rgba(30, 58, 95, 0.10)',
+      tension: 0.35,
+      borderWidth: 2.5,
+      fill: false,
+      spanGaps: true,
+      pointRadius: 3,
+      pointHoverRadius: 5,
+    },
+    {
+      label: 'Projected net income',
+      data: projectedIncome,
+      borderColor: '#D97706',
+      backgroundColor: 'rgba(217, 119, 6, 0.10)',
+      tension: 0.35,
+      borderWidth: 2.5,
+      fill: false,
+      spanGaps: true,
+      pointRadius: 3,
+      pointHoverRadius: 5,
+    },
+  ]
+
+  if (currentRevenue !== null) {
+    datasets.unshift({
+      label: 'Current-month revenue actual',
+      data: actualRevenue,
+      borderColor: '#1E3A5F',
+      backgroundColor: '#1E3A5F',
+      showLine: false,
+      pointRadius: 6,
+      pointHoverRadius: 7,
+    })
+  }
+  if (currentIncome !== null) {
+    datasets.unshift({
+      label: 'Current-month net income actual',
+      data: actualIncome,
+      borderColor: '#D97706',
+      backgroundColor: '#D97706',
+      showLine: false,
+      pointRadius: 6,
+      pointHoverRadius: 7,
+    })
+  }
+
+  replaceChart(canvas, {
+    type: 'line',
+    plugins: [futurePeriodShadePlugin(window.periods, window.currentMonth)],
+    data: { labels: window.labels, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 8 } },
+        tooltip: {
+          callbacks: {
+            label: (context) => {
+              const value = Number(context.raw)
+              return Number.isFinite(value) ? `${context.dataset.label}: ${compactCurrency(value)}` : `${context.dataset.label}: Unavailable`
+            },
+          },
+        },
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { maxRotation: 45, minRotation: 45, autoSkip: true } },
+        y: {
+          beginAtZero: true,
+          title: { display: true, text: 'Financial forecast (PHP)' },
+          ticks: { callback: (value) => compactCurrency(Number(value)) },
+        },
+      },
+    },
+  })
+}
+
 function renderExternalSignalsChart(root: HTMLElement, data: DashboardData) {
   const canvas = root.querySelector<HTMLCanvasElement>('#externalChart')
   if (!canvas) return
@@ -883,6 +989,7 @@ export function renderDecisionSupportCharts(root: HTMLElement) {
   const forecastPage = root.querySelector<HTMLElement>('#page-forecast')
   if (forecastPage?.classList.contains('active')) {
     renderForecastChart(root, data)
+    renderFinancialForecastChart(root, data)
     renderExternalSignalsChart(root, data)
     renderSeasonalityIndexChart(root, data)
   }

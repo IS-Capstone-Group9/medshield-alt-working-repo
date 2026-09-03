@@ -27,11 +27,18 @@ function monthPeriod(year: string, monthIndex: number): string {
   return `${year}-${String(monthIndex + 1).padStart(2, '0')}`
 }
 
-function currentMonthForData(data: DashboardData): string {
+export function resolveActualDataMonth(data: DashboardData, browserDate: Date = new Date()): string {
+  const systemMonth = `${browserDate.getFullYear()}-${String(browserDate.getMonth() + 1).padStart(2, '0')}`
   const configured = data.dataStatus?.current_month ?? data.dataStatus?.forecast_window?.start
-  if (typeof configured === 'string' && /^\d{4}-(0[1-9]|1[0-2])$/.test(configured)) return configured
-  const now = new Date()
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`
+  const configuredIsCurrentAndAvailable =
+    typeof configured === 'string' &&
+    /^\d{4}-(0[1-9]|1[0-2])$/.test(configured) &&
+    configured.slice(0, 4) === String(browserDate.getFullYear()) &&
+    configured <= systemMonth
+
+  // A historical snapshot can be stale. Only the live calendar year may be
+  // truncated; every earlier year is a completed January-to-December series.
+  return configuredIsCurrentAndAvailable ? configured : systemMonth
 }
 
 function validForwardMargin(revenue: number, income: number): number | null {
@@ -97,6 +104,52 @@ function fallbackRevenueBaseline(data: DashboardData): number {
   )
 }
 
+type HistoricalMonth = {
+  month: number
+  revenue: number
+  income: number
+}
+
+function historicalSeasonalEstimate(
+  rows: HistoricalMonth[],
+  month: number,
+  metric: 'revenue' | 'income',
+  seasonalIndices: Map<number, number>,
+): number {
+  const observedValues = rows.map((row) => row[metric])
+  const observedIndices = rows.map((row) => seasonalIndices.get(row.month) ?? 1)
+  const observedIndexAverage = average(observedIndices) ?? 1
+  const yearBaseline = (average(observedValues) ?? 0) / observedIndexAverage
+  return yearBaseline * (seasonalIndices.get(month) ?? 1)
+}
+
+function weightedHistoricalInterpolation(
+  rows: HistoricalMonth[],
+  month: number,
+  metric: 'revenue' | 'income',
+  seasonalIndices: Map<number, number>,
+): number {
+  const seasonal = historicalSeasonalEstimate(rows, month, metric, seasonalIndices)
+  const previous = [...rows].reverse().find((row) => row.month < month)
+  const next = rows.find((row) => row.month > month)
+
+  if (!previous && !next) return seasonal
+  if (!previous || !next) {
+    // A boundary gap has only one observed neighbor, so seasonality carries more weight.
+    const neighbor = previous ?? next!
+    return (neighbor[metric] * 0.4) + (seasonal * 0.6)
+  }
+
+  const previousDistance = month - previous.month
+  const nextDistance = next.month - month
+  const neighborInterpolation = (
+    (previous[metric] * nextDistance) + (next[metric] * previousDistance)
+  ) / (previousDistance + nextDistance)
+
+  // Neighbors preserve the year's local movement; seasonality avoids a flat synthetic run.
+  return (neighborInterpolation * 0.7) + (seasonal * 0.3)
+}
+
 function aggregateForecastRowsByPeriod(rows: ForecastPoint[]): ForecastPoint[] {
   const grouped = new Map<string, ForecastPoint[]>()
 
@@ -146,7 +199,7 @@ export function hasMonthlyRowsForYear(rows: MonthlyPoint[], year: string | null)
 export function buildEstimatedMonthlyRowsForYear(data: DashboardData, year: string): MonthlyPoint[] {
   if (!YEAR_PATTERN.test(year)) return []
 
-  const currentMonth = currentMonthForData(data)
+  const currentMonth = resolveActualDataMonth(data)
   const currentYear = currentMonth.slice(0, 4)
   const actualCutoff = year < currentYear ? `${year}-12` : year === currentYear ? currentMonth : null
   const actualByPeriod = new Map(
@@ -169,14 +222,30 @@ export function buildEstimatedMonthlyRowsForYear(data: DashboardData, year: stri
   const seasonalIndices = seasonalityIndexByMonth(data.seasonality)
   const baseline = fallbackRevenueBaseline(data)
   const margin = resolveWeightedForwardProfitMargin(data)
+  const historicalActuals: HistoricalMonth[] = [...actualByPeriod.values()]
+    .map((row) => ({
+      month: Number(row.period.slice(5, 7)),
+      revenue: row.revenue,
+      income: row.income,
+    }))
+    .sort((left, right) => left.month - right.month)
+  const useHistoricalInterpolation = year < currentYear && historicalActuals.length > 0
 
   return Array.from({ length: 12 }, (_, monthIndex) => {
     const period = monthPeriod(year, monthIndex)
     const actual = actualByPeriod.get(period)
     if (actual) return actual
 
-    const forecast = forecastByPeriod.get(period)
     const month = monthIndex + 1
+    if (useHistoricalInterpolation) {
+      return {
+        period,
+        revenue: Math.round(weightedHistoricalInterpolation(historicalActuals, month, 'revenue', seasonalIndices)),
+        income: Math.round(weightedHistoricalInterpolation(historicalActuals, month, 'income', seasonalIndices)),
+      }
+    }
+
+    const forecast = forecastByPeriod.get(period)
     const seasonalIndex = seasonalIndices.get(month) ?? 1
     const revenue = finite(forecast?.adjusted_forecast)
       ? forecast.adjusted_forecast
