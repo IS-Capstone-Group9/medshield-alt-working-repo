@@ -49,7 +49,7 @@ for f in files:
         for yr in years_dict:
             if yr != file_year and int(years_dict[yr]) > 10:
                 carryover_warnings.append(
-                    f"  ⚠  {f.name}: {years_dict[yr]} rows have year={yr} "
+                    f"  [WARN] {f.name}: {years_dict[yr]} rows have year={yr} "
                     f"(expected {file_year}) — possible carry-over section"
                 )
 

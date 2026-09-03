@@ -64,13 +64,13 @@ The pipeline normalizes inconsistent column names across all source files using 
 | Column | Type | Description | Valid Range |
 |---|---|---|---|
 | `quantity` | `float` | Units sold. Blank → `0.0`. | ≥ 0 (negative → `warning`) |
-| `unit_cost` | `float` | Contract price per unit (CP/UNIT). Blank → `0.0`. | ≥ 0 |
-| `total_cost` | `float` | Gross cost before discount (`unit_cost × quantity`). Blank → `0.0`. | ≥ 0 |
+| `unit_cost` | `float` | Selling price per unit (source CP; legacy field name retained for compatibility). Blank → `0.0`. | ≥ 0 |
+| `total_cost` | `float` | Gross sales before discount (`unit_cost × quantity`; source Total CP). Blank → `0.0`. | ≥ 0 |
 | `discount` | `float` | Applied rebate or discount amount. Can be negative (credit note). Blank → `0.0`. | Any |
-| `net_cost` | `float` | Cost basis after discount (`total_cost - discount`). Blank → `0.0`. | Expected ≥ 0; negative rows flagged as `warning`. |
-| `trade_price_unit` | `float` | Selling price per unit to the hospital or customer. Blank → `0.0`. | ≥ 0 |
-| `total_trade_price` | `float` | **Primary revenue metric.** Total revenue from transaction (`trade_price_unit × quantity`). Blank → `0.0`. Zero with nonzero quantity → `warning`. | ≥ 0 |
-| `net_income` | `float` | Gross profit (`total_trade_price - net_cost`). Can be negative (loss transaction). Blank → `0.0`. | Any |
+| `net_cost` | `float` | **Net sales revenue (Net CP)** after discount (`total_cost - discount`). Blank → `0.0`. | Expected ≥ 0; negative rows flagged as `warning`. |
+| `trade_price_unit` | `float` | Acquisition price per unit (source TP/UNIT). Blank → `0.0`. | ≥ 0 |
+| `total_trade_price` | `float` | **Total acquisition cost (Total TP).** Acquisition price per unit × quantity. Blank → `0.0`. Zero with nonzero quantity → `warning`. | ≥ 0 |
+| `net_income` | `float` | Transaction gross profit (`net_cost - total_trade_price`). Can be negative (loss transaction). Blank → `0.0`. | Any |
 | `margin_pct` | `float` | Gross margin ratio. Source `%` column or derived as `net_income / net_cost`. Normal range: `0.05` to `0.50`. Outside `[-0.5, 1.5]` → `warning`. | `[-0.5, 1.5]` expected |
 
 ### Quality / Lineage Fields

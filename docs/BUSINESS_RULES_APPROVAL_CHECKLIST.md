@@ -8,9 +8,10 @@ Use this checklist before running final models or writing final Chapter 4 and Ch
 
 | Rule | Decision needed | Recommended decision | Status | Approver | Date |
 |---|---|---|---|---|---|
-| Demand unit | What field represents demand? | Use delivered `quantity`. | Pending |  |  |
-| Revenue | What field represents sales revenue? | Use `total_trade_price`. | Pending |  |  |
-| Gross margin/profit | What does `net_income` mean? | Treat as workbook gross margin/profit, not company net income. | Pending |  |  |
+| Demand unit | What field represents demand? | Use delivered `quantity`. | Approved | Project owner | 2026-09-02 |
+| Revenue | What field represents sales revenue? | Use Net CP (`net_cost`) as net sales revenue. | Approved | Project owner | 2026-09-02 |
+| Acquisition cost | What field represents acquisition cost? | Use Total TP (`total_trade_price`) as total acquisition cost. | Approved | Project owner | 2026-09-02 |
+| Gross margin/profit | What does `net_income` mean? | Treat as transaction gross margin/profit (`net_cost - total_trade_price`), not company net income. | Approved | Project owner | 2026-09-02 |
 | Medicine/product scope | What counts as a medicine product? | Use `is_medicine = true` and `forecast_eligible = true` from product mapping. | Pending |  |  |
 | Contract-name rows | How are `#` rows handled? | Use documented backward allocation and mark rows as estimated. | Pending |  |  |
 | SKU aliases | How are duplicate product names mapped? | Map raw names to approved `canonical_sku`; do not merge different strength/form/pack. | Pending |  |  |

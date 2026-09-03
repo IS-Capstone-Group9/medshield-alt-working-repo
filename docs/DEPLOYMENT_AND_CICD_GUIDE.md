@@ -76,14 +76,14 @@ To enforce secure deployment on GitHub:
 1. Go to **Settings > Branches** in your GitHub repository.
 2. Click **Add branch protection rule** for `main`.
 3. Enable the following settings:
-   - ✅ **Require a pull request before merging**
-   - ✅ **Require status checks to pass before merging**:
+   - [PASS] **Require a pull request before merging**
+   - [PASS] **Require status checks to pass before merging**:
      - `Backend TypeScript Build & Typecheck`
      - `Frontend Next.js Build`
      - `Python Services & Model Master Execution Test`
      - `Docker Container & Compose Validation`
-   - ✅ **Require linear history**
-   - ✅ **Do not allow bypassing the above settings**
+   - [PASS] **Require linear history**
+   - [PASS] **Do not allow bypassing the above settings**
 
 ---
 

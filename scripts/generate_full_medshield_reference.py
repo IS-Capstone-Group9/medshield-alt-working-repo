@@ -388,9 +388,9 @@ medshield_markup = r"""
         <div class="hero-title">Centralized Supply Chain Intelligence</div>
         <div class="hero-copy">Monitor baseline performance, evaluate forward demand forecasts, and drive automated inventory replenishment across hospital networks.</div>
         <div class="hero-summary">
-          <span class="hero-tag">📊 Descriptive Analytics</span>
-          <span class="hero-tag">🔮 Prophet 2026 Forecast</span>
-          <span class="hero-tag">🎯 Prescriptive EOQ & ROP</span>
+          <span class="hero-tag"> Descriptive Analytics</span>
+          <span class="hero-tag"> Prophet 2026 Forecast</span>
+          <span class="hero-tag"> Prescriptive EOQ & ROP</span>
         </div>
       </div>
 
@@ -686,14 +686,14 @@ medshield_markup = r"""
       <div class="seasonal-planner-banner">
         <div class="seasonal-planner-header">
           <div>
-            <div class="seasonal-planner-title">📅 Prescriptive Seasonal Climate-Disease Mapping</div>
+            <div class="seasonal-planner-title"> Prescriptive Seasonal Climate-Disease Mapping</div>
             <div class="seasonal-planner-sub">Click any season action card below to drill down into specific SKU-level procurement recommendations, current stock gaps, and Economic Order Quantities (EOQ).</div>
           </div>
         </div>
         <div class="seasonal-grid">
           <div class="season-card clickable-season" onclick="selectSeasonRestock('amihan', this)">
             <div class="season-card-tag" style="color:#38BDF8">JANUARY & FEBRUARY</div>
-            <div class="season-card-title">❄️ Amihan Cool Dry Season</div>
+            <div class="season-card-title"> Amihan Cool Dry Season</div>
             <ul class="season-card-list">
               <li><strong>Risks:</strong> Flu/ILI, SARI, Asthma</li>
               <li><strong>Restock:</strong> Bronchodilators, Antihistamines</li>
@@ -703,7 +703,7 @@ medshield_markup = r"""
           </div>
           <div class="season-card clickable-season" onclick="selectSeasonRestock('summer', this)">
             <div class="season-card-tag" style="color:#F59E0B">MARCH & APRIL</div>
-            <div class="season-card-title">☀️ Summer Peak Heat Surge</div>
+            <div class="season-card-title"> Summer Peak Heat Surge</div>
             <ul class="season-card-list">
               <li><strong>Risks:</strong> Gastroenteritis, Dehydration, Typhoid</li>
               <li><strong>Restock:</strong> ORS Packets, GI Meds</li>
@@ -713,7 +713,7 @@ medshield_markup = r"""
           </div>
           <div class="season-card clickable-season" onclick="selectSeasonRestock('pre_monsoon', this)">
             <div class="season-card-tag" style="color:#34D399">MAY & JUNE</div>
-            <div class="season-card-title">🌩️ Pre-Monsoon Thunderstorms</div>
+            <div class="season-card-title"> Pre-Monsoon Thunderstorms</div>
             <ul class="season-card-list">
               <li><strong>Risks:</strong> Early Dengue Onset, HFMD</li>
               <li><strong>Restock:</strong> Antipyretics, IV Fluids</li>
@@ -723,7 +723,7 @@ medshield_markup = r"""
           </div>
           <div class="season-card clickable-season active-season" onclick="selectSeasonRestock('monsoon', this)" style="border-left: 4px solid #EF4444;">
             <div class="season-card-tag" style="color:#EF4444">JULY & AUGUST — CRITICAL</div>
-            <div class="season-card-title">🌧️ Peak Monsoon (Habagat) & Floods</div>
+            <div class="season-card-title"> Peak Monsoon (Habagat) & Floods</div>
             <ul class="season-card-list">
               <li><strong>Risks:</strong> Dengue Outbreaks, Leptospirosis Wave 1</li>
               <li><strong>Restock:</strong> Flood Prophylactics, IV Fluids</li>
@@ -733,7 +733,7 @@ medshield_markup = r"""
           </div>
           <div class="season-card clickable-season" onclick="selectSeasonRestock('typhoon', this)">
             <div class="season-card-tag" style="color:#F87171">SEPTEMBER & OCTOBER</div>
-            <div class="season-card-title">🌀 Late Typhoon & Siltation</div>
+            <div class="season-card-title"> Late Typhoon & Siltation</div>
             <ul class="season-card-list">
               <li><strong>Risks:</strong> Leptospirosis Wave 2, Dengue</li>
               <li><strong>Restock:</strong> Anti-Leptospiral Meds, GI Meds</li>
@@ -743,7 +743,7 @@ medshield_markup = r"""
           </div>
           <div class="season-card clickable-season" onclick="selectSeasonRestock('holiday', this)">
             <div class="season-card-tag" style="color:#38BDF8">NOVEMBER & DECEMBER</div>
-            <div class="season-card-title">🍂 Cold Front & Holiday Surge</div>
+            <div class="season-card-title"> Cold Front & Holiday Surge</div>
             <ul class="season-card-list">
               <li><strong>Risks:</strong> Flu/ILI Surges, Pediatric Asthma</li>
               <li><strong>Restock:</strong> Bronchodilators, Mucolytics</li>

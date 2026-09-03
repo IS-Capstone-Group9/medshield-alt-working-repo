@@ -1,4 +1,4 @@
-# 🛡️ MedShield: Pharmaceutical Supply Chain Decision-Support System (DSS)
+# MedShield: Pharmaceutical Supply Chain Decision-Support System (DSS)
 ## Capstone Technical & Operational Documentation
 
 ---

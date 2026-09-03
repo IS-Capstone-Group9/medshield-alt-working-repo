@@ -88,7 +88,7 @@ Below is a layout wireframe to serve as the structural prototype for the dashboa
 ```text
 +---------------------------------------------------------------------------------------------------+
 |  [Logo] MedShield DSS                                   [Date Range: Custom ▼] [Profile: VP]      |
-|  Status: 🟢 Data Health 100% | Model: v2.4 (Trained to Dec 2025)                                 |
+|  Status: Healthy Data Health 100% | Model: v2.4 (Trained to Dec 2025)                                 |
 +---------------------------------------------------------------------------------------------------+
 |                                                                                                   |
 |  TOP-LEVEL KPIs                                                                                   |

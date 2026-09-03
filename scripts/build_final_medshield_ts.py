@@ -32,14 +32,14 @@ interactive_banner_html = r'''
       \u003cdiv class=\"seasonal-planner-banner\"\u003e
         \u003cdiv class=\"seasonal-planner-header\"\u003e
           \u003cdiv\u003e
-            \u003cdiv class=\"seasonal-planner-title\"\u003e📅 Prescriptive Seasonal Climate-Disease Mapping\u003c/div\u003e
+            \u003cdiv class=\"seasonal-planner-title\"\u003e Prescriptive Seasonal Climate-Disease Mapping\u003c/div\u003e
             \u003cdiv class=\"seasonal-planner-sub\"\u003eClick any season action card below to drill down into specific SKU-level procurement recommendations, current stock gaps, and Economic Order Quantities (EOQ).\u003c/div\u003e
           \u003c/div\u003e
         \u003c/div\u003e
         \u003cdiv class=\"seasonal-grid\"\u003e
           \u003cdiv class=\"season-card clickable-season\" onclick=\"selectSeasonRestock(\u0027amihan\u0027, this)\"\u003e
             \u003cdiv class=\"season-card-tag\" style=\"color:#38BDF8\"\u003eJANUARY \u0026 FEBRUARY\u003c/div\u003e
-            \u003cdiv class=\"season-card-title\"\u003e❄️ Amihan Cool Dry Season\u003c/div\u003e
+            \u003cdiv class=\"season-card-title\"\u003e Amihan Cool Dry Season\u003c/div\u003e
             \u003cul class=\"season-card-list\"\u003e
               \u003cli\u003e\u003cstr\u006fng\u003eRisks:\u003c/str\u006fng\u003e Flu/ILI, SARI, Asthma\u003c/li\u003e
               \u003cli\u003e\u003cstr\u006fng\u003eRestock:\u003c/str\u006fng\u003e Bronchodilators, Antihistamines\u003c/li\u003e
@@ -49,7 +49,7 @@ interactive_banner_html = r'''
           \u003c/div\u003e
           \u003cdiv class=\"season-card clickable-season\" onclick=\"selectSeasonRestock(\u0027summer\u0027, this)\"\u003e
             \u003cdiv class=\"season-card-tag\" style=\"color:#F59E0B\"\u003eMARCH \u0026 APRIL\u003c/div\u003e
-            \u003cdiv class=\"season-card-title\"\u003e☀️ Summer Peak Heat Surge\u003c/div\u003e
+            \u003cdiv class=\"season-card-title\"\u003e Summer Peak Heat Surge\u003c/div\u003e
             \u003cul class=\"season-card-list\"\u003e
               \u003cli\u003e\u003cstr\u006fng\u003eRisks:\u003c/str\u006fng\u003e Gastroenteritis, Dehydration, Typhoid\u003c/li\u003e
               \u003cli\u003e\u003cstr\u006fng\u003eRestock:\u003c/str\u006fng\u003e ORS Packets, GI Meds\u003c/li\u003e
@@ -59,7 +59,7 @@ interactive_banner_html = r'''
           \u003c/div\u003e
           \u003cdiv class=\"season-card clickable-season\" onclick=\"selectSeasonRestock(\u0027pre_monsoon\u0027, this)\"\u003e
             \u003cdiv class=\"season-card-tag\" style=\"color:#34D399\"\u003eMAY \u0026 JUNE\u003c/div\u003e
-            \u003cdiv class=\"season-card-title\"\u003e🌩️ Pre-Monsoon Thunderstorms\u003c/div\u003e
+            \u003cdiv class=\"season-card-title\"\u003e Pre-Monsoon Thunderstorms\u003c/div\u003e
             \u003cul class=\"season-card-list\"\u003e
               \u003cli\u003e\u003cstr\u006fng\u003eRisks:\u003c/str\u006fng\u003e Early Dengue Onset, HFMD\u003c/li\u003e
               \u003cli\u003e\u003cstr\u006fng\u003eRestock:\u003c/str\u006fng\u003e Antipyretics, IV Fluids\u003c/li\u003e
@@ -69,7 +69,7 @@ interactive_banner_html = r'''
           \u003c/div\u003e
           \u003cdiv class=\"season-card clickable-season active-season\" onclick=\"selectSeasonRestock(\u0027monsoon\u0027, this)\" style=\"border-left: 4px solid #EF4444;\"\u003e
             \u003cdiv class=\"season-card-tag\" style=\"color:#EF4444\"\u003eJULY \u0026 AUGUST — CRITICAL\u003c/div\u003e
-            \u003cdiv class=\"season-card-title\"\u003e🌧️ Peak Monsoon (Habagat) \u0026 Floods\u003c/div\u003e
+            \u003cdiv class=\"season-card-title\"\u003e Peak Monsoon (Habagat) \u0026 Floods\u003c/div\u003e
             \u003cul class=\"season-card-list\"\u003e
               \u003cli\u003e\u003cstr\u006fng\u003eRisks:\u003c/str\u006fng\u003e Dengue Outbreaks, Leptospirosis Wave 1\u003c/li\u003e
               \u003cli\u003e\u003cstr\u006fng\u003eRestock:\u003c/str\u006fng\u003e Flood Prophylactics, IV Fluids\u003c/li\u003e
@@ -79,7 +79,7 @@ interactive_banner_html = r'''
           \u003c/div\u003e
           \u003cdiv class=\"season-card clickable-season\" onclick=\"selectSeasonRestock(\u0027typhoon\u0027, this)\"\u003e
             \u003cdiv class=\"season-card-tag\" style=\"color:#F87171\"\u003eSEPTEMBER \u0026 OCTOBER\u003c/div\u003e
-            \u003cdiv class=\"season-card-title\"\u003e🌀 Late Typhoon \u0026 Siltation\u003c/div\u003e
+            \u003cdiv class=\"season-card-title\"\u003e Late Typhoon \u0026 Siltation\u003c/div\u003e
             \u003cul class=\"season-card-list\"\u003e
               \u003cli\u003e\u003cstr\u006fng\u003eRisks:\u003c/str\u006fng\u003e Leptospirosis Wave 2, Dengue\u003c/li\u003e
               \u003cli\u003e\u003cstr\u006fng\u003eRestock:\u003c/str\u006fng\u003e Anti-Leptospiral Meds, GI Meds\u003c/li\u003e
@@ -89,7 +89,7 @@ interactive_banner_html = r'''
           \u003c/div\u003e
           \u003cdiv class=\"season-card clickable-season\" onclick=\"selectSeasonRestock(\u0027holiday\u0027, this)\"\u003e
             \u003cdiv class=\"season-card-tag\" style=\"color:#38BDF8\"\u003eNOVEMBER \u0026 DECEMBER\u003c/div\u003e
-            \u003cdiv class=\"season-card-title\"\u003e🍂 Cold Front \u0026 Holiday Surge\u003c/div\u003e
+            \u003cdiv class=\"season-card-title\"\u003e Cold Front \u0026 Holiday Surge\u003c/div\u003e
             \u003cul class=\"season-card-list\"\u003e
               \u003cli\u003e\u003cstr\u006fng\u003eRisks:\u003c/str\u006fng\u003e Flu/ILI Surges, Pediatric Asthma\u003c/li\u003e
               \u003cli\u003e\u003cstr\u006fng\u003eRestock:\u003c/str\u006fng\u003e Bronchodilators, Mucolytics\u003c/li\u003e

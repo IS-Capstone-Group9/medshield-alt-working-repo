@@ -48,9 +48,10 @@ The pilot stores exactly one validated row for each year from 2017 through 2025 
 database block: validation, row-count, year, transaction-total, or checksum failure rolls back
 the cache change. Direct access is revoked from `anon` and `authenticated` roles.
 
-The table is deliberately not a publication fact. Candidate revenue remains
-`transfer_value_candidate`; candidate gross profit remains `gross_margin_candidate`. Neither
-field replaces the current dashboard source until Finance/business-owner approval is recorded.
+The table is deliberately not a publication fact. The approved revenue measure is
+`net_sales_candidate`; `transfer_value_candidate` is total acquisition cost and
+`gross_margin_candidate` is transaction gross profit. Promotion to published dashboard facts
+still requires a controlled, reconciled cutover.
 
 The obsolete flat `analytics_*` tables are dropped by `004_dss_schema.sql` because the `vw_dashboard_*` and `vw_dss_*` views are now the API surface.
 
@@ -73,8 +74,9 @@ Migration `005` fixes legacy date/snapshot uniqueness, adds pipeline lineage, cr
 
 Migration `006` aligns the warehouse with approved business definitions:
 
-- Dashboard and model revenue aggregates use `total_trade_price_amount`.
-- `net_income_amount` is documented as workbook gross margin/profit, not company net profit.
+- Dashboard and model revenue aggregates use `net_cost_amount` (source Net CP).
+- `total_trade_price_amount` is total acquisition cost (source Total TP).
+- `net_income_amount` is transaction gross margin/profit, not company net profit.
 - Product aliases and contract-name `#` rows have a controlled mapping table.
 - Area mappings separate `territory`, `customer_type`, and `business_line`.
 - 2025 completeness status is stored so partial months are not treated as complete holdout data.

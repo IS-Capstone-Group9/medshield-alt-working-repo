@@ -1,3 +1,5 @@
+import { Check } from 'lucide-react'
+
 export function LoginFeatures() {
   const items = [
     {
@@ -18,7 +20,7 @@ export function LoginFeatures() {
     <ul style={{ listStyleType: 'none', padding: 0, margin: 0, display: 'grid', gap: '12px' }}>
       {items.map((item, idx) => (
         <li key={idx} style={{ display: 'flex', gap: '8px', alignItems: 'flex-start', fontSize: '13px', color: '#E2E8F0', lineHeight: 1.4 }}>
-          <span style={{ color: '#38BDF8', fontWeight: 'bold' }}>✓</span>
+          <Check aria-hidden="true" size={15} strokeWidth={2.5} style={{ color: '#38BDF8', flexShrink: 0, marginTop: '2px' }} />
           <span>
             <strong>{item.title}:</strong> {item.desc}
           </span>

@@ -166,7 +166,7 @@ def abc_rank(rows: list[dict], group_field: str, output_field: str) -> list[dict
             }
         item = totals[key]
         item["quantity"] += safe_float(row.get("quantity"))
-        item["revenue"] += safe_float(row.get("total_trade_price"))
+        item["revenue"] += safe_float(row.get("net_cost"))
         item["gross_margin"] += safe_float(row.get("net_income"))
         item["row_count"] += 1
         item["active_months"].add(row["period"])
@@ -235,11 +235,11 @@ def yoy_growth(monthly_rows: list[dict], keys: tuple[str, ...] = ()) -> list[dic
             "period": row["period"],
             "prior_period": prior_period,
             "quantity": row["quantity"],
-            "revenue": row["total_trade_price"],
+            "revenue": row["net_cost"],
             "prior_quantity": prior["quantity"] if prior else "",
-            "prior_revenue": prior["total_trade_price"] if prior else "",
+            "prior_revenue": prior["net_cost"] if prior else "",
             "quantity_yoy_growth": round_num((row["quantity"] - prior["quantity"]) / prior["quantity"], 6) if prior and prior["quantity"] else "",
-            "revenue_yoy_growth": round_num((row["total_trade_price"] - prior["total_trade_price"]) / prior["total_trade_price"], 6) if prior and prior["total_trade_price"] else "",
+            "revenue_yoy_growth": round_num((row["net_cost"] - prior["net_cost"]) / prior["net_cost"], 6) if prior and prior["net_cost"] else "",
             "is_2025_partial": str(row["period"]).startswith("2025"),
         })
         output.append(result)
@@ -317,7 +317,7 @@ def forecast_baseline(monthly_rows: list[dict]) -> tuple[list[dict], list[dict],
 
 
 def data_contract(sales_rows: list[dict], weather: dict | None) -> dict:
-    required = ["date_delivered", "area", "product", "quantity", "total_trade_price"]
+    required = ["date_delivered", "area", "product", "quantity", "net_cost"]
     missing = {field: sum(1 for row in sales_rows if str(row.get(field, "")).strip() == "") for field in required}
     valid_dates = sum(1 for row in sales_rows if parse_date(row.get("date_delivered", "")))
     weather_meta = (weather or {}).get("metadata", {})

@@ -79,7 +79,7 @@ Acceptance criteria:
 - Missing months and incomplete periods are labeled.
 - Product-level analysis uses canonical SKU or estimated allocation flags.
 - The descriptive job is reproducible through `python services\analytics_service\jobs\run_descriptive.py`.
-- Revenue uses `total_trade_price`, while `net_income` is labeled as workbook gross margin/profit.
+- Revenue uses Net CP (`net_cost`), Total TP (`total_trade_price`) is acquisition cost, and `net_income` is labeled as transaction gross margin/profit.
 
 ### FR5 - Baseline Demand Forecasting
 

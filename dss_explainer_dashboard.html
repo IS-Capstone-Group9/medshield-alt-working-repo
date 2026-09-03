@@ -1161,12 +1161,12 @@
         </div>
 
         <nav>
-            <button class="nav-btn active" onclick="switchTab('mod1-home')">🏠 Module 1: Home & Nav</button>
-            <button class="nav-btn" onclick="switchTab('mod2-sales-diag')">🔍 Module 2: Sales Diagnostic</button>
-            <button class="nav-btn" onclick="switchTab('mod3-product-area')">🎯 Module 3: Prioritization</button>
-            <button class="nav-btn" onclick="switchTab('mod4-forecast')">📈 Module 4: Forecast Modeling</button>
-            <button class="nav-btn" onclick="switchTab('mod5-prescriptive')">⚙️ Module 5: Planning & Uploads</button>
-            <button class="nav-btn" onclick="switchTab('mod6-rolling-forecast')">🔮 Module 6: Rolling Forecast</button>
+            <button class="nav-btn active" onclick="switchTab('mod1-home')">Module 1: Home & Nav</button>
+            <button class="nav-btn" onclick="switchTab('mod2-sales-diag')">Module 2: Sales Diagnostic</button>
+            <button class="nav-btn" onclick="switchTab('mod3-product-area')">Module 3: Prioritization</button>
+            <button class="nav-btn" onclick="switchTab('mod4-forecast')">Module 4: Forecast Modeling</button>
+            <button class="nav-btn" onclick="switchTab('mod5-prescriptive')">Module 5: Planning & Uploads</button>
+            <button class="nav-btn" onclick="switchTab('mod6-rolling-forecast')">Module 6: Rolling Forecast</button>
         </nav>
 
         <div class="header-meta">
@@ -1190,7 +1190,6 @@
         <div class="card" style="border: 1px solid rgba(59, 130, 246, 0.4); background: linear-gradient(135deg, rgba(17, 24, 39, 0.95), rgba(30, 58, 138, 0.3)); box-shadow: var(--shadow-card);">
             <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="toggleAssignmentDetails()">
                 <div style="display:flex; align-items:center; gap:0.75rem;">
-                    <span style="font-size:1.4rem;">📋</span>
                     <div>
                         <strong style="color:var(--text-main); font-size:1.05rem;">Capstone 2 Meeting Preparation & Objective-to-Solution Mapping</strong>
                         <div style="font-size:0.8rem; color:var(--text-muted)">Group 9 — MedShield Pharmaceutical Corporation Decision Support System</div>
@@ -1264,7 +1263,7 @@
     <div class="alert-banner-container">
         <div class="alert-banner" id="global-alert-banner">
             <div class="alert-content">
-                <span class="alert-icon">⚠️</span>
+                <span class="alert-icon">[WARN]</span>
                 <div>
                     <span class="alert-title">Active Environmental Trigger: Q3 Monsoon Seasonality + Typhoons</span>
                     <span class="alert-desc"> — High Dengue/Leptospirosis risk flags in Quezon & Batangas. Prophet forecasts auto-adjusted.</span>
@@ -1305,7 +1304,6 @@
                 <div class="card">
                     <div class="card-header">
                         <span class="card-title">Inventory Risk Index</span>
-                        <span class="card-icon">🛡️</span>
                     </div>
                     <div class="kpi-value">Low (0.16)</div>
                     <div class="kpi-sub">ROP Buffer Coverage: 98.8% SKUs</div>
@@ -1314,7 +1312,6 @@
                 <div class="card">
                     <div class="card-header">
                         <span class="card-title">Data Ingestion Gate</span>
-                        <span class="card-icon">⚡</span>
                     </div>
                     <div class="kpi-value">288,450 / 288,450</div>
                     <div class="kpi-sub">Accepted Clean Rows (2017–2026)</div>
@@ -1349,11 +1346,11 @@
                     </div>
                     <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.75rem;">Jump directly to any of the 6 decision support modules:</p>
                     <div style="display:flex; flex-direction:column; gap:0.6rem;">
-                        <button class="btn-sm btn-primary" style="justify-content:flex-start;" onclick="switchTab('mod2-sales-diag')">🔍 Module 2: Sales Diagnostic (STL & YoY Trends)</button>
-                        <button class="btn-sm btn-outline" style="justify-content:flex-start;" onclick="switchTab('mod3-product-area')">🎯 Module 3: Product & Area Prioritization (80/20 & XGBoost)</button>
-                        <button class="btn-sm btn-outline" style="justify-content:flex-start;" onclick="switchTab('mod4-forecast')">📈 Module 4: Forecast Modeling (Prophet & Urgency Scores)</button>
-                        <button class="btn-sm btn-outline" style="justify-content:flex-start;" onclick="switchTab('mod5-prescriptive')">⚙️ Module 5: Prescriptive Planning & Data Uploads (EOQ, ROP & LP)</button>
-                        <button class="btn-sm btn-outline" style="justify-content:flex-start;" onclick="switchTab('mod6-rolling-forecast')">🔮 Module 6: Rolling 12-Month Forecast Dashboard</button>
+                        <button class="btn-sm btn-primary" style="justify-content:flex-start;" onclick="switchTab('mod2-sales-diag')">Module 2: Sales Diagnostic (STL & YoY Trends)</button>
+                        <button class="btn-sm btn-outline" style="justify-content:flex-start;" onclick="switchTab('mod3-product-area')">Module 3: Product & Area Prioritization (80/20 & XGBoost)</button>
+                        <button class="btn-sm btn-outline" style="justify-content:flex-start;" onclick="switchTab('mod4-forecast')">Module 4: Forecast Modeling (Prophet & Urgency Scores)</button>
+                        <button class="btn-sm btn-outline" style="justify-content:flex-start;" onclick="switchTab('mod5-prescriptive')">Module 5: Prescriptive Planning & Data Uploads (EOQ, ROP & LP)</button>
+                        <button class="btn-sm btn-outline" style="justify-content:flex-start;" onclick="switchTab('mod6-rolling-forecast')">Module 6: Rolling 12-Month Forecast Dashboard</button>
                     </div>
                 </div>
             </div>
@@ -1484,7 +1481,6 @@
                     <div class="card">
                         <div class="card-header">
                             <span class="card-title">STL Seasonality Index Heatmap</span>
-                            <span class="card-icon">🗓️</span>
                         </div>
                         <p style="font-size:0.775rem; color:var(--text-muted);">Historical monthly multipliers (1.00 = baseline average demand via STL decomposition):</p>
                         
@@ -1591,7 +1587,7 @@
                 <div class="card">
                     <div class="card-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
                         <div style="flex: 1;">
-                            <span class="card-title" style="color:var(--accent-rose); font-size:1rem;">🚨 Insight: Respiratory Demand Projected to Spike 30% in June Due to Early Monsoon</span>
+                            <span class="card-title" style="color:var(--accent-rose); font-size:1rem;">Alert: Respiratory Demand Projected to Spike 30% in June Due to Early Monsoon</span>
                             <div style="margin-top:0.35rem; font-size:0.8rem; color:var(--text-muted);">
                                 <span class="badge badge-b" id="forecast-model-badge">Model: Prophet + DII/RSI Regressors</span>
                                 <span style="margin-left:0.5rem;">Historical data indicates a 95% probability of stockout if no action is taken.</span>
@@ -1969,8 +1965,8 @@
                                 <input type="file" id="csv-file-input" accept=".csv" class="text-input" style="padding:0.4rem;" onchange="handleCSVUpload(event)">
                                 
                                 <div style="display:flex; gap:0.5rem;">
-                                    <button class="btn-sm btn-primary" style="flex:1" onclick="document.getElementById('csv-file-input').click()">📁 Select Sales CSV File</button>
-                                    <button class="btn-sm btn-outline" style="flex:1" onclick="simulateNewBatchUpload()">⚡ Inject Sample Batch (15,240 Rows)</button>
+                                    <button class="btn-sm btn-primary" style="flex:1" onclick="document.getElementById('csv-file-input').click()">Select Sales CSV File</button>
+                                    <button class="btn-sm btn-outline" style="flex:1" onclick="simulateNewBatchUpload()">Inject Sample Batch (15,240 Rows)</button>
                                 </div>
                             </div>
 
@@ -2008,7 +2004,7 @@
 
             <!-- Monthly Roll Notification Banner -->
             <div class="alert-banner" style="background: rgba(59, 130, 246, 0.15); border-color: rgba(59, 130, 246, 0.3); animation: none; margin-bottom: 0.5rem; display: flex;">
-                <span class="alert-icon">ℹ️</span>
+                <span class="alert-icon">Information:</span>
                 <div style="flex:1;">
                     <span class="alert-title" style="color:var(--primary);">Month Rolled</span>
                     <span class="alert-desc"> — Former current month added to historical; forecasts updated automatically based on new horizon.</span>
@@ -2035,7 +2031,6 @@
                 <div class="card">
                     <div class="card-header">
                         <span class="card-title">Current Month Forecast</span>
-                        <span class="card-icon">🎯</span>
                     </div>
                     <div class="kpi-value">₱ 52.8M</div>
                     <div class="kpi-sub">Confidence bounds: ± 2.1M</div>

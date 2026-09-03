@@ -37,7 +37,7 @@ def test(label, url, method='GET', body=None, headers=None, expect_status=200, a
             status = r.status
             ok = status == expect_status
             results.append({'label':label,'status':status,'ok':ok,'snippet':str(payload)[:100]})
-            icon = '✅' if ok else '⚠️'
+            icon = '[PASS]' if ok else '[WARN]'
             print(f"  {icon} [{status}] {label}")
             if not ok:
                 print(f"       Expected {expect_status}, got {status}")
@@ -46,12 +46,12 @@ def test(label, url, method='GET', body=None, headers=None, expect_status=200, a
         body_err = e.read().decode('utf-8','replace')[:80]
         ok = e.code == expect_status
         results.append({'label':label,'status':e.code,'ok':ok,'snippet':body_err})
-        icon = '✅' if ok else '❌'
+        icon = '[PASS]' if ok else '[FAIL]'
         print(f"  {icon} [{e.code}] {label} — {body_err}")
         return None, e.code
     except Exception as e:
         results.append({'label':label,'status':0,'ok':False,'snippet':str(e)[:80]})
-        print(f"  ❌ [ERR] {label} — {e}")
+        print(f"  [FAIL] [ERR] {label} — {e}")
         return None, 0
 
 print("=" * 65)
@@ -78,7 +78,7 @@ if auth_payload and isinstance(auth_payload, dict):
     if token:
         print(f"       Token obtained: {token[:20]}...")
     else:
-        print(f"       ⚠️  No token in response: {str(auth_payload)[:100]}")
+        print(f"       [WARN]  No token in response: {str(auth_payload)[:100]}")
 
 test('POST /api/auth/login (bad creds)',
     f'{BASE_GW}/api/auth/login', method='POST',
@@ -160,13 +160,13 @@ pct    = round(passed/total*100, 1) if total else 0
 
 print(f"QA SUMMARY: {passed}/{total} PASSED ({pct}%)")
 if failed:
-    print(f"\n❌ FAILED TESTS ({failed}):")
+    print(f"\n[FAIL] FAILED TESTS ({failed}):")
     for r in results:
         if not r['ok']:
             print(f"   [{r['status']}] {r['label']}")
             print(f"        {r['snippet'][:120]}")
 else:
-    print("✅ ALL TESTS PASSED")
+    print("[PASS] ALL TESTS PASSED")
 print("=" * 65)
 
 # Save report
@@ -178,4 +178,4 @@ report = {
 import pathlib
 pathlib.Path('outputs/system_qa_report.json').write_text(
     json.dumps(report, indent=2, ensure_ascii=False), encoding='utf-8')
-print(f"✅ Full report saved: outputs/system_qa_report.json")
+print(f"[PASS] Full report saved: outputs/system_qa_report.json")
