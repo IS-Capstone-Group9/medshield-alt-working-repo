@@ -4,6 +4,11 @@ This folder contains the working documentation for inspecting, standardizing, cl
 
 ## Recommended Reading Order
 
+**Current sales rebuild:** use the [sales restart README](../sales_restart/README.md)
+for the complete copy/paste notebook cells and current candidate policies.
+The documents below also cover earlier pipelines and experimental allocations;
+they do not override the restart's reported-value and approval rules.
+
 1. [MedShield CSV Data-Cleaning Plan](MEDSHIELD_CSV_DATA_CLEANING_PLAN.md) — dataset inventory, year coverage, standard columns, and cleaning requirements.
 2. [Databricks Setup Checklist](DATABRICKS_SETUP_CHECKLIST.md) — workspace setup and first-run checklist based on the current Free Edition workspace.
 3. [MedShield Databricks-to-System Connection Walkthrough](MEDSHIELD_DATABRICKS_SYSTEM_CONNECTION_WALKTHROUGH.md) — click-by-click connection verification, Supabase pilot-sync gates, troubleshooting, and suggested one-week plan.

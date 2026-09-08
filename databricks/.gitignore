@@ -10,3 +10,7 @@ build/
 # Raw and generated data belong in Unity Catalog volumes and Delta tables.
 data/
 artifacts/
+
+# Local Databricks source exports and extracted review copies may contain
+# business datasets or workspace configuration. Keep them out of Git.
+imports/
