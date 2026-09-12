@@ -1,4 +1,10 @@
+import { PLANNING_SCRIPT } from './prescriptive-planning-runtime'
+import { EXTERNAL_REGRESSION_SCRIPT } from './external-regression-runtime'
+import { FORECAST_VALIDATION_SCRIPT } from './forecast-validation-runtime'
+import { SALES_SECTORS_SCRIPT } from './sales-sectors-runtime'
 import { MEDSHIELD_SCRIPT } from '@/lib/medshieldReference'
+import { SALES_DIAGNOSTICS_SCRIPT } from './sales-diagnostics-runtime'
+import { SALES_HEATMAP_SCRIPT } from './sales-heatmap-runtime'
 
 export type ListenerRecord = {
   target: EventTarget
@@ -20,6 +26,22 @@ const DASHBOARD_GLOBAL_HANDLERS = [
   'applyDatasetPatch',
   'buildCharts',
   'downloadTableAsCSV',
+  'exportSalesGrowthCSV',
+  'setPlanningData', 'setPlanningResult', 'getPlanningRequest', 'invalidatePlan', 'changePlanningScope', 'requestPlanSolve', 'exportPlanningCSV',
+  'setExternalRegressionData',
+  'renderExternalRegression',
+  'changeRegressionScope',
+  'exportExternalRegressionCSV',
+  'setForecastValidationData',
+  'renderForecastValidation',
+  'changeForecastScope',
+  'exportForecastValidationCSV',
+  'setSalesSectorsData',
+  'renderSalesSectors',
+  'setSalesHeatmapData',
+  'changeHeatmapCategory',
+  'renderSalesHeatmap',
+  'exportSalesHeatmapCSV',
   'removeBadge',
   'exportRestockPlanToCsv',
   'selectSeasonRestock',
@@ -208,6 +230,12 @@ function resizeCharts() {
     console.error(error);
   }
 }
+${SALES_DIAGNOSTICS_SCRIPT}
+${SALES_HEATMAP_SCRIPT}
+${SALES_SECTORS_SCRIPT}
+${FORECAST_VALIDATION_SCRIPT}
+${EXTERNAL_REGRESSION_SCRIPT}
+${PLANNING_SCRIPT}
 ${patchedScript}
 \n${globalHandlerBridge}
 `

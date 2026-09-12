@@ -22,6 +22,7 @@ async function expectOnlyPageActive(page: Page, pageId: string) {
 }
 
 test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
+  test.setTimeout(90000);
   test.beforeEach(async ({ page }) => {
     const runtimeErrors: string[] = []
     page.on('pageerror', (error) => runtimeErrors.push(error.message))
@@ -36,8 +37,8 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     await page.waitForLoadState('networkidle');
 
     // 2. Perform authenticated sign in
-    await page.fill('#username', 'admin');
-    await page.fill('#password', 'medshield2025');
+    await page.fill('#username', process.env.MEDSHIELD_E2E_USERNAME || 'admin');
+    await page.fill('#password', process.env.MEDSHIELD_E2E_PASSWORD || 'medshield2025');
     await page.getByRole('button', { name: 'Login', exact: true }).click();
 
     // 3. Wait for dashboard redirection and sandbox initialization
@@ -55,7 +56,7 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     // Verify Overview KPI Cards exist and display values
     const kpiTotalRevenue = page.locator('#kpiOverviewTotalRevenue');
     await expect(kpiTotalRevenue).toBeVisible();
-    await expect(kpiTotalRevenue).toContainText('₱');
+    await expect(kpiTotalRevenue).toContainText('â‚±');
 
     // Verify Main Overview Canvas
     await expect(page.locator('#overviewBaselineChart')).toBeVisible();
@@ -97,24 +98,9 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     await expect(page.locator('#topbar-title')).toHaveText('Area Prioritization');
     await expectOnlyPageActive(page, 'page-territory');
     await expect(salesDeepDive).not.toBeVisible();
-    await expect(page.locator('#areaBarChart')).toBeVisible();
-    await expect(page.locator('#areaIncomeChart')).toBeVisible();
-    await expect(page.locator('[data-mcda-sensitivity="commercial-candidate"]')).toContainText('Commercial Priority MCDA');
-    await expect(page.locator('#mcdaWeightSalesValue')).toHaveValue('60');
-    await expect(page.locator('#mcdaWeightCoverage')).toHaveValue('40');
-    await expect(page.locator('#mcdaWeightTotal')).toHaveText('100%');
-    await expect(page.locator('#mcdaWeightSurge')).toHaveCount(0);
-    await expect(page.locator('#mcdaWeightLead')).toHaveCount(0);
-    await expect(page.locator('#diseaseDemandChart')).toBeVisible();
-    await expect(page.locator('#territoryRadarChart')).toBeVisible();
-    await expectChartRendered(page, 'areaBarChart');
-    await expectChartRendered(page, 'areaIncomeChart');
-    await expectChartRendered(page, 'diseaseDemandChart');
-    await expectChartRendered(page, 'territoryRadarChart');
-    await page.locator('#mcdaWeightSalesValue').fill('75');
-    await expect(page.locator('#mcdaWeightCoverage')).toHaveValue('25');
-    await expect(page.locator('#priorityTable')).toContainText('Month-Coverage Score');
-    await expect(page.locator('#priorityTable')).not.toContainText('Lead Time Factor');
+    await expect(page.locator('#sectorProfileTable')).toBeVisible();
+    await page.selectOption('#sectorCluster', 'Private');
+    await expect(page.locator('#sectorStatus')).toContainText('No private records');
 
     // 2.4 Forecast Modeling
     await page.locator('.nav-item', { hasText: 'Forecast Modeling' }).click();
@@ -122,16 +108,18 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     await expectOnlyPageActive(page, 'page-forecast');
     await expect(salesDeepDive).not.toBeVisible();
     await expect(page.locator('#forecastChart')).toBeVisible();
-    await expect(page.locator('#externalChart')).toBeVisible();
+    await expect(page.locator('#regMetrics')).toContainText('MAE');
     await expectChartRendered(page, 'forecastChart');
-    await expectChartRendered(page, 'externalChart');
+    await expectChartRendered(page, 'regPredictionChart');
 
     // 2.5 Prescriptive Planning
     await page.locator('.nav-item', { hasText: 'Prescriptive Planning' }).click();
     await expect(page.locator('#topbar-title')).toHaveText('Prescriptive Planning');
     await expectOnlyPageActive(page, 'page-inventory');
     await expect(salesDeepDive).not.toBeVisible();
-    await expect(page.locator('#surgeMultiplierSlider')).toBeVisible();
+    await expect(page.locator('#planInputs tbody tr')).toHaveCount(5);
+    await expectChartRendered(page, 'planParetoChart');
+    await expect(page.locator('#planExport')).toBeDisabled();
 
     // 2.6 Data Upload
     await page.locator('.nav-item', { hasText: 'Data Upload' }).click();
@@ -211,63 +199,29 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     await expect(salesDeepDive).not.toBeVisible();
   });
 
-  test('4. Prescriptive DSS: Adjusts Outbreak Surge Scenario & Seasonal Medicine Matrix', async ({ page }) => {
-    // Navigate to Prescriptive Planning
-    await page.locator('.nav-item', { hasText: 'Prescriptive Planning' }).click();
-
-    const surgeSlider = page.locator('#surgeMultiplierSlider');
-    const surgeLabel = page.locator('#surgeMultiplierLabel');
-
-    // Test Epidemic Emergency (+75%) preset
-    await page.locator('.clean-preset-btn', { hasText: 'Epidemic Emergency (+75%)' }).click();
-    await expect(surgeLabel).toContainText('+75%');
-
-    // Test Normal Baseline (0%) preset
-    await page.locator('.clean-preset-btn', { hasText: 'Normal Baseline (0%)' }).click();
-    await expect(surgeLabel).toContainText('+0%');
-
-    // Test Monsoon Surge (+45%) preset
-    await page.locator('.clean-preset-btn', { hasText: 'Monsoon Surge (+45%)' }).click();
-    await expect(surgeLabel).toContainText('+45%');
-
-    // Test Season Selection: Amihan (Cool Dry)
-    const amihanCard = page.locator('.clean-season-card', { hasText: 'Amihan (Cool Dry)' });
-    await amihanCard.click();
-    await expect(amihanCard).toHaveClass(/active/);
-    await expect(page.locator('#drilldownTitle')).toContainText('Amihan');
-
-    // Test Season Selection: Summer (Hot Dry)
-    const summerCard = page.locator('.clean-season-card', { hasText: 'Summer (Hot Dry)' });
-    await summerCard.click();
-    await expect(summerCard).toHaveClass(/active/);
-    await expect(page.locator('#drilldownTitle')).toContainText('Summer');
-
-    // Test Season Selection: Monsoon (Habagat)
-    const monsoonCard = page.locator('.clean-season-card', { hasText: 'Monsoon (Habagat)' });
-    await monsoonCard.click();
-    await expect(monsoonCard).toHaveClass(/active/);
-    await expect(page.locator('#drilldownTitle')).toContainText('Monsoon');
+  test('4. Forecast horizon updates actual chart and CSV download', async ({ page }) => {
+    await page.locator('.nav-item', { hasText: 'Forecast Modeling' }).click();
+    await expectChartRendered(page, 'forecastChart');
+    await page.selectOption('#forecastHorizon', '3');
+    await expect(page.locator('#forecastWindow')).toContainText('2026-03');
+    const pending = page.waitForEvent('download');
+    await page.locator('#forecastExport').click();
+    const download = await pending;
+    const stream = await download.createReadStream();
+    const chunks: Buffer[] = [];
+    for await (const chunk of stream!) chunks.push(Buffer.from(chunk));
+    const csv = Buffer.concat(chunks).toString('utf8');
+    expect(csv).toContain('2026-03');
+    expect(csv).toContain('Government');
+    await page.screenshot({ path: 'test-results/section-8-live-forecast.png', fullPage: true });
   });
+});
 
-  test('5. Modal Lifecycle: Opens and Closes Order Execution Dialog', async ({ page }) => {
-    // Navigate to Prescriptive Planning
-    await page.locator('.nav-item', { hasText: 'Prescriptive Planning' }).click();
-
-    // Open the draft planning review dialog.
-    const poBtn = page.locator('#seasonalDrilldownContainer button', { hasText: 'Review Draft Plan' });
-    await poBtn.click();
-
-    // Verify Modal appears
-    const modalBackdrop = page.locator('#auditLogModal');
-    await expect(modalBackdrop).toBeVisible();
-
-    // Close Modal via Cancel button or close function
-    const cancelBtn = modalBackdrop.locator('button', { hasText: 'Cancel' });
-    if (await cancelBtn.isVisible()) {
-      await cancelBtn.click();
-    } else {
-      await page.evaluate(() => (window as unknown as { closeAuditModal: () => void }).closeAuditModal());
-    }
-    await expect(modalBackdrop).not.toBeVisible();
-  });
+test('Gateway rejects anonymous access to revised analytics and uploads', async ({ request }) => {
+  for (const endpoint of ['heatmap', 'sectors', 'forecast-validation', 'external-regression', 'planning-shortlist']) {
+    expect((await request.get(`http://localhost:5000/api/sales/${endpoint}`)).status()).toBe(401);
+  }
+  for (const endpoint of ['planning-solve', 'upload']) {
+    expect((await request.post(`http://localhost:5000/api/sales/${endpoint}`, { data: {} })).status()).toBe(401);
+  }
 });

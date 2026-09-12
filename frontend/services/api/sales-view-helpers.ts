@@ -16,22 +16,27 @@ export function renderSalesComputation(root: HTMLElement, summary: SalesSummary,
 
   const money = (val: number | undefined) => formatSalesValue(val ?? 0, 'money')
   const number = (val: number | undefined) => formatSalesValue(val ?? 0, 'number')
-  const percent = (val: number | undefined) => formatSalesValue(val ?? 0, 'percent')
+  const percent = (val: number | null | undefined) => val == null ? 'Unavailable' : formatSalesValue(val, 'percent')
+  const revenue = summary.sums.net_cost
+  const profit = summary.sums.net_income
+  const margin = revenue !== undefined && profit !== undefined && Number.isFinite(revenue) && Number.isFinite(profit) && revenue !== 0
+    ? profit / revenue
+    : null
   
   const cards =
     mode === 'sum'
       ? [
-          ['Quantity', number(summary.sums.quantity)],
-          ['Net Sales (Net CP)', money(summary.sums.net_cost)],
-          ['Gross Profit', money(summary.sums.net_income)],
-          ['Acquisition Cost', money(summary.sums.total_trade_price)],
+          ['Units Sold (Source Units)', number(summary.sums.quantity)],
+          ['Net Sales Revenue (₱)', money(summary.sums.net_cost)],
+          ['Gross Profit (₱)', money(summary.sums.net_income)],
+          ['Acquisition Cost (₱)', money(summary.sums.total_trade_price)],
         ]
       : mode === 'average'
         ? [
-            ['Avg Quantity', number(summary.averages.quantity)],
-            ['Avg Selling Price', money(summary.averages.unit_cost)],
-            ['Avg Gross Profit', money(summary.averages.net_income)],
-            ['Avg Margin', percent(summary.averages.margin_pct)],
+            ['Avg Units Sold per Row (Source)', number(summary.averages.quantity)],
+            ['Avg Selling Price (₱)', money(summary.averages.unit_cost)],
+            ['Avg Gross Profit per Row (₱)', money(summary.averages.net_income)],
+            ['Gross Margin % (Weighted)', percent(margin)],
           ]
         : mode === 'count'
           ? [
@@ -41,9 +46,9 @@ export function renderSalesComputation(root: HTMLElement, summary: SalesSummary,
               ['DR Numbers', number(summary.counts.unique_dr_numbers)],
             ]
           : [
-              ['Net Sales (Net CP)', money(summary.sums.net_cost)],
-              ['Gross Profit', money(summary.sums.net_income)],
-              ['Average Margin', percent(summary.averages.margin_pct)],
+              ['Net Sales Revenue (₱)', money(summary.sums.net_cost)],
+              ['Gross Profit (₱)', money(summary.sums.net_income)],
+              ['Gross Margin % (Weighted)', percent(margin)],
               ['Top Area', summary.top.area || '-'],
             ]
 
@@ -55,6 +60,14 @@ export function renderSalesComputation(root: HTMLElement, summary: SalesSummary,
       </div>
     `)
     .join('')
+
+  const reconciliation = root.querySelector<HTMLElement>('#salesFinancialReconciliation')
+  if (reconciliation) {
+    const check = summary.financial_reconciliation
+    reconciliation.textContent = check
+      ? `Workbook gross profit minus (net sales − acquisition cost): ₱${money(check.delta)}. ${check.mismatched_rows} of ${check.checked_rows} accepted rows differ by more than ₱0.01. Source values are retained for review.`
+      : 'Financial reconciliation is unavailable from this data service.'
+  }
 }
 
 export function renderSalesDatasetStatus(root: HTMLElement, status: SalesDatasetStatus) {

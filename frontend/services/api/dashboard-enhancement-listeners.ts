@@ -22,8 +22,8 @@ const DASHBOARD_PAGE_META = {
   revenue: ['Sales Diagnostics', 'Revenue, growth, and margin trends'],
   products: ['Product Prioritization', 'ABC/Pareto product view'],
   territory: ['Area Prioritization', 'Territory performance and ranking'],
-  forecast: ['Forecast Modeling', 'Prophet forecast with external signals'],
-  inventory: ['Prescriptive Planning', 'Reorder, alerts, and urgency outputs'],
+  forecast: ['Forecast Modeling', 'Actual sales, baseline forecasts and historical validation'],
+  inventory: ['Prescriptive Planning', 'Priority products, constrained allocation and scenario review'],
   data: ['Data Upload', 'CSV and JSON sources for dashboard updates'],
   'sales-data': ['View Sales Data', 'Inspect, filter, validate, and reconcile the uploaded sales records'],
   'weather-validation': [
@@ -88,7 +88,7 @@ export function installDashboardEnhancements(
   root.dataset.enhancementsInstalled = 'true'
   ;(window as any).__medshieldAuditInstalled = true
 
-  installCommonInteractions(root)
+  installCommonInteractions(root, activeListeners)
   installMcdaSensitivity(root, activeListeners)
 
   const legacySeasonSelector = (window as any).selectSeasonRestock

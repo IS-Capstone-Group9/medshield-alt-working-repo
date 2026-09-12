@@ -29,8 +29,8 @@ Use these labels consistently:
 | ABC/Pareto product priority | Draft | Suitable for Chapter 4 evidence after group review. |
 | Sales-only forecast baseline | Draft | External regressors and final review are still pending. |
 | Weather API validation | Proxy | Weather API rows are not official PAGASA observations. |
-| DOH disease-adjusted model | Blocked | DOH historical dataset has not been uploaded yet. |
-| PAGASA reference validation | Blocked | PAGASA historical dataset has not been uploaded yet. |
+| DOH lagged regression | Draft | Onset workbook prepared by exact province/month; retrospective evaluation only, release dates unavailable. |
+| PAGASA regression | Blocked | Station files present; approved station-to-sales-territory mapping and sufficient aligned coverage required. |
 | EOQ/ROP/allocation | Scenario | Inventory, lead time, ordering cost, holding cost, budget, and capacity inputs are unavailable. |
 
 ## UI Simplification Rules

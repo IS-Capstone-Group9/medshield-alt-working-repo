@@ -15,6 +15,11 @@ if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
 from services.shared_snapshot import snapshot
+from services.analytics_service.sales_heatmap import load_heatmap
+from services.analytics_service.sales_sectors import load_sectors
+from services.analytics_service.forecast_validation import load_validation
+from services.analytics_service.external_regression import load_regression
+from services.analytics_service.prescriptive_planning import load_shortlist, solve_plan
 from services.data_pipeline import (
     AREA_COORDINATES,
     ingest_sales_bytes,
@@ -105,6 +110,70 @@ def model_evaluation():
 @app.get("/sales/status")
 def sales_status():
     return jsonify(sales_dataset_status())
+
+
+@app.get("/sales/heatmap")
+def sales_heatmap():
+    try:
+        return jsonify(load_heatmap())
+    except (OSError, ValueError) as error:
+        return jsonify({"error": str(error)}), 503
+
+
+@app.get("/sales/sectors")
+def sales_sectors():
+    try:
+        return jsonify(load_sectors())
+    except (OSError, ValueError) as error:
+        return jsonify({"error": str(error)}), 503
+
+
+@app.get("/sales/forecast-validation")
+def sales_forecast_validation():
+    try:
+        return jsonify(load_validation(request.args.get("sector", "Government"), request.args.get("product", ""), request.args.get("metric", "revenue")))
+    except ValueError as error:
+        return jsonify({"error": str(error)}), 422
+    except OSError as error:
+        return jsonify({"error": str(error)}), 503
+
+
+@app.get("/sales/external-regression")
+def sales_external_regression():
+    try:
+        options = {key: request.args[key] for key in ('sector', 'territory', 'product', 'metric', 'mode', 'provider', 'disease') if key in request.args}
+        for key in ('lag', 'rainfall_lag'):
+            if key in request.args:
+                options[key] = int(request.args[key])
+        return jsonify(load_regression(**options))
+    except ValueError as error:
+        return jsonify({"error": str(error)}), 422
+    except OSError as error:
+        return jsonify({"error": str(error)}), 503
+
+
+@app.get("/sales/planning-shortlist")
+def planning_shortlist():
+    try:
+        return jsonify(load_shortlist(request.args.get("sector", "Unknown"), request.args.get("territory", "Quezon")))
+    except ValueError as error:
+        return jsonify({"error": str(error)}), 422
+    except OSError as error:
+        return jsonify({"error": str(error)}), 503
+
+
+@app.post("/sales/planning-solve")
+def planning_solve():
+    try:
+        body = request.get_json(silent=True)
+        if not isinstance(body, dict) or not isinstance(body.get("scope"), dict):
+            raise ValueError("Planning scope and inputs are required")
+        shortlist = load_shortlist(body['scope'].get('sector'), body['scope'].get('territory'))
+        return jsonify(solve_plan(body, shortlist))
+    except (ValueError, TypeError) as error:
+        return jsonify({"error": str(error)}), 422
+    except (OSError, ImportError) as error:
+        return jsonify({"error": str(error)}), 503
 
 
 @app.get("/sales/transactions")

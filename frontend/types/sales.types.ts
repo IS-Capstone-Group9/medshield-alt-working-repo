@@ -65,6 +65,12 @@ export type SalesPage = {
 }
 
 export type SalesSummary = {
+  gross_margin_rate?: number | null
+  financial_reconciliation?: {
+    delta: number
+    checked_rows: number
+    mismatched_rows: number
+  }
   sums: {
     quantity?: number
     total_cost?: number

@@ -154,7 +154,7 @@ def aggregate(rows: list[dict[str, Any]], keys: tuple[str, ...]) -> list[dict[st
         group["gross_margin_rate"] = (
             round_num(group["net_income"] / group["net_cost"], 6)
             if group["net_cost"]
-            else 0
+            else None
         )
         for field in ADDITIVE_FIELDS:
             group[field] = round_num(group[field], 4)
@@ -200,7 +200,7 @@ def abc_pareto(rows: list[dict[str, Any]], group_field: str, output_field: str) 
         item["gross_margin_rate"] = (
             round_num(item["gross_margin_amount"] / item["revenue"], 6)
             if item["revenue"]
-            else 0
+            else None
         )
         item["revenue_share"] = round_num(item["revenue"] / total_revenue, 6)
         item["cumulative_revenue_share"] = round_num(cumulative_share, 6)
@@ -259,8 +259,10 @@ def yoy_growth(monthly_rows: list[dict[str, Any]], keys: tuple[str, ...] = ()) -
             "gross_margin_amount": row["net_income"],
             "prior_quantity": prior["quantity"] if prior else "",
             "prior_revenue": prior["net_cost"] if prior else "",
+            "revenue_yoy_change_pesos": round_num(row["net_cost"] - prior["net_cost"], 4) if prior else "",
+            "quantity_yoy_change_units": round_num(row["quantity"] - prior["quantity"], 4) if prior else "",
             "quantity_yoy_growth": round_num((row["quantity"] - prior["quantity"]) / prior["quantity"], 6) if prior and prior["quantity"] else "",
-            "revenue_yoy_growth": round_num((row["net_cost"] - prior["net_cost"]) / prior["net_cost"], 6) if prior and prior["net_cost"] else "",
+            "revenue_yoy_growth": round_num((row["net_cost"] - prior["net_cost"]) / prior["net_cost"], 6) if prior and prior["net_cost"] > 0 else "",
             "is_2025_partial": str(row["period"]).startswith("2025"),
         })
         output.append(result)

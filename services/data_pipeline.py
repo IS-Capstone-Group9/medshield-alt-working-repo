@@ -25,6 +25,7 @@ from typing import Any, Iterable
 import requests
 from dotenv import load_dotenv
 from openpyxl import load_workbook
+from services.financial_metrics import gross_margin_rate
 
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
@@ -768,7 +769,7 @@ def build_dashboard_snapshot(rows: list[dict[str, Any]]) -> dict[str, Any]:
             "total_transactions": len(accepted),
             "top_product": ranked_products[0][0] if ranked_products else "",
             "top_area": max(by_area, key=lambda key: by_area[key]["revenue"]) if by_area else "",
-            "avg_margin": round(total_income / total_revenue, 6) if total_revenue else 0,
+            "avg_margin": gross_margin_rate(total_income, total_revenue),
         },
         "monthly": [
             {"period": period, "revenue": round(values["revenue"], 2), "income": round(values["income"], 2)}
@@ -1450,6 +1451,16 @@ def sales_summary(
         },
         "sums": sums,
         "averages": averages,
+        "gross_margin_rate": gross_margin_rate(sums["net_income"], sums["net_cost"]),
+        "financial_reconciliation": {
+            "delta": round(sums["net_income"] - (sums["net_cost"] - sums["total_trade_price"]), 2),
+            "checked_rows": len(accepted),
+            "mismatched_rows": sum(
+                abs(float(row.get("net_income") or 0) - (
+                    float(row.get("net_cost") or 0) - float(row.get("total_trade_price") or 0)
+                )) > 0.0100001 for row in accepted
+            ),
+        },
         "top": {
             "product": product_revenue.most_common(1)[0][0] if product_revenue else "",
             "area": area_revenue.most_common(1)[0][0] if area_revenue else "",

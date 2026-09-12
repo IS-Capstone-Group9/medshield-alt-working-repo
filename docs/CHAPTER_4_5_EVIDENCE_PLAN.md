@@ -4,6 +4,10 @@
 
 Use this as the checklist for writing Chapter 4 and Chapter 5. Chapter 4 should show what was built. Chapter 5 should explain what the results mean, what is limited, and what should be improved.
 
+## September 2026 revision evidence
+
+Use [Section 8 acceptance evidence](SECTION_8_ACCEPTANCE_EVIDENCE.md) for executed checks, reproducible source reconciliation, scoped numerical findings and open gates. The repository methodology guide now reflects the implemented benchmarks, lagged regression and allocation scenarios. Authenticated screenshots and live upload acceptance remain pending a provisioned sign-in; isolated browser results must not be captioned as deployed end-to-end validation. Preserve gross-profit discrepancies and unknown buyer ownership in the discussion.
+
 ## Chapter 4 Evidence Checklist
 
 | Evidence | File or source | Needed action | Status |

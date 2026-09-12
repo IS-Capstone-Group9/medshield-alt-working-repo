@@ -125,6 +125,7 @@ function assignSalesDiagnosticsContent(root: HTMLElement) {
   const sections = [
     findInsight('DSS Executive Takeaway'),
     root.querySelector('#growthChart')?.closest<HTMLElement>('.chart-grid-2') ?? null,
+    root.querySelector<HTMLElement>('[data-sales-growth-detail]'),
     root.querySelector('#revenueHeatmapGrid')?.closest<HTMLElement>('.chart-card') ?? null,
     findInsight('Seasonality Pattern Recognition'),
   ].filter((section): section is HTMLElement => section instanceof HTMLElement)

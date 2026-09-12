@@ -13,7 +13,8 @@ export function renderSalesPage(root: HTMLElement, result: SalesPage) {
     ['Date', 'date_delivered', 'text'],
     ['Area', 'area', 'text'],
     ['Product', 'product', 'text'],
-    ['Qty', 'quantity', 'number'],
+    ['Units Sold (Source)', 'quantity', 'number'],
+    ['Net Sales Revenue', 'net_cost', 'money'],
     ['Acquisition Cost', 'total_trade_price', 'money'],
     ['Gross Profit', 'net_income', 'money'],
   ]
@@ -22,7 +23,7 @@ export function renderSalesPage(root: HTMLElement, result: SalesPage) {
     ['DR Number', 'dr_number', 'text'],
     ['Date Delivered', 'date_delivered', 'text'],
     ['Product', 'product', 'text'],
-    ['Qty', 'quantity', 'number'],
+    ['Units Sold (Source)', 'quantity', 'number'],
     ['Selling Price (CP)', 'unit_cost', 'money'],
     ['Gross Sales (Total CP)', 'total_cost', 'money'],
     ['Discount', 'discount', 'money'],
@@ -30,7 +31,7 @@ export function renderSalesPage(root: HTMLElement, result: SalesPage) {
     ['Acquisition/Unit (TP)', 'trade_price_unit', 'money'],
     ['Acquisition Cost (Total TP)', 'total_trade_price', 'money'],
     ['Gross Profit', 'net_income', 'money'],
-    ['Gross Margin %', 'margin_pct', 'percent'],
+    ['Workbook Margin % (Source)', 'margin_pct', 'percent'],
   ]
   const detailLevel = root.querySelector<HTMLSelectElement>('#salesDataDetail')?.value === 'full' ? 'full' : 'compact'
   const columns = detailLevel === 'full' ? fullColumns : compactColumns

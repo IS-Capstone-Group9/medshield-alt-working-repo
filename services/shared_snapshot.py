@@ -8,6 +8,7 @@ from typing import Any
 
 import requests
 from dotenv import load_dotenv
+from services.financial_metrics import gross_margin_rate
 
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
@@ -90,7 +91,7 @@ def normalize_snapshot(data: dict[str, Any]) -> dict[str, Any]:
         "total_revenue": to_float(totals.get("total_revenue")),
         "total_income": to_float(totals.get("total_income")),
         "total_transactions": to_int(totals.get("total_transactions")),
-        "avg_margin": to_float(totals.get("avg_margin")),
+        "avg_margin": gross_margin_rate(to_float(totals.get("total_income")), to_float(totals.get("total_revenue"))),
     }
 
     def normalize_rows(rows: list[dict[str, Any]], fields: list[str], int_fields: set[str] | None = None) -> list[dict[str, Any]]:
@@ -204,4 +205,4 @@ def snapshot() -> dict[str, Any]:
             return warehouse_snapshot()
         except Exception:
             pass
-    return local_snapshot()
+    return normalize_snapshot(local_snapshot())

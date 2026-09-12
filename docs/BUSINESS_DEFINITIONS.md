@@ -14,14 +14,14 @@ The workbook supports sales revenue, product quantity, transaction cost fields, 
 
 | Metric or concept | Working definition | Source field or formula | Grain | Owner | Status |
 |---|---|---|---|---|---|
-| Demand units | Delivered quantity sold. | `quantity` / `quantity_sold` | Transaction, month, SKU, territory | Data Analyst | Approved for modeling |
+| Units sold (fulfilled demand) | Delivered quantity sold in source units; not total market demand. Mixed packs require unit normalization before quantity comparison. | `quantity` / `quantity_sold` | Transaction, month, SKU, territory | Data Analyst | Approved for modeling |
 | Selling price per unit | Workbook CP: the unit selling price. The legacy API field remains `unit_cost` for compatibility. | `unit_cost` / source `CP` | Transaction | Finance / Business Analyst | Approved 2026-09-02 |
 | Gross sales value | Quantity multiplied by CP before discount. The legacy API field remains `total_cost` for compatibility. | `total_cost` / source `Total CP` | Transaction, month, SKU, territory | Finance / Business Analyst | Approved 2026-09-02 |
 | Net sales revenue | Gross sales value after discount. | `net_cost` / source `Net CP` | Transaction, month, SKU, territory | Finance / Business Analyst | Approved 2026-09-02 |
 | Acquisition price per unit | Workbook TP/UNIT: MedShield's unit acquisition cost. | `trade_price_unit` / source `TP/UNIT` | Transaction | Finance / Business Analyst | Approved 2026-09-02 |
 | Total acquisition cost | Quantity multiplied by TP/UNIT. | `total_trade_price` / source `TOTAL TP` | Transaction, month, SKU, territory | Finance / Business Analyst | Approved 2026-09-02 |
 | Gross margin amount | Transaction net sales less total acquisition cost, using the workbook field when supplied. | `net_income`; reconcile against `net_cost - total_trade_price` | Transaction, month, SKU, territory | Finance / Business Analyst | Approved 2026-09-02 |
-| Margin percentage | Transaction gross margin divided by net sales revenue. | `margin_pct`; validate against `net_income / net_cost` | Transaction, SKU, territory | Data Analyst | Approved 2026-09-02 |
+| Margin percentage | At every reporting grain, sum gross profit divided by sum net sales revenue. Never average transaction rates. Zero revenue produces an unavailable rate. | `margin_pct`; validate against `net_income / net_cost` | Transaction, SKU, territory | Data Analyst | Approved 2026-09-02 |
 | Net income | Not available as company net income. Use `gross_margin_amount` wording instead. | Not applicable | Not applicable | Business Analyst | Approved terminology rule |
 | Canonical SKU | One sellable product identity after alias cleanup. | Product alias map from `product` raw value to `canonical_sku` | SKU | Data Analyst | Needs mapping |
 | Product alias | A raw product string that points to a canonical SKU. | `product_raw` -> `canonical_sku` | Product string | Data Analyst | Needs mapping |

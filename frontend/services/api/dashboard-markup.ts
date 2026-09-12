@@ -61,6 +61,8 @@ export const SALES_DATA_PAGE = `
         <div class="uploaded-data-field uploaded-data-search"><label for="salesDataSearch">Search</label><input id="salesDataSearch" type="search" placeholder="Area, Product, DR Number..." /></div>
       </div>
       <div class="sales-status-grid" id="salesComputationGrid"></div>
+      <p class="sales-note">Net sales revenue = sales after discounts. Gross profit = workbook margin amount before operating expenses. Gross margin % = total gross profit ÷ total net sales. Units sold are delivered quantities in source units; mixed packs are not equivalent units or total market demand.</p>
+      <p class="sales-note" id="salesFinancialReconciliation" aria-live="polite"></p>
       <div class="uploaded-data-table-wrap"><table class="uploaded-data-table" id="salesDataTable"><tbody><tr><td class="uploaded-data-empty">Loading Cleaned Transactions...</td></tr></tbody></table></div>
       <div class="uploaded-data-footer">
         <div class="uploaded-data-status" id="salesDataStatus">Loading...</div>

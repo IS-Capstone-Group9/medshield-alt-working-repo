@@ -4,7 +4,7 @@ export type Summary = {
   total_transactions: number
   top_product: string
   top_area: string
-  avg_margin: number
+  avg_margin: number | null
 }
 
 export type MonthlyPoint = { period: string; revenue: number; income: number }

@@ -68,17 +68,6 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
           console.warn('Dashboard is using the bundled fallback dataset:', error)
         })
 
-        // Add portal injection anchor
-        const inventoryPageEl = root.querySelector('#page-inventory')
-        if (inventoryPageEl) {
-          const container = document.createElement('div')
-          container.id = 'model-dashboard-portal-container'
-          container.style.marginTop = '32px'
-          container.style.marginBottom = '32px'
-          inventoryPageEl.appendChild(container)
-          setPortalContainer(container)
-        }
-
         // Bind logout click
         const logoutBtn = root.querySelector('#sidebarLogoutBtn')
         if (logoutBtn) {
@@ -101,7 +90,8 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
       
       const handlers = [
         'showPage', 'toggleTheme', 'openHelp', 'closeNavigation', 'toggleNavigation',
-        'setComparisonMode', 'setYear', 'setYoYYear', 'refreshComparison', 'applyDatasetPatch', 'buildCharts'
+        'setComparisonMode', 'setYear', 'setYoYYear', 'refreshComparison', 'applyDatasetPatch', 'buildCharts',
+        'setPlanningData', 'setPlanningResult', 'getPlanningRequest', 'invalidatePlan', 'changePlanningScope', 'requestPlanSolve', 'exportPlanningCSV', 'setExternalRegressionData', 'renderExternalRegression', 'changeRegressionScope', 'exportExternalRegressionCSV', 'setForecastValidationData', 'renderForecastValidation', 'changeForecastScope', 'exportForecastValidationCSV', 'setSalesSectorsData', 'renderSalesSectors', 'setSalesHeatmapData', 'changeHeatmapCategory', 'renderSalesHeatmap', 'exportSalesHeatmapCSV'
       ]
       for (const name of handlers) {
         delete (window as any)[name]

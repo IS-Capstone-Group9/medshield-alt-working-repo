@@ -346,8 +346,9 @@ async function fetchWithTimeout(url: string, options: RequestInit = {}, timeoutM
 async function analyticsJson(
   pathName: string,
   options?: RequestInit,
+  timeoutMs = 8000,
 ): Promise<{ status: number; body: unknown }> {
-  const response: globalThis.Response = await fetchWithTimeout(`${analyticsServiceUrl}${pathName}`, options)
+  const response: globalThis.Response = await fetchWithTimeout(`${analyticsServiceUrl}${pathName}`, options, timeoutMs)
   const text = await response.text()
   let body: unknown = {}
   if (text) {
@@ -601,6 +602,69 @@ app.get('/api/sales/status', requireAuth, async (_req: Request, res: Response) =
   } catch (error) {
     return analyticsFailure(res, error)
   }
+})
+
+app.get('/api/sales/heatmap', requireAuth, async (_req: Request, res: Response) => {
+  try {
+    const result = await analyticsJson('/sales/heatmap')
+    return res.status(result.status).json(result.body)
+  } catch (error) {
+    return analyticsFailure(res, error)
+  }
+})
+
+app.get('/api/sales/sectors', requireAuth, async (_req: Request, res: Response) => {
+  try {
+    const result = await analyticsJson('/sales/sectors')
+    return res.status(result.status).json(result.body)
+  } catch (error) {
+    return analyticsFailure(res, error)
+  }
+})
+
+app.get('/api/sales/forecast-validation', requireAuth, async (req: Request, res: Response) => {
+  const params = new URLSearchParams()
+  for (const name of ['sector', 'product', 'metric']) {
+    const value = req.query[name]
+    if (typeof value === 'string') params.set(name, value)
+  }
+  try {
+    const result = await analyticsJson(`/sales/forecast-validation?${params.toString()}`)
+    return res.status(result.status).json(result.body)
+  } catch (error) {
+    return analyticsFailure(res, error)
+  }
+})
+
+app.get('/api/sales/external-regression', requireAuth, async (req: Request, res: Response) => {
+  const params = new URLSearchParams()
+  for (const name of ['sector', 'territory', 'product', 'metric', 'mode', 'provider', 'disease', 'lag', 'rainfall_lag']) {
+    const value = req.query[name]
+    if (typeof value === 'string') params.set(name, value)
+  }
+  try {
+    const result = await analyticsJson(`/sales/external-regression?${params}`)
+    return res.status(result.status).json(result.body)
+  } catch (error) {
+    return analyticsFailure(res, error)
+  }
+})
+
+app.get('/api/sales/planning-shortlist', requireAuth, async (req: Request, res: Response) => {
+  const params = new URLSearchParams()
+  for (const name of ['sector', 'territory']) if (typeof req.query[name] === 'string') params.set(name, req.query[name] as string)
+  try {
+    const result = await analyticsJson(`/sales/planning-shortlist?${params}`)
+    return res.status(result.status).json(result.body)
+  } catch (error) { return analyticsFailure(res, error) }
+})
+
+app.post('/api/sales/planning-solve', requireAuth, async (req: Request, res: Response) => {
+  try {
+    // Two bounded five-second solves plus source validation and serialization.
+    const result = await analyticsJson('/sales/planning-solve', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(req.body) }, 20000)
+    return res.status(result.status).json(result.body)
+  } catch (error) { return analyticsFailure(res, error) }
 })
 
 app.get('/api/sales/transactions', requireAuth, async (req: Request, res: Response) => {

@@ -34,8 +34,8 @@ This layer must be finished first because predictive and prescriptive outputs de
 | Yearly summary | Group clean rows by calendar year; sum the same additive measures. | `descriptive_yearly_summary.csv` |
 | Area summary | Group by `area_type` and standardized area. | `descriptive_area_summary.csv` |
 | Area-type summary | Group by territory/customer/business-line/unmapped. | `descriptive_area_type_summary.csv` |
-| Product ABC/Pareto | Rank products by `total_trade_price`; A covers cumulative 0-80%, B covers >80-95%, C covers >95-100%. | `descriptive_product_abc_pareto.csv` |
-| Territory ABC/Pareto | Rank mapped territories by `total_trade_price` using the same ABC thresholds. | `descriptive_territory_abc_pareto.csv` |
+| Product ABC/Pareto | Rank products by net sales revenue (`net_cost`); A covers cumulative 0-80%, B covers >80-95%, C covers >95-100%. | `descriptive_product_abc_pareto.csv` |
+| Territory ABC/Pareto | Rank mapped territories by net sales revenue (`net_cost`) using the same ABC thresholds. | `descriptive_territory_abc_pareto.csv` |
 | Seasonality index | Monthly average demand divided by average demand across all months. | `descriptive_seasonality_overall.csv`, `descriptive_seasonality_territory.csv` |
 | YoY growth | Compare each month against the same month in the prior year. | `descriptive_yoy_overall.csv`, `descriptive_yoy_territory.csv` |
 | Estimation audit | Count rows from backward allocation and estimated dates. | `descriptive_contract_allocation_summary.csv`, `descriptive_run_summary.json` |
@@ -77,7 +77,7 @@ Descriptive analytics is ready for Chapter 4 when:
 
 Use this simple explanation:
 
-> The descriptive analytics layer summarized historical MedShield sales to show what happened before forecasting or scenario planning. The system grouped accepted cleaned sales records by month, year, product, and area. Revenue was computed from total trade price, while workbook net income was treated as gross margin/profit. Product and territory priority were described using ABC/Pareto classification, and seasonal patterns were described using a monthly demand index. Estimated contract-allocation rows were retained with flags so that totals remained traceable and limitations remained visible.
+> The descriptive analytics layer summarized historical MedShield sales to show what happened before forecasting or scenario planning. The system grouped accepted cleaned sales records by month, year, product, and area. Net sales revenue was computed from Net CP (`net_cost`), while workbook net income was treated as gross margin/profit. Product and territory priority were described using ABC/Pareto classification, and seasonal patterns were described using a monthly demand index. Estimated contract-allocation rows were retained with flags so that totals remained traceable and limitations remained visible.
 
 ## What Comes Next
 

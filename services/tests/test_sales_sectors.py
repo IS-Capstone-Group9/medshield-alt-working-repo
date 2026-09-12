@@ -1,0 +1,45 @@
+import unittest
+from services.analytics_service.sales_sectors import build_sectors
+
+
+class SectorTests(unittest.TestCase):
+    def row(self, area, revenue=100, quantity=10, **kw):
+        return dict(area=area, net_cost=revenue, quantity=quantity, product='A', date_delivered='2025-01-01', quality_status='valid', **kw)
+
+    def test_ownership_is_not_inferred_from_hospital_or_geography(self):
+        result = build_sectors([self.row('Government'), self.row('Hospital'), self.row('Quezon', area_type='territory')], [], {}, 'test')
+        self.assertEqual(sum(r['revenue'] for r in result['rows']), 300)
+        self.assertEqual(sum(r['quantity'] for r in result['rows']), 30)
+        self.assertEqual({r['sector'] for r in result['rows']}, {'Government', 'Unknown'})
+        self.assertEqual(next(r for r in result['rows'] if r['channel']=='Hospital')['sector'], 'Unknown')
+        self.assertIn('unreviewed', next(r for r in result['rows'] if r['sector']=='Government')['basis'])
+
+    def test_approved_private_channels_are_distinct_and_bad_rows_excluded(self):
+        mappings=[dict(raw_area=a, buyer_sector='Private', customer_channel=a, territory='Quezon', mapping_status='approved') for a in ('Hospital', 'Pharma')]
+        rows=[self.row('Hospital'), self.row('Pharma', 200, 40), self.row('Government', duplicate=True), self.row('Government', estimated=True), self.row('Government', float('nan'))]
+        result=build_sectors(rows, mappings, {}, 'test')
+        self.assertEqual(len(result['rows']), 2)
+        self.assertEqual({r['channel'] for r in result['rows']}, {'Hospital','Pharma'})
+        self.assertEqual({r['sector'] for r in result['rows']}, {'Private'})
+        self.assertEqual(result['source']['included_rows'], 2)
+        self.assertEqual(sum(result['source']['excluded'].values()), 3)
+
+    def test_conflicting_approved_mapping_fails(self):
+        item=dict(raw_area='Hospital', buyer_sector='Private', mapping_status='approved')
+        with self.assertRaises(ValueError):
+            build_sectors([], [item,item], {}, 'test')
+
+    def test_geographic_source_type_uses_approved_mapping_without_inventing_ownership(self):
+        mappings=[dict(raw_area='Quezon',territory='Quezon',area_type='territory',mapping_status='approved'),
+                  dict(raw_area='Lower Cavite',territory='Cavite',area_type='territory',mapping_status='needs_review')]
+        result=build_sectors([self.row('Quezon',area_type='geographic'),self.row('Lower Cavite',area_type='geographic')],[],{},'test',mappings)
+        self.assertEqual({r['territory'] for r in result['rows']},{'Quezon','Unassigned geography'})
+        self.assertEqual({r['sector'] for r in result['rows']},{'Unknown'})
+
+    def test_proposed_mapping_cannot_create_private_sales(self):
+        result=build_sectors([self.row('Hospital')], [dict(raw_area='Hospital',buyer_sector='Private',mapping_status='proposed')], {}, 'test')
+        self.assertEqual(result['rows'][0]['sector'],'Unknown')
+
+
+if __name__ == '__main__':
+    unittest.main()
