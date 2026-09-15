@@ -24,33 +24,61 @@ const DESCRIPTIVE_YEAR_ROWS = `function getYearRowsForMode() {
 
 const DESCRIPTIVE_MONTH_ROWS = `function getMonthlyRowsForMode() {
   const rows = getDescriptiveDisplayRows();
+  const priorRows = getDescriptivePriorDisplayRows();
   const scope = descriptivePeriodLabel();
+  const yoy = comparisonMode === 'yoy';
+  const currentRevenue = {
+    label: 'Net Sales Revenue · ' + scope,
+    data: rows.map(row => row.revenue),
+    borderColor: getColor(),
+    backgroundColor: getColor(0.12),
+    fill: true,
+    tension: 0.3,
+    borderWidth: 2.5,
+    pointRadius: descriptivePeriod === '30d' ? 1.5 : 3,
+    spanGaps: false
+  };
+  const currentProfit = {
+    label: 'Gross Profit · ' + scope,
+    data: rows.map(row => row.income == null ? null : row.income),
+    borderColor: getAmber(),
+    backgroundColor: getAmber(0.08),
+    fill: false,
+    tension: 0.3,
+    borderWidth: 2.2,
+    pointRadius: descriptivePeriod === '30d' ? 1.5 : 3,
+    spanGaps: false
+  };
+  const priorRevenue = {
+    label: 'Prior-year Net Sales Revenue',
+    data: priorRows.map(row => row.revenue),
+    borderColor: getColor(0.55),
+    backgroundColor: 'transparent',
+    borderDash: [7, 5],
+    fill: false,
+    tension: 0.3,
+    borderWidth: 2,
+    pointRadius: descriptivePeriod === '30d' ? 1 : 2,
+    spanGaps: false
+  };
+  const priorProfit = {
+    label: 'Prior-year Gross Profit',
+    data: priorRows.map(row => row.income == null ? null : row.income),
+    borderColor: getAmber(0.55),
+    backgroundColor: 'transparent',
+    borderDash: [7, 5],
+    fill: false,
+    tension: 0.3,
+    borderWidth: 2,
+    pointRadius: descriptivePeriod === '30d' ? 1 : 2,
+    spanGaps: false
+  };
   return {
     labels: rows.map(row => descriptivePointLabel(row.period)),
-    datasets: [
-      {
-        label: 'Net Sales Revenue · ' + scope,
-        data: rows.map(row => row.revenue),
-        borderColor: getColor(),
-        backgroundColor: getColor(0.12),
-        fill: true,
-        tension: 0.3,
-        borderWidth: 2.5,
-        pointRadius: descriptivePeriod === '30d' ? 1.5 : 3,
-        spanGaps: false
-      },
-      {
-        label: 'Gross Profit · ' + scope,
-        data: rows.map(row => row.income == null ? null : row.income),
-        borderColor: getAmber(),
-        backgroundColor: getAmber(0.08),
-        fill: false,
-        tension: 0.3,
-        borderWidth: 2.2,
-        pointRadius: descriptivePeriod === '30d' ? 1.5 : 3,
-        spanGaps: false
-      }
-    ].filter((_, index) => descriptivePeriod !== '30d' || index === 0)
+    datasets: (yoy
+      ? [currentRevenue, priorRevenue, currentProfit, priorProfit]
+      : [currentRevenue, currentProfit]
+    ).filter(dataset => descriptivePeriod !== '30d' || !dataset.label.includes('Gross Profit'))
   };
 }`
 
@@ -119,8 +147,135 @@ function descriptiveDailySalesRows() {
   return [...totals.values()].sort((left, right) => left.period.localeCompare(right.period));
 }
 
+function descriptivePreviousPeriod(period) {
+  const text = String(period || '');
+  return /^(\d{4})-(\d{2})(-\d{2})?$/.test(text)
+    ? String(Number(text.slice(0, 4)) - 1) + text.slice(4)
+    : '';
+}
+
+function descriptiveIsFuturePeriod(period) {
+  const text = String(period || '');
+  const today = descriptivePhtDate();
+  return text.length === 7 ? text > today.slice(0, 7) : text > today;
+}
+
+function descriptiveDayDistance(left, right) {
+  const leftDate = new Date(String(left) + 'T00:00:00Z');
+  const rightDate = new Date(String(right) + 'T00:00:00Z');
+  if (Number.isNaN(leftDate.getTime()) || Number.isNaN(rightDate.getTime())) return Infinity;
+  return Math.abs(leftDate.getTime() - rightDate.getTime()) / 86400000;
+}
+
+function descriptiveWeightedEstimate(period, sourceRows) {
+  const text = String(period || '');
+  if (!/^(\d{4})-(\d{2})(-\d{2})?$/.test(text)) return null;
+  if (descriptiveIsFuturePeriod(text)) return null;
+  const byPeriod = new Map(sourceRows.map(row => [String(row.period), row]));
+  let candidates = [1, 2, 3].map((yearsBack, index) => ({
+    row: byPeriod.get(String(Number(text.slice(0, 4)) - yearsBack) + text.slice(4)),
+    weight: [0.6, 0.3, 0.1][index]
+  })).filter(candidate => candidate.row && Number.isFinite(Number(candidate.row.revenue)));
+  if (!candidates.length && text.length === 10) {
+    candidates = [1, 2, 3].flatMap((yearsBack, index) => {
+      const target = String(Number(text.slice(0, 4)) - yearsBack) + text.slice(4);
+      const nearest = sourceRows
+        .map(row => ({ row, distance: descriptiveDayDistance(row.period, target) }))
+        .filter(candidate => candidate.distance <= 7 && Number.isFinite(Number(candidate.row.revenue)))
+        .sort((left, right) => left.distance - right.distance)[0];
+      return nearest ? [{ row: nearest.row, weight: [0.6, 0.3, 0.1][index] / (1 + nearest.distance) }] : [];
+    });
+  }
+  if (!candidates.length) return null;
+  const totalWeight = candidates.reduce((sum, candidate) => sum + candidate.weight, 0);
+  const incomeCandidates = candidates.filter(candidate => Number.isFinite(Number(candidate.row.income)));
+  const incomeWeight = incomeCandidates.reduce((sum, candidate) => sum + candidate.weight, 0);
+  return {
+    period: text,
+    revenue: candidates.reduce((sum, candidate) => sum + Number(candidate.row.revenue) * candidate.weight, 0) / totalWeight,
+    income: incomeWeight
+      ? incomeCandidates.reduce((sum, candidate) => sum + Number(candidate.row.income) * candidate.weight, 0) / incomeWeight
+      : null,
+    evidence: 'estimate',
+    estimate_method: 'recency_weighted_same_calendar_period',
+    source_periods: candidates.map(candidate => String(candidate.row.period)),
+    missing: false
+  };
+}
+
 function getDescriptiveSourceRows() {
   return descriptivePeriod === '30d' ? descriptiveDailySalesRows() : dashboardMonthlyRows();
+}
+
+function getDescriptiveDetailedRows() {
+  if (typeof salesSectorsData === 'undefined' || !salesSectorsData || !Array.isArray(salesSectorsData.rows)) return [];
+  const daily = descriptivePeriod === '30d';
+  const key = row => String(daily ? row.date : row.period || '');
+  const rawRows = salesSectorsData.rows.filter(row => key(row));
+  const rowsByPeriod = new Map();
+  rawRows.forEach(row => {
+    const period = key(row);
+    if (!rowsByPeriod.has(period)) rowsByPeriod.set(period, []);
+    rowsByPeriod.get(period).push(row);
+  });
+  const result = [];
+  descriptiveAxisPeriods().forEach(period => {
+    const observed = rowsByPeriod.get(period);
+    if (observed && observed.length) {
+      observed.forEach(row => result.push({ ...row, evidence: row.evidence || 'actual' }));
+      return;
+    }
+    if (descriptiveIsFuturePeriod(period)) return;
+    let candidateYears = [1, 2, 3].map((yearsBack, index) => ({
+      period: String(Number(period.slice(0, 4)) - yearsBack) + period.slice(4),
+      weight: [0.6, 0.3, 0.1][index]
+    })).filter(candidate => rowsByPeriod.has(candidate.period));
+    if (!candidateYears.length && daily) {
+      candidateYears = [1, 2, 3].flatMap((yearsBack, index) => {
+        const target = String(Number(period.slice(0, 4)) - yearsBack) + period.slice(4);
+        const nearest = [...rowsByPeriod.keys()]
+          .map(sourcePeriod => ({ period: sourcePeriod, distance: descriptiveDayDistance(sourcePeriod, target) }))
+          .filter(candidate => candidate.distance <= 7)
+          .sort((left, right) => left.distance - right.distance)[0];
+        return nearest ? [{ period: nearest.period, weight: [0.6, 0.3, 0.1][index] / (1 + nearest.distance) }] : [];
+      });
+    }
+    const totalWeight = candidateYears.reduce((sum, candidate) => sum + candidate.weight, 0);
+    candidateYears.forEach(candidate => {
+      rowsByPeriod.get(candidate.period).forEach(row => result.push({
+        ...row,
+        period: daily ? String(period).slice(0, 7) : period,
+        ...(daily ? { date: period } : {}),
+        revenue: (Number(row.revenue) || 0) * candidate.weight / totalWeight,
+        quantity: (Number(row.quantity) || 0) * candidate.weight / totalWeight,
+        row_count: (Number(row.row_count) || 0) * candidate.weight / totalWeight,
+        evidence: 'estimate',
+        estimate_method: 'recency_weighted_same_calendar_period',
+        source_period: candidate.period
+      }));
+    });
+  });
+  return result;
+}
+
+function getDescriptiveAreaRows() {
+  const totals = new Map();
+  getDescriptiveDetailedRows().forEach(row => {
+    const area = String(row.area || row.territory || 'Unknown');
+    const total = totals.get(area) || { area, revenue: 0, income: 0, estimated: false };
+    total.revenue += Number(row.revenue) || 0;
+    total.estimated = total.estimated || row.evidence === 'estimate';
+    totals.set(area, total);
+  });
+  const baseline = new Map((DATA.by_area || []).map(row => [String(row.area), row]));
+  totals.forEach(total => {
+    const reference = baseline.get(total.area);
+    const margin = reference && Number(reference.revenue) !== 0
+      ? Number(reference.income) / Number(reference.revenue)
+      : null;
+    total.income = margin === null || !Number.isFinite(margin) ? null : total.revenue * margin;
+  });
+  return [...totals.values()].sort((left, right) => right.revenue - left.revenue);
 }
 
 function getDescriptiveMonthlyRows() {
@@ -142,9 +297,21 @@ function descriptiveAxisPeriods() {
 }
 
 function getDescriptiveDisplayRows() {
-  const source = new Map(getDescriptiveSourceRows().map(row => [String(row.period), row]));
-  return descriptiveAxisPeriods().map(period => source.get(period) || {
-    period, revenue: null, income: null, evidence: 'unavailable', missing: true
+  const sourceRows = getDescriptiveSourceRows();
+  const source = new Map(sourceRows.map(row => [String(row.period), row]));
+  return descriptiveAxisPeriods().map(period => source.get(period)
+    || descriptiveWeightedEstimate(period, sourceRows)
+    || { period, revenue: null, income: null, evidence: 'unavailable', missing: true });
+}
+
+function getDescriptivePriorDisplayRows() {
+  const sourceRows = getDescriptiveSourceRows();
+  const source = new Map(sourceRows.map(row => [String(row.period), row]));
+  return descriptiveAxisPeriods().map(period => {
+    const priorPeriod = descriptivePreviousPeriod(period);
+    return source.get(priorPeriod)
+      || descriptiveWeightedEstimate(priorPeriod, sourceRows)
+      || { period: priorPeriod, revenue: null, income: null, evidence: 'unavailable', missing: true };
   });
 }
 
@@ -167,7 +334,6 @@ function descriptivePointLabel(period) {
 
 function setDescriptivePeriod(value) {
   descriptivePeriod = ['30d', '3', '6', '12', 'custom'].includes(String(value)) ? String(value) : '12';
-  comparisonMode = 'single';
   const periodSelect = document.getElementById('descriptivePeriodSelect');
   if (periodSelect && periodSelect.value !== descriptivePeriod) periodSelect.value = descriptivePeriod;
   const yearWrap = document.getElementById('singleYearWrap');
@@ -179,13 +345,26 @@ function setDescriptivePeriod(value) {
   if (typeof renderSalesSectors === 'function') renderSalesSectors();
   if (typeof renderSalesHeatmap === 'function') renderSalesHeatmap();
 }
+
+function setDescriptiveComparisonMode(value) {
+  comparisonMode = String(value) === 'yoy' ? 'yoy' : 'single';
+  const select = document.getElementById('descriptiveComparisonSelect');
+  if (select && select.value !== comparisonMode) select.value = comparisonMode;
+  refreshComparison();
+}
 document.addEventListener('change', function(event) {
   if (event.target && event.target.id === 'descriptivePeriodSelect') setDescriptivePeriod(event.target.value);
+  if (event.target && event.target.id === 'descriptiveComparisonSelect') setDescriptiveComparisonMode(event.target.value);
 });
 `
 
 export function patchDescriptivePeriodFilters(script: string): string {
-  let patched = script.replace(LEGACY_FILTER_STATE, DESCRIPTIVE_FILTER_STATE)
+  let patched = script
+    .replace(LEGACY_FILTER_STATE, DESCRIPTIVE_FILTER_STATE)
+    .replace(
+      "const FILTERBAR_PAGES = new Set(['overview', 'revenue']);",
+      "const FILTERBAR_PAGES = new Set(['overview', 'revenue', 'products', 'territory']);",
+    )
   if (patched === script) throw new Error('Unable to initialize descriptive period state.')
 
   patched = patched.replace(LEGACY_YEAR_ROWS, DESCRIPTIVE_YEAR_ROWS)
@@ -212,5 +391,16 @@ export function patchDescriptivePeriodFilters(script: string): string {
     )
     .replace("if (periodNote) periodNote.textContent = 'Selected years: ' + yearRowsForMode.map(row => row.year).join(', ') + (yearRowsForMode.some(row => row.missing) ? ' · Missing annual values excluded from totals' : '');", "if (periodNote) periodNote.textContent = 'Selected period: ' + descriptivePeriodLabel() + (descriptiveRows.length ? '' : ' · No observations available');")
   if (!patched.includes(DESCRIPTIVE_SELECTED_METRICS)) throw new Error('Unable to patch descriptive KPI metrics.')
+  patched = patched
+    .replace(
+      'const monthlyDataForMode = getMonthlyRowsForMode();',
+      'const monthlyDataForMode = getMonthlyRowsForMode();\n  const descriptiveAreaRows = getDescriptiveAreaRows();',
+    )
+    .replaceAll('DATA.by_area.map((row) => row.area)', 'descriptiveAreaRows.map((row) => row.area)')
+    .replaceAll('DATA.by_area.map((row) => row.revenue)', 'descriptiveAreaRows.map((row) => row.revenue)')
+    .replaceAll(
+      '(DATA.by_area.length ? DATA.by_area : MOCK_BY_AREA)',
+      '(descriptiveAreaRows.length ? descriptiveAreaRows : (DATA.by_area.length ? DATA.by_area : MOCK_BY_AREA))',
+    )
   return patched
 }

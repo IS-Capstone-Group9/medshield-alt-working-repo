@@ -30,6 +30,8 @@ const DASHBOARD_GLOBAL_HANDLERS = [
   'setYear',
   'setYoYYear',
   'setDescriptivePeriod',
+  'setDescriptiveComparisonMode',
+  'configureProductYearControls',
   'refreshComparison',
   'applyDatasetPatch',
   'buildCharts',

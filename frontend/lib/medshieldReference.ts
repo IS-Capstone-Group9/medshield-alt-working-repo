@@ -24,6 +24,13 @@ export const MEDSHIELD_MARKUP = LEGACY_MEDSHIELD_MARKUP
         <option value="12" selected>Last 12 Months</option>
         <option value="custom">Custom Year</option>
       </select>
+      <span id="descriptiveComparisonWrap">
+        <label class="sr-only" for="descriptiveComparisonSelect">Comparison view</label>
+        <select id="descriptiveComparisonSelect" class="topbar-select" aria-label="Comparison view">
+          <option value="single" selected>Period View</option>
+          <option value="yoy">Y/Y Compare</option>
+        </select>
+      </span>
     </div>
 
         <!-- Single Year Dropdown -->`,

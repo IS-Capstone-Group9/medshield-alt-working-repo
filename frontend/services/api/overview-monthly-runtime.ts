@@ -53,12 +53,15 @@ const RESPONSIVE_OVERVIEW_CHART = `  const overviewRows = getDescriptiveDisplayR
   if (overviewTitleNode) overviewTitleNode.textContent = descriptivePeriod === '30d'
     ? 'Daily Net Sales Revenue '
     : 'Monthly Net Sales Revenue & Gross Profit ';
+  const overviewEstimatedCount = overviewRows.filter(row => row.evidence === 'estimate').length;
   if (overviewSubtitle) overviewSubtitle.textContent = overviewRows.some(row => row.revenue != null)
-    ? descriptivePeriodLabel() + ' ending in the current Philippine calendar period; uploaded actuals take precedence over estimates'
+    ? descriptivePeriodLabel() + ' ending in the current Philippine calendar period; ' + overviewEstimatedCount + ' weighted estimate' + (overviewEstimatedCount === 1 ? '' : 's') + '; uploaded actuals take precedence'
     : descriptivePeriod === '30d'
       ? 'Daily data unavailable for the last 30 days; monthly totals are not divided into invented daily values'
       : 'No monthly observations are available for ' + descriptivePeriodLabel();
-  if (overviewBadge) overviewBadge.textContent = descriptivePeriod === '30d' ? 'Daily Detail' : 'Monthly Detail';
+  if (overviewBadge) overviewBadge.textContent = comparisonMode === 'yoy'
+    ? 'Y/Y Compare'
+    : descriptivePeriod === '30d' ? 'Daily Detail' : 'Monthly Detail';
 
   createChart('overviewBaselineChart', {
     type: 'line',

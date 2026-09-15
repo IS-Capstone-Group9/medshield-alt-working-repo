@@ -105,7 +105,18 @@ function renderSalesDiagnostics(opts) {
     { label: 'Net Sales Revenue · ' + descriptivePeriodLabel(), data: revenue, yAxisID: 'revenue', borderColor: getColor(), backgroundColor: getColor(.08), borderWidth: 2.5, pointRadius: descriptivePeriod === '30d' ? 1.5 : 3, tension: .25, fill: false, spanGaps: false },
     { label: 'Gross Profit · ' + descriptivePeriodLabel(), data: profit, yAxisID: 'grossProfit', borderColor: getAmber(), backgroundColor: getAmber(.08), borderWidth: 2.2, pointRadius: descriptivePeriod === '30d' ? 1.5 : 3, tension: .25, fill: false, spanGaps: false }
   ];
-  if (descriptivePeriod === '30d') detailDatasets.splice(1, 1);
+  if (comparisonMode === 'yoy') {
+    const priorRows = getDescriptivePriorDisplayRows();
+    detailDatasets.push(
+      { label: 'Prior-year Net Sales Revenue', data: priorRows.map(row => row.revenue), yAxisID: 'revenue', borderColor: getColor(.5), backgroundColor: 'transparent', borderDash: [7, 5], borderWidth: 2, pointRadius: descriptivePeriod === '30d' ? 1 : 2, tension: .25, fill: false, spanGaps: false },
+      { label: 'Prior-year Gross Profit', data: priorRows.map(row => row.income), yAxisID: 'grossProfit', borderColor: getAmber(.5), backgroundColor: 'transparent', borderDash: [7, 5], borderWidth: 2, pointRadius: descriptivePeriod === '30d' ? 1 : 2, tension: .25, fill: false, spanGaps: false }
+    );
+  }
+  if (descriptivePeriod === '30d') {
+    for (let index = detailDatasets.length - 1; index >= 0; index--) {
+      if (detailDatasets[index].label.includes('Gross Profit')) detailDatasets.splice(index, 1);
+    }
+  }
   const detailScales = {
     x: opts.scales.x,
     revenue: diagnosticAxis(revenue, 'Net sales revenue (₱)', getColor(), 'left', true),
@@ -130,7 +141,7 @@ function renderSalesDiagnostics(opts) {
 
   const rows = selectedRows.map(row => {
     const previousPeriod = priorPeriod(String(row.period));
-    const previous = sourceByPeriod.get(previousPeriod);
+    const previous = sourceByPeriod.get(previousPeriod) || descriptiveWeightedEstimate(previousPeriod, sourceRows);
     const hasCurrent = row.revenue != null && Number.isFinite(Number(row.revenue));
     const delta = hasCurrent && previous ? Number(row.revenue) - Number(previous.revenue) : null;
     return {

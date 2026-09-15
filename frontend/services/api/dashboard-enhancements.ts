@@ -72,6 +72,21 @@ function installDescriptivePeriodControls(root: HTMLElement) {
       ['custom', 'Custom Year'],
     ].forEach(([value, text]) => select.add(new Option(text, value, false, value === '12')))
     selector.append(label, select)
+
+    const compareWrap = document.createElement('span')
+    compareWrap.id = 'descriptiveComparisonWrap'
+    const compareLabel = document.createElement('label')
+    compareLabel.setAttribute('for', 'descriptiveComparisonSelect')
+    compareLabel.className = 'sr-only'
+    compareLabel.textContent = 'Comparison view'
+    const compareSelect = document.createElement('select')
+    compareSelect.id = 'descriptiveComparisonSelect'
+    compareSelect.className = 'topbar-select'
+    compareSelect.setAttribute('aria-label', 'Comparison view')
+    compareSelect.add(new Option('Period View', 'single', true, true))
+    compareSelect.add(new Option('Y/Y Compare', 'yoy'))
+    compareWrap.append(compareLabel, compareSelect)
+    selector.append(compareWrap)
   }
 
   const singleYearWrap = root.querySelector<HTMLElement>('#singleYearWrap')

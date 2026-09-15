@@ -32,16 +32,19 @@ function dashboardMonthlyRows() {
     const suffix = '-' + String(month).padStart(2, '0');
     const period = String(calendar.year) + suffix;
     if (byPeriod.has(period)) continue;
-    const sourceYear = priorYears.find(year => byPeriod.has(String(year) + suffix));
-    if (!sourceYear) continue;
-    const source = byPeriod.get(String(sourceYear) + suffix);
+    const candidates = priorYears
+      .filter(year => byPeriod.has(String(year) + suffix))
+      .slice(0, 3)
+      .map((year, index) => ({ row: byPeriod.get(String(year) + suffix), weight: [0.6, 0.3, 0.1][index] }));
+    if (!candidates.length) continue;
+    const totalWeight = candidates.reduce((sum, candidate) => sum + candidate.weight, 0);
     byPeriod.set(period, {
       period,
-      revenue: source.revenue,
-      income: source.income,
+      revenue: candidates.reduce((sum, candidate) => sum + Number(candidate.row.revenue) * candidate.weight, 0) / totalWeight,
+      income: candidates.reduce((sum, candidate) => sum + Number(candidate.row.income) * candidate.weight, 0) / totalWeight,
       evidence: 'estimate',
-      estimate_method: 'seasonal_naive_prior_year',
-      source_period: String(sourceYear) + suffix
+      estimate_method: 'recency_weighted_same_month',
+      source_periods: candidates.map(candidate => candidate.row.period)
     });
   }
 

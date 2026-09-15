@@ -606,7 +606,7 @@ app.get('/api/sales/status', requireAuth, async (_req: Request, res: Response) =
 
 app.get('/api/sales/heatmap', requireAuth, async (_req: Request, res: Response) => {
   try {
-    const result = await analyticsJson('/sales/heatmap')
+    const result = await analyticsJson('/sales/heatmap', undefined, 30000)
     return res.status(result.status).json(result.body)
   } catch (error) {
     return analyticsFailure(res, error)
@@ -615,7 +615,7 @@ app.get('/api/sales/heatmap', requireAuth, async (_req: Request, res: Response) 
 
 app.get('/api/sales/sectors', requireAuth, async (_req: Request, res: Response) => {
   try {
-    const result = await analyticsJson('/sales/sectors')
+    const result = await analyticsJson('/sales/sectors', undefined, 30000)
     return res.status(result.status).json(result.body)
   } catch (error) {
     return analyticsFailure(res, error)

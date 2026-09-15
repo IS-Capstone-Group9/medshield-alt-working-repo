@@ -376,6 +376,7 @@ export function installDashboardEnhancements(
   }
   for (const controlId of [
     'descriptivePeriodSelect',
+    'descriptiveComparisonSelect',
     'topbarYearSelect',
     'yoyBaseYearSelect',
     'yoyTargetYearSelect',

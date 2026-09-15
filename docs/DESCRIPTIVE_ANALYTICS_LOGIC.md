@@ -46,13 +46,15 @@ Overview, Sales Diagnostics, Product Prioritization, and Area Prioritization use
 
 | Filter | Display grain | Calendar rule |
 |---|---|---|
-| Last 30 Days | Daily | Current Philippine calendar day and the preceding 29 days. Requires transaction dates; monthly aggregates must never be divided into synthetic daily values. |
+| Last 30 Days | Daily | Current Philippine calendar day and the preceding 29 days. Uses dated transactions; missing days are estimated from the same calendar dates in up to three prior years. Monthly totals are never divided into synthetic daily values. |
 | Last 3 Months | Monthly | Current Philippine calendar month and the preceding two months. |
 | Last 6 Months | Monthly | Current Philippine calendar month and the preceding five months. |
 | Last 12 Months | Monthly | Current Philippine calendar month and the preceding eleven months. |
 | Custom Year | Monthly | January through December for one selected calendar year. The year selector is shown only in this mode. |
 
-Trailing periods are descriptive counterparts to the forward-looking 3-, 6-, and 12-month forecast horizons. Missing observations remain unavailable rather than becoming zero. Current-year monthly estimates may fill missing months only through the current month, and uploaded actuals take precedence when they arrive.
+Trailing periods are descriptive counterparts to the forward-looking 3-, 6-, and 12-month forecast horizons. Missing daily and monthly observations are filled with a recency-weighted same-calendar-period estimate using up to three prior years (60%, 30%, and 10%, renormalized when fewer years exist). Every filled value remains labeled as an estimate, is never treated as an observed zero, and is replaced when an uploaded actual arrives.
+
+Overview and Sales Diagnostics expose Period View and Y/Y Compare. The comparison aligns every displayed day or month to the same calendar period one year earlier; Custom Year compares the selected year monthly against its prior year. Product Prioritization intentionally remains period-only.
 
 ## Command
 

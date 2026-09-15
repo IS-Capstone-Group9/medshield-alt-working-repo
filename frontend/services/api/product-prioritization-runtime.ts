@@ -2,12 +2,20 @@ export const PRODUCT_PRIORITIZATION_SCRIPT = String.raw`
 function configureProductYearControls(pageName) {
  const yearWrap=document.getElementById('singleYearWrap');
  if(yearWrap)yearWrap.style.display=descriptivePeriod==='custom'?'flex':'none';
+ const compareWrap=document.getElementById('descriptiveComparisonWrap');
+ const supportsComparison=pageName==='overview'||pageName==='revenue';
+ if(compareWrap)compareWrap.style.display=supportsComparison?'inline-flex':'none';
+ if(!supportsComparison&&comparisonMode!=='single'){
+  comparisonMode='single';
+  const compareSelect=document.getElementById('descriptiveComparisonSelect');
+  if(compareSelect)compareSelect.value='single';
+ }
 }
 function renderProductPrioritizationTimeline() {
  const page=document.getElementById('page-products');
  if(!page || !page.classList.contains('active') || !salesSectorsData)return;
  const daily=descriptivePeriod==='30d';
- const rows=salesSectorsData.rows.filter(r=>descriptivePeriodIncludes(daily?r.date:r.period));
+ const rows=getDescriptiveDetailedRows();
  const totals=new Map();rows.forEach(r=>{const v=totals.get(r.product)||{revenue:0,quantity:0};v.revenue+=Number(r.revenue)||0;v.quantity+=Number(r.quantity)||0;totals.set(r.product,v);});
  const products=[...totals.entries()].sort((a,b)=>b[1].revenue-a[1].revenue).slice(0,10), top=new Set(products.map(p=>p[0]));
  const keys=descriptiveAxisPeriods();

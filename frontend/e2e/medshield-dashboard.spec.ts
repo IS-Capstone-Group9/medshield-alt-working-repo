@@ -56,7 +56,7 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     // Verify Overview KPI Cards exist and display values
     const kpiTotalRevenue = page.locator('#kpiOverviewTotalRevenue');
     await expect(kpiTotalRevenue).toBeVisible();
-    await expect(kpiTotalRevenue).toContainText('â‚±');
+    await expect(kpiTotalRevenue).toContainText('₱');
 
     // Verify Main Overview Canvas
     await expect(page.locator('#overviewBaselineChart')).toBeVisible();
@@ -137,6 +137,7 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
 
   test('3. Descriptive periods use trailing windows and expose a year only for Custom', async ({ page }) => {
     const periodSelect = page.locator('#descriptivePeriodSelect')
+    const comparisonSelect = page.locator('#descriptiveComparisonSelect')
     const yearWrap = page.locator('#singleYearWrap')
     await expect(periodSelect).toHaveValue('12')
     await expect(periodSelect.locator('option')).toHaveText([
@@ -144,6 +145,7 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     ])
     await expect(yearWrap).toBeHidden()
     await expect(page.locator('#btnYoyYear')).toHaveCount(0)
+    await expect(comparisonSelect).toHaveValue('single')
 
     await periodSelect.selectOption('3')
     await expect.poll(async () => page.evaluate(() => {
@@ -152,6 +154,12 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     })).toBe(3)
     await expect(page.locator('#overviewBaselineChart').locator('xpath=ancestor::div[contains(@class,"chart-card")]').locator('.chart-subtitle'))
       .toContainText('Last 3 Months')
+
+    await comparisonSelect.selectOption('yoy')
+    await expect.poll(async () => page.evaluate(() => {
+      const chart = (window as any).Chart.getChart(document.getElementById('overviewBaselineChart'))
+      return chart?.data?.datasets?.map((dataset: any) => dataset.label) ?? []
+    })).toContain('Prior-year Net Sales Revenue')
 
     await periodSelect.selectOption('custom')
     await expect(yearWrap).toBeVisible()
@@ -162,10 +170,19 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
       return chart?.data?.labels?.length ?? 0
     })).toBe(12)
 
+    await expect(page.locator('#sectorStatus')).toContainText('weighted record equivalents', { timeout: 30000 })
     await periodSelect.selectOption('30d')
     await expect(yearWrap).toBeHidden()
-    await expect(page.locator('#overviewBaselineChart').locator('xpath=ancestor::div[contains(@class,"chart-card")]').locator('.chart-subtitle'))
-      .toContainText(/Last 30 Days|Daily data unavailable/)
+    const overviewSubtitle = page.locator('#overviewBaselineChart').locator('xpath=ancestor::div[contains(@class,"chart-card")]').locator('.chart-subtitle')
+    await expect(overviewSubtitle).toContainText('Last 30 Days')
+    await expect(overviewSubtitle).toContainText('weighted estimate')
+    await expect.poll(async () => page.evaluate(() => {
+      const chart = (window as any).Chart.getChart(document.getElementById('overviewBaselineChart'))
+      return chart?.data?.datasets?.[0]?.data?.filter((value: unknown) => typeof value === 'number').length ?? 0
+    })).toBe(30)
+
+    await page.locator('.nav-item', { hasText: 'Product Prioritization' }).click()
+    await expect(comparisonSelect).toBeHidden()
   });
 
   test('3b. Extended data pages open and unsupported dark mode is absent', async ({ page }) => {

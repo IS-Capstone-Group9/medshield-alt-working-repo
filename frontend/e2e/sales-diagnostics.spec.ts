@@ -68,7 +68,7 @@ test('custom year uses monthly detail and same-month prior-year comparison', asy
   await page.screenshot({ path: 'test-results/section-2-sales-diagnostics.png', fullPage: true })
 })
 
-test('custom year keeps a monthly axis and does not invent a missing prior year', async ({ page }) => {
+test('custom year uses weighted same-month estimates when the prior year is missing', async ({ page }) => {
   await page.evaluate(data => {
     const app = window as any
     app.applyDatasetPatch(data); app.setDescriptivePeriod('custom'); app.setYear('2025')
@@ -76,10 +76,10 @@ test('custom year keeps a monthly axis and does not invent a missing prior year'
   const revenue = await chartData(page, 'revenueDetailChart')
   expect(revenue.labels).toHaveLength(12)
   const growth = await chartData(page, 'growthChart')
-  expect(growth.datasets[0].data).toEqual(Array(12).fill(null))
+  expect(growth.datasets[0].data).toEqual(Array(12).fill(100))
   const margin = await chartData(page, 'marginChart')
   expect(margin.labels).toHaveLength(12)
-  await expect(page.locator('#salesGrowthSummary')).toContainText('No same-period prior-year observations')
+  await expect(page.locator('#salesGrowthSummary')).toContainText('12/12 periods matched')
 })
 
 test('single year uses matched months from prior calendar year; zero baseline keeps nominal change only', async ({ page }) => {
@@ -91,9 +91,9 @@ test('single year uses matched months from prior calendar year; zero baseline ke
   }, data)
   let growth = await chartData(page, 'growthChart')
   expect(growth.labels).toEqual(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
-  expect(growth.datasets[0].data).toEqual([100, null, 100, null, null, null, null, null, null, null, null, null])
-  expect(growth.datasets[1].data).toEqual([1_000_000, null, 1_000_000, null, null, null, null, null, null, null, null, null])
-  await expect(page.locator('#salesGrowthSummary')).toContainText('2/12 periods matched')
+  expect(growth.datasets[0].data).toEqual([100, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+  expect(growth.datasets[1].data).toEqual([1_000_000, 0, 1_000_000, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+  await expect(page.locator('#salesGrowthSummary')).toContainText('12/12 periods matched')
   await page.evaluate(() => (window as any).applyDatasetPatch({ monthly: [
     { period: '2024-01', revenue: 0, income: 0 },
     { period: '2025-01', revenue: 500, income: -20 },
