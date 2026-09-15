@@ -8,6 +8,10 @@ import { SALES_HEATMAP_SCRIPT } from './sales-heatmap-runtime'
 import { patchOverviewMonthlyChart } from './overview-monthly-runtime'
 import { CURRENT_YEAR_SCRIPT } from './current-year-runtime'
 import { PRODUCT_PRIORITIZATION_SCRIPT } from './product-prioritization-runtime'
+import {
+  DESCRIPTIVE_PERIOD_SCRIPT,
+  patchDescriptivePeriodFilters,
+} from './descriptive-period-runtime'
 
 export type ListenerRecord = {
   target: EventTarget
@@ -25,6 +29,7 @@ const DASHBOARD_GLOBAL_HANDLERS = [
   'setComparisonMode',
   'setYear',
   'setYoYYear',
+  'setDescriptivePeriod',
   'refreshComparison',
   'applyDatasetPatch',
   'buildCharts',
@@ -72,7 +77,7 @@ export function getExecutableDashboardScript(): string {
     .map((name) => `if (typeof ${name} === 'function') window.${name} = ${name};`)
     .join('\n')
 
-  let patchedScript = patchOverviewMonthlyChart(MEDSHIELD_SCRIPT)
+  let patchedScript = patchDescriptivePeriodFilters(patchOverviewMonthlyChart(MEDSHIELD_SCRIPT))
     .replace(/window\.([a-zA-Z0-9_]+)\s*=\s*\1;?/g, "if (typeof $1 !== 'undefined') window.$1 = $1;")
     .replace("window.addEventListener('DOMContentLoaded', async () => {", `(async () => {\n${globalHandlerBridge}\n`)
     .replaceAll("'#335F78'", "dashboardThemeColor('--chart-label', '#335F78')")
@@ -237,6 +242,7 @@ function resizeCharts() {
 }
 ${SALES_DIAGNOSTICS_SCRIPT}
 ${CURRENT_YEAR_SCRIPT}
+${DESCRIPTIVE_PERIOD_SCRIPT}
 ${PRODUCT_PRIORITIZATION_SCRIPT}
 ${SALES_HEATMAP_SCRIPT}
 ${SALES_SECTORS_SCRIPT}

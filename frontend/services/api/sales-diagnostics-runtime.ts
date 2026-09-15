@@ -91,69 +91,33 @@ function diagnosticAxis(values, title, color, position, grid) {
 }
 
 function renderSalesDiagnostics(opts) {
-  const years = diagnosticYears(), months = diagnosticMonths();
-  const allYearsMode = comparisonMode === 'single' && selectedYear === 'all';
-  const annual = dashboardAnnualRows().filter(row => Number(row.year) >= 2017 && Number(row.year) <= dashboardCalendar().year);
-  const calendar = dashboardCalendar();
-  const currentYear = calendar.year;
-  const allMonthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  const selectedCalendarYears = comparisonMode === 'yoy'
-    ? [Number(yoyTargetYear), Number(yoyBaseYear)]
-    : [Number(selectedYear)];
-  const monthNames = !allYearsMode && selectedCalendarYears.includes(currentYear)
-    ? allMonthNames.slice(0, calendar.month)
-    : allMonthNames;
-  const periodFor = (year, month) => String(year) + '-' + String(month).padStart(2, '0');
-  const yearLabel = year => Number(year) === currentYear ? String(year) + ' (Actual + Estimate)' : String(year);
-  let detailLabels, detailDatasets, detailScales;
-
-  if (allYearsMode) {
-    const revenue = annual.map(row => row.revenue);
-    const profit = annual.map(row => row.income);
-    detailLabels = annual.map(row => row.label || row.year);
-    detailDatasets = [
-      { label: 'Net Sales Revenue', data: revenue, yAxisID: 'revenue', backgroundColor: getColor(.82), borderColor: getColor(), borderWidth: 1.5, borderRadius: 4 },
-      { label: 'Gross Profit', data: profit, yAxisID: 'grossProfit', backgroundColor: getAmber(.76), borderColor: getAmber(), borderWidth: 1.5, borderRadius: 4 }
-    ];
-    detailScales = {
-      x: opts.scales.x,
-      revenue: diagnosticAxis(revenue, 'Net sales revenue (₱)', getColor(), 'left', true),
-      grossProfit: diagnosticAxis(profit, 'Gross profit (₱)', getAmber(), 'right', false)
-    };
-  } else if (comparisonMode === 'yoy') {
-    const target = Number(yoyTargetYear), base = Number(yoyBaseYear);
-    const targetRevenue = monthNames.map((_, index) => months.get(periodFor(target, index + 1))?.revenue ?? null);
-    const baseRevenue = monthNames.map((_, index) => months.get(periodFor(base, index + 1))?.revenue ?? null);
-    detailLabels = monthNames;
-    detailDatasets = [
-      { label: 'Revenue ' + yearLabel(target), data: targetRevenue, yAxisID: 'revenue', borderColor: getBlue(), backgroundColor: getBlue(.08), borderWidth: 2.3, pointRadius: 3, tension: .25, fill: false, spanGaps: false },
-      { label: 'Revenue ' + yearLabel(base), data: baseRevenue, yAxisID: 'revenue', borderColor: getColor(), backgroundColor: getColor(.08), borderWidth: 2.3, pointRadius: 3, tension: .25, fill: false, spanGaps: false }
-    ];
-    detailScales = { x: opts.scales.x, revenue: diagnosticAxis([...targetRevenue, ...baseRevenue], 'Net sales revenue (₱)', getColor(), 'left', true) };
-  } else {
-    const year = Number(selectedYear);
-    const revenue = monthNames.map((_, index) => months.get(periodFor(year, index + 1))?.revenue ?? null);
-    const profit = monthNames.map((_, index) => months.get(periodFor(year, index + 1))?.income ?? null);
-    detailLabels = monthNames;
-    detailDatasets = [
-      { label: 'Net Sales Revenue ' + yearLabel(year), data: revenue, yAxisID: 'revenue', borderColor: getColor(), backgroundColor: getColor(.08), borderWidth: 2.5, pointRadius: 3, tension: .25, fill: false, spanGaps: false },
-      { label: 'Gross Profit ' + yearLabel(year), data: profit, yAxisID: 'grossProfit', borderColor: getAmber(), backgroundColor: getAmber(.08), borderWidth: 2.2, pointRadius: 3, tension: .25, fill: false, spanGaps: false }
-    ];
-    detailScales = {
-      x: opts.scales.x,
-      revenue: diagnosticAxis(revenue, 'Net sales revenue (₱)', getColor(), 'left', true),
-      grossProfit: diagnosticAxis(profit, 'Gross profit (₱)', getAmber(), 'right', false)
-    };
-  }
+  const selectedRows = getDescriptiveDisplayRows();
+  const sourceRows = getDescriptiveSourceRows();
+  const sourceByPeriod = new Map(sourceRows.map(row => [String(row.period), row]));
+  const priorPeriod = period => descriptivePeriod === '30d'
+    ? String(Number(period.slice(0, 4)) - 1) + period.slice(4)
+    : String(Number(period.slice(0, 4)) - 1) + period.slice(4, 7);
+  const revenue = selectedRows.map(row => row.revenue == null ? null : row.revenue);
+  const profit = selectedRows.map(row => row.income == null ? null : row.income);
+  const detailLabels = selectedRows.map(row => descriptivePointLabel(row.period));
+  const dailyUnavailable = descriptivePeriod === '30d' && selectedRows.every(row => row.revenue == null);
+  const detailDatasets = [
+    { label: 'Net Sales Revenue · ' + descriptivePeriodLabel(), data: revenue, yAxisID: 'revenue', borderColor: getColor(), backgroundColor: getColor(.08), borderWidth: 2.5, pointRadius: descriptivePeriod === '30d' ? 1.5 : 3, tension: .25, fill: false, spanGaps: false },
+    { label: 'Gross Profit · ' + descriptivePeriodLabel(), data: profit, yAxisID: 'grossProfit', borderColor: getAmber(), backgroundColor: getAmber(.08), borderWidth: 2.2, pointRadius: descriptivePeriod === '30d' ? 1.5 : 3, tension: .25, fill: false, spanGaps: false }
+  ];
+  if (descriptivePeriod === '30d') detailDatasets.splice(1, 1);
+  const detailScales = {
+    x: opts.scales.x,
+    revenue: diagnosticAxis(revenue, 'Net sales revenue (₱)', getColor(), 'left', true),
+    ...(descriptivePeriod === '30d' ? {} : { grossProfit: diagnosticAxis(profit, 'Gross profit (₱)', getAmber(), 'right', false) })
+  };
 
   const subtitle = document.getElementById('salesComparisonSubtitle');
-  if (subtitle) subtitle.textContent = allYearsMode
-    ? '2017–' + currentYear + ' annual comparison; current-year estimate stops at the current month and yields to uploaded actuals.'
-    : comparisonMode === 'yoy'
-      ? 'Monthly revenue comparison for ' + yoyTargetYear + ' and ' + yoyBaseYear + '; gaps mean unavailable months, not zero sales.'
-      : 'January–December revenue and gross profit for ' + selectedYear + '; gaps mean unavailable months, not zero sales.';
+  if (subtitle) subtitle.textContent = dailyUnavailable
+    ? 'Daily transaction data is unavailable for the last 30 days; monthly totals are not expanded into synthetic days.'
+    : (descriptivePeriod === '30d' ? 'Daily' : 'Monthly') + ' revenue and gross profit for ' + descriptivePeriodLabel() + '; gaps mean unavailable observations, not zero sales.';
   createChart('revenueDetailChart', {
-    type: allYearsMode ? 'bar' : 'line',
+    type: 'line',
     data: { labels: detailLabels, datasets: detailDatasets },
     options: {
       ...opts,
@@ -164,36 +128,33 @@ function renderSalesDiagnostics(opts) {
     }
   });
 
-  // Calendar-year YoY never uses the previous array row. Matching observed months
-  // avoids treating unreported months as zeros or comparing partial to full years.
-  const baseline = comparisonMode === 'yoy' ? Number(yoyBaseYear)
-    : allYearsMode ? years[0] : Number(selectedYear) - 1;
-  const targetYear = comparisonMode === 'yoy' ? Number(yoyTargetYear) : years[years.length - 1];
-  const rows = allYearsMode
-    ? years.map(year => ({ label: String(year), year, yoy: diagnosticComparison(months, year, year - 1), baseline: diagnosticComparison(months, year, baseline) }))
-    : monthNames.map((label, index) => {
-        const month = index + 1;
-        const current = months.get(periodFor(targetYear, month));
-        const previous = months.get(periodFor(baseline, month));
-        const delta = current && previous ? current.revenue - previous.revenue : null;
-        return { label, year: targetYear, yoy: { current: current?.revenue ?? null, previous: previous?.revenue ?? null,
-          delta, rate: delta !== null && previous.revenue > 0 ? delta / previous.revenue * 100 : null,
-          covered: current && previous ? [month] : [] }, baseline: { delta, rate: delta !== null && previous.revenue > 0 ? delta / previous.revenue * 100 : null, covered: current && previous ? [month] : [] } };
-      });
-  const baselineComparison = diagnosticComparison(months, targetYear, baseline);
+  const rows = selectedRows.map(row => {
+    const previousPeriod = priorPeriod(String(row.period));
+    const previous = sourceByPeriod.get(previousPeriod);
+    const hasCurrent = row.revenue != null && Number.isFinite(Number(row.revenue));
+    const delta = hasCurrent && previous ? Number(row.revenue) - Number(previous.revenue) : null;
+    return {
+      label: descriptivePointLabel(row.period), period: String(row.period), previousPeriod,
+      current: hasCurrent ? Number(row.revenue) : null, previous: previous ? Number(previous.revenue) : null,
+      delta, rate: delta !== null && Number(previous.revenue) > 0 ? delta / Number(previous.revenue) * 100 : null
+    };
+  });
+  const matched = rows.filter(row => row.current !== null && row.previous !== null);
+  const currentTotal = matched.reduce((sum, row) => sum + Number(row.current), 0);
+  const previousTotal = matched.reduce((sum, row) => sum + Number(row.previous), 0);
+  const totalDelta = matched.length ? currentTotal - previousTotal : null;
+  const totalRate = totalDelta !== null && previousTotal > 0 ? totalDelta / previousTotal * 100 : null;
   const summary = document.getElementById('salesGrowthSummary');
-  if (summary) summary.textContent = 'Net sales revenue change: ' + targetYear + ' vs baseline ' + baseline + ': '
-    + diagnosticCurrency(baselineComparison.previous) + ' → ' + diagnosticCurrency(baselineComparison.current)
-    + '; change ' + diagnosticCurrency(baselineComparison.delta) + ' (' + diagnosticRate(baselineComparison.rate) + '). '
-    + diagnosticCoverage(baselineComparison.covered) + '. Change from baseline is not a sum of annual growth rates.';
-  if (summary && !years.length) summary.textContent = 'No monthly sales periods are available for comparison.';
+  if (summary) summary.textContent = matched.length
+    ? descriptivePeriodLabel() + ' versus the same calendar periods one year earlier: ' + diagnosticCurrency(previousTotal) + ' → ' + diagnosticCurrency(currentTotal) + '; change ' + diagnosticCurrency(totalDelta) + ' (' + diagnosticRate(totalRate) + '). ' + matched.length + '/' + rows.length + ' periods matched.'
+    : 'No same-period prior-year observations are available for ' + descriptivePeriodLabel() + '.';
   createChart('growthChart', {
     type: 'bar',
     data: {
       labels: rows.map(row => row.label),
       datasets: [
-        { label: 'YoY net sales growth (%)', data: rows.map(row => row.yoy.rate), yAxisID: 'growthRate', backgroundColor: rows.map(row => row.yoy.rate < 0 ? getRed(.8) : getColor(.8)), borderRadius: 4 },
-        { type: 'line', label: 'YoY net sales change (₱)', data: rows.map(row => row.yoy.delta), yAxisID: 'pesoChange', borderColor: getAmber(), backgroundColor: getAmber(), pointRadius: 3, tension: 0, spanGaps: false }
+        { label: 'YoY net sales growth (%)', data: rows.map(row => row.rate), yAxisID: 'growthRate', backgroundColor: rows.map(row => row.rate < 0 ? getRed(.8) : getColor(.8)), borderRadius: 4 },
+        { type: 'line', label: 'YoY net sales change (₱)', data: rows.map(row => row.delta), yAxisID: 'pesoChange', borderColor: getAmber(), backgroundColor: getAmber(), pointRadius: 3, tension: 0, spanGaps: false }
       ]
     },
     options: {
@@ -203,14 +164,14 @@ function renderSalesDiagnostics(opts) {
           label: context => context.dataset.label + ': ' + (context.dataset.yAxisID === 'growthRate' ? diagnosticRate(context.raw) : diagnosticCurrency(context.raw)),
           afterBody: contexts => {
             const row = rows[contexts[0]?.dataIndex];
-            return row ? [String(baseline) + ': ' + diagnosticCurrency(row.yoy.previous), String(targetYear) + ': ' + diagnosticCurrency(row.yoy.current), diagnosticCoverage(row.yoy.covered)] : [];
+            return row ? [row.previousPeriod + ': ' + diagnosticCurrency(row.previous), row.period + ': ' + diagnosticCurrency(row.current)] : [];
           }
         }
       } },
       scales: {
         x: opts.scales.x,
         growthRate: { type: 'linear', position: 'left', beginAtZero: true, ticks: { callback: value => Number(value).toLocaleString('en-PH', { maximumFractionDigits: 1 }) + '%' }, title: { display: true, text: 'YoY net sales growth (%)' } },
-        pesoChange: diagnosticAxis(rows.map(row => row.yoy.delta), 'YoY net sales change (₱)', getAmber(), 'right', false)
+        pesoChange: diagnosticAxis(rows.map(row => row.delta), 'YoY net sales change (₱)', getAmber(), 'right', false)
       }
     }
   });
@@ -219,13 +180,13 @@ function renderSalesDiagnostics(opts) {
   if (table) {
     table.replaceChildren();
     const head = table.createTHead().insertRow();
-    [(allYearsMode ? 'Year' : 'Month'), 'Compared periods', 'Baseline net sales (₱)', 'Current net sales (₱)', 'Change (₱)', 'Growth (%)', 'Change vs ' + baseline + ' (₱)', 'Growth vs ' + baseline + ' (%)', 'Coverage'].forEach(label => {
+    [(descriptivePeriod === '30d' ? 'Day' : 'Month'), 'Current period', 'Prior-year period', 'Prior-year net sales (₱)', 'Current net sales (₱)', 'Change (₱)', 'Growth (%)'].forEach(label => {
       const th = document.createElement('th'); th.scope = 'col'; th.textContent = label; head.appendChild(th);
     });
     const body = table.createTBody();
     rows.forEach(row => {
       const tr = body.insertRow();
-      [row.label, diagnosticCoverage(row.yoy.covered), diagnosticCurrency(row.yoy.previous), diagnosticCurrency(row.yoy.current), diagnosticCurrency(row.yoy.delta), diagnosticRate(row.yoy.rate), diagnosticCurrency(row.baseline.delta), diagnosticRate(row.baseline.rate), diagnosticCoverage(row.baseline.covered)].forEach(value => { tr.insertCell().textContent = String(value); });
+      [row.label, row.period, row.previousPeriod, diagnosticCurrency(row.previous), diagnosticCurrency(row.current), diagnosticCurrency(row.delta), diagnosticRate(row.rate)].forEach(value => { tr.insertCell().textContent = String(value); });
     });
   }
 }

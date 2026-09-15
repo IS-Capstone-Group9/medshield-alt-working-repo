@@ -135,80 +135,37 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     await expect(salesDeepDive).not.toBeVisible();
   });
 
-  test('3. Dynamic Time Horizons: Toggles Single Year & Y/Y Comparison Filters', async ({ page }) => {
-    const singleYearBtn = page.locator('#btnSingleYear');
-    const yoyBtn = page.locator('#btnYoyYear');
-    const singleWrap = page.locator('#singleYearWrap');
-    const yoyWrap = page.locator('#yoyYearWrap');
+  test('3. Descriptive periods use trailing windows and expose a year only for Custom', async ({ page }) => {
+    const periodSelect = page.locator('#descriptivePeriodSelect')
+    const yearWrap = page.locator('#singleYearWrap')
+    await expect(periodSelect).toHaveValue('12')
+    await expect(periodSelect.locator('option')).toHaveText([
+      'Last 30 Days', 'Last 3 Months', 'Last 6 Months', 'Last 12 Months', 'Custom Year',
+    ])
+    await expect(yearWrap).toBeHidden()
+    await expect(page.locator('#btnYoyYear')).toHaveCount(0)
 
-    // Initially Single Year mode is active
-    await expect(singleYearBtn).toHaveClass(/active/);
-    await expect(singleWrap).toBeVisible();
-
-    // Toggle to Y/Y Compare
-    await yoyBtn.click();
-    await expect(yoyBtn).toHaveClass(/active/);
-    await expect(yoyWrap).toBeVisible();
-    await expect(singleWrap).not.toBeVisible();
-
-    // Switch comparison years in dropdowns
-    const baseSelect = page.locator('#yoyBaseYearSelect');
-    const targetSelect = page.locator('#yoyTargetYearSelect');
-    await baseSelect.selectOption('2025');
-    await targetSelect.selectOption('2023');
-
-    // Overview Chart should align the selected comparison pair by month.
-    await expect(page.locator('#overviewBaselineChart')).toBeVisible();
+    await periodSelect.selectOption('3')
     await expect.poll(async () => page.evaluate(() => {
-      const chartApi = (window as any).Chart
-      const canvas = document.getElementById('overviewBaselineChart')
-      const chart = canvas ? chartApi?.getChart?.(canvas) : null
-      return chart?.data?.labels?.map(String) ?? []
-    })).toEqual(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
-    await expect.poll(async () => page.evaluate(() => {
-      const chartApi = (window as any).Chart
-      const canvas = document.getElementById('overviewBaselineChart')
-      const chart = canvas ? chartApi?.getChart?.(canvas) : null
-      return chart?.data?.datasets?.map((dataset: { label?: string }) => dataset.label) ?? []
-    })).toEqual(['Revenue 2023 (Compare)', 'Revenue 2025 (Base)'])
-
-    // Switch back to Single Year
-    await singleYearBtn.click();
-    await expect(singleYearBtn).toHaveClass(/active/);
-    await expect(singleWrap).toBeVisible();
-
-    const yearSelect = page.locator('#topbarYearSelect');
-    await yearSelect.selectOption('2024');
-    await expect(page.locator('#overviewBaselineChart')).toBeVisible();
-    await expect.poll(async () => page.evaluate(() => {
-      const chartApi = (window as any).Chart
-      const canvas = document.getElementById('overviewBaselineChart')
-      const chart = canvas ? chartApi?.getChart?.(canvas) : null
-      return chart?.data?.labels?.map(String) ?? []
-    })).toEqual(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
-    await expect.poll(async () => page.evaluate(() => {
-      const chartApi = (window as any).Chart
-      const canvas = document.getElementById('overviewBaselineChart')
-      const chart = canvas ? chartApi?.getChart?.(canvas) : null
-      return chart?.data?.datasets?.map((dataset: { label?: string }) => dataset.label) ?? []
-    })).toEqual(['Net Sales Revenue 2024', 'Gross Profit 2024'])
+      const chart = (window as any).Chart.getChart(document.getElementById('overviewBaselineChart'))
+      return chart?.data?.labels?.length ?? 0
+    })).toBe(3)
     await expect(page.locator('#overviewBaselineChart').locator('xpath=ancestor::div[contains(@class,"chart-card")]').locator('.chart-subtitle'))
-      .toHaveText('January–December performance for 2024')
+      .toContainText('Last 3 Months')
 
-    await yearSelect.selectOption('all')
+    await periodSelect.selectOption('custom')
+    await expect(yearWrap).toBeVisible()
+    const yearSelect = page.locator('#topbarYearSelect')
+    await yearSelect.selectOption('2024')
     await expect.poll(async () => page.evaluate(() => {
-      const chartApi = (window as any).Chart
-      const canvas = document.getElementById('overviewBaselineChart')
-      const chart = canvas ? chartApi?.getChart?.(canvas) : null
-      const labels = chart?.data?.labels?.map(String) ?? []
-      const currentYear = new Date().getFullYear()
-      return labels[0] === '2017'
-        && labels.at(-1)?.startsWith(String(currentYear)) === true
-        && labels.every((label: string) => {
-          const year = Number.parseInt(label, 10)
-          return year >= 2017 && year <= currentYear
-        })
-    })).toBe(true)
+      const chart = (window as any).Chart.getChart(document.getElementById('overviewBaselineChart'))
+      return chart?.data?.labels?.length ?? 0
+    })).toBe(12)
+
+    await periodSelect.selectOption('30d')
+    await expect(yearWrap).toBeHidden()
+    await expect(page.locator('#overviewBaselineChart').locator('xpath=ancestor::div[contains(@class,"chart-card")]').locator('.chart-subtitle'))
+      .toContainText(/Last 30 Days|Daily data unavailable/)
   });
 
   test('3b. Extended data pages open and unsupported dark mode is absent', async ({ page }) => {

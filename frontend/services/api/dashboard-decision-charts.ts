@@ -19,12 +19,24 @@ function finite(value: unknown): value is number {
   return typeof value === 'number' && Number.isFinite(value)
 }
 
-function selectedYear(root: HTMLElement): string | null {
-  const comparisonVisible = root.querySelector<HTMLElement>('#yoyYearWrap')?.style.display !== 'none'
-  const value = comparisonVisible
-    ? root.querySelector<HTMLSelectElement>('#yoyTargetYearSelect')?.value
-    : root.querySelector<HTMLSelectElement>('#topbarYearSelect')?.value
-  return value && /^\d{4}$/.test(value) ? value : null
+function phtCalendarMonth(): string {
+  const parts = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Manila', year: 'numeric', month: '2-digit',
+  }).formatToParts(new Date())
+  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]))
+  return `${values.year}-${values.month}`
+}
+
+function shiftMonth(period: string, offset: number): string {
+  const [year, month] = period.split('-').map(Number)
+  const date = new Date(Date.UTC(year, month - 1 + offset, 1))
+  return `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, '0')}`
+}
+
+function periodSelection(root: HTMLElement) {
+  const mode = root.querySelector<HTMLSelectElement>('#descriptivePeriodSelect')?.value ?? '12'
+  const year = root.querySelector<HTMLSelectElement>('#topbarYearSelect')?.value ?? ''
+  return { mode, year }
 }
 
 function compactCurrency(value: number): string {
@@ -47,11 +59,16 @@ function formatPeriod(period: string): string {
   }).format(date)
 }
 
-function aggregateMonthly(rows: MonthlyPoint[], year: string | null): MonthlyPoint[] {
+function aggregateMonthly(rows: MonthlyPoint[], selection: { mode: string; year: string }): MonthlyPoint[] {
   const totals = new Map<string, { revenue: number; income: number }>()
+  const end = phtCalendarMonth()
+  const monthCount = Number(selection.mode)
+  const start = Number.isFinite(monthCount) ? shiftMonth(end, -(monthCount - 1)) : ''
   for (const row of rows) {
     if (!row.period || !finite(row.revenue) || !finite(row.income)) continue
-    if (year && !row.period.startsWith(`${year}-`)) continue
+    if (selection.mode === '30d') continue
+    if (selection.mode === 'custom' && !row.period.startsWith(`${selection.year}-`)) continue
+    if (selection.mode !== 'custom' && (row.period < start || row.period > end)) continue
     const current = totals.get(row.period) ?? { revenue: 0, income: 0 }
     current.revenue += row.revenue
     current.income += row.income
@@ -60,13 +77,11 @@ function aggregateMonthly(rows: MonthlyPoint[], year: string | null): MonthlyPoi
 
   return [...totals.entries()]
     .sort(([left], [right]) => left.localeCompare(right))
-    .slice(-24)
     .map(([period, values]) => ({ period, ...values }))
 }
 
-function monthlyRowsForView(rows: MonthlyPoint[], year: string | null): MonthlyPoint[] {
-  const selected = aggregateMonthly(rows, year)
-  return selected.length ? selected : aggregateMonthly(rows, null)
+function monthlyRowsForView(rows: MonthlyPoint[], selection: { mode: string; year: string }): MonthlyPoint[] {
+  return aggregateMonthly(rows, selection)
 }
 
 function aggregateDiseaseSignals(rows: ExternalSignalPoint[]): Map<string, number> {
@@ -143,8 +158,21 @@ function renderDiseaseDemandChart(root: HTMLElement, data: DashboardData) {
   const canvas = root.querySelector<HTMLCanvasElement>('#diseaseDemandChart')
   if (!canvas) return
 
-  const monthly = monthlyRowsForView(data.monthly, selectedYear(root))
-  if (!monthly.length) return
+  const selection = periodSelection(root)
+  const monthly = monthlyRowsForView(data.monthly, selection)
+  if (!monthly.length) {
+    Chart.getChart(canvas)?.destroy()
+    updateChartCard(canvas, {
+      title: selection.mode === '30d' ? 'Daily Sales vs. Disease Intensity' : 'Historical Sales vs. Disease Intensity',
+      subtitle: selection.mode === '30d'
+        ? 'Daily sales and disease data are unavailable; monthly totals are not expanded into synthetic days'
+        : 'No aligned monthly observations are available for the selected historical period',
+      badge: 'No source-backed observations',
+      status: 'Unavailable',
+      statusClass: 'status-draft',
+    })
+    return
+  }
 
   const signalByPeriod = aggregateDiseaseSignals(data.externalSignals)
   const diseaseValues = monthly.map((row) => signalByPeriod.get(row.period) ?? null)

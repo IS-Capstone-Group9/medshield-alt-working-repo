@@ -17,7 +17,7 @@ test('Section 1: real chart datasets, KPI rates, labels and refresh use the same
   await page.waitForFunction(() => typeof (window as any).applyDatasetPatch === 'function')
   await page.evaluate(() => {
     const app = window as any
-    app.setComparisonMode('single')
+    app.setDescriptivePeriod('custom')
     app.setYear('2025')
     app.showPage('revenue')
     app.applyDatasetPatch({
@@ -34,7 +34,7 @@ test('Section 1: real chart datasets, KPI rates, labels and refresh use the same
   })
   expect(chart.values).toHaveLength(1)
   expect(chart.values[0]).toBeCloseTo(14)
-  expect(chart.labels).toEqual(['Net Sales Revenue 2025', 'Gross Profit 2025'])
+  expect(chart.labels).toEqual(['Net Sales Revenue · 2025', 'Gross Profit · 2025'])
   await page.locator('[data-metric-definitions] summary').click()
   await expect(page.locator('[data-metric-definitions]')).toContainText('transaction percentages are not averaged')
   await page.screenshot({ path: 'test-results/section-1-sales-diagnostics.png', fullPage: true })

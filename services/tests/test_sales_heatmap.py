@@ -15,6 +15,7 @@ class SalesHeatmapTests(unittest.TestCase):
         self.assertEqual(result["monthly"][0]["quantity"], 15)
         self.assertEqual(result["monthly"][1]["quantity"], 0)
         self.assertEqual(len(result["monthly"]), 3)  # Missing months are not manufactured.
+        self.assertEqual(result["daily"][0]["period"], "2025-01-01")
         self.assertEqual(result["source"]["included_rows"], 4)
 
     def test_exclusions_and_unapproved_category_do_not_merge_aliases(self):

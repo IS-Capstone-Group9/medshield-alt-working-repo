@@ -375,6 +375,7 @@ export function installDashboardEnhancements(
     window.requestAnimationFrame(() => renderDecisionSupportCharts(root))
   }
   for (const controlId of [
+    'descriptivePeriodSelect',
     'topbarYearSelect',
     'yoyBaseYearSelect',
     'yoyTargetYearSelect',

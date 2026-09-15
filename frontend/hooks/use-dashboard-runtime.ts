@@ -90,7 +90,7 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
       
       const handlers = [
         'showPage', 'toggleTheme', 'openHelp', 'closeNavigation', 'toggleNavigation',
-        'setComparisonMode', 'setYear', 'setYoYYear', 'refreshComparison', 'applyDatasetPatch', 'buildCharts',
+        'setComparisonMode', 'setYear', 'setYoYYear', 'setDescriptivePeriod', 'refreshComparison', 'applyDatasetPatch', 'buildCharts',
         'setPlanningData', 'setPlanningResult', 'getPlanningRequest', 'invalidatePlan', 'changePlanningScope', 'requestPlanSolve', 'exportPlanningCSV', 'setExternalRegressionData', 'renderExternalRegression', 'changeRegressionScope', 'exportExternalRegressionCSV', 'setForecastValidationData', 'renderForecastValidation', 'changeForecastScope', 'exportForecastValidationCSV', 'setSalesSectorsData', 'renderSalesSectors', 'setSalesHeatmapData', 'changeHeatmapCategory', 'renderSalesHeatmap', 'exportSalesHeatmapCSV'
       ]
       for (const name of handlers) {

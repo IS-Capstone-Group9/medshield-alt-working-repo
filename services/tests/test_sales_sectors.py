@@ -8,6 +8,7 @@ class SectorTests(unittest.TestCase):
 
     def test_owner_rules_classify_channels_but_keep_unmapped_geography_unknown(self):
         result = build_sectors([self.row('Government'), self.row('Hospital'), self.row('Quezon', area_type='territory')], [], {}, 'test')
+        self.assertEqual({r['date'] for r in result['rows']}, {'2025-01-01'})
         self.assertEqual(sum(r['revenue'] for r in result['rows']), 300)
         self.assertEqual(sum(r['quantity'] for r in result['rows']), 30)
         self.assertEqual({r['sector'] for r in result['rows']}, {'Government', 'Private', 'Unknown'})

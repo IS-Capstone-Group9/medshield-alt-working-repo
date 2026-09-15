@@ -68,12 +68,7 @@ function dashboardAnnualRows() {
 }
 
 function diagnosticMarginRows() {
-  if (comparisonMode === 'single' && selectedYear === 'all') return getYearRowsForMode();
-  const years = comparisonMode === 'yoy'
-    ? [String(yoyTargetYear), String(yoyBaseYear)]
-    : [String(selectedYear)];
-  return dashboardMonthlyRows()
-    .filter(row => years.some(year => row.period.startsWith(year + '-')))
-    .map(row => ({ year: monthLabel(row.period), revenue: row.revenue, income: row.income }));
+  return getDescriptiveMonthlyRows()
+    .map(row => ({ year: descriptivePointLabel(row.period), revenue: row.revenue, income: row.income }));
 }
 `

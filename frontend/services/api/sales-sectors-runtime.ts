@@ -33,6 +33,7 @@ let salesSectorsData = null;
 function setSalesSectorsData(data, error) {
  salesSectorsData = data && Array.isArray(data.rows) && data.source ? data : null;
  renderSalesSectors(error);
+ if(descriptivePeriod==='30d' && typeof buildCharts==='function')buildCharts();
 }
 function renderSalesSectors(error) {
  const el = id => document.getElementById(id);
@@ -47,8 +48,7 @@ function renderSalesSectors(error) {
  select.innerHTML = '<option value="">All products — revenue only</option>' + products.map(p=>'<option value="'+esc(p)+'">'+esc(p)+'</option>').join('');
  select.value = products.includes(prior) ? prior : '';
  const product = select.value, sector = el('sectorCluster').value, dimension = el('sectorDimension').value;
- const years = selectedYear === 'all' && comparisonMode !== 'yoy' ? [...new Set(salesSectorsData.rows.map(r=>Number(r.period.slice(0,4))))] : diagnosticYears();
- const scope = salesSectorsData.rows.filter(r=>years.includes(Number(r.period.slice(0,4))) && (!product || r.product===product));
+ const scope = salesSectorsData.rows.filter(r=>descriptivePeriodIncludes(descriptivePeriod==='30d'?r.date:r.period) && (!product || r.product===product));
  const rows = scope.filter(r=>r.sector===sector);
  const groups = new Map();
  rows.forEach(r=>{const key=r[dimension]; const g=groups.get(key)||{label:key,revenue:0,quantity:0,count:0};g.revenue+=r.revenue;g.quantity+=r.quantity;g.count+=r.row_count;groups.set(key,g);});
@@ -59,7 +59,7 @@ function renderSalesSectors(error) {
  const fmt=v=>v===null?'Unavailable':v.toLocaleString('en-PH',{maximumFractionDigits:2});
  el('sectorStatus').textContent=rows.length ? sector+' · '+rows.reduce((n,r)=>n+r.row_count,0).toLocaleString()+' accepted observed records' : 'No '+sector.toLowerCase()+' records in this scope. Ownership must be established before drawing a sector conclusion.';
  el('sectorCoverage').textContent=['Government','Private','Internal','Unknown'].map(s=>s+': '+scope.filter(r=>r.sector===s).reduce((n,r)=>n+r.row_count,0).toLocaleString()+' records').join(' · ')+' (classification coverage, not market share)';
- el('sectorScope').textContent=(years.length?Math.min(...years)+'–'+Math.max(...years):'No years')+' · '+(product||'All products; quantity comparison unavailable')+' · '+(dimension==='territory'?'Geography':'Customer channel')+'. '+(!validRevenue && rows.length?'Revenue shares unavailable for nonpositive totals or negative group values.':'');
+ el('sectorScope').textContent=descriptivePeriodLabel()+' · '+(descriptivePeriod==='30d'?'daily transaction grain':'monthly grain')+' · '+(product||'All products; quantity comparison unavailable')+' · '+(dimension==='territory'?'Geography':'Customer channel')+'. '+(!validRevenue && rows.length?'Revenue shares unavailable for nonpositive totals or negative group values.':'');
  ['revenue','quantity'].forEach(k=>{
   const available=k==='revenue'?validRevenue:!!product && total.quantity>0;
   if(!available)return;

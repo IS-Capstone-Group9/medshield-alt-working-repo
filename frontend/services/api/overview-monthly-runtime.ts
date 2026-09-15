@@ -42,7 +42,7 @@ const ANNUAL_OVERVIEW_CHART_SOURCE = `  createChart('overviewBaselineChart', {
     options: opts
   });`
 
-const RESPONSIVE_OVERVIEW_CHART = `  const overviewUsesAnnualSummary = comparisonMode === 'single' && selectedYear === 'all';
+const RESPONSIVE_OVERVIEW_CHART = `  const overviewRows = getDescriptiveDisplayRows();
   const overviewCanvas = document.getElementById('overviewBaselineChart');
   const overviewCard = overviewCanvas ? overviewCanvas.closest('.chart-card') : null;
   const overviewTitle = overviewCard ? overviewCard.querySelector('.chart-title') : null;
@@ -50,31 +50,17 @@ const RESPONSIVE_OVERVIEW_CHART = `  const overviewUsesAnnualSummary = compariso
   const overviewBadge = overviewCard ? overviewCard.querySelector('.chart-badge') : null;
   const overviewTitleNode = overviewTitle ? Array.from(overviewTitle.childNodes).find((node) => node.nodeType === 3) : null;
 
-  if (overviewUsesAnnualSummary) {
-    if (overviewTitleNode) overviewTitleNode.textContent = 'Annual Net Sales Revenue & Gross Profit ';
-    if (overviewSubtitle) overviewSubtitle.textContent = '2017–' + dashboardCalendar().year + ' annual totals; current-year estimate stops at the current month and yields to uploaded actuals';
-    if (overviewBadge) overviewBadge.textContent = 'Annual Summary';
-  } else if (comparisonMode === 'yoy') {
-    if (overviewTitleNode) overviewTitleNode.textContent = 'Monthly Net Sales Revenue — Y/Y Comparison ';
-    if (overviewSubtitle) overviewSubtitle.textContent = 'January–December alignment for ' + yoyTargetYear + ' and ' + yoyBaseYear;
-    if (overviewBadge) overviewBadge.textContent = 'Monthly Comparison';
-  } else {
-    if (overviewTitleNode) overviewTitleNode.textContent = 'Monthly Net Sales Revenue & Gross Profit ';
-    if (overviewSubtitle) overviewSubtitle.textContent = 'January–December performance for ' + selectedYear;
-    if (overviewBadge) overviewBadge.textContent = 'Monthly Detail';
-  }
+  if (overviewTitleNode) overviewTitleNode.textContent = descriptivePeriod === '30d'
+    ? 'Daily Net Sales Revenue '
+    : 'Monthly Net Sales Revenue & Gross Profit ';
+  if (overviewSubtitle) overviewSubtitle.textContent = overviewRows.some(row => row.revenue != null)
+    ? descriptivePeriodLabel() + ' ending in the current Philippine calendar period; uploaded actuals take precedence over estimates'
+    : descriptivePeriod === '30d'
+      ? 'Daily data unavailable for the last 30 days; monthly totals are not divided into invented daily values'
+      : 'No monthly observations are available for ' + descriptivePeriodLabel();
+  if (overviewBadge) overviewBadge.textContent = descriptivePeriod === '30d' ? 'Daily Detail' : 'Monthly Detail';
 
-  createChart('overviewBaselineChart', overviewUsesAnnualSummary ? {
-    type: 'bar',
-    data: {
-      labels: yearRowsForMode.map((row) => row.label || row.year),
-      datasets: [
-        { label: 'Net Sales Revenue', data: yearRowsForMode.map((row) => row.revenue), backgroundColor: getColor(0.88), borderRadius: 6 },
-        { label: 'Gross Profit', data: yearRowsForMode.map((row) => row.income), backgroundColor: getAmber(0.8), borderRadius: 6 }
-      ]
-    },
-    options: opts
-  } : {
+  createChart('overviewBaselineChart', {
     type: 'line',
     data: {
       labels: monthlyDataForMode.labels,
@@ -84,11 +70,9 @@ const RESPONSIVE_OVERVIEW_CHART = `  const overviewUsesAnnualSummary = compariso
   });
 
   if (overviewCanvas) {
-    overviewCanvas.setAttribute('aria-label', overviewUsesAnnualSummary
-      ? 'Bar chart showing annual net sales revenue and gross profit across all available years.'
-      : comparisonMode === 'yoy'
-        ? 'Line chart comparing monthly net sales revenue for ' + yoyTargetYear + ' and ' + yoyBaseYear + '.'
-        : 'Line chart showing monthly net sales revenue and gross profit for ' + selectedYear + '.');
+    overviewCanvas.setAttribute('aria-label', descriptivePeriod === '30d'
+      ? 'Line chart showing daily net sales revenue for the last 30 days when transaction dates are available.'
+      : 'Line chart showing monthly net sales revenue and gross profit for ' + descriptivePeriodLabel() + '.');
   }`
 
 export function patchOverviewMonthlyChart(script: string): string {

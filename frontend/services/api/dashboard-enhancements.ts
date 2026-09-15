@@ -52,6 +52,36 @@ function replaceSelectOptions(select: HTMLSelectElement | null, years: string[],
       : years[0]
 }
 
+function installDescriptivePeriodControls(root: HTMLElement) {
+  const selector = root.querySelector<HTMLElement>('.comparison-selector')
+  if (selector && !selector.querySelector('#descriptivePeriodSelect')) {
+    selector.replaceChildren()
+    const label = document.createElement('label')
+    label.setAttribute('for', 'descriptivePeriodSelect')
+    label.className = 'sr-only'
+    label.textContent = 'Historical period'
+    const select = document.createElement('select')
+    select.id = 'descriptivePeriodSelect'
+    select.className = 'topbar-select'
+    select.setAttribute('aria-label', 'Historical period')
+    ;[
+      ['30d', 'Last 30 Days'],
+      ['3', 'Last 3 Months'],
+      ['6', 'Last 6 Months'],
+      ['12', 'Last 12 Months'],
+      ['custom', 'Custom Year'],
+    ].forEach(([value, text]) => select.add(new Option(text, value, false, value === '12')))
+    selector.append(label, select)
+  }
+
+  const singleYearWrap = root.querySelector<HTMLElement>('#singleYearWrap')
+  if (singleYearWrap) {
+    singleYearWrap.style.display = 'none'
+    singleYearWrap.setAttribute('aria-label', 'Custom calendar year')
+  }
+  root.querySelector<HTMLElement>('#yoyYearWrap')?.remove()
+}
+
 export function updateDashboardProvenance(
   root: HTMLElement,
   status: DashboardDataStatus,
@@ -63,15 +93,7 @@ export function updateDashboardProvenance(
   const currentYear = String(new Date().getFullYear())
   if (years.length && Number(years[0]) < Number(currentYear)) years.unshift(currentYear)
 
-  replaceSelectOptions(root.querySelector<HTMLSelectElement>('#topbarYearSelect'), years, true)
-  replaceSelectOptions(root.querySelector<HTMLSelectElement>('#yoyBaseYearSelect'), years, false)
-  replaceSelectOptions(root.querySelector<HTMLSelectElement>('#yoyTargetYearSelect'), years, false)
-
-  const targetSelect = root.querySelector<HTMLSelectElement>('#yoyTargetYearSelect')
-  const baseSelect = root.querySelector<HTMLSelectElement>('#yoyBaseYearSelect')
-  if (targetSelect && baseSelect && targetSelect.value === baseSelect.value && years.length > 1) {
-    targetSelect.value = years[1]
-  }
+  replaceSelectOptions(root.querySelector<HTMLSelectElement>('#topbarYearSelect'), years, false)
 
   const statusBar = root.querySelector<HTMLElement>('.data-freshness-bar')
   if (statusBar) {
@@ -161,6 +183,7 @@ export function enhanceDashboardContent(root: HTMLElement) {
   }
 
   replaceUnsupportedLabels(root)
+  installDescriptivePeriodControls(root)
 
   const navigation = root.querySelector('.nav')
   if (navigation) {

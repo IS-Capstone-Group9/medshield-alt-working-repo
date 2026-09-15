@@ -21,6 +21,7 @@ def build_heatmap(rows, mappings, metadata, source_name):
     excluded = Counter()
     products = {}
     totals = defaultdict(lambda: {"quantity": 0.0, "row_count": 0})
+    daily_totals = defaultdict(lambda: {"quantity": 0.0, "row_count": 0})
     for row in rows:
         if row.get("quality_status") not in {"valid", "warning"}:
             excluded["rejected_or_unclassified"] += 1
@@ -60,11 +61,18 @@ def build_heatmap(rows, mappings, metadata, source_name):
         key = (product, delivered.strftime("%Y-%m"), area)
         totals[key]["quantity"] += quantity
         totals[key]["row_count"] += 1
+        daily_key = (product, delivered.isoformat(), area)
+        daily_totals[daily_key]["quantity"] += quantity
+        daily_totals[daily_key]["row_count"] += 1
     monthly = [{"product": key[0], "period": key[1], "area": key[2],
                 "quantity": round(value["quantity"], 4), "row_count": value["row_count"]}
                for key, value in sorted(totals.items())]
+    daily = [{"product": key[0], "period": key[1], "area": key[2],
+              "quantity": round(value["quantity"], 4), "row_count": value["row_count"]}
+             for key, value in sorted(daily_totals.items())]
     return {
         "products": sorted(products.values(), key=lambda row: row["label"]), "monthly": monthly,
+        "daily": daily,
         "source": {"file": source_name, "checksum": metadata.get("checksum"),
                    "generated_at": metadata.get("generated_at") or metadata.get("received_at"),
                    "input_rows": len(rows), "included_rows": sum(row["row_count"] for row in monthly),

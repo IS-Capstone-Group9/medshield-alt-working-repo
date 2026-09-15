@@ -40,6 +40,20 @@ This layer must be finished first because predictive and prescriptive outputs de
 | YoY growth | Compare each month against the same month in the prior year. | `descriptive_yoy_overall.csv`, `descriptive_yoy_territory.csv` |
 | Estimation audit | Count rows from backward allocation and estimated dates. | `descriptive_contract_allocation_summary.csv`, `descriptive_run_summary.json` |
 
+## Dashboard Period and Grain Rules
+
+Overview, Sales Diagnostics, Product Prioritization, and Area Prioritization use one shared historical-period filter:
+
+| Filter | Display grain | Calendar rule |
+|---|---|---|
+| Last 30 Days | Daily | Current Philippine calendar day and the preceding 29 days. Requires transaction dates; monthly aggregates must never be divided into synthetic daily values. |
+| Last 3 Months | Monthly | Current Philippine calendar month and the preceding two months. |
+| Last 6 Months | Monthly | Current Philippine calendar month and the preceding five months. |
+| Last 12 Months | Monthly | Current Philippine calendar month and the preceding eleven months. |
+| Custom Year | Monthly | January through December for one selected calendar year. The year selector is shown only in this mode. |
+
+Trailing periods are descriptive counterparts to the forward-looking 3-, 6-, and 12-month forecast horizons. Missing observations remain unavailable rather than becoming zero. Current-year monthly estimates may fill missing months only through the current month, and uploaded actuals take precedence when they arrive.
+
 ## Command
 
 Run:

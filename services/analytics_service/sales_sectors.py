@@ -45,7 +45,8 @@ def build_sectors(rows, mappings, metadata, source_name, geography_mappings=()):
             excluded['quality_duplicate_or_estimated'] += 1
             continue
         try:
-            period = date.fromisoformat(str(row.get('date_delivered'))[:10]).strftime('%Y-%m')
+            delivered_date = date.fromisoformat(str(row.get('date_delivered'))[:10])
+            period = delivered_date.strftime('%Y-%m')
             revenue, quantity = float(row['net_cost']), float(row['quantity'])
             product = str(row.get('product') or '').strip()
             if not product or product.startswith('#') or row.get('in_analysis_range') is False or not all(map(math.isfinite, (revenue, quantity))) or quantity < 0:
@@ -58,11 +59,11 @@ def build_sectors(rows, mappings, metadata, source_name, geography_mappings=()):
         sector, basis = classify_buyer(area, approved, geographies)
         channel = mapping.get('customer_channel') or (area if area.casefold() in {'hospital', 'pharma'} else 'Unclassified channel')
         territory = mapping.get('territory') or geographies.get(area.casefold()) or 'Unassigned geography'
-        key = (period, product, sector, channel, territory, basis)
+        key = (period, delivered_date.isoformat(), product, sector, channel, territory, basis)
         grouped[key]['revenue'] += revenue
         grouped[key]['quantity'] += quantity
         grouped[key]['row_count'] += 1
-    return {'rows': [dict(zip(('period', 'product', 'sector', 'channel', 'territory', 'basis'), key), **value) for key, value in sorted(grouped.items())],
+    return {'rows': [dict(zip(('period', 'date', 'product', 'sector', 'channel', 'territory', 'basis'), key), **value) for key, value in sorted(grouped.items())],
             'source': {'file': source_name, 'checksum': metadata.get('checksum'), 'input_rows': len(rows), 'included_rows': sum(v['row_count'] for v in grouped.values()), 'excluded': dict(excluded)}}
 
 
