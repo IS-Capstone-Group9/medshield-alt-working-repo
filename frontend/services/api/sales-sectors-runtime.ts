@@ -9,9 +9,9 @@ export const SALES_SECTORS_MARKUP = String.raw`
 </style>
 <div class="chart-card" style="margin-bottom:20px" data-sector-analysis>
  <div class="chart-title">Buyer ownership &amp; geographic distribution</div>
- <p>Cluster A: Government · Cluster B: Private. Hospital and Pharma remain separate customer channels. Unknown ownership is shown explicitly.</p>
+ <p>Government covers national government, public hospitals, and explicitly named LGUs. Private covers generic provincial accounts, private hospitals, pharmacies, and individual sales accounts. Internal covers MedShield business lines; unmatched records remain Unknown.</p>
  <div style="display:flex;gap:16px;flex-wrap:wrap;margin:16px 0">
- <label>Buyer cluster <select id="sectorCluster" onchange="renderSalesSectors()"><option>Government</option><option>Private</option><option>Unknown</option></select></label>
+ <label>Buyer cluster <select id="sectorCluster" onchange="renderSalesSectors()"><option>Government</option><option>Private</option><option>Internal</option><option>Unknown</option></select></label>
  <label>Product scope <select id="sectorProduct" onchange="renderSalesSectors()"></select></label>
  <label>Distribution by <select id="sectorDimension" onchange="renderSalesSectors()"><option value="territory">Geography</option><option value="channel">Customer channel</option></select></label>
  </div>
@@ -24,8 +24,8 @@ export const SALES_SECTORS_MARKUP = String.raw`
  </div>
  <div style="overflow:auto"><table class="product-table" id="sectorProfileTable"></table></div>
  <p>Shares use only the selected cluster, period and product. Select one product to compare revenue and quantity on the same population. Source units are not interchangeable across products. Delivered sales do not measure unmet market demand.</p>
- <p>Government is identified by an approved mapping or the explicit source label. The source label is unreviewed. No assumption is made about equitable allocation or MedShield's control of purchasing decisions.</p>
- <details><summary>Classification and source evidence</summary><p id="sectorSource"></p><p>Private ownership requires an approved buyer-sector mapping. Hospital does not imply private ownership; geography does not identify ownership. Area-wide mappings may be approved only when all buyers represented by that source label share the stated ownership. Mixed groups require buyer-level source data first.</p></details>
+ <p>Explicit institutional wording takes precedence over generic geography. No assumption is made about equitable allocation or MedShield's control of purchasing decisions.</p>
+ <details><summary>Classification and source evidence</summary><p id="sectorSource"></p><p>Generic province labels represent private sales accounts unless the source explicitly names an LGU or government institution. MedShield business-line labels are isolated as Internal. Unmatched labels remain Unknown.</p></details>
 </div>`
 
 export const SALES_SECTORS_SCRIPT = String.raw`
@@ -58,7 +58,7 @@ function renderSalesSectors(error) {
  const share=(v,k)=>k==='revenue' ? (validRevenue ? v/total.revenue*100:null) : (product && total.quantity>0 ? v/total.quantity*100:null);
  const fmt=v=>v===null?'Unavailable':v.toLocaleString('en-PH',{maximumFractionDigits:2});
  el('sectorStatus').textContent=rows.length ? sector+' · '+rows.reduce((n,r)=>n+r.row_count,0).toLocaleString()+' accepted observed records' : 'No '+sector.toLowerCase()+' records in this scope. Ownership must be established before drawing a sector conclusion.';
- el('sectorCoverage').textContent=['Government','Private','Unknown'].map(s=>s+': '+scope.filter(r=>r.sector===s).reduce((n,r)=>n+r.row_count,0).toLocaleString()+' records').join(' · ')+' (classification coverage, not market share)';
+ el('sectorCoverage').textContent=['Government','Private','Internal','Unknown'].map(s=>s+': '+scope.filter(r=>r.sector===s).reduce((n,r)=>n+r.row_count,0).toLocaleString()+' records').join(' · ')+' (classification coverage, not market share)';
  el('sectorScope').textContent=(years.length?Math.min(...years)+'–'+Math.max(...years):'No years')+' · '+(product||'All products; quantity comparison unavailable')+' · '+(dimension==='territory'?'Geography':'Customer channel')+'. '+(!validRevenue && rows.length?'Revenue shares unavailable for nonpositive totals or negative group values.':'');
  ['revenue','quantity'].forEach(k=>{
   const available=k==='revenue'?validRevenue:!!product && total.quantity>0;
@@ -67,5 +67,6 @@ function renderSalesSectors(error) {
  });
  el('sectorProfileTable').innerHTML='<thead><tr><th>'+ (dimension==='territory'?'Geography':'Customer channel')+'</th><th>Net sales (₱)</th><th>Revenue share (%)</th><th>Delivered source units</th><th>Quantity share (%)</th></tr></thead><tbody>'+values.map(v=>'<tr><td>'+esc(v.label)+'</td><td>'+fmt(v.revenue)+'</td><td>'+fmt(share(v.revenue,'revenue'))+'</td><td>'+ (product?fmt(v.quantity):'Select one product')+'</td><td>'+fmt(share(v.quantity,'quantity'))+'</td></tr>').join('')+'</tbody>';
  el('sectorSource').textContent=salesSectorsData.source.file+' · checksum '+(salesSectorsData.source.checksum||'unavailable')+' · excluded '+JSON.stringify(salesSectorsData.source.excluded)+'. Classification evidence: '+[...new Set(rows.map(r=>r.basis))].join('; ');
+ if(typeof renderProductPrioritizationTimeline==='function')renderProductPrioritizationTimeline();
 }
 `

@@ -17,7 +17,7 @@ export const EXTERNAL_REGRESSION_MARKUP = String.raw`
 <div class="chart-card" data-external-regression>
  <div class="chart-header"><div><div class="chart-title">DOH &amp; weather: lagged regression</div><div class="chart-subtitle">Does an earlier external signal improve prediction beyond sales history and seasonality?</div></div><button id="regExport" class="btn btn-secondary" onclick="exportExternalRegressionCSV()" disabled>Export regression CSV</button></div>
  <div class="reg-controls">
- <label>Buyer cluster<select id="regSector" onchange="changeRegressionScope('sector')"><option>Unknown</option><option>Government</option><option>Private</option></select></label>
+ <label>Buyer cluster<select id="regSector" onchange="changeRegressionScope('sector')"><option>Unknown</option><option>Government</option><option>Private</option><option>Internal</option></select></label>
  <label>Territory<select id="regTerritory" onchange="changeRegressionScope('territory')"><option>Quezon</option><option>Batangas</option><option>Cavite</option><option>Laguna</option><option>Marinduque</option><option>Camarines Norte</option><option>Camarines Sur</option></select></label>
  <label>Measure<select id="regMetric" onchange="changeRegressionScope('metric')"><option value="revenue">Net sales (₱)</option><option value="quantity">Delivered quantity</option></select></label>
  <label>Product<select id="regProduct" onchange="changeRegressionScope('product')"><option value="">All products — revenue only</option></select></label>

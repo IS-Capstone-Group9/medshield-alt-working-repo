@@ -29,18 +29,21 @@ def period_name(number):
 def predict(series, origin, target, model):
     training = {p: value for p, value in series.items() if p <= origin}
     minimum = 24 if model == 'seasonal_naive' else 2
-    if len(training) < minimum or not 1 <= target - origin <= 12:
+    if len(training) < minimum or target <= origin:
         return None
     if model == 'seasonal_naive':
-        return training.get(target - 12)
+        reference = target - 12
+        while reference > origin:
+            reference -= 12
+        return training.get(reference)
     return training[max(training)]
 
 
-def error_bands(series, cutoff, model):
+def error_bands(series, cutoff, model, max_lead=12):
     """At each lead, calibrate only on forecast targets observed by cutoff."""
     samples = defaultdict(list)
     for origin in sorted(p for p in series if p <= cutoff):
-        for lead in range(1, 13):
+        for lead in range(1, max_lead + 1):
             target = origin + lead
             if target > cutoff or target not in series:
                 continue
@@ -48,22 +51,26 @@ def error_bands(series, cutoff, model):
             if prediction is not None:
                 samples[lead].append(abs(series[target] - prediction))
     bands = {}
-    for lead in range(1, 13):
+    for lead in range(1, max_lead + 1):
         errors = sorted(samples[lead])
         bands[lead] = {'n': len(errors), 'radius': errors[math.ceil(.9 * len(errors)) - 1] if len(errors) >= 12 else None}
     return bands
 
 
-def forecast_points(series, origin, horizon, model, metric):
-    bands = error_bands(series, origin, model)
+def forecast_points(series, origin, horizon, model, metric, start=None):
+    first_target = origin + 1 if start is None else start
+    max_lead = first_target + horizon - 1 - origin
+    bands = error_bands(series, origin, model, max_lead)
     result = []
-    for lead in range(1, horizon + 1):
-        value = predict(series, origin, origin + lead, model)
+    for offset in range(horizon):
+        target = first_target + offset
+        lead = target - origin
+        value = predict(series, origin, target, model)
         radius = bands[lead]['radius']
         lower = value - radius if value is not None and radius is not None else None
         if metric == 'quantity' and lower is not None:
             lower = max(0., lower)
-        result.append({'period': period_name(origin + lead), 'prediction': value,
+        result.append({'period': period_name(target), 'prediction': value,
                        'lower': lower, 'upper': value + radius if value is not None and radius is not None else None,
                        'band_sample_count': bands[lead]['n'], 'origin': period_name(origin), 'lead': lead})
     return result
@@ -82,7 +89,7 @@ def score(pairs):
 
 
 def build_validation(payload, sector='Government', product='', metric='revenue', today=None):
-    if sector not in {'Government', 'Private', 'Unknown'} or metric not in {'revenue', 'quantity'}:
+    if sector not in {'Government', 'Private', 'Internal', 'Unknown'} or metric not in {'revenue', 'quantity'}:
         raise ValueError('Invalid forecast scope')
     if metric == 'quantity' and not product:
         raise ValueError('Quantity forecasts require one raw product identity')
@@ -112,7 +119,9 @@ def build_validation(payload, sector='Government', product='', metric='revenue',
     if not series:
         return response
     start, end = min(series), max(series)
+    forecast_start = today.year * 12 + today.month - 1
     response.update(origin=period_name(end), months_since_origin=closed_end - end,
+                    forecast_start=period_name(forecast_start),
                     actuals=[{'period': period_name(p), 'actual': series.get(p)} for p in range(start, end + 1)])
     # A frozen-origin holdout has the same calendar length as the chosen horizon.
     # Calibration for the historical bands excludes every holdout observation.
@@ -133,7 +142,7 @@ def build_validation(payload, sector='Government', product='', metric='revenue',
                     if point['lower'] is not None:
                         scored_bands += 1
                         covered += point['lower'] <= point['actual'] <= point['upper']
-            models[model] = {'forecast': forecast_points(series, end, horizon, model, metric), 'backtest': backtest,
+            models[model] = {'forecast': forecast_points(series, end, horizon, model, metric, forecast_start), 'backtest': backtest,
                              'metrics': score(pairs), 'comparison_metrics': score([(backtest[i]['actual'], backtest[i]['prediction']) for i in common]),
                              'band_coverage': {'n': scored_bands, 'percent': 100 * covered / scored_bands if scored_bands else None}}
         response['views'][str(horizon)] = {'training_end': period_name(cutoff), 'evaluation_start': period_name(cutoff + 1),

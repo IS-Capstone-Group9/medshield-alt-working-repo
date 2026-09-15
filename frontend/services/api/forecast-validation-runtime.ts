@@ -13,7 +13,7 @@ export const FORECAST_VALIDATION_MARKUP = String.raw`
 <div class="chart-card" data-forecast-validation>
  <div class="chart-header"><div><div class="chart-title">Actual sales &amp; forecast validation</div><div class="chart-subtitle">Draft sales-only benchmarks · no approved champion model</div></div><button class="btn btn-secondary" id="forecastExport" onclick="exportForecastValidationCSV()" disabled>Export forecast CSV</button></div>
  <div class="forecast-controls">
-  <label>Buyer cluster<select id="forecastSector" onchange="changeForecastScope('sector')"><option>Government</option><option>Private</option><option>Unknown</option></select></label>
+  <label>Buyer cluster<select id="forecastSector" onchange="changeForecastScope('sector')"><option>Government</option><option>Private</option><option>Internal</option><option>Unknown</option></select></label>
   <label>Product<select id="forecastProduct" onchange="changeForecastScope('product')"><option value="">All products — revenue only</option></select></label>
   <label>Measure<select id="forecastMetric" onchange="changeForecastScope('metric')"><option value="revenue">Net sales (₱)</option><option value="quantity">Delivered quantity</option></select></label>
   <label>Baseline model<select id="forecastModel" onchange="renderForecastValidation()"><option value="seasonal_naive">Seasonal naive</option><option value="last_value">Last observed value</option></select></label>
@@ -29,7 +29,7 @@ export const FORECAST_VALIDATION_MARKUP = String.raw`
  <div style="overflow-x:auto"><table id="forecastBenchmarkTable" class="product-table" aria-label="Baseline comparison on identical observed holdout months"></table></div>
  <details style="margin-top:18px"><summary>Monthly values and forecast origins</summary><div style="overflow-x:auto"><table id="forecastEvidenceTable" class="product-table"></table></div></details>
  <details style="margin-top:14px"><summary>Method, source and limitations</summary>
- <p>Seasonal naive repeats the same calendar month from the prior year and requires 24 observed training months. Last observed value repeats the latest training observation and requires two. Missing months remain gaps. Product quantities use one raw product identity; they measure fulfilled sales, not unmet demand.</p>
+ <p>Seasonal naive repeats the latest available observation for the same calendar month and requires 24 observed training months. Last observed value repeats the latest training observation and requires two. Forecast windows start with the current Philippine calendar month; the selected 3, 6 or 12 months include that current month. Missing months remain gaps. Product quantities use one raw product identity; they measure fulfilled sales, not unmet demand.</p>
  <p>The historical holdout is withheld before generating its predictions. These are retrospective backtests computed now, not forecasts archived at the time. Future forecasts use all available closed-month observations. The topbar year filter applies to descriptive pages; this view uses its own training cutoff and horizon.</p>
  <p>MAE is mean absolute error; RMSE gives more weight to large misses; WAPE is total absolute error divided by total absolute actual sales; bias is prediction minus actual (positive means overprediction). WAPE is unavailable when the actual total is zero. Observed records do not certify complete monthly sales or a complete annual holdout.</p>
  <p>Shaded bands use the 90th percentile of historical absolute errors separately at each forecast lead, requiring at least 12 prior error observations. They are empirical error ranges, not calibrated 90% confidence intervals. Historical-band calibration uses only data available before the holdout; measured holdout coverage is shown separately.</p>
@@ -73,10 +73,11 @@ function renderForecastValidation(error) {
  if(el('overviewForecastStatus'))el('overviewForecastStatus').textContent=scope+' · Draft baseline · '+(data.origin?'data through '+data.origin:'No observed data');
  if(!view){el('forecastWindow').textContent='No observed closed-month sales for this buyer cluster. Private ownership requires approved mappings.';return;}
  const result=view.models[model], future=result.forecast, backtest=result.backtest;
- const history=data.actuals.slice(-24), all=[...history.map(r=>r.period),...future.map(r=>r.period)];
+ const history=data.actuals.slice(-24), monthNo=p=>{const parts=p.split('-').map(Number);return parts[0]*12+parts[1]-1;}, periodName=n=>Math.floor(n/12)+'-'+String(n%12+1).padStart(2,'0');
+ const all=[];for(let n=monthNo(history.length?history[0].period:future[0].period),last=monthNo(future[future.length-1].period);n<=last;n++)all.push(periodName(n));
  const actual=new Map(history.map(r=>[r.period,r.actual])), past=new Map(backtest.map(r=>[r.period,r])), next=new Map(future.map(r=>[r.period,r]));
  const points=(map,key)=>all.map(p=>map.has(p)?map.get(p)[key]:null);
- el('forecastWindow').textContent='Forecast: '+future[0].period+' to '+future[future.length-1].period+' · trained through '+data.origin+' ('+data.observed_months+' observed months). '+(data.months_since_origin>0?'Sales history is '+data.months_since_origin+' closed months behind '+data.source.as_of+'; this is not a current-month outlook.':'')+' '+(future.every(r=>r.prediction===null)?'Insufficient training history for this model.':'');
+ el('forecastWindow').textContent='Current-month forecast: '+future[0].period+' to '+future[future.length-1].period+' · '+h+' months including the current month · trained through '+data.origin+' ('+data.observed_months+' observed months). '+(data.months_since_origin>0?'Sales history is '+data.months_since_origin+' closed months behind '+data.source.as_of+'.':'')+' '+(future.every(r=>r.prediction===null)?'Insufficient training history for this model.':'');
  const datasets=[
   {label:'Future lower error range',data:points(next,'lower'),borderColor:'transparent',pointRadius:0},
   {label:'Future upper error range',data:points(next,'upper'),borderColor:'transparent',backgroundColor:'rgba(51,95,120,0.14)',fill:'-1',pointRadius:0},

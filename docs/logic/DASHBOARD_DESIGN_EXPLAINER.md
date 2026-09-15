@@ -96,6 +96,10 @@ The MedShield DSS interface is organized into **5 Core Modules**:
   * **KPI Summary Cards**: Corporate Revenue (2017–2026 actuals), Gross Profit Margin, Active Risk Index, ETL Pipeline Health.
   * **Strategic Overview Chart**: Historical actual sales (2017–2026) seamlessly transitioning into Prophet demand forecasts (2027+) with shaded confidence bounds.
   * **Year Filter Controls**: `<select id="topbarYearSelect">` for single-year views; `yoyBaseYearSelect` / `yoyTargetYearSelect` pair for Y/Y comparisons — dynamically supports any year in the 2017–2026 range without code changes.
+  * **Overview Time Grain**: A selected single year renders monthly net sales revenue and gross profit. Y/Y mode aligns the two selected years by calendar month and compares revenue without expanding to four crowded series. “All Years” retains annual comparison from 2017 through the current calendar year, while KPI cards retain annual totals.
+  * **Product Time Grain**: Product Prioritization does not offer Y/Y mode. A selected year renders monthly product revenue; “All Years” renders yearly product revenue. ABC, portfolio, Pareto, and ranking views are recomputed from the same selected period.
+  * **Buyer Cluster Rule**: Government includes national government, public hospitals, and explicitly named LGUs. Generic provincial accounts, hospitals/pharmacies, and individual sales accounts are Private unless explicit government wording is present. MedShield business lines are Internal; unmatched labels remain Unknown. The same rule feeds Area Prioritization, Forecast Modeling, and Prescriptive Planning.
+  * **Current-Year Evidence Rule**: The current year is displayed only through the current Philippine calendar month. Uploaded monthly actuals take precedence; missing closed/current months use a clearly labelled seasonal-naive estimate from the latest prior year with that month. Future months remain unavailable rather than being treated as zero.
 
 ### Module 2: Sales Diagnostic Module
 * **Audience**: Business Analysts, Operations Researchers.

@@ -38,7 +38,9 @@ function replaceSelectOptions(select: HTMLSelectElement | null, years: string[],
   years.forEach((year) => {
     const option = document.createElement('option')
     option.value = year
-    option.textContent = year
+    option.textContent = Number(year) === new Date().getFullYear()
+      ? `${year} (Actual + Estimate)`
+      : year
     fragment.appendChild(option)
   })
 
@@ -58,6 +60,8 @@ export function updateDashboardProvenance(
   const years = [...new Set(availableYears)]
     .filter((year) => /^\d{4}$/.test(year))
     .sort((a, b) => Number(b) - Number(a))
+  const currentYear = String(new Date().getFullYear())
+  if (years.length && Number(years[0]) < Number(currentYear)) years.unshift(currentYear)
 
   replaceSelectOptions(root.querySelector<HTMLSelectElement>('#topbarYearSelect'), years, true)
   replaceSelectOptions(root.querySelector<HTMLSelectElement>('#yoyBaseYearSelect'), years, false)

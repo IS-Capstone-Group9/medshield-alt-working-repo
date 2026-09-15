@@ -157,14 +157,20 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     await baseSelect.selectOption('2025');
     await targetSelect.selectOption('2023');
 
-    // Overview Chart should render only the selected comparison pair.
+    // Overview Chart should align the selected comparison pair by month.
     await expect(page.locator('#overviewBaselineChart')).toBeVisible();
     await expect.poll(async () => page.evaluate(() => {
       const chartApi = (window as any).Chart
       const canvas = document.getElementById('overviewBaselineChart')
       const chart = canvas ? chartApi?.getChart?.(canvas) : null
       return chart?.data?.labels?.map(String) ?? []
-    })).toEqual(['2023', '2025'])
+    })).toEqual(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
+    await expect.poll(async () => page.evaluate(() => {
+      const chartApi = (window as any).Chart
+      const canvas = document.getElementById('overviewBaselineChart')
+      const chart = canvas ? chartApi?.getChart?.(canvas) : null
+      return chart?.data?.datasets?.map((dataset: { label?: string }) => dataset.label) ?? []
+    })).toEqual(['Revenue 2023 (Compare)', 'Revenue 2025 (Base)'])
 
     // Switch back to Single Year
     await singleYearBtn.click();
@@ -179,7 +185,30 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
       const canvas = document.getElementById('overviewBaselineChart')
       const chart = canvas ? chartApi?.getChart?.(canvas) : null
       return chart?.data?.labels?.map(String) ?? []
-    })).toEqual(['2024'])
+    })).toEqual(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
+    await expect.poll(async () => page.evaluate(() => {
+      const chartApi = (window as any).Chart
+      const canvas = document.getElementById('overviewBaselineChart')
+      const chart = canvas ? chartApi?.getChart?.(canvas) : null
+      return chart?.data?.datasets?.map((dataset: { label?: string }) => dataset.label) ?? []
+    })).toEqual(['Net Sales Revenue 2024', 'Gross Profit 2024'])
+    await expect(page.locator('#overviewBaselineChart').locator('xpath=ancestor::div[contains(@class,"chart-card")]').locator('.chart-subtitle'))
+      .toHaveText('January–December performance for 2024')
+
+    await yearSelect.selectOption('all')
+    await expect.poll(async () => page.evaluate(() => {
+      const chartApi = (window as any).Chart
+      const canvas = document.getElementById('overviewBaselineChart')
+      const chart = canvas ? chartApi?.getChart?.(canvas) : null
+      const labels = chart?.data?.labels?.map(String) ?? []
+      const currentYear = new Date().getFullYear()
+      return labels[0] === '2017'
+        && labels.at(-1)?.startsWith(String(currentYear)) === true
+        && labels.every((label: string) => {
+          const year = Number.parseInt(label, 10)
+          return year >= 2017 && year <= currentYear
+        })
+    })).toBe(true)
   });
 
   test('3b. Extended data pages open and unsupported dark mode is absent', async ({ page }) => {
@@ -203,7 +232,8 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     await page.locator('.nav-item', { hasText: 'Forecast Modeling' }).click();
     await expectChartRendered(page, 'forecastChart');
     await page.selectOption('#forecastHorizon', '3');
-    await expect(page.locator('#forecastWindow')).toContainText('2026-03');
+    const currentMonth = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Manila', year: 'numeric', month: '2-digit' }).format(new Date());
+    await expect(page.locator('#forecastWindow')).toContainText(currentMonth);
     const pending = page.waitForEvent('download');
     await page.locator('#forecastExport').click();
     const download = await pending;

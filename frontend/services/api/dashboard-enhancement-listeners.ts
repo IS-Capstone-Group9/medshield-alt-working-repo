@@ -63,6 +63,7 @@ function activateDashboardPage(root: HTMLElement, name: DashboardPageName, navIt
       ? 'flex'
       : 'none'
   }
+  ;(window as any).configureProductYearControls?.(name)
 
   if (document.body.classList.contains('nav-hidden')) {
     ;(window as any).closeNavigation?.()

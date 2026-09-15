@@ -14,21 +14,21 @@ function exportSalesGrowthCSV() {
 }
 
 function diagnosticYears() {
-  const years = [...new Set(DATA.year_summary.map(row => Number(row.year))
-    .concat(DATA.monthly.map(row => Number(String(row.period).slice(0, 4)))))]
-    .filter(year => Number.isInteger(year) && year >= 1900 && year <= 2200).sort((a, b) => a - b);
+  const calendar = dashboardCalendar();
+  const years = [...new Set(dashboardAnnualRows().map(row => Number(row.year))
+    .concat(dashboardMonthlyRows().map(row => Number(String(row.period).slice(0, 4)))))]
+    .filter(year => Number.isInteger(year) && year >= 2017 && year <= calendar.year).sort((a, b) => a - b);
   if (!years.length) return [];
-  const start = comparisonMode === 'yoy' ? Math.min(Number(yoyBaseYear), Number(yoyTargetYear))
-    : selectedYear === 'all' ? years[0] : Number(selectedYear);
-  const end = comparisonMode === 'yoy' ? Math.max(Number(yoyBaseYear), Number(yoyTargetYear))
-    : selectedYear === 'all' ? years[years.length - 1] : Number(selectedYear);
-  if (!Number.isInteger(start) || !Number.isInteger(end) || end < start || end - start > 300) return [];
-  return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+  if (comparisonMode === 'single' && selectedYear === 'all') return years;
+  const selected = comparisonMode === 'yoy'
+    ? [Number(yoyTargetYear), Number(yoyBaseYear)]
+    : [Number(selectedYear)];
+  return [...new Set(selected)].filter(year => years.includes(year));
 }
 
 function diagnosticMonths() {
   const months = new Map();
-  DATA.monthly.forEach(row => {
+  dashboardMonthlyRows().forEach(row => {
     const period = String(row.period);
     if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(period)) return;
     if (row.revenue == null || row.income == null || !Number.isFinite(Number(row.revenue)) || !Number.isFinite(Number(row.income))) return;
@@ -92,40 +92,94 @@ function diagnosticAxis(values, title, color, position, grid) {
 
 function renderSalesDiagnostics(opts) {
   const years = diagnosticYears(), months = diagnosticMonths();
-  const periods = years.flatMap(year => Array.from({ length: 12 }, (_, i) => year + '-' + String(i + 1).padStart(2, '0')));
-  const revenue = periods.map(period => months.get(period)?.revenue ?? null);
-  const profit = periods.map(period => months.get(period)?.income ?? null);
+  const allYearsMode = comparisonMode === 'single' && selectedYear === 'all';
+  const annual = dashboardAnnualRows().filter(row => Number(row.year) >= 2017 && Number(row.year) <= dashboardCalendar().year);
+  const calendar = dashboardCalendar();
+  const currentYear = calendar.year;
+  const allMonthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const selectedCalendarYears = comparisonMode === 'yoy'
+    ? [Number(yoyTargetYear), Number(yoyBaseYear)]
+    : [Number(selectedYear)];
+  const monthNames = !allYearsMode && selectedCalendarYears.includes(currentYear)
+    ? allMonthNames.slice(0, calendar.month)
+    : allMonthNames;
+  const periodFor = (year, month) => String(year) + '-' + String(month).padStart(2, '0');
+  const yearLabel = year => Number(year) === currentYear ? String(year) + ' (Actual + Estimate)' : String(year);
+  let detailLabels, detailDatasets, detailScales;
+
+  if (allYearsMode) {
+    const revenue = annual.map(row => row.revenue);
+    const profit = annual.map(row => row.income);
+    detailLabels = annual.map(row => row.label || row.year);
+    detailDatasets = [
+      { label: 'Net Sales Revenue', data: revenue, yAxisID: 'revenue', backgroundColor: getColor(.82), borderColor: getColor(), borderWidth: 1.5, borderRadius: 4 },
+      { label: 'Gross Profit', data: profit, yAxisID: 'grossProfit', backgroundColor: getAmber(.76), borderColor: getAmber(), borderWidth: 1.5, borderRadius: 4 }
+    ];
+    detailScales = {
+      x: opts.scales.x,
+      revenue: diagnosticAxis(revenue, 'Net sales revenue (₱)', getColor(), 'left', true),
+      grossProfit: diagnosticAxis(profit, 'Gross profit (₱)', getAmber(), 'right', false)
+    };
+  } else if (comparisonMode === 'yoy') {
+    const target = Number(yoyTargetYear), base = Number(yoyBaseYear);
+    const targetRevenue = monthNames.map((_, index) => months.get(periodFor(target, index + 1))?.revenue ?? null);
+    const baseRevenue = monthNames.map((_, index) => months.get(periodFor(base, index + 1))?.revenue ?? null);
+    detailLabels = monthNames;
+    detailDatasets = [
+      { label: 'Revenue ' + yearLabel(target), data: targetRevenue, yAxisID: 'revenue', borderColor: getBlue(), backgroundColor: getBlue(.08), borderWidth: 2.3, pointRadius: 3, tension: .25, fill: false, spanGaps: false },
+      { label: 'Revenue ' + yearLabel(base), data: baseRevenue, yAxisID: 'revenue', borderColor: getColor(), backgroundColor: getColor(.08), borderWidth: 2.3, pointRadius: 3, tension: .25, fill: false, spanGaps: false }
+    ];
+    detailScales = { x: opts.scales.x, revenue: diagnosticAxis([...targetRevenue, ...baseRevenue], 'Net sales revenue (₱)', getColor(), 'left', true) };
+  } else {
+    const year = Number(selectedYear);
+    const revenue = monthNames.map((_, index) => months.get(periodFor(year, index + 1))?.revenue ?? null);
+    const profit = monthNames.map((_, index) => months.get(periodFor(year, index + 1))?.income ?? null);
+    detailLabels = monthNames;
+    detailDatasets = [
+      { label: 'Net Sales Revenue ' + yearLabel(year), data: revenue, yAxisID: 'revenue', borderColor: getColor(), backgroundColor: getColor(.08), borderWidth: 2.5, pointRadius: 3, tension: .25, fill: false, spanGaps: false },
+      { label: 'Gross Profit ' + yearLabel(year), data: profit, yAxisID: 'grossProfit', borderColor: getAmber(), backgroundColor: getAmber(.08), borderWidth: 2.2, pointRadius: 3, tension: .25, fill: false, spanGaps: false }
+    ];
+    detailScales = {
+      x: opts.scales.x,
+      revenue: diagnosticAxis(revenue, 'Net sales revenue (₱)', getColor(), 'left', true),
+      grossProfit: diagnosticAxis(profit, 'Gross profit (₱)', getAmber(), 'right', false)
+    };
+  }
+
   const subtitle = document.getElementById('salesComparisonSubtitle');
-  if (subtitle) subtitle.textContent = (years.length ? years[0] + '–' + years[years.length - 1] : 'No selected years')
-    + ' · Revenue: left axis; gross profit: right axis (independent scales). Gaps mean unavailable months, not zero sales.';
+  if (subtitle) subtitle.textContent = allYearsMode
+    ? '2017–' + currentYear + ' annual comparison; current-year estimate stops at the current month and yields to uploaded actuals.'
+    : comparisonMode === 'yoy'
+      ? 'Monthly revenue comparison for ' + yoyTargetYear + ' and ' + yoyBaseYear + '; gaps mean unavailable months, not zero sales.'
+      : 'January–December revenue and gross profit for ' + selectedYear + '; gaps mean unavailable months, not zero sales.';
   createChart('revenueDetailChart', {
-    type: 'line',
-    data: {
-      labels: periods,
-      datasets: [
-        { label: 'Net Sales Revenue', data: revenue, yAxisID: 'revenue', borderColor: getColor(), backgroundColor: getColor(), borderWidth: 2.5, pointRadius: 2, tension: 0, fill: false, spanGaps: false },
-        { label: 'Gross Profit', data: profit, yAxisID: 'grossProfit', borderColor: getAmber(), backgroundColor: getAmber(), borderWidth: 2, pointRadius: 2, tension: 0, fill: false, spanGaps: false }
-      ]
-    },
+    type: allYearsMode ? 'bar' : 'line',
+    data: { labels: detailLabels, datasets: detailDatasets },
     options: {
       ...opts,
       plugins: { ...opts.plugins, legend: { ...opts.plugins.legend, position: 'bottom' }, tooltip: {
         ...opts.plugins.tooltip, callbacks: { label: context => context.dataset.label + ': ' + diagnosticCurrency(context.raw) }
       } },
-      scales: {
-        x: { ...opts.scales.x, ticks: { ...opts.scales.x.ticks, maxTicksLimit: 18, callback: function(value) { return monthLabel(this.getLabelForValue(value)); } } },
-        revenue: diagnosticAxis(revenue, 'Net sales revenue (₱)', getColor(), 'left', true),
-        grossProfit: diagnosticAxis(profit, 'Gross profit (₱)', getAmber(), 'right', false)
-      }
+      scales: detailScales
     }
   });
 
   // Calendar-year YoY never uses the previous array row. Matching observed months
   // avoids treating unreported months as zeros or comparing partial to full years.
   const baseline = comparisonMode === 'yoy' ? Number(yoyBaseYear)
-    : selectedYear === 'all' ? years[0] : Number(selectedYear) - 1;
-  const rows = years.map(year => ({ year, yoy: diagnosticComparison(months, year, year - 1), baseline: diagnosticComparison(months, year, baseline) }));
+    : allYearsMode ? years[0] : Number(selectedYear) - 1;
   const targetYear = comparisonMode === 'yoy' ? Number(yoyTargetYear) : years[years.length - 1];
+  const rows = allYearsMode
+    ? years.map(year => ({ label: String(year), year, yoy: diagnosticComparison(months, year, year - 1), baseline: diagnosticComparison(months, year, baseline) }))
+    : monthNames.map((label, index) => {
+        const month = index + 1;
+        const current = months.get(periodFor(targetYear, month));
+        const previous = months.get(periodFor(baseline, month));
+        const delta = current && previous ? current.revenue - previous.revenue : null;
+        return { label, year: targetYear, yoy: { current: current?.revenue ?? null, previous: previous?.revenue ?? null,
+          delta, rate: delta !== null && previous.revenue > 0 ? delta / previous.revenue * 100 : null,
+          covered: current && previous ? [month] : [] }, baseline: { delta, rate: delta !== null && previous.revenue > 0 ? delta / previous.revenue * 100 : null, covered: current && previous ? [month] : [] } };
+      });
   const baselineComparison = diagnosticComparison(months, targetYear, baseline);
   const summary = document.getElementById('salesGrowthSummary');
   if (summary) summary.textContent = 'Net sales revenue change: ' + targetYear + ' vs baseline ' + baseline + ': '
@@ -136,7 +190,7 @@ function renderSalesDiagnostics(opts) {
   createChart('growthChart', {
     type: 'bar',
     data: {
-      labels: rows.map(row => String(row.year)),
+      labels: rows.map(row => row.label),
       datasets: [
         { label: 'YoY net sales growth (%)', data: rows.map(row => row.yoy.rate), yAxisID: 'growthRate', backgroundColor: rows.map(row => row.yoy.rate < 0 ? getRed(.8) : getColor(.8)), borderRadius: 4 },
         { type: 'line', label: 'YoY net sales change (₱)', data: rows.map(row => row.yoy.delta), yAxisID: 'pesoChange', borderColor: getAmber(), backgroundColor: getAmber(), pointRadius: 3, tension: 0, spanGaps: false }
@@ -149,7 +203,7 @@ function renderSalesDiagnostics(opts) {
           label: context => context.dataset.label + ': ' + (context.dataset.yAxisID === 'growthRate' ? diagnosticRate(context.raw) : diagnosticCurrency(context.raw)),
           afterBody: contexts => {
             const row = rows[contexts[0]?.dataIndex];
-            return row ? [String(row.year - 1) + ': ' + diagnosticCurrency(row.yoy.previous), String(row.year) + ': ' + diagnosticCurrency(row.yoy.current), diagnosticCoverage(row.yoy.covered)] : [];
+            return row ? [String(baseline) + ': ' + diagnosticCurrency(row.yoy.previous), String(targetYear) + ': ' + diagnosticCurrency(row.yoy.current), diagnosticCoverage(row.yoy.covered)] : [];
           }
         }
       } },
@@ -165,13 +219,13 @@ function renderSalesDiagnostics(opts) {
   if (table) {
     table.replaceChildren();
     const head = table.createTHead().insertRow();
-    ['Year', 'YoY compared months', 'Prior-year net sales (₱)', 'Current net sales (₱)', 'YoY change (₱)', 'YoY growth (%)', 'Change vs ' + baseline + ' (₱)', 'Growth vs ' + baseline + ' (%)', 'Baseline compared months'].forEach(label => {
+    [(allYearsMode ? 'Year' : 'Month'), 'Compared periods', 'Baseline net sales (₱)', 'Current net sales (₱)', 'Change (₱)', 'Growth (%)', 'Change vs ' + baseline + ' (₱)', 'Growth vs ' + baseline + ' (%)', 'Coverage'].forEach(label => {
       const th = document.createElement('th'); th.scope = 'col'; th.textContent = label; head.appendChild(th);
     });
     const body = table.createTBody();
     rows.forEach(row => {
       const tr = body.insertRow();
-      [row.year, diagnosticCoverage(row.yoy.covered), diagnosticCurrency(row.yoy.previous), diagnosticCurrency(row.yoy.current), diagnosticCurrency(row.yoy.delta), diagnosticRate(row.yoy.rate), diagnosticCurrency(row.baseline.delta), diagnosticRate(row.baseline.rate), diagnosticCoverage(row.baseline.covered)].forEach(value => { tr.insertCell().textContent = String(value); });
+      [row.label, diagnosticCoverage(row.yoy.covered), diagnosticCurrency(row.yoy.previous), diagnosticCurrency(row.yoy.current), diagnosticCurrency(row.yoy.delta), diagnosticRate(row.yoy.rate), diagnosticCurrency(row.baseline.delta), diagnosticRate(row.baseline.rate), diagnosticCoverage(row.baseline.covered)].forEach(value => { tr.insertCell().textContent = String(value); });
     });
   }
 }

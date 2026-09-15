@@ -100,7 +100,7 @@ def ols(train_x, train_y, predict_x):
 
 
 def build_regression(sales, signals, sources, sector='Unknown', territory='Quezon', product='', metric='quantity', mode='disease', provider='NASA POWER', disease='Dengue', lag=1, rainfall_lag=1, today=None):
-    if sector not in {'Government', 'Private', 'Unknown'} or metric not in {'quantity', 'revenue'} or mode not in {'disease', 'rainfall', 'combined'} or provider not in {'NASA POWER', 'PAGASA'} or disease not in DISEASES or lag not in LAGS or rainfall_lag not in LAGS:
+    if sector not in {'Government', 'Private', 'Internal', 'Unknown'} or metric not in {'quantity', 'revenue'} or mode not in {'disease', 'rainfall', 'combined'} or provider not in {'NASA POWER', 'PAGASA'} or disease not in DISEASES or lag not in LAGS or rainfall_lag not in LAGS:
         raise ValueError('Invalid regression scope')
     population = [r for r in sales['rows'] if r['sector'] == sector and r['territory'] == territory]
     products = sorted({r['product'] for r in population})

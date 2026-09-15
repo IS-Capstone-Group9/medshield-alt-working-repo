@@ -34,12 +34,13 @@ test('Section 1: real chart datasets, KPI rates, labels and refresh use the same
   })
   expect(chart.values).toHaveLength(1)
   expect(chart.values[0]).toBeCloseTo(14)
-  expect(chart.labels).toEqual(['Net Sales Revenue', 'Gross Profit'])
+  expect(chart.labels).toEqual(['Net Sales Revenue 2025', 'Gross Profit 2025'])
   await page.locator('[data-metric-definitions] summary').click()
   await expect(page.locator('[data-metric-definitions]')).toContainText('transaction percentages are not averaged')
   await page.screenshot({ path: 'test-results/section-1-sales-diagnostics.png', fullPage: true })
   await page.evaluate(() => (window as any).applyDatasetPatch({
     year_summary: [{ year: '2025', revenue: 0, income: 20, transactions: 1 }],
+    monthly: [{ period: '2025-01', revenue: 0, income: 20 }],
   }))
   await expect(page.locator('#salesGrossMargin')).toHaveText('Unavailable')
   expect(await page.evaluate(() => (window as any).Chart.getChart(document.getElementById('marginChart')).data.datasets[0].data)).toEqual([null])

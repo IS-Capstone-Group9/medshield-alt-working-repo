@@ -5,6 +5,9 @@ import { SALES_SECTORS_SCRIPT } from './sales-sectors-runtime'
 import { MEDSHIELD_SCRIPT } from '@/lib/medshieldReference'
 import { SALES_DIAGNOSTICS_SCRIPT } from './sales-diagnostics-runtime'
 import { SALES_HEATMAP_SCRIPT } from './sales-heatmap-runtime'
+import { patchOverviewMonthlyChart } from './overview-monthly-runtime'
+import { CURRENT_YEAR_SCRIPT } from './current-year-runtime'
+import { PRODUCT_PRIORITIZATION_SCRIPT } from './product-prioritization-runtime'
 
 export type ListenerRecord = {
   target: EventTarget
@@ -69,7 +72,7 @@ export function getExecutableDashboardScript(): string {
     .map((name) => `if (typeof ${name} === 'function') window.${name} = ${name};`)
     .join('\n')
 
-  let patchedScript = MEDSHIELD_SCRIPT
+  let patchedScript = patchOverviewMonthlyChart(MEDSHIELD_SCRIPT)
     .replace(/window\.([a-zA-Z0-9_]+)\s*=\s*\1;?/g, "if (typeof $1 !== 'undefined') window.$1 = $1;")
     .replace("window.addEventListener('DOMContentLoaded', async () => {", `(async () => {\n${globalHandlerBridge}\n`)
     .replaceAll("'#335F78'", "dashboardThemeColor('--chart-label', '#335F78')")
@@ -87,6 +90,8 @@ export function getExecutableDashboardScript(): string {
       setTimeout(function() {
         if (typeof buildCharts === 'function') buildCharts();
         if (typeof buildTables === 'function') buildTables();
+        if (typeof configureProductYearControls === 'function') configureProductYearControls(name);
+        if (typeof renderProductPrioritizationTimeline === 'function') renderProductPrioritizationTimeline();
         if (typeof renderShowcaseDOMVisuals === 'function') renderShowcaseDOMVisuals();
       }, 60);
     });
@@ -231,6 +236,8 @@ function resizeCharts() {
   }
 }
 ${SALES_DIAGNOSTICS_SCRIPT}
+${CURRENT_YEAR_SCRIPT}
+${PRODUCT_PRIORITIZATION_SCRIPT}
 ${SALES_HEATMAP_SCRIPT}
 ${SALES_SECTORS_SCRIPT}
 ${FORECAST_VALIDATION_SCRIPT}

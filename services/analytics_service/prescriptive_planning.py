@@ -10,7 +10,7 @@ from services.analytics_service.sales_sectors import load_sectors
 
 
 def build_shortlist(payload, sector='Unknown', territory='Quezon', today=None):
-    if sector not in {'Unknown', 'Private', 'Government'}:
+    if sector not in {'Unknown', 'Private', 'Government', 'Internal'}:
         raise ValueError('Invalid buyer cluster')
     today = today or datetime.now(ZoneInfo('Asia/Manila')).date()
     cutoff = today.year * 12 + today.month - 2
