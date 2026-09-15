@@ -2,11 +2,25 @@
 
 ## Purpose
 
-This document is the text reference for the MedShield North Star Diagram. It defines the primary inventory optimization question and the descriptive, predictive, and prescriptive analytical paths that support it.
+This document is the text reference for the MedShield North Star Diagram. It defines the primary inventory optimization question and the descriptive, predictive, and prescriptive analytical paths that support it. The approved internal-sales scope is 2017 onward. External DOH, PAGASA, and provider-derived weather signals retain their own documented coverage periods.
+
+The 2017-2019 records remain in scope, but Net CP revenue and revenue-derived KPIs for those years must remain unavailable until the historical financial mapping is reconciled. Available quantity and data-quality evidence may still be reported with explicit coverage labels.
 
 ## North Star Question
 
 **1. How can MedShield optimize its inventory and reduce losses?**
+
+**Capstone objective:** Develop an integrated descriptive, predictive, and prescriptive DSS by December 2026 to improve demand visibility and reduce expiry-driven wastage for December 2026 and future planning cycles.
+
+## Objective Alignment
+
+| Objective | North Star path | Primary completion measures |
+|---|---|---|
+| Analyze validated sales from 2017 onward | Descriptive | Quantity, Net CP revenue where available, workbook gross profit, monthly trend, STL seasonality, year-over-year movement, territory completeness |
+| Prioritize products, areas, and accounts | Descriptive and predictive | Pareto contribution, actual ABC class, demand growth, territory and buyer-cluster share, mapping coverage, provisional XGBoost performance for eligible low-history products |
+| Forecast territory demand from December 2026 onward | Predictive | MAE, RMSE, MAPE or WAPE, bias, improvement over a simple baseline, 3/6/12-month coverage |
+| Improve inventory planning and reduce expiry-driven wastage | Prescriptive | Wastage rate at or below 5%, fulfillment, unmet demand, inventory turnover, stockout rate, cost deviation, allocation feasibility |
+| Deliver governed DSS modules | All paths | Five-module availability, ingestion quality, freshness, publication status, alert validation, recommendation acknowledgement, outcome capture |
 
 ## Descriptive Path
 
@@ -18,7 +32,7 @@ This document is the text reference for the MedShield North Star Diagram. It def
 
 ### 3A. Seasonal Demand Cycles
 
-**Question:** What seasonal demand cycles exist in 2021-2025 sales data?
+**Question:** What seasonal demand cycles exist in validated sales data from 2017 onward?
 
 **Method:** STL decomposition
 
@@ -34,9 +48,9 @@ This document is the text reference for the MedShield North Star Diagram. It def
 
 **Method:** Time-series trend analysis
 
-### 6A. Territory Revenue and Net Income
+### 6A. Territory Revenue and Workbook Gross Profit
 
-**Question:** Which service territories generate the most revenue and net income?
+**Question:** Which service territories generate the most revenue and workbook gross profit?
 
 **Method:** Geographic revenue ranking
 

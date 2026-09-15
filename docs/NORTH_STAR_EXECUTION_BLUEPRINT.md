@@ -15,7 +15,7 @@
 
 This document defines how MedShield should execute the descriptive, predictive, and prescriptive methods in the North Star Diagram using:
 
-- MedShield historical sales data from 2021 through 2025.
+- MedShield historical sales data from 2017 onward, with metric-level availability and reconciliation status.
 - Historical DOH disease data from 2021 through 2025.
 - Historical PAGASA weather data from 2021 through 2024.
 - The existing Next.js frontend, TypeScript API gateway, Python services, and Supabase warehouse.
@@ -54,7 +54,7 @@ The system must support a recommendation lifecycle:
 
 | Dataset | Confirmed period | Role | Current workspace status |
 |---|---|---|---|
-| MedShield sales | 2021-2025 | Historical demand, revenue, product, customer, and territory analysis | Present |
+| MedShield sales | 2017 onward | Historical demand, revenue, product, customer, and territory analysis | Present; 2017-2019 Net CP revenue requires reconciliation |
 | DOH | 2021-2025 | Historical disease intensity, disease-adjusted model training, and alert backtesting | Period confirmed; files are not yet present |
 | PAGASA | 2021-2024 | Historical official weather features, rainfall-risk analysis, and typhoon-rule backtesting | Period confirmed; files are not yet present |
 | NASA POWER | 2021-2025 target backfill | Historical weather proxy and 2025 weather-model evaluation | API integration present |
@@ -90,7 +90,7 @@ The repository already provides important foundations:
 | Real trained DSS outputs | Not yet implemented |
 | Demo/fallback DSS outputs | Present in `frontend/public/data/sales_data.json` |
 
-The existing DSS tables and API endpoints are a storage and delivery foundation. Their presence does not prove that Prophet, XGBoost, EOQ, ROP, MCDA, linear programming, or collaborative filtering have been trained or executed from the 2021-2025 source data.
+The existing DSS tables and API endpoints are a storage and delivery foundation. Their presence does not prove that Prophet, XGBoost, EOQ, ROP, MCDA, linear programming, or collaborative filtering have been trained or executed from the validated 2017-onward sales history.
 
 ### 3.3 Current Sales Data Profile
 
@@ -231,7 +231,7 @@ The team must approve the following definitions before training models:
 
 ```mermaid
 flowchart LR
-    A["Sales files 2021-2025"] --> B["Sales staging and quality checks"]
+    A["Sales files 2017 onward"] --> B["Sales staging and quality checks"]
     C["NASA POWER historical"] --> D["Weather staging and provenance"]
     E["OpenWeather current and forecast"] --> D
     F["DOH historical 2021-2025"] --> G["Disease staging and provenance"]
@@ -502,7 +502,7 @@ The North Star transcription uses `DLI`; the paper uses `DII`, or Disease Intens
 
 ### 9.1.2 3A - STL Seasonal Decomposition
 
-**Business question:** What seasonal demand cycles exist in 2021-2025?
+**Business question:** What seasonal demand cycles exist in validated sales data from 2017 onward?
 
 **Recommended first release:**
 
@@ -621,7 +621,7 @@ The 2025 sales holdout should be used only after 2025 sales completeness is prov
 
 After model selection:
 
-- Refit the selected sales-only model on the full trusted 2021-2025 sales history for the 2026 baseline.
+- Refit the selected sales-only model on the full trusted 2017-onward sales history for the 2026 baseline, excluding unavailable metric periods rather than converting them to zero.
 - Refit the selected disease model on sales and DOH 2021-2025, then apply approved future DII scenarios.
 - Refit the selected NASA proxy model on sales and NASA 2021-2025, then apply weather scenarios or short-horizon OpenWeather values.
 - Keep the official PAGASA model limited to 2021-2024 unless a later PAGASA dataset is acquired.
