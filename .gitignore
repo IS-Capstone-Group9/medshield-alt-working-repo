@@ -52,6 +52,8 @@ docs/~$*.docx
 docs/MedShield_Chapter_4_5_Draft.docx
 frontend/test-results/
 frontend/playwright-report/
+test-results/
+playwright-report/
 *.tsbuildinfo
 
 # Runtime ingestion outputs
