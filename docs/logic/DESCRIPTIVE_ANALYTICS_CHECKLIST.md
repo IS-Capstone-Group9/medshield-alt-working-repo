@@ -14,7 +14,7 @@ This checklist tracks what has been accomplished and what remains for the descri
 
 ## 2. Business Groupings (North Star Node 2A)
 * **Goal**: Group products, territories, and customers by behavior.
-- [x] **Accomplished**: Separate geographic territories (CALABARZON, Bicol, Metro Manila) from customer channels and admin accounts.
+- [x] **Accomplished**: Separate geographic territories (CALABARZON, MIMAROPA, Bicol) from customer channels and admin accounts.
 - [x] **Accomplished**: Ingest product master mappings to separate medicines from operational/office overhead.
 - [x] **Accomplished**: Design a fallback regex parser/grouper to auto-sort unmapped products.
 - [ ] **To Be Accomplished**: Secure formal stakeholder approval on draft SKU categories in `product_master_mapping.csv` and area codes in `area_classification_mapping.csv`.
@@ -44,7 +44,7 @@ This checklist tracks what has been accomplished and what remains for the descri
 
 ## 6. Territory Performance (North Star Node 6A)
 * **Goal**: Identify territories generating the most revenue and net income across the 2017–2026 baseline.
-- [x] **Accomplished**: Exclude non-geographic labels and rank actual geographic territories (CALABARZON, Bicol, Metro Manila) by revenue and gross margin.
+- [x] **Accomplished**: Exclude non-geographic labels and rank actual geographic territories (CALABARZON, MIMAROPA, Bicol) by revenue and gross margin.
 
 ---
 

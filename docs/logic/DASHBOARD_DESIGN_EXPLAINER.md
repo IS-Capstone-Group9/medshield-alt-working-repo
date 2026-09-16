@@ -1,6 +1,6 @@
 # MedShield Executive DSS Dashboard: Design Architecture & Build Guide
 
-This document defines the design methodology and system architecture for the MedShield **Decision Support System (DSS)** — an enterprise-grade platform for pharmaceutical distribution and inventory planning in the Philippines (CALABARZON / Bicol / Metro Manila). It bridges data engineering, predictive forecasting, and prescriptive optimization into a clean, executive-facing interface aligned with the **MedShield North Star Diagram** (`references/NStar.md`) and the Group 9 ISB capstone research framework (`references/PRIVATE_SUMMER_CAPSTONE_2 - GROUP9_ISB.pdf`).
+This document defines the design methodology and system architecture for the MedShield **Decision Support System (DSS)** — an enterprise-grade platform for pharmaceutical distribution and inventory planning in the Philippines (CALABARZON / MIMAROPA / Bicol). It bridges data engineering, predictive forecasting, and prescriptive optimization into a clean, executive-facing interface aligned with the **MedShield North Star Diagram** (`references/NStar.md`) and the Group 9 ISB capstone research framework (`references/PRIVATE_SUMMER_CAPSTONE_2 - GROUP9_ISB.pdf`).
 
 > [!IMPORTANT]
 > **Data Horizon**: Historical data spans **2017–2026**. All forward-looking forecasts, inventory parameters (EOQ, ROP, Safety Stock), and LP allocations target **2027 and beyond**. This boundary is enforced across all dashboard modules, charts, and filter controls.

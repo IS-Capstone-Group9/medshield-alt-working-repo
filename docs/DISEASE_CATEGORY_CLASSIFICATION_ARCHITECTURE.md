@@ -9,7 +9,7 @@
 
 ## 1. Executive Summary
 
-In the **MedShield Decision Support System (DSS)**, sales and inventory datasets collected from pharmaceutical distribution in Philippine epidemic hot zones (such as CALABARZON, Bicol, and Metro Manila) require automated classification to determine which specific seasonal diseases (e.g., **Dengue**, **Leptospirosis**, **Influenza-like Illness [ILI]**, **Acute Gastroenteritis**) each incoming medicine treats.
+In the **MedShield Decision Support System (DSS)**, sales and inventory datasets collected from pharmaceutical distribution in Philippine epidemic hot zones (such as CALABARZON, MIMAROPA, and Bicol) require automated classification to determine which specific seasonal diseases (e.g., **Dengue**, **Leptospirosis**, **Influenza-like Illness [ILI]**, **Acute Gastroenteritis**) each incoming medicine treats.
 
 Because raw incoming records (ERP invoices, delivery receipts, billing lines) contain unstandardized product descriptions, spelling variations, dosages, and packaging formats, MedShield executes a **4-tier hierarchical classification and entity resolution pipeline**:
 

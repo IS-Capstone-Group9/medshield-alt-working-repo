@@ -66,7 +66,7 @@ During panel defense, an evaluator asks: *"What happens if executive leadership 
 3. Observe the **MCDA Regional Priority Ranking** table in real time.
 
 ### [PASS] Expected System Response & Verification:
-- Territories with severe outbreak incidence (e.g. Quezon, Camarines Sur) immediately move to Priority Rank #1 and #2, bypassing historically higher-volume commercial territories (such as Metro Manila or Cavite).
+- Territories with severe outbreak incidence (e.g. Quezon, Camarines Sur) immediately move to Priority Rank #1 and #2, bypassing historically higher-volume commercial territories (such as Batangas or Cavite).
 - Clicking **Reset to Calibrated Baseline (45/35/20)** restores default weights.
 
 ---
