@@ -87,6 +87,9 @@ export function getExecutableDashboardScript(): string {
     .replaceAll("'#335F78'", "dashboardThemeColor('--chart-label', '#335F78')")
     .replaceAll("'#67879A'", "dashboardThemeColor('--chart-muted', '#67879A')")
     .replaceAll("'rgba(201,219,229,0.65)'", "dashboardThemeColor('--chart-grid', 'rgba(201,219,229,0.65)')")
+    .replaceAll('animation: false', 'animation: dashboardChartAnimation()')
+    .replaceAll('animations: false', 'animations: dashboardChartAnimations()')
+    .replace("charts[id].update('none');", "if (dashboardReducedMotion()) charts[id].update('none');")
     .replace('if (document.startViewTransition &&', 'if (false && document.startViewTransition &&')
     .replace('chart.resize();', "if (!chart.canvas || !chart.canvas.isConnected) return;\n      chart.resize();")
     // After making a page active, rebuild charts so canvases render at correct dimensions
@@ -135,6 +138,33 @@ function dashboardThemeColor(name, fallback) {
   } catch (error) {
     return fallback;
   }
+}
+function dashboardReducedMotion() {
+  return Boolean(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+}
+function dashboardChartAnimation() {
+  if (dashboardReducedMotion()) return false;
+  return {
+    duration: 850,
+    easing: 'easeOutQuart',
+    delay: function(context) {
+      return context.type === 'data' ? Math.min((context.dataIndex || 0) * 12, 240) : 0;
+    }
+  };
+}
+function dashboardChartAnimations() {
+  if (dashboardReducedMotion()) return false;
+  return {
+    y: {
+      duration: 850,
+      easing: 'easeOutQuart',
+      from: function(context) {
+        var dataset = context.chart.data.datasets[context.datasetIndex] || {};
+        var scale = context.chart.scales[dataset.yAxisID || 'y'];
+        return scale ? scale.getPixelForValue(0) : undefined;
+      }
+    }
+  };
 }
 // Returns the first array if it has numeric values, otherwise returns the fallback array.
 function numericSeriesOrFallback(primary, fallback) {
@@ -226,7 +256,7 @@ function updateFilterBar(name) {
   try {
     const bar = document.getElementById('filterBar');
     if (bar) {
-      if (['overview', 'revenue', 'products', 'territory'].includes(name)) {
+      if (['overview', 'revenue', 'territory'].includes(name)) {
         bar.style.display = 'flex';
       } else {
         bar.style.display = 'none';

@@ -1,5 +1,7 @@
 export const PRODUCT_PRIORITIZATION_SCRIPT = String.raw`
 function configureProductYearControls(pageName) {
+ const filterBar=document.getElementById('filterBar');
+ if(filterBar&&pageName==='products')filterBar.style.display='flex';
  const yearWrap=document.getElementById('singleYearWrap');
  if(yearWrap)yearWrap.style.display='none';
  const rangeWrap=document.getElementById('customDateRangeWrap');

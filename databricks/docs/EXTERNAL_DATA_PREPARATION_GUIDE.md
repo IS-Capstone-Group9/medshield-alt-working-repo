@@ -29,8 +29,8 @@ Raw files may contain private or large source exports, so do not commit them unl
 
 | Dataset | Current coverage | Clean file target | Required grain |
 |---|---|---|---|
-| PAGASA | 2021-2024 | `datasources/clean/pagasa/pagasa_historical_clean.csv` | Date or month by location |
-| DOH | 2021-2025 | `datasources/clean/doh/doh_historical_clean.csv` | Date or month by disease and location |
+| PAGASA | Observed 2017-2024; requested 2025 is absent | `datasources/clean/pagasa/pagasa_historical_daily_clean.csv` and `pagasa_historical_monthly_clean.csv` | Day and month by station |
+| DOH | Declared 2018-2026; 2026 partial through September 13 | `datasources/clean/doh/doh_historical_monthly_clean.csv` | Onset month by disease, classification, and province |
 | Weather API | Provider-supported historical range | `datasources/clean/weather_api/weather_api_observations_clean.csv` | Date by target region coordinates |
 
 ## Minimum PAGASA Fields
@@ -109,6 +109,39 @@ Required columns:
 9. Run data profiling before joining to sales.
 10. Join external data only to approved territory mappings.
 
+## Current execution
+
+The primary Databricks workflow now reads the unchanged raw files from the
+Unity Catalog volume and runs these notebooks in order:
+
+```text
+external_restart/00_external_setup.py
+external_restart/01_external_bronze.py
+external_restart/02_external_silver.py
+external_restart/03_external_gold.py
+```
+
+The local commands below remain a reproducibility and profiling path. Their
+clean CSV outputs are not required by the Databricks-native workflow.
+
+Run from the repository root:
+
+```powershell
+python -m services.analytics_service.jobs.prepare_external_sources
+python -m services.analytics_service.jobs.prepare_regression_sources
+```
+
+The September 14, 2026 run read 4,484,337 DOH source rows from 19
+disease-specific CSV files and preserved 4,608,155 reported cases in 138,673
+monthly disease/province/classification rows. It produced 1,787 unique
+disease/territory/month candidates for 2018-2025. All remain join-ineligible while
+`external_mapping_status` is pending.
+
+The same run read 161,742 valid PAGASA station-days from 125 files and 64
+stations. It produced 5,314 station-month rows: 5,214 have complete rainfall
+coverage and 100 are retained as incomplete. The supplied files end in 2024;
+official 2025 PAGASA values are not inferred.
+
 ## Validation Checks
 
 Before loading external data:
@@ -126,4 +159,4 @@ Before loading external data:
 
 Use this wording:
 
-> The external datasets were prepared as historical contextual signals. PAGASA records were used as official historical weather reference data for 2021 to 2024. DOH records were used as historical disease signal data for 2021 to 2025. Weather API records collected by latitude and longitude were treated as provider-derived weather proxy observations, not as official PAGASA alerts.
+> The external datasets were prepared as historical contextual candidates. The supplied official PAGASA station records cover 2017 to 2024; no official 2025 observations were inferred. The new DOH extract declares 2018 to 2026 coverage, with 2026 treated as partial through September 13, 2026. DOH values represent retrospectively reported surveillance cases by onset month and classification, not confirmed incidence or live alerts. External signals remain excluded from forecasting until geography and medical-product mappings are approved.

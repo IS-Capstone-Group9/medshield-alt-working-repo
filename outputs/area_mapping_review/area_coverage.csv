@@ -1,0 +1,33 @@
+﻿source_area,assessed_record_count,retained_record_count,mapping_status,proposed_area_type,approved_geographic,territory_id,external_join_ready
+ADMIN,5177,4238,needs_review,business_line,False,,False
+ALBAY,247,172,needs_review,territory,False,,False
+BATANGAS,6265,5099,approved,territory,True,PH-PROVINCE-BATANGAS,False
+BATNGAS,2,0,needs_review,territory,False,,False
+BICOL,332,332,needs_review,territory,False,,False
+CAM NORTE,2802,1963,needs_review,territory,False,,False
+CAM SUR,3121,2163,needs_review,territory,False,,False
+CAVITE,1352,1082,approved,territory,True,PH-PROVINCE-CAVITE,False
+EAST,66,20,needs_review,unresolved,False,,False
+EASTERN,32,20,needs_review,unresolved,False,,False
+EASTERN QUEZON,15,0,needs_review,territory,False,,False
+EQUIPMENT,120,113,needs_review,business_line,False,,False
+GOVERNMENT,8645,7814,needs_review,customer_type,False,,False
+HOPITAL,1,0,needs_review,customer_type,False,,False
+HOSPITAL,5660,5128,needs_review,customer_type,False,,False
+LAGASPI,3,0,needs_review,territory,False,,False
+LAGUMA,1,0,needs_review,territory,False,,False
+LAGUNA,3084,2071,approved,territory,True,PH-PROVINCE-LAGUNA,False
+LEGASPI,20,0,needs_review,territory,False,,False
+LOSSES,20,20,needs_review,business_line,False,,False
+LOWER CAVITE,314,314,needs_review,territory,False,,False
+LUCENA,3,0,needs_review,territory,False,,False
+MARINDUQUE,1284,1085,approved,territory,True,PH-PROVINCE-MARINDUQUE,False
+MINDORO,50,36,needs_review,unresolved,False,,False
+PERSONAL,44,44,needs_review,business_line,False,,False
+PHARMA,103,96,needs_review,customer_type,False,,False
+QUEZON,5366,4671,approved,territory,True,PH-PROVINCE-QUEZON,False
+RAKKK,1,0,needs_review,unresolved,False,,False
+SUPPLIES,675,572,needs_review,business_line,False,,False
+SUPPLIES AND EQUIPMENT,127,125,needs_review,business_line,False,,False
+SUPPLLIES,1,0,needs_review,business_line,False,,False
+UNKNOWN_AREA,18,0,needs_review,unresolved,False,,False

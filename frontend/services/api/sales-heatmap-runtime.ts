@@ -45,6 +45,7 @@ function setSalesHeatmapData(data, error) {
   if (data && (!Array.isArray(data.products) || !Array.isArray(data.monthly) || !data.source)) {
     data=null; error='Product quantity response is invalid.';
   }
+  if(data) data={...data,monthly:data.monthly.filter(r=>historicalPeriod(r.period))};
   salesHeatmapData = data;
   document.querySelectorAll('[data-sales-heatmap] select,[data-sales-heatmap] button').forEach(control=>control.disabled=!data);
   if (!data) {

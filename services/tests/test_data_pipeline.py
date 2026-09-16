@@ -23,6 +23,90 @@ from services.data_pipeline import (
 
 
 class SalesCleaningTests(unittest.TestCase):
+    def test_blank_net_cp_is_derived_from_total_cp_less_discount(self):
+        rows, summary, _ = clean_sales_rows(
+            [
+                SourceRow(
+                    "medshield_data_2018.csv",
+                    "2018",
+                    2,
+                    {
+                        "area": "Quezon",
+                        "date_delivered": "2018-03-01",
+                        "product": "Item A",
+                        "quantity": "2",
+                        "total_cost": "120",
+                        "discount": "20",
+                        "net_cost": "",
+                        "total_trade_price": "60",
+                        "net_income": "40",
+                    },
+                )
+            ],
+            "raw_tabular",
+        )
+
+        self.assertEqual(rows[0]["net_cost"], 100)
+        self.assertIn(
+            "net_cost: derived from total cost - discount",
+            rows[0]["standardization_applied"],
+        )
+        self.assertEqual(
+            summary["standardizations"]["net_cost: derived from total cost - discount"],
+            1,
+        )
+
+    def test_explicit_zero_net_cp_is_not_replaced(self):
+        rows, _, _ = clean_sales_rows(
+            [
+                SourceRow(
+                    "sales.csv",
+                    "2025",
+                    2,
+                    {
+                        "area": "Quezon",
+                        "date_delivered": "2025-01-01",
+                        "product": "Item A",
+                        "quantity": "1",
+                        "total_cost": "120",
+                        "discount": "20",
+                        "net_cost": "0",
+                        "total_trade_price": "60",
+                    },
+                )
+            ],
+            "raw_tabular",
+        )
+
+        self.assertEqual(rows[0]["net_cost"], 0)
+        self.assertNotIn(
+            "net_cost: derived from total cost - discount",
+            rows[0]["standardization_applied"],
+        )
+
+    def test_dashboard_repairs_legacy_blank_net_cp_rows(self):
+        snapshot = build_dashboard_snapshot(
+            [
+                {
+                    "quality_status": "valid",
+                    "date_delivered": "2019-01-01",
+                    "year": 2019,
+                    "area": "Quezon",
+                    "product": "Item A",
+                    "quantity": 1,
+                    "total_cost": 120,
+                    "discount": 20,
+                    "net_cost": 0,
+                    "total_trade_price": 60,
+                    "net_income": 40,
+                    "standardization_applied": ["net_cost: blank converted to 0"],
+                }
+            ]
+        )
+
+        self.assertEqual(snapshot["year_summary"][0]["revenue"], 100)
+        self.assertEqual(snapshot["monthly"][0]["revenue"], 100)
+
     def test_dashboard_revenue_uses_net_cp_not_total_tp(self):
         snapshot = build_dashboard_snapshot([
             {

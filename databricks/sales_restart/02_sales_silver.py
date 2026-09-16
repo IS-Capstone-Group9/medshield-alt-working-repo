@@ -18,7 +18,7 @@ CLEAN_TABLE = "workspace.medshield_silver.sales_restart_clean_candidate"
 AUDIT_TABLE = "workspace.medshield_audit.sales_restart_disposition_candidate"
 MAX_DRIVER_ROWS = 250_000
 MAX_DRIVER_BYTES = 100 * 1024 * 1024
-SILVER_VERSION = "sales_restart_silver_v1"
+SILVER_VERSION = "sales_restart_silver_v3_serial_dates"
 
 # COMMAND ----------
 # Cell 2 — Pure parsing functions. These also run in the local regression tests.
@@ -115,8 +115,11 @@ def parse_delivery_date(raw, layout):
     text = str(raw or "").strip()
     if not text or text.upper() in INVALID_TOKENS:
         return None
-    if re.fullmatch(r"\d{5}", text):
-        return date(1899, 12, 30) + timedelta(days=int(text))
+    # Excel's 1900-system serial can be exported with thousands separators and
+    # zero decimal places (confirmed in Sales Report.xlsx, 2025!C2411).
+    # Reject fractional days and arbitrary numeric text rather than truncating it.
+    if re.fullmatch(r"(?:\d{5}|\d{2},\d{3})(?:\.0+)?", text):
+        return date(1899, 12, 30) + timedelta(days=int(Decimal(text.replace(",", ""))))
     # The source layout fixes slash interpretation; no ambiguous fallback swap.
     formats = ["%Y-%m-%d", "%d-%b-%y", "%d-%b-%Y", "%d/%b/%Y"]
     formats += ["%m/%d/%y", "%m/%d/%Y"] if layout == "legacy_2017" else ["%d/%m/%Y", "%d/%m/%y", "%d-%m-%Y"]
@@ -183,7 +186,10 @@ def blank_assessment(source):
     row.update(raw_fields=[], source_layout=None, quality_rule_codes=[],
                net_value_source="UNAVAILABLE", record_kind="PREAMBLE",
                disposition="EXCLUDE_PREAMBLE", is_analysis_candidate=False,
-               silver_version=SILVER_VERSION)
+               silver_version=SILVER_VERSION,
+               is_area_placeholder=False, is_date_missing=False,
+               is_provisional_year_candidate=False, reporting_year=None,
+               reporting_year_basis="NOT_APPLICABLE")
     return row
 
 
@@ -197,6 +203,19 @@ def assess_transaction(row, fields, layout):
     row["date_delivered"] = parse_delivery_date(row["date_delivered_raw"], layout)
     row["calendar_year"] = row["date_delivered"].year if row["date_delivered"] else None
     rules = row["quality_rule_codes"]
+    if row["date_delivered"] and re.fullmatch(r"(?:\d{5}|\d{2},\d{3})(?:\.0+)?", str(row["date_delivered_raw"] or "").strip()):
+        rules.append("EXCEL_SERIAL_DELIVERY_DATE_PARSED")
+    row["is_area_placeholder"] = row["area"] is None
+    if row["is_area_placeholder"]:
+        row["area"] = "UNKNOWN_AREA"
+        rules.append("MISSING_AREA_PLACEHOLDER")
+    row["is_date_missing"] = normalized_text(row["date_delivered_raw"]) is None
+    row["reporting_year"] = row["calendar_year"]
+    row["reporting_year_basis"] = "OBSERVED_DELIVERY_DATE" if row["date_delivered"] else "UNRESOLVED_INVALID_DATE"
+    if row["is_date_missing"]:
+        row["reporting_year"] = row["data_source_year"]
+        row["reporting_year_basis"] = "PROVISIONAL_SOURCE_FILE_YEAR"
+        rules.append("MISSING_DATE_SOURCE_YEAR_PLACEHOLDER")
     for name in MEASURE_FIELDS:
         value, status = parse_decimal(
             row[name + "_raw"], percent_points=name in {"margin_pct", "discount_rate"},
@@ -272,6 +291,12 @@ def assess_transaction(row, fields, layout):
             rules.append("SOURCE_YEAR_MISMATCH")
         row["disposition"] = "PENDING_RECONCILIATION"
         row["business_fingerprint"] = record_fingerprint(row)
+    # Year-only records stay separate: no invented January 1 date or automatic
+    # acceptance of potential duplicates whose delivery date is unavailable.
+    row["is_provisional_year_candidate"] = bool(
+        row["is_date_missing"] and row["product"] is not None
+        and any(row[key] is not None for key in ("quantity", "net_sales", "gross_sales"))
+    )
     return row
 
 # COMMAND ----------
@@ -444,16 +469,18 @@ string_columns = [
     "source_path", "raw_csv_line", "source_layout", "area_raw", "product_raw",
     "dr_number_raw", "date_delivered_raw", "area", "product", "dr_number",
     "net_value_source", "record_kind", "disposition", "business_fingerprint",
-    "snapshot_reference_source_record_id", "silver_version",
+    "snapshot_reference_source_record_id", "silver_version", "reporting_year_basis",
 ] + [key + "_raw" for key in RAW_MEASURE_FIELDS]
 silver_schema = T.StructType(
     [T.StructField(name, T.StringType(), True) for name in string_columns]
-    + [T.StructField(name, T.LongType(), True) for name in ("data_source_year", "source_row_number", "calendar_year")]
+    + [T.StructField(name, T.LongType(), True) for name in ("data_source_year", "source_row_number", "calendar_year", "reporting_year")]
     + [T.StructField("date_delivered", T.DateType(), True)]
     + [T.StructField(name, T.DecimalType(20, 6), True) for name in MEASURE_FIELDS + ("quantity_primary_candidate", "quantity_secondary_candidate")]
     + [T.StructField("raw_fields", T.ArrayType(T.StringType(), False), False),
        T.StructField("quality_rule_codes", T.ArrayType(T.StringType(), False), False),
        T.StructField("is_analysis_candidate", T.BooleanType(), False)]
+    + [T.StructField(name, T.BooleanType(), False) for name in (
+        "is_area_placeholder", "is_date_missing", "is_provisional_year_candidate")]
 )
 assessed_frame = spark.createDataFrame(assessed_rows, silver_schema)
 clean_frame = assessed_frame.filter(F.col("is_analysis_candidate"))

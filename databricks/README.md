@@ -6,6 +6,12 @@ It uses three standalone notebooks and isolated `sales_restart_*_candidate`
 tables. The module/bundle instructions below describe the earlier, separate
 workflow; do not mix their cells or outputs into that restart.
 
+For the DOH and PAGASA restart, use the
+[external-source restart guide](external_restart/GUIDE.md). Databricks reads
+the unchanged raw files and runs a separate external Bronze → Silver → Gold
+workflow. External joins stay disabled until territory and weather-station
+mappings are reviewed and approved.
+
 This folder is the source-controlled Databricks workspace for cleaning the MedShield 2017–2025 sales CSV files. It contains the notebooks, reusable PySpark modules, SQL checks and views, job definition, tests, and supporting documentation needed to implement the Bronze → Silver → Gold workflow.
 
 ## Project Layout

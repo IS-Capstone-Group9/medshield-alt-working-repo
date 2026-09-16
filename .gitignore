@@ -65,6 +65,10 @@ data/medshield/certification/*_financial_flags.json.gz
 data/medshield/certification/*_master_candidate.csv
 outputs/medical_demand_cleaning_*/
 
+# Reproducible large external-source clean exports (regenerate from raw data)
+datasources/clean/doh/*.csv
+datasources/clean/pagasa/*.csv
+
 # Obsolete local export superseded by complete yearly daily CSVs
 outputs/contract_backward_allocation_20260623/yearly_daily/sales_transactions_area_allocated_undated_review.csv
 

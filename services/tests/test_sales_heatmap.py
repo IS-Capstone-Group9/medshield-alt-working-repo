@@ -10,6 +10,13 @@ def sale(product="A", quantity=10, period="2025-01", **extra):
 
 
 class SalesHeatmapTests(unittest.TestCase):
+    def test_year_boundary_is_checked_even_without_upstream_flag(self):
+        rows = [sale(period=p, quantity=i+1) for i,p in enumerate(['2016-12','2017-01','2025-12','2026-01'])]
+        result=build_heatmap(rows, [], {}, 'test')
+        self.assertEqual([r['period'] for r in result['monthly']], ['2017-01','2025-12'])
+        self.assertEqual(result['source']['included_rows'],2)
+        self.assertEqual(sum(result['source']['excluded'].values()),2)
+
     def test_granular_aggregation_preserves_product_area_and_zero(self):
         result = build_heatmap([sale(), sale(quantity=5), sale("B", 900), sale(quantity=0, period="2025-02")], [], {}, "test")
         self.assertEqual(result["monthly"][0]["quantity"], 15)

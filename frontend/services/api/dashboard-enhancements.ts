@@ -142,7 +142,7 @@ export function updateDashboardProvenance(
   availableYears: string[]
 ) {
   const years = [...new Set(availableYears)]
-    .filter((year) => /^\d{4}$/.test(year))
+    .filter((year) => /^(201[7-9]|202[0-5])$/.test(year))
     .sort((a, b) => Number(b) - Number(a))
   const currentYear = String(new Date().getFullYear())
   if (years.length && Number(years[0]) < Number(currentYear)) years.unshift(currentYear)

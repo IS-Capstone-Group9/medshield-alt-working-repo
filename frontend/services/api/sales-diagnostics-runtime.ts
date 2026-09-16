@@ -1,6 +1,39 @@
 // Runs inside the existing dashboard closure, sharing DATA and filter state.
 // Calculations live here so the chart, explanatory table and export use identical rows.
 export const SALES_DIAGNOSTICS_SCRIPT = String.raw`
+function historicalPeriod(period) {
+  const match = /^(\d{4})-(0[1-9]|1[0-2])$/.exec(String(period));
+  return Boolean(match && Number(match[1]) >= 2017 && Number(match[1]) <= dashboardCalendar().year);
+}
+
+function syncHistoricalYearControls() {
+  const years = [...new Set(DATA.year_summary.map(r=>Number(r.year)).concat(DATA.monthly.map(r=>Number(r.period.slice(0,4)))))]
+    .filter(y=>Number.isInteger(y)&&y>=2017&&y<=dashboardCalendar().year).sort((a,b)=>a-b).map(String);
+  // Keep requested in-range empty years empty rather than silently broadening scope.
+  if(selectedYear!=='all' && (!/^\d{4}$/.test(selectedYear)||Number(selectedYear)<2017||Number(selectedYear)>dashboardCalendar().year)) selectedYear='all';
+  const options = Array.from({length:dashboardCalendar().year-2016},(_,i)=>String(2017+i));
+  for(const [id,value,all] of [['topbarYearSelect',selectedYear,true],['yoyBaseYearSelect',yoyBaseYear,false],['yoyTargetYearSelect',yoyTargetYear,false]]) {
+    const select=document.getElementById(id); if(!select)continue;
+    select.replaceChildren(...(all?[new Option('All years (2017–2025)','all')]:[]), ...options.map(y=>new Option(y+(years.includes(y)?'':' — no snapshot rows'),y)));
+    select.value=String(value);
+  }
+}
+
+function calendarRevenueSeries() {
+  const years=diagnosticYears(), months=diagnosticMonths();
+  const periods=years.flatMap(y=>Array.from({length:12},(_,i)=>y+'-'+String(i+1).padStart(2,'0')));
+  return {labels:periods, datasets:[{label:'Net sales revenue (₱)',data:periods.map(p=>months.get(p)?.revenue??null),borderColor:getColor(),backgroundColor:getColor(.15),pointRadius:2,tension:0,spanGaps:false,fill:false}]};
+}
+
+function labelUnfilteredAggregates() {
+  for(const id of ['areaDonut','productBarChart','abcChart','productTable','productBubbleChart','paretoCurveChart']) {
+    const card=document.getElementById(id)?.closest('.chart-card');if(!card)continue;
+    let note=card.querySelector('[data-aggregate-scope]');
+    if(!note){note=document.createElement('p');note.dataset.aggregateScope='';note.className='chart-subtitle';card.prepend(note);}
+    note.textContent='Pre-aggregated source totals; year breakdown unavailable. The year filter does not apply. Date-range reconciliation is required before treating these as 2017–2025-only totals.';
+  }
+}
+
 function exportSalesGrowthCSV() {
   const table = document.getElementById('salesGrowthTable');
   if (!table) return;
@@ -30,7 +63,7 @@ function diagnosticMonths() {
   const months = new Map();
   dashboardMonthlyRows().forEach(row => {
     const period = String(row.period);
-    if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(period)) return;
+    if (!historicalPeriod(period)) return;
     if (row.revenue == null || row.income == null || !Number.isFinite(Number(row.revenue)) || !Number.isFinite(Number(row.income))) return;
     const total = months.get(period) || { revenue: 0, income: 0 };
     total.revenue += Number(row.revenue);
@@ -38,6 +71,23 @@ function diagnosticMonths() {
     months.set(period, total);
   });
   return months;
+}
+
+function diagnosticPredictions(periods, months, metric) {
+  const observed = periods.map(period => months.get(period)?.[metric] ?? null);
+  return observed.map((value, index) => {
+    if (value != null) return null;
+    let before = index - 1, after = index + 1;
+    while (before >= 0 && observed[before] == null) before--;
+    while (after < observed.length && observed[after] == null) after++;
+    if (before >= 0 && after < observed.length) {
+      const progress = (index - before) / (after - before);
+      return observed[before] + (observed[after] - observed[before]) * progress;
+    }
+    if (before >= 0) return observed[before];
+    if (after < observed.length) return observed[after];
+    return null;
+  });
 }
 
 function diagnosticComparison(months, year, baseYear) {
@@ -99,11 +149,20 @@ function renderSalesDiagnostics(opts) {
   const revenue = selectedRows.map(row => row.revenue == null ? null : row.revenue);
   const profit = selectedRows.map(row => row.income == null ? null : row.income);
   const detailLabels = selectedRows.map(row => descriptivePointLabel(row.period));
+  const detailPeriods = selectedRows.map(row => String(row.period));
+  const observedMonths = new Map(selectedRows
+    .filter(row => row.revenue != null || row.income != null)
+    .map(row => [String(row.period), { revenue: row.revenue, income: row.income }]));
+  const predictedRevenue = diagnosticPredictions(detailPeriods, observedMonths, 'revenue');
+  const predictedProfit = diagnosticPredictions(detailPeriods, observedMonths, 'income');
+  const predictedCount = predictedRevenue.filter(value => value != null).length;
   const dailyUnavailable = descriptiveUsesDailyGrain() && selectedRows.every(row => row.revenue == null);
   const detailDatasets = [
     { label: 'Net Sales Revenue · ' + descriptivePeriodLabel(), data: revenue, yAxisID: 'revenue', borderColor: getColor(), backgroundColor: getColor(.08), borderWidth: 2.5, pointRadius: descriptiveUsesDailyGrain() ? 1.5 : 3, tension: .25, fill: false, spanGaps: false },
     { label: 'Gross Profit · ' + descriptivePeriodLabel(), data: profit, yAxisID: 'grossProfit', borderColor: getAmber(), backgroundColor: getAmber(.08), borderWidth: 2.2, pointRadius: descriptiveUsesDailyGrain() ? 1.5 : 3, tension: .25, fill: false, spanGaps: false }
   ];
+  detailDatasets.push({ label: 'Predicted Net Sales Revenue', data: predictedRevenue, yAxisID: 'revenue', borderColor: 'rgba(124,58,237,0.9)', backgroundColor: 'rgba(124,58,237,0.9)', borderWidth: 2, borderDash: [6, 4], pointStyle: 'triangle', pointRadius: 4, tension: 0, fill: false, spanGaps: false });
+  if (!descriptiveUsesDailyGrain()) detailDatasets.push({ label: 'Predicted Gross Profit', data: predictedProfit, yAxisID: 'grossProfit', borderColor: 'rgba(219,39,119,0.9)', backgroundColor: 'rgba(219,39,119,0.9)', borderWidth: 2, borderDash: [6, 4], pointStyle: 'triangle', pointRadius: 4, tension: 0, fill: false, spanGaps: false });
   if (comparisonMode === 'yoy') {
     detailDatasets.push(
       { label: 'Prior-year Net Sales Revenue', data: priorDisplayRows.map(row => row.revenue), yAxisID: 'revenue', borderColor: getColor(.5), backgroundColor: 'transparent', borderDash: [7, 5], borderWidth: 2, pointRadius: descriptiveUsesDailyGrain() ? 1 : 2, tension: .25, fill: false, spanGaps: false },
@@ -124,7 +183,7 @@ function renderSalesDiagnostics(opts) {
   const subtitle = document.getElementById('salesComparisonSubtitle');
   if (subtitle) subtitle.textContent = dailyUnavailable
     ? 'Daily transaction data is unavailable for the last 30 days; monthly totals are not expanded into synthetic days.'
-    : (descriptiveUsesDailyGrain() ? 'Daily' : 'Monthly') + ' revenue and gross profit for ' + descriptivePeriodLabel() + '; gaps mean unavailable observations, not zero sales.';
+    : (descriptiveUsesDailyGrain() ? 'Daily' : 'Monthly') + ' revenue and gross profit for ' + descriptivePeriodLabel() + '; gaps mean unavailable observations, not zero sales.' + (predictedCount ? ' Dashed triangles are interpolated predictions and are excluded from totals.' : '');
   createChart('revenueDetailChart', {
     type: 'line',
     data: { labels: detailLabels, datasets: detailDatasets },

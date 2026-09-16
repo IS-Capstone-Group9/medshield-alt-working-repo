@@ -546,8 +546,8 @@ export function patchDescriptivePeriodFilters(script: string): string {
   patched = patched.replace(LEGACY_SET_YEAR, DESCRIPTIVE_SET_YEAR)
   if (!patched.includes(DESCRIPTIVE_SET_YEAR)) throw new Error('Unable to patch custom date compatibility.')
 
-  const monthlyPattern = /function getMonthlyRowsForMode\(\) \{[\s\S]*?\n\}\n\n\nfunction baseChartOptions\(\)/
-  patched = patched.replace(monthlyPattern, `${DESCRIPTIVE_MONTH_ROWS}\n\n\nfunction baseChartOptions()`)
+  const monthlyPattern = /function getMonthlyRowsForMode\(\) \{[\s\S]*?\}\n\nfunction baseChartOptions\(\)/
+  patched = patched.replace(monthlyPattern, `${DESCRIPTIVE_MONTH_ROWS}\n\nfunction baseChartOptions()`)
   if (!patched.includes(DESCRIPTIVE_MONTH_ROWS)) throw new Error('Unable to patch descriptive chart rows.')
 
   patched = patched.replace(LEGACY_SELECTED_METRICS, DESCRIPTIVE_SELECTED_METRICS)

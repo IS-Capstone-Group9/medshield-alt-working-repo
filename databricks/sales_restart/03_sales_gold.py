@@ -20,7 +20,11 @@ REFERENCE_PATH = (
     "/Workspace/medshield/medshield_reference_csv/"
     "likely_non_medical_product_candidates.csv"
 )
-POLICY_VERSION = "sales_restart_gold_v1"
+AREA_MAPPING_PATH = "/Workspace/medshield/medshield_reference_csv/area_classification_mapping.csv"
+PRODUCT_MASTER_PATH = "/Workspace/medshield/medshield_reference_csv/product_master_review.csv"
+# Change only after the thesis scope explicitly includes clinical consumables.
+INCLUDE_MEDICAL_SUPPLIES = False
+POLICY_VERSION = "sales_restart_gold_v4_area_master"
 PUBLICATION_STATUS = "CANDIDATE_PENDING_BUSINESS_AND_PRODUCT_MASTER_REVIEW"
 KEEP_DISPOSITIONS = (
     "KEEP_SOURCE_YEAR_ALIGNED", "KEEP_HISTORICAL_BACKFILL_CANDIDATE"
@@ -61,7 +65,8 @@ required = {
     "unit_acquisition_cost", "total_acquisition_cost", "gross_margin_amount",
     "margin_pct", "net_value_source", "quality_rule_codes", "record_kind",
     "disposition", "is_analysis_candidate", "business_fingerprint",
-    "snapshot_reference_source_record_id",
+    "snapshot_reference_source_record_id", "is_area_placeholder", "is_date_missing",
+    "is_provisional_year_candidate", "reporting_year", "reporting_year_basis",
 }
 assert required <= set(assessed.columns), f"Missing assessed fields: {sorted(required - set(assessed.columns))}"
 assert required <= set(clean.columns), f"Missing clean fields: {sorted(required - set(clean.columns))}"
@@ -153,6 +158,147 @@ product_reference = spark.createDataFrame(reference_rows, reference_schema)
 print(f"PRODUCT REFERENCE: {len(reference_rows)} review labels | sha256={REFERENCE_SHA256}")
 print("Reference labels are candidate classifications; an unmatched label is not an approved medicine.")
 
+
+def read_mapping(path, required):
+    """Missing masters mean pending classification; malformed supplied files fail closed."""
+    file = Path(path)
+    if not file.is_file():
+        print(f"MAPPING PENDING: {file.name} is absent; no approvals inferred.")
+        return [], "NOT_SUPPLIED"
+    payload = file.read_bytes()
+    if not 0 < len(payload) <= 5_000_000:
+        raise ValueError(f"Invalid mapping file size: {file.name}")
+    reader = csv.DictReader(io.StringIO(payload.decode("utf-8-sig")))
+    if not required <= set(reader.fieldnames or []):
+        raise ValueError(f"Mapping columns missing: {file.name}")
+    rows = list(reader)
+    if len(rows) > 10_000 or any(None in row or any(v is None for v in row.values()) for row in rows):
+        raise ValueError(f"Malformed or oversized mapping: {file.name}")
+    return rows, hashlib.sha256(payload).hexdigest()
+
+
+def reviewed_mapping(rows, key_column, kind):
+    """Reject ambiguous aliases and incomplete approvals, including conflicting SKU units."""
+    result, sku_contracts, territory_contracts = {}, {}, {}
+    for raw in rows:
+        row = {key: value.strip() for key, value in raw.items()}
+        key = normalize_label(row[key_column])
+        if not key or key in result:
+            raise ValueError(f"Empty or duplicate {kind} mapping key: {key}")
+        if kind == "area":
+            if row["mapping_status"].lower() not in {"approved", "needs_review", "proposed"}:
+                raise ValueError(f"Invalid area mapping status: {key}")
+            if row["area_type"] not in {"territory", "customer_type", "business_line", "unresolved"}:
+                raise ValueError(f"Invalid proposed area type: {key}")
+            if not row.get("evidence_source") or not row.get("evidence_status"):
+                raise ValueError(f"Area mapping evidence must be recorded: {key}")
+        if row["mapping_status"].lower() == "approved":
+            bool_fields = ("weather_eligible", "forecast_eligible") if kind == "area" else ("forecast_eligible",)
+            if any(row[field].lower() not in {"true", "false"} for field in bool_fields):
+                raise ValueError(f"Invalid approved {kind} eligibility: {key}")
+            if kind == "area":
+                if row["area_type"] not in {"territory", "customer_type", "business_line"}:
+                    raise ValueError(f"Invalid area type: {key}")
+                if row["area_type"] == "territory" and not row["territory"]:
+                    raise ValueError(f"Approved territory is missing: {key}")
+                if row["area_type"] == "territory":
+                    level = row.get("geographic_level")
+                    if not row.get("territory_id") or not row.get("region") or level not in {"region", "province", "city", "municipality"}:
+                        raise ValueError(f"Approved territory ID, region and geographic level required: {key}")
+                    if (level == "province" and not row.get("province")) or (
+                        level in {"city", "municipality"} and not row.get("city_municipality")):
+                        raise ValueError(f"Approved geographic detail missing: {key}")
+                    identity = normalize_label(row["territory_id"])
+                    contract = tuple(normalize_label(row.get(field)) for field in (
+                        "territory", "region", "province", "city_municipality", "geographic_level"))
+                    if identity in territory_contracts and territory_contracts[identity] != contract:
+                        raise ValueError(f"Conflicting geography for territory ID: {identity}")
+                    territory_contracts[identity] = contract
+                if row["area_type"] != "territory" and (
+                    row["territory"] or row.get("territory_id") or row.get("province") or row.get("city_municipality")
+                    or row.get("region") or row["weather_eligible"].lower() == "true"
+                    or row["forecast_eligible"].lower() == "true"
+                ):
+                    raise ValueError(f"Nongeographic mapping cannot enable territory models: {key}")
+            else:
+                if row["product_category"] not in {"medicine", "medical_supply", "non_medical"}:
+                    raise ValueError(f"Invalid approved product category: {key}")
+                if not row["canonical_sku"] or not row["unit_of_measure"]:
+                    raise ValueError(f"Approved SKU and source unit are required: {key}")
+                if row["product_category"] == "non_medical" and row["forecast_eligible"].lower() == "true":
+                    raise ValueError(f"Nonmedical product cannot enable medical demand: {key}")
+                sku = normalize_label(row["canonical_sku"])
+                contract = (row["product_category"], normalize_label(row["unit_of_measure"]), row["forecast_eligible"].lower())
+                if sku in sku_contracts and sku_contracts[sku] != contract:
+                    raise ValueError(f"Conflicting category, source units or eligibility for SKU: {sku}")
+                sku_contracts[sku] = contract
+        result[key] = row
+    return result
+
+
+def product_scope(value, reference_keys, master, include_supplies=False):
+    """One policy used both by the Spark label lookup and local regression tests."""
+    label = normalize_label(value)
+    scope = classify_product_label(value, reference_keys)
+    row = master.get(label, {})
+    approved = row.get("mapping_status", "").lower() == "approved"
+    # A reviewed product can resolve a hashtag size or supersede a keyword review list.
+    # Recognized contract parents always remain non-SKU evidence.
+    if scope == "CONTRACT_LABEL_CANDIDATE" or not approved:
+        return (scope, None, None, None, False)
+    category = row["product_category"]
+    eligible = row["forecast_eligible"].lower() == "true" and (
+        category == "medicine" or (category == "medical_supply" and include_supplies)
+    )
+    return (category.upper() + "_APPROVED", normalize_label(row["canonical_sku"]),
+            category, normalize_label(row["unit_of_measure"]), eligible)
+
+
+def area_scope(value, master):
+    if normalize_label(value) == "UNKNOWN_AREA":
+        return ("UNKNOWN_AREA_PLACEHOLDER", None, False, False)
+    row = master.get(normalize_label(value), {})
+    if row.get("mapping_status", "").lower() != "approved":
+        return ("MAPPING_PENDING", None, False, False)
+    geographic = row["area_type"] == "territory"
+    return (row["area_type"], normalize_label(row["territory"]) if geographic else None,
+            geographic, geographic and row["weather_eligible"].lower() == "true"
+            and row["forecast_eligible"].lower() == "true")
+
+
+def area_metadata(value, master):
+    """Proposals remain visible without turning them into approved geographic keys."""
+    row = master.get(normalize_label(value), {})
+    approved_territory = area_scope(value, master)[2]
+    return (row.get("standard_area") or normalize_label(value), row.get("area_type", "unresolved"),
+            row.get("mapping_status", "unmapped"), row.get("territory_id") if approved_territory else None,
+            row.get("region", ""), row.get("province", ""), row.get("city_municipality", ""),
+            row.get("geographic_level", "unresolved"), row.get("customer_type", ""),
+            row.get("business_line", ""), row.get("evidence_source", ""), row.get("evidence_status", "NO_MAPPING"),
+            row.get("external_mapping_status", "pending"))
+
+
+area_rows, AREA_MAPPING_SHA256 = read_mapping(AREA_MAPPING_PATH, {
+    "raw_area", "standard_area", "area_type", "territory", "customer_type", "business_line",
+    "weather_eligible", "forecast_eligible", "mapping_status", "territory_id", "region", "province",
+    "city_municipality", "geographic_level", "evidence_source", "evidence_status", "external_mapping_status"})
+master_rows, PRODUCT_MASTER_SHA256 = read_mapping(PRODUCT_MASTER_PATH, {
+    "raw_product", "canonical_sku", "product_category", "unit_of_measure", "forecast_eligible", "mapping_status"})
+area_master = reviewed_mapping(area_rows, "raw_area", "area")
+product_master = reviewed_mapping(master_rows, "raw_product", "product")
+# Bronze/Silver bound the complete source at 250,000 lines. Collect unique labels only.
+product_labels = {normalize_label(row[0]) for row in clean.select("product").distinct().collect()}
+area_labels = {normalize_label(row[0]) for row in clean.select("area").distinct().collect()}
+product_policy = spark.createDataFrame([
+    (label, *product_scope(label, reference_keys, product_master, INCLUDE_MEDICAL_SUPPLIES))
+    for label in sorted(product_labels)
+], "normalized_product string, product_scope_status string, canonical_sku string, product_category string, unit_of_measure string, is_medical_product_approved boolean")
+area_policy = spark.createDataFrame([
+    (label, *area_scope(label, area_master), *area_metadata(label, area_master)) for label in sorted(area_labels)
+], "normalized_area string, area_classification string, territory string, is_geographic_territory_approved boolean, is_external_geography_candidate boolean, area_display_label string, proposed_area_type string, area_mapping_status string, territory_id string, mapped_region string, mapped_province string, mapped_city_municipality string, mapped_geographic_level string, mapped_customer_channel string, mapped_business_line string, area_mapping_evidence string, area_evidence_status string, external_mapping_status string")
+print(f"AREA MASTER: {len(area_rows)} mapping rows; sha256={AREA_MAPPING_SHA256}")
+display(area_policy.orderBy("area_mapping_status", "normalized_area"))
+
 # COMMAND ----------
 # Cell 3 — Keep one fact per accepted source record and govern each metric separately.
 def has_rule(code):
@@ -165,21 +311,19 @@ fact = (
     .withColumn("normalized_product", F.upper(F.trim(F.regexp_replace("product", r"\s+", " "))))
     .withColumn("normalized_area", F.upper(F.trim(F.regexp_replace("area", r"\s+", " "))))
     .join(product_reference, "normalized_product", "left")
+    .join(product_policy, "normalized_product", "left")
+    .join(area_policy, "normalized_area", "left")
     .withColumn("product_key", F.sha2("normalized_product", 256))
     .withColumn("area_key", F.sha2("normalized_area", 256))
     .withColumn("date_key", F.date_format("date_delivered", "yyyyMMdd").cast("int"))
     .withColumn("month_start", F.trunc("date_delivered", "month").cast("date"))
     .withColumn("calendar_year", F.year("date_delivered"))
     .withColumn("is_contract_label", F.col("normalized_product").rlike(CONTRACT_PREFIX_PATTERN))
-    .withColumn("product_scope_status", F.when(F.col("is_contract_label"), "CONTRACT_LABEL_CANDIDATE")
-        .when(F.col("normalized_product").contains("#"), "HASHTAG_LABEL_REQUIRES_REVIEW")
-        .when(F.col("reference_forecast_eligible").isNotNull(), "NONMEDICAL_REFERENCE_REQUIRES_REVIEW")
-        .otherwise("PRODUCT_MASTER_PENDING"))
     .withColumn("is_low_trust_2017", (F.col("calendar_year") == 2017) | (F.col("data_source_year") == 2017))
     .withColumn("is_historical_backfill_candidate", F.col("disposition") == "KEEP_HISTORICAL_BACKFILL_CANDIDATE")
     .withColumn("is_product_ranking_candidate", F.col("product_scope_status").isin(
-        "PRODUCT_MASTER_PENDING", "NONMEDICAL_REFERENCE_REQUIRES_REVIEW"))
-    .withColumn("is_approved_medical_demand_eligible", F.lit(False))
+        "PRODUCT_MASTER_PENDING", "NONMEDICAL_REFERENCE_REQUIRES_REVIEW",
+        "MEDICINE_APPROVED", "MEDICAL_SUPPLY_APPROVED", "NON_MEDICAL_APPROVED"))
     .withColumn("is_quantity_observation_eligible", F.col("quantity").isNotNull()
         & ~has_rule("2017_QUANTITY_CANDIDATES_DISAGREE") & ~has_rule("INVALID_OR_MISSING_QUANTITY"))
     .withColumn("is_gross_sales_eligible", F.col("gross_sales").isNotNull() & ~has_rule("GROSS_VALUE_FORMULA_MISMATCH"))
@@ -194,6 +338,13 @@ fact = (
     .withColumn("is_provisional_product_demand_eligible", F.col("is_positive_delivery_quantity_eligible")
         & (F.col("product_scope_status") == "PRODUCT_MASTER_PENDING")
         & ~F.col("is_low_trust_2017") & ~F.col("is_historical_backfill_candidate"))
+    .withColumn("is_approved_medical_demand_eligible", F.col("is_positive_delivery_quantity_eligible")
+        & F.col("is_medical_product_approved") & ~F.col("is_low_trust_2017")
+        & ~F.col("is_historical_backfill_candidate"))
+    .withColumn("is_external_analysis_candidate", F.col("is_approved_medical_demand_eligible")
+        & F.col("is_external_geography_candidate"))
+    .withColumn("external_join_status", F.lit("STATION_DISEASE_GEOGRAPHY_AND_PERIOD_COVERAGE_NOT_VALIDATED"))
+    .withColumn("is_external_join_ready", F.lit(False))
     .withColumn("financial_review_required", F.col("net_sales").isNull() | (F.col("net_sales") <= 0)
         | ~F.col("is_net_sales_eligible"))
     .withColumn("transaction_quantity_status", F.when(F.col("quantity").isNull(), "MISSING_QUANTITY")
@@ -212,7 +363,12 @@ for column in fact.columns:
     if column.startswith("is_"):
         eligibility_nulls = eligibility_nulls | F.col(column).isNull()
 assert fact.filter(eligibility_nulls).limit(1).count() == 0, "Gold eligibility flags must not be null"
-assert fact.filter("is_approved_medical_demand_eligible = true").count() == 0
+assert fact.filter("is_approved_medical_demand_eligible = true").filter(
+    ~F.col("is_medical_product_approved") | F.col("is_contract_label")
+    | F.col("canonical_sku").isNull() | F.col("unit_of_measure").isNull()
+    | F.col("is_low_trust_2017") | F.col("is_historical_backfill_candidate")
+    | (F.col("quantity") <= 0)
+).count() == 0
 assert fact.filter("is_provisional_product_demand_eligible = true").filter(
     F.col("is_low_trust_2017") | F.col("is_historical_backfill_candidate")
     | (F.col("product_scope_status") != "PRODUCT_MASTER_PENDING") | (F.col("quantity") <= 0)
@@ -237,12 +393,12 @@ dim_date = (
 dim_area = fact.groupBy("area_key", "normalized_area").agg(
     F.min("area").alias("area_label"), F.count("*").alias("source_record_count"),
     F.min("date_delivered").alias("first_observed_delivery"), F.max("date_delivered").alias("last_observed_delivery"),
-).withColumn("area_master_status", F.lit("GEOGRAPHIC_CUSTOMER_OR_BUSINESS_CLASSIFICATION_PENDING"))
+).join(area_policy, "normalized_area", "left")
 dim_product = fact.groupBy("product_key", "normalized_product", "product_scope_status").agg(
     F.min("product").alias("product_label"), F.count("*").alias("source_record_count"),
     F.min("reference_proposed_category").alias("reference_proposed_category"),
     F.min("date_delivered").alias("first_observed_delivery"), F.max("date_delivered").alias("last_observed_delivery"),
-).withColumn("product_master_status", F.lit("PENDING_APPROVAL"))
+).join(product_policy, ["normalized_product", "product_scope_status"], "left")
 for dimension, keys in [(dim_date, ["date_key"]), (dim_area, ["area_key"]), (dim_product, ["product_key"])]:
     assert_unique(dimension, keys, "Gold dimension")
     assert fact.select(*keys).join(dimension.select(*keys), keys, "left_anti").count() == 0
@@ -256,6 +412,7 @@ METRICS = {
     "positive_delivered_quantity": ("quantity", "is_positive_delivery_quantity_eligible"),
     "return_quantity_abs": ("return_quantity_abs", "is_return_quantity_eligible"),
     "provisional_product_demand_quantity": ("quantity", "is_provisional_product_demand_eligible"),
+    "approved_medical_demand_quantity": ("quantity", "is_approved_medical_demand_eligible"),
     "gross_sales": ("gross_sales", "is_gross_sales_eligible"),
     "net_sales": ("net_sales", "is_net_sales_eligible"),
     "total_acquisition_cost": ("total_acquisition_cost", "is_acquisition_cost_eligible"),
@@ -304,6 +461,33 @@ yearly = year_coverage.join(aggregate_sales(fact, ["calendar_year"]), "calendar_
 area_yearly = aggregate_sales(fact, ["calendar_year", "area_key", "normalized_area"])
 product_yearly = aggregate_sales(fact.filter("is_provisional_product_demand_eligible = true"),
     ["calendar_year", "product_key", "normalized_product", "product_scope_status"])
+# Full business-label reporting and medical demand have deliberately different populations.
+business_product_yearly = aggregate_sales(fact,
+    ["calendar_year", "product_key", "normalized_product", "product_scope_status"])
+territory_yearly = aggregate_sales(fact.filter("is_geographic_territory_approved = true"),
+    ["calendar_year", "territory_id", "territory"])
+medical_monthly = aggregate_sales(fact.filter("is_approved_medical_demand_eligible = true"),
+    ["month_start", "canonical_sku", "unit_of_measure"])
+external_candidates = fact.filter("is_external_analysis_candidate = true")
+scope_audit = fact.groupBy("product_scope_status", "area_classification",
+    "is_approved_medical_demand_eligible", "is_external_analysis_candidate").count()
+area_coverage = fact.groupBy("calendar_year", "normalized_area", "area_display_label",
+    "area_mapping_status", "proposed_area_type", "area_classification", "area_evidence_status").agg(
+    F.count("*").alias("retained_record_count"),
+    F.sum(F.col("is_geographic_territory_approved").cast("long")).alias("approved_territory_record_count"),
+    F.sum(F.col("is_external_geography_candidate").cast("long")).alias("external_geography_candidate_count"),
+    F.sum(F.col("is_external_join_ready").cast("long")).alias("external_join_ready_count"))
+assert area_coverage.agg(F.sum("retained_record_count")).first()[0] == fact.count()
+assert fact.filter("is_geographic_territory_approved = true AND territory_id IS NULL").count() == 0
+display(area_coverage.orderBy("calendar_year", "normalized_area"))
+# Preserve year-only records outside observed sales totals and time-series marts.
+provisional_year_review = assessed.filter("is_provisional_year_candidate = true").withColumn(
+    "provisional_status", F.lit("SOURCE_YEAR_ONLY_DATE_AND_DUPLICATES_REQUIRE_REVIEW"))
+assert provisional_year_review.filter(
+    F.col("date_delivered").isNotNull() | F.col("calendar_year").isNotNull()
+    | (F.col("reporting_year") != F.col("data_source_year"))
+    | F.col("is_analysis_candidate")
+).limit(1).count() == 0
 contract_labels = aggregate_sales(fact.filter("is_contract_label = true"),
     ["contract_label_group_key", "normalized_product", "contract_prefix"]).withColumn(
     "grouping_meaning", F.lit("EXACT_NORMALIZED_LABEL_ONLY_NOT_A_VERIFIED_CONTRACT_ID")
@@ -368,6 +552,14 @@ for mart, label in [(monthly, "monthly"), (yearly, "yearly"), (area_yearly, "are
     assert_metric_reconciliation(fact, mart, label)
 assert_metric_reconciliation(fact.filter("is_provisional_product_demand_eligible = true"), product_yearly, "product yearly")
 assert_metric_reconciliation(fact.filter("is_contract_label = true"), contract_labels, "exact contract labels")
+for source, mart, label, keys in [
+    (fact, business_product_yearly, "business product labels", ["calendar_year", "product_key"]),
+    (fact.filter("is_geographic_territory_approved = true"), territory_yearly, "reviewed territory", ["calendar_year", "territory_id"]),
+    (fact.filter("is_approved_medical_demand_eligible = true"), medical_monthly, "approved medical", ["month_start", "canonical_sku", "unit_of_measure"]),
+]:
+    assert_unique(mart, keys, label)
+    assert_metric_reconciliation(source, mart, label)
+assert scope_audit.agg(F.sum("count")).first()[0] == fact.count()
 print("GOLD PREPUBLICATION: PASS | Metric sums, eligible observation counts, null meaning, and dispositions reconciled")
 
 # COMMAND ----------
@@ -382,6 +574,13 @@ outputs = {
     f"{GOLD_SCHEMA}.sales_restart_yearly_candidate": (yearly, ["calendar_year"]),
     f"{GOLD_SCHEMA}.sales_restart_area_yearly_candidate": (area_yearly, ["calendar_year", "area_key"]),
     f"{GOLD_SCHEMA}.sales_restart_product_yearly_candidate": (product_yearly, ["calendar_year", "product_key"]),
+    f"{GOLD_SCHEMA}.sales_restart_business_product_yearly_candidate": (business_product_yearly, ["calendar_year", "product_key"]),
+    f"{GOLD_SCHEMA}.sales_restart_territory_yearly_candidate": (territory_yearly, ["calendar_year", "territory_id"]),
+    f"{AUDIT_SCHEMA}.sales_restart_area_coverage_candidate": (area_coverage, ["calendar_year", "normalized_area"]),
+    f"{GOLD_SCHEMA}.sales_restart_medical_monthly_candidate": (medical_monthly, ["month_start", "canonical_sku", "unit_of_measure"]),
+    f"{GOLD_SCHEMA}.sales_restart_external_input_candidate": (external_candidates, ["sales_fact_id"]),
+    f"{AUDIT_SCHEMA}.sales_restart_scope_candidate": (scope_audit, ["product_scope_status", "area_classification", "is_approved_medical_demand_eligible", "is_external_analysis_candidate"]),
+    f"{AUDIT_SCHEMA}.sales_restart_provisional_year_candidate": (provisional_year_review, ["source_record_id"]),
     f"{GOLD_SCHEMA}.sales_restart_contract_labels_candidate": (contract_labels, ["contract_label_group_key"]),
     f"{GOLD_SCHEMA}.sales_restart_label_partition_candidate": (label_partition, ["product_scope_status"]),
     f"{AUDIT_SCHEMA}.sales_restart_gold_disposition_candidate": (disposition_audit, ["data_source_year", "record_kind", "disposition", "is_analysis_candidate"]),
@@ -394,7 +593,10 @@ for name, (frame, keys) in outputs.items():
     assert name.split(".")[-1].startswith("sales_restart_") and name.endswith("_candidate")
     target = frame.withColumn("dataset_id", F.lit(DATASET_ID)).withColumn("policy_version", F.lit(POLICY_VERSION)).withColumn(
         "publication_status", F.lit(PUBLICATION_STATUS)
-    ).withColumn("product_reference_sha256", F.lit(REFERENCE_SHA256)).withColumn("gold_published_at", F.current_timestamp())
+    ).withColumn("product_reference_sha256", F.lit(REFERENCE_SHA256)).withColumn(
+        "area_mapping_sha256", F.lit(AREA_MAPPING_SHA256)).withColumn(
+        "product_master_sha256", F.lit(PRODUCT_MASTER_SHA256)).withColumn(
+        "medical_supplies_in_scope", F.lit(INCLUDE_MEDICAL_SUPPLIES)).withColumn("gold_published_at", F.current_timestamp())
     assert_unique(target, keys, name)
     expected_count = target.count()
     target.write.format("delta").mode("overwrite").option("overwriteSchema", "true").saveAsTable(name)
@@ -414,7 +616,10 @@ for suffix in ["monthly", "yearly", "area_yearly", "label_partition"]:
     assert_metric_reconciliation(saved_fact, spark.table(f"{GOLD_SCHEMA}.sales_restart_{suffix}_candidate"), f"persisted {suffix}")
 publication_audit = spark.createDataFrame(publication_rows, "table_name string, saved_rows long, status string").withColumn(
     "dataset_id", F.lit(DATASET_ID)
-).withColumn("policy_version", F.lit(POLICY_VERSION)).withColumn("validated_at", F.current_timestamp())
+).withColumn("policy_version", F.lit(POLICY_VERSION)).withColumn(
+    "area_mapping_sha256", F.lit(AREA_MAPPING_SHA256)).withColumn(
+    "product_master_sha256", F.lit(PRODUCT_MASTER_SHA256)).withColumn(
+    "medical_supplies_in_scope", F.lit(INCLUDE_MEDICAL_SUPPLIES)).withColumn("validated_at", F.current_timestamp())
 publication_audit.write.format("delta").mode("overwrite").option("overwriteSchema", "true").saveAsTable(
     f"{AUDIT_SCHEMA}.sales_restart_gold_publication_candidate"
 )

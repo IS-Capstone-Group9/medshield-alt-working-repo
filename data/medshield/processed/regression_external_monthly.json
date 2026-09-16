@@ -1,0 +1,19 @@
+{
+  "rows": [],
+  "source": {
+    "file": "datasources/clean/doh/doh_sales_territory_monthly_candidate.csv",
+    "checksum": "482e4b80a21699c8803ffc568644f26c12f0d8f8dc3541ce4c56e8f71c8372df",
+    "raw_dataset_checksum": "1712013fabb87e450d6db117a46aa7b0e6d354a4e23ddd29ba88c620554adb61",
+    "area_mapping_checksum": "268785d6ffddab4254c32abb79a56cba3ccf005b6c955d6013dcd7a316826f7f",
+    "external_report": "outputs/external_sources/external_source_cleaning_report.json",
+    "external_policy_version": "external_sources_clean_v1_20260914",
+    "audit": {
+      "candidate_rows": 1787,
+      "external_mapping_pending_rows": 1787
+    },
+    "date_basis": "DOH onset month; retrospective final-revision records",
+    "case_definition": "Reported non-discarded surveillance cases; not confirmed incidence",
+    "coverage": "2018-2025 candidates; exact sales territory labels; external mapping approval required",
+    "status": "BLOCKED_EXTERNAL_MAPPING_PENDING"
+  }
+}

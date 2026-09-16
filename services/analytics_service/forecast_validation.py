@@ -101,6 +101,7 @@ def build_validation(payload, sector='Government', product='', metric='revenue',
         raise ValueError('Product is unavailable in the selected buyer cluster')
     monthly = defaultdict(float)
     excluded_not_closed = 0
+    excluded_outside_history = 0
     count = 0
     for row in population:
         if product and row['product'] != product:
@@ -109,12 +110,15 @@ def build_validation(payload, sector='Government', product='', metric='revenue',
         if period > closed_end:
             excluded_not_closed += row['row_count']
             continue
+        if not month_number('2017-01') <= period <= month_number('2025-12'):
+            excluded_outside_history += row['row_count']
+            continue
         monthly[period] += row[metric]
         count += row['row_count']
     series = dict(monthly)
     response = {'scope': {'sector': sector, 'product': product, 'metric': metric, 'unit': '₱ net sales' if metric == 'revenue' else 'delivered source units'},
                 'products': products, 'models': MODELS, 'status': 'Draft benchmark; source completeness unverified',
-                'source': {**payload['source'], 'as_of': today.isoformat(), 'scoped_rows': count, 'excluded_not_closed': excluded_not_closed},
+                'source': {**payload['source'], 'as_of': today.isoformat(), 'scoped_rows': count, 'excluded_not_closed': excluded_not_closed, 'excluded_outside_history': excluded_outside_history},
                 'actuals': [], 'views': {}, 'origin': None, 'months_since_origin': None, 'observed_months': len(series)}
     if not series:
         return response

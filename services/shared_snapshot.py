@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import re
 from pathlib import Path
 from typing import Any
 
@@ -109,9 +110,11 @@ def normalize_snapshot(data: dict[str, Any]) -> dict[str, Any]:
         return normalized
 
     data["monthly"] = normalize_rows(data.get("monthly", []), ["revenue", "income"])
+    data["monthly"] = sorted([r for r in data["monthly"] if re.fullmatch(r"(201[7-9]|202[0-5])-(0[1-9]|1[0-2])", str(r.get("period", "")))], key=lambda r: r["period"])
     data["by_area"] = normalize_rows(data.get("by_area", []), ["revenue", "income"])
     data["top_products"] = normalize_rows(data.get("top_products", []), ["revenue", "income", "qty", "pct_of_total"])
     data["year_summary"] = normalize_rows(data.get("year_summary", []), ["revenue", "income"], {"transactions"})
+    data["year_summary"] = [r for r in data["year_summary"] if re.fullmatch(r"201[7-9]|202[0-5]", str(r.get("year", "")))]
     data["seasonality"] = normalize_rows(data.get("seasonality", []), ["avg_revenue"])
     data["forecasts"] = normalize_rows(data.get("forecasts", []), [
         "baseline_forecast",
