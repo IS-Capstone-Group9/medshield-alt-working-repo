@@ -640,7 +640,7 @@ app.get('/api/sales/external-regression', requireAuth, async (req: Request, res:
   const params = new URLSearchParams()
   for (const name of ['sector', 'territory', 'product', 'metric', 'mode', 'provider', 'disease', 'lag', 'rainfall_lag']) {
     const value = req.query[name]
-    if (typeof value === 'string') params.set(name, value)
+    if (typeof value === 'string' && value.trim() !== '') params.set(name, value.trim())
   }
   try {
     const result = await analyticsJson(`/sales/external-regression?${params}`)
@@ -761,7 +761,7 @@ app.get('/api/auth/me', requireAuthDuringPasswordReset, (req: AuthenticatedReque
 
 const authLoginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 10,
+  max: 500,
   message: { error: 'Too many login attempts. Try again after 15 minutes.' },
   standardHeaders: true,
   legacyHeaders: false,

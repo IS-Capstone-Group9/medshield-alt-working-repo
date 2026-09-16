@@ -17,7 +17,10 @@ function renderProductPrioritizationTimeline() {
  const page=document.getElementById('page-products');
  if(!page || !page.classList.contains('active') || !salesSectorsData)return;
  const daily=descriptiveUsesDailyGrain();
- const rows=getDescriptiveDetailedRows().filter(row=>row.evidence!=='estimate');
+ const allRows=getDescriptiveDetailedRows();
+ const actualRows=allRows.filter(row=>row.evidence!=='estimate');
+ const rows=actualRows.length?actualRows:allRows;
+ const isEstimated=!actualRows.length&&allRows.length>0;
  const totals=new Map();rows.forEach(r=>{const product=String(r.product||'').trim();if(!product)return;const v=totals.get(product)||{revenue:0,quantity:0};v.revenue+=Number(r.revenue)||0;v.quantity+=Number(r.quantity)||0;totals.set(product,v);});
  const positive=[...totals.entries()].filter(([,value])=>value.revenue>0).sort((a,b)=>b[1].revenue-a[1].revenue);
  const grand=positive.reduce((sum,[,value])=>sum+value.revenue,0);

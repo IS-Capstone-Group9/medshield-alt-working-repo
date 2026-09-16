@@ -141,9 +141,9 @@ def sales_forecast_validation():
 @app.get("/sales/external-regression")
 def sales_external_regression():
     try:
-        options = {key: request.args[key] for key in ('sector', 'territory', 'product', 'metric', 'mode', 'provider', 'disease') if key in request.args}
+        options = {key: request.args[key] for key in ('sector', 'territory', 'product', 'metric', 'mode', 'provider', 'disease') if key in request.args and request.args[key] != ''}
         for key in ('lag', 'rainfall_lag'):
-            if key in request.args:
+            if key in request.args and request.args[key] != '':
                 options[key] = int(request.args[key])
         return jsonify(load_regression(**options))
     except ValueError as error:

@@ -61,9 +61,12 @@ let regressionRequest = 0
 export async function refreshExternalRegression() {
   const request = ++regressionRequest
   const apply = (window as any).setExternalRegressionData
-  if (typeof apply !== 'function') return
   const fields: Record<string, string> = { sector: 'regSector', territory: 'regTerritory', product: 'regProduct', metric: 'regMetric', mode: 'regMode', provider: 'regProvider', disease: 'regDisease', lag: 'regLag', rainfall_lag: 'regRainLag' }
-  const params = new URLSearchParams(Object.fromEntries(Object.entries(fields).map(([key, id]) => [key, (document.getElementById(id) as HTMLSelectElement)?.value ?? ''])))
+  const params = new URLSearchParams()
+  for (const [key, id] of Object.entries(fields)) {
+    const val = (document.getElementById(id) as HTMLSelectElement | null)?.value
+    if (val && val.trim() !== '') params.set(key, val.trim())
+  }
   apply(null, 'Loading matched sales and external evidence…')
   try {
     const data = await getJson(`/api/sales/external-regression?${params}`)

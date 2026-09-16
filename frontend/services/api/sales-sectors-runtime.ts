@@ -22,7 +22,7 @@ export const SALES_SECTORS_MARKUP = String.raw`
  <div><h3>Net sales revenue share (%)</h3><div style="height:280px"><canvas id="sectorRevenueChart"></canvas></div></div>
  <div><h3>Delivered quantity share (%)</h3><div style="height:280px"><canvas id="sectorQuantityChart"></canvas></div></div>
  </div>
- <div style="overflow:auto"><table class="product-table" id="sectorProfileTable"></table></div>
+ <div style="overflow:auto"><table class="product-table" id="sectorProfileTable" style="min-height:36px"></table></div>
  <p>Shares use only the selected cluster, period and product. Select one product to compare revenue and quantity on the same population. Source units are not interchangeable across products. Delivered sales do not measure unmet market demand.</p>
  <p>Explicit institutional wording takes precedence over generic geography. No assumption is made about equitable allocation or MedShield's control of purchasing decisions.</p>
  <details><summary>Classification and source evidence</summary><p id="sectorSource"></p><p>Generic province labels represent private sales accounts unless the source explicitly names an LGU or government institution. MedShield business-line labels are isolated as Internal. Unmatched labels remain Unknown.</p></details>
@@ -48,7 +48,9 @@ function renderSalesSectors(error) {
  select.innerHTML = '<option value="">All products — revenue only</option>' + products.map(p=>'<option value="'+esc(p)+'">'+esc(p)+'</option>').join('');
  select.value = products.includes(prior) ? prior : '';
  const product = select.value, sector = el('sectorCluster').value, dimension = el('sectorDimension').value;
- const scope = getDescriptiveDetailedRows().filter(r=>!product || r.product===product);
+ const allScope = getDescriptiveDetailedRows().filter(r=>!product || r.product===product);
+ const actualScope = allScope.filter(r=>r.evidence!=='estimate');
+ const scope = actualScope.length ? actualScope : allScope;
  const rows = scope.filter(r=>r.sector===sector);
  const groups = new Map();
  rows.forEach(r=>{const key=r[dimension]; const g=groups.get(key)||{label:key,revenue:0,quantity:0,count:0};g.revenue+=r.revenue;g.quantity+=r.quantity;g.count+=r.row_count;groups.set(key,g);});

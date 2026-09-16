@@ -19,7 +19,7 @@ export const SALES_HEATMAP_MARKUP = `
     <label>Measure <select id="heatmapMeasure" onchange="renderSalesHeatmap()"><option value="units">Units sold</option><option value="index">Within-year index</option></select></label>
   </div>
   <p class="chart-subtitle" id="heatmapStatus" role="status">Loading product-level quantities…</p>
-  <div id="revenueHeatmapGrid" style="overflow-x:auto;margin-top:12px;"></div>
+  <div id="revenueHeatmapGrid" style="overflow-x:auto;margin-top:12px;min-height:36px;"></div>
   <p id="heatmapLegend" class="chart-subtitle" style="margin:12px 0;"></p>
   <p id="heatmapInsight" style="margin:12px 0;" aria-live="polite"></p>
   <div class="chart-wrap h260"><canvas id="quantityTrendChart" aria-label="Monthly units sold for the selected product" role="img"></canvas></div>

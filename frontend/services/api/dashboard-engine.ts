@@ -73,6 +73,7 @@ const DASHBOARD_GLOBAL_HANDLERS = [
   'buildTables',
   'buildShowcaseCharts',
   'renderShowcaseDOMVisuals',
+  'renderProductPrioritizationTimeline',
 ] as const
 
 export function getExecutableDashboardScript(): string {
@@ -100,6 +101,10 @@ export function getExecutableDashboardScript(): string {
         if (typeof buildTables === 'function') buildTables();
         if (typeof configureProductYearControls === 'function') configureProductYearControls(name);
         if (typeof renderProductPrioritizationTimeline === 'function') renderProductPrioritizationTimeline();
+        if (typeof renderSalesSectors === 'function') renderSalesSectors();
+        if (typeof renderForecastValidation === 'function') renderForecastValidation();
+        if (typeof renderExternalRegression === 'function') renderExternalRegression();
+        if (typeof renderSalesHeatmap === 'function') renderSalesHeatmap();
         if (typeof renderShowcaseDOMVisuals === 'function') renderShowcaseDOMVisuals();
       }, 60);
     });
@@ -112,11 +117,6 @@ export function getExecutableDashboardScript(): string {
     if (existingChart) existingChart.destroy();
     if (charts[id] && charts[id] !== existingChart) charts[id].destroy();`,
     )
-    .replace(
-      "const sortedProductRows = getSortedProductRows();",
-      "const sortedProductRows = getSortedProductRows();"
-    )
-
   // Robust closing of the (async () => { ... })() IIFE block before utility functions
   if (patchedScript.includes("});\n\nif (typeof window !== 'undefined')")) {
     patchedScript = patchedScript.replace("});\n\nif (typeof window !== 'undefined')", "})();\n\nif (typeof window !== 'undefined')")
@@ -142,6 +142,19 @@ function numericSeriesOrFallback(primary, fallback) {
     return primary;
   }
   return fallback || [];
+}
+
+function applyDatasetPatch(patch) {
+  if (!patch || typeof patch !== 'object') return;
+  if (typeof DATA === 'undefined' || !DATA) return;
+  if (Array.isArray(patch.monthly)) DATA.monthly = patch.monthly;
+  if (Array.isArray(patch.by_area)) DATA.by_area = patch.by_area;
+  if (Array.isArray(patch.top_products)) DATA.top_products = patch.top_products;
+  if (Array.isArray(patch.year_summary)) DATA.year_summary = patch.year_summary;
+  if (Array.isArray(patch.seasonality)) DATA.seasonality = patch.seasonality;
+  if (typeof buildCharts === 'function') buildCharts();
+  if (typeof buildTables === 'function') buildTables();
+  if (typeof refreshComparison === 'function') refreshComparison();
 }
 
 function getSortedProductRows() {
