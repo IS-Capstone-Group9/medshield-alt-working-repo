@@ -80,6 +80,16 @@ test('product prioritization follows trailing periods and custom-range monthly g
   await expect(page.locator('#productPriorityScope')).toContainText('positive-revenue products')
   await page.selectOption('#descriptivePeriodSelect','6')
   await expect.poll(()=>page.evaluate(()=>(window as any).Chart.getChart(document.getElementById('paretoCurveChart')).data.labels.length)).toBe(6)
+  await page.selectOption('#descriptivePeriodSelect','all')
+  const allTime = await page.evaluate(()=>{
+    const chart=(window as any).Chart.getChart(document.getElementById('paretoCurveChart'))
+    return {labels:chart.data.labels,axisTitle:chart.options.scales.x.title.text}
+  })
+  expect(allTime.labels).toContain('2024')
+  expect(allTime.labels).toContain('2025')
+  expect(allTime.labels.every((label:string)=>/^\d{4}(?: (?:YTD|Partial))?$/.test(label))).toBe(true)
+  expect(allTime.axisTitle).toBe('Year')
+  await expect(page.locator('#productPriorityScope')).toContainText('All Time')
   await page.selectOption('#descriptivePeriodSelect','30d')
   await expect.poll(()=>page.evaluate(()=>(window as any).Chart.getChart(document.getElementById('paretoCurveChart')).data.labels.length)).toBe(30)
   await page.selectOption('#descriptivePeriodSelect','custom')

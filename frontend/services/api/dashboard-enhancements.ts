@@ -69,6 +69,7 @@ function installDescriptivePeriodControls(root: HTMLElement) {
       ['3', 'Last 3 Months'],
       ['6', 'Last 6 Months'],
       ['12', 'Last 12 Months'],
+      ['all', 'All Time · Yearly'],
       ['custom', 'Custom Date Range'],
     ].forEach(([value, text]) => select.add(new Option(text, value, false, value === '12')))
     selector.append(label, select)

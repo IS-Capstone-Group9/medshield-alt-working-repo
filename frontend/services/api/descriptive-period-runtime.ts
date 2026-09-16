@@ -174,8 +174,17 @@ function descriptiveUsesDailyGrain() {
   return descriptivePeriod === '30d' || (descriptivePeriod === 'custom' && descriptiveCustomDayCount() <= 31);
 }
 
+function descriptiveUsesYearlyGrain() {
+  return descriptivePeriod === 'all';
+}
+
 function descriptivePeriodIncludes(value) {
   const text = String(value || '');
+  if (descriptivePeriod === 'all') {
+    const year = Number(text.slice(0, 4));
+    return /^\d{4}(?:-\d{2}(?:-\d{2})?)?$/.test(text)
+      && year >= 2017 && year <= Number(descriptivePhtDate().slice(0, 4));
+  }
   if (descriptivePeriod === 'custom') {
     if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text >= customDateStart && text <= customDateEnd;
     const month = text.slice(0, 7);
@@ -235,6 +244,7 @@ function descriptiveCustomMonthlyRows(startDate, endDate) {
 
 function descriptivePreviousPeriod(period) {
   const text = String(period || '');
+  if (/^\d{4}$/.test(text)) return String(Number(text) - 1);
   return /^(\d{4})-(\d{2})(-\d{2})?$/.test(text)
     ? String(Number(text.slice(0, 4)) - 1) + text.slice(4)
     : '';
@@ -243,6 +253,7 @@ function descriptivePreviousPeriod(period) {
 function descriptiveIsFuturePeriod(period) {
   const text = String(period || '');
   const today = descriptivePhtDate();
+  if (/^\d{4}$/.test(text)) return text > today.slice(0, 4);
   return text.length === 7 ? text > today.slice(0, 7) : text > today;
 }
 
@@ -300,6 +311,10 @@ function getDescriptiveDetailedRows() {
   const daily = descriptiveUsesDailyGrain();
   const key = row => String(daily ? row.date : row.period || '');
   const allRows = salesSectorsData.rows.filter(row => key(row));
+  if (descriptiveUsesYearlyGrain()) {
+    return allRows.filter(row => !descriptiveIsFuturePeriod(String(row.period || row.date || '')))
+      .map(row => ({ ...row, evidence: row.evidence || 'actual' }));
+  }
   const rawRows = descriptivePeriod === 'custom'
     ? allRows.filter(row => {
         const date = String(row.date || '');
@@ -386,6 +401,22 @@ function getDescriptiveMonthlyRows() {
 }
 
 function descriptiveAxisPeriods() {
+  if (descriptiveUsesYearlyGrain()) {
+    const years = new Set();
+    dashboardMonthlyRows().forEach(row => {
+      const year = String(row.period || '').slice(0, 4);
+      if (/^\d{4}$/.test(year) && !descriptiveIsFuturePeriod(year)) years.add(Number(year));
+    });
+    if (typeof salesSectorsData !== 'undefined' && salesSectorsData && Array.isArray(salesSectorsData.rows)) {
+      salesSectorsData.rows.forEach(row => {
+        const year = String(row.period || row.date || '').slice(0, 4);
+        if (/^\d{4}$/.test(year) && !descriptiveIsFuturePeriod(year)) years.add(Number(year));
+      });
+    }
+    const observed = [...years].filter(Number.isInteger).sort((left, right) => left - right);
+    if (!observed.length) return [];
+    return Array.from({ length: observed[observed.length - 1] - observed[0] + 1 }, (_, index) => String(observed[0] + index));
+  }
   if (descriptivePeriod === '30d') {
     const end = descriptiveLatestObservedDate();
     return Array.from({ length: 30 }, (_, index) => shiftIsoDate(end, index - 29));
@@ -406,6 +437,26 @@ function descriptiveAxisPeriods() {
 
 function getDescriptiveDisplayRows() {
   const sourceRows = getDescriptiveSourceRows();
+  if (descriptiveUsesYearlyGrain()) {
+    const totals = new Map();
+    sourceRows.forEach(row => {
+      const period = String(row.period || '');
+      if (!/^\d{4}-\d{2}$/.test(period) || descriptiveIsFuturePeriod(period)) return;
+      const year = period.slice(0, 4);
+      const total = totals.get(year) || { period: year, revenue: 0, income: 0, incomeComplete: true, observedMonths: new Set(), evidence: 'actual' };
+      total.revenue += Number(row.revenue) || 0;
+      if (row.income == null || !Number.isFinite(Number(row.income))) total.incomeComplete = false;
+      else total.income += Number(row.income);
+      total.observedMonths.add(period.slice(5, 7));
+      totals.set(year, total);
+    });
+    return descriptiveAxisPeriods().map(period => {
+      const total = totals.get(period);
+      return total
+        ? { period, revenue: total.revenue, income: total.incomeComplete ? total.income : null, evidence: 'actual', observed_months: total.observedMonths.size }
+        : { period, revenue: null, income: null, evidence: 'unavailable', missing: true, observed_months: 0 };
+    });
+  }
   const source = new Map(sourceRows.map(row => [String(row.period), row]));
   const estimateRows = descriptivePeriod === 'custom' && !descriptiveUsesDailyGrain() ? dashboardMonthlyRows() : sourceRows;
   return descriptiveAxisPeriods().map(period => source.get(period)
@@ -414,6 +465,11 @@ function getDescriptiveDisplayRows() {
 }
 
 function getDescriptivePriorDisplayRows() {
+  if (descriptiveUsesYearlyGrain()) {
+    const annual = new Map(getDescriptiveDisplayRows().map(row => [String(row.period), row]));
+    return descriptiveAxisPeriods().map(period => annual.get(String(Number(period) - 1))
+      || { period: String(Number(period) - 1), revenue: null, income: null, evidence: 'unavailable', missing: true });
+  }
   const sourceRows = descriptivePeriod === 'custom' && !descriptiveUsesDailyGrain()
     ? descriptiveCustomMonthlyRows(shiftIsoYear(customDateStart, -1), shiftIsoYear(customDateEnd, -1))
     : getDescriptiveSourceRows();
@@ -428,6 +484,12 @@ function getDescriptivePriorDisplayRows() {
 }
 
 function descriptivePeriodLabel() {
+  if (descriptiveUsesYearlyGrain()) {
+    const years = descriptiveAxisPeriods();
+    return years.length
+      ? 'All Time · ' + years[0] + '–' + descriptiveYearLabel(years[years.length - 1]) + ' · Yearly'
+      : 'All Time · Yearly';
+  }
   if (descriptivePeriod === '30d') {
     const end = descriptiveLatestObservedDate();
     const formatter = new Intl.DateTimeFormat('en-PH', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
@@ -444,11 +506,25 @@ function descriptivePeriodLabel() {
 
 function descriptivePointLabel(period) {
   const text = String(period);
+  if (/^\d{4}$/.test(text)) return descriptiveYearLabel(text);
   const date = new Date(text.length === 7 ? text + '-01T00:00:00Z' : text + 'T00:00:00Z');
   if (Number.isNaN(date.getTime())) return text;
   return new Intl.DateTimeFormat('en-PH', descriptiveUsesDailyGrain()
     ? { month: 'short', day: 'numeric', timeZone: 'UTC' }
     : { month: 'short', year: '2-digit', timeZone: 'UTC' }).format(date);
+}
+
+function descriptiveYearLabel(yearValue) {
+  const year = String(yearValue);
+  const years = descriptiveAxisPeriods();
+  const latestYear = years.length ? years[years.length - 1] : '';
+  const observedMonths = new Set(dashboardMonthlyRows()
+    .map(row => String(row.period || ''))
+    .filter(period => period.slice(0, 4) === year && /^\d{4}-\d{2}$/.test(period))
+    .map(period => period.slice(5, 7)));
+  if (year === latestYear && year === descriptivePhtDate().slice(0, 4)) return year + ' YTD';
+  if (year === latestYear && observedMonths.size > 0 && observedMonths.size < 12) return year + ' Partial';
+  return year;
 }
 
 function setCustomDateRange(startValue, endValue) {
@@ -497,7 +573,7 @@ function openCustomDateCalendar(input) {
 }
 
 function setDescriptivePeriod(value) {
-  descriptivePeriod = ['30d', '3', '6', '12', 'custom'].includes(String(value)) ? String(value) : '12';
+  descriptivePeriod = ['30d', '3', '6', '12', 'all', 'custom'].includes(String(value)) ? String(value) : '12';
   const periodSelect = document.getElementById('descriptivePeriodSelect');
   if (periodSelect && periodSelect.value !== descriptivePeriod) periodSelect.value = descriptivePeriod;
   const yearWrap = document.getElementById('singleYearWrap');

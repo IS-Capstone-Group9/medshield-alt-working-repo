@@ -87,11 +87,18 @@ function renderRankingTable(root: HTMLElement, state: McdaState) {
         ? `Up ${baselineRank - currentRank}`
         : `Down ${currentRank - baselineRank}`
     const tableRow = document.createElement('tr')
+    tableRow.dataset.priorityRank = String(currentRank)
+    if (currentRank <= 3) tableRow.classList.add('mcda-priority-row')
     const rankCell = appendCell(tableRow, `#${currentRank}`, 'left')
     rankCell.style.fontWeight = '800'
     const territoryCell = appendCell(tableRow, row.territory, 'left')
     territoryCell.style.fontWeight = '700'
-    appendCell(tableRow, shift, 'left')
+    const shiftCell = appendCell(tableRow, shift, 'left')
+    shiftCell.className = baselineRank === currentRank
+      ? 'mcda-rank-shift is-steady'
+      : currentRank < baselineRank
+        ? 'mcda-rank-shift is-up'
+        : 'mcda-rank-shift is-down'
     const scoreCell = appendCell(tableRow, row.adjustedScore.toFixed(1))
     scoreCell.style.fontWeight = '800'
     scoreCell.style.color = 'var(--accent)'
@@ -107,7 +114,10 @@ function renderRankingTable(root: HTMLElement, state: McdaState) {
     body.appendChild(tableRow)
   })
 
-  table.replaceChildren(head, body)
+  const caption = document.createElement('caption')
+  caption.className = 'sr-only'
+  caption.textContent = 'Candidate commercial territory priority ranking with weight-sensitivity rank shifts'
+  table.replaceChildren(caption, head, body)
 }
 
 function setLoadingState(root: HTMLElement, loading: boolean, error?: string) {
@@ -128,13 +138,14 @@ function replaceLegacyPanel(root: HTMLElement): HTMLElement | null {
   if (!panel) return null
   panel.dataset.mcdaSensitivity = 'commercial-candidate'
   panel.innerHTML = `
+    <div class="area-section-eyebrow">02 · Interactive MCDA sensitivity</div>
     <div class="chart-header">
       <div>
         <div class="chart-title">Commercial Priority MCDA Weight Sensitivity</div>
         <div class="chart-subtitle">Supported criteria only. Adjustable weights always total 100%.</div>
       </div>
       <div style="display:flex; align-items:center; gap:8px;">
-        <span id="mcdaCriteriaStatus" class="status-pill status-draft">Loading governed criteria</span>
+        <span id="mcdaCriteriaStatus" class="status-pill status-draft" role="status" aria-live="polite">Loading governed criteria</span>
         <button id="mcdaResetWeights" class="btn btn-secondary" type="button" disabled style="font-size:11px; padding:4px 10px;">Reset 60/40</button>
       </div>
     </div>
@@ -143,24 +154,24 @@ function replaceLegacyPanel(root: HTMLElement): HTMLElement | null {
         <div>
           <div style="display:flex; justify-content:space-between; gap:12px; font-size:11px; font-weight:700; color:var(--text-primary); margin-bottom:4px;">
             <label for="mcdaWeightSalesValue">Candidate Sales-Value Scale</label>
-            <span id="mcdaWeightSalesValueLabel" style="color:var(--accent);">60%</span>
+            <output id="mcdaWeightSalesValueLabel" for="mcdaWeightSalesValue" style="color:var(--accent);">60%</output>
           </div>
-          <input data-mcda-supported-weight type="range" id="mcdaWeightSalesValue" min="0" max="100" value="60" disabled style="width:100%; accent-color:var(--accent);" />
-          <div style="font-size:10px; color:var(--text-muted); margin-top:3px;">Territory net_cost total normalized to the largest approved territory. Candidate financial mapping.</div>
+          <input data-mcda-supported-weight type="range" id="mcdaWeightSalesValue" min="0" max="100" value="60" disabled aria-describedby="mcdaSalesHelp mcdaWeightRule" style="width:100%; accent-color:var(--accent);" />
+          <div id="mcdaSalesHelp" style="font-size:10px; color:var(--text-muted); margin-top:3px;">Territory net_cost total normalized to the largest approved territory. Candidate financial mapping.</div>
         </div>
         <div>
           <div style="display:flex; justify-content:space-between; gap:12px; font-size:11px; font-weight:700; color:var(--text-primary); margin-bottom:4px;">
             <label for="mcdaWeightCoverage">Observed Month Coverage</label>
-            <span id="mcdaWeightCoverageLabel" style="color:var(--emerald);">40%</span>
+            <output id="mcdaWeightCoverageLabel" for="mcdaWeightCoverage" style="color:var(--emerald);">40%</output>
           </div>
-          <input data-mcda-supported-weight type="range" id="mcdaWeightCoverage" min="0" max="100" value="40" disabled style="width:100%; accent-color:var(--emerald);" />
-          <div style="font-size:10px; color:var(--text-muted); margin-top:3px;">Unique active sales months divided by available months in the publication candidate.</div>
+          <input data-mcda-supported-weight type="range" id="mcdaWeightCoverage" min="0" max="100" value="40" disabled aria-describedby="mcdaCoverageHelp mcdaWeightRule" style="width:100%; accent-color:var(--emerald);" />
+          <div id="mcdaCoverageHelp" style="font-size:10px; color:var(--text-muted); margin-top:3px;">Unique active sales months divided by available months in the publication candidate.</div>
         </div>
       </div>
       <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px 16px; margin-top:12px; padding-top:10px; border-top:1px solid var(--border); font-size:10px; color:var(--text-muted);">
         <span><strong style="color:var(--text-secondary);">Excluded:</strong> Outbreak risk · P7 territory-level DOH validation pending</span>
         <span><strong style="color:var(--text-secondary);">Excluded:</strong> Supplier lead time · P8 history unavailable</span>
-        <span><strong style="color:var(--text-secondary);">Weight total:</strong> <span id="mcdaWeightTotal">100%</span></span>
+        <span id="mcdaWeightRule"><strong style="color:var(--text-secondary);">Lock rule:</strong> Sales-value + month-coverage = <output id="mcdaWeightTotal">100%</output> exactly</span>
       </div>
     </div>`
   return panel

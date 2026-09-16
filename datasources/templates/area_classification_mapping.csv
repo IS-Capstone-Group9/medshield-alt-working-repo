@@ -2,6 +2,7 @@ raw_area,standard_area,area_type,territory,customer_type,business_line,weather_e
 Batangas,Batangas,territory,Batangas,,,true,true,approved,
 Batngas,Batangas,territory,Batangas,,,true,true,approved,
 Quezon,Quezon,territory,Quezon,,,true,true,approved,
+Pagbilao,Pagbilao,territory,Quezon,,,true,true,approved,Exact LGU reference in docs/MAPPED_CLIENT_REFERENCE.md record CLI-0340.
 Marinduque,Marinduque,territory,Marinduque,,,true,true,approved,
 Camarines Norte,Camarines Norte,territory,Camarines Norte,,,true,true,approved,
 Cam Norte,Camarines Norte,territory,Camarines Norte,,,true,true,approved,

@@ -51,6 +51,20 @@ class SectorTests(unittest.TestCase):
         result = build_sectors(rows, [], {}, 'test')
         self.assertEqual({r['sector'] for r in result['rows']}, {'Government', 'Internal'})
 
+    def test_exact_pagbilao_reference_is_traceable_as_quezon_lgu(self):
+        mappings = [dict(
+            raw_area='Pagbilao',
+            buyer_sector='Government',
+            customer_channel='LGU',
+            territory='Quezon',
+            mapping_status='approved',
+            review_notes='Exact reference-backed LGU mapping from docs/MAPPED_CLIENT_REFERENCE.md record CLI-0340.',
+        )]
+        result = build_sectors([self.row('Pagbilao')], mappings, {}, 'test')
+        row = result['rows'][0]
+        self.assertEqual((row['sector'], row['channel'], row['territory']), ('Government', 'LGU', 'Quezon'))
+        self.assertIn('CLI-0340', row['basis'])
+
 
 if __name__ == '__main__':
     unittest.main()

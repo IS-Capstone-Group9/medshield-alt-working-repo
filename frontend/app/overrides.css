@@ -141,6 +141,56 @@ html[data-theme="dark"] body {
   opacity: 0.72;
 }
 
+.area-section-eyebrow {
+  margin-bottom: 5px;
+  color: #d97706;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.mcda-priority-row {
+  background: rgba(217, 119, 6, 0.07);
+  box-shadow: inset 3px 0 #d97706;
+}
+
+.mcda-priority-row td:first-child,
+.mcda-priority-row td:nth-child(2) {
+  font-weight: 800;
+}
+
+.mcda-rank-shift {
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.mcda-rank-shift.is-up { color: #0d7045; }
+.mcda-rank-shift.is-down { color: #b42318; }
+.mcda-rank-shift.is-steady { color: var(--text-muted); }
+
+.area-decision-heading {
+  margin: 22px 0 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-left: 4px solid #1e3a5f;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.area-decision-heading h2 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 15px;
+}
+
+.area-decision-heading p {
+  margin: 5px 0 0;
+  color: var(--text-secondary);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
 .product-priority-scope {
   margin-bottom: 16px;
   padding: 14px 16px;

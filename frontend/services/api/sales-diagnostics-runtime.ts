@@ -143,9 +143,10 @@ function diagnosticAxis(values, title, color, position, grid) {
 function renderSalesDiagnostics(opts) {
   const selectedRows = getDescriptiveDisplayRows();
   const priorDisplayRows = getDescriptivePriorDisplayRows();
+  const yearly = descriptiveUsesYearlyGrain();
   const priorPeriod = period => descriptiveUsesDailyGrain()
     ? String(Number(period.slice(0, 4)) - 1) + period.slice(4)
-    : String(Number(period.slice(0, 4)) - 1) + period.slice(4, 7);
+    : yearly ? String(Number(period) - 1) : String(Number(period.slice(0, 4)) - 1) + period.slice(4, 7);
   const revenue = selectedRows.map(row => row.revenue == null ? null : row.revenue);
   const profit = selectedRows.map(row => row.income == null ? null : row.income);
   const detailLabels = selectedRows.map(row => descriptivePointLabel(row.period));
@@ -183,7 +184,10 @@ function renderSalesDiagnostics(opts) {
   const subtitle = document.getElementById('salesComparisonSubtitle');
   if (subtitle) subtitle.textContent = dailyUnavailable
     ? 'Daily transaction data is unavailable for the last 30 days; monthly totals are not expanded into synthetic days.'
-    : (descriptiveUsesDailyGrain() ? 'Daily' : 'Monthly') + ' revenue and gross profit for ' + descriptivePeriodLabel() + '; gaps mean unavailable observations, not zero sales.' + (predictedCount ? ' Dashed triangles are interpolated predictions and are excluded from totals.' : '');
+    : (yearly
+      ? 'Annual revenue and gross profit for ' + descriptivePeriodLabel() + '; totals use only observed source months and incomplete latest years are identified.'
+      : (descriptiveUsesDailyGrain() ? 'Daily' : 'Monthly') + ' revenue and gross profit for ' + descriptivePeriodLabel() + '; gaps mean unavailable observations, not zero sales.')
+      + (predictedCount ? ' Dashed triangles are interpolated predictions and are excluded from totals.' : '');
   createChart('revenueDetailChart', {
     type: 'line',
     data: { labels: detailLabels, datasets: detailDatasets },
@@ -248,7 +252,7 @@ function renderSalesDiagnostics(opts) {
   if (table) {
     table.replaceChildren();
     const head = table.createTHead().insertRow();
-    [(descriptiveUsesDailyGrain() ? 'Day' : 'Month'), 'Current period', 'Prior-year period', 'Prior-year net sales (₱)', 'Current net sales (₱)', 'Change (₱)', 'Growth (%)'].forEach(label => {
+    [(yearly ? 'Year' : (descriptiveUsesDailyGrain() ? 'Day' : 'Month')), 'Current period', 'Prior-year period', 'Prior-year net sales (₱)', 'Current net sales (₱)', 'Change (₱)', 'Growth (%)'].forEach(label => {
       const th = document.createElement('th'); th.scope = 'col'; th.textContent = label; head.appendChild(th);
     });
     const body = table.createTBody();

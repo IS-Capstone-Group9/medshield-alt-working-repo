@@ -141,7 +141,7 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     const yearWrap = page.locator('#singleYearWrap')
     await expect(periodSelect).toHaveValue('12')
     await expect(periodSelect.locator('option')).toHaveText([
-      'Last 30 Days', 'Last 3 Months', 'Last 6 Months', 'Last 12 Months', 'Custom Date Range',
+      'Last 30 Days', 'Last 3 Months', 'Last 6 Months', 'Last 12 Months', 'All Time · Yearly', 'Custom Date Range',
     ])
     await expect(yearWrap).toBeHidden()
     await expect(page.locator('#btnYoyYear')).toHaveCount(0)
@@ -154,6 +154,14 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     })).toBe(3)
     await expect(page.locator('#overviewBaselineChart').locator('xpath=ancestor::div[contains(@class,"chart-card")]').locator('.chart-subtitle'))
       .toContainText('Last 3 Months')
+
+    await periodSelect.selectOption('all')
+    await expect.poll(async () => page.evaluate(() => {
+      const chart = (window as any).Chart.getChart(document.getElementById('overviewBaselineChart'))
+      return chart?.data?.labels ?? []
+    })).toEqual(expect.arrayContaining(['2017']))
+    await expect(page.locator('#overviewBaselineChart').locator('xpath=ancestor::div[contains(@class,"chart-card")]').locator('.chart-subtitle'))
+      .toContainText('All Time')
 
     await comparisonSelect.selectOption('yoy')
     await expect.poll(async () => page.evaluate(() => {

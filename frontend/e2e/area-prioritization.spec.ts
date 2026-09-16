@@ -15,7 +15,7 @@ test.describe('Area Prioritization Dynamic Interactions & Visualizations', () =>
     await page.evaluate(() => {
       const app = window as any
       app.showPage('territory')
-      const row = (sector: string, channel: string, territory: string, revenue: number, quantity: number, period = '2025-02', product = 'PARACETAMOL 500MG') => ({
+      const row = (sector: string, channel: string, territory: string, revenue: number, quantity: number, period = '2025-02', product = 'PARACETAMOL 500MG', evidence = 'actual') => ({
         date: period + '-15',
         sector,
         channel,
@@ -25,14 +25,18 @@ test.describe('Area Prioritization Dynamic Interactions & Visualizations', () =>
         period,
         product,
         row_count: 1,
-        basis: 'Institutional purchase order reference'
+        basis: 'Institutional purchase order reference',
+        evidence,
       })
 
+      app.setDescriptivePeriod('custom')
+      app.setCustomDateRange('2025-01-01', '2025-12-31')
       app.setSalesSectorsData({
         rows: [
           row('Government', 'LGU Hospital', 'Quezon', 500000, 5000, '2025-02', 'PARACETAMOL 500MG'),
           row('Government', 'RHU Clinic', 'Batangas', 300000, 3000, '2025-02', 'PARACETAMOL 500MG'),
           row('Government', 'Provincial Hospital', 'Camarines Sur', 200000, 2000, '2025-02', 'PARACETAMOL 500MG'),
+          row('Government', 'LGU Hospital', 'Batangas', 100000, 1000, '2025-03', 'PARACETAMOL 500MG', 'estimate'),
           row('Private', 'Private Hospital', 'Cavite', 400000, 4000, '2025-02', 'PARACETAMOL 500MG'),
           row('Private', 'Retail Pharmacy', 'Laguna', 250000, 2500, '2025-02', 'PARACETAMOL 500MG'),
           row('Private', 'Clinic', 'Quezon', 150000, 1500, '2025-02', 'DOXYCYCLINE 100MG'),
@@ -68,6 +72,19 @@ test.describe('Area Prioritization Dynamic Interactions & Visualizations', () =>
     expect(chartOptions.minRotation).toBe(35)
     expect(chartOptions.maxRotation).toBe(45)
     expect(chartOptions.autoSkip).toBe(false)
+    const evidenceLayers = await page.evaluate(() => {
+      const chart = (window as any).Chart.getChart(document.getElementById('sectorRevenueChart'))
+      return {
+        labels: chart.data.datasets.map((dataset: any) => dataset.label),
+        xStacked: chart.options.scales.x.stacked,
+        yStacked: chart.options.scales.y.stacked,
+      }
+    })
+    expect(evidenceLayers.labels).toEqual(['Observed revenue share', 'Estimated revenue share'])
+    expect(evidenceLayers.xStacked).toBe(true)
+    expect(evidenceLayers.yStacked).toBe(true)
+    await expect(page.locator('#sectorObservedRatio')).toHaveText('60.00%')
+    await expect(page.locator('#sectorEstimatedRatio')).toHaveText('40.00%')
 
     // 2. Switch dimension to Customer Channel
     await page.selectOption('#sectorDimension', 'channel')
@@ -87,6 +104,10 @@ test.describe('Area Prioritization Dynamic Interactions & Visualizations', () =>
 
     await page.selectOption('#descriptivePeriodSelect', '6')
     await expect(page.locator('#sectorScope')).toContainText('Last 6 Months')
+
+    await page.selectOption('#descriptivePeriodSelect', 'all')
+    await expect(page.locator('#sectorScope')).toContainText('All Time')
+    await expect(page.locator('#sectorPeriodGrain')).toHaveText('Yearly')
 
     await page.selectOption('#descriptivePeriodSelect', '30d')
     await expect(page.locator('#sectorScope')).toContainText('Last 30 Days')

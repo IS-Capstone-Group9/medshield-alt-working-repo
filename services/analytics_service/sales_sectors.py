@@ -15,7 +15,9 @@ def classify_buyer(area, approved_mapping, geographies):
     key = text.casefold()
     mapped = approved_mapping.get(key)
     if mapped:
-        return mapped['buyer_sector'], 'Approved buyer mapping'
+        note = str(mapped.get('review_notes') or '').strip()
+        basis = 'Approved buyer mapping'
+        return mapped['buyer_sector'], f'{basis}: {note}' if note else basis
     if key in INTERNAL_LABELS or 'medshield internal' in key:
         return 'Internal', 'MedShield internal business label'
     government = re.search(r'\b(national government|public hospital|government hospital|doh|department of health|lgu|barangay|municipal(?:ity)?|city government|provincial government)\b', key)
