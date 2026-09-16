@@ -35,6 +35,7 @@ This layer must be finished first because predictive and prescriptive outputs de
 | Area summary | Group by `area_type` and standardized area. | `descriptive_area_summary.csv` |
 | Area-type summary | Group by territory/customer/business-line/unmapped. | `descriptive_area_type_summary.csv` |
 | Product ABC/Pareto | Rank products by net sales revenue (`net_cost`); A covers cumulative 0-80%, B covers >80-95%, C covers >95-100%. | `descriptive_product_abc_pareto.csv` |
+| Product focus cohort | Rank observed positive-revenue products inside the selected period and retain the top 5% by product count (rounded up). Gap-fill estimates do not determine cohort membership. Dashboard charts and the performance table show at most the five highest-ranked products from that cohort; the cohort-versus-remainder donut uses revenue from the complete top-5% cohort. This is descriptive prioritization, not a purchase recommendation. | Product Prioritization dashboard |
 | Territory ABC/Pareto | Rank mapped territories by net sales revenue (`net_cost`) using the same ABC thresholds. | `descriptive_territory_abc_pareto.csv` |
 | Seasonality index | Monthly average demand divided by average demand across all months. | `descriptive_seasonality_overall.csv`, `descriptive_seasonality_territory.csv` |
 | YoY growth | Compare each month against the same month in the prior year. | `descriptive_yoy_overall.csv`, `descriptive_yoy_territory.csv` |
@@ -50,11 +51,13 @@ Overview, Sales Diagnostics, Product Prioritization, and Area Prioritization use
 | Last 3 Months | Monthly | Current Philippine calendar month and the preceding two months. |
 | Last 6 Months | Monthly | Current Philippine calendar month and the preceding five months. |
 | Last 12 Months | Monthly | Current Philippine calendar month and the preceding eleven months. |
-| Custom Year | Monthly | January through December for one selected calendar year. The year selector is shown only in this mode. |
+| Custom Date Range | Daily up to 31 days; monthly above 31 days | Calendar start and end dates from January 1, 2017 through the current Philippine date. Exact dated transactions are used; longer selections are summarized into monthly buckets to control chart noise. |
 
 Trailing periods are descriptive counterparts to the forward-looking 3-, 6-, and 12-month forecast horizons. Missing daily and monthly observations are filled with a recency-weighted same-calendar-period estimate using up to three prior years (60%, 30%, and 10%, renormalized when fewer years exist). Every filled value remains labeled as an estimate, is never treated as an observed zero, and is replaced when an uploaded actual arrives.
 
-Overview and Sales Diagnostics expose Period View and Y/Y Compare. The comparison aligns every displayed day or month to the same calendar period one year earlier; Custom Year compares the selected year monthly against its prior year. Product Prioritization intentionally remains period-only.
+Product Prioritization recalculates its observed top-5% cohort whenever a preset changes or either Custom Date Range calendar boundary changes. Presets anchor to the current calendar date and month backwards (PHT), while Custom Date Range allows arbitrary historical date selection.
+
+Overview and Sales Diagnostics expose Period View and Y/Y Compare. The comparison aligns every displayed day or month to the same calendar period one year earlier; Custom Date Range shifts the selected start and end dates back by one calendar year, with leap-day dates clamped to the last valid February date. Product Prioritization intentionally remains period-only.
 
 ## Command
 

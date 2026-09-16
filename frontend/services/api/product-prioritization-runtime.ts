@@ -1,7 +1,9 @@
 export const PRODUCT_PRIORITIZATION_SCRIPT = String.raw`
 function configureProductYearControls(pageName) {
  const yearWrap=document.getElementById('singleYearWrap');
- if(yearWrap)yearWrap.style.display=descriptivePeriod==='custom'?'flex':'none';
+ if(yearWrap)yearWrap.style.display='none';
+ const rangeWrap=document.getElementById('customDateRangeWrap');
+ if(rangeWrap)rangeWrap.style.display=descriptivePeriod==='custom'?'flex':'none';
  const compareWrap=document.getElementById('descriptiveComparisonWrap');
  const supportsComparison=pageName==='overview'||pageName==='revenue';
  if(compareWrap)compareWrap.style.display=supportsComparison?'inline-flex':'none';
@@ -14,26 +16,53 @@ function configureProductYearControls(pageName) {
 function renderProductPrioritizationTimeline() {
  const page=document.getElementById('page-products');
  if(!page || !page.classList.contains('active') || !salesSectorsData)return;
- const daily=descriptivePeriod==='30d';
- const rows=getDescriptiveDetailedRows();
- const totals=new Map();rows.forEach(r=>{const v=totals.get(r.product)||{revenue:0,quantity:0};v.revenue+=Number(r.revenue)||0;v.quantity+=Number(r.quantity)||0;totals.set(r.product,v);});
- const products=[...totals.entries()].sort((a,b)=>b[1].revenue-a[1].revenue).slice(0,10), top=new Set(products.map(p=>p[0]));
+ const daily=descriptiveUsesDailyGrain();
+ const rows=getDescriptiveDetailedRows().filter(row=>row.evidence!=='estimate');
+ const totals=new Map();rows.forEach(r=>{const product=String(r.product||'').trim();if(!product)return;const v=totals.get(product)||{revenue:0,quantity:0};v.revenue+=Number(r.revenue)||0;v.quantity+=Number(r.quantity)||0;totals.set(product,v);});
+ const positive=[...totals.entries()].filter(([,value])=>value.revenue>0).sort((a,b)=>b[1].revenue-a[1].revenue);
+ const grand=positive.reduce((sum,[,value])=>sum+value.revenue,0);
+ let cumulative=0;
+ const portfolio=positive.map(([name,value],index)=>{const before=cumulative;cumulative+=value.revenue;return {name,...value,rank:index+1,revenueShare:grand?100*value.revenue/grand:0,cumulative:grand?100*cumulative/grand:0,abc:before<grand*.8?'A':before<grand*.95?'B':'C'};});
+ const focusCohortCount=portfolio.length?Math.max(1,Math.ceil(portfolio.length*.05)):0;
+ const focusCohort=portfolio.slice(0,focusCohortCount);
+ const shortlistCount=Math.min(5,focusCohortCount);
+ const ranked=focusCohort.slice(0,shortlistCount), top=new Set(ranked.map(product=>product.name));
+ const shortlistRevenue=ranked.reduce((sum,product)=>sum+product.revenue,0);
+ const shortlistShare=grand?100*shortlistRevenue/grand:0;
+ const focusRevenue=focusCohort.reduce((sum,product)=>sum+product.revenue,0);
+ const focusShare=grand?100*focusRevenue/grand:0;
  const keys=descriptiveAxisPeriods();
  const labels=keys.map(descriptivePointLabel);
  const key=r=>daily?r.date:r.period;
  const series=new Map();rows.filter(r=>top.has(r.product)).forEach(r=>{const k=r.product+'|'+key(r);series.set(k,(series.get(k)||0)+(Number(r.revenue)||0));});
- const palette=['#335F78','#D49A23','#1D8096','#7A5C99','#3B8C6E','#A45A52','#607D8B','#8C6D31','#526D82','#9A6F85'];
+ const palette=['#335F78','#D49A23','#1D8096','#7A5C99','#3B8C6E'];
  const replace=(id,config)=>{const canvas=document.getElementById(id),old=canvas&&Chart.getChart(canvas);if(old)old.destroy();if(canvas)new Chart(canvas,config);};
- const grand=[...totals.values()].reduce((n,p)=>n+p.revenue,0);let cumulative=0;const ranked=products.map(([name,v])=>{cumulative+=v.revenue;const pct=grand?100*cumulative/grand:0;return {name,...v,abc:pct<=80?'A':pct<=95?'B':'C',cumulative:pct};});
- replace('productBarChart',{type:'bar',data:{labels:ranked.map(p=>p.name),datasets:[{label:'Net sales revenue',data:ranked.map(p=>p.revenue),backgroundColor:'#335F78',yAxisID:'y'},{type:'line',label:'Cumulative revenue (%)',data:ranked.map(p=>p.cumulative),borderColor:'#D49A23',backgroundColor:'#D49A23',pointRadius:3,yAxisID:'pct'}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{title:{display:true,text:'Products ranked by revenue'}},y:{title:{display:true,text:'Net sales revenue (₱)'}},pct:{position:'right',min:0,max:100,title:{display:true,text:'Cumulative revenue (%)'},grid:{drawOnChartArea:false}}}}});
- const classes=['A','B','C'].map(c=>ranked.filter(p=>p.abc===c).reduce((n,p)=>n+p.revenue,0));
- replace('abcChart',{type:'doughnut',data:{labels:['Class A','Class B','Class C'],datasets:[{data:classes,backgroundColor:['#335F78','#D49A23','#9AAAB5']}]},options:{responsive:true,maintainAspectRatio:false}});
- replace('productBubbleChart',{type:'bubble',data:{datasets:ranked.map((p,i)=>({label:p.name,data:[{x:p.revenue,y:p.quantity,r:Math.max(5,Math.min(22,5+18*(p.revenue/(grand||1))))}],backgroundColor:palette[i]+'AA'}))},options:{responsive:true,maintainAspectRatio:false,scales:{x:{title:{display:true,text:'Net sales revenue (₱)'}},y:{title:{display:true,text:'Delivered source units'}}}}});
- replace('paretoCurveChart',{type:'line',data:{labels,datasets:products.map((p,i)=>({label:p[0],data:keys.map(k=>series.has(p[0]+'|'+k)?series.get(p[0]+'|'+k):null),borderColor:palette[i],backgroundColor:palette[i],pointRadius:daily?1:2,tension:.2,spanGaps:false}))},options:{responsive:true,maintainAspectRatio:false,scales:{x:{title:{display:true,text:daily?'Day':'Month'}},y:{title:{display:true,text:'Net sales revenue (₱)'}}}}});
- const table=document.getElementById('productTable');if(table)table.innerHTML='<thead><tr><th>Product</th><th>Net sales (₱)</th><th>Delivered units</th><th>ABC</th><th>Cumulative %</th></tr></thead><tbody>'+ranked.map(p=>'<tr><td>'+String(p.name).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))+'</td><td>'+p.revenue.toLocaleString('en-PH',{maximumFractionDigits:2})+'</td><td>'+p.quantity.toLocaleString('en-PH',{maximumFractionDigits:2})+'</td><td>'+p.abc+'</td><td>'+p.cumulative.toFixed(2)+'</td></tr>').join('')+'</tbody>';
- const mainTitle=page.querySelector('.chart-grid-2 .chart-title');if(mainTitle)mainTitle.textContent='Product Revenue Pareto';
- const mainSub=page.querySelector('.chart-grid-2 .chart-subtitle');if(mainSub)mainSub.textContent='Ranked net sales bars with cumulative revenue contribution';
- const trendCanvas=document.getElementById('paretoCurveChart'),trendCard=trendCanvas&&trendCanvas.closest('.chart-card');if(trendCard){const title=trendCard.querySelector('.chart-title'),sub=trendCard.querySelector('.chart-subtitle');if(title)title.textContent='Leading Product Revenue Trend';if(sub)sub.textContent=(daily?'Daily':'Monthly')+' revenue by leading product for '+descriptivePeriodLabel();}
+ replace('productBarChart',{type:'bar',data:{labels:ranked.map(p=>p.name),datasets:[{label:'Net sales revenue',data:ranked.map(p=>p.revenue),backgroundColor:'#335F78',yAxisID:'y'},{type:'line',label:'Cumulative portfolio revenue (%)',data:ranked.map(p=>p.cumulative),borderColor:'#D49A23',backgroundColor:'#D49A23',pointRadius:4,yAxisID:'pct'}]},options:{responsive:true,maintainAspectRatio:false,animation:false,plugins:{tooltip:{callbacks:{label:context=>context.dataset.yAxisID==='pct'?context.dataset.label+': '+Number(context.parsed.y).toFixed(2)+'%':context.dataset.label+': ₱'+Number(context.parsed.y).toLocaleString('en-PH',{maximumFractionDigits:2})}}},scales:{x:{title:{display:true,text:'Focus products ranked by revenue'},ticks:{autoSkip:false,maxRotation:0,minRotation:0}},y:{beginAtZero:true,title:{display:true,text:'Net sales revenue (₱)'}},pct:{position:'right',min:0,max:100,ticks:{callback:value=>Number(value).toFixed(0)+'%'},title:{display:true,text:'Cumulative share of all product revenue (%)'},grid:{drawOnChartArea:false}}}}});
+ const focusMix=[focusRevenue,Math.max(0,grand-focusRevenue)];
+ replace('abcChart',{type:'doughnut',data:{labels:['Top 5% cohort · '+focusShare.toFixed(2)+'% of revenue','Remaining 95% · '+(100-focusShare).toFixed(2)+'% of revenue'],datasets:[{data:focusMix,backgroundColor:['#D49A23','#CBD5DF'],borderColor:['#B77912','#AAB9C5'],borderWidth:1}]},options:{responsive:true,maintainAspectRatio:false,animation:false,plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:context=>context.label+': ₱'+Number(context.raw).toLocaleString('en-PH',{maximumFractionDigits:2})}}}}});
+ const largestShare=ranked.length?ranked[0].revenueShare:1;
+ replace('productBubbleChart',{type:'bubble',data:{datasets:ranked.map((p,i)=>({label:p.name,data:[{x:p.revenue,y:p.quantity,r:Math.max(6,Math.min(22,6+16*(p.revenueShare/largestShare)))}],backgroundColor:palette[i]+'B8',borderColor:palette[i]}))},options:{responsive:true,maintainAspectRatio:false,animation:false,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,title:{display:true,text:'Net sales revenue (₱)'}},y:{beginAtZero:true,title:{display:true,text:'Delivered source units (not pack-normalized)'}}}}});
+ replace('paretoCurveChart',{type:'line',data:{labels,datasets:ranked.map((p,i)=>({label:p.name,data:keys.map(k=>series.has(p.name+'|'+k)?series.get(p.name+'|'+k):null),borderColor:palette[i],backgroundColor:palette[i],pointRadius:daily?1:2,tension:.2,spanGaps:false}))},options:{responsive:true,maintainAspectRatio:false,animation:false,scales:{x:{title:{display:true,text:daily?'Day':'Month'}},y:{beginAtZero:true,title:{display:true,text:'Net sales revenue (₱)'}}}}});
+ const escape=value=>String(value).replace(/[&<>]/g,character=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[character]));
+ const table=document.getElementById('productTable');if(table){table.dataset.priorityMode='top5';table.innerHTML='<thead><tr><th>Rank</th><th>Top-5% focus product</th><th>Net sales (₱)</th><th>Revenue share</th><th>Cumulative portfolio share</th><th>Delivered units</th></tr></thead><tbody>'+(ranked.length?ranked.map(p=>'<tr><td>'+p.rank+'</td><td>'+escape(p.name)+'</td><td>'+p.revenue.toLocaleString('en-PH',{maximumFractionDigits:2})+'</td><td>'+p.revenueShare.toFixed(2)+'%</td><td>'+p.cumulative.toFixed(2)+'%</td><td>'+p.quantity.toLocaleString('en-PH',{maximumFractionDigits:2})+'</td></tr>').join(''):'<tr><td colspan="6">No positive-revenue products are available for this period.</td></tr>')+'</tbody>';}
+ let scope=document.getElementById('productPriorityScope');if(!scope){scope=document.createElement('div');scope.id='productPriorityScope';scope.className='product-priority-scope';scope.setAttribute('role','note');const firstGrid=page.querySelector('.chart-grid-2');page.insertBefore(scope,firstGrid);}
+ const capApplied=focusCohortCount>5;
+ scope.innerHTML='<div class="product-priority-scope-title">Top 5% Pareto focus cohort</div><div>The focus cohort contains <strong>'+focusCohortCount+' of '+portfolio.length+' positive-revenue products</strong> and represents <strong>'+focusShare.toFixed(2)+'%</strong> of observed positive-product net sales for '+escape(descriptivePeriodLabel())+'. '+(capApplied?'The charts and table show its five highest-ranked products for a manageable review set.':'All focus-cohort products are shown.')+' The visible leaders account for '+shortlistShare.toFixed(2)+'% of portfolio revenue.</div><div class="product-priority-boundary">Descriptive only: this ranking uses observed product records within the selected period; gap-fill estimates do not determine cohort membership. It does not prescribe order quantities. If the client confirms that the future objective is maximizing forecast-demand fulfillment under budget, pack, supplier, and product constraints, solve that separately with linear programming in Prescriptive Planning.</div>';
+ const updateCard=(canvasId,titleText,subtitleText)=>{const canvas=document.getElementById(canvasId),card=canvas&&canvas.closest('.chart-card');if(!card)return;const title=card.querySelector('.chart-title'),subtitle=card.querySelector('.chart-subtitle');if(title)title.textContent=titleText;if(subtitle)subtitle.textContent=subtitleText;};
+ updateCard('productBarChart','Top 5% Pareto Leaders','Highest-ranked products within the top-5% focus cohort; the line shows cumulative share of total portfolio revenue.');
+ updateCard('abcChart','Top 5% Cohort Revenue Contribution','Revenue captured by the complete top-5% product cohort compared with the remaining 95% of positive-revenue products.');
+ updateCard('productBubbleChart','Shortlist Revenue vs Delivered Units','Revenue concentration versus fulfilled source units; pack sizes are not normalized, so quantities are not directly interchangeable.');
+ updateCard('paretoCurveChart','Shortlist Revenue Trend',(daily?'Daily':'Monthly')+' net sales revenue for the Pareto focus products during '+descriptivePeriodLabel()+'. Missing observations remain gaps.');
+ const tableCard=table&&table.closest('.chart-card');if(tableCard){const title=tableCard.querySelector('.chart-title'),subtitle=tableCard.querySelector('.chart-subtitle');if(title)title.textContent='Top 5% Focus Product Performance';if(subtitle)subtitle.textContent='Ranked observed products with exact portfolio-share percentages for the selected period.';}
+ const insight=page.querySelector('.dss-insight-card');if(insight){const badge=insight.querySelector('.insight-badge'),title=insight.querySelector('.insight-title'),body=title&&title.nextElementSibling;if(badge)badge.textContent='Dynamic Pareto interpretation';if(title)title.textContent='Top 5% focus changes with the selected period';if(body)body.innerHTML=focusCohortCount?'<strong>'+focusCohortCount+' products</strong> form the current top-5% cohort and contribute <strong>'+focusShare.toFixed(2)+'% of observed positive-product net sales</strong>. Use this as a descriptive review shortlist, not an automatic replenishment instruction.':'No observed positive-revenue products fall inside this period. Choose a period that overlaps the available transaction dates.';}
+ const subtitle=document.getElementById('topbar-sub');if(subtitle)subtitle.textContent='Dynamic top-5% Pareto focus by selected historical period';
+ const barCanvas=document.getElementById('productBarChart'),donutCanvas=document.getElementById('abcChart');if(barCanvas)barCanvas.setAttribute('aria-label','Pareto chart of the visible top-five-percent product leaders and their cumulative portfolio revenue percentages.');if(donutCanvas)donutCanvas.setAttribute('aria-label','Doughnut chart comparing revenue from the complete top-five-percent product cohort with the remaining products.');
 }
-document.addEventListener('change',function(event){const id=event.target&&event.target.id;if(id==='topbarYearSelect'||id==='descriptivePeriodSelect')setTimeout(renderProductPrioritizationTimeline,0);});
+function watchProductPriorityTable() {
+ const table=document.getElementById('productTable');if(!table||table.dataset.priorityWatcher==='true')return;
+ table.dataset.priorityWatcher='true';
+ new MutationObserver(function(){const page=document.getElementById('page-products'),firstHeader=table.querySelector('th');if(page&&page.classList.contains('active')&&(!firstHeader||firstHeader.textContent.trim()!=='Rank'))setTimeout(renderProductPrioritizationTimeline,0);}).observe(table,{childList:true,subtree:true});
+}
+setTimeout(watchProductPriorityTable,0);
+document.addEventListener('change',function(event){const id=event.target&&event.target.id;if(id==='descriptivePeriodSelect'||id==='customDateStart'||id==='customDateEnd')setTimeout(renderProductPrioritizationTimeline,0);});
 `

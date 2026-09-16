@@ -92,27 +92,25 @@ function diagnosticAxis(values, title, color, position, grid) {
 
 function renderSalesDiagnostics(opts) {
   const selectedRows = getDescriptiveDisplayRows();
-  const sourceRows = getDescriptiveSourceRows();
-  const sourceByPeriod = new Map(sourceRows.map(row => [String(row.period), row]));
-  const priorPeriod = period => descriptivePeriod === '30d'
+  const priorDisplayRows = getDescriptivePriorDisplayRows();
+  const priorPeriod = period => descriptiveUsesDailyGrain()
     ? String(Number(period.slice(0, 4)) - 1) + period.slice(4)
     : String(Number(period.slice(0, 4)) - 1) + period.slice(4, 7);
   const revenue = selectedRows.map(row => row.revenue == null ? null : row.revenue);
   const profit = selectedRows.map(row => row.income == null ? null : row.income);
   const detailLabels = selectedRows.map(row => descriptivePointLabel(row.period));
-  const dailyUnavailable = descriptivePeriod === '30d' && selectedRows.every(row => row.revenue == null);
+  const dailyUnavailable = descriptiveUsesDailyGrain() && selectedRows.every(row => row.revenue == null);
   const detailDatasets = [
-    { label: 'Net Sales Revenue · ' + descriptivePeriodLabel(), data: revenue, yAxisID: 'revenue', borderColor: getColor(), backgroundColor: getColor(.08), borderWidth: 2.5, pointRadius: descriptivePeriod === '30d' ? 1.5 : 3, tension: .25, fill: false, spanGaps: false },
-    { label: 'Gross Profit · ' + descriptivePeriodLabel(), data: profit, yAxisID: 'grossProfit', borderColor: getAmber(), backgroundColor: getAmber(.08), borderWidth: 2.2, pointRadius: descriptivePeriod === '30d' ? 1.5 : 3, tension: .25, fill: false, spanGaps: false }
+    { label: 'Net Sales Revenue · ' + descriptivePeriodLabel(), data: revenue, yAxisID: 'revenue', borderColor: getColor(), backgroundColor: getColor(.08), borderWidth: 2.5, pointRadius: descriptiveUsesDailyGrain() ? 1.5 : 3, tension: .25, fill: false, spanGaps: false },
+    { label: 'Gross Profit · ' + descriptivePeriodLabel(), data: profit, yAxisID: 'grossProfit', borderColor: getAmber(), backgroundColor: getAmber(.08), borderWidth: 2.2, pointRadius: descriptiveUsesDailyGrain() ? 1.5 : 3, tension: .25, fill: false, spanGaps: false }
   ];
   if (comparisonMode === 'yoy') {
-    const priorRows = getDescriptivePriorDisplayRows();
     detailDatasets.push(
-      { label: 'Prior-year Net Sales Revenue', data: priorRows.map(row => row.revenue), yAxisID: 'revenue', borderColor: getColor(.5), backgroundColor: 'transparent', borderDash: [7, 5], borderWidth: 2, pointRadius: descriptivePeriod === '30d' ? 1 : 2, tension: .25, fill: false, spanGaps: false },
-      { label: 'Prior-year Gross Profit', data: priorRows.map(row => row.income), yAxisID: 'grossProfit', borderColor: getAmber(.5), backgroundColor: 'transparent', borderDash: [7, 5], borderWidth: 2, pointRadius: descriptivePeriod === '30d' ? 1 : 2, tension: .25, fill: false, spanGaps: false }
+      { label: 'Prior-year Net Sales Revenue', data: priorDisplayRows.map(row => row.revenue), yAxisID: 'revenue', borderColor: getColor(.5), backgroundColor: 'transparent', borderDash: [7, 5], borderWidth: 2, pointRadius: descriptiveUsesDailyGrain() ? 1 : 2, tension: .25, fill: false, spanGaps: false },
+      { label: 'Prior-year Gross Profit', data: priorDisplayRows.map(row => row.income), yAxisID: 'grossProfit', borderColor: getAmber(.5), backgroundColor: 'transparent', borderDash: [7, 5], borderWidth: 2, pointRadius: descriptiveUsesDailyGrain() ? 1 : 2, tension: .25, fill: false, spanGaps: false }
     );
   }
-  if (descriptivePeriod === '30d') {
+  if (descriptiveUsesDailyGrain()) {
     for (let index = detailDatasets.length - 1; index >= 0; index--) {
       if (detailDatasets[index].label.includes('Gross Profit')) detailDatasets.splice(index, 1);
     }
@@ -120,13 +118,13 @@ function renderSalesDiagnostics(opts) {
   const detailScales = {
     x: opts.scales.x,
     revenue: diagnosticAxis(revenue, 'Net sales revenue (₱)', getColor(), 'left', true),
-    ...(descriptivePeriod === '30d' ? {} : { grossProfit: diagnosticAxis(profit, 'Gross profit (₱)', getAmber(), 'right', false) })
+    ...(descriptiveUsesDailyGrain() ? {} : { grossProfit: diagnosticAxis(profit, 'Gross profit (₱)', getAmber(), 'right', false) })
   };
 
   const subtitle = document.getElementById('salesComparisonSubtitle');
   if (subtitle) subtitle.textContent = dailyUnavailable
     ? 'Daily transaction data is unavailable for the last 30 days; monthly totals are not expanded into synthetic days.'
-    : (descriptivePeriod === '30d' ? 'Daily' : 'Monthly') + ' revenue and gross profit for ' + descriptivePeriodLabel() + '; gaps mean unavailable observations, not zero sales.';
+    : (descriptiveUsesDailyGrain() ? 'Daily' : 'Monthly') + ' revenue and gross profit for ' + descriptivePeriodLabel() + '; gaps mean unavailable observations, not zero sales.';
   createChart('revenueDetailChart', {
     type: 'line',
     data: { labels: detailLabels, datasets: detailDatasets },
@@ -139,9 +137,9 @@ function renderSalesDiagnostics(opts) {
     }
   });
 
-  const rows = selectedRows.map(row => {
+  const rows = selectedRows.map((row, index) => {
     const previousPeriod = priorPeriod(String(row.period));
-    const previous = sourceByPeriod.get(previousPeriod) || descriptiveWeightedEstimate(previousPeriod, sourceRows);
+    const previous = priorDisplayRows[index];
     const hasCurrent = row.revenue != null && Number.isFinite(Number(row.revenue));
     const delta = hasCurrent && previous ? Number(row.revenue) - Number(previous.revenue) : null;
     return {
@@ -191,7 +189,7 @@ function renderSalesDiagnostics(opts) {
   if (table) {
     table.replaceChildren();
     const head = table.createTHead().insertRow();
-    [(descriptivePeriod === '30d' ? 'Day' : 'Month'), 'Current period', 'Prior-year period', 'Prior-year net sales (₱)', 'Current net sales (₱)', 'Change (₱)', 'Growth (%)'].forEach(label => {
+    [(descriptiveUsesDailyGrain() ? 'Day' : 'Month'), 'Current period', 'Prior-year period', 'Prior-year net sales (₱)', 'Current net sales (₱)', 'Change (₱)', 'Growth (%)'].forEach(label => {
       const th = document.createElement('th'); th.scope = 'col'; th.textContent = label; head.appendChild(th);
     });
     const body = table.createTBody();

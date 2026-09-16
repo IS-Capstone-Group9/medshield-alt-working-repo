@@ -135,13 +135,13 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     await expect(salesDeepDive).not.toBeVisible();
   });
 
-  test('3. Descriptive periods use trailing windows and expose a year only for Custom', async ({ page }) => {
+  test('3. Descriptive periods use trailing windows and calendar dates for Custom', async ({ page }) => {
     const periodSelect = page.locator('#descriptivePeriodSelect')
     const comparisonSelect = page.locator('#descriptiveComparisonSelect')
     const yearWrap = page.locator('#singleYearWrap')
     await expect(periodSelect).toHaveValue('12')
     await expect(periodSelect.locator('option')).toHaveText([
-      'Last 30 Days', 'Last 3 Months', 'Last 6 Months', 'Last 12 Months', 'Custom Year',
+      'Last 30 Days', 'Last 3 Months', 'Last 6 Months', 'Last 12 Months', 'Custom Date Range',
     ])
     await expect(yearWrap).toBeHidden()
     await expect(page.locator('#btnYoyYear')).toHaveCount(0)
@@ -161,18 +161,44 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
       return chart?.data?.datasets?.map((dataset: any) => dataset.label) ?? []
     })).toContain('Prior-year Net Sales Revenue')
 
+    const customRange = page.locator('#customDateRangeWrap')
+    const startDate = page.locator('#customDateStart')
+    const endDate = page.locator('#customDateEnd')
+    await startDate.evaluate((input: HTMLInputElement) => {
+      input.showPicker = () => { input.dataset.calendarOpened = 'true' }
+    })
     await periodSelect.selectOption('custom')
-    await expect(yearWrap).toBeVisible()
-    const yearSelect = page.locator('#topbarYearSelect')
-    await yearSelect.selectOption('2024')
+    await expect(yearWrap).toBeHidden()
+    await expect(customRange).toBeVisible()
+    await expect(page.getByText('Historical period', { exact: true })).toHaveCSS('position', 'absolute')
+    await expect(page.getByText('Historical period', { exact: true })).toHaveCSS('width', '1px')
+    await expect(page.getByText('Comparison view', { exact: true })).toHaveCSS('position', 'absolute')
+    await expect(customRange.getByText('From', { exact: true })).toBeVisible()
+    await expect(customRange.getByText('To', { exact: true })).toBeVisible()
+    await expect(startDate).toHaveAttribute('data-calendar-opened', 'true')
+    await expect(startDate).toHaveAttribute('min', '2017-01-01')
+    await expect(startDate).toHaveCSS('background-color', 'rgb(255, 255, 255)')
+    expect(await startDate.evaluate((input) => getComputedStyle(input).color)).not.toBe('rgb(255, 255, 255)')
+    await startDate.fill('2024-01-01')
+    await endDate.fill('2024-12-31')
+    await expect(startDate).toHaveAttribute('max', '2024-12-31')
+    await expect(endDate).toHaveAttribute('min', '2024-01-01')
     await expect.poll(async () => page.evaluate(() => {
       const chart = (window as any).Chart.getChart(document.getElementById('overviewBaselineChart'))
       return chart?.data?.labels?.length ?? 0
     })).toBe(12)
 
+    await startDate.fill('2024-03-01')
+    await endDate.fill('2024-03-20')
+    await expect.poll(async () => page.evaluate(() => {
+      const chart = (window as any).Chart.getChart(document.getElementById('overviewBaselineChart'))
+      return chart?.data?.labels?.length ?? 0
+    })).toBe(20)
+
     await expect(page.locator('#sectorStatus')).toContainText('weighted record equivalents', { timeout: 30000 })
     await periodSelect.selectOption('30d')
     await expect(yearWrap).toBeHidden()
+    await expect(customRange).toBeHidden()
     const overviewSubtitle = page.locator('#overviewBaselineChart').locator('xpath=ancestor::div[contains(@class,"chart-card")]').locator('.chart-subtitle')
     await expect(overviewSubtitle).toContainText('Last 30 Days')
     await expect(overviewSubtitle).toContainText('weighted estimate')

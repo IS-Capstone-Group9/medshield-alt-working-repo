@@ -43,7 +43,7 @@ test('sector filters use separate denominators and preserve unknown ownership', 
   await expect(page.locator('#sectorStatus')).toHaveText('Service unavailable')
 })
 
-test('product prioritization follows trailing periods and custom-year monthly granularity', async ({ page }) => {
+test('product prioritization follows trailing periods and custom-range monthly granularity', async ({ page }) => {
   await page.route('http://medshield.test/**', route => route.fulfill({contentType:'text/html',body:'<html><body></body></html>'}))
   await page.goto('http://medshield.test/')
   await page.setContent(`<style>${MEDSHIELD_STYLE}</style>${MEDSHIELD_MARKUP}`)
@@ -51,18 +51,44 @@ test('product prioritization follows trailing periods and custom-year monthly gr
   await page.addScriptTag({path:path.resolve('node_modules/chart.js/dist/chart.umd.js')})
   await page.evaluate(script=>new Function(script)(),getExecutableDashboardScript())
   await page.evaluate(()=>{
-    const app=window as any,row=(product:string,period:string,revenue:number)=>({sector:'Private',channel:'Pharma',territory:'Quezon',revenue,quantity:10,period,product,row_count:1,basis:'fixture'})
-    app.setSalesSectorsData({rows:[row('A','2024-01',100),row('A','2025-01',200),row('A','2025-02',300),row('B','2025-02',150)],source:{file:'fixture',excluded:{}}})
+    const app=window as any,row=(product:string,period:string,revenue:number)=>({date:period+'-28',sector:'Private',channel:'Pharma',territory:'Quezon',revenue,quantity:10,period,product,row_count:1,basis:'fixture'})
+    const currentRows=Array.from({length:30},(_,index)=>row('Product '+String(index+1).padStart(2,'0'),'2025-02',3000-index*50))
+    const priorRows=Array.from({length:10},(_,index)=>row('Prior Product '+String(index+1).padStart(2,'0'),'2024-06',10000-index*500))
+    app.setSalesSectorsData({rows:[...currentRows,...priorRows],source:{file:'fixture',excluded:{}}})
     app.showPage('products');app.setDescriptivePeriod('custom');app.setYear('2025')
   })
   await expect(page.locator('#btnYoyYear')).toHaveCount(0)
-  expect(await page.evaluate(()=>(window as any).Chart.getChart(document.getElementById('productBarChart')).data.datasets.map((d:any)=>[d.label,d.type||'bar']))).toEqual([['Net sales revenue','bar'],['Cumulative revenue (%)','line']])
-  expect(await page.evaluate(()=>(window as any).Chart.getChart(document.getElementById('paretoCurveChart')).data.labels)).toEqual(['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'])
+  expect(await page.evaluate(()=>(window as any).Chart.getChart(document.getElementById('productBarChart')).data.datasets.map((d:any)=>[d.label,d.type||'bar']))).toEqual([['Net sales revenue','bar'],['Cumulative portfolio revenue (%)','line']])
+  expect(await page.evaluate(()=>(window as any).Chart.getChart(document.getElementById('productBarChart')).data.labels.length)).toBe(2)
+  expect(await page.evaluate(()=>(window as any).Chart.getChart(document.getElementById('paretoCurveChart')).data.datasets.length)).toBe(2)
+  await expect(page.locator('#productPriorityScope')).toContainText('2 of 30 positive-revenue products')
+  await expect(page.locator('#productPriorityScope')).toContainText('All focus-cohort products are shown')
+  await expect(page.locator('#productPriorityScope')).toContainText('linear programming')
+  await expect(page.locator('#productTable tbody tr')).toHaveCount(2)
+  await expect(page.locator('#abcChart').locator('xpath=ancestor::div[contains(@class,"chart-card")]').locator('.chart-title')).toHaveText('Top 5% Cohort Revenue Contribution')
+  expect(await page.evaluate(()=>(window as any).Chart.getChart(document.getElementById('abcChart')).data.labels)).toEqual([
+    'Top 5% cohort · 8.72% of revenue',
+    'Remaining 95% · 91.28% of revenue',
+  ])
+  expect(await page.evaluate(()=>(window as any).Chart.getChart(document.getElementById('paretoCurveChart')).data.labels)).toEqual(['Jan 25','Feb 25','Mar 25','Apr 25','May 25','Jun 25','Jul 25','Aug 25','Sep 25','Oct 25','Nov 25','Dec 25'])
+  await page.evaluate(()=>(window as any).setCustomDateRange('2024-01-01','2024-12-31'))
+  await expect(page.locator('#productPriorityScope')).toContainText('1 of 10 positive-revenue products')
+  expect(await page.evaluate(()=>(window as any).Chart.getChart(document.getElementById('productBarChart')).data.labels)).toEqual(['Prior Product 01'])
+  await expect(page.locator('#productTable tbody tr')).toHaveCount(1)
   await page.selectOption('#descriptivePeriodSelect','3')
   await expect.poll(()=>page.evaluate(()=>(window as any).Chart.getChart(document.getElementById('paretoCurveChart')).data.labels.length)).toBe(3)
+  await expect(page.locator('#productPriorityScope')).toContainText('positive-revenue products')
+  await page.selectOption('#descriptivePeriodSelect','6')
+  await expect.poll(()=>page.evaluate(()=>(window as any).Chart.getChart(document.getElementById('paretoCurveChart')).data.labels.length)).toBe(6)
+  await page.selectOption('#descriptivePeriodSelect','30d')
+  await expect.poll(()=>page.evaluate(()=>(window as any).Chart.getChart(document.getElementById('paretoCurveChart')).data.labels.length)).toBe(30)
+  await page.selectOption('#descriptivePeriodSelect','custom')
+  await page.evaluate(()=>(window as any).setCustomDateRange('2024-06-01','2024-06-30'))
+  await expect(page.locator('#productPriorityScope')).toContainText('1 of 10 positive-revenue products')
+  await expect(page.locator('#productTable tbody tr')).toHaveCount(1)
 })
 
-test('last 30 days uses genuine transaction dates and keeps missing days as gaps', async ({ page }) => {
+test('last 30 days anchors to the current date backwards and keeps missing days as gaps', async ({ page }) => {
   await page.route('http://medshield.test/**', route => route.fulfill({contentType:'text/html',body:'<html><body></body></html>'}))
   await page.goto('http://medshield.test/')
   await page.setContent(`<style>${MEDSHIELD_STYLE}</style>${MEDSHIELD_MARKUP}`)
@@ -71,17 +97,18 @@ test('last 30 days uses genuine transaction dates and keeps missing days as gaps
   await page.evaluate(script=>new Function(script)(),getExecutableDashboardScript())
   await page.evaluate(()=>{
     const app=window as any
-    const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Manila',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date())
-    const values=Object.fromEntries(parts.map(part=>[part.type,part.value]))
-    const date=`${values.year}-${values.month}-${values.day}`
+    const today = new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'Asia/Manila', year: 'numeric', month: '2-digit', day: '2-digit'
+    }).format(new Date())
     app.setDescriptivePeriod('30d')
-    app.setSalesSectorsData({rows:[{date,period:date.slice(0,7),product:'A',sector:'Private',channel:'Pharma',territory:'Quezon',revenue:500,quantity:10,row_count:1,basis:'fixture'}],source:{file:'fixture',excluded:{}}})
+    app.setSalesSectorsData({rows:[{date:today,period:today.slice(0,7),product:'A',sector:'Private',channel:'Pharma',territory:'Quezon',revenue:500,quantity:10,row_count:1,basis:'fixture'}],source:{file:'fixture',excluded:{}}})
   })
   const chart=await page.evaluate(()=>{
     const view=(window as any).Chart.getChart(document.getElementById('overviewBaselineChart'))
     return {labels:view.data.labels,data:view.data.datasets[0].data}
   })
   expect(chart.labels).toHaveLength(30)
+  expect(chart.data).toHaveLength(30)
   expect(chart.data.slice(0,29)).toEqual(Array(29).fill(null))
   expect(chart.data[29]).toBe(500)
   await expect(page.locator('#singleYearWrap')).toBeHidden()

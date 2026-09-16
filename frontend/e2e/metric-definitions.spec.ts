@@ -34,7 +34,10 @@ test('Section 1: real chart datasets, KPI rates, labels and refresh use the same
   })
   expect(chart.values).toHaveLength(1)
   expect(chart.values[0]).toBeCloseTo(14)
-  expect(chart.labels).toEqual(['Net Sales Revenue · 2025', 'Gross Profit · 2025'])
+  expect(chart.labels).toEqual([
+    'Net Sales Revenue · Jan 1, 2025 – Dec 31, 2025',
+    'Gross Profit · Jan 1, 2025 – Dec 31, 2025',
+  ])
   await page.locator('[data-metric-definitions] summary').click()
   await expect(page.locator('[data-metric-definitions]')).toContainText('transaction percentages are not averaged')
   await page.screenshot({ path: 'test-results/section-1-sales-diagnostics.png', fullPage: true })

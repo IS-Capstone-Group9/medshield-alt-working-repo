@@ -33,7 +33,7 @@ let salesSectorsData = null;
 function setSalesSectorsData(data, error) {
  salesSectorsData = data && Array.isArray(data.rows) && data.source ? data : null;
  renderSalesSectors(error);
- if(descriptivePeriod==='30d' && typeof buildCharts==='function')buildCharts();
+ if(descriptiveUsesDailyGrain() && typeof buildCharts==='function')buildCharts();
 }
 function renderSalesSectors(error) {
  const el = id => document.getElementById(id);
@@ -60,7 +60,7 @@ function renderSalesSectors(error) {
  const estimatedRows=rows.filter(r=>r.evidence==='estimate').length;
  el('sectorStatus').textContent=rows.length ? sector+' · '+rows.reduce((n,r)=>n+r.row_count,0).toLocaleString(undefined,{maximumFractionDigits:0})+' weighted record equivalents · '+estimatedRows+' estimated rows' : 'No '+sector.toLowerCase()+' records in this scope. Ownership must be established before drawing a sector conclusion.';
  el('sectorCoverage').textContent=['Government','Private','Internal','Unknown'].map(s=>s+': '+scope.filter(r=>r.sector===s).reduce((n,r)=>n+r.row_count,0).toLocaleString()+' records').join(' · ')+' (classification coverage, not market share)';
- el('sectorScope').textContent=descriptivePeriodLabel()+' · '+(descriptivePeriod==='30d'?'daily transaction grain':'monthly grain')+' · '+(product||'All products; quantity comparison unavailable')+' · '+(dimension==='territory'?'Geography':'Customer channel')+'. '+(!validRevenue && rows.length?'Revenue shares unavailable for nonpositive totals or negative group values.':'');
+ el('sectorScope').textContent=descriptivePeriodLabel()+' · '+(descriptiveUsesDailyGrain()?'daily transaction grain':'monthly grain')+' · '+(product||'All products; quantity comparison unavailable')+' · '+(dimension==='territory'?'Geography':'Customer channel')+'. '+(!validRevenue && rows.length?'Revenue shares unavailable for nonpositive totals or negative group values.':'');
  ['revenue','quantity'].forEach(k=>{
   const available=k==='revenue'?validRevenue:!!product && total.quantity>0;
   if(!available)return;

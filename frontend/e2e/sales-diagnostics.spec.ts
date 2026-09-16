@@ -37,7 +37,7 @@ test.beforeEach(async ({ page }) => {
   await page.evaluate(() => (window as any).showPage('revenue'))
 })
 
-test('custom year uses monthly detail and same-month prior-year comparison', async ({ page }) => {
+test('custom full-year date range uses monthly detail and same-month prior-year comparison', async ({ page }) => {
   await page.evaluate(data => {
     const app = window as any
     app.applyDatasetPatch(data)
@@ -45,14 +45,14 @@ test('custom year uses monthly detail and same-month prior-year comparison', asy
     app.setYear('2025')
   }, fixture([2023, 2024, 2025]))
   const revenue = await chartData(page, 'revenueDetailChart')
-  expect(revenue.labels).toEqual(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
+  expect(revenue.labels).toEqual(['Jan 25', 'Feb 25', 'Mar 25', 'Apr 25', 'May 25', 'Jun 25', 'Jul 25', 'Aug 25', 'Sep 25', 'Oct 25', 'Nov 25', 'Dec 25'])
   expect(revenue.datasets[0].data).toEqual(Array(12).fill(3_000_000))
   expect(revenue.datasets[1].data).toEqual(Array.from({ length: 12 }, (_, i) => 60_000 + i * 1000))
   expect(revenue.datasets[0].axis).toBe('revenue')
   expect(revenue.datasets[1].axis).toBe('grossProfit')
   expect(revenue.axes.revenue.position).toBe('left')
   const growth = await chartData(page, 'growthChart')
-  expect(growth.labels).toEqual(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
+  expect(growth.labels).toEqual(['Jan 25', 'Feb 25', 'Mar 25', 'Apr 25', 'May 25', 'Jun 25', 'Jul 25', 'Aug 25', 'Sep 25', 'Oct 25', 'Nov 25', 'Dec 25'])
   expect(growth.datasets[0].data).toEqual(Array(12).fill(50))
   expect(growth.datasets[1].data).toEqual(Array(12).fill(1_000_000))
   await expect(page.locator('#salesGrowthSummary')).toContainText('50.0%')
@@ -68,7 +68,7 @@ test('custom year uses monthly detail and same-month prior-year comparison', asy
   await page.screenshot({ path: 'test-results/section-2-sales-diagnostics.png', fullPage: true })
 })
 
-test('custom year uses weighted same-month estimates when the prior year is missing', async ({ page }) => {
+test('custom full-year range uses weighted same-month estimates when the prior year is missing', async ({ page }) => {
   await page.evaluate(data => {
     const app = window as any
     app.applyDatasetPatch(data); app.setDescriptivePeriod('custom'); app.setYear('2025')
@@ -82,7 +82,7 @@ test('custom year uses weighted same-month estimates when the prior year is miss
   await expect(page.locator('#salesGrowthSummary')).toContainText('12/12 periods matched')
 })
 
-test('single year uses matched months from prior calendar year; zero baseline keeps nominal change only', async ({ page }) => {
+test('custom full-year range uses matched prior months; zero baseline keeps nominal change only', async ({ page }) => {
   const data = fixture([2024, 2025])
   data.monthly = data.monthly.filter(row => row.period.startsWith('2024') || row.period.endsWith('-01') || row.period.endsWith('-03'))
   await page.evaluate(data => {
@@ -90,7 +90,7 @@ test('single year uses matched months from prior calendar year; zero baseline ke
     app.applyDatasetPatch(data); app.setDescriptivePeriod('custom'); app.setYear('2025')
   }, data)
   let growth = await chartData(page, 'growthChart')
-  expect(growth.labels).toEqual(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
+  expect(growth.labels).toEqual(['Jan 25', 'Feb 25', 'Mar 25', 'Apr 25', 'May 25', 'Jun 25', 'Jul 25', 'Aug 25', 'Sep 25', 'Oct 25', 'Nov 25', 'Dec 25'])
   expect(growth.datasets[0].data).toEqual([100, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0])
   expect(growth.datasets[1].data).toEqual([1_000_000, 0, 1_000_000, 0, 0, 0, 0, 0, 0, 0, 0, 0])
   await expect(page.locator('#salesGrowthSummary')).toContainText('12/12 periods matched')
@@ -105,7 +105,7 @@ test('single year uses matched months from prior calendar year; zero baseline ke
   await expect(page.locator('#salesGrowthSummary')).toContainText('Unavailable')
 })
 
-test('custom current year shows monthly gaps after the current month and actuals override estimates', async ({ page }) => {
+test('custom current-year-to-date range ends today and actuals override estimates', async ({ page }) => {
   const calendar = await page.evaluate(() => {
     const parts = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Manila', year: 'numeric', month: '2-digit' })
       .formatToParts(new Date())
@@ -124,8 +124,8 @@ test('custom current year shows monthly gaps after the current month and actuals
   }, { data, currentYear: calendar.year })
 
   const monthly = await chartData(page, 'revenueDetailChart')
-  expect(monthly.labels).toHaveLength(12)
+  expect(monthly.labels).toHaveLength(calendar.month)
   expect(monthly.datasets[0].data.slice(0, calendar.month - 1)).toEqual(Array(Math.max(0, calendar.month - 1)).fill(1_000_000))
   expect(monthly.datasets[0].data[calendar.month - 1]).toBe(9_000_000)
-  expect(monthly.datasets[0].data.slice(calendar.month)).toEqual(Array(12 - calendar.month).fill(null))
+  expect(monthly.datasets[0].data).toHaveLength(calendar.month)
 })

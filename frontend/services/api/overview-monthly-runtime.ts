@@ -50,18 +50,18 @@ const RESPONSIVE_OVERVIEW_CHART = `  const overviewRows = getDescriptiveDisplayR
   const overviewBadge = overviewCard ? overviewCard.querySelector('.chart-badge') : null;
   const overviewTitleNode = overviewTitle ? Array.from(overviewTitle.childNodes).find((node) => node.nodeType === 3) : null;
 
-  if (overviewTitleNode) overviewTitleNode.textContent = descriptivePeriod === '30d'
+  if (overviewTitleNode) overviewTitleNode.textContent = descriptiveUsesDailyGrain()
     ? 'Daily Net Sales Revenue '
     : 'Monthly Net Sales Revenue & Gross Profit ';
   const overviewEstimatedCount = overviewRows.filter(row => row.evidence === 'estimate').length;
   if (overviewSubtitle) overviewSubtitle.textContent = overviewRows.some(row => row.revenue != null)
-    ? descriptivePeriodLabel() + ' ending in the current Philippine calendar period; ' + overviewEstimatedCount + ' weighted estimate' + (overviewEstimatedCount === 1 ? '' : 's') + '; uploaded actuals take precedence'
-    : descriptivePeriod === '30d'
-      ? 'Daily data unavailable for the last 30 days; monthly totals are not divided into invented daily values'
+    ? descriptivePeriodLabel() + '; ' + overviewEstimatedCount + ' weighted estimate' + (overviewEstimatedCount === 1 ? '' : 's') + '; uploaded actuals take precedence'
+    : descriptiveUsesDailyGrain()
+      ? 'Daily data unavailable for ' + descriptivePeriodLabel() + '; monthly totals are not divided into invented daily values'
       : 'No monthly observations are available for ' + descriptivePeriodLabel();
   if (overviewBadge) overviewBadge.textContent = comparisonMode === 'yoy'
     ? 'Y/Y Compare'
-    : descriptivePeriod === '30d' ? 'Daily Detail' : 'Monthly Detail';
+    : descriptiveUsesDailyGrain() ? 'Daily Detail' : 'Monthly Detail';
 
   createChart('overviewBaselineChart', {
     type: 'line',
@@ -73,8 +73,8 @@ const RESPONSIVE_OVERVIEW_CHART = `  const overviewRows = getDescriptiveDisplayR
   });
 
   if (overviewCanvas) {
-    overviewCanvas.setAttribute('aria-label', descriptivePeriod === '30d'
-      ? 'Line chart showing daily net sales revenue for the last 30 days when transaction dates are available.'
+    overviewCanvas.setAttribute('aria-label', descriptiveUsesDailyGrain()
+      ? 'Line chart showing daily net sales revenue for ' + descriptivePeriodLabel() + ' when transaction dates are available.'
       : 'Line chart showing monthly net sales revenue and gross profit for ' + descriptivePeriodLabel() + '.');
   }`
 

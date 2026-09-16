@@ -85,17 +85,21 @@ function renderSalesHeatmap() {
   const product = salesHeatmapData.products.find(product => product.id === productId);
   const area = document.getElementById('heatmapArea').value;
   const measure = document.getElementById('heatmapMeasure').value;
-  const daily = descriptivePeriod === '30d';
-  const sourceRows = daily ? (Array.isArray(salesHeatmapData.daily) ? salesHeatmapData.daily : []) : salesHeatmapData.monthly;
+  const daily = descriptiveUsesDailyGrain();
+  const custom = descriptivePeriod === 'custom';
+  const hasDailySource = Array.isArray(salesHeatmapData.daily) && salesHeatmapData.daily.length > 0;
+  const useDailySource = (daily || custom) && hasDailySource;
+  const sourceRows = useDailySource ? (Array.isArray(salesHeatmapData.daily) ? salesHeatmapData.daily : []) : salesHeatmapData.monthly;
   const totals = new Map();
   sourceRows.filter(row => row.product === productId && (area === 'all' || row.area === area) && descriptivePeriodIncludes(row.period)).forEach(row => {
-    const total = totals.get(row.period) || {quantity:0,rows:0};
-    total.quantity += row.quantity; total.rows += row.row_count; totals.set(row.period,total);
+    const period = daily ? row.period : String(row.period).slice(0,7);
+    const total = totals.get(period) || {quantity:0,rows:0};
+    total.quantity += row.quantity; total.rows += row.row_count; totals.set(period,total);
   });
   const periods = descriptiveAxisPeriods();
   const observed = periods.filter(period => totals.has(period));
-  const mean = descriptivePeriod === 'custom' && observed.length === 12
-    ? observed.reduce((sum,period)=>sum+totals.get(period).quantity,0)/12 : null;
+  const mean = !daily && observed.length === periods.length && periods.length > 0
+    ? observed.reduce((sum,period)=>sum+totals.get(period).quantity,0)/periods.length : null;
   salesHeatmapView = periods.map(period => {
     const entry = totals.get(period), quantity = entry ? entry.quantity : null;
     return {period, quantity, rows:entry?.rows || 0, value:measure==='units' ? quantity : mean > 0 && quantity !== null ? quantity/mean : null};
@@ -143,6 +147,6 @@ function exportSalesHeatmapCSV() {
     return '"'+text.replace(/"/g,'""')+'"';
   }).join(',')).join('\r\n');
   const url=URL.createObjectURL(new Blob([String.fromCharCode(65279),csv],{type:'text/csv;charset=utf-8'}));
-  const link=document.createElement('a');link.href=url;link.download=(descriptivePeriod==='30d'?'daily':'monthly')+'-product-quantities.csv';document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  const link=document.createElement('a');link.href=url;link.download=(descriptiveUsesDailyGrain()?'daily':'monthly')+'-product-quantities.csv';document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 `

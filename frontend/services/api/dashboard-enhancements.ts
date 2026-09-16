@@ -69,7 +69,7 @@ function installDescriptivePeriodControls(root: HTMLElement) {
       ['3', 'Last 3 Months'],
       ['6', 'Last 6 Months'],
       ['12', 'Last 12 Months'],
-      ['custom', 'Custom Year'],
+      ['custom', 'Custom Date Range'],
     ].forEach(([value, text]) => select.add(new Option(text, value, false, value === '12')))
     selector.append(label, select)
 
@@ -92,7 +92,46 @@ function installDescriptivePeriodControls(root: HTMLElement) {
   const singleYearWrap = root.querySelector<HTMLElement>('#singleYearWrap')
   if (singleYearWrap) {
     singleYearWrap.style.display = 'none'
-    singleYearWrap.setAttribute('aria-label', 'Custom calendar year')
+    singleYearWrap.setAttribute('aria-hidden', 'true')
+  }
+
+  if (selector && !selector.querySelector('#customDateRangeWrap')) {
+    const rangeWrap = document.createElement('span')
+    rangeWrap.id = 'customDateRangeWrap'
+    rangeWrap.className = 'custom-date-range'
+    rangeWrap.style.display = 'none'
+    rangeWrap.setAttribute('role', 'group')
+    rangeWrap.setAttribute('aria-label', 'Custom historical date range')
+
+    const today = new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'Asia/Manila', year: 'numeric', month: '2-digit', day: '2-digit',
+    }).format(new Date())
+    const currentYear = today.slice(0, 4)
+
+    const makeDateInput = (id: string, labelText: string, accessibleName: string, value: string) => {
+      const label = document.createElement('label')
+      label.setAttribute('for', id)
+      label.className = 'custom-date-label'
+      label.textContent = labelText
+      const input = document.createElement('input')
+      input.type = 'date'
+      input.id = id
+      input.className = 'topbar-select'
+      input.min = '2017-01-01'
+      input.max = today
+      input.value = value
+      input.setAttribute('aria-label', accessibleName)
+      return [label, input] as const
+    }
+
+    const [startLabel, startInput] = makeDateInput(
+      'customDateStart', 'From', 'Custom range start date', `${currentYear}-01-01`
+    )
+    const [endLabel, endInput] = makeDateInput(
+      'customDateEnd', 'To', 'Custom range end date', today
+    )
+    rangeWrap.append(startLabel, startInput, endLabel, endInput)
+    selector.append(rangeWrap)
   }
   root.querySelector<HTMLElement>('#yoyYearWrap')?.remove()
 }

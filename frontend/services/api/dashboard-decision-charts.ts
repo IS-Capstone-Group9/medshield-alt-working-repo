@@ -35,8 +35,9 @@ function shiftMonth(period: string, offset: number): string {
 
 function periodSelection(root: HTMLElement) {
   const mode = root.querySelector<HTMLSelectElement>('#descriptivePeriodSelect')?.value ?? '12'
-  const year = root.querySelector<HTMLSelectElement>('#topbarYearSelect')?.value ?? ''
-  return { mode, year }
+  const start = root.querySelector<HTMLInputElement>('#customDateStart')?.value ?? ''
+  const end = root.querySelector<HTMLInputElement>('#customDateEnd')?.value ?? ''
+  return { mode, start, end }
 }
 
 function compactCurrency(value: number): string {
@@ -59,7 +60,10 @@ function formatPeriod(period: string): string {
   }).format(date)
 }
 
-function aggregateMonthly(rows: MonthlyPoint[], selection: { mode: string; year: string }): MonthlyPoint[] {
+function aggregateMonthly(
+  rows: MonthlyPoint[],
+  selection: { mode: string; start: string; end: string }
+): MonthlyPoint[] {
   const totals = new Map<string, { revenue: number; income: number }>()
   const end = phtCalendarMonth()
   const monthCount = Number(selection.mode)
@@ -67,7 +71,8 @@ function aggregateMonthly(rows: MonthlyPoint[], selection: { mode: string; year:
   for (const row of rows) {
     if (!row.period || !finite(row.revenue) || !finite(row.income)) continue
     if (selection.mode === '30d') continue
-    if (selection.mode === 'custom' && !row.period.startsWith(`${selection.year}-`)) continue
+    if (selection.mode === 'custom'
+      && (row.period < selection.start.slice(0, 7) || row.period > selection.end.slice(0, 7))) continue
     if (selection.mode !== 'custom' && (row.period < start || row.period > end)) continue
     const current = totals.get(row.period) ?? { revenue: 0, income: 0 }
     current.revenue += row.revenue
@@ -80,7 +85,10 @@ function aggregateMonthly(rows: MonthlyPoint[], selection: { mode: string; year:
     .map(([period, values]) => ({ period, ...values }))
 }
 
-function monthlyRowsForView(rows: MonthlyPoint[], selection: { mode: string; year: string }): MonthlyPoint[] {
+function monthlyRowsForView(
+  rows: MonthlyPoint[],
+  selection: { mode: string; start: string; end: string }
+): MonthlyPoint[] {
   return aggregateMonthly(rows, selection)
 }
 
