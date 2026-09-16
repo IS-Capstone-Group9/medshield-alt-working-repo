@@ -1,1 +1,30 @@
 raw_area,buyer_sector,customer_channel,territory,mapping_status,review_notes
+Government,Government,Government Bidding,Unassigned geography,approved,National Government and public health bidding
+Hospital,Private,Private Hospital,Quezon,approved,Private hospitals and medical centers (e.g. Lucena MMG, Peter Paul, Divine Care)
+Pharma,Private,Retail Pharmacy,Quezon,approved,Retail pharmacies and drugstores (e.g. Century Drug, Botika Estela, Ann Denise)
+Rakkk,Private,Private Hospital,Quezon,approved,RAKKK Prophet private hospital
+Lucena,Private,Private Care,Quezon,approved,Lucena private clinics and medical accounts
+Batangas,Private,Retail Pharmacy,Batangas,approved,Batangas private pharmacies and hospitals (e.g. Divine Care Hospital, Botika Estela)
+Quezon,Private,Retail Pharmacy,Quezon,approved,Quezon private pharmacies, clinics and hospitals
+Marinduque,Private,Retail Pharmacy,Marinduque,approved,Marinduque private pharmacies and clinical accounts
+Camarines Norte,Private,Retail Pharmacy,Camarines Norte,approved,Camarines Norte private pharmacies and accounts
+Cam Norte,Private,Retail Pharmacy,Camarines Norte,approved,Camarines Norte private pharmacies and accounts
+Camarines Sur,Private,Retail Pharmacy,Camarines Sur,approved,Camarines Sur private pharmacies and accounts
+Cam Sur,Private,Retail Pharmacy,Camarines Sur,approved,Camarines Sur private pharmacies and accounts
+Cavite,Private,Retail Pharmacy,Cavite,approved,Cavite private clinics and pharmacies
+Laguna,Private,Retail Pharmacy,Laguna,approved,Laguna private clinics and pharmacies
+Albay,Private,Retail Pharmacy,Albay,approved,Albay private clinics and pharmacies
+Legaspi,Private,Retail Pharmacy,Albay,approved,Legaspi City private clinics and pharmacies
+Lagaspi,Private,Retail Pharmacy,Albay,approved,Legaspi City private clinics and pharmacies
+Bicol,Private,Retail Pharmacy,Camarines Sur,approved,Bicol regional private accounts
+Mindoro,Private,Retail Pharmacy,Mindoro,approved,Mindoro private accounts
+East,Private,Retail Pharmacy,Quezon,approved,Eastern Quezon private accounts
+Eastern,Private,Retail Pharmacy,Quezon,approved,Eastern Quezon private accounts
+Eastern Quezon,Private,Retail Pharmacy,Quezon,approved,Eastern Quezon private accounts
+Admin,Internal,Internal Admin,Unassigned geography,approved,MedShield internal administration
+Supplies,Internal,Internal Supplies,Unassigned geography,approved,MedShield internal supplies
+Suppllies,Internal,Internal Supplies,Unassigned geography,approved,MedShield internal supplies
+Supplies and Equipment,Internal,Internal Supplies,Unassigned geography,approved,MedShield internal supplies
+Equipment,Internal,Internal Equipment,Unassigned geography,approved,MedShield internal equipment
+Personal,Internal,Internal Personal,Unassigned geography,approved,MedShield personal accounts
+Losses,Internal,Internal Losses,Unassigned geography,approved,MedShield inventory losses

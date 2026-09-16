@@ -66,8 +66,8 @@ function renderSalesSectors(error) {
  ['revenue','quantity'].forEach(k=>{
   const available=k==='revenue'?validRevenue:!!product && total.quantity>0;
   if(!available)return;
-  new Chart(el(k==='revenue'?'sectorRevenueChart':'sectorQuantityChart'),{type:'bar',data:{labels:values.map(v=>v.label),datasets:[{label:sector+' '+(k==='revenue'?'net sales':'delivered quantity')+' share (%)',data:values.map(v=>share(v[k],k)),backgroundColor:k==='revenue'?'#335F78':'#D49A23'}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{min:0,max:100,title:{display:true,text:'Share within selected cluster (%)'}}},plugins:{legend:{display:false}}}});
- });
+  new Chart(el(k==='revenue'?'sectorRevenueChart':'sectorQuantityChart'),{type:'bar',data:{labels:values.map(v=>v.label),datasets:[{label:sector+' '+(k==='revenue'?'net sales':'delivered quantity')+' share (%)',data:values.map(v=>share(v[k],k)),backgroundColor:k==='revenue'?'#335F78':'#D49A23'}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{ticks:{autoSkip:false,maxRotation:45,minRotation:35}},y:{min:0,max:100,title:{display:true,text:'Share within selected cluster (%)'}}},plugins:{legend:{display:false}}}});
+  });
  el('sectorProfileTable').innerHTML='<thead><tr><th>'+ (dimension==='territory'?'Geography':'Customer channel')+'</th><th>Net sales (₱)</th><th>Revenue share (%)</th><th>Delivered source units</th><th>Quantity share (%)</th></tr></thead><tbody>'+values.map(v=>'<tr><td>'+esc(v.label)+'</td><td>'+fmt(v.revenue)+'</td><td>'+fmt(share(v.revenue,'revenue'))+'</td><td>'+ (product?fmt(v.quantity):'Select one product')+'</td><td>'+fmt(share(v.quantity,'quantity'))+'</td></tr>').join('')+'</tbody>';
  el('sectorSource').textContent=salesSectorsData.source.file+' · checksum '+(salesSectorsData.source.checksum||'unavailable')+' · excluded '+JSON.stringify(salesSectorsData.source.excluded)+'. Classification evidence: '+[...new Set(rows.map(r=>r.basis))].join('; ');
  if(typeof renderProductPrioritizationTimeline==='function')renderProductPrioritizationTimeline();
