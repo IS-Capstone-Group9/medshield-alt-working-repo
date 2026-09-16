@@ -9,7 +9,7 @@ export const SALES_SECTORS_MARKUP = String.raw`
 </style>
 <div class="chart-card" style="margin-bottom:20px" data-sector-analysis>
  <div class="chart-title">Buyer ownership &amp; geographic distribution</div>
- <p>Government covers national government, public hospitals, and explicitly named LGUs. Private covers generic provincial accounts, private hospitals, pharmacies, and individual sales accounts. Internal covers MedShield business lines; unmatched records remain Unknown.</p>
+ <p>Evaluates institutional buyer clusters across CALABARZON, MIMAROPA, and Bicol. Government covers national government, public hospitals, and explicitly named LGUs. Private covers generic provincial accounts, private hospitals, pharmacies, and individual sales accounts. Internal covers MedShield business lines; unmatched records remain Unknown.</p>
  <div style="display:flex;gap:16px;flex-wrap:wrap;margin:16px 0">
  <label>Buyer cluster <select id="sectorCluster" onchange="renderSalesSectors()"><option>Government</option><option>Private</option><option>Internal</option><option>Unknown</option></select></label>
  <label>Product scope <select id="sectorProduct" onchange="renderSalesSectors()"></select></label>
