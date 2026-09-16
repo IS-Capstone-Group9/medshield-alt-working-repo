@@ -495,6 +495,8 @@ def clean_sales_rows(
     for source in source_rows:
         raw = source.raw
         delivery_date = _clean_date(raw.get("date_delivered"))
+        net_cost_was_blank = _clean_number(raw.get("net_cost")) is None
+        total_cost_was_supplied = _clean_number(raw.get("total_cost")) is not None
         row = {
             "area": _clean_area(raw.get("area")),
             "dr_number": _clean_dr_number(raw.get("dr_number")),
@@ -571,6 +573,16 @@ def clean_sales_rows(
             elif field == "net_cost" and row[field] < 0:
                 notes.append("net_cost is negative")
                 issue_counts["negative_net_cost"] += 1
+
+        # Net CP is the approved net-sales field and is defined as Total CP
+        # less discount. Older workbooks omit the Net CP column while still
+        # supplying both inputs, so preserve their historical revenue by
+        # deriving only genuinely blank values. An explicit source zero stays
+        # zero and is never replaced.
+        if net_cost_was_blank and total_cost_was_supplied:
+            row["net_cost"] = float(row["total_cost"]) - float(row["discount"])
+            transformations.remove("net_cost: blank converted to 0")
+            transformations.append("net_cost: derived from total cost - discount")
 
         # ── Fix 1.3 — Negative quantity warning ───────────────────────────────
         if float(row["quantity"] or 0) < 0:
@@ -703,7 +715,23 @@ def clean_sales_rows(
     return cleaned_rows, quality_summary, staging_rows
 
 
+def _net_sales_revenue(row: dict[str, Any]) -> float:
+    revenue = float(row.get("net_cost") or 0)
+    transformations = row.get("standardization_applied") or []
+    # Repair already-cleaned legacy rows without mutating the audit source.
+    # New ingests derive this value in clean_sales_rows above.
+    if (
+        revenue == 0
+        and "net_cost: blank converted to 0" in transformations
+        and "total_cost: blank converted to 0" not in transformations
+        and row.get("total_cost") is not None
+    ):
+        return float(row.get("total_cost") or 0) - float(row.get("discount") or 0)
+    return revenue
+
+
 def build_dashboard_snapshot(rows: list[dict[str, Any]]) -> dict[str, Any]:
+
     def historical_delivery(row):
         try:
             delivered = date.fromisoformat(str(row.get("date_delivered"))[:10])
@@ -730,7 +758,7 @@ def build_dashboard_snapshot(rows: list[dict[str, Any]]) -> dict[str, Any]:
         year = period[:4]
         # Approved workbook semantics: Net CP is net sales revenue after
         # discount; Total TP is the acquisition-cost basis.
-        revenue = float(row["net_cost"] or 0)
+        revenue = _net_sales_revenue(row)
         income = float(row["net_income"] or 0)
         quantity = float(row["quantity"] or 0)
         monthly[period]["revenue"] += revenue
@@ -1426,7 +1454,10 @@ def sales_summary(
         "margin_pct",
     ]
     sums = {
-        field: round(sum(float(row.get(field) or 0) for row in accepted), 4)
+        field: round(sum(
+            _net_sales_revenue(row) if field == "net_cost" else float(row.get(field) or 0)
+            for row in accepted
+        ), 4)
         for field in numeric_fields
     }
     averages = {
@@ -1436,7 +1467,7 @@ def sales_summary(
     area_revenue: Counter[str] = Counter()
     product_revenue: Counter[str] = Counter()
     for row in accepted:
-        revenue = float(row.get("net_cost") or 0)
+        revenue = _net_sales_revenue(row)
         if row.get("area"):
             area_revenue[str(row["area"])] += revenue
         if row.get("product"):
@@ -1465,7 +1496,7 @@ def sales_summary(
             "checked_rows": len(accepted),
             "mismatched_rows": sum(
                 abs(float(row.get("net_income") or 0) - (
-                    float(row.get("net_cost") or 0) - float(row.get("total_trade_price") or 0)
+                    _net_sales_revenue(row) - float(row.get("total_trade_price") or 0)
                 )) > 0.0100001 for row in accepted
             ),
         },

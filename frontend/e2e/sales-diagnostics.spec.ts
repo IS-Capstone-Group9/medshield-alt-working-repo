@@ -21,7 +21,8 @@ function fixture(years: number[]) {
 async function chartData(page: Page, id: string) {
   return page.evaluate(id => {
     const chart = (window as any).Chart.getChart(document.getElementById(id))
-    return { labels: chart.data.labels, datasets: chart.data.datasets.map((d: any) => ({ label: d.label, data: d.data, axis: d.yAxisID })),
+    return { labels: chart.data.labels, datasets: chart.data.datasets.map((d: any) => ({ label: d.label, data: d.data, axis: d.yAxisID, borderColor: d.borderColor })),
+      animationDuration: chart.options.animation?.duration ?? 0,
       axes: Object.fromEntries(Object.entries(chart.options.scales).map(([key, value]: [string, any]) => [key, { position: value.position, step: value.ticks.stepSize }])) }
   }, id)
 }
@@ -49,6 +50,17 @@ test('2017–2025 history keeps years distinct, gaps empty and overview profile 
   const monthly = await chartData(page, 'revenueDetailChart')
   expect(monthly.labels).toHaveLength(12)
   expect(monthly.datasets[0].data).toEqual([8000000, null, ...Array(10).fill(8000000)])
+  expect(monthly.datasets[2].label).toBe('Predicted Net Sales Revenue')
+  expect(monthly.datasets[2].borderColor).toBe('rgba(124,58,237,0.9)')
+  expect(monthly.datasets[2].data).toEqual([null, 8000000, ...Array(10).fill(null)])
+  expect(monthly.datasets[3].label).toBe('Predicted Gross Profit')
+  expect(monthly.datasets[3].borderColor).toBe('rgba(219,39,119,0.9)')
+  expect(monthly.animationDuration).toBe(850)
+  await expect(page.locator('#salesComparisonSubtitle')).toContainText('Dashed triangles are predicted')
+  await expect(page.locator('#page-overview .kpi-grid')).toContainText('1 unavailable months shown as predictions; excluded from totals')
+  await expect(page.locator('#page-overview .kpi-card-ai')).toHaveCount(4)
+  expect(await page.locator('#page-overview .kpi-card-ai .kpi-tag').evaluateAll(nodes =>
+    nodes.every(node => getComputedStyle(node).display === 'none'))).toBe(true)
   expect(await page.locator('#topbarYearSelect').inputValue()).toBe('2024')
   await page.evaluate(() => (window as any).showPage('overview'))
   await expect(page.locator('#kpiOverviewTotalRevenue')).toContainText('96,000,000')
@@ -88,6 +100,27 @@ test('bundled source outliers are excluded and every historical chart point reco
   await page.setViewportSize({width:390,height:844})
   await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true)
   await page.screenshot({path:'test-results/year-audit-real-source-mobile.png',fullPage:true})
+})
+
+test('processed snapshot plots net sales revenue for 2017–2019', async ({ page }) => {
+  const data = JSON.parse(await readFile(
+    path.resolve('../data/medshield/processed/dashboard_sales_snapshot.json'),
+    'utf8',
+  ))
+  await page.evaluate(data => {
+    const app = window as any
+    app.applyDatasetPatch(data)
+    app.setComparisonMode('single')
+    app.setYear('all')
+    app.showPage('overview')
+  }, data)
+
+  const overview = await chartData(page, 'overviewBaselineChart')
+  expect(overview.labels.slice(0, 3)).toEqual(['2017', '2018', '2019'])
+  const expected = data.year_summary.slice(0, 3).map((row: any) => row.revenue)
+  expect(expected.every((value: number) => value > 0)).toBe(true)
+  expect(overview.datasets[0].data.slice(0, 3)).toEqual(expected)
+  await page.screenshot({ path: 'test-results/historical-net-sales-revenue.png', fullPage: true })
 })
 
 test('continuous years, independent scales, peso movement, baseline change and export agree', async ({ page }) => {

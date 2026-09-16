@@ -72,6 +72,23 @@ function diagnosticMonths() {
   return months;
 }
 
+function diagnosticPredictions(periods, months, metric) {
+  const observed = periods.map(period => months.get(period)?.[metric] ?? null);
+  return observed.map((value, index) => {
+    if (value != null) return null;
+    let before = index - 1, after = index + 1;
+    while (before >= 0 && observed[before] == null) before--;
+    while (after < observed.length && observed[after] == null) after++;
+    if (before >= 0 && after < observed.length) {
+      const progress = (index - before) / (after - before);
+      return observed[before] + (observed[after] - observed[before]) * progress;
+    }
+    if (before >= 0) return observed[before];
+    if (after < observed.length) return observed[after];
+    return null;
+  });
+}
+
 function diagnosticComparison(months, year, baseYear) {
   const covered = [];
   let current = 0, previous = 0;
@@ -127,6 +144,9 @@ function renderSalesDiagnostics(opts) {
   const periods = years.flatMap(year => Array.from({ length: 12 }, (_, i) => year + '-' + String(i + 1).padStart(2, '0')));
   const revenue = periods.map(period => months.get(period)?.revenue ?? null);
   const profit = periods.map(period => months.get(period)?.income ?? null);
+  const predictedRevenue = diagnosticPredictions(periods, months, 'revenue');
+  const predictedProfit = diagnosticPredictions(periods, months, 'income');
+  const predictedCount = predictedRevenue.filter(value => value != null).length;
   const annual=getYearRowsForMode().filter(r=>!r.missing);
   const totalRevenue=annual.reduce((n,r)=>n+r.revenue,0), totalProfit=annual.reduce((n,r)=>n+r.income,0);
   const cards=document.querySelectorAll('#page-overview .kpi-grid .kpi-card');
@@ -134,9 +154,10 @@ function renderSalesDiagnostics(opts) {
     ['Selected net sales',annual.length?diagnosticCurrency(totalRevenue):'Unavailable','Selected calendar years: '+years.join(', ')],
     ['Selected gross profit',annual.length?diagnosticCurrency(totalProfit):'Unavailable','Workbook profit before operating expenses; reconciliation required'],
     ['Selected gross margin',totalRevenue?diagnosticRate(totalProfit/totalRevenue*100):'Unavailable','Total gross profit ÷ total net sales'],
-    ['Observed monthly coverage',periods.filter(p=>months.has(p)).length+' / '+periods.length,'Observed months; missing months are not zero sales']
+    ['Observed monthly coverage',periods.filter(p=>months.has(p)).length+' / '+periods.length,
+      predictedCount + ' unavailable months shown as predictions; excluded from totals']
   ];
-  cards.forEach((card,i)=>{if(!summaries[i])return;const [label,value,note]=summaries[i];
+  cards.forEach((card,i)=>{if(!summaries[i])return;card.classList.add('kpi-card-ai');const [label,value,note]=summaries[i];
     const l=card.querySelector('.kpi-label'),v=card.querySelector('.kpi-value');if(l)l.textContent=label;if(v)v.textContent=value;
     const sub=card.querySelector('.kpi-sub')||card.querySelector('.kpi-tag');if(sub)sub.textContent=note;
   });
@@ -149,14 +170,16 @@ function renderSalesDiagnostics(opts) {
   }
   const subtitle = document.getElementById('salesComparisonSubtitle');
   if (subtitle) subtitle.textContent = (years.length ? years[0] + '–' + years[years.length - 1] : 'No selected years')
-    + ' · Revenue: left axis; gross profit: right axis (independent scales). Gaps mean unavailable months, not zero sales.';
+    + ' · Solid circles are observed. Dashed triangles are predicted by interpolation and are excluded from totals.';
   createChart('revenueDetailChart', {
     type: 'line',
     data: {
       labels: periods,
       datasets: [
         { label: 'Net Sales Revenue', data: revenue, yAxisID: 'revenue', borderColor: getColor(), backgroundColor: getColor(), borderWidth: 2.5, pointRadius: 2, tension: 0, fill: false, spanGaps: false },
-        { label: 'Gross Profit', data: profit, yAxisID: 'grossProfit', borderColor: getAmber(), backgroundColor: getAmber(), borderWidth: 2, pointRadius: 2, tension: 0, fill: false, spanGaps: false }
+        { label: 'Gross Profit', data: profit, yAxisID: 'grossProfit', borderColor: getAmber(), backgroundColor: getAmber(), borderWidth: 2, pointRadius: 2, tension: 0, fill: false, spanGaps: false },
+        { label: 'Predicted Net Sales Revenue', data: predictedRevenue, yAxisID: 'revenue', borderColor: 'rgba(124,58,237,0.9)', backgroundColor: 'rgba(124,58,237,0.9)', borderWidth: 2, borderDash: [6, 4], pointStyle: 'triangle', pointRadius: 4, tension: 0, fill: false, spanGaps: false },
+        { label: 'Predicted Gross Profit', data: predictedProfit, yAxisID: 'grossProfit', borderColor: 'rgba(219,39,119,0.9)', backgroundColor: 'rgba(219,39,119,0.9)', borderWidth: 2, borderDash: [6, 4], pointStyle: 'triangle', pointRadius: 4, tension: 0, fill: false, spanGaps: false }
       ]
     },
     options: {

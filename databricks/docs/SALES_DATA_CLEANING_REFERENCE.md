@@ -67,7 +67,7 @@ The pipeline normalizes inconsistent column names across all source files using 
 | `unit_cost` | `float` | Selling price per unit (source CP; legacy field name retained for compatibility). Blank → `0.0`. | ≥ 0 |
 | `total_cost` | `float` | Gross sales before discount (`unit_cost × quantity`; source Total CP). Blank → `0.0`. | ≥ 0 |
 | `discount` | `float` | Applied rebate or discount amount. Can be negative (credit note). Blank → `0.0`. | Any |
-| `net_cost` | `float` | **Net sales revenue (Net CP)** after discount (`total_cost - discount`). Blank → `0.0`. | Expected ≥ 0; negative rows flagged as `warning`. |
+| `net_cost` | `float` | **Net sales revenue (Net CP)** after discount (`total_cost - discount`). When Net CP is blank but Total CP is supplied, derive `total_cost - discount`; otherwise blank → `0.0`. Explicit source zero remains zero. | Expected ≥ 0; negative rows flagged as `warning`. |
 | `trade_price_unit` | `float` | Acquisition price per unit (source TP/UNIT). Blank → `0.0`. | ≥ 0 |
 | `total_trade_price` | `float` | **Total acquisition cost (Total TP).** Acquisition price per unit × quantity. Blank → `0.0`. Zero with nonzero quantity → `warning`. | ≥ 0 |
 | `net_income` | `float` | Transaction gross profit (`net_cost - total_trade_price`). Can be negative (loss transaction). Blank → `0.0`. | Any |
@@ -175,5 +175,5 @@ VALID: all other accepted rows
 |---|---|---|
 | 2019 CSV contains 2018 carry-over rows | Tagged as `warning` with note; business hash dedup prevents double-counting | ~4,857 |
 | 2023–2025 CSVs have blank product names | Rows rejected (`missing product`) | ~719 |
-| Null `net_cost` rows (blank → 0.0) | `valid` or `warning` depending on other flags; margin derived from `net_income / net_cost` will be 0.0 | ~6,000+ |
+| Null `net_cost` rows | Derived from `total_cost - discount` when Total CP is available; unresolved blanks remain `0.0` and require review | ~6,000+ historical rows evaluated by this rule |
 | Non-geographic area labels with `area_type = 'unmapped'` | Logged for review — may need to be added to `NON_GEOGRAPHIC_LABELS` | Varies |

@@ -103,6 +103,45 @@ export const MEDSHIELD_KPI_STYLE = `
 .kpi-card-season .kpi-icon-badge { background: rgba(245, 158, 11, 0.1); color: #d97706; border-color: rgba(245, 158, 11, 0.25); }
 .kpi-card-territory .kpi-icon-badge { background: rgba(13, 112, 69, 0.08); color: #0d7045; border-color: rgba(13, 112, 69, 0.2); }
 
+/* AI-assisted overview metrics use a unified violet/indigo treatment. */
+#page-overview .kpi-card.kpi-card-ai {
+  background: #ffffff !important;
+  border: 1px solid rgba(148, 163, 184, 0.28) !important;
+  border-top: 2px solid var(--card-accent) !important;
+  --card-accent: #7c3aed;
+  min-height: 124px !important;
+  padding: 16px 18px !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05) !important;
+}
+#page-overview .kpi-card.kpi-card-ai::before { display: none !important; }
+#page-overview .kpi-card.kpi-card-ai:hover {
+  border-color: rgba(124, 58, 237, 0.28) !important;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06) !important;
+}
+#page-overview .kpi-card.kpi-card-ai .kpi-icon-badge {
+  width: 28px !important;
+  height: 28px !important;
+  color: #6d28d9 !important;
+  background: rgba(124, 58, 237, 0.07) !important;
+  border-color: transparent !important;
+}
+#page-overview .kpi-card.kpi-card-ai .kpi-card-header { margin-bottom: 8px !important; }
+#page-overview .kpi-card.kpi-card-ai .kpi-label {
+  font-size: 10px !important;
+  letter-spacing: 0.055em !important;
+}
+#page-overview .kpi-card.kpi-card-ai .kpi-value {
+  font-size: 24px !important;
+  margin-bottom: 4px !important;
+}
+#page-overview .kpi-card.kpi-card-ai .kpi-sub {
+  font-size: 10.5px !important;
+  line-height: 1.3 !important;
+}
+#page-overview .kpi-card.kpi-card-ai .kpi-tag {
+  display: none !important;
+}
+
 .kpi-value {
   font-family: var(--font-body);
   font-size: 26px !important;

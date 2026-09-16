@@ -64,6 +64,20 @@ class MetricDefinitionsTests(unittest.TestCase):
         self.assertEqual(summary["financial_reconciliation"],
                          {"delta": 5, "checked_rows": 1, "mismatched_rows": 1})
 
+    def test_summary_repairs_legacy_blank_net_cp_rows(self):
+        row = transaction(0, 40, 60, 2019)
+        row.update({
+            "total_cost": 120,
+            "discount": 20,
+            "standardization_applied": ["net_cost: blank converted to 0"],
+        })
+        with patch("services.data_pipeline._load_local_sales_payload", return_value={"rows": [row]}):
+            summary = sales_summary(year="2019")
+
+        self.assertEqual(summary["sums"]["net_cost"], 100)
+        self.assertEqual(summary["gross_margin_rate"], .4)
+        self.assertEqual(summary["financial_reconciliation"]["mismatched_rows"], 0)
+
     def test_zero_revenue_is_unavailable_and_losses_are_preserved(self):
         for revenue, profit, expected in [(0, 20, None), (100, -20, -.2), (100, 120, 1.2)]:
             rows = [transaction(revenue, profit, 80)]
