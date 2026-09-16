@@ -27,10 +27,17 @@ Keep raw exports unchanged. Put cleaned, standardized copies under `datasources/
 
 | Template | Use |
 |---|---|
-| `templates/pagasa_historical_template.csv` | Clean PAGASA 2021-2024 historical weather reference data |
-| `templates/doh_historical_template.csv` | Clean DOH 2021-2025 historical disease data |
+| `templates/pagasa_historical_template.csv` | Clean supplied PAGASA 2017-2024 historical station data; 2025 is currently absent |
+| `templates/doh_historical_template.csv` | Clean DOH 2018-2026 historical disease data; 2026 is partial |
 | `templates/weather_api_observations_template.csv` | Clean provider-derived weather API observations by latitude/longitude |
 | `templates/product_master_mapping.csv` | Product/SKU alias mapping approval |
 | `templates/area_classification_mapping.csv` | Area, customer type, and business-line classification |
+| `templates/regression_station_mapping.csv` | Review and approve one PAGASA station policy per sales territory |
 
 Follow `databricks/docs/EXTERNAL_DATA_PREPARATION_GUIDE.md` before adding PAGASA, DOH, or weather API files.
+
+Generate the current clean candidate files with:
+
+```powershell
+python -m services.analytics_service.jobs.prepare_external_sources
+```

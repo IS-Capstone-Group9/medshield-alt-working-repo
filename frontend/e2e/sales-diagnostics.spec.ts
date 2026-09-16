@@ -37,6 +37,59 @@ test.beforeEach(async ({ page }) => {
   await page.evaluate(() => (window as any).showPage('revenue'))
 })
 
+test('2017–2025 history keeps years distinct, gaps empty and overview profile scoped', async ({ page }) => {
+  const data = fixture(Array.from({ length: 9 }, (_, i) => 2017 + i))
+  data.monthly.reverse()
+  data.monthly = data.monthly.filter(r => r.period !== '2024-02')
+  data.monthly.push({ period: '2026-01', revenue: 999999999, income: 1 })
+  data.year_summary.push({ year: '2026', revenue: 999999999, income: 1, transactions: 1 })
+  await page.evaluate(data => {
+    const w = window as any; w.applyDatasetPatch(data); w.setComparisonMode('single'); w.setYear('2024'); w.showPage('revenue')
+  }, data)
+  const monthly = await chartData(page, 'revenueDetailChart')
+  expect(monthly.labels).toHaveLength(12)
+  expect(monthly.datasets[0].data).toEqual([8000000, null, ...Array(10).fill(8000000)])
+  expect(await page.locator('#topbarYearSelect').inputValue()).toBe('2024')
+  await page.evaluate(() => (window as any).showPage('overview'))
+  await expect(page.locator('#kpiOverviewTotalRevenue')).toContainText('96,000,000')
+  await expect(page.locator('#page-overview .kpi-grid')).not.toContainText('May & Nov')
+  await expect(page.locator('#page-overview .kpi-grid')).not.toContainText('9.3M')
+  await page.evaluate(() => { const w = window as any; w.setYear('all'); w.showPage('revenue') })
+  const history = await chartData(page, 'revenueDetailChart')
+  expect(history.labels).toHaveLength(108)
+  expect(history.labels[0]).toBe('2017-01')
+  expect(history.labels[107]).toBe('2025-12')
+  expect(history.datasets[0].data[0]).toBe(1000000)
+  expect(history.datasets[0].data[96]).toBe(9000000)
+  expect(await page.locator('#topbarYearSelect option').allTextContents()).not.toContain('2026')
+  await page.screenshot({ path: 'test-results/year-audit-history.png', fullPage: true })
+})
+
+test('initial dropdown and plotted year scope agree; aggregate product charts disclose their scope', async ({ page }) => {
+  expect(await page.locator('#topbarYearSelect').inputValue()).toBe('all')
+  await page.evaluate(() => (window as any).showPage('products'))
+  await expect(page.locator('#filterBar')).not.toBeVisible()
+  await expect(page.locator('#productBarChart').locator('..').locator('..')).toContainText('year filter does not apply')
+})
+
+test('bundled source outliers are excluded and every historical chart point reconciles', async ({ page }) => {
+  const data=JSON.parse(await readFile(path.resolve('public/data/sales_data.json'),'utf8'))
+  expect(data.monthly.some((r:any)=>r.period==='2047-11')).toBe(true)
+  await page.evaluate(data=>{const w=window as any;w.applyDatasetPatch(data);w.setComparisonMode('single');w.setYear('all');w.showPage('revenue')},data)
+  const actual=await chartData(page,'revenueDetailChart')
+  expect(actual.labels).toHaveLength(108)
+  for(let i=0;i<actual.labels.length;i++) {
+    const rows=data.monthly.filter((r:any)=>r.period===actual.labels[i])
+    const expected=rows.length?rows.reduce((n:number,r:any)=>n+r.revenue,0):null
+    if(expected===null)expect(actual.datasets[0].data[i]).toBeNull()
+    else expect(actual.datasets[0].data[i]).toBeCloseTo(expected,2)
+  }
+  await page.screenshot({path:'test-results/year-audit-real-source.png',fullPage:true})
+  await page.setViewportSize({width:390,height:844})
+  await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true)
+  await page.screenshot({path:'test-results/year-audit-real-source-mobile.png',fullPage:true})
+})
+
 test('continuous years, independent scales, peso movement, baseline change and export agree', async ({ page }) => {
   await page.evaluate(data => {
     const app = window as any

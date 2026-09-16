@@ -6,6 +6,8 @@ This file defines how specialist worker roles are assigned, sequenced, and hande
 
 ## Core Principle
 
+Apply [execution-contract.md](execution-contract.md) for assessment, ownership, execution states, recovery, and acceptance evidence. The matrix selects responsibilities; it does not automatically launch separate workers. One agent may perform the needed roles sequentially.
+
 Every worker must connect their output to a business outcome, a technical change, a validation method, and an owner for the next step. A worker is not finished when they produce notes; they are finished when their recommendation can be implemented, tested, reviewed, or operated by another role without hidden assumptions.
 
 ## Standard Worker Lifecycle
@@ -53,9 +55,9 @@ Every worker must connect their output to a business outcome, a technical change
 
 | Situation | Primary Worker | Supporting Workers |
 |---|---|---|
-| Vague business request, scope, acceptance criteria | Business Analyst | Product Manager, QA Engineer, Architect |
+| Vague business request, scope, acceptance criteria | Business Analyst | Orchestrator, QA Engineer, Architect |
 | New feature or user workflow | Orchestrator | Business Analyst, Architect, Frontend Engineer, Backend Engineer, QA Engineer |
-| UI, dashboard, interaction, responsive behavior | Frontend Engineer | BI Specialist, Data Analyst, QA Engineer, Accessibility/Security review as needed |
+| UI, dashboard, interaction, responsive behavior | Frontend Engineer | BI Specialist, Data Analyst, QA Engineer (including accessibility), Security Engineer as needed |
 | API, service contract, validation, business logic | Backend Engineer | Architect, Database Engineer, Security Engineer, QA Engineer |
 | Schema, migrations, query behavior, warehouse model | Database Engineer | Data Analyst, Backend Engineer, Security Engineer |
 | Metrics, KPIs, charts, insight wording | BI Specialist | Data Analyst, Business Analyst, Frontend Engineer |
@@ -98,6 +100,7 @@ Each worker should produce outputs that another role can act on:
 
 - Business Analyst: requirements, user stories, acceptance criteria, business rules, assumptions.
 - Architect: target design, boundaries, tradeoffs, integration notes, decisions.
+- Enterprise Architect: capability alignment, cross-layer ownership, transition steps, and strategic risks.
 - Frontend Engineer: typed UI implementation, responsive states, accessibility notes, UI tests where useful.
 - Backend Engineer: validated endpoints, service logic, error handling, contract updates, tests.
 - Database Engineer: migrations, schema notes, data impact, performance considerations.
@@ -131,7 +134,7 @@ Work is done when:
 - Relevant tests, builds, lint checks, or manual verification have been run.
 - Business, architecture, data, security, analytics, and operations impacts are either addressed or explicitly marked as not applicable.
 - Documentation is updated when setup, behavior, architecture, deployment, or support flow changes.
-- Remaining risks or follow-ups are stated plainly.
+- Remaining risks or follow-ups are stated plainly. Required acceptance checks that fail or were not run keep the task open or blocked; they cannot be counted as passed.
 
 ## Handoff Template
 

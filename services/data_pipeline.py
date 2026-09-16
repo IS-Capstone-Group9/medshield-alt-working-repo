@@ -704,9 +704,16 @@ def clean_sales_rows(
 
 
 def build_dashboard_snapshot(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    def historical_delivery(row):
+        try:
+            delivered = date.fromisoformat(str(row.get("date_delivered"))[:10])
+            return VALID_YEAR_MIN <= delivered.year <= VALID_YEAR_MAX and row.get("in_analysis_range") is not False
+        except (ValueError, TypeError):
+            return False
+
     accepted = [
         row for row in rows
-        if row["quality_status"] != "rejected"
+        if row["quality_status"] != "rejected" and historical_delivery(row)
     ]
     monthly: dict[str, dict[str, float]] = defaultdict(lambda: {"revenue": 0.0, "income": 0.0})
     by_area: dict[str, dict[str, float]] = defaultdict(lambda: {"revenue": 0.0, "income": 0.0})
@@ -719,7 +726,8 @@ def build_dashboard_snapshot(rows: list[dict[str, Any]]) -> dict[str, Any]:
 
     for row in accepted:
         period = str(row["date_delivered"])[:7]
-        year = str(row["year"])
+        # Annual and monthly groups must use the same actual delivery date.
+        year = period[:4]
         # Approved workbook semantics: Net CP is net sales revenue after
         # discount; Total TP is the acquisition-cost basis.
         revenue = float(row["net_cost"] or 0)

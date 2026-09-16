@@ -14,7 +14,7 @@ def build_shortlist(payload, sector='Unknown', territory='Quezon', today=None):
         raise ValueError('Invalid buyer cluster')
     today = today or datetime.now(ZoneInfo('Asia/Manila')).date()
     cutoff = today.year * 12 + today.month - 2
-    rows = [r for r in payload['rows'] if r['sector'] == sector and (territory == 'all' or r['territory'] == territory) and month_number(r['period']) <= cutoff]
+    rows = [r for r in payload['rows'] if r['sector'] == sector and (territory == 'all' or r['territory'] == territory) and month_number('2017-01') <= month_number(r['period']) <= min(cutoff, month_number('2025-12'))]
     end = max((month_number(r['period']) for r in rows), default=None)
     totals = defaultdict(lambda: {'revenue': 0., 'quantity': 0., 'months': set()})
     for r in rows:

@@ -1,6 +1,38 @@
 // Runs inside the existing dashboard closure, sharing DATA and filter state.
 // Calculations live here so the chart, explanatory table and export use identical rows.
 export const SALES_DIAGNOSTICS_SCRIPT = String.raw`
+function historicalPeriod(period) {
+  return /^(201[7-9]|202[0-5])-(0[1-9]|1[0-2])$/.test(String(period));
+}
+
+function syncHistoricalYearControls() {
+  const years = [...new Set(DATA.year_summary.map(r=>Number(r.year)).concat(DATA.monthly.map(r=>Number(r.period.slice(0,4)))))]
+    .filter(y=>Number.isInteger(y)&&y>=2017&&y<=2025).sort((a,b)=>a-b).map(String);
+  // Keep requested in-range empty years empty rather than silently broadening scope.
+  if(selectedYear!=='all' && !/^(201[7-9]|202[0-5])$/.test(selectedYear)) selectedYear='all';
+  const options = Array.from({length:9},(_,i)=>String(2017+i));
+  for(const [id,value,all] of [['topbarYearSelect',selectedYear,true],['yoyBaseYearSelect',yoyBaseYear,false],['yoyTargetYearSelect',yoyTargetYear,false]]) {
+    const select=document.getElementById(id); if(!select)continue;
+    select.replaceChildren(...(all?[new Option('All years (2017–2025)','all')]:[]), ...options.map(y=>new Option(y+(years.includes(y)?'':' — no snapshot rows'),y)));
+    select.value=String(value);
+  }
+}
+
+function calendarRevenueSeries() {
+  const years=diagnosticYears(), months=diagnosticMonths();
+  const periods=years.flatMap(y=>Array.from({length:12},(_,i)=>y+'-'+String(i+1).padStart(2,'0')));
+  return {labels:periods, datasets:[{label:'Net sales revenue (₱)',data:periods.map(p=>months.get(p)?.revenue??null),borderColor:getColor(),backgroundColor:getColor(.15),pointRadius:2,tension:0,spanGaps:false,fill:false}]};
+}
+
+function labelUnfilteredAggregates() {
+  for(const id of ['areaDonut','productBarChart','abcChart','productTable','productBubbleChart','paretoCurveChart']) {
+    const card=document.getElementById(id)?.closest('.chart-card');if(!card)continue;
+    let note=card.querySelector('[data-aggregate-scope]');
+    if(!note){note=document.createElement('p');note.dataset.aggregateScope='';note.className='chart-subtitle';card.prepend(note);}
+    note.textContent='Pre-aggregated source totals; year breakdown unavailable. The year filter does not apply. Date-range reconciliation is required before treating these as 2017–2025-only totals.';
+  }
+}
+
 function exportSalesGrowthCSV() {
   const table = document.getElementById('salesGrowthTable');
   if (!table) return;
@@ -16,13 +48,13 @@ function exportSalesGrowthCSV() {
 function diagnosticYears() {
   const years = [...new Set(DATA.year_summary.map(row => Number(row.year))
     .concat(DATA.monthly.map(row => Number(String(row.period).slice(0, 4)))))]
-    .filter(year => Number.isInteger(year) && year >= 1900 && year <= 2200).sort((a, b) => a - b);
+    .filter(year => Number.isInteger(year) && year >= 2017 && year <= 2025).sort((a, b) => a - b);
   if (!years.length) return [];
   const start = comparisonMode === 'yoy' ? Math.min(Number(yoyBaseYear), Number(yoyTargetYear))
     : selectedYear === 'all' ? years[0] : Number(selectedYear);
   const end = comparisonMode === 'yoy' ? Math.max(Number(yoyBaseYear), Number(yoyTargetYear))
     : selectedYear === 'all' ? years[years.length - 1] : Number(selectedYear);
-  if (!Number.isInteger(start) || !Number.isInteger(end) || end < start || end - start > 300) return [];
+  if (!Number.isInteger(start) || !Number.isInteger(end) || end < start || start < 2017 || end > 2025) return [];
   return Array.from({ length: end - start + 1 }, (_, i) => start + i);
 }
 
@@ -30,7 +62,7 @@ function diagnosticMonths() {
   const months = new Map();
   DATA.monthly.forEach(row => {
     const period = String(row.period);
-    if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(period)) return;
+    if (!historicalPeriod(period)) return;
     if (row.revenue == null || row.income == null || !Number.isFinite(Number(row.revenue)) || !Number.isFinite(Number(row.income))) return;
     const total = months.get(period) || { revenue: 0, income: 0 };
     total.revenue += Number(row.revenue);
@@ -95,6 +127,26 @@ function renderSalesDiagnostics(opts) {
   const periods = years.flatMap(year => Array.from({ length: 12 }, (_, i) => year + '-' + String(i + 1).padStart(2, '0')));
   const revenue = periods.map(period => months.get(period)?.revenue ?? null);
   const profit = periods.map(period => months.get(period)?.income ?? null);
+  const annual=getYearRowsForMode().filter(r=>!r.missing);
+  const totalRevenue=annual.reduce((n,r)=>n+r.revenue,0), totalProfit=annual.reduce((n,r)=>n+r.income,0);
+  const cards=document.querySelectorAll('#page-overview .kpi-grid .kpi-card');
+  const summaries=[
+    ['Selected net sales',annual.length?diagnosticCurrency(totalRevenue):'Unavailable','Selected calendar years: '+years.join(', ')],
+    ['Selected gross profit',annual.length?diagnosticCurrency(totalProfit):'Unavailable','Workbook profit before operating expenses; reconciliation required'],
+    ['Selected gross margin',totalRevenue?diagnosticRate(totalProfit/totalRevenue*100):'Unavailable','Total gross profit ÷ total net sales'],
+    ['Observed monthly coverage',periods.filter(p=>months.has(p)).length+' / '+periods.length,'Observed months; missing months are not zero sales']
+  ];
+  cards.forEach((card,i)=>{if(!summaries[i])return;const [label,value,note]=summaries[i];
+    const l=card.querySelector('.kpi-label'),v=card.querySelector('.kpi-value');if(l)l.textContent=label;if(v)v.textContent=value;
+    const sub=card.querySelector('.kpi-sub')||card.querySelector('.kpi-tag');if(sub)sub.textContent=note;
+  });
+  const overviewCard=document.getElementById('overviewBaselineChart')?.closest('.chart-card');
+  if(overviewCard) {
+    const caption=overviewCard.querySelector('.chart-subtitle');
+    if(caption)caption.textContent='Selected calendar years: '+years.join(', ')+'. Historical net sales and workbook gross profit; actual-data window 2017–2025.';
+    const status=overviewCard.querySelector('.status-pill');
+    if(status)status.textContent='Historical · reconciliation required';
+  }
   const subtitle = document.getElementById('salesComparisonSubtitle');
   if (subtitle) subtitle.textContent = (years.length ? years[0] + '–' + years[years.length - 1] : 'No selected years')
     + ' · Revenue: left axis; gross profit: right axis (independent scales). Gaps mean unavailable months, not zero sales.';

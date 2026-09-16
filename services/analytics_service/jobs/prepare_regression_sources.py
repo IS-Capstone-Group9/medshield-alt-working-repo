@@ -1,74 +1,107 @@
-"""Prepare province/month onset counts; raw workbooks remain unchanged.
+"""Prepare approved DOH monthly regressors from the cleaned external candidates.
 
-Run: python -m services.analytics_service.jobs.prepare_regression_sources
-No week-to-month allocations, city/province alias merges, or missing-as-zero fill.
+Run after ``prepare_external_sources``. Rows remain absent while the external
+geography mapping is pending; missing signals are never filled with zero.
 """
+
+from __future__ import annotations
+
 import csv
 import hashlib
 import json
-from collections import Counter, defaultdict
-from datetime import date, datetime
+from collections import Counter
 from pathlib import Path
 
-import openpyxl
+from services.analytics_service.jobs.prepare_external_sources import (
+    AREA_MAPPING,
+    DOH_TERRITORY_CANDIDATE,
+    REPORT as EXTERNAL_REPORT,
+)
+
 
 ROOT = Path(__file__).resolve().parents[3]
-DOH = ROOT / 'datasources/raw/doh/DOH_Request_Daily_Breakdown_Weekly_Summary_2021_2025.xlsx'
-AREA_MAP = ROOT / 'datasources/templates/area_classification_mapping.csv'
-OUTPUT = ROOT / 'data/medshield/processed/regression_external_monthly.json'
-DISEASES = ('Dengue', 'Leptospirosis', 'Cholera', 'Typhoid Fever')
+DOH = DOH_TERRITORY_CANDIDATE
+AREA_MAP = AREA_MAPPING
+OUTPUT = ROOT / "data" / "medshield" / "processed" / "regression_external_monthly.json"
+DISEASES = ("Dengue", "Leptospirosis", "Cholera", "Typhoid Fever")
 
 
-def sha(path):
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+def sha(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
-def prepare():
-    with AREA_MAP.open(encoding='utf-8-sig', newline='') as handle:
-        territories = {r['territory'].upper(): r['territory'] for r in csv.DictReader(handle) if r['mapping_status'] == 'approved' and r['area_type'] == 'territory'}
-    totals, records = defaultdict(float), Counter()
-    seen, ambiguous = set(), set()
+def prepare() -> dict[str, object]:
+    if not DOH.exists() or not EXTERNAL_REPORT.exists():
+        raise FileNotFoundError(
+            "Cleaned external sources are missing. Run "
+            "python -m services.analytics_service.jobs.prepare_external_sources first."
+        )
+    report = json.loads(EXTERNAL_REPORT.read_text(encoding="utf-8"))
+    expected_checksum = report["doh"]["output_sha256"].get(DOH.relative_to(ROOT).as_posix())
+    if expected_checksum != sha(DOH):
+        raise ValueError("Cleaned DOH territory candidate is stale or modified; rebuild external sources")
+    if report["area_mapping_sha256"] != sha(AREA_MAP):
+        raise ValueError("External source output is stale after an area mapping change")
+
+    rows = []
     audit = Counter()
-    workbook = openpyxl.load_workbook(DOH, read_only=True, data_only=True)
-    for disease in DISEASES:
-        print('Preparing '+disease, flush=True)
-        iterator = workbook[disease].iter_rows(values_only=True)
-        header = [str(v or '').strip() for v in next(iterator)]
-        required = ['Onset Date', 'Province/City', 'Municipality/City', 'Cases']
-        if not all(k in header for k in required):
-            raise ValueError('Unexpected DOH schema: '+disease)
-        indices = [header.index(k) for k in required]
-        for values in iterator:
-            audit['input_rows'] += 1
-            onset, province, municipality, cases = [values[i] if i < len(values) else None for i in indices]
-            territory = territories.get(str(province or '').strip().upper())
-            if not territory:
-                audit['outside_exact_territory'] += 1
+    seen = set()
+    with DOH.open(encoding="utf-8-sig", newline="") as handle:
+        for raw in csv.DictReader(handle):
+            audit["candidate_rows"] += 1
+            if raw["signal"] not in DISEASES:
+                audit["outside_model_disease_scope"] += 1
                 continue
-            if not isinstance(onset, (date, datetime)) or not isinstance(cases, (float, int)) or cases < 0:
-                audit['invalid_date_or_cases'] += 1
+            if raw["is_external_join_ready"].lower() != "true":
+                audit["external_mapping_pending_rows"] += 1
                 continue
-            month = onset.strftime('%Y-%m')
-            key = (disease, territory, month)
-            identity = (disease, territory, str(municipality).strip(), onset.strftime('%Y-%m-%d'))
+            identity = (raw["signal"], raw["territory"], raw["period"])
             if identity in seen:
-                ambiguous.add(key)
-                audit['duplicate_municipality_date'] += 1
+                raise ValueError(f"Duplicate approved DOH monthly key: {identity}")
             seen.add(identity)
-            totals[key] += cases
-            records[key] += 1
-    workbook.close()
-    rows = [{'provider': 'DOH', 'signal': k[0], 'territory': k[1], 'period': k[2], 'value': value,
-             'unit': 'reported onset cases', 'source_rows': records[k]} for k, value in sorted(totals.items()) if k not in ambiguous]
-    audit['ambiguous_months_excluded'] = len(ambiguous)
-    result = {'rows': rows, 'source': {'file': str(DOH.relative_to(ROOT)).replace('\\', '/'), 'checksum': sha(DOH),
-              'area_mapping_checksum': sha(AREA_MAP), 'audit': dict(audit),
-              'date_basis': 'Onset date; final retrospective counts, release dates unavailable',
-              'coverage': 'Exact province labels only; absent months remain unobserved, city aliases unmerged'}}
+            value = float(raw["value"])
+            if value < 0:
+                raise ValueError(f"Negative DOH signal value: {identity}")
+            rows.append(
+                {
+                    "provider": "DOH",
+                    "signal": raw["signal"],
+                    "territory": raw["territory"],
+                    "period": raw["period"],
+                    "value": value,
+                    "unit": raw["unit"],
+                    "source_rows": int(raw["source_record_count"]),
+                }
+            )
+            audit["approved_rows"] += 1
+
+    result = {
+        "rows": rows,
+        "source": {
+            "file": DOH.relative_to(ROOT).as_posix(),
+            "checksum": sha(DOH),
+            "raw_dataset_checksum": report["doh"]["source_dataset_sha256"],
+            "area_mapping_checksum": sha(AREA_MAP),
+            "external_report": EXTERNAL_REPORT.relative_to(ROOT).as_posix(),
+            "external_policy_version": report["policy_version"],
+            "audit": dict(audit),
+            "date_basis": "DOH onset month; retrospective final-revision records",
+            "case_definition": "Reported non-discarded surveillance cases; not confirmed incidence",
+            "coverage": "2018-2025 candidates; exact sales territory labels; external mapping approval required",
+            "status": "APPROVED_EXTERNAL_ROWS_PREPARED" if rows else "BLOCKED_EXTERNAL_MAPPING_PENDING",
+        },
+    }
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT.write_text(json.dumps(result, ensure_ascii=False), encoding='utf-8')
-    print(json.dumps({'monthly_rows': len(rows), 'audit': dict(audit)}), flush=True)
+    temporary = OUTPUT.with_suffix(OUTPUT.suffix + ".tmp")
+    temporary.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    temporary.replace(OUTPUT)
+    print(json.dumps({"monthly_rows": len(rows), "audit": dict(audit), "status": result["source"]["status"]}))
+    return result
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     prepare()

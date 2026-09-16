@@ -24,7 +24,10 @@ def build_sectors(rows, mappings, metadata, source_name, geography_mappings=()):
             excluded['quality_duplicate_or_estimated'] += 1
             continue
         try:
-            period = date.fromisoformat(str(row.get('date_delivered'))[:10]).strftime('%Y-%m')
+            delivered = date.fromisoformat(str(row.get('date_delivered'))[:10])
+            if not 2017 <= delivered.year <= 2025:
+                raise ValueError('Outside historical sales window')
+            period = delivered.strftime('%Y-%m')
             revenue, quantity = float(row['net_cost']), float(row['quantity'])
             product = str(row.get('product') or '').strip()
             if not product or product.startswith('#') or row.get('in_analysis_range') is False or not all(map(math.isfinite, (revenue, quantity))) or quantity < 0:

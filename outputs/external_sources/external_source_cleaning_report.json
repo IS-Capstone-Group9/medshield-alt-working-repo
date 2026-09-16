@@ -1,0 +1,323 @@
+{
+  "policy_version": "external_sources_clean_v1_20260914",
+  "publication_status": "CANDIDATE_ONLY",
+  "area_mapping_file": "datasources/templates/area_classification_mapping.csv",
+  "area_mapping_sha256": "268785d6ffddab4254c32abb79a56cba3ccf005b6c955d6013dcd7a316826f7f",
+  "approved_sales_territories": [
+    "Batangas",
+    "Camarines Norte",
+    "Camarines Sur",
+    "Cavite",
+    "Laguna",
+    "Marinduque",
+    "Quezon"
+  ],
+  "doh": {
+    "source_directory": "data/DOH (2018-2026)-20260914T142300Z-1-001/DOH (2018-2026)/Disease-Specific CSV Files",
+    "source_dataset_sha256": "1712013fabb87e450d6db117a46aa7b0e6d354a4e23ddd29ba88c620554adb61",
+    "source_files": [
+      {
+        "file": "Acute Bloody Diarrhea_20260914.csv",
+        "disease": "Acute Bloody Diarrhea",
+        "sha256": "ea2009935ef5ebd76c6dce0240e46cc67a66bdb7113e9aee01f19a9526497fb8",
+        "minimum_onset": "2018-01-01",
+        "maximum_onset": "2026-09-12",
+        "source_rows": 100682,
+        "valid_rows": 100682,
+        "reported_cases": 102060.0,
+        "partial_2026_rows": 6781
+      },
+      {
+        "file": "Acute Flaccid Paralysis_20260914.csv",
+        "disease": "Acute Flaccid Paralysis",
+        "sha256": "9a084f59ef5b20439fb22037a524fc9e3f718491419da2085700628959e9d497",
+        "minimum_onset": "2018-01-01",
+        "maximum_onset": "2026-09-10",
+        "source_rows": 7047,
+        "missing_province_rows": 1389,
+        "discarded_rows": 6854,
+        "valid_rows": 7047,
+        "reported_cases": 7076.0,
+        "classification_review_rows": 152,
+        "partial_2026_rows": 552
+      },
+      {
+        "file": "Acute Meningitis and Encephalitis Syndrome_20260914.csv",
+        "disease": "Acute Meningitis and Encephalitis Syndrome",
+        "sha256": "405fe7ca3258969adbdd10f08ae47312ab4dca799efdd2b76accbb39811a6b9e",
+        "minimum_onset": "2018-01-01",
+        "maximum_onset": "2026-09-12",
+        "source_rows": 37010,
+        "valid_rows": 37010,
+        "reported_cases": 37168.0,
+        "missing_province_rows": 40,
+        "classification_review_rows": 161,
+        "partial_2026_rows": 3083
+      },
+      {
+        "file": "Chikungunya_20260914.csv",
+        "disease": "Chikungunya",
+        "sha256": "659bee85e2bc9111d6df323b9e628ea62e682cb524e869c8c040fc21bdbe5fd9",
+        "minimum_onset": "2018-01-01",
+        "maximum_onset": "2026-09-08",
+        "source_rows": 13242,
+        "valid_rows": 13242,
+        "reported_cases": 13564.0,
+        "classification_review_rows": 1,
+        "partial_2026_rows": 909
+      },
+      {
+        "file": "Cholera_20260914.csv",
+        "disease": "Cholera",
+        "sha256": "9aa08eed7fc543044f93624a523343d8d22b6071aac071da2c22a231def900a7",
+        "minimum_onset": "2017-01-01",
+        "maximum_onset": "2026-09-10",
+        "source_rows": 27207,
+        "outside_declared_year_rows": 2571,
+        "valid_rows": 27207,
+        "reported_cases": 28123.0,
+        "classification_review_rows": 2,
+        "partial_2026_rows": 446
+      },
+      {
+        "file": "Dengue_20260914.csv",
+        "disease": "Dengue",
+        "sha256": "ffb1bf2f01dd39b7cfda8745eca53276cc1a9438e0b224875339aae8891675dd",
+        "minimum_onset": "2017-01-01",
+        "maximum_onset": "2026-09-12",
+        "source_rows": 2263249,
+        "outside_declared_year_rows": 144665,
+        "valid_rows": 2263249,
+        "reported_cases": 2360615.0,
+        "partial_2026_rows": 146388
+      },
+      {
+        "file": "Diphtheria_20260914.csv",
+        "disease": "Diphtheria",
+        "sha256": "64a4707339aa4dd61ed09773f0b222c1d1397a2d5c6c35fd462377e64b060f21",
+        "minimum_onset": "2017-01-04",
+        "maximum_onset": "2026-09-08",
+        "source_rows": 1579,
+        "outside_declared_year_rows": 186,
+        "valid_rows": 1579,
+        "reported_cases": 1594.0,
+        "discarded_rows": 585,
+        "missing_province_rows": 1,
+        "partial_2026_rows": 76
+      },
+      {
+        "file": "Hand Foot and Mouth Disease_20260914.csv",
+        "disease": "Hand Foot and Mouth Disease",
+        "sha256": "1ff078c84b607f954766af601f8d3455b77621c31f32049d11edd675b1c870cc",
+        "minimum_onset": "2023-01-01",
+        "maximum_onset": "2026-09-11",
+        "source_rows": 119420,
+        "valid_rows": 119420,
+        "reported_cases": 124695.0,
+        "partial_2026_rows": 7657
+      },
+      {
+        "file": "Influenza-like Illness_20260914.csv",
+        "disease": "Influenza-like Illness",
+        "sha256": "8dc02789fddb63bf77eadc512f3c5d9f4f4ff77a8ee196d7f6a97a2d78156206",
+        "minimum_onset": "2017-01-01",
+        "maximum_onset": "2026-09-13",
+        "source_rows": 1414001,
+        "outside_declared_year_rows": 152731,
+        "valid_rows": 1414001,
+        "reported_cases": 1426166.0,
+        "missing_province_rows": 1,
+        "partial_2026_rows": 94843
+      },
+      {
+        "file": "Leptospirosis_20260914.csv",
+        "disease": "Leptospirosis",
+        "sha256": "4ea25e298e17e16554ba6a6365ec5fea477450cd9224db75920b6f855c2c9bde",
+        "minimum_onset": "2018-01-01",
+        "maximum_onset": "2026-09-12",
+        "source_rows": 54714,
+        "valid_rows": 54714,
+        "reported_cases": 55332.0,
+        "partial_2026_rows": 9997
+      },
+      {
+        "file": "Measles-Rubella_20260914.csv",
+        "disease": "Measles-Rubella",
+        "sha256": "cf6fc77597a491bba89ae0d228bd777fc4aadd261741eb00be20774bfbd0a2ef",
+        "minimum_onset": "2018-01-01",
+        "maximum_onset": "2026-09-12",
+        "source_rows": 108084,
+        "discarded_rows": 17712,
+        "valid_rows": 108084,
+        "reported_cases": 109460.0,
+        "missing_province_rows": 6,
+        "partial_2026_rows": 5444
+      },
+      {
+        "file": "Meningococcal Disease_20260914.csv",
+        "disease": "Meningococcal Disease",
+        "sha256": "4a9de58f167b0332c3493663ff5a83069b9e6d388880facf76756102c2ae8797",
+        "minimum_onset": "2018-01-03",
+        "maximum_onset": "2026-09-08",
+        "source_rows": 1520,
+        "valid_rows": 1520,
+        "reported_cases": 1523.0,
+        "partial_2026_rows": 82
+      },
+      {
+        "file": "Neonatal Tetanus_20260914.csv",
+        "disease": "Neonatal Tetanus",
+        "sha256": "bdbf7a5214fe391a226d2f1fbc36100fe4924549791fc5fe67c435caaf256b34",
+        "minimum_onset": "2018-01-04",
+        "maximum_onset": "2026-09-06",
+        "source_rows": 640,
+        "valid_rows": 640,
+        "reported_cases": 654.0,
+        "partial_2026_rows": 52
+      },
+      {
+        "file": "Non-neonatal Tetanus_20260914.csv",
+        "disease": "Non-neonatal Tetanus",
+        "sha256": "2778b23d0603dace729a0c103fc8c79a72abbcb9b295d18fbddb32206afcd962",
+        "minimum_onset": "2018-01-01",
+        "maximum_onset": "2026-09-10",
+        "source_rows": 7947,
+        "valid_rows": 7947,
+        "reported_cases": 7983.0,
+        "partial_2026_rows": 732
+      },
+      {
+        "file": "Pertussis_20260914.csv",
+        "disease": "Pertussis",
+        "sha256": "b982e1e93e116e17328888fd54d0af1bfb5b79559d8f8fb5b8e2805afba524c5",
+        "minimum_onset": "2017-01-01",
+        "maximum_onset": "2026-09-01",
+        "source_rows": 7166,
+        "outside_declared_year_rows": 346,
+        "valid_rows": 7166,
+        "reported_cases": 7181.0,
+        "partial_2026_rows": 218
+      },
+      {
+        "file": "Rabies_20260914.csv",
+        "disease": "Rabies",
+        "sha256": "a27fd53df54d1a1e8696481f61d7f0300dbf86cf9854da239988607f5ccaff1c",
+        "minimum_onset": "2018-01-01",
+        "maximum_onset": "2026-09-05",
+        "source_rows": 2833,
+        "valid_rows": 2833,
+        "reported_cases": 2835.0,
+        "partial_2026_rows": 202
+      },
+      {
+        "file": "Rotavirus_20260914.csv",
+        "disease": "Rotavirus",
+        "sha256": "9bc745be88b627759eb67b9998f7760307c50e49461828c080db495362d0dd50",
+        "minimum_onset": "2018-01-01",
+        "maximum_onset": "2026-09-12",
+        "source_rows": 52626,
+        "valid_rows": 52626,
+        "reported_cases": 55697.0,
+        "partial_2026_rows": 8414
+      },
+      {
+        "file": "Severe Acute Respiratory Infection_20260914.csv",
+        "disease": "Severe Acute Respiratory Infection",
+        "sha256": "04cb8638f60e15a2f4c600f620801462b499fd67c3a8728f805edf0c9e494caf",
+        "minimum_onset": "2017-11-11",
+        "maximum_onset": "2026-09-12",
+        "source_rows": 92313,
+        "outside_declared_year_rows": 41,
+        "valid_rows": 92313,
+        "reported_cases": 92645.0,
+        "partial_2026_rows": 17919
+      },
+      {
+        "file": "Typhoid Fever_20260914.csv",
+        "disease": "Typhoid Fever",
+        "sha256": "9e5a92b3ad2fa3b4d9678107cea2f3717d07c4f5cb8ed057a549cb49a3074452",
+        "minimum_onset": "2018-01-01",
+        "maximum_onset": "2026-09-12",
+        "source_rows": 173057,
+        "valid_rows": 173057,
+        "reported_cases": 173784.0,
+        "partial_2026_rows": 11500
+      }
+    ],
+    "latest_onset_date": "2026-09-13",
+    "declared_coverage": "2018-2026",
+    "observed_coverage": "2017-2026",
+    "2026_status": "partial through 2026-09-13",
+    "clean_rows": 138673,
+    "territory_candidate_rows": 1787,
+    "output_sha256": {
+      "datasources/clean/doh/doh_historical_monthly_clean.csv": "537d30065559ba95e0281394a34055925a515a2b3238a18715f47da73a4a0cef",
+      "datasources/clean/doh/doh_sales_territory_monthly_candidate.csv": "482e4b80a21699c8803ffc568644f26c12f0d8f8dc3541ce4c56e8f71c8372df"
+    },
+    "audit": {
+      "source_rows": 4484337,
+      "valid_rows": 4484337,
+      "reported_cases": 4608155.0,
+      "partial_2026_rows": 315295,
+      "missing_province_rows": 1437,
+      "discarded_rows": 25151,
+      "classification_review_rows": 316,
+      "outside_declared_year_rows": 300540
+    },
+    "outputs": [
+      "datasources/clean/doh/doh_historical_monthly_clean.csv",
+      "datasources/clean/doh/doh_sales_territory_monthly_candidate.csv"
+    ]
+  },
+  "pagasa": {
+    "source_directory": "data/PAGASA 2017-2024",
+    "source_dataset_sha256": "c636cde1313dd021bb04bbcb3546cd8e7975e9875000e31297169b1909315b52",
+    "source_file_count": 125,
+    "station_count": 57,
+    "observed_coverage": "2017-2024",
+    "requested_coverage": "2017-2025",
+    "2025_status": "MISSING_FROM_SUPPLIED_SOURCE",
+    "daily_clean_rows": 161742,
+    "monthly_clean_rows": 5314,
+    "mapping_review_rows": 7,
+    "mapping_master": "datasources/templates/regression_station_mapping.csv",
+    "mapping_master_sha256": "9f3927b13f347e38510b45802dde3ffaa24cc1811e130c7d7adf7fba90debeb8",
+    "output_sha256": {
+      "datasources/clean/pagasa/pagasa_historical_daily_clean.csv": "2770ff49c9334f93be75531a82b3d4fcdfb537bba3bb323b43b1fb7b510b2c91",
+      "datasources/clean/pagasa/pagasa_historical_monthly_clean.csv": "7d1784f9300c018405b26c511f70d0957685d87cd22c68cee742dffbe95e2aab",
+      "datasources/clean/pagasa/pagasa_station_territory_review.csv": "7a67635b29384ad904e0ba1d4f1018e51fa3017c04d520012e42f6e3c549713a"
+    },
+    "metadata_conflicts": [],
+    "audit": {
+      "source_rows": 161744,
+      "valid_date_rows": 161742,
+      "rainfall_trace_rows": 9860,
+      "humidity_missing_sentinel": 5904,
+      "wind_speed_missing_sentinel": 2160,
+      "wind_direction_missing_sentinel": 2267,
+      "rainfall_missing_sentinel": 1096,
+      "temperature_max_missing_sentinel": 7018,
+      "temperature_min_missing_sentinel": 7799,
+      "temperature_mean_missing_sentinel": 2935,
+      "invalid_date_rows": 2,
+      "temperature_mean_missing": 81389,
+      "temperature_mean_derived_rows": 76180,
+      "temperature_max_out_of_range": 1,
+      "humidity_out_of_range": 4,
+      "temperature_min_out_of_range": 1
+    },
+    "outputs": [
+      "datasources/clean/pagasa/pagasa_historical_daily_clean.csv",
+      "datasources/clean/pagasa/pagasa_historical_monthly_clean.csv",
+      "datasources/clean/pagasa/pagasa_station_territory_review.csv"
+    ]
+  },
+  "integration_gate": {
+    "external_join_ready": false,
+    "reasons": [
+      "All approved sales territories still have external_mapping_status=pending",
+      "PAGASA 2025 is absent from the supplied official station files",
+      "The product master has not approved medical-demand SKUs"
+    ]
+  }
+}

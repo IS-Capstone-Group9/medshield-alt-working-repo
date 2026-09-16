@@ -2,6 +2,8 @@
 
 Execute and verify each section against the displayed charts and analytics, not only documentation.
 
+Follow-up: [Year and chart anomaly audit](YEAR_SCOPE_ANOMALY_AUDIT.md) corrects initial selector/state mismatch, out-of-range snapshot months, delivery-year grouping, static overview metrics and mobile filter overflow. Actual sales are restricted to 2017–2025; forecast targets remain separate.
+
 | Section | Scope | Status |
 |---|---|---|
 | 1 | Metric definitions, financial calculations, labels, units and reconciliation | Implemented; verification below |
@@ -141,11 +143,11 @@ Implemented source-backed regression under Forecast Modeling, replacing the Sect
 
 ### Source preparation and eligibility
 
-- The local DOH onset workbook is present, contrary to older publication notes. `python -m services.analytics_service.jobs.prepare_regression_sources` generates the local `data/medshield/processed/regression_external_monthly.json`. It reads actual onset dates for Dengue, Leptospirosis, Cholera and Typhoid Fever, and aggregates exact approved province labels by disease/month. ILI is a link, and weekly-only records are not converted into guessed monthly totals. Final counts lack historical release/revision timestamps.
-- Source audit: 699,240 rows inspected; 637,006 outside exact target provinces; 1,151 monthly disease/province totals; no duplicate municipality/date keys detected. Missing months remain unobserved. Ambiguous duplicate keys exclude their entire month. Source and area-mapping checksums invalidate stale prepared data.
+- The September 14 DOH package is now the current source. `python -m services.analytics_service.jobs.prepare_external_sources` reads 19 disease-specific CSV files, not the duplicated reference workbooks, then publishes lineage-bearing monthly candidates. `prepare_regression_sources` consumes only rows whose external geography is explicitly approved. Final counts lack historical release/revision timestamps.
+- Source audit: 4,484,337 DOH rows and 4,608,155 reported cases reconcile to 138,673 disease/province/classification/month rows. The 1,787 mapped-territory candidates cover 2018-2025 and 233,531 reported non-discarded cases, but all remain blocked because `external_mapping_status` is pending. The declared 2018-2026 source also contains 2017 rows, retained as outside-scope audit records; 2026 is partial through September 13.
 - Corrected the Section 4 geographic join: transactions use `geographic`, while the former consumer expected `territory`. Province assignment now uses the approved area mapping, independently of buyer ownership. Unknown ownership is retained; unreviewed Lower Cavite is not assigned to Cavite.
 - NASA POWER daily data covers 2025. Only complete nonduplicated months with valid rainfall are aggregated; it remains a weather proxy. This source is too short for the regression gate.
-- PAGASA station files are present but lack approved station-to-sales-territory mappings. The empty `regression_station_mapping.csv` supports one approved station per approved territory. Its explicit `lower_bound_zero` trace policy treats documented trace values below 0.1 mm as zero for a lower-bound sum; missing sentinels and incomplete months are excluded. No station mappings or trace-policy approvals were invented.
+- PAGASA cleaning produced 161,742 valid station-days and 5,314 station-months from 2017-2024. Of these, 5,214 have complete rainfall coverage and 100 remain incomplete. Proposed station mappings are recorded as `needs_review`; none is join-ready. Trace rainfall below 0.1 mm uses a flagged zero lower bound, `-999` remains missing, and the missing 2025 official source is not filled or relabeled.
 
 ### Model and visual contract
 

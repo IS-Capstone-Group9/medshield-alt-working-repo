@@ -3,6 +3,12 @@ from services.analytics_service.sales_sectors import build_sectors
 
 
 class SectorTests(unittest.TestCase):
+    def test_actual_years_are_2017_through_2025_without_flags(self):
+        rows=[{**self.row('Government'), 'date_delivered': p+'-01'} for p in ['2016-12','2017-01','2025-12','2026-01']]
+        result=build_sectors(rows, [], {}, 'test')
+        self.assertEqual([r['period'] for r in result['rows']],['2017-01','2025-12'])
+        self.assertEqual(result['source']['included_rows'],2)
+
     def row(self, area, revenue=100, quantity=10, **kw):
         return dict(area=area, net_cost=revenue, quantity=quantity, product='A', date_delivered='2025-01-01', quality_status='valid', **kw)
 

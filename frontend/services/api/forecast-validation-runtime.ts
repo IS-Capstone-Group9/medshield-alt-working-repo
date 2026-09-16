@@ -50,6 +50,9 @@ function changeForecastScope(field) {
  window.dispatchEvent(new CustomEvent('medshield:forecast-change'));
 }
 function setForecastValidationData(data,error) {
+ if(data && (data.actuals?.some(r=>!historicalPeriod(r.period)) || (data.origin&&!historicalPeriod(data.origin)))) {
+  data=null;error='Forecast evidence rejected: actual sales must be within 2017–2025.';
+ }
  forecastValidationData=data && Array.isArray(data.actuals) && data.views && data.scope && data.source ? data : null;
  if(forecastValidationData) {
   const el=document.getElementById('forecastProduct');

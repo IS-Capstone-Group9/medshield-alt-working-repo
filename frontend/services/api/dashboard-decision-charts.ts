@@ -50,7 +50,7 @@ function formatPeriod(period: string): string {
 function aggregateMonthly(rows: MonthlyPoint[], year: string | null): MonthlyPoint[] {
   const totals = new Map<string, { revenue: number; income: number }>()
   for (const row of rows) {
-    if (!row.period || !finite(row.revenue) || !finite(row.income)) continue
+    if (!/^(201[7-9]|202[0-5])-(0[1-9]|1[0-2])$/.test(row.period) || !finite(row.revenue) || !finite(row.income)) continue
     if (year && !row.period.startsWith(`${year}-`)) continue
     const current = totals.get(row.period) ?? { revenue: 0, income: 0 }
     current.revenue += row.revenue
@@ -60,13 +60,11 @@ function aggregateMonthly(rows: MonthlyPoint[], year: string | null): MonthlyPoi
 
   return [...totals.entries()]
     .sort(([left], [right]) => left.localeCompare(right))
-    .slice(-24)
     .map(([period, values]) => ({ period, ...values }))
 }
 
 function monthlyRowsForView(rows: MonthlyPoint[], year: string | null): MonthlyPoint[] {
-  const selected = aggregateMonthly(rows, year)
-  return selected.length ? selected : aggregateMonthly(rows, null)
+  return aggregateMonthly(rows, year)
 }
 
 function aggregateDiseaseSignals(rows: ExternalSignalPoint[]): Map<string, number> {
@@ -144,7 +142,11 @@ function renderDiseaseDemandChart(root: HTMLElement, data: DashboardData) {
   if (!canvas) return
 
   const monthly = monthlyRowsForView(data.monthly, selectedYear(root))
-  if (!monthly.length) return
+  if (!monthly.length) {
+    Chart.getChart(canvas)?.destroy()
+    updateChartCard(canvas, { title: 'Historical Monthly Sales Profile', subtitle: 'No observed sales in the selected year. Other years are not substituted.', badge: 'No observations' })
+    return
+  }
 
   const signalByPeriod = aggregateDiseaseSignals(data.externalSignals)
   const diseaseValues = monthly.map((row) => signalByPeriod.get(row.period) ?? null)

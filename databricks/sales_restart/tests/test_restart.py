@@ -113,11 +113,7 @@ class SalesCorpusTests(unittest.TestCase):
     def setUpClass(cls):
         cls.bronze = pure_notebook_namespace("01_sales_bronze.py")
         cls.silver = pure_notebook_namespace("02_sales_silver.py")
-        cls.source_dir = (
-            ROOT.parent / "imports" / "revised" /
-            "databricks-source-revised-2026-09-04" /
-            "medshield_project_csv"
-        )
+        cls.source_dir = ROOT.parents[1] / "data" / "medshield" / "dataset_csv"
         if not cls.source_dir.is_dir():
             raise unittest.SkipTest("Exported sales CSV directory is not available")
         source_rows = []
@@ -144,7 +140,8 @@ class SalesCorpusTests(unittest.TestCase):
         cls.assessed = cls.silver["assess_sales_records"](source_rows)
 
     def test_full_export_is_accounted_for_and_has_one_disposition_per_line(self):
-        self.assertEqual(len(self.source_rows), 58634)
+        self.assertEqual(len(list(self.source_dir.glob("medshield_data_*.csv"))), 9)
+        self.assertGreater(len(self.source_rows), 0)
         self.assertEqual(len(self.assessed), len(self.source_rows))
         self.assertEqual(
             Counter(row["source_record_id"] for row in self.assessed),
@@ -165,16 +162,63 @@ class SalesCorpusTests(unittest.TestCase):
         self.assertTrue(any(row["net_value_source"] == "DERIVED_2017_GROSS_LESS_EXPLICIT_DISCOUNT" for row in self.assessed))
 
 
+class PlaceholderTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.ns = pure_notebook_namespace("02_sales_silver.py")
+
+    def assess(self, area="Quezon", date="2022-06-15", product="MEDICINE A"):
+        row = self.ns["blank_assessment"]({"data_source_year": 2022})
+        fields = [area, "DR-1", date, product, "2", "10", "20", "0", "20", "5", "10", "10", "50%"]
+        return self.ns["assess_transaction"](row, fields, "modern_13")
+
+    def test_missing_area_preserves_raw_and_enters_reconciliation(self):
+        row = self.assess(area="")
+        self.assertEqual(row["area_raw"], "")
+        self.assertEqual(row["area"], "UNKNOWN_AREA")
+        self.assertTrue(row["is_area_placeholder"])
+        self.assertEqual(row["disposition"], "PENDING_RECONCILIATION")
+
+    def test_missing_date_uses_year_without_inventing_day(self):
+        row = self.assess(date="")
+        self.assertEqual(row["reporting_year"], 2022)
+        self.assertEqual(row["reporting_year_basis"], "PROVISIONAL_SOURCE_FILE_YEAR")
+        self.assertIsNone(row["date_delivered"])
+        self.assertIsNone(row["calendar_year"])
+        self.assertTrue(row["is_provisional_year_candidate"])
+        self.assertFalse(row["is_analysis_candidate"])
+
+    def test_bad_date_or_missing_product_is_not_repaired(self):
+        row = self.assess(date="not-a-date")
+        self.assertIsNone(row["reporting_year"])
+        self.assertFalse(row["is_provisional_year_candidate"])
+        self.assertFalse(self.assess(date="", product="")["is_provisional_year_candidate"])
+
+    def test_real_date_is_not_reassigned_to_csv_year(self):
+        row = self.assess(date="2021-06-15")
+        self.assertEqual(row["reporting_year"], 2021)
+        self.assertEqual(row["reporting_year_basis"], "OBSERVED_DELIVERY_DATE")
+
+    def test_formatted_excel_serial_preserves_real_date(self):
+        from datetime import date
+        parse = self.ns["parse_delivery_date"]
+        for raw in ["45913", "45913.00", "45,913.00"]:
+            self.assertEqual(parse(raw, "modern_13"), date(2025, 9, 13))
+        for raw in ["45,913.50", "4,5913.00", "1'17"]:
+            self.assertIsNone(parse(raw, "modern_13"))
+
+
 class GoldClassificationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         tree = ast.parse((ROOT / "03_sales_gold.py").read_text(encoding="utf-8-sig"))
         functions = [node for node in tree.body if isinstance(node, ast.FunctionDef)
-                     and node.name in {"normalize_label", "classify_product_label"}]
+                     and node.name in {"normalize_label", "classify_product_label", "reviewed_mapping", "product_scope", "area_scope", "area_metadata", "read_mapping"}]
         pattern = next(node for node in tree.body if isinstance(node, ast.Assign)
                        and any(isinstance(target, ast.Name) and target.id == "CONTRACT_PREFIX_PATTERN"
                                for target in node.targets))
-        module = ast.fix_missing_locations(ast.Module(body=[ast.Import(names=[ast.alias(name="re")]), pattern, *functions], type_ignores=[]))
+        imports = ast.parse("import re, csv, io, hashlib\nfrom pathlib import Path").body
+        module = ast.fix_missing_locations(ast.Module(body=[*imports, pattern, *functions], type_ignores=[]))
         cls.gold = {"__name__": "gold_pure_test"}
         exec(compile(module, "03_sales_gold.py", "exec"), cls.gold)
 
@@ -184,6 +228,94 @@ class GoldClassificationTests(unittest.TestCase):
         self.assertEqual(classify("SURGICAL BLADES #20", set()), "HASHTAG_LABEL_REQUIRES_REVIEW")
         self.assertEqual(classify("OFFICE TAPE", {"OFFICE TAPE"}), "NONMEDICAL_REFERENCE_REQUIRES_REVIEW")
         self.assertEqual(classify("AMOXICILLIN 500MG", set()), "PRODUCT_MASTER_PENDING")
+
+    def master(self, label="MEDICINE A", category="medicine", **overrides):
+        row = dict(raw_product=label, canonical_sku=label, product_category=category,
+                   unit_of_measure="TABLET", forecast_eligible="true", mapping_status="approved")
+        row.update(overrides)
+        return self.gold["reviewed_mapping"]([row], "raw_product", "product")
+
+    def test_medical_approval_and_supply_scope_are_explicit(self):
+        scope = self.gold["product_scope"]
+        self.assertFalse(scope("UNREVIEWED", set(), {})[-1])
+        self.assertFalse(scope("MEDICINE A", set(), self.master(mapping_status="proposed"))[-1])
+        self.assertTrue(scope("MEDICINE A", set(), self.master())[-1])
+        supply = self.master("SURGICAL BLADES #20", "medical_supply", unit_of_measure="BLADE")
+        self.assertFalse(scope("SURGICAL BLADES #20", set(), supply)[-1])
+        self.assertTrue(scope("SURGICAL BLADES #20", set(), supply, True)[-1])
+
+    def test_contract_parent_cannot_be_approved_as_sku(self):
+        label = "PAGBILAO # 55,000 LOT 2"
+        self.assertEqual(self.gold["product_scope"](label, set(), self.master(label)),
+                         ("CONTRACT_LABEL_CANDIDATE", None, None, None, False))
+
+    def test_reviewed_product_overrides_keyword_candidate_only(self):
+        scope = self.gold["product_scope"]
+        self.assertTrue(scope("MEDICINE A", {"MEDICINE A"}, self.master())[-1])
+        master = self.master("OFFICE TAPE", "non_medical", forecast_eligible="false")
+        self.assertEqual(scope("OFFICE TAPE", set(), master)[0], "NON_MEDICAL_APPROVED")
+        self.assertFalse(scope("OFFICE TAPE", set(), master)[-1])
+
+    def test_invalid_approvals_fail_closed(self):
+        for kwargs in [dict(unit_of_measure=""), dict(canonical_sku=""),
+                       dict(forecast_eligible="yes"), dict(category="non_medical")]:
+            with self.subTest(kwargs=kwargs), self.assertRaises(ValueError):
+                self.master(**kwargs)
+        row = next(iter(self.master().values()))
+        for other in [dict(row), dict(row, raw_product="ALIAS", unit_of_measure="BOX")]:
+            with self.assertRaises(ValueError):
+                self.gold["reviewed_mapping"]([row, other], "raw_product", "product")
+
+    def test_only_reviewed_territories_enable_external_candidates(self):
+        row = dict(raw_area="Quezon", area_type="territory", territory="Quezon",
+                   weather_eligible="true", forecast_eligible="true", mapping_status="approved",
+                   territory_id="PH-PROVINCE-QUEZON", region="CALABARZON", province="Quezon",
+                   city_municipality="", geographic_level="province", evidence_source="Test evidence",
+                   evidence_status="TEST_APPROVAL")
+        master = self.gold["reviewed_mapping"]([row], "raw_area", "area")
+        self.assertEqual(self.gold["area_scope"](" QUEZON ", master), ("territory", "QUEZON", True, True))
+        self.assertFalse(self.gold["area_scope"]("PAGBILAO", master)[-1])
+        self.assertFalse(self.gold["area_scope"]("UNKNOWN_AREA", {"UNKNOWN_AREA": row})[-1])
+        channel = dict(row, raw_area="Government", area_type="customer_type", territory="",
+                       territory_id="", region="", province="", city_municipality="",
+                       weather_eligible="false", forecast_eligible="false")
+        master = self.gold["reviewed_mapping"]([channel], "raw_area", "area")
+        self.assertEqual(self.gold["area_scope"]("Government", master), ("customer_type", None, False, False))
+        with self.assertRaises(ValueError):
+            self.gold["reviewed_mapping"]([dict(channel, weather_eligible="true")], "raw_area", "area")
+        with self.assertRaises(ValueError):
+            self.gold["reviewed_mapping"]([dict(row, territory_id="")], "raw_area", "area")
+        with self.assertRaises(ValueError):
+            self.gold["reviewed_mapping"]([row, dict(row, raw_area="ALIAS", province="Batangas")], "raw_area", "area")
+
+    def test_shipped_master_template_and_current_area_mapping_load(self):
+        read = self.gold["read_mapping"]
+        rows, checksum = read(ROOT / "references/product_master_review.csv", {
+            "raw_product", "canonical_sku", "product_category", "unit_of_measure", "forecast_eligible", "mapping_status"})
+        self.assertEqual(rows, [])
+        self.assertEqual(len(checksum), 64)
+        rows, checksum = read(ROOT.parents[1] / "datasources/templates/area_classification_mapping.csv", {
+            "raw_area", "area_type", "territory", "weather_eligible", "forecast_eligible", "mapping_status"})
+        master = self.gold["reviewed_mapping"](rows, "raw_area", "area")
+        self.assertTrue(self.gold["area_scope"]("Quezon", master)[-1])
+        self.assertFalse(self.gold["area_scope"]("Lower Cavite", master)[-1])
+        self.assertFalse(self.gold["area_scope"]("Government", master)[-1])
+        self.assertIn("CAM NORTE", master)
+        self.assertFalse(self.gold["area_scope"]("CAM NORTE", master)[2])
+        self.assertIsNone(self.gold["area_metadata"]("CAM NORTE", master)[3])
+        self.assertEqual(self.gold["area_metadata"]("Government", master)[1], "customer_type")
+        self.assertEqual(self.gold["area_metadata"]("UNLISTED AREA", master)[2], "unmapped")
+
+    def test_missing_and_malformed_mapping_files(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "master.csv"
+            self.assertEqual(self.gold["read_mapping"](path, {"raw_product"}), ([], "NOT_SUPPLIED"))
+            for content in ["wrong_column\nvalue\n", "raw_product,other\nmedicine\n",
+                            "raw_product\nmedicine,unexpected\n"]:
+                path.write_text(content, encoding="utf-8")
+                with self.assertRaises(ValueError):
+                    self.gold["read_mapping"](path, {"raw_product"})
 
 
 if __name__ == "__main__":

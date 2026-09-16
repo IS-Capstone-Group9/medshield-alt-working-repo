@@ -249,6 +249,48 @@
   font-weight: 400;
 }
 
+.login-password-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 8px;
+}
+
+.login-password-row .login-card-field {
+  flex: 1;
+  min-width: 0;
+}
+
+.login-password-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  transition: color 0.15s ease, transform 0.1s ease;
+  flex-shrink: 0;
+  border-radius: 4px;
+}
+
+.login-password-toggle:hover {
+  color: #0f766e;
+}
+
+.login-password-toggle:focus-visible {
+  outline: 2px solid #0f766e;
+  outline-offset: 2px;
+  color: #0f766e;
+}
+
+.login-password-toggle:active {
+  transform: scale(0.92);
+}
+
 /* Options Row: Remember Me & Forgot Password */
 .login-options-row {
   display: flex;

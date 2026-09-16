@@ -200,7 +200,7 @@ function updateFilterBar(name) {
   try {
     const bar = document.getElementById('filterBar');
     if (bar) {
-      if (['overview', 'revenue', 'products', 'territory'].includes(name)) {
+      if (['overview', 'revenue', 'territory'].includes(name)) {
         bar.style.display = 'flex';
       } else {
         bar.style.display = 'none';

@@ -10,6 +10,11 @@ from zoneinfo import ZoneInfo
 import numpy as np
 
 from services.analytics_service.forecast_validation import month_number, period_name, score
+from services.analytics_service.jobs.prepare_external_sources import (
+    PAGASA_MAPPING_REVIEW,
+    PAGASA_MONTHLY_CLEAN,
+    REPORT as EXTERNAL_REPORT,
+)
 from services.analytics_service.jobs.prepare_regression_sources import ROOT, DOH, AREA_MAP, OUTPUT, DISEASES, sha
 from services.analytics_service.sales_sectors import load_sectors
 
@@ -44,42 +49,50 @@ def load_external():
         if payload['source']['checksum'] != sha(DOH) or payload['source']['area_mapping_checksum'] != sha(AREA_MAP):
             raise ValueError('Prepared DOH data is stale. Run prepare_regression_sources after source/mapping changes.')
         rows.extend(payload['rows'])
-        sources.append({'provider': 'DOH', 'status': 'Prepared onset counts; retrospective only', **payload['source']})
+        sources.append({'provider': 'DOH', 'status': payload['source'].get('status', 'Prepared onset counts; retrospective only'), **payload['source']})
     else:
-        sources.append({'provider': 'DOH', 'status': 'Onset workbook detected; run prepare_regression_sources', 'file': str(DOH.relative_to(ROOT))})
+        sources.append({'provider': 'DOH', 'status': 'Cleaned candidate detected; run prepare_regression_sources', 'file': str(DOH.relative_to(ROOT))})
     weather = ROOT / 'data/medshield/processed/weather_signals.json'
     if weather.exists():
         payload = json.loads(weather.read_text(encoding='utf-8'))
         if payload.get('metadata', {}).get('provider') == 'nasa_power':
             rows.extend(monthly_rainfall([r for r in payload.get('daily_rows', []) if r.get('provider') == 'nasa_power']))
             sources.append({'provider': 'NASA POWER', 'status': 'Weather proxy; complete daily months only', 'file': str(weather.relative_to(ROOT)), 'checksum': sha(weather)})
-    # Station provenance cannot establish which sales territory it represents.
-    station_dir = ROOT / 'datasources/raw/pagasa/stations'
-    mapping_path = ROOT / 'datasources/templates/regression_station_mapping.csv'
-    station_files = {p.name: p for p in station_dir.glob('*.csv')}
-    with AREA_MAP.open(encoding='utf-8-sig', newline='') as handle:
-        territories = {r['territory'] for r in csv.DictReader(handle) if r['mapping_status'] == 'approved' and r['area_type'] == 'territory'}
-    with mapping_path.open(encoding='utf-8-sig', newline='') as handle:
-        mappings = [r for r in csv.DictReader(handle) if r['mapping_status'] == 'approved']
-    used_territories = set()
-    for mapping in mappings:
-        territory = mapping['territory']
-        station = station_files.get(mapping['station_file'])
-        if station is None or territory not in territories or territory in used_territories or mapping['trace_policy'] != 'lower_bound_zero':
-            raise ValueError('Invalid/ambiguous station mapping or unapproved trace policy')
-        used_territories.add(territory)
-        daily = []
-        with station.open(encoding='utf-8-sig', newline='') as handle:
-            for r in csv.DictReader(handle):
-                day = date(int(r['YEAR']), int(r['MONTH']), int(r['DAY']))
-                value = float(r['RAINFALL'])
-                daily.append({'date': day.isoformat(), 'area': territory, 'rainfall_mm': 0. if value == -1 else value})
-        rows.extend(monthly_rainfall(daily, 'PAGASA'))
-        sources.append({'provider': 'PAGASA', 'status': 'Approved territory mapping; rainfall lower bound: trace (<0.1 mm) counted as zero. Incomplete months excluded.',
-                        'file': str(station.relative_to(ROOT)), 'checksum': sha(station), 'mapping_checksum': sha(mapping_path)})
-    if not mappings:
-        sources.append({'provider': 'PAGASA', 'status': 'Station files detected; no approved station-to-sales-territory mapping',
-                        'file': 'datasources/raw/pagasa/stations', 'station_files': len(station_files)})
+    approved_station_territories = {}
+    if PAGASA_MAPPING_REVIEW.exists() and PAGASA_MONTHLY_CLEAN.exists() and EXTERNAL_REPORT.exists():
+        report = json.loads(EXTERNAL_REPORT.read_text(encoding='utf-8'))
+        expected = report['pagasa']['output_sha256']
+        for path in (PAGASA_MAPPING_REVIEW, PAGASA_MONTHLY_CLEAN):
+            if expected.get(path.relative_to(ROOT).as_posix()) != sha(path):
+                raise ValueError('Prepared PAGASA data is stale. Rebuild external sources.')
+        with PAGASA_MAPPING_REVIEW.open(encoding='utf-8-sig', newline='') as handle:
+            for mapping in csv.DictReader(handle):
+                if mapping['external_join_ready'].lower() != 'true':
+                    continue
+                station = mapping['proposed_station_name']
+                if not station or station in approved_station_territories:
+                    raise ValueError('Invalid or ambiguous approved PAGASA station mapping')
+                approved_station_territories[station] = mapping['territory']
+        seen_pagasa = set()
+        with PAGASA_MONTHLY_CLEAN.open(encoding='utf-8-sig', newline='') as handle:
+            for monthly in csv.DictReader(handle):
+                territory = approved_station_territories.get(monthly['station_name'])
+                if not territory or monthly['monthly_analysis_status'] != 'ANALYSIS_READY_RAINFALL':
+                    continue
+                identity = (territory, monthly['period'])
+                if identity in seen_pagasa:
+                    raise ValueError('Duplicate approved PAGASA territory-month; select one station per territory')
+                seen_pagasa.add(identity)
+                rows.append({'provider': 'PAGASA', 'signal': 'Rainfall', 'territory': territory,
+                             'period': monthly['period'], 'value': float(monthly['rainfall_total_mm']), 'unit': 'mm'})
+        sources.append({'provider': 'PAGASA',
+                        'status': 'Approved mapped station rainfall' if approved_station_territories else 'Cleaned station months; territory mapping pending',
+                        'file': str(PAGASA_MONTHLY_CLEAN.relative_to(ROOT)), 'checksum': sha(PAGASA_MONTHLY_CLEAN),
+                        'mapping_file': str(PAGASA_MAPPING_REVIEW.relative_to(ROOT)), 'mapping_checksum': sha(PAGASA_MAPPING_REVIEW),
+                        'coverage': report['pagasa']['observed_coverage'], 'requested_coverage': report['pagasa']['requested_coverage']})
+    else:
+        sources.append({'provider': 'PAGASA', 'status': 'Run prepare_external_sources before weather regression',
+                        'file': str(PAGASA_MONTHLY_CLEAN.relative_to(ROOT))})
     return rows, sources
 
 
@@ -116,7 +129,7 @@ def build_regression(sales, signals, sources, sector='Unknown', territory='Quezo
     target = defaultdict(float)
     for r in population:
         p = month_number(r['period'])
-        if p <= end_closed and (not product or r['product'] == product):
+        if month_number('2017-01') <= p <= min(end_closed, month_number('2025-12')) and (not product or r['product'] == product):
             target[p] += r[metric]
     external = [('DOH', disease, 'Cases per 100', lag)] if mode != 'rainfall' else []
     if mode != 'disease':

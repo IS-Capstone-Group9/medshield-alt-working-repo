@@ -37,7 +37,7 @@ def build_heatmap(rows, mappings, metadata, source_name):
             continue
         try:
             delivered = date.fromisoformat(str(row.get("date_delivered"))[:10])
-            if row.get("in_analysis_range") is False:
+            if row.get("in_analysis_range") is False or not 2017 <= delivered.year <= 2025:
                 raise ValueError()
             quantity = float(row.get("quantity"))
             if not math.isfinite(quantity) or quantity < 0:

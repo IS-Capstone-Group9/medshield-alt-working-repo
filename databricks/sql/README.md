@@ -6,5 +6,11 @@ Run these files in Databricks SQL Editor when you want to inspect or expose the 
 2. `01_quality_checks.sql` profiles clean and quarantined records.
 3. `02_compatibility_views.sql` exposes the current application field names without changing the governed base table.
 4. `03_gold_checks.sql` performs basic Gold reconciliation queries.
+5. `04_sales_restart_dashboard.sql` provides the datasets for the Databricks
+   `MedShield Sales Analytics — Candidate` dashboard. Create one dashboard
+   dataset per numbered query and follow
+   `../docs/SALES_RESTART_DASHBOARD_GUIDE.md` for visual configuration.
+6. `05_sales_restart_system_bridge.sql` creates the exact yearly compatibility
+   view read by the MedShield backend and validates the rebuilt 2017-2025 source.
 
 The scripts use the default `workspace` catalog. Change the catalog consistently if your workspace uses another one.

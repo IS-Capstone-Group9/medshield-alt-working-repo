@@ -10,17 +10,17 @@ The system must not claim to be a live disease surveillance system, an official 
 
 | Data source | Available period | Use |
 |---|---|---|
-| Sales data | 2021-2025 | Demand, revenue, gross margin/profit, product and territory analysis |
-| PAGASA data | 2021-2024 | Historical weather reference and validation only |
-| DOH data | 2021-2025 | Historical disease signal and disease-adjusted scenarios |
+| Sales data | 2017-2025 | Demand, revenue, gross margin/profit, product and territory analysis |
+| PAGASA data | 2017-2024 observed; 2025 absent | Historical weather reference and validation only |
+| DOH data | 2018-2026 declared; 2026 partial | Historical disease candidates; model overlap is limited to 2018-2025 |
 | Weather API by latitude/longitude | 2021-2025 or provider-supported range | Weather proxy for target regions when official PAGASA coverage is incomplete |
 
 ## Data Rules
 
 1. Historical sales data is the source of truth for demand.
-2. PAGASA 2021-2024 must not be stretched or imputed as official 2025 PAGASA data.
+2. PAGASA 2017-2024 must not be stretched or imputed as official 2025 PAGASA data.
 3. Weather API data must be labeled as provider-derived weather proxy, not official PAGASA observations.
-4. DOH 2021-2025 can support historical disease intensity analysis, but not live disease alerts after 2025.
+4. DOH 2018-2025 can support historical disease analysis after mapping approval. Partial 2026 records are contextual and must not be presented as a complete year or live alerts.
 5. Contract-name product rows such as `PAGBILAO # ...` and `QMC # ...` must be separated from real product names or backward-allocated as documented estimates.
 6. `net_income` from the workbook must be labeled as gross margin/profit unless operating expense data is provided.
 7. EOQ, ROP, safety stock, allocation, and dead-stock outputs must remain scenarios or formula demonstrations unless inventory, lead time, and cost-policy data are available.
@@ -29,7 +29,7 @@ The system must not claim to be a live disease surveillance system, an official 
 
 ### FR1 - Data Upload and Cleaning
 
-The system shall ingest MedShield sales files for 2021-2025, clean field values, flag rejected rows, and preserve lineage.
+The system shall ingest MedShield sales files for 2017-2025, clean field values, flag rejected rows, and preserve lineage.
 
 Acceptance criteria:
 
@@ -98,7 +98,7 @@ The system shall use historical weather data to support weather-context analysis
 
 Acceptance criteria:
 
-- PAGASA 2021-2024 is treated as official historical data only for its covered period.
+- PAGASA 2017-2024 is treated as official historical data only for its covered period.
 - Weather API data by latitude/longitude is labeled as provider weather proxy.
 - Weather features are joined only to approved geographic territories.
 - Weather-adjusted models are compared against sales-only baseline.
@@ -106,14 +106,14 @@ Acceptance criteria:
 
 ### FR7 - Historical Disease Analysis
 
-The system shall use DOH 2021-2025 data to calculate historical disease signals and scenario features.
+The system shall prepare DOH 2018-2026 data as historical disease candidates; model training may use only mapped, closed periods overlapping sales through 2025.
 
 Acceptance criteria:
 
 - Disease data is mapped by period, disease, and available geography.
 - Disease Intensity Indicator is calculated using a documented formula.
 - Disease-adjusted forecasts are historical or scenario-based.
-- No post-2025 live disease alert is claimed without current DOH data.
+- Partial 2026 data is labeled by its maximum observed onset date and is not a live alert or complete-year signal.
 
 ### FR8 - Product Prioritization
 
@@ -177,9 +177,9 @@ Acceptance criteria:
 6. Build analytical marts.
 7. Run descriptive analytics.
 8. Run baseline forecast and benchmarks.
-9. Integrate historical PAGASA 2021-2024 and weather API proxy data.
+9. Prepare historical PAGASA 2017-2024 and weather API proxy data; do not invent 2025 PAGASA observations.
 10. Run weather-context or weather-adjusted forecast comparison.
-11. Integrate historical DOH 2021-2025 disease data.
+11. Prepare DOH 2018-2026 disease data, then integrate only approved 2018-2025 territory-month signals.
 12. Run disease-context or disease-adjusted scenario analysis.
 13. Build product demand-priority model or deterministic priority score.
 14. Build scenario-based prescriptive outputs.
@@ -195,8 +195,8 @@ Acceptance criteria:
 
 Revise the scope and limitations to state:
 
-- PAGASA data is historical and covers 2021-2024 only.
-- DOH data is historical and covers 2021-2025.
+- Supplied PAGASA data is historical and covers 2017-2024; 2025 is absent.
+- DOH data declares 2018-2026 coverage; 2026 is partial through the latest observed onset date.
 - Weather API data is used as a provider-derived proxy by target-region coordinates.
 - The system supports decision-making; it does not automate procurement or issue official alerts.
 
@@ -215,8 +215,8 @@ Revise the literature and technology framing to emphasize:
 Revise the methodology to state:
 
 - Sales-only baseline is mandatory.
-- PAGASA models are evaluated only within 2021-2024 or used as historical reference.
-- DOH can support 2021-2025 historical disease features.
+- PAGASA models are evaluated only within 2017-2024 mapped station coverage or used as historical reference.
+- DOH can support mapped 2018-2025 historical disease features; partial 2026 stays outside the sales-training window.
 - Weather API data must be separately labeled from PAGASA.
 - EOQ/ROP/allocation are scenario models unless inventory and procurement data are provided.
 - Contract-name rows are handled through documented backward allocation.

@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import { Eye, EyeOff } from 'lucide-react'
 import { useLoginForm } from '@/hooks/use-login-form'
 import './login.css'
 
@@ -88,16 +89,31 @@ export default function Login({ onLoginSuccess, initialMessage }: LoginProps) {
             {/* Password Input with Floating Label */}
             <div className="login-input-card">
               <label htmlFor="password" className="login-card-label">Password</label>
-              <input
-                id="password"
-                type={f.showPassword ? 'text' : 'password'}
-                className="login-card-field"
-                value={f.password}
-                onChange={(e) => f.setPassword(e.target.value)}
-                placeholder="••••••••••••"
-                autoComplete="current-password"
-                required
-              />
+              <div className="login-password-row">
+                <input
+                  id="password"
+                  type={f.showPassword ? 'text' : 'password'}
+                  className="login-card-field"
+                  value={f.password}
+                  onChange={(e) => f.setPassword(e.target.value)}
+                  placeholder="••••••••••••"
+                  autoComplete="current-password"
+                  required
+                />
+                <button
+                  type="button"
+                  className="login-password-toggle"
+                  onClick={() => f.setShowPassword(!f.showPassword)}
+                  aria-label={f.showPassword ? 'Hide password' : 'Show password'}
+                  title={f.showPassword ? 'Hide password' : 'Show password'}
+                >
+                  {f.showPassword ? (
+                    <EyeOff size={18} aria-hidden="true" />
+                  ) : (
+                    <Eye size={18} aria-hidden="true" />
+                  )}
+                </button>
+              </div>
             </div>
 
             {/* Options Row: Remember me & Forgot Password */}

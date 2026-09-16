@@ -14,6 +14,19 @@ def transaction(revenue, profit, cost, year=2025, quality="valid"):
 
 
 class MetricDefinitionsTests(unittest.TestCase):
+    def test_annual_grouping_uses_delivery_year_not_stale_year_field(self):
+        rows=[transaction(100,20,80,2017),transaction(200,40,160,2025),transaction(999,0,999,2047)]
+        rows[0]['year']=2025
+        snapshot=build_dashboard_snapshot(rows)
+        self.assertEqual([(r['year'],r['revenue']) for r in snapshot['year_summary']],[('2017',100),('2025',200)])
+        self.assertEqual(snapshot['totals']['total_revenue'],300)
+
+    def test_legacy_snapshot_outliers_do_not_enter_actual_series(self):
+        result=normalize_snapshot({'monthly':[{'period':p,'revenue':1,'income':1} for p in ['2047-11','2025-12','2000-01','2017-01']],
+                                   'year_summary':[{'year':y,'revenue':1,'income':1} for y in ['2000','2017','2025','2047']]})
+        self.assertEqual([r['period'] for r in result['monthly']],['2017-01','2025-12'])
+        self.assertEqual([r['year'] for r in result['year_summary']],['2017','2025'])
+
     def test_growth_exports_nominal_change_and_uses_prior_calendar_year(self):
         rows = [transaction(500, 100, 400, 2023), transaction(1000, 200, 800, 2024), transaction(1500, 300, 1200, 2025)]
         growth = yoy_growth(rows)

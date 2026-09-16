@@ -1,0 +1,49 @@
+{
+  "mapping_sha256": "268785d6ffddab4254c32abb79a56cba3ccf005b6c955d6013dcd7a316826f7f",
+  "source_manifest": [
+    {
+      "file": "medshield_data_2017.csv",
+      "sha256": "9756376c5559a2b4539c3311a0416ec17eab7d3e36a9043920d0a70e1e16db67"
+    },
+    {
+      "file": "medshield_data_2018.csv",
+      "sha256": "d7a1b8ad107e176e642aab540e464eab05b19dc116131b712c33e29fb355b200"
+    },
+    {
+      "file": "medshield_data_2019.csv",
+      "sha256": "3afc789aa0ad798da14cbe87153049eb7f7d7ca15df944a8e27b25f97d419fc8"
+    },
+    {
+      "file": "medshield_data_2020.csv",
+      "sha256": "98c83e6a440298e145b8bbfc2463791f393f0946f26a11c6b0472752d30ce733"
+    },
+    {
+      "file": "medshield_data_2021.csv",
+      "sha256": "d40850359d18a9251425a843f2507ad289da9393e4b6bc1c0ecfee35c30366d3"
+    },
+    {
+      "file": "medshield_data_2022.csv",
+      "sha256": "1f28cacdcdc537065828cf809f8d0ae4bb55891a1317fe6c306d2b4b5b2caf74"
+    },
+    {
+      "file": "medshield_data_2023.csv",
+      "sha256": "83e4509c84e0c2b6c379071593e589b5207842fd469430fe317e5e9a70368cea"
+    },
+    {
+      "file": "medshield_data_2024.csv",
+      "sha256": "c38245983b918c0e44eecfccb3b63be00e8de9c848048dd007d1c086c714831f"
+    },
+    {
+      "file": "medshield_data_2025.csv",
+      "sha256": "2738afaf114d9480928e37b6c2b53dc0cac9ba2f10dc74a98b2549e3345d235c"
+    }
+  ],
+  "observed_labels": 32,
+  "master_labels": 34,
+  "unmatched_labels": [],
+  "retained_records": 37178,
+  "approved_territory_records": 14008,
+  "pending_or_nongeographic_records": 23170,
+  "external_join_ready_records": 0,
+  "limitations": "Existing approvals are inherited, not revalidated. New mappings are proposals. No weather station/DOH join was validated."
+}

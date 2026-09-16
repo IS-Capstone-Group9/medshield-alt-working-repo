@@ -188,6 +188,11 @@ export async function loadSnapshot(): Promise<DashboardSnapshot> {
   if (!snapshotLoad) {
     snapshotLoad = loadFreshSnapshot()
       .then((data) => {
+        // Legacy bundled snapshots can retain quarantined delivery-date outliers.
+        // Apply the actual-sales boundary to both service and fallback responses.
+        data.monthly = data.monthly.filter(row => /^(201[7-9]|202[0-5])-(0[1-9]|1[0-2])$/.test(String(row.period)))
+          .sort((a, b) => String(a.period).localeCompare(String(b.period)))
+        data.year_summary = data.year_summary.filter(row => /^(201[7-9]|202[0-5])$/.test(String(row.year)))
         snapshotCache = {
           data,
           expiresAt: Date.now() + SNAPSHOT_CACHE_TTL_MS,

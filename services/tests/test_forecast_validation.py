@@ -69,6 +69,15 @@ class ForecastValidationTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.build(metric='quantity')
 
+    def test_closed_2026_sales_cannot_extend_the_historical_origin(self):
+        payload=fixture_payload()
+        payload['rows'].extend([{**payload['rows'][-1], 'period': p} for p in ['2016-12','2026-01']])
+        result=self.build(payload)
+        self.assertEqual(result['origin'],'2025-12')
+        self.assertEqual(result['source']['excluded_outside_history'],2)
+        self.assertTrue(all('2017-01' <= r['period'] <= '2025-12' for r in result['actuals']))
+        self.assertEqual(result['views']['3']['models']['last_value']['forecast'][0]['period'],'2026-01')
+
     def test_current_month_future_months_and_sparse_history(self):
         payload = fixture_payload()
         payload['rows'] = payload['rows'][-2:]

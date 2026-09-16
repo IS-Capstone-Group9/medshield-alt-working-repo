@@ -1,1 +1,8 @@
 station_file,territory,mapping_status,trace_policy,review_notes
+Ambulong Daily Data.csv,Batangas,needs_review,lower_bound_zero,Station location and representativeness require owner verification
+Daet Daily Data.csv,Camarines Norte,needs_review,lower_bound_zero,Same-province station candidate; requires owner verification
+,Camarines Sur,needs_review,lower_bound_zero,No same-province station identified in supplied files
+Sangley Point Daily Data.csv,Cavite,needs_review,lower_bound_zero,Same-province station candidate; requires owner verification
+,Laguna,needs_review,lower_bound_zero,No same-province station identified in supplied files
+,Marinduque,needs_review,lower_bound_zero,No same-province station identified in supplied files
+Tayabas Daily Data.csv,Quezon,needs_review,lower_bound_zero,Alabat is an alternative Quezon station; selection policy requires approval

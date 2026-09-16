@@ -31,7 +31,7 @@ export const SALES_SECTORS_MARKUP = String.raw`
 export const SALES_SECTORS_SCRIPT = String.raw`
 let salesSectorsData = null;
 function setSalesSectorsData(data, error) {
- salesSectorsData = data && Array.isArray(data.rows) && data.source ? data : null;
+ salesSectorsData = data && Array.isArray(data.rows) && data.source ? {...data,rows:data.rows.filter(r=>historicalPeriod(r.period))} : null;
  renderSalesSectors(error);
 }
 function renderSalesSectors(error) {
