@@ -12,5 +12,8 @@ Run these files in Databricks SQL Editor when you want to inspect or expose the 
    `../docs/SALES_RESTART_DASHBOARD_GUIDE.md` for visual configuration.
 6. `05_sales_restart_system_bridge.sql` creates the exact yearly compatibility
    view read by the MedShield backend and validates the rebuilt 2017-2025 source.
+7. `06_external_restart_system_bridge.sql` exposes candidate-only DOH and PAGASA
+   context views for the system without zero-filling absent observations or
+   enabling any external signal for forecasting.
 
 The scripts use the default `workspace` catalog. Change the catalog consistently if your workspace uses another one.

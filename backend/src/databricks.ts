@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto'
 
 const YEARLY_DASHBOARD_VIEW = 'vw_dashboard_yearly_sales_candidate'
+const EXTERNAL_SIGNALS_VIEW = 'vw_dss_external_signals_candidate'
 const EXPECTED_YEARS = Object.freeze([2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025])
 const CANDIDATE_FINANCIAL_STATUS = 'CANDIDATE_PENDING_FINANCE_APPROVAL'
 
@@ -63,6 +64,8 @@ type StatementState =
   | 'CLOSED'
 
 interface StatementResponse {
+  error_code?: string
+  message?: string
   statement_id?: string
   status?: {
     state?: StatementState
@@ -84,6 +87,7 @@ interface StatementResponse {
   }
   result?: {
     data_array?: Array<Array<string | null>>
+    next_chunk_internal_link?: string
   }
 }
 
@@ -114,6 +118,33 @@ export interface DatabricksYearlyCandidateExtract {
   period: DatabricksConnectionStatus['period']
   source_transaction_count: number
   source_checksum: string
+  checked_at: string
+}
+
+export interface DatabricksExternalConnectionStatus {
+  connected: true
+  source: {
+    catalog: string
+    schema: string
+    view: string
+  }
+  period: {
+    minimum_year: number
+    maximum_year: number
+  }
+  totals: {
+    rows: number
+    rows_with_value: number
+    territories: number
+    join_ready_rows: number
+    forecast_eligible_rows: number
+  }
+  families: Array<{
+    signal_family: string
+    rows: number
+    rows_with_value: number
+  }>
+  candidate_only: true
   checked_at: string
 }
 
@@ -224,7 +255,10 @@ async function databricksFetch(
     })
     const body = (await response.json().catch(() => ({}))) as StatementResponse
     if (!response.ok) {
-      throw new Error(`Databricks request returned HTTP ${response.status}`)
+      const detail = [body.error_code, body.message].filter(Boolean).join(': ')
+      throw new Error(
+        `Databricks request returned HTTP ${response.status}${detail ? ` (${detail})` : ''}`,
+      )
     }
     return body
   } finally {
@@ -298,7 +332,19 @@ async function executeInlineStatement(statement: string): Promise<InlineStatemen
     throw new Error('Databricks did not return a result schema')
   }
 
-  const data = response.result?.data_array ?? []
+  const data = [...(response.result?.data_array ?? [])]
+  let nextChunkLink = response.result?.next_chunk_internal_link
+  while (nextChunkLink) {
+    const chunkUrl = new URL(nextChunkLink, config.host).toString()
+    const chunk = await databricksFetch(chunkUrl, config.token, { method: 'GET' }, 15_000)
+    data.push(...(chunk.result?.data_array ?? []))
+    nextChunkLink = chunk.result?.next_chunk_internal_link
+  }
+  if (data.length !== (response.manifest?.total_row_count ?? data.length)) {
+    throw new Error(
+      `Databricks returned ${data.length} rows but the result manifest declared ${response.manifest?.total_row_count}`,
+    )
+  }
   return {
     columns: manifestColumns.map((column) => column.name),
     rows: data.map((values) =>
@@ -369,6 +415,135 @@ export async function getDatabricksConnectionStatus(): Promise<DatabricksConnect
       year_count: yearCount,
     },
     row_count: rowCount,
+    checked_at: new Date().toISOString(),
+  }
+}
+
+export async function getDatabricksExternalConnectionStatus(): Promise<DatabricksExternalConnectionStatus> {
+  const config = yearlyCandidateConfiguration()
+  const qualifiedView = `\`${config.catalog}\`.\`${config.schema}\`.\`${EXTERNAL_SIGNALS_VIEW}\``
+  const result = await executeInlineStatement(`
+    SELECT
+      'DISEASE' AS signal_family,
+      COUNT(*) AS row_count,
+      SUM(CASE WHEN signal_value IS NOT NULL THEN 1 ELSE 0 END) AS rows_with_value,
+      COUNT(DISTINCT territory) AS territory_count,
+      SUM(CASE WHEN is_external_join_ready THEN 1 ELSE 0 END) AS join_ready_rows,
+      SUM(CASE WHEN is_forecast_eligible THEN 1 ELSE 0 END) AS forecast_eligible_rows,
+      MIN(YEAR(period_start)) AS minimum_year,
+      MAX(YEAR(period_start)) AS maximum_year
+    FROM ${qualifiedView}
+    WHERE signal_family = 'DISEASE'
+    UNION ALL
+    SELECT
+      'WEATHER' AS signal_family,
+      COUNT(*) AS row_count,
+      SUM(CASE WHEN signal_value IS NOT NULL THEN 1 ELSE 0 END) AS rows_with_value,
+      COUNT(DISTINCT territory) AS territory_count,
+      SUM(CASE WHEN is_external_join_ready THEN 1 ELSE 0 END) AS join_ready_rows,
+      SUM(CASE WHEN is_forecast_eligible THEN 1 ELSE 0 END) AS forecast_eligible_rows,
+      MIN(YEAR(period_start)) AS minimum_year,
+      MAX(YEAR(period_start)) AS maximum_year
+    FROM ${qualifiedView}
+    WHERE signal_family = 'WEATHER'
+  `)
+
+  if (result.rows.length !== 2) {
+    const observed = result.rows
+      .map((row) => `${row.signal_family ?? 'NULL'}:${row.row_count ?? 'NULL'}`)
+      .join(', ')
+    throw new Error(
+      `Expected two external signal families but received ${result.rows.length} (${observed || 'no rows'})`,
+    )
+  }
+
+  const families = result.rows.map((row) => ({
+    signal_family: row.signal_family ?? '',
+    rows: Number(row.row_count),
+    rows_with_value: Number(row.rows_with_value),
+    territories: Number(row.territory_count),
+    join_ready_rows: Number(row.join_ready_rows),
+    forecast_eligible_rows: Number(row.forecast_eligible_rows),
+    minimum_year: Number(row.minimum_year),
+    maximum_year: Number(row.maximum_year),
+  }))
+  const numericValues = families.flatMap((family) => [
+    family.rows,
+    family.rows_with_value,
+    family.territories,
+    family.join_ready_rows,
+    family.forecast_eligible_rows,
+    family.minimum_year,
+    family.maximum_year,
+  ])
+  if (numericValues.some((value) => !Number.isFinite(value))) {
+    throw new Error('Databricks external signal status returned invalid numeric values')
+  }
+
+  const disease = families.find((family) => family.signal_family === 'DISEASE')
+  const weather = families.find((family) => family.signal_family === 'WEATHER')
+  if (
+    !disease ||
+    !weather ||
+    disease.rows !== 1787 ||
+    disease.rows_with_value !== 1787 ||
+    weather.rows !== 384 ||
+    weather.rows_with_value !== 383
+  ) {
+    throw new Error(
+      `Databricks external candidate counts do not match the validated bridge contract: ` +
+      `DISEASE=${disease?.rows ?? 'missing'}/${disease?.rows_with_value ?? 'missing'}, ` +
+      `WEATHER=${weather?.rows ?? 'missing'}/${weather?.rows_with_value ?? 'missing'}`,
+    )
+  }
+
+  const rows = families.reduce((sum, family) => sum + family.rows, 0)
+  const rowsWithValue = families.reduce((sum, family) => sum + family.rows_with_value, 0)
+  const joinReadyRows = families.reduce((sum, family) => sum + family.join_ready_rows, 0)
+  const forecastEligibleRows = families.reduce(
+    (sum, family) => sum + family.forecast_eligible_rows,
+    0,
+  )
+  const territoryCount = Math.max(...families.map((family) => family.territories))
+  const minimumYear = Math.min(...families.map((family) => family.minimum_year))
+  const maximumYear = Math.max(...families.map((family) => family.maximum_year))
+
+  if (
+    rows !== 2171 ||
+    rowsWithValue !== 2170 ||
+    territoryCount !== 7 ||
+    joinReadyRows !== 0 ||
+    forecastEligibleRows !== 0 ||
+    minimumYear !== 2017 ||
+    maximumYear !== 2025
+  ) {
+    throw new Error('Databricks external bridge failed its candidate-only reconciliation')
+  }
+
+  return {
+    connected: true,
+    source: {
+      catalog: config.catalog,
+      schema: config.schema,
+      view: EXTERNAL_SIGNALS_VIEW,
+    },
+    period: {
+      minimum_year: minimumYear,
+      maximum_year: maximumYear,
+    },
+    totals: {
+      rows,
+      rows_with_value: rowsWithValue,
+      territories: territoryCount,
+      join_ready_rows: joinReadyRows,
+      forecast_eligible_rows: forecastEligibleRows,
+    },
+    families: families.map((family) => ({
+      signal_family: family.signal_family,
+      rows: family.rows,
+      rows_with_value: family.rows_with_value,
+    })),
+    candidate_only: true,
     checked_at: new Date().toISOString(),
   }
 }

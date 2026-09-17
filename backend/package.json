@@ -8,7 +8,8 @@
     "build": "tsc -p tsconfig.json",
     "start": "node dist/server.js",
     "auth:migrate": "tsx scripts/migrate-auth-accounts.ts",
-    "databricks:extract:sales": "tsx scripts/extract-databricks-sales.ts"
+    "databricks:extract:sales": "tsx scripts/extract-databricks-sales.ts",
+    "databricks:check:external": "tsx scripts/check-databricks-external.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",

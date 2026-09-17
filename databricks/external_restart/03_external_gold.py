@@ -124,19 +124,40 @@ mapping_proposals = spark.createDataFrame(
     ],
     "territory string, territory_id string, proposed_station_name string, mapping_status string, review_notes string",
 )
-station_coverage = pagasa_monthly.groupBy("station_name").agg(
-    F.min("year").alias("observed_start_year"),
-    F.max("year").alias("observed_end_year"),
-    F.sum((F.col("monthly_analysis_status") == "ANALYSIS_READY_RAINFALL").cast("int")).alias("analysis_ready_rainfall_months"),
+station_coverage = (
+    pagasa_monthly
+    .withColumn(
+        "station_join_key",
+        F.upper(
+            F.trim(
+                F.regexp_replace(
+                    F.regexp_extract(F.col("station_name"), r"([^/]+)$", 1),
+                    r" Daily Data\.csv$",
+                    "",
+                )
+            )
+        ),
+    )
+    .groupBy("station_join_key")
+    .agg(
+        F.first("station_name").alias("matched_station_name"),
+        F.min("year").alias("observed_start_year"),
+        F.max("year").alias("observed_end_year"),
+        F.sum((F.col("monthly_analysis_status") == "ANALYSIS_READY_RAINFALL").cast("int")).alias("analysis_ready_rainfall_months"),
+    )
+)
+mapping_proposals = mapping_proposals.withColumn(
+    "station_join_key", F.upper(F.trim(F.col("proposed_station_name")))
 )
 mapping_review = (
-    mapping_proposals.join(station_coverage, mapping_proposals.proposed_station_name == station_coverage.station_name, "left")
+    mapping_proposals.join(station_coverage, "station_join_key", "left")
     .select(
         "territory", "territory_id", "proposed_station_name",
         F.when(F.col("proposed_station_name").isNotNull(), F.concat(F.col("proposed_station_name"), F.lit(" Daily Data.csv")))
         .otherwise(F.lit(None).cast("string")).alias("proposed_station_file_pattern"),
         "mapping_status", F.lit("lower_bound_zero").alias("trace_policy"),
-        "observed_start_year", "observed_end_year", "analysis_ready_rainfall_months",
+        "observed_start_year", "observed_end_year",
+        F.coalesce(F.col("analysis_ready_rainfall_months"), F.lit(0)).alias("analysis_ready_rainfall_months"),
         F.lit(False).alias("external_join_ready"), "review_notes",
         F.lit("pending").alias("external_mapping_status"), F.lit(dataset_id).alias("external_dataset_id"),
         F.lit(POLICY_VERSION).alias("policy_version"),
@@ -144,6 +165,19 @@ mapping_review = (
 )
 assert mapping_review.count() == 7
 assert mapping_review.filter("external_join_ready = true").count() == 0
+coverage_by_territory = {
+    row["territory"]: int(row["analysis_ready_rainfall_months"] or 0)
+    for row in mapping_review.select("territory", "analysis_ready_rainfall_months").collect()
+}
+assert coverage_by_territory == {
+    "Batangas": 95,
+    "Camarines Norte": 96,
+    "Camarines Sur": 0,
+    "Cavite": 96,
+    "Laguna": 0,
+    "Marinduque": 0,
+    "Quezon": 96,
+}
 mapping_review.write.format("delta").mode("overwrite").option("overwriteSchema", "true").saveAsTable(
     f"{CATALOG}.medshield_audit.external_restart_pagasa_mapping_review_candidate"
 )
@@ -170,4 +204,3 @@ publication.write.format("delta").mode("overwrite").option("overwriteSchema", "t
 display(publication.orderBy("table_name"))
 print("EXTERNAL GOLD: PASS_CANDIDATE_ONLY")
 print("DOH 2026 is partial; PAGASA 2025 is absent; geography and medical-product gates remain pending.")
-

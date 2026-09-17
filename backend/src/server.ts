@@ -8,7 +8,11 @@ import express, { NextFunction, Request, Response } from 'express'
 import rateLimit from 'express-rate-limit'
 
 import { verifyLocalLogin } from './localAuth'
-import { databricksConfigured, getDatabricksConnectionStatus } from './databricks'
+import {
+  databricksConfigured,
+  getDatabricksConnectionStatus,
+  getDatabricksExternalConnectionStatus,
+} from './databricks'
 import {
   DatabricksYearlySyncInProgressError,
   DatabricksYearlySyncValidationError,
@@ -415,6 +419,35 @@ app.get(
         connected: false,
         error: 'MedShield could not reach the approved Databricks Gold view.',
         code: 'DATABRICKS_CONNECTION_FAILED',
+      })
+    }
+  },
+)
+
+app.get(
+  '/api/integrations/databricks/external/status',
+  requireAuth,
+  requireRole(['admin']),
+  async (_req: AuthenticatedRequest, res: Response) => {
+    if (!databricksConfigured()) {
+      return res.status(503).json({
+        connected: false,
+        error: 'Databricks is not configured on the MedShield backend.',
+        code: 'DATABRICKS_NOT_CONFIGURED',
+      })
+    }
+
+    try {
+      return res.json(await getDatabricksExternalConnectionStatus())
+    } catch (error) {
+      console.error(
+        'Databricks external status check failed:',
+        error instanceof Error ? error.message : 'Unknown error',
+      )
+      return res.status(502).json({
+        connected: false,
+        error: 'MedShield could not validate the Databricks DOH/PAGASA candidate view.',
+        code: 'DATABRICKS_EXTERNAL_CONNECTION_FAILED',
       })
     }
   },
