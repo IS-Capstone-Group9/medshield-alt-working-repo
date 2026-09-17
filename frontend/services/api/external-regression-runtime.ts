@@ -24,7 +24,7 @@ export const EXTERNAL_REGRESSION_MARKUP = String.raw`
  <label>External model<select id="regMode" onchange="changeRegressionScope('mode')"><option value="disease">Disease only</option><option value="rainfall">Rainfall only</option><option value="combined">Disease + rainfall</option></select></label>
  <label>Disease<select id="regDisease" onchange="changeRegressionScope('disease')"><option>Dengue</option><option>Leptospirosis</option><option>Cholera</option><option>Typhoid Fever</option></select></label>
  <label>Disease lag (months)<select id="regLag" onchange="changeRegressionScope('lag')"><option>1</option><option>2</option><option>3</option><option>6</option><option>8</option><option>12</option></select></label>
- <label>Weather source<select id="regProvider" onchange="changeRegressionScope('provider')"><option>NASA POWER</option><option>PAGASA</option></select></label>
+ <label>Weather source<select id="regProvider" onchange="changeRegressionScope('provider')"><option value="PAGASA">PAGASA via Databricks</option></select></label>
  <label>Rainfall lag (months)<select id="regRainLag" onchange="changeRegressionScope('rainfall_lag')"><option>1</option><option>2</option><option>3</option><option>6</option><option>8</option><option>12</option></select></label>
  </div>
  <p id="regStatus" role="status">Loading source readiness…</p><p id="regScope"></p><p id="regCoverage"></p>
@@ -41,7 +41,7 @@ export const EXTERNAL_REGRESSION_MARKUP = String.raw`
  <p>Sales-only regression: intercept + time trend + annual sine/cosine seasonality + previous-month sales. The augmented regression adds the selected earlier disease count (per 100 cases), rainfall (per 100 mm), or both. A lag of 8 means March's signal is paired with November's sales.</p>
  <p>At least 36 matched pre-holdout months and 6 observations in the last 12 calendar months are required. Both models use identical training and evaluation observations. Each held-out month is predicted using an expanding fit ending before that month; this is one-month rolling evaluation, not a fixed 12-month forecast. No missing observations are imputed as zero.</p>
  <p>The coefficient chart uses the initial training fit before the holdout. It shows the change in the target associated with 100 additional cases or 100 mm rainfall, holding the other model inputs fixed. It has no causal interpretation or significance claim. Raw linear predictions, including negatives, are retained for evaluation.</p>
- <p>DOH onset counts are final retrospective data; reporting/revision timestamps are unavailable. Any improvement is therefore retrospective, not verified real-time forecast skill. Choosing lags after viewing holdout results makes the result exploratory; no lag search or automatic model promotion is performed. Weather proxies are never relabeled as PAGASA.</p>
+ <p>DOH onset counts are final retrospective data; reporting/revision timestamps are unavailable. Any improvement is therefore retrospective, not verified real-time forecast skill. Choosing lags after viewing holdout results makes the result exploratory; no lag search or automatic model promotion is performed. PAGASA observations use Databricks-published station metadata and remain unavailable for regression until territory mappings are approved.</p>
  <p id="regSourceHash"></p>
  </details>
 </div>`

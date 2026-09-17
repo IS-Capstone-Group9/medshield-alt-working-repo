@@ -6,12 +6,10 @@ Capstone workspace for the MedShield Pharma Corp. business analytics system.
 
 - `frontend/` - Next.js + TypeScript dashboard UI
 - `backend/` - TypeScript API gateway for the dashboard
-- `services/analytics_service/` - analytics microservice
-- `services/product_service/` - product microservice
-- `services/shared_snapshot.py` - shared Supabase warehouse reader for dashboard views
+- `services/` - legacy/offline analytics utilities; they are not dashboard runtime sources
 - `supabase/` - SQL migration and seed files for the Supabase project
 - `data/medshield/raw/` - canonical raw sales and external source files
-- `data/medshield/processed/` - local processed fallback datasets
+- `data/medshield/processed/` - offline preparation and QA artifacts; never a dashboard fallback
 - `outputs/` - generated QA reports, model outputs, and evidence exports
 - `docs/` - setup and capstone documentation
 - `docs/drafts/` - generated draft paper files and Word deliverables

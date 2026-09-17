@@ -1,141 +1,82 @@
 # API Gateway
 
-The canonical API gateway is implemented in TypeScript under `backend/`.
-During local development the gateway probes the Python `/health` endpoints and starts the analytics and product Flask services when they are not already running.
+The canonical gateway is the TypeScript service in `backend/`. All dashboard routes require `Authorization: Bearer <token>` except `/api/health`.
 
-## Responsibilities
+## Source contract
 
-- Proxy dashboard data requests to the Python analytics services.
-- Handle auth requests and fallback behavior.
-- Return consistent JSON responses to the frontend.
+Dashboard responses come from Databricks Unity Catalog. The gateway does not start the legacy Python analytics services and does not read a checked-in sales snapshot. A failed Databricks query returns `502` or `503` with a Databricks error code; it never returns mock data.
 
-## Auth Contract
+The active objects are:
+
+- `workspace.medshield_gold.sales_restart_fact_candidate`
+- `workspace.medshield_gold.vw_dashboard_monthly_sales_candidate`
+- `workspace.medshield_gold.vw_dashboard_yearly_sales_candidate`
+- `workspace.medshield_gold.vw_dashboard_area_yearly_candidate`
+- `workspace.medshield_gold.vw_dashboard_product_yearly_candidate`
+- `workspace.medshield_gold.vw_dss_external_signals_candidate`
+
+## Authentication
 
 - `POST /api/auth/login`
-  - Body: `{ "username": "...", "password": "...", "remember": true | false }`
-  - In Supabase mode, `username` accepts either the provisioned username or email address, and the returned access token is the Supabase Auth access token.
-  - Returns: `{ "access_token": "...", "token_type": "Bearer", "expires_at": "...", "user": { ... } }`
 - `GET /api/auth/me`
-  - Requires `Authorization: Bearer <token>`.
-  - Returns the current gateway session user.
 - `POST /api/auth/logout`
-  - Requires `Authorization: Bearer <token>`.
-  - Revokes the gateway session token.
+- `POST /api/auth/complete-password-reset`
 
-Account provisioning is administrator-managed; there is no public signup endpoint.
-In Supabase mode, the frontend signs in through Supabase Auth and sends the Supabase access token as a bearer token for dashboard and model endpoints. In local fallback mode, the gateway issues its own development bearer token.
+Supabase Auth remains the production identity provider. Databricks credentials stay on the server and are never returned by an API.
 
-## Dashboard Contract
+## Core dashboard
 
+- `GET /api/dashboard_status`
 - `GET /api/summary`
-- `GET /api/monthly`
+- `GET /api/monthly?year=2025`
 - `GET /api/by_area`
-- `GET /api/products`
+- `GET /api/products?limit=15`
 - `GET /api/year_summary`
 - `GET /api/seasonality`
+- `GET /api/forecasts`
+- `GET /api/external_signals`
+- `GET /api/inventory_recommendations`
+- `GET /api/regional_priorities`
+- `GET /api/area_clusters`
+- `GET /api/product_priorities`
+- `GET /api/allocation_recommendations`
+- `GET /api/product_region_matches`
+- `GET /api/decision_alerts`
+- `GET /api/model_evaluation`
 
-All dashboard contract endpoints require `Authorization: Bearer <token>` except `GET /api/health`.
+Unpublished output arrays are empty. The gateway does not synthesize model results.
 
-## Databricks Integration Contract
+## Detailed sales and decision support
+
+- `GET /api/sales/status`
+- `GET /api/sales/transactions?year=2025&page=1&page_size=25&quality_status=all&search=`
+- `GET /api/sales/summary?year=2025&quality_status=all&search=`
+- `GET /api/sales/heatmap`
+- `GET /api/sales/sectors`
+- `GET /api/sales/forecast-validation?sector=Unknown&product=&metric=revenue`
+- `GET /api/sales/external-regression?...`
+- `GET /api/sales/planning-shortlist?sector=Unknown&territory=Quezon`
+- `POST /api/sales/planning-solve`
+
+Buyer ownership is not published, so the sector contract uses `Unknown`. External regression returns `status: "blocked"` until approved DOH/PAGASA territory joins exist. Forecast validation publishes transparent seasonal-naive and last-observation baselines derived from Databricks history; it does not label either model as approved.
+
+`POST /api/sales/upload` returns `409 DATABRICKS_INGESTION_REQUIRED`. Files must enter through the Databricks pipeline.
+
+## External observations
+
+- `GET /api/weather/effects?year=2024&area=Quezon&grain=monthly`
+
+This route reads PAGASA observations from the external-signals Gold view. Temperature, humidity, wind, sales matches, and planning uplift remain unavailable when Databricks has not published them.
+
+`POST /api/weather/refresh` returns `409 DATABRICKS_INGESTION_REQUIRED`. PAGASA refreshes run in Databricks.
+
+## Databricks administration
 
 - `GET /api/integrations/databricks/status`
-  - Requires an authenticated MedShield administrator.
-  - Uses backend-only Databricks credentials to query the approved
-    `workspace.medshield_gold.vw_dashboard_yearly_sales_candidate` view.
-  - Returns connection status, year coverage, and row count without returning tokens,
-    warehouse identifiers, or raw SQL.
 - `POST /api/integrations/databricks/sync/yearly`
-  - Requires an authenticated MedShield administrator and is limited to five requests per 15 minutes per client.
-  - Extracts the 47-column yearly Gold contract, then requires exactly 9 unique years covering 2017–2025, source-to-target transaction-total reconciliation, 12-month calendar scaffolds, and the legacy `CANDIDATE_PENDING_FINANCE_APPROVAL` source label. The approved MedShield mapping is Net CP → revenue, Total TP → acquisition cost, and Net Income → transaction gross profit. The source label remains part of the versioned sync contract. The current rebuilt source total is 37,178 transactions through `databricks/sql/05_sales_restart_system_bridge.sql`.
-  - Calls the service-role-only Supabase RPC `public.sync_databricks_yearly_sales_candidate` to atomically replace the protected shadow table `medshield_sales.databricks_yearly_sales_candidate`.
-  - Reconciles source and target row counts, years, transaction totals, and canonical checksums. A failed database validation rolls back the replacement and preserves the previous candidate cache.
-  - Never changes `fact_year_summary`, `/api/year_summary`, or any published dashboard fact.
-  - Returns:
 
-```json
-{
-  "ok": true,
-  "status": "candidate_cache_synchronized",
-  "pipeline_run_key": 123,
-  "source": {
-    "catalog": "workspace",
-    "schema": "medshield_gold",
-    "view": "vw_dashboard_yearly_sales_candidate"
-  },
-  "extracted_rows": 9,
-  "loaded_rows": 9,
-  "period": {
-    "minimum_year": 2017,
-    "maximum_year": 2025,
-    "year_count": 9
-  },
-  "reconciliation": {
-    "source_transaction_count": 37178,
-    "loaded_transaction_count": 37178,
-    "matched": true
-  },
-  "candidate_only": true,
-  "warning": "Candidate financial measures remain pending Finance/business-owner approval and have not replaced published dashboard facts.",
-  "synced_at": "2026-09-01T00:00:00.000Z"
-}
-```
+These existing administrator routes verify the connection and maintain the candidate cache. The live dashboard reads Databricks directly and does not depend on that Supabase cache.
 
-Databricks does not authenticate MedShield users. Supabase Auth remains the identity and
-session provider, while the TypeScript gateway enforces MedShield roles before using the
-server-side Databricks integration. The browser must never receive `DATABRICKS_TOKEN`,
-`DATABRICKS_SQL_WAREHOUSE_ID`, `SUPABASE_SECRET_KEY`, or `SUPABASE_SERVICE_ROLE_KEY`.
+## Disabled legacy endpoints
 
-## DSS Model Contract
-
-These endpoints expose the paper-aligned decision-support outputs. The TypeScript gateway reads them from the Python services first, then falls back to the checked-in reference export.
-
-| Endpoint | Source View / Service | Purpose |
-|---|---|---|
-| `GET /api/forecasts` | `vw_dss_forecasts` / analytics service | Prophet baseline and external-regressor demand forecast values. |
-| `GET /api/external_signals` | `vw_dss_external_signals` / analytics service | DOH disease intensity and PAGASA/weather rainfall severity signals. |
-| `GET /api/regional_priorities` | `vw_dss_regional_priorities` / analytics service | MCDA regional ranking using revenue, growth, and outbreak risk. |
-| `GET /api/area_clusters` | `vw_dss_area_clusters` / analytics service | Heuristic Tiering-style area cluster outputs. |
-| `GET /api/decision_alerts` | `vw_dss_decision_alerts` / analytics service | Rule-based stock, disease, weather, allocation, and forecast alerts. |
-| `GET /api/model_evaluation` | `vw_dss_model_evaluation` / analytics service | Model validation metrics and benchmark status. |
-| `GET /api/inventory_recommendations` | `vw_dss_inventory_recommendations` / product service | EOQ, reorder point, safety stock, stock gap, and risk recommendations. |
-| `GET /api/product_priorities` | `vw_dss_product_priorities` / product service | ABC/Pareto and XGBoost product prioritization outputs. |
-| `GET /api/allocation_recommendations` | `vw_dss_allocation_recommendations` / product service | Linear programming stock allocation recommendations. |
-| `GET /api/product_region_matches` | `vw_dss_product_region_matches` / product service | Collaborative filtering product-region matching outputs. |
-
-## Sales Ingestion Contract
-
-All routes require a bearer token.
-
-| Endpoint | Purpose |
-|---|---|
-| `POST /api/sales/upload?file_name=Sales%20Report.xlsx` | Accept a raw `.xlsx` or `.csv` body, detect the input stage, preserve raw staging values, standardize all 13 MedShield columns, and persist the processed dataset. |
-| `GET /api/sales/status` | Return checksum, detection result, per-year counts, standardizations, and quality issues. |
-| `GET /api/sales/transactions?year=2025&page=1&page_size=25&quality_status=all&search=` | Return server-paginated canonical transaction rows. |
-| `GET /api/sales/summary?year=2025&quality_status=all&search=` | Return filtered sums, averages, row counts, unique DR numbers, and SKU count for View Sales Data computations. |
-
-The frontend exposes this contract from Data Upload and from View Sales Data -> Upload messy XLSX/CSV. Uploaded files are treated as raw until the cleaning report says otherwise.
-
-Yearly uploads replace only the uploaded year(s) in the processed history. Full workbook uploads replace all included years. This prevents a 2025 upload from deleting a previously loaded 2023 history.
-
-## Weather Contract
-
-| Endpoint | Purpose |
-|---|---|
-| `POST /api/weather/refresh` | Fetch a bounded historical range for approved territories from `nasa_power` or `open_meteo`. |
-| `GET /api/weather/effects?year=2025&area=Quezon&grain=daily` | Return same-area, same-day sales and weather validation rows. |
-| `GET /api/weather/effects?year=2025&area=Quezon&grain=monthly` | Return same-area, same-month sales and weather planning aggregates. |
-
-The frontend exposes this contract from Weather API Validation. The view shows provider provenance, loaded period, daily/monthly grain, weather rows loaded, sales-matched rows, severity proxy, alert level, and bounded planning uplift.
-
-NASA POWER and Open-Meteo output is labeled `rainfall_severity_proxy`. It is not official PAGASA RSI or a typhoon warning.
-
-## External API/Data Scope
-
-Use credible sources that match the capstone scope:
-
-- DOH disease data: prefer Department of Health FOI/Open Data exports when a stable public API is unavailable.
-- PAGASA weather data: prefer DOST-PAGASA rainfall, climate, and typhoon products.
-- NASA POWER Daily: historical meteorological backfill.
-- Open-Meteo Historical: secondary validation or fallback.
-
-Do not call external APIs directly from the frontend. External data should be extracted by backend/ETL jobs, stored in the warehouse with lineage, and exposed through the gateway.
+The previous Python/local endpoints for therapeutic categories, procurement orders, seasonal matrices, model summaries, MCDA, EOQ, and seasonal restock details return `503 DATABRICKS_VIEW_REQUIRED`. They can be re-enabled only after equivalent approved Databricks Gold views are published.

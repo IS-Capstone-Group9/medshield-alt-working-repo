@@ -55,8 +55,10 @@ function setForecastValidationData(data,error) {
  }
  forecastValidationData=data && Array.isArray(data.actuals) && data.views && data.scope && data.source ? data : null;
  if(forecastValidationData) {
-  const el=document.getElementById('forecastProduct');
-  if(el) { el.replaceChildren(); const all=new Option('All products — revenue only','');el.add(all);data.products.forEach(p=>el.add(new Option(p,p)));el.value=data.scope.product; }
+  const sector=document.getElementById('forecastSector'), metric=document.getElementById('forecastMetric'), product=document.getElementById('forecastProduct');
+  if(sector && [...sector.options].some(option=>option.value===data.scope.sector)) sector.value=data.scope.sector;
+  if(metric && [...metric.options].some(option=>option.value===data.scope.metric)) metric.value=data.scope.metric;
+  if(product) { product.replaceChildren(); const all=new Option('All products — revenue only','');product.add(all);data.products.forEach(p=>product.add(new Option(p,p)));product.value=data.scope.product; }
  }
  renderForecastValidation(error);
 }

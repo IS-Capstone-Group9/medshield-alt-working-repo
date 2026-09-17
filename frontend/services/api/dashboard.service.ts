@@ -1,4 +1,4 @@
-import { getJson, getPublicJson } from './api-client'
+import { getJson } from './api-client'
 import {
   DashboardData,
   Summary,
@@ -64,8 +64,7 @@ function assertDashboardCoreData(data: DashboardData, source: string): Dashboard
 }
 
 export async function loadDashboardData(): Promise<DashboardData> {
-  try {
-    const [
+  const [
       dataStatus,
       summary,
       monthly,
@@ -78,7 +77,7 @@ export async function loadDashboardData(): Promise<DashboardData> {
       inventoryRecommendations,
       regionalPriorities,
       modelEvaluation,
-    ] = await Promise.all([
+  ] = await Promise.all([
       getJson<DashboardDataStatus>('/api/dashboard_status'),
       getJson<Summary>('/api/summary'),
       getJson<MonthlyPoint[]>('/api/monthly'),
@@ -91,41 +90,24 @@ export async function loadDashboardData(): Promise<DashboardData> {
       getJson<InventoryRecommendation[]>('/api/inventory_recommendations'),
       getJson<RegionalPriority[]>('/api/regional_priorities'),
       getJson<ModelEvaluation[]>('/api/model_evaluation'),
-    ])
-    return assertDashboardCoreData({
-      dataStatus,
-      summary,
-      monthly,
-      byArea,
-      products,
-      yearSummary,
-      seasonality,
-      forecasts,
-      externalSignals,
-      inventoryRecommendations,
-      regionalPriorities,
-      modelEvaluation,
-    }, 'Gateway')
-  } catch (err) {
-    const data = await getPublicJson<any>('/data/sales_data.json')
-    return assertDashboardCoreData({
-      dataStatus: {
-        source: 'bundled_fallback',
-        mode: 'demo',
-        loaded_at: new Date().toISOString(),
-        message: 'Bundled demonstration snapshot; not a live operational feed.',
-      },
-      summary: data.totals as Summary,
-      monthly: data.monthly as MonthlyPoint[],
-      byArea: data.by_area as AreaPoint[],
-      products: data.top_products as ProductPoint[],
-      yearSummary: data.year_summary as YearPoint[],
-      seasonality: data.seasonality as SeasonalityPoint[],
-      forecasts: (data.forecasts ?? []) as ForecastPoint[],
-      externalSignals: (data.external_signals ?? []) as ExternalSignalPoint[],
-      inventoryRecommendations: (data.inventory_recommendations ?? []) as InventoryRecommendation[],
-      regionalPriorities: (data.regional_priorities ?? []) as RegionalPriority[],
-      modelEvaluation: (data.model_evaluation ?? []) as ModelEvaluation[],
-    }, 'Bundled fallback')
+  ])
+
+  if (dataStatus.source !== 'databricks' || dataStatus.mode !== 'live') {
+    throw new Error('The gateway did not return a live Databricks data contract')
   }
+
+  return assertDashboardCoreData({
+    dataStatus,
+    summary,
+    monthly,
+    byArea,
+    products,
+    yearSummary,
+    seasonality,
+    forecasts,
+    externalSignals,
+    inventoryRecommendations,
+    regionalPriorities,
+    modelEvaluation,
+  }, 'Databricks')
 }

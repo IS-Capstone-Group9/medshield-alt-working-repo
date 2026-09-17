@@ -60,15 +60,15 @@ export function renderWeatherEffects(root: HTMLElement, result: WeatherEffects) 
         isDaily ? item.date ?? item.period : item.period,
         item.area,
         item.provider,
-        `${item.rainfall_mm.toFixed(1)} mm`,
-        isDaily ? (item.rainy_day ? 'Yes' : 'No') : String(item.rainy_days ?? 0),
-        `${Number(temperature ?? 0).toFixed(1)} C`,
-        humidity == null ? '-' : `${Number(humidity).toFixed(1)}%`,
-        `${Number(wind ?? 0).toFixed(1)} km/h`,
-        item.rainfall_severity_proxy.toFixed(3),
+        item.rainfall_mm == null ? 'Unavailable' : `${Number(item.rainfall_mm).toFixed(1)} mm`,
+        isDaily ? (item.rainy_day == null ? 'Unavailable' : item.rainy_day ? 'Yes' : 'No') : item.rainy_days == null ? 'Unavailable' : String(item.rainy_days),
+        temperature == null ? 'Unavailable' : `${Number(temperature).toFixed(1)} C`,
+        humidity == null ? 'Unavailable' : `${Number(humidity).toFixed(1)}%`,
+        wind == null ? 'Unavailable' : `${Number(wind).toFixed(1)} km/h`,
+        item.rainfall_severity_proxy == null ? 'Unavailable' : Number(item.rainfall_severity_proxy).toFixed(3),
         item.weather_alert_level,
         formatSalesValue(item.sales_revenue, 'money'),
-        `${item.planning_demand_uplift_pct.toFixed(1)}%`,
+        item.planning_demand_uplift_pct == null ? 'Unavailable' : `${Number(item.planning_demand_uplift_pct).toFixed(1)}%`,
       ]
       const row = body.insertRow()
       for (const value of values) {

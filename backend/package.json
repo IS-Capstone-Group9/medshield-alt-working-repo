@@ -9,7 +9,10 @@
     "start": "node dist/server.js",
     "auth:migrate": "tsx scripts/migrate-auth-accounts.ts",
     "databricks:extract:sales": "tsx scripts/extract-databricks-sales.ts",
-    "databricks:check:external": "tsx scripts/check-databricks-external.ts"
+    "databricks:extract:products": "tsx scripts/extract-databricks-products.ts",
+    "databricks:extract:areas": "tsx scripts/extract-databricks-areas.ts",
+    "databricks:check:external": "tsx scripts/check-databricks-external.ts",
+    "databricks:check:dashboard": "tsx scripts/validate-databricks-dashboard.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",

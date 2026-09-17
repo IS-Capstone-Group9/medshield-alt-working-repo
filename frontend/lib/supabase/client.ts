@@ -18,10 +18,14 @@ export async function getSupabaseAccessToken(): Promise<string | null> {
     return null
   }
 
-  const supabase = createClient()
-  const {
-    data: { session },
-  } = await supabase.auth.getSession()
+  try {
+    const supabase = createClient()
+    const {
+      data: { session },
+    } = await supabase.auth.getSession()
 
-  return session?.access_token ?? null
+    return session?.access_token ?? null
+  } catch {
+    return null
+  }
 }

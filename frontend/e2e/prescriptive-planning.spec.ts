@@ -6,7 +6,9 @@ import { MEDSHIELD_MARKUP, MEDSHIELD_STYLE } from '../lib/medshieldReference'
 import { getExecutableDashboardScript } from '../services/api/dashboard-engine'
 
 function fixture() {
-  return JSON.parse(execFileSync('python',['-c',"import json; from services.tests.test_prescriptive_planning import planning_fixture; from services.analytics_service.prescriptive_planning import solve_plan; s,b=planning_fixture(); print(json.dumps(dict(shortlist=s,body=b,result=solve_plan(b,s))))"],{cwd:path.resolve('..'),encoding:'utf8'}))
+  const data=JSON.parse(execFileSync('python',['-c',"import json; from services.tests.test_prescriptive_planning import planning_fixture; from services.analytics_service.prescriptive_planning import solve_plan; s,b=planning_fixture(); print(json.dumps(dict(shortlist=s,body=b,result=solve_plan(b,s))))"],{cwd:path.resolve('..'),encoding:'utf8'}))
+  data.result.status='scenario_allocation'
+  return data
 }
 
 test('planning inputs, real solver allocation, chart and exported assumptions agree',async({page})=>{
@@ -30,7 +32,7 @@ test('planning inputs, real solver allocation, chart and exported assumptions ag
   await page.locator('#planSolve').click()
   expect(await page.evaluate(()=>(window as any).solveEvents)).toBe(1)
   await page.evaluate(d=>(window as any).setPlanningResult(d.result),data)
-  await expect(page.locator('#planResultStatus')).toContainText('Optimal scenario')
+  await expect(page.locator('#planResultStatus')).toContainText('Draft allocation under entered constraints')
   expect(await page.evaluate(()=>(window as any).Chart.getChart(document.getElementById('planFulfillmentChart')).data.datasets[0].data)).toEqual(data.result.rows.map((r:any)=>r.fulfillment_pct))
   const download=page.waitForEvent('download');await page.locator('#planExport').click()
   const csv=await readFile((await(await download).path())!,'utf8')

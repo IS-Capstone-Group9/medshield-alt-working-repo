@@ -6,7 +6,7 @@ MedShield Business Analytics is a capstone system for analyzing pharmaceutical s
 
 ## 2. Project Goal
 
-Build a modern business analytics dashboard with a Next.js frontend, Python microservices, and Supabase-backed data persistence.
+Build a modern business analytics dashboard with a Next.js frontend, a TypeScript gateway, Databricks-backed analytics, and Supabase Auth.
 
 ## 3. Selected Tech Stack
 
@@ -14,10 +14,10 @@ Build a modern business analytics dashboard with a Next.js frontend, Python micr
 |---|---|---|
 | Frontend | Next.js + TypeScript | Dashboard UI and page routing |
 | UI Styling | CSS variables + responsive layout | Clean and maintainable interface |
-| API Layer | Python Flask microservices | Business logic and analytics endpoints |
-| Data Layer | Supabase PostgreSQL | Managed database and row-level security |
-| Data Access | Supabase REST API + Python requests | Fetch analytics snapshots and services |
-| Fallback Mode | Local JSON snapshot | Keeps demo usable when services are offline |
+| API Layer | TypeScript + Express | Authentication, validation, and bounded Databricks queries |
+| Data Layer | Databricks Unity Catalog | Dashboard system of record |
+| Identity | Supabase Auth | User sessions and roles |
+| Failure Mode | Explicit unavailable state | Prevents local or mock data substitution |
 
 ## 4. Workspace Structure
 
@@ -25,8 +25,7 @@ Build a modern business analytics dashboard with a Next.js frontend, Python micr
 |---|---|
 | `frontend/` | Next.js application |
 | `backend/` | API gateway |
-| `services/analytics_service/` | Analytics microservice |
-| `services/product_service/` | Product microservice |
+| `services/` | Offline and legacy analytics utilities |
 | `supabase/` | SQL migrations and seed data |
 | `docs/` | Capstone and setup documentation |
 | `references/` | Source papers and capstone reference materials |
@@ -42,13 +41,12 @@ Build a modern business analytics dashboard with a Next.js frontend, Python micr
 | `SUPABASE_URL` | `https://ghrpgyzbjmhgoduxzdyp.supabase.co` | Server-side Supabase project URL |
 | `SUPABASE_ANON_KEY` | provided publishable or anon key | Supabase key used by the gateway for auth validation |
 | `SUPABASE_SECRET_KEY` | modern `sb_secret_...` server key | Backend-only identity resolution and Auth account administration. Never expose to the browser. |
-| `SUPABASE_SERVICE_ROLE_KEY` | server-only secret | Allows ingestion writes to staging, facts, and ETL lineage. |
-| `ANALYTICS_SERVICE_URL` | `http://localhost:5101` | Analytics microservice URL |
-| `PRODUCT_SERVICE_URL` | `http://localhost:5102` | Product microservice URL |
-| `ANALYTICS_SERVICE_PORT` | `5101` | Prevents collision with the gateway on port 5000 |
-| `PRODUCT_SERVICE_PORT` | `5102` | Prevents collision with the gateway on port 5000 |
-| `START_PYTHON_SERVICES` | `true` | Lets the TypeScript gateway start missing Python services when `npm run dev` starts |
-| `PYTHON_EXECUTABLE` | `python` | Python command used by the gateway service supervisor |
+| `SUPABASE_SERVICE_ROLE_KEY` | server-only secret | Optional administrator and migration operations. |
+| `DATABRICKS_HOST` | `https://dbc-...cloud.databricks.com` | Workspace origin only; omit `/browse/...` paths and the `o=` query. |
+| `DATABRICKS_TOKEN` | server-only token | SQL Statement Execution authentication. |
+| `DATABRICKS_SQL_WAREHOUSE_ID` | warehouse ID | Warehouse used for dashboard queries. |
+| `DATABRICKS_CATALOG` | `workspace` | Unity Catalog catalog. |
+| `DATABRICKS_SCHEMA` | `medshield_gold` | Gold schema. |
 | `USE_SUPABASE` | `false` for local, `true` with real keys | Enables Supabase before local fallback |
 | `NASA_POWER_DAILY_URL` | NASA POWER point endpoint | Historical meteorological source |
 | `OPEN_METEO_ARCHIVE_URL` | Open-Meteo archive endpoint | Historical validation/fallback |
@@ -60,20 +58,16 @@ Build a modern business analytics dashboard with a Next.js frontend, Python micr
 | Area | Command |
 |---|---|
 | Backend gateway | `cd backend` then `npm install` |
-| Analytics service | `cd services/analytics_service` then `pip install -r requirements.txt` |
-| Analytics modeling jobs | `cd services/analytics_service` then `pip install -r requirements-modeling.txt` |
-| Product service | `cd services/product_service` then `pip install -r requirements.txt` |
+| Optional offline modeling jobs | Install the relevant requirements under `services/` only when rebuilding Databricks outputs |
 | Frontend | `cd frontend` then `npm install` |
 
-Use `requirements-modeling.txt` only when running model-training or optimization jobs. The normal Flask service remains on `requirements.txt` so the dashboard demo can run without heavy forecasting libraries.
+The dashboard runtime does not require the legacy Flask services.
 
 ## 7. Run Commands
 
 | Service | Command |
 |---|---|
-| API gateway plus Python services | `cd backend` then `npm run dev` |
-| Analytics service only, optional manual mode | `python -m services.analytics_service.app` |
-| Product service only, optional manual mode | `python -m services.product_service.app` |
+| API gateway | `cd backend` then `npm run dev` |
 | Frontend | `cd frontend` then `npm run dev` |
 | Docker app stack | `docker compose build` then `docker compose up` |
 | Local SonarQube | `docker compose -f docker-compose.sonar.yml up -d sonarqube-db sonarqube` |
@@ -109,9 +103,9 @@ Use `requirements-modeling.txt` only when running model-training or optimization
 | Step | Description |
 |---|---|
 | 1 | Copy `.env.example` to `.env` and fill in the Supabase values |
-| 2 | Install backend, microservice, and frontend dependencies |
+| 2 | Install backend and frontend dependencies |
 | 3 | Apply the Supabase migrations in order, then seed |
-| 4 | Start the gateway; it probes and starts missing Python services unless `START_PYTHON_SERVICES=false` |
+| 4 | Configure the backend-only Databricks host, warehouse ID, and token, then start the gateway |
 | 5 | Start the Next.js frontend |
 
 When running the frontend directly with `cd frontend && npm run dev`, make sure the `NEXT_PUBLIC_*` variables are available to that process, for example through `frontend/.env.local` or your shell. Docker Compose passes these variables from the root `.env`.
@@ -127,8 +121,8 @@ When running the frontend directly with `cd frontend && npm run dev`, make sure 
 | SaaS auth | Configure `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_URL`, `SUPABASE_ANON_KEY`, and a backend-only Supabase server secret, then set `USE_SUPABASE=true`. The gateway privately resolves username/email and Supabase Auth owns password verification and browser sessions. |
 | Service-role key | Put `SUPABASE_SERVICE_ROLE_KEY` in ignored local `.env` only. Never commit it, paste it into frontend variables, or expose it in screenshots. |
 | Environment and schema alignment | Use `docs/ENV_SCHEMA_ALIGNMENT_GUIDE.md` after switching Supabase projects or schemas. It lists required variables by name only and maps visible schemas to analytics readiness. |
-| Messy sales upload | Use Data Upload or View Sales Data -> Upload messy XLSX/CSV. The file is cleaned by the server pipeline before it appears in the paginated table. Year uploads merge into history by replacing only their year. |
-| Weather validation | Use Weather API Validation to refresh NASA POWER or Open-Meteo data. Select `All territories` to load every configured capstone territory, then use daily grain for API validation and monthly grain for planning/regressor summaries. |
+| Sales ingestion | Load and validate sales files through the Databricks pipeline. Browser uploads are disabled because Databricks is the dashboard system of record. |
+| Weather validation | Weather API Validation reads monthly PAGASA observations from Databricks Gold. Refresh the source through the Databricks external-source pipeline. |
 | Business definitions | Use `docs/BUSINESS_DEFINITIONS.md` before training models or updating dashboard labels. The current workspace has no operating expense data, so `net_income` must be treated as workbook gross margin/profit, not company net profit. |
 | Mapping templates | Use `datasources/templates/product_master_mapping.csv` and `datasources/templates/area_classification_mapping.csv` as the first controlled mappings before creating database master tables. |
 | Model orchestration | Use `docs/MODEL_LIBRARIES_AND_ORCHESTRATION.md` for the planned job boundary. Dashboard requests should read published outputs, not train models synchronously. |

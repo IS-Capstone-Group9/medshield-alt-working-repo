@@ -59,10 +59,6 @@ export function Topbar({ activeTab, filters, onUpdateFilters }: TopbarProps) {
             ))}
           </div>
         </div>
-        <div className="topbar-badge">
-          <div className="live-dot" />
-          Dataset Status Pending
-        </div>
       </div>
     </div>
   )

@@ -83,6 +83,30 @@ export function getExecutableDashboardScript(): string {
     .join('\n')
 
   let patchedScript = patchDescriptivePeriodFilters(patchOverviewMonthlyChart(MEDSHIELD_SCRIPT))
+    // The design reference still contains its original demonstration payload.
+    // Empty it before the script executes so no local numbers can be rendered,
+    // even during the hidden initialization phase before Databricks responds.
+    .replace(
+      /const DATA = \{[\s\S]*?\n\};\n\nconst PAGE_META/,
+      `const DATA = {
+  monthly: [],
+  by_area: [],
+  year_summary: [],
+  seasonality: [],
+  top_products: []
+};
+
+const PAGE_META`,
+    )
+    .replace(
+      /const MOCK_BY_AREA = \[[\s\S]*?\n\];\n\nconst MOCK_TOP_PRODUCTS/,
+      'const MOCK_BY_AREA = [];\n\nconst MOCK_TOP_PRODUCTS',
+    )
+    .replace(
+      /const MOCK_TOP_PRODUCTS = \[[\s\S]*?\n\];\nconst MOCK_MONTHLY/,
+      'const MOCK_TOP_PRODUCTS = [];\nconst MOCK_MONTHLY',
+    )
+    .replace("data: ['Data Upload', 'CSV and JSON sources for dashboard updates']", "data: ['Databricks Source', 'Live Gold provenance and ingestion policy']")
     .replace(/window\.([a-zA-Z0-9_]+)\s*=\s*\1;?/g, "if (typeof $1 !== 'undefined') window.$1 = $1;")
     .replace("window.addEventListener('DOMContentLoaded', async () => {", `(async () => {\n${globalHandlerBridge}\n`)
     .replaceAll("'#335F78'", "dashboardThemeColor('--chart-label', '#335F78')")

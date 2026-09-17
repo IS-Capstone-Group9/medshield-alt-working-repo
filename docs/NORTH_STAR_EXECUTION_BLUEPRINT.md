@@ -88,7 +88,7 @@ The repository already provides important foundations:
 | Python services | Implemented as read/service shells, but not as model-training pipelines |
 | Dashboard model views | Implemented |
 | Real trained DSS outputs | Not yet implemented |
-| Demo/fallback DSS outputs | Present in `frontend/public/data/sales_data.json` |
+| Demo/fallback DSS outputs | Removed from the dashboard runtime; unpublished outputs fail closed |
 
 The existing DSS tables and API endpoints are a storage and delivery foundation. Their presence does not prove that Prophet, XGBoost, EOQ, ROP, MCDA, linear programming, or collaborative filtering have been trained or executed from the validated 2017-onward sales history.
 

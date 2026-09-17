@@ -30,6 +30,22 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
     let disposed = false
     let activeListeners: ListenerRecord[] = []
 
+    root.dataset.sourceState = 'loading'
+    root.setAttribute('aria-busy', 'true')
+    root.style.visibility = 'hidden'
+
+    const showDatabricksUnavailable = () => {
+      if (disposed) return
+      root.dataset.sourceState = 'unavailable'
+      root.removeAttribute('aria-busy')
+      root.style.visibility = 'visible'
+      root.innerHTML = `
+        <main role="alert" style="max-width:760px;margin:10vh auto;padding:32px;border:1px solid #d9e2e8;border-radius:14px;background:#fff;color:#12384e;font-family:Arial,sans-serif">
+          <h1 style="margin:0 0 12px;font-size:24px">Databricks data is unavailable</h1>
+          <p style="margin:0;line-height:1.6">MedShield could not load its live Databricks Gold dataset. Dashboard charts and values are hidden because local and mock fallbacks are disabled. Check the Databricks warehouse and credentials, then reload this page.</p>
+        </main>`
+    }
+
     const styleEl = document.createElement('style')
     styleEl.id = 'medshield-dashboard-styles'
     styleEl.textContent = MEDSHIELD_STYLE
@@ -64,9 +80,17 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
         
         installDashboardEnhancements(root, activeListeners, user)
 
-        void refreshDashboardFromGateway().catch((error) => {
-          console.warn('Dashboard is using the bundled fallback dataset:', error)
-        })
+        void refreshDashboardFromGateway()
+          .then(() => {
+            if (disposed) return
+            root.dataset.sourceState = 'ready'
+            root.removeAttribute('aria-busy')
+            root.style.visibility = 'visible'
+          })
+          .catch((error) => {
+            console.error('Live Databricks dashboard load failed:', error)
+            showDatabricksUnavailable()
+          })
 
         // Bind logout click
         const logoutBtn = root.querySelector('#sidebarLogoutBtn')
@@ -77,6 +101,7 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
       })
       .catch((error) => {
         console.error('Failed to initialize the MedShield dashboard runtime:', error)
+        showDatabricksUnavailable()
       })
 
     return () => {

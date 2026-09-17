@@ -72,10 +72,10 @@ function requestPlanSolve(){clearPlanningResult('Solving scenario…');window.di
 function setPlanningResult(result,error){
  clearPlanningResult();const el=id=>document.getElementById(id);
  if(!result){el('planResultStatus').textContent=error||'Scenario could not be solved';return;}
- if(result.status!=='optimal_scenario'){el('planResultStatus').textContent='No allocation published: '+(result.conflicts||[]).join('; ');return;}
+ if(result.status!=='scenario_allocation'){el('planResultStatus').textContent='No allocation published: '+(result.conflicts||[]).join('; ');return;}
  planningResult=result;
  const fmt=v=>Number(v).toLocaleString('en-PH',{maximumFractionDigits:2}),esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- el('planResultStatus').textContent='Optimal scenario under entered constraints · '+result.assumptions.horizon+' months · '+fmt(result.mean_fulfillment_pct)+'% average product fulfillment. Client approval and operational validation pending.';
+ el('planResultStatus').textContent='Draft allocation under entered constraints · '+result.assumptions.horizon+' months · '+fmt(result.mean_fulfillment_pct)+'% average product fulfillment. Client approval and operational validation pending.';
  el('planBudgetSummary').textContent='Budget ₱'+fmt(result.budget)+' · spend ₱'+fmt(result.spent)+' · remaining ₱'+fmt(result.remaining)+'. '+(result.budget_binding?'Budget is binding.':'Budget is not fully used; whole packs, demand limits or supplier caps can leave a remainder.');
  new Chart(el('planFulfillmentChart'),{type:'bar',data:{labels:result.rows.map(r=>r.product),datasets:[{label:'Fulfilled (%)',data:result.rows.map(r=>r.fulfillment_pct),backgroundColor:'#335F78'},{label:'Unmet (%)',data:result.rows.map(r=>100-r.fulfillment_pct),backgroundColor:'#D49A23'}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{stacked:true},y:{stacked:true,min:0,max:100}}}});
  el('planResults').innerHTML='<thead><tr><th>Product</th><th>Buy packs</th><th>Buy source units</th><th>Fulfilled</th><th>Unmet</th><th>Ending stock</th><th>Spend (₱)</th><th>Binding constraints</th></tr></thead><tbody>'+result.rows.map(r=>'<tr><td>'+esc(r.product)+'</td>'+[r.purchase_packs,r.purchase_units,r.fulfilled,r.unmet,r.ending_stock,r.spend].map(v=>'<td>'+fmt(v)+'</td>').join('')+'<td>'+esc(r.binding.join('; ')||'None')+'</td></tr>').join('')+'</tbody>';

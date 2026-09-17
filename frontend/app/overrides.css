@@ -293,9 +293,7 @@ body .topbar {
   border-color: rgba(255, 255, 255, 0.28);
 }
 .topbar .topbar-badge {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.18);
-  color: #d5e4ec;
+  display: none !important;
 }
 .topbar .comparison-selector {
   background: rgba(255, 255, 255, 0.08);

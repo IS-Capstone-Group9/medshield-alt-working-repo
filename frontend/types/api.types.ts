@@ -65,10 +65,13 @@ export type ModelEvaluation = {
 }
 
 export type DashboardDataStatus = {
-  source: 'analytics_services' | 'bundled_fallback'
-  mode: 'historical' | 'demo'
+  source: 'databricks'
+  mode: 'live'
   loaded_at: string
   message: string
+  catalog?: string
+  schema?: string
+  candidate_only?: boolean
 }
 
 export type DashboardData = {

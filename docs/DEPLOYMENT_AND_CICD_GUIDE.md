@@ -6,7 +6,7 @@ This document explains how to securely configure GitHub CI/CD pipelines, set up 
 
 ## 1. Quick Start: Running MedShield on Any Computer
 
-MedShield is fully containerized and includes fallback local datasets. Any computer with Docker installed can run the entire system with one command.
+MedShield is containerized, but dashboard startup also requires valid backend-only Databricks credentials and an available SQL warehouse. The application fails closed when Databricks is unavailable.
 
 ### System Requirements
 - **Docker Desktop** (Windows/macOS) or **Docker Engine & Docker Compose** (Linux)

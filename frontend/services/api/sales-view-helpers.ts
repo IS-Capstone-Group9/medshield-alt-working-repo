@@ -75,7 +75,7 @@ export function renderSalesDatasetStatus(root: HTMLElement, status: SalesDataset
   const badge = root.querySelector<HTMLElement>('#salesDatasetBadge')
   const note = root.querySelector<HTMLElement>('#salesPipelineNote')
   const yearSelect = root.querySelector<HTMLSelectElement>('#salesDataYear')
-  if (badge) badge.textContent = `${status.source_file} - ${status.cleaning_status}`
+  if (badge) badge.textContent = `Databricks Gold · ${status.source_file} · ${status.cleaning_status}`
   if (note) {
     note.textContent =
       `${summary.rows_accepted.toLocaleString()} accepted of ${summary.rows_extracted.toLocaleString()} extracted rows` +

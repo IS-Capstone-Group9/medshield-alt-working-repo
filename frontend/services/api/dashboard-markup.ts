@@ -26,30 +26,19 @@ export const SALES_DATA_PAGE = `
         </div>
         <div class="sales-header-actions">
           <span class="mini-badge" id="salesDatasetBadge">Loading Dataset...</span>
-          <button class="sales-primary-button" id="salesDataUploadButton" type="button">Upload XLSX/CSV</button>
-          <input id="salesDataUploadInput" type="file" accept=".xlsx,.csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv" hidden />
         </div>
       </div>
-      <div class="sales-note" id="salesPipelineNote">Uploads are header-mapped, standardized, quality checked.</div>
+      <div class="sales-note" id="salesPipelineNote">Read-only live view of the validated Databricks Gold sales fact. Ingestion and quality checks run in Databricks.</div>
       <div class="databricks-connection-panel" id="databricksConnectionPanel" aria-live="polite">
         <div class="databricks-connection-copy">
           <div class="databricks-connection-heading">
             <span class="mini-badge" id="databricksConnectionBadge">Not Checked</span>
             <strong>Databricks Gold connection</strong>
           </div>
-          <span id="databricksConnectionDetail">Verify the backend-only connection to the approved Gold yearly view. This does not expose the workspace token.</span>
-          <div class="databricks-sync-result" id="databricksYearlySyncResult" hidden>
-            <div class="databricks-sync-result-heading">
-              <span class="mini-badge" id="databricksYearlySyncBadge">Ready</span>
-              <strong>Yearly candidate cache</strong>
-            </div>
-            <span id="databricksYearlySyncDetail">Connection verified. The yearly Gold candidates can now be synchronized into the non-published cache.</span>
-            <span class="databricks-sync-warning" id="databricksYearlySyncWarning">Candidate-only data will not replace approved dashboard facts.</span>
-          </div>
+          <span id="databricksConnectionDetail">Verify the backend-only connection to Databricks Gold. The workspace token remains on the server.</span>
         </div>
         <div class="databricks-connection-actions">
           <button class="sales-secondary-button" id="checkDatabricksConnectionButton" type="button">Verify Gold Connection</button>
-          <button class="sales-primary-button" id="syncDatabricksYearlyButton" type="button" disabled title="Verify the Databricks Gold connection first">Sync Yearly Gold Data</button>
         </div>
       </div>
       <div class="uploaded-data-toolbar sales-filter-toolbar">
@@ -82,17 +71,16 @@ export const WEATHER_VALIDATION_PAGE = `
       <div class="uploaded-data-header">
         <div>
           <div class="uploaded-data-title" id="weatherEffectTitle">Weather API Validation</div>
-          <div class="uploaded-data-copy">Provider weather proxy for historical validation. Not an official PAGASA alert.</div>
+          <div class="uploaded-data-copy">Read-only PAGASA observations published in Databricks Gold. They remain separate from sales until territory mappings are approved.</div>
         </div>
-        <button class="sales-primary-button" id="refreshWeatherButton" type="button">Refresh Weather</button>
       </div>
       <div class="uploaded-data-toolbar weather-filter-toolbar">
-        <div class="uploaded-data-field"><label for="weatherProvider">Provider</label><select id="weatherProvider"><option value="nasa_power">NASA POWER</option><option value="open_meteo">Open-Meteo Archive</option></select></div>
-        <div class="uploaded-data-field"><label for="weatherArea">Territory</label><select id="weatherArea"><option value="all">All Territories</option><option value="Quezon">Quezon</option><option value="Batangas">Batangas</option><option value="Camarines Norte">Camarines Norte</option><option value="Camarines Sur">Camarines Sur</option><option value="Cavite">Cavite</option><option value="Laguna">Laguna</option><option value="Marinduque">Marinduque</option><option value="Rizal">Rizal</option></select></div>
-        <div class="uploaded-data-field"><label for="weatherYear">Year</label><select id="weatherYear"><option value="2025">2025</option><option value="2024">2024</option><option value="2023">2023</option><option value="2022">2022</option><option value="2021">2021</option></select></div>
-        <div class="uploaded-data-field"><label for="weatherGrain">Validation Grain</label><select id="weatherGrain"><option value="monthly">Monthly Planning Aggregate</option><option value="daily">Daily API Rows</option></select></div>
+        <div class="uploaded-data-field"><label for="weatherProvider">Provider</label><select id="weatherProvider" disabled><option value="PAGASA">PAGASA via Databricks</option></select></div>
+        <div class="uploaded-data-field"><label for="weatherArea">Territory</label><select id="weatherArea"><option value="all">All Territories</option><option value="Quezon">Quezon</option><option value="Batangas">Batangas</option><option value="Camarines Norte">Camarines Norte</option><option value="Camarines Sur">Camarines Sur</option><option value="Cavite">Cavite</option><option value="Laguna">Laguna</option><option value="Marinduque">Marinduque</option><option value="Metro Manila">Metro Manila</option><option value="Rizal">Rizal</option></select></div>
+        <div class="uploaded-data-field"><label for="weatherYear">Year</label><select id="weatherYear"><option value="all">All Years</option><option value="2024" selected>2024</option><option value="2023">2023</option><option value="2022">2022</option><option value="2021">2021</option><option value="2020">2020</option><option value="2019">2019</option><option value="2018">2018</option><option value="2017">2017</option></select></div>
+        <div class="uploaded-data-field"><label for="weatherGrain">Validation Grain</label><select id="weatherGrain" disabled><option value="monthly">Monthly Databricks Aggregate</option></select></div>
       </div>
-      <div class="sales-note" id="weatherEffectStatus">Weather synchronization integrity validated with provider API proxy.</div>
+      <div class="sales-note" id="weatherEffectStatus">Loading PAGASA observations from Databricks Gold.</div>
       <div class="uploaded-data-table-wrap"><table class="uploaded-data-table" id="weatherEffectTable"><tbody><tr><td class="uploaded-data-empty">Loading Weather Metrics...</td></tr></tbody></table></div>
       <div class="uploaded-data-footer"><div class="uploaded-data-status" id="weatherEffectCount">Loading...</div></div>
     </section>

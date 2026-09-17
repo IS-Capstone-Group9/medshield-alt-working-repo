@@ -156,9 +156,14 @@ interface DatabricksConfiguration {
   schema: string
 }
 
-interface InlineStatementResult {
+export interface DatabricksStatementResult {
   rows: Record<string, string | null>[]
   columns: string[]
+}
+
+export interface DatabricksStatementOptions {
+  rowLimit?: number
+  timeoutMs?: number
 }
 
 const TERMINAL_STATES = new Set<StatementState>([
@@ -278,10 +283,14 @@ function delay(milliseconds: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, milliseconds))
 }
 
-async function executeInlineStatement(statement: string): Promise<InlineStatementResult> {
+export async function executeDatabricksStatement(
+  statement: string,
+  options: DatabricksStatementOptions = {},
+): Promise<DatabricksStatementResult> {
   const config = configuration()
   const endpoint = `${config.host}/api/2.0/sql/statements`
-  const rowLimit = 100
+  const rowLimit = Math.min(Math.max(options.rowLimit ?? 100, 1), 50_000)
+  const timeoutMs = Math.min(Math.max(options.timeoutMs ?? 60_000, 5_000), 120_000)
   let response = await databricksFetch(endpoint, config.token, {
     method: 'POST',
     body: JSON.stringify({
@@ -297,7 +306,7 @@ async function executeInlineStatement(statement: string): Promise<InlineStatemen
     }),
   })
 
-  const deadline = Date.now() + 60_000
+  const deadline = Date.now() + timeoutMs
   while (
     response.status?.state &&
     !TERMINAL_STATES.has(response.status.state) &&
@@ -318,11 +327,10 @@ async function executeInlineStatement(statement: string): Promise<InlineStatemen
   if (response.status?.state !== 'SUCCEEDED') {
     throw statementError(response)
   }
-  if (
-    response.manifest?.truncated === true ||
-    (response.manifest?.total_row_count ?? 0) > rowLimit
-  ) {
-    throw new Error('Databricks returned a truncated inline result')
+  if (response.manifest?.truncated === true) {
+    throw new Error(
+      `Databricks result exceeded the ${rowLimit}-row safety limit; narrow the requested scope`,
+    )
   }
 
   const manifestColumns = [...(response.manifest?.schema?.columns ?? [])].sort(
@@ -381,7 +389,7 @@ function validateExpectedColumns(actualColumns: string[]): void {
 export async function getDatabricksConnectionStatus(): Promise<DatabricksConnectionStatus> {
   const config = yearlyCandidateConfiguration()
   const qualifiedView = `\`${config.catalog}\`.\`${config.schema}\`.\`${YEARLY_DASHBOARD_VIEW}\``
-  const result = await executeInlineStatement(`
+  const result = await executeDatabricksStatement(`
     SELECT
       COUNT(*) AS row_count,
       COUNT(DISTINCT calendar_year) AS year_count,
@@ -422,7 +430,7 @@ export async function getDatabricksConnectionStatus(): Promise<DatabricksConnect
 export async function getDatabricksExternalConnectionStatus(): Promise<DatabricksExternalConnectionStatus> {
   const config = yearlyCandidateConfiguration()
   const qualifiedView = `\`${config.catalog}\`.\`${config.schema}\`.\`${EXTERNAL_SIGNALS_VIEW}\``
-  const result = await executeInlineStatement(`
+  const result = await executeDatabricksStatement(`
     SELECT
       'DISEASE' AS signal_family,
       COUNT(*) AS row_count,
@@ -551,7 +559,7 @@ export async function getDatabricksExternalConnectionStatus(): Promise<Databrick
 export async function getDatabricksYearlyCandidateExtract(): Promise<DatabricksYearlyCandidateExtract> {
   const config = yearlyCandidateConfiguration()
   const qualifiedView = `\`${config.catalog}\`.\`${config.schema}\`.\`${YEARLY_DASHBOARD_VIEW}\``
-  const result = await executeInlineStatement(`
+  const result = await executeDatabricksStatement(`
     SELECT
       ${YEARLY_CANDIDATE_COLUMNS.map((column) => `\`${column}\``).join(',\n      ')}
     FROM ${qualifiedView}

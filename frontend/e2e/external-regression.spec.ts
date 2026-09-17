@@ -71,11 +71,13 @@ test('unmapped weather, absent buyers and service failure clear all modeled resu
   expect(await page.evaluate(() => (window as any).Chart.getChart(document.getElementById('regPredictionChart')) === undefined)).toBe(true)
 })
 
-test('local prepared DOH and sales snapshot produce reviewable source-backed charts', async ({ page }) => {
+test('an unapproved prepared DOH and sales snapshot remains blocked', async ({ page }) => {
   test.skip(!existsSync(path.resolve('../data/medshield/processed/regression_external_monthly.json')), 'Optional local source audit; raw workbooks are not CI fixtures')
   const data = evidence('', true)
   await page.evaluate(d => (window as any).setExternalRegressionData(d), data)
-  expect(data.status).toBe('exploratory')
-  await expect(page.locator('#regResult')).toContainText('higher holdout MAE')
+  expect(data.status).toBe('blocked')
+  await expect(page.locator('#regStatus')).toContainText('Not estimable')
+  await expect(page.locator('#regCharts')).toBeHidden()
+  await expect(page.locator('#regExport')).toBeDisabled()
   await page.locator('[data-external-regression]').screenshot({ path: 'test-results/section-6-regression-local.png' })
 })

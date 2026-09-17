@@ -14,11 +14,24 @@ import {
   getDatabricksExternalConnectionStatus,
 } from './databricks'
 import {
+  DatabricksDashboardInputError,
+  DatabricksSourceUnavailableError,
+  getDatabricksExternalRegression,
+  getDatabricksForecastValidation,
+  getDatabricksPlanningShortlist,
+  getDatabricksSalesHeatmap,
+  getDatabricksSalesSectors,
+  getDatabricksSalesStatus,
+  getDatabricksSalesSummary,
+  getDatabricksSalesTransactions,
+  getDatabricksWeatherEffects,
+  solveDatabricksPlanningScenario,
+} from './databricksDashboard'
+import {
   DatabricksYearlySyncInProgressError,
   DatabricksYearlySyncValidationError,
   synchronizeDatabricksYearlyCandidate,
 } from './databricksYearlySync'
-import { startPythonServices } from './pythonServices'
 import { createSession, revokeSessionToken, SessionUser, verifySessionToken } from './sessionAuth'
 import { loadSnapshot } from './snapshot'
 import {
@@ -51,14 +64,6 @@ loadEnvironment()
 
 const app = express()
 const port = Number(process.env.PORT ?? '5000')
-const analyticsServiceUrl = (process.env.ANALYTICS_SERVICE_URL ?? 'http://localhost:5101').replace(
-  /\/$/,
-  '',
-)
-const productServiceUrl = (process.env.PRODUCT_SERVICE_URL ?? 'http://localhost:5102').replace(
-  /\/$/,
-  '',
-)
 
 app.use(cors())
 app.use(express.json())
@@ -331,53 +336,29 @@ function requireRole(allowedRoles: string[]) {
   }
 }
 
-async function fetchWithTimeout(url: string, options: RequestInit = {}, timeoutMs = 8000): Promise<globalThis.Response> {
-  const controller = new AbortController()
-  const id = setTimeout(() => controller.abort(), timeoutMs)
-  try {
-    const response = await fetch(url, {
-      ...options,
-      signal: controller.signal as any,
-    })
-    clearTimeout(id)
-    return response as globalThis.Response
-  } catch (error) {
-    clearTimeout(id)
-    throw error
+function databricksDashboardFailure(res: Response, error: unknown): Response {
+  if (error instanceof DatabricksDashboardInputError) {
+    return res.status(400).json({ error: error.message, code: 'INVALID_DATABRICKS_QUERY' })
   }
-}
-
-async function analyticsJson(
-  pathName: string,
-  options?: RequestInit,
-  timeoutMs = 8000,
-): Promise<{ status: number; body: unknown }> {
-  const response: globalThis.Response = await fetchWithTimeout(`${analyticsServiceUrl}${pathName}`, options, timeoutMs)
-  const text = await response.text()
-  let body: unknown = {}
-  if (text) {
-    try {
-      body = JSON.parse(text)
-    } catch {
-      body = { error: text }
-    }
+  if (error instanceof DatabricksSourceUnavailableError) {
+    return res.status(503).json({ error: error.message, code: 'DATABRICKS_SOURCE_UNAVAILABLE' })
   }
-  return { status: response.status, body }
-}
-
-async function serviceGetJson(baseUrl: string, pathName: string, timeoutMs = 8000): Promise<unknown> {
-  const response: globalThis.Response = await fetchWithTimeout(`${baseUrl}${pathName}`, {}, timeoutMs)
-  if (!response.ok) {
-    throw new Error(`Service at ${baseUrl}${pathName} returned status ${response.status}`)
-  }
-  return await response.json()
-}
-
-function analyticsFailure(res: Response, error: unknown): Response {
-  console.error('Analytics service request failed:', error)
+  console.error('Databricks dashboard query failed:', error)
   return res.status(502).json({
-    error: 'Analytics service is unavailable. The gateway tried to auto-start the Python service; check the backend terminal for Python dependency or port errors.',
+    error: 'Live Databricks dashboard data is unavailable. No local or mock fallback was used.',
+    code: 'DATABRICKS_QUERY_FAILED',
   })
+}
+
+async function withDashboardSnapshot(
+  res: Response,
+  send: (snapshot: Awaited<ReturnType<typeof loadSnapshot>>) => Response,
+): Promise<Response> {
+  try {
+    return send(await loadSnapshot())
+  } catch (error) {
+    return databricksDashboardFailure(res, error)
+  }
 }
 
 app.get('/api/health', (_req: Request, res: Response) => {
@@ -385,13 +366,10 @@ app.get('/api/health', (_req: Request, res: Response) => {
     status: 'ok',
     service: 'MedShield API gateway',
     architecture: 'typescript-api-gateway',
-    source: supabaseEnabled() ? 'warehouse' : 'reference-export',
+    source: 'databricks',
     runtime: 'typescript',
     auth_mode: supabaseEnabled() ? 'supabase-auth-jwt' : 'local-session',
-    analytics_services: {
-      analytics: analyticsServiceUrl,
-      product: productServiceUrl,
-    },
+    dashboard_fallback: false,
   })
 })
 
@@ -535,196 +513,170 @@ app.post(
 )
 
 app.get('/api/summary', requireAuth, async (_req: Request, res: Response) => {
-  const snapshot = await loadSnapshot()
-  res.json(snapshot.totals)
+  return withDashboardSnapshot(res, (snapshot) => res.json(snapshot.totals))
 })
 
 app.get('/api/dashboard_status', requireAuth, async (_req: Request, res: Response) => {
-  const snapshot = await loadSnapshot()
-  res.json(snapshot.data_status)
+  return withDashboardSnapshot(res, (snapshot) => res.json(snapshot.data_status))
 })
 
 app.get('/api/monthly', requireAuth, async (req: Request, res: Response) => {
-  const snapshot = await loadSnapshot()
-  const year = String(req.query.year ?? '').trim()
-  const rows = year
-    ? snapshot.monthly.filter((row) => String(row.period ?? '').startsWith(year))
-    : snapshot.monthly
-  res.json(rows)
+  return withDashboardSnapshot(res, (snapshot) => {
+    const year = String(req.query.year ?? '').trim()
+    const rows = year
+      ? snapshot.monthly.filter((row) => String(row.period ?? '').startsWith(year))
+      : snapshot.monthly
+    return res.json(rows)
+  })
 })
 
 app.get('/api/by_area', requireAuth, async (_req: Request, res: Response) => {
-  const snapshot = await loadSnapshot()
-  res.json(snapshot.by_area)
+  return withDashboardSnapshot(res, (snapshot) => res.json(snapshot.by_area))
 })
 
 app.get('/api/products', requireAuth, async (req: Request, res: Response) => {
-  const snapshot = await loadSnapshot()
   const rawLimit = req.query.limit ?? 15
   const limit = Number(rawLimit)
   if (!Number.isInteger(limit) || limit < 1 || limit > 100) {
     return res.status(400).json({ error: 'limit must be an integer between 1 and 100' })
   }
-  res.json(snapshot.top_products.slice(0, limit))
+  return withDashboardSnapshot(res, (snapshot) => res.json(snapshot.top_products.slice(0, limit)))
 })
 
 app.get('/api/year_summary', requireAuth, async (_req: Request, res: Response) => {
-  const snapshot = await loadSnapshot()
-  res.json(snapshot.year_summary)
+  return withDashboardSnapshot(res, (snapshot) => res.json(snapshot.year_summary))
 })
 
 app.get('/api/seasonality', requireAuth, async (_req: Request, res: Response) => {
-  const snapshot = await loadSnapshot()
-  res.json(snapshot.seasonality)
+  return withDashboardSnapshot(res, (snapshot) => res.json(snapshot.seasonality))
 })
 
 app.get('/api/forecasts', requireAuth, async (_req: Request, res: Response) => {
-  const snapshot = await loadSnapshot()
-  res.json(snapshot.forecasts ?? [])
+  return withDashboardSnapshot(res, (snapshot) => res.json(snapshot.forecasts ?? []))
 })
 
 app.get('/api/external_signals', requireAuth, async (_req: Request, res: Response) => {
-  const snapshot = await loadSnapshot()
-  res.json(snapshot.external_signals ?? [])
+  return withDashboardSnapshot(res, (snapshot) => res.json(snapshot.external_signals ?? []))
 })
 
 app.get('/api/inventory_recommendations', requireAuth, async (_req: Request, res: Response) => {
-  const snapshot = await loadSnapshot()
-  res.json(snapshot.inventory_recommendations ?? [])
+  return withDashboardSnapshot(res, (snapshot) => res.json(snapshot.inventory_recommendations ?? []))
 })
 
 app.get('/api/regional_priorities', requireAuth, async (_req: Request, res: Response) => {
-  const snapshot = await loadSnapshot()
-  res.json(snapshot.regional_priorities ?? [])
+  return withDashboardSnapshot(res, (snapshot) => res.json(snapshot.regional_priorities ?? []))
 })
 
 app.get('/api/area_clusters', requireAuth, async (_req: Request, res: Response) => {
-  const snapshot = await loadSnapshot()
-  res.json(snapshot.area_clusters ?? [])
+  return withDashboardSnapshot(res, (snapshot) => res.json(snapshot.area_clusters ?? []))
 })
 
 app.get('/api/product_priorities', requireAuth, async (_req: Request, res: Response) => {
-  const snapshot = await loadSnapshot()
-  res.json(snapshot.product_priorities ?? [])
+  return withDashboardSnapshot(res, (snapshot) => res.json(snapshot.product_priorities ?? []))
 })
 
 app.get('/api/allocation_recommendations', requireAuth, async (_req: Request, res: Response) => {
-  const snapshot = await loadSnapshot()
-  res.json(snapshot.allocation_recommendations ?? [])
+  return withDashboardSnapshot(res, (snapshot) => res.json(snapshot.allocation_recommendations ?? []))
 })
 
 app.get('/api/product_region_matches', requireAuth, async (_req: Request, res: Response) => {
-  const snapshot = await loadSnapshot()
-  res.json(snapshot.product_region_matches ?? [])
+  return withDashboardSnapshot(res, (snapshot) => res.json(snapshot.product_region_matches ?? []))
 })
 
 app.get('/api/decision_alerts', requireAuth, async (_req: Request, res: Response) => {
-  const snapshot = await loadSnapshot()
-  res.json(snapshot.decision_alerts ?? [])
+  return withDashboardSnapshot(res, (snapshot) => res.json(snapshot.decision_alerts ?? []))
 })
 
 app.get('/api/model_evaluation', requireAuth, async (_req: Request, res: Response) => {
-  const snapshot = await loadSnapshot()
-  res.json(snapshot.model_evaluation ?? [])
+  return withDashboardSnapshot(res, (snapshot) => res.json(snapshot.model_evaluation ?? []))
 })
 
 app.get('/api/sales/status', requireAuth, async (_req: Request, res: Response) => {
   try {
-    const result = await analyticsJson('/sales/status')
-    return res.status(result.status).json(result.body)
+    return res.json(await getDatabricksSalesStatus())
   } catch (error) {
-    return analyticsFailure(res, error)
+    return databricksDashboardFailure(res, error)
   }
 })
 
 app.get('/api/sales/heatmap', requireAuth, async (_req: Request, res: Response) => {
   try {
-    const result = await analyticsJson('/sales/heatmap', undefined, 30000)
-    return res.status(result.status).json(result.body)
+    return res.json(await getDatabricksSalesHeatmap())
   } catch (error) {
-    return analyticsFailure(res, error)
+    return databricksDashboardFailure(res, error)
   }
 })
 
 app.get('/api/sales/sectors', requireAuth, async (_req: Request, res: Response) => {
   try {
-    const result = await analyticsJson('/sales/sectors', undefined, 30000)
-    return res.status(result.status).json(result.body)
+    return res.json(await getDatabricksSalesSectors())
   } catch (error) {
-    return analyticsFailure(res, error)
+    return databricksDashboardFailure(res, error)
   }
 })
 
 app.get('/api/sales/forecast-validation', requireAuth, async (req: Request, res: Response) => {
-  const params = new URLSearchParams()
-  for (const name of ['sector', 'product', 'metric']) {
-    const value = req.query[name]
-    if (typeof value === 'string') params.set(name, value)
-  }
   try {
-    const result = await analyticsJson(`/sales/forecast-validation?${params.toString()}`)
-    return res.status(result.status).json(result.body)
+    return res.json(await getDatabricksForecastValidation({
+      sector: typeof req.query.sector === 'string' ? req.query.sector : undefined,
+      product: typeof req.query.product === 'string' ? req.query.product : undefined,
+      metric: typeof req.query.metric === 'string' ? req.query.metric : undefined,
+    }))
   } catch (error) {
-    return analyticsFailure(res, error)
+    return databricksDashboardFailure(res, error)
   }
 })
 
 app.get('/api/sales/external-regression', requireAuth, async (req: Request, res: Response) => {
-  const params = new URLSearchParams()
-  for (const name of ['sector', 'territory', 'product', 'metric', 'mode', 'provider', 'disease', 'lag', 'rainfall_lag']) {
-    const value = req.query[name]
-    if (typeof value === 'string' && value.trim() !== '') params.set(name, value.trim())
-  }
   try {
-    const result = await analyticsJson(`/sales/external-regression?${params}`)
-    return res.status(result.status).json(result.body)
+    const input = Object.fromEntries(
+      ['sector', 'territory', 'product', 'metric', 'mode', 'provider', 'disease', 'lag', 'rainfall_lag']
+        .map((name) => [name, typeof req.query[name] === 'string' ? req.query[name] as string : undefined]),
+    )
+    return res.json(await getDatabricksExternalRegression(input))
   } catch (error) {
-    return analyticsFailure(res, error)
+    return databricksDashboardFailure(res, error)
   }
 })
 
 app.get('/api/sales/planning-shortlist', requireAuth, async (req: Request, res: Response) => {
-  const params = new URLSearchParams()
-  for (const name of ['sector', 'territory']) if (typeof req.query[name] === 'string') params.set(name, req.query[name] as string)
   try {
-    const result = await analyticsJson(`/sales/planning-shortlist?${params}`)
-    return res.status(result.status).json(result.body)
-  } catch (error) { return analyticsFailure(res, error) }
+    return res.json(await getDatabricksPlanningShortlist({
+      sector: typeof req.query.sector === 'string' ? req.query.sector : undefined,
+      territory: typeof req.query.territory === 'string' ? req.query.territory : undefined,
+    }))
+  } catch (error) { return databricksDashboardFailure(res, error) }
 })
 
 app.post('/api/sales/planning-solve', requireAuth, async (req: Request, res: Response) => {
   try {
-    // Two bounded five-second solves plus source validation and serialization.
-    const result = await analyticsJson('/sales/planning-solve', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(req.body) }, 20000)
-    return res.status(result.status).json(result.body)
-  } catch (error) { return analyticsFailure(res, error) }
+    return res.json(await solveDatabricksPlanningScenario(req.body ?? {}))
+  } catch (error) { return databricksDashboardFailure(res, error) }
 })
 
 app.get('/api/sales/transactions', requireAuth, async (req: Request, res: Response) => {
-  const params = new URLSearchParams()
-  for (const name of ['year', 'page', 'page_size', 'search', 'quality_status']) {
-    const value = req.query[name]
-    if (typeof value === 'string' && value.trim()) params.set(name, value.trim())
-  }
   try {
-    const result = await analyticsJson(`/sales/transactions?${params.toString()}`)
-    return res.status(result.status).json(result.body)
+    return res.json(await getDatabricksSalesTransactions({
+      year: typeof req.query.year === 'string' ? req.query.year : undefined,
+      page: typeof req.query.page === 'string' ? req.query.page : undefined,
+      pageSize: typeof req.query.page_size === 'string' ? req.query.page_size : undefined,
+      search: typeof req.query.search === 'string' ? req.query.search : undefined,
+      qualityStatus: typeof req.query.quality_status === 'string' ? req.query.quality_status : undefined,
+    }))
   } catch (error) {
-    return analyticsFailure(res, error)
+    return databricksDashboardFailure(res, error)
   }
 })
 
 app.get('/api/sales/summary', requireAuth, async (req: Request, res: Response) => {
-  const params = new URLSearchParams()
-  for (const name of ['year', 'search', 'quality_status']) {
-    const value = req.query[name]
-    if (typeof value === 'string' && value.trim()) params.set(name, value.trim())
-  }
   try {
-    const result = await analyticsJson(`/sales/summary?${params.toString()}`)
-    return res.status(result.status).json(result.body)
+    return res.json(await getDatabricksSalesSummary({
+      year: typeof req.query.year === 'string' ? req.query.year : undefined,
+      search: typeof req.query.search === 'string' ? req.query.search : undefined,
+      qualityStatus: typeof req.query.quality_status === 'string' ? req.query.quality_status : undefined,
+    }))
   } catch (error) {
-    return analyticsFailure(res, error)
+    return databricksDashboardFailure(res, error)
   }
 })
 
@@ -732,55 +684,31 @@ app.post(
   '/api/sales/upload',
   requireAuth,
   express.raw({ type: () => true, limit: '30mb' }),
-  async (req: Request, res: Response) => {
-    const fileName = String(req.query.file_name ?? '').trim()
-    if (!/\.(xlsx|csv)$/i.test(fileName)) {
-      return res.status(400).json({ error: 'A .xlsx or .csv file_name is required' })
-    }
-    const content = Buffer.isBuffer(req.body) ? req.body : Buffer.alloc(0)
-    if (!content.length) {
-      return res.status(400).json({ error: 'Uploaded file is empty' })
-    }
-    try {
-      const result = await analyticsJson(
-        `/sales/ingest?file_name=${encodeURIComponent(path.basename(fileName))}`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/octet-stream' },
-          body: Uint8Array.from(content).buffer,
-        },
-      )
-      return res.status(result.status).json(result.body)
-    } catch (error) {
-      return analyticsFailure(res, error)
-    }
+  async (_req: Request, res: Response) => {
+    return res.status(409).json({
+      error: 'Browser uploads are disabled because Databricks is the dashboard system of record. Ingest and validate files in the Databricks pipeline.',
+      code: 'DATABRICKS_INGESTION_REQUIRED',
+    })
   },
 )
 
 app.get('/api/weather/effects', requireAuth, async (req: Request, res: Response) => {
-  const params = new URLSearchParams()
-  if (typeof req.query.year === 'string') params.set('year', req.query.year)
-  if (typeof req.query.area === 'string') params.set('area', req.query.area)
-  if (typeof req.query.grain === 'string') params.set('grain', req.query.grain)
   try {
-    const result = await analyticsJson(`/weather/effects?${params.toString()}`)
-    return res.status(result.status).json(result.body)
+    return res.json(await getDatabricksWeatherEffects({
+      year: typeof req.query.year === 'string' ? req.query.year : undefined,
+      area: typeof req.query.area === 'string' ? req.query.area : undefined,
+      grain: typeof req.query.grain === 'string' ? req.query.grain : undefined,
+    }))
   } catch (error) {
-    return analyticsFailure(res, error)
+    return databricksDashboardFailure(res, error)
   }
 })
 
-app.post('/api/weather/refresh', requireAuth, async (req: Request, res: Response) => {
-  try {
-    const result = await analyticsJson('/weather/refresh', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(req.body ?? {}),
-    })
-    return res.status(result.status).json(result.body)
-  } catch (error) {
-    return analyticsFailure(res, error)
-  }
+app.post('/api/weather/refresh', requireAuth, async (_req: Request, res: Response) => {
+  return res.status(409).json({
+    error: 'Browser weather refresh is disabled. Refresh PAGASA data through the Databricks external-source pipeline.',
+    code: 'DATABRICKS_INGESTION_REQUIRED',
+  })
 })
 
 app.options('/api/auth/login', (_req: Request, res: Response) => res.json({}))
@@ -901,88 +829,24 @@ app.post(
   },
 )
 
-app.get('/api/classify_medicine', async (req: Request, res: Response) => {
-  const name = String(req.query.name ?? '').trim()
-  try {
-    const payload = await serviceGetJson(productServiceUrl, `/classify_medicine?name=${encodeURIComponent(name)}`)
-    return res.json(payload)
-  } catch (error) {
-    return res.status(500).json({ error: 'Failed to classify medicine' })
-  }
-})
-
-app.get('/api/therapeutic_categories', async (_req: Request, res: Response) => {
-  try {
-    const payload = await serviceGetJson(productServiceUrl, '/therapeutic_categories')
-    return res.json(payload)
-  } catch (error) {
-    return res.status(500).json({ error: 'Failed to fetch therapeutic categories' })
-  }
-})
-
-app.get('/api/procurement_orders', async (_req: Request, res: Response) => {
-  try {
-    const payload = await serviceGetJson(productServiceUrl, '/procurement_orders')
-    return res.json(payload)
-  } catch (error) {
-    return res.status(500).json({ error: 'Failed to fetch procurement order recommendations' })
-  }
-})
-
-app.get('/api/seasonal_epidemic_matrix', async (_req: Request, res: Response) => {
-  try {
-    const payload = await serviceGetJson(analyticsServiceUrl, '/seasonal_epidemic_matrix')
-    return res.json(payload)
-  } catch (error) {
-    return res.status(500).json({ error: 'Failed to fetch seasonal epidemic matrix' })
-  }
-})
-
-app.get('/api/dss/prescriptive', async (_req: Request, res: Response) => {
-  try {
-    const payload = await serviceGetJson(analyticsServiceUrl, '/dss/prescriptive')
-    return res.json(payload)
-  } catch (error) {
-    return res.status(500).json({ error: 'Failed to fetch prescriptive model data' })
-  }
-})
-
-app.get('/api/seasonal_restock_detail', async (req: Request, res: Response) => {
-  try {
-    const seasonId = req.query.season_id ? String(req.query.season_id) : 'monsoon'
-    const payload = await serviceGetJson(analyticsServiceUrl, `/seasonal_restock_detail?season_id=${seasonId}`)
-    res.json(payload)
-  } catch (err) {
-    res.status(500).json({ error: (err as Error).message })
-  }
-})
-
-app.get('/api/model_summary', async (_req: Request, res: Response) => {
-  try {
-    const payload = await serviceGetJson(analyticsServiceUrl, '/model_summary')
-    return res.json(payload)
-  } catch (error) {
-    return res.status(500).json({ error: 'Failed to fetch model summary' })
-  }
-})
-
-app.get('/api/mcda_territories', requireAuth, async (_req: Request, res: Response) => {
-  try {
-    const payload = await serviceGetJson(analyticsServiceUrl, '/mcda_territories', 20000)
-    return res.json(payload)
-  } catch (error) {
-    return res.status(500).json({ error: 'Failed to fetch MCDA territory rankings' })
-  }
-})
-
-app.get('/api/eoq_scenarios', async (_req: Request, res: Response) => {
-  try {
-    const payload = await serviceGetJson(analyticsServiceUrl, '/eoq_scenarios')
-    return res.json(payload)
-  } catch (error) {
-    return res.status(500).json({ error: 'Failed to fetch EOQ scenarios' })
-  }
-})
+app.all(
+  [
+    '/api/classify_medicine',
+    '/api/therapeutic_categories',
+    '/api/procurement_orders',
+    '/api/seasonal_epidemic_matrix',
+    '/api/dss/prescriptive',
+    '/api/seasonal_restock_detail',
+    '/api/model_summary',
+    '/api/mcda_territories',
+    '/api/eoq_scenarios',
+  ],
+  requireAuth,
+  (_req: Request, res: Response) => res.status(503).json({
+    error: 'This legacy local-analysis endpoint is disabled. Publish an approved Databricks Gold view before exposing this result.',
+    code: 'DATABRICKS_VIEW_REQUIRED',
+  }),
+)
 
 app.post('/api/audit', async (req: Request, res: Response) => {
   const token = bearerToken(req)
@@ -1050,10 +914,6 @@ app.get('/api/audit', requireAuth, async (req: AuthenticatedRequest, res: Respon
   } catch (err) {
     res.status(500).json({ error: 'Failed to retrieve local audit logs' })
   }
-})
-
-void startPythonServices(analyticsServiceUrl, productServiceUrl).catch((error) => {
-  console.error('Python service auto-start failed:', error)
 })
 
 app.listen(port, () => {

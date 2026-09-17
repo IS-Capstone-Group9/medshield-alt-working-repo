@@ -1,25 +1,34 @@
 # MedShield Architecture
 
-## Layering
+## Runtime layers
 
-- Frontend: Next.js App Router and TypeScript UI in `frontend/`.
-- API Gateway: TypeScript service in `backend/` that handles routing, auth, CORS, and fallback behavior.
-- Analytics Services: Python Flask microservices in `services/` for analytics and product reporting.
-- Data: Supabase PostgreSQL warehouse schema in `supabase/`.
+- **Frontend:** Next.js App Router and TypeScript UI in `frontend/`.
+- **API gateway:** TypeScript service in `backend/`; it owns authentication, validation, and every dashboard query.
+- **System of record:** Databricks Unity Catalog, primarily `workspace.medshield_gold`.
+- **Identity and audit:** Supabase Auth and the existing audit store. Supabase does not supply dashboard measures.
 
-## Runtime Flow
+## Dashboard flow
 
-1. The frontend calls the TypeScript gateway.
-2. The gateway tries the Python analytics services for reporting data.
-3. If the analytics services are unavailable, the gateway falls back to the checked-in reference export.
-4. For auth, the frontend signs users in through Supabase Auth when public Supabase environment variables are configured.
-5. Protected frontend routes are guarded by Supabase session middleware, and protected gateway endpoints validate the Supabase bearer token before serving analytics data.
-6. If Supabase frontend variables are not configured, the app can still use the local demo auth store for development.
+1. The authenticated frontend calls the TypeScript gateway.
+2. The gateway uses server-only Databricks credentials and SQL Statement Execution APIs.
+3. Core descriptive views read the Gold yearly, monthly, area, product, and sales-fact objects.
+4. Product quantities, transactions, forecast baselines, planning shortlists, and PAGASA observations also read Databricks Gold.
+5. If Databricks or a required Gold object is unavailable, the gateway returns an error and the frontend hides the dashboard behind an explicit unavailable state.
 
-## Boundary Rules
+There is no browser JSON, Python snapshot, Supabase analytics, or local-file fallback. The public `sales_data.json` fallback was removed.
 
-- Keep frontend code free of direct database access.
-- Keep auth and HTTP orchestration in the TypeScript gateway.
-- Use Supabase Auth only for identity/session handling in the browser; keep analytics and warehouse access behind the gateway.
-- Keep analytical calculations and reporting snapshots in the Python services.
-- Keep the warehouse schema as the source of truth for persisted business data.
+## Publication gates
+
+- The current Gold financial views are candidate views, so the UI labels their status and provenance.
+- Buyer ownership is not approved in Databricks. Sector views therefore expose only `Unknown`; Government and Private remain empty.
+- DOH/PAGASA territory mappings are not approved. The external-regression view returns `blocked` and no coefficients or predictions.
+- PAGASA observations remain visible as Databricks evidence, with sales-match fields unavailable until the mapping gate passes.
+- Inventory, lead-time, supplier, and approved model outputs must be published to Databricks before their legacy endpoints can be re-enabled.
+
+## Boundary rules
+
+- Never send `DATABRICKS_TOKEN` or the SQL warehouse ID to the browser.
+- Keep direct Databricks access in the TypeScript gateway.
+- Do not infer missing buyer ownership, geography, inventory, disease joins, or model approval.
+- Do not replace a failed Databricks query with local, bundled, or mock values.
+- Treat user-entered planning inputs as scenario assumptions; Databricks supplies only the historical shortlist evidence.

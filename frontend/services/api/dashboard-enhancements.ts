@@ -152,9 +152,7 @@ export function updateDashboardProvenance(
 
   const statusBar = root.querySelector<HTMLElement>('.data-freshness-bar')
   if (statusBar) {
-    const sourceLabel = status.source === 'analytics_services'
-      ? 'Analytics Services'
-      : 'Bundled Demo Snapshot'
+    const sourceLabel = 'Databricks Gold'
     const loadedAt = new Date(status.loaded_at)
     const loadedLabel = Number.isNaN(loadedAt.getTime())
       ? 'Unavailable'
@@ -173,8 +171,7 @@ export function updateDashboardProvenance(
 
   const badge = root.querySelector<HTMLElement>('.topbar-badge')
   if (badge) {
-    badge.replaceChildren()
-    badge.textContent = status.mode === 'demo' ? 'Demo Dataset' : 'Historical Dataset'
+    badge.remove()
   }
 }
 

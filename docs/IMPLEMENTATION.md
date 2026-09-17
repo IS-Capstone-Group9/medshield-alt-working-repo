@@ -74,26 +74,23 @@ The DSS extension adds:
 4. DOH and official PAGASA extracts remain authoritative for disease, RSI, and typhoon signals; NASA POWER and Open-Meteo observations provide a separately labeled weather proxy.
 5. Python analytics jobs produce model output rows for forecasts, priorities, inventory recommendations, allocation, product-region matches, alerts, and model evaluation.
 6. Dashboard and DSS views expose the latest trusted outputs to the API.
-7. The TypeScript gateway exposes a stable frontend contract and falls back to the checked-in JSON reference export when services are unavailable.
+7. The TypeScript gateway queries Databricks Gold directly and returns an unavailable response when the source contract cannot be loaded.
 
 ## 4.4 Runtime Behavior
 
-- The TypeScript backend probes the Python analytics and product microservices and starts missing services from `services.analytics_service.app` and `services.product_service.app` during local `npm run dev`.
-- If the microservices are unavailable, it reads the same warehouse views through the reference export.
-- The runtime prefers the warehouse views. If the warehouse is unavailable in this workspace, the gateway and analytics helpers can fall back to the checked-in reference export so the dashboard still runs locally.
+- The TypeScript backend uses server-only credentials to query Databricks SQL.
+- The frontend remains hidden until the core Databricks contract loads.
+- If Databricks is unavailable, the UI shows an explicit unavailable state; no local snapshot or service fallback runs.
 
 ## 4.5 Current Deliverables
 
 - `frontend/` renders the MedShield dashboard in Next.js + TypeScript.
-- The Data Upload page accepts `.xlsx` and `.csv` MedShield sales files and sends them to the authenticated cleaning pipeline.
-- The sales ingestion pipeline standardizes DR numbers, area names, product casing, numeric values, dates, margin percentage, duplicate flags, and row quality before publishing records.
-- Year-specific sales uploads replace only the matching year(s) in the processed history; full workbook uploads replace all years included in that workbook.
-- The View Sales Data page exposes all 13 standardized columns with year, search, quality, page-size, pagination controls, direct messy `.xlsx`/`.csv` upload, and filtered computation cards for sums, averages, row counts, unique DR numbers, and SKU count.
-- The Weather API Validation page exposes daily API observations for validation, monthly planning aggregates for weather regressors, provider provenance, validation summary cards, all-territory refresh, and controlled NASA POWER or Open-Meteo refresh.
-- Local processed artifacts are stored under `data/medshield/processed`; raw runtime uploads are ignored by Git.
+- Sales ingestion and standardization run in Databricks before Gold publication.
+- The View Sales Data page exposes the Gold fact with year, search, quality, page-size, pagination, lineage, and filtered computation cards.
+- The Weather API Validation page exposes monthly PAGASA observations from the Databricks external-signals Gold view.
+- Local processed artifacts under `data/medshield/processed` are offline QA inputs and never runtime fallbacks.
 - `backend/` exposes the dashboard API in TypeScript.
-- `backend/src/snapshot.ts` mirrors the analytics fallback for the TypeScript gateway.
-- `services/shared_snapshot.py` reads the warehouse views for the Python analytics services.
+- `backend/src/snapshot.ts` maintains a short-lived cache of the live Databricks snapshot.
 - `supabase/seed.sql` seeds the current data into the connected schema.
 
 ## 4.6 Current Workbook Reconciliation

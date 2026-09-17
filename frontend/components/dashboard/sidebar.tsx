@@ -38,7 +38,7 @@ export function Sidebar({
     { id: 'territory', label: 'Area Prioritization', icon: Map },
     { id: 'forecast', label: 'Forecast Modeling', icon: TrendingUp, section: 'DSS' },
     { id: 'inventory', label: 'Prescriptive Planning', icon: ClipboardList },
-    { id: 'data', label: 'Data Upload', icon: Upload },
+    { id: 'data', label: 'Data Source', icon: Upload },
   ] as const
 
   return (

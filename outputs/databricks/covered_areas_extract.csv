@@ -1,0 +1,23 @@
+area_name,area_label,area_type,territory,mapped_region,mapped_province,mapped_city_municipality,is_geographic_territory_approved,total_transactions,first_observed_delivery,last_observed_delivery,total_quantity,total_net_sales,total_gross_margin,gross_margin_pct
+BATANGAS,BATANGAS,territory,BATANGAS,CALABARZON,Batangas,-,true,5099,2017-01-04,2025-12-27,51657.31,32085036.67,19569821.50,60.99
+QUEZON,QUEZON,territory,QUEZON,CALABARZON,Quezon,-,true,4671,2017-01-03,2025-12-29,53923.80,28759736.94,18015307.30,62.64
+LAGUNA,LAGUNA,territory,LAGUNA,CALABARZON,Laguna,-,true,2071,2017-01-04,2023-10-21,75456.96,18407803.72,10627754.43,57.74
+MARINDUQUE,MARINDUQUE,territory,MARINDUQUE,MIMAROPA,Marinduque,-,true,1085,2017-01-11,2025-10-31,23554.23,13399514.65,7151054.49,53.37
+CAVITE,CAVITE,territory,CAVITE,CALABARZON,Cavite,-,true,1082,2017-01-27,2023-06-22,18666.16,8683954.84,5850246.48,67.37
+ALBAY,ALBAY,territory,,Bicol,Albay,-,false,172,2018-03-01,2022-02-07,4030.86,1764888.17,1118175.81,63.36
+BICOL,BICOL,territory,,Bicol,-,-,false,332,2018-08-15,2019-09-03,4032.60,1182409.43,690480.50,58.40
+CAM NORTE,CAM NORTE,territory,,Bicol,Camarines Norte,-,false,1963,2017-01-02,2023-09-11,0.00,0.00,0.00,0.00
+CAM SUR,CAM SUR,territory,,Bicol,Camarines Sur,-,false,2163,2017-01-03,2023-06-22,0.00,0.00,0.00,0.00
+LOWER CAVITE,LOWER CAVITE,territory,,CALABARZON,Cavite,-,false,314,2019-02-13,2023-08-26,0.00,0.00,0.00,0.00
+GOVERNMENT,GOVERNMENT,customer_type,,Non-Geographic / Unmapped,-,-,false,7814,2017-01-30,2025-12-31,680910.05,300211655.15,151345188.77,50.41
+HOSPITAL,HOSPITAL,customer_type,,Non-Geographic / Unmapped,-,-,false,5128,2017-01-11,2025-12-31,457703.23,176331564.21,75553573.58,42.85
+ADMIN,ADMIN,business_line,,Non-Geographic / Unmapped,-,-,false,4238,2017-01-03,2025-12-19,30367.48,17933617.86,9359206.30,52.19
+EQUIPMENT,EQUIPMENT,business_line,,Non-Geographic / Unmapped,-,-,false,113,2018-04-06,2023-05-27,33914.00,14475259.73,7679164.32,53.05
+SUPPLIES,SUPPLIES,business_line,,Non-Geographic / Unmapped,-,-,false,572,2017-03-01,2023-10-21,12669.07,4929323.34,1797870.68,36.47
+SUPPLIES AND EQUIPMENT,SUPPLIES AND EQUIPMENT,business_line,,Non-Geographic / Unmapped,-,-,false,125,2018-03-08,2018-10-30,5630.50,1429603.50,562556.50,39.35
+PHARMA,PHARMA,customer_type,,Non-Geographic / Unmapped,-,-,false,96,2017-01-09,2024-01-17,812.90,1126380.00,705257.77,62.61
+MINDORO,MINDORO,unresolved,,MIMAROPA,-,-,false,36,2017-02-22,2020-11-13,1843.00,196474.00,56920.13,28.97
+EAST,EAST,unresolved,,Non-Geographic / Unmapped,-,-,false,20,2017-02-02,2017-04-28,360.00,177512.50,109956.90,61.94
+LOSSES,LOSSES,business_line,,Non-Geographic / Unmapped,-,-,false,20,2020-01-25,2021-03-04,76.30,32792.50,26280.92,80.14
+PERSONAL,PERSONAL,business_line,,Non-Geographic / Unmapped,-,-,false,44,2020-03-14,2024-03-12,79.28,17493.75,2898.43,16.57
+EASTERN,EASTERN,unresolved,,Non-Geographic / Unmapped,-,-,false,20,2017-01-09,2017-04-10,0.00,0.00,0.00,0.00

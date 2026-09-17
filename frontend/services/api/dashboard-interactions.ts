@@ -3,7 +3,6 @@ import {
   getSalesTransactions,
   getSalesSummary,
   getWeatherEffects,
-  refreshWeatherData,
   loadDashboardData,
 } from '@/lib/api'
 import { renderSalesComputation, renderSalesDatasetStatus } from './sales-view-helpers'
@@ -23,7 +22,7 @@ export async function refreshSalesHeatmap() {
     const data = await getJson('/api/sales/heatmap')
     if (request === heatmapRequest) apply(data)
   } catch {
-    if (request === heatmapRequest) apply(null, 'Product quantities unavailable. Check the sales service and rebuild the allocated layer after uploads; no demo quantities are substituted.')
+    if (request === heatmapRequest) apply(null, 'Product quantities unavailable from Databricks Gold; no local or demonstration quantities were substituted.')
   }
 }
 
@@ -37,7 +36,7 @@ export async function refreshSalesSectors() {
     const data = await getJson('/api/sales/sectors')
     if (request === sectorRequest) apply(data)
   } catch {
-    if (request === sectorRequest) apply(null, 'Buyer-sector analysis unavailable. Check the sales service and rebuild the allocated layer after uploads; no demo quantities are substituted.')
+    if (request === sectorRequest) apply(null, 'Buyer-sector analysis unavailable from Databricks Gold; no local or demonstration classifications were substituted.')
   }
 }
 
@@ -47,13 +46,13 @@ export async function refreshForecastValidation() {
   const apply = (window as any).setForecastValidationData
   if (typeof apply !== 'function') return
   const value = (id: string) => (document.getElementById(id) as HTMLSelectElement | null)?.value ?? ''
-  const params = new URLSearchParams({ sector: value('forecastSector') || 'Government', product: value('forecastProduct'), metric: value('forecastMetric') || 'revenue' })
+  const params = new URLSearchParams({ sector: value('forecastSector') || 'Unknown', product: value('forecastProduct'), metric: value('forecastMetric') || 'revenue' })
   apply(null, 'Loading source-backed forecast evidence…')
   try {
     const data = await getJson(`/api/sales/forecast-validation?${params}`)
     if (request === forecastRequest && (window as any).setForecastValidationData === apply) apply(data)
   } catch {
-    if (request === forecastRequest && (window as any).setForecastValidationData === apply) apply(null, 'Forecast evidence unavailable. Check the selected scope and rebuild the allocated sales layer after uploads; no example forecasts are substituted.')
+    if (request === forecastRequest && (window as any).setForecastValidationData === apply) apply(null, 'Forecast evidence unavailable from Databricks Gold for the selected scope; no example forecasts were substituted.')
   }
 }
 
@@ -72,7 +71,7 @@ export async function refreshExternalRegression() {
     const data = await getJson(`/api/sales/external-regression?${params}`)
     if (request === regressionRequest && (window as any).setExternalRegressionData === apply) apply(data)
   } catch {
-    if (request === regressionRequest && (window as any).setExternalRegressionData === apply) apply(null, 'Regression evidence unavailable. Check source preparation, freshness and the selected scope; no demo results are substituted.')
+    if (request === regressionRequest && (window as any).setExternalRegressionData === apply) apply(null, 'Regression evidence unavailable from Databricks Gold for the selected scope; no demonstration results were substituted.')
   }
 }
 
@@ -83,12 +82,12 @@ export async function refreshPlanning() {
   const apply = (window as any).setPlanningData
   if (typeof apply !== 'function') return
   const value = (id: string) => (document.getElementById(id) as HTMLSelectElement)?.value
-  const params = new URLSearchParams({ sector: value('planSector') || 'Unknown', territory: value('planTerritory') || 'Quezon' })
+  const params = new URLSearchParams({ sector: value('planSector') || 'Unknown', territory: value('planTerritory') || 'all' })
   apply(null, 'Loading source-ranked products…')
   try {
     const data = await getJson(`/api/sales/planning-shortlist?${params}`)
     if (request === planningRequest && (window as any).setPlanningData === apply) apply(data)
-  } catch { if (request === planningRequest && (window as any).setPlanningData === apply) apply(null, 'Shortlist unavailable. Check the current sales layer; no demo products substituted.') }
+  } catch { if (request === planningRequest && (window as any).setPlanningData === apply) apply(null, 'Shortlist unavailable from Databricks Gold; no demonstration products were substituted.') }
 }
 
 async function solvePlanning() {
@@ -128,7 +127,9 @@ export function installCommonInteractions(root: HTMLElement, activeListeners: an
 
 export async function refreshDashboardFromGateway() {
   const applyDatasetPatch = (window as any).applyDatasetPatch
-  if (typeof applyDatasetPatch !== 'function') return
+  if (typeof applyDatasetPatch !== 'function') {
+    throw new Error('Dashboard live-data adapter is unavailable')
+  }
 
   // This source must still be checked if the unrelated dashboard snapshot fails.
   const forecastRefresh = refreshForecastValidation()
@@ -139,6 +140,25 @@ export async function refreshDashboardFromGateway() {
   const root = document.querySelector<HTMLElement>('.medshield-root')
   if (root) {
     updateDashboardProvenance(root, data.dataStatus, data.yearSummary.map((row) => row.year))
+    const currency = new Intl.NumberFormat('en-PH', {
+      style: 'currency',
+      currency: 'PHP',
+      notation: 'compact',
+      maximumFractionDigits: 1,
+    })
+    const integer = new Intl.NumberFormat('en-PH', { maximumFractionDigits: 0 })
+    const metrics: Record<string, string> = {
+      kpiOverviewTotalRevenue: currency.format(data.summary.total_revenue),
+      kpiOverviewGrossProfit: currency.format(data.summary.total_income),
+      kpiOverviewTransactions: integer.format(data.summary.total_transactions),
+      kpiOverviewGrossMargin: data.summary.avg_margin == null
+        ? 'Unavailable'
+        : `${data.summary.avg_margin.toFixed(2)}%`,
+    }
+    for (const [id, value] of Object.entries(metrics)) {
+      const element = root.querySelector<HTMLElement>(`#${id}`)
+      if (element) element.textContent = value
+    }
   }
   applyDatasetPatch({
     monthly: data.monthly,
@@ -148,6 +168,8 @@ export async function refreshDashboardFromGateway() {
     seasonality: data.seasonality,
   })
   if (root) setDecisionSupportChartData(root, data)
+  // Keep the dashboard hidden until every visible analytical module has either
+  // loaded its Databricks response or rendered an explicit unavailable state.
   await Promise.all([refreshSalesHeatmap(), refreshSalesSectors(), forecastRefresh, regressionRefresh, planningRefresh])
 }
 
