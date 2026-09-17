@@ -219,5 +219,37 @@ In legacy pharmaceutical distribution ledgers, transactions across Mindoro Islan
     └── Albay / Legazpi (₱1.64M · 172 rows)
 ```
 
+---
+
+## 9. Canonical Mapped Client Reference Catalog & UI Integration
+
+To enable complete auditability and end-to-end tracing from raw account strings to model compute anchors, the **Area Prioritization** module integrates the complete **782-account Client Reference Directory** directly below the primary ranking and concentration views:
+
+### Key Representative Client & Institutional Mappings
+
+| Client Code | Raw Client / Account Name (PDF Source) | Client Type / Channel | Region | Province / Territory | Model Anchor (`lgu_city_muni`) | Imputation Basis & Context |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `CLI-0001` | `A/R - Admin` | Internal Admin | National | HQ | **MedShield HQ** | MedShield corporate headquarters & administration |
+| `CLI-0002` | `A/R - Government` | National Govt | National | National | **National Hub (DOH Central)** | DOH Central & National Public Bidding procurement |
+| `CLI-0003` | `*(System Generated Default)*` | Regional Hub | CALABARZON | Regional | **Quezon City (Logistical)** | DOH-CHD CALABARZON Regional Office |
+| `CLI-0004` | `*(System Generated Default)*` | PHO | CALABARZON | Batangas | **Batangas City** | Batangas Provincial Health Office |
+| `CLI-0070` | `A/R - Batangas - Ann Denise Codizal Pharmacy` | Pharmacy | CALABARZON | Batangas | **Balayan** | Direct facility lookup in Balayan municipality |
+| `CLI-0071` | `A/R - Batangas - Botika Estela` | Pharmacy | CALABARZON | Batangas | **Balayan** | Direct facility lookup in Balayan municipality |
+| `CLI-0075` | `A/R - Batangas - Divine Care Hospital` | Private Hospital | CALABARZON | Batangas | **San Juan** | Direct facility lookup in San Juan municipality |
+| `CLI-0076` | `*(System Generated Default)*` | PHO | CALABARZON | Cavite | **Trece Martires** | Cavite Provincial Health Office (Capital Anchor) |
+| `CLI-0335` | `A/R - Hospital - Lucena MMG Hospital` | Private / Inpatient | CALABARZON | Quezon | **Lucena City** | Major Lucena City inpatient medical cooperative |
+| `CLI-0336` | `A/R - Hospital - Peter Paul Medical Center` | Private / Inpatient | CALABARZON | Quezon | **Candelaria** | Private hospital facility anchor |
+| `CLI-0340` | `A/R - D3 - LGU - Pagbilao` | LGU | CALABARZON | Quezon | **Pagbilao** | Exact reference-backed Municipal Health Office anchor |
+| `CLI-0341` | `A/R - D3 - District - Bondoc Peninsula District Hospital` | Govt Hospital | CALABARZON | Quezon | **Catanauan** | Provincial government district hospital anchor |
+| `CLI-0416` | `A/R - Marinduque - Provincial Government` | Govt | MIMAROPA | Marinduque | **Boac** | Provincial Government of Marinduque (Capital Anchor) |
+| `CLI-0518` | `*(System Generated Default)*` | PHO | MIMAROPA | Oriental Mindoro | **Calapan City** | Oriental Mindoro Provincial Health Office (63.2% PSA) |
+| `CLI-0534` | `*(System Generated Default)*` | PHO | MIMAROPA | Occidental Mindoro | **Mamburao** | Occidental Mindoro Provincial Health Office (36.8% PSA) |
+| `CLI-0550` | `*(System Generated Default)*` | PHO | Bicol (Region V) | Camarines Norte | **Daet** | Camarines Norte Provincial Health Office |
+| `CLI-0563` | `*(System Generated Default)*` | PHO | Bicol (Region V) | Camarines Sur | **Pili** | Camarines Sur Provincial Health Office |
+| `CLI-0600` | `*(System Generated Default)*` | PHO | Bicol (Region V) | Albay | **Legazpi City** | Albay Provincial Health Office |
+
+> Full directory containing all 782 verified accounts is maintained in [`docs/MAPPED_CLIENT_REFERENCE.md`](file:///c:/Users/Ethan/ega_KERR/docs/MAPPED_CLIENT_REFERENCE.md) and exposed via interactive search, filtering, and CSV export in the Area Prioritization dashboard runtime.
+
+
 
 
