@@ -133,3 +133,26 @@ $$\text{MCDA Composite Score} = \left( \frac{\text{Territory Net Sales}}{\text{M
 - **Automated Validation**:
   - Full Playwright E2E suites passing (`medshield-dashboard.spec.ts`, `area-prioritization.spec.ts`, `sales-sectors.spec.ts`).
   - 71 Python analytical unit tests passing in `services/tests/`.
+
+---
+
+## 7. Cluster & Subcluster Verified Dataset Breakdown
+
+Aggregated directly from the 37,178 Databricks Gold sales fact rows across the entire multi-year pipeline (2017–2025):
+
+| Primary Cluster | Subcluster / Channel | Net Sales Revenue (₱) | Share of Total Rev | Quantity (Units) | Fact Row Count | Primary Geographic Scope |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Government** | **Government Bidding** | ₱299,996,885.15 | 48.76% | 680,910.05 | 7,814 | National & CHD Regional Hubs / Public Bidding |
+| *Subtotal* | *Government Cluster* | *₱299,996,885.15* | *48.76%* | *680,910.05* | *7,814* | *Institutional Public Procurement* |
+| **Private** | **Private Hospital** | ₱164,135,595.21 | 26.68% | 409,338.27 | 5,128 | Quezon (Lucena MMG, Peter Paul, RAKKK, Divine Care) |
+| **Private** | **Retail Pharmacy** | ₱113,882,394.19 | 18.51% | 235,736.77 | 19,124 | Cavite, Batangas, Laguna, Quezon, Marinduque, Camarines Norte, Camarines Sur, Albay, Mindoro |
+| *Subtotal* | *Private Cluster* | *₱278,017,989.40* | *45.19%* | *645,075.04* | *24,252* | *Commercial Outpatient & Inpatient Care* |
+| **Internal** | **Internal Admin** | ₱16,357,598.69 | 2.66% | 27,512.23 | 4,238 | MedShield HQ Corporate Administration |
+| **Internal** | **Internal Equipment** | ₱14,475,259.73 | 2.35% | 33,914.00 | 113 | Capital equipment & logistics allocation |
+| **Internal** | **Internal Supplies** | ₱6,358,926.84 | 1.03% | 17,927.55 | 697 | Corporate operational supplies |
+| **Internal** | **Internal Personal** | ₱17,493.75 | <0.01% | 79.28 | 44 | Internal employee / individual accounts |
+| **Internal** | **Internal Losses** | ₱32,792.50 | 0.01% | 40.30 | 20 | Inventory write-offs & stock damage |
+| *Subtotal* | *Internal Cluster* | *₱37,242,071.51* | *6.05%* | *79,473.36* | *5,112* | *Corporate Overhead (Non-Commercial)* |
+| **Unknown** | **Unassigned / Unmapped** | ₱0.00 | 0.00% | 0.00 | 0 | Dynamic "Add Client" flow prevents unmapped loss |
+| **TOTAL** | **All Clusters & Subclusters** | **₱615,256,946.06** | **100.00%** | **1,405,458.45** | **37,178** | **Complete Multi-Year Databricks Gold Fact** |
+
