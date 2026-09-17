@@ -120,7 +120,6 @@ doh_bronze = (
         F.col("Region").alias("region_raw"),
         F.col("Province").alias("province_raw"),
         F.col("Municipality_City").alias("municipality_city_raw"),
-        F.col("Age").alias("age_raw"),
         F.col("Admission Status").alias("admission_status_raw"),
         F.col("Case Classification").alias("case_classification_raw"),
         F.col("Number of Cases").alias("number_of_cases_raw"),
@@ -214,9 +213,23 @@ station_metadata = spark.createDataFrame(
     "station_name string, latitude double, longitude double, elevation_m double, "
     "external_dataset_id string, policy_version string",
 )
-assert station_metadata.count() == 64
+source_station_names = {path.name.removesuffix(" Daily Data.csv") for path in pagasa_files}
+metadata_station_names = set(station_values)
+missing_station_metadata = sorted(source_station_names - metadata_station_names)
+extra_station_metadata = sorted(metadata_station_names - source_station_names)
+assert len(source_station_names) == 64
+assert station_metadata.count() == 63
+assert missing_station_metadata == ["San Ildefonso"]
+assert extra_station_metadata == []
 station_metadata.write.format("delta").mode("overwrite").option("overwriteSchema", "true").saveAsTable(
     f"{CATALOG}.medshield_bronze.external_restart_pagasa_station_metadata_candidate"
+)
+metadata_coverage = spark.createDataFrame(
+    [(station, station in metadata_station_names) for station in sorted(source_station_names)],
+    "station_name string, has_official_coordinate_metadata boolean",
+).withColumn("external_dataset_id", F.lit(dataset_id)).withColumn("policy_version", F.lit(POLICY_VERSION))
+metadata_coverage.write.format("delta").mode("overwrite").option("overwriteSchema", "true").saveAsTable(
+    f"{CATALOG}.medshield_audit.external_restart_pagasa_metadata_coverage_candidate"
 )
 
 audit = spark.createDataFrame(
@@ -228,4 +241,7 @@ audit = spark.createDataFrame(
     "table_name string, saved_rows long",
 ).withColumn("external_dataset_id", F.lit(dataset_id)).withColumn("status", F.lit("PASS_BRONZE_CANDIDATE"))
 display(audit.orderBy("table_name"))
+print(f"PAGASA source stations: {len(source_station_names)}")
+print(f"PAGASA stations with official coordinates: {len(metadata_station_names)}")
+print(f"PAGASA stations missing coordinates: {missing_station_metadata}")
 print("EXTERNAL BRONZE: PASS_CANDIDATE")

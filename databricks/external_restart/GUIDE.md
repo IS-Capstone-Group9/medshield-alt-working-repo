@@ -32,11 +32,20 @@ misaligned with the 2021-2024 files that omit `TMEAN`.
 Import and run these Databricks source notebooks in order:
 
 1. Run `00_external_setup.py` to create the schemas, volume, and upload folders.
-2. Upload the unchanged DOH folder to the printed `/doh` path and the unchanged
-   PAGASA folder to the printed `/pagasa` path.
+2. If the raw files already exist in the sibling Workspace folders shown below,
+   run `00_copy_workspace_sources.py` to copy them into the Volume. Otherwise,
+   upload the raw folders to the printed Volume paths through the upload UI.
 3. Run `01_external_bronze.py`.
 4. Run `02_external_silver.py`.
 5. Run `03_external_gold.py`.
+
+`00_copy_workspace_sources.py` recognizes this existing Workspace layout:
+
+```text
+DOH_datasources/diseases_20182026/
+PAGASA_datasources/20172020_batch1/
+PAGASA_datasources/20212024_batch2/
+```
 
 Bronze records a SHA-256 source manifest and retains the raw string values.
 Silver validates dates and measures, classifies DOH records, converts PAGASA
@@ -47,7 +56,9 @@ closed year.
 
 ## Expected results
 
-- Bronze: 4,484,337 DOH rows, 161,744 PAGASA rows, and 64 station metadata rows.
+- Bronze: 4,484,337 DOH rows, 161,744 PAGASA rows, 64 station names, and
+  63 coordinate-metadata rows. `San Ildefonso` is retained with null
+  coordinates because it is absent from the supplied PAGASA readme metadata.
 - Silver: 138,673 DOH monthly rows totaling 4,608,155 reported cases and
   161,742 valid PAGASA station-days.
 - Gold: 1,787 DOH territory/month/disease candidates totaling 233,531 reported
