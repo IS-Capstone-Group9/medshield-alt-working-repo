@@ -112,18 +112,18 @@ SKUs are organized into 4 clinical action clusters for domain filtering:
 
 ## 4. Geographic Area Prioritization Module
 
-### 4.1 Regional Hierarchy & Multi-Level Granularity
-The geographic scope supports dynamic filtering and aggregation across the Philippine operational territory:
+### 4.1 Regional Hierarchy & Total Mapped Rollup
+The geographic scope supports dynamic filtering and aggregation across the 5 canonical regional granularities:
 - **Region IV-A (CALABARZON)**: Batangas, Cavite, Laguna, Quezon, Rizal.
 - **Region IV-B (MIMAROPA)**: Occidental Mindoro, Oriental Mindoro, Marinduque, Palawan, Romblon.
 - **Region V (Bicol)**: Albay, Camarines Norte, Camarines Sur, Catanduanes, Masbate, Sorsogon.
-- **Other National**: Metro Manila (NCR), Central Luzon, Visayas, Mindanao distribution hubs.
+- **Other National**: Metro Manila (NCR), Central Luzon, Visayas, Mindanao distribution hubs, National DOH Public Bidding.
 - **Unknown / Unassigned**: Unspecified legacy territory records queued for spatial reconciliation.
 
 The system provides:
 1. **Provincial Granularity**: Row-level visibility into specific provincial health offices, hospital networks, and retail accounts.
-2. **Regional Aggregates**: Automated rollups providing regional revenue, unit volume, and priority indices.
-3. **National Grand Total**: Comprehensive macro view of total inventory throughput.
+2. **Regional Granularity Aggregates**: Interactive rollup cards providing regional net sales, unit volume, provincial counts, and market share for each of the 5 regions.
+3. **Total Mapped Rollup**: Consolidated macro aggregate across the 5 regional granularities (`Total = CALABARZON + MIMAROPA + Bicol + Other National + Unknown`).
 
 ### 4.2 Resolution of the Mindoro Disaggregation Dilemma
 In historical raw transaction logs, the island of Mindoro is frequently recorded as a single legacy entity ("Mindoro"). Treating it as a flat 50/50 split distorts logistics planning. MedShield implements an evidence-based weighted disaggregation model:

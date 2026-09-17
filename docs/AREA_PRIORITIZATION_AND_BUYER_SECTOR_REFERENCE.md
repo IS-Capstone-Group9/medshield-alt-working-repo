@@ -199,7 +199,9 @@ In legacy pharmaceutical distribution ledgers, transactions across Mindoro Islan
 3. **Traceability & Audit Metadata**:
    - Each disaggregated record is explicitly tagged with `basis: "Approved buyer mapping: PSA demographic weighted apportionment (63.2% Oriental Mindoro / 36.8% Occidental Mindoro)"` and anchored to its respective Provincial Health Office (Calapan PHO for Oriental Mindoro, Mamburao PHO for Occidental Mindoro).
 
-### 8.2 Regional Hierarchy Tree
+### 8.2 Regional Granularity & Total Mapped Rollup Structure
+
+The **Total Mapped Rollup** in Area Prioritization aggregates directly from the **5 Regional Granularities**:
 
 ```
 ├── Region IV-A (CALABARZON)
@@ -210,13 +212,24 @@ In legacy pharmaceutical distribution ledgers, transactions across Mindoro Islan
 │
 ├── Region IV-B (MIMAROPA)
 │   ├── Marinduque (₱13.40M · 1,085 rows)
-│   ├── Oriental Mindoro [63.2% PSA] (₱0.12M · 23 rows)
-│   └── Occidental Mindoro [36.8% PSA] (₱0.07M · 13 rows)
+│   ├── Oriental Mindoro [63.2% PSA Demog. Share] (₱0.12M · 23 rows)
+│   └── Occidental Mindoro [36.8% PSA Demog. Share] (₱0.07M · 13 rows)
 │
-└── Region V (Bicol)
-    ├── Camarines Norte (₱11.64M · 1,963 rows)
-    ├── Camarines Sur (₱7.76M · 2,495 rows)
-    └── Albay / Legazpi (₱1.64M · 172 rows)
+├── Region V (Bicol)
+│   ├── Camarines Norte (₱11.64M · 1,963 rows)
+│   ├── Camarines Sur (₱7.76M · 2,495 rows)
+│   └── Albay / Legazpi (₱1.64M · 172 rows)
+│
+├── Other National
+│   ├── National Hub (DOH Central Public Bidding)
+│   └── MedShield HQ Operational Facilities
+│
+└── Unknown / Unassigned
+    └── Unmapped / reconciliation queue (0 rows in clean Gold fact)
+
+══════════════════════════════════════════════════════════════════════
+TOTAL MAPPED ROLLUP = CALABARZON + MIMAROPA + Bicol + Other National + Unknown
+══════════════════════════════════════════════════════════════════════
 ```
 
 ---

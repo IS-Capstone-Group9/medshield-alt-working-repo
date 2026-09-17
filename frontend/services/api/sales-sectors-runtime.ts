@@ -7464,7 +7464,7 @@ function renderSalesSectors(error) {
  const topThree=ranked.slice(0,3).reduce((total,row)=>total+row.revenue,0),leading=ranked[0];
 
  /* Regional Granularity & Rollup Aggregation Computation */
- const regionalRollups = ['CALABARZON','MIMAROPA','Bicol','Other National'].map(regName => {
+ const regionalRollups = ['CALABARZON','MIMAROPA','Bicol','Other National','Unknown'].map(regName => {
   const regProvinces = positive.filter(p => p.region === regName);
   const regRev = regProvinces.reduce((sum, p) => sum + p.revenue, 0);
   const regActual = regProvinces.reduce((sum, p) => sum + p.actual, 0);
@@ -7539,7 +7539,7 @@ function renderSalesSectors(error) {
  const totalFooterHtml = ranked.length > 0 ? (
   '<tfoot><tr>' +
    '<td colspan="2" style="text-align:left"><strong>Total Rollup (' + (region === 'All' ? 'All Regions' : esc(region)) + ')</strong></td>' +
-   '<td><strong>' + (region === 'All' ? '4 Regions' : esc(region)) + '</strong></td>' +
+   '<td><strong>' + (region === 'All' ? '5 Regions' : esc(region)) + '</strong></td>' +
    '<td class="area-score">100.0</td>' +
    '<td><strong>' + fmtCurrency(totalActual) + '</strong></td>' +
    '<td><strong>' + fmtCurrency(totalEstimated) + '</strong></td>' +
