@@ -1,5 +1,5 @@
 raw_area,buyer_sector,customer_channel,territory,mapping_status,review_notes
-Government,Government,Government Bidding,Unassigned geography,approved,National Government and public health bidding
+Government,Government,Government Bidding,National Hub (DOH Central),approved,National Government and DOH Central public health bidding from docs/MAPPED_CLIENT_REFERENCE.md record CLI-0002.
 Pagbilao,Government,LGU,Quezon,approved,Exact reference-backed LGU mapping from docs/MAPPED_CLIENT_REFERENCE.md record CLI-0340.
 Hospital,Private,Private Hospital,Quezon,approved,Private hospitals and medical centers (e.g. Lucena MMG, Peter Paul, Divine Care)
 Pharma,Private,Retail Pharmacy,Quezon,approved,Retail pharmacies and drugstores (e.g. Century Drug, Botika Estela, Ann Denise)
@@ -22,10 +22,10 @@ Mindoro,Private,Retail Pharmacy,Mindoro,approved,Disaggregated into Oriental Min
 East,Private,Retail Pharmacy,Quezon,approved,Eastern Quezon private accounts
 Eastern,Private,Retail Pharmacy,Quezon,approved,Eastern Quezon private accounts
 Eastern Quezon,Private,Retail Pharmacy,Quezon,approved,Eastern Quezon private accounts
-Admin,Internal,Internal Admin,Unassigned geography,approved,MedShield internal administration
-Supplies,Internal,Internal Supplies,Unassigned geography,approved,MedShield internal supplies
-Suppllies,Internal,Internal Supplies,Unassigned geography,approved,MedShield internal supplies
-Supplies and Equipment,Internal,Internal Supplies,Unassigned geography,approved,MedShield internal supplies
-Equipment,Internal,Internal Equipment,Unassigned geography,approved,MedShield internal equipment
-Personal,Internal,Internal Personal,Unassigned geography,approved,MedShield personal accounts
-Losses,Internal,Internal Losses,Unassigned geography,approved,MedShield inventory losses
+Admin,Internal,Internal Admin,MedShield HQ,approved,MedShield internal administration from docs/MAPPED_CLIENT_REFERENCE.md record CLI-0001.
+Supplies,Internal,Internal Supplies,MedShield HQ,approved,MedShield internal operational supplies
+Suppllies,Internal,Internal Supplies,MedShield HQ,approved,MedShield internal operational supplies
+Supplies and Equipment,Internal,Internal Supplies,MedShield HQ,approved,MedShield internal operational supplies
+Equipment,Internal,Internal Equipment,MedShield HQ,approved,MedShield internal equipment
+Personal,Internal,Internal Personal,MedShield HQ,approved,MedShield personal accounts
+Losses,Internal,Internal Losses,MedShield HQ,approved,MedShield inventory losses

@@ -544,6 +544,8 @@ export async function getDatabricksSalesSectors() {
       ELSE 'Unknown'
     END AS sector,
     CASE
+      WHEN UPPER(TRIM(normalized_area)) = 'GOVERNMENT' THEN 'National Hub (DOH Central)'
+      WHEN UPPER(TRIM(normalized_area)) IN ('ADMIN', 'SUPPLIES', 'SUPPLLIES', 'EQUIPMENT', 'SUPPLIES AND EQUIPMENT', 'PERSONAL', 'LOSSES') THEN 'MedShield HQ'
       WHEN UPPER(TRIM(normalized_area)) IN ('CAVITE', 'LOWER CAVITE') OR UPPER(TRIM(COALESCE(territory, ''))) IN ('LOWER CAVITE', 'CAVITE') THEN 'Cavite'
       WHEN UPPER(TRIM(normalized_area)) IN ('BATANGAS') OR UPPER(TRIM(COALESCE(territory, ''))) = 'BATANGAS' THEN 'Batangas'
       WHEN UPPER(TRIM(normalized_area)) IN ('QUEZON', 'PAGBILAO', 'HOSPITAL', 'HOPITAL', 'PHARMA', 'LUCENA', 'RAKKK', 'EAST', 'EASTERN', 'EASTERN QUEZON') OR UPPER(TRIM(COALESCE(territory, ''))) = 'QUEZON' THEN 'Quezon'
@@ -571,8 +573,8 @@ export async function getDatabricksSalesSectors() {
     END AS channel,
     CASE
       WHEN UPPER(TRIM(normalized_area)) = 'PAGBILAO' THEN 'Approved buyer mapping: Exact reference-backed LGU mapping from docs/MAPPED_CLIENT_REFERENCE.md record CLI-0340.'
-      WHEN UPPER(TRIM(normalized_area)) = 'GOVERNMENT' THEN 'Explicit government, public hospital, or LGU label'
-      WHEN UPPER(TRIM(normalized_area)) IN ('ADMIN', 'SUPPLIES', 'SUPPLLIES', 'EQUIPMENT', 'SUPPLIES AND EQUIPMENT', 'PERSONAL', 'LOSSES') THEN 'MedShield internal business label'
+      WHEN UPPER(TRIM(normalized_area)) = 'GOVERNMENT' THEN 'Approved buyer mapping: National Government & DOH Central public bidding from docs/MAPPED_CLIENT_REFERENCE.md record CLI-0002.'
+      WHEN UPPER(TRIM(normalized_area)) IN ('ADMIN', 'SUPPLIES', 'SUPPLLIES', 'EQUIPMENT', 'SUPPLIES AND EQUIPMENT', 'PERSONAL', 'LOSSES') THEN 'Approved buyer mapping: MedShield internal corporate administration from docs/MAPPED_CLIENT_REFERENCE.md record CLI-0001.'
       WHEN proposed_area_type = 'territory' OR UPPER(TRIM(normalized_area)) IN ('CAVITE', 'LOWER CAVITE', 'BATANGAS', 'QUEZON', 'LAGUNA', 'MARINDUQUE', 'CAMARINES NORTE', 'CAM NORTE', 'CAMARINES SUR', 'CAM SUR', 'ALBAY', 'LEGASPI', 'LAGASPI', 'BICOL', 'MINDORO', 'HOSPITAL', 'HOPITAL', 'PHARMA', 'LUCENA', 'RAKKK', 'EAST', 'EASTERN', 'EASTERN QUEZON') THEN 'Approved buyer mapping: Provincial, private-care, pharmacy, or individual-account label from docs/MAPPED_CLIENT_REFERENCE.md'
       ELSE 'Buyer type unavailable'
     END AS basis,
@@ -588,6 +590,8 @@ export async function getDatabricksSalesSectors() {
         ELSE 'Unknown'
       END,
       CASE
+        WHEN UPPER(TRIM(normalized_area)) = 'GOVERNMENT' THEN 'National Hub (DOH Central)'
+        WHEN UPPER(TRIM(normalized_area)) IN ('ADMIN', 'SUPPLIES', 'SUPPLLIES', 'EQUIPMENT', 'SUPPLIES AND EQUIPMENT', 'PERSONAL', 'LOSSES') THEN 'MedShield HQ'
         WHEN UPPER(TRIM(normalized_area)) IN ('CAVITE', 'LOWER CAVITE') OR UPPER(TRIM(COALESCE(territory, ''))) IN ('LOWER CAVITE', 'CAVITE') THEN 'Cavite'
         WHEN UPPER(TRIM(normalized_area)) IN ('BATANGAS') OR UPPER(TRIM(COALESCE(territory, ''))) = 'BATANGAS' THEN 'Batangas'
         WHEN UPPER(TRIM(normalized_area)) IN ('QUEZON', 'PAGBILAO', 'HOSPITAL', 'HOPITAL', 'PHARMA', 'LUCENA', 'RAKKK', 'EAST', 'EASTERN', 'EASTERN QUEZON') OR UPPER(TRIM(COALESCE(territory, ''))) = 'QUEZON' THEN 'Quezon'
@@ -615,8 +619,8 @@ export async function getDatabricksSalesSectors() {
       END,
       CASE
         WHEN UPPER(TRIM(normalized_area)) = 'PAGBILAO' THEN 'Approved buyer mapping: Exact reference-backed LGU mapping from docs/MAPPED_CLIENT_REFERENCE.md record CLI-0340.'
-        WHEN UPPER(TRIM(normalized_area)) = 'GOVERNMENT' THEN 'Explicit government, public hospital, or LGU label'
-        WHEN UPPER(TRIM(normalized_area)) IN ('ADMIN', 'SUPPLIES', 'SUPPLLIES', 'EQUIPMENT', 'SUPPLIES AND EQUIPMENT', 'PERSONAL', 'LOSSES') THEN 'MedShield internal business label'
+        WHEN UPPER(TRIM(normalized_area)) = 'GOVERNMENT' THEN 'Approved buyer mapping: National Government & DOH Central public bidding from docs/MAPPED_CLIENT_REFERENCE.md record CLI-0002.'
+        WHEN UPPER(TRIM(normalized_area)) IN ('ADMIN', 'SUPPLIES', 'SUPPLLIES', 'EQUIPMENT', 'SUPPLIES AND EQUIPMENT', 'PERSONAL', 'LOSSES') THEN 'Approved buyer mapping: MedShield internal corporate administration from docs/MAPPED_CLIENT_REFERENCE.md record CLI-0001.'
         WHEN proposed_area_type = 'territory' OR UPPER(TRIM(normalized_area)) IN ('CAVITE', 'LOWER CAVITE', 'BATANGAS', 'QUEZON', 'LAGUNA', 'MARINDUQUE', 'CAMARINES NORTE', 'CAM NORTE', 'CAMARINES SUR', 'CAM SUR', 'ALBAY', 'LEGASPI', 'LAGASPI', 'BICOL', 'MINDORO', 'HOSPITAL', 'HOPITAL', 'PHARMA', 'LUCENA', 'RAKKK', 'EAST', 'EASTERN', 'EASTERN QUEZON') THEN 'Approved buyer mapping: Provincial, private-care, pharmacy, or individual-account label from docs/MAPPED_CLIENT_REFERENCE.md'
         ELSE 'Buyer type unavailable'
       END
