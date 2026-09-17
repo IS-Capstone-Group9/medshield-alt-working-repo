@@ -156,3 +156,52 @@ Aggregated directly from the 37,178 Databricks Gold sales fact rows across the e
 | **Unknown** | **Unassigned / Unmapped** | ₱0.00 | 0.00% | 0.00 | 0 | Dynamic "Add Client" flow prevents unmapped loss |
 | **TOTAL** | **All Clusters & Subclusters** | **₱615,256,946.06** | **100.00%** | **1,405,458.45** | **37,178** | **Complete Multi-Year Databricks Gold Fact** |
 
+---
+
+## 8. Geographic & Provincial Cluster Hierarchy
+
+While **Buyer Clusters** classify *who* is purchasing (Government vs. Private vs. Internal), **Provincial Areas form the Geographic / Spatial Clustering Dimension** (*where* pharmaceutical demand occurs).
+
+### Dual-Dimension Relationship Matrix
+- **Geographic Clusters**: The primary ranking target in the **Area Prioritization** module (ranked via MCDA composite scoring).
+- **Buyer Clusters**: The ownership classification and composition filter within each territory (e.g., *Cavite* is a geographic cluster comprising 100% private retail pharmacies and clinics in commercial distribution).
+
+### Verified Performance by Geographic Territory / Provincial Cluster
+
+Aggregated directly from the 37,178 Databricks Gold sales fact records:
+
+| Region | Provincial Territory (Geographic Cluster) | Net Sales Revenue (₱) | Share of Mapped Sales | Delivered Units | Transaction Rows | Buyer Sector Composition |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **CALABARZON** | **Quezon** *(Provincial Hub & Inpatient Centers)* | ₱192,646,536.25 | 69.29% | 457,950.75 | 9,935 | 100% Private *(59% Private Hospital · 41% Retail Pharmacy)* |
+| **CALABARZON** | **Batangas** | ₱28,556,256.25 | 10.27% | 43,878.40 | 5,099 | 100% Private *(Retail Pharmacy & Clinics)* |
+| **CALABARZON** | **Laguna** | ₱14,376,324.92 | 5.17% | 66,054.11 | 2,071 | 100% Private *(Retail Pharmacy & Clinics)* |
+| **CALABARZON** | **Cavite** *(consolidates Lower Cavite)* | ₱7,799,599.04 | 2.81% | 17,336.62 | 1,396 | 100% Private *(Retail Pharmacy & Clinics)* |
+| **MIMAROPA** | **Marinduque** *(Island Province)* | ₱13,399,514.65 | 4.82% | 23,499.23 | 1,085 | 100% Private *(Retail Pharmacy & Community Care)* |
+| **MIMAROPA** | **Mindoro** | ₱196,474.00 | 0.07% | 1,843.00 | 36 | 100% Private *(Retail Pharmacy Accounts)* |
+| **Bicol (Region V)** | **Camarines Norte** | ₱11,638,151.07 | 4.19% | 13,585.02 | 1,963 | 100% Private *(Retail Pharmacy Accounts)* |
+| **Bicol (Region V)** | **Camarines Sur** | ₱7,761,513.83 | 2.79% | 17,279.88 | 2,495 | 100% Private *(Retail Pharmacy Accounts)* |
+| **Bicol (Region V)** | **Albay** *(incl. Legazpi City)* | ₱1,643,619.39 | 0.59% | 3,648.03 | 172 | 100% Private *(Retail Pharmacy Accounts)* |
+| **Subtotal** | **Mapped Provincial Commercial Areas** | **₱278,017,989.40** | **100.00%** | **645,075.04** | **24,252** | **Ranked Commercial Geography** |
+| *National / Multi-Region* | *Unassigned Geography (Gov Bidding & Admin)* | ₱337,238,956.66 | — | 760,383.41 | 12,926 | 89% Government Bidding · 11% Internal Admin/Supplies |
+| **TOTAL** | **Full Databricks Gold Dataset** | **₱615,256,946.06** | — | **1,405,458.45** | **37,178** | **Complete Dataset** |
+
+### Regional Hierarchy Tree
+
+```
+├── Region IV-A (CALABARZON)
+│   ├── Quezon (₱192.65M · 9,935 rows)
+│   ├── Batangas (₱28.56M · 5,099 rows)
+│   ├── Laguna (₱14.38M · 2,071 rows)
+│   └── Cavite [incl. Lower Cavite] (₱7.80M · 1,396 rows)
+│
+├── Region IV-B (MIMAROPA)
+│   ├── Marinduque (₱13.40M · 1,085 rows)
+│   └── Mindoro (₱0.20M · 36 rows)
+│
+└── Region V (Bicol)
+    ├── Camarines Norte (₱11.64M · 1,963 rows)
+    ├── Camarines Sur (₱7.76M · 2,495 rows)
+    └── Albay / Legazpi (₱1.64M · 172 rows)
+```
+
+
