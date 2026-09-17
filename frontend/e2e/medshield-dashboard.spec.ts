@@ -135,6 +135,41 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     await expect(salesDeepDive).not.toBeVisible();
   });
 
+  test('2b. Area priority weights stay complementary and update selected-period ranking', async ({ page }) => {
+    await page.locator('.nav-item', { hasText: 'Area Prioritization' }).click();
+    await expectOnlyPageActive(page, 'page-territory');
+    await expect(page.locator('#sectorStatus')).toContainText('mapped areas ranked', { timeout: 20000 });
+    await page.locator('#mcdaWeightSalesValue').evaluate((element) => {
+      const details = element.closest('details');
+      if (details) details.open = true;
+    });
+
+    const initialScores = await page.locator('#sectorProfileTable tbody tr td:nth-child(3)').allTextContents();
+    await page.locator('#mcdaWeightSalesValue').evaluate((element: HTMLInputElement) => {
+      element.value = '80';
+      element.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    await expect(page.locator('#mcdaWeightSalesValueLabel')).toHaveText('80%');
+    await expect(page.locator('#mcdaWeightCoverageLabel')).toHaveText('20%');
+    await expect(page.locator('#mcdaWeightTotal')).toHaveText('100%');
+    await expect(page.locator('#areaScoreMethod')).toContainText('80% sales-value scale + 20% active-period coverage');
+    await expect.poll(async () => page.locator('#sectorProfileTable tbody tr td:nth-child(3)').allTextContents()).not.toEqual(initialScores);
+
+    await page.locator('#mcdaWeightCoverage').evaluate((element: HTMLInputElement) => {
+      element.value = '70';
+      element.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    await expect(page.locator('#mcdaWeightSalesValueLabel')).toHaveText('30%');
+    await expect(page.locator('#mcdaWeightCoverageLabel')).toHaveText('70%');
+    await expect(page.locator('#areaScoreMethod')).toContainText('30% sales-value scale + 70% active-period coverage');
+    await expect(page.locator('#mcdaCriteriaStatus')).toHaveText('Live selected-period data');
+
+    await page.locator('#mcdaResetWeights').click();
+    await expect(page.locator('#mcdaWeightSalesValueLabel')).toHaveText('60%');
+    await expect(page.locator('#mcdaWeightCoverageLabel')).toHaveText('40%');
+    await expect(page.locator('#page-territory')).not.toContainText('Request failed: 500');
+  });
+
   test('3. Descriptive periods use trailing windows and calendar dates for Custom', async ({ page }) => {
     const periodSelect = page.locator('#descriptivePeriodSelect')
     const comparisonSelect = page.locator('#descriptiveComparisonSelect')

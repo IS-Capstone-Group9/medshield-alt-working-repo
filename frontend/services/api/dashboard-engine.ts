@@ -49,6 +49,7 @@ const DASHBOARD_GLOBAL_HANDLERS = [
   'exportForecastValidationCSV',
   'setSalesSectorsData',
   'renderSalesSectors',
+  'setAreaPriorityWeights',
   'setSalesHeatmapData',
   'changeHeatmapCategory',
   'renderSalesHeatmap',

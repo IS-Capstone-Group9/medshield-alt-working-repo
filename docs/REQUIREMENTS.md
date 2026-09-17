@@ -123,7 +123,7 @@ The system shall prioritize products for planning review.
 Acceptance criteria:
 
 - Established products use actual ABC classification.
-- The descriptive Product Prioritization view dynamically recalculates its top-5% Pareto cohort for every selected period, including All Time.
+- The descriptive Product Prioritization view lets users compare top-5%, top-10%, and top-20% Pareto cohorts and dynamically recalculates the selected cohort for every historical period, including All Time and custom dates.
 - Area Prioritization separates Government, Private, Internal, and Unknown buyer ownership; its revenue and quantity charts visibly split observed and estimated evidence using one selected-cluster denominator.
 - The commercial MCDA sensitivity candidate uses only sales-value scale and observed-month coverage, locks their weights to exactly 100%, and reports rank shifts from the governed 60/40 baseline.
 - Outbreak risk and supplier lead time remain excluded from commercial ranking until their territory-level source feeds are validated.

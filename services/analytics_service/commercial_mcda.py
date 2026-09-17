@@ -19,6 +19,10 @@ DEFAULT_CANDIDATE_PATH = (
 DEFAULT_AREA_MASTER_PATH = (
     ROOT_DIR / "data" / "medshield" / "certification" / "sales_2017_2025_v1_area_master_candidate.csv"
 )
+FALLBACK_CANDIDATE_PATH = (
+    ROOT_DIR / "data" / "medshield" / "processed" / "sales_transactions_area_allocated.json.gz"
+)
+FALLBACK_AREA_MASTER_PATH = ROOT_DIR / "datasources" / "templates" / "area_classification_mapping.csv"
 
 _CACHE_LOCK = Lock()
 
@@ -35,7 +39,7 @@ def _approved_territories(path: Path) -> dict[str, str]:
             if row.get("mapping_status") != "approved" or row.get("area_type") != "territory":
                 continue
             raw_area = str(row.get("raw_area") or "").strip().upper()
-            standard_area = str(row.get("standard_area") or "").strip()
+            standard_area = str(row.get("territory") or row.get("standard_area") or "").strip()
             if raw_area and standard_area:
                 territories[raw_area] = standard_area
     return territories
@@ -66,7 +70,16 @@ def _build_commercial_mcda_uncached(
     all_periods: set[str] = set()
 
     for row in candidate.get("rows", []):
-        if not row.get("publication_eligible"):
+        publication_flag = row.get("publication_eligible")
+        if publication_flag is not None and not publication_flag:
+            continue
+        if publication_flag is None and (
+            row.get("quality_status") not in {"valid", "warning"}
+            or row.get("duplicate")
+            or any(row.get(key) for key in (
+                "estimated", "is_estimated_date", "is_estimated_contract_allocation", "allocation_method"
+            ))
+        ):
             continue
         area = approved_territories.get(str(row.get("area") or "").strip().upper())
         period = str(row.get("date_delivered") or "")[:7]
@@ -177,6 +190,10 @@ def build_commercial_mcda(
 ) -> dict[str, Any]:
     candidate_path = candidate_path.resolve()
     area_master_path = area_master_path.resolve()
+    if not candidate_path.exists():
+        candidate_path = FALLBACK_CANDIDATE_PATH.resolve()
+    if not area_master_path.exists():
+        area_master_path = FALLBACK_AREA_MASTER_PATH.resolve()
     candidate_stat = candidate_path.stat()
     area_master_stat = area_master_path.stat()
 

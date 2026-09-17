@@ -74,11 +74,20 @@ export const SALES_SECTORS_MARKUP = String.raw`
   <section class="area-chart-panel" aria-labelledby="areaParetoTitle"><h3 id="areaParetoTitle">Area revenue concentration</h3><p>Revenue bars with cumulative share and an 80% reference line.</p><div class="area-chart-wrap"><canvas id="sectorParetoChart" role="img" aria-label="Area revenue Pareto chart"></canvas></div></section>
  </div>
  <div class="area-table-wrap"><table class="product-table" id="sectorProfileTable"><caption class="sr-only">Selected-period geographic commercial priority ranking</caption></table></div>
- <details class="area-method"><summary>How ranking and evidence are calculated</summary><p><strong>Commercial priority score:</strong> 60% sales-value scale + 40% active-period coverage. The score describes historical commercial presence; it is not an inventory allocation instruction.</p><p><strong>Actual:</strong> included source transactions. <strong>Gap estimate:</strong> a missing selected calendar period filled from available same-calendar history using recency weights. Estimated contract allocations and other flagged estimated source rows remain excluded by the sales service.</p><p id="sectorSource">Source evidence unavailable.</p></details>
+ <details class="area-method"><summary>How ranking and evidence are calculated</summary><p><strong>Commercial priority score:</strong> <span id="areaScoreMethod">60% sales-value scale + 40% active-period coverage</span>. The score describes historical commercial presence; it is not an inventory allocation instruction.</p><p><strong>Actual:</strong> included source transactions. <strong>Gap estimate:</strong> a missing selected calendar period filled from available same-calendar history using recency weights. Estimated contract allocations and other flagged estimated source rows remain excluded by the sales service.</p><p id="sectorSource">Source evidence unavailable.</p></details>
 </section>`
 
 export const SALES_SECTORS_SCRIPT = String.raw`
 let salesSectorsData = null;
+let areaPrioritySalesWeight = 60;
+let areaPriorityCoverageWeight = 40;
+function setAreaPriorityWeights(salesWeight, coverageWeight) {
+ const sales = Math.max(0, Math.min(100, Math.round(Number(salesWeight) || 0)));
+ const requestedCoverage = Math.max(0, Math.min(100, Math.round(Number(coverageWeight) || 0)));
+ areaPrioritySalesWeight = sales;
+ areaPriorityCoverageWeight = sales + requestedCoverage === 100 ? requestedCoverage : 100 - sales;
+ renderSalesSectors();
+}
 function setSalesSectorsData(data, error) {
  salesSectorsData = data && Array.isArray(data.rows) && data.source ? {...data,rows:data.rows.filter(r=>historicalPeriod(r.period))} : null;
  renderSalesSectors(error);
@@ -123,7 +132,7 @@ function renderSalesSectors(error) {
  const positive=[...groups.values()].filter(row=>row.revenue>0).sort((left,right)=>right.revenue-left.revenue||left.area.localeCompare(right.area));
  const maximumRevenue=positive.reduce((maximum,row)=>Math.max(maximum,row.revenue),0);
  const availablePeriods=Math.max(1,descriptiveAxisPeriods().length||new Set(scopeRows.map(periodKey).filter(Boolean)).size);
- positive.forEach(row=>{row.salesScore=maximumRevenue?Math.max(0,row.revenue)/maximumRevenue*100:0;row.coverageScore=Math.min(100,row.periods.size/availablePeriods*100);row.score=row.salesScore*.6+row.coverageScore*.4;});
+ positive.forEach(row=>{row.salesScore=maximumRevenue?Math.max(0,row.revenue)/maximumRevenue*100:0;row.coverageScore=Math.min(100,row.periods.size/availablePeriods*100);row.score=row.salesScore*areaPrioritySalesWeight/100+row.coverageScore*areaPriorityCoverageWeight/100;});
  const ranked=[...positive].sort((left,right)=>right.score-left.score||right.revenue-left.revenue||left.area.localeCompare(right.area));
  const mappedRevenue=positive.reduce((total,row)=>total+row.revenue,0),actualRevenue=scopeRows.filter(row=>row.evidence!=='estimate').reduce((total,row)=>total+(Number(row.revenue)||0),0),estimatedRevenue=scopeRows.filter(row=>row.evidence==='estimate').reduce((total,row)=>total+(Number(row.revenue)||0),0);
  const allWeight=weightedCount(scopeRows),mappedWeight=weightedCount(mappedRows),mappingCoverage=allWeight?mappedWeight/allWeight*100:0,unmappedRevenue=revenueTotal(unmappedRows);
@@ -139,8 +148,9 @@ function renderSalesSectors(error) {
  el('areaLeadingArea').textContent=leading?leading.area:'No area';
  el('areaLeadingShare').textContent=leading&&mappedRevenue>0?fmtPct(leading.revenue/mappedRevenue*100)+' of mapped revenue':'No ranked area';
  el('areaTopThreeShare').textContent=mappedRevenue>0?fmtPct(topThree/mappedRevenue*100):'Unavailable';
+ if(el('areaScoreMethod'))el('areaScoreMethod').textContent=areaPrioritySalesWeight+'% sales-value scale + '+areaPriorityCoverageWeight+'% active-period coverage';
  el('sectorStatus').textContent=ranked.length
-  ? ranked.length+' mapped areas ranked · '+weightedCount(mappedRows).toLocaleString(undefined,{maximumFractionDigits:0})+' weighted record equivalents · score uses 60% sales value and 40% active-period coverage.'
+  ? ranked.length+' mapped areas ranked · '+weightedCount(mappedRows).toLocaleString(undefined,{maximumFractionDigits:0})+' weighted record equivalents · score uses '+areaPrioritySalesWeight+'% sales value and '+areaPriorityCoverageWeight+'% active-period coverage.'
   : 'No mapped area with positive revenue is available for this selection. Buyer ownership and geographic mapping must be established before ranking.';
 
  if(ranked.length){
