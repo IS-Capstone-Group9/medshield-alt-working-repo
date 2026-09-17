@@ -623,18 +623,50 @@ export async function getDatabricksSalesSectors() {
     ORDER BY normalized_product, month_start, territory, channel`, 30_000)
   const includedRows = rows.reduce((sum, row) => sum + numberValue(row.row_count), 0)
   const unmappedRows = rows.filter((row) => row.sector === 'Unknown').reduce((sum, row) => sum + numberValue(row.row_count), 0)
-  return {
-    rows: rows.map((row) => ({
+  const expandedRows = rows.flatMap((row) => {
+    const revenue = numberValue(row.revenue)
+    const quantity = numberValue(row.quantity)
+    const rowCount = numberValue(row.row_count)
+    if (row.territory === 'Mindoro') {
+      return [
+        {
+          product: row.product,
+          period: row.period,
+          sector: row.sector,
+          territory: 'Oriental Mindoro',
+          channel: row.channel,
+          revenue: Number((revenue * 0.632).toFixed(2)),
+          quantity: Number((quantity * 0.632).toFixed(2)),
+          row_count: Math.max(1, Math.round(rowCount * 0.632)),
+          basis: `${row.basis} · PSA demographic weighted apportionment (63.2% Oriental Mindoro)`,
+        },
+        {
+          product: row.product,
+          period: row.period,
+          sector: row.sector,
+          territory: 'Occidental Mindoro',
+          channel: row.channel,
+          revenue: Number((revenue * 0.368).toFixed(2)),
+          quantity: Number((quantity * 0.368).toFixed(2)),
+          row_count: Math.max(1, Math.round(rowCount * 0.368)),
+          basis: `${row.basis} · PSA demographic weighted apportionment (36.8% Occidental Mindoro)`,
+        },
+      ]
+    }
+    return [{
       product: row.product,
       period: row.period,
       sector: row.sector,
       territory: row.territory,
       channel: row.channel,
-      revenue: numberValue(row.revenue),
-      quantity: numberValue(row.quantity),
-      row_count: numberValue(row.row_count),
+      revenue,
+      quantity,
+      row_count: rowCount,
       basis: row.basis,
-    })),
+    }]
+  })
+  return {
+    rows: expandedRows,
     source: databricksSource(rows, {
       file: 'datasources/templates/buyer_sector_mapping.csv',
       input_rows: includedRows,

@@ -61,10 +61,17 @@ def build_sectors(rows, mappings, metadata, source_name, geography_mappings=()):
         sector, basis = classify_buyer(area, approved, geographies)
         channel = mapping.get('customer_channel') or (area if area.casefold() in {'hospital', 'pharma'} else 'Unclassified channel')
         territory = mapping.get('territory') or geographies.get(area.casefold()) or 'Unassigned geography'
-        key = (period, delivered_date.isoformat(), product, sector, channel, territory, basis)
-        grouped[key]['revenue'] += revenue
-        grouped[key]['quantity'] += quantity
-        grouped[key]['row_count'] += 1
+        if territory == 'Mindoro':
+            for prov, weight in (('Oriental Mindoro', 0.632), ('Occidental Mindoro', 0.368)):
+                k = (period, delivered_date.isoformat(), product, sector, channel, prov, f"{basis} · PSA demographic weighted apportionment ({weight*100:.1f}% {prov})")
+                grouped[k]['revenue'] += revenue * weight
+                grouped[k]['quantity'] += quantity * weight
+                grouped[k]['row_count'] += 1
+        else:
+            key = (period, delivered_date.isoformat(), product, sector, channel, territory, basis)
+            grouped[key]['revenue'] += revenue
+            grouped[key]['quantity'] += quantity
+            grouped[key]['row_count'] += 1
     return {'rows': [dict(zip(('period', 'date', 'product', 'sector', 'channel', 'territory', 'basis'), key), **value) for key, value in sorted(grouped.items())],
             'source': {'file': source_name, 'checksum': metadata.get('checksum'), 'input_rows': len(rows), 'included_rows': sum(v['row_count'] for v in grouped.values()), 'excluded': dict(excluded)}}
 
