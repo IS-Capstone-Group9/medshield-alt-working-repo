@@ -141,6 +141,10 @@ Possible outputs:
 - Scenario ROP.
 - Scenario safety stock.
 - Commercial-priority MCDA.
+- Area Prioritization must rank mapped geographic areas rather than buyer clusters. Government, Private, Internal, and Unknown are filters and buyer-composition dimensions.
+- Area ranking must respond to Last 30 Days, Last 3 Months, Last 6 Months, Custom Dates, and All Time. All Time uses yearly display grain.
+- Actual revenue, recency-weighted gap estimates, unmapped geography, active-period coverage, and the 60/40 commercial score must remain visibly distinguishable.
+- The primary area view must include a horizontal actual-versus-estimated ranking, a revenue Pareto chart with an 80% reference, and an evidence table with buyer composition and confidence labels.
 - Product-region matching.
 - Weather or disease scenario alerts.
 

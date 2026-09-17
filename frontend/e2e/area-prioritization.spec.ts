@@ -4,7 +4,7 @@ import { MEDSHIELD_MARKUP, MEDSHIELD_STYLE } from '../lib/medshieldReference'
 import { getExecutableDashboardScript } from '../services/api/dashboard-engine'
 
 test.describe('Area Prioritization Dynamic Interactions & Visualizations', () => {
-  test('area prioritization dynamically updates on rolling periods, buyer clusters, dimensions, and diagonal chart rotation', async ({ page }) => {
+  test('area prioritization ranks geography and updates periods, buyer clusters, and evidence', async ({ page }) => {
     await page.route('http://medshield.test/**', route => route.fulfill({ contentType: 'text/html', body: '<html><body></body></html>' }))
     await page.goto('http://medshield.test/')
     await page.setContent(`<style>${MEDSHIELD_STYLE}</style>${MEDSHIELD_MARKUP}`)
@@ -54,51 +54,55 @@ test.describe('Area Prioritization Dynamic Interactions & Visualizations', () =>
     // Verify filterbar displays period selector on Area Prioritization page
     await expect(page.locator('#filterBar')).toBeVisible()
 
-    // 1. Check Government cluster initial rendering
+    // 1. Buyer cluster filters the geographic ranking without becoming an area.
     await page.selectOption('#sectorCluster', 'Government')
     await expect(page.locator('#sectorProfileTable')).toContainText('Quezon')
     await expect(page.locator('#sectorProfileTable')).toContainText('Batangas')
     await expect(page.locator('#sectorProfileTable')).toContainText('Camarines Sur')
+    await expect(page.locator('#sectorProfileTable thead')).toContainText('Geographic area')
+    await expect(page.locator('#sectorProfileTable thead')).toContainText('Buyer composition')
+    await expect(page.locator('#areaRankedCount')).toHaveText('3')
 
-    // Verify x-axis diagonal label rotation on sector revenue chart
+    // The primary ranking is horizontal and visibly separates actual and estimated evidence.
     const chartOptions = await page.evaluate(() => {
       const chart = (window as any).Chart.getChart(document.getElementById('sectorRevenueChart'))
       return {
-        minRotation: chart.options.scales.x.ticks.minRotation,
-        maxRotation: chart.options.scales.x.ticks.maxRotation,
-        autoSkip: chart.options.scales.x.ticks.autoSkip
-      }
-    })
-    expect(chartOptions.minRotation).toBe(35)
-    expect(chartOptions.maxRotation).toBe(45)
-    expect(chartOptions.autoSkip).toBe(false)
-    const evidenceLayers = await page.evaluate(() => {
-      const chart = (window as any).Chart.getChart(document.getElementById('sectorRevenueChart'))
-      return {
-        labels: chart.data.datasets.map((dataset: any) => dataset.label),
+        indexAxis: chart.options.indexAxis,
         xStacked: chart.options.scales.x.stacked,
         yStacked: chart.options.scales.y.stacked,
       }
     })
-    expect(evidenceLayers.labels).toEqual(['Observed revenue share', 'Estimated revenue share'])
-    expect(evidenceLayers.xStacked).toBe(true)
-    expect(evidenceLayers.yStacked).toBe(true)
-    await expect(page.locator('#sectorObservedRatio')).toHaveText('60.00%')
-    await expect(page.locator('#sectorEstimatedRatio')).toHaveText('40.00%')
+    expect(chartOptions.indexAxis).toBe('y')
+    expect(chartOptions.xStacked).toBe(true)
+    expect(chartOptions.yStacked).toBe(true)
+    const evidenceLayers = await page.evaluate(() => {
+      const chart = (window as any).Chart.getChart(document.getElementById('sectorRevenueChart'))
+      return {
+        labels: chart.data.datasets.map((dataset: any) => dataset.label),
+      }
+    })
+    expect(evidenceLayers.labels).toEqual(['Actual net sales', 'Gap estimate'])
+    await expect(page.locator('#areaActualRevenue')).toContainText('₱1M')
+    await expect(page.locator('#areaEstimatedRevenue')).toContainText('₱700K')
 
-    // 2. Switch dimension to Customer Channel
-    await page.selectOption('#sectorDimension', 'channel')
-    await expect(page.locator('#sectorProfileTable')).toContainText('LGU Hospital')
-    await expect(page.locator('#sectorProfileTable')).toContainText('RHU Clinic')
-    await expect(page.locator('#sectorProfileTable')).toContainText('Provincial Hospital')
+    // 2. Pareto analysis includes revenue, cumulative share, and an 80% reference.
+    const paretoLayers = await page.evaluate(() => {
+      const chart = (window as any).Chart.getChart(document.getElementById('sectorParetoChart'))
+      return chart.data.datasets.map((dataset: any) => dataset.label)
+    })
+    expect(paretoLayers).toEqual(['Mapped net sales', 'Cumulative share', '80% reference'])
 
-    // 3. Switch cluster to Private
+    // 3. Actual-only mode removes estimates and updates confidence labels.
+    await page.selectOption('#sectorEvidence', 'actual')
+    await expect(page.locator('#areaEstimatedRevenue')).toContainText('₱0')
+    await expect(page.locator('#sectorProfileTable')).toContainText('Observed')
+
+    // 4. Private remains a buyer filter; the ranked values remain geographic areas.
     await page.selectOption('#sectorCluster', 'Private')
-    await page.selectOption('#sectorDimension', 'territory')
     await expect(page.locator('#sectorProfileTable')).toContainText('Cavite')
     await expect(page.locator('#sectorProfileTable')).toContainText('Laguna')
 
-    // 4. Test Dynamic Period Switching (3 Months, 6 Months, Custom Date Range)
+    // 5. Every supported period updates the shared scope and all-time uses yearly grain.
     await page.selectOption('#descriptivePeriodSelect', '3')
     await expect(page.locator('#sectorScope')).toContainText('Last 3 Months')
 
@@ -107,7 +111,7 @@ test.describe('Area Prioritization Dynamic Interactions & Visualizations', () =>
 
     await page.selectOption('#descriptivePeriodSelect', 'all')
     await expect(page.locator('#sectorScope')).toContainText('All Time')
-    await expect(page.locator('#sectorPeriodGrain')).toHaveText('Yearly')
+    await expect(page.locator('#sectorScope')).toContainText('Yearly')
 
     await page.selectOption('#descriptivePeriodSelect', '30d')
     await expect(page.locator('#sectorScope')).toContainText('Last 30 Days')
@@ -116,7 +120,8 @@ test.describe('Area Prioritization Dynamic Interactions & Visualizations', () =>
     await page.evaluate(() => (window as any).setCustomDateRange('2024-01-01', '2024-12-31'))
     await expect(page.locator('#sectorScope')).toContainText('2024')
 
-    // 5. Verify Classification & Source Evidence Lineage
+    // 6. Verify classification and source lineage.
+    await page.locator('.area-method').evaluate((element: HTMLDetailsElement) => { element.open = true })
     await expect(page.locator('#sectorSource')).toContainText('datasources/templates/buyer_sector_mapping.csv')
   })
 })

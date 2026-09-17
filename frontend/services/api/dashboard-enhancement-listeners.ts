@@ -21,7 +21,7 @@ const DASHBOARD_PAGE_META = {
   overview: ['Executive Overview', 'Centralized demand intelligence, forecasting, and stock actions'],
   revenue: ['Sales Diagnostics', 'Revenue, growth, and margin trends'],
   products: ['Product Prioritization', 'ABC/Pareto product view'],
-  territory: ['Area Prioritization', 'Territory performance and ranking'],
+  territory: ['Area Prioritization', 'Geographic performance, concentration, and evidence quality'],
   forecast: ['Forecast Modeling', 'Actual sales, baseline forecasts and historical validation'],
   inventory: ['Prescriptive Planning', 'Priority products, constrained allocation and scenario review'],
   data: ['Data Upload', 'CSV and JSON sources for dashboard updates'],
