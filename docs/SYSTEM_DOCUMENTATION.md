@@ -5,7 +5,7 @@
 
 ## 1. Executive Summary & System Overview
 
-**MedShield** is an advanced enterprise **Decision-Support System (DSS)** designed for pharmaceutical distribution networks and regional supply chain management across the Philippines (CALABARZON, Bicol, and Metro Manila).
+**MedShield** is an advanced enterprise **Decision-Support System (DSS)** designed for pharmaceutical distribution networks and regional supply chain management across the Philippines (CALABARZON, MIMAROPA, and Bicol).
 
 Unlike typical retail inventory trackers, MedShield operates as an **epidemiologically aware prescriptive planning engine**. It addresses the chronic challenge of stockouts and over-procurement during seasonal epidemics (e.g., Dengue surges, Typhoid, Waterborne Leptospirosis) by triangulating historical ERP transaction data with external public health surveillance (DOH-FOI) and climatic environmental signals (PAGASA / NASA POWER / Open-Meteo).
 

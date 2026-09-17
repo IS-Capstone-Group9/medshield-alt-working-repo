@@ -38,7 +38,9 @@ function replaceSelectOptions(select: HTMLSelectElement | null, years: string[],
   years.forEach((year) => {
     const option = document.createElement('option')
     option.value = year
-    option.textContent = year
+    option.textContent = Number(year) === new Date().getFullYear()
+      ? `${year} (Actual + Estimate)`
+      : year
     fragment.appendChild(option)
   })
 
@@ -50,6 +52,91 @@ function replaceSelectOptions(select: HTMLSelectElement | null, years: string[],
       : years[0]
 }
 
+function installDescriptivePeriodControls(root: HTMLElement) {
+  const selector = root.querySelector<HTMLElement>('.comparison-selector')
+  if (selector && !selector.querySelector('#descriptivePeriodSelect')) {
+    selector.replaceChildren()
+    const label = document.createElement('label')
+    label.setAttribute('for', 'descriptivePeriodSelect')
+    label.className = 'sr-only'
+    label.textContent = 'Historical period'
+    const select = document.createElement('select')
+    select.id = 'descriptivePeriodSelect'
+    select.className = 'topbar-select'
+    select.setAttribute('aria-label', 'Historical period')
+    ;[
+      ['30d', 'Last 30 Days'],
+      ['3', 'Last 3 Months'],
+      ['6', 'Last 6 Months'],
+      ['12', 'Last 12 Months'],
+      ['all', 'All Time · Yearly'],
+      ['custom', 'Custom Date Range'],
+    ].forEach(([value, text]) => select.add(new Option(text, value, false, value === '12')))
+    selector.append(label, select)
+
+    const compareWrap = document.createElement('span')
+    compareWrap.id = 'descriptiveComparisonWrap'
+    const compareLabel = document.createElement('label')
+    compareLabel.setAttribute('for', 'descriptiveComparisonSelect')
+    compareLabel.className = 'sr-only'
+    compareLabel.textContent = 'Comparison view'
+    const compareSelect = document.createElement('select')
+    compareSelect.id = 'descriptiveComparisonSelect'
+    compareSelect.className = 'topbar-select'
+    compareSelect.setAttribute('aria-label', 'Comparison view')
+    compareSelect.add(new Option('Period View', 'single', true, true))
+    compareSelect.add(new Option('Y/Y Compare', 'yoy'))
+    compareWrap.append(compareLabel, compareSelect)
+    selector.append(compareWrap)
+  }
+
+  const singleYearWrap = root.querySelector<HTMLElement>('#singleYearWrap')
+  if (singleYearWrap) {
+    singleYearWrap.style.display = 'none'
+    singleYearWrap.setAttribute('aria-hidden', 'true')
+  }
+
+  if (selector && !selector.querySelector('#customDateRangeWrap')) {
+    const rangeWrap = document.createElement('span')
+    rangeWrap.id = 'customDateRangeWrap'
+    rangeWrap.className = 'custom-date-range'
+    rangeWrap.style.display = 'none'
+    rangeWrap.setAttribute('role', 'group')
+    rangeWrap.setAttribute('aria-label', 'Custom historical date range')
+
+    const today = new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'Asia/Manila', year: 'numeric', month: '2-digit', day: '2-digit',
+    }).format(new Date())
+    const currentYear = today.slice(0, 4)
+
+    const makeDateInput = (id: string, labelText: string, accessibleName: string, value: string) => {
+      const label = document.createElement('label')
+      label.setAttribute('for', id)
+      label.className = 'custom-date-label'
+      label.textContent = labelText
+      const input = document.createElement('input')
+      input.type = 'date'
+      input.id = id
+      input.className = 'topbar-select'
+      input.min = '2017-01-01'
+      input.max = today
+      input.value = value
+      input.setAttribute('aria-label', accessibleName)
+      return [label, input] as const
+    }
+
+    const [startLabel, startInput] = makeDateInput(
+      'customDateStart', 'From', 'Custom range start date', `${currentYear}-01-01`
+    )
+    const [endLabel, endInput] = makeDateInput(
+      'customDateEnd', 'To', 'Custom range end date', today
+    )
+    rangeWrap.append(startLabel, startInput, endLabel, endInput)
+    selector.append(rangeWrap)
+  }
+  root.querySelector<HTMLElement>('#yoyYearWrap')?.remove()
+}
+
 export function updateDashboardProvenance(
   root: HTMLElement,
   status: DashboardDataStatus,
@@ -58,16 +145,10 @@ export function updateDashboardProvenance(
   const years = [...new Set(availableYears)]
     .filter((year) => /^(201[7-9]|202[0-5])$/.test(year))
     .sort((a, b) => Number(b) - Number(a))
+  const currentYear = String(new Date().getFullYear())
+  if (years.length && Number(years[0]) < Number(currentYear)) years.unshift(currentYear)
 
-  replaceSelectOptions(root.querySelector<HTMLSelectElement>('#topbarYearSelect'), years, true)
-  replaceSelectOptions(root.querySelector<HTMLSelectElement>('#yoyBaseYearSelect'), years, false)
-  replaceSelectOptions(root.querySelector<HTMLSelectElement>('#yoyTargetYearSelect'), years, false)
-
-  const targetSelect = root.querySelector<HTMLSelectElement>('#yoyTargetYearSelect')
-  const baseSelect = root.querySelector<HTMLSelectElement>('#yoyBaseYearSelect')
-  if (targetSelect && baseSelect && targetSelect.value === baseSelect.value && years.length > 1) {
-    targetSelect.value = years[1]
-  }
+  replaceSelectOptions(root.querySelector<HTMLSelectElement>('#topbarYearSelect'), years, false)
 
   const statusBar = root.querySelector<HTMLElement>('.data-freshness-bar')
   if (statusBar) {
@@ -157,6 +238,7 @@ export function enhanceDashboardContent(root: HTMLElement) {
   }
 
   replaceUnsupportedLabels(root)
+  installDescriptivePeriodControls(root)
 
   const navigation = root.querySelector('.nav')
   if (navigation) {

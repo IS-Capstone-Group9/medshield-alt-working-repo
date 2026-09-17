@@ -639,7 +639,7 @@ app.get('/api/sales/status', requireAuth, async (_req: Request, res: Response) =
 
 app.get('/api/sales/heatmap', requireAuth, async (_req: Request, res: Response) => {
   try {
-    const result = await analyticsJson('/sales/heatmap')
+    const result = await analyticsJson('/sales/heatmap', undefined, 30000)
     return res.status(result.status).json(result.body)
   } catch (error) {
     return analyticsFailure(res, error)
@@ -648,7 +648,7 @@ app.get('/api/sales/heatmap', requireAuth, async (_req: Request, res: Response) 
 
 app.get('/api/sales/sectors', requireAuth, async (_req: Request, res: Response) => {
   try {
-    const result = await analyticsJson('/sales/sectors')
+    const result = await analyticsJson('/sales/sectors', undefined, 30000)
     return res.status(result.status).json(result.body)
   } catch (error) {
     return analyticsFailure(res, error)
@@ -673,7 +673,7 @@ app.get('/api/sales/external-regression', requireAuth, async (req: Request, res:
   const params = new URLSearchParams()
   for (const name of ['sector', 'territory', 'product', 'metric', 'mode', 'provider', 'disease', 'lag', 'rainfall_lag']) {
     const value = req.query[name]
-    if (typeof value === 'string') params.set(name, value)
+    if (typeof value === 'string' && value.trim() !== '') params.set(name, value.trim())
   }
   try {
     const result = await analyticsJson(`/sales/external-regression?${params}`)
@@ -794,7 +794,7 @@ app.get('/api/auth/me', requireAuthDuringPasswordReset, (req: AuthenticatedReque
 
 const authLoginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 10,
+  max: 500,
   message: { error: 'Too many login attempts. Try again after 15 minutes.' },
   standardHeaders: true,
   legacyHeaders: false,

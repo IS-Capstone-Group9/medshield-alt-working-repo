@@ -26,7 +26,7 @@ This explainer documents the mathematical logic and processing steps for the Des
 * **Goal**: Standardize raw transaction fields into geographic territories, customer channels, and product categories.
 * **The Process**:
   * **Location Grouping**: Each location is looked up in the area classification directory:
-    * **Physical Territories**: Provincial regions (Batangas, Laguna, Quezon, Bicol, Metro Manila).
+    * **Physical Territories**: Provincial regions (Batangas, Laguna, Quezon, Marinduque, Bicol).
     * **Customer Channels**: Institutional groups (Government, Hospitals, Pharmacies).
     * **Internal Business Lines**: Non-sales cost centers (Administration, Losses).
   * **Product Grouping**: Each SKU is looked up in the master mapping file. If unmapped:
@@ -125,7 +125,7 @@ This explainer documents the mathematical logic and processing steps for the Des
 
 ### 7. Territory Performance [North Star 6A: Territory Revenue and Net Income]
 
-* **Goal**: Rank physical delivery regions across CALABARZON, Bicol, and Metro Manila by revenue and gross margin contribution.
+* **Goal**: Rank physical delivery regions across CALABARZON, MIMAROPA, and Bicol by revenue and gross margin contribution.
 * **Variables**:
   * `Revenue` = total revenue of a territory
   * `Net_Income` = gross margin amount of the territory

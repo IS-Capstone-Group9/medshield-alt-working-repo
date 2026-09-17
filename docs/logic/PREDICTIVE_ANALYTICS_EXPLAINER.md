@@ -107,7 +107,7 @@ Use this checklist to verify that forecasting models, classification pipelines, 
 - [ ] Confirm sales transactions are loaded from `sales_transactions_area_allocated` to isolate bulk service contract noise.
 - [ ] Validate that DII calculations utilize the complete **2017–2026 DOH historical baseline dataset**.
 - [ ] Verify PAGASA rain probabilities are cross-validated against NASA POWER or Open-Meteo weather proxies.
-- [ ] Ensure geographic areas are standard physical territories (CALABARZON, MIMAROPA, Bicol Region, Metro Manila).
+- [ ] Ensure geographic areas are standard physical territories (CALABARZON, MIMAROPA, Bicol Region).
 - [ ] Validate weather-disease-medicine correlation patterns (seasonal rain → disease index surge → therapeutic demand lift).
 
 #### Forecasting & Modeling

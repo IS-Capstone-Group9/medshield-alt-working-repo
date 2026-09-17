@@ -26,9 +26,11 @@ class ForecastValidationTests(unittest.TestCase):
             result = data['views'][str(horizon)]
             points = result['models']['seasonal_naive']['forecast']
             self.assertEqual(len(points), horizon)
-            self.assertEqual(points[0]['period'], '2026-01')
+            self.assertEqual(points[0]['period'], '2026-09')
             self.assertEqual(result['models']['seasonal_naive']['metrics']['n'], horizon)
-        self.assertEqual(data['views']['12']['models']['seasonal_naive']['forecast'][0]['prediction'], 1720)
+        self.assertEqual(data['forecast_start'], '2026-09')
+        self.assertEqual(data['views']['12']['models']['seasonal_naive']['forecast'][0]['prediction'], 2600)
+        self.assertEqual(data['views']['12']['models']['seasonal_naive']['forecast'][-1]['period'], '2027-08')
         self.assertEqual(data['views']['12']['models']['seasonal_naive']['metrics']['mae'], 120)
 
     def test_holdout_values_cannot_leak_into_predictions_or_bands(self):
@@ -101,7 +103,7 @@ class ForecastValidationTests(unittest.TestCase):
         data = self.build(payload)
         self.assertEqual(data['origin'], '2025-09')
         points = data['views']['6']['models']['seasonal_naive']['forecast']
-        self.assertEqual([p['period'] for p in points], ['2025-10', '2025-11', '2025-12', '2026-01', '2026-02', '2026-03'])
+        self.assertEqual([p['period'] for p in points], ['2026-09', '2026-10', '2026-11', '2026-12', '2027-01', '2027-02'])
 
     def test_endpoint_validation_and_failure_have_no_demo_fallback(self):
         with patch('services.analytics_service.app.load_validation', side_effect=OSError('Missing source')):

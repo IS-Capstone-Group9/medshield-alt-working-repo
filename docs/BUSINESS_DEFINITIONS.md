@@ -29,7 +29,11 @@ The workbook supports sales revenue, product quantity, transaction cost fields, 
 | Customer type | Non-geographic customer/channel label such as Government, Hospital, Pharma. | Area map where `area_type = customer_type` | Customer type | Business Analyst | Needs mapping |
 | Business line | Internal/non-sales or special label such as Admin, Supplies, Equipment, Personal, Losses. | Area map where `area_type = business_line` | Business line | Business Analyst | Needs mapping |
 | ABC class | Deterministic cumulative revenue contribution class. | A: 0-80%, B: >80-95%, C: >95-100% | SKU snapshot | BI Specialist | Approved |
-| Forecast horizon | Next 12 calendar months after the latest trusted actual period. | Model run metadata | Model run | Business Analyst | Approved |
+| Forecast horizon | User-selectable 3, 6, or 12 calendar months beginning with the current Philippine calendar month. The current month counts as month 1; training still excludes current and future-month observations. | Model run metadata | Model run | Business Analyst | Approved |
+| Government buyer cluster | National government, public hospitals, and accounts explicitly named as an LGU, municipal/city government, or provincial government. Explicit institutional wording takes precedence over geography. | Buyer classification rule | Transaction/account | Business Analyst | Approved |
+| Private buyer cluster | Generic provincial sales areas not explicitly named as LGUs, private/hospital accounts, pharmacies/drugstores, and individual sales accounts. | Buyer classification rule | Transaction/account | Business Analyst | Approved |
+| Internal buyer cluster | MedShield administration, supplies, equipment, personal, losses, and explicitly internal business labels. | Buyer classification rule | Transaction/account | Business Analyst | Approved |
+| Unknown buyer cluster | Records that do not meet the Government, Private, or Internal rules. | Buyer classification rule | Transaction/account | Business Analyst | Approved |
 | Recommendation status | Lifecycle state for model outputs. | Draft, validated, review required, published, superseded, measured | Model output | Service Manager | Approved |
 
 ## Terms That Must Not Be Used Yet

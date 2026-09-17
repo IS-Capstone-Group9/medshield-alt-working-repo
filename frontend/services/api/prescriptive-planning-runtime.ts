@@ -9,7 +9,7 @@ export const PLANNING_MARKUP = String.raw`
 <div class="chart-title">Priority-product allocation scenario</div>
 <p>Maximize average fulfillment across shortlisted products, then minimize purchase cost. This objective requires client review. Results are planning scenarios, not purchase orders.</p>
 <div class="plan-controls">
-<label>Buyer cluster<select id="planSector" onchange="changePlanningScope()"><option>Unknown</option><option>Government</option><option>Private</option></select></label>
+<label>Buyer cluster<select id="planSector" onchange="changePlanningScope()"><option>Unknown</option><option>Government</option><option>Private</option><option>Internal</option></select></label>
 <label>Territory<select id="planTerritory" onchange="changePlanningScope()"><option>Quezon</option><option value="all">All within selected cluster</option></select></label>
 <label>Planning horizon<select id="planHorizon" onchange="document.getElementById('planAcknowledged').checked=false;invalidatePlan()"><option value="1">1 month</option><option value="3" selected>3 months</option><option value="6">6 months</option><option value="12">12 months</option></select></label>
 <label>Purchase budget (₱)<input id="planBudget" type="number" min="0" step="0.01" oninput="invalidatePlan()"></label>

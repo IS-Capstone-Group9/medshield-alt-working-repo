@@ -23,6 +23,7 @@ This layer must be finished first because predictive and prescriptive outputs de
 |---|---|---|
 | Cleaned sales with contract allocation | `data/medshield/processed/sales_transactions_area_allocated.json.gz` | Use this for product-level analysis so `#` contract-name rows are not treated as products. |
 | Area classification mapping | `datasources/templates/area_classification_mapping.csv` | Use this to separate territory, customer type, business line, and unmapped areas. |
+| Client reference crosswalk | `docs/MAPPED_CLIENT_REFERENCE.md` | Use only exact, reviewed matches as mapping evidence. System-generated defaults and ambiguous client names must not create transaction geography or ownership. |
 | Business definitions | `docs/BUSINESS_DEFINITIONS.md` | Net sales revenue is `net_cost`; total acquisition cost is `total_trade_price`; gross margin/profit is workbook `net_income`. |
 | Sales data layer rules | `databricks/docs/SALES_DATA_LAYER_FLOW.md` | Keep raw, semi-raw estimated, and cleaned data labels distinct. |
 
@@ -35,10 +36,29 @@ This layer must be finished first because predictive and prescriptive outputs de
 | Area summary | Group by `area_type` and standardized area. | `descriptive_area_summary.csv` |
 | Area-type summary | Group by territory/customer/business-line/unmapped. | `descriptive_area_type_summary.csv` |
 | Product ABC/Pareto | Rank products by net sales revenue (`net_cost`); A covers cumulative 0-80%, B covers >80-95%, C covers >95-100%. | `descriptive_product_abc_pareto.csv` |
+| Product focus cohort | Rank observed positive-revenue products inside the selected period and let the user retain the top 5%, 10%, or 20% by product count (rounded up). Gap-fill estimates do not determine cohort membership. The performance table and cohort-versus-remainder donut use the complete selected cohort; charts show at most the ten highest-ranked products for readability. The cohort is recalculated whenever the historical period or percentage changes. This is descriptive prioritization, not a purchase recommendation. | Product Prioritization dashboard |
 | Territory ABC/Pareto | Rank mapped territories by net sales revenue (`net_cost`) using the same ABC thresholds. | `descriptive_territory_abc_pareto.csv` |
 | Seasonality index | Monthly average demand divided by average demand across all months. | `descriptive_seasonality_overall.csv`, `descriptive_seasonality_territory.csv` |
 | YoY growth | Compare each month against the same month in the prior year. | `descriptive_yoy_overall.csv`, `descriptive_yoy_territory.csv` |
 | Estimation audit | Count rows from backward allocation and estimated dates. | `descriptive_contract_allocation_summary.csv`, `descriptive_run_summary.json` |
+
+## Dashboard Period and Grain Rules
+
+Overview, Sales Diagnostics, Product Prioritization, and Area Prioritization use one shared historical-period filter:
+
+| Filter | Display grain | Calendar rule |
+|---|---|---|
+| Last 30 Days | Daily | Current Philippine calendar day and the preceding 29 days. Uses dated transactions; missing days are estimated from the same calendar dates in up to three prior years. Monthly totals are never divided into synthetic daily values. |
+| Last 3 Months | Monthly | Current Philippine calendar month and the preceding two months. |
+| Last 6 Months | Monthly | Current Philippine calendar month and the preceding five months. |
+| Last 12 Months | Monthly | Current Philippine calendar month and the preceding eleven months. |
+| Custom Date Range | Daily up to 31 days; monthly above 31 days | Calendar start and end dates from January 1, 2017 through the current Philippine date. Exact dated transactions are used; longer selections are summarized into monthly buckets to control chart noise. |
+
+Trailing periods are descriptive counterparts to the forward-looking 3-, 6-, and 12-month forecast horizons. Missing daily and monthly observations are filled with a recency-weighted same-calendar-period estimate using up to three prior years (60%, 30%, and 10%, renormalized when fewer years exist). Every filled value remains labeled as an estimate, is never treated as an observed zero, and is replaced when an uploaded actual arrives.
+
+Product Prioritization recalculates its selected observed top-5%, top-10%, or top-20% cohort whenever the cohort percentage, a period preset, or either Custom Date Range calendar boundary changes. Presets anchor to the current calendar date and month backwards (PHT), while Custom Date Range allows arbitrary historical date selection.
+
+Overview and Sales Diagnostics expose Period View and Y/Y Compare. The comparison aligns every displayed day or month to the same calendar period one year earlier; Custom Date Range shifts the selected start and end dates back by one calendar year, with leap-day dates clamped to the last valid February date. Product Prioritization intentionally remains period-only.
 
 ## Command
 

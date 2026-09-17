@@ -61,6 +61,34 @@ class CommercialMcdaTests(unittest.TestCase):
             alpha = next(row for row in refreshed["territories"] if row["territory"] == "Alpha")
             self.assertEqual(alpha["sales_value"], 400.0)
 
+    def test_observed_fallback_excludes_estimated_rows_and_uses_parent_territory(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            candidate_path = root / "observed.json.gz"
+            area_master_path = root / "area_mapping.csv"
+            rows = [
+                {"quality_status": "valid", "area": "Pagbilao", "date_delivered": "2025-01-01", "net_cost": 120},
+                {"quality_status": "warning", "area": "Pagbilao", "date_delivered": "2025-02-01", "net_cost": 80},
+                {"quality_status": "valid", "area": "Pagbilao", "date_delivered": "2025-03-01", "net_cost": 900, "estimated": True},
+            ]
+            with gzip.open(candidate_path, "wt", encoding="utf-8") as handle:
+                json.dump({"metadata": {"dataset_id": "observed_fallback"}, "rows": rows}, handle)
+            with area_master_path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=[
+                    "raw_area", "standard_area", "area_type", "territory", "mapping_status"
+                ])
+                writer.writeheader()
+                writer.writerow({
+                    "raw_area": "Pagbilao", "standard_area": "Pagbilao", "area_type": "territory",
+                    "territory": "Quezon", "mapping_status": "approved",
+                })
+
+            result = build_commercial_mcda(candidate_path, area_master_path)
+
+            self.assertEqual([row["territory"] for row in result["territories"]], ["Quezon"])
+            self.assertEqual(result["territories"][0]["sales_value"], 200.0)
+            self.assertEqual(result["territories"][0]["source_row_count"], 2)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -66,7 +66,7 @@ The system shall compute descriptive analytics from historical sales data.
 
 Required outputs:
 
-- Monthly demand and revenue trends.
+- Daily or monthly demand and revenue trends for bounded periods, plus an all-time calendar-year view.
 - STL seasonality.
 - Pareto / 80-20 ranking.
 - Actual ABC classification.
@@ -77,6 +77,7 @@ Acceptance criteria:
 
 - Outputs reconcile to source totals.
 - Missing months and incomplete periods are labeled.
+- The All Time dashboard period aggregates only observed records by calendar year; the current year is labeled YTD and an incomplete historical endpoint is labeled Partial.
 - Product-level analysis uses canonical SKU or estimated allocation flags.
 - The descriptive job is reproducible through `python services\analytics_service\jobs\run_descriptive.py`.
 - Revenue uses Net CP (`net_cost`), Total TP (`total_trade_price`) is acquisition cost, and `net_income` is labeled as transaction gross margin/profit.
@@ -122,6 +123,10 @@ The system shall prioritize products for planning review.
 Acceptance criteria:
 
 - Established products use actual ABC classification.
+- The descriptive Product Prioritization view lets users compare top-5%, top-10%, and top-20% Pareto cohorts and dynamically recalculates the selected cohort for every historical period, including All Time and custom dates.
+- Area Prioritization separates Government, Private, Internal, and Unknown buyer ownership; its revenue and quantity charts visibly split observed and estimated evidence using one selected-cluster denominator.
+- The commercial MCDA sensitivity candidate uses only sales-value scale and observed-month coverage, locks their weights to exactly 100%, and reports rank shifts from the governed 60/40 baseline.
+- Outbreak risk and supplier lead time remain excluded from commercial ranking until their territory-level source feeds are validated.
 - XGBoost or other ML is used only after a clear prediction target is defined.
 - Without inventory data, the output is labeled demand priority, not inventory urgency.
 - Feature importance and limitations are documented.
@@ -136,6 +141,10 @@ Possible outputs:
 - Scenario ROP.
 - Scenario safety stock.
 - Commercial-priority MCDA.
+- Area Prioritization must rank mapped geographic areas rather than buyer clusters. Government, Private, Internal, and Unknown are filters and buyer-composition dimensions.
+- Area ranking must respond to Last 30 Days, Last 3 Months, Last 6 Months, Custom Dates, and All Time. All Time uses yearly display grain.
+- Actual revenue, recency-weighted gap estimates, unmapped geography, active-period coverage, and the 60/40 commercial score must remain visibly distinguishable.
+- The primary area view must include a horizontal actual-versus-estimated ranking, a revenue Pareto chart with an 80% reference, and an evidence table with buyer composition and confidence labels.
 - Product-region matching.
 - Weather or disease scenario alerts.
 

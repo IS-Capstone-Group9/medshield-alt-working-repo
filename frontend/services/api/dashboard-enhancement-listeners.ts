@@ -21,7 +21,7 @@ const DASHBOARD_PAGE_META = {
   overview: ['Executive Overview', 'Centralized demand intelligence, forecasting, and stock actions'],
   revenue: ['Sales Diagnostics', 'Revenue, growth, and margin trends'],
   products: ['Product Prioritization', 'ABC/Pareto product view'],
-  territory: ['Area Prioritization', 'Territory performance and ranking'],
+  territory: ['Area Prioritization', 'Geographic performance, concentration, and evidence quality'],
   forecast: ['Forecast Modeling', 'Actual sales, baseline forecasts and historical validation'],
   inventory: ['Prescriptive Planning', 'Priority products, constrained allocation and scenario review'],
   data: ['Data Upload', 'CSV and JSON sources for dashboard updates'],
@@ -63,6 +63,7 @@ function activateDashboardPage(root: HTMLElement, name: DashboardPageName, navIt
       ? 'flex'
       : 'none'
   }
+  ;(window as any).configureProductYearControls?.(name)
 
   if (document.body.classList.contains('nav-hidden')) {
     ;(window as any).closeNavigation?.()
@@ -73,6 +74,11 @@ function activateDashboardPage(root: HTMLElement, name: DashboardPageName, navIt
       ;(window as any).buildCharts?.()
       ;(window as any).buildTables?.()
       ;(window as any).renderShowcaseDOMVisuals?.()
+      ;(window as any).renderProductPrioritizationTimeline?.()
+      ;(window as any).renderSalesSectors?.()
+      ;(window as any).renderForecastValidation?.()
+      ;(window as any).renderExternalRegression?.()
+      ;(window as any).renderSalesHeatmap?.()
       renderDecisionSupportCharts(root)
       renderMcdaSensitivity(root)
     }, 60)
@@ -374,6 +380,10 @@ export function installDashboardEnhancements(
     window.requestAnimationFrame(() => renderDecisionSupportCharts(root))
   }
   for (const controlId of [
+    'descriptivePeriodSelect',
+    'descriptiveComparisonSelect',
+    'customDateStart',
+    'customDateEnd',
     'topbarYearSelect',
     'yoyBaseYearSelect',
     'yoyTargetYearSelect',

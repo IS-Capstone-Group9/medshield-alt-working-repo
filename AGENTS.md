@@ -17,7 +17,7 @@ These Markdown files define working roles; they do not launch agents or grant to
 
 ## MedShield Core System Identity & Rules
 
-MedShield is an **Enterprise Decision-Support System (DSS)** designed for pharmaceutical distribution and inventory planning under seasonal disease surge conditions in the Philippines (CALABARZON / Bicol / Metro Manila).
+MedShield is an **Enterprise Decision-Support System (DSS)** designed for pharmaceutical distribution and inventory planning under seasonal disease surge conditions in the Philippines (CALABARZON / MIMAROPA / Bicol).
 
 ### Key Architectural Guidelines:
 

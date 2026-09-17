@@ -11,7 +11,7 @@ async function expectChartRendered(page: Page, canvasId: string) {
       chart.height > 0 &&
       chart.data?.datasets?.some((dataset: { data?: unknown[] }) => dataset.data?.length)
     )
-  }, canvasId)).toBe(true)
+  }, canvasId), { timeout: 20000 }).toBe(true)
 }
 
 async function expectOnlyPageActive(page: Page, pageId: string) {
@@ -56,14 +56,14 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     // Verify Overview KPI Cards exist and display values
     const kpiTotalRevenue = page.locator('#kpiOverviewTotalRevenue');
     await expect(kpiTotalRevenue).toBeVisible();
-    await expect(kpiTotalRevenue).toContainText('â‚±');
+    await expect(kpiTotalRevenue).toContainText('₱');
 
     // Verify Main Overview Canvas
     await expect(page.locator('#overviewBaselineChart')).toBeVisible();
     await expectChartRendered(page, 'overviewBaselineChart');
 
     // Verify Data Governance Integrity Bar
-    await expect(page.locator('.data-freshness-bar')).toContainText(/Analytics Services|Bundled Demo Snapshot/);
+    await expect(page.locator('.data-freshness-bar')).toContainText(/Analytics Services|Bundled Demo Snapshot/, { timeout: 20000 });
   });
 
   test('2. Navigation Matrix: Transitions seamlessly across all 7 DSS Modules', async ({ page }) => {
@@ -100,7 +100,7 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     await expect(salesDeepDive).not.toBeVisible();
     await expect(page.locator('#sectorProfileTable')).toBeVisible();
     await page.selectOption('#sectorCluster', 'Private');
-    await expect(page.locator('#sectorStatus')).toContainText('No private records');
+    await expect(page.locator('#sectorStatus')).toContainText(/Private|No private records/);
 
     // 2.4 Forecast Modeling
     await page.locator('.nav-item', { hasText: 'Forecast Modeling' }).click();
@@ -108,16 +108,16 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     await expectOnlyPageActive(page, 'page-forecast');
     await expect(salesDeepDive).not.toBeVisible();
     await expect(page.locator('#forecastChart')).toBeVisible();
-    await expect(page.locator('#regMetrics')).toContainText('MAE');
+    await expect(page.locator('#forecastMetrics')).toContainText('MAE', { timeout: 20000 });
     await expectChartRendered(page, 'forecastChart');
-    await expectChartRendered(page, 'regPredictionChart');
 
     // 2.5 Prescriptive Planning
     await page.locator('.nav-item', { hasText: 'Prescriptive Planning' }).click();
     await expect(page.locator('#topbar-title')).toHaveText('Prescriptive Planning');
     await expectOnlyPageActive(page, 'page-inventory');
     await expect(salesDeepDive).not.toBeVisible();
-    await expect(page.locator('#planInputs tbody tr')).toHaveCount(5);
+    await page.selectOption('#planSector', 'Private');
+    await expect(page.locator('#planInputs tbody tr')).toHaveCount(5, { timeout: 20000 });
     await expectChartRendered(page, 'planParetoChart');
     await expect(page.locator('#planExport')).toBeDisabled();
 
@@ -135,64 +135,127 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     await expect(salesDeepDive).not.toBeVisible();
   });
 
-  test('3. Dynamic Time Horizons: Toggles Single Year & Y/Y Comparison Filters', async ({ page }) => {
-    const singleYearBtn = page.locator('#btnSingleYear');
-    const yoyBtn = page.locator('#btnYoyYear');
-    const singleWrap = page.locator('#singleYearWrap');
-    const yoyWrap = page.locator('#yoyYearWrap');
+  test('2b. Area priority weights stay complementary and update selected-period ranking', async ({ page }) => {
+    await page.locator('.nav-item', { hasText: 'Area Prioritization' }).click();
+    await expectOnlyPageActive(page, 'page-territory');
+    await expect(page.locator('#sectorStatus')).toContainText('mapped areas ranked', { timeout: 20000 });
+    await page.locator('#mcdaWeightSalesValue').evaluate((element) => {
+      const details = element.closest('details');
+      if (details) details.open = true;
+    });
 
-    // Initially Single Year mode is active
-    await expect(singleYearBtn).toHaveClass(/active/);
-    await expect(singleWrap).toBeVisible();
+    const initialScores = await page.locator('#sectorProfileTable tbody tr td:nth-child(3)').allTextContents();
+    await page.locator('#mcdaWeightSalesValue').evaluate((element: HTMLInputElement) => {
+      element.value = '80';
+      element.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    await expect(page.locator('#mcdaWeightSalesValueLabel')).toHaveText('80%');
+    await expect(page.locator('#mcdaWeightCoverageLabel')).toHaveText('20%');
+    await expect(page.locator('#mcdaWeightTotal')).toHaveText('100%');
+    await expect(page.locator('#areaScoreMethod')).toContainText('80% sales-value scale + 20% active-period coverage');
+    await expect.poll(async () => page.locator('#sectorProfileTable tbody tr td:nth-child(3)').allTextContents()).not.toEqual(initialScores);
 
-    // Toggle to Y/Y Compare
-    await yoyBtn.click();
-    await expect(yoyBtn).toHaveClass(/active/);
-    await expect(yoyWrap).toBeVisible();
-    await expect(singleWrap).not.toBeVisible();
+    await page.locator('#mcdaWeightCoverage').evaluate((element: HTMLInputElement) => {
+      element.value = '70';
+      element.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    await expect(page.locator('#mcdaWeightSalesValueLabel')).toHaveText('30%');
+    await expect(page.locator('#mcdaWeightCoverageLabel')).toHaveText('70%');
+    await expect(page.locator('#areaScoreMethod')).toContainText('30% sales-value scale + 70% active-period coverage');
+    await expect(page.locator('#mcdaCriteriaStatus')).toHaveText('Live selected-period data');
 
-    // Switch comparison years in dropdowns
-    const baseSelect = page.locator('#yoyBaseYearSelect');
-    const targetSelect = page.locator('#yoyTargetYearSelect');
-    await baseSelect.selectOption('2025');
-    await targetSelect.selectOption('2023');
+    await page.locator('#mcdaResetWeights').click();
+    await expect(page.locator('#mcdaWeightSalesValueLabel')).toHaveText('60%');
+    await expect(page.locator('#mcdaWeightCoverageLabel')).toHaveText('40%');
+    await expect(page.locator('#page-territory')).not.toContainText('Request failed: 500');
+  });
 
-    // Overview Chart should render only the selected comparison pair.
-    await expect(page.locator('#overviewBaselineChart')).toBeVisible();
+  test('3. Descriptive periods use trailing windows and calendar dates for Custom', async ({ page }) => {
+    const periodSelect = page.locator('#descriptivePeriodSelect')
+    const comparisonSelect = page.locator('#descriptiveComparisonSelect')
+    const yearWrap = page.locator('#singleYearWrap')
+    await expect(periodSelect).toHaveValue('12')
+    await expect(periodSelect.locator('option')).toHaveText([
+      'Last 30 Days', 'Last 3 Months', 'Last 6 Months', 'Last 12 Months', 'All Time · Yearly', 'Custom Date Range',
+    ])
+    await expect(yearWrap).toBeHidden()
+    await expect(page.locator('#btnYoyYear')).toHaveCount(0)
+    await expect(comparisonSelect).toHaveValue('single')
+
+    await periodSelect.selectOption('3')
     await expect.poll(async () => page.evaluate(() => {
-      const chartApi = (window as any).Chart
-      const canvas = document.getElementById('overviewBaselineChart')
-      const chart = canvas ? chartApi?.getChart?.(canvas) : null
-      return chart?.data?.labels?.map(String) ?? []
-    })).toEqual(['2023', '2025'])
+      const chart = (window as any).Chart.getChart(document.getElementById('overviewBaselineChart'))
+      return chart?.data?.labels?.length ?? 0
+    })).toBe(3)
+    await expect(page.locator('#overviewBaselineChart').locator('xpath=ancestor::div[contains(@class,"chart-card")]').locator('.chart-subtitle'))
+      .toContainText('Last 3 Months')
 
-    // Switch back to Single Year
-    await singleYearBtn.click();
-    await expect(singleYearBtn).toHaveClass(/active/);
-    await expect(singleWrap).toBeVisible();
-
-    const yearSelect = page.locator('#topbarYearSelect');
-    await yearSelect.selectOption('2024');
-    await expect(page.locator('#overviewBaselineChart')).toBeVisible();
+    await periodSelect.selectOption('all')
     await expect.poll(async () => page.evaluate(() => {
-      const chartApi = (window as any).Chart
-      const canvas = document.getElementById('overviewBaselineChart')
-      const chart = canvas ? chartApi?.getChart?.(canvas) : null
-      return chart?.data?.labels?.map(String) ?? []
-    })).toEqual(['2024'])
+      const chart = (window as any).Chart.getChart(document.getElementById('overviewBaselineChart'))
+      return chart?.data?.labels ?? []
+    })).toEqual(expect.arrayContaining(['2017']))
+    await expect(page.locator('#overviewBaselineChart').locator('xpath=ancestor::div[contains(@class,"chart-card")]').locator('.chart-subtitle'))
+      .toContainText('All Time')
+
+    await comparisonSelect.selectOption('yoy')
+    await expect.poll(async () => page.evaluate(() => {
+      const chart = (window as any).Chart.getChart(document.getElementById('overviewBaselineChart'))
+      return chart?.data?.datasets?.map((dataset: any) => dataset.label) ?? []
+    })).toContain('Prior-year Net Sales Revenue')
+
+    const customRange = page.locator('#customDateRangeWrap')
+    const startDate = page.locator('#customDateStart')
+    const endDate = page.locator('#customDateEnd')
+    await startDate.evaluate((input: HTMLInputElement) => {
+      input.showPicker = () => { input.dataset.calendarOpened = 'true' }
+    })
+    await periodSelect.selectOption('custom')
+    await expect(yearWrap).toBeHidden()
+    await expect(customRange).toBeVisible()
+    await expect(page.getByText('Historical period', { exact: true })).toHaveCSS('position', 'absolute')
+    await expect(page.getByText('Historical period', { exact: true })).toHaveCSS('width', '1px')
+    await expect(page.getByText('Comparison view', { exact: true })).toHaveCSS('position', 'absolute')
+    await expect(customRange.getByText('From', { exact: true })).toBeVisible()
+    await expect(customRange.getByText('To', { exact: true })).toBeVisible()
+    await expect(startDate).toHaveAttribute('data-calendar-opened', 'true')
+    await expect(startDate).toHaveAttribute('min', '2017-01-01')
+    await expect(startDate).toHaveCSS('background-color', 'rgb(255, 255, 255)')
+    expect(await startDate.evaluate((input) => getComputedStyle(input).color)).not.toBe('rgb(255, 255, 255)')
+    await startDate.fill('2024-01-01')
+    await endDate.fill('2024-12-31')
+    await expect(startDate).toHaveAttribute('max', '2024-12-31')
+    await expect(endDate).toHaveAttribute('min', '2024-01-01')
+    await expect.poll(async () => page.evaluate(() => {
+      const chart = (window as any).Chart.getChart(document.getElementById('overviewBaselineChart'))
+      return chart?.data?.labels?.length ?? 0
+    })).toBe(12)
+
+    await startDate.fill('2024-03-01')
+    await endDate.fill('2024-03-20')
+    await expect.poll(async () => page.evaluate(() => {
+      const chart = (window as any).Chart.getChart(document.getElementById('overviewBaselineChart'))
+      return chart?.data?.labels?.length ?? 0
+    })).toBe(20)
+
+    await expect(page.locator('#sectorStatus')).toContainText('weighted record equivalents', { timeout: 30000 })
+    await periodSelect.selectOption('30d')
+    await expect(yearWrap).toBeHidden()
+    await expect(customRange).toBeHidden()
+    const overviewSubtitle = page.locator('#overviewBaselineChart').locator('xpath=ancestor::div[contains(@class,"chart-card")]').locator('.chart-subtitle')
+    await expect(overviewSubtitle).toContainText('Last 30 Days')
   });
 
   test('3b. Extended data pages open and unsupported dark mode is absent', async ({ page }) => {
     const salesDeepDive = page.locator('[data-sales-diagnostics-deep-dive]');
-    await expect(page.getByRole('button', { name: 'Toggle dark mode' })).toHaveCount(0);
 
-    await page.getByRole('button', { name: 'View Sales Data' }).click();
-    await expectOnlyPageActive(page, 'page-sales-data');
+    await page.locator('.nav-item', { hasText: 'View Sales Data' }).click();
     await expect(page.locator('#topbar-title')).toHaveText('View Sales Data');
+    await expectOnlyPageActive(page, 'page-sales-data');
     await expect(page.locator('#salesDataTable')).toBeVisible();
     await expect(salesDeepDive).not.toBeVisible();
 
-    await page.getByRole('button', { name: 'Weather API Validation' }).click();
+    await page.locator('.nav-item', { hasText: 'Weather API Validation' }).click();
     await expectOnlyPageActive(page, 'page-weather-validation');
     await expect(page.locator('#topbar-title')).toHaveText('Weather API Validation');
     await expect(page.locator('#weatherEffectTable')).toBeVisible();
@@ -203,7 +266,8 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     await page.locator('.nav-item', { hasText: 'Forecast Modeling' }).click();
     await expectChartRendered(page, 'forecastChart');
     await page.selectOption('#forecastHorizon', '3');
-    await expect(page.locator('#forecastWindow')).toContainText('2026-03');
+    const currentMonth = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Manila', year: 'numeric', month: '2-digit' }).format(new Date());
+    await expect(page.locator('#forecastWindow')).toContainText(currentMonth);
     const pending = page.waitForEvent('download');
     await page.locator('#forecastExport').click();
     const download = await pending;

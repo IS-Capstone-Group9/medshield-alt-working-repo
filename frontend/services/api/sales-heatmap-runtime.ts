@@ -19,7 +19,7 @@ export const SALES_HEATMAP_MARKUP = `
     <label>Measure <select id="heatmapMeasure" onchange="renderSalesHeatmap()"><option value="units">Units sold</option><option value="index">Within-year index</option></select></label>
   </div>
   <p class="chart-subtitle" id="heatmapStatus" role="status">Loading product-level quantities…</p>
-  <div id="revenueHeatmapGrid" style="overflow-x:auto;margin-top:12px;"></div>
+  <div id="revenueHeatmapGrid" style="overflow-x:auto;margin-top:12px;min-height:36px;"></div>
   <p id="heatmapLegend" class="chart-subtitle" style="margin:12px 0;"></p>
   <p id="heatmapInsight" style="margin:12px 0;" aria-live="polite"></p>
   <div class="chart-wrap h260"><canvas id="quantityTrendChart" aria-label="Monthly units sold for the selected product" role="img"></canvas></div>
@@ -86,37 +86,37 @@ function renderSalesHeatmap() {
   const product = salesHeatmapData.products.find(product => product.id === productId);
   const area = document.getElementById('heatmapArea').value;
   const measure = document.getElementById('heatmapMeasure').value;
-  const sourceYears = [...new Set(salesHeatmapData.monthly.map(row=>Number(row.period.slice(0,4))))];
-  const years = (comparisonMode==='single' && selectedYear==='all' && sourceYears.length
-    ? Array.from({length:Math.max(...sourceYears)-Math.min(...sourceYears)+1},(_,i)=>Math.min(...sourceYears)+i)
-    : diagnosticYears()).slice().sort((a,b)=>b-a);
+  const daily = descriptiveUsesDailyGrain();
+  const custom = descriptivePeriod === 'custom';
+  const hasDailySource = Array.isArray(salesHeatmapData.daily) && salesHeatmapData.daily.length > 0;
+  const useDailySource = (daily || custom) && hasDailySource;
+  const sourceRows = useDailySource ? (Array.isArray(salesHeatmapData.daily) ? salesHeatmapData.daily : []) : salesHeatmapData.monthly;
   const totals = new Map();
-  salesHeatmapData.monthly.filter(row => row.product === productId && (area === 'all' || row.area === area)).forEach(row => {
-    const total = totals.get(row.period) || {quantity:0,rows:0};
-    total.quantity += row.quantity; total.rows += row.row_count; totals.set(row.period,total);
+  sourceRows.filter(row => row.product === productId && (area === 'all' || row.area === area) && descriptivePeriodIncludes(row.period)).forEach(row => {
+    const period = daily ? row.period : String(row.period).slice(0,7);
+    const total = totals.get(period) || {quantity:0,rows:0};
+    total.quantity += row.quantity; total.rows += row.row_count; totals.set(period,total);
   });
-  salesHeatmapView = years.flatMap(year => {
-    const months = Array.from({length:12}, (_,i) => ({period:year+'-'+String(i+1).padStart(2,'0'),month:i}));
-    const observed = months.filter(month => totals.has(month.period));
-    const mean = observed.length === 12 ? observed.reduce((sum,month)=>sum+totals.get(month.period).quantity,0)/12 : null;
-    return months.map(month => {
-      const entry = totals.get(month.period);
-      const quantity = entry ? entry.quantity : null;
-      return {year, ...month, quantity, rows:entry?.rows || 0, value:measure==='units' ? quantity : mean > 0 && quantity !== null ? quantity/mean : null};
-    });
+  const periods = descriptiveAxisPeriods();
+  const observed = periods.filter(period => totals.has(period));
+  const mean = !daily && observed.length === periods.length && periods.length > 0
+    ? observed.reduce((sum,period)=>sum+totals.get(period).quantity,0)/periods.length : null;
+  salesHeatmapView = periods.map(period => {
+    const entry = totals.get(period), quantity = entry ? entry.quantity : null;
+    return {period, quantity, rows:entry?.rows || 0, value:measure==='units' ? quantity : mean > 0 && quantity !== null ? quantity/mean : null};
   });
   const format = value => value === null ? '—' : value.toLocaleString('en-PH',{maximumFractionDigits:measure==='units'?2:2});
-  const unit = measure==='units' ? 'source units' : '× yearly monthly mean';
-  document.getElementById('salesHeatmapTitle').textContent = (measure==='units'?'Monthly units sold':'Monthly within-year index') + ' — ' + (product?.label || 'No product');
+  const unit = measure==='units' ? 'source units' : '× selected-year monthly mean';
+  document.getElementById('salesHeatmapTitle').textContent = (daily?'Daily':'Monthly') + (measure==='units'?' units sold':' within-year index') + ' — ' + (product?.label || 'No product');
   const max = Math.max(0,...salesHeatmapView.map(row=>row.value??0));
   const grid = document.getElementById('revenueHeatmapGrid');
   const table = document.createElement('table'); table.className='product-table'; table.style.minWidth='780px';
   const header = table.createTHead().insertRow();
-  ['Year','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'].forEach(label=> { const th=document.createElement('th');th.textContent=label;th.scope='col';header.appendChild(th); });
+  const scopeHeader=document.createElement('th');scopeHeader.textContent=descriptivePeriodLabel();scopeHeader.scope='col';header.appendChild(scopeHeader);
+  periods.forEach(period=> { const th=document.createElement('th');th.textContent=descriptivePointLabel(period);th.scope='col';header.appendChild(th); });
   const body=table.createTBody();
-  years.forEach(year=>{
-    const tr=body.insertRow();const th=document.createElement('th');th.scope='row';th.textContent=String(year);tr.appendChild(th);
-    salesHeatmapView.filter(row=>row.year===year).forEach(row=>{
+  const tr=body.insertRow();const rowLabel=document.createElement('th');rowLabel.scope='row';rowLabel.textContent=measure==='units'?'Units':'Index';tr.appendChild(rowLabel);
+  salesHeatmapView.forEach(row=>{
       const td=tr.insertCell(); const ratio=max>0 && row.value!==null?row.value/max:0;
       td.textContent=format(row.value);td.dataset.period=row.period;td.dataset.value=row.value===null?'':String(row.value);
       td.style.padding='10px 7px';td.style.textAlign='center';td.style.border='2px solid white';
@@ -126,16 +126,15 @@ function renderSalesHeatmap() {
       const tooltip=row.period+': '+(row.value===null?'Unavailable':format(row.value)+' '+unit)+'; '+(row.quantity===null?'no observed records':row.quantity+' source units; '+row.rows+' records');
       td.title=tooltip;td.setAttribute('aria-label',tooltip);
       td.addEventListener('focus',()=>document.getElementById('heatmapStatus').textContent=tooltip);
-    });
   });
   grid.replaceChildren(table);
-  const observed=salesHeatmapView.filter(row=>row.quantity!==null);
-  const peak=observed.reduce((best,row)=>!best||row.quantity>best.quantity?row:best,null);
-  document.getElementById('heatmapStatus').textContent=observed.length+' of '+salesHeatmapView.length+' months have observed records. '+(product?.category||'Unclassified')+'; '+(area==='all'?'all sales areas':area)+'.';
+  const observedView=salesHeatmapView.filter(row=>row.quantity!==null);
+  const peak=observedView.reduce((best,row)=>!best||row.quantity>best.quantity?row:best,null);
+  document.getElementById('heatmapStatus').textContent=observedView.length+' of '+salesHeatmapView.length+' '+(daily?'days':'months')+' have observed records. '+(product?.category||'Unclassified')+'; '+(area==='all'?'all sales areas':area)+'.';
   document.getElementById('heatmapLegend').textContent='Light to dark: 0–'+format(max)+' '+unit+' for this selection. Gray: unavailable; recorded zero: 0. '+(measure==='index'?'Index is unavailable for incomplete years.':'');
   document.getElementById('heatmapInsight').textContent=peak ? 'Highest observed quantity: '+peak.period+', '+peak.quantity.toLocaleString('en-PH')+' source units. This is a sales-volume observation, not evidence of a disease surge.' : 'No observed product quantities match these filters.';
   const source=salesHeatmapData.source;
-  document.getElementById('heatmapSource').textContent=source.file+' · Snapshot: '+(source.generated_at||'unknown')+' · '+source.included_rows+' included records; '+Object.entries(source.excluded).map(([key,value])=>key+': '+value).join(', ')+'. Mapping: '+(product?.mapping_status||'unmapped')+'. '+(product?.pack_size?'Source pack label: '+product.pack_size+'. ':'')+'Aliases are not merged without approval. Topbar year selection also applies.';
+  document.getElementById('heatmapSource').textContent=source.file+' · Snapshot: '+(source.generated_at||'unknown')+' · '+source.included_rows+' included records; '+Object.entries(source.excluded).map(([key,value])=>key+': '+value).join(', ')+'. Mapping: '+(product?.mapping_status||'unmapped')+'. '+(product?.pack_size?'Source pack label: '+product.pack_size+'. ':'')+'Aliases are not merged without approval. Shared historical period: '+descriptivePeriodLabel()+'.';
   const chronological=salesHeatmapView.slice().sort((a,b)=>a.period.localeCompare(b.period));
   createChart('quantityTrendChart', {type:'line',data:{labels:chronological.map(row=>row.period),datasets:[{label:'Units sold (source units)',data:chronological.map(row=>row.quantity),borderColor:'#1E3A5F',pointRadius:3,tension:0,spanGaps:false}]},options:{...baseChartOptions(),plugins:{...baseChartOptions().plugins,tooltip:{callbacks:{label:context=>context.raw===null?'Unavailable':Number(context.raw).toLocaleString('en-PH')+' source units'}}},scales:{x:{ticks:{maxTicksLimit:16}},y:{beginAtZero:true,title:{display:true,text:'Units sold (source units)'},ticks:{callback:value=>Number(value).toLocaleString('en-PH')}}}}});
 }
@@ -149,6 +148,6 @@ function exportSalesHeatmapCSV() {
     return '"'+text.replace(/"/g,'""')+'"';
   }).join(',')).join('\r\n');
   const url=URL.createObjectURL(new Blob([String.fromCharCode(65279),csv],{type:'text/csv;charset=utf-8'}));
-  const link=document.createElement('a');link.href=url;link.download='monthly-product-quantities.csv';document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  const link=document.createElement('a');link.href=url;link.download=(descriptiveUsesDailyGrain()?'daily':'monthly')+'-product-quantities.csv';document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 `

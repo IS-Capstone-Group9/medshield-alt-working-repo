@@ -90,8 +90,9 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
       
       const handlers = [
         'showPage', 'toggleTheme', 'openHelp', 'closeNavigation', 'toggleNavigation',
-        'setComparisonMode', 'setYear', 'setYoYYear', 'refreshComparison', 'applyDatasetPatch', 'buildCharts',
-        'setPlanningData', 'setPlanningResult', 'getPlanningRequest', 'invalidatePlan', 'changePlanningScope', 'requestPlanSolve', 'exportPlanningCSV', 'setExternalRegressionData', 'renderExternalRegression', 'changeRegressionScope', 'exportExternalRegressionCSV', 'setForecastValidationData', 'renderForecastValidation', 'changeForecastScope', 'exportForecastValidationCSV', 'setSalesSectorsData', 'renderSalesSectors', 'setSalesHeatmapData', 'changeHeatmapCategory', 'renderSalesHeatmap', 'exportSalesHeatmapCSV'
+        'setComparisonMode', 'setYear', 'setYoYYear', 'setDescriptivePeriod', 'refreshComparison', 'applyDatasetPatch', 'buildCharts',
+        'setPlanningData', 'setPlanningResult', 'getPlanningRequest', 'invalidatePlan', 'changePlanningScope', 'requestPlanSolve', 'exportPlanningCSV', 'setExternalRegressionData', 'renderExternalRegression', 'changeRegressionScope', 'exportExternalRegressionCSV', 'setForecastValidationData', 'renderForecastValidation', 'changeForecastScope', 'exportForecastValidationCSV', 'setSalesSectorsData', 'renderSalesSectors', 'setSalesHeatmapData', 'changeHeatmapCategory', 'renderSalesHeatmap', 'exportSalesHeatmapCSV',
+        'renderProductPrioritizationTimeline', 'configureProductYearControls'
       ]
       for (const name of handlers) {
         delete (window as any)[name]
@@ -103,8 +104,5 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
     }
   }, [])
 
-  return {
-    rootRef,
-    portalContainer,
-  }
+  return { rootRef, portalContainer }
 }

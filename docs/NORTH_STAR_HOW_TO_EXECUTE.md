@@ -4,7 +4,7 @@
 
 This document answers one question:
 
-**How will the MedShield team execute the models in `references/NStar.md` using the current system and the 2021-2025 datasets?**
+**How will the MedShield team execute the models in `references/NStar.md` using the current system and validated internal sales data from 2017 onward?**
 
 This is an execution playbook, not implementation code. It converts the design in `docs/NORTH_STAR_EXECUTION_BLUEPRINT.md` into an ordered delivery and operating procedure.
 
@@ -104,7 +104,7 @@ Create an approved business glossary containing:
 
 Do not proceed until Finance and Supply Planning agree on demand, revenue, cost, margin, SKU, territory, and customer definitions.
 
-## 5. Step 2 - Correct and Conform the 2021-2025 Data
+## 5. Step 2 - Correct and Conform the 2017-Onward Sales Data
 
 ### 5.1 Reconcile the Year Files
 
@@ -1004,7 +1004,7 @@ Only `Published` outputs should appear as current recommendations.
 Deliver:
 
 - Approved glossary
-- Corrected 2021-2025 history
+- Corrected 2017-onward sales history
 - Territory/customer separation
 - Product alias mapping
 
@@ -1160,7 +1160,7 @@ WP5 provider setup and WP7 business data acquisition may begin in parallel, but 
 
 Execution is complete when:
 
-1. The 2021-2025 source history is reconciled.
+1. The 2017-onward internal sales history is reconciled, including the 2017-2019 Net CP exception.
 2. Territory, customer, and business-line concepts are separated.
 3. Descriptive outputs reconcile to the source.
 4. The forecast champion beats the approved benchmark.
