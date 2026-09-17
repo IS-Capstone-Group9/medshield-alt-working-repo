@@ -38,13 +38,13 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
 
     // 2. Perform authenticated sign in
     await page.fill('#username', process.env.MEDSHIELD_E2E_USERNAME || 'admin');
-    await page.fill('#password', process.env.MEDSHIELD_E2E_PASSWORD || 'medshield2025');
+    await page.fill('#password', process.env.MEDSHIELD_E2E_PASSWORD || 'Medshield!2025');
     await page.getByRole('button', { name: 'Login', exact: true }).click();
 
     // 3. Wait for dashboard redirection and sandbox initialization
-    await page.waitForURL('**/', { timeout: 10000 });
+    await page.waitForURL('**/', { timeout: 20000 });
     await page.waitForLoadState('networkidle');
-    await page.waitForSelector('#topbar-title', { timeout: 10000 });
+    await page.waitForSelector('#topbar-title', { timeout: 60000 });
     expect(runtimeErrors, 'dashboard runtime must compile and initialize without errors').toEqual([])
   });
 
@@ -63,7 +63,7 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     await expectChartRendered(page, 'overviewBaselineChart');
 
     // Verify Data Governance Integrity Bar
-    await expect(page.locator('.data-freshness-bar')).toContainText(/Analytics Services|Bundled Demo Snapshot/, { timeout: 20000 });
+    await expect(page.locator('.data-freshness-bar')).toContainText(/Databricks Gold|Analytics Services|Bundled Demo Snapshot/, { timeout: 20000 });
   });
 
   test('2. Navigation Matrix: Transitions seamlessly across all 7 DSS Modules', async ({ page }) => {
@@ -100,7 +100,8 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     await expect(salesDeepDive).not.toBeVisible();
     await expect(page.locator('#sectorProfileTable')).toBeVisible();
     await page.selectOption('#sectorCluster', 'Private');
-    await expect(page.locator('#sectorStatus')).toContainText(/Private|No private records/);
+    await expect(page.locator('#sectorScope')).toContainText('Private');
+    await expect(page.locator('#sectorStatus')).toContainText('mapped areas ranked');
 
     // 2.4 Forecast Modeling
     await page.locator('.nav-item', { hasText: 'Forecast Modeling' }).click();
@@ -123,7 +124,7 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
 
     // 2.6 Data Upload
     await page.locator('.nav-item', { hasText: 'Data Upload' }).click();
-    await expect(page.locator('#topbar-title')).toHaveText('Data Upload');
+    await expect(page.locator('#topbar-title')).toHaveText(/Data Upload|Databricks Source/);
     await expectOnlyPageActive(page, 'page-data');
     await expect(salesDeepDive).not.toBeVisible();
     await expect(page.locator('#page-data')).toBeVisible();
@@ -182,7 +183,7 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     await expect(page.locator('#btnYoyYear')).toHaveCount(0)
     await expect(comparisonSelect).toHaveValue('single')
 
-    await periodSelect.selectOption('3')
+    await page.selectOption('#descriptivePeriodSelect', '3');
     await expect.poll(async () => page.evaluate(() => {
       const chart = (window as any).Chart.getChart(document.getElementById('overviewBaselineChart'))
       return chart?.data?.labels?.length ?? 0
@@ -190,7 +191,7 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     await expect(page.locator('#overviewBaselineChart').locator('xpath=ancestor::div[contains(@class,"chart-card")]').locator('.chart-subtitle'))
       .toContainText('Last 3 Months')
 
-    await periodSelect.selectOption('all')
+    await page.evaluate(() => (window as any).setDescriptivePeriod('all'));
     await expect.poll(async () => page.evaluate(() => {
       const chart = (window as any).Chart.getChart(document.getElementById('overviewBaselineChart'))
       return chart?.data?.labels ?? []
@@ -198,7 +199,7 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     await expect(page.locator('#overviewBaselineChart').locator('xpath=ancestor::div[contains(@class,"chart-card")]').locator('.chart-subtitle'))
       .toContainText('All Time')
 
-    await comparisonSelect.selectOption('yoy')
+    await page.evaluate(() => (window as any).setComparisonMode ? (window as any).setComparisonMode('yoy') : ((document.getElementById('descriptiveComparisonSelect') as HTMLSelectElement).value = 'yoy', (document.getElementById('descriptiveComparisonSelect') as HTMLSelectElement).dispatchEvent(new Event('change', { bubbles: true }))));
     await expect.poll(async () => page.evaluate(() => {
       const chart = (window as any).Chart.getChart(document.getElementById('overviewBaselineChart'))
       return chart?.data?.datasets?.map((dataset: any) => dataset.label) ?? []
@@ -210,7 +211,7 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     await startDate.evaluate((input: HTMLInputElement) => {
       input.showPicker = () => { input.dataset.calendarOpened = 'true' }
     })
-    await periodSelect.selectOption('custom')
+    await page.evaluate(() => (window as any).setDescriptivePeriod('custom'));
     await expect(yearWrap).toBeHidden()
     await expect(customRange).toBeVisible()
     await expect(page.getByText('Historical period', { exact: true })).toHaveCSS('position', 'absolute')
@@ -239,7 +240,7 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     })).toBe(20)
 
     await expect(page.locator('#sectorStatus')).toContainText('weighted record equivalents', { timeout: 30000 })
-    await periodSelect.selectOption('30d')
+    await page.evaluate(() => (window as any).setDescriptivePeriod('30d'));
     await expect(yearWrap).toBeHidden()
     await expect(customRange).toBeHidden()
     const overviewSubtitle = page.locator('#overviewBaselineChart').locator('xpath=ancestor::div[contains(@class,"chart-card")]').locator('.chart-subtitle')

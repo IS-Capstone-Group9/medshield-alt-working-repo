@@ -55,7 +55,7 @@ async function main() {
     Math.abs(summary.sums.net_cost - snapshot.totals.total_revenue) < 0.01,
     `summary/snapshot net sales: ${summary.sums.net_cost} vs ${snapshot.totals.total_revenue}`,
   )
-  assert.deepEqual(ownership, ['Unknown'], 'buyer ownership values')
+  assert.ok(ownership.includes('Government') && ownership.includes('Private') && ownership.includes('Internal'), 'buyer ownership values')
   assert.deepEqual(Object.keys(forecast.views), ['3', '6', '12'], 'forecast horizons')
   assert.equal(regression.status, 'blocked', 'external regression gate')
   assert.ok(regression.coverage.sales_months > 0, 'external regression sales coverage')

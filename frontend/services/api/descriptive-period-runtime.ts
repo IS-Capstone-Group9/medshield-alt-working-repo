@@ -309,7 +309,7 @@ function getDescriptiveSourceRows() {
 function getDescriptiveDetailedRows() {
   if (typeof salesSectorsData === 'undefined' || !salesSectorsData || !Array.isArray(salesSectorsData.rows)) return [];
   const daily = descriptiveUsesDailyGrain();
-  const key = row => String(daily ? row.date : row.period || '');
+  const key = row => String((daily && row.date) ? row.date : row.period || (row.date ? String(row.date).slice(0, 7) : ''));
   const allRows = salesSectorsData.rows.filter(row => key(row));
   if (descriptiveUsesYearlyGrain()) {
     return allRows.filter(row => !descriptiveIsFuturePeriod(String(row.period || row.date || '')))
@@ -342,6 +342,22 @@ function getDescriptiveDetailedRows() {
     if (observed && observed.length) {
       observed.forEach(row => result.push({ ...row, evidence: row.evidence || 'actual' }));
       return;
+    }
+    if (daily) {
+      const monthObserved = observedByPeriod.get(period.slice(0, 7));
+      if (monthObserved && monthObserved.length) {
+        const monthDays = new Date(Number(period.slice(0, 4)), Number(period.slice(5, 7)), 0).getDate() || 30;
+        monthObserved.forEach(row => result.push({
+          ...row,
+          period: period.slice(0, 7),
+          date: period,
+          revenue: (Number(row.revenue) || 0) / monthDays,
+          quantity: (Number(row.quantity) || 0) / monthDays,
+          row_count: (Number(row.row_count) || 0) / monthDays,
+          evidence: row.evidence || 'actual'
+        }));
+        return;
+      }
     }
     if (descriptiveIsFuturePeriod(period)) return;
     let candidateYears = [1, 2, 3].map((yearsBack, index) => ({
@@ -407,11 +423,8 @@ function descriptiveAxisPeriods() {
       const year = String(row.period || '').slice(0, 4);
       if (/^\d{4}$/.test(year) && !descriptiveIsFuturePeriod(year)) years.add(Number(year));
     });
-    if (typeof salesSectorsData !== 'undefined' && salesSectorsData && Array.isArray(salesSectorsData.rows)) {
-      salesSectorsData.rows.forEach(row => {
-        const year = String(row.period || row.date || '').slice(0, 4);
-        if (/^\d{4}$/.test(year) && !descriptiveIsFuturePeriod(year)) years.add(Number(year));
-      });
+    if (!years.size) {
+      for (let y = 2017; y <= Number(descriptivePhtDate().slice(0, 4)); y++) years.add(y);
     }
     const observed = [...years].filter(Number.isInteger).sort((left, right) => left - right);
     if (!observed.length) return [];
@@ -516,14 +529,8 @@ function descriptivePointLabel(period) {
 
 function descriptiveYearLabel(yearValue) {
   const year = String(yearValue);
-  const years = descriptiveAxisPeriods();
-  const latestYear = years.length ? years[years.length - 1] : '';
-  const observedMonths = new Set(dashboardMonthlyRows()
-    .map(row => String(row.period || ''))
-    .filter(period => period.slice(0, 4) === year && /^\d{4}-\d{2}$/.test(period))
-    .map(period => period.slice(5, 7)));
-  if (year === latestYear && year === descriptivePhtDate().slice(0, 4)) return year + ' YTD';
-  if (year === latestYear && observedMonths.size > 0 && observedMonths.size < 12) return year + ' Partial';
+  const currentYear = descriptivePhtDate().slice(0, 4);
+  if (year === currentYear) return year + ' YTD';
   return year;
 }
 

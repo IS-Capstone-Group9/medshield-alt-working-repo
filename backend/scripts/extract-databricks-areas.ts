@@ -40,24 +40,24 @@ async function main(): Promise<void> {
 
   const query = `
     SELECT 
-      d.normalized_area AS area_name,
-      d.area_label,
+      CASE WHEN d.normalized_area = 'LOWER CAVITE' THEN 'CAVITE' ELSE d.normalized_area END AS area_name,
+      CASE WHEN d.normalized_area = 'LOWER CAVITE' THEN 'CAVITE' ELSE d.area_label END AS area_label,
       d.proposed_area_type AS area_type,
-      d.territory,
+      CASE WHEN d.normalized_area = 'LOWER CAVITE' THEN 'CAVITE' ELSE d.territory END AS territory,
       COALESCE(NULLIF(d.mapped_region, ''), 'Non-Geographic / Unmapped') AS mapped_region,
       COALESCE(NULLIF(d.mapped_province, ''), '-') AS mapped_province,
       COALESCE(NULLIF(d.mapped_city_municipality, ''), '-') AS mapped_city_municipality,
-      d.is_geographic_territory_approved,
-      d.source_record_count AS total_transactions,
-      d.first_observed_delivery,
-      d.last_observed_delivery,
-      ROUND(COALESCE(s.total_quantity, 0), 2) AS total_quantity,
-      ROUND(COALESCE(s.total_net_sales, 0), 2) AS total_net_sales,
-      ROUND(COALESCE(s.total_gross_margin, 0), 2) AS total_gross_margin,
+      CASE WHEN d.normalized_area = 'LOWER CAVITE' THEN true ELSE d.is_geographic_territory_approved END AS is_geographic_territory_approved,
+      SUM(d.source_record_count) AS total_transactions,
+      MIN(d.first_observed_delivery) AS first_observed_delivery,
+      MAX(d.last_observed_delivery) AS last_observed_delivery,
+      ROUND(SUM(COALESCE(s.total_quantity, 0)), 2) AS total_quantity,
+      ROUND(SUM(COALESCE(s.total_net_sales, 0)), 2) AS total_net_sales,
+      ROUND(SUM(COALESCE(s.total_gross_margin, 0)), 2) AS total_gross_margin,
       ROUND(
         CASE 
-          WHEN COALESCE(s.total_net_sales, 0) > 0 
-          THEN (COALESCE(s.total_gross_margin, 0) / s.total_net_sales) * 100 
+          WHEN SUM(COALESCE(s.total_net_sales, 0)) > 0 
+          THEN (SUM(COALESCE(s.total_gross_margin, 0)) / SUM(s.total_net_sales)) * 100 
           ELSE 0 
         END, 
         2
@@ -72,6 +72,15 @@ async function main(): Promise<void> {
       FROM workspace.medshield_gold.vw_dashboard_area_yearly_candidate
       GROUP BY area_key
     ) s ON d.area_key = s.area_key
+    GROUP BY
+      CASE WHEN d.normalized_area = 'LOWER CAVITE' THEN 'CAVITE' ELSE d.normalized_area END,
+      CASE WHEN d.normalized_area = 'LOWER CAVITE' THEN 'CAVITE' ELSE d.area_label END,
+      d.proposed_area_type,
+      CASE WHEN d.normalized_area = 'LOWER CAVITE' THEN 'CAVITE' ELSE d.territory END,
+      COALESCE(NULLIF(d.mapped_region, ''), 'Non-Geographic / Unmapped'),
+      COALESCE(NULLIF(d.mapped_province, ''), '-'),
+      COALESCE(NULLIF(d.mapped_city_municipality, ''), '-'),
+      CASE WHEN d.normalized_area = 'LOWER CAVITE' THEN true ELSE d.is_geographic_territory_approved END
     ORDER BY 
       CASE WHEN d.proposed_area_type = 'territory' THEN 1 ELSE 2 END,
       total_net_sales DESC

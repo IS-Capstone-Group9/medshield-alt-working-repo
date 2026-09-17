@@ -51,7 +51,7 @@ def build_sectors(rows, mappings, metadata, source_name, geography_mappings=()):
             period = delivered_date.strftime('%Y-%m')
             revenue, quantity = float(row['net_cost']), float(row['quantity'])
             product = str(row.get('product') or '').strip()
-            if not product or product.startswith('#') or row.get('in_analysis_range') is False or not all(map(math.isfinite, (revenue, quantity))) or quantity < 0:
+            if not product or product.startswith('#') or row.get('in_analysis_range') is False or not 2017 <= delivered_date.year <= 2025 or not all(map(math.isfinite, (revenue, quantity))) or quantity < 0:
                 raise ValueError()
         except (KeyError, TypeError, ValueError):
             excluded['invalid_metric_date_or_product'] += 1

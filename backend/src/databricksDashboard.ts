@@ -175,11 +175,12 @@ export async function loadDatabricksDashboardSnapshot() {
       transaction_count, COALESCE(net_sales_candidate, 0) AS net_sales_candidate,
       COALESCE(gross_margin_candidate, 0) AS gross_margin_candidate
       FROM ${MONTHLY} ORDER BY year_month`, 150),
-    query(`SELECT area_name, SUM(transaction_count) AS transaction_count,
+    query(`SELECT CASE WHEN area_name = 'LOWER CAVITE' THEN 'CAVITE' ELSE area_name END AS area_name,
+      SUM(transaction_count) AS transaction_count,
       SUM(COALESCE(net_sales_candidate, 0)) AS revenue,
       SUM(COALESCE(gross_margin_candidate, 0)) AS income
       FROM ${AREA_YEARLY} WHERE has_sales_activity = TRUE
-      GROUP BY area_name ORDER BY revenue DESC`, 100),
+      GROUP BY CASE WHEN area_name = 'LOWER CAVITE' THEN 'CAVITE' ELSE area_name END ORDER BY revenue DESC`, 100),
     query(`SELECT product_name, SUM(transaction_count) AS transaction_count,
       SUM(COALESCE(total_quantity_candidate, 0)) AS qty,
       SUM(COALESCE(net_sales_candidate, 0)) AS revenue,
@@ -370,7 +371,9 @@ export async function getDatabricksSalesTransactions(input: {
   const offset = (page - 1) * pageSize
   const [countRows, rows, metadata] = await Promise.all([
     query(`SELECT COUNT(*) AS total_rows FROM ${FACT} WHERE ${filters.where}`, 5),
-    query(`SELECT calendar_year, normalized_area AS area, dr_number, date_delivered,
+    query(`SELECT calendar_year,
+      CASE WHEN normalized_area = 'LOWER CAVITE' THEN 'Cavite' ELSE normalized_area END AS area,
+      dr_number, date_delivered,
       normalized_product AS product, quantity,
       unit_selling_price AS contract_price_unit, gross_sales AS gross_contract_value,
       discount_amount, net_sales AS net_contract_value,
@@ -448,8 +451,8 @@ export async function getDatabricksSalesSummary(input: {
         THEN COALESCE(net_sales, 0) - COALESCE(total_acquisition_cost, 0) - COALESCE(gross_margin_amount, 0)
         ELSE 0 END) AS reconciliation_delta
       FROM ${FACT} WHERE ${filters.where}`, 5),
-    query(`SELECT normalized_area AS area FROM ${FACT} WHERE ${filters.where}
-      GROUP BY normalized_area
+    query(`SELECT CASE WHEN normalized_area = 'LOWER CAVITE' THEN 'Cavite' ELSE normalized_area END AS area FROM ${FACT} WHERE ${filters.where}
+      GROUP BY CASE WHEN normalized_area = 'LOWER CAVITE' THEN 'Cavite' ELSE normalized_area END
       ORDER BY SUM(CASE WHEN is_net_sales_eligible THEN COALESCE(net_sales, 0) ELSE 0 END) DESC LIMIT 1`, 2),
     query(`SELECT normalized_product AS product FROM ${FACT} WHERE ${filters.where}
       GROUP BY normalized_product
@@ -496,12 +499,13 @@ export async function getDatabricksSalesHeatmap() {
       GROUP BY normalized_product ORDER BY normalized_product`, 5000),
     query(`SELECT normalized_product AS product,
       DATE_FORMAT(month_start, 'yyyy-MM') AS period,
-      normalized_area AS area,
+      CASE WHEN normalized_area = 'LOWER CAVITE' THEN 'CAVITE' ELSE normalized_area END AS area,
       SUM(quantity) AS quantity, COUNT(*) AS row_count
       FROM ${FACT}
       WHERE ${OBSERVED_FACT} AND is_quantity_observation_eligible = TRUE
-      GROUP BY normalized_product, month_start, normalized_area
-      ORDER BY normalized_product, month_start, normalized_area`, 30_000),
+      GROUP BY normalized_product, month_start,
+        CASE WHEN normalized_area = 'LOWER CAVITE' THEN 'CAVITE' ELSE normalized_area END
+      ORDER BY normalized_product, month_start, area`, 30_000),
   ])
   return {
     products: products.map((row) => ({
@@ -533,52 +537,136 @@ export async function getDatabricksSalesHeatmap() {
 export async function getDatabricksSalesSectors() {
   const rows = await query(`SELECT normalized_product AS product,
     DATE_FORMAT(month_start, 'yyyy-MM') AS period,
-    'Unknown' AS sector,
-    CASE WHEN proposed_area_type = 'territory' THEN COALESCE(territory, normalized_area) ELSE 'Unassigned geography' END AS territory,
-    CASE WHEN proposed_area_type IN ('customer_type', 'business_line') THEN normalized_area ELSE 'Geographic' END AS channel,
+    CASE
+      WHEN UPPER(TRIM(normalized_area)) IN ('GOVERNMENT', 'PAGBILAO') THEN 'Government'
+      WHEN UPPER(TRIM(normalized_area)) IN ('ADMIN', 'SUPPLIES', 'SUPPLLIES', 'EQUIPMENT', 'SUPPLIES AND EQUIPMENT', 'PERSONAL', 'LOSSES') THEN 'Internal'
+      WHEN proposed_area_type = 'territory' OR UPPER(TRIM(normalized_area)) IN ('CAVITE', 'LOWER CAVITE', 'BATANGAS', 'QUEZON', 'LAGUNA', 'MARINDUQUE', 'CAMARINES NORTE', 'CAM NORTE', 'CAMARINES SUR', 'CAM SUR', 'ALBAY', 'LEGASPI', 'LAGASPI', 'BICOL', 'MINDORO', 'HOSPITAL', 'HOPITAL', 'PHARMA', 'LUCENA', 'RAKKK', 'EAST', 'EASTERN', 'EASTERN QUEZON') THEN 'Private'
+      ELSE 'Unknown'
+    END AS sector,
+    CASE
+      WHEN UPPER(TRIM(normalized_area)) IN ('CAVITE', 'LOWER CAVITE') OR UPPER(TRIM(COALESCE(territory, ''))) IN ('LOWER CAVITE', 'CAVITE') THEN 'Cavite'
+      WHEN UPPER(TRIM(normalized_area)) IN ('BATANGAS') OR UPPER(TRIM(COALESCE(territory, ''))) = 'BATANGAS' THEN 'Batangas'
+      WHEN UPPER(TRIM(normalized_area)) IN ('QUEZON', 'PAGBILAO', 'HOSPITAL', 'HOPITAL', 'PHARMA', 'LUCENA', 'RAKKK', 'EAST', 'EASTERN', 'EASTERN QUEZON') OR UPPER(TRIM(COALESCE(territory, ''))) = 'QUEZON' THEN 'Quezon'
+      WHEN UPPER(TRIM(normalized_area)) IN ('LAGUNA') OR UPPER(TRIM(COALESCE(territory, ''))) = 'LAGUNA' THEN 'Laguna'
+      WHEN UPPER(TRIM(normalized_area)) IN ('MARINDUQUE') OR UPPER(TRIM(COALESCE(territory, ''))) = 'MARINDUQUE' THEN 'Marinduque'
+      WHEN UPPER(TRIM(normalized_area)) IN ('CAM NORTE', 'CAMARINES NORTE') OR UPPER(TRIM(COALESCE(territory, ''))) IN ('CAM NORTE', 'CAMARINES NORTE') THEN 'Camarines Norte'
+      WHEN UPPER(TRIM(normalized_area)) IN ('CAM SUR', 'CAMARINES SUR', 'BICOL') OR UPPER(TRIM(COALESCE(territory, ''))) IN ('CAM SUR', 'CAMARINES SUR', 'BICOL') THEN 'Camarines Sur'
+      WHEN UPPER(TRIM(normalized_area)) IN ('ALBAY', 'LEGASPI', 'LAGASPI') OR UPPER(TRIM(COALESCE(territory, ''))) IN ('ALBAY', 'LEGASPI', 'LAGASPI') THEN 'Albay'
+      WHEN UPPER(TRIM(normalized_area)) IN ('MINDORO') OR UPPER(TRIM(COALESCE(territory, ''))) = 'MINDORO' THEN 'Mindoro'
+      WHEN proposed_area_type = 'territory' THEN INITCAP(COALESCE(territory, normalized_area))
+      ELSE 'Unassigned geography'
+    END AS territory,
+    CASE
+      WHEN UPPER(TRIM(normalized_area)) = 'GOVERNMENT' THEN 'Government Bidding'
+      WHEN UPPER(TRIM(normalized_area)) = 'PAGBILAO' THEN 'LGU'
+      WHEN UPPER(TRIM(normalized_area)) IN ('HOSPITAL', 'HOPITAL', 'RAKKK') THEN 'Private Hospital'
+      WHEN UPPER(TRIM(normalized_area)) = 'LUCENA' THEN 'Private Care'
+      WHEN UPPER(TRIM(normalized_area)) IN ('PHARMA', 'BATANGAS', 'QUEZON', 'LAGUNA', 'MARINDUQUE', 'CAVITE', 'LOWER CAVITE', 'ALBAY', 'LEGASPI', 'LAGASPI', 'BICOL', 'CAM SUR', 'CAMARINES SUR', 'CAM NORTE', 'CAMARINES NORTE', 'MINDORO', 'EAST', 'EASTERN', 'EASTERN QUEZON') OR proposed_area_type = 'territory' THEN 'Retail Pharmacy'
+      WHEN UPPER(TRIM(normalized_area)) = 'ADMIN' THEN 'Internal Admin'
+      WHEN UPPER(TRIM(normalized_area)) IN ('SUPPLIES', 'SUPPLLIES', 'SUPPLIES AND EQUIPMENT') THEN 'Internal Supplies'
+      WHEN UPPER(TRIM(normalized_area)) = 'EQUIPMENT' THEN 'Internal Equipment'
+      WHEN UPPER(TRIM(normalized_area)) = 'PERSONAL' THEN 'Internal Personal'
+      WHEN UPPER(TRIM(normalized_area)) = 'LOSSES' THEN 'Internal Losses'
+      ELSE 'Unclassified channel'
+    END AS channel,
+    CASE
+      WHEN UPPER(TRIM(normalized_area)) = 'PAGBILAO' THEN 'Approved buyer mapping: Exact reference-backed LGU mapping from docs/MAPPED_CLIENT_REFERENCE.md record CLI-0340.'
+      WHEN UPPER(TRIM(normalized_area)) = 'GOVERNMENT' THEN 'Explicit government, public hospital, or LGU label'
+      WHEN UPPER(TRIM(normalized_area)) IN ('ADMIN', 'SUPPLIES', 'SUPPLLIES', 'EQUIPMENT', 'SUPPLIES AND EQUIPMENT', 'PERSONAL', 'LOSSES') THEN 'MedShield internal business label'
+      WHEN proposed_area_type = 'territory' OR UPPER(TRIM(normalized_area)) IN ('CAVITE', 'LOWER CAVITE', 'BATANGAS', 'QUEZON', 'LAGUNA', 'MARINDUQUE', 'CAMARINES NORTE', 'CAM NORTE', 'CAMARINES SUR', 'CAM SUR', 'ALBAY', 'LEGASPI', 'LAGASPI', 'BICOL', 'MINDORO', 'HOSPITAL', 'HOPITAL', 'PHARMA', 'LUCENA', 'RAKKK', 'EAST', 'EASTERN', 'EASTERN QUEZON') THEN 'Approved buyer mapping: Provincial, private-care, pharmacy, or individual-account label from docs/MAPPED_CLIENT_REFERENCE.md'
+      ELSE 'Buyer type unavailable'
+    END AS basis,
     SUM(CASE WHEN is_net_sales_eligible THEN net_sales ELSE 0 END) AS revenue,
     SUM(CASE WHEN is_quantity_observation_eligible THEN quantity ELSE 0 END) AS quantity,
     COUNT(*) AS row_count
     FROM ${FACT} WHERE ${OBSERVED_FACT}
     GROUP BY normalized_product, month_start,
-      CASE WHEN proposed_area_type = 'territory' THEN COALESCE(territory, normalized_area) ELSE 'Unassigned geography' END,
-      CASE WHEN proposed_area_type IN ('customer_type', 'business_line') THEN normalized_area ELSE 'Geographic' END
+      CASE
+        WHEN UPPER(TRIM(normalized_area)) IN ('GOVERNMENT', 'PAGBILAO') THEN 'Government'
+        WHEN UPPER(TRIM(normalized_area)) IN ('ADMIN', 'SUPPLIES', 'SUPPLLIES', 'EQUIPMENT', 'SUPPLIES AND EQUIPMENT', 'PERSONAL', 'LOSSES') THEN 'Internal'
+        WHEN proposed_area_type = 'territory' OR UPPER(TRIM(normalized_area)) IN ('CAVITE', 'LOWER CAVITE', 'BATANGAS', 'QUEZON', 'LAGUNA', 'MARINDUQUE', 'CAMARINES NORTE', 'CAM NORTE', 'CAMARINES SUR', 'CAM SUR', 'ALBAY', 'LEGASPI', 'LAGASPI', 'BICOL', 'MINDORO', 'HOSPITAL', 'HOPITAL', 'PHARMA', 'LUCENA', 'RAKKK', 'EAST', 'EASTERN', 'EASTERN QUEZON') THEN 'Private'
+        ELSE 'Unknown'
+      END,
+      CASE
+        WHEN UPPER(TRIM(normalized_area)) IN ('CAVITE', 'LOWER CAVITE') OR UPPER(TRIM(COALESCE(territory, ''))) IN ('LOWER CAVITE', 'CAVITE') THEN 'Cavite'
+        WHEN UPPER(TRIM(normalized_area)) IN ('BATANGAS') OR UPPER(TRIM(COALESCE(territory, ''))) = 'BATANGAS' THEN 'Batangas'
+        WHEN UPPER(TRIM(normalized_area)) IN ('QUEZON', 'PAGBILAO', 'HOSPITAL', 'HOPITAL', 'PHARMA', 'LUCENA', 'RAKKK', 'EAST', 'EASTERN', 'EASTERN QUEZON') OR UPPER(TRIM(COALESCE(territory, ''))) = 'QUEZON' THEN 'Quezon'
+        WHEN UPPER(TRIM(normalized_area)) IN ('LAGUNA') OR UPPER(TRIM(COALESCE(territory, ''))) = 'LAGUNA' THEN 'Laguna'
+        WHEN UPPER(TRIM(normalized_area)) IN ('MARINDUQUE') OR UPPER(TRIM(COALESCE(territory, ''))) = 'MARINDUQUE' THEN 'Marinduque'
+        WHEN UPPER(TRIM(normalized_area)) IN ('CAM NORTE', 'CAMARINES NORTE') OR UPPER(TRIM(COALESCE(territory, ''))) IN ('CAM NORTE', 'CAMARINES NORTE') THEN 'Camarines Norte'
+        WHEN UPPER(TRIM(normalized_area)) IN ('CAM SUR', 'CAMARINES SUR', 'BICOL') OR UPPER(TRIM(COALESCE(territory, ''))) IN ('CAM SUR', 'CAMARINES SUR', 'BICOL') THEN 'Camarines Sur'
+        WHEN UPPER(TRIM(normalized_area)) IN ('ALBAY', 'LEGASPI', 'LAGASPI') OR UPPER(TRIM(COALESCE(territory, ''))) IN ('ALBAY', 'LEGASPI', 'LAGASPI') THEN 'Albay'
+        WHEN UPPER(TRIM(normalized_area)) IN ('MINDORO') OR UPPER(TRIM(COALESCE(territory, ''))) = 'MINDORO' THEN 'Mindoro'
+        WHEN proposed_area_type = 'territory' THEN INITCAP(COALESCE(territory, normalized_area))
+        ELSE 'Unassigned geography'
+      END,
+      CASE
+        WHEN UPPER(TRIM(normalized_area)) = 'GOVERNMENT' THEN 'Government Bidding'
+        WHEN UPPER(TRIM(normalized_area)) = 'PAGBILAO' THEN 'LGU'
+        WHEN UPPER(TRIM(normalized_area)) IN ('HOSPITAL', 'HOPITAL', 'RAKKK') THEN 'Private Hospital'
+        WHEN UPPER(TRIM(normalized_area)) = 'LUCENA' THEN 'Private Care'
+        WHEN UPPER(TRIM(normalized_area)) IN ('PHARMA', 'BATANGAS', 'QUEZON', 'LAGUNA', 'MARINDUQUE', 'CAVITE', 'LOWER CAVITE', 'ALBAY', 'LEGASPI', 'LAGASPI', 'BICOL', 'CAM SUR', 'CAMARINES SUR', 'CAM NORTE', 'CAMARINES NORTE', 'MINDORO', 'EAST', 'EASTERN', 'EASTERN QUEZON') OR proposed_area_type = 'territory' THEN 'Retail Pharmacy'
+        WHEN UPPER(TRIM(normalized_area)) = 'ADMIN' THEN 'Internal Admin'
+        WHEN UPPER(TRIM(normalized_area)) IN ('SUPPLIES', 'SUPPLLIES', 'SUPPLIES AND EQUIPMENT') THEN 'Internal Supplies'
+        WHEN UPPER(TRIM(normalized_area)) = 'EQUIPMENT' THEN 'Internal Equipment'
+        WHEN UPPER(TRIM(normalized_area)) = 'PERSONAL' THEN 'Internal Personal'
+        WHEN UPPER(TRIM(normalized_area)) = 'LOSSES' THEN 'Internal Losses'
+        ELSE 'Unclassified channel'
+      END,
+      CASE
+        WHEN UPPER(TRIM(normalized_area)) = 'PAGBILAO' THEN 'Approved buyer mapping: Exact reference-backed LGU mapping from docs/MAPPED_CLIENT_REFERENCE.md record CLI-0340.'
+        WHEN UPPER(TRIM(normalized_area)) = 'GOVERNMENT' THEN 'Explicit government, public hospital, or LGU label'
+        WHEN UPPER(TRIM(normalized_area)) IN ('ADMIN', 'SUPPLIES', 'SUPPLLIES', 'EQUIPMENT', 'SUPPLIES AND EQUIPMENT', 'PERSONAL', 'LOSSES') THEN 'MedShield internal business label'
+        WHEN proposed_area_type = 'territory' OR UPPER(TRIM(normalized_area)) IN ('CAVITE', 'LOWER CAVITE', 'BATANGAS', 'QUEZON', 'LAGUNA', 'MARINDUQUE', 'CAMARINES NORTE', 'CAM NORTE', 'CAMARINES SUR', 'CAM SUR', 'ALBAY', 'LEGASPI', 'LAGASPI', 'BICOL', 'MINDORO', 'HOSPITAL', 'HOPITAL', 'PHARMA', 'LUCENA', 'RAKKK', 'EAST', 'EASTERN', 'EASTERN QUEZON') THEN 'Approved buyer mapping: Provincial, private-care, pharmacy, or individual-account label from docs/MAPPED_CLIENT_REFERENCE.md'
+        ELSE 'Buyer type unavailable'
+      END
     ORDER BY normalized_product, month_start, territory, channel`, 30_000)
   const includedRows = rows.reduce((sum, row) => sum + numberValue(row.row_count), 0)
+  const unmappedRows = rows.filter((row) => row.sector === 'Unknown').reduce((sum, row) => sum + numberValue(row.row_count), 0)
   return {
     rows: rows.map((row) => ({
       product: row.product,
       period: row.period,
-      sector: 'Unknown',
+      sector: row.sector,
       territory: row.territory,
       channel: row.channel,
       revenue: numberValue(row.revenue),
       quantity: numberValue(row.quantity),
       row_count: numberValue(row.row_count),
-      basis: 'Databricks Gold proposed_area_type; buyer ownership mapping unavailable',
+      basis: row.basis,
     })),
     source: databricksSource(rows, {
+      file: 'datasources/templates/buyer_sector_mapping.csv',
       input_rows: includedRows,
       included_rows: includedRows,
-      excluded: { buyer_sector_unmapped: includedRows },
+      excluded: { buyer_sector_unmapped: unmappedRows },
     }),
   }
 }
 
 async function scopedMonthlySeries(sector: string, product: string, metric: string) {
-  if (!['Unknown', 'Government', 'Private'].includes(sector)) throw new DatabricksDashboardInputError('Invalid buyer cluster')
+  if (!['Unknown', 'Government', 'Private', 'Internal', 'All'].includes(sector)) throw new DatabricksDashboardInputError('Invalid buyer cluster')
   if (!['revenue', 'quantity'].includes(metric)) throw new DatabricksDashboardInputError('Invalid forecast metric')
-  if (sector !== 'Unknown') return { rows: [] as Row[], products: [] as Row[] }
   if (metric === 'quantity' && !product) throw new DatabricksDashboardInputError('Select one product for a quantity forecast')
+
+  let sectorClause = ''
+  if (sector === 'Government') {
+    sectorClause = `AND UPPER(TRIM(normalized_area)) IN ('GOVERNMENT', 'PAGBILAO')`
+  } else if (sector === 'Private') {
+    sectorClause = `AND (proposed_area_type = 'territory' OR UPPER(TRIM(normalized_area)) IN ('CAVITE', 'LOWER CAVITE', 'BATANGAS', 'QUEZON', 'LAGUNA', 'MARINDUQUE', 'CAMARINES NORTE', 'CAM NORTE', 'CAMARINES SUR', 'CAM SUR', 'ALBAY', 'LEGASPI', 'LAGASPI', 'BICOL', 'MINDORO', 'HOSPITAL', 'HOPITAL', 'PHARMA', 'LUCENA', 'RAKKK', 'EAST', 'EASTERN', 'EASTERN QUEZON'))`
+  } else if (sector === 'Internal') {
+    sectorClause = `AND UPPER(TRIM(normalized_area)) IN ('ADMIN', 'SUPPLIES', 'SUPPLLIES', 'EQUIPMENT', 'SUPPLIES AND EQUIPMENT', 'PERSONAL', 'LOSSES')`
+  }
+
   const productClause = product ? `AND normalized_product = ${sqlString(product, 'product')}` : ''
   return {
     rows: await query(`SELECT DATE_FORMAT(month_start, 'yyyy-MM') AS period,
       SUM(${metric === 'quantity' ? 'CASE WHEN is_quantity_observation_eligible THEN quantity ELSE 0 END' : 'CASE WHEN is_net_sales_eligible THEN net_sales ELSE 0 END'}) AS actual
-      FROM ${FACT} WHERE ${OBSERVED_FACT} ${productClause}
+      FROM ${FACT} WHERE ${OBSERVED_FACT} ${sectorClause} ${productClause}
       GROUP BY month_start ORDER BY month_start`, 150),
     products: await query(`SELECT normalized_product AS product,
       SUM(CASE WHEN is_net_sales_eligible THEN COALESCE(net_sales, 0) ELSE 0 END) AS revenue
-      FROM ${FACT} WHERE ${OBSERVED_FACT}
+      FROM ${FACT} WHERE ${OBSERVED_FACT} ${sectorClause}
       GROUP BY normalized_product ORDER BY revenue DESC LIMIT 5000`, 5000),
   }
 }
@@ -671,7 +759,7 @@ export async function getDatabricksExternalRegression(input: Record<string, stri
   const disease = input.disease?.trim() || 'Dengue'
   const lag = integerValue(input.lag ?? 1, 'lag', 1, 12)
   const rainfallLag = integerValue(input.rainfall_lag ?? 1, 'rainfall_lag', 1, 12)
-  if (!['Unknown', 'Government', 'Private'].includes(sector)) throw new DatabricksDashboardInputError('Invalid buyer cluster')
+  if (!['Unknown', 'Government', 'Private', 'Internal', 'All'].includes(sector)) throw new DatabricksDashboardInputError('Invalid buyer cluster')
   if (!['revenue', 'quantity'].includes(metric)) throw new DatabricksDashboardInputError('Invalid metric')
   if (!['disease', 'rainfall', 'combined'].includes(mode)) throw new DatabricksDashboardInputError('Invalid external model')
   const [coverage, products, signals, territories] = await Promise.all([
@@ -719,18 +807,24 @@ export async function getDatabricksExternalRegression(input: Record<string, stri
 export async function getDatabricksPlanningShortlist(input: { sector?: string; territory?: string }) {
   const sector = input.sector?.trim() || 'Unknown'
   const territory = input.territory?.trim() || 'all'
-  if (!['Unknown', 'Government', 'Private'].includes(sector)) throw new DatabricksDashboardInputError('Invalid buyer cluster')
+  if (!['Unknown', 'Government', 'Private', 'Internal', 'All'].includes(sector)) throw new DatabricksDashboardInputError('Invalid buyer cluster')
   const territories = await query(`SELECT DISTINCT INITCAP(COALESCE(territory, normalized_area)) AS territory
     FROM ${FACT} WHERE ${OBSERVED_FACT} AND proposed_area_type = 'territory'
     ORDER BY territory`, 100)
-  if (sector !== 'Unknown') {
-    const emptySource = databricksSource([], { excluded: { buyer_sector_unmapped: 'all_observed_rows' }, input_rows: 0, included_rows: 0 })
-    return { scope: { sector, territory }, source: emptySource, products: [], period_start: null, period_end: null, months_stale: null, eligible_products: 0, excluded_nonpositive_products: 0, shortlist_share_pct: 0, ranking_revenue: 0, territories: territories.map((row) => row.territory).filter(Boolean) }
+
+  let sectorClause = ''
+  if (sector === 'Government') {
+    sectorClause = `AND UPPER(TRIM(normalized_area)) IN ('GOVERNMENT', 'PAGBILAO')`
+  } else if (sector === 'Private') {
+    sectorClause = `AND (proposed_area_type = 'territory' OR UPPER(TRIM(normalized_area)) IN ('CAVITE', 'LOWER CAVITE', 'BATANGAS', 'QUEZON', 'LAGUNA', 'MARINDUQUE', 'CAMARINES NORTE', 'CAM NORTE', 'CAMARINES SUR', 'CAM SUR', 'ALBAY', 'LEGASPI', 'LAGASPI', 'BICOL', 'MINDORO', 'HOSPITAL', 'HOPITAL', 'PHARMA', 'LUCENA', 'RAKKK', 'EAST', 'EASTERN', 'EASTERN QUEZON'))`
+  } else if (sector === 'Internal') {
+    sectorClause = `AND UPPER(TRIM(normalized_area)) IN ('ADMIN', 'SUPPLIES', 'SUPPLLIES', 'EQUIPMENT', 'SUPPLIES AND EQUIPMENT', 'PERSONAL', 'LOSSES')`
   }
+
   const territoryClause = territory === 'all'
     ? ''
     : `AND proposed_area_type = 'territory' AND UPPER(COALESCE(territory, normalized_area)) = UPPER(${sqlString(territory, 'territory')})`
-  const bounds = await query(`SELECT DATE_FORMAT(MAX(month_start), 'yyyy-MM') AS period_end FROM ${FACT} WHERE ${OBSERVED_FACT} ${territoryClause}`, 5)
+  const bounds = await query(`SELECT DATE_FORMAT(MAX(month_start), 'yyyy-MM') AS period_end FROM ${FACT} WHERE ${OBSERVED_FACT} ${sectorClause} ${territoryClause}`, 5)
   const end = bounds[0]?.period_end
   if (!end) {
     return { scope: { sector, territory }, source: databricksSource([]), products: [], period_start: null, period_end: null, months_stale: null, eligible_products: 0, excluded_nonpositive_products: 0, shortlist_share_pct: 0, ranking_revenue: 0, territories: territories.map((row) => row.territory).filter(Boolean) }
@@ -740,14 +834,14 @@ export async function getDatabricksPlanningShortlist(input: { sector?: string; t
     SUM(CASE WHEN is_net_sales_eligible THEN net_sales ELSE 0 END) AS revenue,
     SUM(CASE WHEN is_quantity_observation_eligible THEN quantity ELSE 0 END) AS quantity,
     COUNT(DISTINCT month_start) AS observed_months
-    FROM ${FACT} WHERE ${OBSERVED_FACT} ${territoryClause}
+    FROM ${FACT} WHERE ${OBSERVED_FACT} ${sectorClause} ${territoryClause}
       AND DATE_FORMAT(month_start, 'yyyy-MM') BETWEEN ${sqlString(start, 'period_start')} AND ${sqlString(end, 'period_end')}
     GROUP BY normalized_product ORDER BY revenue DESC`, 5000)
   const positive = productRows.filter((row) => numberValue(row.revenue) > 0)
   const rankingRevenue = positive.reduce((sum, row) => sum + numberValue(row.revenue), 0)
   const count = Math.min(5, Math.ceil(positive.length * 0.2))
   const selected = positive.slice(0, count)
-  const source = databricksSource(productRows, { input_rows: productRows.length, included_rows: productRows.length, excluded: { buyer_sector_unmapped: 'all_observed_rows' } })
+  const source = databricksSource(productRows, { input_rows: productRows.length, included_rows: productRows.length, excluded: {} })
   return {
     scope: { sector, territory },
     source,
