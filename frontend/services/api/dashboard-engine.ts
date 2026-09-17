@@ -50,6 +50,7 @@ const DASHBOARD_GLOBAL_HANDLERS = [
   'setSalesSectorsData',
   'renderSalesSectors',
   'setAreaPriorityWeights',
+  'selectRollupRegion',
   'filterClientReferenceDirectory',
   'changeClientRefPage',
   'exportClientReferenceCSV',

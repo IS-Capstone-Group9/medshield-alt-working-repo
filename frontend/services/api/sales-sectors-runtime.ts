@@ -8,7 +8,7 @@ export const SALES_SECTORS_MARKUP = String.raw`
 [data-sector-analysis] .area-section-eyebrow {font-size:10px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:#D97706;margin-bottom:5px}
 [data-sector-analysis] .area-priority-header {display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
 [data-sector-analysis] .area-priority-intro {max-width:760px;margin-top:7px;font-size:12px}
-[data-sector-analysis] .area-filter-grid {display:grid;grid-template-columns:repeat(3,minmax(180px,1fr));gap:12px;margin:18px 0;padding:14px;border:1px solid var(--border);border-radius:9px;background:var(--bg-elevated,#f8fafc)}
+[data-sector-analysis] .area-filter-grid {display:grid;grid-template-columns:repeat(4,minmax(140px,1fr));gap:12px;margin:18px 0;padding:14px;border:1px solid var(--border);border-radius:9px;background:var(--bg-elevated,#f8fafc)}
 [data-sector-analysis] label {font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted)}
 [data-sector-analysis] select {display:block;width:100%;margin-top:5px;padding:8px 10px;border:1px solid var(--border);border-radius:7px;background:var(--bg-card,#fff);color:var(--text-primary);font:600 12px var(--font-body)}
 [data-sector-analysis] select:focus-visible {outline:2px solid rgba(245,158,11,.35);outline-offset:1px;border-color:#D97706}
@@ -23,17 +23,38 @@ export const SALES_SECTORS_MARKUP = String.raw`
 [data-sector-analysis] .area-kpi-label {font-size:9px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--text-muted)}
 [data-sector-analysis] .area-kpi-value {margin-top:7px;font-size:20px;font-weight:800;color:var(--text-primary);letter-spacing:-.02em}
 [data-sector-analysis] .area-kpi-note {margin-top:4px;font-size:10px;line-height:1.4;color:var(--text-muted)}
+
+/* Regional Aggregations & Granularity Section */
+[data-sector-analysis] .area-region-rollup-card {margin-bottom:18px;padding:16px 18px;border:1px solid var(--border);border-radius:9px;background:#FFFFFF;box-shadow:0 1px 3px rgba(26,43,60,0.04)}
+[data-sector-analysis] .area-region-rollup-header {display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+[data-sector-analysis] .area-region-rollup-title {font-size:13px;font-weight:700;color:var(--text-primary);display:flex;align-items:center;gap:6px}
+[data-sector-analysis] .area-region-rollup-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}
+[data-sector-analysis] .area-region-box {padding:12px 14px;border:1px solid var(--border);border-radius:8px;background:var(--bg-elevated,#F8FAFC);transition:all .15s ease;cursor:pointer}
+[data-sector-analysis] .area-region-box:hover {border-color:#1E3A5F;background:#FFFFFF;box-shadow:0 2px 8px rgba(30,58,95,0.08);transform:translateY(-1px)}
+[data-sector-analysis] .area-region-box.active {border-color:#D97706;background:#FFFBEB;box-shadow:0 0 0 1px #D97706}
+[data-sector-analysis] .area-region-name {font-size:11.5px;font-weight:800;color:var(--text-primary);display:flex;align-items:center;justify-content:space-between}
+[data-sector-analysis] .area-region-rev {font-size:16px;font-weight:800;color:#1E3A5F;margin-top:5px;letter-spacing:-.01em}
+[data-sector-analysis] .area-region-sub {font-size:10px;color:var(--text-muted);margin-top:3px;display:flex;justify-content:space-between}
+
 [data-sector-analysis] .area-chart-grid {display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:16px;margin:0 0 18px}
 [data-sector-analysis] .area-chart-panel {min-width:0;padding:15px;border:1px solid var(--border);border-radius:9px;background:#fff}
 [data-sector-analysis] .area-chart-panel h3 {margin:0;font-size:13px;color:var(--text-primary)}
 [data-sector-analysis] .area-chart-panel p {margin:4px 0 10px;font-size:10px}
 [data-sector-analysis] .area-chart-wrap {height:310px}
 [data-sector-analysis] .area-table-wrap {overflow:auto;border:1px solid var(--border);border-radius:9px}
-[data-sector-analysis] #sectorProfileTable {margin:0;min-width:1050px}
+[data-sector-analysis] #sectorProfileTable {margin:0;min-width:1100px}
 [data-sector-analysis] #sectorProfileTable th {position:sticky;top:0;z-index:1;background:var(--bg-elevated,#f8fafc);white-space:nowrap}
 [data-sector-analysis] #sectorProfileTable td {vertical-align:middle}
+[data-sector-analysis] #sectorProfileTable tfoot td {font-weight:700;background:var(--bg-elevated,#F8FAFC);border-top:2px solid var(--border)}
 [data-sector-analysis] .area-rank {font-weight:800;color:#1E3A5F}
 [data-sector-analysis] .area-score {font-weight:800;color:#D97706}
+[data-sector-analysis] .area-region-pill {display:inline-flex;padding:2px 7px;border-radius:999px;font-size:9px;font-weight:700;white-space:nowrap}
+[data-sector-analysis] .area-region-pill.calabarzon {background:#EEF4FF;color:#1E3A5F;border:1px solid rgba(30,58,95,0.2)}
+[data-sector-analysis] .area-region-pill.mimaropa {background:#ECFDF5;color:#0D7045;border:1px solid rgba(13,112,69,0.2)}
+[data-sector-analysis] .area-region-pill.bicol {background:#FFFBEB;color:#D97706;border:1px solid rgba(217,119,6,0.2)}
+[data-sector-analysis] .area-region-pill.national {background:#F3E8FF;color:#6D28D9;border:1px solid rgba(109,40,217,0.2)}
+[data-sector-analysis] .area-region-pill.unknown {background:#F1F5F9;color:#64748B;border:1px solid #CBD5E1}
+
 [data-sector-analysis] .area-confidence {display:inline-flex;padding:2px 7px;border-radius:999px;font-size:9px;font-weight:800;white-space:nowrap}
 [data-sector-analysis] .area-confidence.observed {background:#ECFDF5;color:#0D7045}
 [data-sector-analysis] .area-confidence.mixed {background:#FFFBEB;color:#A15C05}
@@ -42,6 +63,7 @@ export const SALES_SECTORS_MARKUP = String.raw`
 [data-sector-analysis] .area-method {margin-top:14px;padding:11px 13px;border:1px solid var(--border);border-radius:8px;background:#F8FAFC;font-size:11px}
 [data-sector-analysis] .area-method summary {cursor:pointer;font-weight:800;color:var(--text-primary)}
 [data-sector-analysis] .area-method p {margin:8px 0 0;font-size:11px}
+
 [data-sector-analysis] .area-client-panel {margin-top:20px;padding:18px 20px;border:1px solid var(--border);border-radius:10px;background:#FFFFFF;box-shadow:0 1px 3px rgba(26,43,60,0.05)}
 [data-sector-analysis] .area-client-header {display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px}
 [data-sector-analysis] .area-client-controls {display:grid;grid-template-columns:minmax(220px,2fr) repeat(2,minmax(160px,1fr));gap:10px;margin-bottom:14px;padding:12px 14px;background:var(--bg-elevated,#F8FAFC);border:1px solid var(--border);border-radius:8px}
@@ -49,7 +71,8 @@ export const SALES_SECTORS_MARKUP = String.raw`
 [data-sector-analysis] .area-client-search:focus-visible {outline:2px solid rgba(30,58,95,.25);border-color:#1E3A5F}
 [data-sector-analysis] .client-code-tag {font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:11px;font-weight:700;color:#1E3A5F;background:rgba(30,58,95,0.06);padding:2px 6px;border-radius:4px;border:1px solid rgba(30,58,95,0.12);white-space:nowrap}
 [data-sector-analysis] .client-anchor-tag {font-weight:700;color:#0D7045}
-@media(max-width:1050px){[data-sector-analysis] .area-evidence-strip{grid-template-columns:repeat(2,minmax(0,1fr))}[data-sector-analysis] .area-kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}[data-sector-analysis] .area-chart-grid{grid-template-columns:1fr}[data-sector-analysis] .area-client-controls{grid-template-columns:1fr}}
+
+@media(max-width:1150px){[data-sector-analysis] .area-filter-grid{grid-template-columns:repeat(2,minmax(0,1fr))}[data-sector-analysis] .area-evidence-strip{grid-template-columns:repeat(2,minmax(0,1fr))}[data-sector-analysis] .area-kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}[data-sector-analysis] .area-chart-grid{grid-template-columns:1fr}[data-sector-analysis] .area-client-controls{grid-template-columns:1fr}}
 @media(max-width:680px){[data-sector-analysis] .area-filter-grid,[data-sector-analysis] .area-evidence-strip,[data-sector-analysis] .area-kpi-grid{grid-template-columns:1fr}[data-sector-analysis] .area-chart-wrap{height:280px}}
 </style>
 <section class="chart-card" data-sector-analysis aria-labelledby="areaPriorityTitle">
@@ -57,11 +80,12 @@ export const SALES_SECTORS_MARKUP = String.raw`
   <div>
    <div class="area-section-eyebrow">01 · Geographic commercial prioritization</div>
    <div class="chart-title" id="areaPriorityTitle">Where should commercial attention focus?</div>
-   <p class="area-priority-intro">Ranks mapped geographic areas using selected-period net sales value and active-period coverage. Buyer ownership is a filter and composition measure—it is never treated as a territory.</p>
+   <p class="area-priority-intro">Ranks mapped provincial areas using selected-period net sales value and active-period coverage with regional aggregation rollups. Buyer ownership is a filter and composition measure—it is never treated as a territory.</p>
   </div>
   <span class="status-pill status-draft">Candidate · review required</span>
  </div>
  <div class="area-filter-grid" role="group" aria-label="Area prioritization filters">
+  <label>Region<select id="sectorRegion" onchange="renderSalesSectors()"><option value="All">All regions</option><option value="CALABARZON">CALABARZON (Region IV-A)</option><option value="MIMAROPA">MIMAROPA (Region IV-B)</option><option value="Bicol">Bicol (Region V)</option><option value="Other National">Other National</option><option value="Unknown">Unknown / Unassigned</option></select></label>
   <label>Buyer cluster<select id="sectorCluster" onchange="renderSalesSectors()"><option value="All">All clusters</option><option>Government</option><option>Private</option><option>Internal</option><option>Unknown</option></select></label>
   <label>Product scope<select id="sectorProduct" onchange="renderSalesSectors()"></select></label>
   <label>Evidence<select id="sectorEvidence" onchange="renderSalesSectors()"><option value="all">Actual + gap estimates</option><option value="actual">Actual only</option></select></label>
@@ -79,6 +103,21 @@ export const SALES_SECTORS_MARKUP = String.raw`
   <div class="area-kpi"><div class="area-kpi-label">Leading area</div><div class="area-kpi-value" id="areaLeadingArea">—</div><div class="area-kpi-note" id="areaLeadingShare">No ranked area</div></div>
   <div class="area-kpi"><div class="area-kpi-label">Top-three concentration</div><div class="area-kpi-value" id="areaTopThreeShare">—</div><div class="area-kpi-note">Share of mapped positive revenue</div></div>
  </div>
+
+ <!-- Regional Granularity & Rollup Summary -->
+ <section class="area-region-rollup-card" id="areaRegionalSummarySection" aria-labelledby="areaRegionalSummaryTitle">
+  <div class="area-region-rollup-header">
+   <div class="area-region-rollup-title" id="areaRegionalSummaryTitle">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    Regional Granularity &amp; Rollup Aggregations
+   </div>
+   <span style="font-size:11px;color:var(--text-secondary)" id="areaRegionRollupNote">Aggregating provincial performance to regional and total totals</span>
+  </div>
+  <div class="area-region-rollup-grid" id="areaRegionRollupGrid">
+   <!-- Populated dynamically via JS -->
+  </div>
+ </section>
+
  <div class="area-chart-grid">
   <section class="area-chart-panel" aria-labelledby="areaRankChartTitle"><h3 id="areaRankChartTitle">Area priority ranking</h3><p>Bars separate actual transactions from recency-weighted gap estimates.</p><div class="area-chart-wrap"><canvas id="sectorRevenueChart" role="img" aria-label="Ranked area revenue split between actual and estimated evidence"></canvas></div></section>
   <section class="area-chart-panel" aria-labelledby="areaParetoTitle"><h3 id="areaParetoTitle">Area revenue concentration</h3><p>Revenue bars with cumulative share and an 80% reference line.</p><div class="area-chart-wrap"><canvas id="sectorParetoChart" role="img" aria-label="Area revenue Pareto chart"></canvas></div></section>
@@ -7217,6 +7256,38 @@ let clientRefFilteredList = Array.isArray(MAPPED_CLIENT_CATALOG) ? [...MAPPED_CL
 let clientRefCurrentPage = 1;
 const CLIENT_REF_PAGE_SIZE = 25;
 
+const CANONICAL_TERRITORY_REGION = {
+ 'cavite': 'CALABARZON',
+ 'batangas': 'CALABARZON',
+ 'laguna': 'CALABARZON',
+ 'quezon': 'CALABARZON',
+ 'marinduque': 'MIMAROPA',
+ 'oriental mindoro': 'MIMAROPA',
+ 'occidental mindoro': 'MIMAROPA',
+ 'mindoro': 'MIMAROPA',
+ 'camarines norte': 'Bicol',
+ 'camarines sur': 'Bicol',
+ 'albay': 'Bicol',
+ 'national hub (doh central)': 'Other National',
+ 'medshield hq': 'Other National'
+};
+
+function resolveRowRegion(row) {
+ if (row && row.region && row.region !== 'Unknown') return row.region;
+ const t = String((row && row.territory) || '').trim().toLowerCase();
+ if (CANONICAL_TERRITORY_REGION[t]) return CANONICAL_TERRITORY_REGION[t];
+ if (row && (row.sector === 'Government' || row.sector === 'Internal')) return 'Other National';
+ return 'Unknown';
+}
+
+function selectRollupRegion(regionName) {
+ const el = document.getElementById('sectorRegion');
+ if (el) {
+  el.value = (el.value === regionName ? 'All' : regionName);
+  renderSalesSectors();
+ }
+}
+
 function filterClientReferenceDirectory() {
  const el = id => document.getElementById(id);
  if (!el('clientReferenceTableBody')) return;
@@ -7330,52 +7401,97 @@ function setSalesSectorsData(data, error) {
  renderSalesSectors(error);
  if(descriptiveUsesDailyGrain() && typeof buildCharts==='function')buildCharts();
 }
+
 function renderSalesSectors(error) {
  const el = id => document.getElementById(id);
  if (!el('sectorStatus')) return;
- const esc = value => String(value).replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
+ const esc = value => String(value||'').replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
  const fmtCurrency = value => Number(value||0).toLocaleString('en-PH',{style:'currency',currency:'PHP',maximumFractionDigits:0});
  const fmtCompact = value => new Intl.NumberFormat('en-PH',{style:'currency',currency:'PHP',notation:'compact',maximumFractionDigits:1}).format(Number(value||0));
  const fmtPct = value => Number(value||0).toLocaleString('en-PH',{minimumFractionDigits:1,maximumFractionDigits:1})+'%';
+
  ['sectorRevenueChart','sectorParetoChart'].forEach(id => { const canvas=el(id),chart=canvas&&Chart.getChart(canvas);if(chart)chart.destroy(); });
  ['sectorScope','areaMappingCoverage','areaActualRevenue','areaEstimatedRevenue','areaRankedCount','areaMappedRevenue','areaLeadingArea','areaLeadingShare','areaTopThreeShare'].forEach(id=>{if(el(id))el(id).textContent='Unavailable';});
  if(el('sectorProfileTable'))el('sectorProfileTable').innerHTML='';
- ['sectorCluster','sectorProduct','sectorEvidence'].forEach(id=>{if(el(id))el(id).disabled=!salesSectorsData;});
+ if(el('areaRegionRollupGrid'))el('areaRegionRollupGrid').innerHTML='';
+ ['sectorRegion','sectorCluster','sectorProduct','sectorEvidence'].forEach(id=>{if(el(id))el(id).disabled=!salesSectorsData;});
  if(!salesSectorsData) { el('sectorStatus').textContent=error||'Area prioritization is unavailable; no demonstration values were substituted.';if(el('sectorSource'))el('sectorSource').textContent='Source evidence unavailable.';renderClientReferenceTable();return; }
 
  const productSelect=el('sectorProduct'),priorProduct=productSelect.value;
  const products=[...new Set(salesSectorsData.rows.map(row=>row.product).filter(Boolean))].sort();
  productSelect.innerHTML='<option value="">All products</option>'+products.map(product=>'<option value="'+esc(product)+'">'+esc(product)+'</option>').join('');
  productSelect.value=products.includes(priorProduct)?priorProduct:'';
+
+ const region=el('sectorRegion')?el('sectorRegion').value||'All':'All';
  const product=productSelect.value,cluster=el('sectorCluster').value||'All',evidence=el('sectorEvidence').value||'all';
  const detailed=getDescriptiveDetailedRows();
+
  const productRows=detailed.filter(row=>!product||row.product===product);
  const clusterRows=productRows.filter(row=>cluster==='All'||row.sector===cluster);
- const scopeRows=clusterRows.filter(row=>evidence==='all'||row.evidence!=='estimate');
+ const regionRows=clusterRows.filter(row=>{
+  if(region==='All')return true;
+  return resolveRowRegion(row)===region;
+ });
+ const scopeRows=regionRows.filter(row=>evidence==='all'||row.evidence!=='estimate');
+
  const isMapped=row=>{const area=String(row.territory||'').trim().toLowerCase();return area&&area!=='unassigned geography'&&area!=='unknown'&&area!=='unmapped';};
  const periodKey=row=>descriptiveUsesYearlyGrain()?String(row.period||row.date||'').slice(0,4):(descriptiveUsesDailyGrain()?String(row.date||row.period||''):String(row.period||''));
  const weightedCount=rows=>rows.reduce((total,row)=>total+(Number(row.row_count)||0),0);
  const revenueTotal=rows=>rows.reduce((total,row)=>total+(Number(row.revenue)||0),0);
  const mappedRows=scopeRows.filter(isMapped),unmappedRows=scopeRows.filter(row=>!isMapped(row));
+
+ /* Provincial Grouping & Ranking */
  const groups=new Map();
  mappedRows.forEach(row=>{
-  const area=String(row.territory).trim(),current=groups.get(area)||{area,revenue:0,actual:0,estimated:0,rowCount:0,periods:new Set(),clusters:{Government:0,Private:0,Internal:0,Unknown:0}};
-  const revenue=Number(row.revenue)||0,estimated=row.evidence==='estimate';
-  current.revenue+=revenue;current[estimated?'estimated':'actual']+=revenue;current.rowCount+=Number(row.row_count)||0;
+  const area=String(row.territory).trim();
+  const current=groups.get(area)||{area,region:resolveRowRegion(row),revenue:0,actual:0,estimated:0,quantity:0,rowCount:0,periods:new Set(),clusters:{Government:0,Private:0,Internal:0,Unknown:0}};
+  const revenue=Number(row.revenue)||0,quantity=Number(row.quantity)||0,estimated=row.evidence==='estimate';
+  current.revenue+=revenue;current[estimated?'estimated':'actual']+=revenue;current.quantity+=quantity;current.rowCount+=Number(row.row_count)||0;
   if(periodKey(row))current.periods.add(periodKey(row));
   const ownership=['Government','Private','Internal','Unknown'].includes(row.sector)?row.sector:'Unknown';
   current.clusters[ownership]+=revenue;groups.set(area,current);
  });
+
  const positive=[...groups.values()].filter(row=>row.revenue>0).sort((left,right)=>right.revenue-left.revenue||left.area.localeCompare(right.area));
  const maximumRevenue=positive.reduce((maximum,row)=>Math.max(maximum,row.revenue),0);
  const availablePeriods=Math.max(1,descriptiveAxisPeriods().length||new Set(scopeRows.map(periodKey).filter(Boolean)).size);
  positive.forEach(row=>{row.salesScore=maximumRevenue?Math.max(0,row.revenue)/maximumRevenue*100:0;row.coverageScore=Math.min(100,row.periods.size/availablePeriods*100);row.score=row.salesScore*areaPrioritySalesWeight/100+row.coverageScore*areaPriorityCoverageWeight/100;});
  const ranked=[...positive].sort((left,right)=>right.score-left.score||right.revenue-left.revenue||left.area.localeCompare(right.area));
+
  const mappedRevenue=positive.reduce((total,row)=>total+row.revenue,0),actualRevenue=scopeRows.filter(row=>row.evidence!=='estimate').reduce((total,row)=>total+(Number(row.revenue)||0),0),estimatedRevenue=scopeRows.filter(row=>row.evidence==='estimate').reduce((total,row)=>total+(Number(row.revenue)||0),0);
+ const totalQuantity=positive.reduce((total,row)=>total+row.quantity,0);
  const allWeight=weightedCount(scopeRows),mappedWeight=weightedCount(mappedRows),mappingCoverage=allWeight?mappedWeight/allWeight*100:0,unmappedRevenue=revenueTotal(unmappedRows);
  const topThree=ranked.slice(0,3).reduce((total,row)=>total+row.revenue,0),leading=ranked[0];
 
- el('sectorScope').textContent=descriptivePeriodLabel()+' · '+(cluster==='All'?'All buyer clusters':cluster)+' · '+(product||'All products')+' · '+(evidence==='actual'?'Actual only':'Actual + estimates');
+ /* Regional Granularity & Rollup Aggregation Computation */
+ const regionalRollups = ['CALABARZON','MIMAROPA','Bicol','Other National'].map(regName => {
+  const regProvinces = positive.filter(p => p.region === regName);
+  const regRev = regProvinces.reduce((sum, p) => sum + p.revenue, 0);
+  const regActual = regProvinces.reduce((sum, p) => sum + p.actual, 0);
+  const regEstimated = regProvinces.reduce((sum, p) => sum + p.estimated, 0);
+  const regUnits = regProvinces.reduce((sum, p) => sum + p.quantity, 0);
+  const regLead = regProvinces.length > 0 ? regProvinces[0] : null;
+  const regShare = mappedRevenue > 0 ? (regRev / mappedRevenue * 100) : 0;
+  return { name: regName, revenue: regRev, actual: regActual, estimated: regEstimated, units: regUnits, count: regProvinces.length, share: regShare, leading: regLead };
+ });
+
+ if (el('areaRegionRollupGrid')) {
+  el('areaRegionRollupGrid').innerHTML = regionalRollups.map(regItem => {
+   const isSel = region === regItem.name;
+   return '<div class="area-region-box ' + (isSel ? 'active' : '') + '" onclick="selectRollupRegion(\'' + regItem.name + '\')" title="Click to filter by ' + regItem.name + '">' +
+    '<div class="area-region-name"><span>' + esc(regItem.name) + '</span><span class="status-pill status-ready" style="font-size:9px">' + regItem.count + ' Provinces</span></div>' +
+    '<div class="area-region-rev">' + fmtCompact(regItem.revenue) + '</div>' +
+    '<div class="area-region-sub"><span>' + fmtPct(regItem.share) + ' of total</span><span>' + (regItem.leading ? ('Lead: ' + esc(regItem.leading.area)) : 'No area') + '</span></div>' +
+   '</div>';
+  }).join('') +
+  '<div class="area-region-box ' + (region === 'All' ? 'active' : '') + '" onclick="selectRollupRegion(\'All\')" style="background:var(--bg-card);border:2px solid var(--accent);">' +
+   '<div class="area-region-name"><strong style="color:var(--accent)">Total Mapped Rollup</strong><span class="status-pill status-draft" style="font-size:9px">' + ranked.length + ' Areas</span></div>' +
+   '<div class="area-region-rev" style="color:var(--accent)">' + fmtCompact(mappedRevenue) + '</div>' +
+   '<div class="area-region-sub"><span>100.0% coverage</span><span>' + (leading ? ('#1 ' + esc(leading.area)) : '—') + '</span></div>' +
+  '</div>';
+ }
+
+ el('sectorScope').textContent=descriptivePeriodLabel()+' · '+(region==='All'?'All regions':region)+' · '+(cluster==='All'?'All buyer clusters':cluster)+' · '+(product||'All products')+' · '+(evidence==='actual'?'Actual only':'Actual + estimates');
  el('areaMappingCoverage').textContent=fmtPct(mappingCoverage)+' mapped';
  el('areaActualRevenue').textContent=fmtCompact(actualRevenue);
  el('areaEstimatedRevenue').textContent=fmtCompact(estimatedRevenue);
@@ -7402,9 +7518,39 @@ function renderSalesSectors(error) {
   const confidence=estimatedShare<=.01?['Observed','observed']:estimatedShare>=99.99?['Estimated','estimated']:['Mixed','mixed'];
   const ownershipTotal=['Government','Private','Internal','Unknown'].reduce((total,key)=>total+Math.max(0,row.clusters[key]),0);
   const ownership=['Government','Private','Internal','Unknown'].filter(key=>row.clusters[key]>0).map(key=>key+' '+fmtPct(ownershipTotal?row.clusters[key]/ownershipTotal*100:0)).join(' · ')||'Unavailable';
-  return '<tr><td class="area-rank">#'+(index+1)+'</td><td><strong>'+esc(row.area)+'</strong></td><td class="area-score">'+row.score.toFixed(1)+'</td><td>'+fmtCurrency(row.actual)+'</td><td>'+fmtCurrency(row.estimated)+'</td><td>'+fmtPct(mappedRevenue?row.revenue/mappedRevenue*100:0)+'</td><td>'+row.periods.size+' / '+availablePeriods+'</td><td>'+esc(ownership)+'</td><td><span class="area-confidence '+confidence[1]+'">'+confidence[0]+'</span></td></tr>';
+  const regClass = row.region ? row.region.toLowerCase().replace(/[^a-z0-9]/g, '') : 'unknown';
+
+  return '<tr>' +
+   '<td class="area-rank">#'+(index+1)+'</td>' +
+   '<td><strong>'+esc(row.area)+'</strong></td>' +
+   '<td><span class="area-region-pill '+regClass+'">'+esc(row.region)+'</span></td>' +
+   '<td class="area-score">'+row.score.toFixed(1)+'</td>' +
+   '<td>'+fmtCurrency(row.actual)+'</td>' +
+   '<td>'+fmtCurrency(row.estimated)+'</td>' +
+   '<td>'+fmtPct(mappedRevenue?row.revenue/mappedRevenue*100:0)+'</td>' +
+   '<td>'+row.periods.size+' / '+availablePeriods+'</td>' +
+   '<td>'+esc(ownership)+'</td>' +
+   '<td><span class="area-confidence '+confidence[1]+'">'+confidence[0]+'</span></td>' +
+  '</tr>';
  }).join('');
- el('sectorProfileTable').innerHTML='<caption class="sr-only">Area commercial priority ranking for '+esc(descriptivePeriodLabel())+'</caption><thead><tr><th scope="col">Rank</th><th scope="col">Geographic area</th><th scope="col">Score</th><th scope="col">Actual sales</th><th scope="col">Estimated</th><th scope="col">Revenue share</th><th scope="col">Active periods</th><th scope="col">Buyer composition</th><th scope="col">Evidence</th></tr></thead><tbody>'+(rowsHtml||'<tr><td class="area-empty" colspan="9">No ranked geography is available for this selection.</td></tr>')+'</tbody>';
+
+ const totalActual = positive.reduce((sum, r) => sum + r.actual, 0);
+ const totalEstimated = positive.reduce((sum, r) => sum + r.estimated, 0);
+ const totalFooterHtml = ranked.length > 0 ? (
+  '<tfoot><tr>' +
+   '<td colspan="2" style="text-align:left"><strong>Total Rollup (' + (region === 'All' ? 'All Regions' : esc(region)) + ')</strong></td>' +
+   '<td><strong>' + (region === 'All' ? '4 Regions' : esc(region)) + '</strong></td>' +
+   '<td class="area-score">100.0</td>' +
+   '<td><strong>' + fmtCurrency(totalActual) + '</strong></td>' +
+   '<td><strong>' + fmtCurrency(totalEstimated) + '</strong></td>' +
+   '<td><strong>100.0%</strong></td>' +
+   '<td><strong>' + availablePeriods + ' / ' + availablePeriods + '</strong></td>' +
+   '<td><strong>' + fmtCompact(mappedRevenue) + ' Net Sales</strong></td>' +
+   '<td><span class="area-confidence observed">Consolidated</span></td>' +
+  '</tr></tfoot>'
+ ) : '';
+
+ el('sectorProfileTable').innerHTML='<caption class="sr-only">Area commercial priority ranking for '+esc(descriptivePeriodLabel())+'</caption><thead><tr><th scope="col">Rank</th><th scope="col">Geographic area</th><th scope="col">Region</th><th scope="col">Score</th><th scope="col">Actual sales</th><th scope="col">Estimated</th><th scope="col">Revenue share</th><th scope="col">Active periods</th><th scope="col">Buyer composition</th><th scope="col">Evidence</th></tr></thead><tbody>'+(rowsHtml||'<tr><td class="area-empty" colspan="10">No ranked geography is available for this selection.</td></tr>')+'</tbody>'+totalFooterHtml;
  el('sectorSource').textContent='Source: '+salesSectorsData.source.file+' · SHA-256: '+(salesSectorsData.source.checksum||'unavailable')+' · service exclusions: '+JSON.stringify(salesSectorsData.source.excluded||{})+'. Classification evidence in the selected scope: '+([...new Set(scopeRows.map(row=>row.basis))].filter(Boolean).join('; ')||'Unavailable')+'.';
  renderClientReferenceTable();
  if(typeof renderProductPrioritizationTimeline==='function')renderProductPrioritizationTimeline();

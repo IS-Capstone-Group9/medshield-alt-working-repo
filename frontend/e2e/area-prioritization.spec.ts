@@ -124,4 +124,93 @@ test.describe('Area Prioritization Dynamic Interactions & Visualizations', () =>
     await page.locator('.area-method').evaluate((element: HTMLDetailsElement) => { element.open = true })
     await expect(page.locator('#sectorSource')).toContainText('datasources/templates/buyer_sector_mapping.csv')
   })
+
+  test('regional filtering, provincial granularity, and multi-level aggregations', async ({ page }) => {
+    await page.route('http://medshield.test/**', route => route.fulfill({ contentType: 'text/html', body: '<html><body></body></html>' }))
+    await page.goto('http://medshield.test/')
+    await page.setContent(`<style>${MEDSHIELD_STYLE}</style>${MEDSHIELD_MARKUP}`)
+    await page.evaluate(() => { window.fetch = async () => new Response('{}', { status: 503 }) })
+    await page.addScriptTag({ path: path.resolve('node_modules/chart.js/dist/chart.umd.js') })
+    await page.evaluate(script => new Function(script)(), getExecutableDashboardScript())
+
+    await page.evaluate(() => {
+      const app = window as any
+      app.showPage('territory')
+      const row = (sector: string, channel: string, territory: string, revenue: number, quantity: number, period = '2025-02', product = 'PARACETAMOL 500MG', evidence = 'actual', region?: string) => ({
+        date: period + '-15',
+        sector,
+        channel,
+        territory,
+        region: region || (territory === 'Quezon' || territory === 'Batangas' || territory === 'Cavite' ? 'CALABARZON' : territory === 'Marinduque' || territory === 'Oriental Mindoro' ? 'MIMAROPA' : territory === 'Camarines Sur' ? 'Bicol' : 'Other National'),
+        revenue,
+        quantity,
+        period,
+        product,
+        row_count: 1,
+        basis: 'Institutional purchase order reference',
+        evidence,
+      })
+
+      app.setDescriptivePeriod('all')
+      app.setSalesSectorsData({
+        rows: [
+          row('Government', 'LGU Hospital', 'Quezon', 1000000, 10000, '2025-02', 'PARACETAMOL 500MG'),
+          row('Private', 'Retail Pharmacy', 'Batangas', 500000, 5000, '2025-02', 'PARACETAMOL 500MG'),
+          row('Private', 'Retail Pharmacy', 'Cavite', 300000, 3000, '2025-02', 'PARACETAMOL 500MG'),
+          row('Private', 'Retail Pharmacy', 'Marinduque', 200000, 2000, '2025-02', 'PARACETAMOL 500MG'),
+          row('Private', 'Retail Pharmacy', 'Oriental Mindoro', 50000, 500, '2025-02', 'PARACETAMOL 500MG'),
+          row('Government', 'Provincial Hospital', 'Camarines Sur', 400000, 4000, '2025-02', 'PARACETAMOL 500MG'),
+          row('Government', 'Government Bidding', 'National Hub (DOH Central)', 2000000, 20000, '2025-02', 'PARACETAMOL 500MG', 'actual', 'Other National'),
+        ],
+        source: {
+          file: 'datasources/templates/buyer_sector_mapping.csv',
+          checksum: 'sha256-test-hash',
+          excluded: {}
+        }
+      })
+    })
+
+    // 1. Verify Regional Rollup Grid Renders All Regional Aggregates
+    const rollupGrid = page.locator('#areaRegionRollupGrid')
+    await expect(rollupGrid).toBeVisible()
+    await expect(rollupGrid).toContainText('CALABARZON')
+    await expect(rollupGrid).toContainText('MIMAROPA')
+    await expect(rollupGrid).toContainText('Bicol')
+    await expect(rollupGrid).toContainText('Other National')
+
+    // 2. Verify Region Filter Dropdown Exists with Regional Options
+    const regionSelect = page.locator('#sectorRegion')
+    await expect(regionSelect).toBeVisible()
+    await expect(regionSelect).toContainText('CALABARZON')
+    await expect(regionSelect).toContainText('MIMAROPA')
+    await expect(regionSelect).toContainText('Bicol')
+
+    // 3. Filter by MIMAROPA Region
+    await page.selectOption('#sectorRegion', 'MIMAROPA')
+    await expect(page.locator('#sectorProfileTable')).toContainText('Marinduque')
+    await expect(page.locator('#sectorProfileTable')).toContainText('Oriental Mindoro')
+    await expect(page.locator('#sectorProfileTable')).not.toContainText('Quezon')
+    await expect(page.locator('#sectorProfileTable')).not.toContainText('Batangas')
+    await expect(page.locator('#areaRankedCount')).toHaveText('2')
+
+    // 4. Verify Summary Footer Row Totals
+    const tableFooter = page.locator('#sectorProfileTable tfoot')
+    await expect(tableFooter).toBeVisible()
+    await expect(tableFooter).toContainText('Total Rollup')
+    await expect(tableFooter).toContainText('₱250,000')
+
+    // 5. Test 1-click selectRollupRegion interactive handler
+    await page.evaluate(() => (window as any).selectRollupRegion('CALABARZON'))
+    await expect(page.locator('#sectorRegion')).toHaveValue('CALABARZON')
+    await expect(page.locator('#sectorProfileTable')).toContainText('Quezon')
+    await expect(page.locator('#sectorProfileTable')).toContainText('Batangas')
+    await expect(page.locator('#sectorProfileTable')).toContainText('Cavite')
+    await expect(page.locator('#sectorProfileTable')).not.toContainText('Marinduque')
+    await expect(page.locator('#areaRankedCount')).toHaveText('3')
+
+    // 6. Reset to All Regions
+    await page.selectOption('#sectorRegion', 'All')
+    await expect(page.locator('#areaRankedCount')).toHaveText('7')
+  })
 })
+

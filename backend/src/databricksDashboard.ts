@@ -627,6 +627,15 @@ export async function getDatabricksSalesSectors() {
     ORDER BY normalized_product, month_start, territory, channel`, 30_000)
   const includedRows = rows.reduce((sum, row) => sum + numberValue(row.row_count), 0)
   const unmappedRows = rows.filter((row) => row.sector === 'Unknown').reduce((sum, row) => sum + numberValue(row.row_count), 0)
+function getRegionForTerritory(territory: string, sector?: string): string {
+  const t = String(territory || '').trim().toLowerCase()
+  if (['cavite', 'batangas', 'laguna', 'quezon'].includes(t)) return 'CALABARZON'
+  if (['marinduque', 'oriental mindoro', 'occidental mindoro', 'mindoro'].includes(t)) return 'MIMAROPA'
+  if (['camarines norte', 'camarines sur', 'albay'].includes(t)) return 'Bicol'
+  if (['national hub (doh central)', 'medshield hq'].includes(t) || sector === 'Government' || sector === 'Internal') return 'Other National'
+  return 'Unknown'
+}
+
   const expandedRows = rows.flatMap((row) => {
     const revenue = numberValue(row.revenue)
     const quantity = numberValue(row.quantity)
@@ -637,6 +646,7 @@ export async function getDatabricksSalesSectors() {
           product: row.product,
           period: row.period,
           sector: row.sector,
+          region: 'MIMAROPA',
           territory: 'Oriental Mindoro',
           channel: row.channel,
           revenue: Number((revenue * 0.632).toFixed(2)),
@@ -648,6 +658,7 @@ export async function getDatabricksSalesSectors() {
           product: row.product,
           period: row.period,
           sector: row.sector,
+          region: 'MIMAROPA',
           territory: 'Occidental Mindoro',
           channel: row.channel,
           revenue: Number((revenue * 0.368).toFixed(2)),
@@ -661,6 +672,7 @@ export async function getDatabricksSalesSectors() {
       product: row.product,
       period: row.period,
       sector: row.sector,
+      region: getRegionForTerritory(row.territory, row.sector),
       territory: row.territory,
       channel: row.channel,
       revenue,

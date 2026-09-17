@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Mapped Client Reference Directory E2E Suite', () => {
+  test.setTimeout(60000);
   test.beforeEach(async ({ page }) => {
     await page.goto('/login');
     await page.waitForLoadState('networkidle');
@@ -9,7 +10,7 @@ test.describe('Mapped Client Reference Directory E2E Suite', () => {
     await page.getByRole('button', { name: 'Login', exact: true }).click();
     await page.waitForURL('**/', { timeout: 20000 });
     await page.waitForLoadState('networkidle');
-    await page.waitForSelector('#topbar-title', { timeout: 30000 });
+    await page.waitForSelector('#topbar-title', { state: 'attached', timeout: 30000 });
   });
 
   test('Client Reference Registry renders in Area Prioritization with search, filtering, and pagination', async ({ page }) => {

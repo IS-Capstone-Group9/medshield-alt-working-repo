@@ -250,6 +250,62 @@ To enable complete auditability and end-to-end tracing from raw account strings 
 
 > Full directory containing all 782 verified accounts is maintained in [`docs/MAPPED_CLIENT_REFERENCE.md`](file:///c:/Users/Ethan/ega_KERR/docs/MAPPED_CLIENT_REFERENCE.md) and exposed via interactive search, filtering, and CSV export in the Area Prioritization dashboard runtime.
 
+---
+
+## 10. Regional Filtering, Provincial Granularity & Multi-Level Aggregations
+
+To provide end-to-end strategic oversight while maintaining fine-grained operational precision, the **Area Prioritization** module supports **hierarchical multi-level aggregation** and **regional filtering**:
+
+```mermaid
+flowchart TD
+    Dataset["Databricks Gold Dataset (37,178 Fact Rows)"] --> FilterScope{"Regional Scope Selector"}
+    
+    FilterScope -->|"All Regions"| RegAll["All Regions (Grand Total: ₱615.26M)"]
+    FilterScope -->|"CALABARZON"| Reg4A["CALABARZON (₱243.38M · 4 Provinces)"]
+    FilterScope -->|"MIMAROPA"| Reg4B["MIMAROPA (₱13.60M · 3 Provinces)"]
+    FilterScope -->|"Bicol"| Reg5["Bicol (₱21.04M · 3 Provinces)"]
+    FilterScope -->|"Other National"| RegNat["Other National (₱337.24M · National Hubs / HQ)"]
+    FilterScope -->|"Unknown"| RegUnk["Unknown / Unclassified (₱0.00)"]
+
+    RegAll --> AggGrid["Regional Granularity Rollup Cards"]
+    Reg4A --> AggGrid
+    Reg4B --> AggGrid
+    Reg5 --> AggGrid
+    RegNat --> AggGrid
+
+    AggGrid --> ProvTable["Provincial Granularity Table (Ranked MCDA Scores & Metrics)"]
+    ProvTable --> TotalFoot["Grand Total Rollup Footer Row"]
+```
+
+### 10.1 Regional Rollup Aggregation Matrix
+
+| Region | Active Provinces | Net Sales Revenue (₱) | Regional Share of Mapped Sales | Share of Total Dataset | Delivered Units | Leading Territory by Revenue | Primary Buyer Sector |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **CALABARZON** (Region IV-A) | 4 (Quezon, Batangas, Laguna, Cavite) | ₱243,378,716.46 | 87.54% | 39.56% | 585,219.88 | **Quezon** (₱192.65M · 79.2% reg share) | 100% Private (Hospital & Retail) |
+| **Bicol** (Region V) | 3 (Cam Norte, Cam Sur, Albay) | ₱21,043,284.29 | 7.57% | 3.42% | 34,512.93 | **Camarines Norte** (₱11.64M · 55.3% reg share) | 100% Private (Retail Pharmacy) |
+| **MIMAROPA** (Region IV-B) | 3 (Marinduque, Oriental Mindoro, Occidental Mindoro) | ₱13,595,988.65 | 4.89% | 2.21% | 25,342.23 | **Marinduque** (₱13.40M · 98.6% reg share) | 100% Private (Retail Pharmacy & Port Hub) |
+| **Other National** | 2 (National Hub, MedShield HQ) | ₱337,238,956.66 | — | 54.81% | 760,383.41 | **National Hub** (₱299.99M · Public Bidding) | 88.9% Government · 11.1% Internal |
+| **Unknown** | 0 | ₱0.00 | 0.00% | 0.00% | 0.00 | — | — |
+| **Grand Total / All Commercial Areas** | **10 Provinces** | **₱278,017,989.40** | **100.00%** | **45.19%** | **645,075.04** | **Quezon** (69.29% commercial share) | **100% Private Commercial** |
+| **Grand Total / Complete Pipeline** | **10 Prov + 2 Nat'l** | **₱615,256,946.06** | — | **100.00%** | **1,405,458.45** | **National Hub / DOH Central** | **48.8% Gov · 45.2% Priv · 6.0% Int** |
+
+### 10.2 Interactive Dashboard Implementation Features
+
+1. **4-Way Multi-Dimensional Filtering**:
+   - **Region Dropdown (`#sectorRegion`)**: Filter by `All Regions`, `CALABARZON (Region IV-A)`, `MIMAROPA (Region IV-B)`, `Bicol (Region V)`, `Other National`, or `Unknown`.
+   - **Buyer Cluster Dropdown (`#sectorCluster`)**: Filter by `All Clusters`, `Private`, `Government`, or `Internal`.
+   - **Product SKU Filter (`#sectorProduct`)**: Filter by therapeutic category or specific formulation.
+   - **Evidence Mode (`#sectorEvidence`)**: Filter by `Actual only` vs. `Actual + estimates`.
+2. **Dynamic Regional Granularity Rollup Grid (`#areaRegionRollupGrid`)**:
+   - Interactive summary cards displayed directly above the provincial ranking table.
+   - Displays real-time aggregate revenue, percentage share, total unit volume, and leading province for each region under the active filter scope.
+   - Clicking on any regional rollup card instantly sets the regional filter to that specific region.
+3. **Provincial Granularity Prioritization Table (`#sectorProfileTable`)**:
+   - Displays individual ranked provinces with regional badges (`CALABARZON`, `MIMAROPA`, `Bicol`, `National`).
+   - Dynamic MCDA Priority Score calculation factoring sales volume and coverage consistency.
+   - Summary `<tfoot>` row dynamically aggregating total revenue, units, and average scores for the current view.
+
+
 
 
 

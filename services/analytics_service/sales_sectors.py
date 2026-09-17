@@ -10,6 +10,32 @@ SECTORS = {'Government', 'Private', 'Internal', 'Unknown'}
 INTERNAL_LABELS = {'admin', 'administration', 'supplies', 'equipment', 'personal', 'losses', 'medshield', 'medshield internal'}
 
 
+TERRITORY_TO_REGION = {
+    'cavite': 'CALABARZON',
+    'batangas': 'CALABARZON',
+    'laguna': 'CALABARZON',
+    'quezon': 'CALABARZON',
+    'marinduque': 'MIMAROPA',
+    'oriental mindoro': 'MIMAROPA',
+    'occidental mindoro': 'MIMAROPA',
+    'mindoro': 'MIMAROPA',
+    'camarines norte': 'Bicol',
+    'camarines sur': 'Bicol',
+    'albay': 'Bicol',
+    'national hub (doh central)': 'Other National',
+    'medshield hq': 'Other National',
+}
+
+
+def classify_region(territory, sector):
+    t_clean = str(territory or '').strip().casefold()
+    if t_clean in TERRITORY_TO_REGION:
+        return TERRITORY_TO_REGION[t_clean]
+    if sector in {'Government', 'Internal'}:
+        return 'Other National'
+    return 'Unknown'
+
+
 def classify_buyer(area, approved_mapping, geographies):
     text = str(area or '').strip()
     key = text.casefold()
@@ -63,16 +89,18 @@ def build_sectors(rows, mappings, metadata, source_name, geography_mappings=()):
         territory = mapping.get('territory') or geographies.get(area.casefold()) or 'Unassigned geography'
         if territory == 'Mindoro':
             for prov, weight in (('Oriental Mindoro', 0.632), ('Occidental Mindoro', 0.368)):
-                k = (period, delivered_date.isoformat(), product, sector, channel, prov, f"{basis} · PSA demographic weighted apportionment ({weight*100:.1f}% {prov})")
+                reg = classify_region(prov, sector)
+                k = (period, delivered_date.isoformat(), product, sector, channel, reg, prov, f"{basis} · PSA demographic weighted apportionment ({weight*100:.1f}% {prov})")
                 grouped[k]['revenue'] += revenue * weight
                 grouped[k]['quantity'] += quantity * weight
                 grouped[k]['row_count'] += 1
         else:
-            key = (period, delivered_date.isoformat(), product, sector, channel, territory, basis)
+            reg = classify_region(territory, sector)
+            key = (period, delivered_date.isoformat(), product, sector, channel, reg, territory, basis)
             grouped[key]['revenue'] += revenue
             grouped[key]['quantity'] += quantity
             grouped[key]['row_count'] += 1
-    return {'rows': [dict(zip(('period', 'date', 'product', 'sector', 'channel', 'territory', 'basis'), key), **value) for key, value in sorted(grouped.items())],
+    return {'rows': [dict(zip(('period', 'date', 'product', 'sector', 'channel', 'region', 'territory', 'basis'), key), **value) for key, value in sorted(grouped.items())],
             'source': {'file': source_name, 'checksum': metadata.get('checksum'), 'input_rows': len(rows), 'included_rows': sum(v['row_count'] for v in grouped.values()), 'excluded': dict(excluded)}}
 
 
@@ -83,3 +111,4 @@ def load_sectors():
     with (ROOT / 'datasources/templates/area_classification_mapping.csv').open(encoding='utf-8-sig', newline='') as handle:
         geographies = list(csv.DictReader(handle))
     return build_sectors(payload['rows'], mappings, payload['metadata'], name, geographies)
+
