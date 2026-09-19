@@ -109,7 +109,7 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     await expectOnlyPageActive(page, 'page-forecast');
     await expect(salesDeepDive).not.toBeVisible();
     await expect(page.locator('#forecastChart')).toBeVisible();
-    await expect(page.locator('#forecastMetrics')).toContainText('MAE', { timeout: 20000 });
+    await expect(page.locator('#forecastMetrics')).toContainText(/MAE|MAPE/, { timeout: 20000 });
     await expectChartRendered(page, 'forecastChart');
 
     // 2.5 Prescriptive Planning

@@ -39,7 +39,7 @@ const DASHBOARD_GLOBAL_HANDLERS = [
   'buildCharts',
   'downloadTableAsCSV',
   'exportSalesGrowthCSV',
-  'setPlanningData', 'setPlanningResult', 'getPlanningRequest', 'invalidatePlan', 'changePlanningScope', 'requestPlanSolve', 'exportPlanningCSV',
+  'setPlanningData', 'setPlanningResult', 'getPlanningRequest', 'invalidatePlan', 'changePlanningScope', 'requestPlanSolve', 'exportPlanningCSV', 'setPrescriptivePreset', 'resetPlanningDefaults',
   'setExternalRegressionData',
   'renderExternalRegression',
   'changeRegressionScope',

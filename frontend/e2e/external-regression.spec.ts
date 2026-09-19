@@ -72,7 +72,9 @@ test('unmapped weather, absent buyers and service failure clear all modeled resu
 })
 
 test('an unapproved prepared DOH and sales snapshot remains blocked', async ({ page }) => {
-  test.skip(!existsSync(path.resolve('../data/medshield/processed/regression_external_monthly.json')), 'Optional local source audit; raw workbooks are not CI fixtures')
+  const dohCandidate = path.resolve('../datasources/clean/doh/doh_sales_territory_monthly_candidate.csv')
+  const regJson = path.resolve('../data/medshield/processed/regression_external_monthly.json')
+  test.skip(!existsSync(dohCandidate) || !existsSync(regJson), 'Optional local source audit; raw workbooks are not CI fixtures')
   const data = evidence('', true)
   await page.evaluate(d => (window as any).setExternalRegressionData(d), data)
   expect(data.status).toBe('blocked')

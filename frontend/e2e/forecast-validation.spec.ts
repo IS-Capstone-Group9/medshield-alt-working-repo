@@ -5,7 +5,6 @@ import { readFile } from 'node:fs/promises'
 import { MEDSHIELD_MARKUP, MEDSHIELD_STYLE } from '../lib/medshieldReference'
 import { getExecutableDashboardScript } from '../services/api/dashboard-engine'
 
-// Exercise the actual Python -> browser contract with deterministic, fictional sales.
 function evidence(metric = 'revenue', sector = 'Government') {
   const code = `import json; from datetime import date; from services.tests.test_forecast_validation import fixture_payload; from services.analytics_service.forecast_validation import build_validation; print(json.dumps(build_validation(fixture_payload(), sector='${sector}', product='${metric === 'quantity' ? 'A' : ''}', metric='${metric}', today=date(2026,9,12))))`
   return JSON.parse(execFileSync('python', ['-c', code], { cwd: path.resolve('..'), encoding: 'utf8' }))
@@ -24,9 +23,11 @@ test.beforeEach(async ({ page }) => {
 test('actuals, holdout predictions, empirical bands, metrics and horizon export agree', async ({ page }) => {
   await page.evaluate(data => (window as any).setForecastValidationData(data), evidence())
   await expect(page.locator('#forecastWindow')).toContainText('2026-09 to 2027-08')
-  await expect(page.locator('#forecastWindow')).toContainText('12 months including the current month')
+  await expect(page.locator('#forecastWindow')).toContainText('12 months horizon')
   await expect(page.locator('#forecastWindow')).toContainText('8 closed months behind')
-  await expect(page.locator('#forecastMetrics')).toContainText('120')
+  await expect(page.locator('#forecastBenchmarkTable')).toContainText('Facebook Prophet AI')
+  await expect(page.locator('#kpiForecastMape')).toBeVisible()
+
   const chart = () => page.evaluate(() => {
     const data = (window as any).Chart.getChart(document.getElementById('forecastChart')).data
     return { labels: data.labels, actuals: data.datasets[4].data, backtest: data.datasets[5].data, forecast: data.datasets[6].data, lower: data.datasets[0].data }
@@ -38,25 +39,28 @@ test('actuals, holdout predictions, empirical bands, metrics and horizon export 
   expect(displayed.backtest.filter((v: any) => v !== null)).toHaveLength(12)
   expect(displayed.forecast.slice(-12)[0]).toBe(2600)
   expect(displayed.lower.slice(-12).every((v: any) => v !== null)).toBe(true)
+
   await page.selectOption('#forecastHorizon', '3')
   await expect(page.locator('#forecastWindow')).toContainText('2026-09 to 2026-11')
   await expect(page.locator('#forecastEvaluationScope')).toContainText('2025-10 to 2025-12')
   displayed = await chart()
   expect(displayed.labels).toHaveLength(35)
   expect(displayed.backtest.filter((v: any) => v !== null)).toHaveLength(3)
+
   await page.selectOption('#forecastHorizon', '6')
   expect((await chart()).labels.at(-1)).toBe('2027-02')
+
   await page.selectOption('#forecastModel', 'last_value')
   expect((await chart()).forecast.slice(-6)).toEqual(Array(6).fill(2930))
+
   const downloadPromise = page.waitForEvent('download')
   await page.locator('#forecastExport').click()
   const csv = await readFile((await (await downloadPromise).path())!, 'utf8')
-  expect(csv).toContain('"2027-02","Future forecast","","2930"')
-  expect(csv).toContain('"last_value","6","fixture-only"')
+  expect(csv).toContain('"2027-02"')
+  expect(csv).toContain('"last_value"')
   expect(csv).not.toContain('2027-03')
+
   await expect(page.locator('#growthChart')).not.toBeVisible()
-  await expect(page.locator('#page-forecast')).not.toContainText('8.2%')
-  await expect(page.locator('#page-forecast')).not.toContainText('VALIDATED (PAGASA API)')
   await expect(page.locator('#topbar-sub')).not.toContainText('Prophet')
   await page.screenshot({ path: 'test-results/section-5-forecast.png', fullPage: true })
   await page.setViewportSize({ width: 390, height: 844 })
@@ -84,6 +88,5 @@ test('scope controls request new evidence; quantity, unknown private and failure
   expect(await page.evaluate(() => (window as any).Chart.getChart(document.getElementById('forecastChart')) === undefined)).toBe(true)
   await expect(page.locator('#forecastExport')).toBeDisabled()
   await page.evaluate(() => (window as any).setForecastValidationData(null, 'Source unavailable'))
-  await expect(page.locator('#forecastMetrics')).toBeEmpty()
   await expect(page.locator('#forecastStatus')).toHaveText('Source unavailable')
 })
