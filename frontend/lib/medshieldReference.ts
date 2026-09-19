@@ -3,6 +3,7 @@ import { EXTERNAL_REGRESSION_MARKUP } from '../services/api/external-regression-
 import { FORECAST_VALIDATION_MARKUP } from '../services/api/forecast-validation-runtime'
 import { SALES_SECTORS_MARKUP } from '../services/api/sales-sectors-runtime'
 import { SALES_HEATMAP_MARKUP } from '../services/api/sales-heatmap-runtime'
+import { ODOMETER_STYLE, OVERVIEW_THREAT_ODOMETER_MARKUP } from '../services/api/odometer-runtime'
 // MedShield Design Reference - Extracted from Standalone Application
 // Auto-generated design system reference
 
@@ -231,7 +232,7 @@ export const MEDSHIELD_KPI_STYLE = `
 }
 `
 
-export const MEDSHIELD_STYLE = MEDSHIELD_BASE_STYLE + '\n' + MEDSHIELD_KPI_STYLE + '\n' + MEDSHIELD_PERIOD_STYLE
+export const MEDSHIELD_STYLE = MEDSHIELD_BASE_STYLE + '\n' + MEDSHIELD_KPI_STYLE + '\n' + MEDSHIELD_PERIOD_STYLE + '\n' + ODOMETER_STYLE
 
 export const OVERVIEW_KPI_GRID_MARKUP = `
       <!-- Top Row KPI Grid -->
@@ -338,6 +339,10 @@ export const MEDSHIELD_MARKUP = LEGACY_MEDSHIELD_MARKUP
   .replace(
     /<!-- Top Row KPI Grid -->[\s\S]*?<\/div>\s*<\/div>(?=\s*<!-- Compliance Data Quality Warning Banner -->)/,
     OVERVIEW_KPI_GRID_MARKUP.trim()
+  )
+  .replace(
+    '<!-- Middle Row: Interactive Time Series -->',
+    OVERVIEW_THREAT_ODOMETER_MARKUP + '\n\n      <!-- Middle Row: Interactive Time Series -->'
   )
   .replace('<!-- SALES_QUANTITY_HEATMAP -->', SALES_HEATMAP_MARKUP)
   .replace('<!-- SALES_SECTORS -->', SALES_SECTORS_MARKUP)
