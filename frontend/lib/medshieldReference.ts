@@ -316,7 +316,6 @@ export const MEDSHIELD_MARKUP = LEGACY_MEDSHIELD_MARKUP
     `<div class="comparison-selector">
       <label class="sr-only" for="descriptivePeriodSelect">Historical period</label>
       <select id="descriptivePeriodSelect" class="topbar-select" aria-label="Historical period">
-        <option value="30d">Last 30 Days</option>
         <option value="3">Last 3 Months</option>
         <option value="6">Last 6 Months</option>
         <option value="12" selected>Last 12 Months</option>

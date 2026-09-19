@@ -145,7 +145,7 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
       if (details) details.open = true;
     });
 
-    const initialScores = await page.locator('#sectorProfileTable tbody tr td:nth-child(3)').allTextContents();
+    const initialScores = await page.locator('#sectorProfileTable tbody tr td:nth-child(4)').allTextContents();
     await page.locator('#mcdaWeightSalesValue').evaluate((element: HTMLInputElement) => {
       element.value = '80';
       element.dispatchEvent(new Event('input', { bubbles: true }));
@@ -154,7 +154,7 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     await expect(page.locator('#mcdaWeightCoverageLabel')).toHaveText('20%');
     await expect(page.locator('#mcdaWeightTotal')).toHaveText('100%');
     await expect(page.locator('#areaScoreMethod')).toContainText('80% sales-value scale + 20% active-period coverage');
-    await expect.poll(async () => page.locator('#sectorProfileTable tbody tr td:nth-child(3)').allTextContents()).not.toEqual(initialScores);
+    await expect.poll(async () => page.locator('#sectorProfileTable tbody tr td:nth-child(4)').allTextContents()).not.toEqual(initialScores);
 
     await page.locator('#mcdaWeightCoverage').evaluate((element: HTMLInputElement) => {
       element.value = '70';
@@ -177,7 +177,7 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     const yearWrap = page.locator('#singleYearWrap')
     await expect(periodSelect).toHaveValue('12')
     await expect(periodSelect.locator('option')).toHaveText([
-      'Last 30 Days', 'Last 3 Months', 'Last 6 Months', 'Last 12 Months', 'All Time · Yearly', 'Custom Date Range',
+      'Last 3 Months', 'Last 6 Months', 'Last 12 Months', 'All Time · Yearly', 'Custom Date Range',
     ])
     await expect(yearWrap).toBeHidden()
     await expect(page.locator('#btnYoyYear')).toHaveCount(0)
@@ -240,11 +240,11 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     })).toBe(20)
 
     await expect(page.locator('#sectorStatus')).toContainText('weighted record equivalents', { timeout: 30000 })
-    await page.evaluate(() => (window as any).setDescriptivePeriod('30d'));
+    await page.evaluate(() => (window as any).setDescriptivePeriod('6'));
     await expect(yearWrap).toBeHidden()
     await expect(customRange).toBeHidden()
     const overviewSubtitle = page.locator('#overviewBaselineChart').locator('xpath=ancestor::div[contains(@class,"chart-card")]').locator('.chart-subtitle')
-    await expect(overviewSubtitle).toContainText('Last 30 Days')
+    await expect(overviewSubtitle).toContainText('Last 6 Months')
   });
 
   test('3b. Extended data pages open and unsupported dark mode is absent', async ({ page }) => {

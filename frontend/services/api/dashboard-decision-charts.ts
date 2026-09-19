@@ -70,7 +70,6 @@ function aggregateMonthly(
   const start = Number.isFinite(monthCount) ? shiftMonth(end, -(monthCount - 1)) : ''
   for (const row of rows) {
     if (!row.period || !finite(row.revenue) || !finite(row.income)) continue
-    if (selection.mode === '30d') continue
     if (selection.mode === 'custom'
       && (row.period < selection.start.slice(0, 7) || row.period > selection.end.slice(0, 7))) continue
     if (selection.mode !== 'custom' && selection.mode !== 'all' && (row.period < start || row.period > end)) continue
@@ -174,10 +173,8 @@ function renderDiseaseDemandChart(root: HTMLElement, data: DashboardData) {
   if (!monthly.length) {
     Chart.getChart(canvas)?.destroy()
     updateChartCard(canvas, {
-      title: selection.mode === '30d' ? 'Daily Sales vs. Disease Intensity' : 'Historical Sales vs. Disease Intensity',
-      subtitle: selection.mode === '30d'
-        ? 'Daily sales and disease data are unavailable; monthly totals are not expanded into synthetic days'
-        : 'No aligned monthly observations are available for the selected historical period',
+      title: 'Historical Sales vs. Disease Intensity',
+      subtitle: 'No aligned monthly observations are available for the selected historical period',
       badge: 'No source-backed observations',
       status: 'Unavailable',
       statusClass: 'status-draft',

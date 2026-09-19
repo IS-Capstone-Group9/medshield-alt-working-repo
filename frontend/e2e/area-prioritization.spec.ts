@@ -113,8 +113,8 @@ test.describe('Area Prioritization Dynamic Interactions & Visualizations', () =>
     await expect(page.locator('#sectorScope')).toContainText('All Time')
     await expect(page.locator('#sectorScope')).toContainText('Yearly')
 
-    await page.selectOption('#descriptivePeriodSelect', '30d')
-    await expect(page.locator('#sectorScope')).toContainText('Last 30 Days')
+    await page.selectOption('#descriptivePeriodSelect', '3')
+    await expect(page.locator('#sectorScope')).toContainText('Last 3 Months')
 
     await page.selectOption('#descriptivePeriodSelect', 'custom')
     await page.evaluate(() => (window as any).setCustomDateRange('2024-01-01', '2024-12-31'))

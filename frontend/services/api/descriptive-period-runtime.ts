@@ -171,7 +171,7 @@ function descriptiveCustomDayCount() {
 }
 
 function descriptiveUsesDailyGrain() {
-  return descriptivePeriod === '30d' || (descriptivePeriod === 'custom' && descriptiveCustomDayCount() <= 31);
+  return descriptivePeriod === 'custom' && descriptiveCustomDayCount() <= 31;
 }
 
 function descriptiveUsesYearlyGrain() {
@@ -189,11 +189,6 @@ function descriptivePeriodIncludes(value) {
     if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text >= customDateStart && text <= customDateEnd;
     const month = text.slice(0, 7);
     return /^\d{4}-\d{2}$/.test(month) && month >= customDateStart.slice(0, 7) && month <= customDateEnd.slice(0, 7);
-  }
-  if (descriptivePeriod === '30d') {
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(text)) return false;
-    const end = descriptiveLatestObservedDate(), start = shiftIsoDate(end, -29);
-    return text >= start && text <= end;
   }
   const months = Number(descriptivePeriod);
   const end = descriptiveLatestObservedMonth();
@@ -430,10 +425,6 @@ function descriptiveAxisPeriods() {
     if (!observed.length) return [];
     return Array.from({ length: observed[observed.length - 1] - observed[0] + 1 }, (_, index) => String(observed[0] + index));
   }
-  if (descriptivePeriod === '30d') {
-    const end = descriptiveLatestObservedDate();
-    return Array.from({ length: 30 }, (_, index) => shiftIsoDate(end, index - 29));
-  }
   if (descriptivePeriod === 'custom') {
     if (descriptiveUsesDailyGrain()) {
       return Array.from({ length: descriptiveCustomDayCount() }, (_, index) => shiftIsoDate(customDateStart, index));
@@ -502,11 +493,6 @@ function descriptivePeriodLabel() {
     return years.length
       ? 'All Time · ' + years[0] + '–' + descriptiveYearLabel(years[years.length - 1]) + ' · Yearly'
       : 'All Time · Yearly';
-  }
-  if (descriptivePeriod === '30d') {
-    const end = descriptiveLatestObservedDate();
-    const formatter = new Intl.DateTimeFormat('en-PH', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
-    return 'Last 30 Days · through ' + formatter.format(new Date(end + 'T00:00:00Z'));
   }
   if (descriptivePeriod === 'custom') {
     const formatter = new Intl.DateTimeFormat('en-PH', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
@@ -580,7 +566,7 @@ function openCustomDateCalendar(input) {
 }
 
 function setDescriptivePeriod(value) {
-  descriptivePeriod = ['30d', '3', '6', '12', 'all', 'custom'].includes(String(value)) ? String(value) : '12';
+  descriptivePeriod = ['3', '6', '12', 'all', 'custom'].includes(String(value)) ? String(value) : '12';
   const periodSelect = document.getElementById('descriptivePeriodSelect');
   if (periodSelect && periodSelect.value !== descriptivePeriod) periodSelect.value = descriptivePeriod;
   const yearWrap = document.getElementById('singleYearWrap');

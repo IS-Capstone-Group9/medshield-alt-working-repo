@@ -346,8 +346,8 @@ function renderOverviewThreatOdometer() {
   let narrativeText = '<strong>Executive DSS Takeaway:</strong> Operations are within <strong>Normal Commercial Baseline</strong> thresholds across CALABARZON and MIMAROPA. Standard economic order quantities (EOQ) and commercial turnover protocols apply.';
   
   // Dynamic calculation based on period selection
-  if (period === '30d') {
-    score = 78.6;
+  if (period === '3') {
+    score = 76.8;
     dohPct = 85; weatherPct = 78; salesPct = 70;
     dohText = 'Active Surge Peak (2.45x DII)';
     weatherText = 'Heavy Monsoon Rainfall (185 mm)';
@@ -355,15 +355,15 @@ function renderOverviewThreatOdometer() {
     zone = 'red';
     badgeTitle = 'EPIDEMIC / DISASTER SURGE STATE';
     narrativeText = '<strong>CRITICAL ALERT:</strong> Heightened Dengue transmission and flood alerts in Quezon and Laguna. <strong>Category I Zero-Stockout Buffer Protocol</strong> is activated for Paracetamol, ORS, IV Fluids, and Doxycycline.';
-  } else if (period === '3' || period === '6') {
-    score = 56.2;
-    dohPct = 62; weatherPct = 58; salesPct = 48;
-    dohText = 'Elevated Alert Level 2 (1.68x)';
-    weatherText = 'Seasonal Monsoon Front (110 mm)';
-    salesText = 'Elevated Antibiotic Refills (1.35x)';
+  } else if (period === '6') {
+    score = 54.6;
+    dohPct = 58; weatherPct = 55; salesPct = 46;
+    dohText = 'Elevated Alert Level 2 (1.60x)';
+    weatherText = 'Seasonal Monsoon Front (105 mm)';
+    salesText = 'Elevated Antibiotic Refills (1.30x)';
     zone = 'amber';
     badgeTitle = 'Elevated Surge Watch';
-    narrativeText = '<strong>WARNING:</strong> Rising respiratory and vector-borne trends observed. Pre-position secondary safety stocks at provincial distribution centers (Batangas, Marinduque, and Calapan).';
+    narrativeText = '<strong>WARNING:</strong> Rising seasonal vector-borne and respiratory trends observed. Pre-position secondary safety stocks at provincial distribution centers (Batangas, Marinduque, and Calapan).';
   } else if (period === 'all') {
     score = 38.0;
     dohPct = 36; weatherPct = 42; salesPct = 35;

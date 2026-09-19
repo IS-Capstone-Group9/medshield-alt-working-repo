@@ -55,8 +55,8 @@ test.describe('MedShield Executive Multi-Hazard Threat Gauge & Odometer E2E Suit
     const periodSelect = page.locator('#descriptivePeriodSelect');
     await expect(periodSelect).toBeVisible();
 
-    // Switch to Last 30 Days (Crisis / Peak Surge State)
-    await periodSelect.selectOption('30d');
+    // Switch to Last 3 Months (Tactical Crisis / Peak Surge State)
+    await periodSelect.selectOption('3');
     await page.waitForTimeout(600);
 
     const badgeRed = page.locator('#overviewThreatBadge');
@@ -67,8 +67,8 @@ test.describe('MedShield Executive Multi-Hazard Threat Gauge & Odometer E2E Suit
     const needleStyleRed = await page.locator('#overviewThreatNeedle').getAttribute('style');
     expect(needleStyleRed).toContain('rotate(');
 
-    // Switch to Last 3 Months (Elevated Surge Watch)
-    await periodSelect.selectOption('3');
+    // Switch to Last 6 Months (Elevated Surge Watch)
+    await periodSelect.selectOption('6');
     await page.waitForTimeout(600);
 
     const badgeAmber = page.locator('#overviewThreatBadge');

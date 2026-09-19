@@ -183,7 +183,7 @@ function renderSalesDiagnostics(opts) {
 
   const subtitle = document.getElementById('salesComparisonSubtitle');
   if (subtitle) subtitle.textContent = dailyUnavailable
-    ? 'Daily transaction data is unavailable for the last 30 days; monthly totals are not expanded into synthetic days.'
+    ? 'Daily transaction data is unavailable for the selected period; monthly totals are not expanded into synthetic days.'
     : (yearly
       ? 'Annual revenue and gross profit for ' + descriptivePeriodLabel() + '; totals use only observed source months and incomplete latest years are identified.'
       : (descriptiveUsesDailyGrain() ? 'Daily' : 'Monthly') + ' revenue and gross profit for ' + descriptivePeriodLabel() + '; gaps mean unavailable observations, not zero sales.')

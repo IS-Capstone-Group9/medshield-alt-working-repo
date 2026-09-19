@@ -65,7 +65,6 @@ function installDescriptivePeriodControls(root: HTMLElement) {
     select.className = 'topbar-select'
     select.setAttribute('aria-label', 'Historical period')
     ;[
-      ['30d', 'Last 30 Days'],
       ['3', 'Last 3 Months'],
       ['6', 'Last 6 Months'],
       ['12', 'Last 12 Months'],
