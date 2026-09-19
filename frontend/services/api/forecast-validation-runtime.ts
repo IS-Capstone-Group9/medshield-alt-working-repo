@@ -1,11 +1,11 @@
 export const FORECAST_VALIDATION_MARKUP = String.raw`
 <style>
-[data-forecast-validation] { margin-top: 10px; }
+[data-forecast-validation] { margin-top: 10px; max-width: 100%; box-sizing: border-box; overflow-x: hidden; }
 [data-forecast-validation] canvas { max-width: 100%; }
-[data-forecast-validation] .forecast-controls { display: flex; gap: 14px; flex-wrap: wrap; margin: 16px 0; align-items: flex-end; }
-[data-forecast-validation] label { font-size: 11px; font-weight: 700; color: var(--text-secondary); }
-[data-forecast-validation] select, [data-forecast-validation] input[type="text"] { display: block; max-width: 240px; padding: 7px 10px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg-card,#fff); color: var(--text-primary); font-size: 12px; margin-top: 4px; }
-[data-forecast-validation] p { line-height: 1.6; margin: 10px 0; }
+[data-forecast-validation] .forecast-controls { display: flex; gap: 14px; flex-wrap: wrap; margin: 16px 0; align-items: flex-end; max-width: 100%; }
+[data-forecast-validation] label { font-size: 11px; font-weight: 700; color: var(--text-secondary); max-width: 100%; }
+[data-forecast-validation] select, [data-forecast-validation] input[type="text"] { display: block; width: 100%; max-width: 240px; box-sizing: border-box; padding: 7px 10px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg-card,#fff); color: var(--text-primary); font-size: 12px; margin-top: 4px; }
+[data-forecast-validation] p { line-height: 1.6; margin: 10px 0; word-break: break-word; }
 [data-forecast-validation] .forecast-hero-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 16px 0; }
 [data-forecast-validation] .forecast-hero-card { padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-elevated,#f8fafc); }
 [data-forecast-validation] .forecast-hero-card .hero-label { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
@@ -21,13 +21,14 @@ export const FORECAST_VALIDATION_MARKUP = String.raw`
 </style>
 
 <div class="chart-card" data-forecast-validation>
-  <div class="chart-header">
+  <div class="chart-header" style="flex-wrap:wrap;gap:10px;">
     <div>
-      <div class="chart-title" style="display:flex;align-items:center;gap:8px;">
+      <div class="chart-title" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-        Prophet Time-Series Demand Forecasting &amp; Holdout Validation Studio
+        Prophet Demand Forecasting &amp; Holdout Validation
+        <span class="status-pill status-ready" style="font-size:10px;padding:2px 8px;font-weight:700;letter-spacing:0.3px;">DYNAMIC ROLLING HORIZON</span>
       </div>
-      <div class="chart-subtitle">Capstone Specific Objective 3 · Facebook Prophet AI with DII (Disease Intensity) &amp; RSI (Rainfall Severity) External Regressors</div>
+      <div class="chart-subtitle" style="word-break:break-word;">Capstone SO3 · Facebook Prophet AI with DII &amp; RSI External Regressors · Dynamic current-month start</div>
     </div>
     <div style="display:flex;gap:8px;align-items:center;">
       <button class="btn btn-secondary" id="forecastExport" onclick="exportForecastValidationCSV()" disabled style="font-size:11px;padding:5px 12px;">
@@ -64,11 +65,11 @@ export const FORECAST_VALIDATION_MARKUP = String.raw`
         <option value="last_value">Last Observed Value (Naive Reference)</option>
       </select>
     </label>
-    <label>Forecast Horizon
+    <label>Dynamic Rolling Horizon
       <select id="forecastHorizon" onchange="renderForecastValidation()">
-        <option value="3">Next 3 Months (Tactical Buffer)</option>
-        <option value="6">Next 6 Months (Monsoon Front)</option>
-        <option value="12" selected>Next 12 Months (Annual Baseline)</option>
+        <option value="3">Next 3 Months (Current Month + 2M · Tactical Buffer)</option>
+        <option value="6">Next 6 Months (Current Month + 5M · Monsoon Surge)</option>
+        <option value="12" selected>Next 12 Months (Current Month + 11M · Annual Strategic Horizon)</option>
       </select>
     </label>
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px;padding:6px 12px;background:var(--bg-elevated,#f8fafc);border:1px solid var(--border);border-radius:6px;">
