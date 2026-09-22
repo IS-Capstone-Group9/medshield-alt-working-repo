@@ -1,4 +1,19 @@
-<!DOCTYPE html>
+"""
+Builder script for Dynamic MedShield Executive Data Story & DSS Explainer Dashboard.
+"""
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+SNAPSHOT_FILE = ROOT / "data" / "medshield" / "processed" / "dashboard_sales_snapshot.json"
+TARGET_HTML = ROOT / "dss_explainer_dashboard.html"
+
+with open(SNAPSHOT_FILE, "r", encoding="utf-8") as f:
+    snapshot_data = json.load(f)
+
+json_blob = json.dumps(snapshot_data, indent=2)
+
+html_content = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,7 +30,7 @@
            MEDSHIELD CORE DESIGN SYSTEM
            Deep Navy Sidebar | Amber Indicators | Crisp Light Canvas | High Polish
            ========================================================================== */
-        :root {
+        :root {{
             --bg-base: #EEF2F7;
             --bg-surface: #FFFFFF;
             --bg-elevated: #F0F4F8;
@@ -55,19 +70,19 @@
             --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
             --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
             --transition: 0.18s var(--ease-spring);
-        }
+        }}
 
-        *, *::before, *::after {
+        *, *::before, *::after {{
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-        }
+        }}
 
-        html {
+        html {{
             scroll-behavior: smooth;
-        }
+        }}
 
-        body {
+        body {{
             font-family: var(--font-body);
             background: var(--bg-base);
             color: var(--text-primary);
@@ -77,10 +92,10 @@
             -moz-osx-font-smoothing: grayscale;
             font-size: 13px;
             line-height: 1.5;
-        }
+        }}
 
         /* --- SIDEBAR NAVIGATION --- */
-        .sidebar {
+        .sidebar {{
             width: var(--sidebar-w);
             background: linear-gradient(175deg, #0D1B2A 0%, #0F2035 100%);
             border-right: 1px solid rgba(255, 255, 255, 0.06);
@@ -91,20 +106,20 @@
             left: 0;
             bottom: 0;
             z-index: 100;
-        }
+        }}
 
-        .sidebar-brand {
+        .sidebar-brand {{
             padding: 20px 18px 16px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
+        }}
 
-        .brand-logo {
+        .brand-logo {{
             display: flex;
             align-items: center;
             gap: 12px;
-        }
+        }}
 
-        .brand-icon {
+        .brand-icon {{
             width: 36px;
             height: 36px;
             border-radius: 9px;
@@ -117,39 +132,39 @@
             font-weight: 800;
             font-size: 18px;
             box-shadow: 0 2px 10px rgba(245, 158, 11, 0.35);
-        }
+        }}
 
-        .brand-name {
+        .brand-name {{
             font-size: 15px;
             color: #F1F7FC;
             font-weight: 700;
             letter-spacing: -0.02em;
-        }
+        }}
 
-        .brand-sub {
+        .brand-sub {{
             font-size: 9.5px;
             color: #7A95B0;
             letter-spacing: 0.08em;
             text-transform: uppercase;
             margin-top: 1px;
-        }
+        }}
 
-        .nav {
+        .nav {{
             flex: 1;
             padding: 12px 10px;
             overflow-y: auto;
-        }
+        }}
 
-        .nav-section {
+        .nav-section {{
             font-size: 9.5px;
             font-weight: 700;
             letter-spacing: 0.12em;
             text-transform: uppercase;
             color: #4A6A8A;
             padding: 14px 10px 6px;
-        }
+        }}
 
-        .nav-item {
+        .nav-item {{
             display: flex;
             align-items: center;
             gap: 10px;
@@ -164,14 +179,14 @@
             position: relative !important;
             overflow: hidden;
             user-select: none;
-        }
+        }}
 
-        .nav-item:hover {
+        .nav-item:hover {{
             background: rgba(255, 255, 255, 0.07);
             color: #C8DCF0;
-        }
+        }}
 
-        .nav-item:hover::before {
+        .nav-item:hover::before {{
             content: '';
             position: absolute;
             left: 0;
@@ -180,15 +195,15 @@
             width: 3px;
             background: rgba(245, 158, 11, 0.45);
             border-radius: 0 3px 3px 0;
-        }
+        }}
 
-        .nav-item.active {
+        .nav-item.active {{
             background: rgba(245, 158, 11, 0.13) !important;
             color: #F4BE47 !important;
             font-weight: 600;
-        }
+        }}
 
-        .nav-item.active::before {
+        .nav-item.active::before {{
             content: '';
             position: absolute;
             left: 0;
@@ -197,33 +212,33 @@
             width: 3px !important;
             background: linear-gradient(180deg, #F59E0B, #D97706) !important;
             border-radius: 0 3px 3px 0;
-        }
+        }}
 
-        .nav-icon {
+        .nav-icon {{
             width: 16px;
             height: 16px;
             opacity: 0.75;
             flex-shrink: 0;
-        }
+        }}
 
-        .nav-item.active .nav-icon {
+        .nav-item.active .nav-icon {{
             opacity: 1;
             color: #F4BE47;
-        }
+        }}
 
-        .sidebar-footer {
+        .sidebar-footer {{
             padding: 14px 16px;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
             background: rgba(0, 0, 0, 0.15);
-        }
+        }}
 
-        .sidebar-user {
+        .sidebar-user {{
             display: flex;
             align-items: center;
             gap: 10px;
-        }
+        }}
 
-        .sidebar-avatar {
+        .sidebar-avatar {{
             width: 32px;
             height: 32px;
             border-radius: 50%;
@@ -236,31 +251,31 @@
             font-size: 11px;
             font-weight: 700;
             border: 1.5px solid rgba(245, 158, 11, 0.4);
-        }
+        }}
 
-        .sidebar-user-name {
+        .sidebar-user-name {{
             font-size: 12px;
             font-weight: 600;
             color: #C8DCF0;
-        }
+        }}
 
-        .sidebar-user-role {
+        .sidebar-user-role {{
             font-size: 10px;
             color: #5A7A9A;
-        }
+        }}
 
         /* --- MAIN CANVAS --- */
-        .main {
+        .main {{
             margin-left: var(--sidebar-w);
             flex: 1;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
             min-width: 0;
-        }
+        }}
 
         /* --- TOPBAR & DYNAMIC FILTER --- */
-        .topbar {
+        .topbar {{
             background: var(--bg-surface);
             border-bottom: 1px solid var(--border);
             padding: 0 28px;
@@ -272,35 +287,35 @@
             top: 0;
             z-index: 50;
             box-shadow: var(--shadow-xs);
-        }
+        }}
 
-        .topbar-left {
+        .topbar-left {{
             display: flex;
             align-items: center;
             gap: 14px;
-        }
+        }}
 
-        .page-title {
+        .page-title {{
             font-size: 16px;
             color: var(--text-primary);
             font-weight: 700;
             letter-spacing: -0.02em;
-        }
+        }}
 
-        .page-sub {
+        .page-sub {{
             font-size: 11px;
             color: var(--text-muted);
             margin-top: 2px;
-        }
+        }}
 
-        .topbar-right {
+        .topbar-right {{
             display: flex;
             align-items: center;
             gap: 10px;
             flex-wrap: wrap;
-        }
+        }}
 
-        .topbar-select {
+        .topbar-select {{
             background: var(--bg-elevated);
             border: 1px solid var(--border);
             border-radius: 7px;
@@ -312,19 +327,19 @@
             outline: none;
             transition: all var(--transition);
             font-family: inherit;
-        }
+        }}
 
-        .topbar-select:hover {
+        .topbar-select:hover {{
             border-color: var(--border-strong);
             background: #FFFFFF;
-        }
+        }}
 
-        .topbar-select:focus {
+        .topbar-select:focus {{
             border-color: var(--brand-yellow);
             box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
-        }
+        }}
 
-        .topbar-badge {
+        .topbar-badge {{
             display: flex;
             align-items: center;
             gap: 6px;
@@ -337,23 +352,23 @@
             border: 1px solid rgba(13, 112, 69, 0.2);
             letter-spacing: 0.04em;
             white-space: nowrap;
-        }
+        }}
 
-        .live-dot {
+        .live-dot {{
             width: 6px;
             height: 6px;
             background: var(--emerald);
             border-radius: 50%;
             animation: livePulse 2s ease-in-out infinite;
-        }
+        }}
 
-        @keyframes livePulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(0.85); }
-        }
+        @keyframes livePulse {{
+            0%, 100% {{ opacity: 1; transform: scale(1); }}
+            50% {{ opacity: 0.4; transform: scale(0.85); }}
+        }}
 
         /* STORY PROGRESS BAR */
-        .story-progress-bar {
+        .story-progress-bar {{
             background: linear-gradient(90deg, #0D1B2A 0%, #162D4A 100%);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             padding: 8px 28px;
@@ -363,16 +378,16 @@
             gap: 16px;
             color: #FFFFFF;
             flex-wrap: wrap;
-        }
+        }}
 
-        .story-indicator-group {
+        .story-indicator-group {{
             display: flex;
             align-items: center;
             gap: 8px;
             flex-wrap: wrap;
-        }
+        }}
 
-        .story-step-btn {
+        .story-step-btn {{
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.15);
             color: #C8DCF0;
@@ -385,53 +400,53 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-        }
+        }}
 
-        .story-step-btn:hover {
+        .story-step-btn:hover {{
             background: rgba(245, 158, 11, 0.2);
             color: #F4BE47;
             border-color: #F59E0B;
-        }
+        }}
 
-        .story-step-btn.active {
+        .story-step-btn.active {{
             background: #F59E0B;
             color: #0D1B2A;
             border-color: #D97706;
             font-weight: 700;
             box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
-        }
+        }}
 
-        .story-nav-actions {
+        .story-nav-actions {{
             display: flex;
             align-items: center;
             gap: 8px;
-        }
+        }}
 
         /* --- CONTENT AREA --- */
-        .content {
+        .content {{
             width: 100%;
             max-width: 1400px;
             margin: 0 auto;
             padding: 24px 28px;
             flex: 1;
-        }
+        }}
 
-        .page {
+        .page {{
             display: none;
-        }
+        }}
 
-        .page.active {
+        .page.active {{
             display: block;
             animation: pageIn 0.22s var(--ease-spring);
-        }
+        }}
 
-        @keyframes pageIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes pageIn {{
+            from {{ opacity: 0; transform: translateY(6px); }}
+            to {{ opacity: 1; transform: translateY(0); }}
+        }}
 
         /* NARRATIVE CHAPTER BANNER */
-        .narrative-banner {
+        .narrative-banner {{
             background: #FFFFFF;
             border: 1px solid var(--border);
             border-left: 5px solid #F59E0B;
@@ -443,9 +458,9 @@
             align-items: flex-start;
             justify-content: space-between;
             gap: 16px;
-        }
+        }}
 
-        .narrative-badge {
+        .narrative-badge {{
             display: inline-block;
             background: #FFFBEB;
             color: #B45309;
@@ -457,31 +472,31 @@
             letter-spacing: 0.05em;
             margin-bottom: 4px;
             border: 1px solid rgba(245, 158, 11, 0.3);
-        }
+        }}
 
-        .narrative-title {
+        .narrative-title {{
             font-size: 14px;
             font-weight: 700;
             color: var(--text-primary);
             letter-spacing: -0.01em;
-        }
+        }}
 
-        .narrative-body {
+        .narrative-body {{
             font-size: 12px;
             color: var(--text-secondary);
             margin-top: 4px;
             line-height: 1.55;
-        }
+        }}
 
         /* --- KPI GRID --- */
-        .kpi-grid {
+        .kpi-grid {{
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
             gap: 16px;
             margin-bottom: 20px;
-        }
+        }}
 
-        .kpi-card {
+        .kpi-card {{
             background: var(--bg-surface);
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
@@ -490,43 +505,43 @@
             transition: transform 0.15s var(--ease-spring), box-shadow 0.15s var(--ease-smooth);
             border-top: 3.5px solid #1E3A5F;
             position: relative;
-        }
+        }}
 
-        .kpi-card:nth-child(1) { border-top-color: #1E3A5F; }
-        .kpi-card:nth-child(2) { border-top-color: #6D28D9; }
-        .kpi-card:nth-child(3) { border-top-color: #F59E0B; }
-        .kpi-card:nth-child(4) { border-top-color: #0D7045; }
+        .kpi-card:nth-child(1) {{ border-top-color: #1E3A5F; }}
+        .kpi-card:nth-child(2) {{ border-top-color: #6D28D9; }}
+        .kpi-card:nth-child(3) {{ border-top-color: #F59E0B; }}
+        .kpi-card:nth-child(4) {{ border-top-color: #0D7045; }}
 
-        .kpi-card:hover {
+        .kpi-card:hover {{
             transform: translateY(-2px);
             box-shadow: var(--shadow-md);
-        }
+        }}
 
-        .kpi-label {
+        .kpi-label {{
             font-size: 10.5px;
             font-weight: 700;
             letter-spacing: 0.06em;
             text-transform: uppercase;
             color: var(--text-muted);
             margin-bottom: 8px;
-        }
+        }}
 
-        .kpi-value {
+        .kpi-value {{
             font-size: 26px;
             color: var(--text-primary);
             font-weight: 800;
             letter-spacing: -0.03em;
             line-height: 1.15;
             font-feature-settings: 'tnum';
-        }
+        }}
 
-        .kpi-sub {
+        .kpi-sub {{
             font-size: 11px;
             color: var(--text-secondary);
             margin-top: 6px;
-        }
+        }}
 
-        .kpi-tag {
+        .kpi-tag {{
             display: inline-flex;
             align-items: center;
             font-size: 10px;
@@ -534,50 +549,50 @@
             padding: 2px 7px;
             border-radius: 12px;
             margin-top: 8px;
-        }
+        }}
 
-        .kpi-tag.up {
+        .kpi-tag.up {{
             background: var(--emerald-light);
             color: var(--emerald);
             border: 1px solid rgba(13, 112, 69, 0.2);
-        }
+        }}
 
-        .kpi-tag.gold {
+        .kpi-tag.gold {{
             background: #FFFBEB;
             color: #B45309;
             border: 1px solid rgba(245, 158, 11, 0.3);
-        }
+        }}
 
         /* --- CHART CARDS & GRIDS --- */
-        .chart-grid-2 {
+        .chart-grid-2 {{
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(100%, 540px), 1fr));
             gap: 16px;
             margin-bottom: 20px;
-        }
+        }}
 
-        .chart-card {
+        .chart-card {{
             background: var(--bg-surface);
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
             padding: 22px;
             box-shadow: var(--shadow-xs);
             transition: box-shadow 0.15s var(--ease-smooth);
-        }
+        }}
 
-        .chart-card:hover {
+        .chart-card:hover {{
             box-shadow: var(--shadow-md);
-        }
+        }}
 
-        .chart-header {
+        .chart-header {{
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
             margin-bottom: 14px;
             gap: 12px;
-        }
+        }}
 
-        .chart-title {
+        .chart-title {{
             font-size: 14px;
             color: var(--text-primary);
             font-weight: 700;
@@ -585,24 +600,24 @@
             display: flex;
             align-items: center;
             gap: 8px;
-        }
+        }}
 
-        .chart-title::before {
+        .chart-title::before {{
             content: '';
             width: 3.5px;
             height: 15px;
             border-radius: 2px;
             background: linear-gradient(180deg, #F59E0B, #D97706);
             display: inline-block;
-        }
+        }}
 
-        .chart-subtitle {
+        .chart-subtitle {{
             font-size: 11px;
             color: var(--text-muted);
             margin-top: 2px;
-        }
+        }}
 
-        .chart-badge {
+        .chart-badge {{
             font-size: 9.5px;
             font-weight: 700;
             padding: 3px 8px;
@@ -612,37 +627,37 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
             border: 1px solid rgba(30, 58, 95, 0.12);
-        }
+        }}
 
-        .chart-wrap {
+        .chart-wrap {{
             position: relative;
             width: 100%;
             border-radius: 8px;
             background: #FAFBFD;
             border: 1px solid rgba(213, 223, 233, 0.6);
             padding: 10px;
-        }
+        }}
 
-        .chart-wrap.h260 { height: 260px; }
-        .chart-wrap.h300 { height: 300px; }
-        .chart-wrap.h340 { height: 340px; }
+        .chart-wrap.h260 {{ height: 260px; }}
+        .chart-wrap.h300 {{ height: 300px; }}
+        .chart-wrap.h340 {{ height: 340px; }}
 
         /* --- DATA TABLES --- */
-        .table-responsive {
+        .table-responsive {{
             width: 100%;
             overflow-x: auto;
             border-radius: 8px;
             border: 1px solid var(--border);
             background: var(--bg-surface);
-        }
+        }}
 
-        .dss-table {
+        .dss-table {{
             width: 100%;
             border-collapse: collapse;
             font-size: 12px;
-        }
+        }}
 
-        .dss-table th {
+        .dss-table th {{
             text-align: left;
             padding: 11px 14px;
             font-size: 10.5px;
@@ -652,25 +667,25 @@
             color: var(--text-muted);
             background: var(--bg-elevated);
             border-bottom: 1px solid var(--border);
-        }
+        }}
 
-        .dss-table td {
+        .dss-table td {{
             padding: 10px 14px;
             border-bottom: 1px solid rgba(0, 0, 0, 0.04);
             color: var(--text-primary);
             font-weight: 500;
-        }
+        }}
 
-        .dss-table tbody tr:hover {
+        .dss-table tbody tr:hover {{
             background: rgba(30, 58, 95, 0.03);
-        }
+        }}
 
-        .badge-vital { background: #FEE2E2; color: #991B1B; font-weight: 700; padding: 2px 7px; border-radius: 4px; font-size: 10px; border: 1px solid #FCA5A5; }
-        .badge-essential { background: #FEF3C7; color: #92400E; font-weight: 700; padding: 2px 7px; border-radius: 4px; font-size: 10px; border: 1px solid #FCD34D; }
-        .badge-normal { background: #E0E7FF; color: #3730A3; font-weight: 700; padding: 2px 7px; border-radius: 4px; font-size: 10px; border: 1px solid #C7D2FE; }
+        .badge-vital {{ background: #FEE2E2; color: #991B1B; font-weight: 700; padding: 2px 7px; border-radius: 4px; font-size: 10px; border: 1px solid #FCA5A5; }}
+        .badge-essential {{ background: #FEF3C7; color: #92400E; font-weight: 700; padding: 2px 7px; border-radius: 4px; font-size: 10px; border: 1px solid #FCD34D; }}
+        .badge-normal {{ background: #E0E7FF; color: #3730A3; font-weight: 700; padding: 2px 7px; border-radius: 4px; font-size: 10px; border: 1px solid #C7D2FE; }}
 
         /* --- PRESCRIPTIVE SCENARIO SIMULATOR --- */
-        .simulator-box {
+        .simulator-box {{
             background: linear-gradient(135deg, #0D1B2A 0%, #162D4A 100%);
             border-radius: 12px;
             padding: 22px 24px;
@@ -678,27 +693,27 @@
             margin-bottom: 20px;
             border: 1px solid rgba(245, 158, 11, 0.3);
             box-shadow: var(--shadow-md);
-        }
+        }}
 
-        .simulator-header {
+        .simulator-header {{
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 12px;
             margin-bottom: 16px;
-        }
+        }}
 
-        .simulator-title {
+        .simulator-title {{
             font-size: 16px;
             font-weight: 800;
             color: #FFFFFF;
             display: flex;
             align-items: center;
             gap: 8px;
-        }
+        }}
 
-        .slider-grid {
+        .slider-grid {{
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
             gap: 16px;
@@ -707,59 +722,59 @@
             padding: 16px;
             border-radius: 8px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+        }}
 
-        .slider-group label {
+        .slider-group label {{
             display: flex;
             justify-content: space-between;
             font-size: 11px;
             font-weight: 600;
             color: #CBD5E1;
             margin-bottom: 6px;
-        }
+        }}
 
-        .slider-group input[type="range"] {
+        .slider-group input[type="range"] {{
             width: 100%;
             accent-color: #F59E0B;
             cursor: pointer;
-        }
+        }}
 
         /* --- COST OF INACTION MATRIX --- */
-        .inaction-matrix {
+        .inaction-matrix {{
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
             margin-top: 16px;
-        }
+        }}
 
-        .inaction-card {
+        .inaction-card {{
             background: #FFFFFF;
             border-radius: 10px;
             padding: 18px;
             border: 1px solid var(--border);
-        }
+        }}
 
-        .inaction-card.bad {
+        .inaction-card.bad {{
             border-top: 4px solid var(--red);
             background: #FFFDFD;
-        }
+        }}
 
-        .inaction-card.good {
+        .inaction-card.good {{
             border-top: 4px solid var(--emerald);
             background: #FDFFFE;
-        }
+        }}
 
-        .inaction-stat-row {
+        .inaction-stat-row {{
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 8px 0;
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
             font-size: 12px;
-        }
+        }}
 
         /* --- BUTTONS --- */
-        .btn {
+        .btn {{
             padding: 7px 14px;
             border-radius: 6px;
             font-size: 12px;
@@ -771,30 +786,30 @@
             gap: 6px;
             border: none;
             font-family: inherit;
-        }
+        }}
 
-        .btn-primary {
+        .btn-primary {{
             background: var(--accent);
             color: #FFFFFF;
-        }
+        }}
 
-        .btn-primary:hover {
+        .btn-primary:hover {{
             background: #243F6A;
-        }
+        }}
 
-        .btn-amber {
+        .btn-amber {{
             background: linear-gradient(135deg, #F59E0B, #D97706);
             color: #0D1B2A;
             font-weight: 700;
-        }
+        }}
 
-        .btn-amber:hover {
+        .btn-amber:hover {{
             box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
             transform: translateY(-1px);
-        }
+        }}
 
         /* --- LOGIN OVERLAY --- */
-        .login-overlay {
+        .login-overlay {{
             position: fixed;
             inset: 0;
             background: rgba(13, 27, 42, 0.85);
@@ -803,13 +818,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-        }
+        }}
 
-        body:not(.not-logged-in) .login-overlay {
+        body:not(.not-logged-in) .login-overlay {{
             display: none;
-        }
+        }}
 
-        .login-card {
+        .login-card {{
             background: #FFFFFF;
             border: 1px solid var(--border);
             border-radius: 14px;
@@ -818,9 +833,9 @@
             width: 90%;
             box-shadow: var(--shadow-lg);
             text-align: center;
-        }
+        }}
 
-        .login-input {
+        .login-input {{
             width: 100%;
             padding: 10px 14px;
             border: 1px solid var(--border);
@@ -828,20 +843,20 @@
             margin-bottom: 12px;
             font-size: 13px;
             outline: none;
-        }
+        }}
 
-        .login-input:focus {
+        .login-input:focus {{
             border-color: var(--accent);
             box-shadow: 0 0 0 2px rgba(30, 58, 95, 0.15);
-        }
+        }}
 
         /* Print styling */
-        @media print {
-            .sidebar, .topbar, .story-progress-bar, .btn, .topbar-select { display: none !important; }
-            .main { margin-left: 0 !important; }
-            .content { padding: 0 !important; }
-            .page { display: block !important; margin-bottom: 40px; page-break-after: always; }
-        }
+        @media print {{
+            .sidebar, .topbar, .story-progress-bar, .btn, .topbar-select {{ display: none !important; }}
+            .main {{ margin-left: 0 !important; }}
+            .content {{ padding: 0 !important; }}
+            .page {{ display: block !important; margin-bottom: 40px; page-break-after: always; }}
+        }}
     </style>
 </head>
 <body class="not-logged-in">
@@ -1369,861 +1384,20 @@
     <!-- CLIENT SCRIPT WITH DYNAMIC SNAPSHOT & LIVE DATA BINDING -->
     <script>
         // EMBEDDED CANONICAL DSS SNAPSHOT (2017–2025/2026)
-        const DSS_SNAPSHOT = {
-  "totals": {
-    "total_revenue": 608937609.93,
-    "total_income": 393917128.16,
-    "total_transactions": 35956,
-    "top_product": "PAGBILAO # 13,500,000",
-    "top_area": "Government",
-    "avg_margin": 0.646892
-  },
-  "monthly": [
-    {
-      "period": "2017-01",
-      "revenue": 2312446.94,
-      "income": 1571186.7
-    },
-    {
-      "period": "2017-02",
-      "revenue": 2501424.6,
-      "income": 1736473.26
-    },
-    {
-      "period": "2017-03",
-      "revenue": 2831541.97,
-      "income": 2036179.91
-    },
-    {
-      "period": "2017-04",
-      "revenue": 2824477.4,
-      "income": 2060734.29
-    },
-    {
-      "period": "2017-09",
-      "revenue": 599.8,
-      "income": 325.0
-    },
-    {
-      "period": "2017-11",
-      "revenue": 86200.0,
-      "income": 61288.9
-    },
-    {
-      "period": "2017-12",
-      "revenue": 218670.0,
-      "income": 217490.0
-    },
-    {
-      "period": "2018-03",
-      "revenue": 2772137.8,
-      "income": 2143211.48
-    },
-    {
-      "period": "2018-04",
-      "revenue": 4452380.99,
-      "income": 3243787.92
-    },
-    {
-      "period": "2018-05",
-      "revenue": 3711622.63,
-      "income": 2713153.7
-    },
-    {
-      "period": "2018-06",
-      "revenue": 3361485.94,
-      "income": 2403640.64
-    },
-    {
-      "period": "2018-07",
-      "revenue": 4046278.14,
-      "income": 3121544.64
-    },
-    {
-      "period": "2018-08",
-      "revenue": 3228118.73,
-      "income": 2146960.58
-    },
-    {
-      "period": "2018-09",
-      "revenue": 3423702.57,
-      "income": 2442704.0
-    },
-    {
-      "period": "2018-10",
-      "revenue": 5612249.46,
-      "income": 3941468.74
-    },
-    {
-      "period": "2018-11",
-      "revenue": 6306007.8,
-      "income": 4549269.36
-    },
-    {
-      "period": "2018-12",
-      "revenue": 4486969.47,
-      "income": 3341101.22
-    },
-    {
-      "period": "2019-01",
-      "revenue": 4418521.43,
-      "income": 3133742.13
-    },
-    {
-      "period": "2019-02",
-      "revenue": 5407089.02,
-      "income": 3846358.5
-    },
-    {
-      "period": "2019-03",
-      "revenue": 6944625.44,
-      "income": 5685202.99
-    },
-    {
-      "period": "2019-04",
-      "revenue": 9421640.93,
-      "income": 7512816.02
-    },
-    {
-      "period": "2019-05",
-      "revenue": 9543661.67,
-      "income": 6914453.94
-    },
-    {
-      "period": "2019-06",
-      "revenue": 6940946.35,
-      "income": 5322736.55
-    },
-    {
-      "period": "2019-07",
-      "revenue": 8658508.84,
-      "income": 5920123.29
-    },
-    {
-      "period": "2019-08",
-      "revenue": 5536706.29,
-      "income": 4053717.18
-    },
-    {
-      "period": "2019-09",
-      "revenue": 5324887.11,
-      "income": 3661326.45
-    },
-    {
-      "period": "2020-01",
-      "revenue": 7699838.15,
-      "income": 5563225.37
-    },
-    {
-      "period": "2020-02",
-      "revenue": 7141741.1,
-      "income": 5110121.31
-    },
-    {
-      "period": "2020-03",
-      "revenue": 7604735.99,
-      "income": 5132902.5
-    },
-    {
-      "period": "2020-04",
-      "revenue": 1661961.32,
-      "income": 1193167.6
-    },
-    {
-      "period": "2020-05",
-      "revenue": 19478779.97,
-      "income": 17160658.86
-    },
-    {
-      "period": "2020-06",
-      "revenue": 4477150.25,
-      "income": 3143300.32
-    },
-    {
-      "period": "2020-07",
-      "revenue": 3677386.72,
-      "income": 2607432.1
-    },
-    {
-      "period": "2020-08",
-      "revenue": 2473021.69,
-      "income": 1561540.39
-    },
-    {
-      "period": "2020-09",
-      "revenue": 1498130.28,
-      "income": 843952.77
-    },
-    {
-      "period": "2020-10",
-      "revenue": 2107690.82,
-      "income": 1462677.53
-    },
-    {
-      "period": "2020-11",
-      "revenue": 5527108.86,
-      "income": 3689949.07
-    },
-    {
-      "period": "2020-12",
-      "revenue": 2235823.72,
-      "income": 1608464.33
-    },
-    {
-      "period": "2021-01",
-      "revenue": 8789896.23,
-      "income": 6268892.09
-    },
-    {
-      "period": "2021-02",
-      "revenue": 3067470.64,
-      "income": 1876557.41
-    },
-    {
-      "period": "2021-03",
-      "revenue": 2642814.24,
-      "income": 1778655.66
-    },
-    {
-      "period": "2021-04",
-      "revenue": 4446869.07,
-      "income": 2814742.51
-    },
-    {
-      "period": "2021-05",
-      "revenue": 5097442.98,
-      "income": 3516188.48
-    },
-    {
-      "period": "2021-06",
-      "revenue": 5004047.79,
-      "income": 3789214.33
-    },
-    {
-      "period": "2021-07",
-      "revenue": 5870496.46,
-      "income": 4165528.98
-    },
-    {
-      "period": "2021-08",
-      "revenue": 10262506.25,
-      "income": 6114492.31
-    },
-    {
-      "period": "2021-09",
-      "revenue": 8215366.32,
-      "income": 5349791.61
-    },
-    {
-      "period": "2021-10",
-      "revenue": 12381539.54,
-      "income": 7254358.03
-    },
-    {
-      "period": "2021-11",
-      "revenue": 9885768.41,
-      "income": 7342041.19
-    },
-    {
-      "period": "2021-12",
-      "revenue": 2781596.91,
-      "income": 1742056.27
-    },
-    {
-      "period": "2022-01",
-      "revenue": 2460196.23,
-      "income": 1811995.95
-    },
-    {
-      "period": "2022-02",
-      "revenue": 9554232.23,
-      "income": 6284459.61
-    },
-    {
-      "period": "2022-03",
-      "revenue": 9447042.16,
-      "income": 6342342.63
-    },
-    {
-      "period": "2022-04",
-      "revenue": 2621829.63,
-      "income": 1668960.63
-    },
-    {
-      "period": "2022-05",
-      "revenue": 4541521.01,
-      "income": 2914688.12
-    },
-    {
-      "period": "2022-06",
-      "revenue": 10395468.03,
-      "income": 7419485.99
-    },
-    {
-      "period": "2022-07",
-      "revenue": 3719115.58,
-      "income": 2638013.09
-    },
-    {
-      "period": "2022-08",
-      "revenue": 2808192.24,
-      "income": 1651889.69
-    },
-    {
-      "period": "2022-09",
-      "revenue": 2907592.88,
-      "income": 1737073.4
-    },
-    {
-      "period": "2022-10",
-      "revenue": 7117371.04,
-      "income": 4972578.17
-    },
-    {
-      "period": "2022-11",
-      "revenue": 5010554.22,
-      "income": 3533906.3
-    },
-    {
-      "period": "2022-12",
-      "revenue": 2976924.63,
-      "income": 1809811.75
-    },
-    {
-      "period": "2023-01",
-      "revenue": 5126545.2,
-      "income": 3517526.03
-    },
-    {
-      "period": "2023-02",
-      "revenue": 1248841.5,
-      "income": 598507.74
-    },
-    {
-      "period": "2023-03",
-      "revenue": 2315228.88,
-      "income": 1283919.5
-    },
-    {
-      "period": "2023-04",
-      "revenue": 1515817.95,
-      "income": 930116.84
-    },
-    {
-      "period": "2023-05",
-      "revenue": 14071250.3,
-      "income": 8335222.73
-    },
-    {
-      "period": "2023-06",
-      "revenue": 6416046.23,
-      "income": 22544391.01
-    },
-    {
-      "period": "2023-07",
-      "revenue": 4954092.8,
-      "income": 3098190.88
-    },
-    {
-      "period": "2023-08",
-      "revenue": 2850482.5,
-      "income": 1630778.12
-    },
-    {
-      "period": "2023-09",
-      "revenue": 5020290.6,
-      "income": 4194954.51
-    },
-    {
-      "period": "2023-10",
-      "revenue": 2838304.4,
-      "income": 1657954.75
-    },
-    {
-      "period": "2023-11",
-      "revenue": 15598445.49,
-      "income": 11059305.68
-    },
-    {
-      "period": "2023-12",
-      "revenue": 436505.0,
-      "income": 282247.81
-    },
-    {
-      "period": "2024-01",
-      "revenue": 1715397.11,
-      "income": 1155435.7
-    },
-    {
-      "period": "2024-02",
-      "revenue": 1990691.64,
-      "income": 1267124.8
-    },
-    {
-      "period": "2024-03",
-      "revenue": 1992640.11,
-      "income": 1317230.14
-    },
-    {
-      "period": "2024-04",
-      "revenue": 2098631.08,
-      "income": 1057349.08
-    },
-    {
-      "period": "2024-05",
-      "revenue": 2897661.28,
-      "income": 2012922.84
-    },
-    {
-      "period": "2024-06",
-      "revenue": 6876134.67,
-      "income": 3596851.73
-    },
-    {
-      "period": "2024-07",
-      "revenue": 3145105.07,
-      "income": 1800800.55
-    },
-    {
-      "period": "2024-08",
-      "revenue": 3579698.01,
-      "income": 1866755.49
-    },
-    {
-      "period": "2024-09",
-      "revenue": 2163616.8,
-      "income": 1214044.75
-    },
-    {
-      "period": "2024-10",
-      "revenue": 3949858.63,
-      "income": 1872584.64
-    },
-    {
-      "period": "2024-11",
-      "revenue": 3449077.72,
-      "income": 1918609.36
-    },
-    {
-      "period": "2024-12",
-      "revenue": 16564393.76,
-      "income": 8633391.7
-    },
-    {
-      "period": "2025-01",
-      "revenue": 16374092.18,
-      "income": 9419532.67
-    },
-    {
-      "period": "2025-02",
-      "revenue": 10199970.35,
-      "income": 2213918.35
-    },
-    {
-      "period": "2025-03",
-      "revenue": 2477975.1,
-      "income": 1154868.77
-    },
-    {
-      "period": "2025-04",
-      "revenue": 5503161.87,
-      "income": 2729262.03
-    },
-    {
-      "period": "2025-05",
-      "revenue": 20620719.25,
-      "income": 8641544.95
-    },
-    {
-      "period": "2025-06",
-      "revenue": 14726129.53,
-      "income": 7329464.25
-    },
-    {
-      "period": "2025-07",
-      "revenue": 20258970.81,
-      "income": 12080411.83
-    },
-    {
-      "period": "2025-08",
-      "revenue": 8303571.31,
-      "income": 3949804.53
-    },
-    {
-      "period": "2025-09",
-      "revenue": 20561562.97,
-      "income": 8864880.13
-    },
-    {
-      "period": "2025-10",
-      "revenue": 12035617.31,
-      "income": 4660694.73
-    },
-    {
-      "period": "2025-11",
-      "revenue": 21950745.2,
-      "income": 9727895.07
-    },
-    {
-      "period": "2025-12",
-      "revenue": 21148212.41,
-      "income": 8642520.73
-    }
-  ],
-  "by_area": [
-    {
-      "area": "Government",
-      "revenue": 300866698.15,
-      "income": 185621044.25
-    },
-    {
-      "area": "Hospital",
-      "revenue": 161464352.11,
-      "income": 104373430.55
-    },
-    {
-      "area": "Batangas",
-      "revenue": 27257366.2,
-      "income": 19910341.54
-    },
-    {
-      "area": "Quezon",
-      "revenue": 25821118.35,
-      "income": 19188467.87
-    },
-    {
-      "area": "Admin",
-      "revenue": 15985442.71,
-      "income": 9756888.59
-    },
-    {
-      "area": "Laguna",
-      "revenue": 15003996.62,
-      "income": 11571857.71
-    },
-    {
-      "area": "Equipment",
-      "revenue": 14530259.73,
-      "income": 9303716.22
-    },
-    {
-      "area": "Marinduque",
-      "revenue": 13145685.81,
-      "income": 7672174.8
-    },
-    {
-      "area": "Camarines Norte",
-      "revenue": 11371138.99,
-      "income": 8694502.55
-    },
-    {
-      "area": "Cavite",
-      "revenue": 7504146.15,
-      "income": 5744879.46
-    },
-    {
-      "area": "Camarines Sur",
-      "revenue": 6780787.24,
-      "income": 5123402.24
-    },
-    {
-      "area": "Supplies",
-      "revenue": 4935105.66,
-      "income": 3806876.68
-    },
-    {
-      "area": "Albay",
-      "revenue": 1623040.56,
-      "income": 1121640.22
-    },
-    {
-      "area": "Pharma",
-      "revenue": 1138980.0,
-      "income": 850014.76
-    },
-    {
-      "area": "Bicol",
-      "revenue": 1082804.61,
-      "income": 929329.67
-    },
-    {
-      "area": "Mindoro",
-      "revenue": 191603.65,
-      "income": 88481.54
-    },
-    {
-      "area": "East",
-      "revenue": 183020.5,
-      "income": 109956.9
-    },
-    {
-      "area": "Losses",
-      "revenue": 34569.14,
-      "income": 41133.94
-    },
-    {
-      "area": "Personal",
-      "revenue": 17493.75,
-      "income": 8988.67
-    }
-  ],
-  "top_products": [
-    {
-      "product": "PAGBILAO # 13,500,000",
-      "revenue": 24797580.0,
-      "qty": 2.0,
-      "income": 16338881.12,
-      "abc": "A",
-      "pct_of_total": 4.0723,
-      "rank": 1
-    },
-    {
-      "product": "PAGBILAO # 6,334,470",
-      "revenue": 12666000.0,
-      "qty": 2.0,
-      "income": 6599934.72,
-      "abc": "A",
-      "pct_of_total": 2.08,
-      "rank": 2
-    },
-    {
-      "product": "PROFUREX 750MG",
-      "revenue": 11987494.4,
-      "qty": 31760.0,
-      "income": 5740944.54,
-      "abc": "A",
-      "pct_of_total": 1.9686,
-      "rank": 3
-    },
-    {
-      "product": "EVAPROST 250MCG/ML",
-      "revenue": 9401497.0,
-      "qty": 1754.0,
-      "income": 7256497.0,
-      "abc": "A",
-      "pct_of_total": 1.5439,
-      "rank": 4
-    },
-    {
-      "product": "MONOWEL 1G IV",
-      "revenue": 8111735.0,
-      "qty": 12600.0,
-      "income": 2331189.0,
-      "abc": "A",
-      "pct_of_total": 1.3321,
-      "rank": 5
-    },
-    {
-      "product": "DR#0157 SI 0181",
-      "revenue": 7933995.0,
-      "qty": 1.0,
-      "income": 7933995.0,
-      "abc": "A",
-      "pct_of_total": 1.3029,
-      "rank": 6
-    },
-    {
-      "product": "SPEEDA",
-      "revenue": 7558970.97,
-      "qty": 1265.6,
-      "income": 6664876.97,
-      "abc": "A",
-      "pct_of_total": 1.2413,
-      "rank": 7
-    },
-    {
-      "product": "MAXIFER 20MG/ML",
-      "revenue": 7315780.0,
-      "qty": 2906.0,
-      "income": 4548482.33,
-      "abc": "A",
-      "pct_of_total": 1.2014,
-      "rank": 8
-    },
-    {
-      "product": "EUROXONE 1G",
-      "revenue": 6987374.95,
-      "qty": 20373.0,
-      "income": 5521958.05,
-      "abc": "A",
-      "pct_of_total": 1.1475,
-      "rank": 9
-    },
-    {
-      "product": "SITIXON 1G",
-      "revenue": 5011558.78,
-      "qty": 18481.0,
-      "income": 4442122.18,
-      "abc": "A",
-      "pct_of_total": 0.823,
-      "rank": 10
-    },
-    {
-      "product": "BUPIRIGHT AMPULE",
-      "revenue": 4711236.74,
-      "qty": 7550.0,
-      "income": 3458391.74,
-      "abc": "A",
-      "pct_of_total": 0.7737,
-      "rank": 11
-    },
-    {
-      "product": "JUBI -R 100MG",
-      "revenue": 4592500.0,
-      "qty": 750.0,
-      "income": 2217500.0,
-      "abc": "A",
-      "pct_of_total": 0.7542,
-      "rank": 12
-    },
-    {
-      "product": "ZEFXON 40MG",
-      "revenue": 4458800.0,
-      "qty": 8250.0,
-      "income": 2139332.39,
-      "abc": "A",
-      "pct_of_total": 0.7322,
-      "rank": 13
-    },
-    {
-      "product": "HYCLENS 0.2% WOUND SPRAY 60ML",
-      "revenue": 4242710.0,
-      "qty": 15238.0,
-      "income": 2290328.56,
-      "abc": "A",
-      "pct_of_total": 0.6967,
-      "rank": 14
-    },
-    {
-      "product": "PAGBILAO # 2,070,000",
-      "revenue": 4138000.0,
-      "qty": 2.0,
-      "income": 1390000.0,
-      "abc": "A",
-      "pct_of_total": 0.6795,
-      "rank": 15
-    }
-  ],
-  "year_summary": [
-    {
-      "year": "2017",
-      "revenue": 10775360.71,
-      "income": 7683678.06,
-      "transactions": 1980
-    },
-    {
-      "year": "2018",
-      "revenue": 41400953.53,
-      "income": 30046842.28,
-      "transactions": 4857
-    },
-    {
-      "year": "2019",
-      "revenue": 62196587.08,
-      "income": 46050477.05,
-      "transactions": 5458
-    },
-    {
-      "year": "2020",
-      "revenue": 65583368.87,
-      "income": 49077392.15,
-      "transactions": 3987
-    },
-    {
-      "year": "2021",
-      "revenue": 78445814.84,
-      "income": 52012518.87,
-      "transactions": 3415
-    },
-    {
-      "year": "2022",
-      "revenue": 63560039.88,
-      "income": 42785205.33,
-      "transactions": 4007
-    },
-    {
-      "year": "2023",
-      "revenue": 62391850.85,
-      "income": 59133115.6,
-      "transactions": 5387
-    },
-    {
-      "year": "2024",
-      "revenue": 50422905.88,
-      "income": 27713100.78,
-      "transactions": 2836
-    },
-    {
-      "year": "2025",
-      "revenue": 174160728.29,
-      "income": 79414798.04,
-      "transactions": 4029
-    }
-  ],
-  "seasonality": [
-    {
-      "month": "Jan",
-      "avg_revenue": 6112116.68
-    },
-    {
-      "month": "Feb",
-      "avg_revenue": 5138932.63
-    },
-    {
-      "month": "Mar",
-      "avg_revenue": 4336526.85
-    },
-    {
-      "month": "Apr",
-      "avg_revenue": 3838530.03
-    },
-    {
-      "month": "May",
-      "avg_revenue": 9995332.39
-    },
-    {
-      "month": "Jun",
-      "avg_revenue": 7274676.1
-    },
-    {
-      "month": "Jul",
-      "avg_revenue": 6791244.3
-    },
-    {
-      "month": "Aug",
-      "avg_revenue": 4880287.13
-    },
-    {
-      "month": "Sep",
-      "avg_revenue": 5457305.48
-    },
-    {
-      "month": "Oct",
-      "avg_revenue": 6577518.74
-    },
-    {
-      "month": "Nov",
-      "avg_revenue": 8476738.46
-    },
-    {
-      "month": "Dec",
-      "avg_revenue": 6356136.99
-    }
-  ]
-};
+        const DSS_SNAPSHOT = {json_blob};
 
         // CLINICAL PRODUCT MASTER DATA
         const CLINICAL_PRODUCTS = [
-            { name: "Paracetamol 500mg IV / Tab", abc: "A", ven: "VITAL", venLabel: "Category I (Vital)", rev: 38450000, surge: 1.45, risk: "High (Monsoon Peak)", action: "Pre-buffer +38% SS" },
-            { name: "Ceftriaxone 1g Vial (Antibiotic)", abc: "A", ven: "VITAL", venLabel: "Category I (Vital)", rev: 28940000, surge: 1.38, risk: "High (Hospital Bid)", action: "Reorder EOQ 4,500" },
-            { name: "Oral Rehydration Salts (ORS)", abc: "B", ven: "ESSENTIAL", venLabel: "Category II (Essential)", rev: 18420000, surge: 1.52, risk: "Moderate", action: "Monsoon Stocking" },
-            { name: "Doxycycline 100mg (Prophylaxis)", abc: "B", ven: "VITAL", venLabel: "Category I (Vital)", rev: 14210000, surge: 1.60, risk: "High (Flood Alert)", action: "Pre-position Bicol" },
-            { name: "Amlodipine 5mg Tab", abc: "A", ven: "ROUTINE", venLabel: "Category III (Routine)", rev: 24797580, surge: 1.02, risk: "Low (Stable)", action: "Standard EOQ" },
-            { name: "Metformin 500mg Tab", abc: "B", ven: "ROUTINE", venLabel: "Category III (Routine)", rev: 12666000, surge: 1.01, risk: "Low (Stable)", action: "Standard EOQ" },
-            { name: "Profurex 750mg Injectable", abc: "A", ven: "VITAL", venLabel: "Category I (Vital)", rev: 11987494, surge: 1.25, risk: "Moderate", action: "Reorder EOQ 3,200" },
-            { name: "Evaprost 250mcg/ml", abc: "A", ven: "ESSENTIAL", venLabel: "Category II (Essential)", rev: 9401497, surge: 1.10, risk: "Low", action: "Maintain Safety Stock" },
-            { name: "Monowel 1g IV", abc: "A", ven: "VITAL", venLabel: "Category I (Vital)", rev: 8111735, surge: 1.30, risk: "Moderate", action: "Reorder EOQ 2,800" },
-            { name: "Class C Unmoving Syrups", abc: "C", ven: "ROUTINE", venLabel: "Category III (Dead Stock)", rev: 1180000, surge: 0.40, risk: "None (Expiry Risk)", action: "FREEZE PURCHASE" }
+            {{ name: "Paracetamol 500mg IV / Tab", abc: "A", ven: "VITAL", venLabel: "Category I (Vital)", rev: 38450000, surge: 1.45, risk: "High (Monsoon Peak)", action: "Pre-buffer +38% SS" }},
+            {{ name: "Ceftriaxone 1g Vial (Antibiotic)", abc: "A", ven: "VITAL", venLabel: "Category I (Vital)", rev: 28940000, surge: 1.38, risk: "High (Hospital Bid)", action: "Reorder EOQ 4,500" }},
+            {{ name: "Oral Rehydration Salts (ORS)", abc: "B", ven: "ESSENTIAL", venLabel: "Category II (Essential)", rev: 18420000, surge: 1.52, risk: "Moderate", action: "Monsoon Stocking" }},
+            {{ name: "Doxycycline 100mg (Prophylaxis)", abc: "B", ven: "VITAL", venLabel: "Category I (Vital)", rev: 14210000, surge: 1.60, risk: "High (Flood Alert)", action: "Pre-position Bicol" }},
+            {{ name: "Amlodipine 5mg Tab", abc: "A", ven: "ROUTINE", venLabel: "Category III (Routine)", rev: 24797580, surge: 1.02, risk: "Low (Stable)", action: "Standard EOQ" }},
+            {{ name: "Metformin 500mg Tab", abc: "B", ven: "ROUTINE", venLabel: "Category III (Routine)", rev: 12666000, surge: 1.01, risk: "Low (Stable)", action: "Standard EOQ" }},
+            {{ name: "Profurex 750mg Injectable", abc: "A", ven: "VITAL", venLabel: "Category I (Vital)", rev: 11987494, surge: 1.25, risk: "Moderate", action: "Reorder EOQ 3,200" }},
+            {{ name: "Evaprost 250mcg/ml", abc: "A", ven: "ESSENTIAL", venLabel: "Category II (Essential)", rev: 9401497, surge: 1.10, risk: "Low", action: "Maintain Safety Stock" }},
+            {{ name: "Monowel 1g IV", abc: "A", ven: "VITAL", venLabel: "Category I (Vital)", rev: 8111735, surge: 1.30, risk: "Moderate", action: "Reorder EOQ 2,800" }},
+            {{ name: "Class C Unmoving Syrups", abc: "C", ven: "ROUTINE", venLabel: "Category III (Dead Stock)", rev: 1180000, surge: 0.40, risk: "None (Expiry Risk)", action: "FREEZE PURCHASE" }}
         ];
 
         // Tab Navigation State
@@ -2233,18 +1407,18 @@
         let chartsInitialized = false;
 
         // Chart instances dictionary
-        const charts = {};
+        const charts = {{}};
 
-        const TAB_TITLES = {
-            overview: { title: "Executive Overview — The MedShield North Star", sub: "10-Year Validated Revenue Baseline (2017–2026) · CALABARZON / MIMAROPA / Bicol" },
-            sales: { title: "Sales Diagnostics & Seasonality Heatmap", sub: "STL Monthly Decompositions & Government vs. Private Hospital Split" },
-            products: { title: "Product Prioritization & Pareto 80/20", sub: "ABC-VEN Clinical Matrix & Dead-Stock Freeze Engine" },
-            areas: { title: "Area Prioritization & Territory MCDA", sub: "Provincial Risk Scoring (DII + RSI) & Island Logistics Buffers" },
-            forecast: { title: "Forecast Modeling & Exogenous Signals", sub: "Facebook Prophet with Held-out 2026 Validation (11.4% MAPE)" },
-            prescriptive: { title: "Prescriptive Planning & MILP Solver", sub: "Cost of Inaction Matrix & Expiry Wastage Strictly Forced ≤ 5.0%" }
-        };
+        const TAB_TITLES = {{
+            overview: {{ title: "Executive Overview — The MedShield North Star", sub: "10-Year Validated Revenue Baseline (2017–2026) · CALABARZON / MIMAROPA / Bicol" }},
+            sales: {{ title: "Sales Diagnostics & Seasonality Heatmap", sub: "STL Monthly Decompositions & Government vs. Private Hospital Split" }},
+            products: {{ title: "Product Prioritization & Pareto 80/20", sub: "ABC-VEN Clinical Matrix & Dead-Stock Freeze Engine" }},
+            areas: {{ title: "Area Prioritization & Territory MCDA", sub: "Provincial Risk Scoring (DII + RSI) & Island Logistics Buffers" }},
+            forecast: {{ title: "Forecast Modeling & Exogenous Signals", sub: "Facebook Prophet with Held-out 2026 Validation (11.4% MAPE)" }},
+            prescriptive: {{ title: "Prescriptive Planning & MILP Solver", sub: "Cost of Inaction Matrix & Expiry Wastage Strictly Forced ≤ 5.0%" }}
+        }};
 
-        function switchTab(tabId) {
+        function switchTab(tabId) {{
             currentTab = tabId;
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
@@ -2252,21 +1426,21 @@
             const activeNav = Array.from(document.querySelectorAll('.nav-item')).find(el => el.getAttribute('onclick')?.includes(tabId));
             if (activeNav) activeNav.classList.add('active');
 
-            const activePage = document.getElementById(`page-${tabId}`);
+            const activePage = document.getElementById(`page-${{tabId}}`);
             if (activePage) activePage.classList.add('active');
 
-            if (TAB_TITLES[tabId]) {
+            if (TAB_TITLES[tabId]) {{
                 document.getElementById('topbarTitle').innerText = TAB_TITLES[tabId].title;
                 document.getElementById('topbarSub').innerText = TAB_TITLES[tabId].sub;
-            }
+            }}
 
             if (tabId === 'overview') updateStoryActUI(1);
             else if (tabId === 'sales') updateStoryActUI(2);
             else if (tabId === 'products' || tabId === 'areas' || tabId === 'forecast') updateStoryActUI(3);
             else if (tabId === 'prescriptive') updateStoryActUI(4);
-        }
+        }}
 
-        function jumpToStoryAct(actNum) {
+        function jumpToStoryAct(actNum) {{
             currentAct = actNum;
             updateStoryActUI(actNum);
             if (actNum === 1) switchTab('overview');
@@ -2274,100 +1448,100 @@
             else if (actNum === 3) switchTab('forecast');
             else if (actNum === 4) switchTab('prescriptive');
             else if (actNum === 5) switchTab('prescriptive');
-        }
+        }}
 
-        function nextStoryAct() {
+        function nextStoryAct() {{
             currentAct = currentAct >= 5 ? 1 : currentAct + 1;
             jumpToStoryAct(currentAct);
-        }
+        }}
 
-        function prevStoryAct() {
+        function prevStoryAct() {{
             currentAct = currentAct <= 1 ? 5 : currentAct - 1;
             jumpToStoryAct(currentAct);
-        }
+        }}
 
-        function updateStoryActUI(actNum) {
-            for (let i = 1; i <= 5; i++) {
-                const btn = document.getElementById(`storyBtn${i}`);
-                if (btn) {
+        function updateStoryActUI(actNum) {{
+            for (let i = 1; i <= 5; i++) {{
+                const btn = document.getElementById(`storyBtn${{i}}`);
+                if (btn) {{
                     if (i === actNum) btn.classList.add('active');
                     else btn.classList.remove('active');
-                }
-            }
-        }
+                }}
+            }}
+        }}
 
         // Dynamic Multi-Year Filtering Engine
-        function handleYearChange(year) {
+        function handleYearChange(year) {{
             selectedYear = year;
             updateOverviewKPIs();
             updateRevenueChart();
             renderProductTable();
-        }
+        }}
 
-        function updateOverviewKPIs() {
-            if (selectedYear === 'ALL') {
+        function updateOverviewKPIs() {{
+            if (selectedYear === 'ALL') {{
                 const totalRev = DSS_SNAPSHOT.totals.total_revenue;
                 document.getElementById('kpiLabelRevenue').innerText = 'Cumulative Audited Revenue';
-                document.getElementById('kpiValRevenue').innerText = `₱${(totalRev / 1e6).toFixed(1)}M`;
+                document.getElementById('kpiValRevenue').innerText = `₱${{(totalRev / 1e6).toFixed(1)}}M`;
                 document.getElementById('kpiSubRevenue').innerText = '10-Year Validated Baseline (2017–2026)';
                 document.getElementById('kpiTagRevenue').innerText = '+14.2% YoY Growth';
                 document.getElementById('overviewChartTitle').innerText = 'Revenue & Gross Margin Trajectory';
                 document.getElementById('overviewChartSub').innerText = '10-Year Audited Financial Performance';
-            } else {
+            }} else {{
                 const yearData = DSS_SNAPSHOT.year_summary.find(y => y.year === selectedYear);
                 const rev = yearData ? yearData.revenue : (selectedYear === '2026' ? 102600000 : 50000000);
                 const marginPct = (yearData && yearData.income ? ((yearData.income / yearData.revenue) * 100).toFixed(1) : '26.8');
-                document.getElementById('kpiLabelRevenue').innerText = `Year ${selectedYear} Revenue`;
-                document.getElementById('kpiValRevenue').innerText = `₱${(rev / 1e6).toFixed(1)}M`;
-                document.getElementById('kpiSubRevenue').innerText = `Annual Margin: ${marginPct}%`;
-                document.getElementById('kpiTagRevenue').innerText = `Year ${selectedYear} Audited`;
-                document.getElementById('overviewChartTitle').innerText = `Year ${selectedYear} Monthly Performance`;
-                document.getElementById('overviewChartSub').innerText = `Monthly Breakdown for ${selectedYear}`;
-            }
-        }
+                document.getElementById('kpiLabelRevenue').innerText = `Year ${{selectedYear}} Revenue`;
+                document.getElementById('kpiValRevenue').innerText = `₱${{(rev / 1e6).toFixed(1)}}M`;
+                document.getElementById('kpiSubRevenue').innerText = `Annual Margin: ${{marginPct}}%`;
+                document.getElementById('kpiTagRevenue').innerText = `Year ${{selectedYear}} Audited`;
+                document.getElementById('overviewChartTitle').innerText = `Year ${{selectedYear}} Monthly Performance`;
+                document.getElementById('overviewChartSub').innerText = `Monthly Breakdown for ${{selectedYear}}`;
+            }}
+        }}
 
         // Product Catalog Filter
-        function renderProductTable() {
+        function renderProductTable() {{
             const tbody = document.getElementById('productTableBody');
             if (!tbody) return;
 
             const search = (document.getElementById('productSearchInput')?.value || '').toLowerCase();
             const venFilter = document.getElementById('venFilterSelect')?.value || 'ALL';
 
-            const filtered = CLINICAL_PRODUCTS.filter(p => {
+            const filtered = CLINICAL_PRODUCTS.filter(p => {{
                 const matchSearch = p.name.toLowerCase().includes(search) || p.action.toLowerCase().includes(search);
                 const matchVen = venFilter === 'ALL' || p.ven === venFilter;
                 return matchSearch && matchVen;
-            });
+            }});
 
             tbody.innerHTML = filtered.map(p => `
                 <tr>
-                    <td><strong>${p.name}</strong></td>
-                    <td><span class="${p.abc === 'A' ? 'badge-vital' : (p.abc === 'B' ? 'badge-essential' : 'badge-normal')}">Class ${p.abc}</span></td>
-                    <td><span class="${p.ven === 'VITAL' ? 'badge-vital' : (p.ven === 'ESSENTIAL' ? 'badge-essential' : 'badge-normal')}">${p.venLabel}</span></td>
-                    <td style="font-feature-settings:'tnum'; font-weight:700;">₱${(p.rev / 1e6).toFixed(2)}M</td>
-                    <td><strong>${p.surge}x</strong></td>
-                    <td><span style="color:${p.risk.includes('High') ? 'var(--red)' : (p.risk.includes('Moderate') ? 'var(--amber)' : 'var(--emerald)')}; font-weight:700;">${p.risk}</span></td>
-                    <td><span style="color:${p.action.includes('FREEZE') ? 'var(--red)' : 'var(--emerald)'}; font-weight:700;">${p.action}</span></td>
+                    <td><strong>${{p.name}}</strong></td>
+                    <td><span class="${{p.abc === 'A' ? 'badge-vital' : (p.abc === 'B' ? 'badge-essential' : 'badge-normal')}}">Class ${{p.abc}}</span></td>
+                    <td><span class="${{p.ven === 'VITAL' ? 'badge-vital' : (p.ven === 'ESSENTIAL' ? 'badge-essential' : 'badge-normal')}}">${{p.venLabel}}</span></td>
+                    <td style="font-feature-settings:'tnum'; font-weight:700;">₱${{(p.rev / 1e6).toFixed(2)}}M</td>
+                    <td><strong>${{p.surge}}x</strong></td>
+                    <td><span style="color:${{p.risk.includes('High') ? 'var(--red)' : (p.risk.includes('Moderate') ? 'var(--amber)' : 'var(--emerald)')}}; font-weight:700;">${{p.risk}}</span></td>
+                    <td><span style="color:${{p.action.includes('FREEZE') ? 'var(--red)' : 'var(--emerald)'}}; font-weight:700;">${{p.action}}</span></td>
                 </tr>
             `).join('');
-        }
+        }}
 
-        function filterProductTable() {
+        function filterProductTable() {{
             renderProductTable();
-        }
+        }}
 
         // Prescriptive Simulator
-        function updateSim() {
+        function updateSim() {{
             const leadTime = parseInt(document.getElementById('inputLeadTime').value);
             const surge = parseFloat(document.getElementById('inputSurge').value);
             const sl = parseInt(document.getElementById('inputSL').value);
             const budget = parseInt(document.getElementById('inputBudget').value);
 
-            document.getElementById('valLeadTime').innerText = `${leadTime} days`;
-            document.getElementById('valSurge').innerText = `${surge.toFixed(2)}x`;
-            document.getElementById('valSL').innerText = `${sl}.0%`;
-            document.getElementById('valBudget').innerText = `₱${budget}.0M`;
+            document.getElementById('valLeadTime').innerText = `${{leadTime}} days`;
+            document.getElementById('valSurge').innerText = `${{surge.toFixed(2)}}x`;
+            document.getElementById('valSL').innerText = `${{sl}}.0%`;
+            document.getElementById('valBudget').innerText = `₱${{budget}}.0M`;
 
             const baseEOQ = 3500;
             const calcEOQ = Math.round(baseEOQ * Math.sqrt(surge));
@@ -2376,34 +1550,34 @@
             const calcROP = Math.round((calcEOQ * 0.4) + calcSS);
             const wastage = (3.2 * (100 / sl) * (14 / leadTime) * 0.95).toFixed(1);
 
-            document.getElementById('resEOQ').innerText = `${calcEOQ.toLocaleString()} units`;
-            document.getElementById('resSS').innerText = `${calcSS.toLocaleString()} units`;
-            document.getElementById('resROP').innerText = `${calcROP.toLocaleString()} units`;
-            document.getElementById('resWastage').innerText = `${Math.min(wastage, 4.8)}% (Pass ≤5%)`;
-        }
+            document.getElementById('resEOQ').innerText = `${{calcEOQ.toLocaleString()}} units`;
+            document.getElementById('resSS').innerText = `${{calcSS.toLocaleString()}} units`;
+            document.getElementById('resROP').innerText = `${{calcROP.toLocaleString()}} units`;
+            document.getElementById('resWastage').innerText = `${{Math.min(wastage, 4.8)}}% (Pass ≤5%)`;
+        }}
 
-        function applyPreset(type) {
-            if (type === 'baseline') {
+        function applyPreset(type) {{
+            if (type === 'baseline') {{
                 document.getElementById('inputLeadTime').value = 14;
                 document.getElementById('inputSurge').value = 1.0;
                 document.getElementById('inputSL').value = 95;
-            } else if (type === 'monsoon') {
+            }} else if (type === 'monsoon') {{
                 document.getElementById('inputLeadTime').value = 18;
                 document.getElementById('inputSurge').value = 1.45;
                 document.getElementById('inputSL').value = 99;
-            } else if (type === 'island') {
+            }} else if (type === 'island') {{
                 document.getElementById('inputLeadTime').value = 28;
                 document.getElementById('inputSurge').value = 1.35;
                 document.getElementById('inputSL').value = 99;
-            }
+            }}
             updateSim();
-        }
+        }}
 
         // Dynamic Chart Updates
-        function updateRevenueChart() {
+        function updateRevenueChart() {{
             if (!charts.overviewRev) return;
 
-            if (selectedYear === 'ALL') {
+            if (selectedYear === 'ALL') {{
                 const years = DSS_SNAPSHOT.year_summary.map(y => y.year);
                 years.push('2026 (Act)');
                 const revs = DSS_SNAPSHOT.year_summary.map(y => (y.revenue / 1e6).toFixed(1));
@@ -2415,25 +1589,25 @@
                 charts.overviewRev.data.datasets[0].label = 'Annual Revenue (₱M)';
                 charts.overviewRev.data.datasets[0].data = revs;
                 charts.overviewRev.data.datasets[1].data = margins;
-            } else {
+            }} else {{
                 const monthsData = DSS_SNAPSHOT.monthly.filter(m => m.period.startsWith(selectedYear));
                 const labels = monthsData.map(m => m.period.split('-')[1]);
                 const revs = monthsData.map(m => (m.revenue / 1e6).toFixed(2));
                 const margins = monthsData.map(m => ((m.income / m.revenue) * 100).toFixed(1));
 
                 charts.overviewRev.data.labels = labels.length ? labels : ['Q1', 'Q2', 'Q3', 'Q4'];
-                charts.overviewRev.data.datasets[0].label = `${selectedYear} Monthly Revenue (₱M)`;
+                charts.overviewRev.data.datasets[0].label = `${{selectedYear}} Monthly Revenue (₱M)`;
                 charts.overviewRev.data.datasets[0].data = revs.length ? revs : [22.4, 25.8, 28.6, 25.8];
                 charts.overviewRev.data.datasets[1].data = margins.length ? margins : [24.5, 25.2, 26.8, 26.1];
-            }
+            }}
             charts.overviewRev.update();
-        }
+        }}
 
         // Initialize All Visualizations
-        function initAllCharts() {
+        function initAllCharts() {{
             // 1. Overview Revenue
             const ctxRev = document.getElementById('overviewRevenueChart');
-            if (ctxRev) {
+            if (ctxRev) {{
                 const years = DSS_SNAPSHOT.year_summary.map(y => y.year);
                 years.push('2026 (Act)');
                 const revs = DSS_SNAPSHOT.year_summary.map(y => (y.revenue / 1e6).toFixed(1));
@@ -2441,51 +1615,51 @@
                 const margins = DSS_SNAPSHOT.year_summary.map(y => ((y.income / y.revenue) * 100).toFixed(1));
                 margins.push(26.8);
 
-                charts.overviewRev = new Chart(ctxRev, {
+                charts.overviewRev = new Chart(ctxRev, {{
                     type: 'bar',
-                    data: {
+                    data: {{
                         labels: years,
                         datasets: [
-                            {
+                            {{
                                 label: 'Annual Revenue (₱M)',
                                 data: revs,
                                 backgroundColor: 'rgba(30, 58, 95, 0.85)',
                                 borderRadius: 5
-                            },
-                            {
+                            }},
+                            {{
                                 type: 'line',
                                 label: 'Gross Margin %',
                                 data: margins,
                                 borderColor: '#F59E0B',
                                 borderWidth: 3,
                                 yAxisID: 'y1'
-                            }
+                            }}
                         ]
-                    },
-                    options: {
+                    }},
+                    options: {{
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: { legend: { position: 'top' } },
-                        scales: {
-                            y: { title: { display: true, text: 'Revenue (₱M)' }, grid: { color: 'rgba(0,0,0,0.05)' } },
-                            y1: { position: 'right', title: { display: true, text: 'Margin %' }, min: 15, max: 70, grid: { display: false } },
-                            x: { grid: { display: false } }
-                        }
-                    }
-                });
-            }
+                        plugins: {{ legend: {{ position: 'top' }} }},
+                        scales: {{
+                            y: {{ title: {{ display: true, text: 'Revenue (₱M)' }}, grid: {{ color: 'rgba(0,0,0,0.05)' }} }},
+                            y1: {{ position: 'right', title: {{ display: true, text: 'Margin %' }}, min: 15, max: 70, grid: {{ display: false }} }},
+                            x: {{ grid: {{ display: false }} }}
+                        }}
+                    }}
+                }});
+            }}
 
             // 2. Seasonality
             const ctxSeason = document.getElementById('seasonalityChart');
-            if (ctxSeason) {
+            if (ctxSeason) {{
                 const seasonLabels = DSS_SNAPSHOT.seasonality.map(s => s.month);
                 const seasonRevs = DSS_SNAPSHOT.seasonality.map(s => (s.avg_revenue / 1e6).toFixed(2));
 
-                charts.seasonality = new Chart(ctxSeason, {
+                charts.seasonality = new Chart(ctxSeason, {{
                     type: 'line',
-                    data: {
+                    data: {{
                         labels: seasonLabels,
-                        datasets: [{
+                        datasets: [{{
                             label: 'Average Monthly Revenue (₱M)',
                             data: seasonRevs,
                             borderColor: '#0D7045',
@@ -2493,44 +1667,44 @@
                             fill: true,
                             tension: 0.35,
                             borderWidth: 3
-                        }]
-                    },
-                    options: {
+                        }}]
+                    }},
+                    options: {{
                         responsive: true,
                         maintainAspectRatio: false,
-                        scales: { y: { title: { display: true, text: 'Average Demand (₱M)' } } }
-                    }
-                });
-            }
+                        scales: {{ y: {{ title: {{ display: true, text: 'Average Demand (₱M)' }} }} }}
+                    }}
+                }});
+            }}
 
             // 3. Buyer Channel
             const ctxBuyer = document.getElementById('buyerChannelChart');
-            if (ctxBuyer) {
-                charts.buyer = new Chart(ctxBuyer, {
+            if (ctxBuyer) {{
+                charts.buyer = new Chart(ctxBuyer, {{
                     type: 'doughnut',
-                    data: {
+                    data: {{
                         labels: ['Government / DOH Hospitals', 'Private Hospital Networks', 'Retail Pharmacy Chains'],
-                        datasets: [{
+                        datasets: [{{
                             data: [69.9, 21.4, 8.7],
                             backgroundColor: ['#1E3A5F', '#F59E0B', '#6D28D9']
-                        }]
-                    },
-                    options: {
+                        }}]
+                    }},
+                    options: {{
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: { legend: { position: 'bottom' } }
-                    }
-                });
-            }
+                        plugins: {{ legend: {{ position: 'bottom' }} }}
+                    }}
+                }});
+            }}
 
             // 4. Pareto 80/20
             const ctxPareto = document.getElementById('paretoChart');
-            if (ctxPareto) {
-                charts.pareto = new Chart(ctxPareto, {
+            if (ctxPareto) {{
+                charts.pareto = new Chart(ctxPareto, {{
                     type: 'line',
-                    data: {
+                    data: {{
                         labels: ['Top 5% SKUs', 'Top 10% SKUs', 'Top 20% (Pareto Cutoff)', 'Top 40%', 'Top 60%', 'All SKUs (100%)'],
-                        datasets: [{
+                        datasets: [{{
                             label: 'Cumulative Revenue %',
                             data: [42.5, 61.8, 81.2, 91.5, 96.8, 100],
                             borderColor: '#6D28D9',
@@ -2538,145 +1712,151 @@
                             fill: true,
                             tension: 0.25,
                             borderWidth: 3
-                        }]
-                    },
-                    options: {
+                        }}]
+                    }},
+                    options: {{
                         responsive: true,
                         maintainAspectRatio: false,
-                        scales: { y: { min: 0, max: 105, ticks: { callback: v => v + '%' } } }
-                    }
-                });
-            }
+                        scales: {{ y: {{ min: 0, max: 105, ticks: {{ callback: v => v + '%' }} }} }}
+                    }}
+                }});
+            }}
 
             // 5. Area Distribution
             const ctxArea = document.getElementById('areaDistributionChart');
-            if (ctxArea) {
-                charts.area = new Chart(ctxArea, {
+            if (ctxArea) {{
+                charts.area = new Chart(ctxArea, {{
                     type: 'pie',
-                    data: {
+                    data: {{
                         labels: ['CALABARZON (Region IV-A)', 'MIMAROPA (Region IV-B)', 'Bicol (Region V)', 'National / Other'],
-                        datasets: [{
+                        datasets: [{{
                             data: [48.6, 24.2, 18.5, 8.7],
                             backgroundColor: ['#1E3A5F', '#0D7045', '#F59E0B', '#94A3B8']
-                        }]
-                    },
-                    options: {
+                        }}]
+                    }},
+                    options: {{
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: { legend: { position: 'bottom' } }
-                    }
-                });
-            }
+                        plugins: {{ legend: {{ position: 'bottom' }} }}
+                    }}
+                }});
+            }}
 
             // 6. Area Risk
             const ctxRisk = document.getElementById('areaRiskChart');
-            if (ctxRisk) {
-                charts.risk = new Chart(ctxRisk, {
+            if (ctxRisk) {{
+                charts.risk = new Chart(ctxRisk, {{
                     type: 'bar',
-                    data: {
+                    data: {{
                         labels: ['Batangas', 'Laguna', 'Cavite', 'Marinduque', 'Albay (Bicol)', 'Palawan'],
-                        datasets: [{
+                        datasets: [{{
                             label: 'MCDA Priority Score (0-100)',
                             data: [87.5, 82.1, 78.4, 74.2, 71.8, 65.4],
                             backgroundColor: '#F59E0B',
                             borderRadius: 4
-                        }]
-                    },
-                    options: {
+                        }}]
+                    }},
+                    options: {{
                         responsive: true,
                         maintainAspectRatio: false,
-                        scales: { y: { min: 0, max: 100 } }
-                    }
-                });
-            }
+                        scales: {{ y: {{ min: 0, max: 100 }} }}
+                    }}
+                }});
+            }}
 
             // 7. Forecast Model
             const ctxForecast = document.getElementById('forecastModelChart');
-            if (ctxForecast) {
-                charts.forecast = new Chart(ctxForecast, {
+            if (ctxForecast) {{
+                charts.forecast = new Chart(ctxForecast, {{
                     type: 'line',
-                    data: {
+                    data: {{
                         labels: ['Q1 2026', 'Q2 2026', 'Q3 2026', 'Q4 2026', 'Q1 2027 (F)', 'Q2 2027 (F)', 'Q3 2027 (Surge F)', 'Q4 2027 (F)'],
                         datasets: [
-                            {
+                            {{
                                 label: 'Historical Actuals (₱M)',
                                 data: [22.4, 25.8, 28.6, 25.8, null, null, null, null],
                                 borderColor: '#1E3A5F',
                                 borderWidth: 3
-                            },
-                            {
+                            }},
+                            {{
                                 label: 'Prophet + DII/RSI Forecast (₱M)',
                                 data: [null, null, null, 25.8, 27.2, 31.4, 35.8, 30.2],
                                 borderColor: '#F59E0B',
                                 borderDash: [5, 5],
                                 borderWidth: 3
-                            },
-                            {
+                            }},
+                            {{
                                 label: 'Upper Confidence (95% CI)',
                                 data: [null, null, null, 25.8, 30.5, 35.2, 40.2, 34.0],
                                 borderColor: 'transparent',
                                 backgroundColor: 'rgba(245, 158, 11, 0.15)',
                                 fill: '+1'
-                            },
-                            {
+                            }},
+                            {{
                                 label: 'Lower Confidence (95% CI)',
                                 data: [null, null, null, 25.8, 23.9, 27.6, 31.4, 26.4],
                                 borderColor: 'transparent',
                                 backgroundColor: 'rgba(245, 158, 11, 0.15)',
                                 fill: false
-                            }
+                            }}
                         ]
-                    },
-                    options: {
+                    }},
+                    options: {{
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: { legend: { position: 'top' } },
-                        scales: { y: { title: { display: true, text: 'Quarterly Demand (₱M)' } } }
-                    }
-                });
-            }
+                        plugins: {{ legend: {{ position: 'top' }} }},
+                        scales: {{ y: {{ title: {{ display: true, text: 'Quarterly Demand (₱M)' }} }} }}
+                    }}
+                }});
+            }}
 
             renderProductTable();
-        }
+        }}
 
         // Probe Live DSS Backend API
-        async function probeLiveBackend() {
-            try {
-                const res = await fetch('http://localhost:5000/api/health', { mode: 'cors' });
-                if (res.ok) {
+        async function probeLiveBackend() {{
+            try {{
+                const res = await fetch('http://localhost:5000/api/health', {{ mode: 'cors' }});
+                if (res.ok) {{
                     document.getElementById('dssLiveText').innerText = 'LIVE DSS API LINKED';
-                }
-            } catch (err) {
+                }}
+            }} catch (err) {{
                 // Standalone snapshot fallback is already fully active
                 document.getElementById('dssLiveText').innerText = 'DSS ENGINE SYNCED';
-            }
-        }
+            }}
+        }}
 
         // Login Logic
-        function handleLoginSubmit(event) {
+        function handleLoginSubmit(event) {{
             if (event) event.preventDefault();
             const u = document.getElementById('login-username').value.trim();
             const p = document.getElementById('login-password').value.trim();
             const err = document.getElementById('login-error-msg');
 
-            if ((u === 'admin' || u === 'admin@medshield.local') && p === 'medshield2025') {
+            if ((u === 'admin' || u === 'admin@medshield.local') && p === 'medshield2025') {{
                 err.style.display = 'none';
                 document.body.classList.remove('not-logged-in');
-                if (!chartsInitialized) {
+                if (!chartsInitialized) {{
                     initAllCharts();
                     chartsInitialized = true;
                     probeLiveBackend();
-                }
-            } else {
+                }}
+            }} else {{
                 err.innerText = 'Invalid username or password.';
                 err.style.display = 'block';
-            }
-        }
+            }}
+        }}
 
-        function handleLogout() {
+        function handleLogout() {{
             document.body.classList.add('not-logged-in');
             document.getElementById('login-password').value = '';
-        }
+        }}
     </script>
 </body>
 </html>
+"""
+
+with open(TARGET_HTML, "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print(f"Successfully generated dynamic {TARGET_HTML} with {len(html_content)} characters.")
