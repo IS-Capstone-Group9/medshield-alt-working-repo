@@ -56,9 +56,15 @@ def supabase_fetch(table_name: str, params: dict[str, Any] | None = None) -> lis
 def local_snapshot() -> dict[str, Any]:
     import json
 
-    with REFERENCE_DATA.open("r", encoding="utf-8") as handle:
-        data = json.load(handle)
-    if PROCESSED_SALES_SNAPSHOT.exists():
+    data: dict[str, Any] = {}
+    if REFERENCE_DATA.exists():
+        with REFERENCE_DATA.open("r", encoding="utf-8") as handle:
+            data = json.load(handle)
+    elif PROCESSED_SALES_SNAPSHOT.exists():
+        with PROCESSED_SALES_SNAPSHOT.open("r", encoding="utf-8") as handle:
+            data = json.load(handle)
+
+    if PROCESSED_SALES_SNAPSHOT.exists() and REFERENCE_DATA.exists():
         with PROCESSED_SALES_SNAPSHOT.open("r", encoding="utf-8") as handle:
             sales = json.load(handle)
         for key in (
