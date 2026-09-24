@@ -12,6 +12,7 @@ import {
   DESCRIPTIVE_PERIOD_SCRIPT,
   patchDescriptivePeriodFilters,
 } from './descriptive-period-runtime'
+import { ODOMETER_SCRIPT } from './odometer-runtime'
 
 export type ListenerRecord = {
   target: EventTarget
@@ -30,6 +31,7 @@ const DASHBOARD_GLOBAL_HANDLERS = [
   'setYear',
   'setYoYYear',
   'setDescriptivePeriod',
+  'setDescriptiveGranularity',
   'setDescriptiveComparisonMode',
   'setCustomDateRange',
   'configureProductYearControls',
@@ -38,7 +40,7 @@ const DASHBOARD_GLOBAL_HANDLERS = [
   'buildCharts',
   'downloadTableAsCSV',
   'exportSalesGrowthCSV',
-  'setPlanningData', 'setPlanningResult', 'getPlanningRequest', 'invalidatePlan', 'changePlanningScope', 'requestPlanSolve', 'exportPlanningCSV',
+  'setPlanningData', 'setPlanningResult', 'getPlanningRequest', 'invalidatePlan', 'changePlanningScope', 'requestPlanSolve', 'exportPlanningCSV', 'setPrescriptivePreset', 'resetPlanningDefaults',
   'setExternalRegressionData',
   'renderExternalRegression',
   'changeRegressionScope',
@@ -50,6 +52,19 @@ const DASHBOARD_GLOBAL_HANDLERS = [
   'setSalesSectorsData',
   'renderSalesSectors',
   'setAreaPriorityWeights',
+  'selectRollupRegion',
+  'filterClientReferenceDirectory',
+  'changeClientRefPage',
+  'exportClientReferenceCSV',
+  'renderClientReferenceTable',
+  'setProductScenario',
+  'setProductCluster',
+  'setProductCategory',
+  'setProductCohort',
+  'updateProductMCDAWeights',
+  'resetProductMCDAWeights',
+  'exportProductPriorityCSV',
+  'renderProductPrioritizationTimeline',
   'setSalesHeatmapData',
   'changeHeatmapCategory',
   'renderSalesHeatmap',
@@ -75,6 +90,8 @@ const DASHBOARD_GLOBAL_HANDLERS = [
   'buildShowcaseCharts',
   'renderShowcaseDOMVisuals',
   'renderProductPrioritizationTimeline',
+  'renderOverviewThreatOdometer',
+  'animateRollingNumber',
 ] as const
 
 export function getExecutableDashboardScript(): string {
@@ -133,6 +150,7 @@ const PAGE_META`,
         if (typeof renderForecastValidation === 'function') renderForecastValidation();
         if (typeof renderExternalRegression === 'function') renderExternalRegression();
         if (typeof renderSalesHeatmap === 'function') renderSalesHeatmap();
+        if (typeof renderOverviewThreatOdometer === 'function') renderOverviewThreatOdometer();
         if (typeof renderShowcaseDOMVisuals === 'function') renderShowcaseDOMVisuals();
       }, 60);
     });
@@ -320,6 +338,7 @@ ${SALES_SECTORS_SCRIPT}
 ${FORECAST_VALIDATION_SCRIPT}
 ${EXTERNAL_REGRESSION_SCRIPT}
 ${PLANNING_SCRIPT}
+${ODOMETER_SCRIPT}
 ${patchedScript}
 \n${globalHandlerBridge}
 `

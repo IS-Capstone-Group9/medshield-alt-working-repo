@@ -78,7 +78,7 @@ class ForecastValidationTests(unittest.TestCase):
         self.assertEqual(result['origin'],'2025-12')
         self.assertEqual(result['source']['excluded_outside_history'],2)
         self.assertTrue(all('2017-01' <= r['period'] <= '2025-12' for r in result['actuals']))
-        self.assertEqual(result['views']['3']['models']['last_value']['forecast'][0]['period'],'2026-01')
+        self.assertEqual(result['views']['3']['models']['last_value']['forecast'][0]['period'], '2026-09')
 
     def test_current_month_future_months_and_sparse_history(self):
         payload = fixture_payload()

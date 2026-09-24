@@ -3,6 +3,7 @@ let selectedYear = 'all';`
 
 const DESCRIPTIVE_FILTER_STATE = `let comparisonMode = 'single';
 let descriptivePeriod = '12';
+let descriptiveGranularity = 'auto';
 let selectedYear = descriptivePhtDate().slice(0, 4);
 let customDateStart = descriptivePhtDate().slice(0, 4) + '-01-01';
 let customDateEnd = descriptivePhtDate();`
@@ -171,11 +172,11 @@ function descriptiveCustomDayCount() {
 }
 
 function descriptiveUsesDailyGrain() {
-  return descriptivePeriod === '30d' || (descriptivePeriod === 'custom' && descriptiveCustomDayCount() <= 31);
+  return descriptiveGranularity === 'auto' && descriptivePeriod === 'custom' && descriptiveCustomDayCount() <= 31;
 }
 
 function descriptiveUsesYearlyGrain() {
-  return descriptivePeriod === 'all';
+  return descriptiveGranularity === 'yearly' || (descriptiveGranularity === 'auto' && descriptivePeriod === 'all');
 }
 
 function descriptivePeriodIncludes(value) {
@@ -189,11 +190,6 @@ function descriptivePeriodIncludes(value) {
     if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text >= customDateStart && text <= customDateEnd;
     const month = text.slice(0, 7);
     return /^\d{4}-\d{2}$/.test(month) && month >= customDateStart.slice(0, 7) && month <= customDateEnd.slice(0, 7);
-  }
-  if (descriptivePeriod === '30d') {
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(text)) return false;
-    const end = descriptiveLatestObservedDate(), start = shiftIsoDate(end, -29);
-    return text >= start && text <= end;
   }
   const months = Number(descriptivePeriod);
   const end = descriptiveLatestObservedMonth();
@@ -309,10 +305,11 @@ function getDescriptiveSourceRows() {
 function getDescriptiveDetailedRows() {
   if (typeof salesSectorsData === 'undefined' || !salesSectorsData || !Array.isArray(salesSectorsData.rows)) return [];
   const daily = descriptiveUsesDailyGrain();
-  const key = row => String(daily ? row.date : row.period || '');
+  const key = row => String((daily && row.date) ? row.date : row.period || (row.date ? String(row.date).slice(0, 7) : ''));
   const allRows = salesSectorsData.rows.filter(row => key(row));
   if (descriptiveUsesYearlyGrain()) {
-    return allRows.filter(row => !descriptiveIsFuturePeriod(String(row.period || row.date || '')))
+    return allRows.filter(row => descriptivePeriodIncludes(String(row.date || row.period || ''))
+        && !descriptiveIsFuturePeriod(String(row.period || row.date || '')))
       .map(row => ({ ...row, evidence: row.evidence || 'actual' }));
   }
   const rawRows = descriptivePeriod === 'custom'
@@ -342,6 +339,22 @@ function getDescriptiveDetailedRows() {
     if (observed && observed.length) {
       observed.forEach(row => result.push({ ...row, evidence: row.evidence || 'actual' }));
       return;
+    }
+    if (daily) {
+      const monthObserved = observedByPeriod.get(period.slice(0, 7));
+      if (monthObserved && monthObserved.length) {
+        const monthDays = new Date(Number(period.slice(0, 4)), Number(period.slice(5, 7)), 0).getDate() || 30;
+        monthObserved.forEach(row => result.push({
+          ...row,
+          period: period.slice(0, 7),
+          date: period,
+          revenue: (Number(row.revenue) || 0) / monthDays,
+          quantity: (Number(row.quantity) || 0) / monthDays,
+          row_count: (Number(row.row_count) || 0) / monthDays,
+          evidence: row.evidence || 'actual'
+        }));
+        return;
+      }
     }
     if (descriptiveIsFuturePeriod(period)) return;
     let candidateYears = [1, 2, 3].map((yearsBack, index) => ({
@@ -402,30 +415,47 @@ function getDescriptiveMonthlyRows() {
 
 function descriptiveAxisPeriods() {
   if (descriptiveUsesYearlyGrain()) {
+    if (descriptivePeriod === 'custom') {
+      const firstYear = Number(customDateStart.slice(0, 4));
+      const lastYear = Number(customDateEnd.slice(0, 4));
+      return Array.from({ length: lastYear - firstYear + 1 }, (_, index) => String(firstYear + index));
+    }
+    if (descriptivePeriod !== 'all') {
+      const months = Number(descriptivePeriod);
+      const end = descriptiveLatestObservedMonth();
+      const start = shiftIsoPeriod(end, -(months - 1));
+      const firstYear = Number(start.slice(0, 4));
+      const lastYear = Number(end.slice(0, 4));
+      return Array.from({ length: lastYear - firstYear + 1 }, (_, index) => String(firstYear + index));
+    }
     const years = new Set();
     dashboardMonthlyRows().forEach(row => {
       const year = String(row.period || '').slice(0, 4);
       if (/^\d{4}$/.test(year) && !descriptiveIsFuturePeriod(year)) years.add(Number(year));
     });
-    if (typeof salesSectorsData !== 'undefined' && salesSectorsData && Array.isArray(salesSectorsData.rows)) {
-      salesSectorsData.rows.forEach(row => {
-        const year = String(row.period || row.date || '').slice(0, 4);
-        if (/^\d{4}$/.test(year) && !descriptiveIsFuturePeriod(year)) years.add(Number(year));
-      });
+    if (!years.size) {
+      for (let y = 2017; y <= Number(descriptivePhtDate().slice(0, 4)); y++) years.add(y);
     }
     const observed = [...years].filter(Number.isInteger).sort((left, right) => left - right);
     if (!observed.length) return [];
     return Array.from({ length: observed[observed.length - 1] - observed[0] + 1 }, (_, index) => String(observed[0] + index));
-  }
-  if (descriptivePeriod === '30d') {
-    const end = descriptiveLatestObservedDate();
-    return Array.from({ length: 30 }, (_, index) => shiftIsoDate(end, index - 29));
   }
   if (descriptivePeriod === 'custom') {
     if (descriptiveUsesDailyGrain()) {
       return Array.from({ length: descriptiveCustomDayCount() }, (_, index) => shiftIsoDate(customDateStart, index));
     }
     const start = customDateStart.slice(0, 7), end = customDateEnd.slice(0, 7), periods = [];
+    for (let period = start; period && period <= end; period = shiftIsoPeriod(period, 1)) periods.push(period);
+    return periods;
+  }
+  if (descriptivePeriod === 'all') {
+    const observed = dashboardMonthlyRows()
+      .map(row => String(row.period || ''))
+      .filter(period => /^\d{4}-\d{2}$/.test(period) && !descriptiveIsFuturePeriod(period))
+      .sort();
+    const start = observed[0] || '2017-01';
+    const end = observed[observed.length - 1] || descriptiveLatestObservedMonth();
+    const periods = [];
     for (let period = start; period && period <= end; period = shiftIsoPeriod(period, 1)) periods.push(period);
     return periods;
   }
@@ -486,14 +516,10 @@ function getDescriptivePriorDisplayRows() {
 function descriptivePeriodLabel() {
   if (descriptiveUsesYearlyGrain()) {
     const years = descriptiveAxisPeriods();
+    const scope = descriptivePeriod === 'all' ? 'All Time' : descriptivePeriod === 'custom' ? 'Custom Range' : 'Last ' + descriptivePeriod + ' Months';
     return years.length
-      ? 'All Time · ' + years[0] + '–' + descriptiveYearLabel(years[years.length - 1]) + ' · Yearly'
-      : 'All Time · Yearly';
-  }
-  if (descriptivePeriod === '30d') {
-    const end = descriptiveLatestObservedDate();
-    const formatter = new Intl.DateTimeFormat('en-PH', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
-    return 'Last 30 Days · through ' + formatter.format(new Date(end + 'T00:00:00Z'));
+      ? scope + ' · ' + years[0] + '–' + descriptiveYearLabel(years[years.length - 1]) + ' · Yearly'
+      : scope + ' · Yearly';
   }
   if (descriptivePeriod === 'custom') {
     const formatter = new Intl.DateTimeFormat('en-PH', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
@@ -516,14 +542,8 @@ function descriptivePointLabel(period) {
 
 function descriptiveYearLabel(yearValue) {
   const year = String(yearValue);
-  const years = descriptiveAxisPeriods();
-  const latestYear = years.length ? years[years.length - 1] : '';
-  const observedMonths = new Set(dashboardMonthlyRows()
-    .map(row => String(row.period || ''))
-    .filter(period => period.slice(0, 4) === year && /^\d{4}-\d{2}$/.test(period))
-    .map(period => period.slice(5, 7)));
-  if (year === latestYear && year === descriptivePhtDate().slice(0, 4)) return year + ' YTD';
-  if (year === latestYear && observedMonths.size > 0 && observedMonths.size < 12) return year + ' Partial';
+  const currentYear = descriptivePhtDate().slice(0, 4);
+  if (year === currentYear) return year + ' YTD';
   return year;
 }
 
@@ -573,7 +593,7 @@ function openCustomDateCalendar(input) {
 }
 
 function setDescriptivePeriod(value) {
-  descriptivePeriod = ['30d', '3', '6', '12', 'all', 'custom'].includes(String(value)) ? String(value) : '12';
+  descriptivePeriod = ['3', '6', '12', 'all', 'custom'].includes(String(value)) ? String(value) : '12';
   const periodSelect = document.getElementById('descriptivePeriodSelect');
   if (periodSelect && periodSelect.value !== descriptivePeriod) periodSelect.value = descriptivePeriod;
   const yearWrap = document.getElementById('singleYearWrap');
@@ -581,6 +601,16 @@ function setDescriptivePeriod(value) {
   const rangeWrap = document.getElementById('customDateRangeWrap');
   if (rangeWrap) rangeWrap.style.display = descriptivePeriod === 'custom' ? 'flex' : 'none';
   if (descriptivePeriod === 'custom') openCustomDateCalendar(document.getElementById('customDateStart'));
+  refreshComparison();
+  if (typeof renderProductPrioritizationTimeline === 'function') renderProductPrioritizationTimeline();
+  if (typeof renderSalesSectors === 'function') renderSalesSectors();
+  if (typeof renderSalesHeatmap === 'function') renderSalesHeatmap();
+}
+
+function setDescriptiveGranularity(value) {
+  descriptiveGranularity = ['auto', 'monthly', 'yearly'].includes(String(value)) ? String(value) : 'auto';
+  const select = document.getElementById('chartGranularitySelect');
+  if (select && select.value !== descriptiveGranularity) select.value = descriptiveGranularity;
   refreshComparison();
   if (typeof renderProductPrioritizationTimeline === 'function') renderProductPrioritizationTimeline();
   if (typeof renderSalesSectors === 'function') renderSalesSectors();
@@ -595,6 +625,7 @@ function setDescriptiveComparisonMode(value) {
 }
 document.addEventListener('change', function(event) {
   if (event.target && event.target.id === 'descriptivePeriodSelect') setDescriptivePeriod(event.target.value);
+  if (event.target && event.target.id === 'chartGranularitySelect') setDescriptiveGranularity(event.target.value);
   if (event.target && event.target.id === 'descriptiveComparisonSelect') setDescriptiveComparisonMode(event.target.value);
   if (event.target && (event.target.id === 'customDateStart' || event.target.id === 'customDateEnd')) {
     const start = document.getElementById('customDateStart');

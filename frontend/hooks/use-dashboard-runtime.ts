@@ -116,7 +116,7 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
       const handlers = [
         'showPage', 'toggleTheme', 'openHelp', 'closeNavigation', 'toggleNavigation',
         'setComparisonMode', 'setYear', 'setYoYYear', 'setDescriptivePeriod', 'refreshComparison', 'applyDatasetPatch', 'buildCharts',
-        'setPlanningData', 'setPlanningResult', 'getPlanningRequest', 'invalidatePlan', 'changePlanningScope', 'requestPlanSolve', 'exportPlanningCSV', 'setExternalRegressionData', 'renderExternalRegression', 'changeRegressionScope', 'exportExternalRegressionCSV', 'setForecastValidationData', 'renderForecastValidation', 'changeForecastScope', 'exportForecastValidationCSV', 'setSalesSectorsData', 'renderSalesSectors', 'setSalesHeatmapData', 'changeHeatmapCategory', 'renderSalesHeatmap', 'exportSalesHeatmapCSV',
+        'setPlanningData', 'setPlanningResult', 'getPlanningRequest', 'invalidatePlan', 'changePlanningScope', 'requestPlanSolve', 'exportPlanningCSV', 'setPrescriptivePreset', 'resetPlanningDefaults', 'setExternalRegressionData', 'renderExternalRegression', 'changeRegressionScope', 'exportExternalRegressionCSV', 'setForecastValidationData', 'renderForecastValidation', 'changeForecastScope', 'exportForecastValidationCSV', 'setSalesSectorsData', 'renderSalesSectors', 'setSalesHeatmapData', 'changeHeatmapCategory', 'renderSalesHeatmap', 'exportSalesHeatmapCSV',
         'renderProductPrioritizationTimeline', 'configureProductYearControls'
       ]
       for (const name of handlers) {

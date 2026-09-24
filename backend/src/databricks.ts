@@ -340,17 +340,29 @@ export async function executeDatabricksStatement(
     throw new Error('Databricks did not return a result schema')
   }
 
-  const data = [...(response.result?.data_array ?? [])]
-  let nextChunkLink = response.result?.next_chunk_internal_link
-  while (nextChunkLink) {
-    const chunkUrl = new URL(nextChunkLink, config.host).toString()
-    const chunk = await databricksFetch(chunkUrl, config.token, { method: 'GET' }, 15_000)
-    data.push(...(chunk.result?.data_array ?? []))
-    nextChunkLink = chunk.result?.next_chunk_internal_link
+  const statementId = response.statement_id
+  if (!statementId) {
+    throw new Error('Databricks did not return a statement ID')
   }
-  if (data.length !== (response.manifest?.total_row_count ?? data.length)) {
+
+  const data = [...(response.result?.data_array ?? [])]
+  const expectedRows = response.manifest?.total_row_count ?? data.length
+  let nextChunkLink = response.result?.next_chunk_internal_link
+  let nextChunkIndex = 1
+
+  while (data.length < expectedRows) {
+    const chunkPath = nextChunkLink || `${endpoint}/${encodeURIComponent(statementId)}/result/chunks/${nextChunkIndex}`
+    const chunkUrl = new URL(chunkPath, config.host).toString()
+    const chunk = await databricksFetch(chunkUrl, config.token, { method: 'GET' }, 15_000)
+    const chunkRows = ((chunk as any).data_array ?? chunk.result?.data_array ?? []) as Array<Array<string | null>>
+    if (chunkRows.length === 0) break
+    data.push(...chunkRows)
+    nextChunkLink = (chunk as any).next_chunk_internal_link ?? chunk.result?.next_chunk_internal_link
+    nextChunkIndex += 1
+  }
+  if (data.length !== expectedRows) {
     throw new Error(
-      `Databricks returned ${data.length} rows but the result manifest declared ${response.manifest?.total_row_count}`,
+      `Databricks returned ${data.length} rows but the result manifest declared ${expectedRows}`,
     )
   }
   return {

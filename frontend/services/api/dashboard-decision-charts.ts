@@ -35,9 +35,10 @@ function shiftMonth(period: string, offset: number): string {
 
 function periodSelection(root: HTMLElement) {
   const mode = root.querySelector<HTMLSelectElement>('#descriptivePeriodSelect')?.value ?? '12'
+  const granularity = root.querySelector<HTMLSelectElement>('#chartGranularitySelect')?.value ?? 'auto'
   const start = root.querySelector<HTMLInputElement>('#customDateStart')?.value ?? ''
   const end = root.querySelector<HTMLInputElement>('#customDateEnd')?.value ?? ''
-  return { mode, start, end }
+  return { mode, granularity, start, end }
 }
 
 function compactCurrency(value: number): string {
@@ -62,7 +63,7 @@ function formatPeriod(period: string): string {
 
 function aggregateMonthly(
   rows: MonthlyPoint[],
-  selection: { mode: string; start: string; end: string }
+  selection: { mode: string; granularity: string; start: string; end: string }
 ): MonthlyPoint[] {
   const totals = new Map<string, { revenue: number; income: number }>()
   const end = phtCalendarMonth()
@@ -70,11 +71,12 @@ function aggregateMonthly(
   const start = Number.isFinite(monthCount) ? shiftMonth(end, -(monthCount - 1)) : ''
   for (const row of rows) {
     if (!row.period || !finite(row.revenue) || !finite(row.income)) continue
-    if (selection.mode === '30d') continue
     if (selection.mode === 'custom'
       && (row.period < selection.start.slice(0, 7) || row.period > selection.end.slice(0, 7))) continue
     if (selection.mode !== 'custom' && selection.mode !== 'all' && (row.period < start || row.period > end)) continue
-    const aggregatePeriod = selection.mode === 'all' ? row.period.slice(0, 4) : row.period
+    const yearly = selection.granularity === 'yearly'
+      || (selection.granularity === 'auto' && selection.mode === 'all')
+    const aggregatePeriod = yearly ? row.period.slice(0, 4) : row.period
     const current = totals.get(aggregatePeriod) ?? { revenue: 0, income: 0 }
     current.revenue += row.revenue
     current.income += row.income
@@ -88,7 +90,7 @@ function aggregateMonthly(
 
 function monthlyRowsForView(
   rows: MonthlyPoint[],
-  selection: { mode: string; start: string; end: string }
+  selection: { mode: string; granularity: string; start: string; end: string }
 ): MonthlyPoint[] {
   return aggregateMonthly(rows, selection)
 }
@@ -174,10 +176,8 @@ function renderDiseaseDemandChart(root: HTMLElement, data: DashboardData) {
   if (!monthly.length) {
     Chart.getChart(canvas)?.destroy()
     updateChartCard(canvas, {
-      title: selection.mode === '30d' ? 'Daily Sales vs. Disease Intensity' : 'Historical Sales vs. Disease Intensity',
-      subtitle: selection.mode === '30d'
-        ? 'Daily sales and disease data are unavailable; monthly totals are not expanded into synthetic days'
-        : 'No aligned monthly observations are available for the selected historical period',
+      title: 'Historical Sales vs. Disease Intensity',
+      subtitle: 'No aligned monthly observations are available for the selected historical period',
       badge: 'No source-backed observations',
       status: 'Unavailable',
       statusClass: 'status-draft',
