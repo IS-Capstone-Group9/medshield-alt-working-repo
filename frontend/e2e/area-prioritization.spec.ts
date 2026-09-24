@@ -177,6 +177,9 @@ test.describe('Area Prioritization Dynamic Interactions & Visualizations', () =>
     await expect(rollupGrid).toContainText('MIMAROPA')
     await expect(rollupGrid).toContainText('Bicol')
     await expect(rollupGrid).toContainText('Other National')
+    await expect(rollupGrid).toContainText('Total Regional Rollup')
+    await expect(rollupGrid).toContainText('5 Regions')
+    await expect(rollupGrid).toContainText('#1 Other National')
 
     // 2. Verify Region Filter Dropdown Exists with Regional Options
     const regionSelect = page.locator('#sectorRegion')

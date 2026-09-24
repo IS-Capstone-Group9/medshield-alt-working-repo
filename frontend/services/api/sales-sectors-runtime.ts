@@ -87,7 +87,7 @@ export const SALES_SECTORS_MARKUP = String.raw`
  <div class="area-filter-grid" role="group" aria-label="Area prioritization filters">
   <label>Region<select id="sectorRegion" onchange="renderSalesSectors()"><option value="All">All regions</option><option value="CALABARZON">CALABARZON (Region IV-A)</option><option value="MIMAROPA">MIMAROPA (Region IV-B)</option><option value="Bicol">Bicol (Region V)</option><option value="Other National">Other National</option><option value="Unknown">Unknown / Unassigned</option></select></label>
   <label>Buyer cluster<select id="sectorCluster" onchange="renderSalesSectors()"><option value="All">All clusters</option><option>Government</option><option>Private</option><option>Internal</option><option>Unknown</option></select></label>
-  <label>Product scope<select id="sectorProduct" onchange="renderSalesSectors()"></select></label>
+  <label>Product scope<select id="sectorProduct" onchange="renderSalesSectors()"><option value="">All products</option></select></label>
   <label>Evidence<select id="sectorEvidence" onchange="renderSalesSectors()"><option value="all">Actual + gap estimates</option><option value="actual">Actual only</option></select></label>
  </div>
  <p id="sectorStatus" role="status" aria-live="polite">Loading area evidence…</p>
@@ -212,6 +212,17 @@ export const SALES_SECTORS_SCRIPT = String.raw`
 let salesSectorsData = null;
 let areaPrioritySalesWeight = 60;
 let areaPriorityCoverageWeight = 40;
+let salesSectorProductUniverse = [];
+
+function hydrateSalesSectorProducts() {
+ const select=document.getElementById('sectorProduct');
+ if(!select||select.dataset.hydrated==='true')return;
+ const prior=select.value;
+ select.replaceChildren(new Option('All products',''));
+ salesSectorProductUniverse.forEach(product=>select.add(new Option(product,product)));
+ select.dataset.hydrated='true';
+ if(salesSectorProductUniverse.includes(prior))select.value=prior;
+}
 const MAPPED_CLIENT_CATALOG = [
   {
     "c": "CLI-0001",
@@ -7419,8 +7430,20 @@ function renderSalesSectors(error) {
 
  const productSelect=el('sectorProduct'),priorProduct=productSelect.value;
  const products=[...new Set(salesSectorsData.rows.map(row=>row.product).filter(Boolean))].sort();
- productSelect.innerHTML='<option value="">All products</option>'+products.map(product=>'<option value="'+esc(product)+'">'+esc(product)+'</option>').join('');
- productSelect.value=products.includes(priorProduct)?priorProduct:'';
+ const productSignature=products.length+'|'+(products[0]||'')+'|'+(products[products.length-1]||'');
+ if(productSelect.dataset.productSignature!==productSignature){
+  salesSectorProductUniverse=products;
+  productSelect.dataset.productSignature=productSignature;
+  productSelect.dataset.hydrated='false';
+  productSelect.replaceChildren(new Option('All products',''));
+  if(products.length>500){const hint=new Option('Focus to load '+products.length.toLocaleString('en-PH')+' products','');hint.disabled=true;productSelect.add(hint);}
+ }
+ if(productSelect.dataset.productListener!=='true'){
+  productSelect.addEventListener('focus',hydrateSalesSectorProducts,{once:false});
+  productSelect.dataset.productListener='true';
+ }
+ if(products.length<=500)hydrateSalesSectorProducts();
+ if(productSelect.dataset.hydrated==='true')productSelect.value=products.includes(priorProduct)?priorProduct:'';
 
  const region=el('sectorRegion')?el('sectorRegion').value||'All':'All';
  const product=productSelect.value,cluster=el('sectorCluster').value||'All',evidence=el('sectorEvidence').value||'all';
@@ -7474,6 +7497,7 @@ function renderSalesSectors(error) {
   const regShare = mappedRevenue > 0 ? (regRev / mappedRevenue * 100) : 0;
   return { name: regName, revenue: regRev, actual: regActual, estimated: regEstimated, units: regUnits, count: regProvinces.length, share: regShare, leading: regLead };
  });
+ const leadingRegion = [...regionalRollups].filter(item => item.revenue > 0).sort((left,right)=>right.revenue-left.revenue||left.name.localeCompare(right.name))[0];
 
  if (el('areaRegionRollupGrid')) {
   el('areaRegionRollupGrid').innerHTML = regionalRollups.map(regItem => {
@@ -7485,9 +7509,9 @@ function renderSalesSectors(error) {
    '</div>';
   }).join('') +
   '<div class="area-region-box ' + (region === 'All' ? 'active' : '') + '" onclick="selectRollupRegion(\'All\')" style="background:var(--bg-card);border:2px solid var(--accent);">' +
-   '<div class="area-region-name"><strong style="color:var(--accent)">Total Mapped Rollup</strong><span class="status-pill status-draft" style="font-size:9px">' + ranked.length + ' Areas</span></div>' +
+   '<div class="area-region-name"><strong style="color:var(--accent)">Total Regional Rollup</strong><span class="status-pill status-draft" style="font-size:9px">' + regionalRollups.length + ' Regions</span></div>' +
    '<div class="area-region-rev" style="color:var(--accent)">' + fmtCompact(mappedRevenue) + '</div>' +
-   '<div class="area-region-sub"><span>100.0% coverage</span><span>' + (leading ? ('#1 ' + esc(leading.area)) : '—') + '</span></div>' +
+   '<div class="area-region-sub"><span>100.0% regional rollup</span><span>' + (leadingRegion ? ('#1 ' + esc(leadingRegion.name)) : '—') + '</span></div>' +
   '</div>';
  }
 

@@ -34,7 +34,10 @@ function envNumber(name: string, fallback: number): number {
   return Number.isFinite(value) && value > 0 ? value : fallback
 }
 
-const SNAPSHOT_CACHE_TTL_MS = envNumber('DASHBOARD_SNAPSHOT_CACHE_TTL_MS', 30000)
+// Historical decision-support facts do not need a warehouse round trip on every
+// page refresh. Keep the assembled snapshot warm for five minutes by default;
+// deployments can still tighten this with DASHBOARD_SNAPSHOT_CACHE_TTL_MS.
+const SNAPSHOT_CACHE_TTL_MS = envNumber('DASHBOARD_SNAPSHOT_CACHE_TTL_MS', 300_000)
 
 let snapshotCache: { data: DashboardSnapshot; expiresAt: number } | null = null
 let snapshotLoad: Promise<DashboardSnapshot> | null = null

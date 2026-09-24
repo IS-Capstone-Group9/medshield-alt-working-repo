@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('MedShield Executive Multi-Hazard Threat Gauge & Odometer E2E Suite', () => {
+test.describe('MedShield Executive Evidence Readiness & Decision Story', () => {
   test.setTimeout(90000);
 
   test.beforeEach(async ({ page }) => {
@@ -28,74 +28,32 @@ test.describe('MedShield Executive Multi-Hazard Threat Gauge & Odometer E2E Suit
     expect(runtimeErrors, 'dashboard runtime must initialize without errors').toEqual([]);
   });
 
-  test('1. Multi-Hazard Threat Odometer Dial renders on Overview page', async ({ page }) => {
+  test('1. External-signal readiness is explicit and does not present an unsupported live score', async ({ page }) => {
     const card = page.locator('#overviewThreatOdometerCard');
     await expect(card).toBeVisible();
-
-    // SVG Dial and Needle elements
-    const needle = page.locator('#overviewThreatNeedle');
-    await expect(needle).toBeVisible();
-
-    const score = page.locator('#overviewThreatScore');
-    await expect(score).toBeVisible();
-
-    // Status Badge
-    const badge = page.locator('#overviewThreatBadge');
-    await expect(badge).toBeVisible();
-    await expect(badge).toContainText(/Normal Commercial Baseline|Baseline/i);
-
-    // Multi-factor signal bars
-    await expect(page.locator('#dohSignalBar')).toBeVisible();
-    await expect(page.locator('#weatherSignalBar')).toBeVisible();
-    await expect(page.locator('#salesSignalBar')).toBeVisible();
-    await expect(page.locator('#overviewThreatNarrative')).toBeVisible();
+    await expect(card).toContainText('External Signal Evidence Readiness');
+    await expect(card).toContainText('NOT PUBLISHED');
+    await expect(card).toContainText('DOH surveillance');
+    await expect(card).toContainText('PAGASA weather');
+    await expect(card).toContainText('Inventory controls');
+    await expect(page.locator('#overviewThreatScore')).toHaveCount(0);
+    await expect(page.locator('#overviewThreatNeedle')).toHaveCount(0);
   });
 
-  test('2. Dynamic Period filter triggers Needle Rotation and Zone Transition', async ({ page }) => {
+  test('2. Period changes do not synthesize a hazard state', async ({ page }) => {
     const periodSelect = page.locator('#descriptivePeriodSelect');
     await expect(periodSelect).toBeVisible();
-
-    // Switch to Last 3 Months (Tactical Crisis / Peak Surge State)
     await periodSelect.selectOption('3');
-    await page.waitForTimeout(600);
-
-    const badgeRed = page.locator('#overviewThreatBadge');
-    await expect(badgeRed).toHaveClass(/red/);
-    await expect(page.locator('#overviewThreatBadgeText')).toContainText('EPIDEMIC / DISASTER SURGE STATE');
-    
-    // Check needle style rotation
-    const needleStyleRed = await page.locator('#overviewThreatNeedle').getAttribute('style');
-    expect(needleStyleRed).toContain('rotate(');
-
-    // Switch to Last 6 Months (Elevated Surge Watch)
-    await periodSelect.selectOption('6');
-    await page.waitForTimeout(600);
-
-    const badgeAmber = page.locator('#overviewThreatBadge');
-    await expect(badgeAmber).toHaveClass(/amber/);
-    await expect(page.locator('#overviewThreatBadgeText')).toContainText('Elevated Surge Watch');
-
-    // Switch to All Time · Yearly (Normalized Multi-Year Mean)
-    await periodSelect.selectOption('all');
-    await page.waitForTimeout(600);
-
-    const badgeGreen = page.locator('#overviewThreatBadge');
-    await expect(badgeGreen).toHaveClass(/green/);
-    await expect(page.locator('#overviewThreatBadgeText')).toContainText('Multi-Year Historical Mean');
+    await expect(page.locator('#overviewThreatOdometerCard')).toContainText('NOT PUBLISHED');
+    await expect(page.locator('#overviewThreatBadgeText')).toHaveCount(0);
   });
 
-  test('3. Dynamic Odometer recalculates smoothly after tab switching', async ({ page }) => {
-    // Navigate to Prescriptive Planning
-    await page.locator('.nav-item').filter({ hasText: 'Prescriptive Planning' }).click();
-    await expect(page.locator('#page-inventory')).toBeVisible();
-
-    // Navigate back to Executive Overview
-    await page.locator('.nav-item').filter({ hasText: 'Overview' }).click();
-    await expect(page.locator('#page-overview')).toBeVisible();
-
-    // Verify gauge is active and rendered
-    const card = page.locator('#overviewThreatOdometerCard');
-    await expect(card).toBeVisible();
-    await expect(page.locator('#overviewThreatScore')).not.toBeEmpty();
+  test('3. Capstone scope applies 2021–2025 and the story opens regional prioritization', async ({ page }) => {
+    await page.locator('#analysisScopeSelect').selectOption('capstone');
+    await expect(page.locator('#customDateStart')).toHaveValue('2021-01-01');
+    await expect(page.locator('#customDateEnd')).toHaveValue('2025-12-31');
+    await page.locator('[data-story-page="territory"]').click();
+    await expect(page.locator('#page-territory')).toBeVisible();
+    await expect(page.locator('#areaRegionRollupGrid')).toContainText('Total Regional Rollup', { timeout: 30000 });
   });
 });

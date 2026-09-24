@@ -64,33 +64,21 @@ function assertDashboardCoreData(data: DashboardData, source: string): Dashboard
 }
 
 export async function loadDashboardData(): Promise<DashboardData> {
-  const [
-      dataStatus,
-      summary,
-      monthly,
-      byArea,
-      products,
-      yearSummary,
-      seasonality,
-      forecasts,
-      externalSignals,
-      inventoryRecommendations,
-      regionalPriorities,
-      modelEvaluation,
-  ] = await Promise.all([
-      getJson<DashboardDataStatus>('/api/dashboard_status'),
-      getJson<Summary>('/api/summary'),
-      getJson<MonthlyPoint[]>('/api/monthly'),
-      getJson<AreaPoint[]>('/api/by_area'),
-      getJson<ProductPoint[]>('/api/products?limit=15'),
-      getJson<YearPoint[]>('/api/year_summary'),
-      getJson<SeasonalityPoint[]>('/api/seasonality'),
-      getJson<ForecastPoint[]>('/api/forecasts'),
-      getJson<ExternalSignalPoint[]>('/api/external_signals'),
-      getJson<InventoryRecommendation[]>('/api/inventory_recommendations'),
-      getJson<RegionalPriority[]>('/api/regional_priorities'),
-      getJson<ModelEvaluation[]>('/api/model_evaluation'),
-  ])
+  const data = await getJson<DashboardData>('/api/dashboard')
+  const {
+    dataStatus,
+    summary,
+    monthly,
+    byArea,
+    products,
+    yearSummary,
+    seasonality,
+    forecasts,
+    externalSignals,
+    inventoryRecommendations,
+    regionalPriorities,
+    modelEvaluation,
+  } = data
 
   if (dataStatus.source !== 'databricks' || dataStatus.mode !== 'live') {
     throw new Error('The gateway did not return a live Databricks data contract')

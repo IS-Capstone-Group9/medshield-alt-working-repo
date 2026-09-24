@@ -627,7 +627,7 @@ export async function getDatabricksSalesSectors() {
     ORDER BY normalized_product, month_start, territory, channel`, 30_000)
   const includedRows = rows.reduce((sum, row) => sum + numberValue(row.row_count), 0)
   const unmappedRows = rows.filter((row) => row.sector === 'Unknown').reduce((sum, row) => sum + numberValue(row.row_count), 0)
-function getRegionForTerritory(territory: string, sector?: string): string {
+function getRegionForTerritory(territory: string | null, sector?: string | null): string {
   const t = String(territory || '').trim().toLowerCase()
   if (['cavite', 'batangas', 'laguna', 'quezon'].includes(t)) return 'CALABARZON'
   if (['marinduque', 'oriental mindoro', 'occidental mindoro', 'mindoro'].includes(t)) return 'MIMAROPA'

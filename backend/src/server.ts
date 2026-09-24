@@ -373,6 +373,23 @@ app.get('/api/health', (_req: Request, res: Response) => {
   })
 })
 
+app.get('/api/dashboard', requireAuth, async (_req: Request, res: Response) => {
+  return withDashboardSnapshot(res, (snapshot) => res.json({
+    dataStatus: snapshot.data_status,
+    summary: snapshot.totals,
+    monthly: snapshot.monthly,
+    byArea: snapshot.by_area,
+    products: snapshot.top_products,
+    yearSummary: snapshot.year_summary,
+    seasonality: snapshot.seasonality,
+    forecasts: snapshot.forecasts ?? [],
+    externalSignals: snapshot.external_signals ?? [],
+    inventoryRecommendations: snapshot.inventory_recommendations ?? [],
+    regionalPriorities: snapshot.regional_priorities ?? [],
+    modelEvaluation: snapshot.model_evaluation ?? [],
+  }))
+})
+
 app.get(
   '/api/integrations/databricks/status',
   requireAuth,

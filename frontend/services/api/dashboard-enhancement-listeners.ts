@@ -211,6 +211,18 @@ export function installDashboardEnhancements(
     navItem.click()
   }
 
+  const story = root.querySelector<HTMLElement>('[data-decision-story]')
+  const handleStoryNavigation = (event: Event) => {
+    const target = event.target
+    if (!(target instanceof Element)) return
+    const trigger = target.closest<HTMLElement>('[data-story-page]')
+    if (!trigger || !story?.contains(trigger)) return
+    const pageName = trigger.dataset.storyPage as DashboardPageName | undefined
+    if (!pageName || !(pageName in DASHBOARD_PAGE_META)) return
+    const navItem = navigation?.querySelector<HTMLElement>(`.nav-item[data-dashboard-page="${pageName}"]`)
+    if (navItem) activateDashboardPage(root, pageName, navItem)
+  }
+
   if (navigation) {
     navigation.addEventListener('click', handleNavigation)
     navigation.addEventListener('keydown', handleNavigationKeydown)
@@ -218,6 +230,29 @@ export function installDashboardEnhancements(
       { target: navigation, type: 'click', listener: handleNavigation },
       { target: navigation, type: 'keydown', listener: handleNavigationKeydown }
     )
+  }
+  if (story) {
+    story.addEventListener('click', handleStoryNavigation)
+    activeListeners.push({ target: story, type: 'click', listener: handleStoryNavigation })
+  }
+
+  const analysisScope = root.querySelector<HTMLSelectElement>('#analysisScopeSelect')
+  const applyAnalysisScope = () => {
+    if (!analysisScope) return
+    if (analysisScope.value === 'capstone') {
+      const start = root.querySelector<HTMLInputElement>('#customDateStart')
+      const end = root.querySelector<HTMLInputElement>('#customDateEnd')
+      if (start) start.value = '2021-01-01'
+      if (end) end.value = '2025-12-31'
+      ;(window as any).setDescriptivePeriod?.('custom')
+      ;(window as any).setCustomDateRange?.('2021-01-01', '2025-12-31')
+    } else {
+      ;(window as any).setDescriptivePeriod?.('all')
+    }
+  }
+  if (analysisScope) {
+    analysisScope.addEventListener('change', applyAnalysisScope)
+    activeListeners.push({ target: analysisScope, type: 'change', listener: applyAnalysisScope })
   }
 
   const refreshDecisionCharts = () => {
@@ -229,6 +264,7 @@ export function installDashboardEnhancements(
     'customDateStart',
     'customDateEnd',
     'topbarYearSelect',
+    'analysisScopeSelect',
     'yoyBaseYearSelect',
     'yoyTargetYearSelect',
     'btnSingleYear',

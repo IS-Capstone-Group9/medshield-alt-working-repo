@@ -131,11 +131,6 @@ export async function refreshDashboardFromGateway() {
     throw new Error('Dashboard live-data adapter is unavailable')
   }
 
-  // This source must still be checked if the unrelated dashboard snapshot fails.
-  const forecastRefresh = refreshForecastValidation()
-  const regressionRefresh = refreshExternalRegression()
-  const planningRefresh = refreshPlanning()
-
   const data = await loadDashboardData()
   const root = document.querySelector<HTMLElement>('.medshield-root')
   if (root) {
@@ -159,6 +154,57 @@ export async function refreshDashboardFromGateway() {
       const element = root.querySelector<HTMLElement>(`#${id}`)
       if (element) element.textContent = value
     }
+
+    const overviewCards = Array.from(root.querySelectorAll<HTMLElement>('#page-overview .kpi-card'))
+    const updateOverviewCard = (currentLabel: string, nextLabel: string, value: string, note: string) => {
+      const card = overviewCards.find((item) => item.querySelector('.kpi-label')?.textContent?.trim() === currentLabel)
+      if (!card) return
+      const label = card.querySelector<HTMLElement>('.kpi-label')
+      const valueNode = card.querySelector<HTMLElement>('.kpi-value')
+      const noteNode = card.querySelector<HTMLElement>('.kpi-sub')
+      if (label) label.textContent = nextLabel
+      if (valueNode) valueNode.textContent = value
+      if (noteNode) noteNode.textContent = note
+    }
+
+    const approvedForecast = data.modelEvaluation.some((evaluation) =>
+      evaluation.analytics_layer.toLowerCase().includes('predict') && evaluation.passed === true
+    )
+    const firstForecastPeriod = data.forecasts.map((row) => row.period).sort()[0]
+    const forecastTotal = firstForecastPeriod
+      ? data.forecasts
+        .filter((row) => row.period === firstForecastPeriod)
+        .reduce((sum, row) => sum + row.adjusted_forecast, 0)
+      : 0
+    updateOverviewCard(
+      'Rolling Forecast Start',
+      'Published Forecast Start',
+      approvedForecast && forecastTotal > 0 ? currency.format(forecastTotal) : 'Not published',
+      approvedForecast && firstForecastPeriod ? `${firstForecastPeriod} · validated model` : 'Accuracy evidence required'
+    )
+
+    const peakMonths = [...data.seasonality]
+      .sort((a, b) => b.avg_revenue - a.avg_revenue)
+      .slice(0, 2)
+      .map((row) => row.month)
+    updateOverviewCard(
+      'Peak Demand Season',
+      'Historical Peak Months',
+      peakMonths.join(' & ') || 'Unavailable',
+      'Observed average sales; not an STL result'
+    )
+
+    const totalAreaRevenue = data.byArea.reduce((sum, row) => sum + row.revenue, 0)
+    const leadingArea = [...data.byArea].sort((a, b) => b.revenue - a.revenue)[0]
+    const leadingShare = leadingArea && totalAreaRevenue > 0
+      ? `${((leadingArea.revenue / totalAreaRevenue) * 100).toFixed(1)}% of mapped revenue`
+      : 'Share unavailable'
+    updateOverviewCard(
+      'Top Territory Share',
+      'Leading Sales Area',
+      leadingArea?.area || 'Unavailable',
+      leadingShare
+    )
   }
   applyDatasetPatch({
     monthly: data.monthly,
@@ -168,9 +214,16 @@ export async function refreshDashboardFromGateway() {
     seasonality: data.seasonality,
   })
   if (root) setDecisionSupportChartData(root, data)
-  // Keep the dashboard hidden until every visible analytical module has either
-  // loaded its Databricks response or rendered an explicit unavailable state.
-  await Promise.all([refreshSalesHeatmap(), refreshSalesSectors(), forecastRefresh, regressionRefresh, planningRefresh])
+
+  // The core dashboard is now usable. Load module-specific evidence without
+  // blocking the shell or active-page interaction.
+  void Promise.all([
+    refreshSalesHeatmap(),
+    refreshSalesSectors(),
+    refreshForecastValidation(),
+    refreshExternalRegression(),
+    refreshPlanning(),
+  ])
 }
 
 export async function loadSalesDataView(root: HTMLElement, state: any) {
