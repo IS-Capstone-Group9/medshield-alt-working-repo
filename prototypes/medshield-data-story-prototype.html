@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MedShield DSS Data Story Prototype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --navy-950:#0d1b2a; --navy-900:#10263d; --navy-800:#1e3a5f; --navy-700:#2f669a;
+      --amber-500:#f59e0b; --amber-600:#d97706; --green-700:#0d7045; --red-700:#b42318;
+      --ink:#172b3f; --muted:#60758a; --line:#d8e2eb; --soft:#eef3f7; --surface:#ffffff;
+      --estimated:#adc0cf; --forecast:#d97706; --proxy:#6d4db2;
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;background:#edf2f6;color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:14px;line-height:1.5}
+    button,select,input{font:inherit} button{cursor:pointer}
+    .app-shell{display:flex;min-height:100vh}
+    .sidebar{position:sticky;top:0;z-index:30;flex:0 0 248px;height:100vh;background:linear-gradient(180deg,#0d1b2a 0%,#10263d 100%);color:#fff;border-right:1px solid rgba(255,255,255,.08);transition:flex-basis .18s ease;overflow:hidden}
+    .sidebar-brand{display:flex;align-items:center;gap:11px;height:76px;padding:0 18px;border-bottom:1px solid rgba(255,255,255,.09)}
+    .brand-mark{display:grid;place-items:center;flex:0 0 36px;width:36px;height:36px;border-radius:9px;background:var(--amber-500);color:var(--navy-950);font-weight:800}.brand-copy{white-space:nowrap}.brand-copy strong{display:block;font-size:15px}.brand-copy span{display:block;font-size:9px;color:#91aac0;letter-spacing:.08em;text-transform:uppercase}
+    .story-nav{display:flex;flex-direction:column;gap:4px;padding:14px 10px}
+    .story-step{position:relative!important;display:grid;grid-template-columns:34px 1fr;align-items:center;min-height:55px;padding:8px 10px;border:0;border-radius:7px;background:transparent;color:#b9cad8;text-align:left;transition:.15s ease;overflow:hidden}.story-step:before{content:"";position:absolute;left:0;top:8px;bottom:8px;width:3px;border-radius:2px;background:transparent}.story-step:hover{background:rgba(255,255,255,.06);color:#fff}.story-step.active{background:rgba(255,255,255,.10);color:#fff}.story-step.active:before{background:var(--amber-500)}.nav-number{display:grid;place-items:center;width:28px;height:28px;border-radius:7px;background:rgba(255,255,255,.08);font-size:10px;font-weight:800;color:#d8e4ed}.story-step.active .nav-number{background:var(--amber-500);color:var(--navy-950)}.story-step small{display:block;font-size:8px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#7893aa}.story-step strong{display:block;margin-top:2px;font-size:11px;white-space:nowrap}
+    .sidebar-foot{position:absolute;left:12px;right:12px;bottom:14px;padding:10px;border:1px solid rgba(255,255,255,.10);border-radius:8px;color:#9fb4c5;font-size:9px}.sidebar-foot strong{display:block;margin-bottom:2px;color:#f4c870;font-size:9px;text-transform:uppercase;letter-spacing:.06em}
+    .workspace{min-width:0;flex:1}.topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;min-height:76px;padding:12px 22px;background:linear-gradient(180deg,#102436,#142f45);color:#fff;border-bottom:1px solid rgba(255,255,255,.10)}
+    .menu-button{display:grid;place-items:center;width:34px;height:34px;border:1px solid rgba(255,255,255,.13);border-radius:7px;background:rgba(255,255,255,.06);color:#dbe7ef;font-weight:800}.topbar-heading{min-width:0}.topbar-heading strong{display:block;font-size:15px}.topbar-heading span{display:block;color:#a9bfd3;font-size:10px}.prototype-flag{display:flex;align-items:center;gap:8px;margin-left:auto;padding:6px 10px;border:1px solid rgba(255,255,255,.16);border-radius:999px;color:#d9e6f0;font-size:10px}.prototype-flag i{width:7px;height:7px;border-radius:50%;background:var(--amber-500)}
+    body.nav-collapsed .sidebar{flex-basis:74px}body.nav-collapsed .brand-copy,body.nav-collapsed .story-step .nav-copy,body.nav-collapsed .sidebar-foot{display:none}body.nav-collapsed .story-step{grid-template-columns:1fr;justify-items:center;padding-inline:8px}
+    main{max-width:1500px;margin:0 auto;padding:18px 24px 42px}
+    .notice{display:flex;justify-content:space-between;gap:16px;margin-bottom:14px;padding:10px 13px;background:#fff8e8;border:1px solid #f5d79b;border-radius:9px;color:#73511a;font-size:11px}.notice strong{color:#8c5700}
+    .filterbar{display:flex;align-items:end;gap:12px;flex-wrap:wrap;margin-bottom:18px;padding:13px 15px;background:linear-gradient(180deg,#17364d,#1b4059);border:1px solid #2f566e;border-radius:10px;box-shadow:0 4px 14px rgba(13,27,42,.12)}.filterbar label{min-width:165px;font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#bfd0dd}.filterbar select{display:block;width:100%;margin-top:5px;padding:8px 10px;border:1px solid #55758a;border-radius:5px;background:#fff;color:var(--ink)}.filter-context{margin-left:auto;max-width:390px;padding:8px 11px;border:1px solid rgba(255,255,255,.12);border-radius:6px;color:#d9e5ed;font-size:10px}
+    .hero{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:14px}.eyebrow{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--amber-600)}h1{margin:5px 0 4px;font-size:26px;line-height:1.15;letter-spacing:-.03em;color:var(--navy-950)}.hero p{max-width:850px;margin:0;color:var(--muted)}.objective-badge{flex:0 0 auto;padding:7px 10px;border-radius:999px;background:#eaf1f8;color:var(--navy-800);font-size:11px;font-weight:800}
+    .status-strip{display:grid;grid-template-columns:1.5fr repeat(3,1fr);margin-bottom:14px;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}.status-item{padding:10px 13px;border-left:1px solid #e3eaf0}.status-item:first-child{border-left:0;background:#f5f8fb}.status-item span{display:block;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:.07em;text-transform:uppercase}.status-item strong{display:block;margin-top:3px;color:var(--navy-800);font-size:11px}
+    .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}.kpi{position:relative;min-height:108px;padding:15px 16px;background:#fff;border:1px solid var(--line);border-radius:11px;overflow:hidden}.kpi:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--navy-700)}.kpi:nth-child(3):before,.kpi:nth-child(4):before{background:var(--amber-500)}.kpi span{font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}.kpi strong{display:block;margin-top:8px;font-size:23px;line-height:1.05;color:var(--navy-800);letter-spacing:-.025em}.kpi small{display:block;margin-top:7px;color:var(--muted);font-size:10px}
+    .narrative{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;margin-bottom:14px;padding:13px 15px;background:linear-gradient(135deg,#10263d,#244b70);border-radius:9px;color:#fff}.narrative-index{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--amber-500);color:var(--navy-950);font-weight:800}.narrative strong{display:block;font-size:12px}.narrative p{margin:2px 0 0;color:#c6d6e4;font-size:11px}.evidence-tag{padding:4px 8px;border:1px solid rgba(255,255,255,.18);border-radius:999px;color:#d6e4ef;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
+    .alignment-panel{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.15fr;gap:1px;margin-bottom:14px;overflow:hidden;border:1px solid var(--line);border-radius:9px;background:var(--line)}.alignment-item{min-width:0;padding:11px 12px;background:#fff}.alignment-item span{display:block;color:var(--muted);font-size:8px;font-weight:800;letter-spacing:.07em;text-transform:uppercase}.alignment-item strong{display:block;margin-top:4px;color:var(--navy-800);font-size:10px;line-height:1.4}.alignment-item.gate{background:#fff9ec}.alignment-item.gate strong{color:#805200}.story-flow{display:flex;align-items:center;gap:0;margin-bottom:14px;padding:8px 11px;background:#f8fafc;border:1px solid var(--line);border-radius:9px;overflow:auto}.flow-step{display:flex;align-items:center;white-space:nowrap;color:#8091a0;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.04em}.flow-step:after{content:"→";margin:0 8px;color:#b4c0c9}.flow-step:last-child:after{display:none}.flow-step.active{color:var(--navy-800)}.flow-step.active:before{content:"";width:7px;height:7px;margin-right:5px;border-radius:50%;background:var(--amber-500)}
+    .visual-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(340px,.85fr);gap:14px;margin-bottom:14px}.panel{min-width:0;background:#fff;border:1px solid var(--line);border-radius:11px;padding:15px}.panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}.panel h2{margin:0;color:var(--navy-950);font-size:14px}.panel p{margin:3px 0 0;color:var(--muted);font-size:10px}.chart-wrap{height:320px;position:relative}.chart-wrap.secondary{height:275px}
+    .legend{display:flex;gap:12px;flex-wrap:wrap;font-size:10px;color:var(--muted)}.legend span{display:inline-flex;align-items:center;gap:5px}.legend i{width:12px;height:4px;border-radius:2px;background:var(--navy-800)}.legend .estimated{background:var(--estimated)}.legend .forecast{background:var(--forecast)}.legend .proxy{background:var(--proxy)}
+    .detail-zone{margin-top:10px}.detail-zone:empty{display:none}.region-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.region-btn{padding:11px;border:1px solid var(--line);border-radius:8px;background:#f8fafc;color:var(--ink);text-align:left}.region-btn:hover,.region-btn.active{border-color:var(--amber-600);background:#fffaf0}.region-btn strong,.region-btn span{display:block}.region-btn strong{color:var(--navy-800);font-size:11px}.region-btn span{margin-top:3px;color:var(--muted);font-size:10px}.heatmap{display:grid;grid-template-columns:64px repeat(12,minmax(20px,1fr));gap:3px;align-items:center;min-width:700px}.heatmap-wrap{overflow:auto}.heatmap-cell{display:grid;place-items:center;min-height:29px;border-radius:4px;background:#eef3f7;color:#3e556a;font-size:9px}.heatmap-cell.head{background:transparent;font-weight:800}.heatmap-cell.year{justify-content:start;background:transparent;font-weight:800;color:var(--navy-800)}
+    .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:9px}.evidence-table{width:100%;border-collapse:collapse;min-width:760px;font-size:11px}.evidence-table th,.evidence-table td{padding:9px 10px;border-bottom:1px solid #e5ebf0;text-align:left;vertical-align:middle}.evidence-table th{background:#f4f7fa;color:#526a80;font-size:9px;text-transform:uppercase;letter-spacing:.05em}.evidence-table td.num,.evidence-table th.num{text-align:right;font-variant-numeric:tabular-nums}.pill{display:inline-flex;padding:2px 7px;border-radius:999px;background:#eaf1f8;color:var(--navy-800);font-size:9px;font-weight:800}.pill.amber{background:#fff3d6;color:#995d00}.pill.green{background:#e7f6ee;color:var(--green-700)}.pill.red{background:#fce9e7;color:var(--red-700)}
+    .scenario-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.scenario-controls label{padding:9px 10px;background:#f5f8fb;border-radius:8px;color:var(--muted);font-size:10px}.scenario-controls input{width:100%;margin-top:7px}.scenario-controls output{float:right;color:var(--navy-800);font-weight:800}.assumption-note{margin-top:10px;padding:9px 10px;background:#fff8e8;border-radius:7px;color:#73511a;font-size:10px}
+    .story-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:15px}.story-footer button{padding:9px 14px;border:1px solid #bdccd8;border-radius:7px;background:#fff;color:var(--navy-800);font-weight:700}.story-footer button.primary{border-color:var(--navy-800);background:var(--navy-800);color:#fff}.story-footer button:disabled{opacity:.45;cursor:not-allowed}.story-footer span{color:var(--muted);font-size:11px}
+    .empty-state{display:grid;place-items:center;min-height:220px;text-align:center;color:var(--muted)}
+    @media(max-width:1050px){.sidebar{flex-basis:74px}.brand-copy,.story-step .nav-copy,.sidebar-foot{display:none}.story-step{grid-template-columns:1fr;justify-items:center;padding-inline:8px}.visual-grid{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,1fr)}.status-strip{grid-template-columns:repeat(2,1fr)}.status-item:nth-child(3){border-left:0;border-top:1px solid #e3eaf0}.status-item:nth-child(4){border-top:1px solid #e3eaf0}.alignment-panel{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:650px){.sidebar{display:none}.topbar{padding:11px 14px}.prototype-flag{display:none}main{padding:16px 12px 30px}.filterbar label{min-width:100%}.filter-context{margin-left:0}.hero{display:block}.objective-badge{display:inline-flex;margin-top:9px}.kpis,.status-strip,.alignment-panel{grid-template-columns:1fr}.status-item{border-left:0;border-top:1px solid #e3eaf0}.status-item:first-child{border-top:0}.narrative{grid-template-columns:auto 1fr}.evidence-tag{grid-column:1/-1}.visual-grid{display:block}.panel{margin-bottom:12px}.chart-wrap{height:290px}.scenario-controls{grid-template-columns:1fr}.story-footer span{display:none}}
+  </style>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar" id="appSidebar">
+    <div class="sidebar-brand"><div class="brand-mark">M</div><div class="brand-copy"><strong>MedShield DSS</strong><span>Decision support system</span></div></div>
+    <nav class="story-nav" aria-label="Data story modules" id="storyNav"></nav>
+    <div class="sidebar-foot"><strong>Prototype mode</strong>Illustrative values · evidence gates enforced</div>
+  </aside>
+
+  <div class="workspace">
+    <header class="topbar">
+      <button class="menu-button" id="menuButton" type="button" aria-label="Toggle navigation" aria-expanded="true">☰</button>
+      <div class="topbar-heading"><strong id="moduleTitle">Executive Overview</strong><span id="moduleSubtitle">Capstone evidence, objectives, and decision story</span></div>
+      <div class="prototype-flag"><i></i>Illustrative prototype · not production evidence</div>
+    </header>
+
+    <main>
+    <div class="notice"><span><strong>Prototype safeguard:</strong> Values below are illustrative and exist only to demonstrate the intended interactions, labels, and narrative flow.</span><span id="windowNotice">Extended history: 2017–September 2026</span></div>
+
+    <section class="filterbar" aria-label="Data story filters">
+      <label>Analysis scope<select id="scopeSelect"><option value="extended">Capstone · 2017–Sep 2026</option><option value="paper">Objective evidence · 2021–2025</option></select></label>
+      <label>Study region<select id="regionSelect"><option>All regional groups</option><option>CALABARZON</option><option>MIMAROPA</option><option>Bicol</option><option>Other National</option></select></label>
+      <label>Canonical product<select id="productSelect"><option>HYCLENS WOUND SPRAY 2% 60ML</option><option>DOXYCYCLINE 100MG</option><option>PARACETAMOL 500MG</option></select></label>
+      <label>Chart granularity<select id="grainSelect"><option value="monthly">Monthly</option><option value="yearly">Yearly</option></select></label>
+      <div class="filter-context" id="filterContext" aria-live="polite"></div>
+    </section>
+
+    <section class="hero">
+      <div><div class="eyebrow" id="eyebrow"></div><h1 id="storyTitle"></h1><p id="storyQuestion"></p></div>
+      <div class="objective-badge" id="objectiveBadge"></div>
+    </section>
+
+    <section class="status-strip" aria-label="Evidence status">
+      <div class="status-item"><span>Selected evidence</span><strong id="selectedEvidence"></strong></div>
+      <div class="status-item"><span>Metric definition</span><strong id="metricDefinition"></strong></div>
+      <div class="status-item"><span>Source endpoint</span><strong id="sourceEndpoint"></strong></div>
+      <div class="status-item"><span>Publication status</span><strong>Illustrative prototype · review required</strong></div>
+    </section>
+
+    <section class="kpis" id="kpiGrid" aria-label="Chapter key measures"></section>
+
+    <section class="narrative" aria-live="polite">
+      <div class="narrative-index" id="storyIndex"></div>
+      <div><strong id="narrativeHeadline"></strong><p id="narrativeText"></p></div>
+      <div class="evidence-tag" id="evidenceTag"></div>
+    </section>
+
+    <section class="alignment-panel" aria-label="Capstone and North Star alignment">
+      <div class="alignment-item"><span>Paper objective</span><strong id="paperObjective"></strong></div>
+      <div class="alignment-item"><span>North Star path</span><strong id="northStarPath"></strong></div>
+      <div class="alignment-item"><span>Required method</span><strong id="requiredMethod"></strong></div>
+      <div class="alignment-item gate"><span>Evidence gate</span><strong id="evidenceGate"></strong></div>
+    </section>
+
+    <div class="story-flow" id="storyFlow" aria-label="Decision story flow"></div>
+
+    <section class="visual-grid">
+      <article class="panel">
+        <div class="panel-head"><div><h2 id="primaryTitle"></h2><p id="primarySubtitle"></p></div><div class="legend" id="primaryLegend"></div></div>
+        <div class="chart-wrap"><canvas id="primaryChart" role="img"></canvas></div>
+        <div class="detail-zone" id="primaryDetail"></div>
+      </article>
+      <article class="panel">
+        <div class="panel-head"><div><h2 id="secondaryTitle"></h2><p id="secondarySubtitle"></p></div></div>
+        <div class="chart-wrap secondary" id="secondaryChartWrap"><canvas id="secondaryChart" role="img"></canvas></div>
+        <div class="detail-zone" id="secondaryDetail"></div>
+      </article>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><div><h2 id="tableTitle"></h2><p id="tableSubtitle"></p></div><span class="pill" id="tableStatus">Filtered evidence</span></div>
+      <div class="table-wrap" id="tableWrap"></div>
+    </section>
+
+    <footer class="story-footer">
+      <button id="prevButton" type="button">← Previous chapter</button>
+      <span id="progressText"></span>
+      <button id="nextButton" class="primary" type="button">Next chapter →</button>
+    </footer>
+  </main>
+  </div>
+</div>
+
+<script>
+(() => {
+  const COLORS={navy:'#1e3a5f',blue:'#2f669a',amber:'#d97706',estimated:'#adc0cf',green:'#0d7045',red:'#b42318',purple:'#6d4db2',grid:'#e2e8ee',muted:'#60758a'};
+  const REGIONS=['CALABARZON','MIMAROPA','Bicol','Other National'];
+  const REGION_FACTOR={'CALABARZON':1,'MIMAROPA':0.54,'Bicol':0.72,'Other National':1.18,'All regional groups':1.6};
+  const PRODUCT_FACTOR={'HYCLENS WOUND SPRAY 2% 60ML':1,'DOXYCYCLINE 100MG':1.28,'PARACETAMOL 500MG':1.9};
+  const AREA_MAP={
+    'CALABARZON':['Quezon','Batangas','Cavite','Laguna'],
+    'MIMAROPA':['Marinduque','Oriental Mindoro','Occidental Mindoro','Palawan'],
+    'Bicol':['Camarines Sur','Albay','Camarines Norte','Sorsogon'],
+    'Other National':['National Hub (DOH Central)','MedShield HQ','Other operational areas']
+  };
+  const buildMonths=(startYear,startMonth,endYear,endMonth)=>{const result=[];for(let y=startYear;y<=endYear;y++){const from=y===startYear?startMonth:0;const to=y===endYear?endMonth:11;for(let m=from;m<=to;m++)result.push(new Date(y,m,1).toLocaleDateString('en-US',{month:'short',year:'numeric'}));}return result};
+  const allMonths=buildMonths(2017,0,2026,8);
+  const baseDemand=allMonths.map((_,i)=>Math.round(720+i*5+155*Math.sin((i%12)/12*Math.PI*2-.8)+55*Math.sin(i*.43)));
+  const productRows=[
+    ['HYCLENS WOUND SPRAY 2% 60ML',31.6,22800,16.1,'A','Seasonal'],
+    ['DOXYCYCLINE 100MG',24.2,36100,12.4,'A','Seasonal'],
+    ['PARACETAMOL 500MG',18.7,82400,9.6,'A','Stable'],
+    ['0.9% SODIUM CHLORIDE',11.3,9900,5.8,'B','Intermittent'],
+    ['SALBUTAMOL NEBULES',7.1,14200,3.6,'B','Seasonal'],
+    ['OTHER REVIEWED SKUS',47.7,50600,24.4,'C','Mixed']
+  ];
+  const chapters=[
+    {key:'overview',label:'Executive Overview',subtitle:'Capstone evidence, objectives, and decision story',eyebrow:'Decision story · Orientation',objective:'General objective + SO5',title:'How does the DSS support the capstone goal?',question:'Follow one governed decision path from historical demand evidence to a reviewable planning scenario, with every result tied to an objective and North Star node.',tag:'Integrated DSS',paper:'Develop an integrated descriptive, predictive, and prescriptive DSS by December 2026.',northStar:'1 · Optimize inventory and reduce losses',method:'Five-module governed DSS',gate:'Every claim needs source, period, status, and limitation.'},
+    {key:'descriptive',label:'Sales Diagnostics',subtitle:'Historical sales, STL seasonality, and data completeness',eyebrow:'Act 1 · Diagnose',objective:'SO1 · Sales baseline',title:'What happened, and was it seasonal?',question:'Analyze the objective evidence window across CALABARZON, MIMAROPA, and Bicol while retaining the broader 2017–September 2026 history as context.',tag:'Observed history',paper:'Analyze 2021–2025 sales by study region and year over year.',northStar:'2A, 3A, 5A · Grouping, STL, YoY',method:'Complete calendar + STL decomposition',gate:'≥24 usable months; no unresolved evaluation gaps.'},
+    {key:'products',label:'Product Priority',subtitle:'Sales volume, revenue contribution, and demand growth',eyebrow:'Act 2 · Prioritize products',objective:'SO2 · Product priority',title:'Which products deserve planning attention?',question:'Compare sales volume, revenue contribution, demand growth, variability, and ABC evidence without relabeling historical sales as inventory urgency.',tag:'Priority evidence',paper:'Identify revenue-driving SKUs and flag slow movers.',northStar:'4A, 6B, 7B · Pareto and future priority',method:'80/20 + actual ABC; XGBoost candidate',gate:'Canonical SKU and compatible source units required.'},
+    {key:'areas',label:'Area Prioritization',subtitle:'Regional rollup, area drill-down, and buyer evidence',eyebrow:'Act 2 · Prioritize areas',objective:'SO2 · Territory and account priority',title:'Where should commercial attention focus?',question:'Rank CALABARZON, MIMAROPA, Bicol, and Other National, then drill into province or area evidence without changing the regional-group total.',tag:'Geographic evidence',paper:'Prioritize service territories and client accounts.',northStar:'2A, 4A, 6A, 7A · Territory and account value',method:'Regional ranking + Pareto + coverage',gate:'Mapped geography; buyer cluster stays separate from area.'},
+    {key:'forecast',label:'Forecast Modeling',subtitle:'Territory demand, uncertainty, and model comparison',eyebrow:'Act 3 · Forecast',objective:'SO3 · December 2026 onward',title:'What demand may occur next, and how reliable is it?',question:'Compare a territory-product forecast with simple baselines, uncertainty, and eligibility; treat DII and RSI as challengers until validated.',tag:'Predictive evidence',paper:'Forecast territory demand from December 2026 onward and score demand priority.',northStar:'2B–7B · Demand, accuracy, regressors, priority',method:'Naive baselines + Prophet candidate + XGBoost',gate:'Model must beat baseline; DII/RSI need approved aligned data.'},
+    {key:'planning',label:'Prescriptive Planning',subtitle:'What-if inventory scenarios and human review',eyebrow:'Act 4 · Plan and review',objective:'SO4 · Planning scenario',title:'What planning action should be reviewed?',question:'Translate the forecast into transparent EOQ, ROP, safety-stock, and allocation scenarios without claiming an operational recommendation.',tag:'Scenario only',paper:'Improve inventory planning and target expiry wastage at or below 5%.',northStar:'2C, 3C, 6C, 7C, 8C · Reviewed action',method:'EOQ + ROP + safety stock + MCDA scenario',gate:'Inventory, cost, expiry, budget, and policy inputs required.'}
+  ];
+  const FLOW=['Evidence','Pattern','Priority','Forecast','Scenario','Human review'];
+  let state={chapter:0,scope:'extended',region:'All regional groups',product:'HYCLENS WOUND SPRAY 2% 60ML',grain:'monthly',areaRegion:'All regional groups'};
+  let primaryChart=null,secondaryChart=null;
+  const $=id=>document.getElementById(id);
+  const currency=n=>new Intl.NumberFormat('en-PH',{style:'currency',currency:'PHP',notation:'compact',maximumFractionDigits:1}).format(n);
+  const number=n=>new Intl.NumberFormat('en-PH',{maximumFractionDigits:0}).format(n);
+  const pct=n=>Number(n).toFixed(1)+'%';
+  const productFactor=()=>PRODUCT_FACTOR[state.product]||1;
+  const regionFactor=()=>REGION_FACTOR[state.region]||1;
+  const scopeStart=()=>state.scope==='paper'?48:0;
+  const scopeEnd=()=>state.scope==='paper'?108:allMonths.length;
+  const monthlyLabels=()=>allMonths.slice(scopeStart(),scopeEnd());
+  const demandSeries=()=>baseDemand.slice(scopeStart(),scopeEnd()).map((v,i)=>Math.round(v*productFactor()*regionFactor()*(1+Math.sin(i*.7)*.035)));
+  const yearly=(labels,values)=>{
+    const groups={}; labels.forEach((label,i)=>{const year=label.slice(-4);groups[year]=(groups[year]||0)+values[i]});
+    return {labels:Object.keys(groups),values:Object.values(groups)};
+  };
+  const activeSeries=()=>state.grain==='yearly'?yearly(monthlyLabels(),demandSeries()):{labels:monthlyLabels(),values:demandSeries()};
+  const destroyCharts=()=>{if(primaryChart)primaryChart.destroy();if(secondaryChart)secondaryChart.destroy();primaryChart=secondaryChart=null};
+  const legend=(items)=>items.map(item=>'<span><i class="'+(item.cls||'')+'" style="'+(item.color?'background:'+item.color:'')+'"></i>'+item.label+'</span>').join('');
+  const table=(headers,rows)=>'<table class="evidence-table"><thead><tr>'+headers.map((h,i)=>'<th class="'+(i>0?'num':'')+'">'+h+'</th>').join('')+'</tr></thead><tbody>'+rows.map(row=>'<tr>'+row.map((cell,i)=>'<td class="'+(i>0?'num':'')+'">'+cell+'</td>').join('')+'</tr>').join('')+'</tbody></table>';
+  const baseOptions=(yTitle)=>({responsive:true,maintainAspectRatio:false,animation:{duration:180},plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false}},scales:{x:{grid:{display:false},ticks:{color:COLORS.muted,maxTicksLimit:9}},y:{beginAtZero:true,grid:{color:COLORS.grid},ticks:{color:COLORS.muted},title:{display:true,text:yTitle,color:COLORS.muted}}}});
+
+  function renderNav(){
+    $('storyNav').innerHTML=chapters.map((c,i)=>'<button type="button" class="story-step '+(i===state.chapter?'active':'')+'" data-step="'+i+'" aria-current="'+(i===state.chapter?'page':'false')+'"><span class="nav-number">'+String(i+1).padStart(2,'0')+'</span><span class="nav-copy"><small>'+(i===0?'Story hub':'Module '+i)+'</small><strong>'+c.label+'</strong></span></button>').join('');
+    document.querySelectorAll('[data-step]').forEach(btn=>btn.addEventListener('click',()=>{state.chapter=Number(btn.dataset.step);render()}));
+  }
+  function setKpis(items){$('kpiGrid').innerHTML=items.map(x=>'<div class="kpi"><span>'+x.label+'</span><strong>'+x.value+'</strong><small>'+x.note+'</small></div>').join('')}
+  function setCommon(chapter){
+    $('eyebrow').textContent=chapter.eyebrow;$('storyTitle').textContent=chapter.title;$('storyQuestion').textContent=chapter.question;$('objectiveBadge').textContent=chapter.objective;
+    $('moduleTitle').textContent=chapter.label;$('moduleSubtitle').textContent=chapter.subtitle;
+    $('windowNotice').textContent=state.scope==='paper'?'Objective evidence window: 2021–2025':'Extended history: 2017–September 2026';
+    $('storyIndex').textContent=String(state.chapter+1);$('evidenceTag').textContent=chapter.tag;
+    $('paperObjective').textContent=chapter.paper;$('northStarPath').textContent=chapter.northStar;$('requiredMethod').textContent=chapter.method;$('evidenceGate').textContent=chapter.gate;
+    const activeFlow=Math.min(FLOW.length-1,state.chapter===0?0:state.chapter);
+    $('storyFlow').innerHTML=FLOW.map((item,i)=>'<span class="flow-step '+(i===activeFlow?'active':'')+'">'+item+'</span>').join('');
+    $('selectedEvidence').textContent=state.product+' · '+state.region;
+    $('metricDefinition').textContent=state.chapter===4?'Forecast fulfilled demand (units)':'Delivered quantity in source units';
+    $('sourceEndpoint').textContent=(state.scope==='paper'?'Objective evidence: Jan 2021–Dec 2025':'Extended history: Jan 2017–Sep 2026')+' · illustrative values';
+    $('filterContext').textContent=(state.scope==='paper'?'2021–2025 objective lens':'2017–Sep 2026 extended lens')+' · '+state.region+' · '+state.product+' · '+(state.grain==='monthly'?'Monthly':'Calendar year');
+    $('progressText').textContent='Chapter '+(state.chapter+1)+' of '+chapters.length;
+    $('prevButton').disabled=state.chapter===0;$('nextButton').disabled=state.chapter===chapters.length-1;
+  }
+  function clearDetails(){ $('primaryDetail').innerHTML='';$('secondaryDetail').innerHTML='';$('secondaryChartWrap').style.display='block';$('primaryLegend').innerHTML=''; }
+
+  function renderOverview(){
+    const s=activeSeries(),total=s.values.reduce((a,b)=>a+b,0),monthly=demandSeries();
+    setKpis([
+      {label:'Fulfilled demand',value:number(total),note:'Selected product · delivered source units'},
+      {label:'Illustrative net sales',value:currency(total*148),note:'Financial value kept separate from demand'},
+      {label:'Average monthly volume',value:number(monthly.reduce((a,b)=>a+b,0)/monthly.length),note:'Observed-period reference'},
+      {label:'Objective coverage',value:'5 objectives',note:'Each mapped to a module, method, and gate'}
+    ]);
+    $('narrativeHeadline').textContent='The data story follows the capstone logic—not a collection of unrelated charts.';
+    $('narrativeText').textContent='Diagnose historical demand, prioritize products and areas, forecast eligible series, test planning scenarios, then require human review. The paper lens proves 2021–2025 objectives while the extended lens preserves 2017–September 2026 context.';
+    $('primaryTitle').textContent='Fulfilled-demand movement';$('primarySubtitle').textContent='Delivered units for one canonical product; gaps would remain unavailable.';
+    $('secondaryTitle').textContent='Regional-group contribution';$('secondarySubtitle').textContent='Regional comparison; Other National remains operational context.';
+    $('primaryLegend').innerHTML=legend([{label:'Actual fulfilled demand'}]);
+    primaryChart=new Chart($('primaryChart'),{type:'line',data:{labels:s.labels,datasets:[{label:'Actual fulfilled demand',data:s.values,borderColor:COLORS.navy,backgroundColor:'rgba(30,58,95,.08)',fill:true,tension:.22,pointRadius:2}]},options:baseOptions('Delivered units')});
+    const regionValues=REGIONS.map(r=>Math.round(total*(REGION_FACTOR[r]/REGIONS.reduce((a,x)=>a+REGION_FACTOR[x],0))));
+    secondaryChart=new Chart($('secondaryChart'),{type:'bar',data:{labels:REGIONS,datasets:[{data:regionValues,backgroundColor:[COLORS.navy,COLORS.blue,COLORS.amber,COLORS.estimated]}]},options:{...baseOptions('Delivered units'),indexAxis:'y'}});
+    $('tableTitle').textContent='Objective-to-evidence register';$('tableSubtitle').textContent='The prototype distinguishes demonstrated logic from evidence that still requires validated data.';
+    $('tableWrap').innerHTML=table(['Objective','Prototype evidence','North Star','Current boundary'],[
+      ['SO1 · Sales baseline','Sales Diagnostics · STL + YoY','2A, 3A, 5A','Illustrative series; production reconciliation required'],
+      ['SO2 · Product, area, account priority','Product + Area modules · Pareto/ABC','4A, 6A, 7A, 6B, 7B','XGBoost and account evidence require validated mappings'],
+      ['SO3 · Territory forecast','Forecast module · actuals, interval, metrics','2B–7B','DII/RSI remain challenger features'],
+      ['SO4 · Inventory planning','Prescriptive module · transparent scenarios','2C, 3C, 6C–8C','≤5% expiry target not measurable without inventory/expiry outcomes'],
+      ['SO5 · Integrated DSS','Shared filters, status, narrative, review flow','All paths','CSV validation, Signal-2 alerts, and collaborative filtering remain implementation gates']
+    ]);
+  }
+
+  function renderDescriptive(){
+    const s=activeSeries(),labels=monthlyLabels(),monthly=demandSeries(),trend=monthly.map((v,i)=>Math.round(760*productFactor()*regionFactor()+i*5*productFactor()*regionFactor())),seasonal=monthly.map((v,i)=>Math.round((v-trend[i])*.75)),residual=monthly.map((v,i)=>v-trend[i]-seasonal[i]);
+    setKpis([
+      {label:'Usable observations',value:monthly.length+' months',note:'Minimum eligibility threshold: 24'},
+      {label:'Seasonal strength',value:'0.31',note:'Illustrative STL diagnostic'},
+      {label:'Demand CV',value:'18.4%',note:'Variability relative to monthly mean'},
+      {label:'Calendar gaps',value:'0 unresolved',note:'Observed zero remains distinct from missing'}
+    ]);
+    $('narrativeHeadline').textContent='Seasonality is evidence only after the calendar and product grain are valid.';
+    $('narrativeText').textContent='The story moves from the observed series to trend, seasonal movement, and residual noise. Revenue is never substituted for unit demand.';
+    $('primaryTitle').textContent='Observed demand and STL components';$('primarySubtitle').textContent='One product × one region × calendar month.';
+    $('secondaryTitle').textContent='Year–month demand heatmap';$('secondarySubtitle').textContent='Gray would indicate missing; zero would remain an observed zero.';
+    $('primaryLegend').innerHTML=legend([{label:'Observed'},{label:'Trend',color:COLORS.amber},{label:'Seasonal',color:COLORS.green}]);
+    primaryChart=new Chart($('primaryChart'),{type:'line',data:{labels,datasets:[{label:'Observed',data:monthly,borderColor:COLORS.navy,pointRadius:1,tension:.18},{label:'Trend',data:trend,borderColor:COLORS.amber,pointRadius:0,tension:.25},{label:'Seasonal',data:seasonal,borderColor:COLORS.green,pointRadius:0,borderDash:[5,4],tension:.2}]},options:baseOptions('Delivered units')});
+    $('secondaryChartWrap').style.display='none';
+    const monthNames=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    let heat='<div class="heatmap-wrap"><div class="heatmap"><div></div>'+monthNames.map(m=>'<div class="heatmap-cell head">'+m+'</div>').join('');
+    const years=[...new Set(labels.map(label=>Number(label.slice(-4))))];
+    years.forEach(year=>{heat+='<div class="heatmap-cell year">'+year+'</div>';monthNames.forEach((m,mi)=>{const key=m+' '+year,idx=labels.indexOf(key),v=idx>=0?monthly[idx]:null;const alpha=v?Math.min(.85,.18+v/2500):0;heat+='<div class="heatmap-cell" style="background:'+(v?'rgba(47,102,154,'+alpha+')':'#e8edf1')+';color:'+(alpha>.5?'#fff':'#3e556a')+'">'+(v?Math.round(v/10)*10:'—')+'</div>'});});
+    heat+='</div></div>';$('secondaryDetail').innerHTML=heat;
+    $('tableTitle').textContent='STL evidence';$('tableSubtitle').textContent='Residuals and eligibility remain visible for Chapter 4 reporting.';
+    $('tableWrap').innerHTML=table(['Component','Latest value','Interpretation','Status'],[['Observed',number(monthly.at(-1)),'Delivered units','Actual'],['Trend',number(trend.at(-1)),'Structural movement','Derived'],['Seasonal',number(seasonal.at(-1)),'Recurring monthly component','Derived'],['Residual',number(residual.at(-1)),'Unexplained variation','Diagnostic']]);
+  }
+
+  function renderProducts(){
+    const rows=productRows.map(r=>[...r]);let cumulative=0,total=rows.reduce((a,r)=>a+r[1],0);const shares=rows.map(r=>{cumulative+=r[1];return cumulative/total*100});
+    setKpis([
+      {label:'Products compared',value:String(rows.length),note:'Canonical or grouped prototype rows'},
+      {label:'Top-three revenue share',value:pct(shares[2]),note:'Pareto concentration'},
+      {label:'Selected demand CV',value:'18.4%',note:'Not inventory urgency'},
+      {label:'Priority label',value:'Demand priority',note:'Stock and lead time unavailable'}
+    ]);
+    $('narrativeHeadline').textContent='High revenue and high unit movement are different forms of importance.';
+    $('narrativeText').textContent='The product story uses separate revenue and volume evidence, adds variability and continuity, and avoids dead-stock or urgency claims without inventory.';
+    $('primaryTitle').textContent='Product revenue Pareto';$('primarySubtitle').textContent='Revenue bars, cumulative share, and the 80% reference.';
+    $('secondaryTitle').textContent='Volume versus revenue contribution';$('secondarySubtitle').textContent='Bubble position separates high-volume essentials from high-value lines.';
+    $('primaryLegend').innerHTML=legend([{label:'Net sales'},{label:'Cumulative share',color:COLORS.amber}]);
+    primaryChart=new Chart($('primaryChart'),{data:{labels:rows.map(r=>r[0].split(' ').slice(0,2).join(' ')),datasets:[{type:'bar',label:'Net sales',data:rows.map(r=>r[1]),backgroundColor:COLORS.estimated,yAxisID:'revenue'},{type:'line',label:'Cumulative share',data:shares,borderColor:COLORS.amber,pointRadius:3,yAxisID:'share'},{type:'line',label:'80% reference',data:rows.map(()=>80),borderColor:'#9aa9b5',borderDash:[5,5],pointRadius:0,yAxisID:'share'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},revenue:{beginAtZero:true,title:{display:true,text:'Net sales (₱M)'}},share:{position:'right',min:0,max:100,grid:{drawOnChartArea:false},ticks:{callback:v=>v+'%'}}}}});
+    secondaryChart=new Chart($('secondaryChart'),{type:'bubble',data:{datasets:[{label:'Products',data:rows.slice(0,5).map((r,i)=>({x:r[2],y:r[3],r:7+i})),backgroundColor:'rgba(47,102,154,.65)',borderColor:COLORS.navy}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>rows[c.dataIndex][0]+': '+number(c.raw.x)+' units · '+c.raw.y+'% revenue share'}}},scales:{x:{title:{display:true,text:'Delivered units'}},y:{title:{display:true,text:'Revenue contribution (%)'}}}}});
+    $('tableTitle').textContent='Product-priority evidence';$('tableSubtitle').textContent='Demand-priority features remain explainable and individually traceable.';
+    $('tableWrap').innerHTML=table(['Product','Net sales (₱M)','Delivered units','Revenue share','ABC','Demand profile'],rows.map(r=>[r[0],r[1].toFixed(1),number(r[2]),pct(r[3]),'<span class="pill">'+r[4]+'</span>',r[5]]));
+  }
+
+  function areaRows(){
+    const selected=state.areaRegion==='All regional groups'?REGIONS:(AREA_MAP[state.areaRegion]||[]);const factor=productFactor();
+    return selected.map((name,i)=>({name,value:Math.round((selected.length-i)*920000*factor*(state.areaRegion==='All regional groups'?(REGION_FACTOR[name]||1):REGION_FACTOR[state.areaRegion]/2)),actualShare:i===0?.72:.83})).sort((a,b)=>b.value-a.value);
+  }
+  function renderAreas(){
+    const rows=areaRows(),total=rows.reduce((a,r)=>a+r.value,0),isDrill=state.areaRegion!=='All regional groups';let running=0;const cumulative=rows.map(r=>(running+=r.value)/total*100);
+    setKpis([
+      {label:isDrill?'Ranked areas':'Ranked regional groups',value:String(rows.length),note:isDrill?'Province/area detail within '+state.areaRegion:'Three study regions plus Other National'},
+      {label:isDrill?state.areaRegion+' net sales':'Regional-group net sales',value:currency(total),note:'Illustrative selected-scope value'},
+      {label:isDrill?'Leading area':'Leading regional group',value:rows[0]?.name||'Unavailable',note:rows[0]?pct(rows[0].value/total*100)+' of selected revenue':'No evidence'},
+      {label:'Top-three concentration',value:pct(cumulative[Math.min(2,cumulative.length-1)]||0),note:'Same geographic level as the chart'}
+    ]);
+    $('narrativeHeadline').textContent=isDrill?'The regional total stays fixed while the evidence opens to area detail.':'Begin at regional granularity, then open the area evidence.';
+    $('narrativeText').textContent=isDrill?'Charts now compare '+state.areaRegion+' areas. Choose the total card to return to the regional-group story.':'The default ranking preserves CALABARZON, MIMAROPA, and Bicol as objective evidence while Other National remains operational context.';
+    $('primaryTitle').textContent=isDrill?state.areaRegion+' area priority ranking':'Regional-group priority ranking';$('primarySubtitle').textContent='Bars separate actual transactions from estimated evidence.';
+    $('secondaryTitle').textContent=isDrill?state.areaRegion+' area concentration':'Regional-group concentration';$('secondarySubtitle').textContent='Pareto view follows the same active geographic level.';
+    $('primaryLegend').innerHTML=legend([{label:'Actual'},{label:'Estimated',cls:'estimated'}]);
+    primaryChart=new Chart($('primaryChart'),{type:'bar',data:{labels:rows.map(r=>r.name),datasets:[{label:'Actual',data:rows.map(r=>r.value*r.actualShare),backgroundColor:COLORS.navy},{label:'Estimated',data:rows.map(r=>r.value*(1-r.actualShare)),backgroundColor:COLORS.estimated}]},options:{...baseOptions('Net sales (₱)'),indexAxis:'y',scales:{x:{stacked:true,beginAtZero:true,grid:{color:COLORS.grid}},y:{stacked:true,grid:{display:false}}}}});
+    secondaryChart=new Chart($('secondaryChart'),{data:{labels:rows.map(r=>r.name),datasets:[{type:'bar',label:'Net sales',data:rows.map(r=>r.value),backgroundColor:COLORS.estimated,yAxisID:'revenue'},{type:'line',label:'Cumulative share',data:cumulative,borderColor:COLORS.amber,pointRadius:3,yAxisID:'share'},{type:'line',label:'80% reference',data:rows.map(()=>80),borderColor:'#9aa9b5',borderDash:[5,5],pointRadius:0,yAxisID:'share'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{maxRotation:24}},revenue:{beginAtZero:true,ticks:{callback:v=>currency(v)}},share:{position:'right',min:0,max:100,grid:{drawOnChartArea:false},ticks:{callback:v=>v+'%'}}}}});
+    $('primaryDetail').innerHTML='<div class="region-grid">'+REGIONS.map(r=>'<button class="region-btn '+(state.areaRegion===r?'active':'')+'" data-region-card="'+r+'"><strong>'+r+'</strong><span>Open province/area evidence</span></button>').join('')+'<button class="region-btn '+(state.areaRegion==='All regional groups'?'active':'')+'" data-region-card="All regional groups"><strong>Total regional-group rollup</strong><span>Return to regional comparison</span></button></div>';
+    document.querySelectorAll('[data-region-card]').forEach(btn=>btn.addEventListener('click',()=>{state.areaRegion=btn.dataset.regionCard;state.region=state.areaRegion;$('regionSelect').value=state.region;render()}));
+    $('tableTitle').textContent=isDrill?'Province/area evidence table':'Regional-group evidence table';$('tableSubtitle').textContent='Buyer ownership remains a separate dimension rather than a geographic label.';
+    $('tableWrap').innerHTML=table([isDrill?'Area':'Regional group','Actual sales','Estimated','Revenue share','Evidence'],rows.map(r=>[r.name,currency(r.value*r.actualShare),currency(r.value*(1-r.actualShare)),pct(r.value/total*100),'<span class="pill amber">Mixed</span>']));
+  }
+
+  function renderForecast(){
+    const actualLabels=allMonths,actual=baseDemand.map((v,i)=>Math.round(v*productFactor()*regionFactor()*(1+Math.sin(i*.7)*.035))),futureLabels=['Oct 2026','Nov 2026','Dec 2026','Jan 2027','Feb 2027','Mar 2027'],last=actual.at(-1),forecast=futureLabels.map((_,i)=>Math.round(last*(1+.035*i)+Math.sin((i+2)*.9)*110*productFactor())),lower=forecast.map(v=>Math.round(v*.83)),upper=forecast.map(v=>Math.round(v*1.17));const labels=[...actualLabels,...futureLabels];
+    setKpis([
+      {label:'Forecast eligibility',value:'Eligible',note:'Illustrative · '+actual.length+' usable months'},
+      {label:'December 2026 forecast',value:number(forecast[2]),note:'Delivered units · objective horizon begins'},
+      {label:'Illustrative WAPE',value:'12.8%',note:'Must be reproduced in production'},
+      {label:'Forecast horizon',value:'6 months',note:'Selectable 3, 6, or 12 months in production'}
+    ]);
+    $('narrativeHeadline').textContent='A forecast is credible only when actuals, uncertainty, and the baseline are visible.';
+    $('narrativeText').textContent='The model view begins with an eligible product-region series, shows the cutoff, and keeps disease and weather variables as challengers until they improve out-of-sample accuracy.';
+    $('primaryTitle').textContent='Actual versus forecast fulfilled demand';$('primarySubtitle').textContent='Forecast starts after the latest observed month; shaded area is the illustrative 95% interval.';
+    $('secondaryTitle').textContent='Model error comparison';$('secondarySubtitle').textContent='Lower error is better; complex models must beat the baseline.';
+    $('primaryLegend').innerHTML=legend([{label:'Actual'},{label:'Forecast',cls:'forecast'},{label:'95% interval',cls:'estimated'}]);
+    const actualExtended=[...actual,...futureLabels.map(()=>null)],forecastExtended=[...actualLabels.map(()=>null),...forecast],lowerExtended=[...actualLabels.map(()=>null),...lower],upperExtended=[...actualLabels.map(()=>null),...upper];
+    primaryChart=new Chart($('primaryChart'),{type:'line',data:{labels,datasets:[{label:'95% upper',data:upperExtended,borderColor:'transparent',backgroundColor:'rgba(217,119,6,.14)',pointRadius:0,fill:'+1'},{label:'95% lower',data:lowerExtended,borderColor:'transparent',backgroundColor:'rgba(217,119,6,.14)',pointRadius:0,fill:false},{label:'Actual',data:actualExtended,borderColor:COLORS.navy,pointRadius:1,tension:.2},{label:'Forecast',data:forecastExtended,borderColor:COLORS.amber,borderDash:[6,4],pointRadius:2,tension:.2}]},options:{...baseOptions('Delivered units'),plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,filter:item=>item.raw!==null}}}});
+    secondaryChart=new Chart($('secondaryChart'),{type:'bar',data:{labels:['Seasonal naive','Last observation','Prophet candidate','External challenger'],datasets:[{data:[16.9,19.5,12.8,13.7],backgroundColor:[COLORS.estimated,COLORS.estimated,COLORS.amber,COLORS.purple]}]},options:baseOptions('WAPE (%)')});
+    $('tableTitle').textContent='Forecast publication evidence';$('tableSubtitle').textContent='Production values require stored run IDs, model versions, periods, and review status.';
+    $('tableWrap').innerHTML=table(['Evidence','Value','Required interpretation','Status'],[['Series',state.product+' × '+state.region,'One compatible product-region grain','Eligible'],['Actual cutoff','September 2026','Must match source endpoint','Illustrative'],['Objective horizon','December 2026 onward','Oct–Nov are bridge months','Aligned'],['Champion rule','Beats seasonal naive','Rolling validation required','Pending'],['DII / RSI','Challenger only','Association, not causality','Needs approved mapping']]);
+  }
+
+  function scenarioValues(){
+    const demand=Number($('demandRange')?.value||7800),onHand=Number($('stockRange')?.value||4200),reserved=Number($('reserveRange')?.value||600),lead=Number($('leadRange')?.value||14),service=Number($('serviceRange')?.value||95);const available=Math.max(0,onHand-reserved),gap=Math.max(0,demand-available),daily=demand/90,z=service>=99?2.33:service>=97?1.88:1.65,safety=Math.round(z*Math.sqrt(lead)*daily*.32),rop=Math.round(daily*lead+safety),eoq=Math.round(Math.sqrt(2*(demand*4)*500/(148*.15)));
+    return {demand,onHand,reserved,lead,service,available,gap,safety,rop,eoq};
+  }
+  function renderPlanning(){
+    $('secondaryChartWrap').style.display='none';
+    $('secondaryDetail').innerHTML='<div class="scenario-controls">'+
+      '<label>Horizon demand <output id="demandOut"></output><input id="demandRange" type="range" min="3000" max="16000" step="100" value="7800"></label>'+
+      '<label>Scenario on-hand <output id="stockOut"></output><input id="stockRange" type="range" min="0" max="12000" step="100" value="4200"></label>'+
+      '<label>Reserved stock <output id="reserveOut"></output><input id="reserveRange" type="range" min="0" max="3000" step="100" value="600"></label>'+
+      '<label>Lead time <output id="leadOut"></output><input id="leadRange" type="range" min="3" max="45" step="1" value="14"></label>'+
+      '<label>Service target <output id="serviceOut"></output><input id="serviceRange" type="range" min="85" max="99" step="1" value="95"></label>'+
+      '<label>Budget reference <output>₱2.0M</output><input type="range" min="500000" max="5000000" step="100000" value="2000000"></label>'+
+      '</div><div class="assumption-note"><strong>Scenario inputs:</strong> none of these values are asserted as current operational facts. Production must record source, author, timestamp, and review status.</div>';
+    $('primaryTitle').textContent='Demand-to-stock scenario';$('primarySubtitle').textContent='Waterfall-like comparison of explicit inputs and derived planning outputs.';
+    $('secondaryTitle').textContent='Scenario assumptions';$('secondarySubtitle').textContent='Adjust inputs to see the reviewed planning scenario change.';
+    $('primaryLegend').innerHTML=legend([{label:'Scenario quantity'},{label:'Derived gap',color:COLORS.red}]);
+    const update=()=>{
+      const v=scenarioValues();$('demandOut').textContent=number(v.demand)+' units';$('stockOut').textContent=number(v.onHand)+' units';$('reserveOut').textContent=number(v.reserved)+' units';$('leadOut').textContent=v.lead+' days';$('serviceOut').textContent=v.service+'%';
+      setKpis([{label:'Scenario available stock',value:number(v.available),note:'On-hand minus reserved'}, {label:'Projected stock gap',value:number(v.gap),note:'Horizon demand minus available stock'}, {label:'Scenario reorder point',value:number(v.rop),note:'Demand during lead time plus safety stock'}, {label:'Scenario EOQ',value:number(v.eoq),note:'Uses visible illustrative cost assumptions'}]);
+      $('narrativeHeadline').textContent='The final chapter changes a forecast into a reviewable scenario—not an order.';$('narrativeText').textContent='Historical demand may prefill a reference, but stock, reserve, lead time, cost, budget, capacity, expiry, and service policy require explicit operational inputs.';
+      if(primaryChart)primaryChart.destroy();primaryChart=new Chart($('primaryChart'),{type:'bar',data:{labels:['Horizon demand','On-hand','Reserved','Available','Stock gap','Safety stock','ROP','EOQ'],datasets:[{data:[v.demand,v.onHand,v.reserved,v.available,v.gap,v.safety,v.rop,v.eoq],backgroundColor:[COLORS.navy,COLORS.blue,COLORS.estimated,COLORS.green,COLORS.red,COLORS.amber,COLORS.amber,COLORS.purple]}]},options:baseOptions('Scenario units')});
+      $('tableTitle').textContent='Draft planning ledger';$('tableSubtitle').textContent='Every result is tied to its assumption and remains pending human review.';
+      $('tableWrap').innerHTML=table(['Output','Units','Evidence class','Review rule'],[['Available stock',number(v.available),'Scenario output','Validate inventory input'],['Stock gap',number(v.gap),'Scenario output','Validate forecast and inventory'],['Safety stock',number(v.safety),'Scenario output','Approve service and lead-time policy'],['ROP',number(v.rop),'Scenario output','Not an automated reorder'],['EOQ',number(v.eoq),'Scenario output','Approve cost assumptions']]);
+    };
+    document.querySelectorAll('.scenario-controls input').forEach(input=>input.addEventListener('input',update));update();
+  }
+
+  function render(){
+    destroyCharts();clearDetails();renderNav();const chapter=chapters[state.chapter];setCommon(chapter);
+    if(chapter.key==='overview')renderOverview();if(chapter.key==='descriptive')renderDescriptive();if(chapter.key==='products')renderProducts();if(chapter.key==='areas')renderAreas();if(chapter.key==='forecast')renderForecast();if(chapter.key==='planning')renderPlanning();
+  }
+  $('scopeSelect').addEventListener('change',e=>{state.scope=e.target.value;render()});
+  $('regionSelect').addEventListener('change',e=>{state.region=e.target.value;if(state.chapter===3)state.areaRegion=e.target.value;render()});
+  $('productSelect').addEventListener('change',e=>{state.product=e.target.value;render()});
+  $('grainSelect').addEventListener('change',e=>{state.grain=e.target.value;render()});
+  $('menuButton').addEventListener('click',()=>{const collapsed=document.body.classList.toggle('nav-collapsed');$('menuButton').setAttribute('aria-expanded',String(!collapsed))});
+  $('prevButton').addEventListener('click',()=>{if(state.chapter>0){state.chapter--;render();scrollTo({top:0,behavior:'smooth'})}});
+  $('nextButton').addEventListener('click',()=>{if(state.chapter<chapters.length-1){state.chapter++;render();scrollTo({top:0,behavior:'smooth'})}});
+  render();
+})();
+</script>
+</body>
+</html>
