@@ -25,6 +25,9 @@ This checklist tracks what has been accomplished and what remains for the descri
 * **Goal**: Identify monthly seasonal cycles across the 2017–2026 baseline.
 - [x] **Accomplished**: Compute monthly seasonal demand index multipliers (SI = M / B) against the overall 10-year average benchmark.
 - [x] **Accomplished**: Calculate Seasonal Strength metrics (SS = (Max SI - Min SI) / Max SI) to identify highly volatile products.
+- [x] **Accomplished**: Generate a gap-aware monthly calendar that distinguishes source-observed zero from an unknown missing month.
+- [x] **Accomplished**: Run robust 12-month STL for eligible one-SKU regional series and export trend, seasonality, and residual evidence.
+- [x] **Accomplished**: Block series with fewer than 24 latest consecutive observations or unresolved evaluation gaps as `Insufficient history`.
 
 ---
 

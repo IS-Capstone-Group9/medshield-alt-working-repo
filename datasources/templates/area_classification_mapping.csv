@@ -1,33 +1,33 @@
-raw_area,standard_area,area_type,territory,customer_type,business_line,weather_eligible,forecast_eligible,mapping_status,review_notes
-Batangas,Batangas,territory,Batangas,,,true,true,approved,
-Batngas,Batangas,territory,Batangas,,,true,true,approved,
-Quezon,Quezon,territory,Quezon,,,true,true,approved,
-Pagbilao,Pagbilao,territory,Quezon,,,true,true,approved,Exact LGU reference in docs/MAPPED_CLIENT_REFERENCE.md record CLI-0340.
-Marinduque,Marinduque,territory,Marinduque,,,true,true,approved,
-Camarines Norte,Camarines Norte,territory,Camarines Norte,,,true,true,approved,
-Cam Norte,Camarines Norte,territory,Camarines Norte,,,true,true,approved,
-Camarines Sur,Camarines Sur,territory,Camarines Sur,,,true,true,approved,
-Cam Sur,Camarines Sur,territory,Camarines Sur,,,true,true,approved,
-Cavite,Cavite,territory,Cavite,,,true,true,approved,
-Lower Cavite,Cavite,territory,Cavite,,,true,true,approved,Lower Cavite aligned with Cavite territory per client reference.
-Laguna,Laguna,territory,Laguna,,,true,true,approved,
-Laguma,Laguna,territory,Laguna,,,true,true,approved,
-Albay,Albay,territory,Albay,,,true,true,approved,
-Legaspi,Albay,territory,Albay,,,true,true,approved,
-Lagaspi,Albay,territory,Albay,,,true,true,approved,
-Mindoro,Mindoro,territory,Mindoro,,,true,true,approved,
-East,Quezon,territory,Quezon,,,true,true,approved,
-Eastern,Quezon,territory,Quezon,,,true,true,approved,
-Eastern Quezon,Quezon,territory,Quezon,,,true,true,approved,
-Lucena,Quezon,territory,Quezon,,,true,true,approved,
-Rakkk,Quezon,territory,Quezon,,,true,true,approved,
-Government,Government,customer_type,,Government,,false,false,approved,Government procurement channel.
-Hospital,Hospital,customer_type,,Hospital,,false,false,approved,Hospital customer channel.
-Hopital,Hospital,customer_type,,Hospital,,false,false,approved,Hospital customer channel.
-Pharma,Pharma,customer_type,,Pharma,,false,false,approved,Pharma customer channel.
-Admin,Admin,business_line,,,Admin,false,false,approved,MedShield internal admin.
-Supplies,Supplies,business_line,,,Supplies,false,false,approved,MedShield internal supplies.
-Suppllies,Supplies,business_line,,,Supplies,false,false,approved,MedShield internal supplies.
-Equipment,Equipment,business_line,,,Equipment,false,false,approved,MedShield internal equipment.
-Personal,Personal,business_line,,,Personal,false,false,approved,MedShield personal accounts.
-Losses,Losses,business_line,,,Losses,false,false,approved,MedShield losses.
+raw_area,standard_area,area_type,territory,region,customer_type,business_line,weather_eligible,forecast_eligible,mapping_status,review_notes
+Batangas,Batangas,territory,Batangas,CALABARZON,,,true,true,approved,
+Batngas,Batangas,territory,Batangas,CALABARZON,,,true,true,approved,
+Quezon,Quezon,territory,Quezon,CALABARZON,,,true,true,approved,
+Pagbilao,Pagbilao,territory,Quezon,CALABARZON,,,true,true,approved,Exact LGU reference in docs/MAPPED_CLIENT_REFERENCE.md record CLI-0340.
+Marinduque,Marinduque,territory,Marinduque,MIMAROPA,,,true,true,approved,
+Camarines Norte,Camarines Norte,territory,Camarines Norte,Bicol,,,true,true,approved,
+Cam Norte,Camarines Norte,territory,Camarines Norte,Bicol,,,true,true,approved,
+Camarines Sur,Camarines Sur,territory,Camarines Sur,Bicol,,,true,true,approved,
+Cam Sur,Camarines Sur,territory,Camarines Sur,Bicol,,,true,true,approved,
+Cavite,Cavite,territory,Cavite,CALABARZON,,,true,true,approved,
+Lower Cavite,Cavite,territory,Cavite,CALABARZON,,,true,true,approved,Lower Cavite aligned with Cavite territory per client reference.
+Laguna,Laguna,territory,Laguna,CALABARZON,,,true,true,approved,
+Laguma,Laguna,territory,Laguna,CALABARZON,,,true,true,approved,
+Albay,Albay,territory,Albay,Bicol,,,true,true,approved,
+Legaspi,Albay,territory,Albay,Bicol,,,true,true,approved,
+Lagaspi,Albay,territory,Albay,Bicol,,,true,true,approved,
+Mindoro,Mindoro,territory,Mindoro,MIMAROPA,,,true,true,approved,
+East,Quezon,territory,Quezon,CALABARZON,,,true,true,approved,
+Eastern,Quezon,territory,Quezon,CALABARZON,,,true,true,approved,
+Eastern Quezon,Quezon,territory,Quezon,CALABARZON,,,true,true,approved,
+Lucena,Quezon,territory,Quezon,CALABARZON,,,true,true,approved,
+Rakkk,Quezon,territory,Quezon,CALABARZON,,,true,true,approved,
+Government,Government,customer_type,,Other National,Government,,false,false,approved,Government procurement channel.
+Hospital,Hospital,customer_type,,CALABARZON,Hospital,,false,false,approved,Hospital customer channel anchored to Quezon in the reviewed client reference.
+Hopital,Hospital,customer_type,,CALABARZON,Hospital,,false,false,approved,Hospital customer channel anchored to Quezon in the reviewed client reference.
+Pharma,Pharma,customer_type,,CALABARZON,Pharma,,false,false,approved,Pharma customer channel anchored to Quezon in the reviewed client reference.
+Admin,Admin,business_line,,Other National,,Admin,false,false,approved,MedShield internal admin.
+Supplies,Supplies,business_line,,Other National,,Supplies,false,false,approved,MedShield internal supplies.
+Suppllies,Supplies,business_line,,Other National,,Supplies,false,false,approved,MedShield internal supplies.
+Equipment,Equipment,business_line,,Other National,,Equipment,false,false,approved,MedShield internal equipment.
+Personal,Personal,business_line,,Other National,,Personal,false,false,approved,MedShield personal accounts.
+Losses,Losses,business_line,,Other National,,Losses,false,false,approved,MedShield losses.

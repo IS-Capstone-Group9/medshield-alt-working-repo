@@ -41,6 +41,19 @@ This layer must be finished first because predictive and prescriptive outputs de
 | Seasonality index | Monthly average demand divided by average demand across all months. | `descriptive_seasonality_overall.csv`, `descriptive_seasonality_territory.csv` |
 | YoY growth | Compare each month against the same month in the prior year. | `descriptive_yoy_overall.csv`, `descriptive_yoy_territory.csv` |
 | Estimation audit | Count rows from backward allocation and estimated dates. | `descriptive_contract_allocation_summary.csv`, `descriptive_run_summary.json` |
+| Monthly completeness gate | Emit every month between the first and last observation for one canonical SKU and region. Preserve source zero as `observed_zero`; leave an absent month blank as `missing_unknown`. | `descriptive_monthly_calendar.csv` |
+| STL decomposition | Apply robust STL with a 12-month seasonal period only to one-canonical-SKU regional series with at least 24 latest consecutive observed months. | `descriptive_stl_components.csv` |
+| Forecast eligibility | Require a documented forecast-eligible product mapping, documented region, at least 24 latest consecutive monthly observations, and no unknown gap inside the evaluation window. | `forecast_eligibility.csv`, `descriptive_readiness.json` |
+
+### Predictive Readiness Contract
+
+- Demand is delivered quantity for one canonical SKU. Quantities from different products are never summed into a demand series.
+- A revenue model must be labeled **net-sales forecast**, not demand forecast.
+- CALABARZON, MIMAROPA, and Bicol remain separate objective-evidence regions. Other National is retained only as an operational comparison.
+- An absent calendar month remains `missing_unknown`; it is never converted automatically to zero.
+- A source-backed month whose aggregated quantity is zero is retained as `observed_zero`.
+- Only an eligible gap-free evaluation window is decomposed into STL trend, seasonality, and residual components.
+- Every failing series is labeled **Insufficient history** and receives no STL output or forecast-ready status.
 
 ## Dashboard Period and Grain Rules
 
@@ -92,6 +105,7 @@ Descriptive analytics is ready for Chapter 4 when:
 6. Territory summaries use approved or proposed area mapping.
 7. 2025 outputs are marked carefully because the 2025 completeness issue is not fully resolved.
 8. The dashboard and paper present descriptive outputs as historical evidence, not forecasts.
+9. `descriptive_readiness.json` reports all five predictive-entry gates as passed before an eligible series is handed to model training.
 
 ## Chapter 4 Wording
 

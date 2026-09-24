@@ -5,15 +5,22 @@ import csv
 import gzip
 import json
 import statistics
+import sys
 from collections import Counter, defaultdict
 from datetime import UTC, date, datetime
 from pathlib import Path
 from typing import Any
 
-
 ROOT = Path(__file__).resolve().parents[3]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from services.analytics_service.descriptive_readiness import build_descriptive_readiness
+
+
 DEFAULT_SALES_PATH = ROOT / "data" / "medshield" / "processed" / "sales_transactions_area_allocated.json.gz"
 DEFAULT_AREA_MAPPING_PATH = ROOT / "datasources" / "templates" / "area_classification_mapping.csv"
+DEFAULT_PRODUCT_MAPPING_PATH = ROOT / "datasources" / "templates" / "product_master_mapping.csv"
 DEFAULT_OUTPUT_DIR = ROOT / "outputs" / f"descriptive_analytics_{date.today():%Y%m%d}"
 ADDITIVE_FIELDS = ("quantity", "total_trade_price", "net_income", "net_cost", "discount", "total_cost")
 MONTHS = tuple(f"{month:02d}" for month in range(1, 13))
@@ -76,6 +83,20 @@ def read_area_mapping(path: Path) -> dict[str, dict[str, str]]:
     return mapping
 
 
+def read_product_mapping(path: Path) -> dict[str, dict[str, str]]:
+    if not path.exists():
+        return {}
+
+    mapping: dict[str, dict[str, str]] = {}
+    with path.open("r", encoding="utf-8-sig", newline="") as handle:
+        for row in csv.DictReader(handle):
+            raw_product = str(row.get("raw_product", "")).strip().lower()
+            canonical_sku = str(row.get("canonical_sku", "")).strip()
+            if raw_product and canonical_sku:
+                mapping[raw_product] = {key: str(value or "").strip() for key, value in row.items()}
+    return mapping
+
+
 def area_info(area: object, mapping: dict[str, dict[str, str]]) -> dict[str, str]:
     area_text = str(area or "").strip()
     mapped = mapping.get(area_text.lower())
@@ -85,6 +106,7 @@ def area_info(area: object, mapping: dict[str, dict[str, str]]) -> dict[str, str
         "standard_area": area_text,
         "area_type": "unmapped",
         "territory": "",
+        "region": "",
         "customer_type": "",
         "business_line": "",
         "forecast_eligible": "false",
@@ -93,7 +115,12 @@ def area_info(area: object, mapping: dict[str, dict[str, str]]) -> dict[str, str
     }
 
 
-def enrich_rows(rows: list[dict[str, Any]], area_mapping: dict[str, dict[str, str]]) -> list[dict[str, Any]]:
+def enrich_rows(
+    rows: list[dict[str, Any]],
+    area_mapping: dict[str, dict[str, str]],
+    product_mapping: dict[str, dict[str, str]] | None = None,
+) -> list[dict[str, Any]]:
+    product_mapping = product_mapping or {}
     enriched: list[dict[str, Any]] = []
     for row in rows:
         parsed = parse_date(row.get("date_delivered"))
@@ -104,6 +131,7 @@ def enrich_rows(rows: list[dict[str, Any]], area_mapping: dict[str, dict[str, st
                 continue
 
         info = area_info(row.get("area"), area_mapping)
+        product_info = product_mapping.get(str(row.get("product") or "").strip().lower(), {})
         item = dict(row)
         item["period"] = parsed.strftime("%Y-%m")
         item["calendar_year"] = parsed.year
@@ -111,11 +139,15 @@ def enrich_rows(rows: list[dict[str, Any]], area_mapping: dict[str, dict[str, st
         item["standard_area"] = info.get("standard_area", item.get("area", ""))
         item["area_type"] = info.get("area_type", "unmapped")
         item["territory"] = info.get("territory", "")
+        item["region"] = info.get("region", "")
         item["customer_type"] = info.get("customer_type", "")
         item["business_line"] = info.get("business_line", "")
         item["area_mapping_status"] = info.get("mapping_status", "unmapped")
         item["area_forecast_eligible"] = info.get("forecast_eligible", "false")
         item["area_weather_eligible"] = info.get("weather_eligible", "false")
+        item["canonical_sku"] = product_info.get("canonical_sku", "")
+        item["product_mapping_status"] = product_info.get("mapping_status", "")
+        item["product_forecast_eligible"] = product_info.get("forecast_eligible", "").lower() == "true"
         item["is_estimated_contract_allocation"] = item.get("allocation_status") == "estimated_backward_allocation"
         item["is_estimated_date"] = str(item.get("date_is_estimated", "")).lower() == "true"
         enriched.append(item)
@@ -362,15 +394,22 @@ def build_summary(rows: list[dict[str, Any]], product_abc: list[dict[str, Any]],
     }
 
 
-def run(sales_path: Path, area_mapping_path: Path, output_dir: Path) -> dict[str, Any]:
+def run(
+    sales_path: Path,
+    area_mapping_path: Path,
+    output_dir: Path,
+    product_mapping_path: Path = DEFAULT_PRODUCT_MAPPING_PATH,
+) -> dict[str, Any]:
     sales_path = sales_path if sales_path.is_absolute() else ROOT / sales_path
     area_mapping_path = area_mapping_path if area_mapping_path.is_absolute() else ROOT / area_mapping_path
+    product_mapping_path = product_mapping_path if product_mapping_path.is_absolute() else ROOT / product_mapping_path
     output_dir = output_dir if output_dir.is_absolute() else ROOT / output_dir
 
     payload = read_json_gz(sales_path)
     raw_rows = payload.get("rows", [])
     area_mapping = read_area_mapping(area_mapping_path)
-    rows = enrich_rows(raw_rows, area_mapping)
+    product_mapping = read_product_mapping(product_mapping_path)
+    rows = enrich_rows(raw_rows, area_mapping, product_mapping)
 
     monthly_trends = aggregate(rows, ("period",))
     yearly_summary = aggregate(rows, ("calendar_year",))
@@ -384,6 +423,7 @@ def run(sales_path: Path, area_mapping_path: Path, output_dir: Path) -> dict[str
     yoy_overall = yoy_growth(monthly_trends)
     yoy_territory = yoy_growth(aggregate(territory_rows, ("period", "territory")), ("territory",))
     contract_summary = contract_allocation_summary(rows)
+    readiness = build_descriptive_readiness(rows)
 
     output_dir.mkdir(parents=True, exist_ok=True)
     write_csv(output_dir / "descriptive_monthly_trends.csv", monthly_trends)
@@ -397,6 +437,13 @@ def run(sales_path: Path, area_mapping_path: Path, output_dir: Path) -> dict[str
     write_csv(output_dir / "descriptive_yoy_overall.csv", yoy_overall)
     write_csv(output_dir / "descriptive_yoy_territory.csv", yoy_territory)
     write_csv(output_dir / "descriptive_contract_allocation_summary.csv", contract_summary)
+    write_csv(output_dir / "descriptive_monthly_calendar.csv", readiness["calendar_rows"])
+    write_csv(output_dir / "descriptive_stl_components.csv", readiness["stl_rows"])
+    write_csv(output_dir / "forecast_eligibility.csv", readiness["eligibility_rows"])
+    write_json(
+        output_dir / "descriptive_readiness.json",
+        {key: value for key, value in readiness.items() if key not in {"calendar_rows", "stl_rows", "eligibility_rows"}},
+    )
 
     (output_dir / "descriptive_chapter4_findings.md").write_text(
         findings_markdown(
@@ -406,6 +453,9 @@ def run(sales_path: Path, area_mapping_path: Path, output_dir: Path) -> dict[str
         encoding="utf-8",
     )
     summary = build_summary(rows, product_abc, area_abc)
+    summary["predictive_readiness"] = {
+        key: value for key, value in readiness.items() if key not in {"calendar_rows", "stl_rows", "eligibility_rows"}
+    }
     summary["output_files"] = sorted(path.name for path in output_dir.glob("*") if path.is_file())
     write_json(output_dir / "descriptive_run_summary.json", summary)
     return summary
@@ -415,13 +465,14 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run MedShield descriptive analytics outputs.")
     parser.add_argument("--sales-path", type=Path, default=DEFAULT_SALES_PATH)
     parser.add_argument("--area-mapping-path", type=Path, default=DEFAULT_AREA_MAPPING_PATH)
+    parser.add_argument("--product-mapping-path", type=Path, default=DEFAULT_PRODUCT_MAPPING_PATH)
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
-    summary = run(args.sales_path, args.area_mapping_path, args.output_dir)
+    summary = run(args.sales_path, args.area_mapping_path, args.output_dir, args.product_mapping_path)
     print(json.dumps(summary, indent=2))
 
 
