@@ -1,0 +1,125 @@
+{
+  "generated_at": "2026-09-24T16:11:51Z",
+  "source_dataset": "data\\medshield\\processed\\sales_transactions_area_allocated.json.gz",
+  "clean_rows": 37340,
+  "period_start": "2017-01-02",
+  "period_end": "2025-12-31",
+  "total_quantity": 1438964.92,
+  "total_revenue": 494564708.61,
+  "total_gross_margin": 393917128.16,
+  "gross_margin_rate": 0.796493,
+  "unique_products": 4483,
+  "unique_areas": 31,
+  "estimated_contract_rows": 1730,
+  "estimated_date_rows": 0,
+  "gross_margin_exceeds_revenue_rows": 13291,
+  "negative_gross_margin_rows": 185,
+  "top_product": {
+    "product": "T SHIRT WITH PRINT",
+    "revenue": 8856150.29,
+    "abc_class": "A"
+  },
+  "top_area": {
+    "area": "Quezon",
+    "revenue": 105427480.72,
+    "abc_class": "A"
+  },
+  "status": "draft",
+  "limitations": [
+    "Product master and area mapping still require final approval.",
+    "Contract allocation rows are estimated and must remain labeled.",
+    "2025 remains partial until the group approves completeness remediation.",
+    "Workbook margin fields contain anomalies and should not be used as company net profit.",
+    "Descriptive analytics answer what happened; they are not forecasts or prescriptions."
+  ],
+  "predictive_readiness": {
+    "status": "ready",
+    "measure": {
+      "field": "quantity",
+      "label": "demand (delivered source units)",
+      "grain": "one canonical SKU \u00d7 one region \u00d7 calendar month",
+      "revenue_label_rule": "Use net-sales forecast for net_cost; never call revenue demand."
+    },
+    "minimum_observations": 24,
+    "study_regions": [
+      "CALABARZON",
+      "MIMAROPA",
+      "Bicol"
+    ],
+    "operational_comparison_region": "Other National",
+    "region_source_rows": {
+      "Bicol": 179,
+      "Other National": 161,
+      "CALABARZON": 751,
+      "MIMAROPA": 143
+    },
+    "gates": [
+      {
+        "gate": "approved_demand_measure",
+        "passed": true,
+        "evidence": "Quantity is evaluated for one canonical SKU per series; revenue is excluded from demand STL."
+      },
+      {
+        "gate": "complete_monthly_calendar",
+        "passed": true,
+        "evidence": "Every month is emitted as observed, observed_zero, or missing_unknown; missing values remain blank."
+      },
+      {
+        "gate": "geographic_mapping",
+        "passed": true,
+        "evidence": "CALABARZON, MIMAROPA, and Bicol remain separate objective regions; Other National is comparison-only."
+      },
+      {
+        "gate": "stl_decomposition",
+        "passed": true,
+        "evidence": "4 eligible product-region series decomposed into trend, seasonality, and residual."
+      },
+      {
+        "gate": "forecast_eligibility",
+        "passed": true,
+        "evidence": "2 study-region series have at least 24 latest consecutive observed months."
+      }
+    ],
+    "primary_series": {
+      "canonical_sku": "HYCLENS WOUND SPRAY 2% 60ML",
+      "region": "CALABARZON",
+      "objective_evidence": true,
+      "measure": "quantity",
+      "measure_label": "demand (delivered source units)",
+      "product_mapping_status": "needs_review",
+      "observed_months": 33,
+      "calendar_months": 33,
+      "missing_unknown_months": 0,
+      "observed_zero_months": 0,
+      "evaluation_start": "2023-04",
+      "evaluation_end": "2025-12",
+      "evaluation_months": 33,
+      "unresolved_evaluation_gaps": 0,
+      "forecast_eligible": true,
+      "status": "Eligible for predictive baseline",
+      "reason": "",
+      "method": "STL(period=12, robust=True)",
+      "seasonal_period_months": 12,
+      "seasonal_strength": 0.305882
+    }
+  },
+  "output_files": [
+    "descriptive_area_summary.csv",
+    "descriptive_area_type_summary.csv",
+    "descriptive_chapter4_findings.md",
+    "descriptive_contract_allocation_summary.csv",
+    "descriptive_monthly_calendar.csv",
+    "descriptive_monthly_trends.csv",
+    "descriptive_product_abc_pareto.csv",
+    "descriptive_readiness.json",
+    "descriptive_run_summary.json",
+    "descriptive_seasonality_overall.csv",
+    "descriptive_seasonality_territory.csv",
+    "descriptive_stl_components.csv",
+    "descriptive_territory_abc_pareto.csv",
+    "descriptive_yearly_summary.csv",
+    "descriptive_yoy_overall.csv",
+    "descriptive_yoy_territory.csv",
+    "forecast_eligibility.csv"
+  ]
+}

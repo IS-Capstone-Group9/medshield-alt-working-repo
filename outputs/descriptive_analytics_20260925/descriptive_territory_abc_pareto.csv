@@ -1,0 +1,10 @@
+area,quantity,revenue,gross_margin_amount,row_count,active_months,estimated_contract_rows,rank,gross_margin_rate,revenue_share,cumulative_revenue_share,abc_class,method,status
+Quezon,50582.91,105427480.72,58968321.0,5588,95,1230,1,0.559326,0.71997,0.71997,A,ABC/Pareto using Net CP (net_cost) revenue,draft
+Batangas,42960.2,15817808.41,19910341.54,4910,95,0,2,1.258729,0.108021,0.82799,B,ABC/Pareto using Net CP (net_cost) revenue,draft
+Marinduque,23609.23,11210597.04,7672174.8,1101,76,20,3,0.684368,0.076558,0.904548,B,ABC/Pareto using Net CP (net_cost) revenue,draft
+Camarines Norte,13031.62,4472154.12,8694502.55,1745,61,0,4,1.944142,0.030541,0.935089,B,ABC/Pareto using Net CP (net_cost) revenue,draft
+Cavite,16961.7,3885888.5,5744879.46,1357,66,0,5,1.478395,0.026537,0.961626,C,ABC/Pareto using Net CP (net_cost) revenue,draft
+Laguna,67890.88,2371968.5,11571857.71,1991,43,0,6,4.878588,0.016198,0.977824,C,ABC/Pareto using Net CP (net_cost) revenue,draft
+Camarines Sur,15034.92,2156115.14,5123402.24,1999,57,0,7,2.376219,0.014724,0.992548,C,ABC/Pareto using Net CP (net_cost) revenue,draft
+Albay,3659.69,1047168.97,1121640.22,169,24,0,8,1.071117,0.007151,0.999699,C,ABC/Pareto using Net CP (net_cost) revenue,draft
+Mindoro,1843.0,44040.0,88481.54,36,11,0,9,2.009118,0.000301,1.0,C,ABC/Pareto using Net CP (net_cost) revenue,draft

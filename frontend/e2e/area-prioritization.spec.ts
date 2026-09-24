@@ -190,6 +190,7 @@ test.describe('Area Prioritization Dynamic Interactions & Visualizations', () =>
     await expect(rollupGrid).toContainText('2 Areas')
     await expect(rollupGrid).toContainText('Total Regional-Group Rollup')
     await expect(rollupGrid).toContainText('4 Groups')
+    const regionalTotalBeforeDrilldown = await rollupGrid.locator('.area-region-box.total .area-region-rev').textContent()
 
     // 2. Verify Region Filter Dropdown Exists with Regional Options
     const regionSelect = page.locator('#sectorRegion')
@@ -205,7 +206,18 @@ test.describe('Area Prioritization Dynamic Interactions & Visualizations', () =>
     await expect(page.locator('#sectorProfileTable')).toContainText('Oriental Mindoro')
     await expect(page.locator('#sectorProfileTable')).not.toContainText('Quezon')
     await expect(page.locator('#sectorProfileTable')).not.toContainText('Batangas')
-    await expect(page.locator('#areaRankedCount')).toHaveText('1')
+    await expect(page.locator('#areaRankedCount')).toHaveText('2')
+    await expect(page.locator('#areaRankedCountLabel')).toHaveText('Ranked areas')
+    await expect(page.locator('#areaRankChartTitle')).toHaveText('MIMAROPA area priority ranking')
+    await expect(page.locator('#areaRegionRollupNote')).toContainText('Regional totals remain fixed')
+    await expect(rollupGrid.locator('.area-region-box.total .area-region-rev')).toHaveText(regionalTotalBeforeDrilldown || '')
+    const mimaropaLabels = await page.evaluate(() => {
+      const ranking = (window as any).Chart.getChart(document.getElementById('sectorRevenueChart'))
+      const pareto = (window as any).Chart.getChart(document.getElementById('sectorParetoChart'))
+      return { ranking: ranking.data.labels, pareto: pareto.data.labels }
+    })
+    expect(mimaropaLabels.ranking).toEqual(['Marinduque', 'Oriental Mindoro'])
+    expect(mimaropaLabels.pareto).toEqual(['Marinduque', 'Oriental Mindoro'])
 
     // 4. Verify Summary Footer Row Totals
     const tableFooter = page.locator('#sectorProfileTable tfoot')
@@ -220,11 +232,22 @@ test.describe('Area Prioritization Dynamic Interactions & Visualizations', () =>
     await expect(page.locator('#sectorProfileTable')).toContainText('Batangas')
     await expect(page.locator('#sectorProfileTable')).toContainText('Cavite')
     await expect(page.locator('#sectorProfileTable')).not.toContainText('Marinduque')
-    await expect(page.locator('#areaRankedCount')).toHaveText('1')
+    await expect(page.locator('#areaRankedCount')).toHaveText('3')
+    const calabarzonLabels = await page.evaluate(() => {
+      const ranking = (window as any).Chart.getChart(document.getElementById('sectorRevenueChart'))
+      return ranking.data.labels
+    })
+    expect(calabarzonLabels).toEqual(['Quezon', 'Batangas', 'Cavite'])
 
     // 6. Reset to All Regions
     await page.selectOption('#sectorRegion', 'All')
     await expect(page.locator('#areaRankedCount')).toHaveText('4')
+    await expect(page.locator('#areaRankedCountLabel')).toHaveText('Ranked regional groups')
+    const resetLabels = await page.evaluate(() => {
+      const ranking = (window as any).Chart.getChart(document.getElementById('sectorRevenueChart'))
+      return ranking.data.labels
+    })
+    expect(resetLabels).toEqual(['Other National', 'CALABARZON', 'Bicol', 'MIMAROPA'])
   })
 })
 

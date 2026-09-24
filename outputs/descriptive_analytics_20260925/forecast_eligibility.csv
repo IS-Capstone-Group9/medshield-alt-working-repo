@@ -1,0 +1,19 @@
+canonical_sku,region,objective_evidence,measure,measure_label,product_mapping_status,observed_months,calendar_months,missing_unknown_months,observed_zero_months,evaluation_start,evaluation_end,evaluation_months,unresolved_evaluation_gaps,forecast_eligible,status,reason,method,seasonal_period_months,seasonal_strength
+DOLO JAGA 500MG/50MG/100MG/100MCG,All Study Regions,False,quantity,demand (delivered source units),proposed,90,106,16,0,,,1,,False,Insufficient history,Latest gap-free window has 1 of 24 required months,,12,
+DOLO JAGA 500MG/50MG/100MG/100MCG,Bicol,True,quantity,demand (delivered source units),proposed,56,78,22,0,,,1,,False,Insufficient history,Latest gap-free window has 1 of 24 required months,,12,
+DOLO JAGA 500MG/50MG/100MG/100MCG,CALABARZON,True,quantity,demand (delivered source units),proposed,85,99,14,0,2020-01,2025-05,65,0,True,Eligible for predictive baseline,,"STL(period=12, robust=True)",12,0.302025
+DOLO JAGA 500MG/50MG/100MG/100MCG,MIMAROPA,True,quantity,demand (delivered source units),proposed,51,91,40,0,,,1,,False,Insufficient history,Latest gap-free window has 1 of 24 required months,,12,
+DOLO JAGA 500MG/50MG/100MG/100MCG,Other National,False,quantity,demand (delivered source units),proposed,4,45,41,0,,,1,,False,Insufficient history,Latest gap-free window has 1 of 24 required months,,12,
+HYCLENS WOUND SPRAY 2% 60ML,All Study Regions,False,quantity,demand (delivered source units),needs_review,33,33,0,0,2023-04,2025-12,33,0,True,Eligible for predictive baseline,,"STL(period=12, robust=True)",12,0.433408
+HYCLENS WOUND SPRAY 2% 60ML,CALABARZON,True,quantity,demand (delivered source units),needs_review,33,33,0,0,2023-04,2025-12,33,0,True,Eligible for predictive baseline,,"STL(period=12, robust=True)",12,0.305882
+HYCLENS WOUND SPRAY 2% 60ML,MIMAROPA,True,quantity,demand (delivered source units),needs_review,12,28,16,0,,,1,,False,Insufficient history,Latest gap-free window has 1 of 24 required months,,12,
+HYCLENS WOUND SPRAY 2% 60ML,Other National,False,quantity,demand (delivered source units),needs_review,11,26,15,0,,,9,,False,Insufficient history,Latest gap-free window has 9 of 24 required months,,12,
+HYCLENS WOUND SPRAY 60ML,All Study Regions,False,quantity,demand (delivered source units),needs_review,33,35,2,0,,,2,,False,Insufficient history,Latest gap-free window has 2 of 24 required months,,12,
+HYCLENS WOUND SPRAY 60ML,Bicol,True,quantity,demand (delivered source units),needs_review,1,1,0,0,,,1,,False,Insufficient history,Latest gap-free window has 1 of 24 required months,,12,
+HYCLENS WOUND SPRAY 60ML,CALABARZON,True,quantity,demand (delivered source units),needs_review,33,35,2,0,,,2,,False,Insufficient history,Latest gap-free window has 2 of 24 required months,,12,
+HYCLENS WOUND SPRAY 60ML,MIMAROPA,True,quantity,demand (delivered source units),needs_review,15,30,15,0,,,1,,False,Insufficient history,Latest gap-free window has 1 of 24 required months,,12,
+HYCLENS WOUND SPRAY 60ML,Other National,False,quantity,demand (delivered source units),needs_review,30,54,24,0,,,1,,False,Insufficient history,Latest gap-free window has 1 of 24 required months,,12,
+SANOMAX-FA,All Study Regions,False,quantity,demand (delivered source units),proposed,36,46,10,0,,,4,,False,Insufficient history,Latest gap-free window has 4 of 24 required months,,12,
+SANOMAX-FA,CALABARZON,True,quantity,demand (delivered source units),proposed,36,46,10,0,,,4,,False,Insufficient history,Latest gap-free window has 4 of 24 required months,,12,
+SANOMAX-FA,MIMAROPA,True,quantity,demand (delivered source units),proposed,1,1,0,0,,,1,,False,Insufficient history,Latest gap-free window has 1 of 24 required months,,12,
+SANOMAX-FA,Other National,False,quantity,demand (delivered source units),proposed,36,48,12,0,2024-01,2025-12,24,0,True,Eligible for predictive baseline,,"STL(period=12, robust=True)",12,0.910463
