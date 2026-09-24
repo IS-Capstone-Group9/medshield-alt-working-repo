@@ -220,11 +220,35 @@ export function installDashboardEnhancements(
     )
   }
 
+  const analysisScope = root.querySelector<HTMLSelectElement>('#analysisScopeSelect')
+  const applyAnalysisScope = () => {
+    if (!analysisScope) return
+    if (analysisScope.value === 'capstone') {
+      const start = root.querySelector<HTMLInputElement>('#customDateStart')
+      const end = root.querySelector<HTMLInputElement>('#customDateEnd')
+      const latestHistoricalDate = end?.max || new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'Asia/Manila', year: 'numeric', month: '2-digit', day: '2-digit',
+      }).format(new Date())
+      if (start) start.value = '2017-01-01'
+      if (end) end.value = latestHistoricalDate
+      ;(window as any).setDescriptivePeriod?.('custom')
+      ;(window as any).setCustomDateRange?.('2017-01-01', latestHistoricalDate)
+    } else {
+      ;(window as any).setDescriptivePeriod?.('all')
+    }
+  }
+  if (analysisScope) {
+    analysisScope.addEventListener('change', applyAnalysisScope)
+    activeListeners.push({ target: analysisScope, type: 'change', listener: applyAnalysisScope })
+  }
+
   const refreshDecisionCharts = () => {
     window.requestAnimationFrame(() => renderDecisionSupportCharts(root))
   }
   for (const controlId of [
     'descriptivePeriodSelect',
+    'chartGranularitySelect',
+    'analysisScopeSelect',
     'descriptiveComparisonSelect',
     'customDateStart',
     'customDateEnd',

@@ -61,7 +61,7 @@ test.describe('Area Prioritization Dynamic Interactions & Visualizations', () =>
     await expect(page.locator('#sectorProfileTable')).toContainText('Camarines Sur')
     await expect(page.locator('#sectorProfileTable thead')).toContainText('Geographic area')
     await expect(page.locator('#sectorProfileTable thead')).toContainText('Buyer composition')
-    await expect(page.locator('#areaRankedCount')).toHaveText('3')
+    await expect(page.locator('#areaRankedCount')).toHaveText('2')
 
     // The primary ranking is horizontal and visibly separates actual and estimated evidence.
     const chartOptions = await page.evaluate(() => {
@@ -75,6 +75,15 @@ test.describe('Area Prioritization Dynamic Interactions & Visualizations', () =>
     expect(chartOptions.indexAxis).toBe('y')
     expect(chartOptions.xStacked).toBe(true)
     expect(chartOptions.yStacked).toBe(true)
+    const regionalLabels = await page.evaluate(() => {
+      const ranking = (window as any).Chart.getChart(document.getElementById('sectorRevenueChart'))
+      const pareto = (window as any).Chart.getChart(document.getElementById('sectorParetoChart'))
+      return { ranking: ranking.data.labels, pareto: pareto.data.labels }
+    })
+    expect(regionalLabels.ranking).toEqual(['CALABARZON', 'Bicol'])
+    expect(regionalLabels.pareto).toEqual(['CALABARZON', 'Bicol'])
+    expect(regionalLabels.ranking).not.toContain('Quezon')
+    expect(regionalLabels.ranking).not.toContain('National Hub (DOH Central)')
     const evidenceLayers = await page.evaluate(() => {
       const chart = (window as any).Chart.getChart(document.getElementById('sectorRevenueChart'))
       return {
@@ -90,7 +99,7 @@ test.describe('Area Prioritization Dynamic Interactions & Visualizations', () =>
       const chart = (window as any).Chart.getChart(document.getElementById('sectorParetoChart'))
       return chart.data.datasets.map((dataset: any) => dataset.label)
     })
-    expect(paretoLayers).toEqual(['Mapped net sales', 'Cumulative share', '80% reference'])
+    expect(paretoLayers).toEqual(['Regional-group net sales', 'Cumulative share', '80% reference'])
 
     // 3. Actual-only mode removes estimates and updates confidence labels.
     await page.selectOption('#sectorEvidence', 'actual')
@@ -125,7 +134,7 @@ test.describe('Area Prioritization Dynamic Interactions & Visualizations', () =>
     await expect(page.locator('#sectorSource')).toContainText('datasources/templates/buyer_sector_mapping.csv')
   })
 
-  test('regional filtering, provincial granularity, and multi-level aggregations', async ({ page }) => {
+  test('regional filtering, area granularity, and multi-level aggregations', async ({ page }) => {
     await page.route('http://medshield.test/**', route => route.fulfill({ contentType: 'text/html', body: '<html><body></body></html>' }))
     await page.goto('http://medshield.test/')
     await page.setContent(`<style>${MEDSHIELD_STYLE}</style>${MEDSHIELD_MARKUP}`)
@@ -170,13 +179,17 @@ test.describe('Area Prioritization Dynamic Interactions & Visualizations', () =>
       })
     })
 
-    // 1. Verify Regional Rollup Grid Renders All Regional Aggregates
+    // 1. Verify the primary rollup contains the capstone regions plus consolidated Other National
     const rollupGrid = page.locator('#areaRegionRollupGrid')
     await expect(rollupGrid).toBeVisible()
     await expect(rollupGrid).toContainText('CALABARZON')
     await expect(rollupGrid).toContainText('MIMAROPA')
     await expect(rollupGrid).toContainText('Bicol')
     await expect(rollupGrid).toContainText('Other National')
+    await expect(rollupGrid).not.toContainText('Unknown')
+    await expect(rollupGrid).toContainText('2 Areas')
+    await expect(rollupGrid).toContainText('Total Regional-Group Rollup')
+    await expect(rollupGrid).toContainText('4 Groups')
 
     // 2. Verify Region Filter Dropdown Exists with Regional Options
     const regionSelect = page.locator('#sectorRegion')
@@ -184,6 +197,7 @@ test.describe('Area Prioritization Dynamic Interactions & Visualizations', () =>
     await expect(regionSelect).toContainText('CALABARZON')
     await expect(regionSelect).toContainText('MIMAROPA')
     await expect(regionSelect).toContainText('Bicol')
+    await expect(regionSelect).toContainText('Other National')
 
     // 3. Filter by MIMAROPA Region
     await page.selectOption('#sectorRegion', 'MIMAROPA')
@@ -191,7 +205,7 @@ test.describe('Area Prioritization Dynamic Interactions & Visualizations', () =>
     await expect(page.locator('#sectorProfileTable')).toContainText('Oriental Mindoro')
     await expect(page.locator('#sectorProfileTable')).not.toContainText('Quezon')
     await expect(page.locator('#sectorProfileTable')).not.toContainText('Batangas')
-    await expect(page.locator('#areaRankedCount')).toHaveText('2')
+    await expect(page.locator('#areaRankedCount')).toHaveText('1')
 
     // 4. Verify Summary Footer Row Totals
     const tableFooter = page.locator('#sectorProfileTable tfoot')
@@ -206,11 +220,11 @@ test.describe('Area Prioritization Dynamic Interactions & Visualizations', () =>
     await expect(page.locator('#sectorProfileTable')).toContainText('Batangas')
     await expect(page.locator('#sectorProfileTable')).toContainText('Cavite')
     await expect(page.locator('#sectorProfileTable')).not.toContainText('Marinduque')
-    await expect(page.locator('#areaRankedCount')).toHaveText('3')
+    await expect(page.locator('#areaRankedCount')).toHaveText('1')
 
     // 6. Reset to All Regions
     await page.selectOption('#sectorRegion', 'All')
-    await expect(page.locator('#areaRankedCount')).toHaveText('7')
+    await expect(page.locator('#areaRankedCount')).toHaveText('4')
   })
 })
 

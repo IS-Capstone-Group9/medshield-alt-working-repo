@@ -89,6 +89,35 @@ function installDescriptivePeriodControls(root: HTMLElement) {
     selector.append(compareWrap)
   }
 
+  if (selector && !selector.querySelector('#analysisScopeSelect')) {
+    const label = document.createElement('label')
+    label.setAttribute('for', 'analysisScopeSelect')
+    label.className = 'sr-only'
+    label.textContent = 'Analysis scope'
+    const select = document.createElement('select')
+    select.id = 'analysisScopeSelect'
+    select.className = 'topbar-select'
+    select.setAttribute('aria-label', 'Analysis scope')
+    select.add(new Option('Extended · 2017–Current', 'extended', true, true))
+    select.add(new Option('Capstone · 2017–2026', 'capstone'))
+    selector.prepend(label, select)
+  }
+
+  if (selector && !selector.querySelector('#chartGranularitySelect')) {
+    const label = document.createElement('label')
+    label.setAttribute('for', 'chartGranularitySelect')
+    label.className = 'sr-only'
+    label.textContent = 'Chart granularity'
+    const select = document.createElement('select')
+    select.id = 'chartGranularitySelect'
+    select.className = 'topbar-select'
+    select.setAttribute('aria-label', 'Chart granularity')
+    select.add(new Option('Granularity · Automatic', 'auto', true, true))
+    select.add(new Option('Granularity · Monthly', 'monthly'))
+    select.add(new Option('Granularity · Yearly', 'yearly'))
+    selector.append(label, select)
+  }
+
   const singleYearWrap = root.querySelector<HTMLElement>('#singleYearWrap')
   if (singleYearWrap) {
     singleYearWrap.style.display = 'none'
