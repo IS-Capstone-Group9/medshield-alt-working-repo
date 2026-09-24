@@ -242,10 +242,13 @@ export function installDashboardEnhancements(
     if (analysisScope.value === 'capstone') {
       const start = root.querySelector<HTMLInputElement>('#customDateStart')
       const end = root.querySelector<HTMLInputElement>('#customDateEnd')
-      if (start) start.value = '2021-01-01'
-      if (end) end.value = '2025-12-31'
+      const latestHistoricalDate = end?.max || new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'Asia/Manila', year: 'numeric', month: '2-digit', day: '2-digit',
+      }).format(new Date())
+      if (start) start.value = '2017-01-01'
+      if (end) end.value = latestHistoricalDate
       ;(window as any).setDescriptivePeriod?.('custom')
-      ;(window as any).setCustomDateRange?.('2021-01-01', '2025-12-31')
+      ;(window as any).setCustomDateRange?.('2017-01-01', latestHistoricalDate)
     } else {
       ;(window as any).setDescriptivePeriod?.('all')
     }
@@ -260,6 +263,8 @@ export function installDashboardEnhancements(
   }
   for (const controlId of [
     'descriptivePeriodSelect',
+    'chartGranularitySelect',
+    'analysisScopeSelect',
     'descriptiveComparisonSelect',
     'customDateStart',
     'customDateEnd',

@@ -52,7 +52,9 @@ const RESPONSIVE_OVERVIEW_CHART = `  const overviewRows = getDescriptiveDisplayR
 
   if (overviewTitleNode) overviewTitleNode.textContent = descriptiveUsesDailyGrain()
     ? 'Daily Net Sales Revenue '
-    : 'Monthly Net Sales Revenue & Gross Profit ';
+    : descriptiveUsesYearlyGrain()
+      ? 'Yearly Net Sales Revenue & Gross Profit '
+      : 'Monthly Net Sales Revenue & Gross Profit ';
   const overviewEstimatedCount = overviewRows.filter(row => row.evidence === 'estimate').length;
   if (overviewSubtitle) overviewSubtitle.textContent = overviewRows.some(row => row.revenue != null)
     ? descriptivePeriodLabel() + '; ' + overviewEstimatedCount + ' weighted estimate' + (overviewEstimatedCount === 1 ? '' : 's') + '; uploaded actuals take precedence'
@@ -61,7 +63,7 @@ const RESPONSIVE_OVERVIEW_CHART = `  const overviewRows = getDescriptiveDisplayR
       : 'No monthly observations are available for ' + descriptivePeriodLabel();
   if (overviewBadge) overviewBadge.textContent = comparisonMode === 'yoy'
     ? 'Y/Y Compare'
-    : descriptiveUsesDailyGrain() ? 'Daily Detail' : 'Monthly Detail';
+    : descriptiveUsesDailyGrain() ? 'Daily Detail' : descriptiveUsesYearlyGrain() ? 'Yearly Detail' : 'Monthly Detail';
 
   createChart('overviewBaselineChart', {
     type: 'line',
@@ -75,7 +77,7 @@ const RESPONSIVE_OVERVIEW_CHART = `  const overviewRows = getDescriptiveDisplayR
   if (overviewCanvas) {
     overviewCanvas.setAttribute('aria-label', descriptiveUsesDailyGrain()
       ? 'Line chart showing daily net sales revenue for ' + descriptivePeriodLabel() + ' when transaction dates are available.'
-      : 'Line chart showing monthly net sales revenue and gross profit for ' + descriptivePeriodLabel() + '.');
+      : 'Line chart showing ' + (descriptiveUsesYearlyGrain() ? 'yearly' : 'monthly') + ' net sales revenue and gross profit for ' + descriptivePeriodLabel() + '.');
   }`
 
 export function patchOverviewMonthlyChart(script: string): string {

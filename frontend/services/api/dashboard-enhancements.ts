@@ -90,17 +90,32 @@ function installDescriptivePeriodControls(root: HTMLElement) {
   }
 
   if (selector && !selector.querySelector('#analysisScopeSelect')) {
-    const scopeLabel = document.createElement('label')
-    scopeLabel.setAttribute('for', 'analysisScopeSelect')
-    scopeLabel.className = 'sr-only'
-    scopeLabel.textContent = 'Analysis scope'
-    const scopeSelect = document.createElement('select')
-    scopeSelect.id = 'analysisScopeSelect'
-    scopeSelect.className = 'topbar-select'
-    scopeSelect.setAttribute('aria-label', 'Analysis scope')
-    scopeSelect.add(new Option('Extended · 2017–Current', 'extended', true, true))
-    scopeSelect.add(new Option('Capstone · 2021–2025', 'capstone'))
-    selector.prepend(scopeLabel, scopeSelect)
+    const label = document.createElement('label')
+    label.setAttribute('for', 'analysisScopeSelect')
+    label.className = 'sr-only'
+    label.textContent = 'Analysis scope'
+    const select = document.createElement('select')
+    select.id = 'analysisScopeSelect'
+    select.className = 'topbar-select'
+    select.setAttribute('aria-label', 'Analysis scope')
+    select.add(new Option('Extended · 2017–Current', 'extended', true, true))
+    select.add(new Option('Capstone · 2017–2026', 'capstone'))
+    selector.prepend(label, select)
+  }
+
+  if (selector && !selector.querySelector('#chartGranularitySelect')) {
+    const label = document.createElement('label')
+    label.setAttribute('for', 'chartGranularitySelect')
+    label.className = 'sr-only'
+    label.textContent = 'Chart granularity'
+    const select = document.createElement('select')
+    select.id = 'chartGranularitySelect'
+    select.className = 'topbar-select'
+    select.setAttribute('aria-label', 'Chart granularity')
+    select.add(new Option('Granularity · Automatic', 'auto', true, true))
+    select.add(new Option('Granularity · Monthly', 'monthly'))
+    select.add(new Option('Granularity · Yearly', 'yearly'))
+    selector.append(label, select)
   }
 
   const singleYearWrap = root.querySelector<HTMLElement>('#singleYearWrap')
