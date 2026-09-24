@@ -16,9 +16,23 @@ MANIFEST_TABLE = "workspace.medshield_bronze.sales_restart_manifest_candidate"
 ASSESSED_TABLE = "workspace.medshield_silver.sales_restart_assessed_candidate"
 CLEAN_TABLE = "workspace.medshield_silver.sales_restart_clean_candidate"
 AUDIT_TABLE = "workspace.medshield_audit.sales_restart_disposition_candidate"
+REPLACEMENT_2025_AUDIT_TABLE = "workspace.medshield_audit.sales_restart_replacement_year_validation_candidate"
 MAX_DRIVER_ROWS = 250_000
 MAX_DRIVER_BYTES = 100 * 1024 * 1024
-SILVER_VERSION = "sales_restart_silver_v3_serial_dates"
+SILVER_VERSION = "sales_restart_silver_v4_2025_allocation_validation"
+REPLACEMENT_2025_WORKBOOK = "medshield_data_2025.csv"
+REPLACEMENT_2025_SHA256 = "d05fec98a3a312416118fab4d11ca1f6e0c19f1951248b7b22fcc518eeb15569"
+REPLACEMENT_2025_TRANSACTION_ROWS = 4_544
+REPLACEMENT_2025_NET_SALES = Decimal("185396821.040000")
+REPLACEMENT_2025_GROSS_SALES = Decimal("185777264.240000")
+REPLACEMENT_2025_TOTAL_ACQUISITION_COST = Decimal("94760630.250000")
+REPLACEMENT_2025_GROSS_MARGIN = Decimal("90636190.790000")
+CONTRACT_PREFIX_PATTERN = re.compile(
+    r"^(PAGBILAO|QMC|PPDC|TOURISM|PROVINCIAL\s+TOURISM\s+OFFICE|"
+    r"MARINDUQUE|GULANG\s+GULANG|PESO|PESO\s+PROVINCIAL|PHO|"
+    r"ABOITIZ|PADRE\s+BURGOS|PPOC)\s*#",
+    re.IGNORECASE,
+)
 
 # COMMAND ----------
 # Cell 2 — Pure parsing functions. These also run in the local regression tests.
@@ -75,6 +89,11 @@ def normalized_dr(value):
     text = re.sub(r"\s+", "", text)
     text = re.sub(r"-{2,}", "-", text).strip("-")
     return "DR-" + text if text.isdigit() else text
+
+
+def is_contract_parent_label(value):
+    """Recognize reviewed contract-parent prefixes without rejecting SKU size markers."""
+    return bool(CONTRACT_PREFIX_PATTERN.search(str(value or "").strip()))
 
 
 def parse_decimal(raw, percent_points=False, discount_dash_zero=False):
@@ -446,6 +465,16 @@ assert len(dataset_ids) == 1 and dataset_ids == {row["dataset_id"] for row in ma
 assert len({row["source_record_id"] for row in source_rows}) == bronze_count, "Duplicate Bronze source identities."
 manifest_keys = {(row["source_workbook"], row["source_file_sha256"], row["data_source_year"]) for row in manifest_rows}
 assert len(manifest_keys) == len(manifest_rows), "Duplicate manifest files."
+replacement_manifest = next(
+    (row for row in manifest_rows if row["source_workbook"] == REPLACEMENT_2025_WORKBOOK),
+    None,
+)
+assert replacement_manifest is not None, f"Missing {REPLACEMENT_2025_WORKBOOK}; rerun Bronze."
+assert replacement_manifest["source_file_sha256"] == REPLACEMENT_2025_SHA256, (
+    "The 2025 source is not the reviewed allocation replacement; rerun Bronze with the final CSV."
+)
+assert replacement_manifest.get("source_data_status") == "ADJUSTED_ESTIMATED_PRODUCT_ALLOCATION_SOURCE"
+assert replacement_manifest.get("source_adjustment_policy") == "contract_parent_replaced_with_existing_product_allocation_v1"
 observed_files = Counter((row["source_workbook"], row["source_file_sha256"], row["data_source_year"]) for row in source_rows)
 assert set(observed_files) == manifest_keys, "Bronze files differ from the manifest."
 for manifest in manifest_rows:
@@ -461,6 +490,43 @@ manifest_json = json.dumps(manifest_identity, sort_keys=True, separators=(",", "
 assert dataset_ids == {hashlib.sha256(manifest_json.encode("utf-8")).hexdigest()}, "Dataset identity differs from source manifest."
 assessed_rows = assess_sales_records(source_rows)
 print(f"Assessed {len(assessed_rows):,} physical source rows across {len(manifest_rows)} files.")
+
+# The reviewed 2025 replacement must be complete, contract-parent-free and
+# financially identical to the approved output. A '#' inside an actual SKU name
+# (for example a blade size) is allowed when it does not match a contract prefix.
+replacement_2025_rows = [
+    row for row in assessed_rows
+    if row["source_workbook"] == REPLACEMENT_2025_WORKBOOK
+    and row["record_kind"] == "TRANSACTION_CANDIDATE"
+]
+replacement_2025_contract_rows = [
+    row for row in replacement_2025_rows if is_contract_parent_label(row["product"])
+]
+assert len(replacement_2025_rows) == REPLACEMENT_2025_TRANSACTION_ROWS, (
+    f"2025 replacement transaction count changed: expected {REPLACEMENT_2025_TRANSACTION_ROWS:,}, "
+    f"received {len(replacement_2025_rows):,}."
+)
+assert not replacement_2025_contract_rows, (
+    "Known 2025 contract-parent labels remain; replace the file with the reviewed allocation CSV."
+)
+assert all(row["product"] and row["date_delivered"] for row in replacement_2025_rows), (
+    "Every 2025 replacement transaction must have a product and delivery date."
+)
+replacement_2025_totals = {
+    "gross_sales": sum((row["gross_sales"] or Decimal("0")) for row in replacement_2025_rows),
+    "net_sales": sum((row["net_sales"] or Decimal("0")) for row in replacement_2025_rows),
+    "total_acquisition_cost": sum((row["total_acquisition_cost"] or Decimal("0")) for row in replacement_2025_rows),
+    "gross_margin_amount": sum((row["gross_margin_amount"] or Decimal("0")) for row in replacement_2025_rows),
+}
+assert replacement_2025_totals == {
+    "gross_sales": REPLACEMENT_2025_GROSS_SALES,
+    "net_sales": REPLACEMENT_2025_NET_SALES,
+    "total_acquisition_cost": REPLACEMENT_2025_TOTAL_ACQUISITION_COST,
+    "gross_margin_amount": REPLACEMENT_2025_GROSS_MARGIN,
+}, f"2025 replacement financial reconciliation failed: {replacement_2025_totals}"
+assert all(row["is_analysis_candidate"] for row in replacement_2025_rows), (
+    "Every reviewed 2025 replacement transaction must survive Silver reconciliation."
+)
 
 # COMMAND ----------
 # Cell 5 — Explicit schemas and pre-publication reconciliation.
@@ -498,19 +564,44 @@ audit_frame = (
          F.sum("net_sales").alias("net_sales"),
          F.count("net_sales").alias("rows_with_net_sales"))
 )
+replacement_2025_audit = spark.createDataFrame([{
+    "dataset_id": next(iter(dataset_ids)),
+    "source_workbook": REPLACEMENT_2025_WORKBOOK,
+    "source_file_sha256": REPLACEMENT_2025_SHA256,
+    "source_data_status": replacement_manifest["source_data_status"],
+    "source_adjustment_policy": replacement_manifest["source_adjustment_policy"],
+    "transaction_rows": len(replacement_2025_rows),
+    "contract_parent_rows": len(replacement_2025_contract_rows),
+    "gross_sales": replacement_2025_totals["gross_sales"],
+    "net_sales": replacement_2025_totals["net_sales"],
+    "total_acquisition_cost": replacement_2025_totals["total_acquisition_cost"],
+    "gross_margin_amount": replacement_2025_totals["gross_margin_amount"],
+    "validation_status": "PASS_2025_ALLOCATION_SOURCE",
+}])
 
 # COMMAND ----------
 # Cell 6 — Publish dedicated candidates and validate persisted content.
 spark.sql("CREATE SCHEMA IF NOT EXISTS workspace.medshield_silver")
 spark.sql("CREATE SCHEMA IF NOT EXISTS workspace.medshield_audit")
-for table_name, output in ((ASSESSED_TABLE, assessed_frame), (CLEAN_TABLE, clean_frame), (AUDIT_TABLE, audit_frame)):
+for table_name, output in (
+    (ASSESSED_TABLE, assessed_frame),
+    (CLEAN_TABLE, clean_frame),
+    (AUDIT_TABLE, audit_frame),
+    (REPLACEMENT_2025_AUDIT_TABLE, replacement_2025_audit),
+):
     output.write.format("delta").mode("overwrite").option("overwriteSchema", "true").saveAsTable(table_name)
 saved_assessed = spark.table(ASSESSED_TABLE)
 saved_clean = spark.table(CLEAN_TABLE)
 saved_audit = spark.table(AUDIT_TABLE)
+saved_replacement_2025_audit = spark.table(REPLACEMENT_2025_AUDIT_TABLE)
 assert saved_assessed.count() == bronze_count
 assert saved_clean.count() == len(clean_rows)
-for saved, expected in ((saved_assessed, assessed_frame), (saved_clean, clean_frame), (saved_audit, audit_frame)):
+for saved, expected in (
+    (saved_assessed, assessed_frame),
+    (saved_clean, clean_frame),
+    (saved_audit, audit_frame),
+    (saved_replacement_2025_audit, replacement_2025_audit),
+):
     saved_ordered = saved.select(*expected.columns)
     assert saved_ordered.exceptAll(expected).limit(1).count() == 0, "Persisted content differs from the assessed output."
     assert expected.exceptAll(saved_ordered).limit(1).count() == 0, "Persisted output is missing assessed content."
@@ -519,9 +610,11 @@ assert identity_digest([row.asDict() for row in saved_assessed.select(*identity_
 assert identity_digest([row.asDict() for row in saved_clean.select(*identity_columns).collect()]) == identity_digest(clean_rows)
 assert saved_audit.agg(F.sum("source_row_count")).first()[0] == bronze_count
 display(saved_audit.orderBy("data_source_year", "disposition"))
+display(saved_replacement_2025_audit)
 print("SALES SILVER RESTART")
 print(f"Dataset: {next(iter(dataset_ids))}")
 print(f"Source rows: {bronze_count:,}; analytical candidates: {len(clean_rows):,}")
 print(f"Rows kept for audit/review only: {bronze_count - len(clean_rows):,}")
+print("2025 replacement: PASS | 4,544 product rows | 0 contract parents | net sales PHP 185,396,821.04")
 print("Historical backfills are provisional and remain labelled for Gold eligibility rules.")
 print("Status: PASS_CANDIDATE_ONLY")

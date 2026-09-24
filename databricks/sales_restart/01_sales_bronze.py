@@ -10,6 +10,11 @@ from pathlib import Path
 
 SOURCE_DIRECTORY = Path("/Workspace/medshield/medshield_project_csv")
 REQUIRED_YEARS = set(range(2017, 2026))
+REPLACEMENT_2025_WORKBOOK = "medshield_data_2025.csv"
+REPLACEMENT_2025_SHA256 = "d05fec98a3a312416118fab4d11ca1f6e0c19f1951248b7b22fcc518eeb15569"
+REPLACEMENT_2025_RAW_LINE_COUNT = 4_551
+REPLACEMENT_2025_STATUS = "ADJUSTED_ESTIMATED_PRODUCT_ALLOCATION_SOURCE"
+REPLACEMENT_2025_POLICY = "contract_parent_replaced_with_existing_product_allocation_v1"
 MAX_SOURCE_BYTES = 100 * 1024 * 1024
 MAX_DRIVER_ROWS = 250_000
 CATALOG = "workspace"
@@ -113,7 +118,36 @@ for source_file in source_paths:
         "source_file_sha256": hashlib.sha256(payload).hexdigest(),
         "source_file_bytes": len(payload),
         "raw_line_count": len(lines),
+        "source_data_status": (
+            REPLACEMENT_2025_STATUS
+            if source_file.name == REPLACEMENT_2025_WORKBOOK
+            else "ORIGINAL_SOURCE_EXPORT"
+        ),
+        "source_adjustment_policy": (
+            REPLACEMENT_2025_POLICY
+            if source_file.name == REPLACEMENT_2025_WORKBOOK
+            else None
+        ),
     })
+
+replacement_2025 = next(
+    (item for item in manifest_records if item["source_workbook"] == REPLACEMENT_2025_WORKBOOK),
+    None,
+)
+if replacement_2025 is None:
+    raise ValueError(f"Required replacement source is missing: {REPLACEMENT_2025_WORKBOOK}")
+if replacement_2025["source_file_sha256"] != REPLACEMENT_2025_SHA256:
+    raise ValueError(
+        f"{REPLACEMENT_2025_WORKBOOK} is not the reviewed product-allocation CSV. "
+        f"Expected sha256 {REPLACEMENT_2025_SHA256}, received "
+        f"{replacement_2025['source_file_sha256']}."
+    )
+if replacement_2025["raw_line_count"] != REPLACEMENT_2025_RAW_LINE_COUNT:
+    raise ValueError(
+        f"{REPLACEMENT_2025_WORKBOOK} raw-line count changed: "
+        f"expected {REPLACEMENT_2025_RAW_LINE_COUNT:,}, received "
+        f"{replacement_2025['raw_line_count']:,}."
+    )
 
 dataset_id = build_dataset_id(manifest_records)
 print(f"Dataset: {dataset_id}")
@@ -164,6 +198,8 @@ manifest_schema = T.StructType([
     T.StructField("source_file_sha256", T.StringType(), False),
     T.StructField("source_file_bytes", T.LongType(), False),
     T.StructField("raw_line_count", T.LongType(), False),
+    T.StructField("source_data_status", T.StringType(), False),
+    T.StructField("source_adjustment_policy", T.StringType(), True),
     T.StructField("source_path", T.StringType(), False),
 ])
 rows_schema = T.StructType([
@@ -223,5 +259,9 @@ print(f"Source files: {len(manifest_records)}")
 print(f"Raw lines: {total_raw_lines:,}")
 print(f"Manifest table: {MANIFEST_TABLE}")
 print(f"Raw-line table: {ROWS_TABLE}")
+print(
+    f"2025 replacement: VERIFIED | {REPLACEMENT_2025_STATUS} | "
+    f"sha256={REPLACEMENT_2025_SHA256}"
+)
 print("Validation: exact persisted values and multiplicities match the source")
 print("Status: PASS_CANDIDATE")

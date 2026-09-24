@@ -1,7 +1,7 @@
 # MedShield Databricks-to-System Connection Walkthrough
 
 > This document describes the earlier 40,086-row pipeline. For the current rebuilt
-> 37,178-row `sales_restart` pipeline, follow
+> 37,728-row `sales_restart` pipeline, follow
 > `CURRENT_DATABRICKS_SYSTEM_CONNECTION.md` and run
 > `databricks/sql/05_sales_restart_system_bridge.sql` first.
 

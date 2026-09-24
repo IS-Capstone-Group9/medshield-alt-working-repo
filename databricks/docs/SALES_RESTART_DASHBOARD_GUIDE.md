@@ -51,8 +51,8 @@ profit because operating expenses are unavailable.
 
 Before publishing, confirm:
 
-- Executive transactions equal **37,178** for the current dataset snapshot.
-- Area-coverage records sum to **37,178**.
+- Executive transactions equal **37,728** for the current dataset snapshot.
+- Area-coverage records sum to **37,728**.
 - Approved territory records equal **14,008** under the current inherited approvals.
 - Territory-year table contains **41** observed territory/year combinations.
 - Missing-observation months display null measures rather than invented zero sales.
@@ -62,4 +62,3 @@ Before publishing, confirm:
 These counts are checks for the current source snapshot, not permanent constants.
 If input files or mapping approvals change, rerun the pipeline and replace the
 expected values with the new reconciled outputs.
-

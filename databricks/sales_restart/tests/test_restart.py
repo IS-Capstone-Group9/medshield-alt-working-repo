@@ -2,6 +2,7 @@
 
 import ast
 from collections import Counter
+from decimal import Decimal
 import hashlib
 import importlib.util
 from pathlib import Path
@@ -206,6 +207,65 @@ class PlaceholderTests(unittest.TestCase):
             self.assertEqual(parse(raw, "modern_13"), date(2025, 9, 13))
         for raw in ["45,913.50", "4,5913.00", "1'17"]:
             self.assertIsNone(parse(raw, "modern_13"))
+
+
+class Replacement2025Tests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.bronze = pure_notebook_namespace("01_sales_bronze.py")
+        cls.silver = pure_notebook_namespace("02_sales_silver.py")
+        cls.path = ROOT.parents[1] / "outputs" / "2025_databricks_final" / "medshield_data_2025.csv"
+        if not cls.path.is_file():
+            raise unittest.SkipTest("Reviewed 2025 Databricks replacement is not available")
+        payload = cls.path.read_bytes()
+        sha = hashlib.sha256(payload).hexdigest()
+        cls.source_rows = [
+            {
+                "dataset_id": "replacement-2025-test",
+                "source_record_id": cls.bronze["source_record_key"](cls.path.name, sha, row_number),
+                "source_workbook": cls.path.name,
+                "data_source_year": 2025,
+                "source_row_number": row_number,
+                "source_file_sha256": sha,
+                "raw_csv_line": raw_line,
+                "source_path": str(cls.path),
+            }
+            for row_number, raw_line in enumerate(
+                cls.bronze["decode_csv_source"](payload, cls.path.name), 1
+            )
+        ]
+        cls.assessed = cls.silver["assess_sales_records"](cls.source_rows)
+        cls.transactions = [
+            row for row in cls.assessed if row["record_kind"] == "TRANSACTION_CANDIDATE"
+        ]
+
+    def test_checksum_and_shape_match_notebook_contract(self):
+        self.assertEqual(
+            hashlib.sha256(self.path.read_bytes()).hexdigest(),
+            self.bronze["REPLACEMENT_2025_SHA256"],
+        )
+        self.assertEqual(len(self.source_rows), self.bronze["REPLACEMENT_2025_RAW_LINE_COUNT"])
+        self.assertEqual(len(self.transactions), self.silver["REPLACEMENT_2025_TRANSACTION_ROWS"])
+        self.assertTrue(all(row["is_analysis_candidate"] for row in self.transactions))
+
+    def test_contract_parents_are_removed_without_rejecting_size_markers(self):
+        is_contract = self.silver["is_contract_parent_label"]
+        self.assertFalse(any(is_contract(row["product"]) for row in self.transactions))
+        self.assertFalse(is_contract("BLADE HOLDER SIZE #4, 5 1/4"))
+        self.assertTrue(is_contract("PAGBILAO # 55,000 LOT 2"))
+
+    def test_financial_totals_reconcile(self):
+        expected = {
+            "gross_sales": self.silver["REPLACEMENT_2025_GROSS_SALES"],
+            "net_sales": self.silver["REPLACEMENT_2025_NET_SALES"],
+            "total_acquisition_cost": self.silver["REPLACEMENT_2025_TOTAL_ACQUISITION_COST"],
+            "gross_margin_amount": self.silver["REPLACEMENT_2025_GROSS_MARGIN"],
+        }
+        actual = {
+            key: sum((row[key] or Decimal("0")) for row in self.transactions)
+            for key in expected
+        }
+        self.assertEqual(actual, expected)
 
 
 class GoldClassificationTests(unittest.TestCase):

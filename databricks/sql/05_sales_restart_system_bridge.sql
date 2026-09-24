@@ -159,8 +159,8 @@ SELECT
   'CANDIDATE_PENDING_FINANCE_APPROVAL' AS financial_definition_status
 FROM with_previous;
 
--- Expected for dataset d7fb65992bc6c0d485499529b0f62e2da97388048326457aa6b6ba39a2b0aeaf:
--- 9 yearly rows, 2017-2025, 37,178 accepted transactions, 12 months per year,
+-- Expected for the checksum-bound 2025 allocation replacement snapshot:
+-- 9 yearly rows, 2017-2025, 37,728 accepted transactions, 12 months per year,
 -- and zero eligibility reconciliation failures.
 SELECT
   COUNT(*) AS yearly_rows,

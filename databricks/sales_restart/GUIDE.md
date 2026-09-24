@@ -28,11 +28,40 @@ tables and defines its own functions. Do not mix these cells with the older
 
 ## Required inputs
 
+### 2025 allocation replacement (25 September 2026)
+
+Replace `/Workspace/medshield/medshield_project_csv/medshield_data_2025.csv`
+with the reviewed file from
+`outputs/2025_databricks_final/medshield_data_2025.csv`. The updated Bronze,
+Silver, and Gold notebooks are intentionally bound to that file's SHA-256
+checksum. This prevents the original contract-parent export, a partially edited
+copy, or a later unreviewed file from silently entering the current snapshot.
+
+The replacement has 4,544 transaction rows, zero known contract-parent labels,
+and net sales of PHP 185,396,821.04. Silver verifies those values and publishes
+`workspace.medshield_audit.sales_restart_replacement_year_validation_candidate`.
+Gold refuses to run unless that validation passes. A `#` used as a product size
+marker remains valid; only the reviewed contract-parent prefixes are blocked.
+
+The replacement is an adjusted analytical source whose contract totals were
+allocated to existing product labels. Bronze records
+`ADJUSTED_ESTIMATED_PRODUCT_ALLOCATION_SOURCE` in the manifest and Gold carries
+that provenance into the fact table as `is_adjusted_source`. The allocation is
+therefore available for analysis without being described as an untouched source
+observation. The current CSV cannot identify the adjusted rows individually, so
+the provenance flag applies to all 2025 records.
+
+The 2017–2024 inputs remain unchanged. The current 2024 source still contains
+123 known contract-parent rows. Gold keeps them in historical contract evidence
+and excludes them from provisional product-demand eligibility. Removing the
+contract issue from all years requires a separately reconciled 2024 replacement.
+
 ### Area master v4 (14 September 2026)
 
 Upload the enhanced `datasources/templates/area_classification_mapping.csv` to
 the configured `AREA_MAPPING_PATH`, then replace Gold with the current Python
-source and run it from cell 1. Its policy is `sales_restart_gold_v4_area_master`.
+source and run it from cell 1. The current combined policy is
+`sales_restart_gold_v5_2025_allocation_source`.
 No Bronze/Silver rerun is required when only the area master/Gold changes.
 An older-format supplied CSV now fails the required-column check rather than
 silently dropping geographic metadata. An absent file still leaves all areas
@@ -116,10 +145,11 @@ Your workspace should contain:
     └── product_master_review.csv
 ```
 
-Use the original CSV exports, not previously aggregated or backward-allocated
-files. Keep the reference CSV as a review list; it is not an approved medicine
-master. You need permission to create schemas, a Unity Catalog volume, and
-Delta tables in the `workspace` catalog.
+Use the original CSV exports for 2017–2024 and the checksum-bound reviewed 2025
+allocation replacement described above. Do not substitute another aggregated
+or backward-allocated file. Keep the reference CSV as a review list; it is not
+an approved medicine master. You need permission to create schemas, a Unity
+Catalog volume, and Delta tables in the `workspace` catalog.
 
 Upload `datasources/templates/area_classification_mapping.csv` as the area map.
 Use `sales_restart/references/product_master_review.csv` for the product master.
@@ -160,10 +190,12 @@ The baseline inventory is 2017–2025. Additional yearly files must have a
 recognized, validated source layout. A changed header must be investigated;
 do not rename columns or force a new file through a different year's layout.
 
-The supplied files previously contained **58,634 raw split lines**, including
-headers, blank lines, and one trailing empty split element per file. That is
-an ingestion reference, **not a sales transaction count or a required clean
-row count**. The pipeline validates the current manifest and source keys.
+With the checksum-bound 2025 replacement, the nine supplied files contain
+**59,039 raw split lines**, including headers, blank lines, and one trailing
+empty split element per file. Silver retains **37,728** analytical candidates,
+including all 4,544 replacement-year transactions. These are reconciliation
+references, not hard-coded dashboard totals; the pipeline validates the current
+manifest, source keys, and 2025 financial totals on every run.
 
 ## What each layer means
 
@@ -207,7 +239,7 @@ downstream consumers even when the sales dataset ID has not changed.
 | Historical backfills | Keep unmatched earlier-year records as flagged candidates. Exclude unapproved backfills from provisional predictive demand. |
 | Returns/credits | Retain signed quantities and eligible signed financial amounts. Show negative-quantity return candidates separately as absolute quantities. A negative sign alone does not confirm the business reason. |
 | Zero or negative sales with positive quantity | Keep quantity and financial eligibility separate. Do not require positive revenue to recognize observed positive product deliveries. |
-| Contracts | Known contract prefixes form a separate candidate scope. Exact normalized labels support summaries, not proof of a unique legal contract. Contract parent quantities are not SKU demand. |
+| Contracts | The reviewed 2025 replacement must contain zero known contract-parent labels. Earlier source years still use a separate candidate scope; their parent quantities are excluded from provisional SKU demand. |
 | Unknown `#` labels | Review separately; `#` by itself is not proof of a contract (for example, a numbered surgical blade). |
 | Blank continuation rows | Preserve them in the assessed/audit data. Do not infer products, delivery dates, or parent links from proximity alone. |
 | Backward approximation | No estimated child products are created here. Allocation requires supporting detail, a documented method, reconciliation, and approval. Later estimates must remain separate from observed demand. |
@@ -250,12 +282,12 @@ cells on 735 receipt/area-aligned rows; it cannot repair 2017 `#REF!` references
 472 identity-review records have same-file/receipt/date/area product leads, but
 a multi-product receipt does not prove a particular row's missing product.
 
-Silver v3 fixes the formatted Excel serial `45,913.00` at 2025 CSV row 2411,
-corroborated by numeric 45913 at `Sales Report.xlsx`, sheet `2025`, cell `C2411`.
-It becomes 2025-09-13 and is flagged `EXCEL_SERIAL_DELIVERY_DATE_PARSED`.
-Reconciliation then routes it to possible-duplicate review; it is not simply
-added to sales. With the current source files, retained candidates remain
-37,178, identity review becomes 4,544 and possible-duplicate review becomes 123.
+Silver v4 retains the serial-date parser for legacy inputs and adds strict 2025
+replacement validation. With the checksum-bound replacement, all 4,544 2025
+transaction rows have a product and delivery date and survive Silver. Across
+2017–2025, the current snapshot retains 37,728 analytical candidates. Historical
+identity, duplicate, product-master, and 2024 contract-parent reviews remain
+separate from the resolved 2025 source-file gate.
 
 Ask the source owner for the original 2017 workbook/reference sheets and delivery
 receipt/invoice line details for the blank-product rows, prioritizing records

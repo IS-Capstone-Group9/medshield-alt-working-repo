@@ -29,7 +29,7 @@ SQL before changing credentials.
 | `minimum_year` | 2017 |
 | `maximum_year` | 2025 |
 | `distinct_years` | 9 |
-| `accepted_transactions` | 37,178 |
+| `accepted_transactions` | 37,728 |
 | `minimum_calendar_months` | 12 |
 | `maximum_calendar_months` | 12 |
 | `eligibility_reconciliation_failures` | 0 |
@@ -89,7 +89,7 @@ npm run build
 npm run databricks:extract:sales
 ```
 
-The successful extraction should report 9 rows, 47 columns, 2017-2025, and 37,178
+The successful extraction should report 9 rows, 47 columns, 2017-2025, and 37,728
 source transactions. The command updates the candidate evidence files under
 `outputs/databricks`.
 
@@ -138,8 +138,8 @@ Expected reconciliation:
 - extracted rows: 9
 - loaded rows: 9
 - years: 2017-2025
-- source transactions: 37,178
-- loaded transactions: 37,178
+- source transactions: 37,728
+- loaded transactions: 37,728
 - candidate cache synchronized
 
 This cache is a controlled integration checkpoint. The existing public dashboard

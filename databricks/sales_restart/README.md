@@ -28,11 +28,40 @@ tables and defines its own functions. Do not mix these cells with the older
 
 ## Required inputs
 
+### 2025 allocation replacement (25 September 2026)
+
+Replace `/Workspace/medshield/medshield_project_csv/medshield_data_2025.csv`
+with the reviewed file from
+`outputs/2025_databricks_final/medshield_data_2025.csv`. The updated Bronze,
+Silver, and Gold notebooks are intentionally bound to that file's SHA-256
+checksum. This prevents the original contract-parent export, a partially edited
+copy, or a later unreviewed file from silently entering the current snapshot.
+
+The replacement has 4,544 transaction rows, zero known contract-parent labels,
+and net sales of PHP 185,396,821.04. Silver verifies those values and publishes
+`workspace.medshield_audit.sales_restart_replacement_year_validation_candidate`.
+Gold refuses to run unless that validation passes. A `#` used as a product size
+marker remains valid; only the reviewed contract-parent prefixes are blocked.
+
+The replacement is an adjusted analytical source whose contract totals were
+allocated to existing product labels. Bronze records
+`ADJUSTED_ESTIMATED_PRODUCT_ALLOCATION_SOURCE` in the manifest and Gold carries
+that provenance into the fact table as `is_adjusted_source`. The allocation is
+therefore available for analysis without being described as an untouched source
+observation. The current CSV cannot identify the adjusted rows individually, so
+the provenance flag applies to all 2025 records.
+
+The 2017–2024 inputs remain unchanged. The current 2024 source still contains
+123 known contract-parent rows. Gold keeps them in historical contract evidence
+and excludes them from provisional product-demand eligibility. Removing the
+contract issue from all years requires a separately reconciled 2024 replacement.
+
 ### Area master v4 (14 September 2026)
 
 Upload the enhanced `datasources/templates/area_classification_mapping.csv` to
 the configured `AREA_MAPPING_PATH`, then replace Gold with the current Python
-source and run it from cell 1. Its policy is `sales_restart_gold_v4_area_master`.
+source and run it from cell 1. The current combined policy is
+`sales_restart_gold_v5_2025_allocation_source`.
 No Bronze/Silver rerun is required when only the area master/Gold changes.
 An older-format supplied CSV now fails the required-column check rather than
 silently dropping geographic metadata. An absent file still leaves all areas
@@ -116,10 +145,11 @@ Your workspace should contain:
     └── product_master_review.csv
 ```
 
-Use the original CSV exports, not previously aggregated or backward-allocated
-files. Keep the reference CSV as a review list; it is not an approved medicine
-master. You need permission to create schemas, a Unity Catalog volume, and
-Delta tables in the `workspace` catalog.
+Use the original CSV exports for 2017–2024 and the checksum-bound reviewed 2025
+allocation replacement described above. Do not substitute another aggregated
+or backward-allocated file. Keep the reference CSV as a review list; it is not
+an approved medicine master. You need permission to create schemas, a Unity
+Catalog volume, and Delta tables in the `workspace` catalog.
 
 Upload `datasources/templates/area_classification_mapping.csv` as the area map.
 Use `sales_restart/references/product_master_review.csv` for the product master.
@@ -160,10 +190,12 @@ The baseline inventory is 2017–2025. Additional yearly files must have a
 recognized, validated source layout. A changed header must be investigated;
 do not rename columns or force a new file through a different year's layout.
 
-The supplied files previously contained **58,634 raw split lines**, including
-headers, blank lines, and one trailing empty split element per file. That is
-an ingestion reference, **not a sales transaction count or a required clean
-row count**. The pipeline validates the current manifest and source keys.
+With the checksum-bound 2025 replacement, the nine supplied files contain
+**59,039 raw split lines**, including headers, blank lines, and one trailing
+empty split element per file. Silver retains **37,728** analytical candidates,
+including all 4,544 replacement-year transactions. These are reconciliation
+references, not hard-coded dashboard totals; the pipeline validates the current
+manifest, source keys, and 2025 financial totals on every run.
 
 ## What each layer means
 
@@ -207,7 +239,7 @@ downstream consumers even when the sales dataset ID has not changed.
 | Historical backfills | Keep unmatched earlier-year records as flagged candidates. Exclude unapproved backfills from provisional predictive demand. |
 | Returns/credits | Retain signed quantities and eligible signed financial amounts. Show negative-quantity return candidates separately as absolute quantities. A negative sign alone does not confirm the business reason. |
 | Zero or negative sales with positive quantity | Keep quantity and financial eligibility separate. Do not require positive revenue to recognize observed positive product deliveries. |
-| Contracts | Known contract prefixes form a separate candidate scope. Exact normalized labels support summaries, not proof of a unique legal contract. Contract parent quantities are not SKU demand. |
+| Contracts | The reviewed 2025 replacement must contain zero known contract-parent labels. Earlier source years still use a separate candidate scope; their parent quantities are excluded from provisional SKU demand. |
 | Unknown `#` labels | Review separately; `#` by itself is not proof of a contract (for example, a numbered surgical blade). |
 | Blank continuation rows | Preserve them in the assessed/audit data. Do not infer products, delivery dates, or parent links from proximity alone. |
 | Backward approximation | No estimated child products are created here. Allocation requires supporting detail, a documented method, reconciliation, and approval. Later estimates must remain separate from observed demand. |
@@ -250,12 +282,12 @@ cells on 735 receipt/area-aligned rows; it cannot repair 2017 `#REF!` references
 472 identity-review records have same-file/receipt/date/area product leads, but
 a multi-product receipt does not prove a particular row's missing product.
 
-Silver v3 fixes the formatted Excel serial `45,913.00` at 2025 CSV row 2411,
-corroborated by numeric 45913 at `Sales Report.xlsx`, sheet `2025`, cell `C2411`.
-It becomes 2025-09-13 and is flagged `EXCEL_SERIAL_DELIVERY_DATE_PARSED`.
-Reconciliation then routes it to possible-duplicate review; it is not simply
-added to sales. With the current source files, retained candidates remain
-37,178, identity review becomes 4,544 and possible-duplicate review becomes 123.
+Silver v4 retains the serial-date parser for legacy inputs and adds strict 2025
+replacement validation. With the checksum-bound replacement, all 4,544 2025
+transaction rows have a product and delivery date and survive Silver. Across
+2017–2025, the current snapshot retains 37,728 analytical candidates. Historical
+identity, duplicate, product-master, and 2024 contract-parent reviews remain
+separate from the resolved 2025 source-file gate.
 
 Ask the source owner for the original 2017 workbook/reference sheets and delivery
 receipt/invoice line details for the blank-product rows, prioritizing records
@@ -330,6 +362,11 @@ from pathlib import Path
 
 SOURCE_DIRECTORY = Path("/Workspace/medshield/medshield_project_csv")
 REQUIRED_YEARS = set(range(2017, 2026))
+REPLACEMENT_2025_WORKBOOK = "medshield_data_2025.csv"
+REPLACEMENT_2025_SHA256 = "d05fec98a3a312416118fab4d11ca1f6e0c19f1951248b7b22fcc518eeb15569"
+REPLACEMENT_2025_RAW_LINE_COUNT = 4_551
+REPLACEMENT_2025_STATUS = "ADJUSTED_ESTIMATED_PRODUCT_ALLOCATION_SOURCE"
+REPLACEMENT_2025_POLICY = "contract_parent_replaced_with_existing_product_allocation_v1"
 MAX_SOURCE_BYTES = 100 * 1024 * 1024
 MAX_DRIVER_ROWS = 250_000
 CATALOG = "workspace"
@@ -435,7 +472,36 @@ for source_file in source_paths:
         "source_file_sha256": hashlib.sha256(payload).hexdigest(),
         "source_file_bytes": len(payload),
         "raw_line_count": len(lines),
+        "source_data_status": (
+            REPLACEMENT_2025_STATUS
+            if source_file.name == REPLACEMENT_2025_WORKBOOK
+            else "ORIGINAL_SOURCE_EXPORT"
+        ),
+        "source_adjustment_policy": (
+            REPLACEMENT_2025_POLICY
+            if source_file.name == REPLACEMENT_2025_WORKBOOK
+            else None
+        ),
     })
+
+replacement_2025 = next(
+    (item for item in manifest_records if item["source_workbook"] == REPLACEMENT_2025_WORKBOOK),
+    None,
+)
+if replacement_2025 is None:
+    raise ValueError(f"Required replacement source is missing: {REPLACEMENT_2025_WORKBOOK}")
+if replacement_2025["source_file_sha256"] != REPLACEMENT_2025_SHA256:
+    raise ValueError(
+        f"{REPLACEMENT_2025_WORKBOOK} is not the reviewed product-allocation CSV. "
+        f"Expected sha256 {REPLACEMENT_2025_SHA256}, received "
+        f"{replacement_2025['source_file_sha256']}."
+    )
+if replacement_2025["raw_line_count"] != REPLACEMENT_2025_RAW_LINE_COUNT:
+    raise ValueError(
+        f"{REPLACEMENT_2025_WORKBOOK} raw-line count changed: "
+        f"expected {REPLACEMENT_2025_RAW_LINE_COUNT:,}, received "
+        f"{replacement_2025['raw_line_count']:,}."
+    )
 
 dataset_id = build_dataset_id(manifest_records)
 print(f"Dataset: {dataset_id}")
@@ -490,6 +556,8 @@ manifest_schema = T.StructType([
     T.StructField("source_file_sha256", T.StringType(), False),
     T.StructField("source_file_bytes", T.LongType(), False),
     T.StructField("raw_line_count", T.LongType(), False),
+    T.StructField("source_data_status", T.StringType(), False),
+    T.StructField("source_adjustment_policy", T.StringType(), True),
     T.StructField("source_path", T.StringType(), False),
 ])
 rows_schema = T.StructType([
@@ -551,6 +619,10 @@ print(f"Source files: {len(manifest_records)}")
 print(f"Raw lines: {total_raw_lines:,}")
 print(f"Manifest table: {MANIFEST_TABLE}")
 print(f"Raw-line table: {ROWS_TABLE}")
+print(
+    f"2025 replacement: VERIFIED | {REPLACEMENT_2025_STATUS} | "
+    f"sha256={REPLACEMENT_2025_SHA256}"
+)
 print("Validation: exact persisted values and multiplicities match the source")
 print("Status: PASS_CANDIDATE")
 ```
@@ -581,9 +653,23 @@ MANIFEST_TABLE = "workspace.medshield_bronze.sales_restart_manifest_candidate"
 ASSESSED_TABLE = "workspace.medshield_silver.sales_restart_assessed_candidate"
 CLEAN_TABLE = "workspace.medshield_silver.sales_restart_clean_candidate"
 AUDIT_TABLE = "workspace.medshield_audit.sales_restart_disposition_candidate"
+REPLACEMENT_2025_AUDIT_TABLE = "workspace.medshield_audit.sales_restart_replacement_year_validation_candidate"
 MAX_DRIVER_ROWS = 250_000
 MAX_DRIVER_BYTES = 100 * 1024 * 1024
-SILVER_VERSION = "sales_restart_silver_v3_serial_dates"
+SILVER_VERSION = "sales_restart_silver_v4_2025_allocation_validation"
+REPLACEMENT_2025_WORKBOOK = "medshield_data_2025.csv"
+REPLACEMENT_2025_SHA256 = "d05fec98a3a312416118fab4d11ca1f6e0c19f1951248b7b22fcc518eeb15569"
+REPLACEMENT_2025_TRANSACTION_ROWS = 4_544
+REPLACEMENT_2025_NET_SALES = Decimal("185396821.040000")
+REPLACEMENT_2025_GROSS_SALES = Decimal("185777264.240000")
+REPLACEMENT_2025_TOTAL_ACQUISITION_COST = Decimal("94760630.250000")
+REPLACEMENT_2025_GROSS_MARGIN = Decimal("90636190.790000")
+CONTRACT_PREFIX_PATTERN = re.compile(
+    r"^(PAGBILAO|QMC|PPDC|TOURISM|PROVINCIAL\s+TOURISM\s+OFFICE|"
+    r"MARINDUQUE|GULANG\s+GULANG|PESO|PESO\s+PROVINCIAL|PHO|"
+    r"ABOITIZ|PADRE\s+BURGOS|PPOC)\s*#",
+    re.IGNORECASE,
+)
 ```
 
 ### Silver — cell 2
@@ -643,6 +729,11 @@ def normalized_dr(value):
     text = re.sub(r"\s+", "", text)
     text = re.sub(r"-{2,}", "-", text).strip("-")
     return "DR-" + text if text.isdigit() else text
+
+
+def is_contract_parent_label(value):
+    """Recognize reviewed contract-parent prefixes without rejecting SKU size markers."""
+    return bool(CONTRACT_PREFIX_PATTERN.search(str(value or "").strip()))
 
 
 def parse_decimal(raw, percent_points=False, discount_dash_zero=False):
@@ -1020,6 +1111,16 @@ assert len(dataset_ids) == 1 and dataset_ids == {row["dataset_id"] for row in ma
 assert len({row["source_record_id"] for row in source_rows}) == bronze_count, "Duplicate Bronze source identities."
 manifest_keys = {(row["source_workbook"], row["source_file_sha256"], row["data_source_year"]) for row in manifest_rows}
 assert len(manifest_keys) == len(manifest_rows), "Duplicate manifest files."
+replacement_manifest = next(
+    (row for row in manifest_rows if row["source_workbook"] == REPLACEMENT_2025_WORKBOOK),
+    None,
+)
+assert replacement_manifest is not None, f"Missing {REPLACEMENT_2025_WORKBOOK}; rerun Bronze."
+assert replacement_manifest["source_file_sha256"] == REPLACEMENT_2025_SHA256, (
+    "The 2025 source is not the reviewed allocation replacement; rerun Bronze with the final CSV."
+)
+assert replacement_manifest.get("source_data_status") == "ADJUSTED_ESTIMATED_PRODUCT_ALLOCATION_SOURCE"
+assert replacement_manifest.get("source_adjustment_policy") == "contract_parent_replaced_with_existing_product_allocation_v1"
 observed_files = Counter((row["source_workbook"], row["source_file_sha256"], row["data_source_year"]) for row in source_rows)
 assert set(observed_files) == manifest_keys, "Bronze files differ from the manifest."
 for manifest in manifest_rows:
@@ -1035,6 +1136,43 @@ manifest_json = json.dumps(manifest_identity, sort_keys=True, separators=(",", "
 assert dataset_ids == {hashlib.sha256(manifest_json.encode("utf-8")).hexdigest()}, "Dataset identity differs from source manifest."
 assessed_rows = assess_sales_records(source_rows)
 print(f"Assessed {len(assessed_rows):,} physical source rows across {len(manifest_rows)} files.")
+
+# The reviewed 2025 replacement must be complete, contract-parent-free and
+# financially identical to the approved output. A '#' inside an actual SKU name
+# (for example a blade size) is allowed when it does not match a contract prefix.
+replacement_2025_rows = [
+    row for row in assessed_rows
+    if row["source_workbook"] == REPLACEMENT_2025_WORKBOOK
+    and row["record_kind"] == "TRANSACTION_CANDIDATE"
+]
+replacement_2025_contract_rows = [
+    row for row in replacement_2025_rows if is_contract_parent_label(row["product"])
+]
+assert len(replacement_2025_rows) == REPLACEMENT_2025_TRANSACTION_ROWS, (
+    f"2025 replacement transaction count changed: expected {REPLACEMENT_2025_TRANSACTION_ROWS:,}, "
+    f"received {len(replacement_2025_rows):,}."
+)
+assert not replacement_2025_contract_rows, (
+    "Known 2025 contract-parent labels remain; replace the file with the reviewed allocation CSV."
+)
+assert all(row["product"] and row["date_delivered"] for row in replacement_2025_rows), (
+    "Every 2025 replacement transaction must have a product and delivery date."
+)
+replacement_2025_totals = {
+    "gross_sales": sum((row["gross_sales"] or Decimal("0")) for row in replacement_2025_rows),
+    "net_sales": sum((row["net_sales"] or Decimal("0")) for row in replacement_2025_rows),
+    "total_acquisition_cost": sum((row["total_acquisition_cost"] or Decimal("0")) for row in replacement_2025_rows),
+    "gross_margin_amount": sum((row["gross_margin_amount"] or Decimal("0")) for row in replacement_2025_rows),
+}
+assert replacement_2025_totals == {
+    "gross_sales": REPLACEMENT_2025_GROSS_SALES,
+    "net_sales": REPLACEMENT_2025_NET_SALES,
+    "total_acquisition_cost": REPLACEMENT_2025_TOTAL_ACQUISITION_COST,
+    "gross_margin_amount": REPLACEMENT_2025_GROSS_MARGIN,
+}, f"2025 replacement financial reconciliation failed: {replacement_2025_totals}"
+assert all(row["is_analysis_candidate"] for row in replacement_2025_rows), (
+    "Every reviewed 2025 replacement transaction must survive Silver reconciliation."
+)
 ```
 
 ### Silver — cell 5
@@ -1075,6 +1213,20 @@ audit_frame = (
          F.sum("net_sales").alias("net_sales"),
          F.count("net_sales").alias("rows_with_net_sales"))
 )
+replacement_2025_audit = spark.createDataFrame([{
+    "dataset_id": next(iter(dataset_ids)),
+    "source_workbook": REPLACEMENT_2025_WORKBOOK,
+    "source_file_sha256": REPLACEMENT_2025_SHA256,
+    "source_data_status": replacement_manifest["source_data_status"],
+    "source_adjustment_policy": replacement_manifest["source_adjustment_policy"],
+    "transaction_rows": len(replacement_2025_rows),
+    "contract_parent_rows": len(replacement_2025_contract_rows),
+    "gross_sales": replacement_2025_totals["gross_sales"],
+    "net_sales": replacement_2025_totals["net_sales"],
+    "total_acquisition_cost": replacement_2025_totals["total_acquisition_cost"],
+    "gross_margin_amount": replacement_2025_totals["gross_margin_amount"],
+    "validation_status": "PASS_2025_ALLOCATION_SOURCE",
+}])
 ```
 
 ### Silver — cell 6
@@ -1083,14 +1235,25 @@ audit_frame = (
 # Cell 6 — Publish dedicated candidates and validate persisted content.
 spark.sql("CREATE SCHEMA IF NOT EXISTS workspace.medshield_silver")
 spark.sql("CREATE SCHEMA IF NOT EXISTS workspace.medshield_audit")
-for table_name, output in ((ASSESSED_TABLE, assessed_frame), (CLEAN_TABLE, clean_frame), (AUDIT_TABLE, audit_frame)):
+for table_name, output in (
+    (ASSESSED_TABLE, assessed_frame),
+    (CLEAN_TABLE, clean_frame),
+    (AUDIT_TABLE, audit_frame),
+    (REPLACEMENT_2025_AUDIT_TABLE, replacement_2025_audit),
+):
     output.write.format("delta").mode("overwrite").option("overwriteSchema", "true").saveAsTable(table_name)
 saved_assessed = spark.table(ASSESSED_TABLE)
 saved_clean = spark.table(CLEAN_TABLE)
 saved_audit = spark.table(AUDIT_TABLE)
+saved_replacement_2025_audit = spark.table(REPLACEMENT_2025_AUDIT_TABLE)
 assert saved_assessed.count() == bronze_count
 assert saved_clean.count() == len(clean_rows)
-for saved, expected in ((saved_assessed, assessed_frame), (saved_clean, clean_frame), (saved_audit, audit_frame)):
+for saved, expected in (
+    (saved_assessed, assessed_frame),
+    (saved_clean, clean_frame),
+    (saved_audit, audit_frame),
+    (saved_replacement_2025_audit, replacement_2025_audit),
+):
     saved_ordered = saved.select(*expected.columns)
     assert saved_ordered.exceptAll(expected).limit(1).count() == 0, "Persisted content differs from the assessed output."
     assert expected.exceptAll(saved_ordered).limit(1).count() == 0, "Persisted output is missing assessed content."
@@ -1099,10 +1262,12 @@ assert identity_digest([row.asDict() for row in saved_assessed.select(*identity_
 assert identity_digest([row.asDict() for row in saved_clean.select(*identity_columns).collect()]) == identity_digest(clean_rows)
 assert saved_audit.agg(F.sum("source_row_count")).first()[0] == bronze_count
 display(saved_audit.orderBy("data_source_year", "disposition"))
+display(saved_replacement_2025_audit)
 print("SALES SILVER RESTART")
 print(f"Dataset: {next(iter(dataset_ids))}")
 print(f"Source rows: {bronze_count:,}; analytical candidates: {len(clean_rows):,}")
 print(f"Rows kept for audit/review only: {bronze_count - len(clean_rows):,}")
+print("2025 replacement: PASS | 4,544 product rows | 0 contract parents | net sales PHP 185,396,821.04")
 print("Historical backfills are provisional and remain labelled for Gold eligibility rules.")
 print("Status: PASS_CANDIDATE_ONLY")
 ```
@@ -1139,9 +1304,10 @@ REFERENCE_PATH = (
 )
 AREA_MAPPING_PATH = "/Workspace/medshield/medshield_reference_csv/area_classification_mapping.csv"
 PRODUCT_MASTER_PATH = "/Workspace/medshield/medshield_reference_csv/product_master_review.csv"
+REPLACEMENT_2025_AUDIT_TABLE = f"{AUDIT_SCHEMA}.sales_restart_replacement_year_validation_candidate"
 # Change only after the thesis scope explicitly includes clinical consumables.
 INCLUDE_MEDICAL_SUPPLIES = False
-POLICY_VERSION = "sales_restart_gold_v4_area_master"
+POLICY_VERSION = "sales_restart_gold_v5_2025_allocation_source"
 PUBLICATION_STATUS = "CANDIDATE_PENDING_BUSINESS_AND_PRODUCT_MASTER_REVIEW"
 KEEP_DISPOSITIONS = (
     "KEEP_SOURCE_YEAR_ALIGNED", "KEEP_HISTORICAL_BACKFILL_CANDIDATE"
@@ -1151,6 +1317,10 @@ manifest = spark.table(f"{BRONZE_SCHEMA}.sales_restart_manifest_candidate")
 bronze_rows = spark.table(f"{BRONZE_SCHEMA}.sales_restart_rows_candidate")
 assessed = spark.table(f"{SILVER_SCHEMA}.sales_restart_assessed_candidate")
 clean = spark.table(f"{SILVER_SCHEMA}.sales_restart_clean_candidate")
+assert spark.catalog.tableExists(REPLACEMENT_2025_AUDIT_TABLE), (
+    f"Missing {REPLACEMENT_2025_AUDIT_TABLE}; run the updated Silver notebook first."
+)
+replacement_2025_audit = spark.table(REPLACEMENT_2025_AUDIT_TABLE)
 
 
 def assert_unique(frame, keys, label):
@@ -1191,6 +1361,14 @@ DATASET_ID = dataset_of(manifest, "Bronze manifest")
 assert dataset_of(bronze_rows, "Bronze rows") == DATASET_ID
 assert dataset_of(assessed, "Silver ledger") == DATASET_ID
 assert dataset_of(clean, "Silver clean") == DATASET_ID
+assert dataset_of(replacement_2025_audit, "2025 replacement audit") == DATASET_ID
+replacement_validation = replacement_2025_audit.collect()
+assert len(replacement_validation) == 1, "Expected one 2025 replacement validation row."
+replacement_validation = replacement_validation[0]
+assert replacement_validation["validation_status"] == "PASS_2025_ALLOCATION_SOURCE"
+assert replacement_validation["transaction_rows"] == 4_544
+assert replacement_validation["contract_parent_rows"] == 0
+assert replacement_validation["source_data_status"] == "ADJUSTED_ESTIMATED_PRODUCT_ALLOCATION_SOURCE"
 assert_unique(manifest, ["source_workbook"], "Bronze manifest")
 assert_unique(bronze_rows, ["source_record_id"], "Bronze rows")
 assert_unique(assessed, ["source_record_id"], "Silver ledger")
@@ -1217,6 +1395,7 @@ assert file_reconciliation.filter(
 assert clean.count() > 0, "No analysis candidates; review Silver before Gold"
 display(file_reconciliation.orderBy("source_workbook"))
 print(f"GOLD INPUT CONTRACT: PASS | dataset_id={DATASET_ID}")
+print("2025 ALLOCATION SOURCE: PASS | contract parents=0 | adjusted-source provenance retained")
 ```
 
 ### Gold — cell 2
@@ -1430,6 +1609,11 @@ def has_rule(code):
 
 fact = (
     clean
+    .join(
+        manifest.select("source_workbook", "source_data_status", "source_adjustment_policy"),
+        "source_workbook",
+        "left",
+    )
     .withColumn("sales_fact_id", F.col("source_record_id"))
     .withColumn("normalized_product", F.upper(F.trim(F.regexp_replace("product", r"\s+", " "))))
     .withColumn("normalized_area", F.upper(F.trim(F.regexp_replace("area", r"\s+", " "))))
@@ -1442,6 +1626,7 @@ fact = (
     .withColumn("month_start", F.trunc("date_delivered", "month").cast("date"))
     .withColumn("calendar_year", F.year("date_delivered"))
     .withColumn("is_contract_label", F.col("normalized_product").rlike(CONTRACT_PREFIX_PATTERN))
+    .withColumn("is_adjusted_source", F.col("source_data_status") != "ORIGINAL_SOURCE_EXPORT")
     .withColumn("is_low_trust_2017", (F.col("calendar_year") == 2017) | (F.col("data_source_year") == 2017))
     .withColumn("is_historical_backfill_candidate", F.col("disposition") == "KEEP_HISTORICAL_BACKFILL_CANDIDATE")
     .withColumn("is_product_ranking_candidate", F.col("product_scope_status").isin(
@@ -1486,6 +1671,12 @@ for column in fact.columns:
     if column.startswith("is_"):
         eligibility_nulls = eligibility_nulls | F.col(column).isNull()
 assert fact.filter(eligibility_nulls).limit(1).count() == 0, "Gold eligibility flags must not be null"
+assert fact.filter(
+    (F.col("data_source_year") == 2025) & F.col("is_contract_label")
+).limit(1).count() == 0, "The reviewed 2025 replacement must contain zero contract-parent labels."
+assert fact.filter(
+    (F.col("data_source_year") == 2025) & ~F.col("is_adjusted_source")
+).limit(1).count() == 0, "The adjusted-source provenance flag is missing from 2025 facts."
 assert fact.filter("is_approved_medical_demand_eligible = true").filter(
     ~F.col("is_medical_product_approved") | F.col("is_contract_label")
     | F.col("canonical_sku").isNull() | F.col("unit_of_measure").isNull()
@@ -1553,6 +1744,7 @@ METRICS = {
 def metric_aggregations():
     result = [F.count("*").alias("transaction_count"), F.countDistinct("product_key").alias("distinct_source_product_labels"),
         F.sum(F.col("is_contract_label").cast("long")).alias("contract_label_transaction_count"),
+        F.sum(F.col("is_adjusted_source").cast("long")).alias("adjusted_source_transaction_count"),
         F.sum(F.col("is_low_trust_2017").cast("long")).alias("low_trust_2017_transaction_count"),
         F.sum(F.col("is_historical_backfill_candidate").cast("long")).alias("historical_backfill_transaction_count"),
         F.sum(F.col("financial_review_required").cast("long")).alias("financial_review_transaction_count")]
@@ -1764,6 +1956,7 @@ print(f"Dataset: {DATASET_ID}")
 print(f"Policy: {POLICY_VERSION}; product reference sha256: {REFERENCE_SHA256}")
 print(f"Fact source records: {saved_fact.count():,}; published data tables: {len(outputs)}")
 print("Original measures preserved; each reported aggregate uses its explicit eligibility flag.")
-print("No-observation months remain unknown. Product master, historical backfills, and contract links need review.")
+print("2025 contains no contract-parent labels; its estimated allocation provenance remains explicit in Gold.")
+print("No-observation months remain unknown. Product master, historical backfills, and pre-2025 contract labels need review.")
 print("Provisional product demand is not approved medical demand; no forecasting or external integration was run.")
 ```

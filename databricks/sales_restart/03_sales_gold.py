@@ -22,9 +22,10 @@ REFERENCE_PATH = (
 )
 AREA_MAPPING_PATH = "/Workspace/medshield/medshield_reference_csv/area_classification_mapping.csv"
 PRODUCT_MASTER_PATH = "/Workspace/medshield/medshield_reference_csv/product_master_review.csv"
+REPLACEMENT_2025_AUDIT_TABLE = f"{AUDIT_SCHEMA}.sales_restart_replacement_year_validation_candidate"
 # Change only after the thesis scope explicitly includes clinical consumables.
 INCLUDE_MEDICAL_SUPPLIES = False
-POLICY_VERSION = "sales_restart_gold_v4_area_master"
+POLICY_VERSION = "sales_restart_gold_v5_2025_allocation_source"
 PUBLICATION_STATUS = "CANDIDATE_PENDING_BUSINESS_AND_PRODUCT_MASTER_REVIEW"
 KEEP_DISPOSITIONS = (
     "KEEP_SOURCE_YEAR_ALIGNED", "KEEP_HISTORICAL_BACKFILL_CANDIDATE"
@@ -34,6 +35,10 @@ manifest = spark.table(f"{BRONZE_SCHEMA}.sales_restart_manifest_candidate")
 bronze_rows = spark.table(f"{BRONZE_SCHEMA}.sales_restart_rows_candidate")
 assessed = spark.table(f"{SILVER_SCHEMA}.sales_restart_assessed_candidate")
 clean = spark.table(f"{SILVER_SCHEMA}.sales_restart_clean_candidate")
+assert spark.catalog.tableExists(REPLACEMENT_2025_AUDIT_TABLE), (
+    f"Missing {REPLACEMENT_2025_AUDIT_TABLE}; run the updated Silver notebook first."
+)
+replacement_2025_audit = spark.table(REPLACEMENT_2025_AUDIT_TABLE)
 
 
 def assert_unique(frame, keys, label):
@@ -74,6 +79,14 @@ DATASET_ID = dataset_of(manifest, "Bronze manifest")
 assert dataset_of(bronze_rows, "Bronze rows") == DATASET_ID
 assert dataset_of(assessed, "Silver ledger") == DATASET_ID
 assert dataset_of(clean, "Silver clean") == DATASET_ID
+assert dataset_of(replacement_2025_audit, "2025 replacement audit") == DATASET_ID
+replacement_validation = replacement_2025_audit.collect()
+assert len(replacement_validation) == 1, "Expected one 2025 replacement validation row."
+replacement_validation = replacement_validation[0]
+assert replacement_validation["validation_status"] == "PASS_2025_ALLOCATION_SOURCE"
+assert replacement_validation["transaction_rows"] == 4_544
+assert replacement_validation["contract_parent_rows"] == 0
+assert replacement_validation["source_data_status"] == "ADJUSTED_ESTIMATED_PRODUCT_ALLOCATION_SOURCE"
 assert_unique(manifest, ["source_workbook"], "Bronze manifest")
 assert_unique(bronze_rows, ["source_record_id"], "Bronze rows")
 assert_unique(assessed, ["source_record_id"], "Silver ledger")
@@ -100,6 +113,7 @@ assert file_reconciliation.filter(
 assert clean.count() > 0, "No analysis candidates; review Silver before Gold"
 display(file_reconciliation.orderBy("source_workbook"))
 print(f"GOLD INPUT CONTRACT: PASS | dataset_id={DATASET_ID}")
+print("2025 ALLOCATION SOURCE: PASS | contract parents=0 | adjusted-source provenance retained")
 
 # COMMAND ----------
 # Cell 2 — Load the review reference and classify labels without approving medicines.
@@ -307,6 +321,11 @@ def has_rule(code):
 
 fact = (
     clean
+    .join(
+        manifest.select("source_workbook", "source_data_status", "source_adjustment_policy"),
+        "source_workbook",
+        "left",
+    )
     .withColumn("sales_fact_id", F.col("source_record_id"))
     .withColumn("normalized_product", F.upper(F.trim(F.regexp_replace("product", r"\s+", " "))))
     .withColumn("normalized_area", F.upper(F.trim(F.regexp_replace("area", r"\s+", " "))))
@@ -319,6 +338,7 @@ fact = (
     .withColumn("month_start", F.trunc("date_delivered", "month").cast("date"))
     .withColumn("calendar_year", F.year("date_delivered"))
     .withColumn("is_contract_label", F.col("normalized_product").rlike(CONTRACT_PREFIX_PATTERN))
+    .withColumn("is_adjusted_source", F.col("source_data_status") != "ORIGINAL_SOURCE_EXPORT")
     .withColumn("is_low_trust_2017", (F.col("calendar_year") == 2017) | (F.col("data_source_year") == 2017))
     .withColumn("is_historical_backfill_candidate", F.col("disposition") == "KEEP_HISTORICAL_BACKFILL_CANDIDATE")
     .withColumn("is_product_ranking_candidate", F.col("product_scope_status").isin(
@@ -363,6 +383,12 @@ for column in fact.columns:
     if column.startswith("is_"):
         eligibility_nulls = eligibility_nulls | F.col(column).isNull()
 assert fact.filter(eligibility_nulls).limit(1).count() == 0, "Gold eligibility flags must not be null"
+assert fact.filter(
+    (F.col("data_source_year") == 2025) & F.col("is_contract_label")
+).limit(1).count() == 0, "The reviewed 2025 replacement must contain zero contract-parent labels."
+assert fact.filter(
+    (F.col("data_source_year") == 2025) & ~F.col("is_adjusted_source")
+).limit(1).count() == 0, "The adjusted-source provenance flag is missing from 2025 facts."
 assert fact.filter("is_approved_medical_demand_eligible = true").filter(
     ~F.col("is_medical_product_approved") | F.col("is_contract_label")
     | F.col("canonical_sku").isNull() | F.col("unit_of_measure").isNull()
@@ -424,6 +450,7 @@ METRICS = {
 def metric_aggregations():
     result = [F.count("*").alias("transaction_count"), F.countDistinct("product_key").alias("distinct_source_product_labels"),
         F.sum(F.col("is_contract_label").cast("long")).alias("contract_label_transaction_count"),
+        F.sum(F.col("is_adjusted_source").cast("long")).alias("adjusted_source_transaction_count"),
         F.sum(F.col("is_low_trust_2017").cast("long")).alias("low_trust_2017_transaction_count"),
         F.sum(F.col("is_historical_backfill_candidate").cast("long")).alias("historical_backfill_transaction_count"),
         F.sum(F.col("financial_review_required").cast("long")).alias("financial_review_transaction_count")]
@@ -629,5 +656,6 @@ print(f"Dataset: {DATASET_ID}")
 print(f"Policy: {POLICY_VERSION}; product reference sha256: {REFERENCE_SHA256}")
 print(f"Fact source records: {saved_fact.count():,}; published data tables: {len(outputs)}")
 print("Original measures preserved; each reported aggregate uses its explicit eligibility flag.")
-print("No-observation months remain unknown. Product master, historical backfills, and contract links need review.")
+print("2025 contains no contract-parent labels; its estimated allocation provenance remains explicit in Gold.")
+print("No-observation months remain unknown. Product master, historical backfills, and pre-2025 contract labels need review.")
 print("Provisional product demand is not approved medical demand; no forecasting or external integration was run.")
