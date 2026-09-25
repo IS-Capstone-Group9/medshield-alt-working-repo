@@ -91,6 +91,7 @@ Acceptance criteria:
 - Simple benchmarks are calculated before Prophet.
 - 2025 is used as a full holdout only if completeness is proven.
 - If 2025 remains incomplete, rolling validation is used inside trusted history.
+- Forecast users can select the next 3, 6, or 12 calendar months. The first forecast month is the month after the reporting month, and the window advances automatically when the calendar month changes. For example, a run in November 2026 begins in December 2026.
 - Forecast metrics include MAE, RMSE, MAPE or WAPE/sMAPE, and bias.
 
 ### FR6 - Historical Weather Analysis

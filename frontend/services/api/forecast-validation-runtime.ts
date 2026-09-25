@@ -28,7 +28,7 @@ export const FORECAST_VALIDATION_MARKUP = String.raw`
         Prophet Demand Forecasting &amp; Holdout Validation
         <span class="status-pill status-ready" style="font-size:10px;padding:2px 8px;font-weight:700;letter-spacing:0.3px;">DYNAMIC ROLLING HORIZON</span>
       </div>
-      <div class="chart-subtitle" style="word-break:break-word;">Capstone SO3 · Facebook Prophet AI with DII &amp; RSI External Regressors · Dynamic current-month start</div>
+      <div class="chart-subtitle" style="word-break:break-word;">Capstone SO3 · Facebook Prophet AI with DII &amp; RSI External Regressors · Dynamic next-month start</div>
     </div>
     <div style="display:flex;gap:8px;align-items:center;">
       <button class="btn btn-secondary" id="forecastExport" onclick="exportForecastValidationCSV()" disabled style="font-size:11px;padding:5px 12px;">
@@ -67,9 +67,9 @@ export const FORECAST_VALIDATION_MARKUP = String.raw`
     </label>
     <label>Dynamic Rolling Horizon
       <select id="forecastHorizon" onchange="renderForecastValidation()">
-        <option value="3">Next 3 Months (Current Month + 2M · Tactical Buffer)</option>
-        <option value="6">Next 6 Months (Current Month + 5M · Monsoon Surge)</option>
-        <option value="12" selected>Next 12 Months (Current Month + 11M · Annual Strategic Horizon)</option>
+        <option value="3">Next 3 Months (Next Month + 2M · Tactical Buffer)</option>
+        <option value="6">Next 6 Months (Next Month + 5M · Monsoon Surge)</option>
+        <option value="12" selected>Next 12 Months (Next Month + 11M · Annual Strategic Horizon)</option>
       </select>
     </label>
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px;padding:6px 12px;background:var(--bg-elevated,#f8fafc);border:1px solid var(--border);border-radius:6px;">
@@ -266,7 +266,7 @@ function renderForecastValidation(error) {
   const next = new Map(future.map(r => [r.period, r]));
   const points = (map, key) => all.map(p => map.has(p) ? map.get(p)[key] : null);
 
-  el('forecastWindow').textContent = 'Current-month forecast: ' + future[0].period + ' to ' + future[future.length - 1].period + ' · ' + h + ' months horizon · trained through ' + data.origin + ' (' + data.observed_months + ' observed months). ' + (data.months_since_origin > 0 ? 'Sales history is ' + data.months_since_origin + ' closed months behind ' + data.source.as_of + '.' : '') + ' ' + (future.every(r => r.prediction === null) ? 'Insufficient training history for this model.' : '');
+  el('forecastWindow').textContent = 'Forward forecast: ' + future[0].period + ' to ' + future[future.length - 1].period + ' · next ' + h + ' months · trained through ' + data.origin + ' (' + data.observed_months + ' observed months). The start month advances automatically after each calendar-month change. ' + (data.months_since_origin > 0 ? 'Sales history is ' + data.months_since_origin + ' closed months behind ' + data.source.as_of + '.' : '') + ' ' + (future.every(r => r.prediction === null) ? 'Insufficient training history for this model.' : '');
 
   const showDoh = el('toggleDohOverlay') && el('toggleDohOverlay').checked;
   const showRain = el('toggleRainOverlay') && el('toggleRainOverlay').checked;

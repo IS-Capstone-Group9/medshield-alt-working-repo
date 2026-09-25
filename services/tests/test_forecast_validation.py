@@ -26,11 +26,11 @@ class ForecastValidationTests(unittest.TestCase):
             result = data['views'][str(horizon)]
             points = result['models']['seasonal_naive']['forecast']
             self.assertEqual(len(points), horizon)
-            self.assertEqual(points[0]['period'], '2026-09')
+            self.assertEqual(points[0]['period'], '2026-10')
             self.assertEqual(result['models']['seasonal_naive']['metrics']['n'], horizon)
-        self.assertEqual(data['forecast_start'], '2026-09')
-        self.assertEqual(data['views']['12']['models']['seasonal_naive']['forecast'][0]['prediction'], 2600)
-        self.assertEqual(data['views']['12']['models']['seasonal_naive']['forecast'][-1]['period'], '2027-08')
+        self.assertEqual(data['forecast_start'], '2026-10')
+        self.assertEqual(data['views']['12']['models']['seasonal_naive']['forecast'][0]['prediction'], 2710)
+        self.assertEqual(data['views']['12']['models']['seasonal_naive']['forecast'][-1]['period'], '2027-09')
         self.assertEqual(data['views']['12']['models']['seasonal_naive']['metrics']['mae'], 120)
 
     def test_holdout_values_cannot_leak_into_predictions_or_bands(self):
@@ -71,14 +71,14 @@ class ForecastValidationTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.build(metric='quantity')
 
-    def test_closed_2026_sales_cannot_extend_the_historical_origin(self):
+    def test_closed_2026_sales_extend_the_historical_origin(self):
         payload=fixture_payload()
         payload['rows'].extend([{**payload['rows'][-1], 'period': p} for p in ['2016-12','2026-01']])
         result=self.build(payload)
-        self.assertEqual(result['origin'],'2025-12')
-        self.assertEqual(result['source']['excluded_outside_history'],2)
-        self.assertTrue(all('2017-01' <= r['period'] <= '2025-12' for r in result['actuals']))
-        self.assertEqual(result['views']['3']['models']['last_value']['forecast'][0]['period'], '2026-09')
+        self.assertEqual(result['origin'],'2026-01')
+        self.assertEqual(result['source']['excluded_outside_history'],1)
+        self.assertTrue(all('2017-01' <= r['period'] <= '2026-08' for r in result['actuals']))
+        self.assertEqual(result['views']['3']['models']['last_value']['forecast'][0]['period'], '2026-10')
 
     def test_current_month_future_months_and_sparse_history(self):
         payload = fixture_payload()
@@ -103,7 +103,19 @@ class ForecastValidationTests(unittest.TestCase):
         data = self.build(payload)
         self.assertEqual(data['origin'], '2025-09')
         points = data['views']['6']['models']['seasonal_naive']['forecast']
-        self.assertEqual([p['period'] for p in points], ['2026-09', '2026-10', '2026-11', '2026-12', '2027-01', '2027-02'])
+        self.assertEqual([p['period'] for p in points], ['2026-10', '2026-11', '2026-12', '2027-01', '2027-02', '2027-03'])
+
+    def test_november_reporting_month_starts_forecast_in_december(self):
+        data = build_validation(fixture_payload(), today=date(2026, 11, 15))
+        self.assertEqual(data['forecast_start'], '2026-12')
+        expected = {
+            '3': ('2026-12', '2027-02'),
+            '6': ('2026-12', '2027-05'),
+            '12': ('2026-12', '2027-11'),
+        }
+        for horizon, (start, end) in expected.items():
+            points = data['views'][horizon]['models']['seasonal_naive']['forecast']
+            self.assertEqual((points[0]['period'], points[-1]['period']), (start, end))
 
     def test_endpoint_validation_and_failure_have_no_demo_fallback(self):
         with patch('services.analytics_service.app.load_validation', side_effect=OSError('Missing source')):

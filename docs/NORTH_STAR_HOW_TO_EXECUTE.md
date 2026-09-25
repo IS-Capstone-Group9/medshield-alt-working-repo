@@ -84,7 +84,7 @@ Before model development, conduct a business-definition workshop.
    - A: cumulative contribution from 0% through 80%.
    - B: above 80% through 95%.
    - C: above 95% through 100%.
-9. Forecast horizon is the next 12 months.
+9. Forecast horizon is selectable as the next 3, 6, or 12 months, beginning after the reporting month; 12 months remains the annual planning view.
 10. Model recommendations require human approval.
 
 ### Required Output
@@ -405,7 +405,7 @@ Paper-aligned split:
 
 - Training: January 2021 through December 2024.
 - Testing: January 2025 through December 2025.
-- Forecasting: next 12 months after the latest trusted actual.
+- Forecasting: next 3, 6, or 12 calendar months beginning after the reporting month, while retaining the latest trusted actual as the model origin.
 
 If 2025 remains incomplete:
 

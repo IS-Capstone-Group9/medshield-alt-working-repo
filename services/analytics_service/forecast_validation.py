@@ -110,7 +110,7 @@ def build_validation(payload, sector='Government', product='', metric='revenue',
         if period > closed_end:
             excluded_not_closed += row['row_count']
             continue
-        if not month_number('2017-01') <= period <= month_number('2025-12'):
+        if period < month_number('2017-01'):
             excluded_outside_history += row['row_count']
             continue
         monthly[period] += row[metric]
@@ -123,7 +123,9 @@ def build_validation(payload, sector='Government', product='', metric='revenue',
     if not series:
         return response
     start, end = min(series), max(series)
-    forecast_start = today.year * 12 + today.month - 1
+    # Forecasts begin in the month after the reporting month. This keeps the
+    # selected 3-, 6-, or 12-month window forward-looking as the calendar rolls.
+    forecast_start = today.year * 12 + today.month
     response.update(origin=period_name(end), months_since_origin=closed_end - end,
                     forecast_start=period_name(forecast_start),
                     actuals=[{'period': period_name(p), 'actual': series.get(p)} for p in range(start, end + 1)])
