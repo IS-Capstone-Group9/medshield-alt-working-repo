@@ -92,6 +92,12 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     await expect(page.locator('#productBarChart')).toBeVisible();
     await expect(page.locator('#productTable')).toBeVisible();
     await expectChartRendered(page, 'productBarChart');
+    const quadrantChart = page.locator('#productBubbleChart');
+    await expect(quadrantChart).toHaveAttribute('data-chart-kind', 'quadrant-matrix', { timeout: 20000 });
+    await expect(quadrantChart).toHaveAttribute('aria-label', /Four-quadrant product matrix/);
+    const quadrantCard = quadrantChart.locator('xpath=ancestor::*[contains(@class,"chart-card")][1]');
+    await expect(quadrantCard).toContainText('Dashed cutoffs show shortlist averages');
+    await expect(quadrantCard).not.toContainText('Bubble size represents units sold');
 
     // 2.3 Area Prioritization
     await page.locator('.nav-item', { hasText: 'Area Prioritization' }).click();
@@ -101,7 +107,7 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     await expect(page.locator('#sectorProfileTable')).toBeVisible();
     await page.selectOption('#sectorCluster', 'Private');
     await expect(page.locator('#sectorScope')).toContainText('Private');
-    await expect(page.locator('#sectorStatus')).toContainText('mapped areas ranked');
+    await expect(page.locator('#sectorStatus')).toContainText('regional groups ranked');
 
     // 2.4 Forecast Modeling
     await page.locator('.nav-item', { hasText: 'Forecast Modeling' }).click();
@@ -139,7 +145,7 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
   test('2b. Area priority weights stay complementary and update selected-period ranking', async ({ page }) => {
     await page.locator('.nav-item', { hasText: 'Area Prioritization' }).click();
     await expectOnlyPageActive(page, 'page-territory');
-    await expect(page.locator('#sectorStatus')).toContainText('mapped areas ranked', { timeout: 20000 });
+    await expect(page.locator('#sectorStatus')).toContainText('regional groups ranked', { timeout: 20000 });
     await page.locator('#mcdaWeightSalesValue').evaluate((element) => {
       const details = element.closest('details');
       if (details) details.open = true;
@@ -239,10 +245,14 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
       return chart?.data?.labels?.length ?? 0
     })).toBe(20)
 
-    await expect(page.locator('#sectorStatus')).toContainText('weighted record equivalents', { timeout: 30000 })
+    await page.locator('.nav-item', { hasText: 'Area Prioritization' }).click()
+    await expectOnlyPageActive(page, 'page-territory')
+    await expect(page.locator('#sectorStatus')).toContainText('regional groups ranked', { timeout: 30000 })
     await page.evaluate(() => (window as any).setDescriptivePeriod('6'));
     await expect(yearWrap).toBeHidden()
     await expect(customRange).toBeHidden()
+    await page.locator('.nav-item', { hasText: 'Overview' }).click()
+    await expectOnlyPageActive(page, 'page-overview')
     const overviewSubtitle = page.locator('#overviewBaselineChart').locator('xpath=ancestor::div[contains(@class,"chart-card")]').locator('.chart-subtitle')
     await expect(overviewSubtitle).toContainText('Last 6 Months')
   });
@@ -260,6 +270,13 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     await expectOnlyPageActive(page, 'page-weather-validation');
     await expect(page.locator('#topbar-title')).toHaveText('Weather API Validation');
     await expect(page.locator('#weatherEffectTable')).toBeVisible();
+    await expect(page.locator('#weatherProvider')).toHaveValue('PAGASA');
+    await expect(page.locator('#weatherRefresh')).toBeDisabled();
+    await expect(page.locator('#weatherEffectStatus')).toContainText('Databricks Gold', { timeout: 20000 });
+    await page.selectOption('#weatherProvider', 'nasa_power');
+    await expect(page.locator('#weatherRefresh')).toBeEnabled();
+    await expect(page.locator('#weatherEffectStatus')).toContainText('NASA POWER', { timeout: 20000 });
+    await expect(page.locator('#weatherEffectStatus')).toContainText('Databricks Gold');
     await expect(salesDeepDive).not.toBeVisible();
   });
 

@@ -420,23 +420,124 @@ function renderProductPrioritizationTimeline() {
   });
 
   const largestUnits = Math.max(...ranked.map(p => p.quantity), 1);
+  const revenueCutoff = ranked.length
+    ? ranked.reduce((sum, product) => sum + product.revenue, 0) / ranked.length
+    : 0;
+  const priorityCutoff = ranked.length
+    ? ranked.reduce((sum, product) => sum + product.mcdaScore, 0) / ranked.length
+    : 0;
+  const quadrantName = (revenue, priority) => revenue >= revenueCutoff
+    ? (priority >= priorityCutoff ? 'High revenue · high priority' : 'High revenue · lower priority')
+    : (priority >= priorityCutoff ? 'Lower revenue · high priority' : 'Lower revenue · lower priority');
+  const categoryColors = {
+    'Category I': { fill: 'rgba(220,38,38,0.72)', border: '#b91c1c' },
+    'Category II': { fill: 'rgba(37,99,235,0.72)', border: '#1d4ed8' },
+    'Category III': { fill: 'rgba(100,116,139,0.72)', border: '#475569' }
+  };
+  const quadrantBackgrounds = {
+    id: 'productPriorityQuadrants',
+    beforeDraw(chart) {
+      const { ctx, chartArea, scales } = chart;
+      if (!chartArea || !scales.x || !scales.y) return;
+      const splitX = Math.max(chartArea.left, Math.min(chartArea.right, scales.x.getPixelForValue(revenueCutoff)));
+      const splitY = Math.max(chartArea.top, Math.min(chartArea.bottom, scales.y.getPixelForValue(priorityCutoff)));
+      ctx.save();
+      ctx.fillStyle = 'rgba(220,38,38,0.055)';
+      ctx.fillRect(splitX, chartArea.top, chartArea.right - splitX, splitY - chartArea.top);
+      ctx.fillStyle = 'rgba(212,154,35,0.055)';
+      ctx.fillRect(splitX, splitY, chartArea.right - splitX, chartArea.bottom - splitY);
+      ctx.fillStyle = 'rgba(37,99,235,0.055)';
+      ctx.fillRect(chartArea.left, chartArea.top, splitX - chartArea.left, splitY - chartArea.top);
+      ctx.fillStyle = 'rgba(100,116,139,0.045)';
+      ctx.fillRect(chartArea.left, splitY, splitX - chartArea.left, chartArea.bottom - splitY);
+      ctx.restore();
+    },
+    beforeDatasetsDraw(chart) {
+      const { ctx, chartArea, scales } = chart;
+      if (!chartArea || !scales.x || !scales.y) return;
+      const splitX = Math.max(chartArea.left, Math.min(chartArea.right, scales.x.getPixelForValue(revenueCutoff)));
+      const splitY = Math.max(chartArea.top, Math.min(chartArea.bottom, scales.y.getPixelForValue(priorityCutoff)));
+      ctx.save();
+      ctx.strokeStyle = '#587083';
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([6, 5]);
+      ctx.beginPath();
+      ctx.moveTo(splitX, chartArea.top);
+      ctx.lineTo(splitX, chartArea.bottom);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(chartArea.left, splitY);
+      ctx.lineTo(chartArea.right, splitY);
+      ctx.stroke();
+      ctx.restore();
+    },
+    afterDatasetsDraw(chart) {
+      const { ctx, chartArea } = chart;
+      if (!chartArea) return;
+      ctx.save();
+      ctx.fillStyle = '#425466';
+      ctx.font = '600 10px system-ui, sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText('LOWER REVENUE · HIGH PRIORITY', chartArea.left + 8, chartArea.top + 15);
+      ctx.textAlign = 'right';
+      ctx.fillText('HIGH REVENUE · HIGH PRIORITY', chartArea.right - 8, chartArea.top + 15);
+      ctx.textAlign = 'left';
+      ctx.fillText('LOWER REVENUE · LOWER PRIORITY', chartArea.left + 8, chartArea.bottom - 8);
+      ctx.textAlign = 'right';
+      ctx.fillText('HIGH REVENUE · LOWER PRIORITY', chartArea.right - 8, chartArea.bottom - 8);
+      ctx.restore();
+    }
+  };
+  const quadrantDatasets = ['Category I', 'Category II', 'Category III'].map(category => ({
+    label: category,
+    data: ranked.filter(product => product.category === category).map(product => ({
+      x: product.revenue,
+      y: product.mcdaScore,
+      r: Math.max(6, Math.min(22, 6 + 16 * (product.quantity / largestUnits))),
+      name: product.name,
+      ven: product.ven,
+      quantity: product.quantity,
+      quadrant: quadrantName(product.revenue, product.mcdaScore)
+    })),
+    backgroundColor: categoryColors[category].fill,
+    borderColor: categoryColors[category].border,
+    borderWidth: 1.5,
+    hoverRadius: 2
+  })).filter(dataset => dataset.data.length);
   replaceChart('productBubbleChart', {
     type: 'bubble',
-    data: {
-      datasets: ranked.map(p => ({
-        label: p.name,
-        data: [{ x: p.revenue, y: p.mcdaScore, r: Math.max(6, Math.min(22, 6 + 16 * (p.quantity / largestUnits))) }],
-        backgroundColor: p.category === 'Category I' ? 'rgba(220,38,38,0.7)' : p.category === 'Category II' ? 'rgba(37,99,235,0.7)' : 'rgba(100,116,139,0.7)',
-        borderColor: p.category === 'Category I' ? '#b91c1c' : p.category === 'Category II' ? '#1d4ed8' : '#475569'
-      }))
-    },
+    data: { datasets: quadrantDatasets },
+    plugins: [quadrantBackgrounds],
     options: {
       responsive: true,
       maintainAspectRatio: false,
       animation: false,
-      plugins: { legend: { display: false } },
+      layout: { padding: { top: 4, right: 4 } },
+      plugins: {
+        legend: { display: true, position: 'top', labels: { usePointStyle: true, boxWidth: 8, boxHeight: 8, padding: 14 } },
+        tooltip: {
+          callbacks: {
+            title: items => items[0] && items[0].raw ? items[0].raw.name : '',
+            label: context => {
+              const point = context.raw;
+              return [
+                'Net sales revenue: ₱' + Number(point.x).toLocaleString('en-PH', { maximumFractionDigits: 2 }),
+                'MCDA priority score: ' + Number(point.y).toFixed(1),
+                'Delivered source units: ' + Number(point.quantity).toLocaleString('en-PH', { maximumFractionDigits: 0 }),
+                'WHO VEN: ' + point.ven,
+                'Quadrant: ' + point.quadrant
+              ];
+            }
+          }
+        }
+      },
       scales: {
-        x: { beginAtZero: true, title: { display: true, text: 'Net Sales Revenue (₱)' } },
+        x: {
+          beginAtZero: true,
+          grace: '5%',
+          title: { display: true, text: 'Net Sales Revenue (₱)' },
+          ticks: { callback: value => '₱' + Number(value).toLocaleString('en-PH', { notation: 'compact', maximumFractionDigits: 1 }) }
+        },
         y: { beginAtZero: true, max: 100, title: { display: true, text: 'MCDA Priority Score (0-100)' } }
       }
     }
@@ -531,14 +632,14 @@ function renderProductPrioritizationTimeline() {
     const card = canvas && canvas.closest('.chart-card');
     if (!card) return;
     const title = card.querySelector('.chart-title');
-    const subtitle = card.querySelector('.chart-subtitle');
+    const subtitle = card.querySelector('.chart-header .chart-subtitle');
     if (title) title.textContent = titleText;
     if (subtitle) subtitle.textContent = subtitleText;
   };
 
   updateCard('productBarChart', 'Product MCDA Priority Score (' + productScenario.toUpperCase() + ' Mode)', 'Descending priority score incorporating clinical VEN urgency and epidemic/storm surge elasticity.');
   updateCard('abcChart', 'ABC-VEN Category Capital Allocation', 'Distribution of portfolio revenue across Category I (Critical Buffer), Category II (EOQ), and Category III (Routine).');
-  updateCard('productBubbleChart', 'MCDA Priority Score vs Net Sales Revenue', 'Bubble size represents delivered unit volume; colored by ABC-VEN priority category.');
+  updateCard('productBubbleChart', 'MCDA Priority vs Net Sales Quadrants', 'Dashed cutoffs show shortlist averages; bubble size represents delivered units and color shows ABC-VEN priority category.');
   updateCard('paretoCurveChart', 'Priority Product Sales Timeline', (yearly ? 'Annual' : (daily ? 'Daily' : 'Monthly')) + ' net sales revenue for top focus products during ' + descriptivePeriodLabel() + '.');
 
   const insight = page.querySelector('.dss-insight-card');
@@ -555,6 +656,13 @@ function renderProductPrioritizationTimeline() {
 
   const topbarSub = document.getElementById('topbar-sub');
   if (topbarSub) topbarSub.textContent = 'Scenario-Driven Product Decision Support (' + productScenario.toUpperCase() + ') · WHO ABC-VEN Framework';
+  const quadrantCanvas = document.getElementById('productBubbleChart');
+  if (quadrantCanvas) {
+    quadrantCanvas.setAttribute('aria-label', 'Four-quadrant product matrix comparing net sales revenue and MCDA priority. Dashed lines show shortlist averages, bubble size shows delivered units, and color shows ABC-VEN category.');
+    quadrantCanvas.dataset.chartKind = 'quadrant-matrix';
+    quadrantCanvas.dataset.revenueCutoff = String(revenueCutoff);
+    quadrantCanvas.dataset.priorityCutoff = String(priorityCutoff);
+  }
 }
 
 function setProductScenario(scenario) {

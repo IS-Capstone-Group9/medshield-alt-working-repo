@@ -16,7 +16,8 @@ MedShield should be treated as a SaaS-style decision-support system. Even during
 | Password storage | Local fallback accounts use salted scrypt password hashes. |
 | External data | DOH, PAGASA, and weather API keys must stay server-side or in ETL jobs, never in frontend code. |
 | Upload validation | Gateway accepts only `.xlsx`/`.csv`, enforces a 30 MB limit, and passes files to the cleaning service. |
-| Warehouse write | `SUPABASE_SERVICE_ROLE_KEY` is used only by the Python service. |
+| Databricks access | Host, SQL warehouse ID, and token are used only by the TypeScript backend. |
+| Supabase server operations | `SUPABASE_SECRET_KEY` or the legacy service-role key is used only by the backend for identity/audit/administrative paths. |
 
 ## Local Development
 

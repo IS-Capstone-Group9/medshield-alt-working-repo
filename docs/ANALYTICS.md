@@ -1,54 +1,53 @@
 # Analytics
 
-## Published dashboard evidence
+## Current Databricks-backed evidence
 
-MedShield serves analytics only from Databricks Gold. The live contract currently supports:
-
-| View | Databricks evidence | Method |
+| Capability | Evidence source | Current interpretation |
 |---|---|---|
-| Annual and monthly sales | Gold yearly/monthly candidate views | Descriptive totals and trends |
-| Area performance | Gold area-year candidate view | Revenue and gross-profit ranking |
-| Product performance | Gold product-year candidate view | Revenue ranking and derived ABC/Pareto classes |
-| Transaction ledger | Gold sales fact | Filtered, paginated sales evidence and quality lineage |
-| Product quantity heatmap | Gold sales fact | Observed delivered source units; missing months remain missing |
-| Sales-only forecast validation | Gold sales fact | Seasonal-naive and last-observation baselines |
-| Planning shortlist | Gold sales fact | Top positive-revenue products in the latest 12 observed months |
-| PAGASA validation | Gold external-signals candidate view | Monthly source observations and mapping status |
+| Annual and monthly sales | Gold yearly/monthly candidate views | Descriptive totals, trends, coverage, and YoY review |
+| Area performance | Gold area-year candidate view and fact-derived mappings | Revenue/quantity ranking with mapped geographic and buyer dimensions |
+| Product performance | Gold business-product-year candidate and sales fact | Revenue ranking and deterministic Pareto/ABC candidates |
+| Transaction ledger | Gold sales fact | Filtered, paginated evidence with eligibility and lineage |
+| Quantity heatmap | Gold sales fact | Observed delivered source units; missing periods stay explicit |
+| Forecast validation | Gold sales fact | Seasonal-naive and last-observation baselines |
+| Planning shortlist | Gold sales fact | Positive-revenue products from the latest observed history |
+| Planning solve | Databricks shortlist plus user inputs | Reviewable scenario allocation; no purchase execution |
+| PAGASA context | Gold external-signals candidate | Official supplied observations and mapping readiness |
+| NASA POWER context | Gold NASA monthly candidate view | Separately labeled provider-derived weather proxy |
 
-The browser never loads a local sales snapshot. If a Databricks contract fails, the UI displays an unavailable state.
+The browser never loads a local sales or weather snapshot. A Databricks contract failure produces an unavailable state.
 
-## Unpublished analytics
+## Analytical definitions
 
-The following outputs remain unavailable until approved Databricks inputs or model views exist:
+- **Demand:** observed delivered quantity in the source unit. Mixed packs are not equivalent units unless a canonical conversion is approved.
+- **Revenue:** Net CP (`net_cost`) candidate measure.
+- **Acquisition cost:** Total TP (`total_trade_price`) candidate measure.
+- **Transaction gross margin/profit:** workbook `net_income`, subject to reconciliation; it is not company net profit.
+- **ABC/Pareto:** deterministic cumulative revenue grouping within the selected scope. It is descriptive, not an XGBoost prediction.
+- **Buyer sector/geography:** derived mappings whose evidence and confidence must remain visible.
+- **Forecast:** baseline evaluation result unless an approved model version and validation record are published.
+- **Planning recommendation:** scenario output from historical ranking plus entered assumptions.
 
-- Government/Private buyer-sector splits
-- DOH/PAGASA-to-sales regression
-- Official champion forecasts
-- Inventory-aware EOQ, reorder points, or safety stock
-- MCDA vulnerability rankings
-- Product-region recommendation models
-- Automated procurement or clinical recommendations
+## Predictive status
 
-Unknown fields remain null or empty. The application does not infer ownership from hospital names, treat geography as ownership, convert missing weather fields to zero, or fabricate model scores.
+Sales-only seasonal-naive and last-observation methods are available for transparent baseline comparison. Final evaluation should use rolling-origin validation inside trusted 2017-2025 history and report MAE, RMSE, WAPE or sMAPE, and bias.
 
-## Metric definitions
+No 2026 MedShield sales actuals exist in the current Gold contract, so documentation must not describe 2026 as a holdout. Prophet, XGBoost, and external-regressor models remain design/evaluation candidates until their code, version, input dataset, validation metrics, and Databricks publication are verified.
 
-- **Net sales revenue:** the Databricks Gold candidate net-contract measure.
-- **Gross profit:** the Databricks Gold candidate gross-margin amount before operating expenses.
-- **Gross margin %:** aggregate gross profit divided by aggregate net sales.
-- **Delivered quantity:** source units recorded on accepted transactions; quantities across different products are not interchangeable.
-- **Observed month:** a month with an accepted source record. Missing observations are not zero demand.
+DOH/PAGASA regression remains blocked until territory-month joins are approved. NASA POWER may be evaluated as a proxy feature, but it must first be aligned to approved territories and must demonstrate improvement over the sales-only baseline.
 
-## Model and planning labels
+## Prescriptive status
 
-Forecast baselines are transparent comparison methods and remain drafts. External regression returns a blocked response while territory mappings are pending. Planning allocations use Databricks for historical product ranking and require the user to enter demand, stock, reserve, pack, cost, supplier, and budget assumptions. Results are review scenarios, never purchase orders.
+The current solver supports planning scenarios and reports infeasible constraints. Databricks supplies historical ranking evidence; users supply operational assumptions. EOQ, ROP, safety stock, expiry, and stock-gap claims remain hypothetical until real inventory, lead-time, ordering-cost, holding-cost, supplier, service-level, and expiry data are published.
 
-## Publication checklist
+## Promotion sequence
 
-Before exposing another chart or recommendation:
+1. Approve business definitions and mapping ownership.
+2. Reconcile Bronze, Silver, Gold, bridge, and API totals.
+3. Publish stable approved analytical views.
+4. Freeze the dataset and descriptive KPIs.
+5. Compare predictive candidates against baselines using time-aware validation.
+6. Publish only accepted model outputs with provenance and limitations.
+7. Evaluate prescriptive scenarios with real operational inputs when available.
 
-1. Publish the required source and model output in Databricks Gold.
-2. Define the grain, eligibility flags, date window, metric units, and null behavior.
-3. Add an authenticated gateway query with bounded parameters and row limits.
-4. Render provenance, checksum, scope, and limitations in the UI.
-5. Add a fail-closed test proving a Databricks failure cannot expose local or mock data.
+See [CURRENT_STATE.md](CURRENT_STATE.md), [REQUIREMENTS.md](REQUIREMENTS.md), and [DESCRIPTIVE_PREDICTIVE_PRESCRIPTIVE_GUIDE.md](DESCRIPTIVE_PREDICTIVE_PRESCRIPTIVE_GUIDE.md).

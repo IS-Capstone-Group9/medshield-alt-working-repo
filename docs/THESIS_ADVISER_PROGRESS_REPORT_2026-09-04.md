@@ -1,5 +1,7 @@
 # MedShield Thesis Adviser Progress Report and SMART Checklist
 
+> **Historical evidence:** This report is intentionally frozen to the September 4, 2026 pilot. Its 40,086-row and partial-cutover statements are superseded by [CURRENT_STATE.md](CURRENT_STATE.md).
+
 **Reporting date:** September 4, 2026  
 **Project:** MedShield Enterprise Decision-Support System (DSS)  
 **Reporting scope:** Analytical models, data pipeline, system integration, and verification  

@@ -1,5 +1,7 @@
 # Year and chart anomaly audit
 
+> **Historical branch audit:** This record documents fixes made on the former `medshield/ui_charts_needfixing` branch and its bundled snapshot behavior. The current application reads Databricks directly and fails closed. See [CURRENT_STATE.md](CURRENT_STATE.md).
+
 Approved scope: audit the Section 1–8 changes and correct confirmed analytical/UI defects, using 2017–2025 for actual sales. Changes are local on `medshield/ui_charts_needfixing`; this audit does not authorize another push.
 
 ## Findings and corrections

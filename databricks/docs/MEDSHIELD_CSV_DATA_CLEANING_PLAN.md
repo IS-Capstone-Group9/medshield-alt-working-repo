@@ -5,6 +5,8 @@
 **Status:** Pre-implementation specification<br>
 **Scope:** Raw MedShield annual sales CSV files for 2017–2025
 
+> **Superseded architecture note:** This specification predates the `sales_restart` pipeline. Its parsing and governance rules remain useful, but Supabase is no longer the dashboard analytics store. Use [CURRENT_DATABRICKS_SYSTEM_CONNECTION.md](CURRENT_DATABRICKS_SYSTEM_CONNECTION.md) for the current Databricks-to-gateway contract.
+
 ## 1. Purpose
 
 This document defines the data-cleaning scope, target schema, quality rules, and recommended Supabase workflow for the MedShield sales datasets in `data/medshield/dataset_csv`.

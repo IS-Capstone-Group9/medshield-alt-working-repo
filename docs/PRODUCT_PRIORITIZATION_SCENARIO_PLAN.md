@@ -1,5 +1,8 @@
 # MedShield Product Prioritization & Scenario-Driven Decision Support Plan
 
+
+> **Design-status notice (2026-09-25):** This document is a planning or methodology reference. It may describe target models, scenarios, or UI behavior that is not approved or published. The current sales contract contains 2017-2025 actuals, Databricks Gold remains candidate-only, external regression remains blocked, and inventory optimization remains scenario-based. Use [Current State](CURRENT_STATE.md) for implemented facts.
+
 ## 1. Executive Summary & Problem Formulation
 
 ### 1.1 Context & Capstone Scope
@@ -152,7 +155,7 @@ SKUs are organized into 4 clinical disease/disaster action clusters to allow tar
    - Ensure multi-year transaction facts join seamlessly with SKU VEN and therapeutic metadata.
 
 ### Phase 3: Interactive Dashboard UI & Runtime Sandbox
-1. **UI Layout Updates in [`frontend/lib/medshieldReference.ts`](file:///c:/Users/Ethan/ega_KERR/frontend/lib/medshieldReference.ts)**:
+1. **UI Layout Updates in [`frontend/lib/medshieldReference.ts`](../frontend/lib/medshieldReference.ts)**:
    - **Scenario Control Bar**: Add `#productScenarioSelect` (`Normal`, `Disease Outbreak`, `Inclement Weather`) alongside period selectors.
    - **Category Summary Cards**: Real-time KPI cards for Category I (Critical SKUs count & value), Category II, and Category III.
    - **ABC-VEN Distribution Matrix Chart**: Interactive 3x3 heatmap or grouped bar chart displaying SKU counts and revenue shares across AV through CN.

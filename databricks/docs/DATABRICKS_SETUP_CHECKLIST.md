@@ -1,67 +1,45 @@
 # Databricks Setup Checklist
 
-Use this checklist to finish the workspace shown in the uploaded screenshot.
+Last reviewed: 2026-09-25
 
-## Immediate Setup
+## Workspace
 
-- [ ] Verify your Databricks identity if the **Verify identity** option is available.
-- [ ] Use `Repos/medshield_project` as the Git-backed source of truth.
-- [ ] Pull the repository until the top-level `databricks/` directory appears.
-- [ ] Stop editing the separate blank `BRONZE LAYER`, `SILVER LAYER`, and `GOLD LAYER` notebooks after this workflow is available.
-- [ ] Run `databricks/notebooks/00_setup.py` once using serverless compute.
-- [ ] Confirm these schemas exist in Catalog:
-  - `workspace.medshield_bronze`
-  - `workspace.medshield_silver`
-  - `workspace.medshield_audit`
-  - `workspace.medshield_gold`
-- [ ] Confirm the `workspace.medshield_bronze.raw_files` volume exists.
-- [ ] Create the `sales` directory in that volume.
-- [ ] Upload exactly one source file for every year from 2017 through 2025.
-- [ ] Keep the original filenames unchanged.
+- [ ] Verify the Databricks user identity and workspace URL.
+- [ ] Select or start the SQL warehouse used by MedShield.
+- [ ] Confirm `workspace.medshield_bronze`, `medshield_silver`, `medshield_audit`, and `medshield_gold` exist.
+- [ ] Confirm the raw-file Unity Catalog volume exists.
+- [ ] Keep tokens out of notebooks, screenshots, Git, and frontend settings.
 
-## First Pipeline Run
+## Sales restart
 
-- [ ] Run `01_bronze.py` with a descriptive batch ID such as `initial_2017_2025_v1`.
-- [ ] Confirm Bronze contains nine distinct source files.
-- [ ] Run `02_stage.py` and confirm every file has one detected header row.
-- [ ] Run `03_clean_quality.py` and review quality status and rule counts.
-- [ ] Review every rejected-date group, particularly the known 2017 and 2019 anomalies.
-- [ ] Review `#REF!`, missing-product, source-year mismatch, and duplicate groups.
-- [ ] Run `04_gold.py` only after the Silver counts reconcile; treat its outputs as candidates until Finance definitions are approved.
-- [ ] Run `05_validate.py` and retain the batch result from `pipeline_runs`.
+- [ ] Upload exactly one controlled source for each year 2017-2025, using the checksum-bound replacement 2025 file.
+- [ ] Follow `databricks/sales_restart/README.md` rather than the earlier bundle notebooks.
+- [ ] Run `01_sales_bronze.py`, `02_sales_silver.py`, and `03_sales_gold.py` in order.
+- [ ] Confirm `PASS_CANDIDATE`/`PASS_CANDIDATE_ONLY` and inspect audit tables.
+- [ ] Run `databricks/sql/05_sales_restart_system_bridge.sql`.
+- [ ] Confirm nine years, 37,728 accepted transactions, 12 calendar months per year, and zero eligibility reconciliation failures for the current snapshot.
 
-## Governance Before Dashboard Publication
+## DOH/PAGASA restart
 
-- [ ] Approve the governed 14-field business schema.
-- [ ] Approve the 14 lineage and quality fields.
-- [ ] Approve financial field meanings and the ₱0.02 tolerance.
-- [ ] Approve the 2018 rows found in both the 2018 and 2019 source files.
-- [ ] Approve product/SKU aliases and area aliases.
-- [ ] Decide whether warning rows can enter the dashboard.
-- [ ] Keep estimated backward-allocation rows distinguishable from observed transactions.
-- [ ] Keep quarantine and audit schemas inaccessible to public application users.
+- [ ] Follow `databricks/external_restart/GUIDE.md`.
+- [ ] Keep supplied raw files unchanged.
+- [ ] Run setup/copy, Bronze, Silver, and Gold in order.
+- [ ] Run `databricks/sql/06_external_restart_system_bridge.sql`.
+- [ ] Keep mapping and forecast eligibility false until approved.
 
-## Automation After Validation
+## Gateway connection
 
-- [ ] Deploy the bundle-defined job.
-- [ ] Keep all five tasks sequential in Free Edition.
-- [ ] Run manually until at least two batches complete and reconcile.
-- [ ] Add a schedule only when new source files arrive on a predictable cadence.
-- [ ] Configure failure notification if the workspace/account supports it.
-- [ ] Never put Databricks tokens, Supabase keys, or other credentials in Git or notebook cells.
-- [ ] Keep a Git/local backup of all code and documentation.
+- [ ] Put host origin, token, and warehouse ID in `backend/.env`.
+- [ ] Grant the token identity `CAN USE`, `USE CATALOG`, `USE SCHEMA`, and required `SELECT`/controlled write permissions.
+- [ ] Run `npm run databricks:check:dashboard` and `npm run databricks:check:external` from `backend/`.
+- [ ] Verify `GET /api/health` reports `source: databricks` and `dashboard_fallback: false`.
 
-## Recommended Notebook Naming
+## Publication governance
 
-Use ordered, space-free names:
+- [ ] Reconcile source, accepted, rejected, duplicate, and excluded populations.
+- [ ] Reconcile all estimated 2025 allocation children to their contract parents.
+- [ ] Approve finance definitions, canonical SKUs, product scope, buyer/geographic mapping, and external joins.
+- [ ] Record dataset IDs, hashes, policy versions, reviewers, and approval dates.
+- [ ] Promote stable approved views only after these gates pass.
 
-```text
-00_setup
-01_bronze
-02_stage
-03_clean_quality
-04_gold
-05_validate
-```
-
-This makes execution order obvious and prevents the notebook labels from becoming the only documentation of pipeline behavior.
+Technical PASS output is not publication approval.

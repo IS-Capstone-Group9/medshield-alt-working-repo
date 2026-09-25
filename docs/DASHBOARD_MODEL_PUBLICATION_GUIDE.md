@@ -1,5 +1,7 @@
 # Dashboard Model Publication Guide
 
+> **Current publication boundary (2026-09-25):** The dashboard reads Databricks Gold candidate objects through the TypeScript gateway. Sales covers 2017-2025; external candidates are historical and not approved as regression inputs. See [CURRENT_STATE.md](CURRENT_STATE.md).
+
 ## Purpose
 
 This guide keeps the MedShield dashboard aligned with the capstone scope: historical decision support, not live disease surveillance, official PAGASA alerting, or automated procurement.
@@ -24,13 +26,13 @@ Use these labels consistently:
 
 | Output Area | Status | Reason |
 |---|---|---|
-| Cleaned sales dashboard | Actual | Built from accepted 2021-2025 sales rows. |
+| Cleaned sales dashboard | Actual, candidate | Built from 37,728 accepted 2017-2025 Gold candidate rows for the current checksum-bound snapshot. |
 | Contract-name breakdown | Estimated | Totals reconcile, but child rows are backward approximations. |
 | ABC/Pareto product priority | Draft | Suitable for Chapter 4 evidence after group review. |
-| Sales-only forecast baseline | Draft | External regressors and final review are still pending. |
-| Weather API validation | Proxy | Weather API rows are not official PAGASA observations. |
-| DOH lagged regression | Draft | Onset workbook prepared by exact province/month; retrospective evaluation only, release dates unavailable. |
-| PAGASA regression | Blocked | Station files present; approved station-to-sales-territory mapping and sufficient aligned coverage required. |
+| Sales-only forecast baselines | Validated candidate logic | Seasonal-naive and last-observation baselines are available; publication approval remains open. |
+| NASA POWER validation | Proxy | Provider-derived rows are published separately and are not official PAGASA observations. |
+| DOH lagged regression | Blocked | Historical data is loaded, but geography, disease-product, timing, and representativeness gates remain open. |
+| PAGASA regression | Blocked | Historical station data is loaded; approved station-to-sales-territory mapping and aligned evaluation coverage are required. |
 | EOQ/ROP/allocation | Scenario | Inventory, lead time, ordering cost, holding cost, budget, and capacity inputs are unavailable. |
 
 ## UI Simplification Rules
@@ -53,4 +55,4 @@ Use screenshots from the simplified dashboard to support:
 - weather API validation status,
 - blocked model limitations.
 
-Do not claim final disease-adjusted or official PAGASA-adjusted forecasting until those datasets are uploaded and validated.
+Do not claim final disease-adjusted or official PAGASA-adjusted forecasting until the loaded candidates pass the required join, leakage, baseline-improvement, and owner-approval gates.

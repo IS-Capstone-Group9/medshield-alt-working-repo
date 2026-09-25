@@ -9,13 +9,14 @@ for the complete copy/paste notebook cells and current candidate policies.
 The documents below also cover earlier pipelines and experimental allocations;
 they do not override the restart's reported-value and approval rules.
 
-1. [MedShield CSV Data-Cleaning Plan](MEDSHIELD_CSV_DATA_CLEANING_PLAN.md) — dataset inventory, year coverage, standard columns, and cleaning requirements.
-2. [Databricks Setup Checklist](DATABRICKS_SETUP_CHECKLIST.md) — workspace setup and first-run checklist based on the current Free Edition workspace.
-3. [MedShield Databricks-to-System Connection Walkthrough](MEDSHIELD_DATABRICKS_SYSTEM_CONNECTION_WALKTHROUGH.md) — click-by-click connection verification, Supabase pilot-sync gates, troubleshooting, and suggested one-week plan.
-4. [Databricks Data-Cleaning Workflow](DATABRICKS_DATA_CLEANING_WORKFLOW.md) — recommended implementation workflow from raw CSV ingestion through Supabase publication.
-5. [Sales Data Cleaning Reference](SALES_DATA_CLEANING_REFERENCE.md) — detailed cleaning rules for the sales data.
-6. [Sales Data Layer Flow](SALES_DATA_LAYER_FLOW.md) — separation of raw, estimated, cleaned, and analytical data layers.
-7. [2025 Data Issue Remediation](2025_DATA_ISSUE_REMEDIATION.md) — handling incomplete or anomalous 2025 records.
+1. [Current Databricks System Connection](CURRENT_DATABRICKS_SYSTEM_CONNECTION.md) — current 37,728-row gateway and validation workflow.
+2. [MedShield CSV Data-Cleaning Plan](MEDSHIELD_CSV_DATA_CLEANING_PLAN.md) — pre-implementation inventory and requirements.
+3. [Databricks Setup Checklist](DATABRICKS_SETUP_CHECKLIST.md) — workspace setup and first-run checklist.
+4. [MedShield Databricks-to-System Connection Walkthrough](MEDSHIELD_DATABRICKS_SYSTEM_CONNECTION_WALKTHROUGH.md) — historical 40,086-row pilot walkthrough.
+5. [Databricks Data-Cleaning Workflow](DATABRICKS_DATA_CLEANING_WORKFLOW.md) — earlier reusable/bundle workflow.
+6. [Sales Data Cleaning Reference](SALES_DATA_CLEANING_REFERENCE.md) — detailed cleaning rules for the sales data.
+7. [Sales Data Layer Flow](SALES_DATA_LAYER_FLOW.md) — separation of raw, estimated, cleaned, and analytical data layers.
+8. [2025 Data Issue Remediation](2025_DATA_ISSUE_REMEDIATION.md) — historical issue analysis superseded by the checksum-bound replacement.
 
 ## Master-Data and Classification Guides
 

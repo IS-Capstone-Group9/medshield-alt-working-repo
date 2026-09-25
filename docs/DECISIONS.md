@@ -1,34 +1,43 @@
 # Architectural Decisions
 
-## 001. Use a TypeScript API Gateway
+## 001. Use a TypeScript API gateway
 
-Context:
-- The dashboard needs a stable HTTP layer for auth, orchestration, and fallback behavior.
-- The analytics workloads are already modeled as Python services.
+**Decision:** Keep authentication checks, request validation, bounded Databricks queries, caching, NASA POWER refresh orchestration, and response contracts in `backend/`.
 
-Decision:
-- Keep the backend gateway in TypeScript under `backend/`.
-- Keep analytics and product services in Python under `services/`.
+**Consequence:** The frontend has one server boundary. Warehouse and provider credentials never enter browser code.
 
-Consequences:
-- The frontend talks to one API layer with consistent JSON contracts.
-- Analytics logic stays isolated in Python where it belongs.
-- The stack is easier to explain in the capstone because each layer has a single responsibility.
+## 002. Use Databricks as the analytical system of record
 
-## 002. Use a Warehouse Plus DSS Model-Output Layer
+**Decision:** Serve every dashboard analytical value from Databricks Gold or from a gateway calculation whose inputs came from Databricks Gold.
 
-Context:
-- `supabase/schema.md` showed older flat `analytics_*` tables alongside the connected warehouse tables.
-- The capstone paper requires more than dashboard aggregates: ABC/Pareto, Heuristic Tiering, Prophet with external regressors, XGBoost urgency scoring, EOQ/ROP/safety stock, MCDA, linear programming, collaborative filtering, and rule-based alerts.
-- `data/medshield/raw/sales/Sales Report.xlsx` is transaction-grain data for 2021-2025, while DOH and PAGASA/OpenWeather signals are external supporting inputs.
+**Consequence:** Supabase analytical tables, local files, generated outputs, and Python snapshots cannot silently replace a failed warehouse query.
 
-Decision:
-- Keep the connected warehouse tables from `001_init.sql`.
-- Drop obsolete `analytics_*` prototype tables in `004_dss_schema.sql`.
-- Add source/model dimensions, transaction staging, normalized transaction facts, external signal facts, model output facts, ETL lineage tables, and `vw_dss_*` API views.
+## 003. Keep Supabase for identity and audit
 
-Consequences:
-- The dashboard can still read existing `vw_dashboard_*` views.
-- The DSS can expose paper-aligned model outputs through stable API endpoints.
-- External signals are traceable by source, period, and ETL run.
-- The data pipeline has a clear path from raw workbook/API extracts to warehouse facts, model outputs, and frontend decisions.
+**Decision:** Use Supabase Auth for production sessions and linked application roles. Use Supabase for audit persistence when configured.
+
+**Consequence:** Supabase remains operationally important but is not the source of dashboard KPIs. Local audit fallback is permitted only for audit events.
+
+## 004. Fail closed for analytical data
+
+**Decision:** Return a Databricks error and show an unavailable UI state when a required source cannot be loaded.
+
+**Consequence:** The dashboard does not remain visually populated with stale, mock, seeded, or bundled values during a source outage.
+
+## 005. Publish through candidate gates
+
+**Decision:** Bronze, Silver, Gold, bridge, and API contracts retain dataset IDs, policy versions, quality status, and candidate labels until named approval.
+
+**Consequence:** `PASS_CANDIDATE` proves technical checks only. Business, finance, SKU, geography, external-join, and model approvals remain separate decisions.
+
+## 006. Separate observed, derived, proxy, forecast, and scenario evidence
+
+**Decision:** Preserve visible provenance for contract allocations, buyer/geography mappings, NASA POWER observations, forecast baselines, and planning assumptions.
+
+**Consequence:** The UI and paper can use these outputs without presenting derived evidence as source-recorded fact.
+
+## 007. Keep Python analytics offline until publication
+
+**Decision:** Python jobs under `services/` may prepare and evaluate models, but the dashboard reads only published Databricks contracts.
+
+**Consequence:** Dashboard requests never train models synchronously and do not depend on Flask services.

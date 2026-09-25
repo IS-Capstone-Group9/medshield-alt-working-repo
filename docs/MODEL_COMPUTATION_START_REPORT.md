@@ -1,5 +1,7 @@
 # Model Computation Start Report
 
+> **Historical evidence:** This report records a local June 2026 run over 20,961 rows. It predates the current 37,728-row Databricks sales candidate and the uploaded DOH/PAGASA pipelines. Preserve it as workflow evidence; do not treat its counts or blocked-source statements as current. See [CURRENT_STATE.md](CURRENT_STATE.md).
+
 ## Purpose
 
 This report records what was completed from `MODEL_COMPUTATION_START_CHECKLIST.md` and what remains blocked.

@@ -16,9 +16,9 @@ export type WeatherEffect = {
   rainfall_severity_proxy: number
   rainfall_severity_index?: number
   weather_alert_level: string
-  sales_revenue?: number
+  sales_revenue?: number | null
   sales_total_net_cost?: number
-  planning_demand_uplift_pct: number
+  planning_demand_uplift_pct: number | null
   prescriptive_planning_uplift?: number
 }
 
@@ -30,6 +30,9 @@ export type WeatherEffects = {
     period_end?: string
     rows_returned?: number
     sales_matched_rows?: number
+    source?: string
+    system_of_record?: string
+    status?: string
   }
   summary: Array<{
     periods?: number

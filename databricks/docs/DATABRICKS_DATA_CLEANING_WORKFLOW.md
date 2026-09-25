@@ -1,5 +1,7 @@
 # MedShield Databricks Data-Cleaning Workflow
 
+> **Earlier workflow reference:** The current application uses `databricks/sales_restart/` and reads Databricks Gold directly. Supabase publication described below belongs to the earlier architecture. Follow [CURRENT_DATABRICKS_SYSTEM_CONNECTION.md](CURRENT_DATABRICKS_SYSTEM_CONNECTION.md) for current operation.
+
 ## Decision
 
 Proceed with Databricks when MedShield will use the same platform for recurring ingestion, multi-year data integration, forecasting, disease and weather enrichment, and predictive analytics.

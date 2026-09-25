@@ -4,11 +4,12 @@ For the detailed task tracker that combines environment, schema, medical-demand 
 
 ## Positioning
 
-The capstone should be completed as a historical decision-support system. The available external data is historical:
+The capstone should be completed as a historical decision-support system. The current governed candidate coverage is:
 
-- PAGASA: 2021-2024 only.
-- DOH: 2021-2025.
-- Weather API: provider-derived weather observations by latitude and longitude for target regions.
+- Sales: 2017-2025 actuals in Databricks Gold candidate objects.
+- PAGASA: 2017-2024 official historical station observations; 2025 is absent.
+- DOH: 2018-2026 historical surveillance; 2026 is partial.
+- NASA POWER: provider-derived weather observations by target coordinates, published separately from PAGASA.
 
 This means the final system can support historical analysis, forecast evaluation, scenario planning, and management review. It should not claim live disease surveillance, official live PAGASA alerts, or automated procurement execution.
 
@@ -28,8 +29,8 @@ Deliverables:
 
 ### Phase 2 - Fix and Conform Data
 
-1. Reconcile 2021-2025 sales files.
-2. Decide how to treat incomplete 2025 months.
+1. Reconcile all 2017-2025 sales files to the current checksum-bound Gold candidate.
+2. Verify 2025 observation completeness for each forecast grain.
 3. Review rejected rows and date issues.
 4. Use contract-name backward allocation for product-level analysis.
 5. Approve product and area mappings.
@@ -88,8 +89,8 @@ Deliverables:
 
 ### Phase 6 - Weather Analysis
 
-1. Load PAGASA 2021-2024 as official historical reference.
-2. Load weather API observations by target-region coordinates as provider weather proxy.
+1. Validate the loaded PAGASA 2017-2024 official historical candidate and preserve its 2025 gap.
+2. Validate NASA POWER observations by target-region coordinates as a separately labeled provider proxy.
 3. Build weather features by territory and month.
 4. Compare provider weather data and document source differences.
 5. Test weather-adjusted forecast against the sales-only baseline.
@@ -103,7 +104,7 @@ Deliverables:
 
 ### Phase 7 - Disease Analysis
 
-1. Load DOH 2021-2025 historical data.
+1. Validate the loaded DOH 2018-2026 historical candidate and mark 2026 partial.
 2. Create disease intensity features.
 3. Map disease signals to product categories where defensible.
 4. Test disease-adjusted scenarios or historical regressors.
@@ -144,8 +145,8 @@ Deliverables:
 
 ### Phase 10 - Publish and Validate
 
-1. Store outputs in DSS tables or local processed artifacts.
-2. Expose outputs through Python services and TypeScript gateway.
+1. Store experimental outputs as versioned evidence; publish approved outputs to governed Databricks objects.
+2. Publish accepted outputs to Databricks and expose them through the TypeScript gateway; Python jobs remain offline training/evaluation tools.
 3. Display outputs in dashboard with source, status, metric, and limitation labels.
 4. Run QA checks.
 5. Capture screenshots and evidence for Chapter 4.
@@ -174,15 +175,15 @@ Deliverables:
 ### Must Have
 
 1. Approved business glossary.
-2. Final decision on 2025 incomplete months.
+2. Approved 2025 holdout eligibility by forecast grain.
 3. Approved product/SKU alias mapping.
 4. Approved area/customer/business-line mapping.
 5. Analytical marts.
 6. Descriptive analytics outputs.
 7. Baseline forecast and benchmark metrics.
-8. PAGASA 2021-2024 historical integration.
-9. Weather API proxy integration.
-10. DOH 2021-2025 historical integration.
+8. Approval of PAGASA 2017-2024 mapping and coverage limitations.
+9. NASA POWER proxy validation and provenance evidence.
+10. Approval of DOH 2018-2026 mapping, partial-period, and disease-product limitations.
 11. Dashboard labels for actual, estimated, forecast, proxy, scenario, and official data.
 12. Chapter 1-3 revisions.
 13. Chapter 4 and 5 writing.
@@ -210,4 +211,4 @@ Deliverables:
 
 Use this framing in the paper and defense:
 
-> The system is a historical analytics-driven decision-support system for pharmaceutical demand forecasting and planning. It integrates 2021-2025 sales data, 2021-2025 DOH historical disease data, 2021-2024 PAGASA historical data, and provider-derived weather API observations to support descriptive analysis, forecast comparison, product prioritization, and scenario-based planning. It does not automate procurement or claim live official disease or weather alerts.
+> The system is a historical analytics-driven decision-support system whose current candidate contracts cover 2017-2025 sales, 2018-2026 DOH surveillance with 2026 partial, 2017-2024 PAGASA observations, and separately labeled NASA POWER weather proxies. Databricks supplies runtime analytics through the TypeScript gateway. External-regressor forecasts and procurement recommendations remain blocked until their mapping, validation, input, and owner-approval gates pass.

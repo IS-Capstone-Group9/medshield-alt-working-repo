@@ -1,73 +1,44 @@
 # Deployment
 
-Deployment steps, environments, quality gates, and rollback plans.
+## Current position
 
-## Current Deployment Position
+MedShield supports local Node.js and Docker demonstrations. No production host is approved or configured. AWS is optional and should not delay data acceptance or analytics completion.
 
-The current capstone workspace is prepared for local Docker-based demonstration and future cloud deployment. The system remains a historical decision-support application, so deployment should prioritize repeatable dashboard access, stable API/service behavior, and clear evidence generation.
+## Local Docker deployment
 
-## Local Container Deployment
+`docker-compose.yml` starts two application containers:
 
-Use `docker-compose.yml` to run the frontend, TypeScript API gateway, analytics service, and product service together:
+| Service | Port | Purpose |
+|---|---:|---|
+| `frontend` | 3000 | Next.js dashboard |
+| `backend` | 5000 | TypeScript gateway |
+
+Python analytics and product services are not part of the runtime compose stack.
 
 ```powershell
 docker compose build
 docker compose up
 ```
 
-Main URLs:
+Open `http://localhost:3000`; check the gateway at `http://localhost:5000/api/health`. Valid Supabase/Databricks configuration and a running SQL warehouse are still required for production-style authenticated analytics.
 
-| Service | URL |
-|---|---|
-| Frontend | `http://localhost:3000` |
-| Backend health | `http://localhost:5000/api/health` |
-| Analytics health | `http://localhost:5101/health` |
-| Product health | `http://localhost:5102/health` |
+## Release gates
 
-See `docs/DEVOPS_DOCKER_SONARQUBE.md` for the full runbook.
+Before deployment:
 
-## SonarQube / Static Analysis
+1. Gold data acceptance and named approvals are complete.
+2. Backend/frontend builds and required tests pass.
+3. The live Databricks contract and fail-closed behavior pass.
+4. Secrets and owners are configured in the target environment.
+5. HTTPS, allowed origins, monitoring, backup, rollback, and cost ownership are defined.
+6. Candidate/model/scenario limitations remain visible.
 
-Use `docker-compose.sonar.yml` and `sonar-project.properties` for local SonarQube checks.
+## Cloud options
 
-```powershell
-docker compose -f docker-compose.sonar.yml up -d sonarqube-db sonarqube
-$env:SONAR_HOST_URL = "http://localhost:9000"
-$env:SONAR_TOKEN = "paste-token-here"
-docker compose -f docker-compose.sonar.yml --profile scan run --rm sonar-scanner
-```
-
-Secrets to configure outside source control:
-
-| Secret | Purpose |
-|---|---|
-| `SONAR_TOKEN` | Authentication token for SonarQube or SonarCloud |
-| `SONAR_HOST_URL` | SonarQube server URL |
-| `SUPABASE_SERVICE_ROLE_KEY` | Server-only Supabase ingestion and publication key |
-
-## Future AWS Deployment
-
-If AWS is required, confirm the professor's exact target service before implementation. Reasonable AWS options are:
-
-| AWS option | Fit |
-|---|---|
-| AWS App Runner | Simple container deployment for the backend and services |
-| Amazon ECS on Fargate | More complete container orchestration for all services |
-| Amazon Lightsail or EC2 | Simpler VM-style demo hosting |
-| Amazon RDS or Supabase hosted PostgreSQL | Managed database layer |
-| Amazon S3 | Storage for exported evidence files or uploaded source data |
-
-The Docker files added to this workspace are the preparation step for AWS because they make each runtime boundary explicit.
+Choose a host only after requirements are clear. A managed frontend plus container backend, a container platform, or a VM can all run the current two-service application. Databricks and Supabase remain managed external dependencies.
 
 ## Rollback
 
-For local demos, rollback means returning to the last known working Git commit and restarting containers:
+Retain the prior application image/commit and do not mutate Bronze evidence during an application rollback. If a data release fails, point stable views back to the last accepted publication or leave the dashboard unavailable until the candidate is corrected.
 
-```powershell
-git log --oneline -5
-docker compose down
-docker compose build
-docker compose up
-```
-
-For cloud deployment, keep the previous container image tag until the new deployment is verified.
+See [SETUP.md](SETUP.md), [SERVICE_MANAGEMENT.md](SERVICE_MANAGEMENT.md), and [DEPLOYMENT_AND_CICD_GUIDE.md](DEPLOYMENT_AND_CICD_GUIDE.md).

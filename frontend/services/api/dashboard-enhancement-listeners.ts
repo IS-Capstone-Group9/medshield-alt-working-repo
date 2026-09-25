@@ -1,7 +1,9 @@
 import {
   loadSalesDataView,
   loadWeatherEffectView,
+  refreshSelectedWeatherData,
   refreshDashboardFromGateway,
+  refreshDashboardModulesForPage,
   installCommonInteractions,
 } from './dashboard-interactions'
 import { setSalesViewError } from './sales-page-helpers'
@@ -22,7 +24,7 @@ const DASHBOARD_PAGE_META = {
   'sales-data': ['View Sales Data', 'Inspect, filter, validate, and reconcile Databricks Gold sales records'],
   'weather-validation': [
     'Weather API Validation',
-    'Validate PAGASA-aligned weather signals before they influence DSS outputs',
+    'Validate official PAGASA history and NASA POWER proxy observations stored in Databricks',
   ],
 } as const
 
@@ -58,6 +60,7 @@ function activateDashboardPage(root: HTMLElement, name: DashboardPageName, navIt
       : 'none'
   }
   ;(window as any).configureProductYearControls?.(name)
+  refreshDashboardModulesForPage(name)
 
   if (document.body.classList.contains('nav-hidden')) {
     ;(window as any).closeNavigation?.()
@@ -66,15 +69,15 @@ function activateDashboardPage(root: HTMLElement, name: DashboardPageName, navIt
   window.requestAnimationFrame(() => {
     window.setTimeout(() => {
       ;(window as any).buildCharts?.()
-      ;(window as any).buildTables?.()
-      ;(window as any).renderShowcaseDOMVisuals?.()
-      ;(window as any).renderProductPrioritizationTimeline?.()
-      ;(window as any).renderSalesSectors?.()
-      ;(window as any).renderForecastValidation?.()
-      ;(window as any).renderExternalRegression?.()
-      ;(window as any).renderSalesHeatmap?.()
+      if (name === 'products') {
+        ;(window as any).buildTables?.()
+        ;(window as any).renderProductPrioritizationTimeline?.()
+      }
+      if (name === 'inventory') {
+        ;(window as any).renderShowcaseDOMVisuals?.()
+      }
       renderDecisionSupportCharts(root)
-      renderMcdaSensitivity(root)
+      if (name === 'inventory') renderMcdaSensitivity(root)
     }, 60)
   })
 }
@@ -82,7 +85,7 @@ function activateDashboardPage(root: HTMLElement, name: DashboardPageName, navIt
 export function installDashboardEnhancements(
   root: HTMLElement,
   activeListeners: any[],
-  _user: User | null,
+  user: User | null,
 ) {
   if (root.dataset.enhancementsInstalled === 'true') return
   root.dataset.enhancementsInstalled = 'true'
@@ -200,6 +203,8 @@ export function installDashboardEnhancements(
     const pageName = navItem.dataset.dashboardPage as DashboardPageName | undefined
     if (!pageName || !(pageName in DASHBOARD_PAGE_META)) return
     activateDashboardPage(root, pageName, navItem)
+    if (pageName === 'sales-data') void refreshSalesView()
+    if (pageName === 'weather-validation') refreshWeatherView()
   }
   const handleNavigationKeydown = (event: KeyboardEvent) => {
     if (event.key !== 'Enter' && event.key !== ' ') return
@@ -268,16 +273,45 @@ export function installDashboardEnhancements(
   // Weather page controls and refresh triggers
   const refreshWeatherView = () => {
     loadWeatherEffectView(root).catch((error: unknown) => {
-      console.error('Weather view load error:', error)
+      const status = root.querySelector<HTMLElement>('#weatherEffectStatus')
+      if (status) status.textContent = error instanceof Error ? error.message : 'Weather data could not be loaded.'
     })
   }
 
-  root.querySelector('#weatherProvider')?.addEventListener('change', refreshWeatherView)
-  root.querySelector('#weatherArea')?.addEventListener('change', refreshWeatherView)
-  root.querySelector('#weatherYear')?.addEventListener('change', refreshWeatherView)
-  root.querySelector('#weatherGrain')?.addEventListener('change', refreshWeatherView)
+  const provider = root.querySelector<HTMLSelectElement>('#weatherProvider')
+  const refreshButton = root.querySelector<HTMLButtonElement>('#weatherRefresh')
+  const syncProviderControls = () => {
+    if (!refreshButton) return
+    const isNasaPower = provider?.value === 'nasa_power'
+    const canRefresh = ['admin', 'analyst'].includes(user?.role.toLowerCase() ?? '')
+    refreshButton.disabled = !isNasaPower || !canRefresh
+    refreshButton.title = !canRefresh
+      ? 'An analyst or administrator account is required to refresh NASA POWER'
+      : isNasaPower
+        ? 'Fetch the selected period from NASA POWER and publish it to Databricks'
+        : 'PAGASA files are refreshed through the Databricks external-source notebook'
+  }
+  const handleProviderChange = () => {
+    syncProviderControls()
+    refreshWeatherView()
+  }
+  const handleWeatherRefresh = () => {
+    refreshSelectedWeatherData(root).catch((error: unknown) => {
+      const status = root.querySelector<HTMLElement>('#weatherEffectStatus')
+      if (status) status.textContent = error instanceof Error ? error.message : 'NASA POWER refresh failed.'
+    })
+  }
+  const weatherControls = ['weatherArea', 'weatherYear', 'weatherGrain']
+    .map((id) => root.querySelector<HTMLElement>(`#${id}`))
+    .filter((control): control is HTMLElement => Boolean(control))
+  provider?.addEventListener('change', handleProviderChange)
+  refreshButton?.addEventListener('click', handleWeatherRefresh)
+  for (const control of weatherControls) control.addEventListener('change', refreshWeatherView)
+  syncProviderControls()
+  if (provider) activeListeners.push({ target: provider, type: 'change', listener: handleProviderChange })
+  if (refreshButton) activeListeners.push({ target: refreshButton, type: 'click', listener: handleWeatherRefresh })
+  for (const control of weatherControls) {
+    activeListeners.push({ target: control, type: 'change', listener: refreshWeatherView })
+  }
 
-  // Trigger initial loads
-  void refreshSalesView()
-  refreshWeatherView()
 }

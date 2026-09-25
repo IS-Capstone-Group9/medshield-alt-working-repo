@@ -3,15 +3,19 @@ import { executeDatabricksStatement } from './databricks'
 
 const GOLD = '`workspace`.`medshield_gold`'
 const FACT = `${GOLD}.\`sales_restart_fact_candidate\``
-const MONTHLY = `${GOLD}.\`vw_dashboard_monthly_sales_candidate\``
-const YEARLY = `${GOLD}.\`vw_dashboard_yearly_sales_candidate\``
-const AREA_YEARLY = `${GOLD}.\`vw_dashboard_area_yearly_candidate\``
-const PRODUCT_YEARLY = `${GOLD}.\`vw_dashboard_product_yearly_candidate\``
 const EXTERNAL = `${GOLD}.\`vw_dss_external_signals_candidate\``
+const NASA_WEATHER = `${GOLD}.\`vw_weather_nasa_power_monthly_candidate\``
 const SOURCE_NAME = 'workspace.medshield_gold.sales_restart_fact_candidate'
 const HISTORY_START = '2017-01'
 const HISTORY_END = '2025-12'
-const OBSERVED_FACT = 'is_analysis_candidate = TRUE'
+// One analytical population for every user-facing query. Source rows that are
+// retained only as non-product evidence stay queryable in Gold, but never enter
+// dashboard totals, product lists, forecasts, or downstream model inputs. The
+// explicit patterns also cover four legacy rows whose labels predate the Gold
+// prefix flag (two DR references, one PR reference, and one QMC amount label).
+const NON_PRODUCT_LABEL = `(is_contract_label = TRUE OR UPPER(TRIM(normalized_product)) RLIKE
+  '^(PAGBILAO|QMC|PPDC|TOURISM|PROVINCIAL[[:space:]]+TOURISM[[:space:]]+OFFICE|MARINDUQUE|GULANG[[:space:]]+GULANG|PESO|PESO[[:space:]]+PROVINCIAL|PHO|ABOITIZ|PADRE[[:space:]]+BURGOS|PPOC)([[:space:]]*#|[[:space:]]+[0-9])|^DR[[:space:]]*#|^PR[[:space:]]+[0-9]')`
+const OBSERVED_FACT = `is_analysis_candidate = TRUE AND NOT ${NON_PRODUCT_LABEL}`
 
 type Row = Record<string, string | null>
 
@@ -166,30 +170,68 @@ function databricksSource(rows: unknown, extra: Record<string, unknown> = {}) {
 
 export async function loadDatabricksDashboardSnapshot() {
   const [yearly, monthly, areas, products, seasonality, external] = await Promise.all([
-    query(`SELECT calendar_year, transaction_count, distinct_dr_count, distinct_area_count,
-      distinct_product_count, warning_transaction_count, total_quantity_candidate,
-      net_sales_candidate, gross_margin_candidate, weighted_gross_margin_pct_candidate,
-      financial_definition_status
-      FROM ${YEARLY} ORDER BY calendar_year`, 20),
-    query(`SELECT year_month, month_number, month_short_name, has_sales_activity,
-      transaction_count, COALESCE(net_sales_candidate, 0) AS net_sales_candidate,
-      COALESCE(gross_margin_candidate, 0) AS gross_margin_candidate
-      FROM ${MONTHLY} ORDER BY year_month`, 150),
-    query(`SELECT CASE WHEN area_name = 'LOWER CAVITE' THEN 'CAVITE' ELSE area_name END AS area_name,
-      SUM(transaction_count) AS transaction_count,
-      SUM(COALESCE(net_sales_candidate, 0)) AS revenue,
-      SUM(COALESCE(gross_margin_candidate, 0)) AS income
-      FROM ${AREA_YEARLY} WHERE has_sales_activity = TRUE
-      GROUP BY CASE WHEN area_name = 'LOWER CAVITE' THEN 'CAVITE' ELSE area_name END ORDER BY revenue DESC`, 100),
-    query(`SELECT product_name, SUM(transaction_count) AS transaction_count,
-      SUM(COALESCE(total_quantity_candidate, 0)) AS qty,
-      SUM(COALESCE(net_sales_candidate, 0)) AS revenue,
-      SUM(COALESCE(gross_margin_candidate, 0)) AS income
-      FROM ${PRODUCT_YEARLY}
-      GROUP BY product_name ORDER BY revenue DESC LIMIT 15`, 20),
-    query(`SELECT month_number, MAX(month_short_name) AS month,
-      AVG(COALESCE(net_sales_candidate, 0)) AS avg_revenue
-      FROM ${MONTHLY} GROUP BY month_number ORDER BY month_number`, 20),
+    query(`SELECT calendar_year,
+      COUNT(*) AS transaction_count,
+      COUNT(DISTINCT dr_number) AS distinct_dr_count,
+      COUNT(DISTINCT normalized_area) AS distinct_area_count,
+      COUNT(DISTINCT normalized_product) AS distinct_product_count,
+      SUM(CASE WHEN COALESCE(SIZE(quality_rule_codes), 0) > 0 THEN 1 ELSE 0 END) AS warning_transaction_count,
+      SUM(CASE WHEN is_quantity_observation_eligible THEN quantity END) AS total_quantity_candidate,
+      SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) AS net_sales_candidate,
+      SUM(CASE WHEN is_gross_margin_eligible THEN gross_margin_amount END) AS gross_margin_candidate,
+      CASE WHEN SUM(CASE WHEN is_gross_margin_eligible THEN net_sales END) <> 0
+        THEN ROUND(100 * SUM(CASE WHEN is_gross_margin_eligible THEN gross_margin_amount END)
+          / SUM(CASE WHEN is_gross_margin_eligible THEN net_sales END), 4) END AS weighted_gross_margin_pct_candidate,
+      'CANDIDATE_PENDING_FINANCE_APPROVAL' AS financial_definition_status
+      FROM ${FACT} WHERE ${OBSERVED_FACT}
+      GROUP BY calendar_year ORDER BY calendar_year`, 20),
+    query(`WITH month_spine AS (
+        SELECT EXPLODE(SEQUENCE(TO_DATE('2017-01-01'), TO_DATE('2025-12-01'), INTERVAL 1 MONTH)) AS month_start
+      ), monthly_fact AS (
+        SELECT month_start, COUNT(*) AS transaction_count,
+          SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) AS net_sales_candidate,
+          SUM(CASE WHEN is_gross_margin_eligible THEN gross_margin_amount END) AS gross_margin_candidate
+        FROM ${FACT} WHERE ${OBSERVED_FACT} GROUP BY month_start
+      )
+      SELECT DATE_FORMAT(s.month_start, 'yyyy-MM') AS year_month,
+        MONTH(s.month_start) AS month_number,
+        DATE_FORMAT(s.month_start, 'MMM') AS month_short_name,
+        COALESCE(m.transaction_count, 0) > 0 AS has_sales_activity,
+        COALESCE(m.transaction_count, 0) AS transaction_count,
+        COALESCE(m.net_sales_candidate, 0) AS net_sales_candidate,
+        COALESCE(m.gross_margin_candidate, 0) AS gross_margin_candidate
+      FROM month_spine AS s LEFT JOIN monthly_fact AS m USING (month_start)
+      ORDER BY s.month_start`, 150),
+    query(`SELECT CASE WHEN normalized_area = 'LOWER CAVITE' THEN 'CAVITE' ELSE normalized_area END AS area_name,
+      COUNT(*) AS transaction_count,
+      SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) AS revenue,
+      SUM(CASE WHEN is_gross_margin_eligible THEN gross_margin_amount END) AS income
+      FROM ${FACT} WHERE ${OBSERVED_FACT}
+      GROUP BY CASE WHEN normalized_area = 'LOWER CAVITE' THEN 'CAVITE' ELSE normalized_area END
+      ORDER BY revenue DESC`, 100),
+    query(`SELECT normalized_product AS product_name, COUNT(*) AS transaction_count,
+      SUM(CASE WHEN is_quantity_observation_eligible THEN quantity END) AS qty,
+      SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) AS revenue,
+      SUM(CASE WHEN is_gross_margin_eligible THEN gross_margin_amount END) AS income,
+      SUM(SUM(CASE WHEN is_net_sales_eligible THEN net_sales END)) OVER () AS product_revenue_total
+      FROM ${FACT}
+      WHERE ${OBSERVED_FACT}
+        AND product_scope_status <> 'CONTRACT_LABEL_CANDIDATE'
+        AND UPPER(normalized_product) NOT LIKE 'DR#%'
+        AND UPPER(normalized_product) NOT LIKE 'DR #%TERMS%'
+        AND UPPER(normalized_product) NOT RLIKE '^PR [0-9]'
+      GROUP BY normalized_product ORDER BY revenue DESC LIMIT 15`, 20),
+    query(`WITH month_spine AS (
+        SELECT EXPLODE(SEQUENCE(TO_DATE('2017-01-01'), TO_DATE('2025-12-01'), INTERVAL 1 MONTH)) AS month_start
+      ), monthly_fact AS (
+        SELECT month_start, SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) AS net_sales_candidate
+        FROM ${FACT} WHERE ${OBSERVED_FACT} GROUP BY month_start
+      )
+      SELECT MONTH(s.month_start) AS month_number,
+        MAX(DATE_FORMAT(s.month_start, 'MMM')) AS month,
+        AVG(COALESCE(m.net_sales_candidate, 0)) AS avg_revenue
+      FROM month_spine AS s LEFT JOIN monthly_fact AS m USING (month_start)
+      GROUP BY MONTH(s.month_start) ORDER BY month_number`, 20),
     query(`SELECT period, territory,
       AVG(CASE WHEN signal_family = 'DISEASE' THEN signal_value END) AS disease_intensity_index,
       AVG(CASE WHEN signal_family = 'WEATHER' THEN signal_value END) AS rainfall_severity_index
@@ -219,7 +261,9 @@ export async function loadDatabricksDashboardSnapshot() {
     income: numberValue(row.income),
     qty: numberValue(row.qty),
     abc: index < 3 ? 'A' : index < 8 ? 'B' : 'C',
-    pct_of_total: totalRevenue ? numberValue(row.revenue) / totalRevenue * 100 : 0,
+    pct_of_total: numberValue(row.product_revenue_total)
+      ? numberValue(row.revenue) / numberValue(row.product_revenue_total) * 100
+      : 0,
   }))
   return {
     data_status: {
@@ -283,12 +327,12 @@ export async function getDatabricksSalesStatus() {
     query(`SELECT COUNT(*) AS rows_extracted,
       SUM(CASE WHEN ${OBSERVED_FACT} THEN 1 ELSE 0 END) AS rows_accepted,
       0 AS duplicate_rows,
-      SUM(CASE WHEN COALESCE(SIZE(quality_rule_codes), 0) > 0 THEN 1 ELSE 0 END) AS rows_with_warnings,
-      SUM(CASE WHEN COALESCE(SIZE(quality_rule_codes), 0) = 0 THEN 1 ELSE 0 END) AS valid_rows,
-      COUNT(DISTINCT normalized_product) AS unique_products,
-      COUNT(DISTINCT dr_number) AS unique_dr_numbers,
-      MIN(date_delivered) AS source_period_start,
-      MAX(date_delivered) AS source_period_end,
+      SUM(CASE WHEN ${OBSERVED_FACT} AND COALESCE(SIZE(quality_rule_codes), 0) > 0 THEN 1 ELSE 0 END) AS rows_with_warnings,
+      SUM(CASE WHEN ${OBSERVED_FACT} AND COALESCE(SIZE(quality_rule_codes), 0) = 0 THEN 1 ELSE 0 END) AS valid_rows,
+      COUNT(DISTINCT CASE WHEN ${OBSERVED_FACT} THEN normalized_product END) AS unique_products,
+      COUNT(DISTINCT CASE WHEN ${OBSERVED_FACT} THEN dr_number END) AS unique_dr_numbers,
+      MIN(CASE WHEN ${OBSERVED_FACT} THEN date_delivered END) AS source_period_start,
+      MAX(CASE WHEN ${OBSERVED_FACT} THEN date_delivered END) AS source_period_end,
       MAX(gold_published_at) AS received_at
       FROM ${FACT}`, 5),
     query(`SELECT calendar_year, COUNT(*) AS rows FROM ${FACT}
@@ -627,7 +671,7 @@ export async function getDatabricksSalesSectors() {
     ORDER BY normalized_product, month_start, territory, channel`, 30_000)
   const includedRows = rows.reduce((sum, row) => sum + numberValue(row.row_count), 0)
   const unmappedRows = rows.filter((row) => row.sector === 'Unknown').reduce((sum, row) => sum + numberValue(row.row_count), 0)
-function getRegionForTerritory(territory: string, sector?: string): string {
+function getRegionForTerritory(territory: string | null, sector?: string | null): string {
   const t = String(territory || '').trim().toLowerCase()
   if (['cavite', 'batangas', 'laguna', 'quezon'].includes(t)) return 'CALABARZON'
   if (['marinduque', 'oriental mindoro', 'occidental mindoro', 'mindoro'].includes(t)) return 'MIMAROPA'
@@ -982,14 +1026,125 @@ export async function solveDatabricksPlanningScenario(body: Record<string, unkno
   }
 }
 
-export async function getDatabricksWeatherEffects(input: { year?: string; area?: string; grain?: string }) {
+function pearsonCorrelation(pairs: Array<[number, number]>): number | null {
+  if (pairs.length < 3) return null
+  const xMean = pairs.reduce((sum, [x]) => sum + x, 0) / pairs.length
+  const yMean = pairs.reduce((sum, [, y]) => sum + y, 0) / pairs.length
+  let numerator = 0
+  let xSquares = 0
+  let ySquares = 0
+  for (const [x, y] of pairs) {
+    const xDelta = x - xMean
+    const yDelta = y - yMean
+    numerator += xDelta * yDelta
+    xSquares += xDelta * xDelta
+    ySquares += yDelta * yDelta
+  }
+  const denominator = Math.sqrt(xSquares * ySquares)
+  return denominator ? Number((numerator / denominator).toFixed(4)) : null
+}
+
+async function getNasaPowerWeatherEffects(year: string, area: string) {
+  try {
+    const available = await executeDatabricksStatement(
+      "SHOW TABLES IN `workspace`.`medshield_gold` LIKE 'vw_weather_nasa_power_monthly_candidate'",
+      { rowLimit: 5 },
+    )
+    if (!available.rows.length) {
+      return {
+        metadata: {
+          provider: 'nasa_power', grain: 'monthly', period_start: null, period_end: null,
+          rows_returned: 0, sales_matched_rows: 0,
+          source: 'workspace.medshield_gold.vw_weather_nasa_power_monthly_candidate',
+          system_of_record: 'databricks', status: 'not_refreshed',
+        },
+        summary: [{ periods: 0, sales_matched_periods: 0, rainfall_revenue_correlation: null }],
+        rows: [],
+      }
+    }
+
+    const clauses = ["weather.provider = 'nasa_power'"]
+    if (year !== 'all') clauses.push(`YEAR(weather.period_start) = ${Number(year)}`)
+    if (area !== 'all') clauses.push(`weather.territory = ${sqlString(area, 'area')}`)
+    const result = await executeDatabricksStatement(`WITH monthly_sales AS (
+      SELECT month_start AS period_start,
+        COALESCE(territory, normalized_area) AS territory,
+        SUM(CASE WHEN is_net_sales_eligible THEN net_sales ELSE 0 END) AS sales_revenue
+      FROM ${FACT}
+      WHERE ${OBSERVED_FACT} AND proposed_area_type = 'territory'
+      GROUP BY month_start, COALESCE(territory, normalized_area)
+    )
+    SELECT DATE_FORMAT(weather.period_start, 'yyyy-MM') AS period,
+      weather.territory, weather.provider, weather.rainfall_mm, weather.rainy_days,
+      weather.avg_temperature_c, weather.avg_relative_humidity_pct,
+      weather.max_wind_speed_kph, weather.rainfall_severity_proxy,
+      weather.weather_alert_level, weather.fetched_at,
+      sales.sales_revenue
+    FROM ${NASA_WEATHER} AS weather
+    LEFT JOIN monthly_sales AS sales
+      ON sales.period_start = weather.period_start
+        AND UPPER(sales.territory) = UPPER(weather.territory)
+    WHERE ${clauses.join(' AND ')}
+    ORDER BY weather.period_start, weather.territory`, { rowLimit: 5000, timeoutMs: 120_000 })
+
+    const rows = result.rows.map((row) => ({
+      period: row.period,
+      area: row.territory,
+      provider: row.provider,
+      rainfall_mm: numberValue(row.rainfall_mm),
+      rainy_days: numberValue(row.rainy_days),
+      avg_temperature_c: nullableNumber(row.avg_temperature_c),
+      avg_relative_humidity_pct: nullableNumber(row.avg_relative_humidity_pct),
+      max_wind_speed_kph: nullableNumber(row.max_wind_speed_kph),
+      rainfall_severity_proxy: numberValue(row.rainfall_severity_proxy),
+      weather_alert_level: row.weather_alert_level ?? 'unavailable',
+      sales_revenue: nullableNumber(row.sales_revenue),
+      planning_demand_uplift_pct: null,
+      fetched_at: row.fetched_at,
+      mapping_status: row.sales_revenue == null ? 'weather_only' : 'territory_month_matched',
+    }))
+    const pairs = rows.flatMap((row) =>
+      row.sales_revenue == null ? [] : [[row.rainfall_mm, row.sales_revenue] as [number, number]],
+    )
+    return {
+      metadata: {
+        provider: 'nasa_power', grain: 'monthly',
+        period_start: rows[0]?.period ?? null,
+        period_end: rows.at(-1)?.period ?? null,
+        rows_returned: rows.length,
+        sales_matched_rows: pairs.length,
+        source: 'workspace.medshield_gold.vw_weather_nasa_power_monthly_candidate',
+        system_of_record: 'databricks', status: 'live',
+      },
+      summary: [{
+        periods: rows.length,
+        sales_matched_periods: pairs.length,
+        rainfall_revenue_correlation: pearsonCorrelation(pairs),
+      }],
+      rows,
+    }
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Unknown Databricks error'
+    throw new DatabricksSourceUnavailableError(message)
+  }
+}
+
+export async function getDatabricksWeatherEffects(input: { year?: string; area?: string; grain?: string; provider?: string }) {
   const year = input.year?.trim() || 'all'
   const area = input.area?.trim() || 'all'
   const grain = input.grain?.trim() || 'monthly'
-  if (grain !== 'monthly') throw new DatabricksDashboardInputError('Databricks Gold currently publishes monthly PAGASA observations only')
+  const provider = input.provider?.trim() || 'PAGASA'
+  if (grain !== 'monthly') throw new DatabricksDashboardInputError('Databricks Gold currently publishes monthly weather observations only')
+  if (!['PAGASA', 'nasa_power'].includes(provider)) {
+    throw new DatabricksDashboardInputError('Weather provider must be PAGASA or nasa_power')
+  }
+  if (year !== 'all' && !/^(201[7-9]|202[0-5])$/.test(year)) {
+    throw new DatabricksDashboardInputError('Invalid weather year')
+  }
+  if (provider === 'nasa_power') return getNasaPowerWeatherEffects(year, area)
+
   const clauses = [`signal_family = 'WEATHER'`]
   if (year !== 'all') {
-    if (!/^(201[7-9]|202[0-5])$/.test(year)) throw new DatabricksDashboardInputError('Invalid weather year')
     clauses.push(`YEAR(period_start) = ${Number(year)}`)
   }
   if (area !== 'all') clauses.push(`territory = ${sqlString(area, 'area')}`)
@@ -1004,6 +1159,7 @@ export async function getDatabricksWeatherEffects(input: { year?: string; area?:
       rows_returned: rows.length,
       sales_matched_rows: rows.filter((row) => row.is_external_join_ready === 'true').length,
       source: 'workspace.medshield_gold.vw_dss_external_signals_candidate',
+      system_of_record: 'databricks', status: 'live',
     },
     summary: [{ periods: rows.length, sales_matched_periods: 0, rainfall_revenue_correlation: null }],
     rows: rows.map((row) => ({

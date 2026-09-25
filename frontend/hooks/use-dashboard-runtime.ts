@@ -8,7 +8,10 @@ import {
 } from '@/services/api/dashboard-engine'
 import { enhanceDashboardContent } from '@/services/api/dashboard-enhancements'
 import { installDashboardEnhancements } from '@/services/api/dashboard-enhancement-listeners'
-import { refreshDashboardFromGateway } from '@/services/api/dashboard-interactions'
+import {
+  refreshDashboardFromGateway,
+  resetDashboardDeferredLoads,
+} from '@/services/api/dashboard-interactions'
 import { hydrateSidebarAccountCard } from '@/lib/sidebar-account-card'
 import type { User } from '@/lib/auth-tokens'
 
@@ -32,7 +35,8 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
 
     root.dataset.sourceState = 'loading'
     root.setAttribute('aria-busy', 'true')
-    root.style.visibility = 'hidden'
+    root.style.visibility = 'visible'
+    resetDashboardDeferredLoads()
 
     const showDatabricksUnavailable = () => {
       if (disposed) return
@@ -68,7 +72,28 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
     enhanceDashboardContent(root)
     hydrateSidebarAccountCard(root, user)
 
-    runDashboardScript(getExecutableDashboardScript())
+    const loadingOverlay = document.createElement('div')
+    loadingOverlay.className = 'dashboard-loading-overlay'
+    loadingOverlay.setAttribute('role', 'status')
+    loadingOverlay.setAttribute('aria-live', 'polite')
+    loadingOverlay.innerHTML = `
+      <div class="dashboard-loading-card">
+        <div class="dashboard-loading-mark" aria-hidden="true">M</div>
+        <div>
+          <strong>Loading MedShield</strong>
+          <span>Connecting to the live Databricks Gold dataset…</span>
+        </div>
+        <div class="dashboard-loading-progress" aria-hidden="true"><i></i></div>
+      </div>`
+    root.appendChild(loadingOverlay)
+
+    // Yield one frame so the loading shell paints before the legacy dashboard
+    // runtime parses and initializes its chart registry.
+    new Promise<void>((resolve) => window.requestAnimationFrame(() => resolve()))
+      .then(() => {
+        if (disposed) return []
+        return runDashboardScript(getExecutableDashboardScript())
+      })
       .then((listeners) => {
         activeListeners = listeners
         if (disposed) {
@@ -86,6 +111,7 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
             root.dataset.sourceState = 'ready'
             root.removeAttribute('aria-busy')
             root.style.visibility = 'visible'
+            loadingOverlay.remove()
           })
           .catch((error) => {
             console.error('Live Databricks dashboard load failed:', error)

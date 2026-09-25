@@ -1,113 +1,82 @@
-# Chapter 4 - Implementation
+# Chapter 4 - Implementation Baseline
 
-This document describes the current implementation of the MedShield Business Analytics Decision Support System in this workspace.
+Last reviewed: 2026-09-25
 
-## 4.1 System Overview
+This document describes the implementation currently present in the workspace. Candidate, derived, proxy, and scenario outputs retain those labels; planned analytical models are not presented as published features.
 
-- Frontend: Next.js App Router, React, and TypeScript in `frontend/`.
-- Backend: TypeScript API gateway in `backend/` with two Python Flask microservices in `services/`.
-- Database: Supabase PostgreSQL using a connected warehouse schema in `supabase/`.
-- Source of truth: warehouse fact tables and dimension tables. When Supabase credentials are unavailable in the workspace, the gateway and services can fall back to the checked-in reference export for local execution.
+## 4.1 System overview
 
-## 4.2 Warehouse Design
+- `frontend/`: Next.js App Router, React, TypeScript, Chart.js, dashboard runtime, and Playwright tests.
+- `backend/`: Express and TypeScript gateway for authentication, validation, Databricks queries, caching, NASA POWER refresh, and audit routing.
+- `databricks/`: sales and external-source Bronze-Silver-Gold pipelines, SQL bridge views, tests, and operating guides.
+- `supabase/`: identity, role, audit, and earlier schema migrations. Supabase is not the dashboard analytics source.
+- `services/`: offline Python data preparation, model experiments, and tests. Flask services are not required by the dashboard runtime.
 
-The schema in `supabase/migrations/001_init.sql` uses the connected dashboard warehouse model, `004_dss_schema.sql` adds the DSS layer, and `005_sales_ingestion_weather.sql` completes transaction ingestion and weather provenance.
+## 4.2 Runtime architecture
 
-- Dimensions
-  - `dim_date`
-  - `dim_month`
-  - `dim_area`
-  - `dim_product`
-- Facts
-  - `fact_monthly_sales`
-  - `fact_area_summary`
-  - `fact_product_summary`
-  - `fact_year_summary`
-  - `fact_seasonality`
+The authenticated frontend calls the gateway. The gateway queries Databricks Gold with server-only credentials and returns typed JSON. Supabase authenticates users and supplies application roles. If Databricks is unavailable, the gateway fails closed and the dashboard displays an unavailable state.
 
-These tables are linked through foreign keys and are exposed through dashboard views:
+No chart or KPI reads a browser JSON file, local CSV/XLSX, generated output, Python snapshot, seeded Supabase analytical table, or mock value as a runtime fallback.
 
-- `vw_dashboard_kpis`
-- `vw_dashboard_monthly`
-- `vw_dashboard_by_area`
-- `vw_dashboard_top_products`
-- `vw_dashboard_year_summary`
-- `vw_dashboard_seasonality`
+## 4.3 Sales data implementation
 
-The DSS extension adds:
+The current sales restart processes source files for 2017-2025:
 
-- Source and model dimensions:
-  - `dim_source_system`
-  - `dim_model`
-- Transaction and external signal facts:
-  - `stg_sales_transactions`
-  - `fact_sales_transactions`
-  - `fact_disease_signal`
-  - `fact_weather_signal`
-- Model output facts:
-  - `fact_demand_forecast`
-  - `fact_product_priority`
-  - `fact_area_cluster`
-  - `fact_regional_priority`
-  - `fact_inventory_recommendation`
-  - `fact_allocation_recommendation`
-  - `fact_product_region_match`
-  - `fact_decision_alert`
-  - `fact_model_evaluation`
-- API views:
-  - `vw_dss_forecasts`
-  - `vw_dss_external_signals`
-  - `vw_dss_inventory_recommendations`
-  - `vw_dss_regional_priorities`
-  - `vw_dss_area_clusters`
-  - `vw_dss_product_priorities`
-  - `vw_dss_allocation_recommendations`
-  - `vw_dss_product_region_matches`
-  - `vw_dss_decision_alerts`
-  - `vw_dss_model_evaluation`
+1. Bronze records source manifests, file hashes, and raw rows.
+2. Silver parses yearly layouts, applies quality rules, preserves warnings/rejections, and validates the checksum-bound 2025 allocation replacement.
+3. Gold creates transaction facts, dates, areas, products, yearly/monthly aggregates, mapping and quality audits, and allocation provenance.
+4. `databricks/sql/05_sales_restart_system_bridge.sql` creates the stable yearly application view after Gold passes.
 
-## 4.3 Data Flow
+For the current candidate snapshot, the bridge expects nine yearly rows and 37,728 accepted fact transactions. The figure is version-bound and must change only through a reconciled rerun.
 
-1. Raw sales rows from `data/medshield/raw/sales/Sales Report.xlsx` land in `stg_sales_transactions`.
-2. The ETL validates dates, products, areas, quantities, costs, and row quality.
-3. Valid rows are loaded into `fact_sales_transactions`; aggregate facts are refreshed from that grain.
-4. DOH and official PAGASA extracts remain authoritative for disease, RSI, and typhoon signals; NASA POWER and Open-Meteo observations provide a separately labeled weather proxy.
-5. Python analytics jobs produce model output rows for forecasts, priorities, inventory recommendations, allocation, product-region matches, alerts, and model evaluation.
-6. Dashboard and DSS views expose the latest trusted outputs to the API.
-7. The TypeScript gateway queries Databricks Gold directly and returns an unavailable response when the source contract cannot be loaded.
+## 4.4 External data implementation
 
-## 4.4 Runtime Behavior
+The external restart copies and ingests the supplied DOH and PAGASA files, cleans them independently, publishes candidate context tables, and creates the application bridge through `databricks/sql/06_external_restart_system_bridge.sql`.
 
-- The TypeScript backend uses server-only credentials to query Databricks SQL.
-- The frontend remains hidden until the core Databricks contract loads.
-- If Databricks is unavailable, the UI shows an explicit unavailable state; no local snapshot or service fallback runs.
+- DOH covers the declared 2018-2026 extract; 2026 remains partial and is not a complete-year/live signal.
+- PAGASA covers official historical station observations for 2017-2024; no official 2025 PAGASA rows are invented.
+- Station-to-territory and disease-to-sales mappings remain review candidates and are not forecast-approved.
 
-## 4.5 Current Deliverables
+The backend also supports NASA POWER. An authorized refresh fetches daily observations server-side, aggregates them monthly, writes the Silver candidate table, and exposes the Gold weather view. The dashboard subsequently reads the Gold view, never NASA directly.
 
-- `frontend/` renders the MedShield dashboard in Next.js + TypeScript.
-- Sales ingestion and standardization run in Databricks before Gold publication.
-- The View Sales Data page exposes the Gold fact with year, search, quality, page-size, pagination, lineage, and filtered computation cards.
-- The Weather API Validation page exposes monthly PAGASA observations from the Databricks external-signals Gold view.
-- Local processed artifacts under `data/medshield/processed` are offline QA inputs and never runtime fallbacks.
-- `backend/` exposes the dashboard API in TypeScript.
-- `backend/src/snapshot.ts` maintains a short-lived cache of the live Databricks snapshot.
-- `supabase/seed.sql` seeds the current data into the connected schema.
+## 4.5 Dashboard and API implementation
 
-## 4.6 Current Workbook Reconciliation
+The current gateway supports:
 
-- 20,418 extracted rows.
-- 19,674 accepted rows.
-- 744 rejected rows with missing required area, date, or product values.
-- 100 exact duplicates retained and flagged.
-- All 13 source columns matched across sheets 2021-2025.
+- summary, yearly, monthly, area, product, seasonality, and transaction views;
+- filtered pagination and data-quality evidence;
+- quantity heatmaps and sales diagnostics;
+- derived buyer-sector/channel and geographic prioritization views;
+- deterministic Pareto/ABC and commercial MCDA interactions;
+- sales-only seasonal-naive and last-observation forecast validation;
+- blocked external-regression responses while join gates remain open;
+- historical planning shortlists and user-entered allocation scenarios;
+- PAGASA and NASA POWER validation views;
+- Databricks sales/external integration status.
 
-## 4.7 Next Data Pipeline Step
+Buyer and geographic classifications are derived from controlled mapping rules and `docs/MAPPED_CLIENT_REFERENCE.md`. They are not source-recorded fields for every transaction and require owner review.
 
-When the new datasets or API extracts are provided, the ETL should:
+## 4.6 Authentication and audit
 
-1. Load them into staging tables.
-2. Profile row quality and record results in `etl_pipeline_run`.
-3. Upsert dimensions for dates, areas, products, source systems, and model registry entries.
-4. Insert or refresh transaction facts, external signal facts, and aggregate facts.
-5. Run the analytics services to populate model-output facts.
-6. Validate `vw_dashboard_*` and `vw_dss_*` views before dashboard release.
+Production authentication uses Supabase Auth. The gateway resolves username/email, validates sessions, enforces role checks, and supports required password reset. Local session authentication can be enabled for development without changing the analytical source.
+
+Audit events use Supabase when configured and can fall back to a local audit file. Analytical responses never use that fallback.
+
+## 4.7 Analytical publication status
+
+Current Gold objects remain `_candidate` and API metadata reports `candidate_only: true`. Implemented baseline and scenario logic does not constitute approval of:
+
+- canonical SKU/medical scope;
+- finance definitions or totals;
+- buyer/geographic mappings;
+- DOH/PAGASA predictive joins;
+- Prophet/XGBoost or another champion model;
+- inventory, lead-time, supplier, cost, expiry, or procurement facts.
+
+The next implementation milestone is a signed data-acceptance record followed by stable approved Gold views. Final descriptive evidence, predictive evaluation, and prescriptive scenarios should use that frozen publication.
+
+## 4.8 Evidence rules for Chapters 4 and 5
+
+Use screenshots and metrics from a named dataset ID and run date. Label each output as observed, derived mapping, estimated allocation, proxy, baseline forecast, or scenario. Dated files under `outputs/` remain evidence for their original populations and must be regenerated before they are used as current results.
+
+See [CURRENT_STATE.md](CURRENT_STATE.md), [API.md](API.md), and [CHAPTER_4_5_EVIDENCE_PLAN.md](CHAPTER_4_5_EVIDENCE_PLAN.md).

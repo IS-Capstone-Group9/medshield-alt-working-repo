@@ -32,6 +32,11 @@ import {
   DatabricksYearlySyncValidationError,
   synchronizeDatabricksYearlyCandidate,
 } from './databricksYearlySync'
+import {
+  refreshNasaPowerWeather,
+  WeatherProviderUnavailableError,
+  WeatherRefreshInputError,
+} from './nasaPowerWeather'
 import { createSession, revokeSessionToken, SessionUser, verifySessionToken } from './sessionAuth'
 import { loadSnapshot } from './snapshot'
 import {
@@ -84,6 +89,17 @@ const databricksYearlySyncLimiter = rateLimit({
   message: {
     error: 'Too many Databricks yearly synchronization requests. Try again later.',
     code: 'DATABRICKS_YEARLY_SYNC_RATE_LIMITED',
+  },
+  standardHeaders: true,
+  legacyHeaders: false,
+})
+
+const weatherRefreshLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 6,
+  message: {
+    error: 'Too many weather refresh requests. Try again later.',
+    code: 'WEATHER_REFRESH_RATE_LIMITED',
   },
   standardHeaders: true,
   legacyHeaders: false,
@@ -698,18 +714,29 @@ app.get('/api/weather/effects', requireAuth, async (req: Request, res: Response)
       year: typeof req.query.year === 'string' ? req.query.year : undefined,
       area: typeof req.query.area === 'string' ? req.query.area : undefined,
       grain: typeof req.query.grain === 'string' ? req.query.grain : undefined,
+      provider: typeof req.query.provider === 'string' ? req.query.provider : undefined,
     }))
   } catch (error) {
     return databricksDashboardFailure(res, error)
   }
 })
 
-app.post('/api/weather/refresh', requireAuth, async (_req: Request, res: Response) => {
-  return res.status(409).json({
-    error: 'Browser weather refresh is disabled. Refresh PAGASA data through the Databricks external-source pipeline.',
-    code: 'DATABRICKS_INGESTION_REQUIRED',
-  })
-})
+app.post(
+  '/api/weather/refresh',
+  requireAuth,
+  requireRole(['analyst']),
+  weatherRefreshLimiter,
+  async (req: Request, res: Response) => {
+    try {
+      return res.json(await refreshNasaPowerWeather(req.body ?? {}))
+    } catch (error) {
+      if (error instanceof WeatherRefreshInputError || error instanceof WeatherProviderUnavailableError) {
+        return res.status(error.status).json({ error: error.message, code: error.code })
+      }
+      return databricksDashboardFailure(res, error)
+    }
+  },
+)
 
 app.options('/api/auth/login', (_req: Request, res: Response) => res.json({}))
 app.options('/api/auth/me', (_req: Request, res: Response) => res.json({}))

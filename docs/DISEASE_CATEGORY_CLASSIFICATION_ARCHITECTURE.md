@@ -1,5 +1,8 @@
 # Product Disease Classification & Therapeutic Mapping Architecture
 
+
+> **Design-status notice (2026-09-25):** This document is a planning or methodology reference. It may describe target models, scenarios, or UI behavior that is not approved or published. The current sales contract contains 2017-2025 actuals, Databricks Gold remains candidate-only, external regression remains blocked, and inventory optimization remains scenario-based. Use [Current State](CURRENT_STATE.md) for implemented facts.
+
 **System:** MedShield Decision Support System (DSS)  
 **Document Version:** 1.0.0  
 **Status:** Canonical System Specification (Chapter 3 Methodology & Architecture)  
@@ -182,8 +185,8 @@ The classified items are aggregated into high-priority seasonal restock cards di
 
 ## 6. Relevant System File References
 
-- **Canonical Product Master Mapping:** [`datasources/templates/product_master_mapping.csv`](file:///c:/Users/Ethan/needfixing/datasources/templates/product_master_mapping.csv)
-- **Therapeutic Taxonomy & Classification Endpoint:** [`services/product_service/app.py`](file:///c:/Users/Ethan/needfixing/services/product_service/app.py)
-- **Surge Multiplier & Safety Stock Engine:** [`services/analytics_service/medshield_engine.py`](file:///c:/Users/Ethan/needfixing/services/analytics_service/medshield_engine.py)
-- **Prescriptive Machine Learning Pipeline:** [`scripts/train_prescriptive_classifier.py`](file:///c:/Users/Ethan/needfixing/scripts/train_prescriptive_classifier.py)
-- **API Gateway Classification Router:** [`backend/src/server.ts`](file:///c:/Users/Ethan/needfixing/backend/src/server.ts)
+- **Canonical Product Master Mapping:** [`datasources/templates/product_master_mapping.csv`](../datasources/templates/product_master_mapping.csv)
+- **Therapeutic Taxonomy & Classification Endpoint:** [`services/product_service/app.py`](../services/product_service/app.py)
+- **Surge Multiplier & Safety Stock Engine:** [`services/analytics_service/medshield_engine.py`](../services/analytics_service/medshield_engine.py)
+- **Prescriptive Machine Learning Pipeline:** [`scripts/train_prescriptive_classifier.py`](../scripts/train_prescriptive_classifier.py)
+- **API Gateway Classification Router:** [`backend/src/server.ts`](../backend/src/server.ts)

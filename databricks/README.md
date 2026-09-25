@@ -1,10 +1,10 @@
 # MedShield Databricks Data-Cleaning Project
 
-For the **9 September 2026 sales rebuild with copyable Bronze → Silver → Gold
-cells**, start with [the sales restart README](sales_restart/README.md).
+For the current **37,728-row checksum-bound sales rebuild with copyable Bronze →
+Silver → Gold cells**, start with [the sales restart README](sales_restart/README.md).
 It uses three standalone notebooks and isolated `sales_restart_*_candidate`
-tables. The module/bundle instructions below describe the earlier, separate
-workflow; do not mix their cells or outputs into that restart.
+tables. The module/bundle instructions below describe an earlier, separate
+workflow. They remain reference material and must not be mixed with the restart.
 
 For the DOH and PAGASA restart, use the
 [external-source restart guide](external_restart/GUIDE.md). Databricks reads

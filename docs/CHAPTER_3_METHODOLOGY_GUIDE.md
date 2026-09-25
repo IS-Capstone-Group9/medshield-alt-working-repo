@@ -16,7 +16,7 @@ MedShield uses a combined CRISP-DM and SEMMA methodology.
 
 The study followed a combined CRISP-DM and SEMMA methodology to guide the development of the MedShield Business Analytics Decision Support System. CRISP-DM was used as the overall lifecycle because the project required business understanding, data understanding, data preparation, modeling, evaluation, and deployment. SEMMA was applied within the analytics phase to organize the data mining steps: sampling, exploration, modification, modeling, and assessment.
 
-The system used historical data only. The sales interface supports multi-year history; exact included periods and exclusions must be reported for each selected source and scope, the DOH dataset covers 2021 to 2025, and the PAGASA dataset covers 2021 to 2024. Weather API observations based on latitude and longitude were used as provider-derived weather proxy data where official historical coverage was incomplete. Because of this scope, the system supports historical analysis, forecast comparison, product prioritization, and scenario-based planning. It does not claim to provide live disease surveillance, official live PAGASA alerts, or automatic procurement decisions.
+The system uses historical data only. The current Databricks candidate contracts cover 2017-2025 sales, 2018-2026 DOH surveillance with 2026 partial, and 2017-2024 PAGASA station observations. NASA POWER observations based on latitude and longitude are separately labeled provider-derived proxies. Exact included periods, exclusions, and join-readiness must be reported for each analysis. The system supports historical analysis, forecast comparison, product prioritization, and scenario planning; it does not claim live disease surveillance, official live PAGASA alerts, or automatic procurement decisions.
 
 ## CRISP-DM Application
 
@@ -50,7 +50,7 @@ Use `docs/RRL_DISEASE_WEATHER_PHARMA_DEMAND_GUIDE.md` for the literature-backed 
 | CRISP-DM | Chapman et al., CRISP-DM 1.0, and IBM SPSS Modeler CRISP-DM documentation | Supports the six-phase project lifecycle used in the capstone. |
 | SEMMA | SAS SEMMA / Enterprise Miner references and Azevedo & Santos comparison of KDD, SEMMA, and CRISP-DM | Supports the sample, explore, modify, model, assess modeling workflow. |
 | Historical weather proxy | NASA POWER API documentation | Supports describing NASA POWER as an API for historical analysis-ready weather data. |
-| Historical weather proxy | Open-Meteo Historical Weather API documentation | Supports describing Open-Meteo as historical reanalysis/weather API data by coordinates. |
+| Historical weather proxy | NASA POWER Daily API documentation | Supports describing NASA POWER as provider-derived historical weather data by coordinates. |
 | Decision support | Decision-support system and analytics literature from the paper RRL | Use to justify dashboard, forecast comparison, and scenario recommendations. |
 
 ## Claims To Use

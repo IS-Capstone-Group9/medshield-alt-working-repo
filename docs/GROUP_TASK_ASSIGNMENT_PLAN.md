@@ -1,5 +1,7 @@
 # Group Task Assignment Plan
 
+> **Planning record:** Role assignments below predate the direct-Databricks runtime in places. Current priorities and boundaries are in [CURRENT_STATE.md](CURRENT_STATE.md) and [MEDSHIELD_DSS_MASTER_CHECKLIST.md](MEDSHIELD_DSS_MASTER_CHECKLIST.md).
+
 ## Purpose
 
 This plan splits the remaining MedShield capstone work across four group members. The goal is to finish the historical decision-support system, keep the paper aligned with the implementation, and produce evidence that can be defended in Chapter 4 and Chapter 5.
@@ -36,7 +38,7 @@ Primary outcome: the datasets and model outputs are clean, reproducible, and def
 | Sales data QA | Verify yearly sales rows, missing products, missing area allocations, invalid dates, duplicate rows, and totals after contract-name breakdown. | `data/medshield/raw/sales/`, `data/medshield/processed/`, `outputs/` | Clean sales totals reconcile to source totals by year. |
 | Contract-name breakdown | Maintain the semi-raw layer where `#` contract names are allocated backward into estimated product rows. | `databricks/docs/SALES_DATA_LAYER_FLOW.md`, generated sales CSVs | Breakdown rows are documented and total value remains unchanged. |
 | Product master and SKU aliases | Fill duplicate product/SKU mapping using controlled aliases. | `datasources/templates/product_master_mapping.csv`, `databricks/docs/SKU_ALIAS_MAPPING_PLAN.md` | Dashboard and model logic use one canonical product identity. |
-| DOH and PAGASA preparation | When uploaded, clean DOH 2021-2025 and PAGASA 2021-2024 into consistent historical CSVs with source/provenance columns. | `data/medshield/raw/`, cleaned external CSVs, `databricks/docs/EXTERNAL_DATA_PREPARATION_GUIDE.md` | Every external row has date, geography, metric fields, source, and notes. |
+| DOH and PAGASA validation | Validate the loaded DOH 2018-2026 and PAGASA 2017-2024 candidates, preserving the DOH 2026 partial flag and PAGASA 2025 gap. | Databricks external candidate tables, `databricks/docs/EXTERNAL_DATA_PREPARATION_GUIDE.md` | Coverage, provenance, missingness, and review mappings are reproducible. |
 | Model computation | Run model jobs only from cleaned/published data. Save metrics and charts for Chapter 4. | `docs/MODEL_COMPUTATION_START_REPORT.md`, model outputs | Outputs include method, parameters, period covered, metrics, and limitations. |
 
 ## Member 3: Backend, Database, and API Owner
@@ -46,9 +48,9 @@ Primary outcome: the API and database layer reliably serve the dashboard and mod
 | Task | Specific work | Files or outputs | Acceptance criteria |
 |---|---|---|---|
 | API gateway check | Verify backend routes return stable JSON for dashboards, sales uploads, weather validation, and model outputs. | `backend/src/`, `docs/API.md` | Frontend talks to the TypeScript gateway, not directly to Python services. |
-| Python service boundary | Keep analytics and product logic inside the Python services and document health endpoints. | `services/analytics_service/`, `services/product_service/` | Services can run independently and through Docker Compose. |
-| Supabase schema alignment | Confirm migrations support staging, facts, external signals, DSS outputs, model registry, and ETL lineage. | `supabase/migrations/`, `docs/DATABASE.md` | Schema matches the paper and dashboard data flow. |
-| Data publication logic | Ensure cleaned sales and model outputs can be published without overwriting unrelated history. | `services/data_pipeline.py`, processing tools | Year replacement and fallback behavior are documented and tested. |
+| Offline analytics boundary | Keep Python jobs reproducible and separate from the live request path. Publish approved outputs to Databricks before the dashboard can use them. | `services/analytics_service/`, `services/product_service/`, `docs/API.md` | The dashboard remains available without starting Python services, and unpublished output fails closed. |
+| Databricks and Supabase boundary | Validate Databricks Gold contracts for analytical data and Supabase migrations for identity, roles, audit, and the optional yearly candidate cache. | `databricks/`, `supabase/migrations/`, `docs/DATABASE.md` | Each store has one documented responsibility and no analytical fallback is enabled. |
+| Data publication logic | Publish cleaned sales and approved model outputs to checksum-bound Databricks candidate objects without overwriting unrelated history. | `databricks/sales_restart/`, processing tools | Source replacement, reconciliation, and publication gates are documented and tested. |
 | Backend validation | Add or update tests when API behavior changes. | `backend/`, `services/tests/` | Build and tests pass before handoff. |
 
 ## Member 4: Frontend, BI, QA, and DevOps Owner
@@ -60,7 +62,7 @@ Primary outcome: the system is professional, scannable, testable, and repeatable
 | Dashboard cleanup | Keep dashboard screens compact, reduce wordy cards, make Power BI/dashboard evidence easy to distinguish, and prioritize KPI/charts over explanation text. | `frontend/` | Screens are readable on laptop/mobile and support Chapter 4 screenshots. |
 | BI evidence screenshots | Capture sales dashboard, cleaned data summary, contract breakdown, product mapping, external data readiness, and model output views. | `outputs/`, paper screenshots | Each screenshot has a caption and related requirement. |
 | QA regression | Run frontend build, backend build, service tests, Docker config checks, and manual dashboard smoke test. | `docs/TESTING.md`, terminal evidence | Failed checks are fixed or documented with reason. |
-| Docker setup | Maintain local containers for frontend, backend, analytics service, and product service. | `docker-compose.yml`, Dockerfiles | `docker compose up` starts the stack locally. |
+| Docker setup | Maintain the current frontend and backend containers. Treat Python jobs as separate offline tooling. | `docker-compose.yml`, Dockerfiles | `docker compose up` starts the documented two-service application stack. |
 | SonarQube quality gate | Run local SonarQube scan and record major findings before final defense. | `docker-compose.sonar.yml`, `sonar-project.properties` | Scanner completes after token setup and critical issues are triaged. |
 
 ## Weekly Workflow
@@ -89,6 +91,6 @@ Primary outcome: the system is professional, scannable, testable, and repeatable
 
 1. Approve the business rules checklist before changing model logic.
 2. Finish product/SKU alias mapping before final dashboard screenshots.
-3. Upload and clean DOH/PAGASA/weather data into the raw and cleaned folders.
+3. Resolve the seven external territory mapping reviews and document the blocked join gate.
 4. Run model jobs from the cleaned historical dataset only.
 5. Use Docker Compose and SonarQube to prove the system can run and be quality-checked repeatably.

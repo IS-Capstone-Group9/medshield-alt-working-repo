@@ -1,5 +1,7 @@
 # System QA Review
 
+> **Historical QA record:** This review records the 2026-06-28 implementation and its then-current Python/Supabase paths. It is preserved as test evidence and does not describe the current Databricks-only analytical runtime. See [CURRENT_STATE.md](CURRENT_STATE.md) and [TESTING.md](TESTING.md).
+
 ## Scope
 
 Review date: 2026-06-28

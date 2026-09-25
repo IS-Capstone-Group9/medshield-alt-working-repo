@@ -1,5 +1,7 @@
 # MedShield P1-P14 Remediation Status
 
+> **Historical status report:** This file records the 2026-08-29 remediation state. Its source periods, fallback behavior, and open tasks are preserved as evidence and do not override [CURRENT_STATE.md](../../CURRENT_STATE.md).
+
 Date: 2026-08-29
 Branch: `medshield_ui_kei2`
 

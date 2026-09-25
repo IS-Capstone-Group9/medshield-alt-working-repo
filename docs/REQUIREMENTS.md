@@ -162,7 +162,8 @@ Acceptance criteria:
 
 - Actual, estimated, forecast, proxy, scenario, and official data are visually and textually distinct.
 - Model version, data period, source/provider, metrics, and limitations are shown.
-- Demo/fallback values are labeled as demonstration data.
+- A required Databricks failure produces an explicit unavailable state; the runtime must not substitute demo, local, seeded, or mock analytical values.
+- Derived buyer/geography classifications identify their mapping basis and are not presented as source-recorded fields.
 
 ## Non-Functional Requirements
 
@@ -172,14 +173,14 @@ Acceptance criteria:
 | Reproducibility | Data preparation and model runs must be executable through documented commands. |
 | Data quality | Model runs must stop or downgrade when required data is missing or unmapped. |
 | Security | API keys, service-role keys, and uploaded data must not be exposed in frontend code. |
-| Maintainability | Frontend, TypeScript gateway, Python analytics, and Supabase responsibilities must remain separate. |
+| Maintainability | Frontend, TypeScript gateway, offline Python analytics, Databricks, and Supabase identity/audit responsibilities must remain separate. |
 | Explainability | Forecasts, priorities, and scenarios must include reason text and limitations. |
 | Governance | Published recommendations require human review status. |
 
 ## Capstone Completion Workflow
 
 1. Approve business definitions.
-2. Reconcile and repair 2021-2025 sales data.
+2. Reconcile and repair the complete 2017-2025 sales population, including the checksum-bound 2025 replacement.
 3. Review contract-name row backward allocation.
 4. Complete product/SKU alias mapping.
 5. Complete area, customer-type, and business-line mapping.

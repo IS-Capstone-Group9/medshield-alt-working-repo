@@ -4,6 +4,7 @@ import {
   getSalesSummary,
   getWeatherEffects,
   loadDashboardData,
+  refreshWeatherData,
 } from '@/lib/api'
 import { renderSalesComputation, renderSalesDatasetStatus } from './sales-view-helpers'
 import { renderSalesPage, setSalesViewError } from './sales-page-helpers'
@@ -125,16 +126,34 @@ export function installCommonInteractions(root: HTMLElement, activeListeners: an
   })
 }
 
+const loadedDeferredPages = new Set<string>()
+
+export function resetDashboardDeferredLoads() {
+  loadedDeferredPages.clear()
+}
+
+export function refreshDashboardModulesForPage(pageName: string) {
+  if (loadedDeferredPages.has(pageName)) return
+
+  let loaders: Array<() => Promise<void>> = []
+  if (pageName === 'revenue') loaders = [refreshSalesHeatmap]
+  if (pageName === 'products') loaders = [refreshSalesSectors]
+  if (pageName === 'territory') loaders = [refreshSalesSectors]
+  if (pageName === 'forecast') loaders = [refreshForecastValidation, refreshExternalRegression]
+  if (pageName === 'inventory') loaders = [refreshPlanning]
+  if (!loaders.length) return
+
+  loadedDeferredPages.add(pageName)
+  void Promise.allSettled(loaders.map((load) => load())).then((results) => {
+    if (results.some((result) => result.status === 'rejected')) loadedDeferredPages.delete(pageName)
+  })
+}
+
 export async function refreshDashboardFromGateway() {
   const applyDatasetPatch = (window as any).applyDatasetPatch
   if (typeof applyDatasetPatch !== 'function') {
     throw new Error('Dashboard live-data adapter is unavailable')
   }
-
-  // This source must still be checked if the unrelated dashboard snapshot fails.
-  const forecastRefresh = refreshForecastValidation()
-  const regressionRefresh = refreshExternalRegression()
-  const planningRefresh = refreshPlanning()
 
   const data = await loadDashboardData()
   const root = document.querySelector<HTMLElement>('.medshield-root')
@@ -168,9 +187,6 @@ export async function refreshDashboardFromGateway() {
     seasonality: data.seasonality,
   })
   if (root) setDecisionSupportChartData(root, data)
-  // Keep the dashboard hidden until every visible analytical module has either
-  // loaded its Databricks response or rendered an explicit unavailable state.
-  await Promise.all([refreshSalesHeatmap(), refreshSalesSectors(), forecastRefresh, regressionRefresh, planningRefresh])
 }
 
 export async function loadSalesDataView(root: HTMLElement, state: any) {
@@ -196,8 +212,41 @@ export async function loadSalesDataView(root: HTMLElement, state: any) {
 }
 
 export async function loadWeatherEffectView(root: HTMLElement) {
-  const year = root.querySelector<HTMLSelectElement>('#weatherYear')?.value ?? '2025'
+  const year = root.querySelector<HTMLSelectElement>('#weatherYear')?.value ?? '2024'
   const area = root.querySelector<HTMLSelectElement>('#weatherArea')?.value ?? 'all'
   const grain = (root.querySelector<HTMLSelectElement>('#weatherGrain')?.value ?? 'monthly') as 'daily' | 'monthly'
-  renderWeatherEffects(root, await getWeatherEffects({ year, area, grain }))
+  const provider = (root.querySelector<HTMLSelectElement>('#weatherProvider')?.value ?? 'PAGASA') as 'PAGASA' | 'nasa_power'
+  const status = root.querySelector<HTMLElement>('#weatherEffectStatus')
+  if (status) status.textContent = `Loading ${provider === 'nasa_power' ? 'NASA POWER' : 'PAGASA'} records from Databricks Gold…`
+  renderWeatherEffects(root, await getWeatherEffects({ year, area, grain, provider }))
+}
+
+export async function refreshSelectedWeatherData(root: HTMLElement) {
+  const provider = root.querySelector<HTMLSelectElement>('#weatherProvider')?.value ?? 'PAGASA'
+  if (provider !== 'nasa_power') {
+    throw new Error('PAGASA is refreshed through the Databricks external-source notebook.')
+  }
+  const year = root.querySelector<HTMLSelectElement>('#weatherYear')?.value ?? '2024'
+  const area = root.querySelector<HTMLSelectElement>('#weatherArea')?.value ?? 'all'
+  const status = root.querySelector<HTMLElement>('#weatherEffectStatus')
+  const button = root.querySelector<HTMLButtonElement>('#weatherRefresh')
+  if (status) status.textContent = 'Fetching NASA POWER observations and publishing them to Databricks…'
+  if (button) {
+    button.disabled = true
+    button.textContent = 'Refreshing…'
+  }
+  try {
+    await refreshWeatherData({
+      start: year === 'all' ? '2017-01-01' : `${year}-01-01`,
+      end: year === 'all' ? '2025-12-31' : `${year}-12-31`,
+      areas: area === 'all' ? [] : [area],
+      provider: 'nasa_power',
+    })
+    await loadWeatherEffectView(root)
+  } finally {
+    if (button) {
+      button.disabled = root.querySelector<HTMLSelectElement>('#weatherProvider')?.value !== 'nasa_power'
+      button.textContent = 'Refresh NASA POWER'
+    }
+  }
 }

@@ -44,14 +44,14 @@ The workbook supports sales revenue, product quantity, transaction cost fields, 
 | Expense-optimized EOQ | Scenario EOQ or formula demonstration | Ordering and holding costs are unavailable. |
 | Inventory urgency | Demand priority | Current stock, lead time, and service levels are unavailable. |
 | Dead stock | Dead-stock candidate or slow-moving candidate | On-hand inventory, age, expiry, and purchase history are unavailable. |
-| Official disease alert | Disease scenario or pending DOH integration | DOH data will be uploaded later. |
-| Official PAGASA alert | Weather provider watch or PAGASA-pending scenario | PAGASA data will be uploaded later. |
+| Official disease alert | Historical DOH signal or disease scenario | DOH history is loaded, but the geography/product join and a current operational feed are not approved. |
+| Official PAGASA alert | Historical PAGASA observation or provider weather proxy | PAGASA history is loaded through 2024; NASA POWER remains separately labeled and no live official alert feed exists. |
 
 ## Decisions Needed From The Group
 
 1. Approve the first version of the product master and alias map.
 2. Approve the first version of the area classification map.
-3. Decide whether incomplete 2025 periods should be excluded, repaired, or used only as partial secondary validation.
+3. Approve whether the reconciled 2025 candidate has enough observation coverage for the selected forecast holdout grain.
 
 ## Acceptance Criteria
 

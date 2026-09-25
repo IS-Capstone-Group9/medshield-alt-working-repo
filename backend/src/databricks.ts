@@ -337,7 +337,13 @@ export async function executeDatabricksStatement(
     (left, right) => left.position - right.position,
   )
   if (manifestColumns.length === 0) {
-    throw new Error('Databricks did not return a result schema')
+    // Successful DDL/DML statements do not return a tabular schema. Treat
+    // those as an empty result while retaining strict schema checks for
+    // statements that claim to have returned rows.
+    if ((response.manifest?.total_row_count ?? 0) === 0) {
+      return { columns: [], rows: [] }
+    }
+    throw new Error('Databricks returned rows without a result schema')
   }
 
   const statementId = response.statement_id

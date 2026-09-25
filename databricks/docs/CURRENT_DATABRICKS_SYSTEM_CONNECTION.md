@@ -1,18 +1,19 @@
 # Connect the Current Databricks Workspace to MedShield
 
-Last updated: 2026-09-14
+Last updated: 2026-09-25
 
 ## Connection design
 
 MedShield connects through its TypeScript backend. The browser sends the signed-in
 administrator's Supabase token to the backend. Only the backend stores and uses the
 Databricks credential. The backend calls the Databricks SQL Statement Execution API,
-validates nine yearly candidate rows, and can copy that controlled snapshot into the
-protected Supabase candidate cache.
+validates the Gold contracts, and can optionally copy the nine-row yearly checkpoint
+into the protected Supabase candidate cache. Dashboard measures are queried from
+Databricks directly.
 
 The rebuilt sales pipeline publishes `sales_restart_*_candidate` tables. The current
-application consumes a fixed 47-column yearly contract, so run the versioned bridge
-SQL before changing credentials.
+application consumes the sales fact, monthly, yearly, area, and business-product
+contracts. Run the versioned bridge SQL after Gold and before validating credentials.
 
 ## Step 1 — Publish and validate the bridge view in Databricks
 
@@ -124,9 +125,10 @@ go to **View Sales Data**. Click **Verify Gold Connection**. The result must sho
 - 9 years
 - 9 yearly rows
 
-This proves the live Databricks connection. It has not copied or published the data.
+This proves the live Databricks connection and contract. It does not grant business
+approval to the candidate data.
 
-## Step 6 — Synchronize the protected candidate cache
+## Step 6 — Optionally synchronize the protected yearly candidate cache
 
 Confirm Supabase migrations 013, 014, and 015 are applied to the MedShield Supabase
 project and that the backend has a server-only `SUPABASE_SECRET_KEY` or
@@ -142,7 +144,18 @@ Expected reconciliation:
 - loaded transactions: 37,728
 - candidate cache synchronized
 
-This cache is a controlled integration checkpoint. The existing public dashboard
-facts do not automatically switch to this source. Monthly, territory, product, and
-transaction-level publication require their own reviewed contracts after this yearly
-pilot passes.
+This cache is a controlled integration checkpoint for administration and audit. The
+live dashboard does not read it; monthly, territory, product, transaction, forecast-
+baseline, and planning evidence continue to come from Databricks Gold.
+
+## Step 7 — Validate the complete dashboard contract
+
+```powershell
+cd C:\Users\Adrian\projects\medshield1\medshield\backend
+npm run databricks:check:dashboard
+npm run databricks:check:external
+```
+
+Then complete the data-acceptance record in `docs/CURRENT_STATE.md`. The expected
+output remains candidate-only until named business, finance, mapping, and model
+approvals are recorded.

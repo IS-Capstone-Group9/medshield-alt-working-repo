@@ -1,5 +1,7 @@
 # 2025 Data Issue Remediation Plan
 
+> **Historical issue record:** This profile predates the checksum-bound 2025 replacement and allocation validation now used by `sales_restart`. Preserve it as the reason for the remediation; use `../sales_restart/README.md` and `../../docs/CURRENT_STATE.md` for the current workflow and population.
+
 ## Current Finding
 
 The current processed sales dataset has incomplete accepted coverage for 2025. A profile of `data/medshield/processed/sales_transactions.json.gz` found accepted dated rows only in these months:

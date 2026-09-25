@@ -1,5 +1,7 @@
 # Section 8 acceptance evidence — September 12, 2026
 
+> **Historical acceptance record:** The results below belong to the September 12 isolated runtime and its source snapshot. They are not current production acceptance for the 37,728-row Databricks candidate. Use [CURRENT_STATE.md](CURRENT_STATE.md) and [MEDSHIELD_DSS_MASTER_CHECKLIST.md](MEDSHIELD_DSS_MASTER_CHECKLIST.md) for present gates.
+
 Status: reconciliation, regression verification and paper alignment delivered; authenticated acceptance remains open.
 
 QA is the accountable role for this section. Implementation scope is the evidence generator, acceptance tests, planning gateway timeout and methodology/evidence documentation. No schema migration, source-data replacement, model publication or procurement action is included. Checks are self-review, not independent external review.

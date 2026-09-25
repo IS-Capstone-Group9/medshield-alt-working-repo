@@ -1,5 +1,7 @@
 # Chapter 4 and Chapter 5 Evidence Plan
 
+> **Current evidence boundary (2026-09-25):** Use the 37,728-row checksum-bound sales candidate and the current DOH/PAGASA/NASA Databricks candidates. Earlier Section 8 evidence is historical and must retain its original counts. See [CURRENT_STATE.md](CURRENT_STATE.md).
+
 ## Purpose
 
 Use this as the checklist for writing Chapter 4 and Chapter 5. Chapter 4 should show what was built. Chapter 5 should explain what the results mean, what is limited, and what should be improved.
@@ -13,17 +15,17 @@ Use [Section 8 acceptance evidence](SECTION_8_ACCEPTANCE_EVIDENCE.md) for execut
 | Evidence | File or source | Needed action | Status |
 |---|---|---|---|
 | System architecture | `docs/ARCHITECTURE.md`, `docs/IMPLEMENTATION.md` | Add architecture diagram or screenshot. | Pending |
-| Database/schema design | `docs/DATABASE.md`, `supabase/migrations/` | Add table summary or ERD. | Pending |
-| Sales cleaning summary | `docs/IMPLEMENTATION.md`, processed status files | Include extracted, accepted, rejected, duplicate counts. | Pending |
+| Database/schema design | `docs/DATABASE.md`, Databricks schemas, `supabase/migrations/` | Show Databricks analytics and Supabase identity/audit as separate boundaries. | Pending |
+| Sales cleaning summary | `docs/IMPLEMENTATION.md`, Databricks audit tables | Include source, accepted, rejected, warning, duplicate, and financial-eligibility counts. | Pending |
 | Contract-name breakdown | `outputs/contract_backward_allocation_20260623/` | Include reconciliation and explain estimated rows. | Pending |
 | Product/SKU mapping | `datasources/templates/product_master_mapping.csv` | Add approved mapping summary after review. | Pending |
 | 2025 data issue | `databricks/docs/2025_DATA_ISSUE_REMEDIATION.md` | Explain missing months and holdout policy. | Pending |
-| PAGASA data readiness | Clean PAGASA file after upload | Show coverage and missing values. | Pending |
-| DOH data readiness | Clean DOH file after upload | Show disease coverage and missing values. | Pending |
-| Weather API readiness | Weather API validation page/output | Show provider, region, date coverage, and limitations. | Pending |
+| PAGASA data readiness | Databricks external candidate | Show 2017-2024 station coverage, missingness, review mappings, and absent 2025. | Pending review |
+| DOH data readiness | Databricks external candidate | Show 2018-2026 coverage, classifications, geography, and partial 2026. | Pending review |
+| NASA POWER readiness | Databricks weather proxy candidate | Show provider, coordinates, retrieval time, date coverage, and limitations. | Pending review |
 | Dashboard screenshots | Running frontend | Capture sales dashboard, upload, sales table, weather validation, and outputs. | Pending |
 | API evidence | Backend endpoints | Include sample response summaries, not secrets. | Pending |
-| Model outputs | DSS tables or local model outputs | Include forecasts, ABC/Pareto, seasonality, priority/scenario outputs. | Pending |
+| Model outputs | Databricks candidates plus versioned offline evidence | Separate implemented baselines and scenarios from blocked advanced/external models. | Pending |
 | QA evidence | Test/build commands | Include test/build results and manual QA table. | Pending |
 
 ## Chapter 4 Suggested Structure
@@ -49,7 +51,7 @@ Use [Section 8 acceptance evidence](SECTION_8_ACCEPTANCE_EVIDENCE.md) for execut
 | 2025 limitation | Whether 2025 can be used for model testing. | 2025 coverage table. |
 | Forecast result | Whether baseline forecasts are useful. | MAE, RMSE, MAPE/WAPE/sMAPE, bias. |
 | Weather usefulness | Whether weather proxy improved model or only adds context. | Weather model comparison or descriptive correlation. |
-| Disease usefulness | Whether DOH signals support scenario analysis. | Disease feature table and comparison after upload. |
+| Disease usefulness | Whether DOH signals support scenario analysis. | Loaded-candidate feature table and comparison after join approval. |
 | Decision-support value | How the dashboard helps planning review. | Screenshots and user workflow explanation. |
 | Limitations | What data is missing or historical only. | Limitations table. |
 | Recommendations | What to improve after the capstone. | Future work list. |
@@ -73,7 +75,7 @@ Capture these after the latest data is loaded:
 2. Dashboard overview.
 3. View Sales Data table.
 4. Data Upload page after successful upload or status summary.
-5. Weather API Validation page.
+5. External-data and NASA POWER validation page.
 6. Contract-name allocation output summary.
 7. Model/evaluation output page if available.
 
@@ -93,4 +95,4 @@ If a command cannot be run, record why and list the manual checks performed inst
 
 Use this wording:
 
-> The study is limited by the availability and completeness of historical datasets. PAGASA data covers 2021 to 2024 only, DOH data covers 2021 to 2025, and weather API observations are provider-derived proxy data by coordinates. The system does not provide live official alerts or automatic procurement execution. Because inventory, supplier lead time, ordering cost, holding cost, and operating expense data are not yet available, inventory recommendations are treated as scenario-based decision-support outputs.
+> The study uses candidate datasets whose current coverage is 2017-2025 for sales, 2018-2026 for DOH surveillance with 2026 partial, and 2017-2024 for official PAGASA observations. NASA POWER values are provider-derived proxies by coordinates and are not official PAGASA data. Geography and disease-product joins remain unapproved, and the system does not provide live official alerts or automatic procurement execution. Because complete inventory, supplier lead time, ordering cost, holding cost, budget, capacity, expiry, and operating-expense inputs are unavailable, prescriptive outputs remain review-only scenarios.

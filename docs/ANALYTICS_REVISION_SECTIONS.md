@@ -1,5 +1,7 @@
 # Adviser revisions by section
 
+> **Historical implementation record:** This document describes the Section 1-8 revision work as completed at that time. References to Python proxy routes or upload refresh predate the current direct Databricks gateway. Use [CURRENT_STATE.md](CURRENT_STATE.md) for the live architecture.
+
 Execute and verify each section against the displayed charts and analytics, not only documentation.
 
 Follow-up: [Year and chart anomaly audit](YEAR_SCOPE_ANOMALY_AUDIT.md) corrects initial selector/state mismatch, out-of-range snapshot months, delivery-year grouping, static overview metrics and mobile filter overflow. Actual sales are restricted to 2017–2025; forecast targets remain separate.

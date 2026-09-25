@@ -1,122 +1,142 @@
-# Prescriptive Climate-Disease Mapping Module & System Worker Assignments
+# Prescriptive Climate-Disease Mapping Module
 
-**System:** MedShield Decision Support System (DSS)  
-**Document Version:** 1.0.0  
-**Status:** Canonical Capstone Specification (Chapter 3 Methodology & Architecture)  
+> **Status: gated design specification.** Last reviewed 2026-09-25. No climate-disease model or procurement recommendation is currently approved for live use. Implemented coverage and blockers are recorded in [CURRENT_STATE.md](CURRENT_STATE.md).
 
----
+## Purpose
 
-## 1. Specialist Worker Role Matrix
+This module describes how MedShield may evaluate whether historical disease and weather signals improve demand forecasting and, if approved, how those forecasts may support inventory scenarios.
 
-Following the **Worker Operating Model** (`.agents/worker-operating-model.md`), the implementation of the Prescriptive Climate-Disease Mapping Module is sequenced across nine specialist roles:
+It must remain separate from the current descriptive dashboard until every data and model gate passes.
 
-| Specialist Role | Assigned Responsibility | Primary Output / Artifact |
+## Available source context
+
+| Source | Current role | Limitation |
 |---|---|---|
-| **Orchestrator** | Coordinates cross-layer sequencing between DOH/PAGASA data ingestion, microservices, and UI drill-down interactions. | Integration Roadmap & Milestone Gates |
-| **Business Analyst** | Defines business goals, user stories, acceptance criteria, and capstone terminology for prescriptive decision support. | Chapter 3 Thesis Methodology Text |
-| **Architect** | Designs system boundaries, data contracts (`/api/seasonal_restock_detail`), and microservice proxy routing. | `docs/ARCHITECTURE.md` System Contract |
-| **Data Analyst** | Analyzes Philippine meteorological (PAGASA) and epidemiological (DOH PIDSR) correlations ($r=+0.548$ Leptospirosis, $r=+0.429$ Dengue). | Correlation Matrix & Feature Definitions |
-| **BI Specialist** | Translates climate-disease risk metrics into scannable action cards and SKU drill-down tables. | Dashboard Action Card Layout Specs |
-| **Backend Engineer** | Implements the Flask analytics endpoint (`/seasonal_restock_detail`) and Express Gateway proxy routing. | `services/analytics_service/app.py` & `server.ts` |
-| **Frontend Engineer** | Builds interactive seasonal action cards, dynamic click-selection states, and responsive SKU drill-down table rendering. | `frontend/lib/medshieldReference.ts` |
-| **Security Engineer** | Validates authenticated session access, input parameters, and data sanitization for API endpoints. | Role-Based Access Control Audit |
-| **QA Engineer** | Executes end-to-end verification across API endpoints, data filtering, UI responsiveness, and zero-error builds. | Verification Test Log |
+| Sales Gold candidate | Demand and financial history for 2017-2025 | Candidate-only; mappings and financial eligibility require owner acceptance |
+| DOH candidate | Disease surveillance history for 2018-2026 | 2026 is partial; geography and disease-product joins are not approved |
+| PAGASA candidate | Official station weather for 2017-2024 | 2025 is absent; station-to-territory representativeness requires review |
+| NASA POWER candidate | Provider-derived historical weather proxy | Must remain labeled as NASA; it cannot be presented as PAGASA |
+| Inventory/procurement inputs | Required for prescriptive outputs | Complete governed inputs are not currently available |
 
----
+No published correlation coefficient, causal effect, disease forecast, EOQ, reorder point, or allocation recommendation should be claimed from this specification alone.
 
-## 2. Chapter 3: Academic Methodology Text (Capstone Thesis Formulation)
+## Required analytical contracts
 
-> *Use the following academic text directly in your Capstone Paper (Chapter 3: System Methodology & Architecture):*
+### Geography
 
-### 3.4 Prescriptive Climate-Disease Mapping Module
+Create an approved mapping with:
 
-"The MedShield Decision Support System (DSS) introduces a **Prescriptive Climate-Disease Mapping Module**, transitioning the platform from predictive forecasting to actionable pharmaceutical supply chain optimization. The module utilizes a machine learning pipeline to correlate historical meteorological data—specifically PAGASA rainfall, temperature, and relative humidity indices—with localized epidemiological outbreak surveillance data from the Department of Health (DOH) Philippine Integrated Disease Surveillance and Response (PIDSR) framework.
+- sales territory ID;
+- DOH geography ID;
+- PAGASA station ID;
+- NASA latitude/longitude;
+- mapping method;
+- effective dates;
+- representativeness note;
+- reviewer; and
+- status.
 
-By applying time-series forecasting algorithms (Prophet and Gradient Boosted Regressors), the DSS projects monthly disease case surges. A prescriptive rule-based engine subsequently translates epidemiological risk probabilities into specific pharmaceutical procurement recommendations. The system outputs dynamic restock schedules, targeted SKU categories, current stock levels, Economic Order Quantities (EOQ), Reorder Points (ROP), and urgency scores prior to the onset of identified seasonal health risks."
+The current seven territory review rows remain “needs_review”; zero territories are approved as join-ready.
 
----
+### Time
 
-## 3. Epidemiological & Meteorological Baseline Matrix
+Transform all sources to an explicit monthly grain and record:
 
-| Season / Month Block | Climate Phase (PAGASA Trigger) | Epidemiological Risk (DOH PIDSR) | Prescribed Essential Medicine Categories | High-Priority SKUs |
-|---|---|---|---|---|
-| **Nov - Feb** | Amihan (Cool Dry Season) | Influenza-Like Illness (ILI), Asthma Exacerbations, SARI | Bronchodilators, Antihistamines, Corticosteroids | Salbutamol 2.5mg Nebules, Cetirizine 10mg, Paracetamol |
-| **Mar & Apr** | Summer Peak Heat Surge | Acute Gastroenteritis, Dehydration, Typhoid Fever | Oral Rehydration Salts (ORS), Antidiarrheals, GI Meds | ORS Packets, Metronidazole 500mg, Omeprazole 40mg |
-| **May & Jun** | Pre-Monsoon Thunderstorms | Early Dengue Onset, HFMD, Waterborne GI Outbreaks | Antipyretics, IV Fluids, Broad-Spectrum Antibiotics | Paracetamol 500mg, IV Normal Saline, Co-Amoxiclav 625mg |
-| **Jul & Aug (CRITICAL)** | Peak Monsoon (Habagat) & Floods | Dengue Outbreaks, Leptospirosis Wave 1, Cholera | Flood Prophylactics, Dengue Antipyretics, IV Fluids | Doxycycline 100mg, Paracetamol 500mg, Cefuroxime |
-| **Sep & Oct** | Late Typhoon & Post-Flood Siltation | Leptospirosis Wave 2, Dengue, Typhoid Fever | Anti-Leptospiral Meds, GI Anti-infectives, ORS | Doxycycline 100mg, Ciprofloxacin 500mg, ORS Packets |
-| **Nov & Dec** | Cold Front & Holiday Peak | Flu/ILI, Pediatric Respiratory, Asthma Surge | Bronchodilators, Pediatric Syrups, Antitussives | Salbutamol Nebules, Carbocisteine Syrup, Amoxicillin |
+- source period;
+- partial-period flag;
+- missing-month policy;
+- aggregation formula;
+- publication lag; and
+- model cutoff.
 
----
+Never impute future or unavailable official PAGASA values and label them as observations.
 
-## 4. Machine Learning Architecture Specification
+### Disease-product mapping
 
-### 4.1 Feature Engineering & Target Variables
-- **Input Features ($X$):** `month_idx` (1–12), `rainfall_mm` (monthly accumulated), `avg_temp_c`, `humidity_pct`, `historical_disease_cases`.
-- **Target Outputs ($y$):**
-  - **Classification:** Predicted primary disease risk category (`Dengue`, `Leptospirosis`, `Gastroenteritis`, `ILI/Respiratory`).
-  - **Regression:** Projected reorder volume (units) using EOQ formula $EOQ = \sqrt{\frac{2DS}{H}}$.
+An owner-approved mapping must connect each disease signal to canonical product categories or SKUs. Each rule needs clinical/business rationale, effective date, source, reviewer, and status. A convenient seasonal association is not sufficient evidence.
 
----
+## Predictive evaluation
 
-## 5. Python Machine Learning Proof of Concept Script
+The first question is whether external signals add measurable value over sales history.
 
-Below is the complete standalone Python script using `pandas` and `scikit-learn` (`RandomForestClassifier`) to demonstrate the module's machine learning baseline:
+1. Freeze an eligible territory/product demand series.
+2. Train seasonal-naive and last-observation baselines.
+3. Evaluate a sales-only candidate.
+4. Add lagged disease features in a separate candidate.
+5. Add official PAGASA features where coverage permits.
+6. Add NASA proxy features in a separately labeled candidate.
+7. Compare all candidates on identical time-based holdouts.
+8. Review error, interval coverage, stability, leakage, and segment failures.
+9. Publish an external-signal model only if its incremental value is accepted.
 
-```python
-import pandas as pd
-import numpy as np
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report
+Because PAGASA ends in 2024 and DOH 2026 is partial, evaluation windows differ by provider. The model report must state the exact overlap period and cannot imply full 2017-2025 external coverage.
 
-# 1. Generate Synthetic 3-Year Dataset (36 Months)
-np.random.seed(42)
-months = np.tile(np.arange(1, 13), 3)
+## Prescriptive scenario contract
 
-rainfall_pattern = [110, 90, 60, 45, 140, 260, 420, 450, 380, 290, 180, 150]
-rainfall = np.array(rainfall_pattern * 3) + np.random.normal(0, 20, 36)
+A forecast does not by itself authorize purchasing. A scenario requires:
 
-temp_pattern = [26.5, 27.0, 28.5, 29.8, 29.5, 28.8, 27.9, 27.8, 28.0, 28.2, 27.5, 26.8]
-temperature = np.array(temp_pattern * 3) + np.random.normal(0, 0.5, 36)
+- approved forecast quantity and uncertainty;
+- on-hand and on-order inventory;
+- lead-time distribution;
+- order and holding costs;
+- pack size and minimum order;
+- supplier capacity;
+- budget;
+- service-level policy; and
+- expiry or shelf-life rules when applicable.
 
-# Map target categories based on Philippine seasonal triggers
-categories = []
-for m in months:
-    if m in [1, 2, 11, 12]:
-        categories.append("Respiratory_Bronchodilator")
-    elif m in [3, 4]:
-        categories.append("Gastrointestinal_ORS")
-    elif m in [5, 6]:
-        categories.append("Antipyretic_DengueEarly")
-    elif m in [7, 8]:
-        categories.append("FloodProphylactic_Leptospirosis")
-    else:
-        categories.append("AntiInfective_TyphoonPostFlood")
+Every result must state:
 
-df = pd.DataFrame({
-    'month': months,
-    'rainfall_mm': rainfall,
-    'temp_c': temperature,
-    'prescribed_category': categories
-})
+- input values and units;
+- formula or solver version;
+- feasibility status;
+- binding constraints;
+- sensitivity range;
+- data/model version; and
+- human approval status.
 
-# 2. Train Random Forest Classifier
-X = df[['month', 'rainfall_mm', 'temp_c']]
-y = df['prescribed_category']
+Until these inputs exist, the UI may accept user-entered assumptions and must label the result as a scenario.
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
+## Publication architecture
 
-model = RandomForestClassifier(n_estimators=100, random_state=42)
-model.fit(X_train, y_train)
+    Databricks sales Gold ----+
+                              +-> offline controlled evaluation -> metrics and evidence
+    Databricks external data -+                                  -> model/owner review
+                                                                     -> governed Databricks output
+                                                                     -> TypeScript gateway
+                                                                     -> dashboard
 
-# 3. Sample Inference for Target Month (August: Rain=450mm, Temp=27.8C)
-sample_input = pd.DataFrame([{'month': 8, 'rainfall_mm': 450.0, 'temp_c': 27.8}])
-prediction = model.predict(sample_input)[0]
-probs = model.predict_proba(sample_input)[0]
-confidence = round(max(probs) * 100, 1)
+The Python analytics code may support offline evaluation. It is not a live Flask dependency of the current dashboard. The browser receives approved results only through the TypeScript gateway and Databricks contract.
 
-print(f"Target Month: August (Habagat Monsoon)")
-print(f"Predicted Restock Category: {prediction}")
-print(f"Model Risk Confidence Score: {confidence}%")
-```
+## Roles
+
+| Role | Responsibility |
+|---|---|
+| Business owner | Approves decision use, disease-product mappings, and service policies |
+| Data analyst | Profiles coverage, creates features, and documents limitations |
+| Data engineer | Maintains Databricks ingestion, lineage, and quality checks |
+| Model owner | Trains candidates, prevents leakage, and compares baselines |
+| QA | Reproduces metrics, checks contracts, and tests failure states |
+| Backend engineer | Exposes only approved Databricks contracts |
+| BI/frontend | Labels provider, period, status, uncertainty, and scenario assumptions |
+| Security | Protects credentials, routes, and audit records |
+
+## Acceptance gates
+
+The module remains blocked until:
+
+- geography mappings are approved;
+- disease-product mappings are approved;
+- time coverage and missingness are documented;
+- external-signal candidates beat the sales-only baseline;
+- model uncertainty and limitations are visible;
+- operational inventory inputs are complete;
+- solver constraints and infeasible cases are independently tested; and
+- a business owner signs publication.
+
+Related documents:
+
+- [NORTH_STAR_EXECUTION_BLUEPRINT.md](NORTH_STAR_EXECUTION_BLUEPRINT.md)
+- [PREDICTIVE_ANALYTICS_EXPLAINER.md](logic/PREDICTIVE_ANALYTICS_EXPLAINER.md)
+- [PRESCRIPTIVE_ANALYTICS_EXPLAINER.md](logic/PRESCRIPTIVE_ANALYTICS_EXPLAINER.md)
+- [AREA_AND_PRODUCT_PRIORITIZATION_IMPLEMENTATION_PLAN.md](AREA_AND_PRODUCT_PRIORITIZATION_IMPLEMENTATION_PLAN.md)

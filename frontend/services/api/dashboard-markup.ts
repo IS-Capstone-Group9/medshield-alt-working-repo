@@ -71,16 +71,17 @@ export const WEATHER_VALIDATION_PAGE = `
       <div class="uploaded-data-header">
         <div>
           <div class="uploaded-data-title" id="weatherEffectTitle">Weather API Validation</div>
-          <div class="uploaded-data-copy">Read-only PAGASA observations published in Databricks Gold. They remain separate from sales until territory mappings are approved.</div>
+          <div class="uploaded-data-copy">PAGASA history and separately labeled NASA POWER proxy observations. Every displayed row is read from Databricks Gold.</div>
         </div>
+        <div class="sales-header-actions"><button class="sales-primary-button" id="weatherRefresh" type="button" disabled>Refresh NASA POWER</button></div>
       </div>
       <div class="uploaded-data-toolbar weather-filter-toolbar">
-        <div class="uploaded-data-field"><label for="weatherProvider">Provider</label><select id="weatherProvider" disabled><option value="PAGASA">PAGASA via Databricks</option></select></div>
+        <div class="uploaded-data-field"><label for="weatherProvider">Provider</label><select id="weatherProvider"><option value="PAGASA">PAGASA official history</option><option value="nasa_power">NASA POWER proxy</option></select></div>
         <div class="uploaded-data-field"><label for="weatherArea">Territory</label><select id="weatherArea"><option value="all">All Territories</option><option value="Quezon">Quezon</option><option value="Batangas">Batangas</option><option value="Camarines Norte">Camarines Norte</option><option value="Camarines Sur">Camarines Sur</option><option value="Cavite">Cavite</option><option value="Laguna">Laguna</option><option value="Marinduque">Marinduque</option><option value="Metro Manila">Metro Manila</option><option value="Rizal">Rizal</option></select></div>
-        <div class="uploaded-data-field"><label for="weatherYear">Year</label><select id="weatherYear"><option value="all">All Years</option><option value="2024" selected>2024</option><option value="2023">2023</option><option value="2022">2022</option><option value="2021">2021</option><option value="2020">2020</option><option value="2019">2019</option><option value="2018">2018</option><option value="2017">2017</option></select></div>
+        <div class="uploaded-data-field"><label for="weatherYear">Year</label><select id="weatherYear"><option value="all">All Years</option><option value="2025">2025</option><option value="2024" selected>2024</option><option value="2023">2023</option><option value="2022">2022</option><option value="2021">2021</option><option value="2020">2020</option><option value="2019">2019</option><option value="2018">2018</option><option value="2017">2017</option></select></div>
         <div class="uploaded-data-field"><label for="weatherGrain">Validation Grain</label><select id="weatherGrain" disabled><option value="monthly">Monthly Databricks Aggregate</option></select></div>
       </div>
-      <div class="sales-note" id="weatherEffectStatus">Loading PAGASA observations from Databricks Gold.</div>
+      <div class="sales-note" id="weatherEffectStatus" aria-live="polite">Loading PAGASA observations from Databricks Gold.</div>
       <div class="uploaded-data-table-wrap"><table class="uploaded-data-table" id="weatherEffectTable"><tbody><tr><td class="uploaded-data-empty">Loading Weather Metrics...</td></tr></tbody></table></div>
       <div class="uploaded-data-footer"><div class="uploaded-data-status" id="weatherEffectCount">Loading...</div></div>
     </section>

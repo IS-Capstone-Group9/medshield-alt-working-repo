@@ -1,99 +1,46 @@
-# MedShield Deployment & CI/CD Security Guide
+# Deployment and CI/CD Guide
 
-This document explains how to securely configure GitHub CI/CD pipelines, set up repository security, and deploy MedShield on any computer or cloud host.
+Last reviewed: 2026-09-25
 
----
+## Local start
 
-## 1. Quick Start: Running MedShield on Any Computer
-
-MedShield is containerized, but dashboard startup also requires valid backend-only Databricks credentials and an available SQL warehouse. The application fails closed when Databricks is unavailable.
-
-### System Requirements
-- **Docker Desktop** (Windows/macOS) or **Docker Engine & Docker Compose** (Linux)
-- **RAM:** Minimum 4 GB free RAM
-- **Disk:** 3 GB available disk space
-
-### Commands
-
-```bash
-# 1. Clone the repository
-git clone https://github.com/IS-Capstone-Group9/medshield.git
-cd medshield
-
-# 2. Copy the sample environment file
-cp .env.example .env
-
-# 3. Start all services using Docker Compose
+```powershell
+Copy-Item .env.example .env
 docker compose up --build
 ```
 
-Access the system in your browser:
-- **Frontend Dashboard:** [http://localhost:3000](http://localhost:3000)
-- **Express API Gateway:** [http://localhost:5000/api/health](http://localhost:5000/api/health)
-- **Analytics Microservice:** [http://localhost:5101/health](http://localhost:5101/health)
-- **Product Microservice:** [http://localhost:5102/health](http://localhost:5102/health)
+The compose file starts the Next.js frontend and TypeScript gateway. It does not start Python microservices, Databricks, or Supabase.
 
----
+## Required secrets
 
-## 2. GitHub Security Setup & Best Practices
+| Secret | Scope |
+|---|---|
+| `DATABRICKS_HOST` | Backend only |
+| `DATABRICKS_TOKEN` | Backend only |
+| `DATABRICKS_SQL_WAREHOUSE_ID` | Backend only |
+| `SUPABASE_URL` / `SUPABASE_ANON_KEY` | Gateway authentication |
+| `SUPABASE_SECRET_KEY` or legacy service-role key | Backend account/audit operations only |
+| `NEXT_PUBLIC_SUPABASE_URL` / publishable key | Browser-safe authentication values |
+| `SONAR_HOST_URL` / `SONAR_TOKEN` | CI quality scan |
 
-### Required Repository Secrets
-In GitHub, navigate to **Settings > Secrets and variables > Actions** and add the following repository secrets:
+Never put a Databricks token, warehouse ID, or Supabase server secret in a `NEXT_PUBLIC_*` variable.
 
-| Secret Name | Purpose | Example / Notes |
-|---|---|---|
-| `SONAR_TOKEN` | SonarQube / SonarCloud Code Analysis Token | Generated in SonarCloud dashboard |
-| `SONAR_HOST_URL` | SonarQube Server URL | e.g. `https://sonarcloud.io` |
-| `SUPABASE_URL` | Production Supabase Project URL | e.g. `https://your-project.supabase.co` |
-| `SUPABASE_ANON_KEY` | Supabase Anonymous Client API Key | Found in Supabase API settings |
-| `SUPABASE_SERVICE_ROLE_KEY` | Supabase Service Role Key (Backend Only) | Keep strictly private; never expose to frontend |
+## Repository workflows
 
-### Automated Workflows Included
+- `.github/workflows/ci.yml`: backend build, frontend build, Python checks/model smoke work, and Docker validation on `main`/pull requests.
+- `.github/workflows/quality_gate.yml`: TypeScript, Python, and diagnostic checks on configured branches.
+- `.github/workflows/codeql.yml`: JavaScript/TypeScript and Python CodeQL analysis.
+- `.github/workflows/sonarqube.yml`: conditional SonarQube scan when secrets exist.
+- `.github/workflows/sonarqube-and-deploy.yml`: contains a placeholder artifact/deploy job. It is not a production deployment and must be replaced or disabled before relying on it.
 
-1. **`ci.yml` (Continuous Integration Pipeline):**
-   - Triggers on every Push or Pull Request to `main`.
-   - Builds & typechecks `/backend` and `/frontend`.
-   - Runs Python unit tests and executes the 17-model computation suite (`scripts/compute_all_models.py`).
-   - Validates `docker compose config` syntax and builds Docker images.
+Treat the workflow files themselves as authoritative for triggers and commands.
 
-2. **`codeql.yml` (Automated SAST Security Scanning):**
-   - Scans JavaScript/TypeScript and Python code for security vulnerabilities, SQL injection risks, and bad patterns.
-   - Runs on PRs and weekly every Monday.
+## Branch protection
 
-3. **`dependabot.yml` (Automated Vulnerability Management):**
-   - Scans `npm` and `pip` dependencies weekly.
-   - Automatically files Pull Requests for vulnerable dependencies.
+Require pull-request review and the checks actually enabled in the repository. Do not document a status-check name as required until it exists and has completed on the protected branch.
 
-4. **`sonarqube.yml` (Code Quality & Coverage):**
-   - Conducts static code analysis if `SONAR_TOKEN` is configured.
+## Production readiness
 
----
+No production deployment is currently configured. Before adding one, decide the host, environment ownership, domain/HTTPS, secret store, allowed origins, Databricks warehouse policy, Supabase redirect URLs, monitoring, rollback, and cost owner.
 
-## 3. Branch Protection & Security Policy
-
-To enforce secure deployment on GitHub:
-
-1. Go to **Settings > Branches** in your GitHub repository.
-2. Click **Add branch protection rule** for `main`.
-3. Enable the following settings:
-   - [PASS] **Require a pull request before merging**
-   - [PASS] **Require status checks to pass before merging**:
-     - `Backend TypeScript Build & Typecheck`
-     - `Frontend Next.js Build`
-     - `Python Services & Model Master Execution Test`
-     - `Docker Container & Compose Validation`
-   - [PASS] **Require linear history**
-   - [PASS] **Do not allow bypassing the above settings**
-
----
-
-## 4. Cloud Deployment Options
-
-### Option A: Vercel (Frontend) + Render / Railway (Backend & Services)
-
-1. **Frontend (Next.js):** Connect GitHub repo to Vercel. Set build directory to `frontend`. Add environment variable `NEXT_PUBLIC_API_BASE_URL` pointing to your backend URL.
-2. **Backend Gateway (Express):** Deploy `backend/Dockerfile` to Railway or Render.
-3. **Python Services:** Deploy `services/Dockerfile` to Railway or Render.
-
-### Option B: Single VPS (Docker Compose Deployment)
-Provision an Ubuntu VPS (DigitalOcean, AWS EC2, Hetzner), install Docker, pull the repository, and run `docker compose up -d`.
+AWS is one optional host. It is not required to finish Databricks data acceptance, descriptive analysis, predictive evaluation, or prescriptive scenarios.

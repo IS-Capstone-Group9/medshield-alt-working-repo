@@ -1,5 +1,7 @@
 # MedShield Project Progress Tracker
 
+> **Historical tracker:** The body below records the 2026-09-02 40,086-row pilot and pre-cutover architecture. The current system uses a 37,728-row checksum-bound sales candidate, reads Databricks directly, and has no analytical fallback. See [CURRENT_STATE.md](CURRENT_STATE.md) for current status.
+
 **Last updated:** 2026-09-02
 **Purpose:** Keep one readable record of the dataset, Databricks, Supabase, and MedShield application work discussed during the project.
 

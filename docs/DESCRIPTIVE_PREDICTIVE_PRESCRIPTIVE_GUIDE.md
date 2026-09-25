@@ -1,5 +1,7 @@
 # Descriptive, Predictive, and Prescriptive Analytics Guide
 
+> **Current boundary (2026-09-25):** The live analytical source is Databricks Gold. Sales actuals cover 2017-2025; DOH covers 2018-2026 with 2026 partial; PAGASA covers 2017-2024; NASA POWER is a separately labeled proxy. Advanced forecasting, external regression, and inventory optimization remain gated. See [CURRENT_STATE.md](CURRENT_STATE.md).
+
 ## Purpose
 
 This guide is the working model logic reference for the MedShield capstone. It consolidates the descriptive, predictive, and prescriptive analytics paths into one practical document for documentation, methodology, dashboard logic, and later implementation.
@@ -18,13 +20,13 @@ This is more defensible than a broad claim that the system fully optimizes inven
 
 | Rule | Required wording or behavior |
 |---|---|
-| Historical sales is the source of truth for demand. | Use 2021-2025 sales as the demand baseline. |
+| Historical sales is the source of truth for demand. | Use the reconciled 2017-2025 Databricks Gold candidate as the current demand baseline. |
 | Demand means quantity sold. | Use `quantity` or `quantity_sold`. |
 | Revenue means net sales value. | Use Net CP (`net_cost`); Total TP (`total_trade_price`) is acquisition cost. |
 | `net_income` is not company net income. | Label it workbook gross margin/profit. |
 | PAGASA is historical and official only for its provided period. | Do not stretch PAGASA into unavailable years. |
 | Weather API data is not PAGASA. | Label it provider-derived weather proxy. |
-| DOH is historical/scenario unless current data is loaded. | Do not claim live disease alerts. |
+| DOH is historical and not an operational feed. | Do not claim live disease alerts from the loaded historical candidate. |
 | Prescriptive outputs need operational inputs. | Keep EOQ, ROP, allocation, and dead-stock outputs as scenarios until inventory/procurement data is available. |
 | Dashboard outputs must be reviewed. | Publish only validated/reviewed model runs as recommendations. |
 
@@ -39,7 +41,7 @@ Run these gates before model execution.
 | Product/SKU alias mapping | Prevents raw product strings and contract rows from becoming false SKUs. | Product ABC, product forecast, XGBoost, EOQ. |
 | Area classification | Separates territory, customer type, and business line. | Weather joins, territory forecast, MCDA, allocation. |
 | Revenue and margin definitions | Keeps KPIs and model targets consistent. | Dashboard, Chapter 4-5, model metrics. |
-| External data provenance | Keeps DOH, PAGASA, NASA/Open-Meteo, and future provider data separate. | External-regressor forecasting and alerts. |
+| External data provenance | Keeps DOH, PAGASA, NASA POWER, and any future provider data separate. | External-regressor evaluation and historical context. |
 | Inventory/procurement availability | Determines whether prescriptive outputs are real or scenario-only. | EOQ, ROP, safety stock, allocation, stop-purchase. |
 
 ## Recommended Execution Order
@@ -84,7 +86,7 @@ This layer creates the factual baseline for the capstone. Predictive and prescri
 
 | Input | Current reference |
 |---|---|
-| Cleaned sales with contract allocation | `data/medshield/processed/sales_transactions_area_allocated.json.gz` |
+| Cleaned sales with contract allocation | `workspace.medshield_gold.sales_restart_fact_candidate` |
 | Area classification map | `datasources/templates/area_classification_mapping.csv` |
 | Product alias map | `datasources/templates/product_master_mapping.csv` |
 | Business definitions | `docs/BUSINESS_DEFINITIONS.md` |
@@ -131,8 +133,8 @@ The forecast is a decision-support input for planning. It is not an automated pu
 
 1. Always run simple benchmarks before Prophet or XGBoost.
 2. Use time-based validation only.
-3. Use 2025 as a full holdout only if 2025 completeness is proven.
-4. If 2025 is incomplete, use rolling-origin validation inside trusted history and treat 2025 as partial secondary evidence.
+3. Use 2025 as a holdout only for grains whose current Gold observations are complete and eligible.
+4. Use rolling-origin validation inside trusted history for incomplete or sparse series.
 5. Train external-regressor models only after external data is mapped, validated, and available at the same planning grain.
 6. Promote a model only if it beats the approved benchmark and passes bias/data-quality checks.
 
@@ -145,7 +147,7 @@ The forecast is a decision-support input for planning. It is not an automated pu
 | 3 | Prophet (Champion candidate) | Main candidate forecast, robust to missing data. |
 | 4 | Classical Models (SARIMA/Holt-Winters) | Challenger models. Act as failsafes but heavily monitored for indexing shift errors during missing data events. |
 | 5 | Dynamic Champion-Challenger Routing | System continually evaluates models via MAPE and dynamically routes forecasting to the most accurate model. |
-| 6 | Prophet with weather/disease proxies | External-regressor challenger models when DOH/PAGASA data is loaded and validated. |
+| 6 | Forecast with weather/disease features | External-regressor challenger models only after the loaded DOH/PAGASA/NASA candidates pass join and incremental-value gates. |
 
 ### Recommended Forecast Grains
 
@@ -173,9 +175,9 @@ Products that fail eligibility should use category-level allocation, seasonal na
 
 | Signal | Allowed use | Not allowed |
 |---|---|---|
-| DOH historical data | Disease intensity feature and historical scenario analysis. | Live disease alert without current DOH data. |
+| DOH historical data | Disease intensity feature and historical scenario analysis after join approval. | Live disease alert or unapproved geography/product inference. |
 | PAGASA historical data | Official historical weather feature within provided period. | Filling unavailable years with API weather under the PAGASA name. |
-| NASA/Open-Meteo/weather API | Provider-derived historical proxy and validation. | Calling it official PAGASA RSI. |
+| NASA POWER/weather API | Provider-derived historical proxy and validation. | Calling it official PAGASA RSI. |
 | Future weather provider data | Short-horizon operational context. | Long-horizon certainty outside forecast reliability. |
 
 ### XGBoost Product Priority
@@ -385,7 +387,7 @@ When the new `.env` and database schema are introduced, review:
 7. Whether recommendation statuses support `draft`, `validated`, `review_required`, `published`, `superseded`, and `measured`.
 8. Whether dashboard APIs read only published or clearly labeled demo/draft outputs.
 
-Use `docs/ENV_SCHEMA_ALIGNMENT_GUIDE.md` for the current environment-variable boundary, visible Supabase schema inventory, and table gaps by analytics layer.
+Use `docs/ENV_SCHEMA_ALIGNMENT_GUIDE.md` for the current environment-variable boundary, Databricks contracts, and Supabase identity/audit responsibilities.
 
 ## Minimum Definition Of Done
 

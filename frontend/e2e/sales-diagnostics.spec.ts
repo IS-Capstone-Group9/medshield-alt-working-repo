@@ -38,6 +38,25 @@ test.beforeEach(async ({ page }) => {
   await page.evaluate(() => (window as any).showPage('revenue'))
 })
 
+test('all-history refresh rebuilds only the active page without chart animation', async ({ page }) => {
+  const data = fixture(Array.from({ length: 9 }, (_, index) => 2017 + index))
+  const duration = await page.evaluate((payload) => {
+    const app = window as any
+    app.applyDatasetPatch(payload)
+    const started = performance.now()
+    app.setDescriptivePeriod('all')
+    return performance.now() - started
+  }, data)
+
+  const revenue = await chartData(page, 'revenueDetailChart')
+  expect(revenue.labels).toContain('2017')
+  expect(revenue.labels).toContain('2025')
+  expect(revenue.animationDuration).toBe(0)
+  expect(duration).toBeLessThan(750)
+  expect(await page.evaluate(() => (window as any).Chart.getChart(document.getElementById('productBarChart')))).toBeUndefined()
+  expect(await page.evaluate(() => (window as any).Chart.getChart(document.getElementById('areaBarChart')))).toBeUndefined()
+})
+
 test.skip('legacy year-selector history view is superseded by descriptive period windows', async ({ page }) => {
   const data = fixture(Array.from({ length: 9 }, (_, i) => 2017 + i))
   data.monthly.reverse()

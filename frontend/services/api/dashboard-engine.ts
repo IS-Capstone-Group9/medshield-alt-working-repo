@@ -129,12 +129,20 @@ const PAGE_META`,
     .replaceAll("'#335F78'", "dashboardThemeColor('--chart-label', '#335F78')")
     .replaceAll("'#67879A'", "dashboardThemeColor('--chart-muted', '#67879A')")
     .replaceAll("'rgba(201,219,229,0.65)'", "dashboardThemeColor('--chart-grid', 'rgba(201,219,229,0.65)')")
-    .replaceAll('animation: false', 'animation: dashboardChartAnimation()')
-    .replaceAll('animations: false', 'animations: dashboardChartAnimations()')
-    .replace("charts[id].update('none');", "if (dashboardReducedMotion()) charts[id].update('none');")
+    .replace(
+      `    } else {
+      buildCharts();
+      buildTables();
+    }`,
+      `    } else {
+      // The Databricks adapter performs the first render after live rows arrive.
+      setAllChartWrapStates('loading');
+    }`,
+    )
+    // Filter changes can rebuild several large historical series. Keep those
+    // updates synchronous and animation-free so the controls remain responsive.
     .replace('if (document.startViewTransition &&', 'if (false && document.startViewTransition &&')
     .replace('chart.resize();', "if (!chart.canvas || !chart.canvas.isConnected) return;\n      chart.resize();")
-    // After making a page active, rebuild charts so canvases render at correct dimensions
     .replace(
       "if (page) page.classList.add('active');",
       `if (page) {
@@ -154,14 +162,65 @@ const PAGE_META`,
         if (typeof renderShowcaseDOMVisuals === 'function') renderShowcaseDOMVisuals();
       }, 60);
     });
-  }`
+  }`,
+    )
+    .replace(
+      "function buildCharts() {\n  syncHistoricalYearControls();\n  renderSalesSectors();",
+      `function buildCharts() {
+  syncHistoricalYearControls();
+  // Product Prioritization has its own period-aware chart renderer. Returning
+  // here prevents the legacy bubble chart from racing it and replacing the
+  // quadrant backgrounds, cutoff lines, labels, and ABC-class datasets.
+  if (dashboardPageIsActive('products')) {
+    renderProductPrioritizationTimeline();
+    return;
+  }
+  if (dashboardPageIsActive('territory')) renderSalesSectors();`,
+    )
+    .replace(
+      "  renderSalesDiagnostics(opts);\n  renderSalesHeatmap();",
+      `  if (dashboardPageIsActive('revenue')) {
+    renderSalesDiagnostics(opts);
+    renderSalesHeatmap();
+  }`,
+    )
+    .replace(
+      "  renderForecastValidation();\n  renderExternalRegression();",
+      `  if (dashboardPageIsActive('forecast')) {
+    renderForecastValidation();
+    renderExternalRegression();
+  }`,
+    )
+    .replace(
+      "function renderShowcaseDOMVisuals() {\n  renderSalesHeatmap();",
+      `function renderShowcaseDOMVisuals() {
+  if (dashboardPageIsActive('revenue')) renderSalesHeatmap();`,
     )
     .replace(
       "if (charts[id]) charts[id].destroy();",
       `
+    const chartPage = canvas.closest('.page');
+    if (chartPage && !chartPage.classList.contains('active')) return;
     const existingChart = Chart.getChart ? Chart.getChart(canvas) : charts[id];
+    const trackedChart = charts[id];`,
+    )
+    .replace(
+      "    const ChartClass = getChartConstructor();",
+      `    if (existingChart && existingChart.config && existingChart.config.type === stableConfig.type) {
+      existingChart.data = stableConfig.data;
+      existingChart.options = stableConfig.options;
+      existingChart.update('none');
+      charts[id] = existingChart;
+      const existingWrap = canvas.closest('.chart-wrap');
+      if (existingWrap) {
+        existingWrap.dataset.state = 'ready';
+        existingWrap.dataset.emptyMessage = '';
+      }
+      return;
+    }
     if (existingChart) existingChart.destroy();
-    if (charts[id] && charts[id] !== existingChart) charts[id].destroy();`,
+    if (trackedChart && trackedChart !== existingChart) trackedChart.destroy();
+    const ChartClass = getChartConstructor();`,
     )
   // Robust closing of the (async () => { ... })() IIFE block before utility functions
   if (patchedScript.includes("});\n\nif (typeof window !== 'undefined')")) {
@@ -225,9 +284,11 @@ function applyDatasetPatch(patch) {
   if (Array.isArray(patch.top_products)) DATA.top_products = patch.top_products;
   if (Array.isArray(patch.year_summary)) DATA.year_summary = patch.year_summary;
   if (Array.isArray(patch.seasonality)) DATA.seasonality = patch.seasonality;
-  if (typeof buildCharts === 'function') buildCharts();
-  if (typeof buildTables === 'function') buildTables();
   if (typeof refreshComparison === 'function') refreshComparison();
+}
+function dashboardPageIsActive(name) {
+  const page = document.getElementById('page-' + name);
+  return Boolean(page && page.classList.contains('active'));
 }
 
 function getSortedProductRows() {

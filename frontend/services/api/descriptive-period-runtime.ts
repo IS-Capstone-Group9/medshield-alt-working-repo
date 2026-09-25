@@ -110,6 +110,17 @@ const LEGACY_SET_YEAR = `function setYear(year, targetEl) {
   refreshComparison();
 }`
 
+const LEGACY_REFRESH_COMPARISON = `function refreshComparison() {
+  buildCharts();
+  buildTables();
+}`
+
+const RESPONSIVE_REFRESH_COMPARISON = `function refreshComparison() {
+  buildCharts();
+  const activePage = document.querySelector('.page.active');
+  if (activePage && activePage.id === 'page-products') buildTables();
+}`
+
 const DESCRIPTIVE_SET_YEAR = `function setYear(year, targetEl) {
   var yearVal = typeof year === 'string' ? year : (targetEl && targetEl.value ? targetEl.value : String(new Date().getFullYear()));
   selectedYear = yearVal;
@@ -124,12 +135,28 @@ const DESCRIPTIVE_SET_YEAR = `function setYear(year, targetEl) {
 }`
 
 export const DESCRIPTIVE_PERIOD_SCRIPT = String.raw`
+let descriptivePhtDateValue = '';
+let descriptivePhtDateCheckedAt = 0;
+const descriptivePointFormatters = {
+  daily: new Intl.DateTimeFormat('en-PH', { month: 'short', day: 'numeric', timeZone: 'UTC' }),
+  monthly: new Intl.DateTimeFormat('en-PH', { month: 'short', year: '2-digit', timeZone: 'UTC' })
+};
+
+function descriptivePageIsActive(name) {
+  const page = document.getElementById('page-' + name);
+  return Boolean(page && page.classList.contains('active'));
+}
+
 function descriptivePhtDate() {
+  const now = Date.now();
+  if (descriptivePhtDateValue && now - descriptivePhtDateCheckedAt < 60000) return descriptivePhtDateValue;
   const parts = new Intl.DateTimeFormat('en-CA', {
     timeZone: 'Asia/Manila', year: 'numeric', month: '2-digit', day: '2-digit'
   }).formatToParts(new Date());
   const values = Object.fromEntries(parts.map(part => [part.type, part.value]));
-  return String(values.year) + '-' + String(values.month) + '-' + String(values.day);
+  descriptivePhtDateValue = String(values.year) + '-' + String(values.month) + '-' + String(values.day);
+  descriptivePhtDateCheckedAt = now;
+  return descriptivePhtDateValue;
 }
 
 function shiftIsoPeriod(period, months) {
@@ -535,9 +562,7 @@ function descriptivePointLabel(period) {
   if (/^\d{4}$/.test(text)) return descriptiveYearLabel(text);
   const date = new Date(text.length === 7 ? text + '-01T00:00:00Z' : text + 'T00:00:00Z');
   if (Number.isNaN(date.getTime())) return text;
-  return new Intl.DateTimeFormat('en-PH', descriptiveUsesDailyGrain()
-    ? { month: 'short', day: 'numeric', timeZone: 'UTC' }
-    : { month: 'short', year: '2-digit', timeZone: 'UTC' }).format(date);
+  return (descriptiveUsesDailyGrain() ? descriptivePointFormatters.daily : descriptivePointFormatters.monthly).format(date);
 }
 
 function descriptiveYearLabel(yearValue) {
@@ -575,9 +600,7 @@ function setCustomDateRange(startValue, endValue) {
   }
   if (descriptivePeriod === 'custom') {
     refreshComparison();
-    if (typeof renderProductPrioritizationTimeline === 'function') renderProductPrioritizationTimeline();
-    if (typeof renderSalesSectors === 'function') renderSalesSectors();
-    if (typeof renderSalesHeatmap === 'function') renderSalesHeatmap();
+    if (descriptivePageIsActive('products') && typeof renderProductPrioritizationTimeline === 'function') renderProductPrioritizationTimeline();
   }
   return true;
 }
@@ -602,9 +625,7 @@ function setDescriptivePeriod(value) {
   if (rangeWrap) rangeWrap.style.display = descriptivePeriod === 'custom' ? 'flex' : 'none';
   if (descriptivePeriod === 'custom') openCustomDateCalendar(document.getElementById('customDateStart'));
   refreshComparison();
-  if (typeof renderProductPrioritizationTimeline === 'function') renderProductPrioritizationTimeline();
-  if (typeof renderSalesSectors === 'function') renderSalesSectors();
-  if (typeof renderSalesHeatmap === 'function') renderSalesHeatmap();
+  if (descriptivePageIsActive('products') && typeof renderProductPrioritizationTimeline === 'function') renderProductPrioritizationTimeline();
 }
 
 function setDescriptiveGranularity(value) {
@@ -652,6 +673,9 @@ export function patchDescriptivePeriodFilters(script: string): string {
 
   patched = patched.replace(LEGACY_SET_YEAR, DESCRIPTIVE_SET_YEAR)
   if (!patched.includes(DESCRIPTIVE_SET_YEAR)) throw new Error('Unable to patch custom date compatibility.')
+
+  patched = patched.replace(LEGACY_REFRESH_COMPARISON, RESPONSIVE_REFRESH_COMPARISON)
+  if (!patched.includes(RESPONSIVE_REFRESH_COMPARISON)) throw new Error('Unable to patch responsive filter refresh.')
 
   const monthlyPattern = /function getMonthlyRowsForMode\(\) \{[\s\S]*?\}\n\nfunction baseChartOptions\(\)/
   patched = patched.replace(monthlyPattern, `${DESCRIPTIVE_MONTH_ROWS}\n\nfunction baseChartOptions()`)

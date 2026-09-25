@@ -20,6 +20,7 @@ export function renderWeatherEffects(root: HTMLElement, result: WeatherEffects) 
   const metadata = result.metadata ?? {}
   const grain = String(metadata.grain ?? root.querySelector<HTMLSelectElement>('#weatherGrain')?.value ?? 'monthly')
   const provider = String(metadata.provider ?? 'not refreshed')
+  const sourceLabel = metadata.system_of_record === 'databricks' ? 'Databricks Gold' : 'unverified source'
   const period = metadata.period_start && metadata.period_end
     ? `${String(metadata.period_start)} to ${String(metadata.period_end)}`
     : 'no period loaded'
@@ -78,10 +79,10 @@ export function renderWeatherEffects(root: HTMLElement, result: WeatherEffects) 
   }
 
   status.textContent = result.rows.length
-    ? `${weatherProviderLabel(provider)} | ${grain === 'daily' ? 'Daily rows' : 'Monthly aggregate'} | ${period} | ${periods} weather rows | ${salesMatches} sales matches | ${correlation}`
-    : 'No weather rows match the selected territory and year.'
+    ? `${weatherProviderLabel(provider)} | ${sourceLabel} | ${grain === 'daily' ? 'Daily rows' : 'Monthly aggregate'} | ${period} | ${periods} weather rows | ${salesMatches} sales matches | ${correlation}`
+    : `No ${weatherProviderLabel(provider)} rows match the selected territory and year in ${sourceLabel}.`
   
   if (countLabel) {
-    countLabel.textContent = `Fetched ${periods} records | matched ${salesMatches} sales periods | rainfall-revenue ${correlation}`
+    countLabel.textContent = `${sourceLabel} returned ${periods} records | matched ${salesMatches} sales periods | rainfall-revenue ${correlation}`
   }
 }

@@ -114,10 +114,12 @@ function diagnosticCoverage(covered) {
     : 'No matching observed months';
 }
 
+const diagnosticCurrencyFormatter = new Intl.NumberFormat('en-PH', {
+  style: 'currency', currency: 'PHP', maximumFractionDigits: 2
+});
+
 function diagnosticCurrency(value) {
-  return value == null ? 'Unavailable' : new Intl.NumberFormat('en-PH', {
-    style: 'currency', currency: 'PHP', maximumFractionDigits: 2
-  }).format(value);
+  return value == null ? 'Unavailable' : diagnosticCurrencyFormatter.format(value);
 }
 
 function diagnosticRate(value) {
