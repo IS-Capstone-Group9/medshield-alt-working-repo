@@ -7,11 +7,17 @@ export type Summary = {
   avg_margin: number | null
 }
 
-export type MonthlyPoint = { period: string; revenue: number; income: number }
+export type MonthlyPoint = {
+  period: string; revenue: number | null; income: number | null
+  margin_revenue_basis?: number | null
+  transaction_count?: number
+  has_sales_activity?: boolean
+  missing?: boolean
+}
 export type AreaPoint = { area: string; revenue: number; income: number }
 export type ProductPoint = { product: string; revenue: number; qty: number; income: number; abc: string; pct_of_total: number }
 export type YearPoint = { year: string; revenue: number; income: number; transactions: number }
-export type SeasonalityPoint = { month: string; avg_revenue: number }
+export type SeasonalityPoint = { month: string; avg_revenue: number | null; observed_month_count?: number; method?: string }
 export type ForecastPoint = {
   period: string
   area: string

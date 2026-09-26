@@ -1,0 +1,1449 @@
+{
+  "generated_at": "2026-09-26T17:52:02.042Z",
+  "status": "candidate_calculations_verified_not_publication_approval",
+  "source_table": "workspace.medshield_gold.sales_restart_fact_candidate",
+  "delta_version": "15",
+  "identity": {
+    "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+    "policy_version": "sales_restart_gold_v5_2025_allocation_source",
+    "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+    "product_master_sha256": "8a34ce4946d2b99f896b1dec9e93dd5865ece8fee5e582c64dc6c5b798cca921",
+    "publication_status": "CANDIDATE_PENDING_BUSINESS_AND_PRODUCT_MASTER_REVIEW"
+  },
+  "snapshot": {
+    "data_status": {
+      "source": "databricks",
+      "mode": "live",
+      "loaded_at": "2026-09-26T17:51:59.303Z",
+      "message": "Live Databricks Gold candidate views; no local or bundled fallback is permitted.",
+      "catalog": "workspace",
+      "schema": "medshield_gold",
+      "candidate_only": true
+    },
+    "totals": {
+      "total_revenue": 626946741.8100001,
+      "total_income": 288487498.71999997,
+      "total_transactions": 37728,
+      "avg_margin": 60.2621772529524,
+      "margin_revenue_basis": 478720670.03
+    },
+    "monthly": [
+      {
+        "period": "2017-01",
+        "revenue": 2288688.88,
+        "income": 1563511.66,
+        "margin_revenue_basis": 2288688.88,
+        "transaction_count": 515,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2017-02",
+        "revenue": 2478761.2,
+        "income": 1718333.26,
+        "margin_revenue_basis": 2471021.2,
+        "transaction_count": 454,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2017-03",
+        "revenue": 2697198.47,
+        "income": 1638244.97,
+        "margin_revenue_basis": 2362968.82,
+        "transaction_count": 589,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2017-04",
+        "revenue": 2655938.8,
+        "income": 1331733.89,
+        "margin_revenue_basis": 1999347.2,
+        "transaction_count": 401,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2017-05",
+        "revenue": null,
+        "income": null,
+        "margin_revenue_basis": null,
+        "transaction_count": 0,
+        "has_sales_activity": false,
+        "missing": true
+      },
+      {
+        "period": "2017-06",
+        "revenue": null,
+        "income": null,
+        "margin_revenue_basis": null,
+        "transaction_count": 0,
+        "has_sales_activity": false,
+        "missing": true
+      },
+      {
+        "period": "2017-07",
+        "revenue": null,
+        "income": null,
+        "margin_revenue_basis": null,
+        "transaction_count": 0,
+        "has_sales_activity": false,
+        "missing": true
+      },
+      {
+        "period": "2017-08",
+        "revenue": null,
+        "income": null,
+        "margin_revenue_basis": null,
+        "transaction_count": 0,
+        "has_sales_activity": false,
+        "missing": true
+      },
+      {
+        "period": "2017-09",
+        "revenue": 480,
+        "income": 325,
+        "margin_revenue_basis": 480,
+        "transaction_count": 1,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2017-10",
+        "revenue": null,
+        "income": null,
+        "margin_revenue_basis": null,
+        "transaction_count": 0,
+        "has_sales_activity": false,
+        "missing": true
+      },
+      {
+        "period": "2017-11",
+        "revenue": 86200,
+        "income": 61288.9,
+        "margin_revenue_basis": 86200,
+        "transaction_count": 9,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2017-12",
+        "revenue": 3900,
+        "income": 2720,
+        "margin_revenue_basis": 3900,
+        "transaction_count": 9,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2018-01",
+        "revenue": null,
+        "income": null,
+        "margin_revenue_basis": null,
+        "transaction_count": 0,
+        "has_sales_activity": false,
+        "missing": true
+      },
+      {
+        "period": "2018-02",
+        "revenue": null,
+        "income": null,
+        "margin_revenue_basis": null,
+        "transaction_count": 0,
+        "has_sales_activity": false,
+        "missing": true
+      },
+      {
+        "period": "2018-03",
+        "revenue": 3457920.7,
+        "income": 2090495,
+        "margin_revenue_basis": 3052738.6,
+        "transaction_count": 418,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2018-04",
+        "revenue": 6403396.28,
+        "income": 2827185.11,
+        "margin_revenue_basis": 5018063.29,
+        "transaction_count": 682,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2018-05",
+        "revenue": 4591195.17,
+        "income": 2821895.01,
+        "margin_revenue_basis": 4244749.17,
+        "transaction_count": 634,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2018-06",
+        "revenue": 4599086.64,
+        "income": 2661903.01,
+        "margin_revenue_basis": 4017156.64,
+        "transaction_count": 515,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2018-07",
+        "revenue": 5034975.38,
+        "income": 2812895.33,
+        "margin_revenue_basis": 4618875.94,
+        "transaction_count": 587,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2018-08",
+        "revenue": 4085611.82,
+        "income": 2320349.85,
+        "margin_revenue_basis": 3728264.89,
+        "transaction_count": 585,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2018-09",
+        "revenue": 4066997.22,
+        "income": 2520488.66,
+        "margin_revenue_basis": 4029876.51,
+        "transaction_count": 684,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2018-10",
+        "revenue": 7274326.83,
+        "income": 3796308.79,
+        "margin_revenue_basis": 6313542.23,
+        "transaction_count": 807,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2018-11",
+        "revenue": 7571263.89,
+        "income": 4078448.14,
+        "margin_revenue_basis": 6712233.74,
+        "transaction_count": 845,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2018-12",
+        "revenue": 4534917.34,
+        "income": 2398752.86,
+        "margin_revenue_basis": 3146994.38,
+        "transaction_count": 424,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2019-01",
+        "revenue": 4459965.47,
+        "income": 1772751.68,
+        "margin_revenue_basis": 2613721.84,
+        "transaction_count": 737,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2019-02",
+        "revenue": 5473644.67,
+        "income": 1570400.99,
+        "margin_revenue_basis": 2470989.5,
+        "transaction_count": 484,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2019-03",
+        "revenue": 6995759.14,
+        "income": 2779093.55,
+        "margin_revenue_basis": 4214764.93,
+        "transaction_count": 539,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2019-04",
+        "revenue": 9438917.29,
+        "income": 4594590.79,
+        "margin_revenue_basis": 6370271.3,
+        "transaction_count": 799,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2019-05",
+        "revenue": 9568922.12,
+        "income": 4396497.16,
+        "margin_revenue_basis": 6042074.49,
+        "transaction_count": 646,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2019-06",
+        "revenue": 6948030.48,
+        "income": 4022965.26,
+        "margin_revenue_basis": 5408966.07,
+        "transaction_count": 540,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2019-07",
+        "revenue": 8694463.13,
+        "income": 4080324.51,
+        "margin_revenue_basis": 5662574.04,
+        "transaction_count": 647,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2019-08",
+        "revenue": 5568251.58,
+        "income": 3146257.71,
+        "margin_revenue_basis": 4486498.68,
+        "transaction_count": 513,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2019-09",
+        "revenue": 5394350.61,
+        "income": 2762588.3,
+        "margin_revenue_basis": 3941420.57,
+        "transaction_count": 541,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2019-10",
+        "revenue": null,
+        "income": null,
+        "margin_revenue_basis": null,
+        "transaction_count": 0,
+        "has_sales_activity": false,
+        "missing": true
+      },
+      {
+        "period": "2019-11",
+        "revenue": null,
+        "income": null,
+        "margin_revenue_basis": null,
+        "transaction_count": 0,
+        "has_sales_activity": false,
+        "missing": true
+      },
+      {
+        "period": "2019-12",
+        "revenue": null,
+        "income": null,
+        "margin_revenue_basis": null,
+        "transaction_count": 0,
+        "has_sales_activity": false,
+        "missing": true
+      },
+      {
+        "period": "2020-01",
+        "revenue": 7514695.05,
+        "income": 2604913.92,
+        "margin_revenue_basis": 3740836.74,
+        "transaction_count": 614,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2020-02",
+        "revenue": 6298008,
+        "income": 3594625.9,
+        "margin_revenue_basis": 5452834.41,
+        "transaction_count": 460,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2020-03",
+        "revenue": 6637589.08,
+        "income": 2918264.61,
+        "margin_revenue_basis": 3955415.15,
+        "transaction_count": 467,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2020-04",
+        "revenue": 1525751.32,
+        "income": 897056.61,
+        "margin_revenue_basis": 1321365.32,
+        "transaction_count": 207,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2020-05",
+        "revenue": 19394456.3,
+        "income": 5922379.27,
+        "margin_revenue_basis": 8123767.02,
+        "transaction_count": 420,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2020-06",
+        "revenue": 4471548.75,
+        "income": 2241388.54,
+        "margin_revenue_basis": 3126938.68,
+        "transaction_count": 330,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2020-07",
+        "revenue": 1553987.81,
+        "income": 844152.21,
+        "margin_revenue_basis": 1342995.45,
+        "transaction_count": 170,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2020-08",
+        "revenue": 2983110.79,
+        "income": 1534325.49,
+        "margin_revenue_basis": 2263338.75,
+        "transaction_count": 269,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2020-09",
+        "revenue": 2102633.27,
+        "income": 1127136.35,
+        "margin_revenue_basis": 1924907.37,
+        "transaction_count": 174,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2020-10",
+        "revenue": 2469548.12,
+        "income": 1346486.91,
+        "margin_revenue_basis": 1989440.03,
+        "transaction_count": 421,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2020-11",
+        "revenue": 4870933.12,
+        "income": 2471946.59,
+        "margin_revenue_basis": 3853344.44,
+        "transaction_count": 252,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2020-12",
+        "revenue": 3771013.02,
+        "income": 2511317.28,
+        "margin_revenue_basis": 3164804.73,
+        "transaction_count": 196,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2021-01",
+        "revenue": 5364380.25,
+        "income": 3487149.86,
+        "margin_revenue_basis": 5359900.25,
+        "transaction_count": 258,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2021-02",
+        "revenue": 3682482.14,
+        "income": 2046824.44,
+        "margin_revenue_basis": 3682482.14,
+        "transaction_count": 213,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2021-03",
+        "revenue": 2318360.72,
+        "income": 1553568.62,
+        "margin_revenue_basis": 2318360.72,
+        "transaction_count": 207,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2021-04",
+        "revenue": 4928899.8,
+        "income": 3452714.96,
+        "margin_revenue_basis": 4928899.8,
+        "transaction_count": 258,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2021-05",
+        "revenue": 2012916.83,
+        "income": 1119804.34,
+        "margin_revenue_basis": 2002116.83,
+        "transaction_count": 183,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2021-06",
+        "revenue": 5225498.2,
+        "income": 3759325.12,
+        "margin_revenue_basis": 5207433.2,
+        "transaction_count": 253,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2021-07",
+        "revenue": 9573660.33,
+        "income": 6844972.1,
+        "margin_revenue_basis": 9567160.33,
+        "transaction_count": 345,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2021-08",
+        "revenue": 10533739.53,
+        "income": 5977103,
+        "margin_revenue_basis": 10531039.53,
+        "transaction_count": 305,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2021-09",
+        "revenue": 8287059.6,
+        "income": 5263319.69,
+        "margin_revenue_basis": 8287059.6,
+        "transaction_count": 286,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2021-10",
+        "revenue": 15279603.64,
+        "income": 9375684.82,
+        "margin_revenue_basis": 15275859.64,
+        "transaction_count": 381,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2021-11",
+        "revenue": 6713804.04,
+        "income": 4791990.56,
+        "margin_revenue_basis": 6704134.04,
+        "transaction_count": 503,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2021-12",
+        "revenue": 3939801.18,
+        "income": 2748313.42,
+        "margin_revenue_basis": 3939801.18,
+        "transaction_count": 215,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2022-01",
+        "revenue": 5270833.75,
+        "income": 3837517.84,
+        "margin_revenue_basis": 5080144.86,
+        "transaction_count": 371,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2022-02",
+        "revenue": 10568697.09,
+        "income": 6985336.62,
+        "margin_revenue_basis": 10325195.75,
+        "transaction_count": 453,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2022-03",
+        "revenue": 5791537.63,
+        "income": 3940253.93,
+        "margin_revenue_basis": 5391123.63,
+        "transaction_count": 298,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2022-04",
+        "revenue": 5638889.71,
+        "income": 3795460.11,
+        "margin_revenue_basis": 5560660.22,
+        "transaction_count": 314,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2022-05",
+        "revenue": 3871579.02,
+        "income": 2316104.02,
+        "margin_revenue_basis": 3520180.56,
+        "transaction_count": 324,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2022-06",
+        "revenue": 10350221.03,
+        "income": 7275105.29,
+        "margin_revenue_basis": 10020070.16,
+        "transaction_count": 489,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2022-07",
+        "revenue": 3049922.43,
+        "income": 1830375.81,
+        "margin_revenue_basis": 2798686.43,
+        "transaction_count": 295,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2022-08",
+        "revenue": 2138525.12,
+        "income": 1351331.16,
+        "margin_revenue_basis": 2108727.12,
+        "transaction_count": 194,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2022-09",
+        "revenue": 6498970.54,
+        "income": 3677959.29,
+        "margin_revenue_basis": 5717097.76,
+        "transaction_count": 418,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2022-10",
+        "revenue": 2788157.48,
+        "income": 1447522.73,
+        "margin_revenue_basis": 2765788.48,
+        "transaction_count": 296,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2022-11",
+        "revenue": 3642191.63,
+        "income": 2076151.39,
+        "margin_revenue_basis": 3582173.63,
+        "transaction_count": 306,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2022-12",
+        "revenue": 3625464.61,
+        "income": 2265930.87,
+        "margin_revenue_basis": 3623372.61,
+        "transaction_count": 222,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2023-01",
+        "revenue": 7844551.2,
+        "income": 4582496.9,
+        "margin_revenue_basis": 7738631.2,
+        "transaction_count": 435,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2023-02",
+        "revenue": 13794078.18,
+        "income": 6780024.2,
+        "margin_revenue_basis": 13332610.18,
+        "transaction_count": 753,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2023-03",
+        "revenue": 2344746.44,
+        "income": 1328921.61,
+        "margin_revenue_basis": 2295614.12,
+        "transaction_count": 357,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2023-04",
+        "revenue": 1559602.95,
+        "income": 775366.47,
+        "margin_revenue_basis": 1371440.35,
+        "transaction_count": 215,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2023-05",
+        "revenue": 14537368.3,
+        "income": 6977451.49,
+        "margin_revenue_basis": 13522718.3,
+        "transaction_count": 625,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2023-06",
+        "revenue": 6910935.23,
+        "income": 3393523.66,
+        "margin_revenue_basis": 6639428.18,
+        "transaction_count": 1455,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2023-07",
+        "revenue": 2337078.5,
+        "income": 1151981.33,
+        "margin_revenue_basis": 2285182.5,
+        "transaction_count": 295,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2023-08",
+        "revenue": 2588026.9,
+        "income": 1448354.77,
+        "margin_revenue_basis": 2553709.66,
+        "transaction_count": 348,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2023-09",
+        "revenue": 5029660.6,
+        "income": 4183375.99,
+        "margin_revenue_basis": 5029660.6,
+        "transaction_count": 240,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2023-10",
+        "revenue": 2411760.4,
+        "income": 1382968.72,
+        "margin_revenue_basis": 2406560.4,
+        "transaction_count": 243,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2023-11",
+        "revenue": 1975407.65,
+        "income": 1046798.3,
+        "margin_revenue_basis": 1843097.65,
+        "transaction_count": 262,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2023-12",
+        "revenue": 895750.5,
+        "income": 534319.04,
+        "margin_revenue_basis": 804190.5,
+        "transaction_count": 153,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2024-01",
+        "revenue": 2124201.87,
+        "income": 1434941.77,
+        "margin_revenue_basis": 2124201.87,
+        "transaction_count": 271,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2024-02",
+        "revenue": 1079764.41,
+        "income": 712331.09,
+        "margin_revenue_basis": 1078594.41,
+        "transaction_count": 167,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2024-03",
+        "revenue": 2060009.79,
+        "income": 1420928.01,
+        "margin_revenue_basis": 2058530.47,
+        "transaction_count": 371,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2024-04",
+        "revenue": 2078280.77,
+        "income": 1009968.51,
+        "margin_revenue_basis": 2051549.77,
+        "transaction_count": 182,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2024-05",
+        "revenue": 3608886.82,
+        "income": 1975996.51,
+        "margin_revenue_basis": 3608886.82,
+        "transaction_count": 247,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2024-06",
+        "revenue": 6998941.66,
+        "income": 2911214.27,
+        "margin_revenue_basis": 6888630.66,
+        "transaction_count": 246,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2024-07",
+        "revenue": 4065144.11,
+        "income": 850323.91,
+        "margin_revenue_basis": 4032634.11,
+        "transaction_count": 262,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2024-08",
+        "revenue": 3762272.34,
+        "income": 1368074.96,
+        "margin_revenue_basis": 3760286.83,
+        "transaction_count": 264,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2024-09",
+        "revenue": 2626170.57,
+        "income": 1213581.55,
+        "margin_revenue_basis": 2535270.57,
+        "transaction_count": 206,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2024-10",
+        "revenue": 3030236.03,
+        "income": 1372641.03,
+        "margin_revenue_basis": 3030236.03,
+        "transaction_count": 243,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2024-11",
+        "revenue": 2080441,
+        "income": 939325.71,
+        "margin_revenue_basis": 2064241,
+        "transaction_count": 175,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2024-12",
+        "revenue": 16744970.51,
+        "income": 4354510.1,
+        "margin_revenue_basis": 16723830.51,
+        "transaction_count": 197,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2025-01",
+        "revenue": 16374092.18,
+        "income": 1411814.6,
+        "margin_revenue_basis": 2807978.73,
+        "transaction_count": 232,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2025-02",
+        "revenue": 13408966.82,
+        "income": 7416589.64,
+        "margin_revenue_basis": 12204207.74,
+        "transaction_count": 350,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2025-03",
+        "revenue": 2612295.1,
+        "income": 1134570.11,
+        "margin_revenue_basis": 2142401.76,
+        "transaction_count": 241,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2025-04",
+        "revenue": 5670753.87,
+        "income": 2510146.82,
+        "margin_revenue_basis": 4585400.69,
+        "transaction_count": 206,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2025-05",
+        "revenue": 21382925.25,
+        "income": 3602953.78,
+        "margin_revenue_basis": 6292210.54,
+        "transaction_count": 231,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2025-06",
+        "revenue": 14924161.43,
+        "income": 7063999.01,
+        "margin_revenue_basis": 13048786.11,
+        "transaction_count": 525,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2025-07",
+        "revenue": 20352893.81,
+        "income": 2062138.43,
+        "margin_revenue_basis": 3776455.9,
+        "transaction_count": 265,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2025-08",
+        "revenue": 8934135.31,
+        "income": 4123755.29,
+        "margin_revenue_basis": 7378646.93,
+        "transaction_count": 253,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2025-09",
+        "revenue": 20654027.17,
+        "income": 7288190.94,
+        "margin_revenue_basis": 15820704.15,
+        "transaction_count": 507,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2025-10",
+        "revenue": 12512678.31,
+        "income": 2913359.17,
+        "margin_revenue_basis": 5580924.33,
+        "transaction_count": 360,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2025-11",
+        "revenue": 25076009.2,
+        "income": 6500248.45,
+        "margin_revenue_basis": 10069519.74,
+        "transaction_count": 545,
+        "has_sales_activity": true,
+        "missing": false
+      },
+      {
+        "period": "2025-12",
+        "revenue": 23493882.59,
+        "income": 6306149.52,
+        "margin_revenue_basis": 11369857.25,
+        "transaction_count": 829,
+        "has_sales_activity": true,
+        "missing": false
+      }
+    ],
+    "by_area": [
+      {
+        "area": "GOVERNMENT",
+        "revenue": 310629101.4,
+        "income": 130353976.35
+      },
+      {
+        "area": "HOSPITAL",
+        "revenue": 165121239.71,
+        "income": 69103315.46
+      },
+      {
+        "area": "BATANGAS",
+        "revenue": 28556256.25,
+        "income": 17838380.41
+      },
+      {
+        "area": "QUEZON",
+        "revenue": 27207048.54,
+        "income": 17340506.74
+      },
+      {
+        "area": "ADMIN",
+        "revenue": 16359733.69,
+        "income": 8706600.1
+      },
+      {
+        "area": "EQUIPMENT",
+        "revenue": 14475259.73,
+        "income": 7679164.32
+      },
+      {
+        "area": "LAGUNA",
+        "revenue": 14376324.92,
+        "income": 8509063.56
+      },
+      {
+        "area": "MARINDUQUE",
+        "revenue": 13469314.65,
+        "income": 6984765.63
+      },
+      {
+        "area": "CAM NORTE",
+        "revenue": 11638151.07,
+        "income": 7508275.57
+      },
+      {
+        "area": "CAVITE",
+        "revenue": 7799599.04,
+        "income": 5155855.62
+      },
+      {
+        "area": "CAM SUR",
+        "revenue": 6579104.4,
+        "income": 4301716.4
+      },
+      {
+        "area": "SUPPLIES",
+        "revenue": 4929323.34,
+        "income": 1797870.68
+      },
+      {
+        "area": "ALBAY",
+        "revenue": 1643619.39,
+        "income": 1053656.73
+      },
+      {
+        "area": "SUPPLIES AND EQUIPMENT",
+        "revenue": 1429603.5,
+        "income": 562556.5
+      },
+      {
+        "area": "BICOL",
+        "revenue": 1182409.43,
+        "income": 690480.5
+      },
+      {
+        "area": "PHARMA",
+        "revenue": 1126380,
+        "income": 705257.77
+      },
+      {
+        "area": "MINDORO",
+        "revenue": 196474,
+        "income": 56920.13
+      },
+      {
+        "area": "EASTERN",
+        "revenue": 118287,
+        "income": 77754.8
+      },
+      {
+        "area": "EAST",
+        "revenue": 59225.5,
+        "income": 32202.1
+      },
+      {
+        "area": "LOSSES",
+        "revenue": 32792.5,
+        "income": 26280.92
+      },
+      {
+        "area": "PERSONAL",
+        "revenue": 17493.75,
+        "income": 2898.43
+      }
+    ],
+    "top_products": [
+      {
+        "product": "SPEEDA 2.5IU/0.5ML",
+        "revenue": 22466448.23,
+        "income": 3211451.17,
+        "qty": 3220.201548,
+        "abc": "Unclassified",
+        "abc_basis": "cumulative_net_sales_full_product_population",
+        "product_identity_status": "source_label_not_verified_sku",
+        "pct_of_total": 3.5834699714905915
+      },
+      {
+        "product": "PROHAB 10MG/ML 20ML",
+        "revenue": 16530532.11,
+        "income": 1360000,
+        "qty": 3917.19,
+        "abc": "Unclassified",
+        "abc_basis": "cumulative_net_sales_full_product_population",
+        "product_identity_status": "source_label_not_verified_sku",
+        "pct_of_total": 2.6366724647577287
+      },
+      {
+        "product": "BUPIRIGHT 5MG/ML 0.5% IN 8% 4ML",
+        "revenue": 15966455.39,
+        "income": 1817758.17,
+        "qty": 42104.87,
+        "abc": "Unclassified",
+        "abc_basis": "cumulative_net_sales_full_product_population",
+        "product_identity_status": "source_label_not_verified_sku",
+        "pct_of_total": 2.546700433262437
+      },
+      {
+        "product": "SITIXON 1G",
+        "revenue": 13051271.68,
+        "income": 4433414.18,
+        "qty": 50950.65,
+        "abc": "Unclassified",
+        "abc_basis": "cumulative_net_sales_full_product_population",
+        "product_identity_status": "source_label_not_verified_sku",
+        "pct_of_total": 2.0817193566268295
+      },
+      {
+        "product": "MONOWEL 1G IV",
+        "revenue": 12313552.5,
+        "income": 932998,
+        "qty": 19412.239798,
+        "abc": "Unclassified",
+        "abc_basis": "cumulative_net_sales_full_product_population",
+        "product_identity_status": "source_label_not_verified_sku",
+        "pct_of_total": 1.9640508003041346
+      },
+      {
+        "product": "PROFUREX 750MG",
+        "revenue": 11987494.4,
+        "income": 1930988.4,
+        "qty": 31760,
+        "abc": "Unclassified",
+        "abc_basis": "cumulative_net_sales_full_product_population",
+        "product_identity_status": "source_label_not_verified_sku",
+        "pct_of_total": 1.912043495974158
+      },
+      {
+        "product": "EVAPROST 250MCG/ML",
+        "revenue": 9753530.12,
+        "income": 5206203.43,
+        "qty": 1278.67,
+        "abc": "Unclassified",
+        "abc_basis": "cumulative_net_sales_full_product_population",
+        "product_identity_status": "source_label_not_verified_sku",
+        "pct_of_total": 1.5557190857777623
+      },
+      {
+        "product": "F6 FETAL MONITOR SINGLE",
+        "revenue": 7848998.5,
+        "income": 7688998.5,
+        "qty": 11,
+        "abc": "Unclassified",
+        "abc_basis": "cumulative_net_sales_full_product_population",
+        "product_identity_status": "source_label_not_verified_sku",
+        "pct_of_total": 1.251940232967777
+      },
+      {
+        "product": "SPEEDA",
+        "revenue": 7558970.97,
+        "income": 5753162.97,
+        "qty": 1265.6,
+        "abc": "Unclassified",
+        "abc_basis": "cumulative_net_sales_full_product_population",
+        "product_identity_status": "source_label_not_verified_sku",
+        "pct_of_total": 1.2056799191869463
+      },
+      {
+        "product": "EUROXONE 1G",
+        "revenue": 7311190.91,
+        "income": 5509486.95,
+        "qty": 20961.16,
+        "abc": "Unclassified",
+        "abc_basis": "cumulative_net_sales_full_product_population",
+        "product_identity_status": "source_label_not_verified_sku",
+        "pct_of_total": 1.1661582112848274
+      },
+      {
+        "product": "MAXIFER 20MG/ML",
+        "revenue": 7276180,
+        "income": 2519745.83,
+        "qty": 2884,
+        "abc": "Unclassified",
+        "abc_basis": "cumulative_net_sales_full_product_population",
+        "product_identity_status": "source_label_not_verified_sku",
+        "pct_of_total": 1.1605738597498112
+      },
+      {
+        "product": "TROYNOXA-60 60MG/0.6ML",
+        "revenue": 5031332.16,
+        "income": 1767952.5,
+        "qty": 4827.38,
+        "abc": "Unclassified",
+        "abc_basis": "cumulative_net_sales_full_product_population",
+        "product_identity_status": "source_label_not_verified_sku",
+        "pct_of_total": 0.8025134871064975
+      },
+      {
+        "product": "BUPIRIGHT AMPULE",
+        "revenue": 4883775.75,
+        "income": 3390531.74,
+        "qty": 7429.62,
+        "abc": "Unclassified",
+        "abc_basis": "cumulative_net_sales_full_product_population",
+        "product_identity_status": "source_label_not_verified_sku",
+        "pct_of_total": 0.7789777702489533
+      },
+      {
+        "product": "ANTITET 1500IU/0.7ML",
+        "revenue": 4641242.2,
+        "income": 2112380,
+        "qty": 1740.72,
+        "abc": "Unclassified",
+        "abc_basis": "cumulative_net_sales_full_product_population",
+        "product_identity_status": "source_label_not_verified_sku",
+        "pct_of_total": 0.7402928973840265
+      },
+      {
+        "product": "JUBI -R 100MG",
+        "revenue": 4592500,
+        "income": 2217500,
+        "qty": 750,
+        "abc": "Unclassified",
+        "abc_basis": "cumulative_net_sales_full_product_population",
+        "product_identity_status": "source_label_not_verified_sku",
+        "pct_of_total": 0.7325183614068107
+      }
+    ],
+    "year_summary": [
+      {
+        "year": "2017",
+        "revenue": 10211167.35,
+        "income": 6316157.68,
+        "transactions": 1978,
+        "margin_revenue_basis": 9212606.1
+      },
+      {
+        "year": "2018",
+        "revenue": 51619691.27,
+        "income": 28328721.76,
+        "transactions": 6181,
+        "margin_revenue_basis": 44882495.39
+      },
+      {
+        "year": "2019",
+        "revenue": 62542304.49,
+        "income": 29125469.95,
+        "transactions": 5446,
+        "margin_revenue_basis": 41211281.42
+      },
+      {
+        "year": "2020",
+        "revenue": 63593274.63,
+        "income": 28013993.68,
+        "transactions": 3980,
+        "margin_revenue_basis": 40259988.09
+      },
+      {
+        "year": "2021",
+        "revenue": 77860206.26,
+        "income": 50420770.93,
+        "transactions": 3407,
+        "margin_revenue_basis": 77804247.26
+      },
+      {
+        "year": "2022",
+        "revenue": 63234990.04,
+        "income": 40799049.06,
+        "transactions": 3980,
+        "margin_revenue_basis": 60493221.21
+      },
+      {
+        "year": "2023",
+        "revenue": 62228966.85,
+        "income": 33585582.48,
+        "transactions": 5381,
+        "margin_revenue_basis": 59822843.64
+      },
+      {
+        "year": "2024",
+        "revenue": 50259319.88,
+        "income": 19563837.42,
+        "transactions": 2831,
+        "margin_revenue_basis": 49956893.05
+      },
+      {
+        "year": "2025",
+        "revenue": 185396821.04,
+        "income": 52333915.76,
+        "transactions": 4544,
+        "margin_revenue_basis": 95077093.87
+      }
+    ],
+    "seasonality": [
+      {
+        "month": "Jan",
+        "avg_revenue": 6405176.08125,
+        "observed_month_count": 8,
+        "method": "observed_calendar_month_average_not_stl"
+      },
+      {
+        "month": "Feb",
+        "avg_revenue": 7098050.31375,
+        "observed_month_count": 8,
+        "method": "observed_calendar_month_average_not_stl"
+      },
+      {
+        "month": "Mar",
+        "avg_revenue": 3879490.7855555555,
+        "observed_month_count": 9,
+        "method": "observed_calendar_month_average_not_stl"
+      },
+      {
+        "month": "Apr",
+        "avg_revenue": 4433381.198888889,
+        "observed_month_count": 9,
+        "method": "observed_calendar_month_average_not_stl"
+      },
+      {
+        "month": "May",
+        "avg_revenue": 9871031.22625,
+        "observed_month_count": 8,
+        "method": "observed_calendar_month_average_not_stl"
+      },
+      {
+        "month": "Jun",
+        "avg_revenue": 7553552.9275,
+        "observed_month_count": 8,
+        "method": "observed_calendar_month_average_not_stl"
+      },
+      {
+        "month": "Jul",
+        "avg_revenue": 6832765.6875,
+        "observed_month_count": 8,
+        "method": "observed_calendar_month_average_not_stl"
+      },
+      {
+        "month": "Aug",
+        "avg_revenue": 5074209.17375,
+        "observed_month_count": 8,
+        "method": "observed_calendar_month_average_not_stl"
+      },
+      {
+        "month": "Sep",
+        "avg_revenue": 6073372.175555555,
+        "observed_month_count": 9,
+        "method": "observed_calendar_month_average_not_stl"
+      },
+      {
+        "month": "Oct",
+        "avg_revenue": 6538044.401428571,
+        "observed_month_count": 7,
+        "method": "observed_calendar_month_average_not_stl"
+      },
+      {
+        "month": "Nov",
+        "avg_revenue": 6502031.31625,
+        "observed_month_count": 8,
+        "method": "observed_calendar_month_average_not_stl"
+      },
+      {
+        "month": "Dec",
+        "avg_revenue": 7126212.46875,
+        "observed_month_count": 8,
+        "method": "observed_calendar_month_average_not_stl"
+      }
+    ],
+    "forecasts": [],
+    "external_signals": [],
+    "inventory_recommendations": [],
+    "regional_priorities": [],
+    "area_clusters": [],
+    "product_priorities": [],
+    "allocation_recommendations": [],
+    "product_region_matches": [],
+    "decision_alerts": [],
+    "model_evaluation": []
+  },
+  "summary": {
+    "filters": {
+      "year": "all",
+      "search": "",
+      "quality_status": "all"
+    },
+    "counts": {
+      "rows": 37728,
+      "accepted_rows": 37728,
+      "sku_count": 4561,
+      "unique_dr_numbers": 14076
+    },
+    "sums": {
+      "quantity": 1744567.269605,
+      "total_cost": 534884889.9,
+      "net_cost": 626946741.81,
+      "total_trade_price": 193193729.34,
+      "net_income": 288487498.72
+    },
+    "averages": {
+      "quantity": 46.4388231588,
+      "unit_cost": 1735.0063903099,
+      "net_income": 8458.8036569418,
+      "margin_pct": 60.262177
+    },
+    "gross_margin_rate": 60.262177,
+    "financial_reconciliation": {
+      "delta": -0.06,
+      "checked_rows": 34105,
+      "mismatched_rows": 0
+    },
+    "top": {
+      "area": "GOVERNMENT",
+      "product": "SPEEDA 2.5IU/0.5ML"
+    }
+  }
+}

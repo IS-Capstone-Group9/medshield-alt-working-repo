@@ -7,12 +7,11 @@ import { SALES_DIAGNOSTICS_SCRIPT } from './sales-diagnostics-runtime'
 import { SALES_HEATMAP_SCRIPT } from './sales-heatmap-runtime'
 import { patchOverviewMonthlyChart } from './overview-monthly-runtime'
 import { CURRENT_YEAR_SCRIPT } from './current-year-runtime'
-import { PRODUCT_PRIORITIZATION_SCRIPT } from './product-prioritization-runtime'
+import { PRODUCT_PRIORITIZATION_SCRIPT } from './descriptive-products-runtime'
 import {
   DESCRIPTIVE_PERIOD_SCRIPT,
   patchDescriptivePeriodFilters,
 } from './descriptive-period-runtime'
-import { ODOMETER_SCRIPT } from './odometer-runtime'
 
 export type ListenerRecord = {
   target: EventTarget
@@ -90,8 +89,6 @@ const DASHBOARD_GLOBAL_HANDLERS = [
   'buildShowcaseCharts',
   'renderShowcaseDOMVisuals',
   'renderProductPrioritizationTimeline',
-  'renderOverviewThreatOdometer',
-  'animateRollingNumber',
 ] as const
 
 export function getExecutableDashboardScript(): string {
@@ -100,6 +97,7 @@ export function getExecutableDashboardScript(): string {
     .join('\n')
 
   let patchedScript = patchDescriptivePeriodFilters(patchOverviewMonthlyChart(MEDSHIELD_SCRIPT))
+    .replace("function buildTables() {", "function buildTables() {\n  if (dashboardPageIsActive('products')) { renderProductPrioritizationTimeline(); return; }")
     // The design reference still contains its original demonstration payload.
     // Empty it before the script executes so no local numbers can be rendered,
     // even during the hidden initialization phase before Databricks responds.
@@ -158,7 +156,6 @@ const PAGE_META`,
         if (typeof renderForecastValidation === 'function') renderForecastValidation();
         if (typeof renderExternalRegression === 'function') renderExternalRegression();
         if (typeof renderSalesHeatmap === 'function') renderSalesHeatmap();
-        if (typeof renderOverviewThreatOdometer === 'function') renderOverviewThreatOdometer();
         if (typeof renderShowcaseDOMVisuals === 'function') renderShowcaseDOMVisuals();
       }, 60);
     });
@@ -399,7 +396,6 @@ ${SALES_SECTORS_SCRIPT}
 ${FORECAST_VALIDATION_SCRIPT}
 ${EXTERNAL_REGRESSION_SCRIPT}
 ${PLANNING_SCRIPT}
-${ODOMETER_SCRIPT}
 ${patchedScript}
 \n${globalHandlerBridge}
 `

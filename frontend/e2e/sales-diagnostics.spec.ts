@@ -9,6 +9,7 @@ function fixture(years: number[]) {
     period: `${year}-${String(i + 1).padStart(2, '0')}`,
     revenue: (index + 1) * 1_000_000,
     income: (index + 1) * 20_000 + i * 1000,
+    margin_revenue_basis: (index + 1) * 1_000_000,
   })))
   return {
     monthly,
@@ -61,7 +62,7 @@ test.skip('legacy year-selector history view is superseded by descriptive period
   const data = fixture(Array.from({ length: 9 }, (_, i) => 2017 + i))
   data.monthly.reverse()
   data.monthly = data.monthly.filter(r => r.period !== '2024-02')
-  data.monthly.push({ period: '2026-01', revenue: 999999999, income: 1 })
+  data.monthly.push({ period: '2026-01', revenue: 999999999, income: 1, margin_revenue_basis: 999999999 })
   data.year_summary.push({ year: '2026', revenue: 999999999, income: 1, transactions: 1 })
   await page.evaluate(data => {
     const w = window as any; w.applyDatasetPatch(data); w.setComparisonMode('single'); w.setYear('2024'); w.showPage('revenue')
@@ -173,7 +174,7 @@ test('continuous years, independent scales, peso movement, baseline change and e
   await page.screenshot({ path: 'test-results/section-2-sales-diagnostics.png', fullPage: true })
 })
 
-test('custom full-year range uses weighted same-month estimates when the prior year is missing', async ({ page }) => {
+test('custom full-year range excludes estimated prior-year values from observed YoY', async ({ page }) => {
   await page.evaluate(data => {
     const app = window as any
     app.applyDatasetPatch(data); app.setDescriptivePeriod('custom'); app.setYear('2025')
@@ -181,10 +182,10 @@ test('custom full-year range uses weighted same-month estimates when the prior y
   const revenue = await chartData(page, 'revenueDetailChart')
   expect(revenue.labels).toHaveLength(12)
   const growth = await chartData(page, 'growthChart')
-  expect(growth.datasets[0].data).toEqual(Array(12).fill(100))
+  expect(growth.datasets[0].data).toEqual(Array(12).fill(null))
   const margin = await chartData(page, 'marginChart')
   expect(margin.labels).toHaveLength(12)
-  await expect(page.locator('#salesGrowthSummary')).toContainText('12/12 periods matched')
+  await expect(page.locator('#salesGrowthSummary')).toContainText('No same-period prior-year observations')
 })
 
 test('custom full-year range uses matched prior months; zero baseline keeps nominal change only', async ({ page }) => {
@@ -196,9 +197,9 @@ test('custom full-year range uses matched prior months; zero baseline keeps nomi
   }, data)
   let growth = await chartData(page, 'growthChart')
   expect(growth.labels).toEqual(['Jan 25', 'Feb 25', 'Mar 25', 'Apr 25', 'May 25', 'Jun 25', 'Jul 25', 'Aug 25', 'Sep 25', 'Oct 25', 'Nov 25', 'Dec 25'])
-  expect(growth.datasets[0].data).toEqual([100, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0])
-  expect(growth.datasets[1].data).toEqual([1_000_000, 0, 1_000_000, 0, 0, 0, 0, 0, 0, 0, 0, 0])
-  await expect(page.locator('#salesGrowthSummary')).toContainText('12/12 periods matched')
+  expect(growth.datasets[0].data).toEqual([100, null, 100, null, null, null, null, null, null, null, null, null])
+  expect(growth.datasets[1].data).toEqual([1_000_000, null, 1_000_000, null, null, null, null, null, null, null, null, null])
+  await expect(page.locator('#salesGrowthSummary')).toContainText('2/12 periods matched')
   await page.evaluate(() => (window as any).applyDatasetPatch({ monthly: [
     { period: '2024-01', revenue: 0, income: 0 },
     { period: '2025-01', revenue: 500, income: -20 },
@@ -219,7 +220,7 @@ test('custom current-year-to-date range ends today and actuals override estimate
   })
   const priorYear = calendar.year - 1
   const data = fixture([priorYear])
-  data.monthly.push({ period: `${calendar.year}-${String(calendar.month).padStart(2, '0')}`, revenue: 9_000_000, income: 900_000 })
+  data.monthly.push({ period: `${calendar.year}-${String(calendar.month).padStart(2, '0')}`, revenue: 9_000_000, income: 900_000, margin_revenue_basis: 9_000_000 })
 
   await page.evaluate(({ data, currentYear }) => {
     const app = window as any
@@ -230,7 +231,26 @@ test('custom current-year-to-date range ends today and actuals override estimate
 
   const monthly = await chartData(page, 'revenueDetailChart')
   expect(monthly.labels).toHaveLength(calendar.month)
-  expect(monthly.datasets[0].data.slice(0, calendar.month - 1)).toEqual(Array(Math.max(0, calendar.month - 1)).fill(1_000_000))
+  expect(monthly.datasets[0].data.slice(0, calendar.month - 1)).toEqual(Array(Math.max(0, calendar.month - 1)).fill(null))
+  expect(monthly.datasets[2].label).toContain('Gap estimate')
+  expect(monthly.datasets[2].data.slice(0, calendar.month - 1)).toEqual(Array(Math.max(0, calendar.month - 1)).fill(1_000_000))
   expect(monthly.datasets[0].data[calendar.month - 1]).toBe(9_000_000)
   expect(monthly.datasets[0].data).toHaveLength(calendar.month)
+})
+
+test('annual YoY compares overlapping observed months instead of unequal yearly coverage', async ({ page }) => {
+  await page.evaluate(() => {
+    const app = window as any
+    app.applyDatasetPatch({ monthly: [
+      { period: '2024-01', revenue: 100, income: 20, margin_revenue_basis: 100 },
+      { period: '2024-02', revenue: 1000, income: 200, margin_revenue_basis: 1000 },
+      { period: '2025-01', revenue: 200, income: 40, margin_revenue_basis: 200 },
+    ], year_summary: [] })
+    app.setDescriptivePeriod('all')
+  })
+  const growth = await chartData(page, 'growthChart')
+  expect(growth.datasets[0].data).toEqual([null, 100])
+  expect(growth.datasets[1].data).toEqual([null, 100])
+  expect(growth.labels).toContain('2025 · 1/12 months matched')
+  await expect(page.locator('#salesGrowthSummary')).toContainText('Annual comparisons include only months observed in both years')
 })

@@ -10,7 +10,7 @@ export const PLANNING_MARKUP = String.raw`
 [data-planning] canvas { max-width: 100%; }
 [data-planning] .plan-scroll { overflow-x: auto; margin: 16px 0; border-radius: 8px; border: 1px solid var(--border); }
 [data-planning] .plan-hero-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin: 16px 0; }
-[data-planning] .plan-hero-card { padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-elevated,#f8fafc); }
+[data-planning] .plan-hero-card { padding: 14px 16px; border: 1px solid var(--border); border-radius: 8px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04); }
 [data-planning] .plan-hero-card .hero-label { font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
 [data-planning] .plan-hero-card .hero-val { font-size: 19px; font-weight: 800; color: var(--text-primary); margin: 4px 0 2px 0; }
 [data-planning] .plan-hero-card .hero-sub { font-size: 11px; color: var(--text-secondary); }
@@ -115,7 +115,7 @@ export const PLANNING_MARKUP = String.raw`
   <p id="planSourceStatus" role="status" style="font-weight:600;font-size:12px;color:var(--text-primary);">Loading priority products…</p>
   <p id="planShortlistScope" style="font-size:11px;color:var(--text-muted);"></p>
 
-  <div style="height:260px;margin:14px 0;">
+  <div class="chart-wrap plan-chart-wrap h260" style="position:relative;margin:14px 0;">
     <canvas id="planParetoChart" aria-label="Shortlisted products revenue share"></canvas>
   </div>
 
@@ -147,7 +147,7 @@ export const PLANNING_MARKUP = String.raw`
   <p id="planResultStatus" role="status" style="font-weight:700;font-size:12px;color:var(--text-primary);margin-top:14px;"></p>
   <p id="planBudgetSummary" style="font-size:11px;color:var(--text-secondary);"></p>
 
-  <div style="height:280px;margin:16px 0;">
+  <div class="chart-wrap plan-chart-wrap h280" style="position:relative;margin:16px 0;">
     <canvas id="planFulfillmentChart" aria-label="Fulfilled and unmet demand percentages per product"></canvas>
   </div>
 

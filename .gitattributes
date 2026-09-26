@@ -1,2 +1,12 @@
 *.pdf binary
 *.docx binary
+
+# Preserve exact source and audit bytes used by provenance hashes.
+databricks/medshield_project_csv/**/*.csv -text
+databricks/medshield_reference_csv/**/*.csv -text
+databricks/medshield_project/references/*.csv -text
+datasources/templates/area_classification_mapping.csv -text
+outputs/2020_2024_databricks_final/** -text
+outputs/descriptive_validation/** -text
+outputs/publication_readiness/** -text
+outputs/qa_reassessment/*.csv -text

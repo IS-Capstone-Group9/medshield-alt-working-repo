@@ -585,17 +585,9 @@ export async function getDatabricksYearlyCandidateExtract(): Promise<DatabricksY
   `)
 
   validateExpectedColumns(result.columns)
-  if (result.rows.length !== EXPECTED_YEARS.length) {
-    throw new DatabricksYearlyValidationError(
-      `Expected 9 Gold yearly rows but received ${result.rows.length}`,
-    )
-  }
-
   const years = result.rows.map((row) => numberValue(row, 'calendar_year'))
-  if (years.some((year, index) => year !== EXPECTED_YEARS[index])) {
-    throw new DatabricksYearlyValidationError(
-      'Gold yearly rows must contain each year from 2017 through 2025 exactly once',
-    )
+  if (!years.length || years.some((year, index) => !Number.isInteger(year) || year < 2017 || year > 9999 || (index > 0 && year <= years[index - 1]))) {
+    throw new DatabricksYearlyValidationError('Gold yearly rows must have unique ascending dataset years from 2017 onward')
   }
 
   const transactionCounts = result.rows.map((row) => numberValue(row, 'transaction_count'))
@@ -615,7 +607,7 @@ export async function getDatabricksYearlyCandidateExtract(): Promise<DatabricksY
         `Year ${row.calendar_year} does not reconcile to a 12-month calendar scaffold`,
       )
     }
-    if (row.financial_definition_status !== CANDIDATE_FINANCIAL_STATUS) {
+    if (![CANDIDATE_FINANCIAL_STATUS, 'DEFINITIONS_APPROVED_DATASET_RELEASE_PENDING'].includes(row.financial_definition_status ?? '')) {
       throw new DatabricksYearlyValidationError(
         `Year ${row.calendar_year} is not labeled as a candidate financial definition`,
       )
@@ -632,9 +624,9 @@ export async function getDatabricksYearlyCandidateExtract(): Promise<DatabricksY
       view: YEARLY_DASHBOARD_VIEW,
     },
     period: {
-      minimum_year: EXPECTED_YEARS[0],
-      maximum_year: EXPECTED_YEARS[EXPECTED_YEARS.length - 1],
-      year_count: EXPECTED_YEARS.length,
+      minimum_year: years[0],
+      maximum_year: years[years.length - 1],
+      year_count: years.length,
     },
     source_transaction_count: sourceTransactionCount,
     source_checksum: createHash('sha256').update(JSON.stringify(rows)).digest('hex'),

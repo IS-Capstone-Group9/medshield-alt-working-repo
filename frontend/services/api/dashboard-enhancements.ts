@@ -251,6 +251,73 @@ function assignSalesDiagnosticsContent(root: HTMLElement) {
   sections.forEach((section) => deepDive?.appendChild(section))
 }
 
+export function correctOverviewEvidence(root: Element) {
+  const overview = root.querySelector<HTMLElement>('#page-overview')
+  if (!overview) return
+
+  const scopeNotice = overview.querySelector<HTMLElement>('.compliance-warning-banner')
+  if (scopeNotice) {
+    scopeNotice.textContent = 'Decision-support scope: Sales figures come from Databricks Gold candidate views. Disease and weather joins, predictive models, and inventory actions await approval or operational inputs.'
+  }
+
+  const salesChart = overview.querySelector('#overviewBaselineChart')?.closest<HTMLElement>('.chart-card')
+  const salesBadge = salesChart?.querySelector<HTMLElement>('.status-pill')
+  if (salesBadge) {
+    salesBadge.textContent = 'DATABRICKS GOLD · CANDIDATE'
+    salesBadge.classList.remove('status-ready')
+  }
+  const salesSubtitle = salesChart?.querySelector<HTMLElement>('.chart-subtitle')
+  if (salesSubtitle) salesSubtitle.textContent = 'Observed net sales and transaction gross profit for the selected historical period.'
+
+  const replaceCard = (currentTitle: string, title: string, subtitle: string, messages: string[]) => {
+    const currentHeading = Array.from(overview.querySelectorAll<HTMLElement>('.chart-title'))
+      .find((heading) => heading.textContent?.trim() === currentTitle)
+    const card = currentHeading?.closest<HTMLElement>('.chart-card')
+    if (!card) return
+    const header = document.createElement('div')
+    header.className = 'chart-header'
+    const heading = document.createElement('div')
+    heading.className = 'chart-title'
+    heading.textContent = title
+    const description = document.createElement('div')
+    description.className = 'chart-subtitle'
+    description.textContent = subtitle
+    const headingGroup = document.createElement('div')
+    headingGroup.append(heading, description)
+    header.appendChild(headingGroup)
+    const body = document.createElement('div')
+    body.style.display = 'grid'
+    body.style.gap = '10px'
+    messages.forEach((message) => {
+      const row = document.createElement('p')
+      row.textContent = message
+      body.appendChild(row)
+    })
+    card.replaceChildren(header, body)
+  }
+
+  replaceCard('Model Publication Status', 'Evidence and publication status',
+    'Technical availability does not imply business approval.', [
+      'Historical sales: Databricks Gold candidate data; business approval pending.',
+      'Predictive forecast: no approved trained model is published. Sales-only baseline validation is available in Forecast Modeling.',
+      'Inventory planning: reviewed scenarios only; live stock, lead time, and cost inputs are unavailable.',
+    ])
+  replaceCard('Active Decision Focus', 'Planning review',
+    'No live disease or stock-out alert is published.', [
+      'Use historical sales evidence to review product and territory patterns.',
+      'Enter and review operational assumptions before treating a planning scenario as an action.',
+    ])
+
+  const insightTitle = Array.from(root.querySelectorAll<HTMLElement>('.dss-insight-card .insight-title'))
+    .find((title) => title.textContent?.includes('Baseline Stability & Epidemic Surge Readiness'))
+  if (insightTitle) insightTitle.textContent = 'Historical sales scope'
+
+  const helpBody = root.querySelector<HTMLElement>('#helpGuidanceModal .custom-modal-body')
+  if (helpBody) {
+    helpBody.textContent = 'MedShield shows historical sales evidence from Databricks Gold candidate views. Forecast Modeling provides sales-only baseline validation. Product and area priorities use derived mappings that need owner review. Planning outputs are scenarios based on entered assumptions; MedShield does not publish live disease alerts or execute purchases.'
+  }
+}
+
 export function enhanceDashboardContent(root: HTMLElement) {
   // MedShield is intentionally light-only. Clear any legacy preference so a
   // previously stored dark theme cannot leave the user in an unsupported mode.
@@ -264,6 +331,7 @@ export function enhanceDashboardContent(root: HTMLElement) {
 
   replaceUnsupportedLabels(root)
   installDescriptivePeriodControls(root)
+  correctOverviewEvidence(root)
 
   const navigation = root.querySelector('.nav')
   if (navigation) {

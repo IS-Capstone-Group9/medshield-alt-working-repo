@@ -19,6 +19,19 @@ The browser never loads a local sales or weather snapshot. A Databricks contract
 
 ## Analytical definitions
 
+Implementation update (27 September 2026): missing months remain null; weighted
+margin uses a shared margin-eligible revenue denominator; observed YoY excludes
+gap estimates and compares common months for annual views. Product rankings use
+source labels and preserve negative net revenue, with ABC/Pareto held for scopes
+whose negative product totals make cumulative grouping unsuitable. Clinical VEN,
+surge multipliers and emergency-stock claims are not descriptive sales outputs.
+The active product view exposes source-label cohorts and observed coverage.
+
+`run_descriptive_stl.py` produces offline, checksum-bound STL components from a
+live Databricks validation receipt. It has not been published to the dashboard.
+The existing `/api/seasonality` is an observed calendar-month mean, not STL.
+Use [CURRENT_STATE.md](CURRENT_STATE.md) for evidence and remaining release gates.
+
 - **Demand:** observed delivered quantity in the source unit. Mixed packs are not equivalent units unless a canonical conversion is approved.
 - **Revenue:** Net CP (`net_cost`) candidate measure.
 - **Acquisition cost:** Total TP (`total_trade_price`) candidate measure.

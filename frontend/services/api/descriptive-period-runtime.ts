@@ -96,7 +96,8 @@ const DESCRIPTIVE_SELECTED_METRICS = `  const descriptiveRows = getDescriptiveMo
   const selectedProfit = incomeRows.reduce((sum, row) => sum + Number(row.income), 0);
   const hasAnnualValues = descriptiveRows.length > 0;
   const hasProfitValues = incomeRows.length === descriptiveRows.length && descriptiveRows.length > 0;
-  const selectedMargin = hasProfitValues ? grossMarginPercent(selectedProfit, selectedRevenue) : null;`
+  const hasMarginBasis = descriptiveRows.length > 0 && descriptiveRows.every(row => row.margin_revenue_basis != null && Number.isFinite(Number(row.margin_revenue_basis)));
+  const selectedMargin = hasProfitValues && hasMarginBasis ? grossMarginPercent(selectedProfit, descriptiveRows.reduce((sum, row) => sum + Number(row.margin_revenue_basis), 0)) : null;`
 
 const LEGACY_SET_YEAR = `function setYear(year, targetEl) {
   var yearVal = typeof year === 'string' ? year : (targetEl && targetEl.value ? targetEl.value : 'all');
@@ -231,37 +232,38 @@ function descriptiveDailySalesRows() {
   salesSectorsData.rows.forEach(row => {
     const date = String(row.date || '');
     if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return;
-    const total = totals.get(date) || { period: date, revenue: 0, income: null, evidence: 'actual' };
-    total.revenue += Number(row.revenue) || 0;
+    const total = totals.get(date) || { period: date, revenue: null, income: null, margin_revenue_basis: null, evidence: 'actual' };
+    for (const metric of ['revenue', 'income', 'margin_revenue_basis']) {
+      if (row[metric] != null && Number.isFinite(Number(row[metric]))) total[metric] = (total[metric] || 0) + Number(row[metric]);
+    }
     totals.set(date, total);
   });
   return [...totals.values()].sort((left, right) => left.period.localeCompare(right.period));
 }
 
 function descriptiveCustomMonthlyRows(startDate, endDate) {
+  const fullMonths = () => dashboardMonthlyRows().filter(row => {
+    const period = String(row.period);
+    const monthEnd = new Date(Date.UTC(Number(period.slice(0, 4)), Number(period.slice(5, 7)), 0)).toISOString().slice(0, 10);
+    // A current month snapshot is YTD as of today; historical boundary months need exact dates.
+    const currentYtd = period === descriptivePhtDate().slice(0, 7) && endDate === descriptivePhtDate();
+    return period + '-01' >= startDate && (monthEnd <= endDate || currentYtd);
+  });
   if (typeof salesSectorsData === 'undefined' || !salesSectorsData || !Array.isArray(salesSectorsData.rows)) {
-    return dashboardMonthlyRows().filter(row => String(row.period) >= startDate.slice(0, 7) && String(row.period) <= endDate.slice(0, 7));
+    return fullMonths();
   }
-  const marginByMonth = new Map(dashboardMonthlyRows().map(row => [
-    String(row.period),
-    Number(row.revenue) && Number.isFinite(Number(row.income)) ? Number(row.income) / Number(row.revenue) : null
-  ]));
   const totals = new Map();
   salesSectorsData.rows.forEach(row => {
     const date = String(row.date || '');
     if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || date < startDate || date > endDate) return;
     const period = date.slice(0, 7);
-    const total = totals.get(period) || { period, revenue: 0, income: 0, evidence: 'actual' };
-    total.revenue += Number(row.revenue) || 0;
+    const total = totals.get(period) || { period, revenue: null, income: null, margin_revenue_basis: null, evidence: 'actual' };
+    for (const metric of ['revenue', 'income', 'margin_revenue_basis']) {
+      if (row[metric] != null && Number.isFinite(Number(row[metric]))) total[metric] = (total[metric] || 0) + Number(row[metric]);
+    }
     totals.set(period, total);
   });
-  totals.forEach(total => {
-    const margin = marginByMonth.get(total.period);
-    total.income = Number.isFinite(margin) ? total.revenue * margin : null;
-  });
-  if (!totals.size) {
-    return dashboardMonthlyRows().filter(row => String(row.period) >= startDate.slice(0, 7) && String(row.period) <= endDate.slice(0, 7));
-  }
+  if (!salesSectorsData.rows.some(row => /^\d{4}-\d{2}-\d{2}$/.test(String(row.date || "")))) return fullMonths();
   return [...totals.values()].sort((left, right) => left.period.localeCompare(right.period));
 }
 
@@ -291,11 +293,15 @@ function descriptiveWeightedEstimate(period, sourceRows) {
   const text = String(period || '');
   if (!/^(\d{4})-(\d{2})(-\d{2})?$/.test(text)) return null;
   if (descriptiveIsFuturePeriod(text)) return null;
+  if (descriptivePeriod === 'custom' && text.length === 7) {
+    const monthEnd = new Date(Date.UTC(Number(text.slice(0, 4)), Number(text.slice(5, 7)), 0)).toISOString().slice(0, 10);
+    if (text + '-01' < customDateStart || monthEnd > customDateEnd) return null;
+  }
   const byPeriod = new Map(sourceRows.map(row => [String(row.period), row]));
   let candidates = [1, 2, 3].map((yearsBack, index) => ({
     row: byPeriod.get(String(Number(text.slice(0, 4)) - yearsBack) + text.slice(4)),
     weight: [0.6, 0.3, 0.1][index]
-  })).filter(candidate => candidate.row && Number.isFinite(Number(candidate.row.revenue)));
+  })).filter(candidate => candidate.row && candidate.row.revenue != null && candidate.row.evidence !== 'estimate' && Number.isFinite(Number(candidate.row.revenue)));
   if (!candidates.length && text.length === 10) {
     candidates = [1, 2, 3].flatMap((yearsBack, index) => {
       const target = String(Number(text.slice(0, 4)) - yearsBack) + text.slice(4);
@@ -308,7 +314,7 @@ function descriptiveWeightedEstimate(period, sourceRows) {
   }
   if (!candidates.length) return null;
   const totalWeight = candidates.reduce((sum, candidate) => sum + candidate.weight, 0);
-  const incomeCandidates = candidates.filter(candidate => Number.isFinite(Number(candidate.row.income)));
+  const incomeCandidates = candidates.filter(candidate => candidate.row.income != null && Number.isFinite(Number(candidate.row.income)));
   const incomeWeight = incomeCandidates.reduce((sum, candidate) => sum + candidate.weight, 0);
   return {
     period: text,
@@ -331,113 +337,34 @@ function getDescriptiveSourceRows() {
 
 function getDescriptiveDetailedRows() {
   if (typeof salesSectorsData === 'undefined' || !salesSectorsData || !Array.isArray(salesSectorsData.rows)) return [];
-  const daily = descriptiveUsesDailyGrain();
-  const key = row => String((daily && row.date) ? row.date : row.period || (row.date ? String(row.date).slice(0, 7) : ''));
-  const allRows = salesSectorsData.rows.filter(row => key(row));
-  if (descriptiveUsesYearlyGrain()) {
-    return allRows.filter(row => descriptivePeriodIncludes(String(row.date || row.period || ''))
-        && !descriptiveIsFuturePeriod(String(row.period || row.date || '')))
-      .map(row => ({ ...row, evidence: row.evidence || 'actual' }));
-  }
-  const rawRows = descriptivePeriod === 'custom'
-    ? allRows.filter(row => {
-        const date = String(row.date || '');
-        if (/^\d{4}-\d{2}-\d{2}$/.test(date)) return date >= customDateStart && date <= customDateEnd;
-        const period = String(row.period || '');
-        return /^\d{4}-\d{2}$/.test(period)
-          && period >= customDateStart.slice(0, 7) && period <= customDateEnd.slice(0, 7);
-      })
-    : allRows;
-  const rowsByPeriod = new Map();
-  allRows.forEach(row => {
-    const period = key(row);
-    if (!rowsByPeriod.has(period)) rowsByPeriod.set(period, []);
-    rowsByPeriod.get(period).push(row);
-  });
-  const observedByPeriod = new Map();
-  rawRows.forEach(row => {
-    const period = key(row);
-    if (!observedByPeriod.has(period)) observedByPeriod.set(period, []);
-    observedByPeriod.get(period).push(row);
-  });
-  const result = [];
-  descriptiveAxisPeriods().forEach(period => {
-    const observed = observedByPeriod.get(period);
-    if (observed && observed.length) {
-      observed.forEach(row => result.push({ ...row, evidence: row.evidence || 'actual' }));
-      return;
+  return salesSectorsData.rows.filter(row => {
+    const date = String(row.date || '');
+    if (descriptiveUsesDailyGrain() && !/^\d{4}-\d{2}-\d{2}$/.test(date)) return false;
+    if (descriptivePeriod === 'custom' && !date) {
+      const period = String(row.period || '');
+      if (!/^\d{4}-\d{2}$/.test(period)) return false;
+      const end = new Date(Date.UTC(Number(period.slice(0,4)), Number(period.slice(5,7)), 0)).toISOString().slice(0,10);
+      if (period + '-01' < customDateStart || end > customDateEnd) return false;
     }
-    if (daily) {
-      const monthObserved = observedByPeriod.get(period.slice(0, 7));
-      if (monthObserved && monthObserved.length) {
-        const monthDays = new Date(Number(period.slice(0, 4)), Number(period.slice(5, 7)), 0).getDate() || 30;
-        monthObserved.forEach(row => result.push({
-          ...row,
-          period: period.slice(0, 7),
-          date: period,
-          revenue: (Number(row.revenue) || 0) / monthDays,
-          quantity: (Number(row.quantity) || 0) / monthDays,
-          row_count: (Number(row.row_count) || 0) / monthDays,
-          evidence: row.evidence || 'actual'
-        }));
-        return;
-      }
-    }
-    if (descriptiveIsFuturePeriod(period)) return;
-    let candidateYears = [1, 2, 3].map((yearsBack, index) => ({
-      period: String(Number(period.slice(0, 4)) - yearsBack) + period.slice(4),
-      weight: [0.6, 0.3, 0.1][index]
-    })).filter(candidate => rowsByPeriod.has(candidate.period));
-    if (!candidateYears.length && daily) {
-      candidateYears = [1, 2, 3].flatMap((yearsBack, index) => {
-        const target = String(Number(period.slice(0, 4)) - yearsBack) + period.slice(4);
-        const nearest = [...rowsByPeriod.keys()]
-          .map(sourcePeriod => ({ period: sourcePeriod, distance: descriptiveDayDistance(sourcePeriod, target) }))
-          .filter(candidate => candidate.distance <= 7)
-          .sort((left, right) => left.distance - right.distance)[0];
-        return nearest ? [{ period: nearest.period, weight: [0.6, 0.3, 0.1][index] / (1 + nearest.distance) }] : [];
-      });
-    }
-    const totalWeight = candidateYears.reduce((sum, candidate) => sum + candidate.weight, 0);
-    candidateYears.forEach(candidate => {
-      rowsByPeriod.get(candidate.period).forEach(row => result.push({
-        ...row,
-        period: daily ? String(period).slice(0, 7) : period,
-        ...(daily ? { date: period } : {}),
-        revenue: (Number(row.revenue) || 0) * candidate.weight / totalWeight,
-        quantity: (Number(row.quantity) || 0) * candidate.weight / totalWeight,
-        row_count: (Number(row.row_count) || 0) * candidate.weight / totalWeight,
-        evidence: 'estimate',
-        estimate_method: 'recency_weighted_same_calendar_period',
-        source_period: candidate.period
-      }));
-    });
-  });
-  return result;
+    return descriptivePeriodIncludes(date || row.period) && !descriptiveIsFuturePeriod(date || row.period);
+  }).map(row => ({ ...row, evidence: row.evidence || 'actual' }));
 }
 
 function getDescriptiveAreaRows() {
   const totals = new Map();
-  getDescriptiveDetailedRows().forEach(row => {
+  getDescriptiveDetailedRows().filter(row => row.evidence !== 'estimate').forEach(row => {
     const area = String(row.area || row.territory || 'Unknown');
-    const total = totals.get(area) || { area, revenue: 0, income: 0, estimated: false };
-    total.revenue += Number(row.revenue) || 0;
-    total.estimated = total.estimated || row.evidence === 'estimate';
+    const total = totals.get(area) || { area, revenue: null, income: null, margin_revenue_basis: null, estimated: false };
+    for (const metric of ['revenue', 'income', 'margin_revenue_basis']) {
+      if (row[metric] != null && Number.isFinite(Number(row[metric]))) total[metric] = (total[metric] || 0) + Number(row[metric]);
+    }
     totals.set(area, total);
   });
-  const baseline = new Map((DATA.by_area || []).map(row => [String(row.area), row]));
-  totals.forEach(total => {
-    const reference = baseline.get(total.area);
-    const margin = reference && Number(reference.revenue) !== 0
-      ? Number(reference.income) / Number(reference.revenue)
-      : null;
-    total.income = margin === null || !Number.isFinite(margin) ? null : total.revenue * margin;
-  });
-  return [...totals.values()].sort((left, right) => right.revenue - left.revenue);
+  return [...totals.values()].sort((left, right) => (right.revenue || 0) - (left.revenue || 0));
 }
 
 function getDescriptiveMonthlyRows() {
-  return getDescriptiveSourceRows().filter(row => descriptivePeriodIncludes(row.period));
+  return getDescriptiveSourceRows().filter(row => descriptivePeriodIncludes(row.period) && row.revenue != null && row.evidence !== 'estimate' && !row.missing);
 }
 
 function descriptiveAxisPeriods() {
@@ -456,7 +383,7 @@ function descriptiveAxisPeriods() {
       return Array.from({ length: lastYear - firstYear + 1 }, (_, index) => String(firstYear + index));
     }
     const years = new Set();
-    dashboardMonthlyRows().forEach(row => {
+    dashboardRawMonthlyRows().forEach(row => {
       const year = String(row.period || '').slice(0, 4);
       if (/^\d{4}$/.test(year) && !descriptiveIsFuturePeriod(year)) years.add(Number(year));
     });
@@ -476,7 +403,7 @@ function descriptiveAxisPeriods() {
     return periods;
   }
   if (descriptivePeriod === 'all') {
-    const observed = dashboardMonthlyRows()
+    const observed = dashboardRawMonthlyRows()
       .map(row => String(row.period || ''))
       .filter(period => /^\d{4}-\d{2}$/.test(period) && !descriptiveIsFuturePeriod(period))
       .sort();
@@ -498,7 +425,7 @@ function getDescriptiveDisplayRows() {
     const totals = new Map();
     sourceRows.forEach(row => {
       const period = String(row.period || '');
-      if (!/^\d{4}-\d{2}$/.test(period) || descriptiveIsFuturePeriod(period)) return;
+      if (!/^\d{4}-\d{2}$/.test(period) || descriptiveIsFuturePeriod(period) || !descriptivePeriodIncludes(period) || row.revenue == null || row.evidence === 'estimate' || row.missing) return;
       const year = period.slice(0, 4);
       const total = totals.get(year) || { period: year, revenue: 0, income: 0, incomeComplete: true, observedMonths: new Set(), evidence: 'actual' };
       total.revenue += Number(row.revenue) || 0;
@@ -686,14 +613,29 @@ export function patchDescriptivePeriodFilters(script: string): string {
     .replace(
       "  const periodNote = document.querySelector('[data-sales-metric-period]');",
       `  const overviewRevenue = document.getElementById('kpiOverviewTotalRevenue');
-  if (overviewRevenue) overviewRevenue.textContent = hasAnnualValues ? formatCurrency(selectedRevenue) : 'Unavailable';
+  const overviewEvidenceRows = getDescriptiveDisplayRows();
+  const overviewActualRows = overviewEvidenceRows.filter(row => row.evidence === 'actual' && row.revenue != null);
+  const overviewEstimateRows = overviewEvidenceRows.filter(row => row.evidence === 'estimate' && row.revenue != null);
+  const overviewActualRevenue = overviewActualRows.reduce((sum, row) => sum + Number(row.revenue), 0);
+  const overviewEstimatedRevenue = overviewEstimateRows.reduce((sum, row) => sum + Number(row.revenue), 0);
+  if (overviewRevenue) overviewRevenue.textContent = overviewActualRows.length ? formatCurrency(overviewActualRevenue) : 'No observations';
   const overviewRevenueCard = overviewRevenue ? overviewRevenue.closest('.kpi-card') : null;
   const overviewRevenueLabel = overviewRevenueCard ? overviewRevenueCard.querySelector('.kpi-label') : null;
-  if (overviewRevenueLabel) overviewRevenueLabel.textContent = 'Net Sales Revenue · ' + descriptivePeriodLabel();
+  if (overviewRevenueLabel) overviewRevenueLabel.textContent = 'Observed Net Sales · ' + descriptivePeriodLabel();
+  let overviewBreakdown = document.getElementById('overviewRevenueEvidence');
+  if (!overviewBreakdown && overviewRevenue) {
+    overviewBreakdown = document.createElement('div');
+    overviewBreakdown.id = 'overviewRevenueEvidence';
+    overviewBreakdown.style.cssText = 'font-size:12px;line-height:1.6;margin:8px 0;overflow-wrap:anywhere';
+    overviewRevenue.insertAdjacentElement('afterend', overviewBreakdown);
+  }
+  if (overviewBreakdown) overviewBreakdown.textContent = overviewEstimateRows.length
+    ? 'Gap estimate: ' + formatCurrency(overviewEstimatedRevenue) + ' · Combined: ' + formatCurrency(overviewActualRevenue + overviewEstimatedRevenue) + ' (actual + estimate)'
+    : 'Observed sales only; no gap estimates included';
   const overviewGrowthTag = document.getElementById('kpiOverviewGrowthTag');
   if (overviewGrowthTag) overviewGrowthTag.textContent = descriptiveUsesDailyGrain() && !hasAnnualValues
     ? 'Daily transaction data unavailable'
-    : 'Period-filtered historical view';
+    : 'Observed sales only';
   const periodNote = document.querySelector('[data-sales-metric-period]');`,
     )
     .replace("if (periodNote) periodNote.textContent = 'Selected years: ' + yearRowsForMode.map(row => row.year).join(', ') + (yearRowsForMode.some(row => row.missing) ? ' · Missing annual values excluded from totals' : '');", "if (periodNote) periodNote.textContent = 'Selected period: ' + descriptivePeriodLabel() + (descriptiveRows.length ? '' : ' · No observations available');")
@@ -707,7 +649,7 @@ export function patchDescriptivePeriodFilters(script: string): string {
     .replaceAll('DATA.by_area.map((row) => row.revenue)', 'descriptiveAreaRows.map((row) => row.revenue)')
     .replaceAll(
       '(DATA.by_area.length ? DATA.by_area : MOCK_BY_AREA)',
-      '(descriptiveAreaRows.length ? descriptiveAreaRows : (DATA.by_area.length ? DATA.by_area : MOCK_BY_AREA))',
+      'descriptiveAreaRows',
     )
   return patched
 }

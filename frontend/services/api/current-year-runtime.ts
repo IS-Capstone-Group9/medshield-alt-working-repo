@@ -12,10 +12,13 @@ function dashboardRawMonthlyRows() {
   (DATA.monthly || []).forEach(row => {
     const period = String(row.period || '');
     if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(period)) return;
-    if (!Number.isFinite(Number(row.revenue)) || !Number.isFinite(Number(row.income))) return;
-    const current = totals.get(period) || { period, revenue: 0, income: 0, evidence: 'actual' };
+    if (row.revenue == null || row.missing || !Number.isFinite(Number(row.revenue))) return;
+    const current = totals.get(period) || { period, revenue: 0, income: 0, margin_revenue_basis: 0, evidence: 'actual' };
     current.revenue += Number(row.revenue);
-    current.income += Number(row.income);
+    current.income = current.income == null || row.income == null || !Number.isFinite(Number(row.income))
+      ? null : current.income + Number(row.income);
+    current.margin_revenue_basis = current.margin_revenue_basis == null || row.margin_revenue_basis == null
+      ? null : current.margin_revenue_basis + Number(row.margin_revenue_basis);
     totals.set(period, current);
   });
   return [...totals.values()].sort((left, right) => left.period.localeCompare(right.period));
@@ -41,7 +44,8 @@ function dashboardMonthlyRows() {
     byPeriod.set(period, {
       period,
       revenue: candidates.reduce((sum, candidate) => sum + Number(candidate.row.revenue) * candidate.weight, 0) / totalWeight,
-      income: candidates.reduce((sum, candidate) => sum + Number(candidate.row.income) * candidate.weight, 0) / totalWeight,
+      income: candidates.every(candidate => candidate.row.income != null)
+        ? candidates.reduce((sum, candidate) => sum + Number(candidate.row.income) * candidate.weight, 0) / totalWeight : null,
       evidence: 'estimate',
       estimate_method: 'recency_weighted_same_month',
       source_periods: candidates.map(candidate => candidate.row.period)
@@ -72,6 +76,6 @@ function dashboardAnnualRows() {
 
 function diagnosticMarginRows() {
   return getDescriptiveMonthlyRows()
-    .map(row => ({ year: descriptivePointLabel(row.period), revenue: row.revenue, income: row.income }));
+    .map(row => ({ year: descriptivePointLabel(row.period), revenue: row.margin_revenue_basis, income: row.income }));
 }
 `

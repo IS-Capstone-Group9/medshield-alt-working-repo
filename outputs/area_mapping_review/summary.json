@@ -1,5 +1,5 @@
 {
-  "mapping_sha256": "268785d6ffddab4254c32abb79a56cba3ccf005b6c955d6013dcd7a316826f7f",
+  "mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
   "source_manifest": [
     {
       "file": "medshield_data_2017.csv",
@@ -39,7 +39,7 @@
     }
   ],
   "observed_labels": 32,
-  "master_labels": 34,
+  "master_labels": 35,
   "unmatched_labels": [],
   "retained_records": 37178,
   "approved_territory_records": 14008,

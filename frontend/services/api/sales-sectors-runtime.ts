@@ -7282,11 +7282,8 @@ const CANONICAL_TERRITORY_REGION = {
 };
 
 function resolveRowRegion(row) {
- if (row && row.region && row.region !== 'Unknown') return row.region;
- const t = String((row && row.territory) || '').trim().toLowerCase();
- if (CANONICAL_TERRITORY_REGION[t]) return CANONICAL_TERRITORY_REGION[t];
- if (row && (row.sector === 'Government' || row.sector === 'Internal')) return 'Other National';
- return 'Unknown';
+ // Geography comes from the governed warehouse mapping, never buyer ownership.
+ return row && row.region ? row.region : 'Unknown';
 }
 
 function selectRollupRegion(regionName) {
@@ -7408,6 +7405,7 @@ function setAreaPriorityWeights(salesWeight, coverageWeight) {
 function setSalesSectorsData(data, error) {
  salesSectorsData = data && Array.isArray(data.rows) && data.source ? {...data,rows:data.rows.filter(r=>historicalPeriod(r.period))} : null;
  renderSalesSectors(error);
+ if(typeof renderProductPrioritizationTimeline==='function')renderProductPrioritizationTimeline();
  if(descriptiveUsesDailyGrain() && typeof buildCharts==='function')buildCharts();
 }
 

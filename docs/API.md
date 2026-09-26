@@ -1,5 +1,27 @@
 # API Gateway
 
+## Descriptive remediation contract
+
+`GET /api/sales/sectors` now returns actual `date`, source `area`, eligible
+`income`, `margin_revenue_basis`, `positive_sales`, signed `returns_value`,
+source-adjustment provenance, and proposed buyer/warehouse geography status.
+It does not split Mindoro or manufacture daily observations. Aggregate net revenue
+is conserved; a null amount is not an observed zero.
+
+`GET /api/seasonality/stl` requires authentication. It returns version-matched Gold
+STL components and parameters, or HTTP 503 `STL_UNAVAILABLE`. Missing STL does not
+remove financial reporting and never triggers a local-file fallback.
+
+Fact-based gateway reads are pinned per process. `data_status.release` and source
+metadata identify the fact Delta version and dataset/policy/mapping hashes. Use
+`DATABRICKS_DESCRIPTIVE_FACT_VERSION` plus a controlled restart for an explicit
+candidate version; approved release activation remains unfinished.
+
+Product ABC uses positive eligible sales with signed returns shown separately;
+`abc_policy_status=CANDIDATE_PENDING_CEO_APPROVAL` is mandatory until that policy
+is accepted. This is source-label financial analysis, not medical SKU validation.
+
+
 The canonical gateway is the Express and TypeScript service in `backend/`. All dashboard routes require `Authorization: Bearer <token>` except `GET /api/health` and the authentication entry points.
 
 ## Source contract
@@ -33,6 +55,21 @@ Supabase Auth is the production identity provider. A local-session mode exists f
 
 ## Core dashboard
 
+Descriptive contract changes (27 September 2026): monthly `revenue` and `income`
+may be null. Rows also expose `transaction_count`, `has_sales_activity`,
+`missing`, and nullable `margin_revenue_basis`. A calendar slot without a
+transaction is not proof of zero sales. The summary's `avg_margin` and ledger
+`gross_margin_rate` divide eligible gross profit by revenue from the same
+margin-eligible population. Do not recompute these rates from independently
+eligible revenue and profit totals. Rates are percentage points, not fractions.
+
+Product ABC uses the full product revenue population before the top-15 limit,
+with cumulative thresholds 80%/95%. Negative product totals or an unsuitable
+denominator return `Unclassified`; source labels are not verified medical SKUs.
+`/api/seasonality` returns observed calendar-month mean revenue with
+`observed_month_count` and `method: observed_calendar_month_average_not_stl`.
+It excludes absent months from the mean and is not STL decomposition.
+
 - `GET /api/dashboard_status`
 - `GET /api/summary`
 - `GET /api/monthly?year=2025`
@@ -52,6 +89,8 @@ Supabase Auth is the production identity provider. A local-session mode exists f
 - `GET /api/model_evaluation`
 
 Arrays whose approved Databricks outputs do not exist remain empty. The gateway does not fabricate model results.
+
+For `/api/monthly`, omitting `year` returns all monthly history. A supplied value must be one four-digit year between 1000 and 9999; surrounding whitespace is trimmed. Empty, partial, malformed, repeated, or structured values return `400` with an `error` message before loading analytical data. Filtering matches the complete year followed by `-` in the monthly period. Future years are accepted; a valid year with no data returns `200 []`. Authentication is required before input validation.
 
 ## Sales and decision support
 

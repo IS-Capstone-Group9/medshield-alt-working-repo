@@ -7,12 +7,12 @@ export const FORECAST_VALIDATION_MARKUP = String.raw`
 [data-forecast-validation] select, [data-forecast-validation] input[type="text"] { display: block; width: 100%; max-width: 240px; box-sizing: border-box; padding: 7px 10px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg-card,#fff); color: var(--text-primary); font-size: 12px; margin-top: 4px; }
 [data-forecast-validation] p { line-height: 1.6; margin: 10px 0; word-break: break-word; }
 [data-forecast-validation] .forecast-hero-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 16px 0; }
-[data-forecast-validation] .forecast-hero-card { padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-elevated,#f8fafc); }
+[data-forecast-validation] .forecast-hero-card { padding: 14px 16px; border: 1px solid var(--border); border-radius: 8px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04); }
 [data-forecast-validation] .forecast-hero-card .hero-label { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
 [data-forecast-validation] .forecast-hero-card .hero-val { font-size: 20px; font-weight: 800; color: var(--text-primary); margin: 4px 0 2px 0; }
 [data-forecast-validation] .forecast-hero-card .hero-sub { font-size: 11px; color: var(--text-secondary); }
 [data-forecast-validation] .decomp-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 16px 0; }
-[data-forecast-validation] .decomp-card { background: var(--bg-elevated,#f8fafc); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; }
+[data-forecast-validation] .decomp-card { background: #FFFFFF; border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04); }
 [data-forecast-validation] .decomp-title { font-size: 12px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
 [data-forecast-validation] .decomp-val { font-size: 16px; font-weight: 800; color: var(--accent,#0ea5e9); margin-bottom: 2px; }
 [data-forecast-validation] .decomp-desc { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
@@ -112,7 +112,7 @@ export const FORECAST_VALIDATION_MARKUP = String.raw`
   </div>
 
   <!-- Interactive Prophet Fan Chart Canvas -->
-  <div style="height:380px;position:relative;">
+  <div class="chart-wrap forecast-chart-wrap chart-hero" style="position:relative;">
     <canvas id="forecastChart" aria-label="Actual sales, retrospective holdout predictions and future Prophet baseline forecast with confidence ribbons"></canvas>
   </div>
   <p id="forecastBandNote" style="font-size:11px;color:var(--text-muted);margin-top:8px;"></p>

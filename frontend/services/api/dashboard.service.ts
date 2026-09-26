@@ -20,13 +20,14 @@ function finiteNumber(value: unknown): boolean {
 }
 
 function hasValidMonthlyData(rows: MonthlyPoint[]): boolean {
-  return Array.isArray(rows) && rows.length >= 12 && rows.every(
-    (row) => row.period && finiteNumber(row.revenue) && finiteNumber(row.income)
+  return Array.isArray(rows) && rows.length > 0 && rows.some(row => finiteNumber(row.revenue)) && rows.every(
+    (row) => /^\d{4}-(0[1-9]|1[0-2])$/.test(row.period)
+      && (row.revenue === null || finiteNumber(row.revenue)) && (row.income === null || finiteNumber(row.income))
   )
 }
 
 function hasValidYearSummaryData(rows: YearPoint[]): boolean {
-  return Array.isArray(rows) && rows.length >= 3 && rows.every(
+  return Array.isArray(rows) && rows.length > 0 && rows.every(
     (row) => row.year && finiteNumber(row.revenue) && finiteNumber(row.income)
   )
 }
@@ -44,8 +45,8 @@ function hasValidProductData(rows: ProductPoint[]): boolean {
 }
 
 function hasValidSeasonalityData(rows: SeasonalityPoint[]): boolean {
-  return Array.isArray(rows) && rows.length >= 12 && rows.every(
-    (row) => row.month && finiteNumber(row.avg_revenue)
+  return Array.isArray(rows) && rows.length > 0 && rows.every(
+    (row) => row.month && (row.avg_revenue === null || finiteNumber(row.avg_revenue))
   )
 }
 

@@ -1,0 +1,87 @@
+{
+  "checked_at": "2026-09-26T17:06:40.908Z",
+  "mode": "read-only",
+  "sql": "SELECT rule, COUNT(*) AS affected_rows\n    FROM workspace.medshield_gold.sales_restart_fact_candidate\n    LATERAL VIEW explode(quality_rule_codes) codes AS rule\n    GROUP BY rule ORDER BY affected_rows DESC",
+  "columns": [
+    "rule",
+    "affected_rows"
+  ],
+  "rows": [
+    {
+      "rule": "DISCOUNT_DASH_INTERPRETED_AS_ZERO",
+      "affected_rows": "25080"
+    },
+    {
+      "rule": "MARGIN_PCT_DERIVED",
+      "affected_rows": "17423"
+    },
+    {
+      "rule": "2017_LOW_TRUST_SOURCE",
+      "affected_rows": "1978"
+    },
+    {
+      "rule": "NET_SALES_DERIVED_2017",
+      "affected_rows": "1886"
+    },
+    {
+      "rule": "SOURCE_YEAR_MISMATCH",
+      "affected_rows": "1835"
+    },
+    {
+      "rule": "HISTORICAL_BACKFILL_CANDIDATE",
+      "affected_rows": "1835"
+    },
+    {
+      "rule": "TRANSFER_VALUE_FORMULA_MISMATCH",
+      "affected_rows": "1792"
+    },
+    {
+      "rule": "GROSS_VALUE_FORMULA_MISMATCH",
+      "affected_rows": "1424"
+    },
+    {
+      "rule": "MISSING_NET_SALES",
+      "affected_rows": "880"
+    },
+    {
+      "rule": "MISSING_GROSS_SALES",
+      "affected_rows": "838"
+    },
+    {
+      "rule": "INVALID_NUMERIC_MARGIN_PCT",
+      "affected_rows": "732"
+    },
+    {
+      "rule": "NEGATIVE_QUANTITY",
+      "affected_rows": "673"
+    },
+    {
+      "rule": "NEGATIVE_NET_SALES",
+      "affected_rows": "432"
+    },
+    {
+      "rule": "EXCEL_SERIAL_DELIVERY_DATE_PARSED",
+      "affected_rows": "197"
+    },
+    {
+      "rule": "2017_QUANTITY_CANDIDATES_DISAGREE",
+      "affected_rows": "150"
+    },
+    {
+      "rule": "MISSING_GROSS_MARGIN",
+      "affected_rows": "137"
+    },
+    {
+      "rule": "ZERO_QUANTITY",
+      "affected_rows": "17"
+    },
+    {
+      "rule": "INVALID_OR_MISSING_QUANTITY",
+      "affected_rows": "11"
+    },
+    {
+      "rule": "MISSING_DR_NUMBER",
+      "affected_rows": "6"
+    }
+  ]
+}

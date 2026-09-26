@@ -1,16 +1,10 @@
 import { test, expect } from '@playwright/test';
+import { signInToReadyDashboard } from './helpers/dashboard'
 
 test.describe('Mapped Client Reference Directory E2E Suite', () => {
-  test.setTimeout(60000);
+  test.setTimeout(150000);
   test.beforeEach(async ({ page }) => {
-    await page.goto('/login');
-    await page.waitForLoadState('networkidle');
-    await page.fill('#username', process.env.MEDSHIELD_E2E_USERNAME || 'admin');
-    await page.fill('#password', process.env.MEDSHIELD_E2E_PASSWORD || 'Medshield!2025');
-    await page.getByRole('button', { name: 'Login', exact: true }).click();
-    await page.waitForURL('**/', { timeout: 20000 });
-    await page.waitForLoadState('networkidle');
-    await page.waitForSelector('#topbar-title', { state: 'attached', timeout: 30000 });
+    await signInToReadyDashboard(page)
   });
 
   test('Client Reference Registry renders in Area Prioritization with search, filtering, and pagination', async ({ page }) => {

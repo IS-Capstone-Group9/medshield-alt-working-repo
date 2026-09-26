@@ -1,4 +1,5 @@
 import { test, expect, type Page } from '@playwright/test';
+import { signInToReadyDashboard } from './helpers/dashboard'
 
 async function expectChartRendered(page: Page, canvasId: string) {
   await expect.poll(async () => page.evaluate((id) => {
@@ -22,7 +23,7 @@ async function expectOnlyPageActive(page: Page, pageId: string) {
 }
 
 test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
-  test.setTimeout(90000);
+  test.setTimeout(150000);
   test.beforeEach(async ({ page }) => {
     const runtimeErrors: string[] = []
     page.on('pageerror', (error) => runtimeErrors.push(error.message))
@@ -32,19 +33,7 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
       }
     })
 
-    // 1. Navigate to Login
-    await page.goto('/login');
-    await page.waitForLoadState('networkidle');
-
-    // 2. Perform authenticated sign in
-    await page.fill('#username', process.env.MEDSHIELD_E2E_USERNAME || 'admin');
-    await page.fill('#password', process.env.MEDSHIELD_E2E_PASSWORD || 'Medshield!2025');
-    await page.getByRole('button', { name: 'Login', exact: true }).click();
-
-    // 3. Wait for dashboard redirection and sandbox initialization
-    await page.waitForURL('**/', { timeout: 20000 });
-    await page.waitForLoadState('networkidle');
-    await page.waitForSelector('#topbar-title', { timeout: 60000 });
+    await signInToReadyDashboard(page)
     expect(runtimeErrors, 'dashboard runtime must compile and initialize without errors').toEqual([])
   });
 
@@ -63,7 +52,7 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     await expectChartRendered(page, 'overviewBaselineChart');
 
     // Verify Data Governance Integrity Bar
-    await expect(page.locator('.data-freshness-bar')).toContainText(/Databricks Gold|Analytics Services|Bundled Demo Snapshot/, { timeout: 20000 });
+    await expect(page.locator('.data-freshness-bar')).toContainText('Databricks Gold', { timeout: 20000 });
   });
 
   test('2. Navigation Matrix: Transitions seamlessly across all 7 DSS Modules', async ({ page }) => {

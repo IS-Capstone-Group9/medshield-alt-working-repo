@@ -14,6 +14,9 @@ import {
   loadDatabricksDashboardSnapshot,
 } from '../src/databricksDashboard'
 
+const NON_PRODUCT_PREDICATE = `(is_contract_label = TRUE OR UPPER(TRIM(normalized_product)) RLIKE
+  '^(PAGBILAO|QMC|PPDC|TOURISM|PROVINCIAL[[:space:]]+TOURISM[[:space:]]+OFFICE|MARINDUQUE|GULANG[[:space:]]+GULANG|PESO|PESO[[:space:]]+PROVINCIAL|PHO|ABOITIZ|PADRE[[:space:]]+BURGOS|PPOC)([[:space:]]*#|[[:space:]]+[0-9])|^DR[[:space:]]*#|^PR[[:space:]]+[0-9]')`
+
 async function main() {
   const [snapshot, status, summary, transactions, heatmap, sectors, forecast, regression, planning, weather, nasaWeather, eligibility] =
     await Promise.all([
@@ -29,14 +32,14 @@ async function main() {
       getDatabricksWeatherEffects({ grain: 'monthly' }),
       getDatabricksWeatherEffects({ grain: 'monthly', provider: 'nasa_power', year: '2025' }),
       executeDatabricksStatement(`SELECT
-        COUNT(*) AS accepted_rows,
-        SUM(CASE WHEN is_net_sales_eligible THEN 1 ELSE 0 END) AS net_sales_eligible,
-        SUM(CASE WHEN is_gross_margin_eligible THEN 1 ELSE 0 END) AS gross_margin_eligible,
-        SUM(CASE WHEN is_quantity_observation_eligible THEN 1 ELSE 0 END) AS quantity_eligible
+        COUNT(*) AS analysis_rows,
+        SUM(CASE WHEN ${NON_PRODUCT_PREDICATE} THEN 1 ELSE 0 END) AS excluded_non_product_rows,
+        SUM(CASE WHEN NOT ${NON_PRODUCT_PREDICATE} THEN 1 ELSE 0 END) AS accepted_rows,
+        SUM(CASE WHEN is_net_sales_eligible AND NOT ${NON_PRODUCT_PREDICATE} THEN 1 ELSE 0 END) AS net_sales_eligible,
+        SUM(CASE WHEN is_gross_margin_eligible AND NOT ${NON_PRODUCT_PREDICATE} THEN 1 ELSE 0 END) AS gross_margin_eligible,
+        SUM(CASE WHEN is_quantity_observation_eligible AND NOT ${NON_PRODUCT_PREDICATE} THEN 1 ELSE 0 END) AS quantity_eligible
         FROM workspace.medshield_gold.sales_restart_fact_candidate
-        WHERE is_analysis_candidate = TRUE
-          AND NOT (is_contract_label = TRUE OR UPPER(TRIM(normalized_product)) RLIKE
-            '^(PAGBILAO|QMC|PPDC|TOURISM|PROVINCIAL[[:space:]]+TOURISM[[:space:]]+OFFICE|MARINDUQUE|GULANG[[:space:]]+GULANG|PESO|PESO[[:space:]]+PROVINCIAL|PHO|ABOITIZ|PADRE[[:space:]]+BURGOS|PPOC)([[:space:]]*#|[[:space:]]+[0-9])|^DR[[:space:]]*#|^PR[[:space:]]+[0-9]')`, { rowLimit: 5 }),
+        WHERE is_analysis_candidate = TRUE`, { rowLimit: 5 }),
     ])
 
   const quality = status.quality_summary
@@ -45,11 +48,16 @@ async function main() {
 
   assert.equal(snapshot.data_status.source, 'databricks', 'snapshot source')
   assert.equal(snapshot.data_status.mode, 'live', 'snapshot mode')
-  assert.equal(snapshot.monthly.length, 108, 'monthly contract rows')
-  assert.equal(snapshot.year_summary.length, 9, 'yearly contract rows')
+  assert.equal(snapshot.monthly.length, 108, 'monthly aggregate rows')
+  assert.equal(snapshot.year_summary.length, 9, 'yearly aggregate rows')
   assert.equal(snapshot.top_products.length, 15, 'top product rows')
   assert.equal(quality.duplicate_rows, 0, 'duplicate fact rows')
-  assert.equal(quality.rows_extracted - quality.rows_accepted, 127, 'non-product source rows excluded from analytics')
+  assert.equal(Number(eligible.analysis_rows ?? 0), quality.rows_extracted, 'validation/fact analysis population')
+  assert.equal(
+    quality.rows_extracted - quality.rows_accepted,
+    Number(eligible.excluded_non_product_rows ?? 0),
+    'non-product source rows excluded from analytics',
+  )
   assert.equal(Object.keys(quality.years).length, 9, 'fact year count')
   assert.equal(summary.counts.rows, quality.rows_accepted, 'summary/fact accepted population')
   assert.equal(snapshot.totals.total_transactions, quality.rows_accepted, 'dashboard/fact transaction population')
@@ -91,6 +99,7 @@ async function main() {
       valid_rows: quality.valid_rows,
       warning_rows: quality.rows_with_warnings,
       duplicate_rows: quality.duplicate_rows,
+      excluded_non_product_rows: Number(eligible.excluded_non_product_rows ?? 0),
       net_sales_eligible_rows: Number(eligible.net_sales_eligible ?? 0),
       gross_margin_eligible_rows: Number(eligible.gross_margin_eligible ?? 0),
       quantity_eligible_rows: Number(eligible.quantity_eligible ?? 0),

@@ -22,10 +22,10 @@ test('Section 1: real chart datasets, KPI rates, labels and refresh use the same
     app.showPage('revenue')
     app.applyDatasetPatch({
       year_summary: [{ year: '2025', revenue: 1000, income: 140, transactions: 2 }],
-      monthly: [{ period: '2025-01', revenue: 1000, income: 140 }],
+      monthly: [{ period: '2025-01', revenue: 1000, income: 140, margin_revenue_basis: 700 }],
     })
   })
-  await expect(page.locator('#salesGrossMargin')).toHaveText('14.00%')
+  await expect(page.locator('#salesGrossMargin')).toHaveText('20.00%')
   const chart = await page.evaluate(() => {
     const app = window as any
     const margin = app.Chart.getChart(document.getElementById('marginChart'))
@@ -33,7 +33,7 @@ test('Section 1: real chart datasets, KPI rates, labels and refresh use the same
     return { values: margin.data.datasets[0].data, labels: baseline.data.datasets.map((d: any) => d.label) }
   })
   expect(chart.values).toHaveLength(1)
-  expect(chart.values[0]).toBeCloseTo(14)
+  expect(chart.values[0]).toBeCloseTo(20)
   expect(chart.labels).toEqual([
     'Net Sales Revenue · Jan 1, 2025 – Dec 31, 2025',
     'Gross Profit · Jan 1, 2025 – Dec 31, 2025',
@@ -43,7 +43,7 @@ test('Section 1: real chart datasets, KPI rates, labels and refresh use the same
   await page.screenshot({ path: 'test-results/section-1-sales-diagnostics.png', fullPage: true })
   await page.evaluate(() => (window as any).applyDatasetPatch({
     year_summary: [{ year: '2025', revenue: 0, income: 20, transactions: 1 }],
-    monthly: [{ period: '2025-01', revenue: 0, income: 20 }],
+    monthly: [{ period: '2025-01', revenue: 0, income: 20, margin_revenue_basis: 0 }],
   }))
   await expect(page.locator('#salesGrossMargin')).toHaveText('Unavailable')
   expect(await page.evaluate(() => (window as any).Chart.getChart(document.getElementById('marginChart')).data.datasets[0].data)).toEqual([null])
@@ -57,10 +57,11 @@ test('Section 1: filtered sales summary shows weighted rates and reconciliation 
       new Function(`${renderer} renderSalesComputation(document.body, {
         sums: { net_cost: 1000, net_income: 140 },
         averages: { margin_pct: 0.30 }, counts: {}, top: {},
+        gross_margin_rate: 20,
         financial_reconciliation: { delta: 5, checked_rows: 2, mismatched_rows: 1 }
       }, '${mode}');`)()
     }, { renderer, mode })
-    await expect(page.locator('#salesComputationGrid')).toContainText('14.00%')
+    await expect(page.locator('#salesComputationGrid')).toContainText('20.00%')
     await expect(page.locator('#salesComputationGrid')).not.toContainText('30.00%')
     await expect(page.locator('#salesFinancialReconciliation')).toContainText('1 of 2 accepted rows')
   }

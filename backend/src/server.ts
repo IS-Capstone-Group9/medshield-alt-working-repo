@@ -20,6 +20,7 @@ import {
   getDatabricksForecastValidation,
   getDatabricksPlanningShortlist,
   getDatabricksSalesHeatmap,
+  getDatabricksStl,
   getDatabricksSalesSectors,
   getDatabricksSalesStatus,
   getDatabricksSalesSummary,
@@ -39,6 +40,7 @@ import {
 } from './nasaPowerWeather'
 import { createSession, revokeSessionToken, SessionUser, verifySessionToken } from './sessionAuth'
 import { loadSnapshot } from './snapshot'
+import { filterMonthlyYear, parseMonthlyYear } from './monthlyQuery'
 import {
   completeRequiredPasswordReset,
   getLinkedAccount,
@@ -537,12 +539,12 @@ app.get('/api/dashboard_status', requireAuth, async (_req: Request, res: Respons
 })
 
 app.get('/api/monthly', requireAuth, async (req: Request, res: Response) => {
+  const year = parseMonthlyYear(req.query.year)
+  if (year === null) {
+    return res.status(400).json({ error: 'year must be a single four-digit year between 1000 and 9999' })
+  }
   return withDashboardSnapshot(res, (snapshot) => {
-    const year = String(req.query.year ?? '').trim()
-    const rows = year
-      ? snapshot.monthly.filter((row) => String(row.period ?? '').startsWith(year))
-      : snapshot.monthly
-    return res.json(rows)
+    return res.json(filterMonthlyYear(snapshot.monthly, year))
   })
 })
 
@@ -561,6 +563,11 @@ app.get('/api/products', requireAuth, async (req: Request, res: Response) => {
 
 app.get('/api/year_summary', requireAuth, async (_req: Request, res: Response) => {
   return withDashboardSnapshot(res, (snapshot) => res.json(snapshot.year_summary))
+})
+
+app.get('/api/seasonality/stl', requireAuth, async (_req: Request, res: Response) => {
+  try { return res.json(await getDatabricksStl()) }
+  catch { return res.status(503).json({ code: 'STL_UNAVAILABLE', error: 'Validated STL is unavailable for the active dataset. Calendar-month averages remain a separate descriptive measure.' }) }
 })
 
 app.get('/api/seasonality', requireAuth, async (_req: Request, res: Response) => {

@@ -19,9 +19,11 @@ export function renderSalesComputation(root: HTMLElement, summary: SalesSummary,
   const percent = (val: number | null | undefined) => val == null ? 'Unavailable' : formatSalesValue(val, 'percent')
   const revenue = summary.sums.net_cost
   const profit = summary.sums.net_income
-  const margin = revenue !== undefined && profit !== undefined && Number.isFinite(revenue) && Number.isFinite(profit) && revenue !== 0
-    ? profit / revenue
-    : null
+  const margin = 'gross_margin_rate' in summary
+    ? (summary.gross_margin_rate == null ? null : summary.gross_margin_rate / 100)
+    : revenue !== undefined && profit !== undefined && Number.isFinite(revenue) && Number.isFinite(profit) && revenue > 0
+      ? profit / revenue
+      : null
   
   const cards =
     mode === 'sum'

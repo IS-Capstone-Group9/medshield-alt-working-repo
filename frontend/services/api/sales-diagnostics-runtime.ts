@@ -143,29 +143,32 @@ function diagnosticAxis(values, title, color, position, grid) {
 }
 
 function renderSalesDiagnostics(opts) {
+  const definitions = document.querySelector('[data-metric-definitions]');
+  const marginDefinition = definitions && [...definitions.querySelectorAll('p')].find(p => p.textContent.startsWith('Gross margin %'));
+  if (marginDefinition) marginDefinition.textContent = 'Gross margin % = gross profit ÷ net sales for the same margin-eligible transactions × 100; transaction percentages are not averaged. A missing or nonpositive denominator means unavailable. Revenue-only rows are excluded from this rate.';
   const selectedRows = getDescriptiveDisplayRows();
   const priorDisplayRows = getDescriptivePriorDisplayRows();
   const yearly = descriptiveUsesYearlyGrain();
   const priorPeriod = period => descriptiveUsesDailyGrain()
     ? String(Number(period.slice(0, 4)) - 1) + period.slice(4)
     : yearly ? String(Number(period) - 1) : String(Number(period.slice(0, 4)) - 1) + period.slice(4, 7);
-  const revenue = selectedRows.map(row => row.revenue == null ? null : row.revenue);
-  const profit = selectedRows.map(row => row.income == null ? null : row.income);
+  const revenue = selectedRows.map(row => row.evidence === 'estimate' || row.revenue == null ? null : row.revenue);
+  const profit = selectedRows.map(row => row.evidence === 'estimate' || row.income == null ? null : row.income);
   const detailLabels = selectedRows.map(row => descriptivePointLabel(row.period));
   const detailPeriods = selectedRows.map(row => String(row.period));
   const observedMonths = new Map(selectedRows
     .filter(row => row.revenue != null || row.income != null)
     .map(row => [String(row.period), { revenue: row.revenue, income: row.income }]));
-  const predictedRevenue = diagnosticPredictions(detailPeriods, observedMonths, 'revenue');
-  const predictedProfit = diagnosticPredictions(detailPeriods, observedMonths, 'income');
+  const predictedRevenue = selectedRows.map(row => row.evidence === 'estimate' ? row.revenue : null);
+  const predictedProfit = selectedRows.map(row => row.evidence === 'estimate' ? row.income : null);
   const predictedCount = predictedRevenue.filter(value => value != null).length;
   const dailyUnavailable = descriptiveUsesDailyGrain() && selectedRows.every(row => row.revenue == null);
   const detailDatasets = [
     { label: 'Net Sales Revenue · ' + descriptivePeriodLabel(), data: revenue, yAxisID: 'revenue', borderColor: getColor(), backgroundColor: getColor(.08), borderWidth: 2.5, pointRadius: descriptiveUsesDailyGrain() ? 1.5 : 3, tension: .25, fill: false, spanGaps: false },
     { label: 'Gross Profit · ' + descriptivePeriodLabel(), data: profit, yAxisID: 'grossProfit', borderColor: getAmber(), backgroundColor: getAmber(.08), borderWidth: 2.2, pointRadius: descriptiveUsesDailyGrain() ? 1.5 : 3, tension: .25, fill: false, spanGaps: false }
   ];
-  detailDatasets.push({ label: 'Predicted Net Sales Revenue', data: predictedRevenue, yAxisID: 'revenue', borderColor: 'rgba(124,58,237,0.9)', backgroundColor: 'rgba(124,58,237,0.9)', borderWidth: 2, borderDash: [6, 4], pointStyle: 'triangle', pointRadius: 4, tension: 0, fill: false, spanGaps: false });
-  if (!descriptiveUsesDailyGrain()) detailDatasets.push({ label: 'Predicted Gross Profit', data: predictedProfit, yAxisID: 'grossProfit', borderColor: 'rgba(219,39,119,0.9)', backgroundColor: 'rgba(219,39,119,0.9)', borderWidth: 2, borderDash: [6, 4], pointStyle: 'triangle', pointRadius: 4, tension: 0, fill: false, spanGaps: false });
+  detailDatasets.push({ label: 'Gap estimate · Net Sales Revenue', data: predictedRevenue, yAxisID: 'revenue', borderColor: 'rgba(124,58,237,0.9)', backgroundColor: 'rgba(124,58,237,0.9)', borderWidth: 2, borderDash: [6, 4], pointStyle: 'triangle', pointRadius: 4, tension: 0, fill: false, spanGaps: false });
+  if (!descriptiveUsesDailyGrain()) detailDatasets.push({ label: 'Gap estimate · Gross Profit', data: predictedProfit, yAxisID: 'grossProfit', borderColor: 'rgba(219,39,119,0.9)', backgroundColor: 'rgba(219,39,119,0.9)', borderWidth: 2, borderDash: [6, 4], pointStyle: 'triangle', pointRadius: 4, tension: 0, fill: false, spanGaps: false });
   if (comparisonMode === 'yoy') {
     detailDatasets.push(
       { label: 'Prior-year Net Sales Revenue', data: priorDisplayRows.map(row => row.revenue), yAxisID: 'revenue', borderColor: getColor(.5), backgroundColor: 'transparent', borderDash: [7, 5], borderWidth: 2, pointRadius: descriptiveUsesDailyGrain() ? 1 : 2, tension: .25, fill: false, spanGaps: false },
@@ -189,7 +192,8 @@ function renderSalesDiagnostics(opts) {
     : (yearly
       ? 'Annual revenue and gross profit for ' + descriptivePeriodLabel() + '; totals use only observed source months and incomplete latest years are identified.'
       : (descriptiveUsesDailyGrain() ? 'Daily' : 'Monthly') + ' revenue and gross profit for ' + descriptivePeriodLabel() + '; gaps mean unavailable observations, not zero sales.')
-      + (predictedCount ? ' Dashed triangles are interpolated predictions and are excluded from totals.' : '');
+      + (predictedCount ? ' Dashed triangles are weighted gap estimates and are excluded from observed totals and YoY.' : '');
+  if (subtitle && descriptivePeriod === 'custom' && !descriptiveUsesDailyGrain()) subtitle.textContent += ' Historical partial months require dated transactions; whole-month totals are not assigned to partial dates.';
   createChart('revenueDetailChart', {
     type: 'line',
     data: { labels: detailLabels, datasets: detailDatasets },
@@ -204,12 +208,28 @@ function renderSalesDiagnostics(opts) {
 
   const rows = selectedRows.map((row, index) => {
     const previousPeriod = priorPeriod(String(row.period));
+    if (yearly) {
+      const actual = new Map(dashboardRawMonthlyRows().map(month => [month.period, month]));
+      let current = 0, previous = 0, matchedMonths = 0;
+      for (let month = 1; month <= 12; month++) {
+        const suffix = '-' + String(month).padStart(2, '0');
+        if (!descriptivePeriodIncludes(String(row.period) + suffix)) continue;
+        const currentRow = actual.get(String(row.period) + suffix), priorRow = actual.get(previousPeriod + suffix);
+        if (!currentRow || !priorRow) continue;
+        current += Number(currentRow.revenue); previous += Number(priorRow.revenue); matchedMonths++;
+      }
+      const delta = matchedMonths ? current - previous : null;
+      return { label: descriptivePointLabel(row.period) + ' · ' + matchedMonths + '/12 months matched', period: String(row.period), previousPeriod,
+        current: matchedMonths ? current : null, previous: matchedMonths ? previous : null,
+        delta, rate: delta != null && previous > 0 ? delta / previous * 100 : null };
+    }
     const previous = priorDisplayRows[index];
-    const hasCurrent = row.revenue != null && Number.isFinite(Number(row.revenue));
-    const delta = hasCurrent && previous ? Number(row.revenue) - Number(previous.revenue) : null;
+    const hasCurrent = row.evidence !== 'estimate' && row.revenue != null && Number.isFinite(Number(row.revenue));
+    const hasPrevious = previous && previous.evidence !== 'estimate' && previous.revenue != null && Number.isFinite(Number(previous.revenue));
+    const delta = hasCurrent && hasPrevious ? Number(row.revenue) - Number(previous.revenue) : null;
     return {
       label: descriptivePointLabel(row.period), period: String(row.period), previousPeriod,
-      current: hasCurrent ? Number(row.revenue) : null, previous: previous ? Number(previous.revenue) : null,
+      current: hasCurrent ? Number(row.revenue) : null, previous: hasPrevious ? Number(previous.revenue) : null,
       delta, rate: delta !== null && Number(previous.revenue) > 0 ? delta / Number(previous.revenue) * 100 : null
     };
   });
@@ -220,7 +240,7 @@ function renderSalesDiagnostics(opts) {
   const totalRate = totalDelta !== null && previousTotal > 0 ? totalDelta / previousTotal * 100 : null;
   const summary = document.getElementById('salesGrowthSummary');
   if (summary) summary.textContent = matched.length
-    ? descriptivePeriodLabel() + ' versus the same calendar periods one year earlier: ' + diagnosticCurrency(previousTotal) + ' → ' + diagnosticCurrency(currentTotal) + '; change ' + diagnosticCurrency(totalDelta) + ' (' + diagnosticRate(totalRate) + '). ' + matched.length + '/' + rows.length + ' periods matched.'
+    ? descriptivePeriodLabel() + ' versus the same calendar periods one year earlier: ' + diagnosticCurrency(previousTotal) + ' → ' + diagnosticCurrency(currentTotal) + '; change ' + diagnosticCurrency(totalDelta) + ' (' + diagnosticRate(totalRate) + '). ' + matched.length + '/' + rows.length + ' periods matched.' + (yearly ? ' Annual comparisons include only months observed in both years; see each year’s matched coverage.' : '')
     : 'No same-period prior-year observations are available for ' + descriptivePeriodLabel() + '.';
   createChart('growthChart', {
     type: 'bar',

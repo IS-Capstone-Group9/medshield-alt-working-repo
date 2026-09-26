@@ -1,5 +1,4 @@
 import { Card } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 
 export function StatusSplit() {
   return (
@@ -7,22 +6,19 @@ export function StatusSplit() {
       <Card>
         <div className="chart-header">
           <div>
-            <div className="chart-title">Model Publication Status</div>
-            <div className="chart-subtitle">Calibration status of current DSS layer models</div>
+            <div className="chart-title">Evidence and publication status</div>
+            <div className="chart-subtitle">Technical availability does not imply business approval.</div>
           </div>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid var(--border)' }}>
-            <span style={{ fontSize: '12px', fontWeight: 600 }}>Descriptive Analytics Model</span>
-            <Badge status="ready" />
+            <span style={{ fontSize: '12px', fontWeight: 600 }}>Historical sales: Databricks Gold candidate data; business approval pending.</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid var(--border)' }}>
-            <span style={{ fontSize: '12px', fontWeight: 600 }}>Predictive Time-Series Model (Prophet)</span>
-            <Badge status="draft" />
+            <span style={{ fontSize: '12px', fontWeight: 600 }}>Predictive forecast: no approved trained model is published. Sales-only baseline validation is available in Forecast Modeling.</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 0' }}>
-            <span style={{ fontSize: '12px', fontWeight: 600 }}>Prescriptive Buffer Model (EOQ/ROP)</span>
-            <Badge status="ready" />
+            <span style={{ fontSize: '12px', fontWeight: 600 }}>Inventory planning: reviewed scenarios only; live stock, lead time, and cost inputs are unavailable.</span>
           </div>
         </div>
       </Card>
@@ -30,17 +26,13 @@ export function StatusSplit() {
       <Card>
         <div className="chart-header">
           <div>
-            <div className="chart-title">Active Decision Focus</div>
-            <div className="chart-subtitle">High-priority compliance and stock-out alerts</div>
+            <div className="chart-title">Planning review</div>
+            <div className="chart-subtitle">No live disease or stock-out alert is published.</div>
           </div>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <div style={{ fontSize: '11px', padding: '8px 12px', borderRadius: '6px', background: '#fef2f2', border: '1px solid #fca5a5', color: '#b91c1c', fontWeight: 600 }}>
-            CRITICAL: Stock-out threat on Systemic Antipyretics (Non-NSAID) during monsoon peak.
-          </div>
-          <div style={{ fontSize: '11px', padding: '8px 12px', borderRadius: '6px', background: '#fffbeb', border: '1px solid #fcd34d', color: '#b45309', fontWeight: 600 }}>
-            SCENARIO: Assumed Level 3 disease surge in Quezon. Validate authoritative alerts and current stock before review.
-          </div>
+          <p>Use historical sales evidence to review product and territory patterns.</p>
+          <p>Enter and review operational assumptions before treating a planning scenario as an action.</p>
         </div>
       </Card>
     </div>

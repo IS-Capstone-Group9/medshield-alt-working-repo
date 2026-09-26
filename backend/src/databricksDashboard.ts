@@ -1,13 +1,12 @@
 import { createHash } from 'node:crypto'
 import { executeDatabricksStatement } from './databricks'
+import { revenueAbc, weightedMargin } from './descriptiveMetrics'
 
 const GOLD = '`workspace`.`medshield_gold`'
 const FACT = `${GOLD}.\`sales_restart_fact_candidate\``
 const EXTERNAL = `${GOLD}.\`vw_dss_external_signals_candidate\``
 const NASA_WEATHER = `${GOLD}.\`vw_weather_nasa_power_monthly_candidate\``
 const SOURCE_NAME = 'workspace.medshield_gold.sales_restart_fact_candidate'
-const HISTORY_START = '2017-01'
-const HISTORY_END = '2025-12'
 // One analytical population for every user-facing query. Source rows that are
 // retained only as non-product evidence stay queryable in Gold, but never enter
 // dashboard totals, product lists, forecasts, or downstream model inputs. The
@@ -132,7 +131,31 @@ export class DatabricksSourceUnavailableError extends Error {
   }
 }
 
+type DescriptiveRelease = { fact_delta_version: number; dataset_id: string; policy_version: string; area_mapping_sha256: string; product_master_sha256: string; publication_status: string }
+let releasePromise: Promise<DescriptiveRelease> | undefined
+let activeRelease: DescriptiveRelease | undefined
+
+/** Pin every descriptive fact read for this gateway process; activation requires a restart. */
+export function descriptiveRelease(): Promise<DescriptiveRelease> {
+  if (!releasePromise) releasePromise = (async () => {
+    const configured = process.env.DATABRICKS_DESCRIPTIVE_FACT_VERSION
+    if (configured !== undefined && !/^(0|[1-9][0-9]*)$/.test(configured)) throw new Error('Invalid descriptive fact version')
+    const history = configured === undefined ? (await executeDatabricksStatement(`DESCRIBE HISTORY ${FACT} LIMIT 1`, {rowLimit: 1})).rows : []
+    const version = Number(configured ?? history[0]?.version)
+    if (!Number.isSafeInteger(version) || version < 0) throw new Error('No valid descriptive Delta version')
+    const identity = (await executeDatabricksStatement(`SELECT DISTINCT dataset_id, policy_version, area_mapping_sha256, product_master_sha256, publication_status FROM ${FACT} VERSION AS OF ${version}`, {rowLimit: 2})).rows
+    if (identity.length !== 1 || Object.values(identity[0]).some(v => !v)) throw new Error('Ambiguous descriptive release identity')
+    activeRelease = { ...identity[0], fact_delta_version: version } as DescriptiveRelease
+    return activeRelease
+  })().catch(error => { releasePromise = undefined; throw error })
+  return releasePromise
+}
+
 async function query(statement: string, rowLimit = 1000): Promise<Row[]> {
+  if (statement.includes(FACT)) {
+    const release = await descriptiveRelease()
+    statement = statement.replaceAll(FACT, `${FACT} VERSION AS OF ${release.fact_delta_version}`)
+  }
   const cacheKey = `${rowLimit}:${statement}`
   const cached = queryCache.get(cacheKey)
   if (cached && cached.expiresAt > Date.now()) return cached.rows
@@ -164,6 +187,7 @@ function databricksSource(rows: unknown, extra: Record<string, unknown> = {}) {
     checksum: checksum(rows),
     generated_at: new Date().toISOString(),
     system_of_record: 'databricks',
+    release: activeRelease,
     ...extra,
   }
 }
@@ -179,18 +203,21 @@ export async function loadDatabricksDashboardSnapshot() {
       SUM(CASE WHEN is_quantity_observation_eligible THEN quantity END) AS total_quantity_candidate,
       SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) AS net_sales_candidate,
       SUM(CASE WHEN is_gross_margin_eligible THEN gross_margin_amount END) AS gross_margin_candidate,
+      SUM(CASE WHEN is_gross_margin_eligible THEN net_sales END) AS margin_revenue_basis,
       CASE WHEN SUM(CASE WHEN is_gross_margin_eligible THEN net_sales END) <> 0
         THEN ROUND(100 * SUM(CASE WHEN is_gross_margin_eligible THEN gross_margin_amount END)
           / SUM(CASE WHEN is_gross_margin_eligible THEN net_sales END), 4) END AS weighted_gross_margin_pct_candidate,
-      'CANDIDATE_PENDING_FINANCE_APPROVAL' AS financial_definition_status
+      'DEFINITIONS_APPROVED_DATASET_RELEASE_PENDING' AS financial_definition_status
       FROM ${FACT} WHERE ${OBSERVED_FACT}
-      GROUP BY calendar_year ORDER BY calendar_year`, 20),
+      GROUP BY calendar_year ORDER BY calendar_year`, 200),
     query(`WITH month_spine AS (
-        SELECT EXPLODE(SEQUENCE(TO_DATE('2017-01-01'), TO_DATE('2025-12-01'), INTERVAL 1 MONTH)) AS month_start
+        SELECT EXPLODE(SEQUENCE(MAKE_DATE(MIN(calendar_year), 1, 1), MAKE_DATE(MAX(calendar_year), 12, 1), INTERVAL 1 MONTH)) AS month_start
+        FROM ${FACT} WHERE ${OBSERVED_FACT}
       ), monthly_fact AS (
         SELECT month_start, COUNT(*) AS transaction_count,
           SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) AS net_sales_candidate,
-          SUM(CASE WHEN is_gross_margin_eligible THEN gross_margin_amount END) AS gross_margin_candidate
+          SUM(CASE WHEN is_gross_margin_eligible THEN gross_margin_amount END) AS gross_margin_candidate,
+          SUM(CASE WHEN is_gross_margin_eligible THEN net_sales END) AS margin_revenue_basis
         FROM ${FACT} WHERE ${OBSERVED_FACT} GROUP BY month_start
       )
       SELECT DATE_FORMAT(s.month_start, 'yyyy-MM') AS year_month,
@@ -198,10 +225,11 @@ export async function loadDatabricksDashboardSnapshot() {
         DATE_FORMAT(s.month_start, 'MMM') AS month_short_name,
         COALESCE(m.transaction_count, 0) > 0 AS has_sales_activity,
         COALESCE(m.transaction_count, 0) AS transaction_count,
-        COALESCE(m.net_sales_candidate, 0) AS net_sales_candidate,
-        COALESCE(m.gross_margin_candidate, 0) AS gross_margin_candidate
+        m.net_sales_candidate,
+        m.gross_margin_candidate,
+        m.margin_revenue_basis
       FROM month_spine AS s LEFT JOIN monthly_fact AS m USING (month_start)
-      ORDER BY s.month_start`, 150),
+      ORDER BY s.month_start`, 2400),
     query(`SELECT CASE WHEN normalized_area = 'LOWER CAVITE' THEN 'CAVITE' ELSE normalized_area END AS area_name,
       COUNT(*) AS transaction_count,
       SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) AS revenue,
@@ -209,29 +237,33 @@ export async function loadDatabricksDashboardSnapshot() {
       FROM ${FACT} WHERE ${OBSERVED_FACT}
       GROUP BY CASE WHEN normalized_area = 'LOWER CAVITE' THEN 'CAVITE' ELSE normalized_area END
       ORDER BY revenue DESC`, 100),
-    query(`SELECT normalized_product AS product_name, COUNT(*) AS transaction_count,
+    query(`WITH product_totals AS (SELECT normalized_product AS product_name, COUNT(*) AS transaction_count,
       SUM(CASE WHEN is_quantity_observation_eligible THEN quantity END) AS qty,
       SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) AS revenue,
-      SUM(CASE WHEN is_gross_margin_eligible THEN gross_margin_amount END) AS income,
-      SUM(SUM(CASE WHEN is_net_sales_eligible THEN net_sales END)) OVER () AS product_revenue_total
+      SUM(CASE WHEN is_net_sales_eligible AND net_sales > 0 THEN net_sales ELSE 0 END) AS positive_sales,
+      SUM(CASE WHEN is_net_sales_eligible AND net_sales < 0 THEN net_sales ELSE 0 END) AS returns_value,
+      SUM(CASE WHEN is_gross_margin_eligible THEN gross_margin_amount END) AS income
       FROM ${FACT}
       WHERE ${OBSERVED_FACT}
         AND product_scope_status <> 'CONTRACT_LABEL_CANDIDATE'
         AND UPPER(normalized_product) NOT LIKE 'DR#%'
         AND UPPER(normalized_product) NOT LIKE 'DR #%TERMS%'
         AND UPPER(normalized_product) NOT RLIKE '^PR [0-9]'
-      GROUP BY normalized_product ORDER BY revenue DESC LIMIT 15`, 20),
-    query(`WITH month_spine AS (
-        SELECT EXPLODE(SEQUENCE(TO_DATE('2017-01-01'), TO_DATE('2025-12-01'), INTERVAL 1 MONTH)) AS month_start
-      ), monthly_fact AS (
+      GROUP BY normalized_product)
+      SELECT *, SUM(positive_sales) OVER () AS product_revenue_total,
+        SUM(CASE WHEN revenue < 0 THEN 1 ELSE 0 END) OVER () AS negative_product_count,
+        SUM(positive_sales) OVER (ORDER BY positive_sales DESC, product_name ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS cumulative_revenue
+      FROM product_totals ORDER BY positive_sales DESC, product_name LIMIT 100`, 100),
+    query(`WITH monthly_fact AS (
         SELECT month_start, SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) AS net_sales_candidate
         FROM ${FACT} WHERE ${OBSERVED_FACT} GROUP BY month_start
       )
-      SELECT MONTH(s.month_start) AS month_number,
-        MAX(DATE_FORMAT(s.month_start, 'MMM')) AS month,
-        AVG(COALESCE(m.net_sales_candidate, 0)) AS avg_revenue
-      FROM month_spine AS s LEFT JOIN monthly_fact AS m USING (month_start)
-      GROUP BY MONTH(s.month_start) ORDER BY month_number`, 20),
+      SELECT MONTH(month_start) AS month_number,
+        MAX(DATE_FORMAT(month_start, 'MMM')) AS month,
+        AVG(net_sales_candidate) AS avg_revenue,
+        COUNT(net_sales_candidate) AS observed_month_count
+      FROM monthly_fact
+      GROUP BY MONTH(month_start) ORDER BY month_number`, 20),
     query(`SELECT period, territory,
       AVG(CASE WHEN signal_family = 'DISEASE' THEN signal_value END) AS disease_intensity_index,
       AVG(CASE WHEN signal_family = 'WEATHER' THEN signal_value END) AS rainfall_severity_index
@@ -240,14 +272,15 @@ export async function loadDatabricksDashboardSnapshot() {
       GROUP BY period, territory ORDER BY period, territory`, 5000),
   ])
 
-  if (yearly.length !== 9 || monthly.length !== 108) {
+  if (!yearly.length || !monthly.length) {
     throw new DatabricksSourceUnavailableError(
-      `Databricks Gold contract expected 9 yearly and 108 monthly rows; received ${yearly.length} and ${monthly.length}`,
+      `Databricks Gold returned no usable yearly/monthly history: ${yearly.length} and ${monthly.length} rows`,
     )
   }
 
   const totalRevenue = yearly.reduce((sum, row) => sum + numberValue(row.net_sales_candidate), 0)
   const totalIncome = yearly.reduce((sum, row) => sum + numberValue(row.gross_margin_candidate), 0)
+  const marginRevenueBasis = yearly.reduce((sum, row) => sum + numberValue(row.margin_revenue_basis), 0)
   const totalTransactions = yearly.reduce((sum, row) => sum + numberValue(row.transaction_count), 0)
 
   const byArea = areas.map((row) => ({
@@ -255,14 +288,19 @@ export async function loadDatabricksDashboardSnapshot() {
     revenue: numberValue(row.revenue),
     income: numberValue(row.income),
   }))
-  const topProducts = products.map((row, index) => ({
+  const topProducts = products.map((row) => ({
     product: row.product_name ?? 'Unspecified',
     revenue: numberValue(row.revenue),
     income: numberValue(row.income),
     qty: numberValue(row.qty),
-    abc: index < 3 ? 'A' : index < 8 ? 'B' : 'C',
+    abc: numberValue(row.positive_sales) > 0 ? revenueAbc(nullableNumber(row.cumulative_revenue), nullableNumber(row.product_revenue_total), 0) : 'Unclassified',
+    positive_sales: numberValue(row.positive_sales),
+    returns_value: numberValue(row.returns_value),
+    abc_basis: 'positive_eligible_sales_full_population',
+    abc_policy_status: 'CANDIDATE_PENDING_CEO_APPROVAL',
+    product_identity_status: 'source_label_not_verified_sku',
     pct_of_total: numberValue(row.product_revenue_total)
-      ? numberValue(row.revenue) / numberValue(row.product_revenue_total) * 100
+      ? numberValue(row.positive_sales) / numberValue(row.product_revenue_total) * 100
       : 0,
   }))
   return {
@@ -274,17 +312,23 @@ export async function loadDatabricksDashboardSnapshot() {
       catalog: 'workspace',
       schema: 'medshield_gold',
       candidate_only: true,
+      release: activeRelease,
     },
     totals: {
       total_revenue: totalRevenue,
       total_income: totalIncome,
       total_transactions: totalTransactions,
-      avg_margin: totalRevenue ? totalIncome / totalRevenue * 100 : 0,
+      avg_margin: weightedMargin(totalIncome, marginRevenueBasis),
+      margin_revenue_basis: marginRevenueBasis,
     },
     monthly: monthly.map((row) => ({
       period: row.year_month,
-      revenue: numberValue(row.net_sales_candidate),
-      income: numberValue(row.gross_margin_candidate),
+      revenue: nullableNumber(row.net_sales_candidate),
+      income: nullableNumber(row.gross_margin_candidate),
+      margin_revenue_basis: nullableNumber(row.margin_revenue_basis),
+      transaction_count: numberValue(row.transaction_count),
+      has_sales_activity: String(row.has_sales_activity).toLowerCase() === 'true',
+      missing: nullableNumber(row.net_sales_candidate) == null,
     })),
     by_area: byArea,
     top_products: topProducts,
@@ -293,10 +337,13 @@ export async function loadDatabricksDashboardSnapshot() {
       revenue: numberValue(row.net_sales_candidate),
       income: numberValue(row.gross_margin_candidate),
       transactions: numberValue(row.transaction_count),
+      margin_revenue_basis: nullableNumber(row.margin_revenue_basis),
     })),
     seasonality: seasonality.map((row) => ({
       month: row.month,
-      avg_revenue: numberValue(row.avg_revenue),
+      avg_revenue: nullableNumber(row.avg_revenue),
+      observed_month_count: numberValue(row.observed_month_count),
+      method: 'observed_calendar_month_average_not_stl',
     })),
     forecasts: [],
     external_signals: external.map((row) => ({
@@ -483,9 +530,9 @@ export async function getDatabricksSalesSummary(input: {
       AVG(CASE WHEN is_quantity_observation_eligible THEN quantity END) AS avg_quantity,
       AVG(CASE WHEN is_gross_sales_eligible THEN unit_selling_price END) AS avg_unit_cost,
       AVG(CASE WHEN is_gross_margin_eligible THEN gross_margin_amount END) AS avg_net_income,
-      CASE WHEN SUM(CASE WHEN is_net_sales_eligible THEN COALESCE(net_sales, 0) ELSE 0 END) <> 0
+      CASE WHEN SUM(CASE WHEN is_gross_margin_eligible THEN net_sales END) > 0
         THEN 100 * SUM(CASE WHEN is_gross_margin_eligible THEN COALESCE(gross_margin_amount, 0) ELSE 0 END)
-          / SUM(CASE WHEN is_net_sales_eligible THEN COALESCE(net_sales, 0) ELSE 0 END) END AS gross_margin_rate,
+          / SUM(CASE WHEN is_gross_margin_eligible THEN net_sales END) END AS gross_margin_rate,
       SUM(CASE WHEN is_net_sales_eligible AND is_acquisition_cost_eligible AND is_gross_margin_eligible
         AND ABS(COALESCE(net_sales, 0) - COALESCE(total_acquisition_cost, 0) - COALESCE(gross_margin_amount, 0)) > 0.01
         THEN 1 ELSE 0 END) AS mismatched_rows,
@@ -581,27 +628,22 @@ export async function getDatabricksSalesHeatmap() {
 export async function getDatabricksSalesSectors() {
   const rows = await query(`SELECT normalized_product AS product,
     DATE_FORMAT(month_start, 'yyyy-MM') AS period,
+    CAST(date_delivered AS STRING) AS date,
+    normalized_area AS area,
+    area_mapping_status AS geography_mapping_status,
+    area_evidence_status AS geography_evidence_status,
+    CASE WHEN is_geographic_territory_approved THEN mapped_region ELSE 'Unknown' END AS region,
+    source_data_status,
+    source_adjustment_policy,
+    'proposed' AS buyer_mapping_status,
     CASE
       WHEN UPPER(TRIM(normalized_area)) IN ('GOVERNMENT', 'PAGBILAO') THEN 'Government'
       WHEN UPPER(TRIM(normalized_area)) IN ('ADMIN', 'SUPPLIES', 'SUPPLLIES', 'EQUIPMENT', 'SUPPLIES AND EQUIPMENT', 'PERSONAL', 'LOSSES') THEN 'Internal'
       WHEN proposed_area_type = 'territory' OR UPPER(TRIM(normalized_area)) IN ('CAVITE', 'LOWER CAVITE', 'BATANGAS', 'QUEZON', 'LAGUNA', 'MARINDUQUE', 'CAMARINES NORTE', 'CAM NORTE', 'CAMARINES SUR', 'CAM SUR', 'ALBAY', 'LEGASPI', 'LAGASPI', 'BICOL', 'MINDORO', 'HOSPITAL', 'HOPITAL', 'PHARMA', 'LUCENA', 'RAKKK', 'EAST', 'EASTERN', 'EASTERN QUEZON') THEN 'Private'
       ELSE 'Unknown'
     END AS sector,
-    CASE
-      WHEN UPPER(TRIM(normalized_area)) = 'GOVERNMENT' THEN 'National Hub (DOH Central)'
-      WHEN UPPER(TRIM(normalized_area)) IN ('ADMIN', 'SUPPLIES', 'SUPPLLIES', 'EQUIPMENT', 'SUPPLIES AND EQUIPMENT', 'PERSONAL', 'LOSSES') THEN 'MedShield HQ'
-      WHEN UPPER(TRIM(normalized_area)) IN ('CAVITE', 'LOWER CAVITE') OR UPPER(TRIM(COALESCE(territory, ''))) IN ('LOWER CAVITE', 'CAVITE') THEN 'Cavite'
-      WHEN UPPER(TRIM(normalized_area)) IN ('BATANGAS') OR UPPER(TRIM(COALESCE(territory, ''))) = 'BATANGAS' THEN 'Batangas'
-      WHEN UPPER(TRIM(normalized_area)) IN ('QUEZON', 'PAGBILAO', 'HOSPITAL', 'HOPITAL', 'PHARMA', 'LUCENA', 'RAKKK', 'EAST', 'EASTERN', 'EASTERN QUEZON') OR UPPER(TRIM(COALESCE(territory, ''))) = 'QUEZON' THEN 'Quezon'
-      WHEN UPPER(TRIM(normalized_area)) IN ('LAGUNA') OR UPPER(TRIM(COALESCE(territory, ''))) = 'LAGUNA' THEN 'Laguna'
-      WHEN UPPER(TRIM(normalized_area)) IN ('MARINDUQUE') OR UPPER(TRIM(COALESCE(territory, ''))) = 'MARINDUQUE' THEN 'Marinduque'
-      WHEN UPPER(TRIM(normalized_area)) IN ('CAM NORTE', 'CAMARINES NORTE') OR UPPER(TRIM(COALESCE(territory, ''))) IN ('CAM NORTE', 'CAMARINES NORTE') THEN 'Camarines Norte'
-      WHEN UPPER(TRIM(normalized_area)) IN ('CAM SUR', 'CAMARINES SUR', 'BICOL') OR UPPER(TRIM(COALESCE(territory, ''))) IN ('CAM SUR', 'CAMARINES SUR', 'BICOL') THEN 'Camarines Sur'
-      WHEN UPPER(TRIM(normalized_area)) IN ('ALBAY', 'LEGASPI', 'LAGASPI') OR UPPER(TRIM(COALESCE(territory, ''))) IN ('ALBAY', 'LEGASPI', 'LAGASPI') THEN 'Albay'
-      WHEN UPPER(TRIM(normalized_area)) IN ('MINDORO') OR UPPER(TRIM(COALESCE(territory, ''))) = 'MINDORO' THEN 'Mindoro'
-      WHEN proposed_area_type = 'territory' THEN INITCAP(COALESCE(territory, normalized_area))
-      ELSE 'Unassigned geography'
-    END AS territory,
+    CASE WHEN is_geographic_territory_approved THEN COALESCE(mapped_province, territory, normalized_area)
+      ELSE 'Unassigned geography' END AS territory,
     CASE
       WHEN UPPER(TRIM(normalized_area)) = 'GOVERNMENT' THEN 'Government Bidding'
       WHEN UPPER(TRIM(normalized_area)) = 'PAGBILAO' THEN 'LGU'
@@ -616,122 +658,40 @@ export async function getDatabricksSalesSectors() {
       ELSE 'Unclassified channel'
     END AS channel,
     CASE
-      WHEN UPPER(TRIM(normalized_area)) = 'PAGBILAO' THEN 'Approved buyer mapping: Exact reference-backed LGU mapping from docs/MAPPED_CLIENT_REFERENCE.md record CLI-0340.'
-      WHEN UPPER(TRIM(normalized_area)) = 'GOVERNMENT' THEN 'Approved buyer mapping: National Government & DOH Central public bidding from docs/MAPPED_CLIENT_REFERENCE.md record CLI-0002.'
-      WHEN UPPER(TRIM(normalized_area)) IN ('ADMIN', 'SUPPLIES', 'SUPPLLIES', 'EQUIPMENT', 'SUPPLIES AND EQUIPMENT', 'PERSONAL', 'LOSSES') THEN 'Approved buyer mapping: MedShield internal corporate administration from docs/MAPPED_CLIENT_REFERENCE.md record CLI-0001.'
-      WHEN proposed_area_type = 'territory' OR UPPER(TRIM(normalized_area)) IN ('CAVITE', 'LOWER CAVITE', 'BATANGAS', 'QUEZON', 'LAGUNA', 'MARINDUQUE', 'CAMARINES NORTE', 'CAM NORTE', 'CAMARINES SUR', 'CAM SUR', 'ALBAY', 'LEGASPI', 'LAGASPI', 'BICOL', 'MINDORO', 'HOSPITAL', 'HOPITAL', 'PHARMA', 'LUCENA', 'RAKKK', 'EAST', 'EASTERN', 'EASTERN QUEZON') THEN 'Approved buyer mapping: Provincial, private-care, pharmacy, or individual-account label from docs/MAPPED_CLIENT_REFERENCE.md'
+      WHEN UPPER(TRIM(normalized_area)) = 'PAGBILAO' THEN 'Proposed buyer mapping (CEO review pending): Exact reference-backed LGU mapping from docs/MAPPED_CLIENT_REFERENCE.md record CLI-0340.'
+      WHEN UPPER(TRIM(normalized_area)) = 'GOVERNMENT' THEN 'Proposed buyer mapping (CEO review pending): National Government & DOH Central public bidding from docs/MAPPED_CLIENT_REFERENCE.md record CLI-0002.'
+      WHEN UPPER(TRIM(normalized_area)) IN ('ADMIN', 'SUPPLIES', 'SUPPLLIES', 'EQUIPMENT', 'SUPPLIES AND EQUIPMENT', 'PERSONAL', 'LOSSES') THEN 'Proposed buyer mapping (CEO review pending): MedShield internal corporate administration from docs/MAPPED_CLIENT_REFERENCE.md record CLI-0001.'
+      WHEN proposed_area_type = 'territory' OR UPPER(TRIM(normalized_area)) IN ('CAVITE', 'LOWER CAVITE', 'BATANGAS', 'QUEZON', 'LAGUNA', 'MARINDUQUE', 'CAMARINES NORTE', 'CAM NORTE', 'CAMARINES SUR', 'CAM SUR', 'ALBAY', 'LEGASPI', 'LAGASPI', 'BICOL', 'MINDORO', 'HOSPITAL', 'HOPITAL', 'PHARMA', 'LUCENA', 'RAKKK', 'EAST', 'EASTERN', 'EASTERN QUEZON') THEN 'Proposed buyer mapping (CEO review pending): Provincial, private-care, pharmacy, or individual-account label from docs/MAPPED_CLIENT_REFERENCE.md'
       ELSE 'Buyer type unavailable'
     END AS basis,
-    SUM(CASE WHEN is_net_sales_eligible THEN net_sales ELSE 0 END) AS revenue,
-    SUM(CASE WHEN is_quantity_observation_eligible THEN quantity ELSE 0 END) AS quantity,
+    SUM(CASE WHEN is_net_sales_eligible AND net_sales > 0 THEN net_sales ELSE 0 END) AS positive_sales,
+    SUM(CASE WHEN is_net_sales_eligible AND net_sales < 0 THEN net_sales ELSE 0 END) AS returns_value,
+    SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) AS revenue,
+    SUM(CASE WHEN is_quantity_observation_eligible THEN quantity END) AS quantity,
+    SUM(CASE WHEN is_gross_margin_eligible THEN gross_margin_amount END) AS income,
+    SUM(CASE WHEN is_gross_margin_eligible THEN net_sales END) AS margin_revenue_basis,
     COUNT(*) AS row_count
     FROM ${FACT} WHERE ${OBSERVED_FACT}
-    GROUP BY normalized_product, month_start,
-      CASE
-        WHEN UPPER(TRIM(normalized_area)) IN ('GOVERNMENT', 'PAGBILAO') THEN 'Government'
-        WHEN UPPER(TRIM(normalized_area)) IN ('ADMIN', 'SUPPLIES', 'SUPPLLIES', 'EQUIPMENT', 'SUPPLIES AND EQUIPMENT', 'PERSONAL', 'LOSSES') THEN 'Internal'
-        WHEN proposed_area_type = 'territory' OR UPPER(TRIM(normalized_area)) IN ('CAVITE', 'LOWER CAVITE', 'BATANGAS', 'QUEZON', 'LAGUNA', 'MARINDUQUE', 'CAMARINES NORTE', 'CAM NORTE', 'CAMARINES SUR', 'CAM SUR', 'ALBAY', 'LEGASPI', 'LAGASPI', 'BICOL', 'MINDORO', 'HOSPITAL', 'HOPITAL', 'PHARMA', 'LUCENA', 'RAKKK', 'EAST', 'EASTERN', 'EASTERN QUEZON') THEN 'Private'
-        ELSE 'Unknown'
-      END,
-      CASE
-        WHEN UPPER(TRIM(normalized_area)) = 'GOVERNMENT' THEN 'National Hub (DOH Central)'
-        WHEN UPPER(TRIM(normalized_area)) IN ('ADMIN', 'SUPPLIES', 'SUPPLLIES', 'EQUIPMENT', 'SUPPLIES AND EQUIPMENT', 'PERSONAL', 'LOSSES') THEN 'MedShield HQ'
-        WHEN UPPER(TRIM(normalized_area)) IN ('CAVITE', 'LOWER CAVITE') OR UPPER(TRIM(COALESCE(territory, ''))) IN ('LOWER CAVITE', 'CAVITE') THEN 'Cavite'
-        WHEN UPPER(TRIM(normalized_area)) IN ('BATANGAS') OR UPPER(TRIM(COALESCE(territory, ''))) = 'BATANGAS' THEN 'Batangas'
-        WHEN UPPER(TRIM(normalized_area)) IN ('QUEZON', 'PAGBILAO', 'HOSPITAL', 'HOPITAL', 'PHARMA', 'LUCENA', 'RAKKK', 'EAST', 'EASTERN', 'EASTERN QUEZON') OR UPPER(TRIM(COALESCE(territory, ''))) = 'QUEZON' THEN 'Quezon'
-        WHEN UPPER(TRIM(normalized_area)) IN ('LAGUNA') OR UPPER(TRIM(COALESCE(territory, ''))) = 'LAGUNA' THEN 'Laguna'
-        WHEN UPPER(TRIM(normalized_area)) IN ('MARINDUQUE') OR UPPER(TRIM(COALESCE(territory, ''))) = 'MARINDUQUE' THEN 'Marinduque'
-        WHEN UPPER(TRIM(normalized_area)) IN ('CAM NORTE', 'CAMARINES NORTE') OR UPPER(TRIM(COALESCE(territory, ''))) IN ('CAM NORTE', 'CAMARINES NORTE') THEN 'Camarines Norte'
-        WHEN UPPER(TRIM(normalized_area)) IN ('CAM SUR', 'CAMARINES SUR', 'BICOL') OR UPPER(TRIM(COALESCE(territory, ''))) IN ('CAM SUR', 'CAMARINES SUR', 'BICOL') THEN 'Camarines Sur'
-        WHEN UPPER(TRIM(normalized_area)) IN ('ALBAY', 'LEGASPI', 'LAGASPI') OR UPPER(TRIM(COALESCE(territory, ''))) IN ('ALBAY', 'LEGASPI', 'LAGASPI') THEN 'Albay'
-        WHEN UPPER(TRIM(normalized_area)) IN ('MINDORO') OR UPPER(TRIM(COALESCE(territory, ''))) = 'MINDORO' THEN 'Mindoro'
-        WHEN proposed_area_type = 'territory' THEN INITCAP(COALESCE(territory, normalized_area))
-        ELSE 'Unassigned geography'
-      END,
-      CASE
-        WHEN UPPER(TRIM(normalized_area)) = 'GOVERNMENT' THEN 'Government Bidding'
-        WHEN UPPER(TRIM(normalized_area)) = 'PAGBILAO' THEN 'LGU'
-        WHEN UPPER(TRIM(normalized_area)) IN ('HOSPITAL', 'HOPITAL', 'RAKKK') THEN 'Private Hospital'
-        WHEN UPPER(TRIM(normalized_area)) = 'LUCENA' THEN 'Private Care'
-        WHEN UPPER(TRIM(normalized_area)) IN ('PHARMA', 'BATANGAS', 'QUEZON', 'LAGUNA', 'MARINDUQUE', 'CAVITE', 'LOWER CAVITE', 'ALBAY', 'LEGASPI', 'LAGASPI', 'BICOL', 'CAM SUR', 'CAMARINES SUR', 'CAM NORTE', 'CAMARINES NORTE', 'MINDORO', 'EAST', 'EASTERN', 'EASTERN QUEZON') OR proposed_area_type = 'territory' THEN 'Retail Pharmacy'
-        WHEN UPPER(TRIM(normalized_area)) = 'ADMIN' THEN 'Internal Admin'
-        WHEN UPPER(TRIM(normalized_area)) IN ('SUPPLIES', 'SUPPLLIES', 'SUPPLIES AND EQUIPMENT') THEN 'Internal Supplies'
-        WHEN UPPER(TRIM(normalized_area)) = 'EQUIPMENT' THEN 'Internal Equipment'
-        WHEN UPPER(TRIM(normalized_area)) = 'PERSONAL' THEN 'Internal Personal'
-        WHEN UPPER(TRIM(normalized_area)) = 'LOSSES' THEN 'Internal Losses'
-        ELSE 'Unclassified channel'
-      END,
-      CASE
-        WHEN UPPER(TRIM(normalized_area)) = 'PAGBILAO' THEN 'Approved buyer mapping: Exact reference-backed LGU mapping from docs/MAPPED_CLIENT_REFERENCE.md record CLI-0340.'
-        WHEN UPPER(TRIM(normalized_area)) = 'GOVERNMENT' THEN 'Approved buyer mapping: National Government & DOH Central public bidding from docs/MAPPED_CLIENT_REFERENCE.md record CLI-0002.'
-        WHEN UPPER(TRIM(normalized_area)) IN ('ADMIN', 'SUPPLIES', 'SUPPLLIES', 'EQUIPMENT', 'SUPPLIES AND EQUIPMENT', 'PERSONAL', 'LOSSES') THEN 'Approved buyer mapping: MedShield internal corporate administration from docs/MAPPED_CLIENT_REFERENCE.md record CLI-0001.'
-        WHEN proposed_area_type = 'territory' OR UPPER(TRIM(normalized_area)) IN ('CAVITE', 'LOWER CAVITE', 'BATANGAS', 'QUEZON', 'LAGUNA', 'MARINDUQUE', 'CAMARINES NORTE', 'CAM NORTE', 'CAMARINES SUR', 'CAM SUR', 'ALBAY', 'LEGASPI', 'LAGASPI', 'BICOL', 'MINDORO', 'HOSPITAL', 'HOPITAL', 'PHARMA', 'LUCENA', 'RAKKK', 'EAST', 'EASTERN', 'EASTERN QUEZON') THEN 'Approved buyer mapping: Provincial, private-care, pharmacy, or individual-account label from docs/MAPPED_CLIENT_REFERENCE.md'
-        ELSE 'Buyer type unavailable'
-      END
-    ORDER BY normalized_product, month_start, territory, channel`, 30_000)
+    GROUP BY ALL ORDER BY date, product, area`, 100_000)
   const includedRows = rows.reduce((sum, row) => sum + numberValue(row.row_count), 0)
-  const unmappedRows = rows.filter((row) => row.sector === 'Unknown').reduce((sum, row) => sum + numberValue(row.row_count), 0)
-function getRegionForTerritory(territory: string | null, sector?: string | null): string {
-  const t = String(territory || '').trim().toLowerCase()
-  if (['cavite', 'batangas', 'laguna', 'quezon'].includes(t)) return 'CALABARZON'
-  if (['marinduque', 'oriental mindoro', 'occidental mindoro', 'mindoro'].includes(t)) return 'MIMAROPA'
-  if (['camarines norte', 'camarines sur', 'albay'].includes(t)) return 'Bicol'
-  if (['national hub (doh central)', 'medshield hq'].includes(t) || sector === 'Government' || sector === 'Internal') return 'Other National'
-  return 'Unknown'
-}
-
-  const expandedRows = rows.flatMap((row) => {
-    const revenue = numberValue(row.revenue)
-    const quantity = numberValue(row.quantity)
-    const rowCount = numberValue(row.row_count)
-    if (row.territory === 'Mindoro') {
-      return [
-        {
-          product: row.product,
-          period: row.period,
-          sector: row.sector,
-          region: 'MIMAROPA',
-          territory: 'Oriental Mindoro',
-          channel: row.channel,
-          revenue: Number((revenue * 0.632).toFixed(2)),
-          quantity: Number((quantity * 0.632).toFixed(2)),
-          row_count: Math.max(1, Math.round(rowCount * 0.632)),
-          basis: `${row.basis} · PSA demographic weighted apportionment (63.2% Oriental Mindoro)`,
-        },
-        {
-          product: row.product,
-          period: row.period,
-          sector: row.sector,
-          region: 'MIMAROPA',
-          territory: 'Occidental Mindoro',
-          channel: row.channel,
-          revenue: Number((revenue * 0.368).toFixed(2)),
-          quantity: Number((quantity * 0.368).toFixed(2)),
-          row_count: Math.max(1, Math.round(rowCount * 0.368)),
-          basis: `${row.basis} · PSA demographic weighted apportionment (36.8% Occidental Mindoro)`,
-        },
-      ]
-    }
-    return [{
-      product: row.product,
-      period: row.period,
-      sector: row.sector,
-      region: getRegionForTerritory(row.territory, row.sector),
-      territory: row.territory,
-      channel: row.channel,
-      revenue,
-      quantity,
-      row_count: rowCount,
-      basis: row.basis,
-    }]
-  })
   return {
-    rows: expandedRows,
+    rows: rows.map(row => ({
+      ...row,
+      positive_sales: numberValue(row.positive_sales),
+      returns_value: numberValue(row.returns_value),
+      revenue: row.revenue == null ? null : numberValue(row.revenue),
+      quantity: row.quantity == null ? null : numberValue(row.quantity),
+      income: row.income == null ? null : numberValue(row.income),
+      margin_revenue_basis: row.margin_revenue_basis == null ? null : numberValue(row.margin_revenue_basis),
+      row_count: numberValue(row.row_count),
+      evidence: 'actual',
+      product_evidence: row.source_data_status === 'ORIGINAL_SOURCE_EXPORT' ? 'source_label_unverified' : 'estimated_allocation_source',
+    })),
     source: databricksSource(rows, {
-      file: 'datasources/templates/buyer_sector_mapping.csv',
-      input_rows: includedRows,
-      included_rows: includedRows,
-      excluded: { buyer_sector_unmapped: unmappedRows },
+      input_rows: includedRows, included_rows: includedRows,
+      metric: 'Eligible recorded sales; proposed buyer grouping; only warehouse-approved geography',
+      allocation_policy: 'No gateway geographic allocation; source product allocations retain provenance',
+      excluded: {},
     }),
   }
 }
@@ -1056,7 +1016,8 @@ async function getNasaPowerWeatherEffects(year: string, area: string) {
           provider: 'nasa_power', grain: 'monthly', period_start: null, period_end: null,
           rows_returned: 0, sales_matched_rows: 0,
           source: 'workspace.medshield_gold.vw_weather_nasa_power_monthly_candidate',
-          system_of_record: 'databricks', status: 'not_refreshed',
+          system_of_record: 'databricks',
+    release: activeRelease, status: 'not_refreshed',
         },
         summary: [{ periods: 0, sales_matched_periods: 0, rainfall_revenue_correlation: null }],
         rows: [],
@@ -1114,7 +1075,8 @@ async function getNasaPowerWeatherEffects(year: string, area: string) {
         rows_returned: rows.length,
         sales_matched_rows: pairs.length,
         source: 'workspace.medshield_gold.vw_weather_nasa_power_monthly_candidate',
-        system_of_record: 'databricks', status: 'live',
+        system_of_record: 'databricks',
+    release: activeRelease, status: 'live',
       },
       summary: [{
         periods: rows.length,
@@ -1159,7 +1121,8 @@ export async function getDatabricksWeatherEffects(input: { year?: string; area?:
       rows_returned: rows.length,
       sales_matched_rows: rows.filter((row) => row.is_external_join_ready === 'true').length,
       source: 'workspace.medshield_gold.vw_dss_external_signals_candidate',
-      system_of_record: 'databricks', status: 'live',
+      system_of_record: 'databricks',
+    release: activeRelease, status: 'live',
     },
     summary: [{ periods: rows.length, sales_matched_periods: 0, rainfall_revenue_correlation: null }],
     rows: rows.map((row) => ({
@@ -1178,4 +1141,21 @@ export async function getDatabricksWeatherEffects(input: { year?: string; area?:
       mapping_status: row.mapping_status,
     })),
   }
+}
+
+/** Optional STL capability fails independently from financial reporting. */
+export async function getDatabricksStl() {
+  const release = await descriptiveRelease()
+  const rows = await query(`SELECT period, observed, trend, seasonal, residual, segment_start, segment_end,
+    dataset_id, policy_version, fact_delta_version, parameters_json, input_sha256, publication_status
+    FROM ${GOLD}.sales_restart_stl_candidate
+    WHERE fact_delta_version = ${release.fact_delta_version}
+      AND dataset_id = ${sqlString(release.dataset_id, 'dataset')}
+      AND policy_version = ${sqlString(release.policy_version, 'policy')}
+    ORDER BY period`, 2400)
+  if (!rows.length) throw new DatabricksSourceUnavailableError('No published STL for the active descriptive fact version')
+  if (new Set(rows.map(row => row.input_sha256)).size !== 1 || new Set(rows.map(row => row.period)).size !== rows.length) throw new DatabricksSourceUnavailableError('Ambiguous STL publication')
+  const components = rows.map(row => ({ ...row, observed: nullableNumber(row.observed), trend: nullableNumber(row.trend), seasonal: nullableNumber(row.seasonal), residual: nullableNumber(row.residual) }))
+  if (components.some(row => [row.observed, row.trend, row.seasonal, row.residual].some(v => v == null) || Math.abs(row.observed! - row.trend! - row.seasonal! - row.residual!) > 0.000001)) throw new DatabricksSourceUnavailableError('Invalid STL components')
+  return { method: 'STL', metric: 'Eligible net sales (PHP)', release, parameters: JSON.parse(rows[0].parameters_json!), rows: components, source: databricksSource(rows) }
 }

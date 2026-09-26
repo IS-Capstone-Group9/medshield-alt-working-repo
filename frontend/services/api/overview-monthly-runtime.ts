@@ -65,11 +65,24 @@ const RESPONSIVE_OVERVIEW_CHART = `  const overviewRows = getDescriptiveDisplayR
     ? 'Y/Y Compare'
     : descriptiveUsesDailyGrain() ? 'Daily Detail' : descriptiveUsesYearlyGrain() ? 'Yearly Detail' : 'Monthly Detail';
 
+  const observedSourcePeriods = DATA.monthly.filter(row => row.revenue != null && !row.missing && row.evidence !== 'estimate').map(row => String(row.period)).sort();
+  if (overviewSubtitle && observedSourcePeriods.length) overviewSubtitle.textContent += '; source coverage ' + observedSourcePeriods[0] + '–' + observedSourcePeriods[observedSourcePeriods.length - 1];
+  if (overviewSubtitle && descriptivePeriod === 'custom' && !descriptiveUsesDailyGrain()) overviewSubtitle.textContent += '; historical partial months require dated transactions';
+  const overviewPriorRows = getDescriptivePriorDisplayRows();
+  const overviewDatasets = monthlyDataForMode.datasets.flatMap(dataset => {
+    const evidenceRows = dataset.label.startsWith('Prior-year') ? overviewPriorRows : overviewRows;
+    if (!evidenceRows.some(row => row.evidence === 'estimate')) return [dataset];
+    return [
+      { ...dataset, label: dataset.label.split(' · ')[0] + ' · Actual', data: dataset.data.map((value, i) => evidenceRows[i]?.evidence === 'actual' ? value : null), fill: false },
+      { ...dataset, label: dataset.label.split(' · ')[0] + ' · Gap estimate', data: dataset.data.map((value, i) => evidenceRows[i]?.evidence === 'estimate' ? value : null), borderDash: [6, 4], pointStyle: 'triangle', fill: false }
+    ];
+  });
+
   createChart('overviewBaselineChart', {
     type: 'line',
     data: {
       labels: monthlyDataForMode.labels,
-      datasets: monthlyDataForMode.datasets
+      datasets: overviewDatasets
     },
     options: { ...opts, plugins: { ...opts.plugins, legend: { position: 'bottom' } } }
   });
@@ -82,12 +95,23 @@ const RESPONSIVE_OVERVIEW_CHART = `  const overviewRows = getDescriptiveDisplayR
 
 export function patchOverviewMonthlyChart(script: string): string {
   const withCurrentYearRows = script
+    .replace(/function normalizeMonthlyRows\(rows\) \{[\s\S]*?\n\}\n\nfunction toNumber/, `function normalizeMonthlyRows(rows) {
+  return (rows || []).filter(row => historicalPeriod(row.period)).map(row => ({
+    ...row,
+    revenue: row.revenue == null ? null : toNumber(row.revenue),
+    income: row.income == null ? null : toNumber(row.income),
+    margin_revenue_basis: row.margin_revenue_basis == null ? null : toNumber(row.margin_revenue_basis)
+  }));
+}
+
+function toNumber`)
     .replace(
       'return diagnosticYears().map(year => DATA.year_summary.find(row => String(row.year) === String(year))',
       'return diagnosticYears().map(year => dashboardAnnualRows().find(row => String(row.year) === String(year))',
     )
     .replace('const rows = DATA.monthly.map((row) => ({ ...row }));', 'const rows = dashboardMonthlyRows();')
     .replace('const marginRows = yearRowsForMode;', 'const marginRows = diagnosticMarginRows();')
+    .replace('const revenue = Number(row.revenue);\n    const grossProfit = Number(row.income);', 'const revenue = row.revenue;\n    const grossProfit = row.income;')
     .replace("label: 'Revenue ' + yearA + ' (Compare)'", "label: 'Revenue ' + yearA + (Number(yearA) === dashboardCalendar().year ? ' (Actual + Estimate)' : '') + ' (Compare)'")
     .replace("label: 'Revenue ' + yearB + ' (Base)'", "label: 'Revenue ' + yearB + (Number(yearB) === dashboardCalendar().year ? ' (Actual + Estimate)' : '') + ' (Base)'")
   const withMonthlyProfit = withCurrentYearRows.replace(SINGLE_YEAR_DATASET_SOURCE, SINGLE_YEAR_MONTHLY_DATASETS)
