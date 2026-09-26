@@ -2,7 +2,7 @@
   "policy_version": "external_sources_clean_v1_20260914",
   "publication_status": "CANDIDATE_ONLY",
   "area_mapping_file": "datasources/templates/area_classification_mapping.csv",
-  "area_mapping_sha256": "268785d6ffddab4254c32abb79a56cba3ccf005b6c955d6013dcd7a316826f7f",
+  "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
   "approved_sales_territories": [
     "Batangas",
     "Camarines Norte",
