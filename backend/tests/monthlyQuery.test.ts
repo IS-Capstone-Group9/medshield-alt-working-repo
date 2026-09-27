@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { filterMonthlyYear, parseMonthlyYear } from '../src/monthlyQuery'
+import { filterMonthlyYear, parseMonthlyYear, invalidScalarQueryKey } from '../src/monthlyQuery'
 
 test('monthly year permits omitted, historical, and future years', () => {
   assert.equal(parseMonthlyYear(undefined), undefined)
@@ -24,4 +24,10 @@ test('monthly filtering preserves all rows or selects only the complete year', (
   assert.deepEqual(filterMonthlyYear(rows, '2025'), rows.slice(0, 2))
   assert.deepEqual(filterMonthlyYear(rows, '2026'), [rows[2]])
   assert.deepEqual(filterMonthlyYear(rows, '2030'), [])
+})
+
+test('repeated and structured filters cannot silently turn into all-history queries', () => {
+  assert.equal(invalidScalarQueryKey({year: ['2024', '2025']}), 'year')
+  assert.equal(invalidScalarQueryKey({search: {value: 'abc'}}), 'search')
+  assert.equal(invalidScalarQueryKey({year:'2100', search:'abc'}), undefined)
 })

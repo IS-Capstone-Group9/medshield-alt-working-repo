@@ -150,3 +150,42 @@ Audit events use Supabase when configured and may fall back to a local audit fil
 | Unpublished legacy analytical output | Empty array or `503 DATABRICKS_VIEW_REQUIRED`, depending on route |
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) and [CURRENT_STATE.md](CURRENT_STATE.md).
+
+
+## Catalog implementation prepared — 27 September 2026
+
+[Product catalog contract](PRODUCT_CATALOG.md) defines independent category,
+sellable identity, item kind and transaction evidence. Local deterministic rules,
+Gold enrichment, stable-ID API/UI grouping, category filters and provenance-aware
+quantity/export handling are implemented. The complete version-16 review includes
+37,728 records and 4,561 labels; all remain unresolved because no approved master
+entries were supplied. Category approval cannot approve SKU, quantity conversion,
+forecasting or observed medical demand. Adjusted provenance remains file-level.
+
+The [operator runbook](CATALOG_DEPLOYMENT.md) specifies catalog-only 03 → 04 → 05 →
+06 → publication-readiness → descriptive/catalog validation, version-bound activation
+and rollback. This is local preparation: no Databricks writes, release activation
+or additional CEO decisions occurred. Databricks remains the sole analytical source.
+
+The three catalog endpoints accept `category=All|Medical|Non-Medical|Unclassified`.
+`/api/products` retains its array response and includes selected denominator,
+unresolved coverage and release metadata per result. `/api/sales/sectors` returns
+complete detailed rows and coverage. `/api/sales/heatmap` returns stable product
+metadata plus daily/monthly rows with separate quantity evidence strata. Bounded
+pages and count verification reject truncation. No local catalog output is a fallback.
+# Predictive API update — 27 September 2026
+
+`/api/sales/forecast-validation` now exposes retrospective fixed-origin company
+revenue benchmarks, exact common evaluation keys, unverified reporting coverage
+and unpublished future rows. Unapproved sectors/products/units are blocked.
+Repeated, structured and unknown filters return 400 after authentication.
+
+`/api/forecasts` and `/api/model_evaluation` preserve their no-query legacy arrays.
+Opt in to the coherent metadata envelope with `schema_version=2`. Accepted scalar
+filters: `series_id`, `target`, `scope`, `release_id`, `run_id`, `display_start`
+(`YYYY-MM`) and `horizon` (`3`, `6`, `12`). Only `company:net_sales:PHP`, company
+scope and net_sales are supported. The default window begins in the current
+Asia/Manila month. Response states distinguish published, unpublished, empty and
+unsupported; storage/consistency failures return 503. No local fallback or process
+cache is used. One manifest supplies actuals, backtests, future points and metrics.
+True lead remains distinct from display length. See [operation and release gates](PREDICTIVE_OPERATIONS.md).

@@ -193,6 +193,12 @@ export function updateDashboardProvenance(
     details.textContent = `Loaded: ${loadedLabel} PHT | Years: ${years.join(', ') || 'Unavailable'}`
     details.style.fontWeight = '700'
     statusBar.append(summary, details)
+    if (status.release) {
+      const release = document.createElement('details')
+      const label = document.createElement('summary'); label.textContent = `Candidate dataset · Fact version ${status.release.fact_delta_version} · Release approval pending`
+      const identity = document.createElement('p'); identity.textContent = `Dataset: ${status.release.dataset_id}. Policy: ${status.release.policy_version}. Databricks is the analytical source; product identities and derived mappings retain their review status.`
+      release.append(label, identity); statusBar.append(release)
+    }
     statusBar.dataset.source = status.source
     statusBar.dataset.mode = status.mode
   }

@@ -251,6 +251,6 @@ test('annual YoY compares overlapping observed months instead of unequal yearly 
   const growth = await chartData(page, 'growthChart')
   expect(growth.datasets[0].data).toEqual([null, 100])
   expect(growth.datasets[1].data).toEqual([null, 100])
-  expect(growth.labels).toContain('2025 · 1/12 months matched')
+  expect(growth.labels).toContain('2025 Partial · 1/12 months matched')
   await expect(page.locator('#salesGrowthSummary')).toContainText('Annual comparisons include only months observed in both years')
 })

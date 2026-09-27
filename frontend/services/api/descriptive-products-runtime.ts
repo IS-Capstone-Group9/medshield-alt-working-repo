@@ -3,6 +3,7 @@ import { descriptivePortfolio } from './descriptive-products'
 // All inline callbacks below are existing DASHBOARD_GLOBAL_HANDLERS.
 export const PRODUCT_PRIORITIZATION_SCRIPT = `const descriptivePortfolio = ${descriptivePortfolio.toString()};` + String.raw`
 let productCohortPercent = 'all';
+let productCategory = 'All';
 let productExportRows = [];
 
 function configureProductYearControls(pageName) {
@@ -47,7 +48,7 @@ function renderProductPrioritizationTimeline() {
     }
     return true;
   });
-  const result = descriptivePortfolio(rows, 'positive_sales_candidate');
+  const result = descriptivePortfolio(rows, 'positive_sales_candidate', productCategory);
   const rate = ['5', '10', '20'].includes(String(productCohortPercent)) ? Number(productCohortPercent) : 100;
   const count = Math.ceil(result.products.length * rate / 100);
   const cohort = result.products.slice(0, count);
@@ -60,10 +61,10 @@ function renderProductPrioritizationTimeline() {
     page.prepend(scope);
   }
   scope.replaceChildren();
-  const title = document.createElement('h2'); title.textContent = 'Observed product sales'; title.style.fontSize = '18px';
+  const title = document.createElement('h2'); title.textContent = 'Product sales and catalog review'; title.style.fontSize = '18px';
   const note = document.createElement('p');
   note.textContent = !hasSource ? 'Product data is loading or unavailable. No observed sales total can be reported yet.' : descriptivePeriodLabel() + ' · Candidate source labels; medicine identities and pack conversions require review. '
-    + 'Recorded revenue: ' + formatCurrency(result.revenue) + ' across ' + result.products.length + ' labels. '
+    + productCategory + ' category; services remain in financial totals. Unresolved identity: ' + result.unresolvedCount + ' groups, ' + formatCurrency(result.unresolvedRevenue) + '. ' + 'Recorded revenue: ' + formatCurrency(result.revenue) + ' across ' + result.products.length + ' labels. '
     + result.estimatedRows + ' gap-estimated rows excluded. Historical contract/product allocations may still be present in this candidate source. '
     + (unboundedRows ? unboundedRows + ' monthly rows cannot be assigned to the exact requested dates and are excluded; select whole months. ' : '')
     + (result.unavailableRows ? result.unavailableRows + ' rows have unavailable revenue. ' : '')
@@ -79,7 +80,12 @@ function renderProductPrioritizationTimeline() {
   const exportButton = document.createElement('button'); exportButton.type = 'button'; exportButton.className = 'btn btn-secondary';
   exportButton.textContent = 'Export selected rows'; exportButton.onclick = exportProductPriorityCSV;
   const displayNote = document.createElement('p'); displayNote.textContent = cohort.length + ' labels in cohort. Charts show up to 10; table shows up to 100. Export contains the complete cohort.';
-  scope.append(title, note, label, select, exportButton, displayNote);
+  const categoryLabel = document.createElement('label'); categoryLabel.htmlFor = 'productCategorySelect'; categoryLabel.textContent = 'Category ';
+  const categorySelect = document.createElement('select'); categorySelect.id = 'productCategorySelect'; categorySelect.className = 'topbar-select';
+  ['All','Medical','Non-Medical','Unclassified'].forEach(value => categorySelect.add(new Option(value,value,false,value===productCategory)));
+  categorySelect.onchange = () => { productCategory = categorySelect.value; renderProductPrioritizationTimeline(); };
+  const controls=document.createElement('div');controls.style.cssText='display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 0';controls.append(categoryLabel,categorySelect,label,select,exportButton);
+  scope.append(title, note, controls, displayNote);
   const setTitle = (id, heading, sub) => {
     const card = document.getElementById(id)?.closest('.chart-card');
     const title = card?.querySelector('.chart-title');
@@ -87,20 +93,54 @@ function renderProductPrioritizationTimeline() {
     card?.querySelectorAll('.chart-subtitle').forEach(subtitle => { subtitle.textContent = sub; });
     const badge = card?.querySelector('.chart-badge'); if (badge) badge.textContent = 'Candidate';
   };
-  const options = { responsive: true, maintainAspectRatio: false, animation: false, plugins: { legend: { position: 'bottom' } } };
+  const options = { responsive: true, maintainAspectRatio: false, animation: false, plugins: { legend: { position: 'top', align: 'start', labels: { usePointStyle: true, boxWidth: 8, padding: 12, font: { size: 11 } } } } };
   const chart = (id, config) => {
     const canvas = document.getElementById(id); if (!canvas) return;
     const old = Chart.getChart(canvas); if (old) old.destroy();
     new Chart(canvas, config);
   };
-  chart('productBarChart', { type: 'bar', data: { labels: top.map(row => row.name), datasets: [{ label: 'Observed net sales (₱)', data: top.map(row => row.revenue), backgroundColor: '#1E3A5F' }] }, options });
-  setTitle('productBarChart', 'Top products by observed net sales', 'Source labels ranked within the selected period.');
+  // Horizontal bar chart — product names as readable left-side row labels
+  chart('productBarChart', {
+    type: 'bar',
+    data: {
+      labels: top.map(row => row.name),
+      datasets: [{ label: 'Observed net sales (₱)', data: top.map(row => row.revenue), backgroundColor: '#1E3A5F', borderRadius: 3 }]
+    },
+    options: {
+      ...options,
+      indexAxis: 'y',
+      scales: {
+        x: { ticks: { callback: value => formatCurrency(Number(value)), maxTicksLimit: 6 }, grid: { display: true } },
+        y: { ticks: { font: { size: 11 }, autoSkip: false } }
+      }
+    }
+  });
+  setTitle('productBarChart', 'Positive-sales-ranked products — net sales', 'Source labels ranked within the selected period.');
   const classes = result.abcAvailable ? ['A','B','C'] : ['Unclassified'];
   chart('abcChart', { type: 'bar', data: { labels: classes, datasets: [{ label: 'Source product labels', data: classes.map(code => result.products.filter(row => row.abc === code).length), backgroundColor: ['#1E3A5F','#D97706','#64748B'] }] }, options });
   setTitle('abcChart', 'Candidate ABC — positive sales', result.abcAvailable ? 'Positive eligible sales population; thresholds 80% and 95%; policy approval pending.' : 'Classification held until the revenue basis is suitable.');
-  chart('productBubbleChart', { type: 'scatter', data: { datasets: [{ label: 'Net sales and observed coverage', data: top.map(row => ({ x: row.revenue, y: row.observedMonths, name: row.name })), backgroundColor: '#1E3A5F' }] }, options: { ...options, plugins: { ...options.plugins, tooltip: { callbacks: { label: context => context.raw.name + ': ' + formatCurrency(context.raw.x) + ', ' + context.raw.y + ' observed months' } } }, scales: { x: { title: { display: true, text: 'Observed net sales (₱)' } }, y: { beginAtZero: true, ticks: { precision: 0 }, title: { display: true, text: 'Months with source records' } } } } });
+  chart('productBubbleChart', { type: 'scatter', data: { datasets: [{ label: 'Net sales and observed coverage', data: top.map(row => ({ x: row.revenue, y: row.observedMonths, name: row.name })), backgroundColor: '#1E3A5F' }] }, options: { ...options, plugins: { ...options.plugins, tooltip: { callbacks: { label: context => context.raw.name + ': ' + formatCurrency(context.raw.x) + ', ' + context.raw.y + ' observed months' } } }, scales: { x: { title: { display: true, text: 'Observed net sales (₱)' }, ticks: { callback: value => formatCurrency(Number(value)), maxTicksLimit: 5 } }, y: { beginAtZero: true, ticks: { precision: 0 }, title: { display: true, text: 'Months with source records' } } } } });
   setTitle('productBubbleChart', 'Revenue and observed coverage', 'Coverage is the number of months with source records; no clinical priority is inferred.');
-  chart('paretoCurveChart', { type: 'line', data: { labels: cohort.map(row => row.rank), datasets: [{ label: 'Cumulative positive sales (%)', data: cohort.map(row => row.cumulativeShare), borderColor: '#D97706', pointRadius: 0, spanGaps: false }] }, options: { ...options, scales: { x: { title: { display: true, text: 'Positive sales rank' } }, y: { min: 0, max: 100, title: { display: true, text: 'Cumulative share of full population (%)' } } } } });
+  // Pareto chart: zoomed y-axis (start at 60%) + 80%/95% reference lines for clear ABC cutoff visibility
+  const paretoYMin = cohort.length && cohort[0].cumulativeShare != null ? Math.max(0, Math.floor(cohort[0].cumulativeShare / 10) * 10 - 10) : 0;
+  chart('paretoCurveChart', {
+    type: 'line',
+    data: {
+      labels: cohort.map(row => row.rank),
+      datasets: [
+        { label: 'Cumulative positive sales (%)', data: cohort.map(row => row.cumulativeShare), borderColor: '#D97706', borderWidth: 2.5, pointRadius: 0, spanGaps: false },
+        { label: '80% — Class A threshold', data: cohort.map(() => 80), borderColor: '#1E3A5F', borderDash: [6, 4], borderWidth: 1.5, pointRadius: 0 },
+        { label: '95% — Class B threshold', data: cohort.map(() => 95), borderColor: '#64748B', borderDash: [4, 4], borderWidth: 1.5, pointRadius: 0 }
+      ]
+    },
+    options: {
+      ...options,
+      scales: {
+        x: { title: { display: true, text: 'Positive sales rank' }, ticks: { maxTicksLimit: 10, autoSkip: true } },
+        y: { min: paretoYMin, max: 100, title: { display: true, text: 'Cumulative share of full population (%)' }, ticks: { callback: value => value + '%' } }
+      }
+    }
+  });
   setTitle('paretoCurveChart', 'Pareto cumulative revenue', result.abcAvailable ? 'The cohort does not reset the denominator to 100%.' : 'Unavailable while ABC revenue basis is unresolved.');
   const table = document.getElementById('productTable');
   if (table) {
@@ -112,15 +152,22 @@ function renderProductPrioritizationTimeline() {
     }
     table.replaceChildren();
     const head = table.createTHead().insertRow();
-    ['Rank','Source product label','Net sales (₱)','Positive sales (₱)','Returns (₱)','Contribution share (%)','Cumulative share (%)','Candidate ABC','Observed months','Product provenance'].forEach(text => {
+    ['Rank','Source product label','Net sales (₱)','Positive sales (₱)','Returns (₱)','Contribution share (%)','Cumulative share (%)','Candidate ABC','Observed months','Product provenance','Reporting ID','Category','Identity status','Item kind','Packaging','Original aliases'].forEach(text => {
       const th = document.createElement('th'); th.scope = 'col'; th.textContent = text; head.append(th);
     });
     const body = table.createTBody();
     for (const row of cohort.slice(0, 100)) {
       const tr = body.insertRow();
-      [row.rank, row.name, row.revenue.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 }), row.positiveSales.toFixed(2), row.returnsValue.toFixed(2), row.share == null ? 'Unavailable' : row.share.toFixed(2), row.cumulativeShare == null ? 'Unavailable' : row.cumulativeShare.toFixed(2), row.abc, row.observedMonths, row.productEvidence].forEach(value => { tr.insertCell().textContent = String(value); });
+      [row.rank, row.name, row.revenue.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 }), row.positiveSales.toLocaleString('en-PH', {minimumFractionDigits:2,maximumFractionDigits:2}), row.returnsValue.toLocaleString('en-PH', {minimumFractionDigits:2,maximumFractionDigits:2}), row.share == null ? 'Unavailable' : row.share.toFixed(2), row.cumulativeShare == null ? 'Unavailable' : row.cumulativeShare.toFixed(2), row.abc, row.observedMonths, row.productEvidence, row.id, row.metadata.category || 'Unclassified', row.metadata.identity_status || 'needs_review', row.metadata.item_kind || 'unknown', [row.metadata.packaging_unit,row.metadata.pack_count,row.metadata.contained_unit].filter(Boolean).join(' / ') || 'Unknown', row.aliases.join('; ')].forEach(value => { tr.insertCell().textContent = String(value); });
+      const aliasCell=tr.lastElementChild;
+      const details=document.createElement('details'), summary=document.createElement('summary');
+      summary.textContent=row.aliases.length+' original alias'+(row.aliases.length===1?'':'es');
+      details.append(summary);
+      row.aliases.forEach(alias=>{const value=document.createElement('p');value.textContent=alias;details.append(value);});
+      if(row.lineage.length){const evidence=document.createElement('p');evidence.textContent='Source-record lineage: '+row.lineage.join('; ');evidence.style.cssText='max-width:420px;max-height:180px;overflow:auto;overflow-wrap:anywhere';details.append(evidence);}
+      aliasCell.replaceChildren(details);
     }
-    if (!cohort.length) { const cell = body.insertRow().insertCell(); cell.colSpan = 10; cell.textContent = hasSource ? 'No observed product sales for the selected scope.' : 'Product data is loading or unavailable.'; }
+    if (!cohort.length) { const cell = body.insertRow().insertCell(); cell.colSpan = 17; cell.textContent = hasSource ? 'No observed product sales for the selected scope.' : 'Product data is loading or unavailable.'; }
     const card = table.closest('.chart-card');
     card?.querySelectorAll('.chart-subtitle').forEach(sub => { sub.textContent = 'Observed source-label revenue; not verified medicine-demand quantities.'; });
   }
@@ -141,8 +188,8 @@ function exportProductPriorityCSV() {
     return '"' + text.replace(/"/g, '""') + '"';
   };
   const release = salesSectorsData?.source?.release || {};
-  const rows = [['Rank','Source product label','Net sales PHP','Positive sales PHP','Returns PHP','Contribution share percent','Cumulative share percent','Candidate ABC','Observed months','Reporting scope','Evidence','Product provenance','Policy status','Dataset ID','Fact Delta version','Transformation policy'],
-    ...productExportRows.map(row => [row.rank,row.name,row.revenue,row.positiveSales,row.returnsValue,row.share,row.cumulativeShare,row.abc,row.observedMonths,descriptivePeriodLabel(),'Databricks candidate source labels',row.productEvidence,'positive_sales_candidate_pending_CEO',release.dataset_id || 'Unavailable',release.fact_delta_version ?? 'Unavailable',release.policy_version || 'Unavailable'])];
+  const rows = [['Rank','Source product label','Net sales PHP','Positive sales PHP','Returns PHP','Contribution share percent','Cumulative share percent','Candidate ABC','Observed months','Reporting scope','Evidence','Product provenance','Policy status','Dataset ID','Fact Delta version','Transformation policy','Reporting ID','Category','Identity status','Item kind','Packaging unit','Pack count','Contained unit','Original aliases','Mapping hash','Brand','Manufacturer','Model','Strength','Concentration','Dosage form','Container size','Bundle specifications','Transaction lineage','Resolution policy','Transaction evidence hash','Catalog helper hash'],
+    ...productExportRows.map(row => [row.rank,row.name,row.revenue,row.positiveSales,row.returnsValue,row.share,row.cumulativeShare,row.abc,row.observedMonths,descriptivePeriodLabel(),'Databricks candidate source labels',row.productEvidence,'positive_sales_candidate_pending_CEO',release.dataset_id || 'Unavailable',release.fact_delta_version ?? 'Unavailable',release.policy_version || 'Unavailable',row.id,row.metadata.category || 'Unclassified',row.metadata.identity_status || 'needs_review',row.metadata.item_kind || 'unknown',row.metadata.packaging_unit || 'Unknown',row.metadata.pack_count || '',row.metadata.contained_unit || '',row.aliases.join('; '),release.product_master_sha256 || 'Unavailable',row.metadata.brand||'',row.metadata.manufacturer||'',row.metadata.model||'',row.metadata.strength||'',row.metadata.concentration||'',row.metadata.dosage_form||'',row.metadata.container_size||'',row.metadata.bundle_specification||'',row.lineage.join('; '),row.metadata.resolution_policy||'legacy_unresolved',release.transaction_evidence_sha256||'',release.catalog_helper_sha256||''])];
   const url = URL.createObjectURL(new Blob([rows.map(row => row.map(escape).join(',')).join('\r\n')], { type: 'text/csv;charset=utf-8' }));
   const link = document.createElement('a'); link.href = url; link.download = 'medshield-observed-product-sales.csv'; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
 }

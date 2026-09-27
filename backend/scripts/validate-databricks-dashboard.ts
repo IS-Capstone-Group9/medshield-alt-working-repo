@@ -50,7 +50,7 @@ async function main() {
   assert.equal(snapshot.data_status.mode, 'live', 'snapshot mode')
   assert.equal(snapshot.monthly.length, 108, 'monthly aggregate rows')
   assert.equal(snapshot.year_summary.length, 9, 'yearly aggregate rows')
-  assert.equal(snapshot.top_products.length, 15, 'top product rows')
+  assert.equal(snapshot.top_products.length, 100, 'top product snapshot rows (API limits tested separately)')
   assert.equal(quality.duplicate_rows, 0, 'duplicate fact rows')
   assert.equal(Number(eligible.analysis_rows ?? 0), quality.rows_extracted, 'validation/fact analysis population')
   assert.equal(

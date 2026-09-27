@@ -25,11 +25,12 @@ REFERENCE_PATH = (
     "likely_non_medical_product_candidates.csv"
 )
 AREA_MAPPING_PATH = "/Workspace/medshield/medshield_reference_csv/area_classification_mapping.csv"
+TRANSACTION_EVIDENCE_PATH = "/Workspace/medshield/medshield_reference_csv/transaction_evidence_review.csv"
 PRODUCT_MASTER_PATH = "/Workspace/medshield/medshield_reference_csv/product_master_review.csv"
 REPLACEMENT_2025_AUDIT_TABLE = f"{AUDIT_SCHEMA}.sales_restart_replacement_year_validation_candidate"
 # Change only after the thesis scope explicitly includes clinical consumables.
 INCLUDE_MEDICAL_SUPPLIES = False
-POLICY_VERSION = "sales_restart_gold_v6_reviewed_source_provenance"
+POLICY_VERSION = "sales_restart_gold_v7_independent_catalog"
 PUBLICATION_STATUS = "CANDIDATE_PENDING_BUSINESS_AND_PRODUCT_MASTER_REVIEW"
 KEEP_DISPOSITIONS = (
     "KEEP_SOURCE_YEAR_ALIGNED", "KEEP_HISTORICAL_BACKFILL_CANDIDATE"
@@ -263,7 +264,7 @@ def reviewed_mapping(rows, key_column, kind):
                 ):
                     raise ValueError(f"Nongeographic mapping cannot enable territory models: {key}")
             else:
-                if row["product_category"] not in {"medicine", "medical_supply", "non_medical"}:
+                if row["product_category"] not in {"medicine", "medical_supply", "medical_equipment", "non_medical"}:
                     raise ValueError(f"Invalid approved product category: {key}")
                 if not row["canonical_sku"] or not row["unit_of_measure"]:
                     raise ValueError(f"Approved SKU and source unit are required: {key}")
@@ -320,24 +321,57 @@ def area_metadata(value, master):
             row.get("external_mapping_status", "pending"))
 
 
+# Catalog helper is shipped beside this notebook as a Python workspace file.
+CATALOG_HELPER_PATH = "/Workspace/medshield/medshield_project/product_catalog.py"
+CATALOG_HELPER_SHA256 = "20888a90253718dabf2aea3390ecc8d7ca707b388e8a4d45123e894c98f688c9"
+catalog_payload = Path(CATALOG_HELPER_PATH).read_bytes()
+assert hashlib.sha256(catalog_payload).hexdigest() == CATALOG_HELPER_SHA256, "Catalog helper hash mismatch"
+catalog = {}
+exec(compile(catalog_payload, CATALOG_HELPER_PATH, "exec"), catalog)
+
 area_rows, AREA_MAPPING_SHA256 = read_mapping(AREA_MAPPING_PATH, {
     "raw_area", "standard_area", "area_type", "territory", "customer_type", "business_line",
     "weather_eligible", "forecast_eligible", "mapping_status", "territory_id", "region", "province",
     "city_municipality", "geographic_level", "evidence_source", "evidence_status", "external_mapping_status"})
-master_rows, PRODUCT_MASTER_SHA256 = read_mapping(PRODUCT_MASTER_PATH, {
-    "raw_product", "canonical_sku", "product_category", "unit_of_measure", "forecast_eligible", "mapping_status"})
+master_rows, PRODUCT_MASTER_SHA256 = read_mapping(PRODUCT_MASTER_PATH, set(catalog["FIELDS"]))
 area_master = reviewed_mapping(area_rows, "raw_area", "area")
-product_master = reviewed_mapping(master_rows, "raw_product", "product")
-# Bronze/Silver bound the complete source at 250,000 lines. Collect unique labels only.
+product_master = catalog["validate_master"](master_rows)
+# One policy row per normalized label prevents mapping fan-out.
 product_labels = {normalize_label(row[0]) for row in clean.select("product").distinct().collect()}
 area_labels = {normalize_label(row[0]) for row in clean.select("area").distinct().collect()}
-product_policy = spark.createDataFrame([
-    (label, *product_scope(label, reference_keys, product_master, INCLUDE_MEDICAL_SUPPLIES))
-    for label in sorted(product_labels)
-], "normalized_product string, product_scope_status string, canonical_sku string, product_category string, unit_of_measure string, is_medical_product_approved boolean")
+catalog_rows = []
+for label in sorted(product_labels):
+    metadata = catalog["resolve"](label, hashlib.sha256(label.encode("utf-8")).hexdigest(), product_master)
+    scope = classify_product_label(label, reference_keys)
+    assert scope != "CONTRACT_LABEL_CANDIDATE" or metadata["canonical_sku"] is None, "Contract parent cannot be a SKU"
+    metadata["product_scope_status"] = metadata["product_category"].upper() + "_APPROVED" if metadata["category_status"] == "approved" else scope
+    metadata["is_medical_product_approved"] = metadata["forecast_eligible"] and (
+        metadata["product_category"] == "medicine" or (INCLUDE_MEDICAL_SUPPLIES and metadata["product_category"] == "medical_supply"))
+    metadata["normalized_product"] = label
+    catalog_rows.append(metadata)
+catalog_schema = StructType([StructField(key, BooleanType() if isinstance(value, bool) else StringType(), True)
+    for key, value in catalog_rows[0].items()])
+product_policy = spark.createDataFrame(catalog_rows, catalog_schema)
+assert_unique(product_policy, ["normalized_product"], "catalog policy")
 area_policy = spark.createDataFrame([
     (label, *area_scope(label, area_master), *area_metadata(label, area_master)) for label in sorted(area_labels)
 ], "normalized_area string, area_classification string, territory string, is_geographic_territory_approved boolean, is_external_geography_candidate boolean, area_display_label string, proposed_area_type string, area_mapping_status string, territory_id string, mapped_region string, mapped_province string, mapped_city_municipality string, mapped_geographic_level string, mapped_customer_channel string, mapped_business_line string, area_mapping_evidence string, area_evidence_status string, external_mapping_status string")
+# Independently verified transaction detail has its own source-bound receipt.
+evidence_rows, TRANSACTION_EVIDENCE_SHA256 = read_mapping(TRANSACTION_EVIDENCE_PATH, set(catalog["EVIDENCE_FIELDS"]))
+evidence_master = catalog["validate_transaction_evidence"](evidence_rows)
+evidence_sources = clean.select("source_record_id", "source_file_sha256", "source_workbook").join(
+    manifest.select("source_workbook", "source_data_status", "source_adjustment_policy"), "source_workbook").collect()
+assert set(evidence_master) <= {row["source_record_id"] for row in evidence_sources}, "Verification references an unknown source record"
+transaction_policy_rows = []
+for source in evidence_sources:
+    data = source.asDict()
+    data["is_adjusted_source"] = data["source_data_status"] != "ORIGINAL_SOURCE_EXPORT"
+    transaction_policy_rows.append((data["source_record_id"], *catalog["transaction_evidence"](data, evidence_master)))
+transaction_policy = spark.createDataFrame(transaction_policy_rows,
+    "source_record_id string, transaction_evidence string, transaction_evidence_lineage string")
+assert_unique(transaction_policy, ["source_record_id"], "transaction evidence")
+print(f"PRODUCT MASTER: {len(master_rows)} rows; sha256={PRODUCT_MASTER_SHA256}; resolution={catalog['RESOLUTION_POLICY']}")
+print(f"TRANSACTION EVIDENCE: {len(evidence_rows)} rows; sha256={TRANSACTION_EVIDENCE_SHA256}")
 print(f"AREA MASTER: {len(area_rows)} mapping rows; sha256={AREA_MAPPING_SHA256}")
 display(area_policy.orderBy("area_mapping_status", "normalized_area"))
 
@@ -361,6 +395,7 @@ fact = (
     .join(product_reference, "normalized_product", "left")
     .join(product_policy, "normalized_product", "left")
     .join(area_policy, "normalized_area", "left")
+    .join(transaction_policy, "source_record_id", "left")
     .withColumn("product_key", F.sha2("normalized_product", 256))
     .withColumn("area_key", F.sha2("normalized_area", 256))
     .withColumn("date_key", F.date_format("date_delivered", "yyyyMMdd").cast("int"))
@@ -368,11 +403,14 @@ fact = (
     .withColumn("calendar_year", F.year("date_delivered"))
     .withColumn("is_contract_label", F.col("normalized_product").rlike(CONTRACT_PREFIX_PATTERN))
     .withColumn("is_adjusted_source", F.col("source_data_status") != "ORIGINAL_SOURCE_EXPORT")
+    .withColumn("resolution_policy", F.lit(catalog["RESOLUTION_POLICY"]))
+    .withColumn("transaction_evidence_sha256", F.lit(TRANSACTION_EVIDENCE_SHA256))
+    .withColumn("catalog_helper_sha256", F.lit(CATALOG_HELPER_SHA256))
     .withColumn("is_low_trust_2017", (F.col("calendar_year") == 2017) | (F.col("data_source_year") == 2017))
     .withColumn("is_historical_backfill_candidate", F.col("disposition") == "KEEP_HISTORICAL_BACKFILL_CANDIDATE")
     .withColumn("is_product_ranking_candidate", F.col("product_scope_status").isin(
         "PRODUCT_MASTER_PENDING", "NONMEDICAL_REFERENCE_REQUIRES_REVIEW",
-        "MEDICINE_APPROVED", "MEDICAL_SUPPLY_APPROVED", "NON_MEDICAL_APPROVED"))
+        "MEDICINE_APPROVED", "MEDICAL_SUPPLY_APPROVED", "MEDICAL_EQUIPMENT_APPROVED", "NON_MEDICAL_APPROVED"))
     .withColumn("is_quantity_observation_eligible", F.col("quantity").isNotNull()
         & ~has_rule("2017_QUANTITY_CANDIDATES_DISAGREE") & ~has_rule("INVALID_OR_MISSING_QUANTITY"))
     .withColumn("is_gross_sales_eligible", F.col("gross_sales").isNotNull() & ~has_rule("GROSS_VALUE_FORMULA_MISMATCH"))
@@ -381,14 +419,17 @@ fact = (
     .withColumn("is_gross_margin_eligible", F.col("gross_margin_amount").isNotNull()
         & F.col("is_net_sales_eligible") & F.col("is_acquisition_cost_eligible") & ~has_rule("GROSS_MARGIN_FORMULA_MISMATCH"))
     .withColumn("is_positive_delivery_quantity_eligible", F.col("is_quantity_observation_eligible")
-        & (F.col("quantity") > 0) & F.col("is_product_ranking_candidate"))
+        & (F.col("quantity") > 0) & F.col("is_product_ranking_candidate") & (F.col("item_kind") != "service"))
     .withColumn("is_return_quantity_eligible", F.col("is_quantity_observation_eligible") & (F.col("quantity") < 0))
     .withColumn("return_quantity_abs", F.when(F.col("is_return_quantity_eligible"), F.abs("quantity")))
     .withColumn("is_provisional_product_demand_eligible", F.col("is_positive_delivery_quantity_eligible")
         & (F.col("product_scope_status") == "PRODUCT_MASTER_PENDING")
         & ~F.col("is_low_trust_2017") & ~F.col("is_historical_backfill_candidate"))
     .withColumn("is_approved_medical_demand_eligible", F.col("is_positive_delivery_quantity_eligible")
-        & F.col("is_medical_product_approved") & ~F.col("is_low_trust_2017")
+        & F.col("is_medical_product_approved")
+        & F.col("transaction_evidence").isin("original_source_detail", "independently_verified_detail")
+        & (F.col("item_kind") == "physical_product") & (F.col("identity_status") == "approved")
+        & ~F.col("is_low_trust_2017")
         & ~F.col("is_historical_backfill_candidate"))
     .withColumn("is_external_analysis_candidate", F.col("is_approved_medical_demand_eligible")
         & F.col("is_external_geography_candidate"))
@@ -405,6 +446,16 @@ fact = (
     .withColumn("publication_status", F.lit(PUBLICATION_STATUS))
     .withColumn("policy_version", F.lit(POLICY_VERSION))
 )
+# Catalog-only migration is bound to the reviewed predecessor, not latest mutable state.
+CATALOG_BASE_FACT_VERSION = 16
+catalog_base = spark.sql(f"SELECT * FROM {GOLD_SCHEMA}.sales_restart_fact_candidate VERSION AS OF {CATALOG_BASE_FACT_VERSION}")
+assert dataset_of(catalog_base, "catalog predecessor") == DATASET_ID
+same_keys(catalog_base, fact, ["source_record_id"], "Catalog migration cannot add/delete transactions")
+CATALOG_PRESERVED_FIELDS = ["source_record_id", "product_key", "product", "product_raw", "quantity", "date_delivered", "net_sales",
+    "gross_sales", "gross_margin_amount", "total_acquisition_cost", "is_net_sales_eligible", "is_gross_sales_eligible",
+    "is_gross_margin_eligible", "is_acquisition_cost_eligible", "is_quantity_observation_eligible", "is_adjusted_source"]
+assert catalog_base.select(*CATALOG_PRESERVED_FIELDS).exceptAll(fact.select(*CATALOG_PRESERVED_FIELDS)).limit(1).count() == 0, "Catalog source/financial contract changed"
+assert fact.select(*CATALOG_PRESERVED_FIELDS).exceptAll(catalog_base.select(*CATALOG_PRESERVED_FIELDS)).limit(1).count() == 0, "Catalog source/financial contract changed"
 assert_unique(fact, ["sales_fact_id"], "Gold fact")
 same_keys(clean, fact, ["source_record_id"], "Gold must preserve exactly the Silver survivors")
 eligibility_nulls = F.lit(False)
@@ -420,6 +471,7 @@ assert fact.filter(
 ).limit(1).count() == 0, "The adjusted-source provenance flag is missing from 2025 facts."
 assert fact.filter("is_approved_medical_demand_eligible = true").filter(
     ~F.col("is_medical_product_approved") | F.col("is_contract_label")
+    | (F.col("transaction_evidence") == "adjusted_estimated_source") | (F.col("item_kind") != "physical_product")
     | F.col("canonical_sku").isNull() | F.col("unit_of_measure").isNull()
     | F.col("is_low_trust_2017") | F.col("is_historical_backfill_candidate")
     | (F.col("quantity") <= 0)
@@ -455,6 +507,15 @@ dim_product = fact.groupBy("product_key", "normalized_product", "product_scope_s
     F.min("reference_proposed_category").alias("reference_proposed_category"),
     F.min("date_delivered").alias("first_observed_delivery"), F.max("date_delivered").alias("last_observed_delivery"),
 ).join(product_policy, ["normalized_product", "product_scope_status"], "left")
+# Canonical reporting dimension retains original aliases for drill-through.
+dim_canonical_product = fact.groupBy("canonical_group_id").agg(
+    F.min("canonical_sku").alias("canonical_sku"), F.min("canonical_title").alias("canonical_title"),
+    F.sort_array(F.collect_set("product")).alias("original_aliases"),
+    F.sort_array(F.collect_set("product_key")).alias("source_product_keys"),
+    F.count("*").alias("source_record_count"),
+    *[F.min(field).alias(field) for field in ["display_category", "product_category", "identity_status", "category_status", "item_kind", "unit_of_measure"] + list(catalog["ATTRIBUTES"])])
+assert_unique(dim_canonical_product, ["canonical_group_id"], "canonical product")
+
 for dimension, keys in [(dim_date, ["date_key"]), (dim_area, ["area_key"]), (dim_product, ["product_key"])]:
     assert_unique(dimension, keys, "Gold dimension")
     assert fact.select(*keys).join(dimension.select(*keys), keys, "left_anti").count() == 0
@@ -630,6 +691,7 @@ outputs = {
     f"{GOLD_SCHEMA}.sales_restart_dim_date_candidate": (dim_date, ["date_key"]),
     f"{GOLD_SCHEMA}.sales_restart_dim_area_candidate": (dim_area, ["area_key"]),
     f"{GOLD_SCHEMA}.sales_restart_dim_product_candidate": (dim_product, ["product_key"]),
+    f"{GOLD_SCHEMA}.sales_restart_dim_canonical_product_candidate": (dim_canonical_product, ["canonical_group_id"]),
     f"{GOLD_SCHEMA}.sales_restart_monthly_candidate": (monthly, ["month_start"]),
     f"{GOLD_SCHEMA}.sales_restart_yearly_candidate": (yearly, ["calendar_year"]),
     f"{GOLD_SCHEMA}.sales_restart_area_yearly_candidate": (area_yearly, ["calendar_year", "area_key"]),

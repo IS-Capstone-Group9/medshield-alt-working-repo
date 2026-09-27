@@ -1,5 +1,22 @@
 # Data Stores
 
+Predictive continuation: the complete 15-configuration experiment is persisted
+in candidate run/point/evaluation tables under an artifact-hash experiment ID.
+Readback reconciled all 1,092 prediction/backtest rows and 15 evaluations. This
+experiment namespace is distinct from a reviewed selected-model release. No
+release pointer was changed. See the final run's `candidate-warehouse-receipt.json`
+under `outputs/predictive_validation/2026-09-27T14-30-12-921Z/model-run/`.
+
+Predictive warehouse preparation: `07_predictive_contracts.sql` defines the frozen
+monthly mart, immutable run/point/evaluation candidates, append-only model reviews,
+release manifest, single active pointer and stable dashboard views. The associated
+`08_predictive_frozen_input.py` loader checks input hash and stored content.
+The nine additive DDL statements and 108 frozen candidate input rows were deployed
+and reconciled by the TypeScript deployment script; the alternate Python notebook
+remains unverified in Databricks. The model release pointer is empty. Publication
+requires exact artifact-bound data/model review and verified readback before the
+pointer changes. See [PREDICTIVE_OPERATIONS.md](PREDICTIVE_OPERATIONS.md).
+
 ## Responsibility split
 
 | Store | Current responsibility | Excluded responsibility |

@@ -60,3 +60,19 @@ The gateway also derives bounded buyer-sector, forecasting-baseline, prioritizat
 - Treat `PASS_CANDIDATE` as technical pipeline evidence, not publication approval.
 
 See [CURRENT_STATE.md](CURRENT_STATE.md), [API.md](API.md), and [DATABASE.md](DATABASE.md).
+
+
+## Catalog implementation prepared — 27 September 2026
+
+[Product catalog contract](PRODUCT_CATALOG.md) defines independent category,
+sellable identity, item kind and transaction evidence. Local deterministic rules,
+Gold enrichment, stable-ID API/UI grouping, category filters and provenance-aware
+quantity/export handling are implemented. The complete version-16 review includes
+37,728 records and 4,561 labels; all remain unresolved because no approved master
+entries were supplied. Category approval cannot approve SKU, quantity conversion,
+forecasting or observed medical demand. Adjusted provenance remains file-level.
+
+The [operator runbook](CATALOG_DEPLOYMENT.md) specifies catalog-only 03 → 04 → 05 →
+06 → publication-readiness → descriptive/catalog validation, version-bound activation
+and rollback. This is local preparation: no Databricks writes, release activation
+or additional CEO decisions occurred. Databricks remains the sole analytical source.

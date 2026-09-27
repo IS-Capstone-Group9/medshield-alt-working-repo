@@ -11,3 +11,8 @@ export function filterMonthlyYear<T extends { period?: unknown }>(rows: T[], yea
     ? rows
     : rows.filter((row) => String(row.period ?? '').startsWith(`${year}-`))
 }
+
+/** Reject repeated/structured filters rather than silently broadening scope. */
+export function invalidScalarQueryKey(query: Record<string, unknown>): string | undefined {
+  return Object.keys(query).find(key => typeof query[key] !== 'string')
+}

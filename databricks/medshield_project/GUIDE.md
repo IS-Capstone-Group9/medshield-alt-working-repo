@@ -4,31 +4,26 @@ Canonical notebook package: `databricks/medshield_project`. This replaces the ol
 `sales_restart` paths without undoing their staged deletion. Nothing here grants
 business approval or makes an offline file a dashboard data source.
 
-## Deployment sequence
+## Catalog-only deployment sequence
 
-1. Record the deployed notebook revisions, job configuration, current source hashes
-   and Delta versions before changes. Serialize this historical rebuild.
-2. Upload the reviewed Bronze, Silver and Gold notebooks from this folder. Gold must
-   report `sales_restart_gold_v6_reviewed_source_provenance`. Deploy the matching
-   reference files to the configured Workspace reference directory. Do not alter
-   the historical source files or clear mapping warnings.
-3. Run `01_sales_bronze.py`, `02_sales_silver.py`, then `03_sales_gold.py`.
-   Gold rejects mislabeled adjusted sources, including the known 2020/2024 hashes.
-   Those files contain product-label estimates even though annual finances reconcile.
-4. Run `04_sales_restart_monthly_bridge.py` and
-   `05_sales_restart_system_bridge.sql`. Run the evidence collector before promotion.
-5. Configure numpy and statsmodels in the job environment, record their versions,
-   then run `06_sales_stl.py`. It reads a pinned fact version, splits at gaps and
-   writes only `workspace.medshield_gold.sales_restart_stl_candidate`.
-6. From backend run `node --import tsx scripts/publication-readiness.ts` and
-   `node --import tsx scripts/validate-descriptive.ts`. Every required technical
-   check must pass. A passing receipt never changes CEO approval status.
-7. Configure `DATABRICKS_DESCRIPTIVE_FACT_VERSION` to the reviewed fact Delta version
-   and restart the gateway during controlled activation. Without that setting the
-   gateway pins the latest fact version at its first read for that process.
-   This is a candidate consistency guard, not the final approved-publication workflow.
-8. Check actual dates, partial filters, product/area totals, exports and the STL
-   panel. Obtain the CEO's release decision against the exact new receipt.
+Follow [the exact catalog deployment and rollback runbook](../../docs/CATALOG_DEPLOYMENT.md).
+This package prepares Gold v7 and does not activate a release or grant approvals.
+The current source is version 16; `CATALOG_BASE_FACT_VERSION=16` protects unchanged
+source records and finances before any catalog write. Keep Bronze/Silver unchanged.
+
+1. Capture prior notebook/application revisions, all candidate Delta versions, bridge
+   definitions, and mapping hashes. Keep the serving gateway pinned to 16.
+2. Upload `product_catalog.py` as a workspace file beside Gold. Upload both header-only
+   preparation masters to the configured reference directory and verify their hashes.
+3. Run **03 Gold → 04 monthly bridge → 05 system bridge → 06 STL**. Gold must report
+   `sales_restart_gold_v7_independent_catalog` and `catalog_v1_independent_evidence`.
+4. Against the newly observed candidate fact version, run publication-readiness,
+   descriptive validation and catalog validation. Save matching receipts/output versions.
+5. Only a later explicit CEO decision bound to that exact release permits controlled
+   application activation. Neither local tests nor successful notebooks record approval.
+
+Run Bronze/Silver only if their inputs or logic change under a separately reviewed
+rebuild; this catalog-only package intentionally asserts the original source identity.
 
 ## Permissions and current blocker
 

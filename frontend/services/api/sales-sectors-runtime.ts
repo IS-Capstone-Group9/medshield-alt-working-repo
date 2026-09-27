@@ -132,7 +132,7 @@ export const SALES_SECTORS_MARKUP = String.raw`
   <section class="area-chart-panel" aria-labelledby="areaParetoTitle"><h3 id="areaParetoTitle">Regional-group revenue concentration</h3><p>Regional-group revenue bars with cumulative share and an 80% reference line.</p><div class="area-chart-wrap"><canvas id="sectorParetoChart" role="img" aria-label="Regional-group revenue Pareto chart"></canvas></div></section>
  </div>
  <div class="area-table-wrap"><table class="product-table" id="sectorProfileTable"><caption class="sr-only">Selected-period geographic commercial priority ranking</caption></table></div>
- <details class="area-method"><summary>How ranking and evidence are calculated</summary><p><strong>Commercial priority score:</strong> <span id="areaScoreMethod">60% sales-value scale + 40% active-period coverage</span>. The score describes historical commercial presence; it is not an inventory allocation instruction.</p><p><strong>Actual:</strong> included source transactions. <strong>Gap estimate:</strong> a missing selected calendar period filled from available same-calendar history using recency weights. Estimated contract allocations and other flagged estimated source rows remain excluded by the sales service.</p><p id="sectorSource">Source evidence unavailable.</p></details>
+ <details class="area-method"><summary>How ranking and evidence are calculated</summary><p><strong>Commercial priority score:</strong> <span id="areaScoreMethod">60% sales-value scale + 40% active-period coverage</span>. The score describes historical commercial presence; it is not an inventory allocation instruction.</p><p><strong>Actual:</strong> included source transactions. <strong>Gap estimate:</strong> a missing selected calendar period filled from available same-calendar history using recency weights. Financial amounts can include historical allocations whose product attribution is estimated. These are distinct from gap estimates and do not establish actual SKU quantities. Buyer groups are proposed classifications; geographic mapping status remains visible.</p><p id="sectorSource">Source evidence unavailable.</p></details>
 
  <section class="area-client-panel" id="clientReferenceSection" aria-labelledby="clientRefTitle">
   <div class="area-client-header">
@@ -7424,16 +7424,21 @@ function renderSalesSectors(error) {
  ['sectorRegion','sectorCluster','sectorProduct','sectorEvidence'].forEach(id=>{if(el(id))el(id).disabled=!salesSectorsData;});
  if(!salesSectorsData) { el('sectorStatus').textContent=error||'Area prioritization is unavailable; no demonstration values were substituted.';if(el('sectorSource'))el('sectorSource').textContent='Source evidence unavailable.';renderClientReferenceTable();return; }
 
+ let categorySelect=el('sectorCategory');
+ if(!categorySelect){const label=document.createElement('label');label.textContent='Product category ';categorySelect=document.createElement('select');categorySelect.id='sectorCategory';['All','Medical','Non-Medical','Unclassified'].forEach(value=>categorySelect.add(new Option(value,value)));categorySelect.onchange=()=>renderSalesSectors();label.append(categorySelect);el('sectorProduct').closest('label').parentElement.append(label);}
+ const category=categorySelect.value;
+ const categoryRows=salesSectorsData.rows.filter(row=>category==='All'||(row.category||'Unclassified')===category);
  const productSelect=el('sectorProduct'),priorProduct=productSelect.value;
- const products=[...new Set(salesSectorsData.rows.map(row=>row.product).filter(Boolean))].sort();
- productSelect.innerHTML='<option value="">All products</option>'+products.map(product=>'<option value="'+esc(product)+'">'+esc(product)+'</option>').join('');
+ const productLabels=new Map(categoryRows.map(row=>[row.canonical_group_id||row.product,row.canonical_title||row.product]));
+ const products=[...productLabels.keys()].filter(Boolean).sort();
+ productSelect.innerHTML='<option value="">All products</option>'+products.map(product=>'<option value="'+esc(product)+'">'+esc(productLabels.get(product))+'</option>').join('');
  productSelect.value=products.includes(priorProduct)?priorProduct:'';
 
  const region=el('sectorRegion')?el('sectorRegion').value||'All':'All';
  const product=productSelect.value,cluster=el('sectorCluster').value||'All',evidence=el('sectorEvidence').value||'all';
  const detailed=getDescriptiveDetailedRows();
 
- const productRows=detailed.filter(row=>!product||row.product===product);
+ const productRows=detailed.filter(row=>(category==='All'||(row.category||'Unclassified')===category)&&(!product||(row.canonical_group_id||row.product)===product));
  const clusterRows=productRows.filter(row=>cluster==='All'||row.sector===cluster);
  const regionRows=clusterRows.filter(row=>{
   if(region==='All')return true;
@@ -7451,9 +7456,9 @@ function renderSalesSectors(error) {
  const groups=new Map();
  mappedRows.forEach(row=>{
   const area=String(row.territory).trim();
-  const current=groups.get(area)||{area,region:resolveRowRegion(row),revenue:0,actual:0,estimated:0,quantity:0,rowCount:0,periods:new Set(),clusters:{Government:0,Private:0,Internal:0,Unknown:0}};
-  const revenue=Number(row.revenue)||0,quantity=Number(row.quantity)||0,estimated=row.evidence==='estimate';
-  current.revenue+=revenue;current[estimated?'estimated':'actual']+=revenue;current.quantity+=quantity;current.rowCount+=Number(row.row_count)||0;
+  const current=groups.get(area)||{area,region:resolveRowRegion(row),revenue:0,actual:0,estimated:0,rowCount:0,periods:new Set(),clusters:{Government:0,Private:0,Internal:0,Unknown:0}};
+  const revenue=Number(row.revenue)||0,estimated=row.evidence==='estimate';
+  current.revenue+=revenue;current[estimated?'estimated':'actual']+=revenue;current.rowCount+=Number(row.row_count)||0;
   if(periodKey(row))current.periods.add(periodKey(row));
   const ownership=['Government','Private','Internal','Unknown'].includes(row.sector)?row.sector:'Unknown';
   current.clusters[ownership]+=revenue;groups.set(area,current);
@@ -7466,7 +7471,6 @@ function renderSalesSectors(error) {
  const ranked=[...positive].sort((left,right)=>right.score-left.score||right.revenue-left.revenue||left.area.localeCompare(right.area));
 
  const mappedRevenue=positive.reduce((total,row)=>total+row.revenue,0),actualRevenue=scopeRows.filter(row=>row.evidence!=='estimate').reduce((total,row)=>total+(Number(row.revenue)||0),0),estimatedRevenue=scopeRows.filter(row=>row.evidence==='estimate').reduce((total,row)=>total+(Number(row.revenue)||0),0);
- const totalQuantity=positive.reduce((total,row)=>total+row.quantity,0);
  const allWeight=weightedCount(scopeRows),mappedWeight=weightedCount(mappedRows),mappingCoverage=allWeight?mappedWeight/allWeight*100:0,unmappedRevenue=revenueTotal(unmappedRows);
  const topThree=ranked.slice(0,3).reduce((total,row)=>total+row.revenue,0),leading=ranked[0];
 
@@ -7477,11 +7481,10 @@ function renderSalesSectors(error) {
   const regRev = regAreas.reduce((sum, p) => sum + p.revenue, 0);
   const regActual = regAreas.reduce((sum, p) => sum + p.actual, 0);
   const regEstimated = regAreas.reduce((sum, p) => sum + p.estimated, 0);
-  const regUnits = regAreas.reduce((sum, p) => sum + p.quantity, 0);
   const regLead = regAreas.length > 0 ? regAreas[0] : null;
   const regPeriods = new Set();
   regAreas.forEach(area => area.periods.forEach(period => regPeriods.add(period)));
-  return { name: regName, revenue: regRev, actual: regActual, estimated: regEstimated, units: regUnits, count: regAreas.length, share: 0, leading: regLead, periods: regPeriods };
+  return { name: regName, revenue: regRev, actual: regActual, estimated: regEstimated, count: regAreas.length, share: 0, leading: regLead, periods: regPeriods };
  });
  const regionalGroups=regionalRollups.filter(row=>row.revenue>0);
  const maximumRegionRevenue=regionalGroups.reduce((maximum,row)=>Math.max(maximum,row.revenue),0);
@@ -7510,7 +7513,7 @@ function renderSalesSectors(error) {
   '</div>';
  }
 
- el('sectorScope').textContent=descriptivePeriodLabel()+' · '+(region==='All'?'All regional groups':region)+' · '+(cluster==='All'?'All buyer clusters':cluster)+' · '+(product||'All products')+' · '+(evidence==='actual'?'Actual only':'Actual + estimates');
+ el('sectorScope').textContent=descriptivePeriodLabel()+' · '+(region==='All'?'All regional groups':region)+' · '+(cluster==='All'?'All buyer clusters':cluster)+' · '+(productLabels.get(product)||'All products')+' · '+category+' categories (services included in revenue)'+' · '+(evidence==='actual'?'Actual only':'Actual + estimates');
  el('areaMappingCoverage').textContent=fmtPct(mappingCoverage)+' mapped';
  el('areaActualRevenue').textContent=fmtCompact(regionalActual);
  el('areaEstimatedRevenue').textContent=fmtCompact(regionalEstimated);

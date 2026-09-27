@@ -14,7 +14,7 @@ function syncHistoricalYearControls() {
   const options = Array.from({length:dashboardCalendar().year-2016},(_,i)=>String(2017+i));
   for(const [id,value,all] of [['topbarYearSelect',selectedYear,true],['yoyBaseYearSelect',yoyBaseYear,false],['yoyTargetYearSelect',yoyTargetYear,false]]) {
     const select=document.getElementById(id); if(!select)continue;
-    select.replaceChildren(...(all?[new Option('All years (2017–2025)','all')]:[]), ...options.map(y=>new Option(y+(years.includes(y)?'':' — no snapshot rows'),y)));
+    select.replaceChildren(...(all?[new Option('All available years','all')]:[]), ...options.map(y=>new Option(y+(years.includes(y)?'':' — no snapshot rows'),y)));
     select.value=String(value);
   }
 }
@@ -143,6 +143,15 @@ function diagnosticAxis(values, title, color, position, grid) {
 }
 
 function renderSalesDiagnostics(opts) {
+  const grainLabel = descriptiveUsesYearlyGrain() ? 'Yearly' : descriptiveUsesDailyGrain() ? 'Daily' : 'Monthly';
+  const salesTitle = document.getElementById('salesComparisonSubtitle')?.parentElement?.querySelector('.chart-title');
+  if (salesTitle) salesTitle.textContent = grainLabel + ' Net Sales Revenue and Gross Profit';
+  const marginCard = document.getElementById('marginChart')?.closest('.chart-card');
+  const marginTitle = marginCard?.querySelector('.chart-title');
+  if (marginTitle) marginTitle.textContent = grainLabel + ' Gross Margin %';
+  const marginCaption = marginCard?.querySelector('.chart-subtitle');
+  if (marginCaption) marginCaption.textContent = 'Gross profit ÷ revenue from the same margin-eligible records. Missing or nonpositive denominators are unavailable.';
+
   const definitions = document.querySelector('[data-metric-definitions]');
   const marginDefinition = definitions && [...definitions.querySelectorAll('p')].find(p => p.textContent.startsWith('Gross margin %'));
   if (marginDefinition) marginDefinition.textContent = 'Gross margin % = gross profit ÷ net sales for the same margin-eligible transactions × 100; transaction percentages are not averaged. A missing or nonpositive denominator means unavailable. Revenue-only rows are excluded from this rate.';
@@ -199,10 +208,30 @@ function renderSalesDiagnostics(opts) {
     data: { labels: detailLabels, datasets: detailDatasets },
     options: {
       ...opts,
-      plugins: { ...opts.plugins, legend: { ...opts.plugins.legend, position: 'bottom' }, tooltip: {
-        ...opts.plugins.tooltip, callbacks: { label: context => context.dataset.label + ': ' + diagnosticCurrency(context.raw) }
-      } },
-      scales: detailScales
+      plugins: {
+        ...opts.plugins,
+        legend: {
+          position: 'top',
+          align: 'start',
+          labels: { usePointStyle: true, boxWidth: 8, padding: 14, font: { size: 11 } }
+        },
+        tooltip: {
+          ...opts.plugins.tooltip,
+          callbacks: { label: context => context.dataset.label + ': ' + diagnosticCurrency(context.raw) }
+        }
+      },
+      scales: {
+        ...detailScales,
+        x: {
+          ...detailScales.x,
+          ticks: {
+            ...((detailScales.x && detailScales.x.ticks) || {}),
+            maxRotation: 45,
+            autoSkip: true,
+            maxTicksLimit: descriptiveUsesDailyGrain() ? 14 : 18
+          }
+        }
+      }
     }
   });
 
@@ -215,7 +244,7 @@ function renderSalesDiagnostics(opts) {
         const suffix = '-' + String(month).padStart(2, '0');
         if (!descriptivePeriodIncludes(String(row.period) + suffix)) continue;
         const currentRow = actual.get(String(row.period) + suffix), priorRow = actual.get(previousPeriod + suffix);
-        if (!currentRow || !priorRow) continue;
+        if (!currentRow || !priorRow || currentRow.revenue == null || priorRow.revenue == null || currentRow.evidence === 'estimate' || priorRow.evidence === 'estimate') continue;
         current += Number(currentRow.revenue); previous += Number(priorRow.revenue); matchedMonths++;
       }
       const delta = matchedMonths ? current - previous : null;
@@ -242,6 +271,7 @@ function renderSalesDiagnostics(opts) {
   if (summary) summary.textContent = matched.length
     ? descriptivePeriodLabel() + ' versus the same calendar periods one year earlier: ' + diagnosticCurrency(previousTotal) + ' → ' + diagnosticCurrency(currentTotal) + '; change ' + diagnosticCurrency(totalDelta) + ' (' + diagnosticRate(totalRate) + '). ' + matched.length + '/' + rows.length + ' periods matched.' + (yearly ? ' Annual comparisons include only months observed in both years; see each year’s matched coverage.' : '')
     : 'No same-period prior-year observations are available for ' + descriptivePeriodLabel() + '.';
+  if (summary && yearly) summary.textContent = descriptivePeriodLabel() + ': Annual comparisons include only months observed in both years. Each year uses its preceding year. ' + matched.length + '/' + rows.length + ' yearly comparisons available. The table states the matched coverage; comparisons are not summed into an all-history growth rate.';
   createChart('growthChart', {
     type: 'bar',
     data: {
@@ -253,17 +283,33 @@ function renderSalesDiagnostics(opts) {
     },
     options: {
       ...opts,
-      plugins: { ...opts.plugins, legend: { ...opts.plugins.legend, position: 'bottom' }, tooltip: {
-        ...opts.plugins.tooltip, callbacks: {
-          label: context => context.dataset.label + ': ' + (context.dataset.yAxisID === 'growthRate' ? diagnosticRate(context.raw) : diagnosticCurrency(context.raw)),
-          afterBody: contexts => {
-            const row = rows[contexts[0]?.dataIndex];
-            return row ? [row.previousPeriod + ': ' + diagnosticCurrency(row.previous), row.period + ': ' + diagnosticCurrency(row.current)] : [];
+      plugins: {
+        ...opts.plugins,
+        legend: {
+          position: 'top',
+          align: 'start',
+          labels: { usePointStyle: true, boxWidth: 8, padding: 12, font: { size: 11 } }
+        },
+        tooltip: {
+          ...opts.plugins.tooltip, callbacks: {
+            label: context => context.dataset.label + ': ' + (context.dataset.yAxisID === 'growthRate' ? diagnosticRate(context.raw) : diagnosticCurrency(context.raw)),
+            afterBody: contexts => {
+              const row = rows[contexts[0]?.dataIndex];
+              return row ? [row.previousPeriod + ': ' + diagnosticCurrency(row.previous), row.period + ': ' + diagnosticCurrency(row.current)] : [];
+            }
           }
         }
-      } },
+      },
       scales: {
-        x: opts.scales.x,
+        x: {
+          ...opts.scales.x,
+          ticks: {
+            ...((opts.scales.x && opts.scales.x.ticks) || {}),
+            maxRotation: 45,
+            autoSkip: true,
+            maxTicksLimit: 10
+          }
+        },
         growthRate: { type: 'linear', position: 'left', beginAtZero: true, ticks: { callback: value => Number(value).toLocaleString('en-PH', { maximumFractionDigits: 1 }) + '%' }, title: { display: true, text: 'YoY net sales growth (%)' } },
         pesoChange: diagnosticAxis(rows.map(row => row.delta), 'YoY net sales change (₱)', getAmber(), 'right', false)
       }

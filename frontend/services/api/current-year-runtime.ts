@@ -75,7 +75,17 @@ function dashboardAnnualRows() {
 }
 
 function diagnosticMarginRows() {
-  return getDescriptiveMonthlyRows()
-    .map(row => ({ year: descriptivePointLabel(row.period), revenue: row.margin_revenue_basis, income: row.income }));
+  const totals = new Map();
+  getDescriptiveMonthlyRows().forEach(row => {
+    const period = descriptiveUsesYearlyGrain() ? String(row.period).slice(0,4) : row.period;
+    const total = totals.get(period) || {revenue:0,income:0,complete:true};
+    if (row.margin_revenue_basis == null || row.income == null) total.complete = false;
+    else {total.revenue += Number(row.margin_revenue_basis); total.income += Number(row.income);}
+    totals.set(period,total);
+  });
+  return descriptiveAxisPeriods().map(period => {
+    const row = totals.get(period);
+    return {year:descriptivePointLabel(period),revenue:row?.complete?row.revenue:null,income:row?.complete?row.income:null};
+  });
 }
 `

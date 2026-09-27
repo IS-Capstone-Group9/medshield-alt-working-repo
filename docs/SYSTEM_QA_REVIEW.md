@@ -1,5 +1,174 @@
 # System QA Review
 
+## Descriptive completion verification — 27 September 2026
+
+**Verdict: technically validated historical sales candidate for CEO review.**
+The old Gold-v5 provenance and missing-STL findings below are superseded for fact
+version 16 by the operator's completed 01–06 run and passing read-only receipts.
+No business approval or production deployment is recorded by this review.
+
+Resolved in the application: repeated/structured filters now reject with 400;
+scientific-notation years reject while four-digit empty future years remain empty;
+yearly source quantities and margin use matching yearly aggregation; margin captions
+use the eligible denominator; annual YoY never sums overlapping year-pair comparisons
+into a misleading all-history growth rate; chart titles follow selected grain.
+STL checks fact, policy and mapping identities and component reconstruction, shows
+72 qualifying months and four components, and exports dataset/version/status.
+Product ABC uses positive contributions, separate returns, a fixed full-population
+cohort denominator and an 80% reference. Corrected tests supply actual warehouse
+mapping/positive-sales fields instead of reviving unsupported clinical features.
+
+Evidence:
+- Publication: [70/70 pass](../outputs/publication_readiness/2026-09-27T06-49-46-520Z/README.md).
+- Calculations/STL: [version 16, 72 reconciled months](../outputs/descriptive_validation/2026-09-27T06-41-37-034Z/evidence.json).
+- Backend unit tests: 21 passed (including structured/repeated filter rejection).
+- Frontend/backend TypeScript checks passed during remediation.
+- Browser: area grouping/filtering, matched YoY, partial dates, no-observation scopes,
+  positive-sales ABC, returns, cohort denominator, source-label rendering, CSV totals,
+  yearly quantities, live STL and versioned exports exercised in the descriptive suites.
+  Four explicitly skipped legacy year-selector tests remain superseded; they are not passes.
+- Final delivery browser run: **8 passed**, `frontend/test-results-descriptive-delivery`:
+  live version-16 STL with 72-row export, authenticated filter validation, four product
+  boundary/cohort/export tests, responsive 375px layout, and yearly quantity CSV.
+- Area and buyer scope regressions: **5 passed** in the descriptive release run.
+- Matched-period/growth suite: **6 passed, 4 legacy tests skipped** after final labels.
+- Final rendered screenshots inspected: Sales Diagnostics and Product Prioritization;
+  currency captions, quantity readiness, STL components, candidate notice and provenance
+  were checked. This is scoped visual QA, not a full accessibility certification.
+- Local gateway pinned to version 16 in ignored backend environment configuration.
+
+The product master remains unverified, candidate buyer/geographic and ABC decisions
+remain scoped approval items, and ten missing months remain unavailable. Future
+upload turnover and production packaging/deployment are outside this historical
+candidate verification. Prior production image/standalone packaging findings below
+are not cleared by these local tests. Local test success is not CEO acceptance.
+
+
+## Historical pre-deployment QA — 27 September 2026 (superseded by the review above)
+
+**Decision: HOLD. Descriptive analytics is not ready for final acceptance or an
+approved predictive training baseline.** Financial reconciliation passes, but
+the live source-provenance defect remains. This review did not deploy notebooks,
+modify warehouse data, grant business approval, or change application code.
+The two pre-existing backend edits were preserved. Accountable role: QA Engineer;
+this was a single-agent self-review.
+
+### Scope and acceptance
+
+The review covered Overview, Sales Diagnostics, Product Prioritization, Area
+Prioritization, shared date/grain controls, charts, exports, gateway validation,
+authentication rejection, current Databricks sales/external contracts, notebook
+tests, and the boundary to predictive work. Existing forecast/planning browser
+regressions also ran; this does not certify predictive model suitability.
+
+Plan executed: inspect instructions/runtime and user edits; run offline tests and
+type checks; collect fresh read-only warehouse receipts; exercise APIs; run the
+full browser suite and inspect live screens; record defects and handoff gates.
+The expected example is that the same selected revenue reconciles across the
+warehouse, gateway, dashboard and export. Missing months must stay unavailable,
+and malformed year filters must not silently broaden the reporting scope.
+
+| Acceptance check | Result | Evidence |
+|---|---|---|
+| Backend logic | PASS | `node --import tsx --test tests/*.test.ts`: 20 passed |
+| Canonical Databricks notebook logic | PASS | `python -m unittest discover -s databricks/medshield_project/tests`: 29 passed |
+| Python services | PASS | `python -m unittest discover -s services/tests`: 76 passed |
+| Offline STL | PASS | `python -m unittest services.analytics_service.jobs.test_descriptive_stl`: 3 passed; not cloud execution |
+| Types | PASS | Backend `tsc --noEmit`; frontend `tsc --noEmit --incremental false` |
+| Generated notebook instructions | PASS | `python databricks/medshield_project/render_readme.py --check` |
+| Live publication | FAIL | 68 PASS, 2 FAIL, 0 UNVERIFIED; [receipt](../outputs/publication_readiness/2026-09-27T05-14-39-700Z/README.md) |
+| Live descriptive calculations | PASS | [Version-bound evidence](../outputs/descriptive_validation/2026-09-27T05-15-25-564Z/evidence.json) |
+| Dashboard warehouse contracts | PASS with QA adaptation | Original validator fails its obsolete 15-product snapshot assertion. A [temporary copy](../tmp/qa-dashboard-contract-20260927.ts) expecting the implemented 100-product snapshot passes all remaining assertions; [output](../outputs/qa-dashboard-contract-20260927.json). Public API limits 15 and 100 were separately verified. |
+| API scope/availability probes | FAIL | 21 of 26 expectations pass; four year-validation failures and one unmet STL availability gate; [receipt](../outputs/qa-api-20260927.json), [probe](../tmp/qa-analytics-api-20260927.cjs) |
+| Full Chromium suite | FAIL | 35 passed, 7 failed, 5 skipped, no flaky retries; [report](../outputs/qa-browser-20260927-final.json) |
+| Live product financial export | PASS | `descriptive-live.spec.ts`: header/row alignment, complete cohort export beyond the 100 displayed rows, signed returns, policy labels, and total revenue |
+| Core unavailable/readiness behavior | PASS | Both deterministic `dashboard-readiness.spec.ts` checks; no live warehouse outage was induced |
+| Anonymous access | PASS for tested routes | Seven extra API probes return 401; existing browser test also rejects anonymous revised analytics/uploads |
+| Builds | PASS | `npm.cmd run build` in backend and frontend; frontend compilation, lint/types, static generation and tracing passed after stopping dev |
+| Production-mode visual/control smoke | PASS for loading and controls; defects below | Four analytics pages loaded at 1440px with no page exceptions, no document overflow, and no missing directly named inline handlers. [Screenshots and observations](../outputs/qa-analytics-20260927/visual-observations.json); optional STL remained 503. This check does not assert every chart is semantically correct. |
+
+The five browser skips are four explicitly retired sales-diagnostics tests and
+the opt-in exploratory mobile overview. A separate 375px layout regression passed;
+this does not certify mobile support or full accessibility. Initial sandbox runs
+could not reach Supabase/Databricks; those were interrupted and superseded by the
+network-enabled final run, not counted as product defects or passing coverage.
+
+### Current Databricks evidence
+
+- Dataset: `b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4`.
+  Live policy remains `sales_restart_gold_v5_2025_allocation_source`; locally
+  prepared v6 is not the current deployed policy.
+- Publication receipt SHA-256:
+  `c3de8699a27638b0b8b1d1b0099c5d073e6e9f15bf6b85a6cd867a3238d511bc`.
+- 37,728 fact transactions; zero duplicate source IDs; 32,749 warning-bearing
+  records. Eligible revenue: **₱626,946,741.81**. Eligible gross profit:
+  **₱288,487,498.72**. Margin denominator: **₱478,720,670.03**, yielding
+  **60.262177%**. Revenue eligibility covers 36,848 records; margin eligibility
+  covers 34,105. These populations must not be presented as interchangeable.
+- 108 calendar months, 98 observed months, 9 years (2017–2025). Missing months:
+  2017-05/06/07/08/10, 2018-01/02, 2019-10/11/12. Missing monthly values remain null.
+- The live product master has **0 approved entries**. Product reporting describes
+  commercial source labels, not approved medicine identity or standardized demand.
+- External connection check passed: 2,171 DOH/PAGASA rows, 2,170 non-null values,
+  seven territories, **0 join-ready and 0 forecast-eligible rows**. PAGASA has
+  zero approved sales matches. The separate NASA POWER query returns 108 rows
+  for 2025 and 32 sales matches; those matches do not approve external regression.
+  The regression endpoint correctly reports `blocked`.
+
+### Defects and required handoff
+
+| Priority / owner | Finding and reproduction | Required next action |
+|---|---|---|
+| P1 — Databricks/data engineering | The fresh collector again finds adjusted 2020/2024 files labeled `ORIGINAL_SOURCE_EXPORT`; Gold lacks their estimated-source flags. Financial totals matching does not repair product provenance. | Deploy the reviewed canonical Bronze/Silver/Gold package through an authorized operator, rerun bridges, and obtain a new passing immutable receipt. Follow [deployment guide](../databricks/medshield_project/GUIDE.md). |
+| P1 — Backend | Authenticated `GET /api/sales/summary?year=2024&year=2025` returns 200 and all 37,728 records; `/api/weather/effects?year=2024&year=2025` also returns 200. The monthly endpoint correctly returns 400. Routes convert non-string query values to omitted filters. | Reject repeated/structured filters before dispatch. Add shared boundary validation and regression checks proving malformed filters never become all-history results. |
+| P1 — Frontend | Sales Diagnostics → All Time → Yearly shows no product quantity observations, including the default LACTAMOX 500MG/125MG TAB product. `sales-heatmap-runtime.ts` groups quantity keys as `YYYY-MM`, then looks them up using `YYYY` from `descriptiveAxisPeriods()`. The chart and CSV consequently carry nulls for observed years. | Aggregate source months into the selected yearly grain, preserve missing/observed distinctions, and test yearly/monthly/daily/custom chart-to-export reconciliation. |
+| P2 — Backend | `sales/summary?year=2.025e3` is accepted as 2025; `year=2100` is rejected while `/api/monthly?year=2100` returns a valid empty set. `validateYearFilter` uses `Number` and a 2099 ceiling. | Align the scalar year contract across sales, weather and monthly routes; enforce the documented four-digit format and supported dynamic range. |
+| P2 — Frontend/BI | Live Sales Diagnostics displays 60.26% but its KPI caption says “Total gross profit ÷ total net sales”; the margin chart repeats that wording. The actual denominator is margin-eligible revenue. | Correct every visible formula/caption and verify displayed numerator/denominator against the receipt. Do not change the correct calculation to match the stale caption. |
+| P2 — Frontend/BI | All-Time/Yearly Sales Diagnostics keeps “Monthly Net Sales Revenue and Gross Profit” on an annual chart; “Workbook Gross Margin % by Year” shows monthly bars. Its DOH-PAGASA note claims modeled therapeutic allocations despite external regression being blocked. | Make chart titles reflect the rendered grain and replace unsupported modeled-output claims with the actual publication state. |
+| P2 — Frontend/BI | Area method text says estimated contract allocations are excluded by the sales service. The active sector query includes historical source allocations and marks financial rows `actual`, retaining product provenance separately. | Distinguish observed financial transactions, estimated product attribution, and gap estimates. Reconcile the explanatory text with the actual source predicates. |
+| Readiness gate — Databricks | `GET /api/seasonality/stl` returns 503 `STL_UNAVAILABLE`. The UI correctly discloses this; local algorithm tests cannot clear the cloud gate. | Run/publish the STL notebook against the corrected active fact version, then verify dataset/version and reconstruction in API and UI. |
+| P2 — QA | Seven browser failures and one stale warehouse-validator assertion prevent a green regression baseline. | Repair fixtures/assertions to the accepted current contract, retain edge-case coverage, and rerun; do not restore unsupported UI features just to satisfy old tests. |
+| P2 — Frontend/DevOps | Although the production build and page smoke complete, the production server logs that `sharp` is required for standalone image optimization. Startup also warns to use `.next/standalone/server.js` for the configured `output: 'standalone'` instead of the current `next start` script. | Align the runtime image dependency and launch/package procedure with standalone output, then verify optimized image requests in the deployed form. Build success alone does not clear this issue. |
+| Readiness gate — Business/data owners | Product master, buyer/geographic scope, returns/ABC candidate policy, external joins and version-bound final publication remain unapproved. | Resolve the applicable scoped decisions and approved publication/rollback contract before treating this candidate as an approved training dataset. |
+
+Browser failure triage: two area fixtures omit `region` while the current runtime
+deliberately no longer infers geography from territory strings; one navigation
+assertion expects the removed quadrant matrix; three product tests use the old
+net-sales ABC fields/column indexes or old negative-revenue messaging without
+`positive_sales` and `returns_value`; one sales-sector product test still expects
+MCDA/scenario charts. These are test-contract mismatches, not evidence that the
+removed analytical claims should return. The two area tests also retain obsolete
+gap-estimate expectations and need complete review after their first failure.
+
+Production visual follow-up confirmed the quantity defect with the same product
+and scope: LACTAMOX 500MG/125MG TAB has **65 observed months and 1,376.57 source
+units** in monthly view, but **zero observed periods** in yearly view. The
+machine-readable `heatmapGrainCheck` in the visual observations records both
+datasets. Screenshots: [Overview](../outputs/qa-analytics-20260927/overview.png),
+[Sales Diagnostics](../outputs/qa-analytics-20260927/revenue.png),
+[Products](../outputs/qa-analytics-20260927/products.png), and
+[Areas](../outputs/qa-analytics-20260927/territory.png). Detail pages were captured
+after their own readiness checks, rather than only the initial core-data gate.
+
+### Limits and exit criteria
+
+This is not a load/performance test, penetration test, full accessibility audit,
+cloud job-deployment verification, recovery drill, or role-by-role authorization
+certification. The live read scope does not establish source completeness or
+independently validate historical product allocations. No production build should
+be run concurrently with `next dev`; the QA dev server was stopped first.
+
+Before predictive acceptance: correct and reconcile live provenance; repair
+scope-validation and misleading UI wording; publish matching STL if retained as
+a required descriptive output; restore a passing regression baseline; obtain the
+applicable mapping/policy and version-bound dataset approvals. Sales-only model
+experiments may remain explicitly experimental; this review grants no production
+predictive or external-feature approval.
+
+Evidence artifacts and diagnostic scripts are QA-only and do not feed the runtime.
+No cloud objects or analytical business rules were changed during this review.
+The temporary frontend and gateway started for this review were stopped afterward.
+
 ## Descriptive remediation verification ? 27 September 2026
 
 Local fixes now have the following evidence. No cloud notebook deployment or

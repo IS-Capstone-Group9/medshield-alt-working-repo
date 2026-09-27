@@ -33,10 +33,9 @@ candidate labels and preserves signed net revenue. The client export supplies on
 a document/DR number; no stable line-item identifier is available. Do not fabricate
 line keys or authorize automatic merge from that fact.
 
-The canonical corrected notebook package is now `databricks/medshield_project`.
-Cloud deployment is still pending. The restored audit produced a new failed baseline
-at `outputs/publication_readiness/2026-09-26T18-36-04-060Z` (68 pass, 2 fail).
-Final acceptance must reference a new passing post-deployment receipt.
+The canonical notebook package is `databricks/medshield_project`. The operator
+has now run 01–06. Gold v6 / fact version 16 has passing technical evidence;
+prior failed receipts remain historical evidence, not the current verdict.
 
 ## Purpose and objective alignment
 
@@ -93,23 +92,14 @@ This record does not approve disease surveillance, medical treatment recommendat
 
 ## Current evidence
 
-Latest expanded review: [27 September evidence report](../outputs/publication_readiness/2026-09-26T17-08-24-151Z/README.md),
-with [machine-readable evidence](../outputs/publication_readiness/2026-09-26T17-08-24-151Z/evidence.json).
-The directory timestamp is UTC; the review date is Asia/Manila.
-Result: **68 PASS, 2 FAIL, 0 UNVERIFIED**. The two failures are the same
-historical-provenance defect at Bronze and Gold. This receipt is a correction
-baseline, not an approvable publication. A new passing receipt is required after
-deployment; bind final approval to that replacement receipt.
-
-**Publication blocker discovered:** the live 2020 and 2024 source hashes match
-prepared files containing estimated product-label replacements (3 and 124
-source rows respectively), while Bronze and Gold label those files as original
-exports. The initial 66-check consistency pass did not include this cross-check
-against source-preparation history and is superseded for publication decisions.
-The expanded collector detects the mismatch. Corrected Bronze/Gold code and
-regression tests are prepared locally; deployment and a reconciled rerun remain
-pending an authorized Databricks operator. Do not ask the CEO to approve the
-current misleading provenance as though it were a clean publication.
+Current post-deployment review: [passing publication receipt](../outputs/publication_readiness/2026-09-27T06-49-46-520Z/README.md):
+**70 PASS, 0 FAIL, 0 UNVERIFIED**. Fact version **16**, Gold v6 reviewed provenance.
+Receipt SHA-256: `181516182e62f9081c2acfa4ef01e6b7209dc1f0b320be6ee010936e5a929ad2`.
+The [calculation/STL receipt](../outputs/descriptive_validation/2026-09-27T06-41-37-034Z/evidence.json)
+reconciles dashboard revenue and all 72 STL observed inputs to the same fact version.
+The earlier adjusted-source labeling defect is resolved. Estimated product identity,
+coverage assumptions and scoped business decisions remain distinct from arithmetic
+validation. These receipts do not mark anything business-approved.
 
 Run the read-only collector from `backend/`:
 
@@ -137,7 +127,7 @@ The CEO may approve or reject individual scopes. Approval of financial history d
 
 | Decision | Evidence to review | Required decision |
 |---|---|---|
-| Financial definitions | Net CP as revenue; Total TP as acquisition cost; transaction gross margin rather than company net profit; eligible-record populations | Confirm the meanings and acceptable exclusions, or request corrections |
+| Financial definitions | Already confirmed by the CEO as recorded above | No repeat approval requested; review only changes to scope/exclusions |
 | Source coverage | Source files, reported dates, missing observations, dispositions, and yearly completeness labels | Confirm the intended reporting population; do not infer a complete year merely from transaction presence |
 | Warning treatment | Counts and reasons; effect on revenue, quantities, and margins | Accept specific treatment with limitations or require remediation |
 | Estimated allocations | 2020/2024 label-substitution evidence and 2025 replacement provenance, with financial reconciliation | After provenance correction, accept the estimation methods and permitted uses, or require original product detail/rework |
@@ -257,3 +247,47 @@ the user's explicit relay of CEO confirmation; final publication remains pending
   was run while the development server was active.
 - Cloud deployment, post-correction live validation, and CEO sign-off remain
   unverified/pending. These results are self-review, not independent review.
+
+## Version-16 review and release checklist
+
+- [x] Operator ran corrected Bronze/Silver/Gold and bridges; Gold v6 provenance verified.
+- [x] Technical publication receipt passes all 70 checks, with source/mapping identities.
+- [x] Financial and STL components reconcile to fact version 16; no gap imputation.
+- [x] Local gateway explicitly pinned to version 16; candidate notice retained.
+- [ ] CEO records final permitted reporting scope against the exact receipt and version.
+- [ ] Record remaining ABC/buyer/geography decisions without inferring SKU approval.
+- [ ] For production activation, deploy the reviewed application revision and configure
+      its gateway pin; verify authenticated API/UI/exports in that environment.
+- [ ] Record rollback to a retained reviewed fact version and matching STL availability.
+
+Do not require reapproval of already recorded financial definitions. Do not change
+candidate labels to approved or infer production activation from a local test pass.
+
+## Descriptive objective alignment at version 16
+
+| Requirement | Implemented evidence | Remaining boundary |
+|---|---|---|
+| Revenue/profit/margin | Financial receipt; shared eligible margin denominator; API and CSV reconciliation | Completeness remains a business assumption |
+| Bounded daily/monthly and annual history | Exact-date detail, calendar gaps, yearly source-unit and margin aggregation; browser regression | Source quantities are not standardized medicine demand |
+| YoY | Only common observed months; nominal change and rate; no invented zero baseline | Missing coverage is disclosed per comparison |
+| STL | Warehouse 72-month 2020–2025 components; reconstruction and observed revenue checks; table/chart/CSV | Excludes insufficient contiguous segments; no disease causality |
+| Pareto/ABC | Positive contribution, separate returns, 80/95 thresholds, cohort keeps full denominator | CEO policy acceptance remains pending |
+| Product attribution | Source labels and adjusted-source provenance retained in table/export | No approved medical master entries |
+| Territory/customer type | Warehouse mapping evidence; proposed buyer groups and confidence disclosed | Applicable mapping/scope approval remains pending |
+| One analytical source | Databricks fact version 16; version notices and versioned exports | Production approved activation workflow and future ingestion remain separate |
+
+
+## Catalog implementation prepared — 27 September 2026
+
+[Product catalog contract](PRODUCT_CATALOG.md) defines independent category,
+sellable identity, item kind and transaction evidence. Local deterministic rules,
+Gold enrichment, stable-ID API/UI grouping, category filters and provenance-aware
+quantity/export handling are implemented. The complete version-16 review includes
+37,728 records and 4,561 labels; all remain unresolved because no approved master
+entries were supplied. Category approval cannot approve SKU, quantity conversion,
+forecasting or observed medical demand. Adjusted provenance remains file-level.
+
+The [operator runbook](CATALOG_DEPLOYMENT.md) specifies catalog-only 03 → 04 → 05 →
+06 → publication-readiness → descriptive/catalog validation, version-bound activation
+and rollback. This is local preparation: no Databricks writes, release activation
+or additional CEO decisions occurred. Databricks remains the sole analytical source.

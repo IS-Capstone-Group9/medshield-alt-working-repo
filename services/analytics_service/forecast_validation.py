@@ -1,7 +1,8 @@
 """Draft sales-only benchmarks; retrospective evaluation, never archived forecasts.
 
 No zero imputation, mixed-product quantities, future regressors or claimed champion.
-Intervals are descriptive historical error bands, not calibrated confidence levels.
+Legacy offline exploration only; use predictive/ for governed model runs.
+Intervals are unavailable without governed calibration and validation evidence.
 """
 import math
 from collections import defaultdict
@@ -53,7 +54,7 @@ def error_bands(series, cutoff, model, max_lead=12):
     bands = {}
     for lead in range(1, max_lead + 1):
         errors = sorted(samples[lead])
-        bands[lead] = {'n': len(errors), 'radius': errors[math.ceil(.9 * len(errors)) - 1] if len(errors) >= 12 else None}
+        bands[lead] = {'n': len(errors), 'radius': None}
     return bands
 
 
@@ -65,7 +66,7 @@ def forecast_points(series, origin, horizon, model, metric, start=None):
     for offset in range(horizon):
         target = first_target + offset
         lead = target - origin
-        value = predict(series, origin, target, model)
+        value = predict(series, origin, target, model) if lead <= 12 else None
         radius = bands[lead]['radius']
         lower = value - radius if value is not None and radius is not None else None
         if metric == 'quantity' and lower is not None:
@@ -110,8 +111,7 @@ def build_validation(payload, sector='Government', product='', metric='revenue',
         if period > closed_end:
             excluded_not_closed += row['row_count']
             continue
-        if not month_number('2017-01') <= period <= month_number('2025-12'):
-            excluded_outside_history += row['row_count']
+        if row.get(metric) is None:
             continue
         monthly[period] += row[metric]
         count += row['row_count']
@@ -149,7 +149,7 @@ def build_validation(payload, sector='Government', product='', metric='revenue',
             models[model] = {'forecast': forecast_points(series, end, horizon, model, metric, forecast_start), 'backtest': backtest,
                              'metrics': score(pairs), 'comparison_metrics': score([(backtest[i]['actual'], backtest[i]['prediction']) for i in common]),
                              'band_coverage': {'n': scored_bands, 'percent': 100 * covered / scored_bands if scored_bands else None}}
-        response['views'][str(horizon)] = {'training_end': period_name(cutoff), 'evaluation_start': period_name(cutoff + 1),
+        response['views'][str(horizon)] = {'evaluation_protocol': 'fixed_origin_multi_step', 'training_end': period_name(cutoff), 'evaluation_start': period_name(cutoff + 1),
                                           'evaluation_end': period_name(end), 'common_scored_months': len(common), 'models': models}
     return response
 

@@ -1,3 +1,4 @@
+import type { CatalogMetadata } from './sales.types'
 export type Summary = {
   total_revenue: number
   total_income: number
@@ -15,7 +16,7 @@ export type MonthlyPoint = {
   missing?: boolean
 }
 export type AreaPoint = { area: string; revenue: number; income: number }
-export type ProductPoint = { product: string; revenue: number; qty: number; income: number; abc: string; pct_of_total: number }
+export type ProductPoint = Partial<CatalogMetadata> & { product: string; revenue: number | null; qty: number | null; income: number | null; abc: string; pct_of_total: number | null; estimated_qty?: number | null; verified_qty?: number | null; transaction_provenance?: string[]; transaction_lineage?: string[] }
 export type YearPoint = { year: string; revenue: number; income: number; transactions: number }
 export type SeasonalityPoint = { month: string; avg_revenue: number | null; observed_month_count?: number; method?: string }
 export type ForecastPoint = {
@@ -71,6 +72,7 @@ export type ModelEvaluation = {
 }
 
 export type DashboardDataStatus = {
+  release?: { dataset_id: string; fact_delta_version: number; policy_version: string; publication_status: string }
   source: 'databricks'
   mode: 'live'
   loaded_at: string

@@ -1,3 +1,6 @@
+import { catalogProducts, parseCatalogCategory, CatalogInputError } from './catalogContract'
+import { invalidScalarQueryKey } from './monthlyQuery'
+import { readPredictiveRelease, PredictiveInputError } from './predictiveRelease'
 import path from 'node:path'
 import { createHash } from 'node:crypto'
 import { existsSync } from 'node:fs'
@@ -72,8 +75,37 @@ loadEnvironment()
 const app = express()
 const port = Number(process.env.PORT ?? '5000')
 
-app.use(cors())
+// C-2 fix: restrict CORS to known frontend origins instead of wildcard.
+// Set CORS_ALLOWED_ORIGINS to a comma-separated list for production
+// (e.g. "https://medshield.example.com,https://staging.medshield.example.com").
+// Falls back to localhost development origins when unset.
+const allowedOrigins = (process.env.CORS_ALLOWED_ORIGINS ?? '')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean)
+if (!allowedOrigins.length) {
+  allowedOrigins.push('http://localhost:3000', 'http://localhost:5000')
+}
+
+app.use(
+  cors({
+    origin(requestOrigin, callback) {
+      // Allow requests with no origin (server-to-server, curl, health checks)
+      if (!requestOrigin || allowedOrigins.includes(requestOrigin)) {
+        return callback(null, true)
+      }
+      return callback(new Error(`CORS: origin ${requestOrigin} is not allowed`))
+    },
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  }),
+)
 app.use(express.json())
+app.use('/api', (req, res, next) => {
+  const invalid = invalidScalarQueryKey(req.query)
+  if (invalid) return res.status(400).json({ error: `Query parameter ${invalid} must occur once with a scalar value.`, code: 'INVALID_QUERY_PARAMETER' })
+  next()
+})
 
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -121,8 +153,7 @@ function supabaseEnabled(): boolean {
 }
 
 app.use((_, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*')
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+  // Security headers only; CORS origin is now handled by cors() middleware above.
   res.setHeader('X-Frame-Options', 'DENY')
   res.setHeader('X-Content-Type-Options', 'nosniff')
   res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains')
@@ -355,7 +386,7 @@ function requireRole(allowedRoles: string[]) {
 }
 
 function databricksDashboardFailure(res: Response, error: unknown): Response {
-  if (error instanceof DatabricksDashboardInputError) {
+  if (error instanceof DatabricksDashboardInputError || error instanceof CatalogInputError) {
     return res.status(400).json({ error: error.message, code: 'INVALID_DATABRICKS_QUERY' })
   }
   if (error instanceof DatabricksSourceUnavailableError) {
@@ -554,11 +585,20 @@ app.get('/api/by_area', requireAuth, async (_req: Request, res: Response) => {
 
 app.get('/api/products', requireAuth, async (req: Request, res: Response) => {
   const rawLimit = req.query.limit ?? 15
+  if (typeof rawLimit !== 'string' && typeof rawLimit !== 'number') return res.status(400).json({error: 'Invalid limit'})
   const limit = Number(rawLimit)
   if (!Number.isInteger(limit) || limit < 1 || limit > 100) {
     return res.status(400).json({ error: 'limit must be an integer between 1 and 100' })
   }
-  return withDashboardSnapshot(res, (snapshot) => res.json(snapshot.top_products.slice(0, limit)))
+  try {
+    const category = parseCatalogCategory(req.query.category)
+    const data = await getDatabricksSalesSectors()
+    const result = catalogProducts(data.rows, category, limit)
+    // Preserve the array response consumed by existing clients; metadata accompanies each result.
+    return res.json(result.products.map(row => ({...row, release: data.source.release,
+      selected_positive_sales: result.denominator, unresolved_count: result.unresolved_count,
+      unresolved_revenue: result.unresolved_revenue})))
+  } catch (error) { return databricksDashboardFailure(res, error) }
 })
 
 app.get('/api/year_summary', requireAuth, async (_req: Request, res: Response) => {
@@ -575,6 +615,10 @@ app.get('/api/seasonality', requireAuth, async (_req: Request, res: Response) =>
 })
 
 app.get('/api/forecasts', requireAuth, async (_req: Request, res: Response) => {
+  if (Object.keys(_req.query).length) {
+    try { return res.json(await readPredictiveRelease(_req.query)) }
+    catch (error) { return res.status(error instanceof PredictiveInputError ? 400 : 503).json({ code: error instanceof PredictiveInputError ? 'INVALID_FORECAST_FILTER' : 'FORECAST_UNAVAILABLE', error: error instanceof PredictiveInputError ? error.message : 'Published forecast evidence is unavailable.' }) }
+  }
   return withDashboardSnapshot(res, (snapshot) => res.json(snapshot.forecasts ?? []))
 })
 
@@ -611,6 +655,10 @@ app.get('/api/decision_alerts', requireAuth, async (_req: Request, res: Response
 })
 
 app.get('/api/model_evaluation', requireAuth, async (_req: Request, res: Response) => {
+  if (Object.keys(_req.query).length) {
+    try { return res.json(await readPredictiveRelease(_req.query)) }
+    catch (error) { return res.status(error instanceof PredictiveInputError ? 400 : 503).json({ code: error instanceof PredictiveInputError ? 'INVALID_FORECAST_FILTER' : 'FORECAST_UNAVAILABLE', error: error instanceof PredictiveInputError ? error.message : 'Published evaluation evidence is unavailable.' }) }
+  }
   return withDashboardSnapshot(res, (snapshot) => res.json(snapshot.model_evaluation ?? []))
 })
 
@@ -622,17 +670,17 @@ app.get('/api/sales/status', requireAuth, async (_req: Request, res: Response) =
   }
 })
 
-app.get('/api/sales/heatmap', requireAuth, async (_req: Request, res: Response) => {
+app.get('/api/sales/heatmap', requireAuth, async (req: Request, res: Response) => {
   try {
-    return res.json(await getDatabricksSalesHeatmap())
+    return res.json(await getDatabricksSalesHeatmap(parseCatalogCategory(req.query.category)))
   } catch (error) {
     return databricksDashboardFailure(res, error)
   }
 })
 
-app.get('/api/sales/sectors', requireAuth, async (_req: Request, res: Response) => {
+app.get('/api/sales/sectors', requireAuth, async (req: Request, res: Response) => {
   try {
-    return res.json(await getDatabricksSalesSectors())
+    return res.json(await getDatabricksSalesSectors(parseCatalogCategory(req.query.category)))
   } catch (error) {
     return databricksDashboardFailure(res, error)
   }
@@ -640,6 +688,8 @@ app.get('/api/sales/sectors', requireAuth, async (_req: Request, res: Response) 
 
 app.get('/api/sales/forecast-validation', requireAuth, async (req: Request, res: Response) => {
   try {
+    const invalid = invalidScalarQueryKey(req.query)
+    if (invalid || Object.keys(req.query).some(key => !['sector', 'product', 'metric'].includes(key))) return res.status(400).json({ code: 'INVALID_FORECAST_FILTER', error: 'Forecast filters must be recognized scalar values.' })
     return res.json(await getDatabricksForecastValidation({
       sector: typeof req.query.sector === 'string' ? req.query.sector : undefined,
       product: typeof req.query.product === 'string' ? req.query.product : undefined,
@@ -882,16 +932,7 @@ app.all(
   }),
 )
 
-app.post('/api/audit', async (req: Request, res: Response) => {
-  const token = bearerToken(req)
-  let username = 'unauthenticated'
-  if (token) {
-    const user = verifySessionToken(token) || (supabaseEnabled() ? await getSupabaseAuthUser(token).catch(() => null) : null)
-    if (user) {
-      username = user.username
-    }
-  }
-
+app.post('/api/audit', requireAuth, async (req: AuthenticatedRequest, res: Response) => {
   const action = String(req.body?.action ?? '').trim()
   const detail = String(req.body?.detail ?? '').trim()
 
@@ -903,7 +944,7 @@ app.post('/api/audit', async (req: Request, res: Response) => {
   const userAgent = String(req.headers['user-agent'] || '')
 
   const entry = {
-    username,
+    username: req.user?.username ?? 'unknown',
     action,
     detail,
     ip_address: ipAddress,

@@ -496,7 +496,9 @@ function descriptiveYearLabel(yearValue) {
   const year = String(yearValue);
   const currentYear = descriptivePhtDate().slice(0, 4);
   if (year === currentYear) return year + ' YTD';
-  return year;
+  const months = new Set(dashboardRawMonthlyRows().filter(row => String(row.period).startsWith(year + '-') && row.revenue != null && !row.missing && row.evidence !== 'estimate').map(row=>String(row.period).slice(5,7)));
+  const bounded = descriptivePeriod === 'custom' && (customDateStart > year + '-01-01' || customDateEnd < year + '-12-31');
+  return year + (months.size > 0 && (months.size < 12 || bounded) ? ' Partial' : '');
 }
 
 function setCustomDateRange(startValue, endValue) {

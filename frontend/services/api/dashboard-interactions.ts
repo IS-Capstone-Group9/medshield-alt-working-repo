@@ -12,6 +12,7 @@ import { renderWeatherEffects } from './weather-view-helpers'
 import { updateDashboardProvenance } from './dashboard-enhancements'
 import { setDecisionSupportChartData } from './dashboard-decision-charts'
 import { getJson, authenticatedJson } from './api-client'
+import { publishedForecastEvidence } from './published-forecast-adapter'
 
 let heatmapRequest = 0
 export async function refreshSalesHeatmap() {
@@ -50,7 +51,20 @@ export async function refreshForecastValidation() {
   const params = new URLSearchParams({ sector: value('forecastSector') || 'Unknown', product: value('forecastProduct'), metric: value('forecastMetric') || 'revenue' })
   apply(null, 'Loading source-backed forecast evidence…')
   try {
+    let publicationNote = ''
+    if (params.get('sector') === 'All' && !params.get('product') && params.get('metric') === 'revenue') {
+      try {
+        const release: any = await getJson('/api/forecasts?schema_version=2&horizon=12')
+        const evidence = publishedForecastEvidence(release)
+        if (evidence) {
+          if (request === forecastRequest && (window as any).setForecastValidationData === apply) apply(evidence)
+          return
+        }
+        publicationNote = release.reason || 'No published model release.'
+      } catch { publicationNote = 'Published model storage is unavailable; the following is separately computed retrospective benchmark evidence.' }
+    }
     const data = await getJson(`/api/sales/forecast-validation?${params}`)
+    if (publicationNote && data && typeof data === 'object') (data as any).limitations = [...((data as any).limitations || []), publicationNote]
     if (request === forecastRequest && (window as any).setForecastValidationData === apply) apply(data)
   } catch {
     if (request === forecastRequest && (window as any).setForecastValidationData === apply) apply(null, 'Forecast evidence unavailable from Databricks Gold for the selected scope; no example forecasts were substituted.')

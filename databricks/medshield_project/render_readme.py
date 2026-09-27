@@ -32,6 +32,10 @@ def render():
         for number, cell in enumerate(cells, 1):
             pieces.extend([f"### {label} — cell {number}\n",
                            f"```python\n{cell}\n```\n"])
+    pieces.extend(["## Catalog helper workspace file\n",
+                   "Upload `product_catalog.py` as a file beside Gold, preserving its bytes. "
+                   "Do not paste it as an extra notebook cell; Gold verifies the file hash.\n",
+                   "```python\n" + (ROOT / "product_catalog.py").read_text(encoding="utf-8").rstrip() + "\n```\n"])
     return "\n".join(pieces).rstrip() + "\n"
 
 

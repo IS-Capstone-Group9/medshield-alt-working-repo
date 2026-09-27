@@ -1,106 +1,45 @@
 # MedShield Current State
 
-## Descriptive remediation — 27 September 2026
+## Descriptive historical sales candidate — 27 September 2026
 
-Current local implementation is ahead of the live warehouse. Publication is still
-blocked; no CEO approval has been added. The replacement canonical notebook tree
-is `databricks/medshield_project`; staged deletions of older paths were preserved.
+The operator has deployed and run notebooks 01–06. Read-only post-deployment
+validation confirms Gold policy `sales_restart_gold_v6_reviewed_source_provenance`
+and fact Delta version **16**, dataset
+`b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4`.
+The earlier 2020/2024 provenance deployment blocker is resolved for this version.
+Estimated product attribution remains explicit; equal annual finances do not prove
+actual SKU identity or quantities.
 
-- Restored the reference contract, notebook regression suite and generated runbook.
-  Bronze/Gold v6 now validate original versus adjusted 2020/2024 hashes and reject
-  unreviewed replacements. These notebook changes are **not deployed**.
-- The gateway pins all fact-based descriptive reads to one Delta version per
-  process. Set `DATABRICKS_DESCRIPTIVE_FACT_VERSION` for explicit activation/rollback.
-  This does not replace the still-pending approved active-publication manifest.
-- Sales detail now uses actual transaction dates, eligible gross profit and its
-  matching revenue denominator. Monthly-to-daily division, historical-margin area
-  profit and empty-scope all-history fallback were removed.
-- Geographic values use warehouse mapping status. Proposed buyer grouping is
-  labeled pending CEO review. Gateway Mindoro apportionment was removed; no counts
-  or source units are invented. Legacy geographic approval is not a new CEO decision.
-- Positive-sales ABC with separate signed returns is implemented as a **candidate
-  pending CEO approval**, as requested by the user. Net revenue retains returns.
-  Unknown revenue is disclosed outside the eligible contribution denominator.
-  Product provenance appears in the table/export; source labels remain unverified SKUs.
-- `06_sales_stl.py` prepares a version-bound Gold candidate. `/api/seasonality/stl`
-  and the Sales Diagnostics panel consume warehouse components only. Until the
-  notebook runs against the corrected fact version the panel is unavailable.
-  Calendar-month averages remain a separate method.
-- Narrow-screen filters/KPI labels wrap; a 375px viewport now passes the overflow
-  check. This is not a full accessibility certification.
-- Future ingestion remains unfinished. The user confirmed the client has a DR
-  number but no stable line ID. Do not enable automatic line-key merge. A complete
-  source-period replacement contract and deployed durable workflow remain required.
+- Latest publication audit: [70 PASS, 0 FAIL, 0 UNVERIFIED](../outputs/publication_readiness/2026-09-27T06-49-46-520Z/README.md).
+  Receipt SHA-256: `181516182e62f9081c2acfa4ef01e6b7209dc1f0b320be6ee010936e5a929ad2`.
+- [Calculation and STL receipt](../outputs/descriptive_validation/2026-09-27T06-41-37-034Z/evidence.json)
+  verifies eligible net sales **₱626,946,741.81**, gross margin **60.262177%** on
+  **₱478,720,670.03** margin-eligible revenue, and 72 STL months (2020–2025).
+  Ten missing historical months stay unknown, not zero. STL excludes short/gapped
+  history and is independent of the dashboard date filter.
+- Databricks remains the sole analytical runtime source. Local audit receipts are
+  not dashboard fallbacks. `DATABRICKS_DESCRIPTIVE_FACT_VERSION=16` pins this local
+  candidate gateway; restart after changing it. No CEO release approval is inferred.
+- Descriptive screens cover observed revenue/profit, matched-coverage YoY,
+  source-label positive-sales ABC with separate returns, geographic/buyer summaries,
+  source-unit quantity trends, and warehouse STL trend/seasonal/residual components.
+- Remediation corrects repeated/structured API filters, four-digit future-year
+  validation, yearly quantity and margin grouping, exact-date exclusions, captions,
+  provenance display, and exports. Unapproved buyer grouping and estimated source
+  allocation limitations remain visible.
 
-Latest restored collector run: `outputs/publication_readiness/2026-09-26T18-36-04-060Z`:
-68 PASS, 2 FAIL, 0 UNVERIFIED. Both failures are the live 2020/2024 provenance defect.
-Evidence SHA-256: `684a0f94952132977518ef1ee25248bb00d25adb53bb02591144d723b90a77f6`.
-This is a failed baseline, not a publication receipt. Further local edits after
-collection require a new final receipt after deployment.
+### Remaining release boundaries
 
-Cloud dependency: the configured token lacks Workspace and Jobs scopes (403).
-An authorized operator must apply the tested notebook package and rerun it.
-See `databricks/medshield_project/GUIDE.md`. Verified medical mappings, buyer scope,
-returns-policy approval and final release acceptance remain separate gates.
-
-
-Last reviewed: 2026-09-27
-
-## Descriptive calculation remediation — 27 September 2026
-
-The local gateway and dashboard now preserve unavailable monthly measures,
-separate gap estimates from observed KPI/YoY values, and calculate gross margin
-using revenue from the same margin-eligible transactions. The snapshot calendar
-uses the observed minimum/maximum years rather than a fixed 2017–2025 contract.
-Annual YoY compares only overlapping observed months. Historical partial-date
-requests cannot consume whole boundary-month aggregates as if they were exact.
-
-The active product renderer is `descriptive-products-runtime.ts`. It replaces
-the legacy hard-coded clinical/VEN and surge-score screen with observed
-source-label sales, revenue-ranked cohorts, 80/95% cumulative ABC candidates,
-and revenue/coverage charts. Negative aggregate product revenue is retained in
-totals and holds ABC/Pareto percentages for the affected scope pending a returns
-policy. The old `product-prioritization-runtime.ts` demonstration module was removed.
-No clinical categories, inventory buffers, or product-region recommendations
-are approved by these changes.
-
-Live calculation evidence is saved in
-[`outputs/descriptive_validation/2026-09-26T17-52-02-042Z/evidence.json`](../outputs/descriptive_validation/2026-09-26T17-52-02-042Z/evidence.json).
-The receipt pins fact Delta version 15, Gold v5 policy, dataset identity and
-mapping hashes, and verifies the fact version did not change during collection.
-Eligible net sales reconcile to **₱626,946,741.81**; the margin denominator is
-**₱478,720,670.03**, yielding **60.262177%** on margin-eligible rows.
-Ten historical months have no observations; they remain null, not zero.
-
-An offline STL evidence job now reconstructs the contiguous 2020–2025 revenue
-series into trend, seasonal and residual components without filling gaps.
-This is an inspectable artifact, **not a published dashboard STL feature**.
-`/api/seasonality` explicitly returns an observed calendar-month average, not STL.
-The notebook deployment/provenance correction, approved product identities,
-negative-revenue ABC policy, geographic review and final CEO release decision
-remain gates. Descriptive analytics is improved and testable as a candidate;
-it is not yet a fully approved FR4 release.
-
-## Publication readiness review — 27 September 2026
-
-The live Gold audit now matches the repaired area master checksum
-`a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949`.
-The mapping is technically applied; legacy approvals and proposed mappings
-still need the client CEO's decision. The product master remains header-only.
-
-Publication is blocked by an additional provenance defect: the live 2020 and
-2024 file hashes match prepared product-label replacements, but their source
-status is `ORIGINAL_SOURCE_EXPORT`. Corrected local Bronze recognizes the exact
-original/replacement hashes. Local Gold v6 rejects stale provenance before
-writing and preserves adjusted-source labeling. These corrections have not
-been deployed; the observed warehouse still uses Gold v5. Do not mistake the
-initial internal-reconciliation pass for complete publication readiness.
-
-Use [Descriptive Publication Acceptance](DESCRIPTIVE_PUBLICATION_ACCEPTANCE.md)
-for evidence, remaining gates, the CEO review record, and the deployment
-sequence. Run `node --import tsx scripts/publication-readiness.ts` from
-`backend/` for a new read-only, version-bound evidence receipt. Databricks
-remains the sole analytical runtime source; receipts are offline audit artifacts.
+The candidate is available for business review, not an approved production release.
+The CEO remains the sole business approver. Financial definitions and conditional
+annual reconciliation decisions already recorded are preserved. Final release of
+this exact dataset, positive-sales ABC policy, buyer/geographic scope and permitted
+source-label outputs still require the applicable scoped acceptance.
+There are no verified medical master entries; do not claim standardized medicine
+demand, clinical recommendations, or automated inventory decisions. Future client
+upload/replacement workflow remains unfinished (DR number only; no stable line ID).
+External DOH/PAGASA inputs are not required for these descriptive sales measures.
+See [the acceptance record](DESCRIPTIVE_PUBLICATION_ACCEPTANCE.md).
 
 This is the canonical snapshot of the implemented MedShield system. When a planning document, dated report, generated output, or old walkthrough conflicts with this file, use this file together with [REQUIREMENTS.md](REQUIREMENTS.md), [ARCHITECTURE.md](ARCHITECTURE.md), and the current code.
 
@@ -230,3 +169,37 @@ Use documents in this order:
 5. Dated reports and generated files under `outputs/`
 
 See [DOCUMENTATION_INDEX.md](DOCUMENTATION_INDEX.md) for the complete status policy.
+
+
+## Catalog implementation prepared — 27 September 2026
+
+[Product catalog contract](PRODUCT_CATALOG.md) defines independent category,
+sellable identity, item kind and transaction evidence. Local deterministic rules,
+Gold enrichment, stable-ID API/UI grouping, category filters and provenance-aware
+quantity/export handling are implemented. The complete version-16 review includes
+37,728 records and 4,561 labels; all remain unresolved because no approved master
+entries were supplied. Category approval cannot approve SKU, quantity conversion,
+forecasting or observed medical demand. Adjusted provenance remains file-level.
+
+The [operator runbook](CATALOG_DEPLOYMENT.md) specifies catalog-only 03 → 04 → 05 →
+06 → publication-readiness → descriptive/catalog validation, version-bound activation
+and rollback. This is local preparation: no Databricks writes, release activation
+or additional CEO decisions occurred. Databricks remains the sole analytical source.
+# Predictive delivery checkpoint — 27 September 2026
+
+Latest: training proceeded on explicit user-attested 2020–2025 completeness.
+All 15 configurations evaluated; last value remains the development-selected
+candidate, with 83.20% development and 37.76% retrospective-audit WAPE. Recommendation
+is to remain unpublished; uncertainty support is insufficient. See
+`outputs/predictive_validation/2026-09-27T14-30-12-921Z/REVIEW.md`.
+The original blocked checkpoint below is retained for chronology.
+
+P0 evidence repairs and local P1–P4 implementation are present. A fresh read-only
+version-16 extraction reconciled 37,728 records and 108 calendar months to the
+descriptive receipt; missing months remain explicit. Evidence is under
+`outputs/predictive_validation/2026-09-27T08-56-19-553Z/`. The real offline run is
+blocked because training acceptance/reporting completeness is absent, so no actual
+ETS/Prophet scores or selected production method are claimed. Warehouse contracts
+and 108 candidate input rows are deployed and reconciled. Model publication
+tooling is prepared; no model release is activated. See
+[operations and gates](PREDICTIVE_OPERATIONS.md) and the blueprint milestone record.

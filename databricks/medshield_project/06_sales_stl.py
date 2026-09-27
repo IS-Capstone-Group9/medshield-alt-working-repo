@@ -1,4 +1,8 @@
 # Databricks notebook source
+# MAGIC %pip install statsmodels
+
+# COMMAND ----------
+
 # Run after corrected Gold. Job environment requires numpy and statsmodels.
 # Candidate publication only; this notebook cannot record CEO approval.
 import hashlib
@@ -76,7 +80,7 @@ version = int(spark.sql(f"DESCRIBE HISTORY {FACT} LIMIT 1").first()["version"])
 identity = spark.sql(f"SELECT DISTINCT dataset_id, policy_version, area_mapping_sha256, product_master_sha256 FROM {FACT} VERSION AS OF {version}").collect()
 assert len(identity) == 1, "Ambiguous source identity"
 identity = identity[0].asDict()
-assert identity["policy_version"] == "sales_restart_gold_v6_reviewed_source_provenance", "Correct provenance before STL publication"
+assert identity["policy_version"] == "sales_restart_gold_v7_independent_catalog", "Deploy catalog Gold before this STL package"
 # The same historical population as the gateway. Retained contract evidence is not product sales.
 excluded = "(is_contract_label = TRUE OR UPPER(TRIM(normalized_product)) RLIKE '^(PAGBILAO|QMC|PPDC|TOURISM|PROVINCIAL[[:space:]]+TOURISM[[:space:]]+OFFICE|MARINDUQUE|GULANG[[:space:]]+GULANG|PESO|PESO[[:space:]]+PROVINCIAL|PHO|ABOITIZ|PADRE[[:space:]]+BURGOS|PPOC)([[:space:]]*#|[[:space:]]+[0-9])|^DR[[:space:]]*#|^PR[[:space:]]+[0-9]')"
 monthly = spark.sql(f"""SELECT DATE_FORMAT(month_start,'yyyy-MM') AS period,

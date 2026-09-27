@@ -17,7 +17,7 @@ test.beforeEach(async ({ page }) => {
     app.setCustomDateRange('2025-01-01', '2025-12-31')
     app.showPage('products')
     app.setSalesSectorsData({ rows: [60, 20, 10, 5, 5].map((revenue, i) => ({
-      product: 'Product ' + i, period: '2025-02', revenue, quantity: i + 1,
+      product: 'Product ' + i, period: '2025-02', revenue, positive_sales: revenue, returns_value: 0, quantity: i + 1,
       sector: 'Private', territory: 'Quezon', channel: 'Retail Pharmacy', row_count: 1, evidence: 'actual',
     })), source: { file: 'Databricks test fixture', excluded: {} } })
   })
@@ -26,7 +26,7 @@ test.beforeEach(async ({ page }) => {
 test('observed revenue ranks and full-population ABC replace unsupported clinical claims', async ({ page }) => {
   await expect(page.locator('#productPriorityScope')).toContainText('Recorded revenue: ₱100')
   const rows = await page.locator('#productTable tbody tr').evaluateAll(rows => rows.map(row => [...row.querySelectorAll('td')].map(cell => cell.textContent)))
-  expect(rows.map(row => row[5])).toEqual(['A', 'A', 'B', 'B', 'C'])
+  expect(rows.map(row => row[7])).toEqual(['A', 'A', 'B', 'B', 'C'])
   await expect(page.locator('#page-products')).not.toContainText(/Zero-Stockout|WHO VEN|Surge Multiplier|guaranteed emergency|Clinical VEN/)
   await expect(page.locator('#productScenarioSelect')).toHaveCount(0)
   const values = await page.evaluate(() => (window as any).Chart.getChart(document.getElementById('productBarChart')).data.datasets[0].data)
@@ -43,13 +43,13 @@ test('cohort preserves denominator; empty years do not fall back to historical p
   await expect(page.locator('#productTable')).toContainText('No observed product sales')
 })
 
-test('negative revenue holds ABC; monthly aggregates cannot become partial-month sales', async ({ page }) => {
+test('returns remain separate in positive-sales ABC; monthly aggregates cannot become partial-month sales', async ({ page }) => {
   await page.evaluate(() => (window as any).setSalesSectorsData({ rows: [
-    { product: 'Sale', period: '2025-02', revenue: 100, quantity: 10, sector: 'Private', territory: 'Quezon' },
-    { product: 'Credit', period: '2025-02', revenue: -10, quantity: -1, sector: 'Private', territory: 'Quezon' },
+    { product: 'Sale', period: '2025-02', revenue: 100, positive_sales: 100, returns_value: 0, quantity: 10, sector: 'Private', territory: 'Quezon' },
+    { product: 'Credit', period: '2025-02', revenue: -10, positive_sales: 0, returns_value: -10, quantity: -1, sector: 'Private', territory: 'Quezon' },
   ], source: { excluded: {} } }))
   await expect(page.locator('#productPriorityScope')).toContainText('Recorded revenue: ₱90')
-  await expect(page.locator('#productPriorityScope')).toContainText('1 labels have negative net revenue')
+  await expect(page.locator('#productPriorityScope')).toContainText('Returns remain in net revenue')
   await expect(page.locator('#productTable tbody')).toContainText('Unclassified')
   await page.evaluate(() => (window as any).setCustomDateRange('2025-02-15', '2025-02-28'))
   await expect(page.locator('#productPriorityScope')).toContainText('cannot be assigned to the exact requested dates')
@@ -58,7 +58,7 @@ test('negative revenue holds ABC; monthly aggregates cannot become partial-month
 
 test('source labels render as text and export uses selected scope', async ({ page }) => {
   await page.evaluate(() => (window as any).setSalesSectorsData({ rows: [
-    { product: '<img src=x onerror="window.injected=true">', period: '2025-02', revenue: 100, quantity: 10, sector: 'Private', territory: 'Quezon' },
+    { product: '<img src=x onerror="window.injected=true">', period: '2025-02', revenue: 100, positive_sales: 100, returns_value: 0, quantity: 10, sector: 'Private', territory: 'Quezon' },
   ], source: { excluded: {} } }))
   await expect(page.locator('#productTable tbody img')).toHaveCount(0)
   expect(await page.evaluate(() => (window as any).injected)).toBeUndefined()

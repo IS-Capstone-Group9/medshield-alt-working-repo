@@ -79,7 +79,7 @@ Acceptance criteria:
 - Missing months and incomplete periods are labeled.
 - The All Time dashboard period aggregates only observed records by calendar year; the current year is labeled YTD and an incomplete historical endpoint is labeled Partial.
 - Product-level analysis uses canonical SKU or estimated allocation flags.
-- The descriptive job is reproducible through `python services\analytics_service\jobs\run_descriptive.py`.
+- The descriptive pipeline is reproducible through `databricks/medshield_project/01_sales_bronze.py` through `06_sales_stl.py`; `backend/scripts/publication-readiness.ts` and `validate-descriptive.ts` collect version-bound evidence. Offline jobs are audit tools, not dashboard sources.
 - Revenue uses Net CP (`net_cost`), Total TP (`total_trade_price`) is acquisition cost, and `net_income` is labeled as transaction gross margin/profit.
 
 ### FR5 - Baseline Demand Forecasting
@@ -273,3 +273,19 @@ The capstone is complete when:
 8. Dashboard and API show validated outputs.
 9. Chapters 1-3 match the actual historical-only scope.
 10. Chapters 4-5 are written from implemented evidence and validation results.
+
+
+## Catalog implementation prepared — 27 September 2026
+
+[Product catalog contract](PRODUCT_CATALOG.md) defines independent category,
+sellable identity, item kind and transaction evidence. Local deterministic rules,
+Gold enrichment, stable-ID API/UI grouping, category filters and provenance-aware
+quantity/export handling are implemented. The complete version-16 review includes
+37,728 records and 4,561 labels; all remain unresolved because no approved master
+entries were supplied. Category approval cannot approve SKU, quantity conversion,
+forecasting or observed medical demand. Adjusted provenance remains file-level.
+
+The [operator runbook](CATALOG_DEPLOYMENT.md) specifies catalog-only 03 → 04 → 05 →
+06 → publication-readiness → descriptive/catalog validation, version-bound activation
+and rollback. This is local preparation: no Databricks writes, release activation
+or additional CEO decisions occurred. Databricks remains the sole analytical source.

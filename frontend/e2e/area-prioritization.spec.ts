@@ -20,6 +20,7 @@ test.describe('Area Prioritization Dynamic Interactions & Visualizations', () =>
         sector,
         channel,
         territory,
+        region: territory === 'Camarines Sur' ? 'Bicol' : territory === 'Unassigned geography' ? null : 'CALABARZON',
         revenue,
         quantity,
         period,
@@ -92,7 +93,7 @@ test.describe('Area Prioritization Dynamic Interactions & Visualizations', () =>
     })
     expect(evidenceLayers.labels).toEqual(['Actual net sales', 'Gap estimate'])
     await expect(page.locator('#areaActualRevenue')).toContainText('₱1M')
-    await expect(page.locator('#areaEstimatedRevenue')).toContainText('₱700K')
+    await expect(page.locator('#areaEstimatedRevenue')).toContainText('₱100K')
 
     // 2. Pareto analysis includes revenue, cumulative share, and an 80% reference.
     const paretoLayers = await page.evaluate(() => {

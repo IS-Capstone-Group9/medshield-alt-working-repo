@@ -1,3 +1,6 @@
+import { benchmarkNames, benchmarkView, evaluationProtocol, manilaMonth, reconciledPages } from './forecastEvidence'
+import { catalogProjection } from './catalogContract'
+import { parseMonthlyYear } from './monthlyQuery'
 import { createHash } from 'node:crypto'
 import { executeDatabricksStatement } from './databricks'
 import { revenueAbc, weightedMargin } from './descriptiveMetrics'
@@ -15,6 +18,42 @@ const SOURCE_NAME = 'workspace.medshield_gold.sales_restart_fact_candidate'
 const NON_PRODUCT_LABEL = `(is_contract_label = TRUE OR UPPER(TRIM(normalized_product)) RLIKE
   '^(PAGBILAO|QMC|PPDC|TOURISM|PROVINCIAL[[:space:]]+TOURISM[[:space:]]+OFFICE|MARINDUQUE|GULANG[[:space:]]+GULANG|PESO|PESO[[:space:]]+PROVINCIAL|PHO|ABOITIZ|PADRE[[:space:]]+BURGOS|PPOC)([[:space:]]*#|[[:space:]]+[0-9])|^DR[[:space:]]*#|^PR[[:space:]]+[0-9]')`
 const OBSERVED_FACT = `is_analysis_candidate = TRUE AND NOT ${NON_PRODUCT_LABEL}`
+
+// M-1 fix: shared sector classification constants.
+// These area lists define the proposed buyer grouping (CEO review pending).
+// Change them here once and every sector-scoped query stays consistent.
+const SECTOR_GOVERNMENT_AREAS = `'GOVERNMENT', 'PAGBILAO'`
+const SECTOR_INTERNAL_AREAS = `'ADMIN', 'SUPPLIES', 'SUPPLLIES', 'EQUIPMENT', 'SUPPLIES AND EQUIPMENT', 'PERSONAL', 'LOSSES'`
+const SECTOR_PRIVATE_AREAS = `'CAVITE', 'LOWER CAVITE', 'BATANGAS', 'QUEZON', 'LAGUNA', 'MARINDUQUE', 'CAMARINES NORTE', 'CAM NORTE', 'CAMARINES SUR', 'CAM SUR', 'ALBAY', 'LEGASPI', 'LAGASPI', 'BICOL', 'MINDORO', 'HOSPITAL', 'HOPITAL', 'PHARMA', 'LUCENA', 'RAKKK', 'EAST', 'EASTERN', 'EASTERN QUEZON'`
+const VALID_SECTORS = ['Unknown', 'Government', 'Private', 'Internal', 'All'] as const
+
+/** M-1 fix: single source of truth for sector WHERE clause fragments. */
+function sectorWhereClause(sector: string): string {
+  switch (sector) {
+    case 'Government': return `AND UPPER(TRIM(normalized_area)) IN (${SECTOR_GOVERNMENT_AREAS})`
+    case 'Private': return `AND (proposed_area_type = 'territory' OR UPPER(TRIM(normalized_area)) IN (${SECTOR_PRIVATE_AREAS}))`
+    case 'Internal': return `AND UPPER(TRIM(normalized_area)) IN (${SECTOR_INTERNAL_AREAS})`
+    default: return ''
+  }
+}
+
+/** M-1 fix: validate sector input using the shared list. */
+function validateSector(sector: string): void {
+  if (!(VALID_SECTORS as readonly string[]).includes(sector)) {
+    throw new DatabricksDashboardInputError('Invalid buyer cluster')
+  }
+}
+
+// m-4 fix: shared LOWER CAVITE normalization SQL expression.
+const CAVITE_NORMALIZE = `CASE WHEN normalized_area = 'LOWER CAVITE' THEN 'Cavite' ELSE normalized_area END`
+const CAVITE_NORMALIZE_UPPER = `CASE WHEN normalized_area = 'LOWER CAVITE' THEN 'CAVITE' ELSE normalized_area END`
+
+/** M-4 fix: validate year input dynamically instead of hardcoding 2017-2025. */
+function validateYearFilter(year: string, label = 'year'): void {
+  if (parseMonthlyYear(year) === null) {
+    throw new DatabricksDashboardInputError(`${label} must be all or a four-digit year`)
+  }
+}
 
 type Row = Record<string, string | null>
 
@@ -96,22 +135,9 @@ function periodName(value: number): string {
 }
 
 function currentClosedMonth(): number {
-  const now = new Date()
+  // m-2 fix: use PH timezone (UTC+8) instead of UTC for month-boundary correctness.
+  const now = new Date(Date.now() + 8 * 3600_000)
   return now.getUTCFullYear() * 12 + now.getUTCMonth() - 1
-}
-
-function metricSummary(pairs: Array<[number, number]>) {
-  if (!pairs.length) return { n: 0, mae: null, rmse: null, wape: null, bias: null }
-  const errors = pairs.map(([actual, predicted]) => predicted - actual)
-  const absolute = errors.map(Math.abs)
-  const actualTotal = pairs.reduce((sum, [actual]) => sum + Math.abs(actual), 0)
-  return {
-    n: pairs.length,
-    mae: absolute.reduce((sum, value) => sum + value, 0) / pairs.length,
-    rmse: Math.sqrt(errors.reduce((sum, value) => sum + value * value, 0) / pairs.length),
-    wape: actualTotal ? absolute.reduce((sum, value) => sum + value, 0) / actualTotal * 100 : null,
-    bias: errors.reduce((sum, value) => sum + value, 0) / pairs.length,
-  }
 }
 
 export class DatabricksDashboardInputError extends Error {
@@ -131,7 +157,7 @@ export class DatabricksSourceUnavailableError extends Error {
   }
 }
 
-type DescriptiveRelease = { fact_delta_version: number; dataset_id: string; policy_version: string; area_mapping_sha256: string; product_master_sha256: string; publication_status: string }
+type DescriptiveRelease = { resolution_policy?: string; transaction_evidence_sha256?: string; catalog_helper_sha256?: string; fact_delta_version: number; dataset_id: string; policy_version: string; area_mapping_sha256: string; product_master_sha256: string; publication_status: string }
 let releasePromise: Promise<DescriptiveRelease> | undefined
 let activeRelease: DescriptiveRelease | undefined
 
@@ -145,7 +171,13 @@ export function descriptiveRelease(): Promise<DescriptiveRelease> {
     if (!Number.isSafeInteger(version) || version < 0) throw new Error('No valid descriptive Delta version')
     const identity = (await executeDatabricksStatement(`SELECT DISTINCT dataset_id, policy_version, area_mapping_sha256, product_master_sha256, publication_status FROM ${FACT} VERSION AS OF ${version}`, {rowLimit: 2})).rows
     if (identity.length !== 1 || Object.values(identity[0]).some(v => !v)) throw new Error('Ambiguous descriptive release identity')
-    activeRelease = { ...identity[0], fact_delta_version: version } as DescriptiveRelease
+    let catalogIdentity: Row = {}
+    if (identity[0].policy_version === 'sales_restart_gold_v7_independent_catalog') {
+      const catalog = (await executeDatabricksStatement(`SELECT DISTINCT resolution_policy, transaction_evidence_sha256, catalog_helper_sha256 FROM ${FACT} VERSION AS OF ${version}`, {rowLimit:2})).rows
+      if (catalog.length !== 1 || Object.values(catalog[0]).some(v => !v)) throw new Error('Ambiguous catalog release identity')
+      catalogIdentity = catalog[0]
+    }
+    activeRelease = { ...identity[0], ...catalogIdentity, fact_delta_version: version } as DescriptiveRelease
     return activeRelease
   })().catch(error => { releasePromise = undefined; throw error })
   return releasePromise
@@ -373,7 +405,7 @@ export async function getDatabricksSalesStatus() {
   const [summaryRows, years] = await Promise.all([
     query(`SELECT COUNT(*) AS rows_extracted,
       SUM(CASE WHEN ${OBSERVED_FACT} THEN 1 ELSE 0 END) AS rows_accepted,
-      0 AS duplicate_rows,
+      (COUNT(*) - COUNT(DISTINCT source_record_id)) AS duplicate_rows,
       SUM(CASE WHEN ${OBSERVED_FACT} AND COALESCE(SIZE(quality_rule_codes), 0) > 0 THEN 1 ELSE 0 END) AS rows_with_warnings,
       SUM(CASE WHEN ${OBSERVED_FACT} AND COALESCE(SIZE(quality_rule_codes), 0) = 0 THEN 1 ELSE 0 END) AS valid_rows,
       COUNT(DISTINCT CASE WHEN ${OBSERVED_FACT} THEN normalized_product END) AS unique_products,
@@ -431,7 +463,7 @@ function salesWhere(input: { year?: string; search?: string; qualityStatus?: str
   const clauses = [OBSERVED_FACT]
   const year = input.year?.trim() || 'all'
   if (year !== 'all') {
-    if (!/^(201[7-9]|202[0-5])$/.test(year)) throw new DatabricksDashboardInputError('year must be all or 2017-2025')
+    validateYearFilter(year)
     clauses.push(`calendar_year = ${Number(year)}`)
   }
   const quality = input.qualityStatus?.trim().toLowerCase() || 'all'
@@ -581,52 +613,50 @@ export async function getDatabricksSalesSummary(input: {
   }
 }
 
-export async function getDatabricksSalesHeatmap() {
-  const [products, monthly] = await Promise.all([
-    query(`SELECT normalized_product AS product_name,
-      MAX(reference_mapping_status) AS mapping_status
-      FROM ${FACT}
-      WHERE ${OBSERVED_FACT} AND normalized_product IS NOT NULL
-      GROUP BY normalized_product ORDER BY normalized_product`, 5000),
-    query(`SELECT normalized_product AS product,
-      DATE_FORMAT(month_start, 'yyyy-MM') AS period,
-      CASE WHEN normalized_area = 'LOWER CAVITE' THEN 'CAVITE' ELSE normalized_area END AS area,
-      SUM(quantity) AS quantity, COUNT(*) AS row_count
-      FROM ${FACT}
-      WHERE ${OBSERVED_FACT} AND is_quantity_observation_eligible = TRUE
-      GROUP BY normalized_product, month_start,
-        CASE WHEN normalized_area = 'LOWER CAVITE' THEN 'CAVITE' ELSE normalized_area END
-      ORDER BY normalized_product, month_start, area`, 30_000),
-  ])
-  return {
-    products: products.map((row) => ({
-      id: row.product_name,
-      label: row.product_name,
-      category: 'Unclassified',
-      mapping_status: row.mapping_status ?? 'unmapped',
-      unit: 'source units',
-      pack_size: '',
-    })),
-    monthly: monthly.map((row) => ({
-      product: row.product,
-      period: row.period,
-      area: row.area,
-      quantity: numberValue(row.quantity),
-      row_count: numberValue(row.row_count),
-    })),
-    source: databricksSource(monthly, {
-      input_rows: monthly.reduce((sum, row) => sum + numberValue(row.row_count), 0),
-      included_rows: monthly.reduce((sum, row) => sum + numberValue(row.row_count), 0),
-      excluded: {},
-      metric: 'Delivered quantity sold in source units from Databricks Gold',
-      missing_months: 'Unobserved, not zero',
-      estimated_rows: 'Excluded by the Gold fact contract',
-    }),
-  }
+export async function getDatabricksSalesHeatmap(category = 'All') {
+  const sectors = await getDatabricksSalesSectors(category)
+  const products = new Map<string, Record<string, unknown>>()
+  const daily = sectors.rows.map(row => {
+    const id = String(row.canonical_group_id)
+    // Verified SKU contracts guarantee a sellable unit. RAW groups never cross source keys.
+    products.set(id, { ...row, id, label: row.canonical_title, mapping_status: row.identity_status,
+      unit: row.unit_of_measure || 'Unknown source unit', pack_size: row.pack_count,
+      original_aliases: [...new Set([...(products.get(id)?.original_aliases as string[] || []), String(row.product_raw)])].sort(),
+      transaction_lineage: [...new Set([...(products.get(id)?.transaction_lineage as string[] || []), String(row.transaction_evidence_lineage)])].sort() })
+    return { product: id, period: row.date, area: row.area, quantity: row.item_kind === 'service' ? null : row.observed_quantity,
+      estimated_quantity: row.item_kind === 'service' ? null : row.estimated_quantity,
+      verified_quantity: row.item_kind === 'service' ? null : row.verified_quantity,
+      row_count: row.quantity_rows, transaction_evidence: row.transaction_evidence }
+  })
+  const monthly = daily.map(row => ({ ...row, period: String(row.period).slice(0, 7) }))
+  return { products: [...products.values()], monthly, daily,
+    source: { ...sectors.source, metric: 'Original-source reported quantity; adjusted-source quantities shown separately; verified services excluded',
+      estimated_rows: 'Included only in estimated_quantity; file-level provenance does not prove individual substitution',
+      missing_months: 'Unobserved, not zero' } }
 }
 
-export async function getDatabricksSalesSectors() {
-  const rows = await query(`SELECT normalized_product AS product,
+// Immutable fact-version data can be shared for the lifetime of this pinned process.
+// Failed loads are evicted; no local/offline substitute is used.
+let catalogLoad: ReturnType<typeof loadDatabricksCatalog> | undefined
+export async function getDatabricksSalesSectors(category = 'All') {
+  catalogLoad ??= loadDatabricksCatalog().catch(error => { catalogLoad = undefined; throw error })
+  const data = await catalogLoad
+  const rows = data.rows.filter(row => category === 'All' || row.category === category)
+  return {...data, rows, coverage: {...data.coverage, category_scope: category,
+    unresolved_records: rows.filter(r=>r.identity_status !== 'approved').reduce((n,r)=>n+r.row_count,0),
+    unresolved_revenue: rows.filter(r=>r.identity_status !== 'approved').reduce((n,r)=>n+(r.revenue??0),0)},
+    source: {...data.source, included_rows: rows.reduce((n,r)=>n+r.row_count,0)}}
+}
+
+async function loadDatabricksCatalog() {
+  const category = 'All'
+  const release = await descriptiveRelease()
+  const catalogEnabled = release.policy_version === 'sales_restart_gold_v7_independent_catalog'
+  const observedEvidence = catalogEnabled ? "transaction_evidence = 'original_source_detail'" : 'NOT is_adjusted_source'
+  const estimatedEvidence = catalogEnabled ? "transaction_evidence = 'adjusted_estimated_source'" : 'is_adjusted_source'
+  const verifiedEvidence = catalogEnabled ? "transaction_evidence = 'independently_verified_detail'" : 'FALSE'
+  const catalogSql = `SELECT normalized_product AS product, product_key, product_raw, source_record_id,
+    ${catalogProjection(release.policy_version)},
     DATE_FORMAT(month_start, 'yyyy-MM') AS period,
     CAST(date_delivered AS STRING) AS date,
     normalized_area AS area,
@@ -664,19 +694,46 @@ export async function getDatabricksSalesSectors() {
       WHEN proposed_area_type = 'territory' OR UPPER(TRIM(normalized_area)) IN ('CAVITE', 'LOWER CAVITE', 'BATANGAS', 'QUEZON', 'LAGUNA', 'MARINDUQUE', 'CAMARINES NORTE', 'CAM NORTE', 'CAMARINES SUR', 'CAM SUR', 'ALBAY', 'LEGASPI', 'LAGASPI', 'BICOL', 'MINDORO', 'HOSPITAL', 'HOPITAL', 'PHARMA', 'LUCENA', 'RAKKK', 'EAST', 'EASTERN', 'EASTERN QUEZON') THEN 'Proposed buyer mapping (CEO review pending): Provincial, private-care, pharmacy, or individual-account label from docs/MAPPED_CLIENT_REFERENCE.md'
       ELSE 'Buyer type unavailable'
     END AS basis,
-    SUM(CASE WHEN is_net_sales_eligible AND net_sales > 0 THEN net_sales ELSE 0 END) AS positive_sales,
-    SUM(CASE WHEN is_net_sales_eligible AND net_sales < 0 THEN net_sales ELSE 0 END) AS returns_value,
-    SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) AS revenue,
-    SUM(CASE WHEN is_quantity_observation_eligible THEN quantity END) AS quantity,
-    SUM(CASE WHEN is_gross_margin_eligible THEN gross_margin_amount END) AS income,
-    SUM(CASE WHEN is_gross_margin_eligible THEN net_sales END) AS margin_revenue_basis,
-    COUNT(*) AS row_count
-    FROM ${FACT} WHERE ${OBSERVED_FACT}
-    GROUP BY ALL ORDER BY date, product, area`, 100_000)
+    CASE WHEN is_net_sales_eligible AND net_sales > 0 THEN net_sales ELSE 0 END AS positive_sales,
+    CASE WHEN is_net_sales_eligible AND net_sales < 0 THEN net_sales ELSE 0 END AS returns_value,
+    CASE WHEN is_net_sales_eligible THEN net_sales END AS revenue,
+    CASE WHEN is_quantity_observation_eligible THEN quantity END AS quantity,
+    CASE WHEN is_quantity_observation_eligible AND ${observedEvidence} THEN quantity END AS observed_quantity,
+    CASE WHEN is_quantity_observation_eligible AND ${estimatedEvidence} THEN quantity END AS estimated_quantity,
+    CASE WHEN is_quantity_observation_eligible AND ${verifiedEvidence} THEN quantity END AS verified_quantity,
+    CASE WHEN is_quantity_observation_eligible THEN 1 ELSE 0 END AS quantity_rows,
+    CASE WHEN is_gross_margin_eligible THEN gross_margin_amount END AS income,
+    CASE WHEN is_gross_margin_eligible THEN net_sales END AS margin_revenue_basis,
+    1 AS row_count
+    FROM ${FACT} WHERE ${OBSERVED_FACT}`
+  // Bounded pages avoid Databricks INLINE byte limits without dropping records.
+  const counts = await query(`SELECT calendar_year, COUNT(*) AS n FROM ${FACT} WHERE ${OBSERVED_FACT} GROUP BY calendar_year ORDER BY calendar_year`)
+  const statements: string[] = []
+  for (const count of counts) {
+    const year = integerValue(count.calendar_year, 'calendar year', 1000, 9999)
+    for (let offset = 0; offset < numberValue(count.n); offset += 2000) {
+      statements.push(`${catalogSql} AND calendar_year = ${year} ORDER BY source_record_id LIMIT 2000 OFFSET ${offset}`)
+    }
+  }
+  const pages = await Promise.all(statements.map(statement => query(statement, 2000)))
+  const rows = pages.flat()
+  if (rows.reduce((sum,row)=>sum+numberValue(row.row_count),0) !== counts.reduce((sum,row)=>sum+numberValue(row.n),0)) {
+    throw new DatabricksSourceUnavailableError('Incomplete catalog fact retrieval')
+  }
   const includedRows = rows.reduce((sum, row) => sum + numberValue(row.row_count), 0)
   return {
-    rows: rows.map(row => ({
+    rows: rows.filter(row => category === 'All' || row.category === category).map(row => ({
       ...row,
+      canonical_group_id: row.canonical_group_id, canonical_title: row.canonical_title, canonical_sku: row.canonical_sku,
+      category: row.category, identity_status: row.identity_status, item_kind: row.item_kind,
+      packaging_unit: row.packaging_unit, pack_count: row.pack_count, contained_unit: row.contained_unit,
+      unit_of_measure: row.unit_of_measure, product_raw: row.product_raw, product: row.product,
+      date: row.date, period: row.period, area: row.area, transaction_evidence: row.transaction_evidence,
+      transaction_evidence_lineage: row.transaction_evidence_lineage,
+      observed_quantity: nullableNumber(row.observed_quantity),
+      estimated_quantity: nullableNumber(row.estimated_quantity),
+      verified_quantity: nullableNumber(row.verified_quantity),
+      quantity_rows: numberValue(row.quantity_rows),
       positive_sales: numberValue(row.positive_sales),
       returns_value: numberValue(row.returns_value),
       revenue: row.revenue == null ? null : numberValue(row.revenue),
@@ -687,6 +744,7 @@ export async function getDatabricksSalesSectors() {
       evidence: 'actual',
       product_evidence: row.source_data_status === 'ORIGINAL_SOURCE_EXPORT' ? 'source_label_unverified' : 'estimated_allocation_source',
     })),
+    coverage: { unresolved_records: rows.filter(r=>r.identity_status !== 'approved').reduce((sum,r)=>sum+numberValue(r.row_count),0), unresolved_revenue: rows.filter(r=>r.identity_status !== 'approved').reduce((sum,r)=>sum+numberValue(r.revenue),0), category_scope: category, financial_scope: 'All valid item kinds, including services' },
     source: databricksSource(rows, {
       input_rows: includedRows, included_rows: includedRows,
       metric: 'Eligible recorded sales; proposed buyer grouping; only warehouse-approved geography',
@@ -697,110 +755,82 @@ export async function getDatabricksSalesSectors() {
 }
 
 async function scopedMonthlySeries(sector: string, product: string, metric: string) {
-  if (!['Unknown', 'Government', 'Private', 'Internal', 'All'].includes(sector)) throw new DatabricksDashboardInputError('Invalid buyer cluster')
+  validateSector(sector)
   if (!['revenue', 'quantity'].includes(metric)) throw new DatabricksDashboardInputError('Invalid forecast metric')
   if (metric === 'quantity' && !product) throw new DatabricksDashboardInputError('Select one product for a quantity forecast')
-
-  let sectorClause = ''
-  if (sector === 'Government') {
-    sectorClause = `AND UPPER(TRIM(normalized_area)) IN ('GOVERNMENT', 'PAGBILAO')`
-  } else if (sector === 'Private') {
-    sectorClause = `AND (proposed_area_type = 'territory' OR UPPER(TRIM(normalized_area)) IN ('CAVITE', 'LOWER CAVITE', 'BATANGAS', 'QUEZON', 'LAGUNA', 'MARINDUQUE', 'CAMARINES NORTE', 'CAM NORTE', 'CAMARINES SUR', 'CAM SUR', 'ALBAY', 'LEGASPI', 'LAGASPI', 'BICOL', 'MINDORO', 'HOSPITAL', 'HOPITAL', 'PHARMA', 'LUCENA', 'RAKKK', 'EAST', 'EASTERN', 'EASTERN QUEZON'))`
-  } else if (sector === 'Internal') {
-    sectorClause = `AND UPPER(TRIM(normalized_area)) IN ('ADMIN', 'SUPPLIES', 'SUPPLLIES', 'EQUIPMENT', 'SUPPLIES AND EQUIPMENT', 'PERSONAL', 'LOSSES')`
-  }
-
+  // Use the same ordered proposed buyer mapping as /sales/sectors. It is not an approved territory mapping.
+  const sectorExpression = `CASE
+    WHEN UPPER(TRIM(normalized_area)) IN (${SECTOR_GOVERNMENT_AREAS}) THEN 'Government'
+    WHEN UPPER(TRIM(normalized_area)) IN (${SECTOR_INTERNAL_AREAS}) THEN 'Internal'
+    WHEN proposed_area_type = 'territory' OR UPPER(TRIM(normalized_area)) IN (${SECTOR_PRIVATE_AREAS}) THEN 'Private'
+    ELSE 'Unknown' END`
+  const sectorClause = sector === 'All' ? '' : `AND (${sectorExpression}) = ${sqlString(sector, 'sector')}`
   const productClause = product ? `AND normalized_product = ${sqlString(product, 'product')}` : ''
-  return {
-    rows: await query(`SELECT DATE_FORMAT(month_start, 'yyyy-MM') AS period,
-      SUM(${metric === 'quantity' ? 'CASE WHEN is_quantity_observation_eligible THEN quantity ELSE 0 END' : 'CASE WHEN is_net_sales_eligible THEN net_sales ELSE 0 END'}) AS actual
-      FROM ${FACT} WHERE ${OBSERVED_FACT} ${sectorClause} ${productClause}
-      GROUP BY month_start ORDER BY month_start`, 150),
-    products: await query(`SELECT normalized_product AS product,
-      SUM(CASE WHEN is_net_sales_eligible THEN COALESCE(net_sales, 0) ELSE 0 END) AS revenue
-      FROM ${FACT} WHERE ${OBSERVED_FACT} ${sectorClause}
-      GROUP BY normalized_product ORDER BY revenue DESC LIMIT 5000`, 5000),
-  }
-}
-
-function forecastModel(series: Map<number, number>, origin: number, horizon: number, kind: 'seasonal_naive' | 'last_value') {
-  const evaluationStart = origin - horizon + 1
-  const backtest = []
-  const scored: Array<[number, number]> = []
-  for (let period = evaluationStart; period <= origin; period += 1) {
-    const actual = series.get(period)
-    const prediction = kind === 'seasonal_naive' ? series.get(period - 12) : series.get(period - 1)
-    if (actual == null || prediction == null) continue
-    backtest.push({ period: periodName(period), actual, prediction, lower: null, upper: null, origin: periodName(period - 1), band_sample_count: 0 })
-    scored.push([actual, prediction])
-  }
-  const forecast = []
-  for (let lead = 1; lead <= horizon; lead += 1) {
-    const period = origin + lead
-    const prediction = kind === 'seasonal_naive'
-      ? series.get(period - 12) ?? null
-      : series.get(origin) ?? null
-    forecast.push({ period: periodName(period), prediction, lower: null, upper: null, origin: periodName(origin), band_sample_count: 0 })
-  }
-  const metrics = metricSummary(scored)
-  return {
-    forecast,
-    backtest,
-    metrics,
-    comparison_metrics: metrics,
-    band_coverage: { n: 0, percent: null },
+  const where = `${OBSERVED_FACT} ${sectorClause} ${productClause}`
+  const eligible = metric === 'quantity' ? 'is_quantity_observation_eligible' : 'is_net_sales_eligible'
+  const measure = metric === 'quantity' ? 'quantity' : 'net_sales'
+  const firstOpen = periodName(manilaMonth())
+  const counts = await query(`SELECT COUNT(DISTINCT month_start) AS months,
+    COUNT(DISTINCT CASE WHEN month_start >= DATE '${firstOpen}-01' THEN month_start END) AS not_closed
+    FROM ${FACT} WHERE ${where}`, 1)
+  const count = numberValue(counts[0]?.months, -1)
+  try {
+    const rows = await reconciledPages(count, (offset, size) => query(`SELECT DATE_FORMAT(month_start, 'yyyy-MM') AS period,
+      SUM(CASE WHEN ${eligible} THEN ${measure} END) AS actual,
+      COUNT(*) AS source_rows, SUM(CASE WHEN ${eligible} AND ${measure} IS NOT NULL THEN 1 ELSE 0 END) AS eligible_rows
+      FROM ${FACT} WHERE ${where}
+      GROUP BY month_start ORDER BY month_start LIMIT ${size} OFFSET ${offset}`, size), row => String(row.period))
+    // First release has no approved SKU scope. Do not enumerate thousands of raw
+    // labels as selectable forecast products (or delay company evidence to do so).
+    const products: Array<{ product: string }> = []
+    return { rows, products, excludedNotClosed: numberValue(counts[0]?.not_closed) }
+  } catch (error) {
+    throw new DatabricksSourceUnavailableError(error instanceof Error ? error.message : 'Forecast extraction failed')
   }
 }
 
 export async function getDatabricksForecastValidation(input: { sector?: string; product?: string; metric?: string }) {
-  const sector = input.sector?.trim() || 'Unknown'
+  const sector = input.sector?.trim() || 'All'
   const product = input.product?.trim() || ''
   const metric = input.metric?.trim() || 'revenue'
   const scoped = await scopedMonthlySeries(sector, product, metric)
-  const observations = scoped.rows
-    .filter((row) => row.period && nullableNumber(row.actual) !== null)
-    .map((row) => ({ period: row.period as string, actual: numberValue(row.actual) }))
-  const series = new Map(observations.map((row) => [monthNumber(row.period), row.actual]))
-  const origin = observations.length ? Math.max(...observations.map((row) => monthNumber(row.period))) : null
+  const closed = currentClosedMonth()
+  const observations = scoped.rows.filter(row => row.period && monthNumber(row.period) <= closed)
+    .map(row => ({ period: row.period as string, actual: nullableNumber(row.actual),
+      missing_reason: nullableNumber(row.actual) === null ? 'ineligible_or_missing_measure' : null,
+      reporting_coverage_status: 'unverified', period_closed: true }))
+  const series = new Map(observations.filter(row => row.actual !== null).map(row => [monthNumber(row.period), row.actual!]))
+  const origin = series.size ? Math.max(...series.keys()) : null
   const views: Record<string, unknown> = {}
-  if (origin !== null) {
-    for (const horizon of [3, 6, 12]) {
-      const models = {
-        seasonal_naive: forecastModel(series, origin, horizon, 'seasonal_naive'),
-        last_value: forecastModel(series, origin, horizon, 'last_value'),
-      }
-      views[String(horizon)] = {
-        evaluation_start: periodName(origin - horizon + 1),
-        evaluation_end: periodName(origin),
-        training_end: periodName(origin - horizon),
-        common_scored_months: Math.min(models.seasonal_naive.metrics.n, models.last_value.metrics.n),
-        models,
-      }
-    }
+  // Scope expansion requires separate approved catalog and mapping evidence.
+  const scopeSupported = metric === 'revenue' && sector === 'All' && !product
+  if (origin !== null && scopeSupported) {
+    for (const horizon of [3, 6, 12]) views[String(horizon)] = benchmarkView(series, origin, horizon,
+      'company', 'recorded_net_sales', closed + 1)
   }
-  const source = databricksSource(observations, {
-    as_of: new Date().toISOString().slice(0, 10),
-    input_rows: observations.length,
-    included_rows: observations.length,
-    scoped_rows: observations.length,
-    excluded: {},
-    excluded_not_closed: 0,
-    excluded_outside_history: 0,
+  const limitations = ['Monthly reporting completeness is unverified; benchmarks are exploratory retrospective evidence.',
+    'No approved predictive release or validated future lead range is available.',
+    'Revised historical data does not reconstruct information available at historical origins.']
+  if (!scopeSupported) limitations.push('This scope requires approved mapping, product identity, unit and coverage evidence before model evaluation.')
+  const source = databricksSource(scoped.rows, {
+    as_of: new Date(Date.now() + 8 * 3600_000).toISOString().slice(0, 10),
+    input_rows: scoped.rows.length, included_rows: observations.length, scoped_rows: scoped.rows.length,
+    excluded: { not_closed: scoped.excludedNotClosed }, excluded_not_closed: scoped.excludedNotClosed,
+    excluded_outside_history: 0, reporting_coverage_status: 'unverified',
+    buyer_mapping_status: sector === 'All' ? 'not_applicable' : 'proposed_review_pending',
   })
   return {
+    schema_version: 'forecast-validation.v2',
     scope: { sector, product, metric, unit: metric === 'quantity' ? 'delivered source units' : '₱ net sales' },
-    products: scoped.products.map((row) => row.product).filter(Boolean),
-    models: { seasonal_naive: 'Seasonal naive', last_value: 'Last observed value' },
-    status: observations.length ? 'Databricks Gold baseline' : 'Unavailable',
-    source,
-    actuals: observations,
-    views,
-    origin: origin === null ? null : periodName(origin),
-    months_since_origin: origin === null ? null : Math.max(0, currentClosedMonth() - origin),
-    observed_months: observations.length,
+    products: scoped.products.map(row => row.product).filter(Boolean), models: scopeSupported ? benchmarkNames : {},
+    status: !scopeSupported ? 'blocked' : observations.length ? 'exploratory' : 'empty',
+    publication_status: 'unpublished', reporting_coverage_status: 'unverified', evaluation_protocol: evaluationProtocol,
+    limitations, source, actuals: observations, views,
+    origin: origin === null ? null : periodName(origin), last_actual_period: origin === null ? null : periodName(origin),
+      months_since_origin: origin === null ? null : Math.max(0, closed - origin),
+    observed_months: series.size, display_start: periodName(closed + 1), validated_lead_range: null,
   }
 }
-
 export async function getDatabricksExternalRegression(input: Record<string, string | undefined>) {
   const sector = input.sector?.trim() || 'Unknown'
   const territory = input.territory?.trim() || 'Quezon'
@@ -811,7 +841,7 @@ export async function getDatabricksExternalRegression(input: Record<string, stri
   const disease = input.disease?.trim() || 'Dengue'
   const lag = integerValue(input.lag ?? 1, 'lag', 1, 12)
   const rainfallLag = integerValue(input.rainfall_lag ?? 1, 'rainfall_lag', 1, 12)
-  if (!['Unknown', 'Government', 'Private', 'Internal', 'All'].includes(sector)) throw new DatabricksDashboardInputError('Invalid buyer cluster')
+  validateSector(sector)
   if (!['revenue', 'quantity'].includes(metric)) throw new DatabricksDashboardInputError('Invalid metric')
   if (!['disease', 'rainfall', 'combined'].includes(mode)) throw new DatabricksDashboardInputError('Invalid external model')
   const [coverage, products, signals, territories] = await Promise.all([
@@ -859,19 +889,12 @@ export async function getDatabricksExternalRegression(input: Record<string, stri
 export async function getDatabricksPlanningShortlist(input: { sector?: string; territory?: string }) {
   const sector = input.sector?.trim() || 'Unknown'
   const territory = input.territory?.trim() || 'all'
-  if (!['Unknown', 'Government', 'Private', 'Internal', 'All'].includes(sector)) throw new DatabricksDashboardInputError('Invalid buyer cluster')
+  validateSector(sector)
   const territories = await query(`SELECT DISTINCT INITCAP(COALESCE(territory, normalized_area)) AS territory
     FROM ${FACT} WHERE ${OBSERVED_FACT} AND proposed_area_type = 'territory'
     ORDER BY territory`, 100)
 
-  let sectorClause = ''
-  if (sector === 'Government') {
-    sectorClause = `AND UPPER(TRIM(normalized_area)) IN ('GOVERNMENT', 'PAGBILAO')`
-  } else if (sector === 'Private') {
-    sectorClause = `AND (proposed_area_type = 'territory' OR UPPER(TRIM(normalized_area)) IN ('CAVITE', 'LOWER CAVITE', 'BATANGAS', 'QUEZON', 'LAGUNA', 'MARINDUQUE', 'CAMARINES NORTE', 'CAM NORTE', 'CAMARINES SUR', 'CAM SUR', 'ALBAY', 'LEGASPI', 'LAGASPI', 'BICOL', 'MINDORO', 'HOSPITAL', 'HOPITAL', 'PHARMA', 'LUCENA', 'RAKKK', 'EAST', 'EASTERN', 'EASTERN QUEZON'))`
-  } else if (sector === 'Internal') {
-    sectorClause = `AND UPPER(TRIM(normalized_area)) IN ('ADMIN', 'SUPPLIES', 'SUPPLLIES', 'EQUIPMENT', 'SUPPLIES AND EQUIPMENT', 'PERSONAL', 'LOSSES')`
-  }
+  const sectorClause = sectorWhereClause(sector)
 
   const territoryClause = territory === 'all'
     ? ''
@@ -1100,9 +1123,7 @@ export async function getDatabricksWeatherEffects(input: { year?: string; area?:
   if (!['PAGASA', 'nasa_power'].includes(provider)) {
     throw new DatabricksDashboardInputError('Weather provider must be PAGASA or nasa_power')
   }
-  if (year !== 'all' && !/^(201[7-9]|202[0-5])$/.test(year)) {
-    throw new DatabricksDashboardInputError('Invalid weather year')
-  }
+  if (year !== 'all') validateYearFilter(year, 'weather year')
   if (provider === 'nasa_power') return getNasaPowerWeatherEffects(year, area)
 
   const clauses = [`signal_family = 'WEATHER'`]
@@ -1147,7 +1168,7 @@ export async function getDatabricksWeatherEffects(input: { year?: string; area?:
 export async function getDatabricksStl() {
   const release = await descriptiveRelease()
   const rows = await query(`SELECT period, observed, trend, seasonal, residual, segment_start, segment_end,
-    dataset_id, policy_version, fact_delta_version, parameters_json, input_sha256, publication_status
+    dataset_id, policy_version, area_mapping_sha256, product_master_sha256, fact_delta_version, parameters_json, input_sha256, publication_status
     FROM ${GOLD}.sales_restart_stl_candidate
     WHERE fact_delta_version = ${release.fact_delta_version}
       AND dataset_id = ${sqlString(release.dataset_id, 'dataset')}
@@ -1155,6 +1176,7 @@ export async function getDatabricksStl() {
     ORDER BY period`, 2400)
   if (!rows.length) throw new DatabricksSourceUnavailableError('No published STL for the active descriptive fact version')
   if (new Set(rows.map(row => row.input_sha256)).size !== 1 || new Set(rows.map(row => row.period)).size !== rows.length) throw new DatabricksSourceUnavailableError('Ambiguous STL publication')
+  if (rows.some(row => row.area_mapping_sha256 !== release.area_mapping_sha256 || row.product_master_sha256 !== release.product_master_sha256) || new Set(rows.map(row => row.parameters_json)).size !== 1) throw new DatabricksSourceUnavailableError('STL mapping or parameter identity does not match the active release')
   const components = rows.map(row => ({ ...row, observed: nullableNumber(row.observed), trend: nullableNumber(row.trend), seasonal: nullableNumber(row.seasonal), residual: nullableNumber(row.residual) }))
   if (components.some(row => [row.observed, row.trend, row.seasonal, row.residual].some(v => v == null) || Math.abs(row.observed! - row.trend! - row.seasonal! - row.residual!) > 0.000001)) throw new DatabricksSourceUnavailableError('Invalid STL components')
   return { method: 'STL', metric: 'Eligible net sales (PHP)', release, parameters: JSON.parse(rows[0].parameters_json!), rows: components, source: databricksSource(rows) }

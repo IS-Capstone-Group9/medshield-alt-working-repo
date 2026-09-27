@@ -1,3 +1,21 @@
+export type CatalogMetadata = {
+  canonical_group_id: string
+  canonical_sku: string | null
+  canonical_title: string
+  category: 'Medical' | 'Non-Medical' | 'Unclassified'
+  identity_status: 'approved' | 'needs_review' | 'proposed'
+  category_status: 'approved' | 'needs_review' | 'proposed'
+  item_kind: 'physical_product' | 'service' | 'unknown'
+  packaging_unit: string | null
+  pack_count: string | null
+  contained_unit: string | null
+  unit_of_measure: string | null
+  original_aliases?: string[]
+  transaction_evidence: 'original_source_detail' | 'adjusted_estimated_source' | 'independently_verified_detail'
+  transaction_evidence_lineage: string
+  resolution_policy: string
+}
+
 export type SalesTransaction = {
   year: number | null
   area: string | null
