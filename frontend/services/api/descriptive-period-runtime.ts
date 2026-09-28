@@ -17,12 +17,15 @@ const DESCRIPTIVE_YEAR_ROWS = `function getYearRowsForMode() {
   const totals = new Map();
   getDescriptiveMonthlyRows().forEach(row => {
     const year = String(row.period).slice(0, 4);
-    const total = totals.get(year) || { year, revenue: 0, income: 0, transactions: null };
+    const total = totals.get(year) || { year, revenue: 0, income: 0, transactions: null, margin_revenue_basis: 0, marginBasisComplete: true };
     total.revenue += Number(row.revenue) || 0;
     if (row.income != null && Number.isFinite(Number(row.income))) total.income += Number(row.income);
+    else total.marginBasisComplete = false;
+    if (row.margin_revenue_basis != null && Number.isFinite(Number(row.margin_revenue_basis))) total.margin_revenue_basis += Number(row.margin_revenue_basis);
+    else total.marginBasisComplete = false;
     totals.set(year, total);
   });
-  return [...totals.values()].sort((left, right) => Number(left.year) - Number(right.year));
+  return [...totals.values()].map(row => ({ ...row, income: row.marginBasisComplete ? row.income : null, margin_revenue_basis: row.marginBasisComplete ? row.margin_revenue_basis : null })).sort((left, right) => Number(left.year) - Number(right.year));
 }`
 
 const DESCRIPTIVE_MONTH_ROWS = `function getMonthlyRowsForMode() {
@@ -42,14 +45,26 @@ const DESCRIPTIVE_MONTH_ROWS = `function getMonthlyRowsForMode() {
     spanGaps: false
   };
   const currentProfit = {
-    label: 'Gross Profit · ' + scope,
-    data: rows.map(row => row.income == null ? null : row.income),
+    label: 'Gross Profit · Same margin-eligible transactions',
+    data: rows.map(row => row.income == null || row.margin_revenue_basis == null ? null : row.income),
     borderColor: getAmber(),
     backgroundColor: getAmber(0.08),
     fill: false,
     tension: 0.3,
     borderWidth: 2.2,
     pointRadius: descriptiveUsesDailyGrain() ? 1.5 : 3,
+    spanGaps: false
+  };
+  const currentMarginRevenue = {
+    label: 'Net Sales Revenue · Gross-profit eligible transactions',
+    data: rows.map(row => row.margin_revenue_basis == null ? null : row.margin_revenue_basis),
+    borderColor: getColor(.55),
+    backgroundColor: 'transparent',
+    borderDash: [4, 3],
+    fill: false,
+    tension: 0.3,
+    borderWidth: 2,
+    pointRadius: 2,
     spanGaps: false
   };
   const priorRevenue = {
@@ -65,8 +80,8 @@ const DESCRIPTIVE_MONTH_ROWS = `function getMonthlyRowsForMode() {
     spanGaps: false
   };
   const priorProfit = {
-    label: 'Prior-year Gross Profit',
-    data: priorRows.map(row => row.income == null ? null : row.income),
+    label: 'Prior-year Gross Profit · Same eligible transactions',
+    data: priorRows.map(row => row.income == null || row.margin_revenue_basis == null ? null : row.income),
     borderColor: getAmber(0.55),
     backgroundColor: 'transparent',
     borderDash: [7, 5],
@@ -76,12 +91,24 @@ const DESCRIPTIVE_MONTH_ROWS = `function getMonthlyRowsForMode() {
     pointRadius: descriptiveUsesDailyGrain() ? 1 : 2,
     spanGaps: false
   };
+  const priorMarginRevenue = {
+    label: 'Prior-year Net Sales · Gross-profit eligible transactions',
+    data: priorRows.map(row => row.margin_revenue_basis == null ? null : row.margin_revenue_basis),
+    borderColor: getColor(.3),
+    backgroundColor: 'transparent',
+    borderDash: [2, 3],
+    fill: false,
+    tension: 0.3,
+    borderWidth: 2,
+    pointRadius: 2,
+    spanGaps: false
+  };
   return {
     labels: rows.map(row => descriptivePointLabel(row.period)),
     datasets: (yoy
-      ? [currentRevenue, priorRevenue, currentProfit, priorProfit]
-      : [currentRevenue, currentProfit]
-    ).filter(dataset => !descriptiveUsesDailyGrain() || !dataset.label.includes('Gross Profit'))
+      ? [currentRevenue, priorRevenue, currentMarginRevenue, priorMarginRevenue, currentProfit, priorProfit]
+      : [currentRevenue, currentMarginRevenue, currentProfit]
+    ).filter(dataset => !descriptiveUsesDailyGrain() || (!dataset.label.includes('eligible transactions') && !dataset.label.includes('Gross Profit')))
   };
 }`
 
@@ -427,18 +454,20 @@ function getDescriptiveDisplayRows() {
       const period = String(row.period || '');
       if (!/^\d{4}-\d{2}$/.test(period) || descriptiveIsFuturePeriod(period) || !descriptivePeriodIncludes(period) || row.revenue == null || row.evidence === 'estimate' || row.missing) return;
       const year = period.slice(0, 4);
-      const total = totals.get(year) || { period: year, revenue: 0, income: 0, incomeComplete: true, observedMonths: new Set(), evidence: 'actual' };
+      const total = totals.get(year) || { period: year, revenue: 0, income: 0, incomeComplete: true, margin_revenue_basis: 0, marginBasisComplete: true, observedMonths: new Set(), evidence: 'actual' };
       total.revenue += Number(row.revenue) || 0;
       if (row.income == null || !Number.isFinite(Number(row.income))) total.incomeComplete = false;
       else total.income += Number(row.income);
+      if (row.margin_revenue_basis == null || !Number.isFinite(Number(row.margin_revenue_basis))) total.marginBasisComplete = false;
+      else total.margin_revenue_basis += Number(row.margin_revenue_basis);
       total.observedMonths.add(period.slice(5, 7));
       totals.set(year, total);
     });
     return descriptiveAxisPeriods().map(period => {
       const total = totals.get(period);
       return total
-        ? { period, revenue: total.revenue, income: total.incomeComplete ? total.income : null, evidence: 'actual', observed_months: total.observedMonths.size }
-        : { period, revenue: null, income: null, evidence: 'unavailable', missing: true, observed_months: 0 };
+        ? { period, revenue: total.revenue, income: total.incomeComplete && total.marginBasisComplete ? total.income : null, margin_revenue_basis: total.marginBasisComplete ? total.margin_revenue_basis : null, evidence: 'actual', observed_months: total.observedMonths.size }
+        : { period, revenue: null, income: null, margin_revenue_basis: null, evidence: 'unavailable', missing: true, observed_months: 0 };
     });
   }
   const source = new Map(sourceRows.map(row => [String(row.period), row]));
@@ -452,7 +481,7 @@ function getDescriptivePriorDisplayRows() {
   if (descriptiveUsesYearlyGrain()) {
     const annual = new Map(getDescriptiveDisplayRows().map(row => [String(row.period), row]));
     return descriptiveAxisPeriods().map(period => annual.get(String(Number(period) - 1))
-      || { period: String(Number(period) - 1), revenue: null, income: null, evidence: 'unavailable', missing: true });
+      || { period: String(Number(period) - 1), revenue: null, income: null, margin_revenue_basis: null, evidence: 'unavailable', missing: true });
   }
   const sourceRows = descriptivePeriod === 'custom' && !descriptiveUsesDailyGrain()
     ? descriptiveCustomMonthlyRows(shiftIsoYear(customDateStart, -1), shiftIsoYear(customDateEnd, -1))
@@ -463,7 +492,7 @@ function getDescriptivePriorDisplayRows() {
     const priorPeriod = descriptivePreviousPeriod(period);
     return source.get(priorPeriod)
       || descriptiveWeightedEstimate(priorPeriod, estimateRows)
-      || { period: priorPeriod, revenue: null, income: null, evidence: 'unavailable', missing: true };
+      || { period: priorPeriod, revenue: null, income: null, margin_revenue_basis: null, evidence: 'unavailable', missing: true };
   });
 }
 

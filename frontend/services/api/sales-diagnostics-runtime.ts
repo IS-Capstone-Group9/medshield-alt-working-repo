@@ -64,10 +64,16 @@ function diagnosticMonths() {
   dashboardMonthlyRows().forEach(row => {
     const period = String(row.period);
     if (!historicalPeriod(period)) return;
-    if (row.revenue == null || row.income == null || !Number.isFinite(Number(row.revenue)) || !Number.isFinite(Number(row.income))) return;
-    const total = months.get(period) || { revenue: 0, income: 0 };
-    total.revenue += Number(row.revenue);
-    total.income += Number(row.income);
+    const hasRevenue = row.revenue != null && Number.isFinite(Number(row.revenue));
+    const hasMargin = row.income != null && row.margin_revenue_basis != null
+      && Number.isFinite(Number(row.income)) && Number.isFinite(Number(row.margin_revenue_basis));
+    if (!hasRevenue && !hasMargin) return;
+    const total = months.get(period) || { revenue: null, income: null, margin_revenue_basis: null };
+    if (hasRevenue) total.revenue = (total.revenue || 0) + Number(row.revenue);
+    if (hasMargin) {
+      total.income = (total.income || 0) + Number(row.income);
+      total.margin_revenue_basis = (total.margin_revenue_basis || 0) + Number(row.margin_revenue_basis);
+    }
     months.set(period, total);
   });
   return months;
@@ -96,7 +102,7 @@ function diagnosticComparison(months, year, baseYear) {
   for (let month = 1; month <= 12; month++) {
     const suffix = '-' + String(month).padStart(2, '0');
     const target = months.get(year + suffix), base = months.get(baseYear + suffix);
-    if (target && base) {
+    if (target?.revenue != null && base?.revenue != null) {
       covered.push(month);
       current += target.revenue;
       previous += base.revenue;
@@ -162,46 +168,55 @@ function renderSalesDiagnostics(opts) {
     ? String(Number(period.slice(0, 4)) - 1) + period.slice(4)
     : yearly ? String(Number(period) - 1) : String(Number(period.slice(0, 4)) - 1) + period.slice(4, 7);
   const revenue = selectedRows.map(row => row.evidence === 'estimate' || row.revenue == null ? null : row.revenue);
-  const profit = selectedRows.map(row => row.evidence === 'estimate' || row.income == null ? null : row.income);
+  const revenueDisplay = selectedRows.map(row => row.revenue == null ? null : row.revenue);
+  const marginRevenue = selectedRows.map(row => row.evidence === 'estimate' || row.margin_revenue_basis == null ? null : row.margin_revenue_basis);
+  const profit = selectedRows.map(row => row.evidence === 'estimate' || row.income == null || row.margin_revenue_basis == null ? null : row.income);
   const detailLabels = selectedRows.map(row => descriptivePointLabel(row.period));
-  const detailPeriods = selectedRows.map(row => String(row.period));
-  const observedMonths = new Map(selectedRows
-    .filter(row => row.revenue != null || row.income != null)
-    .map(row => [String(row.period), { revenue: row.revenue, income: row.income }]));
   const predictedRevenue = selectedRows.map(row => row.evidence === 'estimate' ? row.revenue : null);
-  const predictedProfit = selectedRows.map(row => row.evidence === 'estimate' ? row.income : null);
   const predictedCount = predictedRevenue.filter(value => value != null).length;
   const dailyUnavailable = descriptiveUsesDailyGrain() && selectedRows.every(row => row.revenue == null);
   const detailDatasets = [
-    { label: 'Net Sales Revenue · ' + descriptivePeriodLabel(), data: revenue, yAxisID: 'revenue', borderColor: getColor(), backgroundColor: getColor(.08), borderWidth: 2.5, pointRadius: descriptiveUsesDailyGrain() ? 1.5 : 3, tension: .25, fill: false, spanGaps: false },
-    { label: 'Gross Profit · ' + descriptivePeriodLabel(), data: profit, yAxisID: 'grossProfit', borderColor: getAmber(), backgroundColor: getAmber(.08), borderWidth: 2.2, pointRadius: descriptiveUsesDailyGrain() ? 1.5 : 3, tension: .25, fill: false, spanGaps: false }
+    { label: 'Net Sales Revenue' + (predictedCount ? ' · Actual + Estimate' : ' · ' + descriptivePeriodLabel()), data: revenueDisplay, yAxisID: 'revenue', borderColor: getColor(), backgroundColor: getColor(.08), borderWidth: 2.5, pointRadius: context => selectedRows[context.dataIndex]?.evidence === 'estimate' ? 4 : descriptiveUsesDailyGrain() ? 1.5 : 3, pointStyle: context => selectedRows[context.dataIndex]?.evidence === 'estimate' ? 'triangle' : 'circle', segment: { borderDash: context => selectedRows[context.p0DataIndex]?.evidence === 'estimate' || selectedRows[context.p1DataIndex]?.evidence === 'estimate' ? [6, 4] : undefined }, tension: .25, fill: false, spanGaps: false },
+    { label: 'Net Sales Revenue · Gross-profit eligible transactions', data: marginRevenue, yAxisID: 'revenue', borderColor: getColor(.55), backgroundColor: 'transparent', borderDash: [4, 3], borderWidth: 2, pointRadius: 2, tension: .25, fill: false, spanGaps: false },
+    { label: 'Gross Profit · Same eligible transactions', data: profit, yAxisID: 'revenue', borderColor: getAmber(), backgroundColor: getAmber(.08), borderWidth: 2.2, pointRadius: descriptiveUsesDailyGrain() ? 1.5 : 3, tension: .25, fill: false, spanGaps: false }
   ];
-  detailDatasets.push({ label: 'Gap estimate · Net Sales Revenue', data: predictedRevenue, yAxisID: 'revenue', borderColor: 'rgba(124,58,237,0.9)', backgroundColor: 'rgba(124,58,237,0.9)', borderWidth: 2, borderDash: [6, 4], pointStyle: 'triangle', pointRadius: 4, tension: 0, fill: false, spanGaps: false });
-  if (!descriptiveUsesDailyGrain()) detailDatasets.push({ label: 'Gap estimate · Gross Profit', data: predictedProfit, yAxisID: 'grossProfit', borderColor: 'rgba(219,39,119,0.9)', backgroundColor: 'rgba(219,39,119,0.9)', borderWidth: 2, borderDash: [6, 4], pointStyle: 'triangle', pointRadius: 4, tension: 0, fill: false, spanGaps: false });
   if (comparisonMode === 'yoy') {
     detailDatasets.push(
       { label: 'Prior-year Net Sales Revenue', data: priorDisplayRows.map(row => row.revenue), yAxisID: 'revenue', borderColor: getColor(.5), backgroundColor: 'transparent', borderDash: [7, 5], borderWidth: 2, pointRadius: descriptiveUsesDailyGrain() ? 1 : 2, tension: .25, fill: false, spanGaps: false },
-      { label: 'Prior-year Gross Profit', data: priorDisplayRows.map(row => row.income), yAxisID: 'grossProfit', borderColor: getAmber(.5), backgroundColor: 'transparent', borderDash: [7, 5], borderWidth: 2, pointRadius: descriptiveUsesDailyGrain() ? 1 : 2, tension: .25, fill: false, spanGaps: false }
+      { label: 'Prior-year Net Sales · Gross-profit eligible transactions', data: priorDisplayRows.map(row => row.margin_revenue_basis), yAxisID: 'revenue', borderColor: getColor(.3), backgroundColor: 'transparent', borderDash: [2, 3], borderWidth: 2, pointRadius: descriptiveUsesDailyGrain() ? 1 : 2, tension: .25, fill: false, spanGaps: false },
+      { label: 'Prior-year Gross Profit · Same eligible transactions', data: priorDisplayRows.map(row => row.margin_revenue_basis == null ? null : row.income), yAxisID: 'revenue', borderColor: getAmber(.5), backgroundColor: 'transparent', borderDash: [7, 5], borderWidth: 2, pointRadius: descriptiveUsesDailyGrain() ? 1 : 2, tension: .25, fill: false, spanGaps: false }
     );
   }
   if (descriptiveUsesDailyGrain()) {
     for (let index = detailDatasets.length - 1; index >= 0; index--) {
-      if (detailDatasets[index].label.includes('Gross Profit')) detailDatasets.splice(index, 1);
+      if (detailDatasets[index].label.includes('Gross Profit') || detailDatasets[index].label.includes('Gross-profit eligible transactions')) detailDatasets.splice(index, 1);
     }
   }
   const detailScales = {
     x: opts.scales.x,
-    revenue: diagnosticAxis(revenue, 'Net sales revenue (₱)', getColor(), 'left', true),
-    ...(descriptiveUsesDailyGrain() ? {} : { grossProfit: diagnosticAxis(profit, 'Gross profit (₱)', getAmber(), 'right', false) })
+    revenue: diagnosticAxis(
+      descriptiveUsesDailyGrain() ? revenueDisplay : [...revenueDisplay, ...revenue, ...marginRevenue, ...profit, ...priorDisplayRows.flatMap(row => [row.revenue, row.margin_revenue_basis, row.income])],
+      descriptiveUsesDailyGrain() ? 'Net sales revenue (₱)' : 'Net sales revenue and matched gross profit (₱)',
+      getColor(), 'left', true
+    )
   };
 
   const subtitle = document.getElementById('salesComparisonSubtitle');
+  const annualCoverage = yearly ? selectedRows.filter(row => /^\d{4}$/.test(String(row.period))).map(row => {
+    const months = (DATA.monthly || []).filter(month => String(month.period).startsWith(String(row.period) + '-') && descriptivePeriodIncludes(month.period));
+    const netSalesMonths = months.filter(month => month.revenue != null).length;
+    const marginMonths = months.filter(month => month.income != null && month.margin_revenue_basis != null).length;
+    return row.period + ': net sales ' + netSalesMonths + '/' + months.length + ' months; matched margin ' + marginMonths + '/' + months.length;
+  }).join(' · ') : '';
   if (subtitle) subtitle.textContent = dailyUnavailable
     ? 'Daily transaction data is unavailable for the selected period; monthly totals are not expanded into synthetic days.'
     : (yearly
-      ? 'Annual revenue and gross profit for ' + descriptivePeriodLabel() + '; totals use only observed source months and incomplete latest years are identified.'
-      : (descriptiveUsesDailyGrain() ? 'Daily' : 'Monthly') + ' revenue and gross profit for ' + descriptivePeriodLabel() + '; gaps mean unavailable observations, not zero sales.')
-      + (predictedCount ? ' Dashed triangles are weighted gap estimates and are excluded from observed totals and YoY.' : '');
+      ? 'Net sales revenue (all eligible transactions) is shown alongside net sales and gross profit for the same margin-eligible transactions. Months with eligible data: ' + annualCoverage + '.'
+      : (descriptiveUsesDailyGrain()
+        ? 'Daily net sales revenue only; daily gross profit is not shown. Gaps mean unavailable observations, not zero sales.'
+        : 'Monthly net sales revenue is shown alongside net sales and gross profit for the same margin-eligible transactions; gaps mean unavailable observations, not zero sales.')
+      + (descriptiveUsesDailyGrain() ? '' : ' Gross profit is transaction margin before operating expenses; this chart does not identify expense causes.')
+      + (predictedCount ? ' Dashed triangles are weighted total-revenue estimates; no gross-profit estimate is shown without a matched margin basis.' : '');
   if (subtitle && descriptivePeriod === 'custom' && !descriptiveUsesDailyGrain()) subtitle.textContent += ' Historical partial months require dated transactions; whole-month totals are not assigned to partial dates.';
   createChart('revenueDetailChart', {
     type: 'line',

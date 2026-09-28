@@ -67,15 +67,58 @@ const RESPONSIVE_OVERVIEW_CHART = `  const overviewRows = getDescriptiveDisplayR
 
   const observedSourcePeriods = DATA.monthly.filter(row => row.revenue != null && !row.missing && row.evidence !== 'estimate').map(row => String(row.period)).sort();
   if (overviewSubtitle && observedSourcePeriods.length) overviewSubtitle.textContent += '; source coverage ' + observedSourcePeriods[0] + '–' + observedSourcePeriods[observedSourcePeriods.length - 1];
+  if (overviewSubtitle && overviewRows.some(row => row.margin_revenue_basis != null)) {
+    overviewSubtitle.textContent += '; total net sales is shown separately from net sales and gross profit on the same margin-eligible transactions; gross profit is not estimated without that matched basis';
+  }
+  if (overviewSubtitle && descriptiveUsesYearlyGrain()) {
+    const coverage = overviewRows.filter(row => /^\d{4}$/.test(String(row.period))).map(row => {
+      const months = (DATA.monthly || []).filter(month => String(month.period).startsWith(String(row.period) + '-') && descriptivePeriodIncludes(month.period));
+      const salesCount = months.filter(month => month.revenue != null).length;
+      const marginCount = months.filter(month => month.income != null && month.margin_revenue_basis != null).length;
+      return row.period + ' eligible-data months: sales ' + salesCount + '/' + months.length + ', margin ' + marginCount + '/' + months.length;
+    });
+    if (coverage.length) overviewSubtitle.textContent += '; ' + coverage.join(' · ');
+  }
   if (overviewSubtitle && descriptivePeriod === 'custom' && !descriptiveUsesDailyGrain()) overviewSubtitle.textContent += '; historical partial months require dated transactions';
   const overviewPriorRows = getDescriptivePriorDisplayRows();
   const overviewDatasets = monthlyDataForMode.datasets.flatMap(dataset => {
     const evidenceRows = dataset.label.startsWith('Prior-year') ? overviewPriorRows : overviewRows;
-    if (!evidenceRows.some(row => row.evidence === 'estimate')) return [dataset];
-    return [
-      { ...dataset, label: dataset.label.split(' · ')[0] + ' · Actual', data: dataset.data.map((value, i) => evidenceRows[i]?.evidence === 'actual' ? value : null), fill: false },
-      { ...dataset, label: dataset.label.split(' · ')[0] + ' · Gap estimate', data: dataset.data.map((value, i) => evidenceRows[i]?.evidence === 'estimate' ? value : null), borderDash: [6, 4], pointStyle: 'triangle', fill: false }
-    ];
+    const grossProfit = dataset.label.includes('Gross Profit');
+    const sourceLabel = dataset.label.split(' · ')[0];
+    const eligibleValues = evidenceRows.map(row => row.margin_revenue_basis);
+    const values = grossProfit
+      ? dataset.data.map((value, index) => eligibleValues[index] == null ? null : value)
+      : dataset.data;
+    const current = {
+      ...dataset,
+      label: grossProfit ? sourceLabel + ' · Same margin-eligible transactions' : dataset.label,
+      data: values,
+      fill: grossProfit ? false : dataset.fill
+    };
+    const matchedRevenue = dataset.label.includes('Net Sales Revenue')
+      && evidenceRows.some(row => row.margin_revenue_basis != null)
+      ? [{
+          ...dataset,
+          label: (dataset.label.startsWith('Prior-year') ? 'Prior-year ' : '') + 'Net Sales Revenue · Gross-profit eligible transactions',
+          data: eligibleValues,
+          borderColor: dataset.label.startsWith('Prior-year') ? getColor(.3) : getColor(.55),
+          backgroundColor: 'transparent',
+          borderDash: dataset.label.startsWith('Prior-year') ? [2, 3] : [4, 3],
+          fill: false
+        }]
+      : [];
+    const withEvidenceStyles = [current, ...matchedRevenue].map(item => {
+      if (item.label.includes('Gross-profit eligible transactions')) return item;
+      if (!evidenceRows.some(row => row.evidence === 'estimate')) return item;
+      return {
+        ...item,
+        label: item.label.split(' · ')[0] + ' · Actual + Estimate',
+        fill: false,
+        pointStyle: context => evidenceRows[context.dataIndex]?.evidence === 'estimate' ? 'triangle' : 'circle',
+        segment: { borderDash: context => evidenceRows[context.p0DataIndex]?.evidence === 'estimate' || evidenceRows[context.p1DataIndex]?.evidence === 'estimate' ? [6, 4] : undefined }
+      };
+    });
+    return withEvidenceStyles;
   });
 
   createChart('overviewBaselineChart', {

@@ -7,6 +7,7 @@ export const FORECAST_VALIDATION_MARKUP = String.raw`
 [data-forecast-validation] select, [data-forecast-validation] input[type="text"] { display: block; width: 100%; max-width: 240px; box-sizing: border-box; padding: 7px 10px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg-card,#fff); color: var(--text-primary); font-size: 12px; margin-top: 4px; }
 [data-forecast-validation] p { line-height: 1.6; margin: 10px 0; word-break: break-word; }
 [data-forecast-validation] .forecast-hero-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 16px 0; }
+[data-forecast-validation] .forecast-error-chart-wrap { height: 180px; margin: 12px 0 18px; }
 [data-forecast-validation] .forecast-hero-card { padding: 14px 16px; border: 1px solid var(--border); border-radius: 8px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04); }
 [data-forecast-validation] .forecast-hero-card .hero-label { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
 [data-forecast-validation] .forecast-hero-card .hero-val { font-size: 20px; font-weight: 800; color: var(--text-primary); margin: 4px 0 2px 0; }
@@ -37,6 +38,9 @@ export const FORECAST_VALIDATION_MARKUP = String.raw`
     <div class="forecast-hero-card"><div class="hero-label">Signed bias</div><div class="hero-val" id="kpiForecastBias">Unavailable</div><div class="hero-sub">Prediction minus actual in target units</div></div>
   </div>
   <div class="chart-wrap forecast-chart-wrap chart-hero" style="position:relative"><canvas id="forecastChart" aria-label="Observed actuals, historical backtests and available future predictions"></canvas></div>
+  <h3>Holdout error by month</h3>
+  <p>Actual minus prediction for scored holdout months; positive bars mean the model under-forecast.</p>
+  <div class="forecast-error-chart-wrap"><canvas id="forecastErrorChart" aria-label="Monthly holdout error, actual sales minus predicted sales"></canvas></div>
   <p id="forecastBandNote"></p><p id="forecastEvaluationScope"></p><p id="forecastCoverage"></p>
   <div style="overflow-x:auto"><table id="forecastBenchmarkTable" class="product-table" aria-label="Models compared on common evaluation keys"></table></div>
   <details><summary>Backtest error and bias by forecast lead</summary><div style="overflow-x:auto"><table id="forecastLeadTable" class="product-table"></table></div></details>
@@ -84,7 +88,7 @@ function renderForecastValidation(error) {
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const finite = value => typeof value === 'number' && Number.isFinite(value);
   const fmt = value => finite(value) ? value.toLocaleString('en-PH', {maximumFractionDigits: 2}) : 'Unavailable';
-  ['forecastChart', 'overviewForecastChart'].forEach(id => { const canvas = el(id); if (canvas) Chart.getChart(canvas)?.destroy(); });
+  ['forecastChart', 'forecastErrorChart', 'overviewForecastChart'].forEach(id => { const canvas = el(id); if (canvas) Chart.getChart(canvas)?.destroy(); });
   ['forecastWindow','forecastBandNote','forecastEvaluationScope','forecastCoverage','forecastBenchmarkTable','forecastLeadTable','forecastEvidenceTable','forecastSource'].forEach(id => { if(el(id)) el(id).textContent = ''; });
   ['kpiForecastMae','kpiForecastWape','kpiForecastRmse','kpiForecastBias'].forEach(id => el(id).textContent = 'Unavailable');
   forecastValidationExport = [];
@@ -143,6 +147,16 @@ function renderForecastValidation(error) {
   }
   const options = {responsive:true,maintainAspectRatio:false,spanGaps:false,interaction:{mode:'index',intersect:false},scales:{x:{ticks:{maxTicksLimit:14,maxRotation:40},title:{display:true,text:'Calendar month'}},y:{title:{display:true,text:data.scope.unit}}},plugins:{legend:{position:'bottom'}}};
   ['forecastChart','overviewForecastChart'].forEach(id => { if(el(id)) new Chart(el(id), {type:'line',data:{labels:all,datasets:datasets.map(d => ({...d}))},options}); });
+  const holdoutErrors = all.map(period => {
+    const point = past.get(period);
+    const observed = finite(point?.actual) ? point.actual : actual.get(period);
+    return finite(observed) && finite(point?.prediction) ? observed - point.prediction : null;
+  });
+  new Chart(el('forecastErrorChart'), {
+    type:'bar',
+    data:{labels:all,datasets:[{label:'Actual − prediction (' + data.scope.unit + ')',data:holdoutErrors,backgroundColor:holdoutErrors.map(value => value == null ? 'transparent' : value < 0 ? 'rgba(217,119,6,.72)' : 'rgba(30,58,95,.72)'),borderRadius:3}]},
+    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},scales:{x:{ticks:{maxTicksLimit:14,maxRotation:40},grid:{display:false}},y:{title:{display:true,text:'Actual − prediction (' + data.scope.unit + ')'},grid:{color:context => context.tick.value === 0 ? '#64748B' : 'rgba(0,0,0,0.05)'}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:context => 'Actual − prediction: ' + fmt(context.raw)}}}}
+  });
   const m = result.metrics || {};
   el('kpiForecastMae').textContent = fmt(m.mae);
   el('kpiForecastWape').textContent = finite(m.wape) ? fmt(m.wape) + '%' : 'Unavailable';
