@@ -84,7 +84,7 @@ const allowedOrigins = (process.env.CORS_ALLOWED_ORIGINS ?? '')
   .map((origin) => origin.trim())
   .filter(Boolean)
 if (!allowedOrigins.length) {
-  allowedOrigins.push('http://localhost:3000', 'http://localhost:5000')
+  allowedOrigins.push('http://localhost:3000', 'http://localhost:3001', 'http://127.0.0.1:3001', 'http://localhost:5000')
 }
 
 app.use(

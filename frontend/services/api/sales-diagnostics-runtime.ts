@@ -216,7 +216,7 @@ function renderSalesDiagnostics(opts) {
         ? 'Daily net sales revenue only; daily gross profit is not shown. Gaps mean unavailable observations, not zero sales.'
         : 'Monthly net sales revenue is shown alongside net sales and gross profit for the same margin-eligible transactions; gaps mean unavailable observations, not zero sales.')
       + (descriptiveUsesDailyGrain() ? '' : ' Gross profit is transaction margin before operating expenses; this chart does not identify expense causes.')
-      + (predictedCount ? ' Dashed triangles are weighted total-revenue estimates; no gross-profit estimate is shown without a matched margin basis.' : '');
+      + (predictedCount ? ' Dashed triangles are weighted total-revenue estimates; no gross-profit estimate is shown without a matched margin basis.' : ''));
   if (subtitle && descriptivePeriod === 'custom' && !descriptiveUsesDailyGrain()) subtitle.textContent += ' Historical partial months require dated transactions; whole-month totals are not assigned to partial dates.';
   createChart('revenueDetailChart', {
     type: 'line',

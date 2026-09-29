@@ -152,10 +152,34 @@ function renderForecastValidation(error) {
     const observed = finite(point?.actual) ? point.actual : actual.get(period);
     return finite(observed) && finite(point?.prediction) ? observed - point.prediction : null;
   });
+  const errorOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    scales: {
+      x: { ticks: { maxTicksLimit: 14, maxRotation: 40 }, grid: { display: false } },
+      y: {
+        title: { display: true, text: 'Actual − prediction (' + data.scope.unit + ')' },
+        grid: { color: context => context.tick.value === 0 ? '#64748B' : 'rgba(0,0,0,0.05)' }
+      }
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: context => 'Actual − prediction: ' + fmt(context.raw) } }
+    }
+  };
   new Chart(el('forecastErrorChart'), {
-    type:'bar',
-    data:{labels:all,datasets:[{label:'Actual − prediction (' + data.scope.unit + ')',data:holdoutErrors,backgroundColor:holdoutErrors.map(value => value == null ? 'transparent' : value < 0 ? 'rgba(217,119,6,.72)' : 'rgba(30,58,95,.72)'),borderRadius:3}]},
-    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},scales:{x:{ticks:{maxTicksLimit:14,maxRotation:40},grid:{display:false}},y:{title:{display:true,text:'Actual − prediction (' + data.scope.unit + ')'},grid:{color:context => context.tick.value === 0 ? '#64748B' : 'rgba(0,0,0,0.05)'}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:context => 'Actual − prediction: ' + fmt(context.raw)}}}}
+    type: 'bar',
+    data: {
+      labels: all,
+      datasets: [{
+        label: 'Actual − prediction (' + data.scope.unit + ')',
+        data: holdoutErrors,
+        backgroundColor: holdoutErrors.map(value => value == null ? 'transparent' : value < 0 ? 'rgba(217,119,6,.72)' : 'rgba(30,58,95,.72)'),
+        borderRadius: 3
+      }]
+    },
+    options: errorOptions
   });
   const m = result.metrics || {};
   el('kpiForecastMae').textContent = fmt(m.mae);
