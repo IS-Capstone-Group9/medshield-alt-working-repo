@@ -20,6 +20,7 @@ The manifests contain aggregate facts, lineage, hashes, coverage, and limitation
 4. [03_TRANSFORMATION_AND_MAPPING_MANIFEST.md](03_TRANSFORMATION_AND_MAPPING_MANIFEST.md) — transformations, mappings, provenance, and reconciliation controls.
 5. [04_ANALYTICAL_READINESS_MANIFEST.md](04_ANALYTICAL_READINESS_MANIFEST.md) — which descriptive, predictive, and prescriptive outputs are supported by current evidence.
 6. [05_GEMINI_NOTEBOOK_SOURCE_GUIDE.md](05_GEMINI_NOTEBOOK_SOURCE_GUIDE.md) — recommended upload order and rules for drafting Chapter 4.
+7. [06_ACTUAL_TRANSFORMED_AGGREGATES.md](06_ACTUAL_TRANSFORMED_AGGREGATES.md) — actual monthly, area, product, and seasonality aggregate records from the current verifiable receipt.
 
 ## Source precedence
 

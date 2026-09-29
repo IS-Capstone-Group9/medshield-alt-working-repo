@@ -10,6 +10,7 @@ Upload these Markdown files as one evidence pack:
 4. `02_EXTERNAL_PROCESSED_DATA_MANIFEST.md`
 5. `03_TRANSFORMATION_AND_MAPPING_MANIFEST.md`
 6. `04_ANALYTICAL_READINESS_MANIFEST.md`
+7. `06_ACTUAL_TRANSFORMED_AGGREGATES.md`
 
 If Gemini Notebook accepts more sources, add the matching evidence JSON files separately. Do not upload raw client-level sales data unless your team has REC approval, a lawful purpose, and an approved de-identification procedure.
 
