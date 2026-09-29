@@ -54,6 +54,9 @@ The repository contains more than 100 Markdown files across product documentatio
 
 Files named `*_PLAN.md`, `*_GUIDE.md`, `*_BLUEPRINT.md`, `*_CHECKLIST.md`, `*_EXPLAINER.md`, or `dashboard-forecast-prototype.md` describe intended methods, acceptance work, or UI/model designs unless a canonical document explicitly marks a capability as implemented. Checkboxes and prose in a plan are not publication approval.
 
+- [REC_REVIEW_IMPLEMENTATION_PLAN.md](REC_REVIEW_IMPLEMENTATION_PLAN.md) defines the owned preparation, review gates, evidence, submission controls, and post-review responsibilities for the initial CICS Research Ethics Committee review. It does not represent REC approval or determine the review classification.
+- [REC_FORM_INFORMATION_DOSSIER.md](REC_FORM_INFORMATION_DOSSIER.md) is the controlled working source for details that will be copied into the REC application, protocol assessment, consent assessment, consent form, cover letter, and resubmission documents. Bracketed and labeled fields remain unverified until completed and approved.
+
 The model and dashboard explainers under `docs/logic/` are methodology references. Their equations and scenarios do not prove that Prophet, XGBoost, EOQ, ROP, MILP, disease regressors, or procurement automation are live.
 
 ## Historical evidence
