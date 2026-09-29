@@ -91,3 +91,9 @@ The replacement audit reported preserved financial totals and 3 replaced records
 - `outputs/descriptive_validation/2026-09-26T19-02-42-874Z/evidence.json`
 - `outputs/publication_readiness/2026-09-26T18-36-04-060Z/evidence.json`
 
+## Exact-value data tables
+
+- `manifests/06_ACTUAL_TRANSFORMED_AGGREGATES.md` contains all 108 monthly rows, all 21 area-result rows, the complete top-100 product-label result set stored in the receipt, and all 12 observed calendar-month averages.
+
+The transaction-level 37,728-row Gold fact is not stored in this checkout, so the document stops at the highest granularity actually present in the verified receipt.
+

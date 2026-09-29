@@ -11,12 +11,15 @@ Upload these Markdown files as one evidence pack:
 5. `03_TRANSFORMATION_AND_MAPPING_MANIFEST.md`
 6. `04_ANALYTICAL_READINESS_MANIFEST.md`
 7. `06_ACTUAL_TRANSFORMED_AGGREGATES.md`
+8. `07_NASA_WEATHER_MONTHLY_DATA.md`
 
 If Gemini Notebook accepts more sources, add the matching evidence JSON files separately. Do not upload raw client-level sales data unless your team has REC approval, a lawful purpose, and an approved de-identification procedure.
 
 ## Short drafting instruction
 
 Use only the uploaded manifests as evidence. Draft Chapter 4 in essay form, following sections 4.1–4.4. For every finding, state the result, supporting evidence, business implication, and limitation. Preserve all dataset IDs, versions, dates, row counts, financial definitions, and status labels exactly. Distinguish observed outcomes, simulated outcomes, and targets. Never invent missing predictive, prescriptive, user-acceptance, or approval results. Treat the ≤5% expiry-wastage value as a target unless evidence explicitly proves achievement.
+
+When citing a result, retain the grain of its source table: monthly sales are month-level, area results are area-level, product results cover only the stored top 100, seasonality is a calendar-month average, and NASA weather data is area-month-level.
 
 ## Questions Gemini should answer before writing
 

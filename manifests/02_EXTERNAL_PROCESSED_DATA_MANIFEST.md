@@ -85,4 +85,7 @@ This artifact is a weather-severity proxy used for a bounded 0–20% planning sc
 
 - `outputs/external_sources/external_source_cleaning_report.json`
 - `data/medshield/processed/weather_signals.json`
+- `manifests/07_NASA_WEATHER_MONTHLY_DATA.md`: all 108 area-month records from the locally present NASA artifact.
+
+The cleaning report describes DOH monthly and PAGASA daily/monthly outputs, but those output CSV files are absent from this checkout. Consequently, this manifest does not fabricate or reconstruct their row-level contents.
 

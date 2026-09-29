@@ -20,7 +20,10 @@ The manifests contain aggregate facts, lineage, hashes, coverage, and limitation
 4. [03_TRANSFORMATION_AND_MAPPING_MANIFEST.md](03_TRANSFORMATION_AND_MAPPING_MANIFEST.md) — transformations, mappings, provenance, and reconciliation controls.
 5. [04_ANALYTICAL_READINESS_MANIFEST.md](04_ANALYTICAL_READINESS_MANIFEST.md) — which descriptive, predictive, and prescriptive outputs are supported by current evidence.
 6. [05_GEMINI_NOTEBOOK_SOURCE_GUIDE.md](05_GEMINI_NOTEBOOK_SOURCE_GUIDE.md) — recommended upload order and rules for drafting Chapter 4.
-7. [06_ACTUAL_TRANSFORMED_AGGREGATES.md](06_ACTUAL_TRANSFORMED_AGGREGATES.md) — actual monthly, area, product, and seasonality aggregate records from the current verifiable receipt.
+7. [06_ACTUAL_TRANSFORMED_AGGREGATES.md](06_ACTUAL_TRANSFORMED_AGGREGATES.md) — all available monthly, area, top-product, and seasonality rows from the current sales receipt.
+8. [07_NASA_WEATHER_MONTHLY_DATA.md](07_NASA_WEATHER_MONTHLY_DATA.md) — all 108 NASA POWER area-month rows.
+
+The data-table documents preserve the granularity available in their source artifacts. They do not invent transaction-level, SKU-level, DOH-monthly, or PAGASA-station rows that are absent from the current checkout.
 
 ## Source precedence
 
