@@ -1,0 +1,170 @@
+{
+  "input": "C:\\Users\\Ethan\\descriptive_1\\docs\\chapters\\MedShield_Chapter_4_Results_and_Discussion_Defense_Ready.docx",
+  "fonts_by_char_count": {
+    "Times New Roman": 11059
+  },
+  "direct_run_formatting_runs": 446,
+  "direct_paragraph_formatting_paragraphs": 496,
+  "heading_like_paragraphs_not_heading_style": [
+    {
+      "para_index": 2,
+      "text": "RESULTS AND DISCUSSION",
+      "style": "Normal"
+    },
+    {
+      "para_index": 7,
+      "text": "Table 4.1 Objective achievement audit",
+      "style": "Caption"
+    },
+    {
+      "para_index": 14,
+      "text": "Figure 4.1 MedShield runtime architecture",
+      "style": "Caption"
+    },
+    {
+      "para_index": 16,
+      "text": "Table 4.2 Implemented system layers",
+      "style": "Caption"
+    },
+    {
+      "para_index": 20,
+      "text": "Table 4.3 Data sources and current analytical status",
+      "style": "Caption"
+    },
+    {
+      "para_index": 23,
+      "text": "Table 4.4 Sales candidate quality profile",
+      "style": "Caption"
+    },
+    {
+      "para_index": 27,
+      "text": "Table 4.5 Annual sales and workbook gross profit",
+      "style": "Caption"
+    },
+    {
+      "para_index": 30,
+      "text": "Figure 4.2 Annual net sales and workbook gross profit",
+      "style": "Caption"
+    },
+    {
+      "para_index": 34,
+      "text": "Figure 4.3 Monthly net sales and missing coverage",
+      "style": "Caption"
+    },
+    {
+      "para_index": 37,
+      "text": "Table 4.6 Observed calendar month averages",
+      "style": "Caption"
+    },
+    {
+      "para_index": 41,
+      "text": "Figure 4.4 STL decomposition of eligible net sales",
+      "style": "Caption"
+    },
+    {
+      "para_index": 45,
+      "text": "Table 4.7 Top source product labels by net sales",
+      "style": "Caption"
+    },
+    {
+      "para_index": 48,
+      "text": "Figure 4.5 Top ten source product labels by net sales",
+      "style": "Caption"
+    },
+    {
+      "para_index": 51,
+      "text": "Table 4.8 Top derived area labels by net sales",
+      "style": "Caption"
+    },
+    {
+      "para_index": 54,
+      "text": "Figure 4.6 Top ten derived area labels by net sales",
+      "style": "Caption"
+    },
+    {
+      "para_index": 59,
+      "text": "Table 4.9 Fixed origin Government net sales benchmark",
+      "style": "Caption"
+    },
+    {
+      "para_index": 62,
+      "text": "Table 4.10 Predictive readiness audit",
+      "style": "Caption"
+    },
+    {
+      "para_index": 65,
+      "text": "Figure 4.7 Forecast validation interface",
+      "style": "Caption"
+    },
+    {
+      "para_index": 70,
+      "text": "Table 4.11 Operational inputs required for prescriptive use",
+      "style": "Caption"
+    },
+    {
+      "para_index": 73,
+      "text": "Figure 4.8 Prescriptive planning interface",
+      "style": "Caption"
+    }
+  ],
+  "examples": {
+    "direct_paragraph_formatting": [
+      {
+        "para_index": 2,
+        "text": "RESULTS AND DISCUSSION",
+        "style": "Normal"
+      },
+      {
+        "para_index": 3,
+        "text": "This chapter presents what the MedShield Decision Support System currently demonstrates and what the available evidence ",
+        "style": "Normal"
+      },
+      {
+        "para_index": 4,
+        "text": "The discussion follows the project objectives and the North Star question: How can MedShield use historical sales data, ",
+        "style": "Normal"
+      },
+      {
+        "para_index": 6,
+        "text": "The proposal defined five objectives: describe sales and seasonality, prioritize products and areas, forecast demand wit",
+        "style": "Normal"
+      },
+      {
+        "para_index": 7,
+        "text": "Table 4.1 Objective achievement audit",
+        "style": "Caption"
+      }
+    ],
+    "direct_run_formatting": [
+      {
+        "para_index": 2,
+        "run_text": "RESULTS AND DISCUSSION",
+        "style": "Normal"
+      },
+      {
+        "para_index": 7,
+        "run_text": "Table 4.1 Objective achievement audit",
+        "style": "Caption"
+      },
+      {
+        "para_index": 8,
+        "run_text": "Source: Capstone proposal objectives and the MedShield current-state, analytics,",
+        "style": "Normal"
+      },
+      {
+        "para_index": 14,
+        "run_text": "Figure 4.1 MedShield runtime architecture",
+        "style": "Caption"
+      },
+      {
+        "para_index": 15,
+        "run_text": "Source: MedShield Architecture and Database documentation, September 2026.",
+        "style": "Normal"
+      }
+    ]
+  },
+  "notes": [
+    "Direct formatting is not always wrong, but it often causes inconsistent output when templates change.",
+    "Heading-like paragraphs not using Heading styles can break TOC and accessibility."
+  ]
+}
