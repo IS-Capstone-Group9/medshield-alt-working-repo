@@ -1,0 +1,2 @@
+forecast_run_id,model_code,model_version,training_period_start,training_period_end,forecast_period_start,forecast_period_end,input_dataset_version,input_dataset_type,status,limitations
+sales_only_baseline_v1_2026,SEASONAL_NAIVE_BASELINE,sales_only_v1,2000-01,2047-11,2048-01,2048-12,MedShield Sales - Provisional Medical Demand,provisional_medical_demand,draft,Sales-only baseline. 2025 is partial and external signals are not fully loaded. Uses generated medical-demand split; product master approval is still required before publication.

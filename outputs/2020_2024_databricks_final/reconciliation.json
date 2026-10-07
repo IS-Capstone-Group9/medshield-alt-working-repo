@@ -1,0 +1,79 @@
+{
+  "method": "one_to_one_same_year_same_area_nearest_financial_profile",
+  "years": {
+    "2020": {
+      "source_path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\data\\medshield\\dataset_csv\\medshield_data_2020.csv",
+      "output_csv": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\2020_2024_databricks_final\\medshield_data_2020.csv",
+      "output_xlsx": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\2020_2024_databricks_final\\medshield_data_2020.xlsx",
+      "source_sha256": "98c83e6a440298e145b8bbfc2463791f393f0946f26a11c6b0472752d30ce733",
+      "output_sha256": "d5d17c2c6514a652294a23426e8ff9c35b5410d9a65a8273cd0dd6e573254a62",
+      "physical_csv_rows": 4039,
+      "columns": 12,
+      "source_transaction_rows": 3987,
+      "output_transaction_rows": 3987,
+      "replaced_rows": 3,
+      "remaining_non_product_rows": 0,
+      "medical_replacements_only": true,
+      "replacements_observed_in_same_year": true,
+      "source_financial_totals": {
+        "totalCp": 64050598.04,
+        "discount": 444196.61,
+        "netCp": 63606401.43,
+        "totalTp": 17429916.3,
+        "netIncome": 46176485.13
+      },
+      "output_financial_totals": {
+        "totalCp": 64050598.04,
+        "discount": 444196.61,
+        "netCp": 63606401.43,
+        "totalTp": 17429916.3,
+        "netIncome": 46176485.13
+      },
+      "financial_delta": {
+        "totalCp": 0,
+        "discount": 0,
+        "netCp": 0,
+        "totalTp": 0,
+        "netIncome": 0
+      },
+      "status": "PASS"
+    },
+    "2024": {
+      "source_path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\data\\medshield\\dataset_csv\\medshield_data_2024.csv",
+      "output_csv": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\2020_2024_databricks_final\\medshield_data_2024.csv",
+      "output_xlsx": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\2020_2024_databricks_final\\medshield_data_2024.xlsx",
+      "source_sha256": "c38245983b918c0e44eecfccb3b63be00e8de9c848048dd007d1c086c714831f",
+      "output_sha256": "12ebda6996de76cf6af6c958485900fb81597f6f7f19dec4c8eea066919fb938",
+      "physical_csv_rows": 5773,
+      "columns": 13,
+      "source_transaction_rows": 2944,
+      "output_transaction_rows": 2944,
+      "replaced_rows": 124,
+      "remaining_non_product_rows": 0,
+      "medical_replacements_only": true,
+      "replacements_observed_in_same_year": true,
+      "source_financial_totals": {
+        "totalCp": 59073341.4,
+        "discount": 342281.77,
+        "netCp": 58731059.63,
+        "totalTp": 30506004.5,
+        "netIncome": 28225055.13
+      },
+      "output_financial_totals": {
+        "totalCp": 59073341.4,
+        "discount": 342281.77,
+        "netCp": 58731059.63,
+        "totalTp": 30506004.5,
+        "netIncome": 28225055.13
+      },
+      "financial_delta": {
+        "totalCp": 0,
+        "discount": 0,
+        "netCp": 0,
+        "totalTp": 0,
+        "netIncome": 0
+      },
+      "status": "PASS"
+    }
+  }
+}

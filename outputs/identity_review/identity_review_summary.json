@@ -1,0 +1,101 @@
+{
+  "source_manifest": [
+    {
+      "file": "medshield_data_2017.csv",
+      "sha256": "9756376c5559a2b4539c3311a0416ec17eab7d3e36a9043920d0a70e1e16db67"
+    },
+    {
+      "file": "medshield_data_2018.csv",
+      "sha256": "d7a1b8ad107e176e642aab540e464eab05b19dc116131b712c33e29fb355b200"
+    },
+    {
+      "file": "medshield_data_2019.csv",
+      "sha256": "3afc789aa0ad798da14cbe87153049eb7f7d7ca15df944a8e27b25f97d419fc8"
+    },
+    {
+      "file": "medshield_data_2020.csv",
+      "sha256": "98c83e6a440298e145b8bbfc2463791f393f0946f26a11c6b0472752d30ce733"
+    },
+    {
+      "file": "medshield_data_2021.csv",
+      "sha256": "d40850359d18a9251425a843f2507ad289da9393e4b6bc1c0ecfee35c30366d3"
+    },
+    {
+      "file": "medshield_data_2022.csv",
+      "sha256": "1f28cacdcdc537065828cf809f8d0ae4bb55891a1317fe6c306d2b4b5b2caf74"
+    },
+    {
+      "file": "medshield_data_2023.csv",
+      "sha256": "83e4509c84e0c2b6c379071593e589b5207842fd469430fe317e5e9a70368cea"
+    },
+    {
+      "file": "medshield_data_2024.csv",
+      "sha256": "c38245983b918c0e44eecfccb3b63be00e8de9c848048dd007d1c086c714831f"
+    },
+    {
+      "file": "medshield_data_2025.csv",
+      "sha256": "2738afaf114d9480928e37b6c2b53dc0cac9ba2f10dc74a98b2549e3345d235c"
+    }
+  ],
+  "source_rows": 58634,
+  "silver_version": "sales_restart_silver_v3_serial_dates",
+  "silver_code_sha256": "a06f37b15bbae42a0b71329162ee075ea8c6cb737cc540e01020b18b1afc53ef",
+  "formatted_serial_date_records": [
+    {
+      "source_workbook": "medshield_data_2025.csv",
+      "source_row_number": 2411,
+      "original_date": "45,913.00",
+      "parsed_date": "2025-09-13",
+      "disposition": "REVIEW_POSSIBLE_DUPLICATE"
+    }
+  ],
+  "retained_candidates": 37178,
+  "identity_review_rows": 4544,
+  "missing_product_rows": 4542,
+  "categories": {
+    "SOURCE_PRODUCT_ERROR_TOKEN": 3793,
+    "BLANK_PRODUCT_WITH_NUMERIC_ACTIVITY": 691,
+    "PRODUCT_PRESENT_DATE_UNRESOLVED": 2,
+    "BLANK_PRODUCT_WITHOUT_NONZERO_MEASURES": 49,
+    "NO_IDENTITY_SUMMARY_OR_INCOMPLETE_REVIEW": 9
+  },
+  "workbook_evidence": {
+    "SOURCE_YEAR_SHEET_UNAVAILABLE": 3803,
+    "ROW_ALIGNMENT_NOT_ESTABLISHED": 6,
+    "ALIGNED_WORKBOOK_PRODUCT_ABSENT": 735
+  },
+  "receipt_leads": 472,
+  "dispositions": {
+    "EXCLUDE_PREAMBLE": 27,
+    "EXCLUDE_BLANK": 13644,
+    "EXCLUDE_HEADER": 10,
+    "REVIEW_INVALID_TRANSACTION_IDENTITY": 4544,
+    "REVIEW_DELIVERY_DATE_BEFORE_SCOPE": 86,
+    "KEEP_SOURCE_YEAR_ALIGNED": 35343,
+    "REVIEW_POSSIBLE_DUPLICATE": 123,
+    "REVIEW_FUTURE_DATED_SOURCE": 8,
+    "KEEP_HISTORICAL_BACKFILL_CANDIDATE": 1835,
+    "REVIEW_HISTORICAL_RESTATEMENT": 2373,
+    "EXCLUDE_HISTORICAL_SNAPSHOT_DUPLICATE": 639,
+    "EXCLUDE_SOURCE_SUMMARY": 2
+  },
+  "workbook": {
+    "sha256": "04e5f303eb8fe4f3fb441a233adb4603c992c198653b9ca8b6dfb5c4fd0fe107",
+    "2025": {
+      "merged_ranges": []
+    },
+    "2024": {
+      "merged_ranges": []
+    },
+    "2023": {
+      "merged_ranges": []
+    },
+    "2022": {
+      "merged_ranges": []
+    },
+    "2021": {
+      "merged_ranges": []
+    }
+  },
+  "limitation": "Receipt matches and adjacent labels are review leads only; no product identities were inferred."
+}

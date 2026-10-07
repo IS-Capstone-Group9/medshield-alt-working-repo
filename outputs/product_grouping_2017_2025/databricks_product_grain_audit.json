@@ -1,0 +1,284 @@
+{
+  "checked_at": "2026-09-17T12:32:51.724Z",
+  "period": "2017-2025",
+  "results": {
+    "fact": {
+      "rows": "37178",
+      "products": "4900",
+      "provisional_rows": "31615",
+      "contract_rows": "346"
+    },
+    "dashboard_product_view": {
+      "product_year_rows": "7893",
+      "products": "4900",
+      "transactions": "40086",
+      "net_sales": "643853769.67"
+    },
+    "business_product_mart": {
+      "product_year_rows": "7887",
+      "products": "4900",
+      "transactions": "37178",
+      "net_sales": "615256946.06"
+    },
+    "provisional_product_mart": {
+      "product_year_rows": "6569",
+      "products": "3954",
+      "transactions": "31615",
+      "net_sales": "466780993.90"
+    },
+    "product_scope": [
+      {
+        "product_scope_status": "PRODUCT_MASTER_PENDING",
+        "rows": "36102",
+        "net_sales": "490398159.29"
+      },
+      {
+        "product_scope_status": "NONMEDICAL_REFERENCE_REQUIRES_REVIEW",
+        "rows": "606",
+        "net_sales": "8834407.57"
+      },
+      {
+        "product_scope_status": "CONTRACT_LABEL_CANDIDATE",
+        "rows": "346",
+        "net_sales": "106404121.20"
+      },
+      {
+        "product_scope_status": "HASHTAG_LABEL_REQUIRES_REVIEW",
+        "rows": "124",
+        "net_sales": "9620258.00"
+      }
+    ],
+    "product_scope_by_year": [
+      {
+        "calendar_year": "2017",
+        "product_scope_status": "PRODUCT_MASTER_PENDING",
+        "rows": "1978",
+        "net_sales": "10211167.35"
+      },
+      {
+        "calendar_year": "2018",
+        "product_scope_status": "NONMEDICAL_REFERENCE_REQUIRES_REVIEW",
+        "rows": "10",
+        "net_sales": "36580.00"
+      },
+      {
+        "calendar_year": "2018",
+        "product_scope_status": "PRODUCT_MASTER_PENDING",
+        "rows": "6171",
+        "net_sales": "51583111.27"
+      },
+      {
+        "calendar_year": "2019",
+        "product_scope_status": "HASHTAG_LABEL_REQUIRES_REVIEW",
+        "rows": "1",
+        "net_sales": "790.00"
+      },
+      {
+        "calendar_year": "2019",
+        "product_scope_status": "NONMEDICAL_REFERENCE_REQUIRES_REVIEW",
+        "rows": "5",
+        "net_sales": "53116.00"
+      },
+      {
+        "calendar_year": "2019",
+        "product_scope_status": "PRODUCT_MASTER_PENDING",
+        "rows": "5440",
+        "net_sales": "62488398.49"
+      },
+      {
+        "calendar_year": "2020",
+        "product_scope_status": "HASHTAG_LABEL_REQUIRES_REVIEW",
+        "rows": "3",
+        "net_sales": "8909303.00"
+      },
+      {
+        "calendar_year": "2020",
+        "product_scope_status": "NONMEDICAL_REFERENCE_REQUIRES_REVIEW",
+        "rows": "13",
+        "net_sales": "227499.00"
+      },
+      {
+        "calendar_year": "2020",
+        "product_scope_status": "PRODUCT_MASTER_PENDING",
+        "rows": "3964",
+        "net_sales": "54456472.63"
+      },
+      {
+        "calendar_year": "2021",
+        "product_scope_status": "HASHTAG_LABEL_REQUIRES_REVIEW",
+        "rows": "2",
+        "net_sales": "2750.00"
+      },
+      {
+        "calendar_year": "2021",
+        "product_scope_status": "NONMEDICAL_REFERENCE_REQUIRES_REVIEW",
+        "rows": "36",
+        "net_sales": "3733456.43"
+      },
+      {
+        "calendar_year": "2021",
+        "product_scope_status": "PRODUCT_MASTER_PENDING",
+        "rows": "3369",
+        "net_sales": "74123999.83"
+      },
+      {
+        "calendar_year": "2022",
+        "product_scope_status": "HASHTAG_LABEL_REQUIRES_REVIEW",
+        "rows": "6",
+        "net_sales": "54801.00"
+      },
+      {
+        "calendar_year": "2022",
+        "product_scope_status": "NONMEDICAL_REFERENCE_REQUIRES_REVIEW",
+        "rows": "83",
+        "net_sales": "2030793.14"
+      },
+      {
+        "calendar_year": "2022",
+        "product_scope_status": "PRODUCT_MASTER_PENDING",
+        "rows": "3891",
+        "net_sales": "61149395.90"
+      },
+      {
+        "calendar_year": "2023",
+        "product_scope_status": "HASHTAG_LABEL_REQUIRES_REVIEW",
+        "rows": "106",
+        "net_sales": "622184.00"
+      },
+      {
+        "calendar_year": "2023",
+        "product_scope_status": "NONMEDICAL_REFERENCE_REQUIRES_REVIEW",
+        "rows": "364",
+        "net_sales": "1588285.00"
+      },
+      {
+        "calendar_year": "2023",
+        "product_scope_status": "PRODUCT_MASTER_PENDING",
+        "rows": "4911",
+        "net_sales": "60018497.85"
+      },
+      {
+        "calendar_year": "2024",
+        "product_scope_status": "CONTRACT_LABEL_CANDIDATE",
+        "rows": "123",
+        "net_sales": "21047258.16"
+      },
+      {
+        "calendar_year": "2024",
+        "product_scope_status": "HASHTAG_LABEL_REQUIRES_REVIEW",
+        "rows": "4",
+        "net_sales": "28350.00"
+      },
+      {
+        "calendar_year": "2024",
+        "product_scope_status": "NONMEDICAL_REFERENCE_REQUIRES_REVIEW",
+        "rows": "53",
+        "net_sales": "966007.00"
+      },
+      {
+        "calendar_year": "2024",
+        "product_scope_status": "PRODUCT_MASTER_PENDING",
+        "rows": "2651",
+        "net_sales": "28217704.72"
+      },
+      {
+        "calendar_year": "2025",
+        "product_scope_status": "CONTRACT_LABEL_CANDIDATE",
+        "rows": "223",
+        "net_sales": "85356863.04"
+      },
+      {
+        "calendar_year": "2025",
+        "product_scope_status": "HASHTAG_LABEL_REQUIRES_REVIEW",
+        "rows": "2",
+        "net_sales": "2080.00"
+      },
+      {
+        "calendar_year": "2025",
+        "product_scope_status": "NONMEDICAL_REFERENCE_REQUIRES_REVIEW",
+        "rows": "42",
+        "net_sales": "198671.00"
+      },
+      {
+        "calendar_year": "2025",
+        "product_scope_status": "PRODUCT_MASTER_PENDING",
+        "rows": "3727",
+        "net_sales": "88149411.25"
+      }
+    ],
+    "government_by_year": [
+      {
+        "calendar_year": "2017",
+        "rows": "34",
+        "net_sales": "1477829.60",
+        "products": "29",
+        "contract_rows": "0",
+        "approved_territory_rows": "0"
+      },
+      {
+        "calendar_year": "2018",
+        "rows": "1",
+        "net_sales": "250000.00",
+        "products": "1",
+        "contract_rows": "0",
+        "approved_territory_rows": "0"
+      },
+      {
+        "calendar_year": "2019",
+        "rows": "691",
+        "net_sales": "21057245.82",
+        "products": "404",
+        "contract_rows": "0",
+        "approved_territory_rows": "0"
+      },
+      {
+        "calendar_year": "2020",
+        "rows": "1011",
+        "net_sales": "38756928.47",
+        "products": "491",
+        "contract_rows": "0",
+        "approved_territory_rows": "0"
+      },
+      {
+        "calendar_year": "2021",
+        "rows": "1008",
+        "net_sales": "31979349.33",
+        "products": "453",
+        "contract_rows": "0",
+        "approved_territory_rows": "0"
+      },
+      {
+        "calendar_year": "2022",
+        "rows": "1046",
+        "net_sales": "29016811.61",
+        "products": "543",
+        "contract_rows": "0",
+        "approved_territory_rows": "0"
+      },
+      {
+        "calendar_year": "2023",
+        "rows": "2392",
+        "net_sales": "43084157.67",
+        "products": "1354",
+        "contract_rows": "0",
+        "approved_territory_rows": "0"
+      },
+      {
+        "calendar_year": "2024",
+        "rows": "305",
+        "net_sales": "25106298.76",
+        "products": "277",
+        "contract_rows": "116",
+        "approved_territory_rows": "0"
+      },
+      {
+        "calendar_year": "2025",
+        "rows": "1326",
+        "net_sales": "109268263.89",
+        "products": "751",
+        "contract_rows": "174",
+        "approved_territory_rows": "0"
+      }
+    ]
+  }
+}

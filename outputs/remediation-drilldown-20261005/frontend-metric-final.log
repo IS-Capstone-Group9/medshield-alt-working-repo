@@ -1,0 +1,11 @@
+
+Running 2 tests using 1 worker
+
+(node:3668) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:3668) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 [chromium] › e2e\metric-definitions.spec.ts:7:1 › Section 1: real chart datasets, KPI rates, labels and refresh use the same financial definitions (3.3s)
+  ok 2 [chromium] › e2e\metric-definitions.spec.ts:66:1 › Section 1: filtered sales summary shows weighted rates and reconciliation in every computation mode (228ms)
+
+  2 passed (6.4s)

@@ -1,73 +1,54 @@
 'use client'
 
-import { useEffect, useMemo, useRef, useState } from 'react'
-import Chart from 'chart.js/auto'
-import { MEDSHIELD_MARKUP, MEDSHIELD_SCRIPT, MEDSHIELD_STYLE } from '../lib/medshieldReference'
-import { AuthProvider, useAuth } from '../lib/AuthContext'
-import Login from '../components/Login'
+import { createPortal } from 'react-dom'
+import { AuthProvider, useAuth } from '@/lib/AuthContext'
+import Login from '@/components/Login'
+import PasswordResetRequired from '@/components/PasswordResetRequired'
+import ModelDashboard from '@/components/ModelDashboard'
+import { useDashboardRuntime } from '@/hooks/use-dashboard-runtime'
+import type { User } from '@/lib/auth-tokens'
 
-declare global {
-  interface Window {
-    Chart?: unknown
-  }
-}
-
-function getExecutableDashboardScript() {
-  return MEDSHIELD_SCRIPT
-    .replace("window.addEventListener('DOMContentLoaded', async () => {", '(async () => {')
-    .replace(/\n}\);\s*$/, '\n})();')
-}
-
-function Dashboard() {
-  const rootRef = useRef<HTMLDivElement>(null)
-  const executableScript = useMemo(() => getExecutableDashboardScript(), [])
-
-  useEffect(() => {
-    const root = rootRef.current
-    if (!root) return undefined
-
-    let cancelled = false
-    root.innerHTML = MEDSHIELD_MARKUP
-    window.Chart = Chart
-
-    if (!cancelled) {
-      const runtime = document.createElement('script')
-      runtime.id = 'medshield-dashboard-runtime'
-      runtime.text = executableScript
-      document.body.appendChild(runtime)
-    }
-
-    return () => {
-      cancelled = true
-      document.getElementById('medshield-dashboard-runtime')?.remove()
-      root.innerHTML = ''
-      document.body.classList.remove('nav-collapsed', 'nav-hidden', 'nav-open')
-      delete document.body.dataset.navState
-    }
-  }, [executableScript])
+function Dashboard({ onLogout, user }: { onLogout: () => Promise<void>; user: User | null }) {
+  const { rootRef, portalContainer } = useDashboardRuntime(onLogout, user)
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: `${MEDSHIELD_STYLE}\n.medshield-root { display: contents; }` }} />
       <div ref={rootRef} className="medshield-root" />
+      {portalContainer && createPortal(<ModelDashboard />, portalContainer)}
     </>
   )
 }
 
 function AppContent() {
-  const { isAuthenticated, login } = useAuth()
-  const [loggedIn, setLoggedIn] = useState(false)
+  const { isAuthenticated, isAuthLoading, user, logout } = useAuth()
 
-  // sync with auth context
-  useEffect(() => {
-    if (isAuthenticated) setLoggedIn(true)
-  }, [isAuthenticated])
-
-  if (!loggedIn) {
-    return <Login onLoginSuccess={() => setLoggedIn(true)} />
+  if (isAuthLoading) {
+    return (
+      <main
+        style={{
+          minHeight: '100vh',
+          display: 'grid',
+          placeItems: 'center',
+          background: '#e5e7fb',
+          color: '#155a91',
+          fontFamily: 'Inter, DM Sans, Open Sans, system-ui, sans-serif',
+          fontWeight: 700,
+        }}
+      >
+        Restoring Secure Session...
+      </main>
+    )
   }
 
-  return <Dashboard />
+  if (!isAuthenticated) {
+    return <Login onLoginSuccess={() => undefined} />
+  }
+
+  if (user?.mustResetPassword) {
+    return <PasswordResetRequired />
+  }
+
+  return <Dashboard onLogout={logout} user={user} />
 }
 
 export default function Page() {

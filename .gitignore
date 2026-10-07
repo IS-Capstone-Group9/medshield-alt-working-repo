@@ -7,6 +7,9 @@ frontend/dist/
 frontend/.next/
 backend/__pycache__/
 backend/.pytest_cache/
+backend/data/local_accounts.json
+backend/data/local_audit_logs.jsonl
+backend/$log
 __pycache__/
 .pytest_cache/
 .vscode/
@@ -45,3 +48,34 @@ build/
 *.log
 coverage/
 /.cache
+docs/~$*.docx
+docs/MedShield_Chapter_4_5_Draft.docx
+frontend/test-results/
+frontend/playwright-report/
+test-results/
+playwright-report/
+*.tsbuildinfo
+
+# Runtime ingestion outputs
+data/medshield/uploads/
+data/medshield/processed/sales_transactions_medical_demand.json.gz
+data/medshield/processed/sales_transactions_non_medical_excluded.json.gz
+data/medshield/certification/*_candidate.json.gz
+data/medshield/certification/*_financial_flags.json.gz
+data/medshield/certification/*_master_candidate.csv
+outputs/medical_demand_cleaning_*/
+
+# Reproducible large external-source clean exports (regenerate from raw data)
+datasources/clean/doh/*.csv
+datasources/clean/pagasa/*.csv
+data/DOH (2018-2026)-*/
+
+# Obsolete local export superseded by complete yearly daily CSVs
+outputs/contract_backward_allocation_20260623/yearly_daily/sales_transactions_area_allocated_undated_review.csv
+
+# Superseded by yearly_daily_clean_sales exports
+outputs/contract_backward_allocation_20260623/yearly_daily/
+
+# Optional local reference clones; these are not application submodules.
+/external/medshield_frontend/
+/temp-medshield/medshield-dashboard/

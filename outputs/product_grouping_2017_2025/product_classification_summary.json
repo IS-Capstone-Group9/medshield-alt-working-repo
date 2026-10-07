@@ -1,0 +1,49 @@
+{
+  "generated_at": "2026-09-17T12:33:15.912954+00:00",
+  "source": "outputs/databricks/products_sales_extract.json",
+  "source_dataset": "databricks_product_sales_extract",
+  "source_view": "sales_restart_business_product_yearly_candidate",
+  "source_extracted_at": "2026-09-17T12:30:47.669Z",
+  "period": "2017-2025",
+  "raw_products": 4900,
+  "mapping_status": "candidate_needs_owner_review",
+  "master_validation_errors": [],
+  "groups": {
+    "medical_device": {
+      "products": 71,
+      "transactions": 181,
+      "net_sales": 6371829.94,
+      "net_sales_share": 0.010356
+    },
+    "medical_supply": {
+      "products": 798,
+      "transactions": 2237,
+      "net_sales": 48167863.26,
+      "net_sales_share": 0.078289
+    },
+    "medicine": {
+      "products": 2163,
+      "transactions": 29362,
+      "net_sales": 367122421.64,
+      "net_sales_share": 0.596698
+    },
+    "non_medical": {
+      "products": 360,
+      "transactions": 700,
+      "net_sales": 12528649.66,
+      "net_sales_share": 0.020363
+    },
+    "non_product": {
+      "products": 339,
+      "transactions": 349,
+      "net_sales": 116917873.2,
+      "net_sales_share": 0.190031
+    },
+    "unresolved": {
+      "products": 1169,
+      "transactions": 4349,
+      "net_sales": 64148308.36,
+      "net_sales_share": 0.104263
+    }
+  }
+}

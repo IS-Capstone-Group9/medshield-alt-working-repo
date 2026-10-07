@@ -1,0 +1,8 @@
+{
+  "annual_projected_demand": 180149.99,
+  "economic_order_quantity_eoq": 2829.61,
+  "safety_stock": 79539.04,
+  "reorder_point_rop": 94551.54,
+  "lead_time_months": 1.0,
+  "service_level": "95%"
+}

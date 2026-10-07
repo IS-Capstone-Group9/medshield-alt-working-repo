@@ -1,0 +1,13 @@
+forecast_run_id,forecast_period,forecast_scope,baseline_demand_value,lower_bound,upper_bound,source_period_used,model_code,model_version,review_status,limitations
+sales_only_baseline_v1_2026,2048-01,overall,0.0,0.0,0.0,,SEASONAL_NAIVE_BASELINE,sales_only_v1,draft,Sales-only seasonal naive forecast. No future disease/weather regressors included.
+sales_only_baseline_v1_2026,2048-02,overall,0.0,0.0,0.0,,SEASONAL_NAIVE_BASELINE,sales_only_v1,draft,Sales-only seasonal naive forecast. No future disease/weather regressors included.
+sales_only_baseline_v1_2026,2048-03,overall,0.0,0.0,0.0,,SEASONAL_NAIVE_BASELINE,sales_only_v1,draft,Sales-only seasonal naive forecast. No future disease/weather regressors included.
+sales_only_baseline_v1_2026,2048-04,overall,0.0,0.0,0.0,,SEASONAL_NAIVE_BASELINE,sales_only_v1,draft,Sales-only seasonal naive forecast. No future disease/weather regressors included.
+sales_only_baseline_v1_2026,2048-05,overall,0.0,0.0,0.0,,SEASONAL_NAIVE_BASELINE,sales_only_v1,draft,Sales-only seasonal naive forecast. No future disease/weather regressors included.
+sales_only_baseline_v1_2026,2048-06,overall,0.0,0.0,0.0,,SEASONAL_NAIVE_BASELINE,sales_only_v1,draft,Sales-only seasonal naive forecast. No future disease/weather regressors included.
+sales_only_baseline_v1_2026,2048-07,overall,0.0,0.0,0.0,,SEASONAL_NAIVE_BASELINE,sales_only_v1,draft,Sales-only seasonal naive forecast. No future disease/weather regressors included.
+sales_only_baseline_v1_2026,2048-08,overall,0.0,0.0,0.0,,SEASONAL_NAIVE_BASELINE,sales_only_v1,draft,Sales-only seasonal naive forecast. No future disease/weather regressors included.
+sales_only_baseline_v1_2026,2048-09,overall,0.0,0.0,0.0,,SEASONAL_NAIVE_BASELINE,sales_only_v1,draft,Sales-only seasonal naive forecast. No future disease/weather regressors included.
+sales_only_baseline_v1_2026,2048-10,overall,0.0,0.0,0.0,,SEASONAL_NAIVE_BASELINE,sales_only_v1,draft,Sales-only seasonal naive forecast. No future disease/weather regressors included.
+sales_only_baseline_v1_2026,2048-11,overall,2.0,1.7,2.3,2047-11,SEASONAL_NAIVE_BASELINE,sales_only_v1,draft,Sales-only seasonal naive forecast. No future disease/weather regressors included.
+sales_only_baseline_v1_2026,2048-12,overall,0.0,0.0,0.0,,SEASONAL_NAIVE_BASELINE,sales_only_v1,draft,Sales-only seasonal naive forecast. No future disease/weather regressors included.
