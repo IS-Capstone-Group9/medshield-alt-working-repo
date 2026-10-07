@@ -4,8 +4,10 @@ from __future__ import annotations
 
 import os
 import re
+from datetime import date, datetime
 from pathlib import Path
 from typing import Any
+from zoneinfo import ZoneInfo
 
 import requests
 from dotenv import load_dotenv
@@ -85,7 +87,31 @@ def to_float(value: Any) -> float:
     return float(value)
 
 
-def normalize_snapshot(data: dict[str, Any]) -> dict[str, Any]:
+def normalize_snapshot(data: dict[str, Any], *, today: date | None = None) -> dict[str, Any]:
+    today = today or datetime.now(ZoneInfo("Asia/Manila")).date()
+    current_month = today.strftime("%Y-%m")
+
+    def historical_month(row: dict[str, Any]) -> bool:
+        period = str(row.get("period", ""))
+        return bool(re.fullmatch(r"[1-9]\d{3}-(0[1-9]|1[0-2])", period)) and "2017-01" <= period <= current_month
+
+    def historical_year(row: dict[str, Any]) -> bool:
+        year = str(row.get("year", ""))
+        return bool(re.fullmatch(r"[1-9]\d{3}", year)) and 2017 <= int(year) <= today.year
+
+    excluded_periods = (
+        any(not historical_month(row) for row in data.get("monthly", []))
+        or any(not historical_year(row) for row in data.get("year_summary", []))
+    )
+    # Undated aggregates cannot be repaired by trimming their monthly series:
+    # their area/product partitions may still contain the excluded activity.
+    # Validate before mutating so a rejected snapshot is not partly normalized.
+    if excluded_periods and any(data.get(key) for key in ("totals", "by_area", "top_products", "seasonality")):
+        raise ValueError(
+            "Legacy actual snapshot contains future or invalid monthly/year periods alongside undated aggregates. "
+            "Their historical population cannot be verified; rebuild the snapshot from dated historical rows."
+        )
+
     totals = data.get("totals", {})
     data["totals"] = {
         **totals,
@@ -110,11 +136,17 @@ def normalize_snapshot(data: dict[str, Any]) -> dict[str, Any]:
         return normalized
 
     data["monthly"] = normalize_rows(data.get("monthly", []), ["revenue", "income"])
-    data["monthly"] = sorted([r for r in data["monthly"] if re.fullmatch(r"(201[7-9]|202[0-5])-(0[1-9]|1[0-2])", str(r.get("period", "")))], key=lambda r: r["period"])
+    data["monthly"] = sorted([
+        r for r in data["monthly"]
+        if historical_month(r)
+    ], key=lambda r: r["period"])
     data["by_area"] = normalize_rows(data.get("by_area", []), ["revenue", "income"])
     data["top_products"] = normalize_rows(data.get("top_products", []), ["revenue", "income", "qty", "pct_of_total"])
     data["year_summary"] = normalize_rows(data.get("year_summary", []), ["revenue", "income"], {"transactions"})
-    data["year_summary"] = [r for r in data["year_summary"] if re.fullmatch(r"201[7-9]|202[0-5]", str(r.get("year", "")))]
+    data["year_summary"] = [
+        r for r in data["year_summary"]
+        if historical_year(r)
+    ]
     data["seasonality"] = normalize_rows(data.get("seasonality", []), ["avg_revenue"])
     data["forecasts"] = normalize_rows(data.get("forecasts", []), [
         "baseline_forecast",

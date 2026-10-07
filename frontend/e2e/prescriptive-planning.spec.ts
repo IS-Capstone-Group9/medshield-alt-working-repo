@@ -23,10 +23,14 @@ test('planning inputs, real solver allocation, chart and exported assumptions ag
   await expect(page.locator('#planInputs tbody tr')).toHaveCount(2)
 
   // Verify scenario chip switching
+  await page.locator('[data-plan-index="0"][data-plan-field="demand"]').fill('0')
   await page.locator('#chipScenarioSurge').click()
-  await expect(page.locator('#kpiPlanServiceLevel')).toHaveText('99.4%')
+  await expect(page.locator('[data-plan-index="0"][data-plan-field="demand"]')).toHaveValue('0')
+  await expect(page.locator('#kpiPlanServiceLevel')).toHaveText('Not solved')
   await page.locator('#chipScenarioNormal').click()
-  await expect(page.locator('#kpiPlanServiceLevel')).toHaveText('95.0%')
+  await expect(page.locator('#kpiPlanServiceLevel')).toHaveText('Not solved')
+  await expect(page.locator('#kpiPlanExpiryRate')).toHaveText('Unavailable')
+  await expect(page.locator('#planCalculatedResults')).not.toBeVisible()
 
   for (let i = 0; i < 2; i++) for (const key of ['demand', 'stock', 'reserve', 'pack', 'pack_cost', 'max_packs']) await page.locator(`[data-plan-index="${i}"][data-plan-field="${key}"]`).fill(String(data.body.items[i][key]))
   await page.locator('#planBudget').fill('100')
@@ -40,13 +44,14 @@ test('planning inputs, real solver allocation, chart and exported assumptions ag
   expect(await page.evaluate(() => (window as any).solveEvents)).toBe(1)
 
   await page.evaluate(d => (window as any).setPlanningResult(d.result), data)
-  await expect(page.locator('#planResultStatus')).toContainText('Prescriptive Allocation Solved')
+  await expect(page.locator('#planResultStatus')).toContainText('Scenario allocation calculated')
+  await expect(page.locator('#planCalculatedResults')).toBeVisible()
   expect(await page.evaluate(() => (window as any).Chart.getChart(document.getElementById('planFulfillmentChart')).data.datasets[0].data)).toEqual(data.result.rows.map((r: any) => r.fulfillment_pct))
 
   const download = page.waitForEvent('download')
   await page.locator('#planExport').click()
   const csv = await readFile((await (await download).path())!, 'utf8')
-  expect(csv).toContain('Scenario Prescriptive Order')
+  expect(csv).toContain('Scenario allocation for review')
   expect(csv).toContain('"fixture"')
   expect(csv).toContain('units_per_pack')
 
@@ -56,10 +61,12 @@ test('planning inputs, real solver allocation, chart and exported assumptions ag
   await page.locator('#planBudget').fill('50')
   await expect(page.locator('#planExport')).toBeDisabled()
   await expect(page.locator('#planResults')).toBeEmpty()
+  await expect(page.locator('#planCalculatedResults')).not.toBeVisible()
+  await expect(page.locator('#kpiPlanServiceLevel')).toHaveText('Not solved')
   expect(await page.evaluate(() => (window as any).Chart.getChart(document.getElementById('planFulfillmentChart')) === undefined)).toBe(true)
 
   await page.evaluate(() => (window as any).setPlanningResult({ status: 'infeasible', conflicts: ['Budget cannot meet minimum'], rows: [] }))
-  await expect(page.locator('#planResultStatus')).toContainText('No allocation published')
+  await expect(page.locator('#planResultStatus')).toContainText('No scenario allocation calculated')
 
   await page.setViewportSize({ width: 390, height: 844 })
   await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)

@@ -4,6 +4,7 @@ import { parseMonthlyYear } from './monthlyQuery'
 import { createHash } from 'node:crypto'
 import { executeDatabricksStatement } from './databricks'
 import { revenueAbc, weightedMargin } from './descriptiveMetrics'
+import { buildSalesDiagnostics, diagnosticFilter, diagnosticStatement, parseDiagnosticFilters, parseDiagnosticScope, type DiagnosticInput, type DiagnosticParameter } from './salesDiagnostics'
 
 const GOLD = '`workspace`.`medshield_gold`'
 const FACT = `${GOLD}.\`sales_restart_fact_candidate\``
@@ -26,6 +27,13 @@ const SECTOR_GOVERNMENT_AREAS = `'GOVERNMENT', 'PAGBILAO'`
 const SECTOR_INTERNAL_AREAS = `'ADMIN', 'SUPPLIES', 'SUPPLLIES', 'EQUIPMENT', 'SUPPLIES AND EQUIPMENT', 'PERSONAL', 'LOSSES'`
 const SECTOR_PRIVATE_AREAS = `'CAVITE', 'LOWER CAVITE', 'BATANGAS', 'QUEZON', 'LAGUNA', 'MARINDUQUE', 'CAMARINES NORTE', 'CAM NORTE', 'CAMARINES SUR', 'CAM SUR', 'ALBAY', 'LEGASPI', 'LAGASPI', 'BICOL', 'MINDORO', 'HOSPITAL', 'HOPITAL', 'PHARMA', 'LUCENA', 'RAKKK', 'EAST', 'EASTERN', 'EASTERN QUEZON'`
 const VALID_SECTORS = ['Unknown', 'Government', 'Private', 'Internal', 'All'] as const
+const DIAGNOSTIC_SECTOR = `CASE
+  WHEN UPPER(TRIM(normalized_area)) IN (${SECTOR_GOVERNMENT_AREAS}) THEN 'Government'
+  WHEN UPPER(TRIM(normalized_area)) IN (${SECTOR_INTERNAL_AREAS}) THEN 'Internal'
+  WHEN proposed_area_type = 'territory' OR UPPER(TRIM(normalized_area)) IN (${SECTOR_PRIVATE_AREAS}) THEN 'Private'
+  ELSE 'Unknown' END`
+const DIAGNOSTIC_REGION = `CASE WHEN is_geographic_territory_approved THEN mapped_region ELSE 'Unknown' END`
+const DIAGNOSTIC_TERRITORY = `CASE WHEN is_geographic_territory_approved THEN COALESCE(mapped_province, territory, normalized_area) ELSE 'Unassigned geography' END`
 
 /** M-1 fix: single source of truth for sector WHERE clause fragments. */
 function sectorWhereClause(sector: string): string {
@@ -183,12 +191,12 @@ export function descriptiveRelease(): Promise<DescriptiveRelease> {
   return releasePromise
 }
 
-async function query(statement: string, rowLimit = 1000): Promise<Row[]> {
+async function query(statement: string, rowLimit = 1000, parameters?: DiagnosticParameter[]): Promise<Row[]> {
   if (statement.includes(FACT)) {
     const release = await descriptiveRelease()
     statement = statement.replaceAll(FACT, `${FACT} VERSION AS OF ${release.fact_delta_version}`)
   }
-  const cacheKey = `${rowLimit}:${statement}`
+  const cacheKey = `${rowLimit}:${statement}:${JSON.stringify(parameters || [])}`
   const cached = queryCache.get(cacheKey)
   if (cached && cached.expiresAt > Date.now()) return cached.rows
   const existing = queryLoads.get(cacheKey)
@@ -197,7 +205,7 @@ async function query(statement: string, rowLimit = 1000): Promise<Row[]> {
   const load = (async () => {
     await acquireQuerySlot()
     try {
-      const rows = (await executeDatabricksStatement(statement, { rowLimit })).rows
+      const rows = (await executeDatabricksStatement(statement, { rowLimit, parameters })).rows
       queryCache.set(cacheKey, { rows, expiresAt: Date.now() + QUERY_CACHE_TTL_MS })
       return rows
     } catch (error) {
@@ -222,6 +230,31 @@ function databricksSource(rows: unknown, extra: Record<string, unknown> = {}) {
     release: activeRelease,
     ...extra,
   }
+}
+
+function diagnosticCatalogSql(release: DescriptiveRelease) {
+  const catalog = release.policy_version === 'sales_restart_gold_v7_independent_catalog'
+  return {product:catalog ? 'canonical_group_id' : "CONCAT('RAW:', product_key)",
+    title:catalog ? 'canonical_title' : 'normalized_product',
+    category:catalog ? 'display_category' : `CASE WHEN product_category IN ('medicine','medical_supply','medical_equipment') THEN 'Medical'
+      WHEN product_category = 'non_medical' THEN 'Non-Medical' ELSE 'Unclassified' END`,
+    identity:catalog ? 'identity_status' : "'needs_review'",
+    evidence:catalog ? 'transaction_evidence' : "CASE WHEN is_adjusted_source THEN 'adjusted_estimated_source' ELSE 'original_source_detail' END"}
+}
+
+export async function getDatabricksSalesDiagnostics(input: DiagnosticInput) {
+  const scope = parseDiagnosticScope(input)
+  const release = await descriptiveRelease()
+  const {statement, parameters} = diagnosticStatement(scope, {fact:FACT, population:OBSERVED_FACT,
+    sector:DIAGNOSTIC_SECTOR, region:DIAGNOSTIC_REGION, territory:DIAGNOSTIC_TERRITORY, ...diagnosticCatalogSql(release)})
+  // Aggregates only. Truncation or an overlarge grouped population fails visibly.
+  const rows = await query(statement, 20_000, parameters)
+  const diagnostics = buildSalesDiagnostics(scope, rows)
+  return {...diagnostics, release, source:databricksSource(rows, {
+    metric:'Eligible signed net sales (PHP)', candidate_only:true,
+    buyer_mapping_status:'proposed', product_identity_status:'source_group_unless_independently_approved',
+    denominator_policy:'all_matched_eligible_groups_before_display_ranking',
+  })}
 }
 
 export async function loadDatabricksDashboardSnapshot() {
@@ -325,7 +358,8 @@ export async function loadDatabricksDashboardSnapshot() {
     revenue: numberValue(row.revenue),
     income: numberValue(row.income),
     qty: numberValue(row.qty),
-    abc: numberValue(row.positive_sales) > 0 ? revenueAbc(nullableNumber(row.cumulative_revenue), nullableNumber(row.product_revenue_total), 0) : 'Unclassified',
+    abc: revenueAbc(nullableNumber(row.cumulative_revenue), nullableNumber(row.product_revenue_total), nullableNumber(row.positive_sales)),
+    abc_policy: 'positive_sales_crossing_inclusive_v2_candidate',
     positive_sales: numberValue(row.positive_sales),
     returns_value: numberValue(row.returns_value),
     abc_basis: 'positive_eligible_sales_full_population',
@@ -430,6 +464,7 @@ export async function getDatabricksSalesStatus() {
   }
   return {
     dataset_name: 'Databricks Gold sales fact',
+    release: await descriptiveRelease(),
     source_file: SOURCE_NAME,
     source_files: [SOURCE_NAME],
     checksum: checksum(fingerprint),
@@ -481,20 +516,39 @@ function salesWhere(input: { year?: string; search?: string; qualityStatus?: str
   return { where: clauses.join(' AND '), year, search, quality }
 }
 
-export async function getDatabricksSalesTransactions(input: {
-  year?: string
-  page?: unknown
-  pageSize?: unknown
-  search?: string
-  qualityStatus?: string
-}) {
+type SalesDetailInput = {year?: string; search?: string; qualityStatus?: string} & DiagnosticInput
+
+/** Keep ledger totals and its pages under identical validated scope predicates. */
+async function salesDetailFilters(input: SalesDetailInput) {
+  const filters = salesWhere(input)
+  const scopeFilters = parseDiagnosticFilters(input)
+  const dates = input.startDate !== undefined || input.endDate !== undefined ? parseDiagnosticScope(input) : null
+  const release = await descriptiveRelease()
+  const catalog = diagnosticCatalogSql(release)
+  const detail = diagnosticFilter(scopeFilters, {product:catalog.product, sector:DIAGNOSTIC_SECTOR,
+    region:DIAGNOSTIC_REGION, territory:DIAGNOSTIC_TERRITORY, category:catalog.category})
+  const parameters = [...detail.parameters]
+  filters.where += ` AND ${detail.where}`
+  if (dates) {
+    filters.where += ' AND date_delivered BETWEEN :diagnostic_start AND :diagnostic_end'
+    parameters.push({name:'diagnostic_start', value:dates.start_date, type:'DATE'}, {name:'diagnostic_end', value:dates.end_date, type:'DATE'})
+  }
+  return {filters, scopeFilters, dates, release, catalog, parameters}
+}
+
+export async function getDatabricksSalesTransactions(input: SalesDetailInput & {page?: unknown; pageSize?: unknown}) {
   const page = integerValue(input.page ?? 1, 'page', 1, 100_000)
   const pageSize = integerValue(input.pageSize ?? 25, 'page_size', 1, 100)
-  const filters = salesWhere(input)
+  const {filters, scopeFilters, dates, release, catalog, parameters} = await salesDetailFilters(input)
   const offset = (page - 1) * pageSize
   const [countRows, rows, metadata] = await Promise.all([
-    query(`SELECT COUNT(*) AS total_rows FROM ${FACT} WHERE ${filters.where}`, 5),
-    query(`SELECT calendar_year,
+    query(`SELECT COUNT(*) AS total_rows FROM ${FACT} WHERE ${filters.where}`, 5, parameters),
+    query(`SELECT calendar_year, source_record_id, ${catalog.product} AS canonical_group_id,
+      normalized_area AS raw_area, area_raw AS original_area, ${DIAGNOSTIC_SECTOR} AS sector,
+      ${DIAGNOSTIC_REGION} AS region, ${DIAGNOSTIC_TERRITORY} AS territory,
+      ${catalog.identity} AS identity_status, ${catalog.evidence} AS transaction_evidence,
+      source_workbook, source_file_sha256, source_adjustment_policy,
+      is_net_sales_eligible, is_gross_margin_eligible, is_quantity_observation_eligible,
       CASE WHEN normalized_area = 'LOWER CAVITE' THEN 'Cavite' ELSE normalized_area END AS area,
       dr_number, date_delivered,
       normalized_product AS product, quantity,
@@ -505,16 +559,24 @@ export async function getDatabricksSalesTransactions(input: {
       gross_margin_amount, margin_pct AS gross_margin_pct,
       CASE WHEN COALESCE(SIZE(quality_rule_codes), 0) = 0 THEN 'VALID' ELSE 'WARNING' END AS quality_status,
       CONCAT_WS('; ', quality_rule_codes) AS quality_notes,
-      source_layout AS source_sheet, raw_csv_line AS source_row_number
+      CAST(NULL AS STRING) AS source_sheet, source_layout, source_row_number
       FROM ${FACT} WHERE ${filters.where}
       ORDER BY date_delivered DESC, source_workbook, source_record_id
-      LIMIT ${pageSize} OFFSET ${offset}`, pageSize + 1),
+      LIMIT ${pageSize} OFFSET ${offset}`, pageSize + 1, parameters),
     getDatabricksSalesStatus(),
   ])
   const totalRows = numberValue(countRows[0]?.total_rows)
   return {
-    metadata,
+    metadata, release, source:databricksSource(rows, {candidate_only:true}),
     rows: rows.map((row) => ({
+      source_record_id:row.source_record_id, canonical_group_id:row.canonical_group_id,
+      raw_area:row.raw_area, original_area:row.original_area, sector:row.sector, region:row.region, territory:row.territory,
+      identity_status:row.identity_status, transaction_evidence:row.transaction_evidence,
+      source_workbook:row.source_workbook, source_file_sha256:row.source_file_sha256, source_adjustment_policy:row.source_adjustment_policy,
+      is_net_sales_eligible:row.is_net_sales_eligible === 'true', is_gross_margin_eligible:row.is_gross_margin_eligible === 'true',
+      is_quantity_observation_eligible:row.is_quantity_observation_eligible === 'true',
+      eligible_revenue:row.is_net_sales_eligible === 'true' ? nullableNumber(row.net_contract_value) : null,
+      eligible_income:row.is_gross_margin_eligible === 'true' ? nullableNumber(row.gross_margin_amount) : null,
       year: nullableNumber(row.calendar_year),
       area: row.area,
       dr_number: row.dr_number,
@@ -532,7 +594,8 @@ export async function getDatabricksSalesTransactions(input: {
       quality_status: String(row.quality_status ?? 'WARNING').toLowerCase(),
       quality_notes: row.quality_notes ?? '',
       source_sheet: row.source_sheet ?? '',
-      source_row_number: numberValue(row.source_row_number),
+      source_layout: row.source_layout,
+      source_row_number: nullableNumber(row.source_row_number),
     })),
     pagination: {
       page,
@@ -540,16 +603,13 @@ export async function getDatabricksSalesTransactions(input: {
       page_count: Math.ceil(totalRows / pageSize),
       total_rows: totalRows,
     },
-    filters: { year: filters.year, search: filters.search, quality_status: filters.quality },
+    filters: {year:filters.year, search:filters.search, quality_status:filters.quality,
+      ...scopeFilters, start_date:dates?.start_date || null, end_date:dates?.end_date || null},
   }
 }
 
-export async function getDatabricksSalesSummary(input: {
-  year?: string
-  search?: string
-  qualityStatus?: string
-}) {
-  const filters = salesWhere(input)
+export async function getDatabricksSalesSummary(input: SalesDetailInput) {
+  const {filters, scopeFilters, dates, release, parameters} = await salesDetailFilters(input)
   const [summaryRows, topArea, topProduct] = await Promise.all([
     query(`SELECT COUNT(*) AS rows, COUNT(DISTINCT normalized_product) AS sku_count,
       COUNT(DISTINCT dr_number) AS unique_dr_numbers,
@@ -573,17 +633,19 @@ export async function getDatabricksSalesSummary(input: {
       SUM(CASE WHEN is_net_sales_eligible AND is_acquisition_cost_eligible AND is_gross_margin_eligible
         THEN COALESCE(net_sales, 0) - COALESCE(total_acquisition_cost, 0) - COALESCE(gross_margin_amount, 0)
         ELSE 0 END) AS reconciliation_delta
-      FROM ${FACT} WHERE ${filters.where}`, 5),
+      FROM ${FACT} WHERE ${filters.where}`, 5, parameters),
     query(`SELECT CASE WHEN normalized_area = 'LOWER CAVITE' THEN 'Cavite' ELSE normalized_area END AS area FROM ${FACT} WHERE ${filters.where}
       GROUP BY CASE WHEN normalized_area = 'LOWER CAVITE' THEN 'Cavite' ELSE normalized_area END
-      ORDER BY SUM(CASE WHEN is_net_sales_eligible THEN COALESCE(net_sales, 0) ELSE 0 END) DESC LIMIT 1`, 2),
+      ORDER BY SUM(CASE WHEN is_net_sales_eligible THEN COALESCE(net_sales, 0) ELSE 0 END) DESC LIMIT 1`, 2, parameters),
     query(`SELECT normalized_product AS product FROM ${FACT} WHERE ${filters.where}
       GROUP BY normalized_product
-      ORDER BY SUM(CASE WHEN is_net_sales_eligible THEN COALESCE(net_sales, 0) ELSE 0 END) DESC LIMIT 1`, 2),
+      ORDER BY SUM(CASE WHEN is_net_sales_eligible THEN COALESCE(net_sales, 0) ELSE 0 END) DESC LIMIT 1`, 2, parameters),
   ])
   const row = summaryRows[0] ?? {}
   return {
-    filters: { year: filters.year, search: filters.search, quality_status: filters.quality },
+    release, source:databricksSource(summaryRows, {candidate_only:true}),
+    filters: {year:filters.year, search:filters.search, quality_status:filters.quality,
+      ...scopeFilters, start_date:dates?.start_date || null, end_date:dates?.end_date || null},
     counts: {
       rows: numberValue(row.rows),
       accepted_rows: numberValue(row.accepted_rows),

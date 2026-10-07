@@ -1,5 +1,7 @@
 # MedShield Capstone Requirements
 
+Use [OBJECTIVE_EVIDENCE_REGISTER.md](OBJECTIVE_EVIDENCE_REGISTER.md) for the original paper objective mapping, measurable completion criteria, evidence index, decision ownership and remaining scope choices. It indexes these requirements without granting business release approval or changing the original academic objectives.
+
 ## Scope Standard
 
 MedShield is a historical analytics and decision-support capstone. It should help explain demand patterns, forecast planning demand, prioritize products and regions, and show scenario-based recommendations using available historical data.

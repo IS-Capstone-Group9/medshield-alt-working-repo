@@ -1,5 +1,7 @@
 # Business Analysis
 
+The [objective and evidence register](OBJECTIVE_EVIDENCE_REGISTER.md) connects the original capstone objectives to client decisions, required inputs, current evidence and testable completion criteria. Existing CEO decisions remain in [DESCRIPTIVE_PUBLICATION_ACCEPTANCE.md](DESCRIPTIVE_PUBLICATION_ACCEPTANCE.md).
+
 ## Decision problem
 
 MedShield needs one reviewable historical evidence base for deciding which products and territories deserve planning attention. The system must help planners understand past demand, compare forecast methods, and test allocation assumptions without inventing inventory or procurement facts.

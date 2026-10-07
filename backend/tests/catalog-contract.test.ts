@@ -43,3 +43,16 @@ test('category boundary rejects structured/repeated inputs; legacy projection us
   assert.doesNotMatch(catalogProjection('v6'),/AS canonical_sku,\s*canonical_title/)
   assert.match(catalogProjection('sales_restart_gold_v7_independent_catalog'),/transaction_evidence_lineage/)
 })
+
+test('UI and both API classifiers agree on dominant, crossing and exact-cutoff products', async () => {
+  const { revenueAbc } = await import('../src/descriptiveMetrics')
+  for (const amounts of [[96,4], [85,10,5], [80,15,5], [100], [40,40,15,5], [0.1,0.1,0.05]]) {
+    const input = amounts.map((amount,i) => ({canonical_group_id:'RAW:'+i,canonical_title:'P'+i,product:'P'+i,positive_sales:amount,returns_value:0,revenue:amount}))
+    const api=catalogProducts(input,'All',100), ui=descriptivePortfolio(input,'positive_sales_candidate')
+    let cumulative=0
+    assert.deepEqual(api.products.map(p=>p.abc),ui.products.map(p=>p.abc))
+    assert.deepEqual(api.products.map(p=>p.abc),api.products.map(p=>{cumulative+=p.positive_sales;return revenueAbc(cumulative,api.denominator,p.positive_sales)}))
+    assert.equal(api.products[0].abc,'A')
+    assert.equal(api.products[0].abc_policy,'positive_sales_crossing_inclusive_v2_candidate')
+  }
+})

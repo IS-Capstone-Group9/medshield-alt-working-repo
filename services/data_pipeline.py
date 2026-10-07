@@ -21,6 +21,7 @@ from datetime import date, datetime, timezone
 from pathlib import Path
 from statistics import mean
 from typing import Any, Iterable
+from zoneinfo import ZoneInfo
 
 import requests
 from dotenv import load_dotenv
@@ -126,10 +127,9 @@ AREA_STANDARDIZATION = {
 }
 
 # ── Year range constants ───────────────────────────────────────────────────────
-# All data outside [VALID_YEAR_MIN, VALID_YEAR_MAX] is rejected.  This enforces
-# the canonical analysis window mandated by the MedShield project scope.
+# The historical start is fixed; later source years are accepted dynamically.
+# Date parsing already enforces the calendar's valid upper limit.
 VALID_YEAR_MIN: int = 2017
-VALID_YEAR_MAX: int = 2025
 
 # ── Area classification ────────────────────────────────────────────────────────
 # Only geographic territories receive coordinate-based weather and disease features.
@@ -258,7 +258,7 @@ def _extract_source_year(workbook_name: str | None) -> int | None:
     """
     if not workbook_name:
         return None
-    match = re.search(r"(20\d{2})", str(workbook_name))
+    match = re.search(r"(?<!\d)([1-9]\d{3})(?!\d)", str(workbook_name))
     if match:
         return int(match.group(1))
     return None
@@ -529,13 +529,12 @@ def clean_sales_rows(
             transformations.append("dr_number: standardized identifier format")
 
         # ── Fix 1.1 — Year range guard ─────────────────────────────────────────
-        # Reject any row whose delivery date falls outside the canonical 2017-2025
-        # analysis window.  Rows with no delivery date are already rejected above.
+        # Retain later source years; reject dates before historical coverage.
         delivery_year = delivery_date.year if delivery_date else None
-        if delivery_year is not None and not (VALID_YEAR_MIN <= delivery_year <= VALID_YEAR_MAX):
+        if delivery_year is not None and delivery_year < VALID_YEAR_MIN:
             notes.append(
                 f"delivery year {delivery_year} is outside the analysis range "
-                f"{VALID_YEAR_MIN}\u2013{VALID_YEAR_MAX}"
+                f"beginning {VALID_YEAR_MIN}"
             )
             issue_counts["out_of_range_year"] += 1
 
@@ -631,10 +630,10 @@ def clean_sales_rows(
 
         # ── Rejection decision ─────────────────────────────────────────────────
         # A row is rejected if any required field is missing OR the delivery year
-        # falls outside the canonical 2017-2025 analysis window.
+        # precedes the historical analysis window.
         year_out_of_range = (
             delivery_year is not None
-            and not (VALID_YEAR_MIN <= delivery_year <= VALID_YEAR_MAX)
+            and delivery_year < VALID_YEAR_MIN
         )
         rejected = not row["area"] or not delivery_date or not row["product"] or year_out_of_range
         quality_status = "rejected" if rejected else ("warning" if notes else "valid")
@@ -647,7 +646,7 @@ def clean_sales_rows(
         # ── Fix 1.7 — in_analysis_range boolean ──────────────────────────────
         in_analysis_range = (
             delivery_year is not None
-            and VALID_YEAR_MIN <= delivery_year <= VALID_YEAR_MAX
+            and delivery_year >= VALID_YEAR_MIN
         )
 
         source_hash = _source_hash(source)
@@ -730,12 +729,16 @@ def _net_sales_revenue(row: dict[str, Any]) -> float:
     return revenue
 
 
-def build_dashboard_snapshot(rows: list[dict[str, Any]]) -> dict[str, Any]:
+def build_dashboard_snapshot(rows: list[dict[str, Any]], *, today: date | None = None) -> dict[str, Any]:
+    # Ingestion may retain later source years for review, but an actual must have
+    # occurred by the current Philippine calendar date. All partitions use this
+    # same population, including within-year future dates.
+    today = today or datetime.now(ZoneInfo("Asia/Manila")).date()
 
     def historical_delivery(row):
         try:
             delivered = date.fromisoformat(str(row.get("date_delivered"))[:10])
-            return VALID_YEAR_MIN <= delivered.year <= VALID_YEAR_MAX and row.get("in_analysis_range") is not False
+            return VALID_YEAR_MIN <= delivered.year and delivered <= today and row.get("in_analysis_range") is not False
         except (ValueError, TypeError):
             return False
 
@@ -824,7 +827,7 @@ def build_dashboard_snapshot(rows: list[dict[str, Any]]) -> dict[str, Any]:
                 "transactions": int(values["transactions"]),
             }
             for year, values in sorted(yearly.items())
-            if str(year).isdigit() and 2017 <= int(year) <= 2030
+            if str(year).isdigit() and int(year) >= VALID_YEAR_MIN
         ],
         "seasonality": [
             {"month": month_names[index - 1], "avg_revenue": round(mean(month_values[index]), 2)}

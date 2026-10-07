@@ -5,6 +5,7 @@ import {
   WEATHER_VALIDATION_PAGE,
 } from './dashboard-markup'
 import { DashboardDataStatus } from '@/types/api.types'
+import { installDashboardFilterPanel } from './dashboard-filter-panel'
 
 const UNSUPPORTED_DASHBOARD_LABELS = new Map([
   ['Execute Purchase Order', 'Save Draft Plan'],
@@ -27,6 +28,7 @@ function replaceSelectOptions(select: HTMLSelectElement | null, years: string[],
   if (!select || years.length === 0) return
   const previousValue = select.value
   const fragment = document.createDocumentFragment()
+  const currentYear = new Intl.DateTimeFormat('en', { timeZone: 'Asia/Manila', year: 'numeric' }).format(new Date())
 
   if (includeAll) {
     const option = document.createElement('option')
@@ -38,7 +40,7 @@ function replaceSelectOptions(select: HTMLSelectElement | null, years: string[],
   years.forEach((year) => {
     const option = document.createElement('option')
     option.value = year
-    option.textContent = Number(year) === new Date().getFullYear()
+    option.textContent = year === currentYear
       ? `${year} (Actual + Estimate)`
       : year
     fragment.appendChild(option)
@@ -70,7 +72,7 @@ function installDescriptivePeriodControls(root: HTMLElement) {
       ['12', 'Last 12 Months'],
       ['all', 'All Time · Yearly'],
       ['custom', 'Custom Date Range'],
-    ].forEach(([value, text]) => select.add(new Option(text, value, false, value === '12')))
+    ].forEach(([value, text]) => select.add(new Option(text, value, false, value === 'all')))
     selector.append(label, select)
 
     const compareWrap = document.createElement('span')
@@ -171,12 +173,15 @@ export function updateDashboardProvenance(
   availableYears: string[]
 ) {
   const years = [...new Set(availableYears)]
-    .filter((year) => /^(201[7-9]|202[0-5])$/.test(year))
+    .filter((year) => /^\d{4}$/.test(year) && Number(year) >= 2017)
     .sort((a, b) => Number(b) - Number(a))
-  const currentYear = String(new Date().getFullYear())
-  if (years.length && Number(years[0]) < Number(currentYear)) years.unshift(currentYear)
+  const currentYear = new Intl.DateTimeFormat('en', { timeZone: 'Asia/Manila', year: 'numeric' }).format(new Date())
+  // An estimate option is a selectable scope, not evidence of a source year.
+  const offeredYears = years.length
+    ? [...new Set([...years, currentYear])].sort((a, b) => Number(b) - Number(a))
+    : []
 
-  replaceSelectOptions(root.querySelector<HTMLSelectElement>('#topbarYearSelect'), years, false)
+  replaceSelectOptions(root.querySelector<HTMLSelectElement>('#topbarYearSelect'), offeredYears, false)
 
   const statusBar = root.querySelector<HTMLElement>('.data-freshness-bar')
   if (statusBar) {
@@ -337,6 +342,7 @@ export function enhanceDashboardContent(root: HTMLElement) {
 
   replaceUnsupportedLabels(root)
   installDescriptivePeriodControls(root)
+  installDashboardFilterPanel(root)
   correctOverviewEvidence(root)
 
   const navigation = root.querySelector('.nav')

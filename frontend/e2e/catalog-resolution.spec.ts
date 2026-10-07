@@ -29,6 +29,8 @@ test('catalog filter, stable identity, safe aliases and export share one full de
   await expect(page.locator('#productTable tbody img')).toHaveCount(0)
   await page.selectOption('#productCohortSelect','20')
   await expect(page.locator('#productTable tbody tr')).toHaveCount(1)
+  await page.locator('#productTable tbody .product-catalog-evidence summary').click()
+  await expect(page.locator('#productTable tbody .product-catalog-evidence')).toHaveAttribute('open','')
   await expect(page.locator('#productTable tbody')).toContainText('80.00')
   await expect(page.locator('#productTable tbody')).toContainText('SKU:001')
   const download=page.waitForEvent('download')
@@ -48,6 +50,7 @@ test('adjusted quantity never becomes observed zero; exports retain release and 
       {product:'RAW:one',period:'2025-03',area:'Quezon',quantity:null,estimated_quantity:null,verified_quantity:7,row_count:1},
     ],source:{file:'fixture',excluded:{},release:{dataset_id:'test',fact_delta_version:17,product_master_sha256:'hash'}}})
   })
+  await page.getByRole('tab',{name:'Quantities',exact:true}).click()
   await expect(page.locator('[data-period="2025-01"]')).toHaveAttribute('data-value','')
   await expect(page.locator('[data-period="2025-02"]')).toHaveAttribute('data-value','0')
   await page.selectOption('#heatmapMeasure','estimated')

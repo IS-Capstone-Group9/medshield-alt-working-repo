@@ -25,10 +25,13 @@ The workbook supports sales revenue, product quantity, transaction cost fields, 
 | Net income | Not available as company net income. Use `gross_margin_amount` wording instead. | Not applicable | Not applicable | Business Analyst | Approved terminology rule |
 | Canonical SKU | One sellable product identity after alias cleanup. | Product alias map from `product` raw value to `canonical_sku` | SKU | Data Analyst | Needs mapping |
 | Product alias | A raw product string that points to a canonical SKU. | `product_raw` -> `canonical_sku` | Product string | Data Analyst | Needs mapping |
+| Transaction price variation | Retain each row's recorded CP/discount independently of product identity. Price variation can be described; bulk or negotiated pricing requires separate evidence. | `unit_selling_price`, `discount_amount`; original/adjusted strata | Source sales record | Data Analyst | Technical interpretation; no new business approval |
+| Effective net unit price | Recorded eligible net sales divided by positive recorded quantity in a reviewed, consistent sellable unit, with source-trust and formula checks. Preserve CP separately. | `net_sales / quantity`; unavailable when unit/identity or evidence is insufficient | Source sales record | Data Analyst | Preparation diagnostic; current eligible count 0 |
+| Package count | Explicit reviewed number of contained units per sellable package; independent of the quantity purchased on an invoice. | Product/packaging evidence; literal title proposal only | Sellable SKU presentation | Data Analyst / CEO | Needs review; never inferred from transaction quantity |
 | Territory | Geographic delivery area only. | Area map where `area_type = territory` | Territory | Business Analyst | Needs mapping |
 | Customer type | Non-geographic customer/channel label such as Government, Hospital, Pharma. | Area map where `area_type = customer_type` | Customer type | Business Analyst | Needs mapping |
 | Business line | Internal/non-sales or special label such as Admin, Supplies, Equipment, Personal, Losses. | Area map where `area_type = business_line` | Business line | Business Analyst | Needs mapping |
-| ABC class | Deterministic cumulative revenue contribution class. | A: 0-80%, B: >80-95%, C: >95-100% | SKU snapshot | BI Specialist | Approved |
+| ABC class | Deterministic positive-sales contribution class, computed before cohort or Top-N display filtering. | Classify by share before the current label: below 80% = A; 80% to below 95% = B; 95% onward = C. The label crossing a cutoff stays in its starting class. Nonpositive contribution = Unclassified. Returns remain separate in net revenue. | Selected reporting-label population | BI Specialist | Revised at user request 2026-09-29; candidate publication |
 | Forecast horizon | User-selectable 3, 6, or 12 calendar months beginning with the current Philippine calendar month. The current month counts as month 1; training still excludes current and future-month observations. | Model run metadata | Model run | Business Analyst | Approved |
 | Government buyer cluster | National government, public hospitals, and accounts explicitly named as an LGU, municipal/city government, or provincial government. Explicit institutional wording takes precedence over geography. | Buyer classification rule | Transaction/account | Business Analyst | Approved |
 | Private buyer cluster | Generic provincial sales areas not explicitly named as LGUs, private/hospital accounts, pharmacies/drugstores, and individual sales accounts. | Buyer classification rule | Transaction/account | Business Analyst | Approved |
@@ -65,6 +68,12 @@ The definitions are ready for implementation when:
 
 
 ## Catalog implementation prepared — 27 September 2026
+
+The [3 October product/pricing review rules](PRODUCT_REVIEW_RULES.md) preserve
+transaction pricing while refining literal title proposals. Different prices do not
+establish distinct sellable identities or verified negotiation. Unknown source units
+and adjusted allocations remain explicitly limited; descriptive financial totals
+continue under their existing eligibility definitions.
 
 [Product catalog contract](PRODUCT_CATALOG.md) defines independent category,
 sellable identity, item kind and transaction evidence. Local deterministic rules,

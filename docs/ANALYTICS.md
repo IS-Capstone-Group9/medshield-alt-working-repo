@@ -34,7 +34,20 @@ See [PREDICTIVE_OPERATIONS.md](PREDICTIVE_OPERATIONS.md).
 
 The browser never loads a local sales or weather snapshot. A Databricks contract failure produces an unavailable state.
 
+## Diagnostic question and evidence package — 3 October 2026
+
+[Diagnostic analytics](DIAGNOSTIC_ANALYTICS.md) specifies the complete question bank,
+field definitions, calculation rules, interpretation limits, stakeholder evidence,
+dashboard requirements and acceptance checks. Version-17 read-only extracts provide
+all product-year, area-month and provenance partitions, with reconciled contribution,
+signed-adjustment, concentration and eligible-profit bridges in the linked package.
+These are local analytical review artifacts, not a new runtime fallback or a claim
+that a diagnostic dashboard implementation or causal explanation is complete.
+Product identity, external joins and operational causes retain their own evidence gates.
+
 ## Analytical definitions
+
+Chart follow-up (29 September 2026): initial scope is observed All Time/yearly history. Product ABC now retains the label crossing each cutoff in its starting class, consistently across the API and browser (`positive_sales_crossing_inclusive_v2_candidate`). Returns and Unclassified labels remain visible. Quantity lines and heatmaps share the selected measure; negative quantities have a separate color. STL breaks missing months/segment boundaries and explains full-history trend, seasonal contribution and residuals. Supporting scatter, concentration and residual charts are expandable. See `DESCRIPTIVE_ANALYTICS_LOGIC.md` for the complete runtime rules.
 
 Implementation update (27 September 2026): missing months remain null; weighted
 margin uses a shared margin-eligible revenue denominator; observed YoY excludes

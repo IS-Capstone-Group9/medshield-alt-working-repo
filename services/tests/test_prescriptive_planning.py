@@ -16,6 +16,22 @@ def planning_fixture():
 
 
 class PlanningTests(unittest.TestCase):
+    def test_later_years_follow_closed_month_and_rolling_window_policy(self):
+        payload = {'source': {'checksum': 'controlled'}, 'rows': [
+            dict(product=name, period=period, sector='Unknown', territory='Quezon', revenue=value, quantity=1)
+            for name, period, value in [('old','2025-08',1e6), ('closed','2026-09',100),
+                                        ('open','2026-10',1e6), ('future','2027-01',1e6)]
+        ]}
+        result = build_shortlist(payload, today=date(2026, 10, 5))
+        self.assertEqual(result['period_end'], '2026-09')
+        self.assertEqual(result['period_start'], '2025-10')
+        self.assertEqual(result['months_stale'], 0)
+        self.assertEqual([row['product'] for row in result['products']], ['closed'])
+        self.assertEqual(result['ranking_revenue'], 100)
+        result = build_shortlist(payload, today=date(2027, 2, 1))
+        self.assertEqual(result['period_end'], '2027-01')
+        self.assertEqual(result['months_stale'], 0)
+
     def test_integer_solution_matches_exhaustive_service_then_cost_optimum(self):
         shortlist,body=planning_fixture()
         result=solve_plan(body,shortlist)

@@ -1855,9 +1855,7 @@ html[data-theme="dark"] .sidebar {
 }
 
 /* Welcome Back Header Greeting */
-#page-overview::before {
-  content: 'Welcome Back, Admin';
-  display: block;
+.overview-welcome {
   font-family: 'League Spartan', var(--font-league-spartan), sans-serif;
   font-size: 32px;
   font-weight: 800;

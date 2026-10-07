@@ -1,4 +1,5 @@
 import crypto from 'node:crypto'
+import { requireLocalAuthentication } from './authConfiguration'
 
 export interface SessionUser {
   account_id: number
@@ -38,6 +39,7 @@ export function createSession(user: SessionUser, remember = false): {
   expires_at: string
   user: SessionUser
 } {
+  requireLocalAuthentication()
   cleanupExpiredSessions()
   const accessToken = crypto.randomBytes(32).toString('base64url')
   const now = Date.now()
@@ -60,6 +62,7 @@ export function createSession(user: SessionUser, remember = false): {
 }
 
 export function verifySessionToken(token: string): SessionUser | null {
+  requireLocalAuthentication()
   cleanupExpiredSessions()
   const session = sessions.get(hashToken(token))
   if (!session) {

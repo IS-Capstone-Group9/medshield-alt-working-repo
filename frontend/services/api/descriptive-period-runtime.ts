@@ -2,7 +2,7 @@ const LEGACY_FILTER_STATE = `let comparisonMode = 'single';
 let selectedYear = 'all';`
 
 const DESCRIPTIVE_FILTER_STATE = `let comparisonMode = 'single';
-let descriptivePeriod = '12';
+let descriptivePeriod = 'all';
 let descriptiveGranularity = 'auto';
 let selectedYear = descriptivePhtDate().slice(0, 4);
 let customDateStart = descriptivePhtDate().slice(0, 4) + '-01-01';
@@ -36,7 +36,7 @@ const DESCRIPTIVE_MONTH_ROWS = `function getMonthlyRowsForMode() {
     borderColor: getColor(),
     backgroundColor: getColor(0.12),
     fill: true,
-    tension: 0.3,
+    tension: 0,
     borderWidth: 2.5,
     pointRadius: descriptiveUsesDailyGrain() ? 1.5 : 3,
     spanGaps: false
@@ -47,7 +47,7 @@ const DESCRIPTIVE_MONTH_ROWS = `function getMonthlyRowsForMode() {
     borderColor: getAmber(),
     backgroundColor: getAmber(0.08),
     fill: false,
-    tension: 0.3,
+    tension: 0,
     borderWidth: 2.2,
     pointRadius: descriptiveUsesDailyGrain() ? 1.5 : 3,
     spanGaps: false
@@ -59,7 +59,7 @@ const DESCRIPTIVE_MONTH_ROWS = `function getMonthlyRowsForMode() {
     backgroundColor: 'transparent',
     borderDash: [7, 5],
     fill: false,
-    tension: 0.3,
+    tension: 0,
     borderWidth: 2,
     pointRadius: descriptiveUsesDailyGrain() ? 1 : 2,
     spanGaps: false
@@ -71,7 +71,7 @@ const DESCRIPTIVE_MONTH_ROWS = `function getMonthlyRowsForMode() {
     backgroundColor: 'transparent',
     borderDash: [7, 5],
     fill: false,
-    tension: 0.3,
+    tension: 0,
     borderWidth: 2,
     pointRadius: descriptiveUsesDailyGrain() ? 1 : 2,
     spanGaps: false
@@ -146,6 +146,43 @@ const descriptivePointFormatters = {
 function descriptivePageIsActive(name) {
   const page = document.getElementById('page-' + name);
   return Boolean(page && page.classList.contains('active'));
+}
+
+function descriptiveOptionalChart(id, caption) {
+  const canvas = document.getElementById(id);
+  const wrap = canvas?.closest('.chart-wrap') || canvas?.closest('.area-chart-wrap');
+  if (!wrap || wrap.parentElement?.tagName === 'DETAILS') return;
+  const detail = document.createElement('details');
+  const summary = document.createElement('summary'); summary.textContent = caption;
+  wrap.parentElement.insertBefore(detail, wrap); detail.append(summary, wrap);
+  detail.addEventListener('toggle', () => { if (detail.open) Chart.getChart(canvas)?.resize(); });
+}
+
+// One series per measure: estimates connect to their adjacent observations.
+// Segment styling preserves evidence without introducing artificial nulls.
+function descriptiveEvidenceLine(dataset, rows) {
+  const evidence = rows.map(row => row.evidence);
+  return { ...dataset, evidence, fill: false, tension: 0, spanGaps: false,
+    pointStyle: evidence.map(value => value === 'estimate' ? 'triangle' : 'circle'),
+    segment: { borderDash: context => evidence[context.p0DataIndex] === 'estimate' || evidence[context.p1DataIndex] === 'estimate'
+      ? [6, 4] : (dataset.borderDash || []) }
+  };
+}
+
+function descriptiveEvidenceTooltip(context) {
+  const status = context.dataset.evidence?.[context.dataIndex] === 'estimate' ? 'Gap estimate' : 'Observed';
+  return context.dataset.label + ' · ' + status + ': ' + (context.raw == null ? 'Unavailable' : formatCurrency(Number(context.raw)));
+}
+
+function descriptiveTrendSummary(rows) {
+  const observed = rows.filter(row => row.evidence === 'actual' && row.revenue != null && Number.isFinite(Number(row.revenue)));
+  if (!observed.length) return 'No observed sales in this selection; estimates cannot establish an observed trend.';
+  const first = observed[0], last = observed[observed.length - 1];
+  if (observed.length === 1) return 'One observed period (' + descriptivePointLabel(first.period) + '): ' + formatCurrency(first.revenue) + '. More observed periods are needed to describe movement.';
+  const change = Number(last.revenue) - Number(first.revenue);
+  return 'Observed endpoints: ' + descriptivePointLabel(first.period) + ' ' + formatCurrency(first.revenue) + ' → ' + descriptivePointLabel(last.period) + ' ' + formatCurrency(last.revenue)
+    + '; ' + (change > 0 ? 'increase ' : change < 0 ? 'decrease ' : 'no change ') + formatCurrency(Math.abs(change))
+    + '. ' + observed.length + '/' + rows.length + ' displayed periods observed; endpoint change does not imply continuous growth or explain its cause.';
 }
 
 function descriptivePhtDate() {
@@ -270,6 +307,7 @@ function descriptiveCustomMonthlyRows(startDate, endDate) {
 function descriptivePreviousPeriod(period) {
   const text = String(period || '');
   if (/^\d{4}$/.test(text)) return String(Number(text) - 1);
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return shiftIsoYear(text, -1);
   return /^(\d{4})-(\d{2})(-\d{2})?$/.test(text)
     ? String(Number(text.slice(0, 4)) - 1) + text.slice(4)
     : '';
@@ -422,6 +460,11 @@ function descriptiveAxisPeriods() {
 function getDescriptiveDisplayRows() {
   const sourceRows = getDescriptiveSourceRows();
   if (descriptiveUsesYearlyGrain()) {
+    if (comparisonMode === 'yoy') return descriptiveAxisPeriods().map(period => {
+      const matched = descriptiveYearComparison(period);
+      return { period, revenue: matched.current, income: matched.currentIncome, observed_months: matched.matchedMonths,
+        evidence: matched.matchedMonths ? 'actual' : 'unavailable', missing: !matched.matchedMonths };
+    });
     const totals = new Map();
     sourceRows.forEach(row => {
       const period = String(row.period || '');
@@ -448,19 +491,53 @@ function getDescriptiveDisplayRows() {
     || { period, revenue: null, income: null, evidence: 'unavailable', missing: true });
 }
 
+// Compare the exact selected monthly populations, including custom boundary dates.
+// This is shared by the yearly overlays and the growth chart/table.
+function descriptiveYearComparison(year) {
+  const selected = getDescriptiveSourceRows().filter(row => String(row.period).startsWith(String(year) + '-')
+    && descriptivePeriodIncludes(row.period) && !descriptiveIsFuturePeriod(row.period));
+  const priorRows = descriptivePeriod === 'custom'
+    ? descriptiveCustomMonthlyRows(shiftIsoYear(customDateStart, -1), shiftIsoYear(customDateEnd, -1))
+    : dashboardRawMonthlyRows();
+  const prior = new Map(priorRows.map(row => [String(row.period), row]));
+  let current = 0, previous = 0, currentIncome = 0, previousIncome = 0, matchedMonths = 0;
+  let currentIncomeComplete = true, previousIncomeComplete = true;
+  const observed = row => row && !row.missing && row.evidence !== 'estimate'
+    && row.revenue != null && Number.isFinite(Number(row.revenue));
+  selected.forEach(row => {
+    const base = prior.get(descriptivePreviousPeriod(row.period));
+    if (!observed(row) || !observed(base)) return;
+    current += Number(row.revenue); previous += Number(base.revenue); matchedMonths++;
+    if (row.income == null || !Number.isFinite(Number(row.income))) currentIncomeComplete = false;
+    else currentIncome += Number(row.income);
+    if (base.income == null || !Number.isFinite(Number(base.income))) previousIncomeComplete = false;
+    else previousIncome += Number(base.income);
+  });
+  return { current: matchedMonths ? current : null, previous: matchedMonths ? previous : null, matchedMonths,
+    currentIncome: matchedMonths && currentIncomeComplete ? currentIncome : null,
+    previousIncome: matchedMonths && previousIncomeComplete ? previousIncome : null };
+}
+
 function getDescriptivePriorDisplayRows() {
   if (descriptiveUsesYearlyGrain()) {
-    const annual = new Map(getDescriptiveDisplayRows().map(row => [String(row.period), row]));
-    return descriptiveAxisPeriods().map(period => annual.get(String(Number(period) - 1))
-      || { period: String(Number(period) - 1), revenue: null, income: null, evidence: 'unavailable', missing: true });
+    return descriptiveAxisPeriods().map(period => {
+      const matched = descriptiveYearComparison(period);
+      return { period: descriptivePreviousPeriod(period), revenue: matched.previous, income: matched.previousIncome,
+        observed_months: matched.matchedMonths, evidence: matched.matchedMonths ? 'actual' : 'unavailable', missing: !matched.matchedMonths };
+    });
   }
   const sourceRows = descriptivePeriod === 'custom' && !descriptiveUsesDailyGrain()
     ? descriptiveCustomMonthlyRows(shiftIsoYear(customDateStart, -1), shiftIsoYear(customDateEnd, -1))
     : getDescriptiveSourceRows();
   const source = new Map(sourceRows.map(row => [String(row.period), row]));
   const estimateRows = descriptivePeriod === 'custom' && !descriptiveUsesDailyGrain() ? dashboardMonthlyRows() : sourceRows;
+  const usedPriorPeriods = new Set();
   return descriptiveAxisPeriods().map(period => {
     const priorPeriod = descriptivePreviousPeriod(period);
+    // Feb 28 and Feb 29 must not count the same prior-year day twice.
+    if (usedPriorPeriods.has(priorPeriod)) return { period: priorPeriod, revenue: null, income: null,
+      evidence: 'unavailable', missing: true, alignment_note: 'Prior day already matched after leap-day clamping' };
+    usedPriorPeriods.add(priorPeriod);
     return source.get(priorPeriod)
       || descriptiveWeightedEstimate(priorPeriod, estimateRows)
       || { period: priorPeriod, revenue: null, income: null, evidence: 'unavailable', missing: true };
@@ -478,6 +555,10 @@ function descriptivePeriodLabel() {
   if (descriptivePeriod === 'custom') {
     const formatter = new Intl.DateTimeFormat('en-PH', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
     return formatter.format(new Date(customDateStart + 'T00:00:00Z')) + ' – ' + formatter.format(new Date(customDateEnd + 'T00:00:00Z'));
+  }
+  if (descriptivePeriod === 'all') {
+    const periods = descriptiveAxisPeriods();
+    return 'All Time · ' + (periods.length ? periods[0] + '–' + periods[periods.length - 1] + ' · ' : '') + 'Monthly';
   }
   const end = descriptiveLatestObservedMonth();
   const formatter = new Intl.DateTimeFormat('en-PH', { month: 'short', year: 'numeric', timeZone: 'UTC' });
@@ -616,7 +697,7 @@ export function patchDescriptivePeriodFilters(script: string): string {
       "  const periodNote = document.querySelector('[data-sales-metric-period]');",
       `  const overviewRevenue = document.getElementById('kpiOverviewTotalRevenue');
   const overviewEvidenceRows = getDescriptiveDisplayRows();
-  const overviewActualRows = overviewEvidenceRows.filter(row => row.evidence === 'actual' && row.revenue != null);
+  const overviewActualRows = getDescriptiveMonthlyRows();
   const overviewEstimateRows = overviewEvidenceRows.filter(row => row.evidence === 'estimate' && row.revenue != null);
   const overviewActualRevenue = overviewActualRows.reduce((sum, row) => sum + Number(row.revenue), 0);
   const overviewEstimatedRevenue = overviewEstimateRows.reduce((sum, row) => sum + Number(row.revenue), 0);

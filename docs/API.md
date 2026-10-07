@@ -17,6 +17,10 @@ metadata identify the fact Delta version and dataset/policy/mapping hashes. Use
 `DATABRICKS_DESCRIPTIVE_FACT_VERSION` plus a controlled restart for an explicit
 candidate version; approved release activation remains unfinished.
 
+`GET /api/sales/status` also exposes top-level `release` metadata, using the same
+process pin as its counts. Its checksum is a status fingerprint, not a substitute
+for the dataset, policy, mapping hashes and fact Delta version.
+
 Product ABC uses positive eligible sales with signed returns shown separately;
 `abc_policy_status=CANDIDATE_PENDING_CEO_APPROVAL` is mandatory until that policy
 is accepted. This is source-label financial analysis, not medical SKU validation.
@@ -189,3 +193,13 @@ Asia/Manila month. Response states distinguish published, unpublished, empty and
 unsupported; storage/consistency failures return 503. No local fallback or process
 cache is used. One manifest supplies actuals, backtests, future points and metrics.
 True lead remains distinct from display length. See [operation and release gates](PREDICTIVE_OPERATIONS.md).
+
+## Sales diagnostic drill-down (5 October 2026)
+
+Authenticated `GET /api/sales/diagnostics?start_date=2025-01-01&end_date=2025-12-31`
+returns release-bound matched current/prior totals, complete signed month/product/raw-area/sector
+contributions, financial eligibility, coverage gaps and explicitly unverified causal status.
+The prior range uses the same dates one year earlier with leap-day clamping.
+Optional scalar `product_id`, `area`, `sector`, `region`, `territory`, and `category`
+filters also apply to transaction and summary endpoints; both date bounds are required together.
+Invalid diagnostic filters return 400. See [contract and evidence meaning](DRILLDOWN_DIAGNOSTICS.md).

@@ -40,9 +40,12 @@ export function descriptivePortfolio(rows: ProductSalesRow[], basis: 'net' | 'po
   const abcAvailable = contributionTotal > 0 && (basis === 'positive_sales_candidate' ? missingContributionRows === 0 : negativeProducts === 0 && unavailableRows === 0)
   let cumulative = 0
   const products = sorted.map((row, index) => {
+    const shareBefore = abcAvailable ? cumulative / contributionTotal : null
     cumulative += contribution(row)
     const cumulativeShare = abcAvailable ? cumulative / contributionTotal * 100 : null
-    const abc = cumulativeShare == null || contribution(row) <= 0 ? 'Unclassified' : cumulativeShare <= 80 ? 'A' : cumulativeShare <= 95 ? 'B' : 'C'
+    // Include the item crossing each cutoff in the class it started in.
+    // Keep aligned with backend revenueAbc; epsilon stabilizes exact money cutoffs.
+    const abc = shareBefore == null || contribution(row) <= 0 ? 'Unclassified' : shareBefore < 0.8 - 1e-10 ? 'A' : shareBefore < 0.95 - 1e-10 ? 'B' : 'C'
     return { id: row.id, metadata: row.metadata, aliases: [...row.aliases].sort(), lineage: [...row.lineage].sort(), name: row.name, rank: index + 1, revenue: row.revenue, positiveSales: row.positiveSales, returnsValue: row.returnsValue, quantity: row.quantity,
       productEvidence: [...row.provenance].sort().join("; "), observedMonths: row.periods.size, share: contributionTotal > 0 ? contribution(row) / contributionTotal * 100 : null,
       cumulativeShare, abc }

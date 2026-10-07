@@ -1,0 +1,22 @@
+
+Running 13 tests using 1 worker
+
+(node:22652) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22652) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 [chromium] › e2e\dashboard-filter-placement.spec.ts:31:1 › filters belong above dashboard content and retain period and navigation behavior (2.8s)
+  ok  2 [chromium] › e2e\dashboard-filter-placement.spec.ts:65:1 › overview calendar and scatter retain observed values, negative sales and missing profit (1.2s)
+  ok  3 [chromium] › e2e\dashboard-filter-placement.spec.ts:100:1 › filter card fits a narrow screen including custom dates (1.3s)
+  ok  4 [chromium] › e2e\dashboard-recovery.spec.ts:17:1 › cookie-only restored local session supplies bearer headers to read and write callers (234ms)
+  ok  5 [chromium] › e2e\dashboard-recovery.spec.ts:50:1 › all deferred modules retry after transient failure and successful pages stay cached (256ms)
+  ok  6 [chromium] › e2e\dashboard-recovery.spec.ts:97:1 › deferred requests deduplicate and reset cannot cache or render a stale response (206ms)
+  ok  7 [chromium] › e2e\dashboard-recovery.spec.ts:122:1 › missing runtime handler does not cache an unloaded page (209ms)
+  ok  8 [chromium] › e2e\dashboard-recovery.spec.ts:136:1 › provenance retains valid future source years and keeps estimate choices out of observed evidence (267ms)
+  ok  9 [chromium] › e2e\metric-definitions.spec.ts:7:1 › Section 1: real chart datasets, KPI rates, labels and refresh use the same financial definitions (2.0s)
+  ok 10 [chromium] › e2e\metric-definitions.spec.ts:66:1 › Section 1: filtered sales summary shows weighted rates and reconciliation in every computation mode (236ms)
+  ok 11 [chromium] › e2e\sales-sectors.spec.ts:7:1 › area ranking keeps buyer ownership separate from mapped geography (2.0s)
+  ok 12 [chromium] › e2e\sales-sectors.spec.ts:46:1 › product prioritization follows trailing periods and custom-range monthly granularity (2.3s)
+  ok 13 [chromium] › e2e\sales-sectors.spec.ts:92:1 › custom date range anchors to the date range and keeps missing days as gaps (753ms)
+
+  13 passed (19.0s)

@@ -49,6 +49,11 @@ export const SALES_DATA_PAGE = `
         <div class="uploaded-data-field"><label for="salesDataDetail">Detail</label><select id="salesDataDetail"><option value="compact">Compact</option><option value="full">Full Ledger</option></select></div>
         <div class="uploaded-data-field uploaded-data-search"><label for="salesDataSearch">Search</label><input id="salesDataSearch" type="search" placeholder="Area, Product, DR Number..." /></div>
       </div>
+      <div id="salesDrilldownContext" class="sales-note" hidden>
+        <p id="salesDrilldownScope" aria-live="polite"></p>
+        <button type="button" class="sales-secondary-button" id="salesDrilldownBack">Return to investigation</button>
+        <button type="button" class="sales-secondary-button" id="salesDrilldownClear">Clear investigation filters</button>
+      </div>
       <div class="sales-status-grid" id="salesComputationGrid"></div>
       <p class="sales-note">Net sales revenue = sales after discounts. Gross profit = workbook margin amount before operating expenses. Gross margin % = total gross profit ÷ total net sales. Units sold are delivered quantities in source units; mixed packs are not equivalent units or total market demand.</p>
       <p class="sales-note" id="salesFinancialReconciliation" aria-live="polite"></p>

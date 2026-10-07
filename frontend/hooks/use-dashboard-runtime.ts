@@ -1,4 +1,6 @@
 import { installStlPanel } from '@/services/api/stl-panel'
+import { installDiagnosticPanel } from '@/services/api/diagnostic-panel'
+import { installSalesOutputSections } from '@/services/api/sales-output-sections'
 import { useEffect, useRef, useState } from 'react'
 import Chart from 'chart.js/auto'
 import { MEDSHIELD_MARKUP, MEDSHIELD_STYLE } from '@/lib/medshieldReference'
@@ -32,6 +34,7 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
     if (!root) return
 
     let disposeStl = () => {}
+    let disposeDiagnostics = () => {}
     let disposed = false
     let activeListeners: ListenerRecord[] = []
 
@@ -106,6 +109,8 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
         }
         
         installDashboardEnhancements(root, activeListeners, user)
+        disposeDiagnostics = installDiagnosticPanel(root)
+        installSalesOutputSections(root)
 
         void refreshDashboardFromGateway()
           .then(() => {
@@ -136,6 +141,7 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
     return () => {
       disposed = true
       disposeStl()
+      disposeDiagnostics()
       setPortalContainer(null)
       for (const { target, type, listener, options } of activeListeners) {
         target.removeEventListener(type, listener, options)
@@ -147,7 +153,8 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
         'showPage', 'toggleTheme', 'openHelp', 'closeNavigation', 'toggleNavigation',
         'setComparisonMode', 'setYear', 'setYoYYear', 'setDescriptivePeriod', 'refreshComparison', 'applyDatasetPatch', 'buildCharts',
         'setPlanningData', 'setPlanningResult', 'getPlanningRequest', 'invalidatePlan', 'changePlanningScope', 'requestPlanSolve', 'exportPlanningCSV', 'setPrescriptivePreset', 'resetPlanningDefaults', 'setExternalRegressionData', 'renderExternalRegression', 'changeRegressionScope', 'exportExternalRegressionCSV', 'setForecastValidationData', 'renderForecastValidation', 'changeForecastScope', 'exportForecastValidationCSV', 'setSalesSectorsData', 'renderSalesSectors', 'setSalesHeatmapData', 'changeHeatmapCategory', 'renderSalesHeatmap', 'exportSalesHeatmapCSV',
-        'renderProductPrioritizationTimeline', 'configureProductYearControls'
+        'renderProductPrioritizationTimeline', 'configureProductYearControls',
+        'openDiagnosticDrilldown', 'getDiagnosticScope'
       ]
       for (const name of handlers) {
         delete (window as any)[name]

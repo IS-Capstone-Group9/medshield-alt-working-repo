@@ -164,6 +164,8 @@ export interface DatabricksStatementResult {
 export interface DatabricksStatementOptions {
   rowLimit?: number
   timeoutMs?: number
+  /** Values are sent separately from SQL, using Databricks named parameters. */
+  parameters?: Array<{ name: string; value: string; type: 'STRING' | 'DATE' }>
 }
 
 const TERMINAL_STATES = new Set<StatementState>([
@@ -298,6 +300,7 @@ export async function executeDatabricksStatement(
       catalog: config.catalog,
       schema: config.schema,
       statement,
+      ...(options.parameters?.length ? { parameters: options.parameters } : {}),
       wait_timeout: '50s',
       on_wait_timeout: 'CONTINUE',
       format: 'JSON_ARRAY',

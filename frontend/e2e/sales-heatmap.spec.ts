@@ -25,6 +25,7 @@ test('quantity heat map follows the shared custom-year and daily period grain', 
       {product:'B',period:'2025-01',area:'Batangas',quantity:100,row_count:1},
     ],daily:[],source:{file:'reviewed-test',generated_at:'2026-09-12',included_rows:15,excluded:{estimated:2}}})
   })
+  await page.getByRole('tab',{name:'Quantities',exact:true}).click()
   await expect(page.locator('#revenueHeatmapGrid tbody tr').first().locator('th')).toHaveText('Units')
   await expect(page.locator('[data-period="2025-01"]')).toHaveAttribute('data-value','0')
   await expect(page.locator('[data-period="2024-02"]')).toHaveCount(0)
@@ -33,7 +34,7 @@ test('quantity heat map follows the shared custom-year and daily period grain', 
   await page.selectOption('#heatmapMeasure','units')
   await page.selectOption('#heatmapCategory','Antipyretics (proposed)')
   await expect(page.locator('#heatmapProduct')).toHaveValue('B')
-  await expect(page.locator('#salesHeatmapTitle')).toContainText('Medicine B')
+  await expect(page.locator('#heatmapStatus')).toContainText('Medicine B')
   await expect(page.locator('[data-period="2025-01"]')).toHaveAttribute('data-value','1000')
   await page.selectOption('#heatmapArea','Batangas')
   await expect(page.locator('[data-period="2025-01"]')).toHaveAttribute('data-value','100')

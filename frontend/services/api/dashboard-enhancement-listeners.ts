@@ -62,12 +62,14 @@ function activateDashboardPage(root: HTMLElement, name: DashboardPageName, navIt
   ;(window as any).configureProductYearControls?.(name)
   refreshDashboardModulesForPage(name)
 
-  if (document.body.classList.contains('nav-hidden')) {
+  if (document.body.classList.contains('nav-hidden') || document.body.classList.contains('nav-open')) {
     ;(window as any).closeNavigation?.()
   }
 
   window.requestAnimationFrame(() => {
     window.setTimeout(() => {
+      // Navigation may change again while this render waits for layout.
+      if (!targetPage.isConnected || !targetPage.classList.contains('active')) return
       ;(window as any).buildCharts?.()
       if (name === 'products') {
         ;(window as any).buildTables?.()
@@ -134,12 +136,63 @@ export function installDashboardEnhancements(
     pageSize: 25,
     computation: 'overview' as const,
     detailLevel: 'compact' as 'compact' | 'full',
+    startDate: undefined as string | undefined,
+    endDate: undefined as string | undefined,
+    productId: undefined as string | undefined,
+    area: undefined as string | undefined,
+    sector: undefined as string | undefined,
+    region: undefined as string | undefined,
+    territory: undefined as string | undefined,
+    category: undefined as string | undefined,
+    release: undefined as Record<string, unknown> | undefined,
+    requestRevision: 0,
   }
 
-  const refreshSalesView = () =>
-    loadSalesDataView(root, salesState).catch((error: unknown) => {
-      setSalesViewError(root, error instanceof Error ? error.message : 'Sales data could not be loaded.')
+  const refreshSalesView = () => {
+    const revision = salesState.requestRevision + 1
+    root.querySelector('#salesDataTable')?.replaceChildren()
+    root.querySelector('#salesComputationGrid')?.replaceChildren()
+    root.querySelector('#salesFinancialReconciliation')?.replaceChildren()
+    for (const id of ['salesDataPrevious','salesDataNext']) { const control = root.querySelector<HTMLButtonElement>('#' + id); if (control) control.disabled = true }
+    const status = root.querySelector('#salesDataStatus'); if (status) status.textContent = 'Loading selected transaction evidence…'
+    return loadSalesDataView(root, salesState).catch((error: unknown) => {
+      if (revision === salesState.requestRevision) setSalesViewError(root, error instanceof Error ? error.message : 'Sales data could not be loaded.')
     })
+  }
+
+  const clearInvestigation = () => {
+    for (const field of ['startDate','endDate','productId','area','sector','region','territory','category','release'] as const) salesState[field] = undefined
+    salesState.page = 1
+    const context = root.querySelector<HTMLElement>('#salesDrilldownContext')
+    if (context) context.hidden = true
+    const year = root.querySelector<HTMLSelectElement>('#salesDataYear')
+    if (year) year.disabled = false
+  }
+  const openTransactions = (event: Event) => {
+    const detail = (event as CustomEvent).detail
+    clearInvestigation()
+    Object.assign(salesState, { startDate: detail.start_date, endDate: detail.end_date, productId: detail.product_id,
+      area: detail.area, sector: detail.sector, region: detail.region, territory: detail.territory, category: detail.category,
+      release: detail.release, year: 'all', search: '', qualityStatus: 'all', page: 1, detailLevel: 'full' })
+    for (const [id, value] of [['salesDataYear','all'], ['salesDataSearch',''], ['salesDataQuality','all'], ['salesDataDetail','full']]) {
+      const input = root.querySelector<HTMLInputElement | HTMLSelectElement>('#' + id)
+      if (input) input.value = value
+    }
+    const year = root.querySelector<HTMLSelectElement>('#salesDataYear'); if (year) year.disabled = true
+    const context = root.querySelector<HTMLElement>('#salesDrilldownContext'); if (context) context.hidden = false
+    const label = root.querySelector('#salesDrilldownScope')
+    if (label) label.textContent = [detail.label, detail.start_date + ' – ' + detail.end_date, detail.product_id && 'Product ID: ' + detail.product_id, detail.area && 'Raw area: ' + detail.area, detail.sector && 'Buyer sector: ' + detail.sector, detail.region, detail.territory].filter(Boolean).join(' › ') + '. Exact filters retained for paging and summary; all retained rows are visible.'
+    const nav = root.querySelector<HTMLElement>('[data-dashboard-page="sales-data"]')
+    if (nav) activateDashboardPage(root, 'sales-data', nav)
+    void refreshSalesView()
+  }
+  window.addEventListener('medshield:transactions-open', openTransactions)
+  activeListeners.push({ target: window, type: 'medshield:transactions-open', listener: openTransactions })
+  root.querySelector('#salesDrilldownClear')?.addEventListener('click', () => { clearInvestigation(); void refreshSalesView() })
+  root.querySelector('#salesDrilldownBack')?.addEventListener('click', () => {
+    const nav = root.querySelector<HTMLElement>('[data-dashboard-page="revenue"]'); if (nav) activateDashboardPage(root, 'revenue', nav)
+    root.querySelector<HTMLButtonElement>('[data-sales-output-tab="diagnostics"]')?.click()
+  })
 
   root.querySelector('#salesDataYear')?.addEventListener('change', (event) => {
     salesState.year = (event.target as HTMLSelectElement).value

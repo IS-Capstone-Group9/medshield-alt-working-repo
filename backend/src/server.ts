@@ -1,16 +1,17 @@
 import { catalogProducts, parseCatalogCategory, CatalogInputError } from './catalogContract'
 import { invalidScalarQueryKey } from './monthlyQuery'
+import { SalesDiagnosticInputError } from './salesDiagnostics'
 import { readPredictiveRelease, PredictiveInputError } from './predictiveRelease'
 import path from 'node:path'
-import { createHash } from 'node:crypto'
 import { existsSync } from 'node:fs'
-import { appendFile, readFile } from 'node:fs/promises'
 import { config as loadDotenv } from 'dotenv'
 import cors from 'cors'
 import express, { NextFunction, Request, Response } from 'express'
 import rateLimit from 'express-rate-limit'
 
 import { verifyLocalLogin } from './localAuth'
+import { authenticateSelectedMode, resolveAuthenticationMode } from './authConfiguration'
+import { AuditPersistenceError, createAuditStore } from './auditStore'
 import {
   databricksConfigured,
   getDatabricksConnectionStatus,
@@ -28,6 +29,7 @@ import {
   getDatabricksSalesStatus,
   getDatabricksSalesSummary,
   getDatabricksSalesTransactions,
+  getDatabricksSalesDiagnostics,
   getDatabricksWeatherEffects,
   solveDatabricksPlanningScenario,
 } from './databricksDashboard'
@@ -71,6 +73,8 @@ function loadEnvironment(): void {
 }
 
 loadEnvironment()
+// Fail startup for incomplete Supabase configuration instead of selecting demo auth.
+const authenticationMode = resolveAuthenticationMode()
 
 const app = express()
 const port = Number(process.env.PORT ?? '5000')
@@ -139,17 +143,8 @@ const weatherRefreshLimiter = rateLimit({
   legacyHeaders: false,
 })
 
-function envBool(name: string, defaultValue = false): boolean {
-  const value = process.env[name]
-  if (!value) {
-    return defaultValue
-  }
-
-  return ['1', 'true', 'yes', 'on'].includes(value.trim().toLowerCase())
-}
-
 function supabaseEnabled(): boolean {
-  return envBool('USE_SUPABASE', true) && Boolean(process.env.SUPABASE_URL?.trim()) && Boolean(process.env.SUPABASE_ANON_KEY?.trim())
+  return authenticationMode === 'supabase'
 }
 
 app.use((_, res, next) => {
@@ -196,15 +191,6 @@ async function supabaseAuthFetch(pathName: string, init: RequestInit): Promise<g
   })
 }
 
-interface AuditLogEntry {
-  username?: string
-  action: string
-  detail: string
-  ip_address?: string
-  user_agent?: string
-  created_at: string
-}
-
 async function supabaseDbFetch(
   pathName: string,
   init: RequestInit,
@@ -214,7 +200,6 @@ async function supabaseDbFetch(
   const serviceRoleKey =
     process.env.SUPABASE_SECRET_KEY ||
     process.env.SUPABASE_SERVICE_ROLE_KEY ||
-    process.env.SUPABASE_ANON_KEY ||
     ''
   if (!baseUrl || !serviceRoleKey) {
     throw new Error('Supabase DB is not configured')
@@ -236,72 +221,15 @@ async function supabaseDbFetch(
   return await fetch(`${baseUrl}/rest/v1${pathName}`, {
     ...init,
     headers,
+    signal: init.signal ?? AbortSignal.timeout(10000),
   })
 }
 
-let lastAuditHash = '0000000000000000000000000000000000000000000000000000000000000000'
-
-async function getLastAuditHash(): Promise<string> {
-  const logPath = path.resolve(__dirname, '..', 'data', 'local_audit_logs.jsonl')
-  if (!existsSync(logPath)) {
-    return '0000000000000000000000000000000000000000000000000000000000000000'
-  }
-  try {
-    const raw = await readFile(logPath, 'utf8')
-    const lines = raw.trim().split('\n').filter(Boolean)
-    if (lines.length > 0) {
-      const last = JSON.parse(lines[lines.length - 1])
-      if (last.entry_hash) return String(last.entry_hash)
-    }
-  } catch (err) {
-    console.error('Error reading previous audit hash:', err)
-  }
-  return '0000000000000000000000000000000000000000000000000000000000000000'
-}
-
-async function persistAuditLog(rawEntry: {
-  username: string
-  action: string
-  detail: string
-  ip_address: string
-  user_agent: string
-  created_at: string
-}): Promise<{ ok: boolean; entry_hash: string; previous_hash: string }> {
-  const previous_hash = await getLastAuditHash()
-  const hashPayload = `${previous_hash}:${rawEntry.created_at}:${rawEntry.username}:${rawEntry.action}:${rawEntry.detail}`
-  const entry_hash = createHash('sha256').update(hashPayload).digest('hex')
-  
-  const entry = {
-    ...rawEntry,
-    previous_hash,
-    entry_hash,
-    tamper_evident: true
-  }
-  if (supabaseEnabled()) {
-    try {
-      const response = await supabaseDbFetch('/audit_logs', {
-        method: 'POST',
-        body: JSON.stringify(entry),
-      })
-      if (response.ok) {
-        return { ok: true, entry_hash, previous_hash }
-      }
-      console.warn(`Supabase audit log write returned non-OK status: ${response.status}. Falling back to local file.`)
-    } catch (err) {
-      console.error('Failed to write audit log to Supabase. Falling back to local file.', err)
-    }
-  }
-
-  // Fallback to local accounts/logs folder
-  const logPath = path.resolve(__dirname, '..', 'data', 'local_audit_logs.jsonl')
-  try {
-    await appendFile(logPath, `${JSON.stringify(entry)}\n`, 'utf8')
-  } catch (err) {
-    console.error('Failed to write local audit log:', err)
-  }
-
-  return { ok: true, entry_hash, previous_hash }
-}
+const auditStore = createAuditStore({
+  logPath: path.resolve(process.env.MEDSHIELD_AUDIT_LOG_PATH || path.resolve(__dirname, '..', 'data', 'local_audit_logs.jsonl')),
+  remoteRequest: supabaseEnabled() ? supabaseDbFetch : undefined,
+})
+const persistAuditLog = auditStore.persist
 
 async function getSupabaseAuthUser(token: string): Promise<SessionUser | null> {
   const account = await getLinkedAccount(token)
@@ -335,16 +263,14 @@ async function authenticateRequest(
     return res.status(401).json({ error: 'Authentication token is required' })
   }
 
-  let user = verifySessionToken(token)
-  let authSource: AuthenticatedRequest['authSource'] = user ? 'local' : undefined
-  if (!user && supabaseEnabled()) {
-    try {
-      user = await getSupabaseAuthUser(token)
-      authSource = user ? 'supabase' : undefined
-    } catch (error) {
-      console.error('Supabase token validation failed:', error)
-      return res.status(503).json({ error: 'Authentication service is unavailable' })
-    }
+  let user: SessionUser | null
+  try {
+    user = await authenticateSelectedMode(authenticationMode, token, {
+      local: verifySessionToken, supabase: getSupabaseAuthUser,
+    })
+  } catch (error) {
+    console.error('Authentication token validation failed:', error)
+    return res.status(503).json({ error: 'Authentication service is unavailable' })
   }
 
   if (!user) {
@@ -353,7 +279,7 @@ async function authenticateRequest(
 
   req.user = user
   req.accessToken = token
-  req.authSource = authSource
+  req.authSource = authenticationMode
   if (user.password_reset_required && !allowPasswordResetRequired) {
     return res.status(403).json({
       error: 'A password change is required before accessing MedShield.',
@@ -386,7 +312,7 @@ function requireRole(allowedRoles: string[]) {
 }
 
 function databricksDashboardFailure(res: Response, error: unknown): Response {
-  if (error instanceof DatabricksDashboardInputError || error instanceof CatalogInputError) {
+  if (error instanceof DatabricksDashboardInputError || error instanceof CatalogInputError || error instanceof SalesDiagnosticInputError) {
     return res.status(400).json({ error: error.message, code: 'INVALID_DATABRICKS_QUERY' })
   }
   if (error instanceof DatabricksSourceUnavailableError) {
@@ -495,11 +421,15 @@ app.post(
     }
 
     if (!databricksConfigured() || !supabaseWarehouseConfigured()) {
-      await persistAuditLog({
-        ...auditBase,
-        action: 'DATABRICKS_YEARLY_CANDIDATE_SYNC_BLOCKED',
-        detail: 'Yearly candidate synchronization was blocked because a backend-only integration credential is missing.',
-      })
+      try {
+        await persistAuditLog({
+          ...auditBase,
+          action: 'DATABRICKS_YEARLY_CANDIDATE_SYNC_BLOCKED',
+          detail: 'Yearly candidate synchronization was blocked because a backend-only integration credential is missing.',
+        })
+      } catch {
+        return res.status(503).json({ error: 'Yearly sync was blocked and its audit event could not be persisted.', code: 'AUDIT_PERSISTENCE_FAILED' })
+      }
       return res.status(503).json({
         error: 'Databricks or the protected Supabase warehouse connection is not configured.',
         code: 'YEARLY_SYNC_NOT_CONFIGURED',
@@ -515,6 +445,12 @@ app.post(
       })
       return res.json(result)
     } catch (error) {
+      if (error instanceof AuditPersistenceError) {
+        return res.status(503).json({
+          error: 'Candidate synchronization completed, but its audit event could not be persisted.',
+          code: error.code, candidate_sync_completed: true,
+        })
+      }
       const code =
         error instanceof DatabricksYearlySyncInProgressError
           ? error.code
@@ -528,11 +464,15 @@ app.post(
         'Databricks yearly candidate sync failed:',
         error instanceof Error ? `${error.name}: ${error.message}` : 'Unknown error',
       )
-      await persistAuditLog({
-        ...auditBase,
-        action: 'DATABRICKS_YEARLY_CANDIDATE_SYNC_FAILED',
-        detail: `Candidate-only yearly synchronization failed with code ${code}. The published dashboard facts were not changed.`,
-      })
+      try {
+        await persistAuditLog({
+          ...auditBase,
+          action: 'DATABRICKS_YEARLY_CANDIDATE_SYNC_FAILED',
+          detail: `Candidate-only yearly synchronization failed with code ${code}. The published dashboard facts were not changed.`,
+        })
+      } catch {
+        return res.status(503).json({ error: 'Candidate synchronization failed and its audit event could not be persisted.', code: 'AUDIT_PERSISTENCE_FAILED', sync_error_code: code })
+      }
 
       if (error instanceof DatabricksYearlySyncInProgressError) {
         return res.status(409).json({ error: error.message, code: error.code })
@@ -727,9 +667,21 @@ app.post('/api/sales/planning-solve', requireAuth, async (req: Request, res: Res
   } catch (error) { return databricksDashboardFailure(res, error) }
 })
 
+function salesEvidenceQuery(req: Request) {
+  return { startDate: req.query.start_date, endDate: req.query.end_date, productId: req.query.product_id,
+    area: req.query.area, sector: req.query.sector, region: req.query.region, territory: req.query.territory, category: req.query.category }
+}
+
+app.get('/api/sales/diagnostics', requireAuth, async (req: Request, res: Response) => {
+  try {
+    return res.json(await getDatabricksSalesDiagnostics(salesEvidenceQuery(req)))
+  } catch (error) { return databricksDashboardFailure(res, error) }
+})
+
 app.get('/api/sales/transactions', requireAuth, async (req: Request, res: Response) => {
   try {
     return res.json(await getDatabricksSalesTransactions({
+      ...salesEvidenceQuery(req),
       year: typeof req.query.year === 'string' ? req.query.year : undefined,
       page: typeof req.query.page === 'string' ? req.query.page : undefined,
       pageSize: typeof req.query.page_size === 'string' ? req.query.page_size : undefined,
@@ -744,6 +696,7 @@ app.get('/api/sales/transactions', requireAuth, async (req: Request, res: Respon
 app.get('/api/sales/summary', requireAuth, async (req: Request, res: Response) => {
   try {
     return res.json(await getDatabricksSalesSummary({
+      ...salesEvidenceQuery(req),
       year: typeof req.query.year === 'string' ? req.query.year : undefined,
       search: typeof req.query.search === 'string' ? req.query.search : undefined,
       qualityStatus: typeof req.query.quality_status === 'string' ? req.query.quality_status : undefined,
@@ -908,6 +861,12 @@ app.post(
       return res.json({ ok: true, message: 'Password updated. Sign in again with your new password.' })
     } catch (error) {
       console.error('Required password reset failed:', error)
+      if (error instanceof AuditPersistenceError) {
+        return res.status(503).json({
+          error: 'The password was updated, but its audit event could not be persisted. Sign in again with your new password.',
+          code: error.code, password_updated: true,
+        })
+      }
       return res.status(503).json({ error: 'Password update could not be completed. Please try again.' })
     }
   },
@@ -952,8 +911,13 @@ app.post('/api/audit', requireAuth, async (req: AuthenticatedRequest, res: Respo
     created_at: new Date().toISOString(),
   }
 
-  await persistAuditLog(entry)
-  res.json({ ok: true })
+  try {
+    const receipt = await persistAuditLog(entry)
+    return res.json({ ok: true, storage: receipt.storage, event_id: receipt.entry.event_id })
+  } catch (error) {
+    console.error('Audit persistence failed:', error instanceof Error ? error.message : 'Unknown error')
+    return res.status(503).json({ error: 'The audit event could not be persisted. Please retry.', code: 'AUDIT_PERSISTENCE_FAILED' })
+  }
 })
 
 app.get('/api/audit', requireAuth, async (req: AuthenticatedRequest, res: Response) => {
@@ -962,32 +926,14 @@ app.get('/api/audit', requireAuth, async (req: AuthenticatedRequest, res: Respon
     return res.status(403).json({ error: 'Access denied: compliance auditor role required' })
   }
 
-  if (supabaseEnabled()) {
-    try {
-      const response = await supabaseDbFetch('/audit_logs?order=created_at.desc&limit=100', {
-        method: 'GET',
-      })
-      if (response.ok) {
-        const data = await response.json()
-        return res.json(data)
-      }
-      console.warn(`Supabase audit log read returned non-OK status: ${response.status}. Falling back to local file.`)
-    } catch (err) {
-      console.error('Failed to read audit logs from Supabase. Falling back to local file.', err)
-    }
-  }
-
-  const logPath = path.resolve(__dirname, '..', 'data', 'local_audit_logs.jsonl')
-  if (!existsSync(logPath)) {
-    return res.json([])
-  }
   try {
-    const raw = await readFile(logPath, 'utf8')
-    const lines = raw.trim().split('\n').filter(Boolean).map(line => JSON.parse(line))
-    lines.reverse()
-    res.json(lines.slice(0, 100))
-  } catch (err) {
-    res.status(500).json({ error: 'Failed to retrieve local audit logs' })
+    const result = await auditStore.read()
+    res.setHeader('X-MedShield-Audit-Read-Degraded', String(result.remoteUnavailable))
+    res.setHeader('Access-Control-Expose-Headers', 'X-MedShield-Audit-Read-Degraded')
+    return res.json(result.entries)
+  } catch (error) {
+    console.error('Audit retrieval failed:', error instanceof Error ? error.message : 'Unknown error')
+    return res.status(503).json({ error: 'The audit record view is unavailable.', code: 'AUDIT_READ_FAILED' })
   }
 })
 

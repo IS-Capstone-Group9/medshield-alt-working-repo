@@ -1,4 +1,6 @@
 import unittest
+from copy import deepcopy
+from datetime import date, datetime, timezone
 from unittest.mock import patch
 
 from services.data_pipeline import build_dashboard_snapshot, sales_summary
@@ -17,15 +19,85 @@ class MetricDefinitionsTests(unittest.TestCase):
     def test_annual_grouping_uses_delivery_year_not_stale_year_field(self):
         rows=[transaction(100,20,80,2017),transaction(200,40,160,2025),transaction(999,0,999,2047)]
         rows[0]['year']=2025
-        snapshot=build_dashboard_snapshot(rows)
+        snapshot=build_dashboard_snapshot(rows, today=date(2026,10,5))
         self.assertEqual([(r['year'],r['revenue']) for r in snapshot['year_summary']],[('2017',100),('2025',200)])
         self.assertEqual(snapshot['totals']['total_revenue'],300)
 
     def test_legacy_snapshot_outliers_do_not_enter_actual_series(self):
         result=normalize_snapshot({'monthly':[{'period':p,'revenue':1,'income':1} for p in ['2047-11','2025-12','2000-01','2017-01']],
-                                   'year_summary':[{'year':y,'revenue':1,'income':1} for y in ['2000','2017','2025','2047']]})
+                                   'year_summary':[{'year':y,'revenue':1,'income':1} for y in ['2000','2017','2025','2047']]}, today=date(2026,10,5))
         self.assertEqual([r['period'] for r in result['monthly']],['2017-01','2025-12'])
         self.assertEqual([r['year'] for r in result['year_summary']],['2017','2025'])
+
+    def test_normalization_supports_later_actual_years_and_rejects_future_periods(self):
+        def source():
+            return {'monthly': [{'period':p,'revenue':1,'income':1} for p in
+                                ['2017-01','2025-12','2026-10','2026-11','2027-01','2047-11','2026-13']],
+                    'year_summary': [{'year':y,'revenue':1,'income':1} for y in ['2017','2025','2026','2027','2047']]}
+        result=normalize_snapshot(source(), today=date(2026,10,5))
+        self.assertEqual([r['period'] for r in result['monthly']],['2017-01','2025-12','2026-10'])
+        self.assertEqual([r['year'] for r in result['year_summary']],['2017','2025','2026'])
+        result=normalize_snapshot(source(), today=date(2027,1,1))
+        self.assertEqual([r['year'] for r in result['year_summary']],['2017','2025','2026','2027'])
+        self.assertEqual(result['monthly'][-1]['period'],'2027-01')
+
+    def test_future_series_cannot_leave_undated_aggregates_contaminated(self):
+        aggregates = {
+            'totals': {'total_revenue': 1000},
+            'by_area': [{'area': 'Quezon', 'revenue': 1000}],
+            'top_products': [{'product': 'A', 'revenue': 1000}],
+            'seasonality': [{'month': 'Nov', 'avg_revenue': 900}],
+        }
+        for key, aggregate in aggregates.items():
+            with self.subTest(aggregate=key):
+                source = {'monthly': [{'period': '2026-10', 'revenue': 100},
+                                      {'period': '2026-11', 'revenue': 900}], key: aggregate}
+                original = deepcopy(source)
+                with self.assertRaisesRegex(ValueError, 'rebuild the snapshot from dated historical rows'):
+                    normalize_snapshot(source, today=date(2026, 10, 5))
+                self.assertEqual(source, original)
+
+    def test_invalid_or_precoverage_periods_cannot_be_trimmed_from_aggregate_evidence(self):
+        for series in [
+            {'monthly': [{'period': '2026-13', 'revenue': 100}]},
+            {'monthly': [{'period': '2016-12', 'revenue': 100}]},
+            {'year_summary': [{'year': '2027', 'revenue': 100}]},
+            {'year_summary': [{'year': 'invalid', 'revenue': 100}]},
+        ]:
+            with self.subTest(series=series):
+                with self.assertRaisesRegex(ValueError, 'historical population cannot be verified'):
+                    normalize_snapshot({**series, 'totals': {'total_revenue': 100}}, today=date(2026, 10, 5))
+
+    def test_consistent_later_actual_snapshot_preserves_every_financial_partition(self):
+        today = date(2026, 10, 5)
+        snapshot = build_dashboard_snapshot([
+            transaction(100, 20, 80, 2025),
+            dict(transaction(200, 40, 160, 2026), date_delivered='2026-10-05'),
+            dict(transaction(900, 180, 720, 2026), date_delivered='2026-11-01'),
+        ], today=today)
+        result = normalize_snapshot(snapshot, today=today)
+        self.assertEqual([row['period'] for row in result['monthly']], ['2025-01', '2026-10'])
+        self.assertEqual([row['year'] for row in result['year_summary']], ['2025', '2026'])
+        self.assertEqual(result['totals']['total_revenue'], 300)
+        for key in ['monthly', 'year_summary', 'by_area', 'top_products']:
+            self.assertEqual(sum(row['revenue'] for row in result[key]), 300)
+        self.assertEqual([(row['month'], row['avg_revenue']) for row in result['seasonality']],
+                         [('Jan', 100), ('Oct', 200)])
+
+    def test_default_calendar_uses_manila_even_before_utc_date_rollover(self):
+        # This instant is October 1 in Manila while still September 30 in UTC.
+        instant=datetime(2026,9,30,16,0,tzinfo=timezone.utc)
+        def now(zone):
+            self.assertEqual(str(zone),'Asia/Manila')
+            return instant.astimezone(zone)
+        with patch('services.shared_snapshot.datetime') as clock:
+            clock.now.side_effect=now
+            result=normalize_snapshot({'monthly':[{'period':'2026-10','revenue':1}]})
+        self.assertEqual(result['monthly'][0]['period'],'2026-10')
+        with patch('services.data_pipeline.datetime') as clock:
+            clock.now.side_effect=now
+            result=build_dashboard_snapshot([dict(transaction(100,20,80,2026),date_delivered='2026-10-01')])
+        self.assertEqual(result['totals']['total_revenue'],100)
 
     def test_growth_exports_nominal_change_and_uses_prior_calendar_year(self):
         rows = [transaction(500, 100, 400, 2023), transaction(1000, 200, 800, 2024), transaction(1500, 300, 1200, 2025)]

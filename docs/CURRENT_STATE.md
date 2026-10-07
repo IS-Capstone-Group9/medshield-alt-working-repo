@@ -1,6 +1,36 @@
 # MedShield Current State
 
-## Descriptive historical sales candidate — 27 September 2026
+## Current local descriptive candidate — 3 October 2026
+
+The frontend now adds calendar-month sales averages, yearly observed-month coverage,
+adjacent full-month sales change, ABC sales versus source-label shares, and buyer
+ownership sales. Charts use responsive heights, compact axes, full-name tooltips
+and expandable calculation notes. These are descriptive candidate views; their
+addition does not approve the dataset, ABC policy, forecast or procurement actions.
+See [descriptive view definitions](DESCRIPTIVE_ANALYTICS_LOGIC.md) and
+[chart verification commands](TESTING.md).
+
+Read-only warehouse checks identify fact Delta **17**, Gold policy
+`sales_restart_gold_v7_independent_catalog`, and matching 72-month STL. The local
+backend now explicitly pins version 17; authenticated preview endpoints, charts
+and downloads have been checked against that identity. Publication checks pass
+72/72 and catalog financial/eligibility reconciliation passes. Dataset ID remains
+`b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4`.
+
+The [candidate evidence and recovery package](../outputs/candidate_release_20261003/README.md)
+binds table versions, bridge definitions, local bytes and validation receipts.
+No warehouse writes or notebook reruns were needed. Workspace notebook bytes and
+operator run IDs remain unverified by this SQL-based check. The package prepares
+recovery of the current candidate; a complete historical version-16 rollback is
+not verified, and restoring only the old application pin would mismatch STL.
+
+This is **ready for candidate review**, not approved publication. CEO release
+acceptance, reviewed product/geographic coverage and production rollback remain
+separate gates. Estimated allocations remain estimates, and unresolved product
+labels do not become verified medical SKUs. Earlier dated records below describe
+the preceding candidate and are retained as history.
+
+## Previous descriptive candidate — 27 September 2026
 
 The operator has deployed and run notebooks 01–06. Read-only post-deployment
 validation confirms Gold policy `sales_restart_gold_v6_reviewed_source_provenance`
@@ -145,6 +175,8 @@ Until those gates close:
 
 The executive overview shows publication and review status for unavailable predictive and operational evidence. It does not display a synthetic disease/weather threat score, fixed Prophet forecast or confidence interval, or fabricated disease/stock-out alerts. Its main revenue KPI totals observed sales only; gap estimates and combined totals are listed separately. Overview chart estimates use dashed lines and explicit legend labels, with observed source coverage disclosed in the subtitle. Historical sales continue to load from the gateway; the help text describes baseline validation and reviewed planning scenarios.
 
+The analytical output design now leads Overview with observed sales, complete observed gross profit, bounded-period matched growth and observed-month coverage. Publication status is a compact strip. Sales Diagnostics has keyboard-accessible Sales Trend, Growth, Quantities and Seasonality panels sharing the existing filters; STL retains its independent history scope. Products shows the ranking beside ABC counts and shares, with commercial columns before expandable catalog evidence. Areas leads with mapped/unmapped revenue and distinguishes revenue coverage from actual source-row coverage. Forecast and Planning expose derived takeaways, evidence status and assumptions before results. Unsolved planning KPIs remain “Not solved,” expiry remains unavailable, and allocations are explicitly scenarios for review. No dataset, mapping approval, model publication or purchase action is implied by this presentation pass. See [design verification](../outputs/analytical-output-design-20261003/README.md).
+
 ## Immediate next data step
 
 After Bronze, Silver, Gold, and the bridge complete, produce a data-acceptance record that proves:
@@ -203,3 +235,19 @@ ETS/Prophet scores or selected production method are claimed. Warehouse contract
 and 108 candidate input rows are deployed and reconciled. Model publication
 tooling is prepared; no model release is activated. See
 [operations and gates](PREDICTIVE_OPERATIONS.md) and the blueprint milestone record.
+
+## Drill-down and QA remediation checkpoint — 5 October 2026
+
+Local source implementation adds **Sales Diagnostics → Change investigation**,
+observed chart/table selection, reconciled signed month/product/raw-area/buyer
+contributions, exact filtered transaction lineage, and an exported unverified
+root-cause evidence review. Authentication/audit, deferred retry, future-year
+provenance, cookie sessions and legacy historical-date safeguards are repaired;
+the three stale isolated browser expectations are updated with their financial
+and missing-data invariants retained. See [behavior and operational limits](DRILLDOWN_DIAGNOSTICS.md)
+and [executed checks](../outputs/remediation-drilldown-20261005/README.md).
+
+This is local implementation and verification, not cloud publication. The audit
+migration file is prepared but not applied; live diagnostic SQL
+remains unverified while the configured warehouse is not RUNNING. Sales
+contributions do not establish disease, stockout, contract or pricing causes.

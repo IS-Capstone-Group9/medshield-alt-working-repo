@@ -10,7 +10,8 @@ import json
 from pathlib import Path
 import re
 
-from product_catalog import RESOLUTION_POLICY, validate_master, resolve, proposal_attributes, interchange
+from product_catalog import RESOLUTION_POLICY, validate_master, resolve, interchange
+from product_review_rules import proposal_attributes, PROPOSAL_POLICY
 
 
 def truth(value):
@@ -120,7 +121,7 @@ def run(fact_path, evidence_path, master_path, output):
     summary = {"release": receipt["release"], "fact_receipt_sha256": hashlib.sha256(payload).hexdigest(),
                "label_evidence_sha256": hashlib.sha256(evidence_path.read_bytes()).hexdigest(),
                "preparation_master_sha256": hashlib.sha256(master_path.read_bytes()).hexdigest(),
-               "resolution_policy": RESOLUTION_POLICY, "records": len(facts), "labels": len(labels),
+               "resolution_policy": RESOLUTION_POLICY, "proposal_policy": PROPOSAL_POLICY, "records": len(facts), "labels": len(labels),
                "raw_titles": len(exchange), "formatting_families": len(groups), "review_cohort_labels": len(cohort),
                "cohort_positive_sales_percent": str(running/total*100), "all_positive_sales": str(total),
                "unresolved_records": sum(r["identity_status"] != "approved" for r in enriched),

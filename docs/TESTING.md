@@ -1,13 +1,42 @@
 # Descriptive delivery verification
 
-Current target: fact Delta version 16, Gold v6 reviewed-source provenance.
+Chart additions and responsive presentation checks (from `frontend/`):
+
+```powershell
+npx tsc --noEmit --incremental false
+npx playwright test e2e/descriptive-chart-integrity.spec.ts e2e/descriptive-chart-layout.spec.ts --workers=1
+npx playwright test e2e/dashboard-chart-live.spec.ts e2e/prescriptive-planning.spec.ts --workers=1
+```
+
+The layout fixtures verify zero/negative observations, excluded gaps/estimates,
+full-month movement, grain independence, separate ABC denominators, buyer ownership
+and chart fit at 1440, 926 and 375px. The live check uses the actual navigation
+listeners and waits for each deferred data capability. Screenshots and measurements
+are saved under `outputs/descriptive-chart-polish-20261003/`.
+Do not run a production build alongside `next dev`.
+
+Current local candidate target (rechecked 2026-10-03 Manila): fact Delta version
+17, policy `sales_restart_gold_v7_independent_catalog`. This is a candidate
+preview, not CEO dataset approval. See `outputs/candidate_release_20261003/` for
+the bound receipts and remaining production rollback limitations.
 
 From `backend/`: `node --import tsx --test tests/*.test.ts`,
 `node --import tsx scripts/publication-readiness.ts`, and
 `node --import tsx scripts/validate-descriptive.ts`. The last now requires matching
 warehouse STL and checks each component's observed revenue against monthly evidence.
-The version-specific live browser test asserts the current 16/72-month receipt;
-update that explicit reviewed target only with a new version-bound receipt.
+The live browser test checks the explicitly selected candidate version and policy
+against the STL panel and downloads. Set both before running it:
+
+```powershell
+$env:MEDSHIELD_E2E_FACT_VERSION = '17'
+$env:MEDSHIELD_E2E_POLICY_VERSION = 'sales_restart_gold_v7_independent_catalog'
+npx playwright test e2e/descriptive-live.spec.ts --workers=1
+```
+
+Run this from `frontend/`, with both authenticated local servers available.
+Choose new values only after collecting a new version-bound receipt. The existing
+financial and 72-month fixture assertions describe this dataset; new source data
+requires independently verified expected totals and coverage.
 
 From `frontend/`: `node node_modules/@playwright/test/cli.js test e2e/descriptive-live.spec.ts e2e/product-prioritization.spec.ts e2e/sales-heatmap.spec.ts e2e/area-prioritization.spec.ts e2e/sales-sectors.spec.ts e2e/sales-diagnostics.spec.ts e2e/remediation-layout.spec.ts --workers=1`.
 Both local servers and the configured authenticated Databricks connection must be
@@ -166,6 +195,8 @@ Manual acceptance should also confirm:
 
 ## Documentation verification
 
+Analytical output design verification covers the Overview decision cards, four Sales panels, Products evidence details, Areas coverage, Forecast validation and Planning scenario states. The [3 October design record](../outputs/analytical-output-design-20261003/README.md) records the focused suite results and screenshots. `e2e/dashboard-chart-live.spec.ts` checks all nine tabs at 1440, 926 and 375px, plus the Sales subsections, using authenticated live Databricks data. It saves `outputs/analytical-output-design-20261003/live-layout.json` and desktop/mobile screenshots. Source readiness is required; no fixture data replaces the live source gate.
+
 For Markdown-only changes, check relative links, stale architecture terms, sales-year scope, candidate status, and generated/historical labels. Application builds are unnecessary unless behavior or commands also changed.
 
 
@@ -214,3 +245,14 @@ was corrected. Check the blueprint record for the final live retry outcome.
 Cloud DDL and candidate input persistence passed live readback. Model activation,
 rollback and actual challenger accuracy are not verified.
 Commands and dependencies are in [PREDICTIVE_OPERATIONS.md](PREDICTIVE_OPERATIONS.md).
+
+## Drill-down and QA remediation — 5 October 2026
+
+`frontend/e2e/diagnostic-drilldown.spec.ts` covers exact chart/date/dimension scope,
+signed partition reconciliation, observed/estimated isolation, retry, export, source
+identity and filtered transaction paging/summary. `dashboard-recovery.spec.ts` covers
+deferred-load retry, post-2025 provenance and cookie-restored API authentication.
+Backend `sales-diagnostics.test.ts`, `sales-diagnostics-query.test.ts`,
+`auth-configuration.test.ts` and `audit-store.test.ts` protect analytics/auth/audit boundaries.
+See [implementation and limits](DRILLDOWN_DIAGNOSTICS.md) and the
+[executed remediation record](../outputs/remediation-drilldown-20261005/README.md).

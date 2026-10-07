@@ -19,10 +19,13 @@ export const SALES_HEATMAP_MARKUP = `
     <label>Measure <select id="heatmapMeasure" onchange="renderSalesHeatmap()"><option value="units">Original-source units</option><option value="estimated">Adjusted-source units</option><option value="verified">Independently verified units</option><option value="index">Within-year index</option></select></label>
   </div>
   <p class="chart-subtitle" id="heatmapStatus" role="status">Loading product-level quantities…</p>
-  <div id="revenueHeatmapGrid" style="overflow-x:auto;margin-top:12px;min-height:36px;"></div>
-  <p id="heatmapLegend" class="chart-subtitle" style="margin:12px 0;"></p>
   <p id="heatmapInsight" style="margin:12px 0;" aria-live="polite"></p>
+  <p id="quantityTrendMeaning" class="chart-subtitle"></p>
   <div class="chart-wrap h260"><canvas id="quantityTrendChart" aria-label="Monthly units sold for the selected product" role="img"></canvas></div>
+  <details style="margin-top:12px;" id="quantityHeatmapDetail"><summary>Inspect exact quantities and heatmap</summary>
+    <div id="revenueHeatmapGrid" style="overflow-x:auto;margin-top:12px;min-height:36px;"></div>
+    <p id="heatmapLegend" class="chart-subtitle" style="margin:12px 0;"></p>
+  </details>
   <details style="margin-top:12px;"><summary>Source and calculation</summary><p id="heatmapSource" style="margin-top:8px;"></p>
     <p>Quantities are recorded source units for the selected source label; pack equivalence and medical SKU identity are not verified. Unobserved months remain unavailable. Original-source and adjusted-source quantities are separate selections. File-level adjusted provenance does not mean every row was substituted. Verified services are excluded from physical quantities. A within-year index divides each month by that year's monthly mean and requires all 12 observed months and a positive mean. It describes relative intensity; it does not prove recurring seasonality.</p>
   </details>
@@ -111,8 +114,8 @@ function renderSalesHeatmap() {
   });
   const format = value => value === null ? '—' : value.toLocaleString('en-PH',{maximumFractionDigits:measure==='units'?2:2});
   const unit = measure!=='index' ? (product?.unit || 'source units') : '× selected-year monthly mean';
-  document.getElementById('salesHeatmapTitle').textContent = (yearly?'Yearly':daily?'Daily':'Monthly') + (measure==='index'?' within-year index':measure==='estimated'?' adjusted-source units':measure==='verified'?' independently verified units':' original-source units') + ' — ' + (product?.label || 'No product');
-  const max = Math.max(0,...salesHeatmapView.map(row=>row.value??0));
+  document.getElementById('salesHeatmapTitle').textContent = (yearly?'Yearly':daily?'Daily':'Monthly') + (measure==='index'?' within-year index':measure==='estimated'?' adjusted-source units':measure==='verified'?' independently verified units':' original-source units');
+  const max = Math.max(0,...salesHeatmapView.map(row=>Math.abs(row.value??0)));
   const grid = document.getElementById('revenueHeatmapGrid');
   const table = document.createElement('table'); table.className='product-table'; table.style.minWidth='780px';
   const header = table.createTHead().insertRow();
@@ -121,10 +124,10 @@ function renderSalesHeatmap() {
   const body=table.createTBody();
   const tr=body.insertRow();const rowLabel=document.createElement('th');rowLabel.scope='row';rowLabel.textContent=measure!=='index'?'Units':'Index';tr.appendChild(rowLabel);
   salesHeatmapView.forEach(row=>{
-      const td=tr.insertCell(); const ratio=max>0 && row.value!==null?row.value/max:0;
+      const td=tr.insertCell(); const ratio=max>0 && row.value!==null?Math.abs(row.value)/max:0;
       td.textContent=format(row.value);td.dataset.period=row.period;td.dataset.value=row.value===null?'':String(row.value);
       td.style.padding='10px 7px';td.style.textAlign='center';td.style.border='2px solid white';
-      td.style.background=row.value===null?'#E5E7EB':ratio>.75?'#1E3A5F':ratio>.5?'#3D6688':ratio>.25?'#9CB7CC':'#EAF2F8';
+      td.style.background=row.value===null?'#E5E7EB':row.value===0?'#FFFFFF':row.value<0?(ratio>.5?'#9F352E':ratio>.25?'#E6A49E':'#FCE9E7'):ratio>.75?'#1E3A5F':ratio>.5?'#3D6688':ratio>.25?'#9CB7CC':'#EAF2F8';
       td.style.color=ratio>.5 && row.value!==null?'white':'#1A2B3C';
       td.tabIndex=0;
       const tooltip=row.period+': '+(row.value===null?'Unavailable':format(row.value)+' '+unit)+'; '+(row.quantity===null?'no observed records':row.quantity+' source units; '+row.rows+' records');
@@ -134,13 +137,16 @@ function renderSalesHeatmap() {
   grid.replaceChildren(table);
   const observedView=salesHeatmapView.filter(row=>row.quantity!==null);
   const peak=observedView.reduce((best,row)=>!best||row.quantity>best.quantity?row:best,null);
-  document.getElementById('heatmapStatus').textContent=observedView.length+' of '+salesHeatmapView.length+' '+(yearly?'years':daily?'days':'months')+' have '+evidenceLabel+' records. '+(product?.category||'Unclassified')+'; '+(area==='all'?'all sales areas':area)+'.';
-  document.getElementById('heatmapLegend').textContent='Light to dark: 0–'+format(max)+' '+unit+' for this selection. Gray: unavailable; recorded zero: 0. '+(measure==='index'?'Index requires one complete year at monthly grain; switch to Monthly and select one full year.':'');
+  document.getElementById('heatmapStatus').textContent=(product?.label || 'No product')+' · '+observedView.length+' of '+salesHeatmapView.length+' '+(yearly?'years':daily?'days':'months')+' have '+evidenceLabel+' records. '+(product?.category||'Unclassified')+'; '+(area==='all'?'all sales areas':area)+'.';
+  document.getElementById('heatmapLegend').textContent='Blue: positive; red: negative; darker means larger absolute value, up to '+format(max)+' '+unit+' in this selection. White: recorded zero; gray: unavailable. Negative quantities may reflect returns or corrections; inspect the records. '+(measure==='index'?'Index requires one complete year at monthly grain; switch to Monthly and select one full year.':'');
   document.getElementById('heatmapInsight').textContent=peak ? 'Highest '+evidenceLabel+' quantity: '+peak.period+', '+peak.quantity.toLocaleString('en-PH')+' source units. This is a sales-volume observation, not evidence of a disease surge.' : 'No '+evidenceLabel+' quantities match these filters.';
   const source=salesHeatmapData.source;
   document.getElementById('heatmapSource').textContent=source.file+' · Snapshot: '+(source.generated_at||'unknown')+' · '+source.included_rows+' included records; '+Object.entries(source.excluded).map(([key,value])=>key+': '+value).join(', ')+'. Mapping: '+(product?.mapping_status||'unmapped')+'. '+(product?.pack_size?'Source pack label: '+product.pack_size+'. ':'')+'Identity: '+(product?.identity_status || 'needs_review')+'; item kind: '+(product?.item_kind || 'unknown')+'; aliases: '+(product?.original_aliases || []).join('; ')+'. Adjusted provenance is file-level. Aliases are not merged without approval. Shared historical period: '+descriptivePeriodLabel()+'.';
   const chronological=salesHeatmapView.slice().sort((a,b)=>a.period.localeCompare(b.period));
-  createChart('quantityTrendChart', {type:'line',data:{labels:chronological.map(row=>row.period),datasets:[{label:evidenceLabel+' units',data:chronological.map(row=>row.quantity),borderColor:'#1E3A5F',pointRadius:3,tension:0,spanGaps:false}]},options:{...baseChartOptions(),plugins:{...baseChartOptions().plugins,tooltip:{callbacks:{label:context=>context.raw===null?'Unavailable':Number(context.raw).toLocaleString('en-PH')+' source units'}}},scales:{x:{ticks:{maxTicksLimit:16}},y:{beginAtZero:true,title:{display:true,text:'Units sold (source units)'},ticks:{callback:value=>Number(value).toLocaleString('en-PH')}}}}});
+  const indexMode=measure==='index';
+  document.getElementById('quantityTrendMeaning').textContent=indexMode?'Within-year index: 1× is this complete year’s monthly mean; this is not proof of recurring seasonality. The line and heatmap use the same measure.':'Recorded source-unit quantities for one product; missing periods stay blank. Negative values remain visible. Open the heatmap for exact values.';
+  document.getElementById('quantityTrendChart').setAttribute('aria-label',(indexMode?'Within-year quantity index':'Recorded source-unit quantities')+' for '+(product?.label||'selected product')+'; '+descriptivePeriodLabel());
+  createChart('quantityTrendChart', {type:'line',data:{labels:chronological.map(row=>row.period),datasets:[{label:indexMode?'Within-year index':evidenceLabel+' units',data:chronological.map(row=>row.value),borderColor:'#1E3A5F',pointRadius:chronological.length>60?1.5:3,tension:0,spanGaps:false}]},options:{...baseChartOptions(),plugins:{...baseChartOptions().plugins,legend:{display:false},tooltip:{callbacks:{title:contexts=>(product?.label||'Selected product')+' · '+chronological[contexts[0]?.dataIndex]?.period,label:context=>context.raw===null?'Unavailable':Number(context.raw).toLocaleString('en-PH')+(indexMode?' × monthly mean':' source units')}}},scales:{x:{ticks:{autoSkip:true,maxTicksLimit:window.innerWidth<600?5:12,maxRotation:0}},y:{beginAtZero:true,title:{display:true,text:indexMode?'Index (× monthly mean)':'Units sold (source units)'},ticks:{callback:value=>Number(value).toLocaleString('en-PH',{notation:'compact',maximumFractionDigits:1})}}}}});
 }
 
 function exportSalesHeatmapCSV() {

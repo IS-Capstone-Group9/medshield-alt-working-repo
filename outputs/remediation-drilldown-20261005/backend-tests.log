@@ -1,0 +1,325 @@
+TAP version 13
+# Subtest: local persistence creates its directory, serializes concurrent writers, and resumes the durable chain
+ok 1 - local persistence creates its directory, serializes concurrent writers, and resumes the durable chain
+  ---
+  duration_ms: 605.5735
+  ...
+# Subtest: both exhausted persistence paths reject instead of acknowledging a lost event
+ok 2 - both exhausted persistence paths reject instead of acknowledging a lost event
+  ---
+  duration_ms: 90.6828
+  ...
+# Subtest: fallback records remain discoverable after a successful remote read and legacy records make no integrity claim
+ok 3 - fallback records remain discoverable after a successful remote read and legacy records make no integrity claim
+  ---
+  duration_ms: 46.8425
+  ...
+# Subtest: remote RPC receipt is checked and a committed remote event with a lost receipt is deduplicated from fallback
+ok 4 - remote RPC receipt is checked and a committed remote event with a lost receipt is deduplicated from fallback
+  ---
+  duration_ms: 22.5046
+  ...
+# Subtest: valid remote receipts use the remote durable chain, including its predecessor
+ok 5 - valid remote receipts use the remote durable chain, including its predecessor
+  ---
+  duration_ms: 9.1012
+  ...
+# Subtest: corruption blocks append and cannot silently reset the chain; read failures cannot hide fallback evidence
+ok 6 - corruption blocks append and cannot silently reset the chain; read failures cannot hide fallback evidence
+  ---
+  duration_ms: 29.8008
+  ...
+# Subtest: remote outages explicitly mark partial reads and reject an empty unavailable view
+ok 7 - remote outages explicitly mark partial reads and reject an empty unavailable view
+  ---
+  duration_ms: 15.1858
+  ...
+# Subtest: production and incomplete Supabase configuration cannot fall back to demo auth
+ok 8 - production and incomplete Supabase configuration cannot fall back to demo auth
+  ---
+  duration_ms: 4.0507
+  ...
+# Subtest: local accounts require an explicit development mode before reading or provisioning accounts
+ok 9 - local accounts require an explicit development mode before reading or provisioning accounts
+  ---
+  duration_ms: 2.2621
+  ...
+# Subtest: Supabase mode never consults or accepts the local token validator
+ok 10 - Supabase mode never consults or accepts the local token validator
+  ---
+  duration_ms: 2.6079
+  ...
+# Subtest: intentional development sessions work, revoke, and cannot be verified in production
+ok 11 - intentional development sessions work, revoke, and cannot be verified in production
+  ---
+  duration_ms: 4.3613
+  ...
+# Subtest: category precedes ABC denominator; Top-N follows; UI and API totals and IDs agree
+ok 12 - category precedes ABC denominator; Top-N follows; UI and API totals and IDs agree
+  ---
+  duration_ms: 7.173
+  ...
+# Subtest: stable IDs do not merge same display text and input order does not alter classification
+ok 13 - stable IDs do not merge same display text and input order does not alter classification
+  ---
+  duration_ms: 1.1449
+  ...
+# Subtest: category boundary rejects structured/repeated inputs; legacy projection uses existing key
+ok 14 - category boundary rejects structured/repeated inputs; legacy projection uses existing key
+  ---
+  duration_ms: 1.4903
+  ...
+# Subtest: UI and both API classifiers agree on dominant, crossing and exact-cutoff products
+ok 15 - UI and both API classifiers agree on dominant, crossing and exact-cutoff products
+  ---
+  duration_ms: 60.1295
+  ...
+# Subtest: SQL values preserve quote, backslash and Unicode bytes without interpolation
+ok 16 - SQL values preserve quote, backslash and Unicode bytes without interpolation
+  ---
+  duration_ms: 3.074
+  ...
+# Subtest: monthly totals cannot manufacture daily observations
+ok 17 - monthly totals cannot manufacture daily observations
+  ---
+  duration_ms: 7.0519
+  ...
+# Subtest: exact dates preserve uneven sales and eligible gross profit
+ok 18 - exact dates preserve uneven sales and eligible gross profit
+  ---
+  duration_ms: 3.382
+  ...
+# Subtest: empty selections do not borrow all-history area values
+ok 19 - empty selections do not borrow all-history area values
+  ---
+  duration_ms: 5.5265
+  ...
+# Subtest: unknown profit remains null and estimates are not actual area totals
+ok 20 - unknown profit remains null and estimates are not actual area totals
+  ---
+  duration_ms: 2.1109
+  ...
+# Subtest: ABC retains the crossing item and starts the next class after exact cutoffs
+ok 21 - ABC retains the crossing item and starts the next class after exact cutoffs
+  ---
+  duration_ms: 4.3704
+  ...
+# Subtest: ABC with a zero or negative population is explicitly unclassified
+ok 22 - ABC with a zero or negative population is explicitly unclassified
+  ---
+  duration_ms: 0.4342
+  ...
+# Subtest: margin denominator is revenue for margin-eligible rows, not total revenue
+ok 23 - margin denominator is revenue for margin-eligible rows, not total revenue
+  ---
+  duration_ms: 0.3971
+  ...
+# Subtest: full population determines ABC before cohort selection
+ok 24 - full population determines ABC before cohort selection
+  ---
+  duration_ms: 42.9135
+  ...
+# Subtest: negative revenue stays in totals and holds cumulative classification
+ok 25 - negative revenue stays in totals and holds cumulative classification
+  ---
+  duration_ms: 0.733
+  ...
+# Subtest: estimates are excluded; absent revenue is not observed zero
+ok 26 - estimates are excluded; absent revenue is not observed zero
+  ---
+  duration_ms: 2.6017
+  ...
+# Subtest: candidate ABC ranks positive sales without concealing returns
+ok 27 - candidate ABC ranks positive sales without concealing returns
+  ---
+  duration_ms: 0.7946
+  ...
+# Subtest: candidate ABC cannot infer gross sales from a net aggregate
+ok 28 - candidate ABC cannot infer gross sales from a net aggregate
+  ---
+  duration_ms: 0.3989
+  ...
+# Subtest: concurrent requests pin one fact version and all detail reads use it
+ok 29 - concurrent requests pin one fact version and all detail reads use it
+  ---
+  duration_ms: 63.3476
+  ...
+# Subtest: fixed origin last value and means never consume held-out actuals
+ok 30 - fixed origin last value and means never consume held-out actuals
+  ---
+  duration_ms: 9.9945
+  ...
+# Subtest: seasonal naive recurs only to origin-known matching calendar months
+ok 31 - seasonal naive recurs only to origin-known matching calendar months
+  ---
+  duration_ms: 0.4719
+  ...
+# Subtest: common observations intersect exact keys, not minimum counts
+ok 32 - common observations intersect exact keys, not minimum counts
+  ---
+  duration_ms: 0.7677
+  ...
+# Subtest: metrics preserve signed returns and unavailable denominators
+ok 33 - metrics preserve signed returns and unavailable denominators
+  ---
+  duration_ms: 0.3965
+  ...
+# Subtest: Manila rollover and stale display use true lead; unsupported future stays unavailable
+ok 34 - Manila rollover and stale display use true lead; unsupported future stays unavailable
+  ---
+  duration_ms: 1.5718
+  ...
+# Subtest: bounded extraction handles more than 150 months and rejects truncation/duplicates
+ok 35 - bounded extraction handles more than 150 months and rejects truncation/duplicates
+  ---
+  duration_ms: 2.0675
+  ...
+# Subtest: actual gateway preserves missing/zero, excludes future, isolates Unknown and fails on warehouse outage
+ok 36 - actual gateway preserves missing/zero, excludes future, isolates Unknown and fails on warehouse outage
+  ---
+  duration_ms: 78.7803
+  ...
+# Subtest: monthly year permits omitted, historical, and future years
+ok 37 - monthly year permits omitted, historical, and future years
+  ---
+  duration_ms: 2.4852
+  ...
+# Subtest: monthly year rejects malformed, partial, repeated, and structured values
+ok 38 - monthly year rejects malformed, partial, repeated, and structured values
+  ---
+  duration_ms: 0.4842
+  ...
+# Subtest: monthly filtering preserves all rows or selects only the complete year
+ok 39 - monthly filtering preserves all rows or selects only the complete year
+  ---
+  duration_ms: 1.8991
+  ...
+# Subtest: repeated and structured filters cannot silently turn into all-history queries
+ok 40 - repeated and structured filters cannot silently turn into all-history queries
+  ---
+  duration_ms: 0.5636
+  ...
+# Subtest: acceptance binds exact source and preserves independent publication decision
+ok 41 - acceptance binds exact source and preserves independent publication decision
+  ---
+  duration_ms: 3.5145
+  ...
+# Subtest: reject malformed or unsupported acceptance and zero assertions
+ok 42 - reject malformed or unsupported acceptance and zero assertions
+  ---
+  duration_ms: 1.0119
+  ...
+# Subtest: strict filters reject repeated, structured, unknown and malformed values
+ok 43 - strict filters reject repeated, structured, unknown and malformed values
+  ---
+  duration_ms: 128.1489
+  ...
+# Subtest: calendar counts true lead and keeps unsupported display months null
+ok 44 - calendar counts true lead and keeps unsupported display months null
+  ---
+  duration_ms: 2.4779
+  ...
+# Subtest: mixed runs, incomplete manifest, unsupported predictions, bad intervals fail closed
+ok 45 - mixed runs, incomplete manifest, unsupported predictions, bad intervals fail closed
+  ---
+  duration_ms: 1.7631
+  ...
+# Subtest: empty, unsupported, unpublished, outage and pointer rollback stay distinct
+ok 46 - empty, unsupported, unpublished, outage and pointer rollback stay distinct
+  ---
+  duration_ms: 3.864
+  ...
+# Subtest: artifact-bound review is required and interrupted staging never activates
+ok 47 - artifact-bound review is required and interrupted staging never activates
+  ---
+  duration_ms: 3.1351
+  ...
+# Subtest: CSV supports quoted evidence and rejects broken contracts
+ok 48 - CSV supports quoted evidence and rejects broken contracts
+  ---
+  duration_ms: 7.2537
+  ...
+# Subtest: Pending mapping cannot inherit approved geographic identity
+ok 49 - Pending mapping cannot inherit approved geographic identity
+  ---
+  duration_ms: 1.6033
+  ...
+# Subtest: Missing evidence cannot produce a technical pass; technical pass does not grant approval
+ok 50 - Missing evidence cannot produce a technical pass; technical pass does not grant approval
+  ---
+  duration_ms: 0.6156
+  ...
+# Subtest: Matching financial totals do not excuse mislabeled replacement provenance
+ok 51 - Matching financial totals do not excuse mislabeled replacement provenance
+  ---
+  duration_ms: 0.6279
+  ...
+# Subtest: gateway binds exact scope and lineage reads to one release; distinct scopes cannot share cached data
+ok 52 - gateway binds exact scope and lineage reads to one release; distinct scopes cannot share cached data
+  ---
+  duration_ms: 75.3268
+  ...
+# Subtest: exact scope clamps leap boundaries and supports future years without fabricated data
+ok 53 - exact scope clamps leap boundaries and supports future years without fabricated data
+  ---
+  duration_ms: 7.7564
+  ...
+# Subtest: invalid and structured filters fail before data access
+ok 54 - invalid and structured filters fail before data access
+  ---
+  duration_ms: 1.4299
+  ...
+# Subtest: all external filters remain bound and overlapping long scopes keep separate sides
+ok 55 - all external filters remain bound and overlapping long scopes keep separate sides
+  ---
+  duration_ms: 1.3727
+  ...
+# Subtest: signed product changes reconcile across the full population without hiding offsets
+ok 56 - signed product changes reconcile across the full population without hiding offsets
+  ---
+  duration_ms: 2.3348
+  ...
+# Subtest: whole missing months remain null and unpaired observations are excluded from the bridge
+ok 57 - whole missing months remain null and unpaired observations are excluded from the bridge
+  ---
+  duration_ms: 0.9296
+  ...
+# Subtest: zero and negative prior denominators withhold growth; negative margin basis withholds margin
+ok 58 - zero and negative prior denominators withhold growth; negative margin basis withholds margin
+  ---
+  duration_ms: 1.0247
+  ...
+# Subtest: gross profit uses its eligible revenue basis and ineligible-only groups stay explicit
+ok 59 - gross profit uses its eligible revenue basis and ineligible-only groups stay explicit
+  ---
+  duration_ms: 0.7537
+  ...
+# Subtest: financial decimals reconcile before conversion and dropped groups fail visibly
+ok 60 - financial decimals reconcile before conversion and dropped groups fail visibly
+  ---
+  duration_ms: 1.3037
+  ...
+# Subtest: partial exact boundaries are disclosed and zero change has no contribution percentage
+ok 61 - partial exact boundaries are disclosed and zero change has no contribution percentage
+  ---
+  duration_ms: 1.0061
+  ...
+# Subtest: STL inserts calendar gaps and preserves separate contiguous segment boundaries
+ok 62 - STL inserts calendar gaps and preserves separate contiguous segment boundaries
+  ---
+  duration_ms: 33.3091
+  ...
+# Subtest: STL empty, duplicate and invalid periods fail explicitly
+ok 63 - STL empty, duplicate and invalid periods fail explicitly
+  ---
+  duration_ms: 0.9379
+  ...
+1..63
+# tests 63
+# suites 0
+# pass 63
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1836.6504

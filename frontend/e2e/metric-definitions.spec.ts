@@ -26,18 +26,32 @@ test('Section 1: real chart datasets, KPI rates, labels and refresh use the same
     })
   })
   await expect(page.locator('#salesGrossMargin')).toHaveText('20.00%')
+  await page.evaluate(() => {
+    const app = window as any
+    app.showPage('overview')
+    app.buildCharts()
+  })
   const chart = await page.evaluate(() => {
     const app = window as any
     const margin = app.Chart.getChart(document.getElementById('marginChart'))
     const baseline = app.Chart.getChart(document.getElementById('overviewBaselineChart'))
-    return { values: margin.data.datasets[0].data, labels: baseline.data.datasets.map((d: any) => d.label) }
+    return { values: margin.data.datasets[0].data, axis: margin.data.labels, labels: baseline.data.datasets.map((d: any) => d.label), sales: baseline.data.datasets[0].data, profit: baseline.data.datasets[1].data }
   })
-  expect(chart.values).toHaveLength(1)
+  expect(chart.axis).toEqual(Array.from({ length: 12 }, (_, month) => new Intl.DateTimeFormat('en-PH', {
+    month: 'short', year: '2-digit', timeZone: 'UTC',
+  }).format(new Date(Date.UTC(2025, month, 1)))))
+  expect(chart.values).toHaveLength(12)
   expect(chart.values[0]).toBeCloseTo(20)
-  expect(chart.labels).toEqual([
-    'Net Sales Revenue · Jan 1, 2025 – Dec 31, 2025',
-    'Gross Profit · Jan 1, 2025 – Dec 31, 2025',
-  ])
+  expect(chart.values.slice(1)).toEqual(Array(11).fill(null))
+  expect(chart.labels).toEqual(['Net Sales Revenue', 'Gross Profit'])
+  expect(chart.sales).toEqual([1000, ...Array(11).fill(null)])
+  expect(chart.profit).toEqual([140, ...Array(11).fill(null)])
+  await expect(page.locator('#overviewBaselineChart').locator('xpath=ancestor::div[contains(@class,"chart-card")]').locator('.chart-subtitle')).toContainText('Jan 1, 2025 – Dec 31, 2025 · 1/12 periods observed')
+  await page.evaluate(() => {
+    const app = window as any
+    app.showPage('revenue')
+    app.buildCharts()
+  })
   await page.locator('[data-metric-definitions] summary').click()
   await expect(page.locator('[data-metric-definitions]')).toContainText('transaction percentages are not averaged')
   await page.screenshot({ path: 'test-results/section-1-sales-diagnostics.png', fullPage: true })
@@ -46,7 +60,7 @@ test('Section 1: real chart datasets, KPI rates, labels and refresh use the same
     monthly: [{ period: '2025-01', revenue: 0, income: 20, margin_revenue_basis: 0 }],
   }))
   await expect(page.locator('#salesGrossMargin')).toHaveText('Unavailable')
-  expect(await page.evaluate(() => (window as any).Chart.getChart(document.getElementById('marginChart')).data.datasets[0].data)).toEqual([null])
+  expect(await page.evaluate(() => (window as any).Chart.getChart(document.getElementById('marginChart')).data.datasets[0].data)).toEqual(Array(12).fill(null))
 })
 
 test('Section 1: filtered sales summary shows weighted rates and reconciliation in every computation mode', async ({ page }) => {

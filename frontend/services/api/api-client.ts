@@ -1,5 +1,5 @@
 import { getSupabaseAccessToken, isSupabaseBrowserConfigured } from '@/lib/supabase/client'
-import { TOKEN_KEY } from '@/lib/auth-tokens'
+import { getStoredToken } from '@/lib/auth-tokens'
 
 export const API_BASE_URL = (process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:5000').replace(/\/$/, '')
 
@@ -7,9 +7,7 @@ export async function authHeaders(extra?: HeadersInit): Promise<Headers> {
   const headers = new Headers(extra)
   const token = isSupabaseBrowserConfigured()
     ? await getSupabaseAccessToken()
-    : typeof window === 'undefined'
-      ? null
-      : localStorage.getItem(TOKEN_KEY) || sessionStorage.getItem(TOKEN_KEY)
+    : getStoredToken()
   if (token) headers.set('Authorization', `Bearer ${token}`)
   return headers
 }

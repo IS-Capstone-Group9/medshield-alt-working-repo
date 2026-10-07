@@ -170,7 +170,7 @@ test.describe('MedShield DSS Enterprise Dashboard E2E Suite', () => {
     const periodSelect = page.locator('#descriptivePeriodSelect')
     const comparisonSelect = page.locator('#descriptiveComparisonSelect')
     const yearWrap = page.locator('#singleYearWrap')
-    await expect(periodSelect).toHaveValue('12')
+    await expect(periodSelect).toHaveValue('all')
     await expect(periodSelect.locator('option')).toHaveText([
       'Last 3 Months', 'Last 6 Months', 'Last 12 Months', 'All Time · Yearly', 'Custom Date Range',
     ])

@@ -2,6 +2,7 @@ import crypto from 'node:crypto'
 import { existsSync } from 'node:fs'
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises'
 import path from 'node:path'
+import { requireLocalAuthentication } from './authConfiguration'
 
 export type AccountRole = 'admin' | 'analyst' | 'manager' | 'viewer'
 
@@ -150,6 +151,7 @@ function nextAccountId(accounts: LocalAccount[]): number {
 }
 
 async function ensureDemoAdmin(accounts: LocalAccount[]): Promise<void> {
+  requireLocalAuthentication()
   const hasAdmin = accounts.some(
     (account) => account.username === DEMO_ADMIN_USERNAME || account.email === DEMO_ADMIN_EMAIL,
   )
@@ -171,6 +173,7 @@ async function ensureDemoAdmin(accounts: LocalAccount[]): Promise<void> {
 }
 
 async function withStore<T>(handler: (accounts: LocalAccount[]) => Promise<T>): Promise<T> {
+  requireLocalAuthentication()
   const run = writeChain.then(async () => {
     const accounts = (await loadAccounts()).map(normalizeAccount)
     await ensureDemoAdmin(accounts)

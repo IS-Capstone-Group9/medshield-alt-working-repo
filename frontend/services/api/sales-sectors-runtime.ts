@@ -18,6 +18,19 @@ export const SALES_SECTORS_MARKUP = String.raw`
 [data-sector-analysis] .area-evidence-item:first-child {border-left:0;background:#F4F8FB}
 [data-sector-analysis] .area-evidence-item span {display:block;font-size:9px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--text-muted)}
 [data-sector-analysis] .area-evidence-item strong {display:block;margin-top:5px;font-size:12px;line-height:1.4;color:#1E3A5F}
+[data-sector-analysis] .area-coverage-panel {margin:0 0 18px;padding:16px 18px;border:1px solid var(--border);border-radius:10px;background:var(--bg-card,#fff)}
+[data-sector-analysis] .area-coverage-panel h3 {margin:0;font-size:14px;color:var(--text-primary)}
+[data-sector-analysis] .area-coverage-panel p {margin:8px 0 0;font-size:12px;overflow-wrap:anywhere}
+[data-sector-analysis] .area-coverage-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:14px}
+[data-sector-analysis] .area-coverage-metric {min-width:0}
+[data-sector-analysis] .area-coverage-metric span {display:block;font-size:11px;color:var(--text-secondary)}
+[data-sector-analysis] .area-coverage-metric strong {display:block;margin-top:5px;font-size:21px;line-height:1.25;color:#1E3A5F;overflow-wrap:anywhere}
+[data-sector-analysis] .area-coverage-metric.unmapped strong {color:#A15C05}
+[data-sector-analysis] .area-coverage-bar {display:flex;height:10px;margin-top:14px;overflow:hidden;border-radius:4px;background:#EEF2F6}
+[data-sector-analysis] .area-coverage-bar span:first-child {background:#1E3A5F}
+[data-sector-analysis] .area-coverage-bar span:last-child {background:#D9AA68}
+[data-sector-analysis] .area-coverage-bar[hidden] {display:none}
+[data-sector-analysis] .area-coverage-panel .area-coverage-method {font-size:11px;color:var(--text-muted)}
 [data-sector-analysis] .area-kpi-grid {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 18px}
 [data-sector-analysis] .area-kpi {position:relative;min-height:116px;padding:17px 17px 15px;overflow:hidden;border:1px solid #D9E4EC;border-radius:12px;background:#fff;box-shadow:0 5px 16px rgba(30,58,95,.055)}
 [data-sector-analysis] .area-kpi::before {content:"";position:absolute;inset:0 auto 0 0;width:4px;background:#2F669A}
@@ -82,14 +95,14 @@ export const SALES_SECTORS_MARKUP = String.raw`
 [data-sector-analysis] .client-anchor-tag {font-weight:700;color:#0D7045}
 
 @media(max-width:1150px){[data-sector-analysis] .area-filter-grid{grid-template-columns:repeat(2,minmax(0,1fr))}[data-sector-analysis] .area-evidence-strip{grid-template-columns:repeat(2,minmax(0,1fr))}[data-sector-analysis] .area-kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}[data-sector-analysis] .area-chart-grid{grid-template-columns:1fr}[data-sector-analysis] .area-client-controls{grid-template-columns:1fr}}
-@media(max-width:680px){[data-sector-analysis] .area-filter-grid,[data-sector-analysis] .area-evidence-strip,[data-sector-analysis] .area-kpi-grid{grid-template-columns:1fr}[data-sector-analysis] .area-chart-wrap{height:280px}}
+@media(max-width:680px){[data-sector-analysis] .area-filter-grid,[data-sector-analysis] .area-evidence-strip,[data-sector-analysis] .area-kpi-grid{grid-template-columns:1fr}[data-sector-analysis] .area-chart-wrap{height:280px}[data-sector-analysis] .area-coverage-grid{grid-template-columns:1fr;gap:12px}[data-sector-analysis] .area-coverage-panel{padding:14px}}
 </style>
 <section class="chart-card" data-sector-analysis aria-labelledby="areaPriorityTitle">
  <div class="area-priority-header">
   <div>
    <div class="area-section-eyebrow">01 · Geographic commercial prioritization</div>
    <div class="chart-title" id="areaPriorityTitle">Where should commercial attention focus?</div>
-   <p class="area-priority-intro">Ranks CALABARZON, MIMAROPA, Bicol and the consolidated Other National group using selected-period net sales value and active-period coverage. Individual areas remain available as drill-down evidence.</p>
+   <p class="area-priority-intro">Compare regional sales and buyer ownership for the selected period. Review individual areas in the ranking table.</p>
   </div>
   <span class="status-pill status-draft">Candidate · review required</span>
  </div>
@@ -102,10 +115,22 @@ export const SALES_SECTORS_MARKUP = String.raw`
  <p id="sectorStatus" role="status" aria-live="polite">Loading area evidence…</p>
  <div class="area-evidence-strip" aria-label="Area data quality summary">
   <div class="area-evidence-item"><span>Selected scope</span><strong id="sectorScope">Unavailable</strong></div>
-  <div class="area-evidence-item"><span>Geography coverage</span><strong id="areaMappingCoverage">Unavailable</strong></div>
-  <div class="area-evidence-item"><span>Actual revenue</span><strong id="areaActualRevenue">Unavailable</strong></div>
-  <div class="area-evidence-item"><span>Estimated revenue</span><strong id="areaEstimatedRevenue">Unavailable</strong></div>
+  <div class="area-evidence-item"><span>Actual source rows mapped</span><strong id="areaMappingCoverage">Unavailable</strong></div>
+  <div class="area-evidence-item"><span>Mapped actual net sales</span><strong id="areaActualRevenue">Unavailable</strong></div>
+  <div class="area-evidence-item"><span>Mapped estimated net sales</span><strong id="areaEstimatedRevenue">Unavailable</strong></div>
  </div>
+ <section class="area-coverage-panel" id="areaCoveragePanel" aria-labelledby="areaCoverageTitle">
+  <h3 id="areaCoverageTitle">How much net sales enters the geographic rankings?</h3>
+  <p id="areaCoverageTakeaway" role="status">Geographic revenue coverage is unavailable.</p>
+  <div class="area-coverage-grid">
+   <div class="area-coverage-metric"><span>Mapped net sales</span><strong id="areaCoverageMappedRevenue">Unavailable</strong></div>
+   <div class="area-coverage-metric unmapped"><span>Unmapped net sales · excluded from ranks</span><strong id="areaUnmappedRevenue">Unavailable</strong></div>
+   <div class="area-coverage-metric"><span>Net sales mapped</span><strong id="areaRevenueCoverage">Unavailable</strong></div>
+  </div>
+  <div class="area-coverage-bar" id="areaRevenueCoverageBar" aria-hidden="true" hidden><span></span><span></span></div>
+  <p id="areaCoverageNextReview"><strong>Next review:</strong> Check client-to-geography mapping before comparing area priorities.</p>
+  <p id="areaCoverageMethod" class="area-coverage-method">Revenue coverage and source-row mapping coverage measure different things. Buyer ownership is a separate proposed classification. Candidate data and mapping require review; included records do not prove complete source reporting.</p>
+ </section>
  <div class="area-kpi-grid" aria-label="Area prioritization key metrics">
   <div class="area-kpi"><div class="area-kpi-label">Ranked regional groups</div><div class="area-kpi-value" id="areaRankedCount">—</div><div class="area-kpi-note">Three capstone regions plus Other National</div></div>
   <div class="area-kpi"><div class="area-kpi-label">Regional-group net sales</div><div class="area-kpi-value" id="areaMappedRevenue">—</div><div class="area-kpi-note" id="areaMappedRevenueNote">All mapped regional groups</div></div>
@@ -128,11 +153,12 @@ export const SALES_SECTORS_MARKUP = String.raw`
  </section>
 
  <div class="area-chart-grid">
-  <section class="area-chart-panel" aria-labelledby="areaRankChartTitle"><h3 id="areaRankChartTitle">Regional-group priority ranking</h3><p>Three capstone regions plus Other National; bars separate actual transactions from gap estimates.</p><div class="area-chart-wrap"><canvas id="sectorRevenueChart" role="img" aria-label="Ranked regional-group revenue split between actual and estimated evidence"></canvas></div></section>
-  <section class="area-chart-panel" aria-labelledby="areaParetoTitle"><h3 id="areaParetoTitle">Regional-group revenue concentration</h3><p>Regional-group revenue bars with cumulative share and an 80% reference line.</p><div class="area-chart-wrap"><canvas id="sectorParetoChart" role="img" aria-label="Regional-group revenue Pareto chart"></canvas></div></section>
+  <section class="area-chart-panel" aria-labelledby="areaRankChartTitle"><h3 id="areaRankChartTitle">Net sales by region</h3><p id="areaRankChartNote">Mapped regional groups, highest net sales first.</p><div class="area-chart-wrap"><canvas id="sectorRevenueChart" role="img" aria-label="Regional net sales split between actual and gap-estimated evidence" aria-describedby="areaRankChartNote"></canvas></div><p id="areaRegionalChartEmpty" class="area-empty" role="status" hidden></p></section>
+  <section class="area-chart-panel" aria-labelledby="areaBuyerTitle"><h3 id="areaBuyerTitle">Net sales by buyer ownership</h3><p id="areaBuyerNote">Government, Private, Internal and unclassified ownership.</p><div class="area-chart-wrap"><canvas id="sectorBuyerChart" role="img" aria-label="Buyer ownership net sales split between actual and gap-estimated evidence" aria-describedby="areaBuyerNote areaBuyerValues"></canvas></div><p id="areaBuyerEmpty" class="area-empty" role="status" hidden></p><ul id="areaBuyerValues" class="sr-only"></ul></section>
+  <section class="area-chart-panel" style="grid-column:1/-1" aria-labelledby="areaParetoTitle"><h3 id="areaParetoTitle">Regional revenue concentration</h3><p id="areaParetoNote">Cumulative share of mapped regional net sales.</p><div class="area-chart-wrap"><canvas id="sectorParetoChart" role="img" aria-label="Regional-group revenue Pareto chart" aria-describedby="areaParetoNote"></canvas></div></section>
  </div>
  <div class="area-table-wrap"><table class="product-table" id="sectorProfileTable"><caption class="sr-only">Selected-period geographic commercial priority ranking</caption></table></div>
- <details class="area-method"><summary>How ranking and evidence are calculated</summary><p><strong>Commercial priority score:</strong> <span id="areaScoreMethod">60% sales-value scale + 40% active-period coverage</span>. The score describes historical commercial presence; it is not an inventory allocation instruction.</p><p><strong>Actual:</strong> included source transactions. <strong>Gap estimate:</strong> a missing selected calendar period filled from available same-calendar history using recency weights. Financial amounts can include historical allocations whose product attribution is estimated. These are distinct from gap estimates and do not establish actual SKU quantities. Buyer groups are proposed classifications; geographic mapping status remains visible.</p><p id="sectorSource">Source evidence unavailable.</p></details>
+ <details class="area-method"><summary>How ranking and evidence are calculated</summary><p><strong>Commercial priority score:</strong> <span id="areaScoreMethod">60% sales-value scale + 40% active-period coverage</span>. The score describes historical commercial presence; it is not an inventory allocation instruction. Charts sort by net sales, while the table sorts by this score.</p><p><strong>Actual:</strong> included source transactions. <strong>Gap estimate:</strong> a missing selected calendar period filled from available same-calendar history using recency weights. Financial amounts can include historical allocations whose product attribution is estimated. These are distinct from gap estimates and do not establish actual SKU quantities. Buyer groups are proposed classifications; geographic mapping status remains visible.</p><p><strong>Chart scope:</strong> regional charts exclude unmapped geography; buyer ownership includes all selected rows. Unknown ownership does not imply unknown geography. Signed net sales retain zero and negative values. Concentration percentages are unavailable when any regional net total is negative or the total is nonpositive.</p><p id="sectorSource">Source evidence unavailable.</p></details>
 
  <section class="area-client-panel" id="clientReferenceSection" aria-labelledby="clientRefTitle">
   <div class="area-client-header">
@@ -219,6 +245,7 @@ export const SALES_SECTORS_MARKUP = String.raw`
 
 export const SALES_SECTORS_SCRIPT = String.raw`
 let salesSectorsData = null;
+let salesSectorsError = null;
 let areaPrioritySalesWeight = 60;
 let areaPriorityCoverageWeight = 40;
 const MAPPED_CLIENT_CATALOG = [
@@ -7404,12 +7431,14 @@ function setAreaPriorityWeights(salesWeight, coverageWeight) {
 }
 function setSalesSectorsData(data, error) {
  salesSectorsData = data && Array.isArray(data.rows) && data.source ? {...data,rows:data.rows.filter(r=>historicalPeriod(r.period))} : null;
+ salesSectorsError = salesSectorsData ? null : error || null;
  renderSalesSectors(error);
  if(typeof renderProductPrioritizationTimeline==='function')renderProductPrioritizationTimeline();
  if(descriptiveUsesDailyGrain() && typeof buildCharts==='function')buildCharts();
 }
 
 function renderSalesSectors(error) {
+ error = error || salesSectorsError;
  const el = id => document.getElementById(id);
  if (!el('sectorStatus')) return;
  const esc = value => String(value||'').replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
@@ -7417,12 +7446,30 @@ function renderSalesSectors(error) {
  const fmtCompact = value => new Intl.NumberFormat('en-PH',{style:'currency',currency:'PHP',notation:'compact',maximumFractionDigits:1}).format(Number(value||0));
  const fmtPct = value => Number(value||0).toLocaleString('en-PH',{minimumFractionDigits:1,maximumFractionDigits:1})+'%';
 
- ['sectorRevenueChart','sectorParetoChart'].forEach(id => { const canvas=el(id),chart=canvas&&Chart.getChart(canvas);if(chart)chart.destroy(); });
- ['sectorScope','areaMappingCoverage','areaActualRevenue','areaEstimatedRevenue','areaRankedCount','areaMappedRevenue','areaLeadingArea','areaLeadingShare','areaTopThreeShare'].forEach(id=>{if(el(id))el(id).textContent='Unavailable';});
+ ['sectorRevenueChart','sectorParetoChart','sectorBuyerChart'].forEach(id => { const canvas=el(id),chart=canvas&&Chart.getChart(canvas);if(chart)chart.destroy(); });
+ const chartEmpty=(canvasId,messageId,message)=>{
+  const wrap=el(canvasId)?.closest('.area-chart-wrap'),note=el(messageId);
+  if(wrap)wrap.hidden=Boolean(message);
+  if(note){note.hidden=!message;note.textContent=message||'';}
+ };
+ chartEmpty('sectorRevenueChart','areaRegionalChartEmpty','Loading regional sales…');
+ chartEmpty('sectorBuyerChart','areaBuyerEmpty','Loading buyer ownership…');
+ const paretoWrap=el('sectorParetoChart')?.closest('.area-chart-wrap');
+ if(paretoWrap)paretoWrap.hidden=true;
+ descriptiveOptionalChart('sectorParetoChart', 'Inspect regional concentration detail');
+ if(el('areaBuyerValues'))el('areaBuyerValues').innerHTML='';
+ if(el('areaRankChartNote'))el('areaRankChartNote').textContent='Mapped regional groups, highest net sales first.';
+ if(el('areaBuyerNote'))el('areaBuyerNote').textContent='Government, Private, Internal and unclassified ownership.';
+ if(el('areaParetoNote'))el('areaParetoNote').textContent='Regional concentration unavailable.';
+ ['sectorScope','areaMappingCoverage','areaActualRevenue','areaEstimatedRevenue','areaRankedCount','areaMappedRevenue','areaLeadingArea','areaLeadingShare','areaTopThreeShare','areaCoverageMappedRevenue','areaUnmappedRevenue','areaRevenueCoverage'].forEach(id=>{if(el(id))el(id).textContent='Unavailable';});
+ if(el('areaRevenueCoverageBar'))el('areaRevenueCoverageBar').hidden=true;
+ if(el('areaCoverageTakeaway'))el('areaCoverageTakeaway').textContent='Geographic revenue coverage is unavailable.';
+ if(el('areaCoverageNextReview'))el('areaCoverageNextReview').textContent='Next review: Restore the area source before comparing geographic priorities.';
+ if(el('areaCoverageMethod'))el('areaCoverageMethod').textContent='Buyer ownership is a separate proposed classification. Candidate data and mapping require review; included records do not prove complete source reporting.';
  if(el('sectorProfileTable'))el('sectorProfileTable').innerHTML='';
  if(el('areaRegionRollupGrid'))el('areaRegionRollupGrid').innerHTML='';
  ['sectorRegion','sectorCluster','sectorProduct','sectorEvidence'].forEach(id=>{if(el(id))el(id).disabled=!salesSectorsData;});
- if(!salesSectorsData) { el('sectorStatus').textContent=error||'Area prioritization is unavailable; no demonstration values were substituted.';if(el('sectorSource'))el('sectorSource').textContent='Source evidence unavailable.';renderClientReferenceTable();return; }
+ if(!salesSectorsData) { el('sectorStatus').textContent=error||'Area prioritization is unavailable; no demonstration values were substituted.';chartEmpty('sectorRevenueChart','areaRegionalChartEmpty',error||'Regional sales unavailable.');chartEmpty('sectorBuyerChart','areaBuyerEmpty',error||'Buyer ownership unavailable.');if(el('sectorSource'))el('sectorSource').textContent='Source evidence unavailable.';renderClientReferenceTable();return; }
 
  let categorySelect=el('sectorCategory');
  if(!categorySelect){const label=document.createElement('label');label.textContent='Product category ';categorySelect=document.createElement('select');categorySelect.id='sectorCategory';['All','Medical','Non-Medical','Unclassified'].forEach(value=>categorySelect.add(new Option(value,value)));categorySelect.onchange=()=>renderSalesSectors();label.append(categorySelect);el('sectorProduct').closest('label').parentElement.append(label);}
@@ -7446,11 +7493,20 @@ function renderSalesSectors(error) {
  });
  const scopeRows=regionRows.filter(row=>evidence==='all'||row.evidence!=='estimate');
 
- const isMapped=row=>{const area=String(row.territory||'').trim().toLowerCase();return area&&area!=='unassigned geography'&&area!=='unknown'&&area!=='unmapped';};
+ const regionalGroupNames=['CALABARZON','MIMAROPA','Bicol','Other National'];
+ const isMapped=row=>{const area=String(row.territory||'').trim().toLowerCase();return area&&area!=='unassigned geography'&&area!=='unknown'&&area!=='unmapped'&&regionalGroupNames.includes(resolveRowRegion(row));};
  const periodKey=row=>descriptiveUsesYearlyGrain()?String(row.period||row.date||'').slice(0,4):(descriptiveUsesDailyGrain()?String(row.date||row.period||''):String(row.period||''));
  const weightedCount=rows=>rows.reduce((total,row)=>total+(Number(row.row_count)||0),0);
  const revenueTotal=rows=>rows.reduce((total,row)=>total+(Number(row.revenue)||0),0);
  const mappedRows=scopeRows.filter(isMapped),unmappedRows=scopeRows.filter(row=>!isMapped(row));
+ const buyerNames=['Government','Private','Internal','Unknown'];
+ const buyerGroups=new Map(buyerNames.map(name=>[name,{name,revenue:0,actual:0,estimated:0,records:0}]));
+ scopeRows.forEach(row=>{
+  const buyer=buyerGroups.get(buyerNames.includes(row.sector)?row.sector:'Unknown');
+  const amount=Number(row.revenue)||0;
+  buyer.revenue+=amount;buyer[row.evidence==='estimate'?'estimated':'actual']+=amount;buyer.records++;
+ });
+ const buyerRanked=[...buyerGroups.values()].filter(row=>row.records>0).sort((left,right)=>right.revenue-left.revenue||left.name.localeCompare(right.name));
 
  /* Area Grouping & Ranking */
  const groups=new Map();
@@ -7464,20 +7520,26 @@ function renderSalesSectors(error) {
   current.clusters[ownership]+=revenue;groups.set(area,current);
  });
 
- const positive=[...groups.values()].filter(row=>row.revenue>0).sort((left,right)=>right.revenue-left.revenue||left.area.localeCompare(right.area));
- const maximumRevenue=positive.reduce((maximum,row)=>Math.max(maximum,row.revenue),0);
+ const areaTotals=[...groups.values()].sort((left,right)=>right.revenue-left.revenue||left.area.localeCompare(right.area));
+ const maximumRevenue=areaTotals.reduce((maximum,row)=>Math.max(maximum,row.revenue),0);
  const availablePeriods=Math.max(1,descriptiveAxisPeriods().length||new Set(scopeRows.map(periodKey).filter(Boolean)).size);
- positive.forEach(row=>{row.salesScore=maximumRevenue?Math.max(0,row.revenue)/maximumRevenue*100:0;row.coverageScore=Math.min(100,row.periods.size/availablePeriods*100);row.score=row.salesScore*areaPrioritySalesWeight/100+row.coverageScore*areaPriorityCoverageWeight/100;});
- const ranked=[...positive].sort((left,right)=>right.score-left.score||right.revenue-left.revenue||left.area.localeCompare(right.area));
+ areaTotals.forEach(row=>{row.salesScore=maximumRevenue?Math.max(0,row.revenue)/maximumRevenue*100:0;row.coverageScore=Math.min(100,row.periods.size/availablePeriods*100);row.score=row.salesScore*areaPrioritySalesWeight/100+row.coverageScore*areaPriorityCoverageWeight/100;});
+ const ranked=[...areaTotals].sort((left,right)=>right.score-left.score||right.revenue-left.revenue||left.area.localeCompare(right.area));
 
- const mappedRevenue=positive.reduce((total,row)=>total+row.revenue,0),actualRevenue=scopeRows.filter(row=>row.evidence!=='estimate').reduce((total,row)=>total+(Number(row.revenue)||0),0),estimatedRevenue=scopeRows.filter(row=>row.evidence==='estimate').reduce((total,row)=>total+(Number(row.revenue)||0),0);
- const allWeight=weightedCount(scopeRows),mappedWeight=weightedCount(mappedRows),mappingCoverage=allWeight?mappedWeight/allWeight*100:0,unmappedRevenue=revenueTotal(unmappedRows);
+ const mappedRevenue=areaTotals.reduce((total,row)=>total+row.revenue,0),actualRevenue=scopeRows.filter(row=>row.evidence!=='estimate').reduce((total,row)=>total+(Number(row.revenue)||0),0),estimatedRevenue=scopeRows.filter(row=>row.evidence==='estimate').reduce((total,row)=>total+(Number(row.revenue)||0),0);
+ const actualSourceRows=scopeRows.filter(row=>row.evidence!=='estimate');
+ const validRowCounts=actualSourceRows.every(row=>row.row_count!=null&&row.row_count!==''&&Number.isFinite(Number(row.row_count))&&Number(row.row_count)>=0);
+ const allWeight=weightedCount(actualSourceRows),mappedWeight=weightedCount(actualSourceRows.filter(isMapped)),mappingCoverage=validRowCounts&&allWeight>0?mappedWeight/allWeight*100:null,unmappedRevenue=revenueTotal(unmappedRows);
+ const hasKnownRevenue=row=>row.revenue!=null&&row.revenue!==''&&Number.isFinite(Number(row.revenue));
+ const missingRevenueRows=scopeRows.filter(row=>!hasKnownRevenue(row)).length;
+ const selectedRevenue=mappedRevenue+unmappedRevenue;
+ const revenueCoverageAvailable=scopeRows.length>0&&missingRevenueRows===0&&selectedRevenue>0&&mappedRevenue>=0&&unmappedRevenue>=0;
+ const revenueCoverage=revenueCoverageAvailable?mappedRevenue/selectedRevenue*100:null;
  const topThree=ranked.slice(0,3).reduce((total,row)=>total+row.revenue,0),leading=ranked[0];
 
  /* Regional Granularity & Rollup Aggregation Computation */
- const regionalGroupNames=['CALABARZON','MIMAROPA','Bicol','Other National'];
  const regionalRollups = regionalGroupNames.map(regName => {
-  const regAreas = positive.filter(p => p.region === regName);
+  const regAreas = areaTotals.filter(p => p.region === regName);
   const regRev = regAreas.reduce((sum, p) => sum + p.revenue, 0);
   const regActual = regAreas.reduce((sum, p) => sum + p.actual, 0);
   const regEstimated = regAreas.reduce((sum, p) => sum + p.estimated, 0);
@@ -7486,16 +7548,19 @@ function renderSalesSectors(error) {
   regAreas.forEach(area => area.periods.forEach(period => regPeriods.add(period)));
   return { name: regName, revenue: regRev, actual: regActual, estimated: regEstimated, count: regAreas.length, share: 0, leading: regLead, periods: regPeriods };
  });
- const regionalGroups=regionalRollups.filter(row=>row.revenue>0);
+ const regionalGroups=regionalRollups.filter(row=>row.count>0);
  const maximumRegionRevenue=regionalGroups.reduce((maximum,row)=>Math.max(maximum,row.revenue),0);
- regionalGroups.forEach(row=>{row.salesScore=maximumRegionRevenue?row.revenue/maximumRegionRevenue*100:0;row.coverageScore=Math.min(100,row.periods.size/availablePeriods*100);row.score=row.salesScore*areaPrioritySalesWeight/100+row.coverageScore*areaPriorityCoverageWeight/100;});
+ regionalGroups.forEach(row=>{row.salesScore=maximumRegionRevenue?Math.max(0,row.revenue)/maximumRegionRevenue*100:0;row.coverageScore=Math.min(100,row.periods.size/availablePeriods*100);row.score=row.salesScore*areaPrioritySalesWeight/100+row.coverageScore*areaPriorityCoverageWeight/100;});
  const regionalRanked=[...regionalGroups].sort((left,right)=>right.score-left.score||right.revenue-left.revenue||left.name.localeCompare(right.name));
  const regionalRevenue=regionalGroups.reduce((total,row)=>total+row.revenue,0);
+ const regionalSharesAvailable=regionalRevenue>0 && regionalGroups.every(row=>row.revenue>=0);
+ const areaSharesAvailable=mappedRevenue>0 && areaTotals.every(row=>row.revenue>=0);
+ const revenueRanked=[...regionalGroups].sort((left,right)=>right.revenue-left.revenue||left.name.localeCompare(right.name));
  const regionalActual=regionalGroups.reduce((total,row)=>total+row.actual,0);
  const regionalEstimated=regionalGroups.reduce((total,row)=>total+row.estimated,0);
- regionalRollups.forEach(row=>{row.share=regionalRevenue>0?row.revenue/regionalRevenue*100:0;});
+ regionalRollups.forEach(row=>{row.share=regionalSharesAvailable?row.revenue/regionalRevenue*100:null;});
  const leadingRegion=regionalRanked[0];
- const topThreeRegions=regionalRanked.slice(0,3).reduce((total,row)=>total+row.revenue,0);
+ const topThreeRegions=revenueRanked.slice(0,3).reduce((total,row)=>total+row.revenue,0);
 
  if (el('areaRegionRollupGrid')) {
   el('areaRegionRollupGrid').innerHTML = regionalRollups.map(regItem => {
@@ -7503,36 +7568,95 @@ function renderSalesSectors(error) {
    return '<div class="area-region-box ' + (isSel ? 'active' : '') + '" onclick="selectRollupRegion(\'' + regItem.name + '\')" title="Click to filter by ' + regItem.name + '">' +
     '<div class="area-region-name"><span>' + esc(regItem.name) + '</span><span class="status-pill status-ready" style="font-size:9px">' + regItem.count + ' ' + (regItem.count===1?'Area':'Areas') + '</span></div>' +
     '<div class="area-region-rev">' + fmtCompact(regItem.revenue) + '</div>' +
-    '<div class="area-region-sub"><span>' + fmtPct(regItem.share) + ' of regional total</span><span>' + (regItem.leading ? ('Lead: ' + esc(regItem.leading.area)) : 'No area') + '</span></div>' +
+    '<div class="area-region-sub"><span>' + (regItem.share==null?'Unavailable':fmtPct(regItem.share)) + ' of regional total</span><span>' + (regItem.leading ? ('Lead: ' + esc(regItem.leading.area)) : 'No area') + '</span></div>' +
    '</div>';
   }).join('') +
   '<div class="area-region-box total ' + (region === 'All' ? 'active' : '') + '" onclick="selectRollupRegion(\'All\')">' +
    '<div class="area-region-name"><strong>Total Regional-Group Rollup</strong><span class="status-pill status-draft" style="font-size:9px">4 Groups</span></div>' +
    '<div class="area-region-rev">' + fmtCompact(regionalRevenue) + '</div>' +
-   '<div class="area-region-sub"><span>100.0% of regional-group revenue</span><span>' + (leadingRegion ? ('#1 ' + esc(leadingRegion.name)) : '—') + '</span></div>' +
+   '<div class="area-region-sub"><span>Includes zero and negative area totals</span><span>' + (leadingRegion ? ('#1 ' + esc(leadingRegion.name)) : '—') + '</span></div>' +
   '</div>';
  }
 
  el('sectorScope').textContent=descriptivePeriodLabel()+' · '+(region==='All'?'All regional groups':region)+' · '+(cluster==='All'?'All buyer clusters':cluster)+' · '+(productLabels.get(product)||'All products')+' · '+category+' categories (services included in revenue)'+' · '+(evidence==='actual'?'Actual only':'Actual + estimates');
- el('areaMappingCoverage').textContent=fmtPct(mappingCoverage)+' mapped';
+ el('areaMappingCoverage').textContent=mappingCoverage==null?'Unavailable':fmtPct(mappingCoverage)+' mapped';
+ if(el('areaCoverageMappedRevenue'))el('areaCoverageMappedRevenue').textContent=scopeRows.length&&(!mappedRows.length||mappedRows.some(hasKnownRevenue))?fmtCompact(mappedRevenue):'Unavailable';
+ if(el('areaUnmappedRevenue'))el('areaUnmappedRevenue').textContent=scopeRows.length&&(!unmappedRows.length||unmappedRows.some(hasKnownRevenue))?fmtCompact(unmappedRevenue):'Unavailable';
+ if(el('areaRevenueCoverage'))el('areaRevenueCoverage').textContent=revenueCoverage==null?'Unavailable':fmtPct(revenueCoverage);
+ if(el('areaCoverageTakeaway'))el('areaCoverageTakeaway').textContent=revenueCoverageAvailable
+  ? 'Regional rankings include '+fmtPct(revenueCoverage)+' of selected net sales; '+fmtPct(100-revenueCoverage)+' ('+fmtCurrency(unmappedRevenue)+') remains unmapped.'
+  : !scopeRows.length?'No selected sales records are available for geographic comparison.'
+  : missingRevenueRows?'Revenue shares are unavailable: '+missingRevenueRows+' selected net sales '+(missingRevenueRows===1?'value is':'values are')+' missing. Amounts sum known values only.'
+  : selectedRevenue<=0?'Revenue shares are unavailable because selected net sales are zero or negative. Signed amounts remain visible.'
+  : 'Revenue shares are unavailable because a mapped or unmapped net total is negative. Signed amounts remain visible.';
+ if(el('areaRevenueCoverageBar')){
+  const bar=el('areaRevenueCoverageBar');bar.hidden=!revenueCoverageAvailable;
+  bar.children[0].style.width=(revenueCoverage||0)+'%';bar.children[1].style.width=(revenueCoverageAvailable?100-revenueCoverage:0)+'%';
+ }
+ if(el('areaCoverageNextReview'))el('areaCoverageNextReview').textContent=region!=='All'
+  ? 'Next review: Clear the Region filter to assess mapping across all selected sales; this regional selection excludes other and unmapped geography.'
+  : unmappedRows.length?'Next review: Check client-to-geography mapping for excluded sales before comparing area priorities.'
+  : 'Next review: Verify geographic mappings and source completeness before acting on area priorities.';
+ if(el('areaCoverageMethod'))el('areaCoverageMethod').textContent='Net sales coverage uses mapped ÷ all selected net sales ('+(evidence==='actual'?'actual only':'actual + gap estimates')+'). Source-row coverage uses actual records only'+(mappingCoverage==null?'; valid positive source-row counts are unavailable.':': '+mappedWeight.toLocaleString('en-PH')+' of '+allWeight.toLocaleString('en-PH')+' source rows mapped.')+' Buyer ownership is a separate proposed classification. Candidate data and mapping require review; included records do not prove complete source reporting.';
  el('areaActualRevenue').textContent=fmtCompact(regionalActual);
  el('areaEstimatedRevenue').textContent=fmtCompact(regionalEstimated);
  el('areaRankedCount').textContent=String(regionalRanked.length);
  el('areaMappedRevenue').textContent=fmtCompact(regionalRevenue);
- el('areaMappedRevenueNote').textContent='CALABARZON, MIMAROPA, Bicol and Other National';
+ el('areaMappedRevenueNote').textContent='Zero and negative areas retained. Unmapped net sales excluded: '+fmtCurrency(unmappedRevenue);
  el('areaLeadingArea').textContent=leadingRegion?leadingRegion.name:'No region';
- el('areaLeadingShare').textContent=leadingRegion&&regionalRevenue>0?fmtPct(leadingRegion.revenue/regionalRevenue*100)+' of regional-group revenue':'No ranked regional group';
- el('areaTopThreeShare').textContent=regionalRevenue>0?fmtPct(topThreeRegions/regionalRevenue*100):'Unavailable';
+ el('areaLeadingShare').textContent=leadingRegion ? (regionalSharesAvailable?fmtPct(leadingRegion.revenue/regionalRevenue*100)+' of regional-group revenue':'Revenue share unavailable; ranked by commercial score') : 'No ranked regional group';
+ el('areaTopThreeShare').textContent=regionalSharesAvailable?fmtPct(topThreeRegions/regionalRevenue*100):'Unavailable';
  if(el('areaScoreMethod'))el('areaScoreMethod').textContent=areaPrioritySalesWeight+'% sales-value scale + '+areaPriorityCoverageWeight+'% active-period coverage';
  el('sectorStatus').textContent=regionalRanked.length
-  ? regionalRanked.length+' regional groups ranked · '+ranked.length+' area drill-down rows · score uses '+areaPrioritySalesWeight+'% sales value and '+areaPriorityCoverageWeight+'% active-period coverage.'
-  : 'No revenue is available for the selected regional group. Individual area records remain in the drill-down table.';
+  ? regionalRanked.length+' regional groups ranked · '+ranked.length+' mapped areas.'
+  : 'No revenue is available for mapped regional groups in this selection.';
+
+ const evidenceBars=(canvasId,rows,label)=>{
+  const canvas=el(canvasId);
+  if(!canvas)return;
+  const wrap=canvas.closest('.area-chart-wrap');
+  if(wrap)wrap.style.setProperty('height',Math.max(200,Math.min(270,120+rows.length*36))+'px','important');
+  const wrapLabel=text=>{
+   const words=String(text).split(/\s+/),lines=[];let line='';
+   words.forEach(word=>{if(line&&line.length+word.length+1>15){lines.push(line);line=word;}else line+=(line?' ':'')+word;});
+   if(line)lines.push(line);return lines;
+  };
+  new Chart(canvas,{
+   type:'bar',
+   data:{labels:rows.map(label),datasets:[
+    {label:'Actual net sales',data:rows.map(row=>row.actual),backgroundColor:'#1E3A5F',borderColor:'#1E3A5F',borderWidth:1,maxBarThickness:28},
+    {label:'Gap estimate',data:rows.map(row=>row.estimated),backgroundColor:'#AFC1CF',borderColor:'#8198AA',borderWidth:1,maxBarThickness:28}
+   ]},
+   options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,animation:false,interaction:{mode:'index',intersect:false},layout:{padding:{top:6,right:8}},
+    onClick:(event,elements)=>{
+     const selected=elements[0],row=selected&&rows[selected.index];
+     if(!row||selected.datasetIndex!==0)return;
+     openDiagnosticDrilldown({product_id:product||undefined,category,sector:canvasId==='sectorBuyerChart'?row.name:cluster,region:canvasId==='sectorRevenueChart'?row.name:region==='All'?undefined:region,label:row.name});
+    },
+    scales:{x:{stacked:true,beginAtZero:true,grid:{color:'#E5EBF0'},ticks:{maxTicksLimit:4,font:{size:10},callback:value=>fmtCompact(value)}},
+     y:{stacked:true,grid:{display:false},ticks:{autoSkip:false,font:{size:11},callback:function(value){return wrapLabel(this.getLabelForValue(value));}}}},
+    plugins:{legend:{display:true,position:'bottom',labels:{boxWidth:10,boxHeight:10,usePointStyle:true,font:{size:10},padding:12}},
+     tooltip:{callbacks:{label:context=>context.dataset.label+': '+fmtCurrency(context.raw),footer:items=>items.length?'Net sales: '+fmtCurrency(rows[items[0].dataIndex].revenue):''}}}
+   }
+  });
+ };
+
+ chartEmpty('sectorBuyerChart','areaBuyerEmpty',buyerRanked.length?'':'No buyer ownership records for this selection.');
+ if(el('areaBuyerNote'))el('areaBuyerNote').textContent='Includes unmapped geographic sales: '+fmtCurrency(unmappedRevenue)+'. Unknown means unclassified ownership.';
+ if(buyerRanked.length){
+  evidenceBars('sectorBuyerChart',buyerRanked,row=>row.name==='Unknown'?'Unknown ownership':row.name);
+  if(el('areaBuyerValues'))el('areaBuyerValues').innerHTML=buyerRanked.map(row=>'<li>'+esc(row.name==='Unknown'?'Unknown ownership':row.name)+': actual '+fmtCurrency(row.actual)+', gap estimate '+fmtCurrency(row.estimated)+', net sales '+fmtCurrency(row.revenue)+'.</li>').join('');
+ }
+
+ chartEmpty('sectorRevenueChart','areaRegionalChartEmpty',regionalRanked.length?'':'No mapped regional sales for this selection.');
 
  if(regionalRanked.length){
-  new Chart(el('sectorRevenueChart'),{type:'bar',data:{labels:regionalRanked.map(row=>row.name),datasets:[{label:'Actual net sales',data:regionalRanked.map(row=>row.actual),backgroundColor:'#1E3A5F',borderColor:'#1E3A5F',borderWidth:1},{label:'Gap estimate',data:regionalRanked.map(row=>row.estimated),backgroundColor:'#AFC1CF',borderColor:'#8198AA',borderWidth:1}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},scales:{x:{stacked:true,beginAtZero:true,title:{display:true,text:'Net sales revenue (₱)'},ticks:{callback:value=>fmtCompact(value)}},y:{stacked:true,grid:{display:false}}},plugins:{legend:{display:true,position:'bottom'},tooltip:{callbacks:{label:context=>context.dataset.label+': '+fmtCurrency(context.raw)}}}}});
+  if(paretoWrap){paretoWrap.hidden=false;paretoWrap.style.height='260px';}
+  evidenceBars('sectorRevenueChart',revenueRanked,row=>row.name);
   let cumulative=0;const paretoRows=[...regionalGroups].sort((left,right)=>right.revenue-left.revenue||left.name.localeCompare(right.name));
-  const cumulativeShare=paretoRows.map(row=>{cumulative+=row.revenue;return regionalRevenue>0?cumulative/regionalRevenue*100:0;});
-  new Chart(el('sectorParetoChart'),{data:{labels:paretoRows.map(row=>row.name),datasets:[{type:'bar',label:'Regional-group net sales',data:paretoRows.map(row=>row.revenue),backgroundColor:'#D6E1E9',borderColor:'#7890A2',borderWidth:1,yAxisID:'revenue'},{type:'line',label:'Cumulative share',data:cumulativeShare,borderColor:'#D97706',backgroundColor:'#D97706',pointRadius:3,pointHoverRadius:5,tension:.18,yAxisID:'share'},{type:'line',label:'80% reference',data:paretoRows.map(()=>80),borderColor:'#9CA3AF',borderDash:[5,5],borderWidth:1,pointRadius:0,yAxisID:'share'}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},scales:{x:{grid:{display:false},ticks:{autoSkip:false,maxRotation:25,minRotation:0}},revenue:{type:'linear',position:'left',beginAtZero:true,ticks:{callback:value=>fmtCompact(value)}},share:{type:'linear',position:'right',min:0,max:100,grid:{drawOnChartArea:false},ticks:{callback:value=>value+'%'}}},plugins:{legend:{display:true,position:'bottom'},tooltip:{callbacks:{label:context=>context.dataset.yAxisID==='share'?context.dataset.label+': '+fmtPct(context.raw):context.dataset.label+': '+fmtCurrency(context.raw)}}}}});
+  const cumulativeShare=paretoRows.map(row=>{cumulative+=row.revenue;return regionalSharesAvailable?cumulative/regionalRevenue*100:null;});
+  el('areaParetoNote').textContent=regionalSharesAvailable?'Cumulative share of selected mapped regional net sales.':'Concentration unavailable: negative regional net totals or a nonpositive total.';
+  new Chart(el('sectorParetoChart'),{data:{labels:paretoRows.map(row=>row.name),datasets:[{type:'bar',label:'Regional-group net sales',data:paretoRows.map(row=>row.revenue),backgroundColor:'#D6E1E9',borderColor:'#7890A2',borderWidth:1,yAxisID:'revenue'},{type:'line',label:'Cumulative share',data:cumulativeShare,borderColor:'#D97706',backgroundColor:'#D97706',pointRadius:3,pointHoverRadius:5,tension:.18,yAxisID:'share'},{type:'line',label:'80% reference',data:paretoRows.map(()=>regionalSharesAvailable?80:null),borderColor:'#9CA3AF',borderDash:[5,5],borderWidth:1,pointRadius:0,yAxisID:'share'}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},scales:{x:{grid:{display:false},ticks:{autoSkip:false,maxRotation:25,minRotation:0}},revenue:{type:'linear',position:'left',beginAtZero:true,ticks:{callback:value=>fmtCompact(value)}},share:{type:'linear',position:'right',min:0,max:100,grid:{drawOnChartArea:false},ticks:{callback:value=>value+'%'}}},plugins:{legend:{display:true,position:'bottom'},tooltip:{callbacks:{label:context=>context.dataset.yAxisID==='share'?context.dataset.label+': '+fmtPct(context.raw):context.dataset.label+': '+fmtCurrency(context.raw)}}}}});
  }
 
  const rowsHtml=ranked.map((row,index)=>{
@@ -7549,30 +7673,36 @@ function renderSalesSectors(error) {
    '<td class="area-score">'+row.score.toFixed(1)+'</td>' +
    '<td>'+fmtCurrency(row.actual)+'</td>' +
    '<td>'+fmtCurrency(row.estimated)+'</td>' +
-   '<td>'+fmtPct(mappedRevenue?row.revenue/mappedRevenue*100:0)+'</td>' +
+   '<td>'+(areaSharesAvailable?fmtPct(row.revenue/mappedRevenue*100):'Unavailable')+'</td>' +
    '<td>'+row.periods.size+' / '+availablePeriods+'</td>' +
    '<td>'+esc(ownership)+'</td>' +
    '<td><span class="area-confidence '+confidence[1]+'">'+confidence[0]+'</span></td>' +
   '</tr>';
  }).join('');
 
- const totalActual = positive.reduce((sum, r) => sum + r.actual, 0);
- const totalEstimated = positive.reduce((sum, r) => sum + r.estimated, 0);
+ const totalActual = areaTotals.reduce((sum, r) => sum + r.actual, 0);
+ const totalEstimated = areaTotals.reduce((sum, r) => sum + r.estimated, 0);
  const totalFooterHtml = ranked.length > 0 ? (
   '<tfoot><tr>' +
    '<td colspan="2" style="text-align:left"><strong>Total Rollup (' + (region === 'All' ? 'All Regional Groups' : esc(region)) + ')</strong></td>' +
    '<td><strong>' + (region === 'All' ? '4 Groups' : esc(region)) + '</strong></td>' +
-   '<td class="area-score">100.0</td>' +
+   '<td class="area-score">Not additive</td>' +
    '<td><strong>' + fmtCurrency(totalActual) + '</strong></td>' +
    '<td><strong>' + fmtCurrency(totalEstimated) + '</strong></td>' +
-   '<td><strong>100.0%</strong></td>' +
-   '<td><strong>' + availablePeriods + ' / ' + availablePeriods + '</strong></td>' +
+   '<td><strong>'+(areaSharesAvailable?'100.0%':'Unavailable')+'</strong></td>' +
+   '<td><strong>' + new Set(areaTotals.flatMap(row=>[...row.periods])).size + ' / ' + availablePeriods + '</strong></td>' +
    '<td><strong>' + fmtCompact(mappedRevenue) + ' Net Sales</strong></td>' +
    '<td><span class="area-confidence observed">Consolidated</span></td>' +
   '</tr></tfoot>'
  ) : '';
 
  el('sectorProfileTable').innerHTML='<caption class="sr-only">Area commercial priority ranking for '+esc(descriptivePeriodLabel())+'</caption><thead><tr><th scope="col">Rank</th><th scope="col">Geographic area</th><th scope="col">Region</th><th scope="col">Score</th><th scope="col">Actual sales</th><th scope="col">Estimated</th><th scope="col">Revenue share</th><th scope="col">Active periods</th><th scope="col">Buyer composition</th><th scope="col">Evidence</th></tr></thead><tbody>'+(rowsHtml||'<tr><td class="area-empty" colspan="10">No ranked geography is available for this selection.</td></tr>')+'</tbody>'+totalFooterHtml;
+ el('sectorProfileTable').querySelectorAll('tbody tr').forEach((tr,index)=>{
+  const row=ranked[index];if(!row)return;
+  const inspect=document.createElement('button');inspect.type='button';inspect.className='btn btn-secondary';inspect.textContent='Inspect recorded '+row.area;
+  inspect.onclick=()=>openDiagnosticDrilldown({territory:row.area,region:row.region,sector:cluster,product_id:product||undefined,category,label:row.area});
+  tr.cells[1].append(inspect);
+ });
  el('sectorSource').textContent='Source: '+salesSectorsData.source.file+' · SHA-256: '+(salesSectorsData.source.checksum||'unavailable')+' · service exclusions: '+JSON.stringify(salesSectorsData.source.excluded||{})+'. Classification evidence in the selected scope: '+([...new Set(scopeRows.map(row=>row.basis))].filter(Boolean).join('; ')||'Unavailable')+'.';
  renderClientReferenceTable();
  if(typeof renderProductPrioritizationTimeline==='function')renderProductPrioritizationTimeline();

@@ -23,6 +23,43 @@ from services.data_pipeline import (
 
 
 class SalesCleaningTests(unittest.TestCase):
+    def test_future_source_years_are_retained_in_cleaning_and_every_dashboard_partition(self):
+        sources = [SourceRow(f"medshield_data_{year}.csv", str(year), 2, {
+            "area": "Quezon", "date_delivered": f"{year}-01-02", "product": f"ITEM {year}",
+            "quantity": "2", "unit_cost": "50", "total_cost": "100", "discount": "0",
+            "net_cost": "100", "trade_price_unit": "30", "total_trade_price": "60", "net_income": "40",
+        }) for year in (2025, 2026, 2027, 2031)]
+        rows, summary, _ = clean_sales_rows(sources, "raw_tabular")
+        self.assertEqual(summary["rows_accepted"], 4)
+        self.assertEqual([row["data_source_year"] for row in rows], [2025, 2026, 2027, 2031])
+        self.assertTrue(all(row["in_analysis_range"] for row in rows))
+        snapshot = build_dashboard_snapshot(rows, today=date(2031, 1, 2))
+        self.assertEqual([row["year"] for row in snapshot["year_summary"]], ["2025", "2026", "2027", "2031"])
+        self.assertEqual([row["period"] for row in snapshot["monthly"]], ["2025-01", "2026-01", "2027-01", "2031-01"])
+        self.assertEqual(snapshot["totals"]["total_revenue"], 400)
+
+    def test_actual_snapshot_excludes_future_delivery_dates_across_every_partition(self):
+        rows = [dict(quality_status="valid", date_delivered=value, year=int(value[:4]),
+                     area="Quezon", product=value, quantity=1, net_cost=100,
+                     total_trade_price=60, net_income=40)
+                for value in ("2025-01-01", "2026-10-05", "2026-10-06", "2027-01-01", "2047-01-01")]
+        snapshot = build_dashboard_snapshot(rows, today=date(2026, 10, 5))
+        self.assertEqual(snapshot["totals"]["total_transactions"], 2)
+        self.assertEqual(snapshot["totals"]["total_revenue"], 200)
+        self.assertEqual(snapshot["by_area"][0]["revenue"], 200)
+        self.assertEqual([r["product"] for r in snapshot["top_products"]], ["2025-01-01", "2026-10-05"])
+        self.assertEqual([r["year"] for r in snapshot["year_summary"]], ["2025", "2026"])
+        snapshot = build_dashboard_snapshot(rows, today=date(2027, 1, 1))
+        self.assertEqual(snapshot["totals"]["total_transactions"], 4)
+        self.assertEqual([r["year"] for r in snapshot["year_summary"]], ["2025", "2026", "2027"])
+
+    def test_precoverage_and_invalid_dates_remain_rejected(self):
+        rows, summary, _ = clean_sales_rows([SourceRow("sales.csv", "2016", 2, {
+            "area": "Quezon", "date_delivered": value, "product": "ITEM A", "quantity": "1",
+        }) for value in ("2016-12-31", "2026-02-30")], "raw_tabular")
+        self.assertEqual(summary["rows_accepted"], 0)
+        self.assertTrue(all(row["quality_status"] == "rejected" for row in rows))
+
     def test_blank_net_cp_is_derived_from_total_cp_less_discount(self):
         rows, summary, _ = clean_sales_rows(
             [

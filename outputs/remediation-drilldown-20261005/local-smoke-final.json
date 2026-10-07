@@ -1,0 +1,15 @@
+{
+  "health_status": 200,
+  "health": {
+    "status": "ok",
+    "service": "MedShield API gateway",
+    "architecture": "typescript-api-gateway",
+    "source": "databricks",
+    "runtime": "typescript",
+    "auth_mode": "supabase-auth-jwt",
+    "dashboard_fallback": false
+  },
+  "page_status": 200,
+  "diff_whitespace_exit": 0,
+  "checked_at": "2026-10-05T02:32:09.4204058+08:00"
+}

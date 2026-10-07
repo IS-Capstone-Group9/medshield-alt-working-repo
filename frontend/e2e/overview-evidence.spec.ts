@@ -66,11 +66,10 @@ test('a mixed period separates observed KPI revenue and dashed gap estimates', a
   await expect(page.locator('#overviewRevenueEvidence')).toContainText('Gap estimate: ₱200')
   await expect(page.locator('#overviewRevenueEvidence')).toContainText('Combined: ₱500')
   const chart = await page.evaluate(() => (window as any).Chart.getChart(document.getElementById('overviewBaselineChart')).data.datasets.map((d: any) => ({ label: d.label, data: d.data, dash: d.borderDash })))
-  expect(chart[0].label).toContain('Actual')
-  expect(chart[0].data).toEqual([300, null])
-  expect(chart[1].label).toContain('Gap estimate')
-  expect(chart[1].data).toEqual([null, 200])
-  expect(chart[1].dash).toEqual([6, 4])
+  expect(chart[0].label).toContain('Net Sales Revenue')
+  expect(chart[0].data).toEqual([300, 200])
+  expect(chart[1].label).toContain('Gross Profit')
+  expect(chart[1].data).toEqual([60, 40])
   await expect(page.locator('#overviewBaselineChart').locator('xpath=ancestor::*[contains(@class,"chart-card")][1]')).toContainText('source coverage 2024-01–2025-01')
   await page.evaluate(() => (window as any).setCustomDateRange('2025-01-01', '2025-01-31'))
   await expect(page.locator('#overviewRevenueEvidence')).toContainText('no gap estimates included')
@@ -117,4 +116,80 @@ test('a partial historical date range does not consume full boundary-month total
   await expect(page.locator('#kpiOverviewTotalRevenue')).toHaveText('₱2,000')
   const values = await page.evaluate(() => (window as any).Chart.getChart(document.getElementById('overviewBaselineChart')).data.datasets[0].data)
   expect(values).toEqual([null, 2000, null])
+})
+
+test('overview decision cards reconcile observed profit, matched growth and missing month coverage', async ({page}) => {
+  await page.evaluate(() => {
+    const app = window as any
+    app.applyDatasetPatch({monthly:[
+      {period:'2024-01',revenue:100,income:20},{period:'2024-02',revenue:200,income:40},
+      {period:'2025-01',revenue:300,income:60},{period:'2025-02',revenue:0,income:0},
+      {period:'2025-03',revenue:null,income:null,missing:true},
+    ],year_summary:[]})
+    app.setDescriptivePeriod('custom');app.setDescriptiveGranularity('monthly')
+    app.setCustomDateRange('2025-01-01','2025-03-31')
+  })
+  await expect(page.locator('#kpiOverviewTotalRevenue')).toHaveText('₱300')
+  await expect(page.locator('#kpiOverviewGrossProfit')).toHaveText('₱60')
+  await expect(page.locator('#kpiOverviewMatchedGrowth')).toHaveText('0.0%')
+  await expect(page.locator('#overviewMatchedGrowthNote')).toContainText('2/2 observed month pairs matched')
+  await expect(page.locator('#kpiOverviewObservationCoverage')).toHaveText('2/3')
+  await expect(page.locator('#overviewDecisionReview')).toContainText('1 unavailable months')
+  await expect(page.locator('#overviewPublicationStrip')).toContainText('business approval pending')
+  await expect(page.locator('#page-overview .kpi-grid > .kpi-card')).toHaveCount(4)
+  await page.evaluate(() => (window as any).setDescriptivePeriod('all'))
+  await expect(page.locator('#kpiOverviewMatchedGrowth')).toHaveText('Choose a period')
+})
+
+test('overview withholds incomplete profit and growth with a nonpositive prior total', async ({page}) => {
+  await page.evaluate(() => {
+    const app = window as any
+    app.applyDatasetPatch({monthly:[
+      {period:'2024-01',revenue:-100,income:20},
+      {period:'2025-01',revenue:200,income:null},
+    ],year_summary:[]})
+    app.setDescriptivePeriod('custom');app.setDescriptiveGranularity('monthly')
+    app.setCustomDateRange('2025-01-01','2025-01-31')
+  })
+  await expect(page.locator('#kpiOverviewGrossProfit')).toHaveText('Unavailable')
+  await expect(page.locator('#kpiOverviewMatchedGrowth')).toHaveText('Unavailable')
+  await expect(page.locator('#overviewMatchedGrowthNote')).toContainText('positive prior sales')
+})
+
+test('overview matched growth excludes an open month instead of comparing a partial snapshot to a full month', async ({page}) => {
+  await page.clock.install({time:new Date('2026-10-03T04:00:00Z')})
+  await page.evaluate(() => {
+    const app = window as any
+    app.applyDatasetPatch({monthly:[
+      {period:'2025-09',revenue:100,income:20},{period:'2025-10',revenue:100,income:20},
+      {period:'2026-09',revenue:200,income:40},{period:'2026-10',revenue:1000,income:200},
+    ],year_summary:[]})
+    app.setDescriptivePeriod('custom');app.setDescriptiveGranularity('monthly')
+    app.setCustomDateRange('2026-09-01','2026-10-31')
+  })
+  await expect(page.locator('#kpiOverviewMatchedGrowth')).toHaveText('+100.0%')
+  await expect(page.locator('#overviewMatchedGrowthNote')).toContainText('1/1 observed month pairs matched')
+  await expect(page.locator('#overviewMatchedGrowthNote')).toContainText('Open current month')
+})
+
+test('sales sections retain the shared period, support keyboard navigation and resize reopened charts', async ({page}) => {
+  await page.evaluate(() => {
+    const app = window as any
+    app.applyDatasetPatch({monthly:[{period:'2024-01',revenue:100,income:20},{period:'2025-01',revenue:300,income:60}]})
+    app.showPage('revenue');app.setDescriptivePeriod('custom');app.setDescriptiveGranularity('monthly')
+    app.setCustomDateRange('2025-01-01','2025-01-31')
+  })
+  await expect(page.getByRole('tabpanel',{name:'Sales Trend',exact:true})).toBeVisible()
+  const growth = page.getByRole('tab',{name:'Growth',exact:true})
+  await growth.click()
+  await expect(page.getByRole('tabpanel',{name:'Growth',exact:true})).toBeVisible()
+  await page.evaluate(() => (window as any).setCustomDateRange('2024-01-01','2025-01-31'))
+  await expect(growth).toHaveAttribute('aria-selected','true')
+  await expect(page.locator('#salesOutputScope')).toContainText('Jan 1, 2024')
+  await growth.focus();await page.keyboard.press('ArrowRight')
+  await expect(page.getByRole('tab',{name:'Quantities',exact:true})).toBeFocused()
+  await page.keyboard.press('Home')
+  await expect(page.getByRole('tab',{name:'Sales Trend',exact:true})).toBeFocused()
+  await expect.poll(() => page.evaluate(() => (window as any).Chart.getChart(document.getElementById('revenueDetailChart')).chartArea.width)).toBeGreaterThan(100)
+  await expect(page.locator('#salesOutputSections')).toHaveCount(1)
 })

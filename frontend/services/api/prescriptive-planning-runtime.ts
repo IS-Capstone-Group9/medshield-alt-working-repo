@@ -1,6 +1,8 @@
+import { productChartLabel } from './product-chart-view'
+
 export const PLANNING_MARKUP = String.raw`
 <style>
-[data-planning] { margin-top: 10px; }
+[data-planning] { margin-top: 10px; width: 100%; min-width: 0; max-width: 100%; box-sizing: border-box; }
 [data-planning] p { line-height: 1.6; margin: 10px 0; }
 [data-planning] .plan-controls { display: flex; gap: 14px; flex-wrap: wrap; margin: 16px 0; align-items: flex-end; }
 [data-planning] input[type=number] { width: 110px; }
@@ -26,60 +28,39 @@ export const PLANNING_MARKUP = String.raw`
     <div>
       <div class="chart-title" style="display:flex;align-items:center;gap:8px;">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-        Prescriptive Inventory Optimization &amp; Dynamic Safety Stock Cockpit
+        Purchase allocation scenario
       </div>
-      <div class="chart-subtitle">Capstone Specific Objective 4 · Dynamic EOQ, ROP &amp; Constrained Mixed-Integer Linear Programming (MILP) Solver targeting Expiry Loss &le; 5%</div>
+      <div class="chart-subtitle">Historical product shortlist with entered demand, stock, packaging and budget assumptions</div>
     </div>
     <div style="display:flex;gap:8px;align-items:center;">
       <button class="btn btn-secondary" id="planExport" onclick="exportPlanningCSV()" disabled style="font-size:11px;padding:5px 12px;">
         <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:4px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-        Export Purchase Request Manifest CSV
+        Export scenario evidence CSV
       </button>
     </div>
   </div>
 
-  <!-- Scenario Preset Switcher -->
+  <section class="analytical-output-summary" aria-label="Planning finding and evidence quality">
+    <p class="analytical-output-takeaway" id="planTakeaway">No scenario has been calculated.</p>
+    <p class="analytical-output-scope" id="planScope">Historical shortlist evidence loading. Demand and inventory values are scenario assumptions.</p>
+    <p class="analytical-output-review" id="planReview">Review each product's demand, usable stock, reserve, packaging and supplier costs before solving.</p>
+  </section>
+
+  <!-- Illustrative scenario inputs; these are not verified operational data. -->
   <div class="scenario-bar">
-    <span style="font-size:11px;font-weight:700;color:var(--text-primary);margin-right:8px;">Prescriptive Preset:</span>
+    <span style="font-size:11px;font-weight:700;color:var(--text-primary);margin-right:8px;">Fill blank inputs with examples:</span>
     <button type="button" class="scenario-chip active" id="chipScenarioNormal" onclick="setPrescriptivePreset('normal')">
-      Standard Baseline (95% Service Level)
+      Base example
     </button>
     <button type="button" class="scenario-chip" id="chipScenarioSurge" onclick="setPrescriptivePreset('surge')">
-      Monsoon Surge &amp; Epidemic Buffer (99% · 1.45&times; Vital SS)
+      Higher demand example (1.45&times;)
     </button>
     <button type="button" class="scenario-chip" id="chipScenarioIsland" onclick="setPrescriptivePreset('island')">
-      Island Logistics Pre-Positioning (+14d Lead Time)
+      Higher demand example (1.20&times;)
     </button>
   </div>
 
-  <!-- Hero Prescriptive KPI Grid -->
-  <div class="plan-hero-grid">
-    <div class="plan-hero-card">
-      <div class="hero-label">Priority Reorder Items</div>
-      <div class="hero-val" id="kpiPlanReorderCount">14 SKUs</div>
-      <div class="hero-sub" id="kpiPlanReorderSub">Concentrated on Category I</div>
-    </div>
-    <div class="plan-hero-card">
-      <div class="hero-label">Stockout Threat Lines</div>
-      <div class="hero-val" id="kpiPlanCriticalThreats" style="color:#dc2626;">3 Lines</div>
-      <div class="hero-sub">Paracetamol, ORS, Doxycycline</div>
-    </div>
-    <div class="plan-hero-card">
-      <div class="hero-label">Solved Capital Spend</div>
-      <div class="hero-val" id="kpiPlanSolvedSpend">₱18.4M</div>
-      <div class="hero-sub" id="kpiPlanBudgetSub">Within Approved Limit</div>
-    </div>
-    <div class="plan-hero-card">
-      <div class="hero-label">Target Expiry Wastage</div>
-      <div class="hero-val" id="kpiPlanExpiryRate" style="color:#059669;">&le; 3.6%</div>
-      <div class="hero-sub">Meets Capstone Target &le; 5%</div>
-    </div>
-    <div class="plan-hero-card">
-      <div class="hero-label">Category I Protection</div>
-      <div class="hero-val" id="kpiPlanServiceLevel" style="color:#2563eb;">99.4%</div>
-      <div class="hero-sub">Zero Vital Stockout Mode</div>
-    </div>
-  </div>
+  <p class="chart-subtitle" id="planPresetNote">Example values are illustrative and fill blank fields only. They are not audited demand, stock, supplier quotes or disease projections.</p>
 
   <div class="plan-controls">
     <label>Buyer Cluster
@@ -98,14 +79,14 @@ export const PLANNING_MARKUP = String.raw`
     </label>
     <label>Planning Horizon
       <select id="planHorizon" onchange="document.getElementById('planAcknowledged').checked=false;invalidatePlan()">
-        <option value="1">1 Month (Immediate Restock)</option>
-        <option value="3" selected>3 Months (Quarterly Tactical)</option>
-        <option value="6">6 Months (Monsoon Front)</option>
-        <option value="12">12 Months (Annual Baseline)</option>
+        <option value="1">1 month</option>
+        <option value="3" selected>3 months</option>
+        <option value="6">6 months</option>
+        <option value="12">12 months</option>
       </select>
     </label>
     <label>Purchase Budget Cap (₱)
-      <input id="planBudget" type="number" min="0" step="1000" placeholder="e.g. 20000000" oninput="invalidatePlan()">
+      <input id="planBudget" type="number" min="0" step="1000" value="20000000" oninput="invalidatePlan()">
     </label>
     <label>Minimum Fulfillment Target (%)
       <input id="planMinimum" type="number" min="0" max="100" value="0" placeholder="0" oninput="invalidatePlan()">
@@ -115,12 +96,13 @@ export const PLANNING_MARKUP = String.raw`
   <p id="planSourceStatus" role="status" style="font-weight:600;font-size:12px;color:var(--text-primary);">Loading priority products…</p>
   <p id="planShortlistScope" style="font-size:11px;color:var(--text-muted);"></p>
 
+  <h3 class="chart-title">Historical sales contribution</h3>
   <div class="chart-wrap plan-chart-wrap h260" style="position:relative;margin:14px 0;">
-    <canvas id="planParetoChart" aria-label="Shortlisted products revenue share"></canvas>
+    <canvas id="planParetoChart" role="img" aria-label="Historical shortlisted product shares of positive-product net sales"></canvas>
   </div>
 
   <p style="font-size:11px;color:var(--text-muted);line-height:1.5;">
-    The shortlist represents high-priority SKUs ranked by revenue and WHO VEN clinical criticality over trailing closed months. Enter usable stock, protected safety buffer, and pack costs below to compute constrained linear allocation.
+    Share of positive-product net sales over trailing closed months. These source labels require identity review; revenue rank does not establish clinical priority. Enter stock, safety buffer and pack costs to calculate a planning scenario.
   </p>
 
   <div class="plan-scroll">
@@ -130,37 +112,51 @@ export const PLANNING_MARKUP = String.raw`
   <div style="margin:14px 0;display:flex;align-items:center;gap:8px;">
     <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:12px;font-weight:600;color:var(--text-primary);">
       <input type="checkbox" id="planAcknowledged" onchange="invalidatePlan()" style="accent-color:var(--accent);">
-      I confirm demand and inventory inputs represent audited operational assumptions for the December 2026 planning cycle.
+      I reviewed these inputs as scenario assumptions. MedShield has not verified the demand, inventory or supplier values.
     </label>
   </div>
 
   <div class="plan-controls">
     <button class="btn btn-primary" id="planSolve" onclick="requestPlanSolve()" disabled style="padding:7px 18px;font-weight:700;">
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:6px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
-      Solve Linear Allocation Scenario
+      Calculate allocation scenario
     </button>
     <button class="btn btn-secondary" id="planResetInputs" onclick="resetPlanningDefaults()" style="padding:7px 14px;">
-      Reset Scenario Defaults
+      Fill blank inputs with base example
     </button>
   </div>
 
   <p id="planResultStatus" role="status" style="font-weight:700;font-size:12px;color:var(--text-primary);margin-top:14px;"></p>
   <p id="planBudgetSummary" style="font-size:11px;color:var(--text-secondary);"></p>
+  <p class="chart-subtitle" id="planAssumptions">Scenario only · product-specific source units · entered budget in ₱. No operational inventory, expiry or clinical-priority validation is supplied.</p>
 
+  <div class="plan-hero-grid" aria-label="Calculated scenario summary">
+    <div class="plan-hero-card"><div class="hero-label">Scenario purchase products</div><div class="hero-val" id="kpiPlanReorderCount">Not solved</div><div class="hero-sub" id="kpiPlanReorderSub">Products with purchase packs &gt; 0</div></div>
+    <div class="plan-hero-card"><div class="hero-label">Scenario unmet products</div><div class="hero-val" id="kpiPlanCriticalThreats">Not solved</div><div class="hero-sub">Products with unmet demand &gt; 0</div></div>
+    <div class="plan-hero-card"><div class="hero-label">Scenario spend</div><div class="hero-val" id="kpiPlanSolvedSpend">Not solved</div><div class="hero-sub" id="kpiPlanBudgetSub">Entered cost per pack</div></div>
+    <div class="plan-hero-card"><div class="hero-label">Expiry loss</div><div class="hero-val" id="kpiPlanExpiryRate">Unavailable</div><div class="hero-sub">Shelf life and batch data not modeled</div></div>
+    <div class="plan-hero-card"><div class="hero-label">Scenario mean fulfillment</div><div class="hero-val" id="kpiPlanServiceLevel">Not solved</div><div class="hero-sub">Equal weight per product; not pooled units</div></div>
+  </div>
+
+  <div id="planCalculatedResults" hidden>
+  <h3 class="chart-title">Scenario fulfillment by product</h3>
+  <p class="chart-subtitle">Fulfilled and unmet demand add to 100% for each scenario product. Exact assumptions and results are in the tables.</p>
   <div class="chart-wrap plan-chart-wrap h280" style="position:relative;margin:16px 0;">
-    <canvas id="planFulfillmentChart" aria-label="Fulfilled and unmet demand percentages per product"></canvas>
+    <canvas id="planFulfillmentChart" role="img" aria-label="Scenario fulfilled and unmet demand percentages per product"></canvas>
   </div>
 
   <div class="plan-scroll">
     <table id="planResults" class="product-table"></table>
   </div>
+  </div>
 
-  <details style="margin-top:16px;background:var(--bg-elevated,#f8fafc);border:1px solid var(--border);border-radius:8px;padding:10px 14px;">
-    <summary style="cursor:pointer;font-size:12px;font-weight:700;color:var(--text-primary);">Prescriptive Mathematical Formulation, Constraints &amp; Expiry Prevention</summary>
+  <details class="analytical-output-notes" style="margin-top:16px;background:var(--bg-elevated,#f8fafc);border:1px solid var(--border);border-radius:8px;padding:10px 14px;">
+    <summary style="cursor:pointer;font-size:12px;font-weight:700;color:var(--text-primary);">Scenario assumptions, allocation method and source</summary>
     <div style="font-size:11px;color:var(--text-secondary);line-height:1.6;margin-top:10px;">
-      <p><strong>Mixed-Integer Linear Program (MILP):</strong> Maximize weighted portfolio fulfillment under budget constraints and integer packaging minimums.</p>
-      <p><strong>Dynamic Reorder Point (ROP):</strong> ROP = (AverageDemand &times; LeadTime) + Z &times; &radic;(LeadTime &times; VarianceDemand + AverageDemand<sup>2</sup> &times; VarianceLeadTime) &times; SurgeMultiplier.</p>
-      <p><strong>Expiry Minimization (&le; 5%):</strong> Batch sizes are bounded by shelf-life decay functions: EOQ &le; ShelfLife &times; AverageDemand, preventing dead-stock accumulation.</p>
+      <p><strong>Allocation:</strong> The live gateway meets entered minimum fulfillment where feasible, then adds affordable integer packs to products with lower fulfillment fractions. This scenario does not establish a globally optimal purchase plan.</p>
+      <p><strong>Assumptions:</strong> Demand covers the entire selected horizon. Usable stock, protected reserve, units per pack, pack cost, supplier limit, budget and minimum fulfillment come from the entered values.</p>
+      <p><strong>Example inputs:</strong> Base demand is 30% of historical source units, rounded with a 100-unit minimum. Higher-demand examples multiply it by 1.45 or 1.20. Example stock is 40% of base demand; reserve is 15% (35% for the 1.45 example); a pack contains 100 units at ₱250, with a 500-pack supplier limit. These values fill blank fields only and do not vary with the horizon. The initial ₱20,000,000 budget is an editable example.</p>
+      <p><strong>Limits:</strong> Product units are not pooled across packaging. EOQ, reorder points, lead times, disease effects, clinical priority and expiry reduction are not computed by this scenario.</p>
       <p id="planSourceDetails"></p>
     </div>
   </details>
@@ -168,6 +164,11 @@ export const PLANNING_MARKUP = String.raw`
 `;
 
 export const PLANNING_SCRIPT = String.raw`
+const planningChartLabel = ${productChartLabel.toString()};
+function planningChartRows(id, count) {
+  const wrap = document.getElementById(id)?.closest('.chart-wrap');
+  if (wrap) wrap.style.setProperty('height', Math.max(240, count * 44 + 70) + 'px', 'important');
+}
 let planningData = null;
 let planningResult = null;
 let activePrescriptivePreset = 'normal';
@@ -180,12 +181,19 @@ function clearPlanningResult(message) {
   el('planBudgetSummary').textContent = '';
   el('planResults').textContent = '';
   el('planExport').disabled = true;
+  el('planCalculatedResults').hidden = true;
+  ['kpiPlanReorderCount','kpiPlanCriticalThreats','kpiPlanSolvedSpend','kpiPlanServiceLevel'].forEach(id => { if (el(id)) el(id).textContent = 'Not solved'; });
+  if (el('kpiPlanExpiryRate')) el('kpiPlanExpiryRate').textContent = 'Unavailable';
+  if (el('kpiPlanBudgetSub')) el('kpiPlanBudgetSub').textContent = 'Entered cost per pack';
+  el('planTakeaway').textContent = message || 'No scenario has been calculated.';
+  el('planReview').textContent = 'Review each product’s demand, usable stock, reserve, packaging and supplier costs before solving.';
+  el('planAssumptions').textContent = 'Scenario only · product-specific source units · entered budget in ₱. No operational inventory, expiry or clinical-priority validation is supplied.';
   const chart = Chart.getChart(el('planFulfillmentChart'));
   if (chart) chart.destroy();
 }
 
 function invalidatePlan() {
-  clearPlanningResult('Inputs changed. Solve again to refresh allocations.');
+  clearPlanningResult('Inputs changed. Calculate the scenario again to refresh allocations.');
   window.dispatchEvent(new CustomEvent('medshield:plan-invalidated'));
 }
 
@@ -201,22 +209,10 @@ function setPrescriptivePreset(preset) {
     if (el) el.classList.remove('active');
   });
 
-  if (preset === 'normal') {
-    const el = document.getElementById('chipScenarioNormal');
-    if (el) el.classList.add('active');
-    if (document.getElementById('kpiPlanServiceLevel')) document.getElementById('kpiPlanServiceLevel').textContent = '95.0%';
-    if (document.getElementById('kpiPlanExpiryRate')) document.getElementById('kpiPlanExpiryRate').textContent = '≤ 2.4%';
-  } else if (preset === 'surge') {
-    const el = document.getElementById('chipScenarioSurge');
-    if (el) el.classList.add('active');
-    if (document.getElementById('kpiPlanServiceLevel')) document.getElementById('kpiPlanServiceLevel').textContent = '99.4%';
-    if (document.getElementById('kpiPlanExpiryRate')) document.getElementById('kpiPlanExpiryRate').textContent = '≤ 3.6%';
-  } else if (preset === 'island') {
-    const el = document.getElementById('chipScenarioIsland');
-    if (el) el.classList.add('active');
-    if (document.getElementById('kpiPlanServiceLevel')) document.getElementById('kpiPlanServiceLevel').textContent = '98.8%';
-    if (document.getElementById('kpiPlanExpiryRate')) document.getElementById('kpiPlanExpiryRate').textContent = '≤ 4.1%';
-  }
+  const chip = document.getElementById(preset === 'surge' ? 'chipScenarioSurge' : preset === 'island' ? 'chipScenarioIsland' : 'chipScenarioNormal');
+  if (chip) chip.classList.add('active');
+  const note = document.getElementById('planPresetNote');
+  if (note) note.textContent = (preset === 'surge' ? '1.45× demand example' : preset === 'island' ? '1.20× demand example' : 'Base example') + ' fills blank fields only; existing entries stay unchanged. Example values are not audited demand, stock or supplier quotes. Review the assumptions below.';
 
   if (planningData && planningData.products) {
     planningData.products.forEach((p, i) => {
@@ -230,7 +226,7 @@ function setPrescriptivePreset(preset) {
       const baseDemand = Math.max(100, Math.round(p.quantity * 0.3));
       const mult = preset === 'surge' ? 1.45 : (preset === 'island' ? 1.2 : 1.0);
 
-      if (demandInput && (!demandInput.value || demandInput.value === '0')) demandInput.value = String(Math.round(baseDemand * mult));
+      if (demandInput && !demandInput.value) demandInput.value = String(Math.round(baseDemand * mult));
       if (stockInput && !stockInput.value) stockInput.value = String(Math.round(baseDemand * 0.4));
       if (reserveInput && !reserveInput.value) reserveInput.value = String(Math.round(baseDemand * (preset === 'surge' ? 0.35 : 0.15)));
       if (packInput && !packInput.value) packInput.value = '100';
@@ -263,6 +259,9 @@ function setPlanningData(data, error) {
 
   if (!planningData) {
     el('planSourceStatus').textContent = error || 'Shortlist unavailable; no demo products substituted.';
+    el('planScope').textContent = 'Historical shortlist unavailable · scenario has no source evidence.';
+    el('planTakeaway').textContent = 'Planning source evidence unavailable.';
+    el('planReview').textContent = 'Restore shortlist evidence before entering and solving a scenario.';
     return;
   }
 
@@ -273,6 +272,7 @@ function setPlanningData(data, error) {
   el('planTerritory').value = data.scope.territory;
   el('planSourceStatus').textContent = data.products.length ? 'Source-ranked shortlist · scenario inputs required' : 'No eligible positive-revenue products in this scope. Private ownership requires approved buyer mappings.';
   el('planShortlistScope').textContent = data.products.length ? data.period_start + ' to ' + data.period_end + ' · ' + data.products.length + ' of ' + data.eligible_products + ' positive-revenue products · ' + fmt(data.shortlist_share_pct) + '% of positive-product revenue. ' + (data.months_stale ? data.months_stale + ' closed months behind current history.' : '') : '';
+  el('planScope').textContent = data.scope.sector + ' · ' + data.scope.territory + ' · historical net sales in ₱ · ' + (data.period_start || 'Unavailable') + ' to ' + (data.period_end || 'Unavailable') + '. Scenario inputs are separate from the observed source values.';
 
   const fields = [
     ['demand', 'Horizon Demand (Units)'],
@@ -290,6 +290,7 @@ function setPlanningData(data, error) {
     + '</tbody>';
 
   if (data.products.length) {
+    planningChartRows('planParetoChart', data.products.length);
     new Chart(el('planParetoChart'), {
       type: 'bar',
       data: {
@@ -303,13 +304,14 @@ function setPlanningData(data, error) {
         }]
       },
       options: {
+        indexAxis: 'y',
         responsive: true,
         maintainAspectRatio: false,
         scales: {
-          y: { min: 0, max: 100, title: { display: true, text: 'Revenue Contribution (%)' } },
-          x: { ticks: { autoSkip: false, maxRotation: 30 } }
+          x: { min: 0, max: 100, ticks: { callback: value => value + '%' }, title: { display: true, text: 'Share of positive-product net sales (%)' } },
+          y: { ticks: { autoSkip: false, callback: function(value) { return planningChartLabel(this.getLabelForValue(value), window.innerWidth < 600 ? 18 : 34, 2); } } }
         },
-        plugins: { legend: { display: true, position: 'bottom' } }
+        plugins: { legend: { display: false }, tooltip: { callbacks: { title: contexts => planningChartLabel(data.products[contexts[0]?.dataIndex]?.product, window.innerWidth < 600 ? 34 : 64, Number.MAX_SAFE_INTEGER), label: context => Number(context.raw).toFixed(1) + '% of positive-product net sales' } } }
       }
     });
   }
@@ -318,6 +320,7 @@ function setPlanningData(data, error) {
   el('planSolve').disabled = !data.products.length;
 
   setPrescriptivePreset('normal');
+  el('planTakeaway').textContent = data.products.length ? 'The historical shortlist captures ' + fmt(data.shortlist_share_pct) + '% of positive-product net sales across ' + data.products.length + ' products. No scenario result has been calculated.' : 'No eligible historical products are available for a scenario in this scope.';
 }
 
 function getPlanningRequest() {
@@ -327,7 +330,7 @@ function getPlanningRequest() {
     scope: planningData.scope,
     checksum: planningData.source.checksum,
     horizon: value('planHorizon'),
-    budget: value('planBudget') || '20000000',
+    budget: value('planBudget'),
     minimum_pct: value('planMinimum') || '0',
     acknowledged: document.getElementById('planAcknowledged').checked,
     items: planningData.products.map((p, i) => {
@@ -341,7 +344,7 @@ function getPlanningRequest() {
 }
 
 function requestPlanSolve() {
-  clearPlanningResult('Solving linear programming optimization scenario…');
+  clearPlanningResult('Calculating allocation scenario from the entered assumptions…');
   window.dispatchEvent(new CustomEvent('medshield:planning-solve'));
 }
 
@@ -350,10 +353,13 @@ function setPlanningResult(result, error) {
   const el = id => document.getElementById(id);
   if (!result) {
     el('planResultStatus').textContent = error || 'Scenario could not be solved under entered constraints.';
+    el('planTakeaway').textContent = 'No scenario result is available.';
     return;
   }
   if (result.status !== 'scenario_allocation') {
-    el('planResultStatus').textContent = 'No allocation published: ' + (result.conflicts || []).join('; ');
+    el('planResultStatus').textContent = 'No scenario allocation calculated: ' + (result.conflicts || []).join('; ');
+    el('planTakeaway').textContent = 'Entered constraints did not produce a scenario allocation.';
+    el('planReview').textContent = 'Review the reported conflicts and entered budget, stock, supplier limits and minimum fulfillment.';
     return;
   }
   planningResult = result;
@@ -361,26 +367,35 @@ function setPlanningResult(result, error) {
   const fmt = v => Number(v).toLocaleString('en-PH', { maximumFractionDigits: 2 });
   const esc = v => String(v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
-  el('planResultStatus').textContent = 'Prescriptive Allocation Solved under Linear Programming Constraints · ' + result.assumptions.horizon + ' Months Horizon · ' + fmt(result.mean_fulfillment_pct) + '% Average Product Fulfillment.';
-  el('planBudgetSummary').textContent = 'Purchase Budget: ₱' + fmt(result.budget) + ' · Solved Spend: ₱' + fmt(result.spent) + ' · Remaining Capital: ₱' + fmt(result.remaining) + '. ' + (result.budget_binding ? 'Budget constraint is binding.' : 'Budget ceiling is non-binding; pack minimums and supplier limits satisfied.');
+  const purchased = result.rows.filter(r => r.purchase_packs > 0).length;
+  const unmet = result.rows.filter(r => r.unmet > 0).length;
+  el('planTakeaway').textContent = 'Scenario spend ₱' + fmt(result.spent) + ' produces ' + fmt(result.mean_fulfillment_pct) + '% mean product fulfillment; ' + unmet + '/' + result.rows.length + ' products retain unmet scenario demand.';
+  el('planReview').textContent = unmet ? 'Review unmet products, pack costs and supplier limits. Validate operational inputs before considering any purchase.' : 'Review costs, packaging and operational inputs before considering any purchase; scenario fulfillment is not a service-level guarantee.';
+  el('planResultStatus').textContent = 'Scenario allocation calculated · ' + result.assumptions.horizon + '-month horizon · scenario evidence for review.';
+  el('planBudgetSummary').textContent = 'Entered scenario budget: ₱' + fmt(result.budget) + ' · scenario spend: ₱' + fmt(result.spent) + ' · scenario remaining budget: ₱' + fmt(result.remaining) + '. ' + (result.budget_binding ? 'Budget fully used.' : 'Budget not fully used.');
+  el('planAssumptions').textContent = 'Scenario only · ' + result.assumptions.scope.sector + ' · ' + result.assumptions.scope.territory + ' · ' + result.assumptions.horizon + '-month entered demand · ' + fmt(result.assumptions.minimum_pct) + '% minimum fulfillment target · source units per product and entered pack costs in ₱. Mean fulfillment gives each product equal weight.';
+  el('planCalculatedResults').hidden = false;
 
-  if (el('kpiPlanSolvedSpend')) el('kpiPlanSolvedSpend').textContent = '₱' + (result.spent / 1e6).toFixed(1) + 'M';
+  if (el('kpiPlanReorderCount')) el('kpiPlanReorderCount').textContent = String(purchased);
+  if (el('kpiPlanCriticalThreats')) el('kpiPlanCriticalThreats').textContent = String(unmet);
+  if (el('kpiPlanSolvedSpend')) el('kpiPlanSolvedSpend').textContent = '₱' + fmt(result.spent);
   if (el('kpiPlanServiceLevel')) el('kpiPlanServiceLevel').textContent = fmt(result.mean_fulfillment_pct) + '%';
 
+  planningChartRows('planFulfillmentChart', result.rows.length);
   new Chart(el('planFulfillmentChart'), {
     type: 'bar',
     data: {
       labels: result.rows.map(r => r.product),
       datasets: [
         {
-          label: 'Fulfilled Demand (%)',
+          label: 'Scenario fulfilled demand (%)',
           data: result.rows.map(r => r.fulfillment_pct),
           backgroundColor: '#1E3A5F',
           borderColor: '#1E3A5F',
           borderWidth: 1
         },
         {
-          label: 'Unmet Demand Gap (%)',
+          label: 'Scenario unmet demand (%)',
           data: result.rows.map(r => Math.max(0, 100 - r.fulfillment_pct)),
           backgroundColor: '#D97706',
           borderColor: '#D97706',
@@ -389,22 +404,23 @@ function setPlanningResult(result, error) {
       ]
     },
     options: {
+      indexAxis: 'y',
       responsive: true,
       maintainAspectRatio: false,
       scales: {
-        x: { stacked: true, ticks: { autoSkip: false, maxRotation: 30 } },
-        y: { stacked: true, min: 0, max: 100, title: { display: true, text: 'Demand Allocation (%)' } }
+        y: { stacked: true, ticks: { autoSkip: false, callback: function(value) { return planningChartLabel(this.getLabelForValue(value), window.innerWidth < 600 ? 18 : 34, 2); } } },
+        x: { stacked: true, min: 0, max: 100, ticks: { callback: value => value + '%' }, title: { display: true, text: 'Scenario demand (%)' } }
       },
       plugins: {
-        legend: { position: 'bottom' }
+        legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 11 } } },
+        tooltip: { callbacks: { title: contexts => planningChartLabel(result.rows[contexts[0]?.dataIndex]?.product, window.innerWidth < 600 ? 34 : 64, Number.MAX_SAFE_INTEGER), label: context => context.dataset.label + ': ' + Number(context.raw).toFixed(1) + '%' } }
       }
     }
   });
 
-  el('planResults').innerHTML = '<thead><tr><th>Product</th><th>Buy (Packs)</th><th>Buy (Units)</th><th>Fulfilled</th><th>Unmet</th><th>Ending Stock</th><th>Spend (₱)</th><th>Reorder Urgency Status</th><th>Binding Constraints</th></tr></thead><tbody>'
+  el('planResults').innerHTML = '<thead><tr><th>Product</th><th>Scenario buy (packs)</th><th>Scenario buy (units)</th><th>Scenario fulfilled</th><th>Scenario unmet</th><th>Scenario ending stock</th><th>Scenario spend (₱)</th><th>Review cue</th><th>Constraints reported</th></tr></thead><tbody>'
     + result.rows.map(r => {
-      const isCritical = r.unmet > 0 || r.purchase_packs > 0;
-      const badge = isCritical ? '<span class="status-pill" style="background:#fee2e2;color:#b91c1c;border:1px solid #fca5a5;font-size:9px;padding:2px 6px;">CRITICAL ORDER NOW</span>' : '<span class="status-pill status-ready" style="font-size:9px;padding:2px 6px;">OPTIMAL BUFFER</span>';
+      const badge = r.unmet > 0 ? '<span class="status-pill" style="background:#fff7ed;color:#9a3412;border:1px solid #fed7aa;font-size:10px;padding:3px 7px;">Review unmet demand</span>' : '<span class="status-pill" style="font-size:10px;padding:3px 7px;">Scenario demand met</span>';
       return '<tr><td><strong>' + esc(r.product) + '</strong></td>'
         + [r.purchase_packs, r.purchase_units, r.fulfilled, r.unmet, r.ending_stock, r.spend].map(v => '<td>' + fmt(v) + '</td>').join('')
         + '<td>' + badge + '</td>'
@@ -422,13 +438,13 @@ function exportPlanningCSV() {
   const q = v => '"' + String(v ?? '').replace(/"/g, '""') + '"';
   const rows = [
     ['status', 'product', 'horizon_months', 'budget_pesos', 'minimum_fulfillment_pct', 'demand', 'stock', 'reserve', 'units_per_pack', 'cost_per_pack_pesos', 'supplier_max_packs', 'buy_packs', 'buy_units', 'fulfilled', 'unmet', 'ending_stock', 'spend_pesos', 'binding', 'sector', 'territory', 'checksum'],
-    ...r.rows.map(p => ['Scenario Prescriptive Order', safe(p.product), r.assumptions.horizon, r.budget, r.assumptions.minimum_pct, p.demand, p.stock, p.reserve, p.pack, p.pack_cost_cents / 100, p.max_packs, p.purchase_packs, p.purchase_units, p.fulfilled, p.unmet, p.ending_stock, p.spend, p.binding.join('; '), r.assumptions.scope.sector, r.assumptions.scope.territory, r.assumptions.checksum])
+    ...r.rows.map(p => ['Scenario allocation for review', safe(p.product), r.assumptions.horizon, r.budget, r.assumptions.minimum_pct, p.demand, p.stock, p.reserve, p.pack, p.pack_cost_cents / 100, p.max_packs, p.purchase_packs, p.purchase_units, p.fulfilled, p.unmet, p.ending_stock, p.spend, p.binding.join('; '), r.assumptions.scope.sector, r.assumptions.scope.territory, r.assumptions.checksum])
   ];
 
   const url = URL.createObjectURL(new Blob(['\uFEFF' + rows.map(row => row.map(q).join(',')).join('\r\n')], { type: 'text/csv;charset=utf-8' }));
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'medshield-purchase-request-manifest.csv';
+  a.download = 'medshield-allocation-scenario.csv';
   a.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }

@@ -1,6 +1,44 @@
+import { salesMonthlyMovement } from './sales-movement-view'
+import { installSalesOutputSections } from './sales-output-sections'
+
 // Runs inside the existing dashboard closure, sharing DATA and filter state.
 // Calculations live here so the chart, explanatory table and export use identical rows.
 export const SALES_DIAGNOSTICS_SCRIPT = String.raw`
+const diagnosticMonthlyMovement = ${salesMonthlyMovement.toString()};
+const installSalesOutputSections = ${installSalesOutputSections.toString()};
+
+function renderSalesMovement(opts) {
+  const host = document.getElementById('page-revenue');
+  if (!host) return;
+  let card = document.getElementById('salesMovementCard');
+  if (!card) {
+    card = document.createElement('section'); card.id = 'salesMovementCard'; card.className = 'chart-card';
+    card.innerHTML = '<div class="chart-header"><div><h2 class="chart-title">Month-to-month net sales change</h2><p class="chart-subtitle" id="salesMovementCaption"></p></div></div><div class="chart-wrap descriptive-movement-wrap"><canvas id="salesMovementChart" role="img" aria-label="Net sales change between adjacent observed full calendar months"></canvas></div><details class="chart-method"><summary>Calculation and exact values</summary><p>Current month minus the preceding calendar month, in pesos. Both months must be observed within the selection. Estimates, missing months, current incomplete months and partial custom boundary months are excluded. This monthly view is independent of display grain and YoY matching. Percent change requires a positive preceding-month total; it is shown in the table and tooltip.</p><div class="table-responsive-wrap"><table id="salesMovementTable" class="product-table"></table></div></details>';
+    const comparison = document.getElementById('revenueDetailChart')?.closest('.chart-card');
+    if (comparison) comparison.insertAdjacentElement('afterend', card); else host.append(card);
+  }
+  const source = descriptivePeriod === 'custom' ? descriptiveCustomMonthlyRows(customDateStart, customDateEnd) : dashboardMonthlyRows();
+  const history = dashboardRawMonthlyRows().map(row => String(row.period)).filter(period => /^\d{4}-\d{2}$/.test(period)).sort();
+  const start = descriptivePeriod === 'custom' ? customDateStart.slice(0,7) : history[0];
+  const end = descriptivePeriod === 'custom' ? customDateEnd.slice(0,7) : history[history.length-1];
+  const periods = [];
+  if (start && end) for (let period = start; period <= end; period = shiftIsoPeriod(period, 1)) {
+    const monthEnd = new Date(Date.UTC(Number(period.slice(0,4)), Number(period.slice(5,7)), 0)).toISOString().slice(0,10);
+    if (!descriptivePeriodIncludes(period) || monthEnd >= descriptivePhtDate()) continue;
+    if (descriptivePeriod === 'custom' && (period + '-01' < customDateStart || monthEnd > customDateEnd)) continue;
+    periods.push(period);
+  }
+  const rows = diagnosticMonthlyMovement(source, periods);
+  const matches = rows.filter(row => row.delta !== null);
+  document.getElementById('salesMovementCaption').textContent = matches.length
+    ? matches.length + ' adjacent observed month pairs · ' + descriptivePeriodLabel() + '. Blue = increase; red = decrease.'
+    : 'No adjacent observed full-month pairs in this selection. Missing months remain unavailable.';
+  createChart('salesMovementChart', { type:'bar', data:{labels:rows.map(row=>row.period),datasets:[{label:'Month-to-month change (₱)',data:rows.map(row=>row.delta),backgroundColor:rows.map(row=>row.delta < 0 ? getRed(.8) : getColor(.8)),borderRadius:3}]}, options:{...opts,plugins:{...opts.plugins,legend:{display:false},tooltip:{callbacks:{label:context=>diagnosticCurrency(context.raw),afterBody:contexts=>{const row=rows[contexts[0]?.dataIndex];return row ? [row.previousPeriod+': '+diagnosticCurrency(row.previous),row.period+': '+diagnosticCurrency(row.current),'Change: '+diagnosticRate(row.rate)] : [];}}}},scales:{x:{ticks:{autoSkip:true,maxTicksLimit:window.innerWidth < 600 ? 6 : 12,maxRotation:0}},y:diagnosticAxis(rows.map(row=>row.delta),'Net sales change (₱)',getColor(),'left',true)}} });
+  const table = document.getElementById('salesMovementTable'); table.replaceChildren();
+  const head = table.createTHead().insertRow();
+  ['Month','Previous month','Previous sales (₱)','Current sales (₱)','Change (₱)','Change (%)'].forEach(label=>{const th=document.createElement('th');th.scope='col';th.textContent=label;head.append(th);});
+  const body=table.createTBody(); rows.forEach(row=>{const tr=body.insertRow();[row.period,row.previousPeriod,diagnosticCurrency(row.previous),diagnosticCurrency(row.current),diagnosticCurrency(row.delta),diagnosticRate(row.rate)].forEach(value=>tr.insertCell().textContent=String(value));});
+}
 function historicalPeriod(period) {
   const match = /^(\d{4})-(0[1-9]|1[0-2])$/.exec(String(period));
   return Boolean(match && Number(match[1]) >= 2017 && Number(match[1]) <= dashboardCalendar().year);
@@ -143,6 +181,9 @@ function diagnosticAxis(values, title, color, position, grid) {
 }
 
 function renderSalesDiagnostics(opts) {
+  installSalesOutputSections(document);
+  const outputScope = document.getElementById('salesOutputScope');
+  if (outputScope) outputScope.textContent = descriptivePeriodLabel() + ' · Money in Philippine pesos · Shared filters apply across sections; STL states its independent scope.';
   const grainLabel = descriptiveUsesYearlyGrain() ? 'Yearly' : descriptiveUsesDailyGrain() ? 'Daily' : 'Monthly';
   const salesTitle = document.getElementById('salesComparisonSubtitle')?.parentElement?.querySelector('.chart-title');
   if (salesTitle) salesTitle.textContent = grainLabel + ' Net Sales Revenue and Gross Profit';
@@ -158,11 +199,9 @@ function renderSalesDiagnostics(opts) {
   const selectedRows = getDescriptiveDisplayRows();
   const priorDisplayRows = getDescriptivePriorDisplayRows();
   const yearly = descriptiveUsesYearlyGrain();
-  const priorPeriod = period => descriptiveUsesDailyGrain()
-    ? String(Number(period.slice(0, 4)) - 1) + period.slice(4)
-    : yearly ? String(Number(period) - 1) : String(Number(period.slice(0, 4)) - 1) + period.slice(4, 7);
-  const revenue = selectedRows.map(row => row.evidence === 'estimate' || row.revenue == null ? null : row.revenue);
-  const profit = selectedRows.map(row => row.evidence === 'estimate' || row.income == null ? null : row.income);
+  const priorPeriod = descriptivePreviousPeriod;
+  const revenue = selectedRows.map(row => row.revenue == null ? null : row.revenue);
+  const profit = selectedRows.map(row => row.income == null ? null : row.income);
   const detailLabels = selectedRows.map(row => descriptivePointLabel(row.period));
   const detailPeriods = selectedRows.map(row => String(row.period));
   const observedMonths = new Map(selectedRows
@@ -173,26 +212,30 @@ function renderSalesDiagnostics(opts) {
   const predictedCount = predictedRevenue.filter(value => value != null).length;
   const dailyUnavailable = descriptiveUsesDailyGrain() && selectedRows.every(row => row.revenue == null);
   const detailDatasets = [
-    { label: 'Net Sales Revenue · ' + descriptivePeriodLabel(), data: revenue, yAxisID: 'revenue', borderColor: getColor(), backgroundColor: getColor(.08), borderWidth: 2.5, pointRadius: descriptiveUsesDailyGrain() ? 1.5 : 3, tension: .25, fill: false, spanGaps: false },
-    { label: 'Gross Profit · ' + descriptivePeriodLabel(), data: profit, yAxisID: 'grossProfit', borderColor: getAmber(), backgroundColor: getAmber(.08), borderWidth: 2.2, pointRadius: descriptiveUsesDailyGrain() ? 1.5 : 3, tension: .25, fill: false, spanGaps: false }
+    { label: 'Net Sales Revenue', data: revenue, yAxisID: 'revenue', borderColor: getColor(), backgroundColor: getColor(.08), borderWidth: 2.5, pointRadius: descriptiveUsesDailyGrain() ? 1.5 : 3, tension: .25, fill: false, spanGaps: false },
+    { label: 'Gross Profit', data: profit, yAxisID: 'grossProfit', borderColor: getAmber(), backgroundColor: getAmber(.08), borderWidth: 2.2, pointRadius: descriptiveUsesDailyGrain() ? 1.5 : 3, tension: .25, fill: false, spanGaps: false }
   ];
-  detailDatasets.push({ label: 'Gap estimate · Net Sales Revenue', data: predictedRevenue, yAxisID: 'revenue', borderColor: 'rgba(124,58,237,0.9)', backgroundColor: 'rgba(124,58,237,0.9)', borderWidth: 2, borderDash: [6, 4], pointStyle: 'triangle', pointRadius: 4, tension: 0, fill: false, spanGaps: false });
-  if (!descriptiveUsesDailyGrain()) detailDatasets.push({ label: 'Gap estimate · Gross Profit', data: predictedProfit, yAxisID: 'grossProfit', borderColor: 'rgba(219,39,119,0.9)', backgroundColor: 'rgba(219,39,119,0.9)', borderWidth: 2, borderDash: [6, 4], pointStyle: 'triangle', pointRadius: 4, tension: 0, fill: false, spanGaps: false });
   if (comparisonMode === 'yoy') {
-    detailDatasets.push(
-      { label: 'Prior-year Net Sales Revenue', data: priorDisplayRows.map(row => row.revenue), yAxisID: 'revenue', borderColor: getColor(.5), backgroundColor: 'transparent', borderDash: [7, 5], borderWidth: 2, pointRadius: descriptiveUsesDailyGrain() ? 1 : 2, tension: .25, fill: false, spanGaps: false },
-      { label: 'Prior-year Gross Profit', data: priorDisplayRows.map(row => row.income), yAxisID: 'grossProfit', borderColor: getAmber(.5), backgroundColor: 'transparent', borderDash: [7, 5], borderWidth: 2, pointRadius: descriptiveUsesDailyGrain() ? 1 : 2, tension: .25, fill: false, spanGaps: false }
-    );
+    for (const [metric, label, color] of [['revenue','Net Sales Revenue',getColor(.5)],['income','Gross Profit',getAmber(.5)]]) {
+      detailDatasets.push({ label: 'Prior-year ' + label,
+        data: priorDisplayRows.map(row => row[metric] == null ? null : row[metric]),
+        yAxisID: 'revenue', borderColor: color, backgroundColor: 'transparent', borderDash: [2, 3],
+        borderWidth: 2, pointRadius: 3, tension: 0, fill: false, spanGaps: false });
+    }
   }
+  detailDatasets.forEach(dataset => Object.assign(dataset, descriptiveEvidenceLine(dataset,
+    dataset.label.startsWith('Prior-year') ? priorDisplayRows : selectedRows)));
   if (descriptiveUsesDailyGrain()) {
     for (let index = detailDatasets.length - 1; index >= 0; index--) {
       if (detailDatasets[index].label.includes('Gross Profit')) detailDatasets.splice(index, 1);
     }
   }
+  // Both financial metrics use pesos. One shared scale preserves their magnitude,
+  // and its bounds include comparison and gap-estimate series as well as actuals.
+  detailDatasets.forEach(dataset => { dataset.yAxisID = 'revenue'; dataset.tension = 0; });
   const detailScales = {
     x: opts.scales.x,
-    revenue: diagnosticAxis(revenue, 'Net sales revenue (₱)', getColor(), 'left', true),
-    ...(descriptiveUsesDailyGrain() ? {} : { grossProfit: diagnosticAxis(profit, 'Gross profit (₱)', getAmber(), 'right', false) })
+    revenue: diagnosticAxis(detailDatasets.flatMap(dataset => dataset.data), 'Sales and gross profit (₱)', getColor(), 'left', true)
   };
 
   const subtitle = document.getElementById('salesComparisonSubtitle');
@@ -201,8 +244,26 @@ function renderSalesDiagnostics(opts) {
     : (yearly
       ? 'Annual revenue and gross profit for ' + descriptivePeriodLabel() + '; totals use only observed source months and incomplete latest years are identified.'
       : (descriptiveUsesDailyGrain() ? 'Daily' : 'Monthly') + ' revenue and gross profit for ' + descriptivePeriodLabel() + '; gaps mean unavailable observations, not zero sales.')
-      + (predictedCount ? ' Dashed triangles are weighted gap estimates and are excluded from observed totals and YoY.' : '');
+      + (predictedCount ? ' Connected dashed sections and triangle points are weighted gap estimates and are excluded from observed totals and YoY.' : '');
   if (subtitle && descriptivePeriod === 'custom' && !descriptiveUsesDailyGrain()) subtitle.textContent += ' Historical partial months require dated transactions; whole-month totals are not assigned to partial dates.';
+  if (subtitle && yearly && comparisonMode === 'yoy') subtitle.textContent += ' Both yearly lines use only matched observed months; KPI totals retain the full selected observed scope.';
+  if (subtitle && descriptiveUsesDailyGrain() && priorDisplayRows.some(row => row.alignment_note)) subtitle.textContent += ' Leap-day alignment counts each prior-year day once; duplicate matches are unavailable.';
+  if (subtitle) subtitle.textContent += ' ' + descriptiveTrendSummary(selectedRows);
+  if (subtitle) {
+    const card = subtitle.closest('.chart-card');
+    let notes = card?.querySelector('#salesComparisonMethod');
+    if (card && !notes) {
+      notes = document.createElement('details'); notes.id = 'salesComparisonMethod'; notes.className = 'chart-method';
+      const heading = document.createElement('summary'); heading.textContent = 'Scope and calculation notes';
+      const text = document.createElement('p'); notes.append(heading, text); card.append(notes);
+    }
+    if (notes) notes.querySelector('p').textContent = subtitle.textContent;
+    subtitle.textContent = dailyUnavailable ? 'Daily observations are unavailable for this selection.'
+      : descriptivePeriodLabel() + ' · Values in pesos; blank periods are unavailable.'
+        + (predictedCount ? ' Dashed sections and triangles mark gap estimates.' : '')
+        + (yearly && comparisonMode === 'yoy' ? ' Yearly lines use matched observed months.' : '')
+        + (descriptiveUsesDailyGrain() && priorDisplayRows.some(row => row.alignment_note) ? ' Leap-day alignment counts each prior-year day once.' : '');
+  }
   createChart('revenueDetailChart', {
     type: 'line',
     data: { labels: detailLabels, datasets: detailDatasets },
@@ -217,7 +278,7 @@ function renderSalesDiagnostics(opts) {
         },
         tooltip: {
           ...opts.plugins.tooltip,
-          callbacks: { label: context => context.dataset.label + ': ' + diagnosticCurrency(context.raw) }
+          callbacks: { label: descriptiveEvidenceTooltip }
         }
       },
       scales: {
@@ -226,9 +287,9 @@ function renderSalesDiagnostics(opts) {
           ...detailScales.x,
           ticks: {
             ...((detailScales.x && detailScales.x.ticks) || {}),
-            maxRotation: 45,
+            maxRotation: 0,
             autoSkip: true,
-            maxTicksLimit: descriptiveUsesDailyGrain() ? 14 : 18
+            maxTicksLimit: window.innerWidth < 600 ? 5 : 12
           }
         }
       }
@@ -238,15 +299,7 @@ function renderSalesDiagnostics(opts) {
   const rows = selectedRows.map((row, index) => {
     const previousPeriod = priorPeriod(String(row.period));
     if (yearly) {
-      const actual = new Map(dashboardRawMonthlyRows().map(month => [month.period, month]));
-      let current = 0, previous = 0, matchedMonths = 0;
-      for (let month = 1; month <= 12; month++) {
-        const suffix = '-' + String(month).padStart(2, '0');
-        if (!descriptivePeriodIncludes(String(row.period) + suffix)) continue;
-        const currentRow = actual.get(String(row.period) + suffix), priorRow = actual.get(previousPeriod + suffix);
-        if (!currentRow || !priorRow || currentRow.revenue == null || priorRow.revenue == null || currentRow.evidence === 'estimate' || priorRow.evidence === 'estimate') continue;
-        current += Number(currentRow.revenue); previous += Number(priorRow.revenue); matchedMonths++;
-      }
+      const { current, previous, matchedMonths } = descriptiveYearComparison(row.period);
       const delta = matchedMonths ? current - previous : null;
       return { label: descriptivePointLabel(row.period) + ' · ' + matchedMonths + '/12 months matched', period: String(row.period), previousPeriod,
         current: matchedMonths ? current : null, previous: matchedMonths ? previous : null,
@@ -275,7 +328,7 @@ function renderSalesDiagnostics(opts) {
   createChart('growthChart', {
     type: 'bar',
     data: {
-      labels: rows.map(row => row.label),
+      labels: rows.map(row => descriptivePointLabel(row.period)),
       datasets: [
         { label: 'YoY net sales growth (%)', data: rows.map(row => row.rate), yAxisID: 'growthRate', backgroundColor: rows.map(row => row.rate < 0 ? getRed(.8) : getColor(.8)), borderRadius: 4 },
         { type: 'line', label: 'YoY net sales change (₱)', data: rows.map(row => row.delta), yAxisID: 'pesoChange', borderColor: getAmber(), backgroundColor: getAmber(), pointRadius: 3, tension: 0, spanGaps: false }
@@ -295,7 +348,7 @@ function renderSalesDiagnostics(opts) {
             label: context => context.dataset.label + ': ' + (context.dataset.yAxisID === 'growthRate' ? diagnosticRate(context.raw) : diagnosticCurrency(context.raw)),
             afterBody: contexts => {
               const row = rows[contexts[0]?.dataIndex];
-              return row ? [row.previousPeriod + ': ' + diagnosticCurrency(row.previous), row.period + ': ' + diagnosticCurrency(row.current)] : [];
+              return row ? [row.previousPeriod + ': ' + diagnosticCurrency(row.previous), row.period + ': ' + diagnosticCurrency(row.current), ...(yearly ? [row.label] : [])] : [];
             }
           }
         }
@@ -305,9 +358,9 @@ function renderSalesDiagnostics(opts) {
           ...opts.scales.x,
           ticks: {
             ...((opts.scales.x && opts.scales.x.ticks) || {}),
-            maxRotation: 45,
+            maxRotation: 0,
             autoSkip: true,
-            maxTicksLimit: 10
+            maxTicksLimit: window.innerWidth < 600 ? 5 : 10
           }
         },
         growthRate: { type: 'linear', position: 'left', beginAtZero: true, ticks: { callback: value => Number(value).toLocaleString('en-PH', { maximumFractionDigits: 1 }) + '%' }, title: { display: true, text: 'YoY net sales growth (%)' } },
@@ -316,6 +369,7 @@ function renderSalesDiagnostics(opts) {
     }
   });
 
+  renderSalesMovement(opts);
   const table = document.getElementById('salesGrowthTable');
   if (table) {
     table.replaceChildren();

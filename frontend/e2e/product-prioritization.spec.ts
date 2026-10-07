@@ -25,8 +25,11 @@ test.beforeEach(async ({ page }) => {
 
 test('observed revenue ranks and full-population ABC replace unsupported clinical claims', async ({ page }) => {
   await expect(page.locator('#productPriorityScope')).toContainText('Recorded revenue: ₱100')
-  const rows = await page.locator('#productTable tbody tr').evaluateAll(rows => rows.map(row => [...row.querySelectorAll('td')].map(cell => cell.textContent)))
-  expect(rows.map(row => row[7])).toEqual(['A', 'A', 'B', 'B', 'C'])
+  const classes = await page.locator('#productTable').evaluate(table => {
+    const column = [...table.querySelectorAll('thead th')].findIndex(header => header.textContent === 'Candidate ABC')
+    return [...table.querySelectorAll('tbody tr')].map(row => row.querySelectorAll('td')[column].textContent)
+  })
+  expect(classes).toEqual(['A', 'A', 'B', 'B', 'C'])
   await expect(page.locator('#page-products')).not.toContainText(/Zero-Stockout|WHO VEN|Surge Multiplier|guaranteed emergency|Clinical VEN/)
   await expect(page.locator('#productScenarioSelect')).toHaveCount(0)
   const values = await page.evaluate(() => (window as any).Chart.getChart(document.getElementById('productBarChart')).data.datasets[0].data)

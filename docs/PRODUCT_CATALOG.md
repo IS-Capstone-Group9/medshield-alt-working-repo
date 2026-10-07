@@ -28,6 +28,13 @@ supplied or invented by this implementation.
 
 ## Resolution and validation
 
+The [product identity and pricing review rules](PRODUCT_REVIEW_RULES.md) refine
+local literal proposals and scan all version-17 transactions. Price and customer
+negotiation remain transaction attributes. Package/count/strength/model differences
+remain identity boundaries, and title clues cannot supply an approval. Local review
+uses `product_review_v2_literal_pricing`; deployed Gold resolution remains
+`catalog_v1_independent_evidence`. Preparation output never supplies dashboard data.
+
 1. Exact normalized reviewed alias is the first matching route. Existing data has
    no populated verified source identifier. Case/spacing normalization is automatic.
 2. Approved identity requires a stable SKU, title and stable representative alias,
@@ -92,6 +99,14 @@ delete sales records using it. `catalog_interchange.py input.json new-proposals.
 canonical IDs and duplicate flags and produces unapproved review rows.
 
 ## Evidence and remaining decisions
+
+The [3 October complete version-17 product/pricing scan](../outputs/product_sales_rules/2026-10-02T21-00-51-469Z/sealed-review/README.md)
+is the latest rule-preparation evidence: 37,728 records, 4,561 current groups and
+4,985 original titles. The improved parser and price review preserve every extracted
+source field and reconcile warehouse months and annual financial totals. There are
+1,609 groups with multiple recorded positive original-source CP values and zero
+validated unit-price comparison records. Pricing causes remain unknown and all
+product approvals remain pending. Earlier receipts below remain historical evidence.
 
 - [Complete local review](../outputs/product_catalog_implementation/2026-09-27T07-51-00-423Z/README.md): 37,728 records, 4,561 labels, 4,985 original titles, 50 formatting families, 442-label priority cohort.
 - [Review queue](../outputs/product_catalog_implementation/2026-09-27T07-51-00-423Z/review.json): candidates, reasons, source-record IDs, positive/net/return amounts and proposed attributes.

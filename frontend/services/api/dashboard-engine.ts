@@ -1,4 +1,5 @@
 import { PLANNING_SCRIPT } from './prescriptive-planning-runtime'
+import { DIAGNOSTIC_DRILLDOWN_SCRIPT } from './diagnostic-drilldown-runtime'
 import { EXTERNAL_REGRESSION_SCRIPT } from './external-regression-runtime'
 import { FORECAST_VALIDATION_SCRIPT } from './forecast-validation-runtime'
 import { SALES_SECTORS_SCRIPT } from './sales-sectors-runtime'
@@ -7,6 +8,7 @@ import { SALES_DIAGNOSTICS_SCRIPT } from './sales-diagnostics-runtime'
 import { SALES_HEATMAP_SCRIPT } from './sales-heatmap-runtime'
 import { patchOverviewMonthlyChart } from './overview-monthly-runtime'
 import { CURRENT_YEAR_SCRIPT } from './current-year-runtime'
+import { OVERVIEW_ANALYTICS_SCRIPT } from './overview-analytics-runtime'
 import { PRODUCT_PRIORITIZATION_SCRIPT } from './descriptive-products-runtime'
 import {
   DESCRIPTIVE_PERIOD_SCRIPT,
@@ -21,6 +23,8 @@ export type ListenerRecord = {
 }
 
 const DASHBOARD_GLOBAL_HANDLERS = [
+  'openDiagnosticDrilldown',
+  'getDiagnosticScope',
   'showPage',
   'toggleTheme',
   'openHelp',
@@ -202,8 +206,13 @@ const PAGE_META`,
     const trackedChart = charts[id];`,
     )
     .replace(
+      "function applyDatasetPatch(patch) {\n  if (patch.monthly)",
+      "function applyDatasetPatch(patch) {\n  if (patch.release) DATA.release = patch.release;\n  if (patch.monthly)",
+    )
+    .replace(
       "    const ChartClass = getChartConstructor();",
-      `    if (existingChart && existingChart.config && existingChart.config.type === stableConfig.type) {
+      `    attachDiagnosticChartAction(id, stableConfig);
+    if (existingChart && existingChart.config && existingChart.config.type === stableConfig.type) {
       existingChart.data = stableConfig.data;
       existingChart.options = stableConfig.options;
       existingChart.update('none');
@@ -281,6 +290,7 @@ function applyDatasetPatch(patch) {
   if (Array.isArray(patch.top_products)) DATA.top_products = patch.top_products;
   if (Array.isArray(patch.year_summary)) DATA.year_summary = patch.year_summary;
   if (Array.isArray(patch.seasonality)) DATA.seasonality = patch.seasonality;
+  if (patch.release) DATA.release = patch.release;
   if (typeof refreshComparison === 'function') refreshComparison();
 }
 function dashboardPageIsActive(name) {
@@ -388,8 +398,10 @@ function resizeCharts() {
   }
 }
 ${SALES_DIAGNOSTICS_SCRIPT}
+${DIAGNOSTIC_DRILLDOWN_SCRIPT}
 ${CURRENT_YEAR_SCRIPT}
 ${DESCRIPTIVE_PERIOD_SCRIPT}
+${OVERVIEW_ANALYTICS_SCRIPT}
 ${PRODUCT_PRIORITIZATION_SCRIPT}
 ${SALES_HEATMAP_SCRIPT}
 ${SALES_SECTORS_SCRIPT}

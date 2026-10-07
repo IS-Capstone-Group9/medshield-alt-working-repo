@@ -1,3 +1,5 @@
+import { revenueAbc } from './descriptiveMetrics'
+
 /** Metadata is selected from the same pinned fact as the measures. Legacy releases
  * have no verified catalog contract; their existing source keys remain unresolved. */
 export function catalogProjection(policy: string): string {
@@ -63,7 +65,7 @@ export function catalogProducts(rows: Array<Record<string, unknown>>, category =
       original_aliases: [...g.aliases].sort(), transaction_provenance: [...g.provenance].sort(), transaction_lineage: [...g.lineage].sort(),
       revenue: g.revenue, positive_sales: g.positive, returns_value: g.returns, qty: g.quantity, income: g.income, estimated_qty: g.estimated, verified_qty: g.verified,
       pct_of_total: denominator > 0 ? g.positive / denominator * 100 : null,
-      abc: denominator <= 0 || g.positive <= 0 ? 'Unclassified' : cumulative / denominator <= .8 ? 'A' : cumulative / denominator <= .95 ? 'B' : 'C' }
+      abc: revenueAbc(cumulative, denominator, g.positive), abc_policy: 'positive_sales_crossing_inclusive_v2_candidate' }
   })
   return { products: products.slice(0,limit), denominator, product_count: groups.size,
     unresolved_count: products.filter(row => row.identity_status !== 'approved').length,

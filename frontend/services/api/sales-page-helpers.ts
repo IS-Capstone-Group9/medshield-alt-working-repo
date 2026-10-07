@@ -19,6 +19,13 @@ export function renderSalesPage(root: HTMLElement, result: SalesPage) {
     ['Gross Profit', 'net_income', 'money'],
   ]
   const fullColumns: Array<[string, keyof SalesPage['rows'][number], 'text' | 'number' | 'money' | 'percent']> = [
+    ['Source Record ID', 'source_record_id', 'text'],
+    ['Workbook', 'source_workbook', 'text'],
+    ['Source Layout', 'source_layout', 'text'],
+    ['Source Row', 'source_row_number', 'number'],
+    ['Reporting Group ID', 'canonical_group_id', 'text'],
+    ['Transaction Evidence', 'transaction_evidence', 'text'],
+    ['File SHA-256', 'source_file_sha256', 'text'],
     ['Area', 'area', 'text'],
     ['DR Number', 'dr_number', 'text'],
     ['Date Delivered', 'date_delivered', 'text'],
@@ -81,6 +88,10 @@ export function renderSalesPage(root: HTMLElement, result: SalesPage) {
 }
 
 export function setSalesViewError(root: HTMLElement, message: string) {
+  root.querySelector('#salesComputationGrid')?.replaceChildren()
+  root.querySelector('#salesFinancialReconciliation')?.replaceChildren()
+  const pageLabel = root.querySelector('#salesDataPage'); if (pageLabel) pageLabel.textContent = 'Page unavailable'
+  for (const id of ['salesDataPrevious','salesDataNext']) { const button = root.querySelector<HTMLButtonElement>('#' + id); if (button) button.disabled = true }
   const table = root.querySelector<HTMLTableElement>('#salesDataTable')
   const status = root.querySelector<HTMLElement>('#salesDataStatus')
   if (table) {

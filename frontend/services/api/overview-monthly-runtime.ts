@@ -68,15 +68,28 @@ const RESPONSIVE_OVERVIEW_CHART = `  const overviewRows = getDescriptiveDisplayR
   const observedSourcePeriods = DATA.monthly.filter(row => row.revenue != null && !row.missing && row.evidence !== 'estimate').map(row => String(row.period)).sort();
   if (overviewSubtitle && observedSourcePeriods.length) overviewSubtitle.textContent += '; source coverage ' + observedSourcePeriods[0] + '–' + observedSourcePeriods[observedSourcePeriods.length - 1];
   if (overviewSubtitle && descriptivePeriod === 'custom' && !descriptiveUsesDailyGrain()) overviewSubtitle.textContent += '; historical partial months require dated transactions';
+  if (overviewSubtitle) overviewSubtitle.textContent += '; ' + overviewRows.filter(row => row.evidence === 'actual').length + '/' + overviewRows.length + ' displayed periods observed';
+  if (overviewSubtitle && comparisonMode === 'yoy' && descriptiveUsesYearlyGrain()) overviewSubtitle.textContent += '; chart compares matched observed months; KPI retains full selected observed scope';
+  if (overviewSubtitle) overviewSubtitle.textContent += '. ' + descriptiveTrendSummary(overviewRows);
   const overviewPriorRows = getDescriptivePriorDisplayRows();
-  const overviewDatasets = monthlyDataForMode.datasets.flatMap(dataset => {
+  const overviewDatasets = monthlyDataForMode.datasets.map(dataset => {
     const evidenceRows = dataset.label.startsWith('Prior-year') ? overviewPriorRows : overviewRows;
-    if (!evidenceRows.some(row => row.evidence === 'estimate')) return [dataset];
-    return [
-      { ...dataset, label: dataset.label.split(' · ')[0] + ' · Actual', data: dataset.data.map((value, i) => evidenceRows[i]?.evidence === 'actual' ? value : null), fill: false },
-      { ...dataset, label: dataset.label.split(' · ')[0] + ' · Gap estimate', data: dataset.data.map((value, i) => evidenceRows[i]?.evidence === 'estimate' ? value : null), borderDash: [6, 4], pointStyle: 'triangle', fill: false }
-    ];
+    return descriptiveEvidenceLine({ ...dataset, label: dataset.label.split(' · ')[0] }, evidenceRows);
   });
+  if (overviewSubtitle && overviewRows.concat(overviewPriorRows).some(row => row.evidence === 'estimate')) overviewSubtitle.textContent += ' Connected dashed sections and triangles identify estimates; observed totals exclude them.';
+  if (overviewCard && overviewSubtitle) {
+    let notes = overviewCard.querySelector('[data-overview-trend-notes]');
+    if (!notes) {
+      notes = document.createElement('details');
+      notes.className = 'overview-chart-notes';
+      notes.dataset.overviewTrendNotes = 'true';
+      notes.innerHTML = '<summary>Data coverage and comparison notes</summary><p></p>';
+      overviewCard.append(notes);
+    }
+    notes.querySelector('p').textContent = overviewSubtitle.textContent;
+    overviewSubtitle.textContent = descriptivePeriodLabel() + ' · ' + overviewRows.filter(row => row.evidence === 'actual').length + '/' + overviewRows.length + ' periods observed.'
+      + (overviewEstimatedCount ? ' Dashed lines and triangles mark estimates; totals exclude them.' : ' Observed sales and gross profit.');
+  }
 
   createChart('overviewBaselineChart', {
     type: 'line',
@@ -84,14 +97,15 @@ const RESPONSIVE_OVERVIEW_CHART = `  const overviewRows = getDescriptiveDisplayR
       labels: monthlyDataForMode.labels,
       datasets: overviewDatasets
     },
-    options: { ...opts, plugins: { ...opts.plugins, legend: { position: 'bottom' } } }
+    options: { ...opts, plugins: { ...opts.plugins, legend: { position: 'bottom' }, tooltip: { ...opts.plugins.tooltip, callbacks: { label: descriptiveEvidenceTooltip } } } }
   });
 
   if (overviewCanvas) {
     overviewCanvas.setAttribute('aria-label', descriptiveUsesDailyGrain()
       ? 'Line chart showing daily net sales revenue for ' + descriptivePeriodLabel() + ' when transaction dates are available.'
       : 'Line chart showing ' + (descriptiveUsesYearlyGrain() ? 'yearly' : 'monthly') + ' net sales revenue and gross profit for ' + descriptivePeriodLabel() + '.');
-  }`
+  }
+  renderOverviewAnalytics();`
 
 export function patchOverviewMonthlyChart(script: string): string {
   const withCurrentYearRows = script

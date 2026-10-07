@@ -51,14 +51,21 @@ test('product prioritization follows trailing periods and custom-range monthly g
   await page.addScriptTag({path:path.resolve('node_modules/chart.js/dist/chart.umd.js')})
   await page.evaluate(script=>new Function(script)(),getExecutableDashboardScript())
   await page.evaluate(()=>{
-    const app=window as any,row=(product:string,period:string,revenue:number)=>({date:period+'-28',sector:'Private',channel:'Pharma',territory:'Quezon',revenue,positive_sales:revenue,returns_value:0,quantity:10,period,product,row_count:1,basis:'fixture'})
-    const currentRows=Array.from({length:30},(_,index)=>row('Product '+String(index+1).padStart(2,'0'),'2025-02',3000-index*50))
+    const app=window as any,row=(product:string,period:string,revenue:number,returnsValue=0)=>({date:period+'-28',sector:'Private',channel:'Pharma',territory:'Quezon',revenue,positive_sales:revenue-returnsValue,returns_value:returnsValue,quantity:10,period,product,row_count:1,basis:'fixture'})
+    const currentRows=Array.from({length:30},(_,index)=>row('Product '+String(index+1).padStart(2,'0'),'2025-02',3000-index*50,index===0?-100:0))
     const priorRows=Array.from({length:10},(_,index)=>row('Prior Product '+String(index+1).padStart(2,'0'),'2024-06',10000-index*500))
     app.setSalesSectorsData({rows:[...currentRows,...priorRows],source:{file:'fixture',excluded:{}}})
     app.showPage('products');app.setDescriptivePeriod('custom');app.setYear('2025');app.setProductCohort('5')
   })
   await expect(page.locator('#btnYoyYear')).toHaveCount(0)
-  expect(await page.evaluate(()=>(window as any).Chart.getChart(document.getElementById('productBarChart')).data.datasets.map((d:any)=>d.label))).toEqual(['Observed net sales (₱)'])
+  const signedSales = await page.evaluate(() => {
+    const data = (window as any).Chart.getChart(document.getElementById('productBarChart')).data
+    return { labels: data.datasets.map((dataset: any) => dataset.label), positive: data.datasets[0].data, returns: data.datasets[1].data }
+  })
+  expect(signedSales.labels).toEqual(['Positive sales (₱)', 'Returns (₱)'])
+  expect(signedSales.positive).toEqual([3100, 2950])
+  expect(signedSales.returns).toEqual([-100, 0])
+  expect(signedSales.positive.map((value: number, index: number) => value + signedSales.returns[index])).toEqual([3000, 2950])
   await expect(page.locator('#productPriorityScope')).toContainText('ABC policy candidate')
   await expect(page.locator('#productTable tbody tr')).toHaveCount(2)
   await page.selectOption('#productCohortSelect','10')

@@ -15,38 +15,44 @@ import { getJson, authenticatedJson } from './api-client'
 import { publishedForecastEvidence } from './published-forecast-adapter'
 
 let heatmapRequest = 0
-export async function refreshSalesHeatmap() {
+export async function refreshSalesHeatmap(): Promise<boolean> {
   const request = ++heatmapRequest
   const apply = (window as any).setSalesHeatmapData
-  if (typeof apply !== 'function') return
+  if (typeof apply !== 'function') return false
   apply(null, 'Loading product-level quantities…')
   try {
     const data = await getJson('/api/sales/heatmap')
-    if (request === heatmapRequest) apply(data)
+    if (request !== heatmapRequest || (window as any).setSalesHeatmapData !== apply) return false
+    apply(data)
+    return true
   } catch {
     if (request === heatmapRequest) apply(null, 'Product quantities unavailable from Databricks Gold; no local or demonstration quantities were substituted.')
+    return false
   }
 }
 
 let sectorRequest = 0
-export async function refreshSalesSectors() {
+export async function refreshSalesSectors(): Promise<boolean> {
   const request = ++sectorRequest
   const apply = (window as any).setSalesSectorsData
-  if (typeof apply !== 'function') return
+  if (typeof apply !== 'function') return false
   apply(null, 'Loading buyer-sector analysis…')
   try {
     const data = await getJson('/api/sales/sectors')
-    if (request === sectorRequest) apply(data)
+    if (request !== sectorRequest || (window as any).setSalesSectorsData !== apply) return false
+    apply(data)
+    return true
   } catch {
     if (request === sectorRequest) apply(null, 'Buyer-sector analysis unavailable from Databricks Gold; no local or demonstration classifications were substituted.')
+    return false
   }
 }
 
 let forecastRequest = 0
-export async function refreshForecastValidation() {
+export async function refreshForecastValidation(): Promise<boolean> {
   const request = ++forecastRequest
   const apply = (window as any).setForecastValidationData
-  if (typeof apply !== 'function') return
+  if (typeof apply !== 'function') return false
   const value = (id: string) => (document.getElementById(id) as HTMLSelectElement | null)?.value ?? ''
   const params = new URLSearchParams({ sector: value('forecastSector') || 'Unknown', product: value('forecastProduct'), metric: value('forecastMetric') || 'revenue' })
   apply(null, 'Loading source-backed forecast evidence…')
@@ -57,24 +63,29 @@ export async function refreshForecastValidation() {
         const release: any = await getJson('/api/forecasts?schema_version=2&horizon=12')
         const evidence = publishedForecastEvidence(release)
         if (evidence) {
-          if (request === forecastRequest && (window as any).setForecastValidationData === apply) apply(evidence)
-          return
+          if (request !== forecastRequest || (window as any).setForecastValidationData !== apply) return false
+          apply(evidence)
+          return true
         }
         publicationNote = release.reason || 'No published model release.'
       } catch { publicationNote = 'Published model storage is unavailable; the following is separately computed retrospective benchmark evidence.' }
     }
     const data = await getJson(`/api/sales/forecast-validation?${params}`)
     if (publicationNote && data && typeof data === 'object') (data as any).limitations = [...((data as any).limitations || []), publicationNote]
-    if (request === forecastRequest && (window as any).setForecastValidationData === apply) apply(data)
+    if (request !== forecastRequest || (window as any).setForecastValidationData !== apply) return false
+    apply(data)
+    return true
   } catch {
     if (request === forecastRequest && (window as any).setForecastValidationData === apply) apply(null, 'Forecast evidence unavailable from Databricks Gold for the selected scope; no example forecasts were substituted.')
+    return false
   }
 }
 
 let regressionRequest = 0
-export async function refreshExternalRegression() {
+export async function refreshExternalRegression(): Promise<boolean> {
   const request = ++regressionRequest
   const apply = (window as any).setExternalRegressionData
+  if (typeof apply !== 'function') return false
   const fields: Record<string, string> = { sector: 'regSector', territory: 'regTerritory', product: 'regProduct', metric: 'regMetric', mode: 'regMode', provider: 'regProvider', disease: 'regDisease', lag: 'regLag', rainfall_lag: 'regRainLag' }
   const params = new URLSearchParams()
   for (const [key, id] of Object.entries(fields)) {
@@ -84,25 +95,33 @@ export async function refreshExternalRegression() {
   apply(null, 'Loading matched sales and external evidence…')
   try {
     const data = await getJson(`/api/sales/external-regression?${params}`)
-    if (request === regressionRequest && (window as any).setExternalRegressionData === apply) apply(data)
+    if (request !== regressionRequest || (window as any).setExternalRegressionData !== apply) return false
+    apply(data)
+    return true
   } catch {
     if (request === regressionRequest && (window as any).setExternalRegressionData === apply) apply(null, 'Regression evidence unavailable from Databricks Gold for the selected scope; no demonstration results were substituted.')
+    return false
   }
 }
 
 let planningRequest = 0, planningSolve = 0
-export async function refreshPlanning() {
+export async function refreshPlanning(): Promise<boolean> {
   const request = ++planningRequest
   ++planningSolve
   const apply = (window as any).setPlanningData
-  if (typeof apply !== 'function') return
+  if (typeof apply !== 'function') return false
   const value = (id: string) => (document.getElementById(id) as HTMLSelectElement)?.value
   const params = new URLSearchParams({ sector: value('planSector') || 'Unknown', territory: value('planTerritory') || 'all' })
   apply(null, 'Loading source-ranked products…')
   try {
     const data = await getJson(`/api/sales/planning-shortlist?${params}`)
-    if (request === planningRequest && (window as any).setPlanningData === apply) apply(data)
-  } catch { if (request === planningRequest && (window as any).setPlanningData === apply) apply(null, 'Shortlist unavailable from Databricks Gold; no demonstration products were substituted.') }
+    if (request !== planningRequest || (window as any).setPlanningData !== apply) return false
+    apply(data)
+    return true
+  } catch {
+    if (request === planningRequest && (window as any).setPlanningData === apply) apply(null, 'Shortlist unavailable from Databricks Gold; no demonstration products were substituted.')
+    return false
+  }
 }
 
 async function solvePlanning() {
@@ -141,26 +160,45 @@ export function installCommonInteractions(root: HTMLElement, activeListeners: an
 }
 
 const loadedDeferredPages = new Set<string>()
+const pendingDeferredPages = new Map<string, Promise<boolean>>()
+let deferredLoadGeneration = 0
 
 export function resetDashboardDeferredLoads() {
   loadedDeferredPages.clear()
+  pendingDeferredPages.clear()
+  ++deferredLoadGeneration
+  // Ignore responses from the previous dashboard/session after teardown.
+  ++heatmapRequest
+  ++sectorRequest
+  ++forecastRequest
+  ++regressionRequest
+  ++planningRequest
+  ++planningSolve
 }
 
-export function refreshDashboardModulesForPage(pageName: string) {
-  if (loadedDeferredPages.has(pageName)) return
+export function refreshDashboardModulesForPage(pageName: string): Promise<boolean> {
+  if (loadedDeferredPages.has(pageName)) return Promise.resolve(true)
+  const pending = pendingDeferredPages.get(pageName)
+  if (pending) return pending
 
-  let loaders: Array<() => Promise<void>> = []
+  let loaders: Array<() => Promise<boolean>> = []
   if (pageName === 'revenue') loaders = [refreshSalesHeatmap]
   if (pageName === 'products') loaders = [refreshSalesSectors]
   if (pageName === 'territory') loaders = [refreshSalesSectors]
   if (pageName === 'forecast') loaders = [refreshForecastValidation, refreshExternalRegression]
   if (pageName === 'inventory') loaders = [refreshPlanning]
-  if (!loaders.length) return
+  if (!loaders.length) return Promise.resolve(false)
 
-  loadedDeferredPages.add(pageName)
-  void Promise.allSettled(loaders.map((load) => load())).then((results) => {
-    if (results.some((result) => result.status === 'rejected')) loadedDeferredPages.delete(pageName)
+  const generation = deferredLoadGeneration
+  const completion = Promise.allSettled(loaders.map((load) => load())).then((results) => {
+    const success = generation === deferredLoadGeneration
+      && results.every((result) => result.status === 'fulfilled' && result.value)
+    if (success) loadedDeferredPages.add(pageName)
+    if (pendingDeferredPages.get(pageName) === completion) pendingDeferredPages.delete(pageName)
+    return success
   })
+  pendingDeferredPages.set(pageName, completion)
+  return completion
 }
 
 export async function refreshDashboardFromGateway() {
@@ -194,6 +232,7 @@ export async function refreshDashboardFromGateway() {
     }
   }
   applyDatasetPatch({
+    release: data.dataStatus?.release,
     monthly: data.monthly,
     by_area: data.byArea,
     top_products: data.products,
@@ -204,9 +243,13 @@ export async function refreshDashboardFromGateway() {
 }
 
 export async function loadSalesDataView(root: HTMLElement, state: any) {
+  const requestRevision = state.requestRevision = (state.requestRevision || 0) + 1
+  const evidence = { startDate: state.startDate, endDate: state.endDate, productId: state.productId,
+    area: state.area, sector: state.sector, region: state.region, territory: state.territory, category: state.category }
   const [datasetStatus, page, summary] = await Promise.all([
     getSalesDatasetStatus(),
     getSalesTransactions({
+      ...evidence,
       year: state.year,
       page: state.page,
       pageSize: state.pageSize,
@@ -214,11 +257,20 @@ export async function loadSalesDataView(root: HTMLElement, state: any) {
       qualityStatus: state.qualityStatus,
     }),
     getSalesSummary({
+      ...evidence,
       year: state.year,
       search: state.search,
       qualityStatus: state.qualityStatus,
     }),
   ])
+  if (requestRevision !== state.requestRevision || !root.isConnected) return
+  if (state.release) {
+    const sameRelease = (actual: Record<string, unknown> | undefined) => actual &&
+      Object.keys(state.release).every(key => JSON.stringify(actual[key]) === JSON.stringify(state.release[key]))
+    if (!sameRelease(page.release) || !sameRelease(summary.release)) {
+      throw new Error('The source release changed since this investigation. Reopen the analysis before inspecting its transactions.')
+    }
+  }
   state.page = page.pagination.page
   renderSalesDatasetStatus(root, datasetStatus)
   renderSalesComputation(root, summary, state.computation)

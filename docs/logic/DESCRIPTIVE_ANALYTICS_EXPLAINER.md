@@ -21,8 +21,8 @@ Descriptive analytics answers what happened before predictive or prescriptive wo
 - Acquisition cost: sum of eligible Total TP (`total_trade_price`).
 - Transaction gross margin/profit: eligible workbook `net_income`, pending finance reconciliation.
 - YoY: `(current - prior) / abs(prior)` only when both comparison periods are interpretable.
-- Pareto share: cumulative product revenue divided by total eligible product revenue in the selected scope.
-- ABC candidate: A through 80%, B through 95%, C after 95% cumulative revenue.
+- Pareto share: cumulative positive eligible sales divided by the full selected positive-sales population, before display limits. Returns are preserved separately in net revenue.
+- ABC candidate (29 September 2026): class uses cumulative share before the current label: below 80% A, 80% to below 95% B, 95% onward C. The label reaching a cutoff stays in its starting class. Nonpositive contributors are Unclassified. A dominant first label remains A. API and CSV identify `positive_sales_crossing_inclusive_v2_candidate`.
 - Coverage: active observed periods divided by applicable calendar periods.
 
 ## Contract allocation and mappings

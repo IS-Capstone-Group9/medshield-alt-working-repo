@@ -17,6 +17,16 @@ export type CatalogMetadata = {
 }
 
 export type SalesTransaction = {
+  source_record_id?: string
+  source_workbook?: string
+  source_layout?: string
+  source_file_sha256?: string
+  canonical_group_id?: string
+  raw_area?: string
+  original_area?: string
+  is_net_sales_eligible?: boolean
+  is_gross_margin_eligible?: boolean
+  transaction_evidence?: string
   year: number | null
   area: string | null
   dr_number: string | null
@@ -34,7 +44,7 @@ export type SalesTransaction = {
   quality_status: 'valid' | 'warning' | 'rejected'
   quality_notes: string
   source_sheet: string
-  source_row_number: number
+  source_row_number: number | null
 }
 
 export type SalesDatasetStatus = {
@@ -67,6 +77,7 @@ export type SalesDatasetStatus = {
 }
 
 export type SalesPage = {
+  release?: Record<string, unknown>
   metadata: SalesDatasetStatus
   rows: SalesTransaction[]
   pagination: {
@@ -83,6 +94,7 @@ export type SalesPage = {
 }
 
 export type SalesSummary = {
+  release?: Record<string, unknown>
   gross_margin_rate?: number | null
   financial_reconciliation?: {
     delta: number

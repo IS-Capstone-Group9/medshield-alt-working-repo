@@ -83,9 +83,15 @@ function diagnosticMarginRows() {
     else {total.revenue += Number(row.margin_revenue_basis); total.income += Number(row.income);}
     totals.set(period,total);
   });
-  return descriptiveAxisPeriods().map(period => {
+  const result = descriptiveAxisPeriods().map(period => {
     const row = totals.get(period);
     return {year:descriptivePointLabel(period),revenue:row?.complete?row.revenue:null,income:row?.complete?row.income:null};
   });
+  const available = result.map(row => ({ ...row, rate: grossMarginPercent(row.income, row.revenue) })).filter(row => row.rate != null);
+  const caption = document.getElementById('marginChart')?.closest('.chart-card')?.querySelector('.chart-subtitle');
+  if (caption) caption.textContent = 'Gross profit ÷ revenue from the same margin-eligible records, before operating expenses. '
+    + (available.length ? available.length + '/' + result.length + ' periods have an interpretable margin. Latest: ' + available[available.length - 1].year + ', ' + available[available.length - 1].rate.toFixed(1) + '%.' : 'No interpretable margin in this selection.')
+    + ' Missing or nonpositive denominators are unavailable.';
+  return result;
 }
 `

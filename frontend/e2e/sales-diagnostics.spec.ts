@@ -143,7 +143,7 @@ test.skip('legacy overview year chart is superseded by descriptive period window
   await page.screenshot({ path: 'test-results/historical-net-sales-revenue.png', fullPage: true })
 })
 
-test('continuous years, independent scales, peso movement, baseline change and export agree', async ({ page }) => {
+test('continuous years, shared peso scale, peso movement, baseline change and export agree', async ({ page }) => {
   await page.evaluate(data => {
     const app = window as any
     app.applyDatasetPatch(data)
@@ -155,7 +155,8 @@ test('continuous years, independent scales, peso movement, baseline change and e
   expect(revenue.datasets[0].data).toEqual(Array(12).fill(3_000_000))
   expect(revenue.datasets[1].data).toEqual(Array.from({ length: 12 }, (_, i) => 60_000 + i * 1000))
   expect(revenue.datasets[0].axis).toBe('revenue')
-  expect(revenue.datasets[1].axis).toBe('grossProfit')
+  expect(revenue.datasets[1].axis).toBe('revenue')
+  expect(revenue.axes.grossProfit).toBeUndefined()
   expect(revenue.axes.revenue.position).toBe('left')
   const growth = await chartData(page, 'growthChart')
   expect(growth.labels).toEqual(['Jan 25', 'Feb 25', 'Mar 25', 'Apr 25', 'May 25', 'Jun 25', 'Jul 25', 'Aug 25', 'Sep 25', 'Oct 25', 'Nov 25', 'Dec 25'])
@@ -164,6 +165,7 @@ test('continuous years, independent scales, peso movement, baseline change and e
   await expect(page.locator('#salesGrowthSummary')).toContainText('50.0%')
   await expect(page.locator('#salesGrowthSummary')).toContainText('36,000,000')
   const downloadPromise = page.waitForEvent('download')
+  await page.getByRole('tab',{name:'Growth',exact:true}).click()
   await page.getByRole('button', { name: 'Export Growth CSV' }).click()
   const download = await downloadPromise
   const csv = await readFile((await download.path())!, 'utf8')
@@ -231,9 +233,8 @@ test('custom current-year-to-date range ends today and actuals override estimate
 
   const monthly = await chartData(page, 'revenueDetailChart')
   expect(monthly.labels).toHaveLength(calendar.month)
-  expect(monthly.datasets[0].data.slice(0, calendar.month - 1)).toEqual(Array(Math.max(0, calendar.month - 1)).fill(null))
-  expect(monthly.datasets[2].label).toContain('Gap estimate')
-  expect(monthly.datasets[2].data.slice(0, calendar.month - 1)).toEqual(Array(Math.max(0, calendar.month - 1)).fill(1_000_000))
+  expect(monthly.datasets[0].data.slice(0, calendar.month - 1)).toEqual(Array(Math.max(0, calendar.month - 1)).fill(1_000_000))
+  expect(monthly.datasets).toHaveLength(2)
   expect(monthly.datasets[0].data[calendar.month - 1]).toBe(9_000_000)
   expect(monthly.datasets[0].data).toHaveLength(calendar.month)
 })
@@ -251,6 +252,7 @@ test('annual YoY compares overlapping observed months instead of unequal yearly 
   const growth = await chartData(page, 'growthChart')
   expect(growth.datasets[0].data).toEqual([null, 100])
   expect(growth.datasets[1].data).toEqual([null, 100])
-  expect(growth.labels).toContain('2025 Partial · 1/12 months matched')
+  expect(growth.labels).toContain('2025 Partial')
+  await expect(page.locator('#salesGrowthTable')).toContainText('1/12 months matched')
   await expect(page.locator('#salesGrowthSummary')).toContainText('Annual comparisons include only months observed in both years')
 })
