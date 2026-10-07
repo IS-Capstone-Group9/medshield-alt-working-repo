@@ -85,6 +85,8 @@ Baseline CI requires no GitHub repository secrets or running Databricks/Supabase
 
 The optional legacy Python image and full model-generation script are outside baseline CI: they require local data that is not included in a fresh checkout. Offline analytical tests still run. `.gitattributes` preserves the catalog helper's deployed CRLF checksum and the 2025 CSV's original bytes across Windows and Linux.
 
+Optional local reference clones under `external/medshield_frontend/` and `temp-medshield/medshield-dashboard/` are ignored. Their old Git submodule pointers had no `.gitmodules` configuration and caused fresh GitHub checkouts to fail; they are not required by the application.
+
 [`codeql.yml`](../.github/workflows/codeql.yml) provides supplementary security analysis. [`sonarqube.yml`](../.github/workflows/sonarqube.yml) is optional and skips its scan when `SONAR_HOST_URL` or `SONAR_TOKEN` is absent. See the [workflow reference](../.github/workflows/README.md).
 
 ## Recommended protection for main
