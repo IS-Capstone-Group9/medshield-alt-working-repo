@@ -1,0 +1,88 @@
+import { test, expect } from '@playwright/test'
+import path from 'node:path'
+import { MEDSHIELD_MARKUP, MEDSHIELD_STYLE } from '../lib/medshieldReference'
+import { getExecutableDashboardScript } from '../services/api/dashboard-engine'
+import { formatSalesValue, renderSalesComputation } from '../services/api/sales-view-helpers'
+
+test('Section 1: real chart datasets, KPI rates, labels and refresh use the same financial definitions', async ({ page }) => {
+  // Exercise the actual dashboard runtime and Chart.js without depending on login or live services.
+  await page.route('http://medshield.test/**', route => route.fulfill({
+    contentType: 'text/html', body: '<html><head></head><body></body></html>',
+  }))
+  await page.goto('http://medshield.test/')
+  await page.setContent(`<style>${MEDSHIELD_STYLE}</style>${MEDSHIELD_MARKUP}`)
+  await page.evaluate(() => { window.fetch = async () => new Response('{}', { status: 503 }) })
+  await page.addScriptTag({ path: path.resolve('node_modules/chart.js/dist/chart.umd.js') })
+  await page.evaluate(script => { new Function(script)() }, getExecutableDashboardScript())
+  await page.waitForFunction(() => typeof (window as any).applyDatasetPatch === 'function')
+  await page.evaluate(() => {
+    const app = window as any
+    app.setDescriptivePeriod('custom')
+    app.setYear('2025')
+    app.showPage('revenue')
+    app.applyDatasetPatch({
+      year_summary: [{ year: '2025', revenue: 1000, income: 140, transactions: 2 }],
+      monthly: [{ period: '2025-01', revenue: 1000, income: 140, margin_revenue_basis: 700 }],
+    })
+  })
+  await expect(page.locator('#salesGrossMargin')).toHaveText('20.00%')
+  await page.evaluate(() => {
+    const app = window as any
+    app.showPage('overview')
+    app.buildCharts()
+  })
+  const chart = await page.evaluate(() => {
+    const app = window as any
+    const margin = app.Chart.getChart(document.getElementById('marginChart'))
+    const baseline = app.Chart.getChart(document.getElementById('overviewBaselineChart'))
+    return { values: margin.data.datasets[0].data, axis: margin.data.labels, labels: baseline.data.datasets.map((d: any) => d.label), sales: baseline.data.datasets[0].data, profit: baseline.data.datasets[1].data }
+  })
+  expect(chart.axis).toEqual(Array.from({ length: 12 }, (_, month) => new Intl.DateTimeFormat('en-PH', {
+    month: 'short', year: '2-digit', timeZone: 'UTC',
+  }).format(new Date(Date.UTC(2025, month, 1)))))
+  expect(chart.values).toHaveLength(12)
+  expect(chart.values[0]).toBeCloseTo(20)
+  expect(chart.values.slice(1)).toEqual(Array(11).fill(null))
+  expect(chart.labels).toEqual(['Net Sales Revenue', 'Gross Profit'])
+  expect(chart.sales).toEqual([1000, ...Array(11).fill(null)])
+  expect(chart.profit).toEqual([140, ...Array(11).fill(null)])
+  await expect(page.locator('#overviewBaselineChart').locator('xpath=ancestor::div[contains(@class,"chart-card")]').locator('.chart-subtitle')).toContainText('Jan 1, 2025 – Dec 31, 2025 · 1/12 periods observed')
+  await page.evaluate(() => {
+    const app = window as any
+    app.showPage('revenue')
+    app.buildCharts()
+  })
+  await page.locator('[data-metric-definitions] summary').click()
+  await expect(page.locator('[data-metric-definitions]')).toContainText('transaction percentages are not averaged')
+  await page.screenshot({ path: 'test-results/section-1-sales-diagnostics.png', fullPage: true })
+  await page.evaluate(() => (window as any).applyDatasetPatch({
+    year_summary: [{ year: '2025', revenue: 0, income: 20, transactions: 1 }],
+    monthly: [{ period: '2025-01', revenue: 0, income: 20, margin_revenue_basis: 0 }],
+  }))
+  await expect(page.locator('#salesGrossMargin')).toHaveText('Unavailable')
+  expect(await page.evaluate(() => (window as any).Chart.getChart(document.getElementById('marginChart')).data.datasets[0].data)).toEqual(Array(12).fill(null))
+})
+
+test('Section 1: filtered sales summary shows weighted rates and reconciliation in every computation mode', async ({ page }) => {
+  await page.setContent('<div id="salesComputationGrid"></div><p id="salesFinancialReconciliation"></p>')
+  const renderer = `${formatSalesValue.toString()}; ${renderSalesComputation.toString()};`
+  for (const mode of ['overview', 'average']) {
+    await page.evaluate(({ renderer, mode }) => {
+      new Function(`${renderer} renderSalesComputation(document.body, {
+        sums: { net_cost: 1000, net_income: 140 },
+        averages: { margin_pct: 0.30 }, counts: {}, top: {},
+        gross_margin_rate: 20,
+        financial_reconciliation: { delta: 5, checked_rows: 2, mismatched_rows: 1 }
+      }, '${mode}');`)()
+    }, { renderer, mode })
+    await expect(page.locator('#salesComputationGrid')).toContainText('20.00%')
+    await expect(page.locator('#salesComputationGrid')).not.toContainText('30.00%')
+    await expect(page.locator('#salesFinancialReconciliation')).toContainText('1 of 2 accepted rows')
+  }
+  await page.evaluate(renderer => new Function(`${renderer} renderSalesComputation(document.body, {
+    sums: { net_cost: 0, net_income: 10 }, averages: {}, counts: {}, top: {}
+  }, 'overview');`)(), renderer)
+  await expect(page.locator('#salesComputationGrid')).not.toContainText('Infinity')
+  await expect(page.locator('#salesComputationGrid')).not.toContainText('0.00%')
+  await expect(page.locator('#salesComputationGrid')).toContainText('Unavailable')
+})

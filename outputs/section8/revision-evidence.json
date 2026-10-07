@@ -1,0 +1,277 @@
+{
+  "as_of": "2026-09-12",
+  "scope_note": "Local source evidence; not authenticated UI or operational validation.",
+  "source_file_sha256": {
+    "data/medshield/processed/sales_transactions_area_allocated.json.gz": "6724d6977f1f7f873226f0a3ecdc938f6c8543081628426ea37f0fafcdcca106",
+    "datasources/templates/product_master_mapping.csv": "a79d53fa195dfdeba21898a690cde0b95e4fc5423bca9a0a46c78255f6c0b594",
+    "datasources/templates/buyer_sector_mapping.csv": "cbf669f9ceae8bb61bfd5bbad2d037b7c00f7c0e090fed3d412757331c010b7e",
+    "datasources/templates/area_classification_mapping.csv": "e8312e2c088fe628b1456687b8494446fe448852f971b18715be525911d4b2a3",
+    "datasources/templates/regression_station_mapping.csv": "d639d29d929b73d750fcc2f61c2d4eab6d5d2cc22b774424bea65a62c02947c6",
+    "data/medshield/processed/regression_external_monthly.json": "5f0d9af6bf9b561430819a12652fda394b96bfac2a9ca2663568a541b5380cd4"
+  },
+  "source": {
+    "file": "data/medshield/processed/sales_transactions_area_allocated.json.gz",
+    "checksum": "2738afaf114d9480928e37b6c2b53dc0cac9ba2f10dc74a98b2549e3345d235c",
+    "input_rows": 42165,
+    "included_rows": 35545,
+    "excluded": {
+      "quality_duplicate_or_estimated": 6618,
+      "invalid_metric_date_or_product": 2
+    }
+  },
+  "rows_by_ownership": {
+    "Unknown": 28001,
+    "Government": 7544
+  },
+  "net_sales_by_ownership": {
+    "Unknown": 203250641.76000023,
+    "Government": 184370752.13000003
+  },
+  "quantity_reconciliation": {
+    "status": "passed",
+    "product_months": 19047,
+    "mixed_product_total": "Intentionally not reported"
+  },
+  "heatmap": {
+    "source": {
+      "file": "data/medshield/processed/sales_transactions_area_allocated.json.gz",
+      "checksum": "2738afaf114d9480928e37b6c2b53dc0cac9ba2f10dc74a98b2549e3345d235c",
+      "generated_at": "2026-08-25T10:09:03.353Z",
+      "input_rows": 42165,
+      "included_rows": 35545,
+      "excluded": {
+        "rejected_or_unclassified": 4825,
+        "invalid_date_or_quantity": 2,
+        "duplicate": 63,
+        "estimated": 1730
+      },
+      "mapping_file": "datasources/templates/product_master_mapping.csv",
+      "metric": "Delivered quantity sold in source units; one raw product identity per view",
+      "missing_months": "Unobserved, not zero",
+      "estimated_rows": "Excluded"
+    },
+    "raw_product_count": 4483
+  },
+  "separate_financial_ledger": {
+    "financial_reconciliation": {
+      "delta": 172449135.25,
+      "checked_rows": 35956,
+      "mismatched_rows": 13469
+    },
+    "gross_margin_rate": 0.796493
+  },
+  "forecast": {
+    "scope": {
+      "sector": "Government",
+      "product": "",
+      "metric": "revenue",
+      "unit": "₱ net sales"
+    },
+    "models": {
+      "seasonal_naive": "Seasonal naive",
+      "last_value": "Last observed value"
+    },
+    "status": "Draft benchmark; source completeness unverified",
+    "source": {
+      "file": "data/medshield/processed/sales_transactions_area_allocated.json.gz",
+      "checksum": "2738afaf114d9480928e37b6c2b53dc0cac9ba2f10dc74a98b2549e3345d235c",
+      "input_rows": 42165,
+      "included_rows": 35545,
+      "excluded": {
+        "quality_duplicate_or_estimated": 6618,
+        "invalid_metric_date_or_product": 2
+      },
+      "as_of": "2026-09-12",
+      "scoped_rows": 7544,
+      "excluded_not_closed": 0
+    },
+    "origin": "2025-12",
+    "months_since_origin": 8,
+    "observed_months": 81
+  },
+  "forecast_12_month_comparison": {
+    "seasonal_naive": {
+      "n": 9,
+      "mae": 2695359.258888889,
+      "rmse": 3459768.5814482667,
+      "wape": 85.04902127000693,
+      "bias": -2574060.058888889
+    },
+    "last_value": {
+      "n": 9,
+      "mae": 1987359.7366666666,
+      "rmse": 2632312.4878742597,
+      "wape": 62.708894911691765,
+      "bias": -1230712.1588888888
+    }
+  },
+  "regression": {
+    "status": "exploratory",
+    "reason": "Retrospective one-month rolling evaluation using final revised signals. Publication dates are unavailable: this is not proof of operational forecast improvement or causality.",
+    "scope": {
+      "sector": "Unknown",
+      "territory": "Quezon",
+      "product": "",
+      "metric": "revenue",
+      "mode": "disease",
+      "provider": "NASA POWER",
+      "disease": "Dengue",
+      "lag": 1,
+      "rainfall_lag": 1,
+      "unit": "₱ net sales"
+    },
+    "sources": [
+      {
+        "provider": "DOH",
+        "status": "Prepared onset counts; retrospective only",
+        "file": "datasources/raw/doh/DOH_Request_Daily_Breakdown_Weekly_Summary_2021_2025.xlsx",
+        "checksum": "fbb4325924996226668952b4d79a7bd50f72b58d5eee4d8669bf6d75be897d78",
+        "area_mapping_checksum": "e8312e2c088fe628b1456687b8494446fe448852f971b18715be525911d4b2a3",
+        "audit": {
+          "input_rows": 699240,
+          "outside_exact_territory": 637006,
+          "ambiguous_months_excluded": 0
+        },
+        "date_basis": "Onset date; final retrospective counts, release dates unavailable",
+        "coverage": "Exact province labels only; absent months remain unobserved, city aliases unmerged"
+      },
+      {
+        "provider": "NASA POWER",
+        "status": "Weather proxy; complete daily months only",
+        "file": "data\\medshield\\processed\\weather_signals.json",
+        "checksum": "2be7b6d813da9ef42f0ff73f14cf4f4a314eb1b530dca1425b0e675966f144ba"
+      },
+      {
+        "provider": "PAGASA",
+        "status": "Station files detected; no approved station-to-sales-territory mapping",
+        "file": "datasources/raw/pagasa/stations",
+        "station_files": 10
+      }
+    ],
+    "sales_source": {
+      "file": "data/medshield/processed/sales_transactions_area_allocated.json.gz",
+      "checksum": "2738afaf114d9480928e37b6c2b53dc0cac9ba2f10dc74a98b2549e3345d235c",
+      "input_rows": 42165,
+      "included_rows": 35545,
+      "excluded": {
+        "quality_duplicate_or_estimated": 6618,
+        "invalid_metric_date_or_product": 2
+      }
+    },
+    "coefficients": [
+      {
+        "predictor": "Cases per 100 (1-month lag)",
+        "coefficient": -18356.28881210054,
+        "unit": "₱ net sales"
+      }
+    ],
+    "metrics": {
+      "baseline": {
+        "n": 12,
+        "mae": 118915.71653873687,
+        "rmse": 144925.10073232942,
+        "wape": 38.97720576125186,
+        "bias": 34265.65425151703
+      },
+      "augmented": {
+        "n": 12,
+        "mae": 130885.36519278226,
+        "rmse": 156126.918220732,
+        "wape": 42.900517767925436,
+        "bias": 64310.86516515018
+      }
+    },
+    "coverage": {
+      "sales_months": 95,
+      "signals": [
+        {
+          "provider": "DOH",
+          "signal": "Dengue",
+          "months": 60
+        }
+      ],
+      "matched_months": 59,
+      "training_months": 47,
+      "holdout_months": 12,
+      "evaluation_start": "2025-01",
+      "evaluation_end": "2025-12",
+      "training_end": "2024-12"
+    },
+    "mae_improvement_pct": -10.065657427331123
+  },
+  "planning_shortlist": {
+    "scope": {
+      "sector": "Unknown",
+      "territory": "Quezon"
+    },
+    "source": {
+      "file": "data/medshield/processed/sales_transactions_area_allocated.json.gz",
+      "checksum": "2738afaf114d9480928e37b6c2b53dc0cac9ba2f10dc74a98b2549e3345d235c",
+      "input_rows": 42165,
+      "included_rows": 35545,
+      "excluded": {
+        "quality_duplicate_or_estimated": 6618,
+        "invalid_metric_date_or_product": 2
+      }
+    },
+    "products": [
+      {
+        "product": "KZIDINE 35MG",
+        "revenue": 493260.0,
+        "quantity": 443.0,
+        "observed_months": 12,
+        "revenue_share_pct": 13.473055450112463
+      },
+      {
+        "product": "GITOR-40 40MG",
+        "revenue": 413000.0,
+        "quantity": 118.0,
+        "observed_months": 5,
+        "revenue_share_pct": 11.280809108576506
+      },
+      {
+        "product": "CARVIDA 6.25MG",
+        "revenue": 255552.0,
+        "quantity": 484.0,
+        "observed_months": 10,
+        "revenue_share_pct": 6.980225978970807
+      },
+      {
+        "product": "PHYTOBAS 10MG/ML IV",
+        "revenue": 190900.0,
+        "quantity": 230.0,
+        "observed_months": 7,
+        "revenue_share_pct": 5.214301353092627
+      },
+      {
+        "product": "CLOVAS 75MG TAB",
+        "revenue": 183300.0,
+        "quantity": 130.0,
+        "observed_months": 5,
+        "revenue_share_pct": 5.006712614048604
+      }
+    ],
+    "period_start": "2025-01",
+    "period_end": "2025-12",
+    "months_stale": 8,
+    "eligible_products": 85,
+    "excluded_nonpositive_products": 0,
+    "shortlist_share_pct": 41.95510450480101,
+    "ranking_revenue": 3661084.91,
+    "territories": [
+      "Batangas",
+      "Camarines Norte",
+      "Camarines Sur",
+      "Cavite",
+      "Laguna",
+      "Marinduque",
+      "Quezon"
+    ]
+  },
+  "release_gates": [
+    "Authenticated workflow evidence",
+    "Approved buyer and canonical SKU mappings",
+    "Approved weather station mapping and sufficient history",
+    "Client-approved planning objective and operational inputs"
+  ]
+}

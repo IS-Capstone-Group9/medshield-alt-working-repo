@@ -1,0 +1,2 @@
+date,year,month,region,province_city,station_name,rainfall_mm,temperature_mean_c,humidity_mean_pct,wind_speed_mean_kph,weather_indicator,source,source_file,notes
+2021-01-01,2021,1,Region IV-A,Quezon,Sample Station,12.5,27.1,82,8.4,rainy,PAGASA,pagasa_raw_file.csv,example row only

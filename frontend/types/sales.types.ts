@@ -1,0 +1,147 @@
+export type CatalogMetadata = {
+  canonical_group_id: string
+  canonical_sku: string | null
+  canonical_title: string
+  category: 'Medical' | 'Non-Medical' | 'Unclassified'
+  identity_status: 'approved' | 'needs_review' | 'proposed'
+  category_status: 'approved' | 'needs_review' | 'proposed'
+  item_kind: 'physical_product' | 'service' | 'unknown'
+  packaging_unit: string | null
+  pack_count: string | null
+  contained_unit: string | null
+  unit_of_measure: string | null
+  original_aliases?: string[]
+  transaction_evidence: 'original_source_detail' | 'adjusted_estimated_source' | 'independently_verified_detail'
+  transaction_evidence_lineage: string
+  resolution_policy: string
+}
+
+export type SalesTransaction = {
+  source_record_id?: string
+  source_workbook?: string
+  source_layout?: string
+  source_file_sha256?: string
+  canonical_group_id?: string
+  raw_area?: string
+  original_area?: string
+  is_net_sales_eligible?: boolean
+  is_gross_margin_eligible?: boolean
+  transaction_evidence?: string
+  year: number | null
+  area: string | null
+  dr_number: string | null
+  date_delivered: string | null
+  product: string | null
+  quantity: number
+  unit_cost: number
+  total_cost: number
+  discount: number
+  net_cost: number
+  trade_price_unit: number
+  total_trade_price: number
+  net_income: number
+  margin_pct: number
+  quality_status: 'valid' | 'warning' | 'rejected'
+  quality_notes: string
+  source_sheet: string
+  source_row_number: number | null
+}
+
+export type SalesDatasetStatus = {
+  dataset_name: string
+  source_file: string
+  checksum: string
+  received_at: string
+  cleaning_status: string
+  quality_summary: {
+    input_stage: string
+    rows_extracted: number
+    rows_accepted: number
+    rows_rejected: number
+    rows_with_warnings: number
+    duplicate_rows: number
+    valid_rows: number
+    years: Record<string, number>
+    source_period_start: string | null
+    source_period_end: string | null
+    standardizations: Record<string, number>
+    issues: Record<string, number>
+    columns_received: string[]
+    unique_products?: number
+    unique_dr_numbers?: number
+    sku_count?: number
+    merge_strategy?: string
+    merged_years?: string[]
+  }
+  canonical_columns: string[]
+}
+
+export type SalesPage = {
+  release?: Record<string, unknown>
+  metadata: SalesDatasetStatus
+  rows: SalesTransaction[]
+  pagination: {
+    page: number
+    page_size: number
+    page_count: number
+    total_rows: number
+  }
+  filters: {
+    year: string
+    search: string
+    quality_status: string
+  }
+}
+
+export type SalesSummary = {
+  release?: Record<string, unknown>
+  gross_margin_rate?: number | null
+  financial_reconciliation?: {
+    delta: number
+    checked_rows: number
+    mismatched_rows: number
+  }
+  sums: {
+    quantity?: number
+    total_cost?: number
+    net_cost?: number
+    total_trade_price?: number
+    net_income?: number
+  }
+  averages: {
+    quantity?: number
+    unit_cost?: number
+    net_income?: number
+    margin_pct?: number
+  }
+  counts: {
+    rows?: number
+    accepted_rows?: number
+    sku_count?: number
+    unique_dr_numbers?: number
+  }
+  top: {
+    area?: string
+    product?: string
+  }
+}
+
+export type SalesUploadResult = {
+  dataset: {
+    file_name: string
+    input_stage: string
+    cleaning_status: string
+    checksum: string
+  }
+  quality: SalesDatasetStatus['quality_summary']
+  persistence: {
+    local: {
+      persisted: boolean
+      path: string
+      merge_strategy?: string
+      years_replaced?: string[]
+      total_rows?: number
+    }
+    warehouse: { configured: boolean; persisted: boolean; message?: string; pipeline_run_key?: number }
+  }
+}

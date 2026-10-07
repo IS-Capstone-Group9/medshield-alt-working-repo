@@ -1,0 +1,61 @@
+
+Running 13 tests using 1 worker
+
+(node:10260) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:10260) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 [chromium] › e2e\dashboard-filter-placement.spec.ts:31:1 › filters belong above dashboard content and retain period and navigation behavior (2.8s)
+  ok  2 [chromium] › e2e\dashboard-filter-placement.spec.ts:65:1 › overview calendar and scatter retain observed values, negative sales and missing profit (1.2s)
+  ok  3 [chromium] › e2e\dashboard-filter-placement.spec.ts:100:1 › filter card fits a narrow screen including custom dates (1.1s)
+  ok  4 [chromium] › e2e\dashboard-recovery.spec.ts:17:1 › cookie-only restored local session supplies bearer headers to read and write callers (210ms)
+  ok  5 [chromium] › e2e\dashboard-recovery.spec.ts:50:1 › all deferred modules retry after transient failure and successful pages stay cached (223ms)
+  ok  6 [chromium] › e2e\dashboard-recovery.spec.ts:97:1 › deferred requests deduplicate and reset cannot cache or render a stale response (188ms)
+  ok  7 [chromium] › e2e\dashboard-recovery.spec.ts:122:1 › missing runtime handler does not cache an unloaded page (180ms)
+  ok  8 [chromium] › e2e\dashboard-recovery.spec.ts:136:1 › provenance retains valid future source years and keeps estimate choices out of observed evidence (231ms)
+  x   9 [chromium] › e2e\metric-definitions.spec.ts:7:1 › Section 1: real chart datasets, KPI rates, labels and refresh use the same financial definitions (966ms)
+(node:22952) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22952) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 10 [chromium] › e2e\metric-definitions.spec.ts:56:1 › Section 1: filtered sales summary shows weighted rates and reconciliation in every computation mode (1.1s)
+  ok 11 [chromium] › e2e\sales-sectors.spec.ts:7:1 › area ranking keeps buyer ownership separate from mapped geography (1.6s)
+  ok 12 [chromium] › e2e\sales-sectors.spec.ts:46:1 › product prioritization follows trailing periods and custom-range monthly granularity (1.8s)
+  ok 13 [chromium] › e2e\sales-sectors.spec.ts:92:1 › custom date range anchors to the date range and keeps missing days as gaps (735ms)
+
+
+  1) [chromium] › e2e\metric-definitions.spec.ts:7:1 › Section 1: real chart datasets, KPI rates, labels and refresh use the same financial definitions 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+    @@ -1,7 +1,7 @@
+      Array [
+    -   1000,
+    +   null,
+        null,
+        null,
+        null,
+        null,
+        null,
+
+      40 |   expect(chart.values.slice(1)).toEqual(Array(11).fill(null))
+      41 |   expect(chart.labels).toEqual(['Net Sales Revenue', 'Gross Profit'])
+    > 42 |   expect(chart.sales).toEqual([1000, ...Array(11).fill(null)])
+         |                       ^
+      43 |   expect(chart.profit).toEqual([140, ...Array(11).fill(null)])
+      44 |   await expect(page.locator('#overviewBaselineChart').locator('xpath=ancestor::div[contains(@class,"chart-card")] .chart-subtitle')).toContainText('Jan 1, 2025 – Dec 31, 2025 · 1/12 periods observed')
+      45 |   await page.locator('[data-metric-definitions] summary').click()
+        at C:\Users\Adrian\projects\medshield1\medshield\frontend\e2e\metric-definitions.spec.ts:42:23
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\outputs\remediation-drilldown-20261005\frontend-fixes-browser-verified\metric-definitions-Section-59cf0--same-financial-definitions-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\outputs\remediation-drilldown-20261005\frontend-fixes-browser-verified\metric-definitions-Section-59cf0--same-financial-definitions-chromium\error-context.md
+
+  1 failed
+    [chromium] › e2e\metric-definitions.spec.ts:7:1 › Section 1: real chart datasets, KPI rates, labels and refresh use the same financial definitions 
+  12 passed (20.1s)

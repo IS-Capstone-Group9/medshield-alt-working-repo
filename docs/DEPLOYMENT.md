@@ -1,18 +1,44 @@
 # Deployment
 
-Deployment steps, environments, and rollback plans.
+## Current position
 
-## SonarQube / Static Analysis
+MedShield supports local Node.js and Docker demonstrations. No production host is approved or configured. AWS is optional and should not delay data acceptance or analytics completion.
 
-This template includes a sample SonarQube/ SonarCloud setup:
+## Local Docker deployment
 
-- A sample `sonar-project.properties` file is at the repository root.
-- A GitHub Actions workflow `.github/workflows/sonarqube-and-deploy.yml` runs the Sonar scanner on PRs and pushes to `main`.
-- The `deploy` job is a placeholder; update the build and deploy steps to match your stack (Node, .NET, Docker, Kubernetes, etc.).
+`docker-compose.yml` starts two application containers:
 
-Secrets to configure in the repository settings:
-- `SONAR_TOKEN` — authentication token for SonarQube/SonarCloud
-- `SONAR_HOST_URL` — (self-hosted SonarQube) the URL of your SonarQube server
-- `SONAR_ORGANIZATION` — (SonarCloud) your organization key if using SonarCloud
+| Service | Port | Purpose |
+|---|---:|---|
+| `frontend` | 3000 | Next.js dashboard |
+| `backend` | 5000 | TypeScript gateway |
 
-If you want I can adapt the workflow to a specific build system — tell me which language or framework you use.
+Python analytics and product services are not part of the runtime compose stack.
+
+```powershell
+docker compose build
+docker compose up
+```
+
+Open `http://localhost:3000`; check the gateway at `http://localhost:5000/api/health`. Valid Supabase/Databricks configuration and a running SQL warehouse are still required for production-style authenticated analytics.
+
+## Release gates
+
+Before deployment:
+
+1. Gold data acceptance and named approvals are complete.
+2. Backend/frontend builds and required tests pass.
+3. The live Databricks contract and fail-closed behavior pass.
+4. Secrets and owners are configured in the target environment.
+5. HTTPS, allowed origins, monitoring, backup, rollback, and cost ownership are defined.
+6. Candidate/model/scenario limitations remain visible.
+
+## Cloud options
+
+Choose a host only after requirements are clear. A managed frontend plus container backend, a container platform, or a VM can all run the current two-service application. Databricks and Supabase remain managed external dependencies.
+
+## Rollback
+
+Retain the prior application image/commit and do not mutate Bronze evidence during an application rollback. If a data release fails, point stable views back to the last accepted publication or leave the dashboard unavailable until the candidate is corrected.
+
+See [SETUP.md](SETUP.md), [SERVICE_MANAGEMENT.md](SERVICE_MANAGEMENT.md), and [DEPLOYMENT_AND_CICD_GUIDE.md](DEPLOYMENT_AND_CICD_GUIDE.md).

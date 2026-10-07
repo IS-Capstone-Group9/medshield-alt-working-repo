@@ -1,0 +1,89 @@
+{
+  "checked_at": "2026-09-26T17:16:50.689Z",
+  "kpi": "OBSERVED NET SALES · LAST 12 MONTHS · THROUGH SEP 2026\n₱61,082,570\nGap estimate: ₱88,804,257 · Combined: ₱149,886,827 (actual + estimate)\nHistorical sales from Databricks Gold\nObserved sales only",
+  "subtitle": "Last 12 Months · through Sep 2026; 9 weighted estimates; uploaded actuals take precedence; source coverage 2017-01–2025-12",
+  "labels": [
+    "Oct 25",
+    "Nov 25",
+    "Dec 25",
+    "Jan 26",
+    "Feb 26",
+    "Mar 26",
+    "Apr 26",
+    "May 26",
+    "Jun 26",
+    "Jul 26",
+    "Aug 26",
+    "Sep 26"
+  ],
+  "datasets": [
+    {
+      "label": "Net Sales Revenue · Last 12 Months · through Sep 2026 · Actual",
+      "data": [
+        12512678.31,
+        25076009.2,
+        23493882.59,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "label": "Net Sales Revenue · Last 12 Months · through Sep 2026 · Gap estimate",
+      "data": [
+        null,
+        null,
+        null,
+        11246170.989000002,
+        9748717.233000001,
+        2419854.6410000003,
+        4181896.8480000007,
+        15366158.026000002,
+        11745272.879,
+        13664987.368999999,
+        6747965.578000001,
+        13683233.533000004
+      ]
+    },
+    {
+      "label": "Gross Profit · Last 12 Months · through Sep 2026 · Actual",
+      "data": [
+        2913359.17,
+        6500248.45,
+        6306149.52,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "label": "Gross Profit · Last 12 Months · through Sep 2026 · Gap estimate",
+      "data": [
+        null,
+        null,
+        null,
+        1735820.9810000004,
+        5341655.531,
+        1239912.6300000004,
+        1886615.2920000001,
+        3452316.3700000006,
+        5451116.053,
+        1607578.364,
+        3029511.1390000004,
+        5155326.628000001
+      ]
+    }
+  ]
+}

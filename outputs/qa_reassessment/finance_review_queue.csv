@@ -1,0 +1,20 @@
+priority,rule,affected_rows,review_action,reviewer,decision
+HIGH,2017_LOW_TRUST_SOURCE,1978,"Confirm source value, formula or period and document eligibility/correction evidence",,PENDING_REVIEW
+HIGH,SOURCE_YEAR_MISMATCH,1835,"Confirm source value, formula or period and document eligibility/correction evidence",,PENDING_REVIEW
+HIGH,HISTORICAL_BACKFILL_CANDIDATE,1835,"Confirm source value, formula or period and document eligibility/correction evidence",,PENDING_REVIEW
+HIGH,TRANSFER_VALUE_FORMULA_MISMATCH,1792,"Confirm source value, formula or period and document eligibility/correction evidence",,PENDING_REVIEW
+HIGH,GROSS_VALUE_FORMULA_MISMATCH,1424,"Confirm source value, formula or period and document eligibility/correction evidence",,PENDING_REVIEW
+HIGH,MISSING_NET_SALES,880,"Confirm source value, formula or period and document eligibility/correction evidence",,PENDING_REVIEW
+HIGH,2017_QUANTITY_CANDIDATES_DISAGREE,150,"Confirm source value, formula or period and document eligibility/correction evidence",,PENDING_REVIEW
+HIGH,MISSING_GROSS_MARGIN,137,"Confirm source value, formula or period and document eligibility/correction evidence",,PENDING_REVIEW
+POLICY_REVIEW,DISCOUNT_DASH_INTERPRETED_AS_ZERO,25080,Confirm documented transformation policy against source examples,,PENDING_REVIEW
+POLICY_REVIEW,MARGIN_PCT_DERIVED,17423,Confirm documented transformation policy against source examples,,PENDING_REVIEW
+POLICY_REVIEW,NET_SALES_DERIVED_2017,1886,Confirm documented transformation policy against source examples,,PENDING_REVIEW
+REVIEW,MISSING_GROSS_SALES,838,Review source examples and business meaning; do not assume an error,,PENDING_REVIEW
+REVIEW,INVALID_NUMERIC_MARGIN_PCT,732,Review source examples and business meaning; do not assume an error,,PENDING_REVIEW
+REVIEW,NEGATIVE_QUANTITY,673,Review source examples and business meaning; do not assume an error,,PENDING_REVIEW
+REVIEW,NEGATIVE_NET_SALES,432,Review source examples and business meaning; do not assume an error,,PENDING_REVIEW
+POLICY_REVIEW,EXCEL_SERIAL_DELIVERY_DATE_PARSED,197,Confirm documented transformation policy against source examples,,PENDING_REVIEW
+REVIEW,ZERO_QUANTITY,17,Review source examples and business meaning; do not assume an error,,PENDING_REVIEW
+REVIEW,INVALID_OR_MISSING_QUANTITY,11,Review source examples and business meaning; do not assume an error,,PENDING_REVIEW
+REVIEW,MISSING_DR_NUMBER,6,Review source examples and business meaning; do not assume an error,,PENDING_REVIEW

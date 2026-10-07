@@ -1,0 +1,22 @@
+{
+  "generated_at": "2026-08-25T10:13:51Z",
+  "input_dataset": "data\\medshield\\processed\\sales_transactions_medical_demand.json.gz",
+  "input_dataset_type": "provisional_medical_demand",
+  "sales_rows": 40027,
+  "monthly_overall_rows": 115,
+  "monthly_territory_rows": 555,
+  "monthly_product_rows": 18736,
+  "monthly_product_territory_dense_rows": 8070,
+  "product_priority_rows": 4144,
+  "forecast_rows": 12,
+  "model_evaluation_rows": 1,
+  "blocked_items": 4,
+  "review_status": "draft",
+  "limitations": [
+    "Uses generated medical-demand split; product master approval is still required before publication.",
+    "DOH and PAGASA datasets are not yet uploaded.",
+    "Weather API file is partial and should remain contextual.",
+    "Product master classification is not fully approved.",
+    "Inventory/cost data is unavailable, so prescriptive outputs remain scenario-only."
+  ]
+}

@@ -1,25 +1,17 @@
-<!-- Provide a concise description of the change and the rationale behind it. -->
+## Change and reason
 
-## Description
+<!-- Describe the problem, resulting behavior, and relevant issue. Keep this PR focused on one feature or fix. -->
 
-What does this change do and why?
+## Validation
 
-## Related issues
+<!-- List commands/checks actually run and their results. State anything unverified. CI does not replace live data or browser acceptance when those are affected. -->
 
-- Fixes # (issue)
+## Review notes
 
-## Type of change
-- [ ] Bug fix
-- [ ] New feature
-- [ ] Documentation only
-- [ ] Refactor
+<!-- Call out affected contracts, migrations, environment changes, or rollout/rollback steps. Write "None" if not applicable. -->
 
-## Checklist
-- [ ] I have added tests where applicable
-- [ ] I have added documentation where applicable
-- [ ] I have run linters and static checks
-- [ ] I have updated CHANGELOG/RELEASE notes if necessary
+## Before merge
 
-## Notes for reviewers
-
-Add any special notes, migration steps, or follow-ups.
+- [ ] The intended target branch and diff are correct; unrelated work and secrets are excluded.
+- [ ] Relevant tests and documentation are updated, or the reason they are unnecessary is explained.
+- [ ] Conflicts and review conversations are resolved, and `CI required` passes for the current revision.

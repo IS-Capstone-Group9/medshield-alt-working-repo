@@ -1,0 +1,30 @@
+{
+  "name": "medshield-backend",
+  "private": true,
+  "version": "0.1.0",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/server.js",
+    "auth:migrate": "tsx scripts/migrate-auth-accounts.ts",
+    "databricks:extract:sales": "tsx scripts/extract-databricks-sales.ts",
+    "databricks:extract:products": "tsx scripts/extract-databricks-products.ts",
+    "databricks:extract:areas": "tsx scripts/extract-databricks-areas.ts",
+    "databricks:check:external": "tsx scripts/check-databricks-external.ts",
+    "databricks:check:dashboard": "tsx scripts/validate-databricks-dashboard.ts"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^8.6.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.5.4"
+  }
+}

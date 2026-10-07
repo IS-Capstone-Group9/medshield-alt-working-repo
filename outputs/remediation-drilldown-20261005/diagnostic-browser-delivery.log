@@ -1,0 +1,21 @@
+
+Running 12 tests using 1 worker
+
+(node:2536) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:2536) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 [chromium] › e2e\diagnostic-drilldown.spec.ts:138:1 › chart drilldown admits observed zero and excludes missing, estimates and prior-series selections (2.3s)
+  ok  2 [chromium] › e2e\diagnostic-drilldown.spec.ts:160:1 › chart point scope keeps exact partial custom dates instead of broadening month boundaries (1.4s)
+  ok  3 [chromium] › e2e\diagnostic-drilldown.spec.ts:173:1 › last-N monthly date scope stays exact when the chart uses yearly display grain (2.2s)
+  ok  4 [chromium] › e2e\diagnostic-drilldown.spec.ts:187:1 › chart-to-investigation transition withholds data when the source release changes (1.3s)
+  ok  5 [chromium] › e2e\diagnostic-drilldown.spec.ts:197:1 › all dimensions retain signed offsets, nested filters and back navigation without losing draft notes on view changes (1.8s)
+  ok  6 [chromium] › e2e\diagnostic-drilldown.spec.ts:227:1 › canonical product inspection uses reporting identity and retains category scope (2.0s)
+  ok  7 [chromium] › e2e\diagnostic-drilldown.spec.ts:242:1 › unavailable evidence retries the same scope and inconsistent partitions remain withheld (1.4s)
+  ok  8 [chromium] › e2e\diagnostic-drilldown.spec.ts:258:1 › export keeps release identity, every signed partition and unverified causal status with review notes (1.7s)
+  ok  9 [chromium] › e2e\diagnostic-drilldown.spec.ts:274:1 › transaction ledger retains identical date and dimension filters in pagination and summary and blocks a changed release (2.0s)
+  ok 10 [chromium] › e2e\diagnostic-drilldown.spec.ts:297:1 › prior ledger dates and STL unusual-period investigation keep their documented independent scope (3.6s)
+  ok 11 [chromium] › e2e\diagnostic-drilldown.spec.ts:314:34 › diagnostic evidence fits 1440px and remains inspectable without page overflow (1.6s)
+  ok 12 [chromium] › e2e\diagnostic-drilldown.spec.ts:314:34 › diagnostic evidence fits 375px and remains inspectable without page overflow (1.4s)
+
+  12 passed (27.8s)

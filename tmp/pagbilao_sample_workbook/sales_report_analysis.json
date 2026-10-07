@@ -1,0 +1,5090 @@
+{
+  "sheet_names": [
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2021"
+  ],
+  "sheets": [
+    {
+      "title": "2025",
+      "max_row": 4145,
+      "max_column": 13,
+      "header_row": 6,
+      "header": [
+        "Area",
+        "DR Number",
+        "Date Delivered",
+        "Product",
+        "Qty",
+        "CP",
+        "Total CP",
+        "Disc",
+        "Net CP",
+        "TP/UNIT",
+        "TOTAL TP",
+        "Net Income",
+        "%"
+      ],
+      "sample": [
+        [
+          "MEDSHIELD PHARMA CORP",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          "SALES SUMMARY REPORT",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          "AS OF DECEMBER 2025",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          "Area",
+          "DR Number",
+          "Date Delivered",
+          "Product",
+          "Qty",
+          "CP",
+          "Total CP",
+          "Disc",
+          "Net CP",
+          "TP/UNIT",
+          "TOTAL TP",
+          "Net Income",
+          "%"
+        ],
+        [
+          "Government",
+          "DR RT 0002009",
+          "2025-02-21 00:00:00",
+          "PAGBILAO # 411,290",
+          1,
+          104995,
+          104995,
+          0,
+          104995,
+          213312,
+          213312,
+          -108317,
+          -1.031639601885804
+        ],
+        [
+          "Government",
+          "DR RT 0002010",
+          "2025-02-01 00:00:00",
+          null,
+          1,
+          148236,
+          148236,
+          0,
+          148236,
+          null,
+          null,
+          148236,
+          1
+        ]
+      ]
+    },
+    {
+      "title": "2024",
+      "max_row": 5773,
+      "max_column": 13,
+      "header_row": 6,
+      "header": [
+        "Area",
+        "DR Number",
+        "Date Delivered",
+        "Product",
+        "Qty",
+        "CP",
+        "Total CP",
+        "Disc",
+        "Net CP",
+        "TP/UNIT",
+        "TOTAL TP",
+        "Net Income",
+        "%"
+      ],
+      "sample": [
+        [
+          "MEDSHIELD PHARMA CORP",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          "SALES SUMMARY REPORT",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          "AS OF DECEMBER 2024",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          "Area",
+          "DR Number",
+          "Date Delivered",
+          "Product",
+          "Qty",
+          "CP",
+          "Total CP",
+          "Disc",
+          "Net CP",
+          "TP/UNIT",
+          "TOTAL TP",
+          "Net Income",
+          "%"
+        ],
+        [
+          "Admin",
+          "DR 024116",
+          "2024-01-04 00:00:00",
+          "SANOMAX-FA",
+          7,
+          857.14,
+          5999.98,
+          0,
+          5999.98,
+          560,
+          3920,
+          2079.9799999999996,
+          0.34666448888162954
+        ],
+        [
+          "Admin",
+          "DR 024116",
+          "2024-01-04 00:00:00",
+          "CIUMADE TAB",
+          7,
+          678.57,
+          4749.99,
+          0,
+          4749.99,
+          450,
+          3150,
+          1599.9899999999998,
+          0.33684070913833497
+        ]
+      ]
+    },
+    {
+      "title": "2023",
+      "max_row": 5897,
+      "max_column": 13,
+      "header_row": 6,
+      "header": [
+        "Area",
+        "DR Number",
+        "Date Delivered",
+        "Product",
+        "Qty",
+        "CP",
+        "Total CP",
+        "Disc",
+        "Net CP",
+        "TP/UNIT",
+        "TOTAL TP",
+        "Net Income",
+        "%"
+      ],
+      "sample": [
+        [
+          "MEDSHIELD PHARMA CORP",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          "SALES SUMMARY REPORT",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          "AS OF DECEMBER 2023",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          "Area",
+          "DR Number",
+          "Date Delivered",
+          "Product",
+          "Qty",
+          "CP",
+          "Total CP",
+          "Disc",
+          "Net CP",
+          "TP/UNIT",
+          "TOTAL TP",
+          "Net Income",
+          "%"
+        ],
+        [
+          "Batangas",
+          "DR 025238",
+          "2023-02-18 00:00:00",
+          "SITIXON 1G",
+          60,
+          54,
+          3240,
+          0,
+          3240,
+          36,
+          2160,
+          1080,
+          0.3333333333333333
+        ],
+        [
+          "Batangas",
+          "DR 025238",
+          "2023-02-18 00:00:00",
+          "OPREX 40MG",
+          5,
+          500,
+          2500,
+          0,
+          2500,
+          250,
+          1250,
+          1250,
+          0.5
+        ]
+      ]
+    },
+    {
+      "title": "2022",
+      "max_row": 4038,
+      "max_column": 13,
+      "header_row": 6,
+      "header": [
+        "Area",
+        "DR Number",
+        "Date Delivered",
+        "Product",
+        "Qty",
+        "CP",
+        "Total CP",
+        "Disc",
+        "Net CP",
+        "TP/UNIT",
+        "TOTAL TP",
+        "Net Income",
+        "%"
+      ],
+      "sample": [
+        [
+          "MEDSHIELD PHARMA CORP",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          "SALES SUMMARY REPORT",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          "AS OF DECEMBER 2022",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          "Area",
+          "DR Number",
+          "Date Delivered",
+          "Product",
+          "Qty",
+          "CP",
+          "Total CP",
+          "Disc",
+          "Net CP",
+          "TP/UNIT",
+          "TOTAL TP",
+          "Net Income",
+          "%"
+        ],
+        [
+          "Admin",
+          "DR 20316",
+          "2022-08-04 00:00:00",
+          "MOLNUPIRAVIR 400MG",
+          40,
+          250,
+          10000,
+          0,
+          10000,
+          180,
+          7200,
+          2800,
+          0.28
+        ],
+        [
+          "Admin",
+          "DR 20317",
+          "2022-08-05 00:00:00",
+          "CLOXANE 500MG CAP",
+          7,
+          1071.43,
+          7499.99,
+          0,
+          7499.99,
+          195,
+          1365,
+          6134.99,
+          0.8179997573330098
+        ]
+      ]
+    },
+    {
+      "title": "2021",
+      "max_row": 4760,
+      "max_column": 13,
+      "header_row": 6,
+      "header": [
+        "Area",
+        "DR Number",
+        "Date Delivered",
+        "Product",
+        "Qty",
+        "CP",
+        "Total CP",
+        "Disc",
+        "Net CP",
+        "TP/UNIT",
+        "TOTAL TP",
+        "Net Income",
+        "%"
+      ],
+      "sample": [
+        [
+          "MEDSHIELD PHARMA CORP",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          "SALES SUMMARY REPORT",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          "AS OF DEC  2021",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          "Area",
+          "DR Number",
+          "Date Delivered",
+          "Product",
+          "Qty",
+          "CP",
+          "Total CP",
+          "Disc",
+          "Net CP",
+          "TP/UNIT",
+          "TOTAL TP",
+          "Net Income",
+          "%"
+        ],
+        [
+          "Admin",
+          "DR 023184",
+          "2021-12-20 00:00:00",
+          "XYNETRIX CHEWABLE TABLET",
+          7,
+          678.57,
+          4749.99,
+          0,
+          4749.99,
+          450,
+          3150,
+          1599.9899999999998,
+          0.33684070913833497
+        ],
+        [
+          "Admin",
+          "DR 023184",
+          "2021-12-20 00:00:00",
+          "MAXXIVIT PLUS",
+          7,
+          857.14,
+          6000,
+          0,
+          6000,
+          560,
+          3920,
+          2080,
+          0.3466666666666667
+        ]
+      ]
+    }
+  ],
+  "transactions": {
+    "count": 20413,
+    "product_unique": 3729,
+    "blank_product_rows": 735,
+    "contract_like_rows": 1039,
+    "contract_like_product_counts": [
+      [
+        "",
+        735
+      ],
+      [
+        "PAGBILAO # 411,290",
+        2
+      ],
+      [
+        "PAGBILAO # 2,070,000",
+        2
+      ],
+      [
+        "PAGBILAO # 6,334,470",
+        2
+      ],
+      [
+        "PAGBILAO # 474,160",
+        2
+      ],
+      [
+        "PAGBILAO # 3,658,000",
+        2
+      ],
+      [
+        "PAGBILAO # 13,500,000",
+        2
+      ],
+      [
+        "PAGBILAO # 921,080.00",
+        2
+      ],
+      [
+        "PAGBILAO # 145,973",
+        2
+      ],
+      [
+        "PAGBILAO # 34,405.00",
+        2
+      ],
+      [
+        "QMC # 559,400.00",
+        1
+      ],
+      [
+        "QMC # 141,140.00",
+        1
+      ],
+      [
+        "PAGBILAO # 10,000.00-4",
+        1
+      ],
+      [
+        "PESO PROVINCIAL # 19,864.00",
+        1
+      ],
+      [
+        "PESO PROVINCIAL # 960,000.00",
+        1
+      ],
+      [
+        "PESO PROVINCIAL # 101,500.00",
+        1
+      ],
+      [
+        "PAGBILAO # 66,000.00",
+        1
+      ],
+      [
+        "PAGBILAO # 9,093.00",
+        1
+      ],
+      [
+        "QMC # 126,251.00",
+        1
+      ],
+      [
+        "PAGBILAO # 3,273,976",
+        1
+      ],
+      [
+        "PAGBILAO # 2,511,299.00",
+        1
+      ],
+      [
+        "PAGBILAO # 3,072,944",
+        1
+      ],
+      [
+        "QMC # 845,260.00",
+        1
+      ],
+      [
+        "QMC # 112,996.00",
+        1
+      ],
+      [
+        "QMC # 111,696.00",
+        1
+      ],
+      [
+        "PAGBILAO # 187,000",
+        1
+      ],
+      [
+        "PAGBILAO # 9,000.00",
+        1
+      ],
+      [
+        "QMC # 42,400.00",
+        1
+      ],
+      [
+        "PESO # 55,000.00",
+        1
+      ],
+      [
+        "PESO # 18,000.00",
+        1
+      ],
+      [
+        "PAGBILAO # 54,000.00",
+        1
+      ],
+      [
+        "PAGBILAO # 19,000.00-1",
+        1
+      ],
+      [
+        "PAGBILAO # 3,000.00",
+        1
+      ],
+      [
+        "PAGBILAO # 28,000.00",
+        1
+      ],
+      [
+        "PAGBILAO # 51,675.00",
+        1
+      ],
+      [
+        "QMC # 130,994.00",
+        1
+      ],
+      [
+        "QMC # 107,178.00",
+        1
+      ],
+      [
+        "PAGBILAO # 230,400.00",
+        1
+      ],
+      [
+        "PAGBILAO # 891,530.00",
+        1
+      ],
+      [
+        "PAGBILAO # 404,280.00",
+        1
+      ],
+      [
+        "PAGBILAO # 11,000.00",
+        1
+      ],
+      [
+        "PAGBILAO # 3,500.00",
+        1
+      ],
+      [
+        "PAGBILAO # 833,154.00",
+        1
+      ],
+      [
+        "QMC # 605,550.00",
+        1
+      ],
+      [
+        "QMC # 108,598.62",
+        1
+      ],
+      [
+        "QMC # 981,828.00",
+        1
+      ],
+      [
+        "PAGBILAO # 7,000.00",
+        1
+      ],
+      [
+        "PAGBILAO # 17,070.00",
+        1
+      ],
+      [
+        "PAGBILAO # 31,800.00",
+        1
+      ],
+      [
+        "PAGBILAO # 327,050.00",
+        1
+      ],
+      [
+        "PAGBILAO # 36,000.00-1",
+        1
+      ],
+      [
+        "PAGBILAO # 288,255.00",
+        1
+      ],
+      [
+        "PAGBILAO # 417,149.00-1",
+        1
+      ],
+      [
+        "PAGBILAO # 417,149.00-2",
+        1
+      ],
+      [
+        "PAGBILAO # 730,670.00",
+        1
+      ],
+      [
+        "QMC # 206,923.50",
+        1
+      ],
+      [
+        "QMC # 157,565.00",
+        1
+      ],
+      [
+        "PAGBILAO # 147,528.00",
+        1
+      ],
+      [
+        "PAGBILAO # 16,000.00-1",
+        1
+      ],
+      [
+        "PAGBILAO # 52,500.00",
+        1
+      ],
+      [
+        "PESO # 3,450,000.00",
+        1
+      ],
+      [
+        "PAGBILAO # 107,500.00",
+        1
+      ],
+      [
+        "QMC # 31,500.00",
+        1
+      ],
+      [
+        "QMC # 61,900.00",
+        1
+      ],
+      [
+        "PAGBILAO # 135,160.00",
+        1
+      ],
+      [
+        "QMC # 985,170.00",
+        1
+      ],
+      [
+        "QMC # 407,373.75",
+        1
+      ],
+      [
+        "PAGBILAO # 19,000.00-2",
+        1
+      ],
+      [
+        "QMC # 102,275.00",
+        1
+      ],
+      [
+        "QMC # 23,686.00",
+        1
+      ],
+      [
+        "QMC # 83,732.50",
+        1
+      ],
+      [
+        "PAGBILAO # 50,000",
+        1
+      ],
+      [
+        "QMC # 165,000",
+        1
+      ],
+      [
+        "QMC # 213,400",
+        1
+      ],
+      [
+        "QMC # 281,480.00",
+        1
+      ],
+      [
+        "QMC # 24,970.00",
+        1
+      ],
+      [
+        "QMC # 144,740.00",
+        1
+      ],
+      [
+        "QMC # 409,770.00",
+        1
+      ],
+      [
+        "QMC # 132,000.00",
+        1
+      ],
+      [
+        "QMC # 79,770.00",
+        1
+      ],
+      [
+        "PAGBILAO # 569,792.00",
+        1
+      ],
+      [
+        "PAGBILAO # 153,057.00",
+        1
+      ],
+      [
+        "QMC # 31,500",
+        1
+      ],
+      [
+        "PAGBILAO # 985,190",
+        1
+      ],
+      [
+        "PAGBILAO # 879,800",
+        1
+      ],
+      [
+        "PAGBILAO # 2,166,450",
+        1
+      ],
+      [
+        "PAGBILAO # 10,150.00",
+        1
+      ],
+      [
+        "PAGBILAO # 588,760.90",
+        1
+      ],
+      [
+        "PAGBILAO # 18,900",
+        1
+      ],
+      [
+        "PAGBILAO # 1,302,640",
+        1
+      ],
+      [
+        "PAGBILAO # 411,000",
+        1
+      ],
+      [
+        "PAGBILAO # 37,040.00",
+        1
+      ],
+      [
+        "PAGBILAO # 170,200",
+        1
+      ],
+      [
+        "PAGBILAO # 196,000",
+        1
+      ],
+      [
+        "PAGBILAO # 373,500",
+        1
+      ],
+      [
+        "PAGBILAO # 200,000",
+        1
+      ],
+      [
+        "PAGBILAO # 3,150",
+        1
+      ],
+      [
+        "PAGBILAO # 15,750",
+        1
+      ],
+      [
+        "PAGBILAO # 415,593",
+        1
+      ],
+      [
+        "PAGBILAO # 56,239",
+        1
+      ],
+      [
+        "PAGBILAO # 2,568,250",
+        1
+      ],
+      [
+        "PAGBILAO # 14,000",
+        1
+      ],
+      [
+        "PAGBILAO # 20,000",
+        1
+      ],
+      [
+        "PAGBILAO # 41,000",
+        1
+      ],
+      [
+        "PAGBILAO # 29,156",
+        1
+      ],
+      [
+        "PAGBILAO # 61,000",
+        1
+      ],
+      [
+        "PAGBILAO # 33,750",
+        1
+      ],
+      [
+        "PAGBILAO # 75,000",
+        1
+      ],
+      [
+        "PAGBILAO # 160,000",
+        1
+      ],
+      [
+        "PAGBILAO # 49,290",
+        1
+      ],
+      [
+        "PAGBILAO # 31,075",
+        1
+      ],
+      [
+        "PAGBILAO # 48,000",
+        1
+      ],
+      [
+        "PAGBILAO # 6,000",
+        1
+      ],
+      [
+        "PAGBILAO # 26,000",
+        1
+      ],
+      [
+        "PAGBILAO # 16,000-1",
+        1
+      ],
+      [
+        "PAGBILAO # 71,000",
+        1
+      ],
+      [
+        "PAGBILAO # 222,500",
+        1
+      ],
+      [
+        "PAGBILAO # 335,000",
+        1
+      ],
+      [
+        "PAGBILAO # 20,000-1",
+        1
+      ],
+      [
+        "PAGBILAO # 49,960",
+        1
+      ],
+      [
+        "PAGBILAO # 22,500",
+        1
+      ],
+      [
+        "PAGBILAO # 21,000",
+        1
+      ],
+      [
+        "PAGBILAO # 12,120.00",
+        1
+      ],
+      [
+        "PAGBILAO # 171,550.00",
+        1
+      ],
+      [
+        "PAGBILAO # 2,490.00",
+        1
+      ],
+      [
+        "PAGBILAO # 35,130.00",
+        1
+      ],
+      [
+        "PAGBILAO # 66,000",
+        1
+      ],
+      [
+        "PAGBILAO # 8,000",
+        1
+      ],
+      [
+        "PAGBILAO # 155,000",
+        1
+      ],
+      [
+        "PAGBILAO # 28,500",
+        1
+      ],
+      [
+        "PAGBILAO # 652,997.00",
+        1
+      ],
+      [
+        "PAGBILAO # 9,100.00",
+        1
+      ],
+      [
+        "PAGBILAO # 253,100.00",
+        1
+      ],
+      [
+        "PAGBILAO # 500,000",
+        1
+      ],
+      [
+        "PAGBILAO # 882,000.00",
+        1
+      ],
+      [
+        "PAGBILAO # 4,500",
+        1
+      ],
+      [
+        "PAGBILAO # 67,060",
+        1
+      ],
+      [
+        "PAGBILAO # 400,000",
+        1
+      ],
+      [
+        "PAGBILAO # 86,000",
+        1
+      ],
+      [
+        "PAGBILAO # 122,514.80",
+        1
+      ],
+      [
+        "PAGBILAO # 2,900,746.89",
+        1
+      ],
+      [
+        "PAGBILAO # 9,000",
+        1
+      ],
+      [
+        "PAGBILAO # 45,000",
+        1
+      ],
+      [
+        "PAGBILAO # 11,000-1",
+        1
+      ],
+      [
+        "PAGBILAO # 32,050",
+        1
+      ],
+      [
+        "PAGBILAO # 11,000-2",
+        1
+      ],
+      [
+        "QMC # 91,500",
+        1
+      ],
+      [
+        "PAGBILAO # 7,500",
+        1
+      ],
+      [
+        "PAGBILAO # 4,400",
+        1
+      ],
+      [
+        "PAGBILAO # 10,620-1",
+        1
+      ],
+      [
+        "PAGBILAO # 50,000-1",
+        1
+      ],
+      [
+        "PAGBILAO # 10,915",
+        1
+      ],
+      [
+        "PAGBILAO # 642,000",
+        1
+      ],
+      [
+        "PAGBILAO # 20,000-2",
+        1
+      ],
+      [
+        "PAGBILAO # 53,000",
+        1
+      ],
+      [
+        "PAGBILAO # 175,000",
+        1
+      ],
+      [
+        "PAGBILAO # 125,790",
+        1
+      ],
+      [
+        "PAGBILAO # 103,100",
+        1
+      ],
+      [
+        "PAGBILAO # 10,620",
+        1
+      ],
+      [
+        "PAGBILAO # 17,000-1",
+        1
+      ],
+      [
+        "PAGBILAO # 6,000-1",
+        1
+      ],
+      [
+        "PAGBILAO # 32,250",
+        1
+      ],
+      [
+        "PAGBILAO # 102,500",
+        1
+      ],
+      [
+        "QMC # 51,320",
+        1
+      ],
+      [
+        "PAGBILAO # 12,500",
+        1
+      ],
+      [
+        "PAGBILAO # 90,000",
+        1
+      ],
+      [
+        "QMC # 542,292.50",
+        1
+      ],
+      [
+        "PAGBILAO # 2,316,267-1",
+        1
+      ],
+      [
+        "PAGBILAO # 2,162,681.15",
+        1
+      ],
+      [
+        "QMC # 122,723",
+        1
+      ],
+      [
+        "QMC # 213,200",
+        1
+      ],
+      [
+        "QMC # 700,000",
+        1
+      ],
+      [
+        "PAGBILAO # 1,100,000",
+        1
+      ],
+      [
+        "PAGBILAO # 57,540",
+        1
+      ],
+      [
+        "PAGBILAO # 64,165",
+        1
+      ],
+      [
+        "PAGBILAO # 63,250",
+        1
+      ],
+      [
+        "QMC # 127,722.50",
+        1
+      ],
+      [
+        "QMC # 597,322",
+        1
+      ],
+      [
+        "QMC # 268,031",
+        1
+      ],
+      [
+        "QMC # 609,629.50",
+        1
+      ],
+      [
+        "QMC # 243,780",
+        1
+      ],
+      [
+        "QMC # 306,000",
+        1
+      ],
+      [
+        "PAGBILAO # 921,080-1",
+        1
+      ],
+      [
+        "QMC # 49,855.00",
+        1
+      ],
+      [
+        "QMC # 27,190.00",
+        1
+      ],
+      [
+        "QMC # 64,459.00",
+        1
+      ],
+      [
+        "QMC # 268,979.00",
+        1
+      ],
+      [
+        "QMC # 799,200.00",
+        1
+      ],
+      [
+        "QMC # 162,922.00",
+        1
+      ],
+      [
+        "QMC # 201,300.00",
+        1
+      ],
+      [
+        "QMC 787,170",
+        1
+      ],
+      [
+        "PAGBILAO # 51,261.00 LOT 1",
+        1
+      ],
+      [
+        "PAGBILAO # 55,000 LOT 2",
+        1
+      ],
+      [
+        "PAGBILAO # 88,528.00 LOT 3",
+        1
+      ],
+      [
+        "PAGBILAO # 80,216.00 LOT 4",
+        1
+      ],
+      [
+        "PAGBILAO # 5,511 LOT 5",
+        1
+      ],
+      [
+        "PAGBILAO # 37,143.00 LOT 6",
+        1
+      ],
+      [
+        "PAGBILAO # 731,538.00 LOT 7",
+        1
+      ],
+      [
+        "PAGBILAO # 17,785.00 LOT 8",
+        1
+      ],
+      [
+        "PAGBILAO # 231,000.00 LOT 9",
+        1
+      ],
+      [
+        "PAGBILAO # 239,771.40 LOT 10",
+        1
+      ],
+      [
+        "PAGBILAO # 240,000.00 LOT 12",
+        1
+      ],
+      [
+        "PAGBILAO # 41,850.00 LOT 13",
+        1
+      ],
+      [
+        "PAGBILAO # 61,024.00 LOT 14",
+        1
+      ],
+      [
+        "PAGBILAO # 154,415.00 LOT 15",
+        1
+      ],
+      [
+        "PAGBILAO # 124,234.25",
+        1
+      ],
+      [
+        "PAGBILAO #246,628.00",
+        1
+      ],
+      [
+        "PAGBILAO # 63,225.00",
+        1
+      ],
+      [
+        "PAGBILAO # 80,000.00",
+        1
+      ],
+      [
+        "PAGBILAO # 500,000.00",
+        1
+      ],
+      [
+        "PAGBILAO # 90,240.00",
+        1
+      ],
+      [
+        "PAGBILAO # 28,000",
+        1
+      ],
+      [
+        "PAGBILAO # 69,660.00",
+        1
+      ],
+      [
+        "PAGBILAO # 83,090.00",
+        1
+      ],
+      [
+        "PAGBILAO # 17,220.00",
+        1
+      ],
+      [
+        "PAGBILAO # 8,930.00",
+        1
+      ],
+      [
+        "PAGBILAO # 102,060.00",
+        1
+      ],
+      [
+        "PAGBILAO # 31,350.00",
+        1
+      ],
+      [
+        "PAGBILAO # 16,223.00",
+        1
+      ],
+      [
+        "PAGBILAO # 5,166.00",
+        1
+      ],
+      [
+        "PAGBILAO # 11,077.00",
+        1
+      ],
+      [
+        "PAGBILAO # 35,796.00",
+        1
+      ],
+      [
+        "PAGBILAO # 21,787.00",
+        1
+      ],
+      [
+        "PAGBILAO # 6,210.00",
+        1
+      ],
+      [
+        "PAGBILAO # 56,546.00",
+        1
+      ],
+      [
+        "PAGBILAO # 16,930.00",
+        1
+      ],
+      [
+        "PAGBILAO # 179,894.00",
+        1
+      ],
+      [
+        "PAGBILAO # 43,240.00",
+        1
+      ],
+      [
+        "PAGBILAO # 42,960.00",
+        1
+      ],
+      [
+        "PAGBILAO # 43,790.00",
+        1
+      ],
+      [
+        "PAGBILAO # 258,380.00",
+        1
+      ],
+      [
+        "PAGBILAO # 46,930.00",
+        1
+      ],
+      [
+        "PAGBILAO # 16,620.00 -1",
+        1
+      ],
+      [
+        "PAGBILAO # 5000.00",
+        1
+      ],
+      [
+        "PAGBILAO # 390,100.00",
+        1
+      ],
+      [
+        "PAGBILAO # 325,000.00",
+        1
+      ],
+      [
+        "PAGBILAO # 275,000.00",
+        1
+      ],
+      [
+        "PAGBILAO # 10,000.00 -0.1",
+        1
+      ],
+      [
+        "PAGBILAO # 10,000.00 -0.2",
+        1
+      ],
+      [
+        "PAGBILAO # 3000.00",
+        1
+      ],
+      [
+        "PAGBILAO # 200,000.00",
+        1
+      ],
+      [
+        "PAGBILAO # 46,000.00",
+        1
+      ],
+      [
+        "PAGBILAO # 20,695.00",
+        1
+      ],
+      [
+        "PAGBILAO # 30,250.00",
+        1
+      ],
+      [
+        "PAGBILAO # 200,000.00 -1",
+        1
+      ],
+      [
+        "PAGBILAO # 449,000.00",
+        1
+      ],
+      [
+        "PAGBILAO # 5000.00-1",
+        1
+      ],
+      [
+        "PAGBILAO # 21,156.00",
+        1
+      ],
+      [
+        "PAGBILAO # 18,785.00",
+        1
+      ],
+      [
+        "PAGBILAO # 71,155.00",
+        1
+      ],
+      [
+        "PAGBILAO # 67,060.00",
+        1
+      ],
+      [
+        "PAGBILAO # 85,000.00",
+        1
+      ],
+      [
+        "PAGBILAO # 21,950.00",
+        1
+      ],
+      [
+        "PAGBILAO # 10,000.00 -0.3",
+        1
+      ],
+      [
+        "PAGBILAO # 45,500.00",
+        1
+      ],
+      [
+        "PAGBILAO # 19,000.00",
+        1
+      ],
+      [
+        "PAGBILAO # 93,792.00",
+        1
+      ],
+      [
+        "PAGBILAO # 69,000.00",
+        1
+      ],
+      [
+        "PAGBILAO # 75,000.00",
+        1
+      ],
+      [
+        "PAGBILAO # 7,500.00",
+        1
+      ],
+      [
+        "PAGBILAO # 84,000.00",
+        1
+      ],
+      [
+        "PAGBILAO # 37,500.00",
+        1
+      ],
+      [
+        "PAGBILAO # 2,422,600.00",
+        1
+      ],
+      [
+        "PAGBILAO # 37,260.00",
+        1
+      ],
+      [
+        "PAGBILAO # 31,075.00",
+        1
+      ],
+      [
+        "QMC # 108,880",
+        1
+      ],
+      [
+        "QMC # 30,270",
+        1
+      ],
+      [
+        "PAGBILAO # 298,999.7",
+        1
+      ],
+      [
+        "PAGBILAO #65,520",
+        1
+      ],
+      [
+        "PAGBILAO # 16,000",
+        1
+      ],
+      [
+        "PAGBILAO # 11,000",
+        1
+      ],
+      [
+        "PAGBILAO # 17,000",
+        1
+      ],
+      [
+        "PAGBILAO # 443,131.29",
+        1
+      ],
+      [
+        "PAGBILAO # 16,620",
+        1
+      ],
+      [
+        "PAGBILAO # 16,620-2",
+        1
+      ],
+      [
+        "PAGBILAO # 66,564.5",
+        1
+      ],
+      [
+        "PAGBILAO # 27,738.60",
+        1
+      ],
+      [
+        "PAGBILAO # 10,000.00-3",
+        1
+      ],
+      [
+        "PAGBILAO # 444,400.00",
+        1
+      ],
+      [
+        "PAGBILAO # 22,500.00",
+        1
+      ],
+      [
+        "PAGBILAO # 19,000.00-0.1",
+        1
+      ],
+      [
+        "PAGBILAO # 4,800.00",
+        1
+      ],
+      [
+        "PAGBILAO # 40,000.00",
+        1
+      ],
+      [
+        "PAGBILAO # 11,000.00-03",
+        1
+      ],
+      [
+        "PAGBILAO # 35,550.00",
+        1
+      ],
+      [
+        "PAGBILAO # 6,000.00",
+        1
+      ],
+      [
+        "PAGBILAO # 90,730.00",
+        1
+      ],
+      [
+        "PAGBILAO # 112,990.00",
+        1
+      ],
+      [
+        "PAGBILAO # 282,000.00",
+        1
+      ],
+      [
+        "PAGBILAO # 27,000.00",
+        1
+      ],
+      [
+        "PAGBILAO # 21,000.00",
+        1
+      ],
+      [
+        "PAGBILAO # 102,000.00",
+        1
+      ],
+      [
+        "PAGBILAO # 47,375",
+        1
+      ],
+      [
+        "PAGBILAO # A- 11,000",
+        1
+      ],
+      [
+        "PAGBILAO # 6,475",
+        1
+      ],
+      [
+        "PAGBILAO # 2,316,267",
+        1
+      ]
+    ],
+    "contract_like_examples": [
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0002009",
+        "date_delivered": "2025-02-21 00:00:00",
+        "product": "PAGBILAO # 411,290",
+        "qty": 1,
+        "cp": 104995,
+        "total_cp": 104995,
+        "disc": 0,
+        "net_cp": 104995,
+        "tp/unit": 213312,
+        "total_tp": 213312,
+        "net_income": -108317,
+        "%": -1.031639601885804,
+        "_sheet": "2025",
+        "_source_row": 7,
+        "_product": "PAGBILAO # 411,290",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0002010",
+        "date_delivered": "2025-02-01 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 148236,
+        "total_cp": 148236,
+        "disc": 0,
+        "net_cp": 148236,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 148236,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 8,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0002011",
+        "date_delivered": "2025-02-01 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 59740,
+        "total_cp": 59740,
+        "disc": 0,
+        "net_cp": 59740,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 59740,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 9,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0002003-2004",
+        "date_delivered": "2025-01-31 00:00:00",
+        "product": "PAGBILAO # 2,070,000",
+        "qty": 1,
+        "cp": 2069000,
+        "total_cp": 2069000,
+        "disc": 0,
+        "net_cp": 2069000,
+        "tp/unit": 1374000,
+        "total_tp": 1374000,
+        "net_income": 695000,
+        "%": 0.3359110681488642,
+        "_sheet": "2025",
+        "_source_row": 10,
+        "_product": "PAGBILAO # 2,070,000",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0002005-2006",
+        "date_delivered": "2025-05-31 00:00:00",
+        "product": "PAGBILAO # 6,334,470",
+        "qty": 1,
+        "cp": 6333000,
+        "total_cp": 6333000,
+        "disc": 0,
+        "net_cp": 6333000,
+        "tp/unit": 2916065.28,
+        "total_tp": 2916065.28,
+        "net_income": 3416934.72,
+        "%": 0.5395444054950261,
+        "_sheet": "2025",
+        "_source_row": 11,
+        "_product": "PAGBILAO # 6,334,470",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0002007-2008",
+        "date_delivered": "2025-02-01 00:00:00",
+        "product": "PAGBILAO # 474,160",
+        "qty": 1,
+        "cp": 469000,
+        "total_cp": 469000,
+        "disc": 0,
+        "net_cp": 469000,
+        "tp/unit": 415000,
+        "total_tp": 415000,
+        "net_income": 54000,
+        "%": 0.11513859275053305,
+        "_sheet": "2025",
+        "_source_row": 12,
+        "_product": "PAGBILAO # 474,160",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0872",
+        "date_delivered": "2025-02-21 00:00:00",
+        "product": "PAGBILAO # 3,658,000",
+        "qty": 1,
+        "cp": 764600,
+        "total_cp": 764600,
+        "disc": 0,
+        "net_cp": 764600,
+        "tp/unit": 2618955.96,
+        "total_tp": 2618955.96,
+        "net_income": -1854355.96,
+        "%": -2.425262830238033,
+        "_sheet": "2025",
+        "_source_row": 13,
+        "_product": "PAGBILAO # 3,658,000",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0873",
+        "date_delivered": "2025-02-21 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 295544.5,
+        "total_cp": 295544.5,
+        "disc": 0,
+        "net_cp": 295544.5,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 295544.5,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 14,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0874",
+        "date_delivered": "2025-02-21 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 2595995,
+        "total_cp": 2595995,
+        "disc": 0,
+        "net_cp": 2595995,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 2595995,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 15,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Admin",
+        "dr_number": "DR 025270",
+        "date_delivered": "2025-01-27 00:00:00",
+        "product": null,
+        "qty": 0,
+        "cp": null,
+        "total_cp": null,
+        "disc": 0,
+        "net_cp": 0,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 0,
+        "%": "#DIV/0!",
+        "_sheet": "2025",
+        "_source_row": 182,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Admin",
+        "dr_number": "DR 025270",
+        "date_delivered": "2025-01-27 00:00:00",
+        "product": null,
+        "qty": 0,
+        "cp": null,
+        "total_cp": null,
+        "disc": 0,
+        "net_cp": 0,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 0,
+        "%": "#DIV/0!",
+        "_sheet": "2025",
+        "_source_row": 183,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0002016",
+        "date_delivered": "2025-01-23 00:00:00",
+        "product": "PAGBILAO # 13,500,000",
+        "qty": 1,
+        "cp": 11567580,
+        "total_cp": 11567580,
+        "disc": 0,
+        "net_cp": 11567580,
+        "tp/unit": 4229349.44,
+        "total_tp": 4229349.44,
+        "net_income": 7338230.56,
+        "%": 0.634379062863624,
+        "_sheet": "2025",
+        "_source_row": 234,
+        "_product": "PAGBILAO # 13,500,000",
+        "_contract_like": true
+      },
+      {
+        "area": "Hospital",
+        "dr_number": "DR RT 0002020",
+        "date_delivered": "2025-03-05 00:00:00",
+        "product": "QMC # 559,400.00",
+        "qty": 1,
+        "cp": 424760,
+        "total_cp": 424760,
+        "disc": 0,
+        "net_cp": 424760,
+        "tp/unit": 279700,
+        "total_tp": 279700,
+        "net_income": 145060,
+        "%": 0.3415105000470854,
+        "_sheet": "2025",
+        "_source_row": 584,
+        "_product": "QMC # 559,400.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Hospital",
+        "dr_number": "DR RT 0002021",
+        "date_delivered": "2025-03-05 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 134320,
+        "total_cp": 134320,
+        "disc": 0,
+        "net_cp": 134320,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 134320,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 585,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Hospital",
+        "dr_number": "DR RT 0001005",
+        "date_delivered": "2025-04-12 00:00:00",
+        "product": "QMC # 141,140.00",
+        "qty": 1,
+        "cp": 28930,
+        "total_cp": 28930,
+        "disc": 0,
+        "net_cp": 28930,
+        "tp/unit": 82365,
+        "total_tp": 82365,
+        "net_income": -53435,
+        "%": -1.847044590390598,
+        "_sheet": "2025",
+        "_source_row": 870,
+        "_product": "QMC # 141,140.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Hospital",
+        "dr_number": "DR RT 0001006",
+        "date_delivered": "2025-04-12 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 39540,
+        "total_cp": 39540,
+        "disc": 0,
+        "net_cp": 39540,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 39540,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 871,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Hospital",
+        "dr_number": "DR RT 0001007",
+        "date_delivered": "2025-04-12 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 34930,
+        "total_cp": 34930,
+        "disc": 0,
+        "net_cp": 34930,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 34930,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 872,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Hospital",
+        "dr_number": "DR RT 0001008",
+        "date_delivered": "2025-04-12 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 25720,
+        "total_cp": 25720,
+        "disc": 0,
+        "net_cp": 25720,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 25720,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 873,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Hospital",
+        "dr_number": "DR RT 0001009-0001010",
+        "date_delivered": "2025-04-12 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 11700,
+        "total_cp": 11700,
+        "disc": 0,
+        "net_cp": 11700,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 11700,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 874,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0001015",
+        "date_delivered": "2025-04-12 00:00:00",
+        "product": "PAGBILAO # 10,000.00-4",
+        "qty": 1,
+        "cp": 9875,
+        "total_cp": 9875,
+        "disc": 0,
+        "net_cp": 9875,
+        "tp/unit": 6497.75,
+        "total_tp": 6497.75,
+        "net_income": 3377.25,
+        "%": 0.342,
+        "_sheet": "2025",
+        "_source_row": 895,
+        "_product": "PAGBILAO # 10,000.00-4",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0001020",
+        "date_delivered": "2025-04-26 00:00:00",
+        "product": "PESO PROVINCIAL # 19,864.00",
+        "qty": 1,
+        "cp": 9820,
+        "total_cp": 9820,
+        "disc": 0,
+        "net_cp": 9820,
+        "tp/unit": 13044.85,
+        "total_tp": 13044.85,
+        "net_income": -3224.8500000000004,
+        "%": -0.3283961303462322,
+        "_sheet": "2025",
+        "_source_row": 914,
+        "_product": "PESO PROVINCIAL # 19,864.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0001021",
+        "date_delivered": "2025-04-26 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 10005,
+        "total_cp": 10005,
+        "disc": 0,
+        "net_cp": 10005,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 10005,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 915,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR MED 0000001",
+        "date_delivered": "2025-04-26 00:00:00",
+        "product": "PESO PROVINCIAL # 960,000.00",
+        "qty": 1,
+        "cp": 959400,
+        "total_cp": 959400,
+        "disc": 0,
+        "net_cp": 959400,
+        "tp/unit": 631285.2,
+        "total_tp": 631285.2,
+        "net_income": 328114.80000000005,
+        "%": 0.342,
+        "_sheet": "2025",
+        "_source_row": 916,
+        "_product": "PESO PROVINCIAL # 960,000.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0001022",
+        "date_delivered": "2025-04-26 00:00:00",
+        "product": "PESO PROVINCIAL # 101,500.00",
+        "qty": 1,
+        "cp": 101350,
+        "total_cp": 101350,
+        "disc": 0,
+        "net_cp": 101350,
+        "tp/unit": 66369.17,
+        "total_tp": 66369.17,
+        "net_income": 34980.83,
+        "%": 0.3451487913172176,
+        "_sheet": "2025",
+        "_source_row": 917,
+        "_product": "PESO PROVINCIAL # 101,500.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0001045",
+        "date_delivered": "2025-05-10 00:00:00",
+        "product": "PAGBILAO # 66,000.00",
+        "qty": 1,
+        "cp": 65670,
+        "total_cp": 65670,
+        "disc": 0,
+        "net_cp": 65670,
+        "tp/unit": 44918.57,
+        "total_tp": 44918.57,
+        "net_income": 20751.43,
+        "%": 0.3159955839805086,
+        "_sheet": "2025",
+        "_source_row": 1009,
+        "_product": "PAGBILAO # 66,000.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0001054",
+        "date_delivered": "2025-05-17 00:00:00",
+        "product": "PAGBILAO # 9,093.00",
+        "qty": 1,
+        "cp": 9030,
+        "total_cp": 9030,
+        "disc": 0,
+        "net_cp": 9030,
+        "tp/unit": 5941.74,
+        "total_tp": 5941.74,
+        "net_income": 3088.26,
+        "%": 0.342,
+        "_sheet": "2025",
+        "_source_row": 1027,
+        "_product": "PAGBILAO # 9,093.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Hospital",
+        "dr_number": "DR RT 0002034",
+        "date_delivered": "2025-05-24 00:00:00",
+        "product": "QMC # 126,251.00",
+        "qty": 1,
+        "cp": 126150,
+        "total_cp": 126150,
+        "disc": 0,
+        "net_cp": 126150,
+        "tp/unit": 66047,
+        "total_tp": 66047,
+        "net_income": 60103,
+        "%": 0.47644074514466905,
+        "_sheet": "2025",
+        "_source_row": 1079,
+        "_product": "QMC # 126,251.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RM 0002035",
+        "date_delivered": "2025-05-24 00:00:00",
+        "product": "PAGBILAO # 3,273,976",
+        "qty": 1,
+        "cp": 2062128,
+        "total_cp": 2062128,
+        "disc": 0,
+        "net_cp": 2062128,
+        "tp/unit": 1530222.43,
+        "total_tp": 1530222.43,
+        "net_income": 531905.5700000001,
+        "%": 0.25794013271727073,
+        "_sheet": "2025",
+        "_source_row": 1092,
+        "_product": "PAGBILAO # 3,273,976",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RM 0002036",
+        "date_delivered": "2025-05-24 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 231762,
+        "total_cp": 231762,
+        "disc": 0,
+        "net_cp": 231762,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 231762,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 1093,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RM 0002037",
+        "date_delivered": "2025-05-24 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 31676,
+        "total_cp": 31676,
+        "disc": 0,
+        "net_cp": 31676,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 31676,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 1094,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RM 0002040",
+        "date_delivered": "2025-05-24 00:00:00",
+        "product": "PAGBILAO # 2,511,299.00",
+        "qty": 1,
+        "cp": 1431072,
+        "total_cp": 1431072,
+        "disc": 0,
+        "net_cp": 1431072,
+        "tp/unit": 1188562.51,
+        "total_tp": 1188562.51,
+        "net_income": 242509.49,
+        "%": 0.16946002018067574,
+        "_sheet": "2025",
+        "_source_row": 1095,
+        "_product": "PAGBILAO # 2,511,299.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RM 0002041",
+        "date_delivered": "2025-05-24 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 375254,
+        "total_cp": 375254,
+        "disc": 0,
+        "net_cp": 375254,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 375254,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 1096,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0002038",
+        "date_delivered": "2025-05-24 00:00:00",
+        "product": "PAGBILAO # 3,072,944",
+        "qty": 1,
+        "cp": 2173450,
+        "total_cp": 2173450,
+        "disc": 0,
+        "net_cp": 2173450,
+        "tp/unit": 1512820.96,
+        "total_tp": 1512820.96,
+        "net_income": 660629.04,
+        "%": 0.3039541006234328,
+        "_sheet": "2025",
+        "_source_row": 1097,
+        "_product": "PAGBILAO # 3,072,944",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0002039",
+        "date_delivered": "2025-05-24 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 125670,
+        "total_cp": 125670,
+        "disc": 0,
+        "net_cp": 125670,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 125670,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 1098,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Hospital",
+        "dr_number": "DR MS 03173",
+        "date_delivered": "2025-09-13 00:00:00",
+        "product": "QMC # 845,260.00",
+        "qty": 1,
+        "cp": 643500,
+        "total_cp": 643500,
+        "disc": 0,
+        "net_cp": 643500,
+        "tp/unit": 420899.35,
+        "total_tp": 420899.35,
+        "net_income": 222600.65000000002,
+        "%": 0.34592175602175607,
+        "_sheet": "2025",
+        "_source_row": 1114,
+        "_product": "QMC # 845,260.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Hospital",
+        "dr_number": "DR RT 0001072",
+        "date_delivered": "2025-05-31 00:00:00",
+        "product": "QMC # 112,996.00",
+        "qty": 1,
+        "cp": 112569.6,
+        "total_cp": 112569.6,
+        "disc": 0,
+        "net_cp": 112569.6,
+        "tp/unit": 63960,
+        "total_tp": 63960,
+        "net_income": 48609.600000000006,
+        "%": 0.4318181818181818,
+        "_sheet": "2025",
+        "_source_row": 1165,
+        "_product": "QMC # 112,996.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Hospital",
+        "dr_number": "DR RT 0001048",
+        "date_delivered": "2025-05-31 00:00:00",
+        "product": "QMC # 111,696.00",
+        "qty": 1,
+        "cp": 111430,
+        "total_cp": 111430,
+        "disc": 0,
+        "net_cp": 111430,
+        "tp/unit": 56520,
+        "total_tp": 56520,
+        "net_income": 54910,
+        "%": 0.49277573364444044,
+        "_sheet": "2025",
+        "_source_row": 1184,
+        "_product": "QMC # 111,696.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0001059",
+        "date_delivered": "2025-06-07 00:00:00",
+        "product": "PAGBILAO # 187,000",
+        "qty": 1,
+        "cp": 186600,
+        "total_cp": 186600,
+        "disc": 0,
+        "net_cp": 186600,
+        "tp/unit": 141250,
+        "total_tp": 141250,
+        "net_income": 45350,
+        "%": 0.24303322615219722,
+        "_sheet": "2025",
+        "_source_row": 1191,
+        "_product": "PAGBILAO # 187,000",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0001058",
+        "date_delivered": "2025-06-07 00:00:00",
+        "product": "PAGBILAO # 9,000.00",
+        "qty": 1,
+        "cp": 8900,
+        "total_cp": 8900,
+        "disc": 0,
+        "net_cp": 8900,
+        "tp/unit": 4500,
+        "total_tp": 4500,
+        "net_income": 4400,
+        "%": 0.4943820224719101,
+        "_sheet": "2025",
+        "_source_row": 1192,
+        "_product": "PAGBILAO # 9,000.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Hospital",
+        "dr_number": "DR RT 0987",
+        "date_delivered": "2025-06-07 00:00:00",
+        "product": "QMC # 42,400.00",
+        "qty": 1,
+        "cp": 42240,
+        "total_cp": 42240,
+        "disc": 0,
+        "net_cp": 42240,
+        "tp/unit": 24000,
+        "total_tp": 24000,
+        "net_income": 18240,
+        "%": 0.4318181818181818,
+        "_sheet": "2025",
+        "_source_row": 1193,
+        "_product": "QMC # 42,400.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR MS 03001",
+        "date_delivered": "2025-06-07 00:00:00",
+        "product": null,
+        "qty": 200,
+        "cp": 95,
+        "total_cp": 19000,
+        "disc": 0,
+        "net_cp": 19000,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 19000,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 1248,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR MS 03001",
+        "date_delivered": "2025-06-07 00:00:00",
+        "product": null,
+        "qty": 135,
+        "cp": 138,
+        "total_cp": 18630,
+        "disc": 0,
+        "net_cp": 18630,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 18630,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 1250,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR MS 02921",
+        "date_delivered": "2025-06-07 00:00:00",
+        "product": null,
+        "qty": 50,
+        "cp": 559,
+        "total_cp": 27950,
+        "disc": 0,
+        "net_cp": 27950,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 27950,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 1297,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR MS 02921",
+        "date_delivered": "2025-06-07 00:00:00",
+        "product": null,
+        "qty": 150,
+        "cp": 49,
+        "total_cp": 7350,
+        "disc": 0,
+        "net_cp": 7350,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 7350,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 1301,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR MS 02922",
+        "date_delivered": "2025-06-07 00:00:00",
+        "product": null,
+        "qty": 200,
+        "cp": 143,
+        "total_cp": 28600,
+        "disc": 0,
+        "net_cp": 28600,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 28600,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 1352,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR MS 02922",
+        "date_delivered": "2025-06-07 00:00:00",
+        "product": null,
+        "qty": 100,
+        "cp": 89,
+        "total_cp": 8900,
+        "disc": 0,
+        "net_cp": 8900,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 8900,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 1353,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0001061",
+        "date_delivered": "2025-06-14 00:00:00",
+        "product": "PESO # 55,000.00",
+        "qty": 1,
+        "cp": 55350,
+        "total_cp": 55350,
+        "disc": 0,
+        "net_cp": 55350,
+        "tp/unit": 36420.3,
+        "total_tp": 36420.3,
+        "net_income": 18929.699999999997,
+        "%": 0.34199999999999997,
+        "_sheet": "2025",
+        "_source_row": 1367,
+        "_product": "PESO # 55,000.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0001060",
+        "date_delivered": "2025-06-14 00:00:00",
+        "product": "PESO # 18,000.00",
+        "qty": 1,
+        "cp": 17670,
+        "total_cp": 17670,
+        "disc": 0,
+        "net_cp": 17670,
+        "tp/unit": 11626.86,
+        "total_tp": 11626.86,
+        "net_income": 6043.139999999999,
+        "%": 0.34199999999999997,
+        "_sheet": "2025",
+        "_source_row": 1368,
+        "_product": "PESO # 18,000.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0001065",
+        "date_delivered": "2025-06-14 00:00:00",
+        "product": "PAGBILAO # 54,000.00",
+        "qty": 1,
+        "cp": 53595,
+        "total_cp": 53595,
+        "disc": 0,
+        "net_cp": 53595,
+        "tp/unit": 36730,
+        "total_tp": 36730,
+        "net_income": 16865,
+        "%": 0.31467487638772274,
+        "_sheet": "2025",
+        "_source_row": 1369,
+        "_product": "PAGBILAO # 54,000.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0001096",
+        "date_delivered": "2025-06-14 00:00:00",
+        "product": "PAGBILAO # 19,000.00-1",
+        "qty": 1,
+        "cp": 18840,
+        "total_cp": 18840,
+        "disc": 0,
+        "net_cp": 18840,
+        "tp/unit": 12396.72,
+        "total_tp": 12396.72,
+        "net_income": 6443.280000000001,
+        "%": 0.342,
+        "_sheet": "2025",
+        "_source_row": 1370,
+        "_product": "PAGBILAO # 19,000.00-1",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0001141",
+        "date_delivered": "2025-07-05 00:00:00",
+        "product": "PAGBILAO # 3,000.00",
+        "qty": 1,
+        "cp": 2985,
+        "total_cp": 2985,
+        "disc": 0,
+        "net_cp": 2985,
+        "tp/unit": 2464,
+        "total_tp": 2464,
+        "net_income": 521,
+        "%": 0.1745393634840871,
+        "_sheet": "2025",
+        "_source_row": 1383,
+        "_product": "PAGBILAO # 3,000.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Admin",
+        "dr_number": "DR 025803",
+        "date_delivered": "2025-06-10 00:00:00",
+        "product": null,
+        "qty": 0,
+        "cp": null,
+        "total_cp": null,
+        "disc": 0,
+        "net_cp": 0,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 0,
+        "%": "#DIV/0!",
+        "_sheet": "2025",
+        "_source_row": 1402,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0001107",
+        "date_delivered": "2025-06-21 00:00:00",
+        "product": "PAGBILAO # 28,000.00",
+        "qty": 1,
+        "cp": 27760,
+        "total_cp": 27760,
+        "disc": 0,
+        "net_cp": 27760,
+        "tp/unit": 18266.08,
+        "total_tp": 18266.08,
+        "net_income": 9493.919999999998,
+        "%": 0.3419999999999999,
+        "_sheet": "2025",
+        "_source_row": 1434,
+        "_product": "PAGBILAO # 28,000.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0001106",
+        "date_delivered": "2025-06-21 00:00:00",
+        "product": "PAGBILAO # 51,675.00",
+        "qty": 1,
+        "cp": 51428,
+        "total_cp": 51428,
+        "disc": 0,
+        "net_cp": 51428,
+        "tp/unit": 33839.62,
+        "total_tp": 33839.62,
+        "net_income": 17588.379999999997,
+        "%": 0.34200007777864194,
+        "_sheet": "2025",
+        "_source_row": 1435,
+        "_product": "PAGBILAO # 51,675.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Hospital",
+        "dr_number": "DR RT 0002057",
+        "date_delivered": "2025-06-21 00:00:00",
+        "product": "QMC # 130,994.00",
+        "qty": 1,
+        "cp": 48262,
+        "total_cp": 48262,
+        "disc": 0,
+        "net_cp": 48262,
+        "tp/unit": 92829,
+        "total_tp": 92829,
+        "net_income": -44567,
+        "%": -0.9234387302639758,
+        "_sheet": "2025",
+        "_source_row": 1436,
+        "_product": "QMC # 130,994.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Hospital",
+        "dr_number": "DR RT 0002058",
+        "date_delivered": "2025-06-21 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 40812,
+        "total_cp": 40812,
+        "disc": 0,
+        "net_cp": 40812,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 40812,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 1437,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Hospital",
+        "dr_number": "DR RT 0002060",
+        "date_delivered": "2025-06-21 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 41536,
+        "total_cp": 41536,
+        "disc": 0,
+        "net_cp": 41536,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 41536,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 1438,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Hospital",
+        "dr_number": "DR RT 0001073",
+        "date_delivered": "2025-06-28 00:00:00",
+        "product": "QMC # 107,178.00",
+        "qty": 1,
+        "cp": 66274,
+        "total_cp": 66274,
+        "disc": 0,
+        "net_cp": 66274,
+        "tp/unit": 62550,
+        "total_tp": 62550,
+        "net_income": 3724,
+        "%": 0.05619096478256933,
+        "_sheet": "2025",
+        "_source_row": 1491,
+        "_product": "QMC # 107,178.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Hospital",
+        "dr_number": "DR RT 0001074",
+        "date_delivered": "2025-06-28 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 40684,
+        "total_cp": 40684,
+        "disc": 0,
+        "net_cp": 40684,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 40684,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 1492,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0001113",
+        "date_delivered": "2025-06-28 00:00:00",
+        "product": "PAGBILAO # 230,400.00",
+        "qty": 1,
+        "cp": 229860,
+        "total_cp": 229860,
+        "disc": 0,
+        "net_cp": 229860,
+        "tp/unit": 151247.88,
+        "total_tp": 151247.88,
+        "net_income": 78612.12,
+        "%": 0.34199999999999997,
+        "_sheet": "2025",
+        "_source_row": 1493,
+        "_product": "PAGBILAO # 230,400.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0001112",
+        "date_delivered": "2025-06-28 00:00:00",
+        "product": "PAGBILAO # 891,530.00",
+        "qty": 1,
+        "cp": 650192.2,
+        "total_cp": 650192.2,
+        "disc": 0,
+        "net_cp": 650192.2,
+        "tp/unit": 427826.47,
+        "total_tp": 427826.47,
+        "net_income": 222365.72999999998,
+        "%": 0.34199999630878375,
+        "_sheet": "2025",
+        "_source_row": 1494,
+        "_product": "PAGBILAO # 891,530.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0002062",
+        "date_delivered": "2025-06-28 00:00:00",
+        "product": "PAGBILAO # 404,280.00",
+        "qty": 1,
+        "cp": 300820,
+        "total_cp": 300820,
+        "disc": 0,
+        "net_cp": 300820,
+        "tp/unit": 197939.56,
+        "total_tp": 197939.56,
+        "net_income": 102880.44,
+        "%": 0.342,
+        "_sheet": "2025",
+        "_source_row": 1495,
+        "_product": "PAGBILAO # 404,280.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Marinduque",
+        "dr_number": "DR RT 0002032",
+        "date_delivered": "2025-07-05 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 49800,
+        "total_cp": 49800,
+        "disc": 0,
+        "net_cp": 49800,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 49800,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 1628,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Marinduque",
+        "dr_number": "DR RT 0002033",
+        "date_delivered": "2025-07-05 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 20000,
+        "total_cp": 20000,
+        "disc": 0,
+        "net_cp": 20000,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 20000,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 1629,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0001143",
+        "date_delivered": "2025-07-05 00:00:00",
+        "product": "PAGBILAO # 11,000.00",
+        "qty": 1,
+        "cp": 10794,
+        "total_cp": 10794,
+        "disc": 0,
+        "net_cp": 10794,
+        "tp/unit": 7102.45,
+        "total_tp": 7102.45,
+        "net_income": 3691.55,
+        "%": 0.34200018528812304,
+        "_sheet": "2025",
+        "_source_row": 1631,
+        "_product": "PAGBILAO # 11,000.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0001149",
+        "date_delivered": "2025-07-19 00:00:00",
+        "product": "PAGBILAO # 3,500.00",
+        "qty": 1,
+        "cp": 3444,
+        "total_cp": 3444,
+        "disc": 0,
+        "net_cp": 3444,
+        "tp/unit": 1624,
+        "total_tp": 1624,
+        "net_income": 1820,
+        "%": 0.5284552845528455,
+        "_sheet": "2025",
+        "_source_row": 1688,
+        "_product": "PAGBILAO # 3,500.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0001150",
+        "date_delivered": "2025-07-19 00:00:00",
+        "product": "PAGBILAO # 833,154.00",
+        "qty": 1,
+        "cp": 605700,
+        "total_cp": 605700,
+        "disc": 0,
+        "net_cp": 605700,
+        "tp/unit": 398550.6,
+        "total_tp": 398550.6,
+        "net_income": 207149.40000000002,
+        "%": 0.342,
+        "_sheet": "2025",
+        "_source_row": 1689,
+        "_product": "PAGBILAO # 833,154.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Hospital",
+        "dr_number": "DR RT 0002107",
+        "date_delivered": "2025-07-19 00:00:00",
+        "product": "QMC # 605,550.00",
+        "qty": 1,
+        "cp": 586630.5,
+        "total_cp": 586630.5,
+        "disc": 0,
+        "net_cp": 586630.5,
+        "tp/unit": 306004.6,
+        "total_tp": 306004.6,
+        "net_income": 280625.9,
+        "%": 0.4783690926400861,
+        "_sheet": "2025",
+        "_source_row": 1712,
+        "_product": "QMC # 605,550.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Hospital",
+        "dr_number": "DR RT 0002108",
+        "date_delivered": "2025-07-19 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 17970,
+        "total_cp": 17970,
+        "disc": 0,
+        "net_cp": 17970,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 17970,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 1713,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Hospital",
+        "dr_number": "DR RT 0001210",
+        "date_delivered": "2025-07-19 00:00:00",
+        "product": "QMC # 108,598.62",
+        "qty": 1,
+        "cp": 102045,
+        "total_cp": 102045,
+        "disc": 0,
+        "net_cp": 102045,
+        "tp/unit": 78571.25,
+        "total_tp": 78571.25,
+        "net_income": 23473.75,
+        "%": 0.230033318633936,
+        "_sheet": "2025",
+        "_source_row": 1714,
+        "_product": "QMC # 108,598.62",
+        "_contract_like": true
+      },
+      {
+        "area": "Hospital",
+        "dr_number": "DR RT 0001211",
+        "date_delivered": "2025-07-19 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 6153,
+        "total_cp": 6153,
+        "disc": 0,
+        "net_cp": 6153,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 6153,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 1715,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Hospital",
+        "dr_number": "DR RT 0001124",
+        "date_delivered": "2025-07-19 00:00:00",
+        "product": "QMC # 981,828.00",
+        "qty": 1,
+        "cp": 980842.5,
+        "total_cp": 980842.5,
+        "disc": 0,
+        "net_cp": 980842.5,
+        "tp/unit": 682233.1,
+        "total_tp": 682233.1,
+        "net_income": 298609.4,
+        "%": 0.30444174268549745,
+        "_sheet": "2025",
+        "_source_row": 1716,
+        "_product": "QMC # 981,828.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0002075",
+        "date_delivered": "2025-07-19 00:00:00",
+        "product": "PAGBILAO # 13,500,000",
+        "qty": 1,
+        "cp": 13230000,
+        "total_cp": 13230000,
+        "disc": 0,
+        "net_cp": 13230000,
+        "tp/unit": 4229349.44,
+        "total_tp": 4229349.44,
+        "net_income": 9000650.559999999,
+        "%": 0.6803212819349961,
+        "_sheet": "2025",
+        "_source_row": 1717,
+        "_product": "PAGBILAO # 13,500,000",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0001152",
+        "date_delivered": "2025-07-19 00:00:00",
+        "product": "PAGBILAO # 7,000.00",
+        "qty": 1,
+        "cp": 6930,
+        "total_cp": 6930,
+        "disc": 0,
+        "net_cp": 6930,
+        "tp/unit": 5638.31,
+        "total_tp": 5638.31,
+        "net_income": 1291.6899999999996,
+        "%": 0.18639105339105333,
+        "_sheet": "2025",
+        "_source_row": 1718,
+        "_product": "PAGBILAO # 7,000.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0001151",
+        "date_delivered": "2025-07-19 00:00:00",
+        "product": "PAGBILAO # 17,070.00",
+        "qty": 1,
+        "cp": 16726.5,
+        "total_cp": 16726.5,
+        "disc": 0,
+        "net_cp": 16726.5,
+        "tp/unit": 8244.69,
+        "total_tp": 8244.69,
+        "net_income": 8481.81,
+        "%": 0.5070881535288314,
+        "_sheet": "2025",
+        "_source_row": 1719,
+        "_product": "PAGBILAO # 17,070.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0001153",
+        "date_delivered": "2025-07-26 00:00:00",
+        "product": "PAGBILAO # 31,800.00",
+        "qty": 1,
+        "cp": 31724,
+        "total_cp": 31724,
+        "disc": 0,
+        "net_cp": 31724,
+        "tp/unit": 23120,
+        "total_tp": 23120,
+        "net_income": 8604,
+        "%": 0.27121422267053336,
+        "_sheet": "2025",
+        "_source_row": 1739,
+        "_product": "PAGBILAO # 31,800.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0001024",
+        "date_delivered": "2025-07-26 00:00:00",
+        "product": "PAGBILAO # 327,050.00",
+        "qty": 1,
+        "cp": 289362.5,
+        "total_cp": 289362.5,
+        "disc": 0,
+        "net_cp": 289362.5,
+        "tp/unit": 231484,
+        "total_tp": 231484,
+        "net_income": 57878.5,
+        "%": 0.20002073523694328,
+        "_sheet": "2025",
+        "_source_row": 1768,
+        "_product": "PAGBILAO # 327,050.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR MS 03135",
+        "date_delivered": "2025-06-07 00:00:00",
+        "product": null,
+        "qty": 0,
+        "cp": null,
+        "total_cp": null,
+        "disc": 0,
+        "net_cp": 0,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 0,
+        "%": "#DIV/0!",
+        "_sheet": "2025",
+        "_source_row": 1880,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR MS 02968",
+        "date_delivered": "2025-06-07 00:00:00",
+        "product": null,
+        "qty": 85,
+        "cp": 570,
+        "total_cp": 48450,
+        "disc": 0,
+        "net_cp": 48450,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 48450,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 1925,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0001168",
+        "date_delivered": "2025-08-09 00:00:00",
+        "product": "PAGBILAO # 36,000.00-1",
+        "qty": 1,
+        "cp": 35845,
+        "total_cp": 35845,
+        "disc": 0,
+        "net_cp": 35845,
+        "tp/unit": 28113.91,
+        "total_tp": 28113.91,
+        "net_income": 7731.09,
+        "%": 0.21568112707490586,
+        "_sheet": "2025",
+        "_source_row": 1936,
+        "_product": "PAGBILAO # 36,000.00-1",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0002052",
+        "date_delivered": "2025-08-09 00:00:00",
+        "product": "PAGBILAO # 288,255.00",
+        "qty": 1,
+        "cp": 190265,
+        "total_cp": 190265,
+        "disc": 0,
+        "net_cp": 190265,
+        "tp/unit": 189332.92,
+        "total_tp": 189332.92,
+        "net_income": 932.0799999999872,
+        "%": 0.004898851601713332,
+        "_sheet": "2025",
+        "_source_row": 1982,
+        "_product": "PAGBILAO # 288,255.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0002053",
+        "date_delivered": "2025-08-09 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 40235,
+        "total_cp": 40235,
+        "disc": 0,
+        "net_cp": 40235,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 40235,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 1983,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0002054",
+        "date_delivered": "2025-08-09 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 57240,
+        "total_cp": 57240,
+        "disc": 0,
+        "net_cp": 57240,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 57240,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 1984,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0002080",
+        "date_delivered": "2025-08-16 00:00:00",
+        "product": "PAGBILAO # 417,149.00-1",
+        "qty": 1,
+        "cp": 165800,
+        "total_cp": 165800,
+        "disc": 0,
+        "net_cp": 165800,
+        "tp/unit": 155429,
+        "total_tp": 155429,
+        "net_income": 10371,
+        "%": 0.06255126658624849,
+        "_sheet": "2025",
+        "_source_row": 1988,
+        "_product": "PAGBILAO # 417,149.00-1",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0002081",
+        "date_delivered": "2025-08-16 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 52670,
+        "total_cp": 52670,
+        "disc": 0,
+        "net_cp": 52670,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 52670,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 1989,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0002082",
+        "date_delivered": "2025-08-16 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 73100,
+        "total_cp": 73100,
+        "disc": 0,
+        "net_cp": 73100,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 73100,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 1990,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0002083",
+        "date_delivered": "2025-08-16 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 124550,
+        "total_cp": 124550,
+        "disc": 0,
+        "net_cp": 124550,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 124550,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 1991,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0002076",
+        "date_delivered": "2025-08-16 00:00:00",
+        "product": "PAGBILAO # 417,149.00-2",
+        "qty": 1,
+        "cp": 165800,
+        "total_cp": 165800,
+        "disc": 0,
+        "net_cp": 165800,
+        "tp/unit": 155429,
+        "total_tp": 155429,
+        "net_income": 10371,
+        "%": 0.06255126658624849,
+        "_sheet": "2025",
+        "_source_row": 1992,
+        "_product": "PAGBILAO # 417,149.00-2",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0002077",
+        "date_delivered": "2025-08-16 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 52670,
+        "total_cp": 52670,
+        "disc": 0,
+        "net_cp": 52670,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 52670,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 1993,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0002078",
+        "date_delivered": "2025-08-16 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 73100,
+        "total_cp": 73100,
+        "disc": 0,
+        "net_cp": 73100,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 73100,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 1994,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0002079",
+        "date_delivered": "2025-08-16 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 124550,
+        "total_cp": 124550,
+        "disc": 0,
+        "net_cp": 124550,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 124550,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 1995,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0001169",
+        "date_delivered": "2025-08-16 00:00:00",
+        "product": "PAGBILAO # 730,670.00",
+        "qty": 1,
+        "cp": 726100,
+        "total_cp": 726100,
+        "disc": 0,
+        "net_cp": 726100,
+        "tp/unit": 233760,
+        "total_tp": 233760,
+        "net_income": 492340,
+        "%": 0.6780608731579673,
+        "_sheet": "2025",
+        "_source_row": 1996,
+        "_product": "PAGBILAO # 730,670.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Hospital",
+        "dr_number": "DR RT 0001181",
+        "date_delivered": "2025-08-16 00:00:00",
+        "product": "QMC # 206,923.50",
+        "qty": 1,
+        "cp": 206820,
+        "total_cp": 206820,
+        "disc": 0,
+        "net_cp": 206820,
+        "tp/unit": 118242,
+        "total_tp": 118242,
+        "net_income": 88578,
+        "%": 0.42828546562228026,
+        "_sheet": "2025",
+        "_source_row": 1997,
+        "_product": "QMC # 206,923.50",
+        "_contract_like": true
+      },
+      {
+        "area": "Hospital",
+        "dr_number": "DR RT 0002090",
+        "date_delivered": "2025-08-16 00:00:00",
+        "product": "QMC # 157,565.00",
+        "qty": 1,
+        "cp": 87970,
+        "total_cp": 87970,
+        "disc": 0,
+        "net_cp": 87970,
+        "tp/unit": 107440,
+        "total_tp": 107440,
+        "net_income": -19470,
+        "%": -0.22132545185858815,
+        "_sheet": "2025",
+        "_source_row": 1998,
+        "_product": "QMC # 157,565.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Hospital",
+        "dr_number": "DR RT 0002091",
+        "date_delivered": "2025-08-16 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 69417,
+        "total_cp": 69417,
+        "disc": 0,
+        "net_cp": 69417,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 69417,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 1999,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0002092",
+        "date_delivered": "2025-08-16 00:00:00",
+        "product": "PAGBILAO # 147,528.00",
+        "qty": 1,
+        "cp": 42944,
+        "total_cp": 42944,
+        "disc": 0,
+        "net_cp": 42944,
+        "tp/unit": 96695,
+        "total_tp": 96695,
+        "net_income": -53751,
+        "%": -1.2516533159463488,
+        "_sheet": "2025",
+        "_source_row": 2055,
+        "_product": "PAGBILAO # 147,528.00",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0002093",
+        "date_delivered": "2025-08-16 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 59554,
+        "total_cp": 59554,
+        "disc": 0,
+        "net_cp": 59554,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 59554,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 2056,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR RT 0002094",
+        "date_delivered": "2025-08-16 00:00:00",
+        "product": null,
+        "qty": 1,
+        "cp": 44390,
+        "total_cp": 44390,
+        "disc": 0,
+        "net_cp": 44390,
+        "tp/unit": null,
+        "total_tp": null,
+        "net_income": 44390,
+        "%": 1,
+        "_sheet": "2025",
+        "_source_row": 2057,
+        "_product": "",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR MEI 0000004",
+        "date_delivered": "2025-08-16 00:00:00",
+        "product": "PAGBILAO # 16,000.00-1",
+        "qty": 1,
+        "cp": 15800,
+        "total_cp": 15800,
+        "disc": 0,
+        "net_cp": 15800,
+        "tp/unit": 10396.4,
+        "total_tp": 10396.4,
+        "net_income": 5403.6,
+        "%": 0.342,
+        "_sheet": "2025",
+        "_source_row": 2059,
+        "_product": "PAGBILAO # 16,000.00-1",
+        "_contract_like": true
+      },
+      {
+        "area": "Government",
+        "dr_number": "DR MEI 0000003",
+        "date_delivered": "2025-08-16 00:00:00",
+        "product": "PAGBILAO # 52,500.00",
+        "qty": 1,
+        "cp": 52312.5,
+        "total_cp": 52312.5,
+        "disc": 0,
+        "net_cp": 52312.5,
+        "tp/unit": 34421.63,
+        "total_tp": 34421.63,
+        "net_income": 17890.870000000003,
+        "%": 0.3419999044205496,
+        "_sheet": "2025",
+        "_source_row": 2060,
+        "_product": "PAGBILAO # 52,500.00",
+        "_contract_like": true
+      }
+    ],
+    "by_sheet": {
+      "2025": {
+        "rows": 4137,
+        "blank_product_rows": 107,
+        "contract_like_rows": 291,
+        "contract_prefix_counts": {
+          "PAGBILAO": 136,
+          "BLANK": 107,
+          "QMC": 42,
+          "PESO": 6
+        },
+        "contract_like_products": [
+          [
+            "",
+            107
+          ],
+          [
+            "PAGBILAO # 13,500,000",
+            2
+          ],
+          [
+            "PAGBILAO # 921,080.00",
+            2
+          ],
+          [
+            "PAGBILAO # 145,973",
+            2
+          ],
+          [
+            "PAGBILAO # 411,290",
+            1
+          ],
+          [
+            "PAGBILAO # 2,070,000",
+            1
+          ],
+          [
+            "PAGBILAO # 6,334,470",
+            1
+          ],
+          [
+            "PAGBILAO # 474,160",
+            1
+          ],
+          [
+            "PAGBILAO # 3,658,000",
+            1
+          ],
+          [
+            "QMC # 559,400.00",
+            1
+          ],
+          [
+            "QMC # 141,140.00",
+            1
+          ],
+          [
+            "PAGBILAO # 10,000.00-4",
+            1
+          ],
+          [
+            "PESO PROVINCIAL # 19,864.00",
+            1
+          ],
+          [
+            "PESO PROVINCIAL # 960,000.00",
+            1
+          ],
+          [
+            "PESO PROVINCIAL # 101,500.00",
+            1
+          ],
+          [
+            "PAGBILAO # 66,000.00",
+            1
+          ],
+          [
+            "PAGBILAO # 9,093.00",
+            1
+          ],
+          [
+            "QMC # 126,251.00",
+            1
+          ],
+          [
+            "PAGBILAO # 3,273,976",
+            1
+          ],
+          [
+            "PAGBILAO # 2,511,299.00",
+            1
+          ],
+          [
+            "PAGBILAO # 3,072,944",
+            1
+          ],
+          [
+            "QMC # 845,260.00",
+            1
+          ],
+          [
+            "QMC # 112,996.00",
+            1
+          ],
+          [
+            "QMC # 111,696.00",
+            1
+          ],
+          [
+            "PAGBILAO # 187,000",
+            1
+          ],
+          [
+            "PAGBILAO # 9,000.00",
+            1
+          ],
+          [
+            "QMC # 42,400.00",
+            1
+          ],
+          [
+            "PESO # 55,000.00",
+            1
+          ],
+          [
+            "PESO # 18,000.00",
+            1
+          ],
+          [
+            "PAGBILAO # 54,000.00",
+            1
+          ],
+          [
+            "PAGBILAO # 19,000.00-1",
+            1
+          ],
+          [
+            "PAGBILAO # 3,000.00",
+            1
+          ],
+          [
+            "PAGBILAO # 28,000.00",
+            1
+          ],
+          [
+            "PAGBILAO # 51,675.00",
+            1
+          ],
+          [
+            "QMC # 130,994.00",
+            1
+          ],
+          [
+            "QMC # 107,178.00",
+            1
+          ],
+          [
+            "PAGBILAO # 230,400.00",
+            1
+          ],
+          [
+            "PAGBILAO # 891,530.00",
+            1
+          ],
+          [
+            "PAGBILAO # 404,280.00",
+            1
+          ],
+          [
+            "PAGBILAO # 11,000.00",
+            1
+          ],
+          [
+            "PAGBILAO # 3,500.00",
+            1
+          ],
+          [
+            "PAGBILAO # 833,154.00",
+            1
+          ],
+          [
+            "QMC # 605,550.00",
+            1
+          ],
+          [
+            "QMC # 108,598.62",
+            1
+          ],
+          [
+            "QMC # 981,828.00",
+            1
+          ],
+          [
+            "PAGBILAO # 7,000.00",
+            1
+          ],
+          [
+            "PAGBILAO # 17,070.00",
+            1
+          ],
+          [
+            "PAGBILAO # 31,800.00",
+            1
+          ],
+          [
+            "PAGBILAO # 327,050.00",
+            1
+          ],
+          [
+            "PAGBILAO # 36,000.00-1",
+            1
+          ],
+          [
+            "PAGBILAO # 288,255.00",
+            1
+          ],
+          [
+            "PAGBILAO # 417,149.00-1",
+            1
+          ],
+          [
+            "PAGBILAO # 417,149.00-2",
+            1
+          ],
+          [
+            "PAGBILAO # 730,670.00",
+            1
+          ],
+          [
+            "QMC # 206,923.50",
+            1
+          ],
+          [
+            "QMC # 157,565.00",
+            1
+          ],
+          [
+            "PAGBILAO # 147,528.00",
+            1
+          ],
+          [
+            "PAGBILAO # 16,000.00-1",
+            1
+          ],
+          [
+            "PAGBILAO # 52,500.00",
+            1
+          ],
+          [
+            "PESO # 3,450,000.00",
+            1
+          ],
+          [
+            "PAGBILAO # 107,500.00",
+            1
+          ],
+          [
+            "QMC # 31,500.00",
+            1
+          ],
+          [
+            "QMC # 61,900.00",
+            1
+          ],
+          [
+            "PAGBILAO # 135,160.00",
+            1
+          ],
+          [
+            "QMC # 985,170.00",
+            1
+          ],
+          [
+            "QMC # 407,373.75",
+            1
+          ],
+          [
+            "PAGBILAO # 19,000.00-2",
+            1
+          ],
+          [
+            "QMC # 102,275.00",
+            1
+          ],
+          [
+            "QMC # 23,686.00",
+            1
+          ],
+          [
+            "QMC # 83,732.50",
+            1
+          ],
+          [
+            "PAGBILAO # 50,000",
+            1
+          ],
+          [
+            "QMC # 165,000",
+            1
+          ],
+          [
+            "QMC # 213,400",
+            1
+          ],
+          [
+            "QMC # 281,480.00",
+            1
+          ],
+          [
+            "QMC # 24,970.00",
+            1
+          ],
+          [
+            "QMC # 144,740.00",
+            1
+          ],
+          [
+            "QMC # 409,770.00",
+            1
+          ],
+          [
+            "QMC # 132,000.00",
+            1
+          ],
+          [
+            "QMC # 79,770.00",
+            1
+          ],
+          [
+            "PAGBILAO # 569,792.00",
+            1
+          ],
+          [
+            "PAGBILAO # 153,057.00",
+            1
+          ],
+          [
+            "QMC # 31,500",
+            1
+          ],
+          [
+            "PAGBILAO # 985,190",
+            1
+          ],
+          [
+            "PAGBILAO # 879,800",
+            1
+          ],
+          [
+            "PAGBILAO # 2,166,450",
+            1
+          ],
+          [
+            "PAGBILAO # 10,150.00",
+            1
+          ],
+          [
+            "PAGBILAO # 588,760.90",
+            1
+          ],
+          [
+            "PAGBILAO # 18,900",
+            1
+          ],
+          [
+            "PAGBILAO # 1,302,640",
+            1
+          ],
+          [
+            "PAGBILAO # 411,000",
+            1
+          ],
+          [
+            "PAGBILAO # 37,040.00",
+            1
+          ],
+          [
+            "PAGBILAO # 170,200",
+            1
+          ],
+          [
+            "PAGBILAO # 196,000",
+            1
+          ],
+          [
+            "PAGBILAO # 373,500",
+            1
+          ],
+          [
+            "PAGBILAO # 200,000",
+            1
+          ],
+          [
+            "PAGBILAO # 3,150",
+            1
+          ],
+          [
+            "PAGBILAO # 15,750",
+            1
+          ],
+          [
+            "PAGBILAO # 415,593",
+            1
+          ],
+          [
+            "PAGBILAO # 56,239",
+            1
+          ],
+          [
+            "PAGBILAO # 2,568,250",
+            1
+          ],
+          [
+            "PAGBILAO # 14,000",
+            1
+          ],
+          [
+            "PAGBILAO # 20,000",
+            1
+          ],
+          [
+            "PAGBILAO # 41,000",
+            1
+          ],
+          [
+            "PAGBILAO # 29,156",
+            1
+          ],
+          [
+            "PAGBILAO # 61,000",
+            1
+          ],
+          [
+            "PAGBILAO # 33,750",
+            1
+          ],
+          [
+            "PAGBILAO # 75,000",
+            1
+          ],
+          [
+            "PAGBILAO # 160,000",
+            1
+          ],
+          [
+            "PAGBILAO # 49,290",
+            1
+          ],
+          [
+            "PAGBILAO # 31,075",
+            1
+          ],
+          [
+            "PAGBILAO # 48,000",
+            1
+          ],
+          [
+            "PAGBILAO # 6,000",
+            1
+          ],
+          [
+            "PAGBILAO # 26,000",
+            1
+          ],
+          [
+            "PAGBILAO # 16,000-1",
+            1
+          ],
+          [
+            "PAGBILAO # 71,000",
+            1
+          ],
+          [
+            "PAGBILAO # 222,500",
+            1
+          ],
+          [
+            "PAGBILAO # 335,000",
+            1
+          ],
+          [
+            "PAGBILAO # 20,000-1",
+            1
+          ],
+          [
+            "PAGBILAO # 49,960",
+            1
+          ],
+          [
+            "PAGBILAO # 22,500",
+            1
+          ],
+          [
+            "PAGBILAO # 21,000",
+            1
+          ],
+          [
+            "PAGBILAO # 12,120.00",
+            1
+          ],
+          [
+            "PAGBILAO # 171,550.00",
+            1
+          ],
+          [
+            "PAGBILAO # 2,490.00",
+            1
+          ],
+          [
+            "PAGBILAO # 35,130.00",
+            1
+          ],
+          [
+            "PAGBILAO # 66,000",
+            1
+          ],
+          [
+            "PAGBILAO # 8,000",
+            1
+          ],
+          [
+            "PAGBILAO # 155,000",
+            1
+          ],
+          [
+            "PAGBILAO # 28,500",
+            1
+          ],
+          [
+            "PAGBILAO # 652,997.00",
+            1
+          ],
+          [
+            "PAGBILAO # 9,100.00",
+            1
+          ],
+          [
+            "PAGBILAO # 253,100.00",
+            1
+          ],
+          [
+            "PAGBILAO # 500,000",
+            1
+          ],
+          [
+            "PAGBILAO # 882,000.00",
+            1
+          ],
+          [
+            "PAGBILAO # 4,500",
+            1
+          ],
+          [
+            "PAGBILAO # 67,060",
+            1
+          ],
+          [
+            "PAGBILAO # 400,000",
+            1
+          ],
+          [
+            "PAGBILAO # 86,000",
+            1
+          ],
+          [
+            "PAGBILAO # 122,514.80",
+            1
+          ],
+          [
+            "PAGBILAO # 2,900,746.89",
+            1
+          ],
+          [
+            "PAGBILAO # 9,000",
+            1
+          ],
+          [
+            "PAGBILAO # 45,000",
+            1
+          ],
+          [
+            "PAGBILAO # 11,000-1",
+            1
+          ],
+          [
+            "PAGBILAO # 32,050",
+            1
+          ],
+          [
+            "PAGBILAO # 11,000-2",
+            1
+          ],
+          [
+            "QMC # 91,500",
+            1
+          ],
+          [
+            "PAGBILAO # 7,500",
+            1
+          ],
+          [
+            "PAGBILAO # 4,400",
+            1
+          ],
+          [
+            "PAGBILAO # 10,620-1",
+            1
+          ],
+          [
+            "PAGBILAO # 50,000-1",
+            1
+          ],
+          [
+            "PAGBILAO # 10,915",
+            1
+          ],
+          [
+            "PAGBILAO # 642,000",
+            1
+          ],
+          [
+            "PAGBILAO # 20,000-2",
+            1
+          ],
+          [
+            "PAGBILAO # 53,000",
+            1
+          ],
+          [
+            "PAGBILAO # 175,000",
+            1
+          ],
+          [
+            "PAGBILAO # 125,790",
+            1
+          ],
+          [
+            "PAGBILAO # 103,100",
+            1
+          ],
+          [
+            "PAGBILAO # 10,620",
+            1
+          ],
+          [
+            "PAGBILAO # 17,000-1",
+            1
+          ],
+          [
+            "PAGBILAO # 6,000-1",
+            1
+          ],
+          [
+            "PAGBILAO # 32,250",
+            1
+          ],
+          [
+            "PAGBILAO # 102,500",
+            1
+          ],
+          [
+            "QMC # 51,320",
+            1
+          ],
+          [
+            "PAGBILAO # 12,500",
+            1
+          ],
+          [
+            "PAGBILAO # 90,000",
+            1
+          ],
+          [
+            "QMC # 542,292.50",
+            1
+          ],
+          [
+            "PAGBILAO # 2,316,267-1",
+            1
+          ],
+          [
+            "PAGBILAO # 2,162,681.15",
+            1
+          ],
+          [
+            "QMC # 122,723",
+            1
+          ],
+          [
+            "QMC # 213,200",
+            1
+          ],
+          [
+            "QMC # 700,000",
+            1
+          ],
+          [
+            "PAGBILAO # 1,100,000",
+            1
+          ],
+          [
+            "PAGBILAO # 57,540",
+            1
+          ],
+          [
+            "PAGBILAO # 64,165",
+            1
+          ],
+          [
+            "PAGBILAO # 63,250",
+            1
+          ],
+          [
+            "QMC # 127,722.50",
+            1
+          ],
+          [
+            "QMC # 597,322",
+            1
+          ],
+          [
+            "QMC # 268,031",
+            1
+          ],
+          [
+            "QMC # 609,629.50",
+            1
+          ],
+          [
+            "QMC # 243,780",
+            1
+          ],
+          [
+            "QMC # 306,000",
+            1
+          ],
+          [
+            "PAGBILAO # 921,080-1",
+            1
+          ]
+        ]
+      },
+      "2024": {
+        "rows": 2944,
+        "blank_product_rows": 107,
+        "contract_like_rows": 227,
+        "contract_prefix_counts": {
+          "QMC": 10,
+          "BLANK": 107,
+          "PAGBILAO": 110
+        },
+        "contract_like_products": [
+          [
+            "",
+            107
+          ],
+          [
+            "PAGBILAO # 34,405.00",
+            2
+          ],
+          [
+            "QMC # 49,855.00",
+            1
+          ],
+          [
+            "QMC # 27,190.00",
+            1
+          ],
+          [
+            "QMC # 64,459.00",
+            1
+          ],
+          [
+            "QMC # 268,979.00",
+            1
+          ],
+          [
+            "QMC # 799,200.00",
+            1
+          ],
+          [
+            "QMC # 162,922.00",
+            1
+          ],
+          [
+            "QMC # 201,300.00",
+            1
+          ],
+          [
+            "QMC 787,170",
+            1
+          ],
+          [
+            "PAGBILAO # 51,261.00 LOT 1",
+            1
+          ],
+          [
+            "PAGBILAO # 55,000 LOT 2",
+            1
+          ],
+          [
+            "PAGBILAO # 88,528.00 LOT 3",
+            1
+          ],
+          [
+            "PAGBILAO # 80,216.00 LOT 4",
+            1
+          ],
+          [
+            "PAGBILAO # 5,511 LOT 5",
+            1
+          ],
+          [
+            "PAGBILAO # 37,143.00 LOT 6",
+            1
+          ],
+          [
+            "PAGBILAO # 731,538.00 LOT 7",
+            1
+          ],
+          [
+            "PAGBILAO # 17,785.00 LOT 8",
+            1
+          ],
+          [
+            "PAGBILAO # 231,000.00 LOT 9",
+            1
+          ],
+          [
+            "PAGBILAO # 239,771.40 LOT 10",
+            1
+          ],
+          [
+            "PAGBILAO # 240,000.00 LOT 12",
+            1
+          ],
+          [
+            "PAGBILAO # 41,850.00 LOT 13",
+            1
+          ],
+          [
+            "PAGBILAO # 61,024.00 LOT 14",
+            1
+          ],
+          [
+            "PAGBILAO # 154,415.00 LOT 15",
+            1
+          ],
+          [
+            "PAGBILAO # 124,234.25",
+            1
+          ],
+          [
+            "PAGBILAO #246,628.00",
+            1
+          ],
+          [
+            "PAGBILAO # 63,225.00",
+            1
+          ],
+          [
+            "PAGBILAO # 80,000.00",
+            1
+          ],
+          [
+            "PAGBILAO # 500,000.00",
+            1
+          ],
+          [
+            "PAGBILAO # 90,240.00",
+            1
+          ],
+          [
+            "PAGBILAO # 28,000",
+            1
+          ],
+          [
+            "PAGBILAO # 69,660.00",
+            1
+          ],
+          [
+            "PAGBILAO # 83,090.00",
+            1
+          ],
+          [
+            "PAGBILAO # 17,220.00",
+            1
+          ],
+          [
+            "PAGBILAO # 8,930.00",
+            1
+          ],
+          [
+            "PAGBILAO # 102,060.00",
+            1
+          ],
+          [
+            "PAGBILAO # 31,350.00",
+            1
+          ],
+          [
+            "PAGBILAO # 16,223.00",
+            1
+          ],
+          [
+            "PAGBILAO # 5,166.00",
+            1
+          ],
+          [
+            "PAGBILAO # 11,077.00",
+            1
+          ],
+          [
+            "PAGBILAO # 35,796.00",
+            1
+          ],
+          [
+            "PAGBILAO # 21,787.00",
+            1
+          ],
+          [
+            "PAGBILAO # 6,210.00",
+            1
+          ],
+          [
+            "PAGBILAO # 56,546.00",
+            1
+          ],
+          [
+            "PAGBILAO # 16,930.00",
+            1
+          ],
+          [
+            "PAGBILAO # 179,894.00",
+            1
+          ],
+          [
+            "PAGBILAO # 43,240.00",
+            1
+          ],
+          [
+            "PAGBILAO # 42,960.00",
+            1
+          ],
+          [
+            "PAGBILAO # 43,790.00",
+            1
+          ],
+          [
+            "PAGBILAO # 258,380.00",
+            1
+          ],
+          [
+            "PAGBILAO # 46,930.00",
+            1
+          ],
+          [
+            "PAGBILAO # 16,620.00 -1",
+            1
+          ],
+          [
+            "PAGBILAO # 5000.00",
+            1
+          ],
+          [
+            "PAGBILAO # 390,100.00",
+            1
+          ],
+          [
+            "PAGBILAO # 325,000.00",
+            1
+          ],
+          [
+            "PAGBILAO # 275,000.00",
+            1
+          ],
+          [
+            "PAGBILAO # 10,000.00 -0.1",
+            1
+          ],
+          [
+            "PAGBILAO # 10,000.00 -0.2",
+            1
+          ],
+          [
+            "PAGBILAO # 3000.00",
+            1
+          ],
+          [
+            "PAGBILAO # 200,000.00",
+            1
+          ],
+          [
+            "PAGBILAO # 46,000.00",
+            1
+          ],
+          [
+            "PAGBILAO # 20,695.00",
+            1
+          ],
+          [
+            "PAGBILAO # 30,250.00",
+            1
+          ],
+          [
+            "PAGBILAO # 200,000.00 -1",
+            1
+          ],
+          [
+            "PAGBILAO # 449,000.00",
+            1
+          ],
+          [
+            "PAGBILAO # 5000.00-1",
+            1
+          ],
+          [
+            "PAGBILAO # 21,156.00",
+            1
+          ],
+          [
+            "PAGBILAO # 18,785.00",
+            1
+          ],
+          [
+            "PAGBILAO # 71,155.00",
+            1
+          ],
+          [
+            "PAGBILAO # 67,060.00",
+            1
+          ],
+          [
+            "PAGBILAO # 85,000.00",
+            1
+          ],
+          [
+            "PAGBILAO # 21,950.00",
+            1
+          ],
+          [
+            "PAGBILAO # 10,000.00 -0.3",
+            1
+          ],
+          [
+            "PAGBILAO # 45,500.00",
+            1
+          ],
+          [
+            "PAGBILAO # 19,000.00",
+            1
+          ],
+          [
+            "PAGBILAO # 93,792.00",
+            1
+          ],
+          [
+            "PAGBILAO # 69,000.00",
+            1
+          ],
+          [
+            "PAGBILAO # 75,000.00",
+            1
+          ],
+          [
+            "PAGBILAO # 7,500.00",
+            1
+          ],
+          [
+            "PAGBILAO # 84,000.00",
+            1
+          ],
+          [
+            "PAGBILAO # 37,500.00",
+            1
+          ],
+          [
+            "PAGBILAO # 2,422,600.00",
+            1
+          ],
+          [
+            "PAGBILAO # 37,260.00",
+            1
+          ],
+          [
+            "PAGBILAO # 31,075.00",
+            1
+          ],
+          [
+            "QMC # 108,880",
+            1
+          ],
+          [
+            "QMC # 30,270",
+            1
+          ],
+          [
+            "PAGBILAO # 298,999.7",
+            1
+          ],
+          [
+            "PAGBILAO #65,520",
+            1
+          ],
+          [
+            "PAGBILAO # 16,000",
+            1
+          ],
+          [
+            "PAGBILAO # 11,000",
+            1
+          ],
+          [
+            "PAGBILAO # 17,000",
+            1
+          ],
+          [
+            "PAGBILAO # 443,131.29",
+            1
+          ],
+          [
+            "PAGBILAO # 16,620",
+            1
+          ],
+          [
+            "PAGBILAO # 16,620-2",
+            1
+          ],
+          [
+            "PAGBILAO # 66,564.5",
+            1
+          ],
+          [
+            "PAGBILAO # 27,738.60",
+            1
+          ],
+          [
+            "PAGBILAO # 411,290",
+            1
+          ],
+          [
+            "PAGBILAO # 2,070,000",
+            1
+          ],
+          [
+            "PAGBILAO # 6,334,470",
+            1
+          ],
+          [
+            "PAGBILAO # 474,160",
+            1
+          ],
+          [
+            "PAGBILAO # 3,658,000",
+            1
+          ],
+          [
+            "PAGBILAO # 10,000.00-3",
+            1
+          ],
+          [
+            "PAGBILAO # 444,400.00",
+            1
+          ],
+          [
+            "PAGBILAO # 22,500.00",
+            1
+          ],
+          [
+            "PAGBILAO # 19,000.00-0.1",
+            1
+          ],
+          [
+            "PAGBILAO # 4,800.00",
+            1
+          ],
+          [
+            "PAGBILAO # 40,000.00",
+            1
+          ],
+          [
+            "PAGBILAO # 11,000.00-03",
+            1
+          ],
+          [
+            "PAGBILAO # 35,550.00",
+            1
+          ],
+          [
+            "PAGBILAO # 6,000.00",
+            1
+          ],
+          [
+            "PAGBILAO # 90,730.00",
+            1
+          ],
+          [
+            "PAGBILAO # 112,990.00",
+            1
+          ],
+          [
+            "PAGBILAO # 282,000.00",
+            1
+          ],
+          [
+            "PAGBILAO # 27,000.00",
+            1
+          ],
+          [
+            "PAGBILAO # 21,000.00",
+            1
+          ],
+          [
+            "PAGBILAO # 102,000.00",
+            1
+          ],
+          [
+            "PAGBILAO # 47,375",
+            1
+          ],
+          [
+            "PAGBILAO # A- 11,000",
+            1
+          ],
+          [
+            "PAGBILAO # 6,475",
+            1
+          ],
+          [
+            "PAGBILAO # 2,316,267",
+            1
+          ]
+        ]
+      },
+      "2023": {
+        "rows": 5889,
+        "blank_product_rows": 502,
+        "contract_like_rows": 502,
+        "contract_prefix_counts": {
+          "BLANK": 502
+        },
+        "contract_like_products": [
+          [
+            "",
+            502
+          ]
+        ]
+      },
+      "2022": {
+        "rows": 4028,
+        "blank_product_rows": 19,
+        "contract_like_rows": 19,
+        "contract_prefix_counts": {
+          "BLANK": 19
+        },
+        "contract_like_products": [
+          [
+            "",
+            19
+          ]
+        ]
+      },
+      "2021": {
+        "rows": 3415,
+        "blank_product_rows": 0,
+        "contract_like_rows": 0,
+        "contract_prefix_counts": {},
+        "contract_like_products": []
+      }
+    }
+  }
+}
