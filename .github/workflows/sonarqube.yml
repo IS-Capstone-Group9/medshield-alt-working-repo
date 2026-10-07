@@ -18,12 +18,15 @@ jobs:
   scan:
     name: SonarQube scan
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     env:
       SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
 
       - name: Validate SonarQube secrets
         id: sonar-config
@@ -38,7 +41,7 @@ jobs:
 
       - name: Run SonarScanner
         if: steps.sonar-config.outputs.configured == 'true'
-        uses: sonarsource/sonarqube-scan-action@v5
+        uses: SonarSource/sonarqube-scan-action@fd88b7d7ccbaefd23d8f36f73b59db7a3d246602 # v6
         env:
           SONAR_HOST_URL: ${{ env.SONAR_HOST_URL }}
           SONAR_TOKEN: ${{ env.SONAR_TOKEN }}

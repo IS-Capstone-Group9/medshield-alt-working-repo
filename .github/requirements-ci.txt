@@ -1,0 +1,5 @@
+# Runtime dependencies plus the library used by the offline STL regression tests.
+# Full model training is a separate operation; see requirements-modeling.txt.
+-r ../services/analytics_service/requirements.txt
+-r ../services/product_service/requirements.txt
+statsmodels>=0.14.0,<0.15

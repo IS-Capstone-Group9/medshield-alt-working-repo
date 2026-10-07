@@ -29,7 +29,14 @@ updates:
       interval: "weekly"
     open-pull-requests-limit: 5
 
-  # Maintain GitHub Actions dependencies
+  # Maintain offline CI test dependencies
+  - package-ecosystem: "pip"
+    directory: "/.github"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+
+  # Maintain pinned GitHub Actions dependencies
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:

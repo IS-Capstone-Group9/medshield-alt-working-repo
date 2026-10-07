@@ -2,9 +2,9 @@ name: CI Pipeline
 
 on:
   pull_request:
-    branches: [main]
   push:
-    branches: [main]
+    branches: ['**']
+  merge_group:
   workflow_dispatch:
 
 concurrency:
@@ -16,109 +16,115 @@ permissions:
 
 jobs:
   backend:
-    name: Backend TypeScript Build & Typecheck
+    name: Backend build and tests
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     defaults:
       run:
         working-directory: backend
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
-          node-version: 20
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: .nvmrc
           cache: npm
           cache-dependency-path: backend/package-lock.json
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build gateway
-        run: npm run build
+      - run: npm ci
+      - run: npm run build
+      - name: Run gateway regression tests
+        run: node --import tsx --test tests/*.test.ts
 
   frontend:
-    name: Frontend Next.js Build
+    name: Frontend lint and build
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     defaults:
       run:
         working-directory: frontend
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
+      NEXT_PUBLIC_API_BASE_URL: http://localhost:5000
+      NEXT_PUBLIC_SUPABASE_URL: ''
+      NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ''
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
-          node-version: 20
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: .nvmrc
           cache: npm
           cache-dependency-path: frontend/package-lock.json
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build Next.js application
-        env:
-          NEXT_PUBLIC_API_BASE_URL: http://localhost:5000
-          NEXT_PUBLIC_SUPABASE_URL: ""
-          NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ""
+      - run: npm ci
+      - run: npm run lint
+      - name: Build and typecheck Next.js
         run: npm run build
 
   python:
-    name: Python Services & Model Master Execution Test
+    name: Python offline regression tests
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      USE_SUPABASE: 'false'
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
-          python-version: "3.12"
-
-      - name: Cache pip downloads
-        uses: actions/cache@v4
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
-          path: ~/.cache/pip
-          key: pip-${{ runner.os }}-${{ hashFiles('services/analytics_service/requirements.txt', 'services/product_service/requirements.txt') }}
-          restore-keys: |
-            pip-${{ runner.os }}-
-
-      - name: Install service dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r services/analytics_service/requirements.txt -r services/product_service/requirements.txt
-
-      - name: Run Python unit tests
-        run: python -m unittest discover services/tests
-
-      - name: Run master 17-model computation suite
-        run: python scripts/compute_all_models.py
-
-      - name: Upload model snapshot evidence
-        uses: actions/upload-artifact@v4
-        with:
-          name: medshield-model-snapshot
-          if-no-files-found: error
-          path: data/medshield/processed/dashboard_sales_snapshot.json
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: |
+            .github/requirements-ci.txt
+            services/analytics_service/requirements.txt
+            services/product_service/requirements.txt
+      - name: Install offline test dependencies
+        run: python -m pip install -r .github/requirements-ci.txt
+      - run: python -m pip check
+      - name: Test Python services
+        run: python -m unittest discover -s services/tests -v
+      - name: Test Databricks transformations offline
+        run: python -m unittest discover -s databricks/medshield_project/tests -v
+      - name: Test descriptive STL
+        run: python -m unittest services.analytics_service.jobs.test_descriptive_stl -v
 
   docker:
-    name: Docker Container & Compose Validation
+    name: Docker build validation
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     needs: [backend, frontend, python]
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Validate Docker Compose Configuration
-        run: docker compose config
-
-      - name: Build backend image
-        run: docker build -t medshield-backend:test ./backend
-
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - name: Validate Compose without printing environment values
+        run: docker compose --env-file .env.example config --quiet
+      - name: Build gateway image
+        run: docker build -t medshield-backend:ci ./backend
       - name: Build frontend image
-        run: docker build -t medshield-frontend:test ./frontend
+        run: docker build -t medshield-frontend:ci ./frontend
 
-      - name: Build services image
-        run: docker build -t medshield-services:test -f services/Dockerfile .
+  required:
+    name: CI required
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: ${{ always() }}
+    needs: [backend, frontend, python, docker]
+    steps:
+      - name: Require every baseline check to pass
+        env:
+          BACKEND_RESULT: ${{ needs.backend.result }}
+          FRONTEND_RESULT: ${{ needs.frontend.result }}
+          PYTHON_RESULT: ${{ needs.python.result }}
+          DOCKER_RESULT: ${{ needs.docker.result }}
+        shell: bash
+        run: |
+          for result in "$BACKEND_RESULT" "$FRONTEND_RESULT" "$PYTHON_RESULT" "$DOCKER_RESULT"; do
+            if [ "$result" != "success" ]; then
+              echo "A required job failed, was cancelled, or was skipped."
+              exit 1
+            fi
+          done
+          echo "All required CI checks passed."
