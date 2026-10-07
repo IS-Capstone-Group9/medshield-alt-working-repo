@@ -120,6 +120,60 @@ class ProductReviewRulesTests(unittest.TestCase):
         self.assertEqual(proposal_attributes("F6 REPAIR")["item_kind"], "service")
         self.assertEqual(proposal_attributes("F6 FETAL MONITOR SINGLE")["item_kind"], "unknown")
 
+    def test_calibrated_container_is_not_a_calibration_service(self):
+        cup = proposal_attributes("SPECIMEN CUP WITH CALIBRATION")
+        self.assertEqual(cup["item_kind"], "unknown")
+        self.assertIn("CALIBRATION", cup["specification_tokens"])
+        self.assertIn("calibrated_container_markings_require_review", cup["warnings"])
+        self.assertNotIn("service_keyword_requires_review", cup["warnings"])
+        self.assertEqual(cup["status"], "needs_review")
+        for title in ("F6 CALIBRATION", "CLEANING AND CALIBRATION/CALIBRATION VERIFCATION"):
+            with self.subTest(title=title):
+                value = proposal_attributes(title)
+                self.assertEqual(value["item_kind"], "service")
+                self.assertIn("service_keyword_requires_review", value["warnings"])
+                self.assertEqual(value["status"], "needs_review")
+        ambiguous = proposal_attributes("CALIBRATION")
+        self.assertEqual(ambiguous["item_kind"], "unknown")
+        self.assertIn("calibration_context_requires_review", ambiguous["warnings"])
+
+    def test_nonmedical_gram_mass_is_not_pharmaceutical_strength(self):
+        examples = (
+            ("ANMUM MATERNA PLAIN 180G X 24", "180G", "180G"),
+            ("ANMUM MATERNA CHOCO 180G X 24", "180G", "180G"),
+            ("ANMUM MATERNA PLAIN 180G", "180G", "180G"),
+            ("COFFEE GREAT TASTE PREMIUM 25G", "25G", "25G"),
+            ("LYSOL 340G", "340G", "340G"),
+            ("LYSOL 510G", "510G", "510G"),
+            ("DISINFECTANT SPRAY 170G 227ML (LYSOL)", "170G", "227ML / 170G"),
+            ("DETERGENT POWDER 500G (PRIDE)", "500G", "500G"),
+            ("DETERGENT POWDER 500G (PRIDE) SOAP", "500G", "500G"),
+        )
+        for title, mass, container in examples:
+            with self.subTest(title=title):
+                value = proposal_attributes(title, category_context="non_medical")
+                self.assertEqual(value["strength"], "")
+                self.assertEqual(value["container_size"], container)
+                self.assertIn(mass, value["container_size"])
+                self.assertIn("net_mass_container_requires_review", value["warnings"])
+                self.assertEqual(value["status"], "needs_review")
+                self.assertNotIn("category", value)
+                self.assertEqual(value["pack_count"], "")
+        coffee = proposal_attributes("COFFEE GREAT TASTE PREMIUM 25G")
+        self.assertEqual(coffee["strength"], "")
+        self.assertEqual(coffee["container_size"], "25G")
+        medicine = proposal_attributes("SITIXON 1G", category_context="medicine")
+        self.assertEqual(medicine["strength"], "1G")
+        self.assertEqual(medicine["container_size"], "")
+        supplement = proposal_attributes("APCELAC 500MG HERBAL FOOD SUPPLEMENT", category_context="non_medical")
+        self.assertEqual(supplement["strength"], "500MG")
+        self.assertEqual(supplement["container_size"], "")
+        unknown = proposal_attributes("UNIDENTIFIED 1G", category_context="unclassified")
+        self.assertEqual(unknown["status"], "needs_review")
+        self.assertEqual(unknown["container_size"], "")
+        with self.assertRaisesRegex(ValueError, "Invalid proposal category context"):
+            proposal_attributes("UNIDENTIFIED 1G", category_context="approved")
+
 
 if __name__ == "__main__":
     unittest.main()

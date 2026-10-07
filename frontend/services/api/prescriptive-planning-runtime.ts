@@ -65,6 +65,7 @@ export const PLANNING_MARKUP = String.raw`
   <div class="plan-controls">
     <label>Buyer Cluster
       <select id="planSector" onchange="changePlanningScope()">
+        <option>All</option>
         <option>Unknown</option>
         <option>Government</option>
         <option>Private</option>

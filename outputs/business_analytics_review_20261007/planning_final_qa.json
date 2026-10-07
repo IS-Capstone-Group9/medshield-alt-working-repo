@@ -1,0 +1,122 @@
+{
+  "review_date": "2026-10-07 Asia/Manila",
+  "outcome": "PASS: no confirmed blocking defect in reviewed planning changes",
+  "reviewer_provenance": "Supporting worker independently reviewed root's sector/default/frontend additions and performed self-review of its previously authored planning helper. No application/source edits in this QA task.",
+  "scope": [
+    "backend/src/planningScenario.ts",
+    "backend/src/databricksDashboard.ts planning scope/default, sectorWhereClause and wrapper",
+    "frontend/services/api/prescriptive-planning-runtime.ts All option and result/disclosure handling",
+    "frontend/services/api/dashboard-interactions.ts All fallback",
+    "backend/tests/planningGateway.test.ts",
+    "backend/tests/planningScenario.test.ts",
+    "backend/src/server.ts global scalar-query guard"
+  ],
+  "checks": [
+    {
+      "name": "Default semantics",
+      "status": "pass",
+      "evidence": "Gateway omitted/blank sector defaults All; frontend first option All and request fallback All. Explicit Unknown remains a distinct filtered classification.",
+      "files": [
+        "backend/src/databricksDashboard.ts:947",
+        "frontend/services/api/prescriptive-planning-runtime.ts:67",
+        "frontend/services/api/dashboard-interactions.ts:114"
+      ]
+    },
+    {
+      "name": "Exclusive buyer classification",
+      "status": "pass",
+      "evidence": "Ordered CASE classifies Government first, then Internal, then territory/private markers, then Unknown. A Government/Internal source area with a territory marker does not enter Private. All intentionally applies no sector restriction.",
+      "files": [
+        "backend/src/databricksDashboard.ts:31",
+        "backend/src/databricksDashboard.ts:40",
+        "backend/tests/planningGateway.test.ts:5"
+      ]
+    },
+    {
+      "name": "Closed historical months",
+      "status": "pass",
+      "evidence": "Bounds and product aggregation both use Manila current-month exclusive upper boundary; stable tie ordering retained. Rollover cases tested.",
+      "files": [
+        "backend/src/planningScenario.ts:47",
+        "backend/src/databricksDashboard.ts:957"
+      ]
+    },
+    {
+      "name": "Strict numerical inputs and identity",
+      "status": "pass",
+      "evidence": "Blank/null/Boolean/missing inputs fail; explicit zero preserved. Integer fields require safe integer values. Unique exhaustive exact shortlist products and stale checksum enforced; malformed POST scope uses gateway error class.",
+      "files": [
+        "backend/src/planningScenario.ts:11",
+        "backend/src/planningScenario.ts:59",
+        "backend/src/databricksDashboard.ts:995"
+      ]
+    },
+    {
+      "name": "Currency arithmetic",
+      "status": "pass",
+      "evidence": "Exact decimal/exponent cents conversion rejects nonzero fractional cents, including high-precision strings. Supported amount/cents bounds safe; infeasible minimum costs compared before multiplication; successful spend derived from integer cents.",
+      "files": [
+        "backend/src/planningScenario.ts:22",
+        "backend/src/planningScenario.ts:88",
+        "backend/src/planningScenario.ts:117"
+      ]
+    },
+    {
+      "name": "Iteration exhaustion",
+      "status": "pass",
+      "evidence": "If affordable candidates remain after100000 iterations, status not_solved with conflicts and empty rows. Exact boundary completion succeeds. Frontend already exposes every nonsuccess conflict and keeps allocation result unset.",
+      "files": [
+        "backend/src/planningScenario.ts:107",
+        "frontend/services/api/prescriptive-planning-runtime.ts:360"
+      ]
+    },
+    {
+      "name": "Transport scalar guard",
+      "status": "pass",
+      "evidence": "Global /api middleware precedes planning routes and returns400 INVALID_QUERY_PARAMETER for repeated/structured query values. Route fallback is protected; initial route-only concern retracted.",
+      "files": [
+        "backend/src/server.ts:108",
+        "backend/src/monthlyQuery.ts:16",
+        "backend/tests/monthlyQuery.test.ts:29"
+      ]
+    },
+    {
+      "name": "No unsupported decision authority",
+      "status": "pass",
+      "evidence": "Success remains scenario_allocation; assumptions explicitly scenario only, greedy globally nonoptimal disclosure unchanged. No automatic inventory/forecast/product/clinical approval, quantity conversion or order action introduced.",
+      "files": [
+        "backend/src/planningScenario.ts:118",
+        "frontend/services/api/prescriptive-planning-runtime.ts:157"
+      ]
+    }
+  ],
+  "verification": {
+    "focused_tests": {
+      "command": "node --import tsx --test tests/planningGateway.test.ts tests/planningScenario.test.ts tests/monthlyQuery.test.ts",
+      "result": "13 passed,0failed"
+    },
+    "solver_invariants": {
+      "seed": 20261007,
+      "scenarios": 1000,
+      "completed": 614,
+      "infeasible": 386,
+      "checks": "integer packs,cap,budget,cents,protected stock,minimum fulfillment,unmet,scenario-only status",
+      "pass": true
+    },
+    "backend_typecheck": {
+      "command": "node node_modules/typescript/bin/tsc --noEmit",
+      "result": "pass"
+    },
+    "diff_whitespace": {
+      "command": "git diff --check -- backend/src/databricksDashboard.ts frontend/services/api/prescriptive-planning-runtime.ts frontend/services/api/dashboard-interactions.ts",
+      "result": "pass"
+    }
+  },
+  "limitations": [
+    "Fixture gateway test intercepts fetch and uses no remote credentials or live warehouse statements.",
+    "No live browser action or procurement action in this review.",
+    "No claim of globally optimal allocation, accepted stock data, clinical disease-product mapping or approved forecast publication."
+  ],
+  "findings": [],
+  "source_mutations_in_qa": 0
+}

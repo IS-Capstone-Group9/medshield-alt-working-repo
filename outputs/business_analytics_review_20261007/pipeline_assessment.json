@@ -1,0 +1,198 @@
+{
+  "checked_at_utc": "2026-10-07T06:56:57.574534+00:00",
+  "accountable_support_role": "Database Engineer",
+  "scope": "Read-only local code and saved evidence review; writes only assigned assessment artifacts; no SQL/cloud/app changes.",
+  "current_descriptive_candidate": {
+    "source": "saved Oct7 receipts; root owns fresh live audit",
+    "fact_version": 19,
+    "configured_backend_pin": "19",
+    "backend_port": "5000",
+    "running_backend": "Root process inspection reports no MedShield Node process; not independently started here.",
+    "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+    "policy_version": "sales_restart_gold_v7_independent_catalog",
+    "published_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+    "fact_records": 37728,
+    "labels": 4561,
+    "stl_source_version": 19,
+    "stl_rows": 72,
+    "stl_delta_version": 3,
+    "stl_period": [
+      "2020-01",
+      "2025-12"
+    ],
+    "saved_publication_verdict": "PASS",
+    "saved_publication_counts": {
+      "PASS": 72
+    },
+    "saved_catalog_baseline": 16,
+    "latest_fact_deleted_file_retention": "interval 30 days",
+    "latest_fact_log_retention": "interval 30 days",
+    "retention_source": "outputs\\publication_readiness\\2026-10-07T06-01-15-273Z\\evidence.json version_start fact19 operationParameters; not all dependent tables inspected"
+  },
+  "local_draft_master": {
+    "path": "databricks\\medshield_project\\references\\product_master_review.csv",
+    "deployment_copy": "databricks\\medshield_reference_csv\\medshield_reference_csv\\product_master_review.csv",
+    "sha256": "507fe990defc28f41c13eba4526463bbc960783dd5ad82ef209bb5babf509775",
+    "bytes": 4710026,
+    "rows": 4561,
+    "columns": 29,
+    "schema_matches": true,
+    "copies_byte_equal": true,
+    "independent_approved_statuses": 0,
+    "forecast_true": 0,
+    "current19_alias_coverage": "PASS",
+    "activated_resolution": "RAW+Unclassified+unknownunit+forecastfalse",
+    "differs_from_published_master": true,
+    "readiness_interpretation": "Current local preparation checksum mismatch is expected until a newly prepared catalog candidate is published; it does not erase prior19 arithmetic PASS."
+  },
+  "findings": [
+    {
+      "id": "P01",
+      "priority": "high_for_next_catalog_publication",
+      "kind": "stale_publication_contract",
+      "files": [
+        "databricks/medshield_project/03_sales_gold.py:450",
+        "databricks/medshield_project/package_catalog.py:31",
+        "backend/scripts/validate-catalog.ts:22"
+      ],
+      "evidence": "Gold and catalog validation hardcode predecessor 16; package binds 16 and the Sept27 summary despite current source 19/new master.",
+      "impact": "A new package would bind the wrong predecessor and receipt; expiry of16 again blocks migration. This does not invalidate existing 19 descriptive math.",
+      "action": "Use one explicitly reviewed predecessor19 preparation descriptor and a fresh exact conservation receipt across Gold/package/validator; require matching source identities and current/proposed reference hashes. Never select mutable latest as the baseline."
+    },
+    {
+      "id": "P02",
+      "priority": "medium",
+      "kind": "readiness_release_identity_gap",
+      "files": [
+        "backend/scripts/publication-readiness.ts:78",
+        "backend/scripts/publication-readiness.ts:147"
+      ],
+      "evidence": "Collector reads latest warehouse fact but compares configured gateway summary only by row count and financial sums. It does not assert its release version/hash identity equals the captured latest fact.",
+      "impact": "A catalog-only rerun with unchanged finances could pass summary reconciliation while gateway still selects the older catalog. Separate validate-descriptive currently checks fact/gateway/STL alignment. No current mismatch is alleged.",
+      "action": "Add explicit captured fact version plus dataset/policy/mapping/helper/evidence hash comparisons; test equal-financial-value wrong-version fixture fails."
+    },
+    {
+      "id": "P03",
+      "priority": "medium",
+      "kind": "whole_bundle_recovery_gap",
+      "files": [
+        "databricks/medshield_project/03_sales_gold.py:687",
+        "databricks/medshield_project/06_sales_stl.py:107",
+        "docs/CATALOG_DEPLOYMENT.md:106"
+      ],
+      "evidence": "Gold overwrites22 tables individually;04/05 replace views;06 overwrites STL. Time-travel pinning the fact alone does not restore the complete output bundle. Existing saved restoration evidence refers to previous17 preparation.",
+      "impact": "Partial publication or a later STL overwrite can leave older consumers without matching components even though prior fact remains readable.",
+      "action": "Capture current19/allGold+audit versions/STL3/viewDDL/notebook+reference+app bytes and prove complete recovery before production. Avoid VACUUM on retained predecessors; record finite retention limits."
+    },
+    {
+      "id": "P04",
+      "priority": "medium",
+      "kind": "selected_field_assurance_gap",
+      "files": [
+        "databricks/medshield_project/03_sales_gold.py:454",
+        "backend/scripts/validate-catalog.ts:23",
+        "backend/scripts/review-product-catalog.ts:15"
+      ],
+      "evidence": "Existing predecessor comparators preserve selected source/financial fields but do not compare every raw/Silver field, including unit_selling_price, unit_acquisition_cost, discount_amount, DR/area, raw line/row lineage and quality rules. Read-only full-fact exporter also selects a subset.",
+      "impact": "Existing checks establish conservation of their selected fields, not an exhaustive source-column proof. There is no observed corruption; stronger evidence is needed for the stated every-source-field acceptance criterion.",
+      "action": "Keep all existing protected fields and additionally compare an explicit complete immutable source/Silver column contract against captured19, allowing only declared catalog metadata changes. Add price/lineage/quality-only mismatch regression fixtures."
+    },
+    {
+      "id": "P05",
+      "priority": "low_operational_watch",
+      "kind": "master_size_headroom",
+      "files": [
+        "databricks/medshield_project/03_sales_gold.py:218",
+        "databricks/medshield_project/references/product_master_review.csv"
+      ],
+      "evidence": "Master is 4710026 bytes against 5,000,000 limit; 289974 bytes remain.",
+      "impact": "Additional review notes/evidence can cross the cap and cause a clear fail-closed read. Current master passes.",
+      "action": "Keep verbose diagnostics in dated review artifacts and concise traceable references in master; monitor exact bytes. Do not silently raise/drop the bound."
+    }
+  ],
+  "minimal_local_implementation": [
+    "Capture a fresh, explicitly pinned19 source-preservation receipt and whole dependent recovery manifest; verify stable versions and all original source fields. Current labels receipt is aggregate coverage only.",
+    "Introduce one required shared preparation descriptor binding predecessor19/dataset/old and proposed reference hashes/helper/policy/source receipt/recovery manifest. Fail closed on stale or changed inputs; no implicit latest selection.",
+    "Load this bound predecessor in Gold before writes; keep same_keys, bidirectional exceptAll, uniqueness, null flags, adjusted-source and all metric reconciliation guards. Extend the explicit immutable source comparison where needed.",
+    "Make package_catalog.py require that descriptor and fresh conservation receipt; validate CSV copies and receipt identities/hash, include descriptor and receipts (its existingglobexcludesJSON), use a dated output folder instead of overwriting historical package/receipts. Include docs/PRODUCT_MASTER_REVIEW_GUIDE.md explicitly in the package.",
+    "Make validate-catalog.ts use the same explicit predecessor contract, retain all existing key/field/category/evidence/API guards, and refuse predecessor/candidate identity disagreement.",
+    "Strengthen publication-readiness with actual gateway release identity plus stable matching STL/dependency capture, while leaving business acceptance separate from technical PASS.",
+    "Regenerate README after Gold code changes; keep helper bytes/hash unchanged if helper logic unchanged. Update deployment instructions around captured19 and exact new releaseV; do not rewrite Sept27/Oct3 receipts.",
+    "Prepare and verify the local package before controlled03→04→05→06 execution. Keep current configured 19 while preparing; after all validations, align only if a genuinely new accepted preview release is being served. No restart/pin change is necessary for current 19 solely because the local draft changed."
+  ],
+  "suggested_preparation_descriptor_values": {
+    "status": "LOCAL_PREPARATION_NOT_DEPLOYED_NOT_APPROVED",
+    "predecessor_fact_version": 19,
+    "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+    "predecessor_product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+    "proposed_product_master_sha256": "507fe990defc28f41c13eba4526463bbc960783dd5ad82ef209bb5babf509775",
+    "catalog_helper_sha256": "20888a90253718dabf2aea3390ecc8d7ca707b388e8a4d45123e894c98f688c9",
+    "transaction_evidence_sha256": "5e1a839d551293b51149e7c35d863ce680573e02275f65d17512d6099ff88786",
+    "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+    "policy_version": "sales_restart_gold_v7_independent_catalog",
+    "resolution_policy": "catalog_v1_independent_evidence",
+    "fresh_full_source_preservation_receipt": "REQUIRED: not supplied by aggregated current_labels.json",
+    "complete_recovery_manifest": "REQUIRED: capture19dependent outputs,views,STL and deployment bytes",
+    "validation_obligations": [
+      "exact record set and uniqueness",
+      "all existing and explicit additional immutable source fields",
+      "each financial eligibility flag",
+      "monthly/yearly exact Decimal conservation",
+      "categories partition full finances",
+      "zero invented approvals or observed adjusted quantities",
+      "candidate version+hash stable before/after",
+      "STL source version equals final fact version"
+    ]
+  },
+  "verification_commands": [
+    {
+      "cwd": "repository root",
+      "command": "python -m unittest discover -s databricks/medshield_project/tests",
+      "purpose": "Source/identity/approval/financial guards; run after implementation changes."
+    },
+    {
+      "cwd": "repository root",
+      "command": "python databricks/medshield_project/render_readme.py --check",
+      "purpose": "Generated documentation consistency; regenerate first if Gold changes."
+    },
+    {
+      "cwd": "backend",
+      "command": "node --import tsx --test tests/publication-readiness.test.ts tests/descriptive-release.test.ts tests/catalog-contract.test.ts",
+      "purpose": "Focused release identity/parser/catalog safeguards; add mismatch and stale-contract fixtures when implementation is made."
+    },
+    {
+      "cwd": "backend",
+      "command": "node node_modules/typescript/bin/tsc --noEmit",
+      "purpose": "Typecheck changed backend validation code."
+    },
+    {
+      "cwd": "backend; separate candidate validation shell",
+      "command": "Set DATABRICKS_DESCRIPTIVE_FACT_VERSION to observed candidate V, then run publication-readiness.ts, validate-descriptive.ts and validate-catalog.ts with node --import tsx.",
+      "purpose": "Read-only post-publication evidence; current readiness master checksum is intentionally different while the new draft remains local."
+    },
+    {
+      "cwd": "frontend; authenticated servers available",
+      "command": "Set MEDSHIELD_E2E_FACT_VERSION to observedV and MEDSHIELD_E2E_POLICY_VERSION to sales_restart_gold_v7_independent_catalog; npx playwright test e2e/descriptive-live.spec.ts --workers=1",
+      "purpose": "API/UI/export identity and matching STL; root process inspection currently found no servers."
+    }
+  ],
+  "business_scope_interpretation": {
+    "financial_descriptive_reporting": "Technically evaluated current19 candidate; partial source coverage/provenance must remain visible. Missing product approvals do not make all financial measures wrong.",
+    "SKU_quantity_demand": "Unavailable without separately reviewed identity/unit/forecast pluseligible transaction evidence.",
+    "external_features": "Separate join/readiness/availability acceptance; not prerequisites for source-label financial descriptions.",
+    "production_release": "Version-bound scope/owner acceptance and complete recovery remain separate; no approval is inferred from technical PASS."
+  },
+  "verification_executed": [
+    "Read targeted non-secret PORT/factpin keys only.",
+    "Verified local master schema/helper validation/copy byteequality/current19 alias coverage and zero activated approval resolution.",
+    "Verified current_labels receipt SHA.",
+    "Inspected saved19 publication/catalog/STL receipts and fact 19 retention operation parameters.",
+    "Static source-path/guard/release-dependency review."
+  ],
+  "not_performed": [
+    "Cloud writes, job/notebook runs, app config writes/restarts.",
+    "Fresh SQL probes; parent owns live audit.",
+    "New preparation package generation or code edits.",
+    "Complete19 warehouse rollback rehearsal or authenticated browser validation."
+  ]
+}

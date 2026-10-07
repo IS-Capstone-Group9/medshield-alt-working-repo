@@ -4,8 +4,8 @@ import { createHash } from 'node:crypto'
 import { readFileSync, mkdirSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { executeDatabricksStatement } from '../src/databricks'
-import { getDatabricksSalesSummary } from '../src/databricksDashboard'
-import { parseCsv, checkMapping, checkAdjustedSources, technicalVerdict } from './publication-readiness-helpers'
+import { getDatabricksSalesSummary, getDatabricksStl } from '../src/databricksDashboard'
+import { parseCsv, checkMapping, checkAdjustedSources, checkReleaseIdentity, checkStlIdentity, technicalVerdict } from './publication-readiness-helpers'
 
 type Row = Record<string, string | null>
 type Check = { name: string; status: 'PASS' | 'FAIL' | 'UNVERIFIED'; detail: string }
@@ -15,6 +15,7 @@ const A = 'workspace.medshield_audit'
 const B = 'workspace.medshield_bronze'
 const S = 'workspace.medshield_silver'
 const fact = `${G}.sales_restart_fact_candidate`
+const stlTable = `${G}.sales_restart_stl_candidate`
 const started = new Date().toISOString()
 const runId = started.replace(/[:.]/g, '-')
 const out = resolve(root, 'outputs/publication_readiness', runId)
@@ -63,7 +64,7 @@ async function main() {
     publication = await query('publication_start', `SELECT * FROM ${A}.sales_restart_gold_publication_candidate ORDER BY table_name`)
     record('Publication audit contains only passing outputs', publication.length > 0 && publication.every(r => r.status === 'PASS'), `${publication.length} declared outputs`)
     record('Publication dataset is unambiguous', new Set(publication.map(r => r.dataset_id)).size === 1 && Boolean(publication[0]?.dataset_id), 'All published outputs must share a dataset ID')
-    const tables = [...new Set([...publication.map(r => safeTable(r.table_name!)), `${A}.sales_restart_gold_publication_candidate`, `${A}.sales_restart_replacement_year_validation_candidate`, `${B}.sales_restart_manifest_candidate`, `${B}.sales_restart_rows_candidate`, `${S}.sales_restart_assessed_candidate`, `${S}.sales_restart_clean_candidate`])]
+    const tables = [...new Set([...publication.map(r => safeTable(r.table_name!)), fact, stlTable, `${A}.sales_restart_gold_publication_candidate`, `${A}.sales_restart_replacement_year_validation_candidate`, `${B}.sales_restart_manifest_candidate`, `${B}.sales_restart_rows_candidate`, `${S}.sales_restart_assessed_candidate`, `${S}.sales_restart_clean_candidate`])]
     // Bounded independent read batches; version changes invalidate the audit.
     for (let i = 0; i < tables.length; i += 4) {
       const results = await Promise.allSettled(tables.slice(i, i + 4).map(async table => {
@@ -148,7 +149,21 @@ async function main() {
     await query('yearly_review', `SELECT calendar_year, transaction_count, observed_month_count, unobserved_month_count, source_completeness_status, net_sales, gross_margin_amount, margin_net_sales_basis, weighted_gross_margin_pct FROM ${G}.sales_restart_yearly_candidate ORDER BY calendar_year`)
     const summary = await getDatabricksSalesSummary({})
     evidence.gateway_summary = summary
+    const releaseErrors = checkReleaseIdentity({ ...identity, fact_delta_version: Number(versions.get(fact)) }, summary.release)
+    evidence.gateway_release_comparison_errors = releaseErrors
+    record('Gateway summary uses captured fact release', releaseErrors.length === 0, releaseErrors.join('; ') || `Fact version ${versions.get(fact)}; dataset, policy, area master, product master, and publication status match`)
     record('Gateway summary matches eligible Gold totals', summary.counts.rows === Number(totals.fact_rows) && Math.abs(summary.sums.net_cost - Number(totals.net_sales)) < 0.01 && Math.abs(summary.sums.net_income - Number(totals.gross_margin)) < 0.01, 'Fresh gateway function executed against live Databricks; not a browser acceptance test')
+  })
+  await step('STL publication identity', async () => {
+    const stl = await getDatabricksStl()
+    evidence.gateway_stl = stl
+    const captured = { ...identity, fact_delta_version: Number(versions.get(fact)) }
+    const releaseErrors = checkReleaseIdentity(captured, stl.release)
+    const rowErrors = checkStlIdentity(captured, stl.rows)
+    evidence.stl_release_comparison_errors = releaseErrors
+    evidence.stl_row_comparison_errors = rowErrors
+    record('STL gateway uses captured fact release', releaseErrors.length === 0, releaseErrors.join('; ') || `Fact version ${versions.get(fact)}; descriptive release identity matches`)
+    record('STL rows retain captured fact source identity', rowErrors.length === 0, rowErrors.join('; ') || `${stl.rows.length} STL rows match the captured fact version, dataset, policy, and mapping checksums`)
   })
   await step('Adjusted-source protection', async () => {
     const replacement = await query('replacement_validation', `SELECT * FROM ${A}.sales_restart_replacement_year_validation_candidate`)

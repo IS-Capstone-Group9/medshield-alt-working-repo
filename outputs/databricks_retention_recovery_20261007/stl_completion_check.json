@@ -1,0 +1,53 @@
+{
+  "checked_at": "2026-10-07T05:50:30.200Z",
+  "operation": "read_only_sql",
+  "checks": {
+    "fact_history": {
+      "status": "PASS",
+      "rows": [
+        {
+          "version": "19",
+          "timestamp": "2026-10-07T05:22:44.000Z",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT"
+        }
+      ]
+    },
+    "stl_history": {
+      "status": "PASS",
+      "rows": [
+        {
+          "version": "3",
+          "timestamp": "2026-10-07T05:49:45.000Z",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT"
+        }
+      ]
+    },
+    "stl_output": {
+      "status": "PASS",
+      "rows": [
+        {
+          "fact_delta_version": "19",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "records": "72",
+          "first_month": "2020-01",
+          "last_month": "2025-12",
+          "first_generated_at": "2026-10-07T05:49:43.762Z",
+          "last_generated_at": "2026-10-07T05:49:43.762Z"
+        }
+      ]
+    },
+    "fact_history_end": {
+      "status": "PASS",
+      "rows": [
+        {
+          "version": "19",
+          "timestamp": "2026-10-07T05:22:44.000Z",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT"
+        }
+      ]
+    }
+  },
+  "fact_version_stable": true,
+  "stl_matches_current_fact": true
+}

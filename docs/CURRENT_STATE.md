@@ -1,6 +1,42 @@
 # MedShield Current State
 
-## Current local descriptive candidate — 3 October 2026
+## Current analytical assessment — 7 October 2026
+
+Read-only live validation identifies fact Delta **19**, unchanged dataset ID and
+policy `sales_restart_gold_v7_independent_catalog`, with matching **72-month STL**.
+The configured backend pin is already 19. The [fresh calculation receipt](../outputs/descriptive_validation/2026-10-07T06-58-17-441Z/evidence.json)
+verifies 37,728 records, net sales ₱626,946,741.81 and gross margin ₱288,487,498.72.
+The margin rate is 60.262177% on the shared margin-eligible revenue denominator
+₱478,720,670.03. This direct gateway/warehouse check does not renew browser,
+business acceptance or complete rollback evidence.
+
+The [business analytics review](../outputs/business_analytics_review_20261007/REVIEW.md)
+covers all 4,561 master labels, source coverage, predictive readiness, external
+signals and planning inputs. The local master contains unapproved proposals,
+including ten corrected literal/context clues; approved categories, identities,
+sales units and forecast products remain **zero**. Both copies have SHA-256
+`21ba704cb2fb3b39dab214f5e6ac7d3689b17967946889b3f838eb353f1f183c`.
+Published fact 19 still binds the earlier header-only master. Local preparation
+must not be presented as deployed category/SKU coverage.
+
+Local fixes reject missing scenario numbers, duplicate shortlist items and
+fractional cents, disclose computation-limit failures, and select closed Manila
+months. Planning defaults to All; explicit Unknown and other buyer sectors use
+one exclusive classification. Publication-readiness now checks gateway and STL
+source identity in addition to financial equality. Notebook tests (62), backend
+tests (75), both TypeScript checks and independent CSV checks pass. No warehouse
+writes, package migration, new model activation or purchase execution occurred.
+
+Current finance supports historical descriptive review. Adjusted files contribute
+47.73% of eligible net sales; archived original-source quantity candidates end in
+December 2023. Current SKU forecasting and operational replenishment remain
+dependent on verified identity/units, suitable recent observation evidence and
+inventory/supplier inputs. External joins remain unapproved. The existing
+version-16 catalog packaging baseline must be consistently re-prepared against
+captured 19 with complete source-preservation and recovery evidence before a new
+publication; no baseline was blindly changed during this review.
+
+## Previous local descriptive candidate — 3 October 2026
 
 The frontend now adds calendar-month sales averages, yearly observed-month coverage,
 adjacent full-month sales change, ABC sales versus source-label shares, and buyer

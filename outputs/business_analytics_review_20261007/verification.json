@@ -1,0 +1,71 @@
+{
+  "sealed_at_utc": "2026-10-07T07:20:20.631389+00:00",
+  "outcome": "Historical descriptive calculations verified; corrected local drafts/scenarios; SKU forecasting and operational replenishment remain incomplete",
+  "live_descriptive_receipt": "outputs\\descriptive_validation\\2026-10-07T06-58-17-441Z\\evidence.json",
+  "live_descriptive_sha256": "03db5daeee96f6af4100dd79c90115571a9fd8d3277a245ce5b0c573d6347c1e",
+  "live_fact_version": 19,
+  "checks_executed": {
+    "databricks_python_suite": {
+      "passed": 62,
+      "failed": 0
+    },
+    "backend_full_test_suite": {
+      "passed": 75,
+      "failed": 0
+    },
+    "backend_and_frontend_noemit_typechecks": "PASS",
+    "notebook_readme_cell_parity": "PASS",
+    "saved_csv_independent_checks": {
+      "passed": 22,
+      "failed": 0
+    },
+    "archive_full_row_financial_and_source_conservation": "PASS",
+    "planning_independent_qa": "13 tests and1000 deterministic scenarios passed",
+    "integrated_report_independent_qa": {
+      "passed": 10,
+      "failed": 0,
+      "receipt_sha256": "3c487dc47b3a29794de03c307a6c5cf0bbf413b352514f8c01f6cf89ed792357"
+    },
+    "local_document_links": {
+      "resolved": 84
+    },
+    "tracked_diff_whitespace_crlf_allowed": "PASS"
+  },
+  "file_sha256": {
+    "outputs\\business_analytics_review_20261007\\REVIEW.md": "571c1b1ee14e3896b6c4cb9cd42105cbc9676a6170673cabffda7c13df403e8f",
+    "docs\\PRODUCT_CATALOG.md": "61cd1d19ab75ea13c48a51e228ded2e165289dfaa50d0090c9737bbca81c7c2d",
+    "docs\\PRODUCT_MASTER_REVIEW_GUIDE.md": "4d2b3c90eef12b67e754950974f40b30e194569bc1bb2ca636b221b22ab1d87b",
+    "docs\\PRODUCT_REVIEW_RULES.md": "9e4f4dd980fe47160fb1f04ad4ae012b19ce92010f13745ff5ea5d18516ec0d1",
+    "docs\\CURRENT_STATE.md": "ae8a9911a810b0bed768503bc070dc9d6bc200ad0693ffc05eece436c783c597",
+    "docs\\ANALYTICS.md": "3e2f67aa0f9c71e39d400b96770c490dd83f8b8a78a7f3b6ef715d8b573e3189",
+    "docs\\API.md": "82e9f4de146bc3d463f7331d466b40ab59422416987b2f1363ebe82bffd94f01",
+    "docs\\BUSINESS_DEFINITIONS.md": "fa187a14f2e15c5e04c6dc7739584d88e765ba0c5c91980e185f26ee47853cc9",
+    "databricks\\medshield_project\\references\\product_master_review.csv": "21ba704cb2fb3b39dab214f5e6ac7d3689b17967946889b3f838eb353f1f183c",
+    "databricks\\medshield_reference_csv\\medshield_reference_csv\\product_master_review.csv": "21ba704cb2fb3b39dab214f5e6ac7d3689b17967946889b3f838eb353f1f183c",
+    "backend\\src\\planningScenario.ts": "fb689364b2338756bd97366f8e20e7f001795f28d220ff8d2cc37e02c321856b",
+    "backend\\src\\databricksDashboard.ts": "7c6c1ded592ce954c00bbf44f3689c8b82629a64fcd3e6fac3d9645e75d0126e",
+    "backend\\scripts\\publication-readiness-helpers.ts": "fae43ccda67648f4ba44ab9b12f53481416136c264bdce03e75dbcfb55e02102",
+    "backend\\scripts\\publication-readiness.ts": "ffe779d900bcbffc7bc1cab2159e0d0c979ca1975ddeeb5d536845c7715e0653",
+    "backend\\tests\\planningScenario.test.ts": "749cae25338f5ef44034bce054924ef64851ab5e2e2754b65729b59981ad6ec5",
+    "backend\\tests\\planningGateway.test.ts": "17c7793e7136916703ec0fa823eb6bf47c0b27884aa98977d32bc680c796e069",
+    "backend\\tests\\publication-readiness.test.ts": "f1897d94697df64f3d3c1571f28e37816dc569b4de37e3fac1bdfd4354a81a7f",
+    "databricks\\medshield_project\\product_review_rules.py": "e634a55cfc659f275d1f3aee1194146c7edbe44d7a80979278c863c18ed3b75b",
+    "databricks\\medshield_project\\tests\\test_product_review_rules.py": "9336f8ee8b62c8922d46897fa0ab305fb7fbecd65fb286396731badfa7f17cf3",
+    "frontend\\services\\api\\dashboard-interactions.ts": "a560b6aafb376fc06a2d5b4b4361bf5edb4935fe1a441f74fbf34d612dc254fe",
+    "frontend\\services\\api\\prescriptive-planning-runtime.ts": "f7a849f97de3619ae8d5d8e82be1932b757f5cf5658b3df9c2f0f8a52b532833"
+  },
+  "spreadsheet_authoring_setup": {
+    "tool": "@oai/artifact-tool",
+    "saved_export_values_verified": true,
+    "marker_success_before_first_export": false,
+    "reason": "Original bundled marker path disappeared after the skill was initially read; command failed MODULE_NOT_FOUND. Authoring/export still ran. No successful marker was invented or retrospectively claimed."
+  },
+  "cloud_writes": false,
+  "application_services_started_or_restarted": false,
+  "new_authenticated_browser_check": false,
+  "complete_recovery_rehearsal": false,
+  "limits": [
+    "Full-row conservation uses checksum-verified archived fact17. Current19 receipt is complete per-label aggregates, not fresh full-row quantity/date verification.",
+    "Local master remains unpublished. This test does not prove supplier SKU, historical package or unit accuracy."
+  ]
+}

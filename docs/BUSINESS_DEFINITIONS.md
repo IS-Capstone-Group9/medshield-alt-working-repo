@@ -21,7 +21,7 @@ The workbook supports sales revenue, product quantity, transaction cost fields, 
 | Acquisition price per unit | Workbook TP/UNIT: MedShield's unit acquisition cost. | `trade_price_unit` / source `TP/UNIT` | Transaction | Finance / Business Analyst | Approved 2026-09-02 |
 | Total acquisition cost | Quantity multiplied by TP/UNIT. | `total_trade_price` / source `TOTAL TP` | Transaction, month, SKU, territory | Finance / Business Analyst | Approved 2026-09-02 |
 | Gross margin amount | Transaction net sales less total acquisition cost, using the workbook field when supplied. | `net_income`; reconcile against `net_cost - total_trade_price` | Transaction, month, SKU, territory | Finance / Business Analyst | Approved 2026-09-02 |
-| Margin percentage | At every reporting grain, sum gross profit divided by sum net sales revenue. Never average transaction rates. Zero revenue produces an unavailable rate. | `margin_pct`; validate against `net_income / net_cost` | Transaction, SKU, territory | Data Analyst | Approved 2026-09-02 |
+| Margin percentage | At every reporting grain, sum eligible gross profit divided by net sales from those same margin-eligible records. Never average transaction rates or mix separately eligible populations. A zero denominator produces an unavailable rate. | `margin_pct`; `100 × SUM(gross_margin_amount) / SUM(net_sales)` over the same margin-eligible population | Transaction, SKU, territory | Data Analyst | Approved 2026-09-02 |
 | Net income | Not available as company net income. Use `gross_margin_amount` wording instead. | Not applicable | Not applicable | Business Analyst | Approved terminology rule |
 | Canonical SKU | One sellable product identity after alias cleanup. | Product alias map from `product` raw value to `canonical_sku` | SKU | Data Analyst | Needs mapping |
 | Product alias | A raw product string that points to a canonical SKU. | `product_raw` -> `canonical_sku` | Product string | Data Analyst | Needs mapping |
@@ -38,6 +38,60 @@ The workbook supports sales revenue, product quantity, transaction cost fields, 
 | Internal buyer cluster | MedShield administration, supplies, equipment, personal, losses, and explicitly internal business labels. | Buyer classification rule | Transaction/account | Business Analyst | Approved |
 | Unknown buyer cluster | Records that do not meet the Government, Private, or Internal rules. | Buyer classification rule | Transaction/account | Business Analyst | Approved |
 | Recommendation status | Lifecycle state for model outputs. | Draft, validated, review required, published, superseded, measured | Model output | Service Manager | Approved |
+
+## Implementation interpretation (7 October 2026)
+
+These clarifications explain the existing definitions and current implementation.
+They do not record new business, product-master, forecast, or procurement approvals.
+
+The approved fulfilled-sales definition selects recorded delivered quantity as
+the source measure. It does not approve every raw product's sellable identity,
+unit, package count, or conversion. As of this review, there are **0 approved SKU
+unit mappings**. Source quantities may be described with their original/adjusted
+evidence status, but cannot be combined into verified medicine units or used as
+approved SKU demand merely because the measure definition is approved. A Medical
+category decision does not approve these separate gates. See the
+[product review guide](PRODUCT_MASTER_REVIEW_GUIDE.md).
+
+The margin numerator and denominator must use the same eligible records.
+`margin_revenue_basis` identifies the net sales associated with eligible gross
+margin. Dividing eligible margin by all independently eligible revenue can
+produce a different, misleading rate. Preserve signed adjustments and null
+measures; neither a missing value nor a zero denominator supplies a usable rate.
+
+The legacy `returns_value` name means eligible negative net-sales adjustments
+in the current API. It is a signed financial stratum, not verified physical
+returns, returned units, return reasons, or inventory receipts. Descriptive net
+revenue keeps these adjustments; a physical-return claim requires source evidence.
+
+The approved 3/6/12-month forecast definition is retained for the existing
+company net-sales/PHP display, whose default starts in the current Manila month.
+It does not approve every future point or a SKU quantity model. The separate
+[SKU quantity target contract](AI_PRODUCT_CLASSIFICATION_IMPLEMENTATION_PLAN.md)
+proposes 1/3/6 successive displayed months starting with the month after the
+selected Manila planning month. That channel still requires reviewed SKU units,
+observations, evaluation, and a scoped model release.
+
+In both contracts, actual forecast lead is the calendar distance from the
+accepted model origin to the target month, separate from the number of displayed
+months. For example, an October 2026 planning month and September 2026 origin
+make November 2026 lead 2; a six-month November–April view needs leads 2–7.
+A release validated only through lead 6 cannot provide April in that example.
+Current MedShield history ending in 2025 cannot be treated as fresh 2026 history.
+
+Planning uses `All` by default; explicit `Unknown` means only unmatched buyer
+labels. The implementation applies exclusive Government → Internal → Private →
+Unknown precedence and ranks only closed Manila months. These classification
+rules preserve the approved buyer-cluster definitions, while their application
+to raw source labels remains proposed and review pending.
+
+The current 1/3/6/12-month planning scenario accepts entered demand and stock
+assumptions; it does not generate or approve forecast demand. Inputs must cover
+every shortlisted product exactly once, with blanks/nulls/Booleans rejected and
+budget/pack costs represented in exact cents. Its bounded greedy allocation is
+for review, without a global-optimum or purchasing claim. `not_solved` means the
+computation limit was reached while an allocation step remained; no completed
+allocation is returned. See the [planning API contract](API.md#planning-contract-7-october-2026).
 
 ## Terms That Must Not Be Used Yet
 

@@ -1,4 +1,5 @@
 import { benchmarkNames, benchmarkView, evaluationProtocol, manilaMonth, reconciledPages } from './forecastEvidence'
+import { planningHistoryClause, PlanningScenarioInputError, solvePlanningScenario } from './planningScenario'
 import { catalogProjection } from './catalogContract'
 import { parseMonthlyYear } from './monthlyQuery'
 import { createHash } from 'node:crypto'
@@ -37,12 +38,8 @@ const DIAGNOSTIC_TERRITORY = `CASE WHEN is_geographic_territory_approved THEN CO
 
 /** M-1 fix: single source of truth for sector WHERE clause fragments. */
 function sectorWhereClause(sector: string): string {
-  switch (sector) {
-    case 'Government': return `AND UPPER(TRIM(normalized_area)) IN (${SECTOR_GOVERNMENT_AREAS})`
-    case 'Private': return `AND (proposed_area_type = 'territory' OR UPPER(TRIM(normalized_area)) IN (${SECTOR_PRIVATE_AREAS}))`
-    case 'Internal': return `AND UPPER(TRIM(normalized_area)) IN (${SECTOR_INTERNAL_AREAS})`
-    default: return ''
-  }
+  validateSector(sector)
+  return sector === 'All' ? '' : `AND (${DIAGNOSTIC_SECTOR}) = ${sqlString(sector, 'sector')}`
 }
 
 /** M-1 fix: validate sector input using the shared list. */
@@ -949,7 +946,7 @@ export async function getDatabricksExternalRegression(input: Record<string, stri
 }
 
 export async function getDatabricksPlanningShortlist(input: { sector?: string; territory?: string }) {
-  const sector = input.sector?.trim() || 'Unknown'
+  const sector = input.sector?.trim() || 'All'
   const territory = input.territory?.trim() || 'all'
   validateSector(sector)
   const territories = await query(`SELECT DISTINCT INITCAP(COALESCE(territory, normalized_area)) AS territory
@@ -957,11 +954,12 @@ export async function getDatabricksPlanningShortlist(input: { sector?: string; t
     ORDER BY territory`, 100)
 
   const sectorClause = sectorWhereClause(sector)
+  const historyClause = planningHistoryClause()
 
   const territoryClause = territory === 'all'
     ? ''
     : `AND proposed_area_type = 'territory' AND UPPER(COALESCE(territory, normalized_area)) = UPPER(${sqlString(territory, 'territory')})`
-  const bounds = await query(`SELECT DATE_FORMAT(MAX(month_start), 'yyyy-MM') AS period_end FROM ${FACT} WHERE ${OBSERVED_FACT} ${sectorClause} ${territoryClause}`, 5)
+  const bounds = await query(`SELECT DATE_FORMAT(MAX(month_start), 'yyyy-MM') AS period_end FROM ${FACT} WHERE ${OBSERVED_FACT} ${sectorClause} ${territoryClause} ${historyClause}`, 5)
   const end = bounds[0]?.period_end
   if (!end) {
     return { scope: { sector, territory }, source: databricksSource([]), products: [], period_start: null, period_end: null, months_stale: null, eligible_products: 0, excluded_nonpositive_products: 0, shortlist_share_pct: 0, ranking_revenue: 0, territories: territories.map((row) => row.territory).filter(Boolean) }
@@ -971,9 +969,9 @@ export async function getDatabricksPlanningShortlist(input: { sector?: string; t
     SUM(CASE WHEN is_net_sales_eligible THEN net_sales ELSE 0 END) AS revenue,
     SUM(CASE WHEN is_quantity_observation_eligible THEN quantity ELSE 0 END) AS quantity,
     COUNT(DISTINCT month_start) AS observed_months
-    FROM ${FACT} WHERE ${OBSERVED_FACT} ${sectorClause} ${territoryClause}
+    FROM ${FACT} WHERE ${OBSERVED_FACT} ${sectorClause} ${territoryClause} ${historyClause}
       AND DATE_FORMAT(month_start, 'yyyy-MM') BETWEEN ${sqlString(start, 'period_start')} AND ${sqlString(end, 'period_end')}
-    GROUP BY normalized_product ORDER BY revenue DESC`, 5000)
+    GROUP BY normalized_product ORDER BY revenue DESC, normalized_product`, 5000)
   const positive = productRows.filter((row) => numberValue(row.revenue) > 0)
   const rankingRevenue = positive.reduce((sum, row) => sum + numberValue(row.revenue), 0)
   const count = Math.min(5, Math.ceil(positive.length * 0.2))
@@ -996,78 +994,17 @@ export async function getDatabricksPlanningShortlist(input: { sector?: string; t
 
 export async function solveDatabricksPlanningScenario(body: Record<string, unknown>) {
   if (body.acknowledged !== true) throw new DatabricksDashboardInputError('Confirm that inputs are scenario assumptions for review')
-  const scope = body.scope as { sector?: string; territory?: string } | undefined
-  if (!scope) throw new DatabricksDashboardInputError('Planning scope is required')
+  if (!body.scope || typeof body.scope !== 'object' || Array.isArray(body.scope)) throw new DatabricksDashboardInputError('Planning scope is required')
+  const scope = body.scope as { sector?: string; territory?: string }
+  if ((scope.sector !== undefined && typeof scope.sector !== 'string') || (scope.territory !== undefined && typeof scope.territory !== 'string')) {
+    throw new DatabricksDashboardInputError('Planning scope must contain valid text filters')
+  }
   const shortlist = await getDatabricksPlanningShortlist(scope)
-  if (body.checksum !== shortlist.source.checksum) throw new DatabricksDashboardInputError('Databricks source changed; reload the shortlist')
-  const horizon = integerValue(body.horizon, 'Planning horizon', 1, 12)
-  if (![1, 3, 6, 12].includes(horizon)) throw new DatabricksDashboardInputError('Unsupported planning horizon')
-  const budget = decimalValue(body.budget, 'Budget', 0, 1_000_000_000)
-  const minimum = decimalValue(body.minimum_pct, 'Minimum fulfillment', 0, 100)
-  const rawItems = body.items
-  if (!Array.isArray(rawItems) || rawItems.length !== shortlist.products.length) throw new DatabricksDashboardInputError('Inputs must match the Databricks shortlist')
-  const expected = new Set(shortlist.products.map((row) => row.product))
-  const items = rawItems.map((raw) => {
-    if (!raw || typeof raw !== 'object') throw new DatabricksDashboardInputError('Invalid planning item')
-    const row = raw as Record<string, unknown>
-    const product = String(row.product ?? '')
-    if (!expected.has(product)) throw new DatabricksDashboardInputError('Planning product is not in the current Databricks shortlist')
-    const demand = integerValue(row.demand, 'Demand', 1, 1_000_000_000)
-    const stock = integerValue(row.stock, 'Stock', 0, 1_000_000_000)
-    const reserve = integerValue(row.reserve, 'Protected stock', 0, stock)
-    const pack = integerValue(row.pack, 'Units per pack', 1, 1_000_000_000)
-    const packCost = decimalValue(row.pack_cost, 'Pack cost', 0.01, 1_000_000_000)
-    const maxPacks = integerValue(row.max_packs, 'Supplier limit', 0, 100_000)
-    return { product, demand, stock, reserve, pack, pack_cost_cents: Math.round(packCost * 100), max_packs: maxPacks, available: stock - reserve, purchase_packs: 0, fulfilled: 0 }
-  })
-  let remainingCents = Math.round(budget * 100)
-  const conflicts: string[] = []
-  for (const item of items) {
-    const required = Math.ceil(item.demand * minimum / 100)
-    const minimumPacks = Math.max(0, Math.ceil((required - item.available) / item.pack))
-    if (minimumPacks > item.max_packs) conflicts.push(`${item.product}: supplier limit cannot meet minimum fulfillment`)
-    const cost = minimumPacks * item.pack_cost_cents
-    if (cost > remainingCents) conflicts.push(`${item.product}: budget cannot meet minimum fulfillment`)
-    if (!conflicts.length) {
-      item.purchase_packs = minimumPacks
-      remainingCents -= cost
-      item.fulfilled = Math.min(item.demand, item.available + minimumPacks * item.pack)
-    }
-  }
-  if (conflicts.length) return { status: 'infeasible', conflicts, rows: [] }
-  for (let step = 0; step < 100_000; step += 1) {
-    const candidates = items
-      .filter((item) => item.fulfilled < item.demand && item.purchase_packs < item.max_packs && item.pack_cost_cents <= remainingCents)
-      .sort((left, right) => left.fulfilled / left.demand - right.fulfilled / right.demand || left.product.localeCompare(right.product))
-    const item = candidates[0]
-    if (!item) break
-    item.purchase_packs += 1
-    remainingCents -= item.pack_cost_cents
-    item.fulfilled = Math.min(item.demand, item.available + item.purchase_packs * item.pack)
-  }
-  const rows = items.map((item) => {
-    const purchaseUnits = item.purchase_packs * item.pack
-    const spend = item.purchase_packs * item.pack_cost_cents / 100
-    return {
-      ...item,
-      purchase_units: purchaseUnits,
-      unmet: item.demand - item.fulfilled,
-      fulfillment_pct: item.fulfilled / item.demand * 100,
-      spend,
-      ending_stock: item.stock + purchaseUnits - item.fulfilled,
-      binding: [item.fulfilled === item.demand ? 'Demand satisfied' : '', item.purchase_packs === item.max_packs ? 'Supplier cap' : ''].filter(Boolean),
-    }
-  })
-  const spent = rows.reduce((sum, row) => sum + row.spend, 0)
-  return {
-    status: 'scenario_allocation',
-    rows,
-    budget,
-    spent,
-    remaining: budget - spent,
-    mean_fulfillment_pct: rows.reduce((sum, row) => sum + row.fulfillment_pct, 0) / Math.max(rows.length, 1),
-    budget_binding: remainingCents === 0,
-    assumptions: { horizon, minimum_pct: minimum, scope, checksum: body.checksum, objective: 'Balance product fulfillment under entered scenario constraints', status: 'Scenario only; Databricks supplies historical shortlist evidence' },
+  try {
+    return solvePlanningScenario(body, shortlist)
+  } catch (error) {
+    if (error instanceof PlanningScenarioInputError) throw new DatabricksDashboardInputError(error.message)
+    throw error
   }
 }
 

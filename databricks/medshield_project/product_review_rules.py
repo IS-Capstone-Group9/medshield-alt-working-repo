@@ -7,7 +7,7 @@ Extracted attributes still require evidence: a title is not a verified package.
 import re
 
 
-PROPOSAL_POLICY = "product_review_v2_literal_pricing"
+PROPOSAL_POLICY = "product_review_v3_context_literal_pricing"
 _NUMBER = r"(?:\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?|\.\d+)"
 _FRACTION = _NUMBER + r"\s*/\s*\d+(?:\.\d+)?"
 _START = r"(?<![\d.,/])"
@@ -21,8 +21,22 @@ _RATIO = re.compile(
 _CAPACITY = re.compile(_START + r"(?:" + _FRACTION + r"|" + _NUMBER + r")\s*(?:ML|CC|L|LITERS?|LITRES?)\b")
 _MASS_TOKEN = re.compile(_START + _MASS + r"\b")
 _DEVICE = re.compile(r"\b(?:CANNULA|NEEDLES?|SYRINGES?|CATHETERS?|SUTURES?)\b")
-_NET_MASS = re.compile(r"\b(?:OINTMENT|CREAM|GEL|TOOTHPASTE|COTTON|JELLY)\b")
+_NET_MASS = re.compile(
+    r"\b(?:OINTMENT|CREAM|GEL|TOOTHPASTE|COTTON|JELLY|COFFEE|MILK|FOOD|"
+    r"CLEANER|CLEANSER|DISINFECTANT|DETERGENT)\b"
+)
+_CATEGORY_CONTEXTS = {"medicine", "medical_supply", "medical_equipment", "non_medical", "unclassified"}
 _MARKETING = re.compile(r"\b(?:ENERGY|SAVINGS?|EFFICIENCY|DISCOUNT|BATTERY|HUMIDITY)\b")
+_CALIBRATED_CONTAINER = re.compile(
+    r"\b(?:CUP|CONTAINER)\b[^;]*?\bWITH\s+CALIBRATION\b"
+)
+_CALIBRATION_DEVICE = re.compile(
+    r"\b(?:MONITOR|MACHINE|EQUIPMENT|THERMOMETER|SCALE|ECG|F\d+|IM\d+[A-Z]?)\b"
+)
+_CALIBRATION_SERVICE = re.compile(
+    r"\b(?:CLEANING\s+AND\s+CALIBRATION|CALIBRATION\s+SERVICE|"
+    r"SERVICE\s+CALIBRATION|CALIBRATION\s+VERIFICATION)\b"
+)
 _UNITS = {
     "Box": r"BOX(?:ES)?|BX", "Pack": r"PACKS?|PK", "Piece": r"PIECES?|PCS?|PCE",
     "Vial": r"VIALS?", "Bottle": r"BOTTLES?|BTL|BOT",
@@ -57,13 +71,17 @@ def _overlaps(match, spans):
     return any(match.start() < end and start < match.end() for start, end in spans)
 
 
-def proposal_attributes(title):
+def proposal_attributes(title, *, category_context=None):
     """Return conservative literal candidates, with every result needing review.
 
     No numeric equivalence, pack conversion, category, stable SKU, or price split
     is inferred. Unknown packaging/counts are kept unknown rather than Piece/1.
     Concentration denominators are excluded from container capacity candidates.
+    Optional category context is itself an unverified proposal. It only helps
+    distinguish gram net-mass clues; it never supplies a category or approval.
     """
+    if category_context is not None and category_context not in _CATEGORY_CONTEXTS:
+        raise ValueError("Invalid proposal category context")
     title = _label(title)
     warnings, specifications = [], []
     ratios = list(_RATIO.finditer(title))
@@ -99,7 +117,7 @@ def proposal_attributes(title):
                 specifications.append(literal)
                 warnings.append("gauge_not_mass_strength")
                 continue
-            if _NET_MASS.search(title):
+            if _NET_MASS.search(title) or category_context == "non_medical":
                 capacities.append(literal)
                 warnings.append("net_mass_container_requires_review")
                 continue
@@ -191,7 +209,18 @@ def proposal_attributes(title):
         specifications.extend(match.group() for match in re.finditer(pattern, title))
     if re.search(r"\b(?:ASSORTED|VARIOUS|EITHER|OR)\b", title) or len(_unique(capacities)) > 1:
         warnings.append("ambiguous_options_or_assortment")
-    item_kind = "service" if re.search(r"\b(?:REPAIRS?|CALIBRATION)\b", title) else "unknown"
+    item_kind = "unknown"
+    if re.search(r"\bREPAIRS?\b", title):
+        item_kind = "service"
+    elif _CALIBRATED_CONTAINER.search(title):
+        specifications.append("CALIBRATION")
+        warnings.append("calibrated_container_markings_require_review")
+    elif re.search(r"\bCALIBRATION\b", title):
+        if _CALIBRATION_DEVICE.search(title) or _CALIBRATION_SERVICE.search(title):
+            item_kind = "service"
+        else:
+            specifications.append("CALIBRATION")
+            warnings.append("calibration_context_requires_review")
     if item_kind == "service":
         warnings.append("service_keyword_requires_review")
 

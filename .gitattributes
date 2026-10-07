@@ -13,3 +13,11 @@ databricks/medshield_project/product_catalog.py text eol=crlf
 outputs/descriptive_validation/** -text
 outputs/publication_readiness/** -text
 outputs/qa_reassessment/*.csv -text
+# Preserve the dated product review and supporting evidence checksums.
+outputs/business_analytics_review_20261007/** -text
+outputs/product_master_population_20261007/** -text
+outputs/product_category_review_20260927/** -text
+outputs/product_sales_rules/2026-10-02T21-00-51-469Z/sealed-review/** -text
+outputs/databricks_analytical_review_20261007/** -text
+outputs/databricks_retention_recovery_20261007/** -text
+outputs/predictive_validation/2026-09-27T14-30-12-921Z/** -text

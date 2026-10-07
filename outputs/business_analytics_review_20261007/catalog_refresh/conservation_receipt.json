@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "master_sha256": "21ba704cb2fb3b39dab214f5e6ac7d3689b17967946889b3f838eb353f1f183c",
+  "master_rows": 4561,
+  "columns": 29,
+  "bytes": 4746906,
+  "archived_full_fact_version": 17,
+  "archive_sha256": "3495df769aabed43df47b2d5b252ffe9f1d3bec14b3378a09163f19eecbd376b",
+  "archive_records": 37728,
+  "current_label_version": 19,
+  "current_label_sha256": "9c3608c7e8bc4669d62e3c8632161f374e6f78099b8fedf198a8d4e286dd1dc6",
+  "current_label_records": 37728,
+  "changed_existing_fields": {
+    "category_status": 32891
+  },
+  "checks": {
+    "exact_unique_source_records": "PASS",
+    "all_existing_source_fields_except_category_proposal_status_equal": "PASS",
+    "monthly_financial_population_and_values_equal": "PASS",
+    "yearly_financial_population_and_values_equal": "PASS",
+    "current19_alias_resolution_remains_raw_unclassified_unknown_unit": "PASS"
+  },
+  "limits": [
+    "Full-row conservation uses checksum-verified archived fact17. Current19 receipt is complete per-label aggregates, not fresh full-row quantity/date verification.",
+    "Local master remains unpublished. This test does not prove supplier SKU, historical package or unit accuracy."
+  ],
+  "cloud_writes": false
+}

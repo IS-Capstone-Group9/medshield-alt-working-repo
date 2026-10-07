@@ -1,0 +1,343 @@
+{
+  "schema_version": "1.0",
+  "review_date": "2026-10-07 Asia/Manila",
+  "role": "Supporting Data Analyst, then assigned Backend Engineer for confirmed planning defects",
+  "plan": [
+    "Reuse the existing aggregate profile; verify its 12 source hashes",
+    "Inspect canonical external, forecasting and planning contracts",
+    "Separate descriptive, retrospective, current-forecast and replenishment readiness",
+    "Repair confirmed local scenario defects in assigned gateway scope",
+    "Verify focused tests and typecheck; preserve data and approval boundaries"
+  ],
+  "scope": {
+    "profile": "Four modeled DOH diseases and four proposed PAGASA stations; not all 19 diseases or 125 station files",
+    "remote": "No live query, notebook execution, source upload, warehouse write, model publication or approval by this supporting worker",
+    "output_files": [
+      "external_planning_assessment.json",
+      "EXTERNAL_PLANNING_FINDINGS.md"
+    ],
+    "implementation_files": [
+      "backend/src/planningScenario.ts",
+      "backend/src/databricksDashboard.ts (planning functions/import only)",
+      "backend/tests/planningScenario.test.ts"
+    ]
+  },
+  "profile_source": "outputs/databricks_analytical_review_20261007/external_profile.json",
+  "local_verification": {
+    "profile_sha256": "31de53b639475b0fef102098d230659111ed5028aefa4d98565b70fb4b5184ec",
+    "hash_checks": [
+      {
+        "source": "data\\PAGASA 2017-2024\\2017-2020\\Ambulong Daily Data.csv",
+        "unchanged": true
+      },
+      {
+        "source": "data\\PAGASA 2017-2024\\2021-2024\\Ambulong Daily Data.csv",
+        "unchanged": true
+      },
+      {
+        "source": "data\\PAGASA 2017-2024\\2017-2020\\Daet Daily Data.csv",
+        "unchanged": true
+      },
+      {
+        "source": "data\\PAGASA 2017-2024\\2021-2024\\Daet Daily Data.csv",
+        "unchanged": true
+      },
+      {
+        "source": "data\\PAGASA 2017-2024\\2017-2020\\Sangley Point Daily Data.csv",
+        "unchanged": true
+      },
+      {
+        "source": "data\\PAGASA 2017-2024\\2021-2024\\Sangley Point Daily Data.csv",
+        "unchanged": true
+      },
+      {
+        "source": "data\\PAGASA 2017-2024\\2017-2020\\Tayabas Daily Data.csv",
+        "unchanged": true
+      },
+      {
+        "source": "data\\PAGASA 2017-2024\\2021-2024\\Tayabas Daily Data.csv",
+        "unchanged": true
+      },
+      {
+        "source": "data\\DOH (2018-2026)-20260914T142300Z-1-001\\DOH (2018-2026)\\Disease-Specific CSV Files\\Dengue_20260914.csv",
+        "unchanged": true
+      },
+      {
+        "source": "data\\DOH (2018-2026)-20260914T142300Z-1-001\\DOH (2018-2026)\\Disease-Specific CSV Files\\Leptospirosis_20260914.csv",
+        "unchanged": true
+      },
+      {
+        "source": "data\\DOH (2018-2026)-20260914T142300Z-1-001\\DOH (2018-2026)\\Disease-Specific CSV Files\\Cholera_20260914.csv",
+        "unchanged": true
+      },
+      {
+        "source": "data\\DOH (2018-2026)-20260914T142300Z-1-001\\DOH (2018-2026)\\Disease-Specific CSV Files\\Typhoid Fever_20260914.csv",
+        "unchanged": true
+      }
+    ],
+    "counts": {
+      "selected_doh_source_rows": 2518227,
+      "selected_doh_rejected_rows": 0,
+      "selected_doh_blank_province_rows": 0,
+      "gold_scope_disease_territory_month_count": 1787,
+      "gold_scope_reported_case_count": 233531,
+      "selected_weather_rows": 11688,
+      "selected_complete_rainfall_month_count": 383,
+      "four_doh_file_hashes_match_prior_receipt": true,
+      "four_doh_row_counts_match_prior_receipt": true
+    },
+    "overlap_months": {
+      "Dengue": {
+        "BATANGAS": 83,
+        "CAMARINES NORTE": 84,
+        "CAVITE": 84,
+        "QUEZON": 84
+      },
+      "Leptospirosis": {
+        "BATANGAS": 47,
+        "CAMARINES NORTE": 50,
+        "CAVITE": 73,
+        "QUEZON": 55
+      },
+      "Cholera": {
+        "BATANGAS": 3,
+        "CAMARINES NORTE": 20,
+        "CAVITE": 6,
+        "QUEZON": 5
+      },
+      "Typhoid Fever": {
+        "BATANGAS": 74,
+        "CAMARINES NORTE": 67,
+        "CAVITE": 81,
+        "QUEZON": 75
+      }
+    },
+    "weather_quality": {
+      "Ambulong": {
+        "complete_rainfall_months": 95,
+        "incomplete_rainfall_months": [
+          "2020-01"
+        ],
+        "days_missing_measures": 16,
+        "expected_dates": 2922,
+        "observed_dates": 2922
+      },
+      "Daet": {
+        "complete_rainfall_months": 96,
+        "incomplete_rainfall_months": [],
+        "days_missing_measures": 0,
+        "expected_dates": 2922,
+        "observed_dates": 2922
+      },
+      "Sangley Point": {
+        "complete_rainfall_months": 96,
+        "incomplete_rainfall_months": [],
+        "days_missing_measures": 1,
+        "expected_dates": 2922,
+        "observed_dates": 2922
+      },
+      "Tayabas": {
+        "complete_rainfall_months": 96,
+        "incomplete_rainfall_months": [],
+        "days_missing_measures": 0,
+        "expected_dates": 2922,
+        "observed_dates": 2922
+      }
+    },
+    "doh_scope": {
+      "Dengue": {
+        "onset_min": "2017-01-01",
+        "onset_max": "2026-09-12",
+        "outside_declared_scope_rows": 144665
+      },
+      "Leptospirosis": {
+        "onset_min": "2018-01-01",
+        "onset_max": "2026-09-12",
+        "outside_declared_scope_rows": 0
+      },
+      "Cholera": {
+        "onset_min": "2017-01-01",
+        "onset_max": "2026-09-10",
+        "outside_declared_scope_rows": 2571
+      },
+      "Typhoid Fever": {
+        "onset_min": "2018-01-01",
+        "onset_max": "2026-09-12",
+        "outside_declared_scope_rows": 0
+      }
+    }
+  },
+  "parent_reported_live_checks": {
+    "label": "Root reported read-only SQL; not independently repeated by supporting worker",
+    "fact_delta_version": 17,
+    "gold_policy": "sales_restart_gold_v7_independent_catalog",
+    "fact_rows": 37728,
+    "raw_product_groups": 4561,
+    "external_signal_rows": 2171,
+    "external_join_ready_rows": 0,
+    "external_forecast_eligible_rows": 0
+  },
+  "definitions": {
+    "case_measure": "Sum of Number of Cases under CONFIRMED, PROBABLE and SUSPECT_OR_COMPATIBLE classification groups for valid onset/count rows, selected 2018–2025 territories. Reported non-discarded retrospective surveillance cases; not unique patients, population incidence or confirmed-only cases.",
+    "signal_grain": "2,171 = 1,787 DOH territory/disease/month records + 384 PAGASA territory/month records. Weather has 383 complete rainfall totals. Distinct month counts must retain provider/territory/disease scope, rather than treating mixed signal rows as a single continuous monthly series.",
+    "missingness": "No source observation is not a verified zero. January–September 2026 DOH is partial. PAGASA 2025 is absent; NASA is a separate proxy.",
+    "units": "PAGASA wind is m/s at source and converted to kph in Silver. Old TMEAN is reported, newer batch mean is derived TMAX/TMIN midpoint. -999 becomes null; -1 rainfall is a disclosed lower-bound zero."
+  },
+  "decision_matrix": [
+    {
+      "use": "Descriptive context and historical associations",
+      "readiness": "Candidate context available",
+      "permitted": "Provider-specific monthly history with exact coverage; exploratory association under disclosed geography/period limits",
+      "blocked": "Clinical or causal disease-product inference, live outbreak alerts, missing-SKU resolution, absent-month zero inference",
+      "required": "Geography/representativeness review, disease reporting-completeness and classification policy, separate clinical/business disease-product rationale"
+    },
+    {
+      "use": "Historical forecasting",
+      "readiness": "Company revenue benchmarks and offline evaluation; external experiments conditional",
+      "permitted": "Frozen time-based comparison, train-only transforms/lag selection, identical common scored keys",
+      "blocked": "As-of external forecast claims without availability/vintages; realized future regressors at earlier origins; revenue renamed medicine units",
+      "required": "Frozen series and mappings, available_at/vintage or retrospective label, baseline improvement, uncertainty and owner review"
+    },
+    {
+      "use": "Current forecasts as of 7 October 2026",
+      "readiness": "Unpublished; current sales ends December 2025",
+      "permitted": "Freshness and true lead reporting; unsupported points unavailable",
+      "true_leads": {
+        "October_December_2026": [
+          10,
+          11,
+          12
+        ],
+        "October_2026_March_2027": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "October_2026_September_2027": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21
+        ]
+      },
+      "required": "Accepted closed 2026 submissions, validated requested leads, coherent run/release/approval evidence"
+    },
+    {
+      "use": "Replenishment/order recommendations",
+      "readiness": "Entered scenario allocation only",
+      "permitted": "Per-product fulfilled/unmet quantities, packs, spend, reserve and constraints from explicit assumptions",
+      "blocked": "EOQ/ROP from revenue, measured stockout days/expiry reduction, clinical urgency, purchase-order authorization",
+      "required": [
+        "Approved canonical physical SKU/package/count/source unit and demand scope",
+        "Time-stamped usable/on-order/allocated/reserved stock",
+        "Requested demand, backorders/lost-sales evidence to distinguish fulfilled sales",
+        "Supplier lead-time distribution, quote, MOQ/capacity",
+        "Ordering/holding costs and service-level policy",
+        "Lot/expiry/shelf-life/FEFO inputs",
+        "Budget/horizon/objective and procurement review"
+      ]
+    }
+  ],
+  "deterministic_findings": [
+    {
+      "id": "PLAN-01",
+      "status": "Fixed locally",
+      "finding": "Blank/null/Boolean zero coercion; fractional-cent rounding",
+      "change": "Planning-specific numeric validation requires number/nonblank numeric string. Exact cents parsing rejects nonzero fractional cents and avoids unsafe multiplication.",
+      "source": "backend/src/planningScenario.ts:11"
+    },
+    {
+      "id": "PLAN-02",
+      "status": "Fixed locally",
+      "finding": "Repeated allowed label could omit another shortlist product",
+      "change": "Unique exact exhaustive shortlist membership before solving; malformed scope fails with gateway input error.",
+      "source": "backend/src/planningScenario.ts:59"
+    },
+    {
+      "id": "PLAN-03",
+      "status": "Fixed locally",
+      "finding": "100,000 pack iterations could silently leave affordable purchases",
+      "change": "Remaining candidates after limit produce not_solved and no partial result rows. Exact boundary completion still succeeds.",
+      "source": "backend/src/planningScenario.ts:107"
+    },
+    {
+      "id": "PLAN-04",
+      "status": "Fixed locally",
+      "finding": "Open/future month could determine latest shortlist evidence and ranking; revenue ties lacked stable ordering",
+      "change": "Bounds and ranking use closed Manila months and stable product tie order.",
+      "source": "backend/src/databricksDashboard.ts:961"
+    },
+    {
+      "id": "EXT-01",
+      "status": "Candidate-contract enhancement proposed; no warehouse change",
+      "finding": "Temperature/humidity/wind averages can use partial observations even where rainfall is complete",
+      "recommendation": "Metric-specific observation/expected counts, completeness flags and temperature method in monthly usable join fact. Preserve null metrics and no-observation reasons.",
+      "source": "databricks/medshield_project/external_restart/03_external_gold.py:66"
+    },
+    {
+      "id": "EXT-02",
+      "status": "Disclosure/policy review required",
+      "finding": "Raw Dengue/Cholera includes 2017 but declared scope and Gold policy begin 2018",
+      "recommendation": "Keep source observed range, declared range, selected range and excluded counts separate. Extending policy needs versioned reviewed decision.",
+      "source": "databricks/medshield_project/external_restart/03_external_gold.py:28"
+    }
+  ],
+  "evaluation": {
+    "sequence": [
+      "Review descriptive finance/submission completeness and freeze accepted company-revenue series",
+      "Compare last-value/seasonal-naive/recent-mean baselines with approved candidate families on common time holdouts",
+      "Ingest accepted 2026 actuals before current forecast operational claims",
+      "Resolve high-value physical SKU/unit cohort before medicine-unit modeling",
+      "Approve external geography/representativeness and disease-product rules independently",
+      "Evaluate DOH/PAGASA/NASA ablations separately, with origin-known features and matched score keys",
+      "Keep external context if incremental out-of-sample value is absent; publish only reviewed version-bound outputs"
+    ],
+    "metrics": [
+      "MAE in target units",
+      "RMSE and signed bias; WAPE with true zero-denominator reason",
+      "Exact scored key/sample count and missing predictions by origin/lead/series",
+      "MASE only with documented train-only baseline scale",
+      "80%/95% interval coverage, width and calibration support by lead",
+      "Sparse-demand evaluation only after valid zero/unit policy"
+    ],
+    "availability": "Retrospective onset date is not release date. A one-month lag does not prove information was available at origin. Without release vintages label external evaluation revised-snapshot retrospective association. Future covariates need known, independently forecast or explicit scenario paths.",
+    "business_kpis": [
+      "Observed/metric-complete months over explicit calendar/provider/territory/disease scope",
+      "Last accepted actual, months stale, true lead and supported range",
+      "Forecast error/bias/interval coverage with named holdout and sample count",
+      "Category approval separate from identity/unit/forecast/transaction readiness",
+      "Per-product fulfillment/unmet units, packs, spend, budget and constraints; no pooled incompatible quantities",
+      "Inventory position/ROP/safety stock/EOQ only when governed required inputs exist"
+    ]
+  },
+  "verification": {
+    "source_hashes": "12/12 unchanged; no million-row reprofiling",
+    "focused_tests": "8/8 pass: node --import tsx --test tests/planningScenario.test.ts",
+    "typecheck": "Pass: node node_modules/typescript/bin/tsc --noEmit",
+    "diff_check": "Pass: git diff --check -- backend/src/databricksDashboard.ts",
+    "runtime_scope": "Pure helper is called by live gateway wrapper. Offline Python MILP tests do not certify this greedy allocator; current UI correctly discloses non-optimal scenario behavior. No browser/live scenario action run here."
+  },
+  "evidence": {
+    "coverage": "outputs/databricks_analytical_review_20261007/external_profile.json:7813",
+    "disease_mapping": "docs/PRESCRIPTIVE_CLIMATE_DISEASE_MODULE.md:54",
+    "time_availability": "databricks/medshield_project/external_restart/02_external_silver.py:136",
+    "station_mapping": "databricks/medshield_project/external_restart/03_external_gold.py:121",
+    "forecast_eligibility": "databricks/medshield_project/external_restart/06_external_restart_system_bridge.sql:37",
+    "evaluation": "docs/NORTH_STAR_EXECUTION_BLUEPRINT.md:415",
+    "operational_inputs": "docs/PRESCRIPTIVE_CLIMATE_DISEASE_MODULE.md:74",
+    "scenario_disclosure": "frontend/services/api/prescriptive-planning-runtime.ts:156",
+    "gateway": "backend/src/databricksDashboard.ts:999",
+    "tests": "backend/tests/planningScenario.test.ts"
+  }
+}

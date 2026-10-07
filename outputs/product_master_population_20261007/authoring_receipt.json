@@ -1,0 +1,14 @@
+{
+  "tool": "@oai/artifact-tool",
+  "csv_export": "RFC4180 serialization of artifact range values; public CSV export unavailable",
+  "rows": 4561,
+  "columns": 29,
+  "bytes": 4710026,
+  "sha256": "507fe990defc28f41c13eba4526463bbc960783dd5ad82ef209bb5babf509775",
+  "copies_identical": true,
+  "targets": [
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\databricks\\medshield_project\\references\\product_master_review.csv",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\databricks\\medshield_reference_csv\\medshield_reference_csv\\product_master_review.csv"
+  ],
+  "cloud_writes": false
+}

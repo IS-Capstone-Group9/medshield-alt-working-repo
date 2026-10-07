@@ -111,12 +111,16 @@ class CatalogTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             enrich([facts[0],facts[0]],{})
 
-    def test_preparation_master_and_deployed_copy_identical_and_empty(self):
+    def test_preparation_master_and_deployed_copy_identical_and_valid(self):
         source = ROOT / "references/product_master_review.csv"
         copy = ROOT.parent / "medshield_reference_csv/medshield_reference_csv/product_master_review.csv"
         self.assertEqual(source.read_bytes(), copy.read_bytes())
-        with source.open() as stream:
-            self.assertEqual(c.validate_master(list(csv.DictReader(stream))), {})
+        with source.open(encoding="utf-8-sig", newline="") as stream:
+            reader = csv.DictReader(stream)
+            self.assertEqual(tuple(reader.fieldnames), c.FIELDS)
+            rows = list(reader)
+        self.assertTrue(rows)
+        self.assertEqual(len(c.validate_master(rows)), len(rows))
 
     def test_transaction_verification_is_separate_and_source_bound(self):
         source = dict(source_record_id="record", source_file_sha256="a"*64, is_adjusted_source=True)

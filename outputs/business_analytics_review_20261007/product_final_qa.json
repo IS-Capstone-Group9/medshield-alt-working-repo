@@ -1,0 +1,162 @@
+{
+  "status": "PASS",
+  "scope": "Final canonical CSV refresh QA by supporting Data Analyst; full archive source conservation separately owned by root.",
+  "canonical_sha256": "21ba704cb2fb3b39dab214f5e6ac7d3689b17967946889b3f838eb353f1f183c",
+  "bytes": 4746906,
+  "bytes_below_gold_limit": 253094,
+  "rows": 4561,
+  "columns": 29,
+  "proposal_policy": "product_review_v3_context_literal_pricing",
+  "checks": {
+    "exact29_columns_and4561_unique_rows": "PASS",
+    "catalog_helper_valid": "PASS",
+    "canonical_and_deployment_identical": "PASS",
+    "sha_and_size_match_new_receipt": "PASS",
+    "gold_byte_and_row_limits": "PASS",
+    "authoring_matrix_all_cells_identical": "PASS",
+    "all_current19_labels_covered": "PASS",
+    "current19_receipt_checksum": "PASS",
+    "current19_population_aggregates": "PASS",
+    "original507fe_backup_immutable": "PASS",
+    "all_protected_master_cells_preserved": "PASS",
+    "historical_research_source_and_notes_prefix_retained": "PASS",
+    "all_v3_literal_attributes_regenerate_exactly": "PASS",
+    "v3_policy_named_in_all_notes": "PASS",
+    "no_approvals_forecast_false": "PASS",
+    "identity_unit_forecast_pending": "PASS",
+    "no_invented_sku_unit_reviewer_or_brand": "PASS",
+    "all_prior19_research_conflicts_remain_pending": "PASS",
+    "exactly9_attribute_labels_corrected": "PASS",
+    "specimen_marking_warning_corrected": "PASS",
+    "medicine1G_and_concentration_denominators_preserved": "PASS",
+    "render_preview_matches_corrections": "PASS"
+  },
+  "attribute_corrections": [
+    {
+      "raw_product": "ANMUM MATERNA PLAIN 180G X 24",
+      "attribute_changes": {
+        "strength": {
+          "before": "180G",
+          "after": ""
+        },
+        "container_size": {
+          "before": "",
+          "after": "180G"
+        }
+      }
+    },
+    {
+      "raw_product": "LYSOL 340G",
+      "attribute_changes": {
+        "strength": {
+          "before": "340G",
+          "after": ""
+        },
+        "container_size": {
+          "before": "",
+          "after": "340G"
+        }
+      }
+    },
+    {
+      "raw_product": "ANMUM MATERNA CHOCO 180G X 24",
+      "attribute_changes": {
+        "strength": {
+          "before": "180G",
+          "after": ""
+        },
+        "container_size": {
+          "before": "",
+          "after": "180G"
+        }
+      }
+    },
+    {
+      "raw_product": "ANMUM MATERNA PLAIN 180G",
+      "attribute_changes": {
+        "strength": {
+          "before": "180G",
+          "after": ""
+        },
+        "container_size": {
+          "before": "",
+          "after": "180G"
+        }
+      }
+    },
+    {
+      "raw_product": "LYSOL 510G",
+      "attribute_changes": {
+        "strength": {
+          "before": "510G",
+          "after": ""
+        },
+        "container_size": {
+          "before": "",
+          "after": "510G"
+        }
+      }
+    },
+    {
+      "raw_product": "COFFEE GREAT TASTE PREMIUM 25G",
+      "attribute_changes": {
+        "strength": {
+          "before": "25G",
+          "after": ""
+        },
+        "container_size": {
+          "before": "",
+          "after": "25G"
+        }
+      }
+    },
+    {
+      "raw_product": "DISINFECTANT SPRAY 170G 227ML (LYSOL)",
+      "attribute_changes": {
+        "strength": {
+          "before": "170G",
+          "after": ""
+        },
+        "container_size": {
+          "before": "227ML",
+          "after": "227ML / 170G"
+        }
+      }
+    },
+    {
+      "raw_product": "DETERGENT POWDER 500G (PRIDE)",
+      "attribute_changes": {
+        "strength": {
+          "before": "500G",
+          "after": ""
+        },
+        "container_size": {
+          "before": "",
+          "after": "500G"
+        }
+      }
+    },
+    {
+      "raw_product": "DETERGENT POWDER 500G (PRIDE) SOAP",
+      "attribute_changes": {
+        "strength": {
+          "before": "500G",
+          "after": ""
+        },
+        "container_size": {
+          "before": "",
+          "after": "500G"
+        }
+      }
+    }
+  ],
+  "warning_context_correction": "SPECIMEN CUP WITH CALIBRATION now retains physical-product proposal and pending identity with container-marking warning; no service warning.",
+  "corrections_total": 10,
+  "visual_review": "Viewed catalog_refresh/preview.png. Nine masses appear under container_size with blankstrength; specimen retainsphysical_product andneeds_review. Preview is a narrow verification view, not a standalone delivered workbook.",
+  "limitations": [
+    "No supplier/invoice/product-label approval is claimed.",
+    "Current19 per-label coverage and aggregates checked; new full transaction extraction/conservation owned separately by root.",
+    "No cloud publication or model activation performed.",
+    "Old receipts remain bound to their old inputs; this QA is a new receipt."
+  ]
+}

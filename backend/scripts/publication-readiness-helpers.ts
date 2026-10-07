@@ -48,6 +48,50 @@ export function technicalVerdict(checks: {status: string}[]): 'PASS' | 'FAIL' | 
   return 'PASS'
 }
 
+const releaseFields = ['dataset_id', 'policy_version', 'area_mapping_sha256', 'product_master_sha256', 'publication_status'] as const
+
+function identityObject(value: unknown): Record<string, unknown> | null {
+  return value !== null && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : null
+}
+
+function deltaVersion(value: unknown, allowSqlString = false): number | null {
+  if (allowSqlString && typeof value === 'string' && /^(0|[1-9][0-9]*)$/.test(value)) value = Number(value)
+  return typeof value === 'number' && Number.isSafeInteger(value) && value >= 0 ? value : null
+}
+
+function compareIdentity(expected: unknown, actual: unknown, fields: readonly string[], allowSqlVersion = false): string[] {
+  const captured = identityObject(expected)
+  const published = identityObject(actual)
+  if (!captured) return ['Captured fact identity is missing']
+  if (!published) return ['Published release identity is missing']
+  const errors: string[] = []
+  for (const field of fields) {
+    const expectedValue = captured[field]
+    const actualValue = published[field]
+    if (typeof expectedValue !== 'string' || !expectedValue.trim()) errors.push(`Captured fact ${field} is missing`)
+    else if (typeof actualValue !== 'string' || !actualValue.trim()) errors.push(`Published ${field} is missing`)
+    else if (actualValue !== expectedValue) errors.push(`${field} differs from captured fact`)
+  }
+  const expectedVersion = deltaVersion(captured.fact_delta_version)
+  const actualVersion = deltaVersion(published.fact_delta_version, allowSqlVersion)
+  if (expectedVersion === null) errors.push('Captured fact_delta_version is invalid or missing')
+  if (actualVersion === null) errors.push('Published fact_delta_version is invalid or missing')
+  else if (expectedVersion !== null && actualVersion !== expectedVersion) errors.push('fact_delta_version differs from captured fact')
+  return errors
+}
+
+/** Financial equality cannot substitute for the exact captured descriptive release. */
+export function checkReleaseIdentity(expected: unknown, actual: unknown): string[] {
+  return compareIdentity(expected, actual, releaseFields)
+}
+
+/** STL records carry their own candidate status, but must retain the captured fact's source identity. */
+export function checkStlIdentity(expected: unknown, rows: unknown): string[] {
+  if (!Array.isArray(rows) || !rows.length) return ['No published STL rows']
+  const fields = releaseFields.filter(field => field !== 'publication_status')
+  return rows.flatMap((row, index) => compareIdentity(expected, row, fields, true).map(error => `STL row ${index + 1}: ${error}`))
+}
+
 export function checkAdjustedSources(manifest: Row[], known: {filename: string; sha256: string; policy: string}[]): string[] {
   const errors: string[] = []
   for (const expected of known) {

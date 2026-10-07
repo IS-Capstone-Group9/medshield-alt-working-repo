@@ -1,5 +1,38 @@
 # Analytics
 
+## Business analytics review — 7 October 2026
+
+The [complete assessment and delivery sequence](../outputs/business_analytics_review_20261007/REVIEW.md)
+separates descriptive finance, product evidence, model evaluation, external
+context and operational planning. Fresh direct gateway/warehouse checks validate
+fact 19 and its 72 STL months. Local CSV review remains unpublished and all
+category/SKU/unit/forecast approval coverage is zero. A populated proposal file
+does not establish classification accuracy or an eligible quantity series.
+
+Report net sales ₱626,946,741.81, gross margin amount ₱288,487,498.72 and weighted
+margin 60.262177% on the same margin-eligible revenue population ₱478,720,670.03.
+Keep signed negative adjustments separate from positive sales, disclose the
+98/108 observed-month coverage and 47.73% adjusted-source net-sales share, and
+compare YoY on matched observed months. Research-supported proposals cover 31.58%
+of net sales; that is evidence coverage, not approved-category coverage.
+
+For the first complete classification-plus-forecasting feature, review a
+documentary-verifiable medical SKU/unit cohort and evaluate classification on a
+separately reviewed, representative held-out set. Evaluate quantity forecasts by
+rolling origin against naive and seasonal-naive baselines at actual supported
+leads. Archived quantity candidates end in December 2023; current 2026 operational
+claims need newer accepted history or explicit lead/recency validation. Company
+PHP forecast errors below do not establish SKU quantity accuracy. Inventory-aware
+orders additionally need stock, on-order, commitments, packs, supplier lead times,
+costs, service and expiry policies.
+
+Planning now ranks only closed Manila-month history and defaults to All. Explicit
+Unknown is the residual buyer category, with Government/Internal/Private selected
+exclusively. Entered scenarios reject missing numbers and duplicate products,
+use exact cents and report unfinished bounded allocations as `not_solved`.
+These fixes improve scenario reliability without granting forecast, inventory or
+procurement approval.
+
 Latest actual evaluation supersedes the initial blocked-training checkpoint:
 all four benchmarks, two ETS and nine Prophet configurations executed against
 user-attested complete 2020–2025 history. Last value remains selected on development

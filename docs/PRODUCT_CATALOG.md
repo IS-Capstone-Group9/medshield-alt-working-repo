@@ -1,6 +1,7 @@
 # Product catalog and resolution contract
 
-Implementation prepared 27 September 2026; no product approvals or Databricks writes.
+Catalog implementation prepared 27 September 2026; local review master populated
+7 October 2026. This master update records no product approvals or Databricks writes.
 The CEO remains the sole business approver. Existing financial and conditional
 annual-reconciliation decisions in DESCRIPTIVE_PUBLICATION_ACCEPTANCE.md stand.
 
@@ -15,9 +16,21 @@ annual-reconciliation decisions in DESCRIPTIVE_PUBLICATION_ACCEPTANCE.md stand.
 
 `databricks/medshield_project/references/product_master_review.csv` is the sole
 authoritative preparation master. The copy in `databricks/medshield_reference_csv/medshield_reference_csv/`
-is a deployment copy, checked byte-for-byte. Both are header-only. Review proposals
-are not master entries. `mapping_status` remains a legacy administrative field and
+is a deployment copy, checked byte-for-byte. Both now contain **4,561 unapproved
+draft rows**, covering the normalized labels in the fresh
+[fact-version-19 label receipt](../outputs/product_master_population_20261007/current_labels.json).
+The drafts reuse documented version-17 category research and literal product
+proposals; this does not provide new supplier verification or approvals. Identity,
+unit and forecast decisions remain pending, and forecast eligibility is false.
+See the [practical review guide](PRODUCT_MASTER_REVIEW_GUIDE.md) before editing or
+uploading the master. `mapping_status` remains a legacy administrative field and
 cannot confer category, identity, unit or forecast approval.
+
+The populated master is local preparation, not the deployed warehouse catalog.
+Fact version 19 still records the earlier header-only master checksum. A local
+master-checksum mismatch in publication-readiness is expected until a newly
+prepared catalog publication deploys these exact bytes and passes fresh checks.
+Keep the existing receipts unchanged; they describe their original input versions.
 
 The separate `transaction_evidence_review.csv` is keyed by existing source-record
 ID and source-file SHA-256. A verification requires explicit identity-and-quantity
@@ -32,8 +45,18 @@ The [product identity and pricing review rules](PRODUCT_REVIEW_RULES.md) refine
 local literal proposals and scan all version-17 transactions. Price and customer
 negotiation remain transaction attributes. Package/count/strength/model differences
 remain identity boundaries, and title clues cannot supply an approval. Local review
-uses `product_review_v2_literal_pricing`; deployed Gold resolution remains
+uses `product_review_v3_context_literal_pricing`; deployed Gold resolution remains
 `catalog_v1_independent_evidence`. Preparation output never supplies dashboard data.
+
+The 7 October [business analytics review](../outputs/business_analytics_review_20261007/REVIEW.md)
+checks all 4,561 drafts and corrects nine food/cleaning net-mass clues plus one
+specimen-cup marking inference. Nonmedical gram weights belong to proposed
+container/net-mass context rather than pharmaceutical strength. Category context
+helps literal extraction but supplies no approval. The current saved master is
+4,746,906 bytes, SHA-256
+`21ba704cb2fb3b39dab214f5e6ac7d3689b17967946889b3f838eb353f1f183c`.
+Both copies match; historical research evidence and every business decision remain
+unchanged. See the [final independent CSV checks](../outputs/business_analytics_review_20261007/product_final_qa.md).
 
 1. Exact normalized reviewed alias is the first matching route. Existing data has
    no populated verified source identifier. Case/spacing normalization is automatic.
@@ -54,9 +77,13 @@ uses `product_review_v2_literal_pricing`; deployed Gold resolution remains
 
 Gold catalog policy is `catalog_v1_independent_evidence`; Gold transformation is
 `sales_restart_gold_v7_independent_catalog`. Resolution happens after unchanged
-Silver reconciliation. The catalog-only migration compares every source record,
-financial value and financial eligibility flag with fact version 16 before writing.
-The canonical reporting dimension preserves original aliases and raw product keys.
+Silver reconciliation. The checked-in catalog migration and package still bind
+fact version 16. Before the next publication, prepare the complete migration and
+validation package against the captured current predecessor, **fact version 19**,
+with fresh source-record, financial-value and eligibility conservation evidence.
+Do not run the old version-16 migration unchanged or remove its preservation
+assertions. The canonical reporting dimension preserves original aliases and
+raw product keys.
 
 Approved medical demand additionally requires physical item kind, verified identity,
 separately approved forecast eligibility and observed/independently verified detail.
@@ -101,12 +128,17 @@ canonical IDs and duplicate flags and produces unapproved review rows.
 ## Evidence and remaining decisions
 
 The [3 October complete version-17 product/pricing scan](../outputs/product_sales_rules/2026-10-02T21-00-51-469Z/sealed-review/README.md)
-is the latest rule-preparation evidence: 37,728 records, 4,561 current groups and
+remains the product/pricing rule-preparation evidence: 37,728 records, 4,561 groups and
 4,985 original titles. The improved parser and price review preserve every extracted
 source field and reconcile warehouse months and annual financial totals. There are
 1,609 groups with multiple recorded positive original-source CP values and zero
 validated unit-price comparison records. Pricing causes remain unknown and all
 product approvals remain pending. Earlier receipts below remain historical evidence.
+
+The [7 October version-19 label extraction](../outputs/product_master_population_20261007/current_labels.json)
+adds current label coverage for populating the review master. It does not replace
+the original version-17 research provenance, establish a new full-transaction
+pricing review, or approve a category, SKU, unit or forecast.
 
 - [Complete local review](../outputs/product_catalog_implementation/2026-09-27T07-51-00-423Z/README.md): 37,728 records, 4,561 labels, 4,985 original titles, 50 formatting families, 442-label priority cohort.
 - [Review queue](../outputs/product_catalog_implementation/2026-09-27T07-51-00-423Z/review.json): candidates, reasons, source-record IDs, positive/net/return amounts and proposed attributes.
@@ -120,7 +152,10 @@ that “monitor” means IT equipment. Supply category, identity, unit, forecast
 transaction evidence separately. Future uploads remain unfinished: DR numbers alone
 do not provide stable line-item identity.
 
-See [operator deployment and rollback](CATALOG_DEPLOYMENT.md).
+See the [review guide](PRODUCT_MASTER_REVIEW_GUIDE.md) and
+[operator deployment and rollback](CATALOG_DEPLOYMENT.md). The deployment document
+describes the historical 16-to-17 migration; its baseline, package and receipts
+must be refreshed before publishing the newly populated master from version 19.
 
 
 Read-only live verification: [version-16 API/catalog receipt](../outputs/catalog_validation/2026-09-27T08-19-08-947Z/evidence.json).

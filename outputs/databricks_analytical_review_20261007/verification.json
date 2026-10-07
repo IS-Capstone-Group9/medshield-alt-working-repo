@@ -1,0 +1,28 @@
+{
+  "checks": {
+    "local_markdown_links": true,
+    "live_version_stable": true,
+    "live_archive_release_identity": true,
+    "live_archive_record_group_counts": true,
+    "live_archive_finances_and_months": true,
+    "live_archive_annual_values": true,
+    "deployment_source_population": true,
+    "2025_candidate_finances_conserved": true,
+    "local_helpers_match_live_identity": true,
+    "eight_local_notebooks_match_sealed_package": true,
+    "stl_matches_fact_identity": true,
+    "workspace_limitation_disclosed": true
+  },
+  "local_notebook_hash_checks": {
+    "databricks/medshield_project/01_sales_bronze.py": true,
+    "databricks/medshield_project/02_sales_silver.py": true,
+    "databricks/medshield_project/03_sales_gold.py": true,
+    "databricks/medshield_project/04_sales_restart_monthly_bridge.py": true,
+    "databricks/medshield_project/05_sales_restart_system_bridge.sql": true,
+    "databricks/medshield_project/06_sales_stl.py": true,
+    "databricks/medshield_project/07_predictive_contracts.sql": true,
+    "databricks/medshield_project/08_predictive_frozen_input.py": true
+  },
+  "status": "PASS",
+  "scope": "Artifact consistency checks; no application tests, notebook reruns or business approvals."
+}

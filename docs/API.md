@@ -7,6 +7,8 @@
 source-adjustment provenance, and proposed buyer/warehouse geography status.
 It does not split Mindoro or manufacture daily observations. Aggregate net revenue
 is conserved; a null amount is not an observed zero.
+The legacy `returns_value` field contains signed eligible negative net-sales
+adjustments. It does not verify that goods were physically returned.
 
 `GET /api/seasonality/stl` requires authentication. It returns version-matched Gold
 STL components and parameters, or HTTP 503 `STL_UNAVAILABLE`. Missing STL does not
@@ -67,9 +69,11 @@ transaction is not proof of zero sales. The summary's `avg_margin` and ledger
 margin-eligible population. Do not recompute these rates from independently
 eligible revenue and profit totals. Rates are percentage points, not fractions.
 
-Product ABC uses the full product revenue population before the top-15 limit,
-with cumulative thresholds 80%/95%. Negative product totals or an unsuitable
-denominator return `Unclassified`; source labels are not verified medical SKUs.
+Product ABC uses the full positive eligible sales population before the top-15
+limit, with cumulative thresholds 80%/95%. A label crossing a threshold stays in
+its starting class; nonpositive contributions or an unsuitable denominator return
+`Unclassified`. Signed negative adjustments remain separate in net revenue;
+source labels are not verified medical SKUs.
 `/api/seasonality` returns observed calendar-month mean revenue with
 `observed_month_count` and `method: observed_calendar_month_average_not_stl`.
 It excludes absent months from the mean and is not STL decomposition.
@@ -115,6 +119,65 @@ Forecast validation publishes transparent seasonal-naive and last-observation ba
 Planning solve uses a Databricks-ranked historical shortlist plus user-entered demand, stock, reserve, pack, cost, supplier, budget, and horizon assumptions. The result is a scenario and cannot execute procurement.
 
 `POST /api/sales/upload` returns `409 DATABRICKS_INGESTION_REQUIRED`. Sales files must enter through the Databricks pipeline.
+
+### Planning contract (7 October 2026)
+
+`GET /api/sales/planning-shortlist` defaults an omitted or blank scalar `sector`
+to `All` and `territory` to `all`. `All` applies no buyer-cluster restriction;
+explicit `Unknown` selects only rows left unclassified by the buyer rules.
+Recognized sector values are case-sensitive: `All`, `Government`, `Private`,
+`Internal`, and `Unknown`.
+
+Sector selection uses one exclusive ordered `CASE`: Government first, Internal
+second, Private third, and Unknown otherwise. A government or internal label
+cannot also enter Private merely because its proposed area type is a territory.
+These are proposed buyer mappings; selecting a territory does not approve its
+geographic identity or external-source joins.
+
+Ranking excludes the current open month and every future month in Asia/Manila.
+The evidence window covers 12 calendar months ending at the latest observed
+closed month in the selected scope. Missing months remain missing. The shortlist
+contains the highest-revenue 20% of positive-net-revenue source-label groups,
+rounded up and capped at five, with product text breaking revenue ties.
+`period_start`, `period_end`, `months_stale`, observed-month counts, and the
+shortlist share describe historical evidence. Reported quantities are reference
+values and do not establish approved SKU units or forecast demand.
+
+`POST /api/sales/planning-solve` reloads the shortlist for the submitted `scope`.
+The body must contain `acknowledged: true`, the matching shortlist `checksum`,
+and one item for every current shortlisted product exactly once. Item order may
+vary; duplicate, missing, or additional products fail validation. Each item uses
+its exact returned `product` text. An empty shortlist cannot produce a scenario.
+
+Required numeric inputs accept finite numbers or nonblank numeric strings within
+the bounds below. Missing, null, blank, Boolean, array, and object values are
+rejected rather than converted to zero. Explicit zero is permitted where shown.
+
+| Input | Accepted range or values |
+|---|---|
+| `horizon` | Integer `1`, `3`, `6`, or `12`; describes the entered demand assumption |
+| `budget` | PHP 0–1,000,000,000, exactly representable in cents |
+| `minimum_pct` | 0–100 percent |
+| Item `demand` | Integer 1–1,000,000,000 |
+| Item `stock` | Integer 0–1,000,000,000 |
+| Item `reserve` | Integer 0 through that item's stock |
+| Item `pack` | Integer 1–1,000,000,000 units per assumed order pack |
+| Item `pack_cost` | PHP 0.01–1,000,000,000 per assumed pack, exactly representable in cents |
+| Item `max_packs` | Integer 0–100,000 |
+
+Budget and pack costs use integer-cent arithmetic. Fractional cents, including
+`1e-3`, fail validation; they are not rounded into a different assumption.
+Invalid inputs return HTTP 400. Valid scenarios return `scenario_allocation`,
+`infeasible`, or `not_solved`. An unmet minimum budget/supplier constraint returns
+`infeasible` with no allocation rows. If affordable unmet demand remains after
+100,000 additional pack-allocation steps, `not_solved` returns the computation
+limit conflict and no rows; it does not expose a partial allocation as completed.
+
+The allocator greedily balances fulfillment under entered constraints. Its
+result is for human review and carries no proof of global optimality, verified
+inventory, supplier pricing, approved forecast quantities, or purchasing approval.
+This scenario horizon is separate from both the existing company PHP forecast
+display and the proposed SKU quantity forecast contract below.
 
 ## External observations
 
@@ -193,6 +256,15 @@ Asia/Manila month. Response states distinguish published, unpublished, empty and
 unsupported; storage/consistency failures return 503. No local fallback or process
 cache is used. One manifest supplies actuals, backtests, future points and metrics.
 True lead remains distinct from display length. See [operation and release gates](PREDICTIVE_OPERATIONS.md).
+
+The [SKU quantity target contract](AI_PRODUCT_CLASSIFICATION_IMPLEMENTATION_PLAN.md)
+is separate preparation. Its proposed versioned channel offers 1/3/6 displayed
+months starting with the month after the selected Manila planning month, with
+verified SKU/unit scope and explicit target periods. It is not implemented by
+the existing company PHP endpoints. Actual model lead is the calendar distance
+from the accepted model origin to each target month; a short display window
+does not make a stale origin recent. Unsupported leads return unavailable
+quantities rather than an unrelated PHP forecast or fabricated units.
 
 ## Sales diagnostic drill-down (5 October 2026)
 

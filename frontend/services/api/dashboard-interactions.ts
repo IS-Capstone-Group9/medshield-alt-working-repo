@@ -111,7 +111,7 @@ export async function refreshPlanning(): Promise<boolean> {
   const apply = (window as any).setPlanningData
   if (typeof apply !== 'function') return false
   const value = (id: string) => (document.getElementById(id) as HTMLSelectElement)?.value
-  const params = new URLSearchParams({ sector: value('planSector') || 'Unknown', territory: value('planTerritory') || 'all' })
+  const params = new URLSearchParams({ sector: value('planSector') || 'All', territory: value('planTerritory') || 'all' })
   apply(null, 'Loading source-ranked products…')
   try {
     const data = await getJson(`/api/sales/planning-shortlist?${params}`)

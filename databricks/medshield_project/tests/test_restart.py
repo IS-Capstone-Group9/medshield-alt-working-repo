@@ -348,11 +348,14 @@ class GoldClassificationTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.gold["reviewed_mapping"]([row, dict(row, raw_area="ALIAS", province="Batangas")], "raw_area", "area")
 
-    def test_shipped_master_template_and_current_area_mapping_load(self):
+    def test_shipped_product_review_and_current_area_mapping_load(self):
         read = self.gold["read_mapping"]
         rows, checksum = read(ROOT / "references/product_master_review.csv", {
             "raw_product", "canonical_sku", "product_category", "unit_of_measure", "forecast_eligible", "mapping_status"})
-        self.assertEqual(rows, [])
+        catalog = pure_notebook_namespace("product_catalog.py")
+        self.assertTrue(rows)
+        self.assertTrue(all(set(row) == set(catalog["FIELDS"]) for row in rows))
+        self.assertEqual(len(catalog["validate_master"](rows)), len(rows))
         self.assertEqual(len(checksum), 64)
         rows, checksum = read(ROOT.parents[1] / "datasources/templates/area_classification_mapping.csv", {
             "raw_area", "area_type", "territory", "weather_eligible", "forecast_eligible", "mapping_status"})
