@@ -18,8 +18,10 @@ const DASHBOARD_PAGE_META = {
   revenue: ['Sales Diagnostics', 'Revenue, growth, and margin trends'],
   products: ['Product Prioritization', 'ABC/Pareto product view'],
   territory: ['Area Prioritization', 'Geographic performance, concentration, and evidence quality'],
+  diagnostic: ['Diagnostic Analytics', 'Price-Volume-Mix decomposition, 2024–2025 surge audit, and causality separation'],
   forecast: ['Forecast Modeling', 'Actual sales, baseline forecasts and historical validation'],
   inventory: ['Prescriptive Planning', 'Priority products, constrained allocation and scenario review'],
+  scenarios: ['Scenario Comparison', 'Multi-scenario inventory risk, fulfillment, budget, and shortage stress testing'],
   data: ['Databricks Source', 'Live Gold provenance and ingestion policy'],
   'sales-data': ['View Sales Data', 'Inspect, filter, validate, and reconcile Databricks Gold sales records'],
   'weather-validation': [

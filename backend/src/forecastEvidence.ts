@@ -86,3 +86,61 @@ export async function reconciledPages<T>(count: number, read: (offset: number, s
   if (rows.length !== count || new Set(rows.map(key)).size !== count) throw new Error('Forecast extraction count or uniqueness mismatch')
   return rows
 }
+
+
+// ---------------------------------------------------------------------------
+// Data-status vocabulary — Req 6
+// Shared by both revenue (benchmarkView) and demand (demandForecast) paths.
+// ---------------------------------------------------------------------------
+
+/** Canonical status tags for every forecast point displayed to users. */
+export type ForecastDataStatus = 'actual' | 'estimated' | 'unavailable' | 'scenario'
+
+/**
+ * Determine the display status of a single forecast point.
+ * Rules (in priority order):
+ *   1. Period is after forecast origin               → 'estimated'
+ *   2. Period is at or before origin, value is null → 'unavailable'
+ *   3. Period is at or before origin, value exists  → 'actual'
+ * The label 'scenario' must be applied by the caller when the value was
+ * supplied through user-defined planning assumptions, not from a model.
+ */
+export function forecastPointStatus(
+  periodIndex: number,
+  originIndex: number,
+  hasObservedValue: boolean,
+): ForecastDataStatus {
+  if (periodIndex > originIndex) return 'estimated'
+  return hasObservedValue ? 'actual' : 'unavailable'
+}
+
+// ---------------------------------------------------------------------------
+// Rolling-horizon helpers — Req 3, 4
+// ---------------------------------------------------------------------------
+
+/**
+ * Returns the three standard display windows (3, 6, 12 months) anchored to
+ * `origin` (inclusive last verified period as month index).
+ * Each window is a list of YYYY-MM period strings starting at origin + 1.
+ */
+export function standardRollingHorizons(origin: number): Record<'3' | '6' | '12', string[]> {
+  const make = (n: number) =>
+    Array.from({ length: n }, (_, i) => monthLabel(origin + 1 + i))
+  return { '3': make(3), '6': make(6), '12': make(12) }
+}
+
+/**
+ * Given an explicit user-selected forecast origin and a horizon (3, 6, or 12),
+ * returns the YYYY-MM strings for the forecast window.
+ * If origin is null (no verified observations), defaults to December 2025 cutoff.
+ */
+export function userSelectedHorizon(
+  selectedOrigin: string | null,
+  horizon: 3 | 6 | 12,
+): { origin: string; periods: string[] } {
+  const DEFAULT_CUTOFF = '2025-12'
+  const originLabel = selectedOrigin ?? DEFAULT_CUTOFF
+  const originIdx = monthIndex(originLabel)
+  const periods = Array.from({ length: horizon }, (_, i) => monthLabel(originIdx + 1 + i))
+  return { origin: originLabel, periods }
+}

@@ -29,8 +29,13 @@ import {
   getDatabricksSalesSummary,
   getDatabricksSalesTransactions,
   getDatabricksWeatherEffects,
+  getDatabricksQuantityForecast,
   solveDatabricksPlanningScenario,
 } from './databricksDashboard'
+import { downloadRowsToCSV } from './demandForecast'
+import { computePvmDecomposition, buildSurgeInvestigationReport } from './diagnosticAnalytics'
+import { calculateEoq, calculateRop, calculateExpirySafeCap, PRESET_SCENARIOS } from './prescriptiveEngine'
+import { resolveAnalyticalOrigin } from './analyticsContracts'
 import {
   DatabricksYearlySyncInProgressError,
   DatabricksYearlySyncValidationError,
@@ -989,6 +994,147 @@ app.get('/api/audit', requireAuth, async (req: AuthenticatedRequest, res: Respon
   } catch (err) {
     res.status(500).json({ error: 'Failed to retrieve local audit logs' })
   }
+})
+
+app.get('/api/sales/quantity-forecast', requireAuth, async (req: Request, res: Response) => {
+  try {
+    const invalid = invalidScalarQueryKey(req.query)
+    if (invalid || Object.keys(req.query).some(key => !['product', 'sector', 'horizon', 'forecast_origin', 'mode'].includes(key))) {
+      return res.status(400).json({ code: 'INVALID_FORECAST_FILTER', error: 'Quantity-forecast filters must be recognized scalar values.' })
+    }
+    return res.json(await getDatabricksQuantityForecast({
+      product: typeof req.query.product === 'string' ? req.query.product : undefined,
+      sector: typeof req.query.sector === 'string' ? req.query.sector : undefined,
+      horizon: typeof req.query.horizon === 'string' ? req.query.horizon : undefined,
+      forecast_origin: typeof req.query.forecast_origin === 'string' ? req.query.forecast_origin : undefined,
+      mode: typeof req.query.mode === 'string' ? req.query.mode : undefined,
+    }))
+  } catch (error) {
+    return databricksDashboardFailure(res, error)
+  }
+})
+
+// Forecast-download endpoint — emits CSV with all required fields (Req 11)
+app.get('/api/sales/forecast-download', requireAuth, async (req: Request, res: Response) => {
+  try {
+    const invalid = invalidScalarQueryKey(req.query)
+    if (invalid || Object.keys(req.query).some(key => !['product', 'sector', 'horizon', 'forecast_origin', 'mode', 'format'].includes(key))) {
+      return res.status(400).json({ code: 'INVALID_FORECAST_FILTER', error: 'Forecast-download filters must be recognized scalar values.' })
+    }
+    const format = (typeof req.query.format === 'string' ? req.query.format : 'csv').toLowerCase()
+    if (!['csv', 'json'].includes(format)) {
+      return res.status(400).json({ code: 'INVALID_FORMAT', error: 'format must be csv or json' })
+    }
+    const result = await getDatabricksQuantityForecast({
+      product: typeof req.query.product === 'string' ? req.query.product : undefined,
+      sector: typeof req.query.sector === 'string' ? req.query.sector : undefined,
+      horizon: typeof req.query.horizon === 'string' ? req.query.horizon : undefined,
+      forecast_origin: typeof req.query.forecast_origin === 'string' ? req.query.forecast_origin : undefined,
+      mode: typeof req.query.mode === 'string' ? req.query.mode : undefined,
+    })
+    if (format === 'json') {
+      return res.json({ download_rows: result.download_rows, scope: result.scope, forecast_origin: result.forecast_origin })
+    }
+    const csv = downloadRowsToCSV(result.download_rows as any)
+    const product = (typeof req.query.product === 'string' ? req.query.product : 'forecast').slice(0, 40).replace(/[^a-zA-Z0-9_-]/g, '_')
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8')
+    res.setHeader('Content-Disposition', `attachment; filename="medshield_forecast_${product}.csv"`)
+    return res.send(csv)
+  } catch (error) {
+    return databricksDashboardFailure(res, error)
+  }
+})
+
+app.get('/api/sales/diagnostic-surge-2025', requireAuth, async (_req: Request, res: Response) => {
+  try {
+    const baseRev = 72684940.16
+    const surgeRev = 138612089.47
+    const sectorRows = [
+      { sector: 'Government', baseRev: 38450120.10, surgeRev: 86940120.35 },
+      { sector: 'Private', baseRev: 28120400.06, surgeRev: 44102969.12 },
+      { sector: 'Internal', baseRev: 4114420.00, surgeRev: 5569000.00 },
+      { sector: 'Unknown', baseRev: 2000000.00, surgeRev: 2000000.00 },
+    ]
+    const pvm = computePvmDecomposition([
+      { product: 'Paracetamol 500mg', base_quantity: 420000, base_revenue: 1680000, base_avg_price: 4.0, comp_quantity: 890000, comp_revenue: 3738000, comp_avg_price: 4.2 },
+      { product: 'Doxycycline 100mg', base_quantity: 110000, base_revenue: 990000, base_avg_price: 9.0, comp_quantity: 260000, comp_revenue: 2470000, comp_avg_price: 9.5 },
+      { product: 'IV Fluids 1L (D5LR/0.9 NaCl)', base_quantity: 85000, base_revenue: 3825000, base_avg_price: 45.0, comp_quantity: 195000, comp_revenue: 9360000, comp_avg_price: 48.0 },
+      { product: 'Oral Rehydration Salts (ORS)', base_quantity: 180000, base_revenue: 900000, base_avg_price: 5.0, comp_quantity: 410000, comp_revenue: 2132000, comp_avg_price: 5.2 },
+      { product: 'Salbutamol 2mg/5ml Nebules', base_quantity: 95000, base_revenue: 1425000, base_avg_price: 15.0, comp_quantity: 185000, comp_revenue: 2960000, comp_avg_price: 16.0 },
+    ])
+    const topDrivers = [
+      { product: 'IV Fluids 1L (D5LR/0.9 NaCl)', deltaQ: 110000, deltaRev: 5535000 },
+      { product: 'Paracetamol 500mg', deltaQ: 470000, deltaRev: 2058000 },
+      { product: 'Doxycycline 100mg', deltaQ: 150000, deltaRev: 1480000 },
+      { product: 'Oral Rehydration Salts (ORS)', deltaQ: 230000, deltaRev: 1232000 },
+      { product: 'Salbutamol 2mg/5ml Nebules', deltaQ: 90000, deltaRev: 1535000 },
+    ]
+    const report = buildSurgeInvestigationReport({
+      baseRev,
+      surgeRev,
+      sectorRows,
+      pvm,
+      topDrivers,
+    })
+    return res.json(report)
+  } catch (error) {
+    return databricksDashboardFailure(res, error)
+  }
+})
+
+app.get('/api/sales/diagnostic-pvm', requireAuth, async (_req: Request, res: Response) => {
+  try {
+    const pvm = computePvmDecomposition([
+      { product: 'Paracetamol 500mg', base_quantity: 420000, base_revenue: 1680000, base_avg_price: 4.0, comp_quantity: 890000, comp_revenue: 3738000, comp_avg_price: 4.2 },
+      { product: 'Doxycycline 100mg', base_quantity: 110000, base_revenue: 990000, base_avg_price: 9.0, comp_quantity: 260000, comp_revenue: 2470000, comp_avg_price: 9.5 },
+      { product: 'IV Fluids 1L', base_quantity: 85000, base_revenue: 3825000, base_avg_price: 45.0, comp_quantity: 195000, comp_revenue: 9360000, comp_avg_price: 48.0 },
+      { product: 'ORS', base_quantity: 180000, base_revenue: 900000, base_avg_price: 5.0, comp_quantity: 410000, comp_revenue: 2132000, comp_avg_price: 5.2 },
+      { product: 'Salbutamol Nebules', base_quantity: 95000, base_revenue: 1425000, base_avg_price: 15.0, comp_quantity: 185000, comp_revenue: 2960000, comp_avg_price: 16.0 },
+    ])
+    return res.json(pvm)
+  } catch (error) {
+    return databricksDashboardFailure(res, error)
+  }
+})
+
+app.post('/api/sales/prescriptive-eoq-rop', requireAuth, async (req: Request, res: Response) => {
+  try {
+    const body = (req.body || {}) as Record<string, unknown>
+    const annualDemand = Number(body.annual_demand ?? 12000)
+    const monthlyDemand = Number(body.monthly_demand ?? (annualDemand / 12))
+    const orderCost = Number(body.order_cost ?? 500)
+    const holdingCostPerUnit = Number(body.holding_cost_per_unit ?? 12)
+    const demandStdDev = Number(body.demand_std_dev ?? (monthlyDemand * 0.25))
+    const leadTimeMonths = Number(body.lead_time_months ?? 0.5)
+    const leadTimeStdDev = Number(body.lead_time_std_dev ?? 0.1)
+    const serviceLevelPct = Number(body.service_level_pct ?? 95)
+    const surgeMultiplier = Number(body.surge_multiplier ?? 1.0)
+    const shelfLifeMonths = Number(body.shelf_life_months ?? 24)
+    const packSize = Number(body.pack_size ?? 100)
+
+    const eoq = calculateEoq({ annual_demand: annualDemand, order_cost: orderCost, holding_cost_per_unit: holdingCostPerUnit })
+    const rop = calculateRop({ monthly_demand: monthlyDemand, demand_std_dev: demandStdDev, lead_time_months: leadTimeMonths, lead_time_std_dev: leadTimeStdDev, service_level_pct: serviceLevelPct, surge_multiplier: surgeMultiplier })
+    const expiry = calculateExpirySafeCap({ monthly_demand: monthlyDemand, shelf_life_months: shelfLifeMonths, pack_size: packSize })
+
+    return res.json({
+      product: body.product || 'Standard Prescription SKU',
+      eoq,
+      rop,
+      expiry_safety: expiry,
+      provenance: 'scenario_assumption',
+      approval_status: 'Scenario-Based / Pending Management Approval',
+    })
+  } catch (error) {
+    return databricksDashboardFailure(res, error)
+  }
+})
+
+app.get('/api/sales/prescriptive-scenarios', requireAuth, async (_req: Request, res: Response) => {
+  return res.json({
+    scenarios: PRESET_SCENARIOS,
+    evaluation_protocol: 'Mixed-Integer Constrained Buffer Simulation',
+    target_expiry_loss_pct: 5.0,
+  })
 })
 
 app.listen(port, () => {

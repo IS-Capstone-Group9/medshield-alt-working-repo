@@ -3,6 +3,8 @@ import { EXTERNAL_REGRESSION_MARKUP } from '../services/api/external-regression-
 import { FORECAST_VALIDATION_MARKUP } from '../services/api/forecast-validation-runtime'
 import { SALES_SECTORS_MARKUP } from '../services/api/sales-sectors-runtime'
 import { SALES_HEATMAP_MARKUP } from '../services/api/sales-heatmap-runtime'
+import { DIAGNOSTIC_MARKUP } from '../services/api/diagnostic-analytics-runtime'
+import { SCENARIO_COMPARISON_MARKUP } from '../services/api/scenario-comparison-runtime'
 // MedShield Design Reference - Extracted from Standalone Application
 // Auto-generated design system reference
 
@@ -332,6 +334,11 @@ export const MEDSHIELD_MARKUP = LEGACY_MEDSHIELD_MARKUP
           <option value="yoy">Y/Y Compare</option>
         </select>
       </span>
+      <span class="viewing-mode-selector" style="display:inline-flex;align-items:center;gap:3px;margin-left:8px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:8px;padding:2px 4px;">
+        <button type="button" class="comp-mode-btn" id="btnModeActual" onclick="setGlobalViewingMode('actual')">Actual Only</button>
+        <button type="button" class="comp-mode-btn" id="btnModeEstimated" onclick="setGlobalViewingMode('estimated')">Estimated Only</button>
+        <button type="button" class="comp-mode-btn active" id="btnModeBoth" onclick="setGlobalViewingMode('both')">Actual + Estimated</button>
+      </span>
     </div>
 
         <!-- Single Year Dropdown -->`,
@@ -347,6 +354,18 @@ export const MEDSHIELD_MARKUP = LEGACY_MEDSHIELD_MARKUP
   .replace('<!-- FORECAST_VALIDATION -->', FORECAST_VALIDATION_MARKUP)
   .replace('<!-- EXTERNAL_REGRESSION -->', EXTERNAL_REGRESSION_MARKUP)
   .replace('<!-- PLANNING_SCENARIO -->', PLANNING_MARKUP)
+  .replace(
+    '<div class="page" id="page-data">',
+    `<div class="page" id="page-diagnostic">${DIAGNOSTIC_MARKUP}</div>\n<div class="page" id="page-scenarios">${SCENARIO_COMPARISON_MARKUP}</div>\n<div class="page" id="page-data">`
+  )
+  .replace(
+    '<span class="nav-label">Area Prioritization</span>\n    </div>',
+    `<span class="nav-label">Area Prioritization</span>\n    </div>\n    <div class="nav-item" onclick="showPage('diagnostic', this)" role="button" tabindex="0">\n      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>\n      <span class="nav-label">Diagnostic Analytics</span>\n    </div>`
+  )
+  .replace(
+    '<span class="nav-label">Prescriptive Planning</span>\n    </div>',
+    `<span class="nav-label">Prescriptive Planning</span>\n    </div>\n    <div class="nav-item" onclick="showPage('scenarios', this)" role="button" tabindex="0">\n      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>\n      <span class="nav-label">Scenario Comparison</span>\n    </div>`
+  )
   .replace(
     /<div class="sidebar-user">[\s\S]*?(?=\s*<div class="sidebar-footer-actions)/,
     `<div class="sidebar-user">

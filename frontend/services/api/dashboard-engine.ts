@@ -12,6 +12,8 @@ import {
   DESCRIPTIVE_PERIOD_SCRIPT,
   patchDescriptivePeriodFilters,
 } from './descriptive-period-runtime'
+import { DIAGNOSTIC_SCRIPT } from './diagnostic-analytics-runtime'
+import { SCENARIO_COMPARISON_SCRIPT } from './scenario-comparison-runtime'
 
 export type ListenerRecord = {
   target: EventTarget
@@ -89,6 +91,12 @@ const DASHBOARD_GLOBAL_HANDLERS = [
   'buildShowcaseCharts',
   'renderShowcaseDOMVisuals',
   'renderProductPrioritizationTimeline',
+  'exportDiagnosticCSV',
+  'investigateSkuInForecast',
+  'exportScenarioComparisonCSV',
+  'setGlobalViewingMode',
+  'navigateToForecast',
+  'navigateToPrescriptive',
 ] as const
 
 export function getExecutableDashboardScript(): string {
@@ -121,7 +129,10 @@ const PAGE_META`,
       /const MOCK_TOP_PRODUCTS = \[[\s\S]*?\n\];\nconst MOCK_MONTHLY/,
       'const MOCK_TOP_PRODUCTS = [];\nconst MOCK_MONTHLY',
     )
-    .replace("data: ['Data Upload', 'CSV and JSON sources for dashboard updates']", "data: ['Databricks Source', 'Live Gold provenance and ingestion policy']")
+    .replace(
+      "data: ['Data Upload', 'CSV and JSON sources for dashboard updates']",
+      `diagnostic: ['Diagnostic Analytics', 'Price-Volume-Mix decomposition, 2024–2025 surge audit, and causality separation'],\n  scenarios: ['Scenario Comparison', 'Multi-scenario inventory risk, fulfillment, budget, and shortage stress testing'],\n  data: ['Databricks Source', 'Live Gold provenance and ingestion policy']`
+    )
     .replace(/window\.([a-zA-Z0-9_]+)\s*=\s*\1;?/g, "if (typeof $1 !== 'undefined') window.$1 = $1;")
     .replace("window.addEventListener('DOMContentLoaded', async () => {", `(async () => {\n${globalHandlerBridge}\n`)
     .replaceAll("'#335F78'", "dashboardThemeColor('--chart-label', '#335F78')")
@@ -396,6 +407,8 @@ ${SALES_SECTORS_SCRIPT}
 ${FORECAST_VALIDATION_SCRIPT}
 ${EXTERNAL_REGRESSION_SCRIPT}
 ${PLANNING_SCRIPT}
+${DIAGNOSTIC_SCRIPT}
+${SCENARIO_COMPARISON_SCRIPT}
 ${patchedScript}
 \n${globalHandlerBridge}
 `

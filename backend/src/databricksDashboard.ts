@@ -1,4 +1,5 @@
-import { benchmarkNames, benchmarkView, evaluationProtocol, manilaMonth, reconciledPages } from './forecastEvidence'
+import { benchmarkNames, benchmarkView, evaluationProtocol, manilaMonth, reconciledPages, standardRollingHorizons, forecastPointStatus } from './forecastEvidence'
+import { demandForecastView, buildDownloadRows, hasSufficientHistory, assertNoLeakage, ForecastDownloadRow } from './demandForecast'
 import { catalogProjection } from './catalogContract'
 import { parseMonthlyYear } from './monthlyQuery'
 import { createHash } from 'node:crypto'
@@ -1180,4 +1181,176 @@ export async function getDatabricksStl() {
   const components = rows.map(row => ({ ...row, observed: nullableNumber(row.observed), trend: nullableNumber(row.trend), seasonal: nullableNumber(row.seasonal), residual: nullableNumber(row.residual) }))
   if (components.some(row => [row.observed, row.trend, row.seasonal, row.residual].some(v => v == null) || Math.abs(row.observed! - row.trend! - row.seasonal! - row.residual!) > 0.000001)) throw new DatabricksSourceUnavailableError('Invalid STL components')
   return { method: 'STL', metric: 'Eligible net sales (PHP)', release, parameters: JSON.parse(rows[0].parameters_json!), rows: components, source: databricksSource(rows) }
+}
+
+// ---------------------------------------------------------------------------
+// Quantity-demand forecasting — Mode A (source-label exploratory)
+// ---------------------------------------------------------------------------
+
+export interface QuantityForecastFilters {
+  product?: string
+  sector?: string
+  horizon?: string         // '3' | '6' | '12'
+  forecast_origin?: string // explicit YYYY-MM origin; defaults to last verified period
+  mode?: string            // 'source_label' (only supported mode until catalog approved)
+}
+
+/**
+ * Returns quantity-demand benchmark forecasts for a single source-label product.
+ *
+ * Contracts:
+ * - Training data ends at origin; future periods are labeled 'estimated'.
+ * - Historical nulls are labeled 'unavailable'.
+ * - No sum across incompatible UOMs.
+ * - Never emits an operationally approved recommendation.
+ *
+ * This is exploratory and requires an approved canonical SKU scope before
+ * promotion to a validated predictive release.
+ */
+export async function getDatabricksQuantityForecast(filters: QuantityForecastFilters) {
+  const product = filters.product?.trim() || ''
+  const sector = filters.sector?.trim() || 'All'
+  const horizonRaw = filters.horizon?.trim() || '12'
+  const mode = filters.mode?.trim() || 'source_label'
+  const explicitOrigin = filters.forecast_origin?.trim() || null
+
+  if (!['3', '6', '12'].includes(horizonRaw)) throw new DatabricksDashboardInputError('horizon must be 3, 6, or 12')
+  if (mode !== 'source_label') throw new DatabricksDashboardInputError('Only source_label mode is supported until an approved canonical SKU catalog is released')
+  if (!product) throw new DatabricksDashboardInputError('A product (source label) is required for quantity-demand forecasting')
+  validateSector(sector)
+
+  const horizon = Number(horizonRaw) as 3 | 6 | 12
+  const sectorClause = sectorWhereClause(sector)
+  const productClause = `AND normalized_product = ${sqlString(product, 'product')}`
+  const where = `${OBSERVED_FACT} ${sectorClause} ${productClause}`
+
+  // Retrieve monthly quantity spine — including zero-activity months from the fact spine
+  const counts = await query(`SELECT COUNT(DISTINCT month_start) AS months FROM ${FACT} WHERE ${where}`, 1)
+  const count = numberValue(counts[0]?.months, -1)
+
+  if (count < 1) {
+    return {
+      schema_version: 'quantity-forecast.v1',
+      status: 'empty',
+      reason: 'No quantity observations found for the selected product and sector.',
+      mode: 'source_label',
+      scope: { product, sector, horizon },
+      forecasts: {},
+      rolling_horizons: null,
+      download_rows: [],
+      limitations: ['No observations available; cannot generate forecast.'],
+    }
+  }
+
+  const rows = await reconciledPages(
+    count,
+    (offset, size) => query(
+      `SELECT DATE_FORMAT(month_start, 'yyyy-MM') AS period,
+        SUM(CASE WHEN is_quantity_observation_eligible THEN quantity END) AS actual,
+        COUNT(*) AS source_rows,
+        SUM(CASE WHEN is_quantity_observation_eligible AND quantity IS NOT NULL THEN 1 ELSE 0 END) AS eligible_rows,
+        MAX(unit_of_measure) AS unit_of_measure
+        FROM ${FACT} WHERE ${where}
+        GROUP BY month_start ORDER BY month_start LIMIT ${size} OFFSET ${offset}`,
+      size,
+    ),
+    row => String(row.period),
+  )
+
+  // Build the series map — null for missing/ineligible, number for observations.
+  // Do NOT convert nulls to zeros: absence of observation ≠ zero demand.
+  const seriesMap = new Map<number, number | null>()
+  for (const row of rows) {
+    const idx = monthNumber(String(row.period))
+    seriesMap.set(idx, nullableNumber(row.actual))
+  }
+
+  // Determine forecast origin: either user-specified or last observed period
+  const closed = currentClosedMonth()
+  const verifiedObservations = [...seriesMap.entries()]
+    .filter(([idx, v]) => idx <= closed && v !== null)
+    .map(([idx]) => idx)
+  const lastObservedIdx = verifiedObservations.length ? Math.max(...verifiedObservations) : null
+  const originPeriod = explicitOrigin ?? (lastObservedIdx !== null ? periodName(lastObservedIdx) : '2025-12')
+  const originIdx = monthNumber(originPeriod)
+
+  // Leakage guard: verify no future values leaked into the series
+  assertNoLeakage(seriesMap, originIdx)
+
+  // Build quantity forecast
+  const unit = String(rows.find(r => r.unit_of_measure)?.unit_of_measure ?? 'source units')
+  const seriesId = `source_label:${product.slice(0, 60)}:quantity`
+  const hasSufficient = hasSufficientHistory(seriesMap, horizon)
+  const displayStart = originIdx + 1
+
+  const view = demandForecastView(seriesMap, originIdx, horizon, seriesId, product, unit, displayStart)
+
+  // Rolling horizon specs for 3/6/12 from the same origin
+  const rollingHorizons = standardRollingHorizons(originIdx)
+
+  // Build historical actuals series with data_status labels (Req 6)
+  const historicalActuals = [...seriesMap.entries()]
+    .sort(([a], [b]) => a - b)
+    .map(([idx, val]) => ({
+      period: periodName(idx),
+      value: val,
+      data_status: forecastPointStatus(idx, originIdx, val !== null),
+    }))
+
+  // Forecast points for the requested horizon with explicit 'estimated' labels
+  const forecastPoints = (view.models.last_value?.forecast ?? []).map(p => ({
+    period: p.period,
+    data_status: 'estimated' as const,  // always estimated — Req 2
+  }))
+
+  // Download rows
+  const generatedAt = new Date().toISOString()
+  const downloadRows: ForecastDownloadRow[] = buildDownloadRows(view, horizon, generatedAt)
+
+  const limitations = [
+    'Source product labels are not verified canonical SKUs. Forecasts are exploratory only.',
+    'Units are drawn from source records and may be heterogeneous across transactions.',
+    'Observed zero quantities are distinct from periods with no source transactions.',
+    'No approved predictive release exists for this scope; forecasts are not operationally approved.',
+    mode === 'source_label' ? 'Source-label mode: canonical medicine identity has not been confirmed.' : '',
+    !hasSufficient ? `Insufficient history for reliable backtesting (found fewer than ${Math.max(6, 2 * horizon)} non-null observations).` : '',
+  ].filter(Boolean)
+
+  return {
+    schema_version: 'quantity-forecast.v1',
+    status: hasSufficient ? 'exploratory' : 'insufficient_history',
+    mode: 'source_label',
+    scope: { product, sector, horizon, unit, series_id: seriesId },
+    forecast_origin: originPeriod,
+    display_start: periodName(displayStart),
+    publication_status: 'unpublished',
+    reporting_coverage_status: 'unverified',
+    evaluation_protocol: view.evaluation_protocol,
+    pattern: view.pattern,
+    models: Object.fromEntries(
+      Object.entries(view.models).map(([k, m]) => [k, {
+        forecast: m.forecast.map(p => ({
+          period: p.period,
+          lead: p.lead,
+          predicted_value: p.prediction,
+          data_status: 'estimated',    // hard label — Req 2
+          missing_reason: p.missing_reason,
+        })),
+        backtest_metrics: m.metrics,
+        comparison_metrics: m.comparison_metrics,
+        missing_prediction_count: m.missing_prediction_count,
+      }]),
+    ),
+    rolling_horizons: rollingHorizons,
+    historical_actuals: historicalActuals,
+    forecast_points: forecastPoints,
+    download_rows: downloadRows,
+    limitations,
+    source: databricksSource(rows, {
+      input_rows: rows.length,
+      included_rows: rows.length,
+      metric: 'Eligible recorded quantities (source label mode)',
+      mode: 'source_label_exploratory',
+    }),
+  }
 }
