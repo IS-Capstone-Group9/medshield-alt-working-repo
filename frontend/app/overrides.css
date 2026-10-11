@@ -2013,3 +2013,78 @@ body.nav-collapsed .sidebar-account-content {
   body .chart-card { min-width: 0 !important; }
   body .data-freshness-bar { flex-wrap: wrap !important; overflow-wrap: anywhere; }
 }
+
+/* Sidebar and Navigation Item Heights & Scrolling Guarantee */
+.sidebar {
+  height: 100vh !important;
+  max-height: 100vh !important;
+  overflow: hidden !important;
+}
+
+.nav {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  overflow-y: auto !important;
+  padding: 8px 10px !important;
+}
+
+.nav::-webkit-scrollbar {
+  width: 4px;
+}
+
+.nav::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+}
+
+.nav-section {
+  padding: 10px 10px 4px !important;
+  font-size: 8.5px !important;
+  letter-spacing: 0.12em !important;
+}
+
+.nav-item {
+  padding: 7px 10px !important;
+  font-size: 12px !important;
+  margin-bottom: 2px !important;
+}
+
+.sidebar-footer {
+  flex-shrink: 0 !important;
+  padding: 10px 14px 14px !important;
+}
+
+.sidebar-footer-actions {
+  margin-top: 8px !important;
+}
+
+.sidebar-footer-meta {
+  margin-top: 6px !important;
+}
+
+/* Diagnostic Analytics Responsiveness & Table Containment */
+[data-diagnostic-page] {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+[data-diagnostic-page] .table-responsive-wrap {
+  width: 100% !important;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+[data-diagnostic-page] .product-table th,
+[data-diagnostic-page] .product-table td {
+  padding: 8px 10px !important;
+}
+
+.viewing-mode-selector {
+  flex-shrink: 0 !important;
+}
+
+.viewing-mode-selector .comp-mode-btn {
+  white-space: nowrap !important;
+  font-size: 11px !important;
+  padding: 3px 8px !important;
+}

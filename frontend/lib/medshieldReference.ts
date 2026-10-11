@@ -324,7 +324,7 @@ export const MEDSHIELD_MARKUP = LEGACY_MEDSHIELD_MARKUP
         <option value="3">Last 3 Months</option>
         <option value="6">Last 6 Months</option>
         <option value="12" selected>Last 12 Months</option>
-        <option value="all">All Time Ãƒâ€šÃ‚Â· Yearly</option>
+        <option value="all">All Time · Yearly</option>
         <option value="custom">Custom Date Range</option>
       </select>
       <span id="descriptiveComparisonWrap">
@@ -334,17 +334,25 @@ export const MEDSHIELD_MARKUP = LEGACY_MEDSHIELD_MARKUP
           <option value="yoy">Y/Y Compare</option>
         </select>
       </span>
-      <span class="viewing-mode-selector" style="display:inline-flex;align-items:center;gap:3px;margin-left:8px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:8px;padding:2px 4px;">
-        <button type="button" class="comp-mode-btn" id="btnModeActual" onclick="setGlobalViewingMode('actual')">Actual Only</button>
-        <button type="button" class="comp-mode-btn" id="btnModeEstimated" onclick="setGlobalViewingMode('estimated')">Estimated Only</button>
-        <button type="button" class="comp-mode-btn active" id="btnModeBoth" onclick="setGlobalViewingMode('both')">Actual + Estimated</button>
-      </span>
     </div>
 
         <!-- Single Year Dropdown -->`,
   )
   .replace('id="singleYearWrap" style="display:flex;', 'id="singleYearWrap" style="display:none;')
   .replace(/\s*<!-- YoY Compare Pair Dropdowns -->\s*<div id="yoyYearWrap"[\s\S]*?<\/div>/, '')
+  .replace(
+    '      </div>\n    </div>\n  </div>\n\n  <!-- DATA FRESHNESS GOVERNANCE BAR -->',
+    `      </div>
+      <div class="viewing-mode-selector" id="topbarViewingModeSelector" style="display:inline-flex;align-items:center;gap:3px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:8px;padding:2px 4px;margin-left:8px;">
+        <button type="button" class="comp-mode-btn" id="btnModeActual" onclick="setGlobalViewingMode('actual')">Actual Only</button>
+        <button type="button" class="comp-mode-btn" id="btnModeEstimated" onclick="setGlobalViewingMode('estimated')">Estimated Only</button>
+        <button type="button" class="comp-mode-btn active" id="btnModeBoth" onclick="setGlobalViewingMode('both')">Actual + Estimated</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DATA FRESHNESS GOVERNANCE BAR -->`
+  )
   .replace(
     /<!-- Top Row KPI Grid -->[\s\S]*?<\/div>\s*<\/div>(?=\s*<!-- Compliance Data Quality Warning Banner -->)/,
     OVERVIEW_KPI_GRID_MARKUP.trim()

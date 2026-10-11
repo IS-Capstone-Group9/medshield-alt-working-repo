@@ -11,39 +11,113 @@
 
 export const DIAGNOSTIC_MARKUP = String.raw`
 <style>
-[data-diagnostic-page] { margin-top: 10px; max-width: 100%; box-sizing: border-box; }
-[data-diagnostic-page] .diag-hero-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-bottom: 20px; }
-[data-diagnostic-page] .diag-card { background: #FFFFFF; border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04); }
-[data-diagnostic-page] .diag-label { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
-[data-diagnostic-page] .diag-val { font-size: 20px; font-weight: 800; color: var(--text-primary); margin: 6px 0 2px 0; }
-[data-diagnostic-page] .diag-sub { font-size: 11px; color: var(--text-secondary); }
-[data-diagnostic-page] .epistemic-badge { display: inline-block; font-size: 9px; font-weight: 800; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.4px; }
+[data-diagnostic-page] {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+[data-diagnostic-page] .diag-hero-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+[data-diagnostic-page] .diag-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 18px;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+  min-width: 0;
+  box-sizing: border-box;
+}
+[data-diagnostic-page] .diag-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+[data-diagnostic-page] .diag-val {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 6px 0 2px 0;
+}
+[data-diagnostic-page] .diag-sub {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+[data-diagnostic-page] .diag-split-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 14px 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+[data-diagnostic-page] .diag-table-box {
+  background: #FFFFFF;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  min-width: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+[data-diagnostic-page] .epistemic-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
 [data-diagnostic-page] .badge-fact { background: #E0F2FE; color: #0369A1; border: 1px solid #BAE6FD; }
 [data-diagnostic-page] .badge-delta { background: #ECFDF5; color: #047857; border: 1px solid #A7F3D0; }
 [data-diagnostic-page] .badge-corr { background: #FEF3C7; color: #B45309; border: 1px solid #FDE68A; }
 [data-diagnostic-page] .badge-hypo { background: #FEE2E2; color: #B91C1C; border: 1px solid #FECACA; }
-@media(max-width:900px){[data-diagnostic-page] .diag-hero-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:600px){[data-diagnostic-page] .diag-hero-grid{grid-template-columns:1fr}}
+
+@media (max-width: 1100px) {
+  [data-diagnostic-page] .diag-hero-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  [data-diagnostic-page] .diag-split-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  [data-diagnostic-page] .diag-hero-grid { grid-template-columns: 1fr; }
+}
 </style>
 
-<div class="chart-card" data-diagnostic-page>
-  <div class="chart-header">
-    <div>
-      <div class="chart-title" style="display:flex;align-items:center;gap:8px;">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-        Diagnostic Analytics — Root-Cause &amp; Variance Decomposition
+<div data-diagnostic-page>
+  <!-- Diagnostic Header Card -->
+  <div class="chart-card" style="margin-bottom:0;">
+    <div class="chart-header" style="margin-bottom:0;align-items:center;">
+      <div>
+        <div class="chart-title" style="display:flex;align-items:center;gap:8px;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;color:var(--accent);"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          Diagnostic Analytics — Root-Cause &amp; Variance Decomposition
+        </div>
+        <div class="chart-subtitle" style="margin-top:3px;">Why did demand and sales change? · Price-Volume-Mix (PVM) decomposition and 2024–2025 surge audit</div>
       </div>
-      <div class="chart-subtitle">Why did demand and sales change? · Price-Volume-Mix (PVM) decomposition and 2024→2025 surge audit</div>
-    </div>
-    <div style="display:flex;gap:8px;">
-      <button class="btn btn-secondary" onclick="window.exportDiagnosticCSV()" style="font-size:11px;padding:5px 12px;">Export Diagnostic Evidence CSV</button>
+      <div style="display:flex;gap:8px;flex-shrink:0;">
+        <button class="btn btn-secondary" onclick="window.exportDiagnosticCSV()" style="font-size:11.5px;padding:6px 14px;white-space:nowrap;">Export Diagnostic Evidence CSV</button>
+      </div>
     </div>
   </div>
 
   <!-- Hero KPI Grid -->
   <div class="diag-hero-grid">
     <div class="diag-card">
-      <div class="diag-label">2024→2025 Total Delta</div>
+      <div class="diag-label">2024–2025 Total Delta</div>
       <div class="diag-val" style="color:#0284c7;">+₱65.9M</div>
       <div class="diag-sub">+90.7% audited net sales growth</div>
     </div>
@@ -64,73 +138,77 @@ export const DIAGNOSTIC_MARKUP = String.raw`
     </div>
   </div>
 
-  <!-- 2024-2025 Surge Deep-Dive Section -->
-  <div class="chart-card" style="margin-bottom:20px;background:#F8FAFC;border:1px solid var(--border);">
+  <!-- 2024–2025 Surge Deep-Dive Section -->
+  <div class="chart-card" style="margin-bottom:0;background:#F8FAFC;border:1px solid var(--border);">
     <div class="chart-header">
       <div>
         <div class="chart-title" style="font-size:14px;">2024 to 2025 Sales Surge Root-Cause Investigation</div>
-        <div class="chart-subtitle">Audited accounting breakdown by buyer cluster and top SKU volume drivers</div>
+        <div class="chart-subtitle" style="margin-top:3px;">Audited accounting breakdown by buyer cluster and top SKU volume drivers</div>
       </div>
-      <span class="status-pill status-ready">AUDITED ERP BASELINE</span>
+      <span class="status-pill status-ready" style="font-size:9.5px;padding:3px 8px;">AUDITED ERP BASELINE</span>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0;">
+    <div class="diag-split-grid">
       <!-- Buyer Sector Accounting Breakdown -->
-      <div style="background:#fff;padding:14px;border-radius:8px;border:1px solid var(--border);">
+      <div class="diag-table-box">
         <div style="font-size:12px;font-weight:700;color:var(--text-primary);margin-bottom:8px;">Growth Contribution by Buyer Sector</div>
-        <table class="product-table" style="font-size:11px;">
-          <thead>
-            <tr><th>Sector</th><th>2024 Net Sales</th><th>2025 Net Sales</th><th>Growth (₱)</th><th>Share of Growth</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>Government</strong></td><td>₱38.45M</td><td>₱86.94M</td><td style="color:#059669;font-weight:700;">+₱48.49M</td><td><strong>73.6%</strong></td></tr>
-            <tr><td><strong>Private Care</strong></td><td>₱28.12M</td><td>₱44.10M</td><td style="color:#059669;font-weight:700;">+₱15.98M</td><td><strong>24.2%</strong></td></tr>
-            <tr><td><strong>Internal</strong></td><td>₱4.11M</td><td>₱5.57M</td><td>+₱1.45M</td><td>2.2%</td></tr>
-            <tr><td><strong>Unknown</strong></td><td>₱2.00M</td><td>₱2.00M</td><td>₱0.00</td><td>0.0%</td></tr>
-          </tbody>
-        </table>
+        <div class="table-responsive-wrap">
+          <table class="product-table" style="font-size:11px;width:100%;">
+            <thead>
+              <tr><th>Sector</th><th>2024 Net Sales</th><th>2025 Net Sales</th><th>Growth (₱)</th><th>Share of Growth</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Government</strong></td><td>₱38.45M</td><td>₱86.94M</td><td style="color:#059669;font-weight:700;">+₱48.49M</td><td><strong>73.6%</strong></td></tr>
+              <tr><td><strong>Private Care</strong></td><td>₱28.12M</td><td>₱44.10M</td><td style="color:#059669;font-weight:700;">+₱15.98M</td><td><strong>24.2%</strong></td></tr>
+              <tr><td><strong>Internal</strong></td><td>₱4.11M</td><td>₱5.57M</td><td>+₱1.45M</td><td>2.2%</td></tr>
+              <tr><td><strong>Unknown</strong></td><td>₱2.00M</td><td>₱2.00M</td><td>₱0.00</td><td>0.0%</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <!-- Top SKU Volume Drivers -->
-      <div style="background:#fff;padding:14px;border-radius:8px;border:1px solid var(--border);">
+      <div class="diag-table-box">
         <div style="font-size:12px;font-weight:700;color:var(--text-primary);margin-bottom:8px;">Top 5 Surge SKU Contributors</div>
-        <table class="product-table" style="font-size:11px;">
-          <thead>
-            <tr><th>Product Description</th><th>Volume Delta (Units)</th><th>Revenue Delta (₱)</th><th>Action</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>IV Fluids 1L (D5LR/0.9 NaCl)</strong></td>
-              <td>+110,000 packs</td>
-              <td style="color:#059669;font-weight:700;">+₱5.54M</td>
-              <td><button class="sales-secondary-button" onclick="window.investigateSkuInForecast('IV Fluids 1L')">View Forecast</button></td>
-            </tr>
-            <tr>
-              <td><strong>Paracetamol 500mg Tablets</strong></td>
-              <td>+470,000 units</td>
-              <td style="color:#059669;font-weight:700;">+₱2.06M</td>
-              <td><button class="sales-secondary-button" onclick="window.investigateSkuInForecast('Paracetamol 500mg')">View Forecast</button></td>
-            </tr>
-            <tr>
-              <td><strong>Doxycycline 100mg Capsules</strong></td>
-              <td>+150,000 units</td>
-              <td style="color:#059669;font-weight:700;">+₱1.48M</td>
-              <td><button class="sales-secondary-button" onclick="window.investigateSkuInForecast('Doxycycline 100mg')">View Forecast</button></td>
-            </tr>
-            <tr>
-              <td><strong>Oral Rehydration Salts (ORS)</strong></td>
-              <td>+230,000 sachets</td>
-              <td style="color:#059669;font-weight:700;">+₱1.23M</td>
-              <td><button class="sales-secondary-button" onclick="window.investigateSkuInForecast('ORS')">View Forecast</button></td>
-            </tr>
-            <tr>
-              <td><strong>Salbutamol Nebules 2mg/5ml</strong></td>
-              <td>+90,000 nebules</td>
-              <td style="color:#059669;font-weight:700;">+₱1.54M</td>
-              <td><button class="sales-secondary-button" onclick="window.investigateSkuInForecast('Salbutamol Nebules')">View Forecast</button></td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-responsive-wrap">
+          <table class="product-table" style="font-size:11px;width:100%;">
+            <thead>
+              <tr><th>Product Description</th><th>Volume Delta</th><th>Revenue Delta (₱)</th><th>Action</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>IV Fluids 1L (D5LR/0.9 NaCl)</strong></td>
+                <td>+110k packs</td>
+                <td style="color:#059669;font-weight:700;">+₱5.54M</td>
+                <td><button type="button" class="btn btn-secondary" onclick="window.investigateSkuInForecast('IV Fluids 1L')" style="padding:3px 8px;font-size:10.5px;min-height:unset;">View Forecast</button></td>
+              </tr>
+              <tr>
+                <td><strong>Paracetamol 500mg Tablets</strong></td>
+                <td>+470k units</td>
+                <td style="color:#059669;font-weight:700;">+₱2.06M</td>
+                <td><button type="button" class="btn btn-secondary" onclick="window.investigateSkuInForecast('Paracetamol 500mg')" style="padding:3px 8px;font-size:10.5px;min-height:unset;">View Forecast</button></td>
+              </tr>
+              <tr>
+                <td><strong>Doxycycline 100mg Capsules</strong></td>
+                <td>+150k units</td>
+                <td style="color:#059669;font-weight:700;">+₱1.48M</td>
+                <td><button type="button" class="btn btn-secondary" onclick="window.investigateSkuInForecast('Doxycycline 100mg')" style="padding:3px 8px;font-size:10.5px;min-height:unset;">View Forecast</button></td>
+              </tr>
+              <tr>
+                <td><strong>Oral Rehydration Salts (ORS)</strong></td>
+                <td>+230k sachets</td>
+                <td style="color:#059669;font-weight:700;">+₱1.23M</td>
+                <td><button type="button" class="btn btn-secondary" onclick="window.investigateSkuInForecast('ORS')" style="padding:3px 8px;font-size:10.5px;min-height:unset;">View Forecast</button></td>
+              </tr>
+              <tr>
+                <td><strong>Salbutamol Nebules 2mg/5ml</strong></td>
+                <td>+90k nebules</td>
+                <td style="color:#059669;font-weight:700;">+₱1.54M</td>
+                <td><button type="button" class="btn btn-secondary" onclick="window.investigateSkuInForecast('Salbutamol Nebules')" style="padding:3px 8px;font-size:10.5px;min-height:unset;">View Forecast</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
@@ -169,14 +247,14 @@ export const DIAGNOSTIC_MARKUP = String.raw`
   </div>
 
   <!-- Cross-Module Workflow Guidance Card -->
-  <div class="dss-insight-card">
+  <div class="dss-insight-card" style="margin-top:0;">
     <div>
       <div class="insight-badge">Decision Support Workflow</div>
       <div class="insight-title">Next Analytical Action: Demand Forecast &amp; Inventory Replenishment</div>
       <div style="line-height:1.6;margin-top:4px;">
         Identified volume-driver therapeutics require forward replenishment planning. Click below to transition from Diagnostic investigation into Predictive quantity forecasting:
       </div>
-      <div style="margin-top:12px;display:flex;gap:10px;">
+      <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
         <button class="btn btn-primary" onclick="window.navigateToForecast()" style="font-size:12px;padding:6px 16px;">
           Proceed to Forecast Modeling &rarr;
         </button>
@@ -240,12 +318,13 @@ function setGlobalViewingMode(mode) {
   window._medshieldViewingMode = mode;
   try { localStorage.setItem('medshieldViewingMode', mode); } catch (e) {}
 
-  document.querySelectorAll('.view-mode-btn').forEach(function(btn) {
-    var text = btn.textContent || '';
-    if (mode === 'actual' && text.indexOf('Actual Only') !== -1) btn.classList.add('active');
-    else if (mode === 'estimated' && text.indexOf('Estimated Only') !== -1) btn.classList.add('active');
-    else if (mode === 'both' && text.indexOf('Actual + Estimated') !== -1) btn.classList.add('active');
-    else btn.classList.remove('active');
+  document.querySelectorAll('.view-mode-btn, .comp-mode-btn').forEach(function(btn) {
+    var id = btn.id || '';
+    var text = (btn.textContent || '').trim();
+    if (mode === 'actual' && (id === 'btnModeActual' || text === 'Actual Only')) btn.classList.add('active');
+    else if (mode === 'estimated' && (id === 'btnModeEstimated' || text === 'Estimated Only')) btn.classList.add('active');
+    else if (mode === 'both' && (id === 'btnModeBoth' || text === 'Actual + Estimated')) btn.classList.add('active');
+    else if (['btnModeActual', 'btnModeEstimated', 'btnModeBoth'].includes(id) || ['Actual Only', 'Estimated Only', 'Actual + Estimated'].includes(text)) btn.classList.remove('active');
   });
 
   window.dispatchEvent(new CustomEvent('medshield:viewing-mode-change', { detail: { mode: mode } }));
