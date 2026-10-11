@@ -26,7 +26,7 @@ test('actual gateway preserves missing/zero, excludes future, isolates Unknown a
     const all = await getDatabricksForecastValidation({sector:'All'})
     assert.deepEqual(all.actuals.map(row=>row.actual), [null, 0])
     assert.equal(all.origin, '2021-01')
-    assert.equal(all.source.excluded_not_closed, 1)
+    assert.equal((all.source as any).excluded_not_closed, 1)
     assert.equal(all.reporting_coverage_status, 'unverified')
     assert.equal(all.publication_status, 'unpublished')
     assert.equal(all.evaluation_protocol, 'fixed_origin_multi_step')
