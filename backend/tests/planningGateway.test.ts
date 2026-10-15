@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { getDatabricksPlanningShortlist } from '../src/databricksDashboard'
+import { databricksLiteral } from '../src/databricksLiteral'
 
 test('planning scopes distinguish Unknown from All and use exclusive buyer classification', async () => {
   const keys = ['DATABRICKS_HOST', 'DATABRICKS_TOKEN', 'DATABRICKS_SQL_WAREHOUSE_ID', 'DATABRICKS_DESCRIPTIVE_FACT_VERSION']
@@ -33,7 +34,7 @@ test('planning scopes distinguish Unknown from All and use exclusive buyer class
       assert.equal(selected.scope.sector,sector)
       const scopeQueries = statements.slice(index).filter(sql=>sql.includes('AS period_end') || sql.includes('AS product'))
       assert.ok(scopeQueries.length > 0)
-      assert.ok(scopeQueries.every(sql=>sql.includes(`ELSE 'Unknown' END) = '${sector}'`)))
+      assert.ok(scopeQueries.every(sql=>sql.includes(`ELSE 'Unknown' END) = ${databricksLiteral(sector)}`)))
       // The ordered CASE excludes Government/Internal from Private even if the
       // geography proposal labels their source area as a territory.
       assert.ok(scopeQueries.every(sql=>sql.indexOf("THEN 'Government'") < sql.indexOf("THEN 'Internal'") && sql.indexOf("THEN 'Internal'") < sql.indexOf("THEN 'Private'")))

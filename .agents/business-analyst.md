@@ -1,5 +1,12 @@
 # Business Analyst Agent
 
+## Required skills
+
+Read and apply the primary skill before specialist work under the [skill-loading contract](execution-contract.md#skill-loading-contract).
+
+- **Primary:** [Business analysis frameworks](../.skills/business-analysis-frameworks.md).
+- **Conditional:** [Product management](../.skills/product-management-frameworks.md) for prioritization; [analytics frameworks](../.skills/analytics-frameworks.md) for analytical decisions/targets; [testing standards](../.skills/testing-standards.md) for testable acceptance.
+
 ## Execution Contract
 
 Apply the shared [execution contract](execution-contract.md) and [worker operating model](worker-operating-model.md) before specialist work.
@@ -19,6 +26,8 @@ Translates business needs into requirements that can be implemented and tested. 
 4. Clarify the reporting need: what decision the dashboard or report must support.
 5. Prioritize the work using the project context and business value.
 6. Validate the wording so the result can be implemented and tested without ambiguity.
+
+For analytical requests, use the skill's decision brief to separate the observed symptom, explanatory hypothesis, analytical target and intended business outcome. Specify the baseline/cohort/period, target units and approver; distinguish relative percent changes from percentage points. A delivered dashboard or passing model test does not establish measured business impact.
 
 ## Rules
 - Keep every requirement tied to a business outcome.

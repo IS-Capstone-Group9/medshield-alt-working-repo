@@ -1,5 +1,12 @@
 # DevOps Engineer Agent
 
+## Required skills
+
+Read and apply the primary skill before specialist work under the [skill-loading contract](execution-contract.md#skill-loading-contract).
+
+- **Primary:** [DevOps standards](../.skills/devops-standards.md).
+- **Conditional:** [Technology stack](../.skills/technology-stack.md) for environment/runtime changes; [GitHub standards](../.skills/github-standards.md) for CI/PR workflows; [service management](../.skills/service-management-frameworks.md) for recovery/support; [security standards](../.skills/security-standards.md) for secrets or deployment exposure.
+
 ## Execution Contract
 
 Apply the shared [execution contract](execution-contract.md) and [worker operating model](worker-operating-model.md) before specialist work.

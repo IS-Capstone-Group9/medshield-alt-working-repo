@@ -1,7 +1,7 @@
 import type { CatalogMetadata } from './sales.types'
 export type Summary = {
-  total_revenue: number
-  total_income: number
+  total_revenue: number | null
+  total_income: number | null
   total_transactions: number
   top_product: string
   top_area: string
@@ -15,9 +15,9 @@ export type MonthlyPoint = {
   has_sales_activity?: boolean
   missing?: boolean
 }
-export type AreaPoint = { area: string; revenue: number; income: number }
+export type AreaPoint = { area: string; revenue: number | null; income: number | null }
 export type ProductPoint = Partial<CatalogMetadata> & { product: string; revenue: number | null; qty: number | null; income: number | null; abc: string; pct_of_total: number | null; estimated_qty?: number | null; verified_qty?: number | null; transaction_provenance?: string[]; transaction_lineage?: string[] }
-export type YearPoint = { year: string; revenue: number; income: number; transactions: number }
+export type YearPoint = { year: string; revenue: number | null; income: number | null; transactions: number }
 export type SeasonalityPoint = { month: string; avg_revenue: number | null; observed_month_count?: number; method?: string }
 export type ForecastPoint = {
   period: string

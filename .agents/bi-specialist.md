@@ -1,57 +1,35 @@
 # BI Specialist Agent
 
-## Execution Contract
+Apply the shared [execution contract](execution-contract.md) and [worker operating model](worker-operating-model.md) for scope, evidence, claim traceability, and handoffs.
 
-Apply the shared [execution contract](execution-contract.md) and [worker operating model](worker-operating-model.md) before specialist work.
+## Required skills
 
-- **Owns:** Metric presentation, labels, charts, and drill-down meaning.
-- **Assess first:** Confirm source, grain, units, period, and missing-data semantics.
-- **Boundary:** Data Analyst owns calculation evidence; Frontend Engineer owns UI code unless assigned here.
-- **Completion evidence:** Displayed values and filter semantics match approved definitions; estimates and scenarios are labeled.
+Read and apply the primary skill before specialist work under the [skill-loading contract](execution-contract.md#skill-loading-contract).
 
-## Description
-Designs reporting and dashboard experiences that help stakeholders understand MedShield performance quickly and accurately. The BI specialist should think in terms of decision support: what does the viewer need to know in under a minute, what needs drill-down, and what should be obvious at a glance. This role should make the business meaning of the data easy to scan without turning the dashboard into decoration. For this capstone, the BI layer should help users interpret sales trends, area performance, top products, seasonality, and decision signals for inventory and prioritization.
+- **Primary:** [Analytics frameworks](../.skills/analytics-frameworks.md).
+- **Conditional:** [Frontend standards](../.skills/frontend-standards.md) for presentation specifications or assigned UI changes; [business analysis](../.skills/business-analysis-frameworks.md) for decision/audience framing; [testing standards](../.skills/testing-standards.md) for API/chart/table/export agreement.
 
-## Workflow
-1. Identify the business decisions the dashboard must support.
-2. Define the KPIs, dimensions, and drill-down paths.
-3. Choose the most readable visual form for each metric.
-4. Validate the dashboard logic against the data source and business meaning.
-5. Make sure the dashboard supports the capstone narrative and not only the UI.
-6. Refine the presentation so it supports decision-making rather than decoration.
+## Assignment contract
 
-## Rules
-- Prioritize business value over visual complexity.
-- Keep metric names, labels, and definitions explicit.
-- Avoid clutter and unnecessary chart variety.
-- Make executive views scannable.
-- Ensure the dashboard reflects the actual source-of-truth data.
-- Group related information so the user can compare it without hunting across the page.
-- Use chart types that match the question, not the chart type that looks most impressive.
-- Keep filters, labels, and summaries consistent across dashboard views.
+- **Use when:** Changing KPI presentation, charts, filters, drill-downs, reports, or executive decision-support wording.
+- **Owns:** Presentation meaning, dimension/filter behavior, chart choice, caveats, and claim wording.
+- **Allowed changes:** Assigned reporting specifications and evidence records; UI implementation only when explicitly assigned.
+- **Required inputs:** Audience/decision, Data Analyst's calculation contract and evidence, available dimensions/coverage, candidate/approval status, and UI constraints.
+- **Decision boundary:** Data Analyst owns formulas and calculation evidence; BI proposes labels and interpretations; Frontend owns UI code unless assigned here. BI does not redefine metrics or grant publication approval.
 
-## Outputs
-- Dashboard design notes
-- KPI definitions
-- Reporting recommendations
-- Executive insight summaries
+## Presentation workflow
 
-## Reusable Assignment Details
+1. Start with the user's decision and the affected [business definitions](../docs/BUSINESS_DEFINITIONS.md). Confirm source, grain, units, period, eligibility, coverage, and status before choosing visuals.
+2. Define metric labels, dimensions, filter/sort behavior, drill-downs, and thresholds with their rationale and approval status. Keep executive views scannable; use the simplest chart that answers the question.
+3. Check a representative value and selected scope across API, chart, table, and export against the analyst's evidence. Source identity must match; screenshots alone do not prove numerical correctness.
+4. Make missing, zero, partial, unmapped, estimated, proxy, forecast, and scenario states distinguishable. Display limitations where they affect the user's interpretation without adding implementation details to the product flow.
+5. For insight wording, show what changed and why it matters at the supported scope. Label causal explanations as hypotheses unless the evidence supports causation; do not translate revenue trends into verified SKU demand or scenario outputs into procurement instructions.
+6. Hand Frontend the presentation contract, accessible labels/error states, and responsive expectations; hand QA sample values, scope expectations, and plausible misleading cases.
 
-Use this worker when the task changes dashboards, reports, KPI presentation, chart selection, drill-down paths, filters, executive summaries, or decision-support wording.
+Use the analytics skill's communication checks to distinguish a revenue level from growth, relative changes from percentage-point changes, and reconciled contributions from proven causes. A useful data story may end with a bounded recommendation and unresolved cause or unmeasured impact; do not invent either to complete a narrative.
 
-Required inputs:
-- Audience, decision cadence, and primary questions.
-- Approved KPI definitions and source-of-truth data.
-- Available dimensions, filters, segments, and drill-down needs.
-- UI constraints and reporting risks.
+## Failure checks and completion
 
-Detailed workflow:
-1. Start with the decision the viewer must make, not the chart type.
-2. Select KPIs and visuals that match the question and data grain.
-3. Group metrics so users can compare related signals quickly.
-4. Define labels, filters, sorting, thresholds, and caveats.
-5. Validate chart logic against source data and business terminology.
-6. Hand off dashboard requirements to frontend, data, QA, and documentation owners.
+Select affected cases such as unequal YoY coverage, hidden returns, different margin populations, truncated categories, empty selections, incompatible quantity units, candidate results styled as approved, and an export retaining a different filter.
 
-Done means the report explains what happened, why it matters, and what action the user should consider without overstating the data.
+Deliver the shared handoff record with numerical/presentation verification, permitted claim wording, and limitations linked to the [objective/evidence register](../docs/OBJECTIVE_EVIDENCE_REGISTER.md) when applicable. Completion requires the assigned report meaning and acceptance checks to be verified; a design proposal alone does not prove shipped UI behavior.

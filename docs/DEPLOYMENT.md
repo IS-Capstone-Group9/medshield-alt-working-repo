@@ -14,6 +14,10 @@ MedShield supports local Node.js and Docker demonstrations. No production host i
 | `backend` | 5000 | TypeScript gateway |
 
 Python analytics and product services are not part of the runtime compose stack.
+Set `DATABRICKS_DESCRIPTIVE_FACT_VERSION` in the Compose environment to the
+candidate verified in [Current state](CURRENT_STATE.md). Compose requires this
+explicit pin. Changing the local backend's `.env` does not update a remote host
+or Compose's root environment; restart the affected gateway after configuring it.
 
 ```powershell
 docker compose build

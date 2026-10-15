@@ -1,0 +1,128 @@
+# MedShield system QA rerun — 10 October 2026
+
+**QA is complete; full release acceptance still needs fixes.** The current descriptive analytics reconcile end to end on fact 20, accepted reporting categories are deployed, and the earlier missing-value/SQL/frontend/Compose-pin repairs pass. Clean database bootstrap, Auth recovery, one operational validator and production dependency advisories remain open. Predictive research is numerically consistent but has not met operational forecast gates.
+
+Accountable role: Orchestrator. Backend, frontend and database received separate supporting QA assignments. Root owns independent analytics calculations and cross-layer integration; root finished pending frontend evidence after a worker interruption. No product repair, dependency upgrade, analytical warehouse write, provider refresh, model activation, procurement or business approval was performed. Existing user changes and the 9 October QA packet are preserved.
+
+## Scope and identity
+
+Checked HEAD `cc03b4c05398880b18987eca5ca9c1e140bf9dcb` plus the current dirty tree. [Initial identity](C:/Users/Adrian/projects/medshield1/medshield/outputs/system_qa_20261010/identity.json), component byte manifests/patches and final [source manifest](C:/Users/Adrian/projects/medshield1/medshield/outputs/system_qa_20261010/source-manifest.json) bind what was assessed; HEAD alone is insufficient. Windows, Node 22.14.0, Asia/Manila; global Python 3.13 ran general tests, `.venv-predictive` ran artifact/leakage checks. Initial process inspection found no project servers. QA started its own gateway 5000 and frontend 3000 only after the build; no Next dev/build collision occurred. Ordinary Supabase login/audit activity was necessary for authenticated tests; analytical cloud probes were read-only.
+
+The [plan](C:/Users/Adrian/projects/medshield1/medshield/outputs/system_qa_20261010/PLAN.md) covered backend, frontend, database and analytics, with analytics prioritized: establish expected definitions → bind current source → parallel component review → regressions/build → fresh Gold/gateway/browser/export reconciliation → independent model/source checks → credible failure cases → findings and handoffs. Unknown amounts should remain unavailable while supported sales remain visible; a required source failure must remove unsupported measures without replacing them with local values.
+
+Detailed component evidence: [backend](C:/Users/Adrian/projects/medshield1/medshield/outputs/system_qa_20261010/backend/REPORT.md), [frontend](C:/Users/Adrian/projects/medshield1/medshield/outputs/system_qa_20261010/frontend/README.md), [database](C:/Users/Adrian/projects/medshield1/medshield/outputs/system_qa_20261010/database/REPORT.md). Structured acceptance and previous-finding dispositions are in [checks.json](C:/Users/Adrian/projects/medshield1/medshield/outputs/system_qa_20261010/checks.json).
+
+## Fresh acceptance results
+
+| Criterion | Result | Evidence and practical limit |
+|---|---|---|
+| Backend suite/runtime compiler | PASS |102/102 tests across 25 files; runtime noEmit and strict candidate-script compilation pass. All-script compiler still fails; see QA-09. |
+| Python service/notebook/STL suites | PASS |119/119 service,82/82 notebook and3/3 STL tests. Together with backend, **306 unit tests pass**. |
+| Frontend TypeScript/lint/build | PASS | Production build precedes owned server startup. |
+| Original browser fixtures | PASS for executed cases |115 pass,4 explicit legacy skips,0 failures across 20 suites; previous recovery copies are no longer needed. |
+| Authenticated live study/export/predictive boundary | PASS |6/6 original cases on fact 20, including2017–2025 Capstone selection, financial/category/export identity and unpublished model state. |
+| Nine-page responsive sweep | PASS in tested views |1 live test,27 page/width observations at 1440/926/375px,26 screenshots, no runtime errors. Small-width evidence is exploratory, not full accessibility/device certification. |
+| Required source outage/recovery and nullable contract | PASS |4 whole-app cases: monthly503 removes all charts/KPIs; restoration+reload ready; valid nullable profit ready; malformed string unavailable. |
+| Independent live warehouse/gateway finance | PASS |[114/114 comparisons](C:/Users/Adrian/projects/medshield1/medshield/outputs/system_qa_20261010/live-profile.json), all8 query groups successful; fact stays20 during the check. |
+| Current descriptive/STL validator | PASS |[Fresh fact 20 receipt](C:/Users/Adrian/projects/medshield1/medshield/outputs/descriptive_validation/2026-10-10T04-43-47-407Z/evidence.json);72 components, source/reconstruction and gaps. |
+| Publication dependency collector | PASS technically |[76 PASS,0 FAIL,0 UNVERIFIED](C:/Users/Adrian/projects/medshield1/medshield/outputs/publication_readiness/2026-10-10T04-43-32-497Z/evidence.json); current master/STL identities agree. No business release approval follows. |
+| Fresh SQL ↔ frozen input ↔ category cells | PASS |[251/251 independent Decimal/CSV checks](C:/Users/Adrian/projects/medshield1/medshield/outputs/system_qa_20261010/analytics/source-bridge-verification.json), including98 monthly values/counts, nine annual populations and exact category-only field preservation. |
+| Expanded21-model artifact arithmetic/identity | PASS for retained research |[538 checks /441 Decimal metric groups](C:/Users/Adrian/projects/medshield1/medshield/outputs/system_qa_20261010/analytics/extended-verification.json), all 1,524 points and declared hashes/source bytes. |
+| Original15-model artifact | PASS for retained research |[388 checks /315 metric groups](C:/Users/Adrian/projects/medshield1/medshield/outputs/system_qa_20261010/analytics/baseline-verification.json); extension preserves all 1,092 original predictions/actuals. |
+| Added adapter temporal sensitivity | PASS |[30/30 future-sentinel probes](C:/Users/Adrian/projects/medshield1/medshield/outputs/system_qa_20261010/analytics/adapter-leakage-verification.json): six added adapters×five development origins; all retained leads agree. This tests value leakage, not historical source availability. |
+| Source-review numerical bridge | PASS for checked artifacts |[302 checks](C:/Users/Adrian/projects/medshield1/medshield/outputs/system_qa_20261010/analytics/verification.json), standalone Decimal/CSV review of retained10 October source receipt and selected raw/final cases. It is not a new raw-source ingestion. |
+| Weather benchmark arithmetic | PASS for retained history |[12 metric populations](C:/Users/Adrian/projects/medshield1/medshield/outputs/system_qa_20261010/analytics/weather-independent-verification.json) independently match raw PAGASA CSV and retained provider caches. No fresh provider benchmark or join approval. |
+| Fact19→20 category-only preservation | PASS |137 immutable fields; zero changed/added/deleted records, 37,728 unique nonnull source keys, identical schema. |
+| Candidate model storage grain | PASS for sampled live state |2 unique runs,2,616 unique point keys,36 unique evaluation keys;0 reviews/manifests/pointers. |
+| Publisher idempotence/readback boundaries | PASS in isolated PostgreSQL adapter |7/7 checks; signed values retained; changed immutable payloads/ambiguous pointer rejected. Native Delta races/rollback remain unverified. |
+| Clean Supabase migrations | FAIL |001–010 pass;011 fails SQLSTATE42883. Explicit fixture stubs allow later examination only. |
+| Database authorization/audit | PARTIAL |13/15 isolated checks meet expectations;2 conditional old-grant view failures;4 independent audit/profile values pass. Sampled connected private endpoints are denied/not found. |
+| Remote durable audit | NOT VERIFIED/deployment gate |Service-role audit tables return404/PGRST205; read-only probes cannot distinguish missing objects from hidden/stale schema cache. Local audit fallback is audit-only. |
+| Operational tooling/HTTP/recovery | FAIL/PARTIAL |One script TS2339; fresh dashboard validator fails stale horizons;82/92 HTTP expectations match; deleted-Auth recovery fixture fails with 0 writes. |
+| Runtime dependencies/deployment | FAIL/PARTIAL |Frontend and backend production npm audits remain nonzero. Compose accepts explicit pin20 and rejects missing pin as intended. Docker daemon unavailable; predictive pip-check fails two unrelated notebook dependency requirements. |
+
+Counts above describe separate evidence populations; do not add unit tests, SQL checks, artifact checks, browser observations and advisories into a single coverage percentage.
+
+## Analytics findings
+
+Fresh serving identity: fact Delta **20**, policy `sales_restart_gold_v7_independent_catalog`, dataset `b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4`, product master `2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29`. The accepted category deployment changed reporting dispositions while preserving the financial/quantity/demand fields checked against fact 19. Current technical publication mismatch from last QA is resolved.
+
+| Measure | Fresh value | Permitted meaning |
+|---|---:|---|
+| Reporting records |37,728|Unique source-record population, not verified invoices/orders. |
+| Eligible signed net sales |₱626,946,741.81|Company PHP revenue across 2017–2025. |
+| Supported gross margin amount |₱288,487,498.72|Before operating expenses; not company net profit. |
+| Same-population margin revenue basis |₱478,720,670.03|Numerator and denominator use the same eligible records. |
+| Weighted gross margin |60.262177%|Independent margin/basis calculation; missing profit is excluded, not zero-filled. |
+| Negative net-sales adjustments |−₱1,622,699.58|Financial adjustments, not verified physical returns. |
+| Adjusted-source net sales |₱299,249,415.55;47.731234%|Allocation/source-adjustment provenance, not verified SKU demand. |
+| Calendar coverage |98 observed /108 slots|Ten unknown months; observation count is not proof of complete reporting. |
+| STL scope |72 months,Jan 2020–Dec 2025|Separate contiguous company-revenue decomposition, not all nine study years or a forecast. |
+| Exact reporting-category labels |598 medicine;646 supply;131 equipment;209 non-medical;2,977 Unclassified|All 4,561 dispositions accepted; Unclassified retains unresolved identity. |
+| Broad Medical / Non-Medical / Unclassified sales |₱362,376,811.94 / ₱21,287,340.11 / ₱243,282,589.76|Partitions conserve eligible company revenue. Medical contains1,375 labels, not approved SKUs. |
+| Approved identities / forecast-ready / external-ready rows |0 /0 /0|Category acceptance does not supply SKU units, demand targets or origin-available external joins. |
+| Active model release pointers |0|No approved operational forecast is served. |
+
+The10 missing months remain May–August and October 2017, January–February 2018, and October–December 2019. Source nulls still exist:11 quantity,835 unit selling price,880 net-sales and137 gross-margin values;2,743 eligible-sales rows lack eligible gross margin. Current backend/frontend null controls now preserve those distinctions in their checked paths rather than turning missing evidence into observed zero.
+
+The retained expanded experiment contains four transparent benchmarks, two ETS, nine Prophet, two SARIMA and four direct/recursive ridge configurations. All 21 share60 development and12 retrospective-audit keys;1,524 points comprise1,260 development,252 audit and12 selected-model future points. Independent selection again chooses **last value**, with no qualifying challenger. Its development WAPE is **83.199360%**;2025 audit WAPE **37.763644%**, monthly MAE **₱5,834,383.00**, RMSE **₱6,956,031.72**, and signed overprediction bias **₱1,295,235.42**. The best new SARIMA has87.879445% development WAPE, worse than the selected benchmark. Adding families has not improved this measured outcome.
+
+These are defensible research calculations, with separate unresolved operational gates:
+
+- The last accepted origin is December 2025. October 2026–September 2027 means actual leads10–21; current validation supports1–12. Later requested leads cannot be inferred from a twelve-point display.
+- The added recipes were designed after2025 audit inspection. That year remains retrospective; a later untouched accepted period is needed for revised-model final assessment.
+- Five development errors per lead, or six including retrospective audit, fall below registered20/40 support thresholds. Null intervals correctly disclose insufficient calibration.
+- The fresh source bridge has no2026 observed months and latest recorded date31December 2025. Existing completeness is training-only user attestation; matching sums do not verify reporting completeness or historical availability vintages.
+- December 2024 raw-versus-eligible difference₱3,628,365.50 reconciles to preserved invalid-identity/possible-duplicate review rows. November 2025 records92.770368% of eligible revenue on 29 November. Financial/date agreement establishes neither causal explanation nor verified booking/delivery timing.
+- SKU/pack/unit, territory, disease/weather issue-time features, acceptable operational error policy and artifact-bound business/model approval remain unresolved. Inventory, supplier, lead-time and expiry inputs are needed before replenishment; entered planning remains a scenario.
+
+Owners: Data Analyst/Finance/source owner for source and acceptable-error evidence; Database/Backend for governed contracts; named business/model approvers for release; BI/Frontend for truthful scope and unavailable-state presentation. No repeat permission or approval was requested in this QA.
+
+## Previous-finding dispositions and repair handoff
+
+P1 concerns release/use of an affected capability; P2 is a reproducible correctness/bootstrap/recovery/verification defect; P3 is lower-impact contract/configuration drift. Advisory package severity is distinct from demonstrated application impact.
+
+| Prior ID | Current disposition | Evidence / owner |
+|---|---|---|
+|QA-01 dependencies|**Open, P1 for affected Windows Next hosting**|Fresh audits; installed Next14.2.35. Frontend/Backend with Security/DevOps. |
+|QA-02 missing measures→zero|**Fixed in checked scope**|26/26 independent backend checks, zero/partial controls and nullable browser cases. Backend/Frontend. |
+|QA-03 valid nullable profit breaks whole dashboard|**Fixed in checked scope**|14 nullable regressions and whole-app `income:null` readiness. Frontend. |
+|QA-04 SQL apostrophe/backslash fidelity|**Fixed in checked scope**|5/5 current-helper live scalar SELECT round trips; no exploit test. Backend. |
+|QA-05 legacy descriptive arithmetic|**Mitigated by retirement; implementation still fails**|All4 hand-solvable legacy probes fail; canonical docs now prohibit current Chapter4/publication use. Data Analyst owns repair before reuse. |
+|QA-06 legacy model report unsupported claims/leakage|**Open in legacy report, P1 before use**|Fresh AST probe:11/12 holdout targets contain earlier holdout actuals in lag1; random regressors retain DOH/PAGASA claims. Governed21-model path separately passes its checks. Data Analyst/Technical Writer. |
+|QA-07 clean bootstrap migration011|**Open, P2**|Fresh SQLSTATE42883; Database/DevOps. |
+|QA-08 conditional legacy-view grants|**Open, conditional P2**|Two isolated allows under explicit older/custom grants; current cloud private samples denied/not found. Database/Security. |
+|QA-09 QA/validator drift|**Partly fixed; P2 remains**|Original frontend fixtures and STL typing repaired; one sector TS2339 and live stale Unknown-horizon assertion remain. Backend/QA. |
+|QA-10 Compose fact pin|**Primary finding fixed**|Mandatory pin forwarded; missing root environment is rejected intentionally; configured20 validates. Separate false-auth production fallback mismatch remains. DevOps. |
+|QA-11 deleted-Auth recovery|**Open, P2**|Current runbook promises recovery, script refuses absent user after legacy hash cleared; fixture exit1,0 writes. Backend/Security/Technical Writer. |
+|QA-12 HTTP boundary/status drift|**Open, P3**|Same10 differences in 92 isolated requests; explicit errors/no analytical fallback. Backend. |
+
+**QA-01 — dependencies.** Installed Next14.2.35 and Windows App Router configuration meet the maintainer's affected-host/version conditions; no exploitation was attempted. The [maintainer Windows advisory](https://github.com/vercel/next.js/security/advisories/GHSA-p293-qw3h-jr36), checked again today, lists patches 15.5.24/16.3.3 and no workaround. Frontend audit has4 affected package nodes (1 critical/3 high); backend5 (1 critical/4 moderate). The [proxy-addr advisory](https://github.com/jshttp/proxy-addr/security/advisories/GHSA-jqcg-44mw-7w3h) requires a particular trust-subnet configuration; current server does not enable trust proxy, so that trigger was not established. Update compatible supported dependencies/lockfiles under Security review and rerun affected auth/build/reporting/outage checks and audits. Audit counts are not exploit counts.
+
+**QA-07 — optional function revocation breaks bootstrap.** [Migration011](C:/Users/Adrian/projects/medshield1/medshield/supabase/migrations/011_supabase_auth_account_bridge.sql:95) revokes absent namespaced legacy functions; earlier migrations do not create them. Expected clean ordered bootstrap continues; actual first failure is42883. Guard optional revocations and test both clean and preexisting-function cases on a disposable native Supabase-compatible instance. Fixture stubs used for downstream audit tests are explicitly not a repair or clean-chain pass.
+
+**QA-08 — old/custom grants retain analytical views.** [Legacy view](C:/Users/Adrian/projects/medshield1/medshield/supabase/migrations/007_namespaced_schema_alignment.sql:460) lacks invoker semantics/browser-grant retirement; old sales policies allow anonymous SELECT. Under explicit fixture automatic public grants, anon reads synthetic sales123.45 and the legacy forecast view. Current sampled views404/private targets401 do not show present cloud exposure. Explicitly retire/revoke obsolete analytical browser grants/views/policies, inspect deployed effective privileges and retain restrictive/legacy-grant tests. Remote audit404/PGRST205 is a separate documented deployment gap; verify schema/cache and native service RPC when deployed.
+
+**QA-09 — operational validator.** [Sector access](C:/Users/Adrian/projects/medshield1/medshield/backend/scripts/validate-databricks-dashboard.ts:47) causes one TS2339 in all-script compilation, despite runtime spread fields. The validator requests `sector:'Unknown'` at line29 then requires3/6/12 benchmark horizons at line77; this blocked scope returnsnone. The fresh live run fails `AssertionError: forecast horizons`. Expose the real response type and check supported companyAll separately from blockedUnknown. Keep both assertions source-bound; runtime noEmit excludes these scripts.
+
+**QA-11 — recovery path.** [Migration script](C:/Users/Adrian/projects/medshield1/medshield/backend/scripts/migrate-auth-accounts.ts:139) refuses no-user/no-legacy-hash state; successful migration clears that hash. [Runbook](C:/Users/Adrian/projects/medshield1/medshield/docs/SUPABASE_AUTH_MIGRATION.md:49) nevertheless says rerun after Auth-user deletion. Provide an authorized ownership-verified fresh-credential/link/reset/audit recovery flow and correct the runbook; keeping obsolete password hashes is not the remedy. Retain no-write failure and intended recovery tests.
+
+**QA-12 — status/order.** [Global scalar validation](C:/Users/Adrian/projects/medshield1/medshield/backend/src/server.ts:108) precedes protected authentication, so two malformed anonymous requests return400 rather than401. Seven analytical routes with no Databricks configuration return502 rather than documented503. Rejected CORS returns development HTML500; the probe's403JSON expectation is a practical QA expectation, not an explicit API promise. Align auth ordering and source readiness/error classification; retain denial/no-fallback checks. No anonymous analytical exposure was observed.
+
+**Legacy analytical jobs.** [run_descriptive](C:/Users/Adrian/projects/medshield1/medshield/services/analytics_service/jobs/run_descriptive.py:166) still classifies a sole positive seller incorrectly, mixes margin populations and zero-fills absent seasonal months. Current docs now correctly retire it from current publication. [test_all_models](C:/Users/Adrian/projects/medshield1/medshield/services/analytics_service/jobs/test_all_models.py:102) still creates random external variables and makes unsupported disease/urgency claims. Its holdout lagging is only defensible as a disclosed rolling-one-step design, not a twelve-month fixed-origin result. Repair and independently reconcile before reuse; never cite these legacy report outputs as the current governed experiment. [Fresh legacy probes](C:/Users/Adrian/projects/medshield1/medshield/outputs/system_qa_20261010/analytics-probes.json) execute hand-solvable descriptive cases and controlled AST lag statements; its additional September artifact recomputation remains explicitly historical.
+
+**Compose secondary mismatch.** Explicit fact pin repair is complete. Compose still defaults Supabase authfalse while the image is production; runtime correctly rejects that pair. `.env.example` selects true, so correctly configured Supabase mode is not shown failing. Align production defaults or document a separate development override.
+
+## Limits, reproduction and completion
+
+Fresh component commands and source hashes are retained in their reports. Root commands include `python -m unittest discover -s services/tests -v`, `python -m unittest discover -s databricks/medshield_project/tests -v`, `python -m unittest services.analytics_service.jobs.test_descriptive_stl -v`, read-only backend descriptive/publication/dashboard validators, and the independent scripts in `analytics/`. Model verifiers use exact fact 20 frozen input/run paths recorded in receipts; temporal probes rerun adapter fits, without a new comparison experiment or activation. `verify_source.py` reconciles the separately observed 12:14 source review; the fresh 12:43 profile and 251 bridge checks bind its current financial population. Historical benchmark/source artifacts remain labeled inherited inputs to fresh recomputation.
+
+Initial root STL discovery used a nonexistent `scripts/tests` directory; the canonical three-test module then passed. The extra source-bridge fixture initially assumed missing-month rows had source/date fields; it was corrected to count only observed rows, preserving null months. Earlier attempt logs are retained as harness failures, not product failures. Component database adapter setup/coercion attempts are also retained separately. No required assertion was weakened.
+
+PGlite/PostgreSQL adapter evidence is synthetic and does not prove Supabase/Delta concurrency, transactional group recovery or live publication authorization. All 29 retained dependency versions are currently readable;28 lack explicit overrides, but readability is not a restoration rehearsal or a future retention guarantee. Docker daemon is unavailable. Predictive pip-check reports missing ipython/pygments required by notebook tooling; analytical tests pass and no package installation was made. Local Next start/standalone/sharp warnings are recorded; ordinary image probes return200, without proving proper standalone optimizer deployment.
+
+Unverified requirements: target-host deployment/HTTPS and load/SLO behavior, complete live role matrix, native audit persistence, disaster/rollback recovery, external provider publication, historical as-of vintages, operational model/SKU/disease/forecast acceptance, measured replenishment/expiry benefits and final business/academic release decisions. QA completion does not close these gates.
+
+Applied guidance: accountable Orchestrator/product management for scope/handoffs; QA/testing for independent expected results and fixture/live separation; Data Analyst/analytics for eligible populations, Decimal reconciliation, calendar leads and restrained claims; current database/security/architecture/coding/technology skills for boundaries and preservation; frontend/DevOps for browser/build/process/deployment checks; documentation standards for this dated canonical record. Previously read guidance was reused only where content/scope remained current, and workers record their reads/hashes. Root performed integration/self-review of its own evidence; separate workers actually performed component checks.
+
+Only new QA evidence and a dated `docs/CURRENT_STATE.md` entry were written by this QA. Six predictive documentation files changed concurrently in separate work, so the initial whole-tree diff is not identical; those edits were inspected and preserved. Across 285 recorded component-file comparisons, only the already documented concurrent `CURRENT_STATE` and `PREDICTIVE_OPERATIONS` inputs changed; tested application bytes match. The final source manifest includes the current documents. [Change verification](C:/Users/Adrian/projects/medshield1/medshield/outputs/system_qa_20261010/change-verification.json), [report verification](C:/Users/Adrian/projects/medshield1/medshield/outputs/system_qa_20261010/report-verification.json) and [owned-service cleanup](C:/Users/Adrian/projects/medshield1/medshield/outputs/system_qa_20261010/cleanup.json) record preservation and completion. The requested assessment is delivered; repair owners have concrete failures and acceptance criteria. Full-system release remains needs-fix.

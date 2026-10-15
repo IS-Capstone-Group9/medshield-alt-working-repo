@@ -1,0 +1,868 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\frontend\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config=../outputs/system_qa_20261009/frontend/recovered.config.cjs",
+      "--workers=1",
+      "--reporter=list,json",
+      "--output=../outputs/system_qa_20261009/frontend/recovered-final-artifacts"
+    ],
+    "configFile": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\system_qa_20261009\\frontend\\recovered.config.cjs",
+    "rootDir": "C:/Users/Adrian/projects/medshield1/medshield/outputs/system_qa_20261009/frontend/recovered-tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/Adrian/projects/medshield1/medshield/outputs/system_qa_20261009/frontend/recovered-final-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/Adrian/projects/medshield1/medshield/outputs/system_qa_20261009/frontend/recovered-tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "diagnostic-drilldown.spec.ts",
+      "file": "diagnostic-drilldown.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "chart drilldown admits observed zero and excludes missing, estimates and prior-series selections",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3227,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T02:16:46.760Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3e09f60c758c54f940d6-791b5e1d2507fd201f6d",
+          "file": "diagnostic-drilldown.spec.ts",
+          "line": 138,
+          "column": 5
+        },
+        {
+          "title": "chart point scope keeps exact partial custom dates instead of broadening month boundaries",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2302,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T02:16:50.709Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3e09f60c758c54f940d6-71e78e553950868303cf",
+          "file": "diagnostic-drilldown.spec.ts",
+          "line": 160,
+          "column": 5
+        },
+        {
+          "title": "last-N monthly date scope stays exact when the chart uses yearly display grain",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2243,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T02:16:53.052Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3e09f60c758c54f940d6-b86a67d319cc0cbf512e",
+          "file": "diagnostic-drilldown.spec.ts",
+          "line": 173,
+          "column": 5
+        },
+        {
+          "title": "chart-to-investigation transition withholds data when the source release changes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2213,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T02:16:55.329Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3e09f60c758c54f940d6-83b274f7a84d1a209fae",
+          "file": "diagnostic-drilldown.spec.ts",
+          "line": 187,
+          "column": 5
+        },
+        {
+          "title": "all dimensions retain signed offsets, nested filters and back navigation without losing draft notes on view changes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3055,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T02:16:57.573Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3e09f60c758c54f940d6-8777e2d7426ce27f4aed",
+          "file": "diagnostic-drilldown.spec.ts",
+          "line": 197,
+          "column": 5
+        },
+        {
+          "title": "canonical product inspection uses reporting identity and retains category scope",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30275,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\system_qa_20261009\\frontend\\recovered-tests\\diagnostic-drilldown.spec.ts",
+                        "column": 100,
+                        "line": 235
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Inspect records for Canonical Product A', exact: true })\u001b[22m\n\n\n  233 |   })\n  234 |   await page.selectOption('#productCategorySelect', 'Medical')\n> 235 |   await page.getByRole('button', { name: 'Inspect records for Canonical Product A', exact: true }).click()\n      |                                                                                                    ^\n  236 |   await expect(page.locator('#diagnosticStatus')).toContainText('Recorded contribution evidence loaded')\n  237 |   expect((await scopeRequests(page)).at(-1).query.product_id).toBe('RAW:PRODUCT_A')\n  238 |   expect((await scopeRequests(page)).at(-1).query.product_id).not.toBe('SOURCE ALIAS A')\n    at C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\system_qa_20261009\\frontend\\recovered-tests\\diagnostic-drilldown.spec.ts:235:100"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T02:17:00.657Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\system_qa_20261009\\frontend\\recovered-final-artifacts\\diagnostic-drilldown-canon-e9131--and-retains-category-scope\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\system_qa_20261009\\frontend\\recovered-final-artifacts\\diagnostic-drilldown-canon-e9131--and-retains-category-scope\\error-context.md"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "3e09f60c758c54f940d6-e4134e29977b984a1e31",
+          "file": "diagnostic-drilldown.spec.ts",
+          "line": 227,
+          "column": 5
+        },
+        {
+          "title": "unavailable evidence retries the same scope and inconsistent partitions remain withheld",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2504,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T02:17:33.133Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3e09f60c758c54f940d6-309705165deec26c4259",
+          "file": "diagnostic-drilldown.spec.ts",
+          "line": 242,
+          "column": 5
+        },
+        {
+          "title": "export keeps release identity, every signed partition and unverified causal status with review notes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2592,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T02:17:36.166Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3e09f60c758c54f940d6-2c7f9857961d0b5d636d",
+          "file": "diagnostic-drilldown.spec.ts",
+          "line": 258,
+          "column": 5
+        },
+        {
+          "title": "transaction ledger retains identical date and dimension filters in pagination and summary and blocks a changed release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3068,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T02:17:38.804Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3e09f60c758c54f940d6-2f21332685fa1ae1800e",
+          "file": "diagnostic-drilldown.spec.ts",
+          "line": 274,
+          "column": 5
+        },
+        {
+          "title": "prior ledger dates and STL unusual-period investigation keep their documented independent scope",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3757,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T02:17:41.904Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3e09f60c758c54f940d6-62f536d11da2b7827582",
+          "file": "diagnostic-drilldown.spec.ts",
+          "line": 297,
+          "column": 5
+        },
+        {
+          "title": "diagnostic evidence fits 1440px and remains inspectable without page overflow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2538,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T02:17:45.691Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "diagnostic-panel-1440",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\system_qa_20261009\\frontend\\recovered-final-artifacts\\diagnostic-drilldown-diagn-33786-table-without-page-overflow\\attachments\\diagnostic-panel-1440-fc810aa52359ff0bc25b6f9d14331d755fd4ed00.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3e09f60c758c54f940d6-8a98303afd2b5b66f288",
+          "file": "diagnostic-drilldown.spec.ts",
+          "line": 314,
+          "column": 38
+        },
+        {
+          "title": "diagnostic evidence fits 375px and remains inspectable without page overflow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2368,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T02:17:48.258Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "diagnostic-panel-375",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\system_qa_20261009\\frontend\\recovered-final-artifacts\\diagnostic-drilldown-diagn-eddf6-table-without-page-overflow\\attachments\\diagnostic-panel-375-de9863ca0ae33cc4fcf4d10154b7f0d1522abeaa.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3e09f60c758c54f940d6-827e198d3b1a08272769",
+          "file": "diagnostic-drilldown.spec.ts",
+          "line": 314,
+          "column": 38
+        }
+      ]
+    },
+    {
+      "title": "sales-data-view.spec.ts",
+      "file": "sales-data-view.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "search, multi-year quality filters, paging and reset keep summaries in the selected scope",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2146,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T02:17:50.729Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "016c1ed887c0facb72c4-8fca7a868ccde0f61db9",
+          "file": "sales-data-view.spec.ts",
+          "line": 115,
+          "column": 5
+        },
+        {
+          "title": "signed financial values stay readable and full ledger exposes source lineage",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1435,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T02:17:52.910Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "016c1ed887c0facb72c4-bf83ee0b88d5a83ded48",
+          "file": "sales-data-view.spec.ts",
+          "line": 147,
+          "column": 5
+        },
+        {
+          "title": "dataset evidence is discoverable while the transaction table stays the default focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1763,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T02:17:54.380Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "016c1ed887c0facb72c4-787cc2b3e45b4feced1d",
+          "file": "sales-data-view.spec.ts",
+          "line": 165,
+          "column": 5
+        },
+        {
+          "title": "no matching records and rejected-row browsing show an honest empty state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1769,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T02:17:56.183Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "016c1ed887c0facb72c4-4d2f1b915bc5b220d512",
+          "file": "sales-data-view.spec.ts",
+          "line": 182,
+          "column": 5
+        },
+        {
+          "title": "missing summary measures remain unavailable while observed zero remains zero",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1523,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T02:17:57.986Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "016c1ed887c0facb72c4-f967f52a8a4c788c4407",
+          "file": "sales-data-view.spec.ts",
+          "line": 196,
+          "column": 5
+        },
+        {
+          "title": "source failure clears stale values and refresh retries the same selected scope",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2399,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T02:17:59.553Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "016c1ed887c0facb72c4-6f2061484e0912cb5cd2",
+          "file": "sales-data-view.spec.ts",
+          "line": 209,
+          "column": 5
+        },
+        {
+          "title": "investigation reset retains exact dates, dimensions and release across paging and refresh",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1736,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T02:18:02.026Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "016c1ed887c0facb72c4-f94412a3cdd82e108a6e",
+          "file": "sales-data-view.spec.ts",
+          "line": 227,
+          "column": 5
+        },
+        {
+          "title": "sales browser stays within 1440px and preserves a scrollable ledger",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1716,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T02:18:03.786Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "sales-data-compact-1440",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\system_qa_20261009\\frontend\\recovered-final-artifacts\\sales-data-view-sales-brow-6dd56-eserves-a-scrollable-ledger\\attachments\\sales-data-compact-1440-468849ae1858cf7a41ff36863dc7c018efe41e96.png"
+                    },
+                    {
+                      "name": "sales-data-ledger-1440",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\system_qa_20261009\\frontend\\recovered-final-artifacts\\sales-data-view-sales-brow-6dd56-eserves-a-scrollable-ledger\\attachments\\sales-data-ledger-1440-e0b49e06185907bf47164d41f0dab731acd63b31.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "016c1ed887c0facb72c4-10a86c943cc27049d30d",
+          "file": "sales-data-view.spec.ts",
+          "line": 258,
+          "column": 7
+        },
+        {
+          "title": "sales browser stays within 926px and preserves a scrollable ledger",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1742,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T02:18:05.531Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "sales-data-compact-926",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\system_qa_20261009\\frontend\\recovered-final-artifacts\\sales-data-view-sales-brow-fa8bd-eserves-a-scrollable-ledger\\attachments\\sales-data-compact-926-8916783b9f08248cc47f11732c44b207b6ae5749.png"
+                    },
+                    {
+                      "name": "sales-data-ledger-926",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\system_qa_20261009\\frontend\\recovered-final-artifacts\\sales-data-view-sales-brow-fa8bd-eserves-a-scrollable-ledger\\attachments\\sales-data-ledger-926-c1ca14f8efb8386089466ec7870b370d40f91e62.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "016c1ed887c0facb72c4-e801505dad4ff506327e",
+          "file": "sales-data-view.spec.ts",
+          "line": 258,
+          "column": 7
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-09T02:16:42.644Z",
+    "duration": 84927.668,
+    "expected": 20,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

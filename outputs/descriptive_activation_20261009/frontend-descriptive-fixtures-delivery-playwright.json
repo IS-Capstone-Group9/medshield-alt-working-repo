@@ -1,0 +1,1691 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\frontend\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "e2e/dashboard-null-contract.spec.ts",
+      "e2e/diagnostic-drilldown.spec.ts",
+      "e2e/sales-data-view.spec.ts",
+      "e2e/catalog-resolution.spec.ts",
+      "e2e/product-prioritization.spec.ts",
+      "--workers=1",
+      "--reporter=list,json",
+      "--output=test-results-descriptive-fixtures-delivery-20261009"
+    ],
+    "configFile": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\frontend\\playwright.config.ts",
+    "rootDir": "C:/Users/Adrian/projects/medshield1/medshield/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/Adrian/projects/medshield1/medshield/frontend/test-results-descriptive-fixtures-delivery-20261009",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/Adrian/projects/medshield1/medshield/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "catalog-resolution.spec.ts",
+      "file": "catalog-resolution.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "catalog filter, stable identity, safe aliases and export share one full denominator",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2283,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:14.306Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ce791586eb628f540166-c95d5f536719d3481a49",
+          "file": "catalog-resolution.spec.ts",
+          "line": 16,
+          "column": 1
+        },
+        {
+          "title": "adjusted quantity never becomes observed zero; exports retain release and packaging",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1523,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:17.048Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ce791586eb628f540166-68b729723ad9206438db",
+          "file": "catalog-resolution.spec.ts",
+          "line": 43,
+          "column": 1
+        },
+        {
+          "title": "product export waits for observed rows and preserves an observed zero",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1372,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:18.593Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ce791586eb628f540166-2f3d7aae7076baa69895",
+          "file": "catalog-resolution.spec.ts",
+          "line": 70,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "dashboard-null-contract.spec.ts",
+      "file": "dashboard-null-contract.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "nullable financial measures preserve unavailable values and observed zero independently",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 149,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:20.906Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f76158e988f54333e736-fa5137d514f645dcf818",
+          "file": "dashboard-null-contract.spec.ts",
+          "line": 31,
+          "column": 1
+        },
+        {
+          "title": "observations without any eligible revenue remain a valid unavailable population",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 34,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:21.074Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f76158e988f54333e736-583a7698a3903ba5fd8a",
+          "file": "dashboard-null-contract.spec.ts",
+          "line": 50,
+          "column": 1
+        },
+        {
+          "title": "malformed measure undefined fails visibly at every core boundary",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 166,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:21.127Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f76158e988f54333e736-e3bc799dc521aa640bd8",
+          "file": "dashboard-null-contract.spec.ts",
+          "line": 65,
+          "column": 3
+        },
+        {
+          "title": "malformed measure \"\" fails visibly at every core boundary",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 122,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:21.317Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f76158e988f54333e736-4994f1da4dcc44c15ac1",
+          "file": "dashboard-null-contract.spec.ts",
+          "line": 65,
+          "column": 3
+        },
+        {
+          "title": "malformed measure \"100\" fails visibly at every core boundary",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 99,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:21.457Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f76158e988f54333e736-798674785623ad3b7a88",
+          "file": "dashboard-null-contract.spec.ts",
+          "line": 65,
+          "column": 3
+        },
+        {
+          "title": "malformed measure \"bad\" fails visibly at every core boundary",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 85,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:21.578Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f76158e988f54333e736-c4fa9176400d30e550ec",
+          "file": "dashboard-null-contract.spec.ts",
+          "line": 65,
+          "column": 3
+        },
+        {
+          "title": "malformed measure false fails visibly at every core boundary",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 73,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:21.680Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f76158e988f54333e736-a4266fa5e1dd52c148b5",
+          "file": "dashboard-null-contract.spec.ts",
+          "line": 65,
+          "column": 3
+        },
+        {
+          "title": "malformed measure NaN fails visibly at every core boundary",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 70,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:21.772Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f76158e988f54333e736-8957650e142c5e9e299b",
+          "file": "dashboard-null-contract.spec.ts",
+          "line": 65,
+          "column": 3
+        },
+        {
+          "title": "malformed measure Infinity fails visibly at every core boundary",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 55,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:21.859Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f76158e988f54333e736-e95605a69826010af975",
+          "file": "dashboard-null-contract.spec.ts",
+          "line": 65,
+          "column": 3
+        },
+        {
+          "title": "malformed measure -Infinity fails visibly at every core boundary",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 54,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:21.931Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f76158e988f54333e736-f90bde470b193d8c156a",
+          "file": "dashboard-null-contract.spec.ts",
+          "line": 65,
+          "column": 3
+        },
+        {
+          "title": "malformed measure [] fails visibly at every core boundary",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 50,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:21.997Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f76158e988f54333e736-102a7b32f166fbfbff92",
+          "file": "dashboard-null-contract.spec.ts",
+          "line": 65,
+          "column": 3
+        },
+        {
+          "title": "malformed measure {} fails visibly at every core boundary",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 58,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:22.060Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f76158e988f54333e736-9dad49e7d112ad72b1cb",
+          "file": "dashboard-null-contract.spec.ts",
+          "line": 65,
+          "column": 3
+        },
+        {
+          "title": "null rows, blank identifiers, invalid periods and non-Databricks source fail visibly",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 82,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:22.133Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f76158e988f54333e736-fcebb12f4792e410a35e",
+          "file": "dashboard-null-contract.spec.ts",
+          "line": 75,
+          "column": 1
+        },
+        {
+          "title": "nullable summary cards display unavailable and ledger cells show a missing marker",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 323,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:22.230Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f76158e988f54333e736-afc16a34d78eda1c3d36",
+          "file": "dashboard-null-contract.spec.ts",
+          "line": 93,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "diagnostic-drilldown.spec.ts",
+      "file": "diagnostic-drilldown.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "chart drilldown admits observed zero and excludes missing, estimates and prior-series selections",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1472,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:22.598Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3e09f60c758c54f940d6-d185176e8391914f8b41",
+          "file": "diagnostic-drilldown.spec.ts",
+          "line": 138,
+          "column": 1
+        },
+        {
+          "title": "chart point scope keeps exact partial custom dates instead of broadening month boundaries",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1445,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:24.089Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3e09f60c758c54f940d6-8d86084274e2be415e69",
+          "file": "diagnostic-drilldown.spec.ts",
+          "line": 160,
+          "column": 1
+        },
+        {
+          "title": "last-N monthly date scope stays exact when the chart uses yearly display grain",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1625,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:25.557Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3e09f60c758c54f940d6-5e3d7760049af69bf962",
+          "file": "diagnostic-drilldown.spec.ts",
+          "line": 173,
+          "column": 1
+        },
+        {
+          "title": "chart-to-investigation transition withholds data when the source release changes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1339,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:27.203Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3e09f60c758c54f940d6-2ce671c1f92e2b3f4333",
+          "file": "diagnostic-drilldown.spec.ts",
+          "line": 187,
+          "column": 1
+        },
+        {
+          "title": "all dimensions retain signed offsets, nested filters and back navigation without losing draft notes on view changes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1738,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:28.563Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3e09f60c758c54f940d6-c897b0b4297c8c5211ab",
+          "file": "diagnostic-drilldown.spec.ts",
+          "line": 197,
+          "column": 1
+        },
+        {
+          "title": "canonical product inspection uses reporting identity and retains category scope",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2188,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:30.321Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3e09f60c758c54f940d6-411deda596f56cc82cd7",
+          "file": "diagnostic-drilldown.spec.ts",
+          "line": 227,
+          "column": 1
+        },
+        {
+          "title": "unavailable evidence retries the same scope and inconsistent partitions remain withheld",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1598,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:32.530Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3e09f60c758c54f940d6-1132772d6e1d2ffab8df",
+          "file": "diagnostic-drilldown.spec.ts",
+          "line": 247,
+          "column": 1
+        },
+        {
+          "title": "export keeps release identity, every signed partition and unverified causal status with review notes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1531,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:34.150Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3e09f60c758c54f940d6-2bdaea8488c5fda6ee9c",
+          "file": "diagnostic-drilldown.spec.ts",
+          "line": 263,
+          "column": 1
+        },
+        {
+          "title": "transaction ledger retains identical date and dimension filters in pagination and summary and blocks a changed release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2268,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:35.702Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3e09f60c758c54f940d6-3d11cd307fca056de15d",
+          "file": "diagnostic-drilldown.spec.ts",
+          "line": 279,
+          "column": 1
+        },
+        {
+          "title": "prior ledger dates and STL unusual-period investigation keep their documented independent scope",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3165,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:37.994Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3e09f60c758c54f940d6-bf4b9339681eaec014cb",
+          "file": "diagnostic-drilldown.spec.ts",
+          "line": 302,
+          "column": 1
+        },
+        {
+          "title": "diagnostic evidence fits 1440px and remains inspectable without page overflow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1709,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:41.181Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "diagnostic-panel-1440",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\frontend\\test-results-descriptive-fixtures-delivery-20261009\\diagnostic-drilldown-diagn-33786-table-without-page-overflow-chromium\\attachments\\diagnostic-panel-1440-fceda56427af23dd9c8991950ac58a94f175f8f5.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3e09f60c758c54f940d6-91bf047cdc89a07bf8eb",
+          "file": "diagnostic-drilldown.spec.ts",
+          "line": 319,
+          "column": 34
+        },
+        {
+          "title": "diagnostic evidence fits 375px and remains inspectable without page overflow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1448,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:42.913Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "diagnostic-panel-375",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\frontend\\test-results-descriptive-fixtures-delivery-20261009\\diagnostic-drilldown-diagn-eddf6-table-without-page-overflow-chromium\\attachments\\diagnostic-panel-375-a37edbf2c8902778a3ca5eec1525bc232d292eae.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3e09f60c758c54f940d6-ae27dc6816491a27cbe7",
+          "file": "diagnostic-drilldown.spec.ts",
+          "line": 319,
+          "column": 34
+        }
+      ]
+    },
+    {
+      "title": "product-prioritization.spec.ts",
+      "file": "product-prioritization.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "observed revenue ranks and full-population ABC replace unsupported clinical claims",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1713,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:44.421Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5763ac87f8cc1596671e-61ddfcc34f300482bc6b",
+          "file": "product-prioritization.spec.ts",
+          "line": 28,
+          "column": 1
+        },
+        {
+          "title": "cohort preserves denominator; empty years do not fall back to historical products",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1434,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:46.151Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5763ac87f8cc1596671e-be04f331e8a9ac85c6ea",
+          "file": "product-prioritization.spec.ts",
+          "line": 56,
+          "column": 1
+        },
+        {
+          "title": "returns remain separate in positive-sales ABC; monthly aggregates cannot become partial-month sales",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1480,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:47.604Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5763ac87f8cc1596671e-ecf5c28987ca219e7032",
+          "file": "product-prioritization.spec.ts",
+          "line": 65,
+          "column": 1
+        },
+        {
+          "title": "source labels render as text and export uses selected scope",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1360,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:49.101Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5763ac87f8cc1596671e-df24f0814d6b2b6e7d90",
+          "file": "product-prioritization.spec.ts",
+          "line": 82,
+          "column": 1
+        },
+        {
+          "title": "a cutoff-crossing name stays in its starting group and CSV retains original codes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1563,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:50.479Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5763ac87f8cc1596671e-b45c991da03f881f58f5",
+          "file": "product-prioritization.spec.ts",
+          "line": 93,
+          "column": 1
+        },
+        {
+          "title": "table search and paging preserve charts and complete-cohort export; scope changes reset pages",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2580,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:52.066Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5763ac87f8cc1596671e-d2957f81ce622a77b8a3",
+          "file": "product-prioritization.spec.ts",
+          "line": 105,
+          "column": 1
+        },
+        {
+          "title": "product controls and expanded row evidence fit a mobile viewport",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1686,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:54.668Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "product-table-bounds",
+                      "contentType": "application/json",
+                      "body": "eyJ0YWJsZVdpZHRoIjoyOTkuODkwNjI1LCJjc3NXaWR0aCI6IjI5OS44OTFweCIsIm1pbldpZHRoIjoiMHB4IiwicGFyZW50V2lkdGgiOjI5OS44OTA2MjUsInNjcm9sbExlZnQiOjAsInNjcm9sbFdpZHRoIjozMDAsImZpcnN0Q2VsbExlZnQiOjM2LCJwYXJlbnRMZWZ0IjozNX0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5763ac87f8cc1596671e-9b46d307068685e5dd5b",
+          "file": "product-prioritization.spec.ts",
+          "line": 137,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "sales-data-view.spec.ts",
+      "file": "sales-data-view.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "search, multi-year quality filters, paging and reset keep summaries in the selected scope",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1447,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:56.400Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "016c1ed887c0facb72c4-b35915ea6c8ecbc3d394",
+          "file": "sales-data-view.spec.ts",
+          "line": 115,
+          "column": 1
+        },
+        {
+          "title": "signed financial values stay readable and full ledger exposes source lineage",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 858,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:57.866Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "016c1ed887c0facb72c4-5bddd8f2d1728ee585bf",
+          "file": "sales-data-view.spec.ts",
+          "line": 147,
+          "column": 1
+        },
+        {
+          "title": "dataset evidence is discoverable while the transaction table stays the default focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1070,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:58.742Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "016c1ed887c0facb72c4-2075d12a2585411df05a",
+          "file": "sales-data-view.spec.ts",
+          "line": 165,
+          "column": 1
+        },
+        {
+          "title": "no matching records and rejected-row browsing show an honest empty state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1075,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:52:59.832Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "016c1ed887c0facb72c4-eeaa58c208ee6463b26a",
+          "file": "sales-data-view.spec.ts",
+          "line": 182,
+          "column": 1
+        },
+        {
+          "title": "missing summary measures remain unavailable while observed zero remains zero",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1010,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:53:00.926Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "016c1ed887c0facb72c4-84635d0a071a3a7254f0",
+          "file": "sales-data-view.spec.ts",
+          "line": 196,
+          "column": 1
+        },
+        {
+          "title": "source failure clears stale values and refresh retries the same selected scope",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1691,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:53:01.955Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "016c1ed887c0facb72c4-fb85f27b8c28cbeb09ed",
+          "file": "sales-data-view.spec.ts",
+          "line": 209,
+          "column": 1
+        },
+        {
+          "title": "investigation reset retains exact dates, dimensions and release across paging and refresh",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1533,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:53:03.666Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "016c1ed887c0facb72c4-8e4b58020a6f9b14ebfd",
+          "file": "sales-data-view.spec.ts",
+          "line": 227,
+          "column": 1
+        },
+        {
+          "title": "sales browser stays within 1440px and preserves a scrollable ledger",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1391,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:53:05.222Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "sales-data-compact-1440",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\frontend\\test-results-descriptive-fixtures-delivery-20261009\\sales-data-view-sales-brow-6dd56-eserves-a-scrollable-ledger-chromium\\attachments\\sales-data-compact-1440-2b3bde3b66f2d390fa019a3059fb445ea010bff9.png"
+                    },
+                    {
+                      "name": "sales-data-ledger-1440",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\frontend\\test-results-descriptive-fixtures-delivery-20261009\\sales-data-view-sales-brow-6dd56-eserves-a-scrollable-ledger-chromium\\attachments\\sales-data-ledger-1440-4c7056bed8d6a5cc3fb3c8af2ab761ca329e6b64.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "016c1ed887c0facb72c4-115943b5f773d1f35bfe",
+          "file": "sales-data-view.spec.ts",
+          "line": 258,
+          "column": 3
+        },
+        {
+          "title": "sales browser stays within 926px and preserves a scrollable ledger",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1187,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:53:06.634Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "sales-data-compact-926",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\frontend\\test-results-descriptive-fixtures-delivery-20261009\\sales-data-view-sales-brow-fa8bd-eserves-a-scrollable-ledger-chromium\\attachments\\sales-data-compact-926-a1ee62ffde0ec29f8d6e645cb46e8e79a66d80cb.png"
+                    },
+                    {
+                      "name": "sales-data-ledger-926",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\frontend\\test-results-descriptive-fixtures-delivery-20261009\\sales-data-view-sales-brow-fa8bd-eserves-a-scrollable-ledger-chromium\\attachments\\sales-data-ledger-926-d72aecce656b89a7b15b1f6ba3bebf6986e8a6b3.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "016c1ed887c0facb72c4-a22b7bb646711e0b6532",
+          "file": "sales-data-view.spec.ts",
+          "line": 258,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-09T07:52:11.422Z",
+    "duration": 56700.829,
+    "expected": 45,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

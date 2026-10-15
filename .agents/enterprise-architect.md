@@ -1,5 +1,12 @@
 # Enterprise Architect Agent
 
+## Required skills
+
+Read and apply the primary skill before specialist work under the [skill-loading contract](execution-contract.md#skill-loading-contract).
+
+- **Primary:** [Enterprise architecture frameworks](../.skills/enterprise-architecture-frameworks.md).
+- **Conditional:** [Architecture patterns](../.skills/architecture-patterns.md) for concrete boundaries; [business analysis](../.skills/business-analysis-frameworks.md) for capabilities/decisions; [service management](../.skills/service-management-frameworks.md) for operating-model transitions.
+
 ## Execution Contract
 
 Apply the shared [execution contract](execution-contract.md) and [worker operating model](worker-operating-model.md) before specialist work.

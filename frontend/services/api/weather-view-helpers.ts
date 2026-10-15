@@ -3,6 +3,9 @@ import { formatSalesValue } from './sales-view-helpers'
 
 export function weatherProviderLabel(provider: string) {
   if (provider === 'nasa_power') return 'NASA POWER'
+  if (provider === 'open_meteo_era5') return 'Open-Meteo ERA5'
+  if (provider === 'open_meteo_era5_seamless') return 'Open-Meteo ERA5-Seamless'
+  if (provider === 'open_meteo_ifs') return 'Open-Meteo ECMWF IFS'
   if (provider === 'open_meteo') return 'Open-Meteo Archive'
   return provider
     .split('_')
@@ -35,7 +38,7 @@ export function renderWeatherEffects(root: HTMLElement, result: WeatherEffects) 
   const isDaily = grain === 'daily'
   const headers = isDaily
     ? ['Date', 'Area', 'Provider', 'Rainfall', 'Rainy Day', 'Temp', 'Humidity', 'Wind', 'Severity Proxy', 'Alert', 'Daily Sales Net CP', 'Planning Uplift']
-    : ['Period', 'Area', 'Provider', 'Rainfall', 'Rainy Days', 'Avg Temp', 'Avg Humidity', 'Max Wind', 'Severity Proxy', 'Alert', 'Monthly Sales Net CP', 'Planning Uplift']
+    : ['Period', 'Area', 'Provider', 'Rainfall', 'Rainy Days', 'Avg Temp', 'Avg Humidity', 'Max Reported Wind', 'Severity Proxy', 'Alert', 'Monthly Sales Net CP', 'Planning Uplift']
   
   const head = table.createTHead()
   const headerRow = head.insertRow()
@@ -80,7 +83,9 @@ export function renderWeatherEffects(root: HTMLElement, result: WeatherEffects) 
 
   status.textContent = result.rows.length
     ? `${weatherProviderLabel(provider)} | ${sourceLabel} | ${grain === 'daily' ? 'Daily rows' : 'Monthly aggregate'} | ${period} | ${periods} weather rows | ${salesMatches} sales matches | ${correlation}`
-    : `No ${weatherProviderLabel(provider)} rows match the selected territory and year in ${sourceLabel}.`
+    : metadata.status === 'not_refreshed'
+      ? `No ${weatherProviderLabel(provider)} candidate data has been refreshed into ${sourceLabel} for this selection.`
+      : `No ${weatherProviderLabel(provider)} rows match the selected territory and year in ${sourceLabel}.`
   
   if (countLabel) {
     countLabel.textContent = `${sourceLabel} returned ${periods} records | matched ${salesMatches} sales periods | rainfall-revenue ${correlation}`

@@ -31,3 +31,5 @@ Defines the frontend rules for the MedShield dashboard. The project uses Next.js
 - Use named types or interfaces for component data contracts.
 - Keep charts, tables, filters, and summary cards visually consistent.
 - Update supporting documentation when frontend behavior changes.
+- For analytical views, apply [analytics frameworks](analytics-frameworks.md) to labels, scope/coverage and claim wording. Distinguish missing, observed zero, partial periods, forecasts, proxies and entered scenarios; keep displayed and exported populations aligned.
+- Required analytical-source failure shows an unavailable state. Bundled, seeded, local or educational values cannot populate dashboard measures during an outage; follow [architecture](../docs/ARCHITECTURE.md).

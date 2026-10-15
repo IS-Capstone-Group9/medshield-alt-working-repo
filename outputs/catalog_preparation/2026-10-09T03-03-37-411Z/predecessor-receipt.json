@@ -1,0 +1,3612 @@
+{
+  "status": "PASS_READ_ONLY_PREDECESSOR_SOURCE_CAPTURE",
+  "checked_at": "2026-10-09T03:04:59.110Z",
+  "baseline_fact_version": 19,
+  "identity": {
+    "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+    "policy_version": "sales_restart_gold_v7_independent_catalog",
+    "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+    "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+    "publication_status": "CANDIDATE_PENDING_BUSINESS_AND_PRODUCT_MASTER_REVIEW",
+    "product_reference_sha256": "e6055d5303427c8d9c4c755c85e1bf0f5f1b42e4f4d44b2d894a87c1600a9e48",
+    "transaction_evidence_sha256": "5e1a839d551293b51149e7c35d863ce680573e02275f65d17512d6099ff88786",
+    "catalog_helper_sha256": "20888a90253718dabf2aea3390ecc8d7ca707b388e8a4d45123e894c98f688c9"
+  },
+  "fact_schema": [
+    {
+      "col_name": "source_record_id",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "normalized_area",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "normalized_product",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "source_workbook",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "dataset_id",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "source_file_sha256",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "source_path",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "raw_csv_line",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "source_layout",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "area_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "product_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "dr_number_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "date_delivered_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "area",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "product",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "dr_number",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "net_value_source",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "record_kind",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "disposition",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "business_fingerprint",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "snapshot_reference_source_record_id",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "silver_version",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "reporting_year_basis",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "quantity_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "unit_selling_price_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "gross_sales_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "discount_amount_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "net_sales_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "unit_acquisition_cost_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "total_acquisition_cost_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "gross_margin_amount_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "margin_pct_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "discount_rate_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "quantity_secondary_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "data_source_year",
+      "data_type": "bigint",
+      "comment": null
+    },
+    {
+      "col_name": "source_row_number",
+      "data_type": "bigint",
+      "comment": null
+    },
+    {
+      "col_name": "calendar_year",
+      "data_type": "int",
+      "comment": null
+    },
+    {
+      "col_name": "reporting_year",
+      "data_type": "bigint",
+      "comment": null
+    },
+    {
+      "col_name": "date_delivered",
+      "data_type": "date",
+      "comment": null
+    },
+    {
+      "col_name": "quantity",
+      "data_type": "decimal(20,6)",
+      "comment": null
+    },
+    {
+      "col_name": "unit_selling_price",
+      "data_type": "decimal(20,6)",
+      "comment": null
+    },
+    {
+      "col_name": "gross_sales",
+      "data_type": "decimal(20,6)",
+      "comment": null
+    },
+    {
+      "col_name": "discount_amount",
+      "data_type": "decimal(20,6)",
+      "comment": null
+    },
+    {
+      "col_name": "net_sales",
+      "data_type": "decimal(20,6)",
+      "comment": null
+    },
+    {
+      "col_name": "unit_acquisition_cost",
+      "data_type": "decimal(20,6)",
+      "comment": null
+    },
+    {
+      "col_name": "total_acquisition_cost",
+      "data_type": "decimal(20,6)",
+      "comment": null
+    },
+    {
+      "col_name": "gross_margin_amount",
+      "data_type": "decimal(20,6)",
+      "comment": null
+    },
+    {
+      "col_name": "margin_pct",
+      "data_type": "decimal(20,6)",
+      "comment": null
+    },
+    {
+      "col_name": "discount_rate",
+      "data_type": "decimal(20,6)",
+      "comment": null
+    },
+    {
+      "col_name": "quantity_primary_candidate",
+      "data_type": "decimal(20,6)",
+      "comment": null
+    },
+    {
+      "col_name": "quantity_secondary_candidate",
+      "data_type": "decimal(20,6)",
+      "comment": null
+    },
+    {
+      "col_name": "raw_fields",
+      "data_type": "array<string>",
+      "comment": null
+    },
+    {
+      "col_name": "quality_rule_codes",
+      "data_type": "array<string>",
+      "comment": null
+    },
+    {
+      "col_name": "is_analysis_candidate",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "is_area_placeholder",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "is_date_missing",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "is_provisional_year_candidate",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "source_data_status",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "source_adjustment_policy",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "sales_fact_id",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "reference_proposed_category",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "reference_forecast_eligible",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "reference_mapping_status",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "reference_review_notes",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "canonical_group_id",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "canonical_sku",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "canonical_title",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "display_category",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "product_category",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "category_status",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "identity_status",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "item_kind",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "unit_of_measure",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "forecast_eligible",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "is_duplicate",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "catalog_evidence_source",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "brand",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "manufacturer",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "model",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "strength",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "concentration",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "dosage_form",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "container_size",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "packaging_unit",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "pack_count",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "contained_unit",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "bundle_specification",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "product_scope_status",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "is_medical_product_approved",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "area_classification",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "territory",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "is_geographic_territory_approved",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "is_external_geography_candidate",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "area_display_label",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "proposed_area_type",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "area_mapping_status",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "territory_id",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "mapped_region",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "mapped_province",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "mapped_city_municipality",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "mapped_geographic_level",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "mapped_customer_channel",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "mapped_business_line",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "area_mapping_evidence",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "area_evidence_status",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "external_mapping_status",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "transaction_evidence",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "transaction_evidence_lineage",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "product_key",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "area_key",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "date_key",
+      "data_type": "int",
+      "comment": null
+    },
+    {
+      "col_name": "month_start",
+      "data_type": "date",
+      "comment": null
+    },
+    {
+      "col_name": "is_contract_label",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "is_adjusted_source",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "resolution_policy",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "transaction_evidence_sha256",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "catalog_helper_sha256",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "is_low_trust_2017",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "is_historical_backfill_candidate",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "is_product_ranking_candidate",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "is_quantity_observation_eligible",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "is_gross_sales_eligible",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "is_net_sales_eligible",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "is_acquisition_cost_eligible",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "is_gross_margin_eligible",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "is_positive_delivery_quantity_eligible",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "is_return_quantity_eligible",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "return_quantity_abs",
+      "data_type": "decimal(20,6)",
+      "comment": null
+    },
+    {
+      "col_name": "is_provisional_product_demand_eligible",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "is_approved_medical_demand_eligible",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "is_external_analysis_candidate",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "external_join_status",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "is_external_join_ready",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "financial_review_required",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "transaction_quantity_status",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "contract_prefix",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "contract_label_group_key",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "product_reference_sha256",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "publication_status",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "policy_version",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "area_mapping_sha256",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "product_master_sha256",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "medical_supplies_in_scope",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "gold_published_at",
+      "data_type": "timestamp",
+      "comment": null
+    }
+  ],
+  "source_schema": [
+    {
+      "col_name": "dataset_id",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "source_record_id",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "source_workbook",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "source_file_sha256",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "source_path",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "raw_csv_line",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "source_layout",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "area_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "product_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "dr_number_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "date_delivered_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "area",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "product",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "dr_number",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "net_value_source",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "record_kind",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "disposition",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "business_fingerprint",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "snapshot_reference_source_record_id",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "silver_version",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "reporting_year_basis",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "quantity_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "unit_selling_price_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "gross_sales_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "discount_amount_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "net_sales_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "unit_acquisition_cost_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "total_acquisition_cost_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "gross_margin_amount_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "margin_pct_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "discount_rate_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "quantity_secondary_raw",
+      "data_type": "string",
+      "comment": null
+    },
+    {
+      "col_name": "data_source_year",
+      "data_type": "bigint",
+      "comment": null
+    },
+    {
+      "col_name": "source_row_number",
+      "data_type": "bigint",
+      "comment": null
+    },
+    {
+      "col_name": "calendar_year",
+      "data_type": "bigint",
+      "comment": null
+    },
+    {
+      "col_name": "reporting_year",
+      "data_type": "bigint",
+      "comment": null
+    },
+    {
+      "col_name": "date_delivered",
+      "data_type": "date",
+      "comment": null
+    },
+    {
+      "col_name": "quantity",
+      "data_type": "decimal(20,6)",
+      "comment": null
+    },
+    {
+      "col_name": "unit_selling_price",
+      "data_type": "decimal(20,6)",
+      "comment": null
+    },
+    {
+      "col_name": "gross_sales",
+      "data_type": "decimal(20,6)",
+      "comment": null
+    },
+    {
+      "col_name": "discount_amount",
+      "data_type": "decimal(20,6)",
+      "comment": null
+    },
+    {
+      "col_name": "net_sales",
+      "data_type": "decimal(20,6)",
+      "comment": null
+    },
+    {
+      "col_name": "unit_acquisition_cost",
+      "data_type": "decimal(20,6)",
+      "comment": null
+    },
+    {
+      "col_name": "total_acquisition_cost",
+      "data_type": "decimal(20,6)",
+      "comment": null
+    },
+    {
+      "col_name": "gross_margin_amount",
+      "data_type": "decimal(20,6)",
+      "comment": null
+    },
+    {
+      "col_name": "margin_pct",
+      "data_type": "decimal(20,6)",
+      "comment": null
+    },
+    {
+      "col_name": "discount_rate",
+      "data_type": "decimal(20,6)",
+      "comment": null
+    },
+    {
+      "col_name": "quantity_primary_candidate",
+      "data_type": "decimal(20,6)",
+      "comment": null
+    },
+    {
+      "col_name": "quantity_secondary_candidate",
+      "data_type": "decimal(20,6)",
+      "comment": null
+    },
+    {
+      "col_name": "raw_fields",
+      "data_type": "array<string>",
+      "comment": null
+    },
+    {
+      "col_name": "quality_rule_codes",
+      "data_type": "array<string>",
+      "comment": null
+    },
+    {
+      "col_name": "is_analysis_candidate",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "is_area_placeholder",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "is_date_missing",
+      "data_type": "boolean",
+      "comment": null
+    },
+    {
+      "col_name": "is_provisional_year_candidate",
+      "data_type": "boolean",
+      "comment": null
+    }
+  ],
+  "source_fields": [
+    "dataset_id",
+    "source_record_id",
+    "source_workbook",
+    "source_file_sha256",
+    "source_path",
+    "raw_csv_line",
+    "source_layout",
+    "area_raw",
+    "product_raw",
+    "dr_number_raw",
+    "date_delivered_raw",
+    "area",
+    "product",
+    "dr_number",
+    "net_value_source",
+    "record_kind",
+    "disposition",
+    "business_fingerprint",
+    "snapshot_reference_source_record_id",
+    "silver_version",
+    "reporting_year_basis",
+    "quantity_raw",
+    "unit_selling_price_raw",
+    "gross_sales_raw",
+    "discount_amount_raw",
+    "net_sales_raw",
+    "unit_acquisition_cost_raw",
+    "total_acquisition_cost_raw",
+    "gross_margin_amount_raw",
+    "margin_pct_raw",
+    "discount_rate_raw",
+    "quantity_secondary_raw",
+    "data_source_year",
+    "source_row_number",
+    "calendar_year",
+    "reporting_year",
+    "date_delivered",
+    "quantity",
+    "unit_selling_price",
+    "gross_sales",
+    "discount_amount",
+    "net_sales",
+    "unit_acquisition_cost",
+    "total_acquisition_cost",
+    "gross_margin_amount",
+    "margin_pct",
+    "discount_rate",
+    "quantity_primary_candidate",
+    "quantity_secondary_candidate",
+    "raw_fields",
+    "quality_rule_codes",
+    "is_analysis_candidate",
+    "is_area_placeholder",
+    "is_date_missing",
+    "is_provisional_year_candidate"
+  ],
+  "counts": {
+    "records": "37728",
+    "unique_records": "37728"
+  },
+  "source_differences": "0",
+  "dependency_versions": {
+    "workspace.medshield_audit.sales_restart_area_coverage_candidate": 8,
+    "workspace.medshield_audit.sales_restart_gold_disposition_candidate": 10,
+    "workspace.medshield_audit.sales_restart_gold_publication_candidate": 10,
+    "workspace.medshield_audit.sales_restart_contract_evidence_candidate": 10,
+    "workspace.medshield_audit.sales_restart_gold_quality_candidate": 10,
+    "workspace.medshield_audit.sales_restart_returns_candidate": 10,
+    "workspace.medshield_audit.sales_restart_replacement_year_validation_candidate": 4,
+    "workspace.medshield_audit.sales_restart_provisional_year_candidate": 9,
+    "workspace.medshield_bronze.sales_restart_manifest_candidate": 4,
+    "workspace.medshield_audit.sales_restart_scope_candidate": 9,
+    "workspace.medshield_gold.sales_restart_area_yearly_candidate": 10,
+    "workspace.medshield_bronze.sales_restart_rows_candidate": 4,
+    "workspace.medshield_gold.sales_restart_dim_area_candidate": 10,
+    "workspace.medshield_gold.sales_restart_business_product_yearly_candidate": 9,
+    "workspace.medshield_gold.sales_restart_contract_labels_candidate": 10,
+    "workspace.medshield_gold.sales_restart_dim_canonical_product_candidate": 1,
+    "workspace.medshield_gold.sales_restart_dim_date_candidate": 10,
+    "workspace.medshield_gold.sales_restart_external_input_candidate": 9,
+    "workspace.medshield_gold.sales_restart_dim_product_candidate": 10,
+    "workspace.medshield_gold.sales_restart_fact_candidate": 19,
+    "workspace.medshield_gold.sales_restart_product_yearly_candidate": 10,
+    "workspace.medshield_gold.sales_restart_medical_monthly_candidate": 9,
+    "workspace.medshield_gold.sales_restart_label_partition_candidate": 10,
+    "workspace.medshield_gold.sales_restart_monthly_candidate": 10,
+    "workspace.medshield_gold.sales_restart_stl_candidate": 3,
+    "workspace.medshield_silver.sales_restart_assessed_candidate": 8,
+    "workspace.medshield_gold.sales_restart_territory_yearly_candidate": 9,
+    "workspace.medshield_gold.sales_restart_yearly_candidate": 10,
+    "workspace.medshield_silver.sales_restart_clean_candidate": 10
+  },
+  "view_definitions": {
+    "workspace.medshield_gold.vw_dashboard_monthly_sales_candidate": [
+      {
+        "createtab_stmt": "CREATE VIEW medshield_gold.vw_dashboard_monthly_sales_candidate (\n  month_start,\n  calendar_year,\n  calendar_month,\n  transaction_count,\n  distinct_source_product_labels,\n  contract_label_transaction_count,\n  adjusted_source_transaction_count,\n  low_trust_2017_transaction_count,\n  historical_backfill_transaction_count,\n  financial_review_transaction_count,\n  signed_quantity,\n  signed_quantity_observation_count,\n  positive_delivered_quantity,\n  positive_delivered_quantity_observation_count,\n  return_quantity_abs,\n  return_quantity_abs_observation_count,\n  provisional_product_demand_quantity,\n  provisional_product_demand_quantity_observation_count,\n  approved_medical_demand_quantity,\n  approved_medical_demand_quantity_observation_count,\n  gross_sales,\n  gross_sales_observation_count,\n  net_sales,\n  net_sales_observation_count,\n  total_acquisition_cost,\n  total_acquisition_cost_observation_count,\n  gross_margin_amount,\n  gross_margin_amount_observation_count,\n  margin_net_sales_basis,\n  margin_net_sales_basis_observation_count,\n  weighted_gross_margin_pct,\n  observation_status,\n  source_completeness_status,\n  dataset_id,\n  policy_version,\n  publication_status,\n  product_reference_sha256,\n  area_mapping_sha256,\n  product_master_sha256,\n  medical_supplies_in_scope,\n  gold_published_at,\n  year_month,\n  month_number,\n  month_short_name,\n  has_sales_activity,\n  total_quantity_candidate,\n  gross_sales_candidate,\n  net_sales_candidate,\n  transfer_value_candidate,\n  gross_margin_candidate,\n  weighted_gross_margin_pct_candidate,\n  financial_definition_status)\nWITH SCHEMA COMPENSATION\nAS SELECT\n  m.*,\n  DATE_FORMAT(m.month_start, 'yyyy-MM') AS year_month,\n  m.calendar_month AS month_number,\n  DATE_FORMAT(m.month_start, 'MMM') AS month_short_name,\n  m.transaction_count > 0 AS has_sales_activity,\n  m.signed_quantity AS total_quantity_candidate,\n  m.gross_sales AS gross_sales_candidate,\n  m.net_sales AS net_sales_candidate,\n  m.total_acquisition_cost AS transfer_value_candidate,\n  m.gross_margin_amount AS gross_margin_candidate,\n  m.weighted_gross_margin_pct AS weighted_gross_margin_pct_candidate,\n  'DEFINITIONS_APPROVED_DATASET_RELEASE_PENDING'\n    AS financial_definition_status\nFROM workspace.medshield_gold.sales_restart_monthly_candidate AS m\n"
+      }
+    ],
+    "workspace.medshield_gold.vw_dashboard_yearly_sales_candidate": [
+      {
+        "createtab_stmt": "CREATE VIEW medshield_gold.vw_dashboard_yearly_sales_candidate (\n  calendar_year,\n  first_delivery_date,\n  last_delivery_date,\n  calendar_month_count,\n  active_month_count,\n  zero_activity_month_count,\n  month_activity_status,\n  transaction_count,\n  distinct_dr_count,\n  distinct_area_count,\n  distinct_product_count,\n  warning_transaction_count,\n  fully_eligible_transaction_count,\n  partially_eligible_transaction_count,\n  dimension_only_transaction_count,\n  source_year_mismatch_count,\n  negative_quantity_review_count,\n  financial_formula_warning_count,\n  quantity_eligible_transaction_count,\n  gross_sales_eligible_transaction_count,\n  net_sales_eligible_transaction_count,\n  transfer_value_eligible_transaction_count,\n  gross_margin_eligible_transaction_count,\n  total_quantity_candidate,\n  gross_sales_candidate,\n  net_sales_candidate,\n  transfer_value_candidate,\n  gross_margin_candidate,\n  weighted_gross_margin_pct_candidate,\n  warning_transaction_rate,\n  fully_eligible_transaction_rate,\n  quantity_coverage_rate,\n  net_sales_coverage_rate,\n  gross_margin_coverage_rate,\n  previous_calendar_year,\n  previous_transaction_count,\n  previous_total_quantity_candidate,\n  previous_gross_sales_candidate,\n  previous_net_sales_candidate,\n  previous_gross_margin_candidate,\n  transaction_count_yoy_pct,\n  quantity_yoy_pct_candidate,\n  gross_sales_yoy_pct_candidate,\n  net_sales_yoy_pct_candidate,\n  gross_margin_yoy_pct_candidate,\n  yoy_comparison_status,\n  financial_definition_status)\nWITH SCHEMA COMPENSATION\nAS WITH fact_quality AS (\n  SELECT\n    calendar_year,\n    MIN(date_delivered) AS first_delivery_date,\n    MAX(date_delivered) AS last_delivery_date,\n    COUNT(DISTINCT dr_number) AS distinct_dr_count,\n    COUNT(DISTINCT normalized_area) AS distinct_area_count,\n    COUNT(DISTINCT normalized_product) AS distinct_product_count,\n    SUM(CASE WHEN SIZE(quality_rule_codes) > 0 THEN 1 ELSE 0 END) AS warning_transaction_count,\n    SUM(CASE\n      WHEN is_quantity_observation_eligible\n       AND is_gross_sales_eligible\n       AND is_net_sales_eligible\n       AND is_acquisition_cost_eligible\n       AND is_gross_margin_eligible\n      THEN 1 ELSE 0 END\n    ) AS fully_eligible_transaction_count,\n    SUM(CASE\n      WHEN (\n        is_quantity_observation_eligible OR is_gross_sales_eligible\n        OR is_net_sales_eligible OR is_acquisition_cost_eligible\n        OR is_gross_margin_eligible\n      ) AND NOT (\n        is_quantity_observation_eligible AND is_gross_sales_eligible\n        AND is_net_sales_eligible AND is_acquisition_cost_eligible\n        AND is_gross_margin_eligible\n      ) THEN 1 ELSE 0 END\n    ) AS partially_eligible_transaction_count,\n    SUM(CASE\n      WHEN NOT (\n        is_quantity_observation_eligible OR is_gross_sales_eligible\n        OR is_net_sales_eligible OR is_acquisition_cost_eligible\n        OR is_gross_margin_eligible\n      ) THEN 1 ELSE 0 END\n    ) AS dimension_only_transaction_count,\n    SUM(CASE WHEN data_source_year <> calendar_year THEN 1 ELSE 0 END) AS source_year_mismatch_count,\n    SUM(CASE WHEN quantity < 0 THEN 1 ELSE 0 END) AS negative_quantity_review_count,\n    SUM(CASE\n      WHEN ARRAY_CONTAINS(quality_rule_codes, 'GROSS_VALUE_FORMULA_MISMATCH')\n        OR ARRAY_CONTAINS(quality_rule_codes, 'NET_VALUE_FORMULA_MISMATCH')\n        OR ARRAY_CONTAINS(quality_rule_codes, 'TRANSFER_VALUE_FORMULA_MISMATCH')\n        OR ARRAY_CONTAINS(quality_rule_codes, 'GROSS_MARGIN_FORMULA_MISMATCH')\n      THEN 1 ELSE 0 END\n    ) AS financial_formula_warning_count\n  FROM workspace.medshield_gold.sales_restart_fact_candidate\n  GROUP BY calendar_year\n),\nyearly_base AS (\n  SELECT\n    y.calendar_year,\n    q.first_delivery_date,\n    q.last_delivery_date,\n    y.calendar_month_count,\n    y.observed_month_count AS active_month_count,\n    y.unobserved_month_count AS zero_activity_month_count,\n    CASE\n      WHEN y.unobserved_month_count = 0 THEN 'ACTIVITY_OBSERVED_ALL_12_MONTHS'\n      ELSE 'UNOBSERVED_MONTHS_PRESENT'\n    END AS month_activity_status,\n    y.transaction_count,\n    q.distinct_dr_count,\n    q.distinct_area_count,\n    q.distinct_product_count,\n    q.warning_transaction_count,\n    q.fully_eligible_transaction_count,\n    q.partially_eligible_transaction_count,\n    q.dimension_only_transaction_count,\n    q.source_year_mismatch_count,\n    q.negative_quantity_review_count,\n    q.financial_formula_warning_count,\n    y.signed_quantity_observation_count AS quantity_eligible_transaction_count,\n    y.gross_sales_observation_count AS gross_sales_eligible_transaction_count,\n    y.net_sales_observation_count AS net_sales_eligible_transaction_count,\n    y.total_acquisition_cost_observation_count AS transfer_value_eligible_transaction_count,\n    y.gross_margin_amount_observation_count AS gross_margin_eligible_transaction_count,\n    y.signed_quantity AS total_quantity_candidate,\n    y.gross_sales AS gross_sales_candidate,\n    y.net_sales AS net_sales_candidate,\n    y.total_acquisition_cost AS transfer_value_candidate,\n    y.gross_margin_amount AS gross_margin_candidate,\n    y.weighted_gross_margin_pct AS weighted_gross_margin_pct_candidate\n  FROM workspace.medshield_gold.sales_restart_yearly_candidate AS y\n  INNER JOIN fact_quality AS q USING (calendar_year)\n),\nwith_previous AS (\n  SELECT\n    *,\n    LAG(calendar_year) OVER (ORDER BY calendar_year) AS previous_calendar_year,\n    LAG(transaction_count) OVER (ORDER BY calendar_year) AS previous_transaction_count,\n    LAG(total_quantity_candidate) OVER (ORDER BY calendar_year) AS previous_total_quantity_candidate,\n    LAG(gross_sales_candidate) OVER (ORDER BY calendar_year) AS previous_gross_sales_candidate,\n    LAG(net_sales_candidate) OVER (ORDER BY calendar_year) AS previous_net_sales_candidate,\n    LAG(gross_margin_candidate) OVER (ORDER BY calendar_year) AS previous_gross_margin_candidate,\n    LAG(zero_activity_month_count) OVER (ORDER BY calendar_year) AS previous_zero_activity_month_count\n  FROM yearly_base\n)\nSELECT\n  calendar_year,\n  first_delivery_date,\n  last_delivery_date,\n  calendar_month_count,\n  active_month_count,\n  zero_activity_month_count,\n  month_activity_status,\n  transaction_count,\n  distinct_dr_count,\n  distinct_area_count,\n  distinct_product_count,\n  warning_transaction_count,\n  fully_eligible_transaction_count,\n  partially_eligible_transaction_count,\n  dimension_only_transaction_count,\n  source_year_mismatch_count,\n  negative_quantity_review_count,\n  financial_formula_warning_count,\n  quantity_eligible_transaction_count,\n  gross_sales_eligible_transaction_count,\n  net_sales_eligible_transaction_count,\n  transfer_value_eligible_transaction_count,\n  gross_margin_eligible_transaction_count,\n  total_quantity_candidate,\n  gross_sales_candidate,\n  net_sales_candidate,\n  transfer_value_candidate,\n  gross_margin_candidate,\n  weighted_gross_margin_pct_candidate,\n  ROUND(warning_transaction_count / NULLIF(transaction_count, 0), 4) AS warning_transaction_rate,\n  ROUND(fully_eligible_transaction_count / NULLIF(transaction_count, 0), 4) AS fully_eligible_transaction_rate,\n  ROUND(quantity_eligible_transaction_count / NULLIF(transaction_count, 0), 4) AS quantity_coverage_rate,\n  ROUND(net_sales_eligible_transaction_count / NULLIF(transaction_count, 0), 4) AS net_sales_coverage_rate,\n  ROUND(gross_margin_eligible_transaction_count / NULLIF(transaction_count, 0), 4) AS gross_margin_coverage_rate,\n  previous_calendar_year,\n  previous_transaction_count,\n  previous_total_quantity_candidate,\n  previous_gross_sales_candidate,\n  previous_net_sales_candidate,\n  previous_gross_margin_candidate,\n  ROUND(100 * (transaction_count - previous_transaction_count)\n    / NULLIF(ABS(previous_transaction_count), 0), 2) AS transaction_count_yoy_pct,\n  ROUND(100 * (total_quantity_candidate - previous_total_quantity_candidate)\n    / NULLIF(ABS(previous_total_quantity_candidate), 0), 2) AS quantity_yoy_pct_candidate,\n  ROUND(100 * (gross_sales_candidate - previous_gross_sales_candidate)\n    / NULLIF(ABS(previous_gross_sales_candidate), 0), 2) AS gross_sales_yoy_pct_candidate,\n  ROUND(100 * (net_sales_candidate - previous_net_sales_candidate)\n    / NULLIF(ABS(previous_net_sales_candidate), 0), 2) AS net_sales_yoy_pct_candidate,\n  ROUND(100 * (gross_margin_candidate - previous_gross_margin_candidate)\n    / NULLIF(ABS(previous_gross_margin_candidate), 0), 2) AS gross_margin_yoy_pct_candidate,\n  CASE\n    WHEN previous_calendar_year IS NULL THEN 'NO_PREVIOUS_YEAR'\n    WHEN zero_activity_month_count > 0 OR previous_zero_activity_month_count > 0\n      THEN 'REVIEW_ZERO_ACTIVITY_MONTHS'\n    ELSE 'FULL_12_MONTH_ACTIVITY_BOTH_YEARS'\n  END AS yoy_comparison_status,\n  'DEFINITIONS_APPROVED_DATASET_RELEASE_PENDING' AS financial_definition_status\nFROM with_previous\n"
+      }
+    ]
+  },
+  "queries": [
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_fact_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "19",
+          "timestamp": "2026-10-07T05:22:44.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\",\\\"delta.logRetentionDuration\\\":\\\"interval 30 days\\\",\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.deletedFileRetentionDuration\\\":\\\"interval 30 days\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.workloadBasedColumns.deltaFileStatistics\\\":\\\"`sales_fact_id`,`calendar_year`,`proposed_area_type`,`month_start`,`product_scope_status`\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "21243b0d-e1a7-452d-a558-013e439540b7",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "18",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"9395631\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"37728\",\"numOutputBytes\":\"9395744\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT DISTINCT dataset_id, policy_version, area_mapping_sha256, product_master_sha256, publication_status, product_reference_sha256, transaction_evidence_sha256, catalog_helper_sha256 FROM workspace.medshield_gold.sales_restart_fact_candidate VERSION AS OF 19",
+      "rows": [
+        {
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+          "publication_status": "CANDIDATE_PENDING_BUSINESS_AND_PRODUCT_MASTER_REVIEW",
+          "product_reference_sha256": "e6055d5303427c8d9c4c755c85e1bf0f5f1b42e4f4d44b2d894a87c1600a9e48",
+          "transaction_evidence_sha256": "5e1a839d551293b51149e7c35d863ce680573e02275f65d17512d6099ff88786",
+          "catalog_helper_sha256": "20888a90253718dabf2aea3390ecc8d7ca707b388e8a4d45123e894c98f688c9"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE TABLE workspace.medshield_gold.sales_restart_fact_candidate",
+      "rows": [
+        {
+          "col_name": "source_record_id",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "normalized_area",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "normalized_product",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "source_workbook",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "dataset_id",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "source_file_sha256",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "source_path",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "raw_csv_line",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "source_layout",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "area_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "product_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "dr_number_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "date_delivered_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "area",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "product",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "dr_number",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "net_value_source",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "record_kind",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "disposition",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "business_fingerprint",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "snapshot_reference_source_record_id",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "silver_version",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "reporting_year_basis",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "quantity_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "unit_selling_price_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "gross_sales_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "discount_amount_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "net_sales_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "unit_acquisition_cost_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "total_acquisition_cost_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "gross_margin_amount_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "margin_pct_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "discount_rate_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "quantity_secondary_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "data_source_year",
+          "data_type": "bigint",
+          "comment": null
+        },
+        {
+          "col_name": "source_row_number",
+          "data_type": "bigint",
+          "comment": null
+        },
+        {
+          "col_name": "calendar_year",
+          "data_type": "int",
+          "comment": null
+        },
+        {
+          "col_name": "reporting_year",
+          "data_type": "bigint",
+          "comment": null
+        },
+        {
+          "col_name": "date_delivered",
+          "data_type": "date",
+          "comment": null
+        },
+        {
+          "col_name": "quantity",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "unit_selling_price",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "gross_sales",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "discount_amount",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "net_sales",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "unit_acquisition_cost",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "total_acquisition_cost",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "gross_margin_amount",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "margin_pct",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "discount_rate",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "quantity_primary_candidate",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "quantity_secondary_candidate",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "raw_fields",
+          "data_type": "array<string>",
+          "comment": null
+        },
+        {
+          "col_name": "quality_rule_codes",
+          "data_type": "array<string>",
+          "comment": null
+        },
+        {
+          "col_name": "is_analysis_candidate",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_area_placeholder",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_date_missing",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_provisional_year_candidate",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "source_data_status",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "source_adjustment_policy",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "sales_fact_id",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "reference_proposed_category",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "reference_forecast_eligible",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "reference_mapping_status",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "reference_review_notes",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "canonical_group_id",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "canonical_sku",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "canonical_title",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "display_category",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "product_category",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "category_status",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "identity_status",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "item_kind",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "unit_of_measure",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "forecast_eligible",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_duplicate",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "catalog_evidence_source",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "brand",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "manufacturer",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "model",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "strength",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "concentration",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "dosage_form",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "container_size",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "packaging_unit",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "pack_count",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "contained_unit",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "bundle_specification",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "product_scope_status",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "is_medical_product_approved",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "area_classification",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "territory",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "is_geographic_territory_approved",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_external_geography_candidate",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "area_display_label",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "proposed_area_type",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "area_mapping_status",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "territory_id",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "mapped_region",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "mapped_province",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "mapped_city_municipality",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "mapped_geographic_level",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "mapped_customer_channel",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "mapped_business_line",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "area_mapping_evidence",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "area_evidence_status",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "external_mapping_status",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "transaction_evidence",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "transaction_evidence_lineage",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "product_key",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "area_key",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "date_key",
+          "data_type": "int",
+          "comment": null
+        },
+        {
+          "col_name": "month_start",
+          "data_type": "date",
+          "comment": null
+        },
+        {
+          "col_name": "is_contract_label",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_adjusted_source",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "resolution_policy",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "transaction_evidence_sha256",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "catalog_helper_sha256",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "is_low_trust_2017",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_historical_backfill_candidate",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_product_ranking_candidate",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_quantity_observation_eligible",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_gross_sales_eligible",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_net_sales_eligible",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_acquisition_cost_eligible",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_gross_margin_eligible",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_positive_delivery_quantity_eligible",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_return_quantity_eligible",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "return_quantity_abs",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "is_provisional_product_demand_eligible",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_approved_medical_demand_eligible",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_external_analysis_candidate",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "external_join_status",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "is_external_join_ready",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "financial_review_required",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "transaction_quantity_status",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "contract_prefix",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "contract_label_group_key",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "product_reference_sha256",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "publication_status",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "policy_version",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "area_mapping_sha256",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "product_master_sha256",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "medical_supplies_in_scope",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "gold_published_at",
+          "data_type": "timestamp",
+          "comment": null
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE TABLE workspace.medshield_silver.sales_restart_clean_candidate",
+      "rows": [
+        {
+          "col_name": "dataset_id",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "source_record_id",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "source_workbook",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "source_file_sha256",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "source_path",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "raw_csv_line",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "source_layout",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "area_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "product_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "dr_number_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "date_delivered_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "area",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "product",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "dr_number",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "net_value_source",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "record_kind",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "disposition",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "business_fingerprint",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "snapshot_reference_source_record_id",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "silver_version",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "reporting_year_basis",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "quantity_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "unit_selling_price_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "gross_sales_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "discount_amount_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "net_sales_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "unit_acquisition_cost_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "total_acquisition_cost_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "gross_margin_amount_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "margin_pct_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "discount_rate_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "quantity_secondary_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "data_source_year",
+          "data_type": "bigint",
+          "comment": null
+        },
+        {
+          "col_name": "source_row_number",
+          "data_type": "bigint",
+          "comment": null
+        },
+        {
+          "col_name": "calendar_year",
+          "data_type": "bigint",
+          "comment": null
+        },
+        {
+          "col_name": "reporting_year",
+          "data_type": "bigint",
+          "comment": null
+        },
+        {
+          "col_name": "date_delivered",
+          "data_type": "date",
+          "comment": null
+        },
+        {
+          "col_name": "quantity",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "unit_selling_price",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "gross_sales",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "discount_amount",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "net_sales",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "unit_acquisition_cost",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "total_acquisition_cost",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "gross_margin_amount",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "margin_pct",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "discount_rate",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "quantity_primary_candidate",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "quantity_secondary_candidate",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "raw_fields",
+          "data_type": "array<string>",
+          "comment": null
+        },
+        {
+          "col_name": "quality_rule_codes",
+          "data_type": "array<string>",
+          "comment": null
+        },
+        {
+          "col_name": "is_analysis_candidate",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_area_placeholder",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_date_missing",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_provisional_year_candidate",
+          "data_type": "boolean",
+          "comment": null
+        }
+      ]
+    },
+    {
+      "sql": "SELECT table_name FROM workspace.medshield_audit.sales_restart_gold_publication_candidate",
+      "rows": [
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_fact_candidate"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_dim_date_candidate"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_dim_area_candidate"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_dim_product_candidate"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_dim_canonical_product_candidate"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_monthly_candidate"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_yearly_candidate"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_area_yearly_candidate"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_product_yearly_candidate"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_business_product_yearly_candidate"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_territory_yearly_candidate"
+        },
+        {
+          "table_name": "workspace.medshield_audit.sales_restart_area_coverage_candidate"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_medical_monthly_candidate"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_external_input_candidate"
+        },
+        {
+          "table_name": "workspace.medshield_audit.sales_restart_scope_candidate"
+        },
+        {
+          "table_name": "workspace.medshield_audit.sales_restart_provisional_year_candidate"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_contract_labels_candidate"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_label_partition_candidate"
+        },
+        {
+          "table_name": "workspace.medshield_audit.sales_restart_gold_disposition_candidate"
+        },
+        {
+          "table_name": "workspace.medshield_audit.sales_restart_gold_quality_candidate"
+        },
+        {
+          "table_name": "workspace.medshield_audit.sales_restart_returns_candidate"
+        },
+        {
+          "table_name": "workspace.medshield_audit.sales_restart_contract_evidence_candidate"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_audit.sales_restart_area_coverage_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "8",
+          "timestamp": "2026-10-07T05:25:58.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "9262f967-558b-4b5d-9a30-e1ae52b0cf14",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "7",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"9379\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"125\",\"numOutputBytes\":\"9380\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_audit.sales_restart_gold_disposition_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-07T05:27:28.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "cb0159e4-720f-4332-bbb0-45f3a921e4d5",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"6277\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"63\",\"numOutputBytes\":\"6278\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_audit.sales_restart_gold_publication_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-07T05:28:46.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "47654f02-8ccb-4d5d-83b6-ec5729ed14d3",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"4520\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"22\",\"numOutputBytes\":\"4521\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_audit.sales_restart_contract_evidence_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-07T05:28:17.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "3d9c7b0e-d249-4bbc-974a-217e9e69e78a",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"32347\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"62\",\"numOutputBytes\":\"32468\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_audit.sales_restart_gold_quality_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-07T05:27:37.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "9db85e57-4bf3-43ee-8583-0ccab2b4aa59",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"6988\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"231\",\"numOutputBytes\":\"6989\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_audit.sales_restart_returns_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-07T05:27:57.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "0381bc5a-edc3-4612-ab9f-46e4e8a265ce",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"269501\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"673\",\"numOutputBytes\":\"269614\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_audit.sales_restart_replacement_year_validation_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "4",
+          "timestamp": "2026-10-09T02:52:31.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344563\"}",
+          "queryHistoryStatementId": "529bff33-ef9a-4071-a5dc-ea1b3b06e594",
+          "clusterId": "1009-025113-bxqavbhh-v2n",
+          "readVersion": "3",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"5029\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"1\",\"numOutputBytes\":\"5029\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_audit.sales_restart_provisional_year_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "9",
+          "timestamp": "2026-10-07T05:26:49.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "68f00e7d-8372-4c21-9229-3a76e91c28fb",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "8",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"0\",\"numRemovedFiles\":\"0\",\"numRemovedBytes\":\"0\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"0\",\"numOutputBytes\":\"0\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_bronze.sales_restart_manifest_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "4",
+          "timestamp": "2026-10-07T04:51:29.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344566\"}",
+          "queryHistoryStatementId": "9b6998b8-f46e-4d30-8e1b-7cb1742e1e48",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "3",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"5088\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"9\",\"numOutputBytes\":\"5089\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_audit.sales_restart_scope_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "9",
+          "timestamp": "2026-10-07T05:26:36.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "e0305a7a-ec6a-473a-b89e-ef2197d6939a",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "8",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"5823\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"6\",\"numOutputBytes\":\"5824\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_area_yearly_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-07T05:24:47.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "7b71928e-df47-4f6c-8a7a-abc03a8905a4",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"26070\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"125\",\"numOutputBytes\":\"26159\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_bronze.sales_restart_rows_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "4",
+          "timestamp": "2026-10-07T04:51:20.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344566\"}",
+          "queryHistoryStatementId": "bdad3905-d6f8-4866-9470-bf0d56fed2c5",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "3",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"8\",\"numRemovedFiles\":\"8\",\"numRemovedBytes\":\"3168698\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"59039\",\"numOutputBytes\":\"3168706\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_dim_area_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-07T05:23:11.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "4fe023a3-97a5-4247-bdd7-249c0f3939d0",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"13322\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"22\",\"numOutputBytes\":\"13323\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_business_product_yearly_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "9",
+          "timestamp": "2026-10-07T05:25:23.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "290e28a3-20f3-46bd-9d3f-6be82c8acf89",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "8",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"544454\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"7649\",\"numOutputBytes\":\"544543\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_contract_labels_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-07T05:27:00.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "1dfaa5e2-31d0-4611-a008-4905db144d86",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"0\",\"numRemovedFiles\":\"0\",\"numRemovedBytes\":\"0\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"0\",\"numOutputBytes\":\"0\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_dim_canonical_product_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "1",
+          "timestamp": "2026-10-07T05:23:47.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "958e7f76-a998-4e8c-8e42-6ca646145c42",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "0",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"411847\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"4561\",\"numOutputBytes\":\"412000\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_dim_date_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-07T05:22:59.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "c0ecac1b-6674-48f0-be7a-9a8a8a1ba95f",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"6750\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"3287\",\"numOutputBytes\":\"6751\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_external_input_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "9",
+          "timestamp": "2026-10-07T05:26:23.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "201f95e8-4df3-4d3e-849e-9d15128c56a8",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "8",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"0\",\"numRemovedFiles\":\"0\",\"numRemovedBytes\":\"0\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"0\",\"numOutputBytes\":\"0\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_dim_product_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-07T05:23:28.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "9cc6d78b-3c8f-4295-b9f2-790579acd8b7",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"469814\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"4561\",\"numOutputBytes\":\"469816\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_fact_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "19",
+          "timestamp": "2026-10-07T05:22:44.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\",\\\"delta.logRetentionDuration\\\":\\\"interval 30 days\\\",\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.deletedFileRetentionDuration\\\":\\\"interval 30 days\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.workloadBasedColumns.deltaFileStatistics\\\":\\\"`sales_fact_id`,`calendar_year`,`proposed_area_type`,`month_start`,`product_scope_status`\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "21243b0d-e1a7-452d-a558-013e439540b7",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "18",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"9395631\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"37728\",\"numOutputBytes\":\"9395744\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_product_yearly_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-07T05:25:05.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "87ff4ca0-f7f6-4739-8fdd-b145f902d7bb",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"475949\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"6671\",\"numOutputBytes\":\"476037\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_medical_monthly_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "9",
+          "timestamp": "2026-10-07T05:26:12.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "93936e09-0b78-4ece-bb94-f63aba291eec",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "8",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"0\",\"numRemovedFiles\":\"0\",\"numRemovedBytes\":\"0\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"0\",\"numOutputBytes\":\"0\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_label_partition_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-07T05:27:15.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "f827e536-9e35-41b1-a63c-20afc08499c8",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"13441\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"3\",\"numOutputBytes\":\"13530\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_monthly_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-07T05:24:03.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "1f95f78d-47ac-4172-b2eb-6e6b4fb7ab6d",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"24114\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"108\",\"numOutputBytes\":\"24203\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_stl_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "3",
+          "timestamp": "2026-10-07T05:49:45.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344568\"}",
+          "queryHistoryStatementId": "cee4b9bb-7521-4891-a3d3-5046b5c7b3ce",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "2",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"12362\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"72\",\"numOutputBytes\":\"12365\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_silver.sales_restart_assessed_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "8",
+          "timestamp": "2026-10-09T02:52:19.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\",\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.workloadBasedColumns.deltaFileStatistics\\\":\\\"`disposition`,`record_kind`\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344563\"}",
+          "queryHistoryStatementId": "f86da5a0-13d4-4695-b6fe-563f75b0f5f1",
+          "clusterId": "1009-025113-bxqavbhh-v2n",
+          "readVersion": "7",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"8\",\"numRemovedFiles\":\"8\",\"numRemovedBytes\":\"7869576\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"59039\",\"numOutputBytes\":\"7869576\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_territory_yearly_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "9",
+          "timestamp": "2026-10-07T05:25:42.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "366cffff-7760-480c-b74b-69045524ad89",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "8",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"17322\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"41\",\"numOutputBytes\":\"17411\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_yearly_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-07T05:24:24.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "46417d0f-5e1f-4ba4-8528-dc8c3c70a1b0",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"15290\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"9\",\"numOutputBytes\":\"15379\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_silver.sales_restart_clean_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-09T02:52:24.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\",\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.workloadBasedColumns.deltaFileStatistics\\\":\\\"`date_delivered`,`quantity`,`data_source_year`\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344563\"}",
+          "queryHistoryStatementId": "5b52a37d-ffc6-4f29-a1d1-2fd900eef984",
+          "clusterId": "1009-025113-bxqavbhh-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"8\",\"numRemovedFiles\":\"8\",\"numRemovedBytes\":\"6394506\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"37728\",\"numOutputBytes\":\"6394506\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT COUNT(*) AS records, COUNT(DISTINCT source_record_id) AS unique_records FROM workspace.medshield_gold.sales_restart_fact_candidate VERSION AS OF 19",
+      "rows": [
+        {
+          "records": "37728",
+          "unique_records": "37728"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT COUNT(*) AS differences FROM workspace.medshield_silver.sales_restart_clean_candidate VERSION AS OF 10 s FULL OUTER JOIN workspace.medshield_gold.sales_restart_fact_candidate VERSION AS OF 19 f ON s.source_record_id=f.source_record_id\n    WHERE s.source_record_id IS NULL OR f.source_record_id IS NULL OR NOT(s.`dataset_id` <=> f.`dataset_id`) OR NOT(s.`source_record_id` <=> f.`source_record_id`) OR NOT(s.`source_workbook` <=> f.`source_workbook`) OR NOT(s.`source_file_sha256` <=> f.`source_file_sha256`) OR NOT(s.`source_path` <=> f.`source_path`) OR NOT(s.`raw_csv_line` <=> f.`raw_csv_line`) OR NOT(s.`source_layout` <=> f.`source_layout`) OR NOT(s.`area_raw` <=> f.`area_raw`) OR NOT(s.`product_raw` <=> f.`product_raw`) OR NOT(s.`dr_number_raw` <=> f.`dr_number_raw`) OR NOT(s.`date_delivered_raw` <=> f.`date_delivered_raw`) OR NOT(s.`area` <=> f.`area`) OR NOT(s.`product` <=> f.`product`) OR NOT(s.`dr_number` <=> f.`dr_number`) OR NOT(s.`net_value_source` <=> f.`net_value_source`) OR NOT(s.`record_kind` <=> f.`record_kind`) OR NOT(s.`disposition` <=> f.`disposition`) OR NOT(s.`business_fingerprint` <=> f.`business_fingerprint`) OR NOT(s.`snapshot_reference_source_record_id` <=> f.`snapshot_reference_source_record_id`) OR NOT(s.`silver_version` <=> f.`silver_version`) OR NOT(s.`reporting_year_basis` <=> f.`reporting_year_basis`) OR NOT(s.`quantity_raw` <=> f.`quantity_raw`) OR NOT(s.`unit_selling_price_raw` <=> f.`unit_selling_price_raw`) OR NOT(s.`gross_sales_raw` <=> f.`gross_sales_raw`) OR NOT(s.`discount_amount_raw` <=> f.`discount_amount_raw`) OR NOT(s.`net_sales_raw` <=> f.`net_sales_raw`) OR NOT(s.`unit_acquisition_cost_raw` <=> f.`unit_acquisition_cost_raw`) OR NOT(s.`total_acquisition_cost_raw` <=> f.`total_acquisition_cost_raw`) OR NOT(s.`gross_margin_amount_raw` <=> f.`gross_margin_amount_raw`) OR NOT(s.`margin_pct_raw` <=> f.`margin_pct_raw`) OR NOT(s.`discount_rate_raw` <=> f.`discount_rate_raw`) OR NOT(s.`quantity_secondary_raw` <=> f.`quantity_secondary_raw`) OR NOT(s.`data_source_year` <=> f.`data_source_year`) OR NOT(s.`source_row_number` <=> f.`source_row_number`) OR NOT(s.`calendar_year` <=> f.`calendar_year`) OR NOT(s.`reporting_year` <=> f.`reporting_year`) OR NOT(s.`date_delivered` <=> f.`date_delivered`) OR NOT(s.`quantity` <=> f.`quantity`) OR NOT(s.`unit_selling_price` <=> f.`unit_selling_price`) OR NOT(s.`gross_sales` <=> f.`gross_sales`) OR NOT(s.`discount_amount` <=> f.`discount_amount`) OR NOT(s.`net_sales` <=> f.`net_sales`) OR NOT(s.`unit_acquisition_cost` <=> f.`unit_acquisition_cost`) OR NOT(s.`total_acquisition_cost` <=> f.`total_acquisition_cost`) OR NOT(s.`gross_margin_amount` <=> f.`gross_margin_amount`) OR NOT(s.`margin_pct` <=> f.`margin_pct`) OR NOT(s.`discount_rate` <=> f.`discount_rate`) OR NOT(s.`quantity_primary_candidate` <=> f.`quantity_primary_candidate`) OR NOT(s.`quantity_secondary_candidate` <=> f.`quantity_secondary_candidate`) OR NOT(s.`raw_fields` <=> f.`raw_fields`) OR NOT(s.`quality_rule_codes` <=> f.`quality_rule_codes`) OR NOT(s.`is_analysis_candidate` <=> f.`is_analysis_candidate`) OR NOT(s.`is_area_placeholder` <=> f.`is_area_placeholder`) OR NOT(s.`is_date_missing` <=> f.`is_date_missing`) OR NOT(s.`is_provisional_year_candidate` <=> f.`is_provisional_year_candidate`)",
+      "rows": [
+        {
+          "differences": "0"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT COUNT(*) AS duplicate_keys FROM (SELECT source_record_id FROM workspace.medshield_silver.sales_restart_clean_candidate VERSION AS OF 10 GROUP BY source_record_id HAVING COUNT(*)<>1 OR source_record_id IS NULL)",
+      "rows": [
+        {
+          "duplicate_keys": "0"
+        }
+      ]
+    },
+    {
+      "sql": "SHOW CREATE TABLE workspace.medshield_gold.vw_dashboard_monthly_sales_candidate",
+      "rows": [
+        {
+          "createtab_stmt": "CREATE VIEW medshield_gold.vw_dashboard_monthly_sales_candidate (\n  month_start,\n  calendar_year,\n  calendar_month,\n  transaction_count,\n  distinct_source_product_labels,\n  contract_label_transaction_count,\n  adjusted_source_transaction_count,\n  low_trust_2017_transaction_count,\n  historical_backfill_transaction_count,\n  financial_review_transaction_count,\n  signed_quantity,\n  signed_quantity_observation_count,\n  positive_delivered_quantity,\n  positive_delivered_quantity_observation_count,\n  return_quantity_abs,\n  return_quantity_abs_observation_count,\n  provisional_product_demand_quantity,\n  provisional_product_demand_quantity_observation_count,\n  approved_medical_demand_quantity,\n  approved_medical_demand_quantity_observation_count,\n  gross_sales,\n  gross_sales_observation_count,\n  net_sales,\n  net_sales_observation_count,\n  total_acquisition_cost,\n  total_acquisition_cost_observation_count,\n  gross_margin_amount,\n  gross_margin_amount_observation_count,\n  margin_net_sales_basis,\n  margin_net_sales_basis_observation_count,\n  weighted_gross_margin_pct,\n  observation_status,\n  source_completeness_status,\n  dataset_id,\n  policy_version,\n  publication_status,\n  product_reference_sha256,\n  area_mapping_sha256,\n  product_master_sha256,\n  medical_supplies_in_scope,\n  gold_published_at,\n  year_month,\n  month_number,\n  month_short_name,\n  has_sales_activity,\n  total_quantity_candidate,\n  gross_sales_candidate,\n  net_sales_candidate,\n  transfer_value_candidate,\n  gross_margin_candidate,\n  weighted_gross_margin_pct_candidate,\n  financial_definition_status)\nWITH SCHEMA COMPENSATION\nAS SELECT\n  m.*,\n  DATE_FORMAT(m.month_start, 'yyyy-MM') AS year_month,\n  m.calendar_month AS month_number,\n  DATE_FORMAT(m.month_start, 'MMM') AS month_short_name,\n  m.transaction_count > 0 AS has_sales_activity,\n  m.signed_quantity AS total_quantity_candidate,\n  m.gross_sales AS gross_sales_candidate,\n  m.net_sales AS net_sales_candidate,\n  m.total_acquisition_cost AS transfer_value_candidate,\n  m.gross_margin_amount AS gross_margin_candidate,\n  m.weighted_gross_margin_pct AS weighted_gross_margin_pct_candidate,\n  'DEFINITIONS_APPROVED_DATASET_RELEASE_PENDING'\n    AS financial_definition_status\nFROM workspace.medshield_gold.sales_restart_monthly_candidate AS m\n"
+        }
+      ]
+    },
+    {
+      "sql": "SHOW CREATE TABLE workspace.medshield_gold.vw_dashboard_yearly_sales_candidate",
+      "rows": [
+        {
+          "createtab_stmt": "CREATE VIEW medshield_gold.vw_dashboard_yearly_sales_candidate (\n  calendar_year,\n  first_delivery_date,\n  last_delivery_date,\n  calendar_month_count,\n  active_month_count,\n  zero_activity_month_count,\n  month_activity_status,\n  transaction_count,\n  distinct_dr_count,\n  distinct_area_count,\n  distinct_product_count,\n  warning_transaction_count,\n  fully_eligible_transaction_count,\n  partially_eligible_transaction_count,\n  dimension_only_transaction_count,\n  source_year_mismatch_count,\n  negative_quantity_review_count,\n  financial_formula_warning_count,\n  quantity_eligible_transaction_count,\n  gross_sales_eligible_transaction_count,\n  net_sales_eligible_transaction_count,\n  transfer_value_eligible_transaction_count,\n  gross_margin_eligible_transaction_count,\n  total_quantity_candidate,\n  gross_sales_candidate,\n  net_sales_candidate,\n  transfer_value_candidate,\n  gross_margin_candidate,\n  weighted_gross_margin_pct_candidate,\n  warning_transaction_rate,\n  fully_eligible_transaction_rate,\n  quantity_coverage_rate,\n  net_sales_coverage_rate,\n  gross_margin_coverage_rate,\n  previous_calendar_year,\n  previous_transaction_count,\n  previous_total_quantity_candidate,\n  previous_gross_sales_candidate,\n  previous_net_sales_candidate,\n  previous_gross_margin_candidate,\n  transaction_count_yoy_pct,\n  quantity_yoy_pct_candidate,\n  gross_sales_yoy_pct_candidate,\n  net_sales_yoy_pct_candidate,\n  gross_margin_yoy_pct_candidate,\n  yoy_comparison_status,\n  financial_definition_status)\nWITH SCHEMA COMPENSATION\nAS WITH fact_quality AS (\n  SELECT\n    calendar_year,\n    MIN(date_delivered) AS first_delivery_date,\n    MAX(date_delivered) AS last_delivery_date,\n    COUNT(DISTINCT dr_number) AS distinct_dr_count,\n    COUNT(DISTINCT normalized_area) AS distinct_area_count,\n    COUNT(DISTINCT normalized_product) AS distinct_product_count,\n    SUM(CASE WHEN SIZE(quality_rule_codes) > 0 THEN 1 ELSE 0 END) AS warning_transaction_count,\n    SUM(CASE\n      WHEN is_quantity_observation_eligible\n       AND is_gross_sales_eligible\n       AND is_net_sales_eligible\n       AND is_acquisition_cost_eligible\n       AND is_gross_margin_eligible\n      THEN 1 ELSE 0 END\n    ) AS fully_eligible_transaction_count,\n    SUM(CASE\n      WHEN (\n        is_quantity_observation_eligible OR is_gross_sales_eligible\n        OR is_net_sales_eligible OR is_acquisition_cost_eligible\n        OR is_gross_margin_eligible\n      ) AND NOT (\n        is_quantity_observation_eligible AND is_gross_sales_eligible\n        AND is_net_sales_eligible AND is_acquisition_cost_eligible\n        AND is_gross_margin_eligible\n      ) THEN 1 ELSE 0 END\n    ) AS partially_eligible_transaction_count,\n    SUM(CASE\n      WHEN NOT (\n        is_quantity_observation_eligible OR is_gross_sales_eligible\n        OR is_net_sales_eligible OR is_acquisition_cost_eligible\n        OR is_gross_margin_eligible\n      ) THEN 1 ELSE 0 END\n    ) AS dimension_only_transaction_count,\n    SUM(CASE WHEN data_source_year <> calendar_year THEN 1 ELSE 0 END) AS source_year_mismatch_count,\n    SUM(CASE WHEN quantity < 0 THEN 1 ELSE 0 END) AS negative_quantity_review_count,\n    SUM(CASE\n      WHEN ARRAY_CONTAINS(quality_rule_codes, 'GROSS_VALUE_FORMULA_MISMATCH')\n        OR ARRAY_CONTAINS(quality_rule_codes, 'NET_VALUE_FORMULA_MISMATCH')\n        OR ARRAY_CONTAINS(quality_rule_codes, 'TRANSFER_VALUE_FORMULA_MISMATCH')\n        OR ARRAY_CONTAINS(quality_rule_codes, 'GROSS_MARGIN_FORMULA_MISMATCH')\n      THEN 1 ELSE 0 END\n    ) AS financial_formula_warning_count\n  FROM workspace.medshield_gold.sales_restart_fact_candidate\n  GROUP BY calendar_year\n),\nyearly_base AS (\n  SELECT\n    y.calendar_year,\n    q.first_delivery_date,\n    q.last_delivery_date,\n    y.calendar_month_count,\n    y.observed_month_count AS active_month_count,\n    y.unobserved_month_count AS zero_activity_month_count,\n    CASE\n      WHEN y.unobserved_month_count = 0 THEN 'ACTIVITY_OBSERVED_ALL_12_MONTHS'\n      ELSE 'UNOBSERVED_MONTHS_PRESENT'\n    END AS month_activity_status,\n    y.transaction_count,\n    q.distinct_dr_count,\n    q.distinct_area_count,\n    q.distinct_product_count,\n    q.warning_transaction_count,\n    q.fully_eligible_transaction_count,\n    q.partially_eligible_transaction_count,\n    q.dimension_only_transaction_count,\n    q.source_year_mismatch_count,\n    q.negative_quantity_review_count,\n    q.financial_formula_warning_count,\n    y.signed_quantity_observation_count AS quantity_eligible_transaction_count,\n    y.gross_sales_observation_count AS gross_sales_eligible_transaction_count,\n    y.net_sales_observation_count AS net_sales_eligible_transaction_count,\n    y.total_acquisition_cost_observation_count AS transfer_value_eligible_transaction_count,\n    y.gross_margin_amount_observation_count AS gross_margin_eligible_transaction_count,\n    y.signed_quantity AS total_quantity_candidate,\n    y.gross_sales AS gross_sales_candidate,\n    y.net_sales AS net_sales_candidate,\n    y.total_acquisition_cost AS transfer_value_candidate,\n    y.gross_margin_amount AS gross_margin_candidate,\n    y.weighted_gross_margin_pct AS weighted_gross_margin_pct_candidate\n  FROM workspace.medshield_gold.sales_restart_yearly_candidate AS y\n  INNER JOIN fact_quality AS q USING (calendar_year)\n),\nwith_previous AS (\n  SELECT\n    *,\n    LAG(calendar_year) OVER (ORDER BY calendar_year) AS previous_calendar_year,\n    LAG(transaction_count) OVER (ORDER BY calendar_year) AS previous_transaction_count,\n    LAG(total_quantity_candidate) OVER (ORDER BY calendar_year) AS previous_total_quantity_candidate,\n    LAG(gross_sales_candidate) OVER (ORDER BY calendar_year) AS previous_gross_sales_candidate,\n    LAG(net_sales_candidate) OVER (ORDER BY calendar_year) AS previous_net_sales_candidate,\n    LAG(gross_margin_candidate) OVER (ORDER BY calendar_year) AS previous_gross_margin_candidate,\n    LAG(zero_activity_month_count) OVER (ORDER BY calendar_year) AS previous_zero_activity_month_count\n  FROM yearly_base\n)\nSELECT\n  calendar_year,\n  first_delivery_date,\n  last_delivery_date,\n  calendar_month_count,\n  active_month_count,\n  zero_activity_month_count,\n  month_activity_status,\n  transaction_count,\n  distinct_dr_count,\n  distinct_area_count,\n  distinct_product_count,\n  warning_transaction_count,\n  fully_eligible_transaction_count,\n  partially_eligible_transaction_count,\n  dimension_only_transaction_count,\n  source_year_mismatch_count,\n  negative_quantity_review_count,\n  financial_formula_warning_count,\n  quantity_eligible_transaction_count,\n  gross_sales_eligible_transaction_count,\n  net_sales_eligible_transaction_count,\n  transfer_value_eligible_transaction_count,\n  gross_margin_eligible_transaction_count,\n  total_quantity_candidate,\n  gross_sales_candidate,\n  net_sales_candidate,\n  transfer_value_candidate,\n  gross_margin_candidate,\n  weighted_gross_margin_pct_candidate,\n  ROUND(warning_transaction_count / NULLIF(transaction_count, 0), 4) AS warning_transaction_rate,\n  ROUND(fully_eligible_transaction_count / NULLIF(transaction_count, 0), 4) AS fully_eligible_transaction_rate,\n  ROUND(quantity_eligible_transaction_count / NULLIF(transaction_count, 0), 4) AS quantity_coverage_rate,\n  ROUND(net_sales_eligible_transaction_count / NULLIF(transaction_count, 0), 4) AS net_sales_coverage_rate,\n  ROUND(gross_margin_eligible_transaction_count / NULLIF(transaction_count, 0), 4) AS gross_margin_coverage_rate,\n  previous_calendar_year,\n  previous_transaction_count,\n  previous_total_quantity_candidate,\n  previous_gross_sales_candidate,\n  previous_net_sales_candidate,\n  previous_gross_margin_candidate,\n  ROUND(100 * (transaction_count - previous_transaction_count)\n    / NULLIF(ABS(previous_transaction_count), 0), 2) AS transaction_count_yoy_pct,\n  ROUND(100 * (total_quantity_candidate - previous_total_quantity_candidate)\n    / NULLIF(ABS(previous_total_quantity_candidate), 0), 2) AS quantity_yoy_pct_candidate,\n  ROUND(100 * (gross_sales_candidate - previous_gross_sales_candidate)\n    / NULLIF(ABS(previous_gross_sales_candidate), 0), 2) AS gross_sales_yoy_pct_candidate,\n  ROUND(100 * (net_sales_candidate - previous_net_sales_candidate)\n    / NULLIF(ABS(previous_net_sales_candidate), 0), 2) AS net_sales_yoy_pct_candidate,\n  ROUND(100 * (gross_margin_candidate - previous_gross_margin_candidate)\n    / NULLIF(ABS(previous_gross_margin_candidate), 0), 2) AS gross_margin_yoy_pct_candidate,\n  CASE\n    WHEN previous_calendar_year IS NULL THEN 'NO_PREVIOUS_YEAR'\n    WHEN zero_activity_month_count > 0 OR previous_zero_activity_month_count > 0\n      THEN 'REVIEW_ZERO_ACTIVITY_MONTHS'\n    ELSE 'FULL_12_MONTH_ACTIVITY_BOTH_YEARS'\n  END AS yoy_comparison_status,\n  'DEFINITIONS_APPROVED_DATASET_RELEASE_PENDING' AS financial_definition_status\nFROM with_previous\n"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_audit.sales_restart_area_coverage_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "8",
+          "timestamp": "2026-10-07T05:25:58.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "9262f967-558b-4b5d-9a30-e1ae52b0cf14",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "7",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"9379\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"125\",\"numOutputBytes\":\"9380\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_audit.sales_restart_contract_evidence_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-07T05:28:17.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "3d9c7b0e-d249-4bbc-974a-217e9e69e78a",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"32347\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"62\",\"numOutputBytes\":\"32468\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_audit.sales_restart_gold_disposition_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-07T05:27:28.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "cb0159e4-720f-4332-bbb0-45f3a921e4d5",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"6277\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"63\",\"numOutputBytes\":\"6278\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_audit.sales_restart_gold_publication_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-07T05:28:46.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "47654f02-8ccb-4d5d-83b6-ec5729ed14d3",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"4520\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"22\",\"numOutputBytes\":\"4521\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_audit.sales_restart_gold_quality_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-07T05:27:37.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "9db85e57-4bf3-43ee-8583-0ccab2b4aa59",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"6988\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"231\",\"numOutputBytes\":\"6989\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_audit.sales_restart_provisional_year_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "9",
+          "timestamp": "2026-10-07T05:26:49.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "68f00e7d-8372-4c21-9229-3a76e91c28fb",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "8",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"0\",\"numRemovedFiles\":\"0\",\"numRemovedBytes\":\"0\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"0\",\"numOutputBytes\":\"0\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_audit.sales_restart_replacement_year_validation_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "4",
+          "timestamp": "2026-10-09T02:52:31.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344563\"}",
+          "queryHistoryStatementId": "529bff33-ef9a-4071-a5dc-ea1b3b06e594",
+          "clusterId": "1009-025113-bxqavbhh-v2n",
+          "readVersion": "3",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"5029\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"1\",\"numOutputBytes\":\"5029\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_audit.sales_restart_returns_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-07T05:27:57.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "0381bc5a-edc3-4612-ab9f-46e4e8a265ce",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"269501\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"673\",\"numOutputBytes\":\"269614\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_audit.sales_restart_scope_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "9",
+          "timestamp": "2026-10-07T05:26:36.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "e0305a7a-ec6a-473a-b89e-ef2197d6939a",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "8",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"5823\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"6\",\"numOutputBytes\":\"5824\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_bronze.sales_restart_manifest_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "4",
+          "timestamp": "2026-10-07T04:51:29.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344566\"}",
+          "queryHistoryStatementId": "9b6998b8-f46e-4d30-8e1b-7cb1742e1e48",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "3",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"5088\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"9\",\"numOutputBytes\":\"5089\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_bronze.sales_restart_rows_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "4",
+          "timestamp": "2026-10-07T04:51:20.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344566\"}",
+          "queryHistoryStatementId": "bdad3905-d6f8-4866-9470-bf0d56fed2c5",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "3",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"8\",\"numRemovedFiles\":\"8\",\"numRemovedBytes\":\"3168698\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"59039\",\"numOutputBytes\":\"3168706\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_area_yearly_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-07T05:24:47.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "7b71928e-df47-4f6c-8a7a-abc03a8905a4",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"26070\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"125\",\"numOutputBytes\":\"26159\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_business_product_yearly_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "9",
+          "timestamp": "2026-10-07T05:25:23.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "290e28a3-20f3-46bd-9d3f-6be82c8acf89",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "8",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"544454\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"7649\",\"numOutputBytes\":\"544543\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_contract_labels_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-07T05:27:00.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "1dfaa5e2-31d0-4611-a008-4905db144d86",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"0\",\"numRemovedFiles\":\"0\",\"numRemovedBytes\":\"0\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"0\",\"numOutputBytes\":\"0\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_dim_area_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-07T05:23:11.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "4fe023a3-97a5-4247-bdd7-249c0f3939d0",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"13322\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"22\",\"numOutputBytes\":\"13323\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_dim_canonical_product_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "1",
+          "timestamp": "2026-10-07T05:23:47.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "958e7f76-a998-4e8c-8e42-6ca646145c42",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "0",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"411847\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"4561\",\"numOutputBytes\":\"412000\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_dim_date_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-07T05:22:59.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "c0ecac1b-6674-48f0-be7a-9a8a8a1ba95f",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"6750\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"3287\",\"numOutputBytes\":\"6751\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_dim_product_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-07T05:23:28.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "9cc6d78b-3c8f-4295-b9f2-790579acd8b7",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"469814\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"4561\",\"numOutputBytes\":\"469816\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_external_input_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "9",
+          "timestamp": "2026-10-07T05:26:23.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "201f95e8-4df3-4d3e-849e-9d15128c56a8",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "8",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"0\",\"numRemovedFiles\":\"0\",\"numRemovedBytes\":\"0\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"0\",\"numOutputBytes\":\"0\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_fact_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "19",
+          "timestamp": "2026-10-07T05:22:44.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\",\\\"delta.logRetentionDuration\\\":\\\"interval 30 days\\\",\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.deletedFileRetentionDuration\\\":\\\"interval 30 days\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.workloadBasedColumns.deltaFileStatistics\\\":\\\"`sales_fact_id`,`calendar_year`,`proposed_area_type`,`month_start`,`product_scope_status`\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "21243b0d-e1a7-452d-a558-013e439540b7",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "18",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"9395631\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"37728\",\"numOutputBytes\":\"9395744\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_label_partition_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-07T05:27:15.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "f827e536-9e35-41b1-a63c-20afc08499c8",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"13441\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"3\",\"numOutputBytes\":\"13530\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_medical_monthly_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "9",
+          "timestamp": "2026-10-07T05:26:12.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "93936e09-0b78-4ece-bb94-f63aba291eec",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "8",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"0\",\"numRemovedFiles\":\"0\",\"numRemovedBytes\":\"0\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"0\",\"numOutputBytes\":\"0\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_monthly_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-07T05:24:03.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "1f95f78d-47ac-4172-b2eb-6e6b4fb7ab6d",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"24114\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"108\",\"numOutputBytes\":\"24203\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_product_yearly_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-07T05:25:05.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "87ff4ca0-f7f6-4739-8fdd-b145f902d7bb",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"475949\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"6671\",\"numOutputBytes\":\"476037\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_stl_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "3",
+          "timestamp": "2026-10-07T05:49:45.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344568\"}",
+          "queryHistoryStatementId": "cee4b9bb-7521-4891-a3d3-5046b5c7b3ce",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "2",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"12362\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"72\",\"numOutputBytes\":\"12365\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_territory_yearly_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "9",
+          "timestamp": "2026-10-07T05:25:42.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "366cffff-7760-480c-b74b-69045524ad89",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "8",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"17322\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"41\",\"numOutputBytes\":\"17411\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_yearly_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-07T05:24:24.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344565\"}",
+          "queryHistoryStatementId": "46417d0f-5e1f-4ba4-8528-dc8c3c70a1b0",
+          "clusterId": "1007-045035-y3b7phfq-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"15290\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"9\",\"numOutputBytes\":\"15379\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_silver.sales_restart_assessed_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "8",
+          "timestamp": "2026-10-09T02:52:19.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\",\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.workloadBasedColumns.deltaFileStatistics\\\":\\\"`disposition`,`record_kind`\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344563\"}",
+          "queryHistoryStatementId": "f86da5a0-13d4-4695-b6fe-563f75b0f5f1",
+          "clusterId": "1009-025113-bxqavbhh-v2n",
+          "readVersion": "7",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"8\",\"numRemovedFiles\":\"8\",\"numRemovedBytes\":\"7869576\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"59039\",\"numOutputBytes\":\"7869576\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_silver.sales_restart_clean_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "10",
+          "timestamp": "2026-10-09T02:52:24.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\",\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.workloadBasedColumns.deltaFileStatistics\\\":\\\"`date_delivered`,`quantity`,`data_source_year`\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"2464944445344563\"}",
+          "queryHistoryStatementId": "5b52a37d-ffc6-4f29-a1d1-2fd900eef984",
+          "clusterId": "1009-025113-bxqavbhh-v2n",
+          "readVersion": "9",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"8\",\"numRemovedFiles\":\"8\",\"numRemovedBytes\":\"6394506\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"37728\",\"numOutputBytes\":\"6394506\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    }
+  ],
+  "recovery_rehearsal_verified": false,
+  "cloud_writes": false
+}

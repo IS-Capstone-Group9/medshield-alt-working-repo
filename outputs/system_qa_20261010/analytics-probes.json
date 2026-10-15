@@ -1,0 +1,535 @@
+{
+  "mode": "fresh independent recomputation of historical artifacts; no model retraining or activation",
+  "original_run_id": "1a232ddd58100e6e25d2623276dc94d13587664216d831e675df5b5922e890bc",
+  "original_manifest": {
+    "accepted_descriptive_release_id": "0affc87f8ed6aee1666785b05f754df24303fd7354cf704d20fed52f797db5e2",
+    "catalog_mapping_version": "8a34ce4946d2b99f896b1dec9e93dd5865ece8fee5e582c64dc6c5b798cca921",
+    "coverage_receipt_sha256": "a015529c0cd01f00d38662f2ec06cd0b804eea468a4c130758d00451502702a4",
+    "coverage_review": {
+      "evidence_reference": "User confirmation in this implementation chat: yes.our evidence is the sales data. please do what's the best decision. Evidence: checksum-bound supplied sales data; reporting completeness user-attested, not independently verified.",
+      "reviewed_at": "2026-09-27T14:29:23.9926173Z",
+      "reviewer": "Requesting user (session attestation; legal name not supplied)"
+    },
+    "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+    "extracted_at": "2026-09-27T14:30:12.921Z",
+    "fact_delta_version": 16,
+    "geography_mapping_version": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+    "publication_approved": false,
+    "reconciliation_passed": true,
+    "revision_policy": "retrospective_revised_snapshot_no_historical_availability_vintages",
+    "source_available_at": "2026-09-27T06:41:37.034Z",
+    "source_checksum": "0affc87f8ed6aee1666785b05f754df24303fd7354cf704d20fed52f797db5e2",
+    "source_count": 37728,
+    "source_publication_status": "CANDIDATE_PENDING_BUSINESS_AND_PRODUCT_MASTER_REVIEW",
+    "source_table": "workspace.medshield_gold.sales_restart_fact_candidate",
+    "training_approved": true,
+    "transformation_policy": "sales_restart_gold_v6_reviewed_source_provenance"
+  },
+  "selection": {
+    "criteria": {
+      "absolute_normalized_bias_max": 10,
+      "critical_horizon_mae_deterioration_max": 0.1,
+      "relative_mae_rmse_deterioration_max": 0.1,
+      "relative_wape_improvement": 0.05,
+      "status": "experimental_not_business_approval"
+    },
+    "frozen_before_audit": true,
+    "model_id": "last_value",
+    "reason": "No challenger qualifies; retain best complete benchmark candidate",
+    "stage": "development_only"
+  },
+  "artifact_hash_checks": [
+    {
+      "name": "run.json",
+      "expected": "810f4b4065e8dbeeb383e1b661418ae59bfb52dcb90e721162c1987d37a102c8",
+      "actual": "810f4b4065e8dbeeb383e1b661418ae59bfb52dcb90e721162c1987d37a102c8",
+      "passed": true
+    },
+    {
+      "name": "input-manifest.json",
+      "expected": "48760a23fa0c4b7bbe62610e672c5ae0a26f9aa0f5d7a17185d23e35886c8d45",
+      "actual": "48760a23fa0c4b7bbe62610e672c5ae0a26f9aa0f5d7a17185d23e35886c8d45",
+      "passed": true
+    },
+    {
+      "name": "folds.json",
+      "expected": "cb6eeea230bd7bc07eada4edf5741d67d731b4c05cc2a15675adc72aaaed0f13",
+      "actual": "cb6eeea230bd7bc07eada4edf5741d67d731b4c05cc2a15675adc72aaaed0f13",
+      "passed": true
+    },
+    {
+      "name": "predictions.json",
+      "expected": "98005ad65a6695511dedec2ed354a461bf6a231dc7286d759828c44bcf65ddbe",
+      "actual": "98005ad65a6695511dedec2ed354a461bf6a231dc7286d759828c44bcf65ddbe",
+      "passed": true
+    },
+    {
+      "name": "evaluations.json",
+      "expected": "96a4985c61530b6c539de950b950e30e3094617a152e7ce6735720c6a355a8ef",
+      "actual": "96a4985c61530b6c539de950b950e30e3094617a152e7ce6735720c6a355a8ef",
+      "passed": true
+    },
+    {
+      "name": "model-cards.json",
+      "expected": "6fc2357cde3c914078de1ba8fbcd6260f4ad721441f1bfb5ee35c4777e3e06cc",
+      "actual": "6fc2357cde3c914078de1ba8fbcd6260f4ad721441f1bfb5ee35c4777e3e06cc",
+      "passed": true
+    },
+    {
+      "name": "coverage.json",
+      "expected": "5202f5c34e82ee94d9a9289e7ec68f9b50a1c9ab171e66027ce97688031c1715",
+      "actual": "5202f5c34e82ee94d9a9289e7ec68f9b50a1c9ab171e66027ce97688031c1715",
+      "passed": true
+    },
+    {
+      "name": "release-draft.json",
+      "expected": "e20e3e20291aad42c3a7e78391daeef25a5a158612c847aa144cf355fe0e3f8c",
+      "actual": "e20e3e20291aad42c3a7e78391daeef25a5a158612c847aa144cf355fe0e3f8c",
+      "passed": true
+    }
+  ],
+  "metric_checks": [
+    {
+      "model": "last_value",
+      "stage": "development",
+      "recomputed": {
+        "n": 60,
+        "mae": 3090470.9348333334,
+        "rmse": 4300604.366031158,
+        "bias": 46774.56616666661,
+        "wape": 83.19935997006957,
+        "normalized_bias": 1.2592300817591104
+      },
+      "passed": true
+    },
+    {
+      "model": "last_value",
+      "stage": "retrospective_audit",
+      "recomputed": {
+        "n": 12,
+        "mae": 5834383.001666666,
+        "rmse": 6956031.7224267535,
+        "bias": 1295235.423333333,
+        "wape": 37.76364428864427,
+        "normalized_bias": 8.38354454667083
+      },
+      "passed": true
+    },
+    {
+      "model": "seasonal_naive",
+      "stage": "development",
+      "recomputed": {
+        "n": 60,
+        "mae": 3487809.8063333333,
+        "rmse": 5434895.68678964,
+        "bias": 1731923.5969999998,
+        "wape": 93.8962215478383,
+        "normalized_bias": 46.625558960395665
+      },
+      "passed": true
+    },
+    {
+      "model": "seasonal_naive",
+      "stage": "retrospective_audit",
+      "recomputed": {
+        "n": 12,
+        "mae": 11261458.43,
+        "rmse": 13000988.07662962,
+        "bias": -11261458.43,
+        "wape": 72.89094840026605,
+        "normalized_bias": -72.89094840026605
+      },
+      "passed": true
+    },
+    {
+      "model": "mean_3",
+      "stage": "development",
+      "recomputed": {
+        "n": 60,
+        "mae": 3533478.1743888888,
+        "rmse": 4649384.259546954,
+        "bias": 1104448.4615,
+        "wape": 95.12567138678483,
+        "normalized_bias": 29.733140047047083
+      },
+      "passed": true
+    },
+    {
+      "model": "mean_3",
+      "stage": "retrospective_audit",
+      "recomputed": {
+        "n": 12,
+        "mae": 9212416.360555554,
+        "rmse": 10647446.498662483,
+        "bias": -8164519.239999999,
+        "wape": 59.62831277609412,
+        "normalized_bias": -52.8456908432436
+      },
+      "passed": true
+    },
+    {
+      "model": "mean_6",
+      "stage": "development",
+      "recomputed": {
+        "n": 60,
+        "mae": 3473386.0127222226,
+        "rmse": 4419745.38215297,
+        "bias": 1317931.7795000002,
+        "wape": 93.50791490393533,
+        "normalized_bias": 35.480379156042204
+      },
+      "passed": true
+    },
+    {
+      "model": "mean_6",
+      "stage": "retrospective_audit",
+      "recomputed": {
+        "n": 12,
+        "mae": 10526958.881111111,
+        "rmse": 12165944.389409814,
+        "bias": -10064862.66,
+        "wape": 68.13682449607839,
+        "normalized_bias": -65.14585915900989
+      },
+      "passed": true
+    },
+    {
+      "model": "ets_none",
+      "stage": "development",
+      "recomputed": {
+        "n": 60,
+        "mae": 3445030.299204684,
+        "rmse": 4264377.522909957,
+        "bias": 2104348.0188410557,
+        "wape": 92.74454347417584,
+        "normalized_bias": 56.651692254566264
+      },
+      "passed": true
+    },
+    {
+      "model": "ets_none",
+      "stage": "retrospective_audit",
+      "recomputed": {
+        "n": 12,
+        "mae": 10501032.199994955,
+        "rmse": 12194034.953444043,
+        "bias": -10188736.306856176,
+        "wape": 67.96901138491035,
+        "normalized_bias": -65.94764408387297
+      },
+      "passed": true
+    },
+    {
+      "model": "ets_damped",
+      "stage": "development",
+      "recomputed": {
+        "n": 60,
+        "mae": 3725795.377208932,
+        "rmse": 4511523.746495722,
+        "bias": 2338624.7056031036,
+        "wape": 100.30309208520164,
+        "normalized_bias": 62.95871497230687
+      },
+      "passed": true
+    },
+    {
+      "model": "ets_damped",
+      "stage": "retrospective_audit",
+      "recomputed": {
+        "n": 12,
+        "mae": 10426697.234025342,
+        "rmse": 12335068.267822789,
+        "bias": -10294862.191486355,
+        "wape": 67.48787066921119,
+        "normalized_bias": -66.63455479162852
+      },
+      "passed": true
+    },
+    {
+      "model": "prophet_cp0.01_sp0.1",
+      "stage": "development",
+      "recomputed": {
+        "n": 60,
+        "mae": 3483090.9311365355,
+        "rmse": 4179834.104822966,
+        "bias": 2187041.5900186393,
+        "wape": 93.76918349945316,
+        "normalized_bias": 58.877907074472155
+      },
+      "passed": true
+    },
+    {
+      "model": "prophet_cp0.01_sp0.1",
+      "stage": "retrospective_audit",
+      "recomputed": {
+        "n": 12,
+        "mae": 11196043.735291732,
+        "rmse": 12952644.193153972,
+        "bias": -11143564.925568352,
+        "wape": 72.467545058129,
+        "normalized_bias": -72.12787056255353
+      },
+      "passed": true
+    },
+    {
+      "model": "prophet_cp0.01_sp1.0",
+      "stage": "development",
+      "recomputed": {
+        "n": 60,
+        "mae": 3504558.428526304,
+        "rmse": 4196167.552915861,
+        "bias": 2238319.968108259,
+        "wape": 94.34711549773102,
+        "normalized_bias": 60.25838543111124
+      },
+      "passed": true
+    },
+    {
+      "model": "prophet_cp0.01_sp1.0",
+      "stage": "retrospective_audit",
+      "recomputed": {
+        "n": 12,
+        "mae": 11151987.09487096,
+        "rmse": 12928195.128439752,
+        "bias": -11131022.714331886,
+        "wape": 72.1823839199371,
+        "normalized_bias": -72.04668980983442
+      },
+      "passed": true
+    },
+    {
+      "model": "prophet_cp0.01_sp10.0",
+      "stage": "development",
+      "recomputed": {
+        "n": 60,
+        "mae": 3474665.6177450162,
+        "rmse": 4171161.1173614818,
+        "bias": 2203885.95162247,
+        "wape": 93.54236347865285,
+        "normalized_bias": 59.33137844957786
+      },
+      "passed": true
+    },
+    {
+      "model": "prophet_cp0.01_sp10.0",
+      "stage": "retrospective_audit",
+      "recomputed": {
+        "n": 12,
+        "mae": 11140059.9608048,
+        "rmse": 12916026.392890785,
+        "bias": -11117390.272825914,
+        "wape": 72.1051843174892,
+        "normalized_bias": -71.95845242952014
+      },
+      "passed": true
+    },
+    {
+      "model": "prophet_cp0.05_sp0.1",
+      "stage": "development",
+      "recomputed": {
+        "n": 60,
+        "mae": 3511337.420114153,
+        "rmse": 4187454.567417247,
+        "bias": 2241495.629419114,
+        "wape": 94.52961446738463,
+        "normalized_bias": 60.343878223024234
+      },
+      "passed": true
+    },
+    {
+      "model": "prophet_cp0.05_sp0.1",
+      "stage": "retrospective_audit",
+      "recomputed": {
+        "n": 12,
+        "mae": 11218467.027590327,
+        "rmse": 12976769.234157583,
+        "bias": -11172901.763711685,
+        "wape": 72.61268212470529,
+        "normalized_bias": -72.3177562659573
+      },
+      "passed": true
+    },
+    {
+      "model": "prophet_cp0.05_sp1.0",
+      "stage": "development",
+      "recomputed": {
+        "n": 60,
+        "mae": 3515219.2459510523,
+        "rmse": 4205644.294508165,
+        "bias": 2250157.1471124236,
+        "wape": 94.63411809545798,
+        "normalized_bias": 60.57705716036041
+      },
+      "passed": true
+    },
+    {
+      "model": "prophet_cp0.05_sp1.0",
+      "stage": "retrospective_audit",
+      "recomputed": {
+        "n": 12,
+        "mae": 11148853.270395255,
+        "rmse": 12924999.86144402,
+        "bias": -11127450.95290786,
+        "wape": 72.16209991857315,
+        "normalized_bias": -72.02357121651234
+      },
+      "passed": true
+    },
+    {
+      "model": "prophet_cp0.05_sp10.0",
+      "stage": "development",
+      "recomputed": {
+        "n": 60,
+        "mae": 3522034.0227917316,
+        "rmse": 4206001.866887689,
+        "bias": 2264550.0554218534,
+        "wape": 94.81758044907303,
+        "normalized_bias": 60.96453233314247
+      },
+      "passed": true
+    },
+    {
+      "model": "prophet_cp0.05_sp10.0",
+      "stage": "retrospective_audit",
+      "recomputed": {
+        "n": 12,
+        "mae": 11159164.568498785,
+        "rmse": 12935956.1620304,
+        "bias": -11140063.308339627,
+        "wape": 72.2288408564966,
+        "normalized_bias": -72.10520598475281
+      },
+      "passed": true
+    },
+    {
+      "model": "prophet_cp0.1_sp0.1",
+      "stage": "development",
+      "recomputed": {
+        "n": 60,
+        "mae": 3499652.5768063744,
+        "rmse": 4179654.776353706,
+        "bias": 2225145.693364905,
+        "wape": 94.2150438064539,
+        "normalized_bias": 59.90371740483647
+      },
+      "passed": true
+    },
+    {
+      "model": "prophet_cp0.1_sp0.1",
+      "stage": "retrospective_audit",
+      "recomputed": {
+        "n": 12,
+        "mae": 11211532.501051417,
+        "rmse": 12969170.206737965,
+        "bias": -11164525.712250967,
+        "wape": 72.56779768817604,
+        "normalized_bias": -72.26354141105051
+      },
+      "passed": true
+    },
+    {
+      "model": "prophet_cp0.1_sp1.0",
+      "stage": "development",
+      "recomputed": {
+        "n": 60,
+        "mae": 3523434.779481502,
+        "rmse": 4210355.217431969,
+        "bias": 2262643.465582324,
+        "wape": 94.85529057886234,
+        "normalized_bias": 60.9132045395087
+      },
+      "passed": true
+    },
+    {
+      "model": "prophet_cp0.1_sp1.0",
+      "stage": "retrospective_audit",
+      "recomputed": {
+        "n": 12,
+        "mae": 11155270.254011352,
+        "rmse": 12931663.388775252,
+        "bias": -11135003.154652154,
+        "wape": 72.20363450528355,
+        "normalized_bias": -72.07245361936215
+      },
+      "passed": true
+    },
+    {
+      "model": "prophet_cp0.1_sp10.0",
+      "stage": "development",
+      "recomputed": {
+        "n": 60,
+        "mae": 3527663.963427195,
+        "rmse": 4216057.434662053,
+        "bias": 2265122.3587660226,
+        "wape": 94.96914552359306,
+        "normalized_bias": 60.97993945812362
+      },
+      "passed": true
+    },
+    {
+      "model": "prophet_cp0.1_sp10.0",
+      "stage": "retrospective_audit",
+      "recomputed": {
+        "n": 12,
+        "mae": 11181552.735188873,
+        "rmse": 12959317.882023651,
+        "bias": -11166641.904228443,
+        "wape": 72.3737505689577,
+        "normalized_bias": -72.2772386813636
+      },
+      "passed": true
+    }
+  ],
+  "legacy_descriptive_checks": [
+    {
+      "name": "single positive label must be A",
+      "expected": "A",
+      "actual": "C",
+      "passed": false,
+      "reason": "Current positive-sales crossing-inclusive definition; sole label begins before the 80% threshold."
+    },
+    {
+      "name": "signed returns excluded from positive ABC denominator",
+      "expected": [
+        "A",
+        "A",
+        "B",
+        "Unclassified"
+      ],
+      "actual": [
+        "C",
+        "C",
+        "C",
+        "C"
+      ],
+      "passed": false,
+      "reason": "Positive denominator 100; pre-item shares 0%,60%,90%; return has no positive contribution."
+    },
+    {
+      "name": "margin uses same eligible population",
+      "expected": 0.2,
+      "actual": 0.02,
+      "passed": false,
+      "reason": "Only the first row has margin evidence: 20/100, not 20/1000."
+    },
+    {
+      "name": "unobserved calendar month remains unavailable",
+      "expected": null,
+      "actual": 0.0,
+      "passed": false,
+      "reason": "No February observation; missing cannot establish seasonal index zero."
+    }
+  ],
+  "legacy_model_report_probe": {
+    "file": "services\\analytics_service\\jobs\\test_all_models.py",
+    "holdout_targets": 12,
+    "targets_with_previous_holdout_actual_as_lag_1": 11,
+    "intended_fixed_origin_result": 0,
+    "note": "Valid only for an explicitly disclosed rolling one-step protocol with new actuals; not a 12-month fixed-origin result.",
+    "simulated_exogenous_assignments": [
+      102,
+      103
+    ],
+    "unsupported_output_claim": "Reports random regressors as DOH/PAGASA and a quantity regressor as a stock-out urgency classifier."
+  }
+}

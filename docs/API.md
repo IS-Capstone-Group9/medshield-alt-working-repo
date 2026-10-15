@@ -7,6 +7,12 @@
 source-adjustment provenance, and proposed buyer/warehouse geography status.
 It does not split Mindoro or manufacture daily observations. Aggregate net revenue
 is conserved; a null amount is not an observed zero.
+Year, area, product and summary financial measures can be explicit `null` when
+their eligible population has no measured amount. Raw ledger amounts, filtered
+summary sums and averages preserve the same distinction. Record counts and the
+intentional positive-sales/negative-adjustment partitions retain observed zeros.
+The dashboard accepts explicit null measures and shows unavailable values;
+malformed values still reject the analytical contract.
 The legacy `returns_value` field contains signed eligible negative net-sales
 adjustments. It does not verify that goods were physically returned.
 
@@ -183,11 +189,55 @@ display and the proposed SKU quantity forecast contract below.
 
 - `GET /api/weather/effects?provider=PAGASA&year=2024&area=Quezon&grain=monthly`
 - `GET /api/weather/effects?provider=nasa_power&year=2025&area=Batangas&grain=monthly`
+- `GET /api/weather/effects?provider=open_meteo_era5&year=2024&area=Quezon&grain=monthly`
+- `GET /api/weather/effects?provider=open_meteo_era5_seamless&year=2024&area=Palawan&grain=monthly`
+- `GET /api/weather/effects?provider=open_meteo_ifs&year=2024&area=Albay&grain=monthly`
 - `POST /api/weather/refresh`
 
 PAGASA reads official historical observations from the external-signals Gold view. NASA POWER reads provider-derived historical proxy observations from `workspace.medshield_gold.vw_weather_nasa_power_monthly_candidate`. Both displayed response sets come from Databricks; the browser does not read a weather file or call NASA directly.
 
 NASA refresh accepts validated `start`, `end`, `areas`, and `provider: "nasa_power"` input from an authorized analyst/administrator. The gateway fetches NASA POWER daily observations, aggregates monthly values, upserts `workspace.medshield_silver.weather_nasa_power_monthly_candidate`, and creates/refreshes the Gold view before returning success. PAGASA refreshes run through the Databricks external-source notebooks.
+
+Weather refresh now also accepts `open_meteo_era5`, `open_meteo_era5_seamless` and
+`open_meteo_ifs` (the explicit archive model `ecmwf_ifs`). These use the fixed HTTPS
+Open-Meteo archive endpoint with Asia/Manila days. Separate provider/model rows
+upsert `workspace.medshield_silver.weather_open_meteo_monthly_candidate`; the Gold
+reader uses `workspace.medshield_gold.vw_weather_open_meteo_monthly_candidate`.
+The first explicitly requested refresh creates these candidate contracts. The
+implementation is locally tested; cloud publication/readback has not been run as
+part of the 8 October reliability benchmark. An absent new contract returns
+`status: "not_refreshed"`; a failed warehouse query returns an explicit error.
+
+All API refreshes require whole closed calendar months from 2017 through the
+latest closed Manila month, at most ten years per request. The candidate point
+registry covers the 16 provinces of CALABARZON/MIMAROPA/Bicol and retains Metro
+Manila for compatibility. Points are not province-wide observations or approved
+sales joins. Requests with missing rainfall days fail before data writes; an
+incomplete optional monthly mean stays null. NASA no longer accepts partial-month
+overwrite or silently averages incomplete optional measurements. Legacy NASA
+rows retain their original lineage; these stricter guards do not retroactively
+certify earlier refreshes.
+
+Open-Meteo rows preserve expected and per-metric valid days, requested/grid
+coordinates, source URL/response hash, timezone, model family and candidate status.
+They expose no sales matches, demand uplift, severity or official alerts. ERA5 and
+ERA5-Seamless rainfall share ERA5 input; they are not independent votes. NASA's
+existing wind is the maximum daily mean; Open-Meteo wind is the maximum of daily
+maxima. These fields must not be treated as an equivalent wind comparison.
+PAGASA rainfall millimetres are no longer mislabeled as a severity proxy, and
+missing rainfall remains null in both historical readers.
+
+Example authorized request body:
+
+```json
+{"provider":"open_meteo_era5","start":"2024-01-01","end":"2024-12-31","areas":["Quezon"]}
+```
+
+The no-key hosted Open-Meteo endpoint is for noncommercial research; commercial
+deployment needs appropriate provider entitlement/configuration. No account,
+subscription or commercial credential was created. The offline
+[reliability screening](../outputs/weather_reliability_20261008/REPORT.md) is not
+a dashboard fallback, operational forecast certification or model approval.
 
 ## Databricks administration
 

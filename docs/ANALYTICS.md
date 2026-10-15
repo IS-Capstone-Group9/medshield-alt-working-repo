@@ -1,5 +1,16 @@
 # Analytics
 
+## Current predictive evidence
+
+[Current state](CURRENT_STATE.md) supersedes dated model/data checkpoints below.
+The [predictive explanation](logic/PREDICTIVE_ANALYTICS_EXPLAINER.md) covers the
+executed benchmark, ETS, Prophet, SARIMA and ridge comparison. The
+[recomputed scorecard](../outputs/predictive_explanation_20261010/SCORECARD.md)
+shows development rankings, lead-specific errors and the 2025 retrospective audit
+in pesos, with [verification evidence](../outputs/predictive_explanation_20261010/README.md).
+The target is company recorded net sales, not verified SKU quantity. Candidate
+evaluation and storage do not approve operational serving or inventory decisions.
+
 ## Business analytics review — 7 October 2026
 
 The [complete assessment and delivery sequence](../outputs/business_analytics_review_20261007/REVIEW.md)

@@ -1,0 +1,90 @@
+{
+  "status": "PASS_LOCAL_GOLD_GUARD_FIX_AND_READ_ONLY_CONTRACT_REFRESH",
+  "checked_at": "2026-10-09T03:07:59.972136+00:00",
+  "reported_error": {
+    "cell": 3,
+    "cell_line": 133,
+    "assertion": "provisional demand required current PRODUCT_MASTER_PENDING after reporting category acceptance"
+  },
+  "before_source_sha256": "2b15c13f13fd9bd56fcf3da9f0340a3715a920c132b8364411becb7c356d3b09",
+  "after_source_sha256": "ced772ca1ea7796fd42f834aaf40d307db4d09ba1e2657da528e6d2c38c5def8",
+  "checks": [
+    {
+      "command": "python -m unittest discover -s databricks/medshield_project/tests -p test_gold_provisional_guard.py",
+      "before_patch": "4 tests; 5 accepted-category subcases failed with the actual blank assertion",
+      "after_initial_patch": "4 tests passed",
+      "note": "QA subsequently added divergent predecessor/current branch coverage"
+    },
+    {
+      "command": "python -m unittest discover -s databricks/medshield_project/tests",
+      "result": "PASS",
+      "tests": 82,
+      "elapsed_seconds": 23.144
+    },
+    {
+      "command": "python databricks/medshield_project/render_readme.py --check",
+      "result": "PASS"
+    },
+    {
+      "command": "seal_fix.py exact package/unchanged artifact/hash/cell syntax assertions",
+      "result": "PASS"
+    },
+    {
+      "command": "node node_modules/tsx/dist/cli.mjs scripts/prepare-catalog-publication.ts --category-acceptance",
+      "cwd": "backend",
+      "result": "PASS_READ_ONLY",
+      "cloud_writes": false
+    }
+  ],
+  "inherited_guard_diagnosis": {
+    "predecessor_fact_version": 19,
+    "provisional_records": 32495,
+    "invalid_original_provisional_records": 0,
+    "invalid_approved_demand_records": 0
+  },
+  "fresh_source_capture": {
+    "path": "outputs/catalog_preparation/2026-10-09T03-03-37-411Z/predecessor-receipt.json",
+    "source_fields_equal": 55,
+    "records": "37728",
+    "unique_records": "37728",
+    "stable_dependencies": 29,
+    "changed_versions": {
+      "workspace.medshield_audit.sales_restart_replacement_year_validation_candidate": {
+        "before": 3,
+        "after": 4
+      },
+      "workspace.medshield_silver.sales_restart_assessed_candidate": {
+        "before": 7,
+        "after": 8
+      },
+      "workspace.medshield_silver.sales_restart_clean_candidate": {
+        "before": 9,
+        "after": 10
+      }
+    }
+  },
+  "csv_category_receipt_and_catalog_helper_unchanged": true,
+  "quantity_and_demand_fields_remain_immutable": true,
+  "input_sha256": {
+    "databricks/medshield_project/03_sales_gold.py": "ced772ca1ea7796fd42f834aaf40d307db4d09ba1e2657da528e6d2c38c5def8",
+    "databricks/medshield_project/README.md": "ad1332479caccd0b5d53dd4ab8553b796cc00110b8e92cde93e2a0bc5929b8b3",
+    "databricks/medshield_project/GUIDE.md": "eef132eb75257e961b009477fd89d3b728234c835cd0c0230ee63e5d6b7bbaba",
+    "databricks/medshield_project/tests/test_gold_provisional_guard.py": "b7751cbab474ca7dd3bab538e0d401e72968a5ccab6b642268c9e9fa562c24bc",
+    "databricks/medshield_project/references/catalog_publication.json": "1d6d3f797c042d662da93e8aed6bb89dc65a52034deb6a0a353340d53d1ed975",
+    "databricks/medshield_project/references/category_acceptance.json": "a99078830b281be69c856d3aeeb725fe80ef0eebc5e86577ddd0e19f9ff0f56d",
+    "databricks/medshield_project/references/product_master_review.csv": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+    "outputs/gold_assertion_fix_20261009/cell3_corrected.py": "69b929b3c85f4e87836f408a7a9582cdff4219c9741adf2d361752f2d3700daa"
+  },
+  "review": "Separate read-only QA plus actual notebook-guard fixture execution; full Spark notebook execution not performed here",
+  "skills_applied": [
+    ".skills/database-standards.md",
+    ".skills/analytics-frameworks.md",
+    ".skills/coding-standards.md",
+    ".skills/testing-standards.md",
+    ".skills/technology-stack.md"
+  ],
+  "cloud_table_writes": false,
+  "cloud_gold_execution_verified": false,
+  "recovery_rehearsal_verified": false,
+  "business_release_approved": false
+}

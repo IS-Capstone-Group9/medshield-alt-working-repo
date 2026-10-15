@@ -39,30 +39,23 @@ This folder contains repeatable local jobs for the MedShield model computation w
 
 ## Descriptive Analytics
 
-Run:
+Current dashboard and Chapter 4 reporting use Databricks Gold through the TypeScript gateway. Validate the chosen fact release from the repository root with configured server-side Databricks credentials:
 
 ```powershell
-python services\analytics_service\jobs\run_descriptive.py
+Push-Location backend
+$env:DATABRICKS_DESCRIPTIVE_FACT_VERSION = '20'
+node --dns-result-order=ipv4first --import tsx scripts/validate-descriptive.ts
+node --dns-result-order=ipv4first --import tsx scripts/publication-readiness.ts
+Pop-Location
 ```
 
-Outputs are written by default to:
+Fact 20 is the 9 October 2026 validated candidate, not an instruction to choose an unvalidated future version. Consult [Current state](../../../docs/CURRENT_STATE.md) for the selected release. The validators are read-only and write receipts under `outputs/descriptive_validation/` and `outputs/publication_readiness/`. They do not activate a saved backend configuration, establish authenticated dashboard acceptance, or grant business approval.
 
-```text
-outputs/descriptive_analytics_YYYYMMDD/
-```
+Notebook [06_sales_stl.py](../../../databricks/medshield_project/06_sales_stl.py) publishes the company monthly PHP-revenue decomposition after Gold and the bridges. Its candidate components must match the selected fact identity. This is historical decomposition, not a forecast or verified SKU-demand output.
 
-The job performs the sales-only descriptive analytics layer:
+The legacy `run_descriptive.py` job and its `outputs/descriptive_analytics_YYYYMMDD/` files remain historical local preparation artifacts. [9 October QA](../../../outputs/system_qa_20261009/QA_REPORT.md) identified mismatched ABC contribution thresholds, margin populations and missing-month semantics. **Do not use that job for current publication or Chapter 4 results until repaired and independently reconciled to Gold.** Existing offline files never supply dashboard measures.
 
-- monthly and yearly sales trends,
-- product ABC/Pareto,
-- territory ABC/Pareto,
-- area and area-type summaries,
-- seasonality index,
-- year-over-year growth,
-- contract-allocation and estimated-date visibility,
-- Chapter 4 findings notes.
-
-Use this job before predictive or prescriptive model runs. It answers what happened; it does not forecast or recommend procurement action.
+Use [Descriptive analytics logic](../../../docs/DESCRIPTIVE_ANALYTICS_LOGIC.md) for metric/reporting rules and [Testing](../../../docs/TESTING.md) for authenticated API, chart and export acceptance. The current project and Chapter 4 reporting scope is **2017–2025**, confirmed by the user on 9 October 2026. Earlier 2021–2025 packets are historical subset results. Keep the 108 calendar months, 98 months with sales observations and ten unknown months visible; label the separate 72-month 2020–2025 company STL scope. Project-scope confirmation does not record business or academic release approval. Accepted reporting categories include Unclassified and do not approve sellable identity, normalized units, clinical priority, forecasts or procurement.
 
 ## Model Computation Start
 

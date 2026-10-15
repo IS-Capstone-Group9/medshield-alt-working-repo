@@ -25,3 +25,9 @@ Defines the testing strategy for MedShield. Use this file to decide where a chan
 - Unit tests: pure logic, formatting, validation, helpers, and edge cases.
 - Integration tests: API contracts, database access, service boundaries, and inter-module behavior.
 - End-to-end tests: core dashboard flows, authentication flows, and critical user paths.
+
+## Agent and skill instruction changes
+
+For instruction-only edits, verify role-to-skill routing, local links, ownership and consistency with canonical contracts; do not run application builds solely for Markdown changes. Use `python -X utf8 .agents/scripts/check_skill_routing.py` for routing coverage.
+
+When evaluating behavior, use bounded tasks with independent expected results under the [execution contract's worker evaluation protocol](../.agents/execution-contract.md#evaluating-worker-instruction-changes). Retain first attempts, hints and corrected retries separately. Select failure probes from the actual task, such as a missing skill, inflated join, unsupported forecast lead or unavailable source. Repeated comparable baseline/revised trials are needed for a performance-improvement claim; passing link checks or one fresh worker task establishes only that tested scope.

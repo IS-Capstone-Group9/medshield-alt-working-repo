@@ -1,0 +1,59 @@
+{
+  "status": "PASS_LOCAL_CATEGORY_ACCEPTANCE",
+  "master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+  "bytes": 4755483,
+  "rows": 4561,
+  "columns": 29,
+  "copies_identical": true,
+  "category_status_approved": 4561,
+  "noncategory_approval_count": 0,
+  "forecast_eligible_rows": 0,
+  "all_other_csv_cells_unchanged": true,
+  "all_noncategory_resolved_values_equal": true,
+  "category_financial_partition": {
+    "medicine": {
+      "labels": 598,
+      "records": 8580,
+      "adjusted_records": 3072,
+      "net_sales": "283572883.580000",
+      "positive_sales": "283981327.770000",
+      "positive_sales_share_pct": "45.17899042976254668478642568"
+    },
+    "unclassified": {
+      "labels": 2977,
+      "records": 25252,
+      "adjusted_records": 6911,
+      "net_sales": "243282589.760000",
+      "positive_sales": "244488973.530000",
+      "positive_sales_share_pct": "38.89609602868129656467708289"
+    },
+    "medical_equipment": {
+      "labels": 131,
+      "records": 310,
+      "adjusted_records": 171,
+      "net_sales": "19835915.090000",
+      "positive_sales": "19835915.090000",
+      "positive_sales_share_pct": "3.155723740902109399633026917"
+    },
+    "medical_supply": {
+      "labels": 646,
+      "records": 2667,
+      "adjusted_records": 901,
+      "net_sales": "58968013.270000",
+      "positive_sales": "58972470.090000",
+      "positive_sales_share_pct": "9.382013538486696364849509790"
+    },
+    "non_medical": {
+      "labels": 209,
+      "records": 919,
+      "adjusted_records": 300,
+      "net_sales": "21287340.110000",
+      "positive_sales": "21290754.910000",
+      "positive_sales_share_pct": "3.387176262167350986053954722"
+    }
+  },
+  "source_totals_conserved": true,
+  "financial_basis": "Inherited checked fact19 label receipt, separate recomputation; not a fresh cloud replacement",
+  "cloud_deployed": false,
+  "business_release_approved": false
+}

@@ -1,0 +1,731 @@
+{
+  "checked_at": "2026-10-10T04:41:17.688Z",
+  "engine": "PGlite embedded PostgreSQL; isolated synthetic data; no remote migration or read",
+  "commands": [
+    "node outputs/system_qa_20261010/database/probe_supabase.mjs"
+  ],
+  "migrations": [
+    {
+      "file": "001_init.sql",
+      "sha256": "5160636f7f541fbe248b9645f20eda13386ac22355c648767741b3da0c7c96ce",
+      "status": "passed"
+    },
+    {
+      "file": "002_accounts.sql",
+      "sha256": "9c69559561834b6bf5e13060639c50a144abea80d3a234415107c33d067a6990",
+      "status": "passed"
+    },
+    {
+      "file": "003_auth_rpc.sql",
+      "sha256": "0c53723b112fef7dd8be7c37f5207bddae801422c06b2184ca6f977d1cf4f6ed",
+      "status": "passed"
+    },
+    {
+      "file": "004_dss_schema.sql",
+      "sha256": "1ccfe264aec70b1edacf1abba01770b95acf2ee840455212ed1e61674bfa2a22",
+      "status": "passed"
+    },
+    {
+      "file": "005_sales_ingestion_weather.sql",
+      "sha256": "e14b07c47c3bd5cfd7e38f311eb9964f026decaebc178d928c9ebbb922dc98fd",
+      "status": "passed"
+    },
+    {
+      "file": "006_business_rules_master_data.sql",
+      "sha256": "3eb2d76a23ed0f8bad03d8f38dfbc94f8773dd2996a39fc3c8afa734b65173f9",
+      "status": "passed"
+    },
+    {
+      "file": "007_namespaced_schema_alignment.sql",
+      "sha256": "efc0b2f90dfec339ccc43f9281e64afbba9138240fa97b622383f0398e48dc09",
+      "status": "passed"
+    },
+    {
+      "file": "008_schema_performance_lineage_indices.sql",
+      "sha256": "757fe92c51d1182b0a37a92026f309d93f2722427f9d6d12a4cb2c6778eee3f7",
+      "status": "passed"
+    },
+    {
+      "file": "009_saas_compliance_audit.sql",
+      "sha256": "8a91c1f9169c4b2fea9280329af1bd0ab6a38e3aa5e4f39abd8c571b4658ba15",
+      "status": "passed"
+    },
+    {
+      "file": "010_enable_rls.sql",
+      "sha256": "36bd39bd8d569489c0aa543bf1e6f135e196dd5aa4b7a3caa5381a8fa1ca81f8",
+      "status": "passed"
+    },
+    {
+      "file": "011_supabase_auth_account_bridge.sql",
+      "sha256": "0a6e5f291f364664129832fb2817a694fef10a8af66c835baf55cb1a0c698e9b",
+      "status": "failed",
+      "code": "42883",
+      "error": "function medshield_identity.verify_login(text, text) does not exist"
+    },
+    {
+      "file": "011_supabase_auth_account_bridge.sql",
+      "sha256": "0a6e5f291f364664129832fb2817a694fef10a8af66c835baf55cb1a0c698e9b",
+      "status": "passed_with_missing_legacy_function_stubs",
+      "fixture_only": true
+    },
+    {
+      "file": "012_retire_legacy_auth_surface.sql",
+      "sha256": "92654b01de33d0f14577928d6dc0248693b216dc5c2afa49bda8ff08355647f9",
+      "status": "passed"
+    },
+    {
+      "file": "013_databricks_yearly_candidate_sync.sql",
+      "sha256": "df3d1649c9ef7fb21139639d772fc22abf6887269ef4560ab9f345e80cb9094b",
+      "status": "passed"
+    },
+    {
+      "file": "014_databricks_yearly_candidate_permissions.sql",
+      "sha256": "f0c074b0b592bbe3c767d7d4f5e92d61e4a69290497e53d8da3f6500db5d99c6",
+      "status": "passed"
+    },
+    {
+      "file": "015_approved_financial_semantics.sql",
+      "sha256": "0fb419e2cb0eb698b996663ef32025eb5eb7c8b251c2a515f9c1eac93183dcc1",
+      "status": "passed"
+    },
+    {
+      "file": "016_durable_audit_chain.sql",
+      "sha256": "c65a8b0e02f47c0ff85d346d5eb75c0cbbffdbc526a0fb209f137083573d770a",
+      "status": "passed"
+    }
+  ],
+  "checks": [
+    {
+      "name": "linked_user_sees_one_own_profile",
+      "role": "authenticated",
+      "sql": "SELECT COUNT(*) AS visible_rows FROM medshield_identity.accounts",
+      "status": "success",
+      "expected": "success",
+      "rows": [
+        {
+          "visible_rows": 1
+        }
+      ]
+    },
+    {
+      "name": "linked_user_cannot_change_role",
+      "role": "authenticated",
+      "sql": "UPDATE medshield_identity.accounts SET role='admin' WHERE auth_user_id='11111111-1111-4111-8111-111111111111'",
+      "status": "denied_or_error",
+      "expected": "denied",
+      "code": "42501",
+      "error": "permission denied for table accounts"
+    },
+    {
+      "name": "accounts_anonymous_denied",
+      "role": "anon",
+      "sql": "SELECT COUNT(*) AS visible_rows FROM medshield_identity.accounts",
+      "status": "denied_or_error",
+      "expected": "denied",
+      "code": "42501",
+      "error": "permission denied for table accounts"
+    },
+    {
+      "name": "final_public_view_acl",
+      "role": "postgres",
+      "sql": "SELECT c.relname,has_table_privilege('anon',c.oid,'SELECT') AS anon_can_select,c.reloptions FROM pg_class c JOIN pg_namespace n ON c.relnamespace=n.oid WHERE n.nspname='public' AND c.relkind='v' ORDER BY c.relname",
+      "status": "success",
+      "expected": "success",
+      "rows": [
+        {
+          "relname": "vw_area_mapping_status",
+          "anon_can_select": true,
+          "reloptions": null
+        },
+        {
+          "relname": "vw_dashboard_by_area",
+          "anon_can_select": true,
+          "reloptions": null
+        },
+        {
+          "relname": "vw_dashboard_kpis",
+          "anon_can_select": true,
+          "reloptions": null
+        },
+        {
+          "relname": "vw_dashboard_monthly",
+          "anon_can_select": true,
+          "reloptions": null
+        },
+        {
+          "relname": "vw_dashboard_seasonality",
+          "anon_can_select": true,
+          "reloptions": null
+        },
+        {
+          "relname": "vw_dashboard_top_products",
+          "anon_can_select": true,
+          "reloptions": null
+        },
+        {
+          "relname": "vw_dashboard_year_summary",
+          "anon_can_select": true,
+          "reloptions": null
+        },
+        {
+          "relname": "vw_data_completeness_status",
+          "anon_can_select": true,
+          "reloptions": null
+        },
+        {
+          "relname": "vw_dss_allocation_recommendations",
+          "anon_can_select": true,
+          "reloptions": null
+        },
+        {
+          "relname": "vw_dss_area_clusters",
+          "anon_can_select": true,
+          "reloptions": null
+        },
+        {
+          "relname": "vw_dss_decision_alerts",
+          "anon_can_select": true,
+          "reloptions": null
+        },
+        {
+          "relname": "vw_dss_external_signals",
+          "anon_can_select": true,
+          "reloptions": null
+        },
+        {
+          "relname": "vw_dss_forecasts",
+          "anon_can_select": true,
+          "reloptions": null
+        },
+        {
+          "relname": "vw_dss_inventory_recommendations",
+          "anon_can_select": true,
+          "reloptions": null
+        },
+        {
+          "relname": "vw_dss_model_evaluation",
+          "anon_can_select": true,
+          "reloptions": null
+        },
+        {
+          "relname": "vw_dss_product_priorities",
+          "anon_can_select": true,
+          "reloptions": null
+        },
+        {
+          "relname": "vw_dss_product_region_matches",
+          "anon_can_select": true,
+          "reloptions": null
+        },
+        {
+          "relname": "vw_dss_regional_priorities",
+          "anon_can_select": true,
+          "reloptions": null
+        },
+        {
+          "relname": "vw_product_master_status",
+          "anon_can_select": true,
+          "reloptions": null
+        },
+        {
+          "relname": "vw_sales_transactions",
+          "anon_can_select": true,
+          "reloptions": null
+        },
+        {
+          "relname": "vw_sales_with_dimensions",
+          "anon_can_select": true,
+          "reloptions": null
+        }
+      ]
+    },
+    {
+      "name": "final_rls_policy_inventory",
+      "role": "postgres",
+      "sql": "SELECT schemaname,tablename,policyname,roles,cmd,qual FROM pg_policies WHERE schemaname LIKE 'medshield_%' ORDER BY schemaname,tablename,policyname",
+      "status": "success",
+      "expected": "success",
+      "rows": [
+        {
+          "schemaname": "medshield_analytics",
+          "tablename": "dim_model",
+          "policyname": "Public read",
+          "roles": [
+            "public"
+          ],
+          "cmd": "SELECT",
+          "qual": "true"
+        },
+        {
+          "schemaname": "medshield_analytics",
+          "tablename": "fact_allocation_recommendation",
+          "policyname": "Public read",
+          "roles": [
+            "public"
+          ],
+          "cmd": "SELECT",
+          "qual": "true"
+        },
+        {
+          "schemaname": "medshield_analytics",
+          "tablename": "fact_area_cluster",
+          "policyname": "Public read",
+          "roles": [
+            "public"
+          ],
+          "cmd": "SELECT",
+          "qual": "true"
+        },
+        {
+          "schemaname": "medshield_analytics",
+          "tablename": "fact_decision_alert",
+          "policyname": "Public read",
+          "roles": [
+            "public"
+          ],
+          "cmd": "SELECT",
+          "qual": "true"
+        },
+        {
+          "schemaname": "medshield_analytics",
+          "tablename": "fact_demand_forecast",
+          "policyname": "Analytics: read published",
+          "roles": [
+            "public"
+          ],
+          "cmd": "SELECT",
+          "qual": "true"
+        },
+        {
+          "schemaname": "medshield_analytics",
+          "tablename": "fact_demand_forecast",
+          "policyname": "Analytics: service role write",
+          "roles": [
+            "public"
+          ],
+          "cmd": "ALL",
+          "qual": "(auth.role() = 'service_role'::text)"
+        },
+        {
+          "schemaname": "medshield_analytics",
+          "tablename": "fact_demand_forecast",
+          "policyname": "Public read",
+          "roles": [
+            "public"
+          ],
+          "cmd": "SELECT",
+          "qual": "true"
+        },
+        {
+          "schemaname": "medshield_analytics",
+          "tablename": "fact_forecast_run",
+          "policyname": "Public read",
+          "roles": [
+            "public"
+          ],
+          "cmd": "SELECT",
+          "qual": "true"
+        },
+        {
+          "schemaname": "medshield_analytics",
+          "tablename": "fact_inventory_recommendation",
+          "policyname": "Public read",
+          "roles": [
+            "public"
+          ],
+          "cmd": "SELECT",
+          "qual": "true"
+        },
+        {
+          "schemaname": "medshield_analytics",
+          "tablename": "fact_model_evaluation",
+          "policyname": "Public read",
+          "roles": [
+            "public"
+          ],
+          "cmd": "SELECT",
+          "qual": "true"
+        },
+        {
+          "schemaname": "medshield_analytics",
+          "tablename": "fact_product_priority",
+          "policyname": "Public read",
+          "roles": [
+            "public"
+          ],
+          "cmd": "SELECT",
+          "qual": "true"
+        },
+        {
+          "schemaname": "medshield_analytics",
+          "tablename": "fact_product_region_match",
+          "policyname": "Public read",
+          "roles": [
+            "public"
+          ],
+          "cmd": "SELECT",
+          "qual": "true"
+        },
+        {
+          "schemaname": "medshield_analytics",
+          "tablename": "fact_regional_priority",
+          "policyname": "Public read",
+          "roles": [
+            "public"
+          ],
+          "cmd": "SELECT",
+          "qual": "true"
+        },
+        {
+          "schemaname": "medshield_common",
+          "tablename": "dim_area",
+          "policyname": "Public read",
+          "roles": [
+            "public"
+          ],
+          "cmd": "SELECT",
+          "qual": "true"
+        },
+        {
+          "schemaname": "medshield_common",
+          "tablename": "dim_date",
+          "policyname": "Public read",
+          "roles": [
+            "public"
+          ],
+          "cmd": "SELECT",
+          "qual": "true"
+        },
+        {
+          "schemaname": "medshield_common",
+          "tablename": "dim_month",
+          "policyname": "Public read",
+          "roles": [
+            "public"
+          ],
+          "cmd": "SELECT",
+          "qual": "true"
+        },
+        {
+          "schemaname": "medshield_common",
+          "tablename": "dim_product",
+          "policyname": "Public read",
+          "roles": [
+            "public"
+          ],
+          "cmd": "SELECT",
+          "qual": "true"
+        },
+        {
+          "schemaname": "medshield_common",
+          "tablename": "dim_product_alias",
+          "policyname": "Public read",
+          "roles": [
+            "public"
+          ],
+          "cmd": "SELECT",
+          "qual": "true"
+        },
+        {
+          "schemaname": "medshield_etl",
+          "tablename": "dim_source_system",
+          "policyname": "Public read",
+          "roles": [
+            "public"
+          ],
+          "cmd": "SELECT",
+          "qual": "true"
+        },
+        {
+          "schemaname": "medshield_external",
+          "tablename": "fact_disease_signal",
+          "policyname": "Public read",
+          "roles": [
+            "public"
+          ],
+          "cmd": "SELECT",
+          "qual": "true"
+        },
+        {
+          "schemaname": "medshield_external",
+          "tablename": "fact_weather_signal",
+          "policyname": "Public read",
+          "roles": [
+            "public"
+          ],
+          "cmd": "SELECT",
+          "qual": "true"
+        },
+        {
+          "schemaname": "medshield_identity",
+          "tablename": "accounts",
+          "policyname": "Accounts: linked user read own profile",
+          "roles": [
+            "authenticated"
+          ],
+          "cmd": "SELECT",
+          "qual": "(( SELECT auth.uid() AS uid) = auth_user_id)"
+        },
+        {
+          "schemaname": "medshield_identity",
+          "tablename": "accounts",
+          "policyname": "Accounts: service role full access",
+          "roles": [
+            "service_role"
+          ],
+          "cmd": "ALL",
+          "qual": "true"
+        },
+        {
+          "schemaname": "medshield_identity",
+          "tablename": "accounts",
+          "policyname": "Accounts: service role only",
+          "roles": [
+            "public"
+          ],
+          "cmd": "ALL",
+          "qual": "(auth.role() = 'service_role'::text)"
+        },
+        {
+          "schemaname": "medshield_identity",
+          "tablename": "audit_logs",
+          "policyname": "Audit logs: service role only",
+          "roles": [
+            "public"
+          ],
+          "cmd": "ALL",
+          "qual": "(auth.role() = 'service_role'::text)"
+        },
+        {
+          "schemaname": "medshield_sales",
+          "tablename": "fact_area_summary",
+          "policyname": "Public read",
+          "roles": [
+            "public"
+          ],
+          "cmd": "SELECT",
+          "qual": "true"
+        },
+        {
+          "schemaname": "medshield_sales",
+          "tablename": "fact_data_completeness",
+          "policyname": "Public read",
+          "roles": [
+            "public"
+          ],
+          "cmd": "SELECT",
+          "qual": "true"
+        },
+        {
+          "schemaname": "medshield_sales",
+          "tablename": "fact_monthly_sales",
+          "policyname": "Public read",
+          "roles": [
+            "public"
+          ],
+          "cmd": "SELECT",
+          "qual": "true"
+        },
+        {
+          "schemaname": "medshield_sales",
+          "tablename": "fact_product_summary",
+          "policyname": "Public read",
+          "roles": [
+            "public"
+          ],
+          "cmd": "SELECT",
+          "qual": "true"
+        },
+        {
+          "schemaname": "medshield_sales",
+          "tablename": "fact_sales_transactions",
+          "policyname": "Sales: authenticated read",
+          "roles": [
+            "public"
+          ],
+          "cmd": "SELECT",
+          "qual": "(auth.role() = ANY (ARRAY['authenticated'::text, 'anon'::text, 'service_role'::text]))"
+        },
+        {
+          "schemaname": "medshield_sales",
+          "tablename": "fact_sales_transactions",
+          "policyname": "Sales: service role write",
+          "roles": [
+            "public"
+          ],
+          "cmd": "ALL",
+          "qual": "(auth.role() = 'service_role'::text)"
+        },
+        {
+          "schemaname": "medshield_sales",
+          "tablename": "fact_seasonality",
+          "policyname": "Public read",
+          "roles": [
+            "public"
+          ],
+          "cmd": "SELECT",
+          "qual": "true"
+        },
+        {
+          "schemaname": "medshield_sales",
+          "tablename": "fact_year_summary",
+          "policyname": "Public read",
+          "roles": [
+            "public"
+          ],
+          "cmd": "SELECT",
+          "qual": "true"
+        }
+      ]
+    },
+    {
+      "name": "legacy_sales_view_anonymous_query",
+      "role": "anon",
+      "sql": "SELECT COUNT(*) AS rows,SUM(net_cost) AS synthetic_sales FROM public.vw_sales_transactions",
+      "status": "success",
+      "expected": "denied",
+      "rows": [
+        {
+          "rows": 1,
+          "synthetic_sales": "123.45"
+        }
+      ]
+    },
+    {
+      "name": "legacy_forecast_view_anonymous_query",
+      "role": "anon",
+      "sql": "SELECT COUNT(*) AS rows FROM public.vw_dss_forecasts",
+      "status": "success",
+      "expected": "denied",
+      "rows": [
+        {
+          "rows": 0
+        }
+      ]
+    },
+    {
+      "name": "protected_candidate_cache_anonymous_query",
+      "role": "anon",
+      "sql": "SELECT COUNT(*) AS rows FROM medshield_sales.databricks_yearly_sales_candidate",
+      "status": "denied_or_error",
+      "expected": "denied",
+      "code": "42501",
+      "error": "permission denied for schema medshield_sales"
+    },
+    {
+      "name": "protected_audit_select_anon",
+      "role": "anon",
+      "sql": "SELECT COUNT(*) AS rows FROM medshield_identity.audit_logs",
+      "status": "denied_or_error",
+      "expected": "denied",
+      "code": "42501",
+      "error": "permission denied for table audit_logs"
+    },
+    {
+      "name": "protected_audit_select_authenticated",
+      "role": "authenticated",
+      "sql": "SELECT COUNT(*) AS rows FROM medshield_identity.audit_logs",
+      "status": "denied_or_error",
+      "expected": "denied",
+      "code": "42501",
+      "error": "permission denied for table audit_logs"
+    },
+    {
+      "name": "audit_append_service_role",
+      "role": "service_role",
+      "sql": "SELECT chain_sequence,entry_hash FROM medshield_identity.append_audit_log('00000000-0000-4000-8000-000000000001','{\"event_id\":\"00000000-0000-4000-8000-000000000001\",\"username\":\"fixture-user\",\"action\":\"QA\",\"detail\":\"Synthetic ₱ audit\",\"ip_address\":\"127.0.0.1\",\"user_agent\":\"isolated-fixture\",\"created_at\":\"2026-10-09T00:00:00.000Z\"}')",
+      "status": "success",
+      "expected": "success",
+      "rows": [
+        {
+          "chain_sequence": 1,
+          "entry_hash": "02f26b61284fbd4c2989ae3965e317ddbe3dac7ac79564ad1ad9a36c9c78a206"
+        }
+      ]
+    },
+    {
+      "name": "audit_idempotent_repeat",
+      "role": "service_role",
+      "sql": "SELECT chain_sequence,entry_hash FROM medshield_identity.append_audit_log('00000000-0000-4000-8000-000000000001','{\"event_id\":\"00000000-0000-4000-8000-000000000001\",\"username\":\"fixture-user\",\"action\":\"QA\",\"detail\":\"Synthetic ₱ audit\",\"ip_address\":\"127.0.0.1\",\"user_agent\":\"isolated-fixture\",\"created_at\":\"2026-10-09T00:00:00.000Z\"}')",
+      "status": "success",
+      "expected": "success",
+      "rows": [
+        {
+          "chain_sequence": 1,
+          "entry_hash": "02f26b61284fbd4c2989ae3965e317ddbe3dac7ac79564ad1ad9a36c9c78a206"
+        }
+      ]
+    },
+    {
+      "name": "audit_reused_id_changed_payload",
+      "role": "service_role",
+      "sql": "SELECT chain_sequence FROM medshield_identity.append_audit_log('00000000-0000-4000-8000-000000000001','{\"event_id\":\"00000000-0000-4000-8000-000000000001\",\"username\":\"fixture-user\",\"action\":\"QA\",\"detail\":\"Changed audit\",\"ip_address\":\"127.0.0.1\",\"user_agent\":\"isolated-fixture\",\"created_at\":\"2026-10-09T00:00:00.000Z\"}')",
+      "status": "denied_or_error",
+      "expected": "denied",
+      "code": "22023",
+      "error": "Audit event identifier already exists with a different payload"
+    },
+    {
+      "name": "audit_execute_anon",
+      "role": "anon",
+      "sql": "SELECT chain_sequence FROM medshield_identity.append_audit_log('00000000-0000-4000-8000-000000000001','{\"event_id\":\"00000000-0000-4000-8000-000000000001\",\"username\":\"fixture-user\",\"action\":\"QA\",\"detail\":\"Synthetic ₱ audit\",\"ip_address\":\"127.0.0.1\",\"user_agent\":\"isolated-fixture\",\"created_at\":\"2026-10-09T00:00:00.000Z\"}')",
+      "status": "denied_or_error",
+      "expected": "denied",
+      "code": "42501",
+      "error": "permission denied for function append_audit_log"
+    },
+    {
+      "name": "audit_execute_authenticated",
+      "role": "authenticated",
+      "sql": "SELECT chain_sequence FROM medshield_identity.append_audit_log('00000000-0000-4000-8000-000000000001','{\"event_id\":\"00000000-0000-4000-8000-000000000001\",\"username\":\"fixture-user\",\"action\":\"QA\",\"detail\":\"Synthetic ₱ audit\",\"ip_address\":\"127.0.0.1\",\"user_agent\":\"isolated-fixture\",\"created_at\":\"2026-10-09T00:00:00.000Z\"}')",
+      "status": "denied_or_error",
+      "expected": "denied",
+      "code": "42501",
+      "error": "permission denied for function append_audit_log"
+    },
+    {
+      "name": "audit_direct_insert_service_role",
+      "role": "service_role",
+      "sql": "INSERT INTO medshield_identity.audit_logs(action,detail) VALUES('QA','Synthetic')",
+      "status": "denied_or_error",
+      "expected": "denied",
+      "code": "42501",
+      "error": "permission denied for table audit_logs"
+    },
+    {
+      "name": "audit_final_state",
+      "role": "service_role",
+      "sql": "SELECT COUNT(*) AS rows,MAX(chain_sequence) AS sequence,MAX(entry_hash) AS hash FROM medshield_identity.audit_logs",
+      "status": "success",
+      "expected": "success",
+      "rows": [
+        {
+          "rows": 1,
+          "sequence": 1,
+          "hash": "02f26b61284fbd4c2989ae3965e317ddbe3dac7ac79564ad1ad9a36c9c78a206"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Single in-process database does not verify distributed locking or PostgREST/cloud ACLs.",
+    "Supabase auth schema/functions and public-schema default privileges are explicit fixtures."
+  ],
+  "expected_hash": "02f26b61284fbd4c2989ae3965e317ddbe3dac7ac79564ad1ad9a36c9c78a206",
+  "summary": {
+    "consequential_checks": 15,
+    "met": 13,
+    "failed": 2
+  },
+  "independent_value_assertions": {
+    "linked_profile_count": true,
+    "utf8_sha256_equal": true,
+    "idempotent_one_record": true,
+    "idempotent_same_sequence": true
+  },
+  "engine_version": [
+    {
+      "version": "PostgreSQL 18.3 (PGlite 0.5.8) on wasm32-unknown-emscripten, compiled by emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 3.1.74 (1092ec30a3fb1d46b1782ff1b4db5094d3d06ae5), 32-bit"
+    }
+  ]
+}

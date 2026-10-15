@@ -56,6 +56,16 @@ The current gateway supports:
 
 Buyer and geographic classifications are derived from controlled mapping rules and `docs/MAPPED_CLIENT_REFERENCE.md`. They are not source-recorded fields for every transaction and require owner review.
 
+The **View Sales Data** ledger groups search, year and quality filters above a
+filtered summary. Compact columns wrap product names, retain transaction-evidence
+labels and align numeric values to the right. Full Ledger exposes the source and
+financial columns. Page size sits beside pagination; native **Source and validation**
+details contain source identity, quality counts, metric definitions and reconciliation,
+with reconciliation differences visible even when collapsed. **Reset filters** clears
+search/year/quality and returns to page one while retaining an investigation's exact
+date, dimension and release scope. **Refresh** retries the current selection through
+the existing authenticated gateway. Failed loads clear the ledger and summary.
+
 ## 4.6 Authentication and audit
 
 Production authentication uses Supabase Auth. The gateway resolves username/email, validates sessions, enforces role checks, and supports required password reset. Local session authentication can be enabled for development without changing the analytical source.

@@ -209,7 +209,8 @@ def read_mapping(path, required):
         print(f"MAPPING PENDING: {file.name} is absent; no approvals inferred.")
         return [], "NOT_SUPPLIED"
     payload = file.read_bytes()
-    if not 0 < len(payload) <= 5_000_000:
+    # Receipt-bound review metadata raises the 4.75 MB master; retain a fixed bound.
+    if not 0 < len(payload) <= 8_000_000:
         raise ValueError(f"Invalid mapping file size: {file.name}")
     reader = csv.DictReader(io.StringIO(payload.decode("utf-8-sig")))
     if not required <= set(reader.fieldnames or []):
@@ -336,6 +337,18 @@ area_rows, AREA_MAPPING_SHA256 = read_mapping(AREA_MAPPING_PATH, {
 master_rows, PRODUCT_MASTER_SHA256 = read_mapping(PRODUCT_MASTER_PATH, set(catalog["FIELDS"]))
 area_master = reviewed_mapping(area_rows, "raw_area", "area")
 product_master = catalog["validate_master"](master_rows)
+publication_contract_api = {"__name__": "catalog_publication_workspace",
+    "clean_label": catalog["clean_label"], "validate_master": catalog["validate_master"]}
+exec(Path("/Workspace/medshield/medshield_project/catalog_publication.py").read_text(encoding="utf-8"), publication_contract_api)
+catalog_contract = publication_contract_api["validate_contract"](
+    publication_contract_api["json"].loads(Path("/Workspace/medshield/medshield_project/references/catalog_publication.json").read_text(encoding="utf-8")))
+category_acceptance = None
+if catalog_contract["mode"] == publication_contract_api["CATEGORY_MODE"]:
+    assert catalog_contract["category_acceptance_path"] == "databricks/medshield_project/references/category_acceptance.json", "Unexpected category receipt upload path"
+    acceptance_payload = Path("/Workspace/medshield/medshield_project/references/category_acceptance.json").read_bytes()
+    assert hashlib.sha256(acceptance_payload).hexdigest() == catalog_contract["category_acceptance_sha256"], "Category receipt hash mismatch"
+    category_acceptance = publication_contract_api["json"].loads(acceptance_payload)
+category_decisions = publication_contract_api["validate_publication_rows"](master_rows, catalog_contract, category_acceptance)
 # One policy row per normalized label prevents mapping fan-out.
 product_labels = {normalize_label(row[0]) for row in clean.select("product").distinct().collect()}
 area_labels = {normalize_label(row[0]) for row in clean.select("area").distinct().collect()}
@@ -344,7 +357,7 @@ for label in sorted(product_labels):
     metadata = catalog["resolve"](label, hashlib.sha256(label.encode("utf-8")).hexdigest(), product_master)
     scope = classify_product_label(label, reference_keys)
     assert scope != "CONTRACT_LABEL_CANDIDATE" or metadata["canonical_sku"] is None, "Contract parent cannot be a SKU"
-    metadata["product_scope_status"] = metadata["product_category"].upper() + "_APPROVED" if metadata["category_status"] == "approved" else scope
+    metadata["product_scope_status"] = publication_contract_api["category_scope"](scope, metadata["product_category"]) if metadata["category_status"] == "approved" else scope
     metadata["is_medical_product_approved"] = metadata["forecast_eligible"] and (
         metadata["product_category"] == "medicine" or (INCLUDE_MEDICAL_SUPPLIES and metadata["product_category"] == "medical_supply"))
     metadata["normalized_product"] = label
@@ -446,16 +459,49 @@ fact = (
     .withColumn("publication_status", F.lit(PUBLICATION_STATUS))
     .withColumn("policy_version", F.lit(POLICY_VERSION))
 )
-# Catalog-only migration is bound to the reviewed predecessor, not latest mutable state.
-CATALOG_BASE_FACT_VERSION = 16
-catalog_base = spark.sql(f"SELECT * FROM {GOLD_SCHEMA}.sales_restart_fact_candidate VERSION AS OF {CATALOG_BASE_FACT_VERSION}")
-assert dataset_of(catalog_base, "catalog predecessor") == DATASET_ID
+# Catalog-only migration uses the same reviewed contract as packaging and validation.
+assert catalog_contract["proposed"] == {
+    "product_master_sha256": PRODUCT_MASTER_SHA256,
+    "transaction_evidence_sha256": TRANSACTION_EVIDENCE_SHA256,
+    "catalog_helper_sha256": CATALOG_HELPER_SHA256,
+    "area_mapping_sha256": AREA_MAPPING_SHA256,
+}, "Reference bytes changed since contract preparation"
+catalog_base = spark.sql(f"SELECT * FROM {GOLD_SCHEMA}.sales_restart_fact_candidate VERSION AS OF {catalog_contract['baseline_fact_version']}")
+assert dataset_of(catalog_base, "catalog predecessor") == DATASET_ID, "Catalog predecessor dataset differs from current source"
+assert set(catalog_base.columns) == set(catalog_contract["predecessor_columns"]), "Predecessor schema changed"
+catalog_identity = catalog_base.select(*catalog_contract["baseline_identity"]).distinct().collect()
+assert len(catalog_identity) == 1 and catalog_identity[0].asDict() == catalog_contract["baseline_identity"], "Predecessor identity changed"
 same_keys(catalog_base, fact, ["source_record_id"], "Catalog migration cannot add/delete transactions")
-CATALOG_PRESERVED_FIELDS = ["source_record_id", "product_key", "product", "product_raw", "quantity", "date_delivered", "net_sales",
-    "gross_sales", "gross_margin_amount", "total_acquisition_cost", "is_net_sales_eligible", "is_gross_sales_eligible",
-    "is_gross_margin_eligible", "is_acquisition_cost_eligible", "is_quantity_observation_eligible", "is_adjusted_source"]
-assert catalog_base.select(*CATALOG_PRESERVED_FIELDS).exceptAll(fact.select(*CATALOG_PRESERVED_FIELDS)).limit(1).count() == 0, "Catalog source/financial contract changed"
-assert fact.select(*CATALOG_PRESERVED_FIELDS).exceptAll(catalog_base.select(*CATALOG_PRESERVED_FIELDS)).limit(1).count() == 0, "Catalog source/financial contract changed"
+if category_decisions is not None:
+    assert set(category_decisions) == product_labels, "Acceptance must exactly cover predecessor/product labels"
+    # Reporting categories cannot change measured quantities or any demand gate.
+    # Retain these predecessor gates before rebuilding the analytical marts.
+    preserved_demand = publication_contract_api["PRESERVED_DEMAND_FIELDS"]
+    retained = catalog_base.select("source_record_id", *[F.col(name).alias("preserved_" + name) for name in preserved_demand])
+    fact = fact.join(retained, "source_record_id", "inner")
+    for name in preserved_demand:
+        fact = fact.withColumn(name, F.col("preserved_" + name)).drop("preserved_" + name)
+    expected_rows = []
+    predecessor_labels = catalog_base.select("normalized_product", "product_scope_status", "is_contract_label").distinct().collect()
+    assert len(predecessor_labels) == len(product_labels), "Predecessor contains conflicting label scopes"
+    for row in predecessor_labels:
+        expected = publication_contract_api["expected_category_metadata"](row.asDict(), category_decisions[row["normalized_product"]])
+        expected_rows.append({"normalized_product": row["normalized_product"], **{"expected_" + key: value for key, value in expected.items()}})
+    expected_policy = spark.createDataFrame(expected_rows)
+    checked = fact.join(expected_policy, "normalized_product", "inner")
+    same_keys(fact, checked, ["source_record_id"], "Category comparison omitted a fact")
+    for name in ("product_category", "category_status", "display_category", "product_scope_status", "catalog_evidence_source"):
+        assert checked.filter(~F.col(name).eqNullSafe(F.col("expected_" + name))).limit(1).count() == 0, "Unexpected calculated category transition: " + name
+catalog_compare = (fact.withColumn("area_mapping_sha256", F.lit(AREA_MAPPING_SHA256))
+    .withColumn("product_master_sha256", F.lit(PRODUCT_MASTER_SHA256))
+    .withColumn("medical_supplies_in_scope", F.lit(INCLUDE_MEDICAL_SUPPLIES))
+    .withColumn("gold_published_at", F.current_timestamp()))
+assert set(catalog_compare.columns) == set(catalog_base.columns), "Catalog publication cannot add or remove fact columns"
+assert {f.name: f.dataType for f in catalog_compare.schema} == {f.name: f.dataType for f in catalog_base.schema}, "Fact field types changed"
+catalog_preserved_fields = catalog_contract["immutable_fields"]
+assert [(f.name, f.dataType) for f in catalog_base.select(*catalog_preserved_fields).schema] == [(f.name, f.dataType) for f in catalog_compare.select(*catalog_preserved_fields).schema], "Immutable field types changed"
+assert catalog_base.select(*catalog_preserved_fields).exceptAll(catalog_compare.select(*catalog_preserved_fields)).limit(1).count() == 0, "Immutable source/financial/catalog contract changed"
+assert catalog_compare.select(*catalog_preserved_fields).exceptAll(catalog_base.select(*catalog_preserved_fields)).limit(1).count() == 0, "Immutable source/financial/catalog contract changed"
 assert_unique(fact, ["sales_fact_id"], "Gold fact")
 same_keys(clean, fact, ["source_record_id"], "Gold must preserve exactly the Silver survivors")
 eligibility_nulls = F.lit(False)
@@ -475,11 +521,15 @@ assert fact.filter("is_approved_medical_demand_eligible = true").filter(
     | F.col("canonical_sku").isNull() | F.col("unit_of_measure").isNull()
     | F.col("is_low_trust_2017") | F.col("is_historical_backfill_candidate")
     | (F.col("quantity") <= 0)
-).count() == 0
-assert fact.filter("is_provisional_product_demand_eligible = true").filter(
+).count() == 0, "Approved medical demand contains an ineligible source, identity or quantity"
+# Category-only publication retains the predecessor demand gates exactly. Validate
+# their original scope here; accepted reporting scope is checked against the receipt.
+# Ordinary/draft runs still require the current PRODUCT_MASTER_PENDING scope.
+provisional_demand_guard = catalog_base if category_decisions is not None else fact
+assert provisional_demand_guard.filter("is_provisional_product_demand_eligible = true").filter(
     F.col("is_low_trust_2017") | F.col("is_historical_backfill_candidate")
     | (F.col("product_scope_status") != "PRODUCT_MASTER_PENDING") | (F.col("quantity") <= 0)
-).count() == 0
+).count() == 0, "Provisional demand eligibility conflicts with its original scope, trust status or quantity"
 display(fact.groupBy("product_scope_status", "transaction_quantity_status").count().orderBy("product_scope_status"))
 
 # COMMAND ----------
@@ -685,7 +735,8 @@ print("GOLD PREPUBLICATION: PASS | Metric sums, eligible observation counts, nul
 # COMMAND ----------
 
 # Cell 7 — Publish isolated restart candidates, then validate persisted values and keys.
-# Each table write is atomic; the complete group is not. Rerun from Cell 1 if a write fails.
+# Each table write is atomic; the complete group is not. A partial failure requires
+# operator recovery or a newly captured contract; do not bypass the predecessor guard.
 outputs = {
     f"{GOLD_SCHEMA}.sales_restart_fact_candidate": (fact, ["sales_fact_id"]),
     f"{GOLD_SCHEMA}.sales_restart_dim_date_candidate": (dim_date, ["date_key"]),
@@ -710,6 +761,11 @@ outputs = {
     f"{AUDIT_SCHEMA}.sales_restart_returns_candidate": (returns_audit, ["source_record_id"]),
     f"{AUDIT_SCHEMA}.sales_restart_contract_evidence_candidate": (contract_evidence_audit, ["source_record_id"]),
 }
+# Recheck the complete captured dependency set immediately before the first write.
+# No concurrent pipeline runs are permitted during the operator maintenance window.
+for dependency_table, expected_version in catalog_contract["dependency_versions"].items():
+    observed_version = spark.sql(f"DESCRIBE HISTORY {dependency_table} LIMIT 1").first()["version"]
+    assert observed_version == expected_version, f"{dependency_table}: changed since preparation; rebind the contract"
 publication_rows = []
 for name, (frame, keys) in outputs.items():
     assert name.split(".")[-1].startswith("sales_restart_") and name.endswith("_candidate")

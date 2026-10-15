@@ -33,6 +33,62 @@ test('overview and help show publication limits without fabricated alerts or for
   await expect(help).not.toContainText(/Prophet|12\.4%|weather-disease cross-correlations|All models feature live tuning/)
 })
 
+test('overview leads with compact metrics and resizes supporting charts on expansion', async ({ page }, testInfo) => {
+  await page.evaluate(() => {
+    const app = window as any
+    app.applyDatasetPatch({ monthly: Array.from({ length: 24 }, (_, index) => ({
+      period: (2024 + Math.floor(index / 12)) + '-' + String(index % 12 + 1).padStart(2, '0'),
+      revenue: 100 + index * 10, income: 20 + index * 2,
+    })), year_summary: [] })
+    app.showPage('overview'); app.setDescriptivePeriod('all')
+  })
+  await expect(page.locator('#page-overview .overview-decision-kpis .kpi-label')).toHaveText(['Net sales', 'Gross profit', 'Change vs last year', 'Months with records'])
+  await expect(page.locator('#overviewPeriodCaption')).toContainText('All Time')
+  await expect(page.locator('#overviewMonthAverageChart')).not.toBeVisible()
+  await expect(page.locator('#overviewCoverageChart')).not.toBeVisible()
+  await expect(page.locator('#overviewSalesCalendar')).toBeVisible()
+  await page.locator('#overviewPatternDetails > summary').click()
+  await expect(page.locator('#overviewMonthAverageChart')).toBeVisible()
+  await expect.poll(() => page.evaluate(() => (window as any).Chart.getChart(document.getElementById('overviewMonthAverageChart')).chartArea.width)).toBeGreaterThan(100)
+  await page.screenshot({ path: testInfo.outputPath('overview-patterns.png'), fullPage: true })
+  await page.locator('#overviewPatternDetails > summary').click()
+  await page.screenshot({ path: testInfo.outputPath('overview-desktop.png'), fullPage: true })
+})
+
+test('overview measure selection preserves values and explains only recorded endpoints', async ({ page }) => {
+  await page.evaluate(() => {
+    const app = window as any
+    app.applyDatasetPatch({ monthly: [
+      { period: '2025-01', revenue: 1000, income: 20 },
+      { period: '2025-02', revenue: 2000, income: 10 },
+      { period: '2025-03', revenue: null, income: null, missing: true },
+    ], year_summary: [] })
+    app.setDescriptivePeriod('custom'); app.setDescriptiveGranularity('monthly')
+    app.setCustomDateRange('2025-01-01', '2025-03-31')
+  })
+  const state = () => page.evaluate(() => {
+    const chart = (window as any).Chart.getChart(document.getElementById('overviewBaselineChart'))
+    return { values: chart.data.datasets.map((d: any) => d.data), visible: chart.data.datasets.map((_: unknown, i: number) => chart.isDatasetVisible(i)), max: chart.scales.y.max }
+  })
+  const sales = await state()
+  expect(sales.visible).toEqual([true, false])
+  await expect(page.locator('#overviewTrendReading')).toContainText('recorded sales rose by ₱1,000')
+  await page.selectOption('#overviewTrendMeasureSelect', 'profit')
+  const profit = await state()
+  expect(profit.visible).toEqual([false, true])
+  expect(profit.values).toEqual(sales.values)
+  expect(profit.max).toBeLessThan(100)
+  await expect(page.locator('#overviewTrendReading')).toContainText('recorded gross profit fell by ₱10')
+  await expect(page.locator('#overviewTrendReadCue')).toContainText('gaps stay blank')
+  await expect(page.locator('#overviewObservationCoverageNote')).toContainText('2 of 3 selected months have records')
+  await page.selectOption('#overviewTrendMeasureSelect', 'both')
+  expect((await state()).visible).toEqual([true, true])
+  await expect(page.locator('#kpiOverviewTotalRevenue')).toHaveText('₱3,000')
+  await page.evaluate(() => { const app = window as any; app.setCustomDateRange('2025-01-01', '2025-01-15'); app.setDescriptiveGranularity('auto') })
+  await expect(page.locator('#overviewTrendMeasureSelect')).toBeDisabled()
+  await expect(page.locator('#overviewTrendMeasureSelect')).toHaveValue('sales')
+})
+
 test('period changes and navigation cannot recreate synthetic threat values', async ({ page }) => {
   const errors: string[] = []
   page.on('pageerror', error => errors.push(error.message))
@@ -47,6 +103,37 @@ test('period changes and navigation cannot recreate synthetic threat values', as
   })
   await expectTruthfulOverview(page)
   expect(errors).toEqual([])
+})
+
+test('Y/Y overview legend cannot reveal sales on a profit-only scale', async ({ page }) => {
+  await page.evaluate(() => {
+    const app = window as any
+    app.applyDatasetPatch({ monthly: [
+      { period: '2024-01', revenue: 10000, income: 200 },
+      { period: '2025-01', revenue: 1000, income: 20 },
+    ], year_summary: [] })
+    app.setDescriptivePeriod('custom'); app.setDescriptiveGranularity('monthly')
+    app.setCustomDateRange('2025-01-01', '2025-01-31'); app.setDescriptiveComparisonMode('yoy')
+  })
+  await page.selectOption('#overviewTrendMeasureSelect', 'profit')
+  const state = () => page.evaluate(() => {
+    const chart = (window as any).Chart.getChart(document.getElementById('overviewBaselineChart'))
+    return { visible: chart.data.datasets.map((_: unknown, index: number) => chart.isDatasetVisible(index)),
+      legend: chart.legend.legendItems.map((item: any) => item.text), max: chart.scales.y.max }
+  })
+  const before = await state()
+  expect(before.visible).toEqual([false, false, true, true])
+  expect(before.legend).toEqual(['Gross Profit', 'Prior-year Gross Profit'])
+  expect(before.max).toBeGreaterThanOrEqual(200)
+  expect(before.max).toBeLessThan(1000)
+  const hit = await page.locator('#overviewBaselineChart').evaluate(canvas => {
+    const chart = (window as any).Chart.getChart(canvas), box = chart.legend.legendHitBoxes[0]
+    const bounds = canvas.getBoundingClientRect()
+    return { x: bounds.x + box.left + box.width / 2, y: bounds.y + box.top + box.height / 2 }
+  })
+  await page.mouse.click(hit.x, hit.y)
+  expect(await state()).toEqual(before)
+  await expect(page.locator('#overviewTrendMeasureSelect')).toHaveValue('profit')
 })
 
 test('a mixed period separates observed KPI revenue and dashed gap estimates', async ({ page }) => {
@@ -98,7 +185,7 @@ test('real zero remains observed and missing income does not erase revenue or be
   await expect(page.locator('#salesGrossProfit')).toHaveText('Unavailable')
   await expect(page.locator('#salesGrossMargin')).toHaveText('Unavailable')
   await page.waitForFunction(() => Boolean((window as any).Chart.getChart(document.getElementById('growthChart'))))
-  const growth = await page.evaluate(() => (window as any).Chart.getChart(document.getElementById('growthChart')).data.datasets[1].data)
+  const growth = await page.evaluate(() => (window as any).Chart.getChart(document.getElementById('growthChart')).data.datasets[0].data)
   expect(growth).toEqual([null, null, null])
 })
 
@@ -134,11 +221,12 @@ test('overview decision cards reconcile observed profit, matched growth and miss
   await expect(page.locator('#kpiOverviewMatchedGrowth')).toHaveText('0.0%')
   await expect(page.locator('#overviewMatchedGrowthNote')).toContainText('2/2 observed month pairs matched')
   await expect(page.locator('#kpiOverviewObservationCoverage')).toHaveText('2/3')
-  await expect(page.locator('#overviewDecisionReview')).toContainText('1 unavailable months')
+  await expect(page.locator('#overviewDecisionReview')).toContainText('1 month without records')
   await expect(page.locator('#overviewPublicationStrip')).toContainText('business approval pending')
   await expect(page.locator('#page-overview .kpi-grid > .kpi-card')).toHaveCount(4)
   await page.evaluate(() => (window as any).setDescriptivePeriod('all'))
-  await expect(page.locator('#kpiOverviewMatchedGrowth')).toHaveText('Choose a period')
+  await expect(page.locator('#kpiOverviewMatchedGrowth')).toHaveText('—')
+  await expect(page.locator('#overviewMatchedGrowthNote')).toContainText('bounded period')
 })
 
 test('overview withholds incomplete profit and growth with a nonpositive prior total', async ({page}) => {

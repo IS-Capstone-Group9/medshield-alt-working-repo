@@ -101,7 +101,7 @@ function installDescriptivePeriodControls(root: HTMLElement) {
     select.className = 'topbar-select'
     select.setAttribute('aria-label', 'Analysis scope')
     select.add(new Option('Extended · 2017–Current', 'extended', true, true))
-    select.add(new Option('Capstone · 2017–2026', 'capstone'))
+    select.add(new Option('Capstone · 2017–2025', 'capstone'))
     selector.prepend(label, select)
   }
 

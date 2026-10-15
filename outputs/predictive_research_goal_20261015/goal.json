@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "recorded_at_utc": "2026-10-15T09:34:19.896331+00:00",
+  "recorded_client_date": "2026-10-15",
+  "accountable_role": "Business Analyst",
+  "status": "user_endorsed_proposed_research_goal_not_business_limit",
+  "user_answer": "sure",
+  "attribution": "Requesting user endorsement of the assistant proposal in this chat; no named external business approver or acceptance timestamp supplied",
+  "intended_uses": [
+    "sales_outlook_review",
+    "revenue_budget_discussions"
+  ],
+  "proposed_research_goal": {
+    "wape_percent": 10,
+    "reference_equivalent_mae_php": "1544973.51",
+    "approximate_reference_mae_php": "1550000",
+    "achievability": "unknown",
+    "numerical_choice_basis": "Tentative research discussion choice; not a universal standard or measured business tolerance"
+  },
+  "reference_cohort": {
+    "origin_period": "2024-12",
+    "target_start": "2025-01",
+    "target_end": "2025-12",
+    "n": 12,
+    "absolute_actual_total_php": "185396821.04",
+    "mean_absolute_actual_php": "15449735.08666666666666666667",
+    "formula": "reference_equivalent_mae = 0.10 * sum(abs(actual)) / n, then round for display",
+    "use_boundary": "Reference conversion only; do not automatically carry the peso equivalent to development or future cohorts"
+  },
+  "max_mae_php": null,
+  "max_wape_percent": null,
+  "business_acceptance_status": "not_assessed_thresholds_missing",
+  "original_selection": "last_value",
+  "original_criteria_changed": false,
+  "selection_changed": false,
+  "publication_approved": false,
+  "new_fits": false,
+  "new_forecasts": false,
+  "actuals_2026": null,
+  "assessment_2026": null,
+  "goal_comparison": "Existing known audit scores exceed the proposal; no new final test or reselection",
+  "policy_sha256": "55c93ca278c8fa9a19efaecdd8327836bc3d35662fe733eb36917125bb4d0fcb",
+  "source_sha256": {
+    "outputs/predictive_error_optimization_20261010/models/f749f47ef44db53a35f56a822e2b35edc0877ad5126c4352a996dfb2f5a20e8b/run.json": "7c22e0467925ee95fed2f5d287357ff0948bbc524e25715954cd28c22a83e841",
+    "outputs/predictive_error_optimization_20261010/report.json": "2b6c6d02aa1d920c02d1e3806ba4c20bbfee242639c00d141537b23c70800094",
+    "outputs/predictive_error_policy_20261010/policy.json": "55c93ca278c8fa9a19efaecdd8327836bc3d35662fe733eb36917125bb4d0fcb",
+    "outputs/predictive_client_choice3_20261013/selection.json": "06128c1b205df637d174cd889d6e9026c830014dc3c1ce0cebb317664ac302ee"
+  },
+  "before": {
+    "PREDICTIVE_CLIENT_DECISION_BRIEF.md": "840ea6ab434c9b181752b0e40ad6fd1377d54dfb827c0915e74d94131c934681",
+    "OBJECTIVE_EVIDENCE_REGISTER.md": "f5cbf33401f2d372483ad64e474e8062fb2d8080ec78c1e0407332c3db80e992"
+  },
+  "after": {
+    "PREDICTIVE_CLIENT_DECISION_BRIEF.md": "d4fe79bb52aa48ced7ff05f1c6acd07ed40c48d82688f18644c35462f719c188",
+    "OBJECTIVE_EVIDENCE_REGISTER.md": "e10b47a7e3196c68c387e371eaca34cd9174a2d8120eeecb32eef44061ca4917"
+  },
+  "applied_guidance": [
+    ".agents/business-analyst.md",
+    ".skills/business-analysis-frameworks.md",
+    ".skills/analytics-frameworks.md",
+    ".skills/documentation-standards.md",
+    ".skills/testing-standards.md"
+  ],
+  "next_scope_inputs": "Actual required forecast leads and evaluation period; business acceptance and prospective confirmation remain separate"
+}

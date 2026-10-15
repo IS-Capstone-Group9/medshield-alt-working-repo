@@ -1,0 +1,12 @@
+{
+  "status": "candidate_persisted_not_published",
+  "evaluation_status": "exploratory_evaluated_unpublished",
+  "run_id": "eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a",
+  "warehouse_experiment_id": "experiment_9889baea07a1f222edc9d2d2576fefc0d2be4bc8e52dc4d9a3ff9919e0056f45",
+  "artifact_hash": "9889baea07a1f222edc9d2d2576fefc0d2be4bc8e52dc4d9a3ff9919e0056f45",
+  "predictions": 1524,
+  "evaluations": 21,
+  "content_reconciled": true,
+  "release_pointer_modified": false,
+  "completed_at": "2026-10-09T14:14:14.432Z"
+}

@@ -25,3 +25,7 @@ Defines backend expectations for the MedShield TypeScript API gateway and suppor
 - Align with the TypeScript API gateway described in `docs/SETUP.md`.
 - Prefer explicit, readable control flow over clever abstractions.
 - Keep dependency boundaries clear between gateway, services, and data access.
+- Dashboard analytical values use Databricks Gold inputs through the TypeScript gateway. Required-source failure returns an explicit error; offline Python, Supabase analytical tables and local fixtures cannot supply fallback measures.
+- Python prepares/evaluates analytics offline. Dashboard requests do not start Flask services, train models or expose warehouse/provider credentials.
+- For consequential metric or aggregation changes, apply [analytics frameworks](analytics-frameworks.md) and affected [business definitions](../docs/BUSINESS_DEFINITIONS.md); validate the same eligible populations, units, scope and source identity used by consumers.
+- Use [architecture](../docs/ARCHITECTURE.md) and [API](../docs/API.md) for the current contracts. The documented local-file fallback is audit-only; sales ingestion follows the controlled Databricks path.

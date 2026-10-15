@@ -24,3 +24,5 @@ Defines how MedShield documentation should be structured, maintained, and review
 - The docs directory is canonical for project-level guidance.
 - Update setup and implementation docs when the stack or flow changes.
 - Keep terminology consistent across all markdown files.
+- Role instructions must link their Required skills and apply the shared [skill-loading contract](../.agents/execution-contract.md#skill-loading-contract). Keep task method details in the owning skill, role ownership/handoffs in `.agents`, and product contracts in canonical docs.
+- For lesson-derived changes, use the [reviewed corrections](../lessons/REVIEW.md); preserve source references and distinguish document validation, behavioral trial evidence and business approval.

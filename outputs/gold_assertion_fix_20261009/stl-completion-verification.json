@@ -1,0 +1,59 @@
+{
+  "status": "PASS_DESCRIPTIVE_CANDIDATE_AND_STL_VERIFICATION",
+  "checked_at": "2026-10-09T07:23:56.849619+00:00",
+  "fact_delta_version": 20,
+  "fact_records": 37728,
+  "stl_months": 72,
+  "stl_start": "2020-01",
+  "stl_end": "2025-12",
+  "maximum_reconstruction_error": 1.862645149230957e-09,
+  "maximum_monthly_input_difference_php": 0.0,
+  "net_sales_php": 626946741.8100001,
+  "gross_margin_percent": 60.2621772529524,
+  "missing_months": [
+    "2017-05",
+    "2017-06",
+    "2017-07",
+    "2017-08",
+    "2017-10",
+    "2018-01",
+    "2018-02",
+    "2019-10",
+    "2019-11",
+    "2019-12"
+  ],
+  "publication_check_counts": {
+    "PASS": 76,
+    "FAIL": 0,
+    "UNVERIFIED": 0
+  },
+  "evidence": {
+    "descriptive": {
+      "path": "outputs/descriptive_validation/2026-10-09T07-16-46-191Z/evidence.json",
+      "sha256": "e964615cbdf77e29c41c0d63afcde5a24255c9b39dda44944ffa8dbe05d4088f"
+    },
+    "readiness": {
+      "path": "outputs/publication_readiness/2026-10-09T07-20-05-882Z/evidence.json",
+      "sha256": "526d647004daa0644972fbb4dfb37b25d8512da48901756d1cc4b3aa54fa353b"
+    },
+    "catalog": {
+      "path": "outputs/catalog_validation/2026-10-09T07-10-50-843Z/evidence.json",
+      "sha256": "3b3b452937bb74d0699dc01850a7f75425fa8754d0fefed049d8d3b2e0344540"
+    }
+  },
+  "catalog_validation_reused": "Earlier passing receipt is bound to immutable fact20 and matching master; STL-only publication does not change that fact",
+  "initial_readiness_connection_failure": "outputs/publication_readiness/2026-10-09T07-16-25-963Z/evidence.json",
+  "retry_command": "DATABRICKS_DESCRIPTIVE_FACT_VERSION=20; node --dns-result-order=ipv4first --import tsx scripts/publication-readiness.ts",
+  "serving_pin": 19,
+  "serving_configuration_changed": false,
+  "cloud_writes_by_verification": false,
+  "business_release_approved": false,
+  "authenticated_dashboard_acceptance_verified": false,
+  "accountable_role": "Database Engineer",
+  "supporting_review": "/root/stl_completion_review",
+  "skills_applied": [
+    ".skills/database-standards.md",
+    ".skills/analytics-frameworks.md",
+    ".skills/architecture-patterns.md"
+  ]
+}

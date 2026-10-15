@@ -1,63 +1,74 @@
 # Technology Stack Standards
 
 ## Description
-This file defines the canonical stack for the MedShield capstone. Use it to keep implementation choices aligned across frontend, backend, database, deployment, and observability work. The stack should support the paper's business narrative: a dashboard for pharmaceutical sales analysis, territory performance, product prioritization, and inventory decision support. When there is a choice between a new tool and the documented stack, default to the documented stack unless the change solves a real problem that the current stack cannot address.
+This file summarizes the documented stack for the MedShield capstone. Use it to keep implementation choices aligned across frontend, backend, database, deployment, and observability work. The stack supports pharmaceutical sales analysis, territory performance, product prioritization, and inventory decision support. Read [architecture](../docs/ARCHITECTURE.md) and [decisions](../docs/DECISIONS.md) for authoritative boundaries, [setup](../docs/SETUP.md) for environment requirements, and [current state](../docs/CURRENT_STATE.md) for dated readiness and acceptance evidence. Check package manifests before introducing dependencies.
 
 ## Canonical Stack
 
 ### Frontend
-- Next.js
+- Next.js App Router in `frontend/`
 - React
 - TypeScript
 - CSS variables and responsive layout
 
 ### Backend
-- TypeScript API gateway in `backend/`
-- Python Flask microservices for domain-specific analytics logic
+- Express/TypeScript API gateway in `backend/`
+- Authentication checks, request validation, bounded Databricks queries, caching, and provider refresh orchestration
+- Python jobs, model experiments, and tests under `services/` run offline; Flask is not a dashboard runtime dependency
 
 ### Database
-- Supabase PostgreSQL
-- Warehouse tables, views, and seed data
+- Databricks Unity Catalog for Bronze source evidence, Silver assessed data, Gold candidate analytics, and stable SQL bridge views
+- Supabase PostgreSQL for application-account linkage, roles, and audit persistence
+- Supabase analytical tables and seed data do not supply runtime dashboard measures; see [data-store responsibilities](../docs/DATABASE.md)
 
 ### Authentication
-- Supabase Auth where the product flow requires auth
+- Supabase Auth for production browser sessions and gateway token validation
+- Local development auth requires explicit configuration outside production; follow [security guidance](../docs/SECURITY.md)
 
 ### Storage
-- Supabase Storage for uploaded assets or files
+- Sales files enter the controlled Databricks ingestion pipeline; preserve source evidence in Bronze
+- Follow the [Databricks project guide](../databricks/medshield_project/README.md) and [API contract](../docs/API.md); direct sales uploads are rejected with `DATABRICKS_INGESTION_REQUIRED`
+- Treat private upload storage as a deployment requirement where applicable, rather than assuming Supabase Storage is configured
 
 ### Validation
-- Zod or equivalent typed validation at the boundary
+- Validate requests at the gateway using existing typed checks and error contracts; do not assume a validation library is installed
 
 ### Forms
-- React Hook Form where form state is needed
+- Use existing React form patterns; introduce a form library only when justified by the affected workflow
 
 ### State Management
 - Keep state local first; introduce a shared store only when justified
 
 ### Charts
-- Recharts or another charting library already used in the codebase
+- Chart.js and `react-chartjs-2`, as declared in `frontend/package.json`
+- Reuse the dashboard's existing chart/runtime patterns
 
 ### Deployment
-- Vercel for the frontend when applicable
-- Environment-specific deployment scripts for backend services
+- Local Node.js and Docker demonstrations with separate frontend and gateway services
+- Production host selection and configuration require the documented release gates; see [deployment](../docs/DEPLOYMENT.md)
 
 ### Monitoring
-- Sentry or the repository's documented monitoring tool
+- Use documented health, audit, and service-management checks; do not assume Sentry is configured
+- Define production monitoring and ownership through [deployment guidance](../docs/DEPLOYMENT.md)
 
 ### Analytics
-- PostHog or the repository's documented analytics tool
+- Dashboard business analytics use Databricks Gold contracts and bounded gateway calculations
+- Product usage telemetry is a separate concern; do not assume PostHog is configured
 
 ### Service Split
 - Keep the HTTP gateway in TypeScript
-- Keep analytics and reporting services in Python
-- Keep the boundary explicit so the frontend talks to one API layer and the analytical workloads stay isolated
+- Keep Python analytics offline and publish reviewed outputs through Databricks contracts
+- The frontend obtains dashboard analytics through the gateway; browser authentication uses Supabase Auth
+- Fail visibly when a required analytical source is unavailable; do not replace it with local, seeded, bundled, or Supabase analytical data
+- Keep warehouse/provider credentials and Supabase server secrets out of browser code
+- Preserve candidate labels and provenance until the applicable named approvals; technical success does not authorize publication or procurement
 
 ### CI/CD
 - GitHub Actions
 
 ## Workflow
 1. Check the project docs before introducing a new library or pattern.
-2. Prefer the stack already documented in `docs/SETUP.md` and `docs/IMPLEMENTATION.md`.
+2. Follow [architecture](../docs/ARCHITECTURE.md), [decisions](../docs/DECISIONS.md), [setup](../docs/SETUP.md), and [implementation](../docs/IMPLEMENTATION.md) for the affected boundary.
 3. Reuse existing packages and services before adding new dependencies.
 4. Confirm that any new stack choice supports both the demo workflow and the capstone documentation.
 5. Update the docs when the stack or delivery model changes.

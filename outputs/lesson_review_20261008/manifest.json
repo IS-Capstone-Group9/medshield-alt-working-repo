@@ -1,0 +1,32 @@
+[
+  {
+    "source": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\lessons\\Chapter 1 - Introduction to Analytics Application.pptx",
+    "sha256": "f76fd83645b0743798f54d17103bf245e6e60322612f31389ac19672cf1c18db",
+    "bytes": 11634799,
+    "slide_count": 34
+  },
+  {
+    "source": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\lessons\\Chapter 2 - Framing Analytics Problems.pptx",
+    "sha256": "26403f141e46c9b6d216120aea06790ba19046596c0b94698d9d61ebcc91dd2c",
+    "bytes": 114228972,
+    "slide_count": 138
+  },
+  {
+    "source": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\lessons\\Chapter 3 - Data for Modern Analytics.pptx",
+    "sha256": "0bb1c9d137217413efdacbdf569da8b902d1ec703ec2a2a6a1d9810477e69041",
+    "bytes": 54040499,
+    "slide_count": 69
+  },
+  {
+    "source": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\lessons\\Chapter 4 - Exploratory & Diagnostic Analytics.pptx",
+    "sha256": "09b6f9a0c067e7882b906a53d6ea97a05c3b2940fb55b0b29c2cb5c680fd1090",
+    "bytes": 45052898,
+    "slide_count": 106
+  },
+  {
+    "source": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\lessons\\Chapter 5 - Predictive Analytics.pptx",
+    "sha256": "2c69ef765698b014ace6ff69d498f65708da93432e5fe9eed1184e6bc05e055d",
+    "bytes": 63586497,
+    "slide_count": 68
+  }
+]

@@ -2,6 +2,7 @@
 *.docx binary
 
 # Preserve exact source and audit bytes used by provenance hashes.
+outputs/** -text
 databricks/medshield_project_csv/**/*.csv -text
 databricks/medshield_reference_csv/**/*.csv -text
 databricks/medshield_project/references/*.csv -text
@@ -20,4 +21,9 @@ outputs/product_category_review_20260927/** -text
 outputs/product_sales_rules/2026-10-02T21-00-51-469Z/sealed-review/** -text
 outputs/databricks_analytical_review_20261007/** -text
 outputs/databricks_retention_recovery_20261007/** -text
+outputs/catalog_preparation/** -text
+outputs/nebulizer_accessory_update_20261007/** -text
+outputs/catalog_deployment/** -text
+databricks/medshield_project/references/catalog_publication.json -text
+databricks/medshield_project/references/category_acceptance.json -text
 outputs/predictive_validation/2026-09-27T14-30-12-921Z/** -text

@@ -35,7 +35,7 @@ test('area ranking keeps buyer ownership separate from mapped geography', async 
   await expect(page.locator('#areaMappingCoverage')).toHaveText('0.0% mapped')
   await page.selectOption('#sectorCluster','All')
   await expect(page.locator('#sectorProfileTable')).not.toContainText('Unassigned geography')
-  await page.screenshot({path:'test-results/section-4-sectors.png',fullPage:true})
+  await page.screenshot({path:test.info().outputPath('sectors.png'),fullPage:true})
   await page.evaluate(()=>(window as any).setYear('2022'))
   await expect(page.locator('#sectorStatus')).toContainText('No revenue is available')
   await page.evaluate(()=>(window as any).setSalesSectorsData(null,'Service unavailable'))
@@ -62,7 +62,7 @@ test('product prioritization follows trailing periods and custom-range monthly g
     const data = (window as any).Chart.getChart(document.getElementById('productBarChart')).data
     return { labels: data.datasets.map((dataset: any) => dataset.label), positive: data.datasets[0].data, returns: data.datasets[1].data }
   })
-  expect(signedSales.labels).toEqual(['Positive sales (₱)', 'Returns (₱)'])
+  expect(signedSales.labels).toEqual(['Positive amounts (₱)', 'Negative adjustments (₱)'])
   expect(signedSales.positive).toEqual([3100, 2950])
   expect(signedSales.returns).toEqual([-100, 0])
   expect(signedSales.positive.map((value: number, index: number) => value + signedSales.returns[index])).toEqual([3000, 2950])

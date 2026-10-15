@@ -53,13 +53,24 @@ The gateway also derives bounded buyer-sector, forecasting-baseline, prioritizat
 ## Boundary rules
 
 - Never send `DATABRICKS_TOKEN`, `DATABRICKS_SQL_WAREHOUSE_ID`, or Supabase server secrets to the browser.
-- Keep direct Databricks access and NASA POWER refresh orchestration in the TypeScript gateway.
+- Keep direct Databricks access and NASA POWER/Open-Meteo refresh orchestration in the TypeScript gateway.
 - Do not replace a failed Databricks query with bundled, local, mock, or seeded values.
 - Treat mapped buyer/geography fields as derived unless their source explicitly recorded them.
 - Treat user-entered planning inputs as scenario assumptions.
 - Treat `PASS_CANDIDATE` as technical pipeline evidence, not publication approval.
 
 See [CURRENT_STATE.md](CURRENT_STATE.md), [API.md](API.md), and [DATABASE.md](DATABASE.md).
+
+## Additional historical weather providers — 8 October 2026
+
+The gateway and Weather page now support explicit Open-Meteo ERA5,
+ERA5-Seamless and ECMWF IFS archive candidates. The new isolated Silver/Gold
+contract preserves model/provider and completeness; deployment remains pending
+the first requested controlled refresh. Dashboard reads remain warehouse-only.
+The offline station benchmark compares two public HTTP APIs and four model
+variants; it does not establish future forecast skill or change mapping/model
+approvals. See [API weather contract](API.md#external-observations) and the
+[source-bound screening](../outputs/weather_reliability_20261008/REPORT.md).
 
 
 ## Catalog implementation prepared — 27 September 2026

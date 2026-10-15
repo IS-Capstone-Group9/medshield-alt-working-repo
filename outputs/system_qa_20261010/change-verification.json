@@ -1,0 +1,23 @@
+{
+  "checked_before_dated_documentation_entry": "2026-10-10T05:06:09.972254+00:00",
+  "initial_tracked_diff_sha256": "66218c38dabaa1b4ce836e2f07a2e172c426a3b449031b9c5730636d530b72d9",
+  "current_tracked_diff_sha256": "3874dec2745518822a473a885da81a3795e2f94c0e84a162a5a5c5498333e5e2",
+  "tracked_diff_unchanged": false,
+  "tested_components_preserved": true,
+  "comparison_excluding_concurrent_docs_sha256": "305f336de23cef7e147922223d3082b8a6357af6f0c11de5c70f5696e7e2c465",
+  "concurrent_documentation_changes_preserved": [
+    "docs/ANALYTICS.md",
+    "docs/CHAPTER_3_METHODOLOGY_GUIDE.md",
+    "docs/CHAPTER_4_5_EVIDENCE_PLAN.md",
+    "docs/logic/PREDICTIVE_ANALYTICS_EXPLAINER.md",
+    "docs/CURRENT_STATE.md",
+    "docs/PREDICTIVE_OPERATIONS.md"
+  ],
+  "component_file_checks": 285,
+  "component_changes": [
+    "docs/CURRENT_STATE.md",
+    "docs/PREDICTIVE_OPERATIONS.md"
+  ],
+  "planned_only_tracked_QA_write": "docs/CURRENT_STATE.md dated QA entry",
+  "application_repairs": []
+}

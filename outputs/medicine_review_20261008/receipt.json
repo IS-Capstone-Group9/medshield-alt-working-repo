@@ -1,0 +1,182 @@
+{
+  "status": "LOCAL_PROPOSALS_UPDATED_NOT_DEPLOYED_NOT_APPROVED",
+  "checked_at": "2026-10-08T08:56:50.352Z",
+  "before_sha256": "52da8dad06920c2f11bf39ee026a796dce98aafe9eab686cf879375e09175b99",
+  "after_sha256": "ad6d74d4fc24cda3217f3612fb92cb417278fdbde20dc45c15725b99897df12c",
+  "bytes": 4751328,
+  "rows": 4561,
+  "columns": 29,
+  "tool": "@oai/artifact-tool",
+  "changes": [
+    {
+      "raw_product": "LOCAINE 50ML",
+      "changes": [
+        {
+          "field": "product_category",
+          "before": "unclassified",
+          "after": "medicine"
+        },
+        {
+          "field": "category_status",
+          "before": "needs_review",
+          "after": "proposed"
+        },
+        {
+          "field": "item_kind",
+          "before": "unknown",
+          "after": "physical_product"
+        },
+        {
+          "field": "item_kind_status",
+          "before": "needs_review",
+          "after": "proposed"
+        },
+        {
+          "field": "evidence_source",
+          "before": "Databricks fact version 17; receipt SHA256 f523ade6e9c6f66e0fa7edc7f78c323b11e2722de248b0a0b92e1b1881ad9517; current label coverage: fact v19; outputs/product_master_population_20261007/current_labels.json#sha256=9c3608c7e8bc4669d62e3c8632161f374e6f78099b8fedf198a8d4e286dd1dc6",
+          "after": "Databricks fact version 17; receipt SHA256 f523ade6e9c6f66e0fa7edc7f78c323b11e2722de248b0a0b92e1b1881ad9517; current label coverage: fact v19; outputs/product_master_population_20261007/current_labels.json#sha256=9c3608c7e8bc4669d62e3c8632161f374e6f78099b8fedf198a8d4e286dd1dc6 | https://quezoncity.gov.ph/wp-content/uploads/2024/06/PO-2405070.pdf#page=2; source SHA256 bee3618f1db9075be3a5daaa59c6939f29b10b32e2b8667948629dae7496e797; category/presentation proposal only"
+        },
+        {
+          "field": "review_notes",
+          "before": "Brand-only, abbreviated or unclear title; obtain supplier catalog or invoice description Obtain the invoice and product label or supplier specification. No product-specific external source is attached. Category proposal only. No identity or unit approval. Literal attributes are unverified title clues (product_review_v3_context_literal_pricing). Review flags: sellable_packaging_unknown, pack_count_unknown, contained_unit_unknown. Current v19: 9 records; 6 adjusted-source records. Supplier SKU, sales unit and package evidence required.",
+          "after": "Brand-only, abbreviated or unclear title; obtain supplier catalog or invoice description Obtain the invoice and product label or supplier specification. Category proposal only. No identity or unit approval. Literal attributes are unverified title clues (product_review_v3_context_literal_pricing). Review flags: sellable_packaging_unknown, pack_count_unknown, contained_unit_unknown. Current v19: 9 records; 6 adjusted-source records. Supplier SKU, sales unit and package evidence required. | Evidence update 2026-10-08: Quezon City PO 2405070 PDF page 2 lists Eurocaine / Anestin / Locaine / Lido as alternative lidocaine hydrochloride brands, with a 2%, 50 mL presentation. Alternatives are not aliases. Missing historical concentration, form or container values are not backfilled from this purchase order. Category and item-kind proposals only. No identity, unit or forecast approval. Preserve the original label and RAW grouping."
+        },
+        {
+          "field": "brand",
+          "before": "",
+          "after": "LOCAINE"
+        }
+      ]
+    },
+    {
+      "raw_product": "LOCAINE 2% 50ML",
+      "changes": [
+        {
+          "field": "product_category",
+          "before": "unclassified",
+          "after": "medicine"
+        },
+        {
+          "field": "category_status",
+          "before": "needs_review",
+          "after": "proposed"
+        },
+        {
+          "field": "item_kind",
+          "before": "unknown",
+          "after": "physical_product"
+        },
+        {
+          "field": "item_kind_status",
+          "before": "needs_review",
+          "after": "proposed"
+        },
+        {
+          "field": "evidence_source",
+          "before": "Databricks fact version 17; receipt SHA256 f523ade6e9c6f66e0fa7edc7f78c323b11e2722de248b0a0b92e1b1881ad9517; current label coverage: fact v19; outputs/product_master_population_20261007/current_labels.json#sha256=9c3608c7e8bc4669d62e3c8632161f374e6f78099b8fedf198a8d4e286dd1dc6",
+          "after": "Databricks fact version 17; receipt SHA256 f523ade6e9c6f66e0fa7edc7f78c323b11e2722de248b0a0b92e1b1881ad9517; current label coverage: fact v19; outputs/product_master_population_20261007/current_labels.json#sha256=9c3608c7e8bc4669d62e3c8632161f374e6f78099b8fedf198a8d4e286dd1dc6 | https://quezoncity.gov.ph/wp-content/uploads/2024/06/PO-2405070.pdf#page=2; source SHA256 bee3618f1db9075be3a5daaa59c6939f29b10b32e2b8667948629dae7496e797; category/presentation proposal only"
+        },
+        {
+          "field": "review_notes",
+          "before": "Brand-only, abbreviated or unclear title; obtain supplier catalog or invoice description Obtain the invoice and product label or supplier specification. No product-specific external source is attached. Category proposal only. No identity or unit approval. Literal attributes are unverified title clues (product_review_v3_context_literal_pricing). Review flags: sellable_packaging_unknown, pack_count_unknown, contained_unit_unknown. Current v19: 2 records; 0 adjusted-source records. Supplier SKU, sales unit and package evidence required.",
+          "after": "Brand-only, abbreviated or unclear title; obtain supplier catalog or invoice description Obtain the invoice and product label or supplier specification. Category proposal only. No identity or unit approval. Literal attributes are unverified title clues (product_review_v3_context_literal_pricing). Review flags: sellable_packaging_unknown, pack_count_unknown, contained_unit_unknown. Current v19: 2 records; 0 adjusted-source records. Supplier SKU, sales unit and package evidence required. | Evidence update 2026-10-08: Quezon City PO 2405070 PDF page 2 lists Eurocaine / Anestin / Locaine / Lido as alternative lidocaine hydrochloride brands, with a 2%, 50 mL presentation. Alternatives are not aliases. Missing historical concentration, form or container values are not backfilled from this purchase order. Category and item-kind proposals only. No identity, unit or forecast approval. Preserve the original label and RAW grouping."
+        },
+        {
+          "field": "brand",
+          "before": "",
+          "after": "LOCAINE"
+        }
+      ]
+    },
+    {
+      "raw_product": "EUROCAINE",
+      "changes": [
+        {
+          "field": "product_category",
+          "before": "unclassified",
+          "after": "medicine"
+        },
+        {
+          "field": "category_status",
+          "before": "needs_review",
+          "after": "proposed"
+        },
+        {
+          "field": "item_kind",
+          "before": "unknown",
+          "after": "physical_product"
+        },
+        {
+          "field": "item_kind_status",
+          "before": "needs_review",
+          "after": "proposed"
+        },
+        {
+          "field": "evidence_source",
+          "before": "Databricks fact version 17; receipt SHA256 f523ade6e9c6f66e0fa7edc7f78c323b11e2722de248b0a0b92e1b1881ad9517; current label coverage: fact v19; outputs/product_master_population_20261007/current_labels.json#sha256=9c3608c7e8bc4669d62e3c8632161f374e6f78099b8fedf198a8d4e286dd1dc6",
+          "after": "Databricks fact version 17; receipt SHA256 f523ade6e9c6f66e0fa7edc7f78c323b11e2722de248b0a0b92e1b1881ad9517; current label coverage: fact v19; outputs/product_master_population_20261007/current_labels.json#sha256=9c3608c7e8bc4669d62e3c8632161f374e6f78099b8fedf198a8d4e286dd1dc6 | https://quezoncity.gov.ph/wp-content/uploads/2024/06/PO-2405070.pdf#page=2; source SHA256 bee3618f1db9075be3a5daaa59c6939f29b10b32e2b8667948629dae7496e797; category/presentation proposal only"
+        },
+        {
+          "field": "review_notes",
+          "before": "Brand-only, abbreviated or unclear title; obtain supplier catalog or invoice description Obtain the invoice and product label or supplier specification. No product-specific external source is attached. Category proposal only. No identity or unit approval. Literal attributes are unverified title clues (product_review_v3_context_literal_pricing). Review flags: sellable_packaging_unknown, pack_count_unknown, contained_unit_unknown. Current v19: 1 records; 0 adjusted-source records. Supplier SKU, sales unit and package evidence required.",
+          "after": "Brand-only, abbreviated or unclear title; obtain supplier catalog or invoice description Obtain the invoice and product label or supplier specification. Category proposal only. No identity or unit approval. Literal attributes are unverified title clues (product_review_v3_context_literal_pricing). Review flags: sellable_packaging_unknown, pack_count_unknown, contained_unit_unknown. Current v19: 1 records; 0 adjusted-source records. Supplier SKU, sales unit and package evidence required. | Evidence update 2026-10-08: Quezon City PO 2405070 PDF page 2 lists Eurocaine / Anestin / Locaine / Lido as alternative lidocaine hydrochloride brands, with a 2%, 50 mL presentation. Alternatives are not aliases. Missing historical concentration, form or container values are not backfilled from this purchase order. Category and item-kind proposals only. No identity, unit or forecast approval. Preserve the original label and RAW grouping."
+        },
+        {
+          "field": "brand",
+          "before": "",
+          "after": "EUROCAINE"
+        }
+      ]
+    },
+    {
+      "raw_product": "SANOXIN-1000",
+      "changes": [
+        {
+          "field": "product_category",
+          "before": "unclassified",
+          "after": "medicine"
+        },
+        {
+          "field": "category_status",
+          "before": "needs_review",
+          "after": "proposed"
+        },
+        {
+          "field": "item_kind",
+          "before": "unknown",
+          "after": "physical_product"
+        },
+        {
+          "field": "item_kind_status",
+          "before": "needs_review",
+          "after": "proposed"
+        },
+        {
+          "field": "evidence_source",
+          "before": "Databricks fact version 17; receipt SHA256 f523ade6e9c6f66e0fa7edc7f78c323b11e2722de248b0a0b92e1b1881ad9517; current label coverage: fact v19; outputs/product_master_population_20261007/current_labels.json#sha256=9c3608c7e8bc4669d62e3c8632161f374e6f78099b8fedf198a8d4e286dd1dc6",
+          "after": "Databricks fact version 17; receipt SHA256 f523ade6e9c6f66e0fa7edc7f78c323b11e2722de248b0a0b92e1b1881ad9517; current label coverage: fact v19; outputs/product_master_population_20261007/current_labels.json#sha256=9c3608c7e8bc4669d62e3c8632161f374e6f78099b8fedf198a8d4e286dd1dc6 | https://ambpharma.com/wp-content/uploads/2021/07/ambcatalog.pdf#page=8; source SHA256 23748228e81b255f819461c2afbec2b4b9205c89d147446444b1576cd6e650d8; category/presentation proposal only"
+        },
+        {
+          "field": "review_notes",
+          "before": "Brand-only, abbreviated or unclear title; obtain supplier catalog or invoice description Obtain the invoice and product label or supplier specification. No product-specific external source is attached. Category proposal only. No identity or unit approval. Literal attributes are unverified title clues (product_review_v3_context_literal_pricing). Other literal specifications: SANOXIN-1000. Review flags: sellable_packaging_unknown, pack_count_unknown, contained_unit_unknown. Current v19: 1 records; 0 adjusted-source records. Supplier SKU, sales unit and package evidence required.",
+          "after": "Brand-only, abbreviated or unclear title; obtain supplier catalog or invoice description Obtain the invoice and product label or supplier specification. Category proposal only. No identity or unit approval. Literal attributes are unverified title clues (product_review_v3_context_literal_pricing). Other literal specifications: SANOXIN-1000. Review flags: sellable_packaging_unknown, pack_count_unknown, contained_unit_unknown. Current v19: 1 records; 0 adjusted-source records. Supplier SKU, sales unit and package evidence required. | Evidence update 2026-10-08: AMB Pharma catalog page 8 identifies SANOXIN 1000 as cefoxitin sodium 1000 mg powder for injection. Strength and form are catalog-supported proposals; the historical transaction presentation, SKU and sales unit are not verified. Category and item-kind proposals only. No identity, unit or forecast approval. Preserve the original label and RAW grouping."
+        },
+        {
+          "field": "brand",
+          "before": "",
+          "after": "SANOXIN"
+        },
+        {
+          "field": "strength",
+          "before": "",
+          "after": "1000MG"
+        },
+        {
+          "field": "dosage_form",
+          "before": "",
+          "after": "Powder for injection"
+        }
+      ]
+    }
+  ]
+}

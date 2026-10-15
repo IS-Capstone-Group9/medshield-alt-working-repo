@@ -1,0 +1,19 @@
+{
+  "files_deleted": [],
+  "remaining_project_port_listeners": [],
+  "checked_at": "2026-10-10T13:06:08.9118444+08:00",
+  "owned_services": [
+    {
+      "pid": 27524,
+      "name": "gateway5000",
+      "command_verified": true,
+      "stopped": true
+    },
+    {
+      "pid": 25844,
+      "name": "frontend3000",
+      "command_verified": true,
+      "stopped": true
+    }
+  ]
+}

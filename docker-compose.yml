@@ -16,6 +16,7 @@ services:
       DATABRICKS_SQL_WAREHOUSE_ID: ${DATABRICKS_SQL_WAREHOUSE_ID:-}
       DATABRICKS_CATALOG: ${DATABRICKS_CATALOG:-workspace}
       DATABRICKS_SCHEMA: ${DATABRICKS_SCHEMA:-medshield_gold}
+      DATABRICKS_DESCRIPTIVE_FACT_VERSION: ${DATABRICKS_DESCRIPTIVE_FACT_VERSION:?Set the validated descriptive fact version}
     ports:
       - "5000:5000"
     volumes:

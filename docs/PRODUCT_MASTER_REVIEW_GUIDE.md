@@ -1,17 +1,31 @@
 # Review the MedShield product master
 
-Prepared 7 October 2026. Status: local review preparation; no cloud deployment,
-product approvals or forecast activation.
+Updated 8 October 2026. Product categories are accepted locally for descriptive
+reporting under Adrian's instruction: 598 medicine, 646 supplies, 131 equipment,
+209 nonmedical and 2,977 Unclassified. Unclassified is an accepted reporting
+bucket with unresolved underlying category. The four medicine gaps and 14
+nebulizer accessory labels have category decisions; historical SKU/package/unit
+details remain pending. See [category evidence and verification](../outputs/category_acceptance_20261008/README.md).
 
-The master contains 4,561 draft rows, one per normalized product description in
-the [current fact-version-19 label receipt](../outputs/product_master_population_20261007/current_labels.json).
-Suggested categories retain their [version-17 research provenance](../outputs/product_category_review_20260927/README.md).
-Literal descriptions and research links help review; they do not establish the
-exact historical product, supplier SKU, packaging or sales unit. All identity,
-unit and forecast decisions remain pending, with forecast eligibility false.
-Rows are ordered by positive sales contribution. Start with the first 442 rows,
-which cover 80% of positive sales; this is a review priority, not an approved
-product classification or market-share result.
+Both copies contain 4,561 rows, 29 columns, 4,755,483 bytes and SHA-256 `2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29`.
+Recorder/date identify the actual user-directed category review. There are zero
+independent SKU/unit/item-kind/forecast approvals. All other CSV cells are preserved.
+No Databricks deployment or version-bound business-release approval was performed.
+Rows are ordered by positive-sales contribution; high-contribution unknowns remain
+the priority for obtaining original supplier/packaging evidence. Earlier dated
+review receipts and packages are historical and retain their original bytes.
+
+## Local documentary evidence found
+
+The 2026 MedShield injectable price list was found in
+`C:/Users/Adrian/Capstone-Codes/2026 PRICELIST.pdf`, with two identical Downloads
+copies. Its 96 presentation rows provide 265 possible brand-text matches to
+historical sales labels. The [20-label review queue](../outputs/catalog_preparation/product_evidence/REVIEW_QUEUE.md)
+lists high-contribution candidates, source pages and next actions. These are
+proposals only. The printed SKU column describes boxes, not unique product codes;
+package quantities and 2026 prices cannot establish historical sales units or
+acquisition costs. NORBIT appears under two generic descriptions, demonstrating
+why a brand-only join is unsafe. This price-list matching alone did not supply historical SKU/unit approval.
 
 ## Files to use
 
@@ -42,7 +56,8 @@ text `true` or `false`.
 1. Start with high positive-sales contribution or an identified conflict. Keep
    `raw_product` as the exact source alias; do not replace it with a cleaned name.
    Find its invoice, supplier catalog, product label or packaging record. Research
-   references can support a category proposal; check that the evidence identifies
+   references can support an accepted descriptive category when unambiguous;
+   historical identity approval still requires evidence that identifies
    the product and presentation actually sold.
 2. Verify the identity against supplier SKU or product documents. Fill the stable
    `canonical_sku`, accurate `canonical_title` and `representative_raw_product`
@@ -87,34 +102,26 @@ remain; annual financial equality does not prove actual SKU-level quantities.
 
 ## Validate and prepare publication
 
-The current drafts remain `RAW:<product_key>` groups with unclassified displayed
-categories, no approved SKU/unit and no eligible forecasts. Populating the local
-CSV prepares review; the dashboard continues reading its pinned warehouse release.
+The current master retains `RAW:<product_key>` identities, accepted known/Unclassified
+reporting categories, no approved SKU/unit and no eligible forecasts. Dashboard
+data still comes from its pinned warehouse release until this exact revision is
+published and checked. Gold accepts at most 10,000 master rows and 8,000,000 bytes;
+the saved master is 4,755,483 bytes. The bounded size increase accommodates recorded
+category evidence; it does not relax identity or financial controls.
 
-Validate the complete schema, unique normalized aliases, supported statuses and
-independent approval requirements with the existing catalog helper. Verify that
-both local CSV copies have identical bytes. Gold accepts at most 10,000 master
-rows and 5 MB; the current 4,561-row draft fits those bounds. Keep the helper and
-source/financial conservation checks intact.
-The saved draft is 4,746,906 bytes, leaving 253,094 bytes under Gold's 5,000,000-byte
-limit. Recheck the saved file size after adding review evidence.
+The [category-only publication contract](../databricks/medshield_project/references/catalog_publication.json)
+binds fact19, all 137 immutable fields and 29 dependency versions. Its seven mutable
+fields are only category/status/display/scope, category evidence, master checksum
+and publication time. Three demand gates whose calculation normally uses scope
+are explicitly retained from the predecessor. Gold03, packaging and gateway
+validation use the same per-label receipt and fixed allowlist. The fresh read-only
+capture verifies all 55 Silver fields against 37,728 unique source records.
 
-The final 7 October refresh uses `product_review_v3_context_literal_pricing`.
-Nine food/cleaning net-mass clues and one specimen-cup marking inference are
-corrected without changing research citations or decision statuses. The
-[business analytics review](../outputs/business_analytics_review_20261007/REVIEW.md)
-records the current checksum, independent review and archived financial/source
-conservation. Earlier population receipts describe the earlier saved draft and
-must remain unchanged.
-
-Before uploading a new publication, prepare fresh preservation evidence against
-captured **fact version 19**. The checked-in Gold03 migration,
-`package_catalog.py`, `validate-catalog.ts` and historical
-[deployment runbook](CATALOG_DEPLOYMENT.md) still describe baseline 16. Rebind the
-complete package consistently, preserve every transaction/source field/financial
-value/eligibility flag, and record fresh checksums and receipts. Do not blindly
-run the old migration, weaken its assertions or rewrite earlier receipts. Capture
-retained recovery evidence for the complete dependent publication.
+No cloud execution or isolated recovery rehearsal was verified. Follow the
+[operator deployment runbook](CATALOG_DEPLOYMENT.md). Any subsequent CSV edit
+requires a fresh descriptor/package. New source ingestion requires a separately
+reviewed source contract and category decisions for new aliases; this receipt
+cannot accept unseen labels. Preserve earlier receipts unchanged.
 
 For that prepared publication, upload the CSV as a file to:
 
@@ -122,6 +129,9 @@ For that prepared publication, upload the CSV as a file to:
 /Workspace/medshield/medshield_reference_csv/product_master_review.csv
 ```
 
+Also upload `catalog_publication.py` beside Gold and the exact
+`references/catalog_publication.json` and `references/category_acceptance.json`
+under `/Workspace/medshield/medshield_project/references/`.
 Keep the unchanged `product_catalog.py` Python workspace file at:
 
 ```text
@@ -137,7 +147,7 @@ production activation requires the applicable version-bound business acceptance.
 Existing financial-definition decisions remain in
 [descriptive acceptance](DESCRIPTIVE_PUBLICATION_ACCEPTANCE.md).
 
-Uploading the current draft would publish review metadata while leaving its
-unapproved SKU/category/unit/forecast decisions pending. Reviewed product evidence
+Publishing this accepted-category revision enables classified descriptive sales
+reporting while leaving SKU/unit/forecast decisions pending. Reviewed product evidence
 is the work that enables reliable product analytics. Predictive notebooks 07/08
 and external DOH/PAGASA joins are separate preparation stages.

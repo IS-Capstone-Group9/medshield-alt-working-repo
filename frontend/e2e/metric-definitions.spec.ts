@@ -54,7 +54,7 @@ test('Section 1: real chart datasets, KPI rates, labels and refresh use the same
   })
   await page.locator('[data-metric-definitions] summary').click()
   await expect(page.locator('[data-metric-definitions]')).toContainText('transaction percentages are not averaged')
-  await page.screenshot({ path: 'test-results/section-1-sales-diagnostics.png', fullPage: true })
+  await page.screenshot({ path: test.info().outputPath('sales-diagnostics.png'), fullPage: true })
   await page.evaluate(() => (window as any).applyDatasetPatch({
     year_summary: [{ year: '2025', revenue: 0, income: 20, transactions: 1 }],
     monthly: [{ period: '2025-01', revenue: 0, income: 20, margin_revenue_basis: 0 }],

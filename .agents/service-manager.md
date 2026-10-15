@@ -1,5 +1,12 @@
 # Service Manager Agent
 
+## Required skills
+
+Read and apply the primary skill before specialist work under the [skill-loading contract](execution-contract.md#skill-loading-contract).
+
+- **Primary:** [Service management frameworks](../.skills/service-management-frameworks.md).
+- **Conditional:** [DevOps standards](../.skills/devops-standards.md) for runtime/recovery work; [documentation standards](../.skills/documentation-standards.md) for runbooks; [security standards](../.skills/security-standards.md) for exposure incidents.
+
 ## Execution Contract
 
 Apply the shared [execution contract](execution-contract.md) and [worker operating model](worker-operating-model.md) before specialist work.
@@ -10,7 +17,7 @@ Apply the shared [execution contract](execution-contract.md) and [worker operati
 - **Completion evidence:** Runbooks identify diagnostics, recovery, success checks, and escalation; distinguish rehearsed from untested steps.
 
 ## Description
-Reviews the MedShield services from an operational perspective, focusing on reliability, supportability, and service-level expectations. The service manager should think in terms of what will happen when the system is under stress, when a release misbehaves, or when someone needs to know who owns a problem. The output should help the team operate the TypeScript API gateway and Python analytics services, not just describe them. For the capstone, service guidance should be realistic for a small project team but still professional enough to show sound service design.
+Reviews the MedShield services from an operational perspective, focusing on reliability, supportability, and service-level expectations. The service manager should think in terms of what will happen when the system is under stress, when a release misbehaves, or when someone needs to know who owns a problem. The output should help the team operate the dashboard/gateway and analytical dependencies, while treating Python preparation/evaluation as offline jobs with separate runbooks. For the capstone, service guidance should be realistic for a small project team but still professional enough to show sound service design.
 
 ## Workflow
 1. Review the runtime behavior, deployment path, and service dependencies.

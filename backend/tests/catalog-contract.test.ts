@@ -36,6 +36,24 @@ test('stable IDs do not merge same display text and input order does not alter c
   assert.equal(catalogProducts([{...rows[0],canonical_group_id:'RAW:new',identity_status:'needs_review',category:'Unclassified'}],'All').unresolved_count,1)
 })
 
+test('accepted reporting categories preserve unresolved identity and include Unclassified revenue', () => {
+  const input=[
+    {canonical_group_id:'RAW:medicine',canonical_title:'Medicine alias',product:'Medicine alias',category:'Medical',category_status:'approved',identity_status:'needs_review',item_kind:'unknown',revenue:120,positive_sales:120,returns_value:0,observed_quantity:null},
+    {canonical_group_id:'RAW:unknown',canonical_title:'Unknown alias',product:'Unknown alias',category:'Unclassified',category_status:'approved',identity_status:'needs_review',item_kind:'unknown',revenue:35,positive_sales:40,returns_value:-5,observed_quantity:null,estimated_quantity:3,transaction_evidence:'adjusted_estimated_source'},
+  ]
+  const all=catalogProducts(input,'All',100)
+  assert.equal(all.products.reduce((n,p)=>n+p.revenue,0),155)
+  assert.equal(all.unresolved_count,2)
+  assert.ok(all.products.every(p=>p.canonical_group_id.startsWith('RAW:')&&p.qty===null))
+  const parts=['Medical','Non-Medical','Unclassified'].map(category=>catalogProducts(input,category,100))
+  assert.equal(parts.reduce((n,part)=>n+part.products.reduce((s,p)=>s+p.revenue,0),0),155)
+  assert.equal(parts[0].denominator,120)
+  assert.equal(parts[2].denominator,40)
+  const ui=descriptivePortfolio(input,'positive_sales_candidate')
+  assert.equal(ui.products.reduce((n,p)=>n+p.revenue,0),155)
+  assert.ok(ui.products.every(p=>p.quantity===null))
+})
+
 test('category boundary rejects structured/repeated inputs; legacy projection uses existing key', () => {
   for(const input of [[],['Medical'],{},'medical',"Medical' OR 1=1"]) assert.throws(()=>parseCatalogCategory(input))
   for(const input of ['All','Medical','Non-Medical','Unclassified']) assert.equal(parseCatalogCategory(input),input)

@@ -1,0 +1,1151 @@
+{
+  "source": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\lessons\\Chapter 1 - Introduction to Analytics Application.pptx",
+  "sha256": "f76fd83645b0743798f54d17103bf245e6e60322612f31389ac19672cf1c18db",
+  "bytes": 11634799,
+  "slide_count": 34,
+  "slides": [
+    {
+      "number": 1,
+      "part": "ppt/slides/slide1.xml",
+      "text": [
+        "CHAPTER ONE: INTRODUCTION TO ANALYTICS APPLICATION",
+        "Prepared by: Inst. Caesar Gabriel M. Fernando"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-001"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 2,
+      "part": "ppt/slides/slide2.xml",
+      "text": [
+        "Learning Outcomes",
+        "What it covers",
+        "1.",
+        "Define and relate the fundamental concepts of data, information, evidence, insight, analytics, analytics application, data visualization, and data storytelling.",
+        "2.",
+        "Explain analytics as an organizational and information systems capability that connects people, processes, data, technology, analytical methods, and decisions.",
+        "3.",
+        "Distinguish descriptive, diagnostic, predictive, and prescriptive analytics according to the questions they answer and the decisions they support.",
+        "4.",
+        "Analyze a realistic organizational or societal situation to identify symptoms, the underlying problem, stakeholders, objectives, constraints, information needs, and decisions to be supported.",
+        "5.",
+        "Map a problem through an end-to-end analytics lifecycle, from problem framing and data to methodology, development, deployment, evaluation, and continuous improvement."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 3,
+      "part": "ppt/slides/slide3.xml",
+      "text": [
+        "Learning Outcomes",
+        "What it covers",
+        "6.",
+        "Distinguish problem- and decision-driven analytics from method-, model-, and tool-driven analytics.",
+        "7.",
+        "Determine whether analytics is appropriate and likely to add value to a particular problem without prematurely prescribing a method or technology.",
+        "8.",
+        "Construct a basic end-to-end data story connecting problem, evidence, analytical findings, insight, decision, action, and measurable impact."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 4,
+      "part": "ppt/slides/slide4.xml",
+      "text": [
+        "MAKING DATA TELL A STORY"
+      ],
+      "notes": [
+        "Analytics Application is the end-to-end use of data, analytical methods, information systems, domain knowledge, and human judgment to understand a problem, support a decision, guide action, and evaluate impact.",
+        "Today, we are not beginning with software. We are not beginning with Python, Excel, Power BI, or machine learning. Those tools will matter later, but they are not the beginning of analytics application.",
+        "Analytics application begins with a situation that needs to be understood. It begins when a person, organization, community, or institution faces a problem and asks: What is happening? Why is it happening? What might happen next? What should we do? And how will we know if our action helped?",
+        "So when we say “Making Data Tell a Story,” we do not mean inventing a story out of data. We mean building an evidence-based explanation from reality: problem, context, data, analysis, insight, decision, action, and impact."
+      ],
+      "math_text": [],
+      "assets": [
+        "asset-002"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 5,
+      "part": "ppt/slides/slide5.xml",
+      "text": [
+        "Let’s watch this:",
+        "https://www.youtube.com/watch?v=YKiIPOLG4CY",
+        "https://www.youtube.com/watch?v=jbkSRLYSojo"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-003",
+        "asset-004"
+      ],
+      "charts": [],
+      "external_links": [
+        {
+          "type": "hyperlink",
+          "external": true,
+          "target": "https://www.youtube.com/watch?v=YKiIPOLG4CY"
+        },
+        {
+          "type": "hyperlink",
+          "external": true,
+          "target": "https://www.youtube.com/watch?v=jbkSRLYSojo"
+        }
+      ],
+      "alt_text": []
+    },
+    {
+      "number": 6,
+      "part": "ppt/slides/slide6.xml",
+      "text": [
+        "7:15 AM. - The water is rising."
+      ],
+      "notes": [
+        "“Imagine you are part of a disaster-response team. Reports are coming in. Some are from barangay officials, some from Facebook, some from residents. The problem is urgent. You only have three rescue vehicles. Five areas are asking for help. The question is simple but heavy: where do you send help first?”"
+      ],
+      "math_text": [],
+      "assets": [
+        "asset-005",
+        "asset-006",
+        "asset-007"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Metro Manila gets 44% of Ondoy's rainfall in just 5 hours | Philstar.com"
+        },
+        {
+          "name": "Picture 4",
+          "descr": "Manila floods displace hundreds of thousands of residents | Philippines |  The Guardian"
+        },
+        {
+          "name": "Picture 5",
+          "descr": "UST QUICK RESPONSE TEAM RESCUES FLOOD-STRANDED CIVILIANS, WATCH: The UST  Quick Response Team evacuates stranded civilians in the University using a  rescue boat on Monday, Aug. 17. (Video by Luis ..."
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "part": "ppt/slides/slide7.xml",
+      "text": [
+        "This is not yet a “data problem.” It is first a human and decision problem.",
+        "Decision means a choice among possible courses of action made under certain objectives and constraints.",
+        "Uncertainty means that the decision-maker does not yet have complete knowledge about the situation, outcomes, or consequences.",
+        "Analytics begins when a decision meets uncertainty."
+      ],
+      "notes": [
+        "So when the disaster-response team asks, “Where should we send help first?” the need for analytics appears naturally."
+      ],
+      "math_text": [],
+      "assets": [
+        "asset-008",
+        "asset-009",
+        "asset-010"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Flood Prevention in UST - Civware project"
+        },
+        {
+          "name": "Picture 4",
+          "descr": "30 Metro Manila sites identified as rain basins vs floods"
+        },
+        {
+          "name": "Picture 5",
+          "descr": "TomasinoWeb - FLOODING HITS UST CAMPUS, SURROUNDING AREAS Heavy rains flood  the University, España Boulevard, and P. Noval Street to gutter level on  Monday, Aug. 17. The University suspended classes at all"
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "part": "ppt/slides/slide8.xml",
+      "text": [
+        "What Do We Need to Know?",
+        "Data: symbols",
+        "Information: data that are processed to be useful; provides answers to \"who\", \"what\", \"where\", and \"when\" questions",
+        "Knowledge: application of data and information; answers \"how\" questions",
+        "Insights: The appreciation of \"why\"",
+        "Wisdom: Evaluated insights."
+      ],
+      "notes": [
+        "Data are recorded representations, observations, measurements, events, or distinctions that may be used as evidence about a phenomenon.",
+        "Information is data that have been organized, structured, processed, or contextualized so that they carry meaning for a particular question or purpose."
+      ],
+      "math_text": [],
+      "assets": [
+        "asset-011"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 9,
+      "part": "ppt/slides/slide9.xml",
+      "text": [
+        "From Data to Insight",
+        "Analytical Result is an output directly produced by an analytical procedure, computation, model, or visualization.",
+        "Finding is an analytical result judged meaningful or relevant enough to report.",
+        "Insight is a meaningful interpretation of one or more findings that improves understanding of a problem, opportunity, or decision."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-012",
+        "asset-013"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 10,
+      "part": "ppt/slides/slide10.xml",
+      "text": [
+        "Context changes everything",
+        "The same number can tell different stories.",
+        "Context refers to the surrounding conditions that influence how data, findings, and analytical results should be interpreted.",
+        "Context may include time, place, people, policy, culture, weather, operations, constraints, and domain knowledge.",
+        "Contextualization: Provides background information or context to help the audience understand the significance of the data and its relevance to the larger narrative."
+      ],
+      "notes": [
+        "UC Berkeley’s Data 8 emphasizes real-world relevance and the interpretation of data from real phenomena. This supports the teaching point that analytics is not merely computation; it is interpretation within context."
+      ],
+      "math_text": [],
+      "assets": [
+        "asset-014",
+        "asset-015"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Contextualized Insights: Six Ways To Put Your Numbers In Context"
+        },
+        {
+          "name": "Picture 4",
+          "descr": "Context GIFs | Tenor"
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "part": "ppt/slides/slide11.xml",
+      "text": [
+        "The Relationship Between Context and Data",
+        "All variables in a dataset necessarily display what is called “communality”, that is, shared information reflecting the influence of their common context. There will always be some degree of contextual association between variables which makes it difficult to isolate the shape and size of the direct relationship between two variables."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-016"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 12,
+      "part": "ppt/slides/slide12.xml",
+      "text": [],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-017"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Data contextualization: Get valuable insights from your data"
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "part": "ppt/slides/slide13.xml",
+      "text": [
+        "What, then, is Data Context?",
+        "Data Context is the complete, operational understanding of data—covering what the data means, where it comes from, how it changes, whether it can be trusted, and how it should be used.",
+        "In practical terms, Data Context answers five fundamental questions:",
+        "Meaning – What does this data represent in business terms?",
+        "Origin – Where did this data come from?",
+        "Transformation – How has it been transformed across pipelines?",
+        "Trust – Is this data accurate, fresh, and reliable right now?",
+        "Usage – Who can use it, for what purpose, and under which constraints?"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 14,
+      "part": "ppt/slides/slide14.xml",
+      "text": [
+        "What Is a Data Story?",
+        "A data story connects:problem, evidence, meaning, and action.",
+        "Data Story is an evidence-based narrative that explains a meaningful situation through data and analysis and communicates its implications for understanding, decision, or action.",
+        "Data Storytelling is the purposeful integration of evidence, analysis, visualization, context, and narrative to communicate meaning to a specific audience."
+      ],
+      "notes": [
+        "As data becomes increasingly ubiquitous, companies are desperately searching for talent with these data skills. LinkedIn recently reported data analysis is one of the hottest skill categories over the past two years for recruiters, and it was the only category that consistently ranked in the top 4 across all of the countries they analyzed. Interestingly, much of the current hiring emphasis has centered on the data preparation and analysis skills—not the \"last mile\" skills that help convert insights into actions. Many of the heavily-recruited individuals with advanced degrees in economics, mathematics, or statistics struggle with communicating their insights to others effectively—essentially, telling the story of their numbers.",
+        "The need for more data storytellers is only going to increase in the future. With the shift towards more self-service capabilities in analytics and business intelligence, the pool of people generating insights will expand beyond just analysts and data scientists. This new breed of data tools will make it easier for people across business functions to access and explore the data on their own. As a result, we’re going to see an unprecedented number of insights being generated within companies than ever before. However, unless we can improve the communication of these insights we will also see a poorer insight-to-value conversion rate. If an insight isn’t understood and isn’t compelling, no one will act on it and no change will occur."
+      ],
+      "math_text": [],
+      "assets": [
+        "asset-018"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Data Storytelling: The Essential Data Science Skill Everyone Needs"
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "part": "ppt/slides/slide15.xml",
+      "text": [
+        "Insight Funnel"
+      ],
+      "notes": [
+        "At the top of the Insight Funnel, you will use reports and dashboards to extract relevant, meaningful information from your raw data. From the metrics and dimensions that you strategically choose to monitor in your reports, you begin to “frame” the potential stories that can emerge from the data. At this Storyframing stage, the information is more exploratory in nature as you can interact with the dashboard (filters, drilldowns) to discover potential insights. Alternatively, when you make an interesting observation in a report or dashboard, it may also spur you to do further analysis in other analytics tools or across different parts of the organization to understand why something happened."
+      ],
+      "math_text": [],
+      "assets": [
+        "asset-019"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 16,
+      "part": "ppt/slides/slide16.xml",
+      "text": [
+        "Reporting and Data Storytelling Comparison"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-020"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 17,
+      "part": "ppt/slides/slide17.xml",
+      "text": [
+        "Is visualization = data storytelling?",
+        "NO. Data visualization is not yet data storytelling.",
+        "Data Visualization is the representation of data through graphical or visual forms to support exploration, understanding, comparison, and communication.",
+        "Exploratory Visualization helps analysts discover possible patterns.",
+        "Explanatory Visualization helps communicate a specific finding or message to an audience."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-021"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "No GIFs | Tenor"
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "part": "ppt/slides/slide18.xml",
+      "text": [
+        "What makes up data storytelling?",
+        "Data is the foundation of every data story. If you’re simply adding a few facts or figures to an existing narrative, it’s just a story—not a data story. When you analyze data and uncover a key insight, a data story helps you explain the meaning and significance of the insight to other people.",
+        "Narrative is the structure of your data story. It’s not merely about the words or context that are used to explain the data, but how you organize the information into a meaningful and engaging storyline. In most cases, you’re going to need to string together multiple data points or charts to tell your story. The narrative structure is what helps you decide what information to share and in what order.",
+        "Visuals are the scenes of your data story. When the data is complex, visualizing it in data charts helps the audience to see things—anomalies, patterns, and trends—they might not otherwise see. Through the effective use of data visualizations, diagrams, and images, you can enlighten your audience’s minds to new perspectives."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 19,
+      "part": "ppt/slides/slide19.xml",
+      "text": [
+        "What, then, is data storytelling?",
+        "Data storytelling is the broader skill of communicating insights in a way that resonates with your audience.",
+        "This technique brings together data analysis, visualization, domain knowledge, and thoughtful presentation to make insights clear, compelling, and actionable. Instead of just sharing data, you deliver a data story with clarity, context, and purpose, so your message resonates."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-022"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Data Storytelling: What It Is And Is Not"
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "part": "ppt/slides/slide20.xml",
+      "text": [
+        "What isn't data storytelling?",
+        "Descriptive commentary. Some people view data storytelling as simply commentary that accompanies charts that describes the information being displayed. Data storytelling extends well beyond just describing data—the what—and delves into the why to enlighten people’s minds. While calling out unusual anomalies, patterns, or trends in the data may be interesting, you have an incomplete data story if you can’t explain why they occurred.‍",
+        "Added context. Context is essential in data storytelling as it can provide greater clarity into what’s happening. Having more background information is a step up from simply describing the data. However, merely providing more context doesn’t mean you have created a data story. Stories follow a narrative arc or structure where events are revealed in a specific sequence. Without a clear storyline, you don’t have a data story even with rich amounts of context.‍",
+        "Data charts. You’ll often hear people say, “Every chart tells a story.” However, this is simply not true. While some graphs may contain some interesting data and yield part of a data story, a single chart can rarely fully explain 'the why' behind an entire problem or opportunity. Frequently, you need multiple charts to dig into an issue and properly explain it. In addition, many charts are designed to aid in the exploration of the data, not the explanation of the data. We can’t expect charts alone to tell data stories when they weren’t intended for that purpose.‍",
+        "Data visualization (in general). Data storytelling is often used as a synonym for data visualization, especially when it adheres to best practices. However, just because you’re following data visualization best practices doesn’t mean you’re automatically telling a data story. Instead, your purpose might be to help people explore a particular data set, which isn’t storytelling. In addition, visualization is only one aspect of a data story. While data stories can actually exist without visuals (e.g., an audio data story featured in a podcast), data storytelling cannot happen without narrative.",
+        "‍Dashboards. Many people and analytics vendors continue to believe dashboards tell data stories. However, dashboards are primarily designed to help us monitor business performance and explore data sets. While dashboards can be useful in helping us identify potential insights, they can be equally cumbersome and insufficient for curating and telling focused, persuasive data stories. While many analytics platforms offer some automated storytelling capabilities, this technology is limited to only describing anomalies in the data, not explaining what caused them."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 21,
+      "part": "ppt/slides/slide21.xml",
+      "text": [],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-023"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 22,
+      "part": "ppt/slides/slide22.xml",
+      "text": [
+        "How do you make a story for data storytelling?"
+      ],
+      "notes": [
+        "This book provides a comprehensive introduction to data visualization and is particularly oriented toward professionals in business and related fields who must present quantitative information in an accessible, insightful manner. Here's a broad overview of its content:",
+        "Understanding the Importance of Context: The book starts with a discussion on understanding the context before diving into data. It emphasizes the need to know your audience and tailor your message accordingly.",
+        "Choosing an Effective Visual: Knaflic talks about common types of data visualizations and when to use each type.",
+        "Eliminating Clutter: The book discusses the concept of decluttering your visualizations to make them more effective. This includes removing unnecessary decorations and simplifying color schemes.",
+        "Focusing Attention Where You Want It: This section talks about using pre-attentive attributes, like color and position, to guide your audience's attention to key parts of your data.",
+        "Thinking Like a Designer: Knaflic applies principles from graphic design to data visualization, including the use of whitespace and typography.",
+        "Telling a Story: The final part of the book talks about how to weave your data into a compelling narrative."
+      ],
+      "math_text": [],
+      "assets": [
+        "asset-024"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 23,
+      "part": "ppt/slides/slide23.xml",
+      "text": [
+        "Analysis vs. Analytics",
+        "Analysis: What does the data show?",
+        "Analysis is the systematic examination of data or evidence to identify patterns, relationships, differences, explanations, or estimates.",
+        "Analytics: What decision does it improve?",
+        "Analytics is broader because it connects analysis to a decision or action."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-025"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Data Analysis Vs Data Analytics! Best Data Analytics Courses-  https://www.mltut.com/data-analyst-online-certification-to-become-a-successful-data-analyst/  #BigData #bigdataanalytics #bigdatatechnologies #bigdatadeveloper  #BigDataAnalysis #BigDataHadoop ..."
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "part": "ppt/slides/slide24.xml",
+      "text": [
+        "The Four Questions",
+        "Descriptive Analytics summarizes past or current data to describe events, conditions, performance, and patterns. (What happened?)",
+        "Diagnostic Analytics investigates relationships, comparisons, and contextual factors to understand why an observed pattern may have occurred. (Why did it happen?)",
+        "Predictive Analytics uses historical and current evidence to estimate future, unknown, or unobserved outcomes. (What might happen next?)",
+        "Prescriptive Analytics uses data, objectives, models, rules, and constraints to recommend or evaluate possible actions. (What should we do?)"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 25,
+      "part": "ppt/slides/slide25.xml",
+      "text": [
+        "The Four Questions"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-026",
+        "asset-027"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 5",
+          "descr": "4 types of data analysis 1/ Descriptive Analysis In this analysis you  measure what happened. Methods you can use: • Mean, Median & Mode Analysis:  Finding the average, middle, & most frequent"
+        },
+        {
+          "name": "Picture 6",
+          "descr": "Descriptive, predictive and prescriptive analytics: What are the  differences? | UNSW Online"
+        }
+      ]
+    },
+    {
+      "number": 26,
+      "part": "ppt/slides/slide26.xml",
+      "text": [
+        "The Missing Question",
+        "A dashboard is not the ending. A model is not the ending. Impact is the ending.",
+        "Evaluation is the systematic assessment of whether an analytics solution, decision, or action achieved its intended purpose.",
+        "Impact is the meaningful change produced, supported, or influenced by an action or intervention."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-028"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Data Evaluation Guide and Tips for Analysts · DarwinApps"
+        }
+      ]
+    },
+    {
+      "number": 27,
+      "part": "ppt/slides/slide27.xml",
+      "text": [
+        "Problem Before Tool",
+        "Symptom is an observable sign that something may need attention.",
+        "Problem is the underlying condition, need, risk, or opportunity requiring understanding or action.",
+        "Problem Framing is the process of defining the real problem, why it matters, who is affected, what constraints exist, and what successful improvement would mean."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-029"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "What is Problem Framing? | Definition & Overview"
+        }
+      ]
+    },
+    {
+      "number": 28,
+      "part": "ppt/slides/slide28.xml",
+      "text": [
+        "Whose Story Is This?",
+        "Stakeholder is a person or group affected by, responsible for, or interested in the analytics solution.",
+        "Decision-maker is the person or group responsible for choosing or authorizing an action.",
+        "Beneficiary is the person or group intended to benefit from the decision or intervention."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-030",
+        "asset-031"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 4",
+          "descr": "Storytelling with Data: Turning Numbers into Narratives — Data consultants"
+        },
+        {
+          "name": "Picture 3",
+          "descr": "Identifying Your Audience for Impactful Data Storytelling - Quanthub"
+        }
+      ]
+    },
+    {
+      "number": 29,
+      "part": "ppt/slides/slide29.xml",
+      "text": [
+        "Objectives and Limits",
+        "What do we want to improve?",
+        "What limits what we can do?",
+        "Objective is the desired result or improvement.",
+        "Constraint is a limitation that restricts possible actions.",
+        "Success Criterion is the condition used to judge whether the objective was achieved."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-032"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 30,
+      "part": "ppt/slides/slide30.xml",
+      "text": [
+        "Decision-Driven Analytics",
+        "Decision-Driven Analytics begins by identifying the decision that must improve, then determines what data, analysis, and tools are needed.",
+        "Problem-Driven Analytics begins with the real-world problem, objective, and context before selecting methods or technologies.",
+        "Tool-Driven Analytics begins with a preferred tool, model, algorithm, or technology, then searches for a problem to justify using it."
+      ],
+      "notes": [
+        "Not: “Can we use AI?”But: “What decision should become better?”",
+        "Decision-Driven Analytics begins by identifying the decision that must improve, then determines what data, analysis, and tools are needed.",
+        "Problem-Driven Analytics begins with the real-world problem, objective, and context before selecting methods or technologies.",
+        "Tool-Driven Analytics begins with a preferred tool, model, algorithm, or technology, then searches for a problem to justify using it.",
+        "MIT Sloan explicitly warns against collecting data or developing analytics “for the sake of having analytics” without connecting them to actual decisions."
+      ],
+      "math_text": [],
+      "assets": [
+        "asset-033",
+        "asset-034"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Data-Driven Decision-Making: Main to Know. Part 1 | by Sasha Andrieiev |  Better Marketing"
+        },
+        {
+          "name": "Picture 4",
+          "descr": "From Insights to Action: The Process of Data-Driven Decision-Making  (DDN3-A13) - CSPS"
+        }
+      ]
+    },
+    {
+      "number": 31,
+      "part": "ppt/slides/slide31.xml",
+      "text": [
+        "The End-to-End Lifecycle",
+        "End-to-End Analytics is the complete lifecycle through which a real-world need is framed as an analytics problem, supported with appropriate data and methods, translated into a usable solution, deployed into a decision process, and continuously evaluated."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-035"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 5",
+          "descr": "Building End-to-End Data Pipelines: From Data Ingestion to Analysis -  KDnuggets"
+        }
+      ]
+    },
+    {
+      "number": 32,
+      "part": "ppt/slides/slide32.xml",
+      "text": [
+        "End-to-End Data Story",
+        "Problem → Evidence → Insight → Decision → Action → Impact",
+        "End-to-End Data Story is the complete evidence-based narrative of an analytics solution, from problem and context to data, analysis, insight, decision, action, impact, and learning."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-036"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Adventures In Data Storytelling: Three Key Traps To Avoid"
+        }
+      ]
+    },
+    {
+      "number": 33,
+      "part": "ppt/slides/slide33.xml",
+      "text": [
+        "WRONG: DATA → DASHBOARD.",
+        "Problem → Evidence → Analytics → Insight → Story → Decision → Solution → Impact",
+        "This semester is an end-to-end analytics journey.",
+        "There was a problem. We found evidence. We applied analytics. We discovered insight. We supported a decision. We measured impact."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 34,
+      "part": "ppt/slides/slide34.xml",
+      "text": [],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-037",
+        "asset-038"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 1",
+          "descr": "Happy Pokemon GIF by Pokémon_JPN - Find & Share on GIPHY"
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "id": "asset-001",
+      "part": "ppt/media/image2.png",
+      "sha256": "23ff8aa672e61a45fff02bb7ee6fdc90d32118fcb8054ec50bd9e1cf207885f1",
+      "file": "media/asset-001.png",
+      "image": true,
+      "slides": [
+        1
+      ]
+    },
+    {
+      "id": "asset-002",
+      "part": "ppt/media/image3.png",
+      "sha256": "bdcf96a9e0162b6e188259ba9cab552df126466b8cd9ccd68ed1ce2813e3c7e8",
+      "file": "media/asset-002.png",
+      "image": true,
+      "slides": [
+        4
+      ]
+    },
+    {
+      "id": "asset-003",
+      "part": "ppt/media/image5.png",
+      "sha256": "66c36e9ab09162fa838c322b9e1a638e5290428c553952836d5eac8576969bc8",
+      "file": "media/asset-003.png",
+      "image": true,
+      "slides": [
+        5
+      ]
+    },
+    {
+      "id": "asset-004",
+      "part": "ppt/media/image4.png",
+      "sha256": "378813bd1feeed15d4f4aa790841b9a8a2a3afe4e51b0402c9e8122f045bdf22",
+      "file": "media/asset-004.png",
+      "image": true,
+      "slides": [
+        5
+      ]
+    },
+    {
+      "id": "asset-005",
+      "part": "ppt/media/image6.jpeg",
+      "sha256": "aef8c8edd7d789c20adfe630dcfee899d9ceb88267837138f8d9aa900f73be48",
+      "file": "media/asset-005.jpeg",
+      "image": true,
+      "slides": [
+        6
+      ]
+    },
+    {
+      "id": "asset-006",
+      "part": "ppt/media/image8.jpeg",
+      "sha256": "be8cd21ea701427eebcd06ad55a62f6ef9dbf325599af70625bb8575281fadfc",
+      "file": "media/asset-006.jpeg",
+      "image": true,
+      "slides": [
+        6
+      ]
+    },
+    {
+      "id": "asset-007",
+      "part": "ppt/media/image7.jpeg",
+      "sha256": "f23a0ebe3eefcf702b94d3b8d9506bb4a077b4d12dc54e8d41e9bda4ed866f48",
+      "file": "media/asset-007.jpeg",
+      "image": true,
+      "slides": [
+        6
+      ]
+    },
+    {
+      "id": "asset-008",
+      "part": "ppt/media/image9.jpeg",
+      "sha256": "95818e6a85f0faca42a198f3ecd9ff739e0f29e1199e47b809a40aa08d364d96",
+      "file": "media/asset-008.jpeg",
+      "image": true,
+      "slides": [
+        7
+      ]
+    },
+    {
+      "id": "asset-009",
+      "part": "ppt/media/image11.jpeg",
+      "sha256": "e375f8f7ddce36295c5d2972dccd9853fd63f1d7b9be8a6ab8b52d7b283bd57c",
+      "file": "media/asset-009.jpeg",
+      "image": true,
+      "slides": [
+        7
+      ]
+    },
+    {
+      "id": "asset-010",
+      "part": "ppt/media/image10.jpeg",
+      "sha256": "e43ad6d1597c0e7fa7b18a23e0973d8c67191eab18b76fb1aa321e9c6e3e6d38",
+      "file": "media/asset-010.jpeg",
+      "image": true,
+      "slides": [
+        7
+      ]
+    },
+    {
+      "id": "asset-011",
+      "part": "ppt/media/image12.png",
+      "sha256": "b4f2e19c2f8aa6bfe2ea0c478590546b52c44b1ed0758146882ccc0940cd3b04",
+      "file": "media/asset-011.png",
+      "image": true,
+      "slides": [
+        8
+      ]
+    },
+    {
+      "id": "asset-012",
+      "part": "ppt/media/image14.png",
+      "sha256": "4208c2b89aa7fb4db4c6dc7b44437fe9a5fde6deff03973db464add91c903715",
+      "file": "media/asset-012.png",
+      "image": true,
+      "slides": [
+        9
+      ]
+    },
+    {
+      "id": "asset-013",
+      "part": "ppt/media/image13.png",
+      "sha256": "f77bb383d46807b5bdb907b5773f879d3c4991d6b80d6919e55ddaa690601e4d",
+      "file": "media/asset-013.png",
+      "image": true,
+      "slides": [
+        9
+      ]
+    },
+    {
+      "id": "asset-014",
+      "part": "ppt/media/image15.png",
+      "sha256": "241ff40f5c43cf7b0c9e99150f6d8469501b8e20a183e1abf3721416be59b5bb",
+      "file": "media/asset-014.png",
+      "image": true,
+      "slides": [
+        10
+      ]
+    },
+    {
+      "id": "asset-015",
+      "part": "ppt/media/image16.gif",
+      "sha256": "181fad974b62531dd29348448dbffb9d1c5dd0087c095d3bf64f8c510993298b",
+      "file": "media/asset-015.gif",
+      "image": true,
+      "slides": [
+        10
+      ]
+    },
+    {
+      "id": "asset-016",
+      "part": "ppt/media/image17.png",
+      "sha256": "6971cc59e0ef495a3f383658e8288e0e7eef5625f584c713ea2c62ef822307ae",
+      "file": "media/asset-016.png",
+      "image": true,
+      "slides": [
+        11
+      ]
+    },
+    {
+      "id": "asset-017",
+      "part": "ppt/media/image18.png",
+      "sha256": "d83bac036508e351104e16d0670816dbe8914b2bb73dd2fc6aeaf7adc701b441",
+      "file": "media/asset-017.png",
+      "image": true,
+      "slides": [
+        12
+      ]
+    },
+    {
+      "id": "asset-018",
+      "part": "ppt/media/image19.png",
+      "sha256": "2835bee26f6d981402d8e8432a7305389a3b6c32a3cbc2ab0fd137c3e75a4e8f",
+      "file": "media/asset-018.png",
+      "image": true,
+      "slides": [
+        14
+      ]
+    },
+    {
+      "id": "asset-019",
+      "part": "ppt/media/image20.png",
+      "sha256": "2546143897696b4d9bb8a28907196f0e09ceff2f0b4ec46f770d0a8718f07807",
+      "file": "media/asset-019.png",
+      "image": true,
+      "slides": [
+        15
+      ]
+    },
+    {
+      "id": "asset-020",
+      "part": "ppt/media/image21.png",
+      "sha256": "43c15866b3793dfbdebbdc77ac4fd901cbbf93bea52b2e90f8041694f9eff68d",
+      "file": "media/asset-020.png",
+      "image": true,
+      "slides": [
+        16
+      ]
+    },
+    {
+      "id": "asset-021",
+      "part": "ppt/media/image22.gif",
+      "sha256": "4e17a0f59ce2de6581033f3776b50049eea78da0a38f6c938acfee729dddeecb",
+      "file": "media/asset-021.gif",
+      "image": true,
+      "slides": [
+        17
+      ]
+    },
+    {
+      "id": "asset-022",
+      "part": "ppt/media/image23.png",
+      "sha256": "0aa711bd92ea5128d1efcfddb6701fb3658d1a8a93d0c2ff3a72fcb73fc380e9",
+      "file": "media/asset-022.png",
+      "image": true,
+      "slides": [
+        19
+      ]
+    },
+    {
+      "id": "asset-023",
+      "part": "ppt/media/image24.png",
+      "sha256": "6ea402b05e62615acd8bacfc1707a69800e3f1931ef5ee21589c42e8e5f4524a",
+      "file": "media/asset-023.png",
+      "image": true,
+      "slides": [
+        21
+      ]
+    },
+    {
+      "id": "asset-024",
+      "part": "ppt/media/image25.png",
+      "sha256": "447ba20ea85dec428a60bcc78eb341d25cdacf46a57564e15419f022451e827f",
+      "file": "media/asset-024.png",
+      "image": true,
+      "slides": [
+        22
+      ]
+    },
+    {
+      "id": "asset-025",
+      "part": "ppt/media/image26.jpeg",
+      "sha256": "79d766a842de7682adc233b1ad44cb980b4445e3121290d30ca722f6c4738ccc",
+      "file": "media/asset-025.jpeg",
+      "image": true,
+      "slides": [
+        23
+      ]
+    },
+    {
+      "id": "asset-026",
+      "part": "ppt/media/image28.jpeg",
+      "sha256": "a9f2457e8a7728fdf06478cd13e3649cca67659c64ae4d40c0eb65fcd7359b1b",
+      "file": "media/asset-026.jpeg",
+      "image": true,
+      "slides": [
+        25
+      ]
+    },
+    {
+      "id": "asset-027",
+      "part": "ppt/media/image27.jpeg",
+      "sha256": "4587437eaf95e7ab2730440f45067beefc885be21eb343bb4b59dc7c0647cd74",
+      "file": "media/asset-027.jpeg",
+      "image": true,
+      "slides": [
+        25
+      ]
+    },
+    {
+      "id": "asset-028",
+      "part": "ppt/media/image29.png",
+      "sha256": "019a168a61b6e6a8e9c2bd1a248c4046ac27b67d1e83416f2333cd4a6d478063",
+      "file": "media/asset-028.png",
+      "image": true,
+      "slides": [
+        26
+      ]
+    },
+    {
+      "id": "asset-029",
+      "part": "ppt/media/image30.png",
+      "sha256": "79542910e1dca49499baf30abc9449048fd30a604832b5342a4f8e3f13110b21",
+      "file": "media/asset-029.png",
+      "image": true,
+      "slides": [
+        27
+      ]
+    },
+    {
+      "id": "asset-030",
+      "part": "ppt/media/image32.png",
+      "sha256": "0886e1306ab1771ecd03afc8a476462ecfaf6cda62013e9d1bc8fe05346e1709",
+      "file": "media/asset-030.png",
+      "image": true,
+      "slides": [
+        28
+      ]
+    },
+    {
+      "id": "asset-031",
+      "part": "ppt/media/image31.png",
+      "sha256": "4a4925ca60f457b5a25e27953acb34ed52d26944e17ce4f99d90570ec140be34",
+      "file": "media/asset-031.png",
+      "image": true,
+      "slides": [
+        28
+      ]
+    },
+    {
+      "id": "asset-032",
+      "part": "ppt/media/image33.png",
+      "sha256": "b925277172c279e23338a1164d981d51395b672449c9289c13304e0eae7da7d6",
+      "file": "media/asset-032.png",
+      "image": true,
+      "slides": [
+        29
+      ]
+    },
+    {
+      "id": "asset-033",
+      "part": "ppt/media/image34.png",
+      "sha256": "4f6392c8090c4f97a44a48e2731433f4ac614e5a2758ea51300d5d481aa1908a",
+      "file": "media/asset-033.png",
+      "image": true,
+      "slides": [
+        30
+      ]
+    },
+    {
+      "id": "asset-034",
+      "part": "ppt/media/image35.png",
+      "sha256": "78671303162248d6da9e376db521330f71c1a30a40cdeb65e64c8643429056c2",
+      "file": "media/asset-034.png",
+      "image": true,
+      "slides": [
+        30
+      ]
+    },
+    {
+      "id": "asset-035",
+      "part": "ppt/media/image36.png",
+      "sha256": "2e4c8d99d65f4ef83b5a147f56e959255efbebf3409ffb8f9fd1f953a2d5356f",
+      "file": "media/asset-035.png",
+      "image": true,
+      "slides": [
+        31
+      ]
+    },
+    {
+      "id": "asset-036",
+      "part": "ppt/media/image37.png",
+      "sha256": "4a84d63efe1f0c39140129564456fa8bcbd38f5ebb15be680fe2020da17d7111",
+      "file": "media/asset-036.png",
+      "image": true,
+      "slides": [
+        32
+      ]
+    },
+    {
+      "id": "asset-037",
+      "part": "ppt/media/image38.png",
+      "sha256": "9139bcfdbdf79e090d2e8944a4940b385240ba28192b1c91c7ddd802746f364a",
+      "file": "media/asset-037.png",
+      "image": true,
+      "slides": [
+        34
+      ]
+    },
+    {
+      "id": "asset-038",
+      "part": "ppt/media/image39.gif",
+      "sha256": "2e97838d280a19623c234f40fb8f055f03201902d904a8eb91814db8b22f021a",
+      "file": "media/asset-038.gif",
+      "image": true,
+      "slides": [
+        34
+      ]
+    }
+  ],
+  "limits": "XML text, notes, chart caches and embedded media; no layout rendering, OCR, playback or linked-content retrieval.",
+  "previews": {
+    "status": "generated",
+    "files": [
+      "images-01.jpg",
+      "images-02.jpg",
+      "images-03.jpg",
+      "images-04.jpg",
+      "images-05.jpg"
+    ],
+    "failures": []
+  }
+}

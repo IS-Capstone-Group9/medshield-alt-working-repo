@@ -1,0 +1,227 @@
+{
+  "checked_at": "2026-10-09T02:19:26.821Z",
+  "git_head": "cc03b4c05398880b18987eca5ca9c1e140bf9dcb",
+  "files": [
+    {
+      "path": "supabase/migrations/001_init.sql",
+      "sha256": "5160636f7f541fbe248b9645f20eda13386ac22355c648767741b3da0c7c96ce"
+    },
+    {
+      "path": "supabase/migrations/002_accounts.sql",
+      "sha256": "9c69559561834b6bf5e13060639c50a144abea80d3a234415107c33d067a6990"
+    },
+    {
+      "path": "supabase/migrations/003_auth_rpc.sql",
+      "sha256": "0c53723b112fef7dd8be7c37f5207bddae801422c06b2184ca6f977d1cf4f6ed"
+    },
+    {
+      "path": "supabase/migrations/004_dss_schema.sql",
+      "sha256": "1ccfe264aec70b1edacf1abba01770b95acf2ee840455212ed1e61674bfa2a22"
+    },
+    {
+      "path": "supabase/migrations/005_sales_ingestion_weather.sql",
+      "sha256": "e14b07c47c3bd5cfd7e38f311eb9964f026decaebc178d928c9ebbb922dc98fd"
+    },
+    {
+      "path": "supabase/migrations/006_business_rules_master_data.sql",
+      "sha256": "3eb2d76a23ed0f8bad03d8f38dfbc94f8773dd2996a39fc3c8afa734b65173f9"
+    },
+    {
+      "path": "supabase/migrations/007_namespaced_schema_alignment.sql",
+      "sha256": "efc0b2f90dfec339ccc43f9281e64afbba9138240fa97b622383f0398e48dc09"
+    },
+    {
+      "path": "supabase/migrations/008_schema_performance_lineage_indices.sql",
+      "sha256": "757fe92c51d1182b0a37a92026f309d93f2722427f9d6d12a4cb2c6778eee3f7"
+    },
+    {
+      "path": "supabase/migrations/009_saas_compliance_audit.sql",
+      "sha256": "8a91c1f9169c4b2fea9280329af1bd0ab6a38e3aa5e4f39abd8c571b4658ba15"
+    },
+    {
+      "path": "supabase/migrations/010_enable_rls.sql",
+      "sha256": "36bd39bd8d569489c0aa543bf1e6f135e196dd5aa4b7a3caa5381a8fa1ca81f8"
+    },
+    {
+      "path": "supabase/migrations/011_supabase_auth_account_bridge.sql",
+      "sha256": "0a6e5f291f364664129832fb2817a694fef10a8af66c835baf55cb1a0c698e9b"
+    },
+    {
+      "path": "supabase/migrations/012_retire_legacy_auth_surface.sql",
+      "sha256": "92654b01de33d0f14577928d6dc0248693b216dc5c2afa49bda8ff08355647f9"
+    },
+    {
+      "path": "supabase/migrations/013_databricks_yearly_candidate_sync.sql",
+      "sha256": "df3d1649c9ef7fb21139639d772fc22abf6887269ef4560ab9f345e80cb9094b"
+    },
+    {
+      "path": "supabase/migrations/014_databricks_yearly_candidate_permissions.sql",
+      "sha256": "f0c074b0b592bbe3c767d7d4f5e92d61e4a69290497e53d8da3f6500db5d99c6"
+    },
+    {
+      "path": "supabase/migrations/015_approved_financial_semantics.sql",
+      "sha256": "0fb419e2cb0eb698b996663ef32025eb5eb7c8b251c2a515f9c1eac93183dcc1"
+    },
+    {
+      "path": "supabase/migrations/016_durable_audit_chain.sql",
+      "sha256": "c65a8b0e02f47c0ff85d346d5eb75c0cbbffdbc526a0fb209f137083573d770a"
+    },
+    {
+      "path": ".agents/database-engineer.md",
+      "sha256": "819af7927ad6f10e08b2ea3a380535c9a3653e0ac70a285dc8f3cfbb12981326"
+    },
+    {
+      "path": ".agents/qa-engineer.md",
+      "sha256": "bbc4263909b1098cf262d6b0b92c855b76629c2e4794beb63f756ca99a313c70"
+    },
+    {
+      "path": ".agents/worker-operating-model.md",
+      "sha256": "b4ee4b0ae11ecdd87af662e56dc7990c9a82cde866be7114faec7702058be901"
+    },
+    {
+      "path": ".agents/execution-contract.md",
+      "sha256": "61990a3f87b3139806f5e2090c4e7a1205a2147dd5c315d324c0f43ee8cfcec9"
+    },
+    {
+      "path": ".skills/database-standards.md",
+      "sha256": "a21ed135246d0f978d9fc99de230b03ba0203adbb6aceaf3ecd25545733c7325"
+    },
+    {
+      "path": ".skills/testing-standards.md",
+      "sha256": "cb3cce2f7730189092a7367c72eafa31e1f8040037c394a0d8be7cd996b64a0e"
+    },
+    {
+      "path": ".skills/security-standards.md",
+      "sha256": "bc5323d9888dd38b3b3e7a1d793b4a0736f5c09ecc581ea04f422e212a2b3a6b"
+    },
+    {
+      "path": ".skills/analytics-frameworks.md",
+      "sha256": "75345b55b9bd8e7f6bfbaa25c07b067a8d35c43a40d2992a6eb351f8739fdbf7"
+    },
+    {
+      "path": ".skills/architecture-patterns.md",
+      "sha256": "280ddff9f0ecee45030732fc13875de67e668e682c42b06c8278fe4c267ecc30"
+    },
+    {
+      "path": ".skills/coding-standards.md",
+      "sha256": "d78a0a43458020481c48d15b8eec9c1610cf9ca8e0676388936fb819f7ed360c"
+    },
+    {
+      "path": ".skills/technology-stack.md",
+      "sha256": "5330aa0177a1768e82e38f04d5312d87d29ee14b4cc8ef83c4a4c0071fb1f339"
+    },
+    {
+      "path": "docs/DATABASE.md",
+      "sha256": "045d6f3825dbd967994ed430d6f11290a78b28ffbc20dc8fb1cce0284a37645a"
+    },
+    {
+      "path": "docs/SECURITY.md",
+      "sha256": "3b58ea3afc2aa8d6d46e706ed34ad490e7be30110fb376405de46cb9ab22e043"
+    },
+    {
+      "path": "docs/SETUP.md",
+      "sha256": "5bbf00d493da6d8bd6217a0d29ca4181c84acdb9698ce33e4e4b96d176b739e7"
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "sha256": "e3e218dab3aa64c1da36019951bfc5978ec1ccbc742938d8ff4884533e26ebfb"
+    },
+    {
+      "path": "docs/DECISIONS.md",
+      "sha256": "b3eab9fd008aa392077c1d435379762a68b18aaada9de9ed9517d92950603771"
+    },
+    {
+      "path": "docs/CATALOG_DEPLOYMENT.md",
+      "sha256": "2031225a3700fff7a8bfde666f141da7da46577537188474b201658ff6e083fe"
+    },
+    {
+      "path": "docs/PREDICTIVE_OPERATIONS.md",
+      "sha256": "2e13fa0707a90349325ccd5519b4f5fe38548425325bfb71e7729094954cecd5"
+    },
+    {
+      "path": "databricks/medshield_project/01_sales_bronze.py",
+      "sha256": "996331113cd208edcd1bfa9e14d68e0be7bee01ea3b616892dd179926eed1d51"
+    },
+    {
+      "path": "databricks/medshield_project/02_sales_silver.py",
+      "sha256": "7075ec01eb7e7b81ec49cc4b7387c9d7c472750e9b49a2a16add01b809301a1f"
+    },
+    {
+      "path": "databricks/medshield_project/03_sales_gold.py",
+      "sha256": "2b15c13f13fd9bd56fcf3da9f0340a3715a920c132b8364411becb7c356d3b09"
+    },
+    {
+      "path": "databricks/medshield_project/04_sales_restart_monthly_bridge.py",
+      "sha256": "692287d9d5b2a7ec153de27a90adf0e519bfb75db83340af08aaa4d7b6bbba16"
+    },
+    {
+      "path": "databricks/medshield_project/05_sales_restart_system_bridge.sql",
+      "sha256": "fa13c7ad95ba4b4aadbd73b6f90fd595eddb6321a7f2b9a7ee74804bc3b6f1bf"
+    },
+    {
+      "path": "databricks/medshield_project/06_sales_stl.py",
+      "sha256": "dcb1ee462dc78848c78adeeee9b05f5a7bb159c2e27b721fc90c7a4406f038d6"
+    },
+    {
+      "path": "databricks/medshield_project/07_predictive_contracts.sql",
+      "sha256": "711a655c0bc266c465edf89094c5553f85581378263b91fa61bce73d75980cb3"
+    },
+    {
+      "path": "databricks/medshield_project/08_predictive_frozen_input.py",
+      "sha256": "b629d931e29d85f1e07b47532e8008875f879d4b50b4b9e0eb6c7b2818555c83"
+    },
+    {
+      "path": "databricks/medshield_project/catalog_publication.py",
+      "sha256": "5be8775ff7ae7c7310076d3170066ffa1ab6a5212e1eef92628883c8fbe11b50"
+    },
+    {
+      "path": "databricks/medshield_project/product_catalog.py",
+      "sha256": "20888a90253718dabf2aea3390ecc8d7ca707b388e8a4d45123e894c98f688c9"
+    },
+    {
+      "path": "databricks/medshield_project/package_catalog.py",
+      "sha256": "d035eb6d330fa032c3f118e4dcee9006acfb868789d7087e4c58d21a3daf0e8b"
+    },
+    {
+      "path": "databricks/medshield_project/references/catalog_publication.json",
+      "sha256": "d562569e6170ff8aa0af18fd9cf166f4f1333327992e74d38476d5520208d1b3"
+    },
+    {
+      "path": "databricks/medshield_project/references/category_acceptance.json",
+      "sha256": "a99078830b281be69c856d3aeeb725fe80ef0eebc5e86577ddd0e19f9ff0f56d"
+    },
+    {
+      "path": "databricks/medshield_project/references/product_master_review.csv",
+      "sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29"
+    },
+    {
+      "path": "databricks/medshield_project/external_restart/02_external_silver.py",
+      "sha256": "18587b2dc1248a7add7808ee93e4b371dcc93aa2bc1ba96cef34178a24b55e03"
+    },
+    {
+      "path": "databricks/medshield_project/external_restart/03_external_gold.py",
+      "sha256": "2234c8ad644766a42a6573aa14eea74752a997ff00050294158549905b54d5b4"
+    },
+    {
+      "path": "databricks/medshield_project/external_restart/06_external_restart_system_bridge.sql",
+      "sha256": "da06e6954ed983ced191a10f26ee7e2b0311bf5cdd22e7dd636c845b2e19cdbb"
+    },
+    {
+      "path": "backend/src/predictivePublication.ts",
+      "sha256": "7e0b57e4651e633b89bb94143ff939aada094cd34ea59b001a0c3f7fe89f0447"
+    },
+    {
+      "path": "backend/src/predictiveRelease.ts",
+      "sha256": "35f8de551b35cdd7cb8e92ecfe81a5332f2b259d4f24239ae10f869129a41587"
+    },
+    {
+      "path": "backend/scripts/prepare-catalog-publication.ts",
+      "sha256": "51490647e4abb4fb8e6320da734731b24a884a51be9775b691e556cd90aa584f"
+    }
+  ],
+  "working_tree": "Existing extensive changes preserved; product writes were not allowed. Hashes identify checked actual bytes, not just HEAD.",
+  "runtime": {
+    "node": "v22.14.0",
+    "pglite": "0.5.8"
+  }
+}

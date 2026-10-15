@@ -6,7 +6,24 @@
 
 Use this as the checklist for writing Chapter 4 and Chapter 5. Chapter 4 should show what was built. Chapter 5 should explain what the results mean, what is limited, and what should be improved.
 
-## September 2026 revision evidence
+## Current predictive writing packet
+
+For predictive methods and interpretation, use [the predictive explanation](logic/PREDICTIVE_ANALYTICS_EXPLAINER.md)
+and [recomputed model/monthly error scorecard](../outputs/predictive_explanation_20261010/SCORECARD.md).
+The [annual projection packet](../outputs/predictive_annual_release_20261010/README.md)
+adds final-origin 2026 research values, charts, actual generation dates and
+independent QA. Describe them separately from the retained historical accuracy
+evaluation; elapsed 2026 targets have no released actuals and no measured errors.
+The [completed research delivery](../outputs/predictive_completion_20261009/README.md)
+retains the evaluated model artifacts, plots, independent QA, candidate storage and
+two authenticated live predictive checks. [Current state](CURRENT_STATE.md) owns
+the current results and unresolved acceptance gates. Offline evaluation, warehouse
+candidate storage and approved operational serving are three distinct statuses.
+This packet supports a results section; it does not close the original SKU/territory
+demand objective or grant business/academic acceptance. The dated September
+instructions below are historical and do not override current evidence.
+
+## Historical September 2026 revision evidence
 
 Use [Section 8 acceptance evidence](SECTION_8_ACCEPTANCE_EVIDENCE.md) for executed checks, reproducible source reconciliation, scoped numerical findings and open gates. The repository methodology guide now reflects the implemented benchmarks, lagged regression and allocation scenarios. Authenticated screenshots and live upload acceptance remain pending a provisioned sign-in; isolated browser results must not be captioned as deployed end-to-end validation. Preserve gross-profit discrepancies and unknown buyer ownership in the discussion.
 
@@ -25,7 +42,7 @@ Use [Section 8 acceptance evidence](SECTION_8_ACCEPTANCE_EVIDENCE.md) for execut
 | NASA POWER readiness | Databricks weather proxy candidate | Show provider, coordinates, retrieval time, date coverage, and limitations. | Pending review |
 | Dashboard screenshots | Running frontend | Capture sales dashboard, upload, sales table, weather validation, and outputs. | Pending |
 | API evidence | Backend endpoints | Include sample response summaries, not secrets. | Pending |
-| Model outputs | Databricks candidates plus versioned offline evidence | Separate implemented baselines and scenarios from blocked advanced/external models. | Pending |
+| Model outputs | Current predictive packet above, Databricks candidates and versioned offline evidence | Report evaluated revenue models separately from scenarios, unapproved external features and operational demand targets. | Research evidence available; operational acceptance pending |
 | QA evidence | Test/build commands | Include test/build results and manual QA table. | Pending |
 
 ## Chapter 4 Suggested Structure

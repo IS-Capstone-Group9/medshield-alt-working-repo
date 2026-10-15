@@ -1,0 +1,231 @@
+{
+  "checked_at": "2026-10-08T17:52:53.146870+08:00",
+  "root": "C:\\Users\\Adrian\\projects\\medshield1\\medshield",
+  "scope": "role routing, instruction links and heading targets",
+  "role_count": 16,
+  "roles": [
+    {
+      "role": "analytics-learning-coach.md",
+      "primary": [
+        "../.skills/analytics-lesson-coaching/SKILL.md"
+      ],
+      "conditional": [
+        "../.skills/analytics-frameworks.md",
+        "../.skills/business-analysis-frameworks.md",
+        "../.skills/testing-standards.md"
+      ]
+    },
+    {
+      "role": "architect.md",
+      "primary": [
+        "../.skills/architecture-patterns.md"
+      ],
+      "conditional": [
+        "../.skills/technology-stack.md",
+        "../.skills/database-standards.md",
+        "../.skills/enterprise-architecture-frameworks.md"
+      ]
+    },
+    {
+      "role": "backend-engineer.md",
+      "primary": [
+        "../.skills/backend-standards.md"
+      ],
+      "conditional": [
+        "../.skills/database-standards.md",
+        "../.skills/analytics-frameworks.md",
+        "../.skills/security-standards.md"
+      ]
+    },
+    {
+      "role": "bi-specialist.md",
+      "primary": [
+        "../.skills/analytics-frameworks.md"
+      ],
+      "conditional": [
+        "../.skills/frontend-standards.md",
+        "../.skills/business-analysis-frameworks.md",
+        "../.skills/testing-standards.md"
+      ]
+    },
+    {
+      "role": "business-analyst.md",
+      "primary": [
+        "../.skills/business-analysis-frameworks.md"
+      ],
+      "conditional": [
+        "../.skills/product-management-frameworks.md",
+        "../.skills/analytics-frameworks.md",
+        "../.skills/testing-standards.md"
+      ]
+    },
+    {
+      "role": "code-reviewer.md",
+      "primary": [
+        "../.skills/coding-standards.md"
+      ],
+      "conditional": [
+        "../.skills/testing-standards.md",
+        "../.skills/security-standards.md",
+        "../.skills/analytics-frameworks.md"
+      ]
+    },
+    {
+      "role": "data-analyst.md",
+      "primary": [
+        "../.skills/analytics-frameworks.md"
+      ],
+      "conditional": [
+        "../.skills/database-standards.md",
+        "../.skills/business-analysis-frameworks.md",
+        "../.skills/analytics-lesson-coaching/SKILL.md"
+      ]
+    },
+    {
+      "role": "database-engineer.md",
+      "primary": [
+        "../.skills/database-standards.md"
+      ],
+      "conditional": [
+        "../.skills/analytics-frameworks.md",
+        "../.skills/security-standards.md",
+        "../.skills/architecture-patterns.md"
+      ]
+    },
+    {
+      "role": "devops-engineer.md",
+      "primary": [
+        "../.skills/devops-standards.md"
+      ],
+      "conditional": [
+        "../.skills/technology-stack.md",
+        "../.skills/github-standards.md",
+        "../.skills/service-management-frameworks.md",
+        "../.skills/security-standards.md"
+      ]
+    },
+    {
+      "role": "enterprise-architect.md",
+      "primary": [
+        "../.skills/enterprise-architecture-frameworks.md"
+      ],
+      "conditional": [
+        "../.skills/architecture-patterns.md",
+        "../.skills/business-analysis-frameworks.md",
+        "../.skills/service-management-frameworks.md"
+      ]
+    },
+    {
+      "role": "frontend-engineer.md",
+      "primary": [
+        "../.skills/frontend-standards.md"
+      ],
+      "conditional": [
+        "../.skills/analytics-frameworks.md",
+        "../.skills/backend-standards.md",
+        "../.skills/security-standards.md",
+        "rules/ux-ui-design-rules.md"
+      ]
+    },
+    {
+      "role": "orchestrator.md",
+      "primary": [
+        "../.skills/product-management-frameworks.md"
+      ],
+      "conditional": [
+        "../.skills/business-analysis-frameworks.md",
+        "../.skills/architecture-patterns.md",
+        "../.skills/testing-standards.md",
+        "../.skills/devops-standards.md"
+      ]
+    },
+    {
+      "role": "qa-engineer.md",
+      "primary": [
+        "../.skills/testing-standards.md"
+      ],
+      "conditional": [
+        "../.skills/analytics-frameworks.md",
+        "../.skills/security-standards.md",
+        "../.skills/analytics-lesson-coaching/SKILL.md"
+      ]
+    },
+    {
+      "role": "security-engineer.md",
+      "primary": [
+        "../.skills/security-standards.md"
+      ],
+      "conditional": [
+        "../.skills/backend-standards.md",
+        "../.skills/database-standards.md",
+        "../.skills/devops-standards.md",
+        "../.skills/testing-standards.md"
+      ]
+    },
+    {
+      "role": "service-manager.md",
+      "primary": [
+        "../.skills/service-management-frameworks.md"
+      ],
+      "conditional": [
+        "../.skills/devops-standards.md",
+        "../.skills/documentation-standards.md",
+        "../.skills/security-standards.md"
+      ]
+    },
+    {
+      "role": "technical-writer.md",
+      "primary": [
+        "../.skills/documentation-standards.md"
+      ],
+      "conditional": [
+        "../.skills/technology-stack.md",
+        "../.skills/analytics-lesson-coaching/SKILL.md",
+        "../.skills/testing-standards.md"
+      ]
+    }
+  ],
+  "instruction_sha256": {
+    ".agents\\analytics-learning-coach.md": "8680716c6ae0e2d6a45fd64295b3228265435645516fd7a6e5e2cf1573dbb804",
+    ".agents\\architect.md": "b25a1aadd9863be8801ecc71a104bbfd5c55effbcace42cf2445f6b815865ec1",
+    ".agents\\backend-engineer.md": "cd63a06d4aa026976d5ba882900c6e5dea36655f3681651bf1c0571d369e01ad",
+    ".agents\\bi-specialist.md": "1cd156c1dd69d262fefe04c0079f0c3ae686f5e88c83d6f90524a7824612638f",
+    ".agents\\business-analyst.md": "24f3f69e3f03bda916417dafc004512aa28d8033fefe080d3ce1c41a96f72085",
+    ".agents\\code-reviewer.md": "f2529106caf405325fb694793bb400199e929f4ddba8bf9a885ac995546dc94a",
+    ".agents\\data-analyst.md": "253da081234934b6310bee3d61a1d15610388510a28f75064a40a3f9ac41e63a",
+    ".agents\\database-engineer.md": "819af7927ad6f10e08b2ea3a380535c9a3653e0ac70a285dc8f3cfbb12981326",
+    ".agents\\devops-engineer.md": "7b59c5064d9a0d4ba624b8381b10f528fbafc0c665b076f411a08d03ab8fcb91",
+    ".agents\\enterprise-architect.md": "111c2f397c91c26de5e636c0644d4a17d6382528f75eed884ec7871461a81eba",
+    ".agents\\frontend-engineer.md": "63060dbb125d47531efba24d994cdcffbabee19657934c140d516733e3c81883",
+    ".agents\\orchestrator.md": "68d9389021b1bf8d1f79d6cee4f4f1c984604fb3371160535b8ce41da2e128f7",
+    ".agents\\qa-engineer.md": "bbc4263909b1098cf262d6b0b92c855b76629c2e4794beb63f756ca99a313c70",
+    ".agents\\security-engineer.md": "88e0753425d6e906678edf868cadf7dd5b9377bf1813277d6c54ef6925ecd5dc",
+    ".agents\\service-manager.md": "4e9ebd1a0c6fa720a019d00dd195bed2aa1411a18474f91e93efcb4b019bd6fc",
+    ".agents\\technical-writer.md": "21b8cc356586c7e592649059c68ff49a862fbc8443dce88b6e999ea097af3aa4",
+    "AGENTS.md": "c50a5b12f3e13c8f9d33f4e01d0df9e168d0775a44a91cf0f78890ef7f42d5fe",
+    ".agents\\execution-contract.md": "61990a3f87b3139806f5e2090c4e7a1205a2147dd5c315d324c0f43ee8cfcec9",
+    ".agents\\worker-operating-model.md": "b4ee4b0ae11ecdd87af662e56dc7990c9a82cde866be7114faec7702058be901",
+    ".skills\\analytics-frameworks.md": "75345b55b9bd8e7f6bfbaa25c07b067a8d35c43a40d2992a6eb351f8739fdbf7",
+    ".skills\\analytics-lesson-coaching\\references\\assessor-notes.md": "7d02714a0e25c8c910e36a2a381861ae359e03a9d8e2ddf00da555eff84dc6c6",
+    ".skills\\analytics-lesson-coaching\\references\\practice-cases.md": "030eec25184dbc3bc549ca009edf67f282b70e4196ab3e5fdf89b5490c5185fb",
+    ".skills\\analytics-lesson-coaching\\SKILL.md": "f4a30d25ae26c6b8b9f3a0a7b5b09c6c6414217aed2e436bbccd65fd87f867c8",
+    ".skills\\architecture-patterns.md": "280ddff9f0ecee45030732fc13875de67e668e682c42b06c8278fe4c267ecc30",
+    ".skills\\backend-standards.md": "8e0d39af74fe94715d9b844b9deb7b2024e9a209d341670abb66f89d897c9b0a",
+    ".skills\\business-analysis-frameworks.md": "dd7bd718979c5ff3ef5753acb5ed53ed66b8eefe0362d73ec236ff54709f1bbd",
+    ".skills\\coding-standards.md": "d78a0a43458020481c48d15b8eec9c1610cf9ca8e0676388936fb819f7ed360c",
+    ".skills\\database-standards.md": "a21ed135246d0f978d9fc99de230b03ba0203adbb6aceaf3ecd25545733c7325",
+    ".skills\\devops-standards.md": "2fdf7d42c780d27a96d7ffbb8b544c8435fe4b30c5397a8dd223abf6da93194b",
+    ".skills\\documentation-standards.md": "5d42af6dfec568995aebdd452d1f70ddf04d408a1ff9a540944d7c7f6e015833",
+    ".skills\\enterprise-architecture-frameworks.md": "cfe3a10939e3912e856ea60b3d4e4f4d62690e0cbfc6a6b2e7cd97a435845979",
+    ".skills\\frontend-standards.md": "0b3c9062e773e054bc80641f79f369e7894b7e95f8630c9dd6887eef687cd178",
+    ".skills\\github-standards.md": "d42bf96713bc25dac2007431f2500131ad4e16572f4df16d25e21a3ca9e9fa68",
+    ".skills\\product-management-frameworks.md": "cbd8d8d9123bf0bd79e03e4408224f7bd753ce521da29785a46958380aed8481",
+    ".skills\\security-standards.md": "bc5323d9888dd38b3b3e7a1d793b4a0736f5c09ecc581ea04f422e212a2b3a6b",
+    ".skills\\service-management-frameworks.md": "aaf825698da4415efaac5291519e5da64f93f27f2ff78ecf23141be11d72e5ab",
+    ".skills\\sonarqube-check\\SKILL.md": "771d4645a0bf7ec1a57257b5d57b037a7ecaad50ea6631e8ad7b32a0da90b31b",
+    ".skills\\technology-stack.md": "5330aa0177a1768e82e38f04d5312d87d29ee14b4cc8ef83c4a4c0071fb1f339",
+    ".skills\\testing-standards.md": "cb3cce2f7730189092a7367c72eafa31e1f8040037c394a0d8be7cd996b64a0e"
+  },
+  "status": "pass",
+  "errors": []
+}

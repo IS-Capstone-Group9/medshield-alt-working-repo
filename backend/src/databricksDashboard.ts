@@ -4,8 +4,10 @@ import { catalogProjection } from './catalogContract'
 import { parseMonthlyYear } from './monthlyQuery'
 import { createHash } from 'node:crypto'
 import { executeDatabricksStatement } from './databricks'
+import { databricksLiteral } from './databricksLiteral'
 import { revenueAbc, weightedMargin } from './descriptiveMetrics'
 import { buildSalesDiagnostics, diagnosticFilter, diagnosticStatement, parseDiagnosticFilters, parseDiagnosticScope, type DiagnosticInput, type DiagnosticParameter } from './salesDiagnostics'
+import { isOpenMeteoProvider, OPEN_METEO_GOLD_VIEW, OPEN_METEO_PROVIDERS, type OpenMeteoProvider } from './openMeteoWeather'
 
 const GOLD = '`workspace`.`medshield_gold`'
 const FACT = `${GOLD}.\`sales_restart_fact_candidate\``
@@ -99,6 +101,11 @@ function nullableNumber(value: string | null | undefined): number | null {
   return Number.isFinite(parsed) ? parsed : null
 }
 
+function sumObserved(rows: Row[], field: string): number | null {
+  const values = rows.map(row => nullableNumber(row[field])).filter((value): value is number => value !== null)
+  return values.length ? values.reduce((sum, value) => sum + value, 0) : null
+}
+
 function integerValue(value: unknown, label: string, minimum: number, maximum: number): number {
   const parsed = Number(value)
   if (!Number.isInteger(parsed) || parsed < minimum || parsed > maximum) {
@@ -115,12 +122,12 @@ function decimalValue(value: unknown, label: string, minimum: number, maximum: n
   return parsed
 }
 
-function sqlString(value: string, label: string, maximumLength = 160): string {
+export function sqlString(value: string, label: string, maximumLength = 160): string {
   const normalized = value.trim()
   if (normalized.length > maximumLength || /[\u0000-\u001f]/.test(normalized)) {
     throw new DatabricksDashboardInputError(`${label} is invalid`)
   }
-  return `'${normalized.replaceAll("'", "''")}'`
+  return databricksLiteral(normalized)
 }
 
 function checksum(value: unknown): string {
@@ -340,21 +347,21 @@ export async function loadDatabricksDashboardSnapshot() {
     )
   }
 
-  const totalRevenue = yearly.reduce((sum, row) => sum + numberValue(row.net_sales_candidate), 0)
-  const totalIncome = yearly.reduce((sum, row) => sum + numberValue(row.gross_margin_candidate), 0)
-  const marginRevenueBasis = yearly.reduce((sum, row) => sum + numberValue(row.margin_revenue_basis), 0)
+  const totalRevenue = sumObserved(yearly, 'net_sales_candidate')
+  const totalIncome = sumObserved(yearly, 'gross_margin_candidate')
+  const marginRevenueBasis = sumObserved(yearly, 'margin_revenue_basis')
   const totalTransactions = yearly.reduce((sum, row) => sum + numberValue(row.transaction_count), 0)
 
   const byArea = areas.map((row) => ({
     area: row.area_name ?? 'Unspecified',
-    revenue: numberValue(row.revenue),
-    income: numberValue(row.income),
+    revenue: nullableNumber(row.revenue),
+    income: nullableNumber(row.income),
   }))
   const topProducts = products.map((row) => ({
     product: row.product_name ?? 'Unspecified',
-    revenue: numberValue(row.revenue),
-    income: numberValue(row.income),
-    qty: numberValue(row.qty),
+    revenue: nullableNumber(row.revenue),
+    income: nullableNumber(row.income),
+    qty: nullableNumber(row.qty),
     abc: revenueAbc(nullableNumber(row.cumulative_revenue), nullableNumber(row.product_revenue_total), nullableNumber(row.positive_sales)),
     abc_policy: 'positive_sales_crossing_inclusive_v2_candidate',
     positive_sales: numberValue(row.positive_sales),
@@ -364,7 +371,7 @@ export async function loadDatabricksDashboardSnapshot() {
     product_identity_status: 'source_label_not_verified_sku',
     pct_of_total: numberValue(row.product_revenue_total)
       ? numberValue(row.positive_sales) / numberValue(row.product_revenue_total) * 100
-      : 0,
+      : null,
   }))
   return {
     data_status: {
@@ -397,8 +404,8 @@ export async function loadDatabricksDashboardSnapshot() {
     top_products: topProducts,
     year_summary: yearly.map((row) => ({
       year: row.calendar_year,
-      revenue: numberValue(row.net_sales_candidate),
-      income: numberValue(row.gross_margin_candidate),
+      revenue: nullableNumber(row.net_sales_candidate),
+      income: nullableNumber(row.gross_margin_candidate),
       transactions: numberValue(row.transaction_count),
       margin_revenue_basis: nullableNumber(row.margin_revenue_basis),
     })),
@@ -579,15 +586,15 @@ export async function getDatabricksSalesTransactions(input: SalesDetailInput & {
       dr_number: row.dr_number,
       date_delivered: row.date_delivered,
       product: row.product,
-      quantity: numberValue(row.quantity),
-      unit_cost: numberValue(row.contract_price_unit),
-      total_cost: numberValue(row.gross_contract_value),
-      discount: numberValue(row.discount_amount),
-      net_cost: numberValue(row.net_contract_value),
-      trade_price_unit: numberValue(row.transfer_price_unit),
-      total_trade_price: numberValue(row.total_transfer_price),
-      net_income: numberValue(row.gross_margin_amount),
-      margin_pct: numberValue(row.gross_margin_pct),
+      quantity: nullableNumber(row.quantity),
+      unit_cost: nullableNumber(row.contract_price_unit),
+      total_cost: nullableNumber(row.gross_contract_value),
+      discount: nullableNumber(row.discount_amount),
+      net_cost: nullableNumber(row.net_contract_value),
+      trade_price_unit: nullableNumber(row.transfer_price_unit),
+      total_trade_price: nullableNumber(row.total_transfer_price),
+      net_income: nullableNumber(row.gross_margin_amount),
+      margin_pct: nullableNumber(row.gross_margin_pct),
       quality_status: String(row.quality_status ?? 'WARNING').toLowerCase(),
       quality_notes: row.quality_notes ?? '',
       source_sheet: row.source_sheet ?? '',
@@ -611,16 +618,16 @@ export async function getDatabricksSalesSummary(input: SalesDetailInput) {
     query(`SELECT COUNT(*) AS rows, COUNT(DISTINCT normalized_product) AS sku_count,
       COUNT(DISTINCT dr_number) AS unique_dr_numbers,
       COUNT(*) AS accepted_rows,
-      SUM(CASE WHEN is_quantity_observation_eligible THEN COALESCE(quantity, 0) ELSE 0 END) AS quantity,
-      SUM(CASE WHEN is_gross_sales_eligible THEN COALESCE(gross_sales, 0) ELSE 0 END) AS total_cost,
-      SUM(CASE WHEN is_net_sales_eligible THEN COALESCE(net_sales, 0) ELSE 0 END) AS net_cost,
-      SUM(CASE WHEN is_acquisition_cost_eligible THEN COALESCE(total_acquisition_cost, 0) ELSE 0 END) AS total_trade_price,
-      SUM(CASE WHEN is_gross_margin_eligible THEN COALESCE(gross_margin_amount, 0) ELSE 0 END) AS net_income,
+      SUM(CASE WHEN is_quantity_observation_eligible THEN quantity END) AS quantity,
+      SUM(CASE WHEN is_gross_sales_eligible THEN gross_sales END) AS total_cost,
+      SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) AS net_cost,
+      SUM(CASE WHEN is_acquisition_cost_eligible THEN total_acquisition_cost END) AS total_trade_price,
+      SUM(CASE WHEN is_gross_margin_eligible THEN gross_margin_amount END) AS net_income,
       AVG(CASE WHEN is_quantity_observation_eligible THEN quantity END) AS avg_quantity,
       AVG(CASE WHEN is_gross_sales_eligible THEN unit_selling_price END) AS avg_unit_cost,
       AVG(CASE WHEN is_gross_margin_eligible THEN gross_margin_amount END) AS avg_net_income,
       CASE WHEN SUM(CASE WHEN is_gross_margin_eligible THEN net_sales END) > 0
-        THEN 100 * SUM(CASE WHEN is_gross_margin_eligible THEN COALESCE(gross_margin_amount, 0) ELSE 0 END)
+        THEN 100 * SUM(CASE WHEN is_gross_margin_eligible THEN gross_margin_amount END)
           / SUM(CASE WHEN is_gross_margin_eligible THEN net_sales END) END AS gross_margin_rate,
       SUM(CASE WHEN is_net_sales_eligible AND is_acquisition_cost_eligible AND is_gross_margin_eligible
         AND ABS(COALESCE(net_sales, 0) - COALESCE(total_acquisition_cost, 0) - COALESCE(gross_margin_amount, 0)) > 0.01
@@ -650,16 +657,16 @@ export async function getDatabricksSalesSummary(input: SalesDetailInput) {
       unique_dr_numbers: numberValue(row.unique_dr_numbers),
     },
     sums: {
-      quantity: numberValue(row.quantity),
-      total_cost: numberValue(row.total_cost),
-      net_cost: numberValue(row.net_cost),
-      total_trade_price: numberValue(row.total_trade_price),
-      net_income: numberValue(row.net_income),
+      quantity: nullableNumber(row.quantity),
+      total_cost: nullableNumber(row.total_cost),
+      net_cost: nullableNumber(row.net_cost),
+      total_trade_price: nullableNumber(row.total_trade_price),
+      net_income: nullableNumber(row.net_income),
     },
     averages: {
-      quantity: numberValue(row.avg_quantity),
-      unit_cost: numberValue(row.avg_unit_cost),
-      net_income: numberValue(row.avg_net_income),
+      quantity: nullableNumber(row.avg_quantity),
+      unit_cost: nullableNumber(row.avg_unit_cost),
+      net_income: nullableNumber(row.avg_net_income),
       margin_pct: nullableNumber(row.gross_margin_rate),
     },
     gross_margin_rate: nullableNumber(row.gross_margin_rate),
@@ -1074,12 +1081,12 @@ async function getNasaPowerWeatherEffects(year: string, area: string) {
       period: row.period,
       area: row.territory,
       provider: row.provider,
-      rainfall_mm: numberValue(row.rainfall_mm),
-      rainy_days: numberValue(row.rainy_days),
+      rainfall_mm: nullableNumber(row.rainfall_mm),
+      rainy_days: nullableNumber(row.rainy_days),
       avg_temperature_c: nullableNumber(row.avg_temperature_c),
       avg_relative_humidity_pct: nullableNumber(row.avg_relative_humidity_pct),
       max_wind_speed_kph: nullableNumber(row.max_wind_speed_kph),
-      rainfall_severity_proxy: numberValue(row.rainfall_severity_proxy),
+      rainfall_severity_proxy: nullableNumber(row.rainfall_severity_proxy),
       weather_alert_level: row.weather_alert_level ?? 'unavailable',
       sales_revenue: nullableNumber(row.sales_revenue),
       planning_demand_uplift_pct: null,
@@ -1087,7 +1094,7 @@ async function getNasaPowerWeatherEffects(year: string, area: string) {
       mapping_status: row.sales_revenue == null ? 'weather_only' : 'territory_month_matched',
     }))
     const pairs = rows.flatMap((row) =>
-      row.sales_revenue == null ? [] : [[row.rainfall_mm, row.sales_revenue] as [number, number]],
+      row.sales_revenue == null || row.rainfall_mm == null ? [] : [[row.rainfall_mm, row.sales_revenue] as [number, number]],
     )
     return {
       metadata: {
@@ -1098,6 +1105,8 @@ async function getNasaPowerWeatherEffects(year: string, area: string) {
         sales_matched_rows: pairs.length,
         source: 'workspace.medshield_gold.vw_weather_nasa_power_monthly_candidate',
         system_of_record: 'databricks',
+        candidate_only: true, is_forecast_eligible: false,
+        interpretation: 'NASA POWER is a historical grid proxy. Existing severity/alert values are internal heuristics, not PAGASA warnings or validated probabilities. Coordinate matches are not approved geographic joins.',
     release: activeRelease, status: 'live',
       },
       summary: [{
@@ -1113,17 +1122,60 @@ async function getNasaPowerWeatherEffects(year: string, area: string) {
   }
 }
 
+async function getOpenMeteoWeatherEffects(provider: OpenMeteoProvider, year: string, area: string) {
+  const source = 'workspace.medshield_gold.vw_weather_open_meteo_monthly_candidate'
+  const metadata = {
+    provider, model: OPEN_METEO_PROVIDERS[provider].model, variable_models: OPEN_METEO_PROVIDERS[provider].variableModels,
+    grain: 'monthly', source, system_of_record: 'databricks', candidate_only: true,
+    is_external_join_ready: false, is_forecast_eligible: false, reliability_benchmark_id: null,
+    interpretation: 'Representative-point historical weather proxy. Sales/disease joins and forecast use require separate approval; ERA5 variants share ancestry.',
+  }
+  try {
+    const available = await executeDatabricksStatement("SHOW TABLES IN `workspace`.`medshield_gold` LIKE 'vw_weather_open_meteo_monthly_candidate'", { rowLimit: 5 })
+    if (!available.rows.length) return { metadata: { ...metadata, status: 'not_refreshed', period_start: null, period_end: null, rows_returned: 0, sales_matched_rows: 0 },
+      summary: [{ periods: 0, sales_matched_periods: 0, rainfall_revenue_correlation: null }], rows: [] }
+    const clauses = [`provider = ${sqlString(provider, 'provider')}`]
+    if (year !== 'all') clauses.push(`YEAR(period_start) = ${Number(year)}`)
+    if (area !== 'all') clauses.push(`territory = ${sqlString(area, 'area')}`)
+    const result = await executeDatabricksStatement(`SELECT DATE_FORMAT(period_start, 'yyyy-MM') AS period,
+      territory, provider, model, latitude, longitude, grid_latitude, grid_longitude, rainfall_mm, rainy_days,
+      avg_temperature_c, avg_relative_humidity_pct, max_wind_speed_kph, expected_days, valid_rainfall_days,
+      valid_temperature_days, valid_humidity_days, valid_wind_days, quality_status, source_url, source_response_sha256,
+      source_period_start, source_period_end, fetched_at, timezone, point_policy, variable_models_json
+      FROM ${OPEN_METEO_GOLD_VIEW} WHERE ${clauses.join(' AND ')} ORDER BY period_start, territory`, { rowLimit: 5000, timeoutMs: 120_000 })
+    const rows = result.rows.map(row => ({
+      period: row.period, area: row.territory, provider: row.provider, model: row.model,
+      latitude: nullableNumber(row.latitude), longitude: nullableNumber(row.longitude), grid_latitude: nullableNumber(row.grid_latitude), grid_longitude: nullableNumber(row.grid_longitude),
+      rainfall_mm: nullableNumber(row.rainfall_mm), rainy_days: nullableNumber(row.rainy_days),
+      avg_temperature_c: nullableNumber(row.avg_temperature_c), avg_relative_humidity_pct: nullableNumber(row.avg_relative_humidity_pct), max_wind_speed_kph: nullableNumber(row.max_wind_speed_kph),
+      expected_days: nullableNumber(row.expected_days), valid_rainfall_days: nullableNumber(row.valid_rainfall_days),
+      valid_temperature_days: nullableNumber(row.valid_temperature_days), valid_humidity_days: nullableNumber(row.valid_humidity_days), valid_wind_days: nullableNumber(row.valid_wind_days),
+      quality_status: row.quality_status, source_url: row.source_url, source_response_sha256: row.source_response_sha256,
+      source_period_start: row.source_period_start, source_period_end: row.source_period_end, fetched_at: row.fetched_at,
+      timezone: row.timezone, point_policy: row.point_policy, variable_models: JSON.parse(row.variable_models_json ?? '{}'),
+      rainfall_severity_proxy: null, weather_alert_level: 'unavailable', sales_revenue: null, planning_demand_uplift_pct: null,
+      mapping_status: 'candidate_representative_point_unapproved', candidate_only: true,
+    }))
+    return { metadata: { ...metadata, status: rows.length ? 'live_candidate' : 'not_refreshed', period_start: rows[0]?.period ?? null,
+      period_end: rows.at(-1)?.period ?? null, rows_returned: rows.length, sales_matched_rows: 0 },
+      summary: [{ periods: rows.length, sales_matched_periods: 0, rainfall_revenue_correlation: null }], rows }
+  } catch (error) {
+    throw new DatabricksSourceUnavailableError(error instanceof Error ? error.message : 'Unknown Databricks weather error')
+  }
+}
+
 export async function getDatabricksWeatherEffects(input: { year?: string; area?: string; grain?: string; provider?: string }) {
   const year = input.year?.trim() || 'all'
   const area = input.area?.trim() || 'all'
   const grain = input.grain?.trim() || 'monthly'
   const provider = input.provider?.trim() || 'PAGASA'
   if (grain !== 'monthly') throw new DatabricksDashboardInputError('Databricks Gold currently publishes monthly weather observations only')
-  if (!['PAGASA', 'nasa_power'].includes(provider)) {
-    throw new DatabricksDashboardInputError('Weather provider must be PAGASA or nasa_power')
+  if (!['PAGASA', 'nasa_power'].includes(provider) && !isOpenMeteoProvider(provider)) {
+    throw new DatabricksDashboardInputError(`Weather provider must be PAGASA, nasa_power, or ${Object.keys(OPEN_METEO_PROVIDERS).join(', ')}`)
   }
   if (year !== 'all') validateYearFilter(year, 'weather year')
   if (provider === 'nasa_power') return getNasaPowerWeatherEffects(year, area)
+  if (isOpenMeteoProvider(provider)) return getOpenMeteoWeatherEffects(provider, year, area)
 
   const clauses = [`signal_family = 'WEATHER'`]
   if (year !== 'all') {
@@ -1149,13 +1201,14 @@ export async function getDatabricksWeatherEffects(input: { year?: string; area?:
       period: row.period,
       area: row.territory,
       provider: row.source,
-      rainfall_mm: numberValue(row.signal_value),
+      rainfall_mm: nullableNumber(row.signal_value),
       rainy_days: null,
       avg_temperature_c: null,
       avg_relative_humidity_pct: null,
       max_wind_speed_kph: null,
-      rainfall_severity_proxy: numberValue(row.signal_value),
-      weather_alert_level: row.observation_status ?? 'unavailable',
+      rainfall_severity_proxy: null,
+      weather_alert_level: 'unavailable',
+      observation_status: row.observation_status,
       sales_revenue: null,
       planning_demand_uplift_pct: null,
       mapping_status: row.mapping_status,
@@ -1176,7 +1229,7 @@ export async function getDatabricksStl() {
   if (!rows.length) throw new DatabricksSourceUnavailableError('No published STL for the active descriptive fact version')
   if (new Set(rows.map(row => row.input_sha256)).size !== 1 || new Set(rows.map(row => row.period)).size !== rows.length) throw new DatabricksSourceUnavailableError('Ambiguous STL publication')
   if (rows.some(row => row.area_mapping_sha256 !== release.area_mapping_sha256 || row.product_master_sha256 !== release.product_master_sha256) || new Set(rows.map(row => row.parameters_json)).size !== 1) throw new DatabricksSourceUnavailableError('STL mapping or parameter identity does not match the active release')
-  const components = rows.map(row => ({ ...row, observed: nullableNumber(row.observed), trend: nullableNumber(row.trend), seasonal: nullableNumber(row.seasonal), residual: nullableNumber(row.residual) }))
+  const components = rows.map(row => ({ ...row, period: row.period, observed: nullableNumber(row.observed), trend: nullableNumber(row.trend), seasonal: nullableNumber(row.seasonal), residual: nullableNumber(row.residual) }))
   if (components.some(row => [row.observed, row.trend, row.seasonal, row.residual].some(v => v == null) || Math.abs(row.observed! - row.trend! - row.seasonal! - row.residual!) > 0.000001)) throw new DatabricksSourceUnavailableError('Invalid STL components')
   return { method: 'STL', metric: 'Eligible net sales (PHP)', release, parameters: JSON.parse(rows[0].parameters_json!), rows: components, source: databricksSource(rows) }
 }

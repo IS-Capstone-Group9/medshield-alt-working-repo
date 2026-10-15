@@ -1,0 +1,130 @@
+{
+  "audit_previously_inspected": true,
+  "best_new_complete_recipe": "median_12",
+  "criteria_review": {
+    "criteria": {
+      "absolute_normalized_bias_max": 10,
+      "critical_horizon_mae_deterioration_max": 0.1,
+      "relative_mae_rmse_deterioration_max": 0.1,
+      "relative_wape_improvement": 0.05,
+      "status": "experimental_not_business_approval"
+    },
+    "criteria_selected_model": "median_12",
+    "model_checks": [
+      {
+        "checks": {
+          "absolute_normalized_bias": false,
+          "complete_identical_keys": true,
+          "critical_horizon_mae": true,
+          "mae_deterioration": true,
+          "relative_wape_improvement": false,
+          "rmse_deterioration": true
+        },
+        "critical_horizons": {
+          "12": true,
+          "3": true,
+          "6": true
+        },
+        "model_id": "median_3",
+        "qualifies": false
+      },
+      {
+        "checks": {
+          "absolute_normalized_bias": false,
+          "complete_identical_keys": true,
+          "critical_horizon_mae": true,
+          "mae_deterioration": true,
+          "relative_wape_improvement": true,
+          "rmse_deterioration": true
+        },
+        "critical_horizons": {
+          "12": true,
+          "3": true,
+          "6": true
+        },
+        "model_id": "median_6",
+        "qualifies": false
+      },
+      {
+        "checks": {
+          "absolute_normalized_bias": true,
+          "complete_identical_keys": true,
+          "critical_horizon_mae": true,
+          "mae_deterioration": true,
+          "relative_wape_improvement": true,
+          "rmse_deterioration": true
+        },
+        "critical_horizons": {
+          "12": true,
+          "3": true,
+          "6": true
+        },
+        "model_id": "median_12",
+        "qualifies": true
+      },
+      {
+        "checks": {
+          "absolute_normalized_bias": false,
+          "complete_identical_keys": true,
+          "critical_horizon_mae": true,
+          "mae_deterioration": true,
+          "relative_wape_improvement": false,
+          "rmse_deterioration": true
+        },
+        "critical_horizons": {
+          "12": true,
+          "3": true,
+          "6": true
+        },
+        "model_id": "weighted_median_6",
+        "qualifies": false
+      },
+      {
+        "checks": {
+          "absolute_normalized_bias": false,
+          "complete_identical_keys": true,
+          "critical_horizon_mae": true,
+          "mae_deterioration": true,
+          "relative_wape_improvement": true,
+          "rmse_deterioration": true
+        },
+        "critical_horizons": {
+          "12": true,
+          "3": true,
+          "6": true
+        },
+        "model_id": "seasonal_median_shrink_6_3y",
+        "qualifies": false
+      },
+      {
+        "checks": {
+          "absolute_normalized_bias": true,
+          "complete_identical_keys": true,
+          "critical_horizon_mae": true,
+          "mae_deterioration": true,
+          "relative_wape_improvement": true,
+          "rmse_deterioration": true
+        },
+        "critical_horizons": {
+          "12": true,
+          "3": true,
+          "6": true
+        },
+        "model_id": "last_value_l1_calibrated_10pct",
+        "qualifies": true
+      }
+    ],
+    "qualified_models": [
+      "median_12",
+      "last_value_l1_calibrated_10pct"
+    ],
+    "status": "experimental_research_comparison_only_not_original_selection_change"
+  },
+  "criteria_selected_model": "median_12",
+  "decision": "No further recipes, revised weights or audit-driven selection; grid stopped after six predetermined recipes.",
+  "development_predictions_sha256": "d750e98d49ac68d556e9c92b0c89ad2df038e26b0f3dd8a27116236f2acb7e51",
+  "frozen_at": "2026-10-10T08:20:08.091728+00:00",
+  "original_selection_preserved": true,
+  "publication_approved": false,
+  "stage": "development_only"
+}

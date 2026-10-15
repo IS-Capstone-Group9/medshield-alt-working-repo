@@ -1,0 +1,991 @@
+{
+  "created_at": "2026-10-10T05:49:20.952132+00:00",
+  "projection_id": "a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b",
+  "generated_at": "2026-10-10T05:42:41.840327+00:00",
+  "source_cutoff": "2025-12",
+  "target_periods": [
+    "2026-01",
+    "2026-02",
+    "2026-03",
+    "2026-04",
+    "2026-05",
+    "2026-06",
+    "2026-07",
+    "2026-08",
+    "2026-09",
+    "2026-10",
+    "2026-11",
+    "2026-12"
+  ],
+  "metric_semantics": "Inherited historical errors; no 2026 accuracy score",
+  "total_semantics": "Sum of unrounded decimal representations of twelve candidate points; not observed revenue",
+  "selected_recipe": "last_value",
+  "models": [
+    {
+      "model_id": "last_value",
+      "configuration": {
+        "model_id": "last_value"
+      },
+      "inherited_development_metrics": {
+        "bias": 46774.56616666661,
+        "mae": 3090470.9348333334,
+        "n": 60,
+        "normalized_bias": 1.2592300817591104,
+        "reason": null,
+        "rmse": 4300604.366031158,
+        "wape": 83.19935997006957
+      },
+      "inherited_2025_retrospective_audit_metrics": {
+        "bias": 1295235.423333333,
+        "mae": 5834383.001666666,
+        "n": 12,
+        "normalized_bias": 8.38354454667083,
+        "reason": null,
+        "rmse": 6956031.7224267535,
+        "wape": 37.76364428864427
+      },
+      "candidate_2026_total_php": "281926591.08",
+      "candidate_monthly_values_php": [
+        "23493882.59",
+        "23493882.59",
+        "23493882.59",
+        "23493882.59",
+        "23493882.59",
+        "23493882.59",
+        "23493882.59",
+        "23493882.59",
+        "23493882.59",
+        "23493882.59",
+        "23493882.59",
+        "23493882.59"
+      ],
+      "candidate_monthly_min_php": "23493882.59",
+      "candidate_monthly_max_php": "23493882.59",
+      "publication_approved": false
+    },
+    {
+      "model_id": "seasonal_naive",
+      "configuration": {
+        "model_id": "seasonal_naive"
+      },
+      "inherited_development_metrics": {
+        "bias": 1731923.5969999998,
+        "mae": 3487809.8063333333,
+        "n": 60,
+        "normalized_bias": 46.625558960395665,
+        "reason": null,
+        "rmse": 5434895.68678964,
+        "wape": 93.8962215478383
+      },
+      "inherited_2025_retrospective_audit_metrics": {
+        "bias": -11261458.43,
+        "mae": 11261458.43,
+        "n": 12,
+        "normalized_bias": -72.89094840026605,
+        "reason": null,
+        "rmse": 13000988.07662962,
+        "wape": 72.89094840026605
+      },
+      "candidate_2026_total_php": "185396821.04",
+      "candidate_monthly_values_php": [
+        "16374092.18",
+        "13408966.82",
+        "2612295.1",
+        "5670753.87",
+        "21382925.25",
+        "14924161.43",
+        "20352893.81",
+        "8934135.31",
+        "20654027.17",
+        "12512678.31",
+        "25076009.2",
+        "23493882.59"
+      ],
+      "candidate_monthly_min_php": "2612295.1",
+      "candidate_monthly_max_php": "25076009.2",
+      "publication_approved": false
+    },
+    {
+      "model_id": "mean_3",
+      "configuration": {
+        "model_id": "mean_3",
+        "window": 3
+      },
+      "inherited_development_metrics": {
+        "bias": 1104448.4615,
+        "mae": 3533478.1743888888,
+        "n": 60,
+        "normalized_bias": 29.733140047047083,
+        "reason": null,
+        "rmse": 4649384.259546954,
+        "wape": 95.12567138678483
+      },
+      "inherited_2025_retrospective_audit_metrics": {
+        "bias": -8164519.239999999,
+        "mae": 9212416.360555554,
+        "n": 12,
+        "normalized_bias": -52.8456908432436,
+        "reason": null,
+        "rmse": 10647446.498662483,
+        "wape": 59.62831277609412
+      },
+      "candidate_2026_total_php": "244330280.4",
+      "candidate_monthly_values_php": [
+        "20360856.7",
+        "20360856.7",
+        "20360856.7",
+        "20360856.7",
+        "20360856.7",
+        "20360856.7",
+        "20360856.7",
+        "20360856.7",
+        "20360856.7",
+        "20360856.7",
+        "20360856.7",
+        "20360856.7"
+      ],
+      "candidate_monthly_min_php": "20360856.7",
+      "candidate_monthly_max_php": "20360856.7",
+      "publication_approved": false
+    },
+    {
+      "model_id": "mean_6",
+      "configuration": {
+        "model_id": "mean_6",
+        "window": 6
+      },
+      "inherited_development_metrics": {
+        "bias": 1317931.7795000002,
+        "mae": 3473386.0127222226,
+        "n": 60,
+        "normalized_bias": 35.480379156042204,
+        "reason": null,
+        "rmse": 4419745.38215297,
+        "wape": 93.50791490393533
+      },
+      "inherited_2025_retrospective_audit_metrics": {
+        "bias": -10064862.66,
+        "mae": 10526958.881111111,
+        "n": 12,
+        "normalized_bias": -65.14585915900989,
+        "reason": null,
+        "rmse": 12165944.389409814,
+        "wape": 68.13682449607839
+      },
+      "candidate_2026_total_php": "222047252.779999992",
+      "candidate_monthly_values_php": [
+        "18503937.731666666",
+        "18503937.731666666",
+        "18503937.731666666",
+        "18503937.731666666",
+        "18503937.731666666",
+        "18503937.731666666",
+        "18503937.731666666",
+        "18503937.731666666",
+        "18503937.731666666",
+        "18503937.731666666",
+        "18503937.731666666",
+        "18503937.731666666"
+      ],
+      "candidate_monthly_min_php": "18503937.731666666",
+      "candidate_monthly_max_php": "18503937.731666666",
+      "publication_approved": false
+    },
+    {
+      "model_id": "ets_none",
+      "configuration": {
+        "damped": false,
+        "family": "ets",
+        "model_id": "ets_none"
+      },
+      "inherited_development_metrics": {
+        "bias": 2104348.0188410557,
+        "mae": 3445030.299204684,
+        "n": 60,
+        "normalized_bias": 56.651692254566264,
+        "reason": null,
+        "rmse": 4264377.522909957,
+        "wape": 92.74454347417584
+      },
+      "inherited_2025_retrospective_audit_metrics": {
+        "bias": -10188736.306856176,
+        "mae": 10501032.199994955,
+        "n": 12,
+        "normalized_bias": -65.94764408387297,
+        "reason": null,
+        "rmse": 12194034.953444043,
+        "wape": 67.96901138491035
+      },
+      "candidate_2026_total_php": "248837984.939161168",
+      "candidate_monthly_values_php": [
+        "22024923.61127501",
+        "23073061.248002946",
+        "18807956.261142876",
+        "18563435.046751767",
+        "24731070.13008202",
+        "21697897.276609886",
+        "20585779.350082014",
+        "18933054.454216585",
+        "20489701.400843594",
+        "19318588.68786515",
+        "19972111.315081146",
+        "20640406.157208174"
+      ],
+      "candidate_monthly_min_php": "18563435.046751767",
+      "candidate_monthly_max_php": "24731070.13008202",
+      "publication_approved": false
+    },
+    {
+      "model_id": "ets_damped",
+      "configuration": {
+        "damped": true,
+        "family": "ets",
+        "model_id": "ets_damped"
+      },
+      "inherited_development_metrics": {
+        "bias": 2338624.7056031036,
+        "mae": 3725795.377208932,
+        "n": 60,
+        "normalized_bias": 62.95871497230687,
+        "reason": null,
+        "rmse": 4511523.746495722,
+        "wape": 100.30309208520164
+      },
+      "inherited_2025_retrospective_audit_metrics": {
+        "bias": -10294862.191486355,
+        "mae": 10426697.234025342,
+        "n": 12,
+        "normalized_bias": -66.63455479162852,
+        "reason": null,
+        "rmse": 12335068.267822789,
+        "wape": 67.48787066921119
+      },
+      "candidate_2026_total_php": "314785874.307615618",
+      "candidate_monthly_values_php": [
+        "22203639.053123966",
+        "25227987.48340729",
+        "21944029.94288984",
+        "23193832.347109243",
+        "26469991.725519497",
+        "28484663.604388528",
+        "25604545.547691777",
+        "26830875.558991574",
+        "28501286.27910099",
+        "29418241.871100273",
+        "28726884.79466679",
+        "28179896.09962585"
+      ],
+      "candidate_monthly_min_php": "21944029.94288984",
+      "candidate_monthly_max_php": "29418241.871100273",
+      "publication_approved": false
+    },
+    {
+      "model_id": "prophet_cp0.01_sp0.1",
+      "configuration": {
+        "changepoint_prior_scale": 0.01,
+        "family": "prophet",
+        "model_id": "prophet_cp0.01_sp0.1",
+        "seasonality_prior_scale": 0.1
+      },
+      "inherited_development_metrics": {
+        "bias": 2187041.5900186393,
+        "mae": 3483090.9311365355,
+        "n": 60,
+        "normalized_bias": 58.877907074472155,
+        "reason": null,
+        "rmse": 4179834.104822966,
+        "wape": 93.76918349945316
+      },
+      "inherited_2025_retrospective_audit_metrics": {
+        "bias": -11143564.925568352,
+        "mae": 11196043.735291732,
+        "n": 12,
+        "normalized_bias": -72.12787056255353,
+        "reason": null,
+        "rmse": 12952644.193153972,
+        "wape": 72.467545058129
+      },
+      "candidate_2026_total_php": "136859447.544937865",
+      "candidate_monthly_values_php": [
+        "13007190.327684175",
+        "11146845.648576897",
+        "8522106.40137372",
+        "9538794.7162136",
+        "13101575.75088509",
+        "13596852.851244636",
+        "10907392.219373569",
+        "9920112.850959487",
+        "11436723.136952937",
+        "11809073.894955296",
+        "11257050.296726666",
+        "12615729.449991792"
+      ],
+      "candidate_monthly_min_php": "8522106.40137372",
+      "candidate_monthly_max_php": "13596852.851244636",
+      "publication_approved": false
+    },
+    {
+      "model_id": "prophet_cp0.01_sp1.0",
+      "configuration": {
+        "changepoint_prior_scale": 0.01,
+        "family": "prophet",
+        "model_id": "prophet_cp0.01_sp1.0",
+        "seasonality_prior_scale": 1.0
+      },
+      "inherited_development_metrics": {
+        "bias": 2238319.968108259,
+        "mae": 3504558.428526304,
+        "n": 60,
+        "normalized_bias": 60.25838543111124,
+        "reason": null,
+        "rmse": 4196167.552915861,
+        "wape": 94.34711549773102
+      },
+      "inherited_2025_retrospective_audit_metrics": {
+        "bias": -11131022.714331886,
+        "mae": 11151987.09487096,
+        "n": 12,
+        "normalized_bias": -72.04668980983442,
+        "reason": null,
+        "rmse": 12928195.128439752,
+        "wape": 72.1823839199371
+      },
+      "candidate_2026_total_php": "136956785.938322134",
+      "candidate_monthly_values_php": [
+        "13293583.804396166",
+        "11189690.71229968",
+        "8217122.072025316",
+        "9342119.092742804",
+        "13341994.154316818",
+        "13888720.923696138",
+        "10844288.441593353",
+        "9716424.351879442",
+        "11413969.981373157",
+        "11822533.153801106",
+        "11184637.381307349",
+        "12701701.868890805"
+      ],
+      "candidate_monthly_min_php": "8217122.072025316",
+      "candidate_monthly_max_php": "13888720.923696138",
+      "publication_approved": false
+    },
+    {
+      "model_id": "prophet_cp0.01_sp10.0",
+      "configuration": {
+        "changepoint_prior_scale": 0.01,
+        "family": "prophet",
+        "model_id": "prophet_cp0.01_sp10.0",
+        "seasonality_prior_scale": 10.0
+      },
+      "inherited_development_metrics": {
+        "bias": 2203885.95162247,
+        "mae": 3474665.6177450162,
+        "n": 60,
+        "normalized_bias": 59.33137844957786,
+        "reason": null,
+        "rmse": 4171161.1173614818,
+        "wape": 93.54236347865285
+      },
+      "inherited_2025_retrospective_audit_metrics": {
+        "bias": -11117390.272825914,
+        "mae": 11140059.9608048,
+        "n": 12,
+        "normalized_bias": -71.95845242952014,
+        "reason": null,
+        "rmse": 12916026.392890785,
+        "wape": 72.1051843174892
+      },
+      "candidate_2026_total_php": "136957821.607240867",
+      "candidate_monthly_values_php": [
+        "13296789.68180469",
+        "11190179.771518428",
+        "8213715.253499189",
+        "9339914.217979368",
+        "13344676.918930812",
+        "13891980.998759536",
+        "10843575.020113906",
+        "9714135.45437689",
+        "11413707.63197526",
+        "11822677.049583368",
+        "11183816.486800516",
+        "12702653.121898904"
+      ],
+      "candidate_monthly_min_php": "8213715.253499189",
+      "candidate_monthly_max_php": "13891980.998759536",
+      "publication_approved": false
+    },
+    {
+      "model_id": "prophet_cp0.05_sp0.1",
+      "configuration": {
+        "changepoint_prior_scale": 0.05,
+        "family": "prophet",
+        "model_id": "prophet_cp0.05_sp0.1",
+        "seasonality_prior_scale": 0.1
+      },
+      "inherited_development_metrics": {
+        "bias": 2241495.629419114,
+        "mae": 3511337.420114153,
+        "n": 60,
+        "normalized_bias": 60.343878223024234,
+        "reason": null,
+        "rmse": 4187454.567417247,
+        "wape": 94.52961446738463
+      },
+      "inherited_2025_retrospective_audit_metrics": {
+        "bias": -11172901.763711685,
+        "mae": 11218467.027590327,
+        "n": 12,
+        "normalized_bias": -72.3177562659573,
+        "reason": null,
+        "rmse": 12976769.234157583,
+        "wape": 72.61268212470529
+      },
+      "candidate_2026_total_php": "136972124.806875793",
+      "candidate_monthly_values_php": [
+        "13016581.725034516",
+        "11155666.81594916",
+        "8529925.668352423",
+        "9547105.691374298",
+        "13111473.56361599",
+        "13607086.221825503",
+        "10916624.15481119",
+        "9929061.318863424",
+        "11446428.359472457",
+        "11819022.55641139",
+        "11266863.744825644",
+        "12626284.986339798"
+      ],
+      "candidate_monthly_min_php": "8529925.668352423",
+      "candidate_monthly_max_php": "13607086.221825503",
+      "publication_approved": false
+    },
+    {
+      "model_id": "prophet_cp0.05_sp1.0",
+      "configuration": {
+        "changepoint_prior_scale": 0.05,
+        "family": "prophet",
+        "model_id": "prophet_cp0.05_sp1.0",
+        "seasonality_prior_scale": 1.0
+      },
+      "inherited_development_metrics": {
+        "bias": 2250157.1471124236,
+        "mae": 3515219.2459510523,
+        "n": 60,
+        "normalized_bias": 60.57705716036041,
+        "reason": null,
+        "rmse": 4205644.294508165,
+        "wape": 94.63411809545798
+      },
+      "inherited_2025_retrospective_audit_metrics": {
+        "bias": -11127450.95290786,
+        "mae": 11148853.270395255,
+        "n": 12,
+        "normalized_bias": -72.02357121651234,
+        "reason": null,
+        "rmse": 12924999.86144402,
+        "wape": 72.16209991857315
+      },
+      "candidate_2026_total_php": "136994201.012618840",
+      "candidate_monthly_values_php": [
+        "13296078.74365499",
+        "11192215.776117636",
+        "8220296.981079345",
+        "9345331.520495983",
+        "13344609.438345658",
+        "13891364.99699304",
+        "10847618.189714527",
+        "9719991.042091187",
+        "11417288.638666447",
+        "11826038.09425517",
+        "11188447.493371142",
+        "12704920.097833715"
+      ],
+      "candidate_monthly_min_php": "8220296.981079345",
+      "candidate_monthly_max_php": "13891364.99699304",
+      "publication_approved": false
+    },
+    {
+      "model_id": "prophet_cp0.05_sp10.0",
+      "configuration": {
+        "changepoint_prior_scale": 0.05,
+        "family": "prophet",
+        "model_id": "prophet_cp0.05_sp10.0",
+        "seasonality_prior_scale": 10.0
+      },
+      "inherited_development_metrics": {
+        "bias": 2264550.0554218534,
+        "mae": 3522034.0227917316,
+        "n": 60,
+        "normalized_bias": 60.96453233314247,
+        "reason": null,
+        "rmse": 4206001.866887689,
+        "wape": 94.81758044907303
+      },
+      "inherited_2025_retrospective_audit_metrics": {
+        "bias": -11140063.308339627,
+        "mae": 11159164.568498785,
+        "n": 12,
+        "normalized_bias": -72.10520598475281,
+        "reason": null,
+        "rmse": 12935956.1620304,
+        "wape": 72.2288408564966
+      },
+      "candidate_2026_total_php": "137080753.625719963",
+      "candidate_monthly_values_php": [
+        "13304851.52163901",
+        "11198623.283831952",
+        "8223901.499317648",
+        "9350223.58600456",
+        "13353526.755107991",
+        "13900975.058640912",
+        "10854385.11348795",
+        "9725660.358654045",
+        "11424692.656115849",
+        "11834138.198461432",
+        "11196093.981490912",
+        "12713681.612967702"
+      ],
+      "candidate_monthly_min_php": "8223901.499317648",
+      "candidate_monthly_max_php": "13900975.058640912",
+      "publication_approved": false
+    },
+    {
+      "model_id": "prophet_cp0.1_sp0.1",
+      "configuration": {
+        "changepoint_prior_scale": 0.1,
+        "family": "prophet",
+        "model_id": "prophet_cp0.1_sp0.1",
+        "seasonality_prior_scale": 0.1
+      },
+      "inherited_development_metrics": {
+        "bias": 2225145.693364905,
+        "mae": 3499652.5768063744,
+        "n": 60,
+        "normalized_bias": 59.90371740483647,
+        "reason": null,
+        "rmse": 4179654.776353706,
+        "wape": 94.2150438064539
+      },
+      "inherited_2025_retrospective_audit_metrics": {
+        "bias": -11164525.712250967,
+        "mae": 11211532.501051417,
+        "n": 12,
+        "normalized_bias": -72.26354141105051,
+        "reason": null,
+        "rmse": 12969170.206737965,
+        "wape": 72.56779768817604
+      },
+      "candidate_2026_total_php": "200576163.076731460",
+      "candidate_monthly_values_php": [
+        "17000114.40191782",
+        "15451910.811094578",
+        "12943017.22229331",
+        "14191980.380064784",
+        "18120741.028588776",
+        "18881254.345026225",
+        "16304021.132127445",
+        "15520360.64851673",
+        "17352208.210040573",
+        "17941266.122762185",
+        "17570697.42073967",
+        "19298591.353559364"
+      ],
+      "candidate_monthly_min_php": "12943017.22229331",
+      "candidate_monthly_max_php": "19298591.353559364",
+      "publication_approved": false
+    },
+    {
+      "model_id": "prophet_cp0.1_sp1.0",
+      "configuration": {
+        "changepoint_prior_scale": 0.1,
+        "family": "prophet",
+        "model_id": "prophet_cp0.1_sp1.0",
+        "seasonality_prior_scale": 1.0
+      },
+      "inherited_development_metrics": {
+        "bias": 2262643.465582324,
+        "mae": 3523434.779481502,
+        "n": 60,
+        "normalized_bias": 60.9132045395087,
+        "reason": null,
+        "rmse": 4210355.217431969,
+        "wape": 94.85529057886234
+      },
+      "inherited_2025_retrospective_audit_metrics": {
+        "bias": -11135003.154652154,
+        "mae": 11155270.254011352,
+        "n": 12,
+        "normalized_bias": -72.07245361936215,
+        "reason": null,
+        "rmse": 12931663.388775252,
+        "wape": 72.20363450528355
+      },
+      "candidate_2026_total_php": "201307487.476447299",
+      "candidate_monthly_values_php": [
+        "17259195.053103022",
+        "15542643.46900029",
+        "12772735.55895754",
+        "14099130.660587588",
+        "18356534.048782676",
+        "19156413.428358912",
+        "16310926.150787104",
+        "15422262.33984635",
+        "17392094.07561643",
+        "18005420.503946893",
+        "17566954.974498384",
+        "19423177.21296211"
+      ],
+      "candidate_monthly_min_php": "12772735.55895754",
+      "candidate_monthly_max_php": "19423177.21296211",
+      "publication_approved": false
+    },
+    {
+      "model_id": "prophet_cp0.1_sp10.0",
+      "configuration": {
+        "changepoint_prior_scale": 0.1,
+        "family": "prophet",
+        "model_id": "prophet_cp0.1_sp10.0",
+        "seasonality_prior_scale": 10.0
+      },
+      "inherited_development_metrics": {
+        "bias": 2265122.3587660226,
+        "mae": 3527663.963427195,
+        "n": 60,
+        "normalized_bias": 60.97993945812362,
+        "reason": null,
+        "rmse": 4216057.434662053,
+        "wape": 94.96914552359306
+      },
+      "inherited_2025_retrospective_audit_metrics": {
+        "bias": -11166641.904228443,
+        "mae": 11181552.735188873,
+        "n": 12,
+        "normalized_bias": -72.2772386813636,
+        "reason": null,
+        "rmse": 12959317.882023651,
+        "wape": 72.3737505689577
+      },
+      "candidate_2026_total_php": "201552747.721621725",
+      "candidate_monthly_values_php": [
+        "17280205.625563677",
+        "15562852.239614634",
+        "12790182.292723367",
+        "14117297.558632681",
+        "18378454.00365253",
+        "19179002.973679606",
+        "16330766.137096021",
+        "15441308.264268002",
+        "17412979.69053755",
+        "18026513.546522927",
+        "17587323.369983383",
+        "19445862.019347347"
+      ],
+      "candidate_monthly_min_php": "12790182.292723367",
+      "candidate_monthly_max_php": "19445862.019347347",
+      "publication_approved": false
+    },
+    {
+      "model_id": "sarima_ar_seasonal",
+      "configuration": {
+        "family": "sarima",
+        "maxiter": 200,
+        "model_id": "sarima_ar_seasonal",
+        "order": [
+          1,
+          0,
+          0
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          0,
+          12
+        ],
+        "trend": "c"
+      },
+      "inherited_development_metrics": {
+        "bias": 2312777.424022888,
+        "mae": 3961537.7108933656,
+        "n": 60,
+        "normalized_bias": 62.26287368151792,
+        "reason": null,
+        "rmse": 4497831.882989859,
+        "wape": 106.64957185931193
+      },
+      "inherited_2025_retrospective_audit_metrics": {
+        "bias": -9785236.698096426,
+        "mae": 10419009.696578553,
+        "n": 12,
+        "normalized_bias": -63.33595134936145,
+        "reason": null,
+        "rmse": 12152629.142720563,
+        "wape": 67.43811229210203
+      },
+      "candidate_2026_total_php": "91547424.3162287540",
+      "candidate_monthly_values_php": [
+        "14630268.603532366",
+        "10587898.627472086",
+        "9557055.312629413",
+        "8217223.777601427",
+        "6133606.8007805515",
+        "6537721.253482156",
+        "5872022.695766969",
+        "6962083.557588257",
+        "5754893.6508463165",
+        "6559823.86673619",
+        "5289502.909745172",
+        "5445323.26004785"
+      ],
+      "candidate_monthly_min_php": "5289502.909745172",
+      "candidate_monthly_max_php": "14630268.603532366",
+      "publication_approved": false
+    },
+    {
+      "model_id": "sarima_airline",
+      "configuration": {
+        "family": "sarima",
+        "maxiter": 200,
+        "model_id": "sarima_airline",
+        "order": [
+          0,
+          1,
+          1
+        ],
+        "seasonal_order": [
+          0,
+          1,
+          1,
+          12
+        ],
+        "trend": "n"
+      },
+      "inherited_development_metrics": {
+        "bias": 1644738.1644641974,
+        "mae": 3264314.4285409255,
+        "n": 60,
+        "normalized_bias": 44.27841758982534,
+        "reason": null,
+        "rmse": 4277834.4989659535,
+        "wape": 87.87944521158067
+      },
+      "inherited_2025_retrospective_audit_metrics": {
+        "bias": -9473448.964251125,
+        "mae": 9791473.905370826,
+        "n": 12,
+        "normalized_bias": -61.31787316163654,
+        "reason": null,
+        "rmse": 11464941.115276972,
+        "wape": 63.376322315202685
+      },
+      "candidate_2026_total_php": "268569721.558909729",
+      "candidate_monthly_values_php": [
+        "22776774.81421093",
+        "23316175.31557258",
+        "18359843.563939393",
+        "18558946.392993953",
+        "26192246.121414065",
+        "23560962.884767678",
+        "22554015.410332035",
+        "20218879.733092956",
+        "23208317.059010606",
+        "21528054.04656084",
+        "23290855.719218105",
+        "25004650.497796588"
+      ],
+      "candidate_monthly_min_php": "18359843.563939393",
+      "candidate_monthly_max_php": "26192246.121414065",
+      "publication_approved": false
+    },
+    {
+      "model_id": "ridge_direct_a1",
+      "configuration": {
+        "alpha": 1,
+        "family": "ridge",
+        "minimum_examples": 12,
+        "model_id": "ridge_direct_a1",
+        "strategy": "direct"
+      },
+      "inherited_development_metrics": {
+        "bias": 2509922.5485194786,
+        "mae": 4465265.439273276,
+        "n": 60,
+        "normalized_bias": 67.5702680965444,
+        "reason": null,
+        "rmse": 5280350.984835343,
+        "wape": 120.21055511529774
+      },
+      "inherited_2025_retrospective_audit_metrics": {
+        "bias": -9495039.451723784,
+        "mae": 11327417.246424383,
+        "n": 12,
+        "normalized_bias": -61.45761981328815,
+        "reason": null,
+        "rmse": 12783853.383892115,
+        "wape": 73.31787362619635
+      },
+      "candidate_2026_total_php": "64120705.3707803821",
+      "candidate_monthly_values_php": [
+        "18443669.62539882",
+        "15138169.678578965",
+        "16267053.220876811",
+        "19111305.805232592",
+        "15072320.860394323",
+        "14030661.801409677",
+        "3371972.055769735",
+        "-2304730.4320190884",
+        "-7675539.487154352",
+        "-2914572.4892228795",
+        "-6372598.690924041",
+        "-18047006.57756018"
+      ],
+      "candidate_monthly_min_php": "-18047006.57756018",
+      "candidate_monthly_max_php": "19111305.805232592",
+      "publication_approved": false
+    },
+    {
+      "model_id": "ridge_direct_a10",
+      "configuration": {
+        "alpha": 10,
+        "family": "ridge",
+        "minimum_examples": 12,
+        "model_id": "ridge_direct_a10",
+        "strategy": "direct"
+      },
+      "inherited_development_metrics": {
+        "bias": 2621942.210536472,
+        "mae": 4142558.8822416747,
+        "n": 60,
+        "normalized_bias": 70.58597812275111,
+        "reason": null,
+        "rmse": 4745588.7154356055,
+        "wape": 111.52288919986924
+      },
+      "inherited_2025_retrospective_audit_metrics": {
+        "bias": -9693512.399174463,
+        "mae": 11226510.272194743,
+        "n": 12,
+        "normalized_bias": -62.742256386907876,
+        "reason": null,
+        "rmse": 12667058.665816542,
+        "wape": 72.66474285299154
+      },
+      "candidate_2026_total_php": "76046150.2802776684",
+      "candidate_monthly_values_php": [
+        "18655320.350670416",
+        "15968361.002766127",
+        "16566315.280834513",
+        "19081263.125212617",
+        "15613358.216300026",
+        "14710762.160829592",
+        "5468496.5757444315",
+        "-614974.1984164491",
+        "-5750786.782073926",
+        "-2460339.560198524",
+        "-5524983.249625275",
+        "-15666642.64176588"
+      ],
+      "candidate_monthly_min_php": "-15666642.64176588",
+      "candidate_monthly_max_php": "19081263.125212617",
+      "publication_approved": false
+    },
+    {
+      "model_id": "ridge_recursive_a1",
+      "configuration": {
+        "alpha": 1,
+        "family": "ridge",
+        "minimum_examples": 12,
+        "model_id": "ridge_recursive_a1",
+        "strategy": "recursive"
+      },
+      "inherited_development_metrics": {
+        "bias": 2455629.5969867897,
+        "mae": 4123722.120998887,
+        "n": 60,
+        "normalized_bias": 66.10863363575973,
+        "reason": null,
+        "rmse": 4647192.292614293,
+        "wape": 111.01577992353057
+      },
+      "inherited_2025_retrospective_audit_metrics": {
+        "bias": -9304224.705358958,
+        "mae": 10876676.33234437,
+        "n": 12,
+        "normalized_bias": -60.22255173416294,
+        "reason": null,
+        "rmse": 12321155.130956491,
+        "wape": 70.40040668225497
+      },
+      "candidate_2026_total_php": "243141735.810398815",
+      "candidate_monthly_values_php": [
+        "18443669.62539882",
+        "17598659.006406393",
+        "21042195.14678202",
+        "23357705.773989514",
+        "20835698.265045617",
+        "20207024.139257472",
+        "18975037.79973247",
+        "21942329.909901068",
+        "20784178.257126227",
+        "21825064.73705443",
+        "19171057.31557627",
+        "18959115.834128514"
+      ],
+      "candidate_monthly_min_php": "17598659.006406393",
+      "candidate_monthly_max_php": "23357705.773989514",
+      "publication_approved": false
+    },
+    {
+      "model_id": "ridge_recursive_a10",
+      "configuration": {
+        "alpha": 10,
+        "family": "ridge",
+        "minimum_examples": 12,
+        "model_id": "ridge_recursive_a10",
+        "strategy": "recursive"
+      },
+      "inherited_development_metrics": {
+        "bias": 2403248.284126236,
+        "mae": 3958004.571738221,
+        "n": 60,
+        "normalized_bias": 64.69846288952522,
+        "reason": null,
+        "rmse": 4442914.4876304045,
+        "wape": 106.5544553147491
+      },
+      "inherited_2025_retrospective_audit_metrics": {
+        "bias": -9453883.670554144,
+        "mae": 10784789.509068886,
+        "n": 12,
+        "normalized_bias": -61.19123478507393,
+        "reason": null,
+        "rmse": 12252973.379952656,
+        "wape": 69.8056597642008
+      },
+      "candidate_2026_total_php": "237100913.207110810",
+      "candidate_monthly_values_php": [
+        "18655320.350670416",
+        "17710428.02366881",
+        "20452730.821217395",
+        "21252470.83346448",
+        "19853216.662356485",
+        "20067234.030648652",
+        "19013871.029120773",
+        "20885991.292865958",
+        "19875580.580255523",
+        "21058681.05073597",
+        "19287224.456524175",
+        "18988164.075582173"
+      ],
+      "candidate_monthly_min_php": "17710428.02366881",
+      "candidate_monthly_max_php": "21252470.83346448",
+      "publication_approved": false
+    }
+  ],
+  "source_hashes": {
+    "run": "e25c713bb7faee9cf9020f9064fdf016d18df3793131e1ab43bdfcd169d61b6d",
+    "projections": "9a93884535cf705202958e913cd809f2563811cc62bd56d013ecb5d50c182608",
+    "independent_qa": "c24e59aeb1b1a7de6cc0540a3afc1df79424d02902c5e6fff018d295c32a9780",
+    "plot_receipt": "65ce2f0cecb9101cb3d806e2aaaca337c0e25144e2e343ad103d9e24836733f7",
+    "builder": "7619a4c562afe943b9ee638eb98a7ae6ff8ed2e96663a1c2929b4f34955caa1b"
+  }
+}

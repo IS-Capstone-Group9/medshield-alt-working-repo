@@ -143,7 +143,7 @@ test.skip('legacy overview year chart is superseded by descriptive period window
   await page.screenshot({ path: 'test-results/historical-net-sales-revenue.png', fullPage: true })
 })
 
-test('continuous years, shared peso scale, peso movement, baseline change and export agree', async ({ page }) => {
+test('continuous years, shared peso scale, peso movement, baseline change and export agree', async ({ page }, testInfo) => {
   await page.evaluate(data => {
     const app = window as any
     app.applyDatasetPatch(data)
@@ -158,14 +158,24 @@ test('continuous years, shared peso scale, peso movement, baseline change and ex
   expect(revenue.datasets[1].axis).toBe('revenue')
   expect(revenue.axes.grossProfit).toBeUndefined()
   expect(revenue.axes.revenue.position).toBe('left')
-  const growth = await chartData(page, 'growthChart')
+  let growth = await chartData(page, 'growthChart')
   expect(growth.labels).toEqual(['Jan 25', 'Feb 25', 'Mar 25', 'Apr 25', 'May 25', 'Jun 25', 'Jul 25', 'Aug 25', 'Sep 25', 'Oct 25', 'Nov 25', 'Dec 25'])
   expect(growth.datasets[0].data).toEqual(Array(12).fill(50))
-  expect(growth.datasets[1].data).toEqual(Array(12).fill(1_000_000))
+  expect(growth.datasets).toHaveLength(1)
+  expect(Object.keys(growth.axes).sort()).toEqual(['growth', 'x'])
   await expect(page.locator('#salesGrowthSummary')).toContainText('50.0%')
   await expect(page.locator('#salesGrowthSummary')).toContainText('36,000,000')
   const downloadPromise = page.waitForEvent('download')
   await page.getByRole('tab',{name:'Growth',exact:true}).click()
+  await page.selectOption('#salesGrowthMeasureSelect','pesos')
+  growth = await chartData(page, 'growthChart')
+  expect(growth.datasets[0].data).toEqual(Array(12).fill(1_000_000))
+  await expect(page.locator('#salesGrowthTable')).not.toBeVisible()
+  await page.locator('#salesGrowthDetails > summary').click()
+  await expect(page.locator('#salesGrowthTable')).toBeVisible()
+  await expect(page.locator('#marginChart')).not.toBeVisible()
+  await page.locator('#salesMarginDetails > summary').click()
+  await expect(page.locator('#marginChart')).toBeVisible()
   await page.getByRole('button', { name: 'Export Growth CSV' }).click()
   const download = await downloadPromise
   const csv = await readFile((await download.path())!, 'utf8')
@@ -173,7 +183,7 @@ test('continuous years, shared peso scale, peso movement, baseline change and ex
   expect(csv).toContain('50.0%')
   expect(csv).toContain('1,000,000')
   await page.locator('[data-metric-definitions] summary').click()
-  await page.screenshot({ path: 'test-results/section-2-sales-diagnostics.png', fullPage: true })
+  await page.screenshot({ path: testInfo.outputPath('sales-growth-details.png'), fullPage: true })
 })
 
 test('custom full-year range excludes estimated prior-year values from observed YoY', async ({ page }) => {
@@ -200,7 +210,11 @@ test('custom full-year range uses matched prior months; zero baseline keeps nomi
   let growth = await chartData(page, 'growthChart')
   expect(growth.labels).toEqual(['Jan 25', 'Feb 25', 'Mar 25', 'Apr 25', 'May 25', 'Jun 25', 'Jul 25', 'Aug 25', 'Sep 25', 'Oct 25', 'Nov 25', 'Dec 25'])
   expect(growth.datasets[0].data).toEqual([100, null, 100, null, null, null, null, null, null, null, null, null])
-  expect(growth.datasets[1].data).toEqual([1_000_000, null, 1_000_000, null, null, null, null, null, null, null, null, null])
+  await page.getByRole('tab',{name:'Growth',exact:true}).click()
+  await page.selectOption('#salesGrowthMeasureSelect','pesos')
+  growth = await chartData(page, 'growthChart')
+  expect(growth.datasets[0].data).toEqual([1_000_000, null, 1_000_000, null, null, null, null, null, null, null, null, null])
+  await page.selectOption('#salesGrowthMeasureSelect','percent')
   await expect(page.locator('#salesGrowthSummary')).toContainText('2/12 periods matched')
   await page.evaluate(() => (window as any).applyDatasetPatch({ monthly: [
     { period: '2024-01', revenue: 0, income: 0 },
@@ -208,7 +222,9 @@ test('custom full-year range uses matched prior months; zero baseline keeps nomi
   ] }))
   growth = await chartData(page, 'growthChart')
   expect(growth.datasets[0].data).toEqual([null, null, null, null, null, null, null, null, null, null, null, null])
-  expect(growth.datasets[1].data).toEqual([500, null, null, null, null, null, null, null, null, null, null, null])
+  await page.selectOption('#salesGrowthMeasureSelect','pesos')
+  growth = await chartData(page, 'growthChart')
+  expect(growth.datasets[0].data).toEqual([500, null, null, null, null, null, null, null, null, null, null, null])
   expect((await chartData(page, 'revenueDetailChart')).datasets[1].data[0]).toBe(-20)
   await expect(page.locator('#salesGrowthSummary')).toContainText('Unavailable')
 })
@@ -251,8 +267,79 @@ test('annual YoY compares overlapping observed months instead of unequal yearly 
   })
   const growth = await chartData(page, 'growthChart')
   expect(growth.datasets[0].data).toEqual([null, 100])
-  expect(growth.datasets[1].data).toEqual([null, 100])
+  await page.getByRole('tab',{name:'Growth',exact:true}).click()
+  await page.selectOption('#salesGrowthMeasureSelect','pesos')
+  expect((await chartData(page, 'growthChart')).datasets[0].data).toEqual([null, 100])
   expect(growth.labels).toContain('2025 Partial')
   await expect(page.locator('#salesGrowthTable')).toContainText('1/12 months matched')
   await expect(page.locator('#salesGrowthSummary')).toContainText('Annual comparisons include only months observed in both years')
+})
+
+test('sales measure selector preserves observed values and prior-year scope on one peso scale', async ({ page }, testInfo) => {
+  await page.evaluate(() => {
+    const app = window as any
+    app.applyDatasetPatch({ monthly: [
+      {period:'2024-01',revenue:3000,income:50}, {period:'2024-02',revenue:4000,income:60},
+      {period:'2025-01',revenue:1000,income:20}, {period:'2025-02',revenue:2000,income:10},
+      {period:'2025-03',revenue:null,income:null,missing:true},
+    ], year_summary: [] })
+    app.setDescriptivePeriod('custom'); app.setCustomDateRange('2025-01-01','2025-03-31')
+    app.setDescriptiveGranularity('monthly'); app.setDescriptiveComparisonMode('yoy')
+  })
+  const state = () => page.evaluate(() => {
+    const chart = (window as any).Chart.getChart(document.getElementById('revenueDetailChart'))
+    return { values:chart.data.datasets.map((d:any)=>d.data), visible:chart.data.datasets.map((_:unknown,i:number)=>chart.isDatasetVisible(i)),
+      max:chart.scales.revenue.max, axes:Object.keys(chart.scales) }
+  })
+  const sales = await state()
+  expect(sales.visible).toEqual([true,false,true,false])
+  await expect(page.locator('#salesTrendReading')).toContainText('recorded sales rose by ₱1,000')
+  await page.selectOption('#salesTrendMeasureSelect','profit')
+  const profit = await state()
+  expect(profit.visible).toEqual([false,true,false,true])
+  expect(profit.values).toEqual(sales.values)
+  expect(profit.max).toBeLessThan(100)
+  await expect(page.locator('#salesTrendReading')).toContainText('recorded gross profit fell by ₱10')
+  await page.selectOption('#salesTrendMeasureSelect','both')
+  const both = await state()
+  expect(both.visible).toEqual([true,true,true,true])
+  expect(both.values).toEqual(sales.values)
+  expect(both.axes.sort()).toEqual(['revenue','x'])
+  expect(both.max).toBeGreaterThanOrEqual(4000)
+  await expect(page.locator('#salesTrendReadCue')).toContainText('gaps stay blank')
+  await page.setViewportSize({width:375,height:900})
+  await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+  await expect.poll(() => page.evaluate(() => {
+    const chart = (window as any).Chart.getChart(document.getElementById('revenueDetailChart'))
+    return chart.chartArea.width > 65 && chart.chartArea.height > 80
+  })).toBe(true)
+  await page.screenshot({path:testInfo.outputPath('sales-trend-mobile.png'),fullPage:true})
+})
+
+test('movement has an explanation without empty axes and daily trend remains sales-only', async ({ page }) => {
+  await page.evaluate(() => {
+    const app = window as any
+    app.applyDatasetPatch({monthly:[{period:'2025-01',revenue:100,income:20}],year_summary:[]})
+    app.setDescriptivePeriod('custom'); app.setCustomDateRange('2025-01-01','2025-01-31')
+    app.setDescriptiveGranularity('monthly')
+  })
+  await expect(page.locator('#salesMovementChart')).not.toBeVisible()
+  await expect(page.locator('#salesMovementCaption')).toContainText('No adjacent observed full-month pairs')
+  expect(await page.evaluate(() => (window as any).Chart.getChart(document.getElementById('salesMovementChart')))).toBeUndefined()
+  await page.evaluate(() => {
+    const app = window as any
+    app.applyDatasetPatch({monthly:[{period:'2025-01',revenue:100,income:20},{period:'2025-02',revenue:80,income:10}],year_summary:[]})
+    app.setCustomDateRange('2025-01-01','2025-02-28')
+  })
+  await expect(page.locator('#salesMovementChart')).toBeVisible()
+  expect((await chartData(page,'salesMovementChart')).datasets[0].data).toEqual([null,-20])
+  await page.evaluate(() => {
+    const app = window as any
+    app.setSalesSectorsData({rows:[{date:'2025-01-15',period:'2025-01',revenue:10,income:2}],source:{file:'synthetic fixture',excluded:{}}})
+    app.setCustomDateRange('2025-01-15','2025-01-16'); app.setDescriptiveGranularity('daily')
+  })
+  await expect(page.locator('#salesTrendMeasureSelect')).toBeDisabled()
+  await expect(page.locator('#salesTrendMeasureSelect')).toHaveValue('sales')
+  expect((await chartData(page,'revenueDetailChart')).datasets.every((dataset: {label: string}) => !dataset.label.includes('Gross Profit'))).toBe(true)
+  await expect(page.locator('#salesMovementChart')).not.toBeVisible()
 })

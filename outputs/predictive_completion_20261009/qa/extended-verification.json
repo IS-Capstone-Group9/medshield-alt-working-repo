@@ -1,0 +1,2619 @@
+{
+  "status": "PASS",
+  "generated_at": "2026-10-09T22:08:18.263136+08:00",
+  "method": "Standalone Decimal reconciliation; no predictive package imports.",
+  "run_id": "eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a",
+  "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+  "fact_delta_version": 20,
+  "input_sha256": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba",
+  "run_sha256": "9889baea07a1f222edc9d2d2576fefc0d2be4bc8e52dc4d9a3ff9919e0056f45",
+  "verifier_sha256": "7d70a7a84fad67e34c8620cb7f9da8b52d42ad64727e6b421615eb5375ddbd1b",
+  "current_predictive_source_sha256": "9da2a059230a7cc48e5982118fe852ec46375b5d96a89950b690312334270c8c",
+  "current_predictive_source_matches_run": true,
+  "current_code_verification_required": true,
+  "source_files_sha256": {
+    "services\\analytics_service\\predictive\\__init__.py": "8bbd19aa7d775fa2b3442d00a592a2b6e2c5768560c991181321d41f2d7b4e1a",
+    "services\\analytics_service\\predictive\\__main__.py": "8c9ae1b025b7dd6053a4b33c31cedb1e02906ac9614ba15ba4bd1c23239b4b91",
+    "services\\analytics_service\\predictive\\contracts.py": "a6ece04850ba397a84c72309043c9ab6c83c3ee7a4fc1fe4b63f1b82b8b86d3a",
+    "services\\analytics_service\\predictive\\diagnose.py": "81c71e35841416be56e4b40c23536d048ad9da7ba7cb0ed68574f211b970321f",
+    "services\\analytics_service\\predictive\\engine.py": "cdc5a39363c69f500897e849f2c37ab42c401ed789b6890e6abab808cbbee4c8",
+    "services\\analytics_service\\predictive\\extended_experiment.py": "3d88a6aa92bb0b03140ce9830512cd1292d4a6d0fe85ad8bdc190d92b64f3b42",
+    "services\\analytics_service\\predictive\\metrics.py": "4841243a2b262d71845596d4d72b44a7aa7447602003cfdb79b971e1d7ac8baa",
+    "services\\analytics_service\\predictive\\models.py": "2b2b6495e3ff54b7613800fded65832efc46fc1018ad2fe09f678baf857c4ac9",
+    "services\\analytics_service\\predictive\\prepare_coverage.py": "92f9d0250e48aa746743439fe4d6293e50688682a06139b92d363e9dd6c391e1",
+    "services\\analytics_service\\predictive\\release.py": "baa0c309e28aba1f58e50ec88353db2826e6dadac961d22dee4f0e4088a7b099",
+    "services\\analytics_service\\predictive\\rolling_experiment.py": "3f865126798671a5be0c331adb0db81c79aabba5d0d52d21d237e9d57a1fc5aa"
+  },
+  "money_tolerance_php": "0.000001",
+  "rate_tolerance_percentage_points": "1E-9",
+  "prediction_count": 1524,
+  "stage_counts": {
+    "development": 1260,
+    "retrospective_audit": 252,
+    "future": 12
+  },
+  "metric_groups_recomputed": 441,
+  "model_metrics": [
+    {
+      "model_id": "last_value",
+      "development": {
+        "n": 60,
+        "mae": 3090470.9348333334,
+        "rmse": 4300604.366031157,
+        "bias": 46774.566166666664,
+        "wape": 83.19935997006957,
+        "normalized_bias": 1.2592300817591118
+      },
+      "retrospective_audit": {
+        "n": 12,
+        "mae": 5834383.001666667,
+        "rmse": 6956031.7224267535,
+        "bias": 1295235.4233333333,
+        "wape": 37.76364428864427,
+        "normalized_bias": 8.383544546670832
+      }
+    },
+    {
+      "model_id": "seasonal_naive",
+      "development": {
+        "n": 60,
+        "mae": 3487809.8063333333,
+        "rmse": 5434895.68678964,
+        "bias": 1731923.597,
+        "wape": 93.89622154783831,
+        "normalized_bias": 46.625558960395665
+      },
+      "retrospective_audit": {
+        "n": 12,
+        "mae": 11261458.43,
+        "rmse": 13000988.07662962,
+        "bias": -11261458.43,
+        "wape": 72.89094840026605,
+        "normalized_bias": -72.89094840026605
+      }
+    },
+    {
+      "model_id": "mean_3",
+      "development": {
+        "n": 60,
+        "mae": 3533478.1743888888,
+        "rmse": 4649384.259546953,
+        "bias": 1104448.4614999997,
+        "wape": 95.12567138678483,
+        "normalized_bias": 29.733140047047076
+      },
+      "retrospective_audit": {
+        "n": 12,
+        "mae": 9212416.360555556,
+        "rmse": 10647446.498662485,
+        "bias": -8164519.239999999,
+        "wape": 59.62831277609411,
+        "normalized_bias": -52.845690843243595
+      }
+    },
+    {
+      "model_id": "mean_6",
+      "development": {
+        "n": 60,
+        "mae": 3473386.0127222226,
+        "rmse": 4419745.38215297,
+        "bias": 1317931.7795000002,
+        "wape": 93.50791490393533,
+        "normalized_bias": 35.480379156042204
+      },
+      "retrospective_audit": {
+        "n": 12,
+        "mae": 10526958.881111111,
+        "rmse": 12165944.389409812,
+        "bias": -10064862.66,
+        "wape": 68.13682449607839,
+        "normalized_bias": -65.14585915900987
+      }
+    },
+    {
+      "model_id": "ets_none",
+      "development": {
+        "n": 60,
+        "mae": 3445030.299204684,
+        "rmse": 4264377.522909957,
+        "bias": 2104348.0188410557,
+        "wape": 92.74454347417584,
+        "normalized_bias": 56.651692254566264
+      },
+      "retrospective_audit": {
+        "n": 12,
+        "mae": 10501032.199994955,
+        "rmse": 12194034.953444043,
+        "bias": -10188736.306856176,
+        "wape": 67.96901138491035,
+        "normalized_bias": -65.94764408387297
+      }
+    },
+    {
+      "model_id": "ets_damped",
+      "development": {
+        "n": 60,
+        "mae": 3725795.377208932,
+        "rmse": 4511523.746495721,
+        "bias": 2338624.7056031036,
+        "wape": 100.30309208520164,
+        "normalized_bias": 62.958714972306865
+      },
+      "retrospective_audit": {
+        "n": 12,
+        "mae": 10426697.234025344,
+        "rmse": 12335068.267822789,
+        "bias": -10294862.191486355,
+        "wape": 67.48787066921119,
+        "normalized_bias": -66.63455479162852
+      }
+    },
+    {
+      "model_id": "prophet_cp0.01_sp0.1",
+      "development": {
+        "n": 60,
+        "mae": 3483090.9311365355,
+        "rmse": 4179834.104822966,
+        "bias": 2187041.5900186393,
+        "wape": 93.76918349945316,
+        "normalized_bias": 58.877907074472155
+      },
+      "retrospective_audit": {
+        "n": 12,
+        "mae": 11196043.735291732,
+        "rmse": 12952644.19315397,
+        "bias": -11143564.925568352,
+        "wape": 72.46754505812899,
+        "normalized_bias": -72.12787056255353
+      }
+    },
+    {
+      "model_id": "prophet_cp0.01_sp1.0",
+      "development": {
+        "n": 60,
+        "mae": 3504558.428526304,
+        "rmse": 4196167.552915861,
+        "bias": 2238319.968108259,
+        "wape": 94.34711549773102,
+        "normalized_bias": 60.25838543111125
+      },
+      "retrospective_audit": {
+        "n": 12,
+        "mae": 11151987.094870958,
+        "rmse": 12928195.128439752,
+        "bias": -11131022.714331886,
+        "wape": 72.1823839199371,
+        "normalized_bias": -72.04668980983442
+      }
+    },
+    {
+      "model_id": "prophet_cp0.01_sp10.0",
+      "development": {
+        "n": 60,
+        "mae": 3474665.617745016,
+        "rmse": 4171161.1173614818,
+        "bias": 2203885.9516224703,
+        "wape": 93.54236347865285,
+        "normalized_bias": 59.33137844957787
+      },
+      "retrospective_audit": {
+        "n": 12,
+        "mae": 11140059.960804801,
+        "rmse": 12916026.392890785,
+        "bias": -11117390.272825914,
+        "wape": 72.1051843174892,
+        "normalized_bias": -71.95845242952012
+      }
+    },
+    {
+      "model_id": "prophet_cp0.05_sp0.1",
+      "development": {
+        "n": 60,
+        "mae": 3511337.420114153,
+        "rmse": 4187454.567417247,
+        "bias": 2241495.629419114,
+        "wape": 94.52961446738465,
+        "normalized_bias": 60.343878223024234
+      },
+      "retrospective_audit": {
+        "n": 12,
+        "mae": 11218467.027590327,
+        "rmse": 12976769.234157583,
+        "bias": -11172901.763711685,
+        "wape": 72.61268212470529,
+        "normalized_bias": -72.3177562659573
+      }
+    },
+    {
+      "model_id": "prophet_cp0.05_sp1.0",
+      "development": {
+        "n": 60,
+        "mae": 3515219.2459510523,
+        "rmse": 4205644.294508165,
+        "bias": 2250157.1471124236,
+        "wape": 94.63411809545798,
+        "normalized_bias": 60.57705716036042
+      },
+      "retrospective_audit": {
+        "n": 12,
+        "mae": 11148853.270395255,
+        "rmse": 12924999.86144402,
+        "bias": -11127450.95290786,
+        "wape": 72.16209991857315,
+        "normalized_bias": -72.02357121651234
+      }
+    },
+    {
+      "model_id": "prophet_cp0.05_sp10.0",
+      "development": {
+        "n": 60,
+        "mae": 3522034.0227917316,
+        "rmse": 4206001.866887688,
+        "bias": 2264550.055421854,
+        "wape": 94.81758044907302,
+        "normalized_bias": 60.96453233314247
+      },
+      "retrospective_audit": {
+        "n": 12,
+        "mae": 11159164.568498787,
+        "rmse": 12935956.1620304,
+        "bias": -11140063.308339627,
+        "wape": 72.22884085649662,
+        "normalized_bias": -72.10520598475281
+      }
+    },
+    {
+      "model_id": "prophet_cp0.1_sp0.1",
+      "development": {
+        "n": 60,
+        "mae": 3499652.5768063744,
+        "rmse": 4179654.776353706,
+        "bias": 2225145.693364905,
+        "wape": 94.2150438064539,
+        "normalized_bias": 59.90371740483647
+      },
+      "retrospective_audit": {
+        "n": 12,
+        "mae": 11211532.501051415,
+        "rmse": 12969170.206737965,
+        "bias": -11164525.712250967,
+        "wape": 72.56779768817603,
+        "normalized_bias": -72.26354141105051
+      }
+    },
+    {
+      "model_id": "prophet_cp0.1_sp1.0",
+      "development": {
+        "n": 60,
+        "mae": 3523434.779481502,
+        "rmse": 4210355.217431969,
+        "bias": 2262643.465582324,
+        "wape": 94.85529057886234,
+        "normalized_bias": 60.913204539508705
+      },
+      "retrospective_audit": {
+        "n": 12,
+        "mae": 11155270.254011352,
+        "rmse": 12931663.388775254,
+        "bias": -11135003.154652154,
+        "wape": 72.20363450528355,
+        "normalized_bias": -72.07245361936215
+      }
+    },
+    {
+      "model_id": "prophet_cp0.1_sp10.0",
+      "development": {
+        "n": 60,
+        "mae": 3527663.963427195,
+        "rmse": 4216057.434662052,
+        "bias": 2265122.358766023,
+        "wape": 94.96914552359306,
+        "normalized_bias": 60.97993945812363
+      },
+      "retrospective_audit": {
+        "n": 12,
+        "mae": 11181552.735188873,
+        "rmse": 12959317.882023651,
+        "bias": -11166641.904228443,
+        "wape": 72.3737505689577,
+        "normalized_bias": -72.2772386813636
+      }
+    },
+    {
+      "model_id": "sarima_ar_seasonal",
+      "development": {
+        "n": 60,
+        "mae": 3961537.7108933656,
+        "rmse": 4497831.882989859,
+        "bias": 2312777.4240228874,
+        "wape": 106.64957185931193,
+        "normalized_bias": 62.26287368151792
+      },
+      "retrospective_audit": {
+        "n": 12,
+        "mae": 10419009.696578553,
+        "rmse": 12152629.142720563,
+        "bias": -9785236.698096426,
+        "wape": 67.43811229210203,
+        "normalized_bias": -63.33595134936145
+      }
+    },
+    {
+      "model_id": "sarima_airline",
+      "development": {
+        "n": 60,
+        "mae": 3264314.428540926,
+        "rmse": 4277834.4989659535,
+        "bias": 1644738.1644641974,
+        "wape": 87.87944521158067,
+        "normalized_bias": 44.27841758982534
+      },
+      "retrospective_audit": {
+        "n": 12,
+        "mae": 9791473.905370826,
+        "rmse": 11464941.11527697,
+        "bias": -9473448.964251125,
+        "wape": 63.376322315202685,
+        "normalized_bias": -61.31787316163654
+      }
+    },
+    {
+      "model_id": "ridge_direct_a1",
+      "development": {
+        "n": 60,
+        "mae": 4465265.439273276,
+        "rmse": 5280350.984835343,
+        "bias": 2509922.5485194786,
+        "wape": 120.21055511529774,
+        "normalized_bias": 67.57026809654438
+      },
+      "retrospective_audit": {
+        "n": 12,
+        "mae": 11327417.24642438,
+        "rmse": 12783853.383892117,
+        "bias": -9495039.451723784,
+        "wape": 73.31787362619633,
+        "normalized_bias": -61.45761981328815
+      }
+    },
+    {
+      "model_id": "ridge_direct_a10",
+      "development": {
+        "n": 60,
+        "mae": 4142558.8822416747,
+        "rmse": 4745588.7154356055,
+        "bias": 2621942.210536472,
+        "wape": 111.52288919986923,
+        "normalized_bias": 70.58597812275111
+      },
+      "retrospective_audit": {
+        "n": 12,
+        "mae": 11226510.272194743,
+        "rmse": 12667058.665816542,
+        "bias": -9693512.399174463,
+        "wape": 72.66474285299154,
+        "normalized_bias": -62.74225638690787
+      }
+    },
+    {
+      "model_id": "ridge_recursive_a1",
+      "development": {
+        "n": 60,
+        "mae": 4123722.120998887,
+        "rmse": 4647192.292614292,
+        "bias": 2455629.5969867897,
+        "wape": 111.01577992353057,
+        "normalized_bias": 66.10863363575974
+      },
+      "retrospective_audit": {
+        "n": 12,
+        "mae": 10876676.332344372,
+        "rmse": 12321155.13095649,
+        "bias": -9304224.705358958,
+        "wape": 70.40040668225497,
+        "normalized_bias": -60.22255173416295
+      }
+    },
+    {
+      "model_id": "ridge_recursive_a10",
+      "development": {
+        "n": 60,
+        "mae": 3958004.5717382208,
+        "rmse": 4442914.487630404,
+        "bias": 2403248.284126236,
+        "wape": 106.55445531474909,
+        "normalized_bias": 64.69846288952522
+      },
+      "retrospective_audit": {
+        "n": 12,
+        "mae": 10784789.509068886,
+        "rmse": 12252973.379952656,
+        "bias": -9453883.670554144,
+        "wape": 69.8056597642008,
+        "normalized_bias": -61.19123478507393
+      }
+    }
+  ],
+  "checks": [
+    {
+      "check": "Frozen input byte checksum",
+      "status": "PASS"
+    },
+    {
+      "check": "Run semantic input checksum",
+      "status": "PASS"
+    },
+    {
+      "check": "Run ID binds exact identity",
+      "status": "PASS"
+    },
+    {
+      "check": "Run/source manifest identity",
+      "status": "PASS"
+    },
+    {
+      "check": "Every retained artifact byte hash",
+      "status": "PASS",
+      "detail": {
+        "artifact_count": 10
+      }
+    },
+    {
+      "check": "predictions.json agrees with immutable run",
+      "status": "PASS"
+    },
+    {
+      "check": "evaluations.json agrees with immutable run",
+      "status": "PASS"
+    },
+    {
+      "check": "folds.json agrees with immutable run",
+      "status": "PASS"
+    },
+    {
+      "check": "model-cards.json agrees with immutable run",
+      "status": "PASS"
+    },
+    {
+      "check": "Run matches current predictive package bytes",
+      "status": "PASS"
+    },
+    {
+      "check": "Configurations have unique model IDs",
+      "status": "PASS"
+    },
+    {
+      "check": "Exactly one eligible company-month PHP series",
+      "status": "PASS"
+    },
+    {
+      "check": "Prediction keys unique per model/stage",
+      "status": "PASS"
+    },
+    {
+      "check": "All true calendar leads and forecast targets after origin",
+      "status": "PASS"
+    },
+    {
+      "check": "Historical actuals equal accepted frozen targets and future actuals are null",
+      "status": "PASS"
+    },
+    {
+      "check": "Model/run/source/grain/unit preserved",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value: exact intended development calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value: exact intended retrospective-audit calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value: development metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value: audit metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value: complete-model shared population",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value: scored comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value: common comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value: lead 1",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value: lead 10",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value: lead 11",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value: lead 12",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value: lead 2",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value: lead 3",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value: lead 4",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value: lead 5",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value: lead 6",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value: lead 7",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value: lead 8",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value: lead 9",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value: origin 2022-12",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value: origin 2023-03",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value: origin 2023-06",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value: origin 2023-09",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value: origin 2023-12",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive: exact intended development calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive: exact intended retrospective-audit calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive: development metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive: audit metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive: complete-model shared population",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive: scored comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive: common comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive: lead 1",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive: lead 10",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive: lead 11",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive: lead 12",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive: lead 2",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive: lead 3",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive: lead 4",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive: lead 5",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive: lead 6",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive: lead 7",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive: lead 8",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive: lead 9",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive: origin 2022-12",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive: origin 2023-03",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive: origin 2023-06",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive: origin 2023-09",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive: origin 2023-12",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3: exact intended development calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3: exact intended retrospective-audit calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3: development metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3: audit metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3: complete-model shared population",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3: scored comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3: common comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3: lead 1",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3: lead 10",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3: lead 11",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3: lead 12",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3: lead 2",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3: lead 3",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3: lead 4",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3: lead 5",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3: lead 6",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3: lead 7",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3: lead 8",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3: lead 9",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3: origin 2022-12",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3: origin 2023-03",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3: origin 2023-06",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3: origin 2023-09",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3: origin 2023-12",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6: exact intended development calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6: exact intended retrospective-audit calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6: development metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6: audit metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6: complete-model shared population",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6: scored comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6: common comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6: lead 1",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6: lead 10",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6: lead 11",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6: lead 12",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6: lead 2",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6: lead 3",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6: lead 4",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6: lead 5",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6: lead 6",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6: lead 7",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6: lead 8",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6: lead 9",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6: origin 2022-12",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6: origin 2023-03",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6: origin 2023-06",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6: origin 2023-09",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6: origin 2023-12",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none: exact intended development calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none: exact intended retrospective-audit calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none: development metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none: audit metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none: complete-model shared population",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none: scored comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none: common comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none: lead 1",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none: lead 10",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none: lead 11",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none: lead 12",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none: lead 2",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none: lead 3",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none: lead 4",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none: lead 5",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none: lead 6",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none: lead 7",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none: lead 8",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none: lead 9",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none: origin 2022-12",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none: origin 2023-03",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none: origin 2023-06",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none: origin 2023-09",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none: origin 2023-12",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped: exact intended development calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped: exact intended retrospective-audit calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped: development metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped: audit metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped: complete-model shared population",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped: scored comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped: common comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped: lead 1",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped: lead 10",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped: lead 11",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped: lead 12",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped: lead 2",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped: lead 3",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped: lead 4",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped: lead 5",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped: lead 6",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped: lead 7",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped: lead 8",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped: lead 9",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped: origin 2022-12",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped: origin 2023-03",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped: origin 2023-06",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped: origin 2023-09",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped: origin 2023-12",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1: exact intended development calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1: exact intended retrospective-audit calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1: development metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1: audit metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1: complete-model shared population",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1: scored comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1: common comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1: lead 1",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1: lead 10",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1: lead 11",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1: lead 12",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1: lead 2",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1: lead 3",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1: lead 4",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1: lead 5",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1: lead 6",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1: lead 7",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1: lead 8",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1: lead 9",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1: origin 2022-12",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1: origin 2023-03",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1: origin 2023-06",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1: origin 2023-09",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1: origin 2023-12",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0: exact intended development calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0: exact intended retrospective-audit calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0: development metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0: audit metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0: complete-model shared population",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0: scored comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0: common comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0: lead 1",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0: lead 10",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0: lead 11",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0: lead 12",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0: lead 2",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0: lead 3",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0: lead 4",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0: lead 5",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0: lead 6",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0: lead 7",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0: lead 8",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0: lead 9",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0: origin 2022-12",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0: origin 2023-03",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0: origin 2023-06",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0: origin 2023-09",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0: origin 2023-12",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0: exact intended development calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0: exact intended retrospective-audit calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0: development metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0: audit metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0: complete-model shared population",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0: scored comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0: common comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0: lead 1",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0: lead 10",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0: lead 11",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0: lead 12",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0: lead 2",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0: lead 3",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0: lead 4",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0: lead 5",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0: lead 6",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0: lead 7",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0: lead 8",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0: lead 9",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0: origin 2022-12",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0: origin 2023-03",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0: origin 2023-06",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0: origin 2023-09",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0: origin 2023-12",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1: exact intended development calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1: exact intended retrospective-audit calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1: development metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1: audit metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1: complete-model shared population",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1: scored comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1: common comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1: lead 1",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1: lead 10",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1: lead 11",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1: lead 12",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1: lead 2",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1: lead 3",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1: lead 4",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1: lead 5",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1: lead 6",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1: lead 7",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1: lead 8",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1: lead 9",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1: origin 2022-12",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1: origin 2023-03",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1: origin 2023-06",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1: origin 2023-09",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1: origin 2023-12",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0: exact intended development calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0: exact intended retrospective-audit calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0: development metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0: audit metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0: complete-model shared population",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0: scored comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0: common comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0: lead 1",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0: lead 10",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0: lead 11",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0: lead 12",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0: lead 2",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0: lead 3",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0: lead 4",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0: lead 5",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0: lead 6",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0: lead 7",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0: lead 8",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0: lead 9",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0: origin 2022-12",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0: origin 2023-03",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0: origin 2023-06",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0: origin 2023-09",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0: origin 2023-12",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0: exact intended development calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0: exact intended retrospective-audit calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0: development metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0: audit metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0: complete-model shared population",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0: scored comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0: common comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0: lead 1",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0: lead 10",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0: lead 11",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0: lead 12",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0: lead 2",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0: lead 3",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0: lead 4",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0: lead 5",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0: lead 6",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0: lead 7",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0: lead 8",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0: lead 9",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0: origin 2022-12",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0: origin 2023-03",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0: origin 2023-06",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0: origin 2023-09",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0: origin 2023-12",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1: exact intended development calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1: exact intended retrospective-audit calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1: development metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1: audit metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1: complete-model shared population",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1: scored comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1: common comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1: lead 1",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1: lead 10",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1: lead 11",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1: lead 12",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1: lead 2",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1: lead 3",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1: lead 4",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1: lead 5",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1: lead 6",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1: lead 7",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1: lead 8",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1: lead 9",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1: origin 2022-12",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1: origin 2023-03",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1: origin 2023-06",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1: origin 2023-09",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1: origin 2023-12",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0: exact intended development calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0: exact intended retrospective-audit calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0: development metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0: audit metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0: complete-model shared population",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0: scored comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0: common comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0: lead 1",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0: lead 10",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0: lead 11",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0: lead 12",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0: lead 2",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0: lead 3",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0: lead 4",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0: lead 5",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0: lead 6",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0: lead 7",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0: lead 8",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0: lead 9",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0: origin 2022-12",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0: origin 2023-03",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0: origin 2023-06",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0: origin 2023-09",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0: origin 2023-12",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0: exact intended development calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0: exact intended retrospective-audit calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0: development metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0: audit metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0: complete-model shared population",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0: scored comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0: common comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0: lead 1",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0: lead 10",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0: lead 11",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0: lead 12",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0: lead 2",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0: lead 3",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0: lead 4",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0: lead 5",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0: lead 6",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0: lead 7",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0: lead 8",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0: lead 9",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0: origin 2022-12",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0: origin 2023-03",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0: origin 2023-06",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0: origin 2023-09",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0: origin 2023-12",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal: exact intended development calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal: exact intended retrospective-audit calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal: development metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal: audit metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal: complete-model shared population",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal: scored comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal: common comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal: lead 1",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal: lead 10",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal: lead 11",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal: lead 12",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal: lead 2",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal: lead 3",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal: lead 4",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal: lead 5",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal: lead 6",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal: lead 7",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal: lead 8",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal: lead 9",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal: origin 2022-12",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal: origin 2023-03",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal: origin 2023-06",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal: origin 2023-09",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal: origin 2023-12",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline: exact intended development calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline: exact intended retrospective-audit calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline: development metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline: audit metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline: complete-model shared population",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline: scored comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline: common comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline: lead 1",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline: lead 10",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline: lead 11",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline: lead 12",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline: lead 2",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline: lead 3",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline: lead 4",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline: lead 5",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline: lead 6",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline: lead 7",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline: lead 8",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline: lead 9",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline: origin 2022-12",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline: origin 2023-03",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline: origin 2023-06",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline: origin 2023-09",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline: origin 2023-12",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1: exact intended development calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1: exact intended retrospective-audit calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1: development metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1: audit metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1: complete-model shared population",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1: scored comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1: common comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1: lead 1",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1: lead 10",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1: lead 11",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1: lead 12",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1: lead 2",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1: lead 3",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1: lead 4",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1: lead 5",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1: lead 6",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1: lead 7",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1: lead 8",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1: lead 9",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1: origin 2022-12",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1: origin 2023-03",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1: origin 2023-06",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1: origin 2023-09",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1: origin 2023-12",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10: exact intended development calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10: exact intended retrospective-audit calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10: development metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10: audit metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10: complete-model shared population",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10: scored comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10: common comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10: lead 1",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10: lead 10",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10: lead 11",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10: lead 12",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10: lead 2",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10: lead 3",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10: lead 4",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10: lead 5",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10: lead 6",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10: lead 7",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10: lead 8",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10: lead 9",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10: origin 2022-12",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10: origin 2023-03",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10: origin 2023-06",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10: origin 2023-09",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10: origin 2023-12",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1: exact intended development calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1: exact intended retrospective-audit calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1: development metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1: audit metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1: complete-model shared population",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1: scored comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1: common comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1: lead 1",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1: lead 10",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1: lead 11",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1: lead 12",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1: lead 2",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1: lead 3",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1: lead 4",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1: lead 5",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1: lead 6",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1: lead 7",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1: lead 8",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1: lead 9",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1: origin 2022-12",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1: origin 2023-03",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1: origin 2023-06",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1: origin 2023-09",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1: origin 2023-12",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10: exact intended development calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10: exact intended retrospective-audit calendar keys",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10: development metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10: audit metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10: complete-model shared population",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10: scored comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10: common comparison metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10: lead 1",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10: lead 10",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10: lead 11",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10: lead 12",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10: lead 2",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10: lead 3",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10: lead 4",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10: lead 5",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10: lead 6",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10: lead 7",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10: lead 8",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10: lead 9",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10: origin 2022-12",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10: origin 2023-03",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10: origin 2023-06",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10: origin 2023-09",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10: origin 2023-12",
+      "status": "PASS"
+    },
+    {
+      "check": "Lead-specific intervals exclude future outcomes and unsupported bands remain null",
+      "status": "PASS",
+      "detail": {
+        "maximum_error_support": {
+          "0.8": 6,
+          "0.95": 6
+        },
+        "required_support": {
+          "0.8": 20,
+          "0.95": 40
+        }
+      }
+    },
+    {
+      "check": "Fold 2022-12: exact training population/hash",
+      "status": "PASS"
+    },
+    {
+      "check": "Fold 2023-03: exact training population/hash",
+      "status": "PASS"
+    },
+    {
+      "check": "Fold 2023-06: exact training population/hash",
+      "status": "PASS"
+    },
+    {
+      "check": "Fold 2023-09: exact training population/hash",
+      "status": "PASS"
+    },
+    {
+      "check": "Fold 2023-12: exact training population/hash",
+      "status": "PASS"
+    },
+    {
+      "check": "Fold 2024-12: exact training population/hash",
+      "status": "PASS"
+    },
+    {
+      "check": "Independent frozen development-only selection",
+      "status": "PASS",
+      "detail": {
+        "expected_model": "last_value",
+        "qualifying_challengers": []
+      }
+    },
+    {
+      "check": "Frozen engineering comparison thresholds preserved",
+      "status": "PASS"
+    },
+    {
+      "check": "Training acceptance is separate from publication",
+      "status": "PASS"
+    },
+    {
+      "check": "Inspected 2025 explicitly remains retrospective",
+      "status": "PASS"
+    },
+    {
+      "check": "Run remains unpublished",
+      "status": "PASS"
+    },
+    {
+      "check": "Post-audit exploratory suite emits no publishable release draft",
+      "status": "PASS"
+    },
+    {
+      "check": "Immutable experiment registration binds source, input, environment and protocol",
+      "status": "PASS"
+    },
+    {
+      "check": "Exploratory recipe and inspected-audit status remain explicit",
+      "status": "PASS"
+    },
+    {
+      "check": "Model warnings retained in hashed artifact",
+      "status": "PASS"
+    },
+    {
+      "check": "Original frozen configurations, schedule, criteria and seed preserved",
+      "status": "PASS"
+    },
+    {
+      "check": "Original 15-model predictions/actuals preserve baseline numerical results",
+      "status": "PASS",
+      "detail": {
+        "compared_points": 1092,
+        "mismatches": []
+      }
+    }
+  ],
+  "limitations": [
+    "Coverage attestation is not independent source completeness verification.",
+    "Snapshot history does not prove historical issue-time availability.",
+    "This verification neither queries nor changes the warehouse publication pointer.",
+    "Calendar leads 1\u201312 cannot cover October 2026\u2013September 2027 from December 2025.",
+    "Selection metadata, adapter source review and leakage fixtures are separate from historical availability evidence."
+  ]
+}

@@ -13,7 +13,7 @@ test.beforeEach(async ({page})=>{
   await page.evaluate(script=>new Function(script)(),getExecutableDashboardScript())
 })
 
-test('catalog filter, stable identity, safe aliases and export share one full denominator',async ({page})=>{
+test('catalog filter, stable identity, safe aliases and export share one full denominator',async ({page},testInfo)=>{
   await page.evaluate(()=>{
     const app=window as any
     app.setDescriptivePeriod('custom');app.setDescriptiveGranularity('monthly');app.setCustomDateRange('2025-01-01','2025-12-31');app.showPage('products')
@@ -24,7 +24,7 @@ test('catalog filter, stable identity, safe aliases and export share one full de
     ],source:{file:'fixture',excluded:{},release:{dataset_id:'test-dataset',fact_delta_version:17,product_master_sha256:'test-hash'}}})
   })
   await page.selectOption('#productCategorySelect','Medical')
-  await expect(page.locator('#productPriorityScope')).toContainText('Recorded revenue: ₱100')
+  await expect(page.locator('#productPriorityScope')).toContainText('Recorded net sales: ₱100')
   await expect(page.locator('#productPriorityScope')).toContainText('Unresolved identity: 1 groups, ₱20')
   await expect(page.locator('#productTable tbody img')).toHaveCount(0)
   await page.selectOption('#productCohortSelect','20')
@@ -37,7 +37,7 @@ test('catalog filter, stable identity, safe aliases and export share one full de
   await page.getByRole('button',{name:'Export selected rows'}).click()
   const csv=await readFile((await (await download).path())!,'utf8')
   for(const value of ['SKU:001','Box','adjusted_estimated_source','test-dataset','test-hash','Original aliases']) expect(csv).toContain(value)
-  await page.screenshot({path:'test-results-catalog/product-catalog.png',fullPage:true})
+  await page.screenshot({path:testInfo.outputPath('product-catalog.png'),fullPage:true})
 })
 
 test('adjusted quantity never becomes observed zero; exports retain release and packaging',async ({page})=>{
@@ -65,4 +65,46 @@ test('adjusted quantity never becomes observed zero; exports retain release and 
   await page.selectOption('#heatmapMeasure','verified')
   await expect(page.locator('[data-period="2025-03"]')).toHaveAttribute('data-value','7')
   await expect(page.locator('[data-period="2025-01"]')).toHaveAttribute('data-value','')
+})
+
+test('product export waits for observed rows and preserves an observed zero',async ({page})=>{
+  await page.evaluate(()=>{
+    const app=window as any
+    app.setDescriptivePeriod('custom');app.setDescriptiveGranularity('monthly');app.setCustomDateRange('2025-01-01','2025-12-31');app.showPage('products')
+    const original=URL.createObjectURL.bind(URL)
+    app.__productExportUrls=0
+    URL.createObjectURL=(blob:Blob)=>{app.__productExportUrls++;return original(blob)}
+  })
+  const exportButton=page.getByRole('button',{name:'Export selected rows',exact:true})
+  await expect(exportButton).toBeDisabled()
+  await expect(page.locator('#productFinding')).toContainText('loading or unavailable')
+  await page.evaluate(()=>{(window as any).exportProductPriorityCSV()})
+  expect(await page.evaluate(()=>(window as any).__productExportUrls)).toBe(0)
+
+  for(const rows of [[],[{product:'Unavailable label',period:'2025-01',revenue:null,positive_sales:null,returns_value:null}]]){
+    await page.evaluate(rows=>(window as any).setSalesSectorsData({rows,source:{file:'isolated fixture',excluded:{}}}),rows)
+    await expect(exportButton).toBeDisabled()
+    await page.evaluate(()=>{(window as any).exportProductPriorityCSV()})
+    expect(await page.evaluate(()=>(window as any).__productExportUrls)).toBe(0)
+  }
+
+  await page.evaluate(()=>(window as any).setSalesSectorsData({rows:[{
+    canonical_group_id:'RAW:ZERO',canonical_title:'Observed zero label',product:'Observed zero label',
+    category:'Unclassified',identity_status:'needs_review',period:'2025-01',revenue:0,positive_sales:0,returns_value:0,
+  }],source:{file:'isolated fixture',excluded:{},release:{dataset_id:'zero-fixture',fact_delta_version:20}}}))
+  await expect(exportButton).toBeEnabled()
+  await expect(page.locator('#productPriorityScope')).toContainText('Recorded net sales: ₱0 across 1 names')
+  const download=page.waitForEvent('download')
+  await exportButton.click()
+  const csv=await readFile((await (await download).path())!,'utf8')
+  expect(csv).toContain('"1","Observed zero label","0","0","0"')
+  expect(csv).toContain('RAW:ZERO')
+  expect(csv).toContain('zero-fixture')
+  expect(await page.evaluate(()=>(window as any).__productExportUrls)).toBe(1)
+
+  await page.evaluate(()=>(window as any).setSalesSectorsData(null,'Warehouse unavailable'))
+  await expect(exportButton).toBeDisabled()
+  await expect(page.locator('#productFinding')).toContainText('loading or unavailable')
+  await page.evaluate(()=>{(window as any).exportProductPriorityCSV()})
+  expect(await page.evaluate(()=>(window as any).__productExportUrls)).toBe(1)
 })

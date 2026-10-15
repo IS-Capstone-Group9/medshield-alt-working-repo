@@ -1,0 +1,102 @@
+{
+  "status": "PASS_LOCAL_CATEGORY_PACKAGE_CHECKS_NOT_CLOUD_EXECUTED",
+  "checked_at": "2026-10-08T09:57:24.674869+00:00",
+  "checks": [
+    {
+      "command": "python -m unittest discover -s databricks/medshield_project/tests",
+      "status": "PASS",
+      "tests": 77,
+      "elapsed_seconds": 21.172,
+      "scope": "Full notebook/helper/local contract suite before final stricter false-approval guard"
+    },
+    {
+      "command": "python -m unittest discover -s databricks/medshield_project/tests -p test_catalog_publication.py",
+      "status": "PASS",
+      "tests": 15,
+      "elapsed_seconds": 4.847,
+      "scope": "All affected publication tests after the final guard requiring explicit false independent approvals"
+    },
+    {
+      "command": "node --import tsx --test tests/catalog-contract.test.ts",
+      "cwd": "backend",
+      "status": "PASS",
+      "tests": 5,
+      "scope": "Financial category partitions, unknown identity, null quantities, ABC denominator, stable IDs and input boundaries"
+    },
+    {
+      "command": "node node_modules/typescript/bin/tsc --noEmit --target es2022 --module commonjs --moduleResolution node --esModuleInterop --skipLibCheck scripts/prepare-catalog-publication.ts scripts/validate-catalog.ts",
+      "cwd": "backend",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "command": "python outputs/category_acceptance_20261008/verify.py",
+      "status": "PASS",
+      "scope": "Full CSV cell comparison, master/receipt equality, copied-byte identity, independent Decimal financial partitions"
+    },
+    {
+      "command": "python databricks/medshield_project/render_readme.py --check",
+      "status": "PASS"
+    },
+    {
+      "command": "git diff --check -- <affected tracked files>",
+      "status": "PASS",
+      "scope": "No whitespace defects; Git line-ending notices are informational"
+    },
+    {
+      "command": "seal_validation.py local-link assertions",
+      "status": "PASS",
+      "links_checked": 36
+    },
+    {
+      "command": "Artifact-tool import/edit/recalculate/render plus independent saved-file check",
+      "status": "PASS",
+      "scope": "Preserved literals; actual ISO review timestamps; previews inspected"
+    }
+  ],
+  "input_sha256": {
+    "databricks/medshield_project/catalog_publication.py": "5be8775ff7ae7c7310076d3170066ffa1ab6a5212e1eef92628883c8fbe11b50",
+    "databricks/medshield_project/product_catalog.py": "20888a90253718dabf2aea3390ecc8d7ca707b388e8a4d45123e894c98f688c9",
+    "databricks/medshield_project/03_sales_gold.py": "2b15c13f13fd9bd56fcf3da9f0340a3715a920c132b8364411becb7c356d3b09",
+    "databricks/medshield_project/package_catalog.py": "d035eb6d330fa032c3f118e4dcee9006acfb868789d7087e4c58d21a3daf0e8b",
+    "databricks/medshield_project/GUIDE.md": "f230e79e5d61b2ebc1a11a61cc864ae4975844c7bb26111bb842c36c5b07366d",
+    "databricks/medshield_project/README.md": "6759919e3b31ba228ff613e3f452ab577bfc8ec2e5e7f3e70c8f4de298d5f270",
+    "databricks/medshield_project/references/product_master_review.csv": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+    "databricks/medshield_project/references/catalog_publication.json": "d562569e6170ff8aa0af18fd9cf166f4f1333327992e74d38476d5520208d1b3",
+    "databricks/medshield_project/references/category_acceptance.json": "a99078830b281be69c856d3aeeb725fe80ef0eebc5e86577ddd0e19f9ff0f56d",
+    "databricks/medshield_project/tests/test_catalog_publication.py": "653a02688b2cd618246aac8bd96af0a98731277164bdb08bd58e58e0db76d8e1",
+    "backend/scripts/prepare-catalog-publication.ts": "51490647e4abb4fb8e6320da734731b24a884a51be9775b691e556cd90aa584f",
+    "backend/scripts/validate-catalog.ts": "d602e978b2082a801767fc714fc49e451c9824fc9198ce2b6344b22caa6c97e4",
+    "backend/tests/catalog-contract.test.ts": "3bb67a1ed50d1414d3d56e6ef2222b121741fe76b96fdb33593582f068b5d1a5",
+    "outputs/category_acceptance_20261008/verification.json": "fad916d6c4ece8bf0bfb8fa5f34439f1881cf119ee89d1d7472e2dd379772d57",
+    "docs/CATALOG_DEPLOYMENT.md": "2031225a3700fff7a8bfde666f141da7da46577537188474b201658ff6e083fe",
+    "docs/PRODUCT_CATALOG.md": "9d1359b2103364ab681e07bb65874a2cb9427b828565ca18955c2bb786a0da9f",
+    "docs/PRODUCT_MASTER_REVIEW_GUIDE.md": "f5712530affc5d0e7d5f54e27f624f25bf23711b1a8fd2e1b89e9800f3e0636d",
+    "outputs/category_acceptance_20261008/README.md": "1057359488f087a4eea12b25aff158a12a7cf20789d4ace79e4845de65f6a682",
+    "outputs/category_acceptance_20261008/assessment.md": "11d7cbf2ae7c6806aceac2f1408db4a6d44f244a15fbd1117ca97c8e7e02c6f8"
+  },
+  "master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+  "reporting_categories_accepted": 4561,
+  "underlying_category_unresolved": 2977,
+  "noncategory_approvals": 0,
+  "source_totals": {
+    "records": 37728,
+    "net_sales": "626946741.81",
+    "basis": "Inherited fact19 label totals independently repartitioned"
+  },
+  "fresh_predecessor_capture": {
+    "path": "outputs/catalog_preparation/2026-10-08T09-42-03-926Z/predecessor-receipt.json",
+    "checked_at": "2026-10-08T09:43:33.171Z",
+    "fact_version": 19,
+    "source_fields_equal": 55,
+    "immutable_fields": 137,
+    "stable_dependencies": 29,
+    "views": 2
+  },
+  "cloud_upload": false,
+  "cloud_notebook_execution": false,
+  "serving_pin_change": false,
+  "cloud_replacement_api_stl_validation": "NOT_VERIFIED",
+  "isolated_recovery_rehearsal": "NOT_VERIFIED",
+  "business_release_approved": false
+}

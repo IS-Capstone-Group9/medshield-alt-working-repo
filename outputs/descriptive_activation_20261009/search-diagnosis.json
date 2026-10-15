@@ -1,0 +1,63 @@
+{
+  "checked_at": "2026-10-09T07:45:42.226Z",
+  "kind": "Read-only fact20 and gateway search diagnosis; no mutations",
+  "expected_basis": "Search preserves exact normalized source label text, including its space before the pack-count clue",
+  "observed_labels": [
+    {
+      "normalized_product": "BUPIRIGHT",
+      "fact_rows": "2",
+      "analysis_candidate_rows": "2"
+    },
+    {
+      "normalized_product": "BUPIRIGHT 1'S VIALS",
+      "fact_rows": "90",
+      "analysis_candidate_rows": "90"
+    },
+    {
+      "normalized_product": "BUPIRIGHT 5MG/ML",
+      "fact_rows": "61",
+      "analysis_candidate_rows": "61"
+    },
+    {
+      "normalized_product": "BUPIRIGHT 5MG/ML 0.5% IN 8% 4ML",
+      "fact_rows": "53",
+      "analysis_candidate_rows": "53"
+    },
+    {
+      "normalized_product": "BUPIRIGHT AMPULE",
+      "fact_rows": "179",
+      "analysis_candidate_rows": "179"
+    }
+  ],
+  "scalar_counts": [
+    {
+      "search": "BUPIRIGHT1'S VIALS",
+      "pattern": "%bupiright1's vials%",
+      "matched_rows": 0
+    },
+    {
+      "search": "BUPIRIGHT 1'S VIALS",
+      "pattern": "%bupiright 1's vials%",
+      "matched_rows": 90
+    }
+  ],
+  "gateway_counts": [
+    {
+      "search": "BUPIRIGHT1'S VIALS",
+      "total_rows": 0,
+      "rows_returned": 0,
+      "returned_products": [],
+      "fact_delta_version": 20
+    },
+    {
+      "search": "BUPIRIGHT 1'S VIALS",
+      "total_rows": 90,
+      "rows_returned": 5,
+      "returned_products": [
+        "BUPIRIGHT 1'S VIALS"
+      ],
+      "fact_delta_version": 20
+    }
+  ],
+  "conclusion": "The hardcoded test label omits the source-label space. Exact search using BUPIRIGHT 1'S VIALS preserves the apostrophe and returns records."
+}

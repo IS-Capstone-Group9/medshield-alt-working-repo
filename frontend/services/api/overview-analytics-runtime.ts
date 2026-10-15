@@ -57,6 +57,64 @@ export function overviewMatchedGrowth(
 }
 
 export const OVERVIEW_ANALYTICS_SCRIPT = `const overviewDescriptiveSummary = ${overviewDescriptiveSummary.toString()};\nconst overviewMatchedGrowth = ${overviewMatchedGrowth.toString()};` + String.raw`
+let overviewTrendMeasure = 'sales';
+
+function renderOverviewTrendSelection() {
+  const canvas = document.getElementById('overviewBaselineChart');
+  const chart = canvas && Chart.getChart(canvas);
+  const card = canvas?.closest('.chart-card');
+  if (!chart || !card) return;
+  let select = document.getElementById('overviewTrendMeasureSelect');
+  if (!select) {
+    const control = document.createElement('label');
+    control.className = 'descriptive-measure-control';
+    control.innerHTML = 'Show <select id="overviewTrendMeasureSelect"><option value="sales">Net sales</option><option value="profit">Gross profit</option><option value="both">Sales and gross profit</option></select>';
+    card.querySelector('.chart-header').append(control);
+    select = control.querySelector('select');
+    select.addEventListener('change', () => { overviewTrendMeasure = select.value; renderOverviewTrendSelection(); });
+    const finding = document.createElement('p'); finding.id = 'overviewTrendReading'; finding.className = 'analytical-finding'; finding.setAttribute('aria-live', 'polite');
+    card.querySelector('.chart-wrap').before(finding);
+    const cue = document.createElement('p'); cue.id = 'overviewTrendReadCue'; cue.className = 'analytical-review-prompt';
+    card.querySelector('.chart-wrap').after(cue);
+  }
+  const daily = descriptiveUsesDailyGrain();
+  if (daily) overviewTrendMeasure = 'sales';
+  select.value = overviewTrendMeasure;
+  select.disabled = daily;
+  const visibleValues = [];
+  chart.data.datasets.forEach((dataset, index) => {
+    const profit = dataset.label.includes('Gross Profit');
+    const visible = overviewTrendMeasure === 'both' || (overviewTrendMeasure === 'profit' ? profit : !profit);
+    chart.setDatasetVisibility(index, visible);
+    if (visible) visibleValues.push(...dataset.data.filter(value => value != null && Number.isFinite(Number(value))).map(Number));
+  });
+  const axisTitle = overviewTrendMeasure === 'both' ? 'Sales and gross profit (₱)' : overviewTrendMeasure === 'profit' ? 'Gross profit (₱)' : 'Net sales (₱)';
+  chart.options.scales.y = diagnosticAxis(visibleValues, axisTitle, getColor(), 'left', true);
+  chart.options.plugins.legend.display = chart.data.datasets.filter((_, index) => chart.isDatasetVisible(index)).length > 1;
+  // The selector controls visibility, bounds and narrative together. The legend is a key.
+  chart.options.plugins.legend.labels.filter = item => chart.isDatasetVisible(item.datasetIndex);
+  chart.options.plugins.legend.onClick = () => {};
+  chart.update('none');
+  const rows = getDescriptiveDisplayRows();
+  const describe = (metric, name) => {
+    const observed = rows.filter(row => row.evidence === 'actual' && row[metric] != null && Number.isFinite(Number(row[metric])));
+    if (!observed.length) return 'No recorded ' + name + ' in this selection; estimates cannot establish an observed trend.';
+    const first = observed[0], last = observed[observed.length - 1];
+    if (observed.length === 1) return 'Only one period has recorded ' + name + ' (' + descriptivePointLabel(first.period) + '): ' + formatCurrency(first[metric]) + '. More observations are needed to describe movement.';
+    const change = Number(last[metric]) - Number(first[metric]);
+    return 'From ' + descriptivePointLabel(first.period) + ' to ' + descriptivePointLabel(last.period) + ', recorded ' + name + (change > 0 ? ' rose by ' : change < 0 ? ' fell by ' : ' was unchanged at ') + formatCurrency(change === 0 ? first[metric] : Math.abs(change)) + '.';
+  };
+  document.getElementById('overviewTrendReading').textContent = overviewTrendMeasure === 'both'
+    ? describe('revenue', 'sales') + ' ' + describe('income', 'gross profit')
+    : overviewTrendMeasure === 'profit' ? describe('income', 'gross profit') : describe('revenue', 'sales');
+  document.getElementById('overviewTrendReadCue').textContent = (daily ? 'Daily detail shows sales only. ' : 'Both measures use the same peso scale. ')
+    + 'Dashed sections and triangles are gap estimates; unavailable gaps stay blank. Endpoint change does not imply continuous growth or explain a cause.';
+  const title = card.querySelector('.chart-title');
+  const titleText = title && Array.from(title.childNodes).find(node => node.nodeType === 3);
+  if (titleText) titleText.textContent = overviewTrendMeasure === 'profit' ? 'How did gross profit change? ' : overviewTrendMeasure === 'both' ? 'How did sales and gross profit change? ' : 'How did sales change? ';
+  canvas.setAttribute('aria-label', axisTitle + ' over ' + descriptivePeriodLabel() + '; observed values and labeled gap estimates');
+}
+
 function installOverviewDecisionLayout(page) {
   const grid = page.querySelector('.kpi-grid');
   if (!grid || document.getElementById('kpiOverviewGrossProfit')) return;
@@ -64,10 +122,11 @@ function installOverviewDecisionLayout(page) {
   if (!revenueCard) return;
   grid.replaceChildren(revenueCard);
   grid.classList.add('overview-decision-kpis');
+  revenueCard.querySelector('.kpi-label').textContent = 'Net sales';
   for (const [id, title, note] of [
-    ['GrossProfit', 'Observed gross profit', 'Before operating expenses'],
-    ['MatchedGrowth', 'Matched-period sales growth', 'Versus the same period one year earlier'],
-    ['ObservationCoverage', 'Observed month coverage', 'Observed / selected elapsed months']
+    ['GrossProfit', 'Gross profit', 'Before operating expenses'],
+    ['MatchedGrowth', 'Change vs last year', 'Matched observations only'],
+    ['ObservationCoverage', 'Months with records', 'Observed / selected elapsed months']
   ]) {
     const card = document.createElement('section'); card.className = 'kpi-card';
     card.innerHTML = '<div class="kpi-label">'+title+'</div><div class="kpi-value" id="kpiOverview'+id+'">Unavailable</div><p class="overview-kpi-note" id="overview'+id+'Note">'+note+'</p>';
@@ -80,6 +139,8 @@ function installOverviewDecisionLayout(page) {
   const summary = document.createElement('section'); summary.id = 'overviewOutputSummary'; summary.className = 'analytical-output-summary';
   summary.innerHTML = '<p id="overviewDecisionFinding" class="analytical-output-takeaway"></p><p id="overviewDecisionReview" class="analytical-output-review"></p>';
   grid.after(summary);
+  const period = document.createElement('p'); period.id = 'overviewPeriodCaption'; period.className = 'analytical-output-scope';
+  summary.before(period);
   for (const title of ['Evidence and publication status', 'Planning review', 'Model Publication Status', 'Active Decision Focus']) {
     const heading = Array.from(page.querySelectorAll('.chart-title')).find(node => node.textContent.trim() === title);
     const card = heading?.closest('.chart-card'); const parent = card?.parentElement;
@@ -90,6 +151,8 @@ function installOverviewDecisionLayout(page) {
 
 function renderOverviewDecisionSummary(page, summary, source) {
   installOverviewDecisionLayout(page);
+  page.querySelector('#kpiOverviewTotalRevenue').closest('.kpi-card').querySelector('.kpi-label').textContent = 'Net sales';
+  document.getElementById('overviewPeriodCaption').textContent = descriptivePeriodLabel();
   const observed = getDescriptiveMonthlyRows().filter(row => !descriptiveIsFuturePeriod(row.period) && Number.isFinite(Number(row.revenue)));
   const hasProfit = observed.length > 0 && observed.every(row => row.income != null && Number.isFinite(Number(row.income)));
   document.getElementById('kpiOverviewGrossProfit').textContent = hasProfit
@@ -100,14 +163,14 @@ function renderOverviewDecisionSummary(page, summary, source) {
   const elapsed = summary.coverage.reduce((sum,row) => sum + row.total,0);
   const count = summary.coverage.reduce((sum,row) => sum + row.observed,0);
   document.getElementById('kpiOverviewObservationCoverage').textContent = elapsed ? count + '/' + elapsed : 'Unavailable';
-  document.getElementById('overviewObservationCoverageNote').textContent = 'Selected elapsed calendar months · ' + (elapsed-count) + ' unavailable. Within-month completeness is unverified.';
+  document.getElementById('overviewObservationCoverageNote').textContent = count + ' of ' + elapsed + ' selected months have records. Within-month completeness is unverified.';
   const priorSource = descriptivePeriod === 'custom'
     ? descriptiveCustomMonthlyRows(shiftIsoYear(customDateStart,-1), shiftIsoYear(customDateEnd,-1)) : dashboardMonthlyRows();
   // A current-month snapshot may be partial; do not compare it to last year's full month.
   const growth = overviewMatchedGrowth(source.filter(row => String(row.period) < descriptivePhtDate().slice(0,7)), priorSource);
   const growthValue = document.getElementById('kpiOverviewMatchedGrowth');
   const growthNote = document.getElementById('overviewMatchedGrowthNote');
-  growthValue.textContent = descriptivePeriod === 'all' ? 'Choose a period' : growth.rate == null ? 'Unavailable'
+  growthValue.textContent = descriptivePeriod === 'all' ? '—' : growth.rate == null ? 'Unavailable'
     : (growth.rate > 0 ? '+' : '') + growth.rate.toFixed(1) + '%';
   growthNote.textContent = descriptivePeriod === 'all'
     ? 'Select a bounded period to compare with the same dates one year earlier.'
@@ -118,7 +181,7 @@ function renderOverviewDecisionSummary(page, summary, source) {
     ? count + '/' + elapsed + ' selected elapsed months have observed sales. ' + best.period + ' has the highest observed monthly net sales (' + formatCurrency(best.revenue) + ').'
     : 'No observed monthly sales are available in the selected period.';
   document.getElementById('overviewDecisionReview').textContent = elapsed > count
-    ? 'Next review: inspect the ' + (elapsed-count) + ' unavailable months before comparing activity across years. Missing values are excluded from totals.'
+    ? 'Next review: inspect ' + (elapsed-count) + ' month' + (elapsed-count === 1 ? '' : 's') + ' without records before comparing activity across years. Missing values are excluded from totals.'
     : 'Next review: confirm reporting completeness and candidate approval before using these historical patterns for planning.';
 }
 
@@ -131,17 +194,19 @@ function renderOverviewAnalytics() {
     section.id = 'overviewAnalyticalViews';
     section.className = 'overview-analytical-views';
     section.setAttribute('aria-label', 'Observed sales patterns and coverage');
-    section.innerHTML = '<div class="overview-descriptive-grid">'
+    section.innerHTML = '<details id="overviewPatternDetails" class="chart-card"><summary>Explore monthly averages and coverage</summary><div class="overview-descriptive-grid">'
       + '<section class="chart-card" aria-labelledby="overviewMonthAverageTitle"><div class="chart-header"><div><h2 class="chart-title" id="overviewMonthAverageTitle">Average sales by calendar month</h2><p class="chart-subtitle" id="overviewMonthAverageNote"></p></div></div><div class="chart-wrap overview-summary-chart"><canvas id="overviewMonthAverageChart" role="img" aria-label="Average observed net sales by calendar month; values and sample counts in the table below"></canvas></div><p id="overviewMonthAverageEmpty" class="overview-empty-note" role="status" hidden></p><details class="overview-chart-notes"><summary>Method and observed month counts</summary><p>Each bar is the mean of observed year-month net-sales totals in the selected period. Sample counts may differ. Zero and negative sales are retained; missing months and gap estimates are excluded. Partial-month totals can affect comparisons. This describes sales activity and does not establish recurring seasonality or disease effects. Display grain and Y/Y matching do not change this selected-scope summary.</p><div class="overview-summary-table"><table id="overviewMonthAverageTable" class="product-table" aria-label="Calendar-month average sales and observed sample counts"></table></div></details></section>'
-      + '<section class="chart-card" aria-labelledby="overviewCoverageTitle"><div class="chart-header"><div><h2 class="chart-title" id="overviewCoverageTitle">Observed months by year</h2><p class="chart-subtitle" id="overviewCoverageNote"></p></div></div><div class="chart-wrap overview-summary-chart"><canvas id="overviewCoverageChart" role="img" aria-label="Observed and unavailable months by year within the selected elapsed period; exact counts in the table below"></canvas></div><p id="overviewCoverageEmpty" class="overview-empty-note" role="status" hidden></p><details class="overview-chart-notes"><summary>Coverage denominator and values</summary><p>Each denominator counts calendar months intersecting the selected period through the current Philippine month. Future months are excluded. A month is observed when it has a finite source net-sales total, including zero or negative sales. Current and boundary months may be partial. These counts do not prove complete reporting within a month. Display grain and Y/Y matching do not change this selected-scope summary.</p><div class="overview-summary-table"><table id="overviewCoverageTable" class="product-table" aria-label="Observed and unavailable month counts with selected-period denominators"></table></div></details></section></div>'
+      + '<section class="chart-card" aria-labelledby="overviewCoverageTitle"><div class="chart-header"><div><h2 class="chart-title" id="overviewCoverageTitle">Observed months by year</h2><p class="chart-subtitle" id="overviewCoverageNote"></p></div></div><div class="chart-wrap overview-summary-chart"><canvas id="overviewCoverageChart" role="img" aria-label="Observed and unavailable months by year within the selected elapsed period; exact counts in the table below"></canvas></div><p id="overviewCoverageEmpty" class="overview-empty-note" role="status" hidden></p><details class="overview-chart-notes"><summary>Coverage denominator and values</summary><p>Each denominator counts calendar months intersecting the selected period through the current Philippine month. Future months are excluded. A month is observed when it has a finite source net-sales total, including zero or negative sales. Current and boundary months may be partial. These counts do not prove complete reporting within a month. Display grain and Y/Y matching do not change this selected-scope summary.</p><div class="overview-summary-table"><table id="overviewCoverageTable" class="product-table" aria-label="Observed and unavailable month counts with selected-period denominators"></table></div></details></section></div></details>'
       + '<div class="chart-card"><div class="chart-header"><div><h2 class="chart-title">Monthly sales calendar</h2><p class="chart-subtitle" id="overviewCalendarNote"></p></div></div><div id="overviewSalesCalendar"></div><p class="overview-calendar-key"><span>Blue: sales</span><span>Red: negative sales</span><span>White: zero</span><span>Gray: unavailable</span></p><details class="overview-chart-notes"><summary>How to read this calendar</summary><p>Monthly net sales use the same color scale across the selection. Darker cells show larger absolute amounts. Select a month for its value. Estimates are excluded. Gray cells have no observation in the selected scope. Partial months and coverage differences can affect comparisons; this is not a seasonality index. Display grain and Y/Y matching do not change this selected-scope calendar.</p><p id="overviewCalendarMethod"></p></details></div>'
       + '<details id="overviewProfitExplore" class="chart-card overview-profit-explore"><summary>Explore sales and profit</summary><div class="overview-profit-content"><div class="chart-header"><div><h2 class="chart-title">Sales and gross profit</h2><p class="chart-subtitle" id="overviewProfitNote"></p></div></div><div class="chart-wrap"><canvas id="overviewProfitScatter" role="img" aria-label="Observed net sales versus gross profit by period"></canvas></div><details class="overview-chart-notes"><summary>What these points represent</summary><p id="overviewProfitMethod"></p></details></div></details>';
-    section.querySelector('#overviewProfitExplore').addEventListener('toggle', event => {
+    section.querySelectorAll('#overviewProfitExplore, #overviewPatternDetails').forEach(details => details.addEventListener('toggle', event => {
       if (event.target.open) requestAnimationFrame(() => {
-        const chart = Chart.getChart(document.getElementById('overviewProfitScatter'));
-        if (chart && chart.canvas && chart.canvas.isConnected) chart.resize();
+        event.target.querySelectorAll('canvas').forEach(canvas => {
+          const chart = Chart.getChart(canvas);
+          if (chart && chart.canvas && chart.canvas.isConnected) chart.resize();
+        });
       });
-    });
+    }));
     const trendCard = document.getElementById('overviewBaselineChart')?.closest('.chart-card');
     if (trendCard) trendCard.after(section);
     else page.append(section);
@@ -271,6 +336,8 @@ function renderOverviewAnalytics() {
 export const OVERVIEW_ANALYTICS_STYLE = `
 #overviewAnalyticalViews { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; margin-bottom: 20px; }
 #overviewAnalyticalViews > .chart-card { min-width: 0; min-height: 0; margin-bottom: 0; }
+#overviewPatternDetails > summary { cursor: pointer; font-size: 13px; font-weight: 700; color: var(--text-primary); }
+#overviewPatternDetails .overview-descriptive-grid { margin-top: 18px; }
 #overviewAnalyticalViews .overview-descriptive-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
 #overviewAnalyticalViews .overview-descriptive-grid > .chart-card { min-width: 0; min-height: 0; margin-bottom: 0; }
 #overviewAnalyticalViews .overview-summary-chart { height: 250px !important; min-height: 0 !important; }

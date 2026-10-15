@@ -32,15 +32,15 @@ export type SalesTransaction = {
   dr_number: string | null
   date_delivered: string | null
   product: string | null
-  quantity: number
-  unit_cost: number
-  total_cost: number
-  discount: number
-  net_cost: number
-  trade_price_unit: number
-  total_trade_price: number
-  net_income: number
-  margin_pct: number
+  quantity: number | null
+  unit_cost: number | null
+  total_cost: number | null
+  discount: number | null
+  net_cost: number | null
+  trade_price_unit: number | null
+  total_trade_price: number | null
+  net_income: number | null
+  margin_pct: number | null
   quality_status: 'valid' | 'warning' | 'rejected'
   quality_notes: string
   source_sheet: string
@@ -102,17 +102,17 @@ export type SalesSummary = {
     mismatched_rows: number
   }
   sums: {
-    quantity?: number
-    total_cost?: number
-    net_cost?: number
-    total_trade_price?: number
-    net_income?: number
+    quantity?: number | null
+    total_cost?: number | null
+    net_cost?: number | null
+    total_trade_price?: number | null
+    net_income?: number | null
   }
   averages: {
-    quantity?: number
-    unit_cost?: number
-    net_income?: number
-    margin_pct?: number
+    quantity?: number | null
+    unit_cost?: number | null
+    net_income?: number | null
+    margin_pct?: number | null
   }
   counts: {
     rows?: number

@@ -21,6 +21,8 @@ The repository contains more than 100 Markdown files across product documentatio
 | Document | Status | Purpose |
 |---|---|---|
 | [CURRENT_STATE.md](CURRENT_STATE.md) | Canonical | Implemented architecture, data coverage, publication state, and open gates |
+| [STUDY_OVERVIEW.md](STUDY_OVERVIEW.md) | Current study overview, 9 October 2026 | Business problem, original objectives, data, methods, findings and limits |
+| [Predictive Chapter 4 and 5 research draft](chapters/MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.docx) | Predictive manuscript insert, 10 October 2026 | Complete model comparison, error policy, 2026 projection timing, conclusions and open requirements; wider manuscript integration pending |
 | [REQUIREMENTS.md](REQUIREMENTS.md) | Canonical | Scope, data rules, functional requirements, and definition of done |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | Canonical | Runtime boundaries and failure behavior |
 | [API.md](API.md) | Canonical | Gateway endpoints and Databricks contracts |
@@ -31,6 +33,8 @@ The repository contains more than 100 Markdown files across product documentatio
 | [DATABASE.md](DATABASE.md) | Canonical | Databricks analytical store and Supabase identity/audit roles |
 | [IMPLEMENTATION.md](IMPLEMENTATION.md) | Canonical implementation narrative | Current Chapter 4 technical baseline |
 | [ANALYTICS.md](ANALYTICS.md) | Canonical analytics status | Published evidence, limitations, and promotion rules |
+| [PREDICTIVE_OPERATIONS.md](PREDICTIVE_OPERATIONS.md) | Current predictive runbook | Frozen offline evaluation, candidate storage, review and publication workflow |
+| [logic/PREDICTIVE_ANALYTICS_EXPLAINER.md](logic/PREDICTIVE_ANALYTICS_EXPLAINER.md) | Predictive methodology reference | Executed models, time-ordered evaluation, error interpretation and paper wording; not release approval |
 | [DECISIONS.md](DECISIONS.md) | Canonical | Accepted architecture decisions |
 
 ## Current data runbooks
@@ -77,6 +81,9 @@ Everything under `outputs/**` is evidence for the source, policy, and generation
 ## Process documentation
 
 - `AGENTS.md`, `.agents/**`, and `.skills/**` define repository work practices.
+- [Project memory](PROJECT_MEMORY.md) defines the optional local Obsidian connection, context notes, and session handoffs; memory does not replace canonical project contracts or acceptance evidence.
+- [Analytics lesson review](../lessons/REVIEW.md) assesses the five course decks for helper/agent learning, including corrected examples and review limits; it is educational reference, not a runtime contract.
+- [Analytics Learning Coach](../.agents/analytics-learning-coach.md) and [coaching skill](../.skills/analytics-lesson-coaching/SKILL.md) define applied lesson practice and evaluation responsibilities.
 - `README.md` is the contributor entry point.
 - `references/README.md`, `datasources/README.md`, and `services/analytics_service/jobs/README.md` explain their directory contents.
 

@@ -1,5 +1,12 @@
 # Frontend Engineer Agent
 
+## Required skills
+
+Read and apply the primary skill before specialist work under the [skill-loading contract](execution-contract.md#skill-loading-contract).
+
+- **Primary:** [Frontend standards](../.skills/frontend-standards.md).
+- **Conditional:** [Analytics frameworks](../.skills/analytics-frameworks.md) for KPI/chart/filter meaning; [backend standards](../.skills/backend-standards.md) for API contract changes; [security standards](../.skills/security-standards.md) for sessions, authorization or exposure. Also read the [UI design rules](rules/ux-ui-design-rules.md) for affected interfaces.
+
 ## Execution Contract
 
 Apply the shared [execution contract](execution-contract.md) and [worker operating model](worker-operating-model.md) before specialist work.

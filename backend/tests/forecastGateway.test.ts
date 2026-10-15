@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {getDatabricksForecastValidation} from '../src/databricksDashboard'
+import {databricksLiteral} from '../src/databricksLiteral'
 
 test('actual gateway preserves missing/zero, excludes future, isolates Unknown and fails on warehouse outage', async () => {
   const keys = ['DATABRICKS_HOST', 'DATABRICKS_TOKEN', 'DATABRICKS_SQL_WAREHOUSE_ID', 'DATABRICKS_DESCRIPTIVE_FACT_VERSION']
@@ -11,7 +12,7 @@ test('actual gateway preserves missing/zero, excludes future, isolates Unknown a
   globalThis.fetch = async (_url, init) => {
     const sql = JSON.parse(String(init?.body)).statement as string
     statements.push(sql)
-    if (sql.includes("'OUTAGE'")) throw new Error('Warehouse fixture outage')
+    if (sql.includes(databricksLiteral('OUTAGE'))) throw new Error('Warehouse fixture outage')
     let rows: Array<Record<string, string | null>>
     if (sql.includes('SELECT DISTINCT dataset_id')) rows = [{dataset_id:'fixture-dataset', policy_version:'fixture-policy', area_mapping_sha256:'area-hash', product_master_sha256:'product-hash', publication_status:'candidate'}]
     else if (sql.includes('AS months')) rows = [{months:'3', not_closed:'1'}]
@@ -34,7 +35,7 @@ test('actual gateway preserves missing/zero, excludes future, isolates Unknown a
     const unknown = await getDatabricksForecastValidation({sector:'Unknown'})
     assert.equal(unknown.status, 'blocked')
     assert.deepEqual(unknown.views, {})
-    assert.ok(statements.some(sql=>sql.includes("ELSE 'Unknown' END) = 'Unknown'")))
+    assert.ok(statements.some(sql=>sql.includes(`ELSE 'Unknown' END) = ${databricksLiteral('Unknown')}`)))
     assert.ok(statements.filter(sql=>sql.includes('sales_restart_fact_candidate')).every(sql=>sql.includes('VERSION AS OF 16')))
     await assert.rejects(getDatabricksForecastValidation({product:'OUTAGE'}), /Warehouse fixture outage/)
     await assert.rejects(getDatabricksForecastValidation({sector:'unknown'}), /Invalid buyer cluster/)

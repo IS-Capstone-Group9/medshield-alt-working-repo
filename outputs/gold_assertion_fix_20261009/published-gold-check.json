@@ -1,0 +1,595 @@
+{
+  "checked_at": "2026-10-09T07:04:35.316Z",
+  "status": "PASS_GOLD_AUDIT_AND_COUNTS",
+  "cloud_writes": false,
+  "latest_fact_version": 20,
+  "baseline_fact_version": 19,
+  "publication_outputs": 22,
+  "liveCounts": {
+    "workspace.medshield_audit.sales_restart_area_coverage_candidate": 125,
+    "workspace.medshield_audit.sales_restart_gold_disposition_candidate": 63,
+    "workspace.medshield_audit.sales_restart_gold_quality_candidate": 231,
+    "workspace.medshield_audit.sales_restart_contract_evidence_candidate": 62,
+    "workspace.medshield_audit.sales_restart_returns_candidate": 673,
+    "workspace.medshield_audit.sales_restart_scope_candidate": 12,
+    "workspace.medshield_gold.sales_restart_area_yearly_candidate": 125,
+    "workspace.medshield_audit.sales_restart_provisional_year_candidate": 0,
+    "workspace.medshield_gold.sales_restart_contract_labels_candidate": 0,
+    "workspace.medshield_gold.sales_restart_dim_canonical_product_candidate": 4561,
+    "workspace.medshield_gold.sales_restart_business_product_yearly_candidate": 7649,
+    "workspace.medshield_gold.sales_restart_dim_area_candidate": 22,
+    "workspace.medshield_gold.sales_restart_fact_candidate": 37728,
+    "workspace.medshield_gold.sales_restart_external_input_candidate": 0,
+    "workspace.medshield_gold.sales_restart_dim_product_candidate": 4561,
+    "workspace.medshield_gold.sales_restart_dim_date_candidate": 3287,
+    "workspace.medshield_gold.sales_restart_product_yearly_candidate": 6671,
+    "workspace.medshield_gold.sales_restart_medical_monthly_candidate": 0,
+    "workspace.medshield_gold.sales_restart_label_partition_candidate": 6,
+    "workspace.medshield_gold.sales_restart_monthly_candidate": 108,
+    "workspace.medshield_gold.sales_restart_territory_yearly_candidate": 41,
+    "workspace.medshield_gold.sales_restart_yearly_candidate": 9
+  },
+  "categories": [
+    {
+      "product_category": "medical_equipment",
+      "display_category": "Medical",
+      "category_status": "approved",
+      "labels": "131",
+      "records": "310"
+    },
+    {
+      "product_category": "medical_supply",
+      "display_category": "Medical",
+      "category_status": "approved",
+      "labels": "646",
+      "records": "2667"
+    },
+    {
+      "product_category": "medicine",
+      "display_category": "Medical",
+      "category_status": "approved",
+      "labels": "598",
+      "records": "8580"
+    },
+    {
+      "product_category": "non_medical",
+      "display_category": "Non-Medical",
+      "category_status": "approved",
+      "labels": "209",
+      "records": "919"
+    },
+    {
+      "product_category": "unclassified",
+      "display_category": "Unclassified",
+      "category_status": "approved",
+      "labels": "2977",
+      "records": "25252"
+    }
+  ],
+  "stl": [
+    {
+      "fact_delta_version": "19",
+      "rows": "72"
+    }
+  ],
+  "queries": [
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_fact_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "20",
+          "timestamp": "2026-10-09T03:59:51.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\",\\\"delta.logRetentionDuration\\\":\\\"interval 30 days\\\",\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.deletedFileRetentionDuration\\\":\\\"interval 30 days\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.workloadBasedColumns.deltaFileStatistics\\\":\\\"`sales_fact_id`,`calendar_year`,`proposed_area_type`,`month_start`,`product_scope_status`\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"734925910920252\"}",
+          "queryHistoryStatementId": "327859c2-c16b-4f4f-8b41-0720d8efe339",
+          "clusterId": "1009-035039-f4hddx4y-v2n",
+          "readVersion": "19",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"9395744\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"37728\",\"numOutputBytes\":\"9536013\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT * FROM workspace.medshield_audit.sales_restart_gold_publication_candidate ORDER BY table_name",
+      "rows": [
+        {
+          "table_name": "workspace.medshield_audit.sales_restart_area_coverage_candidate",
+          "saved_rows": "125",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-10-09T04:10:37.340Z"
+        },
+        {
+          "table_name": "workspace.medshield_audit.sales_restart_contract_evidence_candidate",
+          "saved_rows": "62",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-10-09T04:10:37.340Z"
+        },
+        {
+          "table_name": "workspace.medshield_audit.sales_restart_gold_disposition_candidate",
+          "saved_rows": "63",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-10-09T04:10:37.340Z"
+        },
+        {
+          "table_name": "workspace.medshield_audit.sales_restart_gold_quality_candidate",
+          "saved_rows": "231",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-10-09T04:10:37.340Z"
+        },
+        {
+          "table_name": "workspace.medshield_audit.sales_restart_provisional_year_candidate",
+          "saved_rows": "0",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-10-09T04:10:37.340Z"
+        },
+        {
+          "table_name": "workspace.medshield_audit.sales_restart_returns_candidate",
+          "saved_rows": "673",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-10-09T04:10:37.340Z"
+        },
+        {
+          "table_name": "workspace.medshield_audit.sales_restart_scope_candidate",
+          "saved_rows": "12",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-10-09T04:10:37.340Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_area_yearly_candidate",
+          "saved_rows": "125",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-10-09T04:10:37.340Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_business_product_yearly_candidate",
+          "saved_rows": "7649",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-10-09T04:10:37.340Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_contract_labels_candidate",
+          "saved_rows": "0",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-10-09T04:10:37.340Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_dim_area_candidate",
+          "saved_rows": "22",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-10-09T04:10:37.340Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_dim_canonical_product_candidate",
+          "saved_rows": "4561",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-10-09T04:10:37.340Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_dim_date_candidate",
+          "saved_rows": "3287",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-10-09T04:10:37.340Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_dim_product_candidate",
+          "saved_rows": "4561",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-10-09T04:10:37.340Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_external_input_candidate",
+          "saved_rows": "0",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-10-09T04:10:37.340Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_fact_candidate",
+          "saved_rows": "37728",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-10-09T04:10:37.340Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_label_partition_candidate",
+          "saved_rows": "6",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-10-09T04:10:37.340Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_medical_monthly_candidate",
+          "saved_rows": "0",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-10-09T04:10:37.340Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_monthly_candidate",
+          "saved_rows": "108",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-10-09T04:10:37.340Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_product_yearly_candidate",
+          "saved_rows": "6671",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-10-09T04:10:37.340Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_territory_yearly_candidate",
+          "saved_rows": "41",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-10-09T04:10:37.340Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_yearly_candidate",
+          "saved_rows": "9",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-10-09T04:10:37.340Z"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT COUNT(*) AS n FROM workspace.medshield_audit.sales_restart_area_coverage_candidate",
+      "rows": [
+        {
+          "n": "125"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT COUNT(*) AS n FROM workspace.medshield_audit.sales_restart_gold_disposition_candidate",
+      "rows": [
+        {
+          "n": "63"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT COUNT(*) AS n FROM workspace.medshield_audit.sales_restart_gold_quality_candidate",
+      "rows": [
+        {
+          "n": "231"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT COUNT(*) AS n FROM workspace.medshield_audit.sales_restart_contract_evidence_candidate",
+      "rows": [
+        {
+          "n": "62"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT COUNT(*) AS n FROM workspace.medshield_audit.sales_restart_returns_candidate",
+      "rows": [
+        {
+          "n": "673"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT COUNT(*) AS n FROM workspace.medshield_audit.sales_restart_scope_candidate",
+      "rows": [
+        {
+          "n": "12"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT COUNT(*) AS n FROM workspace.medshield_gold.sales_restart_area_yearly_candidate",
+      "rows": [
+        {
+          "n": "125"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT COUNT(*) AS n FROM workspace.medshield_audit.sales_restart_provisional_year_candidate",
+      "rows": [
+        {
+          "n": "0"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT COUNT(*) AS n FROM workspace.medshield_gold.sales_restart_contract_labels_candidate",
+      "rows": [
+        {
+          "n": "0"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT COUNT(*) AS n FROM workspace.medshield_gold.sales_restart_dim_canonical_product_candidate",
+      "rows": [
+        {
+          "n": "4561"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT COUNT(*) AS n FROM workspace.medshield_gold.sales_restart_business_product_yearly_candidate",
+      "rows": [
+        {
+          "n": "7649"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT COUNT(*) AS n FROM workspace.medshield_gold.sales_restart_dim_area_candidate",
+      "rows": [
+        {
+          "n": "22"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT COUNT(*) AS n FROM workspace.medshield_gold.sales_restart_fact_candidate",
+      "rows": [
+        {
+          "n": "37728"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT COUNT(*) AS n FROM workspace.medshield_gold.sales_restart_external_input_candidate",
+      "rows": [
+        {
+          "n": "0"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT COUNT(*) AS n FROM workspace.medshield_gold.sales_restart_dim_product_candidate",
+      "rows": [
+        {
+          "n": "4561"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT COUNT(*) AS n FROM workspace.medshield_gold.sales_restart_dim_date_candidate",
+      "rows": [
+        {
+          "n": "3287"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT COUNT(*) AS n FROM workspace.medshield_gold.sales_restart_product_yearly_candidate",
+      "rows": [
+        {
+          "n": "6671"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT COUNT(*) AS n FROM workspace.medshield_gold.sales_restart_medical_monthly_candidate",
+      "rows": [
+        {
+          "n": "0"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT COUNT(*) AS n FROM workspace.medshield_gold.sales_restart_label_partition_candidate",
+      "rows": [
+        {
+          "n": "6"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT COUNT(*) AS n FROM workspace.medshield_gold.sales_restart_monthly_candidate",
+      "rows": [
+        {
+          "n": "108"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT COUNT(*) AS n FROM workspace.medshield_gold.sales_restart_territory_yearly_candidate",
+      "rows": [
+        {
+          "n": "41"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT COUNT(*) AS n FROM workspace.medshield_gold.sales_restart_yearly_candidate",
+      "rows": [
+        {
+          "n": "9"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT product_category,display_category,category_status,COUNT(DISTINCT normalized_product) AS labels,COUNT(*) AS records FROM workspace.medshield_gold.sales_restart_fact_candidate VERSION AS OF 20 GROUP BY ALL ORDER BY product_category",
+      "rows": [
+        {
+          "product_category": "medical_equipment",
+          "display_category": "Medical",
+          "category_status": "approved",
+          "labels": "131",
+          "records": "310"
+        },
+        {
+          "product_category": "medical_supply",
+          "display_category": "Medical",
+          "category_status": "approved",
+          "labels": "646",
+          "records": "2667"
+        },
+        {
+          "product_category": "medicine",
+          "display_category": "Medical",
+          "category_status": "approved",
+          "labels": "598",
+          "records": "8580"
+        },
+        {
+          "product_category": "non_medical",
+          "display_category": "Non-Medical",
+          "category_status": "approved",
+          "labels": "209",
+          "records": "919"
+        },
+        {
+          "product_category": "unclassified",
+          "display_category": "Unclassified",
+          "category_status": "approved",
+          "labels": "2977",
+          "records": "25252"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT DISTINCT fact_delta_version,COUNT(*) AS rows FROM workspace.medshield_gold.sales_restart_stl_candidate GROUP BY fact_delta_version",
+      "rows": [
+        {
+          "fact_delta_version": "19",
+          "rows": "72"
+        }
+      ]
+    },
+    {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_fact_candidate LIMIT 1",
+      "rows": [
+        {
+          "version": "20",
+          "timestamp": "2026-10-09T03:59:51.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\",\\\"delta.logRetentionDuration\\\":\\\"interval 30 days\\\",\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.deletedFileRetentionDuration\\\":\\\"interval 30 days\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.workloadBasedColumns.deltaFileStatistics\\\":\\\"`sales_fact_id`,`calendar_year`,`proposed_area_type`,`month_start`,`product_scope_status`\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"734925910920252\"}",
+          "queryHistoryStatementId": "327859c2-c16b-4f4f-8b41-0720d8efe339",
+          "clusterId": "1009-035039-f4hddx4y-v2n",
+          "readVersion": "19",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"9395744\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"37728\",\"numOutputBytes\":\"9536013\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    }
+  ]
+}

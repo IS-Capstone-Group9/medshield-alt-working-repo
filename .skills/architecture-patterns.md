@@ -22,6 +22,8 @@ Defines the architecture patterns that best fit the MedShield project. Use these
 
 ## MedShield Fit
 - Frontend: page/component structure with typed data access.
-- Backend: TypeScript API gateway plus focused Python analytics services.
-- Data: warehouse tables, dimensions, facts, and views.
+- Backend: TypeScript API gateway for dashboard requests, Databricks access and provider refresh; Python prepares/evaluates analytics offline and does not run behind dashboard requests.
+- Data: Databricks analytical tables/views with provenance and publication gates; Supabase owns production identity, roles and audit. Required analytical failure remains explicit unavailability, with local fallback limited to audit events.
 - Delivery: environment-based deployment with repeatable build and release steps.
+
+Choose platform or batch/streaming changes from decision latency, workload, cost, ownership and actual constraints, following [architecture](../docs/ARCHITECTURE.md) and [decisions](../docs/DECISIONS.md). Chapter 3's lakehouse/mesh/fabric concepts are learning references; their inclusion in a lesson does not justify replacing the established architecture.

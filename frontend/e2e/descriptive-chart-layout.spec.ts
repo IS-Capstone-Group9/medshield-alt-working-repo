@@ -60,7 +60,9 @@ test('movement graph uses full observed adjacent months at any display grain and
   await page.evaluate(()=>(window as any).setDescriptiveGranularity('monthly'))
   expect(await values()).toEqual([null,-100,null,null,30])
   await page.evaluate(()=>(window as any).setCustomDateRange('2024-12-15','2025-04-15'))
-  expect(await values()).toEqual([null,null,null])
+  await expect(page.locator('#salesMovementChart')).not.toBeVisible()
+  await expect(page.locator('#salesMovementCaption')).toContainText('No adjacent observed full-month pairs')
+  await expect(page.locator('#salesMovementTable tbody tr')).toHaveCount(3)
   const download=page.waitForEvent('download')
   await page.evaluate(()=>(window as any).exportSalesGrowthCSV())
   expect(await (await download).path()).toBeTruthy()
@@ -95,7 +97,7 @@ test('ABC shares retain full population and area buyer chart distinguishes estim
   await expect(page.locator('#areaMappingCoverage')).toContainText('50.0%')
   await expect(page.locator('#areaCoverageMethod')).toContainText('actual + gap estimates')
   const buyer=await page.evaluate(()=>{const c=(window as any).Chart.getChart(document.getElementById('sectorBuyerChart'));return {labels:c.data.labels,data:c.data.datasets.map((d:any)=>d.data)}})
-  expect(buyer.labels).toContain('Unknown ownership')
+  expect(buyer.labels).toContain('Unknown buyer type')
   expect(buyer.data[0].reduce((sum:number,value:number)=>sum+value,0)).toBe(140)
   expect(buyer.data[1].reduce((sum:number,value:number)=>sum+value,0)).toBe(20)
 })
@@ -106,7 +108,7 @@ test('empty descriptive selections do not display invented bars or class shares'
     app.setSalesSectorsData({rows:[],source:{file:'empty fixture',excluded:{}}})
   })
   await expect(page.locator('#productAbcShareChart')).not.toBeVisible()
-  await expect(page.locator('#productAbcShareStatus')).toContainText('No source labels')
+  await expect(page.locator('#productAbcShareStatus')).toContainText('No product names')
   await page.evaluate(()=>{const app=window as any;app.showPage('territory');app.setSalesSectorsData(null,'Service unavailable');app.renderSalesSectors()})
   await expect(page.locator('#sectorBuyerChart')).not.toBeVisible()
   await expect(page.locator('#areaBuyerEmpty')).toHaveText('Service unavailable')
@@ -115,7 +117,7 @@ test('empty descriptive selections do not display invented bars or class shares'
   await expect(page.locator('#overviewMonthAverageEmpty')).toContainText('No observed net sales')
 })
 
-for (const width of [1440,926,375]) test(`descriptive charts fit at ${width}px with readable plot area`, async ({page})=>{
+for (const width of [1440,926,375]) test(`descriptive charts fit at ${width}px with readable plot area`, async ({page}, testInfo)=>{
   await page.setViewportSize({width,height:900})
   await page.evaluate(()=>{
     const app=window as any
@@ -125,11 +127,14 @@ for (const width of [1440,926,375]) test(`descriptive charts fit at ${width}px w
   })
   for (const name of ['overview','revenue','products','territory']) {
     await page.evaluate(name=>(window as any).showPage(name),name)
+    const primaryChart = {overview:'overviewBaselineChart',revenue:'revenueDetailChart',products:'productBarChart',territory:'sectorRevenueChart'}[name]
+    await expect.poll(()=>page.evaluate(id=>Boolean((window as any).Chart.getChart(document.getElementById(id!))),primaryChart)).toBe(true)
     await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true)
-    await expect.poll(()=>page.locator('.page.active canvas').evaluateAll(canvases=>canvases.filter(c=>c.getBoundingClientRect().height>0).every(c=>{
+    await expect.poll(()=>page.locator('.page.active canvas').evaluateAll(canvases=>canvases.filter(c=>c.getBoundingClientRect().height>0 && !c.closest('details:not([open])')).every(c=>{
       const box=c.getBoundingClientRect(), parent=c.parentElement!.getBoundingClientRect()
       const chart=(window as any).Chart.getChart(c)
       return box.width>100&&box.height>=170&&box.width<=parent.width+1&&(!chart || chart.chartArea.width>65&&chart.chartArea.height>80)
     }))).toBe(true)
+    await page.screenshot({path:testInfo.outputPath(`${name}-${width}.png`),fullPage:true})
   }
 })

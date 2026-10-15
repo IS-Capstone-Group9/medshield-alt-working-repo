@@ -13,6 +13,8 @@ test.describe('Mapped Client Reference Directory E2E Suite', () => {
     await expect(page.locator('#topbar-title')).toHaveText('Area Prioritization');
 
     // 2. Verify Client Reference Section exists below Area Prioritization
+    await expect(page.locator('#areaMappingDetails')).not.toHaveAttribute('open', '');
+    await page.locator('#areaMappingDetails > summary').click();
     const clientSection = page.locator('#clientReferenceSection');
     await expect(clientSection).toBeVisible();
     await expect(page.locator('#clientRefCountBadge')).toContainText('782 Mapped Accounts');

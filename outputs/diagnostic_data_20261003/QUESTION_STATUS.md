@@ -1,0 +1,50 @@
+# Diagnostic question status register
+
+All 40 questions have an accountable analytical role, required evidence owner, supporting data keys and remaining interpretation boundary. Read the full question text/method in [the canonical guide](../../docs/DIAGNOSTIC_ANALYTICS.md); use [the structured register](question_register.json) for the complete fields.
+
+Computed means the stated candidate calculation is available. A complete causal or operational explanation still requires its documentary evidence and acceptance.
+
+| ID | Diagnostic question | Current calculation/evidence status | Evidence owner | Result keys |
+|---|---|---|---|---|
+| DQ01 | How much did recorded net sales change between comparable periods? | Computed within stated scope | Finance/source owner for source controls and documentary verification | matched_yoy |
+| DQ02 | Which months account for the annual sales difference? | Computed within stated scope | Finance/source owner for source controls and documentary verification | matched_yoy |
+| DQ03 | Is the change spread across months or dominated by a few large contributors? | Computed within stated scope | Finance/source owner for source controls and documentary verification | matched_month_change_concentration |
+| DQ04 | Which adjacent closed months show the strongest rise or fall? | Computed within stated scope | Finance/source owner for source controls and documentary verification | adjacent_month_changes |
+| DQ05 | Did sales move with the number of retained source records or recorded value per eligible record? | Computed within stated scope | Finance/source owner for source controls and documentary verification | eligible_record_count_value_bridges |
+| DQ06 | Which reporting labels contribute the most recorded positive sales and net sales? | Computed within stated scope | Product/catalog owner for identity, packaging and units | product_groups_all_years, product_yearly |
+| DQ07 | Which reporting groups contributed to the selected year-on-year change? | Computed within stated scope | Product/catalog owner for identity, packaging and units | product_yoy_contributions |
+| DQ08 | How much did negative sales adjustments reduce the recorded result? | Computed within stated scope | Finance/pricing owner for cost, adjustment and pricing evidence | yearly_financial_partitions, signed_sales_change_bridges |
+| DQ09 | Did sales concentration or ABC composition change between periods? | Computed within stated scope | Product/catalog owner for identity, packaging and units | positive_sales_concentration_yearly |
+| DQ10 | How much do adjusted product allocations affect the conclusions? | Computed within stated scope | Product/catalog owner for identity, packaging and units | source_provenance_yearly, provenance_monthly |
+| DQ11 | Which raw areas and reviewed territories account for the sales change? | Computed within stated scope | Sales/account and mapping owner for buyer/location evidence | area_monthly, area_yoy_contributions |
+| DQ12 | Did the Government, Private, Internal or Unknown buyer composition change? | Computed within stated scope | Sales/account and mapping owner for buyer/location evidence | buyer_proposals_monthly, buyer_yoy_contributions |
+| DQ13 | Is an area movement explained by its buyer or reporting-product composition? | Partial: additional calculation or evidence needed | Sales/account and mapping owner for buyer/location evidence | area_monthly, product_yearly |
+| DQ14 | Are geographic comparisons distorted by unequal evidence coverage or mapping confidence? | Computed within stated scope | Sales/account and mapping owner for buyer/location evidence | geographic_mapping_yearly |
+| DQ15 | Did gross margin amount and the weighted margin rate change on a comparable eligible basis? | Computed within stated scope | Finance/pricing owner for cost, adjustment and pricing evidence | annual, eligible_gross_profit_change_bridges |
+| DQ16 | Which records and reasons prevent a fuller gross-margin interpretation? | Computed within stated scope | Finance/pricing owner for cost, adjustment and pricing evidence | margin_eligibility_exclusions |
+| DQ17 | Which labels and periods have variable recorded CP, and what can be verified about those prices? | Computed within stated scope | Finance/pricing owner for cost, adjustment and pricing evidence | pricing_review |
+| DQ18 | Can the sales change be attributed to verified price, delivered quantity and product mix? | Additional evidence required | Product/catalog owner for identity, packaging and units | Prerequisite/source-document evidence required |
+| DQ19 | Did discounts, acquisition cost or formula inconsistencies change recorded gross margin? | Partial: additional calculation or evidence needed | Finance/pricing owner for cost, adjustment and pricing evidence | pricing_review, retained_fact_quality_rule_counts |
+| DQ20 | Do the same calendar months repeatedly have higher recorded sales? | Computed within stated scope | Sales/contracts owner for exceptional periods; research reviewer for interpretation | calendar_month_average, calendar_month_distribution_sensitivity |
+| DQ21 | How much of each recorded month is described by STL trend, seasonality and residual? | Computed within stated scope | Sales/contracts owner for exceptional periods; research reviewer for interpretation | stl_all_components |
+| DQ22 | Which residual months deserve investigation, and what happens if the flag rule changes? | Computed within stated scope | Sales/contracts owner for exceptional periods; research reviewer for interpretation | stl_residual_ranked_all_months |
+| DQ23 | Are apparent seasonal patterns stable across years and source strata? | Computed within stated scope | Sales/contracts owner for exceptional periods; research reviewer for interpretation | calendar_month_distribution_sensitivity, provenance_monthly |
+| DQ24 | Does an exceptional month represent a few large source lines or widespread recorded activity? | Computed within stated scope | Finance/source owner for source controls and documentary verification | monthly_source_line_concentration |
+| DQ25 | Are missing months and incomplete reporting changing the comparison? | Computed within stated scope | Finance/source owner for source controls and documentary verification | monthly |
+| DQ26 | Which missing fields, warnings and formula issues affect each analytic measure? | Computed within stated scope | Finance/source owner for source controls and documentary verification | pricing_review, retained_fact_quality_rule_counts, retained_quality_rule_financial_context |
+| DQ27 | Are there duplicated business events, even though source-record IDs are unique? | Receipt-ready for stated scope; interpretation partly unresolved | Finance/source owner for source controls and documentary verification | Prerequisite/source-document evidence required |
+| DQ28 | How do source trust and adjusted/backfilled strata change the findings? | Computed within stated scope | Finance/source owner for source controls and documentary verification | source_provenance_yearly, provenance_monthly |
+| DQ29 | Does every diagnostic result reproduce against one identifiable dataset? | Computed within stated scope | Finance/source owner for source controls and documentary verification | sources, checks |
+| DQ30 | Can sales and external observations be joined at a defensible territory-month grain? | Additional evidence required | External-data mapping reviewer and research adviser for accepted joins/methods | Prerequisite/source-document evidence required |
+| DQ31 | Are approved disease indicators associated with eligible recorded sales or delivered quantity? | Additional evidence required | External-data mapping reviewer and research adviser for accepted joins/methods | Prerequisite/source-document evidence required |
+| DQ32 | Do historical rainfall, temperature or other weather measures associate with recorded movement? | Additional evidence required | External-data mapping reviewer and research adviser for accepted joins/methods | Prerequisite/source-document evidence required |
+| DQ33 | Are associations delayed, and are the results stable after seasonality and multiple comparisons? | Additional evidence required | External-data mapping reviewer and research adviser for accepted joins/methods | Prerequisite/source-document evidence required |
+| DQ34 | Could disease or weather explain a spike beyond contracts, reporting and availability changes? | Additional evidence required | External-data mapping reviewer and research adviser for accepted joins/methods | Prerequisite/source-document evidence required |
+| DQ35 | Did contract awards, delivery schedules or posting cutoffs drive concentrated months? | Additional evidence required | Sales/contracts owner | Prerequisite/source-document evidence required |
+| DQ36 | Did stock constraints suppress fulfilled sales while customer demand remained unmet? | Additional evidence required | Warehouse/inventory owner | Prerequisite/source-document evidence required |
+| DQ37 | Did fulfillment or delivery delays move sales between periods or create credits? | Additional evidence required | Delivery/service owner | Prerequisite/source-document evidence required |
+| DQ38 | Did supplier lead-time or purchasing constraints affect availability and margins? | Additional evidence required | Procurement owner | Prerequisite/source-document evidence required |
+| DQ39 | Did expiry, damage or aging inventory contribute to credits or low movement? | Additional evidence required | Inventory/quality owner | Prerequisite/source-document evidence required |
+| DQ40 | Did customer terms, tenders, campaigns or account changes alter sales and recorded prices? | Additional evidence required | Sales/account and pricing owner | Prerequisite/source-document evidence required |
+
+Each question’s accountable role is Data Analyst. Evidence owners are role assignments for follow-up, not invented named people or records of completed interviews.

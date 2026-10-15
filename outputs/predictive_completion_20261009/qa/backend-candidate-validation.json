@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "checked_at_utc": "2026-10-09T14:15:01.546Z",
+  "run_id": "eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a",
+  "artifact_hash": "9889baea07a1f222edc9d2d2576fefc0d2be4bc8e52dc4d9a3ff9919e0056f45",
+  "predictions": 1524,
+  "evaluations": 21,
+  "checks": [
+    "Current exact extension accepted with both actual approval flags false",
+    "Approved data may coexist with unpublished exploratory model",
+    "Model publication approval is rejected",
+    "Exploratory untouched_holdout point is rejected"
+  ],
+  "checked_files_sha256": {
+    "backend/scripts/predictive-candidate-contract.ts": "95197142940ba78d3f494173f08fc9340e24f8d8dfe74a8f383ad8e5d38fae36",
+    "backend/scripts/persist-predictive-candidate.ts": "87713caa48fbecfa3a1e75b51cbf577481ba732b17a04b7c66d37de2a51e55a0"
+  },
+  "warehouse_access": false
+}

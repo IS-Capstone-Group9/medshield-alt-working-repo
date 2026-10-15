@@ -1,0 +1,20 @@
+{
+  "checked_at_utc": "2026-10-09T14:15:16.383Z",
+  "status": "PASS_CANDIDATE_STORAGE_CHECK",
+  "read_only": true,
+  "input_sha256": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba",
+  "fact_delta_version": 20,
+  "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+  "table_counts": {
+    "mart_forecast_monthly_candidate": 324,
+    "fact_forecast_run_candidate": 2,
+    "fact_forecast_point_candidate": 2616,
+    "fact_model_evaluation_candidate": 36,
+    "fact_model_review": 0,
+    "model_release_manifest": 0
+  },
+  "pointers": [],
+  "pointer_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "predecessor": "../outputs/predictive_completion_20261009/warehouse-before.json",
+  "pointer_unchanged": true
+}

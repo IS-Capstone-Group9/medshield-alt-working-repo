@@ -1,0 +1,1298 @@
+{
+  "status": "PASS",
+  "checked_at_utc": "2026-10-10T09:03:45.336057+00:00",
+  "check_count": 193,
+  "failure_count": 0,
+  "source_sha256": {
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\decision.json": "88bf78ca32006f3687e7f83ff4c36966cfa37dcf7ee64513e0a8faedc4faf4a5",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\source-identities.json": "6537185bdb8dab313282d835a0d6ac9c4a95c30229efd732ae2ceeb99ba7f6b0",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\docs\\PREDICTIVE_CLIENT_DECISION_BRIEF.md": "4fe032ac54537a693157e703b068537063370d4f3aca0c31b6b7880eba4de127",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\docs\\OBJECTIVE_EVIDENCE_REGISTER.md": "e1e946cfc6afaa247c4d6b3a6c0c30846bafc772e937713bc60a9b72b35c316e",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\README.md": "5b6daf4796979c307e93a24560e5fe38df7aef37e8db0fd3db72b41a40176494",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\prepare.py": "828ed0ba659c850f413a81f357d18d14af9340f3c829cc44b1b2c23fac58a69c",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\check_and_seal.py": "5dff8b9e630289ae08837d785191e5ec1380aee3d9bbd38b659bd78a60921532",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\qa\\expected-metrics.json": "4bf30cb861fe88fa53326d4fe1cfe3d39df9b266efdb7af9aa82933ae80a5778",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\qa\\expected_metrics.py": "b801fa35466f308483518b3d4d5523e2c34d9fb7fb4c1bbf1b0daa01e975a4d6",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\qa\\check_brief.py": "8e1e9a1cbc600e200841e07c4f7f71a82a9b03b766f173fa8f1fada4a896124f",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_policy_20261010\\policy.json": "55c93ca278c8fa9a19efaecdd8327836bc3d35662fe733eb36917125bb4d0fcb",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_validation\\2026-10-09T13-28-48-501Z\\input.json": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\run.json": "9889baea07a1f222edc9d2d2576fefc0d2be4bc8e52dc4d9a3ff9919e0056f45",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_annual_release_20261010\\models\\annual-origin-2025-12-asof-2026-10-10\\a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b\\run.json": "e25c713bb7faee9cf9020f9064fdf016d18df3793131e1ab43bdfcd169d61b6d",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\report.json": "2b6c6d02aa1d920c02d1e3806ba4c20bbfee242639c00d141537b23c70800094",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\RESULTS.md": "ffaffc3e2a50c9f707c589c42ba99f4bf385d75389901111755e7b7a9cc15707",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\qa\\verification.json": "874ead40411b7131127aff079ecc61b8ae7c85d0336da8468a039270f944455d",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\qa\\REPORT.md": "8de017892ee0d32c088d2fa76714f025517c8360803f61994c87d9052ab371a4",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\delivery.json": "97965466f37697305e40c1700465580c466ba066be1526c68e9b263e991492f3",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\models\\protocol.json": "4c95566337bbce02a46cebca0979081a65c67441b61e570cb1f55a0e3a21e667",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\models\\f749f47ef44db53a35f56a822e2b35edc0877ad5126c4352a996dfb2f5a20e8b\\run.json": "7c22e0467925ee95fed2f5d287357ff0948bbc524e25715954cd28c22a83e841",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_readiness_20261010\\SOURCE_OWNER_REVIEW.md": "08f8fc10d7c438568453d53544375c927e2a5085affde318c0758664a6f5e3fd",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\contracts.py": "a6ece04850ba397a84c72309043c9ab6c83c3ee7a4fc1fe4b63f1b82b8b86d3a",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\engine.py": "cdc5a39363c69f500897e849f2c37ab42c401ed789b6890e6abab808cbbee4c8",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\models.py": "2b2b6495e3ff54b7613800fded65832efc46fc1018ad2fe09f678baf857c4ac9",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\metrics.py": "4841243a2b262d71845596d4d72b44a7aa7447602003cfdb79b971e1d7ac8baa",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\extended_experiment.py": "3d88a6aa92bb0b03140ce9830512cd1292d4a6d0fe85ad8bdc190d92b64f3b42",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\annual_projection.py": "62064b67e90832ce2e46474ff9b7495ba05a8032b66d1e68177483db412dac80",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\robust_error_experiment.py": "0a07f75c83ed44c05524ad5032e86c3d3e889b32276dd6f3226a3dbd062e6bd6",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\tests\\test_predictive_robust_error.py": "6eed6913afc702bedee334803a37f0b0d15acecef1d1fffeb82797c3e73e1e98"
+  },
+  "checks": [
+    {
+      "check": "20_inherited_sources",
+      "passed": true,
+      "expected": 20,
+      "observed": 20
+    },
+    {
+      "check": "inherited_source:outputs/predictive_error_policy_20261010/policy.json",
+      "passed": true,
+      "expected": "55c93ca278c8fa9a19efaecdd8327836bc3d35662fe733eb36917125bb4d0fcb",
+      "observed": "55c93ca278c8fa9a19efaecdd8327836bc3d35662fe733eb36917125bb4d0fcb"
+    },
+    {
+      "check": "inherited_source:outputs/predictive_validation/2026-10-09T13-28-48-501Z/input.json",
+      "passed": true,
+      "expected": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba",
+      "observed": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba"
+    },
+    {
+      "check": "inherited_source:outputs/predictive_completion_20261009/models/fixed-origin-extended/eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a/run.json",
+      "passed": true,
+      "expected": "9889baea07a1f222edc9d2d2576fefc0d2be4bc8e52dc4d9a3ff9919e0056f45",
+      "observed": "9889baea07a1f222edc9d2d2576fefc0d2be4bc8e52dc4d9a3ff9919e0056f45"
+    },
+    {
+      "check": "inherited_source:outputs/predictive_annual_release_20261010/models/annual-origin-2025-12-asof-2026-10-10/a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b/run.json",
+      "passed": true,
+      "expected": "e25c713bb7faee9cf9020f9064fdf016d18df3793131e1ab43bdfcd169d61b6d",
+      "observed": "e25c713bb7faee9cf9020f9064fdf016d18df3793131e1ab43bdfcd169d61b6d"
+    },
+    {
+      "check": "inherited_source:outputs/predictive_error_optimization_20261010/report.json",
+      "passed": true,
+      "expected": "2b6c6d02aa1d920c02d1e3806ba4c20bbfee242639c00d141537b23c70800094",
+      "observed": "2b6c6d02aa1d920c02d1e3806ba4c20bbfee242639c00d141537b23c70800094"
+    },
+    {
+      "check": "inherited_source:outputs/predictive_error_optimization_20261010/RESULTS.md",
+      "passed": true,
+      "expected": "ffaffc3e2a50c9f707c589c42ba99f4bf385d75389901111755e7b7a9cc15707",
+      "observed": "ffaffc3e2a50c9f707c589c42ba99f4bf385d75389901111755e7b7a9cc15707"
+    },
+    {
+      "check": "inherited_source:outputs/predictive_error_optimization_20261010/qa/verification.json",
+      "passed": true,
+      "expected": "874ead40411b7131127aff079ecc61b8ae7c85d0336da8468a039270f944455d",
+      "observed": "874ead40411b7131127aff079ecc61b8ae7c85d0336da8468a039270f944455d"
+    },
+    {
+      "check": "inherited_source:outputs/predictive_error_optimization_20261010/qa/REPORT.md",
+      "passed": true,
+      "expected": "8de017892ee0d32c088d2fa76714f025517c8360803f61994c87d9052ab371a4",
+      "observed": "8de017892ee0d32c088d2fa76714f025517c8360803f61994c87d9052ab371a4"
+    },
+    {
+      "check": "inherited_source:outputs/predictive_error_optimization_20261010/delivery.json",
+      "passed": true,
+      "expected": "97965466f37697305e40c1700465580c466ba066be1526c68e9b263e991492f3",
+      "observed": "97965466f37697305e40c1700465580c466ba066be1526c68e9b263e991492f3"
+    },
+    {
+      "check": "inherited_source:outputs/predictive_error_optimization_20261010/models/protocol.json",
+      "passed": true,
+      "expected": "4c95566337bbce02a46cebca0979081a65c67441b61e570cb1f55a0e3a21e667",
+      "observed": "4c95566337bbce02a46cebca0979081a65c67441b61e570cb1f55a0e3a21e667"
+    },
+    {
+      "check": "inherited_source:outputs/predictive_error_optimization_20261010/models/f749f47ef44db53a35f56a822e2b35edc0877ad5126c4352a996dfb2f5a20e8b/run.json",
+      "passed": true,
+      "expected": "7c22e0467925ee95fed2f5d287357ff0948bbc524e25715954cd28c22a83e841",
+      "observed": "7c22e0467925ee95fed2f5d287357ff0948bbc524e25715954cd28c22a83e841"
+    },
+    {
+      "check": "inherited_source:outputs/predictive_readiness_20261010/SOURCE_OWNER_REVIEW.md",
+      "passed": true,
+      "expected": "08f8fc10d7c438568453d53544375c927e2a5085affde318c0758664a6f5e3fd",
+      "observed": "08f8fc10d7c438568453d53544375c927e2a5085affde318c0758664a6f5e3fd"
+    },
+    {
+      "check": "inherited_source:services/analytics_service/predictive/contracts.py",
+      "passed": true,
+      "expected": "a6ece04850ba397a84c72309043c9ab6c83c3ee7a4fc1fe4b63f1b82b8b86d3a",
+      "observed": "a6ece04850ba397a84c72309043c9ab6c83c3ee7a4fc1fe4b63f1b82b8b86d3a"
+    },
+    {
+      "check": "inherited_source:services/analytics_service/predictive/engine.py",
+      "passed": true,
+      "expected": "cdc5a39363c69f500897e849f2c37ab42c401ed789b6890e6abab808cbbee4c8",
+      "observed": "cdc5a39363c69f500897e849f2c37ab42c401ed789b6890e6abab808cbbee4c8"
+    },
+    {
+      "check": "inherited_source:services/analytics_service/predictive/models.py",
+      "passed": true,
+      "expected": "2b2b6495e3ff54b7613800fded65832efc46fc1018ad2fe09f678baf857c4ac9",
+      "observed": "2b2b6495e3ff54b7613800fded65832efc46fc1018ad2fe09f678baf857c4ac9"
+    },
+    {
+      "check": "inherited_source:services/analytics_service/predictive/metrics.py",
+      "passed": true,
+      "expected": "4841243a2b262d71845596d4d72b44a7aa7447602003cfdb79b971e1d7ac8baa",
+      "observed": "4841243a2b262d71845596d4d72b44a7aa7447602003cfdb79b971e1d7ac8baa"
+    },
+    {
+      "check": "inherited_source:services/analytics_service/predictive/extended_experiment.py",
+      "passed": true,
+      "expected": "3d88a6aa92bb0b03140ce9830512cd1292d4a6d0fe85ad8bdc190d92b64f3b42",
+      "observed": "3d88a6aa92bb0b03140ce9830512cd1292d4a6d0fe85ad8bdc190d92b64f3b42"
+    },
+    {
+      "check": "inherited_source:services/analytics_service/predictive/annual_projection.py",
+      "passed": true,
+      "expected": "62064b67e90832ce2e46474ff9b7495ba05a8032b66d1e68177483db412dac80",
+      "observed": "62064b67e90832ce2e46474ff9b7495ba05a8032b66d1e68177483db412dac80"
+    },
+    {
+      "check": "inherited_source:services/analytics_service/predictive/robust_error_experiment.py",
+      "passed": true,
+      "expected": "0a07f75c83ed44c05524ad5032e86c3d3e889b32276dd6f3226a3dbd062e6bd6",
+      "observed": "0a07f75c83ed44c05524ad5032e86c3d3e889b32276dd6f3226a3dbd062e6bd6"
+    },
+    {
+      "check": "inherited_source:services/tests/test_predictive_robust_error.py",
+      "passed": true,
+      "expected": "6eed6913afc702bedee334803a37f0b0d15acecef1d1fffeb82797c3e73e1e98",
+      "observed": "6eed6913afc702bedee334803a37f0b0d15acecef1d1fffeb82797c3e73e1e98"
+    },
+    {
+      "check": "independent_expectation_source:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\models\\f749f47ef44db53a35f56a822e2b35edc0877ad5126c4352a996dfb2f5a20e8b\\run.json",
+      "passed": true,
+      "expected": "7c22e0467925ee95fed2f5d287357ff0948bbc524e25715954cd28c22a83e841",
+      "observed": "7c22e0467925ee95fed2f5d287357ff0948bbc524e25715954cd28c22a83e841"
+    },
+    {
+      "check": "independent_expectation_source:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\qa\\verification.json",
+      "passed": true,
+      "expected": "874ead40411b7131127aff079ecc61b8ae7c85d0336da8468a039270f944455d",
+      "observed": "874ead40411b7131127aff079ecc61b8ae7c85d0336da8468a039270f944455d"
+    },
+    {
+      "check": "independent_expectation_source:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_policy_20261010\\policy.json",
+      "passed": true,
+      "expected": "55c93ca278c8fa9a19efaecdd8327836bc3d35662fe733eb36917125bb4d0fcb",
+      "observed": "55c93ca278c8fa9a19efaecdd8327836bc3d35662fe733eb36917125bb4d0fcb"
+    },
+    {
+      "check": "independent_expectation_source:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\delivery.json",
+      "passed": true,
+      "expected": "97965466f37697305e40c1700465580c466ba066be1526c68e9b263e991492f3",
+      "observed": "97965466f37697305e40c1700465580c466ba066be1526c68e9b263e991492f3"
+    },
+    {
+      "check": "independent_expectation_source:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\qa\\expected_metrics.py",
+      "passed": true,
+      "expected": "b801fa35466f308483518b3d4d5523e2c34d9fb7fb4c1bbf1b0daa01e975a4d6",
+      "observed": "b801fa35466f308483518b3d4d5523e2c34d9fb7fb4c1bbf1b0daa01e975a4d6"
+    },
+    {
+      "check": "source_fact20_dataset",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "source_optimization_run",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "accountable_business_analyst",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "research_target",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "two_error_metrics",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "same_scored_pairs",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "unknown_field:accepted_operational_use",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "unknown_field:max_mae_php",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "unknown_field:max_wape_percent",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "unknown_field:accepted_evaluation_period",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "unknown_field:accepted_leads_months",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "unknown_field:numerical_acceptance_reviewer",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "unknown_field:numerical_acceptance_date",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "unknown_field:next_source_release_date",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "unknown_field:actuals_2026",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "unknown_field:assessment_2026",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "both_limits_match_old_policy",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "no_acceptance_with_missing_limits",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "direction_policy_unchanged",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "provisional_costs",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "reported_preference_attributed",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "requesting_user_endorsement",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "no_external_signature_attribution",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "decision_preparation_status",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "recorded_timezone_and_instant",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "capture_time_is_record_time",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "real_record_date",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "original_reference_preserved",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "new_winner_preserved",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "calibration_unselected",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "no_new_authority:selection_changed",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "no_new_authority:publication_approved",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "no_new_authority:new_forecasts_issued",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "no_new_authority:clinical_or_inventory_benefit_established",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "no_new_authority:external_message_sent",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "no_new_authority:fitting_executed",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "original_O3_open",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "annual_release_user_reported",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "confirmation_future_registration",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "audit_dates_count_status",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "same_exact_audit_pairs",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "metric_count:last_value",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "audit_metric:last_value:mae",
+      "passed": true,
+      "expected": "5834383.00166666666666666666666666666666666666666666666666667",
+      "observed": "5834383.001666666666666666666666666666667"
+    },
+    {
+      "check": "audit_metric:last_value:rmse",
+      "passed": true,
+      "expected": "6956031.72242675326151648155085270748567764507677284164936853",
+      "observed": "6956031.722426753261516481550852707485677"
+    },
+    {
+      "check": "audit_metric:last_value:wape",
+      "passed": true,
+      "expected": "37.7636442886442709201266679928397115303633579498402816842603",
+      "observed": "37.76364428864427092012666799283971153036"
+    },
+    {
+      "check": "audit_metric:last_value:normalized_bias",
+      "passed": true,
+      "expected": "8.38354454667083109333987315924044389968467821793240387483615",
+      "observed": "8.383544546670831093339873159240443899685"
+    },
+    {
+      "check": "direction_count:last_value:over_count",
+      "passed": true,
+      "expected": 7,
+      "observed": 7
+    },
+    {
+      "check": "direction_count:last_value:under_count",
+      "passed": true,
+      "expected": 5,
+      "observed": 5
+    },
+    {
+      "check": "direction_count:last_value:zero_count",
+      "passed": true,
+      "expected": 0,
+      "observed": 0
+    },
+    {
+      "check": "direction_amount:last_value:over",
+      "passed": true,
+      "expected": "42777710.55",
+      "observed": "42777710.55"
+    },
+    {
+      "check": "direction_amount:last_value:under",
+      "passed": true,
+      "expected": "27234885.47",
+      "observed": "27234885.47"
+    },
+    {
+      "check": "metric_count:median_12",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "audit_metric:median_12:mae",
+      "passed": true,
+      "expected": "12657516.4866666666666666666666666666666666666666666666666667",
+      "observed": "12657516.48666666666666666666666666666667"
+    },
+    {
+      "check": "audit_metric:median_12:rmse",
+      "passed": true,
+      "expected": "14353111.4105404645314591954650236097826740544286393345819544",
+      "observed": "14353111.41054046453145919546502360978268"
+    },
+    {
+      "check": "audit_metric:median_12:wape",
+      "passed": true,
+      "expected": "81.9270778150123560500506411487928067226583552427453208072548",
+      "observed": "81.92707781501235605005064114879280672266"
+    },
+    {
+      "check": "audit_metric:median_12:normalized_bias",
+      "passed": true,
+      "expected": "-81.6941631417306420498481703632128254533096173308581990559896",
+      "observed": "-81.69416314173064204984817036321282545331"
+    },
+    {
+      "check": "direction_count:median_12:over_count",
+      "passed": true,
+      "expected": 1,
+      "observed": 1
+    },
+    {
+      "check": "direction_count:median_12:under_count",
+      "passed": true,
+      "expected": 11,
+      "observed": 11
+    },
+    {
+      "check": "direction_count:median_12:zero_count",
+      "passed": true,
+      "expected": 0,
+      "observed": 0
+    },
+    {
+      "check": "direction_amount:median_12:over",
+      "passed": true,
+      "expected": "215908.2",
+      "observed": "215908.2"
+    },
+    {
+      "check": "direction_amount:median_12:under",
+      "passed": true,
+      "expected": "151674289.64",
+      "observed": "151674289.64"
+    },
+    {
+      "check": "metric_count:last_value_l1_calibrated_10pct",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "audit_metric:last_value_l1_calibrated_10pct:mae",
+      "passed": true,
+      "expected": "5772569.94666666666666666666666666666666666666666666666666667",
+      "observed": "5772569.946666666666666666666666666666667"
+    },
+    {
+      "check": "audit_metric:last_value_l1_calibrated_10pct:rmse",
+      "passed": true,
+      "expected": "6844894.58675370645192518430000598623153048888227093400541383",
+      "observed": "6844894.586753706451925184300005986231530"
+    },
+    {
+      "check": "audit_metric:last_value_l1_calibrated_10pct:wape",
+      "passed": true,
+      "expected": "37.3635529300982883778577220851359210554886653519288412497798",
+      "observed": "37.36355293009828837785772208513592105549"
+    },
+    {
+      "check": "audit_metric:last_value_l1_calibrated_10pct:normalized_bias",
+      "passed": true,
+      "expected": "-2.45480990799625201599411415668360049028378960386083651264747",
+      "observed": "-2.454809907996252015994114156683600490284"
+    },
+    {
+      "check": "direction_count:last_value_l1_calibrated_10pct:over_count",
+      "passed": true,
+      "expected": 6,
+      "observed": 6
+    },
+    {
+      "check": "direction_count:last_value_l1_calibrated_10pct:under_count",
+      "passed": true,
+      "expected": 6,
+      "observed": 6
+    },
+    {
+      "check": "direction_count:last_value_l1_calibrated_10pct:zero_count",
+      "passed": true,
+      "expected": 0,
+      "observed": 0
+    },
+    {
+      "check": "direction_amount:last_value_l1_calibrated_10pct:over",
+      "passed": true,
+      "expected": "32359849.914",
+      "observed": "32359849.914"
+    },
+    {
+      "check": "direction_amount:last_value_l1_calibrated_10pct:under",
+      "passed": true,
+      "expected": "36910989.446",
+      "observed": "36910989.446"
+    },
+    {
+      "check": "change:last_value_l1_calibrated_10pct:development:mae_absolute_reduction",
+      "passed": true,
+      "expected": "183443.1539351190666666666667",
+      "observed": "183443.1539351190666666666667"
+    },
+    {
+      "check": "change:last_value_l1_calibrated_10pct:development:mae_relative_reduction_percent",
+      "passed": true,
+      "expected": "5.935767001316645991005285950",
+      "observed": "5.935767001316645991005285953"
+    },
+    {
+      "check": "change:last_value_l1_calibrated_10pct:development:wape_percentage_point_reduction",
+      "passed": true,
+      "expected": "4.938520154410040135815567928",
+      "observed": "4.938520154410040135815567928"
+    },
+    {
+      "check": "change:last_value_l1_calibrated_10pct:retrospective_audit:mae_absolute_reduction",
+      "passed": true,
+      "expected": "61813.05500000000000000000000",
+      "observed": "61813.05500000000000000000000"
+    },
+    {
+      "check": "change:last_value_l1_calibrated_10pct:retrospective_audit:mae_relative_reduction_percent",
+      "passed": true,
+      "expected": "1.059461728555398309025593530",
+      "observed": "1.059461728555398309025593535"
+    },
+    {
+      "check": "change:last_value_l1_calibrated_10pct:retrospective_audit:wape_percentage_point_reduction",
+      "passed": true,
+      "expected": "0.4000913585459825422689459077",
+      "observed": "0.4000913585459825422689459077"
+    },
+    {
+      "check": "change:median_12:development:mae_absolute_reduction",
+      "passed": true,
+      "expected": "769510.9913333333333333333333",
+      "observed": "769510.9913333333333333333333"
+    },
+    {
+      "check": "change:median_12:development:mae_relative_reduction_percent",
+      "passed": true,
+      "expected": "24.89947349641819090032515227",
+      "observed": "24.89947349641819090032515227"
+    },
+    {
+      "check": "change:median_12:development:wape_percentage_point_reduction",
+      "passed": true,
+      "expected": "20.71620258493703694659374722",
+      "observed": "20.71620258493703694659374722"
+    },
+    {
+      "check": "change:median_12:development:rmse_relative_reduction_percent",
+      "passed": true,
+      "expected": "19.37062863701369935240135527",
+      "observed": "19.37062863701369935240135527"
+    },
+    {
+      "check": "change:median_12:retrospective_audit:mae_absolute_reduction",
+      "passed": true,
+      "expected": "-6823133.485000000000000000000",
+      "observed": "-6823133.485000000000000000000"
+    },
+    {
+      "check": "change:median_12:retrospective_audit:mae_relative_reduction_percent",
+      "passed": true,
+      "expected": "-116.9469587966865394345078879",
+      "observed": "-116.9469587966865394345078879"
+    },
+    {
+      "check": "change:median_12:retrospective_audit:wape_percentage_point_reduction",
+      "passed": true,
+      "expected": "-44.16343352636808512992397316",
+      "observed": "-44.16343352636808512992397316"
+    },
+    {
+      "check": "change:median_12:retrospective_audit:rmse_relative_reduction_percent",
+      "passed": true,
+      "expected": "-106.3405111317274074727799247",
+      "observed": "-106.3405111317274074727799247"
+    },
+    {
+      "check": "displayed_MAE:last_value",
+      "passed": true,
+      "expected": "₱5,834,383.00",
+      "observed": null
+    },
+    {
+      "check": "displayed_WAPE:last_value",
+      "passed": true,
+      "expected": "37.763644%",
+      "observed": null
+    },
+    {
+      "check": "displayed_MAE:median_12",
+      "passed": true,
+      "expected": "₱12,657,516.49",
+      "observed": null
+    },
+    {
+      "check": "displayed_WAPE:median_12",
+      "passed": true,
+      "expected": "81.927078%",
+      "observed": null
+    },
+    {
+      "check": "displayed_MAE:last_value_l1_calibrated_10pct",
+      "passed": true,
+      "expected": "₱5,772,569.95",
+      "observed": null
+    },
+    {
+      "check": "displayed_WAPE:last_value_l1_calibrated_10pct",
+      "passed": true,
+      "expected": "37.363553%",
+      "observed": null
+    },
+    {
+      "check": "displayed_change:calibration_peso_reduction",
+      "passed": true,
+      "expected": "₱61,813.06 per scored month",
+      "observed": null
+    },
+    {
+      "check": "displayed_change:calibration_relative_percent",
+      "passed": true,
+      "expected": "1.059462%",
+      "observed": null
+    },
+    {
+      "check": "displayed_change:calibration_WAPEpp",
+      "passed": true,
+      "expected": "0.400091 percentage points",
+      "observed": null
+    },
+    {
+      "check": "displayed_change:winner_dev_reduction",
+      "passed": true,
+      "expected": "24.899473%",
+      "observed": null
+    },
+    {
+      "check": "displayed_change:winner_audit_increase",
+      "passed": true,
+      "expected": "116.946959%",
+      "observed": null
+    },
+    {
+      "check": "claim:requesting user reported",
+      "passed": true,
+      "expected": "requesting user reported",
+      "observed": null
+    },
+    {
+      "check": "claim:CLIENT WANTS TO DO BOTH",
+      "passed": true,
+      "expected": "CLIENT WANTS TO DO BOTH",
+      "observed": null
+    },
+    {
+      "check": "claim:SURE DO",
+      "passed": true,
+      "expected": "SURE DO",
+      "observed": null
+    },
+    {
+      "check": "claim:does not supply numerical limits",
+      "passed": true,
+      "expected": "does not supply numerical limits",
+      "observed": null
+    },
+    {
+      "check": "claim:Monthly revenue budgeting is a proposed discussion use",
+      "passed": true,
+      "expected": "Monthly revenue budgeting is a proposed discussion use",
+      "observed": null
+    },
+    {
+      "check": "claim:operational decision remains unconfirmed",
+      "passed": true,
+      "expected": "operational decision remains unconfirmed",
+      "observed": null
+    },
+    {
+      "check": "claim:same pairs and absolute-error numerator",
+      "passed": true,
+      "expected": "same pairs and absolute-error numerator",
+      "observed": null
+    },
+    {
+      "check": "claim:Neither caps the error in every month",
+      "passed": true,
+      "expected": "Neither caps the error in every month",
+      "observed": null
+    },
+    {
+      "check": "claim:zero absolute-actual denominator",
+      "passed": true,
+      "expected": "zero absolute-actual denominator",
+      "observed": null
+    },
+    {
+      "check": "claim:no scored pairs",
+      "passed": true,
+      "expected": "no scored pairs",
+      "observed": null
+    },
+    {
+      "check": "claim:small net bias can conceal large opposing errors",
+      "passed": true,
+      "expected": "small net bias can conceal large opposing errors",
+      "observed": null
+    },
+    {
+      "check": "claim:not measured lost sales, cash loss",
+      "passed": true,
+      "expected": "not measured lost sales, cash loss",
+      "observed": null
+    },
+    {
+      "check": "claim:cannot determine medicine purchase quantities",
+      "passed": true,
+      "expected": "cannot determine medicine purchase quantities",
+      "observed": null
+    },
+    {
+      "check": "claim:Both valid limits must be met on the same cohort",
+      "passed": true,
+      "expected": "Both valid limits must be met on the same cohort",
+      "observed": null
+    },
+    {
+      "check": "claim:business error acceptance remains",
+      "passed": true,
+      "expected": "business error acceptance remains",
+      "observed": null
+    },
+    {
+      "check": "claim:not assessed",
+      "passed": true,
+      "expected": "not assessed",
+      "observed": null
+    },
+    {
+      "check": "claim:has not been sent to the client",
+      "passed": true,
+      "expected": "has not been sent to the client",
+      "observed": null
+    },
+    {
+      "check": "claim:Agreeing limits alone does not activate a forecast",
+      "passed": true,
+      "expected": "Agreeing limits alone does not activate a forecast",
+      "observed": null
+    },
+    {
+      "check": "claim:Source-owner explanations",
+      "passed": true,
+      "expected": "Source-owner explanations",
+      "observed": null
+    },
+    {
+      "check": "claim:remain unconfirmed",
+      "passed": true,
+      "expected": "remain unconfirmed",
+      "observed": null
+    },
+    {
+      "check": "claim:next release date is unknown",
+      "passed": true,
+      "expected": "next release date is unknown",
+      "observed": null
+    },
+    {
+      "check": "claim:Before reviewing later actuals, the model owner must register the confirmation protocol",
+      "passed": true,
+      "expected": "Before reviewing later actuals, the model owner must register the confirmation protocol",
+      "observed": null
+    },
+    {
+      "check": "claim:Historical issue-time source availability remains unverified",
+      "passed": true,
+      "expected": "Historical issue-time source availability remains unverified",
+      "observed": null
+    },
+    {
+      "check": "claim:model's data cutoff",
+      "passed": true,
+      "expected": "model's data cutoff",
+      "observed": null
+    },
+    {
+      "check": "claim:not evidence that predictions were actually issued then",
+      "passed": true,
+      "expected": "not evidence that predictions were actually issued then",
+      "observed": null
+    },
+    {
+      "check": "claim:10 October 2026 using a December 2025 data cutoff",
+      "passed": true,
+      "expected": "10 October 2026 using a December 2025 data cutoff",
+      "observed": null
+    },
+    {
+      "check": "claim:January–September had already elapsed",
+      "passed": true,
+      "expected": "January–September had already elapsed",
+      "observed": null
+    },
+    {
+      "check": "claim:October was current and November–December were future",
+      "passed": true,
+      "expected": "October was current and November–December were future",
+      "observed": null
+    },
+    {
+      "check": "claim:Do not label all twelve as forecasts issued in December 2025",
+      "passed": true,
+      "expected": "Do not label all twelve as forecasts issued in December 2025",
+      "observed": null
+    },
+    {
+      "check": "claim:forecasts issued before their target periods",
+      "passed": true,
+      "expected": "forecasts issued before their target periods",
+      "observed": null
+    },
+    {
+      "check": "claim:later accepted untouched actuals",
+      "passed": true,
+      "expected": "later accepted untouched actuals",
+      "observed": null
+    },
+    {
+      "check": "claim:New trial recipes have no new 2026 projections",
+      "passed": true,
+      "expected": "New trial recipes have no new 2026 projections",
+      "observed": null
+    },
+    {
+      "check": "claim:Original O3",
+      "passed": true,
+      "expected": "Original O3",
+      "observed": null
+    },
+    {
+      "check": "claim:operational inventory acceptance remain open",
+      "passed": true,
+      "expected": "operational inventory acceptance remain open",
+      "observed": null
+    },
+    {
+      "check": "register_preserves_unknowns_and_attribution",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "register_preserves_original_objective",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "annual_true_generation_and_cutoff",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "annual_actual_timing_flags",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "annual_original_selection_preserved",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "preparation_no_fitting_or_forecasting",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "preparation_no_analytical_service_import",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "preparation_refuses_overwrite",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "preparation_command_recorded",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "next_owners_present",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "root_seal_no_model_execution",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "root_seal_checks_qa_before_delivery",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "root_seal_refuses_overwrite",
+      "passed": true,
+      "expected": null,
+      "observed": null
+    },
+    {
+      "check": "local_link:PREDICTIVE_CLIENT_DECISION_BRIEF.md:0",
+      "passed": true,
+      "expected": "existing local file",
+      "observed": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\docs\\OBJECTIVE_EVIDENCE_REGISTER.md"
+    },
+    {
+      "check": "local_anchor:PREDICTIVE_CLIENT_DECISION_BRIEF.md:0",
+      "passed": true,
+      "expected": "predictive-client-decision-brief--10-october-2026",
+      "observed": [
+        "alignment-corrections-and-next-acceptance-sequence",
+        "business-decisions-preserve-and-request-correctly",
+        "current-evidence-and-corrected-baseline",
+        "current-fulfillment-assessment--7-october-2026",
+        "evidence-baseline",
+        "five-objectives-fulfillment-verdict",
+        "functional-delivery-checklist",
+        "implementation-handoff-and-step-1-acceptance",
+        "medshield-objective-scope-and-evidence-register",
+        "north-star-question-by-question",
+        "original-objectives-mapped-to-execution",
+        "original-register-context--3-october-2026",
+        "predictive-client-decision-brief--10-october-2026",
+        "predictive-error-policy--10-october-2026",
+        "predictive-target-review--10-october-2026",
+        "proposed-delivery-boundaries",
+        "purpose-and-authority",
+        "quantitative-and-methodological-claim-register"
+      ]
+    },
+    {
+      "check": "local_link:PREDICTIVE_CLIENT_DECISION_BRIEF.md:1",
+      "passed": true,
+      "expected": "existing local file",
+      "observed": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\RESULTS.md"
+    },
+    {
+      "check": "local_link:PREDICTIVE_CLIENT_DECISION_BRIEF.md:2",
+      "passed": true,
+      "expected": "existing local file",
+      "observed": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_policy_20261010\\README.md"
+    },
+    {
+      "check": "local_anchor:PREDICTIVE_CLIENT_DECISION_BRIEF.md:2",
+      "passed": true,
+      "expected": "client-review-card",
+      "observed": [
+        "client-review-card",
+        "current-inherited-evidence",
+        "selected-approach",
+        "step-2--forecast-error-policy-and-client-review",
+        "step-status-and-evidence"
+      ]
+    },
+    {
+      "check": "local_link:PREDICTIVE_CLIENT_DECISION_BRIEF.md:3",
+      "passed": true,
+      "expected": "existing local file",
+      "observed": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_readiness_20261010\\SOURCE_OWNER_REVIEW.md"
+    },
+    {
+      "check": "local_link:PREDICTIVE_CLIENT_DECISION_BRIEF.md:4",
+      "passed": true,
+      "expected": "existing local file",
+      "observed": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\README.md"
+    },
+    {
+      "check": "local_link:PREDICTIVE_CLIENT_DECISION_BRIEF.md:5",
+      "passed": true,
+      "expected": "existing local file",
+      "observed": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\docs\\CURRENT_STATE.md"
+    },
+    {
+      "check": "local_link:PREDICTIVE_CLIENT_DECISION_BRIEF.md:6",
+      "passed": true,
+      "expected": "existing local file",
+      "observed": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\docs\\PREDICTIVE_OPERATIONS.md"
+    },
+    {
+      "check": "local_link:PREDICTIVE_CLIENT_DECISION_BRIEF.md:7",
+      "passed": true,
+      "expected": "existing local file",
+      "observed": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\docs\\OBJECTIVE_EVIDENCE_REGISTER.md"
+    },
+    {
+      "check": "local_anchor:PREDICTIVE_CLIENT_DECISION_BRIEF.md:7",
+      "passed": true,
+      "expected": "predictive-error-policy--10-october-2026",
+      "observed": [
+        "alignment-corrections-and-next-acceptance-sequence",
+        "business-decisions-preserve-and-request-correctly",
+        "current-evidence-and-corrected-baseline",
+        "current-fulfillment-assessment--7-october-2026",
+        "evidence-baseline",
+        "five-objectives-fulfillment-verdict",
+        "functional-delivery-checklist",
+        "implementation-handoff-and-step-1-acceptance",
+        "medshield-objective-scope-and-evidence-register",
+        "north-star-question-by-question",
+        "original-objectives-mapped-to-execution",
+        "original-register-context--3-october-2026",
+        "predictive-client-decision-brief--10-october-2026",
+        "predictive-error-policy--10-october-2026",
+        "predictive-target-review--10-october-2026",
+        "proposed-delivery-boundaries",
+        "purpose-and-authority",
+        "quantitative-and-methodological-claim-register"
+      ]
+    },
+    {
+      "check": "local_link:PREDICTIVE_CLIENT_DECISION_BRIEF.md:8",
+      "passed": true,
+      "expected": "existing local file",
+      "observed": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_policy_20261010\\policy.json"
+    },
+    {
+      "check": "local_link:PREDICTIVE_CLIENT_DECISION_BRIEF.md:9",
+      "passed": true,
+      "expected": "existing local file",
+      "observed": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\qa\\REPORT.md"
+    },
+    {
+      "check": "local_link:OBJECTIVE_EVIDENCE_REGISTER.md:0",
+      "passed": true,
+      "expected": "existing local file",
+      "observed": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\docs\\PREDICTIVE_CLIENT_DECISION_BRIEF.md"
+    },
+    {
+      "check": "local_link:OBJECTIVE_EVIDENCE_REGISTER.md:1",
+      "passed": true,
+      "expected": "existing local file",
+      "observed": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\RESULTS.md"
+    },
+    {
+      "check": "local_link:OBJECTIVE_EVIDENCE_REGISTER.md:2",
+      "passed": true,
+      "expected": "existing local file",
+      "observed": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\README.md"
+    },
+    {
+      "check": "local_link:README.md:0",
+      "passed": true,
+      "expected": "existing local file",
+      "observed": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\docs\\PREDICTIVE_CLIENT_DECISION_BRIEF.md"
+    },
+    {
+      "check": "local_link:README.md:1",
+      "passed": true,
+      "expected": "existing local file",
+      "observed": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\docs\\OBJECTIVE_EVIDENCE_REGISTER.md"
+    },
+    {
+      "check": "local_anchor:README.md:1",
+      "passed": true,
+      "expected": "predictive-client-decision-brief--10-october-2026",
+      "observed": [
+        "alignment-corrections-and-next-acceptance-sequence",
+        "business-decisions-preserve-and-request-correctly",
+        "current-evidence-and-corrected-baseline",
+        "current-fulfillment-assessment--7-october-2026",
+        "evidence-baseline",
+        "five-objectives-fulfillment-verdict",
+        "functional-delivery-checklist",
+        "implementation-handoff-and-step-1-acceptance",
+        "medshield-objective-scope-and-evidence-register",
+        "north-star-question-by-question",
+        "original-objectives-mapped-to-execution",
+        "original-register-context--3-october-2026",
+        "predictive-client-decision-brief--10-october-2026",
+        "predictive-error-policy--10-october-2026",
+        "predictive-target-review--10-october-2026",
+        "proposed-delivery-boundaries",
+        "purpose-and-authority",
+        "quantitative-and-methodological-claim-register"
+      ]
+    },
+    {
+      "check": "local_link:README.md:2",
+      "passed": true,
+      "expected": "existing local file",
+      "observed": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\docs\\PREDICTIVE_CLIENT_DECISION_BRIEF.md"
+    },
+    {
+      "check": "local_link:README.md:3",
+      "passed": true,
+      "expected": "existing local file",
+      "observed": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\decision.json"
+    },
+    {
+      "check": "local_link:README.md:4",
+      "passed": true,
+      "expected": "existing local file",
+      "observed": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\source-identities.json"
+    },
+    {
+      "check": "local_link:README.md:5",
+      "passed": true,
+      "expected": "owned QA report destination",
+      "observed": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\qa\\REPORT.md"
+    },
+    {
+      "check": "local_link:README.md:6",
+      "passed": true,
+      "expected": "exact root seal output; existence deferred to root seal",
+      "observed": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\delivery.json"
+    }
+  ],
+  "numerical_basis": "Fresh independent Decimal sums of unchanged sealed historical points; expectations retained before the stable draft handoff",
+  "numerical_tolerances": {
+    "currency_php": "0.000001",
+    "percentage_points": "0.0000000001",
+    "displayed_php": "0.005"
+  },
+  "review_mode": "Separate QA Engineer document/data review",
+  "environment": {
+    "python": "3.12.14",
+    "executable": "C:\\Users\\Adrian\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe"
+  },
+  "command": [
+    "outputs/predictive_client_decision_20261010/qa/check_brief.py"
+  ],
+  "fitting_executed": false,
+  "app_build_executed": false,
+  "external_messages_sent": false,
+  "pending_root_seal_links": [
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\delivery.json"
+  ],
+  "skills": [
+    ".agents/qa-engineer.md",
+    ".skills/testing-standards.md",
+    ".skills/analytics-frameworks.md",
+    ".skills/database-standards.md"
+  ],
+  "reused_guidance": [
+    ".agents/worker-operating-model.md",
+    ".agents/execution-contract.md",
+    ".skills/coding-standards.md",
+    ".skills/technology-stack.md"
+  ],
+  "limitations": [
+    "This document/source check does not establish client acceptance or model publication.",
+    "Known numerical client limits, operational decision and named external signature remain absent.",
+    "Future accepted untouched actuals and legitimate issue dates remain required."
+  ]
+}

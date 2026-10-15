@@ -39,10 +39,10 @@ import {
   synchronizeDatabricksYearlyCandidate,
 } from './databricksYearlySync'
 import {
-  refreshNasaPowerWeather,
   WeatherProviderUnavailableError,
   WeatherRefreshInputError,
 } from './nasaPowerWeather'
+import { refreshWeatherProvider } from './weatherProviders'
 import { createSession, revokeSessionToken, SessionUser, verifySessionToken } from './sessionAuth'
 import { loadSnapshot } from './snapshot'
 import { filterMonthlyYear, parseMonthlyYear } from './monthlyQuery'
@@ -738,7 +738,7 @@ app.post(
   weatherRefreshLimiter,
   async (req: Request, res: Response) => {
     try {
-      return res.json(await refreshNasaPowerWeather(req.body ?? {}))
+      return res.json(await refreshWeatherProvider(req.body ?? {}))
     } catch (error) {
       if (error instanceof WeatherRefreshInputError || error instanceof WeatherProviderUnavailableError) {
         return res.status(error.status).json({ error: error.message, code: error.code })

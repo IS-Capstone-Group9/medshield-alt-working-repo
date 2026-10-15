@@ -4,7 +4,392 @@ Prepared: 3 October 2026 (Asia/Manila).
 Accountable documentation role: Business Analyst, with integration review performed sequentially.  
 Status: **Step 1 deliverable prepared and checked; business release and academic scope decisions remain pending.**
 
-## Purpose and authority
+## Guided Step 4: evaluation period — 15 October 2026
+
+Status: **Historical research evaluation-plan setup complete on the requesting
+user's “ok go” instruction. Prospective confirmation remains pending.**
+Preserve the five original development origins (December 2022 and
+March/June/September/December 2023). The full 1–12 month group has 60 overlapping
+cases over 24 distinct target months, January 2023–December 2024. Keep the
+December 2024-origin, January–December 2025 retrospective audit separate.
+Its full 1–12 month group has 12 targets. These counts refer to each of the six
+new recipes and the retained baseline. Shorter groups retain their own actual
+dates/counts; neither all groups nor all origins are independent samples.
+
+Both historical stages were already inspected. This plan creates no new
+untouched test or retrospective issue date. Future confirmation dates stay
+unset until accepted untouched actuals, forecasts issued before their target
+periods and adequate required lead coverage are available under a separately
+registered confirmation protocol. Annual source-release timing remains unknown;
+2026 measured error is unavailable. Source-vintage and completeness limitations
+remain disclosed.
+
+The [current brief](PREDICTIVE_CLIENT_DECISION_BRIEF.md) and
+[evaluation-scope record](../outputs/predictive_evaluation_scope_20261015/scope.json)
+preserve this reporting plan. Original model selection, frozen gates, forecasts
+and prior evidence packets remain unchanged. The 10% research proposal is not
+an achieved score or a business-approved tolerance; business limits stay `null`
+and publication remains unapproved. No model training or new accuracy evaluation
+was performed. Original O3 and operational inventory acceptance remain open.
+
+## Guided Step 3: research lead groups — 15 October 2026
+
+Status: **Complete on the requesting user's Choice 4 selection.** After being
+offered months 1–3, 1–6, 1–12 or all three groups, the user answered **“4”**.
+Report all three cumulative groups separately for company monthly recorded
+net-sales/PHP research forecasts. Leads start after each historical training
+cutoff. Group overlap is explicit; do not sum the groups or claim independent
+observations. Each of the six new recipes and the retained baseline has
+15/30/60 scored development cases and 3/6/12 already inspected 2025
+retrospective-audit cases, respectively.
+
+The [current brief](PREDICTIVE_CLIENT_DECISION_BRIEF.md) and
+[lead-scope record](../outputs/predictive_lead_scope_20261015/scope.json)
+preserve this user-attributed reporting choice. The selection is not named
+external business acceptance or evidence of current rolling calendar coverage.
+It does not alter existing origins, predictions, model criteria or selection.
+The proposed 10% research goal stays separate from unknown business limits;
+the ₱1,544,973.51 conversion applies only to the full twelve-month 2025 reference.
+Business `max_mae_php` and `max_wape_percent` remain `null`; publication remains
+unapproved. Original O3 and prospective model confirmation remain open.
+
+The next guided input is the evaluation period: distinguish the existing
+development and retrospective-audit evidence from later untouched confirmation
+and preserve actual issue dates and source availability. No new fit or
+2026 accuracy result is created by the lead-group selection.
+
+## Guided client inputs 2–3: proposed research error goal — 15 October 2026
+
+Status: **Proposed research goal recorded on the requesting user's endorsement;
+business numerical acceptance remains pending.** The user said **“sure”** after
+the assistant proposed **10% WAPE**, equivalent to approximately **₱1.55 million
+monthly MAE** on the 2025 reference cohort. No named client approver, acceptance
+timestamp, measured cost consequence or operational publication was supplied.
+
+The exact reference conversion is **₱1,544,973.51**, cent-rounded from
+`0.10 × ₱185,396,821.04 / 12`. The denominator covers January–December 2025,
+not future sales or the 60 overlapping development cases. The 10% value is a
+tentative research choice, not an industry benchmark or proven affordable
+business tolerance. Future peso equivalence depends on its own cohort; do not
+silently rescale a business limit or present the reference amount as a cap for
+every monthly error.
+
+The [current brief](PREDICTIVE_CLIENT_DECISION_BRIEF.md) and
+[research-goal record](../outputs/predictive_research_goal_20261015/goal.json)
+separate proposed values from business `max_mae_php` and `max_wape_percent`,
+which remain `null`. Business error acceptance remains
+`not_assessed_thresholds_missing`. Existing audit errors exceed the proposal;
+no achieved 10% result or reliable 2026 performance is claimed. The proposal
+does not change frozen experimental criteria, original `last_value` selection,
+model artifacts, forecast values, 1:1 research weights or publication status.
+Achievability, later confirmation and operational acceptance remain unverified.
+
+The next scope inputs are actual forecast leads and the evaluation period.
+Confirmation must have its own registered protocol before later untouched
+actuals are inspected. Original O3 and operational inventory acceptance remain
+open. Prior dated evidence packets are preserved unchanged.
+
+## Guided client input 1: intended use — 13 October 2026
+
+Status: **Complete on the requesting user's Choice 3 selection.** The user
+answered **“3”** after being offered sales outlook review, revenue-budget
+discussions, both uses, or medicine purchasing/replenishment. This records
+**both sales outlook review and revenue-budget discussions** for the company
+monthly recorded net-sales/PHP research forecasts. The choice is attributed to
+the requesting user; no named CEO signature or external acceptance timestamp
+has been supplied. It does not establish reliable operational budgeting.
+
+The [current client brief](PREDICTIVE_CLIENT_DECISION_BRIEF.md) now reflects the
+selected purpose. Both MAE/PHP and WAPE/% remain the paired reporting measures.
+Maximum acceptable MAE and WAPE remain `null`, with business error acceptance
+`not_assessed_thresholds_missing`. Evaluation period/leads, numerical acceptance
+attribution and later confirmation remain pending. No model selection,
+publication, forecast value, numerical result or provisional 1:1 loss weight
+changes. Original O3 remains open.
+
+Guided client input 2 is next: the maximum acceptable average monthly peso miss
+for this use, followed by its same-cohort WAPE percentage limit. The
+[selection record](../outputs/predictive_client_choice3_20261013/selection.json)
+retains before/after document identities; earlier evidence packets stay intact.
+
+## Predictive client decision brief — 10 October 2026
+
+Status: **Research approach endorsed by the requesting user; client review brief
+prepared. Numerical error acceptance and operational use remain pending.**
+The user reported **“CLIENT WANTS TO DO BOTH”**, supporting continued joint
+MAE/PHP and WAPE/% reporting. They then said **“SURE DO”** after the recommendation
+to retain research status pending scoped limits and later validation. These are
+session statements recorded on 10 October 2026, not supplied external signature
+or decision timestamps. No named CEO/adviser approval, peso limit, percentage
+limit or operational decision has been invented.
+
+The [client decision brief](PREDICTIVE_CLIENT_DECISION_BRIEF.md) turns that
+recommendation into one review item: intended action, target/cohort/leads,
+maximum average monthly MAE, maximum cohort WAPE and actual decision attribution.
+It reuses the existing client review card rather than replacing the error policy.
+Missing limits stay `null`; business error acceptance stays
+`not_assessed_thresholds_missing`. Provisional direction weights remain 1:1.
+
+The [six-trial research supplement](../outputs/predictive_error_optimization_20261010/RESULTS.md)
+has mixed results. The development winner materially worsens the 2025 audit;
+the unselected calibration trial improves audit MAE only 1.059462%. Original
+selected `last_value`, model gates and annual projections remain unchanged.
+The brief does not authorize audit-driven replacement selection or procurement.
+
+Annual release timing, source-owner explanations and independent completeness
+remain unresolved. The next model owner registers the confirmation protocol
+before later actuals are inspected and retains real issue dates and required
+lead coverage. Original O3 remains open. Adviser acceptance and model/source
+publication remain distinct from this documentation deliverable.
+The [preparation packet](../outputs/predictive_client_decision_20261010/README.md)
+records evidence identities, proportional checks and the Business Analyst handoff.
+
+## Predictive error policy — 10 October 2026
+
+Status: **Research reporting policy implemented and verified; numerical business limits remain unset.**
+The requesting user said **"DO THAT THEN"** after the recommendation to use both
+peso and percentage error measures, minimize error in both directions and examine
+overestimates/underestimates separately. Recorded **10 October 2026 at 14:38
+Asia/Manila**; this is the recording time of the task, not an external approval
+time. Accountable role: Business Analyst, with Data Analyst implementation and
+independent QA/reader review.
+
+Implement this as **joint MAE (PHP) and WAPE (%) reporting**, with RMSE, signed
+normalized bias and directional errors retained as diagnostics. Equal absolute
+error weights of **1 for overforecasting / 1 for underforecasting** formalize the
+provisional research comparison. They do not establish equal business costs.
+Forecasts stay at their recorded values; there is no deliberate upward/downward
+adjustment and no change to the inherited selection or experimental criteria.
+
+| Policy item | Selected approach or unresolved limit |
+|---|---|
+| Target | Company monthly eligible recorded `net_sales` in PHP |
+| Primary measures | MAE in PHP and WAPE in percent, reported on the same exact forecast/actual pairs |
+| Provisional loss | Per-peso absolute-error weight 1:1 in both directions; measured client consequences remain unknown |
+| Direction checks | Overforecast/underforecast counts and magnitude totals; their sum is absolute error, their difference is signed error |
+| Secondary diagnostics | RMSE, signed normalized bias and largest absolute miss; small net bias cannot hide large opposing errors |
+| Maximum acceptable cohort MAE | **Unset (`null`)**; client must provide a peso amount |
+| Maximum acceptable cohort WAPE | **Unset (`null`)**; client must provide a percentage |
+| Joint decision | Not assessed until both valid limits and their evaluation scope are recorded; then both limits must be met on that same cohort |
+| Scope of acceptance | Named target, period/cohort, actual leads, source identity and intended decision; an average/aggregate limit is not a cap for each month |
+| 2026 accuracy | Unavailable without accepted actuals; current projections receive no error or acceptance score |
+
+MAE and WAPE share the total absolute-error numerator. On identical common pairs
+with the same nonzero actual denominator, their model ordering agrees. They
+provide peso and scale interpretation, not two independent votes. A zero
+absolute-actual denominator leaves WAPE unavailable; empty pairs leave both
+measures unavailable. Missing limits cannot produce an acceptance pass, even
+where all computed values are finite. Existing audit errors are observed results,
+not automatic client tolerances.
+
+For example, two errors of +₱100 and −₱100 have zero mean signed bias but **₱100
+MAE**. Bias is a diagnostic alongside absolute error. Direction totals here are
+revenue forecast misses, not verified lost sales, excess purchases or expiry.
+If the client later establishes different consequences per direction, register
+a new scoped cost policy before evaluation; do not retrofit it to improve an
+already inspected audit or silently change the frozen model selection.
+
+The [error-policy packet](../outputs/predictive_error_policy_20261010/README.md)
+retains both primary measures and direction checks for all 21 saved recipes,
+separating development from the 2025 retrospective audit. This is a derivation
+of existing predictions, not a new fit or new 2026 evaluation. Its receipt binds
+the input, model artifacts, code and derivation. The builder reconciles 210
+existing metric values across 42 model/cohort summaries; [independent numerical
+QA](../outputs/predictive_error_policy_20261010/qa/REPORT.md) passes 1,331 checks
+with zero failures.
+
+**Guided item 2's reporting/policy setup is complete. Full
+business error acceptance remains pending** until numerical limits and their
+decision scope are recorded. This user request endorses the research approach;
+it supplies no numerical tolerance, verified inventory costs, model-publication
+decision or formal external reviewer identity. Original O3 remains open.
+
+Applied/reused business-analysis frameworks for decision ownership and observable
+acceptance, analytics frameworks for paired populations and error meaning,
+documentation standards for canonical recording, and coding/testing/stack
+guidance for the offline derivation and numerical checks. Runtime, database
+schema, security controls and service operations are unaffected.
+
+## Predictive target review — 10 October 2026
+
+Status: **Guided predictive item 1 complete on user-reported scope approval.**
+After being asked to report the client/adviser scope decision, the requesting
+user replied **"approved"** in this implementation chat. This records acceptance
+of the stated supporting-revenue scope, including peso values and derived forecast
+YoY percentage change. Accountable role: Business Analyst.
+
+Approval evidence: requesting user's direct message, recorded **10 October 2026
+at 14:33 Asia/Manila**. This is the recording time, not an independently verified
+external approval time. Client/adviser names, their individual decision dates and
+a separate written approval were not supplied; no signatures or reviewer
+identities are invented. The reported decision is sufficient to continue this
+guided scope step. It does not authorize model publication or objective removal.
+
+The current research models predict **company monthly eligible recorded net
+sales in Philippine pesos**. Keep that model target and retain the original O3
+territorial pharmaceutical quantity-demand objective as open. Revenue forecasting
+serves as supporting research while the target/data requirements for O3 are
+resolved. No objective is removed, renamed or marked fulfilled by this proposal.
+
+| Item | Current evidence or proposed presentation |
+|---|---|
+| User and intended decision | Client/analyst review of possible company sales and historical forecast misses; usefulness for operational decisions has not been established |
+| Primary target | One company-month `net_sales` value in PHP, preserving eligible item kinds and signed adjustments |
+| Research window | Existing comparison and final-origin execution use January 2020–December 2025; current reporting history is 2017–2025 |
+| Current projection | January–December 2026, leads 1–12 from December 2025; generated on 10 October 2026, with no accepted 2026 actuals here |
+| Accepted presentation scope | Peso forecast plus derived forecast YoY change against the same calendar month in the previous year, from the same frozen eligible revenue input; implementation remains separate |
+| Error reporting already present | MAE/RMSE in pesos; WAPE and normalized bias in percent, on the retained historical evaluation pairs |
+| Original demand target | Verified SKU quantities and units by territory, with the original external-feature/urgency requirements; remains unresolved |
+| Acceptance owners | Client/CEO for business scope and usefulness; adviser/panel for academic scope changes; named model/data reviews for publication |
+
+For a positive eligible, reviewed-complete comparison-month value `b`, derived
+forecast YoY is `100 × (forecast_net_sales − b) / b`. If the baseline is missing,
+zero, negative or coverage-ineligible, leave the percentage unavailable with its
+reason. Preserve the signed peso forecast. Label this **forecast YoY change**,
+not observed growth or accuracy. A percentage display is derived from a revenue
+forecast; it is not an additional fitted model or a medicine-unit target.
+Percentage display remains an accepted specification here, not a new UI or
+numeric output. Existing data coverage and publication gates still apply.
+
+The reviewed statement and request retained for decision context:
+
+> The present predictive research forecasts monthly company recorded net sales
+> in pesos. We propose reporting those peso values alongside derived forecast
+> year-over-year percentage changes, and historical errors in both pesos and
+> percent. This revenue component supports the study while the original medicine
+> quantity-by-territory objective remains open. Please confirm whether that role
+> is acceptable or whether a formal predictive-scope amendment is required.
+
+**Guided item 1 is done for the reported supporting-revenue scope.** The original
+O3 quantity/territory target remains open; the broader register's historical
+scope-amendment, release and acceptance statuses are preserved. Any separate
+signed institutional approval can be attached later with its actual attribution.
+No model tuning, forecast activation, warehouse change or procurement approval
+is part of this documentation step. Guided item 2 is next: agree decision-useful
+error tolerance in pesos/percent and the consequences of over/underforecasting.
+No new tolerance is inferred from this scope approval.
+
+Verification: primary target and dates checked against the
+[annual research packet](../outputs/predictive_annual_release_20261010/README.md);
+original O3 preserved in the original-objectives table below. Applied
+[business-analysis frameworks](../.skills/business-analysis-frameworks.md) to
+define the decision, target and acceptance owner, and
+[analytics frameworks](../.skills/analytics-frameworks.md) to separate peso
+forecasts, derived growth, historical error and quantity-demand evidence.
+Documentation guidance reused for canonical placement, dated evidence and
+accurate attribution of the user's approval report. Verification is document
+consistency and local links; no application tests or new model fit is required.
+
+## Current fulfillment assessment — 7 October 2026
+
+Accountable role: Business Analyst. This refresh compares the five original
+objectives and the [North Star](../references/NStar.md) with current source and
+saved receipts. It does not rerun SQL, authenticated browser flows or application
+tests, and does not grant business/academic acceptance. The 3 October baseline
+below remains historical; its pin mismatch and empty-local-master statements
+must not be read as current conditions.
+
+Assessment plan: retain the original objective wording and existing decisions,
+trace each promised output to source/evidence, distinguish engineering capability
+from demonstrated outcome, and record the exact remaining acceptance gates.
+Scope is this register only; application, schema, security controls and runtime
+operations are unchanged.
+
+### Current evidence and corrected baseline
+
+| ID | Inspected evidence | Scope and limit |
+|---|---|---|
+| E11 | [Current state](CURRENT_STATE.md) and [fact19 direct receipt](../outputs/descriptive_validation/2026-10-07T06-58-17-441Z/evidence.json) | Configured pin19, 37,728 records and matching72-month company STL; no fresh browser/owner acceptance |
+| E12 | [Business analytics assessment](../outputs/business_analytics_review_20261007/REVIEW.md) | 4,561 local pending catalog rows; zero approved category/identity/unit/forecast products; published fact19 retains earlier master |
+| E13 | [Planning QA](../outputs/business_analytics_review_20261007/planning_final_qa.md) | 13 focused fixture tests and1,000 synthetic scenarios; no observed inventory/expiry outcome or optimality assertion |
+| E14 | [Drill-down remediation](../outputs/remediation-drilldown-20261005/README.md) | Local investigation/lineage implementation and browser verification; not authenticated live fact19 diagnostic SQL acceptance |
+| E15 | [Catalog preparation](CATALOG_DEPLOYMENT.md) | Draft descriptor now binds predecessor19; recovery prerequisites and publication remain open; preparation cannot approve products |
+| E16 | [Current upload source](../backend/src/server.ts) | Databricks `/api/sales/upload` branch returns409 and instructs governed pipeline publication; route inspection is not a new HTTP test |
+
+E08 remains the actual frozen fact16 company-PHP forecast experiment:15
+configurations evaluated, no champion activated. Last-value audit WAPE37.76%
+does not establish accepted SKU/territory quantity forecasts or completion rate.
+E10 financial-definition approval and conditional estimate acceptance remain
+valid as recorded; no repeat approval is requested here. Final release,
+geography/buyer evidence and operational outcome gates remain distinct.
+
+### Five objectives: fulfillment verdict
+
+| Objective | Verdict against full original commitment | Established capability | Exact remaining gate |
+|---|---|---|---|
+| O1: study-period regional performance, YoY and STL | **Partly fulfilled; strongest progress** | Historical company finance, coverage, matched-month comparisons and monthly company STL | Verified territory/unit scope,2021–2025 output acceptance, promised daily/territorial decomposition or accepted amendment, same-release authenticated API/chart/export evidence |
+| O2: product/territory/account priority and predictive ABC | **Partly fulfilled** | Observed source-label Pareto/ABC, mapped-area and commercial rankings | Approved SKU/pack/unit and account identity; reviewed territory/buyer mappings; supported slow-mover interpretation; future-period XGBoost evaluation or accepted amendment |
+| O3: December2026 onward territory pharmaceutical demand, DII/RSI and urgency | **Not fulfilled; supporting experiments exist** | Company-PHP baseline/ETS/Prophet comparison with measured errors | Accepted SKU/territory unit target, sufficiently recent history/validated actual leads, external join/as-of evidence, defined urgency truth, validated versioned publication |
+| O4: EOQ/ROP/weighted allocation and expiry wastage≤5% | **Not fulfilled as an operational outcome; scenario work is partial** | Commercial weighting and feasible/infeasible entered allocation scenarios | Stock/on-order/commitments/lot expiry, suppliers/costs/service policy, reviewed optimization objective, measured baseline and observed/simulated outcomes clearly distinguished |
+| O5: five governed modules, upload, official alerts and matching | **Partly fulfilled** | Five module areas exist, historical data serves through the gateway and investigation/export foundations exist | Demonstrated client upload→candidate→review→publication/retry/correction, current authenticated acceptance, official warning or amended scenario scope, evaluated product-region recommendations |
+
+**Zero of five original objectives has evidence closing every conjunctive criterion.**
+This is a strict acceptance count, not zero engineering progress or a person-hour
+estimate. The earlier100% descriptive figure referred only to four corresponding
+method families in narrowed scope; it must not be cited as O1 fulfillment.
+Proposed scope amendments in [the paper revision guide](PAPER_REVISION_GUIDE.md)
+do not silently replace original objectives. Keep2021–2025 as the explicit study
+filter until any expanded2017–2025 study scope is academically accepted.
+
+### North Star question-by-question
+
+Question IDs follow the supplied North Star. Partial means a narrower relevant
+output exists; no row is fully closed against its original target/evidence gates.
+
+| ID | Intended decision/question | Verdict and remaining evidence |
+|---|---|---|
+| 2A | Product, territory and customer grouping | Partial: derived reporting groups exist; SKU, account and mapping review remain |
+| 3A | Seasonal demand cycles | Partial: company monthly revenue STL exists; verified unit/territory demand cycles are different claims |
+| 4A | Revenue contribution | Partial: recorded product-label/area/buyer contribution exists; accepted identity and mapping scope remain |
+| 5A | YoY growth at entry/territory/account levels | Partial: matched historical comparisons exist; account and territory completeness remain |
+| 6A | Territory revenue and gross profit | Partial: mapped financial reporting exists; unresolved geographic share and acceptance remain |
+| 7A | Institutional accounts contributing80% | Not demonstrated: raw area/source-line concentration does not establish verified account concentration |
+| 2B | Monthly product need across territories | Not demonstrated: company PHP experiment does not forecast compatible SKU units by territory |
+| 3B | Prophet forecast accuracy | Partial: company-PHP scores exist; original demand target and accepted forecasting scope remain |
+| 4B | Disease effect on demand | Not demonstrated: accepted external joins and incremental model evaluation absent; do not assume positive effect |
+| 5B | Above-normal rainfall effect by region | Not demonstrated: feature definition/availability and accepted joins/evaluation absent |
+| 6B | Forecasting urgency | Not demonstrated: target and ground truth unresolved |
+| 7B | Next-period SKU ABC | Not demonstrated: deterministic current ABC is not future classification |
+| 2C | Cost-minimizing reorder quantity | Partial scenario foundation only: greedy allocation is not operational EOQ/cost-optimal procurement |
+| 3C | Reorder trigger | Not demonstrated: inventory position, lead-time demand and service policy absent |
+| 4C | Disease emergency alert | Not demonstrated: no accepted live disease procurement trigger; residual flags serve another purpose |
+| 5C | Typhoon emergency stock response | Not demonstrated: official issued warning/manual scenario and tested stock policy needed |
+| 6C | Region priority under constrained supply | Partial: commercial ranks and entered allocations exist; promised regional MCDA→optimization chain differs |
+| 7C | Product-region expansion | Not demonstrated: verified pairings and held-out recommendation evaluation needed |
+| 8C | Stop purchasing low/zero movers | Not demonstrated: C-class or absent sales alone cannot prove dead stock; stock/expiry/availability and reviewed policy needed |
+
+North Star outcome **“optimize inventory and reduce losses” remains unproven**.
+Historical visibility is established technically; forecast-informed operational
+orders and reduced stockouts/expiry/costs need separate measured evidence. A
+scenario pass cannot establish that a real loss was prevented.
+
+### Alignment corrections and next acceptance sequence
+
+- The North Star's2017–2019 finance-unavailable note predates current reconciled
+  fact19 finance. Final reporting still needs the accepted scope and version-bound
+  evidence. Do not suppress those years solely from the old note.
+- North Star7B already asks **next-period ABC**, which is a forward target; the
+  paper's current-tier/cold-start descriptions need to be reconciled with it.
+- North Star disease text uses DLI while the paper uses DII. Define one feature
+  consistently, with source grain, missingness and origin-known availability.
+- The paper and North Star do not agree automatically on study period, decomposition
+  frequency, buyer taxonomy or operational alert scope. Record academic amendments
+  explicitly rather than interpreting broad North Star wording as approval.
+
+| Order | Owner | Observable completion evidence |
+|---|---|---|
+| 1 | QA/operator + CEO | Coherent fact19 authenticated walkthrough and selected-study-period charts/exports; final permitted descriptive scope decision |
+| 2 | Catalog/account/source owners + analyst | Documentary pilot SKU/unit and territory/account identities, completeness/provenance and unresolved coverage |
+| 3 | Analyst/model owner | Supported unit/territory forecasts at actual leads, honest baseline comparisons and accepted publication; external/urgency experiments independently gated |
+| 4 | Inventory/procurement/finance + analyst | Real operational inputs and reviewed cost/service/expiry baseline; tested prescriptive decisions and outcome protocol |
+| 5 | Engineers/QA + client | Complete ingestion/retry/correction/publication/recovery and reviewed warnings/recommendations, or recorded academic scope amendment |
+
+This refresh validates documentary/source consistency only. Required runtime and
+business-outcome acceptance checks stay open until actually executed and recorded.
+
+## Original register context — 3 October 2026
+
+### Purpose and authority
 
 This register connects the original capstone objectives to implementable capabilities, required inputs, owners and measurable acceptance. It is the central objective/evidence index; [REQUIREMENTS.md](REQUIREMENTS.md) remains the detailed functional contract, [BUSINESS_DEFINITIONS.md](BUSINESS_DEFINITIONS.md) owns metric meanings, and [DESCRIPTIVE_PUBLICATION_ACCEPTANCE.md](DESCRIPTIVE_PUBLICATION_ACCEPTANCE.md) owns recorded descriptive business decisions. Link to those records instead of duplicating or inventing approvals.
 

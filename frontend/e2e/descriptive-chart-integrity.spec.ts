@@ -57,6 +57,7 @@ test('one peso scale includes prior values and margin rejects a negative revenue
     app.setCustomDateRange('2025-01-01','2025-01-31')
     app.setDescriptiveGranularity('monthly')
   })
+  await page.selectOption('#salesTrendMeasureSelect', 'both')
   const result=await page.evaluate(()=>{
     const app=window as any, detail=app.Chart.getChart(document.getElementById('revenueDetailChart'))
     return {max:detail.scales.revenue.max,min:detail.scales.revenue.min,
@@ -67,7 +68,7 @@ test('one peso scale includes prior values and margin rejects a negative revenue
   expect(result.min).toBeLessThanOrEqual(-10)
   expect(result.axes).toEqual(['revenue'])
   expect(result.margin).toEqual([null])
-  await page.screenshot({path:'test-results-chart-integrity/sales.png',fullPage:true})
+  await page.screenshot({path:test.info().outputPath('sales.png'),fullPage:true})
 })
 
 test('leap-day comparison clamps once and does not double-count the prior day', async ({ page }) => {
@@ -108,7 +109,7 @@ test('regional net sales retain negative areas and withhold invalid concentratio
   await expect(page.locator('#sectorProfileTable tbody tr')).toHaveCount(3)
   await expect(page.locator('#sectorProfileTable tfoot')).toContainText('1 / 12')
   await expect(page.locator('#areaTopThreeShare')).toHaveText('Unavailable')
-  await page.screenshot({path:'test-results-chart-integrity/areas.png',fullPage:true})
+  await page.screenshot({path:test.info().outputPath('areas.png'),fullPage:true})
 })
 
 test('product presentation reconciles returns and all ABC classes', async ({ page }) => {
@@ -127,10 +128,10 @@ test('product presentation reconciles returns and all ABC classes', async ({ pag
     return {labels:abc.data.labels,counts:abc.data.datasets[0].data,
       amounts:bar.data.datasets.map((d:any)=>d.data),min:app.Chart.getChart(document.getElementById('paretoCurveChart')).scales.y.min}
   })
-  expect(result).toEqual({labels:['A','B','C','Unclassified'],counts:[1,0,1,1],amounts:[[96,4,0],[0,0,-1]],min:0})
-  await expect(page.locator('#productPriorityScope')).toContainText('ABC summarizes the full selected population')
+  expect(result).toEqual({labels:['A · Largest contributors','B · Next contributors','C · Remaining contributors','Unclassified · Not grouped'],counts:[1,0,1,1],amounts:[[96,4,0],[0,0,-1]],min:0})
+  await expect(page.locator('#productDisplayScope')).toContainText('Sales groups: all 3 names in this period and category')
   await expect(page.locator('#abcChart').locator('xpath=ancestor::div[contains(@class,"chart-card")]')).toContainText('A: 96.0%')
-  await page.screenshot({path:'test-results-chart-integrity/products.png',fullPage:true})
+  await page.screenshot({path:test.info().outputPath('products.png'),fullPage:true})
   await page.setViewportSize({width:390,height:844})
   await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true)
 })
@@ -185,7 +186,7 @@ test('observations and estimates form one connected line with marked transition 
     expect(result.tooltip).toContain('Gap estimate')
   }
   await expect(page.locator('#salesNetRevenue')).toHaveText('₱750')
-  await page.locator('#revenueDetailChart').locator('xpath=ancestor::div[contains(@class,"chart-card")]').screenshot({path:'test-results-chart-integrity/connected-estimates.png'})
+  await page.locator('#revenueDetailChart').locator('xpath=ancestor::div[contains(@class,"chart-card")]').screenshot({path:test.info().outputPath('connected-estimates.png')})
 })
 
 test('quantity line and heatmap share index values and distinguish negative, zero and missing', async ({page})=>{
@@ -209,8 +210,9 @@ test('quantity line and heatmap share index values and distinguish negative, zer
   }))
   expect(index.chart).toEqual(index.cells)
   expect(index.chart[0]).toBeCloseTo(-10/7.5)
-  await expect(page.locator('#quantityTrendMeaning')).toContainText('line and heatmap use the same measure')
-  await page.screenshot({path:'test-results-chart-integrity/quantity.png',fullPage:true})
+  await expect(page.locator('#quantityTrendMeaning')).toContainText('1× = the selected year’s monthly average')
+  await expect(page.locator('#heatmapInsight')).toContainText('1.33× the selected year’s monthly average')
+  await page.screenshot({path:test.info().outputPath('quantity.png'),fullPage:true})
 })
 
 test('STL breaks gaps, explains full-history components, and keeps export free of plot-only gaps', async ({page})=>{
@@ -236,12 +238,12 @@ test('STL breaks gaps, explains full-history components, and keeps export free o
   expect(plots[0]).toEqual({labels:['2024-01','2024-02','2024-03'],values:[12,null,18],span:false})
   expect(plots[1].values).toEqual([2,null,3])
   await expect(page.locator('#descriptiveStlPanel')).toContainText('Independent of the date filter')
-  await expect(page.locator('#descriptiveStlPanel')).toContainText('Largest absolute unexplained deviation')
+  await expect(page.locator('#descriptiveStlPanel')).toContainText('Largest unusual difference')
   await page.locator('#stlResidualDetail summary').click()
   await expect(page.locator('#stlResidualDetail canvas')).toBeVisible()
   const download=page.waitForEvent('download');await page.getByRole('button',{name:'Export STL components'}).click()
   const csv=await readFile((await(await download).path())!,'utf8')
   expect(csv).not.toContain('2024-02')
   expect(csv.trim().split('\r\n')).toHaveLength(3)
-  await page.locator('#descriptiveStlPanel').screenshot({path:'test-results-chart-integrity/stl.png'})
+  await page.locator('#descriptiveStlPanel').screenshot({path:test.info().outputPath('stl.png')})
 })

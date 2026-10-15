@@ -8,7 +8,8 @@ import {
 } from '@/lib/api'
 import { renderSalesComputation, renderSalesDatasetStatus } from './sales-view-helpers'
 import { renderSalesPage, setSalesViewError } from './sales-page-helpers'
-import { renderWeatherEffects } from './weather-view-helpers'
+import { renderWeatherEffects, weatherProviderLabel } from './weather-view-helpers'
+import { isWeatherApiProvider, weatherRefreshPeriod, WeatherProvider } from './weather-provider-helpers'
 import { updateDashboardProvenance } from './dashboard-enhancements'
 import { setDecisionSupportChartData } from './dashboard-decision-charts'
 import { getJson, authenticatedJson } from './api-client'
@@ -219,8 +220,8 @@ export async function refreshDashboardFromGateway() {
     })
     const integer = new Intl.NumberFormat('en-PH', { maximumFractionDigits: 0 })
     const metrics: Record<string, string> = {
-      kpiOverviewTotalRevenue: currency.format(data.summary.total_revenue),
-      kpiOverviewGrossProfit: currency.format(data.summary.total_income),
+      kpiOverviewTotalRevenue: data.summary.total_revenue == null ? 'Unavailable' : currency.format(data.summary.total_revenue),
+      kpiOverviewGrossProfit: data.summary.total_income == null ? 'Unavailable' : currency.format(data.summary.total_income),
       kpiOverviewTransactions: integer.format(data.summary.total_transactions),
       kpiOverviewGrossMargin: data.summary.avg_margin == null
         ? 'Unavailable'
@@ -277,42 +278,59 @@ export async function loadSalesDataView(root: HTMLElement, state: any) {
   renderSalesPage(root, page)
 }
 
+const weatherRequests = new WeakMap<HTMLElement, number>()
 export async function loadWeatherEffectView(root: HTMLElement) {
+  const request = (weatherRequests.get(root) ?? 0) + 1
+  weatherRequests.set(root, request)
   const year = root.querySelector<HTMLSelectElement>('#weatherYear')?.value ?? '2024'
   const area = root.querySelector<HTMLSelectElement>('#weatherArea')?.value ?? 'all'
   const grain = (root.querySelector<HTMLSelectElement>('#weatherGrain')?.value ?? 'monthly') as 'daily' | 'monthly'
-  const provider = (root.querySelector<HTMLSelectElement>('#weatherProvider')?.value ?? 'PAGASA') as 'PAGASA' | 'nasa_power'
+  const provider = (root.querySelector<HTMLSelectElement>('#weatherProvider')?.value ?? 'PAGASA') as WeatherProvider
   const status = root.querySelector<HTMLElement>('#weatherEffectStatus')
-  if (status) status.textContent = `Loading ${provider === 'nasa_power' ? 'NASA POWER' : 'PAGASA'} records from Databricks Gold…`
-  renderWeatherEffects(root, await getWeatherEffects({ year, area, grain, provider }))
+  const table = root.querySelector<HTMLTableElement>('#weatherEffectTable')
+  table?.replaceChildren()
+  const loadingCount = root.querySelector<HTMLElement>('#weatherEffectCount')
+  if (loadingCount) loadingCount.textContent = 'Loading…'
+  if (status) status.textContent = `Loading ${weatherProviderLabel(provider)} records from Databricks Gold…`
+  try {
+    const result = await getWeatherEffects({ year, area, grain, provider })
+    if (weatherRequests.get(root) === request) renderWeatherEffects(root, result)
+  } catch (error) {
+    if (weatherRequests.get(root) === request) {
+      table?.replaceChildren()
+      if (status) status.textContent = error instanceof Error ? error.message : 'Weather observations unavailable.'
+      const count = root.querySelector<HTMLElement>('#weatherEffectCount')
+      if (count) count.textContent = 'Unavailable'
+    }
+  }
 }
 
 export async function refreshSelectedWeatherData(root: HTMLElement) {
   const provider = root.querySelector<HTMLSelectElement>('#weatherProvider')?.value ?? 'PAGASA'
-  if (provider !== 'nasa_power') {
+  if (!isWeatherApiProvider(provider)) {
     throw new Error('PAGASA is refreshed through the Databricks external-source notebook.')
   }
   const year = root.querySelector<HTMLSelectElement>('#weatherYear')?.value ?? '2024'
   const area = root.querySelector<HTMLSelectElement>('#weatherArea')?.value ?? 'all'
   const status = root.querySelector<HTMLElement>('#weatherEffectStatus')
   const button = root.querySelector<HTMLButtonElement>('#weatherRefresh')
-  if (status) status.textContent = 'Fetching NASA POWER observations and publishing them to Databricks…'
+  const originallyDisabled = button?.disabled ?? true
+  if (status) status.textContent = `Fetching ${weatherProviderLabel(provider)} observations and publishing candidates to Databricks…`
   if (button) {
     button.disabled = true
     button.textContent = 'Refreshing…'
   }
   try {
     await refreshWeatherData({
-      start: year === 'all' ? '2017-01-01' : `${year}-01-01`,
-      end: year === 'all' ? '2025-12-31' : `${year}-12-31`,
+      ...weatherRefreshPeriod(year),
       areas: area === 'all' ? [] : [area],
-      provider: 'nasa_power',
+      provider,
     })
     await loadWeatherEffectView(root)
   } finally {
     if (button) {
-      button.disabled = root.querySelector<HTMLSelectElement>('#weatherProvider')?.value !== 'nasa_power'
-      button.textContent = 'Refresh NASA POWER'
+      button.disabled = originallyDisabled || !isWeatherApiProvider(root.querySelector<HTMLSelectElement>('#weatherProvider')?.value ?? 'PAGASA')
+      button.textContent = 'Refresh selected API'
     }
   }
 }

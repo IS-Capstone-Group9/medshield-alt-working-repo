@@ -8,13 +8,39 @@ business approval or makes an offline file a dashboard data source.
 
 Follow [the exact catalog deployment and rollback runbook](../../docs/CATALOG_DEPLOYMENT.md).
 This package prepares Gold v7 and does not activate a release or grant approvals.
-The current source is version 16; `CATALOG_BASE_FACT_VERSION=16` protects unchanged
-source records and finances before any catalog write. Keep Bronze/Silver unchanged.
+The prepared source is fact version **19**. `references/catalog_publication.json`
+binds its identity, 29 dependency versions and all 137 immutable fact fields.
+The category-only mode accepts 1,584 supported known classifications and 2,977
+explicit Unclassified reporting dispositions. SKU/unit/forecast review remains
+pending. Exactly seven category/publication metadata fields may change; every
+financial/source/quality/quantity/demand field stays immutable. The local package
+is marked not ready for execution until operator recovery preparation is complete.
+Keep Bronze/Silver unchanged for this category-only metadata publication.
+
+The 9 October Gold correction validates preserved provisional demand against the
+predecessor's original pending scope. Accepted current reporting scopes remain
+receipt-bound; all 137 immutable fields are still compared in both directions.
+Use the corrected Gold source, not the earlier 8 October ZIP's Cell 3 guard.
+
+The uploaded 9 October export is saved at `databricks/medshield_project_backup`.
+Compared with that export, replace only the deployed `03_sales_gold` notebook
+and `references/catalog_publication.json` with this directory's current files.
+The other sales/external analytical code, helpers and category receipt match.
+`06_sales_stl.py` now retains the exported serverless environment version 6 and
+`statsmodels` dependency; its analytical code is unchanged. Leave the backup intact.
+Verify the separate `medshield_reference_csv` uploads because the export does not
+include them. Run Gold Cells 1–3 first, then Cells 4–6 for dimension/mart checks.
+These cells are read-only; Cell 7 writes the candidate tables and requires the
+runbook's recovery and maintenance prerequisites. Do not rerun 01/02 for this fix.
 
 1. Capture prior notebook/application revisions, all candidate Delta versions, bridge
-   definitions, and mapping hashes. Keep the serving gateway pinned to 16.
-2. Upload `product_catalog.py` as a workspace file beside Gold. Upload both header-only
-   preparation masters to the configured reference directory and verify their hashes.
+   definitions, and mapping hashes. Keep the serving gateway pinned to 19.
+2. After the runbook preflight is complete, upload `product_catalog.py` and
+   `catalog_publication.py` as workspace files beside Gold, and the bound contract
+   to `medshield_project/references/catalog_publication.json` and the exact category
+   receipt to `medshield_project/references/category_acceptance.json`. Upload the
+   accepted-category product master and unchanged transaction-evidence master to the reference
+   directory and verify their exact hashes.
 3. Run **03 Gold → 04 monthly bridge → 05 system bridge → 06 STL**. Gold must report
    `sales_restart_gold_v7_independent_catalog` and `catalog_v1_independent_evidence`.
 4. Against the newly observed candidate fact version, run publication-readiness,

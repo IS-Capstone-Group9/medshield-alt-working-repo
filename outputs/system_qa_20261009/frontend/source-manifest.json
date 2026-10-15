@@ -1,0 +1,559 @@
+{
+  "captured_at": "2026-10-09T02:20:17.310Z",
+  "timezone": "Asia/Manila",
+  "commit": "cc03b4c05398880b18987eca5ca9c1e140bf9dcb",
+  "dirty_frontend": true,
+  "files": [
+    {
+      "path": "frontend/app/globals.css",
+      "sha256": "129094704b7c876e1c3a5f0d62be7d398c8ac70a4cfba073c3f1b695f17c5a10"
+    },
+    {
+      "path": "frontend/app/layout.tsx",
+      "sha256": "701cd3959ae82485a298a979f8dfbf20046c16496629271374019a8d83c1c45a"
+    },
+    {
+      "path": "frontend/app/login/page.tsx",
+      "sha256": "25c2198b88a2d86951e1359c126c7c22deec4261f762cfdcb97ab42f317ea8b7"
+    },
+    {
+      "path": "frontend/app/medshield.css",
+      "sha256": "01b9e9a95a76ba635e5e4e191da27b215b3baca6ed9d1935f7d2141ee608a45d"
+    },
+    {
+      "path": "frontend/app/overrides.css",
+      "sha256": "c260f293d646925e129173899f4cc74db76cf293c2bde1ea9dca39a2d79a0607"
+    },
+    {
+      "path": "frontend/app/page.tsx",
+      "sha256": "83c3b19e8856d6ba2fb36decb5ce941722baeb243df56e61d9d1cb341873289e"
+    },
+    {
+      "path": "frontend/components/Filterbar.tsx",
+      "sha256": "6fd0fad24cfe6446369049e545092dac4c5e24e4e1ae13addb9927f5eaa888c4"
+    },
+    {
+      "path": "frontend/components/Login.tsx",
+      "sha256": "06623cb4919ade1df57ecc3ff69c812fb8556e2296427b4b290c757920e80697"
+    },
+    {
+      "path": "frontend/components/ModelDashboard.tsx",
+      "sha256": "ea2b649b7df6074fc7a93335f60b9b01449fabc26f1dc831f104a976e776bc0d"
+    },
+    {
+      "path": "frontend/components/PasswordResetRequired.tsx",
+      "sha256": "0840c42ed80ea301edc0e4165cec33f49173f8ec454ecaa01645ff7ef50c096f"
+    },
+    {
+      "path": "frontend/components/Sidebar.tsx",
+      "sha256": "8328724352a6974e8ea9119b719a11ea29a5bbf2df0d216bd8e3f4f48b710a5b"
+    },
+    {
+      "path": "frontend/components/Topbar.tsx",
+      "sha256": "40f95371ef0da87b3917ca4d4262b753106acb37b5620435cb3262bb07009ca3"
+    },
+    {
+      "path": "frontend/components/dashboard/freshness-bar.tsx",
+      "sha256": "6bc4790bc749989970ead7bed442c9b88d0b304fdaaefbacd650a53d0d35a3bd"
+    },
+    {
+      "path": "frontend/components/dashboard/inventory/alert-actions.tsx",
+      "sha256": "98d1a15a8b662b980f1c8b2754c08f96c40c6047977938233ce54fa138d8fa54"
+    },
+    {
+      "path": "frontend/components/dashboard/inventory/drilldown-table.tsx",
+      "sha256": "ba16b95c729977ecdb368c175624bc898b5ca7ae6e18fb4a1d21dcf3cf643d50"
+    },
+    {
+      "path": "frontend/components/dashboard/inventory/season-grid.tsx",
+      "sha256": "61bb8c1c2115b1baa4d7955b0425617b972075346c8ff135e96b0ac8f9c82bf3"
+    },
+    {
+      "path": "frontend/components/dashboard/model-dashboard/eoq-scenarios.tsx",
+      "sha256": "c5f7835c26cd54223149e5edef01e94e55996c567e62d9b318d58a0190f96f5a"
+    },
+    {
+      "path": "frontend/components/dashboard/model-dashboard/mcda-ranking.tsx",
+      "sha256": "4371a0a0daeaa1b337f4d7f551c199e0bd9eed1ce2a26eab30d15a2a90730ca5"
+    },
+    {
+      "path": "frontend/components/dashboard/model-dashboard/model-readiness.tsx",
+      "sha256": "66fe41b0120ac9191789145fc6c084e2ab8e84afe8eb57a52f1f86cdf75a654f"
+    },
+    {
+      "path": "frontend/components/dashboard/model-dashboard/season-card.tsx",
+      "sha256": "0f44f45a9448b59c832788effa3a9a97f703e95ed7e0bf2699365273dfb606df"
+    },
+    {
+      "path": "frontend/components/dashboard/model-dashboard/tab-nav.tsx",
+      "sha256": "0dfc2ef66a3f6be39c984a0f900ba60a6bc0d71645cc01cbae7c79e557bcb46c"
+    },
+    {
+      "path": "frontend/components/dashboard/model-dashboard/types.ts",
+      "sha256": "221f447b717d3f7e852f8828bcd7390ac5fbfb98358dcf223bb1e9465b5662d9"
+    },
+    {
+      "path": "frontend/components/dashboard/overview/kpi-grid.tsx",
+      "sha256": "9d6bb5f49a9333980a45f88c18f92c88d8316389d72e3f1f6f9e53c2439c7afd"
+    },
+    {
+      "path": "frontend/components/dashboard/overview/status-split.tsx",
+      "sha256": "bfa38cf45cfb7b50fcf444b46007154bad7ccdbb1b6bbdb374abc965280d1cae"
+    },
+    {
+      "path": "frontend/components/dashboard/sidebar.tsx",
+      "sha256": "9f6466480205521497f3f5eabb50ae11d327cb07c5a93fc4a820ae0af84ee6ef"
+    },
+    {
+      "path": "frontend/components/dashboard/topbar.tsx",
+      "sha256": "9e0f433ba79c35aead89df463cbbc675fe7cb6085168a5616f0118a7d7676dbb"
+    },
+    {
+      "path": "frontend/components/login-features.tsx",
+      "sha256": "bc26d789ab61dc2ce04811d5f655b0f35052a659a7558820b2298e4bfbb22071"
+    },
+    {
+      "path": "frontend/components/login.css",
+      "sha256": "f7cce5b6ce0ca4c33e2ee7f0fd4ce99a9998ff7ca2c56ed4c156c2f17592a909"
+    },
+    {
+      "path": "frontend/components/ui/badge.tsx",
+      "sha256": "717d19a03ca7fa07d445fb01adcdf0218b6bedfc44b26084b6bdc1755c0a3207"
+    },
+    {
+      "path": "frontend/components/ui/button.tsx",
+      "sha256": "0d3fffe9b6ca95664d62786ad2570f5c904b2fc2b75a6e41953aafa40ad43ada"
+    },
+    {
+      "path": "frontend/components/ui/card.tsx",
+      "sha256": "f131ea14362c2b524b433288162481ba78cb55caa9f06b2470decaa4d65725d2"
+    },
+    {
+      "path": "frontend/components/ui/icons.tsx",
+      "sha256": "9d52670a81be4b84c018b5d6687b39a1a1cc472808e9b9c92bef384cc365e5d3"
+    },
+    {
+      "path": "frontend/components/ui/modal.tsx",
+      "sha256": "8219750ef564998814c80953f93d5ee769805cac8c8b9f7e0fa5baf9e43f9706"
+    },
+    {
+      "path": "frontend/e2e/area-prioritization.spec.ts",
+      "sha256": "acfda2621fd50ded7104e5099ab7b77a1685e5afb316e79998b43d09fc3f5de3"
+    },
+    {
+      "path": "frontend/e2e/catalog-resolution.spec.ts",
+      "sha256": "752fad903f4acfe4093e59af6746d78c38d571e49ed9732068cdd0eb42302dbb"
+    },
+    {
+      "path": "frontend/e2e/client-reference-list.spec.ts",
+      "sha256": "b3ad3ef3885f9bc609f9cbcf92382e9305f35a468c371d473d58e68d3e3297cb"
+    },
+    {
+      "path": "frontend/e2e/dashboard-chart-live.spec.ts",
+      "sha256": "992307830deb27a69c3bcc184100eb533052332dd5bd4cba1c12428be705bb45"
+    },
+    {
+      "path": "frontend/e2e/dashboard-filter-placement.spec.ts",
+      "sha256": "0d53b5aecf61edb26fc11800e5081e47327797d542363f3182106dbae4bed173"
+    },
+    {
+      "path": "frontend/e2e/dashboard-readiness.spec.ts",
+      "sha256": "bbf18f68ed9d9585b9fed7a0a75c3cb2c669cb69f4a71f44460878d825b0f316"
+    },
+    {
+      "path": "frontend/e2e/dashboard-recovery.spec.ts",
+      "sha256": "58fa5ab80661bb400a35d77e7f045d79bf0a48a61c3cd0b70a7a7f56d18f5a61"
+    },
+    {
+      "path": "frontend/e2e/descriptive-chart-integrity.spec.ts",
+      "sha256": "23443c48b4be995ef4ec07e3ab71847dfd13bde9629beb8096caf18b114d75e5"
+    },
+    {
+      "path": "frontend/e2e/descriptive-chart-layout.spec.ts",
+      "sha256": "7108699d69b262e1ea7bf717bcab5fd3699814afed8785baa29d2e6b363f6407"
+    },
+    {
+      "path": "frontend/e2e/descriptive-live.spec.ts",
+      "sha256": "b9d5f5aa295ad60d45beae0526864957af90129a56eb0e4b6992635be62e075e"
+    },
+    {
+      "path": "frontend/e2e/diagnostic-drilldown.spec.ts",
+      "sha256": "7598660921a7baf4ea88da0cb32b61c45d3ebf38de3c4d90739f6c65e958b662"
+    },
+    {
+      "path": "frontend/e2e/external-regression.spec.ts",
+      "sha256": "209777c4f2ab9cf7ccfca757bdd1f25dfe1619dcd5f5a4927d877f0780697b72"
+    },
+    {
+      "path": "frontend/e2e/forecast-validation.spec.ts",
+      "sha256": "99b0e37e6649cc237fe0135009d027af4323d877a3a075e0472db0aa99f40870"
+    },
+    {
+      "path": "frontend/e2e/helpers/dashboard.ts",
+      "sha256": "aa283e6b9b2a76bb94d6ddc38e3f1820f5b34db07428a39c329cf10d4182150a"
+    },
+    {
+      "path": "frontend/e2e/medshield-dashboard.spec.ts",
+      "sha256": "cf24908b1b5a5a3520aa1e89b2d09458969901ca37ddb0681dfbfac2eab9a1af"
+    },
+    {
+      "path": "frontend/e2e/metric-definitions.spec.ts",
+      "sha256": "2d52df1d88bdc54f44af8c50998d1016a06245c72992685752544773c7966f39"
+    },
+    {
+      "path": "frontend/e2e/overview-evidence.spec.ts",
+      "sha256": "dc5e93dc5ef4471b38435d91734f1145edb86629e6a8a7cb67692561d6c37dd8"
+    },
+    {
+      "path": "frontend/e2e/predictive-live.spec.ts",
+      "sha256": "21f43a36e31568c0ed73f1f7439392355e2b8e2ffda4f133426214888eab9822"
+    },
+    {
+      "path": "frontend/e2e/prescriptive-planning.spec.ts",
+      "sha256": "a238308a5cb716a6978c8ddea53ac2dda2098c72b4e118af6893954066c5c04f"
+    },
+    {
+      "path": "frontend/e2e/product-prioritization.spec.ts",
+      "sha256": "717cb50c6bf67834273db530afd3baed338740381e0d5e53a821b9a2f86508dc"
+    },
+    {
+      "path": "frontend/e2e/qa-live-readiness.spec.ts",
+      "sha256": "b6012cb6a16c5757e33bdd30a6c198ff78394096ad6ab4fe5f012f00d148eace"
+    },
+    {
+      "path": "frontend/e2e/remediation-layout.spec.ts",
+      "sha256": "cc26c617c2276c8fe408b085b251dbd0fb4ecd6f1f95af6a20610118f3f1a4d4"
+    },
+    {
+      "path": "frontend/e2e/sales-data-view.spec.ts",
+      "sha256": "55caf9b85de57cb3e4c11181149fee91c7da301a2a5bea8c1f7eee59183d741d"
+    },
+    {
+      "path": "frontend/e2e/sales-diagnostics.spec.ts",
+      "sha256": "e11d630a83cf801e8c144d8c0e7ae00f0747462d1195aff07bd47b9ce20abc43"
+    },
+    {
+      "path": "frontend/e2e/sales-heatmap.spec.ts",
+      "sha256": "a747845b4c0579a894f30b77679882f0aeec93282406792f93341618264582ba"
+    },
+    {
+      "path": "frontend/e2e/sales-sectors.spec.ts",
+      "sha256": "55c7169fff439ddebfbe8f435d1edb28f7ddf6d2648316ce5405e3e475a72095"
+    },
+    {
+      "path": "frontend/e2e/weather-providers.spec.ts",
+      "sha256": "dab375524f30163c637017406e731b2d79463887ee5b68f859d250a939238592"
+    },
+    {
+      "path": "frontend/hooks/use-audit.ts",
+      "sha256": "d9cbbc638481d573c93474b24ae7fc9aeabb4d5c40300d9ae20147abde082d9d"
+    },
+    {
+      "path": "frontend/hooks/use-dashboard-filters.ts",
+      "sha256": "5186a39e6e87cc1c03402dcf561bfa67b2e93e43e62e72febcbc7174c420cb9a"
+    },
+    {
+      "path": "frontend/hooks/use-dashboard-nav.ts",
+      "sha256": "1da7982ff0942436c7c805b55e75ce80ddcc276c8eb8ced43ee5daec540635e7"
+    },
+    {
+      "path": "frontend/hooks/use-dashboard-runtime.ts",
+      "sha256": "4b65d3fbcb7318c91e7882979e48c3b1e5f719bdf7e6934ce9d3109cf11c6f05"
+    },
+    {
+      "path": "frontend/hooks/use-login-form.ts",
+      "sha256": "74a5a805c6534e3dbbd7c799bde09c5dd7d9ee5269b7762bf5aad7fc72fe4202"
+    },
+    {
+      "path": "frontend/hooks/use-prescriptive.ts",
+      "sha256": "0e932c149ee1c1ce1e9a2ddfffdf33bf12c197d89f12f2c4a815e4a010d89461"
+    },
+    {
+      "path": "frontend/lib/AuthContext.tsx",
+      "sha256": "14710ca9b3c448c3d4fb7f49afdc48fe902572d799db40c9d6d871b8cd24f4ed"
+    },
+    {
+      "path": "frontend/lib/api.ts",
+      "sha256": "3aaf80374dd8f24dad23734940cd4b6702e2a2d1db8400f5745501a1a8d14bd4"
+    },
+    {
+      "path": "frontend/lib/auth-tokens.ts",
+      "sha256": "e3b87bad63ce32a460a9b99b918564c9643fc0a3419f10e6abcf176b9c37f688"
+    },
+    {
+      "path": "frontend/lib/calculators/eoq.ts",
+      "sha256": "7dd2bddce5a4a6bf33d90d952275131faa144076952e45feff17acf63641d3c6"
+    },
+    {
+      "path": "frontend/lib/dashboardContext.tsx",
+      "sha256": "fc1b6e4d7fc3088236f49b5719e47db8d6896b3cd247b3fd0d9f0b3f6f17b5fb"
+    },
+    {
+      "path": "frontend/lib/medshieldReference.ts",
+      "sha256": "2bb99f6ede6c83b2f1674fccbfb4571ac0162818b7b3e2c554a28e09befdb45f"
+    },
+    {
+      "path": "frontend/lib/sidebar-account-card.ts",
+      "sha256": "0867c04f3fca2fdc46ebfdc29e4545ebedb2db12eab39b0437f29e02368f2bf8"
+    },
+    {
+      "path": "frontend/lib/supabase/client.ts",
+      "sha256": "45fe2a041a49da652c9723e4acb3ccf8655b83877edecfeace9aace8461efa2f"
+    },
+    {
+      "path": "frontend/lib/supabase/middleware.ts",
+      "sha256": "c4a570e2819813eeaf57fd322805238aca07609a495f76376bcb5709e9b91180"
+    },
+    {
+      "path": "frontend/lib/utils/csv-parser.ts",
+      "sha256": "6c362eb78aabb95903670c9188308926b3e6069d276ae07f923846c59f2a397c"
+    },
+    {
+      "path": "frontend/lib/utils/formatters.ts",
+      "sha256": "065da172e1e50b43f61c7beed45e1365494a5934c86f15a1054d32fc859df449"
+    },
+    {
+      "path": "frontend/next.config.mjs",
+      "sha256": "3b0d644536053c2242a175841c4b3e86d6f161d949a1c07a4d68c9eac1ffd9fe"
+    },
+    {
+      "path": "frontend/package-lock.json",
+      "sha256": "67b774b4d98360b488bbc8155a5819b6c56941d8294b6df61987979770ef38b8"
+    },
+    {
+      "path": "frontend/package.json",
+      "sha256": "36430609bb94fe1d3cb83a3355bd66b48b79cc45172192abd0dd0b8886e3b52c"
+    },
+    {
+      "path": "frontend/playwright.config.ts",
+      "sha256": "34b23b383c87753a7eae39245e434dc63318ce6d148e4d0cc4309094a83b4621"
+    },
+    {
+      "path": "frontend/services/api/api-client.ts",
+      "sha256": "b34bcf77eaa1a0735149d8ea733a6094b1274b39b10ec8274c37570b17f16a59"
+    },
+    {
+      "path": "frontend/services/api/audit.service.ts",
+      "sha256": "099efdf25a036dff6a2d97ba8b976368168fac8687bd31919329d6b005b97ea3"
+    },
+    {
+      "path": "frontend/services/api/client-reference-data.ts",
+      "sha256": "b9d8ccf342a1fac7b30767250b8271b7b64a0958752ffe5c7c0c53938039313f"
+    },
+    {
+      "path": "frontend/services/api/csv-view-helpers.ts",
+      "sha256": "c651093b6d81a58b32898ed1298d29aec0f985ba9881682d026a3e0436b9ff2c"
+    },
+    {
+      "path": "frontend/services/api/current-year-runtime.ts",
+      "sha256": "58f3d77639abd825e9c993b4b29f0c3f57521e19e706bb68474803c752a4f7fd"
+    },
+    {
+      "path": "frontend/services/api/dashboard-decision-charts.ts",
+      "sha256": "874bb725e02e983367d5df7c34c9e8d665f93c5cc217a0ce95945904a1a74d9f"
+    },
+    {
+      "path": "frontend/services/api/dashboard-engine.ts",
+      "sha256": "a74380fe1b89fec41c6ba56314276d15b4da495e66c3cb34c9ccc6780d07cd3f"
+    },
+    {
+      "path": "frontend/services/api/dashboard-enhancement-listeners.ts",
+      "sha256": "46d7e304359e8bef143f1296078b282dea1533bb2650275d7e7839a35b6f03d0"
+    },
+    {
+      "path": "frontend/services/api/dashboard-enhancements.ts",
+      "sha256": "ba931bc3e0842e63962876f03b1cd7129c214e09b8ea683fe0434782e03c0214"
+    },
+    {
+      "path": "frontend/services/api/dashboard-filter-panel.ts",
+      "sha256": "af6f5689113f0e25b470ded93efb6e59b4dea77db1fd67a7e3aefc5978c0b2c4"
+    },
+    {
+      "path": "frontend/services/api/dashboard-interactions.ts",
+      "sha256": "80f21c9efcd80837279a843ef5784c15d7cac19bf024f63edf1d53f34c9c96a0"
+    },
+    {
+      "path": "frontend/services/api/dashboard-markup.ts",
+      "sha256": "a2b75d4c68e6a98fc880af98cb798735bb905b27a8fcde21d724bc12f4ddc7fa"
+    },
+    {
+      "path": "frontend/services/api/dashboard-mcda.ts",
+      "sha256": "1df70eb69a17d4a382960e249b0d182d472215b490a8050e3fdb9ad37f10a50c"
+    },
+    {
+      "path": "frontend/services/api/dashboard.service.ts",
+      "sha256": "a1bbb2b3e986de761f6c31f8b759407f25ab2729fb1037c930a4895052ca77bb"
+    },
+    {
+      "path": "frontend/services/api/data.service.ts",
+      "sha256": "d6be05e1249d476c4aef4a2061c9b486fcb763b6e839632a95c648586b32f720"
+    },
+    {
+      "path": "frontend/services/api/descriptive-chart-style.ts",
+      "sha256": "1e79e56cd5a879009b5b0bb4a885c7ca1d50df7194d742e0f1ee9f9a5729967d"
+    },
+    {
+      "path": "frontend/services/api/descriptive-period-runtime.ts",
+      "sha256": "d118b0ae29229d9b0298dd2ef18a8fba004c7f675ca9ec5609f126673b279d5b"
+    },
+    {
+      "path": "frontend/services/api/descriptive-products-runtime.ts",
+      "sha256": "cfd2a994077cd51eb01cd234993e433c245156e28f24c74c8ea485fb2e9b9b9b"
+    },
+    {
+      "path": "frontend/services/api/descriptive-products.ts",
+      "sha256": "e2945a59ed82f4c1538097047683b83fd3a2fe68ca3d5413ead3298b7c90810d"
+    },
+    {
+      "path": "frontend/services/api/diagnostic-drilldown-runtime.ts",
+      "sha256": "1010eca914a6d4880562d399ab64f20a8e714f51a12772998e688ac3ef3c4cfc"
+    },
+    {
+      "path": "frontend/services/api/diagnostic-panel.ts",
+      "sha256": "19a6c5eb15bde2141072106554e52bbc18ab8e591b73849b197262baaab1953c"
+    },
+    {
+      "path": "frontend/services/api/diagnostics.service.ts",
+      "sha256": "2c29fb093295ad52d5a5ae983f1042b126fc54fa64dd2d4464ca16f5e021980e"
+    },
+    {
+      "path": "frontend/services/api/external-regression-runtime.ts",
+      "sha256": "5bf2865ce494618657ab0358ea4d39bb659019276955af145486d6de0e7720e8"
+    },
+    {
+      "path": "frontend/services/api/forecast-validation-runtime.ts",
+      "sha256": "01febd9d6f398e06d9c4c3162dab99012662a6baf56c6c8439a0d711d687b152"
+    },
+    {
+      "path": "frontend/services/api/integrations.service.ts",
+      "sha256": "2208ed98f28c1973e47a9b17a52d9844d5dd8ffe8864fd5241e3f5aa6f8c17c0"
+    },
+    {
+      "path": "frontend/services/api/mcda.service.ts",
+      "sha256": "00cd2e2427247ae99b9b5fa1d52dfca184b08fe17b082d4a7868121a357a8128"
+    },
+    {
+      "path": "frontend/services/api/overview-analytics-runtime.ts",
+      "sha256": "8a77e8e335207613c25fa1981d0aa69a54a09fc9f68b0a16700fe3fa965c7aa6"
+    },
+    {
+      "path": "frontend/services/api/overview-monthly-runtime.ts",
+      "sha256": "3fa9f3716c5a63b9edd6dd49aaf088273805fb89a48427cc48f9e94ff953d421"
+    },
+    {
+      "path": "frontend/services/api/prescriptive-planning-runtime.ts",
+      "sha256": "f7a849f97de3619ae8d5d8e82be1932b757f5cf5658b3df9c2f0f8a52b532833"
+    },
+    {
+      "path": "frontend/services/api/product-chart-view.ts",
+      "sha256": "626511e8cb261c8ad8388d80ba65477b11531068011f8c9bfddd0f5efb306dad"
+    },
+    {
+      "path": "frontend/services/api/published-forecast-adapter.ts",
+      "sha256": "f7f185867b0376b447a1f64db0e13b133b44bc079d67933e9778bc4492bfc10b"
+    },
+    {
+      "path": "frontend/services/api/sales-diagnostics-runtime.ts",
+      "sha256": "1ac3d2b79d05e20d54789857957a291c5410751472b2b6a7c3da5c996656789a"
+    },
+    {
+      "path": "frontend/services/api/sales-heatmap-runtime.ts",
+      "sha256": "0be8f0b2dd7a19d0abbb4ba0531b953bea53e6eaf62ac8cbe57236b311a57581"
+    },
+    {
+      "path": "frontend/services/api/sales-movement-view.ts",
+      "sha256": "be379a2295a21414a88ba5e41aafd3e12348c427c0a52fad9fbed2aee3ba3fba"
+    },
+    {
+      "path": "frontend/services/api/sales-output-sections.ts",
+      "sha256": "be3204f13a18fba1121aacc2de71cf0a0f98236f1e4105b0c3aa42ddf532c60d"
+    },
+    {
+      "path": "frontend/services/api/sales-page-helpers.ts",
+      "sha256": "82a928c944b4ceb002effaf4aeb683fab82ef568f225aa6435cd084263e0790d"
+    },
+    {
+      "path": "frontend/services/api/sales-sectors-runtime.ts",
+      "sha256": "acf734bee07644fd9e096f92c9aeb93b96586f1a34fd46a63afbb71712aa99ae"
+    },
+    {
+      "path": "frontend/services/api/sales-view-helpers.ts",
+      "sha256": "2843d5e0d24fd3e00a142fdd9c1033946184a9a30a26627124cd77c94ee32d40"
+    },
+    {
+      "path": "frontend/services/api/sales.service.ts",
+      "sha256": "abd2200f08b96b9bafd0d3268c480c79a74f85b19cce96b80c60903cb439ff53"
+    },
+    {
+      "path": "frontend/services/api/stl-panel.ts",
+      "sha256": "c2ca1eb0fa32bd40b602db9b58b82471ddb96675681d7dd65830288b6b10893d"
+    },
+    {
+      "path": "frontend/services/api/stl-view-model.ts",
+      "sha256": "f8a3f6da7a131f2229dc87d644a9d13f4ed38984f514f1f80fc41ef80485f858"
+    },
+    {
+      "path": "frontend/services/api/upload-pipeline.ts",
+      "sha256": "70883e23e54f05fb529e124d664c512b130bc2a489d32116179daa2205b03167"
+    },
+    {
+      "path": "frontend/services/api/weather-provider-helpers.ts",
+      "sha256": "b39c684aef490ce10a2f32fee43ce4d13d6e1e9ed7972ed918867bcb785068ee"
+    },
+    {
+      "path": "frontend/services/api/weather-view-helpers.ts",
+      "sha256": "2d1cf1f0cb962b8ca007b8f12a471eeade90e5b4538c95fbc938bb0281ee04ca"
+    },
+    {
+      "path": "frontend/services/api/weather.service.ts",
+      "sha256": "de3db8dd8e2d666eef37349c22233ab37e0eb5c4c00f9a5e4bc8bc8f7f40f7d7"
+    },
+    {
+      "path": "frontend/services/supabase/audit.service.ts",
+      "sha256": "a2eb3dd520aa24652bd8714b6653da19d000d97e611bdd514719ef8ef18a796b"
+    },
+    {
+      "path": "frontend/services/supabase/auth.service.ts",
+      "sha256": "3190750a226e836827d834535147515b7a86f17cca1c380c69882773ab0b6c04"
+    },
+    {
+      "path": "frontend/tsconfig.json",
+      "sha256": "f4d94b5fdfe443d6719765d11f24681eee4f8bef0e6899fed443d48a390dc830"
+    },
+    {
+      "path": "frontend/types/api.types.ts",
+      "sha256": "3f998b3395c78212d1e7383212de25a9a2804a23b19173b241f4b57deaab194b"
+    },
+    {
+      "path": "frontend/types/audit.types.ts",
+      "sha256": "98a44bea33f30a17ca12d3a3abd88a255070d9c4e470a4c775b662c7f8b67821"
+    },
+    {
+      "path": "frontend/types/dashboard.types.ts",
+      "sha256": "ef0a07b51a10a3a84847b4bff1d579c50ed3ee42df933de2a06076c2816096f9"
+    },
+    {
+      "path": "frontend/types/diagnostics.types.ts",
+      "sha256": "b2c1867c1beaceec28d487b280146bc98d17ace03583677e5efca62900c1c694"
+    },
+    {
+      "path": "frontend/types/prescriptive.types.ts",
+      "sha256": "578f86685ce446690cdd7f90cb176f027cd7dd5935f7c25e0f17050c4843d854"
+    },
+    {
+      "path": "frontend/types/sales.types.ts",
+      "sha256": "b7a9f4bc2485d380a7851159d6b201db0e9984f3d9d182788f250b4ecdaea12d"
+    },
+    {
+      "path": "frontend/types/weather.types.ts",
+      "sha256": "5706c217ca7b8382d0e1916f2247b96486dc3df5c7f1da7b4fd642aafbbcf402"
+    }
+  ],
+  "aggregate_sha256": "a9843f4b2b35bb71acc2fcf14b2653a7333ae63e44094ee8509fa5995c02c3bb",
+  "runtime": {
+    "node": "v22.14.0",
+    "next": "14.2.35",
+    "playwright": "1.62.1",
+    "typescript": "5.9.3"
+  }
+}

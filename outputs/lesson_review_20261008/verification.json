@@ -1,0 +1,3656 @@
+{
+  "reviewed_at": "2026-10-08T17:31:12.586071+08:00",
+  "timezone": "Asia/Manila",
+  "environment": {
+    "python": "3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]",
+    "platform": "win32"
+  },
+  "git_head": "cc03b4c05398880b18987eca5ca9c1e140bf9dcb",
+  "working_tree": "Dirty before this task; document/helper hashes identify checked deliverables. Existing unrelated changes preserved.",
+  "command": "python -X utf8 outputs/lesson_review_20261008/verify_review.py",
+  "document_hashes": {
+    ".agents\\analytics-learning-coach.md": "0ec92dccba3876d67cd1b5be7141b8ae784f78ec4c9f998542d4e8eaad27d43a",
+    ".agents\\worker-operating-model.md": "0f6d4f2a0cdca2868feff360347bace8b244e387bd830816727ab49bd2fd9f2b",
+    ".skills\\analytics-frameworks.md": "5191e9843caa879caa4648b5fb355af6ff1b21e75eeea5edcfee3e044de02591",
+    "lessons\\README.md": "2c3c7a1030ca8aa191f4e01719c1f5d4fcda8ba91a6f3143afaab21154a2f5c2",
+    "lessons\\REVIEW.md": "1930666154a86283a282864ca6b6b31d7845c8e9fe9ed4451cc018cecc94e2fa",
+    "docs\\DOCUMENTATION_INDEX.md": "7d041fe90cd6935941a5e0c47474c8dbb365bd674faf1f5ec9d2eabb9b9602e8",
+    ".skills\\analytics-lesson-coaching\\references\\assessor-notes.md": "7d02714a0e25c8c910e36a2a381861ae359e03a9d8e2ddf00da555eff84dc6c6",
+    ".skills\\analytics-lesson-coaching\\references\\practice-cases.md": "030eec25184dbc3bc549ca009edf67f282b70e4196ab3e5fdf89b5490c5185fb",
+    ".skills\\analytics-lesson-coaching\\SKILL.md": "f4a30d25ae26c6b8b9f3a0a7b5b09c6c6414217aed2e436bbccd65fd87f867c8"
+  },
+  "helper_sha256": "14d35fda45df4c195974c098e20a2d2e7f680f215a5dd75a64cd2c956dfc6df4",
+  "checks": [
+    {
+      "check": "chapter-1 unchanged source",
+      "status": "pass",
+      "detail": {
+        "source": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\lessons\\Chapter 1 - Introduction to Analytics Application.pptx",
+        "sha256": "f76fd83645b0743798f54d17103bf245e6e60322612f31389ac19672cf1c18db",
+        "bytes": 11634799,
+        "slide_count": 34
+      }
+    },
+    {
+      "check": "chapter-1 slide coverage",
+      "status": "pass",
+      "detail": 34
+    },
+    {
+      "check": "chapter-1 slide-1 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide1.xml",
+        "characters": 95
+      }
+    },
+    {
+      "check": "chapter-1 slide-2 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide2.xml",
+        "characters": 866
+      }
+    },
+    {
+      "check": "chapter-1 slide-3 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide3.xml",
+        "characters": 423
+      }
+    },
+    {
+      "check": "chapter-1 slide-4 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide4.xml",
+        "characters": 24
+      }
+    },
+    {
+      "check": "chapter-1 slide-5 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide5.xml",
+        "characters": 103
+      }
+    },
+    {
+      "check": "chapter-1 slide-6 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide6.xml",
+        "characters": 31
+      }
+    },
+    {
+      "check": "chapter-1 slide-7 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide7.xml",
+        "characters": 355
+      }
+    },
+    {
+      "check": "chapter-1 slide-8 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide8.xml",
+        "characters": 285
+      }
+    },
+    {
+      "check": "chapter-1 slide-9 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide9.xml",
+        "characters": 343
+      }
+    },
+    {
+      "check": "chapter-1 slide-10 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide10.xml",
+        "characters": 472
+      }
+    },
+    {
+      "check": "chapter-1 slide-11 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide11.xml",
+        "characters": 377
+      }
+    },
+    {
+      "check": "chapter-1 slide-12 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide12.xml",
+        "characters": 0
+      }
+    },
+    {
+      "check": "chapter-1 slide-13 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide13.xml",
+        "characters": 570
+      }
+    },
+    {
+      "check": "chapter-1 slide-14 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide14.xml",
+        "characters": 415
+      }
+    },
+    {
+      "check": "chapter-1 slide-15 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide15.xml",
+        "characters": 14
+      }
+    },
+    {
+      "check": "chapter-1 slide-16 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide16.xml",
+        "characters": 42
+      }
+    },
+    {
+      "check": "chapter-1 slide-17 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide17.xml",
+        "characters": 398
+      }
+    },
+    {
+      "check": "chapter-1 slide-18 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide18.xml",
+        "characters": 1055
+      }
+    },
+    {
+      "check": "chapter-1 slide-19 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide19.xml",
+        "characters": 419
+      }
+    },
+    {
+      "check": "chapter-1 slide-20 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide20.xml",
+        "characters": 2659
+      }
+    },
+    {
+      "check": "chapter-1 slide-21 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide21.xml",
+        "characters": 0
+      }
+    },
+    {
+      "check": "chapter-1 slide-22 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide22.xml",
+        "characters": 46
+      }
+    },
+    {
+      "check": "chapter-1 slide-23 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide23.xml",
+        "characters": 307
+      }
+    },
+    {
+      "check": "chapter-1 slide-24 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide24.xml",
+        "characters": 585
+      }
+    },
+    {
+      "check": "chapter-1 slide-25 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide25.xml",
+        "characters": 18
+      }
+    },
+    {
+      "check": "chapter-1 slide-26 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide26.xml",
+        "characters": 319
+      }
+    },
+    {
+      "check": "chapter-1 slide-27 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide27.xml",
+        "characters": 342
+      }
+    },
+    {
+      "check": "chapter-1 slide-28 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide28.xml",
+        "characters": 300
+      }
+    },
+    {
+      "check": "chapter-1 slide-29 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide29.xml",
+        "characters": 265
+      }
+    },
+    {
+      "check": "chapter-1 slide-30 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide30.xml",
+        "characters": 421
+      }
+    },
+    {
+      "check": "chapter-1 slide-31 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide31.xml",
+        "characters": 279
+      }
+    },
+    {
+      "check": "chapter-1 slide-32 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide32.xml",
+        "characters": 259
+      }
+    },
+    {
+      "check": "chapter-1 slide-33 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide33.xml",
+        "characters": 282
+      }
+    },
+    {
+      "check": "chapter-1 slide-34 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide34.xml",
+        "characters": 0
+      }
+    },
+    {
+      "check": "chapter-1 extracted asset integrity",
+      "status": "pass",
+      "detail": 38
+    },
+    {
+      "check": "chapter-1 preview generation",
+      "status": "pass",
+      "detail": {
+        "status": "generated",
+        "files": [
+          "images-01.jpg",
+          "images-02.jpg",
+          "images-03.jpg",
+          "images-04.jpg",
+          "images-05.jpg"
+        ],
+        "failures": []
+      }
+    },
+    {
+      "check": "chapter-2 unchanged source",
+      "status": "pass",
+      "detail": {
+        "source": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\lessons\\Chapter 2 - Framing Analytics Problems.pptx",
+        "sha256": "26403f141e46c9b6d216120aea06790ba19046596c0b94698d9d61ebcc91dd2c",
+        "bytes": 114228972,
+        "slide_count": 138
+      }
+    },
+    {
+      "check": "chapter-2 slide coverage",
+      "status": "pass",
+      "detail": 138
+    },
+    {
+      "check": "chapter-2 slide-1 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide1.xml",
+        "characters": 84
+      }
+    },
+    {
+      "check": "chapter-2 slide-2 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide2.xml",
+        "characters": 501
+      }
+    },
+    {
+      "check": "chapter-2 slide-3 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide3.xml",
+        "characters": 1673
+      }
+    },
+    {
+      "check": "chapter-2 slide-4 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide4.xml",
+        "characters": 42
+      }
+    },
+    {
+      "check": "chapter-2 slide-5 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide5.xml",
+        "characters": 482
+      }
+    },
+    {
+      "check": "chapter-2 slide-6 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide6.xml",
+        "characters": 456
+      }
+    },
+    {
+      "check": "chapter-2 slide-7 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide7.xml",
+        "characters": 552
+      }
+    },
+    {
+      "check": "chapter-2 slide-8 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide8.xml",
+        "characters": 854
+      }
+    },
+    {
+      "check": "chapter-2 slide-9 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide9.xml",
+        "characters": 968
+      }
+    },
+    {
+      "check": "chapter-2 slide-10 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide10.xml",
+        "characters": 0
+      }
+    },
+    {
+      "check": "chapter-2 slide-11 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide11.xml",
+        "characters": 707
+      }
+    },
+    {
+      "check": "chapter-2 slide-12 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide12.xml",
+        "characters": 30
+      }
+    },
+    {
+      "check": "chapter-2 slide-13 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide13.xml",
+        "characters": 1345
+      }
+    },
+    {
+      "check": "chapter-2 slide-14 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide14.xml",
+        "characters": 452
+      }
+    },
+    {
+      "check": "chapter-2 slide-15 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide15.xml",
+        "characters": 831
+      }
+    },
+    {
+      "check": "chapter-2 slide-16 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide16.xml",
+        "characters": 330
+      }
+    },
+    {
+      "check": "chapter-2 slide-17 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide17.xml",
+        "characters": 3
+      }
+    },
+    {
+      "check": "chapter-2 slide-18 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide18.xml",
+        "characters": 435
+      }
+    },
+    {
+      "check": "chapter-2 slide-19 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide19.xml",
+        "characters": 737
+      }
+    },
+    {
+      "check": "chapter-2 slide-20 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide20.xml",
+        "characters": 518
+      }
+    },
+    {
+      "check": "chapter-2 slide-21 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide21.xml",
+        "characters": 8
+      }
+    },
+    {
+      "check": "chapter-2 slide-22 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide22.xml",
+        "characters": 392
+      }
+    },
+    {
+      "check": "chapter-2 slide-23 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide23.xml",
+        "characters": 542
+      }
+    },
+    {
+      "check": "chapter-2 slide-24 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide24.xml",
+        "characters": 388
+      }
+    },
+    {
+      "check": "chapter-2 slide-25 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide25.xml",
+        "characters": 5
+      }
+    },
+    {
+      "check": "chapter-2 slide-26 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide26.xml",
+        "characters": 418
+      }
+    },
+    {
+      "check": "chapter-2 slide-27 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide27.xml",
+        "characters": 641
+      }
+    },
+    {
+      "check": "chapter-2 slide-28 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide28.xml",
+        "characters": 297
+      }
+    },
+    {
+      "check": "chapter-2 slide-29 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide29.xml",
+        "characters": 4
+      }
+    },
+    {
+      "check": "chapter-2 slide-30 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide30.xml",
+        "characters": 671
+      }
+    },
+    {
+      "check": "chapter-2 slide-31 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide31.xml",
+        "characters": 11
+      }
+    },
+    {
+      "check": "chapter-2 slide-32 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide32.xml",
+        "characters": 788
+      }
+    },
+    {
+      "check": "chapter-2 slide-33 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide33.xml",
+        "characters": 1030
+      }
+    },
+    {
+      "check": "chapter-2 slide-34 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide34.xml",
+        "characters": 511
+      }
+    },
+    {
+      "check": "chapter-2 slide-35 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide35.xml",
+        "characters": 1016
+      }
+    },
+    {
+      "check": "chapter-2 slide-36 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide36.xml",
+        "characters": 34
+      }
+    },
+    {
+      "check": "chapter-2 slide-37 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide37.xml",
+        "characters": 1492
+      }
+    },
+    {
+      "check": "chapter-2 slide-38 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide38.xml",
+        "characters": 545
+      }
+    },
+    {
+      "check": "chapter-2 slide-39 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide39.xml",
+        "characters": 990
+      }
+    },
+    {
+      "check": "chapter-2 slide-40 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide40.xml",
+        "characters": 650
+      }
+    },
+    {
+      "check": "chapter-2 slide-41 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide41.xml",
+        "characters": 416
+      }
+    },
+    {
+      "check": "chapter-2 slide-42 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide42.xml",
+        "characters": 807
+      }
+    },
+    {
+      "check": "chapter-2 slide-43 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide43.xml",
+        "characters": 531
+      }
+    },
+    {
+      "check": "chapter-2 slide-44 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide44.xml",
+        "characters": 594
+      }
+    },
+    {
+      "check": "chapter-2 slide-45 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide45.xml",
+        "characters": 1031
+      }
+    },
+    {
+      "check": "chapter-2 slide-46 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide46.xml",
+        "characters": 599
+      }
+    },
+    {
+      "check": "chapter-2 slide-47 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide47.xml",
+        "characters": 34
+      }
+    },
+    {
+      "check": "chapter-2 slide-48 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide48.xml",
+        "characters": 486
+      }
+    },
+    {
+      "check": "chapter-2 slide-49 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide49.xml",
+        "characters": 398
+      }
+    },
+    {
+      "check": "chapter-2 slide-50 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide50.xml",
+        "characters": 371
+      }
+    },
+    {
+      "check": "chapter-2 slide-51 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide51.xml",
+        "characters": 417
+      }
+    },
+    {
+      "check": "chapter-2 slide-52 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide52.xml",
+        "characters": 387
+      }
+    },
+    {
+      "check": "chapter-2 slide-53 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide53.xml",
+        "characters": 314
+      }
+    },
+    {
+      "check": "chapter-2 slide-54 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide54.xml",
+        "characters": 425
+      }
+    },
+    {
+      "check": "chapter-2 slide-55 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide55.xml",
+        "characters": 360
+      }
+    },
+    {
+      "check": "chapter-2 slide-56 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide56.xml",
+        "characters": 38
+      }
+    },
+    {
+      "check": "chapter-2 slide-57 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide57.xml",
+        "characters": 375
+      }
+    },
+    {
+      "check": "chapter-2 slide-58 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide58.xml",
+        "characters": 540
+      }
+    },
+    {
+      "check": "chapter-2 slide-59 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide59.xml",
+        "characters": 474
+      }
+    },
+    {
+      "check": "chapter-2 slide-60 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide60.xml",
+        "characters": 549
+      }
+    },
+    {
+      "check": "chapter-2 slide-61 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide61.xml",
+        "characters": 414
+      }
+    },
+    {
+      "check": "chapter-2 slide-62 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide62.xml",
+        "characters": 310
+      }
+    },
+    {
+      "check": "chapter-2 slide-63 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide63.xml",
+        "characters": 403
+      }
+    },
+    {
+      "check": "chapter-2 slide-64 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide64.xml",
+        "characters": 330
+      }
+    },
+    {
+      "check": "chapter-2 slide-65 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide65.xml",
+        "characters": 324
+      }
+    },
+    {
+      "check": "chapter-2 slide-66 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide66.xml",
+        "characters": 272
+      }
+    },
+    {
+      "check": "chapter-2 slide-67 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide67.xml",
+        "characters": 379
+      }
+    },
+    {
+      "check": "chapter-2 slide-68 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide68.xml",
+        "characters": 411
+      }
+    },
+    {
+      "check": "chapter-2 slide-69 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide69.xml",
+        "characters": 519
+      }
+    },
+    {
+      "check": "chapter-2 slide-70 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide70.xml",
+        "characters": 727
+      }
+    },
+    {
+      "check": "chapter-2 slide-71 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide71.xml",
+        "characters": 358
+      }
+    },
+    {
+      "check": "chapter-2 slide-72 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide72.xml",
+        "characters": 290
+      }
+    },
+    {
+      "check": "chapter-2 slide-73 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide73.xml",
+        "characters": 265
+      }
+    },
+    {
+      "check": "chapter-2 slide-74 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide74.xml",
+        "characters": 495
+      }
+    },
+    {
+      "check": "chapter-2 slide-75 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide75.xml",
+        "characters": 402
+      }
+    },
+    {
+      "check": "chapter-2 slide-76 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide76.xml",
+        "characters": 311
+      }
+    },
+    {
+      "check": "chapter-2 slide-77 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide77.xml",
+        "characters": 273
+      }
+    },
+    {
+      "check": "chapter-2 slide-78 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide78.xml",
+        "characters": 275
+      }
+    },
+    {
+      "check": "chapter-2 slide-79 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide79.xml",
+        "characters": 25
+      }
+    },
+    {
+      "check": "chapter-2 slide-80 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide80.xml",
+        "characters": 392
+      }
+    },
+    {
+      "check": "chapter-2 slide-81 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide81.xml",
+        "characters": 316
+      }
+    },
+    {
+      "check": "chapter-2 slide-82 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide82.xml",
+        "characters": 352
+      }
+    },
+    {
+      "check": "chapter-2 slide-83 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide83.xml",
+        "characters": 371
+      }
+    },
+    {
+      "check": "chapter-2 slide-84 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide84.xml",
+        "characters": 12
+      }
+    },
+    {
+      "check": "chapter-2 slide-85 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide85.xml",
+        "characters": 313
+      }
+    },
+    {
+      "check": "chapter-2 slide-86 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide86.xml",
+        "characters": 378
+      }
+    },
+    {
+      "check": "chapter-2 slide-87 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide87.xml",
+        "characters": 547
+      }
+    },
+    {
+      "check": "chapter-2 slide-88 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide88.xml",
+        "characters": 368
+      }
+    },
+    {
+      "check": "chapter-2 slide-89 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide89.xml",
+        "characters": 439
+      }
+    },
+    {
+      "check": "chapter-2 slide-90 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide90.xml",
+        "characters": 458
+      }
+    },
+    {
+      "check": "chapter-2 slide-91 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide91.xml",
+        "characters": 550
+      }
+    },
+    {
+      "check": "chapter-2 slide-92 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide92.xml",
+        "characters": 1062
+      }
+    },
+    {
+      "check": "chapter-2 slide-93 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide93.xml",
+        "characters": 625
+      }
+    },
+    {
+      "check": "chapter-2 slide-94 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide94.xml",
+        "characters": 367
+      }
+    },
+    {
+      "check": "chapter-2 slide-95 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide95.xml",
+        "characters": 403
+      }
+    },
+    {
+      "check": "chapter-2 slide-96 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide96.xml",
+        "characters": 1385
+      }
+    },
+    {
+      "check": "chapter-2 slide-97 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide97.xml",
+        "characters": 38
+      }
+    },
+    {
+      "check": "chapter-2 slide-98 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide98.xml",
+        "characters": 723
+      }
+    },
+    {
+      "check": "chapter-2 slide-99 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide99.xml",
+        "characters": 1561
+      }
+    },
+    {
+      "check": "chapter-2 slide-100 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide100.xml",
+        "characters": 519
+      }
+    },
+    {
+      "check": "chapter-2 slide-101 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide101.xml",
+        "characters": 1446
+      }
+    },
+    {
+      "check": "chapter-2 slide-102 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide102.xml",
+        "characters": 275
+      }
+    },
+    {
+      "check": "chapter-2 slide-103 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide103.xml",
+        "characters": 277
+      }
+    },
+    {
+      "check": "chapter-2 slide-104 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide104.xml",
+        "characters": 369
+      }
+    },
+    {
+      "check": "chapter-2 slide-105 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide105.xml",
+        "characters": 1090
+      }
+    },
+    {
+      "check": "chapter-2 slide-106 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide106.xml",
+        "characters": 618
+      }
+    },
+    {
+      "check": "chapter-2 slide-107 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide107.xml",
+        "characters": 287
+      }
+    },
+    {
+      "check": "chapter-2 slide-108 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide108.xml",
+        "characters": 303
+      }
+    },
+    {
+      "check": "chapter-2 slide-109 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide109.xml",
+        "characters": 266
+      }
+    },
+    {
+      "check": "chapter-2 slide-110 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide110.xml",
+        "characters": 346
+      }
+    },
+    {
+      "check": "chapter-2 slide-111 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide111.xml",
+        "characters": 337
+      }
+    },
+    {
+      "check": "chapter-2 slide-112 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide112.xml",
+        "characters": 303
+      }
+    },
+    {
+      "check": "chapter-2 slide-113 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide113.xml",
+        "characters": 650
+      }
+    },
+    {
+      "check": "chapter-2 slide-114 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide114.xml",
+        "characters": 492
+      }
+    },
+    {
+      "check": "chapter-2 slide-115 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide115.xml",
+        "characters": 1309
+      }
+    },
+    {
+      "check": "chapter-2 slide-116 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide116.xml",
+        "characters": 1882
+      }
+    },
+    {
+      "check": "chapter-2 slide-117 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide117.xml",
+        "characters": 9
+      }
+    },
+    {
+      "check": "chapter-2 slide-118 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide118.xml",
+        "characters": 26
+      }
+    },
+    {
+      "check": "chapter-2 slide-119 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide119.xml",
+        "characters": 15
+      }
+    },
+    {
+      "check": "chapter-2 slide-120 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide120.xml",
+        "characters": 1190
+      }
+    },
+    {
+      "check": "chapter-2 slide-121 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide121.xml",
+        "characters": 996
+      }
+    },
+    {
+      "check": "chapter-2 slide-122 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide122.xml",
+        "characters": 750
+      }
+    },
+    {
+      "check": "chapter-2 slide-123 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide123.xml",
+        "characters": 709
+      }
+    },
+    {
+      "check": "chapter-2 slide-124 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide124.xml",
+        "characters": 748
+      }
+    },
+    {
+      "check": "chapter-2 slide-125 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide125.xml",
+        "characters": 881
+      }
+    },
+    {
+      "check": "chapter-2 slide-126 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide126.xml",
+        "characters": 700
+      }
+    },
+    {
+      "check": "chapter-2 slide-127 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide127.xml",
+        "characters": 957
+      }
+    },
+    {
+      "check": "chapter-2 slide-128 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide128.xml",
+        "characters": 657
+      }
+    },
+    {
+      "check": "chapter-2 slide-129 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide129.xml",
+        "characters": 733
+      }
+    },
+    {
+      "check": "chapter-2 slide-130 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide130.xml",
+        "characters": 423
+      }
+    },
+    {
+      "check": "chapter-2 slide-131 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide131.xml",
+        "characters": 831
+      }
+    },
+    {
+      "check": "chapter-2 slide-132 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide132.xml",
+        "characters": 26
+      }
+    },
+    {
+      "check": "chapter-2 slide-133 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide133.xml",
+        "characters": 1427
+      }
+    },
+    {
+      "check": "chapter-2 slide-134 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide134.xml",
+        "characters": 1403
+      }
+    },
+    {
+      "check": "chapter-2 slide-135 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide135.xml",
+        "characters": 1134
+      }
+    },
+    {
+      "check": "chapter-2 slide-136 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide136.xml",
+        "characters": 733
+      }
+    },
+    {
+      "check": "chapter-2 slide-137 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide137.xml",
+        "characters": 677
+      }
+    },
+    {
+      "check": "chapter-2 slide-138 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide138.xml",
+        "characters": 0
+      }
+    },
+    {
+      "check": "chapter-2 extracted asset integrity",
+      "status": "pass",
+      "detail": 140
+    },
+    {
+      "check": "chapter-2 preview generation",
+      "status": "pass",
+      "detail": {
+        "status": "generated",
+        "files": [
+          "images-01.jpg",
+          "images-02.jpg",
+          "images-03.jpg",
+          "images-04.jpg",
+          "images-05.jpg",
+          "images-06.jpg",
+          "images-07.jpg",
+          "images-08.jpg",
+          "images-09.jpg",
+          "images-10.jpg",
+          "images-11.jpg",
+          "images-12.jpg",
+          "images-13.jpg",
+          "images-14.jpg",
+          "images-15.jpg",
+          "images-16.jpg",
+          "images-17.jpg",
+          "images-18.jpg"
+        ],
+        "failures": []
+      }
+    },
+    {
+      "check": "chapter-3 unchanged source",
+      "status": "pass",
+      "detail": {
+        "source": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\lessons\\Chapter 3 - Data for Modern Analytics.pptx",
+        "sha256": "0bb1c9d137217413efdacbdf569da8b902d1ec703ec2a2a6a1d9810477e69041",
+        "bytes": 54040499,
+        "slide_count": 69
+      }
+    },
+    {
+      "check": "chapter-3 slide coverage",
+      "status": "pass",
+      "detail": 69
+    },
+    {
+      "check": "chapter-3 slide-1 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide1.xml",
+        "characters": 85
+      }
+    },
+    {
+      "check": "chapter-3 slide-2 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide2.xml",
+        "characters": 819
+      }
+    },
+    {
+      "check": "chapter-3 slide-3 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide3.xml",
+        "characters": 47
+      }
+    },
+    {
+      "check": "chapter-3 slide-4 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide4.xml",
+        "characters": 602
+      }
+    },
+    {
+      "check": "chapter-3 slide-5 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide5.xml",
+        "characters": 725
+      }
+    },
+    {
+      "check": "chapter-3 slide-6 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide6.xml",
+        "characters": 429
+      }
+    },
+    {
+      "check": "chapter-3 slide-7 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide7.xml",
+        "characters": 681
+      }
+    },
+    {
+      "check": "chapter-3 slide-8 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide8.xml",
+        "characters": 588
+      }
+    },
+    {
+      "check": "chapter-3 slide-9 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide9.xml",
+        "characters": 492
+      }
+    },
+    {
+      "check": "chapter-3 slide-10 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide10.xml",
+        "characters": 445
+      }
+    },
+    {
+      "check": "chapter-3 slide-11 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide11.xml",
+        "characters": 37
+      }
+    },
+    {
+      "check": "chapter-3 slide-12 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide12.xml",
+        "characters": 380
+      }
+    },
+    {
+      "check": "chapter-3 slide-13 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide13.xml",
+        "characters": 352
+      }
+    },
+    {
+      "check": "chapter-3 slide-14 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide14.xml",
+        "characters": 903
+      }
+    },
+    {
+      "check": "chapter-3 slide-15 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide15.xml",
+        "characters": 433
+      }
+    },
+    {
+      "check": "chapter-3 slide-16 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide16.xml",
+        "characters": 478
+      }
+    },
+    {
+      "check": "chapter-3 slide-17 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide17.xml",
+        "characters": 299
+      }
+    },
+    {
+      "check": "chapter-3 slide-18 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide18.xml",
+        "characters": 422
+      }
+    },
+    {
+      "check": "chapter-3 slide-19 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide19.xml",
+        "characters": 279
+      }
+    },
+    {
+      "check": "chapter-3 slide-20 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide20.xml",
+        "characters": 418
+      }
+    },
+    {
+      "check": "chapter-3 slide-21 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide21.xml",
+        "characters": 473
+      }
+    },
+    {
+      "check": "chapter-3 slide-22 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide22.xml",
+        "characters": 54
+      }
+    },
+    {
+      "check": "chapter-3 slide-23 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide23.xml",
+        "characters": 396
+      }
+    },
+    {
+      "check": "chapter-3 slide-24 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide24.xml",
+        "characters": 355
+      }
+    },
+    {
+      "check": "chapter-3 slide-25 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide25.xml",
+        "characters": 1491
+      }
+    },
+    {
+      "check": "chapter-3 slide-26 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide26.xml",
+        "characters": 31
+      }
+    },
+    {
+      "check": "chapter-3 slide-27 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide27.xml",
+        "characters": 434
+      }
+    },
+    {
+      "check": "chapter-3 slide-28 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide28.xml",
+        "characters": 494
+      }
+    },
+    {
+      "check": "chapter-3 slide-29 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide29.xml",
+        "characters": 392
+      }
+    },
+    {
+      "check": "chapter-3 slide-30 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide30.xml",
+        "characters": 419
+      }
+    },
+    {
+      "check": "chapter-3 slide-31 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide31.xml",
+        "characters": 329
+      }
+    },
+    {
+      "check": "chapter-3 slide-32 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide32.xml",
+        "characters": 477
+      }
+    },
+    {
+      "check": "chapter-3 slide-33 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide33.xml",
+        "characters": 353
+      }
+    },
+    {
+      "check": "chapter-3 slide-34 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide34.xml",
+        "characters": 414
+      }
+    },
+    {
+      "check": "chapter-3 slide-35 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide35.xml",
+        "characters": 32
+      }
+    },
+    {
+      "check": "chapter-3 slide-36 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide36.xml",
+        "characters": 741
+      }
+    },
+    {
+      "check": "chapter-3 slide-37 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide37.xml",
+        "characters": 392
+      }
+    },
+    {
+      "check": "chapter-3 slide-38 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide38.xml",
+        "characters": 458
+      }
+    },
+    {
+      "check": "chapter-3 slide-39 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide39.xml",
+        "characters": 595
+      }
+    },
+    {
+      "check": "chapter-3 slide-40 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide40.xml",
+        "characters": 32
+      }
+    },
+    {
+      "check": "chapter-3 slide-41 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide41.xml",
+        "characters": 395
+      }
+    },
+    {
+      "check": "chapter-3 slide-42 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide42.xml",
+        "characters": 873
+      }
+    },
+    {
+      "check": "chapter-3 slide-43 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide43.xml",
+        "characters": 466
+      }
+    },
+    {
+      "check": "chapter-3 slide-44 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide44.xml",
+        "characters": 389
+      }
+    },
+    {
+      "check": "chapter-3 slide-45 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide45.xml",
+        "characters": 432
+      }
+    },
+    {
+      "check": "chapter-3 slide-46 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide46.xml",
+        "characters": 412
+      }
+    },
+    {
+      "check": "chapter-3 slide-47 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide47.xml",
+        "characters": 411
+      }
+    },
+    {
+      "check": "chapter-3 slide-48 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide48.xml",
+        "characters": 57
+      }
+    },
+    {
+      "check": "chapter-3 slide-49 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide49.xml",
+        "characters": 339
+      }
+    },
+    {
+      "check": "chapter-3 slide-50 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide50.xml",
+        "characters": 473
+      }
+    },
+    {
+      "check": "chapter-3 slide-51 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide51.xml",
+        "characters": 394
+      }
+    },
+    {
+      "check": "chapter-3 slide-52 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide52.xml",
+        "characters": 519
+      }
+    },
+    {
+      "check": "chapter-3 slide-53 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide53.xml",
+        "characters": 466
+      }
+    },
+    {
+      "check": "chapter-3 slide-54 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide54.xml",
+        "characters": 383
+      }
+    },
+    {
+      "check": "chapter-3 slide-55 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide55.xml",
+        "characters": 424
+      }
+    },
+    {
+      "check": "chapter-3 slide-56 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide56.xml",
+        "characters": 387
+      }
+    },
+    {
+      "check": "chapter-3 slide-57 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide57.xml",
+        "characters": 402
+      }
+    },
+    {
+      "check": "chapter-3 slide-58 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide58.xml",
+        "characters": 37
+      }
+    },
+    {
+      "check": "chapter-3 slide-59 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide59.xml",
+        "characters": 232
+      }
+    },
+    {
+      "check": "chapter-3 slide-60 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide60.xml",
+        "characters": 627
+      }
+    },
+    {
+      "check": "chapter-3 slide-61 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide61.xml",
+        "characters": 423
+      }
+    },
+    {
+      "check": "chapter-3 slide-62 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide62.xml",
+        "characters": 660
+      }
+    },
+    {
+      "check": "chapter-3 slide-63 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide63.xml",
+        "characters": 48
+      }
+    },
+    {
+      "check": "chapter-3 slide-64 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide64.xml",
+        "characters": 1275
+      }
+    },
+    {
+      "check": "chapter-3 slide-65 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide65.xml",
+        "characters": 997
+      }
+    },
+    {
+      "check": "chapter-3 slide-66 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide66.xml",
+        "characters": 734
+      }
+    },
+    {
+      "check": "chapter-3 slide-67 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide67.xml",
+        "characters": 507
+      }
+    },
+    {
+      "check": "chapter-3 slide-68 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide68.xml",
+        "characters": 422
+      }
+    },
+    {
+      "check": "chapter-3 slide-69 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide69.xml",
+        "characters": 0
+      }
+    },
+    {
+      "check": "chapter-3 extracted asset integrity",
+      "status": "pass",
+      "detail": 57
+    },
+    {
+      "check": "chapter-3 preview generation",
+      "status": "pass",
+      "detail": {
+        "status": "generated",
+        "files": [
+          "images-01.jpg",
+          "images-02.jpg",
+          "images-03.jpg",
+          "images-04.jpg",
+          "images-05.jpg",
+          "images-06.jpg",
+          "images-07.jpg",
+          "images-08.jpg"
+        ],
+        "failures": []
+      }
+    },
+    {
+      "check": "chapter-4 unchanged source",
+      "status": "pass",
+      "detail": {
+        "source": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\lessons\\Chapter 4 - Exploratory & Diagnostic Analytics.pptx",
+        "sha256": "09b6f9a0c067e7882b906a53d6ea97a05c3b2940fb55b0b29c2cb5c680fd1090",
+        "bytes": 45052898,
+        "slide_count": 106
+      }
+    },
+    {
+      "check": "chapter-4 slide coverage",
+      "status": "pass",
+      "detail": 106
+    },
+    {
+      "check": "chapter-4 slide-1 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide1.xml",
+        "characters": 92
+      }
+    },
+    {
+      "check": "chapter-4 slide-2 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide2.xml",
+        "characters": 963
+      }
+    },
+    {
+      "check": "chapter-4 slide-3 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide3.xml",
+        "characters": 648
+      }
+    },
+    {
+      "check": "chapter-4 slide-4 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide4.xml",
+        "characters": 356
+      }
+    },
+    {
+      "check": "chapter-4 slide-5 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide5.xml",
+        "characters": 215
+      }
+    },
+    {
+      "check": "chapter-4 slide-6 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide6.xml",
+        "characters": 391
+      }
+    },
+    {
+      "check": "chapter-4 slide-7 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide7.xml",
+        "characters": 328
+      }
+    },
+    {
+      "check": "chapter-4 slide-8 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide8.xml",
+        "characters": 60
+      }
+    },
+    {
+      "check": "chapter-4 slide-9 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide9.xml",
+        "characters": 581
+      }
+    },
+    {
+      "check": "chapter-4 slide-10 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide10.xml",
+        "characters": 889
+      }
+    },
+    {
+      "check": "chapter-4 slide-11 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide11.xml",
+        "characters": 0
+      }
+    },
+    {
+      "check": "chapter-4 slide-12 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide12.xml",
+        "characters": 589
+      }
+    },
+    {
+      "check": "chapter-4 slide-13 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide13.xml",
+        "characters": 872
+      }
+    },
+    {
+      "check": "chapter-4 slide-14 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide14.xml",
+        "characters": 611
+      }
+    },
+    {
+      "check": "chapter-4 slide-15 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide15.xml",
+        "characters": 707
+      }
+    },
+    {
+      "check": "chapter-4 slide-16 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide16.xml",
+        "characters": 46
+      }
+    },
+    {
+      "check": "chapter-4 slide-17 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide17.xml",
+        "characters": 265
+      }
+    },
+    {
+      "check": "chapter-4 slide-18 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide18.xml",
+        "characters": 353
+      }
+    },
+    {
+      "check": "chapter-4 slide-19 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide19.xml",
+        "characters": 556
+      }
+    },
+    {
+      "check": "chapter-4 slide-20 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide20.xml",
+        "characters": 726
+      }
+    },
+    {
+      "check": "chapter-4 slide-21 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide21.xml",
+        "characters": 575
+      }
+    },
+    {
+      "check": "chapter-4 slide-22 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide22.xml",
+        "characters": 671
+      }
+    },
+    {
+      "check": "chapter-4 slide-23 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide23.xml",
+        "characters": 627
+      }
+    },
+    {
+      "check": "chapter-4 slide-24 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide24.xml",
+        "characters": 791
+      }
+    },
+    {
+      "check": "chapter-4 slide-25 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide25.xml",
+        "characters": 30
+      }
+    },
+    {
+      "check": "chapter-4 slide-26 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide26.xml",
+        "characters": 581
+      }
+    },
+    {
+      "check": "chapter-4 slide-27 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide27.xml",
+        "characters": 395
+      }
+    },
+    {
+      "check": "chapter-4 slide-28 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide28.xml",
+        "characters": 509
+      }
+    },
+    {
+      "check": "chapter-4 slide-29 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide29.xml",
+        "characters": 609
+      }
+    },
+    {
+      "check": "chapter-4 slide-30 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide30.xml",
+        "characters": 591
+      }
+    },
+    {
+      "check": "chapter-4 slide-31 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide31.xml",
+        "characters": 511
+      }
+    },
+    {
+      "check": "chapter-4 slide-32 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide32.xml",
+        "characters": 505
+      }
+    },
+    {
+      "check": "chapter-4 slide-33 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide33.xml",
+        "characters": 547
+      }
+    },
+    {
+      "check": "chapter-4 slide-34 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide34.xml",
+        "characters": 539
+      }
+    },
+    {
+      "check": "chapter-4 slide-35 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide35.xml",
+        "characters": 432
+      }
+    },
+    {
+      "check": "chapter-4 slide-36 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide36.xml",
+        "characters": 496
+      }
+    },
+    {
+      "check": "chapter-4 slide-37 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide37.xml",
+        "characters": 236
+      }
+    },
+    {
+      "check": "chapter-4 slide-38 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide38.xml",
+        "characters": 213
+      }
+    },
+    {
+      "check": "chapter-4 slide-39 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide39.xml",
+        "characters": 581
+      }
+    },
+    {
+      "check": "chapter-4 slide-40 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide40.xml",
+        "characters": 340
+      }
+    },
+    {
+      "check": "chapter-4 slide-41 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide41.xml",
+        "characters": 611
+      }
+    },
+    {
+      "check": "chapter-4 slide-42 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide42.xml",
+        "characters": 655
+      }
+    },
+    {
+      "check": "chapter-4 slide-43 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide43.xml",
+        "characters": 67
+      }
+    },
+    {
+      "check": "chapter-4 slide-44 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide44.xml",
+        "characters": 339
+      }
+    },
+    {
+      "check": "chapter-4 slide-45 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide45.xml",
+        "characters": 932
+      }
+    },
+    {
+      "check": "chapter-4 slide-46 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide46.xml",
+        "characters": 629
+      }
+    },
+    {
+      "check": "chapter-4 slide-47 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide47.xml",
+        "characters": 524
+      }
+    },
+    {
+      "check": "chapter-4 slide-48 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide48.xml",
+        "characters": 491
+      }
+    },
+    {
+      "check": "chapter-4 slide-49 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide49.xml",
+        "characters": 15
+      }
+    },
+    {
+      "check": "chapter-4 slide-50 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide50.xml",
+        "characters": 557
+      }
+    },
+    {
+      "check": "chapter-4 slide-51 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide51.xml",
+        "characters": 212
+      }
+    },
+    {
+      "check": "chapter-4 slide-52 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide52.xml",
+        "characters": 13
+      }
+    },
+    {
+      "check": "chapter-4 slide-53 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide53.xml",
+        "characters": 401
+      }
+    },
+    {
+      "check": "chapter-4 slide-54 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide54.xml",
+        "characters": 323
+      }
+    },
+    {
+      "check": "chapter-4 slide-55 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide55.xml",
+        "characters": 345
+      }
+    },
+    {
+      "check": "chapter-4 slide-56 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide56.xml",
+        "characters": 433
+      }
+    },
+    {
+      "check": "chapter-4 slide-57 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide57.xml",
+        "characters": 176
+      }
+    },
+    {
+      "check": "chapter-4 slide-58 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide58.xml",
+        "characters": 54
+      }
+    },
+    {
+      "check": "chapter-4 slide-59 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide59.xml",
+        "characters": 171
+      }
+    },
+    {
+      "check": "chapter-4 slide-60 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide60.xml",
+        "characters": 469
+      }
+    },
+    {
+      "check": "chapter-4 slide-61 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide61.xml",
+        "characters": 637
+      }
+    },
+    {
+      "check": "chapter-4 slide-62 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide62.xml",
+        "characters": 225
+      }
+    },
+    {
+      "check": "chapter-4 slide-63 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide63.xml",
+        "characters": 583
+      }
+    },
+    {
+      "check": "chapter-4 slide-64 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide64.xml",
+        "characters": 620
+      }
+    },
+    {
+      "check": "chapter-4 slide-65 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide65.xml",
+        "characters": 697
+      }
+    },
+    {
+      "check": "chapter-4 slide-66 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide66.xml",
+        "characters": 589
+      }
+    },
+    {
+      "check": "chapter-4 slide-67 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide67.xml",
+        "characters": 633
+      }
+    },
+    {
+      "check": "chapter-4 slide-68 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide68.xml",
+        "characters": 667
+      }
+    },
+    {
+      "check": "chapter-4 slide-69 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide69.xml",
+        "characters": 376
+      }
+    },
+    {
+      "check": "chapter-4 slide-70 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide70.xml",
+        "characters": 125
+      }
+    },
+    {
+      "check": "chapter-4 slide-71 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide71.xml",
+        "characters": 332
+      }
+    },
+    {
+      "check": "chapter-4 slide-72 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide72.xml",
+        "characters": 332
+      }
+    },
+    {
+      "check": "chapter-4 slide-73 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide73.xml",
+        "characters": 593
+      }
+    },
+    {
+      "check": "chapter-4 slide-74 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide74.xml",
+        "characters": 1830
+      }
+    },
+    {
+      "check": "chapter-4 slide-75 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide75.xml",
+        "characters": 788
+      }
+    },
+    {
+      "check": "chapter-4 slide-76 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide76.xml",
+        "characters": 973
+      }
+    },
+    {
+      "check": "chapter-4 slide-77 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide77.xml",
+        "characters": 782
+      }
+    },
+    {
+      "check": "chapter-4 slide-78 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide78.xml",
+        "characters": 468
+      }
+    },
+    {
+      "check": "chapter-4 slide-79 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide79.xml",
+        "characters": 768
+      }
+    },
+    {
+      "check": "chapter-4 slide-80 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide80.xml",
+        "characters": 299
+      }
+    },
+    {
+      "check": "chapter-4 slide-81 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide81.xml",
+        "characters": 651
+      }
+    },
+    {
+      "check": "chapter-4 slide-82 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide82.xml",
+        "characters": 880
+      }
+    },
+    {
+      "check": "chapter-4 slide-83 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide83.xml",
+        "characters": 1077
+      }
+    },
+    {
+      "check": "chapter-4 slide-84 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide84.xml",
+        "characters": 942
+      }
+    },
+    {
+      "check": "chapter-4 slide-85 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide85.xml",
+        "characters": 848
+      }
+    },
+    {
+      "check": "chapter-4 slide-86 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide86.xml",
+        "characters": 582
+      }
+    },
+    {
+      "check": "chapter-4 slide-87 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide87.xml",
+        "characters": 839
+      }
+    },
+    {
+      "check": "chapter-4 slide-88 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide88.xml",
+        "characters": 877
+      }
+    },
+    {
+      "check": "chapter-4 slide-89 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide89.xml",
+        "characters": 870
+      }
+    },
+    {
+      "check": "chapter-4 slide-90 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide90.xml",
+        "characters": 941
+      }
+    },
+    {
+      "check": "chapter-4 slide-91 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide91.xml",
+        "characters": 458
+      }
+    },
+    {
+      "check": "chapter-4 slide-92 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide92.xml",
+        "characters": 720
+      }
+    },
+    {
+      "check": "chapter-4 slide-93 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide93.xml",
+        "characters": 1080
+      }
+    },
+    {
+      "check": "chapter-4 slide-94 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide94.xml",
+        "characters": 51
+      }
+    },
+    {
+      "check": "chapter-4 slide-95 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide95.xml",
+        "characters": 1355
+      }
+    },
+    {
+      "check": "chapter-4 slide-96 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide96.xml",
+        "characters": 659
+      }
+    },
+    {
+      "check": "chapter-4 slide-97 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide97.xml",
+        "characters": 1337
+      }
+    },
+    {
+      "check": "chapter-4 slide-98 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide98.xml",
+        "characters": 533
+      }
+    },
+    {
+      "check": "chapter-4 slide-99 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide99.xml",
+        "characters": 76
+      }
+    },
+    {
+      "check": "chapter-4 slide-100 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide100.xml",
+        "characters": 79
+      }
+    },
+    {
+      "check": "chapter-4 slide-101 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide101.xml",
+        "characters": 484
+      }
+    },
+    {
+      "check": "chapter-4 slide-102 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide102.xml",
+        "characters": 99
+      }
+    },
+    {
+      "check": "chapter-4 slide-103 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide103.xml",
+        "characters": 808
+      }
+    },
+    {
+      "check": "chapter-4 slide-104 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide104.xml",
+        "characters": 771
+      }
+    },
+    {
+      "check": "chapter-4 slide-105 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide105.xml",
+        "characters": 825
+      }
+    },
+    {
+      "check": "chapter-4 slide-106 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide106.xml",
+        "characters": 0
+      }
+    },
+    {
+      "check": "chapter-4 extracted asset integrity",
+      "status": "pass",
+      "detail": 88
+    },
+    {
+      "check": "chapter-4 preview generation",
+      "status": "pass",
+      "detail": {
+        "status": "generated",
+        "files": [
+          "images-01.jpg",
+          "images-02.jpg",
+          "images-03.jpg",
+          "images-04.jpg",
+          "images-05.jpg",
+          "images-06.jpg",
+          "images-07.jpg",
+          "images-08.jpg",
+          "images-09.jpg",
+          "images-10.jpg",
+          "images-11.jpg"
+        ],
+        "failures": []
+      }
+    },
+    {
+      "check": "chapter-5 unchanged source",
+      "status": "pass",
+      "detail": {
+        "source": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\lessons\\Chapter 5 - Predictive Analytics.pptx",
+        "sha256": "2c69ef765698b014ace6ff69d498f65708da93432e5fe9eed1184e6bc05e055d",
+        "bytes": 63586497,
+        "slide_count": 68
+      }
+    },
+    {
+      "check": "chapter-5 slide coverage",
+      "status": "pass",
+      "detail": 68
+    },
+    {
+      "check": "chapter-5 slide-1 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide1.xml",
+        "characters": 105
+      }
+    },
+    {
+      "check": "chapter-5 slide-2 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide2.xml",
+        "characters": 406
+      }
+    },
+    {
+      "check": "chapter-5 slide-3 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide3.xml",
+        "characters": 377
+      }
+    },
+    {
+      "check": "chapter-5 slide-4 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide4.xml",
+        "characters": 539
+      }
+    },
+    {
+      "check": "chapter-5 slide-5 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide5.xml",
+        "characters": 432
+      }
+    },
+    {
+      "check": "chapter-5 slide-6 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide6.xml",
+        "characters": 628
+      }
+    },
+    {
+      "check": "chapter-5 slide-7 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide7.xml",
+        "characters": 632
+      }
+    },
+    {
+      "check": "chapter-5 slide-8 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide8.xml",
+        "characters": 592
+      }
+    },
+    {
+      "check": "chapter-5 slide-9 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide9.xml",
+        "characters": 33
+      }
+    },
+    {
+      "check": "chapter-5 slide-10 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide10.xml",
+        "characters": 840
+      }
+    },
+    {
+      "check": "chapter-5 slide-11 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide11.xml",
+        "characters": 48
+      }
+    },
+    {
+      "check": "chapter-5 slide-12 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide12.xml",
+        "characters": 48
+      }
+    },
+    {
+      "check": "chapter-5 slide-13 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide13.xml",
+        "characters": 1049
+      }
+    },
+    {
+      "check": "chapter-5 slide-14 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide14.xml",
+        "characters": 1072
+      }
+    },
+    {
+      "check": "chapter-5 slide-15 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide15.xml",
+        "characters": 57
+      }
+    },
+    {
+      "check": "chapter-5 slide-16 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide16.xml",
+        "characters": 57
+      }
+    },
+    {
+      "check": "chapter-5 slide-17 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide17.xml",
+        "characters": 632
+      }
+    },
+    {
+      "check": "chapter-5 slide-18 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide18.xml",
+        "characters": 463
+      }
+    },
+    {
+      "check": "chapter-5 slide-19 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide19.xml",
+        "characters": 792
+      }
+    },
+    {
+      "check": "chapter-5 slide-20 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide20.xml",
+        "characters": 604
+      }
+    },
+    {
+      "check": "chapter-5 slide-21 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide21.xml",
+        "characters": 1029
+      }
+    },
+    {
+      "check": "chapter-5 slide-22 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide22.xml",
+        "characters": 48
+      }
+    },
+    {
+      "check": "chapter-5 slide-23 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide23.xml",
+        "characters": 53
+      }
+    },
+    {
+      "check": "chapter-5 slide-24 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide24.xml",
+        "characters": 539
+      }
+    },
+    {
+      "check": "chapter-5 slide-25 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide25.xml",
+        "characters": 524
+      }
+    },
+    {
+      "check": "chapter-5 slide-26 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide26.xml",
+        "characters": 553
+      }
+    },
+    {
+      "check": "chapter-5 slide-27 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide27.xml",
+        "characters": 529
+      }
+    },
+    {
+      "check": "chapter-5 slide-28 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide28.xml",
+        "characters": 45
+      }
+    },
+    {
+      "check": "chapter-5 slide-29 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide29.xml",
+        "characters": 45
+      }
+    },
+    {
+      "check": "chapter-5 slide-30 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide30.xml",
+        "characters": 315
+      }
+    },
+    {
+      "check": "chapter-5 slide-31 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide31.xml",
+        "characters": 1419
+      }
+    },
+    {
+      "check": "chapter-5 slide-32 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide32.xml",
+        "characters": 1204
+      }
+    },
+    {
+      "check": "chapter-5 slide-33 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide33.xml",
+        "characters": 974
+      }
+    },
+    {
+      "check": "chapter-5 slide-34 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide34.xml",
+        "characters": 974
+      }
+    },
+    {
+      "check": "chapter-5 slide-35 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide35.xml",
+        "characters": 974
+      }
+    },
+    {
+      "check": "chapter-5 slide-36 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide36.xml",
+        "characters": 974
+      }
+    },
+    {
+      "check": "chapter-5 slide-37 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide37.xml",
+        "characters": 974
+      }
+    },
+    {
+      "check": "chapter-5 slide-38 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide38.xml",
+        "characters": 974
+      }
+    },
+    {
+      "check": "chapter-5 slide-39 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide39.xml",
+        "characters": 1259
+      }
+    },
+    {
+      "check": "chapter-5 slide-40 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide40.xml",
+        "characters": 77
+      }
+    },
+    {
+      "check": "chapter-5 slide-41 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide41.xml",
+        "characters": 1077
+      }
+    },
+    {
+      "check": "chapter-5 slide-42 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide42.xml",
+        "characters": 64
+      }
+    },
+    {
+      "check": "chapter-5 slide-43 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide43.xml",
+        "characters": 23
+      }
+    },
+    {
+      "check": "chapter-5 slide-44 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide44.xml",
+        "characters": 823
+      }
+    },
+    {
+      "check": "chapter-5 slide-45 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide45.xml",
+        "characters": 66
+      }
+    },
+    {
+      "check": "chapter-5 slide-46 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide46.xml",
+        "characters": 735
+      }
+    },
+    {
+      "check": "chapter-5 slide-47 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide47.xml",
+        "characters": 929
+      }
+    },
+    {
+      "check": "chapter-5 slide-48 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide48.xml",
+        "characters": 824
+      }
+    },
+    {
+      "check": "chapter-5 slide-49 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide49.xml",
+        "characters": 47
+      }
+    },
+    {
+      "check": "chapter-5 slide-50 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide50.xml",
+        "characters": 519
+      }
+    },
+    {
+      "check": "chapter-5 slide-51 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide51.xml",
+        "characters": 618
+      }
+    },
+    {
+      "check": "chapter-5 slide-52 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide52.xml",
+        "characters": 432
+      }
+    },
+    {
+      "check": "chapter-5 slide-53 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide53.xml",
+        "characters": 674
+      }
+    },
+    {
+      "check": "chapter-5 slide-54 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide54.xml",
+        "characters": 573
+      }
+    },
+    {
+      "check": "chapter-5 slide-55 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide55.xml",
+        "characters": 550
+      }
+    },
+    {
+      "check": "chapter-5 slide-56 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide56.xml",
+        "characters": 465
+      }
+    },
+    {
+      "check": "chapter-5 slide-57 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide57.xml",
+        "characters": 458
+      }
+    },
+    {
+      "check": "chapter-5 slide-58 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide58.xml",
+        "characters": 771
+      }
+    },
+    {
+      "check": "chapter-5 slide-59 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide59.xml",
+        "characters": 907
+      }
+    },
+    {
+      "check": "chapter-5 slide-60 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide60.xml",
+        "characters": 619
+      }
+    },
+    {
+      "check": "chapter-5 slide-61 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide61.xml",
+        "characters": 563
+      }
+    },
+    {
+      "check": "chapter-5 slide-62 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide62.xml",
+        "characters": 602
+      }
+    },
+    {
+      "check": "chapter-5 slide-63 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide63.xml",
+        "characters": 543
+      }
+    },
+    {
+      "check": "chapter-5 slide-64 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide64.xml",
+        "characters": 926
+      }
+    },
+    {
+      "check": "chapter-5 slide-65 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide65.xml",
+        "characters": 808
+      }
+    },
+    {
+      "check": "chapter-5 slide-66 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide66.xml",
+        "characters": 771
+      }
+    },
+    {
+      "check": "chapter-5 slide-67 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide67.xml",
+        "characters": 825
+      }
+    },
+    {
+      "check": "chapter-5 slide-68 text",
+      "status": "pass",
+      "detail": {
+        "source_part": "ppt/slides/slide68.xml",
+        "characters": 0
+      }
+    },
+    {
+      "check": "chapter-5 extracted asset integrity",
+      "status": "pass",
+      "detail": 61
+    },
+    {
+      "check": "chapter-5 preview generation",
+      "status": "pass",
+      "detail": {
+        "status": "generated",
+        "files": [
+          "images-01.jpg",
+          "images-02.jpg",
+          "images-03.jpg",
+          "images-04.jpg",
+          "images-05.jpg",
+          "images-06.jpg",
+          "images-07.jpg",
+          "images-08.jpg"
+        ],
+        "failures": []
+      }
+    },
+    {
+      "check": "total coverage",
+      "status": "pass",
+      "detail": {
+        "decks": 5,
+        "slides": 415
+      }
+    },
+    {
+      "check": "owned/new local Markdown links",
+      "status": "pass",
+      "detail": {
+        "checked": 79,
+        "broken": []
+      }
+    },
+    {
+      "check": "helper refuses existing evidence folder",
+      "status": "pass",
+      "detail": "usage: inspect_lessons.py [-h] [--previews] source output\ninspect_lessons.py: error: Output already exists; choose a new folder to preserve earlier evidence"
+    },
+    {
+      "check": "helper rejects missing input without output",
+      "status": "pass",
+      "detail": "usage: inspect_lessons.py [-h] [--previews] source output\ninspect_lessons.py: error: Provide a PPTX file or a folder containing PPTX files"
+    },
+    {
+      "check": "final helper fresh extraction and previews",
+      "status": "pass",
+      "detail": {
+        "returncode": 0,
+        "stdout": "{\"decks\": 1, \"slides\": 34, \"manifest\": \"C:\\\\Users\\\\Adrian\\\\AppData\\\\Local\\\\Temp\\\\medshield-lesson-helper-dn_cck5t\\\\extraction\\\\manifest.json\"}",
+        "stderr": "",
+        "scope": "Chapter 1 with previews in isolated temporary directory; removed after check"
+      }
+    },
+    {
+      "check": "practice key independent arithmetic",
+      "status": "pass",
+      "detail": {
+        "margin_pct": 12.5,
+        "matched_yoy_pct": 50.0,
+        "classification": {
+          "accuracy_pct": 86.0,
+          "precision_pct": 40.0,
+          "recall_pct": 80.0,
+          "f1_pct": 53.333333333333336
+        },
+        "annual": [
+          103.0,
+          111.0,
+          119.0
+        ],
+        "rolling": [
+          103.0,
+          105.0,
+          107.0
+        ],
+        "chi_square": 20.0,
+        "cramers_v": 0.5,
+        "other_bases": {
+          "join_revenue_naive": 600,
+          "join_revenue_expected": 300,
+          "segment_change": 20,
+          "required_forecast_leads": [
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "check": "skill frontmatter validation",
+      "status": "pass",
+      "detail": "Skill is valid!"
+    }
+  ],
+  "summary": {
+    "pass": 442,
+    "fail": 0
+  },
+  "inherited_broken_links": [
+    {
+      "file": "docs\\DOCUMENTATION_INDEX.md",
+      "target": "../databricks/sales_restart/README.md"
+    },
+    {
+      "file": "docs\\DOCUMENTATION_INDEX.md",
+      "target": "../databricks/sales_restart/GUIDE.md"
+    },
+    {
+      "file": "docs\\DOCUMENTATION_INDEX.md",
+      "target": "../databricks/docs/CURRENT_DATABRICKS_SYSTEM_CONNECTION.md"
+    },
+    {
+      "file": "docs\\DOCUMENTATION_INDEX.md",
+      "target": "../databricks/external_restart/GUIDE.md"
+    },
+    {
+      "file": "docs\\DOCUMENTATION_INDEX.md",
+      "target": "../databricks/docs/SALES_RESTART_DASHBOARD_GUIDE.md"
+    }
+  ],
+  "limits": [
+    "Source content/links and numerical keys, not full slide rendering, production runtime or fine-tuning.",
+    "Review coverage records actual root/supporting reviewer declarations; extraction parity is not proof of understanding.",
+    "One draft-stage forward coaching trial; no repeated before/after performance evaluation."
+  ]
+}

@@ -1,5 +1,12 @@
 # Architect Agent
 
+## Required skills
+
+Read and apply the primary skill before specialist work under the [skill-loading contract](execution-contract.md#skill-loading-contract).
+
+- **Primary:** [Architecture patterns](../.skills/architecture-patterns.md).
+- **Conditional:** [Technology stack](../.skills/technology-stack.md) for runtime/dependency choices; [database standards](../.skills/database-standards.md) for data boundaries or joins; [enterprise architecture](../.skills/enterprise-architecture-frameworks.md) for capability/transition alignment.
+
 ## Execution Contract
 
 Apply the shared [execution contract](execution-contract.md) and [worker operating model](worker-operating-model.md) before specialist work.
@@ -10,7 +17,7 @@ Apply the shared [execution contract](execution-contract.md) and [worker operati
 - **Completion evidence:** Design names affected consumers, compatibility, failure handling, tradeoffs, and implementation owners.
 
 ## Description
-Designs the application and service architecture for the MedShield capstone. This role focuses on structure, boundaries, scalability, maintainability, and alignment with the documented stack. The architect should think in terms of fit and shape: what boundaries are worth protecting, what dependencies are acceptable, and what future work the current structure will help or hinder. A good architecture answer should explain how the dashboard, TypeScript API gateway, Python analytics services, and data warehouse work together to support business analytics, not just how each layer exists in isolation.
+Designs the application and service architecture for the MedShield capstone. This role focuses on structure, boundaries, scalability, maintainability, and alignment with the documented stack. The architect should think in terms of fit and shape: what boundaries are worth protecting, what dependencies are acceptable, and what future work the current structure will help or hinder. A good architecture answer traces dashboard requests through the TypeScript gateway to Databricks, distinguishes Supabase identity/audit, and shows where offline Python outputs need reviewed publication before use.
 
 ## Workflow
 1. Review the requirements, business analysis notes, and implementation docs before proposing changes.
@@ -22,7 +29,7 @@ Designs the application and service architecture for the MedShield capstone. Thi
 
 ## Rules
 - Prefer the architecture already documented in `docs/IMPLEMENTATION.md` and `docs/ARCHITECTURE.md`.
-- Keep boundaries explicit between UI, TypeScript API, Python analytics services, and database layers.
+- Keep boundaries explicit between UI, TypeScript gateway, Databricks analytics, Supabase identity/audit and offline Python jobs. Dashboard requests do not start Flask services or train models.
 - Avoid abstractions that do not solve a real project problem.
 - Validate security and data implications before approving structural changes.
 - Document tradeoffs when the chosen design is not the simplest option.

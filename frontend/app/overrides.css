@@ -859,7 +859,8 @@ body .topbar {
   background: var(--bg-elevated);
 }
 #page-sales-data .sales-filter-toolbar {
-  grid-template-columns: repeat(5, minmax(140px, 1fr)) minmax(240px, 1.6fr);
+  grid-template-columns: minmax(200px, 1fr) minmax(120px, 160px) minmax(120px, 160px) auto;
+  background: var(--bg-surface);
 }
 #page-weather-validation .weather-filter-toolbar {
   grid-template-columns: repeat(4, minmax(160px, 1fr));
@@ -868,24 +869,133 @@ body .topbar {
 #page-weather-validation .weather-filter-toolbar .uploaded-data-field {
   min-width: 0;
 }
-#page-sales-data #salesPipelineNote,
 #page-weather-validation #weatherEffectStatus {
   margin: 0 22px 12px;
   border-left-width: 4px;
   border-radius: 0 8px 8px 0;
 }
 #page-sales-data #salesComputationGrid {
-  grid-template-columns: repeat(4, minmax(150px, 1fr));
-  gap: 10px;
-  margin: 12px 22px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  margin: 14px 0 0;
+  min-height: 74px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-surface);
+  overflow: hidden;
 }
 #page-sales-data #salesComputationGrid .sales-status-card {
-  min-height: 64px;
+  min-height: 74px;
+  padding: 14px 16px;
+  border: 0;
+  border-right: 1px solid var(--border);
+  border-radius: 0;
+  background: transparent;
 }
+#page-sales-data #salesComputationGrid .sales-status-card:last-child { border-right: 0; }
 #page-sales-data .uploaded-data-table-wrap {
-  max-height: calc(100vh - 330px);
-  min-height: 430px;
-  margin: 8px 22px 0;
+  max-height: clamp(260px, calc(100vh - 450px), 560px);
+  min-height: 240px;
+  margin: 0 22px;
+}
+#page-sales-data .uploaded-data-panel {
+  background: #fff;
+  --bg-surface: #fff;
+  --bg-elevated: #f5f8fa;
+}
+#page-sales-data .uploaded-data-header { padding: 20px 22px 18px; }
+#page-sales-data .uploaded-data-title { margin: 0; font-size: 18px; }
+#page-sales-data .uploaded-data-copy { margin: 6px 0 0; font-size: 12px; }
+#page-sales-data .sales-header-actions { align-self: center; }
+#page-sales-data .mini-badge { white-space: normal; overflow-wrap: anywhere; }
+#page-sales-data .uploaded-data-field label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+#page-sales-data .uploaded-data-field select,
+#page-sales-data .uploaded-data-field input { background: #fff; min-height: 38px; }
+#page-sales-data .sales-summary-section { padding: 16px 22px; border-bottom: 1px solid var(--border); }
+#page-sales-data .sales-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+#page-sales-data .sales-section-heading h3 { margin: 0; color: var(--text-primary); font-size: 13px; font-weight: 700; }
+#page-sales-data .sales-section-heading p { margin: 4px 0 0; color: var(--text-secondary); font-size: 11px; line-height: 1.4; }
+#page-sales-data .sales-inline-field { display: flex; align-items: center; gap: 8px; min-width: 0; }
+#page-sales-data .sales-inline-field label { white-space: nowrap; }
+#page-sales-data .sales-inline-field select { width: auto; }
+#page-sales-data .sales-ledger-heading { padding: 16px 22px 12px; }
+#page-sales-data .sales-status-label { font-size: 10px; letter-spacing: 0; text-transform: none; line-height: 1.4; }
+#page-sales-data .sales-status-value { font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+#page-sales-data .uploaded-data-table { font-size: 12px; }
+#page-sales-data .uploaded-data-table th {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: normal;
+}
+#page-sales-data .uploaded-data-table th,
+#page-sales-data .uploaded-data-table td { border-right: 0; padding: 11px 12px; }
+#page-sales-data .uploaded-data-table td { background: #fff; }
+#page-sales-data .uploaded-data-table tbody tr:hover td { background: #f1f6fa; }
+#page-sales-data .uploaded-data-table .sales-cell-number { text-align: right; font-variant-numeric: tabular-nums; }
+#page-sales-data .uploaded-data-table .sales-cell-product { min-width: 190px; max-width: 300px; white-space: normal; overflow-wrap: anywhere; line-height: 1.5; }
+#page-sales-data .uploaded-data-table[data-detail="compact"] .sales-cell-product { width: 25%; }
+#page-sales-data .uploaded-data-table[data-detail="full"] :is(th, td):first-child {
+  width: 180px;
+  min-width: 180px;
+  max-width: 180px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+#page-sales-data .sales-row-evidence { display: block; margin-top: 3px; color: var(--text-muted); font-size: 10px; }
+#page-sales-data .uploaded-data-footer { margin: 0; padding: 14px 22px; }
+#page-sales-data .uploaded-data-status { margin: 0; }
+#page-sales-data .sales-footer-count { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+#page-sales-data .sales-evidence-details { border-top: 1px solid var(--border); }
+#page-sales-data .sales-evidence-details summary {
+  padding: 15px 22px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+#page-sales-data #salesReconciliationStatus { margin-left: 12px; font-size: 11px; font-weight: 400; }
+#page-sales-data #salesReconciliationStatus.has-differences { color: var(--amber); font-weight: 600; }
+#page-sales-data .sales-evidence-body { padding: 0 22px 18px; color: var(--text-secondary); font-size: 12px; line-height: 1.6; }
+#page-sales-data .sales-evidence-body p { margin: 0 0 12px; overflow-wrap: anywhere; }
+#page-sales-data .sales-evidence-body p:last-child { margin-bottom: 0; }
+#page-sales-data #salesDrilldownContext { margin: 14px 22px 0; }
+#page-sales-data #salesDrilldownScope { margin-bottom: 8px; overflow-wrap: anywhere; }
+#page-sales-data .sales-secondary-button { border-color: var(--border); color: var(--text-secondary); }
+#page-sales-data button:not(:disabled):hover { background: var(--bg-elevated); }
+#page-sales-data :is(button, input, select, summary, [tabindex]):focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+#page-sales-data .uploaded-data-field :disabled { cursor: not-allowed; opacity: .65; }
+@media (max-width: 1100px) {
+  #page-sales-data .sales-filter-toolbar { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; }
+  #page-sales-data .uploaded-data-search { grid-column: 1 / -1; }
+  #page-sales-data .sales-status-value { font-size: 17px; }
+}
+@media (max-width: 680px) {
+  #page-sales-data .sales-filter-toolbar { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  #page-sales-data .sales-filter-toolbar #salesDataReset { grid-column: 1 / -1; justify-self: start; }
+  #page-sales-data .sales-summary-section,
+  #page-sales-data .sales-ledger-heading,
+  #page-sales-data .uploaded-data-footer,
+  #page-sales-data .sales-evidence-details summary,
+  #page-sales-data .sales-evidence-body { padding-left: 14px; padding-right: 14px; }
+  #page-sales-data #salesComputationGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-left: 0; margin-right: 0; }
+  #page-sales-data #salesComputationGrid .sales-status-card:nth-child(2) { border-right: 0; }
+  #page-sales-data #salesComputationGrid .sales-status-card:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
+  #page-sales-data .sales-inline-field { width: auto; }
+  #page-sales-data #salesDrilldownContext { margin-left: 14px; margin-right: 14px; }
+  #page-sales-data #salesReconciliationStatus { display: block; margin: 6px 0 0 16px; }
 }
 .dashboard-focus-panel {
   display: grid;
@@ -979,17 +1089,13 @@ body .topbar {
     padding-left: 14px;
     padding-right: 14px;
   }
-  #page-sales-data #salesPipelineNote,
   #page-weather-validation #weatherEffectStatus,
-  #page-sales-data #salesComputationGrid,
   #page-sales-data .uploaded-data-table-wrap,
   #page-weather-validation .uploaded-data-table-wrap {
     margin-left: 14px;
     margin-right: 14px;
   }
-  #page-sales-data .sales-filter-toolbar,
-  #page-weather-validation .weather-filter-toolbar,
-  #page-sales-data #salesComputationGrid {
+  #page-weather-validation .weather-filter-toolbar {
     grid-template-columns: 1fr;
   }
 }

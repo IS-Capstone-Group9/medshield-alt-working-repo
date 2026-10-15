@@ -10,7 +10,7 @@ export function installStlPanel(root: HTMLElement): () => void {
   if (!host) return () => {}
   const section = document.createElement('section')
   section.className = 'chart-card'; section.id = 'descriptiveStlPanel'
-  const title = document.createElement('h2'); title.textContent = 'Revenue seasonality — STL'
+  const title = document.createElement('h2'); title.textContent = 'Sales patterns across the full history — STL'
   const status = document.createElement('p'); status.setAttribute('role', 'status'); status.textContent = 'Checking validated Databricks STL…'
   section.append(title, status); host.append(section)
   let disposed = false
@@ -36,7 +36,8 @@ export function installStlPanel(root: HTMLElement): () => void {
     methodology.append(methodologyHeading, methodologyText)
     const trendNote = document.createElement('p'); trendNote.className = 'chart-subtitle'
     trendNote.textContent = `Within the latest qualifying segment (${view.first.period}–${view.latest.period}), fitted trend moved from ${money(view.first.trend)} to ${money(view.latest.trend)}. Breaks separate missing months or independently fitted segments; no change across a break is inferred.`
-    section.append(trendNote)
+    const trendHeading = document.createElement('h3'); trendHeading.textContent = 'Underlying sales direction'
+    section.append(trendHeading, trendNote)
     const compactMoney = (value: string | number) => '₱' + Number(value).toLocaleString('en-PH', { notation: 'compact', maximumFractionDigits: 1 })
     const chartOptions = {
       responsive: true, maintainAspectRatio: false, animation: false as const,
@@ -51,14 +52,16 @@ export function installStlPanel(root: HTMLElement): () => void {
     const canvas = document.createElement('canvas'); canvas.setAttribute('aria-label', 'Observed revenue and STL trend; component values are in the table below'); canvas.setAttribute('role', 'img'); wrapper.append(canvas); section.append(wrapper)
     charts.push(new Chart(canvas, { type: 'line', data: { labels: view.labels, datasets: [
       { label: 'Observed revenue (₱)', data: view.observed, borderColor: '#1E3A5F', pointRadius: 2, spanGaps: false },
-      { label: 'STL trend (₱)', data: view.trend, borderColor: '#D97706', pointRadius: 1, spanGaps: false },
+      { label: 'Underlying direction — STL trend (₱)', data: view.trend, borderColor: '#D97706', pointRadius: 1, spanGaps: false },
     ] }, options: chartOptions }))
     for (const [key, label, color] of [['seasonal', 'Seasonal component (₱)', '#0F766E'], ['residual', 'Residual (₱)', '#64748B']] as const) {
-      const heading = document.createElement('h3'); heading.textContent = label
+      const heading = document.createElement('h3'); heading.textContent = key === 'seasonal'
+        ? 'Repeating monthly contribution — seasonal component'
+        : 'Unusual periods — residual component'
       const note = document.createElement('p'); note.className = 'chart-subtitle'
       note.textContent = key === 'seasonal'
         ? `Fitted seasonal contribution ranges from ${money(view.low.seasonal)} (${view.low.period}) to ${money(view.high.seasonal)} (${view.high.period}). Values above zero add to the fitted trend; below zero subtract. This is historical revenue structure, not evidence of disease causality.`
-        : `Largest absolute unexplained deviation: ${money(view.unusual.residual)} in ${view.unusual.period}. Review source transactions and business context; a residual alone establishes neither a cause nor an error.`
+        : `Largest unusual difference: ${money(view.unusual.residual)} in ${view.unusual.period}, selected by absolute residual size. Review source transactions and business context; a residual alone establishes neither a cause nor an error.`
       let target: HTMLElement = section
       if (key === 'residual') {
         const detail = document.createElement('details'); detail.id = 'stlResidualDetail'

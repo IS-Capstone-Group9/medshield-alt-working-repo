@@ -1,4 +1,4 @@
-import { SalesSummary, SalesPage, SalesDatasetStatus } from '@/lib/api'
+import { SalesSummary, SalesDatasetStatus } from '@/lib/api'
 
 export function formatSalesValue(value: unknown, type: 'text' | 'number' | 'money' | 'percent' = 'text') {
   if (value === null || value === undefined || value === '') return '-'
@@ -14,14 +14,14 @@ export function renderSalesComputation(root: HTMLElement, summary: SalesSummary,
   const grid = root.querySelector<HTMLElement>('#salesComputationGrid')
   if (!grid) return
 
-  const money = (val: number | undefined) => formatSalesValue(val ?? 0, 'money')
-  const number = (val: number | undefined) => formatSalesValue(val ?? 0, 'number')
+  const money = (val: number | null | undefined) => val == null ? 'Unavailable' : formatSalesValue(val, 'money')
+  const number = (val: number | null | undefined) => val == null ? 'Unavailable' : formatSalesValue(val, 'number')
   const percent = (val: number | null | undefined) => val == null ? 'Unavailable' : formatSalesValue(val, 'percent')
   const revenue = summary.sums.net_cost
   const profit = summary.sums.net_income
   const margin = 'gross_margin_rate' in summary
     ? (summary.gross_margin_rate == null ? null : summary.gross_margin_rate / 100)
-    : revenue !== undefined && profit !== undefined && Number.isFinite(revenue) && Number.isFinite(profit) && revenue > 0
+    : revenue != null && profit != null && Number.isFinite(revenue) && Number.isFinite(profit) && revenue > 0
       ? profit / revenue
       : null
   
@@ -44,7 +44,7 @@ export function renderSalesComputation(root: HTMLElement, summary: SalesSummary,
           ? [
               ['Filtered Rows', number(summary.counts.rows)],
               ['Accepted Rows', number(summary.counts.accepted_rows)],
-              ['SKUs', number(summary.counts.sku_count)],
+              ['Source product labels', number(summary.counts.sku_count)],
               ['DR Numbers', number(summary.counts.unique_dr_numbers)],
             ]
           : [
@@ -54,14 +54,19 @@ export function renderSalesComputation(root: HTMLElement, summary: SalesSummary,
               ['Top Area', summary.top.area || '-'],
             ]
 
-  grid.innerHTML = cards
-    .map(([label, value]) => `
-      <div class="sales-status-card">
-        <div class="sales-status-label">${label}</div>
-        <div class="sales-status-value">${value}</div>
-      </div>
-    `)
-    .join('')
+  grid.replaceChildren()
+  for (const [label, value] of cards) {
+    const card = document.createElement('div')
+    card.className = 'sales-status-card'
+    const title = document.createElement('div')
+    title.className = 'sales-status-label'
+    title.textContent = label
+    const amount = document.createElement('div')
+    amount.className = 'sales-status-value'
+    amount.textContent = value
+    card.append(title, amount)
+    grid.appendChild(card)
+  }
 
   const reconciliation = root.querySelector<HTMLElement>('#salesFinancialReconciliation')
   if (reconciliation) {
@@ -70,14 +75,24 @@ export function renderSalesComputation(root: HTMLElement, summary: SalesSummary,
       ? `Workbook gross profit minus (net sales − acquisition cost): ₱${money(check.delta)}. ${check.mismatched_rows} of ${check.checked_rows} accepted rows differ by more than ₱0.01. Source values are retained for review.`
       : 'Financial reconciliation is unavailable from this data service.'
   }
+  const reconciliationStatus = root.querySelector<HTMLElement>('#salesReconciliationStatus')
+  if (reconciliationStatus) {
+    const check = summary.financial_reconciliation
+    reconciliationStatus.textContent = check
+      ? check.mismatched_rows > 0 ? `${check.mismatched_rows.toLocaleString()} rows to reconcile` : 'No reconciliation differences'
+      : 'Reconciliation unavailable'
+    reconciliationStatus.classList.toggle('has-differences', Boolean(check && check.mismatched_rows > 0))
+  }
 }
 
 export function renderSalesDatasetStatus(root: HTMLElement, status: SalesDatasetStatus) {
   const summary = status.quality_summary
   const badge = root.querySelector<HTMLElement>('#salesDatasetBadge')
   const note = root.querySelector<HTMLElement>('#salesPipelineNote')
+  const source = root.querySelector<HTMLElement>('#salesDatasetSource')
   const yearSelect = root.querySelector<HTMLSelectElement>('#salesDataYear')
-  if (badge) badge.textContent = `Databricks Gold · ${status.source_file} · ${status.cleaning_status}`
+  if (badge) badge.textContent = `Databricks Gold · ${status.cleaning_status === 'databricks_gold_candidate' ? 'Candidate' : status.cleaning_status}`
+  if (source) source.textContent = `Source: ${status.source_file}. Quality status: ${status.cleaning_status}.`
   if (note) {
     note.textContent =
       `${summary.rows_accepted.toLocaleString()} accepted of ${summary.rows_extracted.toLocaleString()} extracted rows` +

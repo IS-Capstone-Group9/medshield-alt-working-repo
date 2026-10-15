@@ -1,30 +1,23 @@
 import { executeDatabricksStatement } from './databricks'
+import { WEATHER_AREA_COORDINATES, WEATHER_POINT_POLICY, type WeatherArea } from './weatherAreas'
+export { WEATHER_AREA_COORDINATES } from './weatherAreas'
 
 function nasaPowerUrl(): string {
-  return process.env.NASA_POWER_DAILY_URL?.trim() ||
+  const configured = process.env.NASA_POWER_DAILY_URL?.trim() ||
     'https://power.larc.nasa.gov/api/temporal/daily/point'
+  let url: URL
+  try { url = new URL(configured) } catch { throw new WeatherRefreshInputError('NASA POWER URL must be the official HTTPS daily point endpoint') }
+  if (url.origin !== 'https://power.larc.nasa.gov' || url.pathname.replace(/\/$/, '') !== '/api/temporal/daily/point' || url.username || url.password) {
+    throw new WeatherRefreshInputError('NASA POWER URL must be the official HTTPS daily point endpoint')
+  }
+  return url.href
 }
 
 const SILVER_TABLE = '`workspace`.`medshield_silver`.`weather_nasa_power_monthly_candidate`'
 const GOLD_VIEW = '`workspace`.`medshield_gold`.`vw_weather_nasa_power_monthly_candidate`'
 const EARLIEST_SUPPORTED_DATE = '2017-01-01'
-const LATEST_SUPPORTED_DATE = '2025-12-31'
 const MAX_RANGE_DAYS = 3660
 const FETCH_CONCURRENCY = 3
-
-export const WEATHER_AREA_COORDINATES = Object.freeze({
-  Batangas: [13.7565, 121.0583],
-  'Camarines Norte': [14.139, 122.7633],
-  'Camarines Sur': [13.6218, 123.1948],
-  Cavite: [14.2456, 120.8786],
-  Laguna: [14.2691, 121.4113],
-  Marinduque: [13.4767, 121.9032],
-  'Metro Manila': [14.5995, 120.9842],
-  Quezon: [13.9414, 121.6234],
-  Rizal: [14.6037, 121.3084],
-} satisfies Record<string, readonly [number, number]>)
-
-type WeatherArea = keyof typeof WEATHER_AREA_COORDINATES
 
 type NasaPowerPayload = {
   properties?: {
@@ -93,7 +86,14 @@ function parseDate(value: unknown, label: string): { iso: string; date: Date } {
   return { iso: value, date }
 }
 
-function normalizeInput(input: NasaPowerRefreshInput) {
+export function lastClosedWeatherDate(now = new Date()): string {
+  const parts = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Manila', year: 'numeric', month: '2-digit' }).formatToParts(now)
+  const year = Number(parts.find(part => part.type === 'year')!.value)
+  const month = Number(parts.find(part => part.type === 'month')!.value)
+  return new Date(Date.UTC(year, month - 1, 0)).toISOString().slice(0, 10)
+}
+
+export function normalizeNasaPowerInput(input: NasaPowerRefreshInput, now = new Date()) {
   const provider = String(input.provider ?? 'nasa_power').trim().toLowerCase()
   if (provider !== 'nasa_power') {
     throw new WeatherRefreshInputError('provider must be nasa_power')
@@ -104,10 +104,15 @@ function normalizeInput(input: NasaPowerRefreshInput) {
   if (end.date < start.date) {
     throw new WeatherRefreshInputError('end must be on or after start')
   }
-  if (start.iso < EARLIEST_SUPPORTED_DATE || end.iso > LATEST_SUPPORTED_DATE) {
+  const latest = lastClosedWeatherDate(now)
+  if (start.iso < EARLIEST_SUPPORTED_DATE || end.iso > latest) {
     throw new WeatherRefreshInputError(
-      `weather refresh must stay within ${EARLIEST_SUPPORTED_DATE} and ${LATEST_SUPPORTED_DATE}`,
+      `weather refresh must stay within ${EARLIEST_SUPPORTED_DATE} and the last closed Manila month (${latest})`,
     )
+  }
+  const endMonthDays = new Date(Date.UTC(end.date.getUTCFullYear(), end.date.getUTCMonth() + 1, 0)).getUTCDate()
+  if (start.date.getUTCDate() !== 1 || end.date.getUTCDate() !== endMonthDays) {
+    throw new WeatherRefreshInputError('weather refresh must include whole calendar months')
   }
   const rangeDays = Math.round((end.date.getTime() - start.date.getTime()) / 86_400_000)
   if (rangeDays > MAX_RANGE_DAYS) {
@@ -121,7 +126,7 @@ function normalizeInput(input: NasaPowerRefreshInput) {
   const areas = requested.length
     ? [...new Set(requested.map((area) => String(area).trim()))]
     : Object.keys(WEATHER_AREA_COORDINATES)
-  const invalidAreas = areas.filter((area) => !(area in WEATHER_AREA_COORDINATES))
+  const invalidAreas = areas.filter((area) => !Object.hasOwn(WEATHER_AREA_COORDINATES, area))
   if (invalidAreas.length) {
     throw new WeatherRefreshInputError(
       `no weather coordinates are configured for: ${invalidAreas.join(', ')}`,
@@ -132,8 +137,8 @@ function normalizeInput(input: NasaPowerRefreshInput) {
 }
 
 function validMeasurement(value: number | null | undefined): number | null {
-  if (value == null || !Number.isFinite(Number(value)) || Number(value) <= -998) return null
-  return Number(value)
+  if (typeof value !== 'number' || !Number.isFinite(value) || value <= -998) return null
+  return value
 }
 
 async function fetchNasaPowerDaily(
@@ -159,7 +164,7 @@ async function fetchNasaPowerDaily(
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 90_000)
   try {
-    const response = await fetch(url, { signal: controller.signal })
+    const response = await fetch(url, { signal: controller.signal, redirect: 'error' })
     if (!response.ok) {
       throw new WeatherProviderUnavailableError(
         `NASA POWER returned HTTP ${response.status} for ${area}`,
@@ -176,11 +181,13 @@ async function fetchNasaPowerDaily(
     return Object.keys(parameters.PRECTOTCORR).sort().flatMap((key) => {
       const rainfall = validMeasurement(parameters.PRECTOTCORR[key])
       if (rainfall == null || !/^\d{8}$/.test(key)) return []
+      const date = `${key.slice(0, 4)}-${key.slice(4, 6)}-${key.slice(6, 8)}`
+      if (date < start || date > end) return []
       const temperature = validMeasurement(parameters.T2M[key])
       const humidity = validMeasurement(parameters.RH2M[key])
       const windMs = validMeasurement(parameters.WS10M[key])
       return [{
-        date: `${key.slice(0, 4)}-${key.slice(4, 6)}-${key.slice(6, 8)}`,
+        date,
         precipitationMm: rainfall,
         temperatureC: temperature,
         relativeHumidityPct: humidity,
@@ -234,12 +241,23 @@ export function aggregateNasaPowerMonthly(
 
   return [...groups.entries()].sort(([left], [right]) => left.localeCompare(right)).map(
     ([period, rows]) => {
+      const expectedDays = new Date(Date.UTC(Number(period.slice(0, 4)), Number(period.slice(5, 7)), 0)).getUTCDate()
+      const dates = new Set(rows.map(row => row.date))
+      const invalidDates = rows.some(row => {
+        const date = new Date(`${row.date}T00:00:00.000Z`)
+        return !Number.isFinite(date.getTime()) || date.toISOString().slice(0, 10) !== row.date
+      })
+      if (rows.length !== expectedDays || dates.size !== expectedDays || invalidDates || rows.some(row => !Number.isFinite(row.precipitationMm) || row.precipitationMm < 0)) {
+        throw new WeatherProviderUnavailableError(`NASA POWER returned incomplete or invalid rainfall for ${territory} ${period}; expected ${expectedDays} unique days`)
+      }
       const rainfallMm = rows.reduce((sum, row) => sum + row.precipitationMm, 0)
       const rainyDays = rows.filter((row) => row.precipitationMm >= 1).length
-      const avgTemperatureC = average(rows.flatMap((row) => row.temperatureC == null ? [] : [row.temperatureC]))
-      const avgRelativeHumidityPct = average(rows.flatMap((row) => row.relativeHumidityPct == null ? [] : [row.relativeHumidityPct]))
+      const temperatures = rows.flatMap((row) => row.temperatureC == null || !Number.isFinite(row.temperatureC) ? [] : [row.temperatureC])
+      const humidities = rows.flatMap((row) => row.relativeHumidityPct == null || !Number.isFinite(row.relativeHumidityPct) || row.relativeHumidityPct < 0 || row.relativeHumidityPct > 100 ? [] : [row.relativeHumidityPct])
+      const avgTemperatureC = temperatures.length === expectedDays ? average(temperatures) : null
+      const avgRelativeHumidityPct = humidities.length === expectedDays ? average(humidities) : null
       const winds = rows.flatMap((row) => row.windSpeedKph == null ? [] : [row.windSpeedKph])
-      const maxWindSpeedKph = winds.length ? Math.max(...winds) : null
+      const maxWindSpeedKph = winds.length === expectedDays && winds.every(wind => Number.isFinite(wind) && wind >= 0) ? Math.max(...winds) : null
       const rainfallSeverityProxy = weatherSeverity(
         rainfallMm,
         rainyDays,
@@ -364,7 +382,7 @@ async function upsertMonthlyRows(
 }
 
 export async function refreshNasaPowerWeather(input: NasaPowerRefreshInput) {
-  const normalized = normalizeInput(input)
+  const normalized = normalizeNasaPowerInput(input)
   const fetchedAt = new Date()
   const sourceUrl = nasaPowerUrl()
   const grouped = await mapWithConcurrency(
@@ -388,6 +406,10 @@ export async function refreshNasaPowerWeather(input: NasaPowerRefreshInput) {
   const monthlyRows = grouped.flatMap((result) => result.monthly)
   if (!monthlyRows.length) {
     throw new WeatherProviderUnavailableError('NASA POWER returned no usable weather observations')
+  }
+  const expectedMonths = (normalized.end.date.getUTCFullYear() - normalized.start.date.getUTCFullYear()) * 12 + normalized.end.date.getUTCMonth() - normalized.start.date.getUTCMonth() + 1
+  if (monthlyRows.length !== expectedMonths * normalized.areas.length) {
+    throw new WeatherProviderUnavailableError('NASA POWER did not return every requested closed calendar month')
   }
 
   await ensureWeatherTables()
@@ -423,6 +445,12 @@ export async function refreshNasaPowerWeather(input: NasaPowerRefreshInput) {
       daily_rows_received: grouped.reduce((sum, result) => sum + result.dailyRows, 0),
       monthly_rows_loaded: monthlyRows.length,
       system_of_record: 'databricks',
+      candidate_only: true,
+      point_policy: WEATHER_POINT_POLICY,
+      is_external_join_ready: false,
+      is_forecast_eligible: false,
+      rainfall_coverage_policy: 'complete_calendar_month_required',
+      optional_metric_policy: 'incomplete_daily_measurements_return_null',
       destination: 'workspace.medshield_gold.vw_weather_nasa_power_monthly_candidate',
       interpretation: 'NASA POWER is a provider-derived historical weather proxy, not an official PAGASA alert.',
     },

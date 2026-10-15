@@ -1,5 +1,13 @@
 # Data Stores
 
+The latest governed predictive continuation retains the source-bound monthly
+input and the exploratory model experiment in the existing candidate contracts.
+Exact readback receipts are linked from the
+[predictive delivery](../outputs/predictive_completion_20261009/README.md).
+Candidate storage preserves the supplied approval fields; it does not create
+model reviews or approved release manifests. See [current state](CURRENT_STATE.md)
+for current counts, source identity and publication readiness.
+
 Predictive continuation: the complete 15-configuration experiment is persisted
 in candidate run/point/evaluation tables under an artifact-hash experiment ID.
 Readback reconciled all 1,092 prediction/backtest rows and 15 evaluations. This
@@ -50,5 +58,13 @@ Some migrations and seed files contain earlier Supabase analytical models. Those
 - Estimated contract allocations must reconcile to their parent totals and remain labeled.
 - Missing months or unavailable measures remain missing unless a documented calendar rule explicitly represents zero activity.
 - Provider identity is preserved for PAGASA, NASA POWER, and DOH.
+- The prepared Open-Meteo contract uses
+  `workspace.medshield_silver.weather_open_meteo_monthly_candidate` and
+  `workspace.medshield_gold.vw_weather_open_meteo_monthly_candidate`, keyed by
+  provider/model variant, territory point and month. Expected/valid metric days,
+  requested/grid coordinates, source hash/URL, timezone and point policy accompany
+  each row. These remain candidate-only, join-unapproved and forecast-ineligible.
+  The first authorized provider refresh creates/upserts this isolated contract;
+  local tests are not cloud publication evidence. See [API](API.md#external-observations).
 
 See [../databricks/sales_restart/README.md](../databricks/sales_restart/README.md) and [../databricks/external_restart/GUIDE.md](../databricks/external_restart/GUIDE.md).

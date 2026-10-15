@@ -1,0 +1,1336 @@
+{
+  "started_at": "2026-10-01T16:01:24.737Z",
+  "mode": "read-only",
+  "queries": {
+    "latest_identity": {
+      "sql": "SELECT dataset_id,policy_version,product_master_sha256,publication_status,COUNT(*) records,COUNT(DISTINCT canonical_sku) skus,COUNT(product_category) category_rows,COUNT(unit_of_measure) unit_rows,MAX(date_delivered) last_date FROM workspace.medshield_gold.sales_restart_fact_candidate GROUP BY ALL",
+      "columns": [
+        "dataset_id",
+        "policy_version",
+        "product_master_sha256",
+        "publication_status",
+        "records",
+        "skus",
+        "category_rows",
+        "unit_rows",
+        "last_date"
+      ],
+      "rows": [
+        {
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+          "publication_status": "CANDIDATE_PENDING_BUSINESS_AND_PRODUCT_MASTER_REVIEW",
+          "records": "37728",
+          "skus": "0",
+          "category_rows": "37728",
+          "unit_rows": "0",
+          "last_date": "2025-12-31"
+        }
+      ]
+    },
+    "fact_history": {
+      "sql": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_fact_candidate LIMIT 3",
+      "columns": [
+        "version",
+        "timestamp",
+        "userId",
+        "userName",
+        "operation",
+        "operationParameters",
+        "job",
+        "notebook",
+        "queryHistoryStatementId",
+        "clusterId",
+        "readVersion",
+        "isolationLevel",
+        "isBlindAppend",
+        "operationMetrics",
+        "userMetadata",
+        "engineInfo"
+      ],
+      "rows": [
+        {
+          "version": "17",
+          "timestamp": "2026-09-27T14:20:23.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\",\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.workloadBasedColumns.deltaFileStatistics\\\":\\\"`sales_fact_id`,`calendar_year`,`proposed_area_type`,`month_start`,`product_scope_status`\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"1770236391304414\"}",
+          "queryHistoryStatementId": "3b166c48-8cd0-4feb-adb3-8618e33021a8",
+          "clusterId": "0927-141039-uithjs33-v2n",
+          "readVersion": "16",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"7698943\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"37728\",\"numOutputBytes\":\"9395631\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.6.x-aarch64-photon-scala2.13"
+        },
+        {
+          "version": "16",
+          "timestamp": "2026-09-27T06:02:25.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\",\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.workloadBasedColumns.deltaFileStatistics\\\":\\\"`sales_fact_id`,`calendar_year`,`proposed_area_type`,`month_start`,`product_scope_status`\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"3356988681568620\"}",
+          "queryHistoryStatementId": "3e8c401f-6f20-436d-bb41-99568070734e",
+          "clusterId": "0927-055405-cdbkvb7h-v2n",
+          "readVersion": "15",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"7698863\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"37728\",\"numOutputBytes\":\"7698943\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.6.x-aarch64-photon-scala2.13"
+        },
+        {
+          "version": "15",
+          "timestamp": "2026-09-26T16:43:04.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT",
+          "operationParameters": "{\"isV1SaveAsTableOverwrite\":\"true\",\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"canOverwriteSchema\":\"true\",\"properties\":\"{\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\",\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.workloadBasedColumns.deltaFileStatistics\\\":\\\"`sales_fact_id`,`calendar_year`,`proposed_area_type`,`month_start`,`product_scope_status`\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": "{\"notebookId\":\"953329757154073\"}",
+          "queryHistoryStatementId": "572a3a1a-9c56-4643-8182-5f2143e6ab32",
+          "clusterId": "0926-162027-479iuusb-v2n",
+          "readVersion": "14",
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "false",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numRemovedFiles\":\"1\",\"numRemovedBytes\":\"7683787\",\"numDeletionVectorsRemoved\":\"0\",\"numOutputRows\":\"37728\",\"numOutputBytes\":\"7698863\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.6.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    "stl": {
+      "sql": "SELECT dataset_id,policy_version,product_master_sha256,fact_delta_version,parameters_json,input_sha256,COUNT(*) months,MIN(period) first_period,MAX(period) last_period FROM workspace.medshield_gold.sales_restart_stl_candidate GROUP BY ALL",
+      "columns": [
+        "dataset_id",
+        "policy_version",
+        "product_master_sha256",
+        "fact_delta_version",
+        "parameters_json",
+        "input_sha256",
+        "months",
+        "first_period",
+        "last_period"
+      ],
+      "rows": [
+        {
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+          "fact_delta_version": "17",
+          "parameters_json": "{\"limitations\": [\"Describes this candidate sales series; does not prove recurring disease-driven demand.\", \"Observed months do not establish source completeness.\", \"Publication and product identity gates remain separate.\"], \"method\": \"STL\", \"metric\": \"eligible_net_sales_php\", \"minimum_contiguous_months\": 36, \"missing_policy\": \"no_imputation_split_at_gaps\", \"period\": 12, \"robust\": true, \"seasonal_window\": 13, \"short_segment_periods\": [\"2017-01\", \"2017-02\", \"2017-03\", \"2017-04\", \"2017-09\", \"2017-11\", \"2017-12\", \"2018-03\", \"2018-04\", \"2018-05\", \"2018-06\", \"2018-07\", \"2018-08\", \"2018-09\", \"2018-10\", \"2018-11\", \"2018-12\", \"2019-01\", \"2019-02\", \"2019-03\", \"2019-04\", \"2019-05\", \"2019-06\", \"2019-07\", \"2019-08\", \"2019-09\"], \"statsmodels_version\": \"0.15.0\", \"status\": \"candidate\", \"unavailable_periods\": []}",
+          "input_sha256": "77d3e75b8eeb0f591db67c8fa9cb93eaa9ad5701a64fb797e927482d0c796a90",
+          "months": "72",
+          "first_period": "2020-01",
+          "last_period": "2025-12"
+        }
+      ]
+    },
+    "publication": {
+      "sql": "SELECT * FROM workspace.medshield_audit.sales_restart_gold_publication_candidate ORDER BY table_name",
+      "columns": [
+        "table_name",
+        "saved_rows",
+        "status",
+        "dataset_id",
+        "policy_version",
+        "area_mapping_sha256",
+        "product_master_sha256",
+        "medical_supplies_in_scope",
+        "validated_at"
+      ],
+      "rows": [
+        {
+          "table_name": "workspace.medshield_audit.sales_restart_area_coverage_candidate",
+          "saved_rows": "125",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-09-27T14:26:32.126Z"
+        },
+        {
+          "table_name": "workspace.medshield_audit.sales_restart_contract_evidence_candidate",
+          "saved_rows": "62",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-09-27T14:26:32.126Z"
+        },
+        {
+          "table_name": "workspace.medshield_audit.sales_restart_gold_disposition_candidate",
+          "saved_rows": "63",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-09-27T14:26:32.126Z"
+        },
+        {
+          "table_name": "workspace.medshield_audit.sales_restart_gold_quality_candidate",
+          "saved_rows": "231",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-09-27T14:26:32.126Z"
+        },
+        {
+          "table_name": "workspace.medshield_audit.sales_restart_provisional_year_candidate",
+          "saved_rows": "0",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-09-27T14:26:32.126Z"
+        },
+        {
+          "table_name": "workspace.medshield_audit.sales_restart_returns_candidate",
+          "saved_rows": "673",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-09-27T14:26:32.126Z"
+        },
+        {
+          "table_name": "workspace.medshield_audit.sales_restart_scope_candidate",
+          "saved_rows": "6",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-09-27T14:26:32.126Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_area_yearly_candidate",
+          "saved_rows": "125",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-09-27T14:26:32.126Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_business_product_yearly_candidate",
+          "saved_rows": "7649",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-09-27T14:26:32.126Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_contract_labels_candidate",
+          "saved_rows": "0",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-09-27T14:26:32.126Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_dim_area_candidate",
+          "saved_rows": "22",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-09-27T14:26:32.126Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_dim_canonical_product_candidate",
+          "saved_rows": "4561",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-09-27T14:26:32.126Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_dim_date_candidate",
+          "saved_rows": "3287",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-09-27T14:26:32.126Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_dim_product_candidate",
+          "saved_rows": "4561",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-09-27T14:26:32.126Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_external_input_candidate",
+          "saved_rows": "0",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-09-27T14:26:32.126Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_fact_candidate",
+          "saved_rows": "37728",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-09-27T14:26:32.126Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_label_partition_candidate",
+          "saved_rows": "3",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-09-27T14:26:32.126Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_medical_monthly_candidate",
+          "saved_rows": "0",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-09-27T14:26:32.126Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_monthly_candidate",
+          "saved_rows": "108",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-09-27T14:26:32.126Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_product_yearly_candidate",
+          "saved_rows": "6671",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-09-27T14:26:32.126Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_territory_yearly_candidate",
+          "saved_rows": "41",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-09-27T14:26:32.126Z"
+        },
+        {
+          "table_name": "workspace.medshield_gold.sales_restart_yearly_candidate",
+          "saved_rows": "9",
+          "status": "PASS",
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+          "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+          "medical_supplies_in_scope": "false",
+          "validated_at": "2026-09-27T14:26:32.126Z"
+        }
+      ]
+    },
+    "annual": {
+      "sql": "SELECT calendar_year,COUNT(*) records,COUNT(DISTINCT month_start) months,SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) net_sales,SUM(CASE WHEN is_gross_margin_eligible THEN gross_margin_amount END) gross_profit,SUM(CASE WHEN is_gross_margin_eligible THEN net_sales END) margin_revenue_basis,COUNT(DISTINCT normalized_product) labels,SUM(CASE WHEN is_adjusted_source THEN 1 ELSE 0 END) adjusted_rows FROM workspace.medshield_gold.sales_restart_fact_candidate VERSION AS OF 16 GROUP BY calendar_year ORDER BY calendar_year",
+      "columns": [
+        "calendar_year",
+        "records",
+        "months",
+        "net_sales",
+        "gross_profit",
+        "margin_revenue_basis",
+        "labels",
+        "adjusted_rows"
+      ],
+      "rows": [
+        {
+          "calendar_year": "2017",
+          "records": "1978",
+          "months": "7",
+          "net_sales": "10211167.350000",
+          "gross_profit": "6316157.680000",
+          "margin_revenue_basis": "9212606.100000",
+          "labels": "339",
+          "adjusted_rows": "0"
+        },
+        {
+          "calendar_year": "2018",
+          "records": "6181",
+          "months": "10",
+          "net_sales": "51619691.270000",
+          "gross_profit": "28328721.760000",
+          "margin_revenue_basis": "44882495.390000",
+          "labels": "651",
+          "adjusted_rows": "0"
+        },
+        {
+          "calendar_year": "2019",
+          "records": "5446",
+          "months": "9",
+          "net_sales": "62542304.490000",
+          "gross_profit": "29125469.950000",
+          "margin_revenue_basis": "41211281.420000",
+          "labels": "864",
+          "adjusted_rows": "0"
+        },
+        {
+          "calendar_year": "2020",
+          "records": "3980",
+          "months": "12",
+          "net_sales": "63593274.630000",
+          "gross_profit": "28013993.680000",
+          "margin_revenue_basis": "40259988.090000",
+          "labels": "769",
+          "adjusted_rows": "3980"
+        },
+        {
+          "calendar_year": "2021",
+          "records": "3407",
+          "months": "12",
+          "net_sales": "77860206.260000",
+          "gross_profit": "50420770.930000",
+          "margin_revenue_basis": "77804247.260000",
+          "labels": "673",
+          "adjusted_rows": "0"
+        },
+        {
+          "calendar_year": "2022",
+          "records": "3980",
+          "months": "12",
+          "net_sales": "63234990.040000",
+          "gross_profit": "40799049.060000",
+          "margin_revenue_basis": "60493221.210000",
+          "labels": "840",
+          "adjusted_rows": "0"
+        },
+        {
+          "calendar_year": "2023",
+          "records": "5381",
+          "months": "12",
+          "net_sales": "62228966.850000",
+          "gross_profit": "33585582.480000",
+          "margin_revenue_basis": "59822843.640000",
+          "labels": "1887",
+          "adjusted_rows": "0"
+        },
+        {
+          "calendar_year": "2024",
+          "records": "2831",
+          "months": "12",
+          "net_sales": "50259319.880000",
+          "gross_profit": "19563837.420000",
+          "margin_revenue_basis": "49956893.050000",
+          "labels": "596",
+          "adjusted_rows": "2831"
+        },
+        {
+          "calendar_year": "2025",
+          "records": "4544",
+          "months": "12",
+          "net_sales": "185396821.040000",
+          "gross_profit": "52333915.760000",
+          "margin_revenue_basis": "95077093.870000",
+          "labels": "1030",
+          "adjusted_rows": "4544"
+        }
+      ]
+    },
+    "geo": {
+      "sql": "SELECT normalized_area,area_mapping_status,area_evidence_status,mapped_region,mapped_province,mapped_geographic_level,COUNT(*) records,SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) net_sales FROM workspace.medshield_gold.sales_restart_fact_candidate VERSION AS OF 16 GROUP BY ALL ORDER BY net_sales DESC",
+      "columns": [
+        "normalized_area",
+        "area_mapping_status",
+        "area_evidence_status",
+        "mapped_region",
+        "mapped_province",
+        "mapped_geographic_level",
+        "records",
+        "net_sales"
+      ],
+      "rows": [
+        {
+          "normalized_area": "GOVERNMENT",
+          "area_mapping_status": "needs_review",
+          "area_evidence_status": "PROPOSED_NOT_OWNER_APPROVED",
+          "mapped_region": "",
+          "mapped_province": "",
+          "mapped_geographic_level": "nongeographic",
+          "records": "8249",
+          "net_sales": "310629101.400000"
+        },
+        {
+          "normalized_area": "HOSPITAL",
+          "area_mapping_status": "needs_review",
+          "area_evidence_status": "PROPOSED_NOT_OWNER_APPROVED",
+          "mapped_region": "",
+          "mapped_province": "",
+          "mapped_geographic_level": "nongeographic",
+          "records": "5227",
+          "net_sales": "165121239.710000"
+        },
+        {
+          "normalized_area": "BATANGAS",
+          "area_mapping_status": "approved",
+          "area_evidence_status": "LEGACY_APPROVAL_NOT_REVALIDATED",
+          "mapped_region": "CALABARZON",
+          "mapped_province": "Batangas",
+          "mapped_geographic_level": "province",
+          "records": "5099",
+          "net_sales": "28556256.250000"
+        },
+        {
+          "normalized_area": "QUEZON",
+          "area_mapping_status": "approved",
+          "area_evidence_status": "LEGACY_APPROVAL_NOT_REVALIDATED",
+          "mapped_region": "CALABARZON",
+          "mapped_province": "Quezon",
+          "mapped_geographic_level": "province",
+          "records": "4674",
+          "net_sales": "27207048.540000"
+        },
+        {
+          "normalized_area": "ADMIN",
+          "area_mapping_status": "needs_review",
+          "area_evidence_status": "PROPOSED_NOT_OWNER_APPROVED",
+          "mapped_region": "",
+          "mapped_province": "",
+          "mapped_geographic_level": "nongeographic",
+          "records": "4242",
+          "net_sales": "16359733.690000"
+        },
+        {
+          "normalized_area": "EQUIPMENT",
+          "area_mapping_status": "needs_review",
+          "area_evidence_status": "PROPOSED_NOT_OWNER_APPROVED",
+          "mapped_region": "",
+          "mapped_province": "",
+          "mapped_geographic_level": "nongeographic",
+          "records": "113",
+          "net_sales": "14475259.730000"
+        },
+        {
+          "normalized_area": "LAGUNA",
+          "area_mapping_status": "approved",
+          "area_evidence_status": "LEGACY_APPROVAL_NOT_REVALIDATED",
+          "mapped_region": "CALABARZON",
+          "mapped_province": "Laguna",
+          "mapped_geographic_level": "province",
+          "records": "2071",
+          "net_sales": "14376324.920000"
+        },
+        {
+          "normalized_area": "MARINDUQUE",
+          "area_mapping_status": "approved",
+          "area_evidence_status": "LEGACY_APPROVAL_NOT_REVALIDATED",
+          "mapped_region": "MIMAROPA",
+          "mapped_province": "Marinduque",
+          "mapped_geographic_level": "province",
+          "records": "1094",
+          "net_sales": "13469314.650000"
+        },
+        {
+          "normalized_area": "CAM NORTE",
+          "area_mapping_status": "needs_review",
+          "area_evidence_status": "PROPOSED_NOT_OWNER_APPROVED",
+          "mapped_region": "BICOL",
+          "mapped_province": "Camarines Norte",
+          "mapped_geographic_level": "province",
+          "records": "1963",
+          "net_sales": "11638151.070000"
+        },
+        {
+          "normalized_area": "CAM SUR",
+          "area_mapping_status": "needs_review",
+          "area_evidence_status": "PROPOSED_NOT_OWNER_APPROVED",
+          "mapped_region": "BICOL",
+          "mapped_province": "Camarines Sur",
+          "mapped_geographic_level": "province",
+          "records": "2163",
+          "net_sales": "6579104.400000"
+        },
+        {
+          "normalized_area": "CAVITE",
+          "area_mapping_status": "approved",
+          "area_evidence_status": "LEGACY_APPROVAL_NOT_REVALIDATED",
+          "mapped_region": "CALABARZON",
+          "mapped_province": "Cavite",
+          "mapped_geographic_level": "province",
+          "records": "1082",
+          "net_sales": "6317812.950000"
+        },
+        {
+          "normalized_area": "SUPPLIES",
+          "area_mapping_status": "needs_review",
+          "area_evidence_status": "PROPOSED_NOT_OWNER_APPROVED",
+          "mapped_region": "",
+          "mapped_province": "",
+          "mapped_geographic_level": "nongeographic",
+          "records": "572",
+          "net_sales": "4929323.340000"
+        },
+        {
+          "normalized_area": "ALBAY",
+          "area_mapping_status": "needs_review",
+          "area_evidence_status": "PROPOSED_NOT_OWNER_APPROVED",
+          "mapped_region": "BICOL",
+          "mapped_province": "Albay",
+          "mapped_geographic_level": "province",
+          "records": "172",
+          "net_sales": "1643619.390000"
+        },
+        {
+          "normalized_area": "LOWER CAVITE",
+          "area_mapping_status": "needs_review",
+          "area_evidence_status": "PROPOSED_NOT_OWNER_APPROVED",
+          "mapped_region": "CALABARZON",
+          "mapped_province": "Cavite",
+          "mapped_geographic_level": "province",
+          "records": "314",
+          "net_sales": "1481786.090000"
+        },
+        {
+          "normalized_area": "SUPPLIES AND EQUIPMENT",
+          "area_mapping_status": "needs_review",
+          "area_evidence_status": "PROPOSED_NOT_OWNER_APPROVED",
+          "mapped_region": "",
+          "mapped_province": "",
+          "mapped_geographic_level": "nongeographic",
+          "records": "125",
+          "net_sales": "1429603.500000"
+        },
+        {
+          "normalized_area": "BICOL",
+          "area_mapping_status": "needs_review",
+          "area_evidence_status": "PROPOSED_NOT_OWNER_APPROVED",
+          "mapped_region": "BICOL",
+          "mapped_province": "",
+          "mapped_geographic_level": "region",
+          "records": "332",
+          "net_sales": "1182409.430000"
+        },
+        {
+          "normalized_area": "PHARMA",
+          "area_mapping_status": "needs_review",
+          "area_evidence_status": "PROPOSED_NOT_OWNER_APPROVED",
+          "mapped_region": "",
+          "mapped_province": "",
+          "mapped_geographic_level": "nongeographic",
+          "records": "96",
+          "net_sales": "1126380.000000"
+        },
+        {
+          "normalized_area": "MINDORO",
+          "area_mapping_status": "needs_review",
+          "area_evidence_status": "UNRESOLVED_SOURCE_LABEL",
+          "mapped_region": "MIMAROPA",
+          "mapped_province": "",
+          "mapped_geographic_level": "unresolved",
+          "records": "36",
+          "net_sales": "196474.000000"
+        },
+        {
+          "normalized_area": "EASTERN",
+          "area_mapping_status": "needs_review",
+          "area_evidence_status": "UNRESOLVED_SOURCE_LABEL",
+          "mapped_region": "",
+          "mapped_province": "",
+          "mapped_geographic_level": "unresolved",
+          "records": "20",
+          "net_sales": "118287.000000"
+        },
+        {
+          "normalized_area": "EAST",
+          "area_mapping_status": "needs_review",
+          "area_evidence_status": "UNRESOLVED_SOURCE_LABEL",
+          "mapped_region": "",
+          "mapped_province": "",
+          "mapped_geographic_level": "unresolved",
+          "records": "20",
+          "net_sales": "59225.500000"
+        },
+        {
+          "normalized_area": "LOSSES",
+          "area_mapping_status": "needs_review",
+          "area_evidence_status": "PROPOSED_NOT_OWNER_APPROVED",
+          "mapped_region": "",
+          "mapped_province": "",
+          "mapped_geographic_level": "nongeographic",
+          "records": "20",
+          "net_sales": "32792.500000"
+        },
+        {
+          "normalized_area": "PERSONAL",
+          "area_mapping_status": "needs_review",
+          "area_evidence_status": "PROPOSED_NOT_OWNER_APPROVED",
+          "mapped_region": "",
+          "mapped_province": "",
+          "mapped_geographic_level": "nongeographic",
+          "records": "44",
+          "net_sales": "17493.750000"
+        }
+      ]
+    },
+    "paper_period": {
+      "sql": "SELECT COUNT(DISTINCT normalized_product) labels,COUNT(*) records,SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) net_sales FROM workspace.medshield_gold.sales_restart_fact_candidate VERSION AS OF 16 WHERE calendar_year BETWEEN 2021 AND 2025",
+      "columns": [
+        "labels",
+        "records",
+        "net_sales"
+      ],
+      "rows": [
+        {
+          "labels": "3382",
+          "records": "20143",
+          "net_sales": "438980304.070000"
+        }
+      ]
+    },
+    "antizoal": {
+      "sql": "SELECT normalized_product,calendar_year,MONTH(month_start) month,SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) net_sales,SUM(quantity) source_quantity,COUNT(*) records FROM workspace.medshield_gold.sales_restart_fact_candidate VERSION AS OF 16 WHERE normalized_product LIKE '%ANTIZOAL%' AND calendar_year BETWEEN 2021 AND 2025 GROUP BY ALL ORDER BY calendar_year,normalized_product,month",
+      "columns": [
+        "normalized_product",
+        "calendar_year",
+        "month",
+        "net_sales",
+        "source_quantity",
+        "records"
+      ],
+      "rows": [
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2021",
+          "month": "1",
+          "net_sales": "36000.000000",
+          "source_quantity": "300.000000",
+          "records": "1"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2021",
+          "month": "2",
+          "net_sales": "69000.000000",
+          "source_quantity": "600.000000",
+          "records": "4"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2021",
+          "month": "3",
+          "net_sales": "32000.000000",
+          "source_quantity": "300.000000",
+          "records": "3"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2021",
+          "month": "4",
+          "net_sales": "48000.000000",
+          "source_quantity": "400.000000",
+          "records": "2"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2021",
+          "month": "6",
+          "net_sales": "64300.000000",
+          "source_quantity": "550.000000",
+          "records": "4"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2021",
+          "month": "7",
+          "net_sales": "136500.000000",
+          "source_quantity": "1150.000000",
+          "records": "4"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2021",
+          "month": "8",
+          "net_sales": "89100.000000",
+          "source_quantity": "763.000000",
+          "records": "7"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2021",
+          "month": "9",
+          "net_sales": "34560.000000",
+          "source_quantity": "288.000000",
+          "records": "1"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2021",
+          "month": "10",
+          "net_sales": "33900.000000",
+          "source_quantity": "310.000000",
+          "records": "5"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2021",
+          "month": "11",
+          "net_sales": "98184.000000",
+          "source_quantity": "910.000000",
+          "records": "6"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2021",
+          "month": "12",
+          "net_sales": "37200.000000",
+          "source_quantity": "330.000000",
+          "records": "4"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2022",
+          "month": "1",
+          "net_sales": "15798.000000",
+          "source_quantity": "154.000000",
+          "records": "3"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2022",
+          "month": "2",
+          "net_sales": "69060.000000",
+          "source_quantity": "588.000000",
+          "records": "4"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2022",
+          "month": "3",
+          "net_sales": "80700.000000",
+          "source_quantity": "680.000000",
+          "records": "5"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2022",
+          "month": "4",
+          "net_sales": "97700.000000",
+          "source_quantity": "850.000000",
+          "records": "7"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2022",
+          "month": "5",
+          "net_sales": "64200.000000",
+          "source_quantity": "580.000000",
+          "records": "6"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2022",
+          "month": "6",
+          "net_sales": "69900.000000",
+          "source_quantity": "610.000000",
+          "records": "6"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2022",
+          "month": "7",
+          "net_sales": "7200.000000",
+          "source_quantity": "80.000000",
+          "records": "2"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2022",
+          "month": "8",
+          "net_sales": "18000.000000",
+          "source_quantity": "150.000000",
+          "records": "1"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2022",
+          "month": "9",
+          "net_sales": "31200.000000",
+          "source_quantity": "280.000000",
+          "records": "5"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2022",
+          "month": "10",
+          "net_sales": "17650.000000",
+          "source_quantity": "230.000000",
+          "records": "4"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2022",
+          "month": "11",
+          "net_sales": "116900.000000",
+          "source_quantity": "1210.000000",
+          "records": "5"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2022",
+          "month": "12",
+          "net_sales": "125000.000000",
+          "source_quantity": "1300.000000",
+          "records": "4"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2023",
+          "month": "1",
+          "net_sales": "265050.000000",
+          "source_quantity": "3170.000000",
+          "records": "6"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2023",
+          "month": "2",
+          "net_sales": "33600.000000",
+          "source_quantity": "450.000000",
+          "records": "3"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2023",
+          "month": "3",
+          "net_sales": "216860.000000",
+          "source_quantity": "2290.000000",
+          "records": "6"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2023",
+          "month": "4",
+          "net_sales": "21000.000000",
+          "source_quantity": "200.000000",
+          "records": "3"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2023",
+          "month": "5",
+          "net_sales": "96200.000000",
+          "source_quantity": "1580.000000",
+          "records": "5"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2023",
+          "month": "6",
+          "net_sales": "35660.000000",
+          "source_quantity": "2040.000000",
+          "records": "8"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2023",
+          "month": "1",
+          "net_sales": "60000.000000",
+          "source_quantity": "1200.000000",
+          "records": "1"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2023",
+          "month": "6",
+          "net_sales": "94200.000000",
+          "source_quantity": "1680.000000",
+          "records": "4"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2023",
+          "month": "7",
+          "net_sales": "23300.000000",
+          "source_quantity": "270.000000",
+          "records": "4"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2023",
+          "month": "8",
+          "net_sales": "12200.000000",
+          "source_quantity": "200.000000",
+          "records": "2"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2023",
+          "month": "9",
+          "net_sales": "14700.000000",
+          "source_quantity": "130.000000",
+          "records": "2"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2023",
+          "month": "10",
+          "net_sales": "24160.000000",
+          "source_quantity": "260.000000",
+          "records": "5"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2023",
+          "month": "11",
+          "net_sales": "19200.000000",
+          "source_quantity": "180.000000",
+          "records": "3"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2024",
+          "month": "1",
+          "net_sales": "5400.000000",
+          "source_quantity": "60.000000",
+          "records": "2"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2024",
+          "month": "2",
+          "net_sales": "22580.000000",
+          "source_quantity": "230.000000",
+          "records": "4"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2024",
+          "month": "3",
+          "net_sales": "18400.000000",
+          "source_quantity": "150.000000",
+          "records": "2"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2024",
+          "month": "4",
+          "net_sales": "26700.000000",
+          "source_quantity": "230.000000",
+          "records": "3"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2024",
+          "month": "5",
+          "net_sales": "25500.000000",
+          "source_quantity": "250.000000",
+          "records": "4"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2024",
+          "month": "6",
+          "net_sales": "202000.000000",
+          "source_quantity": "2100.000000",
+          "records": "2"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2024",
+          "month": "7",
+          "net_sales": "58200.000000",
+          "source_quantity": "540.000000",
+          "records": "6"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2024",
+          "month": "8",
+          "net_sales": "8100.000000",
+          "source_quantity": "90.000000",
+          "records": "2"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2024",
+          "month": "9",
+          "net_sales": "18000.000000",
+          "source_quantity": "210.000000",
+          "records": "5"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2024",
+          "month": "10",
+          "net_sales": "34800.000000",
+          "source_quantity": "340.000000",
+          "records": "4"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2024",
+          "month": "11",
+          "net_sales": "9000.000000",
+          "source_quantity": "100.000000",
+          "records": "2"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2024",
+          "month": "12",
+          "net_sales": "4500.000000",
+          "source_quantity": "50.000000",
+          "records": "1"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML",
+          "calendar_year": "2025",
+          "month": "1",
+          "net_sales": "6300.000000",
+          "source_quantity": "70.000000",
+          "records": "1"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2025",
+          "month": "1",
+          "net_sales": "12000.000000",
+          "source_quantity": "100.000000",
+          "records": "1"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2025",
+          "month": "2",
+          "net_sales": "7208.000000",
+          "source_quantity": "230.000000",
+          "records": "2"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2025",
+          "month": "3",
+          "net_sales": "16508.000000",
+          "source_quantity": "300.000000",
+          "records": "2"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2025",
+          "month": "4",
+          "net_sales": "21000.000000",
+          "source_quantity": "200.000000",
+          "records": "3"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2025",
+          "month": "5",
+          "net_sales": "26700.000000",
+          "source_quantity": "230.000000",
+          "records": "3"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2025",
+          "month": "6",
+          "net_sales": "86526.400000",
+          "source_quantity": "3330.000000",
+          "records": "4"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2025",
+          "month": "7",
+          "net_sales": "44140.000000",
+          "source_quantity": "1240.000000",
+          "records": "4"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2025",
+          "month": "8",
+          "net_sales": "30000.000000",
+          "source_quantity": "300.000000",
+          "records": "3"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2025",
+          "month": "9",
+          "net_sales": "79604.000000",
+          "source_quantity": "2800.000000",
+          "records": "5"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2025",
+          "month": "10",
+          "net_sales": "13500.000000",
+          "source_quantity": "150.000000",
+          "records": "1"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2025",
+          "month": "11",
+          "net_sales": "215729.600000",
+          "source_quantity": "8540.000000",
+          "records": "6"
+        },
+        {
+          "normalized_product": "ANTIZOAL 5MG/ML (500MG/100ML) 100ML",
+          "calendar_year": "2025",
+          "month": "12",
+          "net_sales": "126375.540000",
+          "source_quantity": "3760.930000",
+          "records": "4"
+        }
+      ]
+    },
+    "model_pointers": {
+      "sql": "SELECT * FROM workspace.medshield_gold.model_release_pointer",
+      "columns": [
+        "channel",
+        "release_id",
+        "previous_release_id",
+        "changed_at",
+        "reviewer",
+        "reason"
+      ],
+      "rows": []
+    },
+    "model_tables": {
+      "sql": "SHOW TABLES IN workspace.medshield_gold LIKE 'model_*'",
+      "columns": [
+        "database",
+        "tableName",
+        "isTemporary"
+      ],
+      "rows": [
+        {
+          "database": "medshield_gold",
+          "tableName": "model_release_manifest",
+          "isTemporary": "false"
+        },
+        {
+          "database": "medshield_gold",
+          "tableName": "model_release_pointer",
+          "isTemporary": "false"
+        }
+      ]
+    },
+    "external_eligibility": {
+      "sql": "SELECT signal_family,COUNT(*) rows,SUM(CASE WHEN is_external_join_ready THEN 1 ELSE 0 END) join_ready,SUM(CASE WHEN is_forecast_eligible THEN 1 ELSE 0 END) forecast_eligible,MIN(period_start) first_period,MAX(period_start) last_period FROM workspace.medshield_gold.vw_dss_external_signals_candidate GROUP BY signal_family",
+      "columns": [
+        "signal_family",
+        "rows",
+        "join_ready",
+        "forecast_eligible",
+        "first_period",
+        "last_period"
+      ],
+      "rows": [
+        {
+          "signal_family": "DISEASE",
+          "rows": "1787",
+          "join_ready": "0",
+          "forecast_eligible": "0",
+          "first_period": "2018-01-01",
+          "last_period": "2025-12-01"
+        },
+        {
+          "signal_family": "WEATHER",
+          "rows": "384",
+          "join_ready": "0",
+          "forecast_eligible": "0",
+          "first_period": "2017-01-01",
+          "last_period": "2024-12-01"
+        }
+      ]
+    }
+  },
+  "release": {
+    "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+    "policy_version": "sales_restart_gold_v6_reviewed_source_provenance",
+    "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+    "product_master_sha256": "8a34ce4946d2b99f896b1dec9e93dd5865ece8fee5e582c64dc6c5b798cca921",
+    "publication_status": "CANDIDATE_PENDING_BUSINESS_AND_PRODUCT_MASTER_REVIEW",
+    "fact_delta_version": 16
+  },
+  "predictive": {
+    "schema_version": "2",
+    "target": "net_sales",
+    "scope": "company",
+    "series_id": "company:net_sales:PHP",
+    "unit": "PHP",
+    "display_window": {
+      "start": "2026-10",
+      "months": 3
+    },
+    "status": "unpublished",
+    "reason": "No approved coherent model release is selected.",
+    "points": [],
+    "evaluations": []
+  },
+  "completed_at": "2026-10-01T16:02:09.725Z"
+}

@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises'
 import { MEDSHIELD_MARKUP, MEDSHIELD_STYLE } from '../lib/medshieldReference'
 import { getExecutableDashboardScript } from '../services/api/dashboard-engine'
 
-test('quantity heat map follows the shared custom-year and daily period grain', async ({ page }) => {
+test('quantity heat map follows the shared custom-year and daily period grain', async ({ page }, testInfo) => {
   await page.route('http://medshield.test/**', route => route.fulfill({contentType:'text/html',body:'<html><body></body></html>'}))
   await page.goto('http://medshield.test/')
   await page.setContent(`<style>${MEDSHIELD_STYLE}</style>${MEDSHIELD_MARKUP}`)
@@ -31,6 +31,8 @@ test('quantity heat map follows the shared custom-year and daily period grain', 
   await expect(page.locator('[data-period="2024-02"]')).toHaveCount(0)
   await page.selectOption('#heatmapMeasure','index')
   await expect(page.locator('[data-period="2025-12"]')).not.toHaveAttribute('data-value','')
+  await expect(page.locator('#heatmapInsight')).toContainText('Highest within-year index: 2025-12, 1.87× the selected year’s monthly average')
+  await expect(page.locator('#heatmapInsight')).not.toContainText('source units')
   await page.selectOption('#heatmapMeasure','units')
   await page.selectOption('#heatmapCategory','Antipyretics (proposed)')
   await expect(page.locator('#heatmapProduct')).toHaveValue('B')
@@ -45,7 +47,7 @@ test('quantity heat map follows the shared custom-year and daily period grain', 
   expect(csv).toContain('"B","Antipyretics (proposed)","Batangas","2025-01","100"')
   expect(csv).not.toContain('1000')
   await expect(page.locator('#revenueHeatmapGrid tbody tr')).toHaveCount(1)
-  await page.screenshot({path:'test-results/section-3-heatmap.png',fullPage:true})
+  await page.screenshot({path:testInfo.outputPath('product-quantities.png'),fullPage:true})
   await page.evaluate(()=>{const app=window as any;app.setCustomDateRange('2025-01-01','2025-12-31');app.setDescriptiveGranularity('yearly')})
   await expect(page.locator('[data-period="2025"]')).toHaveAttribute('data-value','100')
   await expect(page.locator('#salesHeatmapTitle')).toContainText('Yearly')
@@ -55,6 +57,7 @@ test('quantity heat map follows the shared custom-year and daily period grain', 
   expect(yearlyCsv).toContain('"2025","100"')
   await page.selectOption('#heatmapMeasure','index')
   await expect(page.locator('[data-period="2025"]')).toHaveAttribute('data-value','')
+  await expect(page.locator('#heatmapInsight')).toContainText('Within-year index is unavailable')
   await page.evaluate(()=>(window as any).setSalesHeatmapData(null,'Service unavailable'))
   await expect(page.locator('#revenueHeatmapGrid')).toBeEmpty()
   await expect(page.locator('#heatmapStatus')).toHaveText('Service unavailable')

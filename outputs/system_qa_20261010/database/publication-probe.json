@@ -1,0 +1,65 @@
+{
+  "checked_at": "2026-10-10T04:44:59.996Z",
+  "scope": "Synthetic isolated publisher with PostgreSQL SQL adapter; no live model activation, no authorization inferred from fixture approval",
+  "checks": [
+    {
+      "name": "repeat publication stages exactly one immutable row per logical key",
+      "status": "PASS",
+      "counts": {
+        "runs": 1,
+        "points": 1,
+        "evaluations": 1,
+        "reviews": 1,
+        "manifests": 1,
+        "pointers": 1
+      },
+      "signed_prediction": -25,
+      "publication_attempts": 2
+    },
+    {
+      "name": "run artifact cannot be reused with different bytes",
+      "status": "PASS",
+      "expected_rejection": "Run identity is immutable",
+      "pointer_mutation_attempted": false
+    },
+    {
+      "name": "review identity cannot be overwritten",
+      "status": "PASS",
+      "expected_rejection": "Review identity is immutable",
+      "pointer_mutation_attempted": false
+    },
+    {
+      "name": "manifest identity cannot be overwritten",
+      "status": "PASS",
+      "expected_rejection": "Manifest readback mismatch",
+      "pointer_mutation_attempted": false
+    },
+    {
+      "name": "same point key cannot silently replace prediction evidence",
+      "status": "PASS",
+      "expected_rejection": "fact_forecast_point_candidate readback mismatch",
+      "pointer_mutation_attempted": false
+    },
+    {
+      "name": "same evaluation key cannot silently replace evaluation evidence",
+      "status": "PASS",
+      "expected_rejection": "fact_model_evaluation_candidate readback mismatch",
+      "pointer_mutation_attempted": false
+    },
+    {
+      "name": "ambiguous active channel refuses pointer update",
+      "status": "PASS",
+      "expected_rejection": "Ambiguous publication pointer",
+      "pointer_mutation_attempted": false
+    }
+  ],
+  "limitations": [
+    "Spark three-part schema replaced by local PostgreSQL schema. String/date fields use text in fixture. UTF-8 decode(unhex(...)) and current_timestamp() are mapped to PostgreSQL equivalents; explicit casts reproduce Spark assignment coercion for numerical columns.",
+    "No Delta concurrency, warehouse jobs, permissions, storage retention, PostgREST or live model activation checked."
+  ],
+  "summary": {
+    "tests": 7,
+    "passed": 7,
+    "failed": 0
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "recorded_at_utc": "2026-10-13T04:40:18.0477865+00:00",
+  "recorded_client_date": "2026-10-13",
+  "accountable_role": "Business Analyst",
+  "user_answer": "3",
+  "selected_choice": 3,
+  "intended_use": [
+    "sales_outlook_review",
+    "revenue_budget_discussions"
+  ],
+  "guided_input_1_status": "complete_on_recorded_user_selection",
+  "attribution": "Requesting user selection in this chat; no named external signature or acceptance timestamp supplied",
+  "forecast_use_status": "research_pending_validation",
+  "max_mae_php": null,
+  "max_wape_percent": null,
+  "business_acceptance_status": "not_assessed_thresholds_missing",
+  "publication_approved": false,
+  "original_selection": "last_value",
+  "selection_changed": false,
+  "before": {
+    "PREDICTIVE_CLIENT_DECISION_BRIEF.md": "4fe032ac54537a693157e703b068537063370d4f3aca0c31b6b7880eba4de127",
+    "OBJECTIVE_EVIDENCE_REGISTER.md": "e1e946cfc6afaa247c4d6b3a6c0c30846bafc772e937713bc60a9b72b35c316e"
+  },
+  "after": {
+    "PREDICTIVE_CLIENT_DECISION_BRIEF.md": "840ea6ab434c9b181752b0e40ad6fd1377d54dfb827c0915e74d94131c934681",
+    "OBJECTIVE_EVIDENCE_REGISTER.md": "f5cbf33401f2d372483ad64e474e8062fb2d8080ec78c1e0407332c3db80e992"
+  },
+  "inherited_decision_sha256": "88bf78ca32006f3687e7f83ff4c36966cfa37dcf7ee64513e0a8faedc4faf4a5",
+  "applied_guidance": [
+    ".agents/business-analyst.md",
+    ".skills/business-analysis-frameworks.md",
+    ".skills/analytics-frameworks.md",
+    ".skills/documentation-standards.md",
+    ".skills/testing-standards.md"
+  ]
+}

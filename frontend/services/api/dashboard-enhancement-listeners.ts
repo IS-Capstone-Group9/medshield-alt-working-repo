@@ -8,6 +8,7 @@ import {
 } from './dashboard-interactions'
 import { setSalesViewError } from './sales-page-helpers'
 import { weatherProviderLabel } from './weather-view-helpers'
+import { isWeatherApiProvider, populateWeatherYears } from './weather-provider-helpers'
 import { applyScenarioSafetyLabels } from './dashboard-enhancements'
 import { renderDecisionSupportCharts } from './dashboard-decision-charts'
 import { installMcdaSensitivity, renderMcdaSensitivity } from './dashboard-mcda'
@@ -21,10 +22,10 @@ const DASHBOARD_PAGE_META = {
   forecast: ['Forecast Modeling', 'Actual sales, baseline forecasts and historical validation'],
   inventory: ['Prescriptive Planning', 'Priority products, constrained allocation and scenario review'],
   data: ['Databricks Source', 'Live Gold provenance and ingestion policy'],
-  'sales-data': ['View Sales Data', 'Inspect, filter, validate, and reconcile Databricks Gold sales records'],
+  'sales-data': ['View Sales Data', 'Browse transactions and filtered sales totals'],
   'weather-validation': [
     'Weather API Validation',
-    'Validate official PAGASA history and NASA POWER proxy observations stored in Databricks',
+    'Validate PAGASA history and provider weather proxies stored in Databricks',
   ],
 } as const
 
@@ -150,13 +151,30 @@ export function installDashboardEnhancements(
 
   const refreshSalesView = () => {
     const revision = salesState.requestRevision + 1
-    root.querySelector('#salesDataTable')?.replaceChildren()
+    const table = root.querySelector<HTMLTableElement>('#salesDataTable')
+    if (table) {
+      table.replaceChildren()
+      const cell = table.createTBody().insertRow().insertCell()
+      cell.className = 'uploaded-data-empty'
+      cell.textContent = 'Loading transactions…'
+    }
+    root.querySelector('#salesDataTableWrap')?.setAttribute('aria-busy', 'true')
     root.querySelector('#salesComputationGrid')?.replaceChildren()
     root.querySelector('#salesFinancialReconciliation')?.replaceChildren()
+    const reconciliationStatus = root.querySelector<HTMLElement>('#salesReconciliationStatus')
+    if (reconciliationStatus) { reconciliationStatus.textContent = 'Checks pending'; reconciliationStatus.classList.remove('has-differences') }
+    const badge = root.querySelector('#salesDatasetBadge'); if (badge) badge.textContent = 'Loading dataset…'
+    const source = root.querySelector('#salesDatasetSource'); if (source) source.textContent = 'Loading source identity…'
+    const pipeline = root.querySelector('#salesPipelineNote'); if (pipeline) pipeline.textContent = 'Loading quality checks…'
+    const pageLabel = root.querySelector('#salesDataPage'); if (pageLabel) pageLabel.textContent = 'Loading…'
     for (const id of ['salesDataPrevious','salesDataNext']) { const control = root.querySelector<HTMLButtonElement>('#' + id); if (control) control.disabled = true }
+    const refresh = root.querySelector<HTMLButtonElement>('#salesDataRefresh')
+    if (refresh) { refresh.disabled = true; refresh.textContent = 'Refreshing…' }
     const status = root.querySelector('#salesDataStatus'); if (status) status.textContent = 'Loading selected transaction evidence…'
     return loadSalesDataView(root, salesState).catch((error: unknown) => {
       if (revision === salesState.requestRevision) setSalesViewError(root, error instanceof Error ? error.message : 'Sales data could not be loaded.')
+    }).finally(() => {
+      if (revision === salesState.requestRevision && refresh) { refresh.disabled = false; refresh.textContent = 'Refresh' }
     })
   }
 
@@ -227,6 +245,19 @@ export function installDashboardEnhancements(
   })
 
   let searchTimer = 0
+  root.querySelector('#salesDataReset')?.addEventListener('click', () => {
+    window.clearTimeout(searchTimer)
+    Object.assign(salesState, { year: 'all', search: '', qualityStatus: 'all', page: 1 })
+    for (const [id, value] of [['salesDataYear', 'all'], ['salesDataSearch', ''], ['salesDataQuality', 'all']]) {
+      const input = root.querySelector<HTMLInputElement | HTMLSelectElement>('#' + id)
+      if (input) input.value = value
+    }
+    void refreshSalesView()
+  })
+  root.querySelector('#salesDataRefresh')?.addEventListener('click', () => {
+    window.clearTimeout(searchTimer)
+    void refreshSalesView()
+  })
   root.querySelector('#salesDataSearch')?.addEventListener('input', (event) => {
     window.clearTimeout(searchTimer)
     salesState.search = (event.target as HTMLInputElement).value
@@ -284,13 +315,10 @@ export function installDashboardEnhancements(
     if (analysisScope.value === 'capstone') {
       const start = root.querySelector<HTMLInputElement>('#customDateStart')
       const end = root.querySelector<HTMLInputElement>('#customDateEnd')
-      const latestHistoricalDate = end?.max || new Intl.DateTimeFormat('en-CA', {
-        timeZone: 'Asia/Manila', year: 'numeric', month: '2-digit', day: '2-digit',
-      }).format(new Date())
       if (start) start.value = '2017-01-01'
-      if (end) end.value = latestHistoricalDate
+      if (end) end.value = '2025-12-31'
       ;(window as any).setDescriptivePeriod?.('custom')
-      ;(window as any).setCustomDateRange?.('2017-01-01', latestHistoricalDate)
+      ;(window as any).setCustomDateRange?.('2017-01-01', '2025-12-31')
     } else {
       ;(window as any).setDescriptivePeriod?.('all')
     }
@@ -332,16 +360,19 @@ export function installDashboardEnhancements(
   }
 
   const provider = root.querySelector<HTMLSelectElement>('#weatherProvider')
+  const weatherYear = root.querySelector<HTMLSelectElement>('#weatherYear')
+  if (weatherYear) populateWeatherYears(weatherYear)
   const refreshButton = root.querySelector<HTMLButtonElement>('#weatherRefresh')
   const syncProviderControls = () => {
     if (!refreshButton) return
-    const isNasaPower = provider?.value === 'nasa_power'
+    const isApi = isWeatherApiProvider(provider?.value ?? '')
     const canRefresh = ['admin', 'analyst'].includes(user?.role.toLowerCase() ?? '')
-    refreshButton.disabled = !isNasaPower || !canRefresh
+    refreshButton.disabled = !isApi || !canRefresh
+    refreshButton.textContent = 'Refresh selected API'
     refreshButton.title = !canRefresh
-      ? 'An analyst or administrator account is required to refresh NASA POWER'
-      : isNasaPower
-        ? 'Fetch the selected period from NASA POWER and publish it to Databricks'
+      ? 'An analyst or administrator account is required to refresh weather APIs'
+      : isApi
+        ? `Fetch the selected period from ${weatherProviderLabel(provider?.value ?? '')} and publish candidates to Databricks`
         : 'PAGASA files are refreshed through the Databricks external-source notebook'
   }
   const handleProviderChange = () => {
@@ -351,7 +382,7 @@ export function installDashboardEnhancements(
   const handleWeatherRefresh = () => {
     refreshSelectedWeatherData(root).catch((error: unknown) => {
       const status = root.querySelector<HTMLElement>('#weatherEffectStatus')
-      if (status) status.textContent = error instanceof Error ? error.message : 'NASA POWER refresh failed.'
+      if (status) status.textContent = error instanceof Error ? error.message : 'Weather API refresh failed.'
     })
   }
   const weatherControls = ['weatherArea', 'weatherYear', 'weatherGrain']

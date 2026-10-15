@@ -3,6 +3,11 @@ export const DESCRIPTIVE_CHART_STYLE = String.raw`
 .chart-card .chart-header { gap: 10px 16px; align-items: flex-start; }
 .chart-card .chart-title { margin: 0; line-height: 1.35; overflow-wrap: anywhere; }
 .chart-card .chart-subtitle { line-height: 1.55; overflow-wrap: anywhere; }
+.descriptive-measure-control { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; font-size: 12px; color: var(--text-secondary); }
+.descriptive-measure-control select, .sales-measure-control select { max-width: 100%; min-width: 0; padding: 7px 9px; border: 1px solid var(--border-color, #cbd5e1); border-radius: 5px; background: var(--bg-card, white); color: var(--text-primary); font: inherit; }
+.descriptive-measure-control select:focus-visible, .sales-measure-control select:focus-visible { outline: 3px solid #f1b84b; outline-offset: 2px; }
+.descriptive-measure-control select:disabled, .sales-measure-control select:disabled { opacity: .65; }
+#overviewTrendReading { margin-bottom: 12px; }
 .chart-card .chart-method { margin-top: 12px; font-size: 12px; line-height: 1.6; color: var(--text-secondary); }
 .chart-card .chart-method summary { cursor: pointer; font-weight: 600; color: var(--text-primary); }
 .chart-card .chart-method p { margin: 10px 0; overflow-wrap: anywhere; }
@@ -16,7 +21,9 @@ export const DESCRIPTIVE_CHART_STYLE = String.raw`
 .analytical-output-notes summary { cursor: pointer; font-weight: 600; }
 .analytical-output-notes p { margin-top: 8px; }
 #page-overview .overview-decision-kpis { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-#page-overview .overview-decision-kpis .kpi-card { min-width: 0; }
+#page-overview .overview-decision-kpis .kpi-card { min-width: 0; min-height: 0; justify-content: flex-start; gap: 6px; padding: 16px 18px !important; }
+#page-overview .overview-decision-kpis .kpi-card-header { margin-bottom: 0; }
+#page-overview .overview-decision-kpis .overview-kpi-note { margin-top: 2px; }
 #page-overview .overview-decision-kpis .kpi-label { font-size: 11px; line-height: 1.5; overflow-wrap: anywhere; }
 #page-overview .overview-decision-kpis .kpi-value { font-size: clamp(22px, 2.1vw, 30px); line-height: 1.3; overflow-wrap: anywhere; }
 .overview-kpi-note { font-size: 11px; line-height: 1.6; color: var(--text-secondary); margin-top: 10px; overflow-wrap: anywhere; }

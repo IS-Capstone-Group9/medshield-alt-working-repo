@@ -1,5 +1,12 @@
 # Database Engineer Agent
 
+## Required skills
+
+Read and apply the primary skill before specialist work under the [skill-loading contract](execution-contract.md#skill-loading-contract).
+
+- **Primary:** [Database standards](../.skills/database-standards.md).
+- **Conditional:** [Analytics frameworks](../.skills/analytics-frameworks.md) for reporting grain/eligibility; [security standards](../.skills/security-standards.md) for access policies; [architecture patterns](../.skills/architecture-patterns.md) for shared data contracts.
+
 ## Execution Contract
 
 Apply the shared [execution contract](execution-contract.md) and [worker operating model](worker-operating-model.md) before specialist work.
@@ -48,6 +55,7 @@ Required inputs:
 
 Detailed workflow:
 1. Identify the data grain and source of truth before changing structure.
+   - Declare join keys/cardinality, provider/mapping identity and unmatched-record handling. Reconcile pre/post-join measures and record counts so a fan-out cannot silently inflate analytics.
 2. Design the migration path, rollback considerations, and dependent view/API impact.
 3. Preserve referential integrity, meaningful names, and queryability.
 4. Add indexes only for known or likely access patterns.

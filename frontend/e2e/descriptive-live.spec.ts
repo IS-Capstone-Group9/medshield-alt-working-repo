@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises'
 import { test, expect } from '@playwright/test'
 import { signInToReadyDashboard } from './helpers/dashboard'
 
-test('live descriptive views use Databricks candidate sales and no demonstration recommendations', async ({ page }) => {
+test('live descriptive views use Databricks candidate sales and no demonstration recommendations', async ({ page }, testInfo) => {
   test.setTimeout(150000)
   const expectedFactVersion = process.env.MEDSHIELD_E2E_FACT_VERSION
   const expectedPolicy = process.env.MEDSHIELD_E2E_POLICY_VERSION
@@ -18,6 +18,7 @@ test('live descriptive views use Databricks candidate sales and no demonstration
   await page.locator('.nav-item', { hasText: 'Sales Diagnostics' }).click()
   await expect(page.locator('#salesGrossMargin')).toHaveText('60.26%', { timeout: 15000 })
   await expect(page.locator('[data-metric-definitions]')).toContainText('same margin-eligible transactions')
+  await page.getByRole('tab', { name: 'Seasonality', exact: true }).click()
   await expect(page.locator('#descriptiveStlPanel')).toContainText(/72 qualifying months/, {timeout:60000})
   await expect(page.locator('#descriptiveStlPanel')).toContainText(`Fact version ${expectedFactVersion}`)
   await expect(page.locator('#descriptiveStlPanel canvas')).toHaveCount(3)
@@ -37,20 +38,26 @@ test('live descriptive views use Databricks candidate sales and no demonstration
     expect(row[9]).toBe(expectedPolicy)
   }
 
+  await page.getByRole('tab', { name: 'Growth', exact: true }).click()
+  await expect(page.locator('#salesMarginDetails')).not.toHaveAttribute('open', '')
+  await page.locator('#salesMarginDetails > summary').click()
   await expect(page.locator('#marginChart').locator('xpath=ancestor::div[contains(@class,"chart-card")]')).toContainText('Yearly Gross Margin')
   const margin = await page.evaluate(()=>(window as any).Chart.getChart(document.getElementById('marginChart')).data)
   expect(margin.labels).toHaveLength(9)
+  await page.getByRole('tab', { name: 'Quantities', exact: true }).click()
   await expect(page.locator('#heatmapProduct')).not.toBeEmpty({timeout:60000})
   await expect(page.locator('#heatmapStatus')).toContainText('years have original-source records')
   const yearlyQuantities = await page.evaluate(()=>(window as any).Chart.getChart(document.getElementById('quantityTrendChart')).data.datasets[0].data)
   expect(yearlyQuantities.some((value:number|null)=>value !== null && value > 0)).toBeTruthy()
-  await page.screenshot({ path: 'test-results-descriptive-live/sales.png', fullPage: true })
+  await page.screenshot({ path: testInfo.outputPath('sales.png'), fullPage: true })
   await page.locator('.nav-item', { hasText: 'Product Prioritization' }).click()
-  await expect(page.locator('#productPriorityScope')).toContainText('Recorded revenue: ₱626,946,742', { timeout: 60000 })
-  await expect(page.locator('#productTable tbody tr')).toHaveCount(100)
+  await expect(page.locator('#productPriorityScope')).toContainText('Recorded net sales: ₱626,946,742', { timeout: 60000 })
+  await expect(page.locator('#productTable tbody tr')).toHaveCount(20)
+  await expect(page.locator('#productTableStatus')).toContainText('Showing 1–20')
   await expect(page.locator('#productPriorityScope')).toContainText('ABC policy candidate — CEO approval pending')
-  await expect(page.locator('#productTable thead')).toContainText('Returns (₱)')
-  await expect(page.locator('#productTable thead')).toContainText('Product provenance')
+  await expect(page.locator('#productTable thead th')).toHaveCount(6)
+  await expect(page.locator('#productTable tbody details').first()).toContainText('Negative adjustments')
+  await expect(page.locator('#productTable tbody details').first()).toContainText('Product provenance')
   const downloadPromise = page.waitForEvent('download')
   await page.getByRole('button', {name:'Export selected rows'}).click()
   const download = await downloadPromise
@@ -66,9 +73,9 @@ test('live descriptive views use Databricks candidate sales and no demonstration
   expect(sum('Positive sales PHP')+sum('Returns PHP')).toBeCloseTo(sum('Net sales PHP'),2)
   expect(csv.every(row=>row['Policy status']==='positive_sales_crossing_inclusive_v2_candidate')).toBeTruthy()
   await expect(page.locator('#page-products')).not.toContainText(/WHO VEN|Zero-Stockout|Surge Multiplier|Expand stock presence|Hospital demand similarity/)
-  await expect(page.locator('#matchingTable')).toContainText('not published')
+  await expect(page.locator('#productPublicationLimits')).toContainText('Product-region recommendations are not published')
   await expect(page.locator('#page-products')).not.toContainText('Class A (70%)')
-  await page.screenshot({ path: 'test-results-descriptive-live/products.png', fullPage: true })
+  await page.screenshot({ path: testInfo.outputPath('products.png'), fullPage: true })
   expect(errors).toEqual([])
 })
 

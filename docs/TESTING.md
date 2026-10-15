@@ -1,3 +1,184 @@
+# Bounded predictive error reduction verification — 10 October 2026
+
+The [six-recipe packet](../outputs/predictive_error_optimization_20261010/README.md)
+retains frozen source/code/protocol identities and the independent Decimal
+oracle expectations prepared before real-source evaluation. From the root:
+
+```powershell
+.\.venv-predictive\Scripts\python.exe -X utf8 -m unittest services.tests.test_predictive_robust_error services.tests.test_predictive_annual_projection -v
+.\.venv-predictive\Scripts\python.exe -X utf8 outputs/predictive_error_optimization_20261010/qa/test_independent_oracle.py
+```
+
+The focused checks cover signed observations, median duplicates/ties, scalar
+bounds and zero-endpoint loss, origin-known targets, gaps, malformed/null output,
+registration drift and overwrite protection. The annual-helper fixture checks
+do not create new real-source annual projections. The independent reviewer
+reconstructs all new points, retained baseline keys, aggregate/directional errors
+and original challenger gates without importing the production forecast code.
+Review the frozen development choice before audit timing and retain unsuccessful
+methods. A numerical pass does not demonstrate future accuracy or client approval.
+The packet records actual commands, counts, tolerances and reproducible bindings;
+do not overwrite its run when reproducing. No application build is required.
+
+# Predictive error visibility verification — 10 October 2026
+
+The [presentation packet](../outputs/predictive_error_visibility_20261010/README.md)
+binds the monthly table/CSV errors, historical summary context, unit formatting
+and unavailable states. From `frontend/`, run the isolated browser fixtures:
+
+```powershell
+node node_modules/@playwright/test/cli.js test e2e/forecast-validation.spec.ts --workers=1 --output=../outputs/predictive_error_visibility_20261010/playwright
+node node_modules/typescript/bin/tsc --noEmit --incremental false
+```
+
+The fixture suite uses `medshield.test`, `page.setContent` and the gateway's pure
+benchmark evaluator; it does not require Next.js, a running gateway or Databricks.
+Check matched historical pairs, signed direction, negative actuals, observed zero,
+null/mismatched/future pairs, units, CSV escaping, source failure clearing and
+mobile overflow. Do not use these presentation checks as live integration or
+forecast accuracy evidence. Retain a new output directory when reproducing;
+do not overwrite a prior evidence packet.
+
+# Predictive error-policy verification — 10 October 2026
+
+The [joint error-policy packet](../outputs/predictive_error_policy_20261010/README.md)
+derives retained historical predictions with no model fit or serving change.
+Its [independent numerical review](../outputs/predictive_error_policy_20261010/qa/REPORT.md)
+supplies executed commands and source/code/output hash bindings. Check common
+forecast keys, paired MAE/PHP and WAPE/%, signed/directional error reconciliation,
+empty/zero-denominator behavior and unset-limit acceptance separation.
+The cancellation example must retain nonzero MAE despite zero signed bias.
+Do not run application builds solely for this offline presentation step, or
+interpret a numerical pass as client tolerance or publication approval.
+
+# Annual predictive projection verification — 10 October 2026
+
+The [annual packet](../outputs/predictive_annual_release_20261010/README.md)
+retains a pre-fit registration and actual final-origin fits. Its
+[independent QA report](../outputs/predictive_annual_release_20261010/qa/REPORT.md)
+documents checksum/code/package identity checks, exact temporal populations,
+null actuals/bands, publication separation and independently reconstructed
+benchmarks/ridge values. From the repository root:
+
+```powershell
+.\.venv-predictive\Scripts\python.exe -m unittest services.tests.test_predictive_annual_projection -v
+.\.venv-predictive\Scripts\python.exe outputs/predictive_annual_release_20261010/qa/test_independent_math.py
+```
+
+The fixture tests cover training cutoff, future-row exclusion, exact recipe
+invocations, adapter failures/convergence, malformed output, checksum/registration
+drift, no overwrite and actual-generation versus reference-date semantics.
+The QA report supplies the artifact verifier command and pre-fit expected-values
+receipt. These local checks establish research artifact integrity, not cloud
+deployment, measured 2026 accuracy or business acceptance. No frontend/gateway
+runtime path was changed by this module.
+
+# Predictive model continuation verification — 9 October 2026
+
+The [delivery record](../outputs/predictive_completion_20261009/README.md) binds
+actual model evaluation, independent numerical/leakage QA, gateway tests,
+authenticated browser checks and candidate warehouse readback. Technical passes
+do not approve operational forecasting. From the repository root:
+
+```powershell
+.\.venv-predictive\Scripts\python.exe -m unittest services.tests.test_predictive services.tests.test_predictive_coverage_review services.tests.test_predictive_diagnosis services.tests.test_predictive_rolling services.tests.test_forecast_validation services.tests.test_predictive_extended
+```
+
+From `backend/`, run the forecast tests plus `tests/predictiveRelease.test.ts`
+and `tests/predictiveCandidate.test.ts` with `node --import tsx --test`.
+The new candidate tests cover approval separation, immutable source identities,
+mixed/duplicate prediction keys, true leads, future actual exclusion, complete
+artifact hashes and unsafe artifact paths. Check the persistence scripts with:
+
+```powershell
+node node_modules/typescript/bin/tsc --noEmit --target es2022 --module commonjs --moduleResolution node --esModuleInterop --skipLibCheck --strict scripts/persist-predictive-candidate.ts scripts/predictive-candidate-contract.ts tests/predictiveCandidate.test.ts
+```
+
+From `frontend/`, run `e2e/forecast-validation.spec.ts` and
+`e2e/predictive-live.spec.ts` with `--workers=1`. Bind live source expectations
+through `MEDSHIELD_E2E_FACT_VERSION` and `MEDSHIELD_E2E_DATASET_ID`. Set
+`MEDSHIELD_E2E_PREDICTIVE_EVIDENCE_DIR` to a new evidence directory; the default
+is `test-results/predictive-live-evidence`, so historical September receipts are
+not overwritten. Run frontend TypeScript with `--noEmit --incremental false`.
+The live tests verify the current unpublished boundary, not cloud model accuracy
+or activation. Independent model verifiers and exact commands are in the
+[QA review](../outputs/predictive_completion_20261009/qa/REVIEW.md).
+
+# Latest descriptive candidate verification — 9 October 2026
+
+The [full-period check](../outputs/descriptive_activation_20261009/full-history-scope-receipt.json)
+binds the current 2017–2025 preset, checked source and results. The earlier
+[activation report](../outputs/descriptive_activation_20261009/README.md)
+retains the broader regression checks and historical 2021–2025 subset. Use
+[Current state](CURRENT_STATE.md) for the changing fact pin and counts.
+From `backend/`, run `node --import tsx --test tests/*.test.ts` and
+`node node_modules/typescript/bin/tsc --noEmit`. Null/observed-zero regressions
+execute the gateway with isolated warehouse responses; UTF-8 literal tests
+preserve punctuation and Unicode without changing authentication.
+
+From `frontend/`, with local authenticated services running and the expected
+fact/policy set in `MEDSHIELD_E2E_FACT_VERSION` / `MEDSHIELD_E2E_POLICY_VERSION`:
+
+```powershell
+node node_modules/@playwright/test/cli.js test e2e/descriptive-live.spec.ts e2e/descriptive-acceptance-live.spec.ts --workers=1
+```
+
+The study test checks the actual Capstone preset, 2017–2025 exact financial totals,
+108 calendar slots with 98 observed months and ten unknown gaps, same-population
+margin, category partition/export identities and apostrophe search.
+Its independent expected calculation receipt is explicit in the test; update that
+binding before accepting a later fact version. Isolated regressions use
+`dashboard-null-contract.spec.ts`, `diagnostic-drilldown.spec.ts`,
+`sales-data-view.spec.ts`, `catalog-resolution.spec.ts` and
+`product-prioritization.spec.ts`. These cover unavailable/null/zero behavior,
+export readiness and current evidence inspection. Run frontend noEmit TypeScript;
+do not run a Next production build while its dev server is active.
+
+# Weather provider verification — 8 October 2026
+
+From `backend/`: `node --import tsx --test tests/weatherProviders.test.ts tests/nasaPowerWeather.test.ts`
+and `node node_modules/typescript/bin/tsc --noEmit`. Request fixtures check closed
+Manila months, missing/zero/duplicate days, unit/timezone/schema errors, explicit
+models, no warehouse writes after source failure and exact candidate readback.
+`node --import tsx scripts/check-weather-providers.ts` performs a bounded,
+read-only live provider/adapter probe; it does not publish warehouse values.
+
+From the repository root: `python -m unittest services.tests.test_weather_provider_reliability`.
+`python -m services.analytics_service.jobs.evaluate_weather_providers --prepare-only`
+freezes the protocol before network execution. Omit `--prepare-only` for the
+bounded 12-station historical run; `--offline` reuses hash-verified caches.
+`python outputs/weather_reliability_20261008/verify_benchmark.py` independently
+reconciles source hashes, paired counts, percentages and error metrics.
+
+From `frontend/`: `node node_modules/@playwright/test/cli.js test e2e/weather-providers.spec.ts --workers=1`.
+The isolated browser fixture uses actual weather modules with controlled gateway
+responses; it verifies provider/area/year options, explicit refresh requests,
+null versus zero rendering and clearing stale rows on source failure. It is not
+a live warehouse UI check. Results and limits:
+[weather validation](../outputs/weather_reliability_20261008/VALIDATION.md).
+
+# Category acceptance verification — 8 October 2026
+
+The accepted-category revision uses the fixed category-only publication contract.
+Local verification covers exact label/receipt coverage, original master byte hashes,
+seven mutable fields only, tampered classification, unchanged quantities/demand
+gates, forbidden SKU/unit/forecast/CEO approvals and financial partitions including
+Unclassified. See [the bound verification](../outputs/category_acceptance_20261008/README.md).
+
+```powershell
+python outputs/category_acceptance_20261008/verify.py
+python -m unittest discover -s databricks/medshield_project/tests
+python databricks/medshield_project/render_readme.py --check
+```
+
+From `backend`: `node --import tsx --test tests/catalog-contract.test.ts` and
+`node node_modules/typescript/bin/tsc --noEmit --target es2022 --module commonjs --moduleResolution node --esModuleInterop --skipLibCheck scripts/prepare-catalog-publication.ts scripts/validate-catalog.ts`.
+The tests include accepted Medical and Unclassified sales with unresolved identity,
+separate category denominators, signed returns and null physical quantities.
+These are local fixture/file checks. Fresh cloud replacement/API/STL validation,
+recovery rehearsal and release acceptance remain operator steps. The earlier
+dated test records below are historical and are not renewed by these checks.
+
 # Descriptive delivery verification
 
 Chart additions and responsive presentation checks (from `frontend/`):
@@ -156,6 +337,19 @@ Verify:
 - a warehouse/view failure returns a Databricks error and no analytical fallback.
 
 ## Frontend end-to-end checks
+
+The isolated sales-ledger suite runs without local services:
+
+```powershell
+cd frontend
+node node_modules/@playwright/test/cli.js test e2e/sales-data-view.spec.ts e2e/diagnostic-drilldown.spec.ts --workers=1
+```
+
+It checks search/year/quality filters, summary scope, pagination, compact/full
+columns, source details, signed and missing values, empty/error/refresh states,
+and investigation release retention. Layout checks cover 1440 and 926px; set
+`MEDSHIELD_QA_MOBILE=true` to include the exploratory 390px ledger check. These
+fixtures exercise production renderers and listeners, not live Databricks access.
 
 Start the gateway and frontend, configure `MEDSHIELD_E2E_USERNAME` and `MEDSHIELD_E2E_PASSWORD` when needed, then run:
 

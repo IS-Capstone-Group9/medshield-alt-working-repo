@@ -8,7 +8,7 @@ import { installDashboardFilterPanel } from '../services/api/dashboard-filter-pa
 import * as markup from '../services/api/dashboard-markup'
 
 const release = { dataset_id: 'diagnostic-fixture', fact_delta_version: 17, policy_version: 'fixture-policy' }
-const sources = ['dashboard-enhancements', 'diagnostics.service', 'diagnostic-panel', 'sales.service', 'sales-view-helpers', 'sales-page-helpers', 'dashboard-interactions', 'dashboard-enhancement-listeners', 'stl-panel', 'stl-view-model']
+const sources = ['dashboard-enhancements', 'diagnostics.service', 'diagnostic-panel', 'sales.service', 'sales-view-helpers', 'sales-page-helpers', 'dashboard-interactions', 'dashboard-enhancement-listeners', 'stl-panel', 'stl-view-model', 'weather-provider-helpers']
 const runtimeErrors = new WeakMap<Page, string[]>()
 
 async function scopeRequests(page: Page, endpoint = '/api/sales/diagnostics') {
@@ -232,7 +232,12 @@ test('canonical product inspection uses reporting identity and retains category 
     app.showPage('products'); app.buildCharts()
   })
   await page.selectOption('#productCategorySelect', 'Medical')
-  await page.getByRole('button', { name: 'Inspect Canonical Product A', exact: true }).click()
+  // The deferred navigation render can replace an evidence panel opened before
+  // layout has settled. Retry the complete user action against fresh locators.
+  await expect(async () => {
+    await page.getByLabel('View evidence for Canonical Product A', { exact: true }).click({ timeout: 1000 })
+    await page.getByRole('button', { name: 'Inspect records for Canonical Product A', exact: true }).click({ timeout: 1000 })
+  }).toPass({ timeout: 5000 })
   await expect(page.locator('#diagnosticStatus')).toContainText('Recorded contribution evidence loaded')
   expect((await scopeRequests(page)).at(-1).query.product_id).toBe('RAW:PRODUCT_A')
   expect((await scopeRequests(page)).at(-1).query.product_id).not.toBe('SOURCE ALIAS A')

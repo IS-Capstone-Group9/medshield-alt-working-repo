@@ -1,6 +1,10 @@
 import { test, expect } from '@playwright/test'
 import { signInToReadyDashboard } from './helpers/dashboard'
-import { writeFile } from 'node:fs/promises'
+import { mkdir, writeFile } from 'node:fs/promises'
+import path from 'node:path'
+
+const evidenceDirectory = path.resolve(process.env.MEDSHIELD_E2E_PREDICTIVE_EVIDENCE_DIR || 'test-results/predictive-live-evidence')
+test.beforeAll(async () => { await mkdir(evidenceDirectory, { recursive: true }) })
 
 test('live authenticated forecast API rejects malformed filters and returns source evidence', async ({ page, request }) => {
   test.setTimeout(120000)
@@ -22,10 +26,16 @@ test('live authenticated forecast API rejects malformed filters and returns sour
   expect(data.publication_status).toBe('unpublished')
   expect(data.evaluation_protocol).toBe('fixed_origin_multi_step')
   expect(data.views['12'].common_scored_months).toBeGreaterThan(0)
+  if (process.env.MEDSHIELD_E2E_FACT_VERSION) {
+    expect(data.source.release.fact_delta_version).toBe(Number(process.env.MEDSHIELD_E2E_FACT_VERSION))
+  }
+  if (process.env.MEDSHIELD_E2E_DATASET_ID) {
+    expect(data.source.release.dataset_id).toBe(process.env.MEDSHIELD_E2E_DATASET_ID)
+  }
   const published = await fetch('http://localhost:5000/api/forecasts?schema_version=2&horizon=12', { headers, signal: AbortSignal.timeout(60000) })
   expect(published.status).toBe(200)
   expect((await published.json()).status).toBe('unpublished')
-  await writeFile('../outputs/predictive_validation/2026-09-27T08-56-19-553Z/live-benchmark.json', JSON.stringify(data, null, 2))
+  await writeFile(path.join(evidenceDirectory, 'live-benchmark.json'), JSON.stringify(data, null, 2))
 })
 
 test('authenticated live benchmark is truthful while publication remains unavailable', async ({ page, request }) => {
@@ -39,7 +49,7 @@ test('authenticated live benchmark is truthful while publication remains unavail
   }
   try { await signInToReadyDashboard(page) }
   catch (error) {
-    await writeFile('../outputs/predictive_validation/2026-09-27T08-56-19-553Z/live-readiness-diagnostic.json', JSON.stringify(diagnostic, null, 2))
+    await writeFile(path.join(evidenceDirectory, 'live-readiness-diagnostic.json'), JSON.stringify(diagnostic, null, 2))
     throw error
   }
   await page.evaluate(() => (window as any).showPage('forecast'))
@@ -49,5 +59,5 @@ test('authenticated live benchmark is truthful while publication remains unavail
   await expect(page.locator('#forecastBenchmarkTable tbody tr')).toHaveCount(4)
   await expect(page.locator('#forecastBenchmarkTable')).not.toContainText('Prophet')
   await expect(page.locator('#forecastWindow')).toContainText('2025-12')
-  await page.screenshot({ path: '../outputs/predictive_validation/2026-09-27T08-56-19-553Z/live-forecast.png', fullPage: true })
+  await page.screenshot({ path: path.join(evidenceDirectory, 'live-forecast.png'), fullPage: true })
 })

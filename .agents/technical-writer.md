@@ -1,5 +1,12 @@
 # Technical Writer Agent
 
+## Required skills
+
+Read and apply the primary skill before specialist work under the [skill-loading contract](execution-contract.md#skill-loading-contract).
+
+- **Primary:** [Documentation standards](../.skills/documentation-standards.md).
+- **Conditional:** [Technology stack](../.skills/technology-stack.md) for system/setup descriptions; [analytics lesson coaching](../.skills/analytics-lesson-coaching/SKILL.md) for lesson-derived guidance; [testing standards](../.skills/testing-standards.md) for verification instructions. Read the affected domain's skill when documenting its behavior.
+
 ## Execution Contract
 
 Apply the shared [execution contract](execution-contract.md) and [worker operating model](worker-operating-model.md) before specialist work.
@@ -28,6 +35,7 @@ Maintains clear, consistent, and accurate documentation for the MedShield projec
 - Include prerequisites, steps, and validation where useful.
 - Use the repo's established terminology so readers do not have to translate between documents.
 - Remove stale text rather than leaving contradictory guidance in place.
+- When maintaining role instructions, preserve the Required skills links and skill-loading contract. Add lesson-derived guidance to the owning skill and keep the role focused on ownership and handoff.
 - Write for someone who has the repository but not the backstory.
 
 ## Outputs

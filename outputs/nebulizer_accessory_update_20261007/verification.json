@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "changed_labels": 14,
+  "only_changed_fields": [
+    "product_category",
+    "review_notes"
+  ],
+  "all_other_cells_unchanged": true,
+  "master_schema": "PASS",
+  "copies_identical": true,
+  "approved_categories": 0,
+  "warehouse_modified": false,
+  "sha256": "52da8dad06920c2f11bf39ee026a796dce98aafe9eab686cf879375e09175b99",
+  "catalog_resolution_comparison": "PASS all4561 resolved metadata records unchanged; categories remain unapproved"
+}

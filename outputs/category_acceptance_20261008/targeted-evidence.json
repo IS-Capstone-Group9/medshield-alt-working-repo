@@ -1,0 +1,2122 @@
+{
+  "status": "TARGETED_CATEGORY_EVIDENCE_REVIEW_COMPLETE_APPROVAL_NOT_GRANTED",
+  "checked_at_utc": "2026-10-08T09:16:23.4832029Z",
+  "timezone": "Asia/Manila",
+  "primary_role": "Data Analyst",
+  "accountable_owner": "parent task /root",
+  "allowed_writes": [
+    "outputs/category_acceptance_20261008/targeted-evidence.json",
+    "outputs/category_acceptance_20261008/targeted-evidence.md"
+  ],
+  "scope": "All 19 prior flags, 4 medicine proposals, 14 reviewed nebulizer accessories, related Hyclens and cotton product lines, and selected literal subtype conflicts.",
+  "plan": [
+    "Inspect repository definitions and prior review inputs",
+    "Verify targeted source-specific matches with primary sources and cached documentary page images",
+    "Write implementable correction/retain/hold evidence without editingCSV or approvals",
+    "Check targeted coverage and hand off exact source limits"
+  ],
+  "impact": {
+    "business": "Defensible medical/nonmedical and subtype proposals",
+    "data_analytics": "Classification evidence only; no historical financial/source/quantity changes",
+    "architecture": "Not applicable: no runtime edits",
+    "security": "No secrets or authenticated cloud writes",
+    "operations": "No services stopped or builds run",
+    "qa": "Coverage/hash/source-match review"
+  },
+  "current_master_sha256": "ad6d74d4fc24cda3217f3612fb92cb417278fdbde20dc45c15725b99897df12c",
+  "audit_sha256": "3987463871943697d9b76ae848e4eb25bd4b36a7765987ed076c132eff339e8b",
+  "proposals_sha256": "d2c48fd676768d6b27ecd883e780bf1b683f4f1a80cfbbfbb5b7e25d794029e6",
+  "review_mode": "Self-review by delegated Data Analyst; parent integrates",
+  "checks": {
+    "source_specific_matches": "PASS",
+    "medicine_primary_pages_visual_self_review": "PASS",
+    "master_stable_during_scan": "PASS",
+    "all19prior_flags_included": "PASS",
+    "four_medicine_rows_included": "PASS",
+    "fourteen_nebulizer_kits_included": "PASS",
+    "no_csv_or_cloud_mutations": "PASS",
+    "no_human_approval_invented": "PASS",
+    "all_external_sources_direct_retrieval": "NOT_VERIFIED: Some primary websites denied direct access; indexed records are explicitly marked."
+  },
+  "sources": [
+    {
+      "id": "T-QC-PO",
+      "source_type": "government_purchase_order",
+      "url": "https://quezoncity.gov.ph/wp-content/uploads/2024/06/PO-2405070.pdf",
+      "access": "Live PDF text retrieved; cached unchanged PDF/page image visually checked",
+      "local_file": "outputs/medicine_review_20261008/PO-2405070.pdf",
+      "sha256": "bee3618f1db9075be3a5daaa59c6939f29b10b32e2b8667948629dae7496e797",
+      "locator": "PDF page 2 (printed page 1); lidocaine hydrochloride line",
+      "finding": "Lists Eurocaine, Anestin, Locaine and Lido as alternative lidocaine hydrochloride brands in a 2%, 50 mL procurement specification.",
+      "limitation": "Alternative brands are not aliases. Does not authenticate MedShield historical transactions, concentration, sold packaging or units."
+    },
+    {
+      "id": "T-AMB-SANOXIN",
+      "source_type": "supplier_catalog",
+      "url": "https://ambpharma.com/wp-content/uploads/2021/07/ambcatalog.pdf",
+      "access": "Cached unchanged PDF/page 8 image visually checked; live direct open failed",
+      "local_file": "outputs/medicine_review_20261008/ambcatalog.pdf",
+      "sha256": "23748228e81b255f819461c2afbec2b4b9205c89d147446444b1576cd6e650d8",
+      "locator": "PDF page 8; Pharmaceutical Drugs heading; lower-right Sanoxin 1000 panel",
+      "finding": "Named Sanoxin 1000 product is cefoxitin sodium 1000 mg powder for injection.",
+      "limitation": "Category/brand evidence; historical source SKU and quantity unit remain unverified."
+    },
+    {
+      "id": "T-EVAPROST-DOH",
+      "source_type": "government_notice_of_award",
+      "url": "https://mmmhmc.doh.gov.ph/images/FromBAC/2024/01-2024DMBACB-ITB/NOTICE_OF_AWARD.pdf",
+      "access": "Search-index table content retrieved; direct open 403",
+      "locator": "Item 119, NOA 2024-07-006 DM",
+      "finding": "Explicit Evaprost brand mapped to carboprost 250 mcg/mL solution for injection.",
+      "limitation": "Conflicting MedShield strength and route are unresolved identity attributes; medicine category does not verify them."
+    },
+    {
+      "id": "T-HYSPRAY-FDA",
+      "source_type": "Philippine_FDA_medical_device_record",
+      "url": "https://verification.fda.gov.ph/medical_devicesview.php?export=pdf&registration_number=CMDR-2022-00486D",
+      "access": "Search-index full record retrieved; direct open failed",
+      "locator": "CMDR-2022-00486D",
+      "finding": "Names Hyclens Wound Spray 60/100/120 mL as a medical device, Maridan Industries, expiry 6 April 2027.",
+      "limitation": "Record does not give concentration. Does not establish 1 L/1 gallon exact registration or historical sold SKU."
+    },
+    {
+      "id": "T-HY-GALENX",
+      "source_type": "brand_owner_product_catalog",
+      "url": "https://www.galenx.com/surgery",
+      "access": "Direct page retrieved",
+      "locator": "Wound Spray lines 27–37; Wound Care lines 41–51",
+      "finding": "Wound Spray section lists 60 mL,1 Liter,1 Gallon; separate Wound Care section lists 7.5 mL,15 mL,60 mL,1 Liter,1 Gallon.",
+      "limitation": "Wound Care and Wound Spray are distinct product lines. Therapeutic brand content alone does not settle their separate regulatory subcategories."
+    },
+    {
+      "id": "T-HY-SKIN-FDA",
+      "source_type": "Philippine_FDA_drug_record",
+      "url": "https://verification.fda.gov.ph/drug_productsview.php?export=pdf&registration_number=DRHR-2213",
+      "access": "Search-index full record retrieved; direct open failed",
+      "locator": "DRHR-2213",
+      "finding": "Hyclens Skin Cleanser is chlorhexidine 40 mg/mL 4% solution, Household Remedy;60 mL,1 L,1 Gallon packaging; expiry 6 March 2028.",
+      "limitation": "Category support only; sales presentation and authenticity remain unverified."
+    },
+    {
+      "id": "T-HY-OB-FDA",
+      "source_type": "Philippine_FDA_drug_record",
+      "url": "https://verification.fda.gov.ph/drug_productsview.php?export=pdf&registration_number=DRHR-2052",
+      "access": "Search-index full record retrieved",
+      "locator": "DRHR-2052",
+      "finding": "Hyclens OB is chlorhexidine 1% solution feminine wash, Household Remedy.",
+      "limitation": "Indexed entry expired 28 September 2026. Historical category evidence remains useful; current registration validity was not established."
+    },
+    {
+      "id": "T-HY-GARGLE",
+      "source_type": "brand_owner_product_catalog",
+      "url": "https://www.galenx.com/entd",
+      "access": "Direct page retrieved",
+      "locator": "Hyclens Gargle lines 19–29",
+      "finding": "Brand owner identifies Hyclens Gargle as therapeutic antiseptic oral solution, sizes 60/120/500 mL/1 L.",
+      "limitation": "Medicine is an analytical inference from therapeutic description; no direct FDA drug record for this exact line was obtained."
+    },
+    {
+      "id": "T-CAP-MEDLINE",
+      "source_type": "manufacturer_product_type_catalog",
+      "url": "https://athome.medline.com/en/categories/protection-wear/head-covers",
+      "access": "Search-index catalog content retrieved; direct open 403",
+      "finding": "Bouffant caps are disposable head coverings used in hospitals and multiple industrial/food settings.",
+      "limitation": "Product-type evidence does not establish intended clinical use of unbranded MedShield cap labels; no historical sales model match."
+    },
+    {
+      "id": "T-HAPPY-COTTON-FDA",
+      "source_type": "Philippine_FDA_medical_device_record",
+      "url": "https://verification.fda.gov.ph/Medical_Device_CMDNview.php?CPR_NUMBER=CDRRHR-CMDN-2023-00743&export=pdf",
+      "access": "Search-index full record retrieved; direct open 403",
+      "locator": "CDRRHR-CMDN-2023-00743",
+      "finding": "Names Happy Cotton Balls, Care ProductsInc., ClassA medical device, expiry 7 May 2028.",
+      "limitation": "Matches explicit Happy Cotton Balls product name only. Happy Cotton 40 G/10 MG does not establish balls versus roll or other format. No pack-count/quantity verification."
+    },
+    {
+      "id": "T-AIRLIFE-KIT",
+      "source_type": "manufacturer_user_guide",
+      "url": "https://connect.myairlife.com/resources/UG-10016_8900_Series_Disposable_Nebulizer_Kit_Rev2.pdf",
+      "access": "Search-index primary PDF content retrieved",
+      "finding": "Disposable jet nebulizer kit includes medication cup, mask and gas supply tubing, connected to a separate gas source.",
+      "limitation": "Product-type support. Other brands and exact sold models were not confirmed. Generic kits can also be reusable."
+    },
+    {
+      "id": "T-KIT-USER-RECEIPT",
+      "source_type": "prior_local_instruction_receipt",
+      "local_file": "outputs/nebulizer_accessory_update_20261007/receipt.json",
+      "sha256": "b560db98b9c260360fae29846c99924c32344540c425f380c97754ff4a62f149",
+      "access": "Local receipt inspected",
+      "finding": "Records prior user instruction to make the 14 reviewed nebulizer kits accessories, and the local proposed category change to medical_supply.",
+      "limitation": "Prior user classification instruction supports the existing proposal. Receipt explicitly records no product approval; it is not independent supplier evidence."
+    },
+    {
+      "id": "T-SKIN-STAPLER",
+      "source_type": "manufacturer_product_type_catalog",
+      "url": "https://www.medtronic.com/en-us/healthcare-professionals/products/wound-closure/skin-stapling/appose-skin-stapler.html",
+      "access": "Search-index full primary page content retrieved",
+      "finding": "Appose skin stapler is sterile, single-use, for surgical skin closure; discard after a single procedure.",
+      "limitation": "Supports disposable skin stapler type as medical_supply; generic historical titles do not prove Appose brand or single-use unless literal disposable wording present."
+    },
+    {
+      "id": "T-AUTOCLAVE-TAPE",
+      "source_type": "manufacturer_product_type_catalog",
+      "url": "https://www.3m.com/3M/en_US/p/c/medical/sterilization-monitoring/chemical-indicator-tapes/i/health-care/medical/",
+      "access": "Search-index primary catalog content retrieved",
+      "finding": "Medical steam chemical indicator tapes are supplied as tape rolls used for sterilization monitoring.",
+      "limitation": "Supplies product-type evidence; do not equate a tape roll to autoclave machine or infer a dispenser bundle."
+    },
+    {
+      "id": "T-BLOOD-LANCET",
+      "source_type": "manufacturer_product_type_catalog",
+      "url": "https://www.bd.com/en-za/products-and-solutions/products/product-families/bd-sentry-safety-lancet",
+      "access": "Search-index primary page content retrieved",
+      "finding": "BD Sentry is a single-use fingerstick blood collection lancet.",
+      "limitation": "Supplies-type evidence; distinguish lancet consumable from reusable lancing device; exact historical model not confirmed."
+    },
+    {
+      "id": "T-BANDAGE-SCISSORS",
+      "source_type": "manufacturer_product_type_catalog",
+      "url": "https://www.sklarcorp.com/p/sklar-lister-bandage-scissors-7-1-4/11-1072",
+      "access": "Search-index primary page content retrieved",
+      "finding": "Sklar Lister bandage scissors are reusable stainless-steel instruments.",
+      "limitation": "Equipment-type evidence for reusable instruments only. Historical unbranded title does not prove reusable/disposable construction."
+    }
+  ],
+  "findings": [
+    {
+      "raw_product": "EVAPROST 250MCG/ML",
+      "current_category": "medicine",
+      "current_category_status": "proposed",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "brand_primary_source",
+      "source_ids": [
+        "T-EVAPROST-DOH"
+      ],
+      "reason": "Official source names Evaprost as carboprost injection; strength/route disagreements do not change its medicine category.",
+      "remaining_limitations": "Preserve exact raw labels and existing strength/route conflicts. Do not equate 125 mcg/mL to 125 mcg/0.5 mL or resolveIV from this category evidence.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS 0.2% WOUND SPRAY 60ML",
+      "current_category": "medical_supply",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "product_primary_source",
+      "source_ids": [
+        "T-HYSPRAY-FDA",
+        "T-HY-GALENX"
+      ],
+      "reason": "Named Wound Spray line has FDA device evidence; manufacturer independently supports 1 L and 1 Gallon sizes omitted by the prior FDA entry.",
+      "remaining_limitations": "Concentration 2% versus 0.2% remains unresolved; BOV/pack/registration/identity must be reviewed separately. Category evidence does not correct source wording.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "EVAPROST 125MCG/ML",
+      "current_category": "medicine",
+      "current_category_status": "needs_review",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "brand_primary_source",
+      "source_ids": [
+        "T-EVAPROST-DOH"
+      ],
+      "reason": "Official source names Evaprost as carboprost injection; strength/route disagreements do not change its medicine category.",
+      "remaining_limitations": "Preserve exact raw labels and existing strength/route conflicts. Do not equate 125 mcg/mL to 125 mcg/0.5 mL or resolveIV from this category evidence.",
+      "prior_conflict_flags": [
+        "Strength differs from source"
+      ],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS 0.2% WOUND SPRAY",
+      "current_category": "medical_supply",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "product_primary_source",
+      "source_ids": [
+        "T-HYSPRAY-FDA",
+        "T-HY-GALENX"
+      ],
+      "reason": "Named Wound Spray line has FDA device evidence; manufacturer independently supports 1 L and 1 Gallon sizes omitted by the prior FDA entry.",
+      "remaining_limitations": "Concentration 2% versus 0.2% remains unresolved; BOV/pack/registration/identity must be reviewed separately. Category evidence does not correct source wording.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS SKIN CLEANSER (60ML)",
+      "current_category": "medicine",
+      "current_category_status": "proposed",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "product_primary_source",
+      "source_ids": [
+        "T-HY-SKIN-FDA"
+      ],
+      "reason": "Exact Skin Cleanser product line is named in FDA Household Remedy drug record.",
+      "remaining_limitations": "No historical presentation, unit or authenticity verification.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS WOUND SPRAY (60ML)",
+      "current_category": "medical_supply",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "product_primary_source",
+      "source_ids": [
+        "T-HYSPRAY-FDA",
+        "T-HY-GALENX"
+      ],
+      "reason": "Named Wound Spray line has FDA device evidence; manufacturer independently supports 1 L and 1 Gallon sizes omitted by the prior FDA entry.",
+      "remaining_limitations": "Concentration 2% versus 0.2% remains unresolved; BOV/pack/registration/identity must be reviewed separately. Category evidence does not correct source wording.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "EVAPROST 250MCG/ML IV",
+      "current_category": "medicine",
+      "current_category_status": "needs_review",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "brand_primary_source",
+      "source_ids": [
+        "T-EVAPROST-DOH"
+      ],
+      "reason": "Official source names Evaprost as carboprost injection; strength/route disagreements do not change its medicine category.",
+      "remaining_limitations": "Preserve exact raw labels and existing strength/route conflicts. Do not equate 125 mcg/mL to 125 mcg/0.5 mL or resolveIV from this category evidence.",
+      "prior_conflict_flags": [
+        "Route differs from source"
+      ],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS WOUND SPRAY 60ML.",
+      "current_category": "medical_supply",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "product_primary_source",
+      "source_ids": [
+        "T-HYSPRAY-FDA",
+        "T-HY-GALENX"
+      ],
+      "reason": "Named Wound Spray line has FDA device evidence; manufacturer independently supports 1 L and 1 Gallon sizes omitted by the prior FDA entry.",
+      "remaining_limitations": "Concentration 2% versus 0.2% remains unresolved; BOV/pack/registration/identity must be reviewed separately. Category evidence does not correct source wording.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "EVAPROST 125MCG/0.5ML",
+      "current_category": "medicine",
+      "current_category_status": "proposed",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "brand_primary_source",
+      "source_ids": [
+        "T-EVAPROST-DOH"
+      ],
+      "reason": "Official source names Evaprost as carboprost injection; strength/route disagreements do not change its medicine category.",
+      "remaining_limitations": "Preserve exact raw labels and existing strength/route conflicts. Do not equate 125 mcg/mL to 125 mcg/0.5 mL or resolveIV from this category evidence.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS WOUND SPRAY 2% 60ML",
+      "current_category": "medical_supply",
+      "current_category_status": "needs_review",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "product_primary_source",
+      "source_ids": [
+        "T-HYSPRAY-FDA",
+        "T-HY-GALENX"
+      ],
+      "reason": "Named Wound Spray line has FDA device evidence; manufacturer independently supports 1 L and 1 Gallon sizes omitted by the prior FDA entry.",
+      "remaining_limitations": "Concentration 2% versus 0.2% remains unresolved; BOV/pack/registration/identity must be reviewed separately. Category evidence does not correct source wording.",
+      "prior_conflict_flags": [
+        "Concentration needs confirmation"
+      ],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS 0.12% GARGLE 60ML",
+      "current_category": "medicine",
+      "current_category_status": "proposed",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal_with_inference",
+      "evidence_basis": "therapeutic_description_inference",
+      "source_ids": [
+        "T-HY-GARGLE"
+      ],
+      "reason": "Brand owner supports exact Gargle line and therapeutic oral solution use.",
+      "remaining_limitations": "Medicine subtype is an analyst inference, not direct regulatory verification; obtain product label/registration before stronger acceptance.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS SKIN CLEANSER 4G/100ML 60ML",
+      "current_category": "medicine",
+      "current_category_status": "proposed",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "product_primary_source",
+      "source_ids": [
+        "T-HY-SKIN-FDA"
+      ],
+      "reason": "Exact Skin Cleanser product line is named in FDA Household Remedy drug record.",
+      "remaining_limitations": "No historical presentation, unit or authenticity verification.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS 0.2% WOUND CARE SOLUTION - 15ML",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold_subtype",
+      "evidence_basis": "product_family_primary_source",
+      "source_ids": [
+        "T-HY-GALENX"
+      ],
+      "reason": "Named Wound Care line and 7.5/15/60 mL sizes are supported, but cannot inherit the separate Wound Spray device classification.",
+      "remaining_limitations": "Medical intended use supported; medicine-versus-supply taxonomy subtype needs exact label/registration evidence.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS SKIN CLEANSER 60ML",
+      "current_category": "medicine",
+      "current_category_status": "proposed",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "product_primary_source",
+      "source_ids": [
+        "T-HY-SKIN-FDA"
+      ],
+      "reason": "Exact Skin Cleanser product line is named in FDA Household Remedy drug record.",
+      "remaining_limitations": "No historical presentation, unit or authenticity verification.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "NEBULIZER KIT ADULT (SURGITECH)",
+      "current_category": "medical_supply",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "prior_user_classification_plus_product_type",
+      "source_ids": [
+        "T-KIT-USER-RECEIPT",
+        "T-AIRLIFE-KIT"
+      ],
+      "reason": "Existing accessory proposal follows the recorded prior user instruction and compatible respiratory-accessory product-type evidence.",
+      "remaining_limitations": "No independent brand/model/kit-contents/disposable-status confirmation for each historical item; no human approval fabricated.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "BOUFFANT CAP",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "cross_industry_product_type",
+      "source_ids": [
+        "T-CAP-MEDLINE"
+      ],
+      "reason": "Caps are disposable head coverings across clinical and nonclinical settings; unbranded title does not establish clinical category.",
+      "remaining_limitations": "Request supplier specification or sales context establishing medical-supply use; avoid treatingCAP as capsule.",
+      "prior_conflict_flags": [
+        "Keyword false positive corrected"
+      ],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "AUTOCLAVE TAPE 3/4\"",
+      "current_category": "medical_equipment",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "correction_proposal",
+      "evidence_basis": "literal_type_plus_primary_example",
+      "source_ids": [
+        "T-AUTOCLAVE-TAPE"
+      ],
+      "reason": "Sterilization indicator tape is a consumable supply, separately identified from autoclave machines.",
+      "remaining_limitations": "Exact manufacturer/roll/pack quantity and historical unit remain unverified.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "COTTON ROLL 400G - TENDERSOFT",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "insufficient_specific_evidence",
+      "source_ids": [],
+      "reason": "No source-specific category evidence established in this targeted review.",
+      "remaining_limitations": "Obtain exact product description and clinical/nonclinical intended use; no approval inferred.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS GARGLE (60ML)",
+      "current_category": "medicine",
+      "current_category_status": "proposed",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal_with_inference",
+      "evidence_basis": "therapeutic_description_inference",
+      "source_ids": [
+        "T-HY-GARGLE"
+      ],
+      "reason": "Brand owner supports exact Gargle line and therapeutic oral solution use.",
+      "remaining_limitations": "Medicine subtype is an analyst inference, not direct regulatory verification; obtain product label/registration before stronger acceptance.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "NEBULIZER KIT WITH MASK PEDIA (PARTNERS)",
+      "current_category": "medical_supply",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "prior_user_classification_plus_product_type",
+      "source_ids": [
+        "T-KIT-USER-RECEIPT",
+        "T-AIRLIFE-KIT"
+      ],
+      "reason": "Existing accessory proposal follows the recorded prior user instruction and compatible respiratory-accessory product-type evidence.",
+      "remaining_limitations": "No independent brand/model/kit-contents/disposable-status confirmation for each historical item; no human approval fabricated.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS OB WASH 1% 100ML",
+      "current_category": "medicine",
+      "current_category_status": "proposed",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "product_primary_source",
+      "source_ids": [
+        "T-HY-OB-FDA"
+      ],
+      "reason": "Exact OB product line is named in FDA Household Remedy drug record.",
+      "remaining_limitations": "Indexed registration expired 28 September 2026; do not represent current registration as active without renewal evidence.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "EVAPROST 250",
+      "current_category": "medicine",
+      "current_category_status": "needs_review",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "brand_primary_source",
+      "source_ids": [
+        "T-EVAPROST-DOH"
+      ],
+      "reason": "Official source names Evaprost as carboprost injection; strength/route disagreements do not change its medicine category.",
+      "remaining_limitations": "Preserve exact raw labels and existing strength/route conflicts. Do not equate 125 mcg/mL to 125 mcg/0.5 mL or resolveIV from this category evidence.",
+      "prior_conflict_flags": [
+        "Strength unit missing"
+      ],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "EVAPROST 125",
+      "current_category": "medicine",
+      "current_category_status": "needs_review",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "brand_primary_source",
+      "source_ids": [
+        "T-EVAPROST-DOH"
+      ],
+      "reason": "Official source names Evaprost as carboprost injection; strength/route disagreements do not change its medicine category.",
+      "remaining_limitations": "Preserve exact raw labels and existing strength/route conflicts. Do not equate 125 mcg/mL to 125 mcg/0.5 mL or resolveIV from this category evidence.",
+      "prior_conflict_flags": [
+        "Strength unit missing"
+      ],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS GARGLE 0.12% 120ML",
+      "current_category": "medicine",
+      "current_category_status": "proposed",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal_with_inference",
+      "evidence_basis": "therapeutic_description_inference",
+      "source_ids": [
+        "T-HY-GARGLE"
+      ],
+      "reason": "Brand owner supports exact Gargle line and therapeutic oral solution use.",
+      "remaining_limitations": "Medicine subtype is an analyst inference, not direct regulatory verification; obtain product label/registration before stronger acceptance.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS GARGLE (120ML)",
+      "current_category": "medicine",
+      "current_category_status": "proposed",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal_with_inference",
+      "evidence_basis": "therapeutic_description_inference",
+      "source_ids": [
+        "T-HY-GARGLE"
+      ],
+      "reason": "Brand owner supports exact Gargle line and therapeutic oral solution use.",
+      "remaining_limitations": "Medicine subtype is an analyst inference, not direct regulatory verification; obtain product label/registration before stronger acceptance.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "LOCAINE 50ML",
+      "current_category": "medicine",
+      "current_category_status": "proposed",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "product_or_brand_primary_source",
+      "source_ids": "T-QC-PO",
+      "reason": "Category-specific named medicinal product is supported by primary documentary evidence.",
+      "remaining_limitations": "No exact historical SKU, concentration, form, packaging, unit or forecast approval.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS WOUND SPRAY 1GALLON",
+      "current_category": "medical_supply",
+      "current_category_status": "needs_review",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "product_primary_source",
+      "source_ids": [
+        "T-HYSPRAY-FDA",
+        "T-HY-GALENX"
+      ],
+      "reason": "Named Wound Spray line has FDA device evidence; manufacturer independently supports 1 L and 1 Gallon sizes omitted by the prior FDA entry.",
+      "remaining_limitations": "Concentration 2% versus 0.2% remains unresolved; BOV/pack/registration/identity must be reviewed separately. Category evidence does not correct source wording.",
+      "prior_conflict_flags": [
+        "Pack size outside cited entry"
+      ],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "COTTON ROLL 400G - UNIMEX",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "insufficient_specific_evidence",
+      "source_ids": [],
+      "reason": "No source-specific category evidence established in this targeted review.",
+      "remaining_limitations": "Obtain exact product description and clinical/nonclinical intended use; no approval inferred.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS OB 1% ANTISEPTIC",
+      "current_category": "medicine",
+      "current_category_status": "proposed",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "product_primary_source",
+      "source_ids": [
+        "T-HY-OB-FDA"
+      ],
+      "reason": "Exact OB product line is named in FDA Household Remedy drug record.",
+      "remaining_limitations": "Indexed registration expired 28 September 2026; do not represent current registration as active without renewal evidence.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "NEBULIZER MASK ADULT",
+      "current_category": "medical_equipment",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "correction_proposal_with_inference",
+      "evidence_basis": "product_type_inference",
+      "source_ids": [
+        "T-AIRLIFE-KIT"
+      ],
+      "reason": "Mask component is a respiratory accessory rather than a compressor machine.",
+      "remaining_limitations": "Exact disposable/reusable model and package need evidence; category proposal only.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS WOUND SPRAY 2% 120ML BOV",
+      "current_category": "medical_supply",
+      "current_category_status": "needs_review",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "product_primary_source",
+      "source_ids": [
+        "T-HYSPRAY-FDA",
+        "T-HY-GALENX"
+      ],
+      "reason": "Named Wound Spray line has FDA device evidence; manufacturer independently supports 1 L and 1 Gallon sizes omitted by the prior FDA entry.",
+      "remaining_limitations": "Concentration 2% versus 0.2% remains unresolved; BOV/pack/registration/identity must be reviewed separately. Category evidence does not correct source wording.",
+      "prior_conflict_flags": [
+        "Concentration needs confirmation"
+      ],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "NEBULIZER KIT ORMED",
+      "current_category": "medical_supply",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "prior_user_classification_plus_product_type",
+      "source_ids": [
+        "T-KIT-USER-RECEIPT",
+        "T-AIRLIFE-KIT"
+      ],
+      "reason": "Existing accessory proposal follows the recorded prior user instruction and compatible respiratory-accessory product-type evidence.",
+      "remaining_limitations": "No independent brand/model/kit-contents/disposable-status confirmation for each historical item; no human approval fabricated.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "NEBULIZER KIT WITH MASK PEDIA (TOPCARE)",
+      "current_category": "medical_supply",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "prior_user_classification_plus_product_type",
+      "source_ids": [
+        "T-KIT-USER-RECEIPT",
+        "T-AIRLIFE-KIT"
+      ],
+      "reason": "Existing accessory proposal follows the recorded prior user instruction and compatible respiratory-accessory product-type evidence.",
+      "remaining_limitations": "No independent brand/model/kit-contents/disposable-status confirmation for each historical item; no human approval fabricated.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS OB WASH ANTISEPTIC",
+      "current_category": "medicine",
+      "current_category_status": "proposed",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "product_primary_source",
+      "source_ids": [
+        "T-HY-OB-FDA"
+      ],
+      "reason": "Exact OB product line is named in FDA Household Remedy drug record.",
+      "remaining_limitations": "Indexed registration expired 28 September 2026; do not represent current registration as active without renewal evidence.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "SKIN STAPLER",
+      "current_category": "non_medical",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "correction_proposal_with_inference",
+      "evidence_basis": "product_type_inference",
+      "source_ids": [
+        "T-SKIN-STAPLER"
+      ],
+      "reason": "Skin closure stapler is a medical device; supplied single-use type supports supply proposal and contradictsnon_medical.",
+      "remaining_limitations": "Generic title lacks exact model/reusability evidence; confirm disposable use before categorical subtype approval.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "COTTON ROLL 400G (TENDERSOFT)",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "insufficient_specific_evidence",
+      "source_ids": [],
+      "reason": "No source-specific category evidence established in this targeted review.",
+      "remaining_limitations": "Obtain exact product description and clinical/nonclinical intended use; no approval inferred.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS GARGLE 0.12% 60ML",
+      "current_category": "medicine",
+      "current_category_status": "proposed",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal_with_inference",
+      "evidence_basis": "therapeutic_description_inference",
+      "source_ids": [
+        "T-HY-GARGLE"
+      ],
+      "reason": "Brand owner supports exact Gargle line and therapeutic oral solution use.",
+      "remaining_limitations": "Medicine subtype is an analyst inference, not direct regulatory verification; obtain product label/registration before stronger acceptance.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "BANDAGE SCISSOR SIZE 7'' (OLTEN)",
+      "current_category": "medical_supply",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_equipment",
+      "category_evidence_result": "correction_proposal_with_inference",
+      "evidence_basis": "product_type_inference",
+      "source_ids": [
+        "T-BANDAGE-SCISSORS"
+      ],
+      "reason": "Manufacturer supports reusable stainless-steel bandage-scissors instrument type.",
+      "remaining_limitations": "Generic historical title does not prove reusable construction; confirm before subtype approval.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "COTTON BALLS - HAPPY 150BALLS",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "correction_proposal",
+      "evidence_basis": "product_primary_source",
+      "source_ids": [
+        "T-HAPPY-COTTON-FDA"
+      ],
+      "reason": "Happy Cotton Balls exact product line has FDA medical-device category evidence.",
+      "remaining_limitations": "Brand/name matches category;150-ball package, source quantity, exact historical SKU and approvals remain unverified.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "NEBULIZER KIT W/ MOUTH PC - ORMED",
+      "current_category": "medical_supply",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "prior_user_classification_plus_product_type",
+      "source_ids": [
+        "T-KIT-USER-RECEIPT",
+        "T-AIRLIFE-KIT"
+      ],
+      "reason": "Existing accessory proposal follows the recorded prior user instruction and compatible respiratory-accessory product-type evidence.",
+      "remaining_limitations": "No independent brand/model/kit-contents/disposable-status confirmation for each historical item; no human approval fabricated.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "SKIN STAPLER 35 - SURGITECH",
+      "current_category": "medical_supply",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "retain_proposal_with_inference",
+      "evidence_basis": "product_type_inference",
+      "source_ids": [
+        "T-SKIN-STAPLER"
+      ],
+      "reason": "Skin closure stapler is a medical device; supplied single-use type supports supply proposal and contradictsnon_medical.",
+      "remaining_limitations": "Generic title lacks exact model/reusability evidence; confirm disposable use before categorical subtype approval.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "NEBULIZER KIT WITH MASK PEDIA (HEXACARE)",
+      "current_category": "medical_supply",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "prior_user_classification_plus_product_type",
+      "source_ids": [
+        "T-KIT-USER-RECEIPT",
+        "T-AIRLIFE-KIT"
+      ],
+      "reason": "Existing accessory proposal follows the recorded prior user instruction and compatible respiratory-accessory product-type evidence.",
+      "remaining_limitations": "No independent brand/model/kit-contents/disposable-status confirmation for each historical item; no human approval fabricated.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "COTTON BALLS -300'S - UNIMEX",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "insufficient_specific_evidence",
+      "source_ids": [],
+      "reason": "No source-specific category evidence established in this targeted review.",
+      "remaining_limitations": "Obtain exact product description and clinical/nonclinical intended use; no approval inferred.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "NEBULIZER KIT WITH MASK ADULT (HEXACARE)",
+      "current_category": "medical_supply",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "prior_user_classification_plus_product_type",
+      "source_ids": [
+        "T-KIT-USER-RECEIPT",
+        "T-AIRLIFE-KIT"
+      ],
+      "reason": "Existing accessory proposal follows the recorded prior user instruction and compatible respiratory-accessory product-type evidence.",
+      "remaining_limitations": "No independent brand/model/kit-contents/disposable-status confirmation for each historical item; no human approval fabricated.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS 0.12% GARGLE 120ML",
+      "current_category": "medicine",
+      "current_category_status": "proposed",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal_with_inference",
+      "evidence_basis": "therapeutic_description_inference",
+      "source_ids": [
+        "T-HY-GARGLE"
+      ],
+      "reason": "Brand owner supports exact Gargle line and therapeutic oral solution use.",
+      "remaining_limitations": "Medicine subtype is an analyst inference, not direct regulatory verification; obtain product label/registration before stronger acceptance.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "NEBULIZER KIT ADULT (AIRLIFE)",
+      "current_category": "medical_supply",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "prior_user_classification_plus_product_type",
+      "source_ids": [
+        "T-KIT-USER-RECEIPT",
+        "T-AIRLIFE-KIT"
+      ],
+      "reason": "Existing accessory proposal follows the recorded prior user instruction and compatible respiratory-accessory product-type evidence.",
+      "remaining_limitations": "No independent brand/model/kit-contents/disposable-status confirmation for each historical item; no human approval fabricated.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "COTTON ROLL 400G - SUREGUARD",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "insufficient_specific_evidence",
+      "source_ids": [],
+      "reason": "No source-specific category evidence established in this targeted review.",
+      "remaining_limitations": "Obtain exact product description and clinical/nonclinical intended use; no approval inferred.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "NEBULIZER KIT (ADULT ) 10CC - SURGITECH",
+      "current_category": "medical_supply",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "prior_user_classification_plus_product_type",
+      "source_ids": [
+        "T-KIT-USER-RECEIPT",
+        "T-AIRLIFE-KIT"
+      ],
+      "reason": "Existing accessory proposal follows the recorded prior user instruction and compatible respiratory-accessory product-type evidence.",
+      "remaining_limitations": "No independent brand/model/kit-contents/disposable-status confirmation for each historical item; no human approval fabricated.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS GARGLE 120ML",
+      "current_category": "medicine",
+      "current_category_status": "proposed",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal_with_inference",
+      "evidence_basis": "therapeutic_description_inference",
+      "source_ids": [
+        "T-HY-GARGLE"
+      ],
+      "reason": "Brand owner supports exact Gargle line and therapeutic oral solution use.",
+      "remaining_limitations": "Medicine subtype is an analyst inference, not direct regulatory verification; obtain product label/registration before stronger acceptance.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "NEBULIZER KIT PEDIA",
+      "current_category": "medical_supply",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "prior_user_classification_plus_product_type",
+      "source_ids": [
+        "T-KIT-USER-RECEIPT",
+        "T-AIRLIFE-KIT"
+      ],
+      "reason": "Existing accessory proposal follows the recorded prior user instruction and compatible respiratory-accessory product-type evidence.",
+      "remaining_limitations": "No independent brand/model/kit-contents/disposable-status confirmation for each historical item; no human approval fabricated.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS WOUND CARE SOLUTION - 15ML",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold_subtype",
+      "evidence_basis": "product_family_primary_source",
+      "source_ids": [
+        "T-HY-GALENX"
+      ],
+      "reason": "Named Wound Care line and 7.5/15/60 mL sizes are supported, but cannot inherit the separate Wound Spray device classification.",
+      "remaining_limitations": "Medical intended use supported; medicine-versus-supply taxonomy subtype needs exact label/registration evidence.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS SKIN CLEANSER 4G/100ML GALLON",
+      "current_category": "medicine",
+      "current_category_status": "proposed",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "product_primary_source",
+      "source_ids": [
+        "T-HY-SKIN-FDA"
+      ],
+      "reason": "Exact Skin Cleanser product line is named in FDA Household Remedy drug record.",
+      "remaining_limitations": "No historical presentation, unit or authenticity verification.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "COTTON BALLS 1000S (TENDERSOFT)",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "insufficient_specific_evidence",
+      "source_ids": [],
+      "reason": "No source-specific category evidence established in this targeted review.",
+      "remaining_limitations": "Obtain exact product description and clinical/nonclinical intended use; no approval inferred.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "COTTON BALLS",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "insufficient_specific_evidence",
+      "source_ids": [],
+      "reason": "No source-specific category evidence established in this targeted review.",
+      "remaining_limitations": "Obtain exact product description and clinical/nonclinical intended use; no approval inferred.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS WOUND SPRAY 1GLN",
+      "current_category": "medical_supply",
+      "current_category_status": "needs_review",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "product_primary_source",
+      "source_ids": [
+        "T-HYSPRAY-FDA",
+        "T-HY-GALENX"
+      ],
+      "reason": "Named Wound Spray line has FDA device evidence; manufacturer independently supports 1 L and 1 Gallon sizes omitted by the prior FDA entry.",
+      "remaining_limitations": "Concentration 2% versus 0.2% remains unresolved; BOV/pack/registration/identity must be reviewed separately. Category evidence does not correct source wording.",
+      "prior_conflict_flags": [
+        "Pack size outside cited entry"
+      ],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "NEBULIZER KIT WITH TUBNG AND MOUTH PIECE - HUDSON",
+      "current_category": "medical_supply",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "prior_user_classification_plus_product_type",
+      "source_ids": [
+        "T-KIT-USER-RECEIPT",
+        "T-AIRLIFE-KIT"
+      ],
+      "reason": "Existing accessory proposal follows the recorded prior user instruction and compatible respiratory-accessory product-type evidence.",
+      "remaining_limitations": "No independent brand/model/kit-contents/disposable-status confirmation for each historical item; no human approval fabricated.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS WOUND CARE SOLUTION 60ML",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold_subtype",
+      "evidence_basis": "product_family_primary_source",
+      "source_ids": [
+        "T-HY-GALENX"
+      ],
+      "reason": "Named Wound Care line and 7.5/15/60 mL sizes are supported, but cannot inherit the separate Wound Spray device classification.",
+      "remaining_limitations": "Medical intended use supported; medicine-versus-supply taxonomy subtype needs exact label/registration evidence.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "NEBULIZER KIT",
+      "current_category": "medical_supply",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "prior_user_classification_plus_product_type",
+      "source_ids": [
+        "T-KIT-USER-RECEIPT",
+        "T-AIRLIFE-KIT"
+      ],
+      "reason": "Existing accessory proposal follows the recorded prior user instruction and compatible respiratory-accessory product-type evidence.",
+      "remaining_limitations": "No independent brand/model/kit-contents/disposable-status confirmation for each historical item; no human approval fabricated.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "NEBULIZER KIT WITH MASK PEDIA (SURGITECH)",
+      "current_category": "medical_supply",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "prior_user_classification_plus_product_type",
+      "source_ids": [
+        "T-KIT-USER-RECEIPT",
+        "T-AIRLIFE-KIT"
+      ],
+      "reason": "Existing accessory proposal follows the recorded prior user instruction and compatible respiratory-accessory product-type evidence.",
+      "remaining_limitations": "No independent brand/model/kit-contents/disposable-status confirmation for each historical item; no human approval fabricated.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "BANDAGE SCISSOR 7'' (OLTEN)",
+      "current_category": "medical_supply",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_equipment",
+      "category_evidence_result": "correction_proposal_with_inference",
+      "evidence_basis": "product_type_inference",
+      "source_ids": [
+        "T-BANDAGE-SCISSORS"
+      ],
+      "reason": "Manufacturer supports reusable stainless-steel bandage-scissors instrument type.",
+      "remaining_limitations": "Generic historical title does not prove reusable construction; confirm before subtype approval.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS 0.2% WOUND CARE SOLUTION",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold_subtype",
+      "evidence_basis": "product_family_primary_source",
+      "source_ids": [
+        "T-HY-GALENX"
+      ],
+      "reason": "Named Wound Care line and 7.5/15/60 mL sizes are supported, but cannot inherit the separate Wound Spray device classification.",
+      "remaining_limitations": "Medical intended use supported; medicine-versus-supply taxonomy subtype needs exact label/registration evidence.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS 0.2% WOUND SPRAY 1L",
+      "current_category": "medical_supply",
+      "current_category_status": "needs_review",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "product_primary_source",
+      "source_ids": [
+        "T-HYSPRAY-FDA",
+        "T-HY-GALENX"
+      ],
+      "reason": "Named Wound Spray line has FDA device evidence; manufacturer independently supports 1 L and 1 Gallon sizes omitted by the prior FDA entry.",
+      "remaining_limitations": "Concentration 2% versus 0.2% remains unresolved; BOV/pack/registration/identity must be reviewed separately. Category evidence does not correct source wording.",
+      "prior_conflict_flags": [
+        "Pack size outside cited entry"
+      ],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "BANDAGE SCISSOR SIZE 7 1/2''",
+      "current_category": "medical_supply",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_equipment",
+      "category_evidence_result": "correction_proposal_with_inference",
+      "evidence_basis": "product_type_inference",
+      "source_ids": [
+        "T-BANDAGE-SCISSORS"
+      ],
+      "reason": "Manufacturer supports reusable stainless-steel bandage-scissors instrument type.",
+      "remaining_limitations": "Generic historical title does not prove reusable construction; confirm before subtype approval.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HAIR CAP NON WOVEN",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "cross_industry_product_type",
+      "source_ids": [
+        "T-CAP-MEDLINE"
+      ],
+      "reason": "Caps are disposable head coverings across clinical and nonclinical settings; unbranded title does not establish clinical category.",
+      "remaining_limitations": "Request supplier specification or sales context establishing medical-supply use; avoid treatingCAP as capsule.",
+      "prior_conflict_flags": [
+        "Keyword false positive corrected"
+      ],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "COTTON SUTURE 2.0 (RGM)",
+      "current_category": "medical_supply",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "retain_description_proposal",
+      "evidence_basis": "literal_clinical_type",
+      "source_ids": [],
+      "reason": "Literal surgical suture description supports supply proposal but was not independently re-fetched in this targeted review.",
+      "remaining_limitations": "External product/model verification remains unperformed.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "COTTON TIP APPLICATOR 6\"/100PCS",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "insufficient_specific_evidence",
+      "source_ids": [],
+      "reason": "No source-specific category evidence established in this targeted review.",
+      "remaining_limitations": "Obtain exact product description and clinical/nonclinical intended use; no approval inferred.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "NON-PLEATED BOUFFANT CLIP CAP",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "cross_industry_product_type",
+      "source_ids": [
+        "T-CAP-MEDLINE"
+      ],
+      "reason": "Caps are disposable head coverings across clinical and nonclinical settings; unbranded title does not establish clinical category.",
+      "remaining_limitations": "Request supplier specification or sales context establishing medical-supply use; avoid treatingCAP as capsule.",
+      "prior_conflict_flags": [
+        "Keyword false positive corrected"
+      ],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "GLUCOMETER BLOOD LANCETS - SURGITECH",
+      "current_category": "medical_equipment",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "correction_proposal",
+      "evidence_basis": "literal_type_plus_primary_example",
+      "source_ids": [
+        "T-BLOOD-LANCET"
+      ],
+      "reason": "Lancets for fingerstick collection are consumables separate from the glucose meter or lancing device.",
+      "remaining_limitations": "Confirm historical item is lancet consumable, not bundled meter/reusable lancing device.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "BOUFFANT CAP BRAIDED",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "cross_industry_product_type",
+      "source_ids": [
+        "T-CAP-MEDLINE"
+      ],
+      "reason": "Caps are disposable head coverings across clinical and nonclinical settings; unbranded title does not establish clinical category.",
+      "remaining_limitations": "Request supplier specification or sales context establishing medical-supply use; avoid treatingCAP as capsule.",
+      "prior_conflict_flags": [
+        "Keyword false positive corrected"
+      ],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS 0.2% WOUND CARE SOLUTION 7.5ML",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold_subtype",
+      "evidence_basis": "product_family_primary_source",
+      "source_ids": [
+        "T-HY-GALENX"
+      ],
+      "reason": "Named Wound Care line and 7.5/15/60 mL sizes are supported, but cannot inherit the separate Wound Spray device classification.",
+      "remaining_limitations": "Medical intended use supported; medicine-versus-supply taxonomy subtype needs exact label/registration evidence.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "LOCAINE 2% 50ML",
+      "current_category": "medicine",
+      "current_category_status": "proposed",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "product_or_brand_primary_source",
+      "source_ids": "T-QC-PO",
+      "reason": "Category-specific named medicinal product is supported by primary documentary evidence.",
+      "remaining_limitations": "No exact historical SKU, concentration, form, packaging, unit or forecast approval.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "COTTON SWAB",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "insufficient_specific_evidence",
+      "source_ids": [],
+      "reason": "No source-specific category evidence established in this targeted review.",
+      "remaining_limitations": "Obtain exact product description and clinical/nonclinical intended use; no approval inferred.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "COTTON TIPPED APPLICATOR",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "insufficient_specific_evidence",
+      "source_ids": [],
+      "reason": "No source-specific category evidence established in this targeted review.",
+      "remaining_limitations": "Obtain exact product description and clinical/nonclinical intended use; no approval inferred.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "COTTON 400G",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "insufficient_specific_evidence",
+      "source_ids": [],
+      "reason": "No source-specific category evidence established in this targeted review.",
+      "remaining_limitations": "Obtain exact product description and clinical/nonclinical intended use; no approval inferred.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "STERILE COTTON SWAB",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "insufficient_specific_evidence",
+      "source_ids": [],
+      "reason": "No source-specific category evidence established in this targeted review.",
+      "remaining_limitations": "Obtain exact product description and clinical/nonclinical intended use; no approval inferred.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "COTTON BALLS 300S (TENDERSOFT)",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "insufficient_specific_evidence",
+      "source_ids": [],
+      "reason": "No source-specific category evidence established in this targeted review.",
+      "remaining_limitations": "Obtain exact product description and clinical/nonclinical intended use; no approval inferred.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "EUROCAINE",
+      "current_category": "medicine",
+      "current_category_status": "proposed",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "product_or_brand_primary_source",
+      "source_ids": "T-QC-PO",
+      "reason": "Category-specific named medicinal product is supported by primary documentary evidence.",
+      "remaining_limitations": "No exact historical SKU, concentration, form, packaging, unit or forecast approval.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "BOUFFANT CAP S19",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "cross_industry_product_type",
+      "source_ids": [
+        "T-CAP-MEDLINE"
+      ],
+      "reason": "Caps are disposable head coverings across clinical and nonclinical settings; unbranded title does not establish clinical category.",
+      "remaining_limitations": "Request supplier specification or sales context establishing medical-supply use; avoid treatingCAP as capsule.",
+      "prior_conflict_flags": [
+        "Keyword false positive corrected"
+      ],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "DISPOSABLE SKIN STAPLER",
+      "current_category": "non_medical",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "correction_proposal",
+      "evidence_basis": "literal_type_plus_primary_example",
+      "source_ids": [
+        "T-SKIN-STAPLER"
+      ],
+      "reason": "Literal disposable surgical skin-stapler type is supported as a single-use medical supply.",
+      "remaining_limitations": "Not the same as historical Appose model/packaging verification.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS GARGLE",
+      "current_category": "medicine",
+      "current_category_status": "proposed",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal_with_inference",
+      "evidence_basis": "therapeutic_description_inference",
+      "source_ids": [
+        "T-HY-GARGLE"
+      ],
+      "reason": "Brand owner supports exact Gargle line and therapeutic oral solution use.",
+      "remaining_limitations": "Medicine subtype is an analyst inference, not direct regulatory verification; obtain product label/registration before stronger acceptance.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "SANOXIN-1000",
+      "current_category": "medicine",
+      "current_category_status": "proposed",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "product_or_brand_primary_source",
+      "source_ids": "T-AMB-SANOXIN",
+      "reason": "Category-specific named medicinal product is supported by primary documentary evidence.",
+      "remaining_limitations": "No exact historical SKU, concentration, form, packaging, unit or forecast approval.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "AUTOCLAVE TAPE 1\"",
+      "current_category": "medical_equipment",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "correction_proposal",
+      "evidence_basis": "literal_type_plus_primary_example",
+      "source_ids": [
+        "T-AUTOCLAVE-TAPE"
+      ],
+      "reason": "Sterilization indicator tape is a consumable supply, separately identified from autoclave machines.",
+      "remaining_limitations": "Exact manufacturer/roll/pack quantity and historical unit remain unverified.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "SPOOL COTTON TREAD SIZE 2.0",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "insufficient_specific_evidence",
+      "source_ids": [],
+      "reason": "No source-specific category evidence established in this targeted review.",
+      "remaining_limitations": "Obtain exact product description and clinical/nonclinical intended use; no approval inferred.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "COTTON BALLS- TENDERSOFT 300'S",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "insufficient_specific_evidence",
+      "source_ids": [],
+      "reason": "No source-specific category evidence established in this targeted review.",
+      "remaining_limitations": "Obtain exact product description and clinical/nonclinical intended use; no approval inferred.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "COTTON BALLS- TENDERSOFT",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "insufficient_specific_evidence",
+      "source_ids": [],
+      "reason": "No source-specific category evidence established in this targeted review.",
+      "remaining_limitations": "Obtain exact product description and clinical/nonclinical intended use; no approval inferred.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS 4% SKIN CLEASER 1L",
+      "current_category": "medicine",
+      "current_category_status": "proposed",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "product_primary_source",
+      "source_ids": [
+        "T-HY-SKIN-FDA"
+      ],
+      "reason": "Exact Skin Cleanser product line is named in FDA Household Remedy drug record.",
+      "remaining_limitations": "No historical presentation, unit or authenticity verification.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS WOUND SPRAY 120ML AEROSOL",
+      "current_category": "medical_supply",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "product_primary_source",
+      "source_ids": [
+        "T-HYSPRAY-FDA",
+        "T-HY-GALENX"
+      ],
+      "reason": "Named Wound Spray line has FDA device evidence; manufacturer independently supports 1 L and 1 Gallon sizes omitted by the prior FDA entry.",
+      "remaining_limitations": "Concentration 2% versus 0.2% remains unresolved; BOV/pack/registration/identity must be reviewed separately. Category evidence does not correct source wording.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS 0.12% GARGLE 500ML",
+      "current_category": "medicine",
+      "current_category_status": "proposed",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal_with_inference",
+      "evidence_basis": "therapeutic_description_inference",
+      "source_ids": [
+        "T-HY-GARGLE"
+      ],
+      "reason": "Brand owner supports exact Gargle line and therapeutic oral solution use.",
+      "remaining_limitations": "Medicine subtype is an analyst inference, not direct regulatory verification; obtain product label/registration before stronger acceptance.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "COTTON APPLICATOR STICKS-SIMPLEX",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "insufficient_specific_evidence",
+      "source_ids": [],
+      "reason": "No source-specific category evidence established in this targeted review.",
+      "remaining_limitations": "Obtain exact product description and clinical/nonclinical intended use; no approval inferred.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "SKIN STAPLER (SURGITECH)",
+      "current_category": "medical_supply",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "retain_proposal_with_inference",
+      "evidence_basis": "product_type_inference",
+      "source_ids": [
+        "T-SKIN-STAPLER"
+      ],
+      "reason": "Skin closure stapler is a medical device; supplied single-use type supports supply proposal and contradictsnon_medical.",
+      "remaining_limitations": "Generic title lacks exact model/reusability evidence; confirm disposable use before categorical subtype approval.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "COTTON ROLL 400G GINGERMED",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "insufficient_specific_evidence",
+      "source_ids": [],
+      "reason": "No source-specific category evidence established in this targeted review.",
+      "remaining_limitations": "Obtain exact product description and clinical/nonclinical intended use; no approval inferred.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS 0.12% GARGLE",
+      "current_category": "medicine",
+      "current_category_status": "proposed",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal_with_inference",
+      "evidence_basis": "therapeutic_description_inference",
+      "source_ids": [
+        "T-HY-GARGLE"
+      ],
+      "reason": "Brand owner supports exact Gargle line and therapeutic oral solution use.",
+      "remaining_limitations": "Medicine subtype is an analyst inference, not direct regulatory verification; obtain product label/registration before stronger acceptance.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS 4% SKIN CLEANSER",
+      "current_category": "medicine",
+      "current_category_status": "proposed",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "product_primary_source",
+      "source_ids": [
+        "T-HY-SKIN-FDA"
+      ],
+      "reason": "Exact Skin Cleanser product line is named in FDA Household Remedy drug record.",
+      "remaining_limitations": "No historical presentation, unit or authenticity verification.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "BOUFFANT CAP S21",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "cross_industry_product_type",
+      "source_ids": [
+        "T-CAP-MEDLINE"
+      ],
+      "reason": "Caps are disposable head coverings across clinical and nonclinical settings; unbranded title does not establish clinical category.",
+      "remaining_limitations": "Request supplier specification or sales context establishing medical-supply use; avoid treatingCAP as capsule.",
+      "prior_conflict_flags": [
+        "Keyword false positive corrected"
+      ],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS SKIN CLEASER 1L",
+      "current_category": "medicine",
+      "current_category_status": "proposed",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "product_primary_source",
+      "source_ids": [
+        "T-HY-SKIN-FDA"
+      ],
+      "reason": "Exact Skin Cleanser product line is named in FDA Household Remedy drug record.",
+      "remaining_limitations": "No historical presentation, unit or authenticity verification.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS SKIN CLEANSER",
+      "current_category": "medicine",
+      "current_category_status": "proposed",
+      "recommended_category": "medicine",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "product_primary_source",
+      "source_ids": [
+        "T-HY-SKIN-FDA"
+      ],
+      "reason": "Exact Skin Cleanser product line is named in FDA Household Remedy drug record.",
+      "remaining_limitations": "No historical presentation, unit or authenticity verification.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "NEBULIZER KIT - CHINA",
+      "current_category": "medical_supply",
+      "current_category_status": "proposed",
+      "recommended_category": "medical_supply",
+      "category_evidence_result": "retain_proposal",
+      "evidence_basis": "prior_user_classification_plus_product_type",
+      "source_ids": [
+        "T-KIT-USER-RECEIPT",
+        "T-AIRLIFE-KIT"
+      ],
+      "reason": "Existing accessory proposal follows the recorded prior user instruction and compatible respiratory-accessory product-type evidence.",
+      "remaining_limitations": "No independent brand/model/kit-contents/disposable-status confirmation for each historical item; no human approval fabricated.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "BOUFFANT CAP S24",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "cross_industry_product_type",
+      "source_ids": [
+        "T-CAP-MEDLINE"
+      ],
+      "reason": "Caps are disposable head coverings across clinical and nonclinical settings; unbranded title does not establish clinical category.",
+      "remaining_limitations": "Request supplier specification or sales context establishing medical-supply use; avoid treatingCAP as capsule.",
+      "prior_conflict_flags": [
+        "Keyword false positive corrected"
+      ],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HYCLENS WOUND CARE 7.5ML",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold_subtype",
+      "evidence_basis": "product_family_primary_source",
+      "source_ids": [
+        "T-HY-GALENX"
+      ],
+      "reason": "Named Wound Care line and 7.5/15/60 mL sizes are supported, but cannot inherit the separate Wound Spray device classification.",
+      "remaining_limitations": "Medical intended use supported; medicine-versus-supply taxonomy subtype needs exact label/registration evidence.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "COTTON APPLICATOR (STERILE, SMALL HEAD)",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "insufficient_specific_evidence",
+      "source_ids": [],
+      "reason": "No source-specific category evidence established in this targeted review.",
+      "remaining_limitations": "Obtain exact product description and clinical/nonclinical intended use; no approval inferred.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "COTTON ROLL 400G - ADAMSON DAISY",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "insufficient_specific_evidence",
+      "source_ids": [],
+      "reason": "No source-specific category evidence established in this targeted review.",
+      "remaining_limitations": "Obtain exact product description and clinical/nonclinical intended use; no approval inferred.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HAPPY COTTON 40G",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "insufficient_specific_evidence",
+      "source_ids": [],
+      "reason": "No source-specific category evidence established in this targeted review.",
+      "remaining_limitations": "Obtain exact product description and clinical/nonclinical intended use; no approval inferred.",
+      "prior_conflict_flags": [
+        "Keyword false positive corrected"
+      ],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "COTTON APPLICATOR (STERILE, BIG HEAD)",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "insufficient_specific_evidence",
+      "source_ids": [],
+      "reason": "No source-specific category evidence established in this targeted review.",
+      "remaining_limitations": "Obtain exact product description and clinical/nonclinical intended use; no approval inferred.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "APPLICATOR STICKS COTTON-TIPPED (PARTNERS)",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "insufficient_specific_evidence",
+      "source_ids": [],
+      "reason": "No source-specific category evidence established in this targeted review.",
+      "remaining_limitations": "Obtain exact product description and clinical/nonclinical intended use; no approval inferred.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "BOUFFANT CAP/HEADCAP",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "cross_industry_product_type",
+      "source_ids": [
+        "T-CAP-MEDLINE"
+      ],
+      "reason": "Caps are disposable head coverings across clinical and nonclinical settings; unbranded title does not establish clinical category.",
+      "remaining_limitations": "Request supplier specification or sales context establishing medical-supply use; avoid treatingCAP as capsule.",
+      "prior_conflict_flags": [
+        "Keyword false positive corrected"
+      ],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "COTTON ROLL 80GRAMS",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "insufficient_specific_evidence",
+      "source_ids": [],
+      "reason": "No source-specific category evidence established in this targeted review.",
+      "remaining_limitations": "Obtain exact product description and clinical/nonclinical intended use; no approval inferred.",
+      "prior_conflict_flags": [],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    },
+    {
+      "raw_product": "HAPPY COTTON 10MG",
+      "current_category": "unclassified",
+      "current_category_status": "needs_review",
+      "recommended_category": "unclassified",
+      "category_evidence_result": "hold",
+      "evidence_basis": "insufficient_specific_evidence",
+      "source_ids": [],
+      "reason": "No source-specific category evidence established in this targeted review.",
+      "remaining_limitations": "Obtain exact product description and clinical/nonclinical intended use; no approval inferred.",
+      "prior_conflict_flags": [
+        "Keyword false positive corrected"
+      ],
+      "category_approval_granted": false,
+      "identity_approval_granted": false,
+      "unit_approval_granted": false,
+      "forecast_approval_granted": false
+    }
+  ],
+  "limitations": [
+    "Evidence-supported category proposals are not human business approval",
+    "Exact historical SKU/units/forecast eligibility were outside scope",
+    "Search-index contents are not represented as successfuldirect retrieval",
+    "Named product-line matches can support category despite unresolvedpack/route/strength; do not merge these identities",
+    "Unbranded multi-purpose items remain held unless clinical use or category policy is evidenced"
+  ]
+}

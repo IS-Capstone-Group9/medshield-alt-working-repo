@@ -1,0 +1,39 @@
+{
+  "checked_at": "2026-10-08T08:56:49.630Z",
+  "sources": [
+    {
+      "url": "https://quezoncity.gov.ph/wp-content/uploads/2024/06/PO-2405070.pdf",
+      "file": "PO-2405070.pdf",
+      "pages": [
+        2
+      ],
+      "sha256": "bee3618f1db9075be3a5daaa59c6939f29b10b32e2b8667948629dae7496e797"
+    },
+    {
+      "url": "https://ambpharma.com/wp-content/uploads/2021/07/ambcatalog.pdf",
+      "file": "ambcatalog.pdf",
+      "pages": [
+        8
+      ],
+      "sha256": "23748228e81b255f819461c2afbec2b4b9205c89d147446444b1576cd6e650d8"
+    }
+  ],
+  "decisions": [
+    {
+      "raw_product": "LOCAINE 50ML",
+      "decision": "Quezon City PO 2405070 PDF page 2 lists Eurocaine / Anestin / Locaine / Lido as alternative lidocaine hydrochloride brands, with a 2%, 50 mL presentation. Alternatives are not aliases. Missing historical concentration, form or container values are not backfilled from this purchase order."
+    },
+    {
+      "raw_product": "LOCAINE 2% 50ML",
+      "decision": "Quezon City PO 2405070 PDF page 2 lists Eurocaine / Anestin / Locaine / Lido as alternative lidocaine hydrochloride brands, with a 2%, 50 mL presentation. Alternatives are not aliases. Missing historical concentration, form or container values are not backfilled from this purchase order."
+    },
+    {
+      "raw_product": "EUROCAINE",
+      "decision": "Quezon City PO 2405070 PDF page 2 lists Eurocaine / Anestin / Locaine / Lido as alternative lidocaine hydrochloride brands, with a 2%, 50 mL presentation. Alternatives are not aliases. Missing historical concentration, form or container values are not backfilled from this purchase order."
+    },
+    {
+      "raw_product": "SANOXIN-1000",
+      "decision": "AMB Pharma catalog page 8 identifies SANOXIN 1000 as cefoxitin sodium 1000 mg powder for injection. Strength and form are catalog-supported proposals; the historical transaction presentation, SKU and sales unit are not verified."
+    }
+  ]
+}

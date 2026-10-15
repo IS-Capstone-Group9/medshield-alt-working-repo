@@ -1,4 +1,11 @@
 # Databricks notebook source
+# /// script
+# [tool.databricks.environment]
+# environment_version = "6"
+# dependencies = [
+#   "statsmodels",
+# ]
+# ///
 # MAGIC %pip install statsmodels
 
 # COMMAND ----------

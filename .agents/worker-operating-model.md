@@ -18,7 +18,7 @@ Every worker must connect their output to a business outcome, a technical change
    - Confirm whether the work is discovery, design, implementation, review, testing, documentation, or operations.
 
 2. Context Review
-   - Read project instructions, decisions, requirements, architecture, setup, security, database, testing, and deployment docs before making changes.
+   - Read project instructions and the selected role, then read/apply its Required skills under the [skill-loading contract](execution-contract.md#skill-loading-contract). Follow the canonical decisions, requirements, and boundary docs for the affected task; do not load unrelated docs by default.
    - Inspect the current code, schema, APIs, workflows, and tests touched by the request.
    - Separate facts from assumptions and list anything that must be verified.
 
@@ -69,6 +69,7 @@ Every worker must connect their output to a business outcome, a technical change
 | Test strategy, defects, regression checks | QA Engineer | Frontend Engineer, Backend Engineer, Business Analyst |
 | Service levels, support, incidents, change management | Service Manager | DevOps Engineer, Security Engineer, Technical Writer |
 | Documentation, setup, runbooks, release notes | Technical Writer | Owning implementation worker, QA Engineer, Service Manager |
+| Analytics lessons, helper coaching, applied practice, instruction evaluation | [Analytics Learning Coach](analytics-learning-coach.md) | Technical Writer, Data Analyst, BI Specialist, QA Engineer as needed |
 | Code review before merge or release | Code Reviewer | Owning implementation worker, Security Engineer, QA Engineer |
 
 ## Assignment Rules
@@ -92,6 +93,7 @@ Each worker should ask for or discover:
 - Affected components, APIs, data sources, integrations, and environments.
 - Known constraints, deadlines, risks, and non-goals.
 - Existing decisions, standards, and templates that apply.
+- Primary and applicable conditional skills from the selected role's Required skills section.
 - Acceptance criteria and verification evidence.
 
 ## Standard Outputs
@@ -111,6 +113,7 @@ Each worker should produce outputs that another role can act on:
 - DevOps Engineer: pipeline changes, environment notes, deployment and rollback steps.
 - Service Manager: support model, incident/change guidance, service targets, runbook needs.
 - Technical Writer: current docs, setup instructions, release notes, runbooks.
+- Analytics Learning Coach: reviewed lesson concepts, source/slide mappings, corrected practice tasks, feedback, and bounded evaluation records; see the [coaching skill](../.skills/analytics-lesson-coaching/SKILL.md).
 - Code Reviewer: blocking findings, non-blocking suggestions, missing tests, residual risk.
 - Orchestrator: ordered plan, dependency map, milestone status, final integration summary.
 
@@ -120,6 +123,7 @@ Work is ready to implement when:
 
 - The user or business objective is clear.
 - Acceptance criteria are testable.
+- The selected role's primary and applicable conditional skills have been read and applied to the plan.
 - The affected layers and owners are known.
 - Key data, security, and architecture risks have been reviewed.
 - Required dependencies, environment variables, migrations, or external services are identified.
@@ -131,6 +135,7 @@ Work is done when:
 
 - The requested behavior or document update exists in the repository.
 - The implementation follows the project stack and local patterns.
+- The handoff identifies the skills applied and how they informed the assigned work.
 - Relevant tests, builds, lint checks, or manual verification have been run.
 - Business, architecture, data, security, analytics, and operations impacts are either addressed or explicitly marked as not applicable.
 - Documentation is updated when setup, behavior, architecture, deployment, or support flow changes.
@@ -138,20 +143,7 @@ Work is done when:
 
 ## Handoff Template
 
-Use this structure for worker-to-worker handoffs:
-
-```text
-Context:
-Decision or change:
-Files or systems affected:
-Business impact:
-Technical impact:
-Data impact:
-Security impact:
-Verification performed:
-Open risks:
-Next worker:
-```
+Use the [execution contract's assignment and handoff record](execution-contract.md#assignment-and-handoff-record). Role files add specialist inputs, decisions, failure checks, and recipient requirements rather than repeating the shared lifecycle. For each assignment, name exact allowed files and decisions, dependency owners, and the evidence the recipient must check before using the result.
 
 ## Conflict Resolution
 

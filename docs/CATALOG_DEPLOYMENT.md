@@ -1,132 +1,168 @@
-# Catalog candidate: operator deployment and rollback
+# Accepted-category preparation, execution and recovery
 
-This is a prepared local package, not a deployment or CEO release decision. Do not
-run these write steps until the operator has a controlled candidate maintenance
-window. Keep the application pinned to its current fact throughout preparation.
-Never replace recorded CEO decisions or treat technical PASS as business approval.
+Updated 8 October 2026. The current package accepts product categories for
+descriptive reporting under Adrian's instruction. It is bound to predecessor
+fact **19** on `sales_restart_gold_v7_independent_catalog`. Cloud deployment,
+serving activation and CEO release acceptance remain separate steps. Earlier
+version-16 and draft-only packages are historical.
 
-## Bound predecessor and package
+Gold Cell 3 was corrected on 9 October 2026: category acceptance preserves the
+predecessor provisional-demand flag, so its original scope must be validated
+against the predecessor rather than the newly accepted reporting category. The
+old 8 October package has a contradictory final assertion. Use the corrected
+Gold source or latest 9 October package. Reference CSV/category-receipt/helper
+bytes are unchanged. The publication descriptor was refreshed for three newer
+Silver/validation table versions after all 55 current Silver fields were proven
+equal to fact19. Use the refreshed descriptor together with corrected Gold.
+The [9 October capture](../outputs/catalog_preparation/2026-10-09T03-03-37-411Z/predecessor-receipt.json)
+binds 29 stable dependencies, 37,728 unique records and the same source identity.
+See [the correction and regression evidence](../outputs/gold_assertion_fix_20261009/README.md).
 
-- Dataset: `b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4`.
-- Fact Delta version: **16**, Gold policy `sales_restart_gold_v6_reviewed_source_provenance`.
-- Previous product master SHA-256: `8a34ce4946d2b99f896b1dec9e93dd5865ece8fee5e582c64dc6c5b798cca921`.
-- New header-only master SHA-256: `1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088`.
-- Target policy: `sales_restart_gold_v7_independent_catalog`; resolution: `catalog_v1_independent_evidence`.
-- [Local reconciliation receipt](../outputs/product_catalog_implementation/2026-09-27T07-51-00-423Z/summary.json).
-- Full fact receipt SHA-256: `883a13a752211c5fff7dc9c43552a1dec4ec48eccfb2319f6506b9ff46e64341`.
+## Current decisions and bound artifacts
 
-`python databricks/medshield_project/package_catalog.py` creates the local ZIP and
-manifest in `outputs/catalog_deployment/`. The manifest binds the current Git HEAD,
-exact notebook/helper/application file hashes, preparation master/evidence hashes,
-and local receipts. The working tree is not a clean commit; file hashes, not HEAD
-alone, identify this package. Preserve existing unrelated work when committing later.
+All 4,561 labels have accepted reporting dispositions: 598 medicine, 646 medical
+supply, 131 equipment, 209 nonmedical and 2,977 Unclassified. Unclassified is an
+accepted reporting bucket with unresolved underlying category. The four medicine
+gaps are accepted as medicine; 14 nebulizer kits are supplies/accessories.
+Historical SKU, package, sales-unit, item-kind and forecast approvals remain
+pending. Every alias and sales record is retained.
 
-## Preflight and capture
+Both CSV copies are 4,755,483 bytes, SHA-256
+`2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29`.
+The [category receipt](../databricks/medshield_project/references/category_acceptance.json)
+records actual user-directed provenance, per-label decisions and original/new
+master hashes. It grants no business-release, SKU/unit or forecast approval.
+[Full-file checks](../outputs/category_acceptance_20261008/README.md) independently
+reconcile the inherited fact19 label totals: 37,728 records and net sales
+₱626,946,741.81, including Unclassified and signed returns.
 
-1. Stop concurrent pipeline jobs through the Databricks operator controls. Save
-   current job/notebook revisions, environment configuration and gateway revision.
-   Keep `DATABRICKS_DESCRIPTIVE_FACT_VERSION=16` in the currently serving gateway.
-2. Run and save `DESCRIBE HISTORY workspace.medshield_gold.sales_restart_fact_candidate LIMIT 1`.
-   It must still be 16 and its dataset must match the identity above. If not, stop:
-   refresh the complete read-only profile and rebind the catalog migration and receipts.
-3. Save every table's current Delta version from the Gold publication table:
-   `SELECT table_name FROM workspace.medshield_audit.sales_restart_gold_publication_candidate`.
-   For each returned table, execute `DESCRIBE HISTORY <table_name> LIMIT 1` and save
-   its version. Also capture the publication table and
-   `workspace.medshield_gold.sales_restart_stl_candidate` histories. Save `SHOW CREATE TABLE`
-   for each bridge view created by 04/05, plus the old notebook files and reference CSVs.
-   Do not VACUUM retained rollback versions.
-4. Run locally:
+The shared [descriptor](../databricks/medshield_project/references/catalog_publication.json)
+uses `category_acceptance_only` and binds all 144 fact columns. Exactly seven
+fields may change: `product_category`, `category_status`, `display_category`,
+`product_scope_status`, `catalog_evidence_source`, `product_master_sha256` and
+`gold_published_at`. All other **137 fields** must equal their predecessor values,
+including prices, financial amounts, original/adjusted provenance, identity,
+quantities, quality and demand eligibility. Three scope-derived demand gates are
+explicitly copied from the predecessor before rebuilding marts. This prevents
+category acceptance from changing quantity eligibility.
+
+Gold and gateway validation compare every accepted category transition to its
+bound receipt, as well as exact schema/type and immutable-value equality.
+Contract/hashtag scopes remain explicit. Categories do not create verified SKUs.
+The old draft mode still rejects approved statuses. Future source ingestion
+requires a separate source-change contract and review of new aliases.
+
+The [earlier 8 October read-only capture](../outputs/catalog_preparation/2026-10-08T09-42-03-926Z/predecessor-receipt.json)
+confirms 37,728 unique records, all 55 Silver source fields equal, 29 stable
+dependencies and two bridge definitions. The [earlier same-day retention/access
+check](../outputs/medicine_review_20261008/cloud-check.json) found captured versions
+readable; 28 tables lacked explicit retention overrides and fact19 had 30-day
+file/log retention. Neither check proves durable recovery. Workspace and Jobs
+access returned HTTP403. Deployment and isolated recovery rehearsal remain
+operator steps requiring suitable access.
+
+## Local checks and package
+
+From the repository root:
+
+```powershell
+python outputs/category_acceptance_20261008/verify.py
+python -m unittest discover -s databricks/medshield_project/tests
+python databricks/medshield_project/render_readme.py --check
+python databricks/medshield_project/package_catalog.py
+```
+
+From `backend`: `node --import tsx --test tests/catalog-contract.test.ts`.
+Local checks cover missing/duplicate decisions, tampered categories/quantities,
+forbidden independent approvals, identical copies and Unclassified financial
+partitions. They do not prove a replacement's cloud/API/STL execution.
+
+Packaging writes a dated ZIP, manifest and checksums under
+`outputs/catalog_deployment/`, including actual working-tree sources, descriptor,
+receipt, archived original CSV, predecessor receipt, evidence and current runbook.
+It states `ready_for_execution=false` and `recovery_rehearsal_verified=false`
+until operator prerequisites pass. Credentials are excluded. Older ZIPs with a
+different master hash must not be substituted.
+
+Any CSV edit invalidates the descriptor/package. Archive the previous descriptor,
+then run `node --import tsx scripts/prepare-catalog-publication.ts --category-acceptance`
+from `backend` for a fresh read-only capture. The script currently expects19 and
+creates the descriptor exclusively. A changed baseline requires review, not a
+weakened guard. Keep the serving pin19 throughout preparation.
+
+## Before warehouse writes
+
+1. Arrange controlled maintenance, stop concurrent pipeline jobs and preserve
+   deployed notebooks/helpers/references/application revisions.
+2. Recheck all 29 dependency versions and uploaded artifact hashes. Changed
+   data/code identities require fresh preparation; do not mix package versions.
+3. Verify retained files and readability for every rollback version. Save durable
+   recovery artifacts where retention is insufficient, covering all Gold/audit
+   outputs, publication audit, STL, source inputs and bridge definitions. Do not
+   VACUUM files needed for recovery.
+4. Rehearse recovery in isolated targets and save the actual result before
+   treating the package as executable. A version number or longer retention
+   alone is insufficient.
+
+Token scope and resource ACLs are separate. The operator needs the applicable
+workspace edit, job/compute and Run as catalog/schema/table privileges. Keep
+credentials server-side and out of the package/browser.
+
+## Exact upload set
+
+Use the files in the new category ZIP after the prerequisites. Verify uploaded
+bytes against its manifest. Upload helpers/JSON as workspace files beside Gold;
+do not paste them into extra notebook cells.
+
+| File | Destination |
+|---|---|
+| `03_sales_gold.py` | Replace all cells of `/Workspace/medshield/medshield_project/03_sales_gold` |
+| `product_catalog.py` (unchanged; verify bytes) | `/Workspace/medshield/medshield_project/product_catalog.py` |
+| `catalog_publication.py` | `/Workspace/medshield/medshield_project/catalog_publication.py` |
+| `references/catalog_publication.json` | `/Workspace/medshield/medshield_project/references/catalog_publication.json` |
+| `references/category_acceptance.json` | `/Workspace/medshield/medshield_project/references/category_acceptance.json` |
+| `product_master_review.csv` | `/Workspace/medshield/medshield_reference_csv/product_master_review.csv` |
+| `transaction_evidence_review.csv` (unchanged) | `/Workspace/medshield/medshield_reference_csv/transaction_evidence_review.csv` |
+| `area_classification_mapping.csv` (unchanged) | `/Workspace/medshield/medshield_reference_csv/area_classification_mapping.csv` |
+| `likely_non_medical_product_candidates.csv` (unchanged) | `/Workspace/medshield/medshield_reference_csv/likely_non_medical_product_candidates.csv` |
+
+Verify existing **04 monthly bridge**, **05 system bridge** and **06 STL** against
+packaged sources; replace if different. Preserve Bronze/Silver and the already
+ingested source files for this category-only publication. The archived original
+CSV and preparation receipts are recovery/evidence artifacts in the package;
+Gold consumes the current master, descriptor and category receipt above.
+
+## Execute and validate
+
+1. Run **03 Gold from Cell 1 → 04 monthly bridge → 05 system bridge → 06 STL**.
+   Keep jobs stopped throughout. Gold checks every category decision, all 137
+   immutable fields and dependency histories immediately before writing. Do not
+   rerun 01/02 for this category-only operation.
+2. Record actual new fact version **V**, every output version, job IDs and hashes.
+   Do not assume the next version number or reuse old execution receipts.
+3. In a separate validation shell in `backend`, set V for that shell only:
 
    ```powershell
-   python -m unittest discover -s databricks/medshield_project/tests
-   python databricks/medshield_project/render_readme.py --check
-   python databricks/medshield_project/package_catalog.py
-   ```
-
-   Verify ZIP and manifest hashes and compare the deployed product/evidence CSV
-   bytes to the authoritative preparation masters. The package script fails on
-   divergent copies. Product and transaction-evidence masters remain header-only;
-   adding reviewed entries creates a new package/hash and requires new tests/receipts.
-
-## Candidate execution (no activation)
-
-1. Import `03_sales_gold.py` and `06_sales_stl.py` as notebooks under
-   `/Workspace/medshield/medshield_project/`. Upload `product_catalog.py` there as
-   a **Python file**, preserving its bytes. Gold checks its SHA-256 before execution.
-   Upload the two preparation CSVs to `/Workspace/medshield/medshield_reference_csv/`.
-   Preserve the existing area master and nonmedical suggestion reference. Verify all
-   uploaded bytes against the package manifest. Gold prints the product master and
-   records product, helper, resolution and transaction-evidence identities in the fact.
-2. Run **03 Gold only** from Cell 1 to completion. It compares source records,
-   financial values and financial eligibility to fact version 16 before writing.
-   Do not run Bronze/Silver: their inputs and logic have not changed in this task.
-   A mismatch is a deployment stop, not permission to weaken the assertion.
-3. Run **04 monthly bridge → 05 system bridge → 06 STL** in that order. Upload
-   unchanged 04/05 from the package if required. STL requires the v7 policy and
-   records its source fact version. If any job fails, keep the application at 16;
-   repair and rerun the candidate sequence before validation.
-4. Capture the new fact version **V**, every new output version, the publication
-   table, STL version, dataset, mapping hashes, resolution policy, helper hash and
-   job run IDs. These are observed deployment values; do not assume V is 17.
-5. In a separate backend validation shell, set the candidate version only for that
-   shell, not the serving process:
-
-   ```powershell
-   Set-Location C:\Users\Adrian\projects\medshield1\medshield\backend
-   $env:DATABRICKS_DESCRIPTIVE_FACT_VERSION = '<V from step 4>'
+   $env:DATABRICKS_DESCRIPTIVE_FACT_VERSION = '<observed V>'
    node --import tsx scripts/publication-readiness.ts
    node --import tsx scripts/validate-descriptive.ts
    node --import tsx scripts/validate-catalog.ts
    ```
 
-   All required checks must pass; catalog validation must report warehouse_catalog
-   PASS, not legacy NOT_DEPLOYED. Save and hash the receipts. Confirm exact financial
-   reconciliation, category partitions, source IDs, evidence guards, STL identity,
-   original aliases, filtered ABC, and compatible-unit quantities. The earlier
-   version-16 receipt only proves compatibility, not candidate cloud execution.
+   Catalog validation requires V greater than19, exact hashes, identical schema,
+   null-safe equality of every immutable field and exact per-label categories.
+   Save matching warehouse/API/STL and authenticated dashboard/export receipts.
+   A business release gate can remain pending after technical checks pass.
 
-## Controlled activation
+## Partial failure, recovery and activation
 
-Only after the CEO's separate, explicit, version-bound acceptance of the intended
-scope: record that actual decision outside this task, referencing dataset, V,
-product/evidence/helper hashes, resolution policy, exact notebook/application
-revision, related output versions and the new reconciliation receipt SHA-256.
-Deploy the matching application artifact; set the serving gateway's
-`DATABRICKS_DESCRIPTIVE_FACT_VERSION=V` and restart it once. Verify `/api/products`,
-`/api/sales/sectors`, `/api/sales/heatmap` and STL all identify V. Verify company totals,
-category selection, returns, unresolved coverage, aliases and exports. No local
-test pass authorizes these activation steps.
+Each write is atomic; the group is not. After partial failure, dependency guards
+prevent a blind rerun. Stop jobs, recover changed outputs with the rehearsed
+procedure, restore bridges/code/references and verify the complete group.
+RESTORE creates a new latest version; capture a new descriptor before retrying
+even if restored data equals the original. Preserve original receipts.
 
-## Rollback
-
-1. Stop candidate jobs. Restore the previous application artifact/configuration,
-   set the gateway fact pin to **16** (or the captured previously approved version),
-   and restart. Confirm fact-derived endpoints identify that exact version/dataset.
-2. If candidate table writes or bridge replacements affect dependent consumers,
-   restore **each** changed pre-existing candidate table to its captured preflight
-   version, using this exact SQL form per saved table/version:
-
-   ```sql
-   RESTORE TABLE workspace.medshield_gold.sales_restart_fact_candidate TO VERSION AS OF 16;
-   -- Repeat RESTORE TABLE <captured table> TO VERSION AS OF <captured version>
-   -- for all changed Gold/audit outputs, publication table and STL.
-   ```
-
-   RESTORE creates a new latest Delta version; keep the application's explicit pin
-   at retained version 16. Restore the saved 04/05 view definitions and old notebook,
-   helper and reference files. Do not drop the new canonical dimension; leave it
-   unused for investigation. Never delete Bronze/Silver/source archives.
-3. Restore the matching retained STL output or leave STL explicitly unavailable;
-   do not serve components bound to another fact version. Re-run read-only financial
-   and endpoint checks against the restored version and record a rollback receipt.
-   Publication-readiness must be run against the matching restored preparation
-   master; the v7 header hash deliberately differs from v6.
-
-## Status boundaries
-
-Implemented and locally verified: deterministic resolution, validation, review
-outputs, Gold package, typed API/UI, safe exports and exact offline reconciliation.
-Not deployed or approved: Gold v7, new dimensions/mappings, notebook execution,
-candidate activation, product approvals and final CEO release decision. The
-historical batch does not implement future client uploads or stable DR line IDs.
+Keep serving pin19 with matching STL, or show STL unavailable on identity mismatch.
+Successful notebooks/tests and `PASS_CANDIDATE` do not record CEO acceptance.
+Activate the new pin only after the applicable separately recorded version-bound
+release acceptance in the canonical publication-readiness contract.

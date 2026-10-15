@@ -1,0 +1,413 @@
+{
+  "status": "PASS",
+  "delivery_scope": "Existing predictive experiment interpretation and presentation; operational forecasting remains open",
+  "checked_at_utc": "2026-10-10T05:00:23.393398+00:00",
+  "user_timezone": "Asia/Manila",
+  "command": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\.venv-predictive\\Scripts\\python.exe -X utf8 outputs/predictive_explanation_20261010/seal_delivery.py",
+  "python_version": "3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]",
+  "git_head": "cc03b4c05398880b18987eca5ca9c1e140bf9dcb",
+  "dirty_tree_identity": "Hashes bind final task files and reused model code/artifacts; unrelated pre-existing edits preserved.",
+  "check_summary": {
+    "passed": 75,
+    "failed": 0
+  },
+  "numerical_verification": {
+    "passed": 1126,
+    "failed": 0
+  },
+  "separately_recomputed_metric_groups": 399,
+  "review_mode": "Root self-review using a separately authored verifier; root repaired schema/table assertions and executed it. The supporting QA agent did not complete its own verification turn.",
+  "source_identity": {
+    "run_id": "eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a",
+    "input_sha256": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba",
+    "fact_delta_version": 20,
+    "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4"
+  },
+  "file_hashes": {
+    "docs\\ANALYTICS.md": {
+      "sha256": "4b345d952250c04a89343c250be2399a176acc3a9010f6368702f1e18e41c168",
+      "bytes": 11937
+    },
+    "docs\\CHAPTER_3_METHODOLOGY_GUIDE.md": {
+      "sha256": "85c0edcb8290d6705f621854a97dc57a77304fee6a99b87fb6485872754f9bf9",
+      "bytes": 8323
+    },
+    "docs\\CHAPTER_4_5_EVIDENCE_PLAN.md": {
+      "sha256": "8b4d4a936f5c820fc897e3f5df1d57f59342fb93fcf16d7d57184cb5ad5af1c0",
+      "bytes": 7275
+    },
+    "docs\\CURRENT_STATE.md": {
+      "sha256": "50f0b9ba7b34c7b25c5ce278171d2a7b4c1beda5c2896e6a52f00bd739dfb3c5",
+      "bytes": 46103
+    },
+    "docs\\DOCUMENTATION_INDEX.md": {
+      "sha256": "a9b94ad3b8eed63e0eb9d81ad8a6bb28ce9b09d69374a5416ac71dbbd99fee82",
+      "bytes": 7653
+    },
+    "docs\\logic\\PREDICTIVE_ANALYTICS_EXPLAINER.md": {
+      "sha256": "596179ca3af766c51721d9f36cea22e1a7d08cf089d56baa4b8fb756bc0e945b",
+      "bytes": 10228
+    },
+    "docs\\PREDICTIVE_OPERATIONS.md": {
+      "sha256": "c10e0d15c459a018c2ff994eaedf6cdf01951d11a16e1a98c826f4c7106a00bb",
+      "bytes": 15843
+    },
+    "outputs\\predictive_explanation_20261010\\derivation-receipt.json": {
+      "sha256": "1689fe1f9be2243cfb2ccbf10a0d4db8ade36a3e2ec8d309643ed0a6cd8c2495",
+      "bytes": 415849
+    },
+    "outputs\\predictive_explanation_20261010\\derive-scorecard.py": {
+      "sha256": "6cf6f006c8ad115eb9358f72aea6d09d81d6c0e5ed46411194aef6057382f9ae",
+      "bytes": 30996
+    },
+    "outputs\\predictive_explanation_20261010\\qa\\REVIEW.md": {
+      "sha256": "120405352e62cb0e63c319bb145a15922456316b4a7c9d3e5da5a0bbd32fd339",
+      "bytes": 2479
+    },
+    "outputs\\predictive_explanation_20261010\\qa\\verification-first.json": {
+      "sha256": "760744f2b39432c9707efa6830f376931f77710fd76174a5659f7c58307c3c9b",
+      "bytes": 118961
+    },
+    "outputs\\predictive_explanation_20261010\\qa\\verification-first.sha256": {
+      "sha256": "e502c4bcac2f61044f1fdd6814209050af236ef6eca3ab00932a3ce74e4fd2fa",
+      "bytes": 66
+    },
+    "outputs\\predictive_explanation_20261010\\qa\\verification.json": {
+      "sha256": "beb225fae9a1c9101b51c83ae6bc82245033a93c20b5f39d611dc8c3390227bf",
+      "bytes": 118960
+    },
+    "outputs\\predictive_explanation_20261010\\qa\\verification.sha256": {
+      "sha256": "49dd6a76074e51c5652c7c58e4f7685986b84c279ff3071a094173c3990e9584",
+      "bytes": 66
+    },
+    "outputs\\predictive_explanation_20261010\\qa\\verify_scorecard.py": {
+      "sha256": "7938f5510dfa3683242b97339a8c3f56b91c5ca54b37ac4245d5a15e7fd24ade",
+      "bytes": 23532
+    },
+    "outputs\\predictive_explanation_20261010\\qa\\verify_scorecard_first.py": {
+      "sha256": "0653183950386ebf2f09369cbe3a24c6f68ae0d8d86cf269453dd97c25f77039",
+      "bytes": 23067
+    },
+    "outputs\\predictive_explanation_20261010\\README.md": {
+      "sha256": "ea91a32791d37b406b9ebbbcc1b1f8cda0f39c401a5ff01896a5ce7f45047ca7",
+      "bytes": 6628
+    },
+    "outputs\\predictive_explanation_20261010\\scorecard.json": {
+      "sha256": "8a0b0476e474870a38ec412ef2889585f450c9c46f3f357d58e8505b1c151dda",
+      "bytes": 479044
+    },
+    "outputs\\predictive_explanation_20261010\\SCORECARD.md": {
+      "sha256": "fb339ce7daf05429140295f17f324c7262af49daaff98e1614e84afcd8048ea2",
+      "bytes": 9950
+    },
+    "outputs\\predictive_explanation_20261010\\seal_delivery.py": {
+      "sha256": "47c8bed15d5fee650840cd89c2b57a895ab2e0570244cc29ed560bb373c0e2b2",
+      "bytes": 6373
+    }
+  },
+  "checks": [
+    {
+      "check": "QA pass",
+      "status": "PASS"
+    },
+    {
+      "check": "QA separate metric calculation",
+      "status": "PASS"
+    },
+    {
+      "check": "QA receipt sidecar",
+      "status": "PASS"
+    },
+    {
+      "check": "QA verifier identity",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged model artifact protocol.json",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged model artifact RESULTS.md",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged model artifact coverage.json",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged model artifact evaluations.json",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged model artifact folds.json",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged model artifact input-manifest.json",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged model artifact model-cards.json",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged model artifact predictions.json",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged model artifact run.json",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged model artifact warnings.json",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged scorecard scorecard.json",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged scorecard SCORECARD.md",
+      "status": "PASS"
+    },
+    {
+      "check": "builder script identity",
+      "status": "PASS"
+    },
+    {
+      "check": "input identity",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged model code contracts.py",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged model code engine.py",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged model code extended_experiment.py",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged model code metrics.py",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged model code models.py",
+      "status": "PASS"
+    },
+    {
+      "check": "first-attempt receipt retained",
+      "status": "PASS"
+    },
+    {
+      "check": "first-attempt checksum",
+      "status": "PASS"
+    },
+    {
+      "check": "first-attempt verifier snapshot",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\logic\\PREDICTIVE_ANALYTICS_EXPLAINER.md:4:../CURRENT_STATE.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\logic\\PREDICTIVE_ANALYTICS_EXPLAINER.md:5:../PREDICTIVE_OPERATIONS.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\logic\\PREDICTIVE_ANALYTICS_EXPLAINER.md:39:../../services/analytics_service/predictive/models.py",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\logic\\PREDICTIVE_ANALYTICS_EXPLAINER.md:84:../../outputs/predictive_completion_20261009/models/fixed-origin-extended/eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a/RESULTS.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\logic\\PREDICTIVE_ANALYTICS_EXPLAINER.md:92:../../outputs/predictive_completion_20261009/model-comparison.png",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\logic\\PREDICTIVE_ANALYTICS_EXPLAINER.md:96:../CURRENT_STATE.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\logic\\PREDICTIVE_ANALYTICS_EXPLAINER.md:100:../../outputs/predictive_explanation_20261010/SCORECARD.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\logic\\PREDICTIVE_ANALYTICS_EXPLAINER.md:104:../../outputs/predictive_completion_20261009/audit-comparison.png",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\logic\\PREDICTIVE_ANALYTICS_EXPLAINER.md:111:../../outputs/predictive_readiness_20261010/SOURCE_OWNER_REVIEW.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\logic\\PREDICTIVE_ANALYTICS_EXPLAINER.md:152:../PREDICTIVE_OPERATIONS.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\CHAPTER_3_METHODOLOGY_GUIDE.md:86:logic/PREDICTIVE_ANALYTICS_EXPLAINER.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\CHAPTER_3_METHODOLOGY_GUIDE.md:88:../outputs/predictive_explanation_20261010/SCORECARD.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\CHAPTER_3_METHODOLOGY_GUIDE.md:89:CURRENT_STATE.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\CHAPTER_4_5_EVIDENCE_PLAN.md:11:logic/PREDICTIVE_ANALYTICS_EXPLAINER.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\CHAPTER_4_5_EVIDENCE_PLAN.md:12:../outputs/predictive_explanation_20261010/SCORECARD.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\CHAPTER_4_5_EVIDENCE_PLAN.md:13:../outputs/predictive_completion_20261009/README.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\CHAPTER_4_5_EVIDENCE_PLAN.md:15:CURRENT_STATE.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\DOCUMENTATION_INDEX.md:35:PREDICTIVE_OPERATIONS.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\DOCUMENTATION_INDEX.md:36:logic/PREDICTIVE_ANALYTICS_EXPLAINER.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\CURRENT_STATE.md:5:logic/PREDICTIVE_ANALYTICS_EXPLAINER.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\CURRENT_STATE.md:6:../outputs/predictive_explanation_20261010/SCORECARD.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\CURRENT_STATE.md:20:../outputs/predictive_explanation_20261010/README.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\PREDICTIVE_OPERATIONS.md:5:logic/PREDICTIVE_ANALYTICS_EXPLAINER.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\PREDICTIVE_OPERATIONS.md:7:../outputs/predictive_explanation_20261010/SCORECARD.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\PREDICTIVE_OPERATIONS.md:10:../outputs/predictive_explanation_20261010/README.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\PREDICTIVE_OPERATIONS.md:13:CURRENT_STATE.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\ANALYTICS.md:5:CURRENT_STATE.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\ANALYTICS.md:6:logic/PREDICTIVE_ANALYTICS_EXPLAINER.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\ANALYTICS.md:8:../outputs/predictive_explanation_20261010/SCORECARD.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\ANALYTICS.md:10:../outputs/predictive_explanation_20261010/README.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link outputs\\predictive_explanation_20261010\\README.md:9:../../docs/logic/PREDICTIVE_ANALYTICS_EXPLAINER.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link outputs\\predictive_explanation_20261010\\README.md:10:SCORECARD.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link outputs\\predictive_explanation_20261010\\README.md:11:scorecard.json",
+      "status": "PASS"
+    },
+    {
+      "check": "local link outputs\\predictive_explanation_20261010\\README.md:11:derivation-receipt.json",
+      "status": "PASS"
+    },
+    {
+      "check": "local link outputs\\predictive_explanation_20261010\\README.md:11:qa/verification.json",
+      "status": "PASS"
+    },
+    {
+      "check": "local link outputs\\predictive_explanation_20261010\\README.md:11:qa/REVIEW.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link outputs\\predictive_explanation_20261010\\README.md:13:delivery.json",
+      "status": "PASS"
+    },
+    {
+      "check": "local link outputs\\predictive_explanation_20261010\\README.md:51:qa/verification-first.json",
+      "status": "PASS"
+    },
+    {
+      "check": "local link outputs\\predictive_explanation_20261010\\README.md:80:../predictive_readiness_20261010/SOURCE_OWNER_REVIEW.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link outputs\\predictive_explanation_20261010\\README.md:82:../../docs/PREDICTIVE_OPERATIONS.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link outputs\\predictive_explanation_20261010\\README.md:83:../../docs/CURRENT_STATE.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link outputs\\predictive_explanation_20261010\\qa\\REVIEW.md:4:verification.json",
+      "status": "PASS"
+    },
+    {
+      "check": "local link outputs\\predictive_explanation_20261010\\qa\\REVIEW.md:15:verification-first.json",
+      "status": "PASS"
+    },
+    {
+      "check": "local link outputs\\predictive_explanation_20261010\\qa\\REVIEW.md:16:verify_scorecard_first.py",
+      "status": "PASS"
+    },
+    {
+      "check": "Python syntax outputs\\predictive_explanation_20261010\\derive-scorecard.py",
+      "status": "PASS"
+    },
+    {
+      "check": "Python syntax outputs\\predictive_explanation_20261010\\qa\\verify_scorecard.py",
+      "status": "PASS"
+    },
+    {
+      "check": "Python syntax outputs\\predictive_explanation_20261010\\qa\\verify_scorecard_first.py",
+      "status": "PASS"
+    },
+    {
+      "check": "Python syntax outputs\\predictive_explanation_20261010\\seal_delivery.py",
+      "status": "PASS"
+    },
+    {
+      "check": "runtime/publication outside delivery scope",
+      "status": "PASS"
+    }
+  ],
+  "no_new_model_fit": true,
+  "no_remote_mutations": true,
+  "inherited_runtime_checks": true
+}

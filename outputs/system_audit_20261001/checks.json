@@ -1,0 +1,37 @@
+{
+  "review_date": "2026-10-01",
+  "mode": "read-only review; local audit outputs only",
+  "warehouse_fact_version": 17,
+  "configured_fact_version": 16,
+  "publication_readiness": {
+    "pass": 72,
+    "fail": 0,
+    "unverified": 0
+  },
+  "descriptive_validation": {
+    "configured_16": "FAIL: matching STL absent",
+    "process_override_17": "PASS"
+  },
+  "catalog_validation_17": "PASS",
+  "backend_tests": {
+    "passed": 42
+  },
+  "notebook_tests": {
+    "passed": 40
+  },
+  "chart_integrity_fixture_tests": {
+    "passed": 9
+  },
+  "backend_typecheck": "PASS",
+  "frontend_typecheck": "PASS",
+  "forecast_metric_groups_recomputed": 30,
+  "all_metric_groups_match": true,
+  "missing_report_links": [],
+  "paper_sha256": "4c40147be0de0563e2a58bc0210c0a13cf850bf1382577fff497422b44ebe862",
+  "limitations": [
+    "No application or warehouse edits",
+    "No authenticated production browser flow",
+    "No complete security audit",
+    "No business approval"
+  ]
+}

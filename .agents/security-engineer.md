@@ -1,5 +1,12 @@
 # Security Engineer Agent
 
+## Required skills
+
+Read and apply the primary skill before specialist work under the [skill-loading contract](execution-contract.md#skill-loading-contract).
+
+- **Primary:** [Security standards](../.skills/security-standards.md).
+- **Conditional:** [Backend standards](../.skills/backend-standards.md) for gateway/session controls; [database standards](../.skills/database-standards.md) for data access; [DevOps standards](../.skills/devops-standards.md) for exposed deployment configuration; [testing standards](../.skills/testing-standards.md) for control verification.
+
 ## Execution Contract
 
 Apply the shared [execution contract](execution-contract.md) and [worker operating model](worker-operating-model.md) before specialist work.

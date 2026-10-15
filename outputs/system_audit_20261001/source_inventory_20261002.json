@@ -1,0 +1,1090 @@
+{
+  "mode": "read-only source inventory",
+  "sales": [
+    {
+      "file": "databricks/medshield_project_csv/medshield_project_csv/medshield_data_2017.csv",
+      "bytes": 740101,
+      "sha256": "15edfe33e5365e047d57556eb8a2dc9581b89b1f59f98449b983f0483f2b9c77",
+      "first_row": [
+        "MEDSHIELD PHARMA CORP",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "physical_rows_after_first": 15283,
+      "looks_like_html_error": false,
+      "header_only": false
+    },
+    {
+      "file": "databricks/medshield_project_csv/medshield_project_csv/medshield_data_2018.csv",
+      "bytes": 503447,
+      "sha256": "d7a1b8ad107e176e642aab540e464eab05b19dc116131b712c33e29fb355b200",
+      "first_row": [
+        "MEDSHIELD PHARMA CORP",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "physical_rows_after_first": 4363,
+      "looks_like_html_error": false,
+      "header_only": false
+    },
+    {
+      "file": "databricks/medshield_project_csv/medshield_project_csv/medshield_data_2019.csv",
+      "bytes": 1270693,
+      "sha256": "3afc789aa0ad798da14cbe87153049eb7f7d7ca15df944a8e27b25f97d419fc8",
+      "first_row": [
+        "MEDSHIELD PHARMA CORP",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "physical_rows_after_first": 10324,
+      "looks_like_html_error": false,
+      "header_only": false
+    },
+    {
+      "file": "databricks/medshield_project_csv/medshield_project_csv/medshield_data_2020.csv",
+      "bytes": 495396,
+      "sha256": "d5d17c2c6514a652294a23426e8ff9c35b5410d9a65a8273cd0dd6e573254a62",
+      "first_row": [
+        "MEDSHIELD PHARMA CORP",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "physical_rows_after_first": 4038,
+      "looks_like_html_error": false,
+      "header_only": false
+    },
+    {
+      "file": "databricks/medshield_project_csv/medshield_project_csv/medshield_data_2021.csv",
+      "bytes": 483905,
+      "sha256": "c1cc109b73a0b073a051cd2fbdd7df2e0c2c8ea52a98be8b8c443b0388d12477",
+      "first_row": [
+        "MEDSHIELD PHARMA CORP",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "physical_rows_after_first": 4759,
+      "looks_like_html_error": false,
+      "header_only": false
+    },
+    {
+      "file": "databricks/medshield_project_csv/medshield_project_csv/medshield_data_2022.csv",
+      "bytes": 551812,
+      "sha256": "1f28cacdcdc537065828cf809f8d0ae4bb55891a1317fe6c306d2b4b5b2caf74",
+      "first_row": [
+        "MEDSHIELD PHARMA CORP",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "physical_rows_after_first": 4037,
+      "looks_like_html_error": false,
+      "header_only": false
+    },
+    {
+      "file": "databricks/medshield_project_csv/medshield_project_csv/medshield_data_2023.csv",
+      "bytes": 791507,
+      "sha256": "83e4509c84e0c2b6c379071593e589b5207842fd469430fe317e5e9a70368cea",
+      "first_row": [
+        "MEDSHIELD PHARMA CORP",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "physical_rows_after_first": 5896,
+      "looks_like_html_error": false,
+      "header_only": false
+    },
+    {
+      "file": "databricks/medshield_project_csv/medshield_project_csv/medshield_data_2024.csv",
+      "bytes": 453866,
+      "sha256": "12ebda6996de76cf6af6c958485900fb81597f6f7f19dec4c8eea066919fb938",
+      "first_row": [
+        "MEDSHIELD PHARMA CORP",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "physical_rows_after_first": 5772,
+      "looks_like_html_error": false,
+      "header_only": false
+    },
+    {
+      "file": "databricks/medshield_project_csv/medshield_project_csv/medshield_data_2025.csv",
+      "bytes": 473296,
+      "sha256": "d05fec98a3a312416118fab4d11ca1f6e0c19f1951248b7b22fcc518eeb15569",
+      "first_row": [
+        "MEDSHIELD PHARMA CORP",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "physical_rows_after_first": 4549,
+      "looks_like_html_error": false,
+      "header_only": false
+    }
+  ],
+  "review_masters": [
+    {
+      "file": "databricks/medshield_reference_csv/medshield_reference_csv/area_classification_mapping.csv",
+      "bytes": 12109,
+      "sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+      "first_row": [
+        "raw_area",
+        "standard_area",
+        "area_type",
+        "territory",
+        "customer_type",
+        "business_line",
+        "weather_eligible",
+        "forecast_eligible",
+        "mapping_status",
+        "review_notes",
+        "territory_id",
+        "region",
+        "province",
+        "city_municipality",
+        "geographic_level",
+        "evidence_source",
+        "evidence_status",
+        "external_mapping_status"
+      ],
+      "physical_rows_after_first": 35,
+      "looks_like_html_error": false,
+      "header_only": false
+    },
+    {
+      "file": "databricks/medshield_reference_csv/medshield_reference_csv/likely_non_medical_product_candidates.csv",
+      "bytes": 95151,
+      "sha256": "e6055d5303427c8d9c4c755c85e1bf0f5f1b42e4f4d44b2d894a87c1600a9e48",
+      "first_row": [
+        "raw_product",
+        "proposed_category",
+        "matched_rules",
+        "proposed_is_medicine",
+        "forecast_eligible",
+        "mapping_status",
+        "review_notes",
+        "row_count",
+        "accepted_rows",
+        "estimated_contract_rows",
+        "quantity",
+        "total_trade_price",
+        "net_cost",
+        "net_income",
+        "first_sale_date",
+        "last_sale_date",
+        "years_seen",
+        "sample_areas"
+      ],
+      "physical_rows_after_first": 330,
+      "looks_like_html_error": false,
+      "header_only": false
+    },
+    {
+      "file": "databricks/medshield_reference_csv/medshield_reference_csv/product_master_review.csv",
+      "bytes": 412,
+      "sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+      "first_row": [
+        "raw_product",
+        "canonical_sku",
+        "canonical_title",
+        "representative_raw_product",
+        "product_category",
+        "category_status",
+        "identity_status",
+        "item_kind",
+        "item_kind_status",
+        "unit_of_measure",
+        "unit_status",
+        "forecast_eligible",
+        "forecast_status",
+        "mapping_status",
+        "evidence_source",
+        "reviewed_by",
+        "reviewed_at",
+        "review_notes",
+        "brand",
+        "manufacturer",
+        "model",
+        "strength",
+        "concentration",
+        "dosage_form",
+        "container_size",
+        "packaging_unit",
+        "pack_count",
+        "contained_unit",
+        "bundle_specification"
+      ],
+      "physical_rows_after_first": 0,
+      "looks_like_html_error": false,
+      "header_only": true
+    },
+    {
+      "file": "databricks/medshield_reference_csv/medshield_reference_csv/transaction_evidence_review.csv",
+      "bytes": 119,
+      "sha256": "5e1a839d551293b51149e7c35d863ce680573e02275f65d17512d6099ff88786",
+      "first_row": [
+        "source_record_id",
+        "source_file_sha256",
+        "verification_status",
+        "verified_detail_scope",
+        "evidence_source",
+        "reviewed_by",
+        "reviewed_at"
+      ],
+      "physical_rows_after_first": 0,
+      "looks_like_html_error": false,
+      "header_only": true
+    }
+  ],
+  "external": [
+    {
+      "file": "datasources/raw/pagasa/stations/Baguio_Daily_Data.csv",
+      "bytes": 46766,
+      "sha256": "e6e2615f1b5155a82d353e2be685a70db46f034b29d9bf33e1f38e32a9e113ed",
+      "first_row": [
+        "YEAR",
+        "MONTH",
+        "DAY",
+        "RAINFALL",
+        "TMAX",
+        "TMIN",
+        "RH",
+        "WIND_SPEED",
+        "WIND_DIRECTION"
+      ],
+      "physical_rows_after_first": 1461,
+      "looks_like_html_error": false,
+      "header_only": false
+    },
+    {
+      "file": "datasources/raw/pagasa/stations/Clark_Daily_Data.csv",
+      "bytes": 47155,
+      "sha256": "a1593ef7ef69728da00ebc8896744cef3224643cbbccb80347fcd287ebc366ac",
+      "first_row": [
+        "YEAR",
+        "MONTH",
+        "DAY",
+        "RAINFALL",
+        "TMAX",
+        "TMIN",
+        "RH",
+        "WIND_SPEED",
+        "WIND_DIRECTION"
+      ],
+      "physical_rows_after_first": 1461,
+      "looks_like_html_error": false,
+      "header_only": false
+    },
+    {
+      "file": "datasources/raw/pagasa/stations/Dagupan_Daily_Data.csv",
+      "bytes": 45628,
+      "sha256": "ef0abd470a98a8f99b9592b7a80fb87dad8efcfa69e9c2f50d3afcfda0d77f43",
+      "first_row": [
+        "YEAR",
+        "MONTH",
+        "DAY",
+        "RAINFALL",
+        "TMAX",
+        "TMIN",
+        "RH",
+        "WIND_SPEED",
+        "WIND_DIRECTION"
+      ],
+      "physical_rows_after_first": 1461,
+      "looks_like_html_error": false,
+      "header_only": false
+    },
+    {
+      "file": "datasources/raw/pagasa/stations/Davao_City_Daily_Data.csv",
+      "bytes": 47171,
+      "sha256": "abe25e848364e0d033081b93e24cb6e7c45ab011c78f5b5c61904ce5b6204af2",
+      "first_row": [
+        "YEAR",
+        "MONTH",
+        "DAY",
+        "RAINFALL",
+        "TMAX",
+        "TMIN",
+        "RH",
+        "WIND_SPEED",
+        "WIND_DIRECTION"
+      ],
+      "physical_rows_after_first": 1461,
+      "looks_like_html_error": false,
+      "header_only": false
+    },
+    {
+      "file": "datasources/raw/pagasa/stations/Iloilo_Daily_Data.csv",
+      "bytes": 64,
+      "sha256": "bdbdc05049e86594a4a0d8a7dc41e13e1f990a4de8e75abca4c972889e600680",
+      "first_row": [
+        "YEAR",
+        "MONTH",
+        "DAY",
+        "RAINFALL",
+        "TMAX",
+        "TMIN",
+        "RH",
+        "WIND_SPEED",
+        "WIND_DIRECTION"
+      ],
+      "physical_rows_after_first": 0,
+      "looks_like_html_error": false,
+      "header_only": true
+    },
+    {
+      "file": "datasources/raw/pagasa/stations/Mactan_Daily_Data.csv",
+      "bytes": 46777,
+      "sha256": "1b1bac033d8d7d63f3211d62bd3eddeb9f9fa1cdce55a7ef62206861412e5b91",
+      "first_row": [
+        "YEAR",
+        "MONTH",
+        "DAY",
+        "RAINFALL",
+        "TMAX",
+        "TMIN",
+        "RH",
+        "WIND_SPEED",
+        "WIND_DIRECTION"
+      ],
+      "physical_rows_after_first": 1461,
+      "looks_like_html_error": false,
+      "header_only": false
+    },
+    {
+      "file": "datasources/raw/pagasa/stations/NAIA_Daily_Data.csv",
+      "bytes": 1652,
+      "sha256": "4af8a7e3be0a35ebb2e2031c1a26f5f4e9e584320f1c31d1554f30df34b78a7d",
+      "first_row": [
+        "<html lang=\"en\" dir=ltr><meta charset=utf-8><meta name=viewport content=\"initial-scale=1",
+        " minimum-scale=1",
+        " width=device-width\"><title>Error 404 (Not Found)!!1</title><style nonce=\"E_LAgA-CUwk7eXVkMhdShA\">*{margin:0;padding:0}html",
+        "code{font:15px/22px arial",
+        "sans-serif}html{background:#fff;color:#222;padding:15px}body{color:#222;text-align:unset;margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px;}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}pre{white-space:pre-wrap;}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat;-webkit-background-size:100% 100%}}#logo{display:inline-block;height:54px;width:150px}</style><main id=\"af-error-container\" role=\"main\"><a href=//www.google.com><span id=logo aria-label=Google role=img></span></a><p><b>404.</b> <ins>That’s an error.</ins><p>The requested URL was not found on this server. <ins>That’s all we know.</ins></main>"
+      ],
+      "physical_rows_after_first": 0,
+      "looks_like_html_error": true,
+      "header_only": true
+    },
+    {
+      "file": "datasources/raw/pagasa/stations/Port_Area_Daily_Data.csv",
+      "bytes": 32460,
+      "sha256": "2c8e392c7cb9207673a7c9c74514bdb510b3c9a7f7a2a6c923bce96c5d581c47",
+      "first_row": [
+        "YEAR",
+        "MONTH",
+        "DAY",
+        "RAINFALL",
+        "TMAX",
+        "TMIN",
+        "RH",
+        "WIND_SPEED",
+        "WIND_DIRECTION"
+      ],
+      "physical_rows_after_first": 1034,
+      "looks_like_html_error": false,
+      "header_only": false
+    },
+    {
+      "file": "datasources/raw/pagasa/stations/Science_Garden_Daily_Data.csv",
+      "bytes": 47044,
+      "sha256": "6fa62e800d71674b0c838f0eea35bd5f33fca5fb4bbe45f8f4ea8a3424c405c7",
+      "first_row": [
+        "YEAR",
+        "MONTH",
+        "DAY",
+        "RAINFALL",
+        "TMAX",
+        "TMIN",
+        "RH",
+        "WIND_SPEED",
+        "WIND_DIRECTION"
+      ],
+      "physical_rows_after_first": 1461,
+      "looks_like_html_error": false,
+      "header_only": false
+    },
+    {
+      "file": "datasources/raw/pagasa/stations/Zamboanga_Daily_Data.csv",
+      "bytes": 46911,
+      "sha256": "fe9a4626cf3464fdbd98e8199a940d888f971fcb36b378873ccdb6a64e3dea1c",
+      "first_row": [
+        "YEAR",
+        "MONTH",
+        "DAY",
+        "RAINFALL",
+        "TMAX",
+        "TMIN",
+        "RH",
+        "WIND_SPEED",
+        "WIND_DIRECTION"
+      ],
+      "physical_rows_after_first": 1461,
+      "looks_like_html_error": false,
+      "header_only": false
+    },
+    {
+      "file": "datasources/raw/doh/[#DOH-313647129213] Weekly Reported Cases 2021-2025 (1).xlsx",
+      "bytes": 3792828,
+      "sha256": "2e213d139b820dd83ef4ddcafdab7d2969301646512075d4c8a1cc2841df6a16",
+      "sheets": [
+        {
+          "name": "Copy of Data Request Form",
+          "first_nonempty_rows": [],
+          "reported_rows": null,
+          "reported_columns": null
+        },
+        {
+          "name": "Case Definition",
+          "first_nonempty_rows": [
+            [
+              "Disease",
+              "Case Definition",
+              null,
+              null
+            ],
+            [
+              "Vaccine-Preventable Diseases",
+              null,
+              null,
+              null
+            ]
+          ],
+          "reported_rows": null,
+          "reported_columns": null
+        },
+        {
+          "name": "Format",
+          "first_nonempty_rows": [
+            [
+              "Year",
+              "Morbidity Week",
+              "Region",
+              "Province",
+              "Cases",
+              "Deaths"
+            ]
+          ],
+          "reported_rows": null,
+          "reported_columns": null
+        },
+        {
+          "name": "Zoo_Mpox",
+          "first_nonempty_rows": [
+            [
+              "Year",
+              "Morbidity Week",
+              "Region",
+              "Province",
+              "Cases",
+              "Deaths"
+            ],
+            [
+              "2022.0",
+              "28.0",
+              "NCR (National Capital Region)",
+              "CITY OF MUNTINLUPA",
+              "1.0",
+              "0.0"
+            ]
+          ],
+          "reported_rows": null,
+          "reported_columns": null
+        },
+        {
+          "name": "Zoo_Rabies",
+          "first_nonempty_rows": [
+            [
+              "Year",
+              "Morbidity Week",
+              "Region",
+              "Province",
+              "Cases",
+              "Deaths"
+            ],
+            [
+              "2021.0",
+              "1.0",
+              "REGION I (ILOCOS REGION)",
+              "ILOCOS SUR",
+              "1.0",
+              "1.0"
+            ]
+          ],
+          "reported_rows": null,
+          "reported_columns": null
+        },
+        {
+          "name": "Zoo_Leptospirosis",
+          "first_nonempty_rows": [
+            [
+              "Year",
+              "Morbidity Week",
+              "Region",
+              "Province",
+              "Cases",
+              "Deaths"
+            ],
+            [
+              "2021.0",
+              "1.0",
+              "CORDILLERA ADMINISTRATIVE REGION (CAR)",
+              "APAYAO",
+              "1.0",
+              "0.0"
+            ]
+          ],
+          "reported_rows": null,
+          "reported_columns": null
+        },
+        {
+          "name": "FWBD_Cholera",
+          "first_nonempty_rows": [
+            [
+              "Year",
+              "Morbidity Week",
+              "Region",
+              "Province/City",
+              "Cases",
+              "Deaths"
+            ],
+            [
+              "2021.0",
+              "1.0",
+              "REGION V (BICOL REGION)",
+              "CAMARINES SUR",
+              "1.0",
+              "0.0"
+            ]
+          ],
+          "reported_rows": null,
+          "reported_columns": null
+        },
+        {
+          "name": "FWBD_ABD",
+          "first_nonempty_rows": [
+            [
+              "Year",
+              "Morbidity Week",
+              "Region",
+              "Province/City",
+              "Cases",
+              "Deaths"
+            ],
+            [
+              "2021.0",
+              "1.0",
+              "BANGSAMORO AUTONOMOUS REGION IN MUSLIM MINDANAO (BARMM)",
+              "BASILAN",
+              "1.0",
+              "0.0"
+            ]
+          ],
+          "reported_rows": null,
+          "reported_columns": null
+        },
+        {
+          "name": "FWBD_Rotavirus",
+          "first_nonempty_rows": [
+            [
+              "Year",
+              "Morbidity Week",
+              "Region",
+              "Province/City",
+              "Cases",
+              "Deaths"
+            ],
+            [
+              "2021.0",
+              "1.0",
+              "NEGROS ISLAND REGION (NIR)",
+              "CITY OF BACOLOD",
+              "1.0",
+              "0.0"
+            ]
+          ],
+          "reported_rows": null,
+          "reported_columns": null
+        },
+        {
+          "name": "FWBD_Typhoid",
+          "first_nonempty_rows": [
+            [
+              "Year",
+              "Morbidity Week",
+              "Region",
+              "Province/City",
+              "Cases",
+              "Deaths"
+            ],
+            [
+              "2021.0",
+              "1.0",
+              "BANGSAMORO AUTONOMOUS REGION IN MUSLIM MINDANAO (BARMM)",
+              "BASILAN",
+              "1.0",
+              "0.0"
+            ]
+          ],
+          "reported_rows": null,
+          "reported_columns": null
+        },
+        {
+          "name": "MBD_Dengue",
+          "first_nonempty_rows": [
+            [
+              "Year",
+              "Morbidity Week",
+              "Region",
+              "Province",
+              "Cases",
+              "Deaths"
+            ],
+            [
+              "2021.0",
+              "1.0",
+              "BANGSAMORO AUTONOMOUS REGION IN MUSLIM MINDANAO (BARMM)",
+              "LANAO DEL SUR",
+              "3.0",
+              "0.0"
+            ]
+          ],
+          "reported_rows": null,
+          "reported_columns": null
+        },
+        {
+          "name": "MBD_Chikungunya",
+          "first_nonempty_rows": [
+            [
+              "Year",
+              "Morbidity Week",
+              "Region",
+              "Province",
+              "Cases",
+              "Deaths"
+            ],
+            [
+              "2021.0",
+              "1.0",
+              "REGION IX (ZAMBOANGA PENINSULA)",
+              "ZAMBOANGA DEL SUR",
+              "1.0",
+              "0.0"
+            ]
+          ],
+          "reported_rows": null,
+          "reported_columns": null
+        },
+        {
+          "name": "Pan-respi_COVID-19",
+          "first_nonempty_rows": [
+            [
+              "Year",
+              "Morbidity Week",
+              "Region",
+              "Province",
+              "Cases",
+              "Deaths"
+            ],
+            [
+              "2021.0",
+              "1.0",
+              "BANGSAMORO AUTONOMOUS REGION IN MUSLIM MINDANAO (BARMM)",
+              "BASILAN",
+              "54.0",
+              "0.0"
+            ]
+          ],
+          "reported_rows": null,
+          "reported_columns": null
+        },
+        {
+          "name": "Pan-respi_SARI",
+          "first_nonempty_rows": [
+            [
+              "Year",
+              "Morbidity Week",
+              "Region",
+              "Province",
+              "Cases",
+              "Deaths"
+            ],
+            [
+              "2021.0",
+              "1.0",
+              "CORDILLERA ADMINISTRATIVE REGION (CAR)",
+              "BENGUET",
+              "1.0",
+              "0.0"
+            ]
+          ],
+          "reported_rows": null,
+          "reported_columns": null
+        },
+        {
+          "name": "Pan-respi_ILI",
+          "first_nonempty_rows": [
+            [
+              "Year",
+              "Morbidity Week",
+              "Region",
+              "Province",
+              "Cases",
+              "Deaths"
+            ],
+            [
+              "2021.0",
+              "1.0",
+              "REGION IV-A (CALABARZON)",
+              "CAVITE",
+              "63.0",
+              "0.0"
+            ]
+          ],
+          "reported_rows": null,
+          "reported_columns": null
+        },
+        {
+          "name": "Others_HFMD",
+          "first_nonempty_rows": [
+            [
+              "Year",
+              "Morbidity Week",
+              "Region",
+              "Province",
+              "Cases",
+              "Deaths"
+            ],
+            [
+              "2023.0",
+              "1.0",
+              "BANGSAMORO AUTONOMOUS REGION IN MUSLIM MINDANAO (BARMM)",
+              "SULU",
+              "1.0",
+              "0.0"
+            ]
+          ],
+          "reported_rows": null,
+          "reported_columns": null
+        },
+        {
+          "name": "Others_Meningococcal Disease",
+          "first_nonempty_rows": [
+            [
+              "Year",
+              "Morbidity Week",
+              "Region",
+              "Province",
+              "Cases",
+              "Deaths"
+            ],
+            [
+              "2021.0",
+              "2.0",
+              "NATIONAL CAPITAL REGION (NCR)",
+              "CITY OF MARIKINA",
+              "1.0",
+              "1.0"
+            ]
+          ],
+          "reported_rows": null,
+          "reported_columns": null
+        },
+        {
+          "name": "Others_AMES",
+          "first_nonempty_rows": [
+            [
+              "Year",
+              "Morbidity Week",
+              "Region",
+              "Province",
+              "Cases",
+              "Deaths"
+            ],
+            [
+              "2021.0",
+              "1.0",
+              "BANGSAMORO AUTONOMOUS REGION IN MUSLIM MINDANAO (BARMM)",
+              "LANAO DEL SUR",
+              "3.0",
+              "2.0"
+            ]
+          ],
+          "reported_rows": null,
+          "reported_columns": null
+        }
+      ]
+    },
+    {
+      "file": "datasources/raw/doh/DOH_Request_Daily_Breakdown_Weekly_Summary_2021_2025.xlsx",
+      "bytes": 20152115,
+      "sha256": "fbb4325924996226668952b4d79a7bd50f72b58d5eee4d8669bf6d75be897d78",
+      "sheets": [
+        {
+          "name": "DataRequest",
+          "first_nonempty_rows": [],
+          "reported_rows": null,
+          "reported_columns": null
+        },
+        {
+          "name": "Case Def",
+          "first_nonempty_rows": [
+            [
+              "Disease",
+              "Case Definition"
+            ],
+            [
+              "DM 2024-0333",
+              "DM 2024-0333 Clarification on the Use of Case Definitions of Mandatory Notifiabl"
+            ]
+          ],
+          "reported_rows": null,
+          "reported_columns": null
+        },
+        {
+          "name": "ILI",
+          "first_nonempty_rows": [
+            [
+              "LINK for ILI data: ILI: Request for Daily Breakdown and Weekly Summary of Diseas",
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          ],
+          "reported_rows": null,
+          "reported_columns": null
+        },
+        {
+          "name": "Cholera",
+          "first_nonempty_rows": [
+            [
+              "Year",
+              "Morbidity Week",
+              "Onset Date",
+              "Region ",
+              "Province/City",
+              "Municipality/City",
+              "Cases"
+            ],
+            [
+              "2021.0",
+              "1.0",
+              "2021-01-01 00:00:00",
+              "REGION V (BICOL REGION)",
+              "CATANDUANES",
+              "SAN ANDRES",
+              "1.0"
+            ]
+          ],
+          "reported_rows": null,
+          "reported_columns": null
+        },
+        {
+          "name": "Typhoid Fever",
+          "first_nonempty_rows": [
+            [
+              "Year",
+              "Morbidity Week",
+              "Onset Date",
+              "Region ",
+              "Province/City",
+              "Municipality/City",
+              "Cases"
+            ],
+            [
+              "2021.0",
+              "1.0",
+              "2021-01-01 00:00:00",
+              "BANGSAMORO AUTONOMOUS REGION IN MUSLIM MINDANAO (BARMM)",
+              "BASILAN",
+              "CITY OF LAMITAN",
+              "1.0"
+            ]
+          ],
+          "reported_rows": null,
+          "reported_columns": null
+        },
+        {
+          "name": "Dengue",
+          "first_nonempty_rows": [
+            [
+              "Year",
+              "Morbidity Week",
+              "Onset Date",
+              "Region ",
+              "Province/City",
+              "Municipality/City",
+              "Cases"
+            ],
+            [
+              "2021.0",
+              "1.0",
+              "2021-01-01 00:00:00",
+              "BANGSAMORO AUTONOMOUS REGION IN MUSLIM MINDANAO (BARMM)",
+              "LANAO DEL SUR",
+              "CITY OF MARAWI",
+              "1.0"
+            ]
+          ],
+          "reported_rows": null,
+          "reported_columns": null
+        },
+        {
+          "name": "Leptospirosis",
+          "first_nonempty_rows": [
+            [
+              "Year",
+              "Morbidity Week",
+              "Onset Date",
+              "Region ",
+              "Province/City",
+              "Municipality/City",
+              "Cases"
+            ],
+            [
+              "2021.0",
+              "1.0",
+              "2021-01-01 00:00:00",
+              "CORDILLERA ADMINISTRATIVE REGION (CAR)",
+              "KALINGA",
+              "RIZAL",
+              "1.0"
+            ]
+          ],
+          "reported_rows": null,
+          "reported_columns": null
+        }
+      ]
+    },
+    {
+      "file": "datasources/raw/pagasa/PAR_0km_2021_2024.xlsx",
+      "bytes": 8125,
+      "sha256": "2cefa0bfc7cb5dcd36beac8efb469c64f7182dc9d79b4ab73f42df5daf7ea0d3",
+      "sheets": [
+        {
+          "name": "Summary",
+          "first_nonempty_rows": [
+            [
+              "YEAR",
+              "MONTH",
+              "TC_NAME",
+              "TYPE",
+              "PAR BEG",
+              "PAR END",
+              "MSW",
+              "REENTRY"
+            ],
+            [
+              "2021",
+              "2",
+              "AURING",
+              "STS",
+              "2021-02-17 00:00:00",
+              "2021-02-22 00:00:00",
+              "95",
+              null
+            ]
+          ],
+          "reported_rows": 71,
+          "reported_columns": 8
+        }
+      ]
+    }
+  ]
+}

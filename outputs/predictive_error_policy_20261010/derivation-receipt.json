@@ -1,0 +1,1499 @@
+{
+  "schema_version": "1.0",
+  "derived_at_utc": "2026-10-10T06:41:47.247337+00:00",
+  "derived_at_manila": "2026-10-10T14:41:47.247337+08:00",
+  "timezone": "Asia/Manila",
+  "timestamp_semantics": "derivation_execution_time_not_approval_time",
+  "command": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\.venv-predictive\\Scripts\\python.exe -X utf8 outputs/predictive_error_policy_20261010/build_error_policy.py",
+  "argv": [
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\.venv-predictive\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "outputs/predictive_error_policy_20261010/build_error_policy.py"
+  ],
+  "executable": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\.venv-predictive\\Scripts\\python.exe",
+  "python_version": "3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]",
+  "script_path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_policy_20261010\\build_error_policy.py",
+  "script_sha256": "5d9cfdee76eebcdbd6431bee424d354643c206e0394389ea7bd700aeb4654543",
+  "source": {
+    "run_id": "eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a",
+    "run_path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\run.json",
+    "run_sha256": "9889baea07a1f222edc9d2d2576fefc0d2be4bc8e52dc4d9a3ff9919e0056f45",
+    "input_path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_validation\\2026-10-09T13-28-48-501Z\\input.json",
+    "input_sha256": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba",
+    "manifest": {
+      "accepted_descriptive_release_id": "19662860d526ca2efb5ccf4256645211bfb916fb8590060901e6e2573b991def",
+      "catalog_mapping_version": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+      "coverage_receipt_sha256": "aea5d30560eecbc7adb9d0d1024e0337a3df9bdc125503c27aa931a1816ccb82",
+      "coverage_review": {
+        "evidence_reference": "User confirmation in this implementation chat: yes.our evidence is the sales data. please do what's the best decision. Evidence: checksum-bound supplied sales data; reporting completeness user-attested, not independently verified. Gold20 binding inherits that same decision after exact 108-month target/provenance comparison; no new completeness verification or publication decision.",
+        "reviewed_at": "2026-09-27T14:29:23.9926173Z",
+        "reviewer": "Requesting user (session attestation; legal name not supplied)"
+      },
+      "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+      "extracted_at": "2026-10-09T13:28:48.501Z",
+      "fact_delta_version": 20,
+      "geography_mapping_version": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+      "publication_approved": false,
+      "reconciliation_passed": true,
+      "revision_policy": "retrospective_revised_snapshot_no_historical_availability_vintages",
+      "source_available_at": "2026-10-09T07:40:39.615Z",
+      "source_checksum": "19662860d526ca2efb5ccf4256645211bfb916fb8590060901e6e2573b991def",
+      "source_count": 37728,
+      "source_publication_status": "CANDIDATE_PENDING_BUSINESS_AND_PRODUCT_MASTER_REVIEW",
+      "source_table": "workspace.medshield_gold.sales_restart_fact_candidate",
+      "training_approved": true,
+      "transformation_policy": "sales_restart_gold_v7_independent_catalog"
+    },
+    "status": "exploratory_evaluated_unpublished"
+  },
+  "artifact_hash_map_sha256": "41185d0ee810dc446ad90fcf568466b02751f3c6fb5223a7f873878a7da6ab45",
+  "verified_source_artifacts": [
+    {
+      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\protocol.json",
+      "sha256": "ec438baf6f371c570caee425861ffbaf1a44d087a2dd8bd8cc516d303e74f419",
+      "bytes": 7859
+    },
+    {
+      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\RESULTS.md",
+      "sha256": "e64e9b4183dcac57a18e99ce5b770aef8ed8b37f97fcbe2bd79f12ba6e8fbbe3",
+      "bytes": 4702
+    },
+    {
+      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\coverage.json",
+      "sha256": "05347804d72779ff1d93a089385199be750ca2e930baf4408c38e0a924facfdf",
+      "bytes": 36
+    },
+    {
+      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\evaluations.json",
+      "sha256": "c9763ee9ceed55d48aae48a542a5a610d3cc4c9a5cd5a3ae110f3e23df74b647",
+      "bytes": 290241
+    },
+    {
+      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\folds.json",
+      "sha256": "cb6eeea230bd7bc07eada4edf5741d67d731b4c05cc2a15675adc72aaaed0f13",
+      "bytes": 3339
+    },
+    {
+      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\input-manifest.json",
+      "sha256": "fcedce34d7486dc5b311de051be585233e61abaca7b18f618da091d5b8c5bcb8",
+      "bytes": 1719
+    },
+    {
+      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\model-cards.json",
+      "sha256": "4898d8d4bd006b693638767cd80e72e70cc020a1b8c0732ef5e22afcc30ce042",
+      "bytes": 11419
+    },
+    {
+      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\predictions.json",
+      "sha256": "da8ae57f0df557386004b1227bc2ef453f7067a5556d9e9ce5dfd25812c2de42",
+      "bytes": 1451467
+    },
+    {
+      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\run.json",
+      "sha256": "9889baea07a1f222edc9d2d2576fefc0d2be4bc8e52dc4d9a3ff9919e0056f45",
+      "bytes": 1900732
+    },
+    {
+      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\warnings.json",
+      "sha256": "8e92f46c32b3e1369a79d65cd1a57e2cce4b3f13d8178973cb065b8de7fac30f",
+      "bytes": 363
+    }
+  ],
+  "input_sidecar_sha256": "1612b49cbd94ae4d9a80b01e35a01608709ec74185221114bf5622de48ae65e0",
+  "verified_adapter_code": [
+    {
+      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\contracts.py",
+      "sha256": "a6ece04850ba397a84c72309043c9ab6c83c3ee7a4fc1fe4b63f1b82b8b86d3a"
+    },
+    {
+      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\engine.py",
+      "sha256": "cdc5a39363c69f500897e849f2c37ab42c401ed789b6890e6abab808cbbee4c8"
+    },
+    {
+      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\extended_experiment.py",
+      "sha256": "3d88a6aa92bb0b03140ce9830512cd1292d4a6d0fe85ad8bdc190d92b64f3b42"
+    },
+    {
+      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\metrics.py",
+      "sha256": "4841243a2b262d71845596d4d72b44a7aa7447602003cfdb79b971e1d7ac8baa"
+    },
+    {
+      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\models.py",
+      "sha256": "2b2b6495e3ff54b7613800fded65832efc46fc1018ad2fe09f678baf857c4ac9"
+    }
+  ],
+  "models": 21,
+  "metric_groups": 42,
+  "metric_values_compared": 210,
+  "reconciliation_checks": [
+    {
+      "cohort": "last_value/development",
+      "metric": "mae_php",
+      "absolute_difference": "0.0000000000666666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "last_value/development",
+      "metric": "rmse_php",
+      "absolute_difference": "0.0000000007420669379907709821819387017839781",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "last_value/development",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000005304694568925627509286015211933288",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "last_value/development",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.000000000056666666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "last_value/development",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.0000000000000013561300129763295317915474929637796",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "last_value/retrospective_audit",
+      "metric": "mae_php",
+      "absolute_difference": "0.0000000006666666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "last_value/retrospective_audit",
+      "metric": "rmse_php",
+      "absolute_difference": "0.0000000002384835184491472925143223549232272",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "last_value/retrospective_audit",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000000920126667992839711530363357949840",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "last_value/retrospective_audit",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.0000000003333333333333333333333333333333333",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "last_value/retrospective_audit",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.0000000000000010933398731592404438996846782179324",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "seasonal_naive/development",
+      "metric": "mae_php",
+      "absolute_difference": "0.0000000000333333333333333333333333333333333",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "seasonal_naive/development",
+      "metric": "rmse_php",
+      "absolute_difference": "0.0000000003046109112438998754657600637619721",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "seasonal_naive/development",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000002027077282069914752041500769115681",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "seasonal_naive/development",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.0000000002",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "seasonal_naive/development",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000000174154717856613191201116785205630",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "seasonal_naive/retrospective_audit",
+      "metric": "mae_php",
+      "absolute_difference": "0.00",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "seasonal_naive/retrospective_audit",
+      "metric": "rmse_php",
+      "absolute_difference": "0.000000000282717691071451708584140616484914",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "seasonal_naive/retrospective_audit",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000004529539952677065600239808728923176",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "seasonal_naive/retrospective_audit",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.00",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "seasonal_naive/retrospective_audit",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000004529539952677065600239808728923176",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "mean_3/development",
+      "metric": "mae_php",
+      "absolute_difference": "0.0000000000066666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "mean_3/development",
+      "metric": "rmse_php",
+      "absolute_difference": "0.0000000003028399324235660697030548117002462",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "mean_3/development",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000005555126432326262998973505197043683",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "mean_3/development",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.0000000001933333333333333333333333333333333",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "mean_3/development",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000006004380328125674770771792509068189",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "mean_3/retrospective_audit",
+      "metric": "mae_php",
+      "absolute_difference": "0.0000000013333333333333333333333333333333333",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "mean_3/retrospective_audit",
+      "metric": "rmse_php",
+      "absolute_difference": "0.000000001318536864559845211294472549747443",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "mean_3/retrospective_audit",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000004076856768956819001992095861882746",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "mean_3/retrospective_audit",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.0000000006666666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "mean_3/retrospective_audit",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000004327611118137217440608171498127647",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "mean_6/development",
+      "metric": "mae_php",
+      "absolute_difference": "0.0000000001333333333333333333333333333333333",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "mean_6/development",
+      "metric": "rmse_php",
+      "absolute_difference": "0.0000000003692726907016895691818088457105786",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "mean_6/development",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000003126264691997468252015900606212933",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "mean_6/development",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.0000000000133333333333333333333333333333333",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "mean_6/development",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000000291577649010877538478539331500794",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "mean_6/retrospective_audit",
+      "metric": "mae_php",
+      "absolute_difference": "0.000000000166666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "mean_6/retrospective_audit",
+      "metric": "rmse_php",
+      "absolute_difference": "0.000000001585430617736194258955322144616050",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "mean_6/retrospective_audit",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000002441472960867765265323990584428847",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "mean_6/retrospective_audit",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.000000000333333333333333333333333333333333",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "mean_6/retrospective_audit",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000010139980152056656861002669110275053",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "ets_none/development",
+      "metric": "mae_php",
+      "absolute_difference": "0.0000000000533333333333333333333333333333333",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ets_none/development",
+      "metric": "rmse_php",
+      "absolute_difference": "0.0000000001352343884454811820959954529470920",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ets_none/development",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000007825679381382414790317357702170801",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "ets_none/development",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.0000000001533333333333333333333333333333333",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ets_none/development",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000000078890909718581443562260068445619",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "ets_none/retrospective_audit",
+      "metric": "mae_php",
+      "absolute_difference": "0.000000000141666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ets_none/retrospective_audit",
+      "metric": "rmse_php",
+      "absolute_difference": "0.000000000380057051062837504113004008716486",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ets_none/retrospective_audit",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000002941764378378038234349651931874355",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "ets_none/retrospective_audit",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.000000000641666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ets_none/retrospective_audit",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000001083172354701125677942206856299395",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "ets_damped/development",
+      "metric": "mae_php",
+      "absolute_difference": "0.00000000028",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ets_damped/development",
+      "metric": "rmse_php",
+      "absolute_difference": "0.0000000006684097931590904711232231386987895",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ets_damped/development",
+      "metric": "wape_percent",
+      "absolute_difference": "0.00000000000000068873514754803065287744624281566",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "ets_damped/development",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.0000000000433333333333333333333333333333333",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ets_damped/development",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000003490660487809890524047850086919173",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "ets_damped/retrospective_audit",
+      "metric": "mae_php",
+      "absolute_difference": "0.000000001491666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ets_damped/retrospective_audit",
+      "metric": "rmse_php",
+      "absolute_difference": "0.000000000627460393122673810587219714484717",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ets_damped/retrospective_audit",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000000860880793449876728263883936119081",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "ets_damped/retrospective_audit",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.000000000241666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ets_damped/retrospective_audit",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000008104777915667760470247165571356336",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp0.1/development",
+      "metric": "mae_php",
+      "absolute_difference": "0.0000000000766666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp0.1/development",
+      "metric": "rmse_php",
+      "absolute_difference": "0.0000000002211811614731279978317353587734723",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp0.1/development",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000003216311180461358020734692247309625",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp0.1/development",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.0000000002066666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp0.1/development",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000000898002210900003423347326644428979",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp0.1/retrospective_audit",
+      "metric": "mae_php",
+      "absolute_difference": "0.000000000208333333333333333333333333333333",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp0.1/retrospective_audit",
+      "metric": "rmse_php",
+      "absolute_difference": "0.000000001258731154567522876623162080690363",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp0.1/retrospective_audit",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000002482427462446634408591799012866181",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp0.1/retrospective_audit",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.000000001091666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp0.1/retrospective_audit",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000000880110715408629209363060392634659",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp1.0/development",
+      "metric": "mae_php",
+      "absolute_difference": "0.0000000001583333333333333333333333333333333",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp1.0/development",
+      "metric": "rmse_php",
+      "absolute_difference": "0.0000000002660064354661758008476367858859449",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp1.0/development",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000010779542091505718904966887644726930",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp1.0/development",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.0000000002683333333333333333333333333333333",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp1.0/development",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000007477643686835678066028230603225147",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp1.0/retrospective_audit",
+      "metric": "mae_php",
+      "absolute_difference": "0.000000000991666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp1.0/retrospective_audit",
+      "metric": "rmse_php",
+      "absolute_difference": "0.000000000208524809967306667697543132692832",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp1.0/retrospective_audit",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000007587813944751983866055182496132405",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp1.0/retrospective_audit",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.000000000241666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp1.0/retrospective_audit",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000000575911691479130229211615180993505",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp10.0/development",
+      "metric": "mae_php",
+      "absolute_difference": "0.00000000033",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp10.0/development",
+      "metric": "rmse_php",
+      "absolute_difference": "0.0000000001299411765286387742819312557887158",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp10.0/development",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000007400272324363589481035452028977840",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp10.0/development",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.0000000000566666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp10.0/development",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000009113594650354122458222036371249933",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp10.0/retrospective_audit",
+      "metric": "mae_php",
+      "absolute_difference": "0.000000000725",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp10.0/retrospective_audit",
+      "metric": "rmse_php",
+      "absolute_difference": "0.000000000555571147335919640098241036442608",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp10.0/retrospective_audit",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000006016647026322711967898799738772479",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp10.0/retrospective_audit",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.000000000675",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.01_sp10.0/retrospective_audit",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000014124598959736294731885117980122190",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp0.1/development",
+      "metric": "mae_php",
+      "absolute_difference": "0.000000000105",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp0.1/development",
+      "metric": "rmse_php",
+      "absolute_difference": "0.0000000003528344022058880977036461903271497",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp0.1/development",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000012637610540557603026598076574530438",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp0.1/development",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.0000000001016666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp0.1/development",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000001565104805467532012645399181699763",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp0.1/retrospective_audit",
+      "metric": "mae_php",
+      "absolute_difference": "0.000000000241666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp0.1/retrospective_audit",
+      "metric": "rmse_php",
+      "absolute_difference": "0.000000000331017361306722553023577126364084",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp0.1/retrospective_audit",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000008106240943989812868692109263579636",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp0.1/retrospective_audit",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.000000001025",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp0.1/retrospective_audit",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000005190928229521059969087375026977971",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp1.0/development",
+      "metric": "mae_php",
+      "absolute_difference": "0.00000000005",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp1.0/development",
+      "metric": "rmse_php",
+      "absolute_difference": "0.0000000001069479488607738372257031903031919",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp1.0/development",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000004832868349163560038908661700843020",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp1.0/development",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.0000000001833333333333333333333333333333333",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp1.0/development",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000006105469991417470753279689928350525",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp1.0/retrospective_audit",
+      "metric": "mae_php",
+      "absolute_difference": "0.000000000658333333333333333333333333333333",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp1.0/retrospective_audit",
+      "metric": "rmse_php",
+      "absolute_difference": "0.000000000097514385949061844353266243053228",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp1.0/retrospective_audit",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000001873284137515327916541712888045321",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp1.0/retrospective_audit",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.000000000741666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp1.0/retrospective_audit",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000002707336785951181593140438671677021",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp10.0/development",
+      "metric": "mae_php",
+      "absolute_difference": "0.0000000000916666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp10.0/development",
+      "metric": "rmse_php",
+      "absolute_difference": "0.0000000008715836706382145895939429089726593",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp10.0/development",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000012378131176086861173769969851314520",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp10.0/development",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.000000000275",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp10.0/development",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000000480622328346560178540378724201019",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp10.0/retrospective_audit",
+      "metric": "mae_php",
+      "absolute_difference": "0.000000000708333333333333333333333333333333",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp10.0/retrospective_audit",
+      "metric": "rmse_php",
+      "absolute_difference": "0.000000001040346612390706382977159543568458",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp10.0/retrospective_audit",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000012828869031615408544331963805499780",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp10.0/retrospective_audit",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.000000001208333333333333333333333333333333",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.05_sp10.0/retrospective_audit",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000000894259549165784336902781232283852",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp0.1/development",
+      "metric": "mae_php",
+      "absolute_difference": "0.00000000013",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp0.1/development",
+      "metric": "rmse_php",
+      "absolute_difference": "0.0000000000743919564546698798654951264557610",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp0.1/development",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000007144262473135772505270191383707379",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp0.1/development",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.0000000002233333333333333333333333333333333",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp0.1/development",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000001371629468762483839417212119335095",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp0.1/retrospective_audit",
+      "metric": "mae_php",
+      "absolute_difference": "0.000000001991666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp0.1/retrospective_audit",
+      "metric": "rmse_php",
+      "absolute_difference": "0.000000000483326961169764900492058780475336",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp0.1/retrospective_audit",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000005404061817132439003982179607279851",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp0.1/retrospective_audit",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.000000000725",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp0.1/retrospective_audit",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000005128840532788026493121362314379412",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp1.0/development",
+      "metric": "mae_php",
+      "absolute_difference": "0.0000000000583333333333333333333333333333333",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp1.0/development",
+      "metric": "rmse_php",
+      "absolute_difference": "0.0000000000289772978964661601540240888201260",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp1.0/development",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000004973924374733337637626423874446771",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp1.0/development",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.000000000315",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp1.0/development",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000003456815235660013728587054374277620",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp1.0/retrospective_audit",
+      "metric": "mae_php",
+      "absolute_difference": "0.000000000566666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp1.0/retrospective_audit",
+      "metric": "rmse_php",
+      "absolute_difference": "0.000000001059844329123980003184333989442822",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp1.0/retrospective_audit",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000008273097043390383259400033993161073",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp1.0/retrospective_audit",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.0000000001",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp1.0/retrospective_audit",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000000633777663181446317640700793323592",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp10.0/development",
+      "metric": "mae_php",
+      "absolute_difference": "0.000000000215",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp10.0/development",
+      "metric": "rmse_php",
+      "absolute_difference": "0.0000000001087259629979058194079340049429645",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp10.0/development",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000007475829808866440447209808469647154",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp10.0/development",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.0000000003483333333333333333333333333333333",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp10.0/development",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000008680365956604101781855947052713315",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp10.0/retrospective_audit",
+      "metric": "mae_php",
+      "absolute_difference": "0.000000001183333333333333333333333333333333",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp10.0/retrospective_audit",
+      "metric": "rmse_php",
+      "absolute_difference": "0.000000000249876566732549093250266116157032",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp10.0/retrospective_audit",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000000721533364216308031685978470647891",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp10.0/retrospective_audit",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.000000000266666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "prophet_cp0.1_sp10.0/retrospective_audit",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000005460558268049146696415221338360441",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "sarima_ar_seasonal/development",
+      "metric": "mae_php",
+      "absolute_difference": "0.0000000000083333333333333333333333333333333",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "sarima_ar_seasonal/development",
+      "metric": "rmse_php",
+      "absolute_difference": "0.0000000002989557101311492616732487912153084",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "sarima_ar_seasonal/development",
+      "metric": "wape_percent",
+      "absolute_difference": "0.00000000000000046083384099243539535378383570627",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "sarima_ar_seasonal/development",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.000000000495",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "sarima_ar_seasonal/development",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000000687256834961573394576103135046252",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "sarima_ar_seasonal/retrospective_audit",
+      "metric": "mae_php",
+      "absolute_difference": "0.000000000725",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "sarima_ar_seasonal/retrospective_audit",
+      "metric": "rmse_php",
+      "absolute_difference": "0.000000000355708414930407269100408685935017",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "sarima_ar_seasonal/retrospective_audit",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000001125527868436206278113861234305876",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "sarima_ar_seasonal/retrospective_audit",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.0000000006416666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "sarima_ar_seasonal/retrospective_audit",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000003808453068608236153389440015610744",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "sarima_airline/development",
+      "metric": "mae_php",
+      "absolute_difference": "0.0000000003566666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "sarima_airline/development",
+      "metric": "rmse_php",
+      "absolute_difference": "0.0000000003897533915208073072919815483586892",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "sarima_airline/development",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000000460640752768857744942462547098613",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "sarima_airline/development",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.0000000000933333333333333333333333333333333",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "sarima_airline/development",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000000282225801523588656507368355306295",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "sarima_airline/retrospective_audit",
+      "metric": "mae_php",
+      "absolute_difference": "0.0000000002083333333333333333333333333333333",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "sarima_airline/retrospective_audit",
+      "metric": "rmse_php",
+      "absolute_difference": "0.000000001324648119960309765142188777907268",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "sarima_airline/retrospective_audit",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000001551954914792858305851348269698465",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "sarima_airline/retrospective_audit",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.0000000005416666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "sarima_airline/retrospective_audit",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000004045890291927736928794968511613267",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "ridge_direct_a1/development",
+      "metric": "mae_php",
+      "absolute_difference": "0.0000000006185",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ridge_direct_a1/development",
+      "metric": "rmse_php",
+      "absolute_difference": "0.0000000000389236529257278483000499871335000",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ridge_direct_a1/development",
+      "metric": "wape_percent",
+      "absolute_difference": "0.00000000000000174998048687895886717136604731218",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "ridge_direct_a1/development",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.0000000000448333333333333333333333333333333",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ridge_direct_a1/development",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000011151066096650661903399539419455275",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "ridge_direct_a1/retrospective_audit",
+      "metric": "mae_php",
+      "absolute_difference": "0.000000001775",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ridge_direct_a1/retrospective_audit",
+      "metric": "rmse_php",
+      "absolute_difference": "0.000000001868502437667892760561543334085465",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ridge_direct_a1/retrospective_audit",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000016649968358055078332102559982492351",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "ridge_direct_a1/retrospective_audit",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.0000000003916666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ridge_direct_a1/retrospective_audit",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000000482762732920266689379691857957005",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "ridge_direct_a10/development",
+      "metric": "mae_php",
+      "absolute_difference": "0.0000000000116666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ridge_direct_a10/development",
+      "metric": "rmse_php",
+      "absolute_difference": "0.0000000004643996851352832416789696771566768",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ridge_direct_a10/development",
+      "metric": "wape_percent",
+      "absolute_difference": "0.00000000000001071116117364192786971310186234911",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "ridge_direct_a10/development",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.000000000145",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ridge_direct_a10/development",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000009516302016389453601112529780601576",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "ridge_direct_a10/retrospective_audit",
+      "metric": "mae_php",
+      "absolute_difference": "0.00000000055",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ridge_direct_a10/retrospective_audit",
+      "metric": "rmse_php",
+      "absolute_difference": "0.000000000687848785208164611287886476035033",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ridge_direct_a10/retrospective_audit",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000003398192040542444459596759869017008",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "ridge_direct_a10/retrospective_audit",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.0000000001166666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ridge_direct_a10/retrospective_audit",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000004022391035923449618173668766807243",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "ridge_recursive_a1/development",
+      "metric": "mae_php",
+      "absolute_difference": "0.0000000002633333333333333333333333333333333",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ridge_recursive_a1/development",
+      "metric": "rmse_php",
+      "absolute_difference": "0.0000000002633103863631645718070763365743142",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ridge_recursive_a1/development",
+      "metric": "wape_percent",
+      "absolute_difference": "0.00000000000000642760689723175599912721269289740",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "ridge_recursive_a1/development",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.00000000019",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ridge_recursive_a1/development",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000011745562559764036308892317001676723",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "ridge_recursive_a1/retrospective_audit",
+      "metric": "mae_php",
+      "absolute_difference": "0.000000001008333333333333333333333333333333",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ridge_recursive_a1/retrospective_audit",
+      "metric": "rmse_php",
+      "absolute_difference": "0.000000000497141870815795960980368596706460",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ridge_recursive_a1/retrospective_audit",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000002121176776354503559399326796569111",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "ridge_recursive_a1/retrospective_audit",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.0000000001583333333333333333333333333333333",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ridge_recursive_a1/retrospective_audit",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000006303342936758696000130725866085756",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "ridge_recursive_a10/development",
+      "metric": "mae_php",
+      "absolute_difference": "0.0000000000566666666666666666666666666666667",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ridge_recursive_a10/development",
+      "metric": "rmse_php",
+      "absolute_difference": "0.0000000004851952589940917661102575149344844",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ridge_recursive_a10/development",
+      "metric": "wape_percent",
+      "absolute_difference": "0.00000000000000783951185756465812304826705495698",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "ridge_recursive_a10/development",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.0000000001233333333333333333333333333333333",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ridge_recursive_a10/development",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000004644172274700597526826055845492822",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "ridge_recursive_a10/retrospective_audit",
+      "metric": "mae_php",
+      "absolute_difference": "0.0000000007",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ridge_recursive_a10/retrospective_audit",
+      "metric": "rmse_php",
+      "absolute_difference": "0.000000000530594615788109140634120033278698",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ridge_recursive_a10/retrospective_audit",
+      "metric": "wape_percent",
+      "absolute_difference": "0.000000000000001489911371999218611844651076979437",
+      "tolerance": "0.000001"
+    },
+    {
+      "cohort": "ridge_recursive_a10/retrospective_audit",
+      "metric": "mean_signed_bias_php",
+      "absolute_difference": "0.0000000012",
+      "tolerance": "0.01"
+    },
+    {
+      "cohort": "ridge_recursive_a10/retrospective_audit",
+      "metric": "normalized_signed_bias_percent",
+      "absolute_difference": "0.000000000000000126105113716894829881275077552430",
+      "tolerance": "0.000001"
+    }
+  ],
+  "php_tolerance": "0.01",
+  "percentage_point_tolerance": "0.000001",
+  "smoke_checks": [
+    {
+      "name": "hand_calculable_positive_negative_100",
+      "status": "pass",
+      "expected": "Errors +100 and -100; bias 0, MAE 100, WAPE 10%, total absolute error 200.",
+      "observed": {
+        "n": 2,
+        "mae_php": "100",
+        "rmse_php": "100",
+        "wape_percent": "10",
+        "mean_signed_bias_php": "0",
+        "normalized_signed_bias_percent": "0",
+        "actual_signed_sum_php": "2000",
+        "actual_absolute_sum_php": "2000",
+        "prediction_sum_php": "2000",
+        "absolute_error_sum_php": "200",
+        "signed_error_sum_php": "0",
+        "squared_error_sum_php_squared": "20000",
+        "overforecast_count": 1,
+        "underforecast_count": 1,
+        "exact_count": 0,
+        "overforecast_amount_php": "100",
+        "underforecast_amount_php": "100",
+        "max_absolute_error_php": "100",
+        "distinct_target_month_count": 2,
+        "origin_count": 1,
+        "metric_status": "available"
+      }
+    },
+    {
+      "name": "empty_cohort",
+      "status": "pass",
+      "observed": {
+        "n": 0,
+        "mae_php": null,
+        "rmse_php": null,
+        "wape_percent": null,
+        "mean_signed_bias_php": null,
+        "normalized_signed_bias_percent": null,
+        "actual_signed_sum_php": null,
+        "actual_absolute_sum_php": null,
+        "prediction_sum_php": null,
+        "absolute_error_sum_php": null,
+        "signed_error_sum_php": null,
+        "squared_error_sum_php_squared": null,
+        "overforecast_count": 0,
+        "underforecast_count": 0,
+        "exact_count": 0,
+        "overforecast_amount_php": null,
+        "underforecast_amount_php": null,
+        "max_absolute_error_php": null,
+        "distinct_target_month_count": 0,
+        "origin_count": 0,
+        "metric_status": "unavailable_empty_cohort"
+      }
+    },
+    {
+      "name": "zero_actual_denominator",
+      "status": "pass",
+      "observed": {
+        "n": 1,
+        "mae_php": "10",
+        "rmse_php": "10",
+        "wape_percent": null,
+        "mean_signed_bias_php": "10",
+        "normalized_signed_bias_percent": null,
+        "actual_signed_sum_php": "0",
+        "actual_absolute_sum_php": "0",
+        "prediction_sum_php": "10",
+        "absolute_error_sum_php": "10",
+        "signed_error_sum_php": "10",
+        "squared_error_sum_php_squared": "100",
+        "overforecast_count": 1,
+        "underforecast_count": 0,
+        "exact_count": 0,
+        "overforecast_amount_php": "10",
+        "underforecast_amount_php": "0",
+        "max_absolute_error_php": "10",
+        "distinct_target_month_count": 1,
+        "origin_count": 1,
+        "metric_status": "rates_unavailable_zero_actual_denominator"
+      }
+    }
+  ],
+  "review_mode": "self-verification; independent QA separate",
+  "skills_applied": {
+    ".skills/analytics-frameworks.md": "Same-cohort error/bias/directional interpretation and approval limits.",
+    ".skills/database-standards.md": "Source hashes, unique same-population keys and input actual lineage.",
+    ".skills/coding-standards.md": "Explicit stdlib-only derivative; no evaluator/model imports.",
+    ".skills/testing-standards.md": "Hand-calculable cancellation and empty/zero-denominator checks plus retained metric reconciliation.",
+    ".skills/technology-stack.md": "Offline presentation evidence only; no API/SQL/publication/dependency changes."
+  },
+  "outputs": [
+    {
+      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_policy_20261010\\policy.json",
+      "sha256": "55c93ca278c8fa9a19efaecdd8327836bc3d35662fe733eb36917125bb4d0fcb"
+    },
+    {
+      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_policy_20261010\\model-error-review.json",
+      "sha256": "de057ab8090715557dec3a308fac13034afbf7c2080369f599df2d09691f45bb"
+    },
+    {
+      "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_policy_20261010\\MODEL_ERRORS.md",
+      "sha256": "943fce8deb29d7d2569531baff9d9b39c52101b2380c77d9e5da60eb07b81247"
+    }
+  ]
+}

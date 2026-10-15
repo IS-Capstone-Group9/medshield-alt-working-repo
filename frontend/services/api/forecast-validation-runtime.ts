@@ -36,10 +36,10 @@ export const FORECAST_VALIDATION_MARKUP = String.raw`
   </section>
   <p class="chart-subtitle" id="forecastAssumptions">Historical error is retrospective evidence. Revenue measures commercial sales; source units require product eligibility.</p>
   <div class="forecast-hero-grid" id="forecastMetrics">
-    <div class="forecast-hero-card"><div class="hero-label">MAE</div><div class="hero-val" id="kpiForecastMae">Unavailable</div><div class="hero-sub">Mean absolute error in target units</div></div>
-    <div class="forecast-hero-card"><div class="hero-label">WAPE</div><div class="hero-val" id="kpiForecastWape">Unavailable</div><div class="hero-sub">Absolute error / absolute actuals</div></div>
-    <div class="forecast-hero-card"><div class="hero-label">RMSE</div><div class="hero-val" id="kpiForecastRmse">Unavailable</div><div class="hero-sub">Root mean squared error</div></div>
-    <div class="forecast-hero-card"><div class="hero-label">Signed bias</div><div class="hero-val" id="kpiForecastBias">Unavailable</div><div class="hero-sub">Prediction minus actual in target units</div></div>
+    <div class="forecast-hero-card"><div class="hero-label">Historical MAE</div><div class="hero-val" id="kpiForecastMae">Unavailable</div><div class="hero-sub">Mean absolute error in target units</div></div>
+    <div class="forecast-hero-card"><div class="hero-label">Historical WAPE</div><div class="hero-val" id="kpiForecastWape">Unavailable</div><div class="hero-sub">Absolute error / absolute actuals</div></div>
+    <div class="forecast-hero-card"><div class="hero-label">Historical RMSE</div><div class="hero-val" id="kpiForecastRmse">Unavailable</div><div class="hero-sub">Root mean squared error in target units</div></div>
+    <div class="forecast-hero-card"><div class="hero-label">Historical signed bias</div><div class="hero-val" id="kpiForecastBias">Unavailable</div><div class="hero-sub">Mean prediction minus actual in target units</div></div>
   </div>
   <p class="chart-subtitle" id="forecastEvaluationScope"></p>
   <div class="chart-wrap forecast-chart-wrap chart-hero" style="position:relative"><canvas id="forecastChart" role="img" aria-label="Observed actuals, historical backtests and available future predictions"></canvas></div>
@@ -48,7 +48,7 @@ export const FORECAST_VALIDATION_MARKUP = String.raw`
   <p class="chart-subtitle">Compare errors on common evaluation keys. A lower historical error does not establish future accuracy or model approval.</p>
   <div style="overflow-x:auto"><table id="forecastBenchmarkTable" class="product-table" aria-label="Models compared on common evaluation keys"></table></div>
   <details><summary>Backtest error and bias by forecast lead</summary><div style="overflow-x:auto"><table id="forecastLeadTable" class="product-table"></table></div></details>
-  <details><summary>Displayed monthly evidence, origins and leads</summary><div style="overflow-x:auto"><table id="forecastEvidenceTable" class="product-table"></table></div></details>
+  <details open><summary>Monthly actuals, predictions and historical errors</summary><div style="overflow-x:auto"><table id="forecastEvidenceTable" class="product-table"></table></div></details>
   <details class="analytical-output-notes"><summary>Validation methods, coverage and source</summary>
     <p id="forecastCoverage"></p><p id="forecastSource"></p>
     <p>Revenue is a commercial measure. It does not establish medicine demand, stock positions or procurement requirements. Disease/weather effects and model decomposition are unavailable unless separately published.</p>
@@ -162,24 +162,58 @@ function renderForecastValidation(error) {
   const options = {responsive:true,maintainAspectRatio:false,spanGaps:false,interaction:{mode:'index',intersect:false},scales:{x:{ticks:{maxTicksLimit:window.innerWidth < 600 ? 7 : 14,maxRotation:0},title:{display:true,text:'Calendar month'}},y:{ticks:{callback:compact},title:{display:true,text:data.scope.unit}}},plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:11}}},tooltip:{callbacks:{label:context => context.dataset.label + ': ' + fmt(context.raw)}}}};
   ['forecastChart','overviewForecastChart'].forEach(id => { if(el(id)) new Chart(el(id), {type:'line',data:{labels:all,datasets:datasets.map(d => ({...d}))},options}); });
   const m = result.metrics || {};
+  const pesoTarget = data.scope.metric === 'revenue' || data.scope.unit === 'PHP';
+  const targetUnit = esc(pesoTarget ? '₱' : data.scope.unit);
+  const fmtTarget = value => finite(value) ? (pesoTarget ? '₱' + value.toLocaleString('en-PH', {minimumFractionDigits: 2, maximumFractionDigits: 2}) : fmt(value) + ' ' + data.scope.unit) : 'Unavailable';
   const futureCount = future.filter(p => finite(p.prediction)).length;
   el('forecastTakeaway').textContent = name + ': ' + (finite(m.wape) ? fmt(m.wape) + '% historical WAPE across ' + (m.n ?? 0) + ' scored observations' : 'historical WAPE unavailable') + '. ' + (futureCount ? futureCount + '/' + future.length + ' displayed future months have prediction values.' : 'No prediction values are available for the displayed future window.');
   el('forecastChart').setAttribute('aria-label', name + ' · monthly ' + data.scope.unit + ' · ' + scope + ' · observed values, historical backtest and future prediction evidence');
-  el('kpiForecastMae').textContent = fmt(m.mae);
+  el('kpiForecastMae').textContent = fmtTarget(m.mae);
   el('kpiForecastWape').textContent = finite(m.wape) ? fmt(m.wape) + '%' : 'Unavailable';
-  el('kpiForecastRmse').textContent = fmt(m.rmse);
-  el('kpiForecastBias').textContent = fmt(m.bias);
+  el('kpiForecastRmse').textContent = fmtTarget(m.rmse);
+  el('kpiForecastBias').textContent = fmtTarget(m.bias);
   el('forecastEvaluationScope').textContent = 'Protocol: ' + protocol + ' · training cutoff ' + (view.training_end || 'Unavailable') + ' · evaluation ' + view.evaluation_start + ' to ' + view.evaluation_end + ' · ' + (m.n ?? 0) + ' scored observations. Missing actuals stay unavailable.';
   el('forecastBandNote').textContent = future.filter(supported).length + '/' + future.length + ' future points have supported published intervals. ' + [...new Set(future.map(p => p.interval_reason).filter(Boolean))].join('; ');
   el('forecastCoverage').textContent = 'Measured interval coverage: ' + fmt(result.band_coverage?.percent) + (finite(result.band_coverage?.percent) ? '%' : '') + ' · scored interval observations: ' + (result.band_coverage?.n ?? 0) + ' · exact common evaluation keys: ' + (view.common_scored_months ?? 'Unavailable') + '.';
   el('forecastEvaluationScope').textContent += ' ' + (view.comparison_label || '');
-  el('forecastBenchmarkTable').innerHTML = '<thead><tr><th>Model</th><th>Common observations</th><th>MAE</th><th>RMSE</th><th>WAPE (%)</th><th>Signed bias</th><th>Selection</th></tr></thead><tbody>' + Object.entries(view.comparisons || view.models).map(([model, value]) => { const c = value.comparison_metrics || {}; return '<tr><td>' + esc(data.models[model] || model) + '</td><td>' + fmt(c.n) + '</td><td>' + fmt(c.mae) + '</td><td>' + fmt(c.rmse) + '</td><td>' + fmt(c.wape) + '</td><td>' + fmt(c.bias) + '</td><td>' + esc(value.selection_reason || 'Exploratory benchmark; no champion approval') + '</td></tr>'; }).join('') + '</tbody>';
-  el('forecastLeadTable').innerHTML = '<thead><tr><th>Lead</th><th>Target month</th><th>Absolute error</th><th>Signed error</th><th>Scored observations</th></tr></thead><tbody>' + backtest.map(p => { const valid = finite(p.actual) && finite(p.prediction); const error = valid ? p.prediction - p.actual : null; return '<tr><td>' + fmt(lead(p)) + '</td><td>' + esc(p.period) + '</td><td>' + fmt(valid ? Math.abs(error) : null) + '</td><td>' + fmt(error) + '</td><td>' + (valid ? 1 : 0) + '</td></tr>'; }).join('') + '</tbody>';
+  el('forecastBenchmarkTable').innerHTML = '<thead><tr><th>Model</th><th>Common observations</th><th>MAE (' + targetUnit + ')</th><th>RMSE (' + targetUnit + ')</th><th>WAPE (%)</th><th>Mean signed bias (' + targetUnit + ')</th><th>Selection</th></tr></thead><tbody>' + Object.entries(view.comparisons || view.models).map(([model, value]) => { const c = value.comparison_metrics || {}; return '<tr><td>' + esc(data.models[model] || model) + '</td><td>' + fmt(c.n) + '</td><td>' + fmt(c.mae) + '</td><td>' + fmt(c.rmse) + '</td><td>' + fmt(c.wape) + '</td><td>' + fmt(c.bias) + '</td><td>' + esc(value.selection_reason || 'Exploratory benchmark; no champion approval') + '</td></tr>'; }).join('') + '</tbody>';
+  const historicalSummary = {
+    historical_mae_target_units: finite(m.mae) ? m.mae : null,
+    historical_rmse_target_units: finite(m.rmse) ? m.rmse : null,
+    historical_wape_percent: finite(m.wape) ? m.wape : null,
+    historical_mean_signed_error_target_units: finite(m.bias) ? m.bias : null,
+    historical_evaluation_start: view.evaluation_start || '',
+    historical_evaluation_end: view.evaluation_end || '',
+    historical_scored_count: finite(m.n) ? m.n : null,
+  };
   forecastValidationExport = all.map(period => {
     const point = next.get(period) || past.get(period);
-    return {period,phase:next.has(period) ? 'Future prediction' : past.has(period) ? 'Historical backtest' : actual.has(period) ? 'Historical actual' : 'Missing history',actual:actual.has(period) ? actual.get(period) : null,prediction:point?.prediction ?? null,lower:point && supported(point) ? point.lower : null,upper:point && supported(point) ? point.upper : null,origin:point?.origin || '',lead:point ? lead(point) : null,samples:point?.band_sample_count ?? null,interval_level:point?.interval_level ?? point?.interval?.nominal_level ?? null,reason:point?.missing_reason || '',interval_reason:point?.interval_reason || '',model:key,protocol};
+    const displayedActual = finite(actual.get(period)) ? actual.get(period) : null;
+    const prediction = finite(point?.prediction) ? point.prediction : null;
+    let errorReason = null;
+    if (next.has(period)) errorReason = 'future_prediction_not_scored';
+    else if (!past.has(period)) errorReason = 'no_historical_backtest_prediction';
+    else if (!finite(displayedActual)) errorReason = 'missing_displayed_actual';
+    else if (!finite(point.actual)) errorReason = 'missing_backtest_actual';
+    else if (point.actual !== displayedActual) errorReason = 'historical_actual_mismatch';
+    else if (!finite(prediction)) errorReason = 'missing_backtest_prediction';
+    let signedError = errorReason ? null : prediction - displayedActual;
+    if (signedError !== null && !finite(signedError)) { signedError = null; errorReason = 'non_finite_historical_error'; }
+    return {
+      period, phase: next.has(period) ? 'Future prediction' : past.has(period) ? 'Historical backtest' : actual.has(period) ? 'Historical actual' : 'Missing history',
+      actual: displayedActual, prediction,
+      absolute_error_target_units: signedError === null ? null : Math.abs(signedError),
+      signed_error_target_units: signedError, error_unavailable_reason: errorReason,
+      lower: point && supported(point) ? point.lower : null, upper: point && supported(point) ? point.upper : null,
+      origin: point?.origin || '', lead: point ? lead(point) : null, samples: point?.band_sample_count ?? null,
+      interval_level: point?.interval_level ?? point?.interval?.nominal_level ?? null,
+      reason: point?.missing_reason || '', interval_reason: point?.interval_reason || '', model: key, protocol,
+      ...historicalSummary,
+    };
   });
-  el('forecastEvidenceTable').innerHTML = '<thead><tr><th>Month</th><th>Evidence</th><th>Actual</th><th>Prediction</th><th>Lower</th><th>Upper</th><th>Origin</th><th>Lead</th><th>Unavailable reason</th></tr></thead><tbody>' + forecastValidationExport.map(r => '<tr><td>' + esc(r.period) + '</td><td>' + r.phase + '</td><td>' + fmt(r.actual) + '</td><td>' + fmt(r.prediction) + '</td><td>' + fmt(r.lower) + '</td><td>' + fmt(r.upper) + '</td><td>' + esc(r.origin) + '</td><td>' + fmt(r.lead) + '</td><td>' + esc([r.reason,r.interval_reason].filter(Boolean).join('; ')) + '</td></tr>').join('') + '</tbody>';
+  el('forecastReview').textContent += ' Monthly errors use matching historical actuals only; positive signed error means overforecast and negative means underforecast. Future errors are unavailable.';
+  el('forecastLeadTable').innerHTML = '<thead><tr><th>Lead</th><th>Target month</th><th>Absolute error (' + targetUnit + ')</th><th>Signed error (' + targetUnit + ')</th><th>Scored observations</th><th>Error unavailable reason</th></tr></thead><tbody>' + forecastValidationExport.filter(r => r.phase === 'Historical backtest').map(r => '<tr><td>' + fmt(r.lead) + '</td><td>' + esc(r.period) + '</td><td>' + fmt(r.absolute_error_target_units) + '</td><td>' + fmt(r.signed_error_target_units) + '</td><td>' + (r.signed_error_target_units === null ? 0 : 1) + '</td><td>' + esc((r.error_unavailable_reason || '').replace(/_/g, ' ')) + '</td></tr>').join('') + '</tbody>';
+  el('forecastEvidenceTable').innerHTML = '<thead><tr><th>Month</th><th>Evidence</th><th>Actual (' + targetUnit + ')</th><th>Prediction (' + targetUnit + ')</th><th>Absolute error (' + targetUnit + ')</th><th>Signed error (' + targetUnit + ')</th><th>Lower (' + targetUnit + ')</th><th>Upper (' + targetUnit + ')</th><th>Origin</th><th>Lead</th><th>Unavailable reason</th><th>Error unavailable reason</th></tr></thead><tbody>' + forecastValidationExport.map(r => '<tr><td>' + esc(r.period) + '</td><td>' + r.phase + '</td><td>' + fmt(r.actual) + '</td><td>' + fmt(r.prediction) + '</td><td>' + fmt(r.absolute_error_target_units) + '</td><td>' + fmt(r.signed_error_target_units) + '</td><td>' + fmt(r.lower) + '</td><td>' + fmt(r.upper) + '</td><td>' + esc(r.origin) + '</td><td>' + fmt(r.lead) + '</td><td>' + esc([r.reason,r.interval_reason].filter(Boolean).join('; ')) + '</td><td>' + esc((r.error_unavailable_reason || '').replace(/_/g, ' ')) + '</td></tr>').join('') + '</tbody>';
   el('forecastExport').disabled = !forecastValidationExport.length;
 }
 
@@ -189,7 +223,7 @@ function exportForecastValidationCSV() {
   const h = document.getElementById('forecastHorizon').value;
   const quote = v => '"' + String(v ?? '').replace(/"/g, '""') + '"';
   const safe = v => typeof v === 'string' && /^[=+\-@\t\r]/.test(v) ? "'" + v : v;
-  const rows = [['period','evidence_type','actual','prediction','lower','upper','origin','lead_months','interval_sample_count','interval_level','missing_reason','interval_reason','model','evaluation_protocol','sector','product','unit','display_horizon_months','source_checksum','run_id','release_id','publication_status'], ...forecastValidationExport.map(r => [r.period,r.phase,r.actual,r.prediction,r.lower,r.upper,r.origin,r.lead,r.samples,r.interval_level,r.reason,r.interval_reason,r.model,r.protocol,d.scope.sector,d.scope.product,d.scope.unit,h,d.source.checksum,d.run_id,d.release_id,d.publication_status])];
+  const rows = [['period','evidence_type','actual','prediction','lower','upper','origin','lead_months','interval_sample_count','interval_level','missing_reason','interval_reason','model','evaluation_protocol','sector','product','unit','display_horizon_months','source_checksum','run_id','release_id','publication_status','absolute_error_target_units','signed_error_target_units','error_unavailable_reason','historical_mae_target_units','historical_rmse_target_units','historical_wape_percent','historical_mean_signed_error_target_units','historical_evaluation_start','historical_evaluation_end','historical_scored_count'], ...forecastValidationExport.map(r => [r.period,r.phase,r.actual,r.prediction,r.lower,r.upper,r.origin,r.lead,r.samples,r.interval_level,r.reason,r.interval_reason,r.model,r.protocol,d.scope.sector,d.scope.product,d.scope.unit,h,d.source.checksum,d.run_id,d.release_id,d.publication_status,r.absolute_error_target_units,r.signed_error_target_units,r.error_unavailable_reason,r.historical_mae_target_units,r.historical_rmse_target_units,r.historical_wape_percent,r.historical_mean_signed_error_target_units,r.historical_evaluation_start,r.historical_evaluation_end,r.historical_scored_count])];
   const url = URL.createObjectURL(new Blob(['\uFEFF' + rows.map(row => row.map(v => quote(safe(v))).join(',')).join('\r\n')], {type:'text/csv;charset=utf-8'}));
   const a = document.createElement('a'); a.href = url; a.download = 'medshield-forecast-evidence-' + h + '-months.csv'; a.click();
   setTimeout(() => URL.revokeObjectURL(url),1000);

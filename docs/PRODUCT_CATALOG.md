@@ -1,9 +1,18 @@
 # Product catalog and resolution contract
 
-Catalog implementation prepared 27 September 2026; local review master populated
-7 October 2026. This master update records no product approvals or Databricks writes.
-The CEO remains the sole business approver. Existing financial and conditional
-annual-reconciliation decisions in DESCRIPTIVE_PUBLICATION_ACCEPTANCE.md stand.
+Catalog implementation prepared 27 September 2026; category reporting accepted
+locally under Adrian's instruction on 8 October 2026. There are 1,584 supported
+known classifications and 2,977 explicit Unclassified dispositions. Category
+acceptance no longer depends on completing SKU/unit/forecast review. Unclassified
+remains unresolved underlying classification, while sales stay in financial totals.
+
+The four Locaine/Eurocaine/Sanoxin labels are accepted as medicine; the 14 nebulizer
+kit labels are accepted as supplies/accessories. Skin stapler/autoclave tape and
+other reviewed subtype errors are corrected. Exact per-label evidence and actual
+recorder/date are bound in [category_acceptance.json](../databricks/medshield_project/references/category_acceptance.json).
+Both copies are 4,755,483 bytes, SHA-256 `2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29`. See [review and independent validation](../outputs/category_acceptance_20261008/README.md).
+No cloud writes, SKU/unit/forecast approvals or CEO release signoff were performed.
+Existing financial decisions remain in DESCRIPTIVE_PUBLICATION_ACCEPTANCE.md.
 
 ## Independent dimensions
 
@@ -16,12 +25,12 @@ annual-reconciliation decisions in DESCRIPTIVE_PUBLICATION_ACCEPTANCE.md stand.
 
 `databricks/medshield_project/references/product_master_review.csv` is the sole
 authoritative preparation master. The copy in `databricks/medshield_reference_csv/medshield_reference_csv/`
-is a deployment copy, checked byte-for-byte. Both now contain **4,561 unapproved
-draft rows**, covering the normalized labels in the fresh
-[fact-version-19 label receipt](../outputs/product_master_population_20261007/current_labels.json).
-The drafts reuse documented version-17 category research and literal product
-proposals; this does not provide new supplier verification or approvals. Identity,
-unit and forecast decisions remain pending, and forecast eligibility is false.
+is a deployment copy, checked byte-for-byte. Both contain **4,561 accepted category
+reporting dispositions**, covering all current fact19 normalized source aliases.
+Documentary and literal product-type evidence supports accepted known categories;
+unsupported cases are explicitly Unclassified. Historical identity, sales unit,
+item kind and forecast statuses remain pending; forecast eligibility is false.
+Category evidence does not supply historical supplier verification.
 See the [practical review guide](PRODUCT_MASTER_REVIEW_GUIDE.md) before editing or
 uploading the master. `mapping_status` remains a legacy administrative field and
 cannot confer category, identity, unit or forecast approval.
@@ -52,7 +61,7 @@ The 7 October [business analytics review](../outputs/business_analytics_review_2
 checks all 4,561 drafts and corrects nine food/cleaning net-mass clues plus one
 specimen-cup marking inference. Nonmedical gram weights belong to proposed
 container/net-mass context rather than pharmaceutical strength. Category context
-helps literal extraction but supplies no approval. The current saved master is
+helps literal extraction but supplies no approval. The master saved for that review was
 4,746,906 bytes, SHA-256
 `21ba704cb2fb3b39dab214f5e6ac7d3689b17967946889b3f838eb353f1f183c`.
 Both copies match; historical research evidence and every business decision remain
@@ -77,12 +86,13 @@ unchanged. See the [final independent CSV checks](../outputs/business_analytics_
 
 Gold catalog policy is `catalog_v1_independent_evidence`; Gold transformation is
 `sales_restart_gold_v7_independent_catalog`. Resolution happens after unchanged
-Silver reconciliation. The checked-in catalog migration and package still bind
-fact version 16. Before the next publication, prepare the complete migration and
-validation package against the captured current predecessor, **fact version 19**,
-with fresh source-record, financial-value and eligibility conservation evidence.
-Do not run the old version-16 migration unchanged or remove its preservation
-assertions. The canonical reporting dimension preserves original aliases and
+Silver reconciliation. The prepared migration and validation use the shared
+`references/catalog_publication.json` contract against **fact version 19**.
+The category-only descriptor binds seven mutable reporting/publication fields and
+137 immutable fields, including all demand gates. Its exact per-label receipt and
+fresh predecessor capture are shared by Gold, package and gateway validation;
+prior dated packages retain their old master hashes. Preserve source-record,
+financial-value and eligibility assertions. The canonical reporting dimension preserves original aliases and
 raw product keys.
 
 Approved medical demand additionally requires physical item kind, verified identity,

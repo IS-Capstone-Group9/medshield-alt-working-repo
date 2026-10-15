@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0",
+  "status": "provisional_research_reporting_policy",
+  "publication_approved": false,
+  "target": "company_monthly_net_sales_PHP",
+  "primary_metrics": [
+    "mae_php",
+    "wape_percent"
+  ],
+  "diagnostic_metrics": [
+    "rmse_php",
+    "normalized_signed_bias_percent",
+    "directional_error_counts_and_amounts"
+  ],
+  "provisional_directional_weights": {
+    "overforecast_absolute_error": 1,
+    "underforecast_absolute_error": 1,
+    "status": "user_endorsed_research_assumption_not_measured_business_cost",
+    "attribution": "Requesting user in this implementation chat; DO THAT THEN endorsed the proposed two metrics and equal-direction treatment.",
+    "deliberate_directional_shift": false
+  },
+  "max_mae_php": null,
+  "max_wape_percent": null,
+  "tolerance_status": "not_assessed_thresholds_missing",
+  "future_joint_assessment": {
+    "required_thresholds": [
+      "max_mae_php",
+      "max_wape_percent"
+    ],
+    "rule": "Both defined limits must be met on the same eligible cohort; neither is an every-month error cap.",
+    "empty_cohort": "unavailable",
+    "zero_actual_denominator": "percentage_metric_unavailable_no_joint_pass",
+    "implementation_status": "documented_only_no_future_assessment_executed"
+  },
+  "actuals_2026": null,
+  "assessment_2026": null,
+  "source": {
+    "run_id": "eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a",
+    "run_path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\run.json",
+    "run_sha256": "9889baea07a1f222edc9d2d2576fefc0d2be4bc8e52dc4d9a3ff9919e0056f45",
+    "input_path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_validation\\2026-10-09T13-28-48-501Z\\input.json",
+    "input_sha256": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba",
+    "manifest": {
+      "accepted_descriptive_release_id": "19662860d526ca2efb5ccf4256645211bfb916fb8590060901e6e2573b991def",
+      "catalog_mapping_version": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+      "coverage_receipt_sha256": "aea5d30560eecbc7adb9d0d1024e0337a3df9bdc125503c27aa931a1816ccb82",
+      "coverage_review": {
+        "evidence_reference": "User confirmation in this implementation chat: yes.our evidence is the sales data. please do what's the best decision. Evidence: checksum-bound supplied sales data; reporting completeness user-attested, not independently verified. Gold20 binding inherits that same decision after exact 108-month target/provenance comparison; no new completeness verification or publication decision.",
+        "reviewed_at": "2026-09-27T14:29:23.9926173Z",
+        "reviewer": "Requesting user (session attestation; legal name not supplied)"
+      },
+      "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+      "extracted_at": "2026-10-09T13:28:48.501Z",
+      "fact_delta_version": 20,
+      "geography_mapping_version": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+      "publication_approved": false,
+      "reconciliation_passed": true,
+      "revision_policy": "retrospective_revised_snapshot_no_historical_availability_vintages",
+      "source_available_at": "2026-10-09T07:40:39.615Z",
+      "source_checksum": "19662860d526ca2efb5ccf4256645211bfb916fb8590060901e6e2573b991def",
+      "source_count": 37728,
+      "source_publication_status": "CANDIDATE_PENDING_BUSINESS_AND_PRODUCT_MASTER_REVIEW",
+      "source_table": "workspace.medshield_gold.sales_restart_fact_candidate",
+      "training_approved": true,
+      "transformation_policy": "sales_restart_gold_v7_independent_catalog"
+    },
+    "status": "exploratory_evaluated_unpublished"
+  },
+  "derived_at_utc": "2026-10-10T06:41:47.247337+00:00",
+  "derived_at_manila": "2026-10-10T14:41:47.247337+08:00",
+  "timezone": "Asia/Manila",
+  "timestamp_semantics": "derivation_execution_time_not_approval_time",
+  "limitations": [
+    "No measured business-cost ratio or acceptance threshold was supplied.",
+    "Revenue over/underforecast does not quantify stock excess, shortages, lost sales or expiry.",
+    "Policy does not replace inherited experimental criteria, reselect a recipe or grant publication approval."
+  ]
+}

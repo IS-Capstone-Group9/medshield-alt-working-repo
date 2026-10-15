@@ -33,7 +33,7 @@ Copy `.env.example` to an ignored `.env`, or use `backend/.env` for backend-only
 | `DATABRICKS_SCHEMA` | Analytics | Defaults to `medshield_gold` |
 | `DATABRICKS_QUERY_CACHE_TTL_MS` | Performance | Optional positive cache lifetime; default is 60 seconds |
 | `DATABRICKS_QUERY_CONCURRENCY` | Performance | Optional positive query limit; default is 3 |
-| `NASA_POWER_DAILY_URL` | NASA refresh | Optional endpoint override; the backend has an official default |
+| `NASA_POWER_DAILY_URL` | NASA refresh | Optional official HTTPS daily-point URL only; custom hosts and redirects are rejected |
 | `MEDSHIELD_ENV_FILE` | Gateway | Optional explicit environment-file path |
 
 Do not place Databricks or Supabase server secrets in `NEXT_PUBLIC_*` variables.
@@ -70,7 +70,10 @@ Do not run `npm run build` in the frontend while the same checkout has `next dev
 
 ## Databricks preparation
 
-For a current sales rebuild, follow [../databricks/sales_restart/README.md](../databricks/sales_restart/README.md), then run `databricks/sql/05_sales_restart_system_bridge.sql` after Gold passes.
+For a current sales rebuild, follow [the Databricks project guide](../databricks/medshield_project/README.md).
+After Gold passes, run the matching project's 04 monthly bridge, 05 system bridge
+and 06 STL, then validate the candidate before configuring the gateway's explicit
+fact-version pin. A completed unchanged candidate does not need another rebuild.
 
 For DOH/PAGASA, follow [../databricks/external_restart/GUIDE.md](../databricks/external_restart/GUIDE.md), then run `databricks/sql/06_external_restart_system_bridge.sql`.
 

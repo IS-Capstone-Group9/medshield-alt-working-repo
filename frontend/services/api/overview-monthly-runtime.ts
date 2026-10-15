@@ -105,6 +105,7 @@ const RESPONSIVE_OVERVIEW_CHART = `  const overviewRows = getDescriptiveDisplayR
       ? 'Line chart showing daily net sales revenue for ' + descriptivePeriodLabel() + ' when transaction dates are available.'
       : 'Line chart showing ' + (descriptiveUsesYearlyGrain() ? 'yearly' : 'monthly') + ' net sales revenue and gross profit for ' + descriptivePeriodLabel() + '.');
   }
+  renderOverviewTrendSelection();
   renderOverviewAnalytics();`
 
 export function patchOverviewMonthlyChart(script: string): string {

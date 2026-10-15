@@ -42,7 +42,8 @@ def validate_schedule(schedule):
 
 def evaluate_fold(series, series_id, origin, config, run_id, residuals, stage, seed):
     try:
-        values, reason = forecast(series, origin, list(range(1, 13)), config, seed)
+        training = {p: value for p, value in series.items() if p <= origin}
+        values, reason = forecast(training, origin, list(range(1, 13)), config, seed)
     except (ImportError, ValueError, RuntimeError, ArithmeticError) as exc:
         values, reason = {}, f'{type(exc).__name__}: {exc}'
     points = []
@@ -101,12 +102,15 @@ def select_model(points, configs):
     return best, 'No challenger qualifies; retain best complete benchmark candidate', comparisons
 
 
-def run(data, *, schedule=None, include_challengers=True, code_identity=None, seed=20260927):
+def run(data, *, schedule=None, include_challengers=True, code_identity=None, seed=20260927,
+        configurations=None):
     started = time.monotonic()
     blockers = validate_input(data)
     schedule = dict(schedule or DEFAULT_SCHEDULE)
     validate_schedule(schedule)
-    configs = BENCHMARKS + (CHALLENGERS if include_challengers else [])
+    configs = configurations if configurations is not None else BENCHMARKS + (CHALLENGERS if include_challengers else [])
+    if not configs or len({c['model_id'] for c in configs}) != len(configs):
+        raise ValueError('A nonempty grid with unique model identities is required')
     identity = dict(input_hash=digest(data), schedule=schedule, configurations=configs, seed=seed,
                     code_identity=code_identity or {'status': 'not_supplied'}, packages=package_versions(), criteria=CRITERIA)
     run_id = digest(identity)

@@ -292,7 +292,7 @@ function normalizeScore(value: number, maximum: number): number {
 
 function supportedAreaRadarData(rows: AreaPoint[], priorities: RegionalPriority[]) {
   const validRows = rows
-    .filter((row) => row.area && finite(row.revenue) && finite(row.income))
+    .filter((row): row is AreaPoint & { revenue: number; income: number } => Boolean(row.area) && finite(row.revenue) && finite(row.income))
   if (!validRows.length) return null
 
   const publishedRanks = new Map(

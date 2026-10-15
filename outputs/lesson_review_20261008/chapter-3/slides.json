@@ -1,0 +1,2336 @@
+{
+  "source": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\lessons\\Chapter 3 - Data for Modern Analytics.pptx",
+  "sha256": "0bb1c9d137217413efdacbdf569da8b902d1ec703ec2a2a6a1d9810477e69041",
+  "bytes": 54040499,
+  "slide_count": 69,
+  "slides": [
+    {
+      "number": 1,
+      "part": "ppt/slides/slide1.xml",
+      "text": [
+        "CHAPTER THREE: DATA FOR MODERN ANALYTICS",
+        "Prepared by: Inst. Caesar Gabriel M. Fernando"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-001"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 2,
+      "part": "ppt/slides/slide2.xml",
+      "text": [
+        "Learning Outcomes",
+        "At the end of this chapter, you should be able to:",
+        "1.",
+        "Explain Domain III and connect data requirements to the business and analytics problem.",
+        "2.",
+        "Differentiate traditional data warehouses, data lakes, lakehouses, streaming/event architectures, data mesh, data fabric, and hybrid data-platform patterns according to analytical need.",
+        "3.",
+        "Explain how batch, streaming, CDC, cloud elasticity, semantic layers, catalogs, lineage, and AI-ready representations affect the feasibility and timeliness of analytics.",
+        "4.",
+        "Evaluate architecture trade-offs involving latency, scale, variety, governance, interoperability, team ownership, cost, and complexity.",
+        "5.",
+        "Design a high-level analytics-ready data platform for a realistic application and justify what should remain simple, what should scale, and what should be governed."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 3,
+      "part": "ppt/slides/slide3.xml",
+      "text": [
+        "RECAP: WonderMart & “Data in the Wild” Activity"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-002"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 5",
+          "descr": "Recap - Openclipart"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "part": "ppt/slides/slide4.xml",
+      "text": [
+        "INFORMS Domain III: DATA",
+        "Domain III begins after the business and analytics problem have been sufficiently framed.",
+        "Its responsibility is to determine specific data needs; identify sources, structure, and management approach; acquire and prepare data; harmonize and validate it; and document it so the analytics team can rely on it.",
+        "Data findings may force a return to earlier problem framing when assumptions prove wrong or required evidence does not exist.",
+        "We do not reduce Domain III to “clean the CSV.” It is the bridge between an analytical question and the data ecosystem that can credibly support it."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-003",
+        "asset-004"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Explore the INFORMS Analytics Framework 🔗 https://hubs.ly/Q04sk_f20 Seven  domains. One connected lifecycle. | INFORMS"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "part": "ppt/slides/slide5.xml",
+      "text": [
+        "Domain III Deliverables — What Should Exist Before Modeling?",
+        "Deliverable",
+        "What It Clarifies",
+        "Data requirement map",
+        "Which evidence is required by which analytics question",
+        "Source inventory",
+        "Where the evidence originates and who controls it",
+        "Structure/grain map",
+        "What one record/event represents and how sources relate",
+        "Quality/readiness assessment",
+        "Whether data are fit enough for the intended claim",
+        "Access/governance plan",
+        "Who may use what, for which purpose, under which controls",
+        "Preparation/integration plan",
+        "How sources become an analytical dataset or analytical service",
+        "Documentation/metadata",
+        "Definitions, lineage, transformations, assumptions, limitations",
+        "Communication checkpoint",
+        "Stakeholder agreement that the data plan still supports the decision"
+      ],
+      "notes": [
+        "The output of Domain III is not necessarily one flat table. In modern analytics, the output may be a curated dataset, event stream, feature set, semantic model, geospatial layer, document index, or combination."
+      ],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 6,
+      "part": "ppt/slides/slide6.xml",
+      "text": [
+        "This Is a Bridge, Not a Repeat of ELE2BA",
+        "ELE2BA already treated data as an enterprise asset and covered governance, stewardship, strategy, architecture, warehouses/lakes/marts, ETL, extraction, transformation, and integrated pipelines.",
+        "Chapter 3 assumes that foundation.",
+        "The new question is not “What is ETL?” but “When does this analytics problem need ETL, ELT, streaming, CDC, a lakehouse, a semantic layer, or something simpler?”"
+      ],
+      "notes": [
+        "Position this as prerequisite activation. Students should feel that prior courses matter and that Analytics Application is where earlier knowledge becomes decision-oriented design."
+      ],
+      "math_text": [],
+      "assets": [
+        "asset-005"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 5",
+          "descr": "Suspension Bridge by ILLO on Dribbble"
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "part": "ppt/slides/slide7.xml",
+      "text": [
+        "ELE2BA Knowledge Map → Domain III",
+        "Prior ELE2BA Knowledge",
+        "Domain III Application",
+        "Enterprise Data Management",
+        "Treat data as managed evidence, not disposable project files",
+        "Data Governance & Stewardship",
+        "Clarify authority, definitions, access, quality, and accountability",
+        "Data Strategy",
+        "Align data investment with analytical and organizational value",
+        "Data Architecture",
+        "Locate analytical data sources and movement paths",
+        "Warehouse / Lake / Mart",
+        "Select serving/storage patterns according to workload",
+        "ETL & Extraction",
+        "Acquire and integrate required evidence",
+        "Cleaning / normalization / mapping",
+        "Harmonize data for valid analysis",
+        "Pipeline architecture",
+        "Make analytical data preparation repeatable rather than manual"
+      ],
+      "notes": [
+        "The chapter should repeatedly reference this map"
+      ],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 8,
+      "part": "ppt/slides/slide8.xml",
+      "text": [
+        "The Important Shift — Managing Data vs. Applying Analytics",
+        "ELE2BA Lens",
+        "Analytics Application Lens",
+        "How should enterprise data be governed?",
+        "What governance is required for this analytical use?",
+        "How should architecture be designed?",
+        "Which architecture makes this decision possible at the needed latency and scale?",
+        "How do ETL pipelines work?",
+        "How should evidence be integrated for this analytical question?",
+        "How do we maintain quality?",
+        "Which quality dimensions can invalidate this specific claim?",
+        "Where should data reside?",
+        "Where should each workload be served—BI, ML, real-time, geospatial, AI, optimization?"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 9,
+      "part": "ppt/slides/slide9.xml",
+      "text": [
+        "ELE2BA Recall — What Still Matters from Enterprise Data",
+        "Definitions must be shared: the same KPI or field cannot mean different things across systems without consequence.",
+        "Ownership matters: available data are not automatically authorized data.",
+        "Quality is multidimensional: completeness alone does not guarantee usability.",
+        "Lineage matters: analytical trust depends on knowing where data came from and what transformed it.",
+        "Pipelines matter: repeatable analytics requires repeatable data preparation."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-006"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Data Inform Illustration Animation Gif/Json by Nadeem Javed on Dribbble"
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "part": "ppt/slides/slide10.xml",
+      "text": [
+        "Enterprise Architecture Memory Refresh — Before “Modern”",
+        "ELE2BA already treated data as an enterprise asset and covered governance, stewardship, strategy, architecture, warehouses/lakes/marts, ETL, extraction, transformation, and integrated pipelines.",
+        "Chapter 3 assumes that foundation.",
+        "The new question is not “What is ETL?” but “When does this analytics problem need ETL, ELT, streaming, CDC, a lakehouse, a semantic layer, or something simpler?”"
+      ],
+      "notes": [
+        "Position this as prerequisite activation. Students should feel that prior courses matter and that Analytics Application is where earlier knowledge becomes decision-oriented design."
+      ],
+      "math_text": [],
+      "assets": [
+        "asset-007"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Enterprise architecture Animated Icon | Free business and finance Animated  Icon"
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "part": "ppt/slides/slide11.xml",
+      "text": [
+        "Foundations of a Modern Data Platform"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-008"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 12,
+      "part": "ppt/slides/slide12.xml",
+      "text": [
+        "What Is a Data Platform?",
+        "A data platform is the integrated set of architectural capabilities that acquire, store, process, govern, orchestrate, and serve data for operational, analytical, and AI use.",
+        "A platform is broader than a database and broader than a dashboard.",
+        "Its value is not “having many tools.” Its value is making trustworthy data reusable across decisions and workloads."
+      ],
+      "notes": [
+        "Modernize the definition by making consumption, governance, orchestration, and ML/AI first-class rather than treating the platform as storage alone."
+      ],
+      "math_text": [],
+      "assets": [
+        "asset-009"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Data Integration Platform | HokuApps"
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "part": "ppt/slides/slide13.xml",
+      "text": [
+        "The Modern Data Platform as an Evidence Supply Chain",
+        "Sources produce observations.",
+        "Ingestion captures them.",
+        "Storage preserves them.",
+        "Processing makes them usable.",
+        "Metadata gives them meaning.",
+        "Governance controls their use.",
+        "Serving layers make them consumable.",
+        "Analytics and AI turn them into evidence for decisions.",
+        "Monitoring keeps the chain reliable over time."
+      ],
+      "notes": [
+        "We focus on asking where evidence can fail: delayed ingestion, inconsistent definitions, broken joins, stale gold tables, undocumented transformations, access denial, or an unreachable dashboard."
+      ],
+      "math_text": [],
+      "assets": [
+        "asset-010"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 4",
+          "descr": "Animated Illustration / Data Factory :: Behance"
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "part": "ppt/slides/slide14.xml",
+      "text": [
+        "Eight Capabilities of an Analytics-Ready Data Platform",
+        "Capability",
+        "Purpose",
+        "1. Connectivity & Ingestion",
+        "Bring data from databases, files, APIs, devices, partners, and streams",
+        "2. Storage & Persistence",
+        "Retain structured, semi-structured, unstructured, and event data appropriately",
+        "3. Processing & Transformation",
+        "Clean, standardize, join, aggregate, enrich, and engineer analytical representations",
+        "4. Orchestration & Observability",
+        "Schedule, coordinate, test, monitor, retry, and trace data workflows",
+        "5. Metadata & Semantics",
+        "Describe meaning, ownership, lineage, definitions, and business metrics",
+        "6. Governance, Security & Privacy",
+        "Control access, policy, retention, acceptable use, and accountability",
+        "7. Serving & Consumption",
+        "Deliver data to BI, notebooks, APIs, ML, optimization, operational apps, and AI",
+        "8. Platform / ML Enablement",
+        "Provide scalable compute, reusable environments, feature/vector access, and lifecycle support"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 15,
+      "part": "ppt/slides/slide15.xml",
+      "text": [
+        "Ingestion — Getting Evidence into the Platform",
+        "Batch ingestion: periodic files, database extracts, scheduled API pulls.",
+        "Streaming/event ingestion: data captured continuously as events occur.",
+        "Change Data Capture: propagate source-system inserts, updates, and deletes without reloading everything.",
+        "File/object ingestion: CSV, JSON, Parquet, images, audio, documents.",
+        "The right ingestion pattern follows decision latency and source behavior."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-011"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 4",
+          "descr": "Cool dynamic GIF on Data Pipeline! | Fabricio F. Costa, PhD, MBA, PMP"
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "part": "ppt/slides/slide16.xml",
+      "text": [
+        "Storage — Not Every Dataset Belongs in the Same Place",
+        "Relational stores are strong for structured transactions and integrity.",
+        "Analytical warehouses are strong for curated, query-oriented structured analytics.",
+        "Object storage/data lakes are strong for scalable heterogeneous data and open file formats.",
+        "Lakehouses add table-management and analytical capabilities over low-cost data-lake storage.",
+        "Specialized stores may serve time-series, graph, search, geospatial, or vector workloads."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-012"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "a computer is surrounded by social media icons"
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "part": "ppt/slides/slide17.xml",
+      "text": [
+        "Processing — Turning Records into Analytical Evidence",
+        "Cleaning and validation",
+        "Schema alignment and type conversion",
+        "Deduplication and identity resolution",
+        "Joins across systems and grains",
+        "Aggregation and feature engineering",
+        "Geospatial enrichment and temporal alignment",
+        "Text/document processing where justified"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-013",
+        "asset-014"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 4",
+          "descr": "Processing Data Animation by Sam Peniak on Dribbble"
+        },
+        {
+          "name": "Picture 5",
+          "descr": "processing.gif"
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "part": "ppt/slides/slide18.xml",
+      "text": [
+        "Orchestration and Observability — The Platform Must Know When It Breaks",
+        "Orchestration coordinates dependencies, schedules, retries, and workflow order.",
+        "Observability detects stale data, schema changes, failed jobs, volume anomalies, and latency problems.",
+        "A dashboard can be visually correct while its source pipeline silently failed yesterday.",
+        "Operational trust requires monitoring the data pipeline, not only the final model."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-015"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Digital transformation through automation and orchestration | inotec.digital"
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "part": "ppt/slides/slide19.xml",
+      "text": [
+        "Serving — Data Must Reach the Place Where Decisions Happen",
+        "BI dashboards and reports",
+        "Analyst SQL/notebooks",
+        "Machine-learning training and scoring",
+        "Optimization and simulation models",
+        "Operational APIs and alerts",
+        "Geospatial applications",
+        "Search, retrieval, and AI assistants where appropriate"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-016",
+        "asset-017"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 6",
+          "descr": "Dashboard animation by Bill Chung on Dribbble"
+        },
+        {
+          "name": "Picture 3",
+          "descr": "Haikyuu!! Anime GIFs - 24 Volleyball Moments | USAGIF.com"
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "part": "ppt/slides/slide20.xml",
+      "text": [
+        "Governance and Security Are Cross-Cutting Fabrics",
+        "Governance does not sit at the end of the pipeline; it applies across source, ingestion, storage, processing, serving, and lifecycle.",
+        "Controls may include identity/access management, encryption, classification, retention, lineage, policy, data minimization, audit, and approved purpose.",
+        "Modern distributed platforms increase—not decrease—the need for coherent governance."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-018"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Why Your 2015 Plan Needs To Include Data & Analytics Governance"
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "part": "ppt/slides/slide21.xml",
+      "text": [
+        "ML and AI Enablement: A Modern Platform Serves More Than BI",
+        "Traditional BI primarily consumes curated historical measures.",
+        "Machine learning may require large training datasets, feature histories, labels, reproducible snapshots, and low-latency scoring inputs.",
+        "Generative/semantic applications may require documents, metadata, embeddings, retrieval indexes, and access controls.",
+        "The platform must support these workloads without allowing AI experimentation to bypass governance."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-019"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 4",
+          "descr": "Free Machine Learning Animations | Download in GIF, MP4, and Lottie JSON"
+        }
+      ]
+    },
+    {
+      "number": 22,
+      "part": "ppt/slides/slide22.xml",
+      "text": [
+        "Big Data: The Workload Changed Before the Buzzword Did"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-020"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 23,
+      "part": "ppt/slides/slide23.xml",
+      "text": [
+        "What is Big Data?",
+        "NIST describes Big Data in terms of extensive data whose characteristics can overwhelm traditional technical approaches.",
+        "ISO/IEC 20546 provides standardized terminology and a conceptual overview for Big Data.",
+        "The practical lesson: Big Data is not simply “many rows.” It is a workload whose scale, speed, heterogeneity, or complexity changes the architecture required to process it."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-021"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 5",
+          "descr": "Big Data Explosion by Lucas Habouche on Dribbble"
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "part": "ppt/slides/slide24.xml",
+      "text": [
+        "Big Data – Characteristics (5V)",
+        "Volume: The sheer scale and massive amount of data generated.",
+        "Velocity: The high speed at which data accumulates and needs to be processed.",
+        "Variety: The diverse formats (structured and unstructured) from various sources.",
+        "Veracity: The accuracy, quality, and trustworthiness of the data.",
+        "Value: The actionable and useful insights"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-022"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Big Data Characteristics — EITC"
+        }
+      ]
+    },
+    {
+      "number": 25,
+      "part": "ppt/slides/slide25.xml",
+      "text": [
+        "Big Data – Characteristics (5V)",
+        "V",
+        "Definition",
+        "Example",
+        "Volume",
+        "The amount of data generated, collected, and stored. Volume becomes a challenge when the scale strains the tools used to manage or analyze it; there is no universal size threshold for “big.”",
+        "A grocery chain accumulates millions of POS transaction lines across its branches and years of operation.",
+        "Velocity",
+        "The rate at which data arrives, together with the speed at which it must be processed and used. The question is whether information can be acted on while it is still relevant.",
+        "If Wondermart receives stock alerts throughout the day, staff need to see them soon enough to replenish shelves before a stockout continues.",
+        "Variety",
+        "The diversity of data sources, structures, and formats, including structured tables, semi-structured files, and unstructured material.",
+        "Wondermart combines POS records in CSV, inventory in a spreadsheet, promotions in JSON, and customer feedback in XML.",
+        "Veracity",
+        "The extent to which data can be trusted for an analysis. Accuracy, completeness, consistency, source reliability, and uncertainty affect the conclusions it can support.",
+        "A customer complaint identifies a store and category but no SKU. It cannot reliably be attributed to one specific product.",
+        "Value",
+        "The useful benefit gained when data is analyzed and applied to a question or decision. Collecting more data alone does not establish value.",
+        "Wondermart uses validated sales and stockout evidence to choose replenishment priorities for its next operating cycle."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 26,
+      "part": "ppt/slides/slide26.xml",
+      "text": [
+        "Big Data – Characteristics (5V)"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-023"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 6",
+          "descr": "UNLOCKING THE POWER OF BIG DATA | Women in Big Data"
+        }
+      ]
+    },
+    {
+      "number": 27,
+      "part": "ppt/slides/slide27.xml",
+      "text": [
+        "Veracity and Value — Useful Extensions, Not Magic Words",
+        "Veracity asks whether the data are trustworthy enough for the intended use.",
+        "Value asks whether the data and platform improve a meaningful analytical or organizational outcome.",
+        "A high-volume stream with poor timestamps may be less useful than a smaller, trustworthy dataset.",
+        "A technically impressive platform that does not improve a decision is architecture without analytical value."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-024"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "From 3 Vs to 5 Vs: The Language of Big Data | Tushar Saini posted on the  topic | LinkedIn"
+        }
+      ]
+    },
+    {
+      "number": 28,
+      "part": "ppt/slides/slide28.xml",
+      "text": [
+        "Big Data Is Relative to the Workload",
+        "Scenario",
+        "Why It May Be Easy or Hard",
+        "10 million historical rows, monthly reporting",
+        "Potentially routine on modern analytical systems",
+        "10,000 events/second with sub-second intervention",
+        "Velocity/latency may dominate architecture",
+        "Small number of high-resolution images",
+        "Storage/compute may dominate despite low row count",
+        "Several small datasets with incompatible identities",
+        "Integration complexity may dominate",
+        "Sensitive cross-agency data",
+        "Governance may dominate technical scale"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-025"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 7",
+          "descr": "What is Workload? - Definition of Workload in Cloud Computing"
+        }
+      ]
+    },
+    {
+      "number": 29,
+      "part": "ppt/slides/slide29.xml",
+      "text": [
+        "Latency Is an Analytics Requirement",
+        "Latency is the delay between an event occurring and useful evidence becoming available to a decision process.",
+        "The required latency should be derived from the decision—not from a desire to label everything “real-time.”",
+        "Monthly budgeting may tolerate hours or days; fraud screening, equipment protection, or flood-response alerts may require seconds or minutes."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-026"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 4",
+          "descr": "Analyze a GIF Animation – Online GIF Tools"
+        }
+      ]
+    },
+    {
+      "number": 30,
+      "part": "ppt/slides/slide30.xml",
+      "text": [
+        "Batch Processing",
+        "Data are accumulated and processed on a schedule or in bounded jobs.",
+        "Strengths: simpler operations, efficient large-scale processing, easier reproducibility for many historical workloads.",
+        "Examples: nightly KPI refresh, monthly financial close, semester analytics, weekly model retraining.",
+        "Batch is not “old.” It remains the correct architecture when decision latency does not require continuous processing."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-027"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Batch Processing vs Real-time Streaming. | Nikki Siapno"
+        }
+      ]
+    },
+    {
+      "number": 31,
+      "part": "ppt/slides/slide31.xml",
+      "text": [
+        "Streaming / Event Processing",
+        "Streaming systems process unbounded sequences of events as they arrive or in very small windows.",
+        "They support continuous monitoring, low-latency aggregation, alerting, and event-driven decision systems.",
+        "Examples: fraud events, sensors, clicks, GPS, equipment telemetry, market feeds, network monitoring."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-027"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Batch Processing vs Real-time Streaming. | Nikki Siapno"
+        }
+      ]
+    },
+    {
+      "number": 32,
+      "part": "ppt/slides/slide32.xml",
+      "text": [
+        "Batch vs. Streaming — It Is a Decision Choice",
+        "Dimension",
+        "Batch",
+        "Streaming / Event",
+        "Data boundary",
+        "Finite/bounded job",
+        "Continuous/unbounded events",
+        "Typical latency",
+        "Minutes to days",
+        "Milliseconds to minutes",
+        "Complexity",
+        "Usually lower",
+        "Usually higher",
+        "Best fit",
+        "Historical, periodic analytics",
+        "Continuous monitoring/intervention",
+        "Failure concerns",
+        "Job completeness/restart",
+        "Ordering, duplicates, state, late events, replay",
+        "Batch Example: Historical flood data review",
+        "Streaming Example: Live road disruption monitoring"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-028"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 8",
+          "descr": "Understanding Batch and Stream Processing. | by Musili Adebayo | Art of Data  Engineering | Medium"
+        }
+      ]
+    },
+    {
+      "number": 33,
+      "part": "ppt/slides/slide33.xml",
+      "text": [
+        "Event Time vs. Processing TimeWhy “When” is harder then it looks",
+        "Event time: when the real-world event actually happened.",
+        "Processing time: when the platform received or processed it.",
+        "Late, duplicated, or out-of-order events can distort real-time aggregates.",
+        "For sensor and mobility analytics, time semantics are part of data quality and analytical validity."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-029"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 5",
+          "descr": "Streaming vs Batch: Two Philosophies of Data Processing"
+        }
+      ]
+    },
+    {
+      "number": 34,
+      "part": "ppt/slides/slide34.xml",
+      "text": [
+        "Change Data Capture (CDC)",
+        "CDC captures database changes—such as inserts, updates, and deletes—and propagates them downstream.",
+        "Instead of re-extracting an entire table, the analytical platform can process what changed.",
+        "CDC is useful for fresher analytics, operational synchronization, and event-driven architectures.",
+        "It also creates governance and ordering concerns: downstream systems must understand change semantics."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-030"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 7",
+          "descr": "What is Change Data Capture (CDC)? In database terms, CDC captures changes  made in the data source, such as INSERT, UPDATE, and DELETE operations, and  replicates them into a target system, typically… |"
+        }
+      ]
+    },
+    {
+      "number": 35,
+      "part": "ppt/slides/slide35.xml",
+      "text": [
+        "Warehouses, Lakes and Lakehouses"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-031"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 36,
+      "part": "ppt/slides/slide36.xml",
+      "text": [
+        "Data Warehouse & Data Lake",
+        "A data warehouse organizes integrated, curated data for analytical querying, reporting, and decision support. Strengths include mature SQL analytics, dimensional modeling, governed metrics, and predictable BI performance. Limitations emerge when organizations need inexpensive storage of diverse raw data, large-scale data science, streaming, or non-tabular workloads.",
+        "A data lake retains large volumes of data—often in open or flexible formats—before all downstream uses are known. It supports structured, semi-structured, and unstructured data, exploratory analytics, and data science. Without strong metadata, governance, quality, and table-management practices, a lake can become difficult to trust and navigate."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-032",
+        "asset-033"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 4",
+          "descr": "AlgoDaily - Data Warehouse vs Data Lake"
+        },
+        {
+          "name": "Picture 5",
+          "descr": "Compare Data Lakes vs. Data Warehouses | Stackademic"
+        }
+      ]
+    },
+    {
+      "number": 37,
+      "part": "ppt/slides/slide37.xml",
+      "text": [
+        "The Two-Tier Problem — Lake + Warehouse",
+        "Organizations often stored raw/diverse data in a lake, then copied selected data into a warehouse for BI.",
+        "This pattern can create duplicated data, multiple definitions, staleness, extra pipelines, and separate governance surfaces.",
+        "The lakehouse idea emerged partly to reduce the gap between low-cost open storage and warehouse-like management/performance."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-034"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "What is a Data Lakehouse? Definition, Features & Benefits | Qlik"
+        }
+      ]
+    },
+    {
+      "number": 38,
+      "part": "ppt/slides/slide38.xml",
+      "text": [
+        "Lakehouse — The Convergence Idea",
+        "Armbrust et al. describe the lakehouse as an architecture built on open, directly accessible data formats while adding data-management capabilities traditionally associated with analytical DBMSs.",
+        "The intended convergence includes BI, data science, and machine learning over a more unified data foundation.",
+        "Key enabling ideas include transaction management, metadata, versioning, indexing/optimization, and open columnar formats."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-035"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 4",
+          "descr": "What Is a Data Lakehouse? How It Works in 2026"
+        }
+      ]
+    },
+    {
+      "number": 39,
+      "part": "ppt/slides/slide39.xml",
+      "text": [
+        "Warehouse vs. Lake vs. Lakehouse",
+        "Dimension",
+        "Warehouse",
+        "Data Lake",
+        "Lakehouse",
+        "Typical data",
+        "Curated structured",
+        "Structured + semi/unstructured",
+        "Broad mix with managed tables/files",
+        "Primary strength",
+        "SQL/BI performance & governance",
+        "Flexible scalable storage",
+        "Unify lake flexibility with analytical table management",
+        "Schema tendency",
+        "Schema-on-write",
+        "Often schema-on-read",
+        "Supports governed tables over open storage",
+        "ML/data science",
+        "Possible, sometimes separate path",
+        "Strong access to raw/diverse data",
+        "First-class design goal",
+        "Risk",
+        "Rigid/costly duplication",
+        "“Data swamp” without governance",
+        "Complexity and implementation choices still matter"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 40,
+      "part": "ppt/slides/slide40.xml",
+      "text": [
+        "Warehouse vs. Lake vs. Lakehouse"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-036"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 2",
+          "descr": "Lakehouse vs. Warehouse in Microsoft Fabric: What's the Difference?"
+        }
+      ]
+    },
+    {
+      "number": 41,
+      "part": "ppt/slides/slide41.xml",
+      "text": [
+        "Why Open Data Formats Matter",
+        "Open columnar file formats such as Parquet allow multiple analytical engines to read the same underlying data.",
+        "Modern table formats/layers such as Apache Iceberg, Delta Lake, and Apache Hudi add table metadata and management capabilities over object storage.",
+        "The architectural objective is interoperability and reliable table behavior—not allegiance to a single engine."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-037"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "I spent 8 hours learning Parquet. Here's what I discovered | by Vu Trinh |  Data Engineer Things"
+        }
+      ]
+    },
+    {
+      "number": 42,
+      "part": "ppt/slides/slide42.xml",
+      "text": [
+        "Medallion Architecture — Raw → Refined → Curated",
+        "Layer",
+        "Purpose",
+        "Flood Monitoring System Example",
+        "Bronze / Raw",
+        "Preserve source data close to original form",
+        "Raw sensor events, raw GPS, raw hotline payloads",
+        "Silver / Refined",
+        "Validate, standardize, deduplicate, harmonize",
+        "Standard road IDs, cleaned sensor units, matched locations",
+        "Gold / Curated",
+        "Publish business/analytics-ready products",
+        "Road-risk table, barangay disruption KPI, model-ready feature set",
+        "BUT Do Not Worship Bronze–Silver–Gold",
+        "The labels are optional; the principle is what matters: preserve raw evidence, create reusable validated data, then publish purpose-built analytical products.",
+        "A small project may need only source → validated → analytical output.",
+        "A large platform may need many domains, quality zones, sandboxes, or serving layers. Architecture should be as simple as the decision allows and as robust as the risk requires."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 43,
+      "part": "ppt/slides/slide43.xml",
+      "text": [
+        "ETL → ELT — What Changed?",
+        "ETL: Extract → Transform → Load. Transformation occurs before data reach the main analytical destination.",
+        "ELT: Extract → Load → Transform. Raw or lightly processed data are loaded first, then transformed using scalable analytical-platform compute.",
+        "Cloud object storage and scalable compute made ELT attractive for many modern analytical workloads.",
+        "ETL remains valid when transformations, compliance, bandwidth, or target constraints require it."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-038"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 7",
+          "descr": "Put It Early, Play It Late — ETL vs. ELT in Data Processing 🎭 | by  Abhishek Muni | Medium"
+        }
+      ]
+    },
+    {
+      "number": 44,
+      "part": "ppt/slides/slide44.xml",
+      "text": [
+        "ETL vs. ELT",
+        "Dimension",
+        "ETL",
+        "ELT",
+        "Transform location",
+        "Before analytical target",
+        "Inside/near analytical platform",
+        "Raw retention",
+        "May be limited",
+        "Often easier to retain",
+        "Typical historical association",
+        "Traditional integration/warehouse",
+        "Cloud/lakehouse analytical platforms",
+        "Governance implication",
+        "Control before load",
+        "Requires strong controls after landing as well",
+        "Best answer",
+        "Depends on constraints",
+        "Depends on constraints"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-039"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 6",
+          "descr": "ETL vs. ELT: Choosing the Right Data Integration Strategy - NashTech Blog"
+        }
+      ]
+    },
+    {
+      "number": 45,
+      "part": "ppt/slides/slide45.xml",
+      "text": [
+        "Cloud-Native Analytics — Why the Architecture Changed",
+        "Elastic infrastructure reduces the need to size every system for permanent peak capacity.",
+        "Managed services can reduce operational overhead for storage, compute, integration, streaming, and analytics.",
+        "Object storage enables inexpensive durable data retention at scale.",
+        "Cloud APIs make it easier to compose specialized services—but can also create cost, governance, and lock-in risks."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-040"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Data Analytics – NGC Mena"
+        }
+      ]
+    },
+    {
+      "number": 46,
+      "part": "ppt/slides/slide46.xml",
+      "text": [
+        "Separation of Storage and Compute",
+        "Traditional systems often tied storage capacity and processing capacity together.",
+        "Modern cloud/lakehouse architectures frequently allow compute to scale independently from durable storage.",
+        "Benefits can include workload isolation, elastic scaling, and multiple engines over shared data.",
+        "Trade-offs include data movement, cost control, caching, concurrency, and governance complexity."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-041"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Pristine Cloud Storage Gif + Drive Custom-made – Mobile App (5) GIFs Behance"
+        }
+      ]
+    },
+    {
+      "number": 47,
+      "part": "ppt/slides/slide47.xml",
+      "text": [
+        "Serverless Does Not Mean “No Servers”",
+        "Serverless means infrastructure provisioning and scaling are substantially abstracted from the user.",
+        "Teams focus more on jobs, queries, functions, or pipelines and less on managing individual servers.",
+        "Benefits: elasticity and reduced operations for suitable workloads.",
+        "Risks: unpredictable cost, service limits, cold starts, portability concerns, and reduced low-level control."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-042"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 5",
+          "descr": "Serverless Architecture Explained. Before 2014, server management was a  much more manual and complex task. The concept of serverless computing was  beginning to gain prominence, and AWS Lambda took… | Nikki Siapno | 30  comments"
+        }
+      ]
+    },
+    {
+      "number": 48,
+      "part": "ppt/slides/slide48.xml",
+      "text": [
+        "Centralized, Decentralized, and Hybrid Data Architectures"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-043"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 49,
+      "part": "ppt/slides/slide49.xml",
+      "text": [
+        "Centralized Data Platform",
+        "A centralized platform concentrates data engineering, governance, infrastructure, and analytical serving into a common organizational environment.",
+        "Strengths: consistency, shared standards, centralized expertise, easier control.",
+        "Risks: bottlenecks, distance from domain meaning, slow response to many competing teams."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-044"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Denodo"
+        }
+      ]
+    },
+    {
+      "number": 50,
+      "part": "ppt/slides/slide50.xml",
+      "text": [
+        "Data Mesh — Architecture Meets Organization",
+        "Data mesh is a socio-technical approach for scaling data ownership across domains.",
+        "Its four widely cited principles are domain-oriented decentralized data ownership, data as a product, self-service data infrastructure, and federated computational governance.",
+        "The core problem it addresses is not only storage scale, but organizational scale: too many domains, sources, users, and changes for one central team to mediate efficiently."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-045"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 4",
+          "descr": "edgeCore™ Data Mesh"
+        }
+      ]
+    },
+    {
+      "number": 51,
+      "part": "ppt/slides/slide51.xml",
+      "text": [
+        "Data as a Product",
+        "A data product is designed for consumers, not merely emitted as a by-product of an operational system.",
+        "Useful properties include clear ownership, discoverability, documented semantics, quality expectations, reliable interfaces, security, and lifecycle responsibility.",
+        "Examples: “Road Accessibility by Segment” or “Validated Rainfall Event Feed” rather than “table_2026_final_v3.”"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-046"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Data Analysis by Rizwan Babar on Dribbble"
+        }
+      ]
+    },
+    {
+      "number": 52,
+      "part": "ppt/slides/slide52.xml",
+      "text": [
+        "Data Fabric — Unifying Access Through Metadata and Automation",
+        "Recent literature describes data fabric as a metadata- and automation-oriented approach that connects heterogeneous data across distributed environments while maintaining unified access and governance.",
+        "It often emphasizes metadata, semantic relationships, automation, integration, and policy across on-premises, cloud, and edge sources.",
+        "Unlike data mesh, fabric is primarily an integration/technology architecture rather than an organizational ownership model."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-047"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Data Fabric: Embrace the Evolution of Data | FTI Consulting"
+        }
+      ]
+    },
+    {
+      "number": 53,
+      "part": "ppt/slides/slide53.xml",
+      "text": [
+        "Platform vs. Mesh vs. Fabric",
+        "Concept",
+        "Primary Problem It Addresses",
+        "Core Idea",
+        "Data Platform",
+        "How data capabilities are provided",
+        "Integrated technical capabilities for ingestion, storage, processing, governance, serving",
+        "Data Mesh",
+        "How data ownership scales across domains",
+        "Domain ownership + data products + self-service + federated governance",
+        "Data Fabric",
+        "How distributed data are connected and managed",
+        "Metadata/automation/semantics for unified access across heterogeneous environments"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-048"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 7",
+          "descr": "Data Mesh vs Data Fabric: Choosing the Right Strategy for Your Enterprise -  Digital Alternative"
+        }
+      ]
+    },
+    {
+      "number": 54,
+      "part": "ppt/slides/slide54.xml",
+      "text": [
+        "Hybrid and Federated Models — What Most Organizations Actually Look Like",
+        "Real organizations often combine centralized platform services with decentralized domain ownership.",
+        "Shared teams may operate identity, catalogs, compute, observability, and security while domains own data products and business semantics.",
+        "The design problem is balancing local autonomy with enterprise consistency."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-049"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 55,
+      "part": "ppt/slides/slide55.xml",
+      "text": [
+        "Data Contracts:Making Producer–Consumer Expectations Explicit",
+        "Working industry concept: a data contract makes expectations between data producers and consumers explicit.",
+        "It may specify schema, semantics, quality rules, freshness, ownership, compatibility, and change expectations.",
+        "The goal is to reduce silent breakage when upstream systems evolve.",
+        "Treat data contracts as an emerging industry practice—not a universal standard."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-050"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Data Contracts: How to Implement and Enforce Them with Soda"
+        }
+      ]
+    },
+    {
+      "number": 56,
+      "part": "ppt/slides/slide56.xml",
+      "text": [
+        "Catalogs, Metadata, and Lineage:Find It, Understand It, Trust It",
+        "Catalog: helps users discover available data assets and their metadata.",
+        "Metadata: describes meaning, owner, structure, sensitivity, quality, and operational properties.",
+        "Lineage: traces how data move and transform from sources to analytical outputs.",
+        "Together they reduce the “tribal knowledge” problem of modern data platforms."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-051"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 57,
+      "part": "ppt/slides/slide57.xml",
+      "text": [
+        "Semantic / Metrics Layer — One KPI, One Meaning",
+        "A semantic layer translates physical data structures into shared business concepts, relationships, dimensions, and measures.",
+        "A metrics layer centralizes reusable metric definitions so “SLA Compliance,” “Active Student,” or “Gross Margin” are not recalculated differently in every dashboard.",
+        "This is the data-platform counterpart of Chapter 2 KPI discipline."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-052"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "What Is a Semantic Layer? Definition, Benefits, Examples"
+        }
+      ]
+    },
+    {
+      "number": 58,
+      "part": "ppt/slides/slide58.xml",
+      "text": [
+        "From Analytics-Ready to AI-Ready Data"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-043"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 59,
+      "part": "ppt/slides/slide59.xml",
+      "text": [
+        "Pope Leo XIV’s “Magnifica Humanitas” on AI",
+        "\"We must educate in the wise use of technology and AI, placing the person before the algorithm, and harmonizing technical, emotional, social, spiritual and ecological forms of intelligence.\""
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-053"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Pope Leo and the Next 'Industrial Revolution' - The Atlantic"
+        }
+      ]
+    },
+    {
+      "number": 60,
+      "part": "ppt/slides/slide60.xml",
+      "text": [
+        "Modern Analytical Data Is More Than Tables",
+        "Data Form",
+        "Examples",
+        "Possible Analytics",
+        "Structured",
+        "Transactions, finance, student records",
+        "BI, statistics, ML",
+        "Semi-structured",
+        "JSON APIs, logs, events",
+        "Streaming, behavioral analytics",
+        "Text / Documents",
+        "Complaints, reports, policies, PDFs",
+        "NLP, search, retrieval",
+        "Images / Video",
+        "CCTV frames, inspections, medical imagery",
+        "Computer vision",
+        "Audio",
+        "Calls, acoustic sensors",
+        "Speech/audio analytics",
+        "Geospatial",
+        "GPS, routes, boundaries, rasters",
+        "Spatial analytics, routing",
+        "Graph / Network",
+        "Connections, dependencies, interactions",
+        "Network analytics",
+        "Time-series / Events",
+        "Sensors, prices, system telemetry",
+        "Forecasting, anomaly detection"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 61,
+      "part": "ppt/slides/slide61.xml",
+      "text": [
+        "Multimodal Analytics — When Evidence Comes in Different Forms",
+        "A multimodal analytical problem combines evidence from more than one data modality.",
+        "A flood monitoring analytics system might combine a citizen text report, photo, GPS coordinate, rainfall sensor reading, and road-network data.",
+        "The challenge is not merely storing files; it is aligning identity, time, place, meaning, permissions, and confidence across modalities."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-054"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 4",
+          "descr": "Analytics Animation by Shakil Ali on Dribbble"
+        }
+      ]
+    },
+    {
+      "number": 62,
+      "part": "ppt/slides/slide62.xml",
+      "text": [
+        "Analytics-Ready vs. AI-Ready",
+        "Analytics-Ready Data",
+        "AI-Ready Data Extension",
+        "Defined, clean, governed, appropriately structured",
+        "May also include large unstructured corpora and multimodal assets",
+        "Stable metrics and analytical grain",
+        "May require labels, embeddings, feature histories, prompt/retrieval context",
+        "Fit for reporting/statistical analysis",
+        "Fit for training, inference, retrieval, or agentic use",
+        "Lineage and access controls",
+        "Requires the same—plus stronger attention to provenance, rights, bias, drift, and reuse risk",
+        "AI-ready should never imply “remove governance to move faster.” Modern AI increases the importance of data provenance, permissions, quality, and context."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 63,
+      "part": "ppt/slides/slide63.xml",
+      "text": [
+        "Applying Modern Data Platforms Across Industries"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-055"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 64,
+      "part": "ppt/slides/slide64.xml",
+      "text": [
+        "There Is No Universal “Best” Modern Data Architecture",
+        "Warehouse, lakehouse, mesh, fabric, streaming, serverless, and vector technologies solve different problems.",
+        "A good architecture is proportionate to the analytical need, organizational scale, risk, latency, skills, and budget.",
+        "Over-architecture creates cost and operational burden; under-architecture creates bottlenecks and unreliable evidence.",
+        "Question",
+        "Why It Matters",
+        "Possible Architectural Consequence",
+        "How fast must the decision happen?",
+        "Defines latency requirement",
+        "Batch vs. streaming / CDC",
+        "How much and what kinds of data?",
+        "Defines storage/processing needs",
+        "Warehouse, lake, lakehouse, specialized stores",
+        "How many domains/teams produce data?",
+        "Defines ownership model",
+        "Centralized vs. mesh/hybrid",
+        "How stable are schemas and sources?",
+        "Defines integration resilience",
+        "Contracts, schema evolution, raw retention",
+        "How sensitive are the data?",
+        "Defines access/governance",
+        "Isolation, minimization, audit, encryption",
+        "Which workloads consume the data?",
+        "Defines serving layers",
+        "BI, ML, geospatial, APIs, vector retrieval",
+        "What skills and operating capacity exist?",
+        "Defines feasible complexity",
+        "Managed/serverless vs. self-managed",
+        "What failure can the organization tolerate?",
+        "Defines reliability investment",
+        "Observability, replay, redundancy, SLAs",
+        "Architecture Decision Matrix"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 65,
+      "part": "ppt/slides/slide65.xml",
+      "text": [
+        "Same Platform Concepts, Different Decisions",
+        "Domain",
+        "Data Challenge",
+        "Analytics Application",
+        "Likely Modern Requirement",
+        "Healthcare operations",
+        "EHR + bed status + arrivals + staffing",
+        "Capacity and wait-time forecasting",
+        "Strong governance + near-real-time operational data",
+        "Finance",
+        "Transactions + device + behavior events",
+        "Fraud/risk detection",
+        "Low latency + auditability + streaming",
+        "Manufacturing",
+        "Machine telemetry + maintenance history",
+        "Predictive maintenance",
+        "IoT/time-series + event processing",
+        "Energy",
+        "Meters + weather + grid telemetry",
+        "Demand forecasting / anomaly detection",
+        "High-volume time-series + streaming",
+        "Education",
+        "LMS + enrollment + assessment + support records",
+        "Engagement and intervention analysis",
+        "Identity resolution + privacy + semantic consistency",
+        "Retail",
+        "POS + app + inventory + customer interactions",
+        "Demand, pricing, personalization",
+        "Batch + streaming + unified customer/product data",
+        "Public sector / resilience",
+        "Sensors + GIS + reports + external context",
+        "Incident response and resource allocation",
+        "Geospatial + streaming + governance"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 66,
+      "part": "ppt/slides/slide66.xml",
+      "text": [
+        "Modern Trends Worth Watching — and Why",
+        "Trend",
+        "Why It Matters for Analytics",
+        "Caution",
+        "Edge analytics",
+        "Process data closer to devices when latency/connectivity matter",
+        "Operational complexity and device governance",
+        "Federated learning / privacy-preserving analytics",
+        "Learn across distributed data without centralizing everything",
+        "Not automatically private or simple",
+        "Data spaces / sovereign sharing",
+        "Structured cross-organization data exchange and control",
+        "Standards/governance still evolving",
+        "Agentic / automated data operations",
+        "AI assists metadata, testing, transformation, discovery, monitoring",
+        "Human accountability and correctness remain necessary",
+        "Sustainable data operations",
+        "Cost/energy-aware storage and compute decisions",
+        "Avoid “green” claims without measurement"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 67,
+      "part": "ppt/slides/slide67.xml",
+      "text": [
+        "Key Takeaways",
+        "What we have learned",
+        "1.",
+        "Domain III is not “just cleaning.” It translates analytical evidence needs into a trustworthy data plan.",
+        "2.",
+        "Analytics Application uses prior data-management knowledge to justify architecture for specific decisions.",
+        "3.",
+        "Big Data is a workload problem. Volume, velocity, variety, variability, and latency can force different systems choices.",
+        "4.",
+        "Modern architecture is plural. Warehouses, lakes, lakehouses, streaming, mesh, fabric, and specialized stores solve different problems."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 68,
+      "part": "ppt/slides/slide68.xml",
+      "text": [
+        "Key Takeaways",
+        "What we have learned",
+        "5.",
+        "Real-time is a requirement, not a status symbol. Use it only when delayed evidence loses decision value.",
+        "6.",
+        "AI-ready data still require governance. Metadata, lineage, quality, rights, representativeness, and monitoring become more—not less—important.",
+        "7.",
+        "The best architecture is the simplest defensible architecture that delivers the right evidence to the right decision at the right time."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 69,
+      "part": "ppt/slides/slide69.xml",
+      "text": [],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-056",
+        "asset-057"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 1",
+          "descr": "Happy Pokemon GIF by Pokémon_JPN - Find & Share on GIPHY"
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "id": "asset-001",
+      "part": "ppt/media/image2.jpg",
+      "sha256": "0662ca1d8d99ff3f886e662b0afeae15f616ee90c2d20348519126191ee1fc61",
+      "file": "media/asset-001.jpg",
+      "image": true,
+      "slides": [
+        1
+      ]
+    },
+    {
+      "id": "asset-002",
+      "part": "ppt/media/image3.png",
+      "sha256": "fe6517f81d71a10bcb8bd1995a459f08037182afd15c05cc5f0de14f56910d4a",
+      "file": "media/asset-002.png",
+      "image": true,
+      "slides": [
+        3
+      ]
+    },
+    {
+      "id": "asset-003",
+      "part": "ppt/media/image5.png",
+      "sha256": "dd451995df639fcc7ccd68d1aeca3cad8cd957f888fb7b85ddb1a6e36de27415",
+      "file": "media/asset-003.png",
+      "image": true,
+      "slides": [
+        4
+      ]
+    },
+    {
+      "id": "asset-004",
+      "part": "ppt/media/image4.jpeg",
+      "sha256": "be5f17b94914ad75733bd7816637c17d8dbb2979032dc69634958b441ebfec22",
+      "file": "media/asset-004.jpeg",
+      "image": true,
+      "slides": [
+        4
+      ]
+    },
+    {
+      "id": "asset-005",
+      "part": "ppt/media/image6.gif",
+      "sha256": "ef2fceede4d857bc97b2d91536368424c5ef30f59a717ba38b810420d9d2c64f",
+      "file": "media/asset-005.gif",
+      "image": true,
+      "slides": [
+        6
+      ]
+    },
+    {
+      "id": "asset-006",
+      "part": "ppt/media/image7.gif",
+      "sha256": "617b3bddaacc783364acd73abd323b691d29f0e02edf5ced71c1f843d817dce5",
+      "file": "media/asset-006.gif",
+      "image": true,
+      "slides": [
+        9
+      ]
+    },
+    {
+      "id": "asset-007",
+      "part": "ppt/media/image8.gif",
+      "sha256": "4d0ce512ec04c12bc85d70978d9c1acdd86ce3657e2c7a0e208b9ea3bd228f56",
+      "file": "media/asset-007.gif",
+      "image": true,
+      "slides": [
+        10
+      ]
+    },
+    {
+      "id": "asset-008",
+      "part": "ppt/media/image9.jpg",
+      "sha256": "da327a5f32d033c37c3c4165a6a95577b00e6e1b5278e554b8e1ceb3ccb4d349",
+      "file": "media/asset-008.jpg",
+      "image": true,
+      "slides": [
+        11
+      ]
+    },
+    {
+      "id": "asset-009",
+      "part": "ppt/media/image10.gif",
+      "sha256": "602381266de8434edc1bcff4e4cdcad8f8f457e99836907c01a0f3a872922fde",
+      "file": "media/asset-009.gif",
+      "image": true,
+      "slides": [
+        12
+      ]
+    },
+    {
+      "id": "asset-010",
+      "part": "ppt/media/image11.gif",
+      "sha256": "5b7c910ab37ad55ee766ccc2adc7b04e4a68eb3216c3558d95c5233c5d815a7a",
+      "file": "media/asset-010.gif",
+      "image": true,
+      "slides": [
+        13
+      ]
+    },
+    {
+      "id": "asset-011",
+      "part": "ppt/media/image12.gif",
+      "sha256": "4cfbcb8573dc329450298f7641e81c18f2669d5a449e29f72cfce8b8603ff69f",
+      "file": "media/asset-011.gif",
+      "image": true,
+      "slides": [
+        15
+      ]
+    },
+    {
+      "id": "asset-012",
+      "part": "ppt/media/image13.gif",
+      "sha256": "4f83a2255de2fa98a4cfa8908debe1e24c5de858fbdb44eec97c7ef4764b8de0",
+      "file": "media/asset-012.gif",
+      "image": true,
+      "slides": [
+        16
+      ]
+    },
+    {
+      "id": "asset-013",
+      "part": "ppt/media/image14.gif",
+      "sha256": "f4497fe1e1f062354927b38b13c9dcbdf9fb98af5a4e6f96e83ea5cc015de7dd",
+      "file": "media/asset-013.gif",
+      "image": true,
+      "slides": [
+        17
+      ]
+    },
+    {
+      "id": "asset-014",
+      "part": "ppt/media/image15.gif",
+      "sha256": "70de7730a4041d99d2701776e591d02a7c15c00158a4b820565c5bf840aea053",
+      "file": "media/asset-014.gif",
+      "image": true,
+      "slides": [
+        17
+      ]
+    },
+    {
+      "id": "asset-015",
+      "part": "ppt/media/image16.gif",
+      "sha256": "420db1c23230de3c714e57a0e7adc95618cdfa752526b4204af572bad710a96c",
+      "file": "media/asset-015.gif",
+      "image": true,
+      "slides": [
+        18
+      ]
+    },
+    {
+      "id": "asset-016",
+      "part": "ppt/media/image17.gif",
+      "sha256": "845d46b661a6a6391b7a3d0cd3671308148192f1d9e1a6f211206ccc5438e1c9",
+      "file": "media/asset-016.gif",
+      "image": true,
+      "slides": [
+        19
+      ]
+    },
+    {
+      "id": "asset-017",
+      "part": "ppt/media/image18.gif",
+      "sha256": "dc29cb105c38ca79f2852acab287a26759699d4aad8de7a45a5509089205498f",
+      "file": "media/asset-017.gif",
+      "image": true,
+      "slides": [
+        19
+      ]
+    },
+    {
+      "id": "asset-018",
+      "part": "ppt/media/image19.png",
+      "sha256": "dd8b5119956a8a415747dded263c36033197e72a85435cbe72e8b46f3b9ac5b2",
+      "file": "media/asset-018.png",
+      "image": true,
+      "slides": [
+        20
+      ]
+    },
+    {
+      "id": "asset-019",
+      "part": "ppt/media/image20.gif",
+      "sha256": "d7bc6f49b760d9450a257101d4f8b543967ec331adcbe24b668266e86c7e643d",
+      "file": "media/asset-019.gif",
+      "image": true,
+      "slides": [
+        21
+      ]
+    },
+    {
+      "id": "asset-020",
+      "part": "ppt/media/image21.jpg",
+      "sha256": "ca3a379b94c929be39226fd30046db7126a866a047507ec7677e71821f22cd2e",
+      "file": "media/asset-020.jpg",
+      "image": true,
+      "slides": [
+        22
+      ]
+    },
+    {
+      "id": "asset-021",
+      "part": "ppt/media/image22.gif",
+      "sha256": "6e8f75c563fcf0a8b40bc41b00c30e92c706429571ae7794e16eb128539c96c8",
+      "file": "media/asset-021.gif",
+      "image": true,
+      "slides": [
+        23
+      ]
+    },
+    {
+      "id": "asset-022",
+      "part": "ppt/media/image23.png",
+      "sha256": "9e7819ada10e13c9cf9d93c29bbd4296ec35dc4ce437f6f22d5d8657810ea61f",
+      "file": "media/asset-022.png",
+      "image": true,
+      "slides": [
+        24
+      ]
+    },
+    {
+      "id": "asset-023",
+      "part": "ppt/media/image24.png",
+      "sha256": "6240f91f9d04e3ee6c72b3f4f2dd54d72323489636deb8c53940fac2136dab31",
+      "file": "media/asset-023.png",
+      "image": true,
+      "slides": [
+        26
+      ]
+    },
+    {
+      "id": "asset-024",
+      "part": "ppt/media/image25.jpeg",
+      "sha256": "48f3210cfceb0332cb8b9cf8b7185d02d59fa315de494f8ae1dcb3ce2f613e89",
+      "file": "media/asset-024.jpeg",
+      "image": true,
+      "slides": [
+        27
+      ]
+    },
+    {
+      "id": "asset-025",
+      "part": "ppt/media/image26.jpeg",
+      "sha256": "49b13c12049a57ca4137015fcd5caa24eb8c18df9abb2533dd51b2ea181c5a2d",
+      "file": "media/asset-025.jpeg",
+      "image": true,
+      "slides": [
+        28
+      ]
+    },
+    {
+      "id": "asset-026",
+      "part": "ppt/media/image27.png",
+      "sha256": "25d59d33ed33d39d259f0fd498db085479808d6f999dd6ce2e5aefcce3e2994e",
+      "file": "media/asset-026.png",
+      "image": true,
+      "slides": [
+        29
+      ]
+    },
+    {
+      "id": "asset-027",
+      "part": "ppt/media/image28.gif",
+      "sha256": "d9f104ddfc33a346b691bcd40d6f4ee79ed6fa5bb973b5461e1e1f4123e86327",
+      "file": "media/asset-027.gif",
+      "image": true,
+      "slides": [
+        30,
+        31
+      ]
+    },
+    {
+      "id": "asset-028",
+      "part": "ppt/media/image29.gif",
+      "sha256": "b333f5f39e777e04989bf7cd4a1237651eeb437148be6a6178858c7e0ea6163a",
+      "file": "media/asset-028.gif",
+      "image": true,
+      "slides": [
+        32
+      ]
+    },
+    {
+      "id": "asset-029",
+      "part": "ppt/media/image30.png",
+      "sha256": "7785786d54b691407d440d7e162a58bf38b3188d2c42e21ce59ff790aebd0ae8",
+      "file": "media/asset-029.png",
+      "image": true,
+      "slides": [
+        33
+      ]
+    },
+    {
+      "id": "asset-030",
+      "part": "ppt/media/image31.jpeg",
+      "sha256": "7969d22bd37954e22b2c409cc4d0229054fcb5d60f10bdc12f87aad7b148a53c",
+      "file": "media/asset-030.jpeg",
+      "image": true,
+      "slides": [
+        34
+      ]
+    },
+    {
+      "id": "asset-031",
+      "part": "ppt/media/image32.jpg",
+      "sha256": "913bf2265834d961cb1da64796481cad25f7008c814b55b4a9ccd34937a67bd0",
+      "file": "media/asset-031.jpg",
+      "image": true,
+      "slides": [
+        35
+      ]
+    },
+    {
+      "id": "asset-032",
+      "part": "ppt/media/image33.png",
+      "sha256": "ae39afa90087289ec8bfe61aae3f3b744cefe32e760fb9b3ed93304f5867768e",
+      "file": "media/asset-032.png",
+      "image": true,
+      "slides": [
+        36
+      ]
+    },
+    {
+      "id": "asset-033",
+      "part": "ppt/media/image34.png",
+      "sha256": "4fda9983814f5d2656ef891b3288bb05f4a89875b871d8af698760eb54c68feb",
+      "file": "media/asset-033.png",
+      "image": true,
+      "slides": [
+        36
+      ]
+    },
+    {
+      "id": "asset-034",
+      "part": "ppt/media/image35.jpeg",
+      "sha256": "9d3426060344cbaca604d93444cc129a729ffeed0c57869d12ac9b8f1875de3c",
+      "file": "media/asset-034.jpeg",
+      "image": true,
+      "slides": [
+        37
+      ]
+    },
+    {
+      "id": "asset-035",
+      "part": "ppt/media/image36.png",
+      "sha256": "043b4fcb0d9ebacf8d8d7c4ea32c831cc45fa56da9ca4cb6173acfcd6de8e860",
+      "file": "media/asset-035.png",
+      "image": true,
+      "slides": [
+        38
+      ]
+    },
+    {
+      "id": "asset-036",
+      "part": "ppt/media/image37.png",
+      "sha256": "82b4e9e2ca801fa4147abe44659b3078c71a654c8bc411794fdf286df5a7f09a",
+      "file": "media/asset-036.png",
+      "image": true,
+      "slides": [
+        40
+      ]
+    },
+    {
+      "id": "asset-037",
+      "part": "ppt/media/image38.png",
+      "sha256": "6eb083ec1f0626a72282dd1fe99e2ccd1e5d685c6206a419250a379600ebd335",
+      "file": "media/asset-037.png",
+      "image": true,
+      "slides": [
+        41
+      ]
+    },
+    {
+      "id": "asset-038",
+      "part": "ppt/media/image39.gif",
+      "sha256": "fecad3c5f1fd7048ac1d4370c9f45202b065b2f10687dd843e723aba277ed4a6",
+      "file": "media/asset-038.gif",
+      "image": true,
+      "slides": [
+        43
+      ]
+    },
+    {
+      "id": "asset-039",
+      "part": "ppt/media/image40.png",
+      "sha256": "f61740dd996cd15d6681f77c74d64e2d99b5bf3bf0eab7e41c392962ac44adba",
+      "file": "media/asset-039.png",
+      "image": true,
+      "slides": [
+        44
+      ]
+    },
+    {
+      "id": "asset-040",
+      "part": "ppt/media/image41.gif",
+      "sha256": "94e72183e6fbfd3592c6a37f0fccb0f1391eb4b1243e17f044c16344fe4d233b",
+      "file": "media/asset-040.gif",
+      "image": true,
+      "slides": [
+        45
+      ]
+    },
+    {
+      "id": "asset-041",
+      "part": "ppt/media/image42.jpeg",
+      "sha256": "e4538c2fe36ea6a98e142d68e40a80ae25522dbb1f06fc9f51a3c597e7998706",
+      "file": "media/asset-041.jpeg",
+      "image": true,
+      "slides": [
+        46
+      ]
+    },
+    {
+      "id": "asset-042",
+      "part": "ppt/media/image43.gif",
+      "sha256": "259789eca2090ea89f258113ffad5111ba9213accc2c77236b367b660a18100b",
+      "file": "media/asset-042.gif",
+      "image": true,
+      "slides": [
+        47
+      ]
+    },
+    {
+      "id": "asset-043",
+      "part": "ppt/media/image44.jpg",
+      "sha256": "5c0162698f78aefa8735e01ac4146a55338b606233774d0bab6f5604ac6e0176",
+      "file": "media/asset-043.jpg",
+      "image": true,
+      "slides": [
+        48,
+        58
+      ]
+    },
+    {
+      "id": "asset-044",
+      "part": "ppt/media/image45.gif",
+      "sha256": "baf762e5e398277d4afaaa6668e0ac3f0c3615c34e6fc1610da1006e47c50d12",
+      "file": "media/asset-044.gif",
+      "image": true,
+      "slides": [
+        49
+      ]
+    },
+    {
+      "id": "asset-045",
+      "part": "ppt/media/image46.jpeg",
+      "sha256": "f0300cec15e13df406ae07266c8cdd3563d78b7c89395aa8c68e1ce17949f7ff",
+      "file": "media/asset-045.jpeg",
+      "image": true,
+      "slides": [
+        50
+      ]
+    },
+    {
+      "id": "asset-046",
+      "part": "ppt/media/image47.gif",
+      "sha256": "a34b2d80bed666e04fa4012d55f4381a0b27a1f2ac2995a414b16af49418a86c",
+      "file": "media/asset-046.gif",
+      "image": true,
+      "slides": [
+        51
+      ]
+    },
+    {
+      "id": "asset-047",
+      "part": "ppt/media/image48.gif",
+      "sha256": "e35e7244f62d4eef03ba6f25a5653a1eca21442839749419c65b7c1fa9f78cb6",
+      "file": "media/asset-047.gif",
+      "image": true,
+      "slides": [
+        52
+      ]
+    },
+    {
+      "id": "asset-048",
+      "part": "ppt/media/image49.jpeg",
+      "sha256": "d4dc9af8ebfaa878fe32623fec43501ff55a4a6613d9a8a13a5ac60be6381c8f",
+      "file": "media/asset-048.jpeg",
+      "image": true,
+      "slides": [
+        53
+      ]
+    },
+    {
+      "id": "asset-049",
+      "part": "ppt/media/image50.png",
+      "sha256": "d491b6c7068bd0622841a2e29b70aacbc10da232c3397a55ea0e851ddd324e1a",
+      "file": "media/asset-049.png",
+      "image": true,
+      "slides": [
+        54
+      ]
+    },
+    {
+      "id": "asset-050",
+      "part": "ppt/media/image51.gif",
+      "sha256": "f8c972e6405ba4d0a15c3a5df72d00baac25e21c87ca89625e1f731333fe162f",
+      "file": "media/asset-050.gif",
+      "image": true,
+      "slides": [
+        55
+      ]
+    },
+    {
+      "id": "asset-051",
+      "part": "ppt/media/image52.png",
+      "sha256": "3dd6b3de04230b38e720da8fd8e186afed91fe2feb6b8d322d63dcfac68272fa",
+      "file": "media/asset-051.png",
+      "image": true,
+      "slides": [
+        56
+      ]
+    },
+    {
+      "id": "asset-052",
+      "part": "ppt/media/image53.png",
+      "sha256": "0c2f5c846dd957665852af9e33c566f8330f79a8a708c65e332acee3317a2783",
+      "file": "media/asset-052.png",
+      "image": true,
+      "slides": [
+        57
+      ]
+    },
+    {
+      "id": "asset-053",
+      "part": "ppt/media/image54.jpeg",
+      "sha256": "90f8c5c3387db69571d5f01c694f67d38e725a72f7aa26f91d4f484c2760561e",
+      "file": "media/asset-053.jpeg",
+      "image": true,
+      "slides": [
+        59
+      ]
+    },
+    {
+      "id": "asset-054",
+      "part": "ppt/media/image55.gif",
+      "sha256": "049686ce675e678298be9c37d02b39ce0ead03f9deeea2a62e91813cfeee20f3",
+      "file": "media/asset-054.gif",
+      "image": true,
+      "slides": [
+        61
+      ]
+    },
+    {
+      "id": "asset-055",
+      "part": "ppt/media/image56.jpeg",
+      "sha256": "a825dad4f0a4659851262dd6339fd7190375a27832c7597f2640520c097eb3c3",
+      "file": "media/asset-055.jpeg",
+      "image": true,
+      "slides": [
+        63
+      ]
+    },
+    {
+      "id": "asset-056",
+      "part": "ppt/media/image57.png",
+      "sha256": "9139bcfdbdf79e090d2e8944a4940b385240ba28192b1c91c7ddd802746f364a",
+      "file": "media/asset-056.png",
+      "image": true,
+      "slides": [
+        69
+      ]
+    },
+    {
+      "id": "asset-057",
+      "part": "ppt/media/image58.gif",
+      "sha256": "2e97838d280a19623c234f40fb8f055f03201902d904a8eb91814db8b22f021a",
+      "file": "media/asset-057.gif",
+      "image": true,
+      "slides": [
+        69
+      ]
+    }
+  ],
+  "limits": "XML text, notes, chart caches and embedded media; no layout rendering, OCR, playback or linked-content retrieval.",
+  "previews": {
+    "status": "generated",
+    "files": [
+      "images-01.jpg",
+      "images-02.jpg",
+      "images-03.jpg",
+      "images-04.jpg",
+      "images-05.jpg",
+      "images-06.jpg",
+      "images-07.jpg",
+      "images-08.jpg"
+    ],
+    "failures": []
+  }
+}

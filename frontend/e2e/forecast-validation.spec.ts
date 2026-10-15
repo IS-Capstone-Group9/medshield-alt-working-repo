@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 import path from 'node:path'
-import { readFile } from 'node:fs/promises'
+import { mkdir, readFile } from 'node:fs/promises'
 import { MEDSHIELD_MARKUP, MEDSHIELD_STYLE } from '../lib/medshieldReference'
 import { getExecutableDashboardScript } from '../services/api/dashboard-engine'
 import { execFileSync } from 'node:child_process'
@@ -63,7 +63,7 @@ test('TypeScript evidence renders real comparisons, fixed origins, unavailable f
   await page.selectOption('#forecastModel','last_value')
   displayed = await chart()
   expect(displayed.backtest.filter((v:any)=>v!==null)).toEqual(Array(3).fill(1680))
-  await expect(page.locator('#kpiForecastMae')).toHaveText('20')
+  await expect(page.locator('#kpiForecastMae')).toHaveText('₱20.00')
   const downloadPromise = page.waitForEvent('download')
   await page.locator('#forecastExport').click()
   const csv = await readFile((await (await downloadPromise).path())!,'utf8')
@@ -116,11 +116,126 @@ test('published adapter preserves run, true lead, interval and export evidence',
   await page.evaluate(data => (window as any).setForecastValidationData(data), publishedForecastEvidence(release))
   await expect(page.locator('#forecastStatus')).toContainText('published')
   await expect(page.locator('#forecastBandNote')).toContainText('4/12')
-  await expect(page.locator('#kpiForecastMae')).toHaveText('10')
+  await expect(page.locator('#kpiForecastMae')).toHaveText('₱10.00')
   const downloadPromise = page.waitForEvent('download')
   await page.locator('#forecastExport').click()
   const csv = await readFile((await (await downloadPromise).path())!, 'utf8')
   expect(csv).toContain('fixture-run')
   expect(csv).toContain('fixture-release')
   expect(csv).toContain('unsupported_lead')
+})
+
+function errorOutputEvidence(unit = 'PHP') {
+  const data = evidence()
+  data.scope = {sector:'All', product:'', metric:unit === 'PHP' ? 'revenue' : 'quantity', unit}
+  data.run_id = 'fixture-run'
+  data.release_id = 'fixture-release'
+  data.source.checksum = '+fixture-checksum'
+  data.actuals = [
+    {period:'2024-12',actual:20}, {period:'2025-01',actual:0},
+    {period:'2025-02',actual:0}, {period:'2025-03',actual:-5},
+    {period:'2025-04',actual:7}, {period:'2025-05',actual:null},
+    {period:'2025-06',actual:100}, {period:'2025-07',actual:9},
+    {period:'2025-08',actual:5}, {period:'2025-12',actual:20},
+  ]
+  const backtest = [
+    {period:'2025-01',actual:0,prediction:0},
+    {period:'2025-02',actual:0,prediction:10},
+    {period:'2025-03',actual:-5,prediction:-8},
+    {period:'2025-04',actual:7,prediction:null},
+    {period:'2025-05',actual:null,prediction:3},
+    {period:'2025-06',actual:99,prediction:110},
+    {period:'2025-07',actual:null,prediction:10},
+  ].map((p,i) => ({...p,origin:'2024-12',lead:i+1}))
+  // Three matched finite pairs: errors 0, +10 and −3; hand-calculated metrics.
+  data.views['12'] = {evaluation_protocol:'fixed_origin_multi_step',training_end:'2024-12',evaluation_start:'2025-01',evaluation_end:'2025-07',common_scored_months:3,
+    models:{last_value:{backtest,forecast:[{period:'2026-09',origin:'2025-12',lead:9,actual:999,prediction:100}],metrics:{n:3,mae:13/3,rmse:Math.sqrt(109/3),wape:260,bias:7/3},comparison_metrics:{n:3,mae:13/3,wape:260,bias:7/3}}}}
+  return data
+}
+
+async function exportedRows(page: import('@playwright/test').Page) {
+  const download = page.waitForEvent('download')
+  await page.locator('#forecastExport').click()
+  const csv = await readFile((await (await download).path())!, 'utf8')
+  const lines = csv.replace(/^\uFEFF/, '').trim().split(/\r?\n/)
+  const cells = lines.map(line => Array.from(line.matchAll(/"((?:""|[^"])*)"(?:,|$)/g), match => match[1].replace(/""/g, '"')))
+  return cells.slice(1).map(values => Object.fromEntries(cells[0].map((header,i) => [header,values[i]])))
+}
+
+test('monthly evidence and CSV expose only matched historical errors and the historical summary', async ({ page }) => {
+  await page.evaluate(data => (window as any).setForecastValidationData(data), errorOutputEvidence())
+  await expect(page.locator('#forecastMetrics')).toContainText('Historical MAE')
+  await expect(page.locator('#kpiForecastMae')).toHaveText('₱4.33')
+  await expect(page.locator('#kpiForecastRmse')).toHaveText('₱6.03')
+  await expect(page.locator('#kpiForecastBias')).toHaveText('₱2.33')
+  await expect(page.locator('#kpiForecastWape')).toHaveText('260%')
+  await expect(page.locator('#forecastReview')).toContainText('positive signed error means overforecast and negative means underforecast')
+  await expect(page.locator('#forecastReview')).toContainText('Future errors are unavailable')
+  await expect(page.locator('#forecastBenchmarkTable thead')).toContainText('MAE (₱)')
+  await expect(page.locator('#forecastEvidenceTable thead')).toContainText('Signed error (₱)')
+  await expect(page.locator('#forecastEvidenceTable')).toBeVisible()
+  const monthly = (period: string) => page.locator('#forecastEvidenceTable tbody tr').filter({hasText:period})
+  await expect(monthly('2025-02').locator('td').nth(4)).toHaveText('10')
+  await expect(monthly('2025-03').locator('td').nth(5)).toHaveText('-3')
+  await expect(monthly('2025-01').locator('td').nth(4)).toHaveText('0')
+  await expect(monthly('2025-06').locator('td').nth(4)).toHaveText('Unavailable')
+  await expect(monthly('2025-06').locator('td').last()).toHaveText('historical actual mismatch')
+  const rows = await exportedRows(page)
+  const row = (period: string) => rows.find(r => r.period === period)!
+  expect(row('2025-01').absolute_error_target_units).toBe('0')
+  expect(row('2025-01').signed_error_target_units).toBe('0')
+  expect(row('2025-02').absolute_error_target_units).toBe('10')
+  expect(row('2025-02').signed_error_target_units).toBe('10')
+  expect(row('2025-03').absolute_error_target_units).toBe('3')
+  expect(row('2025-03').signed_error_target_units).toBe('-3')
+  for (const [period,reason] of [['2025-04','missing_backtest_prediction'],['2025-05','missing_displayed_actual'],['2025-06','historical_actual_mismatch'],['2025-07','missing_backtest_actual'],['2025-08','no_historical_backtest_prediction'],['2026-09','future_prediction_not_scored']]) {
+    expect(row(period).absolute_error_target_units).toBe('')
+    expect(row(period).signed_error_target_units).toBe('')
+    expect(row(period).error_unavailable_reason).toBe(reason)
+  }
+  expect(row('2026-09').historical_evaluation_start).toBe('2025-01')
+  expect(row('2026-09').historical_evaluation_end).toBe('2025-07')
+  expect(row('2026-09').historical_scored_count).toBe('3')
+  expect(Number(row('2026-09').historical_mae_target_units)).toBeCloseTo(13/3,12)
+  expect(Number(row('2026-09').historical_rmse_target_units)).toBeCloseTo(Math.sqrt(109/3),12)
+  expect(row('2026-09').historical_wape_percent).toBe('260')
+  expect(Number(row('2026-09').historical_mean_signed_error_target_units)).toBeCloseTo(7/3,12)
+  expect(row('2025-03').source_checksum).toBe("'+fixture-checksum")
+  expect(row('2025-03').run_id).toBe('fixture-run')
+  expect(row('2025-03').release_id).toBe('fixture-release')
+  expect(row('2025-03').publication_status).toBe('unpublished')
+  expect(row('2025-03').unit).toBe('PHP')
+  const screenshots = path.resolve('../outputs/predictive_error_visibility_20261010')
+  await mkdir(screenshots,{recursive:true})
+  await page.locator('[data-forecast-validation]').screenshot({path:path.join(screenshots,'frontend-desktop.png')})
+  await page.setViewportSize({width:390,height:844})
+  await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
+  await page.locator('[data-forecast-validation]').screenshot({path:path.join(screenshots,'frontend-mobile.png')})
+})
+
+test('non-PHP targets retain unit labels and unavailable versus zero historical summaries', async ({ page }) => {
+  const data = errorOutputEvidence('boxes')
+  await page.evaluate(value => (window as any).setForecastValidationData(value), data)
+  await expect(page.locator('#kpiForecastMae')).toHaveText('4.33 boxes')
+  await expect(page.locator('#kpiForecastBias')).toHaveText('2.33 boxes')
+  await expect(page.locator('#forecastEvidenceTable thead')).toContainText('Signed error (boxes)')
+  await expect(page.locator('#forecastBenchmarkTable thead')).toContainText('MAE (boxes)')
+  expect((await exportedRows(page)).find(r => r.period === '2025-03')!.unit).toBe('boxes')
+  data.views['12'].models.last_value.metrics = {n:0,mae:null,rmse:null,wape:null,bias:null}
+  await page.evaluate(value => (window as any).setForecastValidationData(value), data)
+  await expect(page.locator('#kpiForecastMae')).toHaveText('Unavailable')
+  const unavailable = (await exportedRows(page))[0]
+  expect(unavailable.historical_mae_target_units).toBe('')
+  expect(unavailable.historical_wape_percent).toBe('')
+  expect(unavailable.historical_scored_count).toBe('0')
+  data.views['12'].models.last_value.metrics = {n:1,mae:0,rmse:0,wape:null,bias:0}
+  await page.evaluate(value => (window as any).setForecastValidationData(value), data)
+  await expect(page.locator('#kpiForecastMae')).toHaveText('0 boxes')
+  await expect(page.locator('#kpiForecastBias')).toHaveText('0 boxes')
+  await expect(page.locator('#kpiForecastWape')).toHaveText('Unavailable')
+  const zero = (await exportedRows(page))[0]
+  expect(zero.historical_mae_target_units).toBe('0')
+  expect(zero.historical_rmse_target_units).toBe('0')
+  expect(zero.historical_mean_signed_error_target_units).toBe('0')
+  expect(zero.historical_scored_count).toBe('1')
 })

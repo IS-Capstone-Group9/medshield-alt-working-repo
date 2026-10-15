@@ -1,0 +1,143 @@
+{
+  "status": "LOCAL_PROPOSALS_UPDATED_NOT_DEPLOYED_NOT_APPROVED",
+  "date": "2026-10-07",
+  "before_sha256": "21ba704cb2fb3b39dab214f5e6ac7d3689b17967946889b3f838eb353f1f183c",
+  "after_sha256": "52da8dad06920c2f11bf39ee026a796dce98aafe9eab686cf879375e09175b99",
+  "bytes": 4748992,
+  "rows": 4561,
+  "columns": 29,
+  "user_instruction": "Make the reviewed nebulizer kits accessories",
+  "changes": [
+    {
+      "raw_product": "NEBULIZER KIT ADULT (SURGITECH)",
+      "before_category": "medical_equipment",
+      "after_category": "medical_supply",
+      "changed_fields": [
+        "product_category",
+        "review_notes"
+      ]
+    },
+    {
+      "raw_product": "NEBULIZER KIT WITH MASK PEDIA (PARTNERS)",
+      "before_category": "medical_equipment",
+      "after_category": "medical_supply",
+      "changed_fields": [
+        "product_category",
+        "review_notes"
+      ]
+    },
+    {
+      "raw_product": "NEBULIZER KIT ORMED",
+      "before_category": "medical_equipment",
+      "after_category": "medical_supply",
+      "changed_fields": [
+        "product_category",
+        "review_notes"
+      ]
+    },
+    {
+      "raw_product": "NEBULIZER KIT WITH MASK PEDIA (TOPCARE)",
+      "before_category": "medical_equipment",
+      "after_category": "medical_supply",
+      "changed_fields": [
+        "product_category",
+        "review_notes"
+      ]
+    },
+    {
+      "raw_product": "NEBULIZER KIT W/ MOUTH PC - ORMED",
+      "before_category": "medical_equipment",
+      "after_category": "medical_supply",
+      "changed_fields": [
+        "product_category",
+        "review_notes"
+      ]
+    },
+    {
+      "raw_product": "NEBULIZER KIT WITH MASK PEDIA (HEXACARE)",
+      "before_category": "medical_equipment",
+      "after_category": "medical_supply",
+      "changed_fields": [
+        "product_category",
+        "review_notes"
+      ]
+    },
+    {
+      "raw_product": "NEBULIZER KIT WITH MASK ADULT (HEXACARE)",
+      "before_category": "medical_equipment",
+      "after_category": "medical_supply",
+      "changed_fields": [
+        "product_category",
+        "review_notes"
+      ]
+    },
+    {
+      "raw_product": "NEBULIZER KIT ADULT (AIRLIFE)",
+      "before_category": "medical_equipment",
+      "after_category": "medical_supply",
+      "changed_fields": [
+        "product_category",
+        "review_notes"
+      ]
+    },
+    {
+      "raw_product": "NEBULIZER KIT (ADULT ) 10CC - SURGITECH",
+      "before_category": "medical_equipment",
+      "after_category": "medical_supply",
+      "changed_fields": [
+        "product_category",
+        "review_notes"
+      ]
+    },
+    {
+      "raw_product": "NEBULIZER KIT PEDIA",
+      "before_category": "medical_equipment",
+      "after_category": "medical_supply",
+      "changed_fields": [
+        "product_category",
+        "review_notes"
+      ]
+    },
+    {
+      "raw_product": "NEBULIZER KIT WITH TUBNG AND MOUTH PIECE - HUDSON",
+      "before_category": "medical_equipment",
+      "after_category": "medical_supply",
+      "changed_fields": [
+        "product_category",
+        "review_notes"
+      ]
+    },
+    {
+      "raw_product": "NEBULIZER KIT",
+      "before_category": "medical_equipment",
+      "after_category": "medical_supply",
+      "changed_fields": [
+        "product_category",
+        "review_notes"
+      ]
+    },
+    {
+      "raw_product": "NEBULIZER KIT WITH MASK PEDIA (SURGITECH)",
+      "before_category": "medical_equipment",
+      "after_category": "medical_supply",
+      "changed_fields": [
+        "product_category",
+        "review_notes"
+      ]
+    },
+    {
+      "raw_product": "NEBULIZER KIT - CHINA",
+      "before_category": "medical_equipment",
+      "after_category": "medical_supply",
+      "changed_fields": [
+        "product_category",
+        "review_notes"
+      ]
+    }
+  ],
+  "copies_identical": true,
+  "reviewer_fields_unchanged": true,
+  "forecast_fields_unchanged": true,
+  "tool": "@oai/artifact-tool",
+  "serialization": "Verified literal artifact values serialized as CSV"
+}

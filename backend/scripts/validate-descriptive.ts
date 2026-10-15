@@ -12,7 +12,10 @@ async function main() {
   const identity = (await executeDatabricksStatement(`SELECT DISTINCT dataset_id, policy_version, area_mapping_sha256, product_master_sha256, publication_status FROM ${fact}`, { rowLimit: 10 })).rows
   assert.equal(identity.length, 1, 'single dataset and policy identity')
   const [snapshot, summary] = await Promise.all([loadDatabricksDashboardSnapshot(), getDatabricksSalesSummary({})])
-  const close = (a: number, b: number, label: string) => assert.ok(Math.abs(a - b) < 0.01, `${label}: ${a} vs ${b}`)
+  const close = (a: number | null, b: number | null, label: string) => {
+    assert.ok(a != null && b != null && Number.isFinite(a) && Number.isFinite(b), `${label}: measurements must be observed`)
+    assert.ok(Math.abs(a - b) < 0.01, `${label}: ${a} vs ${b}`)
+  }
   close(snapshot.monthly.reduce((sum, row) => sum + (row.revenue ?? 0), 0), snapshot.totals.total_revenue, 'monthly/yearly revenue')
   close(snapshot.totals.total_revenue, summary.sums.net_cost, 'snapshot/filtered summary revenue')
   close(snapshot.totals.avg_margin!, summary.gross_margin_rate!, 'common population margin')

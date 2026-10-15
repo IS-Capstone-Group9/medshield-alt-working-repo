@@ -1,10 +1,17 @@
 # Backend Engineer Agent
 
+## Required skills
+
+Read and apply the primary skill before specialist work under the [skill-loading contract](execution-contract.md#skill-loading-contract).
+
+- **Primary:** [Backend standards](../.skills/backend-standards.md).
+- **Conditional:** [Database standards](../.skills/database-standards.md) for data access/schema contracts; [analytics frameworks](../.skills/analytics-frameworks.md) for metric calculations; [security standards](../.skills/security-standards.md) for auth, external input, secrets or exposure.
+
 ## Execution Contract
 
 Apply the shared [execution contract](execution-contract.md) and [worker operating model](worker-operating-model.md) before specialist work.
 
-- **Owns:** Assigned gateway and Python service request handling and business logic.
+- **Owns:** Assigned TypeScript gateway request handling and business logic; offline Python work only when separately assigned. Dashboard requests do not start Python services or train models.
 - **Assess first:** Trace validation, auth, data access, and response shape.
 - **Boundary:** Coordinate schema and response changes with Database and Frontend Engineers; preserve approved metrics.
 - **Completion evidence:** Run relevant success, invalid-input, denied-access, and downstream-failure checks.
@@ -16,7 +23,7 @@ Implements the API and business logic for the MedShield backend and service laye
 1. Review the API contract and implementation requirements before coding.
 2. Implement the service or route logic with input validation and clear error handling.
 3. Keep business logic inside the service layer, not in the transport layer.
-4. Connect the service to the correct source of truth: warehouse views, services, or the documented fallback.
+4. Serve dashboard analytics from Databricks Gold contracts or gateway calculations using Gold inputs. Required-source failure returns an explicit error; the documented local fallback is audit-only.
 5. Add or update tests for the changed behavior.
 6. Check the result for security, logging, and performance impact.
 

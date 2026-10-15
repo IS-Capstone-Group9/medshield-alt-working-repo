@@ -1,0 +1,96 @@
+{
+  "checked_at": "2026-10-09T02:14:28.905Z",
+  "scope": "Anonymous read-only HEAD counts; no raw rows, no cloud writes",
+  "configured": true,
+  "checks": [
+    {
+      "schema": "public",
+      "view": "vw_sales_transactions",
+      "status": 404,
+      "count_header": null
+    },
+    {
+      "schema": "public",
+      "view": "vw_dashboard_year_summary",
+      "status": 404,
+      "count_header": null
+    },
+    {
+      "schema": "public",
+      "view": "vw_dss_forecasts",
+      "status": 404,
+      "count_header": null
+    },
+    {
+      "schema": "public",
+      "view": "vw_dss_inventory_recommendations",
+      "status": 404,
+      "count_header": null
+    },
+    {
+      "schema": "medshield_sales",
+      "view": "fact_sales_transactions",
+      "status": 401,
+      "count_header": null
+    },
+    {
+      "schema": "medshield_sales",
+      "view": "fact_year_summary",
+      "status": 401,
+      "count_header": null
+    },
+    {
+      "schema": "medshield_sales",
+      "view": "databricks_yearly_sales_candidate",
+      "status": 401,
+      "count_header": null
+    },
+    {
+      "schema": "medshield_analytics",
+      "view": "fact_demand_forecast",
+      "status": 401,
+      "count_header": null
+    },
+    {
+      "schema": "medshield_identity",
+      "view": "accounts",
+      "status": 401,
+      "count_header": null
+    },
+    {
+      "schema": "medshield_identity",
+      "view": "audit_logs",
+      "status": 404,
+      "count_header": null
+    },
+    {
+      "actor": "service_role",
+      "schema": "medshield_identity",
+      "view": "audit_logs",
+      "selected_columns": "event_id,chain_sequence,hash_payload",
+      "status": 404,
+      "count_header": null,
+      "error_code": "PGRST205",
+      "error_message": "Could not find the table 'medshield_identity.audit_logs' in the schema cache"
+    },
+    {
+      "actor": "service_role",
+      "schema": "medshield_identity",
+      "view": "audit_chain_state",
+      "selected_columns": "chain_id,last_sequence,last_hash",
+      "status": 404,
+      "count_header": null,
+      "error_code": "PGRST205",
+      "error_message": "Could not find the table 'medshield_identity.audit_chain_state' in the schema cache"
+    },
+    {
+      "actor": "service_role",
+      "schema": "medshield_identity",
+      "view": "accounts",
+      "selected_columns": "auth_user_id,password_reset_required",
+      "status": 206,
+      "count_header": "0-0/7"
+    }
+  ],
+  "server_key_configured": true
+}

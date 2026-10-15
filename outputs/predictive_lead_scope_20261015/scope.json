@@ -1,0 +1,155 @@
+{
+  "schema_version": "1.0",
+  "recorded_at_utc": "2026-10-15T09:39:59.388505+00:00",
+  "recorded_client_date": "2026-10-15",
+  "accountable_role": "Business Analyst",
+  "user_answer": "4",
+  "selected_choice": 4,
+  "guided_step_3_status": "complete_on_user_selected_research_lead_groups",
+  "attribution": "Requesting user selection in this chat; no named external acceptance timestamp or signature supplied",
+  "target": "company_monthly_eligible_recorded_net_sales_PHP",
+  "lead_groups": [
+    [
+      1,
+      3
+    ],
+    [
+      1,
+      6
+    ],
+    [
+      1,
+      12
+    ]
+  ],
+  "lead_definition": "Calendar months after each historical training-data cutoff",
+  "cumulative": true,
+  "groups_overlap": true,
+  "per_model_case_counts": {
+    "last_value": {
+      "development": {
+        "3": 15,
+        "6": 30,
+        "12": 60
+      },
+      "retrospective_audit": {
+        "3": 3,
+        "6": 6,
+        "12": 12
+      }
+    },
+    "last_value_l1_calibrated_10pct": {
+      "development": {
+        "3": 15,
+        "6": 30,
+        "12": 60
+      },
+      "retrospective_audit": {
+        "3": 3,
+        "6": 6,
+        "12": 12
+      }
+    },
+    "median_12": {
+      "development": {
+        "3": 15,
+        "6": 30,
+        "12": 60
+      },
+      "retrospective_audit": {
+        "3": 3,
+        "6": 6,
+        "12": 12
+      }
+    },
+    "median_3": {
+      "development": {
+        "3": 15,
+        "6": 30,
+        "12": 60
+      },
+      "retrospective_audit": {
+        "3": 3,
+        "6": 6,
+        "12": 12
+      }
+    },
+    "median_6": {
+      "development": {
+        "3": 15,
+        "6": 30,
+        "12": 60
+      },
+      "retrospective_audit": {
+        "3": 3,
+        "6": 6,
+        "12": 12
+      }
+    },
+    "seasonal_median_shrink_6_3y": {
+      "development": {
+        "3": 15,
+        "6": 30,
+        "12": 60
+      },
+      "retrospective_audit": {
+        "3": 3,
+        "6": 6,
+        "12": 12
+      }
+    },
+    "weighted_median_6": {
+      "development": {
+        "3": 15,
+        "6": 30,
+        "12": 60
+      },
+      "retrospective_audit": {
+        "3": 3,
+        "6": 6,
+        "12": 12
+      }
+    }
+  },
+  "cohorts": [
+    "development",
+    "already_inspected_2025_retrospective_audit"
+  ],
+  "retrospective_audit_origin": "2024-12",
+  "prospective_confirmation_period": null,
+  "operational_calendar_window": null,
+  "proposed_wape_goal_percent": 10,
+  "reference_equivalent_mae_php": "1544973.51",
+  "currency_conversion_scope": "Full 12-month January-December2025 reference only; do not treat as equivalent for shorter groups or different cohorts",
+  "max_mae_php": null,
+  "max_wape_percent": null,
+  "business_acceptance_status": "not_assessed_thresholds_missing",
+  "publication_approved": false,
+  "original_selection": "last_value",
+  "selection_changed": false,
+  "criteria_changed": false,
+  "fits_executed": false,
+  "new_forecasts": false,
+  "assessment_2026": null,
+  "source_sha256": {
+    "outputs/predictive_error_optimization_20261010/models/f749f47ef44db53a35f56a822e2b35edc0877ad5126c4352a996dfb2f5a20e8b/run.json": "7c22e0467925ee95fed2f5d287357ff0948bbc524e25715954cd28c22a83e841",
+    "outputs/predictive_research_goal_20261015/goal.json": "143f5c78cd08b04d340ce9f9ce14c8adc2323308a902b71c9cd7291e41b71579",
+    "outputs/predictive_error_policy_20261010/policy.json": "55c93ca278c8fa9a19efaecdd8327836bc3d35662fe733eb36917125bb4d0fcb"
+  },
+  "before": {
+    "PREDICTIVE_CLIENT_DECISION_BRIEF.md": "d4fe79bb52aa48ced7ff05f1c6acd07ed40c48d82688f18644c35462f719c188",
+    "OBJECTIVE_EVIDENCE_REGISTER.md": "e10b47a7e3196c68c387e371eaca34cd9174a2d8120eeecb32eef44061ca4917"
+  },
+  "after": {
+    "PREDICTIVE_CLIENT_DECISION_BRIEF.md": "18cc5fac03939d3ffb73b295fad7ed1ce56165b90f5515d4e8bebbfaf9d2ae98",
+    "OBJECTIVE_EVIDENCE_REGISTER.md": "f21c4cd49c030c128f001d470596f4d48f6732a8a5c2cae0bea6eeb0a3733fe7"
+  },
+  "applied_guidance": [
+    ".agents/business-analyst.md",
+    ".skills/business-analysis-frameworks.md",
+    ".skills/analytics-frameworks.md",
+    ".skills/documentation-standards.md",
+    ".skills/testing-standards.md"
+  ],
+  "verification_scope": "Document attribution, same frozen point keys and cumulative counts; no new accuracy evaluation or model selection"
+}

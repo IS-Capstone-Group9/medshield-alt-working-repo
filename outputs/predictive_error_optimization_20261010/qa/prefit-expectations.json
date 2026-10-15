@@ -1,0 +1,921 @@
+{
+  "status": "PREFIT_EXPECTATIONS_FROZEN",
+  "prepared_at_utc": "2026-10-10T08:10:19.581674+00:00",
+  "actual_source_evaluation_executed": false,
+  "method": "Separate Decimal formulas and hand cases; no production forecast imports or fitting",
+  "formulas": {
+    "ordinary_even_median": "midpoint of two central values",
+    "weighted_median": "lower: first ordered value with twice cumulative positive weight >= total weight; duplicate mass preserved",
+    "weighted_median_6_weights": "[1,2,3,4,5,6] oldest to newest",
+    "seasonal_shrinkage": "0.5 * median(last6) + 0.5 * median(target−12,target−24,target−36)",
+    "calibration": "min(1.1,max(0.9, lower weighted median(target/inner_endpoint,abs(inner_endpoint)))); no informative nonzero endpoint -> 1",
+    "calibration_inner_origins": "training_start+23, step3, inner_origin+12 <= outer_origin; all 12 inner target leads"
+  },
+  "source_sha256": {
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_validation\\2026-10-09T13-28-48-501Z\\input.json": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_validation\\2026-10-09T13-28-48-501Z\\input.sha256": "1612b49cbd94ae4d9a80b01e35a01608709ec74185221114bf5622de48ae65e0",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\run.json": "9889baea07a1f222edc9d2d2576fefc0d2be4bc8e52dc4d9a3ff9919e0056f45",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_policy_20261010\\policy.json": "55c93ca278c8fa9a19efaecdd8327836bc3d35662fe733eb36917125bb4d0fcb",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\engine.py": "cdc5a39363c69f500897e849f2c37ab42c401ed789b6890e6abab808cbbee4c8",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\models.py": "2b2b6495e3ff54b7613800fded65832efc46fc1018ad2fe09f678baf857c4ac9",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\metrics.py": "4841243a2b262d71845596d4d72b44a7aa7447602003cfdb79b971e1d7ac8baa",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\contracts.py": "a6ece04850ba397a84c72309043c9ab6c83c3ee7a4fc1fe4b63f1b82b8b86d3a",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\extended_experiment.py": "3d88a6aa92bb0b03140ce9830512cd1292d4a6d0fe85ad8bdc190d92b64f3b42"
+  },
+  "qa_code_sha256": {
+    "prepare_expectations.py": "3ec513e821f016c9709bcc7c2b8f23df89a7c636809a053191e6b0c376131907",
+    "independent_oracle.py": "13e9b34c9ab7e4f4ac703608b7cab24170bcef5cb184e9d3ece85c0eacb72b30",
+    "test_independent_oracle.py": "5e026e14e6d4c2a6193817a7865e2d82e136729a4a04fb0593d2303190a5ab1f"
+  },
+  "scalar_cases": [
+    {
+      "name": "exact_upper",
+      "initial_24_values": 100,
+      "subsequent_12_values": [
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110
+      ],
+      "expected_learned_scale": "1.1",
+      "expected_unbounded_l1_scale": "1.1",
+      "expected_prediction_each_lead": "121",
+      "independent_trace": {
+        "learned_scale": "1.1",
+        "unbounded_l1_scale": "1.1",
+        "inner_origins": [
+          23
+        ],
+        "inner_origin_count": 1,
+        "inner_case_count": 12,
+        "informative_case_count": 12,
+        "zero_endpoint_case_count": 0,
+        "inner_zero_endpoint_constant_absolute_loss_php": "0",
+        "calibration_reason": "bounded_origin_local_l1_calibration",
+        "cases": [
+          [
+            23,
+            1,
+            "100",
+            "110"
+          ],
+          [
+            23,
+            2,
+            "100",
+            "110"
+          ],
+          [
+            23,
+            3,
+            "100",
+            "110"
+          ],
+          [
+            23,
+            4,
+            "100",
+            "110"
+          ],
+          [
+            23,
+            5,
+            "100",
+            "110"
+          ],
+          [
+            23,
+            6,
+            "100",
+            "110"
+          ],
+          [
+            23,
+            7,
+            "100",
+            "110"
+          ],
+          [
+            23,
+            8,
+            "100",
+            "110"
+          ],
+          [
+            23,
+            9,
+            "100",
+            "110"
+          ],
+          [
+            23,
+            10,
+            "100",
+            "110"
+          ],
+          [
+            23,
+            11,
+            "100",
+            "110"
+          ],
+          [
+            23,
+            12,
+            "100",
+            "110"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "clipped_upper",
+      "initial_24_values": 100,
+      "subsequent_12_values": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "expected_learned_scale": "1.1",
+      "expected_unbounded_l1_scale": "2",
+      "expected_prediction_each_lead": "220",
+      "independent_trace": {
+        "learned_scale": "1.1",
+        "unbounded_l1_scale": "2",
+        "inner_origins": [
+          23
+        ],
+        "inner_origin_count": 1,
+        "inner_case_count": 12,
+        "informative_case_count": 12,
+        "zero_endpoint_case_count": 0,
+        "inner_zero_endpoint_constant_absolute_loss_php": "0",
+        "calibration_reason": "bounded_origin_local_l1_calibration",
+        "cases": [
+          [
+            23,
+            1,
+            "100",
+            "200"
+          ],
+          [
+            23,
+            2,
+            "100",
+            "200"
+          ],
+          [
+            23,
+            3,
+            "100",
+            "200"
+          ],
+          [
+            23,
+            4,
+            "100",
+            "200"
+          ],
+          [
+            23,
+            5,
+            "100",
+            "200"
+          ],
+          [
+            23,
+            6,
+            "100",
+            "200"
+          ],
+          [
+            23,
+            7,
+            "100",
+            "200"
+          ],
+          [
+            23,
+            8,
+            "100",
+            "200"
+          ],
+          [
+            23,
+            9,
+            "100",
+            "200"
+          ],
+          [
+            23,
+            10,
+            "100",
+            "200"
+          ],
+          [
+            23,
+            11,
+            "100",
+            "200"
+          ],
+          [
+            23,
+            12,
+            "100",
+            "200"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "clipped_lower",
+      "initial_24_values": 100,
+      "subsequent_12_values": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50
+      ],
+      "expected_learned_scale": ".9",
+      "expected_unbounded_l1_scale": ".5",
+      "expected_prediction_each_lead": "45",
+      "independent_trace": {
+        "learned_scale": "0.9",
+        "unbounded_l1_scale": "0.5",
+        "inner_origins": [
+          23
+        ],
+        "inner_origin_count": 1,
+        "inner_case_count": 12,
+        "informative_case_count": 12,
+        "zero_endpoint_case_count": 0,
+        "inner_zero_endpoint_constant_absolute_loss_php": "0",
+        "calibration_reason": "bounded_origin_local_l1_calibration",
+        "cases": [
+          [
+            23,
+            1,
+            "100",
+            "50"
+          ],
+          [
+            23,
+            2,
+            "100",
+            "50"
+          ],
+          [
+            23,
+            3,
+            "100",
+            "50"
+          ],
+          [
+            23,
+            4,
+            "100",
+            "50"
+          ],
+          [
+            23,
+            5,
+            "100",
+            "50"
+          ],
+          [
+            23,
+            6,
+            "100",
+            "50"
+          ],
+          [
+            23,
+            7,
+            "100",
+            "50"
+          ],
+          [
+            23,
+            8,
+            "100",
+            "50"
+          ],
+          [
+            23,
+            9,
+            "100",
+            "50"
+          ],
+          [
+            23,
+            10,
+            "100",
+            "50"
+          ],
+          [
+            23,
+            11,
+            "100",
+            "50"
+          ],
+          [
+            23,
+            12,
+            "100",
+            "50"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "negative_endpoint",
+      "initial_24_values": -100,
+      "subsequent_12_values": [
+        -90,
+        -90,
+        -90,
+        -90,
+        -90,
+        -90,
+        -90,
+        -90,
+        -90,
+        -90,
+        -90,
+        -90
+      ],
+      "expected_learned_scale": ".9",
+      "expected_unbounded_l1_scale": ".9",
+      "expected_prediction_each_lead": "-81",
+      "independent_trace": {
+        "learned_scale": "0.9",
+        "unbounded_l1_scale": "0.9",
+        "inner_origins": [
+          23
+        ],
+        "inner_origin_count": 1,
+        "inner_case_count": 12,
+        "informative_case_count": 12,
+        "zero_endpoint_case_count": 0,
+        "inner_zero_endpoint_constant_absolute_loss_php": "0",
+        "calibration_reason": "bounded_origin_local_l1_calibration",
+        "cases": [
+          [
+            23,
+            1,
+            "-100",
+            "-90"
+          ],
+          [
+            23,
+            2,
+            "-100",
+            "-90"
+          ],
+          [
+            23,
+            3,
+            "-100",
+            "-90"
+          ],
+          [
+            23,
+            4,
+            "-100",
+            "-90"
+          ],
+          [
+            23,
+            5,
+            "-100",
+            "-90"
+          ],
+          [
+            23,
+            6,
+            "-100",
+            "-90"
+          ],
+          [
+            23,
+            7,
+            "-100",
+            "-90"
+          ],
+          [
+            23,
+            8,
+            "-100",
+            "-90"
+          ],
+          [
+            23,
+            9,
+            "-100",
+            "-90"
+          ],
+          [
+            23,
+            10,
+            "-100",
+            "-90"
+          ],
+          [
+            23,
+            11,
+            "-100",
+            "-90"
+          ],
+          [
+            23,
+            12,
+            "-100",
+            "-90"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "lower_median_exact_half_tie",
+      "initial_24_values": 100,
+      "subsequent_12_values": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150
+      ],
+      "expected_learned_scale": ".9",
+      "expected_unbounded_l1_scale": ".5",
+      "expected_prediction_each_lead": "135",
+      "independent_trace": {
+        "learned_scale": "0.9",
+        "unbounded_l1_scale": "0.5",
+        "inner_origins": [
+          23
+        ],
+        "inner_origin_count": 1,
+        "inner_case_count": 12,
+        "informative_case_count": 12,
+        "zero_endpoint_case_count": 0,
+        "inner_zero_endpoint_constant_absolute_loss_php": "0",
+        "calibration_reason": "bounded_origin_local_l1_calibration",
+        "cases": [
+          [
+            23,
+            1,
+            "100",
+            "50"
+          ],
+          [
+            23,
+            2,
+            "100",
+            "50"
+          ],
+          [
+            23,
+            3,
+            "100",
+            "50"
+          ],
+          [
+            23,
+            4,
+            "100",
+            "50"
+          ],
+          [
+            23,
+            5,
+            "100",
+            "50"
+          ],
+          [
+            23,
+            6,
+            "100",
+            "50"
+          ],
+          [
+            23,
+            7,
+            "100",
+            "150"
+          ],
+          [
+            23,
+            8,
+            "100",
+            "150"
+          ],
+          [
+            23,
+            9,
+            "100",
+            "150"
+          ],
+          [
+            23,
+            10,
+            "100",
+            "150"
+          ],
+          [
+            23,
+            11,
+            "100",
+            "150"
+          ],
+          [
+            23,
+            12,
+            "100",
+            "150"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "no_informative_endpoint",
+      "initial_24_values": 0,
+      "subsequent_12_values": [
+        -2,
+        -1,
+        0,
+        1,
+        2,
+        3,
+        -3,
+        4,
+        -4,
+        5,
+        -5,
+        6
+      ],
+      "expected_learned_scale": "1",
+      "expected_unbounded_l1_scale": null,
+      "expected_prediction_each_lead": "6",
+      "independent_trace": {
+        "learned_scale": "1",
+        "unbounded_l1_scale": null,
+        "inner_origins": [
+          23
+        ],
+        "inner_origin_count": 1,
+        "inner_case_count": 12,
+        "informative_case_count": 0,
+        "zero_endpoint_case_count": 12,
+        "inner_zero_endpoint_constant_absolute_loss_php": "36",
+        "calibration_reason": "no_informative_nonzero_inner_endpoints",
+        "cases": [
+          [
+            23,
+            1,
+            "0",
+            "-2"
+          ],
+          [
+            23,
+            2,
+            "0",
+            "-1"
+          ],
+          [
+            23,
+            3,
+            "0",
+            "0"
+          ],
+          [
+            23,
+            4,
+            "0",
+            "1"
+          ],
+          [
+            23,
+            5,
+            "0",
+            "2"
+          ],
+          [
+            23,
+            6,
+            "0",
+            "3"
+          ],
+          [
+            23,
+            7,
+            "0",
+            "-3"
+          ],
+          [
+            23,
+            8,
+            "0",
+            "4"
+          ],
+          [
+            23,
+            9,
+            "0",
+            "-4"
+          ],
+          [
+            23,
+            10,
+            "0",
+            "5"
+          ],
+          [
+            23,
+            11,
+            "0",
+            "-5"
+          ],
+          [
+            23,
+            12,
+            "0",
+            "6"
+          ]
+        ]
+      }
+    }
+  ],
+  "other_hand_cases": [
+    {
+      "recipe": "median_3",
+      "values": [
+        -5,
+        0,
+        15
+      ],
+      "expected": "0"
+    },
+    {
+      "recipe": "ordinary_even_median",
+      "values": [
+        -10,
+        0,
+        10,
+        30
+      ],
+      "expected": "5"
+    },
+    {
+      "recipe": "weighted_median_6",
+      "values": [
+        0,
+        0,
+        0,
+        10,
+        10,
+        0
+      ],
+      "weights": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "expected": "0"
+    },
+    {
+      "recipe": "weighted_median_generic_duplicate_mass",
+      "values": [
+        1,
+        1,
+        2
+      ],
+      "weights": [
+        10,
+        10,
+        15
+      ],
+      "expected": "1"
+    },
+    {
+      "recipe": "weighted_median_generic_signed_exact_half",
+      "values": [
+        ".9",
+        "1.1"
+      ],
+      "weights": [
+        100,
+        100
+      ],
+      "expected": ".9"
+    },
+    {
+      "recipe": "seasonal_shrink_median_6",
+      "recent_median": "10",
+      "same_calendar_prior3": [
+        -5,
+        0,
+        15
+      ],
+      "expected": "5"
+    }
+  ],
+  "origin_support": [
+    {
+      "outer_origin": "2022-12",
+      "training_count": 36,
+      "inner_origin_count": 1,
+      "inner_case_count": 12
+    },
+    {
+      "outer_origin": "2023-03",
+      "training_count": 39,
+      "inner_origin_count": 2,
+      "inner_case_count": 24
+    },
+    {
+      "outer_origin": "2023-06",
+      "training_count": 42,
+      "inner_origin_count": 3,
+      "inner_case_count": 36
+    },
+    {
+      "outer_origin": "2023-09",
+      "training_count": 45,
+      "inner_origin_count": 4,
+      "inner_case_count": 48
+    },
+    {
+      "outer_origin": "2023-12",
+      "training_count": 48,
+      "inner_origin_count": 5,
+      "inner_case_count": 60
+    },
+    {
+      "outer_origin": "2024-12",
+      "training_count": 60,
+      "inner_origin_count": 9,
+      "inner_case_count": 108
+    }
+  ],
+  "metric_hand_pairs": {
+    "pairs": [
+      [
+        100,
+        110
+      ],
+      [
+        100,
+        90
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        -100,
+        -90
+      ]
+    ],
+    "expected": {
+      "n": 4,
+      "mae": "7.5",
+      "rmse": "8.66025403784438646763723170752936183471402626905190314027903",
+      "wape": "10",
+      "bias": "2.5",
+      "normalized_bias": "3.33333333333333333333333333333333333333333333333333333333333",
+      "absolute_error_sum": "30",
+      "signed_error_sum": "10",
+      "over_count": 2,
+      "under_count": 1,
+      "exact_count": 1,
+      "over_amount": "20",
+      "under_amount": "10",
+      "actual_absolute_sum": "300"
+    }
+  },
+  "cancellation_hand_pairs": {
+    "pairs": [
+      [
+        100,
+        200
+      ],
+      [
+        100,
+        0
+      ]
+    ],
+    "expected": {
+      "n": 2,
+      "mae": "100",
+      "rmse": "100",
+      "wape": "100",
+      "bias": "0",
+      "normalized_bias": "0",
+      "absolute_error_sum": "200",
+      "signed_error_sum": "0",
+      "over_count": 1,
+      "under_count": 1,
+      "exact_count": 0,
+      "over_amount": "100",
+      "under_amount": "100",
+      "actual_absolute_sum": "200"
+    }
+  },
+  "numeric_tolerances": {
+    "point_php": "0.000001",
+    "metric_php": "0.000001",
+    "rate_percentage_point": "0.0000000001",
+    "displayed_php_rounding": "0.005"
+  },
+  "leakage_probes": [
+    "Mutate any records after an outer origin; every recipe's origin predictions and calibration trace remain unchanged",
+    "Mutate all 2025 audit actuals; development selection and development metric keys remain unchanged",
+    "Inner calibration endpoint and every target date remain <= outer origin",
+    "Seasonal references exactly target−12/24/36 and within Jan2020 training start; no fewer-year fallback",
+    "Reject gap, missing/null/nonfinite target, invalid or unsupported lead and duplicate evaluation key",
+    "Code/input/config/package drift after registration and repeated execution refuse before results",
+    "Original selection rules and benchmark classification remain unchanged; six recipes are challengers",
+    "No source clipping, outlier deletion, future actual fabrication, warehouse write or publication"
+  ],
+  "expected_populations": {
+    "new_recipe_count": 6,
+    "development_keys_per_recipe": 60,
+    "distinct_development_targets": 24,
+    "audit_keys_per_recipe": 12,
+    "development_origins": 5,
+    "leads": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ]
+  },
+  "inherited_limitations": [
+    "Five outer origins and dependent inner cases give limited support",
+    "Development selection is adaptively inspected; 2025 audit is already inspected and cannot be an untouched confirmation",
+    "Company net-sales PHP is not medicine unit demand or inventory benefit",
+    "Client MAE/WAPE tolerance remains unset; research selection is not approval",
+    "Unsupported empirical intervals remain null"
+  ],
+  "tests": {
+    "command": [
+      "C:\\Users\\Adrian\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "-X",
+      "utf8",
+      "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\qa\\test_independent_oracle.py"
+    ],
+    "returncode": 0,
+    "count": 8,
+    "log_sha256": "7c213cc06973b5e159ddbd7650bf99a701de63d88cb5189418faa631ca45aeb9"
+  },
+  "skills": [
+    ".agents/qa-engineer.md",
+    ".skills/testing-standards.md",
+    ".skills/analytics-frameworks.md",
+    ".skills/database-standards.md",
+    ".skills/coding-standards.md"
+  ]
+}

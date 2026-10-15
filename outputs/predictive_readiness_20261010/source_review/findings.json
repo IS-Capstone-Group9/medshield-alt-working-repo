@@ -1,0 +1,746 @@
+{
+  "generated_at": "2026-10-10T12:15:59.825638+08:00",
+  "status": "local_source_review_not_model_or_publication_acceptance",
+  "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+  "fact_delta_version": 20,
+  "transformation_policy": "sales_restart_gold_v7_independent_catalog",
+  "retained_composition_extracted_at": "2026-10-09T14:01:29.524Z",
+  "observed_remote_state_today": false,
+  "source_grain": "CSV report detail rows; not unique verified invoices/orders/SKUs",
+  "source_date_field": "Date Delivered",
+  "source_date_rule": "ISO / day-first modern slash dates / integral Excel serial; no inferred booking or order date",
+  "source_identifiers": "DR Number; file hash plus physical row number; no stable original line-item ID",
+  "csv_headers": [
+    "Area",
+    "DR Number",
+    "Date Delivered",
+    "Product",
+    " Qty ",
+    " CP ",
+    " Total CP ",
+    " Disc ",
+    " Net CP ",
+    " TP/UNIT ",
+    " TOTAL TP ",
+    " Net Income ",
+    "%"
+  ],
+  "input_provenance": [
+    {
+      "path": "databricks/medshield_project_csv/medshield_project_csv/medshield_data_2024.csv",
+      "sha256": "12ebda6996de76cf6af6c958485900fb81597f6f7f19dec4c8eea066919fb938",
+      "status": "ADJUSTED_ESTIMATED_PRODUCT_ALLOCATION_SOURCE",
+      "policy": "one_to_one_same_year_same_area_nearest_financial_profile"
+    },
+    {
+      "path": "databricks/medshield_project_csv/medshield_project_csv/medshield_data_2025.csv",
+      "sha256": "d05fec98a3a312416118fab4d11ca1f6e0c19f1951248b7b22fcc518eeb15569",
+      "status": "ADJUSTED_ESTIMATED_PRODUCT_ALLOCATION_SOURCE",
+      "policy": "contract_parent_replaced_with_existing_product_allocation_v1"
+    }
+  ],
+  "original_2024_preserved_columns_check": {
+    "changed_column_indices": {
+      "3": 124,
+      "4": 124,
+      "5": 124,
+      "9": 124
+    },
+    "invalid_changes": 0
+  },
+  "cases": {
+    "2024-12": {
+      "adjusted_csv_gold_population": {
+        "source_count": 197,
+        "eligible_revenue_count": 197,
+        "revenue_excluded_count": 0,
+        "raw_known_net_sales": "16744970.51",
+        "net_sales": "16744970.51",
+        "positive_sales": "16744970.51",
+        "signed_negative_adjustments": "0.00",
+        "eligible_margin_count": 195,
+        "gross_margin_amount": "4354510.10",
+        "margin_revenue_basis": "16723830.51",
+        "weighted_margin_pct": "26.037756",
+        "distinct_delivery_dates": 17,
+        "distinct_dr_labels": 92,
+        "missing_dr_count": 0,
+        "document_date_area_groups": 92,
+        "groups_with_multiple_lines": 35,
+        "repeated_identical_raw_line_extra_occurrences": 0,
+        "first_delivery": "2024-12-02",
+        "last_delivery": "2024-12-31",
+        "highest_revenue_delivery_date": "2024-12-31",
+        "highest_revenue_delivery_date_amount": "12525723.05",
+        "top_day_share_pct": "74.802897",
+        "top_delivery_document_group_share_pct": "37.820311",
+        "area_contributions": {
+          "ADMIN": "235307.26",
+          "BATANGAS": "188416.50",
+          "GOVERNMENT": "14864034.75",
+          "HOSPITAL": "1207046.00",
+          "QUEZON": "250166.00"
+        },
+        "quality_rule_counts": {
+          "DISCOUNT_DASH_INTERPRETED_AS_ZERO": 179,
+          "GROSS_VALUE_FORMULA_MISMATCH": 2,
+          "TRANSFER_VALUE_FORMULA_MISMATCH": 2
+        },
+        "eligible_gross_sales": "16746659.01",
+        "eligible_gross_sales_count": 195,
+        "eligible_total_acquisition_cost": "12369320.41",
+        "eligible_total_acquisition_cost_count": 195
+      },
+      "original_csv_raw_financial_control": {
+        "parsed_detail_count": 217,
+        "raw_known_net_sales": "20373336.01",
+        "raw_known_gross_margin": "7988682.26",
+        "invalid_or_missing_product_count": 17,
+        "contract_parent_count": 21,
+        "exact_business_repeat_extra_occurrences": 2,
+        "net_difference_to_final_gold": "-3628365.50",
+        "delivery_date_area_dr_group_mismatch_count": 18,
+        "sum_group_signed_difference": "-3628365.50"
+      },
+      "source_dispositions": {
+        "KEEP_SOURCE_YEAR_ALIGNED": 197,
+        "REVIEW_INVALID_TRANSACTION_IDENTITY": 17,
+        "REVIEW_POSSIBLE_DUPLICATE": 3
+      },
+      "source_disposition_finance": {
+        "KEEP_SOURCE_YEAR_ALIGNED": {
+          "count": 197,
+          "raw_known_net_sales": "16744970.51"
+        },
+        "REVIEW_INVALID_TRANSACTION_IDENTITY": {
+          "count": 17,
+          "raw_known_net_sales": "3621045.50"
+        },
+        "REVIEW_POSSIBLE_DUPLICATE": {
+          "count": 3,
+          "raw_known_net_sales": "7320.00"
+        }
+      },
+      "supplied_raw_net_sales": "20373336.01",
+      "historical_preparation_parent_count": 0,
+      "historical_preparation_parent_net_sales": "0.00",
+      "historical_preparation_methods": {}
+    },
+    "2025-03": {
+      "adjusted_csv_gold_population": {
+        "source_count": 241,
+        "eligible_revenue_count": 241,
+        "revenue_excluded_count": 0,
+        "raw_known_net_sales": "2612295.10",
+        "net_sales": "2612295.10",
+        "positive_sales": "2612295.10",
+        "signed_negative_adjustments": "0.00",
+        "eligible_margin_count": 235,
+        "gross_margin_amount": "1134570.11",
+        "margin_revenue_basis": "2142401.76",
+        "weighted_margin_pct": "52.957859",
+        "distinct_delivery_dates": 12,
+        "distinct_dr_labels": 92,
+        "missing_dr_count": 0,
+        "document_date_area_groups": 92,
+        "groups_with_multiple_lines": 46,
+        "repeated_identical_raw_line_extra_occurrences": 0,
+        "first_delivery": "2025-03-03",
+        "last_delivery": "2025-03-31",
+        "highest_revenue_delivery_date": "2025-03-15",
+        "highest_revenue_delivery_date_amount": "806176.20",
+        "top_day_share_pct": "30.860840",
+        "top_delivery_document_group_share_pct": "16.260031",
+        "area_contributions": {
+          "ADMIN": "169491.49",
+          "BATANGAS": "308063.00",
+          "GOVERNMENT": "937264.30",
+          "HOSPITAL": "938174.20",
+          "MARINDUQUE": "13132.00",
+          "QUEZON": "246170.11"
+        },
+        "quality_rule_counts": {
+          "GROSS_VALUE_FORMULA_MISMATCH": 6,
+          "TRANSFER_VALUE_FORMULA_MISMATCH": 6
+        },
+        "eligible_gross_sales": "2167154.86",
+        "eligible_gross_sales_count": 235,
+        "eligible_total_acquisition_cost": "1007831.65",
+        "eligible_total_acquisition_cost_count": 235
+      },
+      "original_csv_raw_financial_control": {
+        "parsed_detail_count": 239,
+        "raw_known_net_sales": "2612295.10",
+        "raw_known_gross_margin": "1289188.77",
+        "invalid_or_missing_product_count": 1,
+        "contract_parent_count": 2,
+        "exact_business_repeat_extra_occurrences": 3,
+        "net_difference_to_final_gold": "0.00",
+        "delivery_date_area_dr_group_mismatch_count": 0,
+        "sum_group_signed_difference": "0.00"
+      },
+      "source_dispositions": {
+        "KEEP_SOURCE_YEAR_ALIGNED": 241
+      },
+      "source_disposition_finance": {
+        "KEEP_SOURCE_YEAR_ALIGNED": {
+          "count": 241,
+          "raw_known_net_sales": "2612295.10"
+        }
+      },
+      "supplied_raw_net_sales": "2612295.10",
+      "historical_preparation_parent_count": 3,
+      "historical_preparation_parent_net_sales": "603160.00",
+      "historical_preparation_methods": {
+        "nearest_actual_medical_line_by_area_price_and_quantity": 1,
+        "nearest_same_channel_actual_medical_basket": 2
+      }
+    },
+    "2025-04": {
+      "adjusted_csv_gold_population": {
+        "source_count": 206,
+        "eligible_revenue_count": 206,
+        "revenue_excluded_count": 0,
+        "raw_known_net_sales": "5670753.87",
+        "net_sales": "5670753.87",
+        "positive_sales": "5670753.87",
+        "signed_negative_adjustments": "0.00",
+        "eligible_margin_count": 196,
+        "gross_margin_amount": "2510146.82",
+        "margin_revenue_basis": "4585400.69",
+        "weighted_margin_pct": "54.742148",
+        "distinct_delivery_dates": 8,
+        "distinct_dr_labels": 102,
+        "missing_dr_count": 0,
+        "document_date_area_groups": 102,
+        "groups_with_multiple_lines": 39,
+        "repeated_identical_raw_line_extra_occurrences": 0,
+        "first_delivery": "2025-04-05",
+        "last_delivery": "2025-04-30",
+        "highest_revenue_delivery_date": "2025-04-05",
+        "highest_revenue_delivery_date_amount": "3379140.50",
+        "top_day_share_pct": "59.588911",
+        "top_delivery_document_group_share_pct": "32.602579",
+        "area_contributions": {
+          "ADMIN": "105705.07",
+          "BATANGAS": "331309.90",
+          "GOVERNMENT": "1090450.00",
+          "HOSPITAL": "3876720.40",
+          "MARINDUQUE": "4956.00",
+          "QUEZON": "261612.50"
+        },
+        "quality_rule_counts": {
+          "GROSS_VALUE_FORMULA_MISMATCH": 10,
+          "TRANSFER_VALUE_FORMULA_MISMATCH": 10
+        },
+        "eligible_gross_sales": "4612168.50",
+        "eligible_gross_sales_count": 196,
+        "eligible_total_acquisition_cost": "2075253.87",
+        "eligible_total_acquisition_cost_count": 196
+      },
+      "original_csv_raw_financial_control": {
+        "parsed_detail_count": 196,
+        "raw_known_net_sales": "5670753.87",
+        "raw_known_gross_margin": "2807067.70",
+        "invalid_or_missing_product_count": 5,
+        "contract_parent_count": 5,
+        "exact_business_repeat_extra_occurrences": 0,
+        "net_difference_to_final_gold": "0.00",
+        "delivery_date_area_dr_group_mismatch_count": 0,
+        "sum_group_signed_difference": "0.00"
+      },
+      "source_dispositions": {
+        "KEEP_SOURCE_YEAR_ALIGNED": 206
+      },
+      "source_disposition_finance": {
+        "KEEP_SOURCE_YEAR_ALIGNED": {
+          "count": 206,
+          "raw_known_net_sales": "5670753.87"
+        }
+      },
+      "supplied_raw_net_sales": "5670753.87",
+      "historical_preparation_parent_count": 10,
+      "historical_preparation_parent_net_sales": "1231270.00",
+      "historical_preparation_methods": {
+        "nearest_actual_medical_line_by_area_price_and_quantity": 5,
+        "nearest_same_channel_actual_medical_basket": 5
+      }
+    },
+    "2025-11": {
+      "adjusted_csv_gold_population": {
+        "source_count": 545,
+        "eligible_revenue_count": 545,
+        "revenue_excluded_count": 0,
+        "raw_known_net_sales": "25076009.20",
+        "net_sales": "25076009.20",
+        "positive_sales": "25076009.20",
+        "signed_negative_adjustments": "0.00",
+        "eligible_margin_count": 367,
+        "gross_margin_amount": "6500248.45",
+        "margin_revenue_basis": "10069519.74",
+        "weighted_margin_pct": "64.553709",
+        "distinct_delivery_dates": 8,
+        "distinct_dr_labels": 185,
+        "missing_dr_count": 0,
+        "document_date_area_groups": 185,
+        "groups_with_multiple_lines": 86,
+        "repeated_identical_raw_line_extra_occurrences": 0,
+        "first_delivery": "2025-11-05",
+        "last_delivery": "2025-11-29",
+        "highest_revenue_delivery_date": "2025-11-29",
+        "highest_revenue_delivery_date_amount": "23263105.97",
+        "top_day_share_pct": "92.770368",
+        "top_delivery_document_group_share_pct": "10.233885",
+        "area_contributions": {
+          "ADMIN": "145910.05",
+          "BATANGAS": "214885.50",
+          "GOVERNMENT": "22177074.29",
+          "HOSPITAL": "2390909.36",
+          "QUEZON": "147230.00"
+        },
+        "quality_rule_counts": {
+          "GROSS_VALUE_FORMULA_MISMATCH": 172,
+          "TRANSFER_VALUE_FORMULA_MISMATCH": 178,
+          "ZERO_QUANTITY": 11
+        },
+        "eligible_gross_sales": "10470543.38",
+        "eligible_gross_sales_count": 373,
+        "eligible_total_acquisition_cost": "3569271.29",
+        "eligible_total_acquisition_cost_count": 367
+      },
+      "original_csv_raw_financial_control": {
+        "parsed_detail_count": 419,
+        "raw_known_net_sales": "25076009.20",
+        "raw_known_gross_margin": "12853159.07",
+        "invalid_or_missing_product_count": 15,
+        "contract_parent_count": 83,
+        "exact_business_repeat_extra_occurrences": 4,
+        "net_difference_to_final_gold": "0.00",
+        "delivery_date_area_dr_group_mismatch_count": 0,
+        "sum_group_signed_difference": "0.00"
+      },
+      "source_dispositions": {
+        "KEEP_SOURCE_YEAR_ALIGNED": 545
+      },
+      "source_disposition_finance": {
+        "KEEP_SOURCE_YEAR_ALIGNED": {
+          "count": 545,
+          "raw_known_net_sales": "25076009.20"
+        }
+      },
+      "supplied_raw_net_sales": "25076009.20",
+      "historical_preparation_parent_count": 98,
+      "historical_preparation_parent_net_sales": "18728932.75",
+      "historical_preparation_methods": {
+        "nearest_actual_medical_line_by_area_price_and_quantity": 15,
+        "nearest_same_channel_actual_medical_basket": 83
+      }
+    }
+  },
+  "checks": [
+    {
+      "period": "2024-12",
+      "metric": "source_count",
+      "actual": "197",
+      "expected": "197",
+      "passed": true
+    },
+    {
+      "period": "2024-12",
+      "metric": "eligible_count",
+      "actual": "197",
+      "expected": "197",
+      "passed": true
+    },
+    {
+      "period": "2024-12",
+      "metric": "net_sales",
+      "actual": "16744970.51",
+      "expected": "16744970.510000",
+      "passed": true
+    },
+    {
+      "period": "2024-12",
+      "metric": "monthly_receipt",
+      "actual": "16744970.51",
+      "expected": "16744970.51",
+      "passed": true
+    },
+    {
+      "period": "2024-12",
+      "metric": "gross_margin",
+      "actual": "4354510.10",
+      "expected": "4354510.1",
+      "passed": true
+    },
+    {
+      "period": "2024-12",
+      "metric": "margin_basis",
+      "actual": "16723830.51",
+      "expected": "16723830.51",
+      "passed": true
+    },
+    {
+      "period": "2024-12",
+      "metric": "all_disposition_amounts_reconcile_raw_source",
+      "actual": "20373336.01",
+      "expected": "20373336.010000",
+      "passed": true
+    },
+    {
+      "period": "2024-12",
+      "metric": "row_preserved_original_vs_adjusted_raw_net_sales",
+      "actual": "20373336.01",
+      "expected": "20373336.01",
+      "passed": true
+    },
+    {
+      "period": "2025-03",
+      "metric": "source_count",
+      "actual": "241",
+      "expected": "241",
+      "passed": true
+    },
+    {
+      "period": "2025-03",
+      "metric": "eligible_count",
+      "actual": "241",
+      "expected": "241",
+      "passed": true
+    },
+    {
+      "period": "2025-03",
+      "metric": "net_sales",
+      "actual": "2612295.10",
+      "expected": "2612295.100000",
+      "passed": true
+    },
+    {
+      "period": "2025-03",
+      "metric": "monthly_receipt",
+      "actual": "2612295.10",
+      "expected": "2612295.1",
+      "passed": true
+    },
+    {
+      "period": "2025-03",
+      "metric": "gross_margin",
+      "actual": "1134570.11",
+      "expected": "1134570.11",
+      "passed": true
+    },
+    {
+      "period": "2025-03",
+      "metric": "margin_basis",
+      "actual": "2142401.76",
+      "expected": "2142401.76",
+      "passed": true
+    },
+    {
+      "period": "2025-03",
+      "metric": "all_disposition_amounts_reconcile_raw_source",
+      "actual": "2612295.10",
+      "expected": "2612295.100000",
+      "passed": true
+    },
+    {
+      "period": "2025-04",
+      "metric": "source_count",
+      "actual": "206",
+      "expected": "206",
+      "passed": true
+    },
+    {
+      "period": "2025-04",
+      "metric": "eligible_count",
+      "actual": "206",
+      "expected": "206",
+      "passed": true
+    },
+    {
+      "period": "2025-04",
+      "metric": "net_sales",
+      "actual": "5670753.87",
+      "expected": "5670753.870000",
+      "passed": true
+    },
+    {
+      "period": "2025-04",
+      "metric": "monthly_receipt",
+      "actual": "5670753.87",
+      "expected": "5670753.87",
+      "passed": true
+    },
+    {
+      "period": "2025-04",
+      "metric": "gross_margin",
+      "actual": "2510146.82",
+      "expected": "2510146.82",
+      "passed": true
+    },
+    {
+      "period": "2025-04",
+      "metric": "margin_basis",
+      "actual": "4585400.69",
+      "expected": "4585400.69",
+      "passed": true
+    },
+    {
+      "period": "2025-04",
+      "metric": "all_disposition_amounts_reconcile_raw_source",
+      "actual": "5670753.87",
+      "expected": "5670753.870000",
+      "passed": true
+    },
+    {
+      "period": "2025-11",
+      "metric": "source_count",
+      "actual": "545",
+      "expected": "545",
+      "passed": true
+    },
+    {
+      "period": "2025-11",
+      "metric": "eligible_count",
+      "actual": "545",
+      "expected": "545",
+      "passed": true
+    },
+    {
+      "period": "2025-11",
+      "metric": "net_sales",
+      "actual": "25076009.20",
+      "expected": "25076009.200000",
+      "passed": true
+    },
+    {
+      "period": "2025-11",
+      "metric": "monthly_receipt",
+      "actual": "25076009.20",
+      "expected": "25076009.2",
+      "passed": true
+    },
+    {
+      "period": "2025-11",
+      "metric": "gross_margin",
+      "actual": "6500248.45",
+      "expected": "6500248.45",
+      "passed": true
+    },
+    {
+      "period": "2025-11",
+      "metric": "margin_basis",
+      "actual": "10069519.74",
+      "expected": "10069519.74",
+      "passed": true
+    },
+    {
+      "period": "2025-11",
+      "metric": "all_disposition_amounts_reconcile_raw_source",
+      "actual": "25076009.20",
+      "expected": "25076009.200000",
+      "passed": true
+    },
+    {
+      "period": "2024-all-source",
+      "metric": "only_product_quantity_unit_price_unit_cost_changed",
+      "actual": "0",
+      "expected": "0",
+      "passed": true
+    }
+  ],
+  "check_summary": {
+    "passed": 30,
+    "failed": 0
+  },
+  "historical_staging_summary": {
+    "source_sheet": "2025",
+    "source_transaction_rows": 4137,
+    "unchanged_product_rows": 3807,
+    "parent_rows_replaced": 330,
+    "replacement_counts": {
+      "pagbilao_contract": 136,
+      "blank_or_invalid_product": 107,
+      "qmc_contract": 42,
+      "other_non_product": 39,
+      "peso_contract": 6
+    },
+    "estimated_medical_child_rows": 763,
+    "full_output_rows": 4570,
+    "unique_allocated_medical_products": 304,
+    "reference_medical_lines": 15901,
+    "reference_medical_baskets": 6055,
+    "source_totals": {
+      "total_cp": "185777264.24",
+      "discount": "380443.2",
+      "net_cp": "185396821.04",
+      "total_tp": "94760630.25",
+      "net_income": "90636190.79"
+    },
+    "output_totals": {
+      "total_cp": "185777264.24",
+      "discount": "380443.2",
+      "net_cp": "185396821.04",
+      "total_tp": "94760630.25",
+      "net_income": "90636190.79"
+    },
+    "financial_deltas": {
+      "total_cp": "0.0",
+      "discount": "0.0",
+      "net_cp": "0.0",
+      "total_tp": "0.0",
+      "net_income": "0.0"
+    },
+    "parent_reconciliation_failures": 0,
+    "low_confidence_allocations": 122,
+    "source_cost_missing_parents": 108,
+    "negative_margin_parents": 14,
+    "non_product_output_rows": 0,
+    "blank_output_products": 0,
+    "source_quantity": "423747.83",
+    "output_quantity": "693472.91"
+  },
+  "historical_staging_final_identity_match": false,
+  "missing_inputs": [
+    "Attributable source-owner explanation of the selected changes and period-close completeness",
+    "Original order/invoice/booking and correction-effective timestamps plus original item-line keys",
+    "Versioned historical source availability at each forecast origin",
+    "Exact final 2025 parent-to-child mapping bound to the accepted replacement hash",
+    "Reviewed SKU/pack/unit identities and documentary account/territory mappings"
+  ],
+  "limitations": [
+    "Accounting amounts and contribution changes do not establish causes or disease effects",
+    "Historical preparation staging has 4570 full rows; final accepted CSV has 4544 transactions, so staging is context rather than exact final row lineage",
+    "Both selected annual sources are adjusted; original-source finance and model-training/publication approvals remain distinct",
+    "Local source replay uses canonical notebook parsing/dispositions; Decimal aggregation and original-versus-final controls are separately recomputed",
+    "Repeated rows are retained in assessment; only the existing documented Silver dispositions define the Gold comparison population",
+    "No raw document identifiers, customer records, or transaction rows are retained in this audit output"
+  ],
+  "files": [
+    {
+      "path": "outputs/predictive_readiness_20261010/source_review/audit_sources.py",
+      "sha256": "dfb44b96bc8fea39822a3e0ef7500cb36f157e3136e9bcb67b0e0b94830bf320",
+      "bytes": 19814
+    },
+    {
+      "path": "databricks/medshield_project/01_sales_bronze.py",
+      "sha256": "996331113cd208edcd1bfa9e14d68e0be7bee01ea3b616892dd179926eed1d51",
+      "bytes": 13505
+    },
+    {
+      "path": "databricks/medshield_project/02_sales_silver.py",
+      "sha256": "7075ec01eb7e7b81ec49cc4b7387c9d7c472750e9b49a2a16add01b809301a1f",
+      "bytes": 35729
+    },
+    {
+      "path": "databricks/medshield_project/03_sales_gold.py",
+      "sha256": "ced772ca1ea7796fd42f834aaf40d307db4d09ba1e2657da528e6d2c38c5def8",
+      "bytes": 57302
+    },
+    {
+      "path": "databricks/medshield_project/tests/test_restart.py",
+      "sha256": "fb32ce1ce165e1031e93c9e3dc7ae4e7712cca9a14d0a6cec26cccd7eca13db2",
+      "bytes": 21501
+    },
+    {
+      "path": "outputs/predictive_completion_20261009/diagnosis/composition.json",
+      "sha256": "a873c9b6d670456e3dbc1c38b03c67ed3607788ebd169b49f3696ab6b8f55dcf",
+      "bytes": 5328474
+    },
+    {
+      "path": "outputs/descriptive_validation/2026-10-09T07-40-39-615Z/evidence.json",
+      "sha256": "19662860d526ca2efb5ccf4256645211bfb916fb8590060901e6e2573b991def",
+      "bytes": 220579
+    },
+    {
+      "path": "tmp/pagbilao_sample_workbook/full_2025_all_contracts_staging.json",
+      "sha256": "4c11199ac74cf71d180833da88a5b3beebc09a42952f0ed840bc402d9cc75add",
+      "bytes": 6987084
+    },
+    {
+      "path": "databricks/medshield_project_csv/medshield_project_csv/medshield_data_2017.csv",
+      "sha256": "15edfe33e5365e047d57556eb8a2dc9581b89b1f59f98449b983f0483f2b9c77",
+      "bytes": 740101
+    },
+    {
+      "path": "databricks/medshield_project_csv/medshield_project_csv/medshield_data_2018.csv",
+      "sha256": "d7a1b8ad107e176e642aab540e464eab05b19dc116131b712c33e29fb355b200",
+      "bytes": 503447
+    },
+    {
+      "path": "databricks/medshield_project_csv/medshield_project_csv/medshield_data_2019.csv",
+      "sha256": "3afc789aa0ad798da14cbe87153049eb7f7d7ca15df944a8e27b25f97d419fc8",
+      "bytes": 1270693
+    },
+    {
+      "path": "databricks/medshield_project_csv/medshield_project_csv/medshield_data_2020.csv",
+      "sha256": "d5d17c2c6514a652294a23426e8ff9c35b5410d9a65a8273cd0dd6e573254a62",
+      "bytes": 495396
+    },
+    {
+      "path": "databricks/medshield_project_csv/medshield_project_csv/medshield_data_2021.csv",
+      "sha256": "c1cc109b73a0b073a051cd2fbdd7df2e0c2c8ea52a98be8b8c443b0388d12477",
+      "bytes": 483905
+    },
+    {
+      "path": "databricks/medshield_project_csv/medshield_project_csv/medshield_data_2022.csv",
+      "sha256": "1f28cacdcdc537065828cf809f8d0ae4bb55891a1317fe6c306d2b4b5b2caf74",
+      "bytes": 551812
+    },
+    {
+      "path": "databricks/medshield_project_csv/medshield_project_csv/medshield_data_2023.csv",
+      "sha256": "83e4509c84e0c2b6c379071593e589b5207842fd469430fe317e5e9a70368cea",
+      "bytes": 791507
+    },
+    {
+      "path": "databricks/medshield_project_csv/medshield_project_csv/medshield_data_2024.csv",
+      "sha256": "12ebda6996de76cf6af6c958485900fb81597f6f7f19dec4c8eea066919fb938",
+      "bytes": 453866
+    },
+    {
+      "path": "databricks/medshield_project_csv/medshield_project_csv/medshield_data_2025.csv",
+      "sha256": "d05fec98a3a312416118fab4d11ca1f6e0c19f1951248b7b22fcc518eeb15569",
+      "bytes": 473296
+    },
+    {
+      "path": "data/medshield/dataset_csv/medshield_data_2024.csv",
+      "sha256": "c38245983b918c0e44eecfccb3b63be00e8de9c848048dd007d1c086c714831f",
+      "bytes": 453665
+    },
+    {
+      "path": "data/medshield/dataset_csv/medshield_data_2025.csv",
+      "sha256": "2738afaf114d9480928e37b6c2b53dc0cac9ba2f10dc74a98b2549e3345d235c",
+      "bytes": 541162
+    },
+    {
+      "path": "data/medshield/dataset_xlsx/Sales Report.xlsx",
+      "sha256": "04e5f303eb8fe4f3fb441a233adb4603c992c198653b9ca8b6dfb5c4fd0fe107",
+      "bytes": 2161566
+    },
+    {
+      "path": "tmp/pagbilao_sample_workbook/prepare_full_2025_all_contracts.py",
+      "sha256": "e6c776665281ceb2df2b491c7c19c43033aabd44acca31d9bc6d5047ebf1a7c7",
+      "bytes": 29752
+    },
+    {
+      "path": "tmp/historical_contract_allocation/build_replacements.mjs",
+      "sha256": "8c93bf8fffc43e16fc04de029d636e3a5f1b28b74bc6d612e41da1d37d8eea17",
+      "bytes": 19199
+    },
+    {
+      "path": "outputs/2020_2024_databricks_final/allocation_audit_2020_2024.csv",
+      "sha256": "38e2f695617a8c77cbba709747950e03c95309f0cbe04808bce2f4a27df7428d",
+      "bytes": 45269
+    },
+    {
+      "path": "outputs/2020_2024_databricks_final/reconciliation.json",
+      "sha256": "95aab9224a789e63928f83104fbee547a475b995e2744d7cf31c3104a190774a",
+      "bytes": 3024
+    },
+    {
+      "path": "databricks/medshield_project/references/transaction_evidence_review.csv",
+      "sha256": "5e1a839d551293b51149e7c35d863ce680573e02275f65d17512d6099ff88786",
+      "bytes": 119
+    }
+  ]
+}

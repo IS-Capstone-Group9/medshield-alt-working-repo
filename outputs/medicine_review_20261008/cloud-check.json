@@ -1,0 +1,263 @@
+{
+  "checked_at": "2026-10-08T08:56:22.194Z",
+  "operation": "read_only_readability_retention_access_check",
+  "cloud_writes": false,
+  "dependencies": [
+    {
+      "table": "workspace.medshield_audit.sales_restart_area_coverage_candidate",
+      "version": 8,
+      "records": "125",
+      "properties": [],
+      "latest_version": "8",
+      "status": "READABLE_VERSION_STABLE"
+    },
+    {
+      "table": "workspace.medshield_audit.sales_restart_gold_publication_candidate",
+      "version": 10,
+      "records": "22",
+      "properties": [],
+      "latest_version": "10",
+      "status": "READABLE_VERSION_STABLE"
+    },
+    {
+      "table": "workspace.medshield_audit.sales_restart_gold_disposition_candidate",
+      "version": 10,
+      "records": "63",
+      "properties": [],
+      "latest_version": "10",
+      "status": "READABLE_VERSION_STABLE"
+    },
+    {
+      "table": "workspace.medshield_audit.sales_restart_contract_evidence_candidate",
+      "version": 10,
+      "records": "62",
+      "properties": [],
+      "latest_version": "10",
+      "status": "READABLE_VERSION_STABLE"
+    },
+    {
+      "table": "workspace.medshield_audit.sales_restart_returns_candidate",
+      "version": 10,
+      "records": "673",
+      "properties": [],
+      "latest_version": "10",
+      "status": "READABLE_VERSION_STABLE"
+    },
+    {
+      "table": "workspace.medshield_audit.sales_restart_provisional_year_candidate",
+      "version": 9,
+      "records": "0",
+      "properties": [],
+      "latest_version": "9",
+      "status": "READABLE_VERSION_STABLE"
+    },
+    {
+      "table": "workspace.medshield_audit.sales_restart_replacement_year_validation_candidate",
+      "version": 3,
+      "records": "1",
+      "properties": [],
+      "latest_version": "3",
+      "status": "READABLE_VERSION_STABLE"
+    },
+    {
+      "table": "workspace.medshield_audit.sales_restart_gold_quality_candidate",
+      "version": 10,
+      "records": "231",
+      "properties": [],
+      "latest_version": "10",
+      "status": "READABLE_VERSION_STABLE"
+    },
+    {
+      "table": "workspace.medshield_bronze.sales_restart_manifest_candidate",
+      "version": 4,
+      "records": "9",
+      "properties": [],
+      "latest_version": "4",
+      "status": "READABLE_VERSION_STABLE"
+    },
+    {
+      "table": "workspace.medshield_gold.sales_restart_area_yearly_candidate",
+      "version": 10,
+      "records": "125",
+      "properties": [],
+      "latest_version": "10",
+      "status": "READABLE_VERSION_STABLE"
+    },
+    {
+      "table": "workspace.medshield_bronze.sales_restart_rows_candidate",
+      "version": 4,
+      "records": "59039",
+      "properties": [],
+      "latest_version": "4",
+      "status": "READABLE_VERSION_STABLE"
+    },
+    {
+      "table": "workspace.medshield_audit.sales_restart_scope_candidate",
+      "version": 9,
+      "records": "6",
+      "properties": [],
+      "latest_version": "9",
+      "status": "READABLE_VERSION_STABLE"
+    },
+    {
+      "table": "workspace.medshield_gold.sales_restart_dim_canonical_product_candidate",
+      "version": 1,
+      "records": "4561",
+      "properties": [],
+      "latest_version": "1",
+      "status": "READABLE_VERSION_STABLE"
+    },
+    {
+      "table": "workspace.medshield_gold.sales_restart_contract_labels_candidate",
+      "version": 10,
+      "records": "0",
+      "properties": [],
+      "latest_version": "10",
+      "status": "READABLE_VERSION_STABLE"
+    },
+    {
+      "table": "workspace.medshield_gold.sales_restart_dim_area_candidate",
+      "version": 10,
+      "records": "22",
+      "properties": [],
+      "latest_version": "10",
+      "status": "READABLE_VERSION_STABLE"
+    },
+    {
+      "table": "workspace.medshield_gold.sales_restart_business_product_yearly_candidate",
+      "version": 9,
+      "records": "7649",
+      "properties": [],
+      "latest_version": "9",
+      "status": "READABLE_VERSION_STABLE"
+    },
+    {
+      "table": "workspace.medshield_gold.sales_restart_fact_candidate",
+      "version": 19,
+      "records": "37728",
+      "properties": [
+        {
+          "key": "delta.deletedFileRetentionDuration",
+          "value": "interval 30 days"
+        },
+        {
+          "key": "delta.logRetentionDuration",
+          "value": "interval 30 days"
+        }
+      ],
+      "latest_version": "19",
+      "status": "READABLE_VERSION_STABLE"
+    },
+    {
+      "table": "workspace.medshield_gold.sales_restart_dim_product_candidate",
+      "version": 10,
+      "records": "4561",
+      "properties": [],
+      "latest_version": "10",
+      "status": "READABLE_VERSION_STABLE"
+    },
+    {
+      "table": "workspace.medshield_gold.sales_restart_dim_date_candidate",
+      "version": 10,
+      "records": "3287",
+      "properties": [],
+      "latest_version": "10",
+      "status": "READABLE_VERSION_STABLE"
+    },
+    {
+      "table": "workspace.medshield_gold.sales_restart_external_input_candidate",
+      "version": 9,
+      "records": "0",
+      "properties": [],
+      "latest_version": "9",
+      "status": "READABLE_VERSION_STABLE"
+    },
+    {
+      "table": "workspace.medshield_gold.sales_restart_product_yearly_candidate",
+      "version": 10,
+      "records": "6671",
+      "properties": [],
+      "latest_version": "10",
+      "status": "READABLE_VERSION_STABLE"
+    },
+    {
+      "table": "workspace.medshield_gold.sales_restart_medical_monthly_candidate",
+      "version": 9,
+      "records": "0",
+      "properties": [],
+      "latest_version": "9",
+      "status": "READABLE_VERSION_STABLE"
+    },
+    {
+      "table": "workspace.medshield_gold.sales_restart_monthly_candidate",
+      "version": 10,
+      "records": "108",
+      "properties": [],
+      "latest_version": "10",
+      "status": "READABLE_VERSION_STABLE"
+    },
+    {
+      "table": "workspace.medshield_gold.sales_restart_label_partition_candidate",
+      "version": 10,
+      "records": "3",
+      "properties": [],
+      "latest_version": "10",
+      "status": "READABLE_VERSION_STABLE"
+    },
+    {
+      "table": "workspace.medshield_gold.sales_restart_yearly_candidate",
+      "version": 10,
+      "records": "9",
+      "properties": [],
+      "latest_version": "10",
+      "status": "READABLE_VERSION_STABLE"
+    },
+    {
+      "table": "workspace.medshield_silver.sales_restart_assessed_candidate",
+      "version": 7,
+      "records": "59039",
+      "properties": [],
+      "latest_version": "7",
+      "status": "READABLE_VERSION_STABLE"
+    },
+    {
+      "table": "workspace.medshield_gold.sales_restart_territory_yearly_candidate",
+      "version": 9,
+      "records": "41",
+      "properties": [],
+      "latest_version": "9",
+      "status": "READABLE_VERSION_STABLE"
+    },
+    {
+      "table": "workspace.medshield_gold.sales_restart_stl_candidate",
+      "version": 3,
+      "records": "72",
+      "properties": [],
+      "latest_version": "3",
+      "status": "READABLE_VERSION_STABLE"
+    },
+    {
+      "table": "workspace.medshield_silver.sales_restart_clean_candidate",
+      "version": 9,
+      "records": "37728",
+      "properties": [],
+      "latest_version": "9",
+      "status": "READABLE_VERSION_STABLE"
+    }
+  ],
+  "access": [
+    {
+      "endpoint": "/api/2.0/workspace/list",
+      "http_status": 403,
+      "accessible": false
+    },
+    {
+      "endpoint": "/api/2.1/jobs/list",
+      "http_status": 403,
+      "accessible": false
+    }
+  ],
+  "recovery_rehearsal_verified": false,
+  "all_captured_versions_readable": true,
+  "ready_for_execution": false
+}
