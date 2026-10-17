@@ -101,6 +101,7 @@ function renderOverviewTrendSelection() {
     if (!observed.length) return 'No recorded ' + name + ' in this selection; estimates cannot establish an observed trend.';
     const first = observed[0], last = observed[observed.length - 1];
     if (observed.length === 1) return 'Only one period has recorded ' + name + ' (' + descriptivePointLabel(first.period) + '): ' + formatCurrency(first[metric]) + '. More observations are needed to describe movement.';
+    if (/Partial|YTD/.test(descriptivePointLabel(first.period) + ' ' + descriptivePointLabel(last.period))) return 'Recorded ' + name + ' totals: ' + descriptivePointLabel(first.period) + ' ' + formatCurrency(first[metric]) + '; ' + descriptivePointLabel(last.period) + ' ' + formatCurrency(last[metric]) + '. Incomplete-year coverage; this is not a like-for-like growth comparison.';
     const change = Number(last[metric]) - Number(first[metric]);
     return 'From ' + descriptivePointLabel(first.period) + ' to ' + descriptivePointLabel(last.period) + ', recorded ' + name + (change > 0 ? ' rose by ' : change < 0 ? ' fell by ' : ' was unchanged at ') + formatCurrency(change === 0 ? first[metric] : Math.abs(change)) + '.';
   };
@@ -121,6 +122,8 @@ function installOverviewDecisionLayout(page) {
   const revenueCard = document.getElementById('kpiOverviewTotalRevenue')?.closest('.kpi-card');
   if (!revenueCard) return;
   grid.replaceChildren(revenueCard);
+  revenueCard.querySelector('.kpi-sub')?.remove();
+  revenueCard.querySelector('.kpi-tag')?.remove();
   grid.classList.add('overview-decision-kpis');
   revenueCard.querySelector('.kpi-label').textContent = 'Net sales';
   for (const [id, title, note] of [
@@ -134,7 +137,7 @@ function installOverviewDecisionLayout(page) {
   }
   const status = document.createElement('aside'); status.id = 'overviewPublicationStrip';
   status.className = 'overview-publication-strip'; status.setAttribute('aria-label', 'Evidence and publication status');
-  status.innerHTML = '<span><strong>Sales</strong> · Gold candidate; business approval pending</span><span class="kpi-card-forecast"><strong>Forecast</strong> · Not published</span><span><strong>Planning</strong> · reviewed scenarios only</span><details><summary>Publication limits</summary><p>No approved trained forecast or live disease alert is published. Disease and weather joins await approval. Planning requires reviewed operational assumptions and does not execute purchases.</p></details>';
+  status.innerHTML = '<span><strong>Sales</strong> · Candidate</span><span class="kpi-card-forecast"><strong>Forecast</strong> · Unpublished</span><span><strong>Planning</strong> · Scenarios only</span><details><summary>Publication limits</summary><p>Sales business approval is pending. No approved trained forecast or live disease alert is published. Disease and weather joins await approval. Planning requires reviewed operational assumptions and does not execute purchases.</p></details>';
   grid.before(status);
   const summary = document.createElement('section'); summary.id = 'overviewOutputSummary'; summary.className = 'analytical-output-summary';
   summary.innerHTML = '<p id="overviewDecisionFinding" class="analytical-output-takeaway"></p><p id="overviewDecisionReview" class="analytical-output-review"></p>';

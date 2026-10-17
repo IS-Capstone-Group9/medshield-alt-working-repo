@@ -1,5 +1,37 @@
 # Review the MedShield product master
 
+## Independent decision bridge —17 October2026
+
+[Step2 software bridge](../outputs/product_approval_bridge_20261017/README.md)
+preserves each current master status independently with exact source/master
+binding. Shared review metadata is explicitly category-only context, not physical
+identity/unit/forecast approval. Effective Gold item-kind unknown and proposed
+master values remain distinct. Future noncategory approvals need scoped,
+attributable historical evidence; observation/model/publication gates stay
+separate. Offline bridge preparation does not modify this master or live Gold.
+
+## Product analysis routing — 17 October 2026
+
+The [offline analytical policy](PRODUCT_ANALYTICS_POLICY.md) now assigns a
+financial/source-unit review route to each archived label and defines conditional
+future model comparisons after identity/unit/coverage evidence. The
+[all-product output and verification](../outputs/product_analytics_policy_20261017/README.md)
+preserve the archive17 population and approvals. This does not approve physical
+units, modify this master, certify current fact20, train models or supply runtime
+dashboard values. Use its per-product blockers and next actions with the existing
+review workbook; historical evidence remains required by the workflow below.
+
+## Whole-product unit wording check — 16 October 2026
+
+The [new product/title assessment](../outputs/product_quantity_units_20261016/README.md)
+reviews every accepted archived alias and spelling for quantity/presentation
+context and supplies a filterable workbook. It separates explicit presentation
+wording from container, form, count-only, ambiguous and absent clues. Use it as
+a source-owner review aid; it does not replace this master or approve units.
+The user's box/strip explanation remains an attributed hypothesis for unknown
+historical cases. Source Qty, source titles, current master and all independent
+approval dimensions are preserved; no conversions or default package counts.
+
 Updated 8 October 2026. Product categories are accepted locally for descriptive
 reporting under Adrian's instruction: 598 medicine, 646 supplies, 131 equipment,
 209 nonmedical and 2,977 Unclassified. Unclassified is an accepted reporting

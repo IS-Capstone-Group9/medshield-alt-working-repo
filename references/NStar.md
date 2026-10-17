@@ -4,7 +4,9 @@
 
 This document is the text reference for the MedShield North Star Diagram. It defines the primary inventory optimization question and the descriptive, predictive, and prescriptive analytical paths that support it. The approved internal-sales scope is 2017 onward. External DOH, PAGASA, and provider-derived weather signals retain their own documented coverage periods.
 
-The 2017-2019 records remain in scope, but Net CP revenue and revenue-derived KPIs for those years must remain unavailable until the historical financial mapping is reconciled. Available quantity and data-quality evidence may still be reported with explicit coverage labels.
+**15 October 2026 authority clarification:** the earlier blanket restriction on 2017–2019 finance is superseded by the reconciled financial evidence documented in the [objective/evidence register](../docs/OBJECTIVE_EVIDENCE_REGISTER.md) and [Current State](../docs/CURRENT_STATE.md). Current project reporting covers 2017–2025 with its financial eligibility, original/adjusted provenance and coverage labels. Reconciled finance does not establish original SKU quantities or independent source completeness.
+
+The question IDs and methods below preserve the supplied North Star's intended analytical paths. They are not implementation or acceptance claims. The original paper's 2021–2025 scope, current reporting scope and modeling subsets must be reconciled explicitly. Use the [completion workflow](../docs/CAPSTONE_COMPLETION_WORKFLOW.md) to connect objectives, system evidence and the manuscript; business acceptance and academic amendments retain their named decision owners.
 
 ## North Star Question
 

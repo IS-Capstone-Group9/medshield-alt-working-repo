@@ -114,7 +114,8 @@ class SalesCorpusTests(unittest.TestCase):
     def setUpClass(cls):
         cls.bronze = pure_notebook_namespace("01_sales_bronze.py")
         cls.silver = pure_notebook_namespace("02_sales_silver.py")
-        cls.source_dir = ROOT.parents[1] / "data" / "medshield" / "dataset_csv"
+        # Exercise the actual deployment input, not a different historical copy.
+        cls.source_dir = ROOT.parent / "medshield_project_csv" / "medshield_project_csv"
         if not cls.source_dir.is_dir():
             raise unittest.SkipTest("Exported sales CSV directory is not available")
         source_rows = []

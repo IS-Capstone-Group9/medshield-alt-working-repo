@@ -15,7 +15,7 @@ import { installMcdaSensitivity, renderMcdaSensitivity } from './dashboard-mcda'
 import type { User } from '@/lib/auth-tokens'
 
 const DASHBOARD_PAGE_META = {
-  overview: ['Executive Overview', 'Centralized demand intelligence, forecasting, and stock actions'],
+  overview: ['Recorded sales overview', 'Sales, profit and coverage'],
   revenue: ['Sales Diagnostics', 'Revenue, growth, and margin trends'],
   products: ['Product Prioritization', 'ABC/Pareto product view'],
   territory: ['Area Prioritization', 'Geographic performance, concentration, and evidence quality'],
@@ -96,6 +96,17 @@ export function installDashboardEnhancements(
 
   installCommonInteractions(root, activeListeners)
   installMcdaSensitivity(root, activeListeners)
+
+  const expandEvidence = (event: Event) => {
+    const details = event.target
+    if (!(details instanceof HTMLDetailsElement) || !details.open) return
+    window.requestAnimationFrame(() => {
+      if (details.querySelector('[data-external-regression]')) (window as any).renderExternalRegression?.()
+      ;(window as any).resizeCharts?.()
+    })
+  }
+  root.addEventListener('toggle', expandEvidence, true)
+  activeListeners.push({ target: root, type: 'toggle', listener: expandEvidence, options: true })
 
   const legacySeasonSelector = (window as any).selectSeasonRestock
   if (typeof legacySeasonSelector === 'function') {

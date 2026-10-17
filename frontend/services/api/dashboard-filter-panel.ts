@@ -48,17 +48,17 @@ export function installDashboardFilterPanel(root: HTMLElement) {
     welcome = document.createElement('h1')
     welcome.id = 'overviewWelcomeHeading'
     welcome.className = 'overview-welcome'
-    welcome.textContent = 'Welcome Back, Admin'
+    welcome.textContent = 'Recorded sales overview'
   }
   content.prepend(welcome)
 }
 
 export const DASHBOARD_FILTER_PANEL_STYLE = `
-.overview-welcome { display: none; font-size: 32px; font-weight: 800; margin-bottom: 20px; color: var(--text-primary); }
+.overview-welcome { display: none; font-size: 22px; font-weight: 700; margin-bottom: 12px; color: var(--text-primary); }
 .content:has(#page-overview.active) > .overview-welcome { display: block; }
 #filterBar.dashboard-filter-panel {
   width: 100%; min-width: 0; flex-direction: column; align-items: stretch;
-  gap: 12px; padding: 18px 20px; margin-bottom: 20px;
+  gap: 8px; padding: 14px 16px; margin-bottom: 16px;
   background: var(--bg-surface); border: 1px solid var(--border);
   border-radius: var(--radius-md); box-shadow: var(--shadow-xs);
 }
@@ -89,7 +89,21 @@ export const DASHBOARD_FILTER_PANEL_STYLE = `
   #filterBar.dashboard-filter-panel .comparison-selector { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 540px) {
-  #filterBar.dashboard-filter-panel { padding: 14px; }
-  #filterBar.dashboard-filter-panel .comparison-selector { grid-template-columns: minmax(0, 1fr); }
+  #filterBar.dashboard-filter-panel { padding: 12px; }
+  #filterBar.dashboard-filter-panel .comparison-selector { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  #filterBar.dashboard-filter-panel .topbar-select { font-size: 11px; padding: 7px 5px; }
+}
+.source-ingestion-steps { padding-left: 22px; margin: 16px 0; line-height: 1.8; }
+.data-freshness-bar > details { min-width: 0; }
+.data-freshness-bar > details p { overflow-wrap: anywhere; }
+.nav-item:focus-visible { outline: 2px solid #F4BE47; outline-offset: -2px; }
+.analytical-section { margin: 16px 0; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--bg-surface); padding: 12px 16px; min-width: 0; }
+.analytical-section > summary { cursor: pointer; font-weight: 600; }
+.analytical-section > .chart-card { margin-bottom: 0; border: 0; box-shadow: none; padding: 16px 0 0; }
+@media (max-width: 540px) {
+  #page-overview .overview-decision-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 10px; }
+  #page-overview .overview-decision-kpis .kpi-card { padding: 14px 10px; }
+  #page-overview .overview-decision-kpis .kpi-value { font-size: clamp(12px, 3.8vw, 18px) !important; word-break: normal !important; overflow-wrap: normal; }
+  #page-overview .overview-decision-kpis .kpi-label { font-size: 9px; }
 }
 `

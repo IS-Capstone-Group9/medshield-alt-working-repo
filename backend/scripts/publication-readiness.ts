@@ -152,7 +152,12 @@ async function main() {
     const releaseErrors = checkReleaseIdentity({ ...identity, fact_delta_version: Number(versions.get(fact)) }, summary.release)
     evidence.gateway_release_comparison_errors = releaseErrors
     record('Gateway summary uses captured fact release', releaseErrors.length === 0, releaseErrors.join('; ') || `Fact version ${versions.get(fact)}; dataset, policy, area master, product master, and publication status match`)
-    record('Gateway summary matches eligible Gold totals', summary.counts.rows === Number(totals.fact_rows) && Math.abs(summary.sums.net_cost - Number(totals.net_sales)) < 0.01 && Math.abs(summary.sums.net_income - Number(totals.gross_margin)) < 0.01, 'Fresh gateway function executed against live Databricks; not a browser acceptance test')
+    record('Gateway summary matches eligible Gold totals', summary.counts.rows === Number(totals.fact_rows)
+      && summary.sums.net_cost !== null && totals.net_sales !== null
+      && Math.abs(summary.sums.net_cost - Number(totals.net_sales)) < 0.01
+      && summary.sums.net_income !== null && totals.gross_margin !== null
+      && Math.abs(summary.sums.net_income - Number(totals.gross_margin)) < 0.01,
+    'Fresh gateway function executed against live Databricks; not a browser acceptance test')
   })
   await step('STL publication identity', async () => {
     const stl = await getDatabricksStl()

@@ -6,8 +6,10 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc -p tsconfig.json",
+    "typecheck:scripts": "tsc -p tsconfig.scripts.json",
     "start": "node dist/server.js",
     "auth:migrate": "tsx scripts/migrate-auth-accounts.ts",
+    "auth:recover": "tsx scripts/recover-auth-account.ts",
     "databricks:extract:sales": "tsx scripts/extract-databricks-sales.ts",
     "databricks:extract:products": "tsx scripts/extract-databricks-products.ts",
     "databricks:extract:areas": "tsx scripts/extract-databricks-areas.ts",

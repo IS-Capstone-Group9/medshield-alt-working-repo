@@ -30,6 +30,9 @@ __pycache__/
 .idea/
 *.sublime-workspace
 
+# Machine-local Obsidian project-memory connection
+/.codex/obsidian-memory.local.json
+
 # OS
 .DS_Store
 Thumbs.db
@@ -79,3 +82,9 @@ outputs/contract_backward_allocation_20260623/yearly_daily/
 # Optional local reference clones; these are not application submodules.
 /external/medshield_frontend/
 /temp-medshield/medshield-dashboard/
+
+# Disposable native PostgreSQL verification runtime and synthetic clusters
+/outputs/database_remediation_20261016/environment-runtime/
+
+# Private live Supabase recovery metadata (contains schema/ACL definitions)
+/outputs/supabase_live_migration_20261017/private/

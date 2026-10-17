@@ -1,5 +1,78 @@
 # Security
 
+## Explicit Auth recovery and HTTP repair — 17 October 2026
+
+The [T08 implementation and evidence](../outputs/auth_http_remediation_20261017/README.md)
+adds an administrator-only recovery CLI with read-only default, exact account/email
+preflight, out-of-band ownership attestation, opaque proof reference and stable
+operation ID. Fresh temporary credentials enter only through stdin. Remote intent
+audit precedes identity writes; conflicts, invalid roles and stale conditional
+updates fail closed. Forced reset is set in both stores; completion requires
+readback and remote audit. Explicit same-operation resume handles uncertain
+cross-service commits without deleting users or rotating passwords again.
+Ordinary migration cannot use email matching to bypass this recovered-ownership
+path after a completed migration's Auth deletion. [Runbook](SUPABASE_AUTH_MIGRATION.md).
+
+Current isolated and configured checks pass with no existing-account/data changes.
+Protected query checks follow authentication/reset denial; blocked CORS returns
+generic 403 JSON and missing analytical configuration returns 503 with no fallback.
+Operator attestation is not automated identity proof; password replacement is not
+proof that every pre-existing access token was revoked. Existing backup/advisor,
+tooling, release, model and business acceptance limits remain separate.
+
+## Live operational audit and privilege verification — 17 October 2026
+
+The [live evidence](../outputs/supabase_live_migration_20261017/README.md)
+supersedes the earlier deployment gate: the matched PostgreSQL17.6 database has
+the missing audit table/checkpoint and service-only atomic append RPC, retired
+analytical browser/PUBLIC grants,21 private invoker views and explicit server
+USAGE/SELECT. Current affected effective checks show zero privilege failures;
+exactly43 historical public-layout expectations have explicit retired-baseline
+dispositions rather than a blanket waiver. Existing own-profile access survives.
+
+Actual Auth/PostgREST/gateway verification passes39 checks: linked login,
+anonymous/authenticated denials, direct audit-insert denial for all API roles,
+UTF-8 hash consistency, replay rejection/idempotence, concurrent serialization
+and committed remote readback. Four synthetic verification events remain; the
+gateway returns Supabase storage with nondegraded reads. Hash/checkpoint agreement
+does not prevent privileged history rewrite. Full role-matrix/recovery/load tests
+are outside this rollout; public future defaults remain inventoried and unapproved.
+
+The security advisor still reports the pre-existing
+[disabled leaked-password protection](https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection).
+Performance also retains a pre-existing
+[duplicate weather index](https://supabase.com/docs/guides/database/database-linter?lint=0009_duplicate_index).
+RLS-without-policy INFO rows are intentional for service-only relations; adding
+browser policies to silence them would violate the boundary. A private schema/ACL
+snapshot was retained; full independent backup/restore remains unverified.
+
+## Legacy analytical permissions — 16 October 2026
+
+[Migration017](../supabase/migrations/017_retire_legacy_analytical_browser_access.sql)
+closes the declared older/custom-grant browser paths for obsolete Supabase
+analytics, including column ACLs and owner-based public views. It preserves
+identity self-profile and service-only cache/audit operations. The guarded 011
+revocations also allow clean bootstrap without optional legacy functions.
+The [T06 native evidence](../outputs/database_remediation_20261016/README.md)
+passes fresh/upgrade permission and audit regressions; no remote migration was
+applied. Connected endpoint denial/404 is not proof of deployed effective ACLs.
+Owner-run [read-only verification](../supabase/verification/legacy_analytical_access.sql),
+custom dependency/role/default-grant review and actual PostgREST audit readback
+remain deployment gates. Global defaults and unrelated public objects are
+intentionally unchanged.
+
+## Dependency remediation — 16 October 2026
+
+The [version-bound T05 record](../outputs/dependency_remediation_20261016/README.md)
+retains current full/production audit receipts, primary advisories, package
+decisions and actual auth/source/export regressions. Both package production
+audits and the backend full audit report zero vulnerabilities. Frontend full
+audit still reports one unpatched braces advisory through five development
+lint-chain entries. Upstream ESLint10 peer constraints also retain EOL ESLint9.
+These findings are recorded without audit suppression or peer bypass; the full
+tooling gate remains open. This evidence does not certify Docker deployment,
+every possible vulnerability, all roles or wider release acceptance.
+
 MedShield should be treated as a SaaS-style decision-support system. Even during capstone/demo use, sales, product, inventory, and regional planning data should not be exposed through anonymous backend routes.
 
 ## Current Controls
@@ -8,7 +81,7 @@ MedShield should be treated as a SaaS-style decision-support system. Even during
 |---|---|
 | Login | Frontend uses Supabase Auth email/password when `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` are configured. The gateway requires Supabase Auth by default and fails startup if its URL/key are incomplete. Local demo auth requires explicit `USE_SUPABASE=false` outside production. |
 | Session | Supabase Auth manages the browser session for the production path. The gateway validates tokens through its selected authentication mode only; Supabase mode never accepts local-session tokens. |
-| Route protection | Next.js middleware redirects unauthenticated users away from protected app routes when Supabase Auth is configured. |
+| Route protection | The Next.js proxy redirects unauthenticated users away from protected app routes when Supabase Auth is configured. |
 | Reload behavior | Supabase sessions are restored through the Supabase client. Local fallback mode restores the gateway token through `/api/auth/me`. |
 | Logout | Supabase logout clears the Supabase browser session. Local fallback mode calls `/api/auth/logout` and clears browser token storage. |
 | Dashboard APIs | Analytics and model endpoints require `Authorization: Bearer <token>` and the gateway validates Supabase Auth tokens before serving data. |
@@ -16,7 +89,7 @@ MedShield should be treated as a SaaS-style decision-support system. Even during
 | Gateway audit | Audit writes acknowledge success after the Supabase atomic append RPC commits or a local file append is flushed. Exhausted persistence returns `503 AUDIT_PERSISTENCE_FAILED`. Privileged audit reads merge remote and local fallback records. |
 | Password storage | Local fallback accounts use salted scrypt password hashes. |
 | External data | DOH, PAGASA, and weather API keys must stay server-side or in ETL jobs, never in frontend code. |
-| Upload validation | Gateway accepts only `.xlsx`/`.csv`, enforces a 30 MB limit, and passes files to the cleaning service. |
+| Sales ingestion | Direct dashboard uploads are disabled: authenticated `POST /api/sales/upload` returns `409 DATABRICKS_INGESTION_REQUIRED`. Files enter the controlled Databricks pipeline, with source preservation, validation, candidate review and release gates. See [API](API.md) and the [pipeline guide](../databricks/medshield_project/README.md). |
 | Databricks access | Host, SQL warehouse ID, and token are used only by the TypeScript backend. |
 | Supabase server operations | `SUPABASE_SECRET_KEY` or the legacy service-role key is used only by the backend for identity/audit/administrative paths. |
 

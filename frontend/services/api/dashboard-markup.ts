@@ -76,13 +76,27 @@ export const SALES_DATA_PAGE = `
   </div>
 `
 
+export const DATABRICKS_SOURCE_PAGE = `
+  <section class="chart-card" aria-labelledby="sourcePageTitle">
+    <h2 class="chart-title" id="sourcePageTitle">Data source and ingestion</h2>
+    <p id="sourcePageStatus" role="status">Source verification pending.</p>
+    <p>Sales files are loaded through the controlled Databricks pipeline. Direct dashboard uploads are unavailable.</p>
+    <ol class="source-ingestion-steps">
+      <li>The data operator validates files and preserves the source evidence.</li>
+      <li>The pipeline prepares candidate records and runs quality checks.</li>
+      <li>Reviewers resolve data issues and record the required release decisions.</li>
+    </ol>
+    <p>New candidate data is shown only after it is available through the gateway. Pipeline checks do not grant business approval.</p>
+    <details><summary>Current source evidence</summary><p id="sourcePageEvidence">Release identity unavailable.</p></details>
+  </section>`
+
 export const WEATHER_VALIDATION_PAGE = `
   <div class="page fade-in" id="page-weather-validation">
     <section class="uploaded-data-panel" aria-labelledby="weatherEffectTitle">
       <div class="uploaded-data-header">
         <div>
           <div class="uploaded-data-title" id="weatherEffectTitle">Weather API Validation</div>
-          <div class="uploaded-data-copy">PAGASA history and labeled NASA POWER / Open-Meteo weather proxies. Every displayed row is read from Databricks Gold. Historical agreement does not establish forecast accuracy.</div>
+          <div class="uploaded-data-copy">Compare PAGASA history with labeled NASA POWER / Open-Meteo proxies. Historical agreement does not establish forecast accuracy.</div>
         </div>
         <div class="sales-header-actions"><button class="sales-primary-button" id="weatherRefresh" type="button" disabled>Refresh selected API</button></div>
       </div>
@@ -90,7 +104,7 @@ export const WEATHER_VALIDATION_PAGE = `
         <div class="uploaded-data-field"><label for="weatherProvider">Provider / model</label><select id="weatherProvider"><option value="PAGASA">PAGASA official history</option><option value="nasa_power">NASA POWER proxy</option><option value="open_meteo_era5">Open-Meteo ERA5 proxy</option><option value="open_meteo_era5_seamless">Open-Meteo ERA5-Seamless proxy</option><option value="open_meteo_ifs">Open-Meteo ECMWF IFS proxy</option></select></div>
         <div class="uploaded-data-field"><label for="weatherArea">Territory point</label><select id="weatherArea"><option value="all">All Territories</option><option value="Albay">Albay</option><option value="Batangas">Batangas</option><option value="Camarines Norte">Camarines Norte</option><option value="Camarines Sur">Camarines Sur</option><option value="Catanduanes">Catanduanes</option><option value="Cavite">Cavite</option><option value="Laguna">Laguna</option><option value="Marinduque">Marinduque</option><option value="Masbate">Masbate</option><option value="Metro Manila">Metro Manila</option><option value="Occidental Mindoro">Occidental Mindoro</option><option value="Oriental Mindoro">Oriental Mindoro</option><option value="Palawan">Palawan</option><option value="Quezon">Quezon</option><option value="Rizal">Rizal</option><option value="Romblon">Romblon</option><option value="Sorsogon">Sorsogon</option></select></div>
         <div class="uploaded-data-field"><label for="weatherYear">Year</label><select id="weatherYear"><option value="all">All Years</option><option value="2025">2025</option><option value="2024" selected>2024</option><option value="2023">2023</option><option value="2022">2022</option><option value="2021">2021</option><option value="2020">2020</option><option value="2019">2019</option><option value="2018">2018</option><option value="2017">2017</option></select></div>
-        <div class="uploaded-data-field"><label for="weatherGrain">Validation Grain</label><select id="weatherGrain" disabled><option value="monthly">Monthly Databricks Aggregate</option></select></div>
+        <div class="uploaded-data-field"><span>Observation grain</span><strong>Monthly observations</strong></div>
       </div>
       <div class="sales-note" id="weatherEffectStatus" aria-live="polite">Loading PAGASA observations from Databricks Gold.</div>
       <div class="uploaded-data-table-wrap"><table class="uploaded-data-table" id="weatherEffectTable"><tbody><tr><td class="uploaded-data-empty">Loading Weather Metrics...</td></tr></tbody></table></div>

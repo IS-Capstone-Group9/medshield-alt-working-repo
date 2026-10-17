@@ -32,7 +32,6 @@ export const FORECAST_VALIDATION_MARKUP = String.raw`
     <p class="analytical-output-takeaway" id="forecastTakeaway">Loading forecast evidence…</p>
     <p class="analytical-output-scope" id="forecastStatus" role="status">Validation status unavailable</p>
     <p class="analytical-output-scope" id="forecastWindow"></p>
-    <p class="analytical-output-review" id="forecastReview">Review validation and publication status before using any prediction.</p>
   </section>
   <p class="chart-subtitle" id="forecastAssumptions">Historical error is retrospective evidence. Revenue measures commercial sales; source units require product eligibility.</p>
   <div class="forecast-hero-grid" id="forecastMetrics">
@@ -41,15 +40,18 @@ export const FORECAST_VALIDATION_MARKUP = String.raw`
     <div class="forecast-hero-card"><div class="hero-label">Historical RMSE</div><div class="hero-val" id="kpiForecastRmse">Unavailable</div><div class="hero-sub">Root mean squared error in target units</div></div>
     <div class="forecast-hero-card"><div class="hero-label">Historical signed bias</div><div class="hero-val" id="kpiForecastBias">Unavailable</div><div class="hero-sub">Mean prediction minus actual in target units</div></div>
   </div>
-  <p class="chart-subtitle" id="forecastEvaluationScope"></p>
   <div class="chart-wrap forecast-chart-wrap chart-hero" style="position:relative"><canvas id="forecastChart" role="img" aria-label="Observed actuals, historical backtests and available future predictions"></canvas></div>
+  <p class="chart-subtitle" id="forecastPlotScope" role="status"></p>
   <p class="chart-subtitle" id="forecastBandNote"></p>
-  <h3 class="chart-title">Historical model comparison</h3>
+  <details><summary>Compare historical models</summary>
   <p class="chart-subtitle">Compare errors on common evaluation keys. A lower historical error does not establish future accuracy or model approval.</p>
   <div style="overflow-x:auto"><table id="forecastBenchmarkTable" class="product-table" aria-label="Models compared on common evaluation keys"></table></div>
+  </details>
   <details><summary>Backtest error and bias by forecast lead</summary><div style="overflow-x:auto"><table id="forecastLeadTable" class="product-table"></table></div></details>
-  <details open><summary>Monthly actuals, predictions and historical errors</summary><div style="overflow-x:auto"><table id="forecastEvidenceTable" class="product-table"></table></div></details>
+  <details><summary>Monthly actuals, predictions and historical errors</summary><div style="overflow-x:auto"><table id="forecastEvidenceTable" class="product-table"></table></div></details>
   <details class="analytical-output-notes"><summary>Validation methods, coverage and source</summary>
+    <p id="forecastReview">Review validation and publication status before using any prediction.</p>
+    <p id="forecastEvaluationScope"></p>
     <p id="forecastCoverage"></p><p id="forecastSource"></p>
     <p>Revenue is a commercial measure. It does not establish medicine demand, stock positions or procurement requirements. Disease/weather effects and model decomposition are unavailable unless separately published.</p>
   </details>
@@ -95,7 +97,7 @@ function renderForecastValidation(error) {
   const finite = value => typeof value === 'number' && Number.isFinite(value);
   const fmt = value => finite(value) ? value.toLocaleString('en-PH', {maximumFractionDigits: 2}) : 'Unavailable';
   ['forecastChart', 'overviewForecastChart'].forEach(id => { const canvas = el(id); if (canvas) Chart.getChart(canvas)?.destroy(); });
-  ['forecastWindow','forecastBandNote','forecastEvaluationScope','forecastCoverage','forecastBenchmarkTable','forecastLeadTable','forecastEvidenceTable','forecastSource','forecastAssumptions'].forEach(id => { if(el(id)) el(id).textContent = ''; });
+  ['forecastWindow','forecastPlotScope','forecastBandNote','forecastEvaluationScope','forecastCoverage','forecastBenchmarkTable','forecastLeadTable','forecastEvidenceTable','forecastSource','forecastAssumptions'].forEach(id => { if(el(id)) el(id).textContent = ''; });
   el('forecastTakeaway').textContent = 'Forecast evidence unavailable.';
   el('forecastReview').textContent = 'Review validation and publication status before using any prediction.';
   ['kpiForecastMae','kpiForecastWape','kpiForecastRmse','kpiForecastBias'].forEach(id => el(id).textContent = 'Unavailable');
@@ -124,7 +126,7 @@ function renderForecastValidation(error) {
   const approved = data.status === 'published' && data.publication_status === 'approved' && !!data.run_id && !!data.release_id;
   el('forecastStatus').textContent = (approved ? 'Approved published forecast' : data.status === 'published' ? 'Published model evidence — approval not established' : view?.models[key] ? 'Retrospective benchmark evidence' : 'No eligible forecast evidence') + ' · ' + (data.publication_status || 'Publication status unavailable') + ' · ' + scope;
   el('forecastReview').textContent = approved ? 'Review supported leads, intervals and source freshness before applying the published forecast.' : 'Review benchmark errors and reporting coverage. No approved published forecast is established for this scope.';
-  el('forecastAssumptions').textContent = 'Monthly ' + data.scope.unit + ' · ' + scope + ' · historical errors are retrospective, not a guarantee of future accuracy. ' + (data.scope.metric === 'revenue' || data.scope.unit === 'PHP' ? 'Revenue does not establish medicine demand or stock requirements.' : 'Delivered source units remain specific to the eligible product and its source packaging.');
+  el('forecastAssumptions').textContent = (data.scope.metric === 'revenue' || data.scope.unit === 'PHP' ? 'Revenue research; medicine demand and stock requirements are unverified.' : 'Delivered units are specific to the eligible product and packaging.') + ' Historical errors do not establish future accuracy.';
   if (el('overviewForecastStatus')) el('overviewForecastStatus').textContent = el('forecastStatus').textContent;
   el('forecastSource').textContent = 'Source: ' + (data.source.file || 'Unavailable') + ' · checksum ' + (data.source.checksum || 'Unavailable') + ' · reporting coverage: ' + (data.reporting_coverage_status || 'Unavailable') + ' · ' + (data.limitations || []).join(' ');
   if (!view || !view.models[key]) {
@@ -160,20 +162,29 @@ function renderForecastValidation(error) {
   }
   const compact = value => Number(value).toLocaleString('en-PH',{notation:'compact',maximumFractionDigits:1});
   const options = {responsive:true,maintainAspectRatio:false,spanGaps:false,interaction:{mode:'index',intersect:false},scales:{x:{ticks:{maxTicksLimit:window.innerWidth < 600 ? 7 : 14,maxRotation:0},title:{display:true,text:'Calendar month'}},y:{ticks:{callback:compact},title:{display:true,text:data.scope.unit}}},plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:11}}},tooltip:{callbacks:{label:context => context.dataset.label + ': ' + fmt(context.raw)}}}};
-  ['forecastChart','overviewForecastChart'].forEach(id => { if(el(id)) new Chart(el(id), {type:'line',data:{labels:all,datasets:datasets.map(d => ({...d}))},options}); });
+  // Keep the full requested calendar in evidence/CSV, but plot only numerical series.
+  // Interior missing months remain gaps; an entirely unavailable future is not a legend item.
+  const plotted = datasets.filter(dataset => dataset.data.some(finite));
+  const plotEnd = all.findLastIndex((period, index) => plotted.some(dataset => finite(dataset.data[index])));
+  const plotLabels = all.slice(0, plotEnd + 1);
+  ['forecastChart','overviewForecastChart'].forEach(id => { if(el(id)) new Chart(el(id), {type:'line',data:{labels:plotLabels,datasets:plotted.map(d => ({...d,data:d.data.slice(0,plotEnd + 1)}))},options}); });
   const m = result.metrics || {};
   const pesoTarget = data.scope.metric === 'revenue' || data.scope.unit === 'PHP';
   const targetUnit = esc(pesoTarget ? '₱' : data.scope.unit);
   const fmtTarget = value => finite(value) ? (pesoTarget ? '₱' + value.toLocaleString('en-PH', {minimumFractionDigits: 2, maximumFractionDigits: 2}) : fmt(value) + ' ' + data.scope.unit) : 'Unavailable';
   const futureCount = future.filter(p => finite(p.prediction)).length;
+  el('forecastPlotScope').textContent = futureCount || future.some(supported)
+    ? 'Chart: available actuals and predictions through ' + (plotLabels.at(-1) || 'Unavailable') + '. Missing months stay blank; full requested months remain in the evidence table and CSV.'
+    : 'Historical chart only' + (plotLabels.length ? ' · through ' + plotLabels.at(-1) : '') + '. Requested future predictions are unavailable; full requested months remain in the evidence table and CSV.';
   el('forecastTakeaway').textContent = name + ': ' + (finite(m.wape) ? fmt(m.wape) + '% historical WAPE across ' + (m.n ?? 0) + ' scored observations' : 'historical WAPE unavailable') + '. ' + (futureCount ? futureCount + '/' + future.length + ' displayed future months have prediction values.' : 'No prediction values are available for the displayed future window.');
-  el('forecastChart').setAttribute('aria-label', name + ' · monthly ' + data.scope.unit + ' · ' + scope + ' · observed values, historical backtest and future prediction evidence');
+  el('forecastChart').setAttribute('aria-label', name + ' · monthly ' + data.scope.unit + ' · ' + scope + (futureCount || future.some(supported) ? ' · observed values, historical backtest and available future evidence' : ' · historical actuals and backtest only; requested future predictions unavailable'));
+  el('forecastChart').setAttribute('aria-describedby', 'forecastPlotScope forecastBandNote');
   el('kpiForecastMae').textContent = fmtTarget(m.mae);
   el('kpiForecastWape').textContent = finite(m.wape) ? fmt(m.wape) + '%' : 'Unavailable';
   el('kpiForecastRmse').textContent = fmtTarget(m.rmse);
   el('kpiForecastBias').textContent = fmtTarget(m.bias);
   el('forecastEvaluationScope').textContent = 'Protocol: ' + protocol + ' · training cutoff ' + (view.training_end || 'Unavailable') + ' · evaluation ' + view.evaluation_start + ' to ' + view.evaluation_end + ' · ' + (m.n ?? 0) + ' scored observations. Missing actuals stay unavailable.';
-  el('forecastBandNote').textContent = future.filter(supported).length + '/' + future.length + ' future points have supported published intervals. ' + [...new Set(future.map(p => p.interval_reason).filter(Boolean))].join('; ');
+  el('forecastBandNote').textContent = future.filter(supported).length + '/' + future.length + ' future points have supported published intervals. ' + [...new Set(future.map(p => p.interval_reason).filter(Boolean))].map(reason => String(reason).replace(/_/g, ' ')).join('; ');
   el('forecastCoverage').textContent = 'Measured interval coverage: ' + fmt(result.band_coverage?.percent) + (finite(result.band_coverage?.percent) ? '%' : '') + ' · scored interval observations: ' + (result.band_coverage?.n ?? 0) + ' · exact common evaluation keys: ' + (view.common_scored_months ?? 'Unavailable') + '.';
   el('forecastEvaluationScope').textContent += ' ' + (view.comparison_label || '');
   el('forecastBenchmarkTable').innerHTML = '<thead><tr><th>Model</th><th>Common observations</th><th>MAE (' + targetUnit + ')</th><th>RMSE (' + targetUnit + ')</th><th>WAPE (%)</th><th>Mean signed bias (' + targetUnit + ')</th><th>Selection</th></tr></thead><tbody>' + Object.entries(view.comparisons || view.models).map(([model, value]) => { const c = value.comparison_metrics || {}; return '<tr><td>' + esc(data.models[model] || model) + '</td><td>' + fmt(c.n) + '</td><td>' + fmt(c.mae) + '</td><td>' + fmt(c.rmse) + '</td><td>' + fmt(c.wape) + '</td><td>' + fmt(c.bias) + '</td><td>' + esc(value.selection_reason || 'Exploratory benchmark; no champion approval') + '</td></tr>'; }).join('') + '</tbody>';

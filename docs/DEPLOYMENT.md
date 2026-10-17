@@ -41,6 +41,13 @@ Before deployment:
 
 Choose a host only after requirements are clear. A managed frontend plus container backend, a container platform, or a VM can all run the current two-service application. Databricks and Supabase remain managed external dependencies.
 
+## Backup and restore
+
+Follow [the backup/restore runbook](BACKUP_RESTORE.md) for the separate Supabase,
+Databricks, application and secure-configuration recovery inventory. The dated
+local synthetic rehearsal passes; managed-platform/full-live restore acceptance
+and agreed RPO/RTO remain required release evidence.
+
 ## Rollback
 
 Retain the prior application image/commit and do not mutate Bronze evidence during an application rollback. If a data release fails, point stable views back to the last accepted publication or leave the dashboard unavailable until the candidate is corrected.

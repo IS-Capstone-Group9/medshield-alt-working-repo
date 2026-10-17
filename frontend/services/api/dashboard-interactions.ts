@@ -83,6 +83,29 @@ export async function refreshForecastValidation(): Promise<boolean> {
 }
 
 let regressionRequest = 0
+let predictiveResearchRequest = 0
+
+export async function refreshPredictiveResearch(runId?: string): Promise<boolean> {
+  const request = ++predictiveResearchRequest
+  const apply = (window as any).setPredictiveResearchData
+  if (typeof apply !== 'function') return false
+  const selected = runId ?? (document.getElementById('researchRun') as HTMLSelectElement | null)?.value ?? ''
+  const params = new URLSearchParams()
+  if (selected) params.set('run_id', selected)
+  apply(null, 'Loading stored research evidence from Databricks Gold…')
+  try {
+    const data = await getJson(`/api/sales/predictive-research${params.size ? `?${params}` : ''}`)
+    if (request !== predictiveResearchRequest || (window as any).setPredictiveResearchData !== apply) return false
+    apply(data)
+    return true
+  } catch {
+    if (request === predictiveResearchRequest && (window as any).setPredictiveResearchData === apply) {
+      apply(null, 'Stored research evidence unavailable from Databricks Gold; no local model results substituted.')
+    }
+    return false
+  }
+}
+
 export async function refreshExternalRegression(): Promise<boolean> {
   const request = ++regressionRequest
   const apply = (window as any).setExternalRegressionData
@@ -147,6 +170,9 @@ export function installCommonInteractions(root: HTMLElement, activeListeners: an
   const refreshForecast = () => { void refreshForecastValidation() }
   window.addEventListener('medshield:forecast-change', refreshForecast)
   activeListeners.push({ target: window, type: 'medshield:forecast-change', listener: refreshForecast })
+  const refreshResearch = (event: Event) => { void refreshPredictiveResearch((event as CustomEvent<{run_id?: string}>).detail?.run_id) }
+  window.addEventListener('medshield:predictive-research-change', refreshResearch)
+  activeListeners.push({ target: window, type: 'medshield:predictive-research-change', listener: refreshResearch })
   const backdrop = root.querySelector<HTMLElement>('#dashboardHelpBackdrop') || root.querySelector<HTMLElement>('#helpGuidanceModal')
   root.querySelector('#closeDashboardHelpButton')?.addEventListener('click', () => {
     backdrop?.classList.remove('is-open')
@@ -172,6 +198,7 @@ export function resetDashboardDeferredLoads() {
   ++heatmapRequest
   ++sectorRequest
   ++forecastRequest
+  ++predictiveResearchRequest
   ++regressionRequest
   ++planningRequest
   ++planningSolve
@@ -186,7 +213,7 @@ export function refreshDashboardModulesForPage(pageName: string): Promise<boolea
   if (pageName === 'revenue') loaders = [refreshSalesHeatmap]
   if (pageName === 'products') loaders = [refreshSalesSectors]
   if (pageName === 'territory') loaders = [refreshSalesSectors]
-  if (pageName === 'forecast') loaders = [refreshForecastValidation, refreshExternalRegression]
+  if (pageName === 'forecast') loaders = [refreshForecastValidation, refreshExternalRegression, refreshPredictiveResearch]
   if (pageName === 'inventory') loaders = [refreshPlanning]
   if (!loaders.length) return Promise.resolve(false)
 

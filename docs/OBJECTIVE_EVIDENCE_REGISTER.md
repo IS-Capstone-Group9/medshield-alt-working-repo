@@ -1,8 +1,199 @@
 # MedShield objective, scope and evidence register
 
+## Supporting-revenue forecast YoY delivered — 16 October 2026
+
+The accepted supporting-revenue presentation now has an implemented and checked
+forecast YoY view beside the stored PHP candidate projections. [T13 evidence](../outputs/predictive_yoy_20261016/README.md)
+traces the exact frozen Gold input through the read-only gateway, table and CSV,
+with prior-year baseline/status/reasons and distinct storage/content hashes.
+Authenticated live source/browser checks, independent numerical reconciliation,
+failure fixtures, regression tests, types/build and separate review passed.
+
+This closes the bounded T13 implementation gap noted in the earlier dated
+scope/predictive handoffs. Original model selection, historical measured error,
+generation/origin/leads and candidate status remain unchanged. Derived forecast
+change does not measure 2026 accuracy or establish medicine-quantity demand.
+AC-O3's original territory/SKU/unit/external/urgency requirements, publication
+reviews and actual business/academic acceptance remain open; no original
+objective or proposed wording is approved by this technical feature.
+
+## T01 review packet and predictive handoff — 16 October 2026
+
+The [scope reconciliation](../outputs/scope_reconciliation_20261016/README.md)
+preserves every original O1–O5 commitment and maps33 clauses to current evidence,
+unfulfilled criteria, owners and observable exits. All17 analytical tasks remain
+represented. Exact original quotes are checked against the latest confirmed
+post-defense source, including the distinct classifier designs and proposed
+error thresholds. Proposed alternative wording is a review option with unset
+decisions; original scope remains authoritative until actual acceptance.
+
+This closes the **T01 packet-preparation deliverable**, not original-objective
+acceptance or scope amendment. The [verification](../outputs/scope_reconciliation_20261016/verification.json)
+states actual document/source checks and separate review. The
+[predictive execution handoff](../outputs/scope_reconciliation_20261016/predictive-handoff.md)
+defines the next source-bound company-PHP forecast YoY feature, with unchanged
+stored predictions and explicit baseline eligibility/failure semantics. It is
+prepared for implementation, not an implemented feature or new model result.
+Quantity/territory data, external/urgency, operational inventory and publication
+criteria remain open under their existing acceptance contracts.
+
+## All-product quantity-context review — 16 October 2026
+
+The user's belief that Qty follows each product's box/strip presentation is
+recorded as a working hypothesis. The [complete product/title review](../outputs/product_quantity_units_20261016/README.md)
+tests existing textual/source evidence and produces a filterable review workbook
+covering all accepted archived product labels. It finds explicit presentation
+clues for some products; it does not supply missing historical identity, unit,
+package conversions, completeness or forecast approvals. The exact original
+sales-unit question is narrowed by existing wording rather than filled with
+assumed defaults.
+
+Accountable analyst: all-product inspection delivered, with separate numerical
+QA and root export/visual verification in the [packet](../outputs/product_quantity_units_20261016/verification.json).
+Source/catalog owner: substantiate historical Qty meaning for each selected
+presentation. Model owner: freeze a supported target/evaluation only afterward.
+Original M05/O3, retained target contracts and publication decisions remain
+open; no scope amendment, master change or model training was performed.
+
 Prepared: 3 October 2026 (Asia/Manila).  
 Accountable documentation role: Business Analyst, with integration review performed sequentially.  
 Status: **Step 1 deliverable prepared and checked; business release and academic scope decisions remain pending.**
+
+## Latest paper identity and Chapters 4–5 revision — 16 October 2026
+
+The user confirms the latest post-defense Chapters 1–3 source, whose bytes match [CapstonePaper_1.pdf](../references/CapstonePaper_1.pdf); the five objective quotations remain unchanged. A separate supplied [Chapters 4–5 source draft](../references/chapters/GROUP%209_MedShield_CP2_Chapter%204_5.pdf) is preserved. The [complete revised working chapters](chapters/MedShield_Chapter_4_5_Revised_20261016.md) integrate retained descriptive, company-PHP research, planning and system evidence with an objective-by-objective conclusion. The [revision record](../outputs/paper_revision_20261016/REVISION_RECORD.md) identifies actual document checks and remaining integration work. This is manuscript preparation, not objective closure, an academic amendment or business/model release acceptance.
+
+The latest proposal's ABC classifier evaluation concerns held-out new/low-history labels (PDF p117); the North Star's next-period ABC question is a distinct temporal target. Older future-classifier recommendations below retain their dated interpretation and must be reconciled explicitly with the retained task before implementation or amendment. No accepted XGBoost classification result is supplied by this writing step. Active bounded allocation does not compute EOQ/ROP or expiry reduction; scenario verification does not close O4's operational commitments.
+
+## Guided medicine-pilot readiness Step 1 — 16 October 2026
+
+Status: **Bounded data-readiness assessment complete; no eligible quantity-model
+pilot established.** This guided Step 1 is the M05/O3 inspection proposed after
+the paper-method coverage discussion. It is distinct from this register's older
+Step 1 scope deliverable and does not close the full O1–O5 T01 reconciliation.
+
+The [source-bound assessment](../outputs/predictive_pilot_readiness_20261016/README.md)
+and [current-state entry](CURRENT_STATE.md#medicine-forecasting-pilot-readiness-assessed--16-october-2026)
+identify a concrete TRIVASC 35MG MR × QUEZON review cohort, current independent
+catalog/quantity approval gaps, unknown later months and one signed observation
+requiring treatment. Archived fact-17 records are traced to exact supplied CSVs;
+this is fresh local inspection, not a current warehouse/fact-20 certification.
+The [verification packet](../outputs/predictive_pilot_readiness_20261016/verification.json)
+binds source identity, reproducible counters and separate reviews.
+
+Next owner/action: catalog/source owners substantiate the historical product
+presentation, Qty unit, territorial meaning, coverage and signed-adjustment
+policy. After a supported target exists, the Data Analyst freezes the quantity
+evaluation contract and compares transparent baselines with Prophet at validated
+actual leads. Source-only availability and unavailable receipts remain recorded;
+no new source evidence or owner approvals were invented. The current company-PHP
+research retains its existing use; it does not satisfy original O3. No training,
+model replacement, publication or academic scope amendment was performed.
+
+## System analytics integration delivered — 15 October 2026
+
+The user's clarification that the system must contain descriptive and predictive
+analytics shifts this continuation to working features. The new Forecast research
+panel and authenticated warehouse reader expose the existing 21-model experiment,
+same-case lead-group comparisons, origin-keyed peso/percentage error detail and
+CSV, with a separate stored candidate-projection view. The original selection,
+unpublished status and genuine projection generation timing remain intact.
+
+The [integration record](../outputs/analytics_system_completion_20261015/README.md)
+and [current state](CURRENT_STATE.md#descriptive-and-predictive-system-integration-verified--15-october-2026)
+bind implemented files, live fact-20/source reconciliation, browser/export evidence,
+separate QA and retained failures/recovery. Existing recorded-sales descriptive
+features pass the live workflow regression. This closes the scoped system
+integration deliverable, rather than treating offline model execution or paper
+writing as proof of dashboard functionality.
+
+No new fit, training-data alteration, model replacement, publication, numerical
+business limit or operational/academic approval is recorded. Source-only evidence
+and open medicine-unit/territory requirements remain disclosed. The later six
+offline recipes are not served from local files. Next owner/action: client/project
+lead reviews the implemented research workflow; engineering and the model/data
+owners retain the separate production, original-target and operational gates.
+
+## Predictive findings and limitations written — 15 October 2026
+
+Status: **Research findings supplement prepared for client discussion and
+Chapter 4–5 integration.** The user's continuation instruction authorizes writing
+the interpretation of the retained comparison; it does not supply new source
+evidence, business limits, a model replacement or academic acceptance.
+
+The [findings update](chapters/MedShield_Predictive_Findings_Update_20261015.md)
+reports the original 21-model comparison separately from the six later
+error-reduction recipes. It preserves the last-value research reference,
+identifies the median development winner's audit deterioration and the
+unselected calibration's modest retrospective gain, and reports nested lead
+groups with their actual coverage. The proposed 10% research goal remains
+unachieved and separate from unset business error limits. Sales-only evidence,
+unavailable receipts, unverified completeness/causes and the genuine 2026
+projection timing are disclosed. Original O3 and operational gates stay open.
+
+The [writing verification record](../outputs/predictive_findings_20261015/verification.json)
+binds retained source identities, report metrics and document checks. No refit,
+source correction, selection change, publication or old draft replacement is
+performed. Next owner/action: the writing owner integrates this supplement and
+the dated predictive draft with the full manuscript's descriptive/system/scenario
+evidence, then applies required numbering/citations and obtains formal review.
+
+## Guided Step 5 clarification: sales-only evidence — 15 October 2026
+
+Status: **Date-basis and available-evidence documentation complete for the
+research scope. Original delivery receipts unavailable; independent event and
+completeness verification not performed.** This entry supersedes the earlier
+same-day receipt-collection task below, while retaining that dated history.
+The requesting user reported **“we dont have any delivery receipts. the only
+evidence is the medshield sales”**. Availability is attributed to that report,
+not a fresh independent source audit.
+
+Use the supplied MedShield sales files for recorded monthly eligible Net CP/PHP
+analysis by `Date Delivered`. Preserve their original/adjusted provenance, the
+limited three-month CSV reconciliations and December 2024 exclusions. Agreement
+within the supplied source lineage does not prove physical delivery,
+independent completeness, original SKU quantities or the cause of an unusual
+month. The training-only completeness attestation remains unchanged; unsupported
+causes remain unknown. Do not continue asking for receipts known to be unavailable.
+
+The [current client brief](PREDICTIVE_CLIENT_DECISION_BRIEF.md) includes report-ready
+limitations and continues research reporting using the available evidence.
+The [clarification record](../outputs/predictive_delivery_review_20261015/sales-only-clarification.json)
+retains the changed scope and guidance. No source data, model fit, selection,
+metric, numerical business limit, release or original O3 acceptance is changed.
+Operational acceptance requirements remain in force. Next owner/action: the
+analyst carries this limitation into the research findings and model discussion;
+the project lead supplies any genuinely new evidence only if it becomes available.
+
+## Guided Step 5: delivery-date clarification and remaining source review — 15 October 2026
+
+Status: **Date-field meaning and scoped CSV consistency review complete;
+original delivery-document confirmation and explanations remain pending.**
+The requesting user stated **“i know it's delivery date”**, followed by
+**“ok continue”**. This agrees with the saved source audit's `Date Delivered`
+field and the valid-date pipeline's `OBSERVED_DELIVERY_DATE` basis. It is a
+user clarification of field meaning, not an independently verified signature
+for every event, reporting completeness or model acceptance.
+
+The [current client brief](PREDICTIVE_CLIENT_DECISION_BRIEF.md) now begins with
+a consolidated research setup and narrows the remaining source questions.
+The retained March, April and November 2025 eligible Net CP totals are
+₱2,612,295.10, ₱5,670,753.87 and ₱25,076,009.20; their original CSV revenue
+differences and delivery-date/area/DR financial-group mismatch counts are zero.
+These are inherited frozen source reconciliations, not fresh live queries or
+proof of original SKU quantities. December 2024's separate exclusions remain
+disclosed; the zero-difference statement is limited to those three 2025 cases.
+
+Do not re-ask which date field is used. Remaining requests concern original
+delivery documents, documented corrections/reasons and independent period
+closure/completeness evidence. Preserve the existing training-only completeness
+attestation and label unconfirmed causes unknown. An inaccurate forecast alone
+does not show that reconciled source values are erroneous. No rows, dates,
+amounts, model criteria or selection are changed; no fit, publication or
+external client message is performed. The
+[delivery-review record](../outputs/predictive_delivery_review_20261015/review-inputs.json)
+preserves source and before/after identities. Proposed goals, null business
+limits, future confirmation and original O3 remain in their prior state.
 
 ## Guided Step 4: evaluation period — 15 October 2026
 
@@ -315,10 +506,16 @@ geography/buyer evidence and operational outcome gates remain distinct.
 
 ### Five objectives: fulfillment verdict
 
+**17 October editorial clarification:** the O2 classifier wording below and in
+the acceptance table distinguishes the proposal's temporal/held-out/new-label
+descriptions from the separate North Star future-period task. This corrects the
+earlier future-target-only summary; it adds no model result or scope approval.
+See [paper corrections](PAPER_REVISION_GUIDE.md#required-system-to-paper-corrections--17-october-2026).
+
 | Objective | Verdict against full original commitment | Established capability | Exact remaining gate |
 |---|---|---|---|
 | O1: study-period regional performance, YoY and STL | **Partly fulfilled; strongest progress** | Historical company finance, coverage, matched-month comparisons and monthly company STL | Verified territory/unit scope,2021–2025 output acceptance, promised daily/territorial decomposition or accepted amendment, same-release authenticated API/chart/export evidence |
-| O2: product/territory/account priority and predictive ABC | **Partly fulfilled** | Observed source-label Pareto/ABC, mapped-area and commercial rankings | Approved SKU/pack/unit and account identity; reviewed territory/buyer mappings; supported slow-mover interpretation; future-period XGBoost evaluation or accepted amendment |
+| O2: product/territory/account priority and predictive ABC | **Partly fulfilled** | Observed source-label Pareto/ABC, mapped-area and commercial rankings | Approved SKU/pack/unit and account identity; reviewed territory/buyer mappings; supported slow-mover interpretation; reconciled original classifier design and distinct North Star future-period evaluation, or actual accepted amendment |
 | O3: December2026 onward territory pharmaceutical demand, DII/RSI and urgency | **Not fulfilled; supporting experiments exist** | Company-PHP baseline/ETS/Prophet comparison with measured errors | Accepted SKU/territory unit target, sufficiently recent history/validated actual leads, external join/as-of evidence, defined urgency truth, validated versioned publication |
 | O4: EOQ/ROP/weighted allocation and expiry wastage≤5% | **Not fulfilled as an operational outcome; scenario work is partial** | Commercial weighting and feasible/infeasible entered allocation scenarios | Stock/on-order/commitments/lot expiry, suppliers/costs/service policy, reviewed optimization objective, measured baseline and observed/simulated outcomes clearly distinguished |
 | O5: five governed modules, upload, official alerts and matching | **Partly fulfilled** | Five module areas exist, historical data serves through the gateway and investigation/export foundations exist | Demonstrated client upload→candidate→review→publication/retry/correction, current authenticated acceptance, official warning or amended scenario scope, evaluated product-region recommendations |
@@ -431,7 +628,7 @@ The wording below summarizes each original objective rather than rewriting it. A
 | Objective | Business output, data and required capability | Current evidence and gap | Owner and acceptance contract |
 |---|---|---|---|
 | O1, p11: 2021–2025 performance across CALABARZON/MIMAROPA/Bicol; territory YoY and STL | Comparable territory sales/quantity series with mapped geography, period coverage, financial eligibility and product-unit meaning. Sales Diagnostics identifies changes without overstating completeness or cause. FR2–FR4, FR10. | Company finance/YoY and monthly company STL exist. Latest candidate passes E05–E07; app pin mismatch remains. Government/Hospital geography is unresolved; actual STL is company/monthly/2020–2025, not the paper's daily territorial decomposition. | Analyst owns calculations; developer owns UI/API; operator binds release. **AC-O1:** same selected study-period SQL/API/chart/table/export totals; matched YoY coverage; explicit unallocated geography; decomposition per promised series/frequency with enough history and published identity, or approved academic amendment. Missing/zero/partial states and CEO walkthrough pass. |
-| O2, p11: territories/accounts, sales volume, revenue/growth, Pareto and XGBoost ABC to prioritize SKUs/slow movers | Evidence-backed product/pack aliases, customer account identifiers, buyer/geography separation, compatible quantity units and contribution/growth. Predictive classification needs a defined future target. FR3, FR4, FR8, FR9. | Deterministic positive-contribution ABC/returns and provisional area ranking exist. All current catalog identity/category rows need review; no canonical units/SKUs. Account-level attribution is not established. Fixed ABC does not itself require XGBoost. | Analyst/catalog reviewer; CEO confirms evidenced business mappings; model developer for any future classifier. **AC-O2:** exact source-to-approved group trace; no merged incompatible packs or changed finance; cohort/filter ranking recomputation and reconciled returns; mapped geographic ranking. Account concentration supported by a verified key. For predictive ABC: future labels/as-of features/time split and per-class evaluation, or explicit amendment retaining deterministic ABC. |
+| O2, p11: territories/accounts, sales volume, revenue/growth, Pareto and XGBoost ABC to prioritize SKUs/slow movers | Evidence-backed product/pack aliases, customer account identifiers, buyer/geography separation, compatible quantity units and contribution/growth. Predictive classification needs a reconciled target: original pp99–100 describe temporal/held-out designs and p117 names new/low-history labels; the North Star future-period target remains a separate task. See the 17 October clarification in PAPER_REVISION_GUIDE.md. FR3, FR4, FR8, FR9. | Deterministic positive-contribution ABC/returns and provisional area ranking exist. All current catalog identity/category rows need review; no canonical units/SKUs. Account-level attribution is not established. Fixed ABC does not itself require XGBoost. | Analyst/catalog reviewer; CEO confirms evidenced business mappings; model developer for any future classifier. **AC-O2:** exact source-to-approved group trace; no merged incompatible packs or changed finance; cohort/filter ranking recomputation and reconciled returns; mapped geographic ranking. Account concentration supported by a verified key. For predictive ABC: reconcile and record the original temporal/held-out/new-label design before claiming fulfillment; define eligible labels, as-of features, leakage controls and per-class held-out evaluation. The separate North Star temporal task retains future labels/time splits. An actual amendment is required to retain deterministic ABC alone. |
 | O3, p12: territory pharmaceutical demand for December 2026 onward with Prophet+DII+RSI and XGBoost urgency | Demand quantity and unit per verified SKU/territory, fresh accepted actuals, aligned disease/weather features available at forecast issue time, and a measurable urgency target. FR5–FR8, FR10. | E08 evaluates company monthly PHP revenue; retained last-value audit WAPE 37.76%, development WAPE 83.20%. Neither disease nor weather candidate is join-ready. No approved model review/manifest/pointer. Current quantity identity cannot support the original target. | Model developer/analyst, operator publication, CEO usefulness review, adviser method review. **AC-O3:** frozen target/unit/geography/cutoff and folds; benchmarks before challengers; leakage-free features; MAE/RMSE/WAPE-or-sMAPE/bias and supported intervals; demonstrated horizon beginning at the stated date; coherent model publication/API/UI. Urgency truth and evaluation defined. If only PHP is supported, rename/scope it explicitly through amendment. |
 | O4, p12: EOQ/ROP/LP under revenue/growth/outbreak MCDA; expiry wastage ≤5% | Stock/lot expiry, purchases, pack conversion, supplier lead times, ordering/holding cost, budget/capacity/service policy; defined wastage baseline and prospective outcome period. FR9, FR10. | Live scenario solver is greedy; offline Python contains mixed-integer solver. Current commercial score uses sales value/coverage, not outbreak/growth. Operational inputs are user assumptions. No verified expiry baseline/outcome supports the target. | Operations analyst and developer; CEO policy/usefulness; adviser method/outcome evaluation. **AC-O4:** agreed objective and units; operational input provenance or scenario labels; hand-solvable optimality/constraint tests; feasible/infeasible UI; reviewed assumptions and sensitivity. Demonstrate real EOQ/ROP/expiry evaluation using inventory feed or amend claims to tested scenarios. ≤5% remains a target until measured. |
 | O5, p12: five modules with CSV validation, Signal-2 alerts and collaborative filtering | Usable authenticated screens, safe ingestion/retry/correction/history, mapped product-region evidence and official warning source or accurately labelled scenarios. FR1, FR3, FR9, FR10 and nonfunctional requirements. | Module shells exist, but upload returns HTTP 409. DR-only input has no stable line ID. No operational warning feed or accepted collaborative-filtering evidence established by audit. Screen presence does not close the workflow. | Frontend/backend engineer, operator and QA; CEO client-task acceptance. **AC-O5:** client upload→validated candidate→acceptance→publication survives retry/failure; complete-period replacement demonstrated; chart/export filters and keyboard/error states pass; real or explicitly scoped warning/recommendation behavior demonstrated and evaluated. |

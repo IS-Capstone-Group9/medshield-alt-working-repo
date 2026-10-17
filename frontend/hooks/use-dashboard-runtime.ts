@@ -1,7 +1,7 @@
 import { installStlPanel } from '@/services/api/stl-panel'
 import { installDiagnosticPanel } from '@/services/api/diagnostic-panel'
 import { installSalesOutputSections } from '@/services/api/sales-output-sections'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useEffectEvent, useRef, useState } from 'react'
 import Chart from 'chart.js/auto'
 import { MEDSHIELD_MARKUP, MEDSHIELD_STYLE } from '@/lib/medshieldReference'
 import {
@@ -21,17 +21,21 @@ import type { User } from '@/lib/auth-tokens'
 export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | null) {
   const rootRef = useRef<HTMLDivElement>(null)
   const [portalContainer, setPortalContainer] = useState<HTMLElement | null>(null)
-  const [isLoggingOut, setIsLoggingOut] = useState(false)
-
-  const handleLogout = () => {
-    if (isLoggingOut) return
-    setIsLoggingOut(true)
-    onLogout().finally(() => setIsLoggingOut(false))
-  }
+  const logoutInFlight = useRef(false)
+  const logout = useEffectEvent(() => onLogout())
+  const installRuntimeEnhancements = useEffectEvent((root: HTMLElement, activeListeners: ListenerRecord[]) => {
+    installDashboardEnhancements(root, activeListeners, user)
+  })
 
   useEffect(() => {
     const root = rootRef.current
     if (!root) return
+
+    const handleLogout = () => {
+      if (logoutInFlight.current) return
+      logoutInFlight.current = true
+      void logout().finally(() => { logoutInFlight.current = false })
+    }
 
     let disposeStl = () => {}
     let disposeDiagnostics = () => {}
@@ -51,7 +55,7 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
       root.innerHTML = `
         <main role="alert" style="max-width:760px;margin:10vh auto;padding:32px;border:1px solid #d9e2e8;border-radius:14px;background:#fff;color:#12384e;font-family:Arial,sans-serif">
           <h1 style="margin:0 0 12px;font-size:24px">Databricks data is unavailable</h1>
-          <p style="margin:0;line-height:1.6">MedShield could not load its live Databricks Gold dataset. Dashboard charts and values are hidden because local and mock fallbacks are disabled. Check the Databricks warehouse and credentials, then reload this page.</p>
+          <p style="margin:0;line-height:1.6">Source data could not be loaded. Charts and values are unavailable. Reload this page to retry, or contact the administrator if the problem continues.</p>
         </main>`
     }
 
@@ -75,7 +79,6 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
 
     root.innerHTML = MEDSHIELD_MARKUP
     enhanceDashboardContent(root)
-    hydrateSidebarAccountCard(root, user)
 
     const loadingOverlay = document.createElement('div')
     loadingOverlay.className = 'dashboard-loading-overlay'
@@ -88,7 +91,6 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
           <path class="dashboard-loading-spinner-arc" d="M24 5a19 19 0 0 1 19 19" />
         </svg>
         <strong class="dashboard-loading-title">Loading MedShield</strong>
-        <span class="dashboard-loading-sub">Connecting to Databricks Gold</span>
       </div>`
     root.appendChild(loadingOverlay)
 
@@ -108,7 +110,7 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
           return
         }
         
-        installDashboardEnhancements(root, activeListeners, user)
+        installRuntimeEnhancements(root, activeListeners)
         disposeDiagnostics = installDiagnosticPanel(root)
         installSalesOutputSections(root)
 
@@ -154,7 +156,8 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
         'setComparisonMode', 'setYear', 'setYoYYear', 'setDescriptivePeriod', 'refreshComparison', 'applyDatasetPatch', 'buildCharts',
         'setPlanningData', 'setPlanningResult', 'getPlanningRequest', 'invalidatePlan', 'changePlanningScope', 'requestPlanSolve', 'exportPlanningCSV', 'setPrescriptivePreset', 'resetPlanningDefaults', 'setExternalRegressionData', 'renderExternalRegression', 'changeRegressionScope', 'exportExternalRegressionCSV', 'setForecastValidationData', 'renderForecastValidation', 'changeForecastScope', 'exportForecastValidationCSV', 'setSalesSectorsData', 'renderSalesSectors', 'setSalesHeatmapData', 'changeHeatmapCategory', 'renderSalesHeatmap', 'exportSalesHeatmapCSV',
         'renderProductPrioritizationTimeline', 'configureProductYearControls',
-        'openDiagnosticDrilldown', 'getDiagnosticScope'
+        'setPredictiveResearchData', 'renderPredictiveResearch', 'changePredictiveResearch', 'exportPredictiveResearchCSV',
+        'openDiagnosticDrilldown', 'getDiagnosticScope', 'exportAreaRankingCSV'
       ]
       for (const name of handlers) {
         delete (window as any)[name]
@@ -165,6 +168,10 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
       delete document.body.dataset.navState
     }
   }, [])
+
+  useEffect(() => {
+    if (rootRef.current) hydrateSidebarAccountCard(rootRef.current, user)
+  }, [user])
 
   return { rootRef, portalContainer }
 }

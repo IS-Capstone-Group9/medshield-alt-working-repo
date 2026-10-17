@@ -3,7 +3,7 @@ import { planningHistoryClause, PlanningScenarioInputError, solvePlanningScenari
 import { catalogProjection } from './catalogContract'
 import { parseMonthlyYear } from './monthlyQuery'
 import { createHash } from 'node:crypto'
-import { executeDatabricksStatement } from './databricks'
+import { databricksConfigured, executeDatabricksStatement } from './databricks'
 import { databricksLiteral } from './databricksLiteral'
 import { revenueAbc, weightedMargin } from './descriptiveMetrics'
 import { buildSalesDiagnostics, diagnosticFilter, diagnosticStatement, parseDiagnosticFilters, parseDiagnosticScope, type DiagnosticInput, type DiagnosticParameter } from './salesDiagnostics'
@@ -173,8 +173,15 @@ type DescriptiveRelease = { resolution_policy?: string; transaction_evidence_sha
 let releasePromise: Promise<DescriptiveRelease> | undefined
 let activeRelease: DescriptiveRelease | undefined
 
+function requireDatabricksSource(): void {
+  if (!databricksConfigured()) {
+    throw new DatabricksSourceUnavailableError('Databricks is not configured on the MedShield backend.')
+  }
+}
+
 /** Pin every descriptive fact read for this gateway process; activation requires a restart. */
 export function descriptiveRelease(): Promise<DescriptiveRelease> {
+  requireDatabricksSource()
   if (!releasePromise) releasePromise = (async () => {
     const configured = process.env.DATABRICKS_DESCRIPTIVE_FACT_VERSION
     if (configured !== undefined && !/^(0|[1-9][0-9]*)$/.test(configured)) throw new Error('Invalid descriptive fact version')
@@ -196,6 +203,7 @@ export function descriptiveRelease(): Promise<DescriptiveRelease> {
 }
 
 async function query(statement: string, rowLimit = 1000, parameters?: DiagnosticParameter[]): Promise<Row[]> {
+  requireDatabricksSource()
   if (statement.includes(FACT)) {
     const release = await descriptiveRelease()
     statement = statement.replaceAll(FACT, `${FACT} VERSION AS OF ${release.fact_delta_version}`)

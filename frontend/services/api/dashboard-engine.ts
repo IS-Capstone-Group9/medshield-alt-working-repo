@@ -2,6 +2,7 @@ import { PLANNING_SCRIPT } from './prescriptive-planning-runtime'
 import { DIAGNOSTIC_DRILLDOWN_SCRIPT } from './diagnostic-drilldown-runtime'
 import { EXTERNAL_REGRESSION_SCRIPT } from './external-regression-runtime'
 import { FORECAST_VALIDATION_SCRIPT } from './forecast-validation-runtime'
+import { PREDICTIVE_RESEARCH_SCRIPT } from './predictive-research-runtime'
 import { SALES_SECTORS_SCRIPT } from './sales-sectors-runtime'
 import { MEDSHIELD_SCRIPT } from '@/lib/medshieldReference'
 import { SALES_DIAGNOSTICS_SCRIPT } from './sales-diagnostics-runtime'
@@ -10,6 +11,8 @@ import { patchOverviewMonthlyChart } from './overview-monthly-runtime'
 import { CURRENT_YEAR_SCRIPT } from './current-year-runtime'
 import { OVERVIEW_ANALYTICS_SCRIPT } from './overview-analytics-runtime'
 import { PRODUCT_PRIORITIZATION_SCRIPT } from './descriptive-products-runtime'
+import { guardReplacedChartInitializers } from './legacy-chart-targets'
+import { patchDashboardNavigation } from './dashboard-navigation-runtime'
 import {
   DESCRIPTIVE_PERIOD_SCRIPT,
   patchDescriptivePeriodFilters,
@@ -52,6 +55,10 @@ const DASHBOARD_GLOBAL_HANDLERS = [
   'renderForecastValidation',
   'changeForecastScope',
   'exportForecastValidationCSV',
+  'setPredictiveResearchData',
+  'renderPredictiveResearch',
+  'changePredictiveResearch',
+  'exportPredictiveResearchCSV',
   'setSalesSectorsData',
   'renderSalesSectors',
   'setAreaPriorityWeights',
@@ -59,6 +66,7 @@ const DASHBOARD_GLOBAL_HANDLERS = [
   'filterClientReferenceDirectory',
   'changeClientRefPage',
   'exportClientReferenceCSV',
+  'exportAreaRankingCSV',
   'renderClientReferenceTable',
   'setProductScenario',
   'setProductCluster',
@@ -100,7 +108,7 @@ export function getExecutableDashboardScript(): string {
     .map((name) => `if (typeof ${name} === 'function') window.${name} = ${name};`)
     .join('\n')
 
-  let patchedScript = patchDescriptivePeriodFilters(patchOverviewMonthlyChart(MEDSHIELD_SCRIPT))
+  let patchedScript = patchDashboardNavigation(patchDescriptivePeriodFilters(patchOverviewMonthlyChart(guardReplacedChartInitializers(MEDSHIELD_SCRIPT))))
     .replace("function buildTables() {", "function buildTables() {\n  if (dashboardPageIsActive('products')) { renderProductPrioritizationTimeline(); return; }")
     // The design reference still contains its original demonstration payload.
     // Empty it before the script executes so no local numbers can be rendered,
@@ -126,6 +134,7 @@ const PAGE_META`,
       'const MOCK_TOP_PRODUCTS = [];\nconst MOCK_MONTHLY',
     )
     .replace("data: ['Data Upload', 'CSV and JSON sources for dashboard updates']", "data: ['Databricks Source', 'Live Gold provenance and ingestion policy']")
+    .replace("overview: ['Executive Overview', 'Demand baseline, forecast, and actions']", "overview: ['Recorded sales overview', 'Sales, profit and coverage']")
     .replace(/window\.([a-zA-Z0-9_]+)\s*=\s*\1;?/g, "if (typeof $1 !== 'undefined') window.$1 = $1;")
     .replace("window.addEventListener('DOMContentLoaded', async () => {", `(async () => {\n${globalHandlerBridge}\n`)
     .replaceAll("'#335F78'", "dashboardThemeColor('--chart-label', '#335F78')")
@@ -406,6 +415,7 @@ ${PRODUCT_PRIORITIZATION_SCRIPT}
 ${SALES_HEATMAP_SCRIPT}
 ${SALES_SECTORS_SCRIPT}
 ${FORECAST_VALIDATION_SCRIPT}
+${PREDICTIVE_RESEARCH_SCRIPT}
 ${EXTERNAL_REGRESSION_SCRIPT}
 ${PLANNING_SCRIPT}
 ${patchedScript}

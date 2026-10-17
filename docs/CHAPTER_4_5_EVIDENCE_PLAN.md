@@ -8,6 +8,16 @@ Use this as the checklist for writing Chapter 4 and Chapter 5. Chapter 4 should 
 
 ## Current predictive writing packet
 
+**Complete chapter revision — 16 October 2026:** use the [revised Chapters 4–5 working text](chapters/MedShield_Chapter_4_5_Revised_20261016.md) and [revision record](../outputs/paper_revision_20261016/REVISION_RECORD.md) for top-to-bottom integration of descriptive, system, predictive and scenario findings against the user-confirmed post-defense Chapters 1–3. It fills the supplied draft's empty 4.2/4.4 and Chapter 5 template sections, distinguishes held-out ABC classification from next-period prediction, and includes the 15 October system integration plus bounded 16 October pilot-readiness evidence. The dated predictive packets below remain sources; complete Chapters 1–5 assembly and institutional/formal review are still open.
+
+Use the [15 October findings and limitations update](chapters/MedShield_Predictive_Findings_Update_20261015.md)
+with the dated 10 October predictive draft. It adds the six-recipe error-reduction
+experiment, cumulative lead-group reporting, user-endorsed research goal and
+sales-only evidence constraint. It preserves the original selection and explains
+why the inspected audit does not support activation or measured 2026 accuracy.
+The update is a Markdown research supplement; complete-manuscript integration,
+Word/PDF formatting and formal academic review remain separate tasks.
+
 For predictive methods and interpretation, use [the predictive explanation](logic/PREDICTIVE_ANALYTICS_EXPLAINER.md)
 and [recomputed model/monthly error scorecard](../outputs/predictive_explanation_20261010/SCORECARD.md).
 The [annual projection packet](../outputs/predictive_annual_release_20261010/README.md)

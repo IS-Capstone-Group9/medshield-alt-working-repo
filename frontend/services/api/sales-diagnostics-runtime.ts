@@ -60,6 +60,7 @@ function salesTrendReading(rows, metric) {
   const label = metric === 'income' ? 'gross profit' : 'sales';
   if (observed.length < 2) return 'At least two recorded points are needed to describe the direction of ' + label + '.';
   const first = observed[0], last = observed[observed.length - 1], delta = Number(last[metric]) - Number(first[metric]);
+  if (/Partial|YTD/.test(descriptivePointLabel(first.period) + ' ' + descriptivePointLabel(last.period))) return 'Recorded ' + label + ' totals: ' + descriptivePointLabel(first.period) + ' ' + diagnosticCurrency(first[metric]) + '; ' + descriptivePointLabel(last.period) + ' ' + diagnosticCurrency(last[metric]) + '. Incomplete-year coverage; this is not a like-for-like growth comparison.';
   return 'From ' + descriptivePointLabel(first.period) + ' to ' + descriptivePointLabel(last.period) + ', recorded ' + label
     + (delta === 0 ? ' stayed at ' + diagnosticCurrency(first[metric]) : (delta > 0 ? ' rose by ' : ' fell by ') + diagnosticCurrency(Math.abs(delta)))
     + '. This compares the endpoints; it does not describe every intervening period.';

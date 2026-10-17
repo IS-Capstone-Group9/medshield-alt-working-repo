@@ -5,6 +5,25 @@ This is a client review aid linked to the existing
 [objective/evidence register](OBJECTIVE_EVIDENCE_REGISTER.md#predictive-client-decision-brief--10-october-2026),
 not a separate approval register.
 
+## Client review summary — 15 October 2026
+
+The [15 October findings and limitations update](chapters/MedShield_Predictive_Findings_Update_20261015.md)
+combines the original comparison, six later trials, lead-group results and
+sales-only evidence limitation for client discussion and paper integration.
+
+| Item | Recorded research setup |
+|---|---|
+| Intended use | Both sales outlook review and revenue-budget discussions |
+| Source date | `Date Delivered`; source field and user clarification agree |
+| Available source evidence | MedShield sales files only, as reported by the user; original DR/delivery receipts unavailable; independent event/completeness verification not established |
+| Target | Monthly company eligible recorded Net CP/net-sales value in PHP, grouped by delivery month |
+| Error reporting | MAE/PHP and WAPE/% on the same matched cases, with bias/direction diagnostics |
+| Proposed research goal | 10% WAPE; ₱1,544,973.51 monthly MAE is its cent-rounded equivalent on the full 2025 reference only; not an achieved or approved business limit |
+| Lead groups | Cumulative 1–3, 1–6 and 1–12 after each historical data cutoff, reported separately |
+| Existing evaluation | Development overall January 2023–December 2024 for the full 1–12 group, plus a separate already inspected January–December 2025 audit; shorter groups keep their own coverage |
+| Model status | Original last-value research reference preserved; calibration remains unselected; no operational activation |
+| Later confirmation | Pending accepted untouched actuals, genuine issue dates and adequate required lead coverage; no measured 2026 error |
+
 ## Recommended approach and attribution
 
 Use both **MAE in pesos** and **WAPE in percent** to review company monthly
@@ -128,6 +147,7 @@ The remaining unresolved values stay explicit; measured errors are not defaults.
 | Required decision field | Present status | Responsible next owner |
 |---|---|---|
 | Intended use | Choice 3: both sales outlook review and revenue-budget discussions; user selected on 13 October, with research status retained | Recorded user selection; formal operational acceptance remains with the client |
+| Date basis | `Date Delivered`, confirmed by the source header/valid-date pipeline policy and the user's 15 October clarification | Field meaning recorded; original-event verification remains separate |
 | Proposed research goal | 10% WAPE; 2025-equivalent monthly MAE ₱1,544,973.51 (approximately ₱1.55 million), user-endorsed 15 October | Research proposal recorded; confirmation protocol remains separate |
 | Business maximum average monthly MAE | Unset; proposed research amount is not an agreed business limit | CEO/client business owner |
 | Business maximum cohort WAPE | Unset; proposed 10% research goal is not an agreed business limit | CEO/client business owner |
@@ -154,15 +174,83 @@ missing, business error acceptance remains **not assessed**. Limits should
 reflect the decision's consequences, not be chosen to make the observed score
 pass. Agreeing limits alone does not activate a forecast.
 
+## Step 5 source review: sales files are the available evidence
+
+Later on 15 October 2026, the requesting user clarified **“we dont have any
+delivery receipts. the only evidence is the medshield sales”**. Record original
+DR/delivery receipts as **unavailable**, rather than a pending collection task.
+MedShield sales files are the only available evidence reported for this source
+review; the prior dated review record preserves the earlier request. This
+clarification does not independently authenticate the sales records or establish
+that every physical delivery occurred as recorded.
+
+On 15 October 2026, the requesting user stated **“i know it's delivery date”**
+and then **“ok continue”**. The source audit already identifies `Date Delivered`,
+and valid-date processing uses `OBSERVED_DELIVERY_DATE`. The field's meaning is
+settled for this study; do not keep asking whether it is a booking or payment
+date. Monthly eligible Net CP totals therefore describe recorded net-sales value
+grouped by delivery month. This is not a new definition of cash collections,
+company net profit, original order demand or verified medicine quantities.
+
+The retained source review already reconciled these selected monthly Net CP
+totals and delivery-date × raw-area × DR groups to the original CSV control:
+
+| Delivery month | Eligible recorded net sales | Difference from original CSV Net CP control | Mismatched date/area/DR financial groups |
+|---|---:|---:|---:|
+| March 2025 | ₱2,612,295.10 | ₱0.00 | 0 |
+| April 2025 | ₱5,670,753.87 | ₱0.00 | 0 |
+| November 2025 | ₱25,076,009.20 | ₱0.00 | 0 |
+
+These are inherited reconciliations from the frozen fact-version-20 review,
+not fresh warehouse queries. They verify agreement with the supplied CSV
+financial control, not the accuracy of every real-world delivery event,
+independent completeness, gross-margin eligibility or allocated product/SKU
+quantities. December 2024 has separate documented exclusions and is not covered
+by this three-month zero-difference claim. The
+[delivery-review record](../outputs/predictive_delivery_review_20261015/review-inputs.json)
+binds the source findings and current clarification without changing old packets.
+
+Large forecast misses alone do not establish that the data are wrong. Retain
+the recorded dates, signed amounts and unusual months. A delivery-schedule or
+business explanation remains unconfirmed until supported by evidence. High
+concentration on a recorded date does not by itself identify its cause.
+
+Continue the research using the supplied sales files and their recorded
+provenance. The scoped CSV reconciliation is a check within the supplied source
+lineage, not independent delivery evidence. Preserve the existing training-only
+completeness attestation; it is neither revoked nor upgraded to independent
+verification. Physical deliveries, independent period completeness and the
+business causes of the unusual months remain unverified. Do not keep requesting
+receipts already reported unavailable or make collecting them the next research
+task. If new evidence becomes available later, assess it through the applicable
+source and model review processes.
+
+Guided Step 5's date-basis and available-evidence documentation is complete.
+Independent delivery verification was not performed and does not count as
+passed. This closes the availability question for the present research scope;
+it does not waive operational data/model acceptance requirements. No source row,
+date, signed amount, model criterion or model selection is changed. The
+[sales-only clarification](../outputs/predictive_delivery_review_20261015/sales-only-clarification.json)
+records the latest constraint separately from the retained earlier review.
+
+Use this limitation wording in the research report:
+
+> The study used the supplied MedShield sales files, with eligible recorded net
+> sales grouped by the source's Date Delivered field. Original delivery receipts
+> were unavailable, so physical deliveries and source completeness were not
+> independently verified. Explanations for unusual sales months remain unconfirmed.
+
 ## Continue while annual records are unavailable
 
 Retain the completed research comparison and report the mixed outcome in the
 paper. Keep the existing original-model and annual projection evidence intact;
 reference this supplement separately. Source-owner explanations for the selected
-2025 movements remain unconfirmed. Use the existing
+2025 movements remain unconfirmed. The existing
 [source-owner review](../outputs/predictive_readiness_20261010/SOURCE_OWNER_REVIEW.md)
-to collect original dates, amounts, adjustments, completeness and availability
-evidence. Do not alter dates or unexplained sales spikes to reduce error.
+is a dated historical request; its receipt-collection task is superseded by the
+sales-only clarification above. Continue with the available sales-source
+consistency checks and explicit evidence limitations. Do not alter dates or
+unexplained sales spikes to reduce error.
 
 The client reports annual record releases; the next release date is unknown.
 Before reviewing later actuals, the model owner must register the confirmation

@@ -1,5 +1,728 @@
 # MedShield Current State
 
+## QA interface and wording repairs verified — 17 October 2026
+
+[Repair/evidence](../outputs/qa_remediation_20261017/README.md) closes the
+reproduced navigation names/drawer-state, misleading direct-upload controls and
+stray-quote defects. Source identity remains expandable; Forecast evidence and
+research use summary-first disclosure, with shorter Product/Planning/Overview
+copy and compact mobile controls. Candidate/scenario/coverage and historical
+error limits remain visible. Security ingestion/stack wording and competing ABC
+target summaries are corrected; the paper guide supplies implementation-aligned
+chapter corrections without replacing original objectives/source PDFs.
+
+Fresh final checks:171 backend tests,24 browser scenarios in one final run,
+one separate actual Product category/cohort/filter/CSV reconciliation, frontend
+types/lint. Loaded1440/390/320 layouts, exact mobile number fit, research CSV and
+simulated source503/network clearing/recovery pass. Retained first failures and
+focused repairs are separate from the final run. Final source216-file identity,
+task diff and screenshots are linked in the packet. Root Frontend/QA/BI/Writer
+self-review; no independent final review claimed.
+
+No analytical source/model/schema/auth/dependency or remote publication change;
+existing services preserved and no build alongside Next dev. Original medicine,
+territory/external/classifier, operational inventory/outcome and actual scope/
+business/model/academic gates remain open. Next project lead reviews the repaired
+workflow; writing owner integrates consistent Chapters1–5 while separate data/
+model work retains its current owners and dependencies.
+
+## Step3 pilot revalidated; historical evidence still required —17 October2026
+
+[Fresh pilot packet](../outputs/pilot_evidence_step3_20261017/README.md) revalidates
+TRIVASC35MG MR ×QUEZON in pinned fact20:165 original2021–2023 rows,164 positive
+and1 signed observation,30 consecutive recorded months throughJune2023. Eighteen
+aggregate/source/gate/link checks pass. Unknown historical unit, identity pending,
+legacy geography not revalidated and unknown later-month completeness remain.
+Step2 source identity/decision state agrees. Source-owner review sheet prepared
+with unfilled answers and acceptable evidence paths, no nonexistent receipts
+required. First necessary answer is historical Qty meaning/evidence for this
+presentation/date range. Step3 is NOT complete until actual evidence decisions
+exist; no quantity fit/input publication follows from assessment completion.
+No master/source/schema/model/server or remote writes. Root Analyst self-review.
+
+## Step2 independent approval software bridge complete —17 October2026
+
+[Bridge/evidence](../outputs/product_approval_bridge_20261017/README.md) carries
+5 separate controlled-master states and scoped evidence into4561 offline current-
+Gold product records.43 contract/regression tests and20 independent population/
+financial/evidence/hash/link checks pass.4491 financial/70 review-only partition
+and exact amounts preserved. Shared category-review metadata does not approve
+identity/unit/item-kind/forecast; missing historical scope stays null.
+
+First real bridge failed closed on proposed item-kind vs effective Gold unknown.
+Existing product_catalog.py confirms3331 unapproved proposals intentionally project
+to unknown. Bridge now preserves source-effective/master-proposed values and
+checks that exact publication projection; new tests reject incorrect exposure.
+Failure retained; no master/source/default approvals changed. Current item-kind
+3331 proposed/1230 needs_review; identity/unit/forecast all4561 needs_review.
+Step2 software contract done; actual Step3 owner evidence and governed deployment
+remain open. Input is exact prior Step1 fact20 capture, not a fresh warehouse
+query. No data/model/app/server/remote mutation. Root Analyst self-review.
+
+## Step1 current-Gold product-policy adapter complete —17 October2026
+
+[Implementation/evidence](../outputs/current_gold_product_adapter_20261017/README.md)
+provides a reusable offline adapter/job and fresh pinned fact20 capture.
+Twenty-nine contract/regression tests and13 independent source/output checks
+pass. Review4561 / financial4491 / excluded70 populations,37728 source rows and
+exact net-sales total reconcile. Missing independent review states stay blocked;
+review-only financial amounts remain null, negative eligible values preserved,
+ambiguous metadata/duplicate keys/release mismatch rejected. No archive values
+supply current routes, no conversions or model approvals invented.
+
+Step1's offline adapter/reconciliation deliverable is complete; Step2's approval
+bridge, actual source decisions and governed runtime integration remain open.
+No serving/model/master/database/server changes or forecast improvement. Root
+Analyst self-review; no new independent business/academic acceptance.
+
+## Paper alignment and dashboard text QA — 17 October 2026
+
+[The scoped QA report](../outputs/qa_paper_alignment_20261017/QA_REPORT.md)
+compares the confirmed post-defense Chapters 1–3 with the revised working
+Chapters 4–5 and current system. Recorded-sales, company-PHP research and entered
+scenario behavior broadly fit the revised results; original medicine-demand,
+territorial/external/classifier, operational inventory and complete workflow
+commitments remain unfulfilled or unaccepted. The original-scope decision stays
+with the existing objective/evidence register, study lead/adviser and data/model
+owners.
+
+Live local browser review reproduces misleading CSV/JSON upload controls despite
+the disabled API, seven unnamed collapsed navigation buttons, stale mobile
+drawer expanded state and a stray markup quote. Forecast/Product/Planning contain
+repeated copy; measured desktop/mobile screenshots and a summary-first wording
+plan are retained. Types/lint pass. The backend full-suite first attempt retains
+one fixture startup failure; the unchanged focused retry passes. Logs distinguish
+isolated contracts from live browser observation and unverified cloud/accuracy
+claims. No application, manuscript, schema, source/model, dependency or service
+change; no production build with the running dev server.
+
+Next Frontend/Technical Writer owner corrects the source-page/navigation/markup
+and stale security wording, then implements bounded text/layout simplification
+with responsive, accessibility and unchanged evidence/export checks. Writing
+owner reconciles the full manuscript; actual scope/release approval remains open.
+
+## Current Gold product/model readiness assessed — 17 October 2026
+
+[Live read-only assessment](../outputs/analytical_readiness_20261017/README.md)
+checks pinned fact20: all4561 product keys and per-key source counts match the
+archive17 review;4491 keys have eligible financial rows and70 have none. Exact
+product-group financial totals reconcile;11 independent checks pass. Matching
+keys/counts does not certify all cells or physical units. Current fact has no
+independent unit_status/item_kind_status/forecast_status fields; approved medicine
+and external modeling input tables exist but each has0 rows, matching0 eligible
+medical-demand/external-ready source rows. No source/unit approvals invented.
+
+Next ready engineering task is a current-Gold product-policy adapter and explicit
+independent approval-field bridge contract/tests. Data owners still supply actual
+identity/unit/quantity/coverage decisions; mapped territory alone is insufficient.
+Existing company-PHP research remains available with unchanged errors. No remote
+mutation, pipeline/job rerun, new model, app or server change. Batch ingestion/job
+turnover/external feature acceptance not newly certified. Root Analyst self-review.
+
+## Chart repair follow-up — 17 October 2026
+
+[Follow-up verification](../outputs/chart_initialization_fix_20261017/FOLLOWUP.md)
+passes12 distinct scenarios across the initial run and focused recovery rerun:
+12 live page/width geometry cases in one workflow,9 synthetic chart-integrity
+scenarios and2 browser-only503/network recovery scenarios. Initial11/12 pass;
+network response-body capture failed across navigation. Immediate listener
+capture reproduced the harness issue in focused503 case; final route.fetch
+capture delivers the upstream response unchanged and both recovery cases pass.
+All identity/unavailable/cleared-chart assertions retained; failures preserved.
+No product/chart code, data/models, providers or server changes in this follow-up.
+Root Frontend self-review; fixture/proxy failures do not establish real outages.
+
+## Chart initialization and local editor errors repaired — 17 October 2026
+
+The [repair packet](../outputs/chart_initialization_fix_20261017/README.md)
+reproduces twelve obsolete-canvas warnings before repair. Executable script
+assembly now guards only six replaced reference-chart call sites before their
+configuration work; current-chart diagnostics and source-backed renderers remain.
+Three isolated contracts and a live populated-chart/navigation/reload regression
+pass, including a final pass after frontend restart. The installed Next editor
+module passes three stubbed-process checks with machine-local explicit VS Code
+configuration, bypassing WMIC auto-detection without node_modules/OS changes.
+
+User explicitly authorized server management for this repair; backend5000 and
+frontend3000 are left running. This supersedes the earlier no-start restriction
+within the repair scope. No production build ran with nextdev, and no desktop
+editor window launch is claimed. Data, Auth helper, models, financial definitions
+and publication gates unchanged. Root Frontend Engineer self-review.
+
+## Per-product offline analysis routing implemented — 17 October 2026
+
+The [product analytical policy](PRODUCT_ANALYTICS_POLICY.md) and
+[all-product routes](../outputs/product_analytics_policy_20261017/README.md)
+assign explicit financial/conditional-quantity logic and review actions to every
+sealed archive17 label. The input population is4,561 labels/37,728 records,
+distinct from the currently served fact20 financial scope. Source review hashes,
+one-to-one keys and exact financial totals are checked; no identities merge,
+units convert, missing months become zero or model/clinical approvals appear.
+All physical-quantity routes remain blocked by their actual evidence gaps.
+Nineteen focused synthetic contract tests cover approval boundaries, calendar
+coverage/leakage, signed quantities, services and future pattern-screening paths.
+
+Proposed24/36-month and50% observed-zero thresholds route future comparison
+candidates; they are not empirically optimized or business-approved criteria.
+No current product series is newly fitted/classified, no model error improves,
+and gateway/frontend/Databricks/Supabase/master/publication remain unchanged.
+Next data-owner action is per-product authoritative evidence review; current
+Gold reconciliation and governed integration precede any runtime use. Root
+Data Analyst implementation/self-review; original study/acceptance gates remain.
+
+## Analytics completion verified; Supabase checked — 17 October 2026
+
+User explicitly returns priority to descriptive/predictive delivery. The
+[completion card](../outputs/analytics_finish_20261017/README.md) records fresh
+3/3 Sales/Product/Forecast browser workflows, 538/538 predictive API checks,
+151/151 forecast CSV checks and 6/6 Supabase gateway support checks. Live
+connector metadata verifies the healthy project, linked profiles, bounded RLS/
+privileges and audit hash consistency. Supabase owns Auth/roles/audit; Databricks
+fact20 remains the analytical source. All14 bound paths and prior build match.
+First connection-refused failures are retained; stopped local builds were
+restarted without changing product code, database, source, models or approvals.
+
+Implemented recorded-sales descriptive and company-PHP predictive research
+workflows are verified, with visible historical peso/percentage errors and null
+future errors. This does not close original medicine/unit/territory/external/
+classifier objectives. Retained full2025 audit WAPE37.763644% and MAE₱5,834,383.00
+remain above the proposed10% research goal; no operational publication or client
+tolerance approval is inferred. Current next analytics action is study-lead
+review of original-versus-implemented scope and named source/acceptance inputs.
+Backup/tooling/deployment gates remain separate release work, not the default
+next analytics prerequisite. Root sequential Analyst/QA self-review.
+
+## Local backup/restore rehearsal passes; managed recovery gate open —17 October2026
+
+The [rehearsal](../outputs/backup_restore_20261017/README.md) passes23 native
+PostgreSQL16.15 synthetic checks: actual migration chain, full custom archive,
+fixture source loss, transactional new-target restore,38 user tables/31 rows,
+normalized schema/effective ACLs/RLS, audit checkpoint/hash integrity, access
+denials and post-restore identity/append/replay continuity. All fixture servers
+are stopped and app/source/build unchanged. First startup-pipe failure and ACL
+encoding comparison failure are retained; harness fixes preserve privilege tests.
+Automatic approval review denied deletion of stopped cluster directories; they
+remain stopped with artifacts. No live database/account/model/source changes.
+
+The [canonical runbook](BACKUP_RESTORE.md) documents the complete inventory and
+required next release/database inputs. This completes local rehearsal/readiness
+documentation, not a full PostgreSQL17.6 Supabase/Auth/PostgREST/global-role/file/
+platform/Databricks recovery. Separate approved destination, version-compatible
+protected full backup/storage/access and RPO/RTO decisions remain needed before
+managed recovery acceptance. Broader release, T05 and original study/model gates
+are unchanged. Root sequential DevOps/Database/QA self-review.
+
+## Isolated gateway role matrix verified —17 October2026
+
+The [role matrix packet](../outputs/role_matrix_20261017/README.md) verifies
+135 new HTTP requests across admin/manager/analyst/viewer, absent/invalid/unlinked/
+inactive/reset and metadata-spoofed sessions under the actual Supabase-mode Express
+middleware with synthetic external dependencies. Existing HTTP regressions plus
+new nested matrix tests report20 passes sequentially, zero final failures.
+Admin/manager audit access, admin integration restrictions, admin/analyst refresh
+validation, general authenticated read/scenario boundaries, disabled uploads and
+reset exceptions match current policy. No real account/source/model/app changes.
+
+An initial concurrent run timed out starting an older fixture; its failure is
+preserved. Sequential execution passes without altering product/old expectations;
+contention is a hypothesis. Production source/build hashes match; no rebuild.
+This closes isolated access-control checks only, not all live-role RLS/browser/
+revocation/load/restore acceptance. Next QA/release/database outcome is isolated
+backup/restore readiness. T05 upstream and original medicine/model/business/
+academic gates remain open; measured predictive performance is unchanged.
+
+## Post-walkthrough tooling reassessed; role matrix next —17 October2026
+
+The [remaining-release review](../outputs/release_next_20261017/README.md)
+freshly verifies frontend/backend production audits at zero known vulnerabilities.
+Frontend full audit still reports five high-severity package entries from the
+single development lint-chain advisory, with no braces patch published. Latest
+ESLint10.13.0 remains incompatible with the declared peers of three required
+plugins. No forced upgrade/downgrade or dependency/application change; manifest,
+lockfile and production-build hashes match. T05 remains needs-fix for upstream
+constraints; existing scoped exposure assessment is inherited, not newly tested.
+
+The ordered ready engineering outcome is an isolated role-based gateway access
+matrix, owned by QA/Backend/Security; no client input required. Wider live roles,
+backup/hosted recovery, medicine-unit/territory targets, later model validation
+and business/academic acceptance retain separate owners/gates. Five guided local
+steps remain done; full T09/project release remains open. No new application tests
+or builds were necessary for this read-only registry/evidence review.
+
+## Five guided walkthrough steps complete; release gates remain —17 October2026
+
+The [Step5 consolidated handoff](../outputs/t09_modules_20261017/step5-WALKTHROUGH_HANDOFF.md)
+closes the five-step local walkthrough within its implemented scope. Fresh14
+read-only audit checks verify all10 remote-chain records, independent UTF8 hashes/
+links/fields, retained four rollout events and nondegraded gateway readback.
+All102 sealed Step2 artifact hashes and current source/build bindings match.
+Current checkpoint table read is403 and its value remains unverified; no
+privilege change. Prior checkpoint/append/concurrency evidence is inherited.
+No new audit append or application/model/source/account change occurred.
+
+Steps1–4 are dated inherited tests, with login repeated on the final Step2 build;
+Step5 does not rerun them or certify automatic logging of every UI action.
+All five guided steps are done, but full T09 release, retained T05 tooling,
+broader role/session/load/hosted recovery/backup, source-unit/territory inputs,
+model/future validation and business/academic acceptance stay open. Next owners:
+project/release lead disposition remaining gates; source owner/analyst resolve
+medicine inputs; study lead/adviser/writer review scope/manuscript. Local services
+remain running. Root self-review; no independent final-release approval claimed.
+
+## T09 step 4 unavailable-source recovery verified — 17 October 2026
+
+The [Step4 recovery packet](../outputs/t09_modules_20261017/step4-RECOVERY_REVIEW.md)
+records seven passing tests: five isolated retry/cache/header/stale-response/
+provenance contracts and two built-app browser-only monthly503/network-abort
+simulations. Both failures remove charts/exports and show explicit unavailability;
+removing the override and reloading restores the identical fact20 candidate source.
+The real cloud services were not interrupted; this is not disaster/backup testing.
+Current source/build hashes match Step2; no application repair or rebuild needed.
+Alert crops visually reviewed; no saved tokens/credentials. Root self-review.
+
+GuidedStep4 only is complete. NextStep5 audits persistence and consolidates the
+walkthrough evidence. Full T09 release, wider role/session/load/restore, T05 tooling
+and original medicine/model/business/academic acceptance remain open. No source,
+model, account/password, migration, provider or publication changes occurred.
+
+## T09 step 3 forecast error review complete — 17 October 2026
+
+The [Step3 review](../outputs/t09_modules_20261017/step3-ERROR_REVIEW.md)
+recomputes the selected last-value full2025 retrospective audit: monthly MAE
+₱5,834,383.00, WAPE37.763644%, signed bias+₱1,295,235.42 across12 cases.
+Fresh151 API/export checks pass with unchanged Step2 source/build identity.
+Inherited same-build browser evidence establishes visible PHP/percentage fields;
+no new browser execution is claimed. Future actual/error fields stay blank and
+YoY remains distinct. Calculation reliability does not establish acceptable
+forecast performance: the proposed10% research goal is unmet, business limits
+remain unapproved, and this already-inspected audit is not future confirmation.
+No code/model/source/threshold/publication change. GuidedStep3 only is done;
+next engineering/QA outcome is Step4 unavailable-source and recovery checks.
+Full T09, operational and original-objective/business/academic gates remain open.
+
+## T09 step 2 modules, filters and exports verified — 17 October 2026
+
+The [step-2 packet](../outputs/t09_modules_20261017/README.md) records six passing
+actual browser scenarios on the fresh production build: login and all five
+implemented modules. Selected Sales exact-date investigation JSON/STL CSV,
+Product categories/cohort exports, Area filters/ranking CSV, stored Forecast
+research and synthetic Planning scenario/CSV reconcile with current fact20.
+The final forecast export comparison passes151/151; initial matching21-grid
+API538 and source-mismatch6 checks remain separately identified. No27-model
+runtime claim is made; six later recipes remain offline.
+
+This step fixes the zero-match client-reference export that previously returned
+all782 entries, removes unsupported verified/model-anchor wording, and adds a
+raw computed Area ranking export with weights, exact dates, axis bounds and
+candidate source identity. Empty/error clears ranking export. Two focused Area
+fixtures, frontend lint/types and production build pass. The bounded initial
+Area source change received separate review; root completed the identified date
+metadata correction and final integration self-review. Initial failures remain.
+
+Local app/gateway remain running. This closes guided step2 only; next is step3
+visible PHP/percentage error interpretation. No source/model publication, account
+edit or procurement occurred. Original medicine/unit/territory objectives,
+future accuracy, business/academic approval, remaining T09 audit/recovery and
+wider release/backup/role scope retain their gates. Source residual−₱0.06 and
+unverified causes are unchanged.
+
+## T09 step 1 login and dashboard loading verified — 17 October 2026
+
+The [step-1 packet](../outputs/t09_login_20261017/README.md) records one passing
+actual built-app browser scenario and51 independent current API checks. Login,
+Databricks readiness, all12 core200 responses, reload, logout UI isolation,
+malformed actual Supabase-cookie rejection and gateway invalid-Bearer401 pass.
+The UI and API agree on candidate fact20, dataset and policy identity. Existing
+frontend build is reused with current-source evidence; build-time environment
+reproducibility is not newly established. Frontend types pass; masked screenshots
+were reviewed. Local frontend3000/gateway5000 remain running for review.
+
+Source monthly/yearly/ledger populations and eligible margin denominator agree.
+The aggregate financial residual is retained at−₱0.06 across34,105 checked rows
+with zero differences above the existing₱0.01 per-row threshold; its cause is
+unverified. An initially incorrect aggregate tolerance test was corrected to the
+documented row contract; first evidence is preserved. No formula/source change.
+
+This closes guided step1 only. Next: step2 verifies all five modules, selected
+filters and exports. Remaining T09 failure/recovery/audit evidence, T05 tooling,
+broader release/backup/role/session scope and original medicine/model/business/
+academic gates remain open. No warehouse/model writes or publication occurred.
+
+## T08 account recovery and HTTP contracts verified — 17 October 2026
+
+The [T08 delivery](../outputs/auth_http_remediation_20261017/README.md) repairs
+QA-11 with explicit administrator recovery, fresh stdin-only temporary credentials,
+ownership attestation/reference, paginated conflict checks, mandatory remote audit,
+conditional linking, both forced-reset guards and explicit operation-bound resume.
+Ordinary migration now rejects deleted-Auth/hash-cleared accounts before writes,
+including unrelated same-email matches. The stale rerun runbook is corrected.
+
+QA-12 now validates protected scalar filters after auth/reset restrictions, reports
+missing Databricks configuration 503 before cached/release reads, and returns
+generic CORS 403 JSON. The checked configured release failure remains502 and no
+analytical fallback was introduced. Final 158 backend tests, runtime build and
+strict scripts pass. Separate QA passes 44 recovery cases,99 HTTP expectations,
+ten extra protocol checks and two migration no-write denials.
+
+The 17-check actual Supabase/gateway recovery flow passes on a newly created
+disposable viewer, including UTF-8 stdin, password change, remote audit and source
+continuity. A first live harness assertion used the wrong profile envelope; its
+receipt is retained and product code was unchanged for that correction. Both
+synthetic identities were removed; six recovery/reset audit events remain and
+the checkpoint agrees. All 35 original table/stable-Auth fingerprints match after
+testing. Fixture and configured evidence are distinct; no existing client account
+was recovered or password changed, and no warehouse/model write occurred.
+
+T08 is complete within this engineering scope. Ownership remains an administrator's
+out-of-band assertion, and all-token revocation/full role/load/backup restoration
+are not established. T05 upstream tooling and T09 final release acceptance remain
+open, as do medicine/model/business/academic gates. Next engineering owner assembles
+a same-release integrated T09 walkthrough without treating it as final acceptance.
+
+## Live Supabase migration and application checks verified — 17 October 2026
+
+The [live rollout](../outputs/supabase_live_migration_20261017/README.md) supersedes
+the earlier access limitation below. The matched MedShield PostgreSQL17.6 target
+now records three scoped migrations: missing durable audit bootstrap, analytical
+browser-permission retirement, and explicit service-only USAGE/SELECT repair.
+The original001–017 chain was not replayed. All35 existing table/stable-Auth
+counts and content hashes match after the changes and actual API checks.
+
+The raw effective-access inventory has2,699 PASS and zero FAIL; exactly43
+absent-public expectations are individually dispositioned against the observed
+pre-existing view/wrapper retirement. All21 private views and actual service
+reads of57 analytical relations pass. The configured Supabase/Auth/gateway
+passes39 checks, including login/profile, denials, committed remote audit,
+idempotence, concurrency and independent UTF-8 chain verification. Four
+identified synthetic audit events remain, with the final checkpoint reconciled.
+Native234-check and separate118-check fixtures are distinct from this live17.6
+evidence. The [verification receipt](../outputs/supabase_live_migration_20261017/verification.json)
+retains exact SQL hashes, ledger names and limits.
+
+T06's scoped live deployment/readback gate is closed. Supabase remains the
+application identity/audit store and Databricks remains the analytics source;
+only a read-only benchmark smoke was performed. No model fit, source/warehouse
+write, activation or objective/business/academic acceptance occurred. A private
+schema/ACL recovery snapshot is retained, but a full independent backup/restore
+rehearsal is not verified. Pre-existing leaked-password-protection and duplicate
+weather-index advisor warnings remain; no policies or unrelated indexes were
+changed to suppress them. Current public defaults cover future objects only
+after separate review. Next engineering task: T08 account recovery/HTTP
+contracts; T05 upstream tooling, T09 release and medicine/model gates remain.
+
+## Live Supabase migration requested; SQL access unavailable — 17 October 2026
+
+The user requests applying and verifying the pending changes on the existing
+Supabase operational identity/audit database. The [live preparation record](../outputs/supabase_live_migration_20261017/README.md)
+clarifies its boundary with Databricks and preserves existing records. Access
+discovery found application API configuration, but no usable SQL migration
+connection/connector or linked CLI; browser inventory reports access disabled
+in Work settings. No live SQL or migration was executed. Pending-only rollout
+requires the target preflight, backup/recovery review and actual privilege/audit
+readback once SQL access is available. The prior native checks remain inherited
+16 October local evidence; the deployment gate is open.
+
+## Database bootstrap/access repairs verified locally; deployment gate open — 16 October 2026
+
+The [T06 repair](../outputs/database_remediation_20261016/README.md) guards
+optional function revocations in011 and adds017 to retire browser/PUBLIC
+schema, relation, column, sequence and routine grants for obsolete Supabase
+analytics. Twenty-one retained public views use invoker semantics and explicit
+service SELECT. Linked profiles, account resolution, protected cache and audit
+permissions remain intact. No analytical/model/UI behavior or stored source
+data was changed.
+
+Native PostgreSQL 16.15 reproduces the original 42883 bootstrap error and older
+view exposure. The repaired restrictive-default and old/custom-grant chains
+pass all 237 assertions, including repeated017, browser denials, service
+operations, UTF-8 audit integrity/idempotence and native multi-connection
+append serialization. Supabase auth helpers, roles and grants are synthetic
+fixtures; actual platform/Auth/PostgREST behavior is a separate scope.
+
+No remote migration was executed. Read-only connected samples deny or do not
+find browser analytical targets; service audit endpoints still report PGRST205.
+This is not deployed SQL/grant certification. The read-only effective-access
+script distinguishes failed, missing and custom-scope gates. T06's local repair
+is verified; target migration, effective privileges/custom defaults/aliases and
+actual audit readback remain open. Next unblocked engineering task is T08
+auth recovery/HTTP contracts; T05 upstream tooling and T09 release acceptance
+retain their separate gates. Original medicine inputs and business/academic
+acceptance remain unchanged.
+
+## Production dependency repairs verified; development tooling gate open — 16 October 2026
+
+The [T05 remediation](../outputs/dependency_remediation_20261016/README.md)
+updates compatible backend transitive packages and migrates the frontend from
+Next14/React18 to maintained Next16.4.2/React19.3.1, aligned types and flat
+ESLint configuration. The production audits for both packages now report zero
+vulnerabilities; backend full audit is also zero. Frontend full audit retains
+five high-severity package entries for one unpatched braces advisory in its
+development lint chain. ESLint9's EOL and upstream peer constraints preventing
+a clean ESLint10 migration are separately recorded. No audit finding or lint
+rule was suppressed; the full T05 tooling gate remains needs-fix.
+
+Fresh backend regression/build/strict script checks, frontend lint/types/build,
+33 existing browser fixtures, 12 isolated React lifecycle tests and five unique
+built-app cases pass after one selector-only test repair. Authenticated
+descriptive/research exports, 120 source/projection preservation checks and nine
+actual HTTP boundaries pass. [Exact receipts and review mode](../outputs/dependency_remediation_20261016/verification.json)
+retain initial attempts and fixture/live distinctions. The two auth/dashboard
+hook compatibility changes preserve mode selection, cancellation and latest
+callbacks; analytical formulas, models, forecasts/errors and source status are
+unchanged. No warehouse write, fit, source correction or model publication.
+
+The final frontend clean install uses pinned npm11.21.1 to repair an npm10
+optional-package tree defect; the lockfile is unchanged. Complete recursive
+tree and native-image checks pass. Frontend setup/CI/Docker use the same pinned
+installer; cloud CI and Docker execution were not verified here.
+
+Local services are restored. Recorded middleware/Edge/workspace/standalone
+warnings and Docker execution limits remain explicit. Next unblocked engineering
+task is T06 database bootstrap/grants; T05 upstream tooling follow-ups, T08 auth,
+original medicine inputs and actual business/academic acceptance remain open.
+
+## Operational validator gap closed within tested scope — 16 October 2026
+
+The [T07 delivery](../outputs/validator_completion_20261016/README.md) completes
+the dated QA-09 compiler/validator repair. An explicit strict no-emit script
+configuration covers all backend runtime and operational-script TypeScript
+files. Narrow extractor-column and publication-readiness null guards repair
+three additional strict diagnostics without running either operational script.
+
+The dashboard validator now checks real 3/6/12 retrospective windows, fixed
+origins, complete point keys, same-case populations, source observations and
+release identity, current Manila as-of/display dates and blocked Unknown scope.
+Future display length cannot reset a stale origin or manufacture unavailable
+actuals/predictions. Fresh fact-20 Databricks validation passed; all 146 backend
+tests, 18 included focused tests, 59 additional QA-authored probes and strict
+runtime/script/test compilation passed. [Evidence and final review mode](../outputs/validator_completion_20261016/verification.json)
+distinguish root executions/self-review from supporting workers' interrupted
+handoffs. No completed separate final review is claimed.
+
+Existing models, predictions, errors, warehouse/source identity and frontend
+remain unchanged. No write, fit, ingestion, source correction or publication.
+This closes T07's tested scope, not the wider release, operational forecast or
+original medicine-demand requirements. Next engineering owner assesses the
+current dependency findings (T05); source/catalog and writing owners keep their
+separate input and manuscript tasks.
+
+## Source-bound forecast YoY implemented — 16 October 2026
+
+The [T13 delivery](../outputs/predictive_yoy_20261016/README.md) adds prior-year
+recorded company-PHP baselines and derived forecast YoY to stored candidate
+projections in the authenticated API, Forecast panel and CSV. The gateway
+resolves the selected run's exact immutable Gold input, verifies its canonical
+content digest separately from its storage hash, and preserves eligibility,
+calendar and explicit unavailable semantics. Required source failure clears
+the panel/export; no current-snapshot or local-file fallback is used.
+
+Fresh verification: 139 backend tests, 17 isolated browser cases, one authenticated
+live browser flow, backend/frontend type checks and production build passed.
+The final live API passed 120 preservation/source checks; independent Decimal
+reconciliation covers all twelve projections and 126 historical metric groups.
+Separate code review found no actionable issue. [Receipts and code identities](../outputs/predictive_yoy_20261016/verification.json)
+retain actual commands, source hashes, recovery attempts and limits.
+
+This closes T13's bounded feature. All 21 configurations, original selection,
+historical errors, twelve PHP predictions, issue/cutoff/leads and unpublished
+flags remain unchanged. YoY is forecast change, not actual 2026 growth or model
+accuracy. No new fit, warehouse write, publication or operational approval.
+Original medicine-demand O3, source-unit/coverage evidence, wider release QA
+and full-paper/business/academic acceptance remain open. Next: project lead
+reviews the local feature; source/catalog owner resolves separate quantity
+inputs and writing owner integrates the checked evidence where appropriate.
+
+## T01 scope-reconciliation packet prepared — 16 October 2026
+
+The [complete scope packet](../outputs/scope_reconciliation_20261016/README.md)
+binds the latest user-confirmed source PDF, all five original objective texts,
+33 constituent clauses, all17 analytical tasks, actual scoped evidence, exact
+gaps, owners and chapter impacts. It supplies retain/implement paths and
+clearly unaccepted alternative objective wording. This completes T01 packet
+preparation after its document/source checks; original objective fulfillment
+and actual client/adviser/panel decisions remain open.
+
+The [next predictive implementation handoff](../outputs/scope_reconciliation_20261016/predictive-handoff.md)
+specifies source-bound forecast YoY change beside existing company-PHP candidate
+projections. It uses the exact frozen input, preserves issue/cutoff/lead/error
+labels and requires null/reasons for invalid prior-year baselines. This is a
+concrete task that can proceed independently of unknown medicine units; it is
+not implemented by this documentation step. Existing model selection, inspected
+audit, quantities and publication status are unchanged.
+
+The source's new/low-history ABC versus training-year/held-out-product design
+ambiguity and proposed MAPE thresholds are explicit; neither is silently replaced
+by a different target or the current WAPE results. Next: backend/frontend/analyst
+owners implement and verify the scoped YoY feature; source/catalog owners resolve
+the separate medicine-unit inputs. No new training or warehouse/runtime check.
+
+## Every-product quantity wording reviewed — 16 October 2026
+
+The [all-product assessment](../outputs/product_quantity_units_20261016/README.md)
+checks the user's hypothesis that Qty follows each product's box/strip
+presentation across all 4,561 normalized labels, 4,985 exact variants and 37,728
+archived fact-17 records. Sixteen labels have explicit presentation wording;
+other labels have container/form/count clues, ambiguous wording or no useful
+package/unit wording under the recorded policy. These are text findings,
+not verified historical quantity units or model eligibility.
+
+The source audit finds no separate physical Qty-unit column in the nine CSVs
+and no alphabetic/package wording in the accepted Qty cells. Among the current
+598 medicine labels, none has explicit Box/Strip presentation wording; count,
+ampoule/vial and dosage-form clues remain distinct. Current master, source
+records and deployed parser are unchanged. The new filterable product/title
+workbook and structured assessments retain Unknown actual units, independent
+review and source/output checks. This is local archived-source inspection,
+not a fresh warehouse/fact-20 certification.
+
+Next: review the named presentation candidates with supported historical
+identity/unit evidence; preserve separate presentations and do not invent
+conversions. A model may use a supported product's consistent sales unit when
+its other inputs and evaluation gates are met. No model fitting/publication,
+operational approval or original-O3 closure occurred. The new quantity-review
+findings require any subsequent paper integration to retain these limits.
+
+## Complete Chapters 4–5 working revision — 16 October 2026
+
+The user confirmed the latest post-defense Chapters 1–3 source, whose 149-page bytes match the existing `references/CapstonePaper_1.pdf`. The separately supplied 42-page Chapters 4–5 draft is preserved unchanged. The [revised working chapters](chapters/MedShield_Chapter_4_5_Revised_20261016.md) now contain substantive preparation/analysis/system findings, a completed summary, five-objective conclusions and strategic/competitive/tactical recommendations. The [revision record](../outputs/paper_revision_20261016/REVISION_RECORD.md) binds source identities, section changes, retained evidence and actual document checks.
+
+The revised 28-page PDF contains twelve consecutive tables and seven figures. Separate source/scope, complete-draft and numerical reviews informed corrections; every rendered page received full-size visual inspection. Retained descriptive/model/planning/system checks remain inherited evidence, with fresh document/arithmetic/figure verification. No new application test, warehouse query, model fit, ingestion, activation or business/academic approval occurred.
+
+The text distinguishes the proposal's held-out new/low-history XGBoost ABC task from the North Star's next-period target; active bounded planning does not compute EOQ/ROP or expiry reduction. Original O3/operational commitments remain open. Full Chapters 1–5 assembly, institutional bibliography/formatting reconciliation and actual client/adviser/panel review remain separate work. The scoped medicine-pilot readiness assessment below remains unchanged.
+
+## Medicine forecasting pilot readiness assessed — 16 October 2026
+
+The [Step 1 readiness assessment](../outputs/predictive_pilot_readiness_20261016/README.md)
+checks the existing files against M05/O3 rather than fitting more company-PHP
+recipes. Fresh local inspection joins all 37,728 archived fact-17 records to
+their nine checksum-identical CSV inputs. It is not a fresh fact-20/warehouse
+certification. Current preparation has 598 accepted medicine categories but
+zero approved identity, item-kind, unit or forecast decisions and zero eligible
+medicine aliases; category/master deployment copies match.
+
+TRIVASC 35MG MR × QUEZON is a review candidate with 164 positive original-source
+records across 30 consecutive months, January 2021–June 2023. The whole original
+2021–2023 label/area population has 165 records, including one negative quantity
+requiring interpretation. July–December 2023 have no records for that exact
+label/area; they remain unknown. The historical sales unit/presentation and SKU
+are unapproved; Quezon's mapping remains a legacy approval without revalidation.
+Other original, adjusted and backfill strata are retained separately.
+
+The assessment is complete within its inspection scope; the pilot is **not ready
+for training**. Source/master hashes, independent recomputation and actual checks
+are in its [verification packet](../outputs/predictive_pilot_readiness_20261016/verification.json).
+Next: catalog/source owners substantiate identity, Qty meaning, geography,
+observation coverage and signed-quantity treatment. The analyst then freezes a
+supported target and retrospective benchmark plan. December 2026 is lead 42 from
+this candidate's June 2023 last observation, outside a 1–12 lead claim.
+No source change, model fit, warehouse operation, scope amendment, publication
+or application/manuscript replacement occurred. Original O3 and the rest of T01
+remain open; unavailable receipts are not requested again.
+
+## Project progress tracking prepared — 15 October 2026
+
+The [project-memory workflow](PROJECT_MEMORY.md) now covers graphs/dashboard,
+pipeline/data/models, documentation, and paper through linked Obsidian notes.
+`AGENTS.md` requires a concise record for each project user turn, including
+questions and no-change outcomes, with evidence and next-action references.
+The initial workstream summaries are navigation over dated repository evidence;
+they are not fresh application, warehouse, model, or manuscript validation.
+
+Project-local lifecycle hooks are prepared to capture prompt/stop/interrupt
+metadata without copying prompt text, assistant messages, or transcripts.
+The helper passes 18 isolated fixture tests for access boundaries, privacy,
+retry/concurrent events, lifecycle receipts and command discovery. These checks
+establish helper behavior, not execution in a trusted live project session.
+Prompt submission capture was observed on the resumed 15 October desktop turn;
+live stop/interrupt receipts remain unverified. The source-history import now
+retains 94 curated summaries from 99 project-related chat snapshots and four
+native Obsidian Canvas maps; its coverage/link checks are separate from runtime
+or model validation. This tracking setup grants no release, business,
+model-publication, or academic approval. See the workflow for verification and
+recovery; substantive readiness remains in the scoped records below and the
+[objective/evidence register](OBJECTIVE_EVIDENCE_REGISTER.md).
+
+## Descriptive and predictive system integration verified — 15 October 2026
+
+The Forecast page now includes a separate **Stored predictive research** panel
+backed by authenticated, read-only Databricks candidate access. The live default
+experiment exposes all **21 stored configurations**, five-origin development and
+the already inspected 2025 audit, cumulative 1–3/1–6/1–12 groups, model metrics,
+origin-keyed point errors and source-bound CSV. Its separate projection view shows
+the stored selected-model candidate with the actual 9 October generation time,
+December 2025 cutoff, elapsed/current/future labels at generation and null actual
+errors. Selecting a detail model does not alter the frozen selection or publish it.
+The existing approved-release adapter and four dynamic benchmarks are preserved.
+
+Live research and descriptive summary responses agree on fact **20** and its
+dataset/policy/mappings. Independent Decimal reconciliation passes **883 checks
+over 126 model/stage/lead groups** against the hash-identical retained 21-model
+artifact. The original reference's full-audit MAE remains **₱5,834,383.00** and
+WAPE **37.763644%**. The six later offline trial recipes are not automatically
+ingested by this read path; no local evidence files supply runtime values.
+
+The repaired dashboard validator passes against the live pinned Gold population,
+including source counts/eligible finance, changing-year coverage, supported
+company forecasts and truthful empty buyer-scope planning results. The full
+backend suite passes **130 tests**; runtime and strict validator TypeScript pass.
+Frontend production build passes. **52 broader isolated browser fixtures** pass,
+followed by **six final research fixtures** after review fixes. **Four authenticated
+live browser cases** pass across descriptive/API/category CSV, existing predictive
+boundaries and the new research controls/origin-keyed CSV/projection view.
+Desktop and 390px research screenshots were inspected. These are distinct check
+populations, not an overall coverage percentage.
+
+Initial warehouse queries failed while the warehouse was stopped, and its start
+request returned 400. Subsequent authenticated requests recovered; both failure
+and recovery records are retained. An initial new browser test used the legacy
+programmatic page switch, which bypasses the actual navigation loader; the
+corrected test clicks the real sidebar and passes. Earlier failed verification
+attempts remain evidence, not current product failures. See the
+[integration record](../outputs/analytics_system_completion_20261015/README.md).
+
+The recorded-sales descriptive workflow and stored-model research workflow are
+implemented and checked locally. This does not close original medicine-unit/
+territory objectives, prove independent source completeness, meet the proposed
+10% research goal, approve operational forecasts or complete production release
+and academic acceptance. No new model fit, source ingestion, analytical data write
+or release-pointer change occurred. Wider system QA/deployment issues retain
+their separate status; full-manuscript integration remains open.
+
+## Predictive findings supplement prepared — 15 October 2026
+
+The [findings and limitations update](chapters/MedShield_Predictive_Findings_Update_20261015.md)
+adds the six-recipe experiment and later guided research decisions to the dated
+predictive writing packet. It reports the original 21-model and later trial
+results separately, preserves the original reference, shows cumulative lead-group
+errors and states the sales-only evidence limitation. The proposed research goal
+remains unachieved, business numerical limits remain unset and no measured 2026
+error is claimed. Its [verification record](../outputs/predictive_findings_20261015/verification.json)
+identifies the actual document/numerical checks and separate review.
+
+This deliverable is a Markdown supplement for client discussion and Chapters
+4–5, with the earlier Word/Markdown draft preserved. No new fit, source change,
+model publication, operational acceptance or completed whole manuscript is
+implied. Full integration, institutional formatting and formal review remain
+with the writing owner and adviser.
+
+## Predictive source availability clarified — 15 October 2026
+
+The requesting user reports that MedShield sales files are the only available
+source evidence and original delivery receipts are unavailable. This supersedes
+the earlier receipt-collection task; it is not independent authentication of
+the supplied records. `Date Delivered` remains the source date basis for monthly
+eligible recorded Net CP/PHP. The retained CSV reconciliations remain checks
+within the supplied source lineage, with their existing scope and exclusions.
+Physical deliveries, independent completeness and unusual-month causes remain
+unverified; the inherited training-only completeness attestation is preserved.
+
+Guided Step 5's date-basis and available-evidence documentation is complete.
+Continue research reporting with these limitations, without waiting for receipts
+already reported unavailable. No data/model artifact, measured error or release
+status changes, and operational/academic acceptance requirements remain open.
+See the [current client brief](PREDICTIVE_CLIENT_DECISION_BRIEF.md) and latest
+[objective/evidence entry](OBJECTIVE_EVIDENCE_REGISTER.md#guided-step-5-clarification-sales-only-evidence--15-october-2026).
+
 ## Bounded predictive error reduction evaluated — 10 October 2026
 
 The [error-reduction packet](../outputs/predictive_error_optimization_20261010/README.md)
@@ -698,7 +1421,7 @@ If Databricks or a required view is unavailable, the API returns an explicit err
 
 | Layer | Current implementation |
 |---|---|
-| Frontend | Next.js 14, React, TypeScript, Chart.js |
+| Frontend | Next.js 16, React 19, TypeScript, Chart.js; installed versions are defined by `frontend/package-lock.json` |
 | Gateway | Express and TypeScript in `backend/` |
 | Analytics store | Databricks Unity Catalog, primarily `workspace.medshield_gold` |
 | Identity | Supabase Auth with server-side account resolution |
@@ -850,3 +1573,81 @@ This is local implementation and verification, not cloud publication. The audit
 migration file is prepared but not applied; live diagnostic SQL
 remains unverified while the configured warehouse is not RUNNING. Sales
 contributions do not establish disease, stockout, contract or pricing causes.
+
+
+## Read-only schema snapshot — 17 October 2026, 09:09 Asia/Manila
+
+The [schema documentation receipt](../outputs/schema_documentation_20261017/README.md)
+retains fresh catalog metadata from both configured stores and complete scoped
+Obsidian field dictionaries/relationship maps. This supersedes the prior lack of
+SQL access only for read-only discovery. At this snapshot, the linked accounts
+contract was present, durable audit tables/append RPC were absent, and the
+completeness relation differed from the repository's intended namespace.
+Databricks catalog discovery succeeded; the prepared Open-Meteo objects were
+absent. No data values, Delta history/current versions or active release-pointer
+values were checked. These are dated structural observations, not deployment,
+source-quality or release acceptance. A separate live-rollout chat was preparing
+migrations concurrently; use its subsequent execution/readback receipt when
+available. This documentation task applied no migrations or data changes.
+
+## Product candidate screen — 17 October 2026
+
+[Fresh product screen](../outputs/pilot_evidence_step3_20261017/PRODUCT_SCREEN.md)
+reconciles 3,780 product-label/recorded-area series and 12,768 original non-backfill
+2021–2025 records across 2,494 product keys to fact20 and the independent approval
+bridge; eleven checks pass. Original observations stop in December 2023. The
+2024–2025 rows exist as adjusted-source and were kept separate from original SKU
+history. No screened series has all 24 observed months in 2022–2023 or current
+quantity-model eligibility. These are screening findings, not proof that months
+without rows had no sales, or that observed months are complete.
+
+TRIVASC 35MG × QUEZON has June–December 2023 records, while TRIVASC 35MG MR × QUEZON
+ends in June 2023. Their overlap and differing release qualifier require
+identity/presentation evidence before merging or transferring a unit decision.
+No source/master/model/runtime/approval changes. Next analyst/source-owner action:
+review that label transition and permissible use of adjusted recent sources;
+retain existing company-PHP research within its documented acceptance limits.
+
+### User reporting-group decision — 17 October 2026
+
+Adrian explicitly approved grouping the two TRIVASC labels for the QUEZON
+original 2021–2023 reporting review. [Decision and impact boundaries](../outputs/pilot_evidence_step3_20261017/LABEL_GROUP_DECISION.md)
+retain the original keys/rows and separate user reporting approval from verified
+physical identity, unit and model suitability. This supersedes the lack of user
+reporting-group approval in the earlier screen, not its unresolved historical
+evidence findings. No live mapping deployed. Next analyst action: combined
+monthly reporting view with preserved label contributions and conservation checks.
+
+17 October 2026 grouped-table follow-up: the [combined monthly review](../outputs/pilot_evidence_step3_20261017/GROUPED_MONTHLY_REVIEW.md) now covers 36 observed months, January 2021–December 2023, with 193 rows retained. Seventeen checks reconcile source-label contributions and original quantities. Positive recorded Qty 2,163, adjustment −60, net 2,103. Every grouped month has records; completeness and physical equivalence remain unverified. This is offline reporting preparation, with no model fit or live mapping deployed. Next analyst action: pattern assessment and supported retrospective evaluation design.
+
+
+17 October 2026 pattern/design follow-up: [TRIVASC observed pattern and retrospective design](../outputs/pilot_evidence_step3_20261017/GROUP_PATTERN_AND_MODEL_PLAN.md) reconciles annual positive recorded quantities and enumerates 44 historical one/three-month cases; six checks pass. No model fitted, seasonality not established, 2023 audit explicitly previously inspected. Physical quantity gates remain open. Next practical independent route: prepare signed, financially eligible grouped-product monthly PHP sales research, retaining coverage limitations and avoiding any claim of verified medicine demand.
+
+
+## Full 2017–2025 deployment-source verification — 17 October 2026
+
+[Full verification and repair receipt](../outputs/source_verification_20261017/README.md)
+reads all nine CSVs in `databricks/medshield_project_csv/medshield_project_csv`
+with the existing pure Bronze/Silver functions. The resulting dataset ID matches
+current live fact20: 59,039 physical lines accounted for, 37,728 retained rows,
+36,848 financially eligible net-sales rows and ₱626,946,741.81. All nine source
+hashes, retained-ID digests, per-file quantity/net sums, financial eligibility
+and 98 observed monthly aggregates reconcile in 273 checks. Raw bytes unchanged.
+
+A real verification defect was repaired: full-corpus tests used the historical
+`data/medshield/dataset_csv` copy instead of deployment inputs. Five yearly hashes
+differ. Tests now use the Databricks-folder exports; all 89 tests pass, including
+new source-inventory, unknown-month, changed-byte and no-unit-inference guards.
+The [shared product queue](../outputs/source_verification_20261017/product-resolution-queue.json)
+covers 4,561 labels with conserved source/financial populations and six checks.
+
+None of the nine source layouts provides a separate billed-unit/UOM field. The
+reviewed 2020/2024/2025 hashes correctly identify adjusted product allocations;
+their presence and financial uses are distinct from verified original physical
+demand. Ten months without retained observations remain unknown in 2017–2019.
+These are source/evidence limits, not defects repaired by relabelling, zero fill,
+automatic alias merging, excluding all signed entries or inventing quantities.
+No CSV, controlled master, live mapping, model, schema or server was changed.
+Next analyst work uses the shared queue and bounded financial research;
+source owners retain historical unit/identity/completeness and adjusted-detail
+verification. This full audit does not grant business/model/operational approval.

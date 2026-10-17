@@ -1,5 +1,17 @@
 # MedShield study overview
 
+## Current descriptive/predictive completion boundary — 17 October 2026
+
+The [completion card](../outputs/analytics_finish_20261017/README.md) maps the
+implemented descriptive, diagnostic and21-configuration company-PHP research
+methods to fresh source/API/browser/export checks, measured historical error and
+remaining original objectives. It supersedes older configuration availability
+summaries for this bounded runtime scope. Original objective acceptance remains
+governed by the objective/evidence register; research workflow completion does
+not establish medicine-demand forecasting or operational approval. Supabase
+supports Auth/roles/audit; Databricks remains the analytical source. Release/
+backup work is separate from presenting the supported analytical results.
+
 Evidence reviewed: **9 October 2026, Asia/Manila**. This overview explains the
 study, its implemented capabilities and its remaining evidence requirements.
 [Current state](CURRENT_STATE.md) owns changing release identities and readiness;
@@ -7,6 +19,8 @@ the [objective/evidence register](OBJECTIVE_EVIDENCE_REGISTER.md) preserves the
 original academic commitments. Dated earlier assessments remain historical.
 
 ## Study purpose and business problem
+
+**Paper source clarification — 16 October 2026:** the user-confirmed latest post-defense Chapters 1–3 is byte-identical to [CapstonePaper_1.pdf](../references/CapstonePaper_1.pdf). The previous `PRIVATE_SUMMER` reference below identifies the manuscript used by the dated 9 October overview, not the latest source after this clarification. See the [paper revision guide](PAPER_REVISION_GUIDE.md) and [complete revised Chapters 4–5](chapters/MedShield_Chapter_4_5_Revised_20261016.md) for the current writing handoff.
 
 MedShield is an enterprise decision-support capstone for pharmaceutical
 distribution and inventory planning in the Philippines, focused on
@@ -32,7 +46,7 @@ interpret results and provenance; and administrators who manage access and
 integration. The CEO owns client business acceptance; adviser/panel acceptance
 is a separate academic decision. See [business analysis](BUSINESS_ANALYSIS.md).
 
-The [current manuscript](../references/PRIVATE_SUMMER_CAPSTONE_2%20-%20GROUP9_ISB.pdf)
+The [manuscript inspected for the 9 October overview](../references/PRIVATE_SUMMER_CAPSTONE_2%20-%20GROUP9_ISB.pdf)
 proposes **CRISP-DM + SEMMA**: business/data understanding, preparation, modeling,
 evaluation and deployment, with sampling, exploration, modification and assessment
 inside the modeling work. The implemented evidence follows that progression through

@@ -1,6 +1,7 @@
 import { PLANNING_MARKUP } from '../services/api/prescriptive-planning-runtime'
 import { EXTERNAL_REGRESSION_MARKUP } from '../services/api/external-regression-runtime'
 import { FORECAST_VALIDATION_MARKUP } from '../services/api/forecast-validation-runtime'
+import { PREDICTIVE_RESEARCH_MARKUP } from '../services/api/predictive-research-runtime'
 import { SALES_SECTORS_MARKUP } from '../services/api/sales-sectors-runtime'
 import { SALES_HEATMAP_MARKUP } from '../services/api/sales-heatmap-runtime'
 import { DASHBOARD_FILTER_PANEL_STYLE } from '../services/api/dashboard-filter-panel'
@@ -317,6 +318,7 @@ export const OVERVIEW_KPI_GRID_MARKUP = `
 `
 
 export const MEDSHIELD_MARKUP = LEGACY_MEDSHIELD_MARKUP
+  .replace(/\n"\s*$/, '')
   .replace(
     /<div class="comparison-selector">[\s\S]*?<\/div>\s*<!-- Single Year Dropdown -->/,
     `<div class="comparison-selector">
@@ -347,8 +349,8 @@ export const MEDSHIELD_MARKUP = LEGACY_MEDSHIELD_MARKUP
   )
   .replace('<!-- SALES_QUANTITY_HEATMAP -->', SALES_HEATMAP_MARKUP)
   .replace('<!-- SALES_SECTORS -->', SALES_SECTORS_MARKUP)
-  .replace('<!-- FORECAST_VALIDATION -->', FORECAST_VALIDATION_MARKUP)
-  .replace('<!-- EXTERNAL_REGRESSION -->', EXTERNAL_REGRESSION_MARKUP)
+  .replace('<!-- FORECAST_VALIDATION -->', FORECAST_VALIDATION_MARKUP + '<details class="analytical-section" id="predictiveResearchDetails"><summary>Stored predictive research · Unpublished</summary>' + PREDICTIVE_RESEARCH_MARKUP + '</details>')
+  .replace('<!-- EXTERNAL_REGRESSION -->', '<details class="analytical-section" id="externalRegressionDetails"><summary>Disease and weather analysis · Mapping review required</summary>' + EXTERNAL_REGRESSION_MARKUP + '</details>')
   .replace('<!-- PLANNING_SCENARIO -->', PLANNING_MARKUP)
   .replace(
     /<div class="sidebar-user">[\s\S]*?(?=\s*<div class="sidebar-footer-actions)/,

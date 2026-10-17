@@ -4,6 +4,8 @@
 
 ## Objective
 
+**Execution context — 15 October 2026:** use the [capstone completion workflow](CAPSTONE_COMPLETION_WORKFLOW.md) and the latest scoped entries in [Current State](CURRENT_STATE.md) and the [objective/evidence register](OBJECTIVE_EVIDENCE_REGISTER.md) before executing this plan. The September baseline and dated implementation milestones below retain their original scope. Later descriptive/research evidence exists; the 15 October predictive findings supplement is prepared, while complete manuscript integration and formal review remain open. Sales-only source limitations and original O3/operational gates remain explicit; no method plan or technical pass grants their acceptance.
+
 The North Star is a defensible monthly decision cycle:
 
 1. explain historical demand and performance;
@@ -28,7 +30,7 @@ The dashboard must never present a planned model, synthetic result, or unpublish
 | Inventory optimization | Scenario-only; no approved procurement recommendation |
 | Publication | Candidate-only until the owner accepts reconciliations and policy limitations |
 
-Open-Meteo and OpenWeather are not runtime sources. Python analytics code is offline tooling; the browser does not call it and it is not a dashboard fallback.
+The 8 October architecture/API additions prepare explicit Open-Meteo ERA5, ERA5-Seamless and ECMWF IFS historical archive candidates; their controlled publication status must be read from current evidence. They remain provider-derived observations, distinct from official PAGASA. OpenWeather is not an analytical runtime source. Python analytics code is offline tooling; the browser does not call it and it is not a dashboard fallback. See [architecture](ARCHITECTURE.md) and [weather API contracts](API.md#external-observations).
 
 ## Data authority
 
@@ -36,6 +38,7 @@ Open-Meteo and OpenWeather are not runtime sources. Python analytics code is off
     NASA POWER API -----------------------> Databricks Silver external data
     Databricks Silver -> Databricks Gold candidate tables and views
     Databricks Gold -> TypeScript gateway -> Next.js dashboard
+    Pinned Gold + reconciliation receipt -> frozen analytical input -> offline Python evaluation
     Supabase Auth and audit -> TypeScript gateway
     Offline Python jobs -> validation artifacts -> owner review -> governed Databricks publication
 

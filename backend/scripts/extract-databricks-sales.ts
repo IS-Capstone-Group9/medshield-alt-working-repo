@@ -3,7 +3,7 @@ import 'dotenv/config'
 import { mkdir, rename, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 
-import { getDatabricksYearlyCandidateExtract } from '../src/databricks'
+import { getDatabricksYearlyCandidateExtract, type DatabricksYearlyCandidateRow } from '../src/databricks'
 
 const OUTPUT_DIRECTORY = path.resolve(
   __dirname,
@@ -36,7 +36,7 @@ async function writeAtomically(filePath: string, contents: string): Promise<void
 
 async function main(): Promise<void> {
   const extract = await getDatabricksYearlyCandidateExtract()
-  const columns = Object.keys(extract.rows[0] ?? {})
+  const columns = Object.keys(extract.rows[0] ?? {}) as Array<keyof DatabricksYearlyCandidateRow>
   if (columns.length === 0) {
     throw new Error('The validated Databricks extract did not contain any columns')
   }

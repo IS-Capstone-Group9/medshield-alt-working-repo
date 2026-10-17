@@ -50,14 +50,16 @@ test('TypeScript evidence renders real comparisons, fixed origins, unavailable f
   await expect(page.locator('#decompBaseTrend')).toHaveCount(0)
   const chart = () => page.evaluate(() => {
     const data = (window as any).Chart.getChart(document.getElementById('forecastChart')).data
-    return {labels:data.labels,actuals:data.datasets[0].data,backtest:data.datasets[1].data,forecast:data.datasets[2].data,names:data.datasets.map((d:any)=>d.label)}
+    return {labels:data.labels,actuals:data.datasets[0].data,backtest:data.datasets[1].data,names:data.datasets.map((d:any)=>d.label)}
   })
   let displayed = await chart()
-  expect(displayed.labels).toHaveLength(44)
+  expect(displayed.labels).toHaveLength(24)
+  expect(displayed.labels.at(-1)).toBe('2025-12')
   expect(displayed.actuals.filter((v:any)=>v!==null)).toHaveLength(24)
-  expect(displayed.actuals.slice(-20)).toEqual(Array(20).fill(null))
-  expect(displayed.forecast.every((v:any)=>v===null)).toBe(true)
-  expect(displayed.names).toHaveLength(3)
+  expect(displayed.names).toHaveLength(2)
+  expect(displayed.names.some((name: string) => name.includes('future prediction'))).toBe(false)
+  await expect(page.locator('#forecastPlotScope')).toContainText('Historical chart only')
+  await expect(page.locator('#forecastEvidenceTable tbody tr')).toHaveCount(44)
   await page.selectOption('#forecastHorizon','3')
   await expect(page.locator('#forecastWindow')).toContainText('true forecast leads 9–11')
   await page.selectOption('#forecastModel','last_value')
@@ -153,6 +155,25 @@ function errorOutputEvidence(unit = 'PHP') {
   return data
 }
 
+test('available zero and negative future predictions retain interior gaps and trailing evidence rows', async ({page}) => {
+  const data = errorOutputEvidence()
+  data.views['12'].models.last_value.forecast = Array.from({length:12},(_,index) => ({
+    period:new Date(Date.UTC(2026,8+index,1)).toISOString().slice(0,7),origin:'2025-12',lead:index+9,
+    prediction:index === 0 ? 0 : index === 2 ? -5 : null,
+  }))
+  await page.evaluate(value => (window as any).setForecastValidationData(value),data)
+  const graph = await page.evaluate(() => {
+    const chart = (window as any).Chart.getChart(document.getElementById('forecastChart'))
+    const predictions = chart.data.datasets.find((dataset: any) => dataset.label.includes('future prediction')).data
+    return {labels:chart.data.labels,predictions,spanGaps:chart.options.spanGaps}
+  })
+  expect(graph.labels.at(-1)).toBe('2026-11')
+  expect(graph.predictions.slice(-3)).toEqual([0,null,-5])
+  expect(graph.spanGaps).toBe(false)
+  await expect(page.locator('#forecastPlotScope')).toContainText('Missing months stay blank')
+  await expect(page.locator('#forecastEvidenceTable tbody tr').last()).toContainText('2027-08')
+})
+
 async function exportedRows(page: import('@playwright/test').Page) {
   const download = page.waitForEvent('download')
   await page.locator('#forecastExport').click()
@@ -173,6 +194,8 @@ test('monthly evidence and CSV expose only matched historical errors and the his
   await expect(page.locator('#forecastReview')).toContainText('Future errors are unavailable')
   await expect(page.locator('#forecastBenchmarkTable thead')).toContainText('MAE (₱)')
   await expect(page.locator('#forecastEvidenceTable thead')).toContainText('Signed error (₱)')
+  await expect(page.locator('#forecastEvidenceTable')).not.toBeVisible()
+  await page.getByText('Monthly actuals, predictions and historical errors', { exact: true }).click()
   await expect(page.locator('#forecastEvidenceTable')).toBeVisible()
   const monthly = (period: string) => page.locator('#forecastEvidenceTable tbody tr').filter({hasText:period})
   await expect(monthly('2025-02').locator('td').nth(4)).toHaveText('10')

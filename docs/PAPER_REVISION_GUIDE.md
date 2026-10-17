@@ -1,8 +1,49 @@
 # Capstone Paper Revision Guide
 
-Last reviewed: 2026-10-07 (Asia/Manila)
+Last reviewed: 2026-10-17 (Asia/Manila); dated assessments below retain their original evidence dates.
 
 Revise the paper from implemented evidence, not from older architecture or model plans.
+
+## Required system-to-paper corrections — 17 October 2026
+
+The [QA review](../outputs/qa_paper_alignment_20261017/paper-review.md) maps the
+confirmed proposal to current implementation. UI/messaging corrections are
+tracked in the [repair evidence](../outputs/qa_remediation_20261017/README.md).
+They do not fulfill missing original methods or authorize an academic amendment.
+Carry these corrections into the integrated working manuscript:
+
+- **Architecture:** describe Next.js/React/TypeScript dashboard → Express gateway
+  → Databricks Gold analytical contracts. Supabase supplies authentication,
+  linked application roles and audit persistence. Replace the obsolete Power BI
+  dashboard/Supabase analytical-persistence description in Chapter 3.
+- **Ingestion:** describe controlled Databricks ingestion and candidate/release
+  review. Direct browser upload is disabled with HTTP409; a source-status screen
+  is not evidence of an upload-to-publication workflow.
+- **Descriptive:** identify the implemented monthly company-PHP STL and its
+  actual period. Do not call it the original daily territorial decomposition.
+- **Predictive:** distinguish company net-sales PHP research, its historical
+  errors and unpublished candidate projections from territory medicine demand,
+  urgency and accepted disease/weather models. Preserve MAPE versus WAPE and
+  genuine generation/origin/lead timing.
+- **ABC:** reconcile the proposal's pp99–100 temporal/held-out descriptions and
+  p117 new/low-history task. The North Star future-period target is separate.
+  Observed deterministic ABC does not establish either classifier result.
+- **Planning:** describe entered product-specific allocation scenarios and the
+  active bounded greedy method. EOQ/ROP, global LP optimality and measured expiry
+  reduction remain absent; do not describe scenario output as procurement action.
+
+The revised Chapters 4–5 already preserve these bounded claims. The writing owner
+must integrate the same terminology across Chapters 1–5 and submit unresolved
+original commitments for actual study-lead/adviser decisions. Original source
+PDFs remain read-only; no original objective or model/business approval is changed.
+
+## Latest source and complete Chapters 4–5 revision — 16 October 2026
+
+The user identifies `(POST-DEFENSE) Capstone 1 - GROUP_9_3ISB.pdf` as the latest Chapters 1–3. Its 149-page bytes match [CapstonePaper_1.pdf](../references/CapstonePaper_1.pdf), SHA-256 `4c40147be0de0563e2a58bc0210c0a13cf850bf1382577fff497422b44ebe862`. This confirmation supersedes the earlier filename-based inference that `PRIVATE_SUMMER_CAPSTONE_2 - GROUP9_ISB.pdf` is latest. The dated 7 October review below retains its historical source identity; original O1–O5 wording is unchanged.
+
+The separately supplied [42-page Chapters 4–5 draft](../references/chapters/GROUP%209_MedShield_CP2_Chapter%204_5.pdf) is preserved. Use the [complete revised working text](chapters/MedShield_Chapter_4_5_Revised_20261016.md) and [top-to-bottom revision record](../outputs/paper_revision_20261016/REVISION_RECORD.md). The revision fills the empty analysis/summary and Chapter 5 sections, integrates current descriptive/predictive/scenario evidence and preserves original objective gaps. Whole-paper integration, institutional bibliography/formatting and actual academic/client decisions remain separate.
+
+The latest proposal's held-out XGBoost ABC task concerns new/low-history SKU labels (PDF p117). A future-period ABC target in North Star question 7B is a distinct temporal task. Keep that difference explicit rather than attributing a future-period design to every proposal classifier. No accepted classifier result is established here.
 
 ## Chapter 1–3 model disposition — 7 October 2026
 

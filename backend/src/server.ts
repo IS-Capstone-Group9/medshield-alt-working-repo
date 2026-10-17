@@ -2,6 +2,7 @@ import { catalogProducts, parseCatalogCategory, CatalogInputError } from './cata
 import { invalidScalarQueryKey } from './monthlyQuery'
 import { SalesDiagnosticInputError } from './salesDiagnostics'
 import { readPredictiveRelease, PredictiveInputError } from './predictiveRelease'
+import { readPredictiveResearch, PredictiveResearchInputError } from './predictiveResearch'
 import path from 'node:path'
 import { existsSync } from 'node:fs'
 import { config as loadDotenv } from 'dotenv'
@@ -91,6 +92,8 @@ if (!allowedOrigins.length) {
   allowedOrigins.push('http://localhost:3000', 'http://localhost:5000')
 }
 
+class CorsOriginDeniedError extends Error {}
+
 app.use(
   cors({
     origin(requestOrigin, callback) {
@@ -98,18 +101,25 @@ app.use(
       if (!requestOrigin || allowedOrigins.includes(requestOrigin)) {
         return callback(null, true)
       }
-      return callback(new Error(`CORS: origin ${requestOrigin} is not allowed`))
+      return callback(new CorsOriginDeniedError('Browser origin is not allowed.'))
     },
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],
   }),
 )
+app.use((error: unknown, _req: Request, res: Response, next: NextFunction) => {
+  if (error instanceof CorsOriginDeniedError) {
+    return res.status(403).json({ error: 'Browser origin is not allowed.', code: 'CORS_ORIGIN_DENIED' })
+  }
+  next(error)
+})
 app.use(express.json())
-app.use('/api', (req, res, next) => {
+
+function validateScalarQuery(req: Request, res: Response, next: NextFunction) {
   const invalid = invalidScalarQueryKey(req.query)
   if (invalid) return res.status(400).json({ error: `Query parameter ${invalid} must occur once with a scalar value.`, code: 'INVALID_QUERY_PARAMETER' })
   next()
-})
+}
 
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -286,7 +296,7 @@ async function authenticateRequest(
       code: 'PASSWORD_RESET_REQUIRED',
     })
   }
-  next()
+  validateScalarQuery(req, res, next)
 }
 
 function requireAuth(req: AuthenticatedRequest, res: Response, next: NextFunction) {
@@ -336,7 +346,7 @@ async function withDashboardSnapshot(
   }
 }
 
-app.get('/api/health', (_req: Request, res: Response) => {
+app.get('/api/health', validateScalarQuery, (_req: Request, res: Response) => {
   res.json({
     status: 'ok',
     service: 'MedShield API gateway',
@@ -626,6 +636,15 @@ app.get('/api/sales/sectors', requireAuth, async (req: Request, res: Response) =
   }
 })
 
+app.get('/api/sales/predictive-research', requireAuth, async (req: Request, res: Response) => {
+  try {
+    return res.json(await readPredictiveResearch(req.query))
+  } catch (error) {
+    const invalid = error instanceof PredictiveResearchInputError
+    return res.status(invalid ? 400 : 503).json({ code: invalid ? 'INVALID_RESEARCH_FILTER' : 'PREDICTIVE_RESEARCH_UNAVAILABLE', error: invalid ? error.message : 'Stored predictive research evidence is unavailable or inconsistent.' })
+  }
+})
+
 app.get('/api/sales/forecast-validation', requireAuth, async (req: Request, res: Response) => {
   try {
     const invalid = invalidScalarQueryKey(req.query)
@@ -777,7 +796,7 @@ app.post('/api/auth/logout', requireAuthDuringPasswordReset, (req: Authenticated
   res.json({ ok: true })
 })
 
-app.post('/api/auth/login', authLoginLimiter, async (req: Request, res: Response) => {
+app.post('/api/auth/login', validateScalarQuery, authLoginLimiter, async (req: Request, res: Response) => {
   const username = String(req.body?.username ?? '').trim()
   // Passwords are opaque credentials; trimming would change valid leading or trailing spaces.
   const password = typeof req.body?.password === 'string' ? req.body.password : ''

@@ -1,7 +1,7 @@
 FROM node:22-alpine AS deps
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci
+RUN npm exec --yes --package=npm@11.21.1 -- npm ci
 
 FROM node:22-alpine AS build
 WORKDIR /app
@@ -12,7 +12,7 @@ ENV NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL
 ENV NEXT_PUBLIC_SUPABASE_URL=$NEXT_PUBLIC_SUPABASE_URL
 ENV NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=$NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
 COPY --from=deps /app/node_modules ./node_modules
-COPY package*.json next.config.mjs tsconfig.json .eslintrc.json middleware.ts ./
+COPY package*.json next.config.mjs tsconfig.json eslint.config.mjs proxy.ts ./
 COPY app ./app
 COPY components ./components
 COPY hooks ./hooks

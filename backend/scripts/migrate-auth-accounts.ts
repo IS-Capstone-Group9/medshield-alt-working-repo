@@ -102,6 +102,14 @@ async function main() {
   const accounts = await readActiveAccounts()
   const users = await readAuthUsers()
   const { byId, byEmail } = indexAuthUsers(users)
+  // A completed migration deliberately cleared its legacy hash. Email matching
+  // cannot establish ownership after deletion; use the explicit recovery flow.
+  for (const account of accounts) {
+    if (account.auth_migrated_at && account.password_hash === null &&
+        (!account.auth_user_id || !byId.has(account.auth_user_id))) {
+      throw new Error(`Account ${account.account_id} requires explicit auth:recover with verified ownership; migration cannot recreate or adopt a deleted Auth identity.`)
+    }
+  }
   const claimedUserIds = new Set<string>()
   const accountEmails = new Set<string>()
 

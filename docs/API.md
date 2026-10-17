@@ -1,5 +1,23 @@
 # API Gateway
 
+## Authentication ordering and source failures — 17 October 2026
+
+The [T08 repair](../outputs/auth_http_remediation_20261017/README.md) makes scalar
+query validation follow authentication and the required-password-change guard on
+protected routes. Missing/invalid sessions return 401, forced-reset sessions 403,
+then malformed/repeated/structured scalar filters 400. Public health/login retain
+explicit scalar validation. This ordering applies to those query checks; JSON
+body parsing, CORS and rate limiting retain their own boundaries.
+
+An absent Databricks configuration now returns 503 with
+`DATABRICKS_SOURCE_UNAVAILABLE` before release lookup or cached analytical reads.
+A configured release/query failure retains its existing502/503 classification;
+the checked configured release failure is502 `DATABRICKS_QUERY_FAILED`. Denied
+browser origins return 403 JSON `CORS_ORIGIN_DENIED`, without reflecting the origin
+or a stack trace. Allowed OPTIONS still works. None of these errors returns
+substitute analytical data. Recovery itself is a server-admin CLI documented in
+[the Auth runbook](SUPABASE_AUTH_MIGRATION.md), not a new HTTP endpoint.
+
 ## Descriptive remediation contract
 
 `GET /api/sales/sectors` now returns actual `date`, source `area`, eligible
@@ -291,6 +309,67 @@ complete detailed rows and coverage. `/api/sales/heatmap` returns stable product
 metadata plus daily/monthly rows with separate quantity evidence strata. Bounded
 pages and count verification reject truncation. No local catalog output is a fallback.
 # Predictive API update — 27 September 2026
+
+## Stored predictive research — 15 October 2026
+
+Authenticated `GET /api/sales/predictive-research` exposes evaluated unpublished
+experiments already retained in Databricks Gold. The optional scalar `run_id`
+must use the `experiment_<64 lowercase hexadecimal characters>` warehouse
+namespace. Unsupported, repeated, structured or blank filters return 400; an
+unauthenticated ordinary request returns 401. Storage, integrity or source
+failures return 503 with `PREDICTIVE_RESEARCH_UNAVAILABLE`, without raw warehouse
+details or a local analytical fallback. Successful absence is an `empty` response.
+
+The `predictive-research.v1` response lists stored experiment identities and
+compares a selected source-matched run against the gateway's active descriptive
+fact/dataset/policy/catalog/geography identity. The default is the largest
+matching configuration grid, then warehouse run ID; this is neither a model
+ranking nor a claim that the experiment is newest. Explicit selection does not
+change the stored model-selection decision. Raw payload hashes, storage metadata,
+scope, calendar leads and point keys are verified before any results are returned.
+
+`cohorts.development.groups` and `cohorts.retrospective_audit.groups` contain
+cumulative `3`, `6` and `12` lead groups, their dates, origins, case counts and
+distinct target counts. Model metrics use complete expected origin–target–lead
+cases. An incomplete model remains visible with its individual coverage and
+exclusion reason; it cannot erase the complete models' comparison population.
+Point rows retain origin, target, true lead, actual, prediction, signed/absolute
+peso errors and explicit unavailable reasons. Zero-denominator WAPE remains null.
+
+`candidate_projections` separately exposes the stored selected-model research
+points, genuine generation timestamp, training cutoff and elapsed/current/future
+labels **at generation**. Future actuals and measured errors remain null. Missing
+generation evidence leaves this view unavailable. This is distinct from approved
+`/api/forecasts?schema_version=2` serving and the four dynamically calculated
+retrospective benchmarks. Every research response keeps
+`publication_approved: false` and `activation_allowed: false`.
+
+The projection points add `prior_year_period`, `prior_year_net_sales_php`,
+`prior_year_value_status`, `prior_year_coverage_status`, `forecast_yoy_percent`
+and `forecast_yoy_unavailable_reason`. Forecast YoY is
+`100 * (prediction - prior_year_net_sales_php) / prior_year_net_sales_php`.
+The denominator is the same calendar month twelve months earlier from the
+selected run's exact frozen company-PHP input, at or before the model origin.
+It must be finite, positive, closed, complete and evaluation-eligible with a
+supported value status and no blockers. Zero, negative or ineligible recorded
+baselines remain visible while the percentage is null with a reason. A missing
+forecast also leaves the percentage null. This derived forecast change is
+separate from observed growth and measured forecast error.
+
+`baseline_input_storage_hash` preserves the frozen mart's file/storage identity;
+`baseline_input_content_hash` preserves the run's canonical input digest. These
+identities need not be equal. The gateway resolves a bounded complete immutable
+mart group, validates its manifest and typed/payload fields, and verifies the
+reconstructed content digest against the selected run. Ambiguous, incomplete or
+inconsistent required source evidence returns the same explicit 503 contract;
+there is no substitution from current monthly data or repository files. The CSV
+retains the baseline, percentage, statuses, reasons and both hashes.
+
+The endpoint performs no training, file ingestion, warehouse write or pointer
+change. Offline experiments not stored under this candidate contract do not
+become dashboard results through repository-file access. The Forecast research
+panel's CSV retains the selected run/artifact/source identity, stage, lead group,
+each origin-keyed point and same-group summary metrics.
 
 `/api/sales/forecast-validation` now exposes retrospective fixed-origin company
 revenue benchmarks, exact common evaluation keys, unverified reporting coverage

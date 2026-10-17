@@ -4,6 +4,8 @@
 
 ## Execution principle
 
+**Current completion context — 15 October 2026:** this September playbook is an ordered technical path, not a fresh list of missing work. First read the [completion workflow](CAPSTONE_COMPLETION_WORKFLOW.md), current objective/evidence register and latest Current State entries. Existing descriptive and company-PHP research evidence can be integrated into the paper now; full manuscript integration and formal review remain open. Supplied sales files are the available evidence, original receipts are unavailable, and independent events/completeness/causes remain unverified. Do not make receipt collection a prerequisite for bounded research writing. Original objective amendments and operational publication retain their actual acceptance owners.
+
 Run the work as a dependency chain:
 
     approve definitions
@@ -67,6 +69,7 @@ Run the external pipeline and bridge, then verify:
 - PAGASA coverage is 2017-2024;
 - the seven territory mapping review rows remain visible;
 - NASA POWER records include provider, retrieval time, coordinates, and period;
+- any separately supported Open-Meteo historical archive candidate retains its explicit model/provider, coverage and controlled publication status from the current [API](API.md#external-observations); it is not official PAGASA or a live warning;
 - weather and disease data are not silently joined to sales; and
 - the system reports zero join-ready territories until the mapping gate is passed.
 
@@ -138,7 +141,7 @@ Candidates may include statistical forecasting, Prophet, gradient boosting, or p
 - explain failures and excluded series; and
 - select a champion only under an approved rule.
 
-External-signal candidates add five required checks: geography, time, disease-product mapping, representativeness, and incremental value. NASA POWER is a proxy feature; it is not official PAGASA data. Open-Meteo and OpenWeather are outside the current runtime unless a future controlled ingestion is separately approved.
+External-signal candidates add five required checks: geography, time, disease-product mapping, representativeness, and incremental value. NASA POWER and supported Open-Meteo historical archive candidates are provider-derived proxy observations, not official PAGASA data. Use the current architecture/API contracts and actual controlled-publication status for each Open-Meteo model. OpenWeather remains outside the analytical runtime.
 
 Exit condition: the candidate improves the accepted baseline and passes model review.
 

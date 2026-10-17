@@ -3,6 +3,7 @@ import {
   WEATHER_VALIDATION_NAV_ITEM,
   SALES_DATA_PAGE,
   WEATHER_VALIDATION_PAGE,
+  DATABRICKS_SOURCE_PAGE,
 } from './dashboard-markup'
 import { DashboardDataStatus } from '@/types/api.types'
 import { installDashboardFilterPanel } from './dashboard-filter-panel'
@@ -185,7 +186,6 @@ export function updateDashboardProvenance(
 
   const statusBar = root.querySelector<HTMLElement>('.data-freshness-bar')
   if (statusBar) {
-    const sourceLabel = 'Databricks Gold'
     const loadedAt = new Date(status.loaded_at)
     const loadedLabel = Number.isNaN(loadedAt.getTime())
       ? 'Unavailable'
@@ -193,17 +193,27 @@ export function updateDashboardProvenance(
 
     statusBar.replaceChildren()
     const summary = document.createElement('div')
-    summary.textContent = `${sourceLabel} | ${status.message}`
+    summary.textContent = `Candidate data · ${years.length ? `${years[years.length - 1]}–${years[0]}` : 'Years unavailable'} · Approval pending`
     const details = document.createElement('div')
-    details.textContent = `Loaded: ${loadedLabel} PHT | Years: ${years.join(', ') || 'Unavailable'}`
-    details.style.fontWeight = '700'
-    statusBar.append(summary, details)
+    details.textContent = `Loaded: ${loadedLabel} PHT`
+    statusBar.append(summary)
+    const sourceDetails = document.createElement('details')
+    sourceDetails.dataset.sourceDetails = 'true'
+    const sourceSummary = document.createElement('summary')
+    sourceSummary.textContent = 'Source details'
+    const sourceMessage = document.createElement('p')
+    sourceMessage.textContent = `Databricks Gold · ${status.message} Years: ${years.join(', ') || 'Unavailable'}.`
+    sourceDetails.append(sourceSummary, details, sourceMessage)
     if (status.release) {
-      const release = document.createElement('details')
-      const label = document.createElement('summary'); label.textContent = `Candidate dataset · Fact version ${status.release.fact_delta_version} · Release approval pending`
+      const label = document.createElement('p'); label.textContent = `Candidate dataset · Fact version ${status.release.fact_delta_version} · Release approval pending`
       const identity = document.createElement('p'); identity.textContent = `Dataset: ${status.release.dataset_id}. Policy: ${status.release.policy_version}. Databricks is the analytical source; product identities and derived mappings retain their review status.`
-      release.append(label, identity); statusBar.append(release)
+      sourceDetails.append(label, identity)
     }
+    statusBar.append(sourceDetails)
+    const sourcePageStatus = root.querySelector<HTMLElement>('#sourcePageStatus')
+    if (sourcePageStatus) sourcePageStatus.textContent = summary.textContent
+    const sourcePageEvidence = root.querySelector<HTMLElement>('#sourcePageEvidence')
+    if (sourcePageEvidence) sourcePageEvidence.textContent = `${sourceMessage.textContent} ${details.textContent}. ${status.release ? `Fact version ${status.release.fact_delta_version}. Dataset: ${status.release.dataset_id}. Policy: ${status.release.policy_version}.` : 'Release identity unavailable.'}`
     statusBar.dataset.source = status.source
     statusBar.dataset.mode = status.mode
   }
@@ -268,7 +278,8 @@ export function correctOverviewEvidence(root: Element) {
 
   const scopeNotice = overview.querySelector<HTMLElement>('.compliance-warning-banner')
   if (scopeNotice) {
-    scopeNotice.textContent = 'Decision-support scope: Sales figures come from Databricks Gold candidate views. Disease and weather joins, predictive models, and inventory actions await approval or operational inputs.'
+    // The publication strip carries the visible status and its full limits.
+    scopeNotice.remove()
   }
 
   const salesChart = overview.querySelector('#overviewBaselineChart')?.closest<HTMLElement>('.chart-card')
@@ -344,9 +355,16 @@ export function enhanceDashboardContent(root: HTMLElement) {
   installDescriptivePeriodControls(root)
   installDashboardFilterPanel(root)
   correctOverviewEvidence(root)
+  const initialTitle = root.querySelector('#topbar-title')
+  const initialSubtitle = root.querySelector('#topbar-sub')
+  if (root.querySelector('#page-overview.active')) {
+    if (initialTitle) initialTitle.textContent = 'Recorded sales overview'
+    if (initialSubtitle) initialSubtitle.textContent = 'Sales, profit and coverage'
+  }
 
   const navigation = root.querySelector('.nav')
   if (navigation) {
+    navigation.id = 'dashboardNavigation'
     if (!navigation.querySelector('#salesDataNavItem')) {
       navigation.insertAdjacentHTML('beforeend', SALES_DATA_NAV_ITEM)
     }
@@ -360,12 +378,21 @@ export function enhanceDashboardContent(root: HTMLElement) {
       const inlineHandler = item.getAttribute('onclick') ?? ''
       const routeMatch = inlineHandler.match(/showPage\('([^']+)'/)
       if (routeMatch?.[1]) item.dataset.dashboardPage = routeMatch[1]
+      const label = item.querySelector<HTMLElement>('.nav-label')
+      if (item.dataset.dashboardPage === 'data' && label) label.textContent = 'Data Source'
+      const name = label?.textContent?.trim() || item.getAttribute('aria-label')
+      if (name) {
+        item.setAttribute('aria-label', name)
+        item.setAttribute('title', name)
+      }
       item.removeAttribute('onclick')
     })
   }
 
   const content = root.querySelector('.content')
   if (content) {
+    const sourcePage = content.querySelector<HTMLElement>('#page-data')
+    if (sourcePage) sourcePage.innerHTML = DATABRICKS_SOURCE_PAGE
     assignSalesDiagnosticsContent(root)
 
     if (!content.querySelector('#page-sales-data')) {

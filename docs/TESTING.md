@@ -1,3 +1,411 @@
+# Database migration regressions — 16 October 2026
+
+## Canonical 2017–2025 sales source verification — 17 October 2026
+
+The full-corpus tests now read `databricks/medshield_project_csv/medshield_project_csv`,
+the deployment input. They previously read the different `data/medshield/dataset_csv`
+copy. [Verification receipt](../outputs/source_verification_20261017/README.md)
+retains both source-copy hashes, 89 passing tests, and 273 live/local checks.
+
+```powershell
+python databricks/medshield_project/verify_local_sources.py --output outputs/source_verification_20261017/local-audit.json
+python -X utf8 -m unittest discover -s databricks/medshield_project/tests -v
+```
+
+The verifier loads only pure Bronze/Silver declarations; it never executes Spark
+cells, edits CSVs or creates catalog approvals. It checks every physical line,
+retains all dispositions, uses exact source hashes and produces a 108-month
+calendar with nulls for months lacking records. Packaging words are clues, not
+verified units. Tests cover wrong inventory, changed bytes, unknown months and
+adjusted-source preservation. Tests may skip the corpus when deployment files
+are absent; no skip is a source-verification pass.
+
+For the separately configured live read-only comparison:
+
+```powershell
+node backend/node_modules/tsx/dist/cli.mjs outputs/source_verification_20261017/capture-live.ts
+python outputs/source_verification_20261017/verify_readback.py
+python outputs/source_verification_20261017/build_resolution_queue.py
+```
+
+Refresh these artifacts together. A changed release/master fails explicitly;
+retained receipts do not certify later files, models or releases. No dashboard
+request reads these local outputs.
+
+## QA navigation, evidence hierarchy and copy repairs — 17 October 2026
+
+[Repair evidence](../outputs/qa_remediation_20261017/README.md) adds
+`e2e/qa-remediation-live.spec.ts`: named/keyboard navigation, drawer/rail state,
+disabled-upload messaging, quote removal, source/projection evidence details,
+and loaded desktop/mobile summaries with retained warnings. Existing research
+and forecast tests now open the newly collapsed sections through their controls;
+their numerical/CSV/null/candidate and unavailable-source assertions remain.
+
+From `frontend/`, with the existing configured local services:
+
+```powershell
+node node_modules/@playwright/test/cli.js test --config=../outputs/qa_remediation_20261017/playwright.verified.config.cjs
+node node_modules/@playwright/test/cli.js test --config=../outputs/qa_remediation_20261017/playwright.product-export.config.cjs
+```
+
+Trace/video/automatic screenshots are off; explicit local QA screenshots and CSV
+artifacts are retained in the packet. The separate HTTP fixture startup loop uses
+a bounded15-second health deadline and one-second request timeouts. Its full
+isolated backend run is distinct from live browser evidence or cloud acceptance.
+No build alongside Next dev, real provider outage or source/model mutation.
+
+## Chart repair follow-up — 17 October 2026
+
+[Follow-up verification](../outputs/chart_initialization_fix_20261017/FOLLOWUP.md)
+passes12 distinct scenarios across the initial run and focused recovery rerun:
+12 live page/width geometry cases in one workflow,9 synthetic chart-integrity
+scenarios and2 browser-only503/network recovery scenarios. Initial11/12 pass;
+network response-body capture failed across navigation. Immediate listener
+capture reproduced the harness issue in focused503 case; final route.fetch
+capture delivers the upstream response unchanged and both recovery cases pass.
+All identity/unavailable/cleared-chart assertions retained; failures preserved.
+No product/chart code, data/models, providers or server changes in this follow-up.
+Root Frontend self-review; fixture/proxy failures do not establish real outages.
+
+## Chart initialization and editor detection — 17 October 2026
+
+[Repair evidence](../outputs/chart_initialization_fix_20261017/README.md) retains
+the live failure with twelve obsolete-canvas warnings, then passing scoped
+initializer contracts and real chart/navigation/reload checks. Only the six
+replaced reference targets are guarded; required current-target diagnostics
+remain. Local Windows `REACT_EDITOR=code` selects the installed VS Code command
+without WMIC auto-detection; installed module is checked with stubbed spawn.
+Run the packet's `playwright.config.cjs` for live source-backed verification and
+`contract.config.cjs` for isolated contracts from frontend. No production build
+alongside nextdev. Local server start/restart was authorized for this repair;
+do not infer broader data/model/release acceptance from these checks.
+
+## Native synthetic backup/restore rehearsal —17 October2026
+
+[The backup/restore packet](../outputs/backup_restore_20261017/README.md) records
+23 passing checks in `supabase/tests/test_backup_restore.py`: a new loopback-only
+cluster applies actual migrations to synthetic fixtures, dumps a sealed custom
+archive, drops only its own new source database, restores transactionally into
+its own new target, reconciles all-table fingerprints/schema/effective grants,
+RLS/audit checkpoint and verifies denial/sequence/append/replay continuity.
+
+```powershell
+python -X utf8 supabase/tests/test_backup_restore.py --bin outputs/database_remediation_20261016/environment-runtime/pgsql/bin --output outputs/backup_restore_20261017
+```
+
+The existing native16 binaries are required; this is not a live17 managed restore.
+All fixture servers stop in cleanup. First Windows pipe handling and raw-versus-
+default ACL comparison failures remain; final corrected harness retains actual
+access-denial expectations. Stopped cluster-folder deletion was policy-rejected;
+directories are retained. No real account/source/model/dependency change or app
+build. Full managed recovery scope remains in [the runbook](BACKUP_RESTORE.md).
+
+## Isolated selected-Supabase gateway role matrix —17 October2026
+
+The [role matrix](../outputs/role_matrix_20261017/README.md) adds
+`backend/tests/role-matrix.test.ts` and its synthetic fixture.135 HTTP observations
+cover linked roles, reset/invalid/unlinked/inactive sessions, privileged/audit
+read gates, planning/reset/refresh validation and metadata-role non-elevation.
+No real Supabase/provider/warehouse request is permitted. Actual source503 and
+validation400 mean route authorization passed, not successful real operations.
+
+From backend/:
+
+```powershell
+node --import tsx --test --test-concurrency=1 tests/role-matrix.test.ts tests/http-boundaries.test.ts
+```
+
+The executed combined run reports20 passes including nested/parent tests, not20
+new cases. To save the safe response matrix, set MEDSHIELD_ROLE_MATRIX_RECEIPT
+to an absolute evidence JSON path before execution. Initial concurrent existing
+fixture startup failure is retained; sequential run passes with unchanged app/
+old fixture. Temporary child/path cleanup verified; running app preserved.
+No build necessary for tests-only changes. Real all-role token/RLS/browser,
+revocation/load and backup restoration remain separate acceptance scopes.
+
+## T09 step5 audit readback and consolidated handoff —17 October2026
+
+[The consolidated handoff](../outputs/t09_modules_20261017/step5-WALKTHROUGH_HANDOFF.md)
+links all five dated walkthrough steps without summing overlapping checks.
+`node outputs/t09_modules_20261017/step5-audit-read.cjs` runs from repository
+root with current configured services:14 checks pass,10 remote audit records
+independently reconcile, earlier four rollout events retain exact hashes, and
+gateway readback is nondegraded. GET/POST401 and authenticated empty POST400
+append no records. No new audit append or raw record/auth storage is retained.
+Checkpoint read403 is an explicit current-value limitation, not a failed chain
+hash check or an invitation to widen access. Prior actual append/replay/concurrency
+and checkpoint results remain inherited.102 Step2 artifact hashes and source/
+build identity match; no product change/rebuild. Root self-review. The guided
+walkthrough is complete within its scope; full release/restore/roles and model/
+source/business/academic acceptance remain separate.
+
+## T09 step 4 unavailable-source and recovery — 17 October 2026
+
+The [Step4 packet](../outputs/t09_modules_20261017/step4-RECOVERY_REVIEW.md)
+records7/7 passing tests on the unchanged checked source/build: existing five
+`e2e/dashboard-recovery.spec.ts` isolated module contracts plus new two
+`e2e/t09-source-recovery-live.spec.ts` built-app browser simulations. Required
+monthly503 and transport abort both hide charts/exports; after override removal
+and reload, full release identity and pending approval label are preserved.
+
+From frontend/ against configured services:
+
+```powershell
+node node_modules/@playwright/test/cli.js test --config=../outputs/t09_modules_20261017/step4-playwright.config.cjs
+```
+
+Trace/video/automatic screenshots are disabled; manual crops show only unavailable
+alerts. Simulations do not interrupt real cloud services. Isolated retries and
+stale-response checks are distinct from actual built-app visibility/recovery;
+no real provider restart, hosted recovery or full backup/restore is established.
+No application change/build required. Source/build fingerprints, results and
+limitations are retained in the packet; nextStep5 covers audit/evidence review.
+
+## T09 step 2 actual modules and Area export regressions — 17 October 2026
+
+The [step-2 packet](../outputs/t09_modules_20261017/README.md) binds six passing
+actual browser cases to one freshly built frontend/current compiled gateway and
+fact20 source. New canonical `e2e/t09-sales-products-live.spec.ts` verifies
+exact-date investigation JSON,72-row STL reconstruction/CSV, matched margin,
+category partitions and full-cohort product exports. `e2e/t09-area-planning-live.spec.ts`
+checks current-source chart/ranking/CSV filters, zero-match draft reference export,
+synthetic scenario arithmetic/CSV and stale/unacknowledged/infeasible guards.
+`e2e/t09-area-export.spec.ts` has two isolated regression fixtures for raw precision,
+weights/product/category/date filters, empty/error clearing and draft-reference scope.
+These fixture cases do not prove live source completeness.
+
+Run from frontend/ with configured services, traces/video/automatic screenshots off:
+
+```powershell
+node node_modules/@playwright/test/cli.js test e2e/t09-area-export.spec.ts --workers=1 --retries=0 --trace=off
+$env:MEDSHIELD_E2E_FACT_VERSION='20'
+node node_modules/@playwright/test/cli.js test --config=../outputs/t09_modules_20261017/integrated-playwright.config.cjs
+```
+
+From repository root, `node outputs/t09_modules_20261017/predictive-integrated-csv-verify.cjs`
+compares final actual downloads against current API;151/151 pass. Initial538
+matching21-grid and6 mismatched-run checks, and24 backend deterministic tests
+remain distinct. Do not count old15 or six offline recipes as current runtime models.
+The packet retains true pre-repair defects and harness cwd/wording failures;
+no failed assertion was waived. Frontend lint/types/build pass. Production source
+repair requires a fresh build with no nextdev; run lint separately. Existing build
+warnings and broader T09/model/business/academic gates remain separate.
+
+## T09 step 1 built-app readiness — 17 October 2026
+
+The [step-1 evidence](../outputs/t09_login_20261017/README.md) binds the existing
+production Next build/current compiled gateway to actual configured authentication
+and Databricks candidate fact20. The canonical browser scenario checks login,
+all12 core responses/ready gate, source/candidate labels, authenticated reload,
+logout UI isolation and malformed actual Supabase-cookie/invalid gateway denial:
+
+```powershell
+# Run from frontend/ against the configured services. Use the reviewed fact pin.
+$env:MEDSHIELD_E2E_FACT_VERSION = '20'
+node node_modules/@playwright/test/cli.js test e2e/integrated-login-live.spec.ts --workers=1 --retries=0 --trace=off
+```
+
+The test disables trace/video/automatic error screenshots, masks account details
+in manual screenshots and saves only source/status/readiness fields. Never persist
+valid auth storage/cookies/tokens to reproduce it. Independent read-only API51
+checks reconcile source and financial populations separately. The existing
+per-row₱0.01 arithmetic tolerance does not imply aggregate residual≤₱0.01; the
+observed−₱0.06 is retained with zero over-threshold rows and an unverified cause.
+One configured administrator and exploratory mobile rendering do not constitute
+all-role/full-responsive/module/filter/export or complete T09 release acceptance.
+
+## T08 recovery and HTTP verification — 17 October 2026
+
+The [T08 packet](../outputs/auth_http_remediation_20261017/README.md) retains
+158/158 full backend tests, runtime build and strict all-script compilation;
+44/44 independent recovery cases; 99/99 actual isolated HTTP responses plus ten
+protocol/no-data checks; and both no-write ordinary-migration denial cases.
+Canonical `tests/auth-recovery.test.ts` covers read-only preflight, audit ordering,
+credential/reset continuity, zero-write rejection and explicit partial-state resume.
+`tests/http-boundaries.test.ts` launches fixture gateways with blocked external
+network access for auth/reset/scalar ordering, missing-source 503, configured
+release 502 and explicit CORS 403. Helpers live in `tests/fixtures/`.
+
+The configured live check passed 17/17 on one new disposable viewer after a
+retained harness-only profile-envelope correction. It exercises actual Auth
+deletion/FK unlink, the CLI with split UTF-8 stdin, forced reset, password change,
+old/new credential behavior, profile, remote audit hashes and a read-only
+Databricks benchmark. Both attempts cleaned up their synthetic identities and
+gateway; six audit events remain. All 35 original table/stable-Auth fingerprints
+match. `live-verify.cjs` mutates a new test identity: do not rerun merely to
+recreate this report. Full role/session-revocation/load/restore verification is
+outside this scope. No frontend build is required for these backend-only changes.
+
+## Actual live Supabase rollout verification — 17 October 2026
+
+The [rollout packet](../outputs/supabase_live_migration_20261017/README.md)
+separates native PostgreSQL16.15 fixtures (234 initial and118 service-repair
+assertions) from actual configured PostgreSQL17.6/Auth/PostgREST/gateway evidence.
+Three exact-hash plugin migrations succeeded and appear in the live ledger.
+All35 original table/stable-Auth counts and content hashes match after API tests.
+
+Run the existing catalog-only `supabase/verification/legacy_analytical_access.sql`
+and inspect row statuses. For this already-private layout its raw result retains
+43 MISSING_GATE expectations; each is reconciled in
+[retired dispositions](../outputs/supabase_live_migration_20261017/live/retired-public-dispositions.json)
+against21 private replacements and the previously absent public refresh wrapper.
+There are zero actual FAIL or scope-review rows. The packet's
+`live/verify-target-layout.sql` verifies those replacements and executes zero-row
+SELECTs on57 relations under actual service_role inside a rolled-back transaction.
+Unknown missing objects are not accepted by these specific dispositions.
+
+With the configured gateway running normally, this bounded integration script
+exercises actual login/profile, denied browser/direct-write paths and committed
+service/gateway audit persistence:
+
+```powershell
+node outputs/supabase_live_migration_20261017/live/audit-api-verify.cjs
+```
+
+This is a live mutation test: it appends four clearly identified synthetic audit
+events and retains them. Do not rerun merely to reproduce a report. The stored
+execution passed39/39, independently reconstructs the full four-event chain and
+checks gateway `storage: supabase` and nondegraded reads; root separately verified
+the checkpoint. A read-only Databricks benchmark smoke passed with unpublished
+status. It is not a full role matrix, load/recovery/backup rehearsal or fresh full
+warehouse/model validation. Native fixture and verification gateway were stopped.
+No application rebuild is required solely for these SQL/documentation changes.
+
+Use a disposable native PostgreSQL 16+ cluster with `pgcrypto` and a superuser.
+The fixture runner creates uniquely named `medshield_t06_*` databases on
+loopback only and creates missing synthetic API roles. Never point it at an
+application database/cluster. It leaves the fixture databases for inspection;
+stop the disposable server after reviewing the evidence.
+
+```powershell
+python -X utf8 supabase/tests/test_migrations.py --psql <absolute-psql-path> --port 55432 --output <new-evidence-directory>
+```
+
+This runs the 001–017 chain with restrictive defaults and old/custom grants,
+optional functions absent/present, and repeats017. It checks actual SQLSTATE
+permission denials, all 21 legacy views, independent column grants, effective
+schema/relation/sequence/routine access, retired policies, unrelated public
+objects, linked profiles, service identity/cache/refresh and atomic audit
+hash/idempotence. Four native connections append eight distinct events per
+profile and independently reconcile the full nine-event chain. Supabase Auth
+helpers/default grants are explicit synthetic fixtures, not actual platform/API
+verification. The optional `--baseline-011 <original-file>` reproduces the old
+bootstrap failure and pre-repair view exposure in its own fixture database.
+
+Run `supabase/verification/legacy_analytical_access.sql` separately through
+`psql --no-psqlrc --set=ON_ERROR_STOP=1 --csv --file=<path>` for catalog-only
+effective-privilege results. A successful SQL command may report FAIL,
+MISSING_GATE or REVIEW_SCOPE: inspect its summary and rows. It does not execute
+application functions or read business rows. An empty catalog must not pass;
+unknown dependent public views/default owners need review. See the
+[actual native and endpoint evidence](../outputs/database_remediation_20261016/README.md).
+No application rebuild is required solely for these SQL/documentation edits.
+
+# Dependency migration regression checks — 16 October 2026
+
+The [T05 packet](../outputs/dependency_remediation_20261016/README.md) records
+fresh package audits separately for full and production trees. Both production
+audits are zero; an upstream development lint advisory and ESLint support/peer
+constraints remain open. A passing build or clean production audit does not
+close the complete-toolchain or wider release gates.
+
+After package or Next/React changes, run backend `npm run build`,
+`npm run typecheck:scripts` and `node --import tsx --test tests/*.test.ts`.
+In `frontend/`, run `npm run lint`,
+`node node_modules/typescript/bin/tsc --noEmit --incremental false`, then
+`npm run build` with no Next dev owning `.next`. Next16 no longer lints during
+build; keep the separate ESLint CLI check. The build script explicitly retains
+Webpack. The Docker build copies `eslint.config.mjs`, not the removed legacy
+ESLint config.
+
+`e2e/dependency-runtime.spec.ts` exercises the actual built application:
+authenticated reload, rapid logout once, invalid-session denial and simulated
+required-source outage with real-source recovery. Scope alert selectors to the
+application because Next also renders an accessibility route announcer. Run it
+with `e2e/descriptive-acceptance-live.spec.ts` and
+`e2e/predictive-research-live.spec.ts` against configured authentication and Gold;
+set `MEDSHIELD_E2E_FACT_VERSION` to the checked source version. The retained
+study/experiment expectations are version-bound, not arbitrary latest data.
+The packet's separately authored actual React19 lifecycle harness uses mocked
+provider/gateway boundaries and cannot establish live provider behavior.
+
+# Operational validator and all-script compiler — 16 October 2026
+
+From `backend/`, run `npm run typecheck:scripts` to compile all `src/**/*.ts`
+and `scripts/**/*.ts` under the runtime's strict settings, without emitted files.
+The ordinary runtime build alone does not check operational scripts. Run
+`node --import tsx --test tests/dashboard-validator.test.ts` for deterministic
+scope/calendar/source/missing-value checks and
+`node --dns-result-order=ipv4first --import tsx scripts/validate-databricks-dashboard.ts`
+for the real read-only Databricks check. The latter requires a usable configured
+warehouse; fixtures and compilation do not substitute for live verification.
+
+The validator checks complete origin–target–lead keys and common scored cases
+within each 3/6/12 retrospective view. Future display length stays distinct from
+the true lead measured from the last observed origin. It checks current Manila
+as-of/display dates, captured release identity and explicit blocked Unknown
+scope. Unpublished future actuals/predictions/bounds remain null. Date fixtures
+inject a clock; they do not depend on the date when tests run. The
+[T07 receipt](../outputs/validator_completion_20261016/README.md) records the
+current compiler coverage, fixture/live executions, review mode and limits.
+
+# Stored predictive research integration verification — 15 October 2026
+
+The system research panel uses the immutable Databricks experiment contract,
+with a separate view from approved forecast serving and gateway benchmarks.
+From `backend/`:
+
+```powershell
+node --import tsx --test tests/predictiveResearch.test.ts tests/dashboard-validator.test.ts
+node node_modules/typescript/bin/tsc --noEmit
+node node_modules/typescript/bin/tsc --noEmit --target es2022 --module commonjs --moduleResolution node --esModuleInterop --skipLibCheck --strict scripts/validate-databricks-dashboard.ts tests/dashboard-validator.test.ts
+```
+
+From `frontend/`, the isolated browser checks run without a live warehouse:
+
+```powershell
+node node_modules/@playwright/test/cli.js test e2e/predictive-research.spec.ts e2e/forecast-validation.spec.ts e2e/dashboard-recovery.spec.ts --workers=1 --output=test-results-predictive-research
+```
+
+These checks cover source/hash identity, origin-keyed comparisons, null/signed
+values, unavailable models, projections' genuine timing and unavailable errors,
+selector/CSV behavior, stale-response suppression and source-failure clearing.
+They do not establish current live warehouse availability or future accuracy.
+Use a new evidence output path when repeating a verification.
+
+The dashboard validator now checks supported company `All` benchmarks separately
+from blocked `Unknown` scope. Calendar/year/product counts and eligible revenue
+are derived from the pinned Gold population rather than fixed study-year counts.
+It preserves null-versus-zero checks. Its live execution requires the configured
+warehouse to be available; a compiler/fixture pass does not count as live success.
+
+The dated live test `e2e/predictive-research-live.spec.ts` verifies the stored
+21-model fact-20 experiment, repeated development target months across origins,
+audit values, CSV identity and projection timing. It intentionally binds the
+retained experiment hash; assess/update the expected evidence before using it
+against another accepted release. Navigate through the actual sidebar so the
+deferred research loader runs. The legacy programmatic `showPage` call alone
+does not exercise this loader. The test uses real authentication and warehouse
+reads; credentials and tokens are not written to its result artifacts.
+
+## Source-bound forecast YoY — 16 October 2026
+
+The scoped [T13 evidence packet](../outputs/predictive_yoy_20261016/README.md)
+records actual commands, source identities, first attempts and remaining limits.
+Baseline tests must cover frozen-input resolution, canonical digest compatibility,
+typed/payload agreement, ambiguous/duplicate/partial groups, source changes,
+eligible positive denominators and explicit null reasons. Numerical checks use
+hand-solvable cases and independent Decimal recomputation of the twelve retained
+projections. A percentage alone does not measure forecast accuracy.
+
+The research fixture and live browser tests check prior-year baseline, forecast
+YoY, CSV provenance/parity and mobile containment alongside unchanged models,
+historical errors and generation/cutoff/lead semantics. Source-failure clearing
+is checked in isolated fixtures without disrupting the live warehouse. Live
+acceptance requires authenticated source-backed results; fixtures and a build
+do not establish it. No new source ingestion, model training or publication is
+part of these checks.
+
 # Bounded predictive error reduction verification — 10 October 2026
 
 The [six-recipe packet](../outputs/predictive_error_optimization_20261010/README.md)

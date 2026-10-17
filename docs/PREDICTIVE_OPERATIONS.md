@@ -137,6 +137,38 @@ issue dates, prior outputs and the inspected-audit limitation. Data/model
 acceptance, business error tolerance, uncertainty and quantity/inventory
 contracts remain separate requirements for operational use.
 
+## Research access in the dashboard — 15 October 2026
+
+The Forecast page has a separate stored-research panel backed by authenticated
+`/api/sales/predictive-research`. It reads immutable candidate run payloads from
+Databricks and verifies artifact/storage identity and the active descriptive
+source before showing a comparison. See the [API contract](API.md#stored-predictive-research--15-october-2026).
+
+Use the experiment, development/audit, cumulative lead and detail-model controls
+to inspect same-case MAE/PHP, WAPE/%, bias and origin-keyed monthly errors.
+Repeated target months from different origins remain separate cases. The CSV
+preserves the selected source/run and evaluation scope. A separate evidence-stage
+choice shows stored selected-model candidate projections with actual generation
+timing and unavailable actual/errors; it does not issue a new forecast.
+
+The stored-projection view also shows the prior-year calendar month, its frozen
+recorded PHP baseline and **Forecast YoY change (%)**. This is the forecast's
+relative change against a positive eligible prior-year observation. It is not
+measured error or observed growth. The baseline comes from the exact immutable
+input used by the selected run; the gateway verifies the content digest and
+retains its separate storage hash. Missing, zero, negative or ineligible
+baselines produce a null percentage and reason; signed raw baseline values are
+preserved. Required warehouse/input-integrity failure makes the research panel
+unavailable and disables export. No new fit, cutoff, issue date or accuracy
+result is created. The projection CSV carries the same fields and provenance.
+
+This read path does not publish a model or replace the approved-release adapter.
+Stored candidate absence differs from source/integrity failure, which clears
+the panel and disables export. The existing offline six-recipe optimization is
+not automatically ingested or served as a local fallback. New experiments need
+the controlled candidate-storage contract and applicable verification before
+they appear. Research access does not waive operational model/data gates.
+
 ## Source review before another model revision
 
 The [10 October continuation packet](../outputs/predictive_readiness_20261010/README.md)

@@ -37,13 +37,105 @@ npm run auth:migrate
 
 Then verify in Supabase that:
 
-- `auth.users` has four users;
-- all four active account rows have a non-null `auth_user_id`;
-- all four begin with `password_reset_required=true`;
+- each active application account has one distinct existing Auth user with matching normalized email;
+- successfully imported accounts have a non-null `auth_user_id` and no retained legacy hash;
+- newly imported accounts require a password change; completed resets stay completed;
 - `anon` and `authenticated` cannot execute the retired password RPCs.
 
 Accounts using placeholder `example.com` addresses are not sent reset or invitation email. Their imported password must be changed through the in-app required reset flow.
 
-## Recovery after an Auth user is deleted
+## Recovery after an Auth user is deleted — repaired 17 October 2026
 
-Deleting a linked user in Supabase Auth intentionally sets `medshield_identity.accounts.auth_user_id` to `NULL`. Login then fails closed before password verification. Do not manually recreate only the Auth user: rerun `npm run auth:migrate` so the hash, server-controlled metadata, UUID link, and reset state are repaired together. The script will reuse a manually recreated user with the same normalized email, but it replaces that user's password hash with the retained legacy hash before completing the link.
+Deleting a linked Auth user sets the account's `auth_user_id` to NULL. Login fails
+closed. A completed migration already cleared the old password hash: ordinary
+`auth:migrate` now rejects this state before any identity write, even if another
+Auth user shares the email. A matching email alone cannot establish ownership.
+Use the explicit server-administrator recovery command below after verifying
+ownership out of band against the organization's approved records/process.
+`--confirm-ownership` records that administrator assertion; the software does not
+independently prove the person's identity. Keep sensitive verification evidence
+outside logs; supply only its opaque review/ticket reference.
+
+The command recovers exactly one active, previously migrated, hash-cleared
+account. It checks account ID plus expected email and role, scans all relevant
+Auth-user pages, rejects conflicts, commits a remote intent audit, creates a fresh
+temporary credential and links through a conditional unchanged-account update.
+It verifies both stores and commits a completion audit. Server-controlled metadata
+and the account both require the existing in-app password change. It never
+restores an old hash, grants a new role or automatically adopts an unrelated user.
+
+From `backend/`, inspect help and prepare a read-only check. Replace the example
+account ID, email, operator and proof reference with the reviewed target:
+
+```powershell
+npm run auth:recover -- --help
+$medshieldRecoveryOperation = [guid]::NewGuid().ToString()
+$medshieldRecoveryArgs = @('--account-id', 'REPLACE_ID', '--expected-email', 'person@company.example', '--operator', 'REPLACE_OPERATOR', '--ownership-reference', 'REPLACE_REVIEW_REF', '--operation-id', $medshieldRecoveryOperation)
+npm run auth:recover -- @medshieldRecoveryArgs
+```
+
+Default execution reads only and prints `status: ready` after a valid preflight.
+Apply requires explicit ownership attestation and a fresh temporary password of
+12–128 characters containing uppercase, lowercase, number and a special character.
+Use a hidden secure-string prompt and pipe the value only through UTF-8 stdin.
+The example sets and restores the shell encoding; PowerShell 7 was the checked
+environment. This avoids silently changing non-ASCII password characters:
+
+```powershell
+$medshieldRecoverySecure = Read-Host 'Fresh temporary password' -AsSecureString
+$medshieldRecoveryPointer = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($medshieldRecoverySecure)
+$medshieldRecoveryOutputEncoding = $OutputEncoding
+try {
+  $OutputEncoding = [Text.UTF8Encoding]::new($false)
+  [Runtime.InteropServices.Marshal]::PtrToStringBSTR($medshieldRecoveryPointer) | npm run auth:recover -- @medshieldRecoveryArgs --apply --confirm-ownership --password-stdin
+} finally {
+  $OutputEncoding = $medshieldRecoveryOutputEncoding
+  [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($medshieldRecoveryPointer)
+  $medshieldRecoverySecure.Dispose()
+}
+```
+
+Never put the password in command arguments, chat, logs or an evidence file.
+Deliver it to the verified owner through the organization's approved secure
+channel, then verify required password change, new login and normal role access.
+The code rejects credential-bearing redirects and does not print provider error
+bodies or password values. It uses the existing ignored backend server secret;
+this is not a public recovery endpoint. No command in this runbook authorizes
+deleting an existing account or Auth identity.
+
+### Partial state and explicit resume
+
+Auth creation, account linking and audit append are separate transactions. A
+timeout or rejected conditional link can leave an operation-tagged Auth user.
+Errors report a bounded phase and whether identity state may have changed. Keep
+the same operation UUID, inspect the specific account/Auth state and fix the
+reported dependency/conflict. Do not delete a potentially linked user or retry
+with a new operation UUID as a cleanup shortcut.
+
+```powershell
+npm run auth:recover -- @medshieldRecoveryArgs --apply --confirm-ownership --resume
+```
+
+Resume accepts only matching account/email/role and server-controlled operation
+metadata. It does not rotate the credential again or relink an already verified
+account. If completion auditing failed after a committed link, resume completes
+verification/auditing and reports no false rollback. Audit attempts are distinct
+entries tied to one recovery operation; they are not one idempotent audit event.
+Complete a partial recovery before the owner changes the temporary password:
+after a successful password change, the original forced-reset operation no
+longer matches the resume contract.
+
+Remote audit persistence is mandatory for recovery. If the standard audit store
+falls back locally, the attempt remains durable evidence but recovery stops
+before further identity changes. Retain local audit files and resolve remote
+persistence; do not treat local-only acknowledgement as completed recovery.
+
+### Verified scope
+
+The [T08 delivery](../outputs/auth_http_remediation_20261017/README.md) retains
+44 independent recovery cases, zero-write migration denials, HTTP status checks
+and a 17-check actual configured recovery/password-change flow on a disposable
+synthetic viewer. Existing table/stable-Auth fingerprints match before/after.
+Synthetic identities were removed; all audit evidence remains. This does not
+establish revocation of every already-issued access token, a full role/load
+matrix, disaster recovery or broader release acceptance.

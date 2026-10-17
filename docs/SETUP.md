@@ -1,10 +1,39 @@
 # MedShield Project Setup
 
+## Next.js workspace and request entry — 17 October 2026
+
+For Windows local editor detection, this machine uses the ignored
+`frontend/.env.development.local` setting `REACT_EDITOR=code`, after verifying
+VS Code is installed. This avoids Next's WMIC process-discovery path without
+requiring deprecated Windows components. Keep this optional editor choice
+machine-local; do not copy credentials or impose a nonexistent editor on other
+machines. User explicitly authorized server startup/restart for the17 October
+chart/editor repair; that scoped authorization takes precedence over the
+general server-control preference below.
+
+Frontend configuration explicitly binds Turbopack and standalone file tracing
+to the frontend directory. Root/backend/frontend lockfiles remain intact;
+independent packages do not need a lockfile deleted to suppress root guessing.
+The Next16 request entry is `frontend/proxy.ts`, with the same matcher and
+unchanged `lib/supabase/middleware.ts` session helper. Lint and Docker copy the
+proxy entry. These convention/config changes do not alter analytical sources
+or grant authentication access. User controls server startup/restart; an agent
+does not automatically start servers for verification. Do not build alongside
+`next dev`; read-only checks against an already-running server are permitted.
+
 ## Architecture
 
 MedShield runs a Next.js frontend and a TypeScript/Express gateway. Supabase owns production authentication and account roles. Databricks Unity Catalog is the sole runtime analytical source. Python analytics code is optional for offline jobs and tests.
 
 ## Prerequisites
+
+The checked frontend uses Next16 and React19; Node22 meets the >=20.9 runtime
+floor and remains the `.nvmrc`/Docker major. Frontend installs use pinned npm11.21.1
+(Node ^20.17 or >=22.9) to avoid npm10's shared optional-dependency tree bug;
+the checked Node22.14 meets both floors. CI and Docker use the same installer.
+Use the frozen lockfiles and commands below. Run `npm run lint` separately before the frontend build;
+it uses flat `eslint.config.mjs`. The [dependency record](../outputs/dependency_remediation_20261016/README.md)
+documents checked versions, open development-tool constraints and exact tests.
 
 - Node.js and npm supported by the checked-in lockfiles.
 - Access to the MedShield Supabase project for production authentication, or intentional local auth for development.
@@ -42,10 +71,10 @@ Do not place Databricks or Supabase server secrets in `NEXT_PUBLIC_*` variables.
 
 ```powershell
 cd backend
-npm install
+npm ci
 
 cd ..\frontend
-npm install
+npm exec --yes --package=npm@11.21.1 -- npm ci
 ```
 
 ## Run locally

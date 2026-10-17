@@ -90,10 +90,22 @@ grant all on medshield_identity.accounts to service_role;
 
 -- These SECURITY DEFINER password functions are retired. Password verification now
 -- belongs exclusively to Supabase Auth through the server-side login bridge.
-revoke all on function public.verify_login(text, text) from public, anon, authenticated;
-revoke all on function public.create_account(text, text, text, text) from public, anon, authenticated;
-revoke all on function medshield_identity.verify_login(text, text) from public, anon, authenticated;
-revoke all on function medshield_identity.create_account(text, text, text, text) from public, anon, authenticated;
-
--- Event-trigger helpers must not be executable by API roles.
-revoke all on function public.rls_auto_enable() from public, anon, authenticated;
+-- Some installations never created the namespaced variants or event helper.
+-- Retire only existing exact signatures; an absent optional function is harmless.
+do $$
+declare
+  signature text;
+begin
+  foreach signature in array array[
+    'public.verify_login(text,text)',
+    'public.create_account(text,text,text,text)',
+    'medshield_identity.verify_login(text,text)',
+    'medshield_identity.create_account(text,text,text,text)',
+    'public.rls_auto_enable()'
+  ] loop
+    if to_regprocedure(signature) is not null then
+      execute format('revoke all on function %s from public, anon, authenticated', signature);
+    end if;
+  end loop;
+end
+$$;

@@ -30,12 +30,12 @@ export const PLANNING_MARKUP = String.raw`
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
         Purchase allocation scenario
       </div>
-      <div class="chart-subtitle">Historical product shortlist with entered demand, stock, packaging and budget assumptions</div>
+      <div class="chart-subtitle">Enter demand, stock, packaging and supplier costs.</div>
     </div>
     <div style="display:flex;gap:8px;align-items:center;">
       <button class="btn btn-secondary" id="planExport" onclick="exportPlanningCSV()" disabled style="font-size:11px;padding:5px 12px;">
         <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:4px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-        Export scenario evidence CSV
+        Export scenario CSV
       </button>
     </div>
   </div>
@@ -43,8 +43,8 @@ export const PLANNING_MARKUP = String.raw`
   <section class="analytical-output-summary" aria-label="Planning finding and evidence quality">
     <p class="analytical-output-takeaway" id="planTakeaway">No scenario has been calculated.</p>
     <p class="analytical-output-scope" id="planScope">Historical shortlist evidence loading. Demand and inventory values are scenario assumptions.</p>
-    <p class="analytical-output-review" id="planReview">Review each product's demand, usable stock, reserve, packaging and supplier costs before solving.</p>
   </section>
+  <p class="chart-subtitle" id="planAssumptions">Scenario only · Product-specific units and entered costs. Operational inventory, expiry and clinical priority are unverified. No purchase is executed.</p>
 
   <!-- Illustrative scenario inputs; these are not verified operational data. -->
   <div class="scenario-bar">
@@ -60,7 +60,7 @@ export const PLANNING_MARKUP = String.raw`
     </button>
   </div>
 
-  <p class="chart-subtitle" id="planPresetNote">Example values are illustrative and fill blank fields only. They are not audited demand, stock, supplier quotes or disease projections.</p>
+  <p class="chart-subtitle" id="planPresetNote">Examples fill blanks only. Demand, stock and supplier values are unverified assumptions.</p>
 
   <div class="plan-controls">
     <label>Buyer Cluster
@@ -103,7 +103,7 @@ export const PLANNING_MARKUP = String.raw`
   </div>
 
   <p style="font-size:11px;color:var(--text-muted);line-height:1.5;">
-    Share of positive-product net sales over trailing closed months. These source labels require identity review; revenue rank does not establish clinical priority. Enter stock, safety buffer and pack costs to calculate a planning scenario.
+    Share of positive-product net sales over trailing closed months. Source identities require review; revenue rank does not establish clinical priority.
   </p>
 
   <div class="plan-scroll">
@@ -120,7 +120,7 @@ export const PLANNING_MARKUP = String.raw`
   <div class="plan-controls">
     <button class="btn btn-primary" id="planSolve" onclick="requestPlanSolve()" disabled style="padding:7px 18px;font-weight:700;">
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:6px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
-      Calculate allocation scenario
+      Calculate scenario
     </button>
     <button class="btn btn-secondary" id="planResetInputs" onclick="resetPlanningDefaults()" style="padding:7px 14px;">
       Fill blank inputs with base example
@@ -129,7 +129,6 @@ export const PLANNING_MARKUP = String.raw`
 
   <p id="planResultStatus" role="status" style="font-weight:700;font-size:12px;color:var(--text-primary);margin-top:14px;"></p>
   <p id="planBudgetSummary" style="font-size:11px;color:var(--text-secondary);"></p>
-  <p class="chart-subtitle" id="planAssumptions">Scenario only · product-specific source units · entered budget in ₱. No operational inventory, expiry or clinical-priority validation is supplied.</p>
 
   <div class="plan-hero-grid" aria-label="Calculated scenario summary">
     <div class="plan-hero-card"><div class="hero-label">Scenario purchase products</div><div class="hero-val" id="kpiPlanReorderCount">Not solved</div><div class="hero-sub" id="kpiPlanReorderSub">Products with purchase packs &gt; 0</div></div>
@@ -154,6 +153,7 @@ export const PLANNING_MARKUP = String.raw`
   <details class="analytical-output-notes" style="margin-top:16px;background:var(--bg-elevated,#f8fafc);border:1px solid var(--border);border-radius:8px;padding:10px 14px;">
     <summary style="cursor:pointer;font-size:12px;font-weight:700;color:var(--text-primary);">Scenario assumptions, allocation method and source</summary>
     <div style="font-size:11px;color:var(--text-secondary);line-height:1.6;margin-top:10px;">
+      <p id="planReview">Review demand, usable stock, reserve, packaging and supplier costs before solving.</p>
       <p><strong>Allocation:</strong> The live gateway meets entered minimum fulfillment where feasible, then adds affordable integer packs to products with lower fulfillment fractions. This scenario does not establish a globally optimal purchase plan.</p>
       <p><strong>Assumptions:</strong> Demand covers the entire selected horizon. Usable stock, protected reserve, units per pack, pack cost, supplier limit, budget and minimum fulfillment come from the entered values.</p>
       <p><strong>Example inputs:</strong> Base demand is 30% of historical source units, rounded with a 100-unit minimum. Higher-demand examples multiply it by 1.45 or 1.20. Example stock is 40% of base demand; reserve is 15% (35% for the 1.45 example); a pack contains 100 units at ₱250, with a 500-pack supplier limit. These values fill blank fields only and do not vary with the horizon. The initial ₱20,000,000 budget is an editable example.</p>
@@ -188,7 +188,7 @@ function clearPlanningResult(message) {
   if (el('kpiPlanBudgetSub')) el('kpiPlanBudgetSub').textContent = 'Entered cost per pack';
   el('planTakeaway').textContent = message || 'No scenario has been calculated.';
   el('planReview').textContent = 'Review each product’s demand, usable stock, reserve, packaging and supplier costs before solving.';
-  el('planAssumptions').textContent = 'Scenario only · product-specific source units · entered budget in ₱. No operational inventory, expiry or clinical-priority validation is supplied.';
+  el('planAssumptions').textContent = 'Scenario only · Product-specific units and entered costs. Operational inventory, expiry and clinical priority are unverified. No purchase is executed.';
   const chart = Chart.getChart(el('planFulfillmentChart'));
   if (chart) chart.destroy();
 }
@@ -285,7 +285,7 @@ function setPlanningData(data, error) {
   ];
 
   el('planInputs').innerHTML = '<thead><tr><th>Product / Historical Reference</th>' + fields.map(f => '<th>' + f[1] + '</th>').join('') + '</tr></thead><tbody>'
-    + data.products.map((p, i) => '<tr><td><strong>' + esc(p.product) + '</strong><br><small style="color:var(--text-muted);">₱' + fmt(p.revenue) + ' · ' + fmt(p.quantity) + ' units · ' + p.observed_months + '/12 observed months</small></td>'
+    + data.products.map((p, i) => '<tr><td><strong>' + esc(p.product) + '</strong><br><small style="color:var(--text-muted);">₱' + fmt(p.revenue) + ' · ' + (typeof p.quantity === 'number' && Number.isFinite(p.quantity) ? fmt(p.quantity) + ' source Qty (unit unverified)' : 'Source Qty unavailable') + ' · ' + p.observed_months + '/12 observed months</small></td>'
       + fields.map(([key, label]) => '<td><input aria-label="' + esc(p.product + ' ' + label) + '" data-plan-index="' + i + '" data-plan-field="' + key + '" type="number" min="' + (key === 'pack_cost' ? '0.01' : ['demand', 'pack'].includes(key) ? '1' : '0') + '" step="' + (key === 'pack_cost' ? '0.01' : '1') + '" oninput="invalidatePlan()"></td>').join('')
       + '</tr>').join('')
     + '</tbody>';

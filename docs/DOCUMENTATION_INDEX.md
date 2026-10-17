@@ -21,7 +21,9 @@ The repository contains more than 100 Markdown files across product documentatio
 | Document | Status | Purpose |
 |---|---|---|
 | [CURRENT_STATE.md](CURRENT_STATE.md) | Canonical | Implemented architecture, data coverage, publication state, and open gates |
+| [Revised Chapters 4–5](chapters/MedShield_Chapter_4_5_Revised_20261016.md) | Complete working chapter revision, 16 October 2026 | Revised source-backed results, five-objective conclusions and recommendations; [revision/evidence record](../outputs/paper_revision_20261016/REVISION_RECORD.md); whole-paper integration/formal acceptance remain open |
 | [STUDY_OVERVIEW.md](STUDY_OVERVIEW.md) | Current study overview, 9 October 2026 | Business problem, original objectives, data, methods, findings and limits |
+| [CAPSTONE_COMPLETION_WORKFLOW.md](CAPSTONE_COMPLETION_WORKFLOW.md) | Current completion workflow, 15 October 2026 | Objective-to-system/evidence/paper delivery loop, source authority, task ownership and distinct acceptance gates; Obsidian is its working navigation view |
 | [Predictive Chapter 4 and 5 research draft](chapters/MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.docx) | Predictive manuscript insert, 10 October 2026 | Complete model comparison, error policy, 2026 projection timing, conclusions and open requirements; wider manuscript integration pending |
 | [REQUIREMENTS.md](REQUIREMENTS.md) | Canonical | Scope, data rules, functional requirements, and definition of done |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | Canonical | Runtime boundaries and failure behavior |
@@ -31,6 +33,7 @@ The repository contains more than 100 Markdown files across product documentatio
 | [TESTING.md](TESTING.md) | Canonical | Verification commands and acceptance checks |
 | [SECURITY.md](SECURITY.md) | Canonical | Authentication, secrets, and trust boundaries |
 | [DATABASE.md](DATABASE.md) | Canonical | Databricks analytical store and Supabase identity/audit roles |
+| [Schema documentation snapshot](../outputs/schema_documentation_20261017/README.md) | Dated structural evidence, 17 October 2026 | Read-only catalog metadata, source inventories and connected Obsidian field dictionaries/relationship maps; later rollout evidence may supersede this snapshot |
 | [IMPLEMENTATION.md](IMPLEMENTATION.md) | Canonical implementation narrative | Current Chapter 4 technical baseline |
 | [ANALYTICS.md](ANALYTICS.md) | Canonical analytics status | Published evidence, limitations, and promotion rules |
 | [PREDICTIVE_OPERATIONS.md](PREDICTIVE_OPERATIONS.md) | Current predictive runbook | Frozen offline evaluation, candidate storage, review and publication workflow |
@@ -41,11 +44,9 @@ The repository contains more than 100 Markdown files across product documentatio
 
 | Document | Status |
 |---|---|
-| [../databricks/sales_restart/README.md](../databricks/sales_restart/README.md) | Current sales Bronze-Silver-Gold notebook source |
-| [../databricks/sales_restart/GUIDE.md](../databricks/sales_restart/GUIDE.md) | Current sales restart operating guide |
-| [../databricks/docs/CURRENT_DATABRICKS_SYSTEM_CONNECTION.md](../databricks/docs/CURRENT_DATABRICKS_SYSTEM_CONNECTION.md) | Current gateway/warehouse connection guide |
-| [../databricks/external_restart/GUIDE.md](../databricks/external_restart/GUIDE.md) | Current DOH/PAGASA restart guide |
-| [../databricks/docs/SALES_RESTART_DASHBOARD_GUIDE.md](../databricks/docs/SALES_RESTART_DASHBOARD_GUIDE.md) | Current Databricks dashboard inspection guide |
+| [../databricks/medshield_project/README.md](../databricks/medshield_project/README.md) | Canonical notebook package and bounded catalog deployment/rollback guidance; dated preparation is not current activation proof |
+| [../databricks/medshield_project/GUIDE.md](../databricks/medshield_project/GUIDE.md) | Project notebook operating guide; check current source identities and publication gates before a run |
+| [API.md](API.md), [SETUP.md](SETUP.md), [CURRENT_STATE.md](CURRENT_STATE.md) | Gateway/warehouse configuration, serving contracts and dated current evidence |
 
 ## Controlled references
 
@@ -81,7 +82,7 @@ Everything under `outputs/**` is evidence for the source, policy, and generation
 ## Process documentation
 
 - `AGENTS.md`, `.agents/**`, and `.skills/**` define repository work practices.
-- [Project memory](PROJECT_MEMORY.md) defines the optional local Obsidian connection, context notes, and session handoffs; memory does not replace canonical project contracts or acceptance evidence.
+- [Project memory](PROJECT_MEMORY.md) defines the local Obsidian progress map, four workstreams, per-turn records, and optional lifecycle capture; canonical project contracts and acceptance evidence remain authoritative.
 - [Analytics lesson review](../lessons/REVIEW.md) assesses the five course decks for helper/agent learning, including corrected examples and review limits; it is educational reference, not a runtime contract.
 - [Analytics Learning Coach](../.agents/analytics-learning-coach.md) and [coaching skill](../.skills/analytics-lesson-coaching/SKILL.md) define applied lesson practice and evaluation responsibilities.
 - `README.md` is the contributor entry point.

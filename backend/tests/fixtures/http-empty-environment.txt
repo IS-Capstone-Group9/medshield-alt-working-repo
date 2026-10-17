@@ -1,0 +1,1 @@
+# Intentionally empty synthetic HTTP fixture environment. No real credentials.

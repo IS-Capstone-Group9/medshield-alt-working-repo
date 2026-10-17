@@ -1,0 +1,101 @@
+import { test, expect } from '@playwright/test'
+import { readFile, writeFile } from 'node:fs/promises'
+import { createHash } from 'node:crypto'
+import { signInToReadyDashboard } from './helpers/dashboard'
+
+test('live Gold experiment, dashboard comparison and exported origin keys agree', async ({ page }, testInfo) => {
+  test.setTimeout(240000)
+  await signInToReadyDashboard(page)
+  await page.locator('[data-dashboard-page="forecast"]').click()
+  await page.locator('#predictiveResearchDetails > summary').click()
+  const panel = page.locator('[data-predictive-research]')
+  await expect(page.locator('#researchStatus')).toContainText('Unpublished research candidate', { timeout: 90000 })
+  await expect(page.locator('#researchRun option:checked')).toContainText('21 configurations')
+  await expect(page.locator('#researchModel option')).toHaveCount(21)
+  await page.selectOption('#researchModel', 'last_value')
+  await page.selectOption('#researchStage', 'development')
+  await page.selectOption('#researchLead', '12')
+  await expect(page.locator('#researchComparison tbody tr')).toHaveCount(21)
+  await expect(page.locator('#researchPoints tbody tr')).toHaveCount(60)
+  await expect(page.locator('#researchScope')).toContainText('24 distinct target months')
+  const developmentKeys = await page.locator('#researchPoints tbody tr').evaluateAll(rows => rows.map(row => {
+    const cells = row.querySelectorAll('td')
+    return { origin: cells[0].textContent, target: cells[1].textContent, lead: cells[2].textContent }
+  }))
+  expect(new Set(developmentKeys.map(row => `${row.origin}|${row.target}|${row.lead}`)).size).toBe(60)
+  expect(new Set(developmentKeys.map(row => row.target)).size).toBe(24)
+
+  await page.selectOption('#researchStage', 'retrospective_audit')
+  const reference = page.locator('#researchComparison tbody tr').filter({ hasText: 'Last observed value' })
+  await expect(reference).toContainText('₱5,834,383.00')
+  await expect(reference).toContainText('37.76%')
+  await expect(page.locator('#researchPoints tbody tr')).toHaveCount(12)
+  const downloadPromise = page.waitForEvent('download')
+  await page.locator('#researchExport').click()
+  const download = await downloadPromise
+  const csv = await readFile((await download.path())!, 'utf8')
+  const records = csv.trim().replace(/^\uFEFF/, '').split('\r\n').map(line => [...line.matchAll(/"((?:[^"]|"")*)"(?:,|$)/g)].map(match => match[1].replace(/""/g, '"')))
+  const headers = records.shift()!
+  const rows = records.map(record => Object.fromEntries(headers.map((name, index) => [name, record[index]])))
+  expect(rows).toHaveLength(12)
+  expect(rows.every(row => row.fact_delta_version === '20' && row.evidence_role === 'retrospective_audit' && row.model_id === 'last_value')).toBe(true)
+  expect(rows.every(row => row.run_id === 'experiment_9889baea07a1f222edc9d2d2576fefc0d2be4bc8e52dc4d9a3ff9919e0056f45')).toBe(true)
+  expect(rows.every(row => row.publication_approved === 'false' && row.activation_allowed === 'false')).toBe(true)
+  expect(Number(rows.find(row => row.target_period === '2025-03')?.absolute_error_php)).toBeCloseTo(14132675.41, 2)
+  await writeFile(testInfo.outputPath('live-audit.csv'), csv)
+
+  await page.selectOption('#researchLead', '3')
+  await expect(page.locator('#researchPoints tbody tr')).toHaveCount(3)
+  await panel.screenshot({ path: testInfo.outputPath('live-research-desktop.png') })
+  await page.setViewportSize({ width: 390, height: 844 })
+  await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
+  await panel.screenshot({ path: testInfo.outputPath('live-research-mobile.png') })
+
+  await page.selectOption('#researchStage', 'projections')
+  await expect(page.locator('#researchPoints tbody tr')).toHaveCount(12)
+  await expect(page.locator('#researchScope')).toContainText('2025-12')
+  await expect(page.locator('#researchScope')).toContainText('2026-10-09')
+  await expect(page.locator('#researchPoints')).toContainText('Unavailable — actuals not supplied')
+  const temporalCells = page.locator('#researchPoints [data-research-field="temporal_status_at_generation"]')
+  await expect(temporalCells.filter({ hasText: /^elapsed$/ })).toHaveCount(9)
+  await expect(temporalCells.filter({ hasText: /^current$/ })).toHaveCount(1)
+  await expect(temporalCells.filter({ hasText: /^future$/ })).toHaveCount(2)
+  await expect(page.locator('#researchPoints').getByRole('columnheader', { name: 'Forecast YoY change (%)', exact: true })).toBeVisible()
+  await expect(page.locator('#researchScope')).toContainText('same frozen input')
+  const projectionDownload = page.waitForEvent('download')
+  await page.locator('#researchExport').click()
+  const projectionCsv = await readFile((await (await projectionDownload).path())!, 'utf8')
+  const projectionRecords = projectionCsv.trim().replace(/^\uFEFF/, '').split('\r\n').map(line => [...line.matchAll(/"((?:[^"]|"")*)"(?:,|$)/g)].map(match => match[1].replace(/""/g, '"')))
+  const projectionHeaders = projectionRecords.shift()!
+  const projectionRows = projectionRecords.map(record => Object.fromEntries(projectionHeaders.map((name, index) => [name, record[index]])))
+  // The retained file is an offline assertion oracle, never a dashboard data source.
+  const frozenInputBytes = await readFile('../outputs/predictive_validation/2026-10-09T13-28-48-501Z/input.json')
+  expect(createHash('sha256').update(frozenInputBytes).digest('hex')).toBe('04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba')
+  const frozenInput = JSON.parse(frozenInputBytes.toString('utf8'))
+  expect(projectionRows).toHaveLength(12)
+  for (let index = 0; index < projectionRows.length; index++) {
+    const row = projectionRows[index]
+    const month = String(index + 1).padStart(2, '0')
+    const baseline = frozenInput.rows.find((point: any) => point.period === `2025-${month}` && point.series_id === 'company:net_sales:PHP')
+    expect(baseline).toMatchObject({ period_closed: true, calendar_closed: true, coverage_status: 'complete', eligible_for_evaluation: true, blockers: [] })
+    expect(baseline.target_value).toBeGreaterThan(0)
+    expect(row).toMatchObject({ origin_period: '2025-12', target_period: `2026-${month}`, lead_months: String(index + 1), prediction: '23493882.59', prior_year_period: `2025-${month}`, prior_year_value_status: baseline.value_status, prior_year_coverage_status: baseline.coverage_status, forecast_yoy_unavailable_reason: '', baseline_input_storage_hash: '04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba', baseline_input_content_hash: '63105c8b81d711748b0aac9df2ee316b1aa1b68202302b2b0f1231a6c2bb4046', actual: '', signed_error_php: '', absolute_error_php: '', error_unavailable_reason: 'actual_unavailable', publication_approved: 'false', activation_allowed: 'false' })
+    expect(Number(row.prior_year_net_sales_php)).toBe(baseline.target_value)
+    const expectedYoy = 100 * (23493882.59 - baseline.target_value) / baseline.target_value
+    expect(Number(row.forecast_yoy_percent)).toBeCloseTo(expectedYoy, 10)
+    const displayed = page.locator('#researchPoints tbody tr').nth(index)
+    await expect(displayed.locator('[data-research-field="prior_year_period"]')).toHaveText(row.prior_year_period)
+    await expect(displayed.locator('[data-research-field="prior_year_net_sales_php"]')).toContainText('₱' + baseline.target_value.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 }))
+    await expect(displayed.locator('[data-research-field="forecast_yoy_percent"]')).toHaveText(expectedYoy.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '%')
+  }
+  await writeFile(testInfo.outputPath('live-projections.csv'), projectionCsv)
+  await panel.screenshot({ path: testInfo.outputPath('live-projections-mobile.png') })
+  await page.setViewportSize({ width: 1440, height: 1000 })
+  await panel.screenshot({ path: testInfo.outputPath('live-projections-desktop.png') })
+  await testInfo.attach('live-source-and-key-check', { body: JSON.stringify({ source: 'live Databricks via authenticated gateway', fact_version: 20, model_count: 21, development_cases: developmentKeys.length, development_distinct_targets: 24, audit_export_rows: rows.length, projection_rows: projectionRows.length, forecast_yoy_reconciled: 12, baseline_input_storage_hash: '04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba', baseline_input_content_hash: '63105c8b81d711748b0aac9df2ee316b1aa1b68202302b2b0f1231a6c2bb4046', operational_activation: false }), contentType: 'application/json' })
+  await page.route('**/api/sales/predictive-research*', route => route.fulfill({ status: 503, contentType: 'application/json', body: JSON.stringify({ error: 'PREDICTIVE_RESEARCH_UNAVAILABLE' }) }))
+  await page.locator('#researchRefresh').click()
+  await expect(page.locator('#researchStatus')).toContainText('unavailable from Databricks Gold')
+  await expect(page.locator('#researchPoints tbody tr')).toHaveCount(0)
+  await expect(page.locator('#researchExport')).toBeDisabled()
+})

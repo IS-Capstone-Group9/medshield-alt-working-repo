@@ -55,7 +55,7 @@ test('all deferred modules retry after transient failure and successful pages st
     const counts: Record<string, number> = {}
     const state: Record<string, { data: any; message?: string }> = {}
     const app = window as any
-    for (const name of ['setSalesHeatmapData', 'setSalesSectorsData', 'setForecastValidationData', 'setExternalRegressionData', 'setPlanningData']) {
+    for (const name of ['setSalesHeatmapData', 'setSalesSectorsData', 'setForecastValidationData', 'setExternalRegressionData', 'setPlanningData', 'setPredictiveResearchData']) {
       app[name] = (data: any, message?: string) => { state[name] = { data, message } }
     }
     const module = { exports: {} as any }
@@ -90,7 +90,7 @@ test('all deferred modules retry after transient failure and successful pages st
     expect(report.recoveredDisplay.data, report.pageName).toEqual({ rows: [], recovered: true })
     expect(report.cached, report.pageName).toBe(true)
   }
-  expect(result.counts).toEqual({ '/api/sales/heatmap': 2, '/api/sales/sectors': 2, '/api/sales/forecast-validation': 2, '/api/sales/external-regression': 2, '/api/sales/planning-shortlist': 2 })
+  expect(result.counts).toEqual({ '/api/sales/heatmap': 2, '/api/sales/sectors': 2, '/api/sales/forecast-validation': 2, '/api/sales/external-regression': 2, '/api/sales/planning-shortlist': 2, '/api/sales/predictive-research': 2 })
   expect(errors).toEqual([])
 })
 

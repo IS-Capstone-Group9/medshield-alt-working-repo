@@ -116,7 +116,7 @@ export const SALES_SECTORS_MARKUP = String.raw`
    <div class="chart-title" id="areaPriorityTitle">Where should commercial attention focus?</div>
    <p class="area-priority-intro">Compare regional sales and buyer ownership for the selected period. Review individual areas in the ranking table.</p>
   </div>
-  <span class="status-pill status-draft">Candidate · review required</span>
+  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="status-pill status-draft">Candidate · review required</span><button type="button" class="btn btn-secondary" id="areaRankingExport" onclick="exportAreaRankingCSV()" disabled>Export area ranking CSV</button></div>
  </div>
  <div class="area-filter-grid" role="group" aria-label="Area prioritization filters">
   <label>Region<select id="sectorRegion" onchange="renderSalesSectors()"><option value="All">All regional groups</option><option value="CALABARZON">CALABARZON (Region IV-A)</option><option value="MIMAROPA">MIMAROPA (Region IV-B)</option><option value="Bicol">Bicol (Region V)</option><option value="Other National">Other National</option></select></label>
@@ -163,8 +163,8 @@ export const SALES_SECTORS_MARKUP = String.raw`
  </section>
 
  <div class="area-chart-grid">
-  <section class="area-chart-panel" aria-labelledby="areaRankChartTitle"><h3 id="areaRankChartTitle">Which regions contribute the most sales?</h3><p id="areaRankChartTakeaway" class="area-chart-takeaway">Regional sales unavailable.</p><div class="area-chart-wrap"><canvas id="sectorRevenueChart" role="img" aria-label="Regional net sales split between actual and gap-estimated evidence" aria-describedby="areaRankChartNote areaRegionalValues"></canvas></div><p id="areaRegionalChartEmpty" class="area-empty" role="status" hidden></p><ul id="areaRegionalValues" class="area-chart-values"></ul><p id="areaRankChartNote">Sales linked to an area, highest net sales first.</p></section>
-  <section class="area-chart-panel" aria-labelledby="areaBuyerTitle"><h3 id="areaBuyerTitle">Which buyer types contribute the most sales?</h3><p id="areaBuyerTakeaway" class="area-chart-takeaway">Buyer sales unavailable.</p><div class="area-chart-wrap"><canvas id="sectorBuyerChart" role="img" aria-label="Buyer type net sales split between actual and gap-estimated evidence" aria-describedby="areaBuyerNote areaBuyerValues"></canvas></div><p id="areaBuyerEmpty" class="area-empty" role="status" hidden></p><ul id="areaBuyerValues" class="area-chart-values"></ul><p id="areaBuyerNote">All selected sales, including unassigned areas.</p></section>
+  <section class="area-chart-panel" aria-labelledby="areaRankChartTitle"><h3 id="areaRankChartTitle">Which regions contribute the most sales?</h3><p>Mapped areas only · Unassigned sales excluded</p><p id="areaRankChartTakeaway" class="area-chart-takeaway">Regional sales unavailable.</p><div class="area-chart-wrap"><canvas id="sectorRevenueChart" role="img" aria-label="Regional net sales split between actual and gap-estimated evidence" aria-describedby="areaRankChartNote areaRegionalValues"></canvas></div><p id="areaRegionalChartEmpty" class="area-empty" role="status" hidden></p><ul id="areaRegionalValues" class="area-chart-values"></ul><p id="areaRankChartNote">Sales linked to an area, highest net sales first.</p></section>
+  <section class="area-chart-panel" aria-labelledby="areaBuyerTitle"><h3 id="areaBuyerTitle">Which buyer types contribute the most sales?</h3><p>All selected sales · Includes unassigned areas</p><p id="areaBuyerTakeaway" class="area-chart-takeaway">Buyer sales unavailable.</p><div class="area-chart-wrap"><canvas id="sectorBuyerChart" role="img" aria-label="Buyer type net sales split between actual and gap-estimated evidence" aria-describedby="areaBuyerNote areaBuyerValues"></canvas></div><p id="areaBuyerEmpty" class="area-empty" role="status" hidden></p><ul id="areaBuyerValues" class="area-chart-values"></ul><p id="areaBuyerNote">All selected sales, including unassigned areas.</p></section>
   <section class="area-chart-panel" style="grid-column:1/-1" aria-labelledby="areaParetoTitle"><h3 id="areaParetoTitle">Regional revenue concentration</h3><p id="areaParetoNote">Cumulative share of mapped regional net sales.</p><div class="area-chart-wrap"><canvas id="sectorParetoChart" role="img" aria-label="Regional-group revenue Pareto chart" aria-describedby="areaParetoNote"></canvas></div></section>
  </div>
  <p id="areaScoreExplanation" class="area-score-explanation">Historical sales score (0–100): 60% sales size + 40% periods with records.</p>
@@ -177,11 +177,11 @@ export const SALES_SECTORS_MARKUP = String.raw`
   <div class="area-client-header">
    <div>
     <div class="area-section-eyebrow" style="color:#1E3A5F">02 · Mapped Client &amp; Account Reference List</div>
-    <div class="chart-title" id="clientRefTitle">Client Reference Registry &amp; Model LGU Anchors</div>
-    <p style="font-size:11.5px;color:var(--text-secondary);margin-top:3px">Direct catalog of 782 verified client accounts, public health offices (PHO/MHO/CHO), hospitals, and pharmacies from <code>docs/MAPPED_CLIENT_REFERENCE.md</code> mapped to ML model anchors.</p>
+    <div class="chart-title" id="clientRefTitle">Proposed client and area reference</div>
+    <p style="font-size:11.5px;color:var(--text-secondary);margin-top:3px">Bundled draft reference from <code>docs/MAPPED_CLIENT_REFERENCE.md</code>. Account labels, proposed areas and LGU references require review; they are not source-recorded ownership, approved geographic joins or validated model inputs. This directory is separate from the Databricks sales ranking above.</p>
    </div>
    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-    <span class="status-pill status-ready" id="clientRefCountBadge">782 Mapped Accounts</span>
+    <span class="status-pill status-draft" id="clientRefCountBadge">782 Reference Entries</span>
     <button class="btn btn-secondary" style="font-size:11px;padding:5px 12px" onclick="exportClientReferenceCSV()" title="Download mapped client reference directory as CSV">
      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
      Export CSV
@@ -237,7 +237,7 @@ export const SALES_SECTORS_MARKUP = String.raw`
       <th scope="col" style="width:140px">Client Type</th>
       <th scope="col" style="width:110px">Region</th>
       <th scope="col" style="width:140px">Area / Scope</th>
-      <th scope="col" style="width:160px">Model Anchor (LGU)</th>
+      <th scope="col" style="width:160px">Proposed LGU reference</th>
       <th scope="col">Context / UI Subtag</th>
      </tr>
     </thead>
@@ -7383,7 +7383,7 @@ function renderClientReferenceTable() {
  const end = Math.min(total, start + CLIENT_REF_PAGE_SIZE);
  const pageItems = clientRefFilteredList.slice(start, end);
 
- if (el('clientRefCountBadge')) el('clientRefCountBadge').textContent = total + ' Mapped Accounts';
+ if (el('clientRefCountBadge')) el('clientRefCountBadge').textContent = total + ' Reference Entries';
  if (el('clientRefShowingCount')) el('clientRefShowingCount').textContent = total > 0 ? ('Showing ' + (start + 1) + '–' + end + ' of ' + total + ' accounts') : 'No accounts matching filter';
  if (el('clientRefPageLabel')) el('clientRefPageLabel').textContent = 'Page ' + clientRefCurrentPage + ' of ' + totalPages;
  if (el('clientRefPrevBtn')) el('clientRefPrevBtn').disabled = clientRefCurrentPage <= 1;
@@ -7413,19 +7413,14 @@ function renderClientReferenceTable() {
 }
 
 function exportClientReferenceCSV() {
- const catalog = clientRefFilteredList.length > 0 ? clientRefFilteredList : (Array.isArray(MAPPED_CLIENT_CATALOG) ? MAPPED_CLIENT_CATALOG : []);
- if (!catalog.length) return;
- const headers = ['Client Code', 'Raw Client Name', 'Client Type', 'Region', 'Area', 'Model Anchor LGU', 'Context Subtag'];
- const rows = catalog.map(item => [
-  '"' + (item.c || '').replace(/"/g, '""') + '"',
-  '"' + (item.n || '').replace(/"/g, '""') + '"',
-  '"' + (item.t || '').replace(/"/g, '""') + '"',
-  '"' + (item.r || '').replace(/"/g, '""') + '"',
-  '"' + (item.p || '').replace(/"/g, '""') + '"',
-  '"' + (item.a || '').replace(/"/g, '""') + '"',
-  '"' + (item.s || '').replace(/"/g, '""') + '"'
- ]);
- const csvContent = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+ const catalog = Array.isArray(clientRefFilteredList) ? clientRefFilteredList : [];
+ const safe = value => /^[=+\-@\t\r]/.test(String(value || '')) ? "'" + value : value;
+ const quote = value => '"' + String(safe(value == null ? '' : value)).replace(/"/g, '""') + '"';
+ const headers = ['Client Code', 'Raw Client Name', 'Client Type', 'Region', 'Proposed Area', 'Proposed LGU Reference', 'Context Subtag', 'reference_status', 'reference_source', 'evidence_basis'];
+ const rows = catalog.map(item => [item.c,item.n,item.t,item.r,item.p,item.a,item.s,
+  'Draft reference; review required','docs/MAPPED_CLIENT_REFERENCE.md',
+  'Bundled proposed reference; not source-recorded ownership or an approved geographic/model join']);
+ const csvContent = [headers,...rows].map(row=>row.map(quote).join(',')).join('\r\n');
  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
  const url = URL.createObjectURL(blob);
  const link = document.createElement('a');
@@ -7434,6 +7429,20 @@ function exportClientReferenceCSV() {
  document.body.appendChild(link);
  link.click();
  document.body.removeChild(link);
+}
+
+let areaRankingSnapshot = null;
+function exportAreaRankingCSV() {
+ const snapshot = areaRankingSnapshot;
+ if (!snapshot || !snapshot.rows.length) return;
+ const text = value => /^[=+\-@\t\r]/.test(String(value || '')) ? "'" + value : value;
+ const quote = value => '"' + String(value == null ? '' : value).replace(/"/g, '""') + '"';
+ const headers = ['rank','area','region','net_sales_php','actual_net_sales_php','gap_estimate_net_sales_php','active_periods','selected_periods','sales_size_score','coverage_score','historical_sales_score','sales_weight_pct','coverage_weight_pct','period_scope','axis_period_start','axis_period_end','selected_start_date','selected_end_date','grain','buyer_filter','region_filter','product_filter','product_label','category_filter','evidence_filter','mapped_net_sales_php','excluded_unmapped_net_sales_php','ranking_scope','mapping_status','source_file','source_checksum','fact_delta_version','dataset_id','policy_version','area_mapping_sha256','product_master_sha256','publication_status'];
+ const values = snapshot.rows.map((row, index) => [index + 1,text(row.area),text(row.region),row.revenue,row.actual,row.estimated,row.activePeriods,snapshot.selectedPeriods,row.salesScore,row.coverageScore,row.score,snapshot.salesWeight,snapshot.coverageWeight,text(snapshot.periodScope),text(snapshot.periodStart),text(snapshot.periodEnd),text(snapshot.selectedStartDate),text(snapshot.selectedEndDate),snapshot.grain,text(snapshot.buyer),text(snapshot.region),text(snapshot.product),text(snapshot.productLabel),snapshot.category,snapshot.evidence,snapshot.mappedRevenue,snapshot.unmappedRevenue,'Mapped geography only; unmapped sales excluded','Proposed geography and buyer classification; review required',text(snapshot.source.file),snapshot.source.checksum,snapshot.release.fact_delta_version,snapshot.release.dataset_id,snapshot.release.policy_version,snapshot.release.area_mapping_sha256,snapshot.release.product_master_sha256,snapshot.release.publication_status]);
+ const csv = [headers,...values].map(row => row.map(quote).join(',')).join('\r\n');
+ const url = URL.createObjectURL(new Blob(['\uFEFF' + csv], {type:'text/csv;charset=utf-8'}));
+ const link = document.createElement('a');link.href=url;link.download='medshield-area-historical-ranking.csv';link.click();
+ setTimeout(() => URL.revokeObjectURL(url),1000);
 }
 
 function setAreaPriorityWeights(salesWeight, coverageWeight) {
@@ -7455,6 +7464,8 @@ function renderSalesSectors(error) {
  error = error || salesSectorsError;
  const el = id => document.getElementById(id);
  if (!el('sectorStatus')) return;
+ areaRankingSnapshot = null;
+ if (el('areaRankingExport')) el('areaRankingExport').disabled = true;
  const esc = value => String(value||'').replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
  const fmtCurrency = value => Number(value||0).toLocaleString('en-PH',{style:'currency',currency:'PHP',maximumFractionDigits:0});
  const fmtCompact = value => new Intl.NumberFormat('en-PH',{style:'currency',currency:'PHP',notation:'compact',maximumFractionDigits:1}).format(Number(value||0));
@@ -7553,6 +7564,17 @@ function renderSalesSectors(error) {
  const revenueCoverageAvailable=scopeRows.length>0&&missingRevenueRows===0&&selectedRevenue>0&&mappedRevenue>=0&&unmappedRevenue>=0;
  const revenueCoverage=revenueCoverageAvailable?mappedRevenue/selectedRevenue*100:null;
  const topThree=ranked.slice(0,3).reduce((total,row)=>total+row.revenue,0),leading=ranked[0];
+ const axisPeriods=descriptiveAxisPeriods();
+ const selectedDateScope=typeof getDiagnosticScope==='function'?getDiagnosticScope():null;
+ areaRankingSnapshot = ranked.length ? {
+  rows:ranked.map(row=>({area:row.area,region:row.region,revenue:row.revenue,actual:row.actual,estimated:row.estimated,activePeriods:row.periods.size,salesScore:row.salesScore,coverageScore:row.coverageScore,score:row.score})),
+  selectedPeriods:availablePeriods,salesWeight:areaPrioritySalesWeight,coverageWeight:areaPriorityCoverageWeight,
+  periodScope:descriptivePeriodLabel(),periodStart:axisPeriods[0]||'',periodEnd:axisPeriods[axisPeriods.length-1]||'',grain:descriptiveUsesYearlyGrain()?'year':descriptiveUsesDailyGrain()?'day':'month',
+  selectedStartDate:selectedDateScope?.start_date||'',selectedEndDate:selectedDateScope?.end_date||'',
+  buyer:cluster,region,product,productLabel:productLabels.get(product)||'All products',category,evidence,mappedRevenue,unmappedRevenue,
+  source:{file:salesSectorsData.source.file,checksum:salesSectorsData.source.checksum},release:{...(salesSectorsData.source.release||{})}
+ } : null;
+ if(el('areaRankingExport'))el('areaRankingExport').disabled=!areaRankingSnapshot;
 
  /* Regional Granularity & Rollup Aggregation Computation */
  const regionalRollups = regionalGroupNames.map(regName => {
@@ -7584,8 +7606,8 @@ function renderSalesSectors(error) {
    const isSel = region === regItem.name;
    return '<button type="button" class="area-region-box ' + (isSel ? 'active' : '') + '" data-rollup-region="'+esc(regItem.name)+'" aria-pressed="'+isSel+'" title="Filter by ' + esc(regItem.name) + '">' +
     '<span class="area-region-name"><span>' + esc(regItem.name) + '</span><span class="status-pill status-draft" style="font-size:9px">' + regItem.count + ' ' + (regItem.count===1?'area':'areas') + '</span></span>' +
-    '<span class="area-region-rev" style="display:block">' + fmtCompact(regItem.revenue) + '</span>' +
-    '<span class="area-region-sub"><span>' + (regItem.share==null?'Share unavailable':fmtPct(regItem.share)+' of linked sales') + '</span><span>' + (regItem.leading ? ('Highest sales: ' + esc(regItem.leading.area)) : 'No area') + '</span></span>' +
+    '<span class="area-region-rev" style="display:block">' + (regItem.count ? fmtCompact(regItem.revenue) : 'No mapped records') + '</span>' +
+    '<span class="area-region-sub"><span>' + (!regItem.count || regItem.share==null?'Share unavailable':fmtPct(regItem.share)+' of linked sales') + '</span><span>' + (regItem.leading ? ('Highest sales: ' + esc(regItem.leading.area)) : 'No area in selection') + '</span></span>' +
    '</button>';
   }).join('') +
   '<button type="button" class="area-region-box total ' + (region === 'All' ? 'active' : '') + '" data-rollup-region="All" aria-label="All regions" aria-pressed="'+(region==='All')+'">' +

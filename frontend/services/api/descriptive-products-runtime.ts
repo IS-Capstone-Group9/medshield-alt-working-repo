@@ -189,7 +189,8 @@ function renderProductPrioritizationTimeline() {
   const evidenceDetails = document.createElement('details');
   const evidenceSummary = document.createElement('summary'); evidenceSummary.textContent = 'Evidence, ABC method and display limits';
   evidenceDetails.append(evidenceSummary, note);
-  scope.append(title, finding, summaryNote, policyNote, reviewPrompt, controls, readCue, displayNote, evidenceDetails);
+  evidenceDetails.append(reviewPrompt, readCue, displayNote);
+  scope.append(title, finding, summaryNote, policyNote, controls, evidenceDetails);
   // Keep the primary sales and full-population share comparisons side by side.
   let analyticalLayout = document.getElementById('productAnalyticalLayout');
   if (!analyticalLayout) {
@@ -280,7 +281,11 @@ function renderProductPrioritizationTimeline() {
   });
   setTitle('productBarChart', 'Which product names contribute the most sales?', 'Top ' + top.length + ' selected names, ranked by positive amounts.', 'Up to 10 names from the selected cohort. Positive amounts and negative adjustments share one row; their signed sum is net sales. Source identities require review. Values are unavailable when the contribution basis does not reconcile.');
   let salesValues = document.getElementById('productSalesValues');
-  if (!salesValues) { salesValues = document.createElement('ul'); salesValues.id = 'productSalesValues'; salesValues.className = 'product-exact-values'; rankingCard?.append(salesValues); }
+  if (!salesValues) {
+    const details = document.createElement('details'); details.id = 'productExactAmounts'; details.className = 'chart-method';
+    const summary = document.createElement('summary'); summary.textContent = 'Exact amounts and negative adjustments'; details.append(summary);
+    salesValues = document.createElement('ul'); salesValues.id = 'productSalesValues'; salesValues.className = 'product-exact-values'; details.append(salesValues); rankingCard?.append(details);
+  }
   salesValues.replaceChildren();
   top.forEach(row => { const item = document.createElement('li'); item.textContent = row.name + ': ' + (result.missingContributionRows ? 'positive amounts and adjustments unavailable' : 'positive ' + formatCurrency(row.positiveSales) + ', negative adjustments ' + formatCurrency(row.returnsValue)) + ', net sales ' + formatCurrency(row.revenue) + '.'; salesValues.append(item); });
   barCanvas?.setAttribute('aria-describedby', 'productSalesReadCue productSalesValues');
