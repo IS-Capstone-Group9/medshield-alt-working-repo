@@ -4,6 +4,31 @@ Canonical notebook package: `databricks/medshield_project`. This replaces the ol
 `sales_restart` paths without undoing their staged deletion. Nothing here grants
 business approval or makes an offline file a dashboard data source.
 
+## Current warehouse check — 20 October 2026
+
+The serving fact is Delta 20 on `sales_restart_gold_v7_independent_catalog`, with
+37,728 unique accepted records and the current mapping/catalog identities.
+The five inspected serving view definitions match this package; STL has 72
+source-matched 2020–2025 months, and the current research run retains 21 models
+bound to fact 20. The study remains 2017–2025. Recent sector/context/UI changes
+are implemented in the gateway/frontend and do not require rebuilding 01/02/03.
+
+One derived-mart mismatch remains: 81 rate cells across four aggregate marts
+have a margin percentage despite a negative matching revenue basis. The local
+`with_margin_rate` guard now requires a positive basis. The
+[targeted maintenance patch](maintenance/MARGIN_RATE_PATCH.md) is prepared,
+with exact version/count drift guards, read-only previews and immutable-field
+readback checks; it has **not** been applied remotely. Signed financial amounts,
+fact 20 and frozen model inputs remain unchanged. See the
+[warehouse review](../../outputs/warehouse_review_20261020/README.md) for actual
+verification and limits. Notebook source bytes could not be exported with the
+current token; table/view/run readback is the evidence for currency.
+
+The category-only sequence below records the historical predecessor 19→20
+publication procedure. Its bound descriptor is not an instruction to replay it
+against the now-serving 20 baseline. A future source/category rebuild needs its
+own current predecessor capture, review and publication evidence.
+
 ## Catalog-only deployment sequence
 
 Follow [the exact catalog deployment and rollback runbook](../../docs/CATALOG_DEPLOYMENT.md).
@@ -1661,7 +1686,7 @@ def metric_aggregations():
 
 def with_margin_rate(frame):
     return frame.withColumn("weighted_gross_margin_pct", F.when(
-        F.col("margin_net_sales_basis").isNotNull() & (F.col("margin_net_sales_basis") != 0),
+        F.col("margin_net_sales_basis").isNotNull() & (F.col("margin_net_sales_basis") > 0),
         F.round(F.col("gross_margin_amount") / F.col("margin_net_sales_basis") * 100, 4)
     ))
 

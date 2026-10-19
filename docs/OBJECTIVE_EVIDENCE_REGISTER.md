@@ -1,5 +1,23 @@
 # MedShield objective, scope and evidence register
 
+## External-context delivery and scoped verification — 20 October 2026
+
+The [20 October audit](../outputs/analytics_external_audit_20261020/README.md) adds scoped Gold-backed disease/weather context and corrects buyer filtering; it independently checks financials, stored forecast scores, STL, ABC and scenario arithmetic. Working Chapters 3–5 record the bounded method/results. Private/Quezon context is exploratory:0 approved joins; missing 2025 PAGASA and DOH reporting/revision timestamps remain dependencies. No operational demand model, urgency truth, procurement outcome or original-objective acceptance is inferred. Existing model selection and publication status remain unchanged.
+
+
+## User-confirmed temporal scope — 20 October 2026
+
+Adrian explicitly directs the current project study to cover **2017–2025**,
+including the earlier gathered records. 2026 actuals remain pending client
+confirmation. This supersedes the former dashboard restriction to 2021–2025
+and the classification of 2017–2020 as context only. The working methodology
+guide and Chapters 4–5 follow this temporal direction; align working Chapters
+1–3 during manuscript assembly while preserving archived source documents and
+their original quotations below. No academic sign-off is inferred from a code
+change. Territorial/unit/model-method and actual business acceptance criteria
+remain independently traceable; the existing 2020–2025 fitted/evaluated window
+does not expand retroactively or establish new model accuracy.
+
 ## Supporting-revenue forecast YoY delivered — 16 October 2026
 
 The accepted supporting-revenue presentation now has an implemented and checked

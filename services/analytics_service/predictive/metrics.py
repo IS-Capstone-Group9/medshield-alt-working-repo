@@ -5,6 +5,8 @@ import math
 def score(pairs):
     if not pairs:
         return dict(n=0, mae=None, rmse=None, wape=None, bias=None, normalized_bias=None, reason='No eligible pairs')
+    if any(not math.isfinite(value) for pair in pairs for value in pair):
+        raise ValueError('Nonfinite evaluation value')
     errors = [predicted - actual for actual, predicted in pairs]
     denominator = sum(abs(actual) for actual, _ in pairs)
     return dict(n=len(pairs), mae=sum(map(abs, errors)) / len(pairs),
@@ -28,6 +30,9 @@ def compare(points, model_ids):
                 raise ValueError('Duplicate evaluation point')
             indexes[p['model_id']][k] = p
     common = set.intersection(*(set(v) for v in indexes.values())) if indexes else set()
+    for k in common:
+        if len({index[k]['actual'] for index in indexes.values()}) != 1:
+            raise ValueError('Models disagree on the actual for a common evaluation key')
     return {model: {'scored': score([(p['actual'], p['prediction']) for p in index.values()]),
                     'common': score([(index[k]['actual'], index[k]['prediction']) for k in sorted(common)]),
                     'common_keys': [list(k) for k in sorted(common)]}
@@ -39,10 +44,22 @@ def interval(prediction, residual_points, cutoff, lead, level):
     support = {0.8: 20, 0.95: 40}
     if level not in support:
         raise ValueError('Unsupported nominal level')
+    if prediction is not None and not math.isfinite(prediction):
+        raise ValueError('Nonfinite calibration prediction')
     # Deduplicate overlapping/accidentally repeated fold evidence; no pooling of leads.
-    errors = {key(p): abs(p['actual'] - p['prediction']) for p in residual_points
-              if p['lead_months'] == lead and month(p['target_period']) <= cutoff
-              and p['prediction'] is not None and p.get('actual') is not None}
+    errors = {}
+    evidence = {}
+    for p in residual_points:
+        if p['lead_months'] != lead or month(p['target_period']) > cutoff or p['prediction'] is None or p.get('actual') is None:
+            continue
+        values = (p['model_id'], p['actual'], p['prediction'])
+        if not all(math.isfinite(value) for value in values[1:]):
+            raise ValueError('Nonfinite calibration value')
+        k = key(p)
+        if k in evidence and evidence[k] != values:
+            raise ValueError('Conflicting calibration evidence for one evaluation key')
+        evidence[k] = values
+        errors[k] = abs(p['actual'] - p['prediction'])
     result = dict(level=level, lower=None, upper=None, sample_count=len(errors),
                   method='lead_specific_empirical_absolute_error',
                   reason='Insufficient lead-specific out-of-fold support')

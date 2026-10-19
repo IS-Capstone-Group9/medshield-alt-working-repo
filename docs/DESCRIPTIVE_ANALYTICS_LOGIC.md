@@ -1,5 +1,122 @@
 # Descriptive Analytics Logic
 
+## Remaining density findings addressed — 20 October 2026
+
+Product table instructions are shortened; expanded publication limits share the
+existing evidence notes. Area charts keep concise known-sales totals and their
+mapped/all scope labels; full total/exclusion explanations share the calculation
+notes. Weather defaults to Compact weather measurements, retaining observed zero
+and per-row missing values. Full evidence restores the original twelve columns;
+switching columns is local, with provider changes recalculating availability.
+Forecast and Planning explanations also use their existing notes while keeping
+errors, source/publication/availability and scenario/acknowledgement visible.
+See the [five-page delivery](../outputs/ui_density_followup_20261020/README.md).
+
+## Compact chart explanations — 20 October 2026
+
+Overview keeps short scope/coverage and candidate/mapping labels visible. Repeated
+endpoint amounts, reading guidance, buyer mapping details and contribution methods
+are available in closed disclosures. The gross-margin formula and financial-basis
+table expand below its chart. Sales Diagnostics replaces its long reporting-scope
+banner with `About this sales view` and puts endpoint prose in `Trend summary`.
+Recorded values, coverage, filters, missing states and CSV remain unchanged by this
+presentation change. See the [density review and verification](../outputs/ui_text_simplification_20261020/README.md).
+
+## Current 2017–2025 study — 20 October 2026
+
+The user explicitly confirms 2017–2025 as the study, including earlier gathered
+records. All Time now includes all nine years; the former original-study versus
+additional-context selector is removed. Both Overall and selected-sector panels,
+coverage, summary and CSV use this scope. 2026 actuals remain pending client
+confirmation. Historical year labels show the year without a `Partial` suffix:
+the client-provided records are the submitted dataset. Values tables retain
+recorded sales/profit month counts. An absent month does not establish either
+omitted files or zero sales. Annual totals still sum the eligible supplied
+records; Y/Y comparisons still use matched recorded months. Custom selections
+that cut through a year show `selected dates`, and the current year retains YTD.
+This dated direction supersedes the earlier 2021–2025 display decision below.
+
+Expanded-history reconciliation also checks independently eligible profit:
+a sector-month with gross profit and no independently eligible net sales retains
+its profit without becoming observed zero sales. Annual series/CSV disclose
+sales and profit month counts separately; supported profit KPIs sum eligible
+profit independently of sales coverage. Margin uses the matching eligible profit
+and revenue basis. Retained model/STL windows and forecast publication are
+unchanged. See [scope correction and checks](../outputs/study_scope_2017_2025_20261020/README.md).
+
+## Overall and selected-sector trends — 19 October 2026
+
+The primary sales/profit card now shows two simultaneous line charts: **Overall ·
+All sectors** stays on the left, while **Government / Private / Internal / Unknown**
+selects the right chart. Government is the initial selection. The original
+2021–2025 study remains the default; earlier history stays additional context.
+Dates, daily/monthly/yearly grain, single/Y/Y mode and the measure selector apply
+to both charts. Both use identical peso bounds (including signed adjustments),
+time-axis positions and measure colors. Daily detail retains the existing
+sales-only contract. Annual Y/Y charts use each scope's matched observed months;
+monthly/daily overlays retain unavailable prior matches rather than inventing
+observations. Different scope coverage remains explicit.
+
+The sector selector appears above the right chart. Supporting KPIs, margin,
+calendar and their existing detailed table continue to follow that selection,
+with an explicit scope notice. Selecting a sector never replaces the Overall
+chart's data. Each trend panel has its own coverage, narrative, keyboard-accessible
+value table and CSV. CSVs carry scope, release, evidence, displayed measure and
+prior-period fields when Y/Y is selected. Missing observations export as blanks;
+recorded zero and negative values remain numbers. Unknown displays an explicit
+empty state when it has no observations. Chart-point investigation retains All
+for the reference and the selected sector for detail.
+
+The contribution table remains below both charts and always includes all four
+sectors, with the selected row highlighted and an All reference total. Its CSV
+exports the entire displayed comparison. Narrow screens stack Overall first,
+then the selected sector. This changes presentation and explicit scope handling;
+the existing gateway/Gold source and metric/publication contracts are unchanged.
+See the [implementation and verification record](../outputs/overall_sector_graphs_20261019/README.md).
+
+## Sector diagnosis and chronological margin — 19 October 2026
+
+The overview now defaults to the original 2021–2025 study view, with an explicit
+additional-history option. All/Government/Private/Internal/Unknown scopes the
+sales/profit trend, summary KPIs, narratives, observed coverage, calendar and
+displayed-trend CSV. Missing sector observations stay unavailable; observed
+zero/signed values remain numeric. Other analytical pages retain their own
+scope. The former unlabeled sales/profit scatter is replaced by a chronological
+gross-margin percentage chart and visible, keyboard-accessible financial/value
+table. Its numerator and denominator use the same margin-eligible population.
+
+The year-comparison table defaults to 2024–2025 and provides both margins,
+signed peso changes, full-company contribution shares, source-evidence counts,
+scope-aligned export and sector/month/product/raw-area inspection. It matches
+company months before grouping. Group absence in that accounting bridge is
+labelled separately from missing trend observations. Selected-sector rows retain
+a labelled All reference. API/chart/table/export amounts are source reconciled.
+
+[Checked findings](../outputs/sector_diagnostic_20261019/FINDINGS.md) explain the
+Government contribution and the adjusted/estimated allocation limitation.
+Quezon/Batangas buyer classification remains proposed despite approved
+geographic mapping. A generic GOVERNMENT label does not support provincial or
+individual-account attribution. Eligible margin-basis coverage differs between
+years, so rate changes do not prove whole-sector profitability. These changes
+supersede earlier descriptions of the overview's sales/profit scatter, without
+changing original data/model/business/academic acceptance gates.
+
+## D9/D10 completion review — 17 October 2026
+
+The [prefilled source-owner and acceptance review](../outputs/descriptive_closure_20261017/START_HERE.md)
+consolidates the remaining descriptive exits. It retains nine yearly evidence
+statuses, ten unknown calendar months, a prioritized exact-key product batch,
+and an intended-scope demonstration checklist. Human decision fields remain
+unset and are preserved on regeneration. Source reconciliation checks do not
+independently establish complete reporting or original physical units.
+D9 and D10 remain open in the forty-point tracker until actual evidence and
+attributed scope/business decisions satisfy their exits. No descriptive scope
+amendment or live-data/model change is created by preparing this review.
+The separate [executed technical recheck](../outputs/descriptive_closure_20261017/RESULTS.md)
+records13 passing chart/live-view/Area-export/Product-export scenarios. These
+are fresh implementation checks, while the review builder's22 checks inspect
+retained evidence and source hashes. Neither supplies actual D9/D10 acceptance.
+
 ## Purpose
 
 Descriptive analytics is the first analytics layer for MedShield. It answers what happened in the historical sales data before the group moves to predictive forecasting or prescriptive scenario planning.

@@ -57,13 +57,17 @@ export function overviewMatchedGrowth(
 }
 
 export const OVERVIEW_ANALYTICS_SCRIPT = `const overviewDescriptiveSummary = ${overviewDescriptiveSummary.toString()};\nconst overviewMatchedGrowth = ${overviewMatchedGrowth.toString()};` + String.raw`
-let overviewTrendMeasure = 'sales';
+let overviewTrendMeasure = 'both';
 
 function renderOverviewTrendSelection() {
   const canvas = document.getElementById('overviewBaselineChart');
   const chart = canvas && Chart.getChart(canvas);
   const card = canvas?.closest('.chart-card');
   if (!chart || !card) return;
+  if (typeof overviewSectorData !== 'undefined' && overviewSectorData) {
+    renderOverviewTrendComparison(chart, card);
+    return;
+  }
   let select = document.getElementById('overviewTrendMeasureSelect');
   if (!select) {
     const control = document.createElement('label');
@@ -73,9 +77,12 @@ function renderOverviewTrendSelection() {
     select = control.querySelector('select');
     select.addEventListener('change', () => { overviewTrendMeasure = select.value; renderOverviewTrendSelection(); });
     const finding = document.createElement('p'); finding.id = 'overviewTrendReading'; finding.className = 'analytical-finding'; finding.setAttribute('aria-live', 'polite');
-    card.querySelector('.chart-wrap').before(finding);
+    const values = document.createElement('details'); values.id = 'overviewTrendSummary'; values.className = 'chart-method';
+    const heading = document.createElement('summary'); heading.textContent = 'Trend summary and reading notes';
+    values.append(heading, finding);
+    card.querySelector('.chart-wrap').after(values);
     const cue = document.createElement('p'); cue.id = 'overviewTrendReadCue'; cue.className = 'analytical-review-prompt';
-    card.querySelector('.chart-wrap').after(cue);
+    values.append(cue);
   }
   const daily = descriptiveUsesDailyGrain();
   if (daily) overviewTrendMeasure = 'sales';
@@ -101,7 +108,7 @@ function renderOverviewTrendSelection() {
     if (!observed.length) return 'No recorded ' + name + ' in this selection; estimates cannot establish an observed trend.';
     const first = observed[0], last = observed[observed.length - 1];
     if (observed.length === 1) return 'Only one period has recorded ' + name + ' (' + descriptivePointLabel(first.period) + '): ' + formatCurrency(first[metric]) + '. More observations are needed to describe movement.';
-    if (/Partial|YTD/.test(descriptivePointLabel(first.period) + ' ' + descriptivePointLabel(last.period))) return 'Recorded ' + name + ' totals: ' + descriptivePointLabel(first.period) + ' ' + formatCurrency(first[metric]) + '; ' + descriptivePointLabel(last.period) + ' ' + formatCurrency(last[metric]) + '. Incomplete-year coverage; this is not a like-for-like growth comparison.';
+    if (descriptiveYearNeedsCoverageNote(first.period) || descriptiveYearNeedsCoverageNote(last.period)) return 'Recorded ' + name + ' totals: ' + descriptivePointLabel(first.period) + ' ' + formatCurrency(first[metric]) + '; ' + descriptivePointLabel(last.period) + ' ' + formatCurrency(last[metric]) + '. Totals use client-provided records; compare years using matched recorded months.';
     const change = Number(last[metric]) - Number(first[metric]);
     return 'From ' + descriptivePointLabel(first.period) + ' to ' + descriptivePointLabel(last.period) + ', recorded ' + name + (change > 0 ? ' rose by ' : change < 0 ? ' fell by ' : ' was unchanged at ') + formatCurrency(change === 0 ? first[metric] : Math.abs(change)) + '.';
   };
@@ -109,7 +116,7 @@ function renderOverviewTrendSelection() {
     ? describe('revenue', 'sales') + ' ' + describe('income', 'gross profit')
     : overviewTrendMeasure === 'profit' ? describe('income', 'gross profit') : describe('revenue', 'sales');
   document.getElementById('overviewTrendReadCue').textContent = (daily ? 'Daily detail shows sales only. ' : 'Both measures use the same peso scale. ')
-    + 'Dashed sections and triangles are gap estimates; unavailable gaps stay blank. Endpoint change does not imply continuous growth or explain a cause.';
+    + (typeof overviewSectorData!=='undefined'&&overviewSectorData?'Observed records only; unavailable gaps stay blank. ':'Dashed sections and triangles are gap estimates; unavailable gaps stay blank. ')+'Endpoint change does not imply continuous growth or explain a cause.';
   const title = card.querySelector('.chart-title');
   const titleText = title && Array.from(title.childNodes).find(node => node.nodeType === 3);
   if (titleText) titleText.textContent = overviewTrendMeasure === 'profit' ? 'How did gross profit change? ' : overviewTrendMeasure === 'both' ? 'How did sales and gross profit change? ' : 'How did sales change? ';
@@ -155,13 +162,17 @@ function installOverviewDecisionLayout(page) {
 function renderOverviewDecisionSummary(page, summary, source) {
   installOverviewDecisionLayout(page);
   page.querySelector('#kpiOverviewTotalRevenue').closest('.kpi-card').querySelector('.kpi-label').textContent = 'Net sales';
-  document.getElementById('overviewPeriodCaption').textContent = descriptivePeriodLabel();
+  document.getElementById('overviewPeriodCaption').textContent = (typeof overviewBuyerSector === 'undefined' ? '' : overviewBuyerSector + ' · ') + descriptivePeriodLabel();
   const observed = getDescriptiveMonthlyRows().filter(row => !descriptiveIsFuturePeriod(row.period) && Number.isFinite(Number(row.revenue)));
-  const hasProfit = observed.length > 0 && observed.every(row => row.income != null && Number.isFinite(Number(row.income)));
+  const independentProfit = typeof overviewSectorData !== 'undefined' && overviewSectorData;
+  const profitRows = independentProfit ? getDescriptiveSourceRows().filter(row => descriptivePeriodIncludes(row.period)
+    && !descriptiveIsFuturePeriod(row.period) && row.income != null && Number.isFinite(Number(row.income))) : observed;
+  const hasProfit = independentProfit ? profitRows.length > 0 : observed.length > 0 && observed.every(row => row.income != null && Number.isFinite(Number(row.income)));
+  document.getElementById('kpiOverviewTotalRevenue').textContent = observed.length ? formatCurrency(observed.reduce((sum,row)=>sum+Number(row.revenue),0)) : 'No observations';
   document.getElementById('kpiOverviewGrossProfit').textContent = hasProfit
-    ? formatCurrency(observed.reduce((sum,row) => sum + Number(row.income),0)) : 'Unavailable';
+    ? formatCurrency(profitRows.reduce((sum,row) => sum + Number(row.income),0)) : 'Unavailable';
   document.getElementById('overviewGrossProfitNote').textContent = hasProfit
-    ? 'Before operating expenses · ' + observed.length + ' observed source periods'
+    ? 'Before operating expenses · ' + profitRows.length + (independentProfit ? ' periods with eligible profit; sales coverage may differ' : ' observed source periods')
     : 'Complete profit values are required for all observed sales periods.';
   const elapsed = summary.coverage.reduce((sum,row) => sum + row.total,0);
   const count = summary.coverage.reduce((sum,row) => sum + row.observed,0);
@@ -201,7 +212,7 @@ function renderOverviewAnalytics() {
       + '<section class="chart-card" aria-labelledby="overviewMonthAverageTitle"><div class="chart-header"><div><h2 class="chart-title" id="overviewMonthAverageTitle">Average sales by calendar month</h2><p class="chart-subtitle" id="overviewMonthAverageNote"></p></div></div><div class="chart-wrap overview-summary-chart"><canvas id="overviewMonthAverageChart" role="img" aria-label="Average observed net sales by calendar month; values and sample counts in the table below"></canvas></div><p id="overviewMonthAverageEmpty" class="overview-empty-note" role="status" hidden></p><details class="overview-chart-notes"><summary>Method and observed month counts</summary><p>Each bar is the mean of observed year-month net-sales totals in the selected period. Sample counts may differ. Zero and negative sales are retained; missing months and gap estimates are excluded. Partial-month totals can affect comparisons. This describes sales activity and does not establish recurring seasonality or disease effects. Display grain and Y/Y matching do not change this selected-scope summary.</p><div class="overview-summary-table"><table id="overviewMonthAverageTable" class="product-table" aria-label="Calendar-month average sales and observed sample counts"></table></div></details></section>'
       + '<section class="chart-card" aria-labelledby="overviewCoverageTitle"><div class="chart-header"><div><h2 class="chart-title" id="overviewCoverageTitle">Observed months by year</h2><p class="chart-subtitle" id="overviewCoverageNote"></p></div></div><div class="chart-wrap overview-summary-chart"><canvas id="overviewCoverageChart" role="img" aria-label="Observed and unavailable months by year within the selected elapsed period; exact counts in the table below"></canvas></div><p id="overviewCoverageEmpty" class="overview-empty-note" role="status" hidden></p><details class="overview-chart-notes"><summary>Coverage denominator and values</summary><p>Each denominator counts calendar months intersecting the selected period through the current Philippine month. Future months are excluded. A month is observed when it has a finite source net-sales total, including zero or negative sales. Current and boundary months may be partial. These counts do not prove complete reporting within a month. Display grain and Y/Y matching do not change this selected-scope summary.</p><div class="overview-summary-table"><table id="overviewCoverageTable" class="product-table" aria-label="Observed and unavailable month counts with selected-period denominators"></table></div></details></section></div></details>'
       + '<div class="chart-card"><div class="chart-header"><div><h2 class="chart-title">Monthly sales calendar</h2><p class="chart-subtitle" id="overviewCalendarNote"></p></div></div><div id="overviewSalesCalendar"></div><p class="overview-calendar-key"><span>Blue: sales</span><span>Red: negative sales</span><span>White: zero</span><span>Gray: unavailable</span></p><details class="overview-chart-notes"><summary>How to read this calendar</summary><p>Monthly net sales use the same color scale across the selection. Darker cells show larger absolute amounts. Select a month for its value. Estimates are excluded. Gray cells have no observation in the selected scope. Partial months and coverage differences can affect comparisons; this is not a seasonality index. Display grain and Y/Y matching do not change this selected-scope calendar.</p><p id="overviewCalendarMethod"></p></details></div>'
-      + '<details id="overviewProfitExplore" class="chart-card overview-profit-explore"><summary>Explore sales and profit</summary><div class="overview-profit-content"><div class="chart-header"><div><h2 class="chart-title">Sales and gross profit</h2><p class="chart-subtitle" id="overviewProfitNote"></p></div></div><div class="chart-wrap"><canvas id="overviewProfitScatter" role="img" aria-label="Observed net sales versus gross profit by period"></canvas></div><details class="overview-chart-notes"><summary>What these points represent</summary><p id="overviewProfitMethod"></p></details></div></details>';
+      + '<section id="overviewProfitExplore" class="chart-card overview-profit-explore"><div class="chart-header"><div><h2 class="chart-title">How did gross margin change over time?</h2><p class="chart-subtitle" id="overviewProfitNote"></p></div></div><div class="chart-wrap"><canvas id="overviewMarginChart" role="img" aria-label="Chronological gross-margin percentage; exact sector, period, financial basis and coverage in the table below"></canvas></div><details class="chart-method"><summary>Margin calculation, values and coverage</summary><p id="overviewProfitMethod" class="overview-chart-notes"></p><div class="overview-summary-table" tabindex="0" role="region" aria-label="Scrollable trend values"><table id="overviewTrendValues" class="product-table" aria-label="Selected sector trend values and coverage"></table></div></details></section>';
     section.querySelectorAll('#overviewProfitExplore, #overviewPatternDetails').forEach(details => details.addEventListener('toggle', event => {
       if (event.target.open) requestAnimationFrame(() => {
         event.target.querySelectorAll('canvas').forEach(canvas => {
@@ -211,7 +222,8 @@ function renderOverviewAnalytics() {
       });
     }));
     const trendCard = document.getElementById('overviewBaselineChart')?.closest('.chart-card');
-    if (trendCard) trendCard.after(section);
+    if (document.getElementById('overviewSectorComparison')) document.getElementById('overviewSectorComparison').after(section);
+    else if (trendCard) trendCard.after(section);
     else page.append(section);
   }
   const monthlySource = descriptivePeriod === 'custom' ? descriptiveCustomMonthlyRows(customDateStart, customDateEnd) : dashboardMonthlyRows();
@@ -305,34 +317,25 @@ function renderOverviewAnalytics() {
     : 'No observed monthly sales in this selection.';
   document.getElementById('overviewCalendarMethod').textContent = descriptivePeriodLabel() + '. Observed sales only; partial periods may affect comparisons.';
 
-  const points = getDescriptiveDisplayRows().filter(row => row.evidence === 'actual' && row.revenue != null && row.income != null
-    && Number.isFinite(Number(row.revenue)) && Number.isFinite(Number(row.income)))
-    .map(row => ({ x: Number(row.revenue), y: Number(row.income), period: row.period, observedMonths: row.observed_months }));
-  const largestSales = [...points].sort((a,b) => b.x - a.x)[0];
-  const largestProfit = [...points].sort((a,b) => b.y - a.y)[0];
-  document.getElementById('overviewProfitNote').textContent = points.length
-    ? points.length + ' observed periods · gross profit before operating expenses'
-    : 'No periods with both sales and gross profit.';
-  document.getElementById('overviewProfitMethod').textContent = points.length + ' observed periods with both measures. Estimates and unavailable profit are excluded. '
-    + descriptivePeriodLabel() + '. ' + (largestSales ? 'Highest sales: ' + largestSales.period + '; highest gross profit: ' + largestProfit.period + '. ' : '')
-    + (comparisonMode === 'yoy' && descriptiveUsesYearlyGrain() ? 'Y/Y mode uses matched observed months. ' : '')
-    + 'Gross profit is before operating expenses. Partial periods remain partial; this does not establish causality.';
-  createChart('overviewProfitScatter', {
-    type: 'scatter', data: { datasets: [{ label: 'Observed periods', data: points, backgroundColor: '#0ea5e9', pointRadius: 5, pointHoverRadius: 7 }] },
-    options: { responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { display: false }, tooltip: { callbacks: {
-        title: items => items.length ? items[0].raw.period + (items[0].raw.observedMonths != null ? ' · ' + items[0].raw.observedMonths + '/12 observed months' : '') : '',
-        label: context => ['Net sales: ' + formatCurrency(context.raw.x), 'Gross profit: ' + formatCurrency(context.raw.y)]
-      } } },
-      scales: {
-        x: { type: 'linear', beginAtZero: true, title: { display: true, text: 'Net sales (₱)' }, ticks: { callback: value => new Intl.NumberFormat('en-PH', {style:'currency',currency:'PHP',notation:'compact'}).format(value) } },
-        y: { type: 'linear', beginAtZero: true, title: { display: true, text: 'Gross profit (₱)' }, ticks: { callback: value => new Intl.NumberFormat('en-PH', {style:'currency',currency:'PHP',notation:'compact'}).format(value) } }
-      }
-    }
+  const values = getDescriptiveDisplayRows();
+  const rates = values.map(row=>typeof overviewPeriodMargin==='function'?overviewPeriodMargin(row):null);
+  const count = rates.filter(value=>value!=null).length;
+  const sector = typeof overviewBuyerSector==='undefined'?'All':overviewBuyerSector;
+  document.getElementById('overviewProfitNote').textContent = sector+' · '+descriptivePeriodLabel()+' · '+count+'/'+values.length+' periods have an interpretable margin';
+  document.getElementById('overviewProfitMethod').textContent = 'Gross profit ÷ net sales from the same margin-eligible records × 100, before operating expenses. Missing or nonpositive denominators stay unavailable. Signed adjustments are retained. Recorded-month coverage and selected dates remain visible; this does not explain a business cause.';
+  createChart('overviewMarginChart', {
+    type:'line', data:{labels:values.map(row=>descriptivePointLabel(row.period)),datasets:[{label:'Gross margin (%)',data:rates,borderColor:'#1E3A5F',pointRadius:3,tension:0,spanGaps:false,fill:false}]},
+    options:{responsive:true,maintainAspectRatio:false,animation:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:context=>context.raw==null?'Unavailable':Number(context.raw).toFixed(2)+'%'}}},scales:{y:{title:{display:true,text:'Gross margin (%)'},ticks:{callback:value=>value+'%'}}}}
   });
-  const wrap = document.getElementById('overviewProfitScatter').closest('.chart-wrap');
-  wrap.style.display = points.length ? '' : 'none';
-  if (!points.length) { wrap.dataset.state = 'empty'; wrap.dataset.emptyMessage = 'No observed periods with both net sales and gross profit.'; }
+  const marginTable=document.getElementById('overviewTrendValues'); marginTable.replaceChildren();
+  const marginHeader=marginTable.createTHead().insertRow();
+  ['Period','Sector','Net sales','Gross profit','Margin revenue basis','Gross margin','Coverage/status'].forEach(value=>{const th=document.createElement('th');th.scope='col';th.textContent=value;marginHeader.append(th);});
+  const marginBody=marginTable.createTBody();
+  values.forEach((row,index)=>{
+    const tr=marginBody.insertRow();
+    [descriptivePointLabel(row.period),sector,row.revenue==null?'Unavailable':formatCurrency(row.revenue),row.income==null?'Unavailable':formatCurrency(row.income),row.margin_revenue_basis==null?'Unavailable':formatCurrency(row.margin_revenue_basis),rates[index]==null?'Unavailable':rates[index].toFixed(2)+'%',(row.observed_months!=null?row.observed_months+'/12 observed months (sales) · ':'')+(row.profit_observed_months!=null?row.profit_observed_months+'/12 profit months · ':'')+(row.evidence||'unavailable')].forEach(value=>tr.insertCell().textContent=value);
+  });
+  if(typeof renderOverviewSectorScope==='function')renderOverviewSectorScope();
 }
 `
 

@@ -27,6 +27,7 @@ import {
   getDatabricksSalesHeatmap,
   getDatabricksStl,
   getDatabricksSalesSectors,
+  getDatabricksSectorTrend,
   getDatabricksSalesStatus,
   getDatabricksSalesSummary,
   getDatabricksSalesTransactions,
@@ -280,7 +281,7 @@ async function authenticateRequest(
     })
   } catch (error) {
     console.error('Authentication token validation failed:', error)
-    return res.status(503).json({ error: 'Authentication service is unavailable' })
+    return res.status(503).json({ error: 'Authentication service is unavailable', code: 'AUTHENTICATION_UNAVAILABLE' })
   }
 
   if (!user) {
@@ -631,6 +632,14 @@ app.get('/api/sales/heatmap', requireAuth, async (req: Request, res: Response) =
 app.get('/api/sales/sectors', requireAuth, async (req: Request, res: Response) => {
   try {
     return res.json(await getDatabricksSalesSectors(parseCatalogCategory(req.query.category)))
+  } catch (error) {
+    return databricksDashboardFailure(res, error)
+  }
+})
+
+app.get('/api/sales/sector-trend', requireAuth, async (_req: Request, res: Response) => {
+  try {
+    return res.json(await getDatabricksSectorTrend())
   } catch (error) {
     return databricksDashboardFailure(res, error)
   }

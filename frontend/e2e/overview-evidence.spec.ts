@@ -18,9 +18,9 @@ test.beforeEach(async ({ page }) => {
 async function expectTruthfulOverview(page: import('@playwright/test').Page) {
   const overview = page.locator('#page-overview')
   await expect(overview).toBeVisible()
-  await expect(overview.locator('.kpi-card-forecast')).toContainText('Not published')
-  await expect(overview).toContainText('business approval pending')
-  await expect(overview).toContainText('reviewed scenarios only')
+  await expect(overview.locator('.kpi-card-forecast')).toContainText(/Not published|Unpublished/)
+  await expect(overview).toContainText(/business approval (?:is )?pending/)
+  await expect(overview).toContainText(/reviewed scenarios only|Scenarios only/)
   await expect(overview).not.toContainText(/REAL-TIME DSS GAUGE|₱9\.3M|12\.4%|Prophet ML|Dengue Alert Level 3|CRITICAL: Stock-out threat|fallback local data mode/)
   await expect(page.locator('#overviewThreatScore, #overviewThreatNeedle, #dohSignalBar')).toHaveCount(0)
 }
@@ -71,7 +71,7 @@ test('overview measure selection preserves values and explains only recorded end
     return { values: chart.data.datasets.map((d: any) => d.data), visible: chart.data.datasets.map((_: unknown, i: number) => chart.isDatasetVisible(i)), max: chart.scales.y.max }
   })
   const sales = await state()
-  expect(sales.visible).toEqual([true, false])
+  expect(sales.visible).toEqual([true, true])
   await expect(page.locator('#overviewTrendReading')).toContainText('recorded sales rose by ₱1,000')
   await page.selectOption('#overviewTrendMeasureSelect', 'profit')
   const profit = await state()
@@ -144,6 +144,7 @@ test('a mixed period separates observed KPI revenue and dashed gap estimates', a
       { period: '2024-02', revenue: 200, income: 40 },
       { period: '2025-01', revenue: 300, income: 60 },
       { period: '2025-02', revenue: null, income: null, missing: true, has_sales_activity: false },
+      { period: '2025-03', revenue: 100, income: 20 },
     ], year_summary: [] })
     app.setDescriptivePeriod('custom')
     app.setDescriptiveGranularity('monthly')
@@ -157,7 +158,7 @@ test('a mixed period separates observed KPI revenue and dashed gap estimates', a
   expect(chart[0].data).toEqual([300, 200])
   expect(chart[1].label).toContain('Gross Profit')
   expect(chart[1].data).toEqual([60, 40])
-  await expect(page.locator('#overviewBaselineChart').locator('xpath=ancestor::*[contains(@class,"chart-card")][1]')).toContainText('source coverage 2024-01–2025-01')
+  await expect(page.locator('#overviewBaselineChart').locator('xpath=ancestor::*[contains(@class,"chart-card")][1]')).toContainText('source coverage 2024-01–2025-03')
   await page.evaluate(() => (window as any).setCustomDateRange('2025-01-01', '2025-01-31'))
   await expect(page.locator('#overviewRevenueEvidence')).toContainText('no gap estimates included')
   await page.evaluate(() => (window as any).setCustomDateRange('2025-02-01', '2025-02-28'))
@@ -222,7 +223,7 @@ test('overview decision cards reconcile observed profit, matched growth and miss
   await expect(page.locator('#overviewMatchedGrowthNote')).toContainText('2/2 observed month pairs matched')
   await expect(page.locator('#kpiOverviewObservationCoverage')).toHaveText('2/3')
   await expect(page.locator('#overviewDecisionReview')).toContainText('1 month without records')
-  await expect(page.locator('#overviewPublicationStrip')).toContainText('business approval pending')
+  await expect(page.locator('#overviewPublicationStrip')).toContainText(/business approval (?:is )?pending/)
   await expect(page.locator('#page-overview .kpi-grid > .kpi-card')).toHaveCount(4)
   await page.evaluate(() => (window as any).setDescriptivePeriod('all'))
   await expect(page.locator('#kpiOverviewMatchedGrowth')).toHaveText('—')

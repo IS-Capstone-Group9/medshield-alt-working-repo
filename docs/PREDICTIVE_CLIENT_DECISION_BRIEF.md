@@ -5,6 +5,78 @@ This is a client review aid linked to the existing
 [objective/evidence register](OBJECTIVE_EVIDENCE_REGISTER.md#predictive-client-decision-brief--10-october-2026),
 not a separate approval register.
 
+## Current review recommendation — 20 October 2026
+
+The [completed sector and forecast-schedule assessment](../outputs/sector_refresh_evaluation_20261020/README.md)
+uses existing recorded-sales evidence only. The study remains 2017–2025 and the
+model window 2020–2025. New 2026 actuals are uncertain; no additional business
+inputs are assumed available. The COO sales files are user-attested complete
+and the sole recorded-sales study source; independent physical-event
+verification is unavailable.
+
+**Analyst recommendation: retain the original unpublished last-value company
+reference for exploratory sales-outlook and revenue-budget discussion, with
+measured errors visible. Dependable operational budgeting, medicine purchasing
+and replenishment are not established uses.** This is a technical recommendation,
+not named client/adviser acceptance or a new selection.
+
+### Matched-target workflow results
+
+Each row scores the same twelve January–December 2025 targets within its scope.
+Annual-fixed forecasts use December 2024 as their data cutoff; monthly lead-1
+forecasts use the preceding month. Targets match, while origins, information
+sets and actual leads differ. These are already inspected retrospective outcomes,
+and historical source-availability vintages are unverified.
+
+| Scope / benchmark | Workflow | Monthly MAE | WAPE | Mean signed bias |
+|---|---|---:|---:|---:|
+| Company / last value | Annual fixed | ₱5,834,383.00 | 37.76% | +₱1,295,235.42 |
+| Company / last value | Monthly lead 1 | ₱7,518,021.54 | 48.66% | −₱562,409.34 |
+| Company / six-month mean | Annual fixed | ₱10,526,958.88 | 68.14% | −₱10,064,862.66 |
+| Company / six-month mean | Monthly lead 1 | ₱6,596,268.34 | 42.70% | −₱3,807,168.45 |
+| Private / six-month mean | Annual fixed | ₱3,754,519.74 | 70.97% | −₱3,628,065.89 |
+| Private / six-month mean | Monthly lead 1 | ₱2,471,538.12 | 46.72% | −₱1,620,525.25 |
+
+Positive bias means overforecasting, negative means underforecasting. Monthly
+updating helps some methods but worsens company last value. None of the four
+company monthly lead-1 benchmarks beats the retained annual last-value reference
+on these targets. This does not select a replacement from the inspected ranking
+or negate the separate unselected calibration trial. The [full registered
+report](../outputs/sector_refresh_evaluation_20261020/run/RESULTS.md) retains all
+scopes, methods and support counts.
+
+Actual calendar leads 1–12 and complete 3/6/12-month origin windows are evaluated
+separately. Lead means target minus origin, not the number of months displayed.
+Error of a summed horizon is separate from sum of absolute monthly errors;
+opposing misses can cancel. Same-method sector sums reproduce direct company
+forecasts on complete support, so splitting these linear methods alone adds no
+company accuracy improvement. Missing values are never filled with zero.
+
+### Sector findings and supported use
+
+Government contributes 70.15% of the recorded company increase, Private 30.06%,
+and Internal offsets 0.20%. The generic HOSPITAL label contributes
+₱39,057,373.41, or 96.16% of Private's increase; September, October and December
+account for 59.44%. These locate financial movements, not their business causes,
+individual accounts, verified geography or medicine demand. Proposed mappings,
+adjusted allocation policies and six unavailable sector revenues remain explicit.
+[Source-bound investigation](../outputs/sector_refresh_evaluation_20261020/diagnostics/README.md).
+
+- Supported: inspect recorded revenue, compare errors on matching cases and
+  discuss exploratory sales/budget scenarios with their errors visible.
+- Unestablished: future accuracy, reliable operational budgets, medicine-unit
+  requirements, procurement benefit and model publication approval.
+- Unchanged: original selection and predictions. The 10% WAPE research goal is
+  unachieved; numerical business MAE/WAPE limits remain unset.
+- Next owners: analyst/project lead reviews intended use and records actual
+  decisions; system/writing owners preserve the measured scope and limits.
+  Unavailable business records are not re-requested as the next prerequisite.
+
+The Forecast view and CSV identify the current gateway result's use and error
+context. Offline schedule results remain dated study evidence, not bundled live
+dashboard measures. Working Chapters 4–5 incorporate these findings. This update
+does not fit, tune, select or activate a model or establish prospective accuracy.
+
 ## Client review summary — 15 October 2026
 
 The [15 October findings and limitations update](chapters/MedShield_Predictive_Findings_Update_20261015.md)

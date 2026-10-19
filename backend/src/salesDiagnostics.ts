@@ -151,6 +151,7 @@ export function diagnosticStatement(scope: DiagnosticScope, sql: {fact: string; 
     `SELECT 'product' AS dimension, diagnostic_product AS group_key, MAX(diagnostic_title) AS label, side, ${MEASURES} FROM matched GROUP BY diagnostic_product, side`,
     `SELECT 'area' AS dimension, COALESCE(normalized_area, 'Unknown') AS group_key, COALESCE(normalized_area, 'Unknown') AS label, side, ${MEASURES} FROM matched GROUP BY normalized_area, side`,
     `SELECT 'sector' AS dimension, diagnostic_sector AS group_key, diagnostic_sector AS label, side, ${MEASURES} FROM matched GROUP BY diagnostic_sector, side`,
+    `SELECT 'evidence' AS dimension, COALESCE(diagnostic_evidence, 'unclassified_evidence') AS group_key, COALESCE(diagnostic_evidence, 'unclassified_evidence') AS label, side, ${MEASURES} FROM matched GROUP BY diagnostic_evidence, side`,
   ]
   return {statement: `${base}\n${partitions.join('\nUNION ALL\n')}\nORDER BY dimension, group_key, side`, parameters}
 }
@@ -227,7 +228,8 @@ export function buildSalesDiagnostics(scope: DiagnosticScope, rows: DiagnosticRo
     if (deltaFixed !== null && partitionSum !== deltaFixed) throw new Error(`Diagnostic ${dimension} partition does not reconcile`)
     return dimension === 'month' ? result : result.sort((a,b) => Math.abs(b.delta || 0) - Math.abs(a.delta || 0) || a.key.localeCompare(b.key))
   }
-  const contributions = {month:partitions('month'), product:partitions('product'), area:partitions('area'), sector:partitions('sector')}
+  const contributions = {month:partitions('month'), product:partitions('product'), area:partitions('area'), sector:partitions('sector'),
+    evidence:rows.some(row => row.dimension === 'evidence') ? partitions('evidence') : []}
   const missingCurrent = months.filter(month => !observed(month,'current'))
   const missingPrior = months.filter(month => !observed(month,'prior'))
   const lastDay = new Date(Date.UTC(Number(scope.end_date.slice(0,4)), Number(scope.end_date.slice(5,7)), 0)).getUTCDate()

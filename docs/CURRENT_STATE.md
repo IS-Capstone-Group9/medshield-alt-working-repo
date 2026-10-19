@@ -1,5 +1,301 @@
 # MedShield Current State
 
+## Forecast-use brief, system and paper consolidated — 20 October 2026
+
+The [checked consolidation](../outputs/forecast_use_review_20261020/README.md)
+updates the existing predictive client decision brief and working Chapters 4–5
+with sector localization, matched-target schedule errors, actual lead/window
+meaning and current supported use. The original last-value company reference
+remains unchanged; recommendations support exploratory sales-outlook and
+revenue-budget discussion, while dependable operational forecasting remains
+unestablished. The 10% research goal is unachieved and business error limits
+remain unset. No additional business inputs are assumed available.
+
+Forecast evidence now shows its use, historical period, backtest origins and
+actual lead range beside existing source-derived errors. Stored research adds a
+selected-model MAE/WAPE/bias summary; projections show no measured actual errors.
+Both CSVs retain use/error context. Empty/failure states clear it and the
+approved-publication path retains its own wording. Offline study figures are
+kept in the dated brief/paper rather than supplying dashboard values.
+
+Fourteen focused browser cases and one configured live API/UI/CSV/desktop/mobile/
+failure-recovery workflow pass; frontend typecheck and focused lint pass. Five
+live captures were visually reviewed. Section captures can intersect the fixed
+header; they are not a full-page accessibility audit. Source-number/link/hash
+checks and exact receipts are retained in the packet. Review mode is self-review.
+No model fitting/selection, source/mapping change, cloud publication or broader
+business/academic acceptance occurred. Working Markdown is updated; earlier
+formatted PDFs and screenshots retain their dates. Next project lead reviews
+the concrete brief/use recommendation and writing owner integrates the working
+chapters into the institution-formatted manuscript.
+
+## Existing-data sector and forecast-schedule assessment — 20 October 2026
+
+The [executed assessment](../outputs/sector_refresh_evaluation_20261020/README.md)
+investigates Government/Private changes and evaluates four fixed existing
+benchmarks under annual forecasts, monthly updates and actual calendar leads
+1–12. It uses retained fact-20 aggregate evidence only; 2026 actuals remain
+uncertain and no additional business inputs are assumed. The input has 288
+month/scope rows for 2020–2025, with six unavailable revenues preserved as null.
+Private's generic HOSPITAL label accounts for 96.16% of its recorded increase;
+Government supplies 70.15% of the company increase. These locate financial
+changes without establishing their business causes or verified account identity.
+
+On the same twelve 2025 company targets, monthly six-month mean reduces its
+annual-fixed WAPE from 68.14% to 42.70%; monthly last value worsens from 37.76%
+to 48.66%. Private six-month mean improves from 70.97% to 46.72%. No tested
+company monthly lead-1 method beats the retained annual last-value result on
+these targets. Same-model sector sums reproduce direct company predictions
+where all required history exists; splitting alone provides no improvement.
+Comparisons retain exact keys/native support and distinguish errors of monthly
+values from cancellation in totals. All 2025 results remain inspected
+retrospective evidence, not an untouched test or achieved future accuracy.
+
+The packet retains registration, all 9,360 planned points, 1,440 planned
+origin-horizon windows, source reconciliation, 24 passing scoped tests and
+separate Decimal QA. Unavailable entries and overlapping windows are not
+independent successful observations. No original model, selection, source,
+mapping, cloud publication or dashboard behavior changed. Analyst/project lead
+owns interpretation and decision-specific error tolerance; the existing model,
+operational and academic gates remain separate.
+
+## Warehouse currency verified; bounded margin repair prepared — 20 October 2026
+
+The [fresh warehouse review](../outputs/warehouse_review_20261020/README.md) confirms serving fact 20/current policy and mapping identities, 59,039 assessed source lines, 37,728 unique accepted records, 108 calendar/98 sales months, 72 matching STL months, current frozen input and the 21-model fact 20 research candidate. Five deployed SQL SELECT bodies match the local package. Independent readback checks pass 1,556 assertions. The 72.8909484% seasonal-naive WAPE is reproduced; it is large underprediction, not a calculation or warehouse-execution error. Approved forecast release objects remain empty and external joins remain unapproved as intended.
+
+One actual warehouse mismatch remains: 81 percentage cells across four overlapping marts have negative matching revenue bases (product-year 7, business-product-year 71, area-year 2, territory-year 1). The API already returns unavailable rates for these bases. Local Gold now requires a positive basis; a [version-bound maintenance patch](../databricks/medshield_project/maintenance/MARGIN_RATE_PATCH.md) is prepared with exact versions/counts, drift guards, read-only previews, planner checks and immutable-field readback. Cloud UPDATE/post-write validation is **not performed**. Signed amounts, company totals, fact 20, frozen inputs and model pointers remain unchanged. A full 01→03 rebuild is unnecessary for this correction.
+
+The live dashboard validator initially failed on its stale expectation of positive Unknown-buyer external coverage. It now checks Private/Quezon coverage separately from empty Unknown; live validation and 20 focused tests pass. The final broad backend suite passes 192 tests; the notebook package passes 90, including the actual Gold margin expression. Generated README/type/link/content-hash receipts are in the packet. 46 captured SQL failures are historical, latest 9 October; Workspace/Jobs APIs return 403 and browser automation is disabled, so notebook source-byte/cell-log parity is unverified. User reports no active notebook error. Warehouse operator owns applying and checking the bounded repair; all other source/model/business/academic gates remain separate.
+
+
+## Five-page UI density cleanup — 20 October 2026
+
+The [follow-up delivery and checks](../outputs/ui_density_followup_20261020/README.md)
+implements the remaining Forecast, Weather, Product, Area and Planning findings.
+Explanations use optional notes, critical status/coverage stays visible, and the
+Weather Compact/Full evidence selector retains original values with no extra
+request. The sampled PAGASA view has four compact columns and NASA POWER eight,
+with all twelve available in Full evidence. 23 focused browser cases and one
+configured live five-page desktop/mobile/export/failure workflow pass; frontend
+types and focused lint pass. Ten captures were visually inspected. No API,
+formula, source/model/publication or acceptance change; existing services reused.
+
+## External-context implementation and formula audit — 20 October 2026
+
+The [source-bound audit](../outputs/analytics_external_audit_20261020/README.md) fixes external-analysis coverage/product queries ignoring buyer scope and adds Gold-backed, lag-aligned sales/disease/rainfall context charts, values and CSV. Current study remains 2017–2025; 2026 sales pending. Private/Quezon has 94 observed sales months and 79 co-observed one-month-lag Dengue/PAGASA months out of 108; 0 approved joins. Original/adjusted counts, missing values and mapping states remain explicit. No external model is fitted or published. The supplied PAGASA package lacks 2025 and DOH lacks reporting/revision timestamps. Requiring previous-month sales leaves 76 candidate feature-complete rows, only one in 2025; its holdout fails the six-case minimum. The [source-owner checklist and unfitted protocol](../outputs/analytics_external_audit_20261020/CLIENT_REVIEW.md) records a possible 12-case retrospective 2024 subset, still blocked by mapping/data review and explicitly not an untouched test set.
+
+Independent Decimal recomputation reconciles financial sector partitions, matching margin bases, current benchmark views and retained 21-model development/common/audit scores plus the robust-recipe report. The observed seasonal-naive 72.8909484% WAPE is reproduced, not repaired by changing its formula. Retained 2020–2025 STL components reconstruct and match fresh Gold. Existing saved model outputs/windows are preserved. Offline commercial ABC now follows 80%/95% crossing-inclusive positive-contribution classes (version 2.0.1); model comparison/calibration rejects contradictory evidence. A dated packet owns exact verification receipts and scope. All mappings, source/business/model publication and original objective acceptance gates remain separate.
+
+
+## Dashboard text simplified — 20 October 2026
+
+The [UI cleanup and density review](../outputs/ui_text_simplification_20261020/README.md)
+moves repeated Overview/Sales narratives and methods into closed disclosures,
+retaining short coverage and evidence labels. Initial 30 browser cases pass with
+four existing legacy skips; 18 affected cases pass after final refinements. One
+configured live API/chart/CSV/mobile/failure-recovery workflow, final frontend
+types and focused lint pass. Screenshots were visually inspected. Forecast prose
+and Weather table density are the leading remaining review findings. No analytical
+source, formula, API, model, publication or acceptance decision changed.
+
+## Client-provided annual record labels — 20 October 2026
+
+Historical years now show plain year labels rather than `Partial`, following the
+user's clarification that the provided records are the client dataset. Recorded
+sales/profit month counts remain available, and absent observations are not
+converted into zeros. Totals and matched-month comparisons are unchanged;
+custom boundary years use `selected dates`, and the current year retains YTD.
+Coverage-aware summaries use a separate calculation guard rather than parsing a
+display suffix. [Delivery and evidence](../outputs/recorded_year_labels_20261020/README.md)
+record 18 passing isolated browser cases (four existing legacy skips), one passing
+configured live workflow with source-total/month-count parity, frontend types,
+focused lint and scoped whitespace checks. Source/model/publication unchanged;
+these UI checks do not establish why an absent month has no records.
+
+## Current study corrected to 2017–2025 — 20 October 2026
+
+Adrian explicitly confirms 2017–2025 as the study; 2026 actuals are pending client
+confirmation. The [scope correction and checks](../outputs/study_scope_2017_2025_20261020/README.md)
+remove the obsolete 2021–2025/original-versus-context selector, include all nine
+years in both overview panels and align gateway study metadata and trend CSVs.
+Recorded-month counts and months without observations remain explicit. Expanded
+reconciliation also repairs sector profit-only months being dropped when net
+sales were unavailable: eligible profit is retained without inventing zero sales,
+and separate sales/profit coverage is shown. Same-population margin remains intact.
+
+56 browser regressions pass, followed by six affected cases after the final
+coverage-caption change; one configured live nine-year workflow and 144 separate
+saved-CSV checks pass. Backend aggregation test, backend/frontend types, focused
+lint, scoped whitespace and delivery targets pass. Desktop/mobile captures were
+visually reviewed. The retained first live failure exposed the profit mismatch;
+the corrected run passes without changing source amounts or tolerances.
+
+The methodology guide, working Chapters 4–5, scope register and completion
+workflow now follow the owner's temporal direction. Archived source PDFs and
+original quotations remain preserved; working Chapters 1–3/whole-paper assembly
+still need date consistency and formatted review. Existing descriptive/diagnostic
+delivery is retained. The current workflow identifies the remaining output-packet
+and actual-use decisions rather than reopening implemented chart design.
+
+Saved predictive models, the 2020–2025 model/STL window, measured errors and
+candidate publication remain unchanged. Wider study dates do not prove a lower
+error or medicine-demand forecast. No Databricks source/schema/notebook change or
+rerun is required for this scope correction. New 2026 data, if supplied, requires
+normal controlled ingestion and independent evaluation of frozen predictions.
+
+## Overall and selected-sector graphs delivered — 19 October 2026
+
+The [two-panel implementation and verification](../outputs/overall_sector_graphs_20261019/README.md)
+keeps All fixed on the left and Government/Private/Internal/Unknown detail on the
+right (Government initially). Both share dates, grain, measure and signed peso
+bounds; each has its own summary, coverage, value table and CSV. Supporting KPIs,
+calendar and margin remain explicitly sector-scoped. The contribution table below
+both graphs now retains every sector, selected-row highlighting and an All total.
+Chart-point investigation preserves the clicked scope. Unknown stays unavailable
+when empty; mobile stacks Overall first. Original 2021–2025 study remains default.
+
+48 isolated browser regressions pass before the final palette-only adjustment;
+all six sector cases and one configured live workflow pass on the final layout.
+Types and focused lint pass; desktop/mobile captures were visually reviewed.
+Live chart/CSV/source agreement, shared scales, investigation scope, settled
+mobile fit and browser-only503/recovery are checked. Source remains fact20 with
+the existing candidate/proposed/adjusted-source limitations. No backend or
+Databricks change/rerun, build, manual service restart, causal claim or new
+business/academic approval is implied. Refresh Overview to inspect the layout.
+
+## Sector-filtered diagnosis and paper findings delivered — 19 October 2026
+
+[Implementation and verification](../outputs/sector_diagnostic_20261019/README.md)
+deliver All/Government/Private/Internal/Unknown overview scoping across the
+sales/profit trend, KPIs, findings, coverage, calendar and CSV. The overview's
+unlabelled scatter is replaced by a chronological same-record gross-margin
+chart and accessible value/basis/coverage table. Default history remains the
+original 2021–2025 study; earlier years are explicitly additional context.
+
+The [source-bound findings](../outputs/sector_diagnostic_20261019/FINDINGS.md)
+verify a 2024–2025 company change of ₱135,137,501.16. Government contributes
+₱94,794,181.38 (70.15%), Private ₱40,618,244.49 (30.06%), and Internal
+−₱274,924.71 (−0.20%). Unknown has no records and is an explicitly labelled
+accounting absence, not observed zero demand. Both company years have twelve
+observed months; Government lacks a February2024 group record. Common company
+months are paired before sector partitions so all signed changes reconcile.
+
+November, January and July supply 52.20% of the Government increase. The leading
+allocated product labels are PROHAB 10MG/ML20ML, BUPIRIGHT5MG/ML0.5% IN8%4ML and
+F6 FETAL MONITOR SINGLE. All Government area change belongs to the generic
+GOVERNMENT source label; no verified provincial/individual-account breakdown
+can be made. Quezon/Batangas buyer mappings were checked and remain proposed
+Private; approved geography does not approve ownership. No mapping was changed.
+
+Both compared years carry adjusted/estimated allocation provenance, with
+different documented policies. The diagnostic API now includes a reconciled
+original/adjusted financial partition, visible in nested investigations. The
+Government margin basis changes from99.17% to39.97% of its independently eligible
+net sales; the reported20.54%→57.15% rates use different eligible subsets and
+do not prove whole-sector profitability. Business causes remain unverified.
+
+The methodology guide and working Chapters4–5 now integrate the method, actual
+tables/figure, drill-down, source/mapping/eligibility limits and bounded
+conclusion. Original Chapters1–3 PDF and institutional Word assembly remain
+separate. Verification:34 backend tests,46 isolated browser cases, one final
+configured live workflow,346 independent Decimal/CSV checks, runtime/script/
+frontend types, focused lint, visual checks and scoped whitespace/link checks
+pass. Initial implementation/test failures are retained. Fact20 remains
+candidate; no warehouse/master/source/model/mapping publication change or build.
+Existing services remain running with ordinary watch reloads. Orchestrator
+accountable with sequential implementation/analytics/QA/writer self-review.
+Next user refreshes the overview; project team reviews the bounded findings and
+continues whole-paper assembly and existing actual acceptance/input gates.
+
+## Dashboard 503: identity connection recovery and clear unavailable state — 19 October 2026
+
+The reported generic `getJson` 503 was traced to gateway identity-validation logs:
+the linked Supabase account read failed with `fetch failed` / `ECONNRESET` before
+analytics could be served. The immediate failure boundary is observed; the
+underlying network/provider cause is not established.
+
+The [focused repair and evidence](../outputs/auth_503_recovery_20261019/README.md)
+add five-second identity GET attempt timeouts, at most three attempts for
+transient failures, and distinct `AUTHENTICATION_UNAVAILABLE` 503 responses.
+Current token/active account/linked role checks still fail closed; no writes
+are automatically replayed. Frontend API errors retain endpoint/status/code,
+and the dashboard distinguishes authentication from analytical unavailability,
+removes charts/exports, and offers a reload retry. Expected API failures remain
+visible as warnings without a redundant JavaScript console-error overlay.
+
+Verification: 37 backend tests, seven browser cases, backend runtime/script and
+frontend types, focused ESLint and scoped whitespace checks pass. Browser checks
+use live configured login/core data with isolated browser-only outage injection;
+identity reset/outage cases use synthetic unit/middleware dependencies. Actual
+provider availability cannot be guaranteed. No warehouse/source/model/mapping
+or publication change; no build or manual restart of existing dev services.
+Backend Engineer accountable, sequential security/frontend/QA self-review;
+next user refreshes the app. Persistent external failures require service/network
+investigation by the backend/operator, while prior graph/paper gates stay open.
+
+## Predictive buyer scopes enabled; large benchmark error verified — 19 October 2026
+
+[Implementation and evidence](../outputs/predictive_buyer_scope_20261019/README.md)
+correct the company-only retrospective benchmark restriction. Government,
+Private and Internal now receive their own all-product revenue histories,
+fixed-origin benchmark views/errors and CSVs using the existing proposed buyer
+mapping; each series has a distinct scope key. Unknown is truthfully empty in
+the checked release. Product/quantity/external/trained-model gates are unchanged.
+
+The screenshot's72.89% seasonal-naive company WAPE is independently reproduced:
+origin-known2024 levels underpredict the higher recorded2025 revenue in every
+scored month. That is poor benchmark performance, not a demonstrated metric bug
+or a causal explanation. The UI now states the evaluated period/origin, matching
+totals and error direction. All original company benchmark views, stored research
+and model selections remain unchanged; no accuracy improvement is claimed.
+
+Verification:37 backend regressions,14 isolated browser cases, one after-repair
+live workflow covering all buyers/three horizons/CSV/empty/source503 recovery,
+1,681 separate numerical checks, five saved live scope/calendar validations,
+runtime/all-script/frontend types and focused lint pass. Before reproduction and
+initial test-expectation failures are retained separately. Fact20/source identity
+remains candidate; no source/master/schema/model/publication change or build.
+Existing dev services remain running; backend watch reload handles the repair.
+Root sequential Orchestrator/Backend/Frontend/Analyst/QA/Writer self-review.
+
+Next analyst uses the working scope controls for supported contributions and
+later actual evaluation. Future forecasts remain unavailable without their
+published contracts; mappings/coverage remain disclosed and original quantity,
+operational, model/business/academic and paper-integration gates stay separate.
+
+## Sales/profit scatter QA: values reconcile; presentation gaps remain — 19 October 2026
+
+[Focused QA](../outputs/scatter_chart_qa_20261019/QA_REPORT.md) checks the user-reported overview scatter against the live served monthly contract. Nine yearly points, coverage counts, actual hover, desktop/mobile geometry and zero/negative/null fixture behavior pass in two browser tests. The source-bound receipt retains fact20 candidate identity; no fresh independent warehouse SQL/source audit is claimed.
+
+The chart still hides year identities until hover, renders partial years like complete years and lacks a keyboard-accessible value table. The newly requested buyer-sector comparison is a proposed unmet design requirement. Recommended repair is a sector-scoped totals trend plus a chronological same-population margin view/table. [Retained diagnostic logic](CAPSTONE_COMPLETION_WORKFLOW.md#retained-sector-diagnosis-and-chart-qa--19-october-2026) specifies period, mapping, reconciliation and paper handoffs.
+
+No application/source/mapping/model/schema changes, build, server restart or publication occurred. Root QA/BI self-review; test passes do not resolve the recorded presentation findings or grant acceptance. Next Frontend/Backend/Analyst owner implements and verifies the bounded presentation/filter contract; writer then integrates checked findings. Original objective, data/model and business/academic gates remain separate.
+
+## Graph meaning and misleading output corrections verified — 17 October 2026
+
+[Evidence and scoped changes](../outputs/graph_clarity_20261017/README.md)
+correct incomplete-year growth wording, empty future forecast legends/tails,
+no-mapped-record regions displayed as zero, unverified historical Qty called
+units, and repetitive product value lists. Regional/buyer chart scope labels now
+distinguish mapped areas from all selected sales. Numerical values, missing/zero/
+negative distinctions, full requested forecast evidence/CSV and candidate/scenario
+boundaries are preserved.
+
+Final 29 browser scenarios pass: 27 isolated contracts/area interactions plus
+one six-page loaded desktop/mobile workflow and one live Product filter/CSV/source
+reconciliation. Types/lint pass. Eighteen captured chart series retain their
+values; 186 source/config/test hashes remain unchanged through the final run.
+Fact20 dataset/policy identity is retained in the live receipt. Initial loading-
+state captures and the inactive-chart harness failure remain labeled separately.
+
+The selected seasonal-naive benchmark still has 72.89% historical WAPE; future
+values in the requested window remain unavailable. Coverage, historical identity/
+unit and geographic mapping limitations are not resolved by presentation repairs.
+No model/source/master/schema/publication/dependency or service changes; no build.
+Root BI/Frontend/QA/Writer self-review. Next project lead reviews usability;
+data/model owners retain evidence/evaluation gates and writer retains manuscript
+integration with actual scope decisions.
+
 ## QA interface and wording repairs verified — 17 October 2026
 
 [Repair/evidence](../outputs/qa_remediation_20261017/README.md) closes the
@@ -1651,3 +1947,151 @@ No CSV, controlled master, live mapping, model, schema or server was changed.
 Next analyst work uses the shared queue and bounded financial research;
 source owners retain historical unit/identity/completeness and adjusted-detail
 verification. This full audit does not grant business/model/operational approval.
+
+## Descriptive D9/D10 review preparation and fresh technical checks — 17 October 2026
+
+[Review and executed recheck](../outputs/descriptive_closure_20261017/RESULTS.md) records a prefilled yearly/monthly/product review packet, 22 retained-input/source checks and 13 first-attempt passing browser scenarios. Review form preservation and local evidence links checked. Live graph meaning/geometry, nine chart-integrity cases, Area CSV and live Product filter/export reconciliation pass. This checks implemented scope; historical completeness/physical units and original intended-scope stakeholder decisions remain unresolved. D9/D10 remain open; descriptive stays 8/10. No application/source/master/model or live publication changes. Next source owner reviews D9 evidence; project lead obtains the actual intended-scope walkthrough and decisions for D10.
+
+### Recorded-sales completeness confirmation and unit method — 17 October 2026
+Adrian confirms the COO-provided 2017–2025 files are the company's complete recorded-sales dataset and sole sales source of truth. [Attributed source/method record](../outputs/descriptive_closure_20261017/review-decisions.json) now records this confirmation; do not repeat the submission-completeness question. This is user-confirmed submission scope, not an independent audit, a zero-sales interpretation for no-record months, or removal of adjusted-allocation provenance. User authorizes research-supported unit interpretation using presentation references and quantity/price consistency, without claiming historical validation; [method](../outputs/descriptive_closure_20261017/PRODUCT_RESEARCH_METHOD.md). Source Qty unchanged, ambiguous units remain unknown, no automatic tablet conversion. D9's original independent physical-evidence exit and D10's actual intended-scope acceptance remain open; no live mapping/master/model change.
+
+### Prioritized product-unit research batch completed — 17 October 2026
+
+[Per-product research and sources](../outputs/descriptive_closure_20261017/PRIORITY_BATCH_RESEARCH.md)
+cover the first 20 exact contribution-priority labels: 11 supported reference-unit
+interpretations, four tentative pack interpretations, three adjusted-only
+presentation references and two unresolved labels (SPEEDA and MERAZOL 40MG).
+Twenty-five external references are recorded with access and historical-linkage
+limits; original and adjusted selling-price/Qty profiles remain separate.
+All 1,347 retained records reconcile; 20 profile count checks and 100 binding
+checks pass, plus separate report-structure/no-conversion review. Nine source
+hashes and the controlled master hash are unchanged. No live analytical mapping,
+physical-unit conversion, model activation or acceptance decision was made.
+D9 research evidence advances; its original historical-unit exit and D10 actual
+stakeholder acceptance stay open, with no delivery-score increment. Next analyst
+and source owner review candidate subsets, atypical rows and unresolved pack
+alternatives before any separately scoped Gold/gateway integration.
+
+### Original-record unit review and Databricks handoff — 17 October 2026
+
+[Reviewed batch decisions](../outputs/descriptive_closure_20261017/UNIT_REVIEW_DECISIONS.md)
+combine current exact-label source profiles with the hash-matched company 2026
+injectable list; pages 1–2 visually checked and four key brands rechecked against
+the original PDF text. Eleven labels gain company presentation leads. MERAZOL
+now has a local vial/box-of-one reference, superseding the earlier absence of a
+local reference without closing historical-unit ambiguity. Existing tentative,
+adjusted-only and unverified historical statuses stay separate.
+
+The reparse accounts for 1,077 original and 270 adjusted records. Of the original
+records, 196 have one or more stated review flags: 73 historical backfills, 79
+Qty-times-price/gross differences over PHP0.02, 17 missing/nonpositive Qty and
+28 positive-Qty records without selling price. Counts overlap; flags are not
+confirmed errors or row-exclusion instructions. No prices or quantities were
+repaired, no records removed, and nine CSV/master hashes remain unchanged.
+Seventy-six review checks pass; prior research checks were not counted as fresh
+warehouse validation. D9 and D10 acceptance remain open; no score increment.
+
+[Warehouse update handoff](../outputs/descriptive_closure_20261017/DATABRICKS_UPDATE_HANDOFF.md)
+defines affected pipeline branches, reference/annotation versus historical-unit
+approval, recovery, version-bound validation and activation. No remote write or
+fresh live Databricks check occurred. Last audited fact20 is inherited evidence;
+actual current versions must be rediscovered before publication. The old
+predecessor-19 category-only descriptor permits neither unit nor new research
+annotations. Next warehouse/API implementation is a separate provenance-carrying
+descriptive research annotation contract if these interpretations should appear
+in the system, with immutable sales/Qty and unverified physical-unit status.
+
+### Automatic current-year sales estimates removed — 17 October 2026
+
+[Implementation and checked scope](../outputs/current_year_estimate_removal_20261017/README.md):
+the frontend monthly source series no longer manufactures current-year months;
+its current-year annual total exists only with observed months and uses YTD
+wording. Unknown gross profit remains null. Custom-range gap annotations cannot
+fill current-year periods or extend beyond the last observed period, including
+on 2027 rollover. Historical interior gap annotations and separately labelled
+stored predictive research remain. No source, master, warehouse or API change.
+
+Six new browser cases pass after correcting lazy-chart timing in two fixtures;
+15 existing chart/research regression cases pass against the final runtime.
+TypeScript and targeted lint pass. These are isolated-browser checks, not a fresh
+live Databricks execution. Existing dev servers remain running; no build/restart
+was needed. No score or approval change.
+
+2027 planning must use a separately labelled budget/forecast/scenario. If the
+latest recorded cutoff is December 2025, 2027 is leads 13–24 and the retained
+1–12-month evaluation does not establish performance there. Do not turn estimated
+2026 values into actual sales or relabel 2026 projections as 2027. A longer-lead
+forecast needs its own declared target/origin/horizon and comparable temporal
+evaluation; physical allocation also requires verified operational inputs.
+
+### 2027 horizon feasibility checked — 17 October 2026
+
+[Executed readiness assessment](../outputs/forecast_2027_readiness_20261017/README.md)
+verifies the existing frozen input checksum and validator, and finds 72
+contiguous eligible company-PHP months in 2020–2025. For proposed 36-month minimum
+training and quarterly origins December 2022 through December 2023, leads 13–24
+have 60 cases per complete model across 24 distinct 2024–2025 target months.
+Five origins overlap; only two December origins align with calendar-year target
+blocks. These are feasibility counts, not forecast errors, fresh live coverage
+validation, independent tests or model/publication acceptance.
+
+Next analyst action is registering a separate longer-horizon experiment and
+implementing its runner/adapters before any new scoring; existing 12-month
+limits and original selections stay intact. Previously available historical
+targets make this exploratory. No models fitted, 2027 predictions created,
+synthetic 2026 actuals inserted, warehouse outputs changed or score advanced.
+
+### 2027 longer-horizon comparison executed — 17 October 2026
+
+[Registered experiment and decision](../outputs/forecast_2027_experiment_20261017/REVIEW.md)
+extend research to calendar leads13–24 on the unchanged frozen company-PHP input.
+Eight fixed baseline/ETS/SARIMA recipes completed 40 model-origin fits. Seasonal
+naive won the registered first-four-origin MAE comparison and was frozen before
+the later-origin fits; no reselection from the diagnostic. Selection MAE
+PHP4,487,867.95 / WAPE56.61%; December2023-origin diagnostic targeting2025 MAE
+PHP10,328,173.08 / WAPE66.8501629%, mean bias −PHP10,263,987.85. Origin/target overlap
+and prior historical inspection prevent independent/untouched-test claims.
+
+The separate unpublished2027 seasonal-baseline projection totals PHP185,396,821.04
+and repeats the corresponding observed2025 monthly pattern; it is not a growth
+estimate or verified future actuals. No synthetic2026 observations inserted.
+Large historical errors/underforecasting support retaining research/scenario
+status, not dependable budget/procurement activation. Client tolerance remains
+unapproved; no arbitrary numeric acceptance limit introduced.
+
+Twenty-six targeted tests pass; separate Decimal/key/hash recomputation passes
+836 checks. Five SARIMA-airline short-history starting-parameter warnings remain
+visible; all fits returned complete target predictions. No calibrated intervals
+claimed from sparse per-lead support. Original1–12-month guards/selection and
+existing research remain unchanged; new adapter/runner is offline and separate.
+No live source/master/warehouse/API/UI change, business publication, score or
+objective-acceptance increment. Next: review error suitability and intended
+decision; assess later released actuals when available rather than repeatedly
+tuning these inspected targets. Physical allocation still needs its own inputs.
+
+### D9/D10 closure review refreshed — 17 October 2026
+
+Focus returned to descriptive acceptance, not further forecast tuning. The
+[updated existing review packet](../outputs/descriptive_closure_20261017/START_HERE.md)
+now presents the exact gap between original D9 independent historical evidence
+and the authorized research-supported interpretation, plus a concrete bounded
+reporting proposal for real stakeholder review. No proposal or amended scope is
+recorded as accepted. The already-confirmed complete COO-provided recorded-sales
+submission is retained without another completeness question.
+
+One authenticated live end-to-end scenario passed in47.4 seconds on fact20:
+Overview2017–2025 financials, API summary/margin,98 observed/10 unknown months,
+product category partitions and full category CSVs, and transaction search.
+[Bound receipt](../outputs/descriptive_closure_20261017/closure-recheck.json)
+adds17 CSV/source/status checks and artifact/test/runtime hashes. This is gateway/
+UI/export validation, not a separate uncached warehouse SQL capture or the entire
+original geography/frequency/failure-state scope. Earlier Area evidence is
+inherited. No application/source/master/warehouse/server change.
+
+The existing decision record now links actual technical demonstration and
+product research evidence; reviewer/date and business/academic approval fields
+are preserved and remain unset. D9/D10 status remains pending and descriptive
+stays8/10. Next project lead conducts the concrete walkthrough with source,
+designated business/publication and adviser owners. Obtain evidence meeting the
+original requirement or an actual reviewed scope amendment; never redefine a
+checkpoint silently or substitute technical tests for their decisions.

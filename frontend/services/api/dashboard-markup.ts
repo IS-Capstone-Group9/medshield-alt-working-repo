@@ -91,6 +91,7 @@ export const DATABRICKS_SOURCE_PAGE = `
   </section>`
 
 export const WEATHER_VALIDATION_PAGE = `
+  <style>#weatherEffectTable [hidden]{display:none}#page-weather-validation details{margin-top:12px;font-size:12px}#page-weather-validation summary{cursor:pointer;font-weight:600}</style>
   <div class="page fade-in" id="page-weather-validation">
     <section class="uploaded-data-panel" aria-labelledby="weatherEffectTitle">
       <div class="uploaded-data-header">
@@ -105,10 +106,12 @@ export const WEATHER_VALIDATION_PAGE = `
         <div class="uploaded-data-field"><label for="weatherArea">Territory point</label><select id="weatherArea"><option value="all">All Territories</option><option value="Albay">Albay</option><option value="Batangas">Batangas</option><option value="Camarines Norte">Camarines Norte</option><option value="Camarines Sur">Camarines Sur</option><option value="Catanduanes">Catanduanes</option><option value="Cavite">Cavite</option><option value="Laguna">Laguna</option><option value="Marinduque">Marinduque</option><option value="Masbate">Masbate</option><option value="Metro Manila">Metro Manila</option><option value="Occidental Mindoro">Occidental Mindoro</option><option value="Oriental Mindoro">Oriental Mindoro</option><option value="Palawan">Palawan</option><option value="Quezon">Quezon</option><option value="Rizal">Rizal</option><option value="Romblon">Romblon</option><option value="Sorsogon">Sorsogon</option></select></div>
         <div class="uploaded-data-field"><label for="weatherYear">Year</label><select id="weatherYear"><option value="all">All Years</option><option value="2025">2025</option><option value="2024" selected>2024</option><option value="2023">2023</option><option value="2022">2022</option><option value="2021">2021</option><option value="2020">2020</option><option value="2019">2019</option><option value="2018">2018</option><option value="2017">2017</option></select></div>
         <div class="uploaded-data-field"><span>Observation grain</span><strong>Monthly observations</strong></div>
+        <div class="uploaded-data-field"><label for="weatherColumns">Columns</label><select id="weatherColumns"><option value="compact">Compact</option><option value="full">Full evidence</option></select></div>
       </div>
       <div class="sales-note" id="weatherEffectStatus" aria-live="polite">Loading PAGASA observations from Databricks Gold.</div>
       <div class="uploaded-data-table-wrap"><table class="uploaded-data-table" id="weatherEffectTable"><tbody><tr><td class="uploaded-data-empty">Loading Weather Metrics...</td></tr></tbody></table></div>
       <div class="uploaded-data-footer"><div class="uploaded-data-status" id="weatherEffectCount">Loading...</div></div>
+      <details><summary>Coverage and interpretation</summary><p id="weatherEffectEvidence"></p><p>Compact shows available weather measurements. Full evidence includes empty measurements, derived indicators and sales matches. Missing values remain unavailable; historical agreement does not establish forecast accuracy.</p></details>
     </section>
   </div>
 `

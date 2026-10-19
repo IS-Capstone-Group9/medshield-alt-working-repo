@@ -1,5 +1,10 @@
 # Data Stores
 
+## Current warehouse readback — 20 October 2026
+
+The [currency review](../outputs/warehouse_review_20261020/README.md) verifies the active fact 20 source and current descriptive/frozen-input/STL/research relationships. It identifies one bounded derived-rate discrepancy: 81 aggregate margin percentages require NULL for nonpositive matching revenue. The [controlled maintenance migration](../databricks/medshield_project/maintenance/MARGIN_RATE_PATCH.md) is prepared, with existing baseline versions 11/10/11/10 for the four targets. It has not been applied remotely. Source fact, financial amounts, model inputs and publication state are unchanged. Use this current readback ahead of historical predecessor 19 preparation instructions; preserve old objects until dependencies/recovery are assessed.
+
+
 ## Backup/restore readiness —17 October2026
 
 The [runbook](BACKUP_RESTORE.md) and [local rehearsal](../outputs/backup_restore_20261017/README.md)

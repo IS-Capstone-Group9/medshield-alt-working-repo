@@ -604,7 +604,7 @@ def metric_aggregations():
 
 def with_margin_rate(frame):
     return frame.withColumn("weighted_gross_margin_pct", F.when(
-        F.col("margin_net_sales_basis").isNotNull() & (F.col("margin_net_sales_basis") != 0),
+        F.col("margin_net_sales_basis").isNotNull() & (F.col("margin_net_sales_basis") > 0),
         F.round(F.col("gross_margin_amount") / F.col("margin_net_sales_basis") * 100, 4)
     ))
 

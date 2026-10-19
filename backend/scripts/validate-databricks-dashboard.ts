@@ -114,56 +114,74 @@ function observedOrMissing(value: unknown, label: string): asserts value is numb
   assert.ok(value === null || typeof value === 'number' && Number.isFinite(value), `${label}: finite observed value or null`)
 }
 
-export function assertForecastValidationScopes(
-  company: ForecastScopeEvidence,
-  unknown: ForecastScopeEvidence,
+export function assertForecastValidationScope(
+  evidence: ForecastScopeEvidence,
+  sector: string,
   release: Awaited<ReturnType<typeof descriptiveRelease>>,
   now = new Date(),
 ) {
   const manilaDate = new Date(now.getTime() + 8 * 3600_000).toISOString().slice(0, 10)
-  for (const evidence of [company, unknown]) {
-    assert.equal(evidence.schema_version, 'forecast-validation.v2', 'forecast schema version')
-    assert.equal(evidence.evaluation_protocol, 'fixed_origin_multi_step', 'forecast evaluation protocol')
-    assert.equal(evidence.reporting_coverage_status, 'unverified', 'forecast reporting completeness remains unverified')
-    assert.equal(evidence.source.system_of_record, 'databricks', 'forecast system of record')
-    assert.equal(evidence.source.file, 'workspace.medshield_gold.sales_restart_fact_candidate', 'forecast source fact')
-    assert.equal(evidence.source.view, evidence.source.file, 'forecast source view')
-    assert.deepEqual(evidence.source.release, release, 'forecast source matches captured immutable release')
-    assert.equal(evidence.source.as_of, manilaDate, 'forecast source as-of matches current Manila date')
-    assert.equal(evidence.display_start, manilaDate.slice(0, 7), 'forecast display starts in current Manila month')
-    assert.equal(evidence.validated_lead_range, null, 'exploratory forecasts have no approved lead range')
+  assert.ok(['All', 'Government', 'Private', 'Internal', 'Unknown'].includes(sector), 'supported buyer scope')
+  assert.equal(evidence.schema_version, 'forecast-validation.v2', 'forecast schema version')
+  assert.equal(evidence.evaluation_protocol, 'fixed_origin_multi_step', 'forecast evaluation protocol')
+  assert.equal(evidence.reporting_coverage_status, 'unverified', 'forecast reporting completeness remains unverified')
+  assert.equal(evidence.source.system_of_record, 'databricks', 'forecast system of record')
+  assert.equal(evidence.source.file, 'workspace.medshield_gold.sales_restart_fact_candidate', 'forecast source fact')
+  assert.equal(evidence.source.view, evidence.source.file, 'forecast source view')
+  assert.deepEqual(evidence.source.release, release, 'forecast source matches captured immutable release')
+  assert.equal(evidence.source.as_of, manilaDate, 'forecast source as-of matches current Manila date')
+  assert.equal(evidence.display_start, manilaDate.slice(0, 7), 'forecast display starts in current Manila month')
+  assert.equal(evidence.validated_lead_range, null, 'exploratory forecasts have no approved lead range')
+  assert.deepEqual(evidence.scope, { sector, product: '', metric: 'revenue', unit: '₱ net sales' }, 'selected buyer forecast scope')
+  assert.equal(evidence.publication_status, 'unpublished', 'benchmark publication status')
+  if (evidence.status === 'empty') {
+    assert.equal(evidence.origin, null, 'empty scope has no origin')
+    assert.equal(evidence.last_actual_period, null, 'empty scope has no last actual')
+    assert.equal(evidence.observed_months, 0, 'empty scope has no observed measures')
+    assert.deepEqual(evidence.models, {}, 'empty scope has no model choices')
+    assert.deepEqual(evidence.views, {}, 'empty scope has no forecast horizons')
+    const displayStart = calendarMonth(evidence.display_start, 'empty scope display start')
+    let previous = -1
+    for (const point of evidence.actuals) {
+      const period = calendarMonth(point.period, 'empty scope period')
+      assert.ok(period > previous && period < displayStart, 'empty scope periods ordered and closed')
+      assert.equal(point.period_closed, true, 'empty scope period closed')
+      assert.equal(point.actual, null, 'empty scope has no observed actual')
+      previous = period
+    }
+    return {}
   }
-  assert.deepEqual(company.scope, { sector: 'All', product: '', metric: 'revenue', unit: '₱ net sales' }, 'company forecast scope')
-  assert.equal(company.status, 'exploratory', 'company forecast evidence status')
-  assert.equal(company.publication_status, 'unpublished', 'benchmark publication status')
-  assert.deepEqual(Object.keys(company.views), ['3', '6', '12'], 'supported company forecast horizons')
+  const seriesKey = sector === 'All' ? 'company' : `buyer:${sector}`
+  assert.equal(evidence.status, 'exploratory', 'evidence forecast evidence status')
+  assert.equal(evidence.publication_status, 'unpublished', 'benchmark publication status')
+  assert.deepEqual(Object.keys(evidence.views), ['3', '6', '12'], 'supported evidence forecast horizons')
   const modelIds = ['seasonal_naive', 'last_value', 'recent_mean_3', 'recent_mean_6'].sort()
-  assert.deepEqual(Object.keys(company.models).sort(), modelIds, 'company benchmark model choices')
-  const origin = calendarMonth(company.origin, 'company model origin')
-  const displayStart = calendarMonth(company.display_start, 'company forecast display start')
-  assert.ok(displayStart > origin, 'company forecast display starts after model origin')
-  assert.equal(company.last_actual_period, company.origin, 'company latest observed period is model origin')
+  assert.deepEqual(Object.keys(evidence.models).sort(), modelIds, 'evidence benchmark model choices')
+  const origin = calendarMonth(evidence.origin, 'evidence model origin')
+  const displayStart = calendarMonth(evidence.display_start, 'evidence forecast display start')
+  assert.ok(displayStart > origin, 'evidence forecast display starts after model origin')
+  assert.equal(evidence.last_actual_period, evidence.origin, 'evidence latest observed period is model origin')
   const actuals = new Map<number, number | null>()
   let previousMonth = -1
-  for (const point of company.actuals) {
-    const period = calendarMonth(point.period, 'company actual period')
-    assert.ok(period > previousMonth && period < displayStart, 'company actual periods unique, ordered and closed before display')
-    assert.equal(point.period_closed, true, 'company actual period closed')
-    observedOrMissing(point.actual, 'company actual')
+  for (const point of evidence.actuals) {
+    const period = calendarMonth(point.period, 'evidence actual period')
+    assert.ok(period > previousMonth && period < displayStart, 'evidence actual periods unique, ordered and closed before display')
+    assert.equal(point.period_closed, true, 'evidence actual period closed')
+    observedOrMissing(point.actual, 'evidence actual')
     actuals.set(period, point.actual)
     previousMonth = period
   }
   const observedPeriods = [...actuals].filter(([, value]) => value !== null).map(([period]) => period)
-  assert.equal(company.observed_months, observedPeriods.length, 'company observed month population')
-  assert.equal(observedPeriods.at(-1), origin, 'company origin is last observed actual month')
+  assert.equal(evidence.observed_months, observedPeriods.length, 'evidence observed month population')
+  assert.equal(observedPeriods.at(-1), origin, 'evidence origin is last observed actual month')
   const verifiedViews: Record<string, {
     training_end: string; evaluation_start: string; evaluation_end: string;
     display_start: string; display_end: string; first_future_lead: number; last_future_lead: number;
     model_count: number; common_scored_months: number;
   }> = {}
   for (const horizon of [3, 6, 12]) {
-    const label = `company ${horizon}-month view`
-    const view = objectEvidence(company.views[String(horizon)], label)
+    const label = `evidence ${horizon}-month view`
+    const view = objectEvidence(evidence.views[String(horizon)], label)
     const trainingEnd = origin - horizon
     assert.equal(view.evaluation_protocol, 'fixed_origin_multi_step', `${label}: evaluation protocol`)
     assert.equal(calendarMonth(view.training_end, label), trainingEnd, `${label}: true training cutoff`)
@@ -181,7 +199,7 @@ export function assertForecastValidationScopes(
       for (const [index, raw] of model.backtest.entries()) {
         const point = objectEvidence(raw, modelLabel)
         const target = trainingEnd + index + 1
-        assert.equal(point.series, 'company', `${modelLabel}: backtest series key`)
+        assert.equal(point.series, seriesKey, `${modelLabel}: backtest series key`)
         assert.equal(point.target, 'recorded_net_sales', `${modelLabel}: backtest target key`)
         assert.equal(calendarMonth(point.origin, modelLabel), trainingEnd, `${modelLabel}: fixed backtest origin`)
         assert.equal(calendarMonth(point.period, modelLabel), target, `${modelLabel}: consecutive backtest target`)
@@ -200,7 +218,7 @@ export function assertForecastValidationScopes(
       for (const [index, raw] of model.forecast.entries()) {
         const point = objectEvidence(raw, modelLabel)
         const target = displayStart + index
-        assert.equal(point.series, 'company', `${modelLabel}: forecast series key`)
+        assert.equal(point.series, seriesKey, `${modelLabel}: forecast series key`)
         assert.equal(point.target, 'recorded_net_sales', `${modelLabel}: forecast target key`)
         assert.equal(calendarMonth(point.origin, modelLabel), origin, `${modelLabel}: original forecast cutoff`)
         assert.equal(calendarMonth(point.period, modelLabel), target, `${modelLabel}: consecutive display target`)
@@ -223,17 +241,55 @@ export function assertForecastValidationScopes(
     const display = firstModel.forecast as Array<Record<string, unknown>>
     verifiedViews[String(horizon)] = {
       training_end: String(view.training_end), evaluation_start: String(view.evaluation_start), evaluation_end: String(view.evaluation_end),
-      display_start: company.display_start, display_end: String(display.at(-1)!.period),
+      display_start: evidence.display_start, display_end: String(display.at(-1)!.period),
       first_future_lead: displayStart - origin, last_future_lead: displayStart + horizon - 1 - origin,
       model_count: modelIds.length, common_scored_months: commonKeys.length,
     }
   }
-  assert.deepEqual(unknown.scope, { sector: 'Unknown', product: '', metric: 'revenue', unit: '₱ net sales' }, 'unsupported buyer scope')
-  assert.equal(unknown.status, 'blocked', 'unsupported buyer forecast status')
-  assert.equal(unknown.publication_status, 'unpublished', 'unsupported buyer publication status')
-  assert.deepEqual(unknown.views, {}, 'unsupported buyer has no forecast horizons')
-  assert.deepEqual(unknown.models, {}, 'unsupported buyer has no model choices')
   return verifiedViews
+}
+
+export function assertForecastValidationScopes(
+  company: ForecastScopeEvidence,
+  unknown: ForecastScopeEvidence,
+  release: Awaited<ReturnType<typeof descriptiveRelease>>,
+  now = new Date(),
+) {
+  const verified = assertForecastValidationScope(company, 'All', release, now)
+  assertForecastValidationScope(unknown, 'Unknown', release, now)
+  return verified
+}
+
+type ExternalContextEvidence = {
+  status: string; scope: {sector: string; territory: string};
+  coverage: {sales_months: number; matched_months: number};
+  context: {status: string; sales_months: number; coobserved_months: number; join_ready_months: number;
+    rows: Array<{period: string; sales: number | null; signals: Array<{value: number | null; join_ready: boolean}>}>};
+}
+
+/** An empty Unknown buyer is valid; a separate known scope proves coverage. */
+export function assertExternalContextScopes(known: ExternalContextEvidence, unknown: ExternalContextEvidence) {
+  assert.equal(known.scope.sector, 'Private', 'external known buyer scope')
+  assert.equal(unknown.scope.sector, 'Unknown', 'external empty buyer scope')
+  for (const evidence of [known, unknown]) {
+    assert.equal(evidence.status, 'blocked', 'external regression publication gate')
+    assert.equal(evidence.scope.territory, 'Quezon', 'external selected territory')
+    const c = evidence.context
+    assert.equal(c.status, 'historical_context_candidate', 'external context candidate status')
+    assert.equal(c.rows.length, 108, 'external full2017–2025 study calendar')
+    assert.equal(new Set(c.rows.map(row => row.period)).size, 108, 'unique external target months')
+    assert.equal(c.sales_months, evidence.coverage.sales_months, 'context/coverage buyer sales population')
+    assert.equal(c.sales_months, c.rows.filter(row => row.sales !== null).length, 'observed sales month count')
+    assert.equal(c.coobserved_months, c.rows.filter(row => row.sales !== null && row.signals.length === 2 && row.signals.every(s => s.value !== null)).length, 'co-observation count')
+    assert.equal(c.join_ready_months, 0, 'unapproved external joins remain blocked')
+    assert.equal(evidence.coverage.matched_months, 0, 'candidate alignment is not approved model coverage')
+    assert.ok(c.rows.every(row => row.signals.length === 2 && row.signals.every(s => s.join_ready === false)), 'selected disease/rainfall signals retain pending mapping')
+  }
+  assert.ok(known.coverage.sales_months > 0, 'external known buyer has observed sales')
+  assert.equal(unknown.coverage.sales_months, 0, 'absent Unknown buyer is not private-territory coverage')
+  assert.ok(unknown.context.rows.every(row => row.sales === null), 'absent Unknown buyer never becomes zero sales')
+  return {known_scope:known.scope,known_sales_months:known.coverage.sales_months,coobserved_months:known.context.coobserved_months,
+    unknown_sales_months:unknown.coverage.sales_months,approved_join_months:known.context.join_ready_months}
 }
 
 async function main() {
@@ -254,7 +310,7 @@ async function main() {
     FROM ${fact}`, { rowLimit: 1 })).rows[0]
   assert.ok(source, 'Gold validation returned no source aggregate')
   const weatherYear = sourceCount(source, 'last_year')
-  const [snapshot, status, summary, transactions, heatmap, sectors, forecast, unknownForecast, regression, planning, weather, nasaWeather, nasaCount] =
+  const [snapshot, status, summary, transactions, heatmap, sectors, forecast, unknownForecast, regression, unknownRegression, planning, weather, nasaWeather, nasaCount] =
     await Promise.all([
       loadDatabricksDashboardSnapshot(),
       getDatabricksSalesStatus(),
@@ -264,7 +320,8 @@ async function main() {
       getDatabricksSalesSectors(),
       getDatabricksForecastValidation({ sector: 'All', metric: 'revenue' }),
       getDatabricksForecastValidation({ sector: 'Unknown', metric: 'revenue' }),
-      getDatabricksExternalRegression({ sector: 'Unknown', metric: 'revenue' }),
+      getDatabricksExternalRegression({ sector: 'Private', territory: 'Quezon', metric: 'revenue', mode: 'combined' }),
+      getDatabricksExternalRegression({ sector: 'Unknown', territory: 'Quezon', metric: 'revenue', mode: 'combined' }),
       getDatabricksPlanningShortlist({ sector: 'Unknown', territory: 'all' }),
       getDatabricksWeatherEffects({ grain: 'monthly' }),
       getDatabricksWeatherEffects({ grain: 'monthly', provider: 'nasa_power', year: String(weatherYear) }),
@@ -293,8 +350,7 @@ async function main() {
   assert.equal(heatmap.source.included_rows, counts.accepted, 'heatmap/Gold survivor population')
   assert.equal(sectors.source.included_rows, counts.accepted, 'buyer grouping/Gold survivor population')
   const forecastCalendar = assertForecastValidationScopes(forecast, unknownForecast, release)
-  assert.equal(regression.status, 'blocked', 'external regression gate')
-  assert.ok(regression.coverage.sales_months > 0, 'external regression sales coverage')
+  const externalContext = assertExternalContextScopes(regression, unknownRegression)
   assertPlanningShortlist(planning)
   assert.equal(weather.metadata.provider, 'PAGASA', 'weather provider')
   assert.equal(weather.metadata.sales_matched_rows, 0, 'unapproved PAGASA/sales matches')
@@ -347,13 +403,13 @@ async function main() {
       origin: forecast.origin,
       horizons: Object.keys(forecast.views),
       calendar_views: forecastCalendar,
-      unsupported_buyer_scope: {
+      buyer_scope_probe: {
         scope: unknownForecast.scope,
         status: unknownForecast.status,
         horizons: Object.keys(unknownForecast.views),
       },
     },
-    external_regression: { status: regression.status, reason: regression.reason },
+    external_regression: { status: regression.status, reason: regression.reason, context: externalContext },
     pagasa: {
       rows: weather.metadata.rows_returned,
       period: [weather.metadata.period_start, weather.metadata.period_end],

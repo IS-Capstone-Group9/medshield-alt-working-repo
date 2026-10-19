@@ -53,7 +53,7 @@ test('capture loaded graph meaning and geometry across dashboard pages', async (
     if (name === 'inventory') await expect(page.locator('#planSourceStatus')).toContainText('Source-ranked shortlist', {timeout: 90000})
     await settleCharts(page, name)
     if (phase === 'after') {
-      if (name === 'overview') await expect(page.locator('#overviewTrendReading')).toContainText('Incomplete-year coverage')
+      if (name === 'overview') await expect(page.locator('#overviewTrendReading')).toContainText('Totals use client-provided records')
       if (name === 'products') await expect(page.locator('#productSalesValues')).not.toBeVisible()
       if (name === 'territory') await expect(page.locator('[data-rollup-region="Bicol"]')).toContainText('No mapped records')
       if (name === 'inventory') await expect(page.locator('#planInputs tbody')).toContainText('source Qty (unit unverified)')

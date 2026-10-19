@@ -1,5 +1,213 @@
 # Database migration regressions — 16 October 2026
 
+## Forecast-use brief/system/paper consolidation — 20 October 2026
+
+From `frontend/`:
+
+```powershell
+node node_modules/@playwright/test/cli.js test --config=../outputs/forecast_use_review_20261020/fixtures.config.cjs
+node node_modules/@playwright/test/cli.js test --config=../outputs/forecast_use_review_20261020/live.config.cjs
+node node_modules/typescript/bin/tsc --noEmit --incremental false
+node node_modules/eslint/bin/eslint.js services/api/forecast-validation-runtime.ts services/api/predictive-research-runtime.ts
+```
+
+Fourteen focused cases and one configured live workflow pass. Checks cover
+source-derived use/error context, CSV agreement, approved-versus-research
+wording, selected-model changes, projections without actual errors, null/zero/
+signed values, empty scopes, source failure/recovery and desktop/mobile fit.
+The [delivery and receipts](../outputs/forecast_use_review_20261020/README.md)
+retain source-number/document checks and original-artifact preservation. This
+validates presentation/documentation, not improved model accuracy or acceptance.
+
+## Offline sector and forecast-schedule assessment — 20 October 2026
+
+From the repository root:
+
+```powershell
+.\.venv-predictive\Scripts\python.exe -X utf8 -m unittest services.tests.test_predictive services.tests.test_predictive_sector_refresh -v
+.\.venv-predictive\Scripts\python.exe -X utf8 outputs/sector_refresh_evaluation_20261020/qa/verify_results.py --results outputs/sector_refresh_evaluation_20261020/run/results.json
+```
+
+[Assessment and source-bound receipts](../outputs/sector_refresh_evaluation_20261020/README.md)
+retain the registered run, input/source hashes, actual calendar leads, matched
+schedule targets, native/common support, missing/signed/zero probes, future-value
+invariance, sector-sum checks and cancellation-aware horizon totals. The scoped
+24-test run passed; separate Decimal verification checks retained source and
+output artifacts without using the runner's forecast/score functions as its
+expected-value oracle. This is offline historical evaluation, not a live
+warehouse/browser test, model fit, untouched test or acceptance decision.
+
+## Five-page information density — 20 October 2026
+
+From `frontend/`, with existing local services for the live case:
+
+```powershell
+node node_modules/@playwright/test/cli.js test --config=../outputs/ui_density_followup_20261020/fixtures.config.cjs
+node node_modules/@playwright/test/cli.js test --config=../outputs/ui_density_followup_20261020/live.config.cjs
+```
+
+[Delivery and receipts](../outputs/ui_density_followup_20261020/README.md) cover
+closed notes, retained statuses/metrics/exports, provider-specific compact columns,
+full evidence, zero/missing/empty states, no switch refetch, keyboard access,
+desktop/mobile layout and browser-only source failure/recovery. The initial
+test-formatting failure and subsequent passing run remain separately recorded.
+
+## Client-provided annual record labels — 20 October 2026
+
+From `frontend/`, reuse the configured local services for the live case:
+
+```powershell
+node node_modules/@playwright/test/cli.js test --config=../outputs/recorded_year_labels_20261020/fixtures.config.cjs
+node node_modules/@playwright/test/cli.js test --config=../outputs/recorded_year_labels_20261020/live.config.cjs
+```
+
+The [delivery record](../outputs/recorded_year_labels_20261020/README.md) separates
+the first failures, corrected fixture checks and configured live evidence. Check
+plain historical years, visible month counts, exact unchanged financial totals,
+null versus observed zero, matched Y/Y, selected-date labels, current-year YTD,
+both graph scopes, CSV and mobile fit. Client submission completeness and month
+observations are different facts. No forecast or source-audit approval is implied.
+
+## Current study scope and independent financial populations — 20 October 2026
+
+From `frontend/` with the configured local services for the live case:
+
+```powershell
+node node_modules/@playwright/test/cli.js test --config=../outputs/study_scope_2017_2025_20261020/fixtures.config.cjs
+node node_modules/@playwright/test/cli.js test --config=../outputs/study_scope_2017_2025_20261020/live.config.cjs
+```
+
+The [delivery record](../outputs/study_scope_2017_2025_20261020/README.md) checks
+the nine-year default, removed history selector, scope metadata/CSV, all-sector
+source agreement, independent profit-only periods with null sales, matching
+margin bases, dates/Y/Y, preserved predictive rendering, mobile and source failure.
+The saved model window/results are unchanged. Runtime tests and the actual model
+quality/acceptance decision remain different evidence.
+
+## Overall and selected-sector trend graphs — 19 October 2026
+
+From `frontend/`:
+
+```powershell
+node node_modules/@playwright/test/cli.js test --config=../outputs/overall_sector_graphs_20261019/fixtures.config.cjs
+node node_modules/@playwright/test/cli.js test --config=../outputs/overall_sector_graphs_20261019/live.config.cjs
+```
+
+The [delivery record](../outputs/overall_sector_graphs_20261019/README.md) separates
+the 48-case broader regression receipt, final six-case palette/sector receipt and
+final configured live workflow. Check fixed All data, four sector choices, common
+dates/grain/measure/signed bounds, exact custom dates and Y/Y populations, both
+CSVs/tables, missing/zero/negative states, scope-correct chart investigation,
+all-sector contribution rows, mobile stacking and explicit source-failure reset.
+The live case independently groups served sector-trend inputs; it is not a new
+source-file or warehouse audit. Screenshots suppress the fixed app header only
+during tall element capture. No build runs alongside the existing Next dev.
+
+## Sector diagnostic overview and paper evidence — 19 October 2026
+
+The [delivery record](../outputs/sector_diagnostic_20261019/README.md) distinguishes
+isolated regressions, configured live integration, independent source/CSV
+recomputation and manuscript claims. From `backend/`:
+
+```powershell
+node --import tsx --test tests/sector-trend.test.ts tests/sales-diagnostics.test.ts tests/sales-diagnostics-query.test.ts tests/role-matrix.test.ts tests/http-boundaries.test.ts
+```
+
+From `frontend/` with configured local services for the live case:
+
+```powershell
+node node_modules/@playwright/test/cli.js test --config=../outputs/sector_diagnostic_20261019/fixtures.config.cjs
+node node_modules/@playwright/test/cli.js test --config=../outputs/sector_diagnostic_20261019/live.config.cjs
+```
+
+From the repository root:
+
+```powershell
+python -X utf8 outputs/sector_diagnostic_20261019/verify_findings.py
+python -X utf8 outputs/sector_diagnostic_20261019/prepare_findings.py
+```
+
+The live flow compares all five scopes against independently grouped served
+Gold catalog inputs, reconciles signed sector changes, checks margin bases,
+captures trend/contribution CSVs, traverses Government/month/product/area,
+checks settled mobile width and browser-only required-source failure/recovery.
+Synthetic cases cover null/zero/signed/missing and exact-date/matched overlays,
+comparison failure/reset/retry, access denial, source evidence partitions and
+existing diagnostic behavior. A responsive chart resize must settle before
+measuring mobile overflow. No real provider outage or new source/causal approval
+is implied; no build runs concurrently with Next dev.
+
+## Authentication 503 recovery — 19 October 2026
+
+The [focused recovery evidence](../outputs/auth_503_recovery_20261019/README.md)
+separates observed gateway connection-reset logs, isolated identity/middleware
+regressions and browser-only outage injections. From `backend/`:
+
+```powershell
+node --import tsx --test tests/supabase-identity.test.ts tests/auth-configuration.test.ts tests/role-matrix.test.ts tests/http-boundaries.test.ts
+```
+
+From `frontend/`, against the existing configured development services:
+
+```powershell
+node node_modules/@playwright/test/cli.js test --config=../outputs/auth_503_recovery_20261019/playwright.config.cjs
+```
+
+Checks cover bounded recovery at both identity reads, persistent-failure denial,
+unchanged invalid/inactive/linked-role controls, no password POST replay,
+structured API errors, hidden analytics, distinct identity/source messages and
+reload recovery to live data. No real provider interruption or guaranteed
+external availability is implied; no build runs alongside Next dev.
+
+## Buyer-scoped predictive evidence — 19 October 2026
+
+[Delivery and evidence](../outputs/predictive_buyer_scope_20261019/README.md)
+retain the before/after live scope responses, CSVs and independent recomputation.
+From `backend/`, the focused predictive/approval/calendar regression command is:
+
+```powershell
+node --import tsx --test tests/forecast*.test.ts tests/predictiveRelease.test.ts tests/predictiveCandidate.test.ts tests/predictiveCoverage.test.ts tests/dashboard-validator.test.ts
+```
+
+From `frontend/`, against the existing configured local services:
+
+```powershell
+node node_modules/@playwright/test/cli.js test --config=../outputs/predictive_buyer_scope_20261019/playwright.config.cjs
+node node_modules/@playwright/test/cli.js test --config=../outputs/predictive_buyer_scope_20261019/fixtures.config.cjs
+```
+
+The live case checks buyer-scoped actuals, 3/6/12-month benchmark/table/CSV parity,
+the empty Unknown selection, cross-sector reconciliation and browser-only
+source503 clearing/recovery. The isolated cases cover signed/null/zero errors,
+published-adapter boundaries, model/lead behavior, new empty-state reset and
+stored-research regression. Captures are scoped to each run; the older historical
+screenshots are not overwritten. Tests do not grant model/mapping approval or
+establish future accuracy. No build runs alongside Next dev.
+
+## Graph meaning and output corrections — 17 October 2026
+
+[Graph clarity evidence](../outputs/graph_clarity_20261017/README.md) records
+29 passing browser scenarios, frontend types/lint and numerical preservation of
+18 captured series. The isolated cases distinguish incomplete annual totals from
+growth, absent mapped rows from observed zero, unknown source Qty from verified
+units, and empty future predictions from available zero/negative predictions.
+Full forecast evidence/CSV retains requested missing months and supported
+intervals; interior gaps remain blank. Existing area interactions and live
+Product category/cohort/search/CSV reconciliation remain checked.
+
+From `frontend/`, using existing configured local services:
+
+```powershell
+node node_modules/@playwright/test/cli.js test --config=../outputs/graph_clarity_20261017/playwright.final.config.cjs
+```
+
+One live workflow checks six loaded pages at1440/390 widths; these are12 layout
+cases, not12 separate test scenarios. Explicit screenshots wait for loaded source
+and settled chart geometry. Trace/video/automatic screenshots are disabled.
+Retained first loading-state captures and the inactive-page wait failure are
+not passing loaded-output evidence. This is local self-review, without model,
+business, academic, operational or release approval; no production build ran.
+
 ## Canonical 2017–2025 sales source verification — 17 October 2026
 
 The full-corpus tests now read `databricks/medshield_project_csv/medshield_project_csv`,
@@ -858,3 +1066,37 @@ Backend `sales-diagnostics.test.ts`, `sales-diagnostics-query.test.ts`,
 `auth-configuration.test.ts` and `audit-store.test.ts` protect analytics/auth/audit boundaries.
 See [implementation and limits](DRILLDOWN_DIAGNOSTICS.md) and the
 [executed remediation record](../outputs/remediation-drilldown-20261005/README.md).
+
+## Current-year estimate removal — 17 October 2026
+
+`frontend/e2e/current-year-observations.spec.ts`: six passing cases cover absent
+current-year observations, partial actuals/zero, null profit, rollover and custom
+2026 charts in 2026/2027. Fifteen existing descriptive chart-integrity and stored
+predictive-research cases pass against the final runtime. TypeScript and targeted
+lint pass. Two initial custom-chart fixture failures were corrected by awaiting
+lazy chart creation; see [execution scope and artifacts](../outputs/current_year_estimate_removal_20261017/README.md).
+No live warehouse revalidation or production build was performed for this
+frontend-only correction; stored candidate research remains separately available.
+
+## Long-horizon company-PHP experiment — 17 October 2026
+
+`python -m unittest services.tests.test_predictive_long_horizon services.tests.test_predictive services.tests.test_predictive_extended`:
+26 pass in the predictive environment. New cases cover future-actual poisoning,
+second-year seasonal indexing, training gaps, partial-fold exclusion, signed
+revenue and zero percentage denominators. Actual experiment has40 complete
+model-origin fits. Separate Decimal/source/key/hash verification passes836
+checks; [execution and limits](../outputs/forecast_2027_experiment_20261017/REVIEW.md).
+These checks do not establish2027 actual accuracy, independent validation,
+calibrated intervals, live Databricks execution or operational acceptance.
+
+
+## External-context and analytics audit — 20 October 2026
+
+Use the [audit packet](../outputs/analytics_external_audit_20261020/README.md) for source identities and numerical checks. Focused gateway tests are `node --import tsx --test tests/external-context.test.ts tests/analytics-formula-crosscheck.test.ts` from `backend/`. They check buyer/product/approved-geography SQL, invalid options, source outage, unique monthly keys, null/zero/signed values and hand-calculated financial/forecast/pack examples. `frontend/e2e/external-context.spec.ts` checks compiled runtime, charts/table/CSV, formula-safe text, mapping states, stale-state clearing, actual authenticated buyer changes and desktop/mobile layout. Its fixture loads the production CSS and overrides; its live check requires the configured running gateway/Next dev and Gold. Run no concurrent Next build. Python metrics/calibration and offline commercial-ABC regressions are in `services/tests/test_predictive.py` and `test_commercial_mcda.py`; fixtures do not validate live forecast accuracy. Separate `audit.py` recalculates the retained model/STL and fresh Gold aggregate evidence without fitting or publishing a real forecast.
+
+
+## Warehouse currency and nonpositive margin basis — 20 October 2026
+
+[Warehouse review evidence](../outputs/warehouse_review_20261020/README.md) retains the initial false validation failure and the repaired current gateway check. The validator now tests known Private/Quezon context separately from absent Unknown, rejecting leaked or zero-filled sales and duplicate months. Run `node --import tsx --test tests/dashboard-validator.test.ts` from `backend/`. The complete notebook suite uses `python -m unittest discover -s databricks/medshield_project/tests`; its new margin test executes the actual Gold expression through a small SQL-expression adapter on hand-calculated rows, not cloud Spark execution. The package's generated README must pass `render_readme.py --check` after source/guide edits.
+
+`backend/scripts/review-analytical-warehouse.ts --check-margin-patch` executes read-only preflight assertions, formula previews and EXPLAIN analysis, without applying maintenance SQL. The prepared SQL has separate post-write rowset assertions that remain unexecuted until an operator applies the reviewed change. Counts/source identities, before/after versions, immutable-field equality, current API validation and actual cloud receipt are required to close the open repair. Passing preparation checks is not an applied migration or a model/data publication decision.

@@ -32,7 +32,7 @@ export type SalesDiagnostics = {
     current_financial: DiagnosticFinancial; prior_financial: DiagnosticFinancial }
   coverage: { missing_current_months: string[]; missing_prior_months: string[]; unmatched_months: string[]
     partial_boundary_months: string[]; coverage_status: string }
-  contributions: Record<DiagnosticDimension, DiagnosticContribution[]>
+  contributions: Record<DiagnosticDimension, DiagnosticContribution[]> & { evidence?: DiagnosticContribution[] }
   causal_status: string
   limitations: string[]
 }

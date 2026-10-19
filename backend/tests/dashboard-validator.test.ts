@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { assertForecastValidationScopes as validateForecastScopes, assertGoldCoverage, assertObservedAmount, assertPlanningShortlist } from '../scripts/validate-databricks-dashboard'
+import { assertExternalContextScopes, assertForecastValidationScopes as validateForecastScopes, assertForecastValidationScope, assertGoldCoverage, assertObservedAmount, assertPlanningShortlist } from '../scripts/validate-databricks-dashboard'
 
 const assertForecastValidationScopes = (...args: Parameters<typeof validateForecastScopes>) =>
   validateForecastScopes(args[0], args[1], args[2], args[3] ?? new Date('2026-10-16T04:00:00Z'))
@@ -37,11 +37,11 @@ const companyEvidence = () => {
     views, models: { ...names } }
 }
 
-const unsupportedEvidence = () => ({ ...companyEvidence(),
-  scope: { sector: 'Unknown', product: '', metric: 'revenue', unit: '₱ net sales' }, status: 'blocked', views: {}, models: {} })
+const emptyBuyerEvidence = () => ({ ...companyEvidence(),
+  scope: { sector: 'Unknown', product: '', metric: 'revenue', unit: '₱ net sales' }, status: 'empty', actuals: [], origin: null, last_actual_period: null, observed_months: 0, views: {}, models: {} })
 
-test('dashboard validator separates company benchmarks from blocked buyer scope', () => {
-  const checked = assertForecastValidationScopes(companyEvidence(), unsupportedEvidence(), release)
+test('dashboard validator separates company benchmarks from empty buyer scope', () => {
+  const checked = assertForecastValidationScopes(companyEvidence(), emptyBuyerEvidence(), release)
   assert.deepEqual(checked['3'], { training_end: '2025-09', evaluation_start: '2025-10', evaluation_end: '2025-12',
     display_start: '2026-10', display_end: '2026-12', first_future_lead: 10, last_future_lead: 12, model_count: 4, common_scored_months: 3 })
   assert.equal(checked['12'].training_end, '2024-12')
@@ -49,9 +49,29 @@ test('dashboard validator separates company benchmarks from blocked buyer scope'
   assert.equal(checked['12'].last_future_lead, 21)
 })
 
+test('buyer evidence validates its own series keys and empty never means observed zero', () => {
+  const buyer = companyEvidence()
+  buyer.scope.sector = 'Government'
+  for (const view of Object.values(buyer.views)) {
+    for (const model of Object.values(view.models)) {
+      for (const point of [...model.backtest, ...model.forecast]) point.series = 'buyer:Government'
+    }
+    view.common_evaluation_keys = view.common_evaluation_keys.map(raw => {
+      const key = JSON.parse(raw); key[0] = 'buyer:Government'; return JSON.stringify(key)
+    }).sort()
+  }
+  const now = new Date('2026-10-16T04:00:00Z')
+  assert.equal(assertForecastValidationScope(buyer, 'Government', release, now)['12'].model_count, 4)
+  assert.throws(() => assertForecastValidationScope(buyer, 'Private', release, now), /selected buyer forecast scope/)
+  buyer.views['12'].models.last_value.backtest[0].series = 'company'
+  assert.throws(() => assertForecastValidationScope(buyer, 'Government', release, now), /backtest series key/)
+  const falseEmpty = { ...emptyBuyerEvidence(), actuals: [{period:'2025-01',actual:0,period_closed:true}] }
+  assert.throws(() => assertForecastValidationScopes(companyEvidence(), falseEmpty, release), /no observed actual/)
+})
+
 test('dashboard validator rejects company evidence missing supported horizons', () => {
-  assert.throws(() => assertForecastValidationScopes({ ...companyEvidence(), views: {} }, unsupportedEvidence(), release), /supported company forecast horizons/)
-  assert.throws(() => assertForecastValidationScopes({ ...companyEvidence(), views: { '3': {}, '6': {}, '12': {} } }, unsupportedEvidence(), release), /evaluation protocol/)
+  assert.throws(() => assertForecastValidationScopes({ ...companyEvidence(), views: {} }, emptyBuyerEvidence(), release), /supported evidence forecast horizons/)
+  assert.throws(() => assertForecastValidationScopes({ ...companyEvidence(), views: { '3': {}, '6': {}, '12': {} } }, emptyBuyerEvidence(), release), /evaluation protocol/)
 })
 
 test('dashboard validator rejects a consistently shifted future window and stale as-of date', () => {
@@ -60,54 +80,54 @@ test('dashboard validator rejects a consistently shifted future window and stale
   for (const view of Object.values(shifted.views)) for (const model of Object.values(view.models)) {
     model.forecast.forEach((point, index) => { point.period = periodAt(46 + index); point.lead += 1 })
   }
-  assert.throws(() => assertForecastValidationScopes(shifted, unsupportedEvidence(), release), /current Manila month/)
+  assert.throws(() => assertForecastValidationScopes(shifted, emptyBuyerEvidence(), release), /current Manila month/)
   const stale = companyEvidence()
   stale.source.as_of = '2026-10-15'
-  assert.throws(() => assertForecastValidationScopes(stale, unsupportedEvidence(), release), /current Manila date/)
-  assert.throws(() => assertForecastValidationScopes(companyEvidence(), { ...unsupportedEvidence(), display_start: '2026-11' }, release), /current Manila month/)
+  assert.throws(() => assertForecastValidationScopes(stale, emptyBuyerEvidence(), release), /current Manila date/)
+  assert.throws(() => assertForecastValidationScopes(companyEvidence(), { ...emptyBuyerEvidence(), display_start: '2026-11' }, release), /current Manila month/)
 })
 
 test('dashboard validator uses Manila date at a UTC month boundary without changing model origin', () => {
-  const company = companyEvidence(), unknown = unsupportedEvidence()
+  const company = companyEvidence(), unknown = emptyBuyerEvidence()
   company.source.as_of = unknown.source.as_of = '2026-10-01'
   const checked = assertForecastValidationScopes(company, unknown, release, new Date('2026-09-30T16:00:00Z'))
   assert.equal(checked['12'].first_future_lead, 10)
   assert.equal(checked['12'].last_future_lead, 21)
 })
 
-test('dashboard validator rejects forecast or model choices on the blocked buyer scope', () => {
-  assert.throws(() => assertForecastValidationScopes(companyEvidence(), { ...unsupportedEvidence(), views: { '3': {} } }, release), /unsupported buyer has no forecast horizons/)
-  assert.throws(() => assertForecastValidationScopes(companyEvidence(), { ...unsupportedEvidence(), models: { last_value: 'Last value' } }, release), /unsupported buyer has no model choices/)
+test('dashboard validator rejects forecast or model choices on an empty buyer scope', () => {
+  assert.throws(() => assertForecastValidationScopes(companyEvidence(), { ...emptyBuyerEvidence(), views: { '3': {} } }, release), /empty scope has no forecast horizons/)
+  assert.throws(() => assertForecastValidationScopes(companyEvidence(), { ...emptyBuyerEvidence(), models: { last_value: 'Last value' } }, release), /empty scope has no model choices/)
 })
 
 test('dashboard validator does not confuse exploratory benchmarks with publication', () => {
-  assert.throws(() => assertForecastValidationScopes({ ...companyEvidence(), publication_status: 'approved' }, unsupportedEvidence(), release), /benchmark publication status/)
+  assert.throws(() => assertForecastValidationScopes({ ...companyEvidence(), publication_status: 'approved' }, emptyBuyerEvidence(), release), /benchmark publication status/)
 })
 
 test('dashboard validator requires exact company and blocked request scopes', () => {
   for (const scope of [{ ...companyEvidence().scope, product: 'raw-label' }, { ...companyEvidence().scope, metric: 'quantity' }, { ...companyEvidence().scope, unit: 'boxes' }]) {
-    assert.throws(() => assertForecastValidationScopes({ ...companyEvidence(), scope }, unsupportedEvidence(), release), /company forecast scope/)
-    assert.throws(() => assertForecastValidationScopes(companyEvidence(), { ...unsupportedEvidence(), scope: { ...scope, sector: 'Unknown' } }, release), /unsupported buyer scope/)
+    assert.throws(() => assertForecastValidationScopes({ ...companyEvidence(), scope }, emptyBuyerEvidence(), release), /selected buyer forecast scope/)
+    assert.throws(() => assertForecastValidationScopes(companyEvidence(), { ...emptyBuyerEvidence(), scope: { ...scope, sector: 'Unknown' } }, release), /selected buyer forecast scope/)
   }
-  assert.throws(() => assertForecastValidationScopes({ ...companyEvidence(), models: { last_value: 'Last value' } }, unsupportedEvidence(), release), /model choices/)
+  assert.throws(() => assertForecastValidationScopes({ ...companyEvidence(), models: { last_value: 'Last value' } }, emptyBuyerEvidence(), release), /model choices/)
 })
 
 test('dashboard validator binds both forecast scopes to the exact captured source and catalog release', () => {
   for (const field of Object.keys(release) as Array<keyof typeof release>) {
     const evidence = companyEvidence()
     const changed = { ...evidence.source.release, [field]: 'different' }
-    assert.throws(() => assertForecastValidationScopes({ ...evidence, source: { ...evidence.source, release: changed } }, unsupportedEvidence(), release), /immutable release/)
-    assert.throws(() => assertForecastValidationScopes(evidence, { ...unsupportedEvidence(), source: { ...evidence.source, release: changed } }, release), /immutable release/)
+    assert.throws(() => assertForecastValidationScopes({ ...evidence, source: { ...evidence.source, release: changed } }, emptyBuyerEvidence(), release), /immutable release/)
+    assert.throws(() => assertForecastValidationScopes(evidence, { ...emptyBuyerEvidence(), source: { ...evidence.source, release: changed } }, release), /immutable release/)
   }
-  assert.throws(() => assertForecastValidationScopes({ ...companyEvidence(), source: { ...companyEvidence().source, system_of_record: 'local' } }, unsupportedEvidence(), release), /system of record/)
-  assert.throws(() => assertForecastValidationScopes({ ...companyEvidence(), source: { ...companyEvidence().source, release: null } }, unsupportedEvidence(), release), /immutable release/)
+  assert.throws(() => assertForecastValidationScopes({ ...companyEvidence(), source: { ...companyEvidence().source, system_of_record: 'local' } }, emptyBuyerEvidence(), release), /system of record/)
+  assert.throws(() => assertForecastValidationScopes({ ...companyEvidence(), source: { ...companyEvidence().source, release: null } }, emptyBuyerEvidence(), release), /immutable release/)
 })
 
 test('dashboard validator rejects truncated, duplicate or wrong-origin evaluation keys despite correct horizon labels', () => {
   const mutate = (change: (evidence: ReturnType<typeof companyEvidence>) => void, expected: RegExp) => {
     const evidence = companyEvidence()
     change(evidence)
-    assert.throws(() => assertForecastValidationScopes(evidence, unsupportedEvidence(), release), expected)
+    assert.throws(() => assertForecastValidationScopes(evidence, emptyBuyerEvidence(), release), expected)
   }
   mutate(evidence => { evidence.views['3'].models.last_value.backtest.pop() }, /complete backtest window/)
   mutate(evidence => { evidence.views['3'].models.last_value.backtest[1] = { ...evidence.views['3'].models.last_value.backtest[0] } }, /consecutive backtest target/)
@@ -140,23 +160,23 @@ test('dashboard validator retains null gaps and exact common-key intersections w
     view.common_evaluation_keys = view.common_evaluation_keys.filter(key => !key.includes('2025-10') && !key.includes('2025-11'))
     view.common_scored_months = view.common_evaluation_keys.length
   }
-  assert.equal(assertForecastValidationScopes(evidence, unsupportedEvidence(), release)['3'].common_scored_months, 1)
+  assert.equal(assertForecastValidationScopes(evidence, emptyBuyerEvidence(), release)['3'].common_scored_months, 1)
   evidence.views['3'].common_evaluation_keys = ['different-origin-and-target']
-  assert.throws(() => assertForecastValidationScopes(evidence, unsupportedEvidence(), release), /exact common origin-target-lead keys/)
+  assert.throws(() => assertForecastValidationScopes(evidence, emptyBuyerEvidence(), release), /exact common origin-target-lead keys/)
 })
 
 test('dashboard validator rejects nonfinite, source-mismatched and unexplained missing values', () => {
   for (const value of [NaN, Infinity, undefined]) {
     const evidence = companyEvidence()
     Object.assign(evidence.views['3'].models.last_value.backtest[0], { actual: value })
-    assert.throws(() => assertForecastValidationScopes(evidence, unsupportedEvidence(), release), /finite observed value or null/)
+    assert.throws(() => assertForecastValidationScopes(evidence, emptyBuyerEvidence(), release), /finite observed value or null/)
   }
   const mismatch = companyEvidence()
   mismatch.views['3'].models.last_value.backtest[0].actual = 0
-  assert.throws(() => assertForecastValidationScopes(mismatch, unsupportedEvidence(), release), /actual matches source observation/)
+  assert.throws(() => assertForecastValidationScopes(mismatch, emptyBuyerEvidence(), release), /actual matches source observation/)
   const missing = companyEvidence()
   missing.views['3'].models.last_value.backtest[0].prediction = null
-  assert.throws(() => assertForecastValidationScopes(missing, unsupportedEvidence(), release), /missing evidence reason/)
+  assert.throws(() => assertForecastValidationScopes(missing, emptyBuyerEvidence(), release), /missing evidence reason/)
 })
 
 const source = () => ({ fact_rows: '7', analysis_rows: '6', first_year: '2024', last_year: '2026', observed_years: '2', product_labels: '3' })
@@ -208,4 +228,20 @@ test('nonempty planning shortlist reconciles selected positive revenue to its co
   assert.doesNotThrow(() => assertPlanningShortlist(observed))
   assert.throws(() => assertPlanningShortlist({ ...observed, shortlist_share_pct: 80 }), /share reconciles/)
   assert.throws(() => assertPlanningShortlist({ ...observed, products: [{ revenue: 40 }] }), /selection population/)
+})
+
+test('external readiness validates a known buyer separately from absent Unknown and rejects leaked or zero-filled sales', () => {
+  const evidence = (sector: string) => ({status:'blocked',scope:{sector,territory:'Quezon'},
+    coverage:{sales_months:sector==='Private'?1:0,matched_months:0},
+    context:{status:'historical_context_candidate',sales_months:sector==='Private'?1:0,coobserved_months:sector==='Private'?1:0,join_ready_months:0,
+      rows:Array.from({length:108},(_,i)=>({period:new Date(Date.UTC(2017,i,1)).toISOString().slice(0,7),sales:sector==='Private'&&i===96?0:null,
+        signals:[{value:i===96?0:null,join_ready:false},{value:i===96?10:null,join_ready:false}]}))}})
+  const known=evidence('Private'),unknown=evidence('Unknown')
+  assert.equal(assertExternalContextScopes(known,unknown).known_sales_months,1)
+  const leaked=structuredClone(unknown);leaked.coverage.sales_months=1
+  assert.throws(()=>assertExternalContextScopes(known,leaked),/buyer sales population/)
+  const zero=structuredClone(unknown);zero.context.rows[0].sales=0
+  assert.throws(()=>assertExternalContextScopes(known,zero),/observed sales month count/)
+  const duplicate=structuredClone(known);duplicate.context.rows[1].period=duplicate.context.rows[0].period
+  assert.throws(()=>assertExternalContextScopes(duplicate,unknown),/unique external target months/)
 })

@@ -8,6 +8,14 @@ const diagnosticMonthlyMovement = ${salesMonthlyMovement.toString()};
 const installSalesOutputSections = ${installSalesOutputSections.toString()};
 
 function installSalesMeasureControls() {
+  const scopeBanner = document.querySelector('#page-revenue .compliance-warning-banner');
+  if (scopeBanner && !document.getElementById('salesScopeNotes')) {
+    const notes = document.createElement('details'); notes.id = 'salesScopeNotes'; notes.className = 'chart-method';
+    const heading = document.createElement('summary'); heading.textContent = 'About this sales view';
+    const text = document.createElement('p');
+    text.textContent = 'Historical sales only. Weather and disease data are excluded. This view does not establish causes or inventory recommendations.';
+    notes.append(heading, text); scopeBanner.replaceWith(notes);
+  }
   const trendCard = document.getElementById('revenueDetailChart')?.closest('.chart-card');
   const growthCard = document.getElementById('growthChart')?.closest('.chart-card');
   for (const [card, id, label, choices] of [
@@ -31,7 +39,9 @@ function installSalesMeasureControls() {
   }
   if (trendCard && !document.getElementById('salesTrendReading')) {
     const reading = document.createElement('p'); reading.id = 'salesTrendReading'; reading.setAttribute('aria-live','polite');
-    reading.style.margin = '12px 0'; trendCard.querySelector('.chart-wrap')?.before(reading);
+    const detail = document.createElement('details'); detail.className = 'chart-method';
+    const heading = document.createElement('summary'); heading.textContent = 'Trend summary';
+    detail.append(heading, reading); trendCard.append(detail);
   }
   const marginCard = document.getElementById('marginChart')?.closest('.chart-card');
   if (marginCard && !document.getElementById('salesMarginDetails')) {
@@ -60,7 +70,7 @@ function salesTrendReading(rows, metric) {
   const label = metric === 'income' ? 'gross profit' : 'sales';
   if (observed.length < 2) return 'At least two recorded points are needed to describe the direction of ' + label + '.';
   const first = observed[0], last = observed[observed.length - 1], delta = Number(last[metric]) - Number(first[metric]);
-  if (/Partial|YTD/.test(descriptivePointLabel(first.period) + ' ' + descriptivePointLabel(last.period))) return 'Recorded ' + label + ' totals: ' + descriptivePointLabel(first.period) + ' ' + diagnosticCurrency(first[metric]) + '; ' + descriptivePointLabel(last.period) + ' ' + diagnosticCurrency(last[metric]) + '. Incomplete-year coverage; this is not a like-for-like growth comparison.';
+  if (descriptiveYearNeedsCoverageNote(first.period) || descriptiveYearNeedsCoverageNote(last.period)) return 'Recorded ' + label + ' totals: ' + descriptivePointLabel(first.period) + ' ' + diagnosticCurrency(first[metric]) + '; ' + descriptivePointLabel(last.period) + ' ' + diagnosticCurrency(last[metric]) + '. Totals use client-provided records; compare years using matched recorded months.';
   return 'From ' + descriptivePointLabel(first.period) + ' to ' + descriptivePointLabel(last.period) + ', recorded ' + label
     + (delta === 0 ? ' stayed at ' + diagnosticCurrency(first[metric]) : (delta > 0 ? ' rose by ' : ' fell by ') + diagnosticCurrency(Math.abs(delta)))
     + '. This compares the endpoints; it does not describe every intervening period.';

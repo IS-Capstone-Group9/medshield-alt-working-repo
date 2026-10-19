@@ -141,3 +141,8 @@ The [operator runbook](CATALOG_DEPLOYMENT.md) specifies catalog-only 03 → 04 �
 06 → publication-readiness → descriptive/catalog validation, version-bound activation
 and rollback. This is local preparation: no Databricks writes, release activation
 or additional CEO decisions occurred. Databricks remains the sole analytical source.
+
+
+## Stored margin-rate alignment — 20 October 2026
+
+Current dashboard/API reporting treats a missing or nonpositive matching eligible revenue basis as an unavailable percentage. Preserve signed net sales, profit and basis amounts; the unavailable rate does not turn the amount into zero or remove the group. Gold stores valid rates rounded to four decimals; API computations may retain greater internal precision before display rounding. The [warehouse currency review](../outputs/warehouse_review_20261020/README.md) found negative-basis rates in four existing marts and prepared a derived-rate-only correction. It has not changed cloud values or approvals. Do not attribute the later reporting guard to a new business approval or reinterpret negative financial adjustments as physical returns.

@@ -21,9 +21,9 @@ The repository contains more than 100 Markdown files across product documentatio
 | Document | Status | Purpose |
 |---|---|---|
 | [CURRENT_STATE.md](CURRENT_STATE.md) | Canonical | Implemented architecture, data coverage, publication state, and open gates |
-| [Revised Chapters 4–5](chapters/MedShield_Chapter_4_5_Revised_20261016.md) | Complete working chapter revision, 16 October 2026 | Revised source-backed results, five-objective conclusions and recommendations; [revision/evidence record](../outputs/paper_revision_20261016/REVISION_RECORD.md); whole-paper integration/formal acceptance remain open |
+| [Revised Chapters 4–5](chapters/MedShield_Chapter_4_5_Revised_20261016.md) | Working chapter revision, 16 October; sector update 19 October 2026 | Source-backed results, sector bridge and nested diagnostic findings, five-objective conclusions; [sector evidence](../outputs/sector_diagnostic_20261019/FINDINGS.md) and [original revision record](../outputs/paper_revision_20261016/REVISION_RECORD.md); complete-paper/Word integration and formal acceptance remain open |
 | [STUDY_OVERVIEW.md](STUDY_OVERVIEW.md) | Current study overview, 9 October 2026 | Business problem, original objectives, data, methods, findings and limits |
-| [CAPSTONE_COMPLETION_WORKFLOW.md](CAPSTONE_COMPLETION_WORKFLOW.md) | Current completion workflow, 15 October 2026 | Objective-to-system/evidence/paper delivery loop, source authority, task ownership and distinct acceptance gates; Obsidian is its working navigation view |
+| [CAPSTONE_COMPLETION_WORKFLOW.md](CAPSTONE_COMPLETION_WORKFLOW.md) | Current completion workflow, reviewed 19 October 2026 | System decision flow, analytical input rules, O1–O5 method/result/conclusion map and ordered evidence/paper handoffs; source authority and distinct acceptance gates retained; Obsidian is its working navigation view |
 | [Predictive Chapter 4 and 5 research draft](chapters/MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.docx) | Predictive manuscript insert, 10 October 2026 | Complete model comparison, error policy, 2026 projection timing, conclusions and open requirements; wider manuscript integration pending |
 | [REQUIREMENTS.md](REQUIREMENTS.md) | Canonical | Scope, data rules, functional requirements, and definition of done |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | Canonical | Runtime boundaries and failure behavior |
@@ -99,5 +99,16 @@ Everything under `outputs/**` is evidence for the source, policy, and generation
 - Buyer-sector and geographic classifications are derived mappings; their source and confidence must remain visible.
 
 ## Maintenance rule
+
+The [17 October analytics completion assessment](ANALYTICS_COMPLETION_ASSESSMENT_20261017.md)
+defines a proposed 40-checkpoint delivery rubric and evidence/demonstration map.
+Its percentages are planning assessments, not model accuracy or formal original-objective acceptance.
+An [eight-page Word report and verification record](../outputs/analytics_completion_20261017/README.md)
+package the same scores and all 40 checkpoints for stakeholder discussion.
+
+The [17 October analytics progress and chart guide](ANALYTICS_PROGRESS_CHART_GUIDE_20261017.md)
+supports the [presentation and editable reading guide](../outputs/analytics_progress_20261017/README.md).
+This is a dated stakeholder snapshot of Databricks, analytical progress and chart interpretation;
+canonical definitions and later evidence retain authority. It records no new source/model approval.
 
 When implementation changes, update `CURRENT_STATE.md` and the affected canonical document in the same change. Add a dated report only when point-in-time evidence is useful. Never resolve a conflict by silently copying old totals into a current document.

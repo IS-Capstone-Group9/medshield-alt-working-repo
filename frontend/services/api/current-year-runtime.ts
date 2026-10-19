@@ -7,9 +7,14 @@ function dashboardCalendar() {
   return { year: Number(values.year), month: Number(values.month) };
 }
 
-function dashboardRawMonthlyRows() {
+function dashboardRawMonthlyRows(sector) {
+  if (typeof overviewScopedMonths === 'function' && dashboardPageIsActive('overview') && overviewSectorData) {
+    return overviewScopedMonths(sector).filter(row => ['revenue','income','margin_revenue_basis']
+      .some(metric => row[metric] != null && Number.isFinite(Number(row[metric]))));
+  }
   const totals = new Map();
-  (DATA.monthly || []).forEach(row => {
+  const source = DATA.monthly || [];
+  source.forEach(row => {
     const period = String(row.period || '');
     if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(period)) return;
     if (row.revenue == null || row.missing || !Number.isFinite(Number(row.revenue))) return;
@@ -24,35 +29,10 @@ function dashboardRawMonthlyRows() {
   return [...totals.values()].sort((left, right) => left.period.localeCompare(right.period));
 }
 
-function dashboardMonthlyRows() {
-  const actualRows = dashboardRawMonthlyRows();
-  const byPeriod = new Map(actualRows.map(row => [row.period, row]));
-  const calendar = dashboardCalendar();
-  const priorYears = [...new Set(actualRows.map(row => Number(row.period.slice(0, 4))))]
-    .filter(year => year < calendar.year).sort((left, right) => right - left);
-
-  for (let month = 1; month <= calendar.month; month++) {
-    const suffix = '-' + String(month).padStart(2, '0');
-    const period = String(calendar.year) + suffix;
-    if (byPeriod.has(period)) continue;
-    const candidates = priorYears
-      .filter(year => byPeriod.has(String(year) + suffix))
-      .slice(0, 3)
-      .map((year, index) => ({ row: byPeriod.get(String(year) + suffix), weight: [0.6, 0.3, 0.1][index] }));
-    if (!candidates.length) continue;
-    const totalWeight = candidates.reduce((sum, candidate) => sum + candidate.weight, 0);
-    byPeriod.set(period, {
-      period,
-      revenue: candidates.reduce((sum, candidate) => sum + Number(candidate.row.revenue) * candidate.weight, 0) / totalWeight,
-      income: candidates.every(candidate => candidate.row.income != null)
-        ? candidates.reduce((sum, candidate) => sum + Number(candidate.row.income) * candidate.weight, 0) / totalWeight : null,
-      evidence: 'estimate',
-      estimate_method: 'recency_weighted_same_month',
-      source_periods: candidates.map(candidate => candidate.row.period)
-    });
-  }
-
-  return [...byPeriod.values()].sort((left, right) => left.period.localeCompare(right.period));
+function dashboardMonthlyRows(sector) {
+  // Descriptive periods require source observations, including in a new year.
+  // Forecasts belong to the separate model/research contract, never this series.
+  return dashboardRawMonthlyRows(sector);
 }
 
 function dashboardAnnualRows() {
@@ -64,11 +44,12 @@ function dashboardAnnualRows() {
   if (currentMonths.length) {
     rows.push({
       year: String(calendar.year),
-      label: String(calendar.year) + ' est. through ' + new Intl.DateTimeFormat('en-PH', { month: 'short' }).format(new Date(2000, calendar.month - 1, 1)),
+      label: String(calendar.year) + ' YTD',
       revenue: currentMonths.reduce((sum, row) => sum + Number(row.revenue), 0),
-      income: currentMonths.reduce((sum, row) => sum + Number(row.income), 0),
+      income: currentMonths.every(row => row.income != null)
+        ? currentMonths.reduce((sum, row) => sum + Number(row.income), 0) : null,
       transactions: null,
-      evidence: currentMonths.some(row => row.evidence === 'estimate') ? 'estimate' : 'actual_ytd'
+      evidence: 'actual_ytd'
     });
   }
   return rows.sort((left, right) => Number(left.year) - Number(right.year));

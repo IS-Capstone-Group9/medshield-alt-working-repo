@@ -14,6 +14,21 @@ export function weatherProviderLabel(provider: string) {
     .join(' ')
 }
 
+export function applyWeatherColumns(root: HTMLElement) {
+  const table = root.querySelector<HTMLTableElement>('#weatherEffectTable')
+  if (!table) return
+  const full = root.querySelector<HTMLSelectElement>('#weatherColumns')?.value === 'full'
+  const headers = Array.from(table.querySelectorAll<HTMLTableCellElement>('thead th'))
+  headers.forEach((header, index) => {
+    const hidden = !full && header.dataset.compact === 'false'
+    header.hidden = hidden
+    for (const row of Array.from(table.tBodies).flatMap(body => Array.from(body.rows))) {
+      if (row.cells.length === headers.length) row.cells[index].hidden = hidden
+      else if (row.cells.length === 1) row.cells[0].colSpan = full ? headers.length : headers.filter(cell => cell.dataset.compact !== 'false').length
+    }
+  })
+}
+
 export function renderWeatherEffects(root: HTMLElement, result: WeatherEffects) {
   const table = root.querySelector<HTMLTableElement>('#weatherEffectTable')
   const status = root.querySelector<HTMLElement>('#weatherEffectStatus')
@@ -36,14 +51,26 @@ export function renderWeatherEffects(root: HTMLElement, result: WeatherEffects) 
   
   table.replaceChildren()
   const isDaily = grain === 'daily'
+  const measurements = [
+    (item: WeatherEffects['rows'][number]) => isDaily ? item.rainy_day : item.rainy_days,
+    (item: WeatherEffects['rows'][number]) => isDaily ? item.temperature_c : item.avg_temperature_c,
+    (item: WeatherEffects['rows'][number]) => isDaily ? item.relative_humidity_pct : item.avg_relative_humidity_pct,
+    (item: WeatherEffects['rows'][number]) => isDaily ? item.wind_speed_kph : item.max_wind_speed_kph,
+  ]
+  const compact = [true, true, true, true, ...measurements.map(measure => result.rows.some(item => {
+    const value = measure(item)
+    return typeof value === 'boolean' || (typeof value === 'number' && Number.isFinite(value))
+  })), false, false, false, false]
   const headers = isDaily
     ? ['Date', 'Area', 'Provider', 'Rainfall', 'Rainy Day', 'Temp', 'Humidity', 'Wind', 'Severity Proxy', 'Alert', 'Daily Sales Net CP', 'Planning Uplift']
     : ['Period', 'Area', 'Provider', 'Rainfall', 'Rainy Days', 'Avg Temp', 'Avg Humidity', 'Max Reported Wind', 'Severity Proxy', 'Alert', 'Monthly Sales Net CP', 'Planning Uplift']
   
   const head = table.createTHead()
   const headerRow = head.insertRow()
-  for (const label of headers) {
+  for (const [index, label] of headers.entries()) {
     const cell = document.createElement('th')
+    cell.scope = 'col'
+    cell.dataset.compact = String(compact[index])
     cell.textContent = label
     headerRow.appendChild(cell)
   }
@@ -82,12 +109,15 @@ export function renderWeatherEffects(root: HTMLElement, result: WeatherEffects) 
   }
 
   status.textContent = result.rows.length
-    ? `${weatherProviderLabel(provider)} | ${sourceLabel} | ${grain === 'daily' ? 'Daily rows' : 'Monthly aggregate'} | ${period} | ${periods} weather rows | ${salesMatches} sales matches | ${correlation}`
+    ? `${weatherProviderLabel(provider)} | ${sourceLabel} | ${grain === 'daily' ? 'Daily rows' : 'Monthly aggregate'} | ${period} · ${metadata.candidate_only === false ? 'Approval not established' : 'Candidate'}`
     : metadata.status === 'not_refreshed'
       ? `No ${weatherProviderLabel(provider)} candidate data has been refreshed into ${sourceLabel} for this selection.`
       : `No ${weatherProviderLabel(provider)} rows match the selected territory and year in ${sourceLabel}.`
   
   if (countLabel) {
-    countLabel.textContent = `${sourceLabel} returned ${periods} records | matched ${salesMatches} sales periods | rainfall-revenue ${correlation}`
+    countLabel.textContent = `${periods} weather records · ${salesMatches} sales matches`
   }
+  const evidence = root.querySelector<HTMLElement>('#weatherEffectEvidence')
+  if (evidence) evidence.textContent = `Rainfall-revenue ${correlation}. ${metadata.interpretation ?? ''}`
+  applyWeatherColumns(root)
 }

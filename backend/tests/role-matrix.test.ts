@@ -54,14 +54,35 @@ test('selected Supabase-mode actual gateway enforces linked-role and restricted-
     return { status: response.status, body: await response.json() as Record<string, any> }
   }
   const protectedRoutes: [string, string, unknown?][] = [
-    ['GET', '/api/summary'], ['GET', '/api/monthly'], ['GET', '/api/sales/sectors'], ['GET', '/api/sales/predictive-research'],
+    ['GET', '/api/summary'], ['GET', '/api/monthly'], ['GET', '/api/sales/sectors'], ['GET', '/api/sales/sector-trend'], ['GET', '/api/sales/predictive-research'],
     ['GET', '/api/sales/planning-shortlist'], ['POST', '/api/sales/planning-solve', {}], ['GET', '/api/audit'], ['POST', '/api/audit', {}],
     ['GET', '/api/integrations/databricks/status'], ['GET', '/api/integrations/databricks/external/status'],
     ['POST', '/api/integrations/databricks/sync/yearly', {}], ['POST', '/api/weather/refresh', { provider: 'invalid-fixture-provider' }],
     ['POST', '/api/sales/upload', {}], ['GET', '/api/procurement_orders'],
   ]
+  await t.test('identity outages fail closed with a distinct 503 code after bounded retries', async () => {
+    for (const actor of ['auth_outage', 'account_outage']) {
+      const before = await counts(child)
+      const result = await request(actor, '/api/summary')
+      assert.equal(result.status, 503)
+      assert.deepEqual(result.body, { error: 'Authentication service is unavailable', code: 'AUTHENTICATION_UNAVAILABLE' })
+      const after = await counts(child)
+      assert.equal(after.auth - before.auth, actor === 'auth_outage' ? 3 : 1)
+      assert.equal(after.account - before.account, actor === 'account_outage' ? 3 : 0)
+      for (const key of ['auditRead', 'auditAppend', 'authWrite', 'external'] as const) assert.equal(after[key], before[key])
+    }
+  })
+  await t.test('two transient resets recover through actual authentication middleware', async () => {
+    const before = await counts(child)
+    const result = await request('transient', '/api/auth/me')
+    assert.equal(result.status, 200)
+    assert.equal(result.body.user.role, 'viewer')
+    const after = await counts(child)
+    assert.equal(after.auth - before.auth, 3)
+    assert.equal(after.account - before.account, 1)
+  })
   for (const actor of ['absent', 'invalid', 'unlinked', 'inactive', 'reset']) {
-    await t.test(`${actor}: all fourteen protected routes reject before service side effects`, async () => {
+    await t.test(`${actor}: all protected routes reject before service side effects`, async () => {
       const before = await counts(child)
       for (const [method, route, body] of protectedRoutes) {
         const result = await request(actor, route, method, body)
@@ -76,7 +97,7 @@ test('selected Supabase-mode actual gateway enforces linked-role and restricted-
   for (const actor of ['admin', 'manager', 'analyst', 'viewer']) {
     await t.test(`${actor}: source boundaries, privileged operations, audit and disabled upload`, async () => {
       const me = await request(actor, '/api/auth/me'); assert.equal(me.status, 200); assert.equal(me.body.user.role, actor)
-      for (const route of ['/api/summary', '/api/monthly', '/api/sales/sectors']) {
+      for (const route of ['/api/summary', '/api/monthly', '/api/sales/sectors', '/api/sales/sector-trend']) {
         const response = await request(actor, route); assert.equal(response.status, 503); assert.equal(response.body.code, 'DATABRICKS_SOURCE_UNAVAILABLE')
       }
       const audit = await request(actor, '/api/audit'); assert.equal(audit.status, ['admin', 'manager'].includes(actor) ? 200 : 403)

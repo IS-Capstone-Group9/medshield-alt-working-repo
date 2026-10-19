@@ -1,3 +1,5 @@
+import { setTimeout as delay } from 'node:timers/promises'
+
 export interface MedShieldAccount {
   account_id: number
   auth_user_id: string | null
@@ -79,6 +81,42 @@ async function responseJson(response: Response): Promise<Record<string, unknown>
   return (await response.json().catch(() => ({}))) as Record<string, unknown>
 }
 
+class IdentityReadHttpError extends Error {
+  constructor(readonly status: number) {
+    super(`Supabase identity read failed with status ${status}`)
+  }
+}
+
+function retryableIdentityRead(error: unknown): boolean {
+  if (error instanceof IdentityReadHttpError) return [429, 500, 502, 503, 504].includes(error.status)
+  if (!(error instanceof Error)) return false
+  // The signal is owned here; a body read can report its timeout as AbortError.
+  if (error.name === 'TimeoutError' || error.name === 'AbortError') return true
+  const code = (error.cause as { code?: string } | undefined)?.code
+  return ['ECONNRESET', 'ECONNREFUSED', 'ETIMEDOUT', 'EAI_AGAIN', 'UND_ERR_SOCKET', 'UND_ERR_CONNECT_TIMEOUT', 'UND_ERR_HEADERS_TIMEOUT', 'UND_ERR_BODY_TIMEOUT'].includes(code ?? '')
+}
+
+// Only token/account GETs use this policy. Never replay a password or other write.
+async function readIdentityJson<T>(request: (signal: AbortSignal) => Promise<Response>, allowInvalidSession = false): Promise<T | null> {
+  for (let attempt = 0; ; attempt++) {
+    try {
+      const response = await request(AbortSignal.timeout(5000))
+      if (allowInvalidSession && [401, 403].includes(response.status)) {
+        await response.body?.cancel()
+        return null
+      }
+      if (!response.ok) {
+        await response.body?.cancel()
+        throw new IdentityReadHttpError(response.status)
+      }
+      return await response.json() as T
+    } catch (error) {
+      if (attempt >= 2 || !retryableIdentityRead(error)) throw error
+      await delay(250 * (attempt + 1))
+    }
+  }
+}
+
 async function resolveIdentifier(identifier: string): Promise<MedShieldAccount | null> {
   const response = await identityDbFetch('/rpc/resolve_login_identifier', {
     method: 'POST',
@@ -95,20 +133,17 @@ async function resolveAuthUser(authUserId: string): Promise<MedShieldAccount | n
     auth_user_id: `eq.${authUserId}`,
     limit: '1',
   })
-  const response = await identityDbFetch(`/accounts?${query.toString()}`, { method: 'GET' })
-  if (!response.ok) throw new Error(`Linked account lookup failed with status ${response.status}`)
-  const rows = (await response.json()) as MedShieldAccount[]
-  return rows[0] ?? null
+  const rows = await readIdentityJson<MedShieldAccount[]>(signal => identityDbFetch(`/accounts?${query.toString()}`, { method: 'GET', signal }))
+  return rows?.[0] ?? null
 }
 
 async function getAuthUser(accessToken: string): Promise<SupabaseIdentityUser | null> {
-  const response = await authFetch('/user', {
+  const user = await readIdentityJson<SupabaseIdentityUser>(signal => authFetch('/user', {
     method: 'GET',
+    signal,
     headers: { Authorization: `Bearer ${accessToken}` },
-  })
-  if (!response.ok) return null
-  const user = (await response.json()) as SupabaseIdentityUser
-  return user.id ? user : null
+  }), true)
+  return user?.id ? user : null
 }
 
 async function passwordSignIn(email: string, password: string) {

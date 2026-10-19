@@ -235,7 +235,11 @@ export async function refreshDashboardFromGateway() {
     throw new Error('Dashboard live-data adapter is unavailable')
   }
 
-  const data = await loadDashboardData()
+  const [data, sectors] = await Promise.all([loadDashboardData(), getJson<any>('/api/sales/sector-trend')])
+  if (!data.dataStatus?.release || !Object.keys(data.dataStatus.release).every(key=>JSON.stringify(sectors.source?.release?.[key])===JSON.stringify((data.dataStatus!.release as any)[key]))) {
+    throw new Error('Buyer-sector and dashboard source releases differ. Reload before comparing.')
+  }
+  ;(window as any).setOverviewSectorData(sectors)
   const root = document.querySelector<HTMLElement>('.medshield-root')
   if (root) {
     updateDashboardProvenance(root, data.dataStatus, data.yearSummary.map((row) => row.year))
@@ -317,6 +321,8 @@ export async function loadWeatherEffectView(root: HTMLElement) {
   const table = root.querySelector<HTMLTableElement>('#weatherEffectTable')
   table?.replaceChildren()
   const loadingCount = root.querySelector<HTMLElement>('#weatherEffectCount')
+  const weatherEvidence = root.querySelector<HTMLElement>('#weatherEffectEvidence')
+  if (weatherEvidence) weatherEvidence.textContent = ''
   if (loadingCount) loadingCount.textContent = 'Loading…'
   if (status) status.textContent = `Loading ${weatherProviderLabel(provider)} records from Databricks Gold…`
   try {

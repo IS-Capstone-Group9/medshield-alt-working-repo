@@ -160,7 +160,8 @@ function renderProductPrioritizationTimeline() {
       + (returnLabels ? ' and ' + returnLabels + ' names with negative adjustments' : '') + ' before using the ranking for inventory decisions.';
   const note = document.createElement('p');
   const summaryNote = document.createElement('p');
-  summaryNote.textContent = !hasSource ? 'Product data is loading or unavailable.' : descriptivePeriodLabel() + ' · ' + productCategory + ' · Recorded net sales: ' + formatCurrency(result.revenue) + ' across ' + result.products.length + ' names.';
+  summaryNote.hidden = !hasSource;
+  summaryNote.textContent = !hasSource ? '' : descriptivePeriodLabel() + ' · ' + productCategory + ' · Recorded net sales: ' + formatCurrency(result.revenue) + ' across ' + result.products.length + ' names.';
   const policyNote = document.createElement('p'); policyNote.textContent = 'ABC policy candidate — CEO approval pending. Source labels; product identities require review.';
   note.textContent = !hasSource ? 'Product data is loading or unavailable. No observed sales total can be reported yet.' : descriptivePeriodLabel() + ' · Candidate source labels; medicine identities and pack conversions require review. '
     + productCategory + ' category; services remain in financial totals. Unresolved identity: ' + result.unresolvedCount + ' groups, ' + formatCurrency(result.unresolvedRevenue) + '. ' + 'Recorded net sales: ' + formatCurrency(result.revenue) + ' across ' + result.products.length + ' names. '
@@ -190,6 +191,9 @@ function renderProductPrioritizationTimeline() {
   const evidenceSummary = document.createElement('summary'); evidenceSummary.textContent = 'Evidence, ABC method and display limits';
   evidenceDetails.append(evidenceSummary, note);
   evidenceDetails.append(reviewPrompt, readCue, displayNote);
+  const limits = document.createElement('p'); limits.id = 'productPublicationLimits';
+  limits.textContent = 'Product-region recommendations are not published. Product identity, clinical classification, disease effects, inventory and procurement require separate validated evidence.';
+  evidenceDetails.append(limits);
   scope.append(title, finding, summaryNote, policyNote, controls, evidenceDetails);
   // Keep the primary sales and full-population share comparisons side by side.
   let analyticalLayout = document.getElementById('productAnalyticalLayout');
@@ -397,11 +401,11 @@ function renderProductPrioritizationTimeline() {
       const status = document.createElement('p'); status.id = 'productTableStatus'; status.setAttribute('role', 'status'); status.setAttribute('aria-live', 'polite');
       controls.append(label, search, previous, next); table.parentElement.before(controls, status);
     }
-    card?.querySelectorAll('.chart-subtitle').forEach(sub => { sub.textContent = 'Search and paging affect this table only. Expand Details for signed adjustments, source coverage and catalog evidence. Export retains the complete selected cohort.'; });
+    card?.querySelectorAll('.chart-subtitle').forEach(sub => { sub.textContent = 'Search this table; export includes the full selected cohort.'; });
     renderProductPerformanceTable();
   }
   const insight = page.querySelector('.dss-insight-card');
-  if (insight) { insight.replaceChildren(); const p = document.createElement('p'); p.id = 'productPublicationLimits'; p.textContent = 'Product-region recommendations are not published. Use revenue concentration to review commercial performance. Product identity, clinical classification, disease effects, inventory levels and procurement decisions require separate validated evidence.'; insight.append(p); }
+  if (insight) insight.remove();
   const sub = document.getElementById('topbar-sub'); if (sub) sub.textContent = 'Descriptive product sales · Databricks candidate data';
 }
 

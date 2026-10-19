@@ -3,7 +3,7 @@
 
 The implemented MedShield Decision Support System provided traceable historical sales reporting, product and area contribution analysis, stored company-revenue forecasting research, and allocation scenarios based on entered assumptions. Its strongest evidence concerns recorded commercial activity and the reproducibility of analytical outputs. The study did not establish reduced expiry losses, a production-approved medicine-demand forecast, or an optimized operational purchasing policy. These boundaries determine how the findings answer the objectives in the post-defense Chapters 1–3 manuscript. [E1–E10]
 
-The original study specifies 2021–2025 performance across CALABARZON, MIMAROPA and Bicol. The implemented reporting population extends from 2017 to 2025, while company-revenue STL and forecasting use a separate contiguous 2020–2025 series. The extended history provides analytical context; it does not silently amend the original territorial, product-unit or methodological commitments. Results below identify the population, period and evidence status of each output.
+The current study covers 2017–2025, as explicitly confirmed by the project owner on 20 October 2026, across the intended CALABARZON, MIMAROPA and Bicol scope. Earlier years are part of the study and retain their actual partial coverage. Company-revenue STL and forecasting use a separately disclosed contiguous 2020–2025 analytical series. 2026 actual sales are pending client confirmation and are not observed study data. Archived Chapters 1–3 retain the former 2021–2025 wording; their working manuscript must be aligned with this temporal update. Territorial, product-unit and methodological requirements remain distinct from the expanded dates. Results below identify each output’s population, period and evidence status.
 
 ### 4.1 Presentation of Results
 
@@ -157,7 +157,7 @@ The post-defense proposal includes planned Prophet MAPE below 15%, urgency MAPE 
 
 #### 4.2.1 Historical Sales and Margin
 
-The full reporting population contains ₱626,946,741.81 in eligible signed net sales and ₱288,487,498.72 in supported gross margin. Table 4.7 gives annual results with coverage. The original 2021–2025 study window is identifiable within the broader context rather than being replaced by it. [E2]
+The full reporting population contains ₱626,946,741.81 in eligible signed net sales and ₱288,487,498.72 in supported gross margin. Table 4.7 gives annual results with coverage. All nine years, 2017–2025, belong to the current study; early partial-year totals remain labelled. [E2]
 
 **Table 4.7 Annual company financial results and observed coverage**
 
@@ -181,6 +181,34 @@ Eligible net sales rose from ₱50,259,319.88 in 2024 to ₱185,396,821.04 in 20
 The increase localizes a change in recorded commercial activity. It does not establish increased medicine-unit demand or identify disease, weather, procurement expansion or reporting practices as its cause. The original/adjusted files and within-source reconciliations support financial consistency at their checked scope; independent explanations remain unavailable. Management should investigate unusual periods without relabelling plausible explanations as findings.
 
 The earliest three annual totals have seven, ten and nine observed months respectively. Their differences from a fully observed later year are not automatically like-for-like growth. The dashboard's matched-period controls must identify the compared months and denominators.
+
+##### 4.2.1.1 Sector contribution to the 2025 increase — evidence update, 19 October 2026
+
+Within the current 2017–2025 study, the version-bound diagnostic comparison used January–December 2025 against January–December 2024, matching the twelve company month pairs before grouping buyer sectors. Signed changes, including negative offsets, reconcile to the company increase of ₱135,137,501.16. Buyer assignments remain proposed; a geographic label is not independently verified customer ownership. [E13]
+
+**Supplementary Table S1. Recorded net-sales contribution and eligible gross margin, 2024–2025**
+
+| Sector | 2024 net sales (₱) | 2025 net sales (₱) | Signed change (₱) | Share of company change | 2024 gross margin | 2025 gross margin |
+|---|---:|---:|---:|---:|---:|---:|
+| Government | 25,106,298.76 | 119,900,480.14 | 94,794,181.38 | 70.15% | 20.54% | 57.15% |
+| Private | 22,864,319.26 | 63,482,563.75 | 40,618,244.49 | 30.06% | 57.53% | 52.74% |
+| Internal | 2,288,701.86 | 2,013,777.15 | −274,924.71 | −0.20% | 58.95% | 56.45% |
+| Unknown | 0.00* | 0.00* | 0.00* | 0.00% | Unavailable | Unavailable |
+| All | 50,259,319.88 | 185,396,821.04 | 135,137,501.16 | 100.00% | 39.16% | 55.04% |
+
+*Unknown has no eligible records in either comparison year; these values represent accounting absence within observed company periods, not observed zero demand. Government similarly has no eligible group record in February 2024. Trends retain missing group observations as unavailable. Displayed percentage shares are rounded; the unrounded signed shares reconcile to 100%.*
+
+![Supplementary Figure S1. Signed sector contributions to the recorded increase](../../outputs/sector_diagnostic_20261019/paper-sector-contribution.png)
+
+Government is the dominant recorded contributor. Its largest monthly changes are November (+₱21,147,466.29), January (+₱14,471,466.40) and July (+₱13,862,980.00). Together these months account for ₱49,481,912.69, or 52.20%, of the Government increase. The largest full-year product-reporting contributions are PROHAB 10MG/ML 20ML (+₱14,420,532.11), BUPIRIGHT 5MG/ML 0.5% IN 8% 4ML (+₱13,185,366.39) and F6 FETAL MONITOR SINGLE (+₱7,458,998.50). These three allocations account for 36.99% of the Government increase. Nested November inspection identifies F6 FETAL MONITOR SINGLE, TROYNOXA-60 60MG/0.6ML and SPEEDA 2.5IU/0.5ML as its leading reporting groups. [E13]
+
+The product figures are allocated financial reporting groups, not verified medicine-unit demand or proof of product launches. All retained 2024 and 2025 comparison records carry adjusted/estimated product-allocation provenance. Government contains 305 retained adjusted records in 2024 and 1,761 in 2025, with no original-source-detail records in either served comparison year. The 2024 nearest-financial-profile policy differs from the 2025 contract-parent replacement/allocation policy. This documented processing difference qualifies product-mix interpretation; it does not establish that allocation caused the total financial increase. Source reconciliation is not independent verification of physical orders or deliveries. [E13]
+
+The Government area partition contains only the generic source label GOVERNMENT, accounting for the entire ₱94,794,181.38 increase. No verified provincial or individual-account distribution can be inferred from this label. Quezon and Batangas retain proposed Private classification: Quezon changes from ₱3,189,426.78 to ₱3,779,939.91, while Batangas changes from ₱3,595,134.45 to ₱3,495,101.91. Their approved geographic mapping does not verify private ownership, so the analysis retains the assignments and exposes their review status. [E13]
+
+Gross-margin rates use gross profit and revenue from the same margin-eligible records. Government's margin basis changes from ₱24,897,473.25 in 2024 to ₱47,918,964.09 in 2025, respectively 99.17% and 39.97% of its independently eligible net sales. Consequently, 20.54% → 57.15% describes changing eligible subsets and cannot establish a corresponding improvement in whole-sector profitability. Missing/nonpositive bases remain unavailable, and operating expenses remain absent. [E13]
+
+The supported diagnostic finding identifies where the recorded change is concentrated. Larger procurement contracts, delivery timing, price/mix, reporting coverage and disease-related demand remain possible explanations requiring independently linked evidence. Neither contribution accounting nor an allocated product label verifies those causes. Complete source-bound month/product/area/evidence partitions and the mapping review are retained in E13; 2017–2020 are included in the current study, with their observed coverage retained.
 
 #### 4.2.2 Product Contribution and Observed ABC
 
@@ -274,6 +302,26 @@ The proposed 10% WAPE research goal remains unachieved and separate from unset b
 
 Retained 2026 research projections use a December 2025 data cutoff but were generated in October 2026. The stored selected-model candidate exposed in the dashboard records its 9 October generation; the separate 21-model annual-release packet records 10 October generation. These are distinct artifacts. January–September had already elapsed, October was current and November–December were future at generation. Neither artifact was issued in December 2025. Accepted 2026 actuals and measured 2026 errors are absent, and the later six recipes generated no new annual projections.
 
+##### 4.2.5.1 Existing-data sector and forecast-schedule assessment — 20 October 2026
+
+A separate registered assessment investigated Government/Private changes and compared four existing unfitted benchmarks using retained fact-20 aggregates. The 2020–2025 model window remains within the wider 2017–2025 study. Six unavailable sector revenues stay null, including Internal June 2023 with source records but no eligible revenue. No extra business inputs or accepted 2026 actuals were introduced. [E15]
+
+The comparison below scores the same twelve January–December 2025 targets within each scope. Annual-fixed predictions use the December 2024 cutoff, while monthly lead-1 predictions use the preceding month. Targets match but origins, information sets and actual leads differ. These inspected retrospective results are not an untouched test; source-availability vintages at historical origins remain unknown.
+
+**Supplementary comparison: annual-fixed and monthly-update forecasts**
+
+| Scope and benchmark | Annual-fixed monthly MAE | Annual-fixed WAPE | Monthly lead-1 MAE | Monthly lead-1 WAPE |
+|---|---:|---:|---:|---:|
+| Company, last value | ₱5,834,383.00 | 37.76% | ₱7,518,021.54 | 48.66% |
+| Company, six-month mean | ₱10,526,958.88 | 68.14% | ₱6,596,268.34 | 42.70% |
+| Private, six-month mean | ₱3,754,519.74 | 70.97% | ₱2,471,538.12 | 46.72% |
+
+Monthly updating improves some means and Private comparisons but worsens company last value. None of the four company monthly lead-1 benchmarks beats the retained annual last-value reference on these targets. The original selection remains unchanged. The complete output preserves native/common support, calendar leads 1–12 and complete 3/6/12-month origin windows. Error of the horizon total is separate from sum of absolute monthly errors because opposing misses can cancel. Same-method sector sums reproduce direct company forecasts on complete support; splitting these linear formulas alone adds no accuracy gain. [E15]
+
+Government accounts for 70.15% of the recorded company increase, Private 30.06%, and Internal offsets 0.20%. The generic HOSPITAL label contributes ₱39,057,373.41, or 96.16% of Private's increase; September, October and December contribute 59.44%. Generic labels, proposed buyer mappings and differing adjusted product-allocation policies prevent a verified account/geography or causal interpretation. These are financial localizations, not explanations of commercial events. [E15]
+
+The current analyst recommendation is to retain the original company research reference for exploratory sales-outlook and revenue-budget discussion with measured errors visible. Dependable operational budgeting, medicine purchasing and replenishment remain unestablished. This supplies no named business or academic acceptance, does not achieve the 10% research goal and does not set business error limits. [E6, E15]
+
 #### 4.2.6 External Signals and Planning Scenarios
 
 The disease/weather interface reports readiness rather than a demonstrated external-variable effect for the blocked selection. The supplied draft captures zero aligned months for its selected territory/product/provider combination. That selected unavailable state cannot support a claim that disease or rainfall improved forecasts, caused the 2025 increase, or supplied operational alerts. No accepted held-out XGBoost ABC or urgency evaluation is established by the reviewed evidence. The proposal's classifier addresses new or low-history SKU labels; a next-period ABC forecast, as separately described in the North Star, would require a temporal target and evaluation. [E1, E6, E10, E11]
@@ -320,6 +368,8 @@ Figure 4.7 is a crop from retained 15 October authenticated browser evidence. It
 
 A separate projection view preserves generation time, cutoff, true leads and unavailable actual errors. Unsupported intervals or missing required sources produce an explicit unavailable state. The six later recipes are not silently read from local files.
 
+The later forecast-use presentation makes the exploratory purpose explicit and keeps the selected result's peso MAE, WAPE, signed bias and historical origin/lead context visible. CSV retains use/error context. Candidate projections keep actual errors unavailable, while missing sources clear the summary. Offline schedule findings remain dated study evidence rather than a bundled dashboard source or replacement model. [E15, E16]
+
 The external-regression interface identifies insufficient approved alignment for its blocked selections. Its presence demonstrates a guarded analytical boundary, not a fitted or successful disease/weather forecasting model.
 
 #### 4.3.6 Prescriptive Planning
@@ -362,6 +412,16 @@ The DSS centralizes recorded-sales evidence, exposes uncertainty and identifies 
 
 Reduced expiry, fewer stockouts, higher turnover, lower procurement cost and superiority over existing practice require a defined baseline, verified operational data and an evaluation design. Those outcomes were not measured. The North Star of optimizing inventory and reducing losses remains an intended operational outcome rather than an established effect of the delivered system.
 
+#### 4.3.10 Historical External Context and Formula Verification
+
+The 20 October 2026 read-only audit reproduced the sector financial totals from Gold version 20 and the matching profit/revenue populations. Government contributed ₱94,794,181.38, or 70.15%, of the ₱135,137,501.16 recorded increase from 2024 to 2025. This locates the largest contribution; it does not establish a business, disease or weather cause. Government's2025 supported gross-margin basis covered 39.97% of its independently eligible sales, limiting whole-sector profit interpretation.
+
+A predeclared historical context pilot used Private–Quezon eligible net sales, Dengue and PAGASA rainfall with one-month lags. It retained 94 sales months and 79 months co-observed with both external signals within 108 study months. No months had approved external joins. Requiring previous-month sales reduced the candidate feature-complete rows to 76, with only one in 2025, below the six-case evaluation minimum. A possible 12-case retrospective 2024 subset remains subject to mapping/data review and is not an untouched test set. The interface presents separate peso, reported-case and millimetre plots, a monthly evidence table and CSV, preserving missing observations, original/adjusted source distinctions and mapping status. Co-observation is exploratory alignment, not a fitted predictor or verified disease-demand relationship.
+
+The supplied PAGASA package has no 2025 observations; DOH onset counts lack publication/revision timestamps and include retained non-discarded classifications. Station observations do not represent province-wide rainfall, and generic Government records do not establish a province for joining. Consequently no incremental external-model accuracy was claimed or model activated.
+
+Independent Decimal recomputation reproduced the current seasonal-naive 12-month WAPE of 72.8909484%, MAE of ₱11,261,458.43, RMSE of ₱13,000,988.08 and negative mean prediction-minus-actual bias of ₱11,261,458.43. The large error reflects underprediction of the 2025 observations rather than a WAPE arithmetic defect. Recalculation also checked retained 21-model development/common-case/audit scores, the robust-recipe report and 72 retained STL components against fresh Gold. Saved models were preserved. An offline commercial ABC cutoff inconsistency was corrected; contradictory actual/calibration records are now rejected. These are technical checks, not new untouched forecast validation or business approval. See[E14].
+
 ### 4.4 Summary of Findings
 
 The accepted candidate contains 37,728 source records and supports 2017–2025 historical reporting with 98 observed months. Missing months remain unknown, while original/adjusted provenance and unverified completeness limit interpretation. Supported gross margin uses its matching revenue denominator and cannot be called company net profit.
@@ -381,9 +441,9 @@ The study developed a decision-support environment that makes recorded commercia
 
 #### 5.1.1 Regional Performance and Seasonal Analysis
 
-O1 is partly supported by reconciled financial reporting, comparable-period controls and the checked company-month STL series. The recorded 2025 increase is a financial observation with source-provenance limitations; the cause was not established. Missing earlier observations constrain annual comparisons.
+O1 is partly supported by reconciled financial reporting, comparable-period controls and the checked company-month STL series. Government accounts for ₱94,794,181.38, or 70.15%, of the recorded 2024–2025 company increase; November, January and July provide the largest Government monthly contributions. This localizes an accounting change under proposed sector mappings and adjusted/estimated source allocations. The generic GOVERNMENT label prevents verified provincial/account attribution, and changing margin eligibility prevents a whole-sector profitability claim. The business cause was not established. Missing earlier observations constrain annual comparisons. [E13]
 
-The original regional and decomposition commitments are broader than the demonstrated company-month analysis. Verified territory attribution and the promised series/frequency must be completed or addressed through an explicit academic scope decision. Extending context to 2017–2025 does not itself amend the original 2021–2025 objective.
+The original regional and decomposition commitments are broader than the demonstrated company-month analysis. Verified territory attribution and the promised series/frequency must be completed or addressed through an explicit academic scope decision. The project owner has explicitly expanded the working temporal scope to 2017–2025; that decision does not supply missing territorial decomposition or verified quantity evidence. Original objective quotations above identify the archived source and need corresponding working-manuscript alignment.
 
 #### 5.1.2 Product and Area Prioritization
 
@@ -397,7 +457,11 @@ O3 remains unfulfilled at its original territory medicine-demand target. The imp
 
 The findings are specific to the recorded target, recipes and historical origins. They do not prove that every method family is unsuitable, that an outlying sales month is wrong, or that a future model cannot improve. Historical availability vintages, overlapping folds, the inspected audit, sparse lead support and absent accepted 2026 actuals limit generalization.
 
+The later sector/refresh assessment supports this bounded conclusion. Monthly updating improves selected workflows but does not consistently reduce error, and identical linear sector formulas add no combined-company accuracy gain. The original reference remains unchanged. Supported current use is exploratory sales-outlook and revenue-budget discussion with visible errors; dependable operational forecasting is unestablished. [E15]
+
 The proposal's MAPE targets, the later WAPE research goal and actual business tolerances have different meanings. No evidence establishes that the original targets or later goal were achieved. Disease/weather increment, XGBoost urgency and supported operational forecast intervals remain unestablished.
+
+The external-context pilot demonstrates that supplied disease/weather observations can be inspected beside scoped commercial results while retaining source and mapping limitations. It does not establish that external signals explain the2025 increase or improve forecasts. Admissible mappings, issue-time evidence and a frozen comparison on unseen temporal cases remain necessary; client2026 sales and operational quantity inputs are separate dependencies.[E14]
 
 #### 5.1.4 Inventory Planning and Loss Reduction
 
@@ -451,6 +515,8 @@ Commercial review can start with high-contribution source labels and unusual mon
 
 Users reviewing forecasts should examine peso error, percentage error, bias, supported leads and the actual issue time together. They should retain the original reference and failed recipes, treat the audit as inspected evidence and avoid interpreting the proposed research goal as an achieved reliability level. Unsupported intervals or absent accepted actuals should remain unavailable.
 
+The existing client brief and forecast interpretation should retain the tested schedule tradeoffs. A blanket monthly-refresh change is unsupported: it worsens company last value while improving some means and Private comparisons. Selecting another policy from the inspected 2025 ranking is exploratory rather than independent confirmation. No additional unavailable business inputs are needed to document these current limits. [E15]
+
 Planners should enter scenarios only with reviewed units and constraints, preserve the assumption set and inspect feasible and infeasible results. Before operational use, the entered values should be replaced or verified against controlled inventory and supplier evidence. A scenario result alone should not be used as a procurement authorization or claimed inventory saving.
 
 Engineers and reviewers should resolve the remaining applicable security, clean-bootstrap, recovery and deployment findings, then retain same-release workflow evidence. The 15 October validator repair should be recognized at its actual scope rather than reopening a superseded defect or claiming every release issue is closed.
@@ -482,3 +548,11 @@ The writing team should integrate these results with the latest post-defense man
 [E11] Project team. Supplied Chapters 4–5 draft, received 16 October 2026. [Preserved source PDF](../../references/chapters/GROUP%209_MedShield_CP2_Chapter%204_5.pdf). Captured interface observations are attributed to their selected scope rather than treated as fresh runtime measurements.
 
 [E12] MedShield project records. Medicine forecasting pilot readiness, 16 October 2026. [Source-bound assessment and verification](../../outputs/predictive_pilot_readiness_20261016/README.md). Bounded archived-source inspection; no quantity-model training or new warehouse certification.
+
+[E13] MedShield project records. Sector diagnostic implementation and checked findings, 19 October 2026. [Findings and limitations](../../outputs/sector_diagnostic_20261019/FINDINGS.md), [version-bound live aggregates and workflow](../../outputs/sector_diagnostic_20261019/live-evidence.json), [independent reconciliation](../../outputs/sector_diagnostic_20261019/independent-verification.json), and [delivery/verification scope](../../outputs/sector_diagnostic_20261019/README.md). Fact 20 candidate; the 19 October dashboard capture used the former 2021–2025 view, superseded by the explicit 20 October 2017–2025 scope direction. The 2024–2025 contribution calculations remain applicable; no new source, mapping, product-unit, causal or operational approval.
+
+[E14] MedShield project records.20 October2026 [external-context implementation, source/formula/model audit and bounded findings](../../outputs/analytics_external_audit_20261020/README.md), with linked Gold evidence, independent calculations, coverage, pilot dataset and verification receipts.
+
+[E15] MedShield project records. Existing-data sector and forecast-schedule assessment, 20 October 2026. [Findings, registered methods and results](../../outputs/sector_refresh_evaluation_20261020/README.md), [sector investigation](../../outputs/sector_refresh_evaluation_20261020/diagnostics/README.md) and [separate numerical QA](../../outputs/sector_refresh_evaluation_20261020/qa/REPORT.md). Retained fact-20 evidence; inspected 2025 outcomes; no fitting, selection or prospective accuracy improvement.
+
+[E16] MedShield project records. Forecast-use consolidation, 20 October 2026. [Brief/system/paper changes and actual verification](../../outputs/forecast_use_review_20261020/README.md). Presentation/documentation update with original forecasts preserved. Working Markdown updated; earlier formatted PDF and retained screenshots remain dated artifacts.

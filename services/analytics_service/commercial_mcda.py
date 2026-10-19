@@ -50,9 +50,12 @@ def _abc_classes(sales_by_area: dict[str, float]) -> dict[str, str]:
     cumulative = 0.0
     classes: dict[str, str] = {}
     for area, sales_value in sorted(sales_by_area.items(), key=lambda item: item[1], reverse=True):
-        cumulative += max(sales_value, 0.0)
-        cumulative_share = cumulative / total if total else 1.0
-        classes[area] = "A" if cumulative_share <= 0.80 else "B" if cumulative_share <= 0.95 else "C"
+        if sales_value <= 0 or total <= 0:
+            classes[area] = "Unclassified"
+            continue
+        before = cumulative / total
+        classes[area] = "A" if before < 0.80 - 1e-10 else "B" if before < 0.95 - 1e-10 else "C"
+        cumulative += sales_value
     return classes
 
 
@@ -136,7 +139,8 @@ def _build_commercial_mcda_uncached(
     metadata = candidate.get("metadata", {})
     return {
         "model_code": "COMMERCIAL_MCDA_V2",
-        "model_version": "2.0.0",
+        "model_version": "2.0.1",
+        "abc_policy": "positive_sales_crossing_inclusive_v2_candidate",
         "status": "candidate",
         "label": (
             "CANDIDATE - Based on publication-eligible sales rows and approved territory mappings; "

@@ -44,7 +44,7 @@ export const PLANNING_MARKUP = String.raw`
     <p class="analytical-output-takeaway" id="planTakeaway">No scenario has been calculated.</p>
     <p class="analytical-output-scope" id="planScope">Historical shortlist evidence loading. Demand and inventory values are scenario assumptions.</p>
   </section>
-  <p class="chart-subtitle" id="planAssumptions">Scenario only · Product-specific units and entered costs. Operational inventory, expiry and clinical priority are unverified. No purchase is executed.</p>
+  <p class="chart-subtitle">Scenario only · Entered assumptions · No purchase is executed.</p>
 
   <!-- Illustrative scenario inputs; these are not verified operational data. -->
   <div class="scenario-bar">
@@ -60,7 +60,7 @@ export const PLANNING_MARKUP = String.raw`
     </button>
   </div>
 
-  <p class="chart-subtitle" id="planPresetNote">Examples fill blanks only. Demand, stock and supplier values are unverified assumptions.</p>
+  <p class="chart-subtitle">Examples fill blank fields only.</p>
 
   <div class="plan-controls">
     <label>Buyer Cluster
@@ -103,7 +103,7 @@ export const PLANNING_MARKUP = String.raw`
   </div>
 
   <p style="font-size:11px;color:var(--text-muted);line-height:1.5;">
-    Share of positive-product net sales over trailing closed months. Source identities require review; revenue rank does not establish clinical priority.
+    Share of historical positive-product net sales · Commercial ranking only.
   </p>
 
   <div class="plan-scroll">
@@ -153,6 +153,8 @@ export const PLANNING_MARKUP = String.raw`
   <details class="analytical-output-notes" style="margin-top:16px;background:var(--bg-elevated,#f8fafc);border:1px solid var(--border);border-radius:8px;padding:10px 14px;">
     <summary style="cursor:pointer;font-size:12px;font-weight:700;color:var(--text-primary);">Scenario assumptions, allocation method and source</summary>
     <div style="font-size:11px;color:var(--text-secondary);line-height:1.6;margin-top:10px;">
+      <p id="planAssumptions">Scenario only · Product-specific units and entered costs. Operational inventory, expiry and clinical priority are unverified. No purchase is executed.</p>
+      <p id="planPresetNote">Examples fill blanks only. Demand, stock and supplier values are unverified assumptions.</p>
       <p id="planReview">Review demand, usable stock, reserve, packaging and supplier costs before solving.</p>
       <p><strong>Allocation:</strong> The live gateway meets entered minimum fulfillment where feasible, then adds affordable integer packs to products with lower fulfillment fractions. This scenario does not establish a globally optimal purchase plan.</p>
       <p><strong>Assumptions:</strong> Demand covers the entire selected horizon. Usable stock, protected reserve, units per pack, pack cost, supplier limit, budget and minimum fulfillment come from the entered values.</p>

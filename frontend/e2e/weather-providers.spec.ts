@@ -51,11 +51,17 @@ test('new models read through gateway, refresh explicitly and clear stale rows o
       displays.push(root.querySelector('#weatherEffectStatus')!.textContent!)
     }
     const cells = Array.from(root.querySelectorAll('#weatherEffectTable tbody td'), cell => cell.textContent)
+    const visibleColumns = () => Array.from(root.querySelectorAll<HTMLTableCellElement>('#weatherEffectTable thead th')).filter(cell => !cell.hidden).map(cell => cell.textContent)
+    const compactColumns = visibleColumns()
+    const columns = root.querySelector<HTMLSelectElement>('#weatherColumns')!
+    columns.value = 'full'; view.applyWeatherColumns(root)
+    const fullColumns = visibleColumns()
+    columns.value = 'compact'; view.applyWeatherColumns(root)
     await interactions.refreshSelectedWeatherData(root)
     fail = true
     provider.value = 'nasa_power'
     await interactions.loadWeatherEffectView(root)
-    return { calls, displays, cells, years, failedRowCount: root.querySelectorAll('#weatherEffectTable tbody tr').length,
+    return { calls, displays, cells, compactColumns, fullColumns, years, failedRowCount: root.querySelectorAll('#weatherEffectTable tbody tr').length,
       failureStatus: root.querySelector('#weatherEffectStatus')!.textContent, count: root.querySelector('#weatherEffectCount')!.textContent }
   }, scripts)
   expect(result.displays[0]).toContain('Open-Meteo ERA5 | Databricks Gold')
@@ -63,11 +69,35 @@ test('new models read through gateway, refresh explicitly and clear stale rows o
   expect(result.displays[2]).toContain('Open-Meteo ECMWF IFS')
   expect(result.cells).toContain('0.0 mm')
   expect(result.cells).toContain('Unavailable')
+  expect(result.compactColumns).toEqual(['Period', 'Area', 'Provider', 'Rainfall', 'Rainy Days'])
+  expect(result.fullColumns).toHaveLength(12)
   expect(result.calls.find(call => call.kind === 'refresh')).toEqual({ kind: 'refresh', start: '2024-01-01', end: '2024-12-31', areas: ['Quezon'], provider: 'open_meteo_ifs' })
   expect(result.years).toContain('2026')
   expect(result.failedRowCount).toBe(0)
   expect(result.failureStatus).toBe('Databricks unavailable')
   expect(result.count).toBe('Unavailable')
+})
+
+test('compact weather columns follow available daily measurements and preserve zero and unavailable cells', async ({ page }) => {
+  const script = ts.transpileModule(await readFile('services/api/weather-view-helpers.ts', 'utf8'), { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS } }).outputText
+  await page.setContent(WEATHER_VALIDATION_PAGE)
+  const result = await page.evaluate(script => {
+    const module = { exports: {} as any }
+    new Function('require', 'module', 'exports', script)(() => ({ formatSalesValue: (value: unknown) => value == null ? 'Unavailable' : String(value) }), module, module.exports)
+    const root = document.querySelector<HTMLElement>('#page-weather-validation')!
+    const row = { date: '2024-01-01', period: '2024-01', area: 'Quezon', provider: 'nasa_power', rainfall_mm: 0, rainy_day: false, temperature_c: 0, relative_humidity_pct: null, wind_speed_kph: 0, rainfall_severity_proxy: null, weather_alert_level: 'unavailable', sales_revenue: null, planning_demand_uplift_pct: null }
+    const data = { metadata: { provider: 'nasa_power', grain: 'daily', system_of_record: 'databricks' }, summary: [], rows: [row, { ...row, date: '2024-01-02', temperature_c: null }] }
+    module.exports.renderWeatherEffects(root, data)
+    const visible = Array.from(root.querySelectorAll<HTMLTableCellElement>('thead th')).filter(cell => !cell.hidden).map(cell => cell.textContent)
+    const first = Array.from(root.querySelectorAll<HTMLTableCellElement>('tbody tr:first-child td')).filter(cell => !cell.hidden).map(cell => cell.textContent)
+    const second = Array.from(root.querySelectorAll<HTMLTableCellElement>('tbody tr:last-child td')).filter(cell => !cell.hidden).map(cell => cell.textContent)
+    module.exports.renderWeatherEffects(root, { ...data, rows: [] })
+    return { visible, first, second, emptySpan: root.querySelector<HTMLTableCellElement>('tbody td')!.colSpan }
+  }, script)
+  expect(result.visible).toEqual(['Date', 'Area', 'Provider', 'Rainfall', 'Rainy Day', 'Temp', 'Wind'])
+  expect(result.first).toEqual(['2024-01-01', 'Quezon', 'nasa_power', '0.0 mm', 'No', '0.0 C', '0.0 km/h'])
+  expect(result.second).toContain('Unavailable')
+  expect(result.emptySpan).toBe(4)
 })
 
 test('weather controls fit desktop and mobile with existing styles', async ({ page }) => {

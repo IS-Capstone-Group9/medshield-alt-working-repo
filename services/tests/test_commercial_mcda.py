@@ -8,10 +8,15 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from services.analytics_service.commercial_mcda import build_commercial_mcda
+from services.analytics_service.commercial_mcda import _abc_classes, build_commercial_mcda
 
 
 class CommercialMcdaTests(unittest.TestCase):
+    def test_abc_cutoff_crossing_and_nonpositive_values(self) -> None:
+        self.assertEqual(_abc_classes({'major': 90, 'minor': 10, 'zero': 0, 'return': -5}),
+                         {'major': 'A', 'minor': 'B', 'zero': 'Unclassified', 'return': 'Unclassified'})
+        self.assertEqual(_abc_classes({'a': 80, 'b': 15, 'c': 5}), {'a': 'A', 'b': 'B', 'c': 'C'})
+
     def test_uses_only_publication_eligible_rows_and_approved_territories(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             root = Path(temp_dir)

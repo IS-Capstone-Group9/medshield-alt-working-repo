@@ -76,6 +76,20 @@ class PredictiveTests(unittest.TestCase):
         self.assertEqual(result['a']['common_keys'], result['b']['common_keys'])
         self.assertEqual(compare(points, ['a', 'missing'])['a']['common']['n'], 0)
 
+    def test_conflicting_actuals_and_calibration_fail_visibly(self):
+        origin = month('2022-12')
+        with self.assertRaisesRegex(ValueError, 'disagree on the actual'):
+            compare([point(origin, 1), point(origin, 1, actual=99, model='b')], ['a', 'b'])
+        with self.assertRaisesRegex(ValueError, 'Conflicting calibration'):
+            interval(10, [point(origin, 1), point(origin, 1, prediction=99)], month('2024-12'), 1, .8)
+        with self.assertRaisesRegex(ValueError, 'Conflicting calibration'):
+            interval(10, [point(origin, 1), point(origin, 1, model='b')], month('2024-12'), 1, .8)
+        for invalid in [float('nan'), float('inf')]:
+            with self.assertRaisesRegex(ValueError, 'Nonfinite'):
+                score([(10, invalid)])
+            with self.assertRaisesRegex(ValueError, 'Nonfinite'):
+                interval(invalid, [], month('2024-12'), 1, .8)
+
     def test_missing_zero_partial_scope_duplicate(self):
         data = fixture()
         row = data['rows'][0]

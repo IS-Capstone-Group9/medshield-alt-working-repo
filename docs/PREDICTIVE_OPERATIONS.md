@@ -1,5 +1,100 @@
 # Predictive operation and review
 
+## Forecast-use consolidation — 20 October 2026
+
+The [client decision brief](PREDICTIVE_CLIENT_DECISION_BRIEF.md#current-review-recommendation--20-october-2026)
+now records the checked schedule/sector findings and current analyst
+recommendation: preserve the original company reference and use forecasts for
+exploratory outlook/budget discussion with historical errors visible. This is
+not a new client acceptance, numerical business threshold or operational
+activation. No additional unavailable business data is required to document the
+current limits. The [delivery](../outputs/forecast_use_review_20261020/README.md)
+also updates working Chapters 4–5 and source-derived Forecast use/error summaries
+and CSV context, preserving approved/empty/failure behavior. Offline schedule
+scores remain dated study records and are never bundled into runtime measures.
+
+## Existing-data buyer and refresh assessment — 20 October 2026
+
+The [executed sector/schedule packet](../outputs/sector_refresh_evaluation_20261020/README.md)
+provides the separately authorized Government/Private investigation and fixed
+four-benchmark evaluation using retained fact-20 aggregate evidence. It covers
+annual-fixed versus monthly lead-1 schedules on matching target months, exact
+calendar leads 1–12, native/common support, sector-sum invariance and complete
+3/6/12-month origin windows. Missing values are never zero-filled; the separate
+minimal-input benchmark policy does not alter trained-adapter history rules.
+
+This assessment registers the existing formulas before execution and performs
+no recipe tuning, model selection or publication. 2023–2024 is development
+evidence and already inspected 2025 is retrospective. It does not produce an
+untouched test, 2026 accuracy or a supported low-error replacement. No additional
+business inputs are assumed available. Follow the packet's actual commands,
+verification and measured tradeoffs; keep the original saved forecasts intact.
+
+## Expanded study and settled output contract — 20 October 2026
+
+The current user-confirmed study is **2017–2025**. That reporting scope includes
+partial early years; it does not retroactively expand the saved **2020–2025**
+company-revenue model/STL input window, change a model selection, or improve a
+measured error. Retain the recorded experiment identities, same-case comparisons,
+origins/leads, original versus exploratory status and actual error/bias results.
+Present historical evaluation separately from stored candidate future projections.
+Buyer-scoped retrospective benchmarks are implemented; they do not authorize
+unpublished buyer future points or a medicine-unit forecast.
+
+2026 actuals remain pending client confirmation. A requested future window with
+no supported published points must stay unavailable. Stored projections are not
+actual observations and cannot receive an accuracy score without matching actuals.
+If new 2026 data arrives, first preserve the frozen prior predictions and version
+the new source. Assess eligible, previously unobserved targets on the same recorded
+lead/target definition before any subsequent retraining. Do not tune additional
+recipes against already inspected audits to obtain a preferred error percentage.
+
+Next is consolidation of the already-run evaluation and the accepted-use decision,
+not another dashboard redesign or automatic model activation. The client can
+confirm the latest 2026 coverage and acceptable peso/percentage error for the
+intended decision; existing source completeness is already recorded.
+
+## Buyer benchmarks and error interpretation — 19 October 2026
+
+The [buyer-scope delivery](../outputs/predictive_buyer_scope_20261019/README.md)
+enables retrospective all-product revenue benchmarks on each existing mapped
+buyer subset. This corrects an explicit company-only software restriction;
+it does not grant buyer-ownership, quantity, coverage or trained-model approval.
+The gateway continues to calculate transparent origin-known naive/mean
+benchmarks from pinned Gold inputs. Dashboard requests do not fit Python models.
+
+The screenshot's seasonal-naive error was reproduced and independently
+recomputed. It repeats the prior matching calendar-month levels while the
+recorded evaluation year has a higher revenue level. That is poor historical
+benchmark performance, not a demonstrated WAPE calculation defect or explanation
+of the commercial cause. The UI now reports the evaluated period/origin, signed
+actual/prediction totals on matching pairs, under/overforecast counts and the
+selected benchmark's method. Keep all existing model selections/errors unchanged.
+
+Buyer results can have different support: Government seasonal naive has a
+missing origin-known comparison month in the checked source. Use the common-key
+comparison table when comparing models; do not rank their different headline
+populations as though all use identical observations. Missing months remain
+unavailable. An empty Unknown selection clears charts/errors/export and shows
+No observations. Future points remain unavailable without their published
+contract; PHP evidence remains separate from physical medicine demand.
+
+The separate stored company-PHP research and its frozen selection/evaluation
+remain intact. Newly exposed buyer benchmarks do not establish lower errors,
+future forecast accuracy, a new champion or operational replenishment.
+
+## 2027 longer-horizon exploratory comparison — 17 October 2026
+
+The [registered run and decision](../outputs/forecast_2027_experiment_20261017/REVIEW.md)
+provide an isolated leads13–24 runner, eight fixed recipes, overlapping origin
+comparisons, saved selection, explicit warnings and research-only2027 projection.
+Use the exact prepare/run commands there with a new empty output directory;
+protocol/input/code/runtime changes invalidate the registration. Do not relax
+the original12-month contracts or reuse their error as2027 performance.
+The frozen seasonal-naive choice has66.85%WAPE on the later-origin2025 diagnostic,
+so the analyst recommends retaining research/scenario status. This is not a
+formal client threshold or model activation. No Databricks publication occurred.
+
 ## Evaluate a bounded error reduction revision
 
 The [registered six-recipe experiment](../outputs/predictive_error_optimization_20261010/README.md)
@@ -398,3 +493,8 @@ Do not run a frontend production build while `next dev` owns `.next`.
 Fixture checks prove contracts, leakage safeguards and display parity, not model
 accuracy or cloud deployment. See the blueprint milestone record and timestamped
 predictive evidence directory for actual outcomes and unresolved checks.
+
+
+## External context and evidence guards — 20 October 2026
+
+The [scoped source/formula audit](../outputs/analytics_external_audit_20261020/README.md) independently recomputes saved scores and retains model selection/windows. External context is available in the existing authenticated regression response even when `status=blocked`; co-observed months are not approved training joins. Private/Quezon is the default revenue pilot. No external fit is activated: station mappings, 2025 official weather and DOH reporting/revision timing remain dependencies. Scores reject nonfinite values; common-key comparisons reject inconsistent actuals; interval calibration rejects contradictory duplicates or mixed-model evidence at one key. Identical repeated calibration points still cannot inflate support. Saved runs are unchanged; no new future accuracy is established.

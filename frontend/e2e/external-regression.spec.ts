@@ -16,11 +16,16 @@ function evidence(options = '', real = false) {
 test.beforeEach(async ({ page }) => {
   await page.route('http://medshield.test/**', route => route.fulfill({ contentType: 'text/html', body: '<html><body></body></html>' }))
   await page.goto('http://medshield.test/')
-  await page.setContent(`<style>${MEDSHIELD_STYLE}</style>${MEDSHIELD_MARKUP}`)
+  await page.setContent(`<style>${MEDSHIELD_STYLE}</style><div class="medshield-root">${MEDSHIELD_MARKUP}</div>`)
+  await page.addStyleTag({ path: path.resolve('app/medshield.css') })
+  await page.addStyleTag({ path: path.resolve('app/overrides.css') })
   await page.evaluate(() => { window.fetch = async () => new Response('{}', { status: 503 }) })
   await page.addScriptTag({ path: path.resolve('node_modules/chart.js/dist/chart.umd.js') })
   await page.evaluate(script => new Function(script)(), getExecutableDashboardScript())
-  await page.evaluate(() => (window as any).showPage('forecast'))
+  await page.evaluate(() => {
+    ;(window as any).showPage('forecast')
+    ;(document.getElementById('externalRegressionDetails') as HTMLDetailsElement).open = true
+  })
 })
 
 test('regression plots, metrics, lag controls and export share the evaluated scope', async ({ page }) => {

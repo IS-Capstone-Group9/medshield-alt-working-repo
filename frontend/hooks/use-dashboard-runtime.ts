@@ -17,6 +17,8 @@ import {
 } from '@/services/api/dashboard-interactions'
 import { hydrateSidebarAccountCard } from '@/lib/sidebar-account-card'
 import type { User } from '@/lib/auth-tokens'
+import { ApiRequestError } from '@/services/api/api-client'
+import { installOverviewSectorComparison } from '@/services/api/overview-sector-comparison'
 
 export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | null) {
   const rootRef = useRef<HTMLDivElement>(null)
@@ -39,6 +41,7 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
 
     let disposeStl = () => {}
     let disposeDiagnostics = () => {}
+    let disposeOverviewComparison = () => {}
     let disposed = false
     let activeListeners: ListenerRecord[] = []
 
@@ -47,16 +50,19 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
     root.style.visibility = 'visible'
     resetDashboardDeferredLoads()
 
-    const showDatabricksUnavailable = () => {
+    const showDatabricksUnavailable = (error?: unknown) => {
       if (disposed) return
+      const authenticationUnavailable = error instanceof ApiRequestError && error.code === 'AUTHENTICATION_UNAVAILABLE'
       root.dataset.sourceState = 'unavailable'
       root.removeAttribute('aria-busy')
       root.style.visibility = 'visible'
       root.innerHTML = `
         <main role="alert" style="max-width:760px;margin:10vh auto;padding:32px;border:1px solid #d9e2e8;border-radius:14px;background:#fff;color:#12384e;font-family:Arial,sans-serif">
-          <h1 style="margin:0 0 12px;font-size:24px">Databricks data is unavailable</h1>
-          <p style="margin:0;line-height:1.6">Source data could not be loaded. Charts and values are unavailable. Reload this page to retry, or contact the administrator if the problem continues.</p>
+          <h1 style="margin:0 0 12px;font-size:24px">${authenticationUnavailable ? 'Authentication service is unavailable' : 'Databricks data is unavailable'}</h1>
+          <p style="margin:0;line-height:1.6">${authenticationUnavailable ? 'Your session could not be verified. Charts and values are unavailable.' : 'Source data could not be loaded. Charts and values are unavailable.'} Reload this page to retry, or contact the administrator if the problem continues.</p>
+          <button type="button" style="margin-top:20px;padding:10px 18px;cursor:pointer">Retry loading dashboard</button>
         </main>`
+      root.querySelector('button')?.addEventListener('click', () => window.location.reload(), { once: true })
     }
 
     const styleEl = document.createElement('style')
@@ -112,6 +118,7 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
         
         installRuntimeEnhancements(root, activeListeners)
         disposeDiagnostics = installDiagnosticPanel(root)
+        disposeOverviewComparison = installOverviewSectorComparison(root)
         installSalesOutputSections(root)
 
         void refreshDashboardFromGateway()
@@ -124,8 +131,9 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
             disposeStl = installStlPanel(root)
           })
           .catch((error) => {
-            console.error('Live Databricks dashboard load failed:', error)
-            showDatabricksUnavailable()
+            if (error instanceof ApiRequestError) console.warn('Dashboard request unavailable:', error.message)
+            else console.error('Live Databricks dashboard load failed:', error)
+            showDatabricksUnavailable(error)
           })
 
         // Bind logout click
@@ -144,6 +152,7 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
       disposed = true
       disposeStl()
       disposeDiagnostics()
+      disposeOverviewComparison()
       setPortalContainer(null)
       for (const { target, type, listener, options } of activeListeners) {
         target.removeEventListener(type, listener, options)
@@ -152,9 +161,9 @@ export function useDashboardRuntime(onLogout: () => Promise<void>, user: User | 
       document.getElementById('medshield-dashboard-styles')?.remove()
       
       const handlers = [
-        'showPage', 'toggleTheme', 'openHelp', 'closeNavigation', 'toggleNavigation',
+        'showPage', 'toggleTheme', 'openHelp', 'closeNavigation', 'toggleNavigation', 'setOverviewSectorData', 'getOverviewComparisonScope',
         'setComparisonMode', 'setYear', 'setYoYYear', 'setDescriptivePeriod', 'refreshComparison', 'applyDatasetPatch', 'buildCharts',
-        'setPlanningData', 'setPlanningResult', 'getPlanningRequest', 'invalidatePlan', 'changePlanningScope', 'requestPlanSolve', 'exportPlanningCSV', 'setPrescriptivePreset', 'resetPlanningDefaults', 'setExternalRegressionData', 'renderExternalRegression', 'changeRegressionScope', 'exportExternalRegressionCSV', 'setForecastValidationData', 'renderForecastValidation', 'changeForecastScope', 'exportForecastValidationCSV', 'setSalesSectorsData', 'renderSalesSectors', 'setSalesHeatmapData', 'changeHeatmapCategory', 'renderSalesHeatmap', 'exportSalesHeatmapCSV',
+        'setPlanningData', 'setPlanningResult', 'getPlanningRequest', 'invalidatePlan', 'changePlanningScope', 'requestPlanSolve', 'exportPlanningCSV', 'setPrescriptivePreset', 'resetPlanningDefaults', 'setExternalRegressionData', 'renderExternalRegression', 'changeRegressionScope', 'exportExternalRegressionCSV', 'exportExternalContextCSV', 'setForecastValidationData', 'renderForecastValidation', 'changeForecastScope', 'exportForecastValidationCSV', 'setSalesSectorsData', 'renderSalesSectors', 'setSalesHeatmapData', 'changeHeatmapCategory', 'renderSalesHeatmap', 'exportSalesHeatmapCSV',
         'renderProductPrioritizationTimeline', 'configureProductYearControls',
         'setPredictiveResearchData', 'renderPredictiveResearch', 'changePredictiveResearch', 'exportPredictiveResearchCSV',
         'openDiagnosticDrilldown', 'getDiagnosticScope', 'exportAreaRankingCSV'

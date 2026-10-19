@@ -229,7 +229,7 @@ test('custom full-year range uses matched prior months; zero baseline keeps nomi
   await expect(page.locator('#salesGrowthSummary')).toContainText('Unavailable')
 })
 
-test('custom current-year-to-date range ends today and actuals override estimates', async ({ page }) => {
+test('custom current-year-to-date range ends today and months without records stay blank', async ({ page }) => {
   const calendar = await page.evaluate(() => {
     const parts = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Manila', year: 'numeric', month: '2-digit' })
       .formatToParts(new Date())
@@ -249,10 +249,14 @@ test('custom current-year-to-date range ends today and actuals override estimate
 
   const monthly = await chartData(page, 'revenueDetailChart')
   expect(monthly.labels).toHaveLength(calendar.month)
-  expect(monthly.datasets[0].data.slice(0, calendar.month - 1)).toEqual(Array(Math.max(0, calendar.month - 1)).fill(1_000_000))
+  expect(monthly.datasets[0].data.slice(0, calendar.month - 1)).toEqual(Array(Math.max(0, calendar.month - 1)).fill(null))
   expect(monthly.datasets).toHaveLength(2)
   expect(monthly.datasets[0].data[calendar.month - 1]).toBe(9_000_000)
   expect(monthly.datasets[0].data).toHaveLength(calendar.month)
+  await page.evaluate(() => (window as any).setDescriptiveGranularity('yearly'))
+  const annual = await chartData(page, 'revenueDetailChart')
+  expect(annual.labels).toEqual([`${calendar.year} YTD`])
+  expect(annual.datasets[0].data).toEqual([9_000_000])
 })
 
 test('annual YoY compares overlapping observed months instead of unequal yearly coverage', async ({ page }) => {
@@ -270,7 +274,8 @@ test('annual YoY compares overlapping observed months instead of unequal yearly 
   await page.getByRole('tab',{name:'Growth',exact:true}).click()
   await page.selectOption('#salesGrowthMeasureSelect','pesos')
   expect((await chartData(page, 'growthChart')).datasets[0].data).toEqual([null, 100])
-  expect(growth.labels).toContain('2025 Partial')
+  expect(growth.labels).toContain('2025')
+  expect(growth.labels.some((label:string)=>label.includes('Partial'))).toBe(false)
   await expect(page.locator('#salesGrowthTable')).toContainText('1/12 months matched')
   await expect(page.locator('#salesGrowthSummary')).toContainText('Annual comparisons include only months observed in both years')
 })

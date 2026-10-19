@@ -13,6 +13,7 @@ export const PREDICTIVE_RESEARCH_MARKUP = `
   <p id="researchStatus" class="analytical-output-scope" role="status" aria-live="polite">Stored research evidence unavailable.</p>
   <p id="researchScope" class="chart-subtitle"></p>
   <p id="researchSelection" class="chart-subtitle"></p>
+  <p id="researchUseSummary" class="analytical-output-scope" aria-live="polite">Forecast use unavailable.</p>
   <div id="researchComparisonWrap" style="max-width:100%;overflow-x:auto" tabindex="0" role="region" aria-label="Research model comparison"><table id="researchComparison" class="product-table" style="min-width:1000px;white-space:nowrap;overflow-wrap:normal" aria-label="Research models on common historical cases"></table></div>
   <h3 id="researchDetailTitle" class="chart-title">Origin and target month evidence</h3>
   <div style="max-width:100%;overflow-x:auto" tabindex="0" role="region" aria-label="Selected research model evidence"><table id="researchPoints" class="product-table" style="min-width:1000px;white-space:nowrap;overflow-wrap:normal" aria-label="Origin keyed research evidence"></table></div>
@@ -75,6 +76,7 @@ function renderPredictiveResearch(error) {
   const data = predictiveResearchData;
   predictiveResearchExport = [];
   ['researchComparison','researchPoints','researchScope','researchSelection','researchSource','researchLimitations','researchPointCount'].forEach(id => el(id).textContent = '');
+  el('researchUseSummary').textContent = 'Forecast use unavailable.';
   el('researchDetailTitle').textContent = 'Origin and target month evidence';
   el('researchComparisonWrap').hidden = false;
   el('researchLead').disabled = false;
@@ -142,6 +144,12 @@ function renderPredictiveResearch(error) {
     el('researchPoints').innerHTML = '<thead><tr><th>Origin cutoff</th><th>Target month</th><th>Calendar lead</th><th>Actual (₱)</th><th>Prediction (₱)</th><th>Signed error (₱)</th><th>Absolute error (₱)</th><th>Absolute percentage error</th><th>Error status</th></tr></thead><tbody>' + points.map(p => { const ape = finite(p.absolute_error_php) && finite(p.actual) && p.actual !== 0 ? p.absolute_error_php / Math.abs(p.actual) * 100 : null; return '<tr><td>' + esc(p.origin_period) + '</td><td>' + esc(p.target_period) + '</td><td>' + esc(p.lead_months) + '</td><td>' + php(p.actual) + '</td><td>' + php(p.prediction) + '</td><td>' + php(p.signed_error_php) + '</td><td>' + php(p.absolute_error_php) + '</td><td>' + pct(ape) + '</td><td>' + esc(p.error_unavailable_reason || (p.actual === 0 ? 'Peso error available; percentage denominator zero' : 'Scored')) + '</td></tr>'; }).join('') + '</tbody>';
   }
   const m = result?.metrics || {};
+  el('researchUseSummary').textContent = 'Exploratory revenue estimates · Sales outlook and revenue-budget discussion only. '
+    + (projections ? 'Actuals and forecast errors unavailable.' : !result?.available ? 'Selected model excluded from the common-case comparison.'
+      : 'Selected model: MAE ' + php(m.mae) + ' · WAPE ' + pct(m.wape) + ' · signed bias ' + php(m.bias) + '.')
+    + ' Operational reliability is not established.';
+  identity.forecast_use = 'exploratory_review_only';
+  identity.error_context = projections ? 'actuals_unavailable' : stage;
   predictiveResearchExport = points.map(p => ({...identity,origin_period:p.origin_period,target_period:p.target_period,lead_months:p.lead_months,actual:projections ? null : p.actual,prediction:p.prediction,signed_error_php:projections ? null : p.signed_error_php,absolute_error_php:projections ? null : p.absolute_error_php,absolute_percentage_error:!projections && finite(p.actual) && p.actual !== 0 && finite(p.absolute_error_php) ? p.absolute_error_php / Math.abs(p.actual) * 100 : null,error_unavailable_reason:projections ? 'actual_unavailable' : p.error_unavailable_reason ?? '',...(projections ? {prior_year_period:p.prior_year_period ?? '',prior_year_net_sales_php:finite(p.prior_year_net_sales_php) ? p.prior_year_net_sales_php : null,prior_year_value_status:p.prior_year_value_status ?? '',prior_year_coverage_status:p.prior_year_coverage_status ?? '',forecast_yoy_percent:yoyReason(p) ? null : p.forecast_yoy_percent,forecast_yoy_unavailable_reason:yoyReason(p),baseline_input_storage_hash:p.baseline_input_storage_hash ?? '',baseline_input_content_hash:p.baseline_input_content_hash ?? ''} : {}),temporal_status_at_generation:projections ? p.temporal_status_at_generation ?? '' : '',intervals:projections ? JSON.stringify(p.intervals || []) : '',comparison_available:result?.available ?? false,comparison_n:m.n ?? 0,comparison_mae_php:m.mae ?? null,comparison_rmse_php:m.rmse ?? null,comparison_wape_percent:m.wape ?? null,comparison_bias_php:m.bias ?? null,comparison_normalized_bias_percent:m.normalized_bias ?? null}));
   el('researchPointCount').textContent = points.length + ' rows displayed and exported · ' + (projections ? 'no actuals or measured errors. Scroll the table horizontally to view all baseline and interval fields' : 'origin keys preserved, including repeated target months') + '.';
   el('researchExport').disabled = !points.length;

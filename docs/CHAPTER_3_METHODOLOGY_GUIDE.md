@@ -88,10 +88,54 @@ executed model families, target/unit, evaluation protocol, formulas and defensib
 interpretation. The [recomputed scorecard](../outputs/predictive_explanation_20261010/SCORECARD.md)
 supports the predictive results table. [Current state](CURRENT_STATE.md) owns
 current numerical results and acceptance status. Distinguish the 2017–2025 current
-project reporting scope from the 2020–2025 modeling window. If the paper still
-uses its original 2021–2025 dates, reconcile them with the recorded project-scope
-change and academic requirements.
+user-confirmed study scope from the retained 2020–2025 modeling window. Adrian
+explicitly confirmed the expanded 2017–2025 study on 20 October 2026. Include
+2017–2020 in the study, disclose partial coverage, and align the working
+Chapters 1–3 dates while preserving archived source PDFs. 2026 actuals are
+pending client confirmation; do not include them as observed study data. The
+scope update does not retrospectively retrain or validate a saved model.
 
-## Historical implemented revision methods (September 12, 2026)
+## Sector diagnostic method — implemented 19 October 2026
 
-Use [the Section 8 evidence record](SECTION_8_ACCEPTANCE_EVIDENCE.md) and its reproducible JSON for the implemented methods. Heatmaps and forecast quantities use one raw product at a time and exclude estimated rows. Government, Private and Unknown ownership remain separate. Regression uses earlier signal months and reports retrospective evaluation limitations. Planning maximizes equal-product fulfillment fractions then minimizes cost, with integer packs, budget, stock protection and supplier caps. Client acceptance of that objective remains pending.
+Within the current 2017–2025 study, compare January–December 2025 with the
+same calendar dates in 2024. Pin dataset, Delta version, policy and mapping
+identities. Select eligible signed net sales, retaining negative adjustments;
+match company months with eligible evidence on both sides before grouping
+Government, Private, Internal and Unknown. Do not silently remove Internal or
+unknown groups. Earlier study years retain their actual observed coverage.
+
+For group `g`, contribution is `Δg = sales(g, 2025) − sales(g, 2024)`; its signed
+share is `100 × Δg / ΔAll`, unavailable if `ΔAll = 0`. Reconcile all sector and
+month/product/raw-area/source-evidence partitions to the same total before
+ranking. Shares may exceed 100% when other groups offset the increase. A missing
+company month is excluded from both periods. Group absence within a matched
+company period is an accounting zero; it does not establish zero real activity.
+The observed trend preserves absent sector periods as unavailable.
+
+Compute gross margin as `100 × eligible gross profit / matching eligible net
+sales`, with a nonpositive or missing denominator unavailable. Report the basis
+and changing eligibility rather than comparing rates as whole-sector profit.
+Keep proposed ownership, approved geography and product-identity/unit review
+separate. Drill down sector → month → product reporting group → raw area label,
+retaining original versus adjusted financial evidence. Generic labels do not
+establish individual accounts. Contributions localize change; contracts, price,
+inventory, disease/weather and causal explanations require independently linked
+evidence. The available study sources do not establish the underlying cause.
+
+Use the [checked findings](../outputs/sector_diagnostic_20261019/FINDINGS.md),
+[reproducible verification](../outputs/sector_diagnostic_20261019/README.md) and
+[updated working Chapters 4–5](chapters/MedShield_Chapter_4_5_Revised_20261016.md)
+for the implementation, results and bounded conclusion. The supplied Chapters
+1–3 PDF is preserved; final complete-paper assembly remains a separate step.
+
+## External context and cross-check method — 20 October 2026
+
+The [external/source/formula audit](../outputs/analytics_external_audit_20261020/README.md) supplies a predeclared Private–Quezon revenue pilot with Dengue and PAGASA rainfall each from one month earlier. Aggregate eligible sales to one unique buyer/product/approved-territory/month key before aligning each unique provider/signal/month key. Reject duplicate signal keys; never multiply sales through a multi-signal transaction join. Preserve missing versus zero, peso/case/mm units, original/adjusted source counts and pending mappings. Count co-observed months separately from approved joins. Revenue remains a financial target.
+
+The supplied sources support historical candidate context, not an admissible external model: station/territory mappings are unapproved, official 2025 weather is absent and DOH reporting/revision timestamps are missing. Do not claim that onset-month lagging proves real-time availability. After these dependencies are resolved, freeze the sales-only versus augmented temporal comparison on identical cases, fit transformations on training only and reserve genuinely unseen evidence. Already inspected 2025 results are a retrospective audit. A retrospective sensitivity study must remain explicitly separate from operational forecast validation.
+
+Cross-check financial sums, contributions and matching margin denominators with a separate Decimal calculation; recompute MAE, RMSE, WAPE and mean prediction-minus-actual bias from stored pairs. Verify full common evaluation keys and consistent actuals; reject contradictory calibration evidence. Test positive-sales ABC at 80%/95% cutoffs with crossing items retained. Reconstruct observed STL as trend+seasonal+residual. Check planning packs/cents, stock protection and budget feasibility against a hand-calculated example. The current gateway planning method is bounded greedy allocation, with no global-optimality claim. Keep source approval, technical verification and academic acceptance distinct.
+
+## Historical implemented revision methods (September 12, 2026) — retained note
+
+Use [the Section 8 evidence record](SECTION_8_ACCEPTANCE_EVIDENCE.md) and its reproducible JSON for the implemented methods. Heatmaps and forecast quantities use one raw product at a time and exclude estimated rows. Government, Private and Unknown ownership remain separate. Regression uses earlier signal months and reports retrospective evaluation limitations. The historical offline planning solver uses equal-product fulfillment and cost objectives. The current gateway instead uses a bounded greedy scenario with integer packs, budget, stock protection and supplier caps; it does not certify a global optimum. Client acceptance of that objective remains pending.

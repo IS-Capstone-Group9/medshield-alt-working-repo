@@ -10,6 +10,8 @@ import { SALES_HEATMAP_SCRIPT } from './sales-heatmap-runtime'
 import { patchOverviewMonthlyChart } from './overview-monthly-runtime'
 import { CURRENT_YEAR_SCRIPT } from './current-year-runtime'
 import { OVERVIEW_ANALYTICS_SCRIPT } from './overview-analytics-runtime'
+import { OVERVIEW_SECTOR_SCRIPT } from './overview-sector-runtime'
+import { OVERVIEW_TREND_COMPARISON_SCRIPT } from './overview-trend-comparison-runtime'
 import { PRODUCT_PRIORITIZATION_SCRIPT } from './descriptive-products-runtime'
 import { guardReplacedChartInitializers } from './legacy-chart-targets'
 import { patchDashboardNavigation } from './dashboard-navigation-runtime'
@@ -28,6 +30,7 @@ export type ListenerRecord = {
 const DASHBOARD_GLOBAL_HANDLERS = [
   'openDiagnosticDrilldown',
   'getDiagnosticScope',
+  'setOverviewSectorData', 'getOverviewComparisonScope',
   'showPage',
   'toggleTheme',
   'openHelp',
@@ -51,6 +54,7 @@ const DASHBOARD_GLOBAL_HANDLERS = [
   'renderExternalRegression',
   'changeRegressionScope',
   'exportExternalRegressionCSV',
+  'exportExternalContextCSV',
   'setForecastValidationData',
   'renderForecastValidation',
   'changeForecastScope',
@@ -411,6 +415,8 @@ ${DIAGNOSTIC_DRILLDOWN_SCRIPT}
 ${CURRENT_YEAR_SCRIPT}
 ${DESCRIPTIVE_PERIOD_SCRIPT}
 ${OVERVIEW_ANALYTICS_SCRIPT}
+${OVERVIEW_SECTOR_SCRIPT}
+${OVERVIEW_TREND_COMPARISON_SCRIPT}
 ${PRODUCT_PRIORITIZATION_SCRIPT}
 ${SALES_HEATMAP_SCRIPT}
 ${SALES_SECTORS_SCRIPT}

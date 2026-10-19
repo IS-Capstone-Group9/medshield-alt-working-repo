@@ -7,7 +7,7 @@ import {
   installCommonInteractions,
 } from './dashboard-interactions'
 import { setSalesViewError } from './sales-page-helpers'
-import { weatherProviderLabel } from './weather-view-helpers'
+import { applyWeatherColumns, weatherProviderLabel } from './weather-view-helpers'
 import { isWeatherApiProvider, populateWeatherYears } from './weather-provider-helpers'
 import { applyScenarioSafetyLabels } from './dashboard-enhancements'
 import { renderDecisionSupportCharts } from './dashboard-decision-charts'
@@ -400,6 +400,10 @@ export function installDashboardEnhancements(
     .map((id) => root.querySelector<HTMLElement>(`#${id}`))
     .filter((control): control is HTMLElement => Boolean(control))
   provider?.addEventListener('change', handleProviderChange)
+  const weatherColumns = root.querySelector<HTMLSelectElement>('#weatherColumns')
+  const changeWeatherColumns = () => applyWeatherColumns(root)
+  weatherColumns?.addEventListener('change', changeWeatherColumns)
+  if (weatherColumns) activeListeners.push({ target: weatherColumns, type: 'change', listener: changeWeatherColumns })
   refreshButton?.addEventListener('click', handleWeatherRefresh)
   for (const control of weatherControls) control.addEventListener('change', refreshWeatherView)
   syncProviderControls()

@@ -104,12 +104,14 @@ test('nullable summary cards display unavailable and ledger cells show a missing
   await page.evaluate(async ({ scripts }) => {
     const app = window as any
     const data = {
-      dataStatus: { source: 'databricks', mode: 'live' }, summary: { total_revenue: 0, total_income: null, total_transactions: 1, avg_margin: null },
+      dataStatus: { source: 'databricks', mode: 'live', release: {dataset_id:'isolated-null-contract',fact_delta_version:1} }, summary: { total_revenue: 0, total_income: null, total_transactions: 1, avg_margin: null },
       monthly: [], byArea: [], products: [], yearSummary: [], seasonality: [],
     }
     app.applyDatasetPatch = (patch: any) => { app.__nullContractPatch = patch }
+    app.setOverviewSectorData = () => {}
     const modules: Record<string, any> = {
       '@/lib/api': { loadDashboardData: async () => data },
+      './api-client': {getJson:async()=>({daily:[],source:{release:data.dataStatus.release}})},
       './dashboard-enhancements': { updateDashboardProvenance: () => {} },
       './dashboard-decision-charts': { setDecisionSupportChartData: () => {} },
     }

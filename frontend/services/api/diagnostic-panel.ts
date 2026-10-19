@@ -103,6 +103,11 @@ export function installDiagnosticPanel(root: HTMLElement): () => void {
     const financial = data.totals.current_financial
     results.append(paragraph(`Current eligible gross profit: ${money(financial.income)}; margin basis: ${money(financial.margin_revenue_basis)}; weighted gross margin: ${rate(financial.margin_pct)}. Net-sales eligible rows: ${financial.net_sales_eligible_rows}/${financial.rows}; gross-margin eligible rows: ${financial.gross_margin_eligible_rows}/${financial.rows}. Original source rows: ${financial.original_source_rows}; adjusted/estimated rows: ${financial.adjusted_estimated_rows}; unresolved product rows: ${financial.unresolved_product_rows}. These are row counts, not revenue shares.`))
     const source = paragraph(`Dataset ${data.release.dataset_id} · Fact version ${data.release.fact_delta_version} · Policy ${data.release.policy_version}. Candidate evidence; business acceptance is separate.`); source.id = 'diagnosticRelease'; results.append(source)
+    if(data.contributions.evidence?.length){
+      const split=document.createElement('details'),title=document.createElement('summary');title.textContent='Original versus adjusted source financial contributions';split.append(title)
+      for(const row of data.contributions.evidence)split.append(paragraph(`${row.label}: prior ${money(row.prior)}; current ${money(row.current)}; signed change ${money(row.delta)}. These financial amounts retain their source evidence status.`))
+      results.append(split)
+    }
     const actions = document.createElement('div'); actions.className = 'diagnostic-controls'
     actions.append(button('Current transactions', () => ledger(currentScope, 'Current investigation scope')), button('Prior transactions', () => ledger({ ...currentScope, start_date: data.scope.prior_start_date, end_date: data.scope.prior_end_date }, 'Prior investigation scope')))
     results.append(actions, paragraph('The transaction view includes all retained rows in these exact dates and dimensions, including unmatched periods and rows excluded from financial metrics. Its raw totals may differ from the matched eligible comparison above.'))

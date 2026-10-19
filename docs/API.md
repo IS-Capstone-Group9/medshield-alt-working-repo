@@ -1,5 +1,83 @@
 # API Gateway
 
+## Overview buyer-sector diagnosis — 19 October 2026
+
+Authenticated `GET /api/sales/sector-trend` returns compact daily Gold-derived
+financial aggregates for All/Government/Private/Internal/Unknown with a shared
+release identity. It uses the existing complete, version-pinned catalog read;
+the browser does not receive the catalog's raw records through this endpoint.
+Each present day/sector exposes `date`, `period`, nullable `revenue`, `income`,
+`margin_revenue_basis`, retained row count and original/adjusted row counts.
+Eligible signed amounts are aggregated in integer millionths. Absent groups
+are absent, not filled with observed zero. The source remains candidate with
+`buyer_mapping_status: proposed_review_pending`; required-source errors remain
+explicit. The overview requires the same release as its core data.
+
+Overview buyer selection scopes the right trend, KPI/narrative, coverage, calendar,
+margin chart/value table and sector CSV together; the left Overall trend stays All.
+As confirmed by the user on 20 October 2026, All Time opens the **2017–2025 study**.
+The former History view selector is removed. `study.start` is `2017-01-01`,
+`study.end` is `2025-12-31`, and `pending_extension` describes unconfirmed 2026
+actuals. No model window is changed by this display metadata. Custom and
+last-N date controls remain explicit selected dates. Sector trends use recorded
+observations only; no gap interpolation substitutes for absent sector periods.
+Net sales and gross profit have independently eligible populations. A month
+with eligible profit but unavailable net sales retains its profit; it must not
+be dropped or acquire zero sales. Annual values/CSV disclose sales and profit
+month counts separately. Historical UI year labels show plain years rather than
+classifying the client-provided dataset as `Partial`; counts remain visible and
+absent months are not inferred to be zero. Custom boundary years show `selected
+dates`; current-year YTD and matched-month Y/Y rules remain. This presentation
+change does not modify API values or forecast inputs. Margin still uses its
+matching eligible profit/basis.
+
+The contribution table calls existing `GET /api/sales/diagnostics` for the last
+selected year's date intersection, compared with the same dates one year
+earlier. In the default study view this is January–December 2025 vs 2024.
+Common company month pairs are selected before sector grouping, preserving a
+reconciled All denominator. Group absence in those observed company periods is
+an explicitly labelled accounting zero; it is not zero real demand. Missing
+company periods remain unavailable/excluded. Selecting a buyer filters the
+displayed/exported rows while an All-sector reference remains labelled.
+
+Diagnostic responses additionally expose `contributions.evidence`: the same
+matched financial populations partitioned by original/adjusted source evidence.
+This signed partition reconciles before serving and is visible in investigation
+details/JSON export. Sector → month → product → raw area inspection retains
+dates, filters, financial eligibility and release identity. Generic raw area or
+proposed directory entries do not establish individual account linkage.
+
+Both comparison-year margins and the trend rate use the same-record eligible
+gross-profit/revenue basis, with missing/nonpositive basis unavailable. The
+eligible subset can change between years; a rising reported rate does not
+establish improved whole-sector profitability. See [checked findings and
+mapping review](../outputs/sector_diagnostic_20261019/FINDINGS.md).
+
+## Buyer-scoped retrospective revenue benchmarks — 19 October 2026
+
+`GET /api/sales/forecast-validation?sector=Government&product=&metric=revenue`
+now returns separately computed historical benchmark evidence for each allowed
+buyer scope: All, Government, Private, Internal and Unknown. The gateway applies
+the same proposed buyer CASE as diagnostic reporting before monthly aggregation.
+All retains its existing `company` evaluation series; buyer subsets use
+`buyer:<sector>` keys. Source, errors, common comparisons, chart/table and CSV
+must describe that selected population. No company result is relabelled as a
+buyer result.
+
+Nonempty all-product revenue scopes return `status: exploratory` and the existing
+3/6/12-month fixed-origin benchmark views. Empty financial scopes return
+`status: empty`, null origin, empty model/view objects and an `empty_reason`
+(`no_records_in_selected_buyer_scope` or `no_eligible_net_sales_observations`).
+Observed zero remains an observation; missing months are not filled with zero.
+Unknown happens to be empty in the checked release, but is not permanently
+blocked if later source records support that mapped category.
+
+These responses remain unpublished, with unverified reporting coverage and
+proposed buyer mappings disclosed. Product-specific and physical-quantity
+evaluation, external features, trained-model publication and operational use
+retain their separate evidence requirements. Future benchmark points/bounds
+remain null. See the [implemented change and verification](../outputs/predictive_buyer_scope_20261019/README.md).
+
 ## Authentication ordering and source failures — 17 October 2026
 
 The [T08 repair](../outputs/auth_http_remediation_20261017/README.md) makes scalar
@@ -83,6 +161,19 @@ Responses identify Databricks as the source and report candidate status where ap
 
 Supabase Auth is the production identity provider. A local-session mode exists for local development when Supabase is intentionally disabled. Neither mode changes the analytical source.
 
+Identity dependency recovery (19 October 2026): token validation and linked-account
+GETs each use a five-second attempt timeout and at most three attempts, with
+250/500 ms backoff for connection resets/timeouts and HTTP 429/500/502/503/504.
+Invalid-token 401/403 responses are denied immediately; other nontransient
+errors are not retried. Password/sign-in/reset and other writes are never
+automatically replayed by this policy. Each request still validates its current
+token and linked active account/role; no stored authorization result is reused.
+Exhausted identity reads return `503 AUTHENTICATION_UNAVAILABLE` with the generic
+`Authentication service is unavailable` message. Provider outages do not mean
+that a valid session has expired, and this code distinguishes identity failure
+from warehouse unavailability. The frontend preserves the status, code and
+endpoint (without query parameters), hides analytics, and offers a reload retry.
+
 ## Core dashboard
 
 Descriptive contract changes (27 September 2026): monthly `revenue` and `income`
@@ -138,7 +229,7 @@ For `/api/monthly`, omitting `year` returns all monthly history. A supplied valu
 
 The sector response uses derived classification rules traceable to `docs/MAPPED_CLIENT_REFERENCE.md`. Government, Private, Internal, and Unknown describe mapped buyer clusters; they are not source-recorded ownership for every row.
 
-Forecast validation publishes transparent seasonal-naive and last-observation baselines derived from Databricks history. It does not label either model as approved. External regression returns `status: "blocked"` until approved DOH/PAGASA territory-month joins exist.
+Forecast validation publishes transparent seasonal-naive and last-observation baselines derived from Databricks history. It does not label either model as approved. External regression returns `status: "blocked"` until approved DOH/PAGASA territory-month joins exist. The response also provides `context` for the selected buyer/product and approved sales geography:108 study-month rows(2017–2025), lagged DOH/PAGASA observations, eligible signed net sales, original/adjusted source-row counts, station/mapping/observation status, per-signal source dataset identity and a content checksum. Default pilot is Private/Quezon. `coobserved_months` is descriptive alignment; it is distinct from `join_ready_months` and model-training coverage. Missing values remain null. Quantity context stays unavailable pending unit verification. Supported lags are 1,2,3,6,8,12; provider is PAGASA and disease must be one of the four supplied disease choices. Any required-source failure returns an error and clears the context. No local-file fallback or model fit is started. See the [context audit](../outputs/analytics_external_audit_20261020/README.md).
 
 Planning solve uses a Databricks-ranked historical shortlist plus user-entered demand, stock, reserve, pack, cost, supplier, budget, and horizon assumptions. The result is a scenario and cannot execute procurement.
 

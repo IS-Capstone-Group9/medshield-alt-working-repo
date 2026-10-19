@@ -15,6 +15,14 @@ function fixture(current = '200', prior = '100') {
   })
 }
 
+test('original and adjusted source financial contributions remain separate and reconcile', () => {
+  const result=buildSalesDiagnostics(scope(),[...fixture(),row('evidence','original_source_detail','current','50'),row('evidence','original_source_detail','prior','100'),row('evidence','adjusted_estimated_source','current','150')])
+  assert.equal(result.contributions.evidence.reduce((n,r)=>n+(r.delta??0),0),100)
+  assert.equal(result.contributions.evidence.find(r=>r.key==='original_source_detail')!.delta,-50)
+  assert.equal(result.contributions.evidence.find(r=>r.key==='adjusted_estimated_source')!.delta,150)
+  assert.throws(()=>buildSalesDiagnostics(scope(),[...fixture(),row('evidence','original_source_detail','current','51')]),/evidence partition does not reconcile/)
+})
+
 test('exact scope clamps leap boundaries and supports future years without fabricated data', () => {
   const leap = parseDiagnosticScope({startDate:'2024-02-29',endDate:'2024-03-01'})
   assert.equal(leap.prior_start_date,'2023-02-28')

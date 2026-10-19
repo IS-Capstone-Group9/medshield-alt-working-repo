@@ -2,7 +2,8 @@
 const path = require('node:path')
 const { createHash } = require('node:crypto')
 const counts = { auth: 0, account: 0, auditRead: 0, auditAppend: 0, authWrite: 0, external: 0 }
-const actors = ['admin', 'manager', 'analyst', 'viewer', 'reset', 'unlinked', 'inactive', 'metadata_admin']
+const actors = ['admin', 'manager', 'analyst', 'viewer', 'reset', 'unlinked', 'inactive', 'metadata_admin', 'auth_outage', 'account_outage', 'transient']
+let transientAttempts = 0
 const tokenActor = new Map(actors.map(actor => ['synthetic-role-' + actor, actor]))
 globalThis.fetch = async (input, init = {}) => {
   const url = new URL(String(input))
@@ -12,14 +13,17 @@ globalThis.fetch = async (input, init = {}) => {
     const token = new Headers(init.headers).get('Authorization')?.replace(/^Bearer /, '')
     const actor = tokenActor.get(token)
     if (!actor) return Response.json({ error: 'Synthetic invalid session' }, { status: 401 })
+    if (actor === 'auth_outage') return Response.json({}, { status: 503 })
+    if (actor === 'transient' && ++transientAttempts < 3) throw new TypeError('fetch failed', { cause: Object.assign(new Error('read ECONNRESET'), { code: 'ECONNRESET' }) })
     return Response.json({ id: actor, email: 'synthetic@example.invalid', app_metadata: { role: actor === 'metadata_admin' ? 'admin' : actor } })
   }
   if (url.pathname === '/rest/v1/accounts') {
     counts.account++
     const actor = (url.searchParams.get('auth_user_id') || '').replace(/^eq\./, '')
+    if (actor === 'account_outage') return Response.json({}, { status: 503 })
     if (actor === 'unlinked') return Response.json([])
     return Response.json([{ account_id: 101, auth_user_id: actor, username: 'synthetic-' + actor, email: 'synthetic@example.invalid',
-      role: actor === 'reset' ? 'admin' : actor === 'metadata_admin' ? 'viewer' : actor, is_active: actor !== 'inactive', password_reset_required: actor === 'reset' }])
+      role: actor === 'reset' ? 'admin' : ['metadata_admin', 'transient'].includes(actor) ? 'viewer' : actor, is_active: actor !== 'inactive', password_reset_required: actor === 'reset' }])
   }
   if (url.pathname === '/rest/v1/audit_logs') { counts.auditRead++; return Response.json([]) }
   if (url.pathname === '/rest/v1/rpc/append_audit_log') {

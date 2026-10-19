@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 import path from 'node:path'
-import { mkdir, readFile } from 'node:fs/promises'
+import { readFile } from 'node:fs/promises'
 import { MEDSHIELD_MARKUP, MEDSHIELD_STYLE } from '../lib/medshieldReference'
 import { getExecutableDashboardScript } from '../services/api/dashboard-engine'
 import { execFileSync } from 'node:child_process'
@@ -46,6 +46,11 @@ test('TypeScript evidence renders real comparisons, fixed origins, unavailable f
   await expect(page.locator('#forecastEvaluationScope')).toContainText('fixed_origin_multi_step')
   await expect(page.locator('#forecastCoverage')).toContainText('coverage: Unavailable')
   await expect(page.locator('#forecastStatus')).toContainText('unpublished')
+  await expect(page.locator('#forecastUseSummary')).toContainText('Exploratory revenue estimates')
+  await expect(page.locator('#forecastUseSummary')).toContainText('operational reliability is not established')
+  await expect(page.locator('#forecastErrorContext')).toContainText('2025-01 to 2025-12')
+  await expect(page.locator('#forecastErrorContext')).toContainText('backtest origins: 2024-12')
+  await expect(page.locator('#forecastErrorContext')).toContainText('actual leads: 1–12')
   await expect(page.locator('#toggleDohOverlay')).toHaveCount(0)
   await expect(page.locator('#decompBaseTrend')).toHaveCount(0)
   const chart = () => page.evaluate(() => {
@@ -96,6 +101,8 @@ test('scope changes and failures clear old model metrics and charts', async ({ p
   await page.evaluate(()=>(window as any).setForecastValidationData(null,'Source unavailable'))
   await expect(page.locator('#forecastStatus')).toHaveText('Source unavailable')
   await expect(page.locator('#forecastModel')).toHaveText('Unavailable')
+  await expect(page.locator('#forecastUseSummary')).toHaveText('Forecast use unavailable.')
+  await expect(page.locator('#forecastErrorContext')).toBeEmpty()
 })
 
 test('future years are supported and open-month actuals are rejected', async ({page}) => {
@@ -119,6 +126,8 @@ test('published adapter preserves run, true lead, interval and export evidence',
   await expect(page.locator('#forecastStatus')).toContainText('published')
   await expect(page.locator('#forecastBandNote')).toContainText('4/12')
   await expect(page.locator('#kpiForecastMae')).toHaveText('₱10.00')
+  await expect(page.locator('#forecastUseSummary')).toContainText('Published forecast')
+  await expect(page.locator('#forecastUseSummary')).not.toContainText('Exploratory')
   const downloadPromise = page.waitForEvent('download')
   await page.locator('#forecastExport').click()
   const csv = await readFile((await (await downloadPromise).path())!, 'utf8')
@@ -155,6 +164,32 @@ function errorOutputEvidence(unit = 'PHP') {
   return data
 }
 
+test('buyer evidence explains matching historical errors and clears an empty scope', async ({page}) => {
+  const data = errorOutputEvidence()
+  data.scope.sector = 'Government'
+  await page.evaluate(value => (window as any).setForecastValidationData(value), data)
+  await expect(page.locator('#forecastSector')).toHaveValue('Government')
+  await expect(page.locator('#forecastModel')).toBeEnabled()
+  await expect(page.locator('#forecastAssumptions')).toContainText('proposed reporting mappings')
+  await expect(page.locator('#forecastErrorExplanation')).toContainText('₱-5.00 recorded versus ₱2.00 predicted over 3 matching months')
+  await expect(page.locator('#forecastErrorExplanation')).toContainText('1 below actual; 1 above actual')
+  const empty = {...data, status:'empty', scope:{...data.scope,sector:'Unknown'}, actuals:[], origin:null, last_actual_period:null, models:{}, views:{}}
+  await page.evaluate(value => (window as any).setForecastValidationData(value), empty)
+  await expect(page.locator('#forecastTakeaway')).toContainText('No recorded net-sales observations for Unknown')
+  await expect(page.locator('#forecastModel')).toHaveText('No observations')
+  await expect(page.locator('#forecastModel')).toBeDisabled()
+  await expect(page.locator('#forecastExport')).toBeDisabled()
+  await expect(page.locator('#forecastErrorExplanation')).toBeEmpty()
+  await expect(page.locator('#forecastUseSummary')).toHaveText('Forecast use unavailable.')
+  await expect(page.locator('#forecastErrorContext')).toBeEmpty()
+  expect(await page.evaluate(() => (window as any).Chart.getChart(document.getElementById('forecastChart')))).toBeUndefined()
+  data.scope.sector = 'Private'
+  await page.evaluate(value => (window as any).setForecastValidationData(value), data)
+  await expect(page.locator('#forecastSector')).toHaveValue('Private')
+  await expect(page.locator('#forecastModel')).toBeEnabled()
+  await expect(page.locator('#kpiForecastMae')).toHaveText('₱4.33')
+})
+
 test('available zero and negative future predictions retain interior gaps and trailing evidence rows', async ({page}) => {
   const data = errorOutputEvidence()
   data.views['12'].models.last_value.forecast = Array.from({length:12},(_,index) => ({
@@ -183,7 +218,7 @@ async function exportedRows(page: import('@playwright/test').Page) {
   return cells.slice(1).map(values => Object.fromEntries(cells[0].map((header,i) => [header,values[i]])))
 }
 
-test('monthly evidence and CSV expose only matched historical errors and the historical summary', async ({ page }) => {
+test('monthly evidence and CSV expose only matched historical errors and the historical summary', async ({ page }, testInfo) => {
   await page.evaluate(data => (window as any).setForecastValidationData(data), errorOutputEvidence())
   await expect(page.locator('#forecastMetrics')).toContainText('Historical MAE')
   await expect(page.locator('#kpiForecastMae')).toHaveText('₱4.33')
@@ -228,12 +263,12 @@ test('monthly evidence and CSV expose only matched historical errors and the his
   expect(row('2025-03').release_id).toBe('fixture-release')
   expect(row('2025-03').publication_status).toBe('unpublished')
   expect(row('2025-03').unit).toBe('PHP')
-  const screenshots = path.resolve('../outputs/predictive_error_visibility_20261010')
-  await mkdir(screenshots,{recursive:true})
-  await page.locator('[data-forecast-validation]').screenshot({path:path.join(screenshots,'frontend-desktop.png')})
+  expect(row('2025-03').forecast_use).toContain('Exploratory revenue estimates')
+  expect(row('2026-09').error_context).toContain('Displayed future months have no measured error')
+  await page.locator('[data-forecast-validation]').screenshot({path:testInfo.outputPath('forecast-evidence-desktop.png')})
   await page.setViewportSize({width:390,height:844})
   await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
-  await page.locator('[data-forecast-validation]').screenshot({path:path.join(screenshots,'frontend-mobile.png')})
+  await page.locator('[data-forecast-validation]').screenshot({path:testInfo.outputPath('forecast-evidence-mobile.png')})
 })
 
 test('non-PHP targets retain unit labels and unavailable versus zero historical summaries', async ({ page }) => {
@@ -241,6 +276,8 @@ test('non-PHP targets retain unit labels and unavailable versus zero historical 
   await page.evaluate(value => (window as any).setForecastValidationData(value), data)
   await expect(page.locator('#kpiForecastMae')).toHaveText('4.33 boxes')
   await expect(page.locator('#kpiForecastBias')).toHaveText('2.33 boxes')
+  await expect(page.locator('#forecastUseSummary')).toContainText('Exploratory source-unit estimates')
+  await expect(page.locator('#forecastUseSummary')).not.toContainText('revenue-budget')
   await expect(page.locator('#forecastEvidenceTable thead')).toContainText('Signed error (boxes)')
   await expect(page.locator('#forecastBenchmarkTable thead')).toContainText('MAE (boxes)')
   expect((await exportedRows(page)).find(r => r.period === '2025-03')!.unit).toBe('boxes')

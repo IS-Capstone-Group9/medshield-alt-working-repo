@@ -85,6 +85,7 @@ MedShield should be treated as a SaaS-style decision-support system. Even during
 | Reload behavior | Supabase sessions are restored through the Supabase client. Local fallback mode restores the gateway token through `/api/auth/me`. |
 | Logout | Supabase logout clears the Supabase browser session. Local fallback mode calls `/api/auth/logout` and clears browser token storage. |
 | Dashboard APIs | Analytics and model endpoints require `Authorization: Bearer <token>` and the gateway validates Supabase Auth tokens before serving data. |
+| Identity outages | Token/account GETs have bounded retries and five-second attempt timeouts. Exhaustion returns `503 AUTHENTICATION_UNAVAILABLE`, without accepting local tokens, stale roles or fallback analytical data. Invalid sessions are denied immediately. Password and other writes are not replayed. See [API](API.md#authentication). |
 | Dashboard audit | The dashboard records local browser audit entries for navigation, theme changes, filters, uploads, help, dataset refreshes, and logout. |
 | Gateway audit | Audit writes acknowledge success after the Supabase atomic append RPC commits or a local file append is flushed. Exhausted persistence returns `503 AUDIT_PERSISTENCE_FAILED`. Privileged audit reads merge remote and local fallback records. |
 | Password storage | Local fallback accounts use salted scrypt password hashes. |
