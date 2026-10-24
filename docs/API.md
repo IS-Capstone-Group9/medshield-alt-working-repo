@@ -495,3 +495,8 @@ The prior range uses the same dates one year earlier with leap-day clamping.
 Optional scalar `product_id`, `area`, `sector`, `region`, `territory`, and `category`
 filters also apply to transaction and summary endpoints; both date bounds are required together.
 Invalid diagnostic filters return 400. See [contract and evidence meaning](DRILLDOWN_DIAGNOSTICS.md).
+
+
+## Commercial extension
+
+See [commercial backend contracts and verification](COMMERCIAL_BACKEND.md) for additive sales/forecast/allocation/reconciliation routes, optional operational migrations, offline jobs, and source acceptance limits.

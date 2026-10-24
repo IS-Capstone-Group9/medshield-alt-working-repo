@@ -14,18 +14,27 @@
     "databricks:extract:products": "tsx scripts/extract-databricks-products.ts",
     "databricks:extract:areas": "tsx scripts/extract-databricks-areas.ts",
     "databricks:check:external": "tsx scripts/check-databricks-external.ts",
-    "databricks:check:dashboard": "tsx scripts/validate-databricks-dashboard.ts"
+    "databricks:check:dashboard": "tsx scripts/validate-databricks-dashboard.ts",
+    "test:commercial": "node --import tsx --test tests/commercial.test.ts",
+    "commercial:forecast": "tsx scripts/commercial-forecast.ts",
+    "commercial:migrate": "tsx scripts/commercial-migrate.ts",
+    "commercial:fixture": "tsx scripts/commercial-fixture.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",
+    "decimal.js": "^10.6.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "express-rate-limit": "^8.6.2"
+    "express-rate-limit": "^8.6.2",
+    "pg": "^8.23.1",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.5.11",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.0",
     "@types/node": "^22.10.1",
+    "@types/pg": "^8.23.1",
     "tsx": "^4.19.2",
     "typescript": "^5.5.4"
   }

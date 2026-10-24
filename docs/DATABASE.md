@@ -157,3 +157,8 @@ It is dated structural evidence, not a data-quality, active-release or migration
 acceptance result. A separate live rollout was being prepared concurrently;
 use its later execution/readback receipt when available. No schema/data changes
 were made by the documentation task.
+
+
+## Commercial extension
+
+See [commercial backend contracts and verification](COMMERCIAL_BACKEND.md) for additive sales/forecast/allocation/reconciliation routes, optional operational migrations, offline jobs, and source acceptance limits.

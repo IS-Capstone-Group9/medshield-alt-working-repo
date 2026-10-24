@@ -1100,3 +1100,8 @@ Use the [audit packet](../outputs/analytics_external_audit_20261020/README.md) f
 [Warehouse review evidence](../outputs/warehouse_review_20261020/README.md) retains the initial false validation failure and the repaired current gateway check. The validator now tests known Private/Quezon context separately from absent Unknown, rejecting leaked or zero-filled sales and duplicate months. Run `node --import tsx --test tests/dashboard-validator.test.ts` from `backend/`. The complete notebook suite uses `python -m unittest discover -s databricks/medshield_project/tests`; its new margin test executes the actual Gold expression through a small SQL-expression adapter on hand-calculated rows, not cloud Spark execution. The package's generated README must pass `render_readme.py --check` after source/guide edits.
 
 `backend/scripts/review-analytical-warehouse.ts --check-margin-patch` executes read-only preflight assertions, formula previews and EXPLAIN analysis, without applying maintenance SQL. The prepared SQL has separate post-write rowset assertions that remain unexecuted until an operator applies the reviewed change. Counts/source identities, before/after versions, immutable-field equality, current API validation and actual cloud receipt are required to close the open repair. Passing preparation checks is not an applied migration or a model/data publication decision.
+
+
+## Commercial extension
+
+See [commercial backend contracts and verification](COMMERCIAL_BACKEND.md) for additive sales/forecast/allocation/reconciliation routes, optional operational migrations, offline jobs, and source acceptance limits.

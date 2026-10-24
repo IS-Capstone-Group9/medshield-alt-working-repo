@@ -11,6 +11,7 @@ import express, { NextFunction, Request, Response } from 'express'
 import rateLimit from 'express-rate-limit'
 
 import { verifyLocalLogin } from './localAuth'
+import { createCommercialRouter } from './commercial/controllers/router'
 import { authenticateSelectedMode, resolveAuthenticationMode } from './authConfiguration'
 import { AuditPersistenceError, createAuditStore } from './auditStore'
 import {
@@ -964,6 +965,8 @@ app.get('/api/audit', requireAuth, async (req: AuthenticatedRequest, res: Respon
     return res.status(503).json({ error: 'The audit record view is unavailable.', code: 'AUDIT_READ_FAILED' })
   }
 })
+
+app.use('/api', createCommercialRouter({ authenticate: requireAuth, authorize: requireRole }))
 
 app.listen(port, () => {
   console.log(`MedShield TypeScript API listening on port ${port}`)
