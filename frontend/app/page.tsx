@@ -1,23 +1,9 @@
 'use client'
 
-import { createPortal } from 'react-dom'
 import { AuthProvider, useAuth } from '@/lib/AuthContext'
 import Login from '@/components/Login'
 import PasswordResetRequired from '@/components/PasswordResetRequired'
-import ModelDashboard from '@/components/ModelDashboard'
-import { useDashboardRuntime } from '@/hooks/use-dashboard-runtime'
-import type { User } from '@/lib/auth-tokens'
-
-function Dashboard({ onLogout, user }: { onLogout: () => Promise<void>; user: User | null }) {
-  const { rootRef, portalContainer } = useDashboardRuntime(onLogout, user)
-
-  return (
-    <>
-      <div ref={rootRef} className="medshield-root" />
-      {portalContainer && createPortal(<ModelDashboard />, portalContainer)}
-    </>
-  )
-}
+import CommercialDashboard from '@/components/commercial/CommercialDashboard'
 
 function AppContent() {
   const { isAuthenticated, isAuthLoading, user, logout } = useAuth()
@@ -48,7 +34,7 @@ function AppContent() {
     return <PasswordResetRequired />
   }
 
-  return <Dashboard onLogout={logout} user={user} />
+  return <CommercialDashboard onLogout={logout} user={user} />
 }
 
 export default function Page() {
