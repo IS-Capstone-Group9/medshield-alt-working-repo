@@ -37,3 +37,14 @@ The commercial browser tests expect a running frontend at port 3001 (override `C
 Live smoke verification on 23 October 2026 loaded the overview through the unchanged gateway and Databricks version 20 with no browser runtime errors. The source's latest recorded month was December 2025. Operational acceptance, BIR receipt audits, approved clinical mappings, future forecast publication and procurement authority remain separate requirements.
 
 Applied repository guidance: frontend standards, coding standards, testing standards, analytics frameworks, UI design rules, security standards, technology stack and GitHub standards. The optional Obsidian connection was unavailable; no vault record was written.
+
+
+## Live reports integration — 2026-10-24
+
+User requested the live data and reports from `medshield/upd_1.1`. A fresh fetch confirmed its head is `8d730f7`, already the ancestor of this UI branch; no upstream backend or reports were missing from the checkout. The new **Live Reports & Source Data** module now exposes the existing `/api/sales/transactions` contract directly, with calendar/buyer/region filters, search, record quality, pagination, source-workbook detail and current-page CSV exports carrying scope and release metadata. The original workspace remains accessible at `/classic`, including its analytical tools. Source failures remove stale rows and exports.
+
+Live read verification: fact version 20, 37,728 accepted source rows, coverage ending 2025-12-31. A 2025 transaction query returned 25 rows from 4,544 matches with workbook provenance. “Live” means fetched from the connected warehouse; it does not imply new 2026 observations. No seed fixture supplies this module.
+
+Turn record: frontend role; reused frontend/analytics/testing/security guidance for source fidelity, scope-aligned exports and unavailable states. Changed commercial dashboard, Reports component and report-flow test. Optional vault connection remains unavailable; record retained here. Verification: frontend lint/build and commercial Playwright suite; live source read as above. Remote target remains only `medshield-alt-working-repo/the_new_medshield_ui`. Data owners remain responsible for adding new source records through the controlled ingestion pipeline.
+
+Verification result: lint and production build passed; all eight commercial Playwright checks passed. An authenticated browser against the live gateway displayed 25 source records in the new module and retained the /classic workspace link.

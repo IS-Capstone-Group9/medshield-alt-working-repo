@@ -69,3 +69,34 @@ test('mobile navigation and layout stay within the viewport', async ({ page }) =
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
   await expect(page.getByRole('heading', { name: 'Purchasing & Inventory Plan', exact: true })).toBeVisible()
 })
+
+
+test('live report filters, provenance drawer, scoped export and unavailable state', async ({ page }) => {
+  await prepare(page)
+  await page.getByRole('button', { name: 'Live Reports & Source Data' }).click()
+  await expect(page.getByRole('heading', { name: 'Live delivery & sales records' })).toBeVisible()
+  await expect(page.getByRole('link', { name: 'Open original reports & analytics' })).toHaveAttribute('href', '/classic')
+  await page.getByRole('button', { name: 'TEST-1', exact: true }).click()
+  await expect(page.getByRole('dialog')).toContainText('Source report detail')
+  await page.keyboard.press('Escape')
+  const request = page.waitForRequest(req => req.url().includes('/api/sales/transactions?') && req.url().includes('quality_status=warning'))
+  await page.getByLabel('Record quality', { exact: true }).selectOption('warning'); await request
+  await expect(page.getByRole('button', { name: 'TEST-1', exact: true })).toBeVisible()
+  const downloadPromise = page.waitForEvent('download')
+  await page.getByRole('button', { name: 'Export CSV', exact: true }).click()
+  const download = await downloadPromise
+  expect(download.suggestedFilename()).toContain('live-sales-records-page')
+  const stream = await download.createReadStream()
+  const chunks: Buffer[] = []
+  for await (const chunk of stream!) chunks.push(Buffer.from(chunk))
+  const csv = Buffer.concat(chunks).toString('utf8')
+  expect(csv).toContain('current_page_only')
+  expect(csv).toContain('quality_status')
+  expect(csv).toContain('warning')
+  expect(csv).toContain('TEST-1')
+  await page.route('**/api/sales/transactions?**', route => route.fulfill({ status: 503, contentType: 'application/json', body: JSON.stringify({ error: 'Test source unavailable' }) }))
+  await page.getByLabel('Record quality', { exact: true }).selectOption('valid')
+  await expect(page.getByText('Live report unavailable', { exact: true })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'TEST-1', exact: true })).toHaveCount(0)
+  await expect(page.getByRole('button', { name: 'Export CSV', exact: true })).toHaveCount(0)
+})

@@ -11,7 +11,7 @@
 .ms-app button,.ms-app input,.ms-app select { border-radius:4px; }
 .ms-app h1,.ms-app h2,.ms-app h3,.ms-app p { margin:0; }
 .ms-app input,.ms-app select { border:1px solid #cbd5e1; background:#fff; color:var(--ms-ink); padding:8px 10px; min-height:36px; width:100%; font:inherit; }
-.ms-sidebar { width:252px; background:#101f32; color:#c3cddb; position:fixed; inset:0 auto 0 0; z-index:40; display:flex; flex-direction:column; }
+.ms-sidebar { overflow-y:auto; width:252px; background:#101f32; color:#c3cddb; position:fixed; inset:0 auto 0 0; z-index:40; display:flex; flex-direction:column; }
 .ms-brand { display:flex; gap:11px; align-items:center; padding:28px 23px 30px; font-size:23px; font-weight:750; letter-spacing:-.8px; color:#fff; }
 .ms-brand>div>span { display:block; font-size:8px; letter-spacing:2.3px; color:#a9b8c9; margin-top:1px; }
 .ms-brand-icon { display:grid; place-items:center; color:#fbbf24; border:1px solid #526171; width:39px; height:43px; border-radius:7px; }
