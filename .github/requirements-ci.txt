@@ -1,0 +1,13 @@
+# Runtime dependencies and adapters exercised by the offline regression suite.
+# Full model-generation jobs (including Prophet) remain a separate operation.
+-r ../services/analytics_service/requirements.txt
+-r ../services/product_service/requirements.txt
+statsmodels>=0.14.0,<0.15
+# Frozen ABC research registration in services/analytics_service/abc_evaluation.py.
+numpy==2.3.5
+scipy==1.17.1
+scikit-learn==1.8.0
+xgboost==3.4.1
+pulp>=2.8.0,<4
+highspy>=1.7.0,<2
+threadpoolctl>=3.0.0,<4

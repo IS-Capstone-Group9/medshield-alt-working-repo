@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "upload_files": 17,
+  "transport": "individual ordinary files and new maintenance notebooks; no ZIP",
+  "files": [
+    {
+      "workspace_relative_path": "medshield_project/sales_csv_assessment.py",
+      "source_path": "medshield_project/sales_csv_assessment.py",
+      "upload_copy": "upload_ready/medshield_project/sales_csv_assessment.py",
+      "workspace_target": "/Workspace/medshield/medshield_project/sales_csv_assessment.py",
+      "sha256": "60d0ea2f0394a84401b2bf232b084ec7525503dbbb285d536004d9655e1b5d88",
+      "bytes": 32426
+    },
+    {
+      "workspace_relative_path": "medshield_project/verify_local_sources.py",
+      "source_path": "medshield_project/verify_local_sources.py",
+      "upload_copy": "upload_ready/medshield_project/verify_local_sources.py",
+      "workspace_target": "/Workspace/medshield/medshield_project/verify_local_sources.py",
+      "sha256": "cccf681f4a4eb111d9f3b77b0c3233c406956ab01209d6293ac180e1b6075e13",
+      "bytes": 12064
+    },
+    {
+      "workspace_relative_path": "medshield_project/maintenance/20261026_assess_original_sales.py",
+      "source_path": "medshield_project/maintenance/20261026_assess_original_sales.py",
+      "upload_copy": "upload_ready/medshield_project/maintenance/20261026_assess_original_sales.py",
+      "workspace_target": "/Workspace/medshield/medshield_project/maintenance/20261026_assess_original_sales.py",
+      "sha256": "215380214d40e501cfe464cba4e116a20afcd0f062a4fd35ffb37e4e4498d2b1",
+      "bytes": 44019
+    },
+    {
+      "workspace_relative_path": "medshield_project/maintenance/20261026_validate_classification.py",
+      "source_path": "medshield_project/maintenance/20261026_validate_classification.py",
+      "upload_copy": "upload_ready/medshield_project/maintenance/20261026_validate_classification.py",
+      "workspace_target": "/Workspace/medshield/medshield_project/maintenance/20261026_validate_classification.py",
+      "sha256": "4886461786c5de8096b4ddffc8e370010274ecf1dbe47eb284beb13beaf4467a",
+      "bytes": 3512
+    },
+    {
+      "workspace_relative_path": "classification_releases/classification_52342363a7ef3211/candidate_verification.json",
+      "source_path": "classification_releases/classification_52342363a7ef3211/candidate_verification.json",
+      "upload_copy": "upload_ready/classification_releases/classification_52342363a7ef3211/candidate_verification.json",
+      "workspace_target": "/Workspace/medshield/classification_releases/classification_52342363a7ef3211/candidate_verification.json",
+      "sha256": "9014919bc1423245c4f753de853ac239b2aa7ee9fc5c31b344a55c805c51e13d",
+      "bytes": 2694
+    },
+    {
+      "workspace_relative_path": "classification_releases/classification_52342363a7ef3211/category_transitions.csv",
+      "source_path": "classification_releases/classification_52342363a7ef3211/category_transitions.csv",
+      "upload_copy": "upload_ready/classification_releases/classification_52342363a7ef3211/category_transitions.csv",
+      "workspace_target": "/Workspace/medshield/classification_releases/classification_52342363a7ef3211/category_transitions.csv",
+      "sha256": "6a0d357acdd8efc44a0e9e11b009c39b33fef29c9191363741243a58aacf5141",
+      "bytes": 160654
+    },
+    {
+      "workspace_relative_path": "classification_releases/classification_52342363a7ef3211/classification_proposals.csv",
+      "source_path": "classification_releases/classification_52342363a7ef3211/classification_proposals.csv",
+      "upload_copy": "upload_ready/classification_releases/classification_52342363a7ef3211/classification_proposals.csv",
+      "workspace_target": "/Workspace/medshield/classification_releases/classification_52342363a7ef3211/classification_proposals.csv",
+      "sha256": "5c34785ad5d6e13bc8392ec1c30a7e1b5475e59ec6439c7c1456cde227948ad4",
+      "bytes": 4210053
+    },
+    {
+      "workspace_relative_path": "classification_releases/classification_52342363a7ef3211/classification_proposals.json",
+      "source_path": "classification_releases/classification_52342363a7ef3211/classification_proposals.json",
+      "upload_copy": "upload_ready/classification_releases/classification_52342363a7ef3211/classification_proposals.json",
+      "workspace_target": "/Workspace/medshield/classification_releases/classification_52342363a7ef3211/classification_proposals.json",
+      "sha256": "10b01fdaa04a003a9fa7a1b2fcb729259a7e49828fd87218fc097fa3e4d06838",
+      "bytes": 6546239
+    },
+    {
+      "workspace_relative_path": "classification_releases/classification_52342363a7ef3211/current_source_capture.json",
+      "source_path": "classification_releases/classification_52342363a7ef3211/current_source_capture.json",
+      "upload_copy": "upload_ready/classification_releases/classification_52342363a7ef3211/current_source_capture.json",
+      "workspace_target": "/Workspace/medshield/classification_releases/classification_52342363a7ef3211/current_source_capture.json",
+      "sha256": "f08a4129b0f83232075bc798724f8032d2282546b975883179c8842e9bf2612d",
+      "bytes": 28247
+    },
+    {
+      "workspace_relative_path": "classification_releases/classification_52342363a7ef3211/live_product_parity.json",
+      "source_path": "classification_releases/classification_52342363a7ef3211/live_product_parity.json",
+      "upload_copy": "upload_ready/classification_releases/classification_52342363a7ef3211/live_product_parity.json",
+      "workspace_target": "/Workspace/medshield/classification_releases/classification_52342363a7ef3211/live_product_parity.json",
+      "sha256": "2358c95fdb1be5feb102594005a75ef3deeea11ee5eaa2a644402c5a9432329f",
+      "bytes": 655
+    },
+    {
+      "workspace_relative_path": "classification_releases/classification_52342363a7ef3211/manifest.json",
+      "source_path": "classification_releases/classification_52342363a7ef3211/manifest.json",
+      "upload_copy": "upload_ready/classification_releases/classification_52342363a7ef3211/manifest.json",
+      "workspace_target": "/Workspace/medshield/classification_releases/classification_52342363a7ef3211/manifest.json",
+      "sha256": "d0114976fd7542ea26025b512afff494d64b911a0387a1ac6b2e8946fda36e02",
+      "bytes": 3240
+    },
+    {
+      "workspace_relative_path": "classification_releases/classification_52342363a7ef3211/MedShield_product_classification_filled_final.xlsx",
+      "source_path": "classification_releases/classification_52342363a7ef3211/MedShield_product_classification_filled_final.xlsx",
+      "upload_copy": "upload_ready/classification_releases/classification_52342363a7ef3211/MedShield_product_classification_filled_final.xlsx",
+      "workspace_target": "/Workspace/medshield/classification_releases/classification_52342363a7ef3211/MedShield_product_classification_filled_final.xlsx",
+      "sha256": "96a1f1a0e3eae7971ad675a11199d7d2e237d2f1d38cfbe8464d659328bcec07",
+      "bytes": 794730
+    },
+    {
+      "workspace_relative_path": "classification_releases/classification_52342363a7ef3211/OPERATOR.md",
+      "source_path": "classification_releases/classification_52342363a7ef3211/OPERATOR.md",
+      "upload_copy": "upload_ready/classification_releases/classification_52342363a7ef3211/OPERATOR.md",
+      "workspace_target": "/Workspace/medshield/classification_releases/classification_52342363a7ef3211/OPERATOR.md",
+      "sha256": "6cc1dc80cd34427b5d6fc2b1e10a6da6181e17c40bee99d5316d521727df29ea",
+      "bytes": 5307
+    },
+    {
+      "workspace_relative_path": "classification_releases/classification_52342363a7ef3211/predecessor_product_master_review.csv",
+      "source_path": "classification_releases/classification_52342363a7ef3211/predecessor_product_master_review.csv",
+      "upload_copy": "upload_ready/classification_releases/classification_52342363a7ef3211/predecessor_product_master_review.csv",
+      "workspace_target": "/Workspace/medshield/classification_releases/classification_52342363a7ef3211/predecessor_product_master_review.csv",
+      "sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+      "bytes": 4755483
+    },
+    {
+      "workspace_relative_path": "classification_releases/classification_52342363a7ef3211/product_master_review.csv",
+      "source_path": "classification_releases/classification_52342363a7ef3211/product_master_review.csv",
+      "upload_copy": "upload_ready/classification_releases/classification_52342363a7ef3211/product_master_review.csv",
+      "workspace_target": "/Workspace/medshield/classification_releases/classification_52342363a7ef3211/product_master_review.csv",
+      "sha256": "e0b6b2fc00b751a7ce2892bc9db4527c1f4814a9a3711546bdb224edfbf21e93",
+      "bytes": 5058925
+    },
+    {
+      "workspace_relative_path": "classification_releases/classification_52342363a7ef3211/release_validation.py",
+      "source_path": "classification_releases/classification_52342363a7ef3211/release_validation.py",
+      "upload_copy": "upload_ready/classification_releases/classification_52342363a7ef3211/release_validation.py",
+      "workspace_target": "/Workspace/medshield/classification_releases/classification_52342363a7ef3211/release_validation.py",
+      "sha256": "12821598e32e8f7ee7abbec53c3fb7ad5eab7197bda1326bbb11e65751c1fe3b",
+      "bytes": 5288
+    },
+    {
+      "workspace_relative_path": "classification_releases/classification_52342363a7ef3211/validate_classification_preview.py",
+      "source_path": "classification_releases/classification_52342363a7ef3211/validate_classification_preview.py",
+      "upload_copy": "upload_ready/classification_releases/classification_52342363a7ef3211/validate_classification_preview.py",
+      "workspace_target": "/Workspace/medshield/classification_releases/classification_52342363a7ef3211/validate_classification_preview.py",
+      "sha256": "cbf53b028bc8b85f5301b8c6c1def98d14949a69b7e412931af44cec1af62171",
+      "bytes": 4687
+    }
+  ],
+  "remote_upload_performed": false,
+  "serving_activation": false
+}

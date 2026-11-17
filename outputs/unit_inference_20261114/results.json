@@ -1,0 +1,70 @@
+{
+ "registration_sha256": "0c569e94abc085c31c81cff9ffb0d33ba84d9d3cf71c762b24edffaa80a6db9c",
+ "families": 100,
+ "grade_B": 35,
+ "grade_C": 65,
+ "grade_B_net_share": 0.2111421634557107,
+ "grade_B_multi_level": 10,
+ "V1_price_consistency": {
+  "families": 10,
+  "cases": 43,
+  "median_cv_before": 0.18647676702757335,
+  "median_cv_after": 0.16884714570271428,
+  "passes": false
+ },
+ "V2_smoother_demand": {
+  "median_cv_raw": 3.9032088742555757,
+  "median_cv_pieces": 3.9032088742555757,
+  "passes": false
+ },
+ "V3_label_agreement": {
+  "labels_compared": 7,
+  "agreement": 0.0,
+  "passes": false
+ },
+ "P7_forecast": {
+  "wape_raw_quantity": 1.1527365196353818,
+  "wape_pieces": 1.1527396844797837,
+  "wape_pesos": 1.2771272771338031,
+  "passes": false
+ },
+ "examples_factor_and_median_price": {
+  "ENHAMOX": [
+   [
+    1,
+    400.0
+   ]
+  ],
+  "LACTAMOX": [
+   [
+    1,
+    190.0
+   ],
+   [
+    1,
+    360.0
+   ]
+  ],
+  "MAXIFER": [
+   [
+    1,
+    490.0
+   ],
+   [
+    1,
+    2450.0
+   ],
+   [
+    1,
+    2490.0
+   ]
+  ],
+  "BUPIRIGHT": [],
+  "SPEEDA": [
+   [
+    1,
+    1600.0
+   ]
+  ]
+ }
+}

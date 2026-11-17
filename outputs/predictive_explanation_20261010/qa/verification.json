@@ -1,0 +1,4695 @@
+{
+  "schema_version": "1.0",
+  "status": "PASS",
+  "checked_at_utc": "2026-10-10T04:57:27.781013+00:00",
+  "accountable_role": "Data Analyst; root applies supporting QA Engineer role",
+  "review_mode": "Root self-review using a separately authored verifier; root repaired schema/table assertions and executed it. The supporting QA agent did not complete its own verification turn.",
+  "check_summary": {
+    "passed": 1126,
+    "failed": 0
+  },
+  "independent_metric_groups": 399,
+  "decimal_precision": 80,
+  "decimal_tolerance": "1E-24",
+  "command": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\.venv-predictive\\Scripts\\python.exe -X utf8 outputs/predictive_explanation_20261010/qa/verify_scorecard.py",
+  "python_executable": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\.venv-predictive\\Scripts\\python.exe",
+  "python_version": "3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]",
+  "source_identity": {
+    "run_id": "eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a",
+    "input_sha256": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba",
+    "fact_delta_version": 20,
+    "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4"
+  },
+  "independently_derived": {
+    "family_representatives": [
+      "last_value",
+      "ets_none",
+      "prophet_cp0.01_sp10.0",
+      "sarima_airline",
+      "ridge_recursive_a10"
+    ],
+    "audit_direction": {
+      "overforecast_count": 7,
+      "overforecast_amount_php": "42777710.55",
+      "underforecast_count": 5,
+      "underforecast_amount_php": "27234885.47",
+      "exact_count": 0
+    },
+    "audit_metrics": {
+      "n": 12,
+      "mae": "5834383.0016666666666666666666666666666666666666666666666666666666666666666666667",
+      "rmse": "6956031.7224267532615164815508527074856776450767728416493685324770425443074865169",
+      "bias": "1295235.4233333333333333333333333333333333333333333333333333333333333333333333333",
+      "wape": "37.763644288644270920126667992839711530363357949840281684260318210254464242349773",
+      "normalized_bias": "8.3835445466708310933398731592404438996846782179324038748361485928960672755233344",
+      "actual_signed_sum_php": "185396821.04",
+      "actual_absolute_sum_php": "185396821.04",
+      "prediction_sum_php": "200939646.12",
+      "signed_error_sum_php": "15542825.08",
+      "absolute_error_sum_php": "70012596.02",
+      "squared_error_sum_php_squared": "580636527880887.6448",
+      "distinct_target_month_count": 12,
+      "origin_count": 1,
+      "reason": null
+    },
+    "development_metrics": {
+      "n": 60,
+      "mae": "3090470.9348333333333333333333333333333333333333333333333333333333333333333333333",
+      "rmse": "4300604.3660311572579330620092290178180612982160219104013685661223433003836566343",
+      "bias": "46774.566166666666666666666666666666666666666666666666666666666666666666666666667",
+      "wape": "83.199359970069564695305431074372490713984788066712412345128301710927060609507088",
+      "normalized_bias": "1.2592300817591117561300129763295317915474929637795905386843852243340334818180621",
+      "actual_signed_sum_php": "222872214.59",
+      "actual_absolute_sum_php": "222872214.59",
+      "prediction_sum_php": "225678688.56",
+      "signed_error_sum_php": "2806473.97",
+      "absolute_error_sum_php": "185428256.09",
+      "squared_error_sum_php_squared": "1109711874787575.1221",
+      "distinct_target_month_count": 24,
+      "origin_count": 5,
+      "reason": null
+    }
+  },
+  "file_hashes": {
+    "outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\run.json": {
+      "sha256": "9889baea07a1f222edc9d2d2576fefc0d2be4bc8e52dc4d9a3ff9919e0056f45",
+      "bytes": 1900732
+    },
+    "outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\predictions.json": {
+      "sha256": "da8ae57f0df557386004b1227bc2ef453f7067a5556d9e9ce5dfd25812c2de42",
+      "bytes": 1451467
+    },
+    "outputs\\predictive_validation\\2026-10-09T13-28-48-501Z\\input.json": {
+      "sha256": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba",
+      "bytes": 96870
+    },
+    "outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\artifact-hashes.json": {
+      "sha256": "41185d0ee810dc446ad90fcf568466b02751f3c6fb5223a7f873878a7da6ab45",
+      "bytes": 892
+    },
+    "outputs\\predictive_explanation_20261010\\scorecard.json": {
+      "sha256": "8a0b0476e474870a38ec412ef2889585f450c9c46f3f357d58e8505b1c151dda",
+      "bytes": 479044
+    },
+    "outputs\\predictive_explanation_20261010\\derivation-receipt.json": {
+      "sha256": "1689fe1f9be2243cfb2ccbf10a0d4db8ade36a3e2ec8d309643ed0a6cd8c2495",
+      "bytes": 415849
+    },
+    "outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\protocol.json": {
+      "sha256": "ec438baf6f371c570caee425861ffbaf1a44d087a2dd8bd8cc516d303e74f419",
+      "bytes": 7859
+    },
+    "outputs\\predictive_explanation_20261010\\SCORECARD.md": {
+      "sha256": "fb339ce7daf05429140295f17f324c7262af49daaff98e1614e84afcd8048ea2",
+      "bytes": 9950
+    },
+    "outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\RESULTS.md": {
+      "sha256": "e64e9b4183dcac57a18e99ce5b770aef8ed8b37f97fcbe2bd79f12ba6e8fbbe3",
+      "bytes": 4702
+    },
+    "outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\coverage.json": {
+      "sha256": "05347804d72779ff1d93a089385199be750ca2e930baf4408c38e0a924facfdf",
+      "bytes": 36
+    },
+    "outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\evaluations.json": {
+      "sha256": "c9763ee9ceed55d48aae48a542a5a610d3cc4c9a5cd5a3ae110f3e23df74b647",
+      "bytes": 290241
+    },
+    "outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\folds.json": {
+      "sha256": "cb6eeea230bd7bc07eada4edf5741d67d731b4c05cc2a15675adc72aaaed0f13",
+      "bytes": 3339
+    },
+    "outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\input-manifest.json": {
+      "sha256": "fcedce34d7486dc5b311de051be585233e61abaca7b18f618da091d5b8c5bcb8",
+      "bytes": 1719
+    },
+    "outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\model-cards.json": {
+      "sha256": "4898d8d4bd006b693638767cd80e72e70cc020a1b8c0732ef5e22afcc30ce042",
+      "bytes": 11419
+    },
+    "outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\warnings.json": {
+      "sha256": "8e92f46c32b3e1369a79d65cd1a57e2cce4b3f13d8178973cb065b8de7fac30f",
+      "bytes": 363
+    },
+    "services\\analytics_service\\predictive\\contracts.py": {
+      "sha256": "a6ece04850ba397a84c72309043c9ab6c83c3ee7a4fc1fe4b63f1b82b8b86d3a",
+      "bytes": 3639
+    },
+    "services\\analytics_service\\predictive\\engine.py": {
+      "sha256": "cdc5a39363c69f500897e849f2c37ab42c401ed789b6890e6abab808cbbee4c8",
+      "bytes": 11839
+    },
+    "services\\analytics_service\\predictive\\extended_experiment.py": {
+      "sha256": "3d88a6aa92bb0b03140ce9830512cd1292d4a6d0fe85ad8bdc190d92b64f3b42",
+      "bytes": 10527
+    },
+    "services\\analytics_service\\predictive\\metrics.py": {
+      "sha256": "4841243a2b262d71845596d4d72b44a7aa7447602003cfdb79b971e1d7ac8baa",
+      "bytes": 3730
+    },
+    "services\\analytics_service\\predictive\\models.py": {
+      "sha256": "2b2b6495e3ff54b7613800fded65832efc46fc1018ad2fe09f678baf857c4ac9",
+      "bytes": 8433
+    },
+    "outputs\\predictive_explanation_20261010\\derive-scorecard.py": {
+      "sha256": "6cf6f006c8ad115eb9358f72aea6d09d81d6c0e5ed46411194aef6057382f9ae",
+      "bytes": 30996
+    },
+    "docs\\logic\\PREDICTIVE_ANALYTICS_EXPLAINER.md": {
+      "sha256": "596179ca3af766c51721d9f36cea22e1a7d08cf089d56baa4b8fb756bc0e945b",
+      "bytes": 10228
+    },
+    "docs\\CHAPTER_3_METHODOLOGY_GUIDE.md": {
+      "sha256": "85c0edcb8290d6705f621854a97dc57a77304fee6a99b87fb6485872754f9bf9",
+      "bytes": 8323
+    },
+    "docs\\CHAPTER_4_5_EVIDENCE_PLAN.md": {
+      "sha256": "8b4d4a936f5c820fc897e3f5df1d57f59342fb93fcf16d7d57184cb5ad5af1c0",
+      "bytes": 7275
+    },
+    "docs\\DOCUMENTATION_INDEX.md": {
+      "sha256": "a9b94ad3b8eed63e0eb9d81ad8a6bb28ce9b09d69374a5416ac71dbbd99fee82",
+      "bytes": 7653
+    },
+    "outputs\\predictive_explanation_20261010\\qa\\verify_scorecard.py": {
+      "sha256": "7938f5510dfa3683242b97339a8c3f56b91c5ca54b37ac4245d5a15e7fd24ade",
+      "bytes": 23532
+    }
+  },
+  "checks": [
+    {
+      "check": "unchanged retained artifact ../protocol.json",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged retained artifact RESULTS.md",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged retained artifact coverage.json",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged retained artifact evaluations.json",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged retained artifact folds.json",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged retained artifact input-manifest.json",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged retained artifact model-cards.json",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged retained artifact predictions.json",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged retained artifact run.json",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged retained artifact warnings.json",
+      "status": "PASS"
+    },
+    {
+      "check": "ten retained declarations",
+      "status": "PASS"
+    },
+    {
+      "check": "input sidecar checksum",
+      "status": "PASS"
+    },
+    {
+      "check": "input protocol checksum",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged model source contracts.py",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged model source engine.py",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged model source extended_experiment.py",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged model source metrics.py",
+      "status": "PASS"
+    },
+    {
+      "check": "unchanged model source models.py",
+      "status": "PASS"
+    },
+    {
+      "check": "prediction copy agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "same manifest",
+      "status": "PASS"
+    },
+    {
+      "check": "source run/input/status binding",
+      "status": "PASS"
+    },
+    {
+      "check": "unpublished exploratory status",
+      "status": "PASS"
+    },
+    {
+      "check": "inherited selection unchanged",
+      "status": "PASS"
+    },
+    {
+      "check": "derivation retained hash receipt C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\protocol.json",
+      "status": "PASS"
+    },
+    {
+      "check": "derivation retained hash receipt C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\RESULTS.md",
+      "status": "PASS"
+    },
+    {
+      "check": "derivation retained hash receipt C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\coverage.json",
+      "status": "PASS"
+    },
+    {
+      "check": "derivation retained hash receipt C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\evaluations.json",
+      "status": "PASS"
+    },
+    {
+      "check": "derivation retained hash receipt C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\folds.json",
+      "status": "PASS"
+    },
+    {
+      "check": "derivation retained hash receipt C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\input-manifest.json",
+      "status": "PASS"
+    },
+    {
+      "check": "derivation retained hash receipt C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\model-cards.json",
+      "status": "PASS"
+    },
+    {
+      "check": "derivation retained hash receipt C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\predictions.json",
+      "status": "PASS"
+    },
+    {
+      "check": "derivation retained hash receipt C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\run.json",
+      "status": "PASS"
+    },
+    {
+      "check": "derivation retained hash receipt C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\warnings.json",
+      "status": "PASS"
+    },
+    {
+      "check": "derivation script hash",
+      "status": "PASS"
+    },
+    {
+      "check": "derivation input hash",
+      "status": "PASS"
+    },
+    {
+      "check": "derivation original map hash",
+      "status": "PASS"
+    },
+    {
+      "check": "derivation output hash scorecard.json",
+      "status": "PASS"
+    },
+    {
+      "check": "derivation output hash SCORECARD.md",
+      "status": "PASS"
+    },
+    {
+      "check": "21 configuration definitions",
+      "status": "PASS"
+    },
+    {
+      "check": "family counts",
+      "status": "PASS"
+    },
+    {
+      "check": "original stage counts",
+      "status": "PASS"
+    },
+    {
+      "check": "all ranking identities exactly once",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value family/config identity",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/development exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/development actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/development input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/development identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/development all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/development original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/development direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/retrospective_audit exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/retrospective_audit actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/retrospective_audit input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/retrospective_audit identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/retrospective_audit all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/retrospective_audit original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/retrospective_audit direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value 12 distinct development leads",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/lead1 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/lead1 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/lead2 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/lead2 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/lead3 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/lead3 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/lead4 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/lead4 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/lead5 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/lead5 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/lead6 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/lead6 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/lead7 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/lead7 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/lead8 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/lead8 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/lead9 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/lead9 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/lead10 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/lead10 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/lead11 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/lead11 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/lead12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/lead12 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value exact five origins",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/origin2022-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/origin2023-03 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/origin2023-06 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/origin2023-09 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "last_value/origin2023-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline family/config identity",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/development exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/development actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/development input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/development identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/development all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/development original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/development direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/retrospective_audit exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/retrospective_audit actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/retrospective_audit input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/retrospective_audit identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/retrospective_audit all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/retrospective_audit original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/retrospective_audit direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline 12 distinct development leads",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/lead1 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/lead1 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/lead2 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/lead2 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/lead3 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/lead3 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/lead4 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/lead4 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/lead5 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/lead5 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/lead6 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/lead6 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/lead7 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/lead7 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/lead8 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/lead8 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/lead9 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/lead9 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/lead10 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/lead10 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/lead11 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/lead11 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/lead12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/lead12 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline exact five origins",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/origin2022-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/origin2023-03 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/origin2023-06 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/origin2023-09 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_airline/origin2023-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none family/config identity",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/development exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/development actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/development input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/development identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/development all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/development original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/development direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/retrospective_audit exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/retrospective_audit actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/retrospective_audit input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/retrospective_audit identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/retrospective_audit all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/retrospective_audit original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/retrospective_audit direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none 12 distinct development leads",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/lead1 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/lead1 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/lead2 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/lead2 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/lead3 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/lead3 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/lead4 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/lead4 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/lead5 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/lead5 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/lead6 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/lead6 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/lead7 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/lead7 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/lead8 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/lead8 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/lead9 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/lead9 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/lead10 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/lead10 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/lead11 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/lead11 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/lead12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/lead12 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none exact five origins",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/origin2022-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/origin2023-03 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/origin2023-06 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/origin2023-09 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_none/origin2023-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6 family/config identity",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/development exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/development actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/development input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/development identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/development all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/development original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/development direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/retrospective_audit exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/retrospective_audit actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/retrospective_audit input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/retrospective_audit identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/retrospective_audit all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/retrospective_audit original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/retrospective_audit direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6 12 distinct development leads",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/lead1 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/lead1 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/lead2 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/lead2 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/lead3 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/lead3 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/lead4 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/lead4 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/lead5 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/lead5 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/lead6 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/lead6 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/lead7 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/lead7 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/lead8 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/lead8 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/lead9 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/lead9 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/lead10 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/lead10 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/lead11 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/lead11 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/lead12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/lead12 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6 exact five origins",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/origin2022-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/origin2023-03 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/origin2023-06 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/origin2023-09 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_6/origin2023-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0 family/config identity",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/development exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/development actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/development input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/development identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/development all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/development original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/development direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/retrospective_audit exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/retrospective_audit actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/retrospective_audit input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/retrospective_audit identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/retrospective_audit all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/retrospective_audit original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/retrospective_audit direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0 12 distinct development leads",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/lead1 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/lead1 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/lead2 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/lead2 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/lead3 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/lead3 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/lead4 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/lead4 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/lead5 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/lead5 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/lead6 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/lead6 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/lead7 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/lead7 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/lead8 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/lead8 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/lead9 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/lead9 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/lead10 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/lead10 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/lead11 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/lead11 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/lead12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/lead12 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0 exact five origins",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/origin2022-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/origin2023-03 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/origin2023-06 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/origin2023-09 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp10.0/origin2023-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1 family/config identity",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/development exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/development actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/development input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/development identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/development all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/development original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/development direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/retrospective_audit exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/retrospective_audit actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/retrospective_audit input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/retrospective_audit identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/retrospective_audit all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/retrospective_audit original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/retrospective_audit direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1 12 distinct development leads",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/lead1 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/lead1 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/lead2 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/lead2 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/lead3 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/lead3 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/lead4 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/lead4 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/lead5 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/lead5 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/lead6 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/lead6 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/lead7 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/lead7 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/lead8 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/lead8 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/lead9 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/lead9 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/lead10 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/lead10 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/lead11 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/lead11 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/lead12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/lead12 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1 exact five origins",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/origin2022-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/origin2023-03 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/origin2023-06 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/origin2023-09 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp0.1/origin2023-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive family/config identity",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/development exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/development actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/development input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/development identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/development all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/development original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/development direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/retrospective_audit exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/retrospective_audit actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/retrospective_audit input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/retrospective_audit identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/retrospective_audit all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/retrospective_audit original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/retrospective_audit direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive 12 distinct development leads",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/lead1 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/lead1 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/lead2 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/lead2 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/lead3 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/lead3 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/lead4 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/lead4 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/lead5 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/lead5 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/lead6 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/lead6 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/lead7 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/lead7 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/lead8 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/lead8 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/lead9 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/lead9 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/lead10 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/lead10 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/lead11 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/lead11 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/lead12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/lead12 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive exact five origins",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/origin2022-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/origin2023-03 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/origin2023-06 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/origin2023-09 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "seasonal_naive/origin2023-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1 family/config identity",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/development exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/development actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/development input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/development identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/development all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/development original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/development direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/retrospective_audit exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/retrospective_audit actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/retrospective_audit input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/retrospective_audit identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/retrospective_audit all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/retrospective_audit original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/retrospective_audit direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1 12 distinct development leads",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/lead1 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/lead1 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/lead2 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/lead2 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/lead3 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/lead3 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/lead4 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/lead4 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/lead5 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/lead5 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/lead6 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/lead6 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/lead7 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/lead7 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/lead8 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/lead8 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/lead9 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/lead9 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/lead10 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/lead10 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/lead11 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/lead11 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/lead12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/lead12 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1 exact five origins",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/origin2022-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/origin2023-03 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/origin2023-06 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/origin2023-09 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp0.1/origin2023-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0 family/config identity",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/development exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/development actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/development input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/development identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/development all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/development original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/development direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/retrospective_audit exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/retrospective_audit actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/retrospective_audit input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/retrospective_audit identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/retrospective_audit all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/retrospective_audit original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/retrospective_audit direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0 12 distinct development leads",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/lead1 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/lead1 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/lead2 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/lead2 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/lead3 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/lead3 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/lead4 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/lead4 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/lead5 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/lead5 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/lead6 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/lead6 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/lead7 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/lead7 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/lead8 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/lead8 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/lead9 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/lead9 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/lead10 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/lead10 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/lead11 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/lead11 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/lead12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/lead12 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0 exact five origins",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/origin2022-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/origin2023-03 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/origin2023-06 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/origin2023-09 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.01_sp1.0/origin2023-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1 family/config identity",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/development exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/development actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/development input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/development identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/development all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/development original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/development direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/retrospective_audit exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/retrospective_audit actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/retrospective_audit input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/retrospective_audit identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/retrospective_audit all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/retrospective_audit original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/retrospective_audit direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1 12 distinct development leads",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/lead1 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/lead1 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/lead2 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/lead2 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/lead3 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/lead3 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/lead4 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/lead4 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/lead5 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/lead5 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/lead6 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/lead6 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/lead7 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/lead7 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/lead8 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/lead8 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/lead9 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/lead9 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/lead10 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/lead10 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/lead11 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/lead11 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/lead12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/lead12 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1 exact five origins",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/origin2022-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/origin2023-03 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/origin2023-06 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/origin2023-09 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp0.1/origin2023-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0 family/config identity",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/development exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/development actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/development input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/development identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/development all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/development original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/development direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/retrospective_audit exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/retrospective_audit actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/retrospective_audit input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/retrospective_audit identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/retrospective_audit all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/retrospective_audit original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/retrospective_audit direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0 12 distinct development leads",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/lead1 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/lead1 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/lead2 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/lead2 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/lead3 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/lead3 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/lead4 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/lead4 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/lead5 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/lead5 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/lead6 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/lead6 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/lead7 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/lead7 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/lead8 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/lead8 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/lead9 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/lead9 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/lead10 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/lead10 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/lead11 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/lead11 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/lead12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/lead12 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0 exact five origins",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/origin2022-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/origin2023-03 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/origin2023-06 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/origin2023-09 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp1.0/origin2023-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0 family/config identity",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/development exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/development actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/development input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/development identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/development all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/development original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/development direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/retrospective_audit exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/retrospective_audit actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/retrospective_audit input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/retrospective_audit identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/retrospective_audit all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/retrospective_audit original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/retrospective_audit direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0 12 distinct development leads",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/lead1 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/lead1 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/lead2 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/lead2 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/lead3 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/lead3 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/lead4 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/lead4 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/lead5 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/lead5 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/lead6 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/lead6 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/lead7 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/lead7 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/lead8 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/lead8 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/lead9 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/lead9 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/lead10 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/lead10 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/lead11 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/lead11 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/lead12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/lead12 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0 exact five origins",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/origin2022-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/origin2023-03 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/origin2023-06 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/origin2023-09 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.05_sp10.0/origin2023-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0 family/config identity",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/development exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/development actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/development input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/development identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/development all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/development original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/development direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/retrospective_audit exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/retrospective_audit actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/retrospective_audit input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/retrospective_audit identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/retrospective_audit all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/retrospective_audit original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/retrospective_audit direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0 12 distinct development leads",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/lead1 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/lead1 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/lead2 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/lead2 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/lead3 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/lead3 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/lead4 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/lead4 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/lead5 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/lead5 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/lead6 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/lead6 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/lead7 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/lead7 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/lead8 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/lead8 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/lead9 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/lead9 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/lead10 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/lead10 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/lead11 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/lead11 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/lead12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/lead12 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0 exact five origins",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/origin2022-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/origin2023-03 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/origin2023-06 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/origin2023-09 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp1.0/origin2023-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0 family/config identity",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/development exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/development actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/development input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/development identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/development all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/development original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/development direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/retrospective_audit exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/retrospective_audit actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/retrospective_audit input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/retrospective_audit identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/retrospective_audit all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/retrospective_audit original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/retrospective_audit direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0 12 distinct development leads",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/lead1 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/lead1 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/lead2 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/lead2 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/lead3 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/lead3 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/lead4 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/lead4 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/lead5 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/lead5 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/lead6 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/lead6 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/lead7 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/lead7 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/lead8 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/lead8 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/lead9 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/lead9 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/lead10 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/lead10 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/lead11 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/lead11 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/lead12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/lead12 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0 exact five origins",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/origin2022-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/origin2023-03 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/origin2023-06 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/origin2023-09 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet_cp0.1_sp10.0/origin2023-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3 family/config identity",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/development exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/development actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/development input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/development identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/development all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/development original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/development direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/retrospective_audit exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/retrospective_audit actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/retrospective_audit input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/retrospective_audit identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/retrospective_audit all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/retrospective_audit original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/retrospective_audit direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3 12 distinct development leads",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/lead1 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/lead1 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/lead2 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/lead2 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/lead3 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/lead3 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/lead4 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/lead4 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/lead5 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/lead5 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/lead6 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/lead6 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/lead7 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/lead7 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/lead8 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/lead8 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/lead9 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/lead9 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/lead10 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/lead10 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/lead11 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/lead11 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/lead12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/lead12 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3 exact five origins",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/origin2022-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/origin2023-03 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/origin2023-06 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/origin2023-09 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "mean_3/origin2023-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped family/config identity",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/development exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/development actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/development input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/development identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/development all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/development original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/development direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/retrospective_audit exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/retrospective_audit actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/retrospective_audit input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/retrospective_audit identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/retrospective_audit all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/retrospective_audit original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/retrospective_audit direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped 12 distinct development leads",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/lead1 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/lead1 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/lead2 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/lead2 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/lead3 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/lead3 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/lead4 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/lead4 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/lead5 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/lead5 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/lead6 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/lead6 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/lead7 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/lead7 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/lead8 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/lead8 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/lead9 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/lead9 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/lead10 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/lead10 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/lead11 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/lead11 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/lead12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/lead12 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped exact five origins",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/origin2022-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/origin2023-03 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/origin2023-06 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/origin2023-09 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ets_damped/origin2023-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10 family/config identity",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/development exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/development actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/development input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/development identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/development all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/development original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/development direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/retrospective_audit exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/retrospective_audit actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/retrospective_audit input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/retrospective_audit identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/retrospective_audit all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/retrospective_audit original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/retrospective_audit direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10 12 distinct development leads",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/lead1 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/lead1 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/lead2 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/lead2 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/lead3 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/lead3 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/lead4 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/lead4 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/lead5 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/lead5 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/lead6 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/lead6 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/lead7 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/lead7 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/lead8 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/lead8 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/lead9 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/lead9 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/lead10 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/lead10 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/lead11 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/lead11 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/lead12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/lead12 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10 exact five origins",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/origin2022-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/origin2023-03 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/origin2023-06 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/origin2023-09 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a10/origin2023-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal family/config identity",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/development exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/development actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/development input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/development identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/development all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/development original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/development direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/retrospective_audit exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/retrospective_audit actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/retrospective_audit input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/retrospective_audit identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/retrospective_audit all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/retrospective_audit original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/retrospective_audit direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal 12 distinct development leads",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/lead1 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/lead1 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/lead2 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/lead2 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/lead3 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/lead3 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/lead4 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/lead4 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/lead5 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/lead5 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/lead6 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/lead6 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/lead7 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/lead7 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/lead8 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/lead8 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/lead9 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/lead9 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/lead10 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/lead10 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/lead11 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/lead11 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/lead12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/lead12 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal exact five origins",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/origin2022-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/origin2023-03 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/origin2023-06 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/origin2023-09 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima_ar_seasonal/origin2023-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1 family/config identity",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/development exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/development actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/development input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/development identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/development all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/development original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/development direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/retrospective_audit exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/retrospective_audit actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/retrospective_audit input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/retrospective_audit identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/retrospective_audit all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/retrospective_audit original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/retrospective_audit direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1 12 distinct development leads",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/lead1 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/lead1 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/lead2 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/lead2 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/lead3 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/lead3 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/lead4 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/lead4 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/lead5 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/lead5 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/lead6 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/lead6 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/lead7 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/lead7 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/lead8 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/lead8 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/lead9 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/lead9 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/lead10 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/lead10 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/lead11 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/lead11 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/lead12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/lead12 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1 exact five origins",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/origin2022-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/origin2023-03 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/origin2023-06 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/origin2023-09 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_recursive_a1/origin2023-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10 family/config identity",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/development exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/development actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/development input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/development identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/development all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/development original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/development direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/retrospective_audit exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/retrospective_audit actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/retrospective_audit input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/retrospective_audit identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/retrospective_audit all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/retrospective_audit original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/retrospective_audit direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10 12 distinct development leads",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/lead1 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/lead1 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/lead2 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/lead2 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/lead3 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/lead3 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/lead4 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/lead4 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/lead5 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/lead5 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/lead6 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/lead6 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/lead7 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/lead7 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/lead8 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/lead8 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/lead9 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/lead9 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/lead10 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/lead10 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/lead11 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/lead11 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/lead12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/lead12 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10 exact five origins",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/origin2022-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/origin2023-03 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/origin2023-06 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/origin2023-09 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a10/origin2023-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1 family/config identity",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/development exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/development actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/development input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/development identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/development all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/development original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/development direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/retrospective_audit exact unique cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/retrospective_audit actual calendar leads",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/retrospective_audit input actual/unit agreement",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/retrospective_audit identical model cohort",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/retrospective_audit all aggregate fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/retrospective_audit original metrics",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/retrospective_audit direction fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1 12 distinct development leads",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/lead1 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/lead1 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/lead2 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/lead2 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/lead3 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/lead3 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/lead4 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/lead4 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/lead5 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/lead5 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/lead6 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/lead6 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/lead7 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/lead7 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/lead8 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/lead8 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/lead9 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/lead9 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/lead10 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/lead10 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/lead11 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/lead11 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/lead12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/lead12 n5 support",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1 exact five origins",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/origin2022-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/origin2023-03 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/origin2023-06 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/origin2023-09 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge_direct_a1/origin2023-12 all fields",
+      "status": "PASS"
+    },
+    {
+      "check": "development ranking independently reconstructed",
+      "status": "PASS"
+    },
+    {
+      "check": "five representatives exactly one per family",
+      "status": "PASS"
+    },
+    {
+      "check": "benchmarks representative chosen by development",
+      "status": "PASS"
+    },
+    {
+      "check": "ets representative chosen by development",
+      "status": "PASS"
+    },
+    {
+      "check": "prophet representative chosen by development",
+      "status": "PASS"
+    },
+    {
+      "check": "sarima representative chosen by development",
+      "status": "PASS"
+    },
+    {
+      "check": "ridge representative chosen by development",
+      "status": "PASS"
+    },
+    {
+      "check": "last value best complete benchmark and no better challenger",
+      "status": "PASS"
+    },
+    {
+      "check": "development declared shared keys",
+      "status": "PASS"
+    },
+    {
+      "check": "retrospective_audit declared shared keys",
+      "status": "PASS"
+    },
+    {
+      "check": "baseline copies verified ranking fields",
+      "status": "PASS"
+    },
+    {
+      "check": "audit monthly table has exact Jan-Dec2025",
+      "status": "PASS"
+    },
+    {
+      "check": "audit row 2025-01",
+      "status": "PASS"
+    },
+    {
+      "check": "audit Markdown 2025-01",
+      "status": "PASS"
+    },
+    {
+      "check": "audit row 2025-02",
+      "status": "PASS"
+    },
+    {
+      "check": "audit Markdown 2025-02",
+      "status": "PASS"
+    },
+    {
+      "check": "audit row 2025-03",
+      "status": "PASS"
+    },
+    {
+      "check": "audit Markdown 2025-03",
+      "status": "PASS"
+    },
+    {
+      "check": "audit row 2025-04",
+      "status": "PASS"
+    },
+    {
+      "check": "audit Markdown 2025-04",
+      "status": "PASS"
+    },
+    {
+      "check": "audit row 2025-05",
+      "status": "PASS"
+    },
+    {
+      "check": "audit Markdown 2025-05",
+      "status": "PASS"
+    },
+    {
+      "check": "audit row 2025-06",
+      "status": "PASS"
+    },
+    {
+      "check": "audit Markdown 2025-06",
+      "status": "PASS"
+    },
+    {
+      "check": "audit row 2025-07",
+      "status": "PASS"
+    },
+    {
+      "check": "audit Markdown 2025-07",
+      "status": "PASS"
+    },
+    {
+      "check": "audit row 2025-08",
+      "status": "PASS"
+    },
+    {
+      "check": "audit Markdown 2025-08",
+      "status": "PASS"
+    },
+    {
+      "check": "audit row 2025-09",
+      "status": "PASS"
+    },
+    {
+      "check": "audit Markdown 2025-09",
+      "status": "PASS"
+    },
+    {
+      "check": "audit row 2025-10",
+      "status": "PASS"
+    },
+    {
+      "check": "audit Markdown 2025-10",
+      "status": "PASS"
+    },
+    {
+      "check": "audit row 2025-11",
+      "status": "PASS"
+    },
+    {
+      "check": "audit Markdown 2025-11",
+      "status": "PASS"
+    },
+    {
+      "check": "audit row 2025-12",
+      "status": "PASS"
+    },
+    {
+      "check": "audit Markdown 2025-12",
+      "status": "PASS"
+    },
+    {
+      "check": "audit decomposition independently known totals",
+      "status": "PASS"
+    },
+    {
+      "check": "audit decomposition closes signed and absolute sums",
+      "status": "PASS"
+    },
+    {
+      "check": "audit last value uses only December2024 constant",
+      "status": "PASS"
+    },
+    {
+      "check": "unsupported audit intervals null",
+      "status": "PASS"
+    },
+    {
+      "check": "latest eligible source December2025",
+      "status": "PASS"
+    },
+    {
+      "check": "four exact horizon scenarios",
+      "status": "PASS"
+    },
+    {
+      "check": "calendar 2026-10/3",
+      "status": "PASS"
+    },
+    {
+      "check": "calendar evaluated range 2026-10/3",
+      "status": "PASS"
+    },
+    {
+      "check": "calendar 2026-10/6",
+      "status": "PASS"
+    },
+    {
+      "check": "calendar evaluated range 2026-10/6",
+      "status": "PASS"
+    },
+    {
+      "check": "calendar 2026-10/12",
+      "status": "PASS"
+    },
+    {
+      "check": "calendar evaluated range 2026-10/12",
+      "status": "PASS"
+    },
+    {
+      "check": "calendar 2026-12/12",
+      "status": "PASS"
+    },
+    {
+      "check": "calendar evaluated range 2026-12/12",
+      "status": "PASS"
+    },
+    {
+      "check": "family Markdown benchmarks",
+      "status": "PASS"
+    },
+    {
+      "check": "family Markdown ets",
+      "status": "PASS"
+    },
+    {
+      "check": "family Markdown prophet",
+      "status": "PASS"
+    },
+    {
+      "check": "family Markdown sarima",
+      "status": "PASS"
+    },
+    {
+      "check": "family Markdown ridge",
+      "status": "PASS"
+    },
+    {
+      "check": "ranking Markdown last_value",
+      "status": "PASS"
+    },
+    {
+      "check": "ranking Markdown sarima_airline",
+      "status": "PASS"
+    },
+    {
+      "check": "ranking Markdown ets_none",
+      "status": "PASS"
+    },
+    {
+      "check": "ranking Markdown mean_6",
+      "status": "PASS"
+    },
+    {
+      "check": "ranking Markdown prophet_cp0.01_sp10.0",
+      "status": "PASS"
+    },
+    {
+      "check": "ranking Markdown prophet_cp0.01_sp0.1",
+      "status": "PASS"
+    },
+    {
+      "check": "ranking Markdown seasonal_naive",
+      "status": "PASS"
+    },
+    {
+      "check": "ranking Markdown prophet_cp0.1_sp0.1",
+      "status": "PASS"
+    },
+    {
+      "check": "ranking Markdown prophet_cp0.01_sp1.0",
+      "status": "PASS"
+    },
+    {
+      "check": "ranking Markdown prophet_cp0.05_sp0.1",
+      "status": "PASS"
+    },
+    {
+      "check": "ranking Markdown prophet_cp0.05_sp1.0",
+      "status": "PASS"
+    },
+    {
+      "check": "ranking Markdown prophet_cp0.05_sp10.0",
+      "status": "PASS"
+    },
+    {
+      "check": "ranking Markdown prophet_cp0.1_sp1.0",
+      "status": "PASS"
+    },
+    {
+      "check": "ranking Markdown prophet_cp0.1_sp10.0",
+      "status": "PASS"
+    },
+    {
+      "check": "ranking Markdown mean_3",
+      "status": "PASS"
+    },
+    {
+      "check": "ranking Markdown ets_damped",
+      "status": "PASS"
+    },
+    {
+      "check": "ranking Markdown ridge_recursive_a10",
+      "status": "PASS"
+    },
+    {
+      "check": "ranking Markdown sarima_ar_seasonal",
+      "status": "PASS"
+    },
+    {
+      "check": "ranking Markdown ridge_recursive_a1",
+      "status": "PASS"
+    },
+    {
+      "check": "ranking Markdown ridge_direct_a10",
+      "status": "PASS"
+    },
+    {
+      "check": "ranking Markdown ridge_direct_a1",
+      "status": "PASS"
+    },
+    {
+      "check": "lead Markdown 1",
+      "status": "PASS"
+    },
+    {
+      "check": "lead Markdown 2",
+      "status": "PASS"
+    },
+    {
+      "check": "lead Markdown 3",
+      "status": "PASS"
+    },
+    {
+      "check": "lead Markdown 4",
+      "status": "PASS"
+    },
+    {
+      "check": "lead Markdown 5",
+      "status": "PASS"
+    },
+    {
+      "check": "lead Markdown 6",
+      "status": "PASS"
+    },
+    {
+      "check": "lead Markdown 7",
+      "status": "PASS"
+    },
+    {
+      "check": "lead Markdown 8",
+      "status": "PASS"
+    },
+    {
+      "check": "lead Markdown 9",
+      "status": "PASS"
+    },
+    {
+      "check": "lead Markdown 10",
+      "status": "PASS"
+    },
+    {
+      "check": "lead Markdown 11",
+      "status": "PASS"
+    },
+    {
+      "check": "lead Markdown 12",
+      "status": "PASS"
+    },
+    {
+      "check": "development Markdown aggregate",
+      "status": "PASS"
+    },
+    {
+      "check": "development Markdown sums",
+      "status": "PASS"
+    },
+    {
+      "check": "development Markdown direction",
+      "status": "PASS"
+    },
+    {
+      "check": "retrospective_audit Markdown aggregate",
+      "status": "PASS"
+    },
+    {
+      "check": "retrospective_audit Markdown sums",
+      "status": "PASS"
+    },
+    {
+      "check": "retrospective_audit Markdown direction",
+      "status": "PASS"
+    },
+    {
+      "check": "calendar Markdown 2026-10/3",
+      "status": "PASS"
+    },
+    {
+      "check": "calendar Markdown 2026-10/6",
+      "status": "PASS"
+    },
+    {
+      "check": "calendar Markdown 2026-10/12",
+      "status": "PASS"
+    },
+    {
+      "check": "calendar Markdown 2026-12/12",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\logic\\PREDICTIVE_ANALYTICS_EXPLAINER.md:4:../CURRENT_STATE.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\logic\\PREDICTIVE_ANALYTICS_EXPLAINER.md:5:../PREDICTIVE_OPERATIONS.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\logic\\PREDICTIVE_ANALYTICS_EXPLAINER.md:39:../../services/analytics_service/predictive/models.py",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\logic\\PREDICTIVE_ANALYTICS_EXPLAINER.md:84:../../outputs/predictive_completion_20261009/models/fixed-origin-extended/eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a/RESULTS.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\logic\\PREDICTIVE_ANALYTICS_EXPLAINER.md:92:../../outputs/predictive_completion_20261009/model-comparison.png",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\logic\\PREDICTIVE_ANALYTICS_EXPLAINER.md:96:../CURRENT_STATE.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\logic\\PREDICTIVE_ANALYTICS_EXPLAINER.md:100:../../outputs/predictive_explanation_20261010/SCORECARD.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\logic\\PREDICTIVE_ANALYTICS_EXPLAINER.md:104:../../outputs/predictive_completion_20261009/audit-comparison.png",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\logic\\PREDICTIVE_ANALYTICS_EXPLAINER.md:111:../../outputs/predictive_readiness_20261010/SOURCE_OWNER_REVIEW.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\logic\\PREDICTIVE_ANALYTICS_EXPLAINER.md:152:../PREDICTIVE_OPERATIONS.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\CHAPTER_3_METHODOLOGY_GUIDE.md:86:logic/PREDICTIVE_ANALYTICS_EXPLAINER.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\CHAPTER_3_METHODOLOGY_GUIDE.md:88:../outputs/predictive_explanation_20261010/SCORECARD.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\CHAPTER_3_METHODOLOGY_GUIDE.md:89:CURRENT_STATE.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\CHAPTER_4_5_EVIDENCE_PLAN.md:11:logic/PREDICTIVE_ANALYTICS_EXPLAINER.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\CHAPTER_4_5_EVIDENCE_PLAN.md:12:../outputs/predictive_explanation_20261010/SCORECARD.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\CHAPTER_4_5_EVIDENCE_PLAN.md:13:../outputs/predictive_completion_20261009/README.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\CHAPTER_4_5_EVIDENCE_PLAN.md:15:CURRENT_STATE.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\DOCUMENTATION_INDEX.md:35:PREDICTIVE_OPERATIONS.md",
+      "status": "PASS"
+    },
+    {
+      "check": "local link docs\\DOCUMENTATION_INDEX.md:36:logic/PREDICTIVE_ANALYTICS_EXPLAINER.md",
+      "status": "PASS"
+    },
+    {
+      "check": "explainer formula contract",
+      "status": "PASS"
+    }
+  ],
+  "skills_applied": {
+    ".agents/qa-engineer.md": "Independent numerical expectations, report scope and acceptance boundaries.",
+    ".skills/testing-standards.md": "Lowest useful document/derivation checks; no application suites for unchanged application.",
+    ".skills/analytics-frameworks.md": "Same-grain denominators, signed error, paired temporal cohorts and bounded revenue interpretation."
+  },
+  "limits": [
+    "No model training, SQL, schema change, publication or application tests.",
+    "Model and cloud correctness inherit identified existing receipts; this check independently verifies presentation derivations.",
+    "Numerical pass does not establish business tolerance, source completeness, historical availability, academic acceptance or operational value."
+  ]
+}

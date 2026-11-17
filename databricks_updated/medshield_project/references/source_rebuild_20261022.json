@@ -1,0 +1,214 @@
+{
+  "schema_version": 1,
+  "mode": "isolated_source_rebuild_candidate",
+  "batch": "source_20261022",
+  "baseline_table": "workspace.medshield_gold.sales_restart_fact_candidate",
+  "baseline_fact_version": 20,
+  "baseline_identity": {
+    "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+    "policy_version": "sales_restart_gold_v7_independent_catalog",
+    "product_reference_sha256": "e6055d5303427c8d9c4c755c85e1bf0f5f1b42e4f4d44b2d894a87c1600a9e48",
+    "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+    "product_master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+    "transaction_evidence_sha256": "5e1a839d551293b51149e7c35d863ce680573e02275f65d17512d6099ff88786",
+    "catalog_helper_sha256": "20888a90253718dabf2aea3390ecc8d7ca707b388e8a4d45123e894c98f688c9",
+    "publication_status": "CANDIDATE_PENDING_BUSINESS_AND_PRODUCT_MASTER_REVIEW",
+    "resolution_policy": "catalog_v1_independent_evidence"
+  },
+  "baseline_records": 37728,
+  "baseline_sources": [
+    {
+      "source_workbook": "medshield_data_2017.csv",
+      "data_source_year": 2017,
+      "source_file_sha256": "15edfe33e5365e047d57556eb8a2dc9581b89b1f59f98449b983f0483f2b9c77",
+      "source_file_bytes": 740101,
+      "raw_line_count": 15285,
+      "source_data_status": "ORIGINAL_SOURCE_EXPORT",
+      "source_adjustment_policy": null
+    },
+    {
+      "source_workbook": "medshield_data_2018.csv",
+      "data_source_year": 2018,
+      "source_file_sha256": "d7a1b8ad107e176e642aab540e464eab05b19dc116131b712c33e29fb355b200",
+      "source_file_bytes": 503447,
+      "raw_line_count": 4365,
+      "source_data_status": "ORIGINAL_SOURCE_EXPORT",
+      "source_adjustment_policy": null
+    },
+    {
+      "source_workbook": "medshield_data_2019.csv",
+      "data_source_year": 2019,
+      "source_file_sha256": "3afc789aa0ad798da14cbe87153049eb7f7d7ca15df944a8e27b25f97d419fc8",
+      "source_file_bytes": 1270693,
+      "raw_line_count": 10326,
+      "source_data_status": "ORIGINAL_SOURCE_EXPORT",
+      "source_adjustment_policy": null
+    },
+    {
+      "source_workbook": "medshield_data_2020.csv",
+      "data_source_year": 2020,
+      "source_file_sha256": "d5d17c2c6514a652294a23426e8ff9c35b5410d9a65a8273cd0dd6e573254a62",
+      "source_file_bytes": 495396,
+      "raw_line_count": 4040,
+      "source_data_status": "ADJUSTED_ESTIMATED_PRODUCT_ALLOCATION_SOURCE",
+      "source_adjustment_policy": "one_to_one_same_year_same_area_nearest_financial_profile"
+    },
+    {
+      "source_workbook": "medshield_data_2021.csv",
+      "data_source_year": 2021,
+      "source_file_sha256": "c1cc109b73a0b073a051cd2fbdd7df2e0c2c8ea52a98be8b8c443b0388d12477",
+      "source_file_bytes": 483905,
+      "raw_line_count": 4761,
+      "source_data_status": "ORIGINAL_SOURCE_EXPORT",
+      "source_adjustment_policy": null
+    },
+    {
+      "source_workbook": "medshield_data_2022.csv",
+      "data_source_year": 2022,
+      "source_file_sha256": "1f28cacdcdc537065828cf809f8d0ae4bb55891a1317fe6c306d2b4b5b2caf74",
+      "source_file_bytes": 551812,
+      "raw_line_count": 4039,
+      "source_data_status": "ORIGINAL_SOURCE_EXPORT",
+      "source_adjustment_policy": null
+    },
+    {
+      "source_workbook": "medshield_data_2023.csv",
+      "data_source_year": 2023,
+      "source_file_sha256": "83e4509c84e0c2b6c379071593e589b5207842fd469430fe317e5e9a70368cea",
+      "source_file_bytes": 791507,
+      "raw_line_count": 5898,
+      "source_data_status": "ORIGINAL_SOURCE_EXPORT",
+      "source_adjustment_policy": null
+    },
+    {
+      "source_workbook": "medshield_data_2024.csv",
+      "data_source_year": 2024,
+      "source_file_sha256": "12ebda6996de76cf6af6c958485900fb81597f6f7f19dec4c8eea066919fb938",
+      "source_file_bytes": 453866,
+      "raw_line_count": 5774,
+      "source_data_status": "ADJUSTED_ESTIMATED_PRODUCT_ALLOCATION_SOURCE",
+      "source_adjustment_policy": "one_to_one_same_year_same_area_nearest_financial_profile"
+    },
+    {
+      "source_workbook": "medshield_data_2025.csv",
+      "data_source_year": 2025,
+      "source_file_sha256": "d05fec98a3a312416118fab4d11ca1f6e0c19f1951248b7b22fcc518eeb15569",
+      "source_file_bytes": 473296,
+      "raw_line_count": 4551,
+      "source_data_status": "ADJUSTED_ESTIMATED_PRODUCT_ALLOCATION_SOURCE",
+      "source_adjustment_policy": "contract_parent_replaced_with_existing_product_allocation_v1"
+    }
+  ],
+  "source_manifest": [
+    {
+      "source_workbook": "medshield_data_2017.csv",
+      "data_source_year": 2017,
+      "source_file_sha256": "15edfe33e5365e047d57556eb8a2dc9581b89b1f59f98449b983f0483f2b9c77",
+      "source_file_bytes": 740101,
+      "raw_line_count": 15285,
+      "source_data_status": "ORIGINAL_SOURCE_EXPORT",
+      "source_adjustment_policy": null
+    },
+    {
+      "source_workbook": "medshield_data_2018.csv",
+      "data_source_year": 2018,
+      "source_file_sha256": "d7a1b8ad107e176e642aab540e464eab05b19dc116131b712c33e29fb355b200",
+      "source_file_bytes": 503447,
+      "raw_line_count": 4365,
+      "source_data_status": "ORIGINAL_SOURCE_EXPORT",
+      "source_adjustment_policy": null
+    },
+    {
+      "source_workbook": "medshield_data_2019.csv",
+      "data_source_year": 2019,
+      "source_file_sha256": "3afc789aa0ad798da14cbe87153049eb7f7d7ca15df944a8e27b25f97d419fc8",
+      "source_file_bytes": 1270693,
+      "raw_line_count": 10326,
+      "source_data_status": "ORIGINAL_SOURCE_EXPORT",
+      "source_adjustment_policy": null
+    },
+    {
+      "source_workbook": "medshield_data_2020.csv",
+      "data_source_year": 2020,
+      "source_file_sha256": "d5d17c2c6514a652294a23426e8ff9c35b5410d9a65a8273cd0dd6e573254a62",
+      "source_file_bytes": 495396,
+      "raw_line_count": 4040,
+      "source_data_status": "ADJUSTED_ESTIMATED_PRODUCT_ALLOCATION_SOURCE",
+      "source_adjustment_policy": "one_to_one_same_year_same_area_nearest_financial_profile"
+    },
+    {
+      "source_workbook": "medshield_data_2021.csv",
+      "data_source_year": 2021,
+      "source_file_sha256": "c1cc109b73a0b073a051cd2fbdd7df2e0c2c8ea52a98be8b8c443b0388d12477",
+      "source_file_bytes": 483905,
+      "raw_line_count": 4761,
+      "source_data_status": "ORIGINAL_SOURCE_EXPORT",
+      "source_adjustment_policy": null
+    },
+    {
+      "source_workbook": "medshield_data_2022.csv",
+      "data_source_year": 2022,
+      "source_file_sha256": "1f28cacdcdc537065828cf809f8d0ae4bb55891a1317fe6c306d2b4b5b2caf74",
+      "source_file_bytes": 551812,
+      "raw_line_count": 4039,
+      "source_data_status": "ORIGINAL_SOURCE_EXPORT",
+      "source_adjustment_policy": null
+    },
+    {
+      "source_workbook": "medshield_data_2023.csv",
+      "data_source_year": 2023,
+      "source_file_sha256": "83e4509c84e0c2b6c379071593e589b5207842fd469430fe317e5e9a70368cea",
+      "source_file_bytes": 791507,
+      "raw_line_count": 5898,
+      "source_data_status": "ORIGINAL_SOURCE_EXPORT",
+      "source_adjustment_policy": null
+    },
+    {
+      "source_workbook": "medshield_data_2024.csv",
+      "data_source_year": 2024,
+      "source_file_sha256": "12ebda6996de76cf6af6c958485900fb81597f6f7f19dec4c8eea066919fb938",
+      "source_file_bytes": 453866,
+      "raw_line_count": 5774,
+      "source_data_status": "ADJUSTED_ESTIMATED_PRODUCT_ALLOCATION_SOURCE",
+      "source_adjustment_policy": "one_to_one_same_year_same_area_nearest_financial_profile"
+    },
+    {
+      "source_workbook": "medshield_data_2025.csv",
+      "data_source_year": 2025,
+      "source_file_sha256": "d05fec98a3a312416118fab4d11ca1f6e0c19f1951248b7b22fcc518eeb15569",
+      "source_file_bytes": 473296,
+      "raw_line_count": 4551,
+      "source_data_status": "ADJUSTED_ESTIMATED_PRODUCT_ALLOCATION_SOURCE",
+      "source_adjustment_policy": "contract_parent_replaced_with_existing_product_allocation_v1"
+    },
+    {
+      "source_workbook": "medshield_data_2026.csv",
+      "data_source_year": 2026,
+      "source_file_sha256": "2e5f1b6b10f2e9e439e3ed2599bdad4409cf46dd5a6a9d7ae68d640d70e10693",
+      "source_file_bytes": 524948,
+      "raw_line_count": 3431,
+      "source_data_status": "UNREVIEWED_SOURCE_EXPORT",
+      "source_adjustment_policy": null
+    }
+  ],
+  "dataset_id": "abb5af9adc151cc7a88b5e2241ea6d4d0a1c78bbd7875a10e66fa67c1353f94d",
+  "target_schemas": {
+    "bronze": "workspace.medshield_bronze_source_20261022",
+    "silver": "workspace.medshield_silver_source_20261022",
+    "gold": "workspace.medshield_gold_source_20261022",
+    "audit": "workspace.medshield_audit_source_20261022"
+  },
+  "reference_hashes": {
+    "product_master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+    "transaction_evidence_sha256": "5e1a839d551293b51149e7c35d863ce680573e02275f65d17512d6099ff88786",
+    "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+    "product_reference_sha256": "e6055d5303427c8d9c4c755c85e1bf0f5f1b42e4f4d44b2d894a87c1600a9e48",
+    "catalog_helper_sha256": "20888a90253718dabf2aea3390ecc8d7ca707b388e8a4d45123e894c98f688c9"
+  },
+  "activate_serving": false,
+  "business_approval": false,
+  "train_models": false,
+  "prepared_at_utc": "2026-10-24T08:24:49.089574+00:00",
+  "preflight_at_utc": "2026-10-24T08:24:22.707Z",
+  "execution_status": "NOT_EXECUTED_WORKSPACE_AND_JOBS_SCOPES_REQUIRED"
+}

@@ -1,0 +1,113 @@
+{
+  "date": "2026-10-10",
+  "timezone": "Asia/Manila",
+  "assessed_head": "cc03b4c05398880b18987eca5ca9c1e140bf9dcb",
+  "assessment": "complete",
+  "system_release_acceptance": "needs_fix",
+  "analytical_cloud_writes": 0,
+  "product_repairs": [],
+  "current_release": {
+    "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+    "policy_version": "sales_restart_gold_v7_independent_catalog",
+    "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+    "product_master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+    "publication_status": "CANDIDATE_PENDING_BUSINESS_AND_PRODUCT_MASTER_REVIEW",
+    "resolution_policy": "catalog_v1_independent_evidence",
+    "transaction_evidence_sha256": "5e1a839d551293b51149e7c35d863ce680573e02275f65d17512d6099ff88786",
+    "catalog_helper_sha256": "20888a90253718dabf2aea3390ecc8d7ca707b388e8a4d45123e894c98f688c9",
+    "fact_delta_version": 20
+  },
+  "unit_tests": {
+    "backend": 102,
+    "services": 119,
+    "notebooks": 82,
+    "stl": 3,
+    "passed": 306,
+    "failed": 0
+  },
+  "browser": {
+    "fixtures": {
+      "startTime": "2026-10-10T04:41:07.861Z",
+      "duration": 196002.785,
+      "expected": 115,
+      "skipped": 4,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "live_read_export": {
+      "startTime": "2026-10-10T04:44:40.124Z",
+      "duration": 158415.90300000002,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "layout_test": {
+      "startTime": "2026-10-10T04:56:36.004Z",
+      "duration": 54828.238000000005,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "layout_records": 27,
+    "layout_runtime_errors": [],
+    "boundary_cases": 4,
+    "boundary_failed": 0
+  },
+  "analytics": {
+    "live_sql_checks": 114,
+    "live_sql_failed": 0,
+    "publication_readiness": {
+      "PASS": 76,
+      "FAIL": 0,
+      "UNVERIFIED": 0
+    },
+    "expanded_models": {
+      "status": "PASS",
+      "checks": 538,
+      "metrics": 441,
+      "predictions": 1524
+    },
+    "original_models": {
+      "status": "PASS",
+      "checks": 388,
+      "metrics": 315
+    },
+    "adapter_probes": {
+      "status": "PASS",
+      "count": 30
+    },
+    "source_bridge": {
+      "passed": 251,
+      "failed": 0
+    },
+    "source_review": {
+      "passed": 302,
+      "failed": 0
+    }
+  },
+  "previous_findings": {
+    "QA-01": "open_dependency_advisories",
+    "QA-02": "fixed_checked_scope",
+    "QA-03": "fixed_checked_scope",
+    "QA-04": "fixed_checked_scope",
+    "QA-05": "retired_from_current_reporting_not_repaired",
+    "QA-06": "open_legacy_report_only",
+    "QA-07": "open_clean_bootstrap",
+    "QA-08": "open_conditional_legacy_grants",
+    "QA-09": "partial_frontend_STL_repaired_backend_validator_open",
+    "QA-10": "fixed_primary_pin_secondary_auth_default_open",
+    "QA-11": "open_deleted_Auth_recovery",
+    "QA-12": "open_HTTP_status_order"
+  },
+  "component_reports": [
+    "backend/REPORT.md",
+    "frontend/README.md",
+    "database/REPORT.md"
+  ],
+  "limitations": [
+    "Separate evidence populations are not summed into a coverage percentage.",
+    "Business/model publication approval, native cloud writes/recovery, Docker and load testing remain unverified."
+  ]
+}

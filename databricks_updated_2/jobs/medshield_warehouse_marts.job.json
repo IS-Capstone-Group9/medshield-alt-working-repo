@@ -1,0 +1,31 @@
+{
+  "_operator_notes": "TEMPLATE. Rebuilds nothing that exists: tables are created once per release and verified on rerun. Run after each promotion or seed.",
+  "name": "medshield-warehouse-marts",
+  "max_concurrent_runs": 1,
+  "queue": {
+    "enabled": true
+  },
+  "parameters": [
+    {
+      "name": "volume",
+      "default": "<VOLUME>"
+    },
+    {
+      "name": "release_schema",
+      "default": "<catalog>.medshield_warehouse"
+    }
+  ],
+  "tasks": [
+    {
+      "task_key": "marts",
+      "notebook_task": {
+        "notebook_path": "/Workspace/medshield/medshield_project/warehouse_marts",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "volume": "{{job.parameters.volume}}",
+          "release_schema": "{{job.parameters.release_schema}}"
+        }
+      }
+    }
+  ]
+}

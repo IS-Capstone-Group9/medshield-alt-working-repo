@@ -1,0 +1,422 @@
+from __future__ import annotations
+
+import unittest
+import tempfile
+import json
+from datetime import date
+from pathlib import Path
+from unittest.mock import patch
+
+from services import data_pipeline
+from services.data_pipeline import (
+    SourceRow,
+    _alert_level,
+    _normalize_headers,
+    _read_csv,
+    _supabase_headers,
+    _supabase_resource_schema,
+    _severity_index,
+    build_dashboard_snapshot,
+    clean_sales_rows,
+    weather_effects,
+)
+
+
+class SalesCleaningTests(unittest.TestCase):
+    def test_future_source_years_are_retained_in_cleaning_and_every_dashboard_partition(self):
+        sources = [SourceRow(f"medshield_data_{year}.csv", str(year), 2, {
+            "area": "Quezon", "date_delivered": f"{year}-01-02", "product": f"ITEM {year}",
+            "quantity": "2", "unit_cost": "50", "total_cost": "100", "discount": "0",
+            "net_cost": "100", "trade_price_unit": "30", "total_trade_price": "60", "net_income": "40",
+        }) for year in (2025, 2026, 2027, 2031)]
+        rows, summary, _ = clean_sales_rows(sources, "raw_tabular")
+        self.assertEqual(summary["rows_accepted"], 4)
+        self.assertEqual([row["data_source_year"] for row in rows], [2025, 2026, 2027, 2031])
+        self.assertTrue(all(row["in_analysis_range"] for row in rows))
+        snapshot = build_dashboard_snapshot(rows, today=date(2031, 1, 2))
+        self.assertEqual([row["year"] for row in snapshot["year_summary"]], ["2025", "2026", "2027", "2031"])
+        self.assertEqual([row["period"] for row in snapshot["monthly"]], ["2025-01", "2026-01", "2027-01", "2031-01"])
+        self.assertEqual(snapshot["totals"]["total_revenue"], 400)
+
+    def test_actual_snapshot_excludes_future_delivery_dates_across_every_partition(self):
+        rows = [dict(quality_status="valid", date_delivered=value, year=int(value[:4]),
+                     area="Quezon", product=value, quantity=1, net_cost=100,
+                     total_trade_price=60, net_income=40)
+                for value in ("2025-01-01", "2026-10-05", "2026-10-06", "2027-01-01", "2047-01-01")]
+        snapshot = build_dashboard_snapshot(rows, today=date(2026, 10, 5))
+        self.assertEqual(snapshot["totals"]["total_transactions"], 2)
+        self.assertEqual(snapshot["totals"]["total_revenue"], 200)
+        self.assertEqual(snapshot["by_area"][0]["revenue"], 200)
+        self.assertEqual([r["product"] for r in snapshot["top_products"]], ["2025-01-01", "2026-10-05"])
+        self.assertEqual([r["year"] for r in snapshot["year_summary"]], ["2025", "2026"])
+        snapshot = build_dashboard_snapshot(rows, today=date(2027, 1, 1))
+        self.assertEqual(snapshot["totals"]["total_transactions"], 4)
+        self.assertEqual([r["year"] for r in snapshot["year_summary"]], ["2025", "2026", "2027"])
+
+    def test_precoverage_and_invalid_dates_remain_rejected(self):
+        rows, summary, _ = clean_sales_rows([SourceRow("sales.csv", "2016", 2, {
+            "area": "Quezon", "date_delivered": value, "product": "ITEM A", "quantity": "1",
+        }) for value in ("2016-12-31", "2026-02-30")], "raw_tabular")
+        self.assertEqual(summary["rows_accepted"], 0)
+        self.assertTrue(all(row["quality_status"] == "rejected" for row in rows))
+
+    def test_blank_net_cp_is_derived_from_total_cp_less_discount(self):
+        rows, summary, _ = clean_sales_rows(
+            [
+                SourceRow(
+                    "medshield_data_2018.csv",
+                    "2018",
+                    2,
+                    {
+                        "area": "Quezon",
+                        "date_delivered": "2018-03-01",
+                        "product": "Item A",
+                        "quantity": "2",
+                        "total_cost": "120",
+                        "discount": "20",
+                        "net_cost": "",
+                        "total_trade_price": "60",
+                        "net_income": "40",
+                    },
+                )
+            ],
+            "raw_tabular",
+        )
+
+        self.assertEqual(rows[0]["net_cost"], 100)
+        self.assertIn(
+            "net_cost: derived from total cost - discount",
+            rows[0]["standardization_applied"],
+        )
+        self.assertEqual(
+            summary["standardizations"]["net_cost: derived from total cost - discount"],
+            1,
+        )
+
+    def test_explicit_zero_net_cp_is_not_replaced(self):
+        rows, _, _ = clean_sales_rows(
+            [
+                SourceRow(
+                    "sales.csv",
+                    "2025",
+                    2,
+                    {
+                        "area": "Quezon",
+                        "date_delivered": "2025-01-01",
+                        "product": "Item A",
+                        "quantity": "1",
+                        "total_cost": "120",
+                        "discount": "20",
+                        "net_cost": "0",
+                        "total_trade_price": "60",
+                    },
+                )
+            ],
+            "raw_tabular",
+        )
+
+        self.assertEqual(rows[0]["net_cost"], 0)
+        self.assertNotIn(
+            "net_cost: derived from total cost - discount",
+            rows[0]["standardization_applied"],
+        )
+
+    def test_dashboard_repairs_legacy_blank_net_cp_rows(self):
+        snapshot = build_dashboard_snapshot(
+            [
+                {
+                    "quality_status": "valid",
+                    "date_delivered": "2019-01-01",
+                    "year": 2019,
+                    "area": "Quezon",
+                    "product": "Item A",
+                    "quantity": 1,
+                    "total_cost": 120,
+                    "discount": 20,
+                    "net_cost": 0,
+                    "total_trade_price": 60,
+                    "net_income": 40,
+                    "standardization_applied": ["net_cost: blank converted to 0"],
+                }
+            ]
+        )
+
+        self.assertEqual(snapshot["year_summary"][0]["revenue"], 100)
+        self.assertEqual(snapshot["monthly"][0]["revenue"], 100)
+
+    def test_dashboard_revenue_uses_net_cp_not_total_tp(self):
+        snapshot = build_dashboard_snapshot([
+            {
+                "quality_status": "valid",
+                "date_delivered": "2021-07-23",
+                "year": 2021,
+                "area": "Supplies",
+                "product": "UV LIGHT",
+                "quantity": 1,
+                "net_cost": 65000,
+                "total_trade_price": 11999.75,
+                "net_income": 53000.25,
+            }
+        ])
+
+        self.assertEqual(snapshot["totals"]["total_revenue"], 65000)
+        self.assertEqual(snapshot["totals"]["total_income"], 53000.25)
+        self.assertEqual(snapshot["top_products"][0]["revenue"], 65000)
+
+    def test_percent_header_maps_to_margin_column(self):
+        self.assertEqual(_normalize_headers(["Net Income", "%"]), ["net_income", "margin_pct"])
+
+    def test_csv_preamble_is_skipped(self):
+        csv_bytes = (
+            "MedShield Sales Report\n"
+            "Reporting Period,2025\n\n\n\n"
+            "Area,DR Number,Date Delivered,Product,Qty,CP,Total CP,Disc,Net CP,TP/UNIT,TOTAL TP,Net Income,%\n"
+            "Quezon,DR-1,2025-01-01,ITEM A,2,10,20,0,20,5,10,10,50%\n"
+        ).encode()
+        rows, stage, headers = _read_csv(csv_bytes, "sales.csv")
+        self.assertEqual(stage, "raw_tabular")
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(len(set(headers) & {
+            "area", "dr_number", "date_delivered", "product", "quantity",
+            "unit_cost", "total_cost", "discount", "net_cost",
+            "trade_price_unit", "total_trade_price", "net_income", "margin_pct",
+        }), 13)
+
+    def test_exact_duplicates_are_retained_and_flagged(self):
+        source_rows = [
+            SourceRow(
+                workbook="sales.csv",
+                sheet="2025",
+                row_number=row_number,
+                raw={
+                    "area": "Quezon",
+                    "dr_number": "DR-1",
+                    "date_delivered": "2025-01-01",
+                    "product": "Item A",
+                    "quantity": "2",
+                    "net_cost": "20",
+                    "net_income": "10",
+                },
+            )
+            for row_number in (2, 3)
+        ]
+        rows, summary, _ = clean_sales_rows(source_rows, "raw_tabular")
+        self.assertEqual(summary["rows_accepted"], 2)
+        self.assertEqual(summary["duplicate_rows"], 1)
+        self.assertEqual(rows[1]["quality_status"], "warning")
+
+    def test_raw_row_is_standardized_and_margin_is_derived(self) -> None:
+        rows, summary, _ = clean_sales_rows(
+            [
+                SourceRow(
+                    workbook="Sales Report.xlsx",
+                    sheet="2025",
+                    row_number=7,
+                    raw={
+                        "area": " cam norte ",
+                        "dr_number": " dr 001 ",
+                        "date_delivered": date(2025, 1, 2),
+                        "product": " test product ",
+                        "quantity": "2",
+                        "unit_cost": "100",
+                        "total_cost": "200",
+                        "discount": "",
+                        "net_cost": "200",
+                        "trade_price_unit": "60",
+                        "total_trade_price": "120",
+                        "net_income": "80",
+                        "margin_pct": "",
+                    },
+                )
+            ],
+            "raw_medshield",
+        )
+
+        self.assertEqual(rows[0]["area"], "Camarines Norte")
+        self.assertEqual(rows[0]["dr_number"], "DR-001")
+        self.assertEqual(rows[0]["product"], "TEST PRODUCT")
+        self.assertEqual(rows[0]["margin_pct"], 0.4)
+        self.assertEqual(rows[0]["quality_status"], "valid")
+        self.assertEqual(summary["rows_accepted"], 1)
+
+    def test_dr_number_variants_are_standardized(self) -> None:
+        rows, summary, _ = clean_sales_rows(
+            [
+                SourceRow(
+                    workbook="sales.csv",
+                    sheet="2025",
+                    row_number=2,
+                    raw={
+                        "area": "Quezon",
+                        "dr_number": " DR No. 2025 - 0007 ",
+                        "date_delivered": "2025-01-01",
+                        "product": "Item A",
+                    },
+                )
+            ],
+            "raw_tabular",
+        )
+        self.assertEqual(rows[0]["dr_number"], "DR-2025-0007")
+        self.assertEqual(summary["rows_accepted"], 1)
+
+    def test_year_upload_replaces_only_matching_year_in_local_history(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            processed = root / "processed"
+            uploads = root / "uploads"
+            patches = [
+                patch.object(data_pipeline, "DATA_DIR", root),
+                patch.object(data_pipeline, "UPLOAD_DIR", uploads),
+                patch.object(data_pipeline, "PROCESSED_DIR", processed),
+                patch.object(data_pipeline, "SALES_DATASET_PATH", processed / "sales_transactions.json.gz"),
+                patch.object(data_pipeline, "SALES_STATUS_PATH", processed / "sales_dataset_status.json"),
+                patch.object(data_pipeline, "SALES_SNAPSHOT_PATH", processed / "dashboard_sales_snapshot.json"),
+            ]
+            for item in patches:
+                item.start()
+            self.addCleanup(lambda: [item.stop() for item in reversed(patches)])
+
+            rows_2023, summary_2023, _ = clean_sales_rows(
+                [
+                    SourceRow("2023.csv", "2023", 2, {
+                        "area": "Quezon",
+                        "dr_number": "1",
+                        "date_delivered": "2023-01-01",
+                        "product": "Item A",
+                        "quantity": "1",
+                        "net_cost": "100",
+                    })
+                ],
+                "raw_tabular",
+            )
+            data_pipeline._write_local_sales_dataset(rows_2023, summary_2023, "2023.csv", "hash-2023")
+
+            rows_2025, summary_2025, _ = clean_sales_rows(
+                [
+                    SourceRow("2025.csv", "2025", 2, {
+                        "area": "Quezon",
+                        "dr_number": "2",
+                        "date_delivered": "2025-01-01",
+                        "product": "Item B",
+                        "quantity": "1",
+                        "net_cost": "200",
+                    })
+                ],
+                "raw_tabular",
+            )
+            result = data_pipeline._write_local_sales_dataset(rows_2025, summary_2025, "2025.csv", "hash-2025")
+            payload = data_pipeline._load_existing_sales_payload()
+
+            self.assertEqual(result["merge_strategy"], "replaced_uploaded_years")
+            self.assertEqual(result["years_replaced"], ["2025"])
+            self.assertEqual(sorted({row["year"] for row in payload["rows"]}), [2023, 2025])
+            self.assertEqual(payload["metadata"]["quality_summary"]["sku_count"], 2)
+
+    def test_missing_required_fields_are_rejected(self) -> None:
+        rows, summary, _ = clean_sales_rows(
+            [
+                SourceRow(
+                    workbook="bad.csv",
+                    sheet="CSV",
+                    row_number=2,
+                    raw={"area": "", "date_delivered": "bad", "product": ""},
+                )
+            ],
+            "raw_tabular",
+        )
+        self.assertEqual(rows[0]["quality_status"], "rejected")
+        self.assertEqual(summary["rows_rejected"], 1)
+
+
+class WeatherSeverityTests(unittest.TestCase):
+    def test_severity_and_alert_thresholds_are_bounded(self) -> None:
+        severity = _severity_index(600, 25, 80, 35)
+        self.assertEqual(severity, 0.98)
+        self.assertEqual(_alert_level(severity), "critical")
+        self.assertEqual(_alert_level(0.65), "watch")
+        self.assertEqual(_alert_level(0.85), "warning")
+
+    def test_daily_weather_effects_match_daily_sales(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            processed = root / "processed"
+            uploads = root / "uploads"
+            patches = [
+                patch.object(data_pipeline, "DATA_DIR", root),
+                patch.object(data_pipeline, "UPLOAD_DIR", uploads),
+                patch.object(data_pipeline, "PROCESSED_DIR", processed),
+                patch.object(data_pipeline, "SALES_DATASET_PATH", processed / "sales_transactions.json.gz"),
+                patch.object(data_pipeline, "SALES_STATUS_PATH", processed / "sales_dataset_status.json"),
+                patch.object(data_pipeline, "SALES_SNAPSHOT_PATH", processed / "dashboard_sales_snapshot.json"),
+                patch.object(data_pipeline, "WEATHER_DATASET_PATH", processed / "weather_signals.json"),
+            ]
+            for item in patches:
+                item.start()
+            self.addCleanup(lambda: [item.stop() for item in reversed(patches)])
+
+            rows, summary, _ = clean_sales_rows(
+                [
+                    SourceRow("sales.csv", "2025", 2, {
+                        "area": "Quezon",
+                        "dr_number": "1",
+                        "date_delivered": "2025-01-02",
+                        "product": "Item A",
+                        "net_cost": "150",
+                    })
+                ],
+                "raw_tabular",
+            )
+            data_pipeline._write_local_sales_dataset(rows, summary, "sales.csv", "hash")
+            processed.mkdir(parents=True, exist_ok=True)
+            data_pipeline.WEATHER_DATASET_PATH.write_text(json.dumps({
+                "metadata": {
+                    "provider": "nasa_power",
+                    "period_start": "2025-01-01",
+                    "period_end": "2025-01-02",
+                    "areas": ["Quezon"],
+                },
+                "daily_rows": [
+                    {
+                        "date": "2025-01-02",
+                        "period": "2025-01-02",
+                        "area": "Quezon",
+                        "provider": "nasa_power",
+                        "rainfall_mm": 12,
+                        "rainy_day": True,
+                        "temperature_c": 27,
+                        "relative_humidity_pct": 80,
+                        "wind_speed_kph": 15,
+                        "rainfall_severity_proxy": 0.12,
+                        "weather_alert_level": "normal",
+                        "high_wind_watch": False,
+                        "weather_adjustment_factor": 1.024,
+                    }
+                ],
+                "rows": [],
+            }), encoding="utf-8")
+
+            result = weather_effects(year="2025", area="Quezon", grain="daily")
+            self.assertEqual(result["metadata"]["grain"], "daily")
+            self.assertEqual(result["metadata"]["sales_matched_rows"], 1)
+            self.assertEqual(result["rows"][0]["sales_revenue"], 150)
+
+
+class SupabaseSchemaRoutingTests(unittest.TestCase):
+    def test_resources_route_to_namespaced_schemas(self) -> None:
+        self.assertEqual(_supabase_resource_schema("dim_product"), "medshield_common")
+        self.assertEqual(_supabase_resource_schema("etl_pipeline_run"), "medshield_etl")
+        self.assertEqual(_supabase_resource_schema("fact_sales_transactions"), "medshield_sales")
+        self.assertEqual(_supabase_resource_schema("fact_weather_signal"), "medshield_external")
+        self.assertEqual(_supabase_resource_schema("rpc/refresh_sales_aggregates"), "medshield_sales")
+
+    def test_headers_include_postgrest_schema_profile(self) -> None:
+        with patch.dict("os.environ", {"SUPABASE_SERVICE_ROLE_KEY": "test-key"}):
+            headers = _supabase_headers("return=representation", "medshield_sales")
+
+        self.assertEqual(headers["Accept-Profile"], "medshield_sales")
+        self.assertEqual(headers["Content-Profile"], "medshield_sales")
+        self.assertEqual(headers["Prefer"], "return=representation")
+
+
+if __name__ == "__main__":
+    unittest.main()

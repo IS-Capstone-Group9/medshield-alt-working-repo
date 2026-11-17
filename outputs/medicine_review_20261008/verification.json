@@ -1,0 +1,65 @@
+{
+  "status": "PASS",
+  "rows": 4561,
+  "columns": 29,
+  "changed_labels": 4,
+  "changes": [
+    {
+      "raw_product": "LOCAINE 50ML",
+      "fields": [
+        "product_category",
+        "category_status",
+        "item_kind",
+        "item_kind_status",
+        "evidence_source",
+        "review_notes",
+        "brand"
+      ]
+    },
+    {
+      "raw_product": "LOCAINE 2% 50ML",
+      "fields": [
+        "product_category",
+        "category_status",
+        "item_kind",
+        "item_kind_status",
+        "evidence_source",
+        "review_notes",
+        "brand"
+      ]
+    },
+    {
+      "raw_product": "EUROCAINE",
+      "fields": [
+        "product_category",
+        "category_status",
+        "item_kind",
+        "item_kind_status",
+        "evidence_source",
+        "review_notes",
+        "brand"
+      ]
+    },
+    {
+      "raw_product": "SANOXIN-1000",
+      "fields": [
+        "product_category",
+        "category_status",
+        "item_kind",
+        "item_kind_status",
+        "evidence_source",
+        "review_notes",
+        "brand",
+        "strength",
+        "dosage_form"
+      ]
+    }
+  ],
+  "all_other_cells_unchanged": true,
+  "copies_identical": true,
+  "approved_rows": 0,
+  "forecast_eligible_rows": 0,
+  "immutable_resolved_fields_equal_all_rows": true,
+  "sha256": "ad6d74d4fc24cda3217f3612fb92cb417278fdbde20dc45c15725b99897df12c",
+  "bytes": 4751328
+}

@@ -1,0 +1,955 @@
+{
+  "checked_at": "2026-10-25T16:42:04.870Z",
+  "scope": "Read-only corrected-source metadata and aggregate controls; Workspace access check",
+  "source_table": "workspace.medshield_gold_source_20261022.truth_48a447f8fe9556d3_fact",
+  "source_version": 0,
+  "source_manifest_sha256": "f5d3dd2b57df477d035af3ae612fae579681e2050e2ba22c93c6877288774b73",
+  "source_manifest": {
+    "schema_version": 1,
+    "policy": "original_itemized_sales_v1",
+    "id": "truth_48a447f8fe9556d3",
+    "source_dataset": "abb5af9adc151cc7a88b5e2241ea6d4d0a1c78bbd7875a10e66fa67c1353f94d",
+    "source_fact_version": 0,
+    "source_table": "workspace.medshield_gold_source_20261022.financial_0b178092136f93e0_fact",
+    "source_publication_id": "financial_0b178092136f93e0",
+    "correction_sha256": "e20775f01b1652416426ca11d14e30274aa1a0104c36ba20b48db62ebde35a05",
+    "serving_table": "workspace.medshield_gold_source_20261022.truth_48a447f8fe9556d3_fact",
+    "excluded_table": "workspace.medshield_gold_source_20261022.truth_48a447f8fe9556d3_excluded",
+    "contracts_table": "workspace.medshield_gold_source_20261022.truth_48a447f8fe9556d3_contracts",
+    "source_rows": 41071,
+    "removed_rows": 911,
+    "kept_rows": 40160,
+    "excluded_keys": 911,
+    "source_keys_sha256": "67e1886a087722821078a67f377ce9727c2a44dba98561206fd98f5836a78b50",
+    "kept_keys_sha256": "10c8386a2f97587baf55cc1b6ae41648c0046a66a2e7e185f2ad31b1ae7cdb82",
+    "contract_rows": 350,
+    "original_source_hashes": {
+      "medshield_data_2020.csv": "98c83e6a440298e145b8bbfc2463791f393f0946f26a11c6b0472752d30ce733",
+      "medshield_data_2024.csv": "c38245983b918c0e44eecfccb3b63be00e8de9c848048dd007d1c086c714831f",
+      "medshield_data_2025.csv": "2738afaf114d9480928e37b6c2b53dc0cac9ba2f10dc74a98b2549e3345d235c"
+    },
+    "scope": "itemized_product_sales",
+    "status": "source_corrected_research_not_new_business_approval"
+  },
+  "results": {
+    "history_start": {
+      "sql_sha256": "715dda32597d96b4f92ba9fb34c2ca3001651c9cd063986414cfe056251d4eb6",
+      "columns": [
+        "version",
+        "timestamp",
+        "userId",
+        "userName",
+        "operation",
+        "operationParameters",
+        "job",
+        "notebook",
+        "queryHistoryStatementId",
+        "clusterId",
+        "readVersion",
+        "isolationLevel",
+        "isBlindAppend",
+        "operationMetrics",
+        "userMetadata",
+        "engineInfo"
+      ],
+      "rows": [
+        {
+          "version": "0",
+          "timestamp": "2026-10-24T22:06:59.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE TABLE AS SELECT",
+          "operationParameters": "{\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"properties\":\"{\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"databricks.internal.autoUpgrades.delta.enableRowTracking\\\":\\\"true\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\",\\\"delta.checkpoint.writeStatsAsStruct\\\":\\\"true\\\",\\\"databricks.internal.autoUpgrades.delta.checkpointPolicy\\\":\\\"v2\\\",\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.enableRowTracking\\\":\\\"true\\\",\\\"delta.checkpointPolicy\\\":\\\"v2\\\",\\\"delta.checkpoint.writeStatsAsJson\\\":\\\"false\\\",\\\"io.unitycatalog.tableId\\\":\\\"eeae28b5-acc9-4638-8974-c5644c1fbc3a\\\",\\\"delta.rowTracking.materializedRowCommitVersionColumnName\\\":\\\"_row-commit-version-col-c0780853-8eb9-466c-8378-b0dcab15c86a\\\",\\\"delta.rowTracking.materializedRowIdColumnName\\\":\\\"_row-id-col-06087702-7617-4b70-8f26-f831761e4ca4\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": null,
+          "queryHistoryStatementId": "01f1cff7-38a5-188b-8b63-2eb0e2b746da",
+          "clusterId": null,
+          "readVersion": null,
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "true",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numOutputRows\":\"40160\",\"numOutputBytes\":\"10169247\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    },
+    "schema": {
+      "sql_sha256": "39308386bed20a9a27022f62bbbbe84b81eee54ccf0236efb7272825c75a5a66",
+      "columns": [
+        "col_name",
+        "data_type",
+        "comment"
+      ],
+      "rows": [
+        {
+          "col_name": "source_record_id",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "normalized_area",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "normalized_product",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "source_workbook",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "dataset_id",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "source_file_sha256",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "source_path",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "raw_csv_line",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "source_layout",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "area_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "product_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "dr_number_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "date_delivered_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "area",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "product",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "dr_number",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "net_value_source",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "record_kind",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "disposition",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "business_fingerprint",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "snapshot_reference_source_record_id",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "silver_version",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "reporting_year_basis",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "quantity_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "unit_selling_price_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "gross_sales_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "discount_amount_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "net_sales_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "unit_acquisition_cost_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "total_acquisition_cost_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "gross_margin_amount_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "margin_pct_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "discount_rate_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "quantity_secondary_raw",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "data_source_year",
+          "data_type": "bigint",
+          "comment": null
+        },
+        {
+          "col_name": "source_row_number",
+          "data_type": "bigint",
+          "comment": null
+        },
+        {
+          "col_name": "calendar_year",
+          "data_type": "int",
+          "comment": null
+        },
+        {
+          "col_name": "reporting_year",
+          "data_type": "bigint",
+          "comment": null
+        },
+        {
+          "col_name": "date_delivered",
+          "data_type": "date",
+          "comment": null
+        },
+        {
+          "col_name": "quantity",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "unit_selling_price",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "gross_sales",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "discount_amount",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "net_sales",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "unit_acquisition_cost",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "total_acquisition_cost",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "gross_margin_amount",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "margin_pct",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "discount_rate",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "quantity_primary_candidate",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "quantity_secondary_candidate",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "raw_fields",
+          "data_type": "array<string>",
+          "comment": null
+        },
+        {
+          "col_name": "quality_rule_codes",
+          "data_type": "array<string>",
+          "comment": null
+        },
+        {
+          "col_name": "is_analysis_candidate",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_area_placeholder",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_date_missing",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_provisional_year_candidate",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "source_data_status",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "source_adjustment_policy",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "sales_fact_id",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "reference_proposed_category",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "reference_forecast_eligible",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "reference_mapping_status",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "reference_review_notes",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "canonical_group_id",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "canonical_sku",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "canonical_title",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "display_category",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "product_category",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "category_status",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "identity_status",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "item_kind",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "unit_of_measure",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "forecast_eligible",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_duplicate",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "catalog_evidence_source",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "brand",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "manufacturer",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "model",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "strength",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "concentration",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "dosage_form",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "container_size",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "packaging_unit",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "pack_count",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "contained_unit",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "bundle_specification",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "product_scope_status",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "is_medical_product_approved",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "area_classification",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "territory",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "is_geographic_territory_approved",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_external_geography_candidate",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "area_display_label",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "proposed_area_type",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "area_mapping_status",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "territory_id",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "mapped_region",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "mapped_province",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "mapped_city_municipality",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "mapped_geographic_level",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "mapped_customer_channel",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "mapped_business_line",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "area_mapping_evidence",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "area_evidence_status",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "external_mapping_status",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "transaction_evidence",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "transaction_evidence_lineage",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "product_key",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "area_key",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "date_key",
+          "data_type": "int",
+          "comment": null
+        },
+        {
+          "col_name": "month_start",
+          "data_type": "date",
+          "comment": null
+        },
+        {
+          "col_name": "is_contract_label",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_adjusted_source",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "resolution_policy",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "transaction_evidence_sha256",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "catalog_helper_sha256",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "is_low_trust_2017",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_historical_backfill_candidate",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_product_ranking_candidate",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_quantity_observation_eligible",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_gross_sales_eligible",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_net_sales_eligible",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_acquisition_cost_eligible",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_gross_margin_eligible",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_positive_delivery_quantity_eligible",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_return_quantity_eligible",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "return_quantity_abs",
+          "data_type": "decimal(20,6)",
+          "comment": null
+        },
+        {
+          "col_name": "is_provisional_product_demand_eligible",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_approved_medical_demand_eligible",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "is_external_analysis_candidate",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "external_join_status",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "is_external_join_ready",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "financial_review_required",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "transaction_quantity_status",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "contract_prefix",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "contract_label_group_key",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "product_reference_sha256",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "publication_status",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "policy_version",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "area_mapping_sha256",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "product_master_sha256",
+          "data_type": "string",
+          "comment": null
+        },
+        {
+          "col_name": "medical_supplies_in_scope",
+          "data_type": "boolean",
+          "comment": null
+        },
+        {
+          "col_name": "gold_published_at",
+          "data_type": "timestamp",
+          "comment": null
+        }
+      ]
+    },
+    "controls": {
+      "sql_sha256": "5658a50b7818ea7fe272b67b1a7df51a37df01dadf060ace6ce7000d8c637285",
+      "columns": [
+        "records",
+        "unique_records",
+        "product_keys",
+        "keys_sha256"
+      ],
+      "rows": [
+        {
+          "records": "40160",
+          "unique_records": "40160",
+          "product_keys": "5692",
+          "keys_sha256": "10c8386a2f97587baf55cc1b6ae41648c0046a66a2e7e185f2ad31b1ae7cdb82"
+        }
+      ]
+    },
+    "identity": {
+      "sql_sha256": "5a3ae9c5bae5d2355e2ceeb8440475c61811d2294a271c804c8d0a1cbaa13176",
+      "columns": [
+        "dataset_id",
+        "policy_version",
+        "product_master_sha256",
+        "resolution_policy",
+        "transaction_evidence_sha256",
+        "catalog_helper_sha256",
+        "records"
+      ],
+      "rows": [
+        {
+          "dataset_id": "abb5af9adc151cc7a88b5e2241ea6d4d0a1c78bbd7875a10e66fa67c1353f94d",
+          "policy_version": "sales_restart_gold_v8_isolated_source_rebuild",
+          "product_master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+          "resolution_policy": "catalog_v1_independent_evidence",
+          "transaction_evidence_sha256": "5e1a839d551293b51149e7c35d863ce680573e02275f65d17512d6099ff88786",
+          "catalog_helper_sha256": "20888a90253718dabf2aea3390ecc8d7ca707b388e8a4d45123e894c98f688c9",
+          "records": "40160"
+        }
+      ]
+    },
+    "excluded_overlap": {
+      "sql_sha256": "abf7c5d382d3457479cf20de9035bf84cf9e6d084c825b4a66b7cb7a6465c4f2",
+      "columns": [
+        "records"
+      ],
+      "rows": [
+        {
+          "records": "0"
+        }
+      ]
+    },
+    "financial_controls": {
+      "sql_sha256": "982086727378c806c05bb8ba0f406022b4a071845da4df315e653472f2327e64",
+      "columns": [
+        "quantity",
+        "gross_sales",
+        "discount_amount",
+        "net_sales",
+        "unit_acquisition_cost",
+        "total_acquisition_cost",
+        "gross_margin_amount",
+        "margin_pct",
+        "discount_rate",
+        "quantity_primary_candidate",
+        "quantity_secondary_candidate",
+        "return_quantity_abs"
+      ],
+      "rows": [
+        {
+          "quantity": "3104674.446156",
+          "gross_sales": "643048176.240000",
+          "discount_amount": "4700968.250000",
+          "net_sales": "637944458.530000",
+          "unit_acquisition_cost": "20759206.210000",
+          "total_acquisition_cost": "259136525.270000",
+          "gross_margin_amount": "379194300.530000",
+          "margin_pct": "22593.451720",
+          "discount_rate": "90.450000",
+          "quantity_primary_candidate": "3104387.446156",
+          "quantity_secondary_candidate": "1776134.000000",
+          "return_quantity_abs": "30023.270000"
+        }
+      ]
+    },
+    "eligible_finance": {
+      "sql_sha256": "6035541eca6a7196131371165aa0c1fc6c7b8eebb93a3272fad6640db416a3f0",
+      "columns": [
+        "net_eligible_records",
+        "eligible_net_sales"
+      ],
+      "rows": [
+        {
+          "net_eligible_records": "39275",
+          "eligible_net_sales": "637922399.530000"
+        }
+      ]
+    },
+    "history_end": {
+      "sql_sha256": "715dda32597d96b4f92ba9fb34c2ca3001651c9cd063986414cfe056251d4eb6",
+      "columns": [
+        "version",
+        "timestamp",
+        "userId",
+        "userName",
+        "operation",
+        "operationParameters",
+        "job",
+        "notebook",
+        "queryHistoryStatementId",
+        "clusterId",
+        "readVersion",
+        "isolationLevel",
+        "isBlindAppend",
+        "operationMetrics",
+        "userMetadata",
+        "engineInfo"
+      ],
+      "rows": [
+        {
+          "version": "0",
+          "timestamp": "2026-10-24T22:06:59.000Z",
+          "userId": "76150394747914",
+          "userName": "adrianbenedicto.11@gmail.com",
+          "operation": "CREATE TABLE AS SELECT",
+          "operationParameters": "{\"partitionBy\":\"[]\",\"clusterBy\":\"[]\",\"description\":null,\"isManaged\":\"true\",\"properties\":\"{\\\"delta.parquet.compression.codec\\\":\\\"zstd\\\",\\\"databricks.internal.autoUpgrades.delta.enableRowTracking\\\":\\\"true\\\",\\\"delta.parquet.format.version.afe.internal\\\":\\\"2.12.0\\\",\\\"delta.enableDeletionVectors\\\":\\\"true\\\",\\\"delta.checkpoint.writeStatsAsStruct\\\":\\\"true\\\",\\\"databricks.internal.autoUpgrades.delta.checkpointPolicy\\\":\\\"v2\\\",\\\"delta.parquet.format.version\\\":\\\"2.12.0\\\",\\\"delta.enableRowTracking\\\":\\\"true\\\",\\\"delta.checkpointPolicy\\\":\\\"v2\\\",\\\"delta.checkpoint.writeStatsAsJson\\\":\\\"false\\\",\\\"io.unitycatalog.tableId\\\":\\\"eeae28b5-acc9-4638-8974-c5644c1fbc3a\\\",\\\"delta.rowTracking.materializedRowCommitVersionColumnName\\\":\\\"_row-commit-version-col-c0780853-8eb9-466c-8378-b0dcab15c86a\\\",\\\"delta.rowTracking.materializedRowIdColumnName\\\":\\\"_row-id-col-06087702-7617-4b70-8f26-f831761e4ca4\\\"}\",\"statsOnLoad\":\"true\"}",
+          "job": null,
+          "notebook": null,
+          "queryHistoryStatementId": "01f1cff7-38a5-188b-8b63-2eb0e2b746da",
+          "clusterId": null,
+          "readVersion": null,
+          "isolationLevel": "WriteSerializable",
+          "isBlindAppend": "true",
+          "operationMetrics": "{\"numFiles\":\"1\",\"numOutputRows\":\"40160\",\"numOutputBytes\":\"10169247\"}",
+          "userMetadata": null,
+          "engineInfo": "Databricks-Runtime/19.9.x-aarch64-photon-scala2.13"
+        }
+      ]
+    }
+  },
+  "workspace_access": {
+    "http_status": 403,
+    "error_code": 403,
+    "missing_workspace_scope": true,
+    "object_type": null,
+    "stage_parent": "/Workspace/medshield/classification_releases"
+  },
+  "warehouse_writes": 0,
+  "notebook_runs": 0,
+  "activation_changes": 0
+}

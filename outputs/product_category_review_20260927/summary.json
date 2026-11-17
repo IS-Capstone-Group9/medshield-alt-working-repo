@@ -1,0 +1,83 @@
+{
+  "release": {
+    "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+    "policy_version": "sales_restart_gold_v7_independent_catalog",
+    "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+    "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+    "publication_status": "CANDIDATE_PENDING_BUSINESS_AND_PRODUCT_MASTER_REVIEW",
+    "resolution_policy": "catalog_v1_independent_evidence",
+    "transaction_evidence_sha256": "5e1a839d551293b51149e7c35d863ce680573e02275f65d17512d6099ff88786",
+    "catalog_helper_sha256": "20888a90253718dabf2aea3390ecc8d7ca707b388e8a4d45123e894c98f688c9",
+    "fact_delta_version": 17
+  },
+  "source_receipt_sha256": "f523ade6e9c6f66e0fa7edc7f78c323b11e2722de248b0a0b92e1b1881ad9517",
+  "records": 37728,
+  "labels": 4561,
+  "raw_variants": 4985,
+  "categories": [
+    {
+      "category": "medicine",
+      "labels": 2161,
+      "records": 29453,
+      "net_sales": "473292323.930000"
+    },
+    {
+      "category": "medical_supply",
+      "labels": 631,
+      "records": 2618,
+      "net_sales": "58493264.320000"
+    },
+    {
+      "category": "medical_equipment",
+      "labels": 150,
+      "records": 377,
+      "net_sales": "20795191.040000"
+    },
+    {
+      "category": "non_medical",
+      "labels": 198,
+      "records": 902,
+      "net_sales": "21309137.110000"
+    },
+    {
+      "category": "unclassified",
+      "labels": 1421,
+      "records": 4378,
+      "net_sales": "53056825.410000"
+    }
+  ],
+  "confirmed_categories": 0,
+  "research_coverage": [
+    {
+      "value": "Product or brand source",
+      "labels": 178,
+      "records": 4427,
+      "net_sales": "192204783.510000"
+    },
+    {
+      "value": "Product type source",
+      "labels": 46,
+      "records": 99,
+      "net_sales": "5805793.600000"
+    },
+    {
+      "value": "Description only",
+      "labels": 2916,
+      "records": 28824,
+      "net_sales": "375879339.290000"
+    },
+    {
+      "value": "Unresolved",
+      "labels": 1421,
+      "records": 4378,
+      "net_sales": "53056825.410000"
+    }
+  ],
+  "research_entries": 69,
+  "source_urls": 65,
+  "matched_source_entries": 68,
+  "researched_descriptions": 238,
+  "category_changes": 96,
+  "conflict_descriptions": 19,
+  "research_date": "2026-09-27"
+}

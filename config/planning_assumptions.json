@@ -1,0 +1,31 @@
+{
+  "schema_version": "planning_assumptions_v1",
+  "policy_version": "sales_external_scenario_v1_candidate_only",
+  "dataset_id": null,
+  "evidence_label": "Assumed",
+  "display_label": "Scenario – assumed inputs",
+  "operational_use_approved": false,
+  "runtime_defaults_enabled": false,
+  "parameters": [
+    {"id":"A1","name":"annual_holding_cost_fraction","unit":"fraction_per_year","base_values":[0.25],"sensitivity_values":[0.15,0.20,0.25,0.30,0.35],"evidence_label":"Assumed","basis_status":"proposed_scenario_not_company_verified","basis":"Plan-specified exploration range; a textbook formula does not verify this percentage."},
+    {"id":"A2","name":"ordering_cost","unit":"PHP_per_order","base_values":[1500],"sensitivity_values":[500,1000,1500,3000,5000],"evidence_label":"Assumed","basis_status":"proposed_scenario_not_company_verified","basis":"Researcher scenario; not a measured Philippine distributor cost."},
+    {"id":"A3","name":"mean_lead_time","unit":"days","base_values":[14],"sensitivity_values":[7,10,14,21,30],"evidence_label":"Assumed","basis_status":"proposed_scenario_not_company_verified","basis":"Researcher scenario; not a verified supplier delivery commitment."},
+    {"id":"A4","name":"lead_time_sd","unit":"days","base_values":[3],"sensitivity_values":[0,2,3,5,7],"evidence_label":"Assumed","basis_status":"proposed_scenario_not_company_verified","basis":"Researcher scenario; no observed lead-time distribution."},
+    {"id":"A5","name":"cycle_service_probability","unit":"probability","base_values":[0.95],"sensitivity_values":[0.90,0.95,0.98,0.99],"evidence_label":"Assumed","basis_status":"proposed_scenario_not_company_verified","basis":"Scenario target, not a verified WHO mandate or company service policy."},
+    {"id":"A6","name":"remaining_shelf_life_at_receipt","unit":"days","base_values":[365,730],"sensitivity_values":[180,365,540,730,1095],"evidence_label":"Assumed","basis_status":"proposed_scenario_not_company_verified","basis":"Scenario remaining-life values, not observed batch dates or an asserted FDA rule."},
+    {"id":"A7","name":"initial_stock_monthly_demand_multiplier","unit":"months_of_mean_demand","base_values":[1],"sensitivity_values":[0.5,1,1.5,2],"evidence_label":"Assumed","basis_status":"proposed_scenario_not_company_verified","basis":"Simulation warm start; first six months must be reported separately or excluded as burn-in."},
+    {"id":"A8","name":"budget_historical_acquisition_ratio","unit":"fraction_of_scoped_monthly_Total_TP","base_values":[1],"sensitivity_values":[0.70,0.85,1,1.15,1.30],"evidence_label":"Assumed","basis_status":"proposed_scenario_not_company_verified","basis":"Budget scenario based on reviewed acquisition values; sales acquisition value is not actual procurement spend."},
+    {"id":"A9","name":"capacity_scoped_p95_throughput_ratio","unit":"fraction_of_presentation_scoped_p95_quantity","base_values":[1],"sensitivity_values":[0.75,1,1.25],"evidence_label":"Assumed","basis_status":"proposed_scenario_not_company_verified","basis":"Throughput-derived scenario proxy, not measured storage capacity; incompatible units must remain separate."}
+  ],
+  "derivations": [
+    {"id":"D1","evidence_label":"Derived","name":"presentation_and_pack","gate":"Explicit reviewed presentation/unit mapping; literal-title proposals remain unapproved."},
+    {"id":"D2","evidence_label":"Derived","name":"account_linkage","gate":"Unique exact reference or reviewed alias only; DR is not an account ID; channel fallbacks remain separate."},
+    {"id":"D3","evidence_label":"Derived","name":"therapeutic_disease_link","gate":"Medical category is insufficient: clinical linkage and presentation need separate review."},
+    {"id":"D4","evidence_label":"Derived","name":"territory_attribution","gate":"Retain nine confirmed labels; unallocated channels are never distributed among regions."}
+  ],
+  "limitations": [
+    "No company stock, batch expiry, supplier lead-time, ordering-cost or holding-cost facts are supplied.",
+    "Every run must bind its own dataset_id, policy_version, source hashes and assumption_ids.",
+    "This register must never populate blank gateway or dashboard planning fields automatically."
+  ]
+}

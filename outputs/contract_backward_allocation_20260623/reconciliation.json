@@ -1,0 +1,32 @@
+{
+  "quantity": {
+    "original": 1076005.5599999994,
+    "adjusted": 1076005.5599999987,
+    "delta": 0
+  },
+  "total_cost": {
+    "original": 926774318.1199996,
+    "adjusted": 926774318.1199988,
+    "delta": 0
+  },
+  "discount": {
+    "original": 4307478.04,
+    "adjusted": 4307478.04,
+    "delta": 0
+  },
+  "net_cost": {
+    "original": 921917689.8599995,
+    "adjusted": 921917689.8599985,
+    "delta": 0
+  },
+  "total_trade_price": {
+    "original": 424337912.0800011,
+    "adjusted": 424337912.0800009,
+    "delta": 0
+  },
+  "net_income": {
+    "original": 550600746.4599993,
+    "adjusted": 550600746.4599994,
+    "delta": 0
+  }
+}

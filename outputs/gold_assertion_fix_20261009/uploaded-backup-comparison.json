@@ -1,0 +1,281 @@
+{
+  "checked_at": "2026-10-09T03:31:25.335423+00:00",
+  "backup_path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\databricks\\medshield_project_backup",
+  "active_path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\databricks\\medshield_project",
+  "backup_unchanged": true,
+  "backup_inventory": {
+    "manifest.mf": "3595ebd2ea767bf2bf9b0e780d8b298de9ff753ced67a9ccaa7fe23a3c2db1f0",
+    "medshield_project/01_sales_bronze.py": "890fa3c77e8821df696f5f17c5b8b4ccf618ba9d36d2d04c4c34efea29b22547",
+    "medshield_project/02_sales_silver.py": "88ea6275548dda702e2961edd2df59c414fc035f33a628e6bd5ce89ef9248c1d",
+    "medshield_project/03_sales_gold.py": "34ca7db4834f345cf956bff2fdc829e24b53b7c15decbf70794112003aa0d014",
+    "medshield_project/04_sales_restart_monthly_bridge.py": "bfce8de94a2f3d1abda5cc69bc3f0927aa6869568cfcd4eb9558f59c97c5c3cc",
+    "medshield_project/05_sales_restart_system_bridge.sql": "2c2391a00898abd021dfb030f8ecbece7c617b41634cb03ffe7505caf00ca270",
+    "medshield_project/06_sales_stl.py": "4efe4fc87ce432ea5bcf5fdbacaece570086a288644da737314300513f473828",
+    "medshield_project/07_predictive_contracts.sql": "711a655c0bc266c465edf89094c5553f85581378263b91fa61bce73d75980cb3",
+    "medshield_project/08_predictive_frozen_input.py": "b629d931e29d85f1e07b47532e8008875f879d4b50b4b9e0eb6c7b2818555c83",
+    "medshield_project/area_mapping_status_2_sql.dbquery.ipynb": "ebd01a7cfd1de8420da2df1a7f5b1298855b634ab1f071f0b701ff9d9d550979",
+    "medshield_project/area_mapping_status_sql.dbquery.ipynb": "ac6b2d4bbf695c7ac3dc8246df034986db53285747e0ab02e763a06547f85fa5",
+    "medshield_project/catalog_publication.py": "5be8775ff7ae7c7310076d3170066ffa1ab6a5212e1eef92628883c8fbe11b50",
+    "medshield_project/external_restart/00_copy_workspace_sources.py": "4ac3f640b8bb33b148b75e7dfe8b0b959758dcc5524159c0719a3725a1bc47b1",
+    "medshield_project/external_restart/00_external_setup.py": "a156f90a7ef7d5a250d0b14d5059c5e55fc1522431bdf5a2eba3eea29b98aec5",
+    "medshield_project/external_restart/01_external_bronze.py": "54f3431cdfec946474780235a61c4cb8e0f2465f6544ff84c266a04987b48189",
+    "medshield_project/external_restart/02_external_silver.py": "e158b339e056189665afeff1901dda17bbe6c671e022768ae954022c3dd88b50",
+    "medshield_project/external_restart/03_external_gold.py": "27e1ef36d6c459723190c2ab30b37c7004b2933f9a1dc5a32f03424b40f9e6fa",
+    "medshield_project/external_restart/04_external_mapping_review.sql": "83936bd37b0d6d3a7f3513eb9cb345704c83bb16aaade052e64d2814eb87e1ce",
+    "medshield_project/external_restart/06_external_restart_system_bridge.sql": "b5af7d012f6cfaceb447059cb483497a0c2adf2a58ab9760b5111bb3b457c3fb",
+    "medshield_project/MedShield Sales Analytics \u2014 Candidate.lvdash.json": "9963c1f136f862a08ec1b3d77276e2e1f6bd250632ad2e3225b0f0de02cc01cf",
+    "medshield_project/New Query 2026-10-07 13_10_56.dbquery.ipynb": "7316ea51be7330d762ec0a60bdec2802b269af1370c9117878fa6d3da93ea3b5",
+    "medshield_project/product_catalog 2026-10-09 02_47_18.py": "20888a90253718dabf2aea3390ecc8d7ca707b388e8a4d45123e894c98f688c9",
+    "medshield_project/product_catalog.py": "20888a90253718dabf2aea3390ecc8d7ca707b388e8a4d45123e894c98f688c9",
+    "medshield_project/references/catalog_publication.json": "d562569e6170ff8aa0af18fd9cf166f4f1333327992e74d38476d5520208d1b3",
+    "medshield_project/references/category_acceptance.json": "a99078830b281be69c856d3aeeb725fe80ef0eebc5e86577ddd0e19f9ff0f56d",
+    "medshield_project/sales_bridge_databrick_2.py": "148a858ccf5a58bb7d13643d2176a0df83f69cd75df8de8462f9d0a4bfc8eb1e",
+    "medshield_project/validate_fact_monthly_population.py": "7104d146ba7b52ce4459e33528306f2cbc1c39a595f3edaf1e54de80d049f5b2",
+    "medshield_project/VALIDATION_QUERY.py": "0a1bd9a61c48620cd6c012bdeeb4f89397b20ee9c3725f17c412a2bea07aa58c"
+  },
+  "files": [
+    {
+      "path": "01_sales_bronze.py",
+      "backup_sha256": "890fa3c77e8821df696f5f17c5b8b4ccf618ba9d36d2d04c4c34efea29b22547",
+      "active_sha256": "996331113cd208edcd1bfa9e14d68e0be7bee01ea3b616892dd179926eed1d51",
+      "status": "LINE_ENDING_ONLY",
+      "python_parse_errors": {
+        "backup": null,
+        "active": null
+      }
+    },
+    {
+      "path": "02_sales_silver.py",
+      "backup_sha256": "88ea6275548dda702e2961edd2df59c414fc035f33a628e6bd5ce89ef9248c1d",
+      "active_sha256": "7075ec01eb7e7b81ec49cc4b7387c9d7c472750e9b49a2a16add01b809301a1f",
+      "status": "LINE_ENDING_ONLY",
+      "python_parse_errors": {
+        "backup": null,
+        "active": null
+      }
+    },
+    {
+      "path": "03_sales_gold.py",
+      "backup_sha256": "34ca7db4834f345cf956bff2fdc829e24b53b7c15decbf70794112003aa0d014",
+      "active_sha256": "ced772ca1ea7796fd42f834aaf40d307db4d09ba1e2657da528e6d2c38c5def8",
+      "status": "DIFFERENT",
+      "python_parse_errors": {
+        "backup": null,
+        "active": null
+      }
+    },
+    {
+      "path": "04_sales_restart_monthly_bridge.py",
+      "backup_sha256": "bfce8de94a2f3d1abda5cc69bc3f0927aa6869568cfcd4eb9558f59c97c5c3cc",
+      "active_sha256": "692287d9d5b2a7ec153de27a90adf0e519bfb75db83340af08aaa4d7b6bbba16",
+      "status": "LINE_ENDING_ONLY",
+      "python_parse_errors": {
+        "backup": null,
+        "active": null
+      }
+    },
+    {
+      "path": "05_sales_restart_system_bridge.sql",
+      "backup_sha256": "2c2391a00898abd021dfb030f8ecbece7c617b41634cb03ffe7505caf00ca270",
+      "active_sha256": "fa13c7ad95ba4b4aadbd73b6f90fd595eddb6321a7f2b9a7ee74804bc3b6f1bf",
+      "status": "LINE_ENDING_ONLY"
+    },
+    {
+      "path": "06_sales_stl.py",
+      "backup_sha256": "4efe4fc87ce432ea5bcf5fdbacaece570086a288644da737314300513f473828",
+      "active_sha256": "4efe4fc87ce432ea5bcf5fdbacaece570086a288644da737314300513f473828",
+      "status": "BYTE_IDENTICAL",
+      "python_parse_errors": {
+        "backup": null,
+        "active": null
+      }
+    },
+    {
+      "path": "07_predictive_contracts.sql",
+      "backup_sha256": "711a655c0bc266c465edf89094c5553f85581378263b91fa61bce73d75980cb3",
+      "active_sha256": "711a655c0bc266c465edf89094c5553f85581378263b91fa61bce73d75980cb3",
+      "status": "BYTE_IDENTICAL"
+    },
+    {
+      "path": "08_predictive_frozen_input.py",
+      "backup_sha256": "b629d931e29d85f1e07b47532e8008875f879d4b50b4b9e0eb6c7b2818555c83",
+      "active_sha256": "b629d931e29d85f1e07b47532e8008875f879d4b50b4b9e0eb6c7b2818555c83",
+      "status": "BYTE_IDENTICAL",
+      "python_parse_errors": {
+        "backup": null,
+        "active": null
+      }
+    },
+    {
+      "path": "area_mapping_status_2_sql.dbquery.ipynb",
+      "backup_sha256": "ebd01a7cfd1de8420da2df1a7f5b1298855b634ab1f071f0b701ff9d9d550979",
+      "active_sha256": "2dd1bda189394abceb422705f54927c19eeabc3397c0efc417c33e5a53345837",
+      "status": "LINE_ENDING_ONLY"
+    },
+    {
+      "path": "area_mapping_status_sql.dbquery.ipynb",
+      "backup_sha256": "ac6b2d4bbf695c7ac3dc8246df034986db53285747e0ab02e763a06547f85fa5",
+      "active_sha256": "80b9c440cb36d4b2e287206a934afd896295b20ef87f031f5553ced0a157186c",
+      "status": "LINE_ENDING_ONLY"
+    },
+    {
+      "path": "catalog_publication.py",
+      "backup_sha256": "5be8775ff7ae7c7310076d3170066ffa1ab6a5212e1eef92628883c8fbe11b50",
+      "active_sha256": "5be8775ff7ae7c7310076d3170066ffa1ab6a5212e1eef92628883c8fbe11b50",
+      "status": "BYTE_IDENTICAL",
+      "python_parse_errors": {
+        "backup": null,
+        "active": null
+      }
+    },
+    {
+      "path": "external_restart/00_copy_workspace_sources.py",
+      "backup_sha256": "4ac3f640b8bb33b148b75e7dfe8b0b959758dcc5524159c0719a3725a1bc47b1",
+      "active_sha256": "8b15020a2e8accb726d98e7a568fb09040a342b2c228649e7f74b9d9be53736a",
+      "status": "LINE_ENDING_ONLY",
+      "python_parse_errors": {
+        "backup": null,
+        "active": null
+      }
+    },
+    {
+      "path": "external_restart/00_external_setup.py",
+      "backup_sha256": "a156f90a7ef7d5a250d0b14d5059c5e55fc1522431bdf5a2eba3eea29b98aec5",
+      "active_sha256": "23f54974a9566e2f93124186ba00f5ea898376485752d5d475d2fd521c7fe707",
+      "status": "LINE_ENDING_ONLY",
+      "python_parse_errors": {
+        "backup": null,
+        "active": null
+      }
+    },
+    {
+      "path": "external_restart/01_external_bronze.py",
+      "backup_sha256": "54f3431cdfec946474780235a61c4cb8e0f2465f6544ff84c266a04987b48189",
+      "active_sha256": "1126a8e05ccf71a39429cc6a947a9479689e02b6090fe59d0a606ef6a1db4e2a",
+      "status": "LINE_ENDING_ONLY",
+      "python_parse_errors": {
+        "backup": null,
+        "active": null
+      }
+    },
+    {
+      "path": "external_restart/02_external_silver.py",
+      "backup_sha256": "e158b339e056189665afeff1901dda17bbe6c671e022768ae954022c3dd88b50",
+      "active_sha256": "18587b2dc1248a7add7808ee93e4b371dcc93aa2bc1ba96cef34178a24b55e03",
+      "status": "LINE_ENDING_ONLY",
+      "python_parse_errors": {
+        "backup": null,
+        "active": null
+      }
+    },
+    {
+      "path": "external_restart/03_external_gold.py",
+      "backup_sha256": "27e1ef36d6c459723190c2ab30b37c7004b2933f9a1dc5a32f03424b40f9e6fa",
+      "active_sha256": "2234c8ad644766a42a6573aa14eea74752a997ff00050294158549905b54d5b4",
+      "status": "LINE_ENDING_ONLY",
+      "python_parse_errors": {
+        "backup": null,
+        "active": null
+      }
+    },
+    {
+      "path": "external_restart/04_external_mapping_review.sql",
+      "backup_sha256": "83936bd37b0d6d3a7f3513eb9cb345704c83bb16aaade052e64d2814eb87e1ce",
+      "active_sha256": "da66a2be00393274b1230bdde44e689adfada34a250d169201c2fb962e4fbb37",
+      "status": "LINE_ENDING_ONLY"
+    },
+    {
+      "path": "external_restart/06_external_restart_system_bridge.sql",
+      "backup_sha256": "b5af7d012f6cfaceb447059cb483497a0c2adf2a58ab9760b5111bb3b457c3fb",
+      "active_sha256": "da06e6954ed983ced191a10f26ee7e2b0311bf5cdd22e7dd636c845b2e19cdbb",
+      "status": "LINE_ENDING_ONLY"
+    },
+    {
+      "path": "MedShield Sales Analytics \u2014 Candidate.lvdash.json",
+      "backup_sha256": "9963c1f136f862a08ec1b3d77276e2e1f6bd250632ad2e3225b0f0de02cc01cf",
+      "active_sha256": "729eeccdcf08abf6c14c0d7d44ed542c5d42670cef341942212ed2d2ab643d49",
+      "status": "LINE_ENDING_ONLY"
+    },
+    {
+      "path": "New Query 2026-10-07 13_10_56.dbquery.ipynb",
+      "backup_sha256": "7316ea51be7330d762ec0a60bdec2802b269af1370c9117878fa6d3da93ea3b5",
+      "active_sha256": null,
+      "status": "EXPORT_ONLY"
+    },
+    {
+      "path": "product_catalog 2026-10-09 02_47_18.py",
+      "backup_sha256": "20888a90253718dabf2aea3390ecc8d7ca707b388e8a4d45123e894c98f688c9",
+      "active_sha256": null,
+      "status": "EXPORT_ONLY"
+    },
+    {
+      "path": "product_catalog.py",
+      "backup_sha256": "20888a90253718dabf2aea3390ecc8d7ca707b388e8a4d45123e894c98f688c9",
+      "active_sha256": "20888a90253718dabf2aea3390ecc8d7ca707b388e8a4d45123e894c98f688c9",
+      "status": "BYTE_IDENTICAL",
+      "python_parse_errors": {
+        "backup": null,
+        "active": null
+      }
+    },
+    {
+      "path": "references/catalog_publication.json",
+      "backup_sha256": "d562569e6170ff8aa0af18fd9cf166f4f1333327992e74d38476d5520208d1b3",
+      "active_sha256": "1d6d3f797c042d662da93e8aed6bb89dc65a52034deb6a0a353340d53d1ed975",
+      "status": "DIFFERENT"
+    },
+    {
+      "path": "references/category_acceptance.json",
+      "backup_sha256": "a99078830b281be69c856d3aeeb725fe80ef0eebc5e86577ddd0e19f9ff0f56d",
+      "active_sha256": "a99078830b281be69c856d3aeeb725fe80ef0eebc5e86577ddd0e19f9ff0f56d",
+      "status": "BYTE_IDENTICAL"
+    },
+    {
+      "path": "sales_bridge_databrick_2.py",
+      "backup_sha256": "148a858ccf5a58bb7d13643d2176a0df83f69cd75df8de8462f9d0a4bfc8eb1e",
+      "active_sha256": "157e8d83ec68743bb524a5467c98d19726f9c57bb61849f9806af9d689771919",
+      "status": "LINE_ENDING_ONLY",
+      "python_parse_errors": {
+        "backup": null,
+        "active": null
+      }
+    },
+    {
+      "path": "validate_fact_monthly_population.py",
+      "backup_sha256": "7104d146ba7b52ce4459e33528306f2cbc1c39a595f3edaf1e54de80d049f5b2",
+      "active_sha256": "f81ed4b70a214bef8368770a59e15588e899b61191d3e53f3143c4608f3840e5",
+      "status": "LINE_ENDING_ONLY",
+      "python_parse_errors": {
+        "backup": null,
+        "active": null
+      }
+    },
+    {
+      "path": "VALIDATION_QUERY.py",
+      "backup_sha256": "0a1bd9a61c48620cd6c012bdeeb4f89397b20ee9c3725f17c412a2bea07aa58c",
+      "active_sha256": null,
+      "status": "EXPORT_ONLY"
+    }
+  ],
+  "active_only": [
+    "GUIDE.md",
+    "README.md",
+    "catalog_interchange.py",
+    "package_catalog.py",
+    "prepare_product_evidence.py",
+    "product_review_rules.py",
+    "references/product_master_review.csv",
+    "references/transaction_evidence_review.csv",
+    "render_readme.py",
+    "review_catalog.py",
+    "review_product_sales.py",
+    "sales_bridge_databrick.py",
+    "tests/test_catalog_publication.py",
+    "tests/test_gold_provisional_guard.py",
+    "tests/test_product_catalog.py",
+    "tests/test_product_pricing_review.py",
+    "tests/test_product_review_rules.py",
+    "tests/test_restart.py",
+    "tests/test_source_provenance.py"
+  ]
+}

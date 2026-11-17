@@ -1,0 +1,121 @@
+[
+ {
+  "month": "2024-08",
+  "forecast": {
+   "mean6": 2601537,
+   "actual": 2735618,
+   "error_pct": -4.9
+  },
+  "day20": {
+   "delivered_by_day20": 1362913,
+   "usual_share_by_day20": 0.729,
+   "estimate": 2053324,
+   "actual": 2735618,
+   "error_pct": -24.9
+  },
+  "stock_policy": {
+   "families": 190,
+   "families_covered_pct": 97.4,
+   "value_covered_pct": 87.7,
+   "order_up_to_php": 6623169
+  },
+  "government_readiness": {
+   "range_php": [
+    0,
+    2912538
+   ],
+   "actual_php": 0,
+   "inside": true
+  },
+  "surge": {
+   "diseases_peaking": [
+    "ILI",
+    "Dengue",
+    "Leptospirosis",
+    "Chikungunya"
+   ],
+   "typhoons_in_month_2021_2024": 9,
+   "rainfall_mm": 380.4,
+   "rainy": true
+  }
+ },
+ {
+  "month": "2025-09",
+  "forecast": {
+   "mean6": 6114063,
+   "actual": 16182280,
+   "error_pct": -62.2
+  },
+  "day20": {
+   "delivered_by_day20": 15088086,
+   "usual_share_by_day20": 0.69,
+   "estimate": 17919888,
+   "actual": 16182280,
+   "error_pct": 10.7
+  },
+  "stock_policy": {
+   "families": 88,
+   "families_covered_pct": 85.2,
+   "value_covered_pct": 66.7,
+   "order_up_to_php": 6383239
+  },
+  "government_readiness": {
+   "range_php": [
+    0,
+    3054866
+   ],
+   "actual_php": 3433019,
+   "inside": false
+  },
+  "surge": {
+   "diseases_peaking": [
+    "ILI",
+    "SARI",
+    "Dengue",
+    "Leptospirosis"
+   ],
+   "typhoons_in_month_2021_2024": 14,
+   "rainfall_mm": 470.8,
+   "rainy": true
+  }
+ },
+ {
+  "month": "2026-07",
+  "forecast": {
+   "mean6": 12175661,
+   "actual": 24686329,
+   "error_pct": -50.7
+  },
+  "day20": {
+   "delivered_by_day20": 18411389,
+   "usual_share_by_day20": 0.522,
+   "estimate": 29499619,
+   "actual": 24686329,
+   "error_pct": 19.5
+  },
+  "stock_policy": {
+   "families": 112,
+   "families_covered_pct": 91.1,
+   "value_covered_pct": 92.9,
+   "order_up_to_php": 18642048
+  },
+  "government_readiness": {
+   "range_php": [
+    0,
+    6131563
+   ],
+   "actual_php": 6185576,
+   "inside": false
+  },
+  "surge": {
+   "diseases_peaking": [
+    "Dengue",
+    "Typhoid",
+    "Chikungunya"
+   ],
+   "typhoons_in_month_2021_2024": 8,
+   "rainfall_mm": 659.4,
+   "rainy": true
+  }
+ }
+]

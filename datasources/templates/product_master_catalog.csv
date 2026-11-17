@@ -1,0 +1,24 @@
+product_name,generic_name,ven_class,therapeutic_cluster,dengue_surge_coeff,weather_surge_coeff,unit_cost_php,lead_time_days,dosage_form,clinical_indication
+PARACETAMOL 500MG,Paracetamol,V,Vector-Borne (Dengue),1.85,1.20,2.50,3,Tablet,First-line antipyretic for Dengue and acute febrile illnesses (Non-NSAID)
+PARACETAMOL MYREX 125MG/5ML,Paracetamol,V,Vector-Borne (Dengue),1.75,1.15,24.00,4,Syrup,Pediatric antipyretic for fever and Dengue viral infection
+PARACETAMOL MYREX 250MG/5ML,Paracetamol,V,Vector-Borne (Dengue),1.80,1.20,30.00,4,Syrup,Pediatric antipyretic for high fever and Dengue
+PARACETAMOL MYREX 100MG/ML,Paracetamol,V,Vector-Borne (Dengue),1.70,1.10,24.00,4,Oral Drops,Infant antipyretic drops for fever management
+DOXYCYCLINE 100MG,Doxycycline Hyclate,V,Waterborne (Flood/Lepto),2.50,2.80,8.50,5,Capsule,Mandatory post-exposure prophylaxis and treatment for Leptospirosis during floods
+ORAL REHYDRATION SALTS,Oral Rehydration Salts (ORS),V,Vector-Borne (Dengue),2.20,1.90,12.00,2,Sachet,Critical electrolyte and fluid replacement for Dengue and Acute Gastroenteritis
+0.9% SODIUM CHLORIDE 500ML,0.9% Sodium Chloride (Normal Saline),V,Vector-Borne (Dengue),2.40,1.50,45.00,6,IV Infusion Bottle,Emergency fluid resuscitation and maintenance in Dengue hemorrhagic fever
+LACTATED RINGERS 500ML,Lactated Ringer's Solution,V,Vector-Borne (Dengue),2.30,1.40,48.00,6,IV Infusion Bottle,Intravenous fluid replacement in Dengue shock syndrome and trauma
+SALBUTAMOL 2.5MG/2.5ML NEBULE,Salbutamol,V,Monsoon (ARI),1.30,2.20,18.00,3,Nebule,Emergency bronchodilator for acute asthma exacerbations during monsoon weather
+SALBUTAMOL 2MG/5ML SYRUP,Salbutamol,E,Monsoon (ARI),1.20,1.80,35.00,4,Syrup,Pediatric bronchodilator for acute bronchitis and asthma
+AMOXICILLIN 500MG,Amoxicillin,E,Monsoon (ARI),1.25,1.75,4.50,5,Capsule,Broad-spectrum antibiotic for bacterial pneumonia and respiratory infections
+CO-AMOXICLAV 625MG,Amoxicillin + Clavulanic Acid,E,Monsoon (ARI),1.20,1.60,22.00,7,Tablet,Second-line antibiotic for severe respiratory tract infections
+AZITHROMYCIN 500MG,Azithromycin,E,Monsoon (ARI),1.15,1.50,38.00,7,Tablet,Macrolide antibiotic for atypical pneumonia and storm-related infections
+CIPROFLOXACIN 500MG,Ciprofloxacin,E,Waterborne (Flood/Lepto),1.40,1.80,6.50,5,Tablet,Fluoroquinolone for severe enteric fever, typhoid, and waterborne infections
+HYCLENS WOUND SPRAY 60ML,Chlorhexidine Digluconate 2%,E,Waterborne (Flood/Lepto),1.10,2.10,85.00,5,Spray,Antiseptic wound cleansing and flood-debris trauma disinfection
+DOLO JAGA 500MG/50MG/100MG/100MCG,Paracetamol + Vit B Complex,E,Routine Chronic,1.10,1.05,9.50,4,Tablet,Analgesic and neurotropic vitamin complex for musculoskeletal pain
+AMLODIPINE 5MG,Amlodipine Besylate,E,Routine Chronic,1.00,1.00,1.80,4,Tablet,Standard essential antihypertensive for maintenance therapy
+LOSARTAN 50MG,Losartan Potassium,E,Routine Chronic,1.00,1.00,2.50,4,Tablet,Angiotensin II receptor blocker for chronic hypertension
+METFORMIN 500MG,Metformin HCl,E,Routine Chronic,1.00,1.00,1.50,4,Tablet,Essential biguanide for type 2 diabetes glycemic control
+CETIRIZINE 10MG,Cetirizine HCl,E,Routine Chronic,1.10,1.30,3.00,3,Tablet,Antihistamine for allergic rhinitis and skin rashes
+MULTIVITAMINS + ZINC,Multivitamins + Zinc,N,Routine Chronic,1.15,1.10,5.00,3,Capsule,Elective immune supplement and dietary nutritional support
+SANOMAX-FA,Nutritional Supplement FA,N,Routine Chronic,1.00,1.00,12.00,5,Bottle,Discretionary dietary supplement and health tonic
+VITAMIN C 500MG,Ascorbic Acid,N,Routine Chronic,1.20,1.25,2.50,3,Tablet,Over-the-counter vitamin supplement

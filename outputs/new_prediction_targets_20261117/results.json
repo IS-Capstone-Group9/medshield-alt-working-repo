@@ -1,0 +1,189 @@
+{
+ "rules_sha256": "f120fc7b9376078709fe366c059dc70b0104b5124f120dff53e38c4681b1dc42",
+ "P1": {
+  "GOVERNMENT": {
+   "chosen": "EXP",
+   "dev_brier": {
+    "EXP": 0.2471,
+    "CAL": 0.2613
+   },
+   "test_brier": 0.2611,
+   "test_brier_exp": 0.2611,
+   "test_brier_cal": 0.3111,
+   "mean_pred": 0.546,
+   "observed": 0.515,
+   "usable": false,
+   "budget_cycle_supported": false,
+   "size_coverage": {
+    "dev": 77.8,
+    "test": 78.8
+   },
+   "size_usable": true,
+   "large_months_share_2020_2026": 0.58,
+   "large_net_2020_2026": 135289991
+  },
+  "HOSPITAL": {
+   "chosen": "EXP",
+   "dev_brier": {
+    "EXP": 0.1647,
+    "CAL": 0.1981
+   },
+   "test_brier": 0.3291,
+   "test_brier_exp": 0.3291,
+   "test_brier_cal": 0.3654,
+   "mean_pred": 0.24,
+   "observed": 0.576,
+   "usable": false,
+   "budget_cycle_supported": false,
+   "size_coverage": {
+    "dev": 88.9,
+    "test": 66.7
+   },
+   "size_usable": false,
+   "large_months_share_2020_2026": 0.358,
+   "large_net_2020_2026": 81600741
+  },
+  "OTHER": {
+   "chosen": "EXP",
+   "dev_brier": {
+    "EXP": 0.1288,
+    "CAL": 0.1413
+   },
+   "test_brier": 0.0065,
+   "test_brier_exp": 0.0065,
+   "test_brier_cal": 0.0122,
+   "mean_pred": 0.08,
+   "observed": 0.0,
+   "usable": true,
+   "budget_cycle_supported": false,
+   "size_coverage": {
+    "dev": 88.9,
+    "test": 100.0
+   },
+   "size_usable": false,
+   "large_months_share_2020_2026": 0.062,
+   "large_net_2020_2026": 5394708
+  }
+ },
+ "P3": {
+  "train": 766,
+  "test": 753,
+  "coef": {
+   "A": 0.7425,
+   "S": -0.1034,
+   "intercept": -1.1113
+  },
+  "auc": 0.662,
+  "brier": 0.1514,
+  "brier_constant": 0.1574,
+  "mean_pred": 0.311,
+  "observed": 0.174,
+  "usable": false,
+  "bands": {
+   "<20%": {
+    "families": 95,
+    "mean_pred": 0.182,
+    "observed": 0.126
+   },
+   "20-50%": {
+    "families": 566,
+    "mean_pred": 0.281,
+    "observed": 0.143
+   },
+   ">=50%": {
+    "families": 92,
+    "mean_pred": 0.631,
+    "observed": 0.413
+   }
+  },
+  "survival_by_active_months": {
+   "1": {
+    "n": 1034,
+    "survival": 0.156
+   },
+   "2": {
+    "n": 273,
+    "survival": 0.304
+   },
+   "3": {
+    "n": 118,
+    "survival": 0.424
+   },
+   "4": {
+    "n": 60,
+    "survival": 0.567
+   },
+   "5": {
+    "n": 18,
+    "survival": 0.722
+   },
+   "6": {
+    "n": 16,
+    "survival": 0.812
+   }
+  }
+ },
+ "P4": {
+  "table_late_lapse_nolapse_notlate_lapse_nolapse": [
+   [
+    393,
+    52
+   ],
+   [
+    19,
+    264
+   ]
+  ],
+  "lapse_rate_late": 0.883,
+  "lapse_rate_not_late": 0.067,
+  "p_one_sided": 0.0,
+  "usable": true,
+  "late_at_2026_08_31": [
+   {
+    "area": "CAVITE",
+    "days_since": 1304,
+    "p80": 8.0
+   },
+   {
+    "area": "CAM SUR",
+    "days_since": 1292,
+    "p80": 7.0
+   },
+   {
+    "area": "MARINDUQUE",
+    "days_since": 304,
+    "p80": 28.0
+   },
+   {
+    "area": "CAM NORTE",
+    "days_since": 1085,
+    "p80": 7.0
+   },
+   {
+    "area": "LAGUNA",
+    "days_since": 1045,
+    "p80": 5.0
+   },
+   {
+    "area": "MINDORO",
+    "days_since": 2117,
+    "p80": 127.2
+   },
+   {
+    "area": "ALBAY",
+    "days_since": 1666,
+    "p80": 25.0
+   },
+   {
+    "area": "BICOL",
+    "days_since": 2554,
+    "p80": 5.0
+   },
+   {
+    "area": "LOWER CAVITE",
+    "days_since": 1101,
+    "p80": 19.0
+   }
+  ]
+ }
+}

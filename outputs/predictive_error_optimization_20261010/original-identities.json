@@ -1,0 +1,23 @@
+{
+  "captured_at_utc": "2026-10-10T08:08:27.228519+00:00",
+  "purpose": "Preserve original source/model/serving/manuscript bytes before bounded optimization",
+  "files": {
+    "outputs/predictive_validation/2026-10-09T13-28-48-501Z/input.json": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba",
+    "outputs/predictive_completion_20261009/models/fixed-origin-extended/eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a/run.json": "9889baea07a1f222edc9d2d2576fefc0d2be4bc8e52dc4d9a3ff9919e0056f45",
+    "outputs/predictive_error_policy_20261010/policy.json": "55c93ca278c8fa9a19efaecdd8327836bc3d35662fe733eb36917125bb4d0fcb",
+    "services/analytics_service/predictive/contracts.py": "a6ece04850ba397a84c72309043c9ab6c83c3ee7a4fc1fe4b63f1b82b8b86d3a",
+    "services/analytics_service/predictive/engine.py": "cdc5a39363c69f500897e849f2c37ab42c401ed789b6890e6abab808cbbee4c8",
+    "services/analytics_service/predictive/models.py": "2b2b6495e3ff54b7613800fded65832efc46fc1018ad2fe09f678baf857c4ac9",
+    "services/analytics_service/predictive/metrics.py": "4841243a2b262d71845596d4d72b44a7aa7447602003cfdb79b971e1d7ac8baa",
+    "services/analytics_service/predictive/extended_experiment.py": "3d88a6aa92bb0b03140ce9830512cd1292d4a6d0fe85ad8bdc190d92b64f3b42",
+    "frontend/services/api/forecast-validation-runtime.ts": "ceea1fa768a2c5e1ef019867436ed7e6ec949855a4aa65db6b49c30ef42b7344",
+    "frontend/e2e/forecast-validation.spec.ts": "3adea70905f3602961ca334697722b9618555153650482083096c01eda503f51",
+    "docs/chapters/MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.docx": "eb92d197c4aae0df879db21f3bf2cedd40aebc05d9076cc0daf14636a2c3dcb3"
+  },
+  "git_head": "cc03b4c05398880b18987eca5ca9c1e140bf9dcb",
+  "dirty_tree_note": "Existing extensive unrelated changes preserved; new experiment does not modify these bound files.",
+  "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+  "fact_delta_version": 20,
+  "scope": "company_month_net_sales_PHP",
+  "new_evaluation_started": false
+}

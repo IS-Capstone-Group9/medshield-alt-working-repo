@@ -1,0 +1,318 @@
+{
+  "mode": "independent read-only recomputation",
+  "metrics": [
+    {
+      "model": "last_value",
+      "stage": "development",
+      "n": 60,
+      "mae": 3090470.9348333334,
+      "rmse": 4300604.366031158,
+      "bias": 46774.56616666661,
+      "wape": 83.19935997006957,
+      "matches_stored": true
+    },
+    {
+      "model": "last_value",
+      "stage": "audit",
+      "n": 12,
+      "mae": 5834383.001666666,
+      "rmse": 6956031.7224267535,
+      "bias": 1295235.423333333,
+      "wape": 37.76364428864427,
+      "matches_stored": true
+    },
+    {
+      "model": "seasonal_naive",
+      "stage": "development",
+      "n": 60,
+      "mae": 3487809.8063333333,
+      "rmse": 5434895.68678964,
+      "bias": 1731923.5969999998,
+      "wape": 93.8962215478383,
+      "matches_stored": true
+    },
+    {
+      "model": "seasonal_naive",
+      "stage": "audit",
+      "n": 12,
+      "mae": 11261458.43,
+      "rmse": 13000988.07662962,
+      "bias": -11261458.43,
+      "wape": 72.89094840026605,
+      "matches_stored": true
+    },
+    {
+      "model": "mean_3",
+      "stage": "development",
+      "n": 60,
+      "mae": 3533478.1743888888,
+      "rmse": 4649384.259546954,
+      "bias": 1104448.4615,
+      "wape": 95.12567138678483,
+      "matches_stored": true
+    },
+    {
+      "model": "mean_3",
+      "stage": "audit",
+      "n": 12,
+      "mae": 9212416.360555554,
+      "rmse": 10647446.498662483,
+      "bias": -8164519.239999999,
+      "wape": 59.62831277609412,
+      "matches_stored": true
+    },
+    {
+      "model": "mean_6",
+      "stage": "development",
+      "n": 60,
+      "mae": 3473386.0127222226,
+      "rmse": 4419745.38215297,
+      "bias": 1317931.7795000002,
+      "wape": 93.50791490393533,
+      "matches_stored": true
+    },
+    {
+      "model": "mean_6",
+      "stage": "audit",
+      "n": 12,
+      "mae": 10526958.881111111,
+      "rmse": 12165944.389409814,
+      "bias": -10064862.66,
+      "wape": 68.13682449607839,
+      "matches_stored": true
+    },
+    {
+      "model": "ets_none",
+      "stage": "development",
+      "n": 60,
+      "mae": 3445030.299204684,
+      "rmse": 4264377.522909957,
+      "bias": 2104348.0188410557,
+      "wape": 92.74454347417584,
+      "matches_stored": true
+    },
+    {
+      "model": "ets_none",
+      "stage": "audit",
+      "n": 12,
+      "mae": 10501032.199994955,
+      "rmse": 12194034.953444043,
+      "bias": -10188736.306856176,
+      "wape": 67.96901138491035,
+      "matches_stored": true
+    },
+    {
+      "model": "ets_damped",
+      "stage": "development",
+      "n": 60,
+      "mae": 3725795.377208932,
+      "rmse": 4511523.746495722,
+      "bias": 2338624.7056031036,
+      "wape": 100.30309208520164,
+      "matches_stored": true
+    },
+    {
+      "model": "ets_damped",
+      "stage": "audit",
+      "n": 12,
+      "mae": 10426697.234025342,
+      "rmse": 12335068.267822789,
+      "bias": -10294862.191486355,
+      "wape": 67.48787066921119,
+      "matches_stored": true
+    },
+    {
+      "model": "prophet_cp0.01_sp0.1",
+      "stage": "development",
+      "n": 60,
+      "mae": 3483090.9311365355,
+      "rmse": 4179834.104822966,
+      "bias": 2187041.5900186393,
+      "wape": 93.76918349945316,
+      "matches_stored": true
+    },
+    {
+      "model": "prophet_cp0.01_sp0.1",
+      "stage": "audit",
+      "n": 12,
+      "mae": 11196043.735291732,
+      "rmse": 12952644.193153972,
+      "bias": -11143564.925568352,
+      "wape": 72.467545058129,
+      "matches_stored": true
+    },
+    {
+      "model": "prophet_cp0.01_sp1.0",
+      "stage": "development",
+      "n": 60,
+      "mae": 3504558.428526304,
+      "rmse": 4196167.552915861,
+      "bias": 2238319.968108259,
+      "wape": 94.34711549773102,
+      "matches_stored": true
+    },
+    {
+      "model": "prophet_cp0.01_sp1.0",
+      "stage": "audit",
+      "n": 12,
+      "mae": 11151987.09487096,
+      "rmse": 12928195.128439752,
+      "bias": -11131022.714331886,
+      "wape": 72.1823839199371,
+      "matches_stored": true
+    },
+    {
+      "model": "prophet_cp0.01_sp10.0",
+      "stage": "development",
+      "n": 60,
+      "mae": 3474665.6177450162,
+      "rmse": 4171161.1173614818,
+      "bias": 2203885.95162247,
+      "wape": 93.54236347865285,
+      "matches_stored": true
+    },
+    {
+      "model": "prophet_cp0.01_sp10.0",
+      "stage": "audit",
+      "n": 12,
+      "mae": 11140059.9608048,
+      "rmse": 12916026.392890785,
+      "bias": -11117390.272825914,
+      "wape": 72.1051843174892,
+      "matches_stored": true
+    },
+    {
+      "model": "prophet_cp0.05_sp0.1",
+      "stage": "development",
+      "n": 60,
+      "mae": 3511337.420114153,
+      "rmse": 4187454.567417247,
+      "bias": 2241495.629419114,
+      "wape": 94.52961446738463,
+      "matches_stored": true
+    },
+    {
+      "model": "prophet_cp0.05_sp0.1",
+      "stage": "audit",
+      "n": 12,
+      "mae": 11218467.027590327,
+      "rmse": 12976769.234157583,
+      "bias": -11172901.763711685,
+      "wape": 72.61268212470529,
+      "matches_stored": true
+    },
+    {
+      "model": "prophet_cp0.05_sp1.0",
+      "stage": "development",
+      "n": 60,
+      "mae": 3515219.2459510523,
+      "rmse": 4205644.294508165,
+      "bias": 2250157.1471124236,
+      "wape": 94.63411809545798,
+      "matches_stored": true
+    },
+    {
+      "model": "prophet_cp0.05_sp1.0",
+      "stage": "audit",
+      "n": 12,
+      "mae": 11148853.270395255,
+      "rmse": 12924999.86144402,
+      "bias": -11127450.95290786,
+      "wape": 72.16209991857315,
+      "matches_stored": true
+    },
+    {
+      "model": "prophet_cp0.05_sp10.0",
+      "stage": "development",
+      "n": 60,
+      "mae": 3522034.0227917316,
+      "rmse": 4206001.866887689,
+      "bias": 2264550.0554218534,
+      "wape": 94.81758044907303,
+      "matches_stored": true
+    },
+    {
+      "model": "prophet_cp0.05_sp10.0",
+      "stage": "audit",
+      "n": 12,
+      "mae": 11159164.568498785,
+      "rmse": 12935956.1620304,
+      "bias": -11140063.308339627,
+      "wape": 72.2288408564966,
+      "matches_stored": true
+    },
+    {
+      "model": "prophet_cp0.1_sp0.1",
+      "stage": "development",
+      "n": 60,
+      "mae": 3499652.5768063744,
+      "rmse": 4179654.776353706,
+      "bias": 2225145.693364905,
+      "wape": 94.2150438064539,
+      "matches_stored": true
+    },
+    {
+      "model": "prophet_cp0.1_sp0.1",
+      "stage": "audit",
+      "n": 12,
+      "mae": 11211532.501051417,
+      "rmse": 12969170.206737965,
+      "bias": -11164525.712250967,
+      "wape": 72.56779768817604,
+      "matches_stored": true
+    },
+    {
+      "model": "prophet_cp0.1_sp1.0",
+      "stage": "development",
+      "n": 60,
+      "mae": 3523434.779481502,
+      "rmse": 4210355.217431969,
+      "bias": 2262643.465582324,
+      "wape": 94.85529057886234,
+      "matches_stored": true
+    },
+    {
+      "model": "prophet_cp0.1_sp1.0",
+      "stage": "audit",
+      "n": 12,
+      "mae": 11155270.254011352,
+      "rmse": 12931663.388775252,
+      "bias": -11135003.154652154,
+      "wape": 72.20363450528355,
+      "matches_stored": true
+    },
+    {
+      "model": "prophet_cp0.1_sp10.0",
+      "stage": "development",
+      "n": 60,
+      "mae": 3527663.963427195,
+      "rmse": 4216057.434662053,
+      "bias": 2265122.3587660226,
+      "wape": 94.96914552359306,
+      "matches_stored": true
+    },
+    {
+      "model": "prophet_cp0.1_sp10.0",
+      "stage": "audit",
+      "n": 12,
+      "mae": 11181552.735188873,
+      "rmse": 12959317.882023651,
+      "bias": -11166641.904228443,
+      "wape": 72.3737505689577,
+      "matches_stored": true
+    }
+  ],
+  "all_metrics_match": true,
+  "financial": {
+    "net_sales": 626946741.8100001,
+    "gross_profit": 288487498.72,
+    "margin_basis": 478720670.03000003,
+    "margin_pct": 60.26217725295241,
+    "basis_coverage_pct": 76.35746995796322
+  },
+  "unlocated_segments": {
+    "net_sales": 475750341.11,
+    "pct_of_total": 75.8836930448837
+  },
+  "paper_sha256": "4c40147be0de0563e2a58bc0210c0a13cf850bf1382577fff497422b44ebe862"
+}

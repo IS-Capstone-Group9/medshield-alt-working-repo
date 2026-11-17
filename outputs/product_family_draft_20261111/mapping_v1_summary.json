@@ -1,0 +1,20 @@
+{
+ "labels": 5623,
+ "families_v1": 3507,
+ "labels_changed": 43,
+ "changed_by_basis": {
+  "split_product_line": 41,
+  "merged": 2
+ },
+ "hyclens_families": [
+  "HYCLENS GARGLE",
+  "HYCLENS OB WASH",
+  "HYCLENS SKIN CLEANSER",
+  "HYCLENS WOUND CARE"
+ ],
+ "catalog_corrections_requested": [
+  "SANOMAX FA: one product, two categories",
+  "XED: one product, two categories"
+ ],
+ "status": "candidate_v1_not_applied"
+}

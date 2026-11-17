@@ -1,0 +1,432 @@
+import {
+  SALES_DATA_NAV_ITEM,
+  WEATHER_VALIDATION_NAV_ITEM,
+  SALES_DATA_PAGE,
+  WEATHER_VALIDATION_PAGE,
+  DATABRICKS_SOURCE_PAGE,
+} from './dashboard-markup'
+import { DashboardDataStatus } from '@/types/api.types'
+import { installDashboardFilterPanel } from './dashboard-filter-panel'
+import { installAnalyticsReadingGuide } from './analytics-reading-guide'
+
+const UNSUPPORTED_DASHBOARD_LABELS = new Map([
+  ['Execute Purchase Order', 'Save Draft Plan'],
+  ['Confirm & Execute Order', 'Save Draft for Review'],
+])
+
+function replaceUnsupportedLabels(root: HTMLElement) {
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT)
+  let node = walker.nextNode()
+  while (node) {
+    const value = node.nodeValue?.trim()
+    if (value && UNSUPPORTED_DASHBOARD_LABELS.has(value)) {
+      node.nodeValue = node.nodeValue?.replace(value, UNSUPPORTED_DASHBOARD_LABELS.get(value)!) ?? ''
+    }
+    node = walker.nextNode()
+  }
+}
+
+function replaceSelectOptions(select: HTMLSelectElement | null, years: string[], includeAll: boolean) {
+  if (!select || years.length === 0) return
+  const previousValue = select.value
+  const fragment = document.createDocumentFragment()
+
+  if (includeAll) {
+    const option = document.createElement('option')
+    option.value = 'all'
+    option.textContent = `All Years (${years[years.length - 1]}–${years[0]})`
+    fragment.appendChild(option)
+  }
+
+  years.forEach((year) => {
+    const option = document.createElement('option')
+    option.value = year
+    option.textContent = year
+    fragment.appendChild(option)
+  })
+
+  select.replaceChildren(fragment)
+  select.value = previousValue === 'all' && includeAll
+    ? 'all'
+    : years.includes(previousValue)
+      ? previousValue
+      : years[0]
+}
+
+function installDescriptivePeriodControls(root: HTMLElement) {
+  const selector = root.querySelector<HTMLElement>('.comparison-selector')
+  if (selector && !selector.querySelector('#descriptivePeriodSelect')) {
+    selector.replaceChildren()
+    const label = document.createElement('label')
+    label.setAttribute('for', 'descriptivePeriodSelect')
+    label.className = 'sr-only'
+    label.textContent = 'Historical period'
+    const select = document.createElement('select')
+    select.id = 'descriptivePeriodSelect'
+    select.className = 'topbar-select'
+    select.setAttribute('aria-label', 'Historical period')
+    ;[
+      ['3', 'Last 3 Months'],
+      ['6', 'Last 6 Months'],
+      ['12', 'Last 12 Months'],
+      ['all', 'All recorded dates'],
+      ['custom', 'Custom Date Range'],
+    ].forEach(([value, text]) => select.add(new Option(text, value, false, value === 'all')))
+    selector.append(label, select)
+
+    const compareWrap = document.createElement('span')
+    compareWrap.id = 'descriptiveComparisonWrap'
+    const compareLabel = document.createElement('label')
+    compareLabel.setAttribute('for', 'descriptiveComparisonSelect')
+    compareLabel.className = 'sr-only'
+    compareLabel.textContent = 'Comparison view'
+    const compareSelect = document.createElement('select')
+    compareSelect.id = 'descriptiveComparisonSelect'
+    compareSelect.className = 'topbar-select'
+    compareSelect.setAttribute('aria-label', 'Comparison view')
+    compareSelect.add(new Option('No prior-year overlay', 'single', true, true))
+    compareSelect.add(new Option('Same dates last year', 'yoy'))
+    compareWrap.append(compareLabel, compareSelect)
+    selector.append(compareWrap)
+  }
+
+  if (selector && !selector.querySelector('#analysisScopeSelect')) {
+    const label = document.createElement('label')
+    label.setAttribute('for', 'analysisScopeSelect')
+    label.className = 'sr-only'
+    label.textContent = 'Analysis scope'
+    const select = document.createElement('select')
+    select.id = 'analysisScopeSelect'
+    select.className = 'topbar-select'
+    select.setAttribute('aria-label', 'Analysis scope')
+    select.add(new Option('All available years', 'extended', true, true))
+    select.add(new Option('Study · Jan 2017–Sep 2026', 'capstone'))
+    selector.prepend(label, select)
+  }
+
+  if (selector && !selector.querySelector('#chartGranularitySelect')) {
+    const label = document.createElement('label')
+    label.setAttribute('for', 'chartGranularitySelect')
+    label.className = 'sr-only'
+    label.textContent = 'Chart granularity'
+    const select = document.createElement('select')
+    select.id = 'chartGranularitySelect'
+    select.className = 'topbar-select'
+    select.setAttribute('aria-label', 'Chart granularity')
+    select.add(new Option('Automatic', 'auto', true, true))
+    select.add(new Option('Monthly', 'monthly'))
+    select.add(new Option('Yearly', 'yearly'))
+    selector.append(label, select)
+  }
+
+  const singleYearWrap = root.querySelector<HTMLElement>('#singleYearWrap')
+  if (singleYearWrap) {
+    singleYearWrap.style.display = 'none'
+    singleYearWrap.setAttribute('aria-hidden', 'true')
+  }
+
+  if (selector && !selector.querySelector('#customDateRangeWrap')) {
+    const rangeWrap = document.createElement('span')
+    rangeWrap.id = 'customDateRangeWrap'
+    rangeWrap.className = 'custom-date-range'
+    rangeWrap.style.display = 'none'
+    rangeWrap.setAttribute('role', 'group')
+    rangeWrap.setAttribute('aria-label', 'Custom historical date range')
+
+    const today = new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'Asia/Manila', year: 'numeric', month: '2-digit', day: '2-digit',
+    }).format(new Date())
+    const currentYear = today.slice(0, 4)
+
+    const makeDateInput = (id: string, labelText: string, accessibleName: string, value: string) => {
+      const label = document.createElement('label')
+      label.setAttribute('for', id)
+      label.className = 'custom-date-label'
+      label.textContent = labelText
+      const input = document.createElement('input')
+      input.type = 'date'
+      input.id = id
+      input.className = 'topbar-select'
+      input.min = '2017-01-01'
+      input.max = today
+      input.value = value
+      input.setAttribute('aria-label', accessibleName)
+      return [label, input] as const
+    }
+
+    const [startLabel, startInput] = makeDateInput(
+      'customDateStart', 'From', 'Custom range start date', `${currentYear}-01-01`
+    )
+    const [endLabel, endInput] = makeDateInput(
+      'customDateEnd', 'To', 'Custom range end date', today
+    )
+    rangeWrap.append(startLabel, startInput, endLabel, endInput)
+    selector.append(rangeWrap)
+  }
+  root.querySelector<HTMLElement>('#yoyYearWrap')?.remove()
+}
+
+export function updateDashboardProvenance(
+  root: HTMLElement,
+  status: DashboardDataStatus,
+  availableYears: string[]
+) {
+  const financial = status.release?.financial_publication
+  const truth = status.release?.analytical_integrity
+  const scope=status.release?.financial_scope
+  const original=status.release?.original_itemized
+  root.dataset.analyticalScope = scope?.id && scope.id!=='itemized' ? scope.id : original || truth ? 'itemized_product_sales' : 'legacy'
+  const financialApproved = !original && status.source === 'databricks' && status.mode === 'live' && financial?.status === 'approved'
+    && financial.scope === 'descriptive_company_financial_history_and_source_label_commercial_reporting'
+  root.dataset.financialPublication = financialApproved ? 'approved' : 'candidate'
+  const financialLabel = root.querySelector<HTMLElement>('[data-financial-status]')
+  if (financialLabel) financialLabel.textContent = original ? 'Financial scope · '+(scope?.label??'Exclude Contracts') : truth ? 'Sales · Original itemized records' : financialApproved ? 'Sales · Financial scope approved' : 'Sales · Candidate'
+  const publicationLimits = root.querySelector<HTMLElement>('[data-publication-limits]')
+  if (publicationLimits) publicationLimits.textContent = original ? (scope?.note??'Original Gold itemized financial candidates; contracts excluded.')+' Financial publication, units, mappings and models retain independent review. Product and area analyses remain itemized-only.' : truth
+    ? 'Itemized product sales only. Contracts without product details and unmatched replacement rows are excluded. These are not complete company totals. Earlier stored research remains unavailable until correction-bound results are published. Current monthly STL uses this corrected population. Product units and planning inputs retain their separate review requirements.'
+    : (financialApproved
+    ? 'Descriptive financial reporting is approved. Product identity and derived mappings retain their separate review status. '
+    : 'Sales business approval is pending. ') + 'Historical DOH and PAGASA observations and NASA POWER monthly proxies are available in Sales Diagnostics. Forecast research remains unpublished; external model joins require a separate supported methodology. Planning uses reviewed scenario assumptions and does not execute purchases.'
+  const years = [...new Set(availableYears)]
+    .filter((year) => /^\d{4}$/.test(year) && Number(year) >= 2017)
+    .sort((a, b) => Number(b) - Number(a))
+  const currentYear = new Intl.DateTimeFormat('en', { timeZone: 'Asia/Manila', year: 'numeric' }).format(new Date())
+  // An estimate option is a selectable scope, not evidence of a source year.
+  const offeredYears = years.length
+    ? [...new Set([...years, currentYear])].sort((a, b) => Number(b) - Number(a))
+    : []
+
+  replaceSelectOptions(root.querySelector<HTMLSelectElement>('#topbarYearSelect'), offeredYears, false)
+
+  const statusBar = root.querySelector<HTMLElement>('.data-freshness-bar')
+  if (statusBar) {
+    const loadedAt = new Date(status.loaded_at)
+    const loadedLabel = Number.isNaN(loadedAt.getTime())
+      ? 'Unavailable'
+      : loadedAt.toLocaleString('en-PH', { timeZone: 'Asia/Manila' })
+
+    statusBar.replaceChildren()
+    const summary = document.createElement('div')
+    summary.textContent = `${original ? (scope?.label??'Original Gold itemized sales') : truth ? 'Itemized sales · Original-source correction' : financialApproved ? 'Financial scope approved' : 'Candidate data'} · ${years.length ? `${years[years.length - 1]}–${years[0]}` : 'Years unavailable'}${truth || financialApproved ? '' : ' · Approval pending'}`
+    summary.title = summary.textContent.includes('Approval pending') ? 'Approval pending: the required reviewer has not recorded acceptance; technical checks do not grant approval.' : 'Review source details for coverage and publication limits.'
+    const details = document.createElement('div')
+    details.textContent = `Loaded: ${loadedLabel} PHT${truth ? ` · ${truth.removed_rows.toLocaleString()} unmatched replacement rows excluded` : ''}`
+    statusBar.append(summary)
+    const sourceDetails = document.createElement('details')
+    sourceDetails.dataset.sourceDetails = 'true'
+    const sourceSummary = document.createElement('summary')
+    sourceSummary.textContent = 'Source details'
+    const sourceMessage = document.createElement('p')
+    sourceMessage.textContent = `Databricks Gold · ${status.message} Years: ${years.join(', ') || 'Unavailable'}.`
+    sourceDetails.append(sourceSummary, details, sourceMessage)
+    if (status.release) {
+      const label = document.createElement('p'); label.textContent = truth
+        ? `Original-source correction ${truth.id} · ${truth.kept_rows.toLocaleString()} retained itemized records · Correction approval remains separate from the predecessor financial release`
+        : financialApproved
+        ? `Approved financial release ${financial.publication_id} · Source fact version ${status.release.fact_delta_version} · Decision ${financial.decision_date}`
+        : `Candidate dataset · Fact version ${status.release.fact_delta_version} · Release approval pending`
+      const identity = document.createElement('p'); identity.textContent = `Dataset: ${status.release.dataset_id}. Policy: ${status.release.policy_version}. Databricks is the analytical source; product identities and derived mappings retain their review status.`
+      sourceDetails.append(label, identity)
+    }
+    statusBar.append(sourceDetails)
+    const sourcePageStatus = root.querySelector<HTMLElement>('#sourcePageStatus')
+    if (sourcePageStatus) sourcePageStatus.textContent = summary.textContent
+    const sourcePageEvidence = root.querySelector<HTMLElement>('#sourcePageEvidence')
+    if (sourcePageEvidence) sourcePageEvidence.textContent = `${sourceMessage.textContent} ${details.textContent}. ${truth ? `Correction: ${truth.id}. ${truth.kept_rows.toLocaleString()} retained itemized records. ` : ''}${status.release ? `Fact version ${status.release.fact_delta_version}. Dataset: ${status.release.dataset_id}. Policy: ${status.release.policy_version}.` : 'Release identity unavailable.'}`
+    statusBar.dataset.source = status.source
+    statusBar.dataset.mode = status.mode
+  }
+
+  const badge = root.querySelector<HTMLElement>('.topbar-badge')
+  if (badge) {
+    badge.remove()
+  }
+}
+
+export function applyScenarioSafetyLabels(root: HTMLElement) {
+  replaceUnsupportedLabels(root)
+}
+
+export function setCardModel(root: HTMLElement, id: string, name: string, note: string) {
+  const canvas = root.querySelector(`#${id}`)
+  const card = canvas?.closest('.chart-card')
+  if (card && card instanceof HTMLElement) {
+    card.dataset.model = `${name}: ${note}`
+  }
+}
+
+function assignSalesDiagnosticsContent(root: HTMLElement) {
+  const salesDiagnosticsPage = root.querySelector<HTMLElement>('#page-revenue')
+  if (!salesDiagnosticsPage) return
+
+  const insightCards = Array.from(root.querySelectorAll<HTMLElement>('.dss-insight-card'))
+  const findInsight = (badge: string) =>
+    insightCards.find(
+      (card) => card.querySelector('.insight-badge')?.textContent?.trim() === badge
+    ) ?? null
+
+  // These historical-sales sections were emitted as direct children of
+  // `.content`, outside every `.page`, so the browser displayed them under
+  // every module. Give them one explicit owner: Sales Diagnostics.
+  const sections = [
+    findInsight('DSS Executive Takeaway'),
+    root.querySelector('#growthChart')?.closest<HTMLElement>('.chart-grid-2') ?? null,
+    root.querySelector<HTMLElement>('[data-sales-growth-detail]'),
+    root.querySelector('#revenueHeatmapGrid')?.closest<HTMLElement>('.chart-card') ?? null,
+    findInsight('Seasonality Pattern Recognition'),
+  ].filter((section): section is HTMLElement => section instanceof HTMLElement)
+
+  if (sections.length === 0) return
+
+  let deepDive = salesDiagnosticsPage.querySelector<HTMLElement>(
+    ':scope > [data-sales-diagnostics-deep-dive]'
+  )
+  if (!deepDive) {
+    deepDive = document.createElement('section')
+    deepDive.dataset.salesDiagnosticsDeepDive = 'true'
+    deepDive.setAttribute('aria-label', 'Historical sales performance analytics')
+    salesDiagnosticsPage.appendChild(deepDive)
+  }
+
+  sections.forEach((section) => deepDive?.appendChild(section))
+}
+
+export function correctOverviewEvidence(root: Element) {
+  const overview = root.querySelector<HTMLElement>('#page-overview')
+  if (!overview) return
+
+  const scopeNotice = overview.querySelector<HTMLElement>('.compliance-warning-banner')
+  if (scopeNotice) {
+    // The publication strip carries the visible status and its full limits.
+    scopeNotice.remove()
+  }
+
+  const salesChart = overview.querySelector('#overviewBaselineChart')?.closest<HTMLElement>('.chart-card')
+  const salesBadge = salesChart?.querySelector<HTMLElement>('.status-pill')
+  if (salesBadge) {
+    salesBadge.textContent = 'DATABRICKS GOLD · CANDIDATE'
+    salesBadge.classList.remove('status-ready')
+  }
+  const salesSubtitle = salesChart?.querySelector<HTMLElement>('.chart-subtitle')
+  if (salesSubtitle) salesSubtitle.textContent = 'Observed net sales and transaction gross profit for the selected historical period.'
+
+  const replaceCard = (currentTitle: string, title: string, subtitle: string, messages: string[]) => {
+    const currentHeading = Array.from(overview.querySelectorAll<HTMLElement>('.chart-title'))
+      .find((heading) => heading.textContent?.trim() === currentTitle)
+    const card = currentHeading?.closest<HTMLElement>('.chart-card')
+    if (!card) return
+    const header = document.createElement('div')
+    header.className = 'chart-header'
+    const heading = document.createElement('div')
+    heading.className = 'chart-title'
+    heading.textContent = title
+    const description = document.createElement('div')
+    description.className = 'chart-subtitle'
+    description.textContent = subtitle
+    const headingGroup = document.createElement('div')
+    headingGroup.append(heading, description)
+    header.appendChild(headingGroup)
+    const body = document.createElement('div')
+    body.style.display = 'grid'
+    body.style.gap = '10px'
+    messages.forEach((message) => {
+      const row = document.createElement('p')
+      row.textContent = message
+      body.appendChild(row)
+    })
+    card.replaceChildren(header, body)
+  }
+
+  replaceCard('Model Publication Status', 'Evidence and publication status',
+    'Technical availability does not imply business approval.', [
+      'Historical sales: Databricks Gold candidate data; business approval pending.',
+      'Predictive forecast: no approved trained model is published. Sales-only baseline validation is available in Forecast Modeling.',
+      'Inventory planning: reviewed scenarios only; live stock, lead time, and cost inputs are unavailable.',
+    ])
+  replaceCard('Active Decision Focus', 'Planning review',
+    'No live disease or stock-out alert is published.', [
+      'Use historical sales evidence to review product and territory patterns.',
+      'Enter and review operational assumptions before treating a planning scenario as an action.',
+    ])
+
+  const insightTitle = Array.from(root.querySelectorAll<HTMLElement>('.dss-insight-card .insight-title'))
+    .find((title) => title.textContent?.includes('Baseline Stability & Epidemic Surge Readiness'))
+  if (insightTitle) insightTitle.textContent = 'Historical sales scope'
+
+  const helpBody = root.querySelector<HTMLElement>('#helpGuidanceModal .custom-modal-body')
+  if (helpBody) {
+    helpBody.textContent = 'MedShield shows historical sales evidence from Databricks Gold candidate views. Forecast Modeling provides sales-only baseline validation. Product and area priorities use derived mappings that need owner review. Planning outputs are scenarios based on entered assumptions; MedShield does not publish live disease alerts or execute purchases.'
+  }
+}
+
+export function enhanceDashboardContent(root: HTMLElement) {
+  // MedShield is intentionally light-only. Clear any legacy preference so a
+  // previously stored dark theme cannot leave the user in an unsupported mode.
+  root.querySelector('[aria-label="Toggle dark mode"]')?.remove()
+  document.documentElement.removeAttribute('data-theme')
+  try {
+    window.localStorage.removeItem('medshield-theme')
+  } catch {
+    // Storage can be unavailable in privacy-restricted browser contexts.
+  }
+
+  replaceUnsupportedLabels(root)
+  installDescriptivePeriodControls(root)
+  installDashboardFilterPanel(root)
+  correctOverviewEvidence(root)
+  const initialTitle = root.querySelector('#topbar-title')
+  const initialSubtitle = root.querySelector('#topbar-sub')
+  if (root.querySelector('#page-overview.active')) {
+    if (initialTitle) initialTitle.textContent = 'Recorded sales overview'
+    if (initialSubtitle) initialSubtitle.textContent = 'Sales, profit and coverage'
+  }
+
+  const navigation = root.querySelector('.nav')
+  if (navigation) {
+    navigation.id = 'dashboardNavigation'
+    if (!navigation.querySelector('#salesDataNavItem')) {
+      navigation.insertAdjacentHTML('beforeend', SALES_DATA_NAV_ITEM)
+    }
+    if (!navigation.querySelector('#weatherValidationNavItem')) {
+      navigation.insertAdjacentHTML('beforeend', WEATHER_VALIDATION_NAV_ITEM)
+    }
+
+    // Normalize the legacy inline routes into data attributes. A single
+    // delegated listener owns navigation after the dashboard runtime starts.
+    navigation.querySelectorAll<HTMLElement>('.nav-item').forEach((item) => {
+      const inlineHandler = item.getAttribute('onclick') ?? ''
+      const routeMatch = inlineHandler.match(/showPage\('([^']+)'/)
+      if (routeMatch?.[1]) item.dataset.dashboardPage = routeMatch[1]
+      const label = item.querySelector<HTMLElement>('.nav-label')
+      if (item.dataset.dashboardPage === 'data' && label) label.textContent = 'Data Source'
+      const name = label?.textContent?.trim() || item.getAttribute('aria-label')
+      if (name) {
+        item.setAttribute('aria-label', name)
+        item.setAttribute('title', name)
+      }
+      item.removeAttribute('onclick')
+    })
+    const sourceNav = navigation.querySelector('[data-dashboard-page="data"]')
+    if (sourceNav && !navigation.querySelector('.nav-evidence-label')) {
+      const label = document.createElement('div')
+      label.className = 'nav-evidence-label'
+      label.textContent = 'Data & evidence'
+      sourceNav.before(label)
+    }
+  }
+
+  const content = root.querySelector('.content')
+  if (content) {
+    const sourcePage = content.querySelector<HTMLElement>('#page-data')
+    if (sourcePage) sourcePage.innerHTML = DATABRICKS_SOURCE_PAGE
+    assignSalesDiagnosticsContent(root)
+
+    if (!content.querySelector('#page-sales-data')) {
+      content.insertAdjacentHTML('beforeend', SALES_DATA_PAGE)
+    }
+    if (!content.querySelector('#page-weather-validation')) {
+      content.insertAdjacentHTML('beforeend', WEATHER_VALIDATION_PAGE)
+    }
+  }
+  installAnalyticsReadingGuide(root)
+}

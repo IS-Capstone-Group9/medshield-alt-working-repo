@@ -1,0 +1,99 @@
+{
+ "labels": 5623,
+ "families": 3515,
+ "multi_label_families": 1002,
+ "top100_family_share": 0.5503767847715945,
+ "a_class_churn": {
+  "2018": {
+   "label": {
+    "a_items": 90,
+    "new_share": 0.7888888888888889
+   },
+   "family": {
+    "a_items": 68,
+    "new_share": 0.4411764705882353
+   }
+  },
+  "2019": {
+   "label": {
+    "a_items": 130,
+    "new_share": 0.3076923076923077
+   },
+   "family": {
+    "a_items": 113,
+    "new_share": 0.25663716814159293
+   }
+  },
+  "2020": {
+   "label": {
+    "a_items": 136,
+    "new_share": 0.3382352941176471
+   },
+   "family": {
+    "a_items": 124,
+    "new_share": 0.27419354838709675
+   }
+  },
+  "2021": {
+   "label": {
+    "a_items": 103,
+    "new_share": 0.49514563106796117
+   },
+   "family": {
+    "a_items": 91,
+    "new_share": 0.3626373626373626
+   }
+  },
+  "2022": {
+   "label": {
+    "a_items": 145,
+    "new_share": 0.35172413793103446
+   },
+   "family": {
+    "a_items": 130,
+    "new_share": 0.34615384615384615
+   }
+  },
+  "2023": {
+   "label": {
+    "a_items": 302,
+    "new_share": 0.6158940397350994
+   },
+   "family": {
+    "a_items": 190,
+    "new_share": 0.3736842105263158
+   }
+  },
+  "2024": {
+   "label": {
+    "a_items": 109,
+    "new_share": 0.3669724770642202
+   },
+   "family": {
+    "a_items": 88,
+    "new_share": 0.25
+   }
+  },
+  "2025": {
+   "label": {
+    "a_items": 134,
+    "new_share": 0.4626865671641791
+   },
+   "family": {
+    "a_items": 112,
+    "new_share": 0.4017857142857143
+   }
+  },
+  "2026": {
+   "label": {
+    "a_items": 131,
+    "new_share": 0.9312977099236641
+   },
+   "family": {
+    "a_items": 101,
+    "new_share": 0.6237623762376238
+   }
+  }
+ },
+ "status": "draft_rule_based_needs_human_review_not_applied"
+}

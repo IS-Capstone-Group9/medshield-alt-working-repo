@@ -1,0 +1,1016 @@
+{
+  "status": "done",
+  "checked_at_utc": "2026-10-13T04:27:14.455773+00:00",
+  "scope": "Client decision brief, structured research approach and canonical attribution",
+  "check_count": 158,
+  "failure_count": 0,
+  "checks": [
+    {
+      "check": "source_current:outputs/predictive_error_policy_20261010/policy.json",
+      "expected": "55c93ca278c8fa9a19efaecdd8327836bc3d35662fe733eb36917125bb4d0fcb",
+      "observed": "55c93ca278c8fa9a19efaecdd8327836bc3d35662fe733eb36917125bb4d0fcb",
+      "passed": true
+    },
+    {
+      "check": "source_current:outputs/predictive_validation/2026-10-09T13-28-48-501Z/input.json",
+      "expected": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba",
+      "observed": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba",
+      "passed": true
+    },
+    {
+      "check": "source_current:outputs/predictive_completion_20261009/models/fixed-origin-extended/eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a/run.json",
+      "expected": "9889baea07a1f222edc9d2d2576fefc0d2be4bc8e52dc4d9a3ff9919e0056f45",
+      "observed": "9889baea07a1f222edc9d2d2576fefc0d2be4bc8e52dc4d9a3ff9919e0056f45",
+      "passed": true
+    },
+    {
+      "check": "source_current:outputs/predictive_annual_release_20261010/models/annual-origin-2025-12-asof-2026-10-10/a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b/run.json",
+      "expected": "e25c713bb7faee9cf9020f9064fdf016d18df3793131e1ab43bdfcd169d61b6d",
+      "observed": "e25c713bb7faee9cf9020f9064fdf016d18df3793131e1ab43bdfcd169d61b6d",
+      "passed": true
+    },
+    {
+      "check": "source_current:outputs/predictive_error_optimization_20261010/report.json",
+      "expected": "2b6c6d02aa1d920c02d1e3806ba4c20bbfee242639c00d141537b23c70800094",
+      "observed": "2b6c6d02aa1d920c02d1e3806ba4c20bbfee242639c00d141537b23c70800094",
+      "passed": true
+    },
+    {
+      "check": "source_current:outputs/predictive_error_optimization_20261010/RESULTS.md",
+      "expected": "ffaffc3e2a50c9f707c589c42ba99f4bf385d75389901111755e7b7a9cc15707",
+      "observed": "ffaffc3e2a50c9f707c589c42ba99f4bf385d75389901111755e7b7a9cc15707",
+      "passed": true
+    },
+    {
+      "check": "source_current:outputs/predictive_error_optimization_20261010/qa/verification.json",
+      "expected": "874ead40411b7131127aff079ecc61b8ae7c85d0336da8468a039270f944455d",
+      "observed": "874ead40411b7131127aff079ecc61b8ae7c85d0336da8468a039270f944455d",
+      "passed": true
+    },
+    {
+      "check": "source_current:outputs/predictive_error_optimization_20261010/qa/REPORT.md",
+      "expected": "8de017892ee0d32c088d2fa76714f025517c8360803f61994c87d9052ab371a4",
+      "observed": "8de017892ee0d32c088d2fa76714f025517c8360803f61994c87d9052ab371a4",
+      "passed": true
+    },
+    {
+      "check": "source_current:outputs/predictive_error_optimization_20261010/delivery.json",
+      "expected": "97965466f37697305e40c1700465580c466ba066be1526c68e9b263e991492f3",
+      "observed": "97965466f37697305e40c1700465580c466ba066be1526c68e9b263e991492f3",
+      "passed": true
+    },
+    {
+      "check": "source_current:outputs/predictive_error_optimization_20261010/models/protocol.json",
+      "expected": "4c95566337bbce02a46cebca0979081a65c67441b61e570cb1f55a0e3a21e667",
+      "observed": "4c95566337bbce02a46cebca0979081a65c67441b61e570cb1f55a0e3a21e667",
+      "passed": true
+    },
+    {
+      "check": "source_current:outputs/predictive_error_optimization_20261010/models/f749f47ef44db53a35f56a822e2b35edc0877ad5126c4352a996dfb2f5a20e8b/run.json",
+      "expected": "7c22e0467925ee95fed2f5d287357ff0948bbc524e25715954cd28c22a83e841",
+      "observed": "7c22e0467925ee95fed2f5d287357ff0948bbc524e25715954cd28c22a83e841",
+      "passed": true
+    },
+    {
+      "check": "source_current:outputs/predictive_readiness_20261010/SOURCE_OWNER_REVIEW.md",
+      "expected": "08f8fc10d7c438568453d53544375c927e2a5085affde318c0758664a6f5e3fd",
+      "observed": "08f8fc10d7c438568453d53544375c927e2a5085affde318c0758664a6f5e3fd",
+      "passed": true
+    },
+    {
+      "check": "source_current:services/analytics_service/predictive/contracts.py",
+      "expected": "a6ece04850ba397a84c72309043c9ab6c83c3ee7a4fc1fe4b63f1b82b8b86d3a",
+      "observed": "a6ece04850ba397a84c72309043c9ab6c83c3ee7a4fc1fe4b63f1b82b8b86d3a",
+      "passed": true
+    },
+    {
+      "check": "source_current:services/analytics_service/predictive/engine.py",
+      "expected": "cdc5a39363c69f500897e849f2c37ab42c401ed789b6890e6abab808cbbee4c8",
+      "observed": "cdc5a39363c69f500897e849f2c37ab42c401ed789b6890e6abab808cbbee4c8",
+      "passed": true
+    },
+    {
+      "check": "source_current:services/analytics_service/predictive/models.py",
+      "expected": "2b2b6495e3ff54b7613800fded65832efc46fc1018ad2fe09f678baf857c4ac9",
+      "observed": "2b2b6495e3ff54b7613800fded65832efc46fc1018ad2fe09f678baf857c4ac9",
+      "passed": true
+    },
+    {
+      "check": "source_current:services/analytics_service/predictive/metrics.py",
+      "expected": "4841243a2b262d71845596d4d72b44a7aa7447602003cfdb79b971e1d7ac8baa",
+      "observed": "4841243a2b262d71845596d4d72b44a7aa7447602003cfdb79b971e1d7ac8baa",
+      "passed": true
+    },
+    {
+      "check": "source_current:services/analytics_service/predictive/extended_experiment.py",
+      "expected": "3d88a6aa92bb0b03140ce9830512cd1292d4a6d0fe85ad8bdc190d92b64f3b42",
+      "observed": "3d88a6aa92bb0b03140ce9830512cd1292d4a6d0fe85ad8bdc190d92b64f3b42",
+      "passed": true
+    },
+    {
+      "check": "source_current:services/analytics_service/predictive/annual_projection.py",
+      "expected": "62064b67e90832ce2e46474ff9b7495ba05a8032b66d1e68177483db412dac80",
+      "observed": "62064b67e90832ce2e46474ff9b7495ba05a8032b66d1e68177483db412dac80",
+      "passed": true
+    },
+    {
+      "check": "source_current:services/analytics_service/predictive/robust_error_experiment.py",
+      "expected": "0a07f75c83ed44c05524ad5032e86c3d3e889b32276dd6f3226a3dbd062e6bd6",
+      "observed": "0a07f75c83ed44c05524ad5032e86c3d3e889b32276dd6f3226a3dbd062e6bd6",
+      "passed": true
+    },
+    {
+      "check": "source_current:services/tests/test_predictive_robust_error.py",
+      "expected": "6eed6913afc702bedee334803a37f0b0d15acecef1d1fffeb82797c3e73e1e98",
+      "observed": "6eed6913afc702bedee334803a37f0b0d15acecef1d1fffeb82797c3e73e1e98",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:docs/CURRENT_STATE.md",
+      "expected": "15071e530e4ca8991d2950526cbfd3823dd1b776d99cdfab69e517a775dd75e3",
+      "observed": "15071e530e4ca8991d2950526cbfd3823dd1b776d99cdfab69e517a775dd75e3",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:docs/logic/PREDICTIVE_ANALYTICS_EXPLAINER.md",
+      "expected": "d779ef66055dc3836a087a195f388c466ad95b4025a122f31930e3a32681a7ec",
+      "observed": "d779ef66055dc3836a087a195f388c466ad95b4025a122f31930e3a32681a7ec",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:docs/PREDICTIVE_OPERATIONS.md",
+      "expected": "495f4e0b40b29dc70f762002435e4ee10d487088696b48bb15c72db88d815086",
+      "observed": "495f4e0b40b29dc70f762002435e4ee10d487088696b48bb15c72db88d815086",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:docs/TESTING.md",
+      "expected": "82bea46ed89cacf7b6afde0fcaf9cc3b8188a8a0d606b1d480de4ed667750b73",
+      "observed": "82bea46ed89cacf7b6afde0fcaf9cc3b8188a8a0d606b1d480de4ed667750b73",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/build_report.py",
+      "expected": "446858a673fde5ab53c1f87d37a1cbef838f25fcc456cab937f3de0faf81c4f7",
+      "observed": "446858a673fde5ab53c1f87d37a1cbef838f25fcc456cab937f3de0faf81c4f7",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/diagnosis.md",
+      "expected": "fea1f29abcb5e7f9df2240ecf021d1ab496ff068e441ffd373c3a41d76dbe8d8",
+      "observed": "fea1f29abcb5e7f9df2240ecf021d1ab496ff068e441ffd373c3a41d76dbe8d8",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/error-comparison.png",
+      "expected": "380a31b970e036a4fc52a6826cefdb21a0f32d1d5b858656b17eaa2b0d83cfc7",
+      "observed": "380a31b970e036a4fc52a6826cefdb21a0f32d1d5b858656b17eaa2b0d83cfc7",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/error-comparison.svg",
+      "expected": "c8e14c02076a2f144fd51b2694410f8bce7306e37731ccd5b07a9b4a1090e5e6",
+      "observed": "c8e14c02076a2f144fd51b2694410f8bce7306e37731ccd5b07a9b4a1090e5e6",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/evaluation.log",
+      "expected": "9897c50c9b74e14e0c3321aeda8ed7136b9946dcae00b14feaca1a0ce30d6f1b",
+      "observed": "9897c50c9b74e14e0c3321aeda8ed7136b9946dcae00b14feaca1a0ce30d6f1b",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/models/f749f47ef44db53a35f56a822e2b35edc0877ad5126c4352a996dfb2f5a20e8b/artifact-hashes.json",
+      "expected": "b61a8ac01ba452d9740dd057741625eaac7994e8ac2f705dc12d80cc91e0cf49",
+      "observed": "b61a8ac01ba452d9740dd057741625eaac7994e8ac2f705dc12d80cc91e0cf49",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/models/f749f47ef44db53a35f56a822e2b35edc0877ad5126c4352a996dfb2f5a20e8b/baseline-evaluations.json",
+      "expected": "9e6429cba377e667e9f187dfba21a986da5a9b7a0c7e570b97ad114275266735",
+      "observed": "9e6429cba377e667e9f187dfba21a986da5a9b7a0c7e570b97ad114275266735",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/models/f749f47ef44db53a35f56a822e2b35edc0877ad5126c4352a996dfb2f5a20e8b/baseline-predictions.json",
+      "expected": "e1ecff8d677496ed3ce0731d1b75a6d080f9a2f98e963f6ba5e4fb1bde609093",
+      "observed": "e1ecff8d677496ed3ce0731d1b75a6d080f9a2f98e963f6ba5e4fb1bde609093",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/models/f749f47ef44db53a35f56a822e2b35edc0877ad5126c4352a996dfb2f5a20e8b/development-freeze.json",
+      "expected": "17f012098a3bf6b776125402e7aab7624c38227f6bb51c6525c930cade936417",
+      "observed": "17f012098a3bf6b776125402e7aab7624c38227f6bb51c6525c930cade936417",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/models/f749f47ef44db53a35f56a822e2b35edc0877ad5126c4352a996dfb2f5a20e8b/evaluations.json",
+      "expected": "698e1554e864b070c0933f7c0e305c4802fe712337bfdde0e666001d9aeb29a5",
+      "observed": "698e1554e864b070c0933f7c0e305c4802fe712337bfdde0e666001d9aeb29a5",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/models/f749f47ef44db53a35f56a822e2b35edc0877ad5126c4352a996dfb2f5a20e8b/folds.json",
+      "expected": "c7a42fe01bef91a50520d93a9e447e95d58bce34a5e0e8466afc72ac6dd90726",
+      "observed": "c7a42fe01bef91a50520d93a9e447e95d58bce34a5e0e8466afc72ac6dd90726",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/models/f749f47ef44db53a35f56a822e2b35edc0877ad5126c4352a996dfb2f5a20e8b/input-manifest.json",
+      "expected": "fcedce34d7486dc5b311de051be585233e61abaca7b18f618da091d5b8c5bcb8",
+      "observed": "fcedce34d7486dc5b311de051be585233e61abaca7b18f618da091d5b8c5bcb8",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/models/f749f47ef44db53a35f56a822e2b35edc0877ad5126c4352a996dfb2f5a20e8b/model-cards.json",
+      "expected": "57c3023bc82eb8fccf8d9394916b46150177c44ddcddb1a554d6206bfaa681e6",
+      "observed": "57c3023bc82eb8fccf8d9394916b46150177c44ddcddb1a554d6206bfaa681e6",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/models/f749f47ef44db53a35f56a822e2b35edc0877ad5126c4352a996dfb2f5a20e8b/predictions.json",
+      "expected": "b18a3cfbd499be498a2be3f27045a4ec90ebab5c2df7e8e1306e9a95a0f23412",
+      "observed": "b18a3cfbd499be498a2be3f27045a4ec90ebab5c2df7e8e1306e9a95a0f23412",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/models/f749f47ef44db53a35f56a822e2b35edc0877ad5126c4352a996dfb2f5a20e8b/RESULTS.md",
+      "expected": "0346be1372ada825f79f209f7606d912fab4f7d8289ee4519ace8c4899a86d26",
+      "observed": "0346be1372ada825f79f209f7606d912fab4f7d8289ee4519ace8c4899a86d26",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/models/f749f47ef44db53a35f56a822e2b35edc0877ad5126c4352a996dfb2f5a20e8b/run.json",
+      "expected": "7c22e0467925ee95fed2f5d287357ff0948bbc524e25715954cd28c22a83e841",
+      "observed": "7c22e0467925ee95fed2f5d287357ff0948bbc524e25715954cd28c22a83e841",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/models/f749f47ef44db53a35f56a822e2b35edc0877ad5126c4352a996dfb2f5a20e8b/warnings.json",
+      "expected": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "observed": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/models/protocol.json",
+      "expected": "4c95566337bbce02a46cebca0979081a65c67441b61e570cb1f55a0e3a21e667",
+      "observed": "4c95566337bbce02a46cebca0979081a65c67441b61e570cb1f55a0e3a21e667",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/original-identities.json",
+      "expected": "567cdda8d5165c477192a596a824496be13ee50d1b2dfb99cf84a9f35507f150",
+      "observed": "567cdda8d5165c477192a596a824496be13ee50d1b2dfb99cf84a9f35507f150",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/prepare.log",
+      "expected": "a2e3c16d5293877ced37ab1f02b0965341011167cfadd04bca1c8cd43f3d5be1",
+      "observed": "a2e3c16d5293877ced37ab1f02b0965341011167cfadd04bca1c8cd43f3d5be1",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/qa/artifact-hashes.json",
+      "expected": "d365bc363480ee07205ce4b427c2450e434ff7dbcf550b34ba72f2cc60234fc0",
+      "observed": "d365bc363480ee07205ce4b427c2450e434ff7dbcf550b34ba72f2cc60234fc0",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/qa/check_prefit.py",
+      "expected": "142ef339cec04488d31eebab6e7a834f88d490ad6a2bfd2a07adb0a04abd2367",
+      "observed": "142ef339cec04488d31eebab6e7a834f88d490ad6a2bfd2a07adb0a04abd2367",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/qa/independent-oracle-tests.log",
+      "expected": "7c213cc06973b5e159ddbd7650bf99a701de63d88cb5189418faa631ca45aeb9",
+      "observed": "7c213cc06973b5e159ddbd7650bf99a701de63d88cb5189418faa631ca45aeb9",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/qa/independent_oracle.py",
+      "expected": "13e9b34c9ab7e4f4ac703608b7cab24170bcef5cb184e9d3ece85c0eacb72b30",
+      "observed": "13e9b34c9ab7e4f4ac703608b7cab24170bcef5cb184e9d3ece85c0eacb72b30",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/qa/prefit-expectations.json",
+      "expected": "6eb5ebb44c9124d37e429cc4f230277a0e12ef4d59f99fa943e48fd713dd0ba2",
+      "observed": "6eb5ebb44c9124d37e429cc4f230277a0e12ef4d59f99fa943e48fd713dd0ba2",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/qa/prefit-review.json",
+      "expected": "1749a50601c929540a7fb8bcf3ec88ded852e005650c3291521152e39552df5d",
+      "observed": "1749a50601c929540a7fb8bcf3ec88ded852e005650c3291521152e39552df5d",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/qa/prepare_expectations.py",
+      "expected": "3ec513e821f016c9709bcc7c2b8f23df89a7c636809a053191e6b0c376131907",
+      "observed": "3ec513e821f016c9709bcc7c2b8f23df89a7c636809a053191e6b0c376131907",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/qa/REPORT.md",
+      "expected": "8de017892ee0d32c088d2fa76714f025517c8360803f61994c87d9052ab371a4",
+      "observed": "8de017892ee0d32c088d2fa76714f025517c8360803f61994c87d9052ab371a4",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/qa/test_independent_oracle.py",
+      "expected": "5e026e14e6d4c2a6193817a7865e2d82e136729a4a04fb0593d2303190a5ab1f",
+      "observed": "5e026e14e6d4c2a6193817a7865e2d82e136729a4a04fb0593d2303190a5ab1f",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/qa/verification.json",
+      "expected": "874ead40411b7131127aff079ecc61b8ae7c85d0336da8468a039270f944455d",
+      "observed": "874ead40411b7131127aff079ecc61b8ae7c85d0336da8468a039270f944455d",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/qa/verify_results.py",
+      "expected": "7568987a660e59d52dc7ca5224c902e32f079cc354649f02278fc20ae589f1bf",
+      "observed": "7568987a660e59d52dc7ca5224c902e32f079cc354649f02278fc20ae589f1bf",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/qa/visual-review.json",
+      "expected": "7bd37580a50d09a271c8a069341be18f2caa1662c95a31f61049aede656be01d",
+      "observed": "7bd37580a50d09a271c8a069341be18f2caa1662c95a31f61049aede656be01d",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/README.md",
+      "expected": "5074f05de5ce228dea18dce9cb9cf571aa35a2b75db8293883b0a305824d72a2",
+      "observed": "5074f05de5ce228dea18dce9cb9cf571aa35a2b75db8293883b0a305824d72a2",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/report-attempt-1/error-comparison.png",
+      "expected": "110e53441d32ffadd80ce9d566a9f7ae9af35c0c3621229408fed03a8a5b7223",
+      "observed": "110e53441d32ffadd80ce9d566a9f7ae9af35c0c3621229408fed03a8a5b7223",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/report-attempt-1/error-comparison.svg",
+      "expected": "54d3e57a7c26e1f65c2229b5e554942052bdc681e1a6669063cadf96e2b600fd",
+      "observed": "54d3e57a7c26e1f65c2229b5e554942052bdc681e1a6669063cadf96e2b600fd",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/report-attempt-1/report-build.log",
+      "expected": "c9ef0b80e83f21a5cddf239ebc7ede231391087e84833f22d9a5552692b40349",
+      "observed": "c9ef0b80e83f21a5cddf239ebc7ede231391087e84833f22d9a5552692b40349",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/report-attempt-1/report.json",
+      "expected": "1cff714cc0eb370c78717aafa9e955b8a6babe4dcb0813d6d1f073edb65f392c",
+      "observed": "1cff714cc0eb370c78717aafa9e955b8a6babe4dcb0813d6d1f073edb65f392c",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/report-attempt-1/RESULTS.md",
+      "expected": "8bcbbb07724b01cb993d18968f62f6697519c8b792b4d13e8f17380f169ed933",
+      "observed": "8bcbbb07724b01cb993d18968f62f6697519c8b792b4d13e8f17380f169ed933",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/report-attempt-2/error-comparison.png",
+      "expected": "0de9625a3ccfe807d4d0f078102c5a787007eea4bef139b485bef9a3066923ca",
+      "observed": "0de9625a3ccfe807d4d0f078102c5a787007eea4bef139b485bef9a3066923ca",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/report-attempt-2/error-comparison.svg",
+      "expected": "d470097134053b283d7866f8d7e4329407eee4ba10e21ecd9648315f2ca3b632",
+      "observed": "d470097134053b283d7866f8d7e4329407eee4ba10e21ecd9648315f2ca3b632",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/report-attempt-2/report-build.log",
+      "expected": "c9ef0b80e83f21a5cddf239ebc7ede231391087e84833f22d9a5552692b40349",
+      "observed": "c9ef0b80e83f21a5cddf239ebc7ede231391087e84833f22d9a5552692b40349",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/report-attempt-2/report.json",
+      "expected": "2b6c6d02aa1d920c02d1e3806ba4c20bbfee242639c00d141537b23c70800094",
+      "observed": "2b6c6d02aa1d920c02d1e3806ba4c20bbfee242639c00d141537b23c70800094",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/report-attempt-2/RESULTS.md",
+      "expected": "ffaffc3e2a50c9f707c589c42ba99f4bf385d75389901111755e7b7a9cc15707",
+      "observed": "ffaffc3e2a50c9f707c589c42ba99f4bf385d75389901111755e7b7a9cc15707",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/report-build.log",
+      "expected": "c9ef0b80e83f21a5cddf239ebc7ede231391087e84833f22d9a5552692b40349",
+      "observed": "c9ef0b80e83f21a5cddf239ebc7ede231391087e84833f22d9a5552692b40349",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/report.json",
+      "expected": "2b6c6d02aa1d920c02d1e3806ba4c20bbfee242639c00d141537b23c70800094",
+      "observed": "2b6c6d02aa1d920c02d1e3806ba4c20bbfee242639c00d141537b23c70800094",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/RESULTS.md",
+      "expected": "ffaffc3e2a50c9f707c589c42ba99f4bf385d75389901111755e7b7a9cc15707",
+      "observed": "ffaffc3e2a50c9f707c589c42ba99f4bf385d75389901111755e7b7a9cc15707",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/root-fixture-tests.log",
+      "expected": "7df5a777227046d61e7b8802619faf152ca576ffd85853c1383352c46d790c7c",
+      "observed": "7df5a777227046d61e7b8802619faf152ca576ffd85853c1383352c46d790c7c",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:outputs/predictive_error_optimization_20261010/seal_delivery.py",
+      "expected": "a3107a6e7bd9c1f3ba6911e7b3c45d4d1d04109c2338ac47b86a46dc63c3afd2",
+      "observed": "a3107a6e7bd9c1f3ba6911e7b3c45d4d1d04109c2338ac47b86a46dc63c3afd2",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:services/analytics_service/predictive/robust_error_experiment.py",
+      "expected": "0a07f75c83ed44c05524ad5032e86c3d3e889b32276dd6f3226a3dbd062e6bd6",
+      "observed": "0a07f75c83ed44c05524ad5032e86c3d3e889b32276dd6f3226a3dbd062e6bd6",
+      "passed": true
+    },
+    {
+      "check": "prior_delivery_preserved:services/tests/test_predictive_robust_error.py",
+      "expected": "6eed6913afc702bedee334803a37f0b0d15acecef1d1fffeb82797c3e73e1e98",
+      "observed": "6eed6913afc702bedee334803a37f0b0d15acecef1d1fffeb82797c3e73e1e98",
+      "passed": true
+    },
+    {
+      "check": "unknown_remains_null:max_mae_php",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "check": "unknown_remains_null:max_wape_percent",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "check": "unknown_remains_null:accepted_operational_use",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "check": "unknown_remains_null:accepted_evaluation_period",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "check": "unknown_remains_null:accepted_leads_months",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "check": "unknown_remains_null:numerical_acceptance_reviewer",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "check": "unknown_remains_null:numerical_acceptance_date",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "check": "unknown_remains_null:actuals_2026",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "check": "unknown_remains_null:assessment_2026",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "check": "unknown_remains_null:next_source_release_date",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "check": "unchanged_boundary:selection_changed",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "check": "unchanged_boundary:publication_approved",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "check": "unchanged_boundary:new_forecasts_issued",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "check": "unchanged_boundary:external_message_sent",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "check": "unchanged_boundary:fitting_executed",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "check": "unchanged_boundary:clinical_or_inventory_benefit_established",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "check": "both_metrics",
+      "expected": [
+        "mae_php",
+        "wape_percent"
+      ],
+      "observed": [
+        "mae_php",
+        "wape_percent"
+      ],
+      "passed": true
+    },
+    {
+      "check": "original_selection",
+      "expected": "last_value",
+      "observed": "last_value",
+      "passed": true
+    },
+    {
+      "check": "unselected_trial",
+      "expected": "last_value_l1_calibrated_10pct",
+      "observed": "last_value_l1_calibrated_10pct",
+      "passed": true
+    },
+    {
+      "check": "business_acceptance",
+      "expected": "not_assessed_thresholds_missing",
+      "observed": "not_assessed_thresholds_missing",
+      "passed": true
+    },
+    {
+      "check": "original_objective",
+      "expected": "open",
+      "observed": "open",
+      "passed": true
+    },
+    {
+      "check": "independent_status",
+      "expected": "PASS",
+      "observed": "PASS",
+      "passed": true
+    },
+    {
+      "check": "independent_failures",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\decision.json",
+      "expected": "88bf78ca32006f3687e7f83ff4c36966cfa37dcf7ee64513e0a8faedc4faf4a5",
+      "observed": "88bf78ca32006f3687e7f83ff4c36966cfa37dcf7ee64513e0a8faedc4faf4a5",
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\source-identities.json",
+      "expected": "6537185bdb8dab313282d835a0d6ac9c4a95c30229efd732ae2ceeb99ba7f6b0",
+      "observed": "6537185bdb8dab313282d835a0d6ac9c4a95c30229efd732ae2ceeb99ba7f6b0",
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\docs\\PREDICTIVE_CLIENT_DECISION_BRIEF.md",
+      "expected": "4fe032ac54537a693157e703b068537063370d4f3aca0c31b6b7880eba4de127",
+      "observed": "4fe032ac54537a693157e703b068537063370d4f3aca0c31b6b7880eba4de127",
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\docs\\OBJECTIVE_EVIDENCE_REGISTER.md",
+      "expected": "e1e946cfc6afaa247c4d6b3a6c0c30846bafc772e937713bc60a9b72b35c316e",
+      "observed": "e1e946cfc6afaa247c4d6b3a6c0c30846bafc772e937713bc60a9b72b35c316e",
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\README.md",
+      "expected": "5b6daf4796979c307e93a24560e5fe38df7aef37e8db0fd3db72b41a40176494",
+      "observed": "5b6daf4796979c307e93a24560e5fe38df7aef37e8db0fd3db72b41a40176494",
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\prepare.py",
+      "expected": "828ed0ba659c850f413a81f357d18d14af9340f3c829cc44b1b2c23fac58a69c",
+      "observed": "828ed0ba659c850f413a81f357d18d14af9340f3c829cc44b1b2c23fac58a69c",
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\check_and_seal.py",
+      "expected": "5dff8b9e630289ae08837d785191e5ec1380aee3d9bbd38b659bd78a60921532",
+      "observed": "5dff8b9e630289ae08837d785191e5ec1380aee3d9bbd38b659bd78a60921532",
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\qa\\expected-metrics.json",
+      "expected": "4bf30cb861fe88fa53326d4fe1cfe3d39df9b266efdb7af9aa82933ae80a5778",
+      "observed": "4bf30cb861fe88fa53326d4fe1cfe3d39df9b266efdb7af9aa82933ae80a5778",
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\qa\\expected_metrics.py",
+      "expected": "b801fa35466f308483518b3d4d5523e2c34d9fb7fb4c1bbf1b0daa01e975a4d6",
+      "observed": "b801fa35466f308483518b3d4d5523e2c34d9fb7fb4c1bbf1b0daa01e975a4d6",
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\qa\\check_brief.py",
+      "expected": "8e1e9a1cbc600e200841e07c4f7f71a82a9b03b766f173fa8f1fada4a896124f",
+      "observed": "8e1e9a1cbc600e200841e07c4f7f71a82a9b03b766f173fa8f1fada4a896124f",
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_policy_20261010\\policy.json",
+      "expected": "55c93ca278c8fa9a19efaecdd8327836bc3d35662fe733eb36917125bb4d0fcb",
+      "observed": "55c93ca278c8fa9a19efaecdd8327836bc3d35662fe733eb36917125bb4d0fcb",
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_validation\\2026-10-09T13-28-48-501Z\\input.json",
+      "expected": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba",
+      "observed": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba",
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\run.json",
+      "expected": "9889baea07a1f222edc9d2d2576fefc0d2be4bc8e52dc4d9a3ff9919e0056f45",
+      "observed": "9889baea07a1f222edc9d2d2576fefc0d2be4bc8e52dc4d9a3ff9919e0056f45",
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_annual_release_20261010\\models\\annual-origin-2025-12-asof-2026-10-10\\a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b\\run.json",
+      "expected": "e25c713bb7faee9cf9020f9064fdf016d18df3793131e1ab43bdfcd169d61b6d",
+      "observed": "e25c713bb7faee9cf9020f9064fdf016d18df3793131e1ab43bdfcd169d61b6d",
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\report.json",
+      "expected": "2b6c6d02aa1d920c02d1e3806ba4c20bbfee242639c00d141537b23c70800094",
+      "observed": "2b6c6d02aa1d920c02d1e3806ba4c20bbfee242639c00d141537b23c70800094",
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\RESULTS.md",
+      "expected": "ffaffc3e2a50c9f707c589c42ba99f4bf385d75389901111755e7b7a9cc15707",
+      "observed": "ffaffc3e2a50c9f707c589c42ba99f4bf385d75389901111755e7b7a9cc15707",
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\qa\\verification.json",
+      "expected": "874ead40411b7131127aff079ecc61b8ae7c85d0336da8468a039270f944455d",
+      "observed": "874ead40411b7131127aff079ecc61b8ae7c85d0336da8468a039270f944455d",
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\qa\\REPORT.md",
+      "expected": "8de017892ee0d32c088d2fa76714f025517c8360803f61994c87d9052ab371a4",
+      "observed": "8de017892ee0d32c088d2fa76714f025517c8360803f61994c87d9052ab371a4",
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\delivery.json",
+      "expected": "97965466f37697305e40c1700465580c466ba066be1526c68e9b263e991492f3",
+      "observed": "97965466f37697305e40c1700465580c466ba066be1526c68e9b263e991492f3",
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\models\\protocol.json",
+      "expected": "4c95566337bbce02a46cebca0979081a65c67441b61e570cb1f55a0e3a21e667",
+      "observed": "4c95566337bbce02a46cebca0979081a65c67441b61e570cb1f55a0e3a21e667",
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\models\\f749f47ef44db53a35f56a822e2b35edc0877ad5126c4352a996dfb2f5a20e8b\\run.json",
+      "expected": "7c22e0467925ee95fed2f5d287357ff0948bbc524e25715954cd28c22a83e841",
+      "observed": "7c22e0467925ee95fed2f5d287357ff0948bbc524e25715954cd28c22a83e841",
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_readiness_20261010\\SOURCE_OWNER_REVIEW.md",
+      "expected": "08f8fc10d7c438568453d53544375c927e2a5085affde318c0758664a6f5e3fd",
+      "observed": "08f8fc10d7c438568453d53544375c927e2a5085affde318c0758664a6f5e3fd",
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\contracts.py",
+      "expected": "a6ece04850ba397a84c72309043c9ab6c83c3ee7a4fc1fe4b63f1b82b8b86d3a",
+      "observed": "a6ece04850ba397a84c72309043c9ab6c83c3ee7a4fc1fe4b63f1b82b8b86d3a",
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\engine.py",
+      "expected": "cdc5a39363c69f500897e849f2c37ab42c401ed789b6890e6abab808cbbee4c8",
+      "observed": "cdc5a39363c69f500897e849f2c37ab42c401ed789b6890e6abab808cbbee4c8",
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\models.py",
+      "expected": "2b2b6495e3ff54b7613800fded65832efc46fc1018ad2fe09f678baf857c4ac9",
+      "observed": "2b2b6495e3ff54b7613800fded65832efc46fc1018ad2fe09f678baf857c4ac9",
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\metrics.py",
+      "expected": "4841243a2b262d71845596d4d72b44a7aa7447602003cfdb79b971e1d7ac8baa",
+      "observed": "4841243a2b262d71845596d4d72b44a7aa7447602003cfdb79b971e1d7ac8baa",
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\extended_experiment.py",
+      "expected": "3d88a6aa92bb0b03140ce9830512cd1292d4a6d0fe85ad8bdc190d92b64f3b42",
+      "observed": "3d88a6aa92bb0b03140ce9830512cd1292d4a6d0fe85ad8bdc190d92b64f3b42",
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\annual_projection.py",
+      "expected": "62064b67e90832ce2e46474ff9b7495ba05a8032b66d1e68177483db412dac80",
+      "observed": "62064b67e90832ce2e46474ff9b7495ba05a8032b66d1e68177483db412dac80",
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\robust_error_experiment.py",
+      "expected": "0a07f75c83ed44c05524ad5032e86c3d3e889b32276dd6f3226a3dbd062e6bd6",
+      "observed": "0a07f75c83ed44c05524ad5032e86c3d3e889b32276dd6f3226a3dbd062e6bd6",
+      "passed": true
+    },
+    {
+      "check": "qa_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\tests\\test_predictive_robust_error.py",
+      "expected": "6eed6913afc702bedee334803a37f0b0d15acecef1d1fffeb82797c3e73e1e98",
+      "observed": "6eed6913afc702bedee334803a37f0b0d15acecef1d1fffeb82797c3e73e1e98",
+      "passed": true
+    },
+    {
+      "check": "local_link:docs\\PREDICTIVE_CLIENT_DECISION_BRIEF.md:OBJECTIVE_EVIDENCE_REGISTER.md",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "check": "local_link:docs\\PREDICTIVE_CLIENT_DECISION_BRIEF.md:../outputs/predictive_error_optimization_20261010/RESULTS.md",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "check": "local_link:docs\\PREDICTIVE_CLIENT_DECISION_BRIEF.md:../outputs/predictive_error_policy_20261010/README.md",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "check": "local_link:docs\\PREDICTIVE_CLIENT_DECISION_BRIEF.md:../outputs/predictive_readiness_20261010/SOURCE_OWNER_REVIEW.md",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "check": "local_link:docs\\PREDICTIVE_CLIENT_DECISION_BRIEF.md:../outputs/predictive_client_decision_20261010/README.md",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "check": "local_link:docs\\PREDICTIVE_CLIENT_DECISION_BRIEF.md:CURRENT_STATE.md",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "check": "local_link:docs\\PREDICTIVE_CLIENT_DECISION_BRIEF.md:PREDICTIVE_OPERATIONS.md",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "check": "local_link:docs\\PREDICTIVE_CLIENT_DECISION_BRIEF.md:OBJECTIVE_EVIDENCE_REGISTER.md",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "check": "local_link:docs\\PREDICTIVE_CLIENT_DECISION_BRIEF.md:../outputs/predictive_error_policy_20261010/policy.json",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "check": "local_link:docs\\PREDICTIVE_CLIENT_DECISION_BRIEF.md:../outputs/predictive_error_optimization_20261010/qa/REPORT.md",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "check": "local_link:outputs\\predictive_client_decision_20261010\\README.md:../../docs/PREDICTIVE_CLIENT_DECISION_BRIEF.md",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "check": "local_link:outputs\\predictive_client_decision_20261010\\README.md:../../docs/OBJECTIVE_EVIDENCE_REGISTER.md",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "check": "local_link:outputs\\predictive_client_decision_20261010\\README.md:../../docs/PREDICTIVE_CLIENT_DECISION_BRIEF.md",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "check": "local_link:outputs\\predictive_client_decision_20261010\\README.md:decision.json",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "check": "local_link:outputs\\predictive_client_decision_20261010\\README.md:source-identities.json",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "check": "local_link:outputs\\predictive_client_decision_20261010\\README.md:qa/REPORT.md",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "check": "local_link:outputs\\predictive_client_decision_20261010\\qa\\REPORT.md:verification-first.json",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "check": "local_link:outputs\\predictive_client_decision_20261010\\qa\\REPORT.md:check_brief-first.py",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "check": "local_link:outputs\\predictive_client_decision_20261010\\qa\\REPORT.md:verification.json",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "check": "local_link:outputs\\predictive_client_decision_20261010\\qa\\REPORT.md:completion-verification.json",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "check": "python_syntax:prepare.py",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "check": "python_syntax:check_and_seal.py",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "check": "tracked_whitespace",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "check": "no_trailing_whitespace:PREDICTIVE_CLIENT_DECISION_BRIEF.md",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "check": "no_replacement_character:PREDICTIVE_CLIENT_DECISION_BRIEF.md",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "check": "no_trailing_whitespace:README.md",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "check": "no_replacement_character:README.md",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "check": "no_trailing_whitespace:prepare.py",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "check": "no_replacement_character:prepare.py",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "check": "no_trailing_whitespace:check_and_seal.py",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "check": "no_replacement_character:check_and_seal.py",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    }
+  ],
+  "independent_check_count": 193,
+  "source_identity_count": 20,
+  "prior_delivery_bindings_unchanged": 54,
+  "file_sha256": {
+    "docs/OBJECTIVE_EVIDENCE_REGISTER.md": "e1e946cfc6afaa247c4d6b3a6c0c30846bafc772e937713bc60a9b72b35c316e",
+    "docs/PREDICTIVE_CLIENT_DECISION_BRIEF.md": "4fe032ac54537a693157e703b068537063370d4f3aca0c31b6b7880eba4de127",
+    "outputs/predictive_client_decision_20261010/check_and_seal.py": "5dff8b9e630289ae08837d785191e5ec1380aee3d9bbd38b659bd78a60921532",
+    "outputs/predictive_client_decision_20261010/decision.json": "88bf78ca32006f3687e7f83ff4c36966cfa37dcf7ee64513e0a8faedc4faf4a5",
+    "outputs/predictive_client_decision_20261010/prepare.py": "828ed0ba659c850f413a81f357d18d14af9340f3c829cc44b1b2c23fac58a69c",
+    "outputs/predictive_client_decision_20261010/qa/artifact-hashes.json": "c8377ce6076662ae02d51998e97c596ff826a872ca804f1bdc3ba7aefb23aa06",
+    "outputs/predictive_client_decision_20261010/qa/check_brief-first.py": "c7ba5f04b9c53a0ddc3e3d6394ec45c07ceb2fb9442d4c7edbf20235d11f2118",
+    "outputs/predictive_client_decision_20261010/qa/check_brief.py": "8e1e9a1cbc600e200841e07c4f7f71a82a9b03b766f173fa8f1fada4a896124f",
+    "outputs/predictive_client_decision_20261010/qa/complete_review.py": "f2717df8f4a25fb68c70faddc7004921423c4c5ff0b0ac1a82894a233dfbf919",
+    "outputs/predictive_client_decision_20261010/qa/completion-verification.json": "044dae1eab26a789af4f389369d3d82cbe1000ef13a2a92f12c180e4a272adf8",
+    "outputs/predictive_client_decision_20261010/qa/expected-metrics.json": "4bf30cb861fe88fa53326d4fe1cfe3d39df9b266efdb7af9aa82933ae80a5778",
+    "outputs/predictive_client_decision_20261010/qa/expected_metrics.py": "b801fa35466f308483518b3d4d5523e2c34d9fb7fb4c1bbf1b0daa01e975a4d6",
+    "outputs/predictive_client_decision_20261010/qa/REPORT.md": "8006a4aef0cb36c3f26bef32f699bd26f9414e7754145f38d1cf3dec07d64336",
+    "outputs/predictive_client_decision_20261010/qa/verification-first.json": "6c9d656bb7166fda253663faeabd29fbbbac96801aea48e959184abff2bec123",
+    "outputs/predictive_client_decision_20261010/qa/verification.json": "16545462285f901983cee4f53be642b2fe902c6fc453258f1773fd63e8cb655d",
+    "outputs/predictive_client_decision_20261010/README.md": "5b6daf4796979c307e93a24560e5fe38df7aef37e8db0fd3db72b41a40176494",
+    "outputs/predictive_client_decision_20261010/source-identities.json": "6537185bdb8dab313282d835a0d6ac9c4a95c30229efd732ae2ceeb99ba7f6b0"
+  },
+  "git_head": "cc03b4c05398880b18987eca5ca9c1e140bf9dcb",
+  "dirty_tree": true,
+  "command": [
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\.venv-predictive\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "outputs/predictive_client_decision_20261010/check_and_seal.py"
+  ],
+  "environment": {
+    "python": "3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]",
+    "executable": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\.venv-predictive\\Scripts\\python.exe"
+  },
+  "review_mode": "Root document/source checks plus separate numerical/attribution reviewer",
+  "publication_approved": false,
+  "external_message_sent": false,
+  "business_error_acceptance": "not_assessed_thresholds_missing",
+  "applied_guidance": [
+    ".agents/business-analyst.md",
+    ".skills/business-analysis-frameworks.md",
+    ".skills/analytics-frameworks.md",
+    ".skills/documentation-standards.md",
+    ".skills/coding-standards.md",
+    ".skills/testing-standards.md",
+    ".skills/technology-stack.md"
+  ],
+  "remaining": [
+    "Client operational decision and scoped numeric limits",
+    "Source-owner timing/completeness and later accepted actuals",
+    "Registered prospective confirmation protocol and required lead coverage",
+    "Applicable model publication and original O3/inventory acceptance"
+  ]
+}

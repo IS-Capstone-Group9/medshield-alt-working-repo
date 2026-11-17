@@ -1,0 +1,71 @@
+{
+  "_operator_notes": "TEMPLATE. Separate Job and principal from the upload pipeline: only this Job may write <catalog>.medshield_warehouse. max_concurrent_runs must stay 1 (single-writer pointer). Queueing is enabled so a concurrent submission waits instead of being SKIPPED (the gateway reports SKIPPED as FAILED).",
+  "name": "medshield-promote-release",
+  "max_concurrent_runs": 1,
+  "queue": {
+    "enabled": true
+  },
+  "parameters": [
+    {
+      "name": "ingestion_id",
+      "default": ""
+    },
+    {
+      "name": "volume",
+      "default": "<VOLUME>"
+    },
+    {
+      "name": "candidate_schema",
+      "default": "<catalog>.medshield_intake"
+    },
+    {
+      "name": "release_schema",
+      "default": "<catalog>.medshield_warehouse"
+    },
+    {
+      "name": "base_release_id",
+      "default": "NONE"
+    },
+    {
+      "name": "first_month",
+      "default": ""
+    },
+    {
+      "name": "last_month",
+      "default": ""
+    },
+    {
+      "name": "approved_plan_sha256",
+      "default": ""
+    },
+    {
+      "name": "mode",
+      "default": "plan"
+    },
+    {
+      "name": "acknowledge_warnings",
+      "default": ""
+    }
+  ],
+  "tasks": [
+    {
+      "task_key": "promote",
+      "notebook_task": {
+        "notebook_path": "/Workspace/medshield/medshield_project/intake_promote",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "ingestion_id": "{{job.parameters.ingestion_id}}",
+          "volume": "{{job.parameters.volume}}",
+          "candidate_schema": "{{job.parameters.candidate_schema}}",
+          "release_schema": "{{job.parameters.release_schema}}",
+          "base_release_id": "{{job.parameters.base_release_id}}",
+          "first_month": "{{job.parameters.first_month}}",
+          "last_month": "{{job.parameters.last_month}}",
+          "approved_plan_sha256": "{{job.parameters.approved_plan_sha256}}",
+          "mode": "{{job.parameters.mode}}",
+          "acknowledge_warnings": "{{job.parameters.acknowledge_warnings}}"
+        }
+      }
+    }
+  ]
+}

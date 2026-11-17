@@ -1,0 +1,35 @@
+{
+  "checked_at": "2026-10-09T02:16:15.432Z",
+  "kind": "Live Databricks SELECT literal only; no table reads or writes",
+  "expected_basis": "Gateway sqlString must preserve text; search text should neither change bytes nor create invalid SQL",
+  "results": [
+    {
+      "input": "PLAIN",
+      "statement": "SELECT 'PLAIN' AS literal",
+      "expected": "PLAIN",
+      "actual": "PLAIN",
+      "pass": true
+    },
+    {
+      "input": "O'BRIEN",
+      "statement": "SELECT 'O''BRIEN' AS literal",
+      "expected": "O'BRIEN",
+      "actual": "OBRIEN",
+      "pass": false
+    },
+    {
+      "input": "A\\B",
+      "statement": "SELECT 'A\\B' AS literal",
+      "expected": "A\\B",
+      "actual": "AB",
+      "pass": false
+    },
+    {
+      "input": "A\\'B",
+      "statement": "SELECT 'A\\''B' AS literal",
+      "expected": "A\\'B",
+      "error": "Databricks SQL statement did not succeed (FAILED: BAD_REQUEST: \n[PARSE_SYNTAX_ERROR] Syntax error at or near '''. SQLSTATE: 42601 (line 1, pos 13)\n\n== SQL ==\nSELECT 'A\\''B' AS literal\n-------------^^^\n)",
+      "pass": false
+    }
+  ]
+}

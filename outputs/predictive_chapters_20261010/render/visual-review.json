@@ -1,0 +1,86 @@
+{
+  "status": "PASS",
+  "reviewed_at_utc": "2026-10-10T07:23:58.905693+00:00",
+  "timezone": "Asia/Manila",
+  "reviewer": "Root Technical Writer manual visual review",
+  "method": "Viewed page-01 through page-08 individually with view_image at original image resolution",
+  "page_count": 8,
+  "document_sha256": "eb92d197c4aae0df879db21f3bf2cedd40aebc05d9076cc0daf14636a2c3dcb3",
+  "pdf_sha256": "334a4e86c457d3ba7d3e39dcdeef1110429c2c1b0e13409e6d822515630e4a16",
+  "raster_receipt_sha256": "56cf31a133f56bde394ea2d764df58597de8a22c5df036723f42fe65a3b13648",
+  "pages": [
+    {
+      "page": 1,
+      "path": "outputs/predictive_chapters_20261010/render/page-01.png",
+      "sha256": "6a93b703c86796355a8df802ab136c9983845366ba9684ab195481ce108cb3dc",
+      "width": 980,
+      "height": 1268,
+      "characters": 2628
+    },
+    {
+      "page": 2,
+      "path": "outputs/predictive_chapters_20261010/render/page-02.png",
+      "sha256": "ae79c5a002d66c5ca4b244977b7c983d7082f2024dc14cae761ed59a208d459b",
+      "width": 980,
+      "height": 1268,
+      "characters": 2801
+    },
+    {
+      "page": 3,
+      "path": "outputs/predictive_chapters_20261010/render/page-03.png",
+      "sha256": "0cfc3b82560889d605828c321872c88f737ddefd902a294e5eec7c98e61faf7d",
+      "width": 980,
+      "height": 1268,
+      "characters": 2243
+    },
+    {
+      "page": 4,
+      "path": "outputs/predictive_chapters_20261010/render/page-04.png",
+      "sha256": "b69157f788737f21312f7e2d771d9d2061eedbd229bb1ff8cc38b8da958c158f",
+      "width": 980,
+      "height": 1268,
+      "characters": 1855
+    },
+    {
+      "page": 5,
+      "path": "outputs/predictive_chapters_20261010/render/page-05.png",
+      "sha256": "9206ee3ef14e4ff0e11dcc1266b29e92b8920865deb14e22e71a507a2cbdf329",
+      "width": 980,
+      "height": 1268,
+      "characters": 2917
+    },
+    {
+      "page": 6,
+      "path": "outputs/predictive_chapters_20261010/render/page-06.png",
+      "sha256": "f5818dbfb98d1bbaf911a9d25eb943fde2505a7cc4dedb2a46fad575ad4e54f3",
+      "width": 980,
+      "height": 1268,
+      "characters": 3042
+    },
+    {
+      "page": 7,
+      "path": "outputs/predictive_chapters_20261010/render/page-07.png",
+      "sha256": "741d168c561e3fb12939886756da57bd7f182111038ff6b1c014a0475abd6892",
+      "width": 980,
+      "height": 1268,
+      "characters": 3437
+    },
+    {
+      "page": 8,
+      "path": "outputs/predictive_chapters_20261010/render/page-08.png",
+      "sha256": "f74006d6c2cb187d7cc7590f22f7ed84f21279d945a62432f2d1da6d6ca46605",
+      "width": 980,
+      "height": 1268,
+      "characters": 1728
+    }
+  ],
+  "observations": [
+    "All eight pages have readable complete text and stable margins without overlap or clipping",
+    "All four tables have legible headers values and gray borders with adequate padding",
+    "The 21 recipe table continues on page three with its header repeated",
+    "The inherited audit chart and caption are legible and remain together on page four",
+    "Chapter five begins on page six without an orphaned heading",
+    "Currency and formula glyphs are present and all eight page numbers are correct"
+  ],
+  "limitations": "Native Word render used after documented packaged renderer and PowerShell COM failures; PDF and PNGs are internal QA artifacts, not a new analytical evaluation"
+}

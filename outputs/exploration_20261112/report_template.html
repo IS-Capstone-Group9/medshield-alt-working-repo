@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Forecast Accuracy Review</title>
+<style>
+:root{--surface:#fcfcfb;--page:#f4f4f1;--ink:#0b0b0b;--ink2:#52514e;--muted:#8a8984;--grid:#e6e5e0;--s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--best:#e8f1fc}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--surface:#1a1a19;--page:#121211;--ink:#f0efec;--ink2:#c3c2b7;--muted:#8f8e86;--grid:#2e2e2c;--s1:#3987e5;--s2:#d95926;--s3:#199e70;--best:#1d2c40}}
+:root[data-theme="dark"]{--surface:#1a1a19;--page:#121211;--ink:#f0efec;--ink2:#c3c2b7;--muted:#8f8e86;--grid:#2e2e2c;--s1:#3987e5;--s2:#d95926;--s3:#199e70;--best:#1d2c40}
+*{box-sizing:border-box}body{margin:0;background:var(--page);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1040px;margin:0 auto;padding:28px 16px 60px}h1{font-size:26px;margin:0 0 6px}h2{font-size:18px;margin:0 0 4px}
+.sub{color:var(--ink2);margin:0 0 18px}.card{background:var(--surface);border:1px solid var(--grid);border-radius:10px;padding:20px;margin:16px 0}
+.note{font-size:13px;color:var(--ink2)}.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.tile{background:var(--surface);border:1px solid var(--grid);border-radius:10px;padding:14px}.tile b{display:block;font-size:28px;font-weight:650}
+.tile span{color:var(--ink2);font-size:13px}svg{display:block;width:100%;height:auto;overflow:visible}
+.axis text,.lbl{fill:var(--ink2);font-size:12px}.grid line{stroke:var(--grid)}.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--ink2);margin:8px 0}
+.key{display:inline-block;width:22px;height:0;border-top:2px solid;vertical-align:middle;margin-right:6px}
+.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+th,td{padding:7px 9px;border-bottom:1px solid var(--grid);text-align:right;white-space:nowrap}th:first-child,td:first-child{text-align:left}
+th{color:var(--ink2);font-weight:600}th[colspan]{text-align:center}td.best{background:var(--best);font-weight:650}.tip{position:fixed;pointer-events:none;background:var(--surface);color:var(--ink);border:1px solid var(--grid);border-radius:8px;padding:8px 10px;font-size:12px;box-shadow:0 4px 14px rgba(0,0,0,.12);display:none;z-index:5}
+ul{padding-left:20px}li{margin:6px 0}details summary{cursor:pointer;color:var(--ink2)}
+</style></head><body><main>
+<h1>Forecast accuracy review</h1>
+<p class="sub">MedShield original itemized sales, contracts excluded. Records start in January 2017, but 10 months before 2020 are missing, so the forecasts use the unbroken run from January 2020 to September 2026 (81 months). Scored on 2022 to 2026 targets. <strong>Exploratory:</strong> every month was inspected by earlier studies; methods were chosen at each forecast date using only errors known by then.</p>
+
+<div class="tiles" id="tiles"></div>
+
+<section class="card"><h2>Where the error comes down</h2>
+<p class="note">Error (WAPE) is the average miss as a share of actual sales. Lower is better.</p>
+<svg id="ladder" role="img" aria-label="Error by approach, from 49% for the current reference to 29% for the day-20 estimate"></svg></section>
+
+<section class="card"><h2>Total sales vs forecasts made one month ahead</h2>
+<div class="legend"><span><i class="key" style="border-color:var(--s1)"></i>Actual</span><span><i class="key" style="border-color:var(--s2);border-top-style:dashed"></i>4-method blend</span><span><i class="key" style="border-color:var(--s3);border-top-style:dashed"></i>Growth-adjusted 6-month mean</span></div>
+<svg id="line" role="img" aria-label="Monthly total sales with two forecast lines, 2022 to 2026"></svg>
+<p class="note">Large institutional orders cause the spikes that no forecast catches. The growth-adjusted line runs higher and has almost no bias, but misses more month to month.</p></section>
+
+<section class="card"><h2>Every method compared</h2>
+<p class="note">Each cell: error % / bias % (negative = forecast too low). Shaded = lowest error in that column.</p>
+<div class="scroll"><table id="tbl"></table></div></section>
+
+<section class="card"><h2>What fits MedShield's data</h2><ul>
+<li><strong>Routine sales (60% of revenue): 4-method blend, about 37% error 1 month ahead.</strong> Average of the 3-month mean, 6-month mean, 6-month median and growth-adjusted mean. Use for routine replenishment.</li>
+<li><strong>Within the month: day-20 estimate, 29% error, bias −2%.</strong> The largest single gain. Needs sales entered within days of delivery.</li>
+<li><strong>Annual budgeting: growth-adjusted 6-month mean.</strong> Error is a little higher month to month, but bias is near zero (+0.4% at 1 month ahead), so yearly totals are not understated.</li>
+<li><strong>Total sales, 1 to 6 months ahead: 4-method blend or 3-month mean, 49 to 62% error.</strong> Small gains over the reference; large orders cap accuracy.</li>
+<li><strong>Large orders: plan from frequency, not forecasts.</strong> Their own error is 68 to 89%.</li>
+<li><strong>Not a fit:</strong> ETS, Theta, trend lines and automatic method picking add little or increase bias. Building the total from routine plus a large-order allowance is worse (55% vs 49%).</li></ul></section>
+
+<section class="card"><h2>Limits</h2><ul class="note">
+<li>Exploratory, not confirmed: confirmation needs months after September 2026, which no study has seen.</li>
+<li>No method reaches the 10 to 15% error target; erratic high-value product families carry 73% of sales.</li>
+<li>Pesos, not medicine units. Not a purchase quantity or approval.</li></ul></section>
+</main><div class="tip" id="tip"></div>
+<script>
+/*DATA*/
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const pct=v=>(v*100).toFixed(1)+'%',peso=v=>'₱'+(v/1e6).toFixed(2)+'M',tip=document.getElementById('tip');
+const NS='http://www.w3.org/2000/svg',el=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p&&p.appendChild(e);return e};
+function showTip(ev,html){tip.innerHTML=html;tip.style.display='block';const x=Math.min(ev.clientX+14,innerWidth-tip.offsetWidth-8);tip.style.left=x+'px';tip.style.top=(ev.clientY+14)+'px'}
+const hide=()=>tip.style.display='none';
+document.getElementById('tiles').innerHTML=[[LADDER[0][1],'Current reference, total, 1 month ahead'],[LADDER[2][1],'Routine sales, best fit, 1 month ahead'],[LADDER[3][1],'Day-20 estimate of the month'],[CUT,'Error cut by day 20 vs the before-month forecast, same months (2024–26)',true]]
+ .map(([v,l,cut])=>`<div class="tile"><b>${cut?'−'+Math.round(v*100)+'%':pct(v)}</b><span>${l}</span></div>`).join('');
+function ladder(){const s=document.getElementById('ladder');s.innerHTML='';const W=s.clientWidth||900,narrow=W<560,lw=narrow?0:330,rowH=narrow?58:40,H=LADDER.length*rowH+10;
+ s.setAttribute('viewBox',`0 0 ${W} ${H}`);const x0=lw,x1=W-56,max=.55;
+ LADDER.forEach(([lab,v],i)=>{const y=i*rowH+(narrow?24:8),w=(x1-x0)*v/max;
+  el('text',{x:narrow?0:lw-10,y:narrow?y-6:y+15,'text-anchor':narrow?'start':'end',class:'lbl'},s).textContent=lab;
+  const r=el('rect',{x:x0,y,width:Math.max(w,2),height:22,rx:4,fill:css('--s1')},s);
+  el('text',{x:x0+w+6,y:y+15,class:'lbl'},s).textContent=pct(v);
+  r.addEventListener('mousemove',e=>showTip(e,`<b>${lab}</b><br>Error ${pct(v)}`));r.addEventListener('mouseleave',hide)})}
+function line(){const s=document.getElementById('line');s.innerHTML='';const W=s.clientWidth||900,H=Math.max(260,Math.min(380,W*.42)),m={l:54,r:12,t:10,b:28};
+ s.setAttribute('viewBox',`0 0 ${W} ${H}`);const vals=LINE.flatMap(d=>[d.actual,d.blend,d.growth]).filter(v=>v!=null),max=Math.ceil(Math.max(...vals)/5e6)*5e6;
+ const X=i=>m.l+(W-m.l-m.r)*i/(LINE.length-1),Y=v=>H-m.b-(H-m.t-m.b)*Math.max(v,0)/max,g=el('g',{class:'grid axis'},s);
+ for(let v=0;v<=max;v+=max/5){el('line',{x1:m.l,x2:W-m.r,y1:Y(v),y2:Y(v)},g);el('text',{x:m.l-6,y:Y(v)+4,'text-anchor':'end'},g).textContent='₱'+(v/1e6).toFixed(0)+'M'}
+ LINE.forEach((d,i)=>{if(d.p.endsWith('-01'))el('text',{x:X(i),y:H-8,'text-anchor':'middle'},g).textContent=d.p.slice(0,4)});
+ const path=(k,c,dash)=>{let p='';LINE.forEach((d,i)=>{if(d[k]!=null)p+=(p?'L':'M')+X(i)+','+Y(d[k])});el('path',{d:p,fill:'none',stroke:css(c),'stroke-width':2,'stroke-dasharray':dash||'','stroke-linejoin':'round'},s)};
+ path('growth','--s3','6 4');path('blend','--s2','6 4');path('actual','--s1');
+ const last=LINE.length-1;[['actual','Actual'],['blend','Blend'],['growth','Growth-adj.']].forEach(([k,t],j)=>{});
+ const cross=el('line',{y1:m.t,y2:H-m.b,stroke:css('--muted'),'stroke-width':1,visibility:'hidden'},s);
+ const hit=el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b,fill:'transparent'},s);
+ hit.addEventListener('mousemove',e=>{const b=s.getBoundingClientRect(),px=(e.clientX-b.left)*W/b.width,i=Math.max(0,Math.min(last,Math.round((px-m.l)/(W-m.l-m.r)*last))),d=LINE[i];
+  cross.setAttribute('x1',X(i));cross.setAttribute('x2',X(i));cross.setAttribute('visibility','visible');
+  showTip(e,`<b>${d.p}</b><br>Actual ${peso(d.actual)}<br>Blend ${d.blend!=null?peso(d.blend):'–'}<br>Growth-adj. ${d.growth!=null?peso(d.growth):'–'}`)});
+ hit.addEventListener('mouseleave',()=>{cross.setAttribute('visibility','hidden');hide()})}
+function table(){const t=document.getElementById('tbl');const head='<tr><th rowspan="2">Method</th><th colspan="3">Total sales</th><th colspan="3">Routine sales</th></tr><tr>'+'<th>1 mo</th><th>3 mo</th><th>6 mo</th>'.repeat(2)+'</tr>';
+ t.innerHTML='<thead>'+head+'</thead><tbody>'+TABLE.map((r,i)=>'<tr><td>'+r[0]+'</td>'+r.slice(1).map((c,j)=>`<td class="${BEST[j+1]===i?'best':''}">${c?c[0].toFixed(1)+' / '+(c[1]>0?'+':'')+c[1].toFixed(1):'–'}</td>`).join('')+'</tr>').join('')+'</tbody>'}
+const draw=()=>{ladder();line()};table();draw();addEventListener('resize',draw);
+</script></body></html>

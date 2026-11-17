@@ -1,0 +1,351 @@
+{
+  "checked_at": "2026-10-09T02:13:01.811Z",
+  "kind": "actual gateway functions with isolated warehouse response fixture",
+  "expected_basis": "Retain source NULL; one dimension-only row has no observed numeric measurements. SQL AVG and SUM without eligible measurements are NULL, not observed zero.",
+  "ledger_row": {
+    "source_record_id": "fixture-unknown-measures",
+    "canonical_group_id": "RAW:unknown",
+    "raw_area": "UNKNOWN",
+    "original_area": "UNKNOWN",
+    "sector": "Unknown",
+    "region": "Unknown",
+    "territory": "Unassigned geography",
+    "identity_status": "needs_review",
+    "transaction_evidence": "original_source_detail",
+    "source_workbook": "fixture.csv",
+    "source_file_sha256": "fixture-source",
+    "is_net_sales_eligible": false,
+    "is_gross_margin_eligible": false,
+    "is_quantity_observation_eligible": false,
+    "eligible_revenue": null,
+    "eligible_income": null,
+    "year": 2025,
+    "area": "UNKNOWN",
+    "dr_number": "fixture",
+    "date_delivered": "2025-01-01",
+    "product": "Unknown source label",
+    "quantity": 0,
+    "unit_cost": 0,
+    "total_cost": 0,
+    "discount": 0,
+    "net_cost": 0,
+    "trade_price_unit": 0,
+    "total_trade_price": 0,
+    "net_income": 0,
+    "margin_pct": 0,
+    "quality_status": "warning",
+    "quality_notes": "Missing measures",
+    "source_sheet": "",
+    "source_layout": "canonical",
+    "source_row_number": 1
+  },
+  "summary": {
+    "release": {
+      "dataset_id": "null-fixture",
+      "policy_version": "legacy",
+      "area_mapping_sha256": "fixture-area",
+      "product_master_sha256": "fixture-products",
+      "publication_status": "candidate",
+      "fact_delta_version": 91
+    },
+    "source": {
+      "file": "workspace.medshield_gold.sales_restart_fact_candidate",
+      "view": "workspace.medshield_gold.sales_restart_fact_candidate",
+      "checksum": "6caffcaa1b78507ad3bf23f77d0fa4f3b075f36d16a92155bce769ba0f9a2a21",
+      "generated_at": "2026-10-09T02:13:01.801Z",
+      "system_of_record": "databricks",
+      "release": {
+        "dataset_id": "null-fixture",
+        "policy_version": "legacy",
+        "area_mapping_sha256": "fixture-area",
+        "product_master_sha256": "fixture-products",
+        "publication_status": "candidate",
+        "fact_delta_version": 91
+      },
+      "candidate_only": true
+    },
+    "filters": {
+      "year": "all",
+      "search": "",
+      "quality_status": "all",
+      "product_id": null,
+      "area": null,
+      "sector": "All",
+      "region": null,
+      "territory": null,
+      "category": "All",
+      "start_date": null,
+      "end_date": null
+    },
+    "counts": {
+      "rows": 1,
+      "accepted_rows": 1,
+      "sku_count": 1,
+      "unique_dr_numbers": 1
+    },
+    "sums": {
+      "quantity": 0,
+      "total_cost": 0,
+      "net_cost": 0,
+      "total_trade_price": 0,
+      "net_income": 0
+    },
+    "averages": {
+      "quantity": 0,
+      "unit_cost": 0,
+      "net_income": 0,
+      "margin_pct": null
+    },
+    "gross_margin_rate": null,
+    "financial_reconciliation": {
+      "delta": 0,
+      "checked_rows": 0,
+      "mismatched_rows": 0
+    },
+    "top": {
+      "area": "UNKNOWN",
+      "product": "Unknown source label"
+    }
+  },
+  "snapshot": {
+    "data_status": {
+      "source": "databricks",
+      "mode": "live",
+      "loaded_at": "2026-10-09T02:13:01.811Z",
+      "message": "Live Databricks Gold candidate views; no local or bundled fallback is permitted.",
+      "catalog": "workspace",
+      "schema": "medshield_gold",
+      "candidate_only": true,
+      "release": {
+        "dataset_id": "null-fixture",
+        "policy_version": "legacy",
+        "area_mapping_sha256": "fixture-area",
+        "product_master_sha256": "fixture-products",
+        "publication_status": "candidate",
+        "fact_delta_version": 91
+      }
+    },
+    "totals": {
+      "total_revenue": 0,
+      "total_income": 0,
+      "total_transactions": 1,
+      "avg_margin": null,
+      "margin_revenue_basis": 0
+    },
+    "monthly": [
+      {
+        "period": "2025-01",
+        "revenue": null,
+        "income": null,
+        "margin_revenue_basis": null,
+        "transaction_count": 1,
+        "has_sales_activity": true,
+        "missing": true
+      }
+    ],
+    "by_area": [
+      {
+        "area": "UNKNOWN",
+        "revenue": 0,
+        "income": 0
+      }
+    ],
+    "top_products": [
+      {
+        "product": "Unknown source label",
+        "revenue": 0,
+        "income": 0,
+        "qty": 0,
+        "abc": "Unclassified",
+        "abc_policy": "positive_sales_crossing_inclusive_v2_candidate",
+        "positive_sales": 0,
+        "returns_value": 0,
+        "abc_basis": "positive_eligible_sales_full_population",
+        "abc_policy_status": "CANDIDATE_PENDING_CEO_APPROVAL",
+        "product_identity_status": "source_label_not_verified_sku",
+        "pct_of_total": 0
+      }
+    ],
+    "year_summary": [
+      {
+        "year": "2025",
+        "revenue": 0,
+        "income": 0,
+        "transactions": 1,
+        "margin_revenue_basis": null
+      }
+    ],
+    "seasonality": [
+      {
+        "month": "Jan",
+        "avg_revenue": null,
+        "observed_month_count": 0,
+        "method": "observed_calendar_month_average_not_stl"
+      }
+    ],
+    "forecasts": [],
+    "external_signals": [],
+    "inventory_recommendations": [],
+    "regional_priorities": [],
+    "area_clusters": [],
+    "product_priorities": [],
+    "allocation_recommendations": [],
+    "product_region_matches": [],
+    "decision_alerts": [],
+    "model_evaluation": []
+  },
+  "expectations": [
+    {
+      "endpoint": "/api/sales/transactions",
+      "field": "quantity",
+      "source": null,
+      "expected": null,
+      "actual": 0,
+      "pass": false
+    },
+    {
+      "endpoint": "/api/sales/transactions",
+      "field": "unit_cost",
+      "source": null,
+      "expected": null,
+      "actual": 0,
+      "pass": false
+    },
+    {
+      "endpoint": "/api/sales/transactions",
+      "field": "total_cost",
+      "source": null,
+      "expected": null,
+      "actual": 0,
+      "pass": false
+    },
+    {
+      "endpoint": "/api/sales/transactions",
+      "field": "discount",
+      "source": null,
+      "expected": null,
+      "actual": 0,
+      "pass": false
+    },
+    {
+      "endpoint": "/api/sales/transactions",
+      "field": "net_cost",
+      "source": null,
+      "expected": null,
+      "actual": 0,
+      "pass": false
+    },
+    {
+      "endpoint": "/api/sales/transactions",
+      "field": "trade_price_unit",
+      "source": null,
+      "expected": null,
+      "actual": 0,
+      "pass": false
+    },
+    {
+      "endpoint": "/api/sales/transactions",
+      "field": "total_trade_price",
+      "source": null,
+      "expected": null,
+      "actual": 0,
+      "pass": false
+    },
+    {
+      "endpoint": "/api/sales/transactions",
+      "field": "net_income",
+      "source": null,
+      "expected": null,
+      "actual": 0,
+      "pass": false
+    },
+    {
+      "endpoint": "/api/sales/transactions",
+      "field": "margin_pct",
+      "source": null,
+      "expected": null,
+      "actual": 0,
+      "pass": false
+    },
+    {
+      "endpoint": "/api/sales/summary",
+      "field": "averages.quantity",
+      "source": null,
+      "expected": null,
+      "actual": 0,
+      "pass": false
+    },
+    {
+      "endpoint": "/api/sales/summary",
+      "field": "averages.unit_cost",
+      "source": null,
+      "expected": null,
+      "actual": 0,
+      "pass": false
+    },
+    {
+      "endpoint": "/api/sales/summary",
+      "field": "averages.net_income",
+      "source": null,
+      "expected": null,
+      "actual": 0,
+      "pass": false
+    },
+    {
+      "endpoint": "/api/year_summary",
+      "field": "revenue",
+      "source": null,
+      "expected": null,
+      "actual": 0,
+      "pass": false
+    },
+    {
+      "endpoint": "/api/year_summary",
+      "field": "income",
+      "source": null,
+      "expected": null,
+      "actual": 0,
+      "pass": false
+    },
+    {
+      "endpoint": "/api/by_area",
+      "field": "revenue",
+      "source": null,
+      "expected": null,
+      "actual": 0,
+      "pass": false
+    },
+    {
+      "endpoint": "/api/by_area",
+      "field": "income",
+      "source": null,
+      "expected": null,
+      "actual": 0,
+      "pass": false
+    },
+    {
+      "endpoint": "/api/monthly",
+      "field": "revenue",
+      "source": null,
+      "expected": null,
+      "actual": null,
+      "pass": true
+    }
+  ],
+  "statements": [
+    "SELECT DISTINCT dataset_id, policy_version, area_mapping_sha256, product_master_sha256, publication_status FROM `workspace`.`medshield_gold`.`sales_restart_fact_candidate` VERSION AS OF 91",
+    "SELECT COUNT(*) AS total_rows FROM `workspace`.`medshield_gold`.`sales_restart_fact_candidate` VERSION AS OF 91 WHERE is_analysis_candidate = TRUE AND NOT (is_contract_label = TRUE OR UPPER(TRIM(normalized_product)) RLIKE\n  '^(PAGBILAO|QMC|PPDC|TOURISM|PROVINCIAL[[:space:]]+TOURISM[[:space:]]+OFFICE|MARINDUQUE|GULANG[[:space:]]+GULANG|PESO|PESO[[:space:]]+PROVINCIAL|PHO|ABOITIZ|PADRE[[:space:]]+BURGOS|PPOC)([[:space:]]*#|[[:space:]]+[0-9])|^DR[[:space:]]*#|^PR[[:space:]]+[0-9]') AND TRUE",
+    "SELECT calendar_year, source_record_id, CONCAT('RAW:', product_key) AS canonical_group_id,\n      normalized_area AS raw_area, area_raw AS original_area, CASE\n  WHEN UPPER(TRIM(normalized_area)) IN ('GOVERNMENT', 'PAGBILAO') THEN 'Government'\n  WHEN UPPER(TRIM(normalized_area)) IN ('ADMIN', 'SUPPLIES', 'SUPPLLIES', 'EQUIPMENT', 'SUPPLIES AND EQUIPMENT', 'PERSONAL', 'LOSSES') THEN 'Internal'\n  WHEN proposed_area_type = 'territory' OR UPPER(TRIM(normalized_area)) IN ('CAVITE', 'LOWER CAVITE', 'BATANGAS', 'QUEZON', 'LAGUNA', 'MARINDUQUE', 'CAMARINES NORTE', 'CAM NORTE', 'CAMARINES SUR', 'CAM SUR', 'ALBAY', 'LEGASPI', 'LAGASPI', 'BICOL', 'MINDORO', 'HOSPITAL', 'HOPITAL', 'PHARMA', 'LUCENA', 'RAKKK', 'EAST', 'EASTERN', 'EASTERN QUEZON') THEN 'Private'\n  ELSE 'Unknown' END AS sector,\n      CASE WHEN is_geographic_territory_approved THEN mapped_region ELSE 'Unknown' END AS region, CASE WHEN is_geographic_territory_approved THEN COALESCE(mapped_province, territory, normalized_area) ELSE 'Unassigned geography' END AS territory,\n      'needs_review' AS identity_status, CASE WHEN is_adjusted_source THEN 'adjusted_estimated_source' ELSE 'original_source_detail' END AS transaction_evidence,\n      source_workbook, source_file_sha256, source_adjustment_policy,\n      is_net_sales_eligible, is_gross_margin_eligible, is_quantity_observation_eligible,\n      CASE WHEN normalized_area = 'LOWER CAVITE' THEN 'Cavite' ELSE normalized_area END AS area,\n      dr_number, date_delivered,\n      normalized_product AS product, quantity,\n      unit_selling_price AS contract_price_unit, gross_sales AS gross_contract_value,\n      discount_amount, net_sales AS net_contract_value,\n      unit_acquisition_cost AS transfer_price_unit,\n      total_acquisition_cost AS total_transfer_price,\n      gross_margin_amount, margin_pct AS gross_margin_pct,\n      CASE WHEN COALESCE(SIZE(quality_rule_codes), 0) = 0 THEN 'VALID' ELSE 'WARNING' END AS quality_status,\n      CONCAT_WS('; ', quality_rule_codes) AS quality_notes,\n      CAST(NULL AS STRING) AS source_sheet, source_layout, source_row_number\n      FROM `workspace`.`medshield_gold`.`sales_restart_fact_candidate` VERSION AS OF 91 WHERE is_analysis_candidate = TRUE AND NOT (is_contract_label = TRUE OR UPPER(TRIM(normalized_product)) RLIKE\n  '^(PAGBILAO|QMC|PPDC|TOURISM|PROVINCIAL[[:space:]]+TOURISM[[:space:]]+OFFICE|MARINDUQUE|GULANG[[:space:]]+GULANG|PESO|PESO[[:space:]]+PROVINCIAL|PHO|ABOITIZ|PADRE[[:space:]]+BURGOS|PPOC)([[:space:]]*#|[[:space:]]+[0-9])|^DR[[:space:]]*#|^PR[[:space:]]+[0-9]') AND TRUE\n      ORDER BY date_delivered DESC, source_workbook, source_record_id\n      LIMIT 25 OFFSET 0",
+    "SELECT COUNT(*) AS rows_extracted,\n      SUM(CASE WHEN is_analysis_candidate = TRUE AND NOT (is_contract_label = TRUE OR UPPER(TRIM(normalized_product)) RLIKE\n  '^(PAGBILAO|QMC|PPDC|TOURISM|PROVINCIAL[[:space:]]+TOURISM[[:space:]]+OFFICE|MARINDUQUE|GULANG[[:space:]]+GULANG|PESO|PESO[[:space:]]+PROVINCIAL|PHO|ABOITIZ|PADRE[[:space:]]+BURGOS|PPOC)([[:space:]]*#|[[:space:]]+[0-9])|^DR[[:space:]]*#|^PR[[:space:]]+[0-9]') THEN 1 ELSE 0 END) AS rows_accepted,\n      (COUNT(*) - COUNT(DISTINCT source_record_id)) AS duplicate_rows,\n      SUM(CASE WHEN is_analysis_candidate = TRUE AND NOT (is_contract_label = TRUE OR UPPER(TRIM(normalized_product)) RLIKE\n  '^(PAGBILAO|QMC|PPDC|TOURISM|PROVINCIAL[[:space:]]+TOURISM[[:space:]]+OFFICE|MARINDUQUE|GULANG[[:space:]]+GULANG|PESO|PESO[[:space:]]+PROVINCIAL|PHO|ABOITIZ|PADRE[[:space:]]+BURGOS|PPOC)([[:space:]]*#|[[:space:]]+[0-9])|^DR[[:space:]]*#|^PR[[:space:]]+[0-9]') AND COALESCE(SIZE(quality_rule_codes), 0) > 0 THEN 1 ELSE 0 END) AS rows_with_warnings,\n      SUM(CASE WHEN is_analysis_candidate = TRUE AND NOT (is_contract_label = TRUE OR UPPER(TRIM(normalized_product)) RLIKE\n  '^(PAGBILAO|QMC|PPDC|TOURISM|PROVINCIAL[[:space:]]+TOURISM[[:space:]]+OFFICE|MARINDUQUE|GULANG[[:space:]]+GULANG|PESO|PESO[[:space:]]+PROVINCIAL|PHO|ABOITIZ|PADRE[[:space:]]+BURGOS|PPOC)([[:space:]]*#|[[:space:]]+[0-9])|^DR[[:space:]]*#|^PR[[:space:]]+[0-9]') AND COALESCE(SIZE(quality_rule_codes), 0) = 0 THEN 1 ELSE 0 END) AS valid_rows,\n      COUNT(DISTINCT CASE WHEN is_analysis_candidate = TRUE AND NOT (is_contract_label = TRUE OR UPPER(TRIM(normalized_product)) RLIKE\n  '^(PAGBILAO|QMC|PPDC|TOURISM|PROVINCIAL[[:space:]]+TOURISM[[:space:]]+OFFICE|MARINDUQUE|GULANG[[:space:]]+GULANG|PESO|PESO[[:space:]]+PROVINCIAL|PHO|ABOITIZ|PADRE[[:space:]]+BURGOS|PPOC)([[:space:]]*#|[[:space:]]+[0-9])|^DR[[:space:]]*#|^PR[[:space:]]+[0-9]') THEN normalized_product END) AS unique_products,\n      COUNT(DISTINCT CASE WHEN is_analysis_candidate = TRUE AND NOT (is_contract_label = TRUE OR UPPER(TRIM(normalized_product)) RLIKE\n  '^(PAGBILAO|QMC|PPDC|TOURISM|PROVINCIAL[[:space:]]+TOURISM[[:space:]]+OFFICE|MARINDUQUE|GULANG[[:space:]]+GULANG|PESO|PESO[[:space:]]+PROVINCIAL|PHO|ABOITIZ|PADRE[[:space:]]+BURGOS|PPOC)([[:space:]]*#|[[:space:]]+[0-9])|^DR[[:space:]]*#|^PR[[:space:]]+[0-9]') THEN dr_number END) AS unique_dr_numbers,\n      MIN(CASE WHEN is_analysis_candidate = TRUE AND NOT (is_contract_label = TRUE OR UPPER(TRIM(normalized_product)) RLIKE\n  '^(PAGBILAO|QMC|PPDC|TOURISM|PROVINCIAL[[:space:]]+TOURISM[[:space:]]+OFFICE|MARINDUQUE|GULANG[[:space:]]+GULANG|PESO|PESO[[:space:]]+PROVINCIAL|PHO|ABOITIZ|PADRE[[:space:]]+BURGOS|PPOC)([[:space:]]*#|[[:space:]]+[0-9])|^DR[[:space:]]*#|^PR[[:space:]]+[0-9]') THEN date_delivered END) AS source_period_start,\n      MAX(CASE WHEN is_analysis_candidate = TRUE AND NOT (is_contract_label = TRUE OR UPPER(TRIM(normalized_product)) RLIKE\n  '^(PAGBILAO|QMC|PPDC|TOURISM|PROVINCIAL[[:space:]]+TOURISM[[:space:]]+OFFICE|MARINDUQUE|GULANG[[:space:]]+GULANG|PESO|PESO[[:space:]]+PROVINCIAL|PHO|ABOITIZ|PADRE[[:space:]]+BURGOS|PPOC)([[:space:]]*#|[[:space:]]+[0-9])|^DR[[:space:]]*#|^PR[[:space:]]+[0-9]') THEN date_delivered END) AS source_period_end,\n      MAX(gold_published_at) AS received_at\n      FROM `workspace`.`medshield_gold`.`sales_restart_fact_candidate` VERSION AS OF 91",
+    "SELECT calendar_year, COUNT(*) AS rows FROM `workspace`.`medshield_gold`.`sales_restart_fact_candidate` VERSION AS OF 91\n      WHERE is_analysis_candidate = TRUE AND NOT (is_contract_label = TRUE OR UPPER(TRIM(normalized_product)) RLIKE\n  '^(PAGBILAO|QMC|PPDC|TOURISM|PROVINCIAL[[:space:]]+TOURISM[[:space:]]+OFFICE|MARINDUQUE|GULANG[[:space:]]+GULANG|PESO|PESO[[:space:]]+PROVINCIAL|PHO|ABOITIZ|PADRE[[:space:]]+BURGOS|PPOC)([[:space:]]*#|[[:space:]]+[0-9])|^DR[[:space:]]*#|^PR[[:space:]]+[0-9]') GROUP BY calendar_year ORDER BY calendar_year",
+    "SELECT COUNT(*) AS rows, COUNT(DISTINCT normalized_product) AS sku_count,\n      COUNT(DISTINCT dr_number) AS unique_dr_numbers,\n      COUNT(*) AS accepted_rows,\n      SUM(CASE WHEN is_quantity_observation_eligible THEN COALESCE(quantity, 0) ELSE 0 END) AS quantity,\n      SUM(CASE WHEN is_gross_sales_eligible THEN COALESCE(gross_sales, 0) ELSE 0 END) AS total_cost,\n      SUM(CASE WHEN is_net_sales_eligible THEN COALESCE(net_sales, 0) ELSE 0 END) AS net_cost,\n      SUM(CASE WHEN is_acquisition_cost_eligible THEN COALESCE(total_acquisition_cost, 0) ELSE 0 END) AS total_trade_price,\n      SUM(CASE WHEN is_gross_margin_eligible THEN COALESCE(gross_margin_amount, 0) ELSE 0 END) AS net_income,\n      AVG(CASE WHEN is_quantity_observation_eligible THEN quantity END) AS avg_quantity,\n      AVG(CASE WHEN is_gross_sales_eligible THEN unit_selling_price END) AS avg_unit_cost,\n      AVG(CASE WHEN is_gross_margin_eligible THEN gross_margin_amount END) AS avg_net_income,\n      CASE WHEN SUM(CASE WHEN is_gross_margin_eligible THEN net_sales END) > 0\n        THEN 100 * SUM(CASE WHEN is_gross_margin_eligible THEN COALESCE(gross_margin_amount, 0) ELSE 0 END)\n          / SUM(CASE WHEN is_gross_margin_eligible THEN net_sales END) END AS gross_margin_rate,\n      SUM(CASE WHEN is_net_sales_eligible AND is_acquisition_cost_eligible AND is_gross_margin_eligible\n        AND ABS(COALESCE(net_sales, 0) - COALESCE(total_acquisition_cost, 0) - COALESCE(gross_margin_amount, 0)) > 0.01\n        THEN 1 ELSE 0 END) AS mismatched_rows,\n      SUM(CASE WHEN is_net_sales_eligible AND is_acquisition_cost_eligible AND is_gross_margin_eligible\n        THEN 1 ELSE 0 END) AS checked_rows,\n      SUM(CASE WHEN is_net_sales_eligible AND is_acquisition_cost_eligible AND is_gross_margin_eligible\n        THEN COALESCE(net_sales, 0) - COALESCE(total_acquisition_cost, 0) - COALESCE(gross_margin_amount, 0)\n        ELSE 0 END) AS reconciliation_delta\n      FROM `workspace`.`medshield_gold`.`sales_restart_fact_candidate` VERSION AS OF 91 WHERE is_analysis_candidate = TRUE AND NOT (is_contract_label = TRUE OR UPPER(TRIM(normalized_product)) RLIKE\n  '^(PAGBILAO|QMC|PPDC|TOURISM|PROVINCIAL[[:space:]]+TOURISM[[:space:]]+OFFICE|MARINDUQUE|GULANG[[:space:]]+GULANG|PESO|PESO[[:space:]]+PROVINCIAL|PHO|ABOITIZ|PADRE[[:space:]]+BURGOS|PPOC)([[:space:]]*#|[[:space:]]+[0-9])|^DR[[:space:]]*#|^PR[[:space:]]+[0-9]') AND TRUE",
+    "SELECT CASE WHEN normalized_area = 'LOWER CAVITE' THEN 'Cavite' ELSE normalized_area END AS area FROM `workspace`.`medshield_gold`.`sales_restart_fact_candidate` VERSION AS OF 91 WHERE is_analysis_candidate = TRUE AND NOT (is_contract_label = TRUE OR UPPER(TRIM(normalized_product)) RLIKE\n  '^(PAGBILAO|QMC|PPDC|TOURISM|PROVINCIAL[[:space:]]+TOURISM[[:space:]]+OFFICE|MARINDUQUE|GULANG[[:space:]]+GULANG|PESO|PESO[[:space:]]+PROVINCIAL|PHO|ABOITIZ|PADRE[[:space:]]+BURGOS|PPOC)([[:space:]]*#|[[:space:]]+[0-9])|^DR[[:space:]]*#|^PR[[:space:]]+[0-9]') AND TRUE\n      GROUP BY CASE WHEN normalized_area = 'LOWER CAVITE' THEN 'Cavite' ELSE normalized_area END\n      ORDER BY SUM(CASE WHEN is_net_sales_eligible THEN COALESCE(net_sales, 0) ELSE 0 END) DESC LIMIT 1",
+    "SELECT normalized_product AS product FROM `workspace`.`medshield_gold`.`sales_restart_fact_candidate` VERSION AS OF 91 WHERE is_analysis_candidate = TRUE AND NOT (is_contract_label = TRUE OR UPPER(TRIM(normalized_product)) RLIKE\n  '^(PAGBILAO|QMC|PPDC|TOURISM|PROVINCIAL[[:space:]]+TOURISM[[:space:]]+OFFICE|MARINDUQUE|GULANG[[:space:]]+GULANG|PESO|PESO[[:space:]]+PROVINCIAL|PHO|ABOITIZ|PADRE[[:space:]]+BURGOS|PPOC)([[:space:]]*#|[[:space:]]+[0-9])|^DR[[:space:]]*#|^PR[[:space:]]+[0-9]') AND TRUE\n      GROUP BY normalized_product\n      ORDER BY SUM(CASE WHEN is_net_sales_eligible THEN COALESCE(net_sales, 0) ELSE 0 END) DESC LIMIT 1",
+    "SELECT period, territory,\n      AVG(CASE WHEN signal_family = 'DISEASE' THEN signal_value END) AS disease_intensity_index,\n      AVG(CASE WHEN signal_family = 'WEATHER' THEN signal_value END) AS rainfall_severity_index\n      FROM `workspace`.`medshield_gold`.`vw_dss_external_signals_candidate`\n      WHERE is_external_join_ready = TRUE AND is_forecast_eligible = TRUE\n      GROUP BY period, territory ORDER BY period, territory",
+    "SELECT calendar_year,\n      COUNT(*) AS transaction_count,\n      COUNT(DISTINCT dr_number) AS distinct_dr_count,\n      COUNT(DISTINCT normalized_area) AS distinct_area_count,\n      COUNT(DISTINCT normalized_product) AS distinct_product_count,\n      SUM(CASE WHEN COALESCE(SIZE(quality_rule_codes), 0) > 0 THEN 1 ELSE 0 END) AS warning_transaction_count,\n      SUM(CASE WHEN is_quantity_observation_eligible THEN quantity END) AS total_quantity_candidate,\n      SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) AS net_sales_candidate,\n      SUM(CASE WHEN is_gross_margin_eligible THEN gross_margin_amount END) AS gross_margin_candidate,\n      SUM(CASE WHEN is_gross_margin_eligible THEN net_sales END) AS margin_revenue_basis,\n      CASE WHEN SUM(CASE WHEN is_gross_margin_eligible THEN net_sales END) <> 0\n        THEN ROUND(100 * SUM(CASE WHEN is_gross_margin_eligible THEN gross_margin_amount END)\n          / SUM(CASE WHEN is_gross_margin_eligible THEN net_sales END), 4) END AS weighted_gross_margin_pct_candidate,\n      'DEFINITIONS_APPROVED_DATASET_RELEASE_PENDING' AS financial_definition_status\n      FROM `workspace`.`medshield_gold`.`sales_restart_fact_candidate` VERSION AS OF 91 WHERE is_analysis_candidate = TRUE AND NOT (is_contract_label = TRUE OR UPPER(TRIM(normalized_product)) RLIKE\n  '^(PAGBILAO|QMC|PPDC|TOURISM|PROVINCIAL[[:space:]]+TOURISM[[:space:]]+OFFICE|MARINDUQUE|GULANG[[:space:]]+GULANG|PESO|PESO[[:space:]]+PROVINCIAL|PHO|ABOITIZ|PADRE[[:space:]]+BURGOS|PPOC)([[:space:]]*#|[[:space:]]+[0-9])|^DR[[:space:]]*#|^PR[[:space:]]+[0-9]')\n      GROUP BY calendar_year ORDER BY calendar_year",
+    "WITH month_spine AS (\n        SELECT EXPLODE(SEQUENCE(MAKE_DATE(MIN(calendar_year), 1, 1), MAKE_DATE(MAX(calendar_year), 12, 1), INTERVAL 1 MONTH)) AS month_start\n        FROM `workspace`.`medshield_gold`.`sales_restart_fact_candidate` VERSION AS OF 91 WHERE is_analysis_candidate = TRUE AND NOT (is_contract_label = TRUE OR UPPER(TRIM(normalized_product)) RLIKE\n  '^(PAGBILAO|QMC|PPDC|TOURISM|PROVINCIAL[[:space:]]+TOURISM[[:space:]]+OFFICE|MARINDUQUE|GULANG[[:space:]]+GULANG|PESO|PESO[[:space:]]+PROVINCIAL|PHO|ABOITIZ|PADRE[[:space:]]+BURGOS|PPOC)([[:space:]]*#|[[:space:]]+[0-9])|^DR[[:space:]]*#|^PR[[:space:]]+[0-9]')\n      ), monthly_fact AS (\n        SELECT month_start, COUNT(*) AS transaction_count,\n          SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) AS net_sales_candidate,\n          SUM(CASE WHEN is_gross_margin_eligible THEN gross_margin_amount END) AS gross_margin_candidate,\n          SUM(CASE WHEN is_gross_margin_eligible THEN net_sales END) AS margin_revenue_basis\n        FROM `workspace`.`medshield_gold`.`sales_restart_fact_candidate` VERSION AS OF 91 WHERE is_analysis_candidate = TRUE AND NOT (is_contract_label = TRUE OR UPPER(TRIM(normalized_product)) RLIKE\n  '^(PAGBILAO|QMC|PPDC|TOURISM|PROVINCIAL[[:space:]]+TOURISM[[:space:]]+OFFICE|MARINDUQUE|GULANG[[:space:]]+GULANG|PESO|PESO[[:space:]]+PROVINCIAL|PHO|ABOITIZ|PADRE[[:space:]]+BURGOS|PPOC)([[:space:]]*#|[[:space:]]+[0-9])|^DR[[:space:]]*#|^PR[[:space:]]+[0-9]') GROUP BY month_start\n      )\n      SELECT DATE_FORMAT(s.month_start, 'yyyy-MM') AS year_month,\n        MONTH(s.month_start) AS month_number,\n        DATE_FORMAT(s.month_start, 'MMM') AS month_short_name,\n        COALESCE(m.transaction_count, 0) > 0 AS has_sales_activity,\n        COALESCE(m.transaction_count, 0) AS transaction_count,\n        m.net_sales_candidate,\n        m.gross_margin_candidate,\n        m.margin_revenue_basis\n      FROM month_spine AS s LEFT JOIN monthly_fact AS m USING (month_start)\n      ORDER BY s.month_start",
+    "SELECT CASE WHEN normalized_area = 'LOWER CAVITE' THEN 'CAVITE' ELSE normalized_area END AS area_name,\n      COUNT(*) AS transaction_count,\n      SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) AS revenue,\n      SUM(CASE WHEN is_gross_margin_eligible THEN gross_margin_amount END) AS income\n      FROM `workspace`.`medshield_gold`.`sales_restart_fact_candidate` VERSION AS OF 91 WHERE is_analysis_candidate = TRUE AND NOT (is_contract_label = TRUE OR UPPER(TRIM(normalized_product)) RLIKE\n  '^(PAGBILAO|QMC|PPDC|TOURISM|PROVINCIAL[[:space:]]+TOURISM[[:space:]]+OFFICE|MARINDUQUE|GULANG[[:space:]]+GULANG|PESO|PESO[[:space:]]+PROVINCIAL|PHO|ABOITIZ|PADRE[[:space:]]+BURGOS|PPOC)([[:space:]]*#|[[:space:]]+[0-9])|^DR[[:space:]]*#|^PR[[:space:]]+[0-9]')\n      GROUP BY CASE WHEN normalized_area = 'LOWER CAVITE' THEN 'CAVITE' ELSE normalized_area END\n      ORDER BY revenue DESC",
+    "WITH product_totals AS (SELECT normalized_product AS product_name, COUNT(*) AS transaction_count,\n      SUM(CASE WHEN is_quantity_observation_eligible THEN quantity END) AS qty,\n      SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) AS revenue,\n      SUM(CASE WHEN is_net_sales_eligible AND net_sales > 0 THEN net_sales ELSE 0 END) AS positive_sales,\n      SUM(CASE WHEN is_net_sales_eligible AND net_sales < 0 THEN net_sales ELSE 0 END) AS returns_value,\n      SUM(CASE WHEN is_gross_margin_eligible THEN gross_margin_amount END) AS income\n      FROM `workspace`.`medshield_gold`.`sales_restart_fact_candidate` VERSION AS OF 91\n      WHERE is_analysis_candidate = TRUE AND NOT (is_contract_label = TRUE OR UPPER(TRIM(normalized_product)) RLIKE\n  '^(PAGBILAO|QMC|PPDC|TOURISM|PROVINCIAL[[:space:]]+TOURISM[[:space:]]+OFFICE|MARINDUQUE|GULANG[[:space:]]+GULANG|PESO|PESO[[:space:]]+PROVINCIAL|PHO|ABOITIZ|PADRE[[:space:]]+BURGOS|PPOC)([[:space:]]*#|[[:space:]]+[0-9])|^DR[[:space:]]*#|^PR[[:space:]]+[0-9]')\n        AND product_scope_status <> 'CONTRACT_LABEL_CANDIDATE'\n        AND UPPER(normalized_product) NOT LIKE 'DR#%'\n        AND UPPER(normalized_product) NOT LIKE 'DR #%TERMS%'\n        AND UPPER(normalized_product) NOT RLIKE '^PR [0-9]'\n      GROUP BY normalized_product)\n      SELECT *, SUM(positive_sales) OVER () AS product_revenue_total,\n        SUM(CASE WHEN revenue < 0 THEN 1 ELSE 0 END) OVER () AS negative_product_count,\n        SUM(positive_sales) OVER (ORDER BY positive_sales DESC, product_name ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS cumulative_revenue\n      FROM product_totals ORDER BY positive_sales DESC, product_name LIMIT 100",
+    "WITH monthly_fact AS (\n        SELECT month_start, SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) AS net_sales_candidate\n        FROM `workspace`.`medshield_gold`.`sales_restart_fact_candidate` VERSION AS OF 91 WHERE is_analysis_candidate = TRUE AND NOT (is_contract_label = TRUE OR UPPER(TRIM(normalized_product)) RLIKE\n  '^(PAGBILAO|QMC|PPDC|TOURISM|PROVINCIAL[[:space:]]+TOURISM[[:space:]]+OFFICE|MARINDUQUE|GULANG[[:space:]]+GULANG|PESO|PESO[[:space:]]+PROVINCIAL|PHO|ABOITIZ|PADRE[[:space:]]+BURGOS|PPOC)([[:space:]]*#|[[:space:]]+[0-9])|^DR[[:space:]]*#|^PR[[:space:]]+[0-9]') GROUP BY month_start\n      )\n      SELECT MONTH(month_start) AS month_number,\n        MAX(DATE_FORMAT(month_start, 'MMM')) AS month,\n        AVG(net_sales_candidate) AS avg_revenue,\n        COUNT(net_sales_candidate) AS observed_month_count\n      FROM monthly_fact\n      GROUP BY MONTH(month_start) ORDER BY month_number"
+  ]
+}

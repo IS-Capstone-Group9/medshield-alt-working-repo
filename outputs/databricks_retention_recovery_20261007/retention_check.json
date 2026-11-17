@@ -1,0 +1,103 @@
+{
+  "checked_at": "2026-10-07T05:12:45.072Z",
+  "operation": "read_only_sql",
+  "table": "workspace.medshield_gold.sales_restart_fact_candidate",
+  "checks": {
+    "history": {
+      "status": "PASS",
+      "rows": [
+        {
+          "version": "17",
+          "timestamp": "2026-09-27T14:20:23.000Z",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT"
+        },
+        {
+          "version": "16",
+          "timestamp": "2026-09-27T06:02:25.000Z",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT"
+        },
+        {
+          "version": "15",
+          "timestamp": "2026-09-26T16:43:04.000Z",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT"
+        },
+        {
+          "version": "14",
+          "timestamp": "2026-09-26T12:48:59.000Z",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT"
+        },
+        {
+          "version": "13",
+          "timestamp": "2026-09-26T12:14:57.000Z",
+          "operation": "COMPUTE STATS"
+        },
+        {
+          "version": "12",
+          "timestamp": "2026-09-26T12:14:41.000Z",
+          "operation": "SET TBLPROPERTIES"
+        },
+        {
+          "version": "11",
+          "timestamp": "2026-09-26T04:07:25.000Z",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT"
+        },
+        {
+          "version": "10",
+          "timestamp": "2026-09-25T13:53:45.000Z",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT"
+        },
+        {
+          "version": "9",
+          "timestamp": "2026-09-24T17:34:51.000Z",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT"
+        },
+        {
+          "version": "8",
+          "timestamp": "2026-09-18T12:18:00.000Z",
+          "operation": "COMPUTE STATS"
+        }
+      ]
+    },
+    "retention_properties": {
+      "status": "PASS",
+      "rows": []
+    },
+    "current_identity_totals": {
+      "status": "PASS",
+      "rows": [
+        {
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "records": "37728",
+          "unique_records": "37728",
+          "eligible_net_sales": "626946741.810000"
+        }
+      ]
+    },
+    "baseline16_readability": {
+      "status": "UNAVAILABLE",
+      "error": "Databricks SQL statement did not succeed (FAILED: BAD_REQUEST: [DELTA_UNSUPPORTED_TIME_TRAVEL_BEYOND_DELETED_FILE_RETENTION_DURATION] Cannot time travel beyond delta.deletedFileRetentionDuration (168 HOURS) set on the table.)"
+    },
+    "captured_current_version_readability": {
+      "status": "PASS",
+      "rows": [
+        {
+          "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+          "policy_version": "sales_restart_gold_v7_independent_catalog",
+          "records": "37728"
+        }
+      ]
+    },
+    "history_end": {
+      "status": "PASS",
+      "rows": [
+        {
+          "version": "17",
+          "timestamp": "2026-09-27T14:20:23.000Z",
+          "operation": "CREATE OR REPLACE TABLE AS SELECT"
+        }
+      ]
+    }
+  },
+  "version_stable": true
+}

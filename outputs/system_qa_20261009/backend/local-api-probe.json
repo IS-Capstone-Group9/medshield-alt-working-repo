@@ -1,0 +1,1199 @@
+{
+  "checked_at": "2026-10-09T02:11:36.110Z",
+  "kind": "local isolated actual gateway fixture",
+  "outgoing_network_calls_denied": 0,
+  "total": 92,
+  "passed": 82,
+  "failed": 10,
+  "results": [
+    {
+      "name": "health public",
+      "method": "GET",
+      "url": "/api/health",
+      "role": "anonymous",
+      "expectedStatus": 200,
+      "status": 200,
+      "pass": true,
+      "body": {
+        "status": "ok",
+        "service": "MedShield API gateway",
+        "architecture": "typescript-api-gateway",
+        "source": "databricks",
+        "runtime": "typescript",
+        "auth_mode": "local-session",
+        "dashboard_fallback": false
+      }
+    },
+    {
+      "name": "denies anonymous /summary",
+      "method": "GET",
+      "url": "/api/summary",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /dashboard_status",
+      "method": "GET",
+      "url": "/api/dashboard_status",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /monthly",
+      "method": "GET",
+      "url": "/api/monthly",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /by_area",
+      "method": "GET",
+      "url": "/api/by_area",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /products",
+      "method": "GET",
+      "url": "/api/products",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /year_summary",
+      "method": "GET",
+      "url": "/api/year_summary",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /seasonality/stl",
+      "method": "GET",
+      "url": "/api/seasonality/stl",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /seasonality",
+      "method": "GET",
+      "url": "/api/seasonality",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /forecasts",
+      "method": "GET",
+      "url": "/api/forecasts",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /external_signals",
+      "method": "GET",
+      "url": "/api/external_signals",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /inventory_recommendations",
+      "method": "GET",
+      "url": "/api/inventory_recommendations",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /regional_priorities",
+      "method": "GET",
+      "url": "/api/regional_priorities",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /area_clusters",
+      "method": "GET",
+      "url": "/api/area_clusters",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /product_priorities",
+      "method": "GET",
+      "url": "/api/product_priorities",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /allocation_recommendations",
+      "method": "GET",
+      "url": "/api/allocation_recommendations",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /product_region_matches",
+      "method": "GET",
+      "url": "/api/product_region_matches",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /decision_alerts",
+      "method": "GET",
+      "url": "/api/decision_alerts",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /model_evaluation",
+      "method": "GET",
+      "url": "/api/model_evaluation",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /sales/status",
+      "method": "GET",
+      "url": "/api/sales/status",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /sales/heatmap",
+      "method": "GET",
+      "url": "/api/sales/heatmap",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /sales/sectors",
+      "method": "GET",
+      "url": "/api/sales/sectors",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /sales/forecast-validation",
+      "method": "GET",
+      "url": "/api/sales/forecast-validation",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /sales/external-regression",
+      "method": "GET",
+      "url": "/api/sales/external-regression",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /sales/planning-shortlist",
+      "method": "GET",
+      "url": "/api/sales/planning-shortlist",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /sales/diagnostics",
+      "method": "GET",
+      "url": "/api/sales/diagnostics",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /sales/transactions",
+      "method": "GET",
+      "url": "/api/sales/transactions",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /sales/summary",
+      "method": "GET",
+      "url": "/api/sales/summary",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /weather/effects",
+      "method": "GET",
+      "url": "/api/weather/effects",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /integrations/databricks/status",
+      "method": "GET",
+      "url": "/api/integrations/databricks/status",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /integrations/databricks/external/status",
+      "method": "GET",
+      "url": "/api/integrations/databricks/external/status",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /audit",
+      "method": "GET",
+      "url": "/api/audit",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /auth/me",
+      "method": "GET",
+      "url": "/api/auth/me",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /sales/planning-solve",
+      "method": "POST",
+      "url": "/api/sales/planning-solve",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /sales/upload",
+      "method": "POST",
+      "url": "/api/sales/upload",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /weather/refresh",
+      "method": "POST",
+      "url": "/api/weather/refresh",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /integrations/databricks/sync/yearly",
+      "method": "POST",
+      "url": "/api/integrations/databricks/sync/yearly",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /auth/logout",
+      "method": "POST",
+      "url": "/api/auth/logout",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /auth/complete-password-reset",
+      "method": "POST",
+      "url": "/api/auth/complete-password-reset",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "denies anonymous /audit",
+      "method": "POST",
+      "url": "/api/audit",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Authentication token is required"
+      }
+    },
+    {
+      "name": "malformed year requires auth first",
+      "method": "GET",
+      "url": "/api/monthly?year=2025&year=2024",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 400,
+      "pass": false,
+      "body": {
+        "error": "Query parameter year must occur once with a scalar value.",
+        "code": "INVALID_QUERY_PARAMETER"
+      }
+    },
+    {
+      "name": "structured year requires auth first",
+      "method": "GET",
+      "url": "/api/monthly?year[value]=2025",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 400,
+      "pass": false,
+      "body": {
+        "error": "Query parameter year must occur once with a scalar value.",
+        "code": "INVALID_QUERY_PARAMETER"
+      }
+    },
+    {
+      "name": "invalid session denied",
+      "method": "GET",
+      "url": "/api/auth/me",
+      "role": "anonymous",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Session expired or invalid"
+      }
+    },
+    {
+      "name": "me allowed admin",
+      "method": "GET",
+      "url": "/api/auth/me",
+      "role": "admin",
+      "expectedStatus": 200,
+      "status": 200,
+      "pass": true,
+      "body": {
+        "user": {
+          "account_id": 1,
+          "username": "qa-admin",
+          "email": "qa@example.invalid",
+          "role": "admin"
+        }
+      }
+    },
+    {
+      "name": "me allowed manager",
+      "method": "GET",
+      "url": "/api/auth/me",
+      "role": "manager",
+      "expectedStatus": 200,
+      "status": 200,
+      "pass": true,
+      "body": {
+        "user": {
+          "account_id": 1,
+          "username": "qa-manager",
+          "email": "qa@example.invalid",
+          "role": "manager"
+        }
+      }
+    },
+    {
+      "name": "me allowed analyst",
+      "method": "GET",
+      "url": "/api/auth/me",
+      "role": "analyst",
+      "expectedStatus": 200,
+      "status": 200,
+      "pass": true,
+      "body": {
+        "user": {
+          "account_id": 1,
+          "username": "qa-analyst",
+          "email": "qa@example.invalid",
+          "role": "analyst"
+        }
+      }
+    },
+    {
+      "name": "me allowed viewer",
+      "method": "GET",
+      "url": "/api/auth/me",
+      "role": "viewer",
+      "expectedStatus": 200,
+      "status": 200,
+      "pass": true,
+      "body": {
+        "user": {
+          "account_id": 1,
+          "username": "qa-viewer",
+          "email": "qa@example.invalid",
+          "role": "viewer"
+        }
+      }
+    },
+    {
+      "name": "password reset blocks analytics",
+      "method": "GET",
+      "url": "/api/summary",
+      "role": "reset",
+      "expectedStatus": 403,
+      "status": 403,
+      "pass": true,
+      "body": {
+        "error": "A password change is required before accessing MedShield.",
+        "code": "PASSWORD_RESET_REQUIRED"
+      }
+    },
+    {
+      "name": "password reset allows me",
+      "method": "GET",
+      "url": "/api/auth/me",
+      "role": "reset",
+      "expectedStatus": 200,
+      "status": 200,
+      "pass": true,
+      "body": {
+        "user": {
+          "account_id": 2,
+          "username": "qa-reset",
+          "email": "reset@example.invalid",
+          "role": "admin",
+          "password_reset_required": true
+        }
+      }
+    },
+    {
+      "name": "viewer denied provider write",
+      "method": "POST",
+      "url": "/api/weather/refresh",
+      "role": "viewer",
+      "expectedStatus": 403,
+      "status": 403,
+      "pass": true,
+      "body": {
+        "error": "Access Denied: Action requires [analyst] role clearance. Current role is 'viewer'.",
+        "code": "FORBIDDEN_ROLE"
+      }
+    },
+    {
+      "name": "manager denied provider write",
+      "method": "POST",
+      "url": "/api/weather/refresh",
+      "role": "manager",
+      "expectedStatus": 403,
+      "status": 403,
+      "pass": true,
+      "body": {
+        "error": "Access Denied: Action requires [analyst] role clearance. Current role is 'manager'.",
+        "code": "FORBIDDEN_ROLE"
+      }
+    },
+    {
+      "name": "analyst validates provider body",
+      "method": "POST",
+      "url": "/api/weather/refresh",
+      "role": "analyst",
+      "expectedStatus": 400,
+      "status": 400,
+      "pass": true,
+      "body": {
+        "error": "start must use YYYY-MM-DD format",
+        "code": "INVALID_WEATHER_REFRESH"
+      }
+    },
+    {
+      "name": "admin validates provider body",
+      "method": "POST",
+      "url": "/api/weather/refresh",
+      "role": "admin",
+      "expectedStatus": 400,
+      "status": 400,
+      "pass": true,
+      "body": {
+        "error": "start must use YYYY-MM-DD format",
+        "code": "INVALID_WEATHER_REFRESH"
+      }
+    },
+    {
+      "name": "viewer denied yearly write",
+      "method": "POST",
+      "url": "/api/integrations/databricks/sync/yearly",
+      "role": "viewer",
+      "expectedStatus": 403,
+      "status": 403,
+      "pass": true,
+      "body": {
+        "error": "Access Denied: Action requires [admin] role clearance. Current role is 'viewer'.",
+        "code": "FORBIDDEN_ROLE"
+      }
+    },
+    {
+      "name": "analyst denied admin status",
+      "method": "GET",
+      "url": "/api/integrations/databricks/status",
+      "role": "analyst",
+      "expectedStatus": 403,
+      "status": 403,
+      "pass": true,
+      "body": {
+        "error": "Access Denied: Action requires [admin] role clearance. Current role is 'analyst'.",
+        "code": "FORBIDDEN_ROLE"
+      }
+    },
+    {
+      "name": "admin source not configured explicit",
+      "method": "GET",
+      "url": "/api/integrations/databricks/status",
+      "role": "admin",
+      "expectedStatus": 503,
+      "status": 503,
+      "pass": true,
+      "body": {
+        "connected": false,
+        "error": "Databricks is not configured on the MedShield backend.",
+        "code": "DATABRICKS_NOT_CONFIGURED"
+      }
+    },
+    {
+      "name": "viewer denied audit read",
+      "method": "GET",
+      "url": "/api/audit",
+      "role": "viewer",
+      "expectedStatus": 403,
+      "status": 403,
+      "pass": true,
+      "body": {
+        "error": "Access denied: compliance auditor role required"
+      }
+    },
+    {
+      "name": "analyst denied audit read",
+      "method": "GET",
+      "url": "/api/audit",
+      "role": "analyst",
+      "expectedStatus": 403,
+      "status": 403,
+      "pass": true,
+      "body": {
+        "error": "Access denied: compliance auditor role required"
+      }
+    },
+    {
+      "name": "manager audit read",
+      "method": "GET",
+      "url": "/api/audit",
+      "role": "manager",
+      "expectedStatus": 200,
+      "status": 200,
+      "pass": true,
+      "body": []
+    },
+    {
+      "name": "admin durable audit write fixture",
+      "method": "POST",
+      "url": "/api/audit",
+      "role": "admin",
+      "expectedStatus": 200,
+      "status": 200,
+      "pass": true,
+      "body": {
+        "ok": true,
+        "storage": "local",
+        "event_id": "e0d123d4-081f-410a-86da-7bc9f214ed16"
+      }
+    },
+    {
+      "name": "admin durable audit read fixture",
+      "method": "GET",
+      "url": "/api/audit",
+      "role": "admin",
+      "expectedStatus": 200,
+      "status": 200,
+      "pass": true,
+      "body": [
+        {
+          "username": "qa-admin",
+          "action": "QA_PROBE",
+          "detail": "Isolated fixture event.",
+          "ip_address": "::1",
+          "user_agent": "node",
+          "created_at": "2026-10-09T02:11:35.901Z",
+          "event_id": "e0d123d4-081f-410a-86da-7bc9f214ed16",
+          "chain_id": "local-v1",
+          "chain_sequence": 1,
+          "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "entry_hash": "5c8ca96ad58196889de4ed28bf10d67b4fc8d71c0d5569e6fced7e5113265467",
+          "hash_payload": "{\"event_id\":\"e0d123d4-081f-410a-86da-7bc9f214ed16\",\"username\":\"qa-admin\",\"action\":\"QA_PROBE\",\"detail\":\"Isolated fixture event.\",\"ip_address\":\"::1\",\"user_agent\":\"node\",\"created_at\":\"2026-10-09T02:11:35.901Z\"}",
+          "hash_version": "sha256-json-v1",
+          "tamper_evident": false,
+          "storage_source": "local"
+        }
+      ]
+    },
+    {
+      "name": "browser upload disabled",
+      "method": "POST",
+      "url": "/api/sales/upload",
+      "role": "analyst",
+      "expectedStatus": 409,
+      "status": 409,
+      "pass": true,
+      "body": {
+        "error": "Browser uploads are disabled because Databricks is the dashboard system of record. Ingest and validate files in the Databricks pipeline.",
+        "code": "DATABRICKS_INGESTION_REQUIRED"
+      }
+    },
+    {
+      "name": "invalid monthly year denied",
+      "method": "GET",
+      "url": "/api/monthly?year=abc",
+      "role": "viewer",
+      "expectedStatus": 400,
+      "status": 400,
+      "pass": true,
+      "body": {
+        "error": "year must be a single four-digit year between 1000 and 9999"
+      }
+    },
+    {
+      "name": "duplicate monthly year denied",
+      "method": "GET",
+      "url": "/api/monthly?year=2025&year=2024",
+      "role": "viewer",
+      "expectedStatus": 400,
+      "status": 400,
+      "pass": true,
+      "body": {
+        "error": "Query parameter year must occur once with a scalar value.",
+        "code": "INVALID_QUERY_PARAMETER"
+      }
+    },
+    {
+      "name": "structured monthly year denied",
+      "method": "GET",
+      "url": "/api/monthly?year[value]=2025",
+      "role": "viewer",
+      "expectedStatus": 400,
+      "status": 400,
+      "pass": true,
+      "body": {
+        "error": "Query parameter year must occur once with a scalar value.",
+        "code": "INVALID_QUERY_PARAMETER"
+      }
+    },
+    {
+      "name": "invalid product category",
+      "method": "GET",
+      "url": "/api/products?category=UnknownCategory",
+      "role": "viewer",
+      "expectedStatus": 400,
+      "status": 400,
+      "pass": true,
+      "body": {
+        "error": "category must be All, Medical, Non-Medical, or Unclassified",
+        "code": "INVALID_DATABRICKS_QUERY"
+      }
+    },
+    {
+      "name": "invalid product limit",
+      "method": "GET",
+      "url": "/api/products?limit=0",
+      "role": "viewer",
+      "expectedStatus": 400,
+      "status": 400,
+      "pass": true,
+      "body": {
+        "error": "limit must be an integer between 1 and 100"
+      }
+    },
+    {
+      "name": "forecast unknown filters",
+      "method": "GET",
+      "url": "/api/forecasts?unexpected=true",
+      "role": "viewer",
+      "expectedStatus": 400,
+      "status": 400,
+      "pass": true,
+      "body": {
+        "code": "INVALID_FORECAST_FILTER",
+        "error": "Invalid unexpected"
+      }
+    },
+    {
+      "name": "forecast invalid schema",
+      "method": "GET",
+      "url": "/api/forecasts?schema_version=3",
+      "role": "viewer",
+      "expectedStatus": 400,
+      "status": 400,
+      "pass": true,
+      "body": {
+        "code": "INVALID_FORECAST_FILTER",
+        "error": "schema_version=2 required"
+      }
+    },
+    {
+      "name": "forecast-validation unknown filters",
+      "method": "GET",
+      "url": "/api/sales/forecast-validation?unexpected=true",
+      "role": "viewer",
+      "expectedStatus": 400,
+      "status": 400,
+      "pass": true,
+      "body": {
+        "code": "INVALID_FORECAST_FILTER",
+        "error": "Forecast filters must be recognized scalar values."
+      }
+    },
+    {
+      "name": "planning invalid sector",
+      "method": "GET",
+      "url": "/api/sales/planning-shortlist?sector=unknown",
+      "role": "viewer",
+      "expectedStatus": 400,
+      "status": 400,
+      "pass": true,
+      "body": {
+        "error": "Invalid buyer cluster",
+        "code": "INVALID_DATABRICKS_QUERY"
+      }
+    },
+    {
+      "name": "diagnostics missing range",
+      "method": "GET",
+      "url": "/api/sales/diagnostics",
+      "role": "viewer",
+      "expectedStatus": 400,
+      "status": 400,
+      "pass": true,
+      "body": {
+        "error": "start_date must be YYYY-MM-DD",
+        "code": "INVALID_DATABRICKS_QUERY"
+      }
+    },
+    {
+      "name": "unavailable no fallback /summary",
+      "method": "GET",
+      "url": "/api/summary",
+      "role": "viewer",
+      "expectedStatus": 503,
+      "status": 502,
+      "pass": false,
+      "body": {
+        "error": "Live Databricks dashboard data is unavailable. No local or mock fallback was used.",
+        "code": "DATABRICKS_QUERY_FAILED"
+      }
+    },
+    {
+      "name": "unavailable no fallback /monthly?year=2035",
+      "method": "GET",
+      "url": "/api/monthly?year=2035",
+      "role": "viewer",
+      "expectedStatus": 503,
+      "status": 502,
+      "pass": false,
+      "body": {
+        "error": "Live Databricks dashboard data is unavailable. No local or mock fallback was used.",
+        "code": "DATABRICKS_QUERY_FAILED"
+      }
+    },
+    {
+      "name": "unavailable no fallback /sales/status",
+      "method": "GET",
+      "url": "/api/sales/status",
+      "role": "viewer",
+      "expectedStatus": 503,
+      "status": 502,
+      "pass": false,
+      "body": {
+        "error": "Live Databricks dashboard data is unavailable. No local or mock fallback was used.",
+        "code": "DATABRICKS_QUERY_FAILED"
+      }
+    },
+    {
+      "name": "unavailable no fallback /sales/heatmap",
+      "method": "GET",
+      "url": "/api/sales/heatmap",
+      "role": "viewer",
+      "expectedStatus": 503,
+      "status": 502,
+      "pass": false,
+      "body": {
+        "error": "Live Databricks dashboard data is unavailable. No local or mock fallback was used.",
+        "code": "DATABRICKS_QUERY_FAILED"
+      }
+    },
+    {
+      "name": "unavailable no fallback /sales/sectors",
+      "method": "GET",
+      "url": "/api/sales/sectors",
+      "role": "viewer",
+      "expectedStatus": 503,
+      "status": 502,
+      "pass": false,
+      "body": {
+        "error": "Live Databricks dashboard data is unavailable. No local or mock fallback was used.",
+        "code": "DATABRICKS_QUERY_FAILED"
+      }
+    },
+    {
+      "name": "unavailable no fallback /sales/transactions",
+      "method": "GET",
+      "url": "/api/sales/transactions",
+      "role": "viewer",
+      "expectedStatus": 503,
+      "status": 502,
+      "pass": false,
+      "body": {
+        "error": "Live Databricks dashboard data is unavailable. No local or mock fallback was used.",
+        "code": "DATABRICKS_QUERY_FAILED"
+      }
+    },
+    {
+      "name": "unavailable no fallback /sales/summary",
+      "method": "GET",
+      "url": "/api/sales/summary",
+      "role": "viewer",
+      "expectedStatus": 503,
+      "status": 502,
+      "pass": false,
+      "body": {
+        "error": "Live Databricks dashboard data is unavailable. No local or mock fallback was used.",
+        "code": "DATABRICKS_QUERY_FAILED"
+      }
+    },
+    {
+      "name": "unavailable STL",
+      "method": "GET",
+      "url": "/api/seasonality/stl",
+      "role": "viewer",
+      "expectedStatus": 503,
+      "status": 503,
+      "pass": true,
+      "body": {
+        "code": "STL_UNAVAILABLE",
+        "error": "Validated STL is unavailable for the active dataset. Calendar-month averages remain a separate descriptive measure."
+      }
+    },
+    {
+      "name": "legacy source blocked /classify_medicine",
+      "method": "GET",
+      "url": "/api/classify_medicine",
+      "role": "viewer",
+      "expectedStatus": 503,
+      "status": 503,
+      "pass": true,
+      "body": {
+        "error": "This legacy local-analysis endpoint is disabled. Publish an approved Databricks Gold view before exposing this result.",
+        "code": "DATABRICKS_VIEW_REQUIRED"
+      }
+    },
+    {
+      "name": "legacy source blocked /therapeutic_categories",
+      "method": "GET",
+      "url": "/api/therapeutic_categories",
+      "role": "viewer",
+      "expectedStatus": 503,
+      "status": 503,
+      "pass": true,
+      "body": {
+        "error": "This legacy local-analysis endpoint is disabled. Publish an approved Databricks Gold view before exposing this result.",
+        "code": "DATABRICKS_VIEW_REQUIRED"
+      }
+    },
+    {
+      "name": "legacy source blocked /procurement_orders",
+      "method": "GET",
+      "url": "/api/procurement_orders",
+      "role": "viewer",
+      "expectedStatus": 503,
+      "status": 503,
+      "pass": true,
+      "body": {
+        "error": "This legacy local-analysis endpoint is disabled. Publish an approved Databricks Gold view before exposing this result.",
+        "code": "DATABRICKS_VIEW_REQUIRED"
+      }
+    },
+    {
+      "name": "legacy source blocked /seasonal_epidemic_matrix",
+      "method": "GET",
+      "url": "/api/seasonal_epidemic_matrix",
+      "role": "viewer",
+      "expectedStatus": 503,
+      "status": 503,
+      "pass": true,
+      "body": {
+        "error": "This legacy local-analysis endpoint is disabled. Publish an approved Databricks Gold view before exposing this result.",
+        "code": "DATABRICKS_VIEW_REQUIRED"
+      }
+    },
+    {
+      "name": "legacy source blocked /dss/prescriptive",
+      "method": "GET",
+      "url": "/api/dss/prescriptive",
+      "role": "viewer",
+      "expectedStatus": 503,
+      "status": 503,
+      "pass": true,
+      "body": {
+        "error": "This legacy local-analysis endpoint is disabled. Publish an approved Databricks Gold view before exposing this result.",
+        "code": "DATABRICKS_VIEW_REQUIRED"
+      }
+    },
+    {
+      "name": "legacy source blocked /seasonal_restock_detail",
+      "method": "GET",
+      "url": "/api/seasonal_restock_detail",
+      "role": "viewer",
+      "expectedStatus": 503,
+      "status": 503,
+      "pass": true,
+      "body": {
+        "error": "This legacy local-analysis endpoint is disabled. Publish an approved Databricks Gold view before exposing this result.",
+        "code": "DATABRICKS_VIEW_REQUIRED"
+      }
+    },
+    {
+      "name": "legacy source blocked /model_summary",
+      "method": "GET",
+      "url": "/api/model_summary",
+      "role": "viewer",
+      "expectedStatus": 503,
+      "status": 503,
+      "pass": true,
+      "body": {
+        "error": "This legacy local-analysis endpoint is disabled. Publish an approved Databricks Gold view before exposing this result.",
+        "code": "DATABRICKS_VIEW_REQUIRED"
+      }
+    },
+    {
+      "name": "legacy source blocked /mcda_territories",
+      "method": "GET",
+      "url": "/api/mcda_territories",
+      "role": "viewer",
+      "expectedStatus": 503,
+      "status": 503,
+      "pass": true,
+      "body": {
+        "error": "This legacy local-analysis endpoint is disabled. Publish an approved Databricks Gold view before exposing this result.",
+        "code": "DATABRICKS_VIEW_REQUIRED"
+      }
+    },
+    {
+      "name": "legacy source blocked /eoq_scenarios",
+      "method": "GET",
+      "url": "/api/eoq_scenarios",
+      "role": "viewer",
+      "expectedStatus": 503,
+      "status": 503,
+      "pass": true,
+      "body": {
+        "error": "This legacy local-analysis endpoint is disabled. Publish an approved Databricks Gold view before exposing this result.",
+        "code": "DATABRICKS_VIEW_REQUIRED"
+      }
+    },
+    {
+      "name": "disallowed CORS origin",
+      "method": "GET",
+      "url": "/api/health",
+      "role": "anonymous",
+      "expectedStatus": 403,
+      "status": 500,
+      "pass": false,
+      "body": {
+        "raw": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Error: CORS: origin https://untrusted.invalid is not allowed<br> &nbsp; &nbsp;at origin (C:\\Users\\Adrian\\projects\\medshield1\\medshield\\backend\\src\\server.ts:101:23)<br> &nbsp; &nbsp;at C:\\Users\\Adrian\\projects\\medshield1\\medshield\\backend\\node_modules\\cors\\lib\\index.js:219:13<br> &nbsp; &nbsp;at optionsCallback (C:\\Users\\Adrian\\projects\\medshield1\\medshield\\backend\\node_modules\\cors\\lib\\index."
+      }
+    },
+    {
+      "name": "logout local",
+      "method": "POST",
+      "url": "/api/auth/logout",
+      "role": "viewer",
+      "expectedStatus": 200,
+      "status": 200,
+      "pass": true,
+      "body": {
+        "ok": true
+      }
+    },
+    {
+      "name": "logout revoked local session",
+      "method": "GET",
+      "url": "/api/auth/me",
+      "role": "viewer",
+      "expectedStatus": 401,
+      "status": 401,
+      "pass": true,
+      "body": {
+        "error": "Session expired or invalid"
+      }
+    }
+  ]
+}

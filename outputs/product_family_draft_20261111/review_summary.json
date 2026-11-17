@@ -1,0 +1,14 @@
+{
+ "families_reviewed": 150,
+ "share_of_net_pct": 63.04,
+ "likely_ok": 126,
+ "flag_counts": {
+  "LIKELY_OK": 126,
+  "MIXED_CATEGORY": 3,
+  "MANY_VARIANTS": 7,
+  "POSSIBLE_SPLIT": 17,
+  "GENERIC_KEY": 7,
+  "SHORT_KEY": 1
+ },
+ "status": "automated_first_pass_needs_human_decision"
+}

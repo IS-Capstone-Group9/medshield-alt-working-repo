@@ -1,0 +1,213 @@
+{
+ "registration_sha256": "bbfd7a076ba9bef0a610bd6a7cade0c24f078c931f7ea7800b12786ad7929b87",
+ "mapping_sha256": "df9050d7fd7745ea63a2ab4e9035a3f9a8a1b143f2f73a6ad306a1ddab3a823d",
+ "items": {
+  "label": 4821,
+  "family": 3081
+ },
+ "F3_abc_xyz": {
+  "label": {
+   "by_year": {
+    "2021": {
+     "AX": {
+      "items": 9,
+      "value_kept": 0.8927810736940572
+     },
+     "AY": {
+      "items": 16,
+      "value_kept": 0.8189377596752379
+     },
+     "AZ": {
+      "items": 78,
+      "value_kept": 0.3463855103598756
+     }
+    },
+    "2022": {
+     "AX": {
+      "items": 9,
+      "value_kept": 0.33845779615639526
+     },
+     "AY": {
+      "items": 22,
+      "value_kept": 0.3827277458462766
+     },
+     "AZ": {
+      "items": 114,
+      "value_kept": 0.27959965376073936
+     }
+    },
+    "2023": {
+     "AY": {
+      "items": 4,
+      "value_kept": 1.8702376581283728
+     },
+     "AZ": {
+      "items": 298,
+      "value_kept": 0.1942231830804426
+     }
+    },
+    "2024": {
+     "AX": {
+      "items": 9,
+      "value_kept": 0.5457832027194013
+     },
+     "AY": {
+      "items": 28,
+      "value_kept": 1.0887656123061875
+     },
+     "AZ": {
+      "items": 72,
+      "value_kept": 1.4553763120424439
+     }
+    },
+    "2025": {
+     "AX": {
+      "items": 7,
+      "value_kept": 0.296813889995826
+     },
+     "AY": {
+      "items": 19,
+      "value_kept": 0.3038436641832409
+     },
+     "AZ": {
+      "items": 108,
+      "value_kept": 0.07365529819154483
+     }
+    }
+   },
+   "ax_years": 4,
+   "ax_value_kept_mean": 0.51845899064142,
+   "a_items_mean": 158.6,
+   "ax_items_mean": 6.8
+  },
+  "family": {
+   "by_year": {
+    "2021": {
+     "AX": {
+      "items": 9,
+      "value_kept": 0.9224145056713373
+     },
+     "AY": {
+      "items": 14,
+      "value_kept": 0.8627885948194066
+     },
+     "AZ": {
+      "items": 68,
+      "value_kept": 0.36134737988842974
+     }
+    },
+    "2022": {
+     "AX": {
+      "items": 10,
+      "value_kept": 0.7841079529120811
+     },
+     "AY": {
+      "items": 20,
+      "value_kept": 0.7597717900017439
+     },
+     "AZ": {
+      "items": 100,
+      "value_kept": 0.34882907301182753
+     }
+    },
+    "2023": {
+     "AX": {
+      "items": 6,
+      "value_kept": 1.0947395740984966
+     },
+     "AY": {
+      "items": 22,
+      "value_kept": 0.724839649760776
+     },
+     "AZ": {
+      "items": 162,
+      "value_kept": 0.172615268116254
+     }
+    },
+    "2024": {
+     "AX": {
+      "items": 13,
+      "value_kept": 0.6676528754544522
+     },
+     "AY": {
+      "items": 21,
+      "value_kept": 1.0144845070033444
+     },
+     "AZ": {
+      "items": 54,
+      "value_kept": 1.497353214429417
+     }
+    },
+    "2025": {
+     "AX": {
+      "items": 8,
+      "value_kept": 0.6272029448079334
+     },
+     "AY": {
+      "items": 13,
+      "value_kept": 0.7235400537955968
+     },
+     "AZ": {
+      "items": 91,
+      "value_kept": 0.6829378956394307
+     }
+    }
+   },
+   "ax_years": 5,
+   "ax_value_kept_mean": 0.8192235705888603,
+   "a_items_mean": 122.2,
+   "ax_items_mean": 9.2
+  },
+  "passes": true
+ },
+ "F4_tsb": {
+  "label": {
+   "items": 366,
+   "tsb_wape": 1.8365009708526974,
+   "tsb_bias": 0.7723093404381841,
+   "mean6_wape": 1.337183585335536,
+   "mean6_bias": 0.1875704880526616,
+   "boot90": [
+    440865.5430380987,
+    836882.1324097837
+   ],
+   "halves": [
+    24259110.101183616,
+    11452199.87750692
+   ],
+   "passes": false
+  },
+  "family": {
+   "items": 322,
+   "tsb_wape": 1.5224742310879291,
+   "tsb_bias": 0.1805349584745168,
+   "mean6_wape": 1.3231002275376555,
+   "mean6_bias": 0.017509545005467784,
+   "boot90": [
+    183506.24962627658,
+    595612.9544948884
+   ],
+   "halves": [
+    17892169.43415175,
+    4950512.559123175
+   ],
+   "passes": false
+  }
+ },
+ "F2_safety_stock": {
+  "label": {
+   "item_months": 9116,
+   "items": 645,
+   "achieved_service": 0.9765247915752523,
+   "median_buffer_pct_of_forecast": 227.65104808877905,
+   "passes": true
+  },
+  "family": {
+   "item_months": 7008,
+   "items": 440,
+   "achieved_service": 0.9621860730593608,
+   "median_buffer_pct_of_forecast": 230.2691258582442,
+   "passes": true
+  }
+ }
+}

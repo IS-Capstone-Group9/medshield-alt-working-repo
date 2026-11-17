@@ -1,0 +1,2683 @@
+{
+  "status": "PASS",
+  "verified_at": "2026-10-10T07:26:56.260606+00:00",
+  "check_count": 457,
+  "failure_count": 0,
+  "checks": [
+    {
+      "criterion": "expected claims frozen before authoring",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "authoring source bytes: outputs/predictive_error_policy_20261010/model-error-review.json",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "authoring source bytes: outputs/predictive_error_policy_20261010/policy.json",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "authoring source bytes: outputs/predictive_explanation_20261010/scorecard.json",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "authoring source bytes: outputs/predictive_annual_release_20261010/models/annual-origin-2025-12-asof-2026-10-10/a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b/run.json",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "authoring source bytes: outputs/predictive_completion_20261009/audit-comparison.png",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "earlier manuscript preserved: docs/drafts/MedShield_Chapter_4_5_Draft.docx",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "earlier manuscript preserved: docs/chapters/MedShield_Chapter_4_System_Implementation_Results_and_Discussion.docx",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "authored output bytes: docs/chapters/MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "authored output bytes: docs/chapters/MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.docx",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "authored output bytes: outputs/predictive_chapters_20261010/manuscript.json",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "expected source remains current: C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\run.json",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "expected source remains current: C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_annual_release_20261010\\models\\annual-origin-2025-12-asof-2026-10-10\\a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b\\run.json",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "expected source remains current: C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_validation\\2026-10-09T13-28-48-501Z\\input.json",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "expected source remains current: C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_policy_20261010\\policy.json",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "expected source remains current: C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_policy_20261010\\model-error-review.json",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "expected source remains current: C:\\Users\\Adrian\\projects\\medshield1\\medshield\\docs\\CHAPTER_4_5_EVIDENCE_PLAN.md",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "expected source remains current: C:\\Users\\Adrian\\projects\\medshield1\\medshield\\docs\\PAPER_REVISION_GUIDE.md",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "expected source remains current: C:\\Users\\Adrian\\projects\\medshield1\\medshield\\docs\\OBJECTIVE_EVIDENCE_REGISTER.md",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "builder identity",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "no model fits or remote mutation in receipt",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "bundled authoring runtime",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "62 blocks 4 tables 1 figure",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "21 model table population",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "independent displayed model metrics: last_value",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          "Last value",
+          "3,090,470.93",
+          "83.199360",
+          "5,834,383.00",
+          "37.763644"
+        ],
+        "observed": [
+          "Last value",
+          "3,090,470.93",
+          "83.199360",
+          "5,834,383.00",
+          "37.763644"
+        ]
+      }
+    },
+    {
+      "criterion": "independent displayed model metrics: seasonal_naive",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          "Seasonal naive",
+          "3,487,809.81",
+          "93.896222",
+          "11,261,458.43",
+          "72.890948"
+        ],
+        "observed": [
+          "Seasonal naive",
+          "3,487,809.81",
+          "93.896222",
+          "11,261,458.43",
+          "72.890948"
+        ]
+      }
+    },
+    {
+      "criterion": "independent displayed model metrics: mean_3",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          "Mean 3 months",
+          "3,533,478.17",
+          "95.125671",
+          "9,212,416.36",
+          "59.628313"
+        ],
+        "observed": [
+          "Mean 3 months",
+          "3,533,478.17",
+          "95.125671",
+          "9,212,416.36",
+          "59.628313"
+        ]
+      }
+    },
+    {
+      "criterion": "independent displayed model metrics: mean_6",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          "Mean 6 months",
+          "3,473,386.01",
+          "93.507915",
+          "10,526,958.88",
+          "68.136824"
+        ],
+        "observed": [
+          "Mean 6 months",
+          "3,473,386.01",
+          "93.507915",
+          "10,526,958.88",
+          "68.136824"
+        ]
+      }
+    },
+    {
+      "criterion": "independent displayed model metrics: ets_none",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          "ETS no trend",
+          "3,445,030.30",
+          "92.744543",
+          "10,501,032.20",
+          "67.969011"
+        ],
+        "observed": [
+          "ETS no trend",
+          "3,445,030.30",
+          "92.744543",
+          "10,501,032.20",
+          "67.969011"
+        ]
+      }
+    },
+    {
+      "criterion": "independent displayed model metrics: ets_damped",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          "ETS damped trend",
+          "3,725,795.38",
+          "100.303092",
+          "10,426,697.23",
+          "67.487871"
+        ],
+        "observed": [
+          "ETS damped trend",
+          "3,725,795.38",
+          "100.303092",
+          "10,426,697.23",
+          "67.487871"
+        ]
+      }
+    },
+    {
+      "criterion": "independent displayed model metrics: prophet_cp0.01_sp0.1",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          "Prophet cp 0.01 sp 0.1",
+          "3,483,090.93",
+          "93.769183",
+          "11,196,043.74",
+          "72.467545"
+        ],
+        "observed": [
+          "Prophet cp 0.01 sp 0.1",
+          "3,483,090.93",
+          "93.769183",
+          "11,196,043.74",
+          "72.467545"
+        ]
+      }
+    },
+    {
+      "criterion": "independent displayed model metrics: prophet_cp0.01_sp1.0",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          "Prophet cp 0.01 sp 1.0",
+          "3,504,558.43",
+          "94.347115",
+          "11,151,987.09",
+          "72.182384"
+        ],
+        "observed": [
+          "Prophet cp 0.01 sp 1.0",
+          "3,504,558.43",
+          "94.347115",
+          "11,151,987.09",
+          "72.182384"
+        ]
+      }
+    },
+    {
+      "criterion": "independent displayed model metrics: prophet_cp0.01_sp10.0",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          "Prophet cp 0.01 sp 10.0",
+          "3,474,665.62",
+          "93.542363",
+          "11,140,059.96",
+          "72.105184"
+        ],
+        "observed": [
+          "Prophet cp 0.01 sp 10.0",
+          "3,474,665.62",
+          "93.542363",
+          "11,140,059.96",
+          "72.105184"
+        ]
+      }
+    },
+    {
+      "criterion": "independent displayed model metrics: prophet_cp0.05_sp0.1",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          "Prophet cp 0.05 sp 0.1",
+          "3,511,337.42",
+          "94.529614",
+          "11,218,467.03",
+          "72.612682"
+        ],
+        "observed": [
+          "Prophet cp 0.05 sp 0.1",
+          "3,511,337.42",
+          "94.529614",
+          "11,218,467.03",
+          "72.612682"
+        ]
+      }
+    },
+    {
+      "criterion": "independent displayed model metrics: prophet_cp0.05_sp1.0",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          "Prophet cp 0.05 sp 1.0",
+          "3,515,219.25",
+          "94.634118",
+          "11,148,853.27",
+          "72.162100"
+        ],
+        "observed": [
+          "Prophet cp 0.05 sp 1.0",
+          "3,515,219.25",
+          "94.634118",
+          "11,148,853.27",
+          "72.162100"
+        ]
+      }
+    },
+    {
+      "criterion": "independent displayed model metrics: prophet_cp0.05_sp10.0",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          "Prophet cp 0.05 sp 10.0",
+          "3,522,034.02",
+          "94.817580",
+          "11,159,164.57",
+          "72.228841"
+        ],
+        "observed": [
+          "Prophet cp 0.05 sp 10.0",
+          "3,522,034.02",
+          "94.817580",
+          "11,159,164.57",
+          "72.228841"
+        ]
+      }
+    },
+    {
+      "criterion": "independent displayed model metrics: prophet_cp0.1_sp0.1",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          "Prophet cp 0.1 sp 0.1",
+          "3,499,652.58",
+          "94.215044",
+          "11,211,532.50",
+          "72.567798"
+        ],
+        "observed": [
+          "Prophet cp 0.1 sp 0.1",
+          "3,499,652.58",
+          "94.215044",
+          "11,211,532.50",
+          "72.567798"
+        ]
+      }
+    },
+    {
+      "criterion": "independent displayed model metrics: prophet_cp0.1_sp1.0",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          "Prophet cp 0.1 sp 1.0",
+          "3,523,434.78",
+          "94.855291",
+          "11,155,270.25",
+          "72.203635"
+        ],
+        "observed": [
+          "Prophet cp 0.1 sp 1.0",
+          "3,523,434.78",
+          "94.855291",
+          "11,155,270.25",
+          "72.203635"
+        ]
+      }
+    },
+    {
+      "criterion": "independent displayed model metrics: prophet_cp0.1_sp10.0",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          "Prophet cp 0.1 sp 10.0",
+          "3,527,663.96",
+          "94.969146",
+          "11,181,552.74",
+          "72.373751"
+        ],
+        "observed": [
+          "Prophet cp 0.1 sp 10.0",
+          "3,527,663.96",
+          "94.969146",
+          "11,181,552.74",
+          "72.373751"
+        ]
+      }
+    },
+    {
+      "criterion": "independent displayed model metrics: sarima_ar_seasonal",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          "SARIMA seasonal AR",
+          "3,961,537.71",
+          "106.649572",
+          "10,419,009.70",
+          "67.438112"
+        ],
+        "observed": [
+          "SARIMA seasonal AR",
+          "3,961,537.71",
+          "106.649572",
+          "10,419,009.70",
+          "67.438112"
+        ]
+      }
+    },
+    {
+      "criterion": "independent displayed model metrics: sarima_airline",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          "SARIMA airline",
+          "3,264,314.43",
+          "87.879445",
+          "9,791,473.91",
+          "63.376322"
+        ],
+        "observed": [
+          "SARIMA airline",
+          "3,264,314.43",
+          "87.879445",
+          "9,791,473.91",
+          "63.376322"
+        ]
+      }
+    },
+    {
+      "criterion": "independent displayed model metrics: ridge_direct_a1",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          "Ridge direct alpha 1",
+          "4,465,265.44",
+          "120.210555",
+          "11,327,417.25",
+          "73.317874"
+        ],
+        "observed": [
+          "Ridge direct alpha 1",
+          "4,465,265.44",
+          "120.210555",
+          "11,327,417.25",
+          "73.317874"
+        ]
+      }
+    },
+    {
+      "criterion": "independent displayed model metrics: ridge_direct_a10",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          "Ridge direct alpha 10",
+          "4,142,558.88",
+          "111.522889",
+          "11,226,510.27",
+          "72.664743"
+        ],
+        "observed": [
+          "Ridge direct alpha 10",
+          "4,142,558.88",
+          "111.522889",
+          "11,226,510.27",
+          "72.664743"
+        ]
+      }
+    },
+    {
+      "criterion": "independent displayed model metrics: ridge_recursive_a1",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          "Ridge recursive alpha 1",
+          "4,123,722.12",
+          "111.015780",
+          "10,876,676.33",
+          "70.400407"
+        ],
+        "observed": [
+          "Ridge recursive alpha 1",
+          "4,123,722.12",
+          "111.015780",
+          "10,876,676.33",
+          "70.400407"
+        ]
+      }
+    },
+    {
+      "criterion": "independent displayed model metrics: ridge_recursive_a10",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          "Ridge recursive alpha 10",
+          "3,958,004.57",
+          "106.554455",
+          "10,784,789.51",
+          "69.805660"
+        ],
+        "observed": [
+          "Ridge recursive alpha 10",
+          "3,958,004.57",
+          "106.554455",
+          "10,784,789.51",
+          "69.805660"
+        ]
+      }
+    },
+    {
+      "criterion": "independent direction decomposition table",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "family counts table",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "O3 table retains open target",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "annual generation prose matches actual execution",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "annual selected monthly and total",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "independent narrative amount: audit constant",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "independent narrative amount: March actual",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "independent narrative amount: largest overforecast",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "independent narrative amount: November actual",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "independent narrative amount: November underforecast",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "independent narrative amount: selected RMSE",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "independent narrative amount: audit MAE",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "largest miss month independently confirmed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "same-pair MAE/WAPE ordering claim: development",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "same-pair MAE/WAPE ordering claim: retrospective_audit",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "smaller audit WAPE larger audit MAE interpretation",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "source record count and fact policy prose",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "null policy and no 2026 actuals maintained",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "claim boundary: company monthly eligible recorded net sales in Philippine pesos",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "claim boundary: original medicine quantity and territory demand objective remains open",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "claim boundary: not twenty-one fulfilled original paper requirements",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "claim boundary: External disease and weather regressors and an urgency or ABC classifier were not evaluated",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "claim boundary: sixty origin–target pairs covering twenty-four distinct target months",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "claim boundary: overlapping folds produce dependent errors",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "claim boundary: not an untouched final test",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "claim boundary: does not support a new selection decision",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "claim boundary: WAPE is an error ratio",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "claim boundary: business causes remain unconfirmed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "claim boundary: not the generation or issue date",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "claim boundary: All 2026 actuals and interval bounds remain null",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "claim boundary: no 2026 accuracy or tolerance score",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "claim boundary: user-reported scope acceptance",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "claim boundary: without inventing client or adviser identities",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "claim boundary: implementation of that derived display is separate",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "claim boundary: not_assessed_thresholds_missing",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "claim boundary: 1:1 weights are a comparison convention",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "claim boundary: not measured business costs",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "claim boundary: inherited technical verification results",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "claim boundary: not newly rerun application tests",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "claim boundary: root-executed self-review",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "claim boundary: approved operational serving remain separate states",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "claim boundary: has not established measured savings",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "claim boundary: cannot determine whether accepted external features improve forecasts",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "claim boundary: Formal academic scope changes",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "claim boundary: not relabel all twelve months as a prospective untouched holdout",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "claim boundary: Integrate these predictive sections into the wider Chapters 4 and 5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "horizon explanation",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "inherited QA counts accurately labeled",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "prior scorecard reviewer distinction supported",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "reference target exists: docs/STUDY_OVERVIEW.md",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "reference target exists: docs/CHAPTER_4_5_EVIDENCE_PLAN.md",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "reference target exists: outputs/predictive_completion_20261009/README.md",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "reference target exists: outputs/predictive_error_policy_20261010/README.md",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "reference target exists: outputs/predictive_annual_release_20261010/README.md",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "reference target exists: docs/OBJECTIVE_EVIDENCE_REGISTER.md",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "reference target exists: docs/PAPER_REVISION_GUIDE.md",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "reference target exists: outputs/predictive_explanation_20261010/SCORECARD.md",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "reference target exists: outputs/predictive_explanation_20261010/README.md",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "complete Markdown intermediate-representation parity",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "complete Word body text/table order parity",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "Word heading style: MedShield Predictive Results and Conclusions",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "heading title punctuation-free: MedShield Predictive Results and Conclusions",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "Word heading style: Chapter 4 Predictive results",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "heading title punctuation-free: Chapter 4 Predictive results",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "Word heading style: Predictive target and analytical scope",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "heading title punctuation-free: Predictive target and analytical scope",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "Word heading style: Model families and temporal comparison",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "heading title punctuation-free: Model families and temporal comparison",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "Word heading style: Peso and percentage error measures",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "heading title punctuation-free: Peso and percentage error measures",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "Word heading style: Historical model comparison",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "heading title punctuation-free: Historical model comparison",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "Word heading style: Direction and magnitude of historical misses",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "heading title punctuation-free: Direction and magnitude of historical misses",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "Word heading style: Annual source releases and 2026 candidate projections",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "heading title punctuation-free: Annual source releases and 2026 candidate projections",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "Word heading style: Error policy and verification status",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "heading title punctuation-free: Error policy and verification status",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "Word heading style: Chapter 5 Predictive discussion and conclusions",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "heading title punctuation-free: Chapter 5 Predictive discussion and conclusions",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "Word heading style: Interpretation of model performance",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "heading title punctuation-free: Interpretation of model performance",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "Word heading style: Use for the client and alignment with study objectives",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "heading title punctuation-free: Use for the client and alignment with study objectives",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "Word heading style: Limitations of the predictive evidence",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "heading title punctuation-free: Limitations of the predictive evidence",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "Word heading style: Conclusions",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "heading title punctuation-free: Conclusions",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "Word heading style: Recommendations and next annual evaluation",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "heading title punctuation-free: Recommendations and next annual evaluation",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "Word heading style: Evidence references",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "heading title punctuation-free: Evidence references",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "black text style and no decorative border: Title",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "black text style and no decorative border: Heading1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "black text style and no decorative border: Heading2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "black text style and no decorative border: Caption",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "black text style and no decorative border: Normal",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "four Word tables",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "repeated table header: 1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 1/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 1/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 1/1/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table header fill: 1/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 1/1/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table header fill: 1/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 1/1/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table header fill: 1/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 1/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 1/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 1/2/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 1/2/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 1/2/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 1/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 1/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 1/3/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 1/3/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 1/3/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 1/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 1/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 1/4/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 1/4/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 1/4/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 1/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 1/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 1/5/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 1/5/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 1/5/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 1/6",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 1/6",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 1/6/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 1/6/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 1/6/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "repeated table header: 2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 2/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 2/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/1/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table header fill: 2/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/1/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table header fill: 2/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/1/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table header fill: 2/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/1/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table header fill: 2/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/1/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table header fill: 2/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 2/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 2/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/2/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/2/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/2/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/2/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/2/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 2/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 2/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/3/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/3/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/3/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/3/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/3/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 2/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 2/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/4/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/4/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/4/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/4/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/4/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 2/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 2/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/5/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/5/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/5/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/5/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/5/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 2/6",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 2/6",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/6/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/6/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/6/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/6/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/6/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 2/7",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 2/7",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/7/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/7/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/7/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/7/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/7/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 2/8",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 2/8",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/8/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/8/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/8/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/8/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/8/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 2/9",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 2/9",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/9/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/9/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/9/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/9/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/9/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 2/10",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 2/10",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/10/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/10/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/10/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/10/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/10/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 2/11",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 2/11",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/11/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/11/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/11/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/11/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/11/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 2/12",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 2/12",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/12/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/12/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/12/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/12/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/12/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 2/13",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 2/13",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/13/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/13/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/13/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/13/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/13/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 2/14",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 2/14",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/14/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/14/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/14/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/14/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/14/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 2/15",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 2/15",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/15/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/15/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/15/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/15/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/15/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 2/16",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 2/16",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/16/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/16/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/16/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/16/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/16/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 2/17",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 2/17",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/17/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/17/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/17/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/17/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/17/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 2/18",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 2/18",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/18/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/18/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/18/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/18/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/18/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 2/19",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 2/19",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/19/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/19/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/19/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/19/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/19/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 2/20",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 2/20",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/20/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/20/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/20/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/20/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/20/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 2/21",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 2/21",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/21/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/21/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/21/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/21/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/21/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 2/22",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 2/22",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/22/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/22/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/22/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/22/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 2/22/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "repeated table header: 3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 3/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 3/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 3/1/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table header fill: 3/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 3/1/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table header fill: 3/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 3/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 3/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 3/2/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 3/2/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 3/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 3/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 3/3/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 3/3/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 3/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 3/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 3/4/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 3/4/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 3/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 3/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 3/5/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 3/5/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 3/6",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 3/6",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 3/6/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 3/6/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 3/7",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 3/7",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 3/7/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 3/7/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "repeated table header: 4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 4/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 4/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 4/1/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table header fill: 4/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 4/1/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table header fill: 4/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 4/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 4/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 4/2/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 4/2/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 4/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 4/3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 4/3/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 4/3/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 4/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 4/4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 4/4/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 4/4/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 4/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 4/5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 4/5/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 4/5/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row prevents split: 4/6",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "table row no truncating fixed height: 4/6",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 4/6/1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visible gray table borders: 4/6/2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "one unchanged figure embedded",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "figure accessible and retrospective label",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "no hidden text or tracked approval",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "no hidden custom metadata or comments",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "no credential or external publication relationship",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "authoring builder no model fitting or service write",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "packet public claims preserve manuscript and business limits",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "first content review preserved",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "archived first receipt matches original independent review",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "preserved first authoring bytes: docs/chapters/MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "preserved first authoring bytes: docs/chapters/MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.docx",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "preserved first authoring bytes: outputs/predictive_chapters_20261010/manuscript.json",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "two bounded clarity edits only",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "clarity changes preserve numbers and scope",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "raster receipt identifies current final Word",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "raster receipt identifies actual PDF",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "rasterizer identity",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "native renderer identity",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "native export read-only and source not saved",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "bundled raster runtime and internal PDF",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "eight distinct sequential rendered pages",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "independent complete visual review",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "independent visual observations cover all eight pages",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "independent visual receipt tied to rasterizer receipt",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "root visual receipt says PASS",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "root visual receipt binds final Word",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "root visual receipt binds raster receipt",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "root visual receipt covers all eight pages",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "root visual receipt PDF identity",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "root visual reviewed page bindings",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "rendered page bytes: 1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "rendered page PNG dimensions: 1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "page has substantive extracted text: 1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visual observation binds page: 1",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "rendered page bytes: 2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "rendered page PNG dimensions: 2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "page has substantive extracted text: 2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visual observation binds page: 2",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "rendered page bytes: 3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "rendered page PNG dimensions: 3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "page has substantive extracted text: 3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visual observation binds page: 3",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "rendered page bytes: 4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "rendered page PNG dimensions: 4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "page has substantive extracted text: 4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visual observation binds page: 4",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "rendered page bytes: 5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "rendered page PNG dimensions: 5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "page has substantive extracted text: 5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visual observation binds page: 5",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "rendered page bytes: 6",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "rendered page PNG dimensions: 6",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "page has substantive extracted text: 6",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visual observation binds page: 6",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "rendered page bytes: 7",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "rendered page PNG dimensions: 7",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "page has substantive extracted text: 7",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visual observation binds page: 7",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "rendered page bytes: 8",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "rendered page PNG dimensions: 8",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "page has substantive extracted text: 8",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "criterion": "visual observation binds page: 8",
+      "status": "PASS",
+      "detail": null
+    }
+  ],
+  "source_code_sha256": {
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\docs\\chapters\\MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md": "1d2d0d4dbee76465c6b3bf9a8049319bad3d37a9f932319eb968e98098a38446",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\docs\\chapters\\MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.docx": "eb92d197c4aae0df879db21f3bf2cedd40aebc05d9076cc0daf14636a2c3dcb3",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_chapters_20261010\\build_chapters.py": "3b344cf961d3b4ca9c80f7a3a35397d481be6fa6d9ef99a18b76f767d539e055",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_chapters_20261010\\manuscript.json": "79d215ce7ac8e79001e560ae6e2642ff1bec8e49d5955473e7798ce20897b1c2",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_chapters_20261010\\authoring-receipt.json": "6e1664224e3672954233f8e4c432465646d43ea9c72f91a908e858e14afb46fd",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_chapters_20261010\\qa\\expected-claims.json": "c9d5e8e474ab49e237022f0692a637fd4e4bec88114ff2110ae6977686c5fc05",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_chapters_20261010\\qa\\verify_chapters.py": "ef713c609200cdb362f7c8547024b565d2acb47eec4a891a7a5e7c90ea88fce1",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\run.json": "9889baea07a1f222edc9d2d2576fefc0d2be4bc8e52dc4d9a3ff9919e0056f45",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_annual_release_20261010\\models\\annual-origin-2025-12-asof-2026-10-10\\a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b\\run.json": "e25c713bb7faee9cf9020f9064fdf016d18df3793131e1ab43bdfcd169d61b6d",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_chapters_20261010\\render\\MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.pdf": "334a4e86c457d3ba7d3e39dcdeef1110429c2c1b0e13409e6d822515630e4a16",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_chapters_20261010\\render\\raster-receipt.json": "56cf31a133f56bde394ea2d764df58597de8a22c5df036723f42fe65a3b13648",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_chapters_20261010\\qa\\visual-review.json": "1513e589a5084678a0225c4b624f92dcb9977623e02f9ed5e6fcbb311c7b1b37",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_chapters_20261010\\render\\visual-review.json": "f8dd18c2b0fd1c849beff1c418faab32c0ee485d84bc765ae9d95ee9bb2cb1b6",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_chapters_20261010\\qa\\verify_packet.py": "2b8d46ee6edebd1c9e720c89afd567394fe492d9ed44153af7d299600cdd7fa6",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_chapters_20261010\\README.md": "fb88ace643722827c618db294e3df65311973e6992738e99b09cc9e51be968b4",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_chapters_20261010\\rasterize_pages.py": "d090d24fefa5224f100549b916aadc19ee3cd5d17384ae6134b6a95163e6a31a",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_chapters_20261010\\render_word.vbs": "01954335c0a7221e36820042fbe385f74145d1391d7f07b6f8dd8f13f37d4a84",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_chapters_20261010\\qa\\content-verification.json": "0d6bf631e9fa8040f43c9c82e735c8f4854f21f4e8d65b3fe0b56c02e14693f7",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_chapters_20261010\\qa\\revised-content-verification.json": "c95c2bf6be858376a2671b283096d21f3f14e11d77d72f7fa34183d3900e437f",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_chapters_20261010\\authoring-first\\authoring-receipt.json": "b275fd077b6db142f49648afb734a8730e72ba5ceff0cea38588df1e2845ea80",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_chapters_20261010\\render\\page-01.png": "6a93b703c86796355a8df802ab136c9983845366ba9684ab195481ce108cb3dc",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_chapters_20261010\\render\\page-02.png": "ae79c5a002d66c5ca4b244977b7c983d7082f2024dc14cae761ed59a208d459b",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_chapters_20261010\\render\\page-03.png": "0cfc3b82560889d605828c321872c88f737ddefd902a294e5eec7c98e61faf7d",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_chapters_20261010\\render\\page-04.png": "b69157f788737f21312f7e2d771d9d2061eedbd229bb1ff8cc38b8da958c158f",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_chapters_20261010\\render\\page-05.png": "9206ee3ef14e4ff0e11dcc1266b29e92b8920865deb14e22e71a507a2cbdf329",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_chapters_20261010\\render\\page-06.png": "f5818dbfb98d1bbaf911a9d25eb943fde2505a7cc4dedb2a46fad575ad4e54f3",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_chapters_20261010\\render\\page-07.png": "741d168c561e3fb12939886756da57bd7f182111038ff6b1c014a0475abd6892",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_chapters_20261010\\render\\page-08.png": "f74006d6c2cb187d7cc7590f22f7ed84f21279d945a62432f2d1da6d6ca46605",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_chapters_20261010\\authoring-first\\MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md": "f20dc2f35403bafe94c104e75a175caa9430f419210c3596af3e21911f6237d2",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_chapters_20261010\\authoring-first\\MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.docx": "adca0355b0b3b64ecb3bf9ec574b34d48b03e9bf6a129b650fc05a44576cdab9",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_chapters_20261010\\authoring-first\\manuscript.json": "dd58261157be542e931d37fba33164ee0929098a58890f4bd3dc0f906f14b428",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_validation\\2026-10-09T13-28-48-501Z\\input.json": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_policy_20261010\\policy.json": "55c93ca278c8fa9a19efaecdd8327836bc3d35662fe733eb36917125bb4d0fcb",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_policy_20261010\\model-error-review.json": "de057ab8090715557dec3a308fac13034afbf7c2080369f599df2d09691f45bb",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\docs\\CHAPTER_4_5_EVIDENCE_PLAN.md": "c4b9bd6d25a0d23e069ae0df31d5b42cd4e5766fafb183c6f750f179bc337fff",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\docs\\PAPER_REVISION_GUIDE.md": "cdb2dfec06730986aa733b74b464f55d0dc4651aed5428c5ce9e5a9439f37a8b",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\docs\\OBJECTIVE_EVIDENCE_REGISTER.md": "405b2eef31fe078c610fa9eed4d5cf57380d17133abf9d1b3cf80d9a812eefdb",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_explanation_20261010\\scorecard.json": "8a0b0476e474870a38ec412ef2889585f450c9c46f3f357d58e8505b1c151dda",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\audit-comparison.png": "3fc101bdb70b0594641997207d21bb651245a72b491884d8f38a3b55fc5d7807",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\docs\\drafts\\MedShield_Chapter_4_5_Draft.docx": "a33c80dca0397028b539d849f55631f9c28e967aa9285558cb1c1ffed166938c",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\docs\\chapters\\MedShield_Chapter_4_System_Implementation_Results_and_Discussion.docx": "a1723f0110cd4299e50143bfdd8650ee8889228eac93262f9230ffae923a0492"
+  },
+  "visual_review_status": "PASS_EIGHT_PAGES_INDEPENDENT_AND_ROOT",
+  "review_scope": "Independent sealed-source numerical and claim review, complete OOXML/Markdown parity and eight-page visual review; no fits or source writes",
+  "executed_command": [
+    "C:\\Users\\Adrian\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "-X",
+    "utf8",
+    "outputs/predictive_chapters_20261010/qa/verify_packet.py",
+    "--packet",
+    "outputs/predictive_chapters_20261010",
+    "--expected",
+    "outputs/predictive_chapters_20261010/qa/expected-claims.json",
+    "--visual-review",
+    "outputs/predictive_chapters_20261010/qa/visual-review.json",
+    "--root-visual-review",
+    "outputs/predictive_chapters_20261010/render/visual-review.json",
+    "--output",
+    "outputs/predictive_chapters_20261010/qa/verification.json"
+  ],
+  "runtime": "C:\\Users\\Adrian\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+  "skills": [
+    ".agents/qa-engineer.md",
+    ".skills/testing-standards.md",
+    ".skills/analytics-frameworks.md",
+    ".skills/database-standards.md",
+    ".skills/coding-standards.md",
+    "documents/SKILL.md",
+    "documents/tasks/read_review.md"
+  ],
+  "limitations": [
+    "These are predictive inserts for the wider Chapters4/5, not full-capstone or original-O3 acceptance.",
+    "No model fits, new 2026 accuracy scores, source modification, publication or cloud mutation occurred."
+  ]
+}

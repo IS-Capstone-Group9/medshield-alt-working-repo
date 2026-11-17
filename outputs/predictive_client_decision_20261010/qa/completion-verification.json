@@ -1,0 +1,334 @@
+{
+  "status": "PASS",
+  "checked_at_utc": "2026-10-13T04:26:19.247671+00:00",
+  "purpose": "Current identity check and interrupted QA documentation completion",
+  "check_count": 40,
+  "failure_count": 0,
+  "checks": [
+    {
+      "check": "dated_review_status",
+      "expected": "PASS",
+      "observed": "PASS",
+      "passed": true
+    },
+    {
+      "check": "dated_review_count",
+      "expected": 193,
+      "observed": 193,
+      "passed": true
+    },
+    {
+      "check": "dated_review_failures",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "check": "dated_review_time_preserved",
+      "expected": "2026-10-10T09:03:45.336057+00:00",
+      "observed": "2026-10-10T09:03:45.336057+00:00",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\decision.json",
+      "expected": "88bf78ca32006f3687e7f83ff4c36966cfa37dcf7ee64513e0a8faedc4faf4a5",
+      "observed": "88bf78ca32006f3687e7f83ff4c36966cfa37dcf7ee64513e0a8faedc4faf4a5",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\source-identities.json",
+      "expected": "6537185bdb8dab313282d835a0d6ac9c4a95c30229efd732ae2ceeb99ba7f6b0",
+      "observed": "6537185bdb8dab313282d835a0d6ac9c4a95c30229efd732ae2ceeb99ba7f6b0",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\docs\\PREDICTIVE_CLIENT_DECISION_BRIEF.md",
+      "expected": "4fe032ac54537a693157e703b068537063370d4f3aca0c31b6b7880eba4de127",
+      "observed": "4fe032ac54537a693157e703b068537063370d4f3aca0c31b6b7880eba4de127",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\docs\\OBJECTIVE_EVIDENCE_REGISTER.md",
+      "expected": "e1e946cfc6afaa247c4d6b3a6c0c30846bafc772e937713bc60a9b72b35c316e",
+      "observed": "e1e946cfc6afaa247c4d6b3a6c0c30846bafc772e937713bc60a9b72b35c316e",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\README.md",
+      "expected": "5b6daf4796979c307e93a24560e5fe38df7aef37e8db0fd3db72b41a40176494",
+      "observed": "5b6daf4796979c307e93a24560e5fe38df7aef37e8db0fd3db72b41a40176494",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\prepare.py",
+      "expected": "828ed0ba659c850f413a81f357d18d14af9340f3c829cc44b1b2c23fac58a69c",
+      "observed": "828ed0ba659c850f413a81f357d18d14af9340f3c829cc44b1b2c23fac58a69c",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\check_and_seal.py",
+      "expected": "5dff8b9e630289ae08837d785191e5ec1380aee3d9bbd38b659bd78a60921532",
+      "observed": "5dff8b9e630289ae08837d785191e5ec1380aee3d9bbd38b659bd78a60921532",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\qa\\expected-metrics.json",
+      "expected": "4bf30cb861fe88fa53326d4fe1cfe3d39df9b266efdb7af9aa82933ae80a5778",
+      "observed": "4bf30cb861fe88fa53326d4fe1cfe3d39df9b266efdb7af9aa82933ae80a5778",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\qa\\expected_metrics.py",
+      "expected": "b801fa35466f308483518b3d4d5523e2c34d9fb7fb4c1bbf1b0daa01e975a4d6",
+      "observed": "b801fa35466f308483518b3d4d5523e2c34d9fb7fb4c1bbf1b0daa01e975a4d6",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\qa\\check_brief.py",
+      "expected": "8e1e9a1cbc600e200841e07c4f7f71a82a9b03b766f173fa8f1fada4a896124f",
+      "observed": "8e1e9a1cbc600e200841e07c4f7f71a82a9b03b766f173fa8f1fada4a896124f",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_policy_20261010\\policy.json",
+      "expected": "55c93ca278c8fa9a19efaecdd8327836bc3d35662fe733eb36917125bb4d0fcb",
+      "observed": "55c93ca278c8fa9a19efaecdd8327836bc3d35662fe733eb36917125bb4d0fcb",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_validation\\2026-10-09T13-28-48-501Z\\input.json",
+      "expected": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba",
+      "observed": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\run.json",
+      "expected": "9889baea07a1f222edc9d2d2576fefc0d2be4bc8e52dc4d9a3ff9919e0056f45",
+      "observed": "9889baea07a1f222edc9d2d2576fefc0d2be4bc8e52dc4d9a3ff9919e0056f45",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_annual_release_20261010\\models\\annual-origin-2025-12-asof-2026-10-10\\a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b\\run.json",
+      "expected": "e25c713bb7faee9cf9020f9064fdf016d18df3793131e1ab43bdfcd169d61b6d",
+      "observed": "e25c713bb7faee9cf9020f9064fdf016d18df3793131e1ab43bdfcd169d61b6d",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\report.json",
+      "expected": "2b6c6d02aa1d920c02d1e3806ba4c20bbfee242639c00d141537b23c70800094",
+      "observed": "2b6c6d02aa1d920c02d1e3806ba4c20bbfee242639c00d141537b23c70800094",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\RESULTS.md",
+      "expected": "ffaffc3e2a50c9f707c589c42ba99f4bf385d75389901111755e7b7a9cc15707",
+      "observed": "ffaffc3e2a50c9f707c589c42ba99f4bf385d75389901111755e7b7a9cc15707",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\qa\\verification.json",
+      "expected": "874ead40411b7131127aff079ecc61b8ae7c85d0336da8468a039270f944455d",
+      "observed": "874ead40411b7131127aff079ecc61b8ae7c85d0336da8468a039270f944455d",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\qa\\REPORT.md",
+      "expected": "8de017892ee0d32c088d2fa76714f025517c8360803f61994c87d9052ab371a4",
+      "observed": "8de017892ee0d32c088d2fa76714f025517c8360803f61994c87d9052ab371a4",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\delivery.json",
+      "expected": "97965466f37697305e40c1700465580c466ba066be1526c68e9b263e991492f3",
+      "observed": "97965466f37697305e40c1700465580c466ba066be1526c68e9b263e991492f3",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\models\\protocol.json",
+      "expected": "4c95566337bbce02a46cebca0979081a65c67441b61e570cb1f55a0e3a21e667",
+      "observed": "4c95566337bbce02a46cebca0979081a65c67441b61e570cb1f55a0e3a21e667",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\models\\f749f47ef44db53a35f56a822e2b35edc0877ad5126c4352a996dfb2f5a20e8b\\run.json",
+      "expected": "7c22e0467925ee95fed2f5d287357ff0948bbc524e25715954cd28c22a83e841",
+      "observed": "7c22e0467925ee95fed2f5d287357ff0948bbc524e25715954cd28c22a83e841",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_readiness_20261010\\SOURCE_OWNER_REVIEW.md",
+      "expected": "08f8fc10d7c438568453d53544375c927e2a5085affde318c0758664a6f5e3fd",
+      "observed": "08f8fc10d7c438568453d53544375c927e2a5085affde318c0758664a6f5e3fd",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\contracts.py",
+      "expected": "a6ece04850ba397a84c72309043c9ab6c83c3ee7a4fc1fe4b63f1b82b8b86d3a",
+      "observed": "a6ece04850ba397a84c72309043c9ab6c83c3ee7a4fc1fe4b63f1b82b8b86d3a",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\engine.py",
+      "expected": "cdc5a39363c69f500897e849f2c37ab42c401ed789b6890e6abab808cbbee4c8",
+      "observed": "cdc5a39363c69f500897e849f2c37ab42c401ed789b6890e6abab808cbbee4c8",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\models.py",
+      "expected": "2b2b6495e3ff54b7613800fded65832efc46fc1018ad2fe09f678baf857c4ac9",
+      "observed": "2b2b6495e3ff54b7613800fded65832efc46fc1018ad2fe09f678baf857c4ac9",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\metrics.py",
+      "expected": "4841243a2b262d71845596d4d72b44a7aa7447602003cfdb79b971e1d7ac8baa",
+      "observed": "4841243a2b262d71845596d4d72b44a7aa7447602003cfdb79b971e1d7ac8baa",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\extended_experiment.py",
+      "expected": "3d88a6aa92bb0b03140ce9830512cd1292d4a6d0fe85ad8bdc190d92b64f3b42",
+      "observed": "3d88a6aa92bb0b03140ce9830512cd1292d4a6d0fe85ad8bdc190d92b64f3b42",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\annual_projection.py",
+      "expected": "62064b67e90832ce2e46474ff9b7495ba05a8032b66d1e68177483db412dac80",
+      "observed": "62064b67e90832ce2e46474ff9b7495ba05a8032b66d1e68177483db412dac80",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\robust_error_experiment.py",
+      "expected": "0a07f75c83ed44c05524ad5032e86c3d3e889b32276dd6f3226a3dbd062e6bd6",
+      "observed": "0a07f75c83ed44c05524ad5032e86c3d3e889b32276dd6f3226a3dbd062e6bd6",
+      "passed": true
+    },
+    {
+      "check": "current_binding:C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\tests\\test_predictive_robust_error.py",
+      "expected": "6eed6913afc702bedee334803a37f0b0d15acecef1d1fffeb82797c3e73e1e98",
+      "observed": "6eed6913afc702bedee334803a37f0b0d15acecef1d1fffeb82797c3e73e1e98",
+      "passed": true
+    },
+    {
+      "check": "first_review_count",
+      "expected": 190,
+      "observed": 190,
+      "passed": true
+    },
+    {
+      "check": "first_review_failures_retained",
+      "expected": 2,
+      "observed": 2,
+      "passed": true
+    },
+    {
+      "check": "first_checker_snapshot",
+      "expected": "c7ba5f04b9c53a0ddc3e3d6394ec45c07ceb2fb9442d4c7edbf20235d11f2118",
+      "observed": "c7ba5f04b9c53a0ddc3e3d6394ec45c07ceb2fb9442d4c7edbf20235d11f2118",
+      "passed": true
+    },
+    {
+      "check": "first_expectation_issues_preserved",
+      "expected": [
+        "claim:before later actuals",
+        "local_link:README.md:6"
+      ],
+      "observed": [
+        "claim:before later actuals",
+        "local_link:README.md:6"
+      ],
+      "passed": true
+    },
+    {
+      "check": "qa_report_materialized",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "check": "dated_review_bytes_preserved",
+      "expected": "16545462285f901983cee4f53be642b2fe902c6fc453258f1773fd63e8cb655d",
+      "observed": "16545462285f901983cee4f53be642b2fe902c6fc453258f1773fd63e8cb655d",
+      "passed": true
+    }
+  ],
+  "source_sha256": {
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\decision.json": "88bf78ca32006f3687e7f83ff4c36966cfa37dcf7ee64513e0a8faedc4faf4a5",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\source-identities.json": "6537185bdb8dab313282d835a0d6ac9c4a95c30229efd732ae2ceeb99ba7f6b0",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\docs\\PREDICTIVE_CLIENT_DECISION_BRIEF.md": "4fe032ac54537a693157e703b068537063370d4f3aca0c31b6b7880eba4de127",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\docs\\OBJECTIVE_EVIDENCE_REGISTER.md": "e1e946cfc6afaa247c4d6b3a6c0c30846bafc772e937713bc60a9b72b35c316e",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\README.md": "5b6daf4796979c307e93a24560e5fe38df7aef37e8db0fd3db72b41a40176494",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\prepare.py": "828ed0ba659c850f413a81f357d18d14af9340f3c829cc44b1b2c23fac58a69c",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\check_and_seal.py": "5dff8b9e630289ae08837d785191e5ec1380aee3d9bbd38b659bd78a60921532",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\qa\\expected-metrics.json": "4bf30cb861fe88fa53326d4fe1cfe3d39df9b266efdb7af9aa82933ae80a5778",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\qa\\expected_metrics.py": "b801fa35466f308483518b3d4d5523e2c34d9fb7fb4c1bbf1b0daa01e975a4d6",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\qa\\check_brief.py": "8e1e9a1cbc600e200841e07c4f7f71a82a9b03b766f173fa8f1fada4a896124f",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_policy_20261010\\policy.json": "55c93ca278c8fa9a19efaecdd8327836bc3d35662fe733eb36917125bb4d0fcb",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_validation\\2026-10-09T13-28-48-501Z\\input.json": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\run.json": "9889baea07a1f222edc9d2d2576fefc0d2be4bc8e52dc4d9a3ff9919e0056f45",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_annual_release_20261010\\models\\annual-origin-2025-12-asof-2026-10-10\\a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b\\run.json": "e25c713bb7faee9cf9020f9064fdf016d18df3793131e1ab43bdfcd169d61b6d",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\report.json": "2b6c6d02aa1d920c02d1e3806ba4c20bbfee242639c00d141537b23c70800094",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\RESULTS.md": "ffaffc3e2a50c9f707c589c42ba99f4bf385d75389901111755e7b7a9cc15707",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\qa\\verification.json": "874ead40411b7131127aff079ecc61b8ae7c85d0336da8468a039270f944455d",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\qa\\REPORT.md": "8de017892ee0d32c088d2fa76714f025517c8360803f61994c87d9052ab371a4",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\delivery.json": "97965466f37697305e40c1700465580c466ba066be1526c68e9b263e991492f3",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\models\\protocol.json": "4c95566337bbce02a46cebca0979081a65c67441b61e570cb1f55a0e3a21e667",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_error_optimization_20261010\\models\\f749f47ef44db53a35f56a822e2b35edc0877ad5126c4352a996dfb2f5a20e8b\\run.json": "7c22e0467925ee95fed2f5d287357ff0948bbc524e25715954cd28c22a83e841",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_readiness_20261010\\SOURCE_OWNER_REVIEW.md": "08f8fc10d7c438568453d53544375c927e2a5085affde318c0758664a6f5e3fd",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\contracts.py": "a6ece04850ba397a84c72309043c9ab6c83c3ee7a4fc1fe4b63f1b82b8b86d3a",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\engine.py": "cdc5a39363c69f500897e849f2c37ab42c401ed789b6890e6abab808cbbee4c8",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\models.py": "2b2b6495e3ff54b7613800fded65832efc46fc1018ad2fe09f678baf857c4ac9",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\metrics.py": "4841243a2b262d71845596d4d72b44a7aa7447602003cfdb79b971e1d7ac8baa",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\extended_experiment.py": "3d88a6aa92bb0b03140ce9830512cd1292d4a6d0fe85ad8bdc190d92b64f3b42",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\annual_projection.py": "62064b67e90832ce2e46474ff9b7495ba05a8032b66d1e68177483db412dac80",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\analytics_service\\predictive\\robust_error_experiment.py": "0a07f75c83ed44c05524ad5032e86c3d3e889b32276dd6f3226a3dbd062e6bd6",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\services\\tests\\test_predictive_robust_error.py": "6eed6913afc702bedee334803a37f0b0d15acecef1d1fffeb82797c3e73e1e98",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\qa\\check_brief-first.py": "c7ba5f04b9c53a0ddc3e3d6394ec45c07ceb2fb9442d4c7edbf20235d11f2118",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\qa\\complete_review.py": "f2717df8f4a25fb68c70faddc7004921423c4c5ff0b0ac1a82894a233dfbf919",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\qa\\REPORT.md": "8006a4aef0cb36c3f26bef32f699bd26f9414e7754145f38d1cf3dec07d64336",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\qa\\verification-first.json": "6c9d656bb7166fda253663faeabd29fbbbac96801aea48e959184abff2bec123",
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\qa\\verification.json": "16545462285f901983cee4f53be642b2fe902c6fc453258f1773fd63e8cb655d"
+  },
+  "dated_review": {
+    "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\qa\\verification.json",
+    "sha256": "16545462285f901983cee4f53be642b2fe902c6fc453258f1773fd63e8cb655d",
+    "checked_at_utc": "2026-10-10T09:03:45.336057+00:00",
+    "check_count": 193,
+    "failure_count": 0
+  },
+  "original_binding_count": 30,
+  "affected_bytes_changed": false,
+  "numerical_review_rerun": false,
+  "fitting_executed": false,
+  "app_build_executed": false,
+  "preparation_rerun": false,
+  "publication_approved": false,
+  "external_message_sent": false,
+  "pending_root_seal_links": [
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_client_decision_20261010\\delivery.json"
+  ],
+  "command": [
+    "outputs/predictive_client_decision_20261010/qa/complete_review.py"
+  ],
+  "environment": {
+    "python": "3.12.14",
+    "executable": "C:\\Users\\Adrian\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe"
+  },
+  "skills": [
+    ".agents/qa-engineer.md",
+    ".skills/testing-standards.md",
+    ".skills/analytics-frameworks.md",
+    ".skills/database-standards.md",
+    ".skills/coding-standards.md",
+    ".skills/technology-stack.md"
+  ],
+  "reused_guidance": [
+    ".agents/worker-operating-model.md",
+    ".agents/execution-contract.md"
+  ],
+  "limitations": [
+    "Dated numeric/document evidence is reused after current byte verification.",
+    "Root still creates and checks delivery.json during its final seal.",
+    "Business limits and operational/academic/model acceptance remain pending."
+  ]
+}

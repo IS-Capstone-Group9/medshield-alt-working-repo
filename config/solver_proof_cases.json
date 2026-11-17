@@ -1,0 +1,31 @@
+{
+  "schema_version": "synthetic_solver_proof_cases_v1",
+  "dataset_id": "synthetic_fixture_only",
+  "policy_version": "weighted_fill_pack_proof_v1",
+  "evidence_label": "Simulated",
+  "assumption_ids": ["A8", "A9", "D1"],
+  "operational_approval": false,
+  "cases": [
+    {"id":"exact_fill","kind":"ordinary","budget_cents":1200,"minimum_pct":0,
+     "hand_expected_packs":[2,3],"hand_expected_objective":"1",
+     "items":[{"product":"A","demand":4,"available":0,"pack":2,"pack_cost_cents":300,"max_packs":2,"score":60},
+              {"product":"B","demand":3,"available":0,"pack":1,"pack_cost_cents":200,"max_packs":3,"score":40}]},
+    {"id":"binding_budget_pack_trap","kind":"ordinary","budget_cents":1000,"minimum_pct":0,
+     "hand_expected_packs":[0,1,1],"hand_expected_objective":"5/8",
+     "items":[{"product":"A","demand":1,"available":0,"pack":1,"pack_cost_cents":600,"max_packs":1,"score":60},
+              {"product":"B","demand":1,"available":0,"pack":1,"pack_cost_cents":500,"max_packs":1,"score":50},
+              {"product":"C","demand":1,"available":0,"pack":1,"pack_cost_cents":500,"max_packs":1,"score":50}]},
+    {"id":"binding_supplier_cap","kind":"ordinary","budget_cents":600,"minimum_pct":0,
+     "hand_expected_packs":[1,2],"hand_expected_objective":"3/5",
+     "items":[{"product":"A","demand":4,"available":0,"pack":2,"pack_cost_cents":200,"max_packs":1,"score":80},
+              {"product":"B","demand":2,"available":0,"pack":1,"pack_cost_cents":200,"max_packs":2,"score":20}]},
+    {"id":"infeasible_minimum","kind":"ordinary","budget_cents":0,"minimum_pct":100,
+     "hand_expected_packs":null,"hand_expected_objective":null,
+     "items":[{"product":"A","demand":4,"available":0,"pack":2,"pack_cost_cents":300,"max_packs":2,"score":100}]},
+    {"id":"dated_expiry_oversized_lot","kind":"dated","budget_cents":300,"minimum_pct":0,
+     "as_of":"2026-10-30","horizon_end":"2026-11-01","arrival":"2026-10-30","expiry":"2026-10-31",
+     "daily_demand":[2,2,0],"maximum_expired_units":0,
+     "hand_expected_packs":[1],"hand_expected_objective":"1/2",
+     "items":[{"product":"A","demand":4,"available":0,"pack":2,"pack_cost_cents":100,"max_packs":3,"score":100}]}
+  ]
+}

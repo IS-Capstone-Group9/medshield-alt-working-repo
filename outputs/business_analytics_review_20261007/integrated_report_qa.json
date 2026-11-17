@@ -1,0 +1,52 @@
+{
+  "status": "PASS",
+  "reviewed_files": [
+    {
+      "file": "outputs\\business_analytics_review_20261007\\REVIEW.md",
+      "sha256": "571c1b1ee14e3896b6c4cb9cd42105cbc9676a6170673cabffda7c13df403e8f"
+    },
+    {
+      "file": "docs\\CURRENT_STATE.md",
+      "sha256": "ae8a9911a810b0bed768503bc070dc9d6bc200ad0693ffc05eece436c783c597"
+    },
+    {
+      "file": "docs\\ANALYTICS.md",
+      "sha256": "3e2f67aa0f9c71e39d400b96770c490dd83f8b8a78a7f3b6ef715d8b573e3189"
+    },
+    {
+      "file": "docs\\PRODUCT_CATALOG.md",
+      "sha256": "61cd1d19ab75ea13c48a51e228ded2e165289dfaa50d0090c9737bbca81c7c2d"
+    },
+    {
+      "file": "docs\\PRODUCT_REVIEW_RULES.md",
+      "sha256": "9e4f4dd980fe47160fb1f04ad4ae012b19ce92010f13745ff5ea5d18516ec0d1"
+    },
+    {
+      "file": "docs\\PRODUCT_MASTER_REVIEW_GUIDE.md",
+      "sha256": "4d2b3c90eef12b67e754950974f40b30e194569bc1bb2ca636b221b22ab1d87b"
+    }
+  ],
+  "checks": {
+    "facts_counts_and_margin_population": "PASS",
+    "research_coverage_not_approval": "PASS",
+    "archived17_vs_fresh19_boundaries": "PASS",
+    "507fe_original_vs21ba_refresh_explicit": "PASS",
+    "original_quantity2023_vs_finance2025_source_age": "PASS",
+    "actual_leads2026_correct": "PASS",
+    "classification_and_SKU_forecast_not_complete": "PASS",
+    "local_publication_not_claimed": "PASS",
+    "local_relative_links": "PASS",
+    "current_parser_policy_consistency": "PASS"
+  },
+  "local_links_checked": 71,
+  "missing_links": [],
+  "findings": [],
+  "scope": "Integrated factual/report consistency review. Did not rerun unchanged CSV checks or certify new HTTP/browser/cloud publication.",
+  "resolved_findings": [
+    {
+      "file": "docs/PRODUCT_REVIEW_RULES.md",
+      "issue": "Current tool bullet previously named v2.",
+      "resolution": "Current tool now explicitly namesv3; sealed3October v2 scan retainedasdatedhistorical evidence."
+    }
+  ]
+}

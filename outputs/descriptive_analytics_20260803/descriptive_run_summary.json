@@ -1,0 +1,49 @@
+{
+  "generated_at": "2026-08-03T06:22:32Z",
+  "source_dataset": "data\\medshield\\processed\\sales_transactions_area_allocated.json.gz",
+  "clean_rows": 20961,
+  "period_start": "2021-01-02",
+  "period_end": "2025-12-31",
+  "total_quantity": 1016664.41,
+  "total_revenue": 220958269.8,
+  "total_gross_margin": 259767098.7,
+  "gross_margin_rate": 1.175639,
+  "unique_products": 3335,
+  "unique_areas": 29,
+  "estimated_contract_rows": 1725,
+  "estimated_date_rows": 3541,
+  "gross_margin_exceeds_revenue_rows": 12985,
+  "negative_gross_margin_rows": 185,
+  "top_product": {
+    "product": "MONOWEL 1G IV",
+    "revenue": 5780546.0,
+    "abc_class": "A"
+  },
+  "top_area": {
+    "area": "Quezon",
+    "revenue": 7708883.18,
+    "abc_class": "A"
+  },
+  "status": "draft",
+  "limitations": [
+    "Product master and area mapping still require final approval.",
+    "Contract allocation rows are estimated and must remain labeled.",
+    "2025 remains partial until the group approves completeness remediation.",
+    "Workbook margin fields contain anomalies and should not be used as company net profit.",
+    "Descriptive analytics answer what happened; they are not forecasts or prescriptions."
+  ],
+  "output_files": [
+    "descriptive_area_summary.csv",
+    "descriptive_area_type_summary.csv",
+    "descriptive_chapter4_findings.md",
+    "descriptive_contract_allocation_summary.csv",
+    "descriptive_monthly_trends.csv",
+    "descriptive_product_abc_pareto.csv",
+    "descriptive_seasonality_overall.csv",
+    "descriptive_seasonality_territory.csv",
+    "descriptive_territory_abc_pareto.csv",
+    "descriptive_yearly_summary.csv",
+    "descriptive_yoy_overall.csv",
+    "descriptive_yoy_territory.csv"
+  ]
+}

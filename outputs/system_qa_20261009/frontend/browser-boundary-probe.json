@@ -1,0 +1,33 @@
+{
+  "executed_at": "2026-10-09T02:17:59.287Z",
+  "no_cloud_writes": true,
+  "reports": [
+    {
+      "case": "whole app core source failure",
+      "scope": "controlled HTTP503 for monthly; remaining reads actual local gateway",
+      "expected": "unavailable with charts and measures absent",
+      "observed": {
+        "state": "unavailable",
+        "canvas_count": 0,
+        "alert": "\n          Databricks data is unavailable\n          MedShield could not load its live Databricks Gold dataset. Dashboard charts and values are hidden because local and mock fallbacks are disabled. Check the Databricks warehouse and credentials, then reload this page.\n        ",
+        "visible_kpi_count": 0
+      },
+      "pass": true
+    },
+    {
+      "case": "core source recovery on reload",
+      "scope": "authenticated live candidate read",
+      "expected": "ready",
+      "observed": "ready",
+      "pass": true
+    },
+    {
+      "case": "valid product income:null contract",
+      "scope": "controlled one nullable field injected into live read, no cloud mutations",
+      "expected": "ready; revenue remains available and gross profit unavailable",
+      "observed": "unavailable",
+      "pass": false
+    }
+  ],
+  "runtimeErrors": []
+}

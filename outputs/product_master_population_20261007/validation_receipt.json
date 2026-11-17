@@ -1,0 +1,51 @@
+{
+  "status": "PASS",
+  "rows": 4561,
+  "columns": 29,
+  "bytes": 4710026,
+  "sha256": "507fe990defc28f41c13eba4526463bbc960783dd5ad82ef209bb5babf509775",
+  "copies_identical": true,
+  "current_coverage_fact_version": 19,
+  "current_label_receipt_sha256": "9c3608c7e8bc4669d62e3c8632161f374e6f78099b8fedf198a8d4e286dd1dc6",
+  "current_coverage_records": 37728,
+  "changed_existing_fields_in_offline_simulation": {
+    "category_status": 32891
+  },
+  "status_counts": {
+    "category_status": {
+      "proposed": 3131,
+      "needs_review": 1430
+    },
+    "identity_status": {
+      "needs_review": 4561
+    },
+    "item_kind_status": {
+      "proposed": 3327,
+      "needs_review": 1234
+    },
+    "unit_status": {
+      "needs_review": 4561
+    },
+    "forecast_status": {
+      "needs_review": 4561
+    },
+    "mapping_status": {
+      "proposed": 4561
+    }
+  },
+  "checks": {
+    "saved_rfc4180_csv_exact_schema_unique_aliases_and_gold_bounds": "PASS",
+    "saved_values_equal_authored_matrix": "PASS",
+    "all_current_19_aliases_covered": "PASS",
+    "no_approvals_sku_assignments_or_forecast_eligibility": "PASS",
+    "current_label_resolution_remains_raw_unclassified_unknown_unit": "PASS",
+    "archived_17_all_source_fields_and_financial_eligibility_preserved": "PASS",
+    "archived_17_monthly_and_annual_financial_conservation": "PASS"
+  },
+  "limits": [
+    "Current version-19 source comparison uses the complete label aggregate extract; the offline full-row simulation uses archived version-17 facts.",
+    "Historical category research does not verify current registrations, exact historical identities or package units.",
+    "New local master checksum differs from the pinned warehouse19 publication; no cloud deployment or new publication-readiness claim."
+  ],
+  "cloud_writes": false
+}

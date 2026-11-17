@@ -3,15 +3,20 @@
 from __future__ import annotations
 
 import os
+import re
+from datetime import date, datetime
 from pathlib import Path
 from typing import Any
+from zoneinfo import ZoneInfo
 
 import requests
 from dotenv import load_dotenv
+from services.financial_metrics import gross_margin_rate
 
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
-REFERENCE_DATA = ROOT_DIR / "external" / "medshield_frontend" / "data" / "sales_data.json"
+REFERENCE_DATA = ROOT_DIR / "frontend" / "public" / "data" / "sales_data.json"
+PROCESSED_SALES_SNAPSHOT = ROOT_DIR / "data" / "medshield" / "processed" / "dashboard_sales_snapshot.json"
 load_dotenv(ROOT_DIR / ".env")
 
 
@@ -24,12 +29,18 @@ def env_bool(name: str, default: bool = False) -> bool:
 
 def supabase_enabled() -> bool:
     base_url = os.getenv("SUPABASE_URL", "").strip()
-    api_key = os.getenv("SUPABASE_ANON_KEY", "").strip()
+    api_key = (
+        os.getenv("SUPABASE_SERVICE_ROLE_KEY", "").strip()
+        or os.getenv("SUPABASE_ANON_KEY", "").strip()
+    )
     return env_bool("USE_SUPABASE", True) and bool(base_url) and bool(api_key)
 
 
 def supabase_headers() -> dict[str, str]:
-    api_key = os.getenv("SUPABASE_ANON_KEY", "").strip()
+    api_key = (
+        os.getenv("SUPABASE_SERVICE_ROLE_KEY", "").strip()
+        or os.getenv("SUPABASE_ANON_KEY", "").strip()
+    )
     return {"apikey": api_key, "Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
 
 
@@ -48,7 +59,20 @@ def local_snapshot() -> dict[str, Any]:
     import json
 
     with REFERENCE_DATA.open("r", encoding="utf-8") as handle:
-        return json.load(handle)
+        data = json.load(handle)
+    if PROCESSED_SALES_SNAPSHOT.exists():
+        with PROCESSED_SALES_SNAPSHOT.open("r", encoding="utf-8") as handle:
+            sales = json.load(handle)
+        for key in (
+            "totals",
+            "monthly",
+            "by_area",
+            "top_products",
+            "year_summary",
+            "seasonality",
+        ):
+            data[key] = sales.get(key, data.get(key))
+    return data
 
 
 def to_int(value: Any) -> int:
@@ -63,14 +87,38 @@ def to_float(value: Any) -> float:
     return float(value)
 
 
-def normalize_snapshot(data: dict[str, Any]) -> dict[str, Any]:
+def normalize_snapshot(data: dict[str, Any], *, today: date | None = None) -> dict[str, Any]:
+    today = today or datetime.now(ZoneInfo("Asia/Manila")).date()
+    current_month = today.strftime("%Y-%m")
+
+    def historical_month(row: dict[str, Any]) -> bool:
+        period = str(row.get("period", ""))
+        return bool(re.fullmatch(r"[1-9]\d{3}-(0[1-9]|1[0-2])", period)) and "2017-01" <= period <= current_month
+
+    def historical_year(row: dict[str, Any]) -> bool:
+        year = str(row.get("year", ""))
+        return bool(re.fullmatch(r"[1-9]\d{3}", year)) and 2017 <= int(year) <= today.year
+
+    excluded_periods = (
+        any(not historical_month(row) for row in data.get("monthly", []))
+        or any(not historical_year(row) for row in data.get("year_summary", []))
+    )
+    # Undated aggregates cannot be repaired by trimming their monthly series:
+    # their area/product partitions may still contain the excluded activity.
+    # Validate before mutating so a rejected snapshot is not partly normalized.
+    if excluded_periods and any(data.get(key) for key in ("totals", "by_area", "top_products", "seasonality")):
+        raise ValueError(
+            "Legacy actual snapshot contains future or invalid monthly/year periods alongside undated aggregates. "
+            "Their historical population cannot be verified; rebuild the snapshot from dated historical rows."
+        )
+
     totals = data.get("totals", {})
     data["totals"] = {
         **totals,
         "total_revenue": to_float(totals.get("total_revenue")),
         "total_income": to_float(totals.get("total_income")),
         "total_transactions": to_int(totals.get("total_transactions")),
-        "avg_margin": to_float(totals.get("avg_margin")),
+        "avg_margin": gross_margin_rate(to_float(totals.get("total_income")), to_float(totals.get("total_revenue"))),
     }
 
     def normalize_rows(rows: list[dict[str, Any]], fields: list[str], int_fields: set[str] | None = None) -> list[dict[str, Any]]:
@@ -88,10 +136,78 @@ def normalize_snapshot(data: dict[str, Any]) -> dict[str, Any]:
         return normalized
 
     data["monthly"] = normalize_rows(data.get("monthly", []), ["revenue", "income"])
+    data["monthly"] = sorted([
+        r for r in data["monthly"]
+        if historical_month(r)
+    ], key=lambda r: r["period"])
     data["by_area"] = normalize_rows(data.get("by_area", []), ["revenue", "income"])
     data["top_products"] = normalize_rows(data.get("top_products", []), ["revenue", "income", "qty", "pct_of_total"])
     data["year_summary"] = normalize_rows(data.get("year_summary", []), ["revenue", "income"], {"transactions"})
+    data["year_summary"] = [
+        r for r in data["year_summary"]
+        if historical_year(r)
+    ]
     data["seasonality"] = normalize_rows(data.get("seasonality", []), ["avg_revenue"])
+    data["forecasts"] = normalize_rows(data.get("forecasts", []), [
+        "baseline_forecast",
+        "adjusted_forecast",
+        "lower_bound",
+        "upper_bound",
+        "disease_adjustment_factor",
+        "weather_adjustment_factor",
+        "confidence_level",
+    ])
+    data["external_signals"] = normalize_rows(data.get("external_signals", []), [
+        "disease_intensity_index",
+        "rainfall_severity_index",
+    ])
+    data["inventory_recommendations"] = normalize_rows(data.get("inventory_recommendations", []), [
+        "annual_demand_units",
+        "eoq_units",
+        "reorder_point_units",
+        "safety_stock_units",
+        "current_stock_units",
+        "forecast_demand_units",
+        "stock_gap_units",
+    ])
+    data["regional_priorities"] = normalize_rows(data.get("regional_priorities", []), [
+        "revenue_weight",
+        "growth_weight",
+        "outbreak_risk_weight",
+        "revenue_score",
+        "growth_score",
+        "outbreak_risk_index",
+        "mcda_score",
+    ], {"priority_rank"})
+    data["area_clusters"] = normalize_rows(data.get("area_clusters", []), [
+        "revenue_score",
+        "demand_growth_score",
+        "outbreak_risk_index",
+    ])
+    data["product_priorities"] = normalize_rows(data.get("product_priorities", []), [
+        "cumulative_revenue_pct",
+        "demand_score",
+        "margin_score",
+        "xgboost_urgency_score",
+    ], {"pareto_rank"})
+    data["allocation_recommendations"] = normalize_rows(data.get("allocation_recommendations", []), [
+        "available_units",
+        "recommended_units",
+        "objective_value",
+        "optimization_gap",
+    ])
+    data["product_region_matches"] = normalize_rows(data.get("product_region_matches", []), [
+        "similarity_score",
+    ], {"match_rank"})
+    data["decision_alerts"] = normalize_rows(data.get("decision_alerts", []), [
+        "threshold_value",
+        "observed_value",
+        "demand_multiplier",
+    ])
+    data["model_evaluation"] = normalize_rows(data.get("model_evaluation", []), [
+        "metric_value",
+        "benchmark_value",
+    ])
     return data
 
 
@@ -105,6 +221,16 @@ def warehouse_snapshot() -> dict[str, Any]:
         "top_products": supabase_fetch("vw_dashboard_top_products", {"select": "*", "order": "revenue.desc", "limit": 15}),
         "year_summary": supabase_fetch("vw_dashboard_year_summary", {"select": "*", "order": "year.asc"}),
         "seasonality": supabase_fetch("vw_dashboard_seasonality", {"select": "*", "order": "month_num.asc"}),
+        "forecasts": supabase_fetch("vw_dss_forecasts", {"select": "*", "order": "period.asc"}),
+        "external_signals": supabase_fetch("vw_dss_external_signals", {"select": "*", "order": "period.asc"}),
+        "inventory_recommendations": supabase_fetch("vw_dss_inventory_recommendations", {"select": "*"}),
+        "regional_priorities": supabase_fetch("vw_dss_regional_priorities", {"select": "*", "order": "priority_rank.asc"}),
+        "area_clusters": supabase_fetch("vw_dss_area_clusters", {"select": "*", "order": "cluster_label.asc"}),
+        "product_priorities": supabase_fetch("vw_dss_product_priorities", {"select": "*", "order": "pareto_rank.asc"}),
+        "allocation_recommendations": supabase_fetch("vw_dss_allocation_recommendations", {"select": "*"}),
+        "product_region_matches": supabase_fetch("vw_dss_product_region_matches", {"select": "*", "order": "match_rank.asc"}),
+        "decision_alerts": supabase_fetch("vw_dss_decision_alerts", {"select": "*"}),
+        "model_evaluation": supabase_fetch("vw_dss_model_evaluation", {"select": "*"}),
     })
 
 
@@ -114,4 +240,4 @@ def snapshot() -> dict[str, Any]:
             return warehouse_snapshot()
         except Exception:
             pass
-    return local_snapshot()
+    return normalize_snapshot(local_snapshot())

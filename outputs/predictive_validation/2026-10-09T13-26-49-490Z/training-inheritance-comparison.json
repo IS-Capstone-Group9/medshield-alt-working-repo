@@ -1,0 +1,33 @@
+{
+  "generated_at": "2026-10-09T13:28:22.580505+00:00",
+  "status": "PASS",
+  "old_input_sha256": "579a44986b4005c33d71e28957a4b3e06492b25fe4e7ea11cd67ed2e35ce9f3c",
+  "new_input_sha256": "57eb118ece467374526d9beefdb5f49b34c9f5fb7ad47d2fcdcee20f10085295",
+  "prior_attestation_sha256": "a015529c0cd01f00d38662f2ec06cd0b804eea468a4c130758d00451502702a4",
+  "compared_months": 108,
+  "numeric_fields": [
+    "target_value_decimal",
+    "source_count",
+    "eligible_count",
+    "excluded_count",
+    "excluded_amount",
+    "positive_sales",
+    "signed_returns",
+    "original_count",
+    "adjusted_count"
+  ],
+  "text_fields": [
+    "series_id",
+    "target_name",
+    "grain",
+    "scope",
+    "unit",
+    "last_observed_date",
+    "value_status",
+    "missing_reason"
+  ],
+  "differences": [],
+  "limitations": [
+    "Monthly financial/provenance parity carries prior user attestation; it does not independently prove source completeness or SKU units."
+  ]
+}

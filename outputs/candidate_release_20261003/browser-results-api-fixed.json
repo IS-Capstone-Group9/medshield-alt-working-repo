@@ -1,0 +1,190 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\frontend\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "e2e/descriptive-live.spec.ts",
+      "--workers=1",
+      "--reporter=json",
+      "--output=test-results-candidate-20261003-api-fixed"
+    ],
+    "configFile": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\frontend\\playwright.config.ts",
+    "rootDir": "C:/Users/Adrian/projects/medshield1/medshield/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/Adrian/projects/medshield1/medshield/frontend/test-results-candidate-20261003-api-fixed",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/Adrian/projects/medshield1/medshield/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "descriptive-live.spec.ts",
+      "file": "descriptive-live.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "live descriptive views use Databricks candidate sales and no demonstration recommendations",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 150000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 43695,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-02T19:59:17.679Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "26c0dd3fad95afa14524-c6a08829b4aa53f6d65b",
+          "file": "descriptive-live.spec.ts",
+          "line": 5,
+          "column": 1
+        },
+        {
+          "title": "descriptive API rejects broadened filters and preserves future empty years",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 150000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6153,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-02T20:00:01.737Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "26c0dd3fad95afa14524-1fb85d5076991832d6b7",
+          "file": "descriptive-live.spec.ts",
+          "line": 65,
+          "column": 1
+        },
+        {
+          "title": "authenticated descriptive endpoints identify the selected candidate",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 150000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9142,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-02T20:00:07.908Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "candidate-api-identities",
+                      "contentType": "application/json",
+                      "body": "ewogICIvZGFzaGJvYXJkX3N0YXR1cyI6IHsKICAgICJzdGF0dXMiOiAyMDAsCiAgICAiaWRlbnRpdHkiOiB7CiAgICAgICJkYXRhc2V0X2lkIjogImIxZDQ4ZmI1OGE2ZDhiZGZjZmM4ZGIzMDNjZmE4NzE0MWUzNmRkYjdhZjhiNDg5MDQ5YWRiOTVmYjc1OTQzYzQiLAogICAgICAicG9saWN5X3ZlcnNpb24iOiAic2FsZXNfcmVzdGFydF9nb2xkX3Y3X2luZGVwZW5kZW50X2NhdGFsb2ciLAogICAgICAiYXJlYV9tYXBwaW5nX3NoYTI1NiI6ICJhNDBmMzgwYjUwMzA1ZWJlYjlhYjFmZTIxYTNkNzQ4Mzc1MGY1NjU5OGRlMzZiMWRlYTFlODU2NDdhM2FjOTQ5IiwKICAgICAgInByb2R1Y3RfbWFzdGVyX3NoYTI1NiI6ICIxMzYxZjc2MjlkNGRhYjRmMWY2NDE0ZGIzMmExOWU5ZWVhOWFiMjBhY2I5OTMxOWQxNjhhZWNjOWZlZjQ4MDg4IiwKICAgICAgInB1YmxpY2F0aW9uX3N0YXR1cyI6ICJDQU5ESURBVEVfUEVORElOR19CVVNJTkVTU19BTkRfUFJPRFVDVF9NQVNURVJfUkVWSUVXIiwKICAgICAgInJlc29sdXRpb25fcG9saWN5IjogImNhdGFsb2dfdjFfaW5kZXBlbmRlbnRfZXZpZGVuY2UiLAogICAgICAidHJhbnNhY3Rpb25fZXZpZGVuY2Vfc2hhMjU2IjogIjVlMWE4MzlkNTUxMjkzYjUxMTQ5ZTdjMzVkODYzY2U2ODA1NzNlMDIyNzVmNjVkMTc1MTJkNjA5OWZmODg3ODYiLAogICAgICAiY2F0YWxvZ19oZWxwZXJfc2hhMjU2IjogIjIwODg4YTkwMjUzNzE4ZGFiZjJhZWEzMzkwZWNjOGQ3Y2E3MDdiMzg4ZThhNGQ0NTEyM2U4OTRjOThmNjg4YzkiLAogICAgICAiZmFjdF9kZWx0YV92ZXJzaW9uIjogMTcKICAgIH0sCiAgICAibWF0Y2hpbmdfaWRlbnRpdGllcyI6IDEKICB9LAogICIvc2FsZXMvc3RhdHVzIjogewogICAgInN0YXR1cyI6IDIwMCwKICAgICJpZGVudGl0eSI6IHsKICAgICAgImRhdGFzZXRfaWQiOiAiYjFkNDhmYjU4YTZkOGJkZmNmYzhkYjMwM2NmYTg3MTQxZTM2ZGRiN2FmOGI0ODkwNDlhZGI5NWZiNzU5NDNjNCIsCiAgICAgICJwb2xpY3lfdmVyc2lvbiI6ICJzYWxlc19yZXN0YXJ0X2dvbGRfdjdfaW5kZXBlbmRlbnRfY2F0YWxvZyIsCiAgICAgICJhcmVhX21hcHBpbmdfc2hhMjU2IjogImE0MGYzODBiNTAzMDVlYmViOWFiMWZlMjFhM2Q3NDgzNzUwZjU2NTk4ZGUzNmIxZGVhMWU4NTY0N2EzYWM5NDkiLAogICAgICAicHJvZHVjdF9tYXN0ZXJfc2hhMjU2IjogIjEzNjFmNzYyOWQ0ZGFiNGYxZjY0MTRkYjMyYTE5ZTllZWE5YWIyMGFjYjk5MzE5ZDE2OGFlY2M5ZmVmNDgwODgiLAogICAgICAicHVibGljYXRpb25fc3RhdHVzIjogIkNBTkRJREFURV9QRU5ESU5HX0JVU0lORVNTX0FORF9QUk9EVUNUX01BU1RFUl9SRVZJRVciLAogICAgICAicmVzb2x1dGlvbl9wb2xpY3kiOiAiY2F0YWxvZ192MV9pbmRlcGVuZGVudF9ldmlkZW5jZSIsCiAgICAgICJ0cmFuc2FjdGlvbl9ldmlkZW5jZV9zaGEyNTYiOiAiNWUxYTgzOWQ1NTEyOTNiNTExNDllN2MzNWQ4NjNjZTY4MDU3M2UwMjI3NWY2NWQxNzUxMmQ2MDk5ZmY4ODc4NiIsCiAgICAgICJjYXRhbG9nX2hlbHBlcl9zaGEyNTYiOiAiMjA4ODhhOTAyNTM3MThkYWJmMmFlYTMzOTBlY2M4ZDdjYTcwN2IzODhlOGE0ZDQ1MTIzZTg5NGM5OGY2ODhjOSIsCiAgICAgICJmYWN0X2RlbHRhX3ZlcnNpb24iOiAxNwogICAgfSwKICAgICJtYXRjaGluZ19pZGVudGl0aWVzIjogMQogIH0sCiAgIi9zYWxlcy9zZWN0b3JzIjogewogICAgInN0YXR1cyI6IDIwMCwKICAgICJpZGVudGl0eSI6IHsKICAgICAgImRhdGFzZXRfaWQiOiAiYjFkNDhmYjU4YTZkOGJkZmNmYzhkYjMwM2NmYTg3MTQxZTM2ZGRiN2FmOGI0ODkwNDlhZGI5NWZiNzU5NDNjNCIsCiAgICAgICJwb2xpY3lfdmVyc2lvbiI6ICJzYWxlc19yZXN0YXJ0X2dvbGRfdjdfaW5kZXBlbmRlbnRfY2F0YWxvZyIsCiAgICAgICJhcmVhX21hcHBpbmdfc2hhMjU2IjogImE0MGYzODBiNTAzMDVlYmViOWFiMWZlMjFhM2Q3NDgzNzUwZjU2NTk4ZGUzNmIxZGVhMWU4NTY0N2EzYWM5NDkiLAogICAgICAicHJvZHVjdF9tYXN0ZXJfc2hhMjU2IjogIjEzNjFmNzYyOWQ0ZGFiNGYxZjY0MTRkYjMyYTE5ZTllZWE5YWIyMGFjYjk5MzE5ZDE2OGFlY2M5ZmVmNDgwODgiLAogICAgICAicHVibGljYXRpb25fc3RhdHVzIjogIkNBTkRJREFURV9QRU5ESU5HX0JVU0lORVNTX0FORF9QUk9EVUNUX01BU1RFUl9SRVZJRVciLAogICAgICAicmVzb2x1dGlvbl9wb2xpY3kiOiAiY2F0YWxvZ192MV9pbmRlcGVuZGVudF9ldmlkZW5jZSIsCiAgICAgICJ0cmFuc2FjdGlvbl9ldmlkZW5jZV9zaGEyNTYiOiAiNWUxYTgzOWQ1NTEyOTNiNTExNDllN2MzNWQ4NjNjZTY4MDU3M2UwMjI3NWY2NWQxNzUxMmQ2MDk5ZmY4ODc4NiIsCiAgICAgICJjYXRhbG9nX2hlbHBlcl9zaGEyNTYiOiAiMjA4ODhhOTAyNTM3MThkYWJmMmFlYTMzOTBlY2M4ZDdjYTcwN2IzODhlOGE0ZDQ1MTIzZTg5NGM5OGY2ODhjOSIsCiAgICAgICJmYWN0X2RlbHRhX3ZlcnNpb24iOiAxNwogICAgfSwKICAgICJtYXRjaGluZ19pZGVudGl0aWVzIjogMQogIH0sCiAgIi9zYWxlcy9oZWF0bWFwIjogewogICAgInN0YXR1cyI6IDIwMCwKICAgICJpZGVudGl0eSI6IHsKICAgICAgImRhdGFzZXRfaWQiOiAiYjFkNDhmYjU4YTZkOGJkZmNmYzhkYjMwM2NmYTg3MTQxZTM2ZGRiN2FmOGI0ODkwNDlhZGI5NWZiNzU5NDNjNCIsCiAgICAgICJwb2xpY3lfdmVyc2lvbiI6ICJzYWxlc19yZXN0YXJ0X2dvbGRfdjdfaW5kZXBlbmRlbnRfY2F0YWxvZyIsCiAgICAgICJhcmVhX21hcHBpbmdfc2hhMjU2IjogImE0MGYzODBiNTAzMDVlYmViOWFiMWZlMjFhM2Q3NDgzNzUwZjU2NTk4ZGUzNmIxZGVhMWU4NTY0N2EzYWM5NDkiLAogICAgICAicHJvZHVjdF9tYXN0ZXJfc2hhMjU2IjogIjEzNjFmNzYyOWQ0ZGFiNGYxZjY0MTRkYjMyYTE5ZTllZWE5YWIyMGFjYjk5MzE5ZDE2OGFlY2M5ZmVmNDgwODgiLAogICAgICAicHVibGljYXRpb25fc3RhdHVzIjogIkNBTkRJREFURV9QRU5ESU5HX0JVU0lORVNTX0FORF9QUk9EVUNUX01BU1RFUl9SRVZJRVciLAogICAgICAicmVzb2x1dGlvbl9wb2xpY3kiOiAiY2F0YWxvZ192MV9pbmRlcGVuZGVudF9ldmlkZW5jZSIsCiAgICAgICJ0cmFuc2FjdGlvbl9ldmlkZW5jZV9zaGEyNTYiOiAiNWUxYTgzOWQ1NTEyOTNiNTExNDllN2MzNWQ4NjNjZTY4MDU3M2UwMjI3NWY2NWQxNzUxMmQ2MDk5ZmY4ODc4NiIsCiAgICAgICJjYXRhbG9nX2hlbHBlcl9zaGEyNTYiOiAiMjA4ODhhOTAyNTM3MThkYWJmMmFlYTMzOTBlY2M4ZDdjYTcwN2IzODhlOGE0ZDQ1MTIzZTg5NGM5OGY2ODhjOSIsCiAgICAgICJmYWN0X2RlbHRhX3ZlcnNpb24iOiAxNwogICAgfSwKICAgICJtYXRjaGluZ19pZGVudGl0aWVzIjogMQogIH0sCiAgIi9zZWFzb25hbGl0eS9zdGwiOiB7CiAgICAic3RhdHVzIjogMjAwLAogICAgImlkZW50aXR5IjogewogICAgICAiZGF0YXNldF9pZCI6ICJiMWQ0OGZiNThhNmQ4YmRmY2ZjOGRiMzAzY2ZhODcxNDFlMzZkZGI3YWY4YjQ4OTA0OWFkYjk1ZmI3NTk0M2M0IiwKICAgICAgInBvbGljeV92ZXJzaW9uIjogInNhbGVzX3Jlc3RhcnRfZ29sZF92N19pbmRlcGVuZGVudF9jYXRhbG9nIiwKICAgICAgImFyZWFfbWFwcGluZ19zaGEyNTYiOiAiYTQwZjM4MGI1MDMwNWViZWI5YWIxZmUyMWEzZDc0ODM3NTBmNTY1OThkZTM2YjFkZWExZTg1NjQ3YTNhYzk0OSIsCiAgICAgICJwcm9kdWN0X21hc3Rlcl9zaGEyNTYiOiAiMTM2MWY3NjI5ZDRkYWI0ZjFmNjQxNGRiMzJhMTllOWVlYTlhYjIwYWNiOTkzMTlkMTY4YWVjYzlmZWY0ODA4OCIsCiAgICAgICJwdWJsaWNhdGlvbl9zdGF0dXMiOiAiQ0FORElEQVRFX1BFTkRJTkdfQlVTSU5FU1NfQU5EX1BST0RVQ1RfTUFTVEVSX1JFVklFVyIsCiAgICAgICJyZXNvbHV0aW9uX3BvbGljeSI6ICJjYXRhbG9nX3YxX2luZGVwZW5kZW50X2V2aWRlbmNlIiwKICAgICAgInRyYW5zYWN0aW9uX2V2aWRlbmNlX3NoYTI1NiI6ICI1ZTFhODM5ZDU1MTI5M2I1MTE0OWU3YzM1ZDg2M2NlNjgwNTczZTAyMjc1ZjY1ZDE3NTEyZDYwOTlmZjg4Nzg2IiwKICAgICAgImNhdGFsb2dfaGVscGVyX3NoYTI1NiI6ICIyMDg4OGE5MDI1MzcxOGRhYmYyYWVhMzM5MGVjYzhkN2NhNzA3YjM4OGU4YTRkNDUxMjNlODk0Yzk4ZjY4OGM5IiwKICAgICAgImZhY3RfZGVsdGFfdmVyc2lvbiI6IDE3CiAgICB9LAogICAgIm1hdGNoaW5nX2lkZW50aXRpZXMiOiA3NAogIH0sCiAgIi9wcm9kdWN0cyI6IHsKICAgICJzdGF0dXMiOiAyMDAsCiAgICAiaWRlbnRpdHkiOiB7CiAgICAgICJkYXRhc2V0X2lkIjogImIxZDQ4ZmI1OGE2ZDhiZGZjZmM4ZGIzMDNjZmE4NzE0MWUzNmRkYjdhZjhiNDg5MDQ5YWRiOTVmYjc1OTQzYzQiLAogICAgICAicG9saWN5X3ZlcnNpb24iOiAic2FsZXNfcmVzdGFydF9nb2xkX3Y3X2luZGVwZW5kZW50X2NhdGFsb2ciLAogICAgICAiYXJlYV9tYXBwaW5nX3NoYTI1NiI6ICJhNDBmMzgwYjUwMzA1ZWJlYjlhYjFmZTIxYTNkNzQ4Mzc1MGY1NjU5OGRlMzZiMWRlYTFlODU2NDdhM2FjOTQ5IiwKICAgICAgInByb2R1Y3RfbWFzdGVyX3NoYTI1NiI6ICIxMzYxZjc2MjlkNGRhYjRmMWY2NDE0ZGIzMmExOWU5ZWVhOWFiMjBhY2I5OTMxOWQxNjhhZWNjOWZlZjQ4MDg4IiwKICAgICAgInB1YmxpY2F0aW9uX3N0YXR1cyI6ICJDQU5ESURBVEVfUEVORElOR19CVVNJTkVTU19BTkRfUFJPRFVDVF9NQVNURVJfUkVWSUVXIiwKICAgICAgInJlc29sdXRpb25fcG9saWN5IjogImNhdGFsb2dfdjFfaW5kZXBlbmRlbnRfZXZpZGVuY2UiLAogICAgICAidHJhbnNhY3Rpb25fZXZpZGVuY2Vfc2hhMjU2IjogIjVlMWE4MzlkNTUxMjkzYjUxMTQ5ZTdjMzVkODYzY2U2ODA1NzNlMDIyNzVmNjVkMTc1MTJkNjA5OWZmODg3ODYiLAogICAgICAiY2F0YWxvZ19oZWxwZXJfc2hhMjU2IjogIjIwODg4YTkwMjUzNzE4ZGFiZjJhZWEzMzkwZWNjOGQ3Y2E3MDdiMzg4ZThhNGQ0NTEyM2U4OTRjOThmNjg4YzkiLAogICAgICAiZmFjdF9kZWx0YV92ZXJzaW9uIjogMTcKICAgIH0sCiAgICAibWF0Y2hpbmdfaWRlbnRpdGllcyI6IDE1CiAgfQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "26c0dd3fad95afa14524-b76c75f1a7a70432f235",
+          "file": "descriptive-live.spec.ts",
+          "line": 81,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-02T19:59:16.606Z",
+    "duration": 60656.201,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

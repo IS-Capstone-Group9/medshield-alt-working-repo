@@ -1,0 +1,638 @@
+{
+  "status": "PASS",
+  "checked_at_utc": "2026-10-10T07:28:12.255623+00:00",
+  "timezone": "Asia/Manila",
+  "scope": "Guided Step 3 predictive writing insert complete; whole manuscript integration and formal acceptance remain pending",
+  "independent_qa_checks": 457,
+  "rendered_pages": 8,
+  "new_model_fits": 0,
+  "remote_mutations": 0,
+  "business_tolerance_status": "not_assessed_thresholds_missing",
+  "publication_approved": false,
+  "check_summary": {
+    "passed": 113,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "criterion": "independent numerical content and visual QA passes",
+      "status": "PASS"
+    },
+    {
+      "criterion": "all eight pages manually inspected",
+      "status": "PASS"
+    },
+    {
+      "criterion": "root visual binds raster",
+      "status": "PASS"
+    },
+    {
+      "criterion": "authoring binding outputs/predictive_error_policy_20261010/model-error-review.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "authoring binding outputs/predictive_error_policy_20261010/policy.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "authoring binding outputs/predictive_explanation_20261010/scorecard.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "authoring binding outputs/predictive_annual_release_20261010/models/annual-origin-2025-12-asof-2026-10-10/a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b/run.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "authoring binding outputs/predictive_completion_20261009/audit-comparison.png",
+      "status": "PASS"
+    },
+    {
+      "criterion": "authoring binding docs/drafts/MedShield_Chapter_4_5_Draft.docx",
+      "status": "PASS"
+    },
+    {
+      "criterion": "authoring binding docs/chapters/MedShield_Chapter_4_System_Implementation_Results_and_Discussion.docx",
+      "status": "PASS"
+    },
+    {
+      "criterion": "authoring binding docs/chapters/MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md",
+      "status": "PASS"
+    },
+    {
+      "criterion": "authoring binding docs/chapters/MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.docx",
+      "status": "PASS"
+    },
+    {
+      "criterion": "authoring binding outputs/predictive_chapters_20261010/manuscript.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "current builder retained",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.docx",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding build_chapters.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding manuscript.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding authoring-receipt.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding expected-claims.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding verify_chapters.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding run.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding run.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.pdf",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding raster-receipt.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding visual-review.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding visual-review.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding verify_packet.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding README.md",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding rasterize_pages.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding render_word.vbs",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding content-verification.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding revised-content-verification.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding authoring-receipt.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding page-01.png",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding page-02.png",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding page-03.png",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding page-04.png",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding page-05.png",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding page-06.png",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding page-07.png",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding page-08.png",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.docx",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding manuscript.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding input.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding policy.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding model-error-review.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding CHAPTER_4_5_EVIDENCE_PLAN.md",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding PAPER_REVISION_GUIDE.md",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding OBJECTIVE_EVIDENCE_REGISTER.md",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding scorecard.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding audit-comparison.png",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding MedShield_Chapter_4_5_Draft.docx",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding MedShield_Chapter_4_System_Implementation_Results_and_Discussion.docx",
+      "status": "PASS"
+    },
+    {
+      "criterion": "eight file QA seal passes",
+      "status": "PASS"
+    },
+    {
+      "criterion": "QA artifact binding REPORT.md",
+      "status": "PASS"
+    },
+    {
+      "criterion": "QA artifact binding expected-claims.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "QA artifact binding content-verification.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "QA artifact binding revised-content-verification.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "QA artifact binding verification.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "QA artifact binding verify_chapters.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "QA artifact binding verify_packet.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "QA artifact binding visual-review.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "render matches current Word source",
+      "status": "PASS"
+    },
+    {
+      "criterion": "PDF matches inspected render",
+      "status": "PASS"
+    },
+    {
+      "criterion": "native render script retained",
+      "status": "PASS"
+    },
+    {
+      "criterion": "inspected page 1 bytes retained",
+      "status": "PASS"
+    },
+    {
+      "criterion": "inspected page 2 bytes retained",
+      "status": "PASS"
+    },
+    {
+      "criterion": "inspected page 3 bytes retained",
+      "status": "PASS"
+    },
+    {
+      "criterion": "inspected page 4 bytes retained",
+      "status": "PASS"
+    },
+    {
+      "criterion": "inspected page 5 bytes retained",
+      "status": "PASS"
+    },
+    {
+      "criterion": "inspected page 6 bytes retained",
+      "status": "PASS"
+    },
+    {
+      "criterion": "inspected page 7 bytes retained",
+      "status": "PASS"
+    },
+    {
+      "criterion": "inspected page 8 bytes retained",
+      "status": "PASS"
+    },
+    {
+      "criterion": "both business limits still absent",
+      "status": "PASS"
+    },
+    {
+      "criterion": "no business pass or 2026 score",
+      "status": "PASS"
+    },
+    {
+      "criterion": "no new training or remote mutation",
+      "status": "PASS"
+    },
+    {
+      "criterion": "Python syntax outputs\\predictive_chapters_20261010\\build_chapters.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "Python syntax outputs\\predictive_chapters_20261010\\rasterize_pages.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "Python syntax outputs\\predictive_chapters_20261010\\record_visual_review.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "Python syntax outputs\\predictive_chapters_20261010\\seal_delivery.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "Python syntax outputs\\predictive_chapters_20261010\\qa\\verify_chapters.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "Python syntax outputs\\predictive_chapters_20261010\\qa\\verify_packet.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local reference outputs\\predictive_chapters_20261010\\README.md:3",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local reference outputs\\predictive_chapters_20261010\\README.md:4",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local reference outputs\\predictive_chapters_20261010\\README.md:46",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local reference outputs\\predictive_chapters_20261010\\README.md:47",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local reference outputs\\predictive_chapters_20261010\\authoring-first\\MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md:77",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local reference outputs\\predictive_chapters_20261010\\authoring-first\\MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md:168",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local reference outputs\\predictive_chapters_20261010\\authoring-first\\MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md:170",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local reference outputs\\predictive_chapters_20261010\\authoring-first\\MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md:174",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local reference outputs\\predictive_chapters_20261010\\authoring-first\\MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md:178",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local reference outputs\\predictive_chapters_20261010\\authoring-first\\MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md:182",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local reference outputs\\predictive_chapters_20261010\\authoring-first\\MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md:186",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local reference outputs\\predictive_chapters_20261010\\authoring-first\\MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md:188",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local reference outputs\\predictive_chapters_20261010\\authoring-first\\MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md:192",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local reference outputs\\predictive_chapters_20261010\\authoring-first\\MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md:194",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local reference outputs\\predictive_chapters_20261010\\qa\\REPORT.md:39",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local reference docs\\chapters\\MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md:77",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local reference docs\\chapters\\MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md:168",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local reference docs\\chapters\\MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md:170",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local reference docs\\chapters\\MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md:174",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local reference docs\\chapters\\MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md:178",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local reference docs\\chapters\\MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md:182",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local reference docs\\chapters\\MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md:186",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local reference docs\\chapters\\MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md:188",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local reference docs\\chapters\\MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md:192",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local reference docs\\chapters\\MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md:194",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local reference docs\\CURRENT_STATE.md:5",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local reference docs\\CURRENT_STATE.md:6",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local reference docs\\CURRENT_STATE.md:14",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local reference docs\\DOCUMENTATION_INDEX.md:25",
+      "status": "PASS"
+    }
+  ],
+  "command": [
+    "C:\\Users\\Adrian\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "-X",
+    "utf8",
+    "outputs/predictive_chapters_20261010/seal_delivery.py"
+  ],
+  "git_head": "cc03b4c05398880b18987eca5ca9c1e140bf9dcb",
+  "working_tree": "Extensive pre-existing changes preserved; hashes bind current writing artifacts and two documentation pointers",
+  "file_hashes": {
+    "docs/chapters/MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.docx": {
+      "sha256": "eb92d197c4aae0df879db21f3bf2cedd40aebc05d9076cc0daf14636a2c3dcb3",
+      "bytes": 152449
+    },
+    "docs/chapters/MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md": {
+      "sha256": "1d2d0d4dbee76465c6b3bf9a8049319bad3d37a9f932319eb968e98098a38446",
+      "bytes": 21671
+    },
+    "docs/CURRENT_STATE.md": {
+      "sha256": "e8ab3f3de754cecef2d7364b0209d01943646cc3e57be70292826c0c7d5811f8",
+      "bytes": 53638
+    },
+    "docs/DOCUMENTATION_INDEX.md": {
+      "sha256": "5ca7df93693c2da91da13a149a948dd81cd515b2c78abfa94252c3a72e70c488",
+      "bytes": 7961
+    },
+    "outputs/predictive_chapters_20261010/authoring-first/authoring-receipt.json": {
+      "sha256": "b275fd077b6db142f49648afb734a8730e72ba5ceff0cea38588df1e2845ea80",
+      "bytes": 2591
+    },
+    "outputs/predictive_chapters_20261010/authoring-first/manuscript.json": {
+      "sha256": "dd58261157be542e931d37fba33164ee0929098a58890f4bd3dc0f906f14b428",
+      "bytes": 27358
+    },
+    "outputs/predictive_chapters_20261010/authoring-first/MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.docx": {
+      "sha256": "adca0355b0b3b64ecb3bf9ec574b34d48b03e9bf6a129b650fc05a44576cdab9",
+      "bytes": 152442
+    },
+    "outputs/predictive_chapters_20261010/authoring-first/MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md": {
+      "sha256": "f20dc2f35403bafe94c104e75a175caa9430f419210c3596af3e21911f6237d2",
+      "bytes": 21651
+    },
+    "outputs/predictive_chapters_20261010/authoring-receipt.json": {
+      "sha256": "6e1664224e3672954233f8e4c432465646d43ea9c72f91a908e858e14afb46fd",
+      "bytes": 2608
+    },
+    "outputs/predictive_chapters_20261010/build_chapters.py": {
+      "sha256": "3b344cf961d3b4ca9c80f7a3a35397d481be6fa6d9ef99a18b76f767d539e055",
+      "bytes": 32456
+    },
+    "outputs/predictive_chapters_20261010/delivery-attempt-1.json": {
+      "sha256": "51f7c654ea6f47a9997b90bbf8823cdc2ee28c94d72e54bb390b4536036df6bc",
+      "bytes": 21774
+    },
+    "outputs/predictive_chapters_20261010/delivery-attempt-1.sha256": {
+      "sha256": "0b6046c1c0ae9916f7c063fbbf0a94a4b24e7a12181644bdbaf220277b90505e",
+      "bytes": 66
+    },
+    "outputs/predictive_chapters_20261010/manuscript.json": {
+      "sha256": "79d215ce7ac8e79001e560ae6e2642ff1bec8e49d5955473e7798ce20897b1c2",
+      "bytes": 27378
+    },
+    "outputs/predictive_chapters_20261010/qa/artifact-hashes.json": {
+      "sha256": "248af7251e77467b62663ffce6c474b4e6106deb19117af08ffad731e7b4fe97",
+      "bytes": 1156
+    },
+    "outputs/predictive_chapters_20261010/qa/content-verification.json": {
+      "sha256": "0d6bf631e9fa8040f43c9c82e735c8f4854f21f4e8d65b3fe0b56c02e14693f7",
+      "bytes": 62773
+    },
+    "outputs/predictive_chapters_20261010/qa/expected-claims.json": {
+      "sha256": "c9d5e8e474ab49e237022f0692a637fd4e4bec88114ff2110ae6977686c5fc05",
+      "bytes": 32847
+    },
+    "outputs/predictive_chapters_20261010/qa/REPORT.md": {
+      "sha256": "529fa4a3a8920a6d633275b7b5ed67838f6efb1a377a6e8277dd0093f478ee5a",
+      "bytes": 4337
+    },
+    "outputs/predictive_chapters_20261010/qa/revised-content-verification.json": {
+      "sha256": "c95c2bf6be858376a2671b283096d21f3f14e11d77d72f7fa34183d3900e437f",
+      "bytes": 62781
+    },
+    "outputs/predictive_chapters_20261010/qa/verification.json": {
+      "sha256": "3b6fbb7590d97206eb503afe560f3f752950d4f76b57d075a9732bdc1f3cab9a",
+      "bytes": 76178
+    },
+    "outputs/predictive_chapters_20261010/qa/verify_chapters.py": {
+      "sha256": "ef713c609200cdb362f7c8547024b565d2acb47eec4a891a7a5e7c90ea88fce1",
+      "bytes": 20003
+    },
+    "outputs/predictive_chapters_20261010/qa/verify_packet.py": {
+      "sha256": "2b8d46ee6edebd1c9e720c89afd567394fe492d9ed44153af7d299600cdd7fa6",
+      "bytes": 8995
+    },
+    "outputs/predictive_chapters_20261010/qa/visual-review.json": {
+      "sha256": "1513e589a5084678a0225c4b624f92dcb9977623e02f9ed5e6fcbb311c7b1b37",
+      "bytes": 3214
+    },
+    "outputs/predictive_chapters_20261010/rasterize_pages.py": {
+      "sha256": "d090d24fefa5224f100549b916aadc19ee3cd5d17384ae6134b6a95163e6a31a",
+      "bytes": 2200
+    },
+    "outputs/predictive_chapters_20261010/README.md": {
+      "sha256": "fb88ace643722827c618db294e3df65311973e6992738e99b09cc9e51be968b4",
+      "bytes": 5678
+    },
+    "outputs/predictive_chapters_20261010/record_visual_review.py": {
+      "sha256": "f2fb5e18c1c41de7444235a772a0981273423030be3a9e9bb6f75e89004d908e",
+      "bytes": 1678
+    },
+    "outputs/predictive_chapters_20261010/render/MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.pdf": {
+      "sha256": "334a4e86c457d3ba7d3e39dcdeef1110429c2c1b0e13409e6d822515630e4a16",
+      "bytes": 419043
+    },
+    "outputs/predictive_chapters_20261010/render/page-01.png": {
+      "sha256": "6a93b703c86796355a8df802ab136c9983845366ba9684ab195481ce108cb3dc",
+      "bytes": 248101
+    },
+    "outputs/predictive_chapters_20261010/render/page-02.png": {
+      "sha256": "ae79c5a002d66c5ca4b244977b7c983d7082f2024dc14cae761ed59a208d459b",
+      "bytes": 261424
+    },
+    "outputs/predictive_chapters_20261010/render/page-03.png": {
+      "sha256": "0cfc3b82560889d605828c321872c88f737ddefd902a294e5eec7c98e61faf7d",
+      "bytes": 219207
+    },
+    "outputs/predictive_chapters_20261010/render/page-04.png": {
+      "sha256": "b69157f788737f21312f7e2d771d9d2061eedbd229bb1ff8cc38b8da958c158f",
+      "bytes": 234096
+    },
+    "outputs/predictive_chapters_20261010/render/page-05.png": {
+      "sha256": "9206ee3ef14e4ff0e11dcc1266b29e92b8920865deb14e22e71a507a2cbdf329",
+      "bytes": 248890
+    },
+    "outputs/predictive_chapters_20261010/render/page-06.png": {
+      "sha256": "f5818dbfb98d1bbaf911a9d25eb943fde2505a7cc4dedb2a46fad575ad4e54f3",
+      "bytes": 261913
+    },
+    "outputs/predictive_chapters_20261010/render/page-07.png": {
+      "sha256": "741d168c561e3fb12939886756da57bd7f182111038ff6b1c014a0475abd6892",
+      "bytes": 286598
+    },
+    "outputs/predictive_chapters_20261010/render/page-08.png": {
+      "sha256": "f74006d6c2cb187d7cc7590f22f7ed84f21279d945a62432f2d1da6d6ca46605",
+      "bytes": 181950
+    },
+    "outputs/predictive_chapters_20261010/render/raster-receipt.json": {
+      "sha256": "56cf31a133f56bde394ea2d764df58597de8a22c5df036723f42fe65a3b13648",
+      "bytes": 3580
+    },
+    "outputs/predictive_chapters_20261010/render/visual-review.json": {
+      "sha256": "f8dd18c2b0fd1c849beff1c418faab32c0ee485d84bc765ae9d95ee9bb2cb1b6",
+      "bytes": 3406
+    },
+    "outputs/predictive_chapters_20261010/render_word.ps1": {
+      "sha256": "2a60c4764ad6bfb9c9fa4e39e57ade41f09a792603765a537a7e4fa981b13211",
+      "bytes": 3668
+    },
+    "outputs/predictive_chapters_20261010/render_word.vbs": {
+      "sha256": "01954335c0a7221e36820042fbe385f74145d1391d7f07b6f8dd8f13f37d4a84",
+      "bytes": 1167
+    },
+    "outputs/predictive_chapters_20261010/seal_delivery.py": {
+      "sha256": "4e56905d66fdff16ab50a2e6a4e144d66c9488df148ba2289f1a0cab2bd07749",
+      "bytes": 7059
+    }
+  },
+  "review_mode": "Separate Data Analyst evidence extraction, Technical Writer prose review, QA numerical/OOXML/all-page review and root integration/all-page review",
+  "recovery": "Initial builder syntax failure before output, retained first authoring and two reader revisions, unavailable packaged renderer and failed PowerShell COM followed by successful native Word VBScript/PDFium render; task-created hidden abandoned Word process was cleaned up"
+}

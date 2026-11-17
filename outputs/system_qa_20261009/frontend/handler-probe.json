@@ -1,0 +1,29 @@
+{
+  "executed_at": "2026-10-09T02:16:35.314Z",
+  "static_only": true,
+  "handler_count": 18,
+  "handlers": [
+    "changeClientRefPage",
+    "closeAuditModal",
+    "closeHelpModal",
+    "confirmAndExecuteOrder",
+    "exportClientReferenceCSV",
+    "exportExternalRegressionCSV",
+    "exportForecastValidationCSV",
+    "exportPlanningCSV",
+    "exportSalesGrowthCSV",
+    "exportSalesHeatmapCSV",
+    "openHelp",
+    "requestPlanSolve",
+    "resetMcdaWeights",
+    "resetPlanningDefaults",
+    "setPrescriptivePreset",
+    "showPage",
+    "toggleNavigation",
+    "toggleTheme"
+  ],
+  "missing_required_bridge": [],
+  "executable_sha256": "01a133915efb7bda2f7d352b6353e74176e4df63276104de2bc1cbbe2a8bd68f",
+  "executable_contains_legacy_payload": false,
+  "executable_syntax_valid": true
+}

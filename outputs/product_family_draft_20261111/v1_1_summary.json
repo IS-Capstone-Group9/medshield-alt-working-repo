@@ -1,0 +1,69 @@
+{
+ "v1_1": {
+  "families": 3508,
+  "labels_moved": 4,
+  "moves": [
+   [
+    "TRIVASC 35MG MR",
+    "TRIVASC",
+    "TRIVASC MR"
+   ],
+   [
+    "ANIN 50 PLUS 50MG/12.5MG",
+    "ANIN",
+    "ANIN PLUS"
+   ],
+   [
+    "AMBRODAY 75MG SR",
+    "AMBRODAY",
+    "AMBRODAY SR"
+   ],
+   [
+    "GLUCRON 80MG MR",
+    "GLUCRON",
+    "GLUCRON MR"
+   ]
+  ],
+  "source_questions": [
+   "DEXTROSE PLAIN labels describe 0.9% sodium chloride (PNSS)"
+  ]
+ },
+ "abc_xyz_2025": {
+  "families_with_positive_net": 728,
+  "grid": {
+   "AX": {
+    "families": 8,
+    "share_of_net_pct": 3.44
+   },
+   "AY": {
+    "families": 13,
+    "share_of_net_pct": 3.8
+   },
+   "AZ": {
+    "families": 91,
+    "share_of_net_pct": 72.76
+   },
+   "BX": {
+    "families": 4,
+    "share_of_net_pct": 0.47
+   },
+   "BY": {
+    "families": 15,
+    "share_of_net_pct": 1.51
+   },
+   "BZ": {
+    "families": 158,
+    "share_of_net_pct": 13.01
+   },
+   "CY": {
+    "families": 2,
+    "share_of_net_pct": 0.05
+   },
+   "CZ": {
+    "families": 437,
+    "share_of_net_pct": 4.95
+   }
+  }
+ },
+ "status": "candidate_not_applied"
+}

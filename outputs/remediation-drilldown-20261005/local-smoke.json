@@ -1,0 +1,17 @@
+{
+  "health_status": 200,
+  "health": {
+    "status": "ok",
+    "service": "MedShield API gateway",
+    "architecture": "typescript-api-gateway",
+    "source": "databricks",
+    "runtime": "typescript",
+    "auth_mode": "supabase-auth-jwt",
+    "dashboard_fallback": false
+  },
+  "page_status": 200,
+  "diagnostics_unauthenticated_status": 401,
+  "diagnostics_unauthenticated": {
+    "error": "Authentication token is required"
+  }
+}

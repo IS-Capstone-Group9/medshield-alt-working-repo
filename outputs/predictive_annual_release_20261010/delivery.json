@@ -1,0 +1,673 @@
+{
+  "status": "PASS",
+  "checked_at_utc": "2026-10-10T05:53:54.715893+00:00",
+  "user_timezone": "Asia/Manila",
+  "scope": "Actual final-origin research fits plus independently reviewed projection presentation; no operational publication",
+  "projection_id": "a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b",
+  "source_manifest": {
+    "accepted_descriptive_release_id": "19662860d526ca2efb5ccf4256645211bfb916fb8590060901e6e2573b991def",
+    "catalog_mapping_version": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+    "coverage_receipt_sha256": "aea5d30560eecbc7adb9d0d1024e0337a3df9bdc125503c27aa931a1816ccb82",
+    "coverage_review": {
+      "evidence_reference": "User confirmation in this implementation chat: yes.our evidence is the sales data. please do what's the best decision. Evidence: checksum-bound supplied sales data; reporting completeness user-attested, not independently verified. Gold20 binding inherits that same decision after exact 108-month target/provenance comparison; no new completeness verification or publication decision.",
+      "reviewed_at": "2026-09-27T14:29:23.9926173Z",
+      "reviewer": "Requesting user (session attestation; legal name not supplied)"
+    },
+    "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+    "extracted_at": "2026-10-09T13:28:48.501Z",
+    "fact_delta_version": 20,
+    "geography_mapping_version": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+    "publication_approved": false,
+    "reconciliation_passed": true,
+    "revision_policy": "retrospective_revised_snapshot_no_historical_availability_vintages",
+    "source_available_at": "2026-10-09T07:40:39.615Z",
+    "source_checksum": "19662860d526ca2efb5ccf4256645211bfb916fb8590060901e6e2573b991def",
+    "source_count": 37728,
+    "source_publication_status": "CANDIDATE_PENDING_BUSINESS_AND_PRODUCT_MASTER_REVIEW",
+    "source_table": "workspace.medshield_gold.sales_restart_fact_candidate",
+    "training_approved": true,
+    "transformation_policy": "sales_restart_gold_v7_independent_catalog"
+  },
+  "model_generated_at": "2026-10-10T05:42:41.840327+00:00",
+  "training_months": 72,
+  "recipes": 21,
+  "candidate_points": 252,
+  "independent_model_checks": 1156,
+  "fixture_tests": 11,
+  "independent_math_tests": 3,
+  "independent_presentation_review": "qa/packet-review.json",
+  "visual_review": "Root inspected full PNG: readable dates, units, legends, cutoff and target-state shading",
+  "review_limits": [
+    "Only the four benchmarks and four ridge recipes are independently recomputed numerically; ETS, Prophet and SARIMA are checked for identity and finite coherent output, not independently refitted.",
+    "No 2026 accepted actuals, accuracy assessment, calibrated intervals, publication approval, Databricks write or operational use is established."
+  ],
+  "publication_approved": false,
+  "remote_mutations": false,
+  "checks": [
+    {
+      "criterion": "independent model artifact QA passed",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent presentation review passed",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent presentation bytes README.md",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent presentation bytes projection-summary.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent presentation bytes build-packet.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent presentation bytes plot-projections.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent presentation bytes plot-receipt.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent presentation bytes candidate-projections.png",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent presentation bytes candidate-projections.svg",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent presentation bytes run.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent presentation bytes artifact-hashes.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent presentation bytes verification.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent presentation bytes artifact-hashes.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "declared artifact outputs\\predictive_annual_release_20261010\\models\\annual-origin-2025-12-asof-2026-10-10\\protocol.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "declared artifact outputs\\predictive_annual_release_20261010\\models\\annual-origin-2025-12-asof-2026-10-10\\a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b\\RESULTS.md",
+      "status": "PASS"
+    },
+    {
+      "criterion": "declared artifact outputs\\predictive_annual_release_20261010\\models\\annual-origin-2025-12-asof-2026-10-10\\a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b\\inherited-evaluations.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "declared artifact outputs\\predictive_annual_release_20261010\\models\\annual-origin-2025-12-asof-2026-10-10\\a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b\\input-manifest.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "declared artifact outputs\\predictive_annual_release_20261010\\models\\annual-origin-2025-12-asof-2026-10-10\\a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b\\model-cards.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "declared artifact outputs\\predictive_annual_release_20261010\\models\\annual-origin-2025-12-asof-2026-10-10\\a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b\\projections.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "declared artifact outputs\\predictive_annual_release_20261010\\models\\annual-origin-2025-12-asof-2026-10-10\\a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b\\run.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "declared artifact outputs\\predictive_annual_release_20261010\\models\\annual-origin-2025-12-asof-2026-10-10\\a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b\\training.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "declared artifact outputs\\predictive_annual_release_20261010\\models\\annual-origin-2025-12-asof-2026-10-10\\a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b\\warnings.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "declared artifact outputs\\predictive_annual_release_20261010\\qa\\annual-unit-tests.log",
+      "status": "PASS"
+    },
+    {
+      "criterion": "declared artifact outputs\\predictive_annual_release_20261010\\qa\\expected-values.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "declared artifact outputs\\predictive_annual_release_20261010\\qa\\independent_expected.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "declared artifact outputs\\predictive_annual_release_20261010\\qa\\independent-math-tests.log",
+      "status": "PASS"
+    },
+    {
+      "criterion": "declared artifact outputs\\predictive_annual_release_20261010\\qa\\REPORT.md",
+      "status": "PASS"
+    },
+    {
+      "criterion": "declared artifact outputs\\predictive_annual_release_20261010\\qa\\test_independent_math.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "declared artifact outputs\\predictive_annual_release_20261010\\qa\\verification.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "declared artifact outputs\\predictive_annual_release_20261010\\qa\\verify_annual.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "QA retained source input.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "QA retained source input.sha256",
+      "status": "PASS"
+    },
+    {
+      "criterion": "QA retained source run.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "QA retained source protocol.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "QA retained source run.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "QA retained source expected-values.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "QA retained source verify_annual.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "QA retained source independent_expected.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "registered code annual_projection.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "registered code contracts.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "registered code engine.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "registered code extended_experiment.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "registered code metrics.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "registered code models.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "plot artifact candidate-projections.png",
+      "status": "PASS"
+    },
+    {
+      "criterion": "plot artifact candidate-projections.svg",
+      "status": "PASS"
+    },
+    {
+      "criterion": "plot code hash",
+      "status": "PASS"
+    },
+    {
+      "criterion": "presentation source run",
+      "status": "PASS"
+    },
+    {
+      "criterion": "presentation source projections",
+      "status": "PASS"
+    },
+    {
+      "criterion": "presentation source independent_qa",
+      "status": "PASS"
+    },
+    {
+      "criterion": "presentation source plot_receipt",
+      "status": "PASS"
+    },
+    {
+      "criterion": "presentation source builder",
+      "status": "PASS"
+    },
+    {
+      "criterion": "registration unchanged",
+      "status": "PASS"
+    },
+    {
+      "criterion": "actual generation after registration",
+      "status": "PASS"
+    },
+    {
+      "criterion": "research status and no publication",
+      "status": "PASS"
+    },
+    {
+      "criterion": "no release draft",
+      "status": "PASS"
+    },
+    {
+      "criterion": "retained development selection",
+      "status": "PASS"
+    },
+    {
+      "criterion": "21 recipes and 252 points",
+      "status": "PASS"
+    },
+    {
+      "criterion": "all actuals null",
+      "status": "PASS"
+    },
+    {
+      "criterion": "all unsupported bands null",
+      "status": "PASS"
+    },
+    {
+      "criterion": "display summary last_value",
+      "status": "PASS"
+    },
+    {
+      "criterion": "display summary seasonal_naive",
+      "status": "PASS"
+    },
+    {
+      "criterion": "display summary mean_3",
+      "status": "PASS"
+    },
+    {
+      "criterion": "display summary mean_6",
+      "status": "PASS"
+    },
+    {
+      "criterion": "display summary ets_none",
+      "status": "PASS"
+    },
+    {
+      "criterion": "display summary ets_damped",
+      "status": "PASS"
+    },
+    {
+      "criterion": "display summary prophet_cp0.01_sp0.1",
+      "status": "PASS"
+    },
+    {
+      "criterion": "display summary prophet_cp0.01_sp1.0",
+      "status": "PASS"
+    },
+    {
+      "criterion": "display summary prophet_cp0.01_sp10.0",
+      "status": "PASS"
+    },
+    {
+      "criterion": "display summary prophet_cp0.05_sp0.1",
+      "status": "PASS"
+    },
+    {
+      "criterion": "display summary prophet_cp0.05_sp1.0",
+      "status": "PASS"
+    },
+    {
+      "criterion": "display summary prophet_cp0.05_sp10.0",
+      "status": "PASS"
+    },
+    {
+      "criterion": "display summary prophet_cp0.1_sp0.1",
+      "status": "PASS"
+    },
+    {
+      "criterion": "display summary prophet_cp0.1_sp1.0",
+      "status": "PASS"
+    },
+    {
+      "criterion": "display summary prophet_cp0.1_sp10.0",
+      "status": "PASS"
+    },
+    {
+      "criterion": "display summary sarima_ar_seasonal",
+      "status": "PASS"
+    },
+    {
+      "criterion": "display summary sarima_airline",
+      "status": "PASS"
+    },
+    {
+      "criterion": "display summary ridge_direct_a1",
+      "status": "PASS"
+    },
+    {
+      "criterion": "display summary ridge_direct_a10",
+      "status": "PASS"
+    },
+    {
+      "criterion": "display summary ridge_recursive_a1",
+      "status": "PASS"
+    },
+    {
+      "criterion": "display summary ridge_recursive_a10",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link docs\\CURRENT_STATE.md:5",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link docs\\CURRENT_STATE.md:23",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link docs\\PREDICTIVE_OPERATIONS.md:17",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link docs\\TESTING.md:3",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link docs\\TESTING.md:5",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link docs\\logic\\PREDICTIVE_ANALYTICS_EXPLAINER.md:120",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link docs\\logic\\PREDICTIVE_ANALYTICS_EXPLAINER.md:129",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link docs\\logic\\PREDICTIVE_ANALYTICS_EXPLAINER.md:136",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link docs\\CHAPTER_4_5_EVIDENCE_PLAN.md:13",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_annual_release_20261010\\README.md:25",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_annual_release_20261010\\README.md:76",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_annual_release_20261010\\README.md:94",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_annual_release_20261010\\README.md:94",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_annual_release_20261010\\README.md:94",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_annual_release_20261010\\README.md:94",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_annual_release_20261010\\README.md:95",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_annual_release_20261010\\README.md:95",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_annual_release_20261010\\README.md:95",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_annual_release_20261010\\README.md:95",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_annual_release_20261010\\README.md:95",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_annual_release_20261010\\README.md:96",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_annual_release_20261010\\README.md:96",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_annual_release_20261010\\README.md:96",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_annual_release_20261010\\README.md:96",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_annual_release_20261010\\README.md:97",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_annual_release_20261010\\README.md:97",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_annual_release_20261010\\README.md:97",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_annual_release_20261010\\README.md:101",
+      "status": "PASS"
+    },
+    {
+      "criterion": "Python syntax outputs\\predictive_annual_release_20261010\\build-packet.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "Python syntax outputs\\predictive_annual_release_20261010\\plot-projections.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "Python syntax outputs\\predictive_annual_release_20261010\\seal-delivery.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "Python syntax outputs\\predictive_annual_release_20261010\\qa\\independent_expected.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "Python syntax outputs\\predictive_annual_release_20261010\\qa\\test_independent_math.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "Python syntax outputs\\predictive_annual_release_20261010\\qa\\verify_annual.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "Python syntax services\\analytics_service\\predictive\\annual_projection.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "Python syntax services\\tests\\test_predictive_annual_projection.py",
+      "status": "PASS"
+    }
+  ],
+  "check_summary": {
+    "passed": 117,
+    "failed": 0
+  },
+  "git_head": "cc03b4c05398880b18987eca5ca9c1e140bf9dcb",
+  "working_tree": "Pre-existing and unrelated user changes preserved; hashes bind this task's current files",
+  "command": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\.venv-predictive\\Scripts\\python.exe -X utf8 outputs/predictive_annual_release_20261010/seal-delivery.py",
+  "file_hashes": {
+    "docs/CHAPTER_4_5_EVIDENCE_PLAN.md": {
+      "sha256": "c4b9bd6d25a0d23e069ae0df31d5b42cd4e5766fafb183c6f750f179bc337fff",
+      "bytes": 7604
+    },
+    "docs/CURRENT_STATE.md": {
+      "sha256": "3c17dc02fd8a2f195b5b241a6b0fc66487b2f4c97161542569bda134d0acb67a",
+      "bytes": 50502
+    },
+    "docs/logic/PREDICTIVE_ANALYTICS_EXPLAINER.md": {
+      "sha256": "dc3324ec90d46ca3abc666be7fe1eb15bfc250b9f4e3dba9cc715064f21ddadf",
+      "bytes": 12084
+    },
+    "docs/PREDICTIVE_OPERATIONS.md": {
+      "sha256": "99a865f12bc476a518945e986e2cb422b271ded938245603f4b7bbe6a8bb3a3e",
+      "bytes": 18818
+    },
+    "docs/TESTING.md": {
+      "sha256": "a50b6770576f6592b94c030664dcc74164f501602604b9916ad065450d5a8a7c",
+      "bytes": 22437
+    },
+    "outputs/predictive_annual_release_20261010/build-packet.py": {
+      "sha256": "7619a4c562afe943b9ee638eb98a7ae6ff8ed2e96663a1c2929b4f34955caa1b",
+      "bytes": 13949
+    },
+    "outputs/predictive_annual_release_20261010/candidate-projections.png": {
+      "sha256": "6ed22b3bff74e891e85cee24e6ca42ee5135d2d483a2b3ef3cfb53225505a032",
+      "bytes": 309827
+    },
+    "outputs/predictive_annual_release_20261010/candidate-projections.svg": {
+      "sha256": "f85c42b5f6f91b32312175afb95ff9eb7f7f8c3c528e0c5b595f7858acf2f1de",
+      "bytes": 133912
+    },
+    "outputs/predictive_annual_release_20261010/models/annual-origin-2025-12-asof-2026-10-10/a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b/artifact-hashes.json": {
+      "sha256": "59448b1aa77aace1c723affd3f6e6fdf9160bc362654cfacd42e3aada4a399d2",
+      "bytes": 806
+    },
+    "outputs/predictive_annual_release_20261010/models/annual-origin-2025-12-asof-2026-10-10/a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b/inherited-evaluations.json": {
+      "sha256": "c9763ee9ceed55d48aae48a542a5a610d3cc4c9a5cd5a3ae110f3e23df74b647",
+      "bytes": 290241
+    },
+    "outputs/predictive_annual_release_20261010/models/annual-origin-2025-12-asof-2026-10-10/a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b/input-manifest.json": {
+      "sha256": "fcedce34d7486dc5b311de051be585233e61abaca7b18f618da091d5b8c5bcb8",
+      "bytes": 1719
+    },
+    "outputs/predictive_annual_release_20261010/models/annual-origin-2025-12-asof-2026-10-10/a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b/model-cards.json": {
+      "sha256": "a976e294bca58e9f029748759ec13624f790014fa9097af77193704696b2988f",
+      "bytes": 333754
+    },
+    "outputs/predictive_annual_release_20261010/models/annual-origin-2025-12-asof-2026-10-10/a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b/projections.json": {
+      "sha256": "9a93884535cf705202958e913cd809f2563811cc62bd56d013ecb5d50c182608",
+      "bytes": 334425
+    },
+    "outputs/predictive_annual_release_20261010/models/annual-origin-2025-12-asof-2026-10-10/a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b/RESULTS.md": {
+      "sha256": "e7f6bb12af0011ae91caa07a7897e57332aa5f00a336f10d9557ecf4c618ae0d",
+      "bytes": 5706
+    },
+    "outputs/predictive_annual_release_20261010/models/annual-origin-2025-12-asof-2026-10-10/a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b/run.json": {
+      "sha256": "e25c713bb7faee9cf9020f9064fdf016d18df3793131e1ab43bdfcd169d61b6d",
+      "bytes": 1063439
+    },
+    "outputs/predictive_annual_release_20261010/models/annual-origin-2025-12-asof-2026-10-10/a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b/training.json": {
+      "sha256": "d8f58c2010ef80bd8d481c2b25d92c8d4784e5fcf0ba8bbac91a76fdc164de43",
+      "bytes": 5435
+    },
+    "outputs/predictive_annual_release_20261010/models/annual-origin-2025-12-asof-2026-10-10/a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b/warnings.json": {
+      "sha256": "ebbc2a2d6799e4eb4e7d83c4d2b5ea701883f18cabd6c8a7be2741b5c369b367",
+      "bytes": 194
+    },
+    "outputs/predictive_annual_release_20261010/models/annual-origin-2025-12-asof-2026-10-10/protocol.json": {
+      "sha256": "eca2173f64a5304734e170d063186d229894b6ec30b4c61eff8b30d196768f7f",
+      "bytes": 17909
+    },
+    "outputs/predictive_annual_release_20261010/models/annual-tests.log": {
+      "sha256": "43b0ce3fe2427e2ea325b34615138fa10c8a5f97b180e4b9e9a5955c964b5779",
+      "bytes": 3120
+    },
+    "outputs/predictive_annual_release_20261010/plot-projections.py": {
+      "sha256": "d1dc2e6720c0915af44066813dc8a6aae87a4408eb0009a5e9735390cc232e77",
+      "bytes": 9046
+    },
+    "outputs/predictive_annual_release_20261010/plot-receipt.json": {
+      "sha256": "65ce2f0cecb9101cb3d806e2aaaca337c0e25144e2e343ad103d9e24836733f7",
+      "bytes": 1206
+    },
+    "outputs/predictive_annual_release_20261010/projection-summary.json": {
+      "sha256": "3bca3601711fd9ca75a947552bf67b2a7c182c7b529cd1be500e8be683557f7f",
+      "bytes": 31148
+    },
+    "outputs/predictive_annual_release_20261010/qa/annual-unit-tests.log": {
+      "sha256": "5d7ec8610d1a18d85256ce33219ec53a5ed71dcea5af0cb3276df28ca8255353",
+      "bytes": 3120
+    },
+    "outputs/predictive_annual_release_20261010/qa/artifact-hashes.json": {
+      "sha256": "c7b1b794d0b074f23197fa6b34f4c7f483b395f480dbf2114af352df03f27682",
+      "bytes": 761
+    },
+    "outputs/predictive_annual_release_20261010/qa/expected-values.json": {
+      "sha256": "4bd0f05ddd86b4dae1e65dd3d3c07cb62e225565a99f57a8af4800d688b30e4f",
+      "bytes": 3943
+    },
+    "outputs/predictive_annual_release_20261010/qa/independent-math-tests.log": {
+      "sha256": "761e4fcdda35219a979baffd3821079acafc157addcc7ddaaa7472eeaa4cc45e",
+      "bytes": 551
+    },
+    "outputs/predictive_annual_release_20261010/qa/independent_expected.py": {
+      "sha256": "96385cb8bcc5fc16dbf20caa9b9f46995aa0d7e19fa46b6aff13a7fd9a15afdf",
+      "bytes": 5509
+    },
+    "outputs/predictive_annual_release_20261010/qa/packet-review.json": {
+      "sha256": "6ea45a169428d72956c19929212ed0b5f95daf2b0a4ab71f8acf64f4e19f08a6",
+      "bytes": 69834
+    },
+    "outputs/predictive_annual_release_20261010/qa/PACKET_REVIEW.md": {
+      "sha256": "0055d520918aab8a9262d29f19790bd73842116644f89218d58c4d446471e0cb",
+      "bytes": 2362
+    },
+    "outputs/predictive_annual_release_20261010/qa/REPORT.md": {
+      "sha256": "255c0ce2a63f70655a67295ca44810f34a51b081d20a763f88b8f16ca112a4f8",
+      "bytes": 4956
+    },
+    "outputs/predictive_annual_release_20261010/qa/test_independent_math.py": {
+      "sha256": "4ceece9b7dfdcc9c43c97ddedcdccb7ba5a4d7953d51f256baf53178782de45d",
+      "bytes": 1358
+    },
+    "outputs/predictive_annual_release_20261010/qa/verification.json": {
+      "sha256": "c24e59aeb1b1a7de6cc0540a3afc1df79424d02902c5e6fff018d295c32a9780",
+      "bytes": 159077
+    },
+    "outputs/predictive_annual_release_20261010/qa/verify_annual.py": {
+      "sha256": "17f611cf154598cecbd4ce35a0960fae8f6d63eabf62f93a6795a258aac43924",
+      "bytes": 14727
+    },
+    "outputs/predictive_annual_release_20261010/README.md": {
+      "sha256": "e1ab6aa131b60e820f45f6e9aff310222def909b6fbfce0ba6c3ece7ab689eee",
+      "bytes": 10454
+    },
+    "outputs/predictive_annual_release_20261010/seal-delivery.py": {
+      "sha256": "a42628ff5b8ec94ea3a1f8b4cfaf692f5a5bcbcb4b76fd3287176afe318e8dea",
+      "bytes": 7724
+    },
+    "services/analytics_service/predictive/annual_projection.py": {
+      "sha256": "62064b67e90832ce2e46474ff9b7495ba05a8032b66d1e68177483db412dac80",
+      "bytes": 22544
+    },
+    "services/tests/test_predictive_annual_projection.py": {
+      "sha256": "873987e13b32aa0650b9e055fc44bfa90e6a78dca34b5152eed857871a06b173",
+      "bytes": 16036
+    }
+  }
+}

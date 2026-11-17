@@ -1,0 +1,147 @@
+{
+ "registration_sha256": "cf1dd94835ce478aae07cc4a05855e2d274d9d90991b8446d2c5ca4bb97e243b",
+ "mapping_sha256": "df9050d7fd7745ea63a2ab4e9035a3f9a8a1b143f2f73a6ad306a1ddab3a823d",
+ "T1_calibration": {
+  "L7": {
+   "cases": 6896,
+   "cycle_service": 0.9463457076566125,
+   "fill_rate": 0.7158156263503568,
+   "total_stock": 510842961.46862215,
+   "pooled_target": 0.9112166473317866,
+   "by_target": {
+    "0.95": {
+     "cases": 1547,
+     "cycle_service": 0.9321266968325792,
+     "fill_rate": 0.9205570865905759,
+     "total_stock": 133281804.85916662
+    },
+    "0.9": {
+     "cases": 5349,
+     "cycle_service": 0.9504580295382314,
+     "fill_rate": 0.6205199703330707,
+     "total_stock": 377561156.6094555
+    }
+   }
+  },
+  "L14": {
+   "cases": 6896,
+   "cycle_service": 0.9443155452436195,
+   "fill_rate": 0.7317434609845388,
+   "total_stock": 623902192.9202554,
+   "pooled_target": 0.9112166473317866,
+   "by_target": {
+    "0.95": {
+     "cases": 1547,
+     "cycle_service": 0.9301874595992243,
+     "fill_rate": 0.9264824639876678,
+     "total_stock": 154783225.06527776
+    },
+    "0.9": {
+     "cases": 5349,
+     "cycle_service": 0.9484015703869882,
+     "fill_rate": 0.6408774277641718,
+     "total_stock": 469118967.8549777
+    }
+   }
+  },
+  "L30": {
+   "cases": 6896,
+   "cycle_service": 0.9424303944315545,
+   "fill_rate": 0.7324867357365434,
+   "total_stock": 858809009.6474998,
+   "pooled_target": 0.9112166473317866,
+   "by_target": {
+    "0.95": {
+     "cases": 1547,
+     "cycle_service": 0.925016160310278,
+     "fill_rate": 0.9290039378361471,
+     "total_stock": 213004841.94849992
+    },
+    "0.9": {
+     "cases": 5349,
+     "cycle_service": 0.9474668162273322,
+     "fill_rate": 0.6404648992372955,
+     "total_stock": 645804167.699
+    }
+   }
+  },
+  "passes": true
+ },
+ "T2_value_vs_months_of_cover": {
+  "all": {
+   "policy_service": 0.9443155452436195,
+   "policy_stock": 623902192.9202554,
+   "cover_k": 5.990000000000005,
+   "cover_stock": 947226371.4239674,
+   "saving": 0.34133781349188796
+  },
+  "first_half": {
+   "policy_service": 0.9548714883442917,
+   "policy_stock": 350953774.6732,
+   "cover_k": null,
+   "cover_stock": null,
+   "saving": null
+  },
+  "second_half": {
+   "policy_service": 0.9343661971830985,
+   "policy_stock": 272948418.2470555,
+   "cover_k": 5.8700000000000045,
+   "cover_stock": 450838907.20540035,
+   "saving": 0.39457661287715506
+  },
+  "passes": false
+ },
+ "T3_robustness": {
+  "families": 65,
+  "share_stable": 0.5538461538461539,
+  "passes": false,
+  "frequency_counts": {
+   "weekly": 1,
+   "fortnightly": 0,
+   "monthly": 7,
+   "bi-monthly": 14,
+   "quarterly+": 43
+  }
+ },
+ "current_prescription_totals": {
+  "families": 65,
+  "monthly_demand_php": 6345009.01,
+  "order_up_to_php": 17148541.55,
+  "safety_stock_php": 7842528.34,
+  "negative_safety_stock_clipped": 0
+ },
+ "T2_supplementary_post_hoc": {
+  "all": {
+   "cover_k": 5.990000000000005,
+   "saving": 0.34133781349188796
+  },
+  "first_half": {
+   "cover_k": 6.550000000000005,
+   "saving": 0.34119935476579777
+  },
+  "second_half": {
+   "cover_k": 5.8700000000000045,
+   "saving": 0.39457661287715506
+  }
+ },
+ "T1_peso_fill_rate_by_class_L14": {
+  "X": {
+   "cases": 514,
+   "cycle_service": 0.9163424124513618,
+   "fill_rate": 0.9723526116975382,
+   "total_stock": 36533978.21477778
+  },
+  "Y": {
+   "cases": 1033,
+   "cycle_service": 0.9370764762826719,
+   "fill_rate": 0.9047774870256294,
+   "total_stock": 118249246.85049997
+  },
+  "Z": {
+   "cases": 5349,
+   "cycle_service": 0.9484015703869882,
+   "fill_rate": 0.6408774277641718,
+   "total_stock": 469118967.8549777
+  }
+ }
+}

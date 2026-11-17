@@ -1,0 +1,13 @@
+{
+  "generated_at": "2026-10-09T14:11:09.604Z",
+  "status": "candidate_input_persisted_not_training_or_model_approval",
+  "ddl_sha256": "711a655c0bc266c465edf89094c5553f85581378263b91fa61bce73d75980cb3",
+  "ddl_statements": 9,
+  "input_hash": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba",
+  "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+  "fact_delta_version": 20,
+  "stored_rows": 108,
+  "content_reconciled": true,
+  "model_pointer_rows": [],
+  "activated": false
+}

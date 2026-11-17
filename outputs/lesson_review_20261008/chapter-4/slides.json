@@ -1,0 +1,4550 @@
+{
+  "source": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\lessons\\Chapter 4 - Exploratory & Diagnostic Analytics.pptx",
+  "sha256": "09b6f9a0c067e7882b906a53d6ea97a05c3b2940fb55b0b29c2cb5c680fd1090",
+  "bytes": 45052898,
+  "slide_count": 106,
+  "slides": [
+    {
+      "number": 1,
+      "part": "ppt/slides/slide1.xml",
+      "text": [
+        "CHAPTER FOUR: EXPLORATORY &DIAGNOSTIC ANALYTICS",
+        "Prepared by: Inst. Caesar Gabriel M. Fernando"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-001"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 2,
+      "part": "ppt/slides/slide2.xml",
+      "text": [
+        "Learning Outcomes",
+        "At the end of this chapter, you should be able to:",
+        "1.",
+        "Explain the role of Exploratory Data Analysis in understanding data structure, patterns, anomalies, relationships, and emerging analytical questions.",
+        "2.",
+        "Distinguish Exploratory Data Analysis from Descriptive, Diagnostic, Predictive, and Prescriptive Analytics based on analytical approach and purpose.",
+        "3.",
+        "Apply diagnostic reasoning to investigate observed outcomes using comparison, drill-down, data discovery, decomposition, contribution analysis, relationship analysis, triangulation, and root-cause investigation.",
+        "4.",
+        "Differentiate diagnostic signals, statistical associations, contributing factors, plausible explanations, and causal claims, and state conclusions only to the level supported by the evidence.",
+        "5.",
+        "Analyze categorical relationships using expected frequencies, Pearson’s Chi-Square, Pearson cell residuals, and Cramér’s V to test, localize, and measure the strength of an association."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 3,
+      "part": "ppt/slides/slide3.xml",
+      "text": [
+        "Learning Outcomes",
+        "At the end of this chapter, you should be able to:",
+        "6.",
+        "Use time-series decomposition to separate historical patterns into trend, seasonal, and residual components and identify changes that warrant further diagnostic investigation.",
+        "7.",
+        "Select and interpret appropriate visualizations for diagnostic questions involving comparisons, concentration, contributions, processes, anomalies, relationships, and changes over time.",
+        "8.",
+        "Evaluate AI-assisted diagnostic analytics critically by validating AI-generated drivers, anomalies, explanations, and recommendations against data quality, context, alternative explanations, and causal limitations."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 4,
+      "part": "ppt/slides/slide4.xml",
+      "text": [
+        "The Seven INFORMS Domains — Connected and Iterative",
+        "I — Business Problem (Question) Framing",
+        "II — Analytics Problem Framing",
+        "III — Data",
+        "IV — Methodology (Approach) Selection",
+        "V — Analytics / Model Development",
+        "VI — Deployment",
+        "VII — Analytics Solution Life Cycle Management",
+        "The framework is connected and iterative: later findings can force a return to earlier domains."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-002"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Explore the INFORMS Analytics Framework 🔗 https://hubs.ly/Q04sk_f20 Seven  domains. One connected lifecycle. | INFORMS"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "part": "ppt/slides/slide5.xml",
+      "text": [
+        "Domain II Already Frames the Analytical Purpose",
+        "Analytics Purpose",
+        "Core Question",
+        "Descriptive",
+        "What is happening / what happened?",
+        "Diagnostic",
+        "Why did it happen?",
+        "Predictive",
+        "What is likely to happen?",
+        "Prescriptive",
+        "What should we do?"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-003"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 7",
+          "descr": "4 Types of Analytics: Complete Guide to Data Success"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "part": "ppt/slides/slide6.xml",
+      "text": [
+        "Domain III Gives Us Usable Evidence — But Not Yet an Explanation",
+        "Domain III identifies data needs and sources.",
+        "It acquires, cleans, harmonizes, validates, and documents data.",
+        "It records limitations, bias concerns, provenance, and transformations.",
+        "INFORMS also asks what visualizations characterize the data.",
+        "However, trustworthy data are necessary, but clean data are not yet a diagnostic answer."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-004"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 4",
+          "descr": "What Is Diagnostic Analytics? 4 Examples | HBS Online"
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "part": "ppt/slides/slide7.xml",
+      "text": [
+        "The Bridge to Domain IV — Evidence Before Method",
+        "Prepared Data",
+        "→ Exploratory Evidence",
+        "→ Diagnostic Investigation",
+        "→ What is established / uncertain?",
+        "→ Next analytical question",
+        "→ Domain IV: Methodology Selection",
+        "What, first, is diagnostic?",
+        "Diagnosis = investigation or analysis of the cause or nature of a condition, situation, or problem"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-005"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 8,
+      "part": "ppt/slides/slide8.xml",
+      "text": [
+        "Diagnostic Analytics: Definitions, Boundaries, and Reasoning"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-006"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 9,
+      "part": "ppt/slides/slide9.xml",
+      "text": [
+        "EDA — The Evidence-Understanding Discipline",
+        "Exploratory Data Analysis is the crucial first step in data analytics, where you inspect, summarize, and visualize a dataset to understand its main characteristics before building models or testing formal hypotheses.",
+        "NIST describes EDA as an approach/philosophy for data analysis, not simply a set of chart techniques.",
+        "EDA seeks insight, underlying structure, important variables, outliers/anomalies, and assumption checks.",
+        "Its practical role is to: reveal what deserves diagnostic investigation before committing to a method or explanation."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-007"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 4",
+          "descr": "A Comprehensive Guide to Exploratory Data Analysis ✨ | by 🌬️ Wendy Zhang  🦋 | Medium"
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "part": "ppt/slides/slide10.xml",
+      "text": [
+        "Exploratory Data Analysis (EDA) as your first conversation with a new dataset",
+        "Goal",
+        "Description",
+        "Example Question Answered in Excel",
+        "Spot Mistakes & Anomalies",
+        "Finding outliers, typos, or other strange data points that could throw off your analysis.",
+        "Is there a sale recorded for $1,000,000 when most are under $100?",
+        "Understand Data Structure",
+        "Getting a feel for the variables, their data types (text, numbers, etc.), and the overall shape of the data.",
+        "How many rows and columns are there? Are the dates formatted correctly?",
+        "Identify Important Variables",
+        "Figuring out which factors seem to have the biggest impact on the outcomes you care about.",
+        "Does customer age seem to have a strong relationship with purchase size?",
+        "Formulate Initial Hypotheses",
+        "Seeing patterns or relationships that lead to educated guesses you can test more formally later.",
+        "It looks like sales spike on weekends. Is that a consistent trend?"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 11,
+      "part": "ppt/slides/slide11.xml",
+      "text": [],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-008"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 12,
+      "part": "ppt/slides/slide12.xml",
+      "text": [
+        "But EDA Does Not Finish the Investigation",
+        "EDA may reveal:",
+        "Sales are unusually low on weekdays.",
+        "Mobile customers churn more than branch customers.",
+        "One product category accounts for most complaints.",
+        "Waiting time suddenly increased in September.",
+        "One region has much higher defect rates.",
+        "But EDA alone does not yet tell us:",
+        "Why the difference exists.",
+        "Whether the relationship is meaningful.",
+        "Which factor is actually driving the outcome.",
+        "Whether an observed relationship is causal.",
+        "What evidence would support one explanation over another.",
+        "EDA discovers the clue. Diagnostic analytics investigates the clue."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 13,
+      "part": "ppt/slides/slide13.xml",
+      "text": [
+        "Exploratory Data Analysis Is NOT Another “Type” of Analytics",
+        "EDA describes how we investigate data; Descriptive, Diagnostic, Predictive, and Prescriptive describe why we are analyzing it.",
+        "Concept",
+        "Primary Question",
+        "What It Represents",
+        "EDA",
+        "“What does this data reveal?”",
+        "An approach/philosophy of investigation used to understand structure, patterns, anomalies, relationships, assumptions, and possible hypotheses",
+        "Descriptive Analytics",
+        "“What happened / what is happening?”",
+        "An analytical purpose focused on summarizing observed performance",
+        "Diagnostic Analytics",
+        "“Why did it happen?”",
+        "An analytical purpose focused on investigating explanations and contributing factors",
+        "Predictive Analytics",
+        "“What is likely to happen?”",
+        "An analytical purpose focused on estimating future or unknown outcomes",
+        "Prescriptive Analytics",
+        "“What should we do?”",
+        "An analytical purpose focused on selecting or recommending actions"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 14,
+      "part": "ppt/slides/slide14.xml",
+      "text": [
+        "EDA = APPROACH; Analytics Type = PURPOSE",
+        "DA overlaps with descriptive statistics, but it is not synonymous with descriptive analytics.",
+        "OpenStax describes EDA as visually and statistically examining data to uncover relationships, anomalies, trends, and hypotheses for further analysis. Meanwhile, INFORMS explicitly places descriptive, diagnostic, predictive, and prescriptive analytics under problem framing as different kinds of analytical purpose. INFORMS EDA therefore cuts across these purposes rather than competing with them.",
+        "EDA supplies the clues; Diagnostic Analytics builds the evidence-based explanation"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-009"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 2",
+          "descr": "Top 10 EDA Techniques in 2026: Master Exploratory Data Analysis"
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "part": "ppt/slides/slide15.xml",
+      "text": [
+        "Types of Exploratory Data Analysis",
+        "Type",
+        "Focus",
+        "Main Question",
+        "Common Techniques",
+        "Univariate EDA",
+        "One variable",
+        "What does this variable look like?",
+        "Frequency table, histogram, boxplot, distribution, center, spread, missingness, outliers",
+        "Bivariate EDA",
+        "Two variables",
+        "How do these two variables relate or differ?",
+        "Scatterplot, cross-tabulation, grouped boxplot, conditional proportions, correlation",
+        "Multivariate EDA",
+        "Three or more variables",
+        "How do several variables behave together or conditionally?",
+        "Faceting, scatterplot matrix, grouped/conditional views, heatmaps, multivariate plots",
+        "Temporal EDA",
+        "Variables ordered over time",
+        "How does the pattern change through time?",
+        "Time plots, trend inspection, seasonal patterns, spikes, change points"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 16,
+      "part": "ppt/slides/slide16.xml",
+      "text": [
+        "Common Techniques of Exploratory Data Analysis"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-010"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "A Comprehensive Guide to Exploratory Data Analysis ✨ | by 🌬️ Wendy Zhang  🦋 | Medium"
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "part": "ppt/slides/slide17.xml",
+      "text": [
+        "Univariate Analysis",
+        "Univariate Analysis involves analyzing only one variable in a given dataset. This method is used to describe the distribution of data, calculate central values, and measure variability, thereby identifying the characteristics of a single variable"
+      ],
+      "notes": [
+        "Examples of Univariate Data",
+        "Heights of students in a classroom.",
+        "Salaries of workers in a company.",
+        "Daily temperatures recorded over a month.",
+        "Waiting times for a bus.",
+        "Pet counts in different households. [1, 2, 3, 4, 5]",
+        "Examples of Univariate Analysis Methods",
+        "Central Tendency: Finding the average (mean), middle value (median), or most common value (mode).",
+        "Spread / Dispersion: Measuring the range, variance, or standard deviation.",
+        "Visualizations: Displaying the data using histograms, bar charts, pie charts, or box plots. [1]"
+      ],
+      "math_text": [],
+      "assets": [
+        "asset-011"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 18,
+      "part": "ppt/slides/slide18.xml",
+      "text": [
+        "Bivariate Analysis",
+        "“Bi” means two, and “variate” means variable. Bivariate analysis examines the relationship between two variables and determines if they are dependent on each other. The main question here is: Is there a relationship between two variables, and if so, what is its nature?",
+        "Concepts like covariance and correlation are used to measure this."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-012"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 19,
+      "part": "ppt/slides/slide19.xml",
+      "text": [
+        "Multivariate Analysis",
+        "Multivariate analysis is similar to bivariate analysis, but instead of two, more than two variables are analyzed at once.",
+        "Multivariate analysis is widely used for analyzing complex datasets. For instance, several factors may influence a product’s sales, such as its price, advertising budget, competitors’ actions, and customer feedback.",
+        "Multivariate analysis allows for more nuanced interpretation of complex relationships within the data. It helps to discover patterns that may not be visible when variables are examined individually."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-013"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 20,
+      "part": "ppt/slides/slide20.xml",
+      "text": [
+        "Where Does EDA Fit?",
+        "EDA typically examines:",
+        "Data structure & types — What variables do we have, and what do they represent?",
+        "Missing data & quality — What is incomplete, inconsistent, or potentially problematic?",
+        "Distributions — How are values spread, skewed, or concentrated?",
+        "Outliers & anomalies — Which observations behave unusually?",
+        "Relationships — Which variables appear associated?",
+        "Patterns & trends — What recurring, temporal, or subgroup structures emerge?",
+        "Visualizations — How can charts make these structures easier to see?",
+        "EDA is the investigative process that helps us understand what the data is revealing",
+        "EDA is not just one box in the process; it connects these activities to uncover analytical signals worth investigating."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 21,
+      "part": "ppt/slides/slide21.xml",
+      "text": [
+        "EDA cuts across the analytics types; it helps us understand the data before making stronger descriptive, diagnostic, predictive, or prescriptive claims.",
+        "Descriptive: EDA helps reveal what patterns and distributions summarize what happened.",
+        "Diagnostic: EDA surfaces anomalies, subgroup differences, and relationships worth explaining.",
+        "Predictive: EDA helps identify candidate predictors, data issues, nonlinearities, and assumptions before modeling.",
+        "Prescriptive: EDA helps understand constraints, ranges, relationships, and decision context before optimization or recommendation."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 22,
+      "part": "ppt/slides/slide22.xml",
+      "text": [
+        "EDA Can Help Us Discover the Next Analytics Question",
+        "The problem gives us direction; EDA helps us ask better questions.",
+        "EDA can reveal:",
+        "unexpected trends or changes",
+        "unusual groups or subgroups",
+        "anomalies and outliers",
+        "relationships between variables",
+        "important factors worth investigating",
+        "patterns that challenge our original assumptions",
+        "These discoveries can lead us to refine the analytical purpose:",
+        "“What happened?”→ Descriptive",
+        "“Why did this happen?”→ Diagnostic",
+        "“What is likely to happen next?”→ Predictive",
+        "“What should we do about it?”→ Prescriptive",
+        "EDA does not replace problem framing. It helps refine, challenge, and generate more specific analytical questions from the evidence."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 23,
+      "part": "ppt/slides/slide23.xml",
+      "text": [
+        "Why EDA Connects Especially Well to Diagnostic Analytics",
+        "EDA discovers the signal; Diagnostic Analytics investigates the explanation.",
+        "EDA may reveal:",
+        "one branch behaves differently",
+        "churn suddenly increases",
+        "defects cluster on one shift",
+        "two variables appear associated",
+        "one cohort performs unusually poorly",
+        "Diagnostic Analytics then asks:",
+        "Where is the change concentrated?",
+        "When did it begin?",
+        "Who or what is most affected?",
+        "Which factors move with the outcome?",
+        "What explanations are plausible?",
+        "What additional evidence would support or weaken them?",
+        "EDA→ discovers patterns and signals",
+        "Diagnostic Analytics→ investigates why those patterns may exist"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 24,
+      "part": "ppt/slides/slide24.xml",
+      "text": [
+        "Diagnostic Analytics",
+        "INFORMS frames diagnostic analytics as the analytical purpose that asks: WHY did something happen?",
+        "OpenStax describes diagnostic analytics as examining patterns in data to identify relationships and possible causes behind events or outcomes.",
+        "Other newer sources identify diagnostic analytics as a higher-level follow-up to descriptive analytics, using techniques such as drill-down, data discovery, and correlation.",
+        "Current industry practice likewise emphasizes historical data, patterns, relationships, and root-cause investigation.",
+        "Synthesis: Diagnostic analytics systematically investigates an observed outcome to localize where it changed, identify relationships and contributing factors, and develop evidence-based explanations without automatically claiming causality."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 25,
+      "part": "ppt/slides/slide25.xml",
+      "text": [
+        "Where Diagnostic Analytics Fit"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-014"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 26,
+      "part": "ppt/slides/slide26.xml",
+      "text": [
+        "Diagnostic Analytics Follows Descriptive Analytics",
+        "Descriptive analytics establishes WHAT happened: the outcome, magnitude, trend, and population affected.",
+        "Diagnostic analytics begins when the analyst asks WHY the descriptive pattern occurred or WHY it differs across groups, times, or process states.",
+        "The diagnostic step therefore depends on a trustworthy descriptive baseline; a mismeasured outcome cannot be meaningfully diagnosed.",
+        "Diagnostic analytics is often iterative: a diagnostic finding can reveal that the descriptive metric, data source, or original framing needs revision."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-015"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 2",
+          "descr": "Descriptive vs. Diagnostic Analytics | ZealousWeb"
+        }
+      ]
+    },
+    {
+      "number": 27,
+      "part": "ppt/slides/slide27.xml",
+      "text": [
+        "Diagnostic Analytics Follows Descriptive Analytics",
+        "Stage",
+        "Typical Question",
+        "Typical Output",
+        "Descriptive",
+        "What happened?",
+        "KPI, trend, rate, distribution, comparison",
+        "Diagnostic",
+        "Why did it happen?",
+        "Drill-down, decomposition, association, contributing factors",
+        "Predictive",
+        "What is likely next?",
+        "Forecast, probability, predicted value/class",
+        "Prescriptive",
+        "What should we do?",
+        "Recommended action, optimization, scenario decision"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-016"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 9",
+          "descr": "Does Modern Medicine Have a Diagnosis Problem?"
+        }
+      ]
+    },
+    {
+      "number": 28,
+      "part": "ppt/slides/slide28.xml",
+      "text": [
+        "What Does “Why Did It Happen?” Actually Mean?",
+        "The word WHY should be operationalized into answerable analytical questions rather than treated as an invitation to guess.",
+        "Where is the outcome concentrated?",
+        "When did the deviation begin?",
+        "Which people, products, locations, channels, cohorts, or process stages differ?",
+        "Which mathematical component contributed to the change?",
+        "Which variables, events, or process states are associated with the outcome?",
+        "What alternative explanations could produce the same observed pattern?"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-017",
+        "asset-018"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Unleashing the Types of Analytics: Categories and Applications"
+        },
+        {
+          "name": "Picture 4",
+          "descr": "Why Question Sticker - Why Question Porque - Discover & Share GIFs"
+        }
+      ]
+    },
+    {
+      "number": 29,
+      "part": "ppt/slides/slide29.xml",
+      "text": [
+        "Diagnostic Analytics Is Usually Historical and Retrospective",
+        "Diagnostic analytics primarily interrogates outcomes that have already occurred or are currently observable.",
+        "Historical records are compared across periods, segments, process states, or contextual conditions to understand what changed.",
+        "Time can still be central: analysts may localize when a shift began, compare before/after periods, or decompose a trend.",
+        "The objective is explanation of an observed outcome, not forecasting an unseen future outcome.",
+        "If the question becomes 'what will happen next?', the analytical purpose has moved toward predictive."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-019"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 2",
+          "descr": "Expertise | Sales Pistons | Fintech Consultants | Fintech ..."
+        }
+      ]
+    },
+    {
+      "number": 30,
+      "part": "ppt/slides/slide30.xml",
+      "text": [
+        "Two Jobs of Diagnosis — Localization and Explanation",
+        "LOCALIZATION asks where the change lives: which group, time period, process stage, location, product, or category accounts for it?",
+        "EXPLANATION asks what factors, conditions, or mechanisms plausibly account for the localized pattern.",
+        "Localization is often easier and more defensible than explanation.",
+        "A strong diagnostic workflow does not skip directly from an aggregate KPI to a causal story.",
+        "In many systems, drill-down and decomposition are the localization layer; relationship analysis and contextual evidence support the explanation layer."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-020",
+        "asset-021"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Drill-down illustration for the example given in Table 1. (D) and (I)... |  Download Scientific Diagram"
+        }
+      ]
+    },
+    {
+      "number": 31,
+      "part": "ppt/slides/slide31.xml",
+      "text": [
+        "Anatomy of a Diagnostic Question",
+        "Element",
+        "Definition",
+        "Example",
+        "Outcome",
+        "The observed metric/event to explain",
+        "Churn rate",
+        "Reference",
+        "What the outcome is compared against",
+        "Previous quarter",
+        "Population",
+        "Who/what is included",
+        "Active subscribers",
+        "Time window",
+        "Period over which diagnosis is valid",
+        "Q3 2026",
+        "Dimensions",
+        "Ways to localize the outcome",
+        "Channel, plan, device",
+        "Candidate drivers",
+        "Factors that may help explain the outcome",
+        "Errors, wait time, price change",
+        "Evidence test",
+        "What would strengthen/weaken an explanation",
+        "Higher churn where errors increased"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 32,
+      "part": "ppt/slides/slide32.xml",
+      "text": [
+        "Reporting vs. Description vs. Diagnosis vs. Cause",
+        "Level",
+        "Example Statement",
+        "What It Requires",
+        "Reporting",
+        "Revenue = ₱8.2M",
+        "Correct measure",
+        "Description",
+        "Revenue declined 11% vs. last month",
+        "Valid comparison",
+        "Diagnostic localization",
+        "78% of the decline came from two branches",
+        "Drill-down / contribution",
+        "Association",
+        "Those branches also had elevated stockouts",
+        "Relationship evidence",
+        "Plausible explanation",
+        "Stock availability may be contributing",
+        "Converging diagnostic evidence",
+        "Causal claim",
+        "Stockouts caused the decline",
+        "Causal design/assumptions"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 33,
+      "part": "ppt/slides/slide33.xml",
+      "text": [
+        "Diagnostic Vocabulary",
+        "Term",
+        "Definition",
+        "Caution",
+        "Symptom",
+        "Observable sign that a problem or change exists",
+        "May not be the underlying problem",
+        "Outcome",
+        "The metric/event being explained",
+        "Must be measured consistently",
+        "Driver",
+        "Variable or condition associated with movement in the outcome",
+        "Driver does not automatically mean cause",
+        "Contributing factor",
+        "Condition that plausibly helps produce or amplify the outcome",
+        "May be one of several factors",
+        "Root cause",
+        "Underlying cause whose correction addresses recurrence or the causal chain",
+        "Requires stronger evidence than simple association"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 34,
+      "part": "ppt/slides/slide34.xml",
+      "text": [
+        "Diagnostic Signal vs. Diagnostic Evidence",
+        "Diagnostic signal: a pattern, difference, anomaly, or relationship that deserves further investigation.",
+        "Diagnostic evidence: validated information that strengthens or weakens a specific explanation.",
+        "A signal can be generated by a chart, residual, correlation, drill-down, or anomaly flag.",
+        "Evidence requires context: correct measurement, suitable comparison, plausible mechanism, and consideration of alternatives.",
+        "The transition from signal to evidence is where disciplined diagnostic reasoning occurs."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-022"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 2",
+          "descr": "How can signals be translated into evidence? This question has been on my  mind for years. In proteomics, we are becoming increasingly good at  detecting signals. Yet the real challenge is often"
+        }
+      ]
+    },
+    {
+      "number": 35,
+      "part": "ppt/slides/slide35.xml",
+      "text": [
+        "Diagnostic Analytics Begins With a Comparison",
+        "A number becomes diagnostic only after it is placed against a meaningful reference.",
+        "Possible references: previous period, target, baseline, peer group, benchmark, control/expected range, or a comparable cohort.",
+        "The analyst must justify the reference; the most dramatic comparison is not automatically the most useful one.",
+        "Always state the population, period, and denominator being compared."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-023"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Compare GIFs | Tenor"
+        }
+      ]
+    },
+    {
+      "number": 36,
+      "part": "ppt/slides/slide36.xml",
+      "text": [
+        "Drill-Down Analysis",
+        "Drill-down analysis breaks an aggregate result into progressively more detailed levels or dimensions.",
+        "Its purpose is to locate where a change or problem is concentrated.",
+        "Common hierarchies include organization → region → branch; category → product → SKU; process → stage → activity.",
+        "Drill-down should follow meaningful business/process structure rather than arbitrary filtering.",
+        "Drill-down localizes the problem; it does not by itself establish why the localized subgroup differs."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-024",
+        "asset-025"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 2",
+          "descr": "Using Drill-Down Analysis To Find Out Why — GameAnalytics"
+        },
+        {
+          "name": "Picture 4",
+          "descr": "Sales Team Drilldown Dashboard"
+        }
+      ]
+    },
+    {
+      "number": 37,
+      "part": "ppt/slides/slide37.xml",
+      "text": [
+        "Drill-Down Analysis",
+        "The metrics included in the template are:",
+        "Emails logged per sales rep",
+        "Meetings booked per sales rep",
+        "Calles logged per sales rep",
+        "New deals created per sales rep",
+        "Close rate per sales rep",
+        "Closed won deals amount per sales rep"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-024"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 4",
+          "descr": "Sales Team Drilldown Dashboard"
+        }
+      ]
+    },
+    {
+      "number": 38,
+      "part": "ppt/slides/slide38.xml",
+      "text": [
+        "Drill-Down Analysis",
+        "Drill-Down allows users to change the detail level of data displayed in a dashboard item. Users can drill down to display more detailed information or drill up to view more general information."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-026"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 39,
+      "part": "ppt/slides/slide39.xml",
+      "text": [
+        "Data Discovery",
+        "Data discovery is the iterative exploration of available data to uncover patterns, relationships, exceptions, or previously unrecognized structure.",
+        "In diagnostic analytics, discovery is used to generate better questions and candidate explanations.",
+        "It may involve filtering, grouping, visualization, cross-tabulation, searching, or connecting additional data sources.",
+        "Discovery is exploratory: findings should be validated before they are treated as established explanations.",
+        "The process should remain traceable so another analyst can reconstruct how the finding emerged."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-027",
+        "asset-028",
+        "asset-029"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 5",
+          "descr": "Features - IBM Cognos Analytics"
+        },
+        {
+          "name": "Picture 7",
+          "descr": "Data Discovery Animations - Free Download in GIF, Lottie JSON"
+        },
+        {
+          "name": "Picture 8",
+          "descr": "Data Discovery Animations - Free Download in GIF, Lottie JSON"
+        }
+      ]
+    },
+    {
+      "number": 40,
+      "part": "ppt/slides/slide40.xml",
+      "text": [
+        "Data Discovery",
+        "Examples include:",
+        "IBM Cognos Explorations — discover patterns and hidden relationships",
+        "Qlik Sense Associative Insights — uncover unexpected associations and excluded-value patterns",
+        "Power BI Explore — interactively drill, filter, and investigate data",
+        "Tableau Explore & Inspect — isolate outliers, subgroups, and underlying records"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-030",
+        "asset-031"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 5",
+          "descr": "Find Insights in your reports - Power BI | Microsoft Learn"
+        }
+      ]
+    },
+    {
+      "number": 41,
+      "part": "ppt/slides/slide41.xml",
+      "text": [
+        "Relationship Analysis",
+        "Relationship analysis examines whether variables or categories change together in a systematic way.",
+        "For numerical variables, this may involve scatterplots and correlation; for categorical variables, cross-tabulation and tests of association may be appropriate.",
+        "A relationship can identify a useful diagnostic lead or candidate driver.",
+        "Association alone cannot distinguish among confounding, reverse direction, selection effects, measurement artifacts, or genuine causal mechanisms.",
+        "Diagnostic analytics therefore uses relationships to narrow the explanation space, not to skip causal reasoning."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-032",
+        "asset-033"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 42,
+      "part": "ppt/slides/slide42.xml",
+      "text": [
+        "Decomposition and Variance Analysis",
+        "Decomposition separates an aggregate metric or change into meaningful components that together produce the total.",
+        "Variance analysis compares an observed result with a reference such as plan, budget, target, baseline, or prior period, then investigates the sources of the difference.",
+        "Examples: Profit = Revenue − Cost; Revenue = Price × Quantity; Total delay = Queue + Processing + Transfer.",
+        "A component can explain the arithmetic of a change without proving the behavioral or causal mechanism behind that component.",
+        "The decomposition should reflect the real metric/process structure, not an arbitrary slicing of the dataset."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-034",
+        "asset-035"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 2",
+          "descr": "Corporate Spend sample for Power BI: Take a tour - Power BI | Microsoft ..."
+        },
+        {
+          "name": "Picture 4",
+          "descr": "Create and View Decomposition Tree Visuals in Power BI - Power BI |  Microsoft Learn"
+        }
+      ]
+    },
+    {
+      "number": 43,
+      "part": "ppt/slides/slide43.xml",
+      "text": [
+        "Decomposition and Variance Analysis",
+        "Decomposition Trees as examples:"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-034",
+        "asset-036"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 4",
+          "descr": "Create and View Decomposition Tree Visuals in Power BI - Power BI |  Microsoft Learn"
+        },
+        {
+          "name": "Picture 3",
+          "descr": "Power BI - Decomposition Tree - GeeksforGeeks"
+        }
+      ]
+    },
+    {
+      "number": 44,
+      "part": "ppt/slides/slide44.xml",
+      "text": [
+        "Decomposition as tools for Decomposition & Drill-down Analysis",
+        "Decomposition",
+        "Drill-down",
+        "Main question",
+        "What contributed to the result?",
+        "Where does the result come from at a deeper level?",
+        "Structure",
+        "Components / drivers",
+        "Levels / hierarchy",
+        "Example",
+        "Profit → Revenue − Cost",
+        "Country → Region → Branch",
+        "Diagnostic use",
+        "Identifies contributors",
+        "Localizes the problem"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-037",
+        "asset-038"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 8",
+          "descr": "Decomposition Tree -All Expanding – Power BI & Excel are better together"
+        },
+        {
+          "name": "Picture 9",
+          "descr": "The Power BI Decomposition Tree Guide for Data Analysis | Smoak Signals |  Data Analytics Blog"
+        }
+      ]
+    },
+    {
+      "number": 45,
+      "part": "ppt/slides/slide45.xml",
+      "text": [
+        "Diagnostic Analytics vs. Root Cause Analysis",
+        "Dimension",
+        "Diagnostic Analytics",
+        "Root Cause Analysis",
+        "Primary role",
+        "Use data to investigate an observed outcome",
+        "Identify underlying causes of a problem/event",
+        "Typical evidence",
+        "Metrics, records, trends, segments, relationships",
+        "Analytics + process evidence + expert/domain investigation",
+        "Typical techniques",
+        "Drill-down, decomposition, correlations, cross-tabs, hypothesis tests",
+        "Cause-and-effect analysis, timelines, 5 Whys, fishbone, barrier/change analysis",
+        "Typical output",
+        "Evidence-supported contributing factors / hypotheses",
+        "Underlying causes + corrective/preventive actions",
+        "Causal strength",
+        "May remain associational",
+        "Seeks causal explanation, but still depends on evidence quality",
+        "Diagnostic analytics can feed RCA by identifying where the problem is concentrated and which factors deserve investigation. RCA can then combine that evidence with process-level investigation to determine and act on underlying causes."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 46,
+      "part": "ppt/slides/slide46.xml",
+      "text": [
+        "Diagnostic Hypothesis — A Testable Candidate Explanation",
+        "A diagnostic hypothesis is a provisional explanation for an observed outcome that can be evaluated against evidence.",
+        "It should specify what pattern we would expect to observe if the explanation were credible.",
+        "Example: 'Mobile churn increased because release errors disrupted checkout' predicts elevated error incidence among affected mobile users during the same period.",
+        "Competing hypotheses should be considered, especially when several mechanisms could produce the same outcome.",
+        "A hypothesis becomes stronger when predictions derived from it survive multiple relevant checks."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-039"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "The CSN Sociology Student Legacy Wiki [licensed for non-commercial use  only] / Hypothesis"
+        }
+      ]
+    },
+    {
+      "number": 47,
+      "part": "ppt/slides/slide47.xml",
+      "text": [
+        "Cohort Analysis: Finding Which Group Behaved Differently",
+        "Cohort Analysis groups observations that share a common starting point, event, characteristic, or behavior, then compares how those groups perform or behave over time.",
+        "It asks: Did retention fall for everyone—or only for customers acquired during a particular period, campaign, channel, or experience?”",
+        "It helps determine whether an overall pattern is being driven by a specific subgroup, starting period, event, or experience rather than affecting the entire population"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-040",
+        "asset-041"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Legionary Roman Legion GIF - Legionary Roman Legion Rome - Discover & Share  GIFs"
+        },
+        {
+          "name": "Picture 5",
+          "descr": "[GA4] コホートデータ探索 - アナリティクス ヘルプ"
+        }
+      ]
+    },
+    {
+      "number": 48,
+      "part": "ppt/slides/slide48.xml",
+      "text": [
+        "Reading a Cohort Analysis",
+        "A typical retention cohort table looks like this:",
+        "The overall statement: “Customer retention is declining.” is not enough.",
+        "The cohort table reveals: “The major decline begins with customers acquired in March.” This narrows the investigation: What changed in March?",
+        "Cohort Analysis identifies the affected group. Drill-Down investigate why.",
+        "Customer Cohort(Acquired)",
+        "Month 0",
+        "Month 1",
+        "Month 2",
+        "Month 3",
+        "January",
+        "100%",
+        "72%",
+        "61%",
+        "55%",
+        "February",
+        "100%",
+        "70%",
+        "59%",
+        "53%",
+        "March",
+        "100%",
+        "48%",
+        "31%",
+        "24%",
+        "April",
+        "100%",
+        "69%",
+        "58%",
+        "51%"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-041"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Legionary Roman Legion GIF - Legionary Roman Legion Rome - Discover & Share  GIFs"
+        }
+      ]
+    },
+    {
+      "number": 49,
+      "part": "ppt/slides/slide49.xml",
+      "text": [
+        "Cohort Analysis"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-042",
+        "asset-041"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Legionary Roman Legion GIF - Legionary Roman Legion Rome - Discover & Share  GIFs"
+        },
+        {
+          "name": "Picture 4",
+          "descr": "Дослідження когорт в Google Analytics 4: як ефективніше утримувати клієнтів"
+        }
+      ]
+    },
+    {
+      "number": 50,
+      "part": "ppt/slides/slide50.xml",
+      "text": [
+        "Triangulation",
+        "Triangulation examines the same candidate explanation using more than one source, measure, method, or perspective.",
+        "Agreement across partially independent evidence can increase confidence that a diagnostic story is not an artifact of one dataset or metric.",
+        "Disagreement can reveal data-quality issues, subgroup effects, or competing explanations.",
+        "Examples: inventory records + cancelled orders + supplier delays; LMS activity + attendance + assessment outcomes.",
+        "Triangulation strengthens diagnosis but does not automatically establish causal effect."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-043"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 51,
+      "part": "ppt/slides/slide51.xml",
+      "text": [
+        "Triangulation",
+        "Source 1: Inventory Data ↘",
+        "Source 2: Cancelled Orders → Candidate Explanation: Supply Disruption",
+        "Source 3: Supplier Delays ↗",
+        "Agreement = stronger diagnostic confidence",
+        "Disagreement = investigate further"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-044"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 52,
+      "part": "ppt/slides/slide52.xml",
+      "text": [
+        "Triangulation"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-045"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 53,
+      "part": "ppt/slides/slide53.xml",
+      "text": [
+        "The Diagnostic Funnel — A Reusable Investigation Pattern",
+        "1. What changed?",
+        "2. Compared with what?",
+        "3. Where is the change concentrated?",
+        "4. When did it begin?",
+        "5. For whom / which cases is it different?",
+        "6. Which component mathematically drove the change?",
+        "7. What variables, events, or process states move with it?",
+        "8. Which explanations remain plausible?",
+        "9. What evidence would distinguish among those explanations?"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-046",
+        "asset-047"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 2",
+          "descr": "abstinence is not immortality"
+        }
+      ]
+    },
+    {
+      "number": 54,
+      "part": "ppt/slides/slide54.xml",
+      "text": [
+        "What Diagnostic Analytics Is NOT",
+        "Not simply a dashboard with many filters.",
+        "Not “correlation = explanation.”",
+        "Not a machine-learning model by default.",
+        "Not root-cause certainty produced from one chart.",
+        "Not endless EDA without a decision or stopping rule.",
+        "Not causal inference unless the design and assumptions support causal claims."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-048"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 2",
+          "descr": "Its Not What It Looks Like GIFs - Find & Share on GIPHY"
+        }
+      ]
+    },
+    {
+      "number": 55,
+      "part": "ppt/slides/slide55.xml",
+      "text": [
+        "The Data-Generating Process Matters to Diagnosis",
+        "Who or what could enter the dataset?",
+        "Who or what could be systematically absent?",
+        "Did measurement or categorization change over time?",
+        "Could an operational rule create the observed pattern?",
+        "Could the data source itself explain the apparent change?",
+        "Is the unit of analysis the same across all comparisons?"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-049"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "ACM: Digital Library: interactions"
+        }
+      ]
+    },
+    {
+      "number": 56,
+      "part": "ppt/slides/slide56.xml",
+      "text": [
+        "Stopping Rule — When Is a Diagnostic Analysis “Enough”?",
+        "The observed pattern is stable across reasonable views.",
+        "Material data-quality concerns are documented.",
+        "The change has been localized by group/time/process where relevant.",
+        "Major components and plausible associations have been investigated.",
+        "Alternative explanations are stated.",
+        "Causal uncertainty is explicit.",
+        "The remaining question is now specific enough for a next method or decision."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-050"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 2",
+          "descr": "Wait A Minute Stop GIF - Wait A Minute Stop Yousef - Discover & Share GIFs"
+        }
+      ]
+    },
+    {
+      "number": 57,
+      "part": "ppt/slides/slide57.xml",
+      "text": [
+        "Applied Diagnostic Toolkit",
+        "https://www.youtube.com/watch?v=_CdFIIGxVo8&t=6s",
+        "https://www.youtube.com/watch?v=IKJTcnUzY1Q&t=1s",
+        "https://www.youtube.com/watch?v=MwlRg4B7X0c",
+        "2:20–3:20"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-051",
+        "asset-052",
+        "asset-053"
+      ],
+      "charts": [],
+      "external_links": [
+        {
+          "type": "hyperlink",
+          "external": true,
+          "target": "https://www.youtube.com/watch?v=MwlRg4B7X0c"
+        },
+        {
+          "type": "hyperlink",
+          "external": true,
+          "target": "https://www.youtube.com/watch?v=IKJTcnUzY1Q&t=1s"
+        },
+        {
+          "type": "hyperlink",
+          "external": true,
+          "target": "https://www.youtube.com/watch?v=_CdFIIGxVo8&t=6s"
+        }
+      ],
+      "alt_text": []
+    },
+    {
+      "number": 58,
+      "part": "ppt/slides/slide58.xml",
+      "text": [
+        "Mathematical Deep Dive: A Categorical Diagnostic Chain"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-054"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 59,
+      "part": "ppt/slides/slide59.xml",
+      "text": [
+        "Pearson's chi-squared test (χ²)",
+        "Pearson's chi-squared test (χ²) is a statistical method used for categorical data to compare observed frequencies with expected frequencies."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-055",
+        "asset-056"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 8",
+          "descr": "Chi-squared test - Wikipedia"
+        }
+      ]
+    },
+    {
+      "number": 60,
+      "part": "ppt/slides/slide60.xml",
+      "text": [
+        "Why Pearson’s Chi-Square Fits This Chapter",
+        "It addresses a common diagnostic situation: two categorical variables appear related.",
+        "It is hand-computable on a small table but scalable in software.",
+        "It formalizes the comparison between OBSERVED counts and counts EXPECTED under independence.",
+        "It works naturally with residual diagnostics to localize which cells contribute to the association.",
+        "It demonstrates an essential lesson: statistical association is not causal explanation."
+      ],
+      "notes": [
+        "Pearson’s Chi-Square is not “the formula for Diagnostic Analytics.” It is our chapter’s worked statistical example because many real organizational systems generate categorical variables such as channel, status, outcome class, complaint type, risk level, or process stage. The method lets us move from “these percentages look different” to “is there statistical evidence that these variables are associated?”"
+      ],
+      "math_text": [],
+      "assets": [
+        "asset-057"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 2",
+          "descr": "Pearson's chi-squared test | Radiology Reference Article | Radiopaedia.org"
+        }
+      ]
+    },
+    {
+      "number": 61,
+      "part": "ppt/slides/slide61.xml",
+      "text": [
+        "Worked Table: Channel × Churn",
+        "What can we already see?",
+        "Mobile has the highest observed churn rate: 45%.",
+        "Web churn rate = 25%.",
+        "Branch churn rate = 20%.",
+        "Overall churn rate = 180 / 600 = 30%.",
+        "Channel",
+        "Retained",
+        "Churned",
+        "Row Total",
+        "Churn Rate",
+        "Web",
+        "150",
+        "50",
+        "200",
+        "Mobile",
+        "110",
+        "90",
+        "200",
+        "Branch",
+        "160",
+        "40",
+        "200",
+        "Column Total",
+        "420",
+        "180",
+        "600",
+        "Channel",
+        "Retained",
+        "Churned",
+        "Row Total",
+        "Churn Rate",
+        "Web",
+        "150",
+        "50",
+        "200",
+        "25%",
+        "Mobile",
+        "110",
+        "90",
+        "200",
+        "45%",
+        "Branch",
+        "160",
+        "40",
+        "200",
+        "20%",
+        "Column Total",
+        "420",
+        "180",
+        "600",
+        "30% overall",
+        "Diagnostic Question:",
+        "Is churn status associated with customer channel, or could these differences reasonably occur under independence?",
+        "Hypotheses",
+        "H₀: Channel and churn status are independent.",
+        "H₁: Channel and churn status are associated."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 62,
+      "part": "ppt/slides/slide62.xml",
+      "text": [
+        "Formula 1: Expected Frequency",
+        "Expected frequency asks:",
+        "If channel and churn status were independent, how many observations should fall into each cell, given the margins of the table?",
+        "Because every channel has a row total of 200:"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-058",
+        "asset-059",
+        "asset-060"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Chapter 18. Chi-square – Introduction to Statistics for Psychology"
+        },
+        {
+          "name": "Picture 11",
+          "descr": "Expected GIFs | Tenor"
+        }
+      ]
+    },
+    {
+      "number": 63,
+      "part": "ppt/slides/slide63.xml",
+      "text": [
+        "Formula 1: Expected Frequency",
+        "Expected Counts",
+        "Channel",
+        "Expected Retained",
+        "Expected Churned",
+        "Row Total",
+        "Web",
+        "140",
+        "60",
+        "200",
+        "Mobile",
+        "140",
+        "60",
+        "200",
+        "Branch",
+        "140",
+        "60",
+        "200",
+        "Column Total",
+        "420",
+        "180",
+        "600",
+        "Channel",
+        "Retained",
+        "Churned",
+        "Row Total",
+        "Churn Rate",
+        "Web",
+        "150",
+        "50",
+        "200",
+        "25%",
+        "Mobile",
+        "110",
+        "90",
+        "200",
+        "45%",
+        "Branch",
+        "160",
+        "40",
+        "200",
+        "20%",
+        "Column Total",
+        "420",
+        "180",
+        "600",
+        "30% overall",
+        "Diagnostic Interpretation",
+        "Under independence:",
+        "Every channel would be expected to have approximately 70% retained and 30% churned, because those are the overall proportions.",
+        "Important:",
+        "Expected does not mean desired, forecasted, or management target.",
+        "It is the count predicted by the statistical independence model."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-058"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Chapter 18. Chi-square – Introduction to Statistics for Psychology"
+        }
+      ]
+    },
+    {
+      "number": 64,
+      "part": "ppt/slides/slide64.xml",
+      "text": [
+        "Formula 2: Pearson’s Chi-Square Statistic",
+        "Channel",
+        "Retained",
+        "Churned",
+        "Expected R",
+        "Expected C",
+        "Web",
+        "150",
+        "50",
+        "140",
+        "60",
+        "Mobile",
+        "110",
+        "90",
+        "140",
+        "60",
+        "Branch",
+        "160",
+        "40",
+        "140",
+        "60",
+        "Column Total",
+        "420",
+        "180",
+        "420",
+        "180",
+        "Cell",
+        "Observed O",
+        "Expected E",
+        "O - E",
+        "Web–Retained",
+        "150",
+        "140",
+        "Web–Churned",
+        "50",
+        "60",
+        "Mobile–Retained",
+        "110",
+        "140",
+        "Mobile–Churned",
+        "90",
+        "60",
+        "Branch–Retained",
+        "160",
+        "140",
+        "Branch–Churned",
+        "40",
+        "60",
+        "TOTAL χ²",
+        "Cell",
+        "Observed O",
+        "Expected E",
+        "O - E",
+        "Web–Retained",
+        "150",
+        "140",
+        "+10",
+        "0.714",
+        "Web–Churned",
+        "50",
+        "60",
+        "−10",
+        "1.667",
+        "Mobile–Retained",
+        "110",
+        "140",
+        "−30",
+        "6.429",
+        "Mobile–Churned",
+        "90",
+        "60",
+        "+30",
+        "15.000",
+        "Branch–Retained",
+        "160",
+        "140",
+        "+20",
+        "2.857",
+        "Branch–Churned",
+        "40",
+        "60",
+        "−20",
+        "6.667",
+        "TOTAL χ²",
+        "33.333",
+        "What drove the statistic?",
+        "The largest cell contribution is:",
+        "Mobile–Churned = 15.000",
+        "Its share of total χ² is:"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-061",
+        "asset-062",
+        "asset-063"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 65,
+      "part": "ppt/slides/slide65.xml",
+      "text": [
+        "Formula 2: Pearson’s Chi-Square Statistic",
+        "Cell",
+        "Observed O",
+        "Expected E",
+        "O - E",
+        "Web–Retained",
+        "150",
+        "140",
+        "+10",
+        "Web–Churned",
+        "50",
+        "60",
+        "−10",
+        "Mobile–Retained",
+        "110",
+        "140",
+        "−30",
+        "Mobile–Churned",
+        "90",
+        "60",
+        "+30",
+        "Branch–Retained",
+        "160",
+        "140",
+        "+20",
+        "Branch–Churned",
+        "40",
+        "60",
+        "−20",
+        "TOTAL χ²",
+        "Cell",
+        "Observed O",
+        "Expected E",
+        "O - E",
+        "Web–Retained",
+        "150",
+        "140",
+        "+10",
+        "0.714",
+        "Web–Churned",
+        "50",
+        "60",
+        "−10",
+        "1.667",
+        "Mobile–Retained",
+        "110",
+        "140",
+        "−30",
+        "6.429",
+        "Mobile–Churned",
+        "90",
+        "60",
+        "+30",
+        "15.000",
+        "Branch–Retained",
+        "160",
+        "140",
+        "+20",
+        "2.857",
+        "Branch–Churned",
+        "40",
+        "60",
+        "−20",
+        "6.667",
+        "TOTAL χ²",
+        "33.333",
+        "What drove the statistic?",
+        "The largest cell contribution is:",
+        "Mobile–Churned = 15.000",
+        "Its share of total χ² is:",
+        "So almost 45% of the total chi-square discrepancy comes from the Mobile–Churned cell alone.",
+        "The next largest contributors are:",
+        "Branch–Churned = 6.667",
+        "Mobile–Retained = 6.429"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-061",
+        "asset-062",
+        "asset-063"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 66,
+      "part": "ppt/slides/slide66.xml",
+      "text": [
+        "Formula 2: Pearson’s Chi-Square Statistic",
+        "Cell",
+        "Obs. O",
+        "Exp. E",
+        "O - E",
+        "Web–Retained",
+        "150",
+        "140",
+        "+10",
+        "0.714",
+        "Web–Churned",
+        "50",
+        "60",
+        "−10",
+        "1.667",
+        "Mobile–Retained",
+        "110",
+        "140",
+        "−30",
+        "6.429",
+        "Mobile–Churned",
+        "90",
+        "60",
+        "+30",
+        "15.000",
+        "Branch–Retained",
+        "160",
+        "140",
+        "+20",
+        "2.857",
+        "Branch–Churned",
+        "40",
+        "60",
+        "−20",
+        "6.667",
+        "TOTAL χ²",
+        "33.333",
+        "This is the useful transition from:",
+        "“There is an association.”",
+        "to:",
+        "“Where is that association concentrated?”",
+        "But because contributions are squared, they do not indicate whether the count was higher or lower than expected.",
+        "That is why we proceed to residuals.",
+        "NIST notes that the chi-square statistic can be represented as the sum of squared Pearson residuals."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-061",
+        "asset-063"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 67,
+      "part": "ppt/slides/slide67.xml",
+      "text": [
+        "Formula 3: Pearson Cell Residual",
+        "The sign now matters.",
+        "Positive residual → more observations than expected under independence",
+        "Negative residual → fewer observations than expected",
+        "Larger absolute residual → stronger discrepancy from the independence expectation",
+        "And:",
+        "Therefore:",
+        "The squared Pearson residual equals that cell's contribution to χ².",
+        "Cell",
+        "O",
+        "E",
+        "Pearson Residual",
+        "Web–Retained",
+        "150",
+        "140",
+        "Web–Churned",
+        "50",
+        "60",
+        "Mobile–Retained",
+        "110",
+        "140",
+        "Mobile–Churned",
+        "90",
+        "60",
+        "Branch–Retained",
+        "160",
+        "140",
+        "Branch–Churned",
+        "40",
+        "60",
+        "Cell",
+        "O",
+        "E",
+        "Pearson Residual",
+        "Web–Retained",
+        "150",
+        "140",
+        "+0.85",
+        "Web–Churned",
+        "50",
+        "60",
+        "−1.29",
+        "Mobile–Retained",
+        "110",
+        "140",
+        "−2.54",
+        "Mobile–Churned",
+        "90",
+        "60",
+        "+3.87",
+        "Branch–Retained",
+        "160",
+        "140",
+        "+1.69",
+        "Branch–Churned",
+        "40",
+        "60",
+        "−2.58"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-064",
+        "asset-065"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 68,
+      "part": "ppt/slides/slide68.xml",
+      "text": [
+        "Formula 3: Pearson Cell Residual",
+        "Cell",
+        "O",
+        "E",
+        "Pearson Residual",
+        "Web–Retained",
+        "150",
+        "140",
+        "+0.85",
+        "Web–Churned",
+        "50",
+        "60",
+        "−1.29",
+        "Mobile–Retained",
+        "110",
+        "140",
+        "−2.54",
+        "Mobile–Churned",
+        "90",
+        "60",
+        "+3.87",
+        "Branch–Retained",
+        "160",
+        "140",
+        "+1.69",
+        "Branch–Churned",
+        "40",
+        "60",
+        "−2.58",
+        "Interpretation:",
+        "There were substantially more Mobile–Churned observations than the independence model expected: 90 observed versus 60 expected.",
+        "Compare Mobile–Retained:",
+        "So Mobile simultaneously has:",
+        "fewer retained customers than expected, and",
+        "more churned customers than expected.",
+        "That is exactly the kind of localization Diagnostic Analytics needs.",
+        "NIST explicitly describes these Pearson residuals as showing how individual cells contribute to the overall chi-square statistic."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-066"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 69,
+      "part": "ppt/slides/slide69.xml",
+      "text": [
+        "Formula 3: Pearson Cell Residual",
+        "Cell",
+        "O",
+        "E",
+        "Pearson Residual",
+        "Web–Retained",
+        "150",
+        "140",
+        "+0.85",
+        "Web–Churned",
+        "50",
+        "60",
+        "−1.29",
+        "Mobile–Retained",
+        "110",
+        "140",
+        "−2.54",
+        "Mobile–Churned",
+        "90",
+        "60",
+        "+3.87",
+        "Branch–Retained",
+        "160",
+        "140",
+        "+1.69",
+        "Branch–Churned",
+        "40",
+        "60",
+        "−2.58",
+        "Interpretation:",
+        "For Mobile–Churned: r ≈ +3.87; this is the largest positive Pearson residual, indicating substantially more churned Mobile customers than expected under independence."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-067"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 2",
+          "descr": "Konsi-Phone GIFs on GIPHY - Be Animated"
+        }
+      ]
+    },
+    {
+      "number": 70,
+      "part": "ppt/slides/slide70.xml",
+      "text": [
+        "Formula 4: Cramér’s V — Strength of Association",
+        "Using our Channel × Churn table",
+        "We already know:",
+        "There are:",
+        "Therefore:",
+        "Substitute:"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-068",
+        "asset-069",
+        "asset-070",
+        "asset-071",
+        "asset-072",
+        "asset-073",
+        "asset-074",
+        "asset-075"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 25",
+          "descr": "Voltes V Lets Volt In GIF - Voltes V Lets Volt In Push Button - Discover &  Share GIFs"
+        }
+      ]
+    },
+    {
+      "number": 71,
+      "part": "ppt/slides/slide71.xml",
+      "text": [
+        "Formula 4: Cramér’s V — Strength of Association",
+        "Interpretation: Cramér’s V approximately at 0.236 indicates that Channel and Churn have a meaningful but not extremely strong association in this dataset.",
+        "V = 0 means no association; values farther from 0 indicate stronger association. Interpret magnitude in the organizational context."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-075",
+        "asset-076"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 72,
+      "part": "ppt/slides/slide72.xml",
+      "text": [
+        "Formula 4: Cramér’s V — Strength of Association",
+        "Interpretation: Cramér’s V approximately at 0.236 indicates that Channel and Churn have a meaningful but not extremely strong association in this dataset.",
+        "V = 0 means no association; values farther from 0 indicate stronger association. Interpret magnitude in the organizational context."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-075",
+        "asset-076"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 73,
+      "part": "ppt/slides/slide73.xml",
+      "text": [
+        "Your four-formula diagnostic chain now becomes very coherent",
+        "Formula",
+        "Diagnostic Question",
+        "Result in Example",
+        "1. Expected Frequency",
+        "What would we expect under independence?",
+        "Mobile–Churned: 60",
+        "2. Pearson χ²",
+        "Is there evidence of an overall association?",
+        "χ² = 33.33, p < .001",
+        "3. Pearson Residual",
+        "Where is the departure concentrated, and in what direction?",
+        "Mobile–Churned: +3.87",
+        "4. Cramér’s V",
+        "How strong is the overall association?",
+        "V = 0.236",
+        "A particularly good progression for Diagnostic Analytics:",
+        "EXPECT → TEST → LOCALIZE → MEASURE STRENGTH",
+        "And importantly:",
+        "None of the four formulas proves that Channel causes Churn."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 74,
+      "part": "ppt/slides/slide74.xml",
+      "text": [
+        "Baseline and Interpretation of the Four Formulas",
+        "Formula",
+        "Baseline / Reference",
+        "How to Interpret",
+        "Important Limitation",
+        "Expected Frequency",
+        "What the cell count would look like if the two categorical variables were independent",
+        "Observed higher than expected means the combination occurs more often than independence predicts. Observed lower than expected means it occurs less often. Observed close to expected means little discrepancy in that cell.",
+        "Expected frequency is not a target, forecast, benchmark KPI, or desired value. It is a statistical reference under independence.",
+        "Pearson Chi-Square",
+        "Independence is the reference model. A Chi-Square value of zero would mean the observed table matches the expected table exactly.",
+        "Use the p-value together with the chosen significance level. A p-value below 0.05 is commonly treated as evidence against independence.",
+        "Chi-Square does not tell us where the relationship occurs, how practically strong it is, or whether one variable causes the other.",
+        "Pearson Cell Residual",
+        "Zero means the observed count equals the expected count for that cell.",
+        "Positive value means more cases than expected. Negative value means fewer cases than expected. A larger absolute value means a greater contribution to the overall Chi-Square discrepancy.",
+        "Do not treat ordinary Pearson residuals as formal cell-level significance tests using fixed cutoffs. Adjusted standardized residuals are preferable for that purpose.",
+        "Cramér’s V",
+        "Zero represents no association. Values farther from zero represent stronger association. The measure has no negative values.",
+        "Interpret the magnitude using effect-size guidance appropriate to the size of the contingency table, while also considering the real-world context.",
+        "Cramér’s V tells us strength, not direction, location, or causation. Effect-size categories are heuristic rather than universal laws."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 75,
+      "part": "ppt/slides/slide75.xml",
+      "text": [
+        "Time Series",
+        "A time series is a sequence of observations recorded in chronological order over time, where the timing and order of the observations contain meaningful information.",
+        "The observations are often collected at regular intervals, such as hourly, daily, monthly, quarterly, or annually, although time series can also occur at irregular intervals.",
+        "Unlike ordinary cross-sectional data, time-series observations may be related to earlier observations, so their temporal ordering cannot simply be ignored. NIST emphasizes that such data can possess an internal temporal structure, including autocorrelation, trend, and seasonal variation.",
+        "Time Series",
+        "Time Interval",
+        "Daily website visits",
+        "Daily",
+        "Monthly sales",
+        "Monthly",
+        "Quarterly revenue",
+        "Quarterly",
+        "Hourly electricity demand",
+        "Hourly",
+        "Annual population",
+        "Yearly"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-077"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Late Rabbit GIFs | Tenor"
+        }
+      ]
+    },
+    {
+      "number": 76,
+      "part": "ppt/slides/slide76.xml",
+      "text": [
+        "Time-Series Decomposition",
+        "Time-Series Decomposition is the process of separating an observed time series into underlying components that represent different types of temporal patterns.",
+        "Rather than examining only the overall movement of the data, decomposition helps us distinguish which part of the observed behavior is associated with the longer-term direction of the series, which part follows a regular seasonal pattern, and which part remains unexplained by those patterns.",
+        "A time series is commonly decomposed into three components:",
+        "Trend-CycleThe underlying longer-term movement of the series, including gradual increases, decreases, or broader cyclical movements.",
+        "Seasonal ComponentA systematic pattern that repeats at a known and regular frequency, such as by hour, day, week, month, quarter, or year.",
+        "Remainder ComponentThe variation left after the estimated trend-cycle and seasonal components have been removed.",
+        "Observed Time Series = Trend-Cycle + Seasonal + Remainder"
+      ],
+      "notes": [
+        "Before treating a spike or decline as unusual, first determine how much of it can be explained by the normal temporal structure of the data."
+      ],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 77,
+      "part": "ppt/slides/slide77.xml",
+      "text": [
+        "Why Decompose a Time Series?",
+        "Time-Series Decomposition helps analysts understand what kind of temporal pattern is responsible for an observed change.",
+        "Component",
+        "What It Reveals",
+        "Diagnostic Question",
+        "Trend-Cycle",
+        "Longer-term direction or movement",
+        "Is the increase or decline part of a broader long-term movement?",
+        "Seasonal",
+        "Regularly repeating variation",
+        "Is this spike or decline normal for this particular period?",
+        "Remainder",
+        "Variation not explained by trend-cycle or seasonality",
+        "What happened that the normal temporal pattern does not explain?",
+        "For example, if December sales increase substantially, decomposition can help determine whether the increase is simply part of the company's normal December seasonality or whether sales were unusually high even after accounting for the expected December effect."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 78,
+      "part": "ppt/slides/slide78.xml",
+      "text": [
+        "Why Decompose a Time Series?",
+        "DIAGNOSTIC PERSPECTIVE:",
+        "Observed Change",
+        "↓",
+        "Is it part of the Trend-Cycle?",
+        "↓",
+        "Is it expected Seasonality?",
+        "↓",
+        "Does an unusual Remainder remain?",
+        "↓",
+        "Investigate further",
+        "Before treating a spike or decline as unusual, first determine how much of it can be explained by the normal temporal structure of the data.",
+        "This is consistent with the main purpose of decomposition: improving our understanding of the structure and historical behavior of a time series."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-078"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 2",
+          "descr": "an animated dog reading a book to another dog in front of a house and tree"
+        }
+      ]
+    },
+    {
+      "number": 79,
+      "part": "ppt/slides/slide79.xml",
+      "text": [
+        "Additive and Multiplicative Decomposition",
+        "ADDITIVE DECOMPOSITION",
+        "Observed = Trend-Cycle + Seasonal + Remainder",
+        "An additive model is appropriate when the size of the seasonal variation remains approximately constant even as the level of the series changes.",
+        "Example:A store normally sells approximately 500 additional units every December, regardless of whether its typical monthly sales are 5,000 or 10,000 units.",
+        "MULTIPLICATIVE DECOMPOSITION",
+        "Observed = Trend-Cycle x Seasonal x Remainder",
+        "A multiplicative model is appropriate when seasonal variation changes proportionally with the level of the series.",
+        "Example:A store normally experiences approximately 20% higher sales every December. As normal sales increase, the absolute size of the December increase also becomes larger."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 80,
+      "part": "ppt/slides/slide80.xml",
+      "text": [
+        "Additive and Multiplicative Decomposition",
+        "Observation",
+        "More Appropriate",
+        "Seasonal fluctuations remain roughly constant in absolute size",
+        "Additive",
+        "Seasonal fluctuations increase or decrease as the series level changes",
+        "Multiplicative",
+        "Percentage or proportional seasonal effects are more meaningful",
+        "Multiplicative"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-079"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 7",
+          "descr": "故事四| Baamboozle - Baamboozle | The Most Fun Classroom Games!"
+        }
+      ]
+    },
+    {
+      "number": 81,
+      "part": "ppt/slides/slide81.xml",
+      "text": [
+        "The Remainder: What Is Left After Normal Patterns?",
+        "After separating the normal trend-cycle and seasonal pattern, the remainder shows the part of the observation that is still unexplained.",
+        "Additive Decomposition",
+        "Remainder = Observed - Trend-Cycle - Seasonal",
+        "Example",
+        "Suppose monthly sales are:",
+        "Component",
+        "Value",
+        "Observed Sales",
+        "150",
+        "Trend-Cycle",
+        "125",
+        "Seasonal Effect",
+        "+15",
+        "Expected from Normal Pattern",
+        "140",
+        "Remainder",
+        "+10",
+        "Computation: Remainder = 150 - 125 - 15",
+        "Remainder = +10",
+        "Interpretation",
+        "The normal trend-cycle and seasonal pattern would suggest sales of approximately 140.",
+        "Actual sales were 150.",
+        "Therefore:",
+        "Sales were 10 units higher than what the normal temporal pattern explains."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 82,
+      "part": "ppt/slides/slide82.xml",
+      "text": [
+        "The Remainder: What Is Left After Normal Patterns?",
+        "After separating the normal trend-cycle and seasonal pattern, the remainder shows the part of the observation that is still unexplained.",
+        "Computation: Remainder = 150 - 125 - 15",
+        "Remainder = +10",
+        "Interpretation",
+        "The normal trend-cycle and seasonal pattern would suggest sales of approximately 140.",
+        "Actual sales were 150.",
+        "Therefore:",
+        "Sales were 10 units higher than what the normal temporal pattern explains.",
+        "What does this mean diagnostically?",
+        "A large remainder tells us:",
+        "Something unusual may have happened during that period.",
+        "The period deserves further investigation.",
+        "The remainder does not automatically tell us the cause.",
+        "Possible factors to investigate:",
+        "Promotion • Price Change • Product Launch • Weather Event • Supply Issue • System Outage • Competitor Activity",
+        "Key Idea:",
+        "The remainder tells us what the normal time pattern could not explain."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 83,
+      "part": "ppt/slides/slide83.xml",
+      "text": [
+        "Interpreting the Remainder",
+        "Remainder Pattern",
+        "Interpretation",
+        "Diagnostic Meaning",
+        "Near zero",
+        "Observed value is close to what trend-cycle and seasonality explain",
+        "Little unusual deviation for that period",
+        "Small positive",
+        "Slightly higher than expected",
+        "May represent ordinary variation",
+        "Large positive",
+        "Substantially higher than expected",
+        "Investigate unusual positive events or omitted factors",
+        "Small negative",
+        "Slightly lower than expected",
+        "May represent ordinary variation",
+        "Large negative",
+        "Substantially lower than expected",
+        "Investigate possible adverse events or disruptions",
+        "Repeatedly positive or negative",
+        "Systematic direction remains",
+        "Trend or seasonal structure may not be adequately captured",
+        "Repeating pattern remains",
+        "Temporal structure remains in the remainder",
+        "Possible unmodeled seasonality or other time dependence",
+        "Variability increases over time",
+        "Unexplained variation is changing",
+        "May indicate changing variance, structural change, or an unsuitable decomposition",
+        "No obvious pattern remains",
+        "Much of the systematic temporal structure has been extracted",
+        "The decomposition may be adequately representing the major patterns"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 84,
+      "part": "ppt/slides/slide84.xml",
+      "text": [
+        "From Decomposition to Diagnosis",
+        "Time-Series Decomposition helps analysts separate normal temporal behavior from unusual deviations that require investigation.",
+        "Step",
+        "Diagnostic Action",
+        "Key Question",
+        "1. Detect the Change",
+        "Observe a spike, decline, or unusual movement",
+        "What changed?",
+        "2. Decompose the Series",
+        "Separate Trend-Cycle, Seasonality, and Remainder",
+        "Which component explains the change?",
+        "3. Identify the Unusual Part",
+        "Examine large or structured remainder values",
+        "What is not explained by the normal pattern?",
+        "4. Form Hypotheses",
+        "Identify possible reasons for the unusual behavior",
+        "What might have happened during this period?",
+        "5. Investigate Further",
+        "Drill down and triangulate using other evidence",
+        "Which explanation is best supported by the data?",
+        "Time-Series Decomposition tells us whether a change is expected from the normal temporal pattern or unusual enough to investigate further.",
+        "Decomposition finds the anomaly → Diagnostic techniques investigate the explanation."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 85,
+      "part": "ppt/slides/slide85.xml",
+      "text": [
+        "Example Problem: Quarterly Additive Decomposition",
+        "Suppose we have quarterly sales for three years:",
+        "Period",
+        "Sales",
+        "Year 1 Q1",
+        "88",
+        "Year 1 Q2",
+        "104",
+        "Year 1 Q3",
+        "118",
+        "Year 1 Q4",
+        "102",
+        "Year 2 Q1",
+        "96",
+        "Year 2 Q2",
+        "112",
+        "Year 2 Q3",
+        "126",
+        "Year 2 Q4",
+        "110",
+        "Year 3 Q1",
+        "104",
+        "Year 3 Q2",
+        "120",
+        "Year 3 Q3",
+        "134",
+        "Year 3 Q4",
+        "118",
+        "Because this is quarterly data, the seasonal period is:",
+        "m = 4",
+        "So the first task is to estimate the Trend-Cycle using a 4-point moving average. Because 4 is even, the 4-point averages must then be centered, producing a 2 x 4 centered moving average. This is the standard classical-decomposition procedure.",
+        "Step 1 — Compute the 4-Point Moving Average",
+        "First four quarters:",
+        "(88 + 104 + 118 + 102) / 4 = 103",
+        "Next four quarters:",
+        "(104 + 118 + 102 + 96) / 4 = 105",
+        "Next:",
+        "(118 + 102 + 96 + 112) / 4 = 107",
+        ".",
+        "And continue across the series.",
+        "But these 4-point averages fall between quarters, so we still need to center them"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 86,
+      "part": "ppt/slides/slide86.xml",
+      "text": [
+        "Example Problem: Quarterly Additive Decomposition",
+        "Suppose we have quarterly sales for three years:",
+        "Period",
+        "Sales",
+        "Year 1 Q1",
+        "88",
+        "Year 1 Q2",
+        "104",
+        "Year 1 Q3",
+        "118",
+        "Year 1 Q4",
+        "102",
+        "Year 2 Q1",
+        "96",
+        "Year 2 Q2",
+        "112",
+        "Year 2 Q3",
+        "126",
+        "Year 2 Q4",
+        "110",
+        "Year 3 Q1",
+        "104",
+        "Year 3 Q2",
+        "120",
+        "Year 3 Q3",
+        "134",
+        "Year 3 Q4",
+        "118",
+        "Step 1 — Compute the 4-Point Moving Average",
+        "4-Point MA",
+        "Value",
+        "MA1",
+        "103",
+        "MA2",
+        "105",
+        "MA3",
+        "107",
+        "MA4",
+        "109",
+        "MA5",
+        "111",
+        "MA6",
+        "113",
+        "MA7",
+        "115",
+        "MA8",
+        "117",
+        "MA9",
+        "119",
+        "Because 4 is even, these averages fall between quarters. Therefore, they need to be centered by averaging two consecutive 4-point MAs. This is the standard 2 × 4 moving average used for quarterly classical decomposition."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 87,
+      "part": "ppt/slides/slide87.xml",
+      "text": [
+        "Example Problem: Quarterly Additive Decomposition",
+        "Suppose we have quarterly sales for three years:",
+        "Period",
+        "Sales",
+        "Year 1 Q1",
+        "88",
+        "Year 1 Q2",
+        "104",
+        "Year 1 Q3",
+        "118",
+        "Year 1 Q4",
+        "102",
+        "Year 2 Q1",
+        "96",
+        "Year 2 Q2",
+        "112",
+        "Year 2 Q3",
+        "126",
+        "Year 2 Q4",
+        "110",
+        "Year 3 Q1",
+        "104",
+        "Year 3 Q2",
+        "120",
+        "Year 3 Q3",
+        "134",
+        "Year 3 Q4",
+        "118",
+        "Step 2 — Center the Moving Average",
+        "For Year 1 Q3:",
+        "Centered MA = (103 + 105) / 2",
+        "Centered MA = 104",
+        "For Year 1 Q4:",
+        "Centered MA = (105 + 107) / 2",
+        "Centered MA = 106",
+        "So now we have estimates of the underlying Trend-Cycle at actual quarters.",
+        "4-Point MA",
+        "Value",
+        "MA1",
+        "103",
+        "MA2",
+        "105",
+        "MA3",
+        "107",
+        "MA4",
+        "109",
+        "MA5",
+        "111",
+        "MA6",
+        "113",
+        "MA7",
+        "115",
+        "MA8",
+        "117",
+        "MA9",
+        "119",
+        "Period",
+        "Observed",
+        "Centered MA / Trend-Cycle",
+        "Year 1 Q3",
+        "118",
+        "Year 1 Q4",
+        "102",
+        "Year 2 Q1",
+        "96",
+        "Year 2 Q2",
+        "112",
+        "Year 2 Q3",
+        "126",
+        "Year 2 Q4",
+        "110",
+        "Year 3 Q1",
+        "104",
+        "Year 3 Q2",
+        "120",
+        "Period",
+        "Observed",
+        "Centered MA / Trend-Cycle",
+        "Year 1 Q3",
+        "118",
+        "104",
+        "Year 1 Q4",
+        "102",
+        "106",
+        "Year 2 Q1",
+        "96",
+        "108",
+        "Year 2 Q2",
+        "112",
+        "110",
+        "Year 2 Q3",
+        "126",
+        "112",
+        "Year 2 Q4",
+        "110",
+        "114",
+        "Year 3 Q1",
+        "104",
+        "116",
+        "Year 3 Q2",
+        "120",
+        "118"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 88,
+      "part": "ppt/slides/slide88.xml",
+      "text": [
+        "Example Problem: Quarterly Additive Decomposition",
+        "Suppose we have quarterly sales for three years:",
+        "Period",
+        "Sales",
+        "Year 1 Q1",
+        "88",
+        "Year 1 Q2",
+        "104",
+        "Year 1 Q3",
+        "118",
+        "Year 1 Q4",
+        "102",
+        "Year 2 Q1",
+        "96",
+        "Year 2 Q2",
+        "112",
+        "Year 2 Q3",
+        "126",
+        "Year 2 Q4",
+        "110",
+        "Year 3 Q1",
+        "104",
+        "Year 3 Q2",
+        "120",
+        "Year 3 Q3",
+        "134",
+        "Year 3 Q4",
+        "118",
+        "Step 3 — Detrend the Series",
+        "For an additive model:",
+        "Detrended = Observed - Trend-Cycle",
+        "For Year 1 Q3:",
+        "118 - 104 = +14",
+        "For Year 1 Q4:",
+        "102 - 106 = -4",
+        "Interpretation:",
+        "Q3 was 14 units above the estimated underlying trend.",
+        "Q4 was 4 units below the estimated underlying trend.",
+        "Period",
+        "Observed",
+        "Trend-Cycle",
+        "Detrended",
+        "Year 1 Q3",
+        "118",
+        "104",
+        "Year 1 Q4",
+        "102",
+        "106",
+        "Year 2 Q1",
+        "96",
+        "108",
+        "Year 2 Q2",
+        "112",
+        "110",
+        "Year 2 Q3",
+        "126",
+        "112",
+        "Year 2 Q4",
+        "110",
+        "114",
+        "Year 3 Q1",
+        "104",
+        "116",
+        "Year 3 Q2",
+        "120",
+        "118",
+        "Period",
+        "Observed",
+        "Trend-Cycle",
+        "Detrended",
+        "Year 1 Q3",
+        "118",
+        "104",
+        "+14",
+        "Year 1 Q4",
+        "102",
+        "106",
+        "-4",
+        "Year 2 Q1",
+        "96",
+        "108",
+        "-12",
+        "Year 2 Q2",
+        "112",
+        "110",
+        "+2",
+        "Year 2 Q3",
+        "126",
+        "112",
+        "+14",
+        "Year 2 Q4",
+        "110",
+        "114",
+        "-4",
+        "Year 3 Q1",
+        "104",
+        "116",
+        "-12",
+        "Year 3 Q2",
+        "120",
+        "118",
+        "+2",
+        "Now the seasonal pattern becomes visible."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 89,
+      "part": "ppt/slides/slide89.xml",
+      "text": [
+        "Example Problem: Quarterly Additive Decomposition",
+        "Suppose we have quarterly sales for three years:",
+        "Period",
+        "Sales",
+        "Year 1 Q1",
+        "88",
+        "Year 1 Q2",
+        "104",
+        "Year 1 Q3",
+        "118",
+        "Year 1 Q4",
+        "102",
+        "Year 2 Q1",
+        "96",
+        "Year 2 Q2",
+        "112",
+        "Year 2 Q3",
+        "126",
+        "Year 2 Q4",
+        "110",
+        "Year 3 Q1",
+        "104",
+        "Year 3 Q2",
+        "120",
+        "Year 3 Q3",
+        "134",
+        "Year 3 Q4",
+        "118",
+        "Y1 (4Qs) = 103",
+        "Y2 (4Qs) = 105",
+        "Y3 (4Qs) = 107",
+        "Step 4 — Group the Detrended Values by Quarter",
+        "For Q1:",
+        "(-12 + -12) / 2 = -12",
+        "For Q2:",
+        "(+2 + +2) / 2 = +2",
+        "For Q3:",
+        "(+14 + +14) / 2 = +14",
+        "For Q4:",
+        "(-4 + -4) / 2 = -4",
+        "Therefore:",
+        "Quarter",
+        "Seasonal Component",
+        "Interpretation",
+        "Q1",
+        "-12",
+        "Sales tend to be 12 units below trend",
+        "Q2",
+        "+2",
+        "Sales tend to be 2 units above trend",
+        "Q3",
+        "+14",
+        "Sales tend to be 14 units above trend",
+        "Q4",
+        "-4",
+        "Sales tend to be 4 units below trend",
+        "Total",
+        "0",
+        "Correct for additive seasonality",
+        "Period",
+        "Observed",
+        "Trend-Cycle",
+        "Detrended",
+        "Year 1 Q3",
+        "118",
+        "104",
+        "+14",
+        "Year 1 Q4",
+        "102",
+        "106",
+        "-4",
+        "Year 2 Q1",
+        "96",
+        "108",
+        "-12",
+        "Year 2 Q2",
+        "112",
+        "110",
+        "+2",
+        "Year 2 Q3",
+        "126",
+        "112",
+        "+14",
+        "Year 2 Q4",
+        "110",
+        "114",
+        "-4",
+        "Year 3 Q1",
+        "104",
+        "116",
+        "-12",
+        "Year 3 Q2",
+        "120",
+        "118",
+        "+2"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 90,
+      "part": "ppt/slides/slide90.xml",
+      "text": [
+        "Example Problem: Quarterly Additive Decomposition",
+        "Suppose we have quarterly sales for three years:",
+        "Period",
+        "Sales",
+        "Year 1 Q1",
+        "88",
+        "Year 1 Q2",
+        "104",
+        "Year 1 Q3",
+        "118",
+        "Year 1 Q4",
+        "102",
+        "Year 2 Q1",
+        "96",
+        "Year 2 Q2",
+        "112",
+        "Year 2 Q3",
+        "126",
+        "Year 2 Q4",
+        "110",
+        "Year 3 Q1",
+        "104",
+        "Year 3 Q2",
+        "120",
+        "Year 3 Q3",
+        "134",
+        "Year 3 Q4",
+        "118",
+        "Y1 (4Qs) = 103",
+        "Y2 (4Qs) = 105",
+        "Y3 (4Qs) = 107",
+        "Step 5: Compute the Remainder",
+        "For additive decomposition:",
+        "Remainder = Observed - Trend-Cycle – Seasonal",
+        "Use one row first:",
+        "Example: Year 2 Q3",
+        "Component",
+        "Value",
+        "Observed Sales",
+        "Trend-Cycle",
+        "Seasonal Component",
+        "Remainder",
+        "Component",
+        "Value",
+        "Observed Sales",
+        "126",
+        "Trend-Cycle",
+        "112",
+        "Seasonal Component",
+        "+14",
+        "Remainder",
+        "0",
+        "Period",
+        "Observed",
+        "Trend-Cycle",
+        "Seasonal",
+        "Remainder",
+        "Year 1 Q3",
+        "118",
+        "104",
+        "+14",
+        "Year 1 Q4",
+        "102",
+        "106",
+        "-4",
+        "Year 2 Q1",
+        "96",
+        "108",
+        "-12",
+        "Year 2 Q2",
+        "112",
+        "110",
+        "+2",
+        "Year 2 Q3",
+        "126",
+        "112",
+        "+14",
+        "Year 2 Q4",
+        "110",
+        "114",
+        "-4",
+        "Year 3 Q1",
+        "104",
+        "116",
+        "-12",
+        "Year 3 Q2",
+        "120",
+        "118",
+        "+2",
+        "Period",
+        "Observed",
+        "Trend-Cycle",
+        "Seasonal",
+        "Remainder",
+        "Year 1 Q3",
+        "118",
+        "104",
+        "+14",
+        "0",
+        "Year 1 Q4",
+        "102",
+        "106",
+        "-4",
+        "0",
+        "Year 2 Q1",
+        "96",
+        "108",
+        "-12",
+        "0",
+        "Year 2 Q2",
+        "112",
+        "110",
+        "+2",
+        "0",
+        "Year 2 Q3",
+        "126",
+        "112",
+        "+14",
+        "0",
+        "Year 2 Q4",
+        "110",
+        "114",
+        "-4",
+        "0",
+        "Year 3 Q1",
+        "104",
+        "116",
+        "-12",
+        "0",
+        "Year 3 Q2",
+        "120",
+        "118",
+        "+2",
+        "0"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 91,
+      "part": "ppt/slides/slide91.xml",
+      "text": [
+        "Why specifically two observations disappear from each side?",
+        "Because the seasonal period is 4.",
+        "A centered moving average needs enough information both before and after the quarter being estimated.",
+        "For a quarterly series:m = 4",
+        "and classical decomposition therefore loses approximately:m / 2 = 2 periods from each end",
+        "So we lose:First 2 quarters: Y1 Q1, Y1 Q2Last 2 quarters: Y3 Q3, Y3 Q4",
+        "This is called an edge effect or endpoint problem of centered moving averages."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-080"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 6",
+          "descr": "Losing GIFs | Tenor"
+        }
+      ]
+    },
+    {
+      "number": 92,
+      "part": "ppt/slides/slide92.xml",
+      "text": [
+        "Try It Yourself: Quarterly Multiplicative Decomposition",
+        "Multiplicative Model",
+        "Observed = Trend-Cycle × Seasonal × Remainder",
+        "To solve for the Remainder:",
+        "Remainder = Observed / (Trend-Cycle × Seasonal Index)",
+        "GIVEN",
+        "Calculate the Expected Value and Remainder for each quarter",
+        "Quarter",
+        "Observed",
+        "Trend-Cycle",
+        "Seasonal Index",
+        "Q1",
+        "900",
+        "1,000",
+        "0.90",
+        "Q2",
+        "1,260",
+        "1,200",
+        "1.00",
+        "Q3",
+        "1,463",
+        "1,400",
+        "1.10",
+        "Q4",
+        "1,760",
+        "1,600",
+        "1.00",
+        "Expected Value = Trend-Cycle × Seasonal Index",
+        "Remainder = Observed / Expected Value",
+        "Quarter",
+        "Expected Value",
+        "Remainder",
+        "Interpretation",
+        "Q1",
+        "900",
+        "1.00",
+        "Exactly as expected",
+        "Q2",
+        "1,200",
+        "1.05",
+        "5% above expected",
+        "Q3",
+        "1,540",
+        "0.95",
+        "5% below expected",
+        "Q4",
+        "1,600",
+        "1.10",
+        "10% above expected",
+        "ANSWERS:",
+        "Diagnostic Question:Which quarter shows the largest unexplained deviation from its normal temporal pattern?"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 93,
+      "part": "ppt/slides/slide93.xml",
+      "text": [
+        "Purpose of Time-Series Decomposition",
+        "Purpose",
+        "What It Means",
+        "Diagnostic Question",
+        "Separate Trend",
+        "Isolate the longer-term direction or movement of the series.",
+        "Is the increase or decline part of a broader long-term movement?",
+        "Separate Seasonality",
+        "Identify patterns that systematically repeat at known intervals.",
+        "Is this spike normal for this month, day, week, or season?",
+        "Reveal the Remainder / Residual",
+        "Identify variation left after trend and seasonality have been accounted for.",
+        "What happened that the usual trend and seasonal pattern do not explain?",
+        "Compare Pattern Components",
+        "Determine whether an observed change is mainly structural, seasonal, or irregular.",
+        "What component appears to account for the observed movement?",
+        "Detect Unusual Periods",
+        "Large or structured remainder values can highlight periods requiring investigation.",
+        "When did the series behave unusually after accounting for normal patterns?",
+        "Improve Understanding Before Modeling",
+        "Makes the structure of a time series easier to inspect before choosing a later analytical method.",
+        "What structure must we understand before deciding what to do next?"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 94,
+      "part": "ppt/slides/slide94.xml",
+      "text": [
+        "Diagnostic Analytics: Visualization & Latest Trends"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-081"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 95,
+      "part": "ppt/slides/slide95.xml",
+      "text": [
+        "Core Diagnostic Analytics Operations",
+        "Diagnostic Operation",
+        "Core Diagnostic Question",
+        "What It Does",
+        "Example",
+        "Drill-Down Analysis",
+        "Where is the problem concentrated?",
+        "Starts from an aggregate outcome and progressively investigates more detailed levels or dimensions.",
+        "Company → Region → Branch → Product Category",
+        "Data Discovery",
+        "What evidence or pattern might explain the outcome?",
+        "Interactively explores the existing data to uncover previously unnoticed patterns, relationships, groups, or exceptions relevant to the observed problem.",
+        "A decline in completion rate leads to discovery that failures are concentrated among one submission channel.",
+        "Decomposition Analysis",
+        "What components produced the overall result?",
+        "Breaks an aggregate outcome into meaningful components so the analyst can determine which parts account for the change.",
+        "Profit decline → Revenue decline + Cost increase → Price + Quantity",
+        "Contribution Analysis",
+        "Which component contributed most to the observed change?",
+        "Quantifies how much individual groups or components contributed to the overall movement.",
+        "Region A accounts for 60% of the company-wide decline.",
+        "Diagnostic Relationship Analysis",
+        "Which factors are associated with the observed outcome?",
+        "Examines relationships between the outcome and candidate explanatory variables to identify evidence worth further investigation.",
+        "Churn differs substantially by customer channel."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 96,
+      "part": "ppt/slides/slide96.xml",
+      "text": [
+        "Core Diagnostic Analytics Operations",
+        "Diagnostic Operation",
+        "Core Diagnostic Question",
+        "What It Does",
+        "Example",
+        "Root Cause Analysis",
+        "What underlying condition or process produced the problem?",
+        "Moves from symptoms and contributing factors toward underlying mechanisms or conditions that plausibly generated the observed outcome.",
+        "High cancellations → stockouts → replenishment delays → supplier delivery failure",
+        "Diagnostic Triangulation",
+        "Do independent pieces of evidence support the same explanation?",
+        "Tests a candidate explanation against multiple sources, measures, or perspectives.",
+        "Inventory shortages + cancelled orders + supplier-delay records all point toward supply disruption."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 97,
+      "part": "ppt/slides/slide97.xml",
+      "text": [
+        "Visualization for Diagnostic Analytics",
+        "Diagnostic Question",
+        "Recommended Visualization",
+        "Why It Helps Diagnosis",
+        "Example",
+        "Compared with what?",
+        "Grouped Bar Chart / Benchmark Chart",
+        "Makes differences between groups, periods, or reference values visible",
+        "Churn rate by channel",
+        "Where is it concentrated?",
+        "Drill-Down Chart / Decomposition Tree",
+        "Moves from aggregate performance into increasingly detailed dimensions",
+        "Company → Region → Branch → Product",
+        "What contributed to the result?",
+        "Waterfall Chart / Decomposition Tree",
+        "Shows how individual components add to or subtract from an overall result",
+        "Profit change explained by revenue, cost, discounts",
+        "Which groups behave differently?",
+        "Box Plot / Grouped Bar Chart / Small Multiples",
+        "Reveals differences across segments",
+        "Delivery time by region",
+        "Where does the process fail?",
+        "Funnel Chart",
+        "Shows stage-to-stage losses in an ordered process",
+        "Started → Submitted → Approved → Completed",
+        "When did the problem emerge?",
+        "Line Chart / Run Chart",
+        "Reveals changes, spikes, shifts, and event timing",
+        "Error rate before and after a system release",
+        "Which observations are unusual?",
+        "Box Plot / Control-style Plot / Anomaly Markers",
+        "Highlights observations outside the normal pattern",
+        "Unusually high transaction failures",
+        "A diagnostic visualization should help the analyst move from “what happened?” toward “where, when, for whom, and under what conditions did it happen?”"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 98,
+      "part": "ppt/slides/slide98.xml",
+      "text": [
+        "Diagnostic Visualization Is Not Decoration",
+        "Good diagnostic visualization:",
+        "exposes comparison,",
+        "preserves context,",
+        "reveals concentration,",
+        "supports drill-down,",
+        "makes anomalies visible,",
+        "separates signal from noise,",
+        "allows the viewer to trace the evidence.",
+        "A diagnostic chart should answer a diagnostic question.",
+        "Weak diagnostic visualization:",
+        "looks attractive but does not support investigation,",
+        "shows only totals,",
+        "hides denominators,",
+        "uses inappropriate aggregation,",
+        "implies causality from association,",
+        "overwhelms the viewer with unnecessary dimensions."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 99,
+      "part": "ppt/slides/slide99.xml",
+      "text": [
+        "Diagnostic Visualization: Concrete Examples",
+        "Decomposition Tree",
+        "Waterfall Chart"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-034",
+        "asset-082"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 5",
+          "descr": "Create and View Decomposition Tree Visuals in Power BI - Power BI ..."
+        },
+        {
+          "name": "Picture 8",
+          "descr": "Waterfall charts in Power BI - Power BI | Microsoft Learn"
+        }
+      ]
+    },
+    {
+      "number": 100,
+      "part": "ppt/slides/slide100.xml",
+      "text": [
+        "Diagnostic Visualization: Concrete Examples",
+        "Anomaly Detection Graphs",
+        "Funnel Chart"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-083",
+        "asset-084"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 101,
+      "part": "ppt/slides/slide101.xml",
+      "text": [
+        "Diagnostic Analytics Is Becoming AI-Assisted (Not AI-Autonomous)",
+        "Modern systems can now:",
+        "detect anomalies,",
+        "suggest drivers,",
+        "recommend drill paths,",
+        "compare segments,",
+        "identify contributors,",
+        "summarize findings,",
+        "answer natural-language questions.",
+        "But the analyst still must ask:",
+        "Is the data trustworthy?",
+        "Is the comparison valid?",
+        "Is the relationship stable across groups?",
+        "Could another explanation fit?",
+        "Is the apparent driver actually causal?",
+        "Does the conclusion make sense in the organizational context?"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-085"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 11",
+          "descr": "I'm obsessed with making animated GIF's with Meta.AI : r/aiArt"
+        }
+      ]
+    },
+    {
+      "number": 102,
+      "part": "ppt/slides/slide102.xml",
+      "text": [
+        "AI-Assisted Diagnostic Analytics: Examples",
+        "Microsoft Power BI Copilot",
+        "Power BI AI Anomaly Explanation"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-086",
+        "asset-083"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 103,
+      "part": "ppt/slides/slide103.xml",
+      "text": [
+        "Key Takeaways",
+        "What we have learned",
+        "1.",
+        "EDA is an approach, not another analytics type.It helps us understand what the data reveals through distributions, patterns, anomalies, relationships, and emerging hypotheses. Descriptive, Diagnostic, Predictive, and Prescriptive Analytics describe the purpose of the analysis",
+        "2.",
+        "EDA discovers the clue; Diagnostic Analytics investigates the clue.EDA can reveal an unusual pattern, but diagnosis asks where it is concentrated, when it began, who or what is affected, which factors move with it, and what explanations remain plausible.",
+        "3.",
+        "Diagnostic Analytics asks “Why did it happen?” without turning “why” into guesswork.Diagnosis systematically localizes an observed outcome, investigates relationships and contributing factors, and develops evidence-supported explanations."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 104,
+      "part": "ppt/slides/slide104.xml",
+      "text": [
+        "Key Takeaways",
+        "What we have learned",
+        "4.",
+        "Localization comes before explanation.Drill-down and decomposition help identify where the change lives and what contributed to it before analysts attempt to explain the underlying mechanism.",
+        "5.",
+        "Association is diagnostic evidence, not automatic causation.Relationships, statistical tests, residuals, and candidate drivers can narrow the explanation space, but stronger evidence is required before claiming that one factor caused another.",
+        "6.",
+        "For categorical diagnosis, use the chain: EXPECT → TEST → LOCALIZE → MEASURE STRENGTH.Expected Frequency establishes the independence reference; Pearson Chi-Square tests overall association; Pearson Residuals identify where the discrepancy is concentrated; Cramér’s V measures association strength."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 105,
+      "part": "ppt/slides/slide105.xml",
+      "text": [
+        "Key Takeaways",
+        "What we have learned",
+        "7.",
+        "Time can be diagnostic without being predictive.Time-series decomposition separates historical observations into trend, seasonal, and residual components so analysts can distinguish recurring structure from unusual variation. Forecasting begins when the question is what happens next.",
+        "8.",
+        "A diagnostic visualization must support investigation, not decoration.The right visualization should make comparisons, concentration, contributions, process losses, anomalies, relationships, or temporal changes easier to investigate and trace.",
+        "9.",
+        "Diagnostic Analytics is now increasingly AI-assisted, but not AI-autonomous.AI can detect anomalies, suggest drivers, recommend drill paths, etc., but analysts remain responsible for validating the data, comparisons, context, alternatives, and causal claims."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 106,
+      "part": "ppt/slides/slide106.xml",
+      "text": [],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-087",
+        "asset-088"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 1",
+          "descr": "Happy Pokemon GIF by Pokémon_JPN - Find & Share on GIPHY"
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "id": "asset-001",
+      "part": "ppt/media/image2.jpg",
+      "sha256": "cea2c538e65c660eee300e053a2e191637c5ab9cda2a555ec5e6ab0c3ad99f44",
+      "file": "media/asset-001.jpg",
+      "image": true,
+      "slides": [
+        1
+      ]
+    },
+    {
+      "id": "asset-002",
+      "part": "ppt/media/image3.jpeg",
+      "sha256": "be5f17b94914ad75733bd7816637c17d8dbb2979032dc69634958b441ebfec22",
+      "file": "media/asset-002.jpeg",
+      "image": true,
+      "slides": [
+        4
+      ]
+    },
+    {
+      "id": "asset-003",
+      "part": "ppt/media/image4.jpeg",
+      "sha256": "bef07ff022575627234724d2efaaf8accc9cda9570f3201b7d9e579558b270ff",
+      "file": "media/asset-003.jpeg",
+      "image": true,
+      "slides": [
+        5
+      ]
+    },
+    {
+      "id": "asset-004",
+      "part": "ppt/media/image5.jpeg",
+      "sha256": "64c1631f70cb23d82d9926b738994076314cb238be0f84bace45b4d75637dbe3",
+      "file": "media/asset-004.jpeg",
+      "image": true,
+      "slides": [
+        6
+      ]
+    },
+    {
+      "id": "asset-005",
+      "part": "ppt/media/image6.png",
+      "sha256": "ce693da8fb629fc68803b04a86e9ce9210e0939d10f4388e75ca2e6c952b0594",
+      "file": "media/asset-005.png",
+      "image": true,
+      "slides": [
+        7
+      ]
+    },
+    {
+      "id": "asset-006",
+      "part": "ppt/media/image7.jpg",
+      "sha256": "3f34dd236db8eab77f68a75354114f3751d94bb7b953e2a094f18e156d4ef624",
+      "file": "media/asset-006.jpg",
+      "image": true,
+      "slides": [
+        8
+      ]
+    },
+    {
+      "id": "asset-007",
+      "part": "ppt/media/image8.png",
+      "sha256": "424908d3c5a3442550287cecf391d9091012b7f151d59089e2cc364fc097aea9",
+      "file": "media/asset-007.png",
+      "image": true,
+      "slides": [
+        9
+      ]
+    },
+    {
+      "id": "asset-008",
+      "part": "ppt/media/image9.png",
+      "sha256": "3712f9d2d1829cb778a9ccdcd3a7526f5c97a5bbef8717267a8bd01c20fa28de",
+      "file": "media/asset-008.png",
+      "image": true,
+      "slides": [
+        11
+      ]
+    },
+    {
+      "id": "asset-009",
+      "part": "ppt/media/image10.jpeg",
+      "sha256": "5551d50122fbbf61ac933078396c0fe9da5ae0ebd2c791e5ef0a816c3e5bb461",
+      "file": "media/asset-009.jpeg",
+      "image": true,
+      "slides": [
+        14
+      ]
+    },
+    {
+      "id": "asset-010",
+      "part": "ppt/media/image11.png",
+      "sha256": "9db182278602dac0214634722eea6cc2f0373fe77aeeeef8a19c77321947cfa9",
+      "file": "media/asset-010.png",
+      "image": true,
+      "slides": [
+        16
+      ]
+    },
+    {
+      "id": "asset-011",
+      "part": "ppt/media/image12.png",
+      "sha256": "1cf234ece6f3abbb2237a002c502df15eed6e90c38a09117b44e21eea010630d",
+      "file": "media/asset-011.png",
+      "image": true,
+      "slides": [
+        17
+      ]
+    },
+    {
+      "id": "asset-012",
+      "part": "ppt/media/image13.png",
+      "sha256": "5aa25bd10b92941f119ed19102d5e66290fdda66d09d7ca603d35a1a5400af8d",
+      "file": "media/asset-012.png",
+      "image": true,
+      "slides": [
+        18
+      ]
+    },
+    {
+      "id": "asset-013",
+      "part": "ppt/media/image14.png",
+      "sha256": "813c35bd3ade6136dc1e16d02f7610a7d1e2d792ef97afdf251e7b0328bcd532",
+      "file": "media/asset-013.png",
+      "image": true,
+      "slides": [
+        19
+      ]
+    },
+    {
+      "id": "asset-014",
+      "part": "ppt/media/image15.png",
+      "sha256": "7b7358a74cb755270b21fb887515ab46847dfd3f0300e151b1a1b08ddbe40f22",
+      "file": "media/asset-014.png",
+      "image": true,
+      "slides": [
+        25
+      ]
+    },
+    {
+      "id": "asset-015",
+      "part": "ppt/media/image16.jpeg",
+      "sha256": "7daa2f6dc3ce6c5a6f19bd62f41e2f0dac2b1a51bf025c80162c9523fffddcb3",
+      "file": "media/asset-015.jpeg",
+      "image": true,
+      "slides": [
+        26
+      ]
+    },
+    {
+      "id": "asset-016",
+      "part": "ppt/media/image17.gif",
+      "sha256": "cceca45352daae135288d06a05d2f96bbfb1cc5b7828cf4147d5cac973023848",
+      "file": "media/asset-016.gif",
+      "image": true,
+      "slides": [
+        27
+      ]
+    },
+    {
+      "id": "asset-017",
+      "part": "ppt/media/image19.gif",
+      "sha256": "c1be74bb9f3df0fed9391f5fe60764f55cb9a0580239b4e832abab0f491b24ec",
+      "file": "media/asset-017.gif",
+      "image": true,
+      "slides": [
+        28
+      ]
+    },
+    {
+      "id": "asset-018",
+      "part": "ppt/media/image18.png",
+      "sha256": "51bcb2896ad582f101d82ddc0b2dbf848c307f00fd67e9eae75ad3ca5c183a26",
+      "file": "media/asset-018.png",
+      "image": true,
+      "slides": [
+        28
+      ]
+    },
+    {
+      "id": "asset-019",
+      "part": "ppt/media/image20.gif",
+      "sha256": "2608c84c0aca50b33517a61ae34b7b983656bbb7f0a1f0fbdb1ed7df0fa4e115",
+      "file": "media/asset-019.gif",
+      "image": true,
+      "slides": [
+        29
+      ]
+    },
+    {
+      "id": "asset-020",
+      "part": "ppt/media/image22.png",
+      "sha256": "6faf6053eb5700b4aef15392af45aaf7a6c304fafae0aaff178d9cc28ee023d4",
+      "file": "media/asset-020.png",
+      "image": true,
+      "slides": [
+        30
+      ]
+    },
+    {
+      "id": "asset-021",
+      "part": "ppt/media/image21.png",
+      "sha256": "3b2914d720e83f402718837a8c5d7c02a68b3ce3bea4efeee7d4bcee141eac96",
+      "file": "media/asset-021.png",
+      "image": true,
+      "slides": [
+        30
+      ]
+    },
+    {
+      "id": "asset-022",
+      "part": "ppt/media/image23.jpeg",
+      "sha256": "bb1d7748688037591a704789fe37d5dadfc20313f2f39305386de2b3028bb4d0",
+      "file": "media/asset-022.jpeg",
+      "image": true,
+      "slides": [
+        34
+      ]
+    },
+    {
+      "id": "asset-023",
+      "part": "ppt/media/image24.gif",
+      "sha256": "f0bb64a0cc0a24b00dc3ccd1721453d5b1b40641d8167e27b98c70ee719148d5",
+      "file": "media/asset-023.gif",
+      "image": true,
+      "slides": [
+        35
+      ]
+    },
+    {
+      "id": "asset-024",
+      "part": "ppt/media/image26.jpeg",
+      "sha256": "b9f8165cd60764bdbc906733acc51e50513dbb25ec76bb8ca73e6176ef51462d",
+      "file": "media/asset-024.jpeg",
+      "image": true,
+      "slides": [
+        36,
+        37
+      ]
+    },
+    {
+      "id": "asset-025",
+      "part": "ppt/media/image25.png",
+      "sha256": "9585d97110d348fd6f8f6174083e5a6fe355463f5f7a1970a7f6f79e166d8d5d",
+      "file": "media/asset-025.png",
+      "image": true,
+      "slides": [
+        36
+      ]
+    },
+    {
+      "id": "asset-026",
+      "part": "ppt/media/image27.png",
+      "sha256": "d6bbcf2bf5c018b62fe1d93ac90cde560770e69f1a43c354d722d954bffd38fe",
+      "file": "media/asset-026.png",
+      "image": true,
+      "slides": [
+        38
+      ]
+    },
+    {
+      "id": "asset-027",
+      "part": "ppt/media/image29.png",
+      "sha256": "bfa0c98caa03a3116795803067f107a6cb2ccfb28f517a094ffa988a206c1e1d",
+      "file": "media/asset-027.png",
+      "image": true,
+      "slides": [
+        39
+      ]
+    },
+    {
+      "id": "asset-028",
+      "part": "ppt/media/image28.png",
+      "sha256": "659805a68652efc473c1cce9822fcdf97a383331d21cdcc783ee62942342f547",
+      "file": "media/asset-028.png",
+      "image": true,
+      "slides": [
+        39
+      ]
+    },
+    {
+      "id": "asset-029",
+      "part": "ppt/media/image30.png",
+      "sha256": "abd06712cbd0b767ce9de3fdd08b75c81465435e14ee85acecd4340ae1772570",
+      "file": "media/asset-029.png",
+      "image": true,
+      "slides": [
+        39
+      ]
+    },
+    {
+      "id": "asset-030",
+      "part": "ppt/media/image32.gif",
+      "sha256": "8124e41649dcdd0b2d1dd634b6f059cdd1761e1fd27240fc9910a802699b9c8f",
+      "file": "media/asset-030.gif",
+      "image": true,
+      "slides": [
+        40
+      ]
+    },
+    {
+      "id": "asset-031",
+      "part": "ppt/media/image31.png",
+      "sha256": "573d9e3b587fc84297a99fcac8fba834450d5bbcd6b45e2dd5cd95120e8c7a18",
+      "file": "media/asset-031.png",
+      "image": true,
+      "slides": [
+        40
+      ]
+    },
+    {
+      "id": "asset-032",
+      "part": "ppt/media/image34.png",
+      "sha256": "f70ebae94d72e1deb1b8e7b7922fc515671021ef7c5545f825fcd5a2940ec926",
+      "file": "media/asset-032.png",
+      "image": true,
+      "slides": [
+        41
+      ]
+    },
+    {
+      "id": "asset-033",
+      "part": "ppt/media/image33.png",
+      "sha256": "7561f6a9e2db48292bfb1712347b89d458abdb9139f6844b089f76ceb1ffad17",
+      "file": "media/asset-033.png",
+      "image": true,
+      "slides": [
+        41
+      ]
+    },
+    {
+      "id": "asset-034",
+      "part": "ppt/media/image36.png",
+      "sha256": "2dec013a7c7fec09cac1e8e4cc91ffd9e986ee66bd05ba87f27b15af803efdb3",
+      "file": "media/asset-034.png",
+      "image": true,
+      "slides": [
+        42,
+        43,
+        99
+      ]
+    },
+    {
+      "id": "asset-035",
+      "part": "ppt/media/image35.png",
+      "sha256": "43ad54b7106318c554fbbf69a70b22ba7460432e035b7d8a7122b6e74083dc04",
+      "file": "media/asset-035.png",
+      "image": true,
+      "slides": [
+        42
+      ]
+    },
+    {
+      "id": "asset-036",
+      "part": "ppt/media/image37.png",
+      "sha256": "6c4ca597e2edf228e104a0195afc9656d1da87e467360da1050614aa3278fddd",
+      "file": "media/asset-036.png",
+      "image": true,
+      "slides": [
+        43
+      ]
+    },
+    {
+      "id": "asset-037",
+      "part": "ppt/media/image38.png",
+      "sha256": "102f0b0753d5fba81841d93bf1493d2c10a99913f0f0f64ca16c8f2873d83ac7",
+      "file": "media/asset-037.png",
+      "image": true,
+      "slides": [
+        44
+      ]
+    },
+    {
+      "id": "asset-038",
+      "part": "ppt/media/image39.jpeg",
+      "sha256": "614c25d30caf954dd5501a005b06eaaf3dbf8801da3c3f1b06c49166b4db92a1",
+      "file": "media/asset-038.jpeg",
+      "image": true,
+      "slides": [
+        44
+      ]
+    },
+    {
+      "id": "asset-039",
+      "part": "ppt/media/image40.gif",
+      "sha256": "7a709d0b83295f37312664e7424309532c4d2a84b2ae84fbd7ddc203f67bc5a1",
+      "file": "media/asset-039.gif",
+      "image": true,
+      "slides": [
+        46
+      ]
+    },
+    {
+      "id": "asset-040",
+      "part": "ppt/media/image42.jpeg",
+      "sha256": "135ace1abe91b85cb7db08ce5609595c157f66b0d4a125ef15234178c69a1401",
+      "file": "media/asset-040.jpeg",
+      "image": true,
+      "slides": [
+        47
+      ]
+    },
+    {
+      "id": "asset-041",
+      "part": "ppt/media/image41.gif",
+      "sha256": "5eeaa9e7a81b17dae28ee039b495ed48523472af3d134a144effc24872c11515",
+      "file": "media/asset-041.gif",
+      "image": true,
+      "slides": [
+        47,
+        48,
+        49
+      ]
+    },
+    {
+      "id": "asset-042",
+      "part": "ppt/media/image43.jpeg",
+      "sha256": "023db1fdd3bdeb478a884411e6e3162c43a09f8c3e4e299a82ece7b5d1f6aaed",
+      "file": "media/asset-042.jpeg",
+      "image": true,
+      "slides": [
+        49
+      ]
+    },
+    {
+      "id": "asset-043",
+      "part": "ppt/media/image44.png",
+      "sha256": "46de1f2bbad4d5fe3a1f45be6edf0217d8347afe639a85b193c67312e0fa802b",
+      "file": "media/asset-043.png",
+      "image": true,
+      "slides": [
+        50
+      ]
+    },
+    {
+      "id": "asset-044",
+      "part": "ppt/media/image45.png",
+      "sha256": "a4d4efcef44b6dadbb010ec6271761589201330c2c8a70bb2e4dcc25eb9efdc9",
+      "file": "media/asset-044.png",
+      "image": true,
+      "slides": [
+        51
+      ]
+    },
+    {
+      "id": "asset-045",
+      "part": "ppt/media/image46.png",
+      "sha256": "a303742aa2ea7845bb4c809bb1824495549998de6fcd404521e997d0ec0bae0d",
+      "file": "media/asset-045.png",
+      "image": true,
+      "slides": [
+        52
+      ]
+    },
+    {
+      "id": "asset-046",
+      "part": "ppt/media/image48.gif",
+      "sha256": "62071e5d72c5785ad16a0dcd8a647b440545ab27b5ef916b6556b85bccecaa03",
+      "file": "media/asset-046.gif",
+      "image": true,
+      "slides": [
+        53
+      ]
+    },
+    {
+      "id": "asset-047",
+      "part": "ppt/media/image47.png",
+      "sha256": "9c4ff009bf4f874c01bbca5b0e81485401686ae52a530c87769860536defddfb",
+      "file": "media/asset-047.png",
+      "image": true,
+      "slides": [
+        53
+      ]
+    },
+    {
+      "id": "asset-048",
+      "part": "ppt/media/image49.gif",
+      "sha256": "056b76acfc6a6c47cf86deacb37a461e2c0a575f4f8baed89be70a663756af1a",
+      "file": "media/asset-048.gif",
+      "image": true,
+      "slides": [
+        54
+      ]
+    },
+    {
+      "id": "asset-049",
+      "part": "ppt/media/image50.png",
+      "sha256": "c3da0696112ac4b089acf2ae0e48a46f15289a4aa09848ea99bae2ee40c18c56",
+      "file": "media/asset-049.png",
+      "image": true,
+      "slides": [
+        55
+      ]
+    },
+    {
+      "id": "asset-050",
+      "part": "ppt/media/image51.gif",
+      "sha256": "048d99f02dea68171459ed4dec9848be58808669a4f2633fdc8a6abb19e9eda5",
+      "file": "media/asset-050.gif",
+      "image": true,
+      "slides": [
+        56
+      ]
+    },
+    {
+      "id": "asset-051",
+      "part": "ppt/media/image52.png",
+      "sha256": "3b02ee26ac120a4a7c63506cb9e967785e8f7a88c456ada2656c74156603de00",
+      "file": "media/asset-051.png",
+      "image": true,
+      "slides": [
+        57
+      ]
+    },
+    {
+      "id": "asset-052",
+      "part": "ppt/media/image54.png",
+      "sha256": "bffb9b260de7c08aecfac3bf6b4188ec9c26a544dc5a7883fec3a90cc68f126a",
+      "file": "media/asset-052.png",
+      "image": true,
+      "slides": [
+        57
+      ]
+    },
+    {
+      "id": "asset-053",
+      "part": "ppt/media/image53.png",
+      "sha256": "03d22ead8f70bcd83a0626adb66e28ed9bf2d2639b4589a17b92291ff97a6eff",
+      "file": "media/asset-053.png",
+      "image": true,
+      "slides": [
+        57
+      ]
+    },
+    {
+      "id": "asset-054",
+      "part": "ppt/media/image55.jpg",
+      "sha256": "a460bc6b17d32f41276eddd4dfc0a756ac0db93beceed6e5380250b3a4aac425",
+      "file": "media/asset-054.jpg",
+      "image": true,
+      "slides": [
+        58
+      ]
+    },
+    {
+      "id": "asset-055",
+      "part": "ppt/media/image57.png",
+      "sha256": "56e9127c3d2b4a0c52bfbb441ebd517c6784a5124a2cfdfeb771a06418d28835",
+      "file": "media/asset-055.png",
+      "image": true,
+      "slides": [
+        59
+      ]
+    },
+    {
+      "id": "asset-056",
+      "part": "ppt/media/image56.png",
+      "sha256": "069d24363124016a6e761c1d0ebaf8ab5264b0f2e86ba2a71a1a19231310b5b2",
+      "file": "media/asset-056.png",
+      "image": true,
+      "slides": [
+        59
+      ]
+    },
+    {
+      "id": "asset-057",
+      "part": "ppt/media/image58.jpeg",
+      "sha256": "4faff8f6401427fc33394b4f35611d4e8d78073162b74f93079807d201fc1c5c",
+      "file": "media/asset-057.jpeg",
+      "image": true,
+      "slides": [
+        60
+      ]
+    },
+    {
+      "id": "asset-058",
+      "part": "ppt/media/image59.jpeg",
+      "sha256": "d85aec12eff84b674c754bcbd6166c53c1fec9bf9941f15a98a74f5d4326f433",
+      "file": "media/asset-058.jpeg",
+      "image": true,
+      "slides": [
+        62,
+        63
+      ]
+    },
+    {
+      "id": "asset-059",
+      "part": "ppt/media/image61.gif",
+      "sha256": "84086b8f1fa84d4a2e09aa83649ea536774707ba9b1578e88e57c9c84668b306",
+      "file": "media/asset-059.gif",
+      "image": true,
+      "slides": [
+        62
+      ]
+    },
+    {
+      "id": "asset-060",
+      "part": "ppt/media/image60.png",
+      "sha256": "99e7798dc143746ab8363d4333b84afbc253abe80bcd887f2741391da5fc649f",
+      "file": "media/asset-060.png",
+      "image": true,
+      "slides": [
+        62
+      ]
+    },
+    {
+      "id": "asset-061",
+      "part": "ppt/media/image62.png",
+      "sha256": "21494add90e77f5b6194a3bef3c98d79810a515d0738555a4c4f9e35598644e1",
+      "file": "media/asset-061.png",
+      "image": true,
+      "slides": [
+        64,
+        65,
+        66
+      ]
+    },
+    {
+      "id": "asset-062",
+      "part": "ppt/media/image64.png",
+      "sha256": "c4322377bdb95760364b736b4e7fe03820ccc813f6302184089c1b388c96392f",
+      "file": "media/asset-062.png",
+      "image": true,
+      "slides": [
+        64,
+        65
+      ]
+    },
+    {
+      "id": "asset-063",
+      "part": "ppt/media/image63.png",
+      "sha256": "28ae6309fa50a4392eef8ff7d7d3bf1af5e93cab23dfac29ef6e8661e92595b0",
+      "file": "media/asset-063.png",
+      "image": true,
+      "slides": [
+        64,
+        65,
+        66
+      ]
+    },
+    {
+      "id": "asset-064",
+      "part": "ppt/media/image65.png",
+      "sha256": "de77a9f63374302f5596a7aea040ea7ad08e0673f7562cf2b8c291b3b8b50d1a",
+      "file": "media/asset-064.png",
+      "image": true,
+      "slides": [
+        67
+      ]
+    },
+    {
+      "id": "asset-065",
+      "part": "ppt/media/image66.png",
+      "sha256": "50419082501469aba3db434c550effe6acae0c3300213d5bb5f288d13cde9ad9",
+      "file": "media/asset-065.png",
+      "image": true,
+      "slides": [
+        67
+      ]
+    },
+    {
+      "id": "asset-066",
+      "part": "ppt/media/image67.png",
+      "sha256": "e9e3e397eab10cab67f3a4092000889a7e91c2834277ba78e3b4275225524924",
+      "file": "media/asset-066.png",
+      "image": true,
+      "slides": [
+        68
+      ]
+    },
+    {
+      "id": "asset-067",
+      "part": "ppt/media/image68.gif",
+      "sha256": "856339c1efe26d054720a50235d5f6b886fb1740448a22e37f1d7a03adeb1827",
+      "file": "media/asset-067.gif",
+      "image": true,
+      "slides": [
+        69
+      ]
+    },
+    {
+      "id": "asset-068",
+      "part": "ppt/media/image74.png",
+      "sha256": "a8f73c59780b22259e23b1109b8a0fef41b078db89689dd517090359affaa30b",
+      "file": "media/asset-068.png",
+      "image": true,
+      "slides": [
+        70
+      ]
+    },
+    {
+      "id": "asset-069",
+      "part": "ppt/media/image69.png",
+      "sha256": "59933a114709d3aa197006c646cef3b12afed5e2f430853cd06813f38db44d76",
+      "file": "media/asset-069.png",
+      "image": true,
+      "slides": [
+        70
+      ]
+    },
+    {
+      "id": "asset-070",
+      "part": "ppt/media/image73.png",
+      "sha256": "80394cf25e4a9bd95aa114d7fa3df152dc2476ee2f6982d48704591712c4ead0",
+      "file": "media/asset-070.png",
+      "image": true,
+      "slides": [
+        70
+      ]
+    },
+    {
+      "id": "asset-071",
+      "part": "ppt/media/image72.png",
+      "sha256": "bd50831f4125d70336a87f63d899b6b16657e79f1a67942c6aff6a478439ebeb",
+      "file": "media/asset-071.png",
+      "image": true,
+      "slides": [
+        70
+      ]
+    },
+    {
+      "id": "asset-072",
+      "part": "ppt/media/image71.png",
+      "sha256": "0989d3e84712ae6c707f5031515156d44ce90bf7331922bd21be55631fdf8fe8",
+      "file": "media/asset-072.png",
+      "image": true,
+      "slides": [
+        70
+      ]
+    },
+    {
+      "id": "asset-073",
+      "part": "ppt/media/image76.gif",
+      "sha256": "9f6c00e726a715b2ed0c2d77866d5d023ba95e58d059a49b47a58ed2bd9794ef",
+      "file": "media/asset-073.gif",
+      "image": true,
+      "slides": [
+        70
+      ]
+    },
+    {
+      "id": "asset-074",
+      "part": "ppt/media/image70.png",
+      "sha256": "83c366e0d86244dcdfdada5ebefb51c6a5cb727ad62dbc8028d5d219c00e9d16",
+      "file": "media/asset-074.png",
+      "image": true,
+      "slides": [
+        70
+      ]
+    },
+    {
+      "id": "asset-075",
+      "part": "ppt/media/image75.png",
+      "sha256": "12eddd4e035324aee6748933e841c46754c728f61355c63aeea1aed491d13ab3",
+      "file": "media/asset-075.png",
+      "image": true,
+      "slides": [
+        70,
+        71,
+        72
+      ]
+    },
+    {
+      "id": "asset-076",
+      "part": "ppt/media/image77.png",
+      "sha256": "944ae0282c05cb86f064dc86598bf47600881ff37f9985a6f300a6fbac604c56",
+      "file": "media/asset-076.png",
+      "image": true,
+      "slides": [
+        71,
+        72
+      ]
+    },
+    {
+      "id": "asset-077",
+      "part": "ppt/media/image78.gif",
+      "sha256": "37df888e997295cb4f6e932ad3ea3efe28bc3be9f6d46ea7fc34b9b160249eef",
+      "file": "media/asset-077.gif",
+      "image": true,
+      "slides": [
+        75
+      ]
+    },
+    {
+      "id": "asset-078",
+      "part": "ppt/media/image79.gif",
+      "sha256": "6a371e31adf7eb59b0ef87175aad68a9ee898e77e8560b395db8569f3d53cfb2",
+      "file": "media/asset-078.gif",
+      "image": true,
+      "slides": [
+        78
+      ]
+    },
+    {
+      "id": "asset-079",
+      "part": "ppt/media/image80.gif",
+      "sha256": "7e3d857afc42c676e3d8762ca1b55a38239a4faf59ee99bab23caa1bce40e40c",
+      "file": "media/asset-079.gif",
+      "image": true,
+      "slides": [
+        80
+      ]
+    },
+    {
+      "id": "asset-080",
+      "part": "ppt/media/image81.gif",
+      "sha256": "8fa5a5a8ffec71adbb5b4e9e3104db9fbab028b04cac8e1cc84625a7c629bee5",
+      "file": "media/asset-080.gif",
+      "image": true,
+      "slides": [
+        91
+      ]
+    },
+    {
+      "id": "asset-081",
+      "part": "ppt/media/image82.png",
+      "sha256": "9c9ba4f95814f08168a8ed4dafcaf2532ddf9b75111281e9d84e93bf940820eb",
+      "file": "media/asset-081.png",
+      "image": true,
+      "slides": [
+        94
+      ]
+    },
+    {
+      "id": "asset-082",
+      "part": "ppt/media/image83.png",
+      "sha256": "f5b924caa62b9faeabbe634520d71a054b40eb50cddc5027a4ca5d94f0d639ac",
+      "file": "media/asset-082.png",
+      "image": true,
+      "slides": [
+        99
+      ]
+    },
+    {
+      "id": "asset-083",
+      "part": "ppt/media/image84.png",
+      "sha256": "58ab98a1d26072c898e104669b00185d8ff64ef1cd609d7ce86a927270d711cf",
+      "file": "media/asset-083.png",
+      "image": true,
+      "slides": [
+        100,
+        102
+      ]
+    },
+    {
+      "id": "asset-084",
+      "part": "ppt/media/image85.png",
+      "sha256": "1190ba3a7b956a35281ec9df640fa2d5cd095411ae3a55cc7f67584cecb44194",
+      "file": "media/asset-084.png",
+      "image": true,
+      "slides": [
+        100
+      ]
+    },
+    {
+      "id": "asset-085",
+      "part": "ppt/media/image86.gif",
+      "sha256": "b7d4b598c063bf95606e5fc323181cdd228601082ac956aaf2593496f32ead2e",
+      "file": "media/asset-085.gif",
+      "image": true,
+      "slides": [
+        101
+      ]
+    },
+    {
+      "id": "asset-086",
+      "part": "ppt/media/image87.png",
+      "sha256": "08a616fde9dd3688d54b0b6cfe2ef29a3fcc11cd4eb1f1ba07b43b499c89c5b1",
+      "file": "media/asset-086.png",
+      "image": true,
+      "slides": [
+        102
+      ]
+    },
+    {
+      "id": "asset-087",
+      "part": "ppt/media/image88.png",
+      "sha256": "9139bcfdbdf79e090d2e8944a4940b385240ba28192b1c91c7ddd802746f364a",
+      "file": "media/asset-087.png",
+      "image": true,
+      "slides": [
+        106
+      ]
+    },
+    {
+      "id": "asset-088",
+      "part": "ppt/media/image89.gif",
+      "sha256": "2e97838d280a19623c234f40fb8f055f03201902d904a8eb91814db8b22f021a",
+      "file": "media/asset-088.gif",
+      "image": true,
+      "slides": [
+        106
+      ]
+    }
+  ],
+  "limits": "XML text, notes, chart caches and embedded media; no layout rendering, OCR, playback or linked-content retrieval.",
+  "previews": {
+    "status": "generated",
+    "files": [
+      "images-01.jpg",
+      "images-02.jpg",
+      "images-03.jpg",
+      "images-04.jpg",
+      "images-05.jpg",
+      "images-06.jpg",
+      "images-07.jpg",
+      "images-08.jpg",
+      "images-09.jpg",
+      "images-10.jpg",
+      "images-11.jpg"
+    ],
+    "failures": []
+  }
+}

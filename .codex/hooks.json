@@ -1,0 +1,41 @@
+{
+  "description": "Local MedShield Obsidian checkpoints. Captures identifiers and lifecycle only; the agent supplies sanitized summaries. Review and trust through /hooks before activation.",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -X utf8 -c \"import json,pathlib,runpy,subprocess; r=subprocess.run(['git','rev-parse','--show-toplevel'],capture_output=True,text=True); p=pathlib.Path(r.stdout.strip())/'.agents/scripts/project_memory_hook.py'; runpy.run_path(str(p),run_name='__main__') if r.returncode==0 and p.is_file() else print(json.dumps({'systemMessage':'MedShield memory capture unavailable: repository helper was not found.'}))\"",
+            "commandWindows": "python -X utf8 -c \"import json,pathlib,runpy,subprocess; r=subprocess.run(['git','rev-parse','--show-toplevel'],capture_output=True,text=True); p=pathlib.Path(r.stdout.strip())/'.agents/scripts/project_memory_hook.py'; runpy.run_path(str(p),run_name='__main__') if r.returncode==0 and p.is_file() else print(json.dumps({'systemMessage':'MedShield memory capture unavailable: repository helper was not found.'}))\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -X utf8 -c \"import json,pathlib,runpy,subprocess; r=subprocess.run(['git','rev-parse','--show-toplevel'],capture_output=True,text=True); p=pathlib.Path(r.stdout.strip())/'.agents/scripts/project_memory_hook.py'; runpy.run_path(str(p),run_name='__main__') if r.returncode==0 and p.is_file() else print(json.dumps({'systemMessage':'MedShield memory capture unavailable: repository helper was not found.'}))\"",
+            "commandWindows": "python -X utf8 -c \"import json,pathlib,runpy,subprocess; r=subprocess.run(['git','rev-parse','--show-toplevel'],capture_output=True,text=True); p=pathlib.Path(r.stdout.strip())/'.agents/scripts/project_memory_hook.py'; runpy.run_path(str(p),run_name='__main__') if r.returncode==0 and p.is_file() else print(json.dumps({'systemMessage':'MedShield memory capture unavailable: repository helper was not found.'}))\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Interrupt": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -X utf8 -c \"import json,pathlib,runpy,subprocess; r=subprocess.run(['git','rev-parse','--show-toplevel'],capture_output=True,text=True); p=pathlib.Path(r.stdout.strip())/'.agents/scripts/project_memory_hook.py'; runpy.run_path(str(p),run_name='__main__') if r.returncode==0 and p.is_file() else print(json.dumps({'systemMessage':'MedShield memory capture unavailable: repository helper was not found.'}))\"",
+            "commandWindows": "python -X utf8 -c \"import json,pathlib,runpy,subprocess; r=subprocess.run(['git','rev-parse','--show-toplevel'],capture_output=True,text=True); p=pathlib.Path(r.stdout.strip())/'.agents/scripts/project_memory_hook.py'; runpy.run_path(str(p),run_name='__main__') if r.returncode==0 and p.is_file() else print(json.dumps({'systemMessage':'MedShield memory capture unavailable: repository helper was not found.'}))\"",
+            "timeout": 3
+          }
+        ]
+      }
+    ]
+  }
+}

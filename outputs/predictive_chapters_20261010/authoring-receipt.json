@@ -1,0 +1,43 @@
+{
+  "status": "authored_pending_separate_review_and_visual_qa",
+  "authored_at_utc": "2026-10-10T07:19:14.111395+00:00",
+  "timezone": "Asia/Manila",
+  "command": [
+    "C:\\Users\\Adrian\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "-X",
+    "utf8",
+    "outputs/predictive_chapters_20261010/build_chapters.py",
+    "--revise"
+  ],
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "builder_sha256": "3b344cf961d3b4ca9c80f7a3a35397d481be6fa6d9ef99a18b76f767d539e055",
+  "source_hashes": {
+    "outputs/predictive_error_policy_20261010/model-error-review.json": "de057ab8090715557dec3a308fac13034afbf7c2080369f599df2d09691f45bb",
+    "outputs/predictive_error_policy_20261010/policy.json": "55c93ca278c8fa9a19efaecdd8327836bc3d35662fe733eb36917125bb4d0fcb",
+    "outputs/predictive_explanation_20261010/scorecard.json": "8a0b0476e474870a38ec412ef2889585f450c9c46f3f357d58e8505b1c151dda",
+    "outputs/predictive_annual_release_20261010/models/annual-origin-2025-12-asof-2026-10-10/a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b/run.json": "e25c713bb7faee9cf9020f9064fdf016d18df3793131e1ab43bdfcd169d61b6d",
+    "outputs/predictive_completion_20261009/audit-comparison.png": "3fc101bdb70b0594641997207d21bb651245a72b491884d8f38a3b55fc5d7807"
+  },
+  "preserved_document_hashes": {
+    "docs/drafts/MedShield_Chapter_4_5_Draft.docx": "a33c80dca0397028b539d849f55631f9c28e967aa9285558cb1c1ffed166938c",
+    "docs/chapters/MedShield_Chapter_4_System_Implementation_Results_and_Discussion.docx": "a1723f0110cd4299e50143bfdd8650ee8889228eac93262f9230ffae923a0492"
+  },
+  "output_hashes": {
+    "docs/chapters/MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.md": "1d2d0d4dbee76465c6b3bf9a8049319bad3d37a9f932319eb968e98098a38446",
+    "docs/chapters/MedShield_Predictive_Chapter_4_5_Research_Draft_20261010.docx": "eb92d197c4aae0df879db21f3bf2cedd40aebc05d9076cc0daf14636a2c3dcb3",
+    "outputs/predictive_chapters_20261010/manuscript.json": "79d215ce7ac8e79001e560ae6e2642ff1bec8e49d5955473e7798ce20897b1c2"
+  },
+  "model_count": 21,
+  "new_model_fits": 0,
+  "remote_mutations": 0,
+  "scope": "Predictive insert for wider Chapters 4 and 5 not completion of the whole manuscript or business acceptance",
+  "skills": [
+    ".agents/technical-writer.md",
+    ".skills/documentation-standards.md",
+    ".skills/analytics-frameworks.md",
+    ".skills/technology-stack.md",
+    ".skills/coding-standards.md",
+    ".skills/testing-standards.md",
+    "documents/SKILL.md"
+  ]
+}

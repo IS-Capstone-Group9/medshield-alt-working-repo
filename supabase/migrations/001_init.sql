@@ -130,6 +130,14 @@ begin
   end loop;
 end $$;
 
+drop view if exists public.vw_dashboard_monthly cascade;
+drop view if exists public.vw_dashboard_by_area cascade;
+drop view if exists public.vw_dashboard_top_products cascade;
+drop view if exists public.vw_dashboard_year_summary cascade;
+drop view if exists public.vw_dashboard_seasonality cascade;
+drop view if exists public.vw_dashboard_kpis cascade;
+drop view if exists public.vw_sales_with_dimensions cascade;
+
 create or replace view public.vw_dashboard_monthly as
 with latest_snapshot as (
   select max(snapshot_date_key) as snapshot_date_key

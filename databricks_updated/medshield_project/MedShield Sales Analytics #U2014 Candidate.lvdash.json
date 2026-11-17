@@ -1,0 +1,279 @@
+{
+  "datasets": [
+    {
+      "name": "4f2f0566",
+      "displayName": "Annual Business Sales and Margin Summary Dataset",
+      "queryLines": [
+        "-- 1. Executive KPIs — use as counter visualizations.\r\n",
+        "-- Population: all retained business-sales facts, including contracts and non-medical items.\r\n",
+        "SELECT\r\n",
+        "  SUM(transaction_count) AS retained_transaction_count,\r\n",
+        "  SUM(net_sales) AS net_sales,\r\n",
+        "  SUM(gross_margin_amount) AS gross_margin_amount,\r\n",
+        "  ROUND(\r\n",
+        "    100 * SUM(gross_margin_amount) / NULLIF(SUM(margin_net_sales_basis), 0),\r\n",
+        "    2\r\n",
+        "  ) AS weighted_gross_margin_pct,\r\n",
+        "  SUM(contract_label_transaction_count) AS contract_label_transaction_count,\r\n",
+        "  SUM(financial_review_transaction_count) AS financial_review_transaction_count\r\n",
+        "FROM workspace.medshield_gold.sales_restart_yearly_candidate;\r\n"
+      ]
+    },
+    {
+      "name": "6eca7d07",
+      "displayName": "Monthly Sales Performance and Margin Overview Dataset",
+      "queryLines": [
+        "-- 2. Monthly sales trend — line charts for net sales and gross margin; bars for transactions.\r\n",
+        "-- A missing observation stays NULL. Do not convert it to zero sales.\r\n",
+        "SELECT\r\n",
+        "  month_start,\r\n",
+        "  calendar_year,\r\n",
+        "  calendar_month,\r\n",
+        "  transaction_count,\r\n",
+        "  net_sales,\r\n",
+        "  gross_margin_amount,\r\n",
+        "  weighted_gross_margin_pct,\r\n",
+        "  observation_status,\r\n",
+        "  source_completeness_status\r\n",
+        "FROM workspace.medshield_gold.sales_restart_monthly_candidate\r\n",
+        "ORDER BY month_start;\r\n"
+      ]
+    },
+    {
+      "name": "81e567b8",
+      "displayName": "Sales Performance Overview by Year",
+      "queryLines": [
+        "-- 3. Yearly business-sales trend — bars or a table.\r\n",
+        "SELECT\r\n",
+        "  calendar_year,\r\n",
+        "  transaction_count,\r\n",
+        "  distinct_source_product_labels,\r\n",
+        "  signed_quantity,\r\n",
+        "  net_sales,\r\n",
+        "  gross_margin_amount,\r\n",
+        "  weighted_gross_margin_pct,\r\n",
+        "  observed_month_count,\r\n",
+        "  unobserved_month_count,\r\n",
+        "  source_completeness_status\r\n",
+        "FROM workspace.medshield_gold.sales_restart_yearly_candidate\r\n",
+        "ORDER BY calendar_year;\r\n"
+      ]
+    },
+    {
+      "name": "33468a5d",
+      "displayName": "Territory Performance Overview for Approved Areas",
+      "queryLines": [
+        "-- 4. Approved territory performance — horizontal bars and a detail table.\r\n",
+        "-- Population: only records whose area mapping is approved as geographic territory.\r\n",
+        "SELECT\r\n",
+        "  territory_id,\r\n",
+        "  territory,\r\n",
+        "  SUM(transaction_count) AS transaction_count,\r\n",
+        "  SUM(net_sales) AS net_sales,\r\n",
+        "  SUM(gross_margin_amount) AS gross_margin_amount,\r\n",
+        "  ROUND(\r\n",
+        "    100 * SUM(gross_margin_amount) / NULLIF(SUM(margin_net_sales_basis), 0),\r\n",
+        "    2\r\n",
+        "  ) AS weighted_gross_margin_pct,\r\n",
+        "  MIN(calendar_year) AS first_observed_year,\r\n",
+        "  MAX(calendar_year) AS last_observed_year\r\n",
+        "FROM workspace.medshield_gold.sales_restart_territory_yearly_candidate\r\n",
+        "GROUP BY territory_id, territory\r\n",
+        "ORDER BY net_sales DESC NULLS LAST;\r\n"
+      ]
+    },
+    {
+      "name": "83c2d77f",
+      "displayName": "Area Coverage Classification Summary Report",
+      "queryLines": [
+        "-- 5. Area-classification coverage — stacked bar or table.\r\n",
+        "-- This is the governance denominator for all 37,178 retained facts.\r\n",
+        "SELECT\r\n",
+        "  area_mapping_status,\r\n",
+        "  proposed_area_type,\r\n",
+        "  SUM(retained_record_count) AS retained_record_count,\r\n",
+        "  SUM(approved_territory_record_count) AS approved_territory_record_count,\r\n",
+        "  SUM(external_geography_candidate_count) AS external_geography_candidate_count,\r\n",
+        "  SUM(external_join_ready_count) AS external_join_ready_count,\r\n",
+        "  ROUND(\r\n",
+        "    100 * SUM(retained_record_count)\r\n",
+        "      / SUM(SUM(retained_record_count)) OVER (),\r\n",
+        "    2\r\n",
+        "  ) AS retained_record_share_pct\r\n",
+        "FROM workspace.medshield_audit.sales_restart_area_coverage_candidate\r\n",
+        "GROUP BY area_mapping_status, proposed_area_type\r\n",
+        "ORDER BY retained_record_count DESC;\r\n"
+      ]
+    },
+    {
+      "name": "23c8255d",
+      "displayName": "Product Demand Analysis Dashboard",
+      "queryLines": [
+        "-- 6. Product-scope composition — donut or horizontal bars.\r\n",
+        "-- Product master is pending, so this is classification status, not approved medical demand.\r\n",
+        "SELECT\r\n",
+        "  product_scope_status,\r\n",
+        "  transaction_count,\r\n",
+        "  distinct_source_product_labels,\r\n",
+        "  net_sales,\r\n",
+        "  gross_margin_amount,\r\n",
+        "  contract_label_transaction_count,\r\n",
+        "  provisional_product_demand_quantity,\r\n",
+        "  approved_medical_demand_quantity\r\n",
+        "FROM workspace.medshield_gold.sales_restart_label_partition_candidate\r\n",
+        "ORDER BY transaction_count DESC;\r\n"
+      ]
+    },
+    {
+      "name": "4e34db65",
+      "displayName": "Business Product Performance Overview",
+      "queryLines": [
+        "-- 7. Top business product labels — table or horizontal bars.\r\n",
+        "-- These are source labels, not necessarily canonical medicine SKUs.\r\n",
+        "SELECT\r\n",
+        "  normalized_product,\r\n",
+        "  product_scope_status,\r\n",
+        "  SUM(transaction_count) AS transaction_count,\r\n",
+        "  SUM(net_sales) AS net_sales,\r\n",
+        "  SUM(gross_margin_amount) AS gross_margin_amount,\r\n",
+        "  ROUND(\r\n",
+        "    100 * SUM(gross_margin_amount) / NULLIF(SUM(margin_net_sales_basis), 0),\r\n",
+        "    2\r\n",
+        "  ) AS weighted_gross_margin_pct\r\n",
+        "FROM workspace.medshield_gold.sales_restart_business_product_yearly_candidate\r\n",
+        "GROUP BY normalized_product, product_scope_status\r\n",
+        "ORDER BY net_sales DESC NULLS LAST\r\n",
+        "LIMIT 20;\r\n"
+      ]
+    },
+    {
+      "name": "3f122037",
+      "displayName": "Quality Rule Impact Assessment Report",
+      "queryLines": [
+        "-- 8. Data-quality review — table sorted by affected records.\r\n",
+        "SELECT\r\n",
+        "  quality_rule_code,\r\n",
+        "  SUM(affected_source_records) AS affected_source_records,\r\n",
+        "  COUNT(DISTINCT data_source_year) AS affected_source_years\r\n",
+        "FROM workspace.medshield_audit.sales_restart_gold_quality_candidate\r\n",
+        "GROUP BY quality_rule_code\r\n",
+        "ORDER BY affected_source_records DESC;\r\n"
+      ]
+    },
+    {
+      "name": "287c27c8",
+      "displayName": "Source Year Disposition Analysis Overview",
+      "queryLines": [
+        "-- 9. Source disposition — stacked bars by source year and disposition.\r\n",
+        "SELECT\r\n",
+        "  data_source_year,\r\n",
+        "  record_kind,\r\n",
+        "  disposition,\r\n",
+        "  is_analysis_candidate,\r\n",
+        "  source_record_count\r\n",
+        "FROM workspace.medshield_audit.sales_restart_gold_disposition_candidate\r\n",
+        "ORDER BY data_source_year, is_analysis_candidate DESC, source_record_count DESC;\r\n",
+        "\r\n"
+      ]
+    },
+    {
+      "name": "5c3f3903",
+      "displayName": "Yearly Sales Performance and Quality Metrics",
+      "queryLines": [
+        "SELECT\r\n",
+        "  calendar_year,\r\n",
+        "  first_delivery_date,\r\n",
+        "  last_delivery_date,\r\n",
+        "  calendar_month_count,\r\n",
+        "  active_month_count,\r\n",
+        "  zero_activity_month_count,\r\n",
+        "  month_activity_status,\r\n",
+        "  transaction_count,\r\n",
+        "  distinct_dr_count,\r\n",
+        "  distinct_area_count,\r\n",
+        "  distinct_product_count,\r\n",
+        "  warning_transaction_count,\r\n",
+        "  fully_eligible_transaction_count,\r\n",
+        "  partially_eligible_transaction_count,\r\n",
+        "  dimension_only_transaction_count,\r\n",
+        "  source_year_mismatch_count,\r\n",
+        "  negative_quantity_review_count,\r\n",
+        "  financial_formula_warning_count,\r\n",
+        "  quantity_eligible_transaction_count,\r\n",
+        "  gross_sales_eligible_transaction_count,\r\n",
+        "  net_sales_eligible_transaction_count,\r\n",
+        "  transfer_value_eligible_transaction_count,\r\n",
+        "  gross_margin_eligible_transaction_count,\r\n",
+        "  total_quantity_candidate,\r\n",
+        "  gross_sales_candidate,\r\n",
+        "  net_sales_candidate,\r\n",
+        "  transfer_value_candidate,\r\n",
+        "  gross_margin_candidate,\r\n",
+        "  weighted_gross_margin_pct_candidate,\r\n",
+        "  warning_transaction_rate,\r\n",
+        "  fully_eligible_transaction_rate,\r\n",
+        "  quantity_coverage_rate,\r\n",
+        "  net_sales_coverage_rate,\r\n",
+        "  gross_margin_coverage_rate,\r\n",
+        "  previous_calendar_year,\r\n",
+        "  previous_transaction_count,\r\n",
+        "  previous_total_quantity_candidate,\r\n",
+        "  previous_gross_sales_candidate,\r\n",
+        "  previous_net_sales_candidate,\r\n",
+        "  previous_gross_margin_candidate,\r\n",
+        "  transaction_count_yoy_pct,\r\n",
+        "  quantity_yoy_pct_candidate,\r\n",
+        "  gross_sales_yoy_pct_candidate,\r\n",
+        "  net_sales_yoy_pct_candidate,\r\n",
+        "  gross_margin_yoy_pct_candidate,\r\n",
+        "  yoy_comparison_status,\r\n",
+        "  financial_definition_status\r\n",
+        "FROM\r\n",
+        "  workspace.medshield_gold.vw_dashboard_yearly_sales_candidate\r\n",
+        "ORDER BY\r\n",
+        "  calendar_year"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "0b137296",
+      "displayName": "Untitled page",
+      "layout": [
+        {
+          "widget": {
+            "name": "ea802127",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "4f2f0566",
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {}
+            }
+          },
+          "position": {
+            "x": 2,
+            "y": 0,
+            "width": 6,
+            "height": 5
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}

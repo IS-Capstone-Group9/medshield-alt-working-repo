@@ -1,0 +1,348 @@
+{
+ "rules_sha256": "88f353fe00072de43d242e81a8ede8555d176d13b535c53e0bfe11c628f27588",
+ "large_documents": 267,
+ "A_frequency": {
+  "2017": {
+   "months_recorded": 7,
+   "months_with_large": 0,
+   "documents": 0,
+   "large_net": 0,
+   "large_share": 0.0
+  },
+  "2018": {
+   "months_recorded": 10,
+   "months_with_large": 7,
+   "documents": 13,
+   "large_net": 8333320,
+   "large_share": 0.161
+  },
+  "2019": {
+   "months_recorded": 9,
+   "months_with_large": 9,
+   "documents": 23,
+   "large_net": 17601748,
+   "large_share": 0.281
+  },
+  "2020": {
+   "months_recorded": 12,
+   "months_with_large": 8,
+   "documents": 27,
+   "large_net": 20746884,
+   "large_share": 0.391
+  },
+  "2021": {
+   "months_recorded": 12,
+   "months_with_large": 9,
+   "documents": 34,
+   "large_net": 31923639,
+   "large_share": 0.41
+  },
+  "2022": {
+   "months_recorded": 12,
+   "months_with_large": 8,
+   "documents": 23,
+   "large_net": 18854666,
+   "large_share": 0.298
+  },
+  "2023": {
+   "months_recorded": 12,
+   "months_with_large": 6,
+   "documents": 19,
+   "large_net": 23015053,
+   "large_share": 0.37
+  },
+  "2024": {
+   "months_recorded": 12,
+   "months_with_large": 3,
+   "documents": 5,
+   "large_net": 6757289,
+   "large_share": 0.237
+  },
+  "2025": {
+   "months_recorded": 12,
+   "months_with_large": 11,
+   "documents": 49,
+   "large_net": 43457542,
+   "large_share": 0.491
+  },
+  "2026": {
+   "months_recorded": 9,
+   "months_with_large": 9,
+   "documents": 74,
+   "large_net": 84369776,
+   "large_share": 0.602
+  }
+ },
+ "B_size": {
+  "document_all": {
+   "n": 267,
+   "p50": 803889,
+   "p75": 1046371,
+   "p90": 1511716,
+   "max": 4888500
+  },
+  "document_2020_26": {
+   "n": 231,
+   "p50": 845745,
+   "p75": 1072249,
+   "p90": 1563547,
+   "max": 4888500
+  },
+  "monthly_total_when_any_2020_26": {
+   "n": 54,
+   "p10": 799619,
+   "p50": 3015926,
+   "p90": 8984718
+  },
+  "documents_per_month_when_any_2020_26": {
+   "p50": 3,
+   "max": 13
+  }
+ },
+ "C_timing": {
+  "p_value": 0.1342,
+  "calendar_timing_real": false,
+  "by_calendar_month": {
+   "1": {
+    "mean_large_net": 1230811,
+    "share_months_with_large": 0.86
+   },
+   "2": {
+    "mean_large_net": 4443807,
+    "share_months_with_large": 0.86
+   },
+   "3": {
+    "mean_large_net": 1235094,
+    "share_months_with_large": 0.43
+   },
+   "4": {
+    "mean_large_net": 3141650,
+    "share_months_with_large": 0.57
+   },
+   "5": {
+    "mean_large_net": 3958053,
+    "share_months_with_large": 0.57
+   },
+   "6": {
+    "mean_large_net": 4725001,
+    "share_months_with_large": 1.0
+   },
+   "7": {
+    "mean_large_net": 2949437,
+    "share_months_with_large": 0.43
+   },
+   "8": {
+    "mean_large_net": 2454569,
+    "share_months_with_large": 0.57
+   },
+   "9": {
+    "mean_large_net": 4417338,
+    "share_months_with_large": 0.71
+   },
+   "10": {
+    "mean_large_net": 2338289,
+    "share_months_with_large": 0.67
+   },
+   "11": {
+    "mean_large_net": 1297136,
+    "share_months_with_large": 0.67
+   },
+   "12": {
+    "mean_large_net": 1236997,
+    "share_months_with_large": 0.67
+   }
+  }
+ },
+ "D_content": {
+  "families_in_large_orders": 1001,
+  "top10": [
+   {
+    "family": "SPEEDA",
+    "net": 14297610,
+    "share": 0.056
+   },
+   {
+    "family": "SHARJVAX",
+    "net": 11865185,
+    "share": 0.047
+   },
+   {
+    "family": "SEROALBUMIN",
+    "net": 8634183,
+    "share": 0.034
+   },
+   {
+    "family": "PROFUREX",
+    "net": 7926240,
+    "share": 0.031
+   },
+   {
+    "family": "MONOWEL",
+    "net": 7555723,
+    "share": 0.03
+   },
+   {
+    "family": "ZINACARE",
+    "net": 5138861,
+    "share": 0.02
+   },
+   {
+    "family": "HYCLENS WOUND CARE",
+    "net": 5123440,
+    "share": 0.02
+   },
+   {
+    "family": "BUPIRIGHT",
+    "net": 4497553,
+    "share": 0.018
+   },
+   {
+    "family": "LOMOH",
+    "net": 4234307,
+    "share": 0.017
+   },
+   {
+    "family": "JUBI R",
+    "net": 3375000,
+    "share": 0.013
+   }
+  ],
+  "top10_share": 0.285,
+  "repeat_product_share_by_year": {
+   "2019": 0.462,
+   "2020": 0.474,
+   "2021": 0.286,
+   "2022": 0.478,
+   "2023": 0.462,
+   "2024": 0.432,
+   "2025": 0.48,
+   "2026": 0.433
+  },
+  "already_stocked_share_2020_26": 0.564
+ },
+ "E_forward_test": {
+  "E1_chance": {
+   "selection_brier_2021_23": {
+    "T12": 0.2471,
+    "EXP": 0.2394
+   },
+   "chosen": "EXP",
+   "holdout_2024_26": {
+    "months": 33,
+    "brier": 0.2164,
+    "mean_predicted": 0.607,
+    "observed_rate": 0.697,
+    "calibration_gap": -0.09
+   },
+   "usable": true,
+   "other_candidate_holdout_brier": 0.1606
+  },
+  "E2_range": {
+   "coverage": {
+    "2021-2023": 0.833,
+    "2024-2026": 0.727
+   },
+   "usable": true,
+   "misses": [
+    {
+     "month": "2021-07",
+     "low": 0,
+     "high": 2261850,
+     "actual": 4402580
+    },
+    {
+     "month": "2021-08",
+     "low": 0,
+     "high": 2752554,
+     "actual": 5158935
+    },
+    {
+     "month": "2021-10",
+     "low": 0,
+     "high": 4402580,
+     "actual": 8518549
+    },
+    {
+     "month": "2022-06",
+     "low": 0,
+     "high": 4402580,
+     "actual": 4656524
+    },
+    {
+     "month": "2023-02",
+     "low": 0,
+     "high": 4656524,
+     "actual": 5889549
+    },
+    {
+     "month": "2023-05",
+     "low": 0,
+     "high": 5158935,
+     "actual": 9389143
+    },
+    {
+     "month": "2025-02",
+     "low": 0,
+     "high": 4252890,
+     "actual": 4524152
+    },
+    {
+     "month": "2025-05",
+     "low": 0,
+     "high": 4252890,
+     "actual": 5035500
+    },
+    {
+     "month": "2025-06",
+     "low": 0,
+     "high": 4252890,
+     "actual": 8794803
+    },
+    {
+     "month": "2025-09",
+     "low": 0,
+     "high": 4524152,
+     "actual": 7218609
+    },
+    {
+     "month": "2026-02",
+     "low": 0,
+     "high": 5035500,
+     "actual": 13003824
+    },
+    {
+     "month": "2026-04",
+     "low": 0,
+     "high": 7218609,
+     "actual": 14304836
+    },
+    {
+     "month": "2026-06",
+     "low": 0,
+     "high": 8794803,
+     "actual": 8984718
+    },
+    {
+     "month": "2026-07",
+     "low": 0,
+     "high": 8984718,
+     "actual": 15171229
+    },
+    {
+     "month": "2026-09",
+     "low": 0,
+     "high": 13003824,
+     "actual": 14706926
+    }
+   ]
+  }
+ },
+ "readiness_as_of_2026_09": {
+  "chance_next_month_T12": 1.0,
+  "chance_next_month_EXP": 0.67,
+  "range_p10_p90": [
+   0,
+   14304836
+  ]
+ }
+}

@@ -1,0 +1,23 @@
+{
+  "checked_at": "2026-10-09T02:19:47.008Z",
+  "kind": "Pure authentication configuration execution plus Compose source inspection; Docker not invoked",
+  "compose_fallback_false": true,
+  "docker_production_environment": true,
+  "example_env_mode": "USE_SUPABASE=true",
+  "checks": [
+    {
+      "name": "Compose fallback false with production image",
+      "expected": "gateway can start using documented default Compose configuration",
+      "actual": "Production requires Supabase Auth; local authentication is development-only.",
+      "code": "AUTH_CONFIGURATION_INVALID",
+      "pass": false
+    },
+    {
+      "name": "Compose passes explicit descriptive fact pin",
+      "expected": true,
+      "actual": false,
+      "pass": false,
+      "kind": "static configuration observation; no deployed container verified"
+    }
+  ]
+}

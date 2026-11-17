@@ -1,0 +1,470 @@
+{
+  "status": "PASS",
+  "checked_at_utc": "2026-10-10T06:50:49.716028+00:00",
+  "timezone": "Asia/Manila",
+  "scope": "Step 2 joint error reporting and provisional direction policy; numerical business acceptance still pending",
+  "source": {
+    "run_id": "eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a",
+    "run_path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\run.json",
+    "run_sha256": "9889baea07a1f222edc9d2d2576fefc0d2be4bc8e52dc4d9a3ff9919e0056f45",
+    "input_path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_validation\\2026-10-09T13-28-48-501Z\\input.json",
+    "input_sha256": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba",
+    "manifest": {
+      "accepted_descriptive_release_id": "19662860d526ca2efb5ccf4256645211bfb916fb8590060901e6e2573b991def",
+      "catalog_mapping_version": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+      "coverage_receipt_sha256": "aea5d30560eecbc7adb9d0d1024e0337a3df9bdc125503c27aa931a1816ccb82",
+      "coverage_review": {
+        "evidence_reference": "User confirmation in this implementation chat: yes.our evidence is the sales data. please do what's the best decision. Evidence: checksum-bound supplied sales data; reporting completeness user-attested, not independently verified. Gold20 binding inherits that same decision after exact 108-month target/provenance comparison; no new completeness verification or publication decision.",
+        "reviewed_at": "2026-09-27T14:29:23.9926173Z",
+        "reviewer": "Requesting user (session attestation; legal name not supplied)"
+      },
+      "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+      "extracted_at": "2026-10-09T13:28:48.501Z",
+      "fact_delta_version": 20,
+      "geography_mapping_version": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+      "publication_approved": false,
+      "reconciliation_passed": true,
+      "revision_policy": "retrospective_revised_snapshot_no_historical_availability_vintages",
+      "source_available_at": "2026-10-09T07:40:39.615Z",
+      "source_checksum": "19662860d526ca2efb5ccf4256645211bfb916fb8590060901e6e2573b991def",
+      "source_count": 37728,
+      "source_publication_status": "CANDIDATE_PENDING_BUSINESS_AND_PRODUCT_MASTER_REVIEW",
+      "source_table": "workspace.medshield_gold.sales_restart_fact_candidate",
+      "training_approved": true,
+      "transformation_policy": "sales_restart_gold_v7_independent_catalog"
+    },
+    "status": "exploratory_evaluated_unpublished"
+  },
+  "model_count": 21,
+  "cohort_count": 42,
+  "independent_qa_checks": 1331,
+  "builder_reconciled_values": 210,
+  "review_mode": "Separate Data Analyst implementation, QA numerical verification and Technical Writer reader review; root integration checks",
+  "tolerance_status": "not_assessed_thresholds_missing",
+  "publication_approved": false,
+  "no_new_model_fit": true,
+  "no_remote_mutations": true,
+  "check_summary": {
+    "passed": 83,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "criterion": "independent QA pass",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding run.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding artifact-hashes.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding input.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding input.sha256",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding build_error_policy.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding policy.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding model-error-review.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding MODEL_ERRORS.md",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding derivation-receipt.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding README.md",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding expected-errors.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding verify_error_policy.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding independent_errors.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "independent QA binding artifact-hashes.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "QA artifact retained expected-errors.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "QA artifact retained independent_errors.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "QA artifact retained REPORT.md",
+      "status": "PASS"
+    },
+    {
+      "criterion": "QA artifact retained verification.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "QA artifact retained verify_error_policy.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "derivation code retained",
+      "status": "PASS"
+    },
+    {
+      "criterion": "source/output bytes protocol.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "source/output bytes RESULTS.md",
+      "status": "PASS"
+    },
+    {
+      "criterion": "source/output bytes coverage.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "source/output bytes evaluations.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "source/output bytes folds.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "source/output bytes input-manifest.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "source/output bytes model-cards.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "source/output bytes predictions.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "source/output bytes run.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "source/output bytes warnings.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "source/output bytes contracts.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "source/output bytes engine.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "source/output bytes extended_experiment.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "source/output bytes metrics.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "source/output bytes models.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "source/output bytes policy.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "source/output bytes model-error-review.json",
+      "status": "PASS"
+    },
+    {
+      "criterion": "source/output bytes MODEL_ERRORS.md",
+      "status": "PASS"
+    },
+    {
+      "criterion": "frozen input retained",
+      "status": "PASS"
+    },
+    {
+      "criterion": "input sidecar retained",
+      "status": "PASS"
+    },
+    {
+      "criterion": "original run retained",
+      "status": "PASS"
+    },
+    {
+      "criterion": "source hash map retained",
+      "status": "PASS"
+    },
+    {
+      "criterion": "both primary measures",
+      "status": "PASS"
+    },
+    {
+      "criterion": "both limits unset",
+      "status": "PASS"
+    },
+    {
+      "criterion": "no tolerance pass",
+      "status": "PASS"
+    },
+    {
+      "criterion": "equal provisional weights",
+      "status": "PASS"
+    },
+    {
+      "criterion": "no deliberate shift",
+      "status": "PASS"
+    },
+    {
+      "criterion": "no model publication",
+      "status": "PASS"
+    },
+    {
+      "criterion": "no 2026 score",
+      "status": "PASS"
+    },
+    {
+      "criterion": "21 models / 42 cohorts",
+      "status": "PASS"
+    },
+    {
+      "criterion": "selection inherited intact",
+      "status": "PASS"
+    },
+    {
+      "criterion": "recipe order inherited",
+      "status": "PASS"
+    },
+    {
+      "criterion": "all model assessments unavailable",
+      "status": "PASS"
+    },
+    {
+      "criterion": "hand-computable smoke probes pass",
+      "status": "PASS"
+    },
+    {
+      "criterion": "Python syntax outputs\\predictive_error_policy_20261010\\build_error_policy.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "Python syntax outputs\\predictive_error_policy_20261010\\seal_delivery.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "Python syntax outputs\\predictive_error_policy_20261010\\qa\\independent_errors.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "Python syntax outputs\\predictive_error_policy_20261010\\qa\\verify_error_policy.py",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_error_policy_20261010\\README.md:50",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_error_policy_20261010\\README.md:51",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_error_policy_20261010\\README.md:56",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_error_policy_20261010\\README.md:89",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_error_policy_20261010\\README.md:89",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_error_policy_20261010\\README.md:90",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_error_policy_20261010\\README.md:90",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_error_policy_20261010\\README.md:91",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_error_policy_20261010\\README.md:92",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_error_policy_20261010\\README.md:93",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_error_policy_20261010\\README.md:94",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_error_policy_20261010\\README.md:95",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link outputs\\predictive_error_policy_20261010\\README.md:96",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link docs\\OBJECTIVE_EVIDENCE_REGISTER.md:52",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link docs\\logic\\PREDICTIVE_ANALYTICS_EXPLAINER.md:111",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link docs\\logic\\PREDICTIVE_ANALYTICS_EXPLAINER.md:112",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link docs\\PREDICTIVE_OPERATIONS.md:17",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link docs\\PREDICTIVE_OPERATIONS.md:20",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link docs\\CURRENT_STATE.md:5",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link docs\\CURRENT_STATE.md:20",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link docs\\TESTING.md:3",
+      "status": "PASS"
+    },
+    {
+      "criterion": "local link docs\\TESTING.md:5",
+      "status": "PASS"
+    },
+    {
+      "criterion": "original O3 retained",
+      "status": "PASS"
+    },
+    {
+      "criterion": "no release draft",
+      "status": "PASS"
+    }
+  ],
+  "git_head": "cc03b4c05398880b18987eca5ca9c1e140bf9dcb",
+  "command": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\.venv-predictive\\Scripts\\python.exe -X utf8 outputs/predictive_error_policy_20261010/seal_delivery.py",
+  "working_tree": "Pre-existing and unrelated edits preserved; file hashes bind this delivery and current docs",
+  "file_hashes": {
+    "docs/CURRENT_STATE.md": {
+      "sha256": "8801558bdb07f4a4e5152b9fa46981d84d3aac5eaf6482df7056810bc2eac3ac",
+      "bytes": 52354
+    },
+    "docs/logic/PREDICTIVE_ANALYTICS_EXPLAINER.md": {
+      "sha256": "5693f46f3cf4ccc1c137df0d6b5d53ca45e0ed51114e9a44e0cdb505a70e0896",
+      "bytes": 15735
+    },
+    "docs/OBJECTIVE_EVIDENCE_REGISTER.md": {
+      "sha256": "405b2eef31fe078c610fa9eed4d5cf57380d17133abf9d1b3cf80d9a812eefdb",
+      "bytes": 42400
+    },
+    "docs/PREDICTIVE_OPERATIONS.md": {
+      "sha256": "46f7d832e14f1a9b59f8de118d6906bc9341170db51ea388098f10247c708cf1",
+      "bytes": 20004
+    },
+    "docs/TESTING.md": {
+      "sha256": "083c58d1c9855e2f226b10ff67530a411c6f9caa6a97e01fe79d4fbd5a019ffb",
+      "bytes": 23210
+    },
+    "outputs/predictive_error_policy_20261010/build_error_policy.py": {
+      "sha256": "5d9cfdee76eebcdbd6431bee424d354643c206e0394389ea7bd700aeb4654543",
+      "bytes": 22976
+    },
+    "outputs/predictive_error_policy_20261010/delivery-attempt-1.json": {
+      "sha256": "38a3d772aa9e4cd7eb5cb780c891b99e5fb5a65c7bc912ec04b20d47c590f945",
+      "bytes": 14953
+    },
+    "outputs/predictive_error_policy_20261010/delivery-attempt-1.sha256": {
+      "sha256": "94b79c6c569a21bb987f38151dfac2a93f06580aa636e412fbc61e45b8a85746",
+      "bytes": 66
+    },
+    "outputs/predictive_error_policy_20261010/derivation-receipt.json": {
+      "sha256": "480ab87a05e7d8fc3937b22199c432b1d81c45c25eeb3195147fa0fd04e68a78",
+      "bytes": 55344
+    },
+    "outputs/predictive_error_policy_20261010/model-error-review.json": {
+      "sha256": "de057ab8090715557dec3a308fac13034afbf7c2080369f599df2d09691f45bb",
+      "bytes": 71669
+    },
+    "outputs/predictive_error_policy_20261010/MODEL_ERRORS.md": {
+      "sha256": "943fce8deb29d7d2569531baff9d9b39c52101b2380c77d9e5da60eb07b81247",
+      "bytes": 9590
+    },
+    "outputs/predictive_error_policy_20261010/policy.json": {
+      "sha256": "55c93ca278c8fa9a19efaecdd8327836bc3d35662fe733eb36917125bb4d0fcb",
+      "bytes": 4358
+    },
+    "outputs/predictive_error_policy_20261010/qa/artifact-hashes.json": {
+      "sha256": "d317fdbbb1104d09c73d4cf63b1d53a75974f32f316984a2311b2715c06a13de",
+      "bytes": 469
+    },
+    "outputs/predictive_error_policy_20261010/qa/expected-errors.json": {
+      "sha256": "76466469917e9cc9cf7745ff07ab00311bdbfd4dfc91ae92213d14b6991577a6",
+      "bytes": 69333
+    },
+    "outputs/predictive_error_policy_20261010/qa/independent_errors.py": {
+      "sha256": "2e473b1d6088936c713a31fbc78c1748e869e541308f7226c124086c1afd06e9",
+      "bytes": 5024
+    },
+    "outputs/predictive_error_policy_20261010/qa/REPORT.md": {
+      "sha256": "ca2fbcafc926e550d9120bc1b54f05f178c76b347700491e791f488d887e20da",
+      "bytes": 4921
+    },
+    "outputs/predictive_error_policy_20261010/qa/verification.json": {
+      "sha256": "8d57cc2c2835ca3e2bdf28661e1803b33a6e14b09c5b21dcdf885c6884e68603",
+      "bytes": 247486
+    },
+    "outputs/predictive_error_policy_20261010/qa/verify_error_policy.py": {
+      "sha256": "804b43905d3793b27168f01bdfb5a8f8d5c50a336ae4f60907276cacf36acff7",
+      "bytes": 22404
+    },
+    "outputs/predictive_error_policy_20261010/README.md": {
+      "sha256": "65d11da5a285b548ee3b9b80c0964f0a8863a4540a002462d81a514cf7f6f204",
+      "bytes": 6619
+    },
+    "outputs/predictive_error_policy_20261010/seal_delivery.py": {
+      "sha256": "a05aabdc919ed15bc964c13736524802461e4f9e3455f00dc0ffd2047002d813",
+      "bytes": 7431
+    }
+  }
+}

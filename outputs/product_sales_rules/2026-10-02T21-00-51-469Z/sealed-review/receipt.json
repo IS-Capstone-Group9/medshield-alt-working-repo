@@ -1,0 +1,21 @@
+{
+  "release": {
+    "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+    "policy_version": "sales_restart_gold_v7_independent_catalog",
+    "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+    "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+    "publication_status": "CANDIDATE_PENDING_BUSINESS_AND_PRODUCT_MASTER_REVIEW",
+    "resolution_policy": "catalog_v1_independent_evidence",
+    "transaction_evidence_sha256": "5e1a839d551293b51149e7c35d863ce680573e02275f65d17512d6099ff88786",
+    "catalog_helper_sha256": "20888a90253718dabf2aea3390ecc8d7ca707b388e8a4d45123e894c98f688c9",
+    "fact_delta_version": 17
+  },
+  "input_sha256": "3495df769aabed43df47b2d5b252ffe9f1d3bec14b3378a09163f19eecbd376b",
+  "outputs_sha256": {
+    "summary.json": "a02d93df98d7f13a4c3b27b2cc806da7143294412fefef0dc08cecd5db8b74be",
+    "groups.json": "0e4cd8880b523445de00a0143211b6b968090ce8e0c0eabc486d4bad4594867d",
+    "record_reviews.json": "b7b33676a66db683415cb9483616e32086e0b45e31caa2481d003d098025ec29",
+    "reconciliation.json": "22c18c4c9492bd0311afa43f4aa666e3db343cb4f4c5a9e2f5c1435627f7b5c7"
+  },
+  "policy": "product_review_v2_literal_pricing"
+}

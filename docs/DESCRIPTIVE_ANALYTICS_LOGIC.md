@@ -1,0 +1,479 @@
+# Descriptive Analytics Logic
+
+## Loading and Overview clarity — 6 November 2026
+
+Forecast evidence now distinguishes not loaded, loading, available and failed-source states. Pending requests show “Loading (can take up to a minute)” with an indeterminate progress cue; exports remain disabled with a visible reason. A genuine failure clears previous values and shows an explicit source-unavailable message. This wording does not promise a one-minute deadline or repair gateway reliability.
+
+The Overview predictive chart shows up to 18 recent calendar months with larger prediction markers and fewer date ticks; the detailed Forecast chart, tables and CSV retain their original history. The historical error headline includes its scored count and does not establish future accuracy. The planning-review coverage tile counts observed selected months, including zero/negative sales, against selected elapsed calendar months; it does not certify complete reporting or procurement readiness. Output guides include key-term definitions and export labels beginning with a verb.
+
+[Implementation, fixture/live checks and remaining limits](../outputs/improvement_step2_20261106/README.md). No analytical values, source pins, models or approval status changed.
+
+The obsolete Stored predictive research section and its automatic request have been removed from Forecast Modeling. Historical renderer tests explicitly mount an archival fixture; the current monthly, company, regional, tournament and unit research panels retain their own evidence and limits. [Removal and verification](../outputs/improvement_step3_closeout_20261106/README.md).
+
+## Area-first Sales Diagnostic — 2 November 2026
+
+The all-area overview always lists all nine confirmed labels in source-label order,
+with first/latest eligible observation, total observed and longest continuous months,
+selected-period coverage and each area's own matched-year count. These counts are
+not a shared comparison cohort or sales ranking. The native View history action
+selects that label alone in historical mode; all-area coverage CSVs retain the
+source identities and selected scope. The optional Cavite rollup is excluded from
+the nine-label overview to avoid adding a duplicate population. History eligibility
+is explicitly distinguished from an executed STL fit. [Checks and evidence](../outputs/all_area_acceptance_20261102/README.md).
+
+Delivery area is primary in Territory baseline; regional summaries are optional.
+Quezon/Batangas default to January–September2026 versus2025. KPI/table totals
+intersect observed eligible months across selected areas; YoY also intersects
+both base-year month populations. Chart/CSV retain actual observations and
+common/matched flags. Missing months remain null/blank. Historical mode compares
+common periods, never unequal lifetime rankings. Cavite province replaces its two
+labels without duplicate totals. Gross margin uses paired supported revenue.
+The [verified packet](../outputs/delivery_area_20261102/README.md) retains coverage,
+exclusions and separate retrospective area STL findings; PHP is not medicine demand.
+
+## Current study preset — 2 November 2026
+
+The Study preset is January 2017–30 September 2026; 2026 is partial. All available
+years remains source-driven and supports later years. Sector exports retain the
+selected period/release and explicit study dates, partial-year status and
+unavailable-not-zero policy. Recorded coverage does not certify complete company
+sales. Frozen research windows retain their own controls. [Implementation and
+fresh checks](../outputs/system_first_20261102/filters/README.md) distinguish
+retained-source/isolated evidence from unverified current live-source acceptance.
+
+## Overview analytics sections — 2 November 2026
+
+Overview places four chart-bearing analytics sections in a two-column grid that stacks below
+900px, with 24px desktop and 20px narrow gaps/padding. Descriptive plots monthly
+observed net sales with missing months left blank and summarizes month coverage;
+existing KPIs, sales/profit trends, margin, averages and calendar remain below.
+Diagnostic plots signed changes and identifies the largest absolute change between adjacent observed,
+closed months in that selection. Gaps are never bridged, zero and signed sales
+remain observations, and partial boundary-month comparisons retain a warning.
+This localizes change without claiming a verified business cause. Investigation
+uses the existing selected-date/buyer scope and itemized source-release contract.
+
+Predictive automatically requests the existing gateway-backed forecast evidence
+when Overview opens and plots the same observed/backtest/future series as Forecast
+Modeling. A refresh button retries unavailable evidence. It can also open
+Forecast Modeling. Its buyer/product/model/horizon scope is independent of Overview
+filters. It shows historical error and the first available prediction with its
+published/unapproved/unpublished-baseline label; failed evidence clears the value.
+Approval requires the existing published status, approval, run and release IDs.
+Prescriptive shows observed/unavailable months as a planning-readiness coverage
+chart, clearly separate from inventory allocation, offers coverage-dependent review steps and links to Planning, whose
+entered assumptions, operational-input requirements and procurement gates remain.
+Neither section starts offline training, supplies local fallback measures, or
+grants publication or purchase authorization. Checks and limitations are recorded
+in [the chart refinement evidence](../outputs/overview_charts_20261102/README.md).
+Chart scope and interpretation appear in disclosures; unavailable evidence clears
+charts and displays a labelled empty state instead of illustrative values.
+
+## Current SO2 period and comparison logic — 25 October 2026
+
+Use available 2017–2026 data, including processed January–September 2026 sales. [Current SO2 results](../outputs/so2_2026_update_20261025/README.md) separate full-history and observed-2026 contribution/ABC populations and compare matching 2025/2026 months. Qty means counts of sales in source units; retain provenance without inferring pack conversions or cross-label physical comparability. Missing observations are not zeros; partial-year revenue is not an annual total. Raw Area rankings do not establish accounts. This policy supersedes older date/availability assumptions below; historical receipts retain their checked scope. Descriptive calculations do not grant classifier, forecast or procurement acceptance.
+
+## Historical disease/weather pilot — 25 October 2026
+
+Sales Diagnostics → Disease & weather is an explicitly independent historical
+pilot: Quezon, All buyer groups, 2017–2025, with its own year selector. Its
+fixed scope is visible and does not inherit shared topbar product/buyer/date
+filters. Five separate charts retain PHP, reported surveillance cases and mm;
+Tayabas, Alabat and NASA proxies are not merged. The exact table and CSV share
+the displayed year/months and preserve missing versus zero/signed observations.
+The endpoint reads Gold through the gateway; local research artifacts never
+supply runtime values. Source dates, coverage and geographic/timing limits remain
+visible. The same-month alignment grants no model-join or causal interpretation.
+See [checked behavior and boundaries](../outputs/historical_comparison_ui_20261025/README.md).
+
+## Historical filter contract — 25 October 2026
+
+The shared filters apply to Overview, Sales Diagnostics, Product Prioritization
+and Area Prioritization. **Data range** selects all available years or the fixed
+2017–2025 study boundary. This boundary persists across presets and custom dates;
+changing it preserves the current preset. A custom range is intersected with the
+new boundary; if there is no overlap, it resets visibly to that allowed range.
+
+**Date range** selects trailing three/six/twelve calendar months ending at the
+latest recorded company month within the selected data range, all recorded dates,
+or exact custom dates. Buyer selection does not move the company date anchor.
+Missing months remain blank. The dates and latest recorded month are visible
+under the controls. All-recorded coverage stops at the recorded endpoint, rather
+than adding a current calendar month with no records. Explicit custom dates can
+include allowed months without records; these stay unavailable.
+
+**Chart interval** controls aggregation independently of the date range:
+Automatic uses yearly totals for all recorded dates, daily detail for custom
+ranges of at most 31 days, and monthly detail otherwise. Monthly/Yearly override
+that choice; Automatic displays its resolved interval. Yearly totals still use
+only selected dates, with scope/table labels distinguishing bounded years;
+compact chart ticks may show only the year.
+
+**Chart comparison** adds the same dates one year earlier to Overview and Sales
+Diagnostics charts. The matched-year KPI remains a separate comparison measure.
+The control is hidden on Product/Area pages that do not use this overlay. Missing
+counterparts remain unavailable. Sector contribution preserves all selected
+months for bounded presets/custom ranges, including cross-year windows. For all
+recorded dates it retains its explicitly labelled latest-year comparison.
+
+Custom controls enforce real calendar validity and the selected data boundary;
+reversed, nonexistent or out-of-range dates show an error and preserve the last
+valid selection. Dates, chart, coverage, investigation and CSV retain the same
+selected population. Gold identity, provenance and candidate labels remain intact.
+See [filter repair and verification](../outputs/filter_repair_20261025/README.md).
+
+## Overview summary cleanup — 25 October 2026
+
+The standalone recorded-data/buyer-mapping card is now inside the sales graph's
+collapsed Data coverage and comparison notes. The repeated period caption and
+coverage/peak-month/Next review summary below the KPIs are removed. KPI coverage,
+chart scope, candidate labels, filters, values tables and exports remain available.
+
+## Overview single graph — 25 October 2026
+
+Overview shows one full-width sales/profit trend controlled by the buyer-sector
+filter. All sectors is available alongside Government, Private and Internal;
+unmatched buyer records remain included in All sectors. The existing initial
+Government selection is retained. Changing the
+measure or dates preserves the buyer selection. The graph, coverage, values and
+CSV follow that selection; there is no separate fixed overall graph.
+
+Dense series retain hover targets and isolated-observation markers, compact date
+ticks and line-style legends. Missing observations, signed adjustments, candidate
+status and matched Y/Y populations keep their existing contracts. The date-range,
+data-range and chart-interval controls continue to apply to this single graph.
+
+## Remaining density findings addressed — 20 October 2026
+
+Product table instructions are shortened; expanded publication limits share the
+existing evidence notes. Area charts keep concise known-sales totals and their
+mapped/all scope labels; full total/exclusion explanations share the calculation
+notes. Weather defaults to Compact weather measurements, retaining observed zero
+and per-row missing values. Full evidence restores the original twelve columns;
+switching columns is local, with provider changes recalculating availability.
+Forecast and Planning explanations also use their existing notes while keeping
+errors, source/publication/availability and scenario/acknowledgement visible.
+See the [five-page delivery](../outputs/ui_density_followup_20261020/README.md).
+
+## Compact chart explanations — 20 October 2026
+
+Overview keeps short scope/coverage and candidate/mapping labels visible. Repeated
+endpoint amounts, reading guidance, buyer mapping details and contribution methods
+are available in closed disclosures. The gross-margin formula and financial-basis
+table expand below its chart. Sales Diagnostics replaces its long reporting-scope
+banner with `About this sales view` and puts endpoint prose in `Trend summary`.
+Recorded values, coverage, filters, missing states and CSV remain unchanged by this
+presentation change. See the [density review and verification](../outputs/ui_text_simplification_20261020/README.md).
+
+## Current 2017–2025 study — 20 October 2026
+
+The user explicitly confirms 2017–2025 as the study, including earlier gathered
+records. All Time now includes all nine years; the former original-study versus
+additional-context selector is removed. Both Overall and selected-sector panels,
+coverage, summary and CSV use this scope. 2026 actuals remain pending client
+confirmation. Historical year labels show the year without a `Partial` suffix:
+the client-provided records are the submitted dataset. Values tables retain
+recorded sales/profit month counts. An absent month does not establish either
+omitted files or zero sales. Annual totals still sum the eligible supplied
+records; Y/Y comparisons still use matched recorded months. Custom selections
+that cut through a year show `selected dates`, and the current year retains YTD.
+This dated direction supersedes the earlier 2021–2025 display decision below.
+
+Expanded-history reconciliation also checks independently eligible profit:
+a sector-month with gross profit and no independently eligible net sales retains
+its profit without becoming observed zero sales. Annual series/CSV disclose
+sales and profit month counts separately; supported profit KPIs sum eligible
+profit independently of sales coverage. Margin uses the matching eligible profit
+and revenue basis. Retained model/STL windows and forecast publication are
+unchanged. See [scope correction and checks](../outputs/study_scope_2017_2025_20261020/README.md).
+
+## Overall and selected-sector trends — 19 October 2026
+
+The primary sales/profit card now shows two simultaneous line charts: **Overall ·
+All sectors** stays on the left, while **Government / Private / Internal / Unknown**
+selects the right chart. Government is the initial selection. The original
+2021–2025 study remains the default; earlier history stays additional context.
+Dates, daily/monthly/yearly grain, single/Y/Y mode and the measure selector apply
+to both charts. Both use identical peso bounds (including signed adjustments),
+time-axis positions and measure colors. Daily detail retains the existing
+sales-only contract. Annual Y/Y charts use each scope's matched observed months;
+monthly/daily overlays retain unavailable prior matches rather than inventing
+observations. Different scope coverage remains explicit.
+
+The sector selector appears above the right chart. Supporting KPIs, margin,
+calendar and their existing detailed table continue to follow that selection,
+with an explicit scope notice. Selecting a sector never replaces the Overall
+chart's data. Each trend panel has its own coverage, narrative, keyboard-accessible
+value table and CSV. CSVs carry scope, release, evidence, displayed measure and
+prior-period fields when Y/Y is selected. Missing observations export as blanks;
+recorded zero and negative values remain numbers. Unknown displays an explicit
+empty state when it has no observations. Chart-point investigation retains All
+for the reference and the selected sector for detail.
+
+The contribution table remains below both charts and always includes all four
+sectors, with the selected row highlighted and an All reference total. Its CSV
+exports the entire displayed comparison. Narrow screens stack Overall first,
+then the selected sector. This changes presentation and explicit scope handling;
+the existing gateway/Gold source and metric/publication contracts are unchanged.
+See the [implementation and verification record](../outputs/overall_sector_graphs_20261019/README.md).
+
+## Sector diagnosis and chronological margin — 19 October 2026
+
+The overview now defaults to the original 2021–2025 study view, with an explicit
+additional-history option. All/Government/Private/Internal/Unknown scopes the
+sales/profit trend, summary KPIs, narratives, observed coverage, calendar and
+displayed-trend CSV. Missing sector observations stay unavailable; observed
+zero/signed values remain numeric. Other analytical pages retain their own
+scope. The former unlabeled sales/profit scatter is replaced by a chronological
+gross-margin percentage chart and visible, keyboard-accessible financial/value
+table. Its numerator and denominator use the same margin-eligible population.
+
+The year-comparison table defaults to 2024–2025 and provides both margins,
+signed peso changes, full-company contribution shares, source-evidence counts,
+scope-aligned export and sector/month/product/raw-area inspection. It matches
+company months before grouping. Group absence in that accounting bridge is
+labelled separately from missing trend observations. Selected-sector rows retain
+a labelled All reference. API/chart/table/export amounts are source reconciled.
+
+[Checked findings](../outputs/sector_diagnostic_20261019/FINDINGS.md) explain the
+Government contribution and the adjusted/estimated allocation limitation.
+Quezon/Batangas buyer classification remains proposed despite approved
+geographic mapping. A generic GOVERNMENT label does not support provincial or
+individual-account attribution. Eligible margin-basis coverage differs between
+years, so rate changes do not prove whole-sector profitability. These changes
+supersede earlier descriptions of the overview's sales/profit scatter, without
+changing original data/model/business/academic acceptance gates.
+
+## D9/D10 completion review — 17 October 2026
+
+The [prefilled source-owner and acceptance review](../outputs/descriptive_closure_20261017/START_HERE.md)
+consolidates the remaining descriptive exits. It retains nine yearly evidence
+statuses, ten unknown calendar months, a prioritized exact-key product batch,
+and an intended-scope demonstration checklist. Human decision fields remain
+unset and are preserved on regeneration. Source reconciliation checks do not
+independently establish complete reporting or original physical units.
+D9 and D10 remain open in the forty-point tracker until actual evidence and
+attributed scope/business decisions satisfy their exits. No descriptive scope
+amendment or live-data/model change is created by preparing this review.
+The separate [executed technical recheck](../outputs/descriptive_closure_20261017/RESULTS.md)
+records13 passing chart/live-view/Area-export/Product-export scenarios. These
+are fresh implementation checks, while the review builder's22 checks inspect
+retained evidence and source hashes. Neither supplies actual D9/D10 acceptance.
+
+## Purpose
+
+Descriptive analytics is the first analytics layer for MedShield. It answers what happened in the historical sales data before the group moves to predictive forecasting or prescriptive scenario planning.
+
+This layer must be finished first because predictive and prescriptive outputs depend on the same cleaned sales grain, KPI definitions, product mappings, area mappings, and completeness rules.
+
+## Business Questions
+
+| Question | Descriptive output | Decision supported |
+|---|---|---|
+| How did recorded sales and gross profit move over time? | Monthly and yearly trends, with coverage | Identify periods for financial review. |
+| Which product names contribute most sales? | Source-label ABC/Pareto ranking | Prioritize catalog review and commercial attention. |
+| Which territories or customer groups drive sales? | Area, territory, and area-type summaries | Focus management review by geography or customer type. |
+| Which calendar months have higher recorded sales? | Observed monthly averages and company-revenue STL | Describe historical sales patterns with sample counts and scope. |
+| How did current periods compare with prior year? | Year-over-year growth | Explain growth, decline, and volatility. |
+| How much of the analysis depends on estimated records? | Contract-allocation and estimated-date counts | Keep limitations visible in Chapter 4 and dashboard labels. |
+
+## Required Inputs
+
+| Input | Current path | Rule |
+|---|---|---|
+| Published Gold fact and bridge views | `workspace.medshield_gold.sales_restart_fact_candidate`, exposed through the gateway | Bind every reported value to the validated fact Delta version, dataset, policy and mapping hashes. Use metric-specific eligibility; do not read local processed files as dashboard inputs. |
+| Accepted reporting-category decisions | [Product catalog](PRODUCT_CATALOG.md) and the product-master hash in the release | Medicine, medical supply, medical equipment, non-medical and Unclassified are reporting dispositions. An accepted Unclassified disposition preserves unresolved identity; it does not approve a SKU or sales unit. |
+| Published area mapping and client reference | [Mapped client reference](MAPPED_CLIENT_REFERENCE.md) and release area hash | Separate territory, customer type, business line and unmapped areas. Use only reviewed matches as mapping evidence; defaults and ambiguous names must not create transaction geography or ownership. |
+| Metric meanings | [Business definitions](BUSINESS_DEFINITIONS.md) | Net CP is net sales revenue; Total TP is acquisition cost; workbook `net_income` represents supported gross margin amount. Margin numerator and denominator use the same eligible records. |
+| Current evidence and operating sequence | [Current state](CURRENT_STATE.md), [Databricks guide](../databricks_updated/README.md), [API contract](API.md) | Keep observed, adjusted-source, gap-estimated and unavailable evidence distinct. Candidate calculations and release acceptance are separate. |
+
+The current project reporting scope is **January 1, 2017 through December 31, 2025**, as confirmed by the user on 9 October 2026. Use this scope for the dashboard's Capstone preset and current Chapter 4 packet. Earlier 2021–2025 findings are a historical subset and must retain that label; they are not the full-project totals. This scope confirmation does not record adviser/panel or business release approval. Company PHP sales, source product names and source quantity fields must not be described as verified medicine/SKU demand. Category acceptance does not establish normalized packs, source units, clinical priority or disease attribution.
+
+Fact 20 contains 108 calendar months in this scope, with 98 months having sales observations. The ten months without observations are May–August and October 2017, January–February 2018, and October–December 2019. Preserve them as unknown rather than zero and disclose unequal coverage in annual comparisons. The published company-revenue STL uses the separate contiguous January 2020–December 2025 series of 72 months; it does not decompose all nine study years.
+
+## Descriptive Methods
+
+| Method | Logic | Output |
+|---|---|---|
+| Monthly trend | Aggregate eligible financial records by calendar month. Preserve signed net sales, separate gross-profit coverage, unknown months and adjusted-source provenance. Source quantities retain their recorded units and are not normalized demand. | Gold monthly contract; Overview and Sales Diagnostics |
+| Yearly summary | Aggregate the same eligible records by calendar year; disclose observed-month counts and incomplete comparisons. | Gold yearly contract; Overview |
+| Area summary | Group by the published area classification; preserve unallocated geography and disclose its financial effect. | Area Prioritization and gateway area response |
+| Buyer-type summary | Group using the published derived ownership rules, retaining unknown ownership separately from geography. | Area Prioritization; mapping status remains visible |
+| Product ABC/Pareto | Runtime ranks eligible positive sales; returns remain separate. A includes the label crossing 80%; B includes subsequent labels through the one crossing 95%; C is the remainder. Zero-positive-sales labels have ABC class Unclassified, which is separate from reporting category Unclassified. | Dashboard and product CSV with `positive_sales_crossing_inclusive_v2_candidate`; legacy offline CSVs are not publication evidence. |
+| Product focus cohort | Rank observed positive-revenue products inside the selected period and let the user retain the top 5%, 10%, or 20% by product count (rounded up). Gap-fill estimates do not determine cohort membership. The performance table and cohort-versus-remainder donut use the complete selected cohort; charts show at most the ten highest-ranked products for readability. The cohort is recalculated whenever the historical period or percentage changes. This is descriptive prioritization, not a purchase recommendation. | Product Prioritization dashboard |
+| Calendar-month sales averages | Mean observed year-month sales by calendar month, with observation counts. Missing months and gap estimates are excluded; partial periods and unequal coverage remain disclosed. | Overview supporting chart and exact-value detail |
+| Company-revenue STL | Decompose contiguous observed monthly PHP revenue into trend, seasonal and residual components. Notebook 06 splits at gaps without imputing observations. Its separate full-history scope is displayed explicitly. | Published STL candidate, Sales Diagnostics and STL component CSV |
+| YoY growth | Compare matched observed calendar periods, with exact custom boundaries and positive prior-sales denominator for percentage growth. | Sales Diagnostics and matched-growth detail |
+| Estimation audit | Retain adjusted-source/allocation, estimated-date and gap-estimate provenance. Reconciled annual finance does not verify the allocated item mix. | Gold audit contracts and dashboard evidence details |
+
+## Dashboard Period and Grain Rules
+
+### Chart integrity corrections — 29 September 2026
+
+- Overview adds an observed monthly sales calendar (one common absolute-value color scale; negative, zero and unavailable cells remain distinct) and a net-sales/gross-profit scatterplot at the selected display grain. These answer when observed sales were concentrated and whether the largest sales periods also yielded the largest absolute gross profits. Estimates and missing profit are excluded from scatter points; coverage differences and partial periods remain disclosed. Calendar detail retains monthly totals even at yearly display grain; custom daily selections sum only their selected observed dates. Neither visual establishes seasonality or causality.
+- The executive presentation keeps the sales trend and full-width calendar visible, with the scatterplot in an expandable “Explore sales and profit” card. Short scope/evidence labels and partial-period cautions remain visible; longer coverage and method notes are expandable. Empty selections show messages instead of empty scatter axes or a calendar of missing cells. Trend height is 280–380px; scatter height is 320px on desktop and 260px on small screens. Monthly calendar overflow stays inside its card.
+
+- Yearly Y/Y overlays and growth use the same matched observed months, with exact dated records for custom boundary months. The KPI retains the full selected observed population; the comparison subtitle explains this difference.
+- Revenue and gross profit share one peso axis. Axis bounds include all displayed observations, prior-year values and gap estimates. Prior-year estimates have explicit labels and triangle markers.
+- Observed and estimated values now occupy one continuous series per measure in Overview and Sales Diagnostics. Segments touching an estimate are dashed; estimated points use triangles and tooltips identify their evidence. Estimate transitions do not introduce missing points. Truly unavailable values remain null. Observed KPIs and YoY calculations continue to exclude estimates.
+- Daily prior-year dates clamp leap days to the valid February date. If two displayed days map to the same prior day, the second comparison is unavailable, so the summary never counts that prior day twice.
+- Gross margin is unavailable for a nonpositive eligible revenue denominator, consistent with the API.
+- Regional net totals retain zero and negative area totals. Only recognized mapped regional groups enter the rollup; excluded unmapped net sales are disclosed. Revenue bars sort by revenue; the separate table retains commercial-score ranking. Concentration shares are unavailable when group net totals are negative or the denominator is nonpositive.
+- Product bars display positive sales and negative returns on the same scale. ABC counts include Unclassified and disclose each class's positive-sales share across the full selected population. The follow-up implementation uses the crossing-inclusive rule: classify by cumulative share before each label. The largest positive seller is A, including a single-label population. API and export identify `positive_sales_crossing_inclusive_v2_candidate`; this does not activate a production publication.
+- Product Pareto uses a fixed 0–100% scale and states how many labels reach 80% of positive sales. Cohort, top-ten display and full-population scopes are distinguished.
+- The initial view is All Time at yearly grain, containing observed annual totals. Optional trailing periods remain anchored to the current Philippine calendar and retain explicitly labeled estimates. Straight line segments replace smoothing in the overview; endpoint summaries disclose observed coverage.
+- Quantity totals use signed period bars, with recorded total, average per recorded display period (missing periods excluded), and recorded-period coverage above the plot. Partial coverage labels the total; an entirely missing selection shows unavailable totals and a filter-guidance message instead of empty axes. These sums remain one product and one evidence stratum in source units, without pack normalization. The within-year index retains a line and shows peak/average index rather than summed indices, subject to its complete-year rule. The heatmap remains expandable exact-value detail; chart, heatmap and CSV share the selected measure. Red indicates negative quantities, blue positive quantities, white recorded zero and gray missing evidence. Service failure clears summaries and plot; it does not select another source measure.
+- Quantities uses a compact searchable product picker with Category inside it. Search matches product names, recorded aliases, IDs and pack labels; phrase-prefix matches rank first, followed by natural name order. A bounded scrolling result list shows recorded-period coverage for the selected dates, display grain, sales area and evidence stratum. Recorded zero counts as coverage; missing values do not. Duplicate titles retain pack/identity distinctions. Sales area and Measure are under More filters; the active area and measure remain visible beside the product. Search alone does not change the selected product. Existing category narrowing chooses a valid product when needed; date/grouping changes and response refreshes preserve an eligible selection. Keyboard arrows, Enter, Escape, Tab and pointer selection are supported. Source failure closes the picker and clears its displayed product/results.
+- Revenue/coverage scatter, regional concentration and STL residual plots are expandable supporting views. They remain available without duplicating the primary storyline.
+- STL plots insert nulls for missing months and independently fitted segment boundaries; plot gaps never become exported observations. A prominent full-history scope label, within-segment trend summary, signed seasonal contribution and largest absolute residual explain the three charts without implying causes or forecasts.
+
+Evidence: `frontend/e2e/descriptive-chart-integrity.spec.ts`. This validation uses synthetic regression fixtures, not a new warehouse reconciliation. The original audit and remaining presentation recommendations are in `outputs/chart_story_audit_20260929/REVIEW.md`.
+
+Overview, Sales Diagnostics, Product Prioritization, and Area Prioritization use one shared historical-period filter:
+
+| Filter | Display grain | Calendar rule |
+|---|---|---|
+| Capstone · 2017–2025 | Monthly under Automatic; Yearly selectable | January 1, 2017 through December 31, 2025, with the selected period retained across the four descriptive pages. Missing observations remain unknown. |
+| Last 30 Days | Daily | Current Philippine calendar day and the preceding 29 days. Uses dated transactions; missing days are estimated from the same calendar dates in up to three prior years. Monthly totals are never divided into synthetic daily values. |
+| Last 3 Months | Monthly | Current Philippine calendar month and the preceding two months. |
+| Last 6 Months | Monthly | Current Philippine calendar month and the preceding five months. |
+| Last 12 Months | Monthly | Current Philippine calendar month and the preceding eleven months. |
+| Custom Date Range | Daily up to 31 days; monthly above 31 days | Calendar start and end dates from January 1, 2017 through the current Philippine date. Exact dated transactions are used; longer selections are summarized into monthly buckets to control chart noise. |
+
+Trailing periods are descriptive counterparts to the forward-looking 3-, 6-, and 12-month forecast horizons. Missing daily and monthly observations are filled with a recency-weighted same-calendar-period estimate using up to three prior years (60%, 30%, and 10%, renormalized when fewer years exist). Every filled value remains labeled as an estimate, is never treated as an observed zero, and is replaced when an uploaded actual arrives.
+
+Product Prioritization recalculates its selected observed top-5%, top-10%, or top-20% cohort whenever the cohort percentage, a period preset, or either Custom Date Range calendar boundary changes. Presets anchor to the current calendar date and month backwards (PHT), while Custom Date Range allows arbitrary historical date selection.
+
+Overview and Sales Diagnostics expose Period View and Y/Y Compare. The comparison aligns every displayed day or month to the same calendar period one year earlier; Custom Date Range shifts the selected start and end dates back by one calendar year, with leap-day dates clamped to the last valid February date. Product Prioritization intentionally remains period-only.
+
+## Validate the warehouse release
+
+Use the gateway's read-only validators with configured server-side Databricks credentials. The 9 October 2026 validated candidate is fact 20; consult [Current state](CURRENT_STATE.md) before choosing a later version. Run from the repository root:
+
+```powershell
+Push-Location backend
+$env:DATABRICKS_DESCRIPTIVE_FACT_VERSION = '20'
+node --dns-result-order=ipv4first --import tsx scripts/validate-descriptive.ts
+node --dns-result-order=ipv4first --import tsx scripts/publication-readiness.ts
+Pop-Location
+```
+
+`validate-descriptive.ts` reconciles monthly/yearly net sales and same-population margin, verifies missing-month semantics, and checks STL inputs, reconstruction and release identity. It writes a JSON receipt and checksum under `outputs/descriptive_validation/`. The readiness collector checks the persisted publication and dependencies and writes under `outputs/publication_readiness/`. These are audit artifacts, never dashboard data sources. A process-local version pin does not change the saved backend configuration or prove authenticated browser/API/export acceptance; follow [Testing](TESTING.md) for those checks.
+
+The legacy `services/analytics_service/jobs/run_descriptive.py` reads local prepared files. The [9 October QA assessment](../outputs/system_qa_20261009/QA_REPORT.md) found calculation differences from the current runtime contract, including ABC thresholds, margin population and missing-month treatment. Retain its historical outputs for audit; do not generate Chapter 4 or publication results with that job until it has been repaired and independently reconciled. Re-running it does not finish the Databricks descriptive release.
+
+## Acceptance Criteria
+
+Descriptive analytics is ready for Chapter 4 when:
+
+1. The same fact version, dataset, policy and mapping identities reconcile across warehouse, gateway, authenticated charts, tables and exports for the selected study period.
+2. Revenue uses Net CP (`net_cost`); acquisition cost uses Total TP (`total_trade_price`). Signed financial adjustments remain visible.
+3. Gross margin amount is not labeled company net profit. Weighted gross margin uses eligible gross profit and net sales from the same records; unsupported amounts and nonpositive-denominator rates remain unavailable.
+4. Product contribution uses source-label financial reporting with accepted categories. Unclassified labels remain visible. Verified sellable identity, compatible unit quantities and medical-demand approval are separate gates.
+5. Adjusted 2025 allocation and other estimates retain provenance. Missing observations remain unknown; an annual-total reconciliation does not validate actual item mix or prove reporting completeness.
+6. Geographic and derived buyer summaries disclose mapping basis, coverage and unallocated amounts. Commercial ranking does not establish disease risk or clinical priority.
+7. The current 2017–2025 study filter is explicit, including its 98 observed months and ten missing months. Historical 2021–2025 subset results and the separate 2020–2025 company STL scope are labeled with their actual periods. Academic scope acceptance and any promised frequency or territory decomposition require their own evidence; the user's project-scope confirmation does not grant those approvals.
+8. Each retained figure/table answers a business question, states its population and limitations, and links to a matching receipt/export. Test evidence includes unavailable, genuine zero, negative adjustment, partial period and empty-selection behavior.
+9. The client reviews the usable version-bound descriptive packet and the permitted reporting scope is recorded in [Publication acceptance](DESCRIPTIVE_PUBLICATION_ACCEPTANCE.md). Technical passes do not themselves record business or academic acceptance.
+
+## Chapter 4 Wording
+
+Use this simple explanation:
+
+> The descriptive layer summarized eligible MedShield sales from January 2017 through December 2025 using a version-bound Databricks Gold candidate. Of 108 calendar months, 98 had sales observations; the ten remaining months stayed unknown rather than being treated as zero. Net CP represented net sales revenue, while supported workbook net income represented gross margin amount before operating expenses. Product contribution was reported by source product name and accepted reporting category, including Unclassified; it did not establish verified SKU demand. Matched observed periods supported year-over-year comparison. Company monthly PHP revenue was decomposed using a separately labeled 2020–2025 STL series of 72 contiguous months. Adjusted-source allocation, missing observations, financial eligibility and mapping coverage remained visible.
+
+## What Comes Next
+
+The dashboard's additional descriptive views are:
+
+- **Calendar-month sales averages:** average observed year-month net sales, with sample counts. Missing periods and gap estimates are excluded; zero and negative observations remain. Partial months and unequal coverage can affect comparisons. This is a description of sales activity, not proof of recurring seasonality or disease effects.
+- **Observed months by year:** observed versus unavailable months within the selected elapsed period. Counts describe activity evidence, not reporting completeness. Both Overview summaries use a monthly source independent of chart display grain and YoY matching.
+- **Month-to-month sales change:** current minus preceding calendar-month net sales. Both full months must be observed within the selection. Missing months, gap estimates, current incomplete months and partial custom boundary months are excluded. Percentage change requires a positive preceding-month total.
+- **ABC sales versus label shares:** two independent 100% denominators over the full selected population before the displayed cohort. Positive-sales class shares require a reconciled basis; source-label shares include zero-sales and return-only unclassified labels. This remains a candidate ABC policy.
+- **Buyer ownership sales:** signed net sales split between actual and gap-estimated evidence using the existing area filters. Unknown ownership is separate from unknown geography. This view includes selected unmapped geography; regional charts continue to exclude it and disclose the excluded amount.
+
+Charts retain exact values in accessible tables/details and full labels in tooltips.
+Headlines show concise scope and units; methods remain expandable. Chart heights,
+axis label density and horizontal product bars adapt to the available width.
+STL retains its separate full-history scope, and planning charts describe scenarios.
+
+### Default chart presentation
+
+The four descriptive Analytics pages lead with the primary comparison and keep supporting evidence expandable:
+
+- **Overview:** four compact metrics, the selected period, the sales trend and calendar. The trend initially shows sales; a selector exposes gross profit or both measures on the same peso scale. A short takeaway compares the first and last recorded points, and a reading cue explains gaps. Monthly averages, annual observation coverage and sales-versus-profit scatter are supporting views. All Time growth displays `—` with the explanation that a bounded period is required.
+- **Sales Diagnostics:** period and Y/Y trend comparisons initially show sales. A measure selector exposes gross profit or both measures; daily views remain sales-only. Growth displays either percentage or peso change on one visible scale, with exact matched-period values in expandable detail. A reading cue explains above/below zero and unavailable comparisons. Gross margin is expandable. Movement replaces empty axes with an explanation when no observed adjacent full-month pairs exist. Quantity index describes multiples of the selected year's monthly average; its takeaway uses index values when index is selected. STL headings explain underlying direction, repeating monthly contribution and unusual periods while retaining its full-history scope.
+- **Product Prioritization:** the sales ranking and full-population ABC share comparison are primary. Display names explain A as largest contributors, B as next contributors, C as remaining contributors and Unclassified as not grouped. Direct values and an exact share key reduce dependence on hovering. Positive amounts and negative adjustments remain distinct; negative adjustments do not establish physical stock returns. ABC counts and Pareto are expandable. The six-column table supports source-label search and 20-row pages; expandable row evidence retains signed adjustments, observed months and catalog status. Search and paging affect the table only, and CSV export retains the complete selected cohort and original ABC codes.
+- **Area Prioritization:** three summaries lead with sales linked to an area, revenue mapping coverage and the highest-sales region. Regional and buyer type bars show direct totals, factual takeaways and their respective denominators. The five-column score table retains actual/estimate totals, coverage and composition in expandable row and footer evidence. The existing commercial score is displayed as a historical sales score, with current sales-size/period-coverage weights visible. Its score leader is labeled separately from the highest-sales region. The client directory sits under Mapping details.
+
+These display choices preserve the existing filters, metric definitions, signed values, candidate-policy labels, source evidence and publication limits. Browser fixtures validate the controls, scope retention, exports and responsive chart areas; they do not establish live warehouse reconciliation.
+
+Each chart presents a business question, a short result, the plot and a reading cue where needed. Exact values and technical methods remain available in details. This clarity pass is limited to descriptive analytics. Readability checks do not establish usability acceptance by management or procurement users.
+
+Overview's matched-growth card compares the sum of paired observed monthly net sales with the same calendar periods one year earlier. A bounded period is required; all-history annual comparisons are not summed into one growth rate. The open current month and estimates are excluded, a percentage requires positive prior sales, and exact custom boundaries use dated records where available. Matched counts and both totals accompany the result. Gross profit is withheld if any selected observed sales period lacks profit. Month coverage counts observations, including zero and negative sales, and does not attest reporting completeness.
+
+Areas revenue coverage is mapped net sales divided by all selected net sales under the displayed filters and actual/estimate mode. Missing amounts, nonpositive totals or negative components make the percentage unavailable; signed known amounts remain visible. The separate source-row coverage excludes gap estimates and requires valid row counts. Region-filtered coverage excludes other and unmapped geography, with a cue to clear Region for the full selected scope. Buyer ownership remains a separate proposed classification.
+
+To finish this descriptive reporting scope, collect the matched study-period screenshots, exact tables and exports after authenticated acceptance, then record the client's version-bound release decision. Use the [Chapter 4 checklist](../outputs/descriptive_activation_20261009/CHAPTER4_CHECKLIST.md) to assemble that packet. Category acceptance is already distinct from unresolved SKU/unit evidence; do not relabel accepted reporting categories as proposals or silently remove Unclassified rows.
+
+Predictive model acceptance, disease/weather territory joins and operational replenishment remain separate work. Keep planning outputs as scenarios until verified inventory, supplier, lead-time, expiry, cost, budget and capacity inputs exist. Completing company/source-label descriptive reporting does not demonstrate every original capstone objective; follow the [Objective/evidence register](OBJECTIVE_EVIDENCE_REGISTER.md) for the remaining scope.
+
+## Overview named sectors and open summaries — 25 October 2026
+
+The sector-contribution bars, detail table and CSV show Government, Private and
+Internal. All-sector totals retain all records; if unclassified records contribute,
+a visible scope note explains their exclusion from the named-sector display and
+CSV. Reconciliation still checks the full input population. Monthly averages and
+coverage are a regular visible section, with methods and exact values expandable.
+
+## Growth comparison card — 25 October 2026
+
+The Growth tab keeps its year-over-year chart, percent/peso selector, matched-period
+summary, exact-value disclosure and CSV in one comparison card. Chart ownership
+uses the card directly rather than its former two-column grid, so regrouping the
+sales outputs cannot strand the chart outside its comparison details. The separate
+gross-margin disclosure remains available. Calculations and matched populations
+are unchanged.
+
+
+## Overview KPI scope and latest-year growth — 25 October 2026
+
+Net sales and gross profit retain the selected buyer/date population, with scope
+visible in their notes. The all-time growth card is explicitly labelled
+**Latest-year sales growth**: it compares the latest year containing closed-month
+sales observations with the same recorded months one year earlier, within the
+selected buyer. It does not compare multi-year cumulative totals or silently fall
+back to an older year when the latest year lacks prior matches. Bounded selections
+retain the existing exact-date prior-year comparison. Open current months and
+estimates are excluded; a missing pair is omitted and a nonpositive prior total
+has no percentage. Notes show years/scope, paired-month counts, before/after sales
+and the signed peso difference. Missing comparisons explain their unavailable state.
+Sales record coverage retains observed/selected month counts and adds a percentage
+and months without records; this does not attest within-month completeness.
+See [verification and fixture previews](../outputs/overview_kpi_contents_20261025/README.md).
+
+## Growth view simplification — 25 October 2026
+
+Year-over-year sales change is displayed in pesos, with no percent/peso selector.
+Percentage calculations remain in the exact-value table, tooltips and CSV; zero
+or negative prior sales still make percentages unavailable while matched peso
+changes remain valid. The redundant DSS Executive Takeaway card is removed.
+
+## Growth chart spacing — 25 October 2026
+
+Growth and expandable gross margin use white, unboxed plot surfaces, light
+horizontal grids and a clearer zero baseline. Single-series legends and duplicate
+margin headings/badges are suppressed. Bars are capped at 44px; plot height is
+280px on desktop and 240px on small screens. Growth remains before margin with
+at least 16px separation. The latest interpretable margin and period remain in
+the disclosure heading; unavailable denominators clear that summary. Visible
+captions retain comparison/period availability, while detailed matched-period
+summary and method explanations remain expandable. The concurrent single-peso
+growth view and combined exact-values/CSV card are preserved. No analytical
+calculation, source, approval or publication change is introduced by this styling.
+
+## Known source limitation: absent and thin 2017–2019 months — 6 November 2026
+
+The recorded ledger has no source records in 10 calendar months (2017-05 to 2017-08, 2017-10, 2018-01, 2018-02 and 2019-10 to 2019-12). These remain unavailable, never zero. Three further months count as observed but are nearly empty: 2017-09, 2017-11 and 2017-12 hold 1, 9 and 9 records against a post-2020 median of 289. The matched-period comparison already excludes absent months. It does not exclude those three thin months, so a 2018-versus-2017 comparison for September, November or December compares a normal month with a near-empty one, and the 2017 baseline there should not be read as business performance. The default Jan–Sep 2026 versus 2025 study and every comparison from 2021 onward are unaffected.
+
+Decision recorded: disclose and retain approved matched-period semantics. Excluding thin months is not implemented. It would change published definitions, needs a threshold decision from the business owner and requires record counts to be carried through the gateway, API and UI. The [audit helper](../services/analytics_service/seasonality_diagnostics.py) lists the affected pairs and can support that change if later approved. The cause of the absent months (export boundary versus no sales) is unverified and needs the source steward. See the [seasonality evidence](DIAGNOSTIC_ANALYTICS.md#seasonality-evidence-and-thin-month-audit--6-november-2026).

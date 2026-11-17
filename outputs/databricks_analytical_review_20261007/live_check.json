@@ -1,0 +1,165 @@
+{
+  "checked_at": "2026-10-07T04:50:53.633Z",
+  "operation": "read_only_sql",
+  "checks": {
+    "latest_fact_history": [
+      {
+        "version": "17",
+        "timestamp": "2026-09-27T14:20:23.000Z",
+        "operation": "CREATE OR REPLACE TABLE AS SELECT"
+      }
+    ],
+    "latest_fact_identity": [
+      {
+        "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+        "policy_version": "sales_restart_gold_v7_independent_catalog",
+        "resolution_policy": "catalog_v1_independent_evidence",
+        "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+        "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+        "transaction_evidence_sha256": "5e1a839d551293b51149e7c35d863ce680573e02275f65d17512d6099ff88786",
+        "catalog_helper_sha256": "20888a90253718dabf2aea3390ecc8d7ca707b388e8a4d45123e894c98f688c9",
+        "publication_status": "CANDIDATE_PENDING_BUSINESS_AND_PRODUCT_MASTER_REVIEW"
+      }
+    ],
+    "latest_fact_totals": [
+      {
+        "records": "37728",
+        "unique_records": "37728",
+        "product_groups": "4561",
+        "approved_identity_records": "0",
+        "approved_category_records": "0",
+        "adjusted_records": "11355",
+        "eligible_net_sales": "626946741.810000",
+        "observed_revenue_months": "98"
+      }
+    ],
+    "yearly_quality": [
+      {
+        "calendar_year": "2017",
+        "records": "1978",
+        "eligible_net_sales": "10211167.350000",
+        "observed_revenue_months": "7",
+        "adjusted_records": "0",
+        "margin_eligible_revenue": "9212606.100000",
+        "eligible_gross_margin": "6316157.680000"
+      },
+      {
+        "calendar_year": "2018",
+        "records": "6181",
+        "eligible_net_sales": "51619691.270000",
+        "observed_revenue_months": "10",
+        "adjusted_records": "0",
+        "margin_eligible_revenue": "44882495.390000",
+        "eligible_gross_margin": "28328721.760000"
+      },
+      {
+        "calendar_year": "2019",
+        "records": "5446",
+        "eligible_net_sales": "62542304.490000",
+        "observed_revenue_months": "9",
+        "adjusted_records": "0",
+        "margin_eligible_revenue": "41211281.420000",
+        "eligible_gross_margin": "29125469.950000"
+      },
+      {
+        "calendar_year": "2020",
+        "records": "3980",
+        "eligible_net_sales": "63593274.630000",
+        "observed_revenue_months": "12",
+        "adjusted_records": "3980",
+        "margin_eligible_revenue": "40259988.090000",
+        "eligible_gross_margin": "28013993.680000"
+      },
+      {
+        "calendar_year": "2021",
+        "records": "3407",
+        "eligible_net_sales": "77860206.260000",
+        "observed_revenue_months": "12",
+        "adjusted_records": "0",
+        "margin_eligible_revenue": "77804247.260000",
+        "eligible_gross_margin": "50420770.930000"
+      },
+      {
+        "calendar_year": "2022",
+        "records": "3980",
+        "eligible_net_sales": "63234990.040000",
+        "observed_revenue_months": "12",
+        "adjusted_records": "0",
+        "margin_eligible_revenue": "60493221.210000",
+        "eligible_gross_margin": "40799049.060000"
+      },
+      {
+        "calendar_year": "2023",
+        "records": "5381",
+        "eligible_net_sales": "62228966.850000",
+        "observed_revenue_months": "12",
+        "adjusted_records": "0",
+        "margin_eligible_revenue": "59822843.640000",
+        "eligible_gross_margin": "33585582.480000"
+      },
+      {
+        "calendar_year": "2024",
+        "records": "2831",
+        "eligible_net_sales": "50259319.880000",
+        "observed_revenue_months": "12",
+        "adjusted_records": "2831",
+        "margin_eligible_revenue": "49956893.050000",
+        "eligible_gross_margin": "19563837.420000"
+      },
+      {
+        "calendar_year": "2025",
+        "records": "4544",
+        "eligible_net_sales": "185396821.040000",
+        "observed_revenue_months": "12",
+        "adjusted_records": "4544",
+        "margin_eligible_revenue": "95077093.870000",
+        "eligible_gross_margin": "52333915.760000"
+      }
+    ],
+    "stl_identity": [
+      {
+        "fact_delta_version": "17",
+        "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+        "policy_version": "sales_restart_gold_v7_independent_catalog",
+        "rows": "72"
+      }
+    ],
+    "external_signals": [
+      {
+        "rows": "2171",
+        "join_ready_rows": "0",
+        "forecast_eligible_rows": "0"
+      }
+    ]
+  },
+  "workspace_notebook_bytes_verified": false,
+  "operator_run_ids_verified": false,
+  "latest_fact_delta_version": 17,
+  "configured_release": {
+    "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+    "policy_version": "sales_restart_gold_v7_independent_catalog",
+    "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+    "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+    "publication_status": "CANDIDATE_PENDING_BUSINESS_AND_PRODUCT_MASTER_REVIEW",
+    "resolution_policy": "catalog_v1_independent_evidence",
+    "transaction_evidence_sha256": "5e1a839d551293b51149e7c35d863ce680573e02275f65d17512d6099ff88786",
+    "catalog_helper_sha256": "20888a90253718dabf2aea3390ecc8d7ca707b388e8a4d45123e894c98f688c9",
+    "fact_delta_version": 17
+  },
+  "latest_fact_version_end": "17",
+  "fact_version_stable": true,
+  "status": "verified_live_aggregates",
+  "local_sha256": {
+    "databricks/medshield_project/product_catalog.py": "20888a90253718dabf2aea3390ecc8d7ca707b388e8a4d45123e894c98f688c9",
+    "databricks/medshield_project/references/product_master_review.csv": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+    "databricks/medshield_project/references/transaction_evidence_review.csv": "5e1a839d551293b51149e7c35d863ce680573e02275f65d17512d6099ff88786"
+  },
+  "queries": {
+    "latest_fact_history": "DESCRIBE HISTORY workspace.medshield_gold.sales_restart_fact_candidate LIMIT 1",
+    "latest_fact_identity": "SELECT DISTINCT dataset_id, policy_version, resolution_policy, area_mapping_sha256, product_master_sha256, transaction_evidence_sha256, catalog_helper_sha256, publication_status FROM workspace.medshield_gold.sales_restart_fact_candidate VERSION AS OF 17",
+    "latest_fact_totals": "SELECT COUNT(*) AS records, COUNT(DISTINCT source_record_id) AS unique_records, COUNT(DISTINCT canonical_group_id) AS product_groups,\n      SUM(CASE WHEN identity_status='approved' THEN 1 ELSE 0 END) AS approved_identity_records,\n      SUM(CASE WHEN category_status='approved' THEN 1 ELSE 0 END) AS approved_category_records,\n      SUM(CASE WHEN is_adjusted_source THEN 1 ELSE 0 END) AS adjusted_records,\n      SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) AS eligible_net_sales,\n      COUNT(DISTINCT CASE WHEN is_net_sales_eligible THEN month_start END) AS observed_revenue_months\n      FROM workspace.medshield_gold.sales_restart_fact_candidate VERSION AS OF 17",
+    "yearly_quality": "SELECT calendar_year, COUNT(*) AS records,\n      SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) AS eligible_net_sales,\n      COUNT(DISTINCT CASE WHEN is_net_sales_eligible THEN month_start END) AS observed_revenue_months,\n      SUM(CASE WHEN is_adjusted_source THEN 1 ELSE 0 END) AS adjusted_records,\n      SUM(CASE WHEN is_gross_margin_eligible THEN net_sales END) AS margin_eligible_revenue,\n      SUM(CASE WHEN is_gross_margin_eligible THEN gross_margin_amount END) AS eligible_gross_margin\n      FROM workspace.medshield_gold.sales_restart_fact_candidate VERSION AS OF 17 GROUP BY calendar_year ORDER BY calendar_year",
+    "stl_identity": "SELECT fact_delta_version,dataset_id,policy_version,COUNT(*) AS rows FROM workspace.medshield_gold.sales_restart_stl_candidate GROUP BY fact_delta_version,dataset_id,policy_version",
+    "external_signals": "SELECT COUNT(*) AS rows, SUM(CASE WHEN is_external_join_ready THEN 1 ELSE 0 END) AS join_ready_rows, SUM(CASE WHEN is_forecast_eligible THEN 1 ELSE 0 END) AS forecast_eligible_rows FROM workspace.medshield_gold.vw_dss_external_signals_candidate"
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "collected_at": "2026-10-01T16:09:34.200Z",
+  "mode": "read-only",
+  "queries": {
+    "fact_status": {
+      "sql": "SELECT calendar_year, is_adjusted_source, COUNT(*) records, SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) net_sales, SUM(CASE WHEN is_quantity_observation_eligible THEN 1 ELSE 0 END) observed_quantity_rows, SUM(CASE WHEN net_sales<0 THEN net_sales ELSE 0 END) negative_net_sales FROM workspace.medshield_gold.sales_restart_fact_candidate VERSION AS OF 17 GROUP BY calendar_year,is_adjusted_source ORDER BY calendar_year,is_adjusted_source",
+      "rows": [
+        {
+          "calendar_year": "2017",
+          "is_adjusted_source": "false",
+          "records": "1978",
+          "net_sales": "10211167.350000",
+          "observed_quantity_rows": "1826",
+          "negative_net_sales": "-13471.000000"
+        },
+        {
+          "calendar_year": "2018",
+          "is_adjusted_source": "false",
+          "records": "6181",
+          "net_sales": "51619691.270000",
+          "observed_quantity_rows": "6181",
+          "negative_net_sales": "-21376.920000"
+        },
+        {
+          "calendar_year": "2019",
+          "is_adjusted_source": "false",
+          "records": "5446",
+          "net_sales": "62542304.490000",
+          "observed_quantity_rows": "5446",
+          "negative_net_sales": "-65036.080000"
+        },
+        {
+          "calendar_year": "2020",
+          "is_adjusted_source": "true",
+          "records": "3980",
+          "net_sales": "63593274.630000",
+          "observed_quantity_rows": "3980",
+          "negative_net_sales": "-1171401.190000"
+        },
+        {
+          "calendar_year": "2021",
+          "is_adjusted_source": "false",
+          "records": "3407",
+          "net_sales": "77860206.260000",
+          "observed_quantity_rows": "3406",
+          "negative_net_sales": "-130122.790000"
+        },
+        {
+          "calendar_year": "2022",
+          "is_adjusted_source": "false",
+          "records": "3980",
+          "net_sales": "63234990.040000",
+          "observed_quantity_rows": "3973",
+          "negative_net_sales": "-72182.600000"
+        },
+        {
+          "calendar_year": "2023",
+          "is_adjusted_source": "false",
+          "records": "5381",
+          "net_sales": "62228966.850000",
+          "observed_quantity_rows": "5380",
+          "negative_net_sales": "-77176.000000"
+        },
+        {
+          "calendar_year": "2024",
+          "is_adjusted_source": "true",
+          "records": "2831",
+          "net_sales": "50259319.880000",
+          "observed_quantity_rows": "2831",
+          "negative_net_sales": "-71933.000000"
+        },
+        {
+          "calendar_year": "2025",
+          "is_adjusted_source": "true",
+          "records": "4544",
+          "net_sales": "185396821.040000",
+          "observed_quantity_rows": "4544",
+          "negative_net_sales": "0.000000"
+        }
+      ]
+    },
+    "catalog_status": {
+      "sql": "SELECT COALESCE(category_status,'(null)') category_status,COALESCE(identity_status,'(null)') identity_status,COUNT(*) records,SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) revenue FROM workspace.medshield_gold.sales_restart_fact_candidate VERSION AS OF 17 GROUP BY 1,2 ORDER BY records DESC",
+      "rows": [
+        {
+          "category_status": "needs_review",
+          "identity_status": "needs_review",
+          "records": "37728",
+          "revenue": "626946741.810000"
+        }
+      ]
+    },
+    "model_counts": {
+      "sql": "SELECT 'run' kind,COUNT(*) rows FROM workspace.medshield_gold.fact_forecast_run_candidate UNION ALL SELECT 'point',COUNT(*) FROM workspace.medshield_gold.fact_forecast_point_candidate UNION ALL SELECT 'evaluation',COUNT(*) FROM workspace.medshield_gold.fact_model_evaluation_candidate UNION ALL SELECT 'review',COUNT(*) FROM workspace.medshield_gold.fact_model_review UNION ALL SELECT 'release',COUNT(*) FROM workspace.medshield_gold.model_release_manifest UNION ALL SELECT 'pointer',COUNT(*) FROM workspace.medshield_gold.model_release_pointer",
+      "rows": [
+        {
+          "kind": "run",
+          "rows": "1"
+        },
+        {
+          "kind": "point",
+          "rows": "1092"
+        },
+        {
+          "kind": "evaluation",
+          "rows": "15"
+        },
+        {
+          "kind": "review",
+          "rows": "0"
+        },
+        {
+          "kind": "release",
+          "rows": "0"
+        },
+        {
+          "kind": "pointer",
+          "rows": "0"
+        }
+      ]
+    },
+    "nasa_weather": {
+      "sql": "SELECT COUNT(*) rows, MIN(period_start) first_month, MAX(period_start) last_month FROM workspace.medshield_gold.vw_weather_nasa_power_monthly_candidate",
+      "rows": [
+        {
+          "rows": "540",
+          "first_month": "2021-01-01",
+          "last_month": "2025-12-01"
+        }
+      ]
+    }
+  },
+  "completed_at": "2026-10-01T16:09:41.713Z"
+}

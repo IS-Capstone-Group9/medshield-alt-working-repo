@@ -1,0 +1,14 @@
+{
+ "spot_check": {
+  "top_value": 25,
+  "random_tail": 25,
+  "multi_label_families": 1001,
+  "top_value_share_of_net_pct": 30.355307850440244
+ },
+ "generic_worksheet": {
+  "families": 100,
+  "share_of_net_pct": 51.546336788188725,
+  "looks_generic": 5
+ },
+ "status": "worksheets_for_human_review"
+}

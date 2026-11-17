@@ -1,0 +1,141 @@
+{
+  "release": {
+    "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+    "policy_version": "sales_restart_gold_v7_independent_catalog",
+    "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+    "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+    "publication_status": "CANDIDATE_PENDING_BUSINESS_AND_PRODUCT_MASTER_REVIEW",
+    "resolution_policy": "catalog_v1_independent_evidence",
+    "transaction_evidence_sha256": "5e1a839d551293b51149e7c35d863ce680573e02275f65d17512d6099ff88786",
+    "catalog_helper_sha256": "20888a90253718dabf2aea3390ecc8d7ca707b388e8a4d45123e894c98f688c9",
+    "fact_delta_version": 17
+  },
+  "proposal_policy": "product_review_v2_literal_pricing",
+  "fact_receipt_sha256": "3495df769aabed43df47b2d5b252ffe9f1d3bec14b3378a09163f19eecbd376b",
+  "source": "Databricks version-pinned fact; complete extraction; local audit artifacts only",
+  "records": 37728,
+  "groups": 4561,
+  "raw_titles": 4985,
+  "raw_titles_profiled": 4985,
+  "groups_with_varying_reported_cp_positive_original": 1609,
+  "groups_with_multiple_reported_cp_all_sources": 2240,
+  "verified_unit_price_comparison_records": 0,
+  "yearly_price_counts": {
+    "2017": {
+      "records": 1978,
+      "positive_original_price_candidate_records": 1740,
+      "groups_with_multiple_reported_cp": 149
+    },
+    "2018": {
+      "records": 6181,
+      "positive_original_price_candidate_records": 6065,
+      "groups_with_multiple_reported_cp": 340
+    },
+    "2019": {
+      "records": 5446,
+      "positive_original_price_candidate_records": 5249,
+      "groups_with_multiple_reported_cp": 452
+    },
+    "2020": {
+      "records": 3980,
+      "positive_original_price_candidate_records": 0,
+      "groups_with_multiple_reported_cp": 0
+    },
+    "2021": {
+      "records": 3407,
+      "positive_original_price_candidate_records": 3212,
+      "groups_with_multiple_reported_cp": 288
+    },
+    "2022": {
+      "records": 3980,
+      "positive_original_price_candidate_records": 3841,
+      "groups_with_multiple_reported_cp": 372
+    },
+    "2023": {
+      "records": 5381,
+      "positive_original_price_candidate_records": 4573,
+      "groups_with_multiple_reported_cp": 647
+    },
+    "2024": {
+      "records": 2831,
+      "positive_original_price_candidate_records": 0,
+      "groups_with_multiple_reported_cp": 0
+    },
+    "2025": {
+      "records": 4544,
+      "positive_original_price_candidate_records": 0,
+      "groups_with_multiple_reported_cp": 0
+    }
+  },
+  "warning_counts": {
+    "ADJUSTED_ALLOCATION_NOT_VERIFIED_PRICING": 11355,
+    "HISTORICAL_BACKFILL_NOT_COMPARABLE_PRICING": 1835,
+    "LOW_TRUST_SOURCE_NOT_COMPARABLE_PRICING": 1978,
+    "MISSING_DISCOUNT_AMOUNT": 88,
+    "MISSING_GROSS_SALES": 838,
+    "MISSING_NET_SALES": 880,
+    "MISSING_QUANTITY": 11,
+    "MISSING_UNIT_SELLING_PRICE": 835,
+    "NEGATIVE_REPORTED_CP": 29,
+    "RETURN_OR_CREDIT_CANDIDATE": 701,
+    "REVIEW_QTY_CP_GROSS_MISMATCH": 1424,
+    "SELLABLE_IDENTITY_OR_UNIT_UNVERIFIED": 37728,
+    "ZERO_REPORTED_GROSS_SALES": 18,
+    "ZERO_REPORTED_NET_SALES": 62,
+    "ZERO_REPORTED_QUANTITY": 17,
+    "ZERO_REPORTED_UNIT_SELLING_PRICE": 2
+  },
+  "numeric_state_counts": {
+    "discount_amount:missing": 88,
+    "discount_amount:negative": 2,
+    "discount_amount:positive": 3153,
+    "discount_amount:zero": 34485,
+    "gross_sales:missing": 838,
+    "gross_sales:negative": 432,
+    "gross_sales:positive": 36440,
+    "gross_sales:zero": 18,
+    "net_sales:missing": 880,
+    "net_sales:negative": 432,
+    "net_sales:positive": 36354,
+    "net_sales:zero": 62,
+    "quantity:missing": 11,
+    "quantity:negative": 673,
+    "quantity:positive": 37027,
+    "quantity:zero": 17,
+    "unit_selling_price:missing": 835,
+    "unit_selling_price:negative": 29,
+    "unit_selling_price:positive": 36862,
+    "unit_selling_price:zero": 2
+  },
+  "proposed_attribute_warning_counts": {
+    "ambiguous_fraction_or_missing_ratio_unit": 4,
+    "ambiguous_options_or_assortment": 8,
+    "bundle_contents_require_review": 1,
+    "combination_concentration_requires_review": 27,
+    "contained_unit_unknown": 4556,
+    "gauge_not_mass_strength": 12,
+    "marketing_percentage_not_concentration": 1,
+    "multipack_or_dimension_requires_review": 3,
+    "multiple_container_sizes_require_review": 4,
+    "net_mass_container_requires_review": 20,
+    "pack_count_unknown": 4509,
+    "roll_by_is_not_packaging": 1,
+    "sellable_packaging_unknown": 4406,
+    "service_keyword_requires_review": 7
+  },
+  "reconciliation": {
+    "warehouse_monthly": "PASS",
+    "unchanged_source_fields": "PASS",
+    "monthly_and_annual_eligibility_totals": "PASS",
+    "record_and_group_counts": "PASS"
+  },
+  "code_sha256": {
+    "review_product_sales.py": "6bdf2976a423bb318792e25dba412bd00b03106d34d4d6edd80a953bfcc40a39",
+    "product_review_rules.py": "f11b69d08fa2db5ff93ec3e846e49c755fd979f495e523b57769a511338e055a",
+    "review_catalog.py": "ec736f318605e5d18b533fd6fc6c6d47fbe540847403cfb1b95b05692d092cf7"
+  },
+  "customer_id": "No verified account identifier in this fact; DR is a document number",
+  "approvals_created": 0,
+  "cloud_writes": 0,
+  "price_reason": "unknown_without_independent_evidence"
+}

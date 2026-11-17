@@ -1,0 +1,334 @@
+# Capstone Paper Revision Guide
+
+## Figure and evaluation integration — 29 October 2026
+
+Use the [caption and evaluation companion](chapters/MedShield_Figure_Evaluation_Alignment_20261029.md)
+for prepared Figure 1.1 / 3.1 / 3.10 replacements and eleven Table 3.5 evidence rows.
+[Verified SVG/PNG packet](../outputs/figure_evaluation_alignment_20261029/README.md)
+retains original source-page anchors, original criteria and operational gates.
+These materials are ready for insertion; complete manuscript assembly and the
+prototype/citation pass remain pending. No original PDF modification or acceptance
+is implied.
+
+## Page-specific Chapters 1–3 alignment — 29 October 2026
+
+Use the [current working passages](chapters/MedShield_Chapters_1_3_Alignment_20261029.md)
+and [verified integration map](../outputs/chapters_1_3_alignment_20261029/README.md)
+for the original scope/conceptual flow, literature-selection distinction,
+implemented architecture/data preparation, STL/ABC/forecasting/planning and
+evaluation wording. Original objectives/targets are retained. Ten passages are
+written in the companion, not certified in the whole PDF or its institutional
+figures/bibliography. The separate [27-page Chapters 4–5 Word draft](../outputs/formatted_chapters_20261029/README.md)
+is already formatted/visually checked and remains unchanged by this work.
+Older dated readiness statements below retain their snapshot scope.
+
+## Original-source SO1 financial update — 27 October 2026
+
+The [working Chapters 4–5](chapters/MedShield_Chapter_4_5_Revised_20261016.md) now
+integrate current original-source SO1 supported profit/margin and regional audit
+evidence in Sections 4.0/5.0 with E19/E20. Preserve the distinction between current
+40,171-row originals and the historical 40,160-row correction subset. Paired margin
+basis/coverage and unresolved geographic/conditional/acceptance scope are explicit.
+The [verification packet](../outputs/so1_financial_scope_20261027/README.md) owns
+amounts, controls and actual tests. Formatted DOCX/PDF was not regenerated; actual
+visual review, whole-manuscript formatting and academic acceptance remain open.
+
+## Correction continuation — 25 October 2026
+
+[Executed correction continuation](../outputs/truth_correction_20261025/continuation/README.md) records verified SQL original-evidence intake (Spark notebook not run), fresh corrected Gold,21-configuration retrospective itemized-sales evaluation and corrected SO1 diagnostics. The resumed signed-in session verified corrected source labels, totals, product/area ranks, date/table filters, actual product/area/STL/forecast downloads, trained-research unavailability and planning draft invalidation. Concrete label/export defects were repaired and rechecked. Working Chapters4–5 now integrate corrected evidence; prior text/releases remain preserved. These totals are itemized-product sales, not complete company sales. Full-original disposition reconciliation, runtime model/SO1 publication, formatted whole-paper review and business/model/academic acceptance remain open. Earlier affected findings are historical; no operational approval or capstone completion is inferred.
+
+## Source-integrity correction — 25 October 2026
+
+Before reusing source-dependent results, integrate the
+[prepared correction note](../outputs/truth_correction_20261025/PAPER_NOTE.md)
+and [actual execution evidence](../outputs/truth_correction_20261025/README.md).
+Made-up contract-product replacements are not observed medicine demand. Label
+affected prior outputs historical/superseded, disclose itemized-subset coverage
+and the NDA-limited detail, and cite corrected results. The complete manuscript
+has not been rewritten or formally accepted by this software correction.
+
+## Detailed output-by-output review — 25 October 2026
+
+Use the [four-layer capstone crosswalk](../outputs/analytics_paper_gap_review_20261025/README.md)
+to locate each descriptive, diagnostic, predictive and prescriptive output in
+original Chapters 1/3 and the working Chapters 4/5. All 17 original analytical
+methods, evaluation pages and concrete exits are represented. The review
+incorporates later scoped financial approval, Gold-backed current-source
+research, historical context and planning-draft integrity without converting
+them into original medicine-demand, optimized procurement or expiry outcomes.
+It also identifies the full-baseline DII leakage risk, measured-rainfall versus
+forecast-probability RSI mismatch, and stated MCDA versus displayed LP-objective
+inconsistency. Existing [Chapters 1–3 errata](paper_errata/README.md) remain
+prepared corrections until actual manuscript integration and applicable review.
+Conversation milestone percentages are not paper fulfillment measurements.
+
+Last reviewed: 2026-10-25 (Asia/Manila); dated assessments below retain their original evidence dates.
+
+Revise the paper from implemented evidence, not from older architecture or model plans.
+
+## Original descriptive/predictive closure review — 24 October 2026
+
+[Direct paper requirements and exact exits](../outputs/paper_analytics_closure_20261024/PAPER_REQUIREMENTS.md)
+recheck the confirmed latest PDF, including daily STL, held-out-product ABC,
+Prophet DII/RSI, urgency and MAPE commitments. Current financial reporting and
+research are narrower; the original layers are not fully fulfilled. The actual
+new-source monthly financial STL repair is now persisted and verified, without
+claiming daily medicine units or using full-series decomposition as a forecast
+feature. Preserve original PDF bytes and the revised chapters' objective gaps.
+
+The [fresh metric/source checks](../outputs/paper_analytics_closure_20261024/README.md)
+update the earlier model-method assessment. Do not reuse the old percentage counts
+below as a new completion assessment or substitute WAPE for the planned MAPE.
+Current-source completeness is user-attested for financial research; it does not
+create SKU units, external joins or urgency labels. No proposed objective change
+was accepted. Prescriptive operational integration still requires a supported
+quantity forecast and verified inventory/supplier/expiry inputs.
+
+## Required system-to-paper corrections — 17 October 2026
+
+The [QA review](../outputs/qa_paper_alignment_20261017/paper-review.md) maps the
+confirmed proposal to current implementation. UI/messaging corrections are
+tracked in the [repair evidence](../outputs/qa_remediation_20261017/README.md).
+They do not fulfill missing original methods or authorize an academic amendment.
+Carry these corrections into the integrated working manuscript:
+
+- **Architecture:** describe Next.js/React/TypeScript dashboard → Express gateway
+  → Databricks Gold analytical contracts. Supabase supplies authentication,
+  linked application roles and audit persistence. Replace the obsolete Power BI
+  dashboard/Supabase analytical-persistence description in Chapter 3.
+- **Ingestion:** describe controlled Databricks ingestion and candidate/release
+  review. Direct browser upload is disabled with HTTP409; a source-status screen
+  is not evidence of an upload-to-publication workflow.
+- **Descriptive:** identify the implemented monthly company-PHP STL and its
+  actual period. Do not call it the original daily territorial decomposition.
+- **Predictive:** distinguish company net-sales PHP research, its historical
+  errors and unpublished candidate projections from territory medicine demand,
+  urgency and accepted disease/weather models. Preserve MAPE versus WAPE and
+  genuine generation/origin/lead timing.
+- **ABC:** reconcile the proposal's pp99–100 temporal/held-out descriptions and
+  p117 new/low-history task. The North Star future-period target is separate.
+  Observed deterministic ABC does not establish either classifier result.
+- **Planning:** describe entered product-specific allocation scenarios and the
+  active bounded greedy method. EOQ/ROP, global LP optimality and measured expiry
+  reduction remain absent; do not describe scenario output as procurement action.
+
+The revised Chapters 4–5 already preserve these bounded claims. The writing owner
+must integrate the same terminology across Chapters 1–5 and submit unresolved
+original commitments for actual study-lead/adviser decisions. Original source
+PDFs remain read-only; no original objective or model/business approval is changed.
+
+## Latest source and complete Chapters 4–5 revision — 16 October 2026
+
+The user identifies `(POST-DEFENSE) Capstone 1 - GROUP_9_3ISB.pdf` as the latest Chapters 1–3. Its 149-page bytes match [CapstonePaper_1.pdf](../references/CapstonePaper_1.pdf), SHA-256 `4c40147be0de0563e2a58bc0210c0a13cf850bf1382577fff497422b44ebe862`. This confirmation supersedes the earlier filename-based inference that `PRIVATE_SUMMER_CAPSTONE_2 - GROUP9_ISB.pdf` is latest. The dated 7 October review below retains its historical source identity; original O1–O5 wording is unchanged.
+
+The separately supplied [42-page Chapters 4–5 draft](../references/chapters/GROUP%209_MedShield_CP2_Chapter%204_5.pdf) is preserved. Use the [complete revised working text](chapters/MedShield_Chapter_4_5_Revised_20261016.md) and [top-to-bottom revision record](../outputs/paper_revision_20261016/REVISION_RECORD.md). The revision fills the empty analysis/summary and Chapter 5 sections, integrates current descriptive/predictive/scenario evidence and preserves original objective gaps. Whole-paper integration, institutional bibliography/formatting and actual academic/client decisions remain separate.
+
+The latest proposal's held-out XGBoost ABC task concerns new/low-history SKU labels (PDF p117). A future-period ABC target in North Star question 7B is a distinct temporal task. Keep that difference explicit rather than attributing a future-period design to every proposal classifier. No accepted classifier result is established here.
+
+## Chapter 1–3 model disposition — 7 October 2026
+
+Accountable role: Business Analyst, with sequential Data Analyst assessment.
+Source: [current supplied paper](../references/PRIVATE_SUMMER_CAPSTONE_2%20-%20GROUP9_ISB.pdf),
+PDF pages 11–15, 91–107 and 113–118. Recommendations below are proposed scope
+revisions, not an adviser decision or edits to the original PDF. The older chapter
+files in `references/_extracted/` mostly contain contents entries; the full PDF
+was extracted to inspect objectives, formulas and evaluation commitments.
+
+The plan for this review was to identify the paper's actual commitments, compare
+current source and version-bound evidence, specify retain/revise/defer decisions,
+then define a reproducible completion denominator. No application, schema,
+warehouse or model publication changes are part of this documentation review.
+
+### Model-by-model recommendation and current evidence
+
+I = a corresponding method family is implemented in the narrower scope stated.
+P = a related evaluated model or scenario exists, but substantial promised behavior
+is absent. N = no qualifying current delivery evidence for the promised task.
+Legacy scripts, installed libraries and formula demonstrations do not qualify.
+None of these labels implies original-scope acceptance or operational readiness.
+
+| ID | Paper method / Chapter 3 section | Recommended disposition | Evidence status and remaining difference |
+|---|---|---|---|
+| M01 | Area encoding, 3.4.1.1.1.1 | Retain; disclose proposed/approved geography and Unknown | I: mapped area reporting exists; full geographic accuracy/ownership acceptance is open |
+| M02 | Industry encoding, 3.4.1.1.1.2 | Revise into independent buyer sector and customer channel | I: Government/Private/Internal/Unknown sector logic exists; Hospital/Pharmaceutical are channels, not mutually exclusive ownership classes |
+| M03 | STL, 3.4.1.2 | Retain as descriptive/diagnostic monthly decomposition | I: 72 company-revenue months, 2020–2025, verified against fact19; daily SKU/territory demand and automatic Prophet seeding are not delivered |
+| M04 | 80/20 and concentration, 3.4.1.3 | Retain; include deterministic observed ABC | I: positive-sales rankings and ABC thresholds implemented; reporting labels are not approved SKUs and raw areas are not verified customer accounts |
+| M05 | Prophet sales-only baseline, 3.4.2.1.1.1 | Retain as challenger alongside naive, seasonal-naive and ETS | P: company-PHP evaluation executed; accepted territory/SKU-unit forecasts and a promoted Prophet champion are absent |
+| M06 | Prophet + disease/DII, 3.4.2.1.1.2 | Conditional retrospective experiment | N: no accepted origin-safe disease-feature forecast; context/OLS utilities are not this Prophet task |
+| M07 | Prophet + weather/RSI, 3.4.2.1.1.3 | Conditional experiment; revise RSI to actual available input | N: no accepted external-feature forecast; observed rainfall cannot stand in for archived above-normal-rainfall forecast probabilities |
+| M08 | XGBoost ABC classifier, 3.4.2.1.2.1 | Remove for current observed ABC; optional future-period/cold-start experiment | N: no current accepted classifier at the promised target; direct current ABC needs no learned approximation |
+| M09 | XGBoost urgency, 3.4.2.1.2.2 | Defer until a measurable forward target exists | N: a model equation does not define urgency ground truth; sales-only priority does not prove stock urgency |
+| M10 | MCDA, 3.4.3.1.1 | Retain commercial scoring and sensitivity; defer outbreak criteria | P: selected-period sales-value/active-coverage weighting exists; promised revenue/growth/outbreak weights and integration with allocation differ |
+| M11 | LP allocation, 3.4.3.1.2 | Retain scenario allocation; use MILP if claiming optimal integer packs | P: active gateway is bounded greedy; offline Python has two-stage equal-fulfillment MILP, not the promised MCDA-weighted regional model |
+| M12 | EOQ, 3.4.3.1.3 | Retain in literature; conditional scenario or future operational feature | N: ordering/holding costs, supported unit demand and evaluated current feature are absent |
+| M13 | ROP, 3.4.3.1.4 | Retain conditionally with lead-time demand and inventory position | N: accepted supplier lead times, stock/on-order/commitments and operational trigger evaluation are absent |
+| M14 | Safety stock, 3.4.3.1.5 | Retain conditionally; correct service-level versus expiry wording | N: lead-time uncertainty, service policy and validated stock simulation are absent |
+| M15 | Collaborative filtering, 3.4.3.1.6 | Move to future work unless expansion recommendation remains essential | N: no accepted SKU-region recommendation evaluation; sparse sales cannot prove an item was unstocked |
+| M16 | Disease procurement threshold alerts, 3.4.3.1.7.1 | Retain only retrospective evidence flags initially | N: no validated live disease-to-product procurement intervention; diagnostic residual flags are a different task |
+| M17 | Typhoon contingency alerts, 3.4.3.1.7.2 | Remove unofficial Signal inference; defer to official bulletin/manual scenarios | N: no accepted official warning feed or tested contingency policy; proxy rainfall/wind does not certify a PAGASA declaration |
+
+### Completion rate and denominator
+
+Count the 17 named analytical tasks above equally, with area and industry encoding
+separate, disease/weather extensions separate and the two alert mechanisms separate.
+Do not count literature-only ARIMA/SARIMA reviews, architecture, CRISP-DM/SEMMA,
+screens, catalog proposals or diagnostic question counts as additional models.
+
+- Implemented corresponding families in revised/narrower scope: **4/17 = 23.5%**.
+- Partial corresponding tasks: **3/17 = 17.6%**; not counted as complete.
+- Tasks without qualifying delivery evidence: **10/17 = 58.8%**.
+- Implementation/partial coverage together: **7/17 = 41.2%**; coverage is not completion.
+- Recorded fully accepted end-to-end tasks at the original promised target:
+  **0/17 = 0%**. This acceptance figure does not mean no engineering work exists.
+
+These are evidence counts, not estimates of person-hours or overall capstone
+completion. A tested company-revenue Prophet experiment cannot close an approved
+medical SKU-unit forecast requirement. No defensible whole-capstone percentage
+exists without an agreed weighted rubric covering data, system, analytics, paper
+and acceptance. Do not rebase the denominator silently after scope removal.
+
+### Corrections required in Chapters 1–3
+
+1. Chapter 1 objectives 1–2 and scope: align historical coverage with 2017–2025,
+   but specify actual modeling subsets independently. Replace fixed 3,631-SKU and
+   ABC counts with version-bound reporting-label counts and approved SKU coverage.
+   The current 4,561 labels are not 4,561 verified sellable products. Government
+   59%/Hospital25% claims require reproducible, approved buyer/channel evidence.
+2. Chapter 1 objective3: say evaluated forecasts at supported origins/leads, not
+   guaranteed current December2026 territory demand. Company PHP and SKU units
+   are separate targets. Quantity candidate history ending December2023 requires
+   recency/lead evidence or newer observations before a current planning claim.
+3. Chapter 1 objectives4–5: change demonstrated expiry reduction ≤5%, optimal
+   procurement and live typhoon alerts to evaluated planning scenarios/future
+   operational validation unless supporting stock, expiry and official alerts exist.
+   Define any future wastage numerator, denominator, period and baseline explicitly.
+4. Chapter 2: retain relevant literature on conditional methods, clearly distinguishing
+   reviewed alternatives from selected, implemented and accepted models. K-Means,
+   ARIMA and SARIMA mentioned in older drafts are not additional Chapter3 delivery
+   commitments. Product category classification is also distinct from revenue ABC.
+5. Chapter 3 STL/Prophet: use monthly supported history; full-history STL is not a
+   leakage-safe forecast feature. Fit any feature/decomposition within each training
+   window. Prophet does not receive STL components automatically through ordinary fitting.
+6. Chapter 3 XGBoost: same-period revenue features predicting same-period ABC are
+   circular/leakage-prone. A future ABC experiment must derive target bands from the
+   future evaluation portfolio and use origin-known features only. Test low-history
+   and unseen families separately; current cumulative bands remain deterministic.
+   Define urgency as future unit movement or verified stockout risk before fitting;
+   evaluate demand with forecast metrics and stockout risk with probability/ranking metrics.
+7. Chapter 3 external features: compute DII normalization and lag selection inside
+   training windows, handle zero denominators and missing surveillance, and preserve
+   reporting vintages. The paper's 2021–2025 mean would leak the 2025 audit into
+   2021–2024 training. Remove automatic DII>1 uplift and fixed RSI/alert multipliers;
+   learned associations may be absent or negative. Avoid double-counting effects
+   through regressors plus separate unvalidated post-forecast multipliers.
+8. Chapter 3 allocation: reconcile text and mathematics. The printed `max Z=x+y`
+   does not contain the promised MCDA weights. Supply one reviewed product-territory
+   objective, compatible units and actual constraints. Never sum different product
+   units as one physical supply/capacity quantity without a valid conversion.
+   EOQ is an order policy quantity, not proof of available stock/supplier capacity.
+9. Chapter 3 safety stock: Z represents a chosen service quantile under explicit
+   assumptions, not a direct calibration guarantee for ≤5% expiry. Expiry needs
+   shelf-life/lot/FEFO data and simulation. Spreading monthly means over days cannot
+   establish daily demand variability or justify an empirical daily service guarantee.
+10. Chapter 3 evaluation: use rolling origins and common targets for baselines and
+    challengers; preserve the existing 2025 retrospective-audit label. Add WAPE
+    where its denominator is valid, MAE/RMSE and bias; use MAPE only on justified
+    nonzero targets. Targets below15%/20% are proposed thresholds, not achieved
+    results. Last-value WAPE37.76% is not a Prophet MAPE score or completion rate.
+11. Mapping validation needs reviewed accuracy and Unknown coverage, not merely
+    non-null values. Alert evaluation needs independently defined event labels;
+    a mean-plus-two-SD exceedance is not itself evidence of a procurement need.
+12. Correct WeatherAPI/PAGASA wording: consume an official issued signal with its
+    timestamp/province or label a manually entered scenario. Historical rainfall is
+    not a live warning. Replace guaranteed stock doubling with approved scenario
+    sensitivity and constraints. Future external regressors must be available,
+    forecast separately or explicitly scenario-entered at the forecast origin.
+
+### Implementation path if retained methods are pursued
+
+| Gate | Owner | Deliverable and observable exit evidence |
+|---|---|---|
+| 1. Scope and target | Business Analyst + adviser/client | Agreed retained/conditional/future scope; exact target, unit, horizon, metrics and approval rubric |
+| 2. Data readiness | Product/source/account owners + Data Analyst | Reviewed pilot SKU/unit/territory cohort, observation completeness and source/adjustment evidence; independent classification reference set |
+| 3. Predictive evaluation | Data Analyst | Frozen input; origin-only preparation; naive/seasonal-naive/ETS/Prophet common-key rolling evaluation; errors/bias by lead; champion or explicit no-promotion decision |
+| 4. External increments / optional XGBoost | Data Analyst + external reviewers | Accepted joins/vintages and future input policy; leakage-safe targets; improvement and coverage against sales-only/simple rules |
+| 5. Operational inputs | Inventory/procurement/finance | Timestamped stock/on-order/commitments, lead times, costs, packs/MOQ, service and expiry policies |
+| 6. Prescriptive delivery | Backend/Data Analyst + business owner | Reviewed MCDA objective and sensitivity; exact integer-pack solver if optimality claimed; feasibility/infeasibility and stock/cost/expiry simulation versus agreed baseline |
+| 7. Publication and paper | Operator/QA + Technical Writer | Recovery prerequisites; same-release warehouse/API/UI/export acceptance; signed decisions; Chapters1–5 matched to actual methods and results |
+
+Recommended first release: rule-based mappings, historical finance/diagnostics,
+monthly STL, observed Pareto/ABC, a reviewed SKU-unit forecast comparison,
+commercial MCDA sensitivity and transparent constrained allocation scenarios.
+Keep operational EOQ/ROP/safety stock conditional on Gate5; treat external
+regressors, XGBoost, collaborative filtering and live contingencies as separate
+experiments rather than prerequisites for every descriptive screen.
+
+Technical references: [Prophet extra regressors](https://facebook.github.io/prophet/docs/seasonality,_holiday_effects,_and_regressors.html),
+[rolling-origin evaluation](https://otexts.com/fpp3/tscv.html),
+[SciPy integer optimization](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.milp.html),
+[official PAGASA wind signals](https://www.pagasa.dost.gov.ph/learning-tools/tropical-cyclone-wind-signal).
+Local evidence: [current state](CURRENT_STATE.md), [analytics tracker](ROADMAP.md),
+[actual predictive evaluation](../outputs/predictive_validation/2026-09-27T14-30-12-921Z/REVIEW.md),
+[planning QA](../outputs/business_analytics_review_20261007/planning_final_qa.md),
+[current greedy gateway](../backend/src/planningScenario.ts),
+[offline MILP utility](../services/analytics_service/prescriptive_planning.py),
+[commercial sensitivity](../frontend/services/api/dashboard-mcda.ts).
+
+## Claims the paper may make
+
+- MedShield is a historical pharmaceutical decision-support system.
+- The runtime uses a Next.js frontend, TypeScript gateway, Databricks analytical source, and Supabase Auth/audit boundary.
+- The current sales candidate covers 2017-2025 and contains 37,728 accepted fact rows for the checksum-bound replacement snapshot.
+- PAGASA supplies official historical observations for 2017-2024; NASA POWER supplies a separately labeled provider proxy; DOH 2026 is partial.
+- Descriptive sales evidence, deterministic Pareto/ABC, derived area/buyer prioritization, simple forecast baselines, and user-entered planning scenarios are implemented.
+- Required Databricks failures fail closed without local/mock analytical fallback.
+
+## Claims that require additional evidence
+
+- Final/approved revenue, gross margin, SKU, medical-scope, buyer, or geographic definitions.
+- A champion Prophet, XGBoost, disease-adjusted, or weather-adjusted forecast.
+- A 2026 sales holdout or any 2026 MedShield sales actual.
+- Proven causal disease/weather effects.
+- Real EOQ, ROP, safety stock, stockout, expiry, supplier, purchase-order, or savings results.
+- Live disease surveillance or official weather alerts.
+
+## Chapter alignment
+
+### Chapters 1-2
+
+Frame the business problem as historical planning support. Literature can motivate seasonality, weather, disease, forecast evaluation, and inventory methods, but must not imply that every cited method is implemented.
+
+When citing supplementary [PSA](https://psa.gov.ph) / [OpenSTAT](https://openstat.psa.gov.ph) datasets beyond the already-used `0211A6DAPG0` census denominators and PSGC codes ([DECISIONS.md](DECISIONS.md) 012 & 016), match each source to its valid analytical role: **Vital Statistics / Leading Causes of Death** and **regional PNHA (`0332B5CREG0.px`, `0342B5CREG1.px`), 2023 FIES Health (`0071E3ATME0.px`), and provincial poverty (`0011F3DF010.px`)** belong to Chapters 1–2 macro public-health and catchment background (annual/triennial/lagged; never substitutes for DOH weekly/monthly surveillance or live alerts); **2024 POPCEN (`0221A6DLPD0.px`, `0191A6DTHP8.px`)** supports verified catchment scaling; and **CPI `0012M4ACP22.px` (`2018=100`, `06.1.1.1` Medicines, vaccines and other pharmaceutical preparations, Jan 2018–Oct 2026)** supports constant-peso diagnostic sensitivity only (never physical SKU demand).
+
+### Chapter 3
+
+Document:
+
+1. immutable Bronze, assessed Silver, candidate Gold, and SQL bridge flow;
+2. source coverage and candidate publication gates;
+3. metric eligibility and business definitions;
+4. derived/estimated mapping and contract-allocation provenance;
+5. rolling-origin predictive validation against simple baselines;
+6. scenario-based prescriptive methods when operational inputs are absent;
+7. human review and fail-closed system behavior.
+
+### Chapter 4
+
+Use current screenshots and reproducible evidence for architecture, pipeline results, data quality, dashboard behavior, and executed tests. Every table should state dataset ID/version, period, population, status, and run date.
+
+### Chapter 5
+
+Interpret validated descriptive findings and forecast comparisons. State whether external features improved the baseline. Explain candidate/mapping limitations and the absence of real inventory/procurement inputs. Recommend future operational validation without describing it as completed.
+
+## Terminology
+
+| Use | Avoid |
+|---|---|
+| transaction gross margin/profit | company net profit |
+| candidate Gold publication | certified production truth |
+| derived buyer/geography mapping | observed ownership/location when absent from source |
+| NASA POWER weather proxy | official PAGASA replacement |
+| baseline forecast evaluation | approved forecast/champion model |
+| planning scenario | purchase recommendation/order |
+
+Use [CURRENT_STATE.md](CURRENT_STATE.md), [REQUIREMENTS.md](REQUIREMENTS.md), and [IMPLEMENTATION.md](IMPLEMENTATION.md) as the paper's technical baseline.

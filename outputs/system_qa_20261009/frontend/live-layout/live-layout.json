@@ -1,0 +1,372 @@
+{
+  "runtimeErrors": [],
+  "result": [
+    {
+      "width": 1440,
+      "page": "overview",
+      "charts": [
+        {
+          "id": "overviewBaselineChart",
+          "width": 1082.890625,
+          "height": 378,
+          "parentWidth": 1084.890625,
+          "plotWidth": 992.1308593750001,
+          "plotHeight": 339.4
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "revenue",
+      "charts": [
+        {
+          "id": "revenueDetailChart",
+          "width": 1082.890625,
+          "height": 358,
+          "parentWidth": 1084.890625,
+          "plotWidth": 992.1308593750001,
+          "plotHeight": 294.6
+        },
+        {
+          "id": "salesMovementChart",
+          "width": 1082.890625,
+          "height": 278,
+          "parentWidth": 1084.890625,
+          "plotWidth": 1011.1562500000001,
+          "plotHeight": 239.4
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "products",
+      "charts": [
+        {
+          "id": "productBarChart",
+          "width": 546.1875,
+          "height": 532,
+          "parentWidth": 548.1875,
+          "plotWidth": 379.94775390625,
+          "plotHeight": 448.2
+        },
+        {
+          "id": "productAbcShareChart",
+          "width": 468.6875,
+          "height": 248,
+          "parentWidth": 470.6875,
+          "plotWidth": 352.59208984375,
+          "plotHeight": 141.2
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "territory",
+      "charts": [
+        {
+          "id": "sectorRevenueChart",
+          "width": 549.03125,
+          "height": 198,
+          "parentWidth": 551.03125,
+          "plotWidth": 441.58544921875,
+          "plotHeight": 130.4
+        },
+        {
+          "id": "sectorBuyerChart",
+          "width": 451.859375,
+          "height": 226,
+          "parentWidth": 453.859375,
+          "plotWidth": 358.530859375,
+          "plotHeight": 158.4
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "forecast",
+      "charts": [
+        {
+          "id": "forecastChart",
+          "width": 1082.890625,
+          "height": 358,
+          "parentWidth": 1084.890625
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "inventory",
+      "charts": [
+        {
+          "id": "planParetoChart",
+          "width": 1082.890625,
+          "height": 288,
+          "parentWidth": 1084.890625,
+          "plotWidth": 914.7339843750001,
+          "plotHeight": 227
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "data",
+      "charts": []
+    },
+    {
+      "width": 1440,
+      "page": "sales-data",
+      "charts": []
+    },
+    {
+      "width": 1440,
+      "page": "weather-validation",
+      "charts": []
+    },
+    {
+      "width": 926,
+      "page": "overview",
+      "charts": [
+        {
+          "id": "overviewBaselineChart",
+          "width": 816.890625,
+          "height": 278,
+          "parentWidth": 818.890625,
+          "plotWidth": 726.130859375,
+          "plotHeight": 239.4
+        }
+      ]
+    },
+    {
+      "width": 926,
+      "page": "revenue",
+      "charts": [
+        {
+          "id": "revenueDetailChart",
+          "width": 816.890625,
+          "height": 318,
+          "parentWidth": 818.890625,
+          "plotWidth": 726.130859375,
+          "plotHeight": 254.6
+        },
+        {
+          "id": "salesMovementChart",
+          "width": 816.890625,
+          "height": 278,
+          "parentWidth": 818.890625,
+          "plotWidth": 745.15625,
+          "plotHeight": 239.4
+        }
+      ]
+    },
+    {
+      "width": 926,
+      "page": "products",
+      "charts": [
+        {
+          "id": "productBarChart",
+          "width": 403.90625,
+          "height": 532,
+          "parentWidth": 405.90625,
+          "plotWidth": 237.84775390624998,
+          "plotHeight": 448.2
+        },
+        {
+          "id": "productAbcShareChart",
+          "width": 344.96875,
+          "height": 248,
+          "parentWidth": 346.96875,
+          "plotWidth": 228.89208984375,
+          "plotHeight": 141.2
+        }
+      ]
+    },
+    {
+      "width": 926,
+      "page": "territory",
+      "charts": [
+        {
+          "id": "sectorRevenueChart",
+          "width": 784.890625,
+          "height": 198,
+          "parentWidth": 786.890625,
+          "plotWidth": 677.48544921875,
+          "plotHeight": 130.4
+        },
+        {
+          "id": "sectorBuyerChart",
+          "width": 784.890625,
+          "height": 226,
+          "parentWidth": 786.890625,
+          "plotWidth": 691.530859375,
+          "plotHeight": 158.4
+        }
+      ]
+    },
+    {
+      "width": 926,
+      "page": "forecast",
+      "charts": [
+        {
+          "id": "forecastChart",
+          "width": 816.890625,
+          "height": 318,
+          "parentWidth": 818.890625,
+          "plotWidth": 732.13671875,
+          "plotHeight": 226
+        }
+      ]
+    },
+    {
+      "width": 926,
+      "page": "inventory",
+      "charts": [
+        {
+          "id": "planParetoChart",
+          "width": 816.890625,
+          "height": 288,
+          "parentWidth": 818.890625,
+          "plotWidth": 648.733984375,
+          "plotHeight": 227
+        }
+      ]
+    },
+    {
+      "width": 926,
+      "page": "data",
+      "charts": []
+    },
+    {
+      "width": 926,
+      "page": "sales-data",
+      "charts": []
+    },
+    {
+      "width": 926,
+      "page": "weather-validation",
+      "charts": []
+    },
+    {
+      "width": 375,
+      "page": "overview",
+      "charts": [
+        {
+          "id": "overviewBaselineChart",
+          "width": 313.890625,
+          "height": 278,
+          "parentWidth": 315.890625,
+          "plotWidth": 232.97851562499997,
+          "plotHeight": 239.4
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "revenue",
+      "charts": [
+        {
+          "id": "revenueDetailChart",
+          "width": 313.890625,
+          "height": 258,
+          "parentWidth": 315.890625,
+          "plotWidth": 232.97851562499997,
+          "plotHeight": 194.6
+        },
+        {
+          "id": "salesMovementChart",
+          "width": 313.890625,
+          "height": 248,
+          "parentWidth": 315.890625,
+          "plotWidth": 242.15624999999997,
+          "plotHeight": 209.4
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "products",
+      "charts": [
+        {
+          "id": "productBarChart",
+          "width": 313.890625,
+          "height": 532,
+          "parentWidth": 315.890625,
+          "plotWidth": 147.84775390624998,
+          "plotHeight": 448.2
+        },
+        {
+          "id": "productAbcShareChart",
+          "width": 313.890625,
+          "height": 248,
+          "parentWidth": 315.890625,
+          "plotWidth": 197.79208984374998,
+          "plotHeight": 118.19999999999999
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "territory",
+      "charts": [
+        {
+          "id": "sectorRevenueChart",
+          "width": 281.890625,
+          "height": 198,
+          "parentWidth": 283.890625,
+          "plotWidth": 174.48544921874998,
+          "plotHeight": 130.4
+        },
+        {
+          "id": "sectorBuyerChart",
+          "width": 281.890625,
+          "height": 226,
+          "parentWidth": 283.890625,
+          "plotWidth": 188.53085937499998,
+          "plotHeight": 158.4
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "forecast",
+      "charts": [
+        {
+          "id": "forecastChart",
+          "width": 313.890625,
+          "height": 258,
+          "parentWidth": 315.890625,
+          "plotWidth": 249.15624999999997,
+          "plotHeight": 124
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "inventory",
+      "charts": [
+        {
+          "id": "planParetoChart",
+          "width": 313.890625,
+          "height": 288,
+          "parentWidth": 315.890625,
+          "plotWidth": 160.40585937499998,
+          "plotHeight": 227
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "data",
+      "charts": []
+    },
+    {
+      "width": 375,
+      "page": "sales-data",
+      "charts": []
+    },
+    {
+      "width": 375,
+      "page": "weather-validation",
+      "charts": []
+    }
+  ]
+}

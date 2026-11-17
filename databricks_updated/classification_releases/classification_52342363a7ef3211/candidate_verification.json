@@ -1,0 +1,67 @@
+{
+  "status": "PASS_PREPARED_PROPOSALS_NOT_PUBLISHED",
+  "submission_sha256": "96a1f1a0e3eae7971ad675a11199d7d2e237d2f1d38cfbe8464d659328bcec07",
+  "canonical_master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+  "candidate_rows": 5694,
+  "original_master_rows": 4561,
+  "appended_exact_aliases": 1133,
+  "proposal_key_rows": 5694,
+  "category_changes": 2336,
+  "candidate_categories": {
+    "medicine": 2349,
+    "unclassified": 875,
+    "medical_equipment": 197,
+    "medical_supply": 1382,
+    "non_medical": 891
+  },
+  "candidate_category_statuses": {
+    "approved": 2225,
+    "needs_review": 3469
+  },
+  "proposal_dispositions": {
+    "reporting_family_outside_master_enum": 385,
+    "existing_master_preserved": 1584,
+    "supplied_reporting_proposal": 81,
+    "retained_reporting_proposal": 3154,
+    "unresolved_or_nonstock_disposition": 222,
+    "supplied_unverified_guess": 162,
+    "supplied_no_suggestion": 62,
+    "supplied_low": 31,
+    "exact_identity_conflict": 13
+  },
+  "current_records": 40160,
+  "excluded_records": 911,
+  "current_net_sales_php": "637922399.53",
+  "immutable_existing_master_values_preserved": true,
+  "new_identity_unit_item_kind_forecast_approvals": 0,
+  "canonical_master_modified": false,
+  "warehouse_writes": 0,
+  "files": {
+    "category_transitions.csv": {
+      "sha256": "6a0d357acdd8efc44a0e9e11b009c39b33fef29c9191363741243a58aacf5141",
+      "bytes": 160654
+    },
+    "classification_proposals.csv": {
+      "sha256": "5c34785ad5d6e13bc8392ec1c30a7e1b5475e59ec6439c7c1456cde227948ad4",
+      "bytes": 4210053
+    },
+    "classification_proposals.json": {
+      "sha256": "10b01fdaa04a003a9fa7a1b2fcb729259a7e49828fd87218fc097fa3e4d06838",
+      "bytes": 6546239
+    },
+    "predecessor_product_master_review.csv": {
+      "sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+      "bytes": 4755483
+    },
+    "product_master_review.csv": {
+      "sha256": "e0b6b2fc00b751a7ce2892bc9db4527c1f4814a9a3711546bdb224edfbf21e93",
+      "bytes": 5058925
+    }
+  },
+  "limitations": [
+    "Candidate holds unapproved category proposals, not a canonical-master replacement or accepted-category receipt.",
+    "Existing accepted categories/statuses are preserved where unchanged; new proposals cannot become effective Gold classifications under product_catalog.resolve until separately accepted.",
+    "All detailed reporting groups and original uncertainty remain in the exact-key sidecar.",
+    "No source transaction quantities/prices/finance are edited; current-source controls are a separate fresh read-only capture."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "release_id": "category_b160d6aad4376d64",
+  "files": {
+    "accepted_product_master.csv": {
+      "sha256": "470afb59b6ef3f720c54c3d1bb27345ae1629665917b361c10362f8fb2d9f74c",
+      "bytes": 5731617
+    },
+    "category_acceptance.json": {
+      "sha256": "82a83074675ce03940491d505e67aa07b00b2bfbcacae2a5250f9b0ad3f0d5cc",
+      "bytes": 4856582
+    },
+    "publication_contract.json": {
+      "sha256": "c9e97a5aeabba0cbf081bff8dfa2fd173f50f968ade8445823da3a599b37ecf4",
+      "bytes": 10639
+    }
+  }
+}

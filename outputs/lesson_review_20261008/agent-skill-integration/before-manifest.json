@@ -1,0 +1,146 @@
+[
+  {
+    "path": "AGENTS.md",
+    "sha256": "a3610027d39c9a2c09d4314fc699a011f25796d8c7c1e49b5c3b11453f490895"
+  },
+  {
+    "path": ".agents\\analytics-learning-coach.md",
+    "sha256": "0ec92dccba3876d67cd1b5be7141b8ae784f78ec4c9f998542d4e8eaad27d43a"
+  },
+  {
+    "path": ".agents\\architect.md",
+    "sha256": "0bc833bd7623cf6c10dc1da2d4e33b7f348c7bd3f7504fcbf8d3076dea3c3c3c"
+  },
+  {
+    "path": ".agents\\backend-engineer.md",
+    "sha256": "59554688a958334de4e29d2062c71624dc986246845f7bb51abde539c906c38c"
+  },
+  {
+    "path": ".agents\\bi-specialist.md",
+    "sha256": "538415ceb5234a9805e4eba0decfe3dd4b939aa6edc271d69ecc3378fc03fb64"
+  },
+  {
+    "path": ".agents\\business-analyst.md",
+    "sha256": "2d6718afee9f114c4f7dcaf3d6e3e63cdf2c5ef671dffabaf8b6f429c675a69d"
+  },
+  {
+    "path": ".agents\\code-reviewer.md",
+    "sha256": "d69717386a986b0532cee8d4d322b61d984f54020d547d3d57b8fcb673b6f7d7"
+  },
+  {
+    "path": ".agents\\data-analyst.md",
+    "sha256": "b767ec9bad8457e897a7c91d99e92e9211e9024578d8a5310eb4ee51ec866afe"
+  },
+  {
+    "path": ".agents\\database-engineer.md",
+    "sha256": "0134f90a96b3d87a2d54e1348dc24fdc6563b225bb21e836dfe60b15f466d77c"
+  },
+  {
+    "path": ".agents\\devops-engineer.md",
+    "sha256": "13366665cdca65b6e07c2f64c7f6eec34da9ebe3a45ca25df4b93da614c5e2d1"
+  },
+  {
+    "path": ".agents\\enterprise-architect.md",
+    "sha256": "bc66e8221cee792c1b6ff06d938e80b4956a46e1bceeb03afb777628af143b00"
+  },
+  {
+    "path": ".agents\\execution-contract.md",
+    "sha256": "0e390eedb37b6f8c3874a756f5808a50c245936eea10490968161b77f9aaf423"
+  },
+  {
+    "path": ".agents\\frontend-engineer.md",
+    "sha256": "87eae5bbd33944d520f416df0b154dc89c0e5217fbc395bbbb3ebd0e20ba9a79"
+  },
+  {
+    "path": ".agents\\orchestrator.md",
+    "sha256": "c77288d9add9206e0a45603eb0ee02095ecfe7994f93085cd6eb1c24b4899e30"
+  },
+  {
+    "path": ".agents\\qa-engineer.md",
+    "sha256": "902df29a442fbde3285e961523a043d9c8f43d857a3aa087f5a6f94606ae4a22"
+  },
+  {
+    "path": ".agents\\security-engineer.md",
+    "sha256": "b29881430369d9f363c40ed7451f628872fba41db7236191faea8fa859d713c8"
+  },
+  {
+    "path": ".agents\\service-manager.md",
+    "sha256": "1895701d83ddb7a842fdac782c71688b623407238453a49d0b4f9d3490123532"
+  },
+  {
+    "path": ".agents\\technical-writer.md",
+    "sha256": "816c7588ef4eb9a4f8402c74d1fc4e6a4cec04fbd2665d17fa117dceb5148c0d"
+  },
+  {
+    "path": ".agents\\worker-operating-model.md",
+    "sha256": "0f6d4f2a0cdca2868feff360347bace8b244e387bd830816727ab49bd2fd9f2b"
+  },
+  {
+    "path": ".skills\\analytics-frameworks.md",
+    "sha256": "5191e9843caa879caa4648b5fb355af6ff1b21e75eeea5edcfee3e044de02591"
+  },
+  {
+    "path": ".skills\\architecture-patterns.md",
+    "sha256": "2ef4bc733f9798f53cbad0f1dae6382bbd701a6e624a0829d4970bac6941f909"
+  },
+  {
+    "path": ".skills\\backend-standards.md",
+    "sha256": "82bfd5f18ac4116fcb9eb93658a7b4989570620245baa79f25f1afa46ae5558e"
+  },
+  {
+    "path": ".skills\\business-analysis-frameworks.md",
+    "sha256": "8e25db8a15766a263c621ce462f0937d43d7008d2dea89628aba511daa9e43d3"
+  },
+  {
+    "path": ".skills\\coding-standards.md",
+    "sha256": "d78a0a43458020481c48d15b8eec9c1610cf9ca8e0676388936fb819f7ed360c"
+  },
+  {
+    "path": ".skills\\database-standards.md",
+    "sha256": "b5109696fabffbde78fc7e9a7948ef33fb88e56b1d01d708be977c1004d70d6b"
+  },
+  {
+    "path": ".skills\\devops-standards.md",
+    "sha256": "2fdf7d42c780d27a96d7ffbb8b544c8435fe4b30c5397a8dd223abf6da93194b"
+  },
+  {
+    "path": ".skills\\documentation-standards.md",
+    "sha256": "9185001e77c111a0aa963616ecbb7ba7a9ba7de7d35a217732e19eb599aaa73b"
+  },
+  {
+    "path": ".skills\\enterprise-architecture-frameworks.md",
+    "sha256": "cfe3a10939e3912e856ea60b3d4e4f4d62690e0cbfc6a6b2e7cd97a435845979"
+  },
+  {
+    "path": ".skills\\frontend-standards.md",
+    "sha256": "45fafecb2fcb9028765a1080277cbdf85bcf2d390ba1c10424a2b1f40b09afe7"
+  },
+  {
+    "path": ".skills\\github-standards.md",
+    "sha256": "d42bf96713bc25dac2007431f2500131ad4e16572f4df16d25e21a3ca9e9fa68"
+  },
+  {
+    "path": ".skills\\product-management-frameworks.md",
+    "sha256": "cbd8d8d9123bf0bd79e03e4408224f7bd753ce521da29785a46958380aed8481"
+  },
+  {
+    "path": ".skills\\security-standards.md",
+    "sha256": "bc5323d9888dd38b3b3e7a1d793b4a0736f5c09ecc581ea04f422e212a2b3a6b"
+  },
+  {
+    "path": ".skills\\service-management-frameworks.md",
+    "sha256": "aaf825698da4415efaac5291519e5da64f93f27f2ff78ecf23141be11d72e5ab"
+  },
+  {
+    "path": ".skills\\technology-stack.md",
+    "sha256": "5330aa0177a1768e82e38f04d5312d87d29ee14b4cc8ef83c4a4c0071fb1f339"
+  },
+  {
+    "path": ".skills\\testing-standards.md",
+    "sha256": "a178fc96b49991f901f60679973b545b6dc46cf1357236fe06808d92632cda35"
+  },
+  {
+    "path": ".skills\\analytics-lesson-coaching\\SKILL.md",
+    "sha256": "f4a30d25ae26c6b8b9f3a0a7b5b09c6c6414217aed2e436bbccd65fd87f867c8"
+  }
+]

@@ -1,0 +1,150 @@
+{
+ "rules_sha256": "fa1c91b84965a1deb82c4def38a98bd9c84750c70f1fd5795c2f56335141f8bd",
+ "cost_share_2025": 0.506,
+ "options": {
+  "W12_p50": {
+   "sel_2021_23": {
+    "months": 36,
+    "coverage": 0.528,
+    "mean_reserve": 1724203,
+    "mean_idle": 753957,
+    "mean_shortfall": 1079569
+   },
+   "hold_2024_26": {
+    "months": 33,
+    "coverage": 0.394,
+    "mean_reserve": 1682671,
+    "mean_idle": 141866,
+    "mean_shortfall": 2537516
+   }
+  },
+  "W12_p75": {
+   "sel_2021_23": {
+    "months": 36,
+    "coverage": 0.667,
+    "mean_reserve": 2604758,
+    "mean_idle": 1363690,
+    "mean_shortfall": 808747
+   },
+   "hold_2024_26": {
+    "months": 33,
+    "coverage": 0.545,
+    "mean_reserve": 2855926,
+    "mean_idle": 614667,
+    "mean_shortfall": 1837062
+   }
+  },
+  "W12_p90": {
+   "sel_2021_23": {
+    "months": 36,
+    "coverage": 0.806,
+    "mean_reserve": 4455825,
+    "mean_idle": 2848312,
+    "mean_shortfall": 442302
+   },
+   "hold_2024_26": {
+    "months": 33,
+    "coverage": 0.697,
+    "mean_reserve": 5904686,
+    "mean_idle": 2649712,
+    "mean_shortfall": 823347
+   }
+  },
+  "W12_p100": {
+   "sel_2021_23": {
+    "months": 36,
+    "coverage": 0.861,
+    "mean_reserve": 7286548,
+    "mean_idle": 5541991,
+    "mean_shortfall": 305259
+   },
+   "hold_2024_26": {
+    "months": 33,
+    "coverage": 0.788,
+    "mean_reserve": 8266561,
+    "mean_idle": 4538983,
+    "mean_shortfall": 350744
+   }
+  },
+  "W24_p50": {
+   "sel_2021_23": {
+    "months": 36,
+    "coverage": 0.583,
+    "mean_reserve": 1877035,
+    "mean_idle": 832066,
+    "mean_shortfall": 1004847
+   },
+   "hold_2024_26": {
+    "months": 33,
+    "coverage": 0.333,
+    "mean_reserve": 844160,
+    "mean_idle": 70510,
+    "mean_shortfall": 3304672
+   }
+  },
+  "W24_p75": {
+   "sel_2021_23": {
+    "months": 36,
+    "coverage": 0.639,
+    "mean_reserve": 2784953,
+    "mean_idle": 1476057,
+    "mean_shortfall": 740919
+   },
+   "hold_2024_26": {
+    "months": 33,
+    "coverage": 0.485,
+    "mean_reserve": 2482163,
+    "mean_idle": 616286,
+    "mean_shortfall": 2212444
+   }
+  },
+  "W24_p90": {
+   "sel_2021_23": {
+    "months": 36,
+    "coverage": 0.833,
+    "mean_reserve": 4495808,
+    "mean_idle": 2845444,
+    "mean_shortfall": 399452
+   },
+   "hold_2024_26": {
+    "months": 33,
+    "coverage": 0.727,
+    "mean_reserve": 5598272,
+    "mean_idle": 2472203,
+    "mean_shortfall": 952252
+   }
+  },
+  "W24_p100": {
+   "sel_2021_23": {
+    "months": 36,
+    "coverage": 0.944,
+    "mean_reserve": 8478803,
+    "mean_idle": 6474073,
+    "mean_shortfall": 45086
+   },
+   "hold_2024_26": {
+    "months": 33,
+    "coverage": 0.879,
+    "mean_reserve": 10129514,
+    "mean_idle": 6358336,
+    "mean_shortfall": 307143
+   }
+  }
+ },
+ "chosen": "W12_p90",
+ "chosen_holdout_usable": false,
+ "reserve_for_2026_10": {
+  "sales_value": 14706926,
+  "cash_scenario": 7446701
+ },
+ "all_options_for_2026_10": {
+  "W12_p50": 7771984,
+  "W12_p75": 13003824,
+  "W12_p90": 14706926,
+  "W12_p100": 15171229,
+  "W24_p50": 4235823,
+  "W24_p75": 7771984,
+  "W24_p90": 14304836,
+  "W24_p100": 15171229
+ }
+}

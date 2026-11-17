@@ -1,0 +1,11 @@
+{
+  "sealed_at": "2026-10-10T05:06:42.667658+00:00",
+  "source_file_count": 663,
+  "broken_local_links": [],
+  "report_hashes": {
+    "QA_REPORT.md": "630131013728de29864d8234a1d1b453e2d81be9235436f1da2f49bc8d317475",
+    "frontend/README.md": "fe2e6c75733ce6e4077c873ab0ceee30076b82610fef93b11ebb07f78e8103e9",
+    "backend/REPORT.md": "197d4030ecf550d95dd586985f7d72a68c15472fdf628554c76165ed8f5fc42f",
+    "database/REPORT.md": "097ecdf2d19e06bddafe7777ff146ad3449546ad69ec77ea3fa3a7d0212afae5"
+  }
+}

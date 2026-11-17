@@ -1,0 +1,72 @@
+{
+  "checked_at": "2026-10-04T18:25:02.024Z",
+  "scope": "Authenticated validation and warehouse metadata only; no analytical query, migration or compute-state change",
+  "cases": [
+    {
+      "query": "diagnostics?start_date=2025-02-30&end_date=2025-12-31",
+      "expected": 400,
+      "actual": 400,
+      "pass": true,
+      "code": "INVALID_DATABRICKS_QUERY"
+    },
+    {
+      "query": "diagnostics?start_date=2025-01-01",
+      "expected": 400,
+      "actual": 400,
+      "pass": true,
+      "code": "INVALID_DATABRICKS_QUERY"
+    },
+    {
+      "query": "diagnostics?start_date=2025-01-01&end_date=2025-12-31&sector=invalid",
+      "expected": 400,
+      "actual": 400,
+      "pass": true,
+      "code": "INVALID_DATABRICKS_QUERY"
+    },
+    {
+      "query": "diagnostics?start_date=2025-01-01&end_date=2025-12-31&product_id=invalid",
+      "expected": 400,
+      "actual": 400,
+      "pass": true,
+      "code": "INVALID_DATABRICKS_QUERY"
+    },
+    {
+      "query": "diagnostics?start_date=2025-01-01&start_date=2024-01-01&end_date=2025-12-31",
+      "expected": 400,
+      "actual": 400,
+      "pass": true,
+      "code": "INVALID_QUERY_PARAMETER"
+    },
+    {
+      "query": "diagnostics?start_date=2025-01-01&end_date=2025-12-31&category=invalid",
+      "expected": 400,
+      "actual": 400,
+      "pass": true,
+      "code": "INVALID_DATABRICKS_QUERY"
+    },
+    {
+      "query": "transactions?start_date=2025-01-01",
+      "expected": 400,
+      "actual": 400,
+      "pass": true,
+      "code": "INVALID_DATABRICKS_QUERY"
+    },
+    {
+      "query": "summary?start_date=2025-01-01&end_date=2025-12-31&sector=invalid",
+      "expected": 400,
+      "actual": 400,
+      "pass": true,
+      "code": "INVALID_DATABRICKS_QUERY"
+    }
+  ],
+  "login_status": 200,
+  "warehouse": {
+    "http_status": 200,
+    "state": "STOPPING",
+    "error_code": null
+  },
+  "live_diagnostics": {
+    "status": "not_verified",
+    "reason": "Configured warehouse is not RUNNING; analytical execution may change compute state"
+  }
+}

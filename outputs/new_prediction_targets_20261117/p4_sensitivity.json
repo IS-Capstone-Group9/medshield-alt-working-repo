@@ -1,0 +1,30 @@
+{
+ "note": "exploratory, not pre-registered",
+ "table": [
+  [
+   35,
+   48
+  ],
+  [
+   19,
+   264
+  ]
+ ],
+ "lapse_rate_late": 0.422,
+ "lapse_rate_not_late": 0.067,
+ "p_one_sided": 3.050518773909297e-13,
+ "areas": [
+  "ALBAY",
+  "BATANGAS",
+  "CAM NORTE",
+  "CAM SUR",
+  "CAVITE",
+  "GOVERNMENT",
+  "HOSPITAL",
+  "LAGUNA",
+  "LOWER CAVITE",
+  "MARINDUQUE",
+  "QUEZON"
+ ],
+ "late_now": []
+}

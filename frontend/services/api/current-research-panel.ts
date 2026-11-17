@@ -1,0 +1,98 @@
+import Chart from 'chart.js/auto'
+import {getJson} from './api-client'
+
+type Stage='retrospective_audit'|'retrospective_extension_2026'|'future'
+type Score={n:number;mae:number|null;wape:number|null;bias:number|null;expected_cases:number}
+type Point={model_id:string;stage:Stage;origin_period:string;target_period:string;lead_months:number;actual:number|null;prediction:number|null;missing_reason:string|null}
+export type Evidence={status:string;publication_approved:boolean;activation_allowed:boolean;financial_release_approved?:boolean;available_stages?:Stage[];scope:{sector:string;territory:string;unit:string;contracts_excluded?:boolean;company_coverage?:string;filter_policy?:string;forecast_lead_months?:number;refresh_policy?:string};selection:{model_id:string;reason:string;stage:string;frozen_before_audit:boolean};source:{artifact_sha256:string;dataset_id:string;fact_table:string;fact_version:number;input_sha256:string;storage_id:string;extension_run_id:string;policy_version?:string;receipt_sha256?:string;monthly_sha256?:string;protocol_sha256?:string};comparisons:Array<{model_id:string;retrospective_audit:Score;retrospective_extension_2026:Score}>;points:Point[];limitations:string[]}
+const money=(value:number|null)=>value===null?'Unavailable':'₱'+value.toLocaleString('en-PH',{minimumFractionDigits:2,maximumFractionDigits:2})
+const percent=(value:number|null)=>value===null?'Unavailable':value.toFixed(2)+'%'
+const labels={retrospective_extension_2026:'Jan–Sep 2026 retrospective extension',retrospective_audit:'2025 retrospective audit',future:'Oct 2026–Sep 2027 future candidate'}
+const finite=(v:unknown)=>v===null||typeof v==='number'&&Number.isFinite(v)
+const stagesFor=(data:Evidence):Stage[]=>data.scope?.contracts_excluded===true?['retrospective_extension_2026','retrospective_audit']:['retrospective_extension_2026','retrospective_audit','future']
+export function validCurrentResearch(data:Evidence){
+  const itemized=data?.scope?.contracts_excluded===true
+  return data?.status==='evaluated_unpublished'&&data.publication_approved===false&&data.activation_allowed===false
+    &&data.scope?.sector==='All'&&data.scope.territory==='company'&&data.scope.unit==='PHP'
+    &&data.selection?.stage==='development_only'&&data.selection.frozen_before_audit===true
+    &&(!itemized||data.financial_release_approved===false&&data.scope.company_coverage==='unknown'&&data.scope.filter_policy==='fixed_itemized_all_buyers_independent_of_dashboard_filters'&&JSON.stringify(data.available_stages)===JSON.stringify(stagesFor(data))&&[data.source?.receipt_sha256,data.source?.monthly_sha256].every(value=>typeof value==='string'&&/^[a-f0-9]{64}$/.test(value))&&data.source?.policy_version==='original_source_layers_v1_candidate_only')
+    &&typeof data.source?.artifact_sha256==='string'&&/^[a-f0-9]{64}$/.test(data.source.artifact_sha256)
+    &&typeof data.source.dataset_id==='string'&&typeof data.source.fact_table==='string'&&Number.isSafeInteger(data.source.fact_version)&&/^[a-f0-9]{64}$/.test(data.source.input_sha256)&&/^[a-f0-9]{64}$/.test(data.source.extension_run_id)
+    &&Array.isArray(data.comparisons)&&data.comparisons.length>0&&new Set(data.comparisons.map(c=>c.model_id)).size===data.comparisons.length
+    &&data.comparisons.some(c=>c.model_id===data.selection.model_id)
+    &&data.comparisons.every(c=>[c.retrospective_audit,c.retrospective_extension_2026].every(s=>s&&Number.isInteger(s.n)&&s.n>=0&&s.n<=s.expected_cases&&finite(s.mae)&&finite(s.wape)&&finite(s.bias)))
+    &&Array.isArray(data.points)&&data.points.every(p=>p&&stagesFor(data).includes(p.stage)&&typeof p.model_id==='string'&&/^\d{4}-(0[1-9]|1[0-2])$/.test(p.target_period)&&/^\d{4}-(0[1-9]|1[0-2])$/.test(p.origin_period)&&Number.isInteger(p.lead_months)&&p.lead_months>=1&&p.lead_months<=12&&finite(p.actual)&&finite(p.prediction)&&(p.stage!=='future'||p.actual===null&&p.model_id===data.selection.model_id)&&(!itemized||p.actual!==null)&&(!data.scope.forecast_lead_months||p.lead_months===data.scope.forecast_lead_months))
+    &&new Set(data.points.map(p=>`${p.model_id}|${p.stage}|${p.target_period}`)).size===data.points.length
+    &&data.points.length===data.comparisons.length*21+(itemized?0:12)
+    &&data.comparisons.every(c=>c.retrospective_audit.expected_cases===12&&c.retrospective_extension_2026.expected_cases===9&&data.points.filter(p=>p.model_id===c.model_id&&p.stage==='retrospective_audit').length===12&&data.points.filter(p=>p.model_id===c.model_id&&p.stage==='retrospective_extension_2026').length===9)
+    &&Array.isArray(data.limitations)&&data.limitations.every(s=>typeof s==='string')
+}
+
+/** Same selected model/window as the chart and table; retain source and approval identity. */
+export function currentResearchCsvRecords(data:Evidence,stage:Stage,model:string){
+  if(!validCurrentResearch(data)||!stagesFor(data).includes(stage)||stage==='future'&&model!==data.selection.model_id)throw Error('Unsupported research export scope')
+  const rows=data.points.filter(p=>p.model_id===model&&p.stage===stage).sort((a,b)=>a.target_period.localeCompare(b.target_period))
+  if(!rows.length)throw Error('No matched research cases')
+  const header=['stage','model','target_month','origin_month','lead_months','actual_php','prediction_php','signed_error_php','publication_approved','dataset_id','fact_table','fact_version','input_sha256','artifact_sha256','extension_run_id','activation_allowed','financial_release_approved','contracts_excluded','company_coverage','filter_policy','policy_version','receipt_sha256','monthly_sha256','research_run_id','development_selected_model','refresh_policy','forecast_lead_months','protocol_sha256']
+  return [header,...rows.map(p=>[p.stage,p.model_id,p.target_period,p.origin_period,p.lead_months,p.actual,p.prediction,
+    p.actual===null||p.prediction===null?null:p.prediction-p.actual,false,
+    data.source.dataset_id,data.source.fact_table,data.source.fact_version,data.source.input_sha256,data.source.artifact_sha256,data.source.extension_run_id,
+    false,data.financial_release_approved??'unknown',data.scope.contracts_excluded??'unknown',data.scope.company_coverage??'unknown',data.scope.filter_policy??'fixed_all_buyers_php',
+    data.source.policy_version??'',data.source.receipt_sha256??'',data.source.monthly_sha256??'',
+    data.source.extension_run_id,data.selection.model_id,data.scope.refresh_policy??'fixed_origin_multistep',data.scope.forecast_lead_months??'varies_by_target',data.source.protocol_sha256??''])]
+}
+export function installCurrentResearchPanel(root:HTMLElement,options:{rolling?:boolean}={}):()=>void {
+  const rolling=options.rolling===true
+  const existing=root.querySelector<HTMLElement>('[data-forecast-validation]')
+  if(!existing)return()=>{}
+  const panel=document.createElement('section');panel.className='chart-card current-research';panel.setAttribute('aria-label','Current-source financial research')
+  panel.innerHTML=`<style>.current-research{min-width:0;overflow-wrap:anywhere}.current-research p{line-height:1.6}.current-research .research-controls{display:flex;flex-wrap:wrap;gap:12px;align-items:end;margin:16px 0}.current-research label{font-size:12px;font-weight:600}.current-research select{display:block;margin-top:6px;max-width:100%;padding:8px;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--text-primary)}.current-research .research-scroll{overflow-x:auto;max-width:100%}.current-research .research-scroll:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.current-research .research-chart{height:290px;position:relative;margin:20px 0}.current-research th,.current-research td{padding:10px;font-size:12px}.current-research button:focus-visible,.current-research select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}@media(max-width:600px){.current-research{padding:14px}.current-research label{width:100%}.current-research select{width:100%}.current-research .research-scroll:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.current-research .research-chart{height:240px}}</style>
+  <h2 id="currentResearchTitle" class="chart-title">Current-source financial research · Unpublished</h2>
+  <p>Recorded net sales in pesos · All buyers · Source through September 2026. These controls are independent of the dashboard filters. Itemized-product evidence does not establish complete company sales.</p>
+  <p id="currentResearchStatus" role="status">Open Forecast to load current-source research.</p>
+  <p id="currentResearchNotice"></p>
+  <p id="currentResearchSelection"></p>
+  <div class="research-controls"><label id="currentResearchLeadControl" hidden>Forecast lead<select id="currentResearchLead"><option value="1">1 month ahead</option><option value="3">3 months ahead</option></select></label><label>Evaluation window<select id="currentResearchStage"><option value="retrospective_extension_2026">Jan–Sep 2026 retrospective extension</option><option value="retrospective_audit">2025 retrospective audit</option><option value="future">Oct 2026–Sep 2027 future candidate</option></select></label><label>Model<select id="currentResearchModel" disabled></select></label><button type="button" class="btn btn-secondary" id="currentResearchReload">Reload research</button><button type="button" class="btn btn-secondary" id="currentResearchExport" disabled>Export current research CSV</button></div>
+  <p id="currentResearchMetrics"></p><div class="research-chart" hidden><canvas id="currentResearchChart" role="img" aria-label="Current-source actual and candidate net sales in pesos"></canvas></div>
+  <details><summary>Exact monthly values</summary><div class="research-scroll" tabindex="0" role="region" aria-label="${rolling?'Monthly-refresh':'Fixed-origin'} research monthly values"><table id="currentResearchPoints" class="product-table"></table></div></details>
+  <details><summary>Compare all frozen models</summary><p>Each column uses matching targets within that window. Extension rankings cannot replace the development-selected model. The two windows cover different years.</p><div class="research-scroll" tabindex="0" role="region" aria-label="${rolling?'Monthly-refresh':'Fixed-origin'} research model comparison"><table id="currentResearchComparison" class="product-table"></table></div></details>
+  <details><summary>Source and limitations</summary><p id="currentResearchSource"></p><p id="currentResearchLimits"></p><p>No supported prediction interval is claimed. Recorded sales in pesos do not supply medicine quantities or approved purchase instructions.</p></details>`
+  if(rolling){panel.innerHTML=panel.innerHTML.replaceAll('currentResearch','rollingResearch');panel.setAttribute('aria-label','Monthly-refresh itemized financial research')}
+  existing.before(panel)
+  const el=<T extends HTMLElement>(id:string)=>panel.querySelector<T>('#'+(rolling?id.replace('currentResearch','rollingResearch'):id))!
+  const model=el<HTMLSelectElement>('currentResearchModel'),stage=el<HTMLSelectElement>('currentResearchStage'),download=el<HTMLButtonElement>('currentResearchExport')
+  const lead=el<HTMLSelectElement>('currentResearchLead');el('currentResearchLeadControl').hidden=!rolling
+  let views:Record<string,Evidence>|null=null
+  let data:Evidence|null=null,chart:Chart|null=null,disposed=false,loading=false,loaded=false,sequence=0
+  const clear=()=>{chart?.destroy();chart=null;el('currentResearchChart').parentElement!.hidden=true;for(const id of ['currentResearchNotice','currentResearchSelection','currentResearchMetrics','currentResearchPoints','currentResearchComparison','currentResearchSource','currentResearchLimits'])el(id).replaceChildren();download.disabled=true;model.disabled=true;model.replaceChildren();stage.disabled=true;lead.disabled=true}
+  const table=(target:HTMLTableElement,head:string[],rows:(string|number)[][])=>{target.replaceChildren();const header=target.createTHead().insertRow();for(const label of head){const th=document.createElement('th');th.textContent=label;header.append(th)}const body=target.createTBody();for(const row of rows){const tr=body.insertRow();for(const value of row)tr.insertCell().textContent=String(value)}}
+  const visible=()=>data!.points.filter(p=>p.model_id===model.value&&p.stage===stage.value).sort((a,b)=>a.target_period.localeCompare(b.target_period))
+  const render=()=>{
+    if(!data)return
+    if(!stagesFor(data).includes(stage.value as Stage))stage.value=stagesFor(data)[0]
+    const itemized=data.scope.contracts_excluded===true
+    el('currentResearchTitle').textContent=rolling?'Monthly-refresh forecast research · Unpublished':itemized?'Itemized sales forecast research · Unpublished':'Current-source financial research · Unpublished'
+    el('currentResearchNotice').textContent=rolling?'Monthly refits · '+lead.value+' month(s) ahead · Contracts excluded · All buyers. Independent of Analysis filters. Substantial errors and underprediction remain; no operational activation.':itemized?'Contracts excluded · All buyers · Independent of Analysis filters. Errors are substantial; this reference is not approved for operational forecasting. No future projections were generated.':'Research only. Publication and operational activation are not approved.'
+    if(stage.value==='future')model.value=data.selection.model_id
+    model.disabled=stage.value==='future'
+    const rows=visible(),future=stage.value==='future',score=!future?data.comparisons.find(c=>c.model_id===model.value)![stage.value as Exclude<Stage,'future'>]:null
+    el('currentResearchMetrics').textContent=score?`${score.n}/${score.expected_cases} matched months · MAE ${money(score.mae)} · WAPE ${percent(score.wape)} · Signed bias ${money(score.bias)}. Positive bias means overprediction.`:'Future candidate only · Actuals and forecast errors are unavailable.'
+    el('currentResearchStatus').textContent=labels[stage.value as Stage]+' · Evaluated research; publication is not approved.'
+    el('currentResearchSelection').textContent='Development-selected reference: '+data.selection.model_id+'. '+data.selection.reason+'. The 2026 extension does not change this selection.'+(rolling?' Selection used the 1-month lead; the 3-month lead is a separate guardrail.':'')
+    chart?.destroy();el('currentResearchChart').parentElement!.hidden=false
+    chart=new Chart(el<HTMLCanvasElement>('currentResearchChart'),{type:'line',data:{labels:rows.map(p=>p.target_period),datasets:[{label:'Recorded net sales (PHP)',data:rows.map(p=>p.actual),borderColor:'#335f78',spanGaps:false},{label:future?'Unpublished future candidate (PHP)':'Retrospective prediction (PHP)',data:rows.map(p=>p.prediction),borderColor:'#a16d33',borderDash:[5,4],spanGaps:false}]},options:{responsive:true,maintainAspectRatio:false,animation:false,scales:{y:{title:{display:true,text:'PHP'},ticks:{callback:v=>'₱'+Number(v).toLocaleString('en-PH')}}}}})
+    table(el<HTMLTableElement>('currentResearchPoints'),['Target month','Origin month','Lead','Recorded sales','Prediction','Prediction − actual'],rows.map(p=>[p.target_period,p.origin_period,p.lead_months,money(p.actual),money(p.prediction),money(p.actual===null||p.prediction===null?null:p.prediction-p.actual)]))
+    table(el<HTMLTableElement>('currentResearchComparison'),['Model','2025 MAE','2025 WAPE','2026 MAE','2026 WAPE'],data.comparisons.map(c=>[c.model_id+(c.model_id===data!.selection.model_id?' (selected)':''),money(c.retrospective_audit.mae),percent(c.retrospective_audit.wape),money(c.retrospective_extension_2026.mae),percent(c.retrospective_extension_2026.wape)]))
+    el('currentResearchSource').textContent=`Gold candidate ${data.source.storage_id} · Source ${data.source.fact_table} @ ${data.source.fact_version} · Dataset ${data.source.dataset_id} · Input SHA-256 ${data.source.input_sha256} · Artifact SHA-256 ${data.source.artifact_sha256}`
+    el('currentResearchLimits').textContent=data.limitations.join(' ');download.disabled=!rows.length
+  }
+  let loadController: AbortController | null = null
+  const load=async()=>{if(disposed||loading)return;loading=true;loadController?.abort();loadController=new AbortController();loaded=true;const request=++sequence;data=null;views=null;clear();el('currentResearchStatus').textContent='Loading current-source research…';try{const payload=await getJson<Evidence|{status:string;publication_approved:boolean;activation_allowed:boolean;lead_views:Record<string,Evidence>}>(rolling?'/api/sales/rolling-source-research':'/api/sales/current-source-research',{signal:loadController.signal});if(disposed||request!==sequence)return;let value:Evidence;if(rolling){if(!('lead_views' in payload)||payload.lead_views['1']?.source.artifact_sha256!==payload.lead_views['3']?.source.artifact_sha256||payload.lead_views['1']?.selection.model_id!==payload.lead_views['3']?.selection.model_id||payload.status!=='rolling_research_unpublished'||payload.publication_approved!==false||payload.activation_allowed!==false||![1,3].every(n=>validCurrentResearch(payload.lead_views[String(n)])&&payload.lead_views[String(n)].scope.forecast_lead_months===n&&payload.lead_views[String(n)].points.every(p=>p.lead_months===n)))throw Error('Invalid rolling evidence');views=payload.lead_views;value=views[lead.value]??views['1'];lead.disabled=false}else{value=payload as Evidence;views=null}if(!validCurrentResearch(value))throw Error('Invalid evidence');data=value;stage.replaceChildren();for(const name of stagesFor(value))stage.add(new Option(labels[name],name));stage.value=stagesFor(value)[0];stage.disabled=false;for(const c of value.comparisons)model.add(new Option(c.model_id,c.model_id));model.value=value.selection.model_id;render()}catch{if(!disposed&&request===sequence){data=null;views=null;clear();el('currentResearchStatus').textContent='Current-source research unavailable. Reload to retry; no substitute results were used.'}}finally{if(!disposed&&request===sequence)loading=false}}
+  const exportCsv=()=>{if(!data||download.disabled)return;const quote=(v:unknown)=>'"'+String(v??'').replace(/"/g,'""')+'"';const records=currentResearchCsvRecords(data,stage.value as Stage,model.value);const url=URL.createObjectURL(new Blob(['\uFEFF'+records.map(r=>r.map(quote).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download=(rolling?'medshield-rolling-research-lead-'+lead.value+'-':'medshield-current-research-')+stage.value+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+  const invalidate=()=>{loadController?.abort();sequence++;loading=false;loaded=false;data=null;views=null;clear();el('currentResearchStatus').textContent='Source changed. Reload current-source research before review or export.'}
+  root.addEventListener('medshield:source-reloaded',invalidate)
+  const maybeLoad=()=>{if(!loaded&&existing.closest('.page')?.classList.contains('active'))void load()}
+  const observer=new MutationObserver(maybeLoad);observer.observe(existing.closest('.page')??existing,{attributes:true,attributeFilter:['class']})
+  lead.addEventListener('change',()=>{if(!views||!views[lead.value])return;data=views[lead.value];render()});model.addEventListener('change',render);stage.addEventListener('change',render);download.addEventListener('click',exportCsv);el('currentResearchReload').addEventListener('click',()=>void load());maybeLoad()
+  return()=>{disposed=true;loadController?.abort();sequence++;observer.disconnect();root.removeEventListener('medshield:source-reloaded',invalidate);data=null;views=null;clear();panel.remove()}
+}

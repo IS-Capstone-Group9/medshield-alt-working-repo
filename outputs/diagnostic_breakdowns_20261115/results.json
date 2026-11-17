@@ -1,0 +1,389 @@
+{
+ "scope": "original itemized, contracts excluded; 2026 = Jan-Sep",
+ "years": [
+  2017,
+  2018,
+  2019,
+  2020,
+  2021,
+  2022,
+  2023,
+  2024,
+  2025,
+  2026
+ ],
+ "A_margin": {
+  "coverage_and_margin": {
+   "2017": {
+    "eligible_share": 0.9022089036666312,
+    "margin": 0.685599450518133
+   },
+   "2018": {
+    "eligible_share": 0.869483995075432,
+    "margin": 0.6311752836788962
+   },
+   "2019": {
+    "eligible_share": 0.6589344885203158,
+    "margin": 0.706735363386815
+   },
+   "2020": {
+    "eligible_share": 0.7282258990805849,
+    "margin": 0.7030346373410112
+   },
+   "2021": {
+    "eligible_share": 0.9992812888291981,
+    "margin": 0.6480465103853251
+   },
+   "2022": {
+    "eligible_share": 0.9566415867502207,
+    "margin": 0.6744400156567559
+   },
+   "2023": {
+    "eligible_share": 0.9613343538902093,
+    "margin": 0.5614173522427359
+   },
+   "2024": {
+    "eligible_share": 0.9894466097205644,
+    "margin": 0.5658212425500014
+   },
+   "2025": {
+    "eligible_share": 0.9033644564198401,
+    "margin": 0.4936602614867501
+   },
+   "2026": {
+    "eligible_share": 0.9036752748384588,
+    "margin": 0.5010380087326273
+   }
+  },
+  "y2019_to_2025": {
+   "cat": {
+    "margin0": 0.7067353633868141,
+    "margin1": 0.4936602614867497,
+    "change": -0.2130751019000644,
+    "mix": -0.020887776383356975,
+    "rate": -0.19218732551670742,
+    "biggest_drags": [
+     {
+      "segment": "medicine",
+      "share0": 0.8793,
+      "share1": 0.7868,
+      "margin0": 0.7336,
+      "margin1": 0.5147,
+      "mix": -0.0577,
+      "rate": -0.1823
+     },
+     {
+      "segment": "medical_equipment",
+      "share0": 0.0209,
+      "share1": 0.0258,
+      "margin0": 0.6657,
+      "margin1": 0.4814,
+      "mix": 0.0028,
+      "rate": -0.0043
+     },
+     {
+      "segment": "unclassified",
+      "share0": 0.0404,
+      "share1": 0.0521,
+      "margin0": 0.6533,
+      "margin1": 0.4956,
+      "mix": 0.0067,
+      "rate": -0.0073
+     },
+     {
+      "segment": "non_medical",
+      "share0": 0.0096,
+      "share1": 0.0165,
+      "margin0": 0.4995,
+      "margin1": 0.3783,
+      "mix": 0.003,
+      "rate": -0.0016
+     },
+     {
+      "segment": "medical_supply",
+      "share0": 0.0497,
+      "share1": 0.1188,
+      "margin0": 0.3326,
+      "margin1": 0.3721,
+      "mix": 0.0243,
+      "rate": 0.0033
+     }
+    ]
+   },
+   "area": {
+    "margin0": 0.7067353633868153,
+    "margin1": 0.49366026148675,
+    "change": -0.2130751019000653,
+    "mix": -0.03421147062344676,
+    "rate": -0.17886363127661845,
+    "biggest_drags": [
+     {
+      "segment": "GOVERNMENT",
+      "share0": 0.3954,
+      "share1": 0.4391,
+      "margin0": 0.7865,
+      "margin1": 0.4559,
+      "mix": 0.0272,
+      "rate": -0.1379
+     },
+     {
+      "segment": "LAGUNA",
+      "share0": 0.0892,
+      "share1": 0.0,
+      "margin0": 0.6495,
+      "margin1": 0.6495,
+      "mix": -0.0579,
+      "rate": 0.0
+     },
+     {
+      "segment": "CAM NORTE",
+      "share0": 0.0485,
+      "share1": 0.0,
+      "margin0": 0.7497,
+      "margin1": 0.7497,
+      "mix": -0.0364,
+      "rate": 0.0
+     },
+     {
+      "segment": "CAM SUR",
+      "share0": 0.0441,
+      "share1": 0.0,
+      "margin0": 0.7616,
+      "margin1": 0.7616,
+      "mix": -0.0336,
+      "rate": 0.0
+     },
+     {
+      "segment": "BATANGAS",
+      "share0": 0.0772,
+      "share1": 0.0436,
+      "margin0": 0.6727,
+      "margin1": 0.6805,
+      "mix": -0.0227,
+      "rate": 0.0005
+     },
+     {
+      "segment": "CAVITE",
+      "share0": 0.0302,
+      "share1": 0.0,
+      "margin0": 0.6566,
+      "margin1": 0.6566,
+      "mix": -0.0198,
+      "rate": 0.0
+     }
+    ]
+   },
+   "fam": {
+    "margin0": 0.7067929871713268,
+    "margin1": 0.49436238687560685,
+    "change": -0.21243060029571992,
+    "mix": -0.17081967269697473,
+    "rate": -0.0416109275987452,
+    "biggest_drags": [
+     {
+      "segment": "SPEEDA",
+      "share0": 0.0916,
+      "share1": 0.0264,
+      "margin0": 0.8636,
+      "margin1": 0.3346,
+      "mix": -0.0391,
+      "rate": -0.0312
+     },
+     {
+      "segment": "EVAPROST",
+      "share0": 0.0643,
+      "share1": 0.0099,
+      "margin0": 0.608,
+      "margin1": 0.2679,
+      "mix": -0.0238,
+      "rate": -0.0126
+     },
+     {
+      "segment": "ZINACARE",
+      "share0": 0.0387,
+      "share1": 0.0274,
+      "margin0": 0.9181,
+      "margin1": 0.4782,
+      "mix": -0.0079,
+      "rate": -0.0146
+     },
+     {
+      "segment": "EUROXONE",
+      "share0": 0.0292,
+      "share1": 0.0003,
+      "margin0": 0.7603,
+      "margin1": 0.6172,
+      "mix": -0.0199,
+      "rate": -0.0021
+     },
+     {
+      "segment": "LACTAMOX",
+      "share0": 0.032,
+      "share1": 0.0013,
+      "margin0": 0.6395,
+      "margin1": 0.6302,
+      "mix": -0.0195,
+      "rate": -0.0002
+     },
+     {
+      "segment": "CEFOPTI",
+      "share0": 0.0196,
+      "share1": 0.0,
+      "margin0": 0.9034,
+      "margin1": 0.9034,
+      "mix": -0.0177,
+      "rate": 0.0
+     }
+    ]
+   }
+  },
+  "year_on_year": {
+   "2017-2018": {
+    "change": -0.0544,
+    "mix": -0.0396,
+    "rate": -0.0149
+   },
+   "2018-2019": {
+    "change": 0.0756,
+    "mix": 0.0198,
+    "rate": 0.0558
+   },
+   "2019-2020": {
+    "change": 0.0076,
+    "mix": 0.0169,
+    "rate": -0.0093
+   },
+   "2020-2021": {
+    "change": -0.0658,
+    "mix": -0.0825,
+    "rate": 0.0167
+   },
+   "2021-2022": {
+    "change": 0.0259,
+    "mix": 0.0154,
+    "rate": 0.0104
+   },
+   "2022-2023": {
+    "change": -0.1129,
+    "mix": -0.0288,
+    "rate": -0.0841
+   },
+   "2023-2024": {
+    "change": 0.0056,
+    "mix": -0.0131,
+    "rate": 0.0187
+   },
+   "2024-2025": {
+    "change": -0.0728,
+    "mix": -0.0415,
+    "rate": -0.0314
+   },
+   "2025-2026": {
+    "change": 0.0067,
+    "mix": -0.0158,
+    "rate": 0.0225
+   }
+  }
+ },
+ "B_sales_bridge": {
+  "2017-2018": {
+   "matched_months": 5,
+   "net0": 5443717.27,
+   "net1": 26034495.43,
+   "change": 20590778.16,
+   "large_orders": 4773640.0,
+   "continuing_families": 6508173.96,
+   "new_families": 10616316.17,
+   "lost_families": -1307351.97,
+   "non_positive_adjustments": 1.862645149230957e-09
+  },
+  "2018-2019": {
+   "matched_months": 7,
+   "net0": 32239183.21,
+   "net1": 52608694.349999994,
+   "change": 20369511.139999993,
+   "large_orders": 9245464.44,
+   "continuing_families": 3902453.11,
+   "new_families": 11929934.79,
+   "lost_families": -4706139.4,
+   "non_positive_adjustments": -2201.8000000026077
+  },
+  "2019-2020": {
+   "matched_months": 9,
+   "net0": 62542304.489999995,
+   "net1": 41968028.370000005,
+   "change": -20574276.11999999,
+   "large_orders": -1293838.6499999966,
+   "continuing_families": -14868824.18,
+   "new_families": 5199587.06,
+   "lost_families": -9593033.15,
+   "non_positive_adjustments": -18167.199999991804
+  },
+  "2020-2021": {
+   "matched_months": 12,
+   "net0": 53079522.629999995,
+   "net1": 77860206.26,
+   "change": 24780683.63000001,
+   "large_orders": 11176755.700000003,
+   "continuing_families": 5019376.0,
+   "new_families": 14269929.11,
+   "lost_families": -6105337.33,
+   "non_positive_adjustments": 419960.1500000041
+  },
+  "2021-2022": {
+   "matched_months": 12,
+   "net0": 77860206.26,
+   "net1": 63234990.04000001,
+   "change": -14625216.219999999,
+   "large_orders": -13068973.209999997,
+   "continuing_families": -7494111.45,
+   "new_families": 12612005.01,
+   "lost_families": -6716036.77,
+   "non_positive_adjustments": 41900.1999999946
+  },
+  "2022-2023": {
+   "matched_months": 12,
+   "net0": 63234990.04000001,
+   "net1": 62228966.85,
+   "change": -1006023.1900000051,
+   "large_orders": 4160386.719999995,
+   "continuing_families": -5823601.28,
+   "new_families": 12629548.59,
+   "lost_families": -11963066.02,
+   "non_positive_adjustments": -9291.199999996461
+  },
+  "2023-2024": {
+   "matched_months": 12,
+   "net0": 62228966.85,
+   "net1": 28468701.72,
+   "change": -33760265.13,
+   "large_orders": -16257763.6,
+   "continuing_families": -5162509.9799999995,
+   "new_families": 5539509.94,
+   "lost_families": -17886465.72,
+   "non_positive_adjustments": 6964.229999996722
+  },
+  "2024-2025": {
+   "matched_months": 12,
+   "net0": 28468701.72,
+   "net1": 88570398.25,
+   "change": 60101696.53,
+   "large_orders": 36700253.1,
+   "continuing_families": 7317318.36,
+   "new_families": 21137401.8,
+   "lost_families": -5056762.5,
+   "non_positive_adjustments": 3485.769999999553
+  },
+  "2025-2026": {
+   "matched_months": 9,
+   "net0": 64499873.14,
+   "net1": 140199402.67000002,
+   "change": 75699529.53000002,
+   "large_orders": 50990413.120000005,
+   "continuing_families": 729557.9399999997,
+   "new_families": 36193641.37,
+   "lost_families": -12214082.9,
+   "non_positive_adjustments": 3.725290298461914e-09
+  }
+ }
+}

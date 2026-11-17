@@ -1,0 +1,125 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\frontend\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "e2e/descriptive-acceptance-live.spec.ts",
+      "--workers=1",
+      "--reporter=list,json",
+      "--output=../outputs/descriptive_activation_20261009/study-delivery-artifacts"
+    ],
+    "configFile": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\frontend\\playwright.config.ts",
+    "rootDir": "C:/Users/Adrian/projects/medshield1/medshield/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/Adrian/projects/medshield1/medshield/outputs/descriptive_activation_20261009/study-delivery-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/Adrian/projects/medshield1/medshield/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "descriptive-acceptance-live.spec.ts",
+      "file": "descriptive-acceptance-live.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "accepted categories and the 2021–2025 study reconcile across API, dashboard and exports",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 39691,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T07:51:20.682Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "study-acceptance",
+                      "contentType": "application/json",
+                      "body": "ewogICJmYWN0X2RlbHRhX3ZlcnNpb24iOiAiMjAiLAogICJzdHVkeV9wZXJpb2QiOiAiMjAyMS0wMS0wMS8yMDI1LTEyLTMxIiwKICAib2JzZXJ2ZWRfbW9udGhzIjogNjAsCiAgIm5ldF9zYWxlcyI6IDQzODk4MDMwNC4wNzAwMDAwNSwKICAiZ3Jvc3NfbWFyZ2luX3JhdGUiOiA1Ny4zMjIwNzIsCiAgImNhdGVnb3JpZXMiOiB7CiAgICAiQWxsIjogewogICAgICAicmVwb3J0aW5nX2dyb3VwcyI6IDMzMDcsCiAgICAgICJuZXRfc2FsZXMiOiA0Mzg5ODAzMDQuMDcwMDAwMSwKICAgICAgInNvdXJjZV9yZWNvcmRzIjogMjAxNDMKICAgIH0sCiAgICAiTWVkaWNhbCI6IHsKICAgICAgInJlcG9ydGluZ19ncm91cHMiOiAxMDk5LAogICAgICAibmV0X3NhbGVzIjogMjU2ODg5OTEwLjg2OTk5OTksCiAgICAgICJzb3VyY2VfcmVjb3JkcyI6IDc4MzYKICAgIH0sCiAgICAiTm9uLU1lZGljYWwiOiB7CiAgICAgICJyZXBvcnRpbmdfZ3JvdXBzIjogMTgzLAogICAgICAibmV0X3NhbGVzIjogMTg3NDUwODEuNDcsCiAgICAgICJzb3VyY2VfcmVjb3JkcyI6IDczMwogICAgfSwKICAgICJVbmNsYXNzaWZpZWQiOiB7CiAgICAgICJyZXBvcnRpbmdfZ3JvdXBzIjogMjAyNSwKICAgICAgIm5ldF9zYWxlcyI6IDE2MzM0NTMxMS43Mjk5OTk4NCwKICAgICAgInNvdXJjZV9yZWNvcmRzIjogMTE1NzQKICAgIH0KICB9LAogICJhcG9zdHJvcGhlX3NlYXJjaF9yb3dzIjogOTAKfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6993d5cf89f80171048c-5c635fdc9bb849135f86",
+          "file": "descriptive-acceptance-live.spec.ts",
+          "line": 15,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-09T07:51:19.053Z",
+    "duration": 41983.449,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

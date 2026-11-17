@@ -1,0 +1,1586 @@
+{
+  "checked_at": "2026-10-09T02:14:47.439Z",
+  "mode": "fresh_read_only_SQL_and_gateway",
+  "release": {
+    "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+    "policy_version": "sales_restart_gold_v7_independent_catalog",
+    "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+    "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+    "publication_status": "CANDIDATE_PENDING_BUSINESS_AND_PRODUCT_MASTER_REVIEW",
+    "resolution_policy": "catalog_v1_independent_evidence",
+    "transaction_evidence_sha256": "5e1a839d551293b51149e7c35d863ce680573e02275f65d17512d6099ff88786",
+    "catalog_helper_sha256": "20888a90253718dabf2aea3390ecc8d7ca707b388e8a4d45123e894c98f688c9",
+    "fact_delta_version": 19
+  },
+  "queries": {
+    "totals": {
+      "sql": "SELECT COUNT(*) records, COUNT(DISTINCT source_record_id) distinct_records,\n      SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) revenue,\n      SUM(CASE WHEN is_gross_margin_eligible THEN gross_margin_amount END) margin,\n      SUM(CASE WHEN is_gross_margin_eligible THEN net_sales END) margin_basis,\n      SUM(CASE WHEN is_net_sales_eligible THEN 1 ELSE 0 END) revenue_rows,\n      SUM(CASE WHEN is_gross_margin_eligible THEN 1 ELSE 0 END) margin_rows,\n      SUM(CASE WHEN is_net_sales_eligible AND net_sales < 0 THEN net_sales ELSE 0 END) negative_sales,\n      SUM(CASE WHEN is_adjusted_source AND is_net_sales_eligible THEN net_sales ELSE 0 END) adjusted_revenue,\n      SUM(CASE WHEN identity_status='approved' THEN 1 ELSE 0 END) approved_identity_rows,\n      SUM(CASE WHEN forecast_eligible THEN 1 ELSE 0 END) forecast_eligible_rows,\n      SUM(CASE WHEN is_external_join_ready THEN 1 ELSE 0 END) external_ready_rows,\n      SUM(CASE WHEN is_geographic_territory_approved THEN 1 ELSE 0 END) approved_geography_rows\n      FROM workspace.medshield_gold.sales_restart_fact_candidate VERSION AS OF 19 WHERE is_analysis_candidate = TRUE AND product_scope_status <> 'CONTRACT_LABEL_CANDIDATE'",
+      "rows": [
+        {
+          "records": "37728",
+          "distinct_records": "37728",
+          "revenue": "626946741.810000",
+          "margin": "288487498.720000",
+          "margin_basis": "478720670.030000",
+          "revenue_rows": "36848",
+          "margin_rows": "34105",
+          "negative_sales": "-1622699.580000",
+          "adjusted_revenue": "299249415.550000",
+          "approved_identity_rows": "0",
+          "forecast_eligible_rows": "0",
+          "external_ready_rows": "0",
+          "approved_geography_rows": "14020"
+        }
+      ]
+    },
+    "months": {
+      "sql": "SELECT DATE_FORMAT(month_start,'yyyy-MM') period, COUNT(*) records,\n      SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) revenue,\n      SUM(CASE WHEN is_gross_margin_eligible THEN gross_margin_amount END) margin\n      FROM workspace.medshield_gold.sales_restart_fact_candidate VERSION AS OF 19 WHERE is_analysis_candidate = TRUE AND product_scope_status <> 'CONTRACT_LABEL_CANDIDATE' GROUP BY month_start ORDER BY month_start",
+      "rows": [
+        {
+          "period": "2017-01",
+          "records": "515",
+          "revenue": "2288688.880000",
+          "margin": "1563511.660000"
+        },
+        {
+          "period": "2017-02",
+          "records": "454",
+          "revenue": "2478761.200000",
+          "margin": "1718333.260000"
+        },
+        {
+          "period": "2017-03",
+          "records": "589",
+          "revenue": "2697198.470000",
+          "margin": "1638244.970000"
+        },
+        {
+          "period": "2017-04",
+          "records": "401",
+          "revenue": "2655938.800000",
+          "margin": "1331733.890000"
+        },
+        {
+          "period": "2017-09",
+          "records": "1",
+          "revenue": "480.000000",
+          "margin": "325.000000"
+        },
+        {
+          "period": "2017-11",
+          "records": "9",
+          "revenue": "86200.000000",
+          "margin": "61288.900000"
+        },
+        {
+          "period": "2017-12",
+          "records": "9",
+          "revenue": "3900.000000",
+          "margin": "2720.000000"
+        },
+        {
+          "period": "2018-03",
+          "records": "418",
+          "revenue": "3457920.700000",
+          "margin": "2090495.000000"
+        },
+        {
+          "period": "2018-04",
+          "records": "682",
+          "revenue": "6403396.280000",
+          "margin": "2827185.110000"
+        },
+        {
+          "period": "2018-05",
+          "records": "634",
+          "revenue": "4591195.170000",
+          "margin": "2821895.010000"
+        },
+        {
+          "period": "2018-06",
+          "records": "515",
+          "revenue": "4599086.640000",
+          "margin": "2661903.010000"
+        },
+        {
+          "period": "2018-07",
+          "records": "587",
+          "revenue": "5034975.380000",
+          "margin": "2812895.330000"
+        },
+        {
+          "period": "2018-08",
+          "records": "585",
+          "revenue": "4085611.820000",
+          "margin": "2320349.850000"
+        },
+        {
+          "period": "2018-09",
+          "records": "684",
+          "revenue": "4066997.220000",
+          "margin": "2520488.660000"
+        },
+        {
+          "period": "2018-10",
+          "records": "807",
+          "revenue": "7274326.830000",
+          "margin": "3796308.790000"
+        },
+        {
+          "period": "2018-11",
+          "records": "845",
+          "revenue": "7571263.890000",
+          "margin": "4078448.140000"
+        },
+        {
+          "period": "2018-12",
+          "records": "424",
+          "revenue": "4534917.340000",
+          "margin": "2398752.860000"
+        },
+        {
+          "period": "2019-01",
+          "records": "737",
+          "revenue": "4459965.470000",
+          "margin": "1772751.680000"
+        },
+        {
+          "period": "2019-02",
+          "records": "484",
+          "revenue": "5473644.670000",
+          "margin": "1570400.990000"
+        },
+        {
+          "period": "2019-03",
+          "records": "539",
+          "revenue": "6995759.140000",
+          "margin": "2779093.550000"
+        },
+        {
+          "period": "2019-04",
+          "records": "799",
+          "revenue": "9438917.290000",
+          "margin": "4594590.790000"
+        },
+        {
+          "period": "2019-05",
+          "records": "646",
+          "revenue": "9568922.120000",
+          "margin": "4396497.160000"
+        },
+        {
+          "period": "2019-06",
+          "records": "540",
+          "revenue": "6948030.480000",
+          "margin": "4022965.260000"
+        },
+        {
+          "period": "2019-07",
+          "records": "647",
+          "revenue": "8694463.130000",
+          "margin": "4080324.510000"
+        },
+        {
+          "period": "2019-08",
+          "records": "513",
+          "revenue": "5568251.580000",
+          "margin": "3146257.710000"
+        },
+        {
+          "period": "2019-09",
+          "records": "541",
+          "revenue": "5394350.610000",
+          "margin": "2762588.300000"
+        },
+        {
+          "period": "2020-01",
+          "records": "614",
+          "revenue": "7514695.050000",
+          "margin": "2604913.920000"
+        },
+        {
+          "period": "2020-02",
+          "records": "460",
+          "revenue": "6298008.000000",
+          "margin": "3594625.900000"
+        },
+        {
+          "period": "2020-03",
+          "records": "467",
+          "revenue": "6637589.080000",
+          "margin": "2918264.610000"
+        },
+        {
+          "period": "2020-04",
+          "records": "207",
+          "revenue": "1525751.320000",
+          "margin": "897056.610000"
+        },
+        {
+          "period": "2020-05",
+          "records": "420",
+          "revenue": "19394456.300000",
+          "margin": "5922379.270000"
+        },
+        {
+          "period": "2020-06",
+          "records": "330",
+          "revenue": "4471548.750000",
+          "margin": "2241388.540000"
+        },
+        {
+          "period": "2020-07",
+          "records": "170",
+          "revenue": "1553987.810000",
+          "margin": "844152.210000"
+        },
+        {
+          "period": "2020-08",
+          "records": "269",
+          "revenue": "2983110.790000",
+          "margin": "1534325.490000"
+        },
+        {
+          "period": "2020-09",
+          "records": "174",
+          "revenue": "2102633.270000",
+          "margin": "1127136.350000"
+        },
+        {
+          "period": "2020-10",
+          "records": "421",
+          "revenue": "2469548.120000",
+          "margin": "1346486.910000"
+        },
+        {
+          "period": "2020-11",
+          "records": "252",
+          "revenue": "4870933.120000",
+          "margin": "2471946.590000"
+        },
+        {
+          "period": "2020-12",
+          "records": "196",
+          "revenue": "3771013.020000",
+          "margin": "2511317.280000"
+        },
+        {
+          "period": "2021-01",
+          "records": "258",
+          "revenue": "5364380.250000",
+          "margin": "3487149.860000"
+        },
+        {
+          "period": "2021-02",
+          "records": "213",
+          "revenue": "3682482.140000",
+          "margin": "2046824.440000"
+        },
+        {
+          "period": "2021-03",
+          "records": "207",
+          "revenue": "2318360.720000",
+          "margin": "1553568.620000"
+        },
+        {
+          "period": "2021-04",
+          "records": "258",
+          "revenue": "4928899.800000",
+          "margin": "3452714.960000"
+        },
+        {
+          "period": "2021-05",
+          "records": "183",
+          "revenue": "2012916.830000",
+          "margin": "1119804.340000"
+        },
+        {
+          "period": "2021-06",
+          "records": "253",
+          "revenue": "5225498.200000",
+          "margin": "3759325.120000"
+        },
+        {
+          "period": "2021-07",
+          "records": "345",
+          "revenue": "9573660.330000",
+          "margin": "6844972.100000"
+        },
+        {
+          "period": "2021-08",
+          "records": "305",
+          "revenue": "10533739.530000",
+          "margin": "5977103.000000"
+        },
+        {
+          "period": "2021-09",
+          "records": "286",
+          "revenue": "8287059.600000",
+          "margin": "5263319.690000"
+        },
+        {
+          "period": "2021-10",
+          "records": "381",
+          "revenue": "15279603.640000",
+          "margin": "9375684.820000"
+        },
+        {
+          "period": "2021-11",
+          "records": "503",
+          "revenue": "6713804.040000",
+          "margin": "4791990.560000"
+        },
+        {
+          "period": "2021-12",
+          "records": "215",
+          "revenue": "3939801.180000",
+          "margin": "2748313.420000"
+        },
+        {
+          "period": "2022-01",
+          "records": "371",
+          "revenue": "5270833.750000",
+          "margin": "3837517.840000"
+        },
+        {
+          "period": "2022-02",
+          "records": "453",
+          "revenue": "10568697.090000",
+          "margin": "6985336.620000"
+        },
+        {
+          "period": "2022-03",
+          "records": "298",
+          "revenue": "5791537.630000",
+          "margin": "3940253.930000"
+        },
+        {
+          "period": "2022-04",
+          "records": "314",
+          "revenue": "5638889.710000",
+          "margin": "3795460.110000"
+        },
+        {
+          "period": "2022-05",
+          "records": "324",
+          "revenue": "3871579.020000",
+          "margin": "2316104.020000"
+        },
+        {
+          "period": "2022-06",
+          "records": "489",
+          "revenue": "10350221.030000",
+          "margin": "7275105.290000"
+        },
+        {
+          "period": "2022-07",
+          "records": "295",
+          "revenue": "3049922.430000",
+          "margin": "1830375.810000"
+        },
+        {
+          "period": "2022-08",
+          "records": "194",
+          "revenue": "2138525.120000",
+          "margin": "1351331.160000"
+        },
+        {
+          "period": "2022-09",
+          "records": "418",
+          "revenue": "6498970.540000",
+          "margin": "3677959.290000"
+        },
+        {
+          "period": "2022-10",
+          "records": "296",
+          "revenue": "2788157.480000",
+          "margin": "1447522.730000"
+        },
+        {
+          "period": "2022-11",
+          "records": "306",
+          "revenue": "3642191.630000",
+          "margin": "2076151.390000"
+        },
+        {
+          "period": "2022-12",
+          "records": "222",
+          "revenue": "3625464.610000",
+          "margin": "2265930.870000"
+        },
+        {
+          "period": "2023-01",
+          "records": "435",
+          "revenue": "7844551.200000",
+          "margin": "4582496.900000"
+        },
+        {
+          "period": "2023-02",
+          "records": "753",
+          "revenue": "13794078.180000",
+          "margin": "6780024.200000"
+        },
+        {
+          "period": "2023-03",
+          "records": "357",
+          "revenue": "2344746.440000",
+          "margin": "1328921.610000"
+        },
+        {
+          "period": "2023-04",
+          "records": "215",
+          "revenue": "1559602.950000",
+          "margin": "775366.470000"
+        },
+        {
+          "period": "2023-05",
+          "records": "625",
+          "revenue": "14537368.300000",
+          "margin": "6977451.490000"
+        },
+        {
+          "period": "2023-06",
+          "records": "1455",
+          "revenue": "6910935.230000",
+          "margin": "3393523.660000"
+        },
+        {
+          "period": "2023-07",
+          "records": "295",
+          "revenue": "2337078.500000",
+          "margin": "1151981.330000"
+        },
+        {
+          "period": "2023-08",
+          "records": "348",
+          "revenue": "2588026.900000",
+          "margin": "1448354.770000"
+        },
+        {
+          "period": "2023-09",
+          "records": "240",
+          "revenue": "5029660.600000",
+          "margin": "4183375.990000"
+        },
+        {
+          "period": "2023-10",
+          "records": "243",
+          "revenue": "2411760.400000",
+          "margin": "1382968.720000"
+        },
+        {
+          "period": "2023-11",
+          "records": "262",
+          "revenue": "1975407.650000",
+          "margin": "1046798.300000"
+        },
+        {
+          "period": "2023-12",
+          "records": "153",
+          "revenue": "895750.500000",
+          "margin": "534319.040000"
+        },
+        {
+          "period": "2024-01",
+          "records": "271",
+          "revenue": "2124201.870000",
+          "margin": "1434941.770000"
+        },
+        {
+          "period": "2024-02",
+          "records": "167",
+          "revenue": "1079764.410000",
+          "margin": "712331.090000"
+        },
+        {
+          "period": "2024-03",
+          "records": "371",
+          "revenue": "2060009.790000",
+          "margin": "1420928.010000"
+        },
+        {
+          "period": "2024-04",
+          "records": "182",
+          "revenue": "2078280.770000",
+          "margin": "1009968.510000"
+        },
+        {
+          "period": "2024-05",
+          "records": "247",
+          "revenue": "3608886.820000",
+          "margin": "1975996.510000"
+        },
+        {
+          "period": "2024-06",
+          "records": "246",
+          "revenue": "6998941.660000",
+          "margin": "2911214.270000"
+        },
+        {
+          "period": "2024-07",
+          "records": "262",
+          "revenue": "4065144.110000",
+          "margin": "850323.910000"
+        },
+        {
+          "period": "2024-08",
+          "records": "264",
+          "revenue": "3762272.340000",
+          "margin": "1368074.960000"
+        },
+        {
+          "period": "2024-09",
+          "records": "206",
+          "revenue": "2626170.570000",
+          "margin": "1213581.550000"
+        },
+        {
+          "period": "2024-10",
+          "records": "243",
+          "revenue": "3030236.030000",
+          "margin": "1372641.030000"
+        },
+        {
+          "period": "2024-11",
+          "records": "175",
+          "revenue": "2080441.000000",
+          "margin": "939325.710000"
+        },
+        {
+          "period": "2024-12",
+          "records": "197",
+          "revenue": "16744970.510000",
+          "margin": "4354510.100000"
+        },
+        {
+          "period": "2025-01",
+          "records": "232",
+          "revenue": "16374092.180000",
+          "margin": "1411814.600000"
+        },
+        {
+          "period": "2025-02",
+          "records": "350",
+          "revenue": "13408966.820000",
+          "margin": "7416589.640000"
+        },
+        {
+          "period": "2025-03",
+          "records": "241",
+          "revenue": "2612295.100000",
+          "margin": "1134570.110000"
+        },
+        {
+          "period": "2025-04",
+          "records": "206",
+          "revenue": "5670753.870000",
+          "margin": "2510146.820000"
+        },
+        {
+          "period": "2025-05",
+          "records": "231",
+          "revenue": "21382925.250000",
+          "margin": "3602953.780000"
+        },
+        {
+          "period": "2025-06",
+          "records": "525",
+          "revenue": "14924161.430000",
+          "margin": "7063999.010000"
+        },
+        {
+          "period": "2025-07",
+          "records": "265",
+          "revenue": "20352893.810000",
+          "margin": "2062138.430000"
+        },
+        {
+          "period": "2025-08",
+          "records": "253",
+          "revenue": "8934135.310000",
+          "margin": "4123755.290000"
+        },
+        {
+          "period": "2025-09",
+          "records": "507",
+          "revenue": "20654027.170000",
+          "margin": "7288190.940000"
+        },
+        {
+          "period": "2025-10",
+          "records": "360",
+          "revenue": "12512678.310000",
+          "margin": "2913359.170000"
+        },
+        {
+          "period": "2025-11",
+          "records": "545",
+          "revenue": "25076009.200000",
+          "margin": "6500248.450000"
+        },
+        {
+          "period": "2025-12",
+          "records": "829",
+          "revenue": "23493882.590000",
+          "margin": "6306149.520000"
+        }
+      ]
+    },
+    "yearly": {
+      "sql": "SELECT calendar_year, COUNT(*) records,\n      SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) revenue,\n      SUM(CASE WHEN is_gross_margin_eligible THEN gross_margin_amount END) margin,\n      SUM(CASE WHEN is_gross_margin_eligible THEN net_sales END) margin_basis,\n      COUNT(DISTINCT CASE WHEN is_net_sales_eligible THEN month_start END) revenue_months\n      FROM workspace.medshield_gold.sales_restart_fact_candidate VERSION AS OF 19 WHERE is_analysis_candidate = TRUE AND product_scope_status <> 'CONTRACT_LABEL_CANDIDATE' GROUP BY calendar_year ORDER BY calendar_year",
+      "rows": [
+        {
+          "calendar_year": "2017",
+          "records": "1978",
+          "revenue": "10211167.350000",
+          "margin": "6316157.680000",
+          "margin_basis": "9212606.100000",
+          "revenue_months": "7"
+        },
+        {
+          "calendar_year": "2018",
+          "records": "6181",
+          "revenue": "51619691.270000",
+          "margin": "28328721.760000",
+          "margin_basis": "44882495.390000",
+          "revenue_months": "10"
+        },
+        {
+          "calendar_year": "2019",
+          "records": "5446",
+          "revenue": "62542304.490000",
+          "margin": "29125469.950000",
+          "margin_basis": "41211281.420000",
+          "revenue_months": "9"
+        },
+        {
+          "calendar_year": "2020",
+          "records": "3980",
+          "revenue": "63593274.630000",
+          "margin": "28013993.680000",
+          "margin_basis": "40259988.090000",
+          "revenue_months": "12"
+        },
+        {
+          "calendar_year": "2021",
+          "records": "3407",
+          "revenue": "77860206.260000",
+          "margin": "50420770.930000",
+          "margin_basis": "77804247.260000",
+          "revenue_months": "12"
+        },
+        {
+          "calendar_year": "2022",
+          "records": "3980",
+          "revenue": "63234990.040000",
+          "margin": "40799049.060000",
+          "margin_basis": "60493221.210000",
+          "revenue_months": "12"
+        },
+        {
+          "calendar_year": "2023",
+          "records": "5381",
+          "revenue": "62228966.850000",
+          "margin": "33585582.480000",
+          "margin_basis": "59822843.640000",
+          "revenue_months": "12"
+        },
+        {
+          "calendar_year": "2024",
+          "records": "2831",
+          "revenue": "50259319.880000",
+          "margin": "19563837.420000",
+          "margin_basis": "49956893.050000",
+          "revenue_months": "12"
+        },
+        {
+          "calendar_year": "2025",
+          "records": "4544",
+          "revenue": "185396821.040000",
+          "margin": "52333915.760000",
+          "margin_basis": "95077093.870000",
+          "revenue_months": "12"
+        }
+      ]
+    },
+    "category": {
+      "sql": "SELECT display_category, category_status, COUNT(*) records,\n      COUNT(DISTINCT normalized_product) labels, SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) revenue\n      FROM workspace.medshield_gold.sales_restart_fact_candidate VERSION AS OF 19 WHERE is_analysis_candidate = TRUE AND product_scope_status <> 'CONTRACT_LABEL_CANDIDATE' GROUP BY display_category,category_status ORDER BY display_category,category_status",
+      "rows": [
+        {
+          "display_category": "Unclassified",
+          "category_status": "needs_review",
+          "records": "37728",
+          "labels": "4561",
+          "revenue": "626946741.810000"
+        }
+      ]
+    },
+    "source": {
+      "sql": "SELECT source_data_status, COUNT(*) records,\n      SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) revenue,\n      SUM(CASE WHEN is_quantity_observation_eligible THEN 1 ELSE 0 END) quantity_rows\n      FROM workspace.medshield_gold.sales_restart_fact_candidate VERSION AS OF 19 WHERE is_analysis_candidate = TRUE AND product_scope_status <> 'CONTRACT_LABEL_CANDIDATE' GROUP BY source_data_status ORDER BY source_data_status",
+      "rows": [
+        {
+          "source_data_status": "ADJUSTED_ESTIMATED_PRODUCT_ALLOCATION_SOURCE",
+          "records": "11355",
+          "revenue": "299249415.550000",
+          "quantity_rows": "11355"
+        },
+        {
+          "source_data_status": "ORIGINAL_SOURCE_EXPORT",
+          "records": "26373",
+          "revenue": "327697326.260000",
+          "quantity_rows": "26212"
+        }
+      ]
+    },
+    "missing": {
+      "sql": "SELECT SUM(CASE WHEN quantity IS NULL THEN 1 ELSE 0 END) null_quantity,\n      SUM(CASE WHEN unit_selling_price IS NULL THEN 1 ELSE 0 END) null_unit_selling_price,\n      SUM(CASE WHEN net_sales IS NULL THEN 1 ELSE 0 END) null_net_sales,\n      SUM(CASE WHEN gross_margin_amount IS NULL THEN 1 ELSE 0 END) null_margin,\n      SUM(CASE WHEN is_net_sales_eligible AND NOT is_gross_margin_eligible THEN 1 ELSE 0 END) revenue_without_margin\n      FROM workspace.medshield_gold.sales_restart_fact_candidate VERSION AS OF 19 WHERE is_analysis_candidate = TRUE AND product_scope_status <> 'CONTRACT_LABEL_CANDIDATE'",
+      "rows": [
+        {
+          "null_quantity": "11",
+          "null_unit_selling_price": "835",
+          "null_net_sales": "880",
+          "null_margin": "137",
+          "revenue_without_margin": "2743"
+        }
+      ]
+    },
+    "external": {
+      "sql": "SELECT signal_family,COUNT(*) records,\n      SUM(CASE WHEN is_external_join_ready THEN 1 ELSE 0 END) join_ready,\n      SUM(CASE WHEN is_forecast_eligible THEN 1 ELSE 0 END) forecast_ready\n      FROM workspace.medshield_gold.vw_dss_external_signals_candidate GROUP BY signal_family ORDER BY signal_family",
+      "rows": [
+        {
+          "signal_family": "DISEASE",
+          "records": "1787",
+          "join_ready": "0",
+          "forecast_ready": "0"
+        },
+        {
+          "signal_family": "WEATHER",
+          "records": "384",
+          "join_ready": "0",
+          "forecast_ready": "0"
+        }
+      ]
+    },
+    "model": {
+      "sql": "SELECT COUNT(*) pointers FROM workspace.medshield_gold.model_release_pointer",
+      "rows": [
+        {
+          "pointers": "0"
+        }
+      ]
+    }
+  },
+  "checks": [
+    {
+      "name": "unique source records",
+      "actual": "37728",
+      "expected": "37728",
+      "tolerance": 0,
+      "pass": true
+    },
+    {
+      "name": "snapshot transaction population",
+      "actual": 37728,
+      "expected": "37728",
+      "tolerance": 0,
+      "pass": true
+    },
+    {
+      "name": "net sales independent SQL",
+      "actual": 626946741.8100001,
+      "expected": "626946741.810000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "gross margin independent SQL",
+      "actual": 288487498.71999997,
+      "expected": "288487498.720000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "shared margin denominator",
+      "actual": 478720670.03,
+      "expected": "478720670.030000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "weighted gross margin rate",
+      "actual": 60.2621772529524,
+      "expected": 60.26217725295242,
+      "tolerance": 1e-9,
+      "pass": true
+    },
+    {
+      "name": "year 2017 revenue",
+      "actual": 10211167.35,
+      "expected": "10211167.350000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "year 2018 revenue",
+      "actual": 51619691.27,
+      "expected": "51619691.270000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "year 2019 revenue",
+      "actual": 62542304.49,
+      "expected": "62542304.490000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "year 2020 revenue",
+      "actual": 63593274.63,
+      "expected": "63593274.630000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "year 2021 revenue",
+      "actual": 77860206.26,
+      "expected": "77860206.260000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "year 2022 revenue",
+      "actual": 63234990.04,
+      "expected": "63234990.040000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "year 2023 revenue",
+      "actual": 62228966.85,
+      "expected": "62228966.850000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "year 2024 revenue",
+      "actual": 50259319.88,
+      "expected": "50259319.880000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "year 2025 revenue",
+      "actual": 185396821.04,
+      "expected": "185396821.040000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2017-01 revenue",
+      "actual": 2288688.88,
+      "expected": "2288688.880000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2017-02 revenue",
+      "actual": 2478761.2,
+      "expected": "2478761.200000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2017-03 revenue",
+      "actual": 2697198.47,
+      "expected": "2697198.470000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2017-04 revenue",
+      "actual": 2655938.8,
+      "expected": "2655938.800000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2017-09 revenue",
+      "actual": 480,
+      "expected": "480.000000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2017-11 revenue",
+      "actual": 86200,
+      "expected": "86200.000000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2017-12 revenue",
+      "actual": 3900,
+      "expected": "3900.000000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2018-03 revenue",
+      "actual": 3457920.7,
+      "expected": "3457920.700000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2018-04 revenue",
+      "actual": 6403396.28,
+      "expected": "6403396.280000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2018-05 revenue",
+      "actual": 4591195.17,
+      "expected": "4591195.170000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2018-06 revenue",
+      "actual": 4599086.64,
+      "expected": "4599086.640000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2018-07 revenue",
+      "actual": 5034975.38,
+      "expected": "5034975.380000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2018-08 revenue",
+      "actual": 4085611.82,
+      "expected": "4085611.820000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2018-09 revenue",
+      "actual": 4066997.22,
+      "expected": "4066997.220000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2018-10 revenue",
+      "actual": 7274326.83,
+      "expected": "7274326.830000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2018-11 revenue",
+      "actual": 7571263.89,
+      "expected": "7571263.890000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2018-12 revenue",
+      "actual": 4534917.34,
+      "expected": "4534917.340000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2019-01 revenue",
+      "actual": 4459965.47,
+      "expected": "4459965.470000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2019-02 revenue",
+      "actual": 5473644.67,
+      "expected": "5473644.670000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2019-03 revenue",
+      "actual": 6995759.14,
+      "expected": "6995759.140000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2019-04 revenue",
+      "actual": 9438917.29,
+      "expected": "9438917.290000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2019-05 revenue",
+      "actual": 9568922.12,
+      "expected": "9568922.120000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2019-06 revenue",
+      "actual": 6948030.48,
+      "expected": "6948030.480000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2019-07 revenue",
+      "actual": 8694463.13,
+      "expected": "8694463.130000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2019-08 revenue",
+      "actual": 5568251.58,
+      "expected": "5568251.580000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2019-09 revenue",
+      "actual": 5394350.61,
+      "expected": "5394350.610000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2020-01 revenue",
+      "actual": 7514695.05,
+      "expected": "7514695.050000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2020-02 revenue",
+      "actual": 6298008,
+      "expected": "6298008.000000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2020-03 revenue",
+      "actual": 6637589.08,
+      "expected": "6637589.080000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2020-04 revenue",
+      "actual": 1525751.32,
+      "expected": "1525751.320000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2020-05 revenue",
+      "actual": 19394456.3,
+      "expected": "19394456.300000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2020-06 revenue",
+      "actual": 4471548.75,
+      "expected": "4471548.750000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2020-07 revenue",
+      "actual": 1553987.81,
+      "expected": "1553987.810000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2020-08 revenue",
+      "actual": 2983110.79,
+      "expected": "2983110.790000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2020-09 revenue",
+      "actual": 2102633.27,
+      "expected": "2102633.270000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2020-10 revenue",
+      "actual": 2469548.12,
+      "expected": "2469548.120000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2020-11 revenue",
+      "actual": 4870933.12,
+      "expected": "4870933.120000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2020-12 revenue",
+      "actual": 3771013.02,
+      "expected": "3771013.020000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2021-01 revenue",
+      "actual": 5364380.25,
+      "expected": "5364380.250000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2021-02 revenue",
+      "actual": 3682482.14,
+      "expected": "3682482.140000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2021-03 revenue",
+      "actual": 2318360.72,
+      "expected": "2318360.720000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2021-04 revenue",
+      "actual": 4928899.8,
+      "expected": "4928899.800000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2021-05 revenue",
+      "actual": 2012916.83,
+      "expected": "2012916.830000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2021-06 revenue",
+      "actual": 5225498.2,
+      "expected": "5225498.200000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2021-07 revenue",
+      "actual": 9573660.33,
+      "expected": "9573660.330000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2021-08 revenue",
+      "actual": 10533739.53,
+      "expected": "10533739.530000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2021-09 revenue",
+      "actual": 8287059.6,
+      "expected": "8287059.600000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2021-10 revenue",
+      "actual": 15279603.64,
+      "expected": "15279603.640000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2021-11 revenue",
+      "actual": 6713804.04,
+      "expected": "6713804.040000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2021-12 revenue",
+      "actual": 3939801.18,
+      "expected": "3939801.180000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2022-01 revenue",
+      "actual": 5270833.75,
+      "expected": "5270833.750000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2022-02 revenue",
+      "actual": 10568697.09,
+      "expected": "10568697.090000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2022-03 revenue",
+      "actual": 5791537.63,
+      "expected": "5791537.630000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2022-04 revenue",
+      "actual": 5638889.71,
+      "expected": "5638889.710000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2022-05 revenue",
+      "actual": 3871579.02,
+      "expected": "3871579.020000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2022-06 revenue",
+      "actual": 10350221.03,
+      "expected": "10350221.030000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2022-07 revenue",
+      "actual": 3049922.43,
+      "expected": "3049922.430000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2022-08 revenue",
+      "actual": 2138525.12,
+      "expected": "2138525.120000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2022-09 revenue",
+      "actual": 6498970.54,
+      "expected": "6498970.540000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2022-10 revenue",
+      "actual": 2788157.48,
+      "expected": "2788157.480000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2022-11 revenue",
+      "actual": 3642191.63,
+      "expected": "3642191.630000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2022-12 revenue",
+      "actual": 3625464.61,
+      "expected": "3625464.610000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2023-01 revenue",
+      "actual": 7844551.2,
+      "expected": "7844551.200000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2023-02 revenue",
+      "actual": 13794078.18,
+      "expected": "13794078.180000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2023-03 revenue",
+      "actual": 2344746.44,
+      "expected": "2344746.440000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2023-04 revenue",
+      "actual": 1559602.95,
+      "expected": "1559602.950000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2023-05 revenue",
+      "actual": 14537368.3,
+      "expected": "14537368.300000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2023-06 revenue",
+      "actual": 6910935.23,
+      "expected": "6910935.230000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2023-07 revenue",
+      "actual": 2337078.5,
+      "expected": "2337078.500000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2023-08 revenue",
+      "actual": 2588026.9,
+      "expected": "2588026.900000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2023-09 revenue",
+      "actual": 5029660.6,
+      "expected": "5029660.600000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2023-10 revenue",
+      "actual": 2411760.4,
+      "expected": "2411760.400000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2023-11 revenue",
+      "actual": 1975407.65,
+      "expected": "1975407.650000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2023-12 revenue",
+      "actual": 895750.5,
+      "expected": "895750.500000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2024-01 revenue",
+      "actual": 2124201.87,
+      "expected": "2124201.870000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2024-02 revenue",
+      "actual": 1079764.41,
+      "expected": "1079764.410000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2024-03 revenue",
+      "actual": 2060009.79,
+      "expected": "2060009.790000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2024-04 revenue",
+      "actual": 2078280.77,
+      "expected": "2078280.770000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2024-05 revenue",
+      "actual": 3608886.82,
+      "expected": "3608886.820000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2024-06 revenue",
+      "actual": 6998941.66,
+      "expected": "6998941.660000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2024-07 revenue",
+      "actual": 4065144.11,
+      "expected": "4065144.110000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2024-08 revenue",
+      "actual": 3762272.34,
+      "expected": "3762272.340000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2024-09 revenue",
+      "actual": 2626170.57,
+      "expected": "2626170.570000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2024-10 revenue",
+      "actual": 3030236.03,
+      "expected": "3030236.030000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2024-11 revenue",
+      "actual": 2080441,
+      "expected": "2080441.000000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2024-12 revenue",
+      "actual": 16744970.51,
+      "expected": "16744970.510000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2025-01 revenue",
+      "actual": 16374092.18,
+      "expected": "16374092.180000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2025-02 revenue",
+      "actual": 13408966.82,
+      "expected": "13408966.820000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2025-03 revenue",
+      "actual": 2612295.1,
+      "expected": "2612295.100000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2025-04 revenue",
+      "actual": 5670753.87,
+      "expected": "5670753.870000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2025-05 revenue",
+      "actual": 21382925.25,
+      "expected": "21382925.250000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2025-06 revenue",
+      "actual": 14924161.43,
+      "expected": "14924161.430000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2025-07 revenue",
+      "actual": 20352893.81,
+      "expected": "20352893.810000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2025-08 revenue",
+      "actual": 8934135.31,
+      "expected": "8934135.310000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2025-09 revenue",
+      "actual": 20654027.17,
+      "expected": "20654027.170000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2025-10 revenue",
+      "actual": 12512678.31,
+      "expected": "12512678.310000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2025-11 revenue",
+      "actual": 25076009.2,
+      "expected": "25076009.200000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "month 2025-12 revenue",
+      "actual": 23493882.59,
+      "expected": "23493882.590000",
+      "tolerance": 0.005,
+      "pass": true
+    },
+    {
+      "name": "current fact stable during check",
+      "actual": "19",
+      "expected": "19",
+      "tolerance": 0,
+      "pass": true
+    }
+  ],
+  "unavailable_months": [
+    "2017-05",
+    "2017-06",
+    "2017-07",
+    "2017-08",
+    "2017-10",
+    "2018-01",
+    "2018-02",
+    "2019-10",
+    "2019-11",
+    "2019-12"
+  ],
+  "limitation": "No write, approval, model retraining, production Supabase ACL verification, or business acceptance."
+}

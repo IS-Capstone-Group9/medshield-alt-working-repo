@@ -1,0 +1,14 @@
+{
+ "judged": 48,
+ "unknown": 2,
+ "correct": 46,
+ "precision_pct": 95.83333333333333,
+ "precision_after_v1_1_pct": 100.0,
+ "by_sample": {
+  "top_value": "24/25",
+  "random_tail": "22/23"
+ },
+ "definition": "A_brand_line",
+ "reviewer": "Claude (AI-assisted, not independent)",
+ "not_measured": "missed merges (e.g. AMBUBAG vs AMBU BAG, NASAL OXYGEN CANNULA variants stay separate)"
+}

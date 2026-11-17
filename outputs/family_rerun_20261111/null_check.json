@@ -1,0 +1,21 @@
+{
+ "registration_sha256": "361504eae9fad4fd43ea93fce815bac67584d1eb18d382064c2fe3aed417a857",
+ "mapping_statistic": 0.8192235705888603,
+ "mapping_ax_years": 5,
+ "label_statistic": 0.51845899064142,
+ "size_matched": {
+  "runs": 200,
+  "runs_with_ax": 200,
+  "mean": 0.6018820503444062,
+  "p95": 0.7739544588693666,
+  "share_at_or_above_mapping": 0.035
+ },
+ "size_and_category_matched": {
+  "runs": 200,
+  "runs_with_ax": 200,
+  "mean": 0.5940269282833439,
+  "p95": 0.7337681786415817,
+  "share_at_or_above_mapping": 0.025
+ },
+ "passes": true
+}

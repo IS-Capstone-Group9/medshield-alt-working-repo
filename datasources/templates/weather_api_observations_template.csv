@@ -1,0 +1,2 @@
+date,year,month,target_region,province_city,latitude,longitude,provider,rainfall_mm,temperature_mean_c,humidity_mean_pct,wind_speed_mean_kph,severity_proxy,source_url,notes
+2021-01-01,2021,1,Quezon,Lucena,13.9414,121.6236,NASA POWER,10.4,27.5,80,7.8,0.12,https://power.larc.nasa.gov/,example row only

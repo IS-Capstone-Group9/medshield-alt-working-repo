@@ -1,0 +1,210 @@
+{
+  "experiment_id": "f749f47ef44db53a35f56a822e2b35edc0877ad5126c4352a996dfb2f5a20e8b",
+  "identity": {
+    "code_identity": {
+      "code_sha256": {
+        "annual_projection.py": "62064b67e90832ce2e46474ff9b7495ba05a8032b66d1e68177483db412dac80",
+        "contracts.py": "a6ece04850ba397a84c72309043c9ab6c83c3ee7a4fc1fe4b63f1b82b8b86d3a",
+        "engine.py": "cdc5a39363c69f500897e849f2c37ab42c401ed789b6890e6abab808cbbee4c8",
+        "extended_experiment.py": "3d88a6aa92bb0b03140ce9830512cd1292d4a6d0fe85ad8bdc190d92b64f3b42",
+        "metrics.py": "4841243a2b262d71845596d4d72b44a7aa7447602003cfdb79b971e1d7ac8baa",
+        "models.py": "2b2b6495e3ff54b7613800fded65832efc46fc1018ad2fe09f678baf857c4ac9",
+        "robust_error_experiment.py": "0a07f75c83ed44c05524ad5032e86c3d3e889b32276dd6f3226a3dbd062e6bd6"
+      },
+      "git_head": "cc03b4c05398880b18987eca5ca9c1e140bf9dcb",
+      "inherited_adapter_code_sha256": {
+        "contracts.py": "a6ece04850ba397a84c72309043c9ab6c83c3ee7a4fc1fe4b63f1b82b8b86d3a",
+        "engine.py": "cdc5a39363c69f500897e849f2c37ab42c401ed789b6890e6abab808cbbee4c8",
+        "extended_experiment.py": "3d88a6aa92bb0b03140ce9830512cd1292d4a6d0fe85ad8bdc190d92b64f3b42",
+        "metrics.py": "4841243a2b262d71845596d4d72b44a7aa7447602003cfdb79b971e1d7ac8baa",
+        "models.py": "2b2b6495e3ff54b7613800fded65832efc46fc1018ad2fe09f678baf857c4ac9"
+      },
+      "test_sha256": "6eed6913afc702bedee334803a37f0b0d15acecef1d1fffeb82797c3e73e1e98"
+    },
+    "comparison_run_id": "eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a",
+    "input_hash": "63105c8b81d711748b0aac9df2ee316b1aa1b68202302b2b0f1231a6c2bb4046",
+    "original_selection": {
+      "audit_previously_inspected": true,
+      "criteria": {
+        "absolute_normalized_bias_max": 10,
+        "critical_horizon_mae_deterioration_max": 0.1,
+        "relative_mae_rmse_deterioration_max": 0.1,
+        "relative_wape_improvement": 0.05,
+        "status": "experimental_not_business_approval"
+      },
+      "frozen_before_audit": true,
+      "model_id": "last_value",
+      "reason": "No challenger qualifies; retain best complete benchmark candidate",
+      "stage": "development_only",
+      "status": "exploratory_candidate_only"
+    },
+    "packages": {
+      "cmdstanpy": "1.3.0",
+      "numpy": "2.3.5",
+      "pandas": "2.3.3",
+      "prophet": "1.4.0",
+      "python": "3.13.3",
+      "statsmodels": "0.14.6"
+    },
+    "protocol": {
+      "calibration": "Quarterly inner origins start training_start+23 and end no later than outer_origin−12. Minimize origin-known L1 with ratio weights abs(endpoint); zero endpoints retain constant loss. Bound scale to [0.9,1.1].",
+      "candidate_ordering": "Lowest development MAE, then model_id, among complete sixty-key recipes; WAPE shares numerator on same keys.",
+      "configurations": [
+        {
+          "method": "recent_median",
+          "model_id": "median_3",
+          "window": 3
+        },
+        {
+          "method": "recent_median",
+          "model_id": "median_6",
+          "window": 6
+        },
+        {
+          "method": "recent_median",
+          "model_id": "median_12",
+          "window": 12
+        },
+        {
+          "chronological_weights": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "method": "linear_recency_weighted_median",
+          "model_id": "weighted_median_6",
+          "weighted_median_tie": "lower",
+          "window": 6
+        },
+        {
+          "method": "seasonal_median_shrinkage",
+          "model_id": "seasonal_median_shrink_6_3y",
+          "seasonal_weight": 0.5,
+          "seasonal_years": 3,
+          "window": 6
+        },
+        {
+          "inner_horizon": 12,
+          "inner_initial_history": 24,
+          "inner_step_months": 3,
+          "method": "origin_local_l1_scale",
+          "model_id": "last_value_l1_calibrated_10pct",
+          "scale_max": 1.1,
+          "scale_min": 0.9,
+          "weighted_median_tie": "lower"
+        }
+      ],
+      "frozen_original_criteria": {
+        "absolute_normalized_bias_max": 10,
+        "critical_horizon_mae_deterioration_max": 0.1,
+        "relative_mae_rmse_deterioration_max": 0.1,
+        "relative_wape_improvement": 0.05,
+        "status": "experimental_not_business_approval"
+      },
+      "intervals": "Unavailable; no uncertainty calibration or future accuracy assessment.",
+      "limitations": [
+        "Designed after development and the 2025 audit were inspected; all new conclusions are exploratory.",
+        "2025 is a previously inspected retrospective audit, never an untouched final test or recipe-selection set.",
+        "Five overlapping origins yield sixty cases over twenty-four distinct target months, not independent months.",
+        "Scalar inner origins overlap; first outer origin has only one inner origin and twelve cases; calibration reliability is not established.",
+        "Origin-local calculations do not verify historical availability: this is a revised snapshot without availability vintages.",
+        "2020–2025 completeness is inherited training-only user attestation, not independent verification.",
+        "Company PHP revenue does not establish SKU quantity demand, disease causation, stock losses or procurement benefits.",
+        "Business MAE/WAPE limits remain unset; original experimental criteria are not publication approval.",
+        "Later untouched accepted actuals and scoped model/data review are required before promotion.",
+        "No 2026 actuals, accuracy claims, new annual projections, release draft, warehouse writes or activation."
+      ],
+      "median_rule": "Even-window median is midpoint; weighted median is deterministic lower crossing; duplicate weights are summed.",
+      "method_references": [
+        "https://otexts.com/fpp3/accuracy.html",
+        "https://robjhyndman.com/hyndsight/wape.html"
+      ],
+      "preprocessing": "Origin-local values only; all signed observations retained; no clipping, outlier deletion, smoothing across origin or gap imputation.",
+      "promotion": false,
+      "purpose": "bounded_exploratory_absolute_error_reduction",
+      "schedule": {
+        "audit_end": "2025-12",
+        "audit_label": "retrospective_audit",
+        "audit_origin": "2024-12",
+        "development_origins": [
+          "2022-12",
+          "2023-03",
+          "2023-06",
+          "2023-09",
+          "2023-12"
+        ],
+        "rationale": "Blueprint initial contiguous-history candidate; requires full eligible coverage",
+        "training_start": "2020-01"
+      },
+      "seed": 20260927,
+      "stop_rule": "Evaluate exactly six registered recipes once; no post-result grid expansion or audit reselection.",
+      "target": "company_month_net_sales_PHP",
+      "version": "1.0"
+    },
+    "publication_approved": false,
+    "source_receipt": {
+      "comparison_artifact_map_sha256": "41185d0ee810dc446ad90fcf568466b02751f3c6fb5223a7f873878a7da6ab45",
+      "comparison_path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\run.json",
+      "comparison_sha256": "9889baea07a1f222edc9d2d2576fefc0d2be4bc8e52dc4d9a3ff9919e0056f45",
+      "input_path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_validation\\2026-10-09T13-28-48-501Z\\input.json",
+      "input_sha256": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba",
+      "input_sidecar_sha256": "1612b49cbd94ae4d9a80b01e35a01608709ec74185221114bf5622de48ae65e0",
+      "verified_comparison_artifacts": [
+        {
+          "bytes": 7859,
+          "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\protocol.json",
+          "sha256": "ec438baf6f371c570caee425861ffbaf1a44d087a2dd8bd8cc516d303e74f419"
+        },
+        {
+          "bytes": 4702,
+          "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\RESULTS.md",
+          "sha256": "e64e9b4183dcac57a18e99ce5b770aef8ed8b37f97fcbe2bd79f12ba6e8fbbe3"
+        },
+        {
+          "bytes": 36,
+          "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\coverage.json",
+          "sha256": "05347804d72779ff1d93a089385199be750ca2e930baf4408c38e0a924facfdf"
+        },
+        {
+          "bytes": 290241,
+          "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\evaluations.json",
+          "sha256": "c9763ee9ceed55d48aae48a542a5a610d3cc4c9a5cd5a3ae110f3e23df74b647"
+        },
+        {
+          "bytes": 3339,
+          "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\folds.json",
+          "sha256": "cb6eeea230bd7bc07eada4edf5741d67d731b4c05cc2a15675adc72aaaed0f13"
+        },
+        {
+          "bytes": 1719,
+          "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\input-manifest.json",
+          "sha256": "fcedce34d7486dc5b311de051be585233e61abaca7b18f618da091d5b8c5bcb8"
+        },
+        {
+          "bytes": 11419,
+          "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\model-cards.json",
+          "sha256": "4898d8d4bd006b693638767cd80e72e70cc020a1b8c0732ef5e22afcc30ce042"
+        },
+        {
+          "bytes": 1451467,
+          "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\predictions.json",
+          "sha256": "da8ae57f0df557386004b1227bc2ef453f7067a5556d9e9ce5dfd25812c2de42"
+        },
+        {
+          "bytes": 1900732,
+          "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\run.json",
+          "sha256": "9889baea07a1f222edc9d2d2576fefc0d2be4bc8e52dc4d9a3ff9919e0056f45"
+        },
+        {
+          "bytes": 363,
+          "path": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\outputs\\predictive_completion_20261009\\models\\fixed-origin-extended\\eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a\\warnings.json",
+          "sha256": "8e92f46c32b3e1369a79d65cd1a57e2cce4b3f13d8178973cb065b8de7fac30f"
+        }
+      ]
+    }
+  },
+  "registered_at": "2026-10-10T08:19:42.344209+00:00"
+}

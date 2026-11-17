@@ -1,0 +1,78 @@
+{
+ "registration_sha256": "23d479dc3d2c7371562371f66ec983e02a2741f8cc5474978a491ac3b3494d47",
+ "families": 100,
+ "grade_B": 34,
+ "grade_C": 66,
+ "grade_B_net_share": 0.1517075337574362,
+ "grade_B_multi_level": 7,
+ "V1_price_consistency": {
+  "families": 7,
+  "cases": 26,
+  "median_cv_before": 0.2117515630577399,
+  "median_cv_after": 0.2173689734154709,
+  "passes": false
+ },
+ "V2_smoother_demand": {
+  "median_cv_raw": 2.9645370101126627,
+  "median_cv_pieces": 3.3356509565480135,
+  "passes": false
+ },
+ "V3_label_agreement": {
+  "labels_compared": 6,
+  "agreement": 0.0,
+  "passes": false
+ },
+ "P7_forecast": {
+  "wape_raw_quantity": 1.1707998849437755,
+  "wape_pieces": 1.5614115676643099,
+  "wape_pesos": 1.3279439575009626,
+  "passes": false
+ },
+ "examples_factor_and_median_price": {
+  "ENHAMOX": [],
+  "LACTAMOX": [
+   [
+    1,
+    310.0
+   ],
+   [
+    10,
+    2800.0
+   ],
+   [
+    10,
+    2880.0
+   ],
+   [
+    10,
+    3000.0
+   ]
+  ],
+  "MAXIFER": [
+   [
+    1,
+    490.0
+   ],
+   [
+    5,
+    2450.0
+   ],
+   [
+    5,
+    2490.0
+   ]
+  ],
+  "BUPIRIGHT": [
+   [
+    1,
+    620.0
+   ]
+  ],
+  "SPEEDA": [
+   [
+    4,
+    6975.0
+   ]
+  ]
+ }
+}

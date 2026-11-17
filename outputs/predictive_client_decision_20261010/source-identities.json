@@ -1,0 +1,31 @@
+{
+  "captured_at_utc": "2026-10-10T08:57:51.518002+00:00",
+  "purpose": "Bind unchanged inherited data/model/policy evidence for client review preparation",
+  "git_head": "cc03b4c05398880b18987eca5ca9c1e140bf9dcb",
+  "dirty_tree": true,
+  "files": {
+    "outputs/predictive_error_policy_20261010/policy.json": "55c93ca278c8fa9a19efaecdd8327836bc3d35662fe733eb36917125bb4d0fcb",
+    "outputs/predictive_validation/2026-10-09T13-28-48-501Z/input.json": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba",
+    "outputs/predictive_completion_20261009/models/fixed-origin-extended/eac9b508c8f1a28e7a3e3b967cf2189cc20ed0f16d3b70ca21eea0c243282f5a/run.json": "9889baea07a1f222edc9d2d2576fefc0d2be4bc8e52dc4d9a3ff9919e0056f45",
+    "outputs/predictive_annual_release_20261010/models/annual-origin-2025-12-asof-2026-10-10/a0047f8b88958a46152b457770211c53976f769bf24c9a9df097abb00dc6d39b/run.json": "e25c713bb7faee9cf9020f9064fdf016d18df3793131e1ab43bdfcd169d61b6d",
+    "outputs/predictive_error_optimization_20261010/report.json": "2b6c6d02aa1d920c02d1e3806ba4c20bbfee242639c00d141537b23c70800094",
+    "outputs/predictive_error_optimization_20261010/RESULTS.md": "ffaffc3e2a50c9f707c589c42ba99f4bf385d75389901111755e7b7a9cc15707",
+    "outputs/predictive_error_optimization_20261010/qa/verification.json": "874ead40411b7131127aff079ecc61b8ae7c85d0336da8468a039270f944455d",
+    "outputs/predictive_error_optimization_20261010/qa/REPORT.md": "8de017892ee0d32c088d2fa76714f025517c8360803f61994c87d9052ab371a4",
+    "outputs/predictive_error_optimization_20261010/delivery.json": "97965466f37697305e40c1700465580c466ba066be1526c68e9b263e991492f3",
+    "outputs/predictive_error_optimization_20261010/models/protocol.json": "4c95566337bbce02a46cebca0979081a65c67441b61e570cb1f55a0e3a21e667",
+    "outputs/predictive_error_optimization_20261010/models/f749f47ef44db53a35f56a822e2b35edc0877ad5126c4352a996dfb2f5a20e8b/run.json": "7c22e0467925ee95fed2f5d287357ff0948bbc524e25715954cd28c22a83e841",
+    "outputs/predictive_readiness_20261010/SOURCE_OWNER_REVIEW.md": "08f8fc10d7c438568453d53544375c927e2a5085affde318c0758664a6f5e3fd",
+    "services/analytics_service/predictive/contracts.py": "a6ece04850ba397a84c72309043c9ab6c83c3ee7a4fc1fe4b63f1b82b8b86d3a",
+    "services/analytics_service/predictive/engine.py": "cdc5a39363c69f500897e849f2c37ab42c401ed789b6890e6abab808cbbee4c8",
+    "services/analytics_service/predictive/models.py": "2b2b6495e3ff54b7613800fded65832efc46fc1018ad2fe09f678baf857c4ac9",
+    "services/analytics_service/predictive/metrics.py": "4841243a2b262d71845596d4d72b44a7aa7447602003cfdb79b971e1d7ac8baa",
+    "services/analytics_service/predictive/extended_experiment.py": "3d88a6aa92bb0b03140ce9830512cd1292d4a6d0fe85ad8bdc190d92b64f3b42",
+    "services/analytics_service/predictive/annual_projection.py": "62064b67e90832ce2e46474ff9b7495ba05a8032b66d1e68177483db412dac80",
+    "services/analytics_service/predictive/robust_error_experiment.py": "0a07f75c83ed44c05524ad5032e86c3d3e889b32276dd6f3226a3dbd062e6bd6",
+    "services/tests/test_predictive_robust_error.py": "6eed6913afc702bedee334803a37f0b0d15acecef1d1fffeb82797c3e73e1e98"
+  },
+  "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+  "fact_delta_version": 20,
+  "optimization_run_id": "f749f47ef44db53a35f56a822e2b35edc0877ad5126c4352a996dfb2f5a20e8b"
+}

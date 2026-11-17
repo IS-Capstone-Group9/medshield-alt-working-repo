@@ -1,0 +1,684 @@
+{
+  "prepared_date": "2026-10-03",
+  "fact_delta_version": 17,
+  "identity": {
+    "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+    "policy_version": "sales_restart_gold_v7_independent_catalog",
+    "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+    "product_master_sha256": "1361f7629d4dab4f1f6414db32a19e9eea9ab20acb99319d168aecc9fef48088",
+    "publication_status": "CANDIDATE_PENDING_BUSINESS_AND_PRODUCT_MASTER_REVIEW"
+  },
+  "guide_path": "docs/DIAGNOSTIC_ANALYTICS.md",
+  "complete_data_path": "outputs/diagnostic_data_20261003/complete_diagnostic_data.json",
+  "status_meaning": "Computed status applies only to the stated candidate calculation, not every proposed extension, underlying cause or approval.",
+  "questions": [
+    {
+      "id": "DQ01",
+      "question": "How much did recorded net sales change between comparable periods?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Finance/source owner for source controls and documentary verification",
+      "status": "Computed within stated scope",
+      "computed_or_supporting_result_keys": [
+        "matched_yoy"
+      ],
+      "decision": "determine which period changes deserve investigation before revising commercial plans.",
+      "data_and_grain": "eligible `net_cost`, dated source records or monthly aggregates, observation flags, calendar month and exact selection boundaries; comparison period × calendar month.",
+      "method": "compare only the paired observed periods under the same filters. `ΔR = R1 − R0`; `growth % = 100 × ΔR / R0` only when `R0 > 0`. Report full selected totals separately from matched-period totals. Open current months and gap estimates stay outside closed-period growth.",
+      "output": "both matched totals, peso change, growth, matched keys/count, excluded months and coverage; a comparison table and variance waterfall.",
+      "answerability_and_remaining_dependency": "**Computed** for the eight adjacent annual matched-month comparisons in `matched_yoy`; exact partial-month custom comparisons require dated records.",
+      "interpretation_and_closure_boundary": "a matched-month growth rate controls calendar coverage, but does not prove that all transactions were reported. A missing comparison or nonpositive baseline makes the percentage unavailable, not zero.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ02",
+      "question": "Which months account for the annual sales difference?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Finance/source owner for source controls and documentary verification",
+      "status": "Computed within stated scope",
+      "computed_or_supporting_result_keys": [
+        "matched_yoy"
+      ],
+      "decision": "prioritize source-document review for the months contributing most to the change.",
+      "data_and_grain": "the identical matched month population from DQ01; month pair × eligible net sales.",
+      "method": "`ΔRm = R1m − R0m`; growth contribution in percentage points `= 100 × ΔRm / ΣR0m`. Sum all contributions, including negative offsets, back to annual change. Rank by absolute peso contribution and show signed direction.",
+      "output": "every month's prior/current sales, contribution in pesos and percentage points, and share of net change where the total change is nonzero.",
+      "answerability_and_remaining_dependency": "**Computed** for matched monthly contributions in `matched_yoy`; all eight annual comparison scopes are explicit.",
+      "interpretation_and_closure_boundary": "contribution is an accounting explanation of where change appears. It does not identify contracts, prices, disease demand or stock availability as its cause. A contributor may exceed 100% when other months offset it.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ03",
+      "question": "Is the change spread across months or dominated by a few large contributors?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Finance/source owner for source controls and documentary verification",
+      "status": "Computed within stated scope",
+      "computed_or_supporting_result_keys": [
+        "matched_month_change_concentration"
+      ],
+      "decision": "distinguish broad commercial movement from a concentrated review exception.",
+      "data_and_grain": "matched-month differences from DQ02; comparison × month.",
+      "method": "count positive, negative and zero differences; calculate top-three absolute contribution share `Σtop3 |ΔRm| / Σall |ΔRm|`. Also show each contributor's signed impact on net change and median monthly difference. Do not replace the signed bridge with absolute amounts.",
+      "output": "contribution concentration, count of advancing/declining months, sensitivity with each largest month removed and an explanation of the changed scope.",
+      "answerability_and_remaining_dependency": "**Computed** in `matched_month_change_concentration`: positive/negative/zero month counts, median difference, top-three absolute-change share and separately labeled sensitivity after removing each of the three largest contributions.",
+      "interpretation_and_closure_boundary": "a concentrated result suggests targeted review; it does not prove an abnormal transaction. Exclusion sensitivity is a diagnostic comparison, not a corrected or approved total.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ04",
+      "question": "Which adjacent closed months show the strongest rise or fall?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Finance/source owner for source controls and documentary verification",
+      "status": "Computed within stated scope",
+      "computed_or_supporting_result_keys": [
+        "adjacent_month_changes"
+      ],
+      "decision": "identify periods for timing, delivery and source-completeness investigation.",
+      "data_and_grain": "eligible monthly sales and observed/missing flags; adjacent calendar-month pair.",
+      "method": "compute `Rt − Rt−1` and percentage change only for genuinely adjacent, observed, closed months with a positive prior total. Preserve negative/zero recorded values and break the series at missing periods.",
+      "output": "ranked increases/decreases, both amounts, eligible comparison count and unavailable reasons.",
+      "answerability_and_remaining_dependency": "**Computed** in `adjacent_month_changes`, including explicit unavailable entries for missing/nonadjacent periods and invalid percentage bases.",
+      "interpretation_and_closure_boundary": "never compare September directly with November when October is missing and call it month-on-month. Large movement may reflect timing or reporting coverage; investigate before naming a cause.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ05",
+      "question": "Did sales move with the number of retained source records or recorded value per eligible record?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Finance/source owner for source controls and documentary verification",
+      "status": "Computed within stated scope",
+      "computed_or_supporting_result_keys": [
+        "eligible_record_count_value_bridges"
+      ],
+      "decision": "establish whether the first investigation should focus on recorded activity counts or value concentration.",
+      "data_and_grain": "eligible revenue and the count of that same revenue-eligible row population, dates and provenance; period × source stratum.",
+      "method": "`value per eligible record = ΣR / eligible row count`. Use the exact bridge `ΔR = (N1 − N0) × A0 + N1 × (A1 − A0)`, where `A = R/N`, only for positive counts and a common definition. Publish the order used and a reverse-order sensitivity if presenting attribution.",
+      "output": "record-count and value-per-record effects, reconciliation, and top-valued lines where row evidence is available.",
+      "answerability_and_remaining_dependency": "**Computed** for five full-year comparisons in `eligible_record_count_value_bridges`, using revenue-eligible counts and an explicitly ordered count/value bridge. Retained-record counts are not interchangeable with eligible counts; reverse-order sensitivity is not included.",
+      "interpretation_and_closure_boundary": "this is a source-record accounting bridge. It does not measure purchase frequency, customer growth, order size or medical unit demand.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ06",
+      "question": "Which reporting labels contribute the most recorded positive sales and net sales?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Product/catalog owner for identity, packaging and units",
+      "status": "Computed within stated scope",
+      "computed_or_supporting_result_keys": [
+        "product_groups_all_years",
+        "product_yearly"
+      ],
+      "decision": "prioritize high-value identity and source-document reviews.",
+      "data_and_grain": "all selected reporting groups, `positive_sales`, `negative_adjustments`, eligible net sales, group ID, raw aliases and identity status; reporting group × selected period.",
+      "method": "rank positive contribution using the full eligible positive-sales denominator; also show signed net revenue and negative adjustments. Retain every group before applying Top-N display filters.",
+      "output": "complete contribution table, top labels, positive-sales share, net share when valid, provenance counts and unresolved identity flags.",
+      "answerability_and_remaining_dependency": "**Computed** for all 4,561 all-year groups and 7,649 product-year rows in `product_groups_all_years` and `product_yearly`. Selected month/custom-boundary product scopes require a separate product-month or dated-record aggregation.",
+      "interpretation_and_closure_boundary": "a reporting label is not a verified medicine SKU. All-year rank cannot explain a particular year's change. A net share may exceed 100% when signed adjustments offset positive sales elsewhere.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ07",
+      "question": "Which reporting groups contributed to the selected year-on-year change?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Product/catalog owner for identity, packaging and units",
+      "status": "Computed within stated scope",
+      "computed_or_supporting_result_keys": [
+        "product_yoy_contributions"
+      ],
+      "decision": "locate the labels and underlying lines behind a period movement.",
+      "data_and_grain": "eligible sales for both selected matched scopes, stable reporting group ID and unchanged grouping identity; group × period × source stratum.",
+      "method": "outer-join the union of groups across the two fully assessed scopes; calculate group revenue differences and reconcile to DQ01. Missing group activity may become zero only where absence of eligible records in a complete extracted scope is verified; unresolved source coverage remains unknown.",
+      "output": "gainers, decliners, first-recorded and last-recorded groups, signed contribution and source-line drill-down.",
+      "answerability_and_remaining_dependency": "**Computed** for five full-calendar-year comparisons, 2020→2021 through 2024→2025, in `product_yoy_contributions`. The 2017–2019 partial-year matched-month product comparisons and product-month attribution require an additional aggregation. Reviewed aliases are required for canonical-SKU conclusions.",
+      "interpretation_and_closure_boundary": "“first recorded in 2025” does not prove a product launch; “no selected records” does not prove discontinuation. Grouping changes or estimated allocations can create apparent movement.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ08",
+      "question": "How much did negative sales adjustments reduce the recorded result?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Finance/pricing owner for cost, adjustment and pricing evidence",
+      "status": "Computed within stated scope",
+      "computed_or_supporting_result_keys": [
+        "yearly_financial_partitions",
+        "signed_sales_change_bridges"
+      ],
+      "decision": "identify return/credit candidates needing finance and delivery review.",
+      "data_and_grain": "signed revenue, quantity, source ID, date, group, document and credit/return linkage where supplied; period × group × adjustment reason.",
+      "method": "separate `P = Σmax(Ri, 0)` and `C = Σmin(Ri, 0)` under revenue eligibility; prove `net R = P + C`. A candidate adjustment-intensity measure is `|C|/P` for `P > 0`; do not call it a confirmed return rate without reason codes.",
+      "output": "positive-sales/negative-adjustment bridge, counts, largest negative lines, confirmed versus unconfirmed reason and matched original document if available.",
+      "answerability_and_remaining_dependency": "**Computed** for all-year group totals, yearly financial partitions and five full-year signed-sales change bridges. Reasons and original-invoice linkages require additional evidence; adjustment-intensity rates remain a derived method unless shown as executed.",
+      "interpretation_and_closure_boundary": "negative revenue and negative quantity are different conditions. A negative line can be a correction, return or credit; its commercial reason cannot be inferred from sign alone.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ09",
+      "question": "Did sales concentration or ABC composition change between periods?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Product/catalog owner for identity, packaging and units",
+      "status": "Computed within stated scope",
+      "computed_or_supporting_result_keys": [
+        "positive_sales_concentration_yearly"
+      ],
+      "decision": "assess reliance on a small set of reporting groups and focus review capacity.",
+      "data_and_grain": "full positive-sales eligible population, stable group IDs and the same selected cohort definition; group × comparison period.",
+      "method": "compute cumulative positive-sales shares in deterministic descending order. Use the documented crossing-inclusive 80/95% ABC rule; labels crossing a threshold stay in their starting class. Compare top-5/10/20% label cohorts, class counts and sales shares after calculating the full denominator.",
+      "output": "Pareto curves, ABC transition table and concentration measures with tie-breaking rules and selected population size.",
+      "answerability_and_remaining_dependency": "**Computed** for yearly top-five/top-ten/top-twenty reporting-group positive-sales shares in `positive_sales_concentration_yearly`. These are label counts, not top-5/10/20% label cohorts. ABC transitions and percentage-cohort comparisons are receipt-ready from complete yearly groups but require their own executed calculation.",
+      "interpretation_and_closure_boundary": "ABC measures financial contribution, not clinical essentiality, medicine demand, service risk or stock urgency. Negative/nonpositive contribution remains visible as Unclassified; return amounts remain separate.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ10",
+      "question": "How much do adjusted product allocations affect the conclusions?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Product/catalog owner for identity, packaging and units",
+      "status": "Computed within stated scope",
+      "computed_or_supporting_result_keys": [
+        "source_provenance_yearly",
+        "provenance_monthly"
+      ],
+      "decision": "decide which label-level results can be discussed as recorded attribution and which need source recovery.",
+      "data_and_grain": "eligible sales, source provenance, allocation parent/child linkage, grouping identity and allocation-method/version; group × month × provenance.",
+      "method": "compare combined candidate sales with separately reported original-source and adjusted-source financial strata. Reconcile child allocation sums to each verified parent and total; show rank and contribution sensitivity across permitted strata.",
+      "output": "provenance bridge, affected labels/months, financial shares, row shares, allocation reconciliation and changes in ranking.",
+      "answerability_and_remaining_dependency": "**Computed** for yearly/source financial strata in `source_provenance_yearly` and `provenance_monthly`; **partial** for label-specific original/adjusted financial shares, alternative ranks and parent allocation validation. Group extracts provide adjusted record counts and separate quantities, not an interchangeable revenue share. Parent-source accuracy requires original documents.",
+      "interpretation_and_closure_boundary": "adjusted record share is not adjusted revenue share. A file marked adjusted can contain an annual total that reconciles while product attribution and quantities remain estimates. Excluding it changes the scope; it does not recover actual history.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ11",
+      "question": "Which raw areas and reviewed territories account for the sales change?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Sales/account and mapping owner for buyer/location evidence",
+      "status": "Computed within stated scope",
+      "computed_or_supporting_result_keys": [
+        "area_monthly",
+        "area_yoy_contributions"
+      ],
+      "decision": "target commercial/source review by location without misclassifying buyer type as territory.",
+      "data_and_grain": "raw area, reviewed territory/region, mapping identity, eligible sales, source provenance and date; raw area or mapped territory × matched period.",
+      "method": "decompose the same selected difference across mutually exclusive mapped territories plus unmapped geography. Keep raw-area totals alongside derived mapping totals and any estimated geographic splits.",
+      "output": "contribution waterfall, mapped/unmapped reconciliation, location review table and drill-down to source records.",
+      "answerability_and_remaining_dependency": "**Computed** for 988 raw-area/month rows and all eight matched annual raw-area contribution comparisons in `area_monthly` and `area_yoy_contributions`. Warehouse geographic yearly partitions are also profiled; reviewed-territory contribution and mapping acceptance remain separate gates.",
+      "interpretation_and_closure_boundary": "`Government` is not a province. A raw area label, reference anchor or Mindoro display split does not establish transaction delivery geography.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ12",
+      "question": "Did the Government, Private, Internal or Unknown buyer composition change?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Sales/account and mapping owner for buyer/location evidence",
+      "status": "Computed within stated scope",
+      "computed_or_supporting_result_keys": [
+        "buyer_proposals_monthly",
+        "buyer_yoy_contributions"
+      ],
+      "decision": "assess commercial dependence by proposed buyer ownership and direct classification review.",
+      "data_and_grain": "raw area/account evidence, buyer mapping rule/hash, eligible sales and date; derived buyer cluster × matched period, including Unknown.",
+      "method": "sum signed sales in exhaustive, nonoverlapping clusters; reconcile to all selected revenue, including unmapped geography. Calculate buyer composition only where the signed denominator and components make a proportion meaningful.",
+      "output": "buyer shares and peso contributions, Unknown amount, mapping basis, observed/adjusted strata and unresolved-classification list.",
+      "answerability_and_remaining_dependency": "**Computed** for proposed monthly buyer assignments and eight matched annual proposal bridges in `buyer_proposals_monthly` and `buyer_yoy_contributions`. They are labeled `proposed_CEO_review_pending`; source ownership and final acceptance require reviewed account evidence.",
+      "interpretation_and_closure_boundary": "inferred buyer ownership is distinct from source-recorded ownership, geographic coverage and channel. Do not drop Unknown and present the remaining shares as the whole business.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ13",
+      "question": "Is an area movement explained by its buyer or reporting-product composition?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Sales/account and mapping owner for buyer/location evidence",
+      "status": "Partial: additional calculation or evidence needed",
+      "computed_or_supporting_result_keys": [
+        "area_monthly",
+        "product_yearly"
+      ],
+      "decision": "distinguish a broad territory movement from a limited buyer/product contribution before reallocating review effort.",
+      "data_and_grain": "eligible sales, period, raw/reviewed geography, derived buyer cluster and stable reporting group; territory × buyer × group × period.",
+      "method": "build a cross-tab and an additive contribution bridge across disjoint cells. Compare within-cell changes with changes in composition; retain Unknown/unmapped cells. Avoid summing separate product and buyer bridges into one total because they overlap.",
+      "output": "largest contributing cells, area-specific gainers/decliners and an explicit reconciliation to the selected territorial difference.",
+      "answerability_and_remaining_dependency": "**Partial:** the supplied product-year and area-month marginals support separate contribution explanations. A fresh pinned joint area × product partition is required for their cross-tab; the saved fact extraction does not contain area fields, so these marginals cannot reconstruct it. Approved geography/buyer interpretation and canonical products remain separate dependencies.",
+      "interpretation_and_closure_boundary": "a compositional shift identifies where revenue moved. It does not prove that a territory's population, disease intensity or buyer behavior changed.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ14",
+      "question": "Are geographic comparisons distorted by unequal evidence coverage or mapping confidence?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Sales/account and mapping owner for buyer/location evidence",
+      "status": "Computed within stated scope",
+      "computed_or_supporting_result_keys": [
+        "geographic_mapping_yearly"
+      ],
+      "decision": "determine whether area rankings are fit for planning review.",
+      "data_and_grain": "selected eligible sales, mapped/unmapped flag, source-row counts, observed months, mapping evidence/confidence and estimated-child records; territory × month.",
+      "method": "report mapped financial amount and signed total first; mapped revenue coverage is available only when its denominator and components are valid. Separately measure valid source-row mapping coverage and observed-month coverage. Reconcile estimated Mindoro children to their parent without counting the parent twice.",
+      "output": "coverage matrix, Unknown rows/amounts, excluded-region amounts, mapping-confidence distribution and ranking sensitivity.",
+      "answerability_and_remaining_dependency": "**Computed** for yearly warehouse geographic financial/record partitions in `geographic_mapping_yearly`, including evidence-status flags. Coverage ratios, ranked sensitivities and independent mapping correctness remain separate review/computation steps; legacy approval flags are not revalidated by this report.",
+      "interpretation_and_closure_boundary": "revenue coverage, row coverage and month presence answer different questions. None proves complete reporting or verified geography. A region filter can remove unmapped records; disclose that changed population.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ15",
+      "question": "Did gross margin amount and the weighted margin rate change on a comparable eligible basis?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Finance/pricing owner for cost, adjustment and pricing evidence",
+      "status": "Computed within stated scope",
+      "computed_or_supporting_result_keys": [
+        "annual",
+        "eligible_gross_profit_change_bridges"
+      ],
+      "decision": "identify finance review periods while avoiding unsupported company-profit claims.",
+      "data_and_grain": "`net_income`, `net_cost`, margin eligibility, dates and matched periods; period × same eligible source-row population.",
+      "method": "`gross margin rate = Σeligible net_income / Σsame eligible net_cost`. Compare gross margin amount and rates separately, with both revenue bases and eligible-row coverage. A nonpositive reporting denominator is not a meaningful profitability percentage.",
+      "output": "peso gross-margin change, percentage-point rate change, revenue basis and excluded amount/count by period.",
+      "answerability_and_remaining_dependency": "**Computed** for annual/monthly eligible margin and five full-year eligible-basis/rate accounting bridges in `eligible_gross_profit_change_bridges`; the ordered bridge is not causal and eligible-population changes remain visible.",
+      "interpretation_and_closure_boundary": "weighted rate is never an average of row rates. The 2025 candidate basis is roughly 51.28% of total eligible revenue; this is a signed financial-basis ratio, not a row-completeness percentage. No operating expenses are available.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ16",
+      "question": "Which records and reasons prevent a fuller gross-margin interpretation?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Finance/pricing owner for cost, adjustment and pricing evidence",
+      "status": "Computed within stated scope",
+      "computed_or_supporting_result_keys": [
+        "margin_eligibility_exclusions"
+      ],
+      "decision": "recover missing cost/profit evidence or approve a narrower finance scope.",
+      "data_and_grain": "revenue eligibility, margin eligibility and rejection/warning reasons, gross-margin amount, net sales, acquisition cost and provenance; exclusion reason × month × source.",
+      "method": "partition the revenue-eligible population into margin-eligible and ineligible rows; report excluded signed revenue, counts and reasons. For overlapping warnings, publish a mutually exclusive primary-reason rule plus the separate warning-frequency list.",
+      "output": "margin-eligibility reconciliation, largest excluded lines, cost/profit missingness and recovery queue.",
+      "answerability_and_remaining_dependency": "**Computed** for annual revenue-eligible/margin-ineligible counts, excluded known sales, missing cost/profit fields, associated warning frequencies and the largest excluded lines in `margin_eligibility_exclusions`. **Partial** for mutually exclusive primary exclusion causes and recovery, which require eligibility-policy/source review; an overlapping warning is not assumed to be the cause.",
+      "interpretation_and_closure_boundary": "the observed eligible margin cannot be projected to excluded rows by assuming the same rate. A warning count is not automatically a count of ineligible rows and warnings may overlap.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ17",
+      "question": "Which labels and periods have variable recorded CP, and what can be verified about those prices?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Finance/pricing owner for cost, adjustment and pricing evidence",
+      "status": "Computed within stated scope",
+      "computed_or_supporting_result_keys": [
+        "pricing_review"
+      ],
+      "decision": "prioritize packaging, invoice and price-field review.",
+      "data_and_grain": "recorded CP/`unit_cost`, date, raw title, reporting group, source provenance and pricing eligibility; group × recorded price × year × provenance.",
+      "method": "describe exact recorded price frequencies/ranges independently in original and adjusted strata; show years/dates and quantity ranges as context. Preserve null, zero and negative states separately. Do not derive a canonical sellable identity from price equality or difference.",
+      "output": "varying-price groups, example rows, source-stratified price table, verified comparison eligibility and documentary review list.",
+      "answerability_and_remaining_dependency": "**Computed** for reported-price variation/state/warning counts under `pricing_review`, derived from the sealed full review; **additional evidence required** for validated unit-price comparison. Current eligible comparison count is zero.",
+      "interpretation_and_closure_boundary": "differences may arise from dates, units, transcription or terms. They do not prove bulk discounts, negotiated pricing, inflation or different SKUs. File-level adjusted provenance in 2020/2024/2025 must remain explicit.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ18",
+      "question": "Can the sales change be attributed to verified price, delivered quantity and product mix?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Product/catalog owner for identity, packaging and units",
+      "status": "Additional evidence required",
+      "computed_or_supporting_result_keys": [],
+      "decision": "determine whether commercial pricing or quantity/mix needs review after physical identity and unit validation.",
+      "data_and_grain": "independently reviewed SKU, comparable sellable unit, positive eligible delivered quantity, trusted net sales/CP, date and matched periods; reviewed SKU × period.",
+      "method": "for common verified SKUs use `p = R/q` as an explicitly derived effective net price. A symmetric exact two-factor bridge uses price effect `Σ[(q0+q1)/2 × (p1−p0)]` and quantity effect `Σ[(p0+p1)/2 × (q1−q0)]`. Report new/absent verified SKUs and returns separately. This quantity effect includes composition effects; do not rename it pure volume. Split aggregate volume and mix only if cross-SKU quantity normalization is defensible, with a documented path and order sensitivity.",
+      "output": "reconciliation of permitted effects, comparable population, rejected-unit reasons and sensitivity to decomposition order.",
+      "answerability_and_remaining_dependency": "**Additional evidence required:** verified product identities, units, trusted prices and quantities. The current zero validated unit-price rows prevent a factual price/volume conclusion.",
+      "interpretation_and_closure_boundary": "changes in unreviewed source quantities or unresolved CP cannot explain medical demand. A revenue increase alone does not establish either more medicine sold or a selling-price rise.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ19",
+      "question": "Did discounts, acquisition cost or formula inconsistencies change recorded gross margin?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Finance/pricing owner for cost, adjustment and pricing evidence",
+      "status": "Partial: additional calculation or evidence needed",
+      "computed_or_supporting_result_keys": [
+        "pricing_review",
+        "retained_fact_quality_rule_counts"
+      ],
+      "decision": "focus finance review on commercial terms, purchasing cost evidence or source errors.",
+      "data_and_grain": "quantity, CP, gross sales, discount amount, net sales, TP/unit, total acquisition cost, gross-margin amount, formula diagnostics and source trust; source record × period.",
+      "method": "retain recorded fields and check `q × CP ≈ gross`, `gross − discount ≈ net`, `q × TP ≈ acquisition cost`, `net − acquisition cost ≈ gross margin` where all inputs are eligible. Use the documented ₱0.02 monetary reconciliation tolerance for the supported record checks. Compare discounts and acquisition costs only within consistent scopes; produce a sales/discount/cost bridge rather than double-counting discounts already in net sales.",
+      "output": "formula exception ledger, signed discrepancy amounts, discounts and acquisition costs by comparable group and source, and verified finance explanations.",
+      "answerability_and_remaining_dependency": "**Partial:** sealed review provides recorded sales-price formula diagnostics; full cost-field checks and reason evidence require the relevant row fields and finance review.",
+      "interpretation_and_closure_boundary": "a mismatch flag prompts review, not automatic replacement of a field. Absence of ordering, freight, holding and operating expenses prevents total landed-cost or net-profit conclusions.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ20",
+      "question": "Do the same calendar months repeatedly have higher recorded sales?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Sales/contracts owner for exceptional periods; research reviewer for interpretation",
+      "status": "Computed within stated scope",
+      "computed_or_supporting_result_keys": [
+        "calendar_month_average",
+        "calendar_month_distribution_sensitivity"
+      ],
+      "decision": "identify historical scheduling patterns for review without assuming recurring disease demand.",
+      "data_and_grain": "eligible monthly revenue and observed flags; calendar month × year.",
+      "method": "compute observed calendar-month mean, median, range and contributing year count; compare a full-history panel with the contiguous 2020–2025 panel. Missing months are omitted as unknown, not zero. Show year-normalized shares only for years with a comparable, explicitly stated observation scope.",
+      "output": "calendar-month profile with individual-year values, sample count and sensitivity to unusually large months.",
+      "answerability_and_remaining_dependency": "**Computed** for observed means/counts in `calendar_month_average` and full-history medians, ranges and every leave-one-year-out mean in `calendar_month_distribution_sensitivity`. Year-normalized profiles and separate 2020–2025 distribution panels are method extensions; no recurring causal seasonal effect is asserted.",
+      "interpretation_and_closure_boundary": "a pooled calendar average is not STL. It combines growth, one-off contracts, adjusted evidence and seasonality; unequal year counts or large transactions can create an apparent seasonal peak.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ21",
+      "question": "How much of each recorded month is described by STL trend, seasonality and residual?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Sales/contracts owner for exceptional periods; research reviewer for interpretation",
+      "status": "Computed within stated scope",
+      "computed_or_supporting_result_keys": [
+        "stl_all_components"
+      ],
+      "decision": "distinguish modeled repeating patterns from exceptional periods needing source review.",
+      "data_and_grain": "contiguous monthly eligible candidate revenue, pinned STL components and computation metadata; month in the qualifying full-history segment.",
+      "method": "verify `observed = trend + seasonal + residual` for every month and match the fact/mapping identity. Use the actual published segment and parameters; preserve breaks at missing months. Current supported segment is 2020–2025, 72 months.",
+      "output": "components, segment boundary, parameter/version record, reconstruction residual and ranked exceptional months.",
+      "answerability_and_remaining_dependency": "**Computed** for all 72 version-matched monthly components in `stl_all_components` and their reconstruction checks. Interpretation remains full-history descriptive decomposition.",
+      "interpretation_and_closure_boundary": "full-history smoothing uses information from later observations and is not a real-time forecast. Date-filtered dashboard values do not silently redefine the published STL fit. Adjusted source evidence remains in the candidate series.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ22",
+      "question": "Which residual months deserve investigation, and what happens if the flag rule changes?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Sales/contracts owner for exceptional periods; research reviewer for interpretation",
+      "status": "Computed within stated scope",
+      "computed_or_supporting_result_keys": [
+        "stl_residual_ranked_all_months"
+      ],
+      "decision": "order the exception-review queue reproducibly.",
+      "data_and_grain": "STL residual, observed amount, trend/seasonal components, source coverage and eligible record IDs; month.",
+      "method": "rank absolute residuals. For optional candidate flags, document a robust threshold such as `|r − median(r)| > 3 × 1.4826 × MAD(r)` and report the threshold and sensitivity; if MAD is zero, withhold the standardized flag and use an explicit alternate rule. Keep the ranking even when no approved flag threshold exists.",
+      "output": "flagged or ranked months, signed residual, magnitude, coverage/provenance context and linked source review status.",
+      "answerability_and_remaining_dependency": "**Computed** for the complete 72-month absolute-residual ranking in `stl_residual_ranked_all_months`. Statistical threshold/flag sensitivity is specified but not executed; business anomaly acceptance requires review.",
+      "interpretation_and_closure_boundary": "a residual is unexplained by this fitted decomposition, not proof of a fraudulent transaction, disease surge, stockout or data error. The flag threshold is a proposed investigation rule, not a new business policy.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ23",
+      "question": "Are apparent seasonal patterns stable across years and source strata?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Sales/contracts owner for exceptional periods; research reviewer for interpretation",
+      "status": "Computed within stated scope",
+      "computed_or_supporting_result_keys": [
+        "calendar_month_distribution_sensitivity",
+        "provenance_monthly"
+      ],
+      "decision": "judge whether calendar patterns are credible enough to inform historical planning review.",
+      "data_and_grain": "comparable monthly revenue, observed/source flags and the candidate segment; month × year × source stratum.",
+      "method": "compare within-year calendar profiles, leave-one-year-out calendar summaries and original-versus-adjusted scope. Refit STL only when a revised stratum has a qualifying contiguous series; do not fill gaps to make it eligible. Show differences in segment and sample size.",
+      "output": "year-by-month panel, seasonal rank stability and leave-one-year-out/source-stratum sensitivity.",
+      "answerability_and_remaining_dependency": "**Computed** for pooled calendar-month leave-one-year-out means in `calendar_month_distribution_sensitivity` and the 98 provenance-month partitions. Within-year seasonal ranks, source-stratum seasonal comparisons and alternative qualifying STL fits are method extensions rather than evidence of stability.",
+      "interpretation_and_closure_boundary": "sensitivity can weaken confidence in recurring patterns. It does not identify an alternative source as more accurate without independent evidence, and a short original-only series may not support STL.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ24",
+      "question": "Does an exceptional month represent a few large source lines or widespread recorded activity?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Finance/source owner for source controls and documentary verification",
+      "status": "Computed within stated scope",
+      "computed_or_supporting_result_keys": [
+        "monthly_source_line_concentration"
+      ],
+      "decision": "choose between targeted documentary review and a broader commercial investigation.",
+      "data_and_grain": "eligible records for flagged month and comparable month, group, raw area, amount, source/document IDs and provenance; source line within month.",
+      "method": "calculate top-one/top-five/top-ten positive-line shares against that month's full positive-sales denominator; show signed negative adjustments and net amount separately. Inspect document clusters only after validating whether document IDs identify one invoice or multiple legitimate lines.",
+      "output": "line concentration, amount/record distribution, contributing labels/areas and reviewable document list.",
+      "answerability_and_remaining_dependency": "**Computed** for all 98 recorded months' top-one/top-five/top-ten positive-line shares and linked high-value source IDs in `monthly_source_line_concentration`. **Partial** for a joint area × product × source-line attribution and original contract/invoice verification, which need their corresponding data/documents.",
+      "interpretation_and_closure_boundary": "one large contract allocation can dominate the recorded month. Many retained source lines can still arise from one document; never equate line counts with independent purchases.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ25",
+      "question": "Are missing months and incomplete reporting changing the comparison?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Finance/source owner for source controls and documentary verification",
+      "status": "Computed within stated scope",
+      "computed_or_supporting_result_keys": [
+        "monthly"
+      ],
+      "decision": "recover source gaps or constrain the historical scope.",
+      "data_and_grain": "expected calendar, monthly observation flags, source-file/sheet manifests, record counts, period closure and finance control totals; source × calendar month.",
+      "method": "enumerate all expected months, classify observed/missing/confirmed-zero/partial states, and reconcile imported totals to source controls. Compare common months without estimates. A confirmed zero requires explicit source evidence of closed-period zero activity.",
+      "output": "coverage matrix, the ten current missing months, evidence owner, matched comparison eligibility and unresolved completeness decisions.",
+      "answerability_and_remaining_dependency": "**Computed** for all 108 calendar-month presence states, 98 observed and ten missing; **additional evidence required** for complete reporting and confirmed zero claims.",
+      "interpretation_and_closure_boundary": "the existence of one record proves presence, not completeness. Recovering gaps can change ranks, annual totals and growth; such revisions require a new version-bound analysis.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ26",
+      "question": "Which missing fields, warnings and formula issues affect each analytic measure?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Finance/source owner for source controls and documentary verification",
+      "status": "Computed within stated scope",
+      "computed_or_supporting_result_keys": [
+        "pricing_review",
+        "retained_fact_quality_rule_counts",
+        "retained_quality_rule_financial_context"
+      ],
+      "decision": "prioritize data repairs by material financial or analytical impact.",
+      "data_and_grain": "field state, source-row ID, eligible flags, warning/reject reason, amount and provenance; issue × year × measure.",
+      "method": "distinguish null, recorded zero and negative fields; report unique affected-row counts and overlapping issue frequencies separately. Create measure-specific eligibility intersections so revenue, margin, price and medical-demand availability are not conflated.",
+      "output": "missingness/state profile, affected revenue when known, eligibility matrix and repair queue with preserved source values.",
+      "answerability_and_remaining_dependency": "**Computed** for numeric states, warning counts and retained fact quality-rule counts in `pricing_review` and `retained_fact_quality_rule_counts`, plus associated known eligible sales/profit amounts in `retained_quality_rule_financial_context`. Mutually exclusive issue intersections and a verified repair disposition remain separate steps; associated revenue is not the amount of an error or loss.",
+      "interpretation_and_closure_boundary": "32,749 warning rows do not mean 32,749 invalid sales records. Some issues block only identity, unit-price or medical-demand conclusions while existing eligible financial reporting remains usable.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ27",
+      "question": "Are there duplicated business events, even though source-record IDs are unique?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Finance/source owner for source controls and documentary verification",
+      "status": "Receipt-ready for stated scope; interpretation partly unresolved",
+      "computed_or_supporting_result_keys": [],
+      "decision": "identify possible duplicate imports or legitimately repeated lines before changing totals.",
+      "data_and_grain": "source hash/workbook/sheet/row, source ID, document number, date, raw area/product, quantity, price and financial fields; candidate event fingerprint × source lineage.",
+      "method": "verify source-ID uniqueness, then profile exact and plausible business-key collisions across files. Compare source documents and import history before deciding that an event is duplicated. Retain a suspected/confirmed/legitimate outcome for each review group.",
+      "output": "duplicate-candidate ledger, affected amount, provenance match and signed-off disposition; no silent deletion.",
+      "answerability_and_remaining_dependency": "**Receipt-ready** for zero duplicated saved source IDs; **partial** for business duplication because no stable verified sales line identifier exists and source documents are required.",
+      "interpretation_and_closure_boundary": "different IDs can represent one duplicated event; identical amounts or DR numbers can also represent legitimate multiple lines. Neither finding authorizes deletion or proves an error.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ28",
+      "question": "How do source trust and adjusted/backfilled strata change the findings?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Finance/source owner for source controls and documentary verification",
+      "status": "Computed within stated scope",
+      "computed_or_supporting_result_keys": [
+        "source_provenance_yearly",
+        "provenance_monthly"
+      ],
+      "decision": "decide which statements can be made with which evidence label.",
+      "data_and_grain": "eligible financial fields, original/adjusted/backfill/low-trust flags and source acceptance record; period × source stratum × analytic measure.",
+      "method": "produce separate strata, their combined total and reconciliation; compare movement, concentration, margins and quantity availability under disclosed scopes. Record whether classification is file-level or row-level. Reconcile totals without implying that reconciliation verifies attribution.",
+      "output": "evidence-stratified fact table, allowed metric matrix, unavailable conclusions and material sensitivity findings.",
+      "answerability_and_remaining_dependency": "**Computed** for yearly and monthly provenance financial partitions and row counts. Original-versus-adjusted finding sensitivity, backfill/low-trust intersections and independent source verification remain partial rather than confirmed explanations.",
+      "interpretation_and_closure_boundary": "adjusted 2020/2024/2025 files do not become independently observed medicine quantities or prices. An original-only exclusion analysis changes coverage, including whole years, and is not an approved replacement series.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ29",
+      "question": "Does every diagnostic result reproduce against one identifiable dataset?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Finance/source owner for source controls and documentary verification",
+      "status": "Computed within stated scope",
+      "computed_or_supporting_result_keys": [
+        "sources",
+        "checks"
+      ],
+      "decision": "determine whether the diagnostic package is safe to cite and review.",
+      "data_and_grain": "dataset ID, fact Delta version, policy/mapping hashes, SQL/extraction receipt, input checksums, transformation code/version, run time and result file; analytical run × input artifact.",
+      "method": "verify input bytes against checksums, enforce identity consistency, reconcile period/group/source partitions, record decimal precision/tolerances and rerun the exact calculation. If current SQL access fails, label saved-receipt analysis as offline and do not substitute it into runtime analytics.",
+      "output": "lineage manifest, executed check counts/results, formula registry, reproducible commands and remaining unverified checks.",
+      "answerability_and_remaining_dependency": "**Computed** for delivery input identities/checksums and executed partition/arithmetic checks; a fresh read-only fixed-version segment extraction is bound to the result. Current unpinned live state, source completeness and notebook/operator execution are separate verification tasks.",
+      "interpretation_and_closure_boundary": "a checksum verifies file identity, not commercial truth. A technical pass or candidate status does not grant CEO release approval.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ30",
+      "question": "Can sales and external observations be joined at a defensible territory-month grain?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "External-data mapping reviewer and research adviser for accepted joins/methods",
+      "status": "Additional evidence required",
+      "computed_or_supporting_result_keys": [],
+      "decision": "decide whether external association analysis is admissible at all.",
+      "data_and_grain": "reviewed sales territory, month and eligible measure; DOH disease/onset/reporting/geography metadata; PAGASA station-month and NASA coordinate-month/provider metadata; mapping version and coverage.",
+      "method": "define one target key, aggregate each source to one row per target key before joining, test join cardinality, retain unmatched records and prohibit multiplication of sales totals. Restrict to closed overlap periods and document onset-versus-reporting date semantics.",
+      "output": "join manifest, eligible keys/month count, excluded sales amounts, external missingness, mapping review and readiness decision.",
+      "answerability_and_remaining_dependency": "**Additional evidence required:** territory/external joins remain unapproved and current external-ready sales row count is zero.",
+      "interpretation_and_closure_boundary": "DOH 2018–2026 declaration does not create a complete 2026 sales comparison. Official PAGASA supplied coverage ends in 2024. NASA POWER is a separately labeled proxy and cannot fill 2025 as official PAGASA data.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ31",
+      "question": "Are approved disease indicators associated with eligible recorded sales or delivered quantity?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "External-data mapping reviewer and research adviser for accepted joins/methods",
+      "status": "Additional evidence required",
+      "computed_or_supporting_result_keys": [],
+      "decision": "assess historical disease context for commercial review after DQ30 passes.",
+      "data_and_grain": "matched closed territory-month disease indicator and sales outcome; reviewed medical product/disease linkage where a medicine-specific outcome is used; territory × disease × month.",
+      "method": "first inspect paired scatter/time plots and Spearman/Pearson association with paired sample counts. Use a documented disease-intensity formula appropriate to source denominators. Compare raw and seasonality/trend-adjusted associations; preserve source provenance and quantify uncertainty using a method that respects temporal dependence.",
+      "output": "effect/association estimate, uncertainty, sample/exclusion counts, territory/medicine eligibility and competing explanations.",
+      "answerability_and_remaining_dependency": "**Additional evidence required:** approved geographic and disease-product mappings and independently eligible quantity/SKU evidence.",
+      "interpretation_and_closure_boundary": "a recorded sales association is not proof of disease-driven market demand. Raw case counts across unequal populations and administrative aggregation require explicit denominator caveats; no arbitrary disease index weights may be presented as approved.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ32",
+      "question": "Do historical rainfall, temperature or other weather measures associate with recorded movement?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "External-data mapping reviewer and research adviser for accepted joins/methods",
+      "status": "Additional evidence required",
+      "computed_or_supporting_result_keys": [],
+      "decision": "determine whether weather is useful historical context rather than an unsupported explanation.",
+      "data_and_grain": "approved territory-month sales and provider-specific weather measures in documented units, stations/coordinates, missingness and source provenance; territory × month × provider.",
+      "method": "analyse PAGASA and NASA separately within their covered periods, with pairwise sample counts and trend/seasonality controls. Document monthly aggregation rules; do not sum temperature averages or mix precipitation definitions. Inspect proxy-versus-official overlap before substituting provider features.",
+      "output": "paired plots, association estimates/uncertainty, provider comparison, coverage matrix and interpretation statement.",
+      "answerability_and_remaining_dependency": "**Additional evidence required:** reviewed station/coordinate mapping and territory joins.",
+      "interpretation_and_closure_boundary": "weather-sales correlation can reflect shared seasonality, reporting changes or contracts. Provider-derived exposure is not direct evidence of weather at each delivery point or an official warning.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ33",
+      "question": "Are associations delayed, and are the results stable after seasonality and multiple comparisons?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "External-data mapping reviewer and research adviser for accepted joins/methods",
+      "status": "Additional evidence required",
+      "computed_or_supporting_result_keys": [],
+      "decision": "test whether a proposed mechanism survives obvious alternative explanations.",
+      "data_and_grain": "the approved paired series from DQ31/DQ32, with a prespecified small set of lags and outcomes; territory × month.",
+      "method": "predeclare plausible lag direction/window, compare contemporaneous and lagged associations, and report every tested specification. Include seasonal/time controls, temporal dependence checks and a documented multiple-testing correction or clearly label exploratory results. Report sensitivity to exceptional months and adjusted-source periods.",
+      "output": "lag-effect table, corrected/exploratory status, robustness results and rejected competing explanations.",
+      "answerability_and_remaining_dependency": "**Additional evidence required:** approved joins, adequate paired coverage and reproducible statistical computation.",
+      "interpretation_and_closure_boundary": "selecting only the best correlation after testing many lags exaggerates evidence. Autocorrelation can make naive significance tests misleading. Lagged correlation alone is not causation or proof of forecast usefulness.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ34",
+      "question": "Could disease or weather explain a spike beyond contracts, reporting and availability changes?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "External-data mapping reviewer and research adviser for accepted joins/methods",
+      "status": "Additional evidence required",
+      "computed_or_supporting_result_keys": [],
+      "decision": "decide whether to retain the external explanation as context, an association or a testable causal hypothesis.",
+      "data_and_grain": "verified event timing, comparison/control territories or products, contracts/campaigns, coverage changes, inventory constraints and approved external signals; intervention/exposure × comparable group × time.",
+      "method": "write competing mechanisms before analysis. A causal design requires a documented identification strategy, credible comparison, pre-period diagnostics and sensitivity to confounding. Without those conditions, report an observational explanation register, not a causal effect.",
+      "output": "evidence-for/evidence-against matrix and, only if warranted, an identified effect estimate with uncertainty and explicit assumptions.",
+      "answerability_and_remaining_dependency": "**Additional evidence required:** independent operational events, exposure definition and defensible comparison design.",
+      "interpretation_and_closure_boundary": "a disease increase, rainfall peak and revenue spike occurring together do not establish which caused which. Diagnostic completion may correctly conclude that the causal explanation remains unknown.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ35",
+      "question": "Did contract awards, delivery schedules or posting cutoffs drive concentrated months?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Sales/contracts owner",
+      "status": "Additional evidence required",
+      "computed_or_supporting_result_keys": [],
+      "decision": "distinguish transaction timing from sustained commercial movement.",
+      "data_and_grain": "contract/award ID and value, award date, scheduled/actual delivery, invoice and posting dates, product lines, credit adjustments and verified source lineage; contract × delivery/invoice line × date.",
+      "method": "link independently verified contracts to contributing lines in DQ02/DQ24; compare award, delivery and posting timelines and reconcile contract totals. Test alternate timing explanations without reassigning dates unless finance approves a correction.",
+      "output": "contract timing bridge, affected periods/amounts and verified versus estimated allocations.",
+      "answerability_and_remaining_dependency": "**Additional evidence required:** original award, delivery and invoice evidence. Reporting labels containing contract names identify review targets, not verified contracts or physical SKUs.",
+      "interpretation_and_closure_boundary": "high November revenue may reflect scheduled fulfillment or posting, but the sales aggregate alone cannot decide between them. Contract value is not automatically recognized sales revenue.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ36",
+      "question": "Did stock constraints suppress fulfilled sales while customer demand remained unmet?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Warehouse/inventory owner",
+      "status": "Additional evidence required",
+      "computed_or_supporting_result_keys": [],
+      "decision": "determine whether a sales decline warrants stock-availability review.",
+      "data_and_grain": "timestamped on-hand/available stock, customer order quantity/date, fulfilled/cancelled/backordered quantity, lost-sale reason and verified SKU/unit; SKU × location × day/order line.",
+      "method": "reconcile order demand to fulfillment and backlog; calculate stockout duration from stock snapshots and unfilled quantities from order records. Compare periods with similar demand and expose censored sales; do not infer lost demand from zero recorded sales.",
+      "output": "verified stockout episodes, unfilled quantities/value where supported, fulfillment rate and affected lines.",
+      "answerability_and_remaining_dependency": "**Additional evidence required:** current stock, order-demand/backorder data and reviewed units are unavailable.",
+      "interpretation_and_closure_boundary": "delivered quantity captures fulfilled activity only. A sales fall can also reflect lower orders, reporting gaps or timing; zero revenue does not prove a stockout.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ37",
+      "question": "Did fulfillment or delivery delays move sales between periods or create credits?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Delivery/service owner",
+      "status": "Additional evidence required",
+      "computed_or_supporting_result_keys": [],
+      "decision": "identify service/process improvements supported by actual order evidence.",
+      "data_and_grain": "requested/committed/delivered dates, order/delivery line linkage, quantity requested/fulfilled, acceptance and credit reason; order line × shipment.",
+      "method": "calculate on-time delivery against one approved commitment rule and fill rate against requested quantities; reconcile partial deliveries across months. Compare late/short deliveries with linked credit records and revenue timing.",
+      "output": "late-delivery and short-fill cohorts, shifted delivery quantities/amounts and confirmed credit explanations.",
+      "answerability_and_remaining_dependency": "**Additional evidence required:** stable order-line IDs, commitment and fulfillment records. DR numbers alone do not provide a verified line-level fulfillment history.",
+      "interpretation_and_closure_boundary": "posting-date sales cannot establish promised delivery performance. Do not present service levels or logistics causes without agreed denominators and timestamps.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ38",
+      "question": "Did supplier lead-time or purchasing constraints affect availability and margins?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Procurement owner",
+      "status": "Additional evidence required",
+      "computed_or_supporting_result_keys": [],
+      "decision": "prioritize supplier/process review before proposing procurement parameters.",
+      "data_and_grain": "supplier ID, purchase-order/requisition dates, promised/actual receipt, ordered/received quantities, reviewed SKU/unit, invoice costs and linked stock availability; purchase-order line × receipt.",
+      "method": "calculate observed lead-time distributions, late/short receipt rates and verified cost changes; align affected receipts to downstream fulfillment. Separate requested, supplier-confirmed and actual lead time and document partial receipts.",
+      "output": "supplier exception ledger, quantiles/variation, cost bridge and supported availability links.",
+      "answerability_and_remaining_dependency": "**Additional evidence required:** supplier, procurement and receipt evidence is absent from sales-only diagnostics.",
+      "interpretation_and_closure_boundary": "acquisition-cost fields on sales rows do not measure supplier performance. No EOQ, reorder point, safety stock or cost-minimizing purchase conclusion is supported until required policies and operational inputs exist.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ39",
+      "question": "Did expiry, damage or aging inventory contribute to credits or low movement?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Inventory/quality owner",
+      "status": "Additional evidence required",
+      "computed_or_supporting_result_keys": [],
+      "decision": "review avoidable losses and stock handling where evidence exists.",
+      "data_and_grain": "batch/lot, received quantity/cost, on-hand age, expiry date, disposal/write-off event, reason, transfer and credit linkage; SKU × lot × location × time.",
+      "method": "reconcile batch movement and remaining stock, compute expiry exposure within an explicitly chosen horizon, and link write-offs/credits to verified causes. Slow recorded sales alone may identify a review candidate; dead stock requires on-hand/age evidence.",
+      "output": "confirmed loss/expiry events, at-risk stock when supported and evidence-linked adjustment amounts.",
+      "answerability_and_remaining_dependency": "**Additional evidence required:** batch, stock age, expiry, inventory balance and disposal history are unavailable.",
+      "interpretation_and_closure_boundary": "low revenue, a label containing “losses” or a negative line does not prove expired medicine or dead stock. Do not report an invented expiry KPI.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    },
+    {
+      "id": "DQ40",
+      "question": "Did customer terms, tenders, campaigns or account changes alter sales and recorded prices?",
+      "accountable_role": "Data Analyst",
+      "evidence_owner": "Sales/account and pricing owner",
+      "status": "Additional evidence required",
+      "computed_or_supporting_result_keys": [],
+      "decision": "identify commercial mechanisms worth repeating, reviewing or correcting.",
+      "data_and_grain": "verified customer/account ID, terms/price agreement and effective dates, tender/contract/campaign IDs, eligible invoice lines and reviewed SKU/unit; account × SKU × event period.",
+      "method": "link documentary terms to recorded transactions, compare within-account/SKU periods under stable units, and separate new accounts from first-recorded labels. A comparison group and confounding controls are needed for a campaign-effect claim; otherwise record a supported event association.",
+      "output": "confirmed agreement/event timeline, associated amounts, comparable account/SKU cohort and explanation confidence.",
+      "answerability_and_remaining_dependency": "**Additional evidence required:** verified account identifiers and commercial agreements. Source area, DR number, transaction quantity and price variation do not identify a customer or prove negotiation.",
+      "interpretation_and_closure_boundary": "a discount exists only if recorded/verified; its reason remains unknown without evidence. Do not infer retention, repeat buying, bulk terms or tender wins from aggregates.",
+      "closure_test": "Reconcile the declared output to its same-population version-bound source and obtain the stated independent evidence before elevating a hypothesis to a verified explanation."
+    }
+  ]
+}

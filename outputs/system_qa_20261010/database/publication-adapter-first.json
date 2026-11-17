@@ -1,0 +1,51 @@
+{
+  "checked_at": "2026-10-10T04:44:14.808Z",
+  "scope": "Synthetic isolated publisher with PostgreSQL SQL adapter; no live model activation, no authorization inferred from fixture approval",
+  "checks": [
+    {
+      "name": "repeat publication stages exactly one immutable row per logical key",
+      "status": "FAIL",
+      "error": "column \"lead_months\" is of type integer but expression is of type text"
+    },
+    {
+      "name": "run artifact cannot be reused with different bytes",
+      "status": "PASS",
+      "expected_rejection": "Run identity is immutable",
+      "pointer_mutation_attempted": false
+    },
+    {
+      "name": "review identity cannot be overwritten",
+      "status": "FAIL",
+      "error": "The input did not match the regular expression /Review identity is immutable/. Input:\n\n'error: column \"lead_months\" is of type integer but expression is of type text'\n"
+    },
+    {
+      "name": "manifest identity cannot be overwritten",
+      "status": "FAIL",
+      "error": "The input did not match the regular expression /Manifest readback mismatch/. Input:\n\n'error: column \"lead_months\" is of type integer but expression is of type text'\n"
+    },
+    {
+      "name": "same point key cannot silently replace prediction evidence",
+      "status": "FAIL",
+      "error": "The input did not match the regular expression /fact_forecast_point_candidate readback mismatch/. Input:\n\n'error: column \"lead_months\" is of type integer but expression is of type text'\n"
+    },
+    {
+      "name": "same evaluation key cannot silently replace evaluation evidence",
+      "status": "FAIL",
+      "error": "The input did not match the regular expression /fact_model_evaluation_candidate readback mismatch/. Input:\n\n'error: column \"lead_months\" is of type integer but expression is of type text'\n"
+    },
+    {
+      "name": "ambiguous active channel refuses pointer update",
+      "status": "FAIL",
+      "error": "The input did not match the regular expression /Ambiguous publication pointer/. Input:\n\n'error: column \"lead_months\" is of type integer but expression is of type text'\n"
+    }
+  ],
+  "limitations": [
+    "Spark three-part schema replaced by local PostgreSQL schema. String/date fields use text in fixture. UTF-8 decode(unhex(...)) and current_timestamp() are mapped to PostgreSQL equivalents.",
+    "No Delta concurrency, warehouse jobs, permissions, storage retention, PostgREST or live model activation checked."
+  ],
+  "summary": {
+    "tests": 7,
+    "passed": 1,
+    "failed": 6
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "checked_at": "2026-10-09T02:15:12.331Z",
+  "kind": "Actual migration script; fixture state after successful import then linked Auth user deletion",
+  "expected": "Documented rerun recovery recreates/links deleted Auth user",
+  "actual": "Migration fails before any write because legacy hash was intentionally cleared on successful import",
+  "errors": [
+    "Account migrated-fixture has no Auth user or legacy password hash to import"
+  ],
+  "calls": [
+    {
+      "path": "/rest/v1/accounts",
+      "method": "GET"
+    },
+    {
+      "path": "/auth/v1/admin/users",
+      "method": "GET"
+    }
+  ],
+  "writes": 0,
+  "pass": false
+}

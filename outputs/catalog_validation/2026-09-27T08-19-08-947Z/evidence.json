@@ -1,0 +1,1026 @@
+{
+  "release": {
+    "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+    "policy_version": "sales_restart_gold_v6_reviewed_source_provenance",
+    "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+    "product_master_sha256": "8a34ce4946d2b99f896b1dec9e93dd5865ece8fee5e582c64dc6c5b798cca921",
+    "publication_status": "CANDIDATE_PENDING_BUSINESS_AND_PRODUCT_MASTER_REVIEW",
+    "fact_delta_version": 16
+  },
+  "baseline": 16,
+  "checks": {
+    "source_financial_eligibility": "PASS exact source-record comparison",
+    "monthly": [
+      {
+        "period": "2017-01-01",
+        "records": "515",
+        "net_sales": "2288688.880000"
+      },
+      {
+        "period": "2017-02-01",
+        "records": "454",
+        "net_sales": "2478761.200000"
+      },
+      {
+        "period": "2017-03-01",
+        "records": "589",
+        "net_sales": "2697198.470000"
+      },
+      {
+        "period": "2017-04-01",
+        "records": "401",
+        "net_sales": "2655938.800000"
+      },
+      {
+        "period": "2017-09-01",
+        "records": "1",
+        "net_sales": "480.000000"
+      },
+      {
+        "period": "2017-11-01",
+        "records": "9",
+        "net_sales": "86200.000000"
+      },
+      {
+        "period": "2017-12-01",
+        "records": "9",
+        "net_sales": "3900.000000"
+      },
+      {
+        "period": "2018-03-01",
+        "records": "418",
+        "net_sales": "3457920.700000"
+      },
+      {
+        "period": "2018-04-01",
+        "records": "682",
+        "net_sales": "6403396.280000"
+      },
+      {
+        "period": "2018-05-01",
+        "records": "634",
+        "net_sales": "4591195.170000"
+      },
+      {
+        "period": "2018-06-01",
+        "records": "515",
+        "net_sales": "4599086.640000"
+      },
+      {
+        "period": "2018-07-01",
+        "records": "587",
+        "net_sales": "5034975.380000"
+      },
+      {
+        "period": "2018-08-01",
+        "records": "585",
+        "net_sales": "4085611.820000"
+      },
+      {
+        "period": "2018-09-01",
+        "records": "684",
+        "net_sales": "4066997.220000"
+      },
+      {
+        "period": "2018-10-01",
+        "records": "807",
+        "net_sales": "7274326.830000"
+      },
+      {
+        "period": "2018-11-01",
+        "records": "845",
+        "net_sales": "7571263.890000"
+      },
+      {
+        "period": "2018-12-01",
+        "records": "424",
+        "net_sales": "4534917.340000"
+      },
+      {
+        "period": "2019-01-01",
+        "records": "737",
+        "net_sales": "4459965.470000"
+      },
+      {
+        "period": "2019-02-01",
+        "records": "484",
+        "net_sales": "5473644.670000"
+      },
+      {
+        "period": "2019-03-01",
+        "records": "539",
+        "net_sales": "6995759.140000"
+      },
+      {
+        "period": "2019-04-01",
+        "records": "799",
+        "net_sales": "9438917.290000"
+      },
+      {
+        "period": "2019-05-01",
+        "records": "646",
+        "net_sales": "9568922.120000"
+      },
+      {
+        "period": "2019-06-01",
+        "records": "540",
+        "net_sales": "6948030.480000"
+      },
+      {
+        "period": "2019-07-01",
+        "records": "647",
+        "net_sales": "8694463.130000"
+      },
+      {
+        "period": "2019-08-01",
+        "records": "513",
+        "net_sales": "5568251.580000"
+      },
+      {
+        "period": "2019-09-01",
+        "records": "541",
+        "net_sales": "5394350.610000"
+      },
+      {
+        "period": "2020-01-01",
+        "records": "614",
+        "net_sales": "7514695.050000"
+      },
+      {
+        "period": "2020-02-01",
+        "records": "460",
+        "net_sales": "6298008.000000"
+      },
+      {
+        "period": "2020-03-01",
+        "records": "467",
+        "net_sales": "6637589.080000"
+      },
+      {
+        "period": "2020-04-01",
+        "records": "207",
+        "net_sales": "1525751.320000"
+      },
+      {
+        "period": "2020-05-01",
+        "records": "420",
+        "net_sales": "19394456.300000"
+      },
+      {
+        "period": "2020-06-01",
+        "records": "330",
+        "net_sales": "4471548.750000"
+      },
+      {
+        "period": "2020-07-01",
+        "records": "170",
+        "net_sales": "1553987.810000"
+      },
+      {
+        "period": "2020-08-01",
+        "records": "269",
+        "net_sales": "2983110.790000"
+      },
+      {
+        "period": "2020-09-01",
+        "records": "174",
+        "net_sales": "2102633.270000"
+      },
+      {
+        "period": "2020-10-01",
+        "records": "421",
+        "net_sales": "2469548.120000"
+      },
+      {
+        "period": "2020-11-01",
+        "records": "252",
+        "net_sales": "4870933.120000"
+      },
+      {
+        "period": "2020-12-01",
+        "records": "196",
+        "net_sales": "3771013.020000"
+      },
+      {
+        "period": "2021-01-01",
+        "records": "258",
+        "net_sales": "5364380.250000"
+      },
+      {
+        "period": "2021-02-01",
+        "records": "213",
+        "net_sales": "3682482.140000"
+      },
+      {
+        "period": "2021-03-01",
+        "records": "207",
+        "net_sales": "2318360.720000"
+      },
+      {
+        "period": "2021-04-01",
+        "records": "258",
+        "net_sales": "4928899.800000"
+      },
+      {
+        "period": "2021-05-01",
+        "records": "183",
+        "net_sales": "2012916.830000"
+      },
+      {
+        "period": "2021-06-01",
+        "records": "253",
+        "net_sales": "5225498.200000"
+      },
+      {
+        "period": "2021-07-01",
+        "records": "345",
+        "net_sales": "9573660.330000"
+      },
+      {
+        "period": "2021-08-01",
+        "records": "305",
+        "net_sales": "10533739.530000"
+      },
+      {
+        "period": "2021-09-01",
+        "records": "286",
+        "net_sales": "8287059.600000"
+      },
+      {
+        "period": "2021-10-01",
+        "records": "381",
+        "net_sales": "15279603.640000"
+      },
+      {
+        "period": "2021-11-01",
+        "records": "503",
+        "net_sales": "6713804.040000"
+      },
+      {
+        "period": "2021-12-01",
+        "records": "215",
+        "net_sales": "3939801.180000"
+      },
+      {
+        "period": "2022-01-01",
+        "records": "371",
+        "net_sales": "5270833.750000"
+      },
+      {
+        "period": "2022-02-01",
+        "records": "453",
+        "net_sales": "10568697.090000"
+      },
+      {
+        "period": "2022-03-01",
+        "records": "298",
+        "net_sales": "5791537.630000"
+      },
+      {
+        "period": "2022-04-01",
+        "records": "314",
+        "net_sales": "5638889.710000"
+      },
+      {
+        "period": "2022-05-01",
+        "records": "324",
+        "net_sales": "3871579.020000"
+      },
+      {
+        "period": "2022-06-01",
+        "records": "489",
+        "net_sales": "10350221.030000"
+      },
+      {
+        "period": "2022-07-01",
+        "records": "295",
+        "net_sales": "3049922.430000"
+      },
+      {
+        "period": "2022-08-01",
+        "records": "194",
+        "net_sales": "2138525.120000"
+      },
+      {
+        "period": "2022-09-01",
+        "records": "418",
+        "net_sales": "6498970.540000"
+      },
+      {
+        "period": "2022-10-01",
+        "records": "296",
+        "net_sales": "2788157.480000"
+      },
+      {
+        "period": "2022-11-01",
+        "records": "306",
+        "net_sales": "3642191.630000"
+      },
+      {
+        "period": "2022-12-01",
+        "records": "222",
+        "net_sales": "3625464.610000"
+      },
+      {
+        "period": "2023-01-01",
+        "records": "435",
+        "net_sales": "7844551.200000"
+      },
+      {
+        "period": "2023-02-01",
+        "records": "753",
+        "net_sales": "13794078.180000"
+      },
+      {
+        "period": "2023-03-01",
+        "records": "357",
+        "net_sales": "2344746.440000"
+      },
+      {
+        "period": "2023-04-01",
+        "records": "215",
+        "net_sales": "1559602.950000"
+      },
+      {
+        "period": "2023-05-01",
+        "records": "625",
+        "net_sales": "14537368.300000"
+      },
+      {
+        "period": "2023-06-01",
+        "records": "1455",
+        "net_sales": "6910935.230000"
+      },
+      {
+        "period": "2023-07-01",
+        "records": "295",
+        "net_sales": "2337078.500000"
+      },
+      {
+        "period": "2023-08-01",
+        "records": "348",
+        "net_sales": "2588026.900000"
+      },
+      {
+        "period": "2023-09-01",
+        "records": "240",
+        "net_sales": "5029660.600000"
+      },
+      {
+        "period": "2023-10-01",
+        "records": "243",
+        "net_sales": "2411760.400000"
+      },
+      {
+        "period": "2023-11-01",
+        "records": "262",
+        "net_sales": "1975407.650000"
+      },
+      {
+        "period": "2023-12-01",
+        "records": "153",
+        "net_sales": "895750.500000"
+      },
+      {
+        "period": "2024-01-01",
+        "records": "271",
+        "net_sales": "2124201.870000"
+      },
+      {
+        "period": "2024-02-01",
+        "records": "167",
+        "net_sales": "1079764.410000"
+      },
+      {
+        "period": "2024-03-01",
+        "records": "371",
+        "net_sales": "2060009.790000"
+      },
+      {
+        "period": "2024-04-01",
+        "records": "182",
+        "net_sales": "2078280.770000"
+      },
+      {
+        "period": "2024-05-01",
+        "records": "247",
+        "net_sales": "3608886.820000"
+      },
+      {
+        "period": "2024-06-01",
+        "records": "246",
+        "net_sales": "6998941.660000"
+      },
+      {
+        "period": "2024-07-01",
+        "records": "262",
+        "net_sales": "4065144.110000"
+      },
+      {
+        "period": "2024-08-01",
+        "records": "264",
+        "net_sales": "3762272.340000"
+      },
+      {
+        "period": "2024-09-01",
+        "records": "206",
+        "net_sales": "2626170.570000"
+      },
+      {
+        "period": "2024-10-01",
+        "records": "243",
+        "net_sales": "3030236.030000"
+      },
+      {
+        "period": "2024-11-01",
+        "records": "175",
+        "net_sales": "2080441.000000"
+      },
+      {
+        "period": "2024-12-01",
+        "records": "197",
+        "net_sales": "16744970.510000"
+      },
+      {
+        "period": "2025-01-01",
+        "records": "232",
+        "net_sales": "16374092.180000"
+      },
+      {
+        "period": "2025-02-01",
+        "records": "350",
+        "net_sales": "13408966.820000"
+      },
+      {
+        "period": "2025-03-01",
+        "records": "241",
+        "net_sales": "2612295.100000"
+      },
+      {
+        "period": "2025-04-01",
+        "records": "206",
+        "net_sales": "5670753.870000"
+      },
+      {
+        "period": "2025-05-01",
+        "records": "231",
+        "net_sales": "21382925.250000"
+      },
+      {
+        "period": "2025-06-01",
+        "records": "525",
+        "net_sales": "14924161.430000"
+      },
+      {
+        "period": "2025-07-01",
+        "records": "265",
+        "net_sales": "20352893.810000"
+      },
+      {
+        "period": "2025-08-01",
+        "records": "253",
+        "net_sales": "8934135.310000"
+      },
+      {
+        "period": "2025-09-01",
+        "records": "507",
+        "net_sales": "20654027.170000"
+      },
+      {
+        "period": "2025-10-01",
+        "records": "360",
+        "net_sales": "12512678.310000"
+      },
+      {
+        "period": "2025-11-01",
+        "records": "545",
+        "net_sales": "25076009.200000"
+      },
+      {
+        "period": "2025-12-01",
+        "records": "829",
+        "net_sales": "23493882.590000"
+      }
+    ],
+    "warehouse_catalog": "NOT_DEPLOYED: legacy release compatibility only",
+    "api": {
+      "status": "PASS",
+      "net_sales": 626946741.8100002,
+      "records": 37728,
+      "product_groups": 4561,
+      "unresolved_revenue": 626946741.81,
+      "heatmap_rows": 37728
+    }
+  },
+  "queries": [
+    {
+      "sql": "SELECT COUNT(*) AS n FROM workspace.medshield_gold.sales_restart_fact_candidate VERSION AS OF 16 b FULL OUTER JOIN workspace.medshield_gold.sales_restart_fact_candidate VERSION AS OF 16 f ON b.source_record_id=f.source_record_id\n    WHERE b.source_record_id IS NULL OR f.source_record_id IS NULL OR NOT(b.product_key <=> f.product_key) OR NOT(b.product_raw <=> f.product_raw) OR NOT(b.quantity <=> f.quantity) OR NOT(b.net_sales <=> f.net_sales) OR NOT(b.gross_sales <=> f.gross_sales) OR NOT(b.gross_margin_amount <=> f.gross_margin_amount) OR NOT(b.total_acquisition_cost <=> f.total_acquisition_cost) OR NOT(b.date_delivered <=> f.date_delivered) OR NOT(b.is_net_sales_eligible <=> f.is_net_sales_eligible) OR NOT(b.is_gross_sales_eligible <=> f.is_gross_sales_eligible) OR NOT(b.is_gross_margin_eligible <=> f.is_gross_margin_eligible) OR NOT(b.is_acquisition_cost_eligible <=> f.is_acquisition_cost_eligible) OR NOT(b.is_quantity_observation_eligible <=> f.is_quantity_observation_eligible) OR NOT(b.source_file_sha256 <=> f.source_file_sha256) OR NOT(b.is_adjusted_source <=> f.is_adjusted_source)",
+      "rows": [
+        {
+          "n": "0"
+        }
+      ]
+    },
+    {
+      "sql": "SELECT source_record_id FROM workspace.medshield_gold.sales_restart_fact_candidate VERSION AS OF 16 GROUP BY source_record_id HAVING COUNT(*)<>1",
+      "rows": []
+    },
+    {
+      "sql": "SELECT CAST(month_start AS STRING) AS period, COUNT(*) AS records, SUM(CASE WHEN is_net_sales_eligible THEN net_sales END) AS net_sales FROM workspace.medshield_gold.sales_restart_fact_candidate VERSION AS OF 16 GROUP BY month_start ORDER BY month_start",
+      "rows": [
+        {
+          "period": "2017-01-01",
+          "records": "515",
+          "net_sales": "2288688.880000"
+        },
+        {
+          "period": "2017-02-01",
+          "records": "454",
+          "net_sales": "2478761.200000"
+        },
+        {
+          "period": "2017-03-01",
+          "records": "589",
+          "net_sales": "2697198.470000"
+        },
+        {
+          "period": "2017-04-01",
+          "records": "401",
+          "net_sales": "2655938.800000"
+        },
+        {
+          "period": "2017-09-01",
+          "records": "1",
+          "net_sales": "480.000000"
+        },
+        {
+          "period": "2017-11-01",
+          "records": "9",
+          "net_sales": "86200.000000"
+        },
+        {
+          "period": "2017-12-01",
+          "records": "9",
+          "net_sales": "3900.000000"
+        },
+        {
+          "period": "2018-03-01",
+          "records": "418",
+          "net_sales": "3457920.700000"
+        },
+        {
+          "period": "2018-04-01",
+          "records": "682",
+          "net_sales": "6403396.280000"
+        },
+        {
+          "period": "2018-05-01",
+          "records": "634",
+          "net_sales": "4591195.170000"
+        },
+        {
+          "period": "2018-06-01",
+          "records": "515",
+          "net_sales": "4599086.640000"
+        },
+        {
+          "period": "2018-07-01",
+          "records": "587",
+          "net_sales": "5034975.380000"
+        },
+        {
+          "period": "2018-08-01",
+          "records": "585",
+          "net_sales": "4085611.820000"
+        },
+        {
+          "period": "2018-09-01",
+          "records": "684",
+          "net_sales": "4066997.220000"
+        },
+        {
+          "period": "2018-10-01",
+          "records": "807",
+          "net_sales": "7274326.830000"
+        },
+        {
+          "period": "2018-11-01",
+          "records": "845",
+          "net_sales": "7571263.890000"
+        },
+        {
+          "period": "2018-12-01",
+          "records": "424",
+          "net_sales": "4534917.340000"
+        },
+        {
+          "period": "2019-01-01",
+          "records": "737",
+          "net_sales": "4459965.470000"
+        },
+        {
+          "period": "2019-02-01",
+          "records": "484",
+          "net_sales": "5473644.670000"
+        },
+        {
+          "period": "2019-03-01",
+          "records": "539",
+          "net_sales": "6995759.140000"
+        },
+        {
+          "period": "2019-04-01",
+          "records": "799",
+          "net_sales": "9438917.290000"
+        },
+        {
+          "period": "2019-05-01",
+          "records": "646",
+          "net_sales": "9568922.120000"
+        },
+        {
+          "period": "2019-06-01",
+          "records": "540",
+          "net_sales": "6948030.480000"
+        },
+        {
+          "period": "2019-07-01",
+          "records": "647",
+          "net_sales": "8694463.130000"
+        },
+        {
+          "period": "2019-08-01",
+          "records": "513",
+          "net_sales": "5568251.580000"
+        },
+        {
+          "period": "2019-09-01",
+          "records": "541",
+          "net_sales": "5394350.610000"
+        },
+        {
+          "period": "2020-01-01",
+          "records": "614",
+          "net_sales": "7514695.050000"
+        },
+        {
+          "period": "2020-02-01",
+          "records": "460",
+          "net_sales": "6298008.000000"
+        },
+        {
+          "period": "2020-03-01",
+          "records": "467",
+          "net_sales": "6637589.080000"
+        },
+        {
+          "period": "2020-04-01",
+          "records": "207",
+          "net_sales": "1525751.320000"
+        },
+        {
+          "period": "2020-05-01",
+          "records": "420",
+          "net_sales": "19394456.300000"
+        },
+        {
+          "period": "2020-06-01",
+          "records": "330",
+          "net_sales": "4471548.750000"
+        },
+        {
+          "period": "2020-07-01",
+          "records": "170",
+          "net_sales": "1553987.810000"
+        },
+        {
+          "period": "2020-08-01",
+          "records": "269",
+          "net_sales": "2983110.790000"
+        },
+        {
+          "period": "2020-09-01",
+          "records": "174",
+          "net_sales": "2102633.270000"
+        },
+        {
+          "period": "2020-10-01",
+          "records": "421",
+          "net_sales": "2469548.120000"
+        },
+        {
+          "period": "2020-11-01",
+          "records": "252",
+          "net_sales": "4870933.120000"
+        },
+        {
+          "period": "2020-12-01",
+          "records": "196",
+          "net_sales": "3771013.020000"
+        },
+        {
+          "period": "2021-01-01",
+          "records": "258",
+          "net_sales": "5364380.250000"
+        },
+        {
+          "period": "2021-02-01",
+          "records": "213",
+          "net_sales": "3682482.140000"
+        },
+        {
+          "period": "2021-03-01",
+          "records": "207",
+          "net_sales": "2318360.720000"
+        },
+        {
+          "period": "2021-04-01",
+          "records": "258",
+          "net_sales": "4928899.800000"
+        },
+        {
+          "period": "2021-05-01",
+          "records": "183",
+          "net_sales": "2012916.830000"
+        },
+        {
+          "period": "2021-06-01",
+          "records": "253",
+          "net_sales": "5225498.200000"
+        },
+        {
+          "period": "2021-07-01",
+          "records": "345",
+          "net_sales": "9573660.330000"
+        },
+        {
+          "period": "2021-08-01",
+          "records": "305",
+          "net_sales": "10533739.530000"
+        },
+        {
+          "period": "2021-09-01",
+          "records": "286",
+          "net_sales": "8287059.600000"
+        },
+        {
+          "period": "2021-10-01",
+          "records": "381",
+          "net_sales": "15279603.640000"
+        },
+        {
+          "period": "2021-11-01",
+          "records": "503",
+          "net_sales": "6713804.040000"
+        },
+        {
+          "period": "2021-12-01",
+          "records": "215",
+          "net_sales": "3939801.180000"
+        },
+        {
+          "period": "2022-01-01",
+          "records": "371",
+          "net_sales": "5270833.750000"
+        },
+        {
+          "period": "2022-02-01",
+          "records": "453",
+          "net_sales": "10568697.090000"
+        },
+        {
+          "period": "2022-03-01",
+          "records": "298",
+          "net_sales": "5791537.630000"
+        },
+        {
+          "period": "2022-04-01",
+          "records": "314",
+          "net_sales": "5638889.710000"
+        },
+        {
+          "period": "2022-05-01",
+          "records": "324",
+          "net_sales": "3871579.020000"
+        },
+        {
+          "period": "2022-06-01",
+          "records": "489",
+          "net_sales": "10350221.030000"
+        },
+        {
+          "period": "2022-07-01",
+          "records": "295",
+          "net_sales": "3049922.430000"
+        },
+        {
+          "period": "2022-08-01",
+          "records": "194",
+          "net_sales": "2138525.120000"
+        },
+        {
+          "period": "2022-09-01",
+          "records": "418",
+          "net_sales": "6498970.540000"
+        },
+        {
+          "period": "2022-10-01",
+          "records": "296",
+          "net_sales": "2788157.480000"
+        },
+        {
+          "period": "2022-11-01",
+          "records": "306",
+          "net_sales": "3642191.630000"
+        },
+        {
+          "period": "2022-12-01",
+          "records": "222",
+          "net_sales": "3625464.610000"
+        },
+        {
+          "period": "2023-01-01",
+          "records": "435",
+          "net_sales": "7844551.200000"
+        },
+        {
+          "period": "2023-02-01",
+          "records": "753",
+          "net_sales": "13794078.180000"
+        },
+        {
+          "period": "2023-03-01",
+          "records": "357",
+          "net_sales": "2344746.440000"
+        },
+        {
+          "period": "2023-04-01",
+          "records": "215",
+          "net_sales": "1559602.950000"
+        },
+        {
+          "period": "2023-05-01",
+          "records": "625",
+          "net_sales": "14537368.300000"
+        },
+        {
+          "period": "2023-06-01",
+          "records": "1455",
+          "net_sales": "6910935.230000"
+        },
+        {
+          "period": "2023-07-01",
+          "records": "295",
+          "net_sales": "2337078.500000"
+        },
+        {
+          "period": "2023-08-01",
+          "records": "348",
+          "net_sales": "2588026.900000"
+        },
+        {
+          "period": "2023-09-01",
+          "records": "240",
+          "net_sales": "5029660.600000"
+        },
+        {
+          "period": "2023-10-01",
+          "records": "243",
+          "net_sales": "2411760.400000"
+        },
+        {
+          "period": "2023-11-01",
+          "records": "262",
+          "net_sales": "1975407.650000"
+        },
+        {
+          "period": "2023-12-01",
+          "records": "153",
+          "net_sales": "895750.500000"
+        },
+        {
+          "period": "2024-01-01",
+          "records": "271",
+          "net_sales": "2124201.870000"
+        },
+        {
+          "period": "2024-02-01",
+          "records": "167",
+          "net_sales": "1079764.410000"
+        },
+        {
+          "period": "2024-03-01",
+          "records": "371",
+          "net_sales": "2060009.790000"
+        },
+        {
+          "period": "2024-04-01",
+          "records": "182",
+          "net_sales": "2078280.770000"
+        },
+        {
+          "period": "2024-05-01",
+          "records": "247",
+          "net_sales": "3608886.820000"
+        },
+        {
+          "period": "2024-06-01",
+          "records": "246",
+          "net_sales": "6998941.660000"
+        },
+        {
+          "period": "2024-07-01",
+          "records": "262",
+          "net_sales": "4065144.110000"
+        },
+        {
+          "period": "2024-08-01",
+          "records": "264",
+          "net_sales": "3762272.340000"
+        },
+        {
+          "period": "2024-09-01",
+          "records": "206",
+          "net_sales": "2626170.570000"
+        },
+        {
+          "period": "2024-10-01",
+          "records": "243",
+          "net_sales": "3030236.030000"
+        },
+        {
+          "period": "2024-11-01",
+          "records": "175",
+          "net_sales": "2080441.000000"
+        },
+        {
+          "period": "2024-12-01",
+          "records": "197",
+          "net_sales": "16744970.510000"
+        },
+        {
+          "period": "2025-01-01",
+          "records": "232",
+          "net_sales": "16374092.180000"
+        },
+        {
+          "period": "2025-02-01",
+          "records": "350",
+          "net_sales": "13408966.820000"
+        },
+        {
+          "period": "2025-03-01",
+          "records": "241",
+          "net_sales": "2612295.100000"
+        },
+        {
+          "period": "2025-04-01",
+          "records": "206",
+          "net_sales": "5670753.870000"
+        },
+        {
+          "period": "2025-05-01",
+          "records": "231",
+          "net_sales": "21382925.250000"
+        },
+        {
+          "period": "2025-06-01",
+          "records": "525",
+          "net_sales": "14924161.430000"
+        },
+        {
+          "period": "2025-07-01",
+          "records": "265",
+          "net_sales": "20352893.810000"
+        },
+        {
+          "period": "2025-08-01",
+          "records": "253",
+          "net_sales": "8934135.310000"
+        },
+        {
+          "period": "2025-09-01",
+          "records": "507",
+          "net_sales": "20654027.170000"
+        },
+        {
+          "period": "2025-10-01",
+          "records": "360",
+          "net_sales": "12512678.310000"
+        },
+        {
+          "period": "2025-11-01",
+          "records": "545",
+          "net_sales": "25076009.200000"
+        },
+        {
+          "period": "2025-12-01",
+          "records": "829",
+          "net_sales": "23493882.590000"
+        }
+      ]
+    }
+  ],
+  "mode": "read-only",
+  "approved": false
+}

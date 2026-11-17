@@ -1,0 +1,56 @@
+{
+  "status": "PASS",
+  "recorded_at_utc": "2026-10-10T07:53:34.578654+00:00",
+  "scope": "Local historical error presentation and interpretation",
+  "independent_qa": {
+    "checks": 369,
+    "failures": 0
+  },
+  "frontend_fixture_tests": {
+    "review_mode": "Frontend Engineer implementation self-review; not newly rerun by independent QA",
+    "command": "node node_modules/@playwright/test/cli.js test e2e/forecast-validation.spec.ts --workers=1 --output=test-results-predictive-error-output-final-20261010",
+    "working_directory": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\frontend",
+    "result": "6 passed (12.3s), exit 0",
+    "last_run_status": "passed",
+    "runtime_sha256": "ceea1fa768a2c5e1ef019867436ed7e6ec949855a4aa65db6b49c30ef42b7344",
+    "test_sha256": "3adea70905f3602961ca334697722b9618555153650482083096c01eda503f51"
+  },
+  "root_checks": {
+    "typescript": "PASS: frontend node node_modules/typescript/bin/tsc --noEmit --incremental false",
+    "whitespace": "PASS: scoped git diff --check",
+    "visual": "PASS: root inspected both bound desktop and 390px mobile synthetic screenshots",
+    "local_links_checked": 12,
+    "independent_source_bindings_current": true
+  },
+  "files": {
+    "docs/CURRENT_STATE.md": "ae0c25020e8b0360cc0a5cbe161831f095c8275c8b40d5104ead3a8927f2c6cd",
+    "docs/PREDICTIVE_OPERATIONS.md": "5da385cc6642cda151fd9c853ce684da6147e3a660946d5b2abb06405a60358a",
+    "docs/TESTING.md": "cb4032b2db75657000fd3251f47f4f04d80c4085ed9a0fc7b94963c63e4b8144",
+    "frontend/e2e/forecast-validation.spec.ts": "3adea70905f3602961ca334697722b9618555153650482083096c01eda503f51",
+    "frontend/services/api/forecast-validation-runtime.ts": "ceea1fa768a2c5e1ef019867436ed7e6ec949855a4aa65db6b49c30ef42b7344",
+    "outputs/predictive_error_policy_20261010/model-error-review.json": "de057ab8090715557dec3a308fac13034afbf7c2080369f599df2d09691f45bb",
+    "outputs/predictive_error_policy_20261010/policy.json": "55c93ca278c8fa9a19efaecdd8327836bc3d35662fe733eb36917125bb4d0fcb",
+    "outputs/predictive_error_visibility_20261010/frontend-desktop.png": "131eceb5d69549770f3d4ad67a8cff6fbd61626eb22fddd1590a435ab907bb16",
+    "outputs/predictive_error_visibility_20261010/frontend-mobile.png": "7ffaf4a630ee73d5bc7ce964854cc79a61d806cd74e03a4be1f6c84b8bfa4671",
+    "outputs/predictive_error_visibility_20261010/frontend-results.md": "45379ba4485baf49b904bab25004efd01678e878c2aef9a853767e41e9d57183",
+    "outputs/predictive_error_visibility_20261010/qa/artifact-hashes.json": "ec270b0c826d406f3473f53e8ed3fe5f6ee5bdd8b7bf8e062f49a128bae09234",
+    "outputs/predictive_error_visibility_20261010/qa/expected.json": "637ea98f157409c8b07f49b04fa612d62346e5341ac8f05ccabf779796b5454f",
+    "outputs/predictive_error_visibility_20261010/qa/php-display.json": "b8a5887bd95d0566049ca6c492e1cc71717f37cf18bc9385bdd227b301cb0ccf",
+    "outputs/predictive_error_visibility_20261010/qa/php-fixture.csv": "f4b742ead64b8d9a433ad7e0da20706ade326b6d2751f1ce870edfda0c1bfb9e",
+    "outputs/predictive_error_visibility_20261010/qa/REPORT.md": "c2d07b28cc1a254f4afdb13449cf64cb94c7b42bb45087a513faa9473331ca2e",
+    "outputs/predictive_error_visibility_20261010/qa/unit-and-escaping-fixture.csv": "ec6ae42ebd9bb8d1383c2ec54cf5f39de88c031c032ccf72cb009d2b87304390",
+    "outputs/predictive_error_visibility_20261010/qa/unit-display.json": "ec57d1fbcaedc8811ff739ffa479a7eb3239669432e564752ef94220b214fed5",
+    "outputs/predictive_error_visibility_20261010/qa/verification-first.json": "ed1bf6753c43647d5cb3de7b3bbaa9a403b50207b26ec41c88af28eb30285599",
+    "outputs/predictive_error_visibility_20261010/qa/verification.json": "6a1a779d17696a85e2e94ca19442579c42dcf1fa699c0a2dcede4e2e1e4de3e5",
+    "outputs/predictive_error_visibility_20261010/qa/verify-runtime-first.cjs": "2927963715561db7816afa9a80b8f496e2d6bb48693316ad13ab244712408fd9",
+    "outputs/predictive_error_visibility_20261010/qa/verify-runtime.cjs": "bb8bafdfa9a538c6bb4656bf8d2e1b95528a1c8f5b536c24bbd1063ce60cb614",
+    "outputs/predictive_error_visibility_20261010/README.md": "d967556e2c03665259ecfa47ebe8c633d2b5e17d5732f844d6a6e5de4f1463a7",
+    "outputs/predictive_error_visibility_20261010/seal_delivery.py": "76cd2c94f994d09665354a3e2e4669cf5d297c782c73f761450ae920a4f86245"
+  },
+  "business_limits": "Unset; not assessed for business tolerance",
+  "model_fit_or_warehouse_write": false,
+  "live_integration_or_deployment_verified": false,
+  "measured_2026_error": null,
+  "publication_approval_granted": false,
+  "limitations": "Fixtures and visual review verify presentation, not forecasting reliability. Inherited 2025 results are retrospective."
+}

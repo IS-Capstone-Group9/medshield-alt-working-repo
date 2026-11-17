@@ -1,0 +1,130 @@
+ M frontend/app/overrides.css
+ M frontend/e2e/area-prioritization.spec.ts
+ M frontend/e2e/catalog-resolution.spec.ts
+ M frontend/e2e/client-reference-list.spec.ts
+ M frontend/e2e/dashboard-chart-live.spec.ts
+ M frontend/e2e/descriptive-chart-integrity.spec.ts
+ M frontend/e2e/descriptive-chart-layout.spec.ts
+ M frontend/e2e/descriptive-live.spec.ts
+ M frontend/e2e/metric-definitions.spec.ts
+ M frontend/e2e/overview-evidence.spec.ts
+ M frontend/e2e/product-prioritization.spec.ts
+ M frontend/e2e/sales-diagnostics.spec.ts
+ M frontend/e2e/sales-heatmap.spec.ts
+ M frontend/e2e/sales-sectors.spec.ts
+ M frontend/services/api/dashboard-enhancement-listeners.ts
+ M frontend/services/api/dashboard-interactions.ts
+ M frontend/services/api/dashboard-markup.ts
+ M frontend/services/api/descriptive-chart-style.ts
+ M frontend/services/api/descriptive-products-runtime.ts
+ M frontend/services/api/overview-analytics-runtime.ts
+ M frontend/services/api/overview-monthly-runtime.ts
+ M frontend/services/api/sales-diagnostics-runtime.ts
+ M frontend/services/api/sales-heatmap-runtime.ts
+ M frontend/services/api/sales-page-helpers.ts
+ M frontend/services/api/sales-sectors-runtime.ts
+ M frontend/services/api/sales-view-helpers.ts
+ M frontend/services/api/stl-panel.ts
+ M frontend/services/api/weather-view-helpers.ts
+ M frontend/services/api/weather.service.ts
+ M frontend/types/weather.types.ts
+?? frontend/e2e/sales-data-view.spec.ts
+?? frontend/e2e/weather-providers.spec.ts
+?? frontend/screenshots/
+?? frontend/services/api/weather-provider-helpers.ts
+?? frontend/test-results-analytical-design-contracts/
+?? frontend/test-results-analytical-design-final/
+?? frontend/test-results-analytical-design-forecast-final/
+?? frontend/test-results-analytical-design-forecast/
+?? frontend/test-results-analytical-design-live/
+?? frontend/test-results-candidate-20261003-api-fixed/
+?? frontend/test-results-candidate-20261003-final/
+?? frontend/test-results-candidate-20261003-verified/
+?? frontend/test-results-candidate-20261003/
+?? frontend/test-results-catalog-delivery/
+?? frontend/test-results-catalog-export-final/
+?? frontend/test-results-catalog-final/
+?? frontend/test-results-catalog/
+?? frontend/test-results-chart-audit-complete/
+?? frontend/test-results-chart-integrity-final/
+?? frontend/test-results-chart-integrity-run/
+?? frontend/test-results-chart-integrity/
+?? frontend/test-results-chart-last-visual/
+?? frontend/test-results-chart-regression/
+?? frontend/test-results-chart-remaining/
+?? frontend/test-results-connected-estimates/
+?? frontend/test-results-descriptive-chart-live-final/
+?? frontend/test-results-descriptive-chart-live-ready/
+?? frontend/test-results-descriptive-chart-live/
+?? frontend/test-results-descriptive-chart-polish-bounds/
+?? frontend/test-results-descriptive-chart-polish-final/
+?? frontend/test-results-descriptive-chart-polish-mobile/
+?? frontend/test-results-descriptive-chart-polish-regression/
+?? frontend/test-results-descriptive-chart-polish-verified/
+?? frontend/test-results-descriptive-chart-polish/
+?? frontend/test-results-descriptive-completion/
+?? frontend/test-results-descriptive-delivery/
+?? frontend/test-results-descriptive-final-verified/
+?? frontend/test-results-descriptive-final/
+?? frontend/test-results-descriptive-live-run/
+?? frontend/test-results-descriptive-live/
+?? frontend/test-results-descriptive-period-final/
+?? frontend/test-results-descriptive-products/
+?? frontend/test-results-descriptive-release/
+?? frontend/test-results-descriptive/
+?? frontend/test-results-filter-placement-final/
+?? frontend/test-results-filter-placement/
+?? frontend/test-results-integrity-review-20261008/
+?? frontend/test-results-loading-readiness/
+?? frontend/test-results-loading/
+?? frontend/test-results-overview-analytics/
+?? frontend/test-results-overview-clean-final/
+?? frontend/test-results-overview-clean-layout/
+?? frontend/test-results-overview-clean/
+?? frontend/test-results-overview-final/
+?? frontend/test-results-overview-fixed-live/
+?? frontend/test-results-overview-split-retry/
+?? frontend/test-results-overview-split/
+?? frontend/test-results-predictive-p0/
+?? frontend/test-results-product-chart-readability/
+?? frontend/test-results-qa-20260927-authorized/
+?? frontend/test-results-qa-20260927-final/
+?? frontend/test-results-qa-20260927-network/
+?? frontend/test-results-qa-20260927/
+?? frontend/test-results-qa-live/
+?? frontend/test-results-qa-reassessment/
+?? frontend/test-results-qa-retry/
+?? frontend/test-results-remediation-export-version/
+?? frontend/test-results-remediation-final/
+?? frontend/test-results-remediation-layout/
+?? frontend/test-results-remediation-live/
+?? frontend/test-results-remediation-mobile/
+?? frontend/test-results-remediation-readability/
+?? frontend/test-results-remediation-verified/
+?? frontend/test-results-sales-data-clean-20261008/
+?? frontend/test-results-sales-data-clean-final-20261008/
+?? frontend/test-results-sales-data-investigation-final-20261008/
+?? frontend/test-results-simplification-area-20261008/
+?? frontend/test-results-simplification-area-contract-20261008/
+?? frontend/test-results-simplification-final-20261008/
+?? frontend/test-results-simplification-integrated-initial-20261008/
+?? frontend/test-results-simplification-live-20261008/
+?? frontend/test-results-simplification-live-final-20261008/
+?? frontend/test-results-simplification-overview-20261008/
+?? frontend/test-results-simplification-overview-repaired-20261008/
+?? frontend/test-results-simplification-products-20261008/
+?? frontend/test-results-simplification-products-bounds-20261008/
+?? frontend/test-results-simplification-products-final-20261008/
+?? frontend/test-results-simplification-products-mobile-diagnostic-20261008/
+?? frontend/test-results-simplification-products-mobile-diagnostic2-20261008/
+?? frontend/test-results-simplification-products-release-20261008/
+?? frontend/test-results-simplification-products-reviewed-20261008/
+?? frontend/test-results-simplification-sales-20261008/
+?? frontend/test-results-simplification-sales-final-20261008/
+?? frontend/test-results-step1-regression/
+?? frontend/test-results-step1/
+?? frontend/test-results-step4-helper/
+?? frontend/test-results-step4-live/
+?? frontend/test-results-step4-regression/
+?? frontend/test-results-weather-providers-20261008/
+?? frontend/test-results-weather-providers-final-20261008/

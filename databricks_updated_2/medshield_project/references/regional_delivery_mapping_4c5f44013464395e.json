@@ -1,0 +1,99 @@
+{
+  "schema_version": "original_regional_delivery_mapping_v1",
+  "dataset_id": "e87cae21986db32bcade298d69e652236be9db65f2685db51355003f1439ff10",
+  "source_table": "workspace.medshield_original_gold_20261026.original_fd95b9e3abab028c8e41_itemized_candidates",
+  "source_delta_version": 0,
+  "policy": "original_source_layers_v1_candidate_only",
+  "confirmed_on": "2026-10-27",
+  "timezone": "Asia/Manila",
+  "actor": "Adrian",
+  "confirmation_basis": "Direct user confirmation that the nine exact source labels identify actual delivery areas in the named provinces",
+  "mapping_use": "recorded_itemized_regional_financial_review",
+  "mappings": [
+    {
+      "recorded_label": "ALBAY",
+      "province": "Albay",
+      "region": "BICOL",
+      "province_psgc_code": "0500500000",
+      "delivery_meaning": "user_confirmed",
+      "region_membership_source": "https://psa.gov.ph/classification/psgc/provinces?vcode=243AgW"
+    },
+    {
+      "recorded_label": "BATANGAS",
+      "province": "Batangas",
+      "region": "CALABARZON",
+      "province_psgc_code": "0401000000",
+      "delivery_meaning": "user_confirmed",
+      "region_membership_source": "https://psa.gov.ph/classification/psgc/provinces?vcode=243AgW"
+    },
+    {
+      "recorded_label": "CAM NORTE",
+      "province": "Camarines Norte",
+      "region": "BICOL",
+      "province_psgc_code": "0501600000",
+      "delivery_meaning": "user_confirmed",
+      "region_membership_source": "https://psa.gov.ph/classification/psgc/provinces?vcode=243AgW"
+    },
+    {
+      "recorded_label": "CAM SUR",
+      "province": "Camarines Sur",
+      "region": "BICOL",
+      "province_psgc_code": "0501700000",
+      "delivery_meaning": "user_confirmed",
+      "region_membership_source": "https://psa.gov.ph/classification/psgc/provinces?vcode=243AgW"
+    },
+    {
+      "recorded_label": "CAVITE",
+      "province": "Cavite",
+      "region": "CALABARZON",
+      "province_psgc_code": "0402100000",
+      "delivery_meaning": "user_confirmed",
+      "region_membership_source": "https://psa.gov.ph/classification/psgc/provinces?vcode=243AgW"
+    },
+    {
+      "recorded_label": "LAGUNA",
+      "province": "Laguna",
+      "region": "CALABARZON",
+      "province_psgc_code": "0403400000",
+      "delivery_meaning": "user_confirmed",
+      "region_membership_source": "https://psa.gov.ph/classification/psgc/provinces?vcode=243AgW"
+    },
+    {
+      "recorded_label": "LOWER CAVITE",
+      "province": "Cavite",
+      "region": "CALABARZON",
+      "province_psgc_code": "0402100000",
+      "delivery_meaning": "user_confirmed",
+      "region_membership_source": "https://psa.gov.ph/classification/psgc/provinces?vcode=243AgW"
+    },
+    {
+      "recorded_label": "MARINDUQUE",
+      "province": "Marinduque",
+      "region": "MIMAROPA",
+      "province_psgc_code": "1704000000",
+      "delivery_meaning": "user_confirmed",
+      "region_membership_source": "https://psa.gov.ph/classification/psgc/provinces?vcode=243AgW"
+    },
+    {
+      "recorded_label": "QUEZON",
+      "province": "Quezon",
+      "region": "CALABARZON",
+      "province_psgc_code": "0405600000",
+      "delivery_meaning": "user_confirmed",
+      "region_membership_source": "https://psa.gov.ph/classification/psgc/provinces?vcode=243AgW"
+    }
+  ],
+  "unconfirmed_labels_policy": "unallocated_no_inference",
+  "source_completeness": "unknown",
+  "contracts_excluded": true,
+  "financial_publication_approved": false,
+  "forecast_approved": false,
+  "external_join_approved": false,
+  "original_source_flags_rewritten": false,
+  "limitations": [
+    "User-confirmed label meaning, not independent invoice-level verification.",
+    "Province grouping is not complete delivery detail or complete regional/company coverage.",
+    "BICOL and MINDORO source labels remain unconfirmed and unallocated.",
+    "No SKU/unit, external-join or model approval is added."
+  ]
+}

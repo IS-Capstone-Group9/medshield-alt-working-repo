@@ -1,0 +1,72 @@
+{
+  "operation": "prepare_unapproved_catalog_drafts",
+  "fact_delta_version": 19,
+  "current_label_receipt_sha256": "9c3608c7e8bc4669d62e3c8632161f374e6f78099b8fedf198a8d4e286dd1dc6",
+  "research_seed_sha256": "43ff5c31f244ef3718121a7937435c06f26b44f8eb5a1171b7c38352a71f0aea",
+  "research_provenance": "Historical category research remains fact-v17 evidence checked 2026-09-27; v19 comparison is label/record/financial coverage only.",
+  "rows": 4561,
+  "records": 37728,
+  "eligible_net_sales": "626946741.810000",
+  "first_rows_covering_80_percent_positive_sales": 442,
+  "category_counts": {
+    "medicine": 2161,
+    "medical_equipment": 150,
+    "medical_supply": 631,
+    "unclassified": 1421,
+    "non_medical": 198
+  },
+  "status_counts": {
+    "category_status": {
+      "proposed": 3131,
+      "needs_review": 1430
+    },
+    "identity_status": {
+      "needs_review": 4561
+    },
+    "item_kind_status": {
+      "proposed": 3327,
+      "needs_review": 1234
+    },
+    "unit_status": {
+      "needs_review": 4561
+    },
+    "forecast_status": {
+      "needs_review": 4561
+    },
+    "mapping_status": {
+      "proposed": 4561
+    }
+  },
+  "literal_attribute_counts": {
+    "concentration": 666,
+    "container_size": 516,
+    "strength": 1316,
+    "packaging_unit": 155,
+    "pack_count": 52,
+    "bundle_specification": 4,
+    "contained_unit": 5
+  },
+  "warning_counts": {
+    "sellable_packaging_unknown": 4406,
+    "pack_count_unknown": 4509,
+    "contained_unit_unknown": 4556,
+    "net_mass_container_requires_review": 20,
+    "combination_concentration_requires_review": 27,
+    "gauge_not_mass_strength": 12,
+    "ambiguous_fraction_or_missing_ratio_unit": 4,
+    "service_keyword_requires_review": 7,
+    "bundle_contents_require_review": 1,
+    "roll_by_is_not_packaging": 1,
+    "ambiguous_options_or_assortment": 8,
+    "multiple_container_sizes_require_review": 4,
+    "multipack_or_dimension_requires_review": 3,
+    "marketing_percentage_not_concentration": 1
+  },
+  "checks": {
+    "current_version_19_complete_alias_coverage": "PASS",
+    "every_alias_record_financial_and_adjusted_count_matches_research_seed": "PASS",
+    "schema_and_catalog_validation": "PASS",
+    "no_approvals_or_sku_assignments_or_forecast_eligibility": "PASS"
+  },
+  "cloud_writes": false
+}

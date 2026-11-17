@@ -1,0 +1,220 @@
+# Product catalog and resolution contract
+
+## Confirmed BUPIRIGHT unit pilot and baseline review — 27 October 2026
+
+[Source-bound investigation and executed baselines](../outputs/bupiright_lineage_20261027/README.md)
+reconcile 405 discovery records and 53 controls. Adrian explicitly confirmed that
+BUPIRIGHT and BUPIRIGHT 5MG/ML 0.5% IN 8% 4ML are the same 4 mL product, billed as
+one ampoule / box of one. The scoped HOSPITAL research candidate conserves 50
+records, 35 observed months and 1,526 signed recorded ampoules; the recent window
+has 18 contiguous months. Other labels/packs and delivery geography are excluded
+from this confirmation. Thirteen records retain unreviewed-export status.
+Four predeclared baselines yield 40 retrospective predictions, six lead-one and
+four lead-three targets per method. Seasonal naive has the lowest observed WAPE
+(31.6% / 30.0%), without method selection or seasonal/operational accuracy claims.
+Fourteen tests, separate source/count/money/unit/price/baseline reconstruction and
+backend script types pass. No source/warehouse/master/runtime change, learned fit
+or operational release; historical issue-time revisions were not reconstructed.
+Next engineering connects this bounded candidate comparison through the controlled
+Gold research contract; retain short-history/channel/source-quality limits and
+reuse the user's unit confirmation. Original territorial SO3 remains open.
+
+## Medicine pilot evidence trace — 27 October 2026
+
+[Current original-source screening](../outputs/original_medicine_screen_20261027/README.md)
+matches prior unit-review records by exact label and the stored 2026 company
+table by exact whole-label/printed-brand tokens. Presentation IDs preserve page/
+table/row positions. This supplies review leads for current labels, not source
+strength identity, historical billing units, alias equivalence or conversion.
+Current Gold unit-approval flags remain zero. The earlier TRIVASC inferred-box
+interpretation is reused only for its original Quezon/2021–June 2023 price scope;
+the shorter label remains distinct. No master/category/identity/unit decision is
+changed by this analysis. Next source-backed mapping must retain exact transactions,
+time/presentation evidence, unknowns and independent geography/model boundaries.
+
+## Expanded corrected-source category acceptance — 26 October 2026
+
+Adrian delegated category-only acceptance after reviewing the exact proposed scope.
+The new isolated accepted package covers all 5,694 aliases: 4,819 known categories
+and 875 explicit Unclassified dispositions. It records no identity, unit, item-kind,
+forecast or business-release approval. The existing shared master below remains
+unchanged until a separately verified current-source deployment. Use
+[the accepted-package steps](../databricks_updated/CATEGORY_ACCEPTANCE_NEXT.md)
+and Current State for its candidate staging status; earlier fact19 publication
+contracts must not be reused unchanged for the expanded corrected-source catalog.
+
+Catalog implementation prepared 27 September 2026; category reporting accepted
+locally under Adrian's instruction on 8 October 2026. There are 1,584 supported
+known classifications and 2,977 explicit Unclassified dispositions. Category
+acceptance no longer depends on completing SKU/unit/forecast review. Unclassified
+remains unresolved underlying classification, while sales stay in financial totals.
+
+The four Locaine/Eurocaine/Sanoxin labels are accepted as medicine; the 14 nebulizer
+kit labels are accepted as supplies/accessories. Skin stapler/autoclave tape and
+other reviewed subtype errors are corrected. Exact per-label evidence and actual
+recorder/date are bound in [category_acceptance.json](../databricks_updated/medshield_project/references/category_acceptance.json).
+Both copies are 4,755,483 bytes, SHA-256 `2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29`. See [review and independent validation](../outputs/category_acceptance_20261008/README.md).
+No cloud writes, SKU/unit/forecast approvals or CEO release signoff were performed.
+Existing financial decisions remain in DESCRIPTIVE_PUBLICATION_ACCEPTANCE.md.
+
+## Independent dimensions
+
+| Dimension | Contract |
+|---|---|
+| Display category | Medical, Non-Medical, Unclassified; only approved category values are displayed as classified. Medical retains medicine, medical_supply and medical_equipment subtypes. |
+| Sellable identity | `canonical_sku`, canonical title, brand/manufacturer/model, literal strength/concentration/form/container, package, pack count, contained unit and bundle specification. Identity approval is separate from category. |
+| Item kind | physical_product, service, unknown. Medical equipment repair may be a Medical service. Service revenue stays in financial totals; verified services have no physical demand quantity. |
+| Transaction evidence | original_source_detail, adjusted_estimated_source, independently_verified_detail with source-record and source-file lineage. File-level adjusted provenance does not assert that each row was individually substituted. |
+
+`databricks_updated/medshield_reference_csv/product_master_review.csv` is the sole
+canonical master in the current workspace snapshot. The former preparation and
+deployment copies in `databricks/` remain historical evidence. The master contains **4,561 accepted category
+reporting dispositions**, covering all current fact19 normalized source aliases.
+Documentary and literal product-type evidence supports accepted known categories;
+unsupported cases are explicitly Unclassified. Historical identity, sales unit,
+item kind and forecast statuses remain pending; forecast eligibility is false.
+Category evidence does not supply historical supplier verification.
+See the [practical review guide](PRODUCT_MASTER_REVIEW_GUIDE.md) before editing or
+uploading the master. `mapping_status` remains a legacy administrative field and
+cannot confer category, identity, unit or forecast approval.
+
+The populated master is local preparation, not the deployed warehouse catalog.
+Fact version 19 still records the earlier header-only master checksum. A local
+master-checksum mismatch in publication-readiness is expected until a newly
+prepared catalog publication deploys these exact bytes and passes fresh checks.
+Keep the existing receipts unchanged; they describe their original input versions.
+Hash-bound paths inside historical publication descriptors retain their original
+`databricks/` identities; they do not designate the main workspace folder.
+
+The separate `transaction_evidence_review.csv` is keyed by existing source-record
+ID and source-file SHA-256. A verification requires explicit identity-and-quantity
+scope, evidence reference, reviewer and date. It cannot be inferred from catalog
+approval. It is header-only. Independently verified detail retains the original
+adjusted-source flag and records the new supporting lineage. No verification is
+supplied or invented by this implementation.
+
+## Resolution and validation
+
+The [product identity and pricing review rules](PRODUCT_REVIEW_RULES.md) refine
+local literal proposals and scan all version-17 transactions. Price and customer
+negotiation remain transaction attributes. Package/count/strength/model differences
+remain identity boundaries, and title clues cannot supply an approval. Local review
+uses `product_review_v3_context_literal_pricing`; deployed Gold resolution remains
+`catalog_v1_independent_evidence`. Preparation output never supplies dashboard data.
+
+The 7 October [business analytics review](../outputs/business_analytics_review_20261007/REVIEW.md)
+checks all 4,561 drafts and corrects nine food/cleaning net-mass clues plus one
+specimen-cup marking inference. Nonmedical gram weights belong to proposed
+container/net-mass context rather than pharmaceutical strength. Category context
+helps literal extraction but supplies no approval. The master saved for that review was
+4,746,906 bytes, SHA-256
+`21ba704cb2fb3b39dab214f5e6ac7d3689b17967946889b3f838eb353f1f183c`.
+Both copies match; historical research evidence and every business decision remain
+unchanged. See the [final independent CSV checks](../outputs/business_analytics_review_20261007/product_final_qa.md).
+
+1. Exact normalized reviewed alias is the first matching route. Existing data has
+   no populated verified source identifier. Case/spacing normalization is automatic.
+2. Approved identity requires a stable SKU, title and stable representative alias,
+   reviewed item kind, and explicit attributes (reviewed N/A where inapplicable).
+   Physical products require reviewed sellable packaging, pack count and source unit.
+3. SKU aliases must share the same identity, packaging and approved metadata contract.
+   Duplicate mapping keys, conflicting SKU contracts, missing evidence, or duplicate
+   transaction-verification keys fail before joining. Gold asserts one policy row
+   per label and exactly one fact per original source record.
+4. Formatting rules propose candidates only. Unknown attributes never match as
+   wildcards. Preserve decimal points, concentrations, denominator volumes, brands,
+   models, gauges, capacity, package counts and bundle contents. `#` alone is not a
+   contract detector. CHRISTINE and other descriptors are retained.
+5. Verified reporting ID is `SKU:<canonical_sku>`; otherwise it is
+   `RAW:<existing product_key>`. Display names never create permanent SKU identities.
+   Catalog alias grouping is not transaction deduplication.
+
+Gold catalog policy is `catalog_v1_independent_evidence`; Gold transformation is
+`sales_restart_gold_v7_independent_catalog`. Resolution happens after unchanged
+Silver reconciliation. The prepared migration and validation use the shared
+`references/catalog_publication.json` contract against **fact version 19**.
+The category-only descriptor binds seven mutable reporting/publication fields and
+137 immutable fields, including all demand gates. Its exact per-label receipt and
+fresh predecessor capture are shared by Gold, package and gateway validation;
+prior dated packages retain their old master hashes. Preserve source-record,
+financial-value and eligibility assertions. The canonical reporting dimension preserves original aliases and
+raw product keys.
+
+Approved medical demand additionally requires physical item kind, verified identity,
+separately approved forecast eligibility and observed/independently verified detail.
+Existing low-trust/backfill restrictions remain. The existing medical-supply scope
+switch stays false; medical equipment is categorized but not enabled as medicine demand.
+
+## API, quantities and exports
+
+`/api/products`, `/api/sales/sectors`, and `/api/sales/heatmap` accept the case-sensitive
+`category=All|Medical|Non-Medical|Unclassified` parameter. Repeated/structured values
+are rejected. Metadata and amounts come from the same version-pinned Databricks fact.
+Legacy version 16 reports raw stable keys, unknown identity and missing packaging;
+it does not read local review files as a substitute.
+
+Products apply category selection before positive-sales ABC/Pareto denominators and
+Top-N afterwards. Signed returns remain separate and are included in net revenue.
+Company financial totals include all valid categories and services. Unresolved
+coverage/revenue and original aliases remain visible. The 442-label review cohort
+is neither approved ABC nor verified medical market share.
+
+Heatmap selects one stable product group and separately exposes original-source,
+adjusted-source and independently verified quantities. Missing observations stay
+null; recorded zero stays zero. No pack conversions are inferred. Unknown source
+units are labeled as such, not interpreted as equivalent doses/packs. Sector
+financial views do not add incompatible product quantities. Catalog fields,
+provenance and pinned release metadata accompany product/heatmap exports.
+
+Databricks reads are bounded pages with deterministic ordering and a complete-record
+count check to avoid INLINE byte-limit truncation. A failed or incomplete query
+returns unavailable, never local or demonstration data.
+
+## JSON interchange
+
+`product_catalog.interchange` emits `raw_title`, `canonical_title`, `category`,
+`packaging_unit`, `canonical_group_id`, `is_duplicate`, and `notes`, plus richer
+`internal` fields. The narrow package enum is Piece/Box/Pack/Unknown. For unresolved
+rows canonical_title is display cleanup. `is_duplicate` means a reviewed alias
+relative to an explicitly stable representative, independent of input order. Never
+delete sales records using it. `catalog_interchange.py input.json new-proposals.csv` imports to a new, separate proposal CSV (never overwriting a master). `import_proposals` ignores supplied approval flags,
+canonical IDs and duplicate flags and produces unapproved review rows.
+
+## Evidence and remaining decisions
+
+The [3 October complete version-17 product/pricing scan](../outputs/product_sales_rules/2026-10-02T21-00-51-469Z/sealed-review/README.md)
+remains the product/pricing rule-preparation evidence: 37,728 records, 4,561 groups and
+4,985 original titles. The improved parser and price review preserve every extracted
+source field and reconcile warehouse months and annual financial totals. There are
+1,609 groups with multiple recorded positive original-source CP values and zero
+validated unit-price comparison records. Pricing causes remain unknown and all
+product approvals remain pending. Earlier receipts below remain historical evidence.
+
+The [7 October version-19 label extraction](../outputs/product_master_population_20261007/current_labels.json)
+adds current label coverage for populating the review master. It does not replace
+the original version-17 research provenance, establish a new full-transaction
+pricing review, or approve a category, SKU, unit or forecast.
+
+- [Complete local review](../outputs/product_catalog_implementation/2026-09-27T07-51-00-423Z/README.md): 37,728 records, 4,561 labels, 4,985 original titles, 50 formatting families, 442-label priority cohort.
+- [Review queue](../outputs/product_catalog_implementation/2026-09-27T07-51-00-423Z/review.json): candidates, reasons, source-record IDs, positive/net/return amounts and proposed attributes.
+- [Exact reconciliation](../outputs/product_catalog_implementation/2026-09-27T07-51-00-423Z/reconciliation.json): every source field and financial eligibility unchanged; monthly amounts and category partitions match.
+
+All identities remain unresolved; eligible affected revenue is ₱626,946,741.81.
+Obtain product documents and packaging evidence, review fetal/patient monitor
+proposals, concentration differences, services, formatting families and high-value
+labels. The old nonmedical reference remains a suggestion, not approval or proof
+that “monitor” means IT equipment. Supply category, identity, unit, forecast and
+transaction evidence separately. Future uploads remain unfinished: DR numbers alone
+do not provide stable line-item identity.
+
+See the [review guide](PRODUCT_MASTER_REVIEW_GUIDE.md) and
+[operator deployment and rollback](CATALOG_DEPLOYMENT.md). The deployment document
+describes the historical 16-to-17 migration; its baseline, package and receipts
+must be refreshed before publishing the newly populated master from version 19.
+
+
+Read-only live verification: [version-16 API/catalog receipt](../outputs/catalog_validation/2026-09-27T08-19-08-947Z/evidence.json).
+All 37,728 records and 4,561 stable raw groups reconcile through the API; 98 observed
+months retain their amounts. This proves compatibility with the retained release,
+not execution of the prepared v7 notebooks. Original/adjusted/verified quantity
+strata and transaction lineage are retained in exports.

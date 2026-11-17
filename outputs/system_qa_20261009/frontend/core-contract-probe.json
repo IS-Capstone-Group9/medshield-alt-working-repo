@@ -1,0 +1,40 @@
+{
+  "executed_at": "2026-10-09T02:12:05.338Z",
+  "fixture_only": true,
+  "expected_basis": "ProductPoint declares revenue and income nullable; BUSINESS_DEFINITIONS distinguishes missing profit from zero and allows descriptive revenue independently.",
+  "cases": [
+    {
+      "name": "finite core control",
+      "expected": "accepted",
+      "actual": "accepted",
+      "pass": true
+    },
+    {
+      "name": "product revenue present and gross profit unavailable",
+      "expected": "accepted",
+      "actual": "rejected",
+      "error": "Databricks dashboard data is incomplete: product",
+      "pass": false
+    },
+    {
+      "name": "product net sales unavailable",
+      "expected": "accepted",
+      "actual": "rejected",
+      "error": "Databricks dashboard data is incomplete: product",
+      "pass": false
+    },
+    {
+      "name": "monthly missing revenue and profit slot",
+      "expected": "accepted",
+      "actual": "accepted",
+      "pass": true
+    },
+    {
+      "name": "non Databricks contract",
+      "expected": "rejected",
+      "actual": "rejected",
+      "error": "The gateway did not return a live Databricks data contract",
+      "pass": true
+    }
+  ]
+}

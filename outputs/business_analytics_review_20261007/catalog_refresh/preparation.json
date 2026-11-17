@@ -1,0 +1,220 @@
+{
+  "before_sha256": "507fe990defc28f41c13eba4526463bbc960783dd5ad82ef209bb5babf509775",
+  "proposal_policy": "product_review_v3_context_literal_pricing",
+  "rows": 4561,
+  "changed_attribute_or_context_labels": 10,
+  "changes": [
+    {
+      "raw_product": "ANMUM MATERNA PLAIN 180G X 24",
+      "changes": {
+        "strength": {
+          "before": "180G",
+          "after": ""
+        },
+        "container_size": {
+          "before": "",
+          "after": "180G"
+        }
+      },
+      "warnings": [
+        "net_mass_container_requires_review",
+        "sellable_packaging_unknown",
+        "pack_count_unknown",
+        "contained_unit_unknown"
+      ],
+      "item_kind_proposal": "unknown"
+    },
+    {
+      "raw_product": "LYSOL 340G",
+      "changes": {
+        "strength": {
+          "before": "340G",
+          "after": ""
+        },
+        "container_size": {
+          "before": "",
+          "after": "340G"
+        }
+      },
+      "warnings": [
+        "net_mass_container_requires_review",
+        "sellable_packaging_unknown",
+        "pack_count_unknown",
+        "contained_unit_unknown"
+      ],
+      "item_kind_proposal": "unknown"
+    },
+    {
+      "raw_product": "ANMUM MATERNA CHOCO 180G X 24",
+      "changes": {
+        "strength": {
+          "before": "180G",
+          "after": ""
+        },
+        "container_size": {
+          "before": "",
+          "after": "180G"
+        }
+      },
+      "warnings": [
+        "net_mass_container_requires_review",
+        "sellable_packaging_unknown",
+        "pack_count_unknown",
+        "contained_unit_unknown"
+      ],
+      "item_kind_proposal": "unknown"
+    },
+    {
+      "raw_product": "ANMUM MATERNA PLAIN 180G",
+      "changes": {
+        "strength": {
+          "before": "180G",
+          "after": ""
+        },
+        "container_size": {
+          "before": "",
+          "after": "180G"
+        }
+      },
+      "warnings": [
+        "net_mass_container_requires_review",
+        "sellable_packaging_unknown",
+        "pack_count_unknown",
+        "contained_unit_unknown"
+      ],
+      "item_kind_proposal": "unknown"
+    },
+    {
+      "raw_product": "LYSOL 510G",
+      "changes": {
+        "strength": {
+          "before": "510G",
+          "after": ""
+        },
+        "container_size": {
+          "before": "",
+          "after": "510G"
+        }
+      },
+      "warnings": [
+        "net_mass_container_requires_review",
+        "sellable_packaging_unknown",
+        "pack_count_unknown",
+        "contained_unit_unknown"
+      ],
+      "item_kind_proposal": "unknown"
+    },
+    {
+      "raw_product": "COFFEE GREAT TASTE PREMIUM 25G",
+      "changes": {
+        "strength": {
+          "before": "25G",
+          "after": ""
+        },
+        "container_size": {
+          "before": "",
+          "after": "25G"
+        }
+      },
+      "warnings": [
+        "net_mass_container_requires_review",
+        "sellable_packaging_unknown",
+        "pack_count_unknown",
+        "contained_unit_unknown"
+      ],
+      "item_kind_proposal": "unknown"
+    },
+    {
+      "raw_product": "SPECIMEN CUP WITH CALIBRATION",
+      "changes": {},
+      "warnings": [
+        "sellable_packaging_unknown",
+        "pack_count_unknown",
+        "contained_unit_unknown",
+        "calibrated_container_markings_require_review"
+      ],
+      "item_kind_proposal": "unknown"
+    },
+    {
+      "raw_product": "DISINFECTANT SPRAY 170G 227ML (LYSOL)",
+      "changes": {
+        "strength": {
+          "before": "170G",
+          "after": ""
+        },
+        "container_size": {
+          "before": "227ML",
+          "after": "227ML / 170G"
+        }
+      },
+      "warnings": [
+        "net_mass_container_requires_review",
+        "multiple_container_sizes_require_review",
+        "sellable_packaging_unknown",
+        "pack_count_unknown",
+        "contained_unit_unknown",
+        "ambiguous_options_or_assortment"
+      ],
+      "item_kind_proposal": "unknown"
+    },
+    {
+      "raw_product": "DETERGENT POWDER 500G (PRIDE)",
+      "changes": {
+        "strength": {
+          "before": "500G",
+          "after": ""
+        },
+        "container_size": {
+          "before": "",
+          "after": "500G"
+        }
+      },
+      "warnings": [
+        "net_mass_container_requires_review",
+        "sellable_packaging_unknown",
+        "pack_count_unknown",
+        "contained_unit_unknown"
+      ],
+      "item_kind_proposal": "unknown"
+    },
+    {
+      "raw_product": "DETERGENT POWDER 500G (PRIDE) SOAP",
+      "changes": {
+        "strength": {
+          "before": "500G",
+          "after": ""
+        },
+        "container_size": {
+          "before": "",
+          "after": "500G"
+        }
+      },
+      "warnings": [
+        "net_mass_container_requires_review",
+        "sellable_packaging_unknown",
+        "pack_count_unknown",
+        "contained_unit_unknown"
+      ],
+      "item_kind_proposal": "unknown"
+    }
+  ],
+  "warning_counts": {
+    "sellable_packaging_unknown": 4406,
+    "pack_count_unknown": 4509,
+    "contained_unit_unknown": 4556,
+    "net_mass_container_requires_review": 29,
+    "combination_concentration_requires_review": 27,
+    "gauge_not_mass_strength": 12,
+    "ambiguous_fraction_or_missing_ratio_unit": 4,
+    "service_keyword_requires_review": 6,
+    "bundle_contents_require_review": 1,
+    "roll_by_is_not_packaging": 1,
+    "ambiguous_options_or_assortment": 9,
+    "multiple_container_sizes_require_review": 5,
+    "multipack_or_dimension_requires_review": 3,
+    "calibrated_container_markings_require_review": 1,
+    "marketing_percentage_not_concentration": 1
+  },
+  "cloud_writes": false,
+  "protected_fields": "All columns except literal attributes and generated review notes preserved exactly; all historical evidence_source bytes retained."
+}

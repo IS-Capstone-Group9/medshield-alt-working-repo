@@ -14,9 +14,7 @@ export default function Topbar({ title = 'Executive Overview', subtitle = 'Deman
           <div className="page-sub" id="topbar-sub">{subtitle}</div>
         </div>
       </div>
-      <div className="topbar-right">
-        <div className="topbar-badge"><div className="live-dot" /> Dataset loaded</div>
-      </div>
+      <div className="topbar-right" />
     </div>
   )
 }

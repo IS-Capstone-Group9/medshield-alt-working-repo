@@ -1,0 +1,281 @@
+{
+  "dataset_id": "sales_2017_2025_v1",
+  "generated_at": "2026-08-29T07:35:35.480571+00:00",
+  "analysis_period": {
+    "start_year": 2017,
+    "end_year": 2025
+  },
+  "publication_status": "candidate_blocked_pending_reviewer_approval",
+  "approved": false,
+  "source_files": [
+    {
+      "file_name": "medshield_data_2017.csv",
+      "source_year": 2017,
+      "sha256": "5c204c8717c4c7531fd05e1df9b48d8001f90d2f65ee46d216312cc01634da32",
+      "bytes": 740104,
+      "input_stage": "raw_tabular",
+      "extracted_rows": 5874,
+      "record_types": {
+        "source_total": 1,
+        "transaction_candidate": 5873
+      },
+      "headers": [
+        "dr_number",
+        "date_delivered",
+        "area",
+        "product",
+        "quantity",
+        "unit_cost",
+        "total_cost",
+        "discount",
+        "",
+        "quantity",
+        "trade_price_unit",
+        "total_trade_price",
+        "net_income"
+      ]
+    },
+    {
+      "file_name": "medshield_data_2018.csv",
+      "source_year": 2018,
+      "sha256": "7d5548a824d871ae4ce734a0af613c9a556d08c663471c1bd36bed9090e0e5ef",
+      "bytes": 499083,
+      "input_stage": "raw_tabular",
+      "extracted_rows": 4357,
+      "record_types": {
+        "source_total": 1,
+        "transaction_candidate": 4356
+      },
+      "headers": [
+        "dr_number",
+        "date_delivered",
+        "area",
+        "product",
+        "quantity",
+        "unit_cost",
+        "total_cost",
+        "discount",
+        "net_cost",
+        "trade_price_unit",
+        "total_trade_price",
+        "net_income",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "file_name": "medshield_data_2019.csv",
+      "source_year": 2019,
+      "sha256": "9021a3d4e6f878dce83e3c7d444f5354b93d7b60fe6f0ef9d5d7459a25964792",
+      "bytes": 1260368,
+      "input_stage": "raw_tabular",
+      "extracted_rows": 10317,
+      "record_types": {
+        "source_total": 1,
+        "transaction_candidate": 10316
+      },
+      "headers": [
+        "dr_number",
+        "date_delivered",
+        "area",
+        "product",
+        "quantity",
+        "unit_cost",
+        "total_cost",
+        "discount",
+        "total_cost",
+        "trade_price_unit",
+        "total_trade_price",
+        "net_income",
+        ""
+      ]
+    },
+    {
+      "file_name": "medshield_data_2020.csv",
+      "source_year": 2020,
+      "sha256": "54e88fb6d886a4060e3f75c46f58eb7288abd4f4deeca840f7fc287e5011ca5b",
+      "bytes": 491406,
+      "input_stage": "raw_tabular",
+      "extracted_rows": 3988,
+      "record_types": {
+        "source_total": 1,
+        "transaction_candidate": 3987
+      },
+      "headers": [
+        "area",
+        "dr_number",
+        "date_delivered",
+        "product",
+        "quantity",
+        "unit_cost",
+        "total_cost",
+        "discount",
+        "net_cost",
+        "trade_price_unit",
+        "total_trade_price",
+        "net_income"
+      ]
+    },
+    {
+      "file_name": "medshield_data_2021.csv",
+      "source_year": 2021,
+      "sha256": "c1cc109b73a0b073a051cd2fbdd7df2e0c2c8ea52a98be8b8c443b0388d12477",
+      "bytes": 483905,
+      "input_stage": "raw_tabular",
+      "extracted_rows": 3416,
+      "record_types": {
+        "source_total": 1,
+        "transaction_candidate": 3415
+      },
+      "headers": [
+        "area",
+        "dr_number",
+        "date_delivered",
+        "product",
+        "quantity",
+        "unit_cost",
+        "total_cost",
+        "discount",
+        "net_cost",
+        "trade_price_unit",
+        "total_trade_price",
+        "net_income",
+        "margin_pct"
+      ]
+    },
+    {
+      "file_name": "medshield_data_2022.csv",
+      "source_year": 2022,
+      "sha256": "64be9bb4042b6fe2142da30592685357839335af3e90b160c517ef601783653e",
+      "bytes": 547774,
+      "input_stage": "raw_tabular",
+      "extracted_rows": 4029,
+      "record_types": {
+        "reconciliation_summary": 2,
+        "source_total": 1,
+        "transaction_candidate": 4026
+      },
+      "headers": [
+        "area",
+        "dr_number",
+        "date_delivered",
+        "product",
+        "quantity",
+        "unit_cost",
+        "total_cost",
+        "discount",
+        "net_cost",
+        "trade_price_unit",
+        "total_trade_price",
+        "net_income",
+        "margin_pct"
+      ]
+    },
+    {
+      "file_name": "medshield_data_2023.csv",
+      "source_year": 2023,
+      "sha256": "34ce549485f336a78be983a1af4e120b8511585d555c61b3845849511350bf69",
+      "bytes": 785610,
+      "input_stage": "raw_tabular",
+      "extracted_rows": 5890,
+      "record_types": {
+        "source_total": 1,
+        "transaction_candidate": 5889
+      },
+      "headers": [
+        "area",
+        "dr_number",
+        "date_delivered",
+        "product",
+        "quantity",
+        "unit_cost",
+        "total_cost",
+        "discount",
+        "net_cost",
+        "trade_price_unit",
+        "total_trade_price",
+        "net_income",
+        "margin_pct"
+      ]
+    },
+    {
+      "file_name": "medshield_data_2024.csv",
+      "source_year": 2024,
+      "sha256": "2cc3ed2f0c959e32b9c6a1c1f0ff4020a7b30c9e36a53fa150c41e9f4b9d1ac5",
+      "bytes": 447892,
+      "input_stage": "raw_tabular",
+      "extracted_rows": 2945,
+      "record_types": {
+        "orphan_product": 1,
+        "source_total": 1,
+        "transaction_candidate": 2943
+      },
+      "headers": [
+        "area",
+        "dr_number",
+        "date_delivered",
+        "product",
+        "quantity",
+        "unit_cost",
+        "total_cost",
+        "discount",
+        "net_cost",
+        "trade_price_unit",
+        "total_trade_price",
+        "net_income",
+        "margin_pct"
+      ]
+    },
+    {
+      "file_name": "medshield_data_2025.csv",
+      "source_year": 2025,
+      "sha256": "2d0b4ee7cbe1f9a09ac4d46f419573a31d96f4979b53e16ad5c19295a0ec79d4",
+      "bytes": 537017,
+      "input_stage": "raw_tabular",
+      "extracted_rows": 4138,
+      "record_types": {
+        "source_total": 1,
+        "transaction_candidate": 4137
+      },
+      "headers": [
+        "area",
+        "dr_number",
+        "date_delivered",
+        "product",
+        "quantity",
+        "unit_cost",
+        "total_cost",
+        "discount",
+        "net_cost",
+        "trade_price_unit",
+        "total_trade_price",
+        "net_income",
+        "margin_pct"
+      ]
+    }
+  ],
+  "row_policy": {
+    "business_reporting": "valid or warning transaction rows, excluding duplicate occurrences",
+    "forecasting": "valid, geographic, approved-product rows only; downstream master-data approval required",
+    "quarantine": "rejected rows, duplicate occurrences, source totals, reconciliation summaries, and orphan products"
+  },
+  "trust_grades": {
+    "2017": "excluded",
+    "2018": "usable_with_limitations",
+    "2019": "usable_with_limitations",
+    "2020": "usable_with_limitations",
+    "2021": "usable_with_limitations",
+    "2022": "usable_with_limitations",
+    "2023": "usable_with_limitations",
+    "2024": "usable_with_limitations",
+    "2025": "usable_with_limitations"
+  },
+  "candidate_artifact": "sales_2017_2025_v1_candidate.json.gz",
+  "certification_report": "sales_2017_2025_v1_reconciliation.json"
+}

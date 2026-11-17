@@ -1,0 +1,383 @@
+{
+ "rules_sha256": "a559a129811f7d0a88005dbb092f5e1df8f42f3e9eae11b1a62a68301b63185d",
+ "mapping_sha256": "47e709adbde9b10388b83bc5c2eb851577b1c6c4cf29919b6c69d4968cdf925b",
+ "windows": {
+  "current": [
+   "2024-10",
+   "2026-09"
+  ],
+  "earlier": [
+   "2022-10",
+   "2024-09"
+  ]
+ },
+ "profile": [
+  {
+   "category": "NOT_CLASSIFIED",
+   "share_all_sales_pct": 35.7,
+   "current_net_php": 82585985,
+   "large_share_pct": 44.6,
+   "routine_cv": 0.69,
+   "active_months": 24,
+   "planning_class": "UNEVEN",
+   "mixed": true,
+   "plan": "Reorder with a larger buffer",
+   "new_product_share_pct": 76.3,
+   "seasonal": "not tested",
+   "disease_link": "not tested",
+   "routine_wape_current_pct": 39.5
+  },
+  {
+   "category": "ANTIBACTERIAL",
+   "share_all_sales_pct": 16.9,
+   "current_net_php": 33709844,
+   "large_share_pct": 61.7,
+   "routine_cv": 0.64,
+   "active_months": 24,
+   "planning_class": "LARGE_ORDER",
+   "mixed": false,
+   "plan": "Plan for readiness; do not forecast",
+   "new_product_share_pct": 27.9,
+   "seasonal": false,
+   "disease_link": false,
+   "routine_wape_current_pct": 54.3
+  },
+  {
+   "category": "VACCINE_IMMUNE_SERUM",
+   "share_all_sales_pct": 10.3,
+   "current_net_php": 48588703,
+   "large_share_pct": 65.3,
+   "routine_cv": 1.36,
+   "active_months": 17,
+   "planning_class": "LARGE_ORDER",
+   "mixed": false,
+   "plan": "Plan for readiness; do not forecast",
+   "new_product_share_pct": 11.0,
+   "seasonal": false,
+   "disease_link": false,
+   "routine_wape_current_pct": 63.7
+  },
+  {
+   "category": "OBSTETRIC",
+   "share_all_sales_pct": 4.4,
+   "current_net_php": 5161584,
+   "large_share_pct": 33.3,
+   "routine_cv": 0.82,
+   "active_months": 24,
+   "planning_class": "UNEVEN",
+   "mixed": true,
+   "plan": "Reorder with a larger buffer",
+   "new_product_share_pct": 50.1,
+   "seasonal": false,
+   "disease_link": "not tested",
+   "routine_wape_current_pct": 60.5
+  },
+  {
+   "category": "CRITICAL_CARE",
+   "share_all_sales_pct": 3.4,
+   "current_net_php": 12987550,
+   "large_share_pct": 85.7,
+   "routine_cv": 1.08,
+   "active_months": 23,
+   "planning_class": "LARGE_ORDER",
+   "mixed": false,
+   "plan": "Plan for readiness; do not forecast",
+   "new_product_share_pct": 90.2,
+   "seasonal": false,
+   "disease_link": false,
+   "routine_wape_current_pct": 78.3
+  },
+  {
+   "category": "GI_ACID_ANTISPASMODIC",
+   "share_all_sales_pct": 3.1,
+   "current_net_php": 5907190,
+   "large_share_pct": 34.7,
+   "routine_cv": 1.46,
+   "active_months": 22,
+   "planning_class": "ERRATIC",
+   "mixed": true,
+   "plan": "Order on demand",
+   "new_product_share_pct": 23.1,
+   "seasonal": false,
+   "disease_link": "not tested",
+   "routine_wape_current_pct": 93.2
+  },
+  {
+   "category": "CARDIOVASCULAR",
+   "share_all_sales_pct": 2.8,
+   "current_net_php": 3395767,
+   "large_share_pct": 1.8,
+   "routine_cv": 0.5,
+   "active_months": 24,
+   "planning_class": "UNEVEN",
+   "mixed": false,
+   "plan": "Reorder with a larger buffer",
+   "new_product_share_pct": 0.0,
+   "seasonal": false,
+   "disease_link": "not tested",
+   "routine_wape_current_pct": 45.1
+  },
+  {
+   "category": "VITAMINS_MINERALS",
+   "share_all_sales_pct": 2.6,
+   "current_net_php": 3171076,
+   "large_share_pct": 30.7,
+   "routine_cv": 0.31,
+   "active_months": 24,
+   "planning_class": "STEADY",
+   "mixed": true,
+   "plan": "Reorder from the 6-month average",
+   "new_product_share_pct": 0.0,
+   "seasonal": false,
+   "disease_link": "not tested",
+   "routine_wape_current_pct": 26.4
+  },
+  {
+   "category": "ANAESTHETIC",
+   "share_all_sales_pct": 2.5,
+   "current_net_php": 1854752,
+   "large_share_pct": 45.0,
+   "routine_cv": 1.72,
+   "active_months": 23,
+   "planning_class": "ERRATIC",
+   "mixed": true,
+   "plan": "Order on demand",
+   "new_product_share_pct": 0.0,
+   "seasonal": false,
+   "disease_link": "not tested",
+   "routine_wape_current_pct": 81.6
+  },
+  {
+   "category": "MEDICAL_SUPPLY",
+   "share_all_sales_pct": 2.3,
+   "current_net_php": 9428623,
+   "large_share_pct": 45.0,
+   "routine_cv": 2.02,
+   "active_months": 16,
+   "planning_class": "ERRATIC",
+   "mixed": true,
+   "plan": "Order on demand",
+   "new_product_share_pct": 0.0,
+   "seasonal": false,
+   "disease_link": "not tested",
+   "routine_wape_current_pct": 127.2
+  },
+  {
+   "category": "ANTICOAGULANT",
+   "share_all_sales_pct": 2.2,
+   "current_net_php": 11367111,
+   "large_share_pct": 90.6,
+   "routine_cv": 1.98,
+   "active_months": 9,
+   "planning_class": "LARGE_ORDER",
+   "mixed": false,
+   "plan": "Plan for readiness; do not forecast",
+   "new_product_share_pct": 97.2,
+   "seasonal": false,
+   "disease_link": false,
+   "routine_wape_current_pct": 141.2
+  },
+  {
+   "category": "NON_MEDICAL",
+   "share_all_sales_pct": 1.6,
+   "current_net_php": 3864490,
+   "large_share_pct": 97.9,
+   "routine_cv": 4.8,
+   "active_months": 1,
+   "planning_class": "LARGE_ORDER",
+   "mixed": false,
+   "plan": "Plan for readiness; do not forecast",
+   "new_product_share_pct": 60.7,
+   "seasonal": false,
+   "disease_link": "not tested",
+   "routine_wape_current_pct": 402.7
+  },
+  {
+   "category": "RENAL_ANEMIA",
+   "share_all_sales_pct": 1.4,
+   "current_net_php": 1194837,
+   "large_share_pct": 0.0,
+   "routine_cv": 4.52,
+   "active_months": 3,
+   "planning_class": "ERRATIC",
+   "mixed": false,
+   "plan": "Order on demand",
+   "new_product_share_pct": 0.0,
+   "seasonal": false,
+   "disease_link": "not tested",
+   "routine_wape_current_pct": 193.8
+  },
+  {
+   "category": "RESPIRATORY",
+   "share_all_sales_pct": 1.3,
+   "current_net_php": 4603686,
+   "large_share_pct": 59.3,
+   "routine_cv": 1.45,
+   "active_months": 24,
+   "planning_class": "LARGE_ORDER",
+   "mixed": false,
+   "plan": "Plan for readiness; do not forecast",
+   "new_product_share_pct": 66.5,
+   "seasonal": false,
+   "disease_link": false,
+   "routine_wape_current_pct": 85.1
+  },
+  {
+   "category": "ANALGESIC_ANTIPYRETIC",
+   "share_all_sales_pct": 1.2,
+   "current_net_php": 2135241,
+   "large_share_pct": 19.9,
+   "routine_cv": 0.41,
+   "active_months": 24,
+   "planning_class": "STEADY",
+   "mixed": false,
+   "plan": "Reorder from the 6-month average",
+   "new_product_share_pct": 0.0,
+   "seasonal": false,
+   "disease_link": false,
+   "routine_wape_current_pct": 35.0
+  },
+  {
+   "category": "ANTIPROTOZOAL",
+   "share_all_sales_pct": 0.9,
+   "current_net_php": 1393940,
+   "large_share_pct": 32.1,
+   "routine_cv": 1.08,
+   "active_months": 23,
+   "planning_class": "ERRATIC",
+   "mixed": true,
+   "plan": "Order on demand",
+   "new_product_share_pct": 0.0,
+   "seasonal": false,
+   "disease_link": false,
+   "routine_wape_current_pct": 70.3
+  },
+  {
+   "category": "CNS",
+   "share_all_sales_pct": 0.2,
+   "current_net_php": 1331830,
+   "large_share_pct": 95.8,
+   "routine_cv": 4.8,
+   "active_months": 1,
+   "planning_class": "LARGE_ORDER",
+   "mixed": false,
+   "plan": "Plan for readiness; do not forecast",
+   "new_product_share_pct": 100.0,
+   "seasonal": "not tested",
+   "disease_link": "not tested",
+   "routine_wape_current_pct": 150.0
+  }
+ ],
+ "check": {
+  "categories": 13,
+  "by_earlier_class": {
+   "STEADY": {
+    "categories": 1,
+    "median_wape_pct": 26.4
+   },
+   "UNEVEN": {
+    "categories": 5,
+    "median_wape_pct": 54.3
+   },
+   "ERRATIC": {
+    "categories": 5,
+    "median_wape_pct": 93.2
+   },
+   "LARGE_ORDER": {
+    "categories": 2,
+    "median_wape_pct": 79.9
+   }
+  },
+  "C1_forecastability_order": true,
+  "same_class": 7,
+  "stability_pct": 53.8,
+  "C2_stability": false,
+  "usable_planning_guide": false,
+  "detail": [
+   {
+    "category": "ANAESTHETIC",
+    "class_earlier": "LARGE_ORDER",
+    "class_current": "ERRATIC",
+    "routine_wape_current_pct": 81.6
+   },
+   {
+    "category": "ANALGESIC_ANTIPYRETIC",
+    "class_earlier": "UNEVEN",
+    "class_current": "STEADY",
+    "routine_wape_current_pct": 35.0
+   },
+   {
+    "category": "ANTIBACTERIAL",
+    "class_earlier": "UNEVEN",
+    "class_current": "LARGE_ORDER",
+    "routine_wape_current_pct": 54.3
+   },
+   {
+    "category": "ANTIPROTOZOAL",
+    "class_earlier": "ERRATIC",
+    "class_current": "ERRATIC",
+    "routine_wape_current_pct": 70.3
+   },
+   {
+    "category": "CARDIOVASCULAR",
+    "class_earlier": "UNEVEN",
+    "class_current": "UNEVEN",
+    "routine_wape_current_pct": 45.1
+   },
+   {
+    "category": "CRITICAL_CARE",
+    "class_earlier": "LARGE_ORDER",
+    "class_current": "LARGE_ORDER",
+    "routine_wape_current_pct": 78.3
+   },
+   {
+    "category": "GI_ACID_ANTISPASMODIC",
+    "class_earlier": "ERRATIC",
+    "class_current": "ERRATIC",
+    "routine_wape_current_pct": 93.2
+   },
+   {
+    "category": "MEDICAL_SUPPLY",
+    "class_earlier": "ERRATIC",
+    "class_current": "ERRATIC",
+    "routine_wape_current_pct": 127.2
+   },
+   {
+    "category": "NON_MEDICAL",
+    "class_earlier": "ERRATIC",
+    "class_current": "LARGE_ORDER",
+    "routine_wape_current_pct": 402.7
+   },
+   {
+    "category": "OBSTETRIC",
+    "class_earlier": "UNEVEN",
+    "class_current": "UNEVEN",
+    "routine_wape_current_pct": 60.5
+   },
+   {
+    "category": "RESPIRATORY",
+    "class_earlier": "UNEVEN",
+    "class_current": "LARGE_ORDER",
+    "routine_wape_current_pct": 85.1
+   },
+   {
+    "category": "VACCINE_IMMUNE_SERUM",
+    "class_earlier": "ERRATIC",
+    "class_current": "LARGE_ORDER",
+    "routine_wape_current_pct": 63.7
+   },
+   {
+    "category": "VITAMINS_MINERALS",
+    "class_earlier": "STEADY",
+    "class_current": "STEADY",
+    "routine_wape_current_pct": 26.4
+   }
+  ]
+ },
+ "current_sales_by_class_pct": {
+  "LARGE_ORDER": 50.0,
+  "UNEVEN": 39.2,
+  "ERRATIC": 8.5,
+  "STEADY": 2.3
+ }
+}

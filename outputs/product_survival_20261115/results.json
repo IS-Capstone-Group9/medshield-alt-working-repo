@@ -1,0 +1,207 @@
+{
+ "rules_sha256": "c180dcd6f1a17831e6ec7dc2d3c2bd37572fdb4cc3f0ffd1205e7082a53519fa",
+ "new_families": 1876,
+ "by_cohort": {
+  "2020": {
+   "families": 246,
+   "y1_net": 13507623,
+   "n_y2": 246,
+   "survival_y2": 0.337,
+   "value_retention_y2": 0.525,
+   "value_weighted_survival_y2": 0.426,
+   "one_month_products": 0.484,
+   "n_y3": 246,
+   "survival_y3": 0.285,
+   "value_retention_y3": 0.446
+  },
+  "2021": {
+   "families": 221,
+   "y1_net": 39855118,
+   "n_y2": 221,
+   "survival_y2": 0.312,
+   "value_retention_y2": 0.079,
+   "value_weighted_survival_y2": 0.212,
+   "one_month_products": 0.475,
+   "n_y3": 221,
+   "survival_y3": 0.154,
+   "value_retention_y3": 0.035
+  },
+  "2022": {
+   "families": 299,
+   "y1_net": 20070968,
+   "n_y2": 299,
+   "survival_y2": 0.237,
+   "value_retention_y2": 0.17,
+   "value_weighted_survival_y2": 0.32,
+   "one_month_products": 0.498,
+   "n_y3": 299,
+   "survival_y3": 0.097,
+   "value_retention_y3": 0.082
+  },
+  "2023": {
+   "families": 626,
+   "y1_net": 20231219,
+   "n_y2": 626,
+   "survival_y2": 0.137,
+   "value_retention_y2": 0.263,
+   "value_weighted_survival_y2": 0.261,
+   "one_month_products": 0.578,
+   "n_y3": 588,
+   "survival_y3": 0.141,
+   "value_retention_y3": 0.494
+  },
+  "2024": {
+   "families": 154,
+   "y1_net": 15719341,
+   "n_y2": 134,
+   "survival_y2": 0.358,
+   "value_retention_y2": 0.8,
+   "value_weighted_survival_y2": 0.501,
+   "one_month_products": 0.493
+  },
+  "2025": {
+   "families": 330,
+   "y1_net": 32638234
+  }
+ },
+ "all_cohorts": {
+  "families": 1876,
+  "y1_net": 142022503,
+  "n_y2": 1526,
+  "survival_y2": 0.234,
+  "value_retention_y2": 0.269,
+  "value_weighted_survival_y2": 0.301,
+  "one_month_products": 0.525,
+  "n_y3": 1354,
+  "survival_y3": 0.16,
+  "value_retention_y3": 0.202
+ },
+ "splits": {
+  "S1_large_order_start": {
+   "by_cohort": {
+    "2020": {
+     "yes_n": 84,
+     "yes_survival_y2": 0.286,
+     "no_n": 162,
+     "no_survival_y2": 0.364
+    },
+    "2021": {
+     "yes_n": 61,
+     "yes_survival_y2": 0.279,
+     "no_n": 160,
+     "no_survival_y2": 0.325
+    },
+    "2022": {
+     "yes_n": 54,
+     "yes_survival_y2": 0.222,
+     "no_n": 245,
+     "no_survival_y2": 0.241
+    },
+    "2023": {
+     "yes_n": 68,
+     "yes_survival_y2": 0.176,
+     "no_n": 558,
+     "no_survival_y2": 0.133
+    },
+    "2024": {
+     "yes_n": 7,
+     "yes_survival_y2": 0.571,
+     "no_n": 127,
+     "no_survival_y2": 0.346
+    }
+   },
+   "qualifying_cohorts": 4,
+   "consistent": false,
+   "direction": "mixed",
+   "pooled": {
+    "yes": {
+     "families": 361,
+     "y1_net": 81603000,
+     "n_y2": 274,
+     "survival_y2": 0.252,
+     "value_retention_y2": 0.087,
+     "value_weighted_survival_y2": 0.242,
+     "one_month_products": 0.478,
+     "n_y3": 267,
+     "survival_y3": 0.176,
+     "value_retention_y3": 0.051
+    },
+    "no": {
+     "families": 1515,
+     "y1_net": 60419504,
+     "n_y2": 1252,
+     "survival_y2": 0.23,
+     "value_retention_y2": 0.491,
+     "value_weighted_survival_y2": 0.374,
+     "one_month_products": 0.535,
+     "n_y3": 1087,
+     "survival_y3": 0.155,
+     "value_retention_y3": 0.396
+    }
+   }
+  },
+  "S2_early_repeat": {
+   "by_cohort": {
+    "2020": {
+     "yes_n": 26,
+     "yes_survival_y2": 0.615,
+     "no_n": 220,
+     "no_survival_y2": 0.305
+    },
+    "2021": {
+     "yes_n": 40,
+     "yes_survival_y2": 0.7,
+     "no_n": 181,
+     "no_survival_y2": 0.227
+    },
+    "2022": {
+     "yes_n": 39,
+     "yes_survival_y2": 0.513,
+     "no_n": 260,
+     "no_survival_y2": 0.196
+    },
+    "2023": {
+     "yes_n": 82,
+     "yes_survival_y2": 0.378,
+     "no_n": 544,
+     "no_survival_y2": 0.101
+    },
+    "2024": {
+     "yes_n": 27,
+     "yes_survival_y2": 0.593,
+     "no_n": 107,
+     "no_survival_y2": 0.299
+    }
+   },
+   "qualifying_cohorts": 5,
+   "consistent": true,
+   "direction": "yes survives more",
+   "pooled": {
+    "yes": {
+     "families": 255,
+     "y1_net": 50808211,
+     "n_y2": 214,
+     "survival_y2": 0.519,
+     "value_retention_y2": 0.426,
+     "value_weighted_survival_y2": 0.55,
+     "one_month_products": 0.0,
+     "n_y3": 185,
+     "survival_y3": 0.346,
+     "value_retention_y3": 0.315
+    },
+    "no": {
+     "families": 1621,
+     "y1_net": 91214293,
+     "n_y2": 1312,
+     "survival_y2": 0.188,
+     "value_retention_y2": 0.203,
+     "value_weighted_survival_y2": 0.197,
+     "one_month_products": 0.611,
+     "n_y3": 1169,
+     "survival_y3": 0.13,
+     "value_retention_y3": 0.153
+    }
+   }
+  }
+ }
+}

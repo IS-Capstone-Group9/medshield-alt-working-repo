@@ -1,0 +1,42 @@
+{
+  "sales": {
+    "status": "pass",
+    "rows": 40027,
+    "missing_required_fields": {
+      "date_delivered": 0,
+      "area": 0,
+      "product": 0,
+      "quantity": 0,
+      "total_trade_price": 0
+    },
+    "valid_date_rows": 40027,
+    "source_period_start": "2000-01-01",
+    "source_period_end": "2047-11-06"
+  },
+  "weather_api": {
+    "status": "partial",
+    "provider": "nasa_power",
+    "period_start": "2025-01-01",
+    "period_end": "2025-12-31",
+    "areas": [
+      "Batangas",
+      "Camarines Norte",
+      "Camarines Sur",
+      "Cavite",
+      "Laguna",
+      "Marinduque",
+      "Metro Manila",
+      "Quezon",
+      "Rizal"
+    ],
+    "limitation": "Current checked-in weather API data is partial and should be contextual only until all target territories are loaded."
+  },
+  "doh_disease": {
+    "status": "blocked_missing_source",
+    "limitation": "Historical DOH disease data has not been uploaded to the workspace yet."
+  },
+  "pagasa_reference": {
+    "status": "blocked_missing_source",
+    "limitation": "Historical PAGASA reference data has not been uploaded to the workspace yet."
+  }
+}

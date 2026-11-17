@@ -1,0 +1,70 @@
+{
+  "_operator_notes": "TEMPLATE. Fill the <PLACEHOLDER> defaults and attach compute per workspace policy (serverless or a cluster) before creating the Job. The gateway supplies ingestion_id via run-now job_parameters with an idempotency token. Grant the job principal only the intake volume and the isolated medshield_intake schema. Queueing is enabled so a concurrent submission waits instead of being SKIPPED (the gateway reports SKIPPED as FAILED).",
+  "name": "medshield-upload-pipeline",
+  "max_concurrent_runs": 1,
+  "queue": {
+    "enabled": true
+  },
+  "parameters": [
+    {
+      "name": "ingestion_id",
+      "default": ""
+    },
+    {
+      "name": "volume",
+      "default": "<VOLUME e.g. /Volumes/catalog/schema/volume>"
+    },
+    {
+      "name": "candidate_schema",
+      "default": "<catalog>.medshield_intake"
+    }
+  ],
+  "tasks": [
+    {
+      "task_key": "bronze",
+      "notebook_task": {
+        "notebook_path": "/Workspace/medshield/medshield_project/intake_stage_bronze",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "ingestion_id": "{{job.parameters.ingestion_id}}",
+          "volume": "{{job.parameters.volume}}",
+          "candidate_schema": "{{job.parameters.candidate_schema}}"
+        }
+      }
+    },
+    {
+      "task_key": "silver",
+      "notebook_task": {
+        "notebook_path": "/Workspace/medshield/medshield_project/intake_stage_silver",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "ingestion_id": "{{job.parameters.ingestion_id}}",
+          "volume": "{{job.parameters.volume}}",
+          "candidate_schema": "{{job.parameters.candidate_schema}}"
+        }
+      },
+      "depends_on": [
+        {
+          "task_key": "bronze"
+        }
+      ]
+    },
+    {
+      "task_key": "gold",
+      "notebook_task": {
+        "notebook_path": "/Workspace/medshield/medshield_project/intake_stage_gold",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "ingestion_id": "{{job.parameters.ingestion_id}}",
+          "volume": "{{job.parameters.volume}}",
+          "candidate_schema": "{{job.parameters.candidate_schema}}"
+        }
+      },
+      "depends_on": [
+        {
+          "task_key": "silver"
+        }
+      ]
+    }
+  ]
+}

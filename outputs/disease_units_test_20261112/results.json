@@ -1,0 +1,87 @@
+{
+ "registration_sha256": "da55b7ce148edd4b9b456b314945314d84353ed06984179b1ba575cdacecff31",
+ "dii_release": "5df98130b9ec13ef",
+ "territories": [
+  "PH-PROVINCE-BATANGAS",
+  "PH-PROVINCE-CAMARINES-NORTE",
+  "PH-PROVINCE-CAMARINES-SUR",
+  "PH-PROVINCE-CAVITE",
+  "PH-PROVINCE-LAGUNA",
+  "PH-PROVINCE-MARINDUQUE",
+  "PH-PROVINCE-QUEZON"
+ ],
+ "bonferroni_alpha": 0.00625,
+ "tests": {
+  "Dengue lag1": {
+   "cases": 659,
+   "months_with_units": 4,
+   "result": "INSUFFICIENT",
+   "passes": false
+  },
+  "Dengue lag2": {
+   "cases": 652,
+   "months_with_units": 4,
+   "result": "INSUFFICIENT",
+   "passes": false
+  },
+  "Typhoid Fever lag1": {
+   "cases": 546,
+   "months_with_units": 0,
+   "result": "INSUFFICIENT",
+   "passes": false
+  },
+  "Typhoid Fever lag2": {
+   "cases": 541,
+   "months_with_units": 0,
+   "result": "INSUFFICIENT",
+   "passes": false
+  },
+  "Leptospirosis lag1": {
+   "cases": 467,
+   "months_with_units": 0,
+   "result": "INSUFFICIENT",
+   "passes": false
+  },
+  "Leptospirosis lag2": {
+   "cases": 460,
+   "months_with_units": 0,
+   "result": "INSUFFICIENT",
+   "passes": false
+  },
+  "Cholera lag1": {
+   "cases": 96,
+   "months_with_units": 0,
+   "result": "INSUFFICIENT",
+   "passes": false
+  },
+  "Cholera lag2": {
+   "cases": 96,
+   "months_with_units": 0,
+   "result": "INSUFFICIENT",
+   "passes": false
+  }
+ },
+ "matched_labels": {
+  "Dengue": 5,
+  "Typhoid Fever": 0,
+  "Leptospirosis": 0,
+  "Cholera": 4
+ },
+ "matched_label_examples": {
+  "Dengue": [
+   "0.9% SODIUM CHLORIDE 9MG/ML 50ML (PHILRX )",
+   "DEXTROSE D50 COLOR RED",
+   "EUROMED 0.9% SODIUM CHLORIDE 9MG/ML 50ML",
+   "PARACETAMOL MYREX 250MG/5ML",
+   "PNSS 1LITER 0.9%"
+  ],
+  "Typhoid Fever": [],
+  "Leptospirosis": [],
+  "Cholera": [
+   "0.9% SODIUM CHLORIDE 9MG/ML 50ML (PHILRX )",
+   "DEXTROSE D50 COLOR RED",
+   "EUROMED 0.9% SODIUM CHLORIDE 9MG/ML 50ML",
+   "PNSS 1LITER 0.9%"
+  ]
+ }
+}

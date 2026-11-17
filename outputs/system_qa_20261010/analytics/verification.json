@@ -1,0 +1,2435 @@
+{
+  "status": "PASS",
+  "generated_at": "2026-10-10T12:44:04.744043+08:00",
+  "role": "Independent supporting QA Engineer",
+  "method": "Standalone Decimal/date/CSV/hash controls; no canonical product parser, model or cloud import.",
+  "source_identity": {
+    "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+    "fact_delta_version": 20,
+    "input_sha256": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba"
+  },
+  "checked_files_sha256": {
+    "outputs\\system_qa_20261010\\analytics\\verify_source.py": "47571b616dbe52346571c29471a9f2223e3e1997922ec49c2d9d1d407282b01b",
+    "outputs\\predictive_readiness_20261010\\source-live-verified.json": "461769428595b704838d49dbc574c49e51e7050512ed2ca28411f675a7a319d0",
+    "outputs\\predictive_readiness_20261010\\source_review\\findings.json": "79ac6a13480964f406bd2fa2680e62d69ac9a00e34088e5214987530801ea559",
+    "outputs\\predictive_validation\\2026-10-09T13-28-48-501Z\\input.json": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba"
+  },
+  "source_snapshot_observed_at_utc": "2026-10-10T04:14:14.047Z",
+  "exact_money_tolerance_php": "0",
+  "formula_eligibility_tolerance_php": "0.02",
+  "percentage_rounding": "six decimal places",
+  "total_net_sales": "626946741.810000",
+  "case_details": {
+    "2024-12": {
+      "final_count": 197,
+      "original_count": 217,
+      "final_net_sales": "16744970.510000",
+      "original_raw_net_sales": "20373336.010000",
+      "difference": "-3628365.500000",
+      "source_labels": {
+        "ADMIN": "235307.260000",
+        "QUEZON": "250166.000000",
+        "BATANGAS": "188416.500000",
+        "HOSPITAL": "1207046.000000",
+        "GOVERNMENT": "14864034.750000"
+      }
+    },
+    "2025-03": {
+      "final_count": 241,
+      "original_count": 239,
+      "final_net_sales": "2612295.100000",
+      "original_raw_net_sales": "2612295.100000",
+      "difference": "0.000000",
+      "source_labels": {
+        "ADMIN": "169491.490000",
+        "BATANGAS": "308063.000000",
+        "HOSPITAL": "938174.200000",
+        "GOVERNMENT": "937264.300000",
+        "QUEZON": "246170.110000",
+        "MARINDUQUE": "13132.000000"
+      }
+    },
+    "2025-04": {
+      "final_count": 206,
+      "original_count": 196,
+      "final_net_sales": "5670753.870000",
+      "original_raw_net_sales": "5670753.870000",
+      "difference": "0.000000",
+      "source_labels": {
+        "BATANGAS": "331309.900000",
+        "HOSPITAL": "3876720.400000",
+        "QUEZON": "261612.500000",
+        "ADMIN": "105705.070000",
+        "GOVERNMENT": "1090450.000000",
+        "MARINDUQUE": "4956.000000"
+      }
+    },
+    "2025-11": {
+      "final_count": 545,
+      "original_count": 419,
+      "final_net_sales": "25076009.200000",
+      "original_raw_net_sales": "25076009.200000",
+      "difference": "0.000000",
+      "source_labels": {
+        "ADMIN": "145910.050000",
+        "GOVERNMENT": "22177074.290000",
+        "BATANGAS": "214885.500000",
+        "QUEZON": "147230.000000",
+        "HOSPITAL": "2390909.360000"
+      }
+    }
+  },
+  "checks": [
+    {
+      "check": "Byte hash source-live-verified.json",
+      "status": "PASS",
+      "detail": {
+        "actual": "461769428595b704838d49dbc574c49e51e7050512ed2ca28411f675a7a319d0",
+        "expected": "461769428595b704838d49dbc574c49e51e7050512ed2ca28411f675a7a319d0"
+      }
+    },
+    {
+      "check": "Byte hash findings.json",
+      "status": "PASS",
+      "detail": {
+        "actual": "79ac6a13480964f406bd2fa2680e62d69ac9a00e34088e5214987530801ea559",
+        "expected": "79ac6a13480964f406bd2fa2680e62d69ac9a00e34088e5214987530801ea559"
+      }
+    },
+    {
+      "check": "Byte hash input.json",
+      "status": "PASS",
+      "detail": {
+        "actual": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba",
+        "expected": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba"
+      }
+    },
+    {
+      "check": "Live checker source identity",
+      "status": "PASS",
+      "detail": {
+        "actual": "97d9b5796d9527f02ffc35a809b0524ab6a05da54101f9de5b836d1ba800ae97",
+        "expected": "97d9b5796d9527f02ffc35a809b0524ab6a05da54101f9de5b836d1ba800ae97"
+      }
+    },
+    {
+      "check": "Gateway client source identity",
+      "status": "PASS",
+      "detail": {
+        "actual": "77a7fbfc61bcc674cbed14612fc194750ebdb2a31840eb5b89ce7da017dfa1db",
+        "expected": "77a7fbfc61bcc674cbed14612fc194750ebdb2a31840eb5b89ce7da017dfa1db"
+      }
+    },
+    {
+      "check": "Frozen input binding",
+      "status": "PASS",
+      "detail": {
+        "actual": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba",
+        "expected": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba"
+      }
+    },
+    {
+      "check": "Source-review file hash: outputs/predictive_readiness_20261010/source_review/audit_sources.py",
+      "status": "PASS",
+      "detail": {
+        "actual": "dfb44b96bc8fea39822a3e0ef7500cb36f157e3136e9bcb67b0e0b94830bf320",
+        "expected": "dfb44b96bc8fea39822a3e0ef7500cb36f157e3136e9bcb67b0e0b94830bf320"
+      }
+    },
+    {
+      "check": "Source-review file byte length: outputs/predictive_readiness_20261010/source_review/audit_sources.py",
+      "status": "PASS",
+      "detail": {
+        "actual": "19814",
+        "expected": "19814"
+      }
+    },
+    {
+      "check": "Source-review file hash: databricks/medshield_project/01_sales_bronze.py",
+      "status": "PASS",
+      "detail": {
+        "actual": "996331113cd208edcd1bfa9e14d68e0be7bee01ea3b616892dd179926eed1d51",
+        "expected": "996331113cd208edcd1bfa9e14d68e0be7bee01ea3b616892dd179926eed1d51"
+      }
+    },
+    {
+      "check": "Source-review file byte length: databricks/medshield_project/01_sales_bronze.py",
+      "status": "PASS",
+      "detail": {
+        "actual": "13505",
+        "expected": "13505"
+      }
+    },
+    {
+      "check": "Source-review file hash: databricks/medshield_project/02_sales_silver.py",
+      "status": "PASS",
+      "detail": {
+        "actual": "7075ec01eb7e7b81ec49cc4b7387c9d7c472750e9b49a2a16add01b809301a1f",
+        "expected": "7075ec01eb7e7b81ec49cc4b7387c9d7c472750e9b49a2a16add01b809301a1f"
+      }
+    },
+    {
+      "check": "Source-review file byte length: databricks/medshield_project/02_sales_silver.py",
+      "status": "PASS",
+      "detail": {
+        "actual": "35729",
+        "expected": "35729"
+      }
+    },
+    {
+      "check": "Source-review file hash: databricks/medshield_project/03_sales_gold.py",
+      "status": "PASS",
+      "detail": {
+        "actual": "ced772ca1ea7796fd42f834aaf40d307db4d09ba1e2657da528e6d2c38c5def8",
+        "expected": "ced772ca1ea7796fd42f834aaf40d307db4d09ba1e2657da528e6d2c38c5def8"
+      }
+    },
+    {
+      "check": "Source-review file byte length: databricks/medshield_project/03_sales_gold.py",
+      "status": "PASS",
+      "detail": {
+        "actual": "57302",
+        "expected": "57302"
+      }
+    },
+    {
+      "check": "Source-review file hash: databricks/medshield_project/tests/test_restart.py",
+      "status": "PASS",
+      "detail": {
+        "actual": "fb32ce1ce165e1031e93c9e3dc7ae4e7712cca9a14d0a6cec26cccd7eca13db2",
+        "expected": "fb32ce1ce165e1031e93c9e3dc7ae4e7712cca9a14d0a6cec26cccd7eca13db2"
+      }
+    },
+    {
+      "check": "Source-review file byte length: databricks/medshield_project/tests/test_restart.py",
+      "status": "PASS",
+      "detail": {
+        "actual": "21501",
+        "expected": "21501"
+      }
+    },
+    {
+      "check": "Source-review file hash: outputs/predictive_completion_20261009/diagnosis/composition.json",
+      "status": "PASS",
+      "detail": {
+        "actual": "a873c9b6d670456e3dbc1c38b03c67ed3607788ebd169b49f3696ab6b8f55dcf",
+        "expected": "a873c9b6d670456e3dbc1c38b03c67ed3607788ebd169b49f3696ab6b8f55dcf"
+      }
+    },
+    {
+      "check": "Source-review file byte length: outputs/predictive_completion_20261009/diagnosis/composition.json",
+      "status": "PASS",
+      "detail": {
+        "actual": "5328474",
+        "expected": "5328474"
+      }
+    },
+    {
+      "check": "Source-review file hash: outputs/descriptive_validation/2026-10-09T07-40-39-615Z/evidence.json",
+      "status": "PASS",
+      "detail": {
+        "actual": "19662860d526ca2efb5ccf4256645211bfb916fb8590060901e6e2573b991def",
+        "expected": "19662860d526ca2efb5ccf4256645211bfb916fb8590060901e6e2573b991def"
+      }
+    },
+    {
+      "check": "Source-review file byte length: outputs/descriptive_validation/2026-10-09T07-40-39-615Z/evidence.json",
+      "status": "PASS",
+      "detail": {
+        "actual": "220579",
+        "expected": "220579"
+      }
+    },
+    {
+      "check": "Source-review file hash: tmp/pagbilao_sample_workbook/full_2025_all_contracts_staging.json",
+      "status": "PASS",
+      "detail": {
+        "actual": "4c11199ac74cf71d180833da88a5b3beebc09a42952f0ed840bc402d9cc75add",
+        "expected": "4c11199ac74cf71d180833da88a5b3beebc09a42952f0ed840bc402d9cc75add"
+      }
+    },
+    {
+      "check": "Source-review file byte length: tmp/pagbilao_sample_workbook/full_2025_all_contracts_staging.json",
+      "status": "PASS",
+      "detail": {
+        "actual": "6987084",
+        "expected": "6987084"
+      }
+    },
+    {
+      "check": "Source-review file hash: databricks/medshield_project_csv/medshield_project_csv/medshield_data_2017.csv",
+      "status": "PASS",
+      "detail": {
+        "actual": "15edfe33e5365e047d57556eb8a2dc9581b89b1f59f98449b983f0483f2b9c77",
+        "expected": "15edfe33e5365e047d57556eb8a2dc9581b89b1f59f98449b983f0483f2b9c77"
+      }
+    },
+    {
+      "check": "Source-review file byte length: databricks/medshield_project_csv/medshield_project_csv/medshield_data_2017.csv",
+      "status": "PASS",
+      "detail": {
+        "actual": "740101",
+        "expected": "740101"
+      }
+    },
+    {
+      "check": "Source-review file hash: databricks/medshield_project_csv/medshield_project_csv/medshield_data_2018.csv",
+      "status": "PASS",
+      "detail": {
+        "actual": "d7a1b8ad107e176e642aab540e464eab05b19dc116131b712c33e29fb355b200",
+        "expected": "d7a1b8ad107e176e642aab540e464eab05b19dc116131b712c33e29fb355b200"
+      }
+    },
+    {
+      "check": "Source-review file byte length: databricks/medshield_project_csv/medshield_project_csv/medshield_data_2018.csv",
+      "status": "PASS",
+      "detail": {
+        "actual": "503447",
+        "expected": "503447"
+      }
+    },
+    {
+      "check": "Source-review file hash: databricks/medshield_project_csv/medshield_project_csv/medshield_data_2019.csv",
+      "status": "PASS",
+      "detail": {
+        "actual": "3afc789aa0ad798da14cbe87153049eb7f7d7ca15df944a8e27b25f97d419fc8",
+        "expected": "3afc789aa0ad798da14cbe87153049eb7f7d7ca15df944a8e27b25f97d419fc8"
+      }
+    },
+    {
+      "check": "Source-review file byte length: databricks/medshield_project_csv/medshield_project_csv/medshield_data_2019.csv",
+      "status": "PASS",
+      "detail": {
+        "actual": "1270693",
+        "expected": "1270693"
+      }
+    },
+    {
+      "check": "Source-review file hash: databricks/medshield_project_csv/medshield_project_csv/medshield_data_2020.csv",
+      "status": "PASS",
+      "detail": {
+        "actual": "d5d17c2c6514a652294a23426e8ff9c35b5410d9a65a8273cd0dd6e573254a62",
+        "expected": "d5d17c2c6514a652294a23426e8ff9c35b5410d9a65a8273cd0dd6e573254a62"
+      }
+    },
+    {
+      "check": "Source-review file byte length: databricks/medshield_project_csv/medshield_project_csv/medshield_data_2020.csv",
+      "status": "PASS",
+      "detail": {
+        "actual": "495396",
+        "expected": "495396"
+      }
+    },
+    {
+      "check": "Source-review file hash: databricks/medshield_project_csv/medshield_project_csv/medshield_data_2021.csv",
+      "status": "PASS",
+      "detail": {
+        "actual": "c1cc109b73a0b073a051cd2fbdd7df2e0c2c8ea52a98be8b8c443b0388d12477",
+        "expected": "c1cc109b73a0b073a051cd2fbdd7df2e0c2c8ea52a98be8b8c443b0388d12477"
+      }
+    },
+    {
+      "check": "Source-review file byte length: databricks/medshield_project_csv/medshield_project_csv/medshield_data_2021.csv",
+      "status": "PASS",
+      "detail": {
+        "actual": "483905",
+        "expected": "483905"
+      }
+    },
+    {
+      "check": "Source-review file hash: databricks/medshield_project_csv/medshield_project_csv/medshield_data_2022.csv",
+      "status": "PASS",
+      "detail": {
+        "actual": "1f28cacdcdc537065828cf809f8d0ae4bb55891a1317fe6c306d2b4b5b2caf74",
+        "expected": "1f28cacdcdc537065828cf809f8d0ae4bb55891a1317fe6c306d2b4b5b2caf74"
+      }
+    },
+    {
+      "check": "Source-review file byte length: databricks/medshield_project_csv/medshield_project_csv/medshield_data_2022.csv",
+      "status": "PASS",
+      "detail": {
+        "actual": "551812",
+        "expected": "551812"
+      }
+    },
+    {
+      "check": "Source-review file hash: databricks/medshield_project_csv/medshield_project_csv/medshield_data_2023.csv",
+      "status": "PASS",
+      "detail": {
+        "actual": "83e4509c84e0c2b6c379071593e589b5207842fd469430fe317e5e9a70368cea",
+        "expected": "83e4509c84e0c2b6c379071593e589b5207842fd469430fe317e5e9a70368cea"
+      }
+    },
+    {
+      "check": "Source-review file byte length: databricks/medshield_project_csv/medshield_project_csv/medshield_data_2023.csv",
+      "status": "PASS",
+      "detail": {
+        "actual": "791507",
+        "expected": "791507"
+      }
+    },
+    {
+      "check": "Source-review file hash: databricks/medshield_project_csv/medshield_project_csv/medshield_data_2024.csv",
+      "status": "PASS",
+      "detail": {
+        "actual": "12ebda6996de76cf6af6c958485900fb81597f6f7f19dec4c8eea066919fb938",
+        "expected": "12ebda6996de76cf6af6c958485900fb81597f6f7f19dec4c8eea066919fb938"
+      }
+    },
+    {
+      "check": "Source-review file byte length: databricks/medshield_project_csv/medshield_project_csv/medshield_data_2024.csv",
+      "status": "PASS",
+      "detail": {
+        "actual": "453866",
+        "expected": "453866"
+      }
+    },
+    {
+      "check": "Source-review file hash: databricks/medshield_project_csv/medshield_project_csv/medshield_data_2025.csv",
+      "status": "PASS",
+      "detail": {
+        "actual": "d05fec98a3a312416118fab4d11ca1f6e0c19f1951248b7b22fcc518eeb15569",
+        "expected": "d05fec98a3a312416118fab4d11ca1f6e0c19f1951248b7b22fcc518eeb15569"
+      }
+    },
+    {
+      "check": "Source-review file byte length: databricks/medshield_project_csv/medshield_project_csv/medshield_data_2025.csv",
+      "status": "PASS",
+      "detail": {
+        "actual": "473296",
+        "expected": "473296"
+      }
+    },
+    {
+      "check": "Source-review file hash: data/medshield/dataset_csv/medshield_data_2024.csv",
+      "status": "PASS",
+      "detail": {
+        "actual": "c38245983b918c0e44eecfccb3b63be00e8de9c848048dd007d1c086c714831f",
+        "expected": "c38245983b918c0e44eecfccb3b63be00e8de9c848048dd007d1c086c714831f"
+      }
+    },
+    {
+      "check": "Source-review file byte length: data/medshield/dataset_csv/medshield_data_2024.csv",
+      "status": "PASS",
+      "detail": {
+        "actual": "453665",
+        "expected": "453665"
+      }
+    },
+    {
+      "check": "Source-review file hash: data/medshield/dataset_csv/medshield_data_2025.csv",
+      "status": "PASS",
+      "detail": {
+        "actual": "2738afaf114d9480928e37b6c2b53dc0cac9ba2f10dc74a98b2549e3345d235c",
+        "expected": "2738afaf114d9480928e37b6c2b53dc0cac9ba2f10dc74a98b2549e3345d235c"
+      }
+    },
+    {
+      "check": "Source-review file byte length: data/medshield/dataset_csv/medshield_data_2025.csv",
+      "status": "PASS",
+      "detail": {
+        "actual": "541162",
+        "expected": "541162"
+      }
+    },
+    {
+      "check": "Source-review file hash: data/medshield/dataset_xlsx/Sales Report.xlsx",
+      "status": "PASS",
+      "detail": {
+        "actual": "04e5f303eb8fe4f3fb441a233adb4603c992c198653b9ca8b6dfb5c4fd0fe107",
+        "expected": "04e5f303eb8fe4f3fb441a233adb4603c992c198653b9ca8b6dfb5c4fd0fe107"
+      }
+    },
+    {
+      "check": "Source-review file byte length: data/medshield/dataset_xlsx/Sales Report.xlsx",
+      "status": "PASS",
+      "detail": {
+        "actual": "2161566",
+        "expected": "2161566"
+      }
+    },
+    {
+      "check": "Source-review file hash: tmp/pagbilao_sample_workbook/prepare_full_2025_all_contracts.py",
+      "status": "PASS",
+      "detail": {
+        "actual": "e6c776665281ceb2df2b491c7c19c43033aabd44acca31d9bc6d5047ebf1a7c7",
+        "expected": "e6c776665281ceb2df2b491c7c19c43033aabd44acca31d9bc6d5047ebf1a7c7"
+      }
+    },
+    {
+      "check": "Source-review file byte length: tmp/pagbilao_sample_workbook/prepare_full_2025_all_contracts.py",
+      "status": "PASS",
+      "detail": {
+        "actual": "29752",
+        "expected": "29752"
+      }
+    },
+    {
+      "check": "Source-review file hash: tmp/historical_contract_allocation/build_replacements.mjs",
+      "status": "PASS",
+      "detail": {
+        "actual": "8c93bf8fffc43e16fc04de029d636e3a5f1b28b74bc6d612e41da1d37d8eea17",
+        "expected": "8c93bf8fffc43e16fc04de029d636e3a5f1b28b74bc6d612e41da1d37d8eea17"
+      }
+    },
+    {
+      "check": "Source-review file byte length: tmp/historical_contract_allocation/build_replacements.mjs",
+      "status": "PASS",
+      "detail": {
+        "actual": "19199",
+        "expected": "19199"
+      }
+    },
+    {
+      "check": "Source-review file hash: outputs/2020_2024_databricks_final/allocation_audit_2020_2024.csv",
+      "status": "PASS",
+      "detail": {
+        "actual": "38e2f695617a8c77cbba709747950e03c95309f0cbe04808bce2f4a27df7428d",
+        "expected": "38e2f695617a8c77cbba709747950e03c95309f0cbe04808bce2f4a27df7428d"
+      }
+    },
+    {
+      "check": "Source-review file byte length: outputs/2020_2024_databricks_final/allocation_audit_2020_2024.csv",
+      "status": "PASS",
+      "detail": {
+        "actual": "45269",
+        "expected": "45269"
+      }
+    },
+    {
+      "check": "Source-review file hash: outputs/2020_2024_databricks_final/reconciliation.json",
+      "status": "PASS",
+      "detail": {
+        "actual": "95aab9224a789e63928f83104fbee547a475b995e2744d7cf31c3104a190774a",
+        "expected": "95aab9224a789e63928f83104fbee547a475b995e2744d7cf31c3104a190774a"
+      }
+    },
+    {
+      "check": "Source-review file byte length: outputs/2020_2024_databricks_final/reconciliation.json",
+      "status": "PASS",
+      "detail": {
+        "actual": "3024",
+        "expected": "3024"
+      }
+    },
+    {
+      "check": "Source-review file hash: databricks/medshield_project/references/transaction_evidence_review.csv",
+      "status": "PASS",
+      "detail": {
+        "actual": "5e1a839d551293b51149e7c35d863ce680573e02275f65d17512d6099ff88786",
+        "expected": "5e1a839d551293b51149e7c35d863ce680573e02275f65d17512d6099ff88786"
+      }
+    },
+    {
+      "check": "Source-review file byte length: databricks/medshield_project/references/transaction_evidence_review.csv",
+      "status": "PASS",
+      "detail": {
+        "actual": "119",
+        "expected": "119"
+      }
+    },
+    {
+      "check": "Nine-file source-content dataset identity",
+      "status": "PASS",
+      "detail": {
+        "actual": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+        "expected": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4"
+      }
+    },
+    {
+      "check": "Source-review dataset identity",
+      "status": "PASS",
+      "detail": {
+        "actual": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+        "expected": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4"
+      }
+    },
+    {
+      "check": "Live source dataset identity",
+      "status": "PASS",
+      "detail": {
+        "actual": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+        "expected": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4"
+      }
+    },
+    {
+      "check": "Live policy identity",
+      "status": "PASS",
+      "detail": {
+        "actual": "sales_restart_gold_v7_independent_catalog",
+        "expected": "sales_restart_gold_v7_independent_catalog"
+      }
+    },
+    {
+      "check": "Current/frozen Delta version",
+      "status": "PASS",
+      "detail": {
+        "actual": "20",
+        "expected": "20"
+      }
+    },
+    {
+      "check": "Reviewed fact identity",
+      "status": "PASS",
+      "detail": {
+        "actual": "20",
+        "expected": "20"
+      }
+    },
+    {
+      "check": "Observed source remains candidate",
+      "status": "PASS"
+    },
+    {
+      "check": "2017-05 absent source counts remain missing-target evidence",
+      "status": "PASS"
+    },
+    {
+      "check": "2017-06 absent source counts remain missing-target evidence",
+      "status": "PASS"
+    },
+    {
+      "check": "2017-07 absent source counts remain missing-target evidence",
+      "status": "PASS"
+    },
+    {
+      "check": "2017-08 absent source counts remain missing-target evidence",
+      "status": "PASS"
+    },
+    {
+      "check": "2017-10 absent source counts remain missing-target evidence",
+      "status": "PASS"
+    },
+    {
+      "check": "2018-01 absent source counts remain missing-target evidence",
+      "status": "PASS"
+    },
+    {
+      "check": "2018-02 absent source counts remain missing-target evidence",
+      "status": "PASS"
+    },
+    {
+      "check": "2019-10 absent source counts remain missing-target evidence",
+      "status": "PASS"
+    },
+    {
+      "check": "2019-11 absent source counts remain missing-target evidence",
+      "status": "PASS"
+    },
+    {
+      "check": "2019-12 absent source counts remain missing-target evidence",
+      "status": "PASS"
+    },
+    {
+      "check": "Full-year 2017 source_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "1978",
+        "expected": "1978"
+      }
+    },
+    {
+      "check": "Full-year 2017 eligible_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "1886",
+        "expected": "1886"
+      }
+    },
+    {
+      "check": "Full-year 2017 observed_month_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "7",
+        "expected": "7"
+      }
+    },
+    {
+      "check": "Full-year 2017 net sales in exact cents",
+      "status": "PASS",
+      "detail": {
+        "actual": "10211167.350000",
+        "expected": "10211167.350000"
+      }
+    },
+    {
+      "check": "Full-year 2017 last recorded date",
+      "status": "PASS",
+      "detail": {
+        "actual": "2017-12-21",
+        "expected": "2017-12-21"
+      }
+    },
+    {
+      "check": "Full-year 2018 source_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "6181",
+        "expected": "6181"
+      }
+    },
+    {
+      "check": "Full-year 2018 eligible_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "6179",
+        "expected": "6179"
+      }
+    },
+    {
+      "check": "Full-year 2018 observed_month_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "10",
+        "expected": "10"
+      }
+    },
+    {
+      "check": "Full-year 2018 net sales in exact cents",
+      "status": "PASS",
+      "detail": {
+        "actual": "51619691.270000",
+        "expected": "51619691.270000"
+      }
+    },
+    {
+      "check": "Full-year 2018 last recorded date",
+      "status": "PASS",
+      "detail": {
+        "actual": "2018-12-31",
+        "expected": "2018-12-31"
+      }
+    },
+    {
+      "check": "Full-year 2019 source_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "5446",
+        "expected": "5446"
+      }
+    },
+    {
+      "check": "Full-year 2019 eligible_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "5401",
+        "expected": "5401"
+      }
+    },
+    {
+      "check": "Full-year 2019 observed_month_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "9",
+        "expected": "9"
+      }
+    },
+    {
+      "check": "Full-year 2019 net sales in exact cents",
+      "status": "PASS",
+      "detail": {
+        "actual": "62542304.490000",
+        "expected": "62542304.490000"
+      }
+    },
+    {
+      "check": "Full-year 2019 last recorded date",
+      "status": "PASS",
+      "detail": {
+        "actual": "2019-09-30",
+        "expected": "2019-09-30"
+      }
+    },
+    {
+      "check": "Full-year 2020 source_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "3980",
+        "expected": "3980"
+      }
+    },
+    {
+      "check": "Full-year 2020 eligible_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "3971",
+        "expected": "3971"
+      }
+    },
+    {
+      "check": "Full-year 2020 observed_month_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "12",
+        "expected": "12"
+      }
+    },
+    {
+      "check": "Full-year 2020 net sales in exact cents",
+      "status": "PASS",
+      "detail": {
+        "actual": "63593274.630000",
+        "expected": "63593274.630000"
+      }
+    },
+    {
+      "check": "Full-year 2020 last recorded date",
+      "status": "PASS",
+      "detail": {
+        "actual": "2020-12-28",
+        "expected": "2020-12-28"
+      }
+    },
+    {
+      "check": "Full-year 2021 source_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "3407",
+        "expected": "3407"
+      }
+    },
+    {
+      "check": "Full-year 2021 eligible_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "3401",
+        "expected": "3401"
+      }
+    },
+    {
+      "check": "Full-year 2021 observed_month_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "12",
+        "expected": "12"
+      }
+    },
+    {
+      "check": "Full-year 2021 net sales in exact cents",
+      "status": "PASS",
+      "detail": {
+        "actual": "77860206.260000",
+        "expected": "77860206.260000"
+      }
+    },
+    {
+      "check": "Full-year 2021 last recorded date",
+      "status": "PASS",
+      "detail": {
+        "actual": "2021-12-31",
+        "expected": "2021-12-31"
+      }
+    },
+    {
+      "check": "Full-year 2022 source_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "3980",
+        "expected": "3980"
+      }
+    },
+    {
+      "check": "Full-year 2022 eligible_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "3970",
+        "expected": "3970"
+      }
+    },
+    {
+      "check": "Full-year 2022 observed_month_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "12",
+        "expected": "12"
+      }
+    },
+    {
+      "check": "Full-year 2022 net sales in exact cents",
+      "status": "PASS",
+      "detail": {
+        "actual": "63234990.040000",
+        "expected": "63234990.040000"
+      }
+    },
+    {
+      "check": "Full-year 2022 last recorded date",
+      "status": "PASS",
+      "detail": {
+        "actual": "2022-12-31",
+        "expected": "2022-12-31"
+      }
+    },
+    {
+      "check": "Full-year 2023 source_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "5381",
+        "expected": "5381"
+      }
+    },
+    {
+      "check": "Full-year 2023 eligible_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "4665",
+        "expected": "4665"
+      }
+    },
+    {
+      "check": "Full-year 2023 observed_month_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "12",
+        "expected": "12"
+      }
+    },
+    {
+      "check": "Full-year 2023 net sales in exact cents",
+      "status": "PASS",
+      "detail": {
+        "actual": "62228966.850000",
+        "expected": "62228966.850000"
+      }
+    },
+    {
+      "check": "Full-year 2023 last recorded date",
+      "status": "PASS",
+      "detail": {
+        "actual": "2023-12-29",
+        "expected": "2023-12-29"
+      }
+    },
+    {
+      "check": "Full-year 2024 source_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "2831",
+        "expected": "2831"
+      }
+    },
+    {
+      "check": "Full-year 2024 eligible_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "2831",
+        "expected": "2831"
+      }
+    },
+    {
+      "check": "Full-year 2024 observed_month_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "12",
+        "expected": "12"
+      }
+    },
+    {
+      "check": "Full-year 2024 net sales in exact cents",
+      "status": "PASS",
+      "detail": {
+        "actual": "50259319.880000",
+        "expected": "50259319.880000"
+      }
+    },
+    {
+      "check": "Full-year 2024 last recorded date",
+      "status": "PASS",
+      "detail": {
+        "actual": "2024-12-31",
+        "expected": "2024-12-31"
+      }
+    },
+    {
+      "check": "Full-year 2025 source_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "4544",
+        "expected": "4544"
+      }
+    },
+    {
+      "check": "Full-year 2025 eligible_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "4544",
+        "expected": "4544"
+      }
+    },
+    {
+      "check": "Full-year 2025 observed_month_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "12",
+        "expected": "12"
+      }
+    },
+    {
+      "check": "Full-year 2025 net sales in exact cents",
+      "status": "PASS",
+      "detail": {
+        "actual": "185396821.040000",
+        "expected": "185396821.040000"
+      }
+    },
+    {
+      "check": "Full-year 2025 last recorded date",
+      "status": "PASS",
+      "detail": {
+        "actual": "2025-12-31",
+        "expected": "2025-12-31"
+      }
+    },
+    {
+      "check": "Exact nine-year calendar coverage",
+      "status": "PASS",
+      "detail": {
+        "actual": "['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025']",
+        "expected": "['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025']"
+      }
+    },
+    {
+      "check": "Full source-count profile",
+      "status": "PASS",
+      "detail": {
+        "actual": "37728",
+        "expected": "37728"
+      }
+    },
+    {
+      "check": "Observed-month profile",
+      "status": "PASS",
+      "detail": {
+        "actual": "98",
+        "expected": "98"
+      }
+    },
+    {
+      "check": "Last recorded date profile",
+      "status": "PASS",
+      "detail": {
+        "actual": "2025-12-31",
+        "expected": "2025-12-31"
+      }
+    },
+    {
+      "check": "2026+ source rows",
+      "status": "PASS",
+      "detail": {
+        "actual": "0",
+        "expected": "0"
+      }
+    },
+    {
+      "check": "Seven issued SQL statements are read-only single statements",
+      "status": "PASS"
+    },
+    {
+      "check": "Schema probe has no row disclosure",
+      "status": "PASS"
+    },
+    {
+      "check": "Fact queries pin exact current/frozen source version",
+      "status": "PASS"
+    },
+    {
+      "check": "Model release pointer is empty in observed receipt",
+      "status": "PASS",
+      "detail": {
+        "actual": "[]",
+        "expected": "[]"
+      }
+    },
+    {
+      "check": "Correct date/order field-name classification",
+      "status": "PASS",
+      "detail": {
+        "actual": "['dr_number_raw', 'date_delivered_raw', 'dr_number', 'date_delivered', 'is_date_missing', 'date_key']",
+        "expected": "['dr_number_raw', 'date_delivered_raw', 'dr_number', 'date_delivered', 'is_date_missing', 'date_key']"
+      }
+    },
+    {
+      "check": "Candidate markers cannot be mistaken for timestamps",
+      "status": "PASS"
+    },
+    {
+      "check": "2024-12 independently parsed final CSV source_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "197",
+        "expected": "197"
+      }
+    },
+    {
+      "check": "2024-12 independently parsed final CSV eligible_revenue_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "197",
+        "expected": "197"
+      }
+    },
+    {
+      "check": "2024-12 independently parsed final CSV revenue_excluded_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "0",
+        "expected": "0"
+      }
+    },
+    {
+      "check": "2024-12 independently parsed final CSV raw_known_net_sales",
+      "status": "PASS",
+      "detail": {
+        "actual": "16744970.510000",
+        "expected": "16744970.51"
+      }
+    },
+    {
+      "check": "2024-12 independently parsed final CSV net_sales",
+      "status": "PASS",
+      "detail": {
+        "actual": "16744970.510000",
+        "expected": "16744970.51"
+      }
+    },
+    {
+      "check": "2024-12 independently parsed final CSV positive_sales",
+      "status": "PASS",
+      "detail": {
+        "actual": "16744970.510000",
+        "expected": "16744970.51"
+      }
+    },
+    {
+      "check": "2024-12 independently parsed final CSV signed_negative_adjustments",
+      "status": "PASS",
+      "detail": {
+        "actual": "0",
+        "expected": "0.00"
+      }
+    },
+    {
+      "check": "2024-12 independently parsed final CSV eligible_margin_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "195",
+        "expected": "195"
+      }
+    },
+    {
+      "check": "2024-12 independently parsed final CSV gross_margin_amount",
+      "status": "PASS",
+      "detail": {
+        "actual": "4354510.100000",
+        "expected": "4354510.10"
+      }
+    },
+    {
+      "check": "2024-12 independently parsed final CSV margin_revenue_basis",
+      "status": "PASS",
+      "detail": {
+        "actual": "16723830.510000",
+        "expected": "16723830.51"
+      }
+    },
+    {
+      "check": "2024-12 independently parsed final CSV eligible_gross_sales",
+      "status": "PASS",
+      "detail": {
+        "actual": "16746659.010000",
+        "expected": "16746659.01"
+      }
+    },
+    {
+      "check": "2024-12 independently parsed final CSV eligible_gross_sales_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "195",
+        "expected": "195"
+      }
+    },
+    {
+      "check": "2024-12 independently parsed final CSV eligible_total_acquisition_cost",
+      "status": "PASS",
+      "detail": {
+        "actual": "12369320.410000",
+        "expected": "12369320.41"
+      }
+    },
+    {
+      "check": "2024-12 independently parsed final CSV eligible_total_acquisition_cost_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "195",
+        "expected": "195"
+      }
+    },
+    {
+      "check": "2024-12 CSV/frozen source_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "197",
+        "expected": "197"
+      }
+    },
+    {
+      "check": "2024-12 CSV/live source_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "197",
+        "expected": "197"
+      }
+    },
+    {
+      "check": "2024-12 CSV/frozen eligible_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "197",
+        "expected": "197"
+      }
+    },
+    {
+      "check": "2024-12 CSV/live eligible_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "197",
+        "expected": "197"
+      }
+    },
+    {
+      "check": "2024-12 CSV/frozen exact target",
+      "status": "PASS",
+      "detail": {
+        "actual": "16744970.510000",
+        "expected": "16744970.510000"
+      }
+    },
+    {
+      "check": "2024-12 CSV/live exact target",
+      "status": "PASS",
+      "detail": {
+        "actual": "16744970.510000",
+        "expected": "16744970.510000"
+      }
+    },
+    {
+      "check": "2024-12 adjusted-source count",
+      "status": "PASS",
+      "detail": {
+        "actual": "197",
+        "expected": "197"
+      }
+    },
+    {
+      "check": "2024-12 exact retained/review disposition counts",
+      "status": "PASS",
+      "detail": {
+        "actual": "{'KEEP_SOURCE_YEAR_ALIGNED': 197, 'REVIEW_INVALID_TRANSACTION_IDENTITY': 17, 'REVIEW_POSSIBLE_DUPLICATE': 3}",
+        "expected": "{'KEEP_SOURCE_YEAR_ALIGNED': 197, 'REVIEW_INVALID_TRANSACTION_IDENTITY': 17, 'REVIEW_POSSIBLE_DUPLICATE': 3}"
+      }
+    },
+    {
+      "check": "2024-12 KEEP_SOURCE_YEAR_ALIGNED exact financial bridge",
+      "status": "PASS",
+      "detail": {
+        "actual": "16744970.510000",
+        "expected": "16744970.51"
+      }
+    },
+    {
+      "check": "2024-12 REVIEW_INVALID_TRANSACTION_IDENTITY exact financial bridge",
+      "status": "PASS",
+      "detail": {
+        "actual": "3621045.500000",
+        "expected": "3621045.50"
+      }
+    },
+    {
+      "check": "2024-12 REVIEW_POSSIBLE_DUPLICATE exact financial bridge",
+      "status": "PASS",
+      "detail": {
+        "actual": "7320.000000",
+        "expected": "7320.00"
+      }
+    },
+    {
+      "check": "2024-12 complete supplied financial control",
+      "status": "PASS",
+      "detail": {
+        "actual": "20373336.010000",
+        "expected": "20373336.01"
+      }
+    },
+    {
+      "check": "2024-12 raw original detail count",
+      "status": "PASS",
+      "detail": {
+        "actual": "217",
+        "expected": "217"
+      }
+    },
+    {
+      "check": "2024-12 raw original financial control",
+      "status": "PASS",
+      "detail": {
+        "actual": "20373336.010000",
+        "expected": "20373336.01"
+      }
+    },
+    {
+      "check": "2024-12 raw original gross-margin control",
+      "status": "PASS",
+      "detail": {
+        "actual": "7988682.260000",
+        "expected": "7988682.26"
+      }
+    },
+    {
+      "check": "2024-12 original-versus-final financial difference",
+      "status": "PASS",
+      "detail": {
+        "actual": "-3628365.500000",
+        "expected": "-3628365.50"
+      }
+    },
+    {
+      "check": "2024-12 document/date/area group mismatch count",
+      "status": "PASS",
+      "detail": {
+        "actual": "18",
+        "expected": "18"
+      }
+    },
+    {
+      "check": "2024-12 document/date/area signed total difference",
+      "status": "PASS",
+      "detail": {
+        "actual": "-3628365.500000",
+        "expected": "-3628365.50"
+      }
+    },
+    {
+      "check": "2024-12 all source-label contributions",
+      "status": "PASS",
+      "detail": {
+        "actual": "{'ADMIN': Decimal('235307.260000'), 'QUEZON': Decimal('250166.000000'), 'BATANGAS': Decimal('188416.500000'), 'HOSPITAL': Decimal('1207046.000000'), 'GOVERNMENT': Decimal('14864034.750000')}",
+        "expected": "{'ADMIN': Decimal('235307.26'), 'BATANGAS': Decimal('188416.50'), 'GOVERNMENT': Decimal('14864034.75'), 'HOSPITAL': Decimal('1207046.00'), 'QUEZON': Decimal('250166.00')}"
+      }
+    },
+    {
+      "check": "2024-12 recorded delivery-day count",
+      "status": "PASS",
+      "detail": {
+        "actual": "17",
+        "expected": "17"
+      }
+    },
+    {
+      "check": "2024-12 first recorded delivery date",
+      "status": "PASS",
+      "detail": {
+        "actual": "2024-12-02",
+        "expected": "2024-12-02"
+      }
+    },
+    {
+      "check": "2024-12 last recorded delivery date",
+      "status": "PASS",
+      "detail": {
+        "actual": "2024-12-31",
+        "expected": "2024-12-31"
+      }
+    },
+    {
+      "check": "2024-12 largest recorded-day sales share",
+      "status": "PASS",
+      "detail": {
+        "actual": "74.802897",
+        "expected": "74.802897"
+      }
+    },
+    {
+      "check": "2024-12 highest recorded-revenue day",
+      "status": "PASS",
+      "detail": {
+        "actual": "2024-12-31",
+        "expected": "2024-12-31"
+      }
+    },
+    {
+      "check": "2024-12 highest recorded-revenue day amount",
+      "status": "PASS",
+      "detail": {
+        "actual": "12525723.050000",
+        "expected": "12525723.05"
+      }
+    },
+    {
+      "check": "2024-12 weighted gross-margin rate",
+      "status": "PASS",
+      "detail": {
+        "actual": "26.037756",
+        "expected": "26.037756"
+      }
+    },
+    {
+      "check": "2025-03 independently parsed final CSV source_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "241",
+        "expected": "241"
+      }
+    },
+    {
+      "check": "2025-03 independently parsed final CSV eligible_revenue_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "241",
+        "expected": "241"
+      }
+    },
+    {
+      "check": "2025-03 independently parsed final CSV revenue_excluded_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "0",
+        "expected": "0"
+      }
+    },
+    {
+      "check": "2025-03 independently parsed final CSV raw_known_net_sales",
+      "status": "PASS",
+      "detail": {
+        "actual": "2612295.100000",
+        "expected": "2612295.10"
+      }
+    },
+    {
+      "check": "2025-03 independently parsed final CSV net_sales",
+      "status": "PASS",
+      "detail": {
+        "actual": "2612295.100000",
+        "expected": "2612295.10"
+      }
+    },
+    {
+      "check": "2025-03 independently parsed final CSV positive_sales",
+      "status": "PASS",
+      "detail": {
+        "actual": "2612295.100000",
+        "expected": "2612295.10"
+      }
+    },
+    {
+      "check": "2025-03 independently parsed final CSV signed_negative_adjustments",
+      "status": "PASS",
+      "detail": {
+        "actual": "0",
+        "expected": "0.00"
+      }
+    },
+    {
+      "check": "2025-03 independently parsed final CSV eligible_margin_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "235",
+        "expected": "235"
+      }
+    },
+    {
+      "check": "2025-03 independently parsed final CSV gross_margin_amount",
+      "status": "PASS",
+      "detail": {
+        "actual": "1134570.110000",
+        "expected": "1134570.11"
+      }
+    },
+    {
+      "check": "2025-03 independently parsed final CSV margin_revenue_basis",
+      "status": "PASS",
+      "detail": {
+        "actual": "2142401.760000",
+        "expected": "2142401.76"
+      }
+    },
+    {
+      "check": "2025-03 independently parsed final CSV eligible_gross_sales",
+      "status": "PASS",
+      "detail": {
+        "actual": "2167154.860000",
+        "expected": "2167154.86"
+      }
+    },
+    {
+      "check": "2025-03 independently parsed final CSV eligible_gross_sales_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "235",
+        "expected": "235"
+      }
+    },
+    {
+      "check": "2025-03 independently parsed final CSV eligible_total_acquisition_cost",
+      "status": "PASS",
+      "detail": {
+        "actual": "1007831.650000",
+        "expected": "1007831.65"
+      }
+    },
+    {
+      "check": "2025-03 independently parsed final CSV eligible_total_acquisition_cost_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "235",
+        "expected": "235"
+      }
+    },
+    {
+      "check": "2025-03 CSV/frozen source_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "241",
+        "expected": "241"
+      }
+    },
+    {
+      "check": "2025-03 CSV/live source_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "241",
+        "expected": "241"
+      }
+    },
+    {
+      "check": "2025-03 CSV/frozen eligible_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "241",
+        "expected": "241"
+      }
+    },
+    {
+      "check": "2025-03 CSV/live eligible_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "241",
+        "expected": "241"
+      }
+    },
+    {
+      "check": "2025-03 CSV/frozen exact target",
+      "status": "PASS",
+      "detail": {
+        "actual": "2612295.100000",
+        "expected": "2612295.100000"
+      }
+    },
+    {
+      "check": "2025-03 CSV/live exact target",
+      "status": "PASS",
+      "detail": {
+        "actual": "2612295.100000",
+        "expected": "2612295.100000"
+      }
+    },
+    {
+      "check": "2025-03 adjusted-source count",
+      "status": "PASS",
+      "detail": {
+        "actual": "241",
+        "expected": "241"
+      }
+    },
+    {
+      "check": "2025-03 exact retained/review disposition counts",
+      "status": "PASS",
+      "detail": {
+        "actual": "{'KEEP_SOURCE_YEAR_ALIGNED': 241}",
+        "expected": "{'KEEP_SOURCE_YEAR_ALIGNED': 241}"
+      }
+    },
+    {
+      "check": "2025-03 KEEP_SOURCE_YEAR_ALIGNED exact financial bridge",
+      "status": "PASS",
+      "detail": {
+        "actual": "2612295.100000",
+        "expected": "2612295.10"
+      }
+    },
+    {
+      "check": "2025-03 complete supplied financial control",
+      "status": "PASS",
+      "detail": {
+        "actual": "2612295.100000",
+        "expected": "2612295.10"
+      }
+    },
+    {
+      "check": "2025-03 raw original detail count",
+      "status": "PASS",
+      "detail": {
+        "actual": "239",
+        "expected": "239"
+      }
+    },
+    {
+      "check": "2025-03 raw original financial control",
+      "status": "PASS",
+      "detail": {
+        "actual": "2612295.100000",
+        "expected": "2612295.10"
+      }
+    },
+    {
+      "check": "2025-03 raw original gross-margin control",
+      "status": "PASS",
+      "detail": {
+        "actual": "1289188.770000",
+        "expected": "1289188.77"
+      }
+    },
+    {
+      "check": "2025-03 original-versus-final financial difference",
+      "status": "PASS",
+      "detail": {
+        "actual": "0.000000",
+        "expected": "0.00"
+      }
+    },
+    {
+      "check": "2025-03 document/date/area group mismatch count",
+      "status": "PASS",
+      "detail": {
+        "actual": "0",
+        "expected": "0"
+      }
+    },
+    {
+      "check": "2025-03 document/date/area signed total difference",
+      "status": "PASS",
+      "detail": {
+        "actual": "0.000000",
+        "expected": "0.00"
+      }
+    },
+    {
+      "check": "2025-03 all source-label contributions",
+      "status": "PASS",
+      "detail": {
+        "actual": "{'ADMIN': Decimal('169491.490000'), 'BATANGAS': Decimal('308063.000000'), 'HOSPITAL': Decimal('938174.200000'), 'GOVERNMENT': Decimal('937264.300000'), 'QUEZON': Decimal('246170.110000'), 'MARINDUQUE': Decimal('13132.000000')}",
+        "expected": "{'ADMIN': Decimal('169491.49'), 'BATANGAS': Decimal('308063.00'), 'GOVERNMENT': Decimal('937264.30'), 'HOSPITAL': Decimal('938174.20'), 'MARINDUQUE': Decimal('13132.00'), 'QUEZON': Decimal('246170.11')}"
+      }
+    },
+    {
+      "check": "2025-03 recorded delivery-day count",
+      "status": "PASS",
+      "detail": {
+        "actual": "12",
+        "expected": "12"
+      }
+    },
+    {
+      "check": "2025-03 first recorded delivery date",
+      "status": "PASS",
+      "detail": {
+        "actual": "2025-03-03",
+        "expected": "2025-03-03"
+      }
+    },
+    {
+      "check": "2025-03 last recorded delivery date",
+      "status": "PASS",
+      "detail": {
+        "actual": "2025-03-31",
+        "expected": "2025-03-31"
+      }
+    },
+    {
+      "check": "2025-03 largest recorded-day sales share",
+      "status": "PASS",
+      "detail": {
+        "actual": "30.860840",
+        "expected": "30.860840"
+      }
+    },
+    {
+      "check": "2025-03 highest recorded-revenue day",
+      "status": "PASS",
+      "detail": {
+        "actual": "2025-03-15",
+        "expected": "2025-03-15"
+      }
+    },
+    {
+      "check": "2025-03 highest recorded-revenue day amount",
+      "status": "PASS",
+      "detail": {
+        "actual": "806176.200000",
+        "expected": "806176.20"
+      }
+    },
+    {
+      "check": "2025-03 weighted gross-margin rate",
+      "status": "PASS",
+      "detail": {
+        "actual": "52.957859",
+        "expected": "52.957859"
+      }
+    },
+    {
+      "check": "2025-04 independently parsed final CSV source_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "206",
+        "expected": "206"
+      }
+    },
+    {
+      "check": "2025-04 independently parsed final CSV eligible_revenue_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "206",
+        "expected": "206"
+      }
+    },
+    {
+      "check": "2025-04 independently parsed final CSV revenue_excluded_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "0",
+        "expected": "0"
+      }
+    },
+    {
+      "check": "2025-04 independently parsed final CSV raw_known_net_sales",
+      "status": "PASS",
+      "detail": {
+        "actual": "5670753.870000",
+        "expected": "5670753.87"
+      }
+    },
+    {
+      "check": "2025-04 independently parsed final CSV net_sales",
+      "status": "PASS",
+      "detail": {
+        "actual": "5670753.870000",
+        "expected": "5670753.87"
+      }
+    },
+    {
+      "check": "2025-04 independently parsed final CSV positive_sales",
+      "status": "PASS",
+      "detail": {
+        "actual": "5670753.870000",
+        "expected": "5670753.87"
+      }
+    },
+    {
+      "check": "2025-04 independently parsed final CSV signed_negative_adjustments",
+      "status": "PASS",
+      "detail": {
+        "actual": "0",
+        "expected": "0.00"
+      }
+    },
+    {
+      "check": "2025-04 independently parsed final CSV eligible_margin_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "196",
+        "expected": "196"
+      }
+    },
+    {
+      "check": "2025-04 independently parsed final CSV gross_margin_amount",
+      "status": "PASS",
+      "detail": {
+        "actual": "2510146.820000",
+        "expected": "2510146.82"
+      }
+    },
+    {
+      "check": "2025-04 independently parsed final CSV margin_revenue_basis",
+      "status": "PASS",
+      "detail": {
+        "actual": "4585400.690000",
+        "expected": "4585400.69"
+      }
+    },
+    {
+      "check": "2025-04 independently parsed final CSV eligible_gross_sales",
+      "status": "PASS",
+      "detail": {
+        "actual": "4612168.500000",
+        "expected": "4612168.50"
+      }
+    },
+    {
+      "check": "2025-04 independently parsed final CSV eligible_gross_sales_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "196",
+        "expected": "196"
+      }
+    },
+    {
+      "check": "2025-04 independently parsed final CSV eligible_total_acquisition_cost",
+      "status": "PASS",
+      "detail": {
+        "actual": "2075253.870000",
+        "expected": "2075253.87"
+      }
+    },
+    {
+      "check": "2025-04 independently parsed final CSV eligible_total_acquisition_cost_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "196",
+        "expected": "196"
+      }
+    },
+    {
+      "check": "2025-04 CSV/frozen source_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "206",
+        "expected": "206"
+      }
+    },
+    {
+      "check": "2025-04 CSV/live source_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "206",
+        "expected": "206"
+      }
+    },
+    {
+      "check": "2025-04 CSV/frozen eligible_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "206",
+        "expected": "206"
+      }
+    },
+    {
+      "check": "2025-04 CSV/live eligible_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "206",
+        "expected": "206"
+      }
+    },
+    {
+      "check": "2025-04 CSV/frozen exact target",
+      "status": "PASS",
+      "detail": {
+        "actual": "5670753.870000",
+        "expected": "5670753.870000"
+      }
+    },
+    {
+      "check": "2025-04 CSV/live exact target",
+      "status": "PASS",
+      "detail": {
+        "actual": "5670753.870000",
+        "expected": "5670753.870000"
+      }
+    },
+    {
+      "check": "2025-04 adjusted-source count",
+      "status": "PASS",
+      "detail": {
+        "actual": "206",
+        "expected": "206"
+      }
+    },
+    {
+      "check": "2025-04 exact retained/review disposition counts",
+      "status": "PASS",
+      "detail": {
+        "actual": "{'KEEP_SOURCE_YEAR_ALIGNED': 206}",
+        "expected": "{'KEEP_SOURCE_YEAR_ALIGNED': 206}"
+      }
+    },
+    {
+      "check": "2025-04 KEEP_SOURCE_YEAR_ALIGNED exact financial bridge",
+      "status": "PASS",
+      "detail": {
+        "actual": "5670753.870000",
+        "expected": "5670753.87"
+      }
+    },
+    {
+      "check": "2025-04 complete supplied financial control",
+      "status": "PASS",
+      "detail": {
+        "actual": "5670753.870000",
+        "expected": "5670753.87"
+      }
+    },
+    {
+      "check": "2025-04 raw original detail count",
+      "status": "PASS",
+      "detail": {
+        "actual": "196",
+        "expected": "196"
+      }
+    },
+    {
+      "check": "2025-04 raw original financial control",
+      "status": "PASS",
+      "detail": {
+        "actual": "5670753.870000",
+        "expected": "5670753.87"
+      }
+    },
+    {
+      "check": "2025-04 raw original gross-margin control",
+      "status": "PASS",
+      "detail": {
+        "actual": "2807067.700000",
+        "expected": "2807067.70"
+      }
+    },
+    {
+      "check": "2025-04 original-versus-final financial difference",
+      "status": "PASS",
+      "detail": {
+        "actual": "0.000000",
+        "expected": "0.00"
+      }
+    },
+    {
+      "check": "2025-04 document/date/area group mismatch count",
+      "status": "PASS",
+      "detail": {
+        "actual": "0",
+        "expected": "0"
+      }
+    },
+    {
+      "check": "2025-04 document/date/area signed total difference",
+      "status": "PASS",
+      "detail": {
+        "actual": "0.000000",
+        "expected": "0.00"
+      }
+    },
+    {
+      "check": "2025-04 all source-label contributions",
+      "status": "PASS",
+      "detail": {
+        "actual": "{'BATANGAS': Decimal('331309.900000'), 'HOSPITAL': Decimal('3876720.400000'), 'QUEZON': Decimal('261612.500000'), 'ADMIN': Decimal('105705.070000'), 'GOVERNMENT': Decimal('1090450.000000'), 'MARINDUQUE': Decimal('4956.000000')}",
+        "expected": "{'ADMIN': Decimal('105705.07'), 'BATANGAS': Decimal('331309.90'), 'GOVERNMENT': Decimal('1090450.00'), 'HOSPITAL': Decimal('3876720.40'), 'MARINDUQUE': Decimal('4956.00'), 'QUEZON': Decimal('261612.50')}"
+      }
+    },
+    {
+      "check": "2025-04 recorded delivery-day count",
+      "status": "PASS",
+      "detail": {
+        "actual": "8",
+        "expected": "8"
+      }
+    },
+    {
+      "check": "2025-04 first recorded delivery date",
+      "status": "PASS",
+      "detail": {
+        "actual": "2025-04-05",
+        "expected": "2025-04-05"
+      }
+    },
+    {
+      "check": "2025-04 last recorded delivery date",
+      "status": "PASS",
+      "detail": {
+        "actual": "2025-04-30",
+        "expected": "2025-04-30"
+      }
+    },
+    {
+      "check": "2025-04 largest recorded-day sales share",
+      "status": "PASS",
+      "detail": {
+        "actual": "59.588911",
+        "expected": "59.588911"
+      }
+    },
+    {
+      "check": "2025-04 highest recorded-revenue day",
+      "status": "PASS",
+      "detail": {
+        "actual": "2025-04-05",
+        "expected": "2025-04-05"
+      }
+    },
+    {
+      "check": "2025-04 highest recorded-revenue day amount",
+      "status": "PASS",
+      "detail": {
+        "actual": "3379140.500000",
+        "expected": "3379140.50"
+      }
+    },
+    {
+      "check": "2025-04 weighted gross-margin rate",
+      "status": "PASS",
+      "detail": {
+        "actual": "54.742148",
+        "expected": "54.742148"
+      }
+    },
+    {
+      "check": "2025-11 independently parsed final CSV source_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "545",
+        "expected": "545"
+      }
+    },
+    {
+      "check": "2025-11 independently parsed final CSV eligible_revenue_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "545",
+        "expected": "545"
+      }
+    },
+    {
+      "check": "2025-11 independently parsed final CSV revenue_excluded_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "0",
+        "expected": "0"
+      }
+    },
+    {
+      "check": "2025-11 independently parsed final CSV raw_known_net_sales",
+      "status": "PASS",
+      "detail": {
+        "actual": "25076009.200000",
+        "expected": "25076009.20"
+      }
+    },
+    {
+      "check": "2025-11 independently parsed final CSV net_sales",
+      "status": "PASS",
+      "detail": {
+        "actual": "25076009.200000",
+        "expected": "25076009.20"
+      }
+    },
+    {
+      "check": "2025-11 independently parsed final CSV positive_sales",
+      "status": "PASS",
+      "detail": {
+        "actual": "25076009.200000",
+        "expected": "25076009.20"
+      }
+    },
+    {
+      "check": "2025-11 independently parsed final CSV signed_negative_adjustments",
+      "status": "PASS",
+      "detail": {
+        "actual": "0",
+        "expected": "0.00"
+      }
+    },
+    {
+      "check": "2025-11 independently parsed final CSV eligible_margin_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "367",
+        "expected": "367"
+      }
+    },
+    {
+      "check": "2025-11 independently parsed final CSV gross_margin_amount",
+      "status": "PASS",
+      "detail": {
+        "actual": "6500248.450000",
+        "expected": "6500248.45"
+      }
+    },
+    {
+      "check": "2025-11 independently parsed final CSV margin_revenue_basis",
+      "status": "PASS",
+      "detail": {
+        "actual": "10069519.740000",
+        "expected": "10069519.74"
+      }
+    },
+    {
+      "check": "2025-11 independently parsed final CSV eligible_gross_sales",
+      "status": "PASS",
+      "detail": {
+        "actual": "10470543.380000",
+        "expected": "10470543.38"
+      }
+    },
+    {
+      "check": "2025-11 independently parsed final CSV eligible_gross_sales_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "373",
+        "expected": "373"
+      }
+    },
+    {
+      "check": "2025-11 independently parsed final CSV eligible_total_acquisition_cost",
+      "status": "PASS",
+      "detail": {
+        "actual": "3569271.290000",
+        "expected": "3569271.29"
+      }
+    },
+    {
+      "check": "2025-11 independently parsed final CSV eligible_total_acquisition_cost_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "367",
+        "expected": "367"
+      }
+    },
+    {
+      "check": "2025-11 CSV/frozen source_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "545",
+        "expected": "545"
+      }
+    },
+    {
+      "check": "2025-11 CSV/live source_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "545",
+        "expected": "545"
+      }
+    },
+    {
+      "check": "2025-11 CSV/frozen eligible_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "545",
+        "expected": "545"
+      }
+    },
+    {
+      "check": "2025-11 CSV/live eligible_count",
+      "status": "PASS",
+      "detail": {
+        "actual": "545",
+        "expected": "545"
+      }
+    },
+    {
+      "check": "2025-11 CSV/frozen exact target",
+      "status": "PASS",
+      "detail": {
+        "actual": "25076009.200000",
+        "expected": "25076009.200000"
+      }
+    },
+    {
+      "check": "2025-11 CSV/live exact target",
+      "status": "PASS",
+      "detail": {
+        "actual": "25076009.200000",
+        "expected": "25076009.200000"
+      }
+    },
+    {
+      "check": "2025-11 adjusted-source count",
+      "status": "PASS",
+      "detail": {
+        "actual": "545",
+        "expected": "545"
+      }
+    },
+    {
+      "check": "2025-11 exact retained/review disposition counts",
+      "status": "PASS",
+      "detail": {
+        "actual": "{'KEEP_SOURCE_YEAR_ALIGNED': 545}",
+        "expected": "{'KEEP_SOURCE_YEAR_ALIGNED': 545}"
+      }
+    },
+    {
+      "check": "2025-11 KEEP_SOURCE_YEAR_ALIGNED exact financial bridge",
+      "status": "PASS",
+      "detail": {
+        "actual": "25076009.200000",
+        "expected": "25076009.20"
+      }
+    },
+    {
+      "check": "2025-11 complete supplied financial control",
+      "status": "PASS",
+      "detail": {
+        "actual": "25076009.200000",
+        "expected": "25076009.20"
+      }
+    },
+    {
+      "check": "2025-11 raw original detail count",
+      "status": "PASS",
+      "detail": {
+        "actual": "419",
+        "expected": "419"
+      }
+    },
+    {
+      "check": "2025-11 raw original financial control",
+      "status": "PASS",
+      "detail": {
+        "actual": "25076009.200000",
+        "expected": "25076009.20"
+      }
+    },
+    {
+      "check": "2025-11 raw original gross-margin control",
+      "status": "PASS",
+      "detail": {
+        "actual": "12853159.070000",
+        "expected": "12853159.07"
+      }
+    },
+    {
+      "check": "2025-11 original-versus-final financial difference",
+      "status": "PASS",
+      "detail": {
+        "actual": "0.000000",
+        "expected": "0.00"
+      }
+    },
+    {
+      "check": "2025-11 document/date/area group mismatch count",
+      "status": "PASS",
+      "detail": {
+        "actual": "0",
+        "expected": "0"
+      }
+    },
+    {
+      "check": "2025-11 document/date/area signed total difference",
+      "status": "PASS",
+      "detail": {
+        "actual": "0.000000",
+        "expected": "0.00"
+      }
+    },
+    {
+      "check": "2025-11 all source-label contributions",
+      "status": "PASS",
+      "detail": {
+        "actual": "{'ADMIN': Decimal('145910.050000'), 'GOVERNMENT': Decimal('22177074.290000'), 'BATANGAS': Decimal('214885.500000'), 'QUEZON': Decimal('147230.000000'), 'HOSPITAL': Decimal('2390909.360000')}",
+        "expected": "{'ADMIN': Decimal('145910.05'), 'BATANGAS': Decimal('214885.50'), 'GOVERNMENT': Decimal('22177074.29'), 'HOSPITAL': Decimal('2390909.36'), 'QUEZON': Decimal('147230.00')}"
+      }
+    },
+    {
+      "check": "2025-11 recorded delivery-day count",
+      "status": "PASS",
+      "detail": {
+        "actual": "8",
+        "expected": "8"
+      }
+    },
+    {
+      "check": "2025-11 first recorded delivery date",
+      "status": "PASS",
+      "detail": {
+        "actual": "2025-11-05",
+        "expected": "2025-11-05"
+      }
+    },
+    {
+      "check": "2025-11 last recorded delivery date",
+      "status": "PASS",
+      "detail": {
+        "actual": "2025-11-29",
+        "expected": "2025-11-29"
+      }
+    },
+    {
+      "check": "2025-11 largest recorded-day sales share",
+      "status": "PASS",
+      "detail": {
+        "actual": "92.770368",
+        "expected": "92.770368"
+      }
+    },
+    {
+      "check": "2025-11 highest recorded-revenue day",
+      "status": "PASS",
+      "detail": {
+        "actual": "2025-11-29",
+        "expected": "2025-11-29"
+      }
+    },
+    {
+      "check": "2025-11 highest recorded-revenue day amount",
+      "status": "PASS",
+      "detail": {
+        "actual": "23263105.970000",
+        "expected": "23263105.97"
+      }
+    },
+    {
+      "check": "2025-11 weighted gross-margin rate",
+      "status": "PASS",
+      "detail": {
+        "actual": "64.553709",
+        "expected": "64.553709"
+      }
+    },
+    {
+      "check": "Actual final 2025 CSV detail row count",
+      "status": "PASS",
+      "detail": {
+        "actual": "4544",
+        "expected": "4544"
+      }
+    },
+    {
+      "check": "Actual final 2025 CSV annual net sales",
+      "status": "PASS",
+      "detail": {
+        "actual": "185396821.040000",
+        "expected": "185396821.040000"
+      }
+    },
+    {
+      "check": "Original 2025 raw-finance annual total preserved",
+      "status": "PASS",
+      "detail": {
+        "actual": "185396821.040000",
+        "expected": "185396821.040000"
+      }
+    },
+    {
+      "check": "Actual final 2024 CSV Gold-comparable detail count",
+      "status": "PASS",
+      "detail": {
+        "actual": "2831",
+        "expected": "2831"
+      }
+    },
+    {
+      "check": "Actual final 2024 CSV Gold-comparable annual net sales",
+      "status": "PASS",
+      "detail": {
+        "actual": "50259319.880000",
+        "expected": "50259319.880000"
+      }
+    },
+    {
+      "check": "2024 replacement preserves physical CSV record count",
+      "status": "PASS"
+    },
+    {
+      "check": "2024 replacement preserves column widths",
+      "status": "PASS"
+    },
+    {
+      "check": "2024 exact changed column/count map",
+      "status": "PASS",
+      "detail": {
+        "actual": "{'3': 124, '4': 124, '5': 124, '9': 124}",
+        "expected": "{'3': 124, '4': 124, '5': 124, '9': 124}"
+      }
+    },
+    {
+      "check": "2024 financial/date/document fields preserve source values",
+      "status": "PASS"
+    },
+    {
+      "check": "Historical preparation stage row count",
+      "status": "PASS",
+      "detail": {
+        "actual": "4570",
+        "expected": "4570"
+      }
+    },
+    {
+      "check": "Historical preparation is explicitly distinct from final row lineage",
+      "status": "PASS"
+    },
+    {
+      "check": "2024-12 historical preparation parent count",
+      "status": "PASS",
+      "detail": {
+        "actual": "0",
+        "expected": "0"
+      }
+    },
+    {
+      "check": "2024-12 historical preparation parent amount",
+      "status": "PASS",
+      "detail": {
+        "actual": "0",
+        "expected": "0.00"
+      }
+    },
+    {
+      "check": "2025-03 historical preparation parent count",
+      "status": "PASS",
+      "detail": {
+        "actual": "3",
+        "expected": "3"
+      }
+    },
+    {
+      "check": "2025-03 historical preparation parent amount",
+      "status": "PASS",
+      "detail": {
+        "actual": "603160.0",
+        "expected": "603160.00"
+      }
+    },
+    {
+      "check": "2025-04 historical preparation parent count",
+      "status": "PASS",
+      "detail": {
+        "actual": "10",
+        "expected": "10"
+      }
+    },
+    {
+      "check": "2025-04 historical preparation parent amount",
+      "status": "PASS",
+      "detail": {
+        "actual": "1231270.0",
+        "expected": "1231270.00"
+      }
+    },
+    {
+      "check": "2025-11 historical preparation parent count",
+      "status": "PASS",
+      "detail": {
+        "actual": "98",
+        "expected": "98"
+      }
+    },
+    {
+      "check": "2025-11 historical preparation parent amount",
+      "status": "PASS",
+      "detail": {
+        "actual": "18728932.75",
+        "expected": "18728932.75"
+      }
+    }
+  ],
+  "check_summary": {
+    "passed": 302,
+    "failed": 0
+  },
+  "limitations": [
+    "Live query results were independently reconciled from the retained receipt; this QA script makes no fresh warehouse query.",
+    "CSV dates are recorded dates, not independently verified order, invoice, delivery or booking timestamps.",
+    "Source-owner cause and completeness explanations remain unconfirmed; numeric agreement is not approval.",
+    "2025 historical preparation stage cannot establish exact final parent-to-child line mapping.",
+    "Only selected modern CSV financial controls are separately parsed; older annual population comparisons use the frozen input and live aggregate receipt."
+  ]
+}

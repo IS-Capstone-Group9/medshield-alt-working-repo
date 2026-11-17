@@ -1,0 +1,36 @@
+*.pdf binary
+*.docx binary
+
+# Preserve exact source and audit bytes used by provenance hashes.
+outputs/** -text
+databricks/medshield_project_csv/**/*.csv -text
+databricks/medshield_reference_csv/**/*.csv -text
+databricks/medshield_project/references/*.csv -text
+datasources/templates/area_classification_mapping.csv -text
+outputs/2020_2024_databricks_final/** -text
+outputs/2025_databricks_final/** -text
+# Gold pins the deployed helper's CRLF bytes; preserve that hash on every OS.
+databricks/medshield_project/product_catalog.py text eol=crlf
+outputs/descriptive_validation/** -text
+outputs/publication_readiness/** -text
+outputs/qa_reassessment/*.csv -text
+# Preserve the dated product review and supporting evidence checksums.
+outputs/business_analytics_review_20261007/** -text
+outputs/product_master_population_20261007/** -text
+outputs/product_category_review_20260927/** -text
+outputs/product_sales_rules/2026-10-02T21-00-51-469Z/sealed-review/** -text
+outputs/databricks_analytical_review_20261007/** -text
+outputs/databricks_retention_recovery_20261007/** -text
+outputs/catalog_preparation/** -text
+outputs/nebulizer_accessory_update_20261007/** -text
+outputs/catalog_deployment/** -text
+databricks/medshield_project/references/catalog_publication.json -text
+databricks/medshield_project/references/category_acceptance.json -text
+outputs/predictive_validation/2026-09-27T14-30-12-921Z/** -text
+
+# Exact retained offline test-fixture package.
+tests/fixtures/retained/fixtures.tar.gz binary
+tests/fixtures/retained/manifest.json text eol=lf
+databricks_updated_2/medshield_project/references/regional_delivery_mapping_*.json -text
+databricks_updated_2/medshield_project/references/psa_census_population_0211A6DAPG0.csv -text
+databricks_updated_2/medshield_project/references/territory_population_2017_2026.csv -text

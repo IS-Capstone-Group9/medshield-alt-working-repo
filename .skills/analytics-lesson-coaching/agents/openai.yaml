@@ -1,0 +1,4 @@
+interface:
+  display_name: "Analytics Lesson Coaching"
+  short_description: "Coach helpers using MedShield analytics lessons"
+  default_prompt: "Use $analytics-lesson-coaching to coach a MedShield helper on an analytical task and check its reasoning against the reviewed lessons."

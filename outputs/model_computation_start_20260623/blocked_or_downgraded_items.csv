@@ -1,0 +1,5 @@
+checklist_item,status,reason
+Load or prepare DOH historical disease data,blocked_missing_doh_data,No DOH historical dataset is present in the workspace.
+Load historical PAGASA reference data,blocked_missing_pagasa_data,No PAGASA historical dataset is present in the workspace.
+Weather-adjusted model comparison,blocked_partial_weather_coverage,Only partial weather API data is checked in; current file covers one area/year.
+XGBoost urgency model,blocked_target_not_approved,Urgency target and product master classification are not approved.

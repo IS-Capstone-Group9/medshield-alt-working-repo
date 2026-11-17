@@ -1,0 +1,8 @@
+area,quantity,revenue,gross_margin_amount,row_count,active_months,estimated_contract_rows,rank,gross_margin_rate,revenue_share,cumulative_revenue_share,abc_class,method,status
+Quezon,34292.28,7708883.18,13948986.69,2637,54,0,1,1.809469,0.355112,0.355112,A,ABC/Pareto using total_trade_price revenue,draft
+Batangas,19872.28,5198977.99,10411814.26,2816,54,0,2,2.002666,0.239493,0.594605,A,ABC/Pareto using total_trade_price revenue,draft
+Marinduque,15829.0,4712382.36,5718447.85,487,43,20,3,1.213494,0.217077,0.811682,B,ABC/Pareto using total_trade_price revenue,draft
+Camarines Norte,5405.07,1635095.13,2358725.69,402,30,0,4,1.442562,0.075321,0.887003,B,ABC/Pareto using total_trade_price revenue,draft
+Laguna,4573.42,1059773.42,750155.98,62,13,0,5,0.707846,0.048819,0.935822,B,ABC/Pareto using total_trade_price revenue,draft
+Cavite,4415.7,820321.52,1723232.0,476,30,0,6,2.100679,0.037788,0.97361,C,ABC/Pareto using total_trade_price revenue,draft
+Camarines Sur,3549.3,572877.96,1149261.52,388,26,0,7,2.006119,0.02639,1.0,C,ABC/Pareto using total_trade_price revenue,draft

@@ -7,6 +7,9 @@ frontend/dist/
 frontend/.next/
 backend/__pycache__/
 backend/.pytest_cache/
+backend/data/local_accounts.json
+backend/data/local_audit_logs.jsonl
+backend/$log
 __pycache__/
 .pytest_cache/
 .vscode/
@@ -27,6 +30,9 @@ __pycache__/
 .idea/
 *.sublime-workspace
 
+# Machine-local Obsidian project-memory connection
+/.codex/obsidian-memory.local.json
+
 # OS
 .DS_Store
 Thumbs.db
@@ -45,3 +51,46 @@ build/
 *.log
 coverage/
 /.cache
+docs/~$*.docx
+docs/MedShield_Chapter_4_5_Draft.docx
+frontend/test-results/
+frontend/playwright-report/
+test-results/
+playwright-report/
+*.tsbuildinfo
+
+# Runtime ingestion outputs
+data/medshield/uploads/
+data/medshield/processed/sales_transactions_medical_demand.json.gz
+data/medshield/processed/sales_transactions_non_medical_excluded.json.gz
+data/medshield/certification/*_candidate.json.gz
+data/medshield/certification/*_financial_flags.json.gz
+data/medshield/certification/*_master_candidate.csv
+outputs/medical_demand_cleaning_*/
+
+# Reproducible large external-source clean exports (regenerate from raw data)
+datasources/clean/doh/*.csv
+datasources/clean/pagasa/*.csv
+data/DOH (2018-2026)-*/
+
+# Obsolete local export superseded by complete yearly daily CSVs
+outputs/contract_backward_allocation_20260623/yearly_daily/sales_transactions_area_allocated_undated_review.csv
+
+# Superseded by yearly_daily_clean_sales exports
+outputs/contract_backward_allocation_20260623/yearly_daily/
+
+# Optional local reference clones; these are not application submodules.
+/external/medshield_frontend/
+/temp-medshield/medshield-dashboard/
+
+# Disposable native PostgreSQL verification runtime and synthetic clusters
+/outputs/database_remediation_20261016/environment-runtime/
+
+# Private live Supabase recovery metadata (contains schema/ACL definitions)
+/outputs/supabase_live_migration_20261017/private/
+
+# Live dashboard evidence: real client sales figures and the signed-in account's email
+/outputs/ui_simplification_20261107/live-before/
+/outputs/ui_simplification_20261107/live-final/
+/outputs/ui_simplification_20261107/live-before-values/
+/outputs/ui_simplification_20261107/live-final-values/

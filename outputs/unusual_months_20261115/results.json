@@ -1,0 +1,1231 @@
+{
+ "rules_sha256": "4a722060817933eaba666bf0ce4c5858b11d70d7b901a7e807ffe61761e7639f",
+ "months_recorded": 107,
+ "months_scored_total": 101,
+ "total": [
+  {
+   "month": "2017-12",
+   "series": "TOTAL",
+   "flag": "LOW",
+   "z": -5.48,
+   "value": 3900,
+   "baseline_median": 2383725,
+   "deviation": -2379825,
+   "large_order_deviation": 0,
+   "large_documents": 0,
+   "routine_deviation": -2379825,
+   "cause": "BROAD",
+   "new_families": 0,
+   "top_families": [
+    {
+     "family": "EUROXONE",
+     "deviation": -120800,
+     "new": false
+    },
+    {
+     "family": "LACTAMOX",
+     "deviation": -98942,
+     "new": false
+    },
+    {
+     "family": "CEFZIME",
+     "deviation": -59100,
+     "new": false
+    }
+   ]
+  },
+  {
+   "month": "2018-04",
+   "series": "TOTAL",
+   "flag": "HIGH",
+   "z": 3.91,
+   "value": 6403396,
+   "baseline_median": 2383725,
+   "deviation": 4019671,
+   "large_order_deviation": 2248960,
+   "large_documents": 3,
+   "routine_deviation": 1770711,
+   "cause": "LARGE ORDERS",
+   "new_families": 1478626,
+   "top_families": [
+    {
+     "family": "PROFUREX",
+     "deviation": 188720,
+     "new": true
+    },
+    {
+     "family": "EVAPROST",
+     "deviation": 187372,
+     "new": false
+    },
+    {
+     "family": "CEFZIME",
+     "deviation": 164000,
+     "new": false
+    }
+   ]
+  },
+  {
+   "month": "2019-03",
+   "series": "TOTAL",
+   "flag": "HIGH",
+   "z": 3.12,
+   "value": 6995759,
+   "baseline_median": 4595141,
+   "deviation": 2400618,
+   "large_order_deviation": 1019179,
+   "large_documents": 3,
+   "routine_deviation": 1381439,
+   "cause": "NEW PRODUCTS",
+   "new_families": 787990,
+   "top_families": [
+    {
+     "family": "GYNE TOCIN",
+     "deviation": 383000,
+     "new": false
+    },
+    {
+     "family": "CEFZIME",
+     "deviation": 330800,
+     "new": false
+    },
+    {
+     "family": "WHEELCHAIR MAGS",
+     "deviation": 259000,
+     "new": true
+    }
+   ]
+  },
+  {
+   "month": "2019-04",
+   "series": "TOTAL",
+   "flag": "HIGH",
+   "z": 4.49,
+   "value": 9438917,
+   "baseline_median": 4817031,
+   "deviation": 4621886,
+   "large_order_deviation": 1484270,
+   "large_documents": 3,
+   "routine_deviation": 3137616,
+   "cause": "BROAD",
+   "new_families": 1511840,
+   "top_families": [
+    {
+     "family": "SPEEDA",
+     "deviation": 490721,
+     "new": false
+    },
+    {
+     "family": "ONZET",
+     "deviation": 189060,
+     "new": true
+    },
+    {
+     "family": "MULTIVITA",
+     "deviation": 180196,
+     "new": true
+    }
+   ]
+  },
+  {
+   "month": "2019-05",
+   "series": "TOTAL",
+   "flag": "HIGH",
+   "z": 4.62,
+   "value": 9568922,
+   "baseline_median": 4817031,
+   "deviation": 4751891,
+   "large_order_deviation": 83680,
+   "large_documents": 1,
+   "routine_deviation": 4668211,
+   "cause": "BROAD",
+   "new_families": 1279336,
+   "top_families": [
+    {
+     "family": "SPEEDA",
+     "deviation": 734200,
+     "new": false
+    },
+    {
+     "family": "MAXIFER",
+     "deviation": 461825,
+     "new": false
+    },
+    {
+     "family": "HYCLENS WOUND CARE",
+     "deviation": 400235,
+     "new": false
+    }
+   ]
+  },
+  {
+   "month": "2021-07",
+   "series": "TOTAL",
+   "flag": "HIGH",
+   "z": 3.3,
+   "value": 9573660,
+   "baseline_median": 3332796,
+   "deviation": 6240864,
+   "large_order_deviation": 3373722,
+   "large_documents": 5,
+   "routine_deviation": 2867142,
+   "cause": "LARGE ORDERS",
+   "new_families": 1837064,
+   "top_families": [
+    {
+     "family": "GLOVES BLUE VINYL NITRILE BLEND",
+     "deviation": 577830,
+     "new": true
+    },
+    {
+     "family": "PPE SET",
+     "deviation": 494000,
+     "new": true
+    },
+    {
+     "family": "FACE MASK",
+     "deviation": 414400,
+     "new": false
+    }
+   ]
+  },
+  {
+   "month": "2021-08",
+   "series": "TOTAL",
+   "flag": "HIGH",
+   "z": 3.44,
+   "value": 10533740,
+   "baseline_median": 3726748,
+   "deviation": 6806992,
+   "large_order_deviation": 3639008,
+   "large_documents": 6,
+   "routine_deviation": 3167984,
+   "cause": "LARGE ORDERS",
+   "new_families": 1258267,
+   "top_families": [
+    {
+     "family": "GLOVES BLUE VINYL NITRILE BLEND",
+     "deviation": 403000,
+     "new": false
+    },
+    {
+     "family": "ALCOHOL ETHYL",
+     "deviation": 384000,
+     "new": true
+    },
+    {
+     "family": "GLOVES VINYL AIEL",
+     "deviation": 312000,
+     "new": true
+    }
+   ]
+  },
+  {
+   "month": "2021-10",
+   "series": "TOTAL",
+   "flag": "HIGH",
+   "z": 3.84,
+   "value": 15279604,
+   "baseline_median": 4899916,
+   "deviation": 10379687,
+   "large_order_deviation": 6529044,
+   "large_documents": 8,
+   "routine_deviation": 3850644,
+   "cause": "LARGE ORDERS",
+   "new_families": 1728574,
+   "top_families": [
+    {
+     "family": "SYVIR",
+     "deviation": 370000,
+     "new": true
+    },
+    {
+     "family": "EVAPROST",
+     "deviation": 323300,
+     "new": false
+    },
+    {
+     "family": "FERN D",
+     "deviation": 308976,
+     "new": true
+    }
+   ]
+  },
+  {
+   "month": "2023-02",
+   "series": "TOTAL",
+   "flag": "HIGH",
+   "z": 3.54,
+   "value": 13794078,
+   "baseline_median": 4755234,
+   "deviation": 9038844,
+   "large_order_deviation": 4919512,
+   "large_documents": 7,
+   "routine_deviation": 4119332,
+   "cause": "LARGE ORDERS",
+   "new_families": 1709350,
+   "top_families": [
+    {
+     "family": "SYRINGE",
+     "deviation": 383448,
+     "new": false
+    },
+    {
+     "family": "PROFUREX",
+     "deviation": 366872,
+     "new": false
+    },
+    {
+     "family": "LUPINSULIN",
+     "deviation": 321027,
+     "new": false
+    }
+   ]
+  },
+  {
+   "month": "2023-05",
+   "series": "TOTAL",
+   "flag": "HIGH",
+   "z": 5.28,
+   "value": 14537368,
+   "baseline_median": 3633828,
+   "deviation": 10903540,
+   "large_order_deviation": 9121260,
+   "large_documents": 6,
+   "routine_deviation": 1782281,
+   "cause": "LARGE ORDERS",
+   "new_families": 1834690,
+   "top_families": [
+    {
+     "family": "ANMUM MATERNA PLAIN",
+     "deviation": 279000,
+     "new": true
+    },
+    {
+     "family": "VICRYL",
+     "deviation": 239700,
+     "new": true
+    },
+    {
+     "family": "SYRINGE",
+     "deviation": 169400,
+     "new": false
+    }
+   ]
+  },
+  {
+   "month": "2024-06",
+   "series": "TOTAL",
+   "flag": "HIGH",
+   "z": 9.75,
+   "value": 6172208,
+   "baseline_median": 2092106,
+   "deviation": 4080102,
+   "large_order_deviation": 4252890,
+   "large_documents": 2,
+   "routine_deviation": -172788,
+   "cause": "LARGE ORDERS",
+   "new_families": 0,
+   "top_families": [
+    {
+     "family": "TRIVASC",
+     "deviation": -46238,
+     "new": false
+    },
+    {
+     "family": "PHYTOMEN",
+     "deviation": -33900,
+     "new": false
+    },
+    {
+     "family": "EVAPROST",
+     "deviation": -28748,
+     "new": false
+    }
+   ]
+  },
+  {
+   "month": "2025-02",
+   "series": "TOTAL",
+   "flag": "HIGH",
+   "z": 6.99,
+   "value": 8895702,
+   "baseline_median": 1997661,
+   "deviation": 6898042,
+   "large_order_deviation": 4524152,
+   "large_documents": 4,
+   "routine_deviation": 2373889,
+   "cause": "LARGE ORDERS",
+   "new_families": 1486526,
+   "top_families": [
+    {
+     "family": "CUROXIM",
+     "deviation": 266220,
+     "new": true
+    },
+    {
+     "family": "MERAZOL",
+     "deviation": 212396,
+     "new": false
+    },
+    {
+     "family": "IV WRIST SPLINT",
+     "deviation": 164790,
+     "new": false
+    }
+   ]
+  },
+  {
+   "month": "2025-04",
+   "series": "TOTAL",
+   "flag": "HIGH",
+   "z": 3.04,
+   "value": 4439484,
+   "baseline_median": 2251239,
+   "deviation": 2188245,
+   "large_order_deviation": 2392854,
+   "large_documents": 2,
+   "routine_deviation": -204609,
+   "cause": "LARGE ORDERS",
+   "new_families": 0,
+   "top_families": [
+    {
+     "family": "LACTAMOX",
+     "deviation": -79242,
+     "new": false
+    },
+    {
+     "family": "TAZACIN",
+     "deviation": -31932,
+     "new": false
+    },
+    {
+     "family": "PHYTOBAS",
+     "deviation": -29100,
+     "new": false
+    }
+   ]
+  },
+  {
+   "month": "2025-05",
+   "series": "TOTAL",
+   "flag": "HIGH",
+   "z": 4.21,
+   "value": 7999319,
+   "baseline_median": 2627564,
+   "deviation": 5371755,
+   "large_order_deviation": 4678620,
+   "large_documents": 6,
+   "routine_deviation": 693135,
+   "cause": "LARGE ORDERS",
+   "new_families": 1913915,
+   "top_families": [
+    {
+     "family": "MONOWEL",
+     "deviation": 644250,
+     "new": true
+    },
+    {
+     "family": "GENVAC B",
+     "deviation": 404500,
+     "new": true
+    },
+    {
+     "family": "MEDICAL GRADE HEPA MACHINE",
+     "deviation": 208970,
+     "new": true
+    }
+   ]
+  },
+  {
+   "month": "2025-06",
+   "series": "TOTAL",
+   "flag": "HIGH",
+   "z": 6.08,
+   "value": 12502958,
+   "baseline_median": 2736565,
+   "deviation": 9766393,
+   "large_order_deviation": 8035978,
+   "large_documents": 10,
+   "routine_deviation": 1730415,
+   "cause": "LARGE ORDERS",
+   "new_families": 1029593,
+   "top_families": [
+    {
+     "family": "ZINACARE",
+     "deviation": 345100,
+     "new": false
+    },
+    {
+     "family": "SEZUVIN",
+     "deviation": 265915,
+     "new": true
+    },
+    {
+     "family": "ENOXAGET",
+     "deviation": 224766,
+     "new": false
+    }
+   ]
+  },
+  {
+   "month": "2025-09",
+   "series": "TOTAL",
+   "flag": "HIGH",
+   "z": 4.72,
+   "value": 16182280,
+   "baseline_median": 3485562,
+   "deviation": 12696717,
+   "large_order_deviation": 5787165,
+   "large_documents": 9,
+   "routine_deviation": 6909552,
+   "cause": "BROAD",
+   "new_families": 699770,
+   "top_families": [
+    {
+     "family": "ANTITET",
+     "deviation": 1375000,
+     "new": false
+    },
+    {
+     "family": "VOLUMETRIC INFUSION SET",
+     "deviation": 1221141,
+     "new": false
+    },
+    {
+     "family": "OPREX",
+     "deviation": 631695,
+     "new": false
+    }
+   ]
+  }
+ ],
+ "routine": [
+  {
+   "month": "2017-12",
+   "series": "ROUTINE",
+   "flag": "LOW",
+   "z": -5.48,
+   "value": 3900,
+   "baseline_median": 2383725,
+   "deviation": -2379825,
+   "cause": "BROAD",
+   "new_families": 0,
+   "top_families": [
+    {
+     "family": "EUROXONE",
+     "deviation": -120800,
+     "new": false
+    },
+    {
+     "family": "LACTAMOX",
+     "deviation": -98942,
+     "new": false
+    },
+    {
+     "family": "CEFZIME",
+     "deviation": -59100,
+     "new": false
+    }
+   ]
+  },
+  {
+   "month": "2019-05",
+   "series": "ROUTINE",
+   "flag": "HIGH",
+   "z": 3.9,
+   "value": 8290042,
+   "baseline_median": 4050802,
+   "deviation": 4239240,
+   "cause": "BROAD",
+   "new_families": 1279336,
+   "top_families": [
+    {
+     "family": "SPEEDA",
+     "deviation": 734200,
+     "new": false
+    },
+    {
+     "family": "MAXIFER",
+     "deviation": 461825,
+     "new": false
+    },
+    {
+     "family": "HYCLENS WOUND CARE",
+     "deviation": 400235,
+     "new": false
+    }
+   ]
+  },
+  {
+   "month": "2021-07",
+   "series": "ROUTINE",
+   "flag": "HIGH",
+   "z": 4.09,
+   "value": 5171081,
+   "baseline_median": 2210497,
+   "deviation": 2960584,
+   "cause": "NEW PRODUCTS",
+   "new_families": 1837064,
+   "top_families": [
+    {
+     "family": "GLOVES BLUE VINYL NITRILE BLEND",
+     "deviation": 577830,
+     "new": true
+    },
+    {
+     "family": "PPE SET",
+     "deviation": 494000,
+     "new": true
+    },
+    {
+     "family": "FACE MASK",
+     "deviation": 414400,
+     "new": false
+    }
+   ]
+  },
+  {
+   "month": "2021-08",
+   "series": "ROUTINE",
+   "flag": "HIGH",
+   "z": 3.2,
+   "value": 5374805,
+   "baseline_median": 2492705,
+   "deviation": 2882100,
+   "cause": "BROAD",
+   "new_families": 1258267,
+   "top_families": [
+    {
+     "family": "GLOVES BLUE VINYL NITRILE BLEND",
+     "deviation": 403000,
+     "new": false
+    },
+    {
+     "family": "ALCOHOL ETHYL",
+     "deviation": 384000,
+     "new": true
+    },
+    {
+     "family": "GLOVES VINYL AIEL",
+     "deviation": 312000,
+     "new": true
+    }
+   ]
+  },
+  {
+   "month": "2023-01",
+   "series": "ROUTINE",
+   "flag": "HIGH",
+   "z": 3.66,
+   "value": 6498429,
+   "baseline_median": 3069810,
+   "deviation": 3428619,
+   "cause": "BROAD",
+   "new_families": 1114854,
+   "top_families": [
+    {
+     "family": "EVAPROST",
+     "deviation": 326554,
+     "new": false
+    },
+    {
+     "family": "NEUROBE",
+     "deviation": 276000,
+     "new": false
+    },
+    {
+     "family": "GYNE TOCIN",
+     "deviation": 263000,
+     "new": false
+    }
+   ]
+  },
+  {
+   "month": "2023-02",
+   "series": "ROUTINE",
+   "flag": "HIGH",
+   "z": 3.81,
+   "value": 7904529,
+   "baseline_median": 3480638,
+   "deviation": 4423891,
+   "cause": "BROAD",
+   "new_families": 1709350,
+   "top_families": [
+    {
+     "family": "SYRINGE",
+     "deviation": 383448,
+     "new": false
+    },
+    {
+     "family": "PROFUREX",
+     "deviation": 366872,
+     "new": false
+    },
+    {
+     "family": "LUPINSULIN",
+     "deviation": 321027,
+     "new": false
+    }
+   ]
+  },
+  {
+   "month": "2024-10",
+   "series": "ROUTINE",
+   "flag": "LOW",
+   "z": -3.28,
+   "value": 1405131,
+   "baseline_median": 1932414,
+   "deviation": -527283,
+   "cause": "BROAD",
+   "new_families": 0,
+   "top_families": [
+    {
+     "family": "TRIZEF",
+     "deviation": -33725,
+     "new": false
+    },
+    {
+     "family": "LACTAMOX",
+     "deviation": -28750,
+     "new": false
+    },
+    {
+     "family": "TRIVASC",
+     "deviation": -28485,
+     "new": false
+    }
+   ]
+  },
+  {
+   "month": "2024-11",
+   "series": "ROUTINE",
+   "flag": "LOW",
+   "z": -5.25,
+   "value": 1088480,
+   "baseline_median": 1932414,
+   "deviation": -843934,
+   "cause": "BROAD",
+   "new_families": 0,
+   "top_families": [
+    {
+     "family": "HYCLENS WOUND CARE",
+     "deviation": -28299,
+     "new": false
+    },
+    {
+     "family": "DEXAMAX",
+     "deviation": -23738,
+     "new": false
+    },
+    {
+     "family": "TRIDEN",
+     "deviation": -19900,
+     "new": false
+    }
+   ]
+  },
+  {
+   "month": "2025-02",
+   "series": "ROUTINE",
+   "flag": "HIGH",
+   "z": 14.17,
+   "value": 4371550,
+   "baseline_median": 1924418,
+   "deviation": 2447132,
+   "cause": "NEW PRODUCTS",
+   "new_families": 1486526,
+   "top_families": [
+    {
+     "family": "CUROXIM",
+     "deviation": 266220,
+     "new": true
+    },
+    {
+     "family": "MERAZOL",
+     "deviation": 212396,
+     "new": false
+    },
+    {
+     "family": "IV WRIST SPLINT",
+     "deviation": 164790,
+     "new": false
+    }
+   ]
+  },
+  {
+   "month": "2025-05",
+   "series": "ROUTINE",
+   "flag": "HIGH",
+   "z": 6.96,
+   "value": 2963819,
+   "baseline_median": 1934467,
+   "deviation": 1029351,
+   "cause": "NEW PRODUCTS",
+   "new_families": 1913915,
+   "top_families": [
+    {
+     "family": "MONOWEL",
+     "deviation": 644250,
+     "new": true
+    },
+    {
+     "family": "GENVAC B",
+     "deviation": 404500,
+     "new": true
+    },
+    {
+     "family": "MEDICAL GRADE HEPA MACHINE",
+     "deviation": 208970,
+     "new": true
+    }
+   ]
+  },
+  {
+   "month": "2025-06",
+   "series": "ROUTINE",
+   "flag": "HIGH",
+   "z": 8.85,
+   "value": 3708156,
+   "baseline_median": 1959140,
+   "deviation": 1749015,
+   "cause": "NEW PRODUCTS",
+   "new_families": 1029593,
+   "top_families": [
+    {
+     "family": "ZINACARE",
+     "deviation": 345100,
+     "new": false
+    },
+    {
+     "family": "SEZUVIN",
+     "deviation": 265915,
+     "new": true
+    },
+    {
+     "family": "ENOXAGET",
+     "deviation": 224766,
+     "new": false
+    }
+   ]
+  },
+  {
+   "month": "2025-09",
+   "series": "ROUTINE",
+   "flag": "HIGH",
+   "z": 10.16,
+   "value": 8963671,
+   "baseline_median": 2014799,
+   "deviation": 6948872,
+   "cause": "BROAD",
+   "new_families": 699770,
+   "top_families": [
+    {
+     "family": "ANTITET",
+     "deviation": 1375000,
+     "new": false
+    },
+    {
+     "family": "VOLUMETRIC INFUSION SET",
+     "deviation": 1221141,
+     "new": false
+    },
+    {
+     "family": "OPREX",
+     "deviation": 631695,
+     "new": false
+    }
+   ]
+  },
+  {
+   "month": "2025-12",
+   "series": "ROUTINE",
+   "flag": "HIGH",
+   "z": 3.63,
+   "value": 7357947,
+   "baseline_median": 2892888,
+   "deviation": 4465059,
+   "cause": "NEW PRODUCTS",
+   "new_families": 3208999,
+   "top_families": [
+    {
+     "family": "EPOGEN",
+     "deviation": 1126903,
+     "new": true
+    },
+    {
+     "family": "ANTITET",
+     "deviation": 276992,
+     "new": false
+    },
+    {
+     "family": "MORNEM",
+     "deviation": 207000,
+     "new": false
+    }
+   ]
+  }
+ ],
+ "area_routine": [
+  {
+   "area": "ADMIN",
+   "month": "2020-06",
+   "flag": "HIGH",
+   "z": 3.06,
+   "value": 485477,
+   "baseline_median": 232736
+  },
+  {
+   "area": "ADMIN",
+   "month": "2023-01",
+   "flag": "LOW",
+   "z": -4.41,
+   "value": 0,
+   "baseline_median": 192958
+  },
+  {
+   "area": "ADMIN",
+   "month": "2023-02",
+   "flag": "LOW",
+   "z": -3.79,
+   "value": 0,
+   "baseline_median": 192958
+  },
+  {
+   "area": "ADMIN",
+   "month": "2023-03",
+   "flag": "LOW",
+   "z": -3.49,
+   "value": 0,
+   "baseline_median": 192958
+  },
+  {
+   "area": "ADMIN",
+   "month": "2024-07",
+   "flag": "HIGH",
+   "z": 3.48,
+   "value": 293478,
+   "baseline_median": 47594
+  },
+  {
+   "area": "BATANGAS",
+   "month": "2018-09",
+   "flag": "HIGH",
+   "z": 3.23,
+   "value": 822669,
+   "baseline_median": 306197
+  },
+  {
+   "area": "BATANGAS",
+   "month": "2018-11",
+   "flag": "HIGH",
+   "z": 3.44,
+   "value": 2008286,
+   "baseline_median": 329012
+  },
+  {
+   "area": "BATANGAS",
+   "month": "2022-10",
+   "flag": "HIGH",
+   "z": 3.55,
+   "value": 419876,
+   "baseline_median": 166858
+  },
+  {
+   "area": "BATANGAS",
+   "month": "2024-09",
+   "flag": "LOW",
+   "z": -3.18,
+   "value": 109162,
+   "baseline_median": 321897
+  },
+  {
+   "area": "CAM NORTE",
+   "month": "2018-03",
+   "flag": "HIGH",
+   "z": 15.03,
+   "value": 80692,
+   "baseline_median": 3465
+  },
+  {
+   "area": "CAM NORTE",
+   "month": "2018-07",
+   "flag": "HIGH",
+   "z": 5.63,
+   "value": 460431,
+   "baseline_median": 121342
+  },
+  {
+   "area": "CAM NORTE",
+   "month": "2018-09",
+   "flag": "HIGH",
+   "z": 3.27,
+   "value": 520264,
+   "baseline_median": 123907
+  },
+  {
+   "area": "CAM NORTE",
+   "month": "2018-10",
+   "flag": "HIGH",
+   "z": 4.13,
+   "value": 871458,
+   "baseline_median": 123907
+  },
+  {
+   "area": "CAM NORTE",
+   "month": "2018-11",
+   "flag": "HIGH",
+   "z": 3.75,
+   "value": 839526,
+   "baseline_median": 127890
+  },
+  {
+   "area": "GOVERNMENT",
+   "month": "2019-08",
+   "flag": "HIGH",
+   "z": 4.18,
+   "value": 899200,
+   "baseline_median": 125000
+  },
+  {
+   "area": "GOVERNMENT",
+   "month": "2021-06",
+   "flag": "HIGH",
+   "z": 3.31,
+   "value": 1283181,
+   "baseline_median": 579840
+  },
+  {
+   "area": "GOVERNMENT",
+   "month": "2023-02",
+   "flag": "HIGH",
+   "z": 5.41,
+   "value": 6186503,
+   "baseline_median": 858804
+  },
+  {
+   "area": "GOVERNMENT",
+   "month": "2023-05",
+   "flag": "HIGH",
+   "z": 3.61,
+   "value": 3606134,
+   "baseline_median": 791064
+  },
+  {
+   "area": "GOVERNMENT",
+   "month": "2025-02",
+   "flag": "HIGH",
+   "z": 8.96,
+   "value": 2820301,
+   "baseline_median": 235622
+  },
+  {
+   "area": "GOVERNMENT",
+   "month": "2025-06",
+   "flag": "HIGH",
+   "z": 4.91,
+   "value": 2299200,
+   "baseline_median": 294027
+  },
+  {
+   "area": "GOVERNMENT",
+   "month": "2025-09",
+   "flag": "HIGH",
+   "z": 3.89,
+   "value": 2683439,
+   "baseline_median": 486560
+  },
+  {
+   "area": "GOVERNMENT",
+   "month": "2025-12",
+   "flag": "HIGH",
+   "z": 4.21,
+   "value": 4265634,
+   "baseline_median": 741610
+  },
+  {
+   "area": "HOSPITAL",
+   "month": "2018-03",
+   "flag": "HIGH",
+   "z": 8.06,
+   "value": 904792,
+   "baseline_median": 69846
+  },
+  {
+   "area": "HOSPITAL",
+   "month": "2018-04",
+   "flag": "HIGH",
+   "z": 9.29,
+   "value": 1152410,
+   "baseline_median": 78023
+  },
+  {
+   "area": "HOSPITAL",
+   "month": "2018-05",
+   "flag": "HIGH",
+   "z": 10.84,
+   "value": 1471729,
+   "baseline_median": 86200
+  },
+  {
+   "area": "HOSPITAL",
+   "month": "2018-06",
+   "flag": "HIGH",
+   "z": 5.44,
+   "value": 1559056,
+   "baseline_median": 172120
+  },
+  {
+   "area": "HOSPITAL",
+   "month": "2018-07",
+   "flag": "HIGH",
+   "z": 3.9,
+   "value": 1749910,
+   "baseline_median": 258040
+  },
+  {
+   "area": "HOSPITAL",
+   "month": "2021-10",
+   "flag": "HIGH",
+   "z": 4.31,
+   "value": 2465614,
+   "baseline_median": 794772
+  },
+  {
+   "area": "HOSPITAL",
+   "month": "2024-03",
+   "flag": "HIGH",
+   "z": 4.2,
+   "value": 1100718,
+   "baseline_median": 356780
+  },
+  {
+   "area": "HOSPITAL",
+   "month": "2025-04",
+   "flag": "HIGH",
+   "z": 3.47,
+   "value": 1343046,
+   "baseline_median": 594190
+  },
+  {
+   "area": "HOSPITAL",
+   "month": "2025-05",
+   "flag": "HIGH",
+   "z": 6.12,
+   "value": 2233232,
+   "baseline_median": 594190
+  },
+  {
+   "area": "HOSPITAL",
+   "month": "2025-08",
+   "flag": "HIGH",
+   "z": 6.9,
+   "value": 1716722,
+   "baseline_median": 568696
+  },
+  {
+   "area": "HOSPITAL",
+   "month": "2025-09",
+   "flag": "HIGH",
+   "z": 29.52,
+   "value": 5480573,
+   "baseline_median": 568696
+  },
+  {
+   "area": "HOSPITAL",
+   "month": "2025-10",
+   "flag": "HIGH",
+   "z": 9.23,
+   "value": 2226107,
+   "baseline_median": 569784
+  },
+  {
+   "area": "HOSPITAL",
+   "month": "2025-12",
+   "flag": "HIGH",
+   "z": 3.3,
+   "value": 2471249,
+   "baseline_median": 763054
+  },
+  {
+   "area": "LAGUNA",
+   "month": "2020-10",
+   "flag": "LOW",
+   "z": -429.48,
+   "value": -555004,
+   "baseline_median": 873
+  },
+  {
+   "area": "LAGUNA",
+   "month": "2020-11",
+   "flag": "HIGH",
+   "z": 13.52,
+   "value": 17500,
+   "baseline_median": 0
+  },
+  {
+   "area": "LAGUNA",
+   "month": "2021-10",
+   "flag": "HIGH",
+   "z": 32.98,
+   "value": 427778,
+   "baseline_median": 0
+  },
+  {
+   "area": "MARINDUQUE",
+   "month": "2021-05",
+   "flag": "HIGH",
+   "z": 4.13,
+   "value": 332961,
+   "baseline_median": 72972
+  },
+  {
+   "area": "MARINDUQUE",
+   "month": "2021-08",
+   "flag": "HIGH",
+   "z": 3.39,
+   "value": 339555,
+   "baseline_median": 72972
+  },
+  {
+   "area": "MARINDUQUE",
+   "month": "2022-03",
+   "flag": "HIGH",
+   "z": 3.78,
+   "value": 455839,
+   "baseline_median": 77756
+  },
+  {
+   "area": "MARINDUQUE",
+   "month": "2024-09",
+   "flag": "HIGH",
+   "z": 3.7,
+   "value": 173095,
+   "baseline_median": 61086
+  },
+  {
+   "area": "QUEZON",
+   "month": "2018-04",
+   "flag": "HIGH",
+   "z": 3.09,
+   "value": 553267,
+   "baseline_median": 99246
+  },
+  {
+   "area": "QUEZON",
+   "month": "2025-01",
+   "flag": "HIGH",
+   "z": 5.14,
+   "value": 607503,
+   "baseline_median": 247336
+  },
+  {
+   "area": "QUEZON",
+   "month": "2026-06",
+   "flag": "HIGH",
+   "z": 13.12,
+   "value": 1930022,
+   "baseline_median": 287542
+  }
+ ]
+}

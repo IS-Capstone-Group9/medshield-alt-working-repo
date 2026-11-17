@@ -1,0 +1,1954 @@
+{
+ "rules_sha256": "9345374b932b1f1533b97ac942355bff79a3177f3c6bb5e76eb78dbe75ae0ee5",
+ "category_mapping": "category_mapping_v0_1_top200.csv",
+ "category_mapping_sha256": "47e709adbde9b10388b83bc5c2eb851577b1c6c4cf29919b6c69d4968cdf925b",
+ "doh_sha256": "2e213d139b820dd83ef4ddcafdab7d2969301646512075d4c8a1cc2841df6a16",
+ "calendar": [
+  {
+   "disease": "ILI",
+   "geography": "Territory",
+   "monthly_median_cases": [
+    1515,
+    1331,
+    1211,
+    1050,
+    1086,
+    1152,
+    1883,
+    2004,
+    2304,
+    2667,
+    1579,
+    1443
+   ],
+   "seasonal_index": [
+    0.95,
+    0.83,
+    0.76,
+    0.66,
+    0.68,
+    0.72,
+    1.18,
+    1.25,
+    1.44,
+    1.66,
+    0.99,
+    0.9
+   ],
+   "surge_months": [
+    8,
+    9,
+    10
+   ],
+   "total_cases_2021_2025": 108436,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "ILI",
+   "geography": "CALABARZON",
+   "monthly_median_cases": [
+    1511,
+    1321,
+    1199,
+    1005,
+    1085,
+    1152,
+    1859,
+    1989,
+    2302,
+    2560,
+    1538,
+    1409
+   ],
+   "seasonal_index": [
+    0.96,
+    0.84,
+    0.76,
+    0.64,
+    0.69,
+    0.73,
+    1.18,
+    1.26,
+    1.46,
+    1.62,
+    0.97,
+    0.89
+   ],
+   "surge_months": [
+    8,
+    9,
+    10
+   ],
+   "total_cases_2021_2025": 106897,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "ILI",
+   "geography": "MIMAROPA",
+   "monthly_median_cases": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "seasonal_index": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "surge_months": [],
+   "total_cases_2021_2025": 0,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "ILI",
+   "geography": "Bicol",
+   "monthly_median_cases": [
+    19,
+    30,
+    20,
+    9,
+    19,
+    16,
+    11,
+    10,
+    29,
+    81,
+    23,
+    11
+   ],
+   "seasonal_index": [
+    0.82,
+    1.29,
+    0.86,
+    0.39,
+    0.82,
+    0.69,
+    0.47,
+    0.43,
+    1.25,
+    3.5,
+    0.99,
+    0.47
+   ],
+   "surge_months": [
+    2,
+    9,
+    10
+   ],
+   "total_cases_2021_2025": 1539,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "SARI",
+   "geography": "Territory",
+   "monthly_median_cases": [
+    20,
+    6,
+    6,
+    23,
+    72,
+    206,
+    94,
+    76,
+    122,
+    283,
+    173,
+    122
+   ],
+   "seasonal_index": [
+    0.2,
+    0.06,
+    0.06,
+    0.23,
+    0.72,
+    2.05,
+    0.94,
+    0.76,
+    1.22,
+    2.82,
+    1.73,
+    1.22
+   ],
+   "surge_months": [
+    6,
+    9,
+    10,
+    11,
+    12
+   ],
+   "total_cases_2021_2025": 16671,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "SARI",
+   "geography": "CALABARZON",
+   "monthly_median_cases": [
+    20,
+    6,
+    6,
+    23,
+    72,
+    169,
+    92,
+    71,
+    66,
+    210,
+    173,
+    115
+   ],
+   "seasonal_index": [
+    0.23,
+    0.07,
+    0.07,
+    0.27,
+    0.84,
+    1.98,
+    1.08,
+    0.83,
+    0.77,
+    2.46,
+    2.03,
+    1.35
+   ],
+   "surge_months": [
+    6,
+    10,
+    11,
+    12
+   ],
+   "total_cases_2021_2025": 15289,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "SARI",
+   "geography": "MIMAROPA",
+   "monthly_median_cases": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    2,
+    4,
+    56,
+    36,
+    0,
+    1
+   ],
+   "seasonal_index": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.24,
+    0.24,
+    0.48,
+    6.65,
+    4.28,
+    0.0,
+    0.12
+   ],
+   "surge_months": [
+    9,
+    10
+   ],
+   "total_cases_2021_2025": 1308,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "SARI",
+   "geography": "Bicol",
+   "monthly_median_cases": [
+    0,
+    0,
+    1,
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    2,
+    0,
+    0
+   ],
+   "seasonal_index": [
+    0.0,
+    0.0,
+    2.4,
+    0.0,
+    0.0,
+    2.4,
+    0.0,
+    2.4,
+    0.0,
+    4.8,
+    0.0,
+    0.0
+   ],
+   "surge_months": [
+    3,
+    6,
+    8,
+    10
+   ],
+   "total_cases_2021_2025": 74,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "COVID-19",
+   "geography": "Territory",
+   "monthly_median_cases": [
+    1578,
+    482,
+    803,
+    818,
+    1513,
+    3200,
+    1109,
+    697,
+    789,
+    957,
+    1107,
+    2267
+   ],
+   "seasonal_index": [
+    1.24,
+    0.38,
+    0.63,
+    0.64,
+    1.19,
+    2.51,
+    0.87,
+    0.55,
+    0.62,
+    0.75,
+    0.87,
+    1.78
+   ],
+   "surge_months": [
+    1,
+    6,
+    12
+   ],
+   "total_cases_2021_2025": 615498,
+   "pandemic_flag": true
+  },
+  {
+   "disease": "COVID-19",
+   "geography": "CALABARZON",
+   "monthly_median_cases": [
+    1151,
+    370,
+    653,
+    678,
+    1272,
+    2866,
+    841,
+    564,
+    699,
+    806,
+    837,
+    1842
+   ],
+   "seasonal_index": [
+    1.1,
+    0.35,
+    0.62,
+    0.65,
+    1.21,
+    2.73,
+    0.8,
+    0.54,
+    0.67,
+    0.77,
+    0.8,
+    1.76
+   ],
+   "surge_months": [
+    5,
+    6,
+    12
+   ],
+   "total_cases_2021_2025": 510228,
+   "pandemic_flag": true
+  },
+  {
+   "disease": "COVID-19",
+   "geography": "MIMAROPA",
+   "monthly_median_cases": [
+    161,
+    66,
+    74,
+    101,
+    88,
+    192,
+    146,
+    71,
+    42,
+    41,
+    52,
+    110
+   ],
+   "seasonal_index": [
+    1.69,
+    0.69,
+    0.78,
+    1.06,
+    0.92,
+    2.01,
+    1.53,
+    0.74,
+    0.44,
+    0.43,
+    0.55,
+    1.15
+   ],
+   "surge_months": [
+    1,
+    6,
+    7
+   ],
+   "total_cases_2021_2025": 44116,
+   "pandemic_flag": true
+  },
+  {
+   "disease": "COVID-19",
+   "geography": "Bicol",
+   "monthly_median_cases": [
+    394,
+    48,
+    76,
+    39,
+    220,
+    255,
+    122,
+    62,
+    48,
+    110,
+    218,
+    259
+   ],
+   "seasonal_index": [
+    2.55,
+    0.31,
+    0.49,
+    0.25,
+    1.43,
+    1.65,
+    0.79,
+    0.4,
+    0.31,
+    0.71,
+    1.41,
+    1.68
+   ],
+   "surge_months": [
+    1,
+    5,
+    6,
+    11,
+    12
+   ],
+   "total_cases_2021_2025": 61154,
+   "pandemic_flag": true
+  },
+  {
+   "disease": "Dengue",
+   "geography": "Territory",
+   "monthly_median_cases": [
+    2042,
+    1954,
+    1604,
+    1506,
+    1966,
+    3613,
+    7406,
+    6519,
+    5721,
+    4257,
+    3209,
+    2482
+   ],
+   "seasonal_index": [
+    0.58,
+    0.55,
+    0.46,
+    0.43,
+    0.56,
+    1.03,
+    2.1,
+    1.85,
+    1.62,
+    1.21,
+    0.91,
+    0.7
+   ],
+   "surge_months": [
+    7,
+    8,
+    9,
+    10
+   ],
+   "total_cases_2021_2025": 221425,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "Dengue",
+   "geography": "CALABARZON",
+   "monthly_median_cases": [
+    1295,
+    1113,
+    977,
+    924,
+    1113,
+    2152,
+    3652,
+    4680,
+    4478,
+    2832,
+    2096,
+    1611
+   ],
+   "seasonal_index": [
+    0.58,
+    0.5,
+    0.44,
+    0.41,
+    0.5,
+    0.96,
+    1.63,
+    2.09,
+    2.0,
+    1.26,
+    0.93,
+    0.72
+   ],
+   "surge_months": [
+    7,
+    8,
+    9,
+    10
+   ],
+   "total_cases_2021_2025": 153963,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "Dengue",
+   "geography": "MIMAROPA",
+   "monthly_median_cases": [
+    624,
+    735,
+    564,
+    533,
+    731,
+    1420,
+    2280,
+    1533,
+    1007,
+    1251,
+    966,
+    640
+   ],
+   "seasonal_index": [
+    0.61,
+    0.72,
+    0.55,
+    0.52,
+    0.71,
+    1.39,
+    2.23,
+    1.5,
+    0.98,
+    1.22,
+    0.94,
+    0.63
+   ],
+   "surge_months": [
+    6,
+    7,
+    8,
+    10
+   ],
+   "total_cases_2021_2025": 58961,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "Dengue",
+   "geography": "Bicol",
+   "monthly_median_cases": [
+    81,
+    85,
+    88,
+    54,
+    74,
+    110,
+    211,
+    306,
+    179,
+    129,
+    145,
+    117
+   ],
+   "seasonal_index": [
+    0.62,
+    0.65,
+    0.67,
+    0.41,
+    0.56,
+    0.84,
+    1.6,
+    2.33,
+    1.36,
+    0.98,
+    1.1,
+    0.89
+   ],
+   "surge_months": [
+    7,
+    8,
+    9
+   ],
+   "total_cases_2021_2025": 8501,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "Typhoid",
+   "geography": "Territory",
+   "monthly_median_cases": [
+    216,
+    226,
+    166,
+    182,
+    246,
+    244,
+    343,
+    239,
+    245,
+    295,
+    129,
+    136
+   ],
+   "seasonal_index": [
+    0.97,
+    1.02,
+    0.75,
+    0.82,
+    1.11,
+    1.1,
+    1.54,
+    1.08,
+    1.1,
+    1.33,
+    0.58,
+    0.61
+   ],
+   "surge_months": [
+    7,
+    10
+   ],
+   "total_cases_2021_2025": 12540,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "Typhoid",
+   "geography": "CALABARZON",
+   "monthly_median_cases": [
+    62,
+    62,
+    49,
+    59,
+    58,
+    62,
+    120,
+    113,
+    98,
+    97,
+    63,
+    37
+   ],
+   "seasonal_index": [
+    0.85,
+    0.85,
+    0.67,
+    0.8,
+    0.79,
+    0.85,
+    1.64,
+    1.54,
+    1.34,
+    1.32,
+    0.86,
+    0.5
+   ],
+   "surge_months": [
+    7,
+    8,
+    9,
+    10
+   ],
+   "total_cases_2021_2025": 4388,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "Typhoid",
+   "geography": "MIMAROPA",
+   "monthly_median_cases": [
+    127,
+    149,
+    63,
+    105,
+    150,
+    141,
+    153,
+    112,
+    141,
+    152,
+    86,
+    93
+   ],
+   "seasonal_index": [
+    1.04,
+    1.21,
+    0.51,
+    0.86,
+    1.22,
+    1.15,
+    1.25,
+    0.91,
+    1.15,
+    1.24,
+    0.7,
+    0.76
+   ],
+   "surge_months": [
+    2,
+    5,
+    7,
+    10
+   ],
+   "total_cases_2021_2025": 7078,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "Typhoid",
+   "geography": "Bicol",
+   "monthly_median_cases": [
+    17,
+    15,
+    14,
+    15,
+    11,
+    28,
+    23,
+    14,
+    16,
+    23,
+    18,
+    15
+   ],
+   "seasonal_index": [
+    0.98,
+    0.86,
+    0.8,
+    0.86,
+    0.63,
+    1.61,
+    1.32,
+    0.8,
+    0.92,
+    1.32,
+    1.03,
+    0.86
+   ],
+   "surge_months": [
+    6,
+    7,
+    10
+   ],
+   "total_cases_2021_2025": 1074,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "Diarrhoeal",
+   "geography": "Territory",
+   "monthly_median_cases": [
+    110,
+    163,
+    118,
+    148,
+    115,
+    148,
+    96,
+    135,
+    145,
+    108,
+    149,
+    98
+   ],
+   "seasonal_index": [
+    0.86,
+    1.28,
+    0.92,
+    1.16,
+    0.9,
+    1.16,
+    0.75,
+    1.06,
+    1.14,
+    0.85,
+    1.17,
+    0.77
+   ],
+   "surge_months": [
+    2
+   ],
+   "total_cases_2021_2025": 9815,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "Diarrhoeal",
+   "geography": "CALABARZON",
+   "monthly_median_cases": [
+    33,
+    70,
+    44,
+    65,
+    44,
+    45,
+    34,
+    34,
+    72,
+    78,
+    54,
+    48
+   ],
+   "seasonal_index": [
+    0.64,
+    1.35,
+    0.85,
+    1.26,
+    0.85,
+    0.87,
+    0.66,
+    0.66,
+    1.39,
+    1.51,
+    1.04,
+    0.93
+   ],
+   "surge_months": [
+    2,
+    4,
+    9,
+    10
+   ],
+   "total_cases_2021_2025": 5662,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "Diarrhoeal",
+   "geography": "MIMAROPA",
+   "monthly_median_cases": [
+    11,
+    16,
+    16,
+    15,
+    20,
+    25,
+    26,
+    21,
+    20,
+    28,
+    24,
+    31
+   ],
+   "seasonal_index": [
+    0.52,
+    0.76,
+    0.76,
+    0.71,
+    0.95,
+    1.19,
+    1.23,
+    1.0,
+    0.95,
+    1.33,
+    1.14,
+    1.47
+   ],
+   "surge_months": [
+    7,
+    10,
+    12
+   ],
+   "total_cases_2021_2025": 1613,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "Diarrhoeal",
+   "geography": "Bicol",
+   "monthly_median_cases": [
+    58,
+    34,
+    42,
+    44,
+    42,
+    47,
+    40,
+    27,
+    25,
+    26,
+    21,
+    24
+   ],
+   "seasonal_index": [
+    1.62,
+    0.95,
+    1.17,
+    1.23,
+    1.17,
+    1.31,
+    1.12,
+    0.75,
+    0.7,
+    0.73,
+    0.59,
+    0.67
+   ],
+   "surge_months": [
+    1,
+    4,
+    6
+   ],
+   "total_cases_2021_2025": 2540,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "Leptospirosis",
+   "geography": "Territory",
+   "monthly_median_cases": [
+    45,
+    34,
+    25,
+    23,
+    31,
+    55,
+    85,
+    185,
+    144,
+    125,
+    154,
+    64
+   ],
+   "seasonal_index": [
+    0.56,
+    0.42,
+    0.31,
+    0.28,
+    0.38,
+    0.68,
+    1.05,
+    2.29,
+    1.78,
+    1.55,
+    1.91,
+    0.79
+   ],
+   "surge_months": [
+    8,
+    9,
+    10,
+    11
+   ],
+   "total_cases_2021_2025": 5149,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "Leptospirosis",
+   "geography": "CALABARZON",
+   "monthly_median_cases": [
+    15,
+    13,
+    11,
+    8,
+    13,
+    31,
+    50,
+    136,
+    99,
+    66,
+    36,
+    28
+   ],
+   "seasonal_index": [
+    0.36,
+    0.31,
+    0.26,
+    0.19,
+    0.31,
+    0.74,
+    1.19,
+    3.23,
+    2.35,
+    1.57,
+    0.85,
+    0.66
+   ],
+   "surge_months": [
+    8,
+    9,
+    10
+   ],
+   "total_cases_2021_2025": 3049,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "Leptospirosis",
+   "geography": "MIMAROPA",
+   "monthly_median_cases": [
+    15,
+    10,
+    4,
+    3,
+    5,
+    10,
+    20,
+    25,
+    25,
+    27,
+    26,
+    19
+   ],
+   "seasonal_index": [
+    0.95,
+    0.63,
+    0.25,
+    0.19,
+    0.32,
+    0.63,
+    1.27,
+    1.59,
+    1.59,
+    1.71,
+    1.65,
+    1.21
+   ],
+   "surge_months": [
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+   ],
+   "total_cases_2021_2025": 1042,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "Leptospirosis",
+   "geography": "Bicol",
+   "monthly_median_cases": [
+    22,
+    11,
+    12,
+    8,
+    8,
+    9,
+    15,
+    14,
+    10,
+    21,
+    39,
+    20
+   ],
+   "seasonal_index": [
+    1.4,
+    0.7,
+    0.76,
+    0.51,
+    0.51,
+    0.57,
+    0.95,
+    0.89,
+    0.63,
+    1.33,
+    2.48,
+    1.27
+   ],
+   "surge_months": [
+    1,
+    10,
+    11,
+    12
+   ],
+   "total_cases_2021_2025": 1058,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "Rabies",
+   "geography": "Territory",
+   "monthly_median_cases": [
+    9,
+    9,
+    6,
+    7,
+    6,
+    7,
+    7,
+    7,
+    5,
+    7,
+    6,
+    4
+   ],
+   "seasonal_index": [
+    1.35,
+    1.35,
+    0.9,
+    1.05,
+    0.9,
+    1.05,
+    1.05,
+    1.05,
+    0.75,
+    1.05,
+    0.9,
+    0.6
+   ],
+   "surge_months": [
+    1,
+    2
+   ],
+   "total_cases_2021_2025": 406,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "Rabies",
+   "geography": "CALABARZON",
+   "monthly_median_cases": [
+    4,
+    5,
+    4,
+    3,
+    4,
+    5,
+    4,
+    4,
+    2,
+    2,
+    4,
+    3
+   ],
+   "seasonal_index": [
+    1.09,
+    1.36,
+    1.09,
+    0.82,
+    1.09,
+    1.36,
+    1.09,
+    1.09,
+    0.55,
+    0.55,
+    1.09,
+    0.82
+   ],
+   "surge_months": [
+    2,
+    6
+   ],
+   "total_cases_2021_2025": 231,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "Rabies",
+   "geography": "MIMAROPA",
+   "monthly_median_cases": [
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    0,
+    0,
+    1,
+    1,
+    0,
+    0
+   ],
+   "seasonal_index": [
+    2.0,
+    2.0,
+    2.0,
+    0.0,
+    0.0,
+    2.0,
+    0.0,
+    0.0,
+    2.0,
+    2.0,
+    0.0,
+    0.0
+   ],
+   "surge_months": [
+    1,
+    2,
+    3,
+    6,
+    9,
+    10
+   ],
+   "total_cases_2021_2025": 49,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "Rabies",
+   "geography": "Bicol",
+   "monthly_median_cases": [
+    4,
+    3,
+    1,
+    1,
+    2,
+    2,
+    2,
+    2,
+    2,
+    3,
+    2,
+    0
+   ],
+   "seasonal_index": [
+    2.0,
+    1.5,
+    0.5,
+    0.5,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.5,
+    1.0,
+    0.0
+   ],
+   "surge_months": [
+    1,
+    2,
+    10
+   ],
+   "total_cases_2021_2025": 126,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "Chikungunya",
+   "geography": "Territory",
+   "monthly_median_cases": [
+    1,
+    0,
+    1,
+    8,
+    51,
+    30,
+    31,
+    35,
+    11,
+    11,
+    9,
+    6
+   ],
+   "seasonal_index": [
+    0.06,
+    0.0,
+    0.06,
+    0.49,
+    3.15,
+    1.86,
+    1.92,
+    2.16,
+    0.68,
+    0.68,
+    0.56,
+    0.37
+   ],
+   "surge_months": [
+    5,
+    6,
+    7,
+    8
+   ],
+   "total_cases_2021_2025": 2679,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "Chikungunya",
+   "geography": "CALABARZON",
+   "monthly_median_cases": [
+    1,
+    0,
+    0,
+    1,
+    8,
+    5,
+    16,
+    16,
+    7,
+    2,
+    5,
+    2
+   ],
+   "seasonal_index": [
+    0.19,
+    0.0,
+    0.0,
+    0.19,
+    1.52,
+    0.95,
+    3.05,
+    3.05,
+    1.33,
+    0.38,
+    0.95,
+    0.38
+   ],
+   "surge_months": [
+    5,
+    7,
+    8,
+    9
+   ],
+   "total_cases_2021_2025": 501,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "Chikungunya",
+   "geography": "MIMAROPA",
+   "monthly_median_cases": [
+    0,
+    0,
+    1,
+    2,
+    14,
+    22,
+    12,
+    12,
+    3,
+    6,
+    4,
+    0
+   ],
+   "seasonal_index": [
+    0.0,
+    0.0,
+    0.16,
+    0.32,
+    2.21,
+    3.47,
+    1.89,
+    1.89,
+    0.47,
+    0.95,
+    0.63,
+    0.0
+   ],
+   "surge_months": [
+    5,
+    6,
+    7,
+    8
+   ],
+   "total_cases_2021_2025": 2168,
+   "pandemic_flag": false
+  },
+  {
+   "disease": "Chikungunya",
+   "geography": "Bicol",
+   "monthly_median_cases": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "seasonal_index": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "surge_months": [],
+   "total_cases_2021_2025": 10,
+   "pandemic_flag": false
+  }
+ ],
+ "weather": {
+  "cyclones_entering_par_by_month": [
+   0,
+   1,
+   0,
+   3,
+   4,
+   3,
+   8,
+   9,
+   14,
+   10,
+   4,
+   4
+  ],
+  "cyclones_total": 60,
+  "strong_cyclone_months": [
+   "2021-04",
+   "2021-07",
+   "2021-09",
+   "2021-12",
+   "2022-08",
+   "2022-09",
+   "2022-10",
+   "2023-05",
+   "2023-06",
+   "2023-07",
+   "2023-08",
+   "2023-09",
+   "2024-05",
+   "2024-07",
+   "2024-09",
+   "2024-10",
+   "2024-11"
+  ],
+  "rainfall_mm_mean_by_month": [
+   94.8,
+   17.5,
+   36.3,
+   62.0,
+   156.3,
+   248.7,
+   659.4,
+   380.4,
+   470.8,
+   283.2,
+   74.5,
+   68.1
+  ],
+  "wet_months": [
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "rainfall_stations": "Science Garden + Port Area (Metro Manila proxy)"
+ },
+ "alerts": [
+  {
+   "alert": "ILI",
+   "exposed": [
+    "RESPIRATORY",
+    "ANTIBACTERIAL"
+   ],
+   "alert_months": [
+    "2023-02",
+    "2023-03",
+    "2023-04",
+    "2023-05",
+    "2023-06",
+    "2023-10",
+    "2023-11",
+    "2023-12",
+    "2024-01",
+    "2024-02",
+    "2024-07",
+    "2024-08",
+    "2024-09",
+    "2024-10",
+    "2025-01",
+    "2025-02",
+    "2025-03",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10"
+   ],
+   "table_alert_hit_miss_noalert_hit_miss": [
+    [
+     20,
+     22
+    ],
+    [
+     19,
+     11
+    ]
+   ],
+   "hit_rate_alert": 0.476,
+   "hit_rate_no_alert": 0.633,
+   "p_one_sided": 0.9411,
+   "p_holm": 1.0,
+   "useful": false
+  },
+  {
+   "alert": "SARI",
+   "exposed": [
+    "RESPIRATORY",
+    "ANTIBACTERIAL",
+    "CRITICAL_CARE"
+   ],
+   "alert_months": [
+    "2023-03",
+    "2023-04",
+    "2023-05",
+    "2023-06",
+    "2023-07",
+    "2023-08",
+    "2023-09",
+    "2023-10",
+    "2023-11",
+    "2023-12",
+    "2024-01",
+    "2024-02",
+    "2024-03",
+    "2024-04",
+    "2024-05",
+    "2024-06",
+    "2024-07",
+    "2024-08",
+    "2024-09",
+    "2024-10",
+    "2024-11",
+    "2024-12",
+    "2025-01",
+    "2025-02",
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10",
+    "2025-12"
+   ],
+   "table_alert_hit_miss_noalert_hit_miss": [
+    [
+     54,
+     45
+    ],
+    [
+     8,
+     1
+    ]
+   ],
+   "hit_rate_alert": 0.545,
+   "hit_rate_no_alert": 0.889,
+   "p_one_sided": 0.9948,
+   "p_holm": 1.0,
+   "useful": false
+  },
+  {
+   "alert": "Dengue",
+   "exposed": [
+    "ANALGESIC_ANTIPYRETIC",
+    "CRITICAL_CARE"
+   ],
+   "alert_months": [
+    "2023-01",
+    "2023-02",
+    "2023-03",
+    "2023-04",
+    "2023-05",
+    "2023-06",
+    "2023-10",
+    "2023-11",
+    "2023-12",
+    "2024-01",
+    "2024-02",
+    "2024-03",
+    "2024-04",
+    "2024-07",
+    "2024-08",
+    "2024-09",
+    "2024-10",
+    "2024-11",
+    "2024-12",
+    "2025-01",
+    "2025-02",
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-07",
+    "2025-10"
+   ],
+   "table_alert_hit_miss_noalert_hit_miss": [
+    [
+     30,
+     22
+    ],
+    [
+     13,
+     7
+    ]
+   ],
+   "hit_rate_alert": 0.577,
+   "hit_rate_no_alert": 0.65,
+   "p_one_sided": 0.797,
+   "p_holm": 1.0,
+   "useful": false
+  },
+  {
+   "alert": "Typhoid",
+   "exposed": [
+    "ANTIBACTERIAL"
+   ],
+   "alert_months": [
+    "2023-01",
+    "2023-02",
+    "2023-03",
+    "2023-04",
+    "2023-05",
+    "2023-06",
+    "2023-07",
+    "2023-08",
+    "2023-09",
+    "2023-10",
+    "2023-11",
+    "2023-12",
+    "2024-01",
+    "2024-02",
+    "2024-03",
+    "2024-04",
+    "2024-05",
+    "2024-07",
+    "2024-08",
+    "2024-10",
+    "2024-11",
+    "2024-12",
+    "2025-01",
+    "2025-02",
+    "2025-03",
+    "2025-07"
+   ],
+   "table_alert_hit_miss_noalert_hit_miss": [
+    [
+     13,
+     13
+    ],
+    [
+     8,
+     2
+    ]
+   ],
+   "hit_rate_alert": 0.5,
+   "hit_rate_no_alert": 0.8,
+   "p_one_sided": 0.9813,
+   "p_holm": 1.0,
+   "useful": false
+  },
+  {
+   "alert": "Diarrhoeal",
+   "exposed": [
+    "ANTIPROTOZOAL",
+    "ANTIBACTERIAL"
+   ],
+   "alert_months": [
+    "2023-01",
+    "2023-02",
+    "2023-03",
+    "2023-04",
+    "2023-05",
+    "2023-08",
+    "2024-01",
+    "2024-02",
+    "2024-03",
+    "2024-04",
+    "2024-05",
+    "2024-06",
+    "2024-07",
+    "2024-08",
+    "2024-09",
+    "2024-10",
+    "2024-12",
+    "2025-01",
+    "2025-02",
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10",
+    "2025-12"
+   ],
+   "table_alert_hit_miss_noalert_hit_miss": [
+    [
+     37,
+     19
+    ],
+    [
+     3,
+     13
+    ]
+   ],
+   "hit_rate_alert": 0.661,
+   "hit_rate_no_alert": 0.188,
+   "p_one_sided": 0.0009,
+   "p_holm": 0.0074,
+   "useful": true
+  },
+  {
+   "alert": "Leptospirosis",
+   "exposed": [
+    "ANTIBACTERIAL"
+   ],
+   "alert_months": [
+    "2023-01",
+    "2023-02",
+    "2023-03",
+    "2023-05",
+    "2023-06",
+    "2023-07",
+    "2023-08",
+    "2023-09",
+    "2023-10",
+    "2024-05",
+    "2024-06",
+    "2024-07",
+    "2024-08",
+    "2024-09",
+    "2024-10",
+    "2025-01",
+    "2025-02",
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-10",
+    "2025-12"
+   ],
+   "table_alert_hit_miss_noalert_hit_miss": [
+    [
+     14,
+     11
+    ],
+    [
+     7,
+     4
+    ]
+   ],
+   "hit_rate_alert": 0.56,
+   "hit_rate_no_alert": 0.636,
+   "p_one_sided": 0.7851,
+   "p_holm": 1.0,
+   "useful": false
+  },
+  {
+   "alert": "Chikungunya",
+   "exposed": [
+    "ANALGESIC_ANTIPYRETIC"
+   ],
+   "alert_months": [
+    "2023-01",
+    "2023-03",
+    "2023-05",
+    "2023-06",
+    "2023-07",
+    "2023-08",
+    "2023-09",
+    "2023-10",
+    "2023-11",
+    "2023-12",
+    "2024-01",
+    "2024-02",
+    "2024-03",
+    "2024-05",
+    "2024-06",
+    "2024-07",
+    "2024-08",
+    "2024-09",
+    "2024-10",
+    "2024-12",
+    "2025-02"
+   ],
+   "table_alert_hit_miss_noalert_hit_miss": [
+    [
+     13,
+     8
+    ],
+    [
+     7,
+     8
+    ]
+   ],
+   "hit_rate_alert": 0.619,
+   "hit_rate_no_alert": 0.467,
+   "p_one_sided": 0.2853,
+   "p_holm": 1.0,
+   "useful": false
+  },
+  {
+   "alert": "Typhoon",
+   "exposed": [
+    "ANTIBACTERIAL",
+    "ANALGESIC_ANTIPYRETIC",
+    "ANTIPROTOZOAL"
+   ],
+   "alert_months": [
+    "2021-04",
+    "2021-07",
+    "2021-09",
+    "2021-12",
+    "2022-08",
+    "2022-09",
+    "2022-10",
+    "2023-05",
+    "2023-06",
+    "2023-07",
+    "2023-08",
+    "2023-09",
+    "2024-05",
+    "2024-07",
+    "2024-09",
+    "2024-10",
+    "2024-11"
+   ],
+   "table_alert_hit_miss_noalert_hit_miss": [
+    [
+     23,
+     28
+    ],
+    [
+     66,
+     24
+    ]
+   ],
+   "hit_rate_alert": 0.451,
+   "hit_rate_no_alert": 0.733,
+   "p_one_sided": 0.9998,
+   "p_holm": 1.0,
+   "useful": false
+  }
+ ],
+ "scenarios": [
+  {
+   "category": "ANALGESIC_ANTIPYRETIC",
+   "surge_months": [
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "mean_routine_php_in_surge_months": 61926,
+   "extra_stock_php": {
+    "+20%": 12385,
+    "+40%": 24770,
+    "+60%": 37155
+   }
+  },
+  {
+   "category": "ANTIBACTERIAL",
+   "surge_months": [
+    2,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+   ],
+   "mean_routine_php_in_surge_months": 508281,
+   "extra_stock_php": {
+    "+20%": 101656,
+    "+40%": 203312,
+    "+60%": 304968
+   }
+  },
+  {
+   "category": "ANTIPROTOZOAL",
+   "surge_months": [
+    2
+   ],
+   "mean_routine_php_in_surge_months": 40290,
+   "extra_stock_php": {
+    "+20%": 8058,
+    "+40%": 16116,
+    "+60%": 24174
+   }
+  },
+  {
+   "category": "CRITICAL_CARE",
+   "surge_months": [
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+   ],
+   "mean_routine_php_in_surge_months": 49964,
+   "extra_stock_php": {
+    "+20%": 9993,
+    "+40%": 19986,
+    "+60%": 29979
+   }
+  },
+  {
+   "category": "RESPIRATORY",
+   "surge_months": [
+    6,
+    8,
+    9,
+    10,
+    11,
+    12
+   ],
+   "mean_routine_php_in_surge_months": 54501,
+   "extra_stock_php": {
+    "+20%": 10900,
+    "+40%": 21800,
+    "+60%": 32701
+   }
+  }
+ ]
+}

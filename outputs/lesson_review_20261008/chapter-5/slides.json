@@ -1,0 +1,2570 @@
+{
+  "source": "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\lessons\\Chapter 5 - Predictive Analytics.pptx",
+  "sha256": "2c69ef765698b014ace6ff69d498f65708da93432e5fe9eed1184e6bc05e055d",
+  "bytes": 63586497,
+  "slide_count": 68,
+  "slides": [
+    {
+      "number": 1,
+      "part": "ppt/slides/slide1.xml",
+      "text": [
+        "CHAPTER FIVE: PREDICTIVE ANALYTICS -EVALUATION AND SELECTION",
+        "Prepared by: Inst. Caesar Gabriel M. Fernando"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-001"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 2,
+      "part": "ppt/slides/slide2.xml",
+      "text": [
+        "Learning Outcomes",
+        "At the end of this chapter, you should be able to:",
+        "1.",
+        "Match predictive problem structures to appropriate candidate model families.",
+        "2.",
+        "Choose and interpret evaluation metrics for classification, numeric prediction, probability prediction, and forecasting.",
+        "3.",
+        "Select predictive models using scenario fit, validation design, error costs, interpretability, calibration, and operational constraints."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 3,
+      "part": "ppt/slides/slide3.xml",
+      "text": [
+        "Recap: Four Analytics Questions",
+        "Analytics Question",
+        "Core Question",
+        "Typical Output",
+        "Descriptive",
+        "What happened?",
+        "KPI, trend, summary, distribution",
+        "Diagnostic",
+        "Why did it happen?",
+        "Drivers, relationships, drill-downs, anomalies",
+        "Predictive",
+        "What is likely to happen?",
+        "Class, probability, value, forecast, risk score",
+        "Prescriptive",
+        "What should we do?",
+        "Action, allocation, route, schedule, policy, intervention"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-002"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 7",
+          "descr": "4 Types of Analytics: Complete Guide to Data Success"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "part": "ppt/slides/slide4.xml",
+      "text": [
+        "Predictive Analytics: A Recap",
+        "INFORMS defines predictive analytics at the analytics-type level as providing insight into what will happen in the future.",
+        "For model-building practice, predictive analytics uses historical/current observations with statistical or machine-learning models to estimate an unknown or future outcome for new cases.",
+        "Outputs may be classes, probabilities, numeric values, rankings, risk scores, or forecasts.",
+        "The practical requirement is generalization: performance must hold on data not used to fit or select the model."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-003"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 5",
+          "descr": "Data Analytics - Animation | Blue and white tech illustration, Data  analytics illustration, Data-driven business strategies"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "part": "ppt/slides/slide5.xml",
+      "text": [
+        "Prediction Is Not Causation",
+        "Predictive models exploit statistical associations that improve estimation of an outcome.",
+        "A variable can be highly predictive without being a cause of the outcome.",
+        "Prediction asks: “What outcome is likely for this case?” Causal inference asks: “How would the outcome change if we intervened?”",
+        "This distinction becomes essential when a prediction is converted into a treatment, offer, policy, or other action."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-004",
+        "asset-005"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 6",
+          "descr": "US cardiac deaths vs. Waffle House locations : r/MapPorn"
+        },
+        {
+          "name": "Picture 7",
+          "descr": "2,099 Curiosity Word Stock Photos - Free & Royalty-Free Stock Photos from  Dreamstime"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "part": "ppt/slides/slide6.xml",
+      "text": [
+        "A Practical Predictive Workflow",
+        "1. Define the decision that will use the prediction.",
+        "2. Define the target, prediction horizon, unit of analysis, and prediction moment.",
+        "3. Restrict features to information genuinely available at prediction time.",
+        "4. Establish a simple baseline.",
+        "5. Fit several plausible candidate model families.",
+        "6. Choose validation design and decision-relevant metrics before comparing models.",
+        "7. Compare generalization, calibration when probabilities matter, interpretability, latency, stability, and maintenance.",
+        "8. Freeze the design, evaluate on untouched test data, select the operating policy, deploy, then monitor."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-006"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 4",
+          "descr": "Workflow GIFs | Tenor"
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "part": "ppt/slides/slide7.xml",
+      "text": [
+        "Predictive Problem Types",
+        "Problem Structure",
+        "Target / Output",
+        "Example",
+        "Candidate Families",
+        "Classification",
+        "Discrete class and often class probability",
+        "churn / stay; fraud / legitimate",
+        "Logistic models, K-NN, trees/ensembles, SVM, neural nets",
+        "Regression",
+        "Continuous numeric value",
+        "spend, duration, severity",
+        "Linear/regularized regression, tree ensembles, boosting",
+        "Time-series forecasting",
+        "Future observation indexed by time",
+        "weekly demand, monthly sales",
+        "Naive/seasonal naive, Moving Average, ETS, ARIMA, time-aware regression/ML",
+        "Ranking / risk scoring",
+        "Ordered priority or score",
+        "review queue, lead priority",
+        "Probabilistic classifiers, learning-to-rank / scoring models"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-007"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 9",
+          "descr": "Transparent eevee evolution gif spray pack Spray for Team Fortress 2 | TF2  Sprays"
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "part": "ppt/slides/slide8.xml",
+      "text": [
+        "K-Nearest Neighbors: When It Fits",
+        "Use K-NN When…",
+        "Be Careful When…",
+        "Similarity between nearby cases is substantively meaningful.",
+        "Features are on incompatible scales and are not normalized appropriately.",
+        "The data set is small-to-moderate and dimensionality is manageable.",
+        "High dimensionality makes neighborhoods increasingly sparse and distance less informative.",
+        "A local, example-based model is acceptable.",
+        "Scoring latency matters with a very large stored reference set.",
+        "The distance metric and K can be justified and validated.",
+        "Population drift makes historical neighbors poor analogues of current cases."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-008"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 8",
+          "descr": "Hey Neighbor GIFs | Tenor"
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "part": "ppt/slides/slide9.xml",
+      "text": [
+        "K-Nearest Neighbors: When It Fits"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-009",
+        "asset-010"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 2",
+          "descr": "K-Nearest Neighbors (KNN). What is KNN Algorithm ? | by Gurucharan Gottala  | Medium"
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "part": "ppt/slides/slide10.xml",
+      "text": [
+        "Decision Trees and Tree Ensembles: When They Fit",
+        "Model",
+        "Practical Strength",
+        "Practical Limitation",
+        "Single Decision Tree",
+        "Human-readable recursive rules; nonlinear splits and interactions",
+        "High variance/instability; can overfit without control",
+        "Random Forest",
+        "Averages randomized trees to improve robustness/generalization",
+        "Less transparent; larger scoring and maintenance footprint",
+        "Gradient-Boosted Trees",
+        "Sequential ensembles can achieve strong tabular prediction",
+        "More tuning and explanation burden; leakage/overfit must be controlled",
+        "Use a single tree when transparent rule structure is central; use ensembles when their validated performance gain is worth the added complexity.",
+        "Use one decision tree when you need an easy-to-explain set of rules; use Random Forest or Boosting when they give noticeably better predictions and the extra complexity is acceptable."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-011"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 4",
+          "descr": "Tree Grows animation | Trees | Nature | GIFGIFs.com"
+        },
+        {
+          "name": "Picture 6",
+          "descr": "Tree Grows animation | Trees | Nature | GIFGIFs.com"
+        },
+        {
+          "name": "Picture 10",
+          "descr": "Tree Grows animation | Trees | Nature | GIFGIFs.com"
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "part": "ppt/slides/slide11.xml",
+      "text": [
+        "Decision Trees and Tree Ensembles: When They Fit"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-012",
+        "asset-013"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 2",
+          "descr": "Decision Trees make machine learning decisions easy to visualize and  understand. Starting from a root node, the model repeatedly applies  conditions to the data, follows the resulting branches, and eventually  reaches a"
+        },
+        {
+          "name": "Picture 5",
+          "descr": "Random Forest Regression” in 200 words - Data Science"
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "part": "ppt/slides/slide12.xml",
+      "text": [
+        "Decision Trees and Tree Ensembles: When They Fit"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-014"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Ensemble Models: Bagging & Boosting | by Rosaria Silipo | Analytics Vidhya  | Medium"
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "part": "ppt/slides/slide13.xml",
+      "text": [
+        "Decision Trees and Tree Ensembles: When They Fit",
+        "Example Problem",
+        "Recommended Model",
+        "Simple Reason",
+        "Approve or reject a loan based on simple business rules",
+        "Decision Tree",
+        "The rules need to be understandable.",
+        "Predict whether a customer will churn using many customer variables",
+        "Random Forest",
+        "Many factors may interact, and stability is important.",
+        "Predict house prices from many property characteristics",
+        "Gradient Boosting",
+        "Complex nonlinear relationships are common in tabular data.",
+        "Detect fraudulent transactions from many transaction features",
+        "Random Forest / Gradient Boosting",
+        "Fraud patterns usually involve complicated combinations of variables.",
+        "Predict employee resignation and explain the main decision rules to HR",
+        "Decision Tree",
+        "Interpretation may matter more than maximum accuracy.",
+        "Predict credit risk where predictive performance is critical",
+        "Gradient Boosting",
+        "Can capture subtle interactions and nonlinear patterns.",
+        "Classify customers into likely buyers/non-buyers with noisy marketing variables",
+        "Random Forest",
+        "Robust general-purpose choice when many predictors are involved."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 14,
+      "part": "ppt/slides/slide14.xml",
+      "text": [
+        "Regression Models: Match the Model to the Target and Loss",
+        "What does the data look like?",
+        "Good Models to Try First",
+        "Why?",
+        "The relationship is mostly straight/simple",
+        "Linear Regression or Regularized Regression",
+        "Use these when changing X tends to change Y in a fairly consistent way. They are also easier to explain because you can directly see how each variable affects the prediction.",
+        "The relationship is complicated, curved, or variables affect each other",
+        "Regression Tree, Random Forest, or Gradient Boosting",
+        "Use these when there is no simple straight-line relationship. These models can learn bends, thresholds, and combinations of variables automatically.",
+        "Easy Rule to Remember:",
+        "Simple relationship + explanation matters → Linear Regression“Imagine we are predicting salary from years of experience. If every additional year of experience usually adds roughly the same amount to salary, the relationship is fairly simple. Start with Linear Regression.”",
+        "Complex relationship + flexibility matters → Tree-based models“Experience + Education + Industry → different combinations → Salary.”"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-015"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 9",
+          "descr": "Salary GIFs | Tenor"
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "part": "ppt/slides/slide15.xml",
+      "text": [
+        "Regression Models: Match the Model to the Target and Loss"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-016"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 2",
+          "descr": "Enhancing your Power BI Reports with Linear Regression Models"
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "part": "ppt/slides/slide16.xml",
+      "text": [
+        "Regression Models: Match the Model to the Target and Loss"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-017",
+        "asset-018"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Regression Analysis - Definition, Formulas, Explanation, Examples"
+        },
+        {
+          "name": "Picture 4",
+          "descr": "Regression Analysis - Definition, Formulas, Explanation, Examples"
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "part": "ppt/slides/slide17.xml",
+      "text": [
+        "Time-Series Forecasting: Time Changes the Validation Rules",
+        "Forecasting estimates future observations of a variable indexed through time.",
+        "Model choice depends on forecast horizon and temporal structure such as level, trend, seasonality, autocorrelation, and structural change.",
+        "Naive and seasonal-naive forecasts are essential benchmarks because a complex model must beat a credible simple forecast.",
+        "Future-known regressors (for example, scheduled promotions) may be used; information unavailable at forecast time must not leak into evaluation.",
+        "Forecast validation must preserve temporal order and evaluate the horizons used operationally."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-019"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 18,
+      "part": "ppt/slides/slide18.xml",
+      "text": [
+        "Moving Average: A Smoother and Simple Forecasting Device",
+        "A k-period moving average replaces the current level with the arithmetic mean of the most recent k observations.",
+        "Larger windows smooth more strongly but respond more slowly to change.",
+        "Moving averages are useful for smoothing and can serve as simple short-horizon forecasting baselines in appropriate series.",
+        "They do not, by themselves, explicitly model trend, seasonality, causal drivers, or changing variance."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-020",
+        "asset-021",
+        "asset-022"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 4",
+          "descr": "Moving Average Formula | Calculator (Examples with Excel Template)"
+        },
+        {
+          "name": "Picture 6",
+          "descr": "Moving Averages (MA) Guide: Types, Setup & Trading Tips | Titan FX"
+        },
+        {
+          "name": "Picture 8",
+          "descr": "Via GIFER | Walking gif, Duck wallpaper, Duck cartoon"
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "part": "ppt/slides/slide19.xml",
+      "text": [
+        "Other Predictive Families: What Capability Do They Add?",
+        "Family",
+        "Useful When",
+        "Typical Trade-Off",
+        "Logistic models",
+        "You want to predict a category or probability and understand which factors affect the result.",
+        "Linear decision structure on transformed probability scale unless richer terms are added",
+        "Support Vector Machines",
+        "You have many features and need to find a strong boundary that separates the classes.",
+        "Scaling/tuning important; probability outputs are not intrinsic to the basic margin formulation",
+        "Neural Networks",
+        "You have large and complex data, especially images, text, audio, or other unstructured data.",
+        "High data/compute and governance/explanation burden",
+        "Tree Ensembles / Boosting",
+        "You have tabular data with complicated relationships, interactions, or thresholds.",
+        "Higher complexity and monitoring burden"
+      ],
+      "notes": [
+        "Logistic Regression → “I need a prediction I can explain.”",
+        "SVM → “I need to separate groups when I have many features.”",
+        "Neural Network → “My data itself is complicated, like images, text, or audio.”",
+        "Trees / Boosting → “My spreadsheet-type data has complicated relationships.”",
+        "Many variables alone do not determine the model.What matters more is how complicated the relationship between those variables and the target is."
+      ],
+      "math_text": [],
+      "assets": [
+        "asset-023"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 10",
+          "descr": "Family Story – Greetings"
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "part": "ppt/slides/slide20.xml",
+      "text": [
+        "Model Families Are Candidates, Not Winners",
+        "A model family should be considered because its assumptions and strengths fit the scenario—not because it won another dataset.",
+        "Model complexity should earn its place by producing materially better decision-relevant performance.",
+        "Transparent baselines remain valuable even when a more complex model is selected.",
+        "The final comparison must use the same validation folds/time windows, preprocessing logic, and decision-relevant metrics.",
+        "The phrase “best model” is incomplete until you state: best for which target, metric, horizon, cost structure, and deployment setting?"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-024"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 4",
+          "descr": "Choosing the Best Candidate by Alexandra on Dribbble"
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "part": "ppt/slides/slide21.xml",
+      "text": [
+        "Predictive Outputs Must Match Their Decision Use",
+        "Output",
+        "Meaning",
+        "Example",
+        "What Should We Evaluate?",
+        "Class",
+        "Predicts which category something belongs to",
+        "Customer will Churn or Stay",
+        "How often classifications are correct, especially important mistakes: Accuracy, Precision, Recall, F1",
+        "Probability",
+        "Predicts how likely an event is to happen",
+        "Customer has 82% probability of churn",
+        "Can it separate high-risk from low-risk cases, and does 82% really mean about 82%? Evaluate discrimination and calibration",
+        "Numeric value",
+        "Predicts a specific number",
+        "Expected monthly spend = ₱3,250",
+        "How far predictions are from actual values: MAE, RMSE, and whether there are unusually large errors",
+        "Forecast",
+        "Predicts a numeric value at a future time",
+        "Next-month demand = 12,400 units",
+        "How accurate the model is on future/unseen periods, and whether accuracy changes depending on how far ahead we forecast",
+        "Ranking",
+        "Puts cases in priority order",
+        "Top 500 customers most likely to churn",
+        "Whether the highest-ranked cases are actually the most relevant: Precision@K, Recall@K, and ranking quality"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 22,
+      "part": "ppt/slides/slide22.xml",
+      "text": [
+        "Predictive Outputs Must Match Their Decision Use"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-025",
+        "asset-026"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 2",
+          "descr": "Predictive Analytics | Data Analytics Solutions | Bold BI"
+        },
+        {
+          "name": "Picture 4",
+          "descr": "Data analytics dashboard Vectors - Download Free High-Quality Vectors |  Magnific (formerly Freepik)"
+        }
+      ]
+    },
+    {
+      "number": 23,
+      "part": "ppt/slides/slide23.xml",
+      "text": [
+        "Evaluation Metrics: Choose the Metric by the Decision"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-027"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 24,
+      "part": "ppt/slides/slide24.xml",
+      "text": [
+        "Always Establish a Baseline",
+        "Classification: a dummy/majority-class rule or the existing business rule.",
+        "Regression: a simple constant predictor such as the training mean/median, chosen to match the loss being considered.",
+        "Forecasting: naive or seasonal-naive forecast.",
+        "Ranking: current policy, base prevalence, or another transparent reference policy.",
+        "A complex model should deliver enough out-of-sample improvement to justify added engineering, governance, and operating cost.",
+        "A baseline answers the question: “What does this model improve over?”"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-028"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 25,
+      "part": "ppt/slides/slide25.xml",
+      "text": [
+        "Training, Validation, and Test Data",
+        "Partition / Role",
+        "Purpose",
+        "Key Rule",
+        "Training",
+        "Fit model parameters and preprocessing learned from data",
+        "Learning occurs here",
+        "Validation or CV folds",
+        "Tune hyperparameters, features, model families, thresholds",
+        "Used during development and comparison",
+        "Final test",
+        "Estimate generalization after design choices are frozen",
+        "Do not repeatedly tune against it",
+        "With cross-validation, a separate fixed validation set may be replaced by validation folds—but a final untouched test set remains useful for final assessment."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-029",
+        "asset-030",
+        "asset-031"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 10",
+          "descr": "Train Test Validation Split: Best Practices & Examples"
+        },
+        {
+          "name": "Picture 11",
+          "descr": "Machine Learning System Design Interview"
+        }
+      ]
+    },
+    {
+      "number": 26,
+      "part": "ppt/slides/slide26.xml",
+      "text": [
+        "Time-Series Validation Must Imitate Forecasting",
+        "Each validation forecast must be trained only on observations that occur before its forecast origin.",
+        "Rolling-origin or expanding-window evaluation repeats this process through time.",
+        "Evaluate the horizons that matter operationally: one-step performance need not predict eight-step performance.",
+        "Preprocessing and feature engineering must also obey the forecast origin—no future-derived normalization, labels, or covariates.",
+        "Forecast errors from genuine future observations are different from in-sample residuals."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-032",
+        "asset-033"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 6",
+          "descr": "Time Series Cross-Validation: Techniques & Implementation"
+        },
+        {
+          "name": "Picture 7",
+          "descr": "Proper validation of a Time-Series model | Towards Data Science"
+        }
+      ]
+    },
+    {
+      "number": 27,
+      "part": "ppt/slides/slide27.xml",
+      "text": [
+        "Underfitting, Generalization, and Overfitting",
+        "Condition",
+        "Typical Pattern",
+        "Response",
+        "Underfitting",
+        "Poor training + poor validation performance",
+        "Increase useful signal/model flexibility; improve features",
+        "Good generalization",
+        "Training and validation both strong with acceptable gap",
+        "Confirm on final test and monitor",
+        "Overfitting",
+        "Excellent training, weaker validation/test",
+        "Reduce complexity, regularize, gather data, improve validation",
+        "Distribution shift",
+        "Historical validation strong, live performance falls",
+        "Investigate drift, retraining, segment mismatch"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-034"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 4",
+          "descr": "Analytics animation by Qunt on Dribbble"
+        }
+      ]
+    },
+    {
+      "number": 28,
+      "part": "ppt/slides/slide28.xml",
+      "text": [
+        "Underfitting, Generalization, and Overfitting"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-035"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 2",
+          "descr": "Model Tuning and Overfitting Explained: How to Optimize Machine Learning Models for Real-World Success | by Prem Vishnoi(cloudvala) | NextGenAI | Medium"
+        }
+      ]
+    },
+    {
+      "number": 29,
+      "part": "ppt/slides/slide29.xml",
+      "text": [
+        "Underfitting, Generalization, and Overfitting"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-036",
+        "asset-037"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 3",
+          "descr": "Example of overfitting and underfitting in machine learning"
+        },
+        {
+          "name": "Picture 4",
+          "descr": "Chapter 23 | Sebastian Raschka, PhD"
+        }
+      ]
+    },
+    {
+      "number": 30,
+      "part": "ppt/slides/slide30.xml",
+      "text": [
+        "Classification Begins with the Confusion Matrix",
+        "Predicted Positive",
+        "Predicted Negative",
+        "Actual Positive",
+        "True Positive (TP)",
+        "False Negative (FN)",
+        "Actual Negative",
+        "False Positive (FP)",
+        "True Negative (TN)",
+        "Threshold-based classification metrics are functions of these four counts; changing the threshold changes the confusion matrix."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-038"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 10",
+          "descr": "Inside Out Joy GIF"
+        }
+      ]
+    },
+    {
+      "number": 31,
+      "part": "ppt/slides/slide31.xml",
+      "text": [
+        "Classification Evaluation Metrics: One Table, Different Questions",
+        "Metric\\",
+        "Definition / Meaning",
+        "Formula",
+        "Use When",
+        "Main Caution",
+        "Accuracy",
+        "Overall proportion classified correctly",
+        "(TP + TN) / (TP + TN + FP + FN)",
+        "Classes reasonably balanced and FP/FN costs broadly similar",
+        "Can look excellent when one class dominates",
+        "Balanced Accuracy",
+        "Average recall across classes; binary form averages sensitivity and specificity",
+        "(Recall + Specificity) / 2",
+        "Class imbalance makes ordinary accuracy less representative",
+        "Still does not evaluate probability calibration",
+        "Precision (PPV)",
+        "Among predicted positives, proportion actually positive",
+        "TP / (TP + FP)",
+        "False positives consume scarce resources or trust",
+        "Changes with class prevalence",
+        "Recall / Sensitivity",
+        "Among actual positives, proportion correctly detected",
+        "TP / (TP + FN)",
+        "Missing a positive case is costly",
+        "High recall may create many false positives",
+        "Specificity",
+        "Among actual negatives, proportion correctly rejected",
+        "TN / (TN + FP)",
+        "Avoiding false alarms / unnecessary interventions matters",
+        "Can remain high in rare-event settings despite many alerts",
+        "F1 Score",
+        "Harmonic mean of precision and recall; equal weighting",
+        "2PR / (P + R)",
+        "Positive-class retrieval matters and FP/FN both matter",
+        "Does not directly use true negatives",
+        "F-beta",
+        "Weighted harmonic mean of precision and recall",
+        "(1 + beta^2)PR / (beta^2 P + R)",
+        "beta > 1 when recall matters more; beta < 1 when precision matters more",
+        "Choose beta from decision consequences, not convenience"
+      ],
+      "notes": [
+        "All of these measures come from the confusion matrix, but each answers a different evaluation question."
+      ],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 32,
+      "part": "ppt/slides/slide32.xml",
+      "text": [
+        "Choose the Classification Metric from the Error Cost",
+        "Decision Situation",
+        "Primary Concern",
+        "Useful Evaluation",
+        "Practical Interpretation",
+        "Missing a true positive is severe",
+        "False negatives",
+        "Recall / Sensitivity; F-beta with beta > 1",
+        "Also watch precision so workload remains feasible",
+        "False alerts are expensive",
+        "False positives",
+        "Precision; optionally Specificity",
+        "Precision is usually more operationally direct for an alert queue",
+        "FP and FN both matter",
+        "Trade-off between positive-class errors",
+        "Precision + Recall; F1; explicit cost matrix",
+        "Do not hide asymmetric costs behind one score",
+        "Rare positive class; ranking matters",
+        "Quality of the highest-ranked cases",
+        "Precision–Recall curve; Average Precision; Precision/Recall at K",
+        "Ordinary accuracy and ROC-AUC can look reassuring while top-alert quality is poor",
+        "Classes are roughly balanced; costs similar",
+        "Overall correctness",
+        "Accuracy",
+        "Confirm class prevalence and error costs first",
+        "Probabilities drive money, triage, or optimization",
+        "Probability quality",
+        "Calibration + Brier Score / Log Loss",
+        "Discrimination alone is insufficient",
+        "Do not ask “Which metric is best?” Ask “Which mistake can the decision least afford?”",
+        "Metric selection is part of decision design. Define the costly error before comparing models."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 33,
+      "part": "ppt/slides/slide33.xml",
+      "text": [
+        "Decision Situation",
+        "Primary Concern",
+        "Useful Evaluation",
+        "Practical Interpretation",
+        "Missing a true positive is severe",
+        "False negatives",
+        "Recall / Sensitivity; F-beta with beta > 1",
+        "Also watch precision so workload remains feasible",
+        "False alerts are expensive",
+        "False positives",
+        "Precision; optionally Specificity",
+        "Precision is usually more operationally direct for an alert queue",
+        "FP and FN both matter",
+        "Trade-off between positive-class errors",
+        "Precision + Recall; F1; explicit cost matrix",
+        "Do not hide asymmetric costs behind one score",
+        "Rare positive class; ranking matters",
+        "Quality of the highest-ranked cases",
+        "Precision–Recall curve; Average Precision; Precision/Recall at K",
+        "Ordinary accuracy and ROC-AUC can look reassuring while top-alert quality is poor",
+        "Classes are roughly balanced; costs similar",
+        "Overall correctness",
+        "Accuracy",
+        "Confirm class prevalence and error costs first",
+        "Probabilities drive money, triage, or optimization",
+        "Probability quality",
+        "Calibration + Brier Score / Log Loss",
+        "Discrimination alone is insufficient"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-039"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 34,
+      "part": "ppt/slides/slide34.xml",
+      "text": [
+        "Decision Situation",
+        "Primary Concern",
+        "Useful Evaluation",
+        "Practical Interpretation",
+        "Missing a true positive is severe",
+        "False negatives",
+        "Recall / Sensitivity; F-beta with beta > 1",
+        "Also watch precision so workload remains feasible",
+        "False alerts are expensive",
+        "False positives",
+        "Precision; optionally Specificity",
+        "Precision is usually more operationally direct for an alert queue",
+        "FP and FN both matter",
+        "Trade-off between positive-class errors",
+        "Precision + Recall; F1; explicit cost matrix",
+        "Do not hide asymmetric costs behind one score",
+        "Rare positive class; ranking matters",
+        "Quality of the highest-ranked cases",
+        "Precision–Recall curve; Average Precision; Precision/Recall at K",
+        "Ordinary accuracy and ROC-AUC can look reassuring while top-alert quality is poor",
+        "Classes are roughly balanced; costs similar",
+        "Overall correctness",
+        "Accuracy",
+        "Confirm class prevalence and error costs first",
+        "Probabilities drive money, triage, or optimization",
+        "Probability quality",
+        "Calibration + Brier Score / Log Loss",
+        "Discrimination alone is insufficient"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-040"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 35,
+      "part": "ppt/slides/slide35.xml",
+      "text": [
+        "Decision Situation",
+        "Primary Concern",
+        "Useful Evaluation",
+        "Practical Interpretation",
+        "Missing a true positive is severe",
+        "False negatives",
+        "Recall / Sensitivity; F-beta with beta > 1",
+        "Also watch precision so workload remains feasible",
+        "False alerts are expensive",
+        "False positives",
+        "Precision; optionally Specificity",
+        "Precision is usually more operationally direct for an alert queue",
+        "FP and FN both matter",
+        "Trade-off between positive-class errors",
+        "Precision + Recall; F1; explicit cost matrix",
+        "Do not hide asymmetric costs behind one score",
+        "Rare positive class; ranking matters",
+        "Quality of the highest-ranked cases",
+        "Precision–Recall curve; Average Precision; Precision/Recall at K",
+        "Ordinary accuracy and ROC-AUC can look reassuring while top-alert quality is poor",
+        "Classes are roughly balanced; costs similar",
+        "Overall correctness",
+        "Accuracy",
+        "Confirm class prevalence and error costs first",
+        "Probabilities drive money, triage, or optimization",
+        "Probability quality",
+        "Calibration + Brier Score / Log Loss",
+        "Discrimination alone is insufficient"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-041"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 36,
+      "part": "ppt/slides/slide36.xml",
+      "text": [
+        "Decision Situation",
+        "Primary Concern",
+        "Useful Evaluation",
+        "Practical Interpretation",
+        "Missing a true positive is severe",
+        "False negatives",
+        "Recall / Sensitivity; F-beta with beta > 1",
+        "Also watch precision so workload remains feasible",
+        "False alerts are expensive",
+        "False positives",
+        "Precision; optionally Specificity",
+        "Precision is usually more operationally direct for an alert queue",
+        "FP and FN both matter",
+        "Trade-off between positive-class errors",
+        "Precision + Recall; F1; explicit cost matrix",
+        "Do not hide asymmetric costs behind one score",
+        "Rare positive class; ranking matters",
+        "Quality of the highest-ranked cases",
+        "Precision–Recall curve; Average Precision; Precision/Recall at K",
+        "Ordinary accuracy and ROC-AUC can look reassuring while top-alert quality is poor",
+        "Classes are roughly balanced; costs similar",
+        "Overall correctness",
+        "Accuracy",
+        "Confirm class prevalence and error costs first",
+        "Probabilities drive money, triage, or optimization",
+        "Probability quality",
+        "Calibration + Brier Score / Log Loss",
+        "Discrimination alone is insufficient"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-042"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 37,
+      "part": "ppt/slides/slide37.xml",
+      "text": [
+        "Decision Situation",
+        "Primary Concern",
+        "Useful Evaluation",
+        "Practical Interpretation",
+        "Missing a true positive is severe",
+        "False negatives",
+        "Recall / Sensitivity; F-beta with beta > 1",
+        "Also watch precision so workload remains feasible",
+        "False alerts are expensive",
+        "False positives",
+        "Precision; optionally Specificity",
+        "Precision is usually more operationally direct for an alert queue",
+        "FP and FN both matter",
+        "Trade-off between positive-class errors",
+        "Precision + Recall; F1; explicit cost matrix",
+        "Do not hide asymmetric costs behind one score",
+        "Rare positive class; ranking matters",
+        "Quality of the highest-ranked cases",
+        "Precision–Recall curve; Average Precision; Precision/Recall at K",
+        "Ordinary accuracy and ROC-AUC can look reassuring while top-alert quality is poor",
+        "Classes are roughly balanced; costs similar",
+        "Overall correctness",
+        "Accuracy",
+        "Confirm class prevalence and error costs first",
+        "Probabilities drive money, triage, or optimization",
+        "Probability quality",
+        "Calibration + Brier Score / Log Loss",
+        "Discrimination alone is insufficient"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-043"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 38,
+      "part": "ppt/slides/slide38.xml",
+      "text": [
+        "Decision Situation",
+        "Primary Concern",
+        "Useful Evaluation",
+        "Practical Interpretation",
+        "Missing a true positive is severe",
+        "False negatives",
+        "Recall / Sensitivity; F-beta with beta > 1",
+        "Also watch precision so workload remains feasible",
+        "False alerts are expensive",
+        "False positives",
+        "Precision; optionally Specificity",
+        "Precision is usually more operationally direct for an alert queue",
+        "FP and FN both matter",
+        "Trade-off between positive-class errors",
+        "Precision + Recall; F1; explicit cost matrix",
+        "Do not hide asymmetric costs behind one score",
+        "Rare positive class; ranking matters",
+        "Quality of the highest-ranked cases",
+        "Precision–Recall curve; Average Precision; Precision/Recall at K",
+        "Ordinary accuracy and ROC-AUC can look reassuring while top-alert quality is poor",
+        "Classes are roughly balanced; costs similar",
+        "Overall correctness",
+        "Accuracy",
+        "Confirm class prevalence and error costs first",
+        "Probabilities drive money, triage, or optimization",
+        "Probability quality",
+        "Calibration + Brier Score / Log Loss",
+        "Discrimination alone is insufficient"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-044"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 39,
+      "part": "ppt/slides/slide39.xml",
+      "text": [
+        "Threshold, Ranking, and Probability Quality Are Different Evaluation Problems",
+        "Evaluation Layer",
+        "What It Asks",
+        "Typical Tool / Metric",
+        "Key Practical Rule",
+        "Operating threshold",
+        "Converts score/probability into Positive vs Negative",
+        "Precision, Recall, Specificity, F1/F-beta at the chosen threshold",
+        "Choose using consequences, capacity, and policy — not automatically 0.50",
+        "ROC / ROC-AUC",
+        "Discrimination: how well scores rank positives above negatives across thresholds",
+        "TPR versus FPR; AUC summarizes ranking",
+        "Useful general ranking summary; can look optimistic when positives are very rare",
+        "Precision–Recall / AP",
+        "Positive-class retrieval across thresholds",
+        "Precision versus Recall; Average Precision summarizes PR performance",
+        "Often more informative for strongly imbalanced positive classes",
+        "Calibration",
+        "Whether stated probabilities match observed frequencies",
+        "Reliability / calibration plot",
+        "A predicted 0.80 should correspond to roughly 80% observed positives in comparable groups",
+        "Proper probability scores",
+        "Overall quality of probabilistic predictions",
+        "Brier Score; Log Loss",
+        "Useful when probabilities feed expected value, risk, pricing, or optimization; not measures of calibration alone",
+        "A classifier can rank cases well, perform poorly at the chosen threshold, or output badly calibrated probabilities."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 40,
+      "part": "ppt/slides/slide40.xml",
+      "text": [
+        "Threshold, Ranking, and Probability Quality Are Different Evaluation Problems"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-045"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 41,
+      "part": "ppt/slides/slide41.xml",
+      "text": [
+        "Regression Evaluation Metrics — Group by the Loss You Care About",
+        "Metric",
+        "Definition",
+        "Formula / Form",
+        "What It Emphasizes",
+        "Best Practical Use",
+        "MAE",
+        "Mean absolute size of prediction errors",
+        "mean(abs(Actual - Predicted))",
+        "Same units as target; linear penalty",
+        "Typical absolute miss should be easy to explain",
+        "MSE",
+        "Mean of squared prediction errors",
+        "mean((Actual - Predicted)^2)",
+        "Squared units; large errors receive much more weight",
+        "Useful mathematically; less intuitive for stakeholders",
+        "RMSE",
+        "Square root of MSE",
+        "sqrt(mean((Actual - Predicted)^2))",
+        "Returns to target units; still emphasizes large errors",
+        "Large misses deserve extra penalty",
+        "R-squared (R2)",
+        "Performance relative to a mean-only baseline under squared error",
+        "1 - SS_residual / SS_total",
+        "Dimensionless; can be negative on evaluated data",
+        "Use as supporting context, not as “typical error”",
+        "Quantile / Pinball Loss",
+        "Loss for predicting a selected conditional quantile",
+        "Asymmetric quantile loss",
+        "Lets under- and over-prediction have unequal consequences",
+        "Service levels, risk bounds, or asymmetric costs",
+        "For numeric prediction, no single score captures all consequences of error."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 42,
+      "part": "ppt/slides/slide42.xml",
+      "text": [
+        "Regression Evaluation Metrics — Group by the Loss You Care About"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-046"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 43,
+      "part": "ppt/slides/slide43.xml",
+      "text": [
+        "Quantile / Pinball Loss"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-047"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 44,
+      "part": "ppt/slides/slide44.xml",
+      "text": [
+        "Forecast Accuracy Metrics — Keep Time, Scale, and Baseline in View",
+        "Metric",
+        "Meaning",
+        "Why It Is Useful",
+        "Main Caution",
+        "MAE",
+        "Average absolute forecast miss",
+        "Original units; easy to explain",
+        "Scale-dependent",
+        "RMSE",
+        "Forecast error with extra weight on large misses",
+        "Original units; highlights large errors",
+        "Sensitive to unusually large errors",
+        "MAPE",
+        "Average absolute percentage error",
+        "Unit-free percentage interpretation",
+        "Undefined/infinite at zero; unstable near zero; requires a meaningful ratio-scale zero",
+        "MASE",
+        "Absolute error scaled by naive / seasonal-naive training error",
+        "Comparable across differently scaled series",
+        "Scaling benchmark must match seasonality; MASE < 1 indicates lower average absolute error than the scaling benchmark",
+        "Mean Error / Bias",
+        "Average signed forecast error",
+        "Shows systematic over- or under-forecasting",
+        "Positive and negative errors can cancel"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 45,
+      "part": "ppt/slides/slide45.xml",
+      "text": [
+        "Forecast Accuracy Metrics — Keep Time, Scale, and Baseline in View"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-048"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 46,
+      "part": "ppt/slides/slide46.xml",
+      "text": [
+        "Forecast Evaluation Must Match the Decision Horizon",
+        "Evaluate on future observations that were not used to fit the model; in-sample residuals are not a substitute for genuine forecast errors.",
+        "Preserve time order. Use rolling-origin / time-series cross-validation so each forecast is trained only on information available before that forecast origin.",
+        "Score the horizons that matter operationally (for example, 1-week, 4-week, and 8-week ahead) instead of averaging away horizon-specific weakness.",
+        "Always compare against a simple benchmark such as naive or seasonal-naive forecasting before claiming improvement.",
+        "When the decision depends on uncertainty, evaluate interval, quantile, or distributional forecasts in addition to point forecasts."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-049",
+        "asset-050"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 47,
+      "part": "ppt/slides/slide47.xml",
+      "text": [
+        "One Practical Decision Map for Evaluation Metric Selection",
+        "Prediction Product",
+        "Decision Question",
+        "Primary Evaluation",
+        "Do Not Rely on Alone",
+        "Binary action at a fixed threshold",
+        "Which classification error matters most?",
+        "Precision, Recall, Specificity, F-beta; explicit cost",
+        "Accuracy alone",
+        "Rare-event ranking / limited review queue",
+        "Are the top-ranked cases useful within capacity?",
+        "PR curve / AP; Precision@K; Recall@K",
+        "Accuracy; ROC-AUC alone",
+        "Probability feeds expected value / risk",
+        "Can the probability be used quantitatively?",
+        "Calibration + Brier / Log Loss + discrimination",
+        "AUC alone",
+        "Numeric prediction",
+        "Do typical errors or large misses matter more?",
+        "MAE vs RMSE; R2 only as supporting context",
+        "R2 alone",
+        "Time-series forecast",
+        "At what horizon and scale is error costly?",
+        "Rolling-origin MAE/RMSE/MASE + Bias by horizon",
+        "Random train/test split; training residuals",
+        "Start with the prediction product, then choose the metric that represents how the prediction will be used."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 48,
+      "part": "ppt/slides/slide48.xml",
+      "text": [
+        "Evaluation Metrics — The Rules That Matter",
+        "There is no universally best evaluation metric. “Best” depends on the prediction product, error consequences, and downstream decision.",
+        "Choose the metric before final model comparison whenever possible; otherwise it is easy to optimize whichever score makes the preferred model look best.",
+        "Compare candidate models under the same validation / resampling design so the comparison is fair.",
+        "Report complementary measures when one score hides a relevant trade-off: Precision + Recall, discrimination + calibration, MAE + Bias, or point accuracy + uncertainty.",
+        "For classification, model selection and threshold selection are related but separate decisions.",
+        "Translate scores into operational consequences: missed cases, false alerts, review load, pesos of error, service level, or expected loss."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 49,
+      "part": "ppt/slides/slide49.xml",
+      "text": [
+        "Choosing the Best Predictive Model per Scenario"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-051"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 50,
+      "part": "ppt/slides/slide50.xml",
+      "text": [
+        "There Is No Universally Best Predictive Model",
+        "Predictive performance is necessary but not sufficient.",
+        "Scenario fit includes target type, data volume/structure, nonlinearities, imbalance, probability quality, interpretability, latency, retraining burden, and error consequences.",
+        "A simpler model may be preferable when performance is comparable and explanation, speed, stability, or governance matters.",
+        "A more complex model should win only when its incremental value survives realistic validation and operational constraints."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-052"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 5",
+          "descr": "Not Better GIFs | Tenor"
+        }
+      ]
+    },
+    {
+      "number": 51,
+      "part": "ppt/slides/slide51.xml",
+      "text": [
+        "Start with the Business Decision, Then Define the Prediction",
+        "Business Decision",
+        "Prediction Needed",
+        "Target Structure",
+        "Who should retention team contact?",
+        "Churn risk within next 30 days",
+        "Binary probability + ranking",
+        "How much inventory should be positioned?",
+        "Demand over replenishment horizon",
+        "Time-series forecast / distribution",
+        "Which application needs manual review?",
+        "Risk / anomaly likelihood",
+        "Rare-event classification or ranking",
+        "How long will delivery take?",
+        "Expected duration",
+        "Regression / survival-type prediction",
+        "Which offer is most likely to convert?",
+        "Response probability by offer",
+        "Treatment/response model; causal method if effect is claimed"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 52,
+      "part": "ppt/slides/slide52.xml",
+      "text": [
+        "Step 1 — Define the Target, Horizon, and Label",
+        "Target: What exactly will count as success/event/value?",
+        "Horizon: How far into the future must the prediction remain useful?",
+        "Unit: customer, transaction, branch, product-day, shipment, patient, etc.",
+        "Label timing: Is the outcome observed after the feature window, or are we accidentally including future information?",
+        "Actionability: Will the prediction arrive early enough for an intervention?"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-053"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 53,
+      "part": "ppt/slides/slide53.xml",
+      "text": [
+        "Step 2 — Match Candidate Models to the Data Regime",
+        "Data / Scenario Characteristic",
+        "Reasonable Candidates",
+        "Watch For",
+        "Small-to-moderate tabular + explanation",
+        "Logistic/linear models, simple trees",
+        "Underfitting nonlinear effects",
+        "Nonlinear structured/tabular data",
+        "Random Forest, Gradient Boosting",
+        "Complexity, calibration, explanation",
+        "High-dimensional sparse features",
+        "Regularized linear models, SVM",
+        "Scaling, feature sparsity, probability calibration",
+        "Local similarity is meaningful",
+        "K-NN",
+        "Scaling, dimensionality, prediction latency",
+        "Large complex unstructured data",
+        "Neural networks",
+        "Data/compute, drift, governance",
+        "Temporal dependence",
+        "Forecasting models / time-aware ML",
+        "Leakage and horizon-specific validation"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 54,
+      "part": "ppt/slides/slide54.xml",
+      "text": [
+        "Step 3 — Define the Cost of Errors Before Picking the Winner",
+        "For classification, quantify or at least rank the harm of false positives and false negatives.",
+        "For regression/forecasting, ask whether underprediction and overprediction have different costs.",
+        "For ranked queues, define review/intervention capacity: top 100? top 1,000? all above a threshold?",
+        "If possible, convert model errors into expected business cost or net benefit rather than treating metric points as inherently valuable.",
+        "A 1-point gain in accuracy may be irrelevant; preventing 50 costly misses may be decisive."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-054"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 55,
+      "part": "ppt/slides/slide55.xml",
+      "text": [
+        "Step 4 — Decide How Much Interpretability Is Required",
+        "Need\\",
+        "Why It Matters",
+        "Likely Direction",
+        "Explain individual decision",
+        "Credit, healthcare, regulated/high-impact decisions",
+        "Transparent models or reliable local explanations",
+        "Explain global drivers",
+        "Management, policy, process learning",
+        "Coefficients, tree structure, global importance + diagnostics",
+        "Audit logic and assumptions",
+        "Governance, accountability, model risk",
+        "Documented pipeline, versioning, reproducibility",
+        "Pure ranking under low stakes",
+        "Operational automation with safeguards",
+        "More complex model may be acceptable"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 56,
+      "part": "ppt/slides/slide56.xml",
+      "text": [
+        "Step 5 — Check Operational Fit",
+        "Latency: Does the prediction need to arrive in milliseconds, minutes, daily, or monthly?",
+        "Feature availability: Will every required predictor exist at the exact prediction moment?",
+        "Infrastructure: Can the organization host, score, monitor, and retrain the model reliably?",
+        "Stability: Will small changes in data cause disruptive changes in decisions?",
+        "Cost: Is the incremental performance worth compute, licensing, engineering, and maintenance?"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-055"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 57,
+      "part": "ppt/slides/slide57.xml",
+      "text": [
+        "Step 6 — Decide Whether You Need Ranking, Class Labels, or Reliable Probabilities",
+        "Operational Need",
+        "What Matters Most",
+        "Prioritize a fixed review queue",
+        "Ranking quality; precision/recall at K",
+        "Trigger a yes/no action",
+        "Threshold-specific precision, recall, cost",
+        "Calculate expected loss/profit",
+        "Calibrated probabilities + cost model",
+        "Allocate scarce resources by risk",
+        "Ranking + calibration + downstream optimization",
+        "Communicate risk bands",
+        "Calibration and stability across segments"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-056"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 58,
+      "part": "ppt/slides/slide58.xml",
+      "text": [
+        "Step 7 — Prevent Data Leakage with a Pipeline Mindset",
+        "Data leakage occurs when information unavailable at prediction time influences model building or evaluation.",
+        "Split data before learning preprocessing quantities; fit imputation, scaling, feature selection, encoding, and other learned transformations only from training data within each validation split.",
+        "For temporal problems, future observations must not influence earlier features, model selection, or preprocessing.",
+        "Ask of every feature: “Would this value truly be known when the prediction is made?”",
+        "Use reproducible pipelines so cross-validation applies transformations only to the appropriate training portion.",
+        "Leakage produces overly optimistic evaluation and commonly collapses when the system meets truly new data."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 59,
+      "part": "ppt/slides/slide59.xml",
+      "text": [
+        "Candidate Model Scorecard: Strengths by Scenario",
+        "Model Family",
+        "Best Practical Use",
+        "Metric / Validation Priority",
+        "Main Caveat",
+        "Logistic / linear",
+        "Transparent baseline; probability or numeric prediction",
+        "CV + calibration / MAE-RMSE",
+        "May miss nonlinearities",
+        "K-NN",
+        "Local similarity on scaled low-dimensional data",
+        "CV over K + relevant class/regression metric",
+        "Curse of dimensionality; slow scoring",
+        "Single tree",
+        "Readable nonlinear rules",
+        "Pruned CV + threshold metrics",
+        "Instability/overfit",
+        "Random Forest / Boosting",
+        "Strong tabular nonlinear prediction",
+        "CV + PR/ROC/calibration or MAE/RMSE",
+        "Less transparent, tuning/maintenance",
+        "SVM",
+        "High-dimensional medium-size classification",
+        "CV + ranking/threshold metrics",
+        "Scaling and probability issues",
+        "Neural networks",
+        "Large complex/unstructured data",
+        "Strict holdout/CV + calibration/task metric",
+        "Data/compute/governance",
+        "Forecasting family",
+        "Temporal prediction",
+        "Rolling-origin, horizon-specific error",
+        "Time leakage and regime change"
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 60,
+      "part": "ppt/slides/slide60.xml",
+      "text": [
+        "Scenario Drill — Customer Churn",
+        "Decision: retention team can contact only 2,000 customers per week.",
+        "Target: churn within 30 days; features must be available before the contact decision.",
+        "Candidate models: Logistic Regression as transparent baseline; Decision Tree / Random Forest / Gradient Boosting for nonlinear interactions.",
+        "Primary evaluation: precision and recall within the top 2,000 or at the operational threshold; check calibration if probabilities drive offer cost.",
+        "Winner: not necessarily the highest-AUC model—choose the model that finds enough true churners within team capacity at acceptable false-contact cost."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-057"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 61,
+      "part": "ppt/slides/slide61.xml",
+      "text": [
+        "Scenario Drill — Sales Forecasting",
+        "Decision: order inventory today for the next eight weeks.",
+        "Compare seasonal-naive baseline, Moving Average / exponential smoothing, ARIMA-type model, and ML/regression with promotions/calendar if those future inputs are known.",
+        "Use rolling-origin validation and compare error at horizons 1 through 8.",
+        "Use MAE when average unit miss is central; RMSE when severe stockout/overstock misses deserve extra penalty; MASE for scaled comparison across products.",
+        "Reject models that use future promotions or stockout-censored demand incorrectly."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-058"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 62,
+      "part": "ppt/slides/slide62.xml",
+      "text": [
+        "Scenario Drill — Fraud Detection",
+        "Fraud is often rare, so ordinary accuracy can be dominated by legitimate transactions.",
+        "Decision: which transactions should be passed, challenged, manually reviewed, or blocked?",
+        "Use the precision-recall curve and Average Precision for rare-event ranking comparison; then inspect precision/recall at the actual review threshold or queue capacity.",
+        "If expected financial loss uses predicted probabilities, inspect calibration and proper probability scores.",
+        "A multi-band policy may be better than one threshold: auto-block very high risk, review intermediate risk, pass low risk."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-059"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 63,
+      "part": "ppt/slides/slide63.xml",
+      "text": [
+        "Scenario Drill — Comparing Three Models",
+        "Criterion",
+        "Model A: Logistic",
+        "Model B: Random Forest",
+        "Model C: Boosting",
+        "Recall at review capacity",
+        "0.72",
+        "0.81",
+        "0.84",
+        "Precision at review capacity",
+        "0.41",
+        "0.47",
+        "0.46",
+        "Calibration",
+        "Good",
+        "Needs calibration",
+        "Moderate",
+        "Explainability",
+        "High",
+        "Medium",
+        "Lower",
+        "Latency / maintenance",
+        "Low",
+        "Medium",
+        "Higher",
+        "Decision",
+        "Good transparent baseline",
+        "Strong practical choice",
+        "Choose only if extra recall creates enough value",
+        "The “best” model depends on the value of incremental recall versus calibration, explanation, latency, and maintenance—not on a single leaderboard number."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 64,
+      "part": "ppt/slides/slide64.xml",
+      "text": [
+        "Predictive Model Selection Framework — Scenario First",
+        "1. Define the business decision and who/what is being predicted.",
+        "2. Define target, prediction horizon, unit of analysis, and prediction moment.",
+        "3. Establish a transparent baseline.",
+        "4. Select several model families whose assumptions/capabilities fit the data structure.",
+        "5. Define the costly errors and choose decision-aligned metrics before comparison.",
+        "6. Use realistic validation and prevent leakage; for time series, preserve temporal order.",
+        "7. Compare generalization, calibration when needed, interpretability, stability, latency, and maintenance.",
+        "8. Select the operating threshold / queue capacity / forecast policy.",
+        "9. Confirm on untouched test data and important subgroups.",
+        "10. Deploy only when incremental decision value justifies complexity; monitor live outcomes.",
+        "“Best model” means best validated model-policy combination for this scenario—not highest score in the abstract."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 65,
+      "part": "ppt/slides/slide65.xml",
+      "text": [
+        "Key Takeaways",
+        "What we have learned",
+        "1.",
+        "EDA is an approach, not another analytics type.It helps us understand what the data reveals through distributions, patterns, anomalies, relationships, and emerging hypotheses. Descriptive, Diagnostic, Predictive, and Prescriptive Analytics describe the purpose of the analysis",
+        "2.",
+        "EDA discovers the clue; Diagnostic Analytics investigates the clue.EDA can reveal an unusual pattern, but diagnosis asks where it is concentrated, when it began, who or what is affected, which factors move with it, and what explanations remain plausible.",
+        "3.",
+        "Diagnostic Analytics asks “Why did it happen?” without turning “why” into guesswork.Diagnosis systematically localizes an observed outcome, investigates relationships and contributing factors, and develops evidence-supported explanations."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 66,
+      "part": "ppt/slides/slide66.xml",
+      "text": [
+        "Key Takeaways",
+        "What we have learned",
+        "4.",
+        "Localization comes before explanation.Drill-down and decomposition help identify where the change lives and what contributed to it before analysts attempt to explain the underlying mechanism.",
+        "5.",
+        "Association is diagnostic evidence, not automatic causation.Relationships, statistical tests, residuals, and candidate drivers can narrow the explanation space, but stronger evidence is required before claiming that one factor caused another.",
+        "6.",
+        "For categorical diagnosis, use the chain: EXPECT → TEST → LOCALIZE → MEASURE STRENGTH.Expected Frequency establishes the independence reference; Pearson Chi-Square tests overall association; Pearson Residuals identify where the discrepancy is concentrated; Cramér’s V measures association strength."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 67,
+      "part": "ppt/slides/slide67.xml",
+      "text": [
+        "Key Takeaways",
+        "What we have learned",
+        "7.",
+        "Time can be diagnostic without being predictive.Time-series decomposition separates historical observations into trend, seasonal, and residual components so analysts can distinguish recurring structure from unusual variation. Forecasting begins when the question is what happens next.",
+        "8.",
+        "A diagnostic visualization must support investigation, not decoration.The right visualization should make comparisons, concentration, contributions, process losses, anomalies, relationships, or temporal changes easier to investigate and trace.",
+        "9.",
+        "Diagnostic Analytics is now increasingly AI-assisted, but not AI-autonomous.AI can detect anomalies, suggest drivers, recommend drill paths, etc., but analysts remain responsible for validating the data, comparisons, context, alternatives, and causal claims."
+      ],
+      "notes": [],
+      "math_text": [],
+      "assets": [],
+      "charts": [],
+      "external_links": [],
+      "alt_text": []
+    },
+    {
+      "number": 68,
+      "part": "ppt/slides/slide68.xml",
+      "text": [],
+      "notes": [],
+      "math_text": [],
+      "assets": [
+        "asset-060",
+        "asset-061"
+      ],
+      "charts": [],
+      "external_links": [],
+      "alt_text": [
+        {
+          "name": "Picture 1",
+          "descr": "Happy Pokemon GIF by Pokémon_JPN - Find & Share on GIPHY"
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "id": "asset-001",
+      "part": "ppt/media/image2.jpg",
+      "sha256": "c2a078d261695417a39745fe79e114f4f2577b36710f5fb068b714c910b5a307",
+      "file": "media/asset-001.jpg",
+      "image": true,
+      "slides": [
+        1
+      ]
+    },
+    {
+      "id": "asset-002",
+      "part": "ppt/media/image3.jpeg",
+      "sha256": "bef07ff022575627234724d2efaaf8accc9cda9570f3201b7d9e579558b270ff",
+      "file": "media/asset-002.jpeg",
+      "image": true,
+      "slides": [
+        3
+      ]
+    },
+    {
+      "id": "asset-003",
+      "part": "ppt/media/image4.gif",
+      "sha256": "eed910b25068a97a0e64d5be1541a8047cf4720418e67d8aedb34910cf83d642",
+      "file": "media/asset-003.gif",
+      "image": true,
+      "slides": [
+        4
+      ]
+    },
+    {
+      "id": "asset-004",
+      "part": "ppt/media/image6.jpeg",
+      "sha256": "0f2fa5a23af50a68ed1c7d70a1781afe583bd4ba958cb028a7a5b27d1c828f5d",
+      "file": "media/asset-004.jpeg",
+      "image": true,
+      "slides": [
+        5
+      ]
+    },
+    {
+      "id": "asset-005",
+      "part": "ppt/media/image5.gif",
+      "sha256": "460cd1e2261c8d8419b2a329c577dd0fdd5fbbd021d46851d5ec749bfacd8631",
+      "file": "media/asset-005.gif",
+      "image": true,
+      "slides": [
+        5
+      ]
+    },
+    {
+      "id": "asset-006",
+      "part": "ppt/media/image7.gif",
+      "sha256": "94f50a1d752565d63ffb954916eff1ace2d9c12232edcb2ce2daf64571cff606",
+      "file": "media/asset-006.gif",
+      "image": true,
+      "slides": [
+        6
+      ]
+    },
+    {
+      "id": "asset-007",
+      "part": "ppt/media/image8.gif",
+      "sha256": "43c56fa192f25e2f94d368d7a18bb757c60da8e09b6fa0f5d2b6281854cbd8dc",
+      "file": "media/asset-007.gif",
+      "image": true,
+      "slides": [
+        7
+      ]
+    },
+    {
+      "id": "asset-008",
+      "part": "ppt/media/image9.gif",
+      "sha256": "c2052461f2fe1d8d60722cdd84f12e9183b3f16dfc0b466e1d1ce6dec163ff56",
+      "file": "media/asset-008.gif",
+      "image": true,
+      "slides": [
+        8
+      ]
+    },
+    {
+      "id": "asset-009",
+      "part": "ppt/media/image11.png",
+      "sha256": "fac8a9d50550478c42e681dddbe4c0eb9d8fb7953124cbcc463bf98974e7ab1c",
+      "file": "media/asset-009.png",
+      "image": true,
+      "slides": [
+        9
+      ]
+    },
+    {
+      "id": "asset-010",
+      "part": "ppt/media/image10.png",
+      "sha256": "7be5a56065ecc9838e4a9574d7b503d7d67557528e15f46cb492ca0a65a9a23d",
+      "file": "media/asset-010.png",
+      "image": true,
+      "slides": [
+        9
+      ]
+    },
+    {
+      "id": "asset-011",
+      "part": "ppt/media/image12.gif",
+      "sha256": "065ee3c305c51187a07244c11cf4a88bb2d6e615d6178d61a7e6ad002fd128d0",
+      "file": "media/asset-011.gif",
+      "image": true,
+      "slides": [
+        10
+      ]
+    },
+    {
+      "id": "asset-012",
+      "part": "ppt/media/image14.png",
+      "sha256": "a7b44cb4e3f9554621d7dcf0e69bbc00ceb598770fe13d333d4eb5b8875ecbbb",
+      "file": "media/asset-012.png",
+      "image": true,
+      "slides": [
+        11
+      ]
+    },
+    {
+      "id": "asset-013",
+      "part": "ppt/media/image13.jpeg",
+      "sha256": "2de0df8734996aeb37ba92c383516235139aa4d7ef8d8b65bc98fcbc2845a0fc",
+      "file": "media/asset-013.jpeg",
+      "image": true,
+      "slides": [
+        11
+      ]
+    },
+    {
+      "id": "asset-014",
+      "part": "ppt/media/image15.png",
+      "sha256": "b8e8e0e719dcd64429d2383d548d9a6c70ecf5fda92c022bc52bcb21f64e5daf",
+      "file": "media/asset-014.png",
+      "image": true,
+      "slides": [
+        12
+      ]
+    },
+    {
+      "id": "asset-015",
+      "part": "ppt/media/image16.gif",
+      "sha256": "5a213119d12d08b70fdf8669e71ee058c3efeb57f79c0af5ca4eace79dc64187",
+      "file": "media/asset-015.gif",
+      "image": true,
+      "slides": [
+        14
+      ]
+    },
+    {
+      "id": "asset-016",
+      "part": "ppt/media/image17.png",
+      "sha256": "ccf53c3f687f0d400ec69bc478005514d66c147a5ef554c538a9a60cf6e2b77f",
+      "file": "media/asset-016.png",
+      "image": true,
+      "slides": [
+        15
+      ]
+    },
+    {
+      "id": "asset-017",
+      "part": "ppt/media/image18.png",
+      "sha256": "17c75722a4abe62cab83c4c6f0b6d428f427c7530bb1b46bd0e05e756c3b9f41",
+      "file": "media/asset-017.png",
+      "image": true,
+      "slides": [
+        16
+      ]
+    },
+    {
+      "id": "asset-018",
+      "part": "ppt/media/image19.png",
+      "sha256": "1273fc7c6f6e895f4de598d86629e5979f3aaec9c3aa6bcddabb67bc8628e524",
+      "file": "media/asset-018.png",
+      "image": true,
+      "slides": [
+        16
+      ]
+    },
+    {
+      "id": "asset-019",
+      "part": "ppt/media/image20.gif",
+      "sha256": "daa28df023aa2a743cbf4e8b830f80cd1beb966f3077d462afa9618ff25ee509",
+      "file": "media/asset-019.gif",
+      "image": true,
+      "slides": [
+        17
+      ]
+    },
+    {
+      "id": "asset-020",
+      "part": "ppt/media/image22.png",
+      "sha256": "82ddad4298fd4ddc02a6394eddfa4f8fd8fe6f77293029f6f87253a5e9c8ad0b",
+      "file": "media/asset-020.png",
+      "image": true,
+      "slides": [
+        18
+      ]
+    },
+    {
+      "id": "asset-021",
+      "part": "ppt/media/image21.jpeg",
+      "sha256": "eaddaacc46672ea495d7cfaa6656624599943e6b51a1aad47e1e6e163585af42",
+      "file": "media/asset-021.jpeg",
+      "image": true,
+      "slides": [
+        18
+      ]
+    },
+    {
+      "id": "asset-022",
+      "part": "ppt/media/image23.gif",
+      "sha256": "c5d44618d82300ebdb9b17dd457528da2620858c0f19e629d5377b54a5fd5efd",
+      "file": "media/asset-022.gif",
+      "image": true,
+      "slides": [
+        18
+      ]
+    },
+    {
+      "id": "asset-023",
+      "part": "ppt/media/image24.gif",
+      "sha256": "987ab592ec468e30a91d331bb1e921b40b004108b2c3c2583282dee05dc650d0",
+      "file": "media/asset-023.gif",
+      "image": true,
+      "slides": [
+        19
+      ]
+    },
+    {
+      "id": "asset-024",
+      "part": "ppt/media/image25.gif",
+      "sha256": "6c5a62a03748aaaf667e002f534ac06977ba4d647808e40178b48f4575632f87",
+      "file": "media/asset-024.gif",
+      "image": true,
+      "slides": [
+        20
+      ]
+    },
+    {
+      "id": "asset-025",
+      "part": "ppt/media/image26.jpeg",
+      "sha256": "be32ef71953276686c51a51cdcceb56dc44b0ebc0120ed3f6624d49338432875",
+      "file": "media/asset-025.jpeg",
+      "image": true,
+      "slides": [
+        22
+      ]
+    },
+    {
+      "id": "asset-026",
+      "part": "ppt/media/image27.jpeg",
+      "sha256": "1815c9980ae5f32ef20202cc98b9b436d5c2327d8eb42b710a438d3ab4816fda",
+      "file": "media/asset-026.jpeg",
+      "image": true,
+      "slides": [
+        22
+      ]
+    },
+    {
+      "id": "asset-027",
+      "part": "ppt/media/image28.jpg",
+      "sha256": "3241d00bdd150dc771786f90f9ffd3ce68dfcedbc013486f598d4cbd16bd55d0",
+      "file": "media/asset-027.jpg",
+      "image": true,
+      "slides": [
+        23
+      ]
+    },
+    {
+      "id": "asset-028",
+      "part": "ppt/media/image29.png",
+      "sha256": "bdd4358f9ae032b8ebf6b99f23a46a32ad1123e5079692bdaefca6ee426f553c",
+      "file": "media/asset-028.png",
+      "image": true,
+      "slides": [
+        24
+      ]
+    },
+    {
+      "id": "asset-029",
+      "part": "ppt/media/image31.png",
+      "sha256": "af0e1fdcfa34c334e56e11fc2a529fcbcfe3d7b6fcfb1d73d856ab8df3689555",
+      "file": "media/asset-029.png",
+      "image": true,
+      "slides": [
+        25
+      ]
+    },
+    {
+      "id": "asset-030",
+      "part": "ppt/media/image30.png",
+      "sha256": "871279aa91defa257df233fdf0f5b005f91d8bc6e624d806264b90e2e2268329",
+      "file": "media/asset-030.png",
+      "image": true,
+      "slides": [
+        25
+      ]
+    },
+    {
+      "id": "asset-031",
+      "part": "ppt/media/image32.png",
+      "sha256": "ca84960ed8d89b11877c0d330209bcdc9e841588c09d7e6390f18d4afaf2b931",
+      "file": "media/asset-031.png",
+      "image": true,
+      "slides": [
+        25
+      ]
+    },
+    {
+      "id": "asset-032",
+      "part": "ppt/media/image34.png",
+      "sha256": "e7ca2ef7d673a3dcb1cdc6d988999ddd991dbe526802c700b0f5f203a9d9c621",
+      "file": "media/asset-032.png",
+      "image": true,
+      "slides": [
+        26
+      ]
+    },
+    {
+      "id": "asset-033",
+      "part": "ppt/media/image33.png",
+      "sha256": "f57377e201381e1511dfe6222570e7987b122e9985405295c6ffe19f0b7f7f8c",
+      "file": "media/asset-033.png",
+      "image": true,
+      "slides": [
+        26
+      ]
+    },
+    {
+      "id": "asset-034",
+      "part": "ppt/media/image35.gif",
+      "sha256": "7513d719c4f3d906fdc5d2135ee54bcba0fb4ec4e3c230d44b92ae26d1d88929",
+      "file": "media/asset-034.gif",
+      "image": true,
+      "slides": [
+        27
+      ]
+    },
+    {
+      "id": "asset-035",
+      "part": "ppt/media/image36.jpeg",
+      "sha256": "1a12cbe45244b565e7deb217358526125474c2028250b95fd9a381beee998898",
+      "file": "media/asset-035.jpeg",
+      "image": true,
+      "slides": [
+        28
+      ]
+    },
+    {
+      "id": "asset-036",
+      "part": "ppt/media/image38.png",
+      "sha256": "aab102f4584169c1293ba773a2cd570ad501e151e0805809493b781922bad683",
+      "file": "media/asset-036.png",
+      "image": true,
+      "slides": [
+        29
+      ]
+    },
+    {
+      "id": "asset-037",
+      "part": "ppt/media/image37.png",
+      "sha256": "9a584c950108383cc40b1d470f082bac1d47c1c73057a0afecf669c090d5c84b",
+      "file": "media/asset-037.png",
+      "image": true,
+      "slides": [
+        29
+      ]
+    },
+    {
+      "id": "asset-038",
+      "part": "ppt/media/image39.gif",
+      "sha256": "2a813c6cb4eeab25fd636548bd1a5164da107fe62f941b10c0bc19b2c5d6f718",
+      "file": "media/asset-038.gif",
+      "image": true,
+      "slides": [
+        30
+      ]
+    },
+    {
+      "id": "asset-039",
+      "part": "ppt/media/image40.png",
+      "sha256": "d28204ffd99c25e9e48bacfc1e3fcec0bd48cbc85472c7e1c853af0910af37fb",
+      "file": "media/asset-039.png",
+      "image": true,
+      "slides": [
+        33
+      ]
+    },
+    {
+      "id": "asset-040",
+      "part": "ppt/media/image41.png",
+      "sha256": "516085b80e5ad931b33e1b6b22477d3da8fd93dbca3e6c195cbdfbd9da54f852",
+      "file": "media/asset-040.png",
+      "image": true,
+      "slides": [
+        34
+      ]
+    },
+    {
+      "id": "asset-041",
+      "part": "ppt/media/image42.png",
+      "sha256": "31a8142d155a67b4a0ebe9eeffff438774df9cae7598b3ad13d840ce06cca8f2",
+      "file": "media/asset-041.png",
+      "image": true,
+      "slides": [
+        35
+      ]
+    },
+    {
+      "id": "asset-042",
+      "part": "ppt/media/image43.png",
+      "sha256": "9ad499f5b68cef5d173d095bd3a2a329aac23775793e437e14d2d6374c15012f",
+      "file": "media/asset-042.png",
+      "image": true,
+      "slides": [
+        36
+      ]
+    },
+    {
+      "id": "asset-043",
+      "part": "ppt/media/image44.png",
+      "sha256": "01bba50bc961b24d911e3d0a44ca4e679c5b7bc8b1650b4290a07990dc32fdd6",
+      "file": "media/asset-043.png",
+      "image": true,
+      "slides": [
+        37
+      ]
+    },
+    {
+      "id": "asset-044",
+      "part": "ppt/media/image45.png",
+      "sha256": "5602ecc098cef529ca40d64510b85726872bb95802ec63c6dddf5a331f5c6443",
+      "file": "media/asset-044.png",
+      "image": true,
+      "slides": [
+        38
+      ]
+    },
+    {
+      "id": "asset-045",
+      "part": "ppt/media/image46.png",
+      "sha256": "8e9ad6012066f2152b0e225fbea96ff58f1d92c52c898db48423c254ba8313c4",
+      "file": "media/asset-045.png",
+      "image": true,
+      "slides": [
+        40
+      ]
+    },
+    {
+      "id": "asset-046",
+      "part": "ppt/media/image47.png",
+      "sha256": "5f4f8218d4e6d3a9e954969cf4d2b1e0a8f8c3a1384d7e02482aa58fc4bc6574",
+      "file": "media/asset-046.png",
+      "image": true,
+      "slides": [
+        42
+      ]
+    },
+    {
+      "id": "asset-047",
+      "part": "ppt/media/image48.png",
+      "sha256": "a5ac67aa6520024387fa6d431258baff213112806f5a5da1471d9cc9c6a7cac2",
+      "file": "media/asset-047.png",
+      "image": true,
+      "slides": [
+        43
+      ]
+    },
+    {
+      "id": "asset-048",
+      "part": "ppt/media/image49.png",
+      "sha256": "ba1d3ad4fd1bd83e0cb9f1541bab1a673bd9d2a12b56c7812bf26b81bb6753b8",
+      "file": "media/asset-048.png",
+      "image": true,
+      "slides": [
+        45
+      ]
+    },
+    {
+      "id": "asset-049",
+      "part": "ppt/media/image51.png",
+      "sha256": "b2174907d38952f6e4223e8c9dd87b3eb844ba402532f937073b45b7db351f49",
+      "file": "media/asset-049.png",
+      "image": true,
+      "slides": [
+        46
+      ]
+    },
+    {
+      "id": "asset-050",
+      "part": "ppt/media/image50.png",
+      "sha256": "f2f8276333af62e4ea53697edb07174c5daa07f85bf53ba908c4394ffae71650",
+      "file": "media/asset-050.png",
+      "image": true,
+      "slides": [
+        46
+      ]
+    },
+    {
+      "id": "asset-051",
+      "part": "ppt/media/image52.jpg",
+      "sha256": "241e4e279d16eac4de14fc349d44972470be8bc241851962fe40206ad9e8aaad",
+      "file": "media/asset-051.jpg",
+      "image": true,
+      "slides": [
+        49
+      ]
+    },
+    {
+      "id": "asset-052",
+      "part": "ppt/media/image53.gif",
+      "sha256": "18d7f2773853254b00b6b9c59aed0db4dca24d6e4175c6650dbf1df1eb331e97",
+      "file": "media/asset-052.gif",
+      "image": true,
+      "slides": [
+        50
+      ]
+    },
+    {
+      "id": "asset-053",
+      "part": "ppt/media/image54.png",
+      "sha256": "4f4db8a71b3020c39b944219865f0c02c4f02ed1c5d7799565cac8a07e058e01",
+      "file": "media/asset-053.png",
+      "image": true,
+      "slides": [
+        52
+      ]
+    },
+    {
+      "id": "asset-054",
+      "part": "ppt/media/image55.png",
+      "sha256": "9922290b4f2862a5252c75be993b516e8b4e5fc164265a8cfba33bf9400f1c87",
+      "file": "media/asset-054.png",
+      "image": true,
+      "slides": [
+        54
+      ]
+    },
+    {
+      "id": "asset-055",
+      "part": "ppt/media/image56.png",
+      "sha256": "bb923976ccf603446688c3c56fa36575a6bd4686f065fb855b4e01958da2e2df",
+      "file": "media/asset-055.png",
+      "image": true,
+      "slides": [
+        56
+      ]
+    },
+    {
+      "id": "asset-056",
+      "part": "ppt/media/image57.png",
+      "sha256": "16d4c36d4f99d077bc3a84f16d1f5369b34a616d940cde64522f92c4d12edebf",
+      "file": "media/asset-056.png",
+      "image": true,
+      "slides": [
+        57
+      ]
+    },
+    {
+      "id": "asset-057",
+      "part": "ppt/media/image58.png",
+      "sha256": "89d11a24d10ae159b5b9489d55dd38bfe2ed216fe8d7f717c132f76c87c4b9c0",
+      "file": "media/asset-057.png",
+      "image": true,
+      "slides": [
+        60
+      ]
+    },
+    {
+      "id": "asset-058",
+      "part": "ppt/media/image59.png",
+      "sha256": "758fa5aed18a1859199e62a636884090a55edf65ffa534d527a26fa1744930d4",
+      "file": "media/asset-058.png",
+      "image": true,
+      "slides": [
+        61
+      ]
+    },
+    {
+      "id": "asset-059",
+      "part": "ppt/media/image60.png",
+      "sha256": "1e66ab2a2e2708fe5db65ab074dc89ab83fe2bae59af9aa7680e5289f0b12a8e",
+      "file": "media/asset-059.png",
+      "image": true,
+      "slides": [
+        62
+      ]
+    },
+    {
+      "id": "asset-060",
+      "part": "ppt/media/image61.png",
+      "sha256": "9139bcfdbdf79e090d2e8944a4940b385240ba28192b1c91c7ddd802746f364a",
+      "file": "media/asset-060.png",
+      "image": true,
+      "slides": [
+        68
+      ]
+    },
+    {
+      "id": "asset-061",
+      "part": "ppt/media/image62.gif",
+      "sha256": "2e97838d280a19623c234f40fb8f055f03201902d904a8eb91814db8b22f021a",
+      "file": "media/asset-061.gif",
+      "image": true,
+      "slides": [
+        68
+      ]
+    }
+  ],
+  "limits": "XML text, notes, chart caches and embedded media; no layout rendering, OCR, playback or linked-content retrieval.",
+  "previews": {
+    "status": "generated",
+    "files": [
+      "images-01.jpg",
+      "images-02.jpg",
+      "images-03.jpg",
+      "images-04.jpg",
+      "images-05.jpg",
+      "images-06.jpg",
+      "images-07.jpg",
+      "images-08.jpg"
+    ],
+    "failures": []
+  }
+}

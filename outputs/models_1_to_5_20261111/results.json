@@ -1,0 +1,315 @@
+{
+ "registration_sha256": "597d78f10ca34b992f5a5554577b76523ab7a74e55398fa83ebaf250dd76083f",
+ "control": {
+  "months": 81,
+  "company_net": 513642188.42,
+  "base_net": 284517337.68
+ },
+ "M1_ranges": {
+  "lead1": {
+   "cases": 45,
+   "coverage": 0.6888888888888889,
+   "width_over_forecast": 1.2561079752657596
+  },
+  "lead3": {
+   "cases": 41,
+   "coverage": 0.6829268292682927,
+   "width_over_forecast": 1.1598305156077136
+  },
+  "lead6": {
+   "cases": 35,
+   "coverage": 0.7142857142857143,
+   "width_over_forecast": 1.6741815448415192
+  },
+  "passes": false
+ },
+ "M2_safety_stock": {
+  "cases": 45,
+  "achieved_service": 0.8222222222222222,
+  "mean_buffer_pct_of_forecast": 1.0006089041766495,
+  "passes": false
+ },
+ "M3_abc_xyz": {
+  "by_year": {
+   "2021": {
+    "AX": {
+     "items": 9,
+     "value_kept_next_year": 0.8927810736940572,
+     "same_class_next_year": 0.4444444444444444
+    },
+    "AY": {
+     "items": 16,
+     "value_kept_next_year": 0.8189377596752379,
+     "same_class_next_year": 0.375
+    },
+    "AZ": {
+     "items": 78,
+     "value_kept_next_year": 0.3463855103598756,
+     "same_class_next_year": 0.38461538461538464
+    },
+    "BX": {
+     "items": 1,
+     "value_kept_next_year": 1.6655480233145183,
+     "same_class_next_year": 0.0
+    },
+    "BY": {
+     "items": 13,
+     "value_kept_next_year": 1.3140065473213807,
+     "same_class_next_year": 0.07692307692307693
+    },
+    "BZ": {
+     "items": 160,
+     "value_kept_next_year": 0.573936352189039,
+     "same_class_next_year": 0.18125
+    },
+    "CY": {
+     "items": 4,
+     "value_kept_next_year": 1.2791009670826532,
+     "same_class_next_year": 0.25
+    },
+    "CZ": {
+     "items": 385,
+     "value_kept_next_year": 1.4678645770706416,
+     "same_class_next_year": 0.3246753246753247
+    }
+   },
+   "2022": {
+    "AX": {
+     "items": 9,
+     "value_kept_next_year": 0.33845779615639526,
+     "same_class_next_year": 0.0
+    },
+    "AY": {
+     "items": 22,
+     "value_kept_next_year": 0.3827277458462766,
+     "same_class_next_year": 0.0
+    },
+    "AZ": {
+     "items": 114,
+     "value_kept_next_year": 0.27959965376073936,
+     "same_class_next_year": 0.35964912280701755
+    },
+    "BY": {
+     "items": 16,
+     "value_kept_next_year": 0.37911946556363585,
+     "same_class_next_year": 0.0
+    },
+    "BZ": {
+     "items": 208,
+     "value_kept_next_year": 0.3963443884561226,
+     "same_class_next_year": 0.23076923076923078
+    },
+    "CY": {
+     "items": 1,
+     "value_kept_next_year": 0.7582409972299169,
+     "same_class_next_year": 0.0
+    },
+    "CZ": {
+     "items": 466,
+     "value_kept_next_year": 1.8349329599344555,
+     "same_class_next_year": 0.2532188841201717
+    }
+   },
+   "2023": {
+    "AY": {
+     "items": 4,
+     "value_kept_next_year": 1.8702376581283728,
+     "same_class_next_year": 0.5
+    },
+    "AZ": {
+     "items": 298,
+     "value_kept_next_year": 0.1942231830804426,
+     "same_class_next_year": 0.06375838926174497
+    },
+    "BZ": {
+     "items": 432,
+     "value_kept_next_year": 0.3205100934211913,
+     "same_class_next_year": 0.05787037037037037
+    },
+    "CZ": {
+     "items": 992,
+     "value_kept_next_year": 0.794014106794688,
+     "same_class_next_year": 0.09274193548387097
+    }
+   },
+   "2024": {
+    "AX": {
+     "items": 9,
+     "value_kept_next_year": 0.5457832027194013,
+     "same_class_next_year": 0.2222222222222222
+    },
+    "AY": {
+     "items": 28,
+     "value_kept_next_year": 1.0887656123061875,
+     "same_class_next_year": 0.35714285714285715
+    },
+    "AZ": {
+     "items": 72,
+     "value_kept_next_year": 1.4553763120424439,
+     "same_class_next_year": 0.3333333333333333
+    },
+    "BY": {
+     "items": 9,
+     "value_kept_next_year": 0.8394883069467307,
+     "same_class_next_year": 0.3333333333333333
+    },
+    "BZ": {
+     "items": 138,
+     "value_kept_next_year": 1.9618389264497356,
+     "same_class_next_year": 0.15942028985507245
+    },
+    "CY": {
+     "items": 1,
+     "value_kept_next_year": 1.7804804933407563,
+     "same_class_next_year": 0.0
+    },
+    "CZ": {
+     "items": 337,
+     "value_kept_next_year": 5.208851709838265,
+     "same_class_next_year": 0.24629080118694363
+    }
+   },
+   "2025": {
+    "AX": {
+     "items": 7,
+     "value_kept_next_year": 0.296813889995826,
+     "same_class_next_year": 0.0
+    },
+    "AY": {
+     "items": 19,
+     "value_kept_next_year": 0.3038436641832409,
+     "same_class_next_year": 0.0
+    },
+    "AZ": {
+     "items": 108,
+     "value_kept_next_year": 0.07365529819154483,
+     "same_class_next_year": 0.046296296296296294
+    },
+    "BX": {
+     "items": 4,
+     "value_kept_next_year": 0.3373849820072292,
+     "same_class_next_year": 0.0
+    },
+    "BY": {
+     "items": 18,
+     "value_kept_next_year": 0.45472940388434496,
+     "same_class_next_year": 0.0
+    },
+    "BZ": {
+     "items": 199,
+     "value_kept_next_year": 0.041040016505058154,
+     "same_class_next_year": 0.03015075376884422
+    },
+    "CY": {
+     "items": 2,
+     "value_kept_next_year": 0.14979619565217392,
+     "same_class_next_year": 0.0
+    },
+    "CZ": {
+     "items": 552,
+     "value_kept_next_year": 0.0834799720723604,
+     "same_class_next_year": 0.050724637681159424
+    }
+   }
+  },
+  "AX_value_kept_mean": 0.51845899064142,
+  "passes": true
+ },
+ "M4_tsb": {
+  "products": 366,
+  "tsb": {
+   "cases": 20862,
+   "wape": 1.8365009708526983,
+   "bias": 0.7723093404381811
+  },
+  "mean6": {
+   "cases": 20862,
+   "wape": 1.3371835853355372,
+   "bias": 0.18757048805266238
+  },
+  "boot90": [
+   440865.5430380987,
+   836882.1324097837
+  ],
+  "halves": [
+   24259110.101183616,
+   11452199.87750692
+  ],
+  "passes": false
+ },
+ "M5_reconciliation": {
+  "nodes": [
+   "GOVERNMENT",
+   "HOSPITAL",
+   "QUEZON",
+   "BATANGAS",
+   "EQUIPMENT",
+   "ADMIN",
+   "MARINDUQUE",
+   "CAM NORTE",
+   "OTHER"
+  ],
+  "base": {
+   "total": {
+    "cases": 57,
+    "wape": 0.49672935587295713,
+    "bias": -0.10763036170167187
+   },
+   "bottom_pooled": {
+    "cases": 513,
+    "wape": 0.6506835316568884,
+    "bias": -0.1076120118204717
+   }
+  },
+  "ols": {
+   "total": {
+    "cases": 57,
+    "wape": 0.4967293558729571,
+    "bias": -0.1076303617016723
+   },
+   "bottom_pooled": {
+    "cases": 513,
+    "wape": 0.6506835316568885,
+    "bias": -0.10761201182047168
+   },
+   "win_total": {
+    "boot90": [
+     -1.3561363805804337e-09,
+     6.372207089474327e-10
+    ],
+    "halves": [
+     -4.889443516731262e-08,
+     1.7695128917694092e-08
+    ],
+    "bias": -0.1076303617016723,
+    "passes": false
+   },
+   "passes": false
+  },
+  "wls": {
+   "total": {
+    "cases": 57,
+    "wape": 0.4967293558729571,
+    "bias": -0.1076303617016723
+   },
+   "bottom_pooled": {
+    "cases": 513,
+    "wape": 0.6506835316568884,
+    "bias": -0.10761201182047192
+   },
+   "win_total": {
+    "boot90": [
+     -1.380644869386104e-09,
+     6.576444496188247e-10
+    ],
+    "halves": [
+     -4.7497451305389404e-08,
+     1.6530975699424744e-08
+    ],
+    "bias": -0.1076303617016723,
+    "passes": false
+   },
+   "passes": false
+  }
+ }
+}

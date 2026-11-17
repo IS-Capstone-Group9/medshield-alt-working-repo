@@ -1,0 +1,111 @@
+{
+  "status": "PASS",
+  "checks": "Independent raw CSV + provider cache recomputation matches 12 metric populations, all counts/percentages/MAE/RMSE/bias",
+  "report_sha256": "f7e412d796c12868552730f392b5b4bfda9879322f63b8f8b8098f3251a77953",
+  "metrics": {
+    "nasa_power": {
+      "temperature_c": {
+        "paired_count": 8769,
+        "agreeing_count": 6791,
+        "agreement_pct": 77.4433,
+        "mae": 1.33104,
+        "rmse": 1.676465,
+        "bias": -0.285069
+      },
+      "humidity_pct": {
+        "paired_count": 8771,
+        "agreeing_count": 7757,
+        "agreement_pct": 88.4392,
+        "mae": 5.15277,
+        "rmse": 6.709735,
+        "bias": 0.690214
+      },
+      "monthly_rain": {
+        "paired_count": 278,
+        "agreeing_count": 125,
+        "agreement_pct": 44.964,
+        "mae": 78.642878,
+        "rmse": 114.295636,
+        "bias": 2.863381
+      }
+    },
+    "open_meteo_era5": {
+      "temperature_c": {
+        "paired_count": 8769,
+        "agreeing_count": 8541,
+        "agreement_pct": 97.3999,
+        "mae": 0.720968,
+        "rmse": 0.907925,
+        "bias": -0.364774
+      },
+      "humidity_pct": {
+        "paired_count": 8771,
+        "agreeing_count": 8503,
+        "agreement_pct": 96.9445,
+        "mae": 3.841067,
+        "rmse": 4.882054,
+        "bias": 0.533349
+      },
+      "monthly_rain": {
+        "paired_count": 278,
+        "agreeing_count": 87,
+        "agreement_pct": 31.295,
+        "mae": 103.999856,
+        "rmse": 156.497259,
+        "bias": -9.875899
+      }
+    },
+    "open_meteo_era5_seamless": {
+      "temperature_c": {
+        "paired_count": 8769,
+        "agreeing_count": 7560,
+        "agreement_pct": 86.2128,
+        "mae": 1.157472,
+        "rmse": 1.380617,
+        "bias": -1.033425
+      },
+      "humidity_pct": {
+        "paired_count": 8771,
+        "agreeing_count": 8356,
+        "agreement_pct": 95.2685,
+        "mae": 4.219359,
+        "rmse": 5.350342,
+        "bias": 1.455022
+      },
+      "monthly_rain": {
+        "paired_count": 278,
+        "agreeing_count": 87,
+        "agreement_pct": 31.295,
+        "mae": 103.999856,
+        "rmse": 156.497259,
+        "bias": -9.875899
+      }
+    },
+    "open_meteo_ifs": {
+      "temperature_c": {
+        "paired_count": 8769,
+        "agreeing_count": 7265,
+        "agreement_pct": 82.8487,
+        "mae": 1.322317,
+        "rmse": 1.504293,
+        "bias": -1.272802
+      },
+      "humidity_pct": {
+        "paired_count": 8771,
+        "agreeing_count": 8482,
+        "agreement_pct": 96.7051,
+        "mae": 4.027705,
+        "rmse": 5.02908,
+        "bias": 1.118117
+      },
+      "monthly_rain": {
+        "paired_count": 278,
+        "agreeing_count": 98,
+        "agreement_pct": 35.2518,
+        "mae": 86.26446,
+        "rmse": 124.90919,
+        "bias": -14.335252
+      }
+    }
+  }
+}

@@ -1,0 +1,220 @@
+{
+  "run_sha256": "7c22e0467925ee95fed2f5d287357ff0948bbc524e25715954cd28c22a83e841",
+  "source": "outputs\\predictive_error_optimization_20261010\\models\\f749f47ef44db53a35f56a822e2b35edc0877ad5126c4352a996dfb2f5a20e8b\\run.json",
+  "best_new_recipe": "median_12",
+  "summaries": {
+    "last_value": {
+      "development": {
+        "n": 60,
+        "mae": "3090470.934833333333333333333333333333333",
+        "rmse": "4300604.366031157257933062009229017818061",
+        "wape": "83.19935997006956469530543107437249071398",
+        "normalized_bias": "1.259230081759111756130012976329531791547",
+        "over_count": 36,
+        "under_count": 24,
+        "zero_count": 0,
+        "over_amount": "94117365.03",
+        "under_amount": "91310891.06"
+      },
+      "retrospective_audit": {
+        "n": 12,
+        "mae": "5834383.001666666666666666666666666666667",
+        "rmse": "6956031.722426753261516481550852707485677",
+        "wape": "37.76364428864427092012666799283971153036",
+        "normalized_bias": "8.383544546670831093339873159240443899685",
+        "over_count": 7,
+        "under_count": 5,
+        "zero_count": 0,
+        "over_amount": "42777710.55",
+        "under_amount": "27234885.47"
+      }
+    },
+    "last_value_l1_calibrated_10pct": {
+      "development": {
+        "n": 60,
+        "mae": "2907027.780898214266666666666666666666667",
+        "rmse": "4159910.637254731592273409847770555599920",
+        "wape": "78.26083981565952455948986314597736595318",
+        "normalized_bias": "-6.943859967699616512344720808115697738848",
+        "over_count": 35,
+        "under_count": 25,
+        "zero_count": 0,
+        "over_amount": "79472866.1829261310",
+        "under_amount": "94948800.6709667250"
+      },
+      "retrospective_audit": {
+        "n": 12,
+        "mae": "5772569.946666666666666666666666666666667",
+        "rmse": "6844894.586753706451925184300005986231530",
+        "wape": "37.36355293009828837785772208513592105549",
+        "normalized_bias": "-2.454809907996252015994114156683600490284",
+        "over_count": 6,
+        "under_count": 6,
+        "zero_count": 0,
+        "over_amount": "32359849.914",
+        "under_amount": "36910989.446"
+      }
+    },
+    "median_12": {
+      "development": {
+        "n": 60,
+        "mae": "2320959.9435",
+        "rmse": "3467550.265140064454837885666307848876499",
+        "wape": "62.48315738513252774871168385422916167560",
+        "normalized_bias": "-2.568519095361854904606931424308956071382",
+        "over_count": 40,
+        "under_count": 20,
+        "zero_count": 0,
+        "over_amount": "66766540.610",
+        "under_amount": "72491056.000"
+      },
+      "retrospective_audit": {
+        "n": 12,
+        "mae": "12657516.48666666666666666666666666666667",
+        "rmse": "14353111.41054046453145919546502360978268",
+        "wape": "81.92707781501235605005064114879280672266",
+        "normalized_bias": "-81.69416314173064204984817036321282545331",
+        "over_count": 1,
+        "under_count": 11,
+        "zero_count": 0,
+        "over_amount": "215908.2",
+        "under_amount": "151674289.64"
+      }
+    },
+    "median_3": {
+      "development": {
+        "n": 60,
+        "mae": "3285721.751833333333333333333333333333333",
+        "rmse": "4422615.229588166609303216118988551881916",
+        "wape": "88.45575724756385838181391043537528120544",
+        "normalized_bias": "23.53833679380230543972897308122898569166",
+        "over_count": 37,
+        "under_count": 23,
+        "zero_count": 0,
+        "over_amount": "124801858.80",
+        "under_amount": "72341446.31"
+      },
+      "retrospective_audit": {
+        "n": 12,
+        "mae": "12489155.87833333333333333333333333333333",
+        "rmse": "14175778.61495071626999766405590450137632",
+        "wape": "80.83734645464339510877731930284234608255",
+        "normalized_bias": "-80.38648550928788892032018414807227268518",
+        "over_count": 1,
+        "under_count": 11,
+        "zero_count": 0,
+        "over_amount": "417940.93",
+        "under_amount": "149451929.61"
+      }
+    },
+    "median_6": {
+      "development": {
+        "n": 60,
+        "mae": "2880858.3625",
+        "rmse": "4108945.058132180244440233850933259833511",
+        "wape": "77.55632619704566466837834637231528395161",
+        "normalized_bias": "10.55228984611849815782817182801162742285",
+        "over_count": 43,
+        "under_count": 17,
+        "zero_count": 0,
+        "over_amount": "98184811.910",
+        "under_amount": "74666689.84"
+      },
+      "retrospective_audit": {
+        "n": 12,
+        "mae": "12184140.74916666666666666666666666666667",
+        "rmse": "13856231.24692976911316489283361918407790",
+        "wape": "78.86310464754665784748344571723083736862",
+        "normalized_bias": "-78.01739534077180420676753584533846222847",
+        "over_count": 1,
+        "under_count": 11,
+        "zero_count": 0,
+        "over_amount": "783959.085",
+        "under_amount": "145425729.905"
+      }
+    },
+    "seasonal_median_shrink_6_3y": {
+      "development": {
+        "n": 60,
+        "mae": "2764290.998916666666666666666666666666667",
+        "rmse": "3909320.355146349779798051590217279828254",
+        "wape": "74.41818633162261341533879178384306285723",
+        "normalized_bias": "18.85461676876318061985835270736607795647",
+        "over_count": 44,
+        "under_count": 16,
+        "zero_count": 0,
+        "over_amount": "103939580.9400",
+        "under_amount": "61917878.995"
+      },
+      "retrospective_audit": {
+        "n": 12,
+        "mae": "11699027.5400",
+        "rmse": "13511303.61851112064901920636969927248960",
+        "wape": "75.72315948702849452051208698545870169253",
+        "normalized_bias": "-75.44461618617622010116856963773535908952",
+        "over_count": 1,
+        "under_count": 11,
+        "zero_count": 0,
+        "over_amount": "258205.2125",
+        "under_amount": "140130125.2675"
+      }
+    },
+    "weighted_median_6": {
+      "development": {
+        "n": 60,
+        "mae": "3023795.651166666666666666666666666666667",
+        "rmse": "4120466.669935162836987886958075941352915",
+        "wape": "81.40437757293252012101343924641081927161",
+        "normalized_bias": "14.05814632731962570660073773532650748539",
+        "over_count": 39,
+        "under_count": 21,
+        "zero_count": 0,
+        "over_amount": "106379720.56",
+        "under_amount": "75048018.51"
+      },
+      "retrospective_audit": {
+        "n": 12,
+        "mae": "12489155.87833333333333333333333333333333",
+        "rmse": "14175778.61495071626999766405590450137632",
+        "wape": "80.83734645464339510877731930284234608255",
+        "normalized_bias": "-80.38648550928788892032018414807227268518",
+        "over_count": 1,
+        "under_count": 11,
+        "zero_count": 0,
+        "over_amount": "417940.93",
+        "under_amount": "149451929.61"
+      }
+    }
+  },
+  "same_cohort_changes": {
+    "development": {
+      "mae_absolute_reduction": "769510.9913333333333333333333",
+      "mae_relative_reduction_percent": "24.89947349641819090032515227",
+      "wape_percentage_point_reduction": "20.71620258493703694659374722",
+      "rmse_relative_reduction_percent": "19.37062863701369935240135527"
+    },
+    "retrospective_audit": {
+      "mae_absolute_reduction": "-6823133.485000000000000000000",
+      "mae_relative_reduction_percent": "-116.9469587966865394345078879",
+      "wape_percentage_point_reduction": "-44.16343352636808512992397316",
+      "rmse_relative_reduction_percent": "-106.3405111317274074727799247"
+    }
+  },
+  "computation": "Separate Decimal reconstruction from retained point values; no model fit or reselection",
+  "unselected_calibration_changes": {
+    "development": {
+      "mae_absolute_reduction": "183443.1539351190666666666667",
+      "mae_relative_reduction_percent": "5.935767001316645991005285953",
+      "wape_percentage_point_reduction": "4.938520154410040135815567928"
+    },
+    "retrospective_audit": {
+      "mae_absolute_reduction": "61813.05500000000000000000000",
+      "mae_relative_reduction_percent": "1.059461728555398309025593535",
+      "wape_percentage_point_reduction": "0.4000913585459825422689459077"
+    }
+  },
+  "interpretation": "Development winner fails retrospective audit; unselected calibration gives modest retrospective improvement only. No activation or audit-driven reselection.",
+  "inherited_source_results": true,
+  "measured_2026_error": null,
+  "publication_approved": false
+}

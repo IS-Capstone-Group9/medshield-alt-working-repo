@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "package_id": "classification_52342363a7ef3211",
+  "prepared_at": "2026-10-26T00:55:30.209749+08:00",
+  "scope": "category_proposal_staging_only",
+  "input_submission_sha256": "96a1f1a0e3eae7971ad675a11199d7d2e237d2f1d38cfbe8464d659328bcec07",
+  "source_table": "workspace.medshield_gold_source_20261022.truth_48a447f8fe9556d3_fact",
+  "source_version": 0,
+  "source_keys_sha256": "10c8386a2f97587baf55cc1b6ae41648c0046a66a2e7e185f2ad31b1ae7cdb82",
+  "source_manifest_sha256": "f5d3dd2b57df477d035af3ae612fae579681e2050e2ba22c93c6877288774b73",
+  "excluded_table": "workspace.medshield_gold_source_20261022.truth_48a447f8fe9556d3_excluded",
+  "excluded_keys": 911,
+  "source_rows": 40160,
+  "source_product_keys": 5692,
+  "proposal_product_keys": 5694,
+  "eligible_net_sales_php": "637922399.53",
+  "preview_table": "workspace.medshield_gold_source_20261022.classification_52342363a7ef3211_review_preview",
+  "workspace_directory": "/Workspace/medshield/classification_releases/classification_52342363a7ef3211",
+  "files": {
+    "candidate_verification.json": {
+      "sha256": "9014919bc1423245c4f753de853ac239b2aa7ee9fc5c31b344a55c805c51e13d",
+      "bytes": 2694
+    },
+    "category_transitions.csv": {
+      "sha256": "6a0d357acdd8efc44a0e9e11b009c39b33fef29c9191363741243a58aacf5141",
+      "bytes": 160654
+    },
+    "classification_proposals.csv": {
+      "sha256": "5c34785ad5d6e13bc8392ec1c30a7e1b5475e59ec6439c7c1456cde227948ad4",
+      "bytes": 4210053
+    },
+    "classification_proposals.json": {
+      "sha256": "10b01fdaa04a003a9fa7a1b2fcb729259a7e49828fd87218fc097fa3e4d06838",
+      "bytes": 6546239
+    },
+    "current_source_capture.json": {
+      "sha256": "f08a4129b0f83232075bc798724f8032d2282546b975883179c8842e9bf2612d",
+      "bytes": 28247
+    },
+    "live_product_parity.json": {
+      "sha256": "2358c95fdb1be5feb102594005a75ef3deeea11ee5eaa2a644402c5a9432329f",
+      "bytes": 655
+    },
+    "MedShield_product_classification_filled_final.xlsx": {
+      "sha256": "96a1f1a0e3eae7971ad675a11199d7d2e237d2f1d38cfbe8464d659328bcec07",
+      "bytes": 794730
+    },
+    "OPERATOR.md": {
+      "sha256": "6cc1dc80cd34427b5d6fc2b1e10a6da6181e17c40bee99d5316d521727df29ea",
+      "bytes": 5307
+    },
+    "predecessor_product_master_review.csv": {
+      "sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+      "bytes": 4755483
+    },
+    "product_master_review.csv": {
+      "sha256": "e0b6b2fc00b751a7ce2892bc9db4527c1f4814a9a3711546bdb224edfbf21e93",
+      "bytes": 5058925
+    },
+    "release_validation.py": {
+      "sha256": "12821598e32e8f7ee7abbec53c3fb7ad5eab7197bda1326bbb11e65751c1fe3b",
+      "bytes": 5288
+    },
+    "validate_classification_preview.py": {
+      "sha256": "cbf53b028bc8b85f5301b8c6c1def98d14949a69b7e412931af44cec1af62171",
+      "bytes": 4687
+    }
+  },
+  "warehouse_execution_performed": false,
+  "serving_activation": false,
+  "canonical_master_modified": false,
+  "new_approvals_added": 0,
+  "ready_for_upload": true,
+  "ready_for_live_publication": false,
+  "predecessor_package_id": "classification_e4e495787e4a23b5",
+  "manual_ui_compatible": true
+}

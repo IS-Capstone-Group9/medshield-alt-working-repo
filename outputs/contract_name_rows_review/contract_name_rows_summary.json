@@ -1,0 +1,161 @@
+{
+  "generated_at": "2026-06-23T07:56:04.208Z",
+  "source": "data/medshield/processed/sales_transactions.json.gz",
+  "all_hashtag_rows": 466,
+  "likely_contract_name_rows": 345,
+  "hashtag_but_probably_item_code_rows": 121,
+  "likely_contract_totals": {
+    "quantity": 345,
+    "total_cost": 106393351.2,
+    "discount": 0,
+    "net_cost": 106393351.2,
+    "total_trade_price": 65942989.21,
+    "net_income": 47875099.99
+  },
+  "likely_by_contract_prefix": [
+    {
+      "key": "PAGBILAO",
+      "rows": 245,
+      "net_cost": 84719851.16,
+      "total_trade_price": 51821012.93,
+      "net_income": 39703157.23
+    },
+    {
+      "key": "QMC",
+      "rows": 51,
+      "net_cost": 12052056.6,
+      "total_trade_price": 7530374.88,
+      "net_income": 4749955.72
+    },
+    {
+      "key": "PESO",
+      "rows": 3,
+      "net_cost": 3521520,
+      "total_trade_price": 2317160.16,
+      "net_income": 1204359.84
+    },
+    {
+      "key": "TOURISM",
+      "rows": 11,
+      "net_cost": 1416676,
+      "total_trade_price": 921686.79,
+      "net_income": 494989.21
+    },
+    {
+      "key": "PROVINCIAL TOURISM OFFICE",
+      "rows": 5,
+      "net_cost": 836410,
+      "total_trade_price": 855305.26,
+      "net_income": 373249.74
+    },
+    {
+      "key": "MARINDUQUE",
+      "rows": 4,
+      "net_cost": 1245007,
+      "total_trade_price": 823692.8,
+      "net_income": 421314.2
+    },
+    {
+      "key": "PESO PROVINCIAL",
+      "rows": 3,
+      "net_cost": 1070570,
+      "total_trade_price": 710699.22,
+      "net_income": 359870.78
+    },
+    {
+      "key": "PPDC",
+      "rows": 14,
+      "net_cost": 986429.75,
+      "total_trade_price": 614539.86,
+      "net_income": 371889.89
+    },
+    {
+      "key": "PHO",
+      "rows": 3,
+      "net_cost": 166788,
+      "total_trade_price": 109077.31,
+      "net_income": 57710.69
+    },
+    {
+      "key": "GULANG GULANG",
+      "rows": 3,
+      "net_cost": 118855,
+      "total_trade_price": 80151,
+      "net_income": 38704
+    },
+    {
+      "key": "PPOC",
+      "rows": 1,
+      "net_cost": 116500,
+      "total_trade_price": 64000,
+      "net_income": 52500
+    },
+    {
+      "key": "PADRE BURGOS",
+      "rows": 1,
+      "net_cost": 74380,
+      "total_trade_price": 50889,
+      "net_income": 23491
+    },
+    {
+      "key": "ABOITIZ",
+      "rows": 1,
+      "net_cost": 68307.69,
+      "total_trade_price": 44400,
+      "net_income": 23907.69
+    }
+  ],
+  "likely_by_year": [
+    {
+      "key": "missing",
+      "rows": 139,
+      "net_cost": 66237244.45,
+      "total_trade_price": 36082299.49,
+      "net_income": 30154944.96
+    },
+    {
+      "key": "2024",
+      "rows": 122,
+      "net_cost": 21036488.16,
+      "total_trade_price": 17644933.84,
+      "net_income": 10816292.32
+    },
+    {
+      "key": "2025",
+      "rows": 84,
+      "net_cost": 19119618.59,
+      "total_trade_price": 12215755.88,
+      "net_income": 6903862.71
+    }
+  ],
+  "likely_by_area": [
+    {
+      "key": "Government",
+      "rows": 289,
+      "net_cost": 93104700.6,
+      "total_trade_price": 57586855.21,
+      "net_income": 42714309.39
+    },
+    {
+      "key": "Hospital",
+      "rows": 49,
+      "net_cost": 11924788.6,
+      "total_trade_price": 7452290.2,
+      "net_income": 4700772.4
+    },
+    {
+      "key": "Marinduque",
+      "rows": 4,
+      "net_cost": 1245007,
+      "total_trade_price": 823692.8,
+      "net_income": 421314.2
+    },
+    {
+      "key": "Quezon",
+      "rows": 3,
+      "net_cost": 118855,
+      "total_trade_price": 80151,
+      "net_income": 38704
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "_operator_notes": "TEMPLATE. Run plan first, then apply with the same hash. Same principal rule as the promote Job; max_concurrent_runs must stay 1 (single-writer pointer).",
+  "name": "medshield-seed-warehouse",
+  "max_concurrent_runs": 1,
+  "queue": {
+    "enabled": true
+  },
+  "parameters": [
+    {
+      "name": "volume",
+      "default": "<VOLUME>"
+    },
+    {
+      "name": "release_schema",
+      "default": "<catalog>.medshield_warehouse"
+    },
+    {
+      "name": "base_release_id",
+      "default": ""
+    },
+    {
+      "name": "approved_plan_sha256",
+      "default": ""
+    },
+    {
+      "name": "mode",
+      "default": "plan"
+    },
+    {
+      "name": "acknowledge_warnings",
+      "default": ""
+    }
+  ],
+  "tasks": [
+    {
+      "task_key": "seed",
+      "notebook_task": {
+        "notebook_path": "/Workspace/medshield/medshield_project/warehouse_seed",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "volume": "{{job.parameters.volume}}",
+          "release_schema": "{{job.parameters.release_schema}}",
+          "base_release_id": "{{job.parameters.base_release_id}}",
+          "approved_plan_sha256": "{{job.parameters.approved_plan_sha256}}",
+          "mode": "{{job.parameters.mode}}",
+          "acknowledge_warnings": "{{job.parameters.acknowledge_warnings}}"
+        }
+      }
+    }
+  ]
+}

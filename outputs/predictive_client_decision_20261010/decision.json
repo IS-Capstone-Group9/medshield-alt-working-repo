@@ -1,0 +1,142 @@
+{
+  "schema_version": "1.0",
+  "status": "user_endorsed_research_approach_prepared_for_client_review",
+  "recorded_at_utc": "2026-10-10T08:57:51.518002+00:00",
+  "recorded_at_manila": "2026-10-10T16:57:51.518002+08:00",
+  "attribution": {
+    "requesting_user_endorsement": "SURE DO",
+    "reported_client_preference": "CLIENT WANTS TO DO BOTH",
+    "evidence": "Statements in this implementation chat; no named external signature or acceptance timestamp supplied"
+  },
+  "accountable_role": "Business Analyst",
+  "target": "company_monthly_eligible_recorded_net_sales_PHP",
+  "primary_metrics": [
+    "mae_php",
+    "wape_percent"
+  ],
+  "metric_populations": "Both metrics use identical scored prediction/actual pairs within each cohort",
+  "provisional_directional_weights": {
+    "overforecast_absolute_error": 1,
+    "underforecast_absolute_error": 1,
+    "status": "user_endorsed_research_assumption_not_measured_business_cost",
+    "attribution": "Requesting user in this implementation chat; DO THAT THEN endorsed the proposed two metrics and equal-direction treatment.",
+    "deliberate_directional_shift": false
+  },
+  "intended_research_use": "Client/analyst review of possible company sales and historical forecast misses",
+  "proposed_operational_discussion_use": "monthly_revenue_budgeting",
+  "accepted_operational_use": null,
+  "max_mae_php": null,
+  "max_wape_percent": null,
+  "accepted_evaluation_period": null,
+  "accepted_leads_months": null,
+  "numerical_acceptance_reviewer": null,
+  "numerical_acceptance_date": null,
+  "business_acceptance_status": "not_assessed_thresholds_missing",
+  "original_selection": "last_value",
+  "new_development_winner": "median_12",
+  "unselected_trial": "last_value_l1_calibrated_10pct",
+  "selection_changed": false,
+  "publication_approved": false,
+  "compared_historical_audit": {
+    "origin_period": "2024-12",
+    "target_start": "2025-01",
+    "target_end": "2025-12",
+    "cases_per_recipe": 12,
+    "status": "already_inspected_retrospective_audit",
+    "summaries": {
+      "last_value": {
+        "n": 12,
+        "mae": "5834383.001666666666666666666666666666667",
+        "rmse": "6956031.722426753261516481550852707485677",
+        "wape": "37.76364428864427092012666799283971153036",
+        "normalized_bias": "8.383544546670831093339873159240443899685",
+        "over_count": 7,
+        "under_count": 5,
+        "zero_count": 0,
+        "over_amount": "42777710.55",
+        "under_amount": "27234885.47"
+      },
+      "median_12": {
+        "n": 12,
+        "mae": "12657516.48666666666666666666666666666667",
+        "rmse": "14353111.41054046453145919546502360978268",
+        "wape": "81.92707781501235605005064114879280672266",
+        "normalized_bias": "-81.69416314173064204984817036321282545331",
+        "over_count": 1,
+        "under_count": 11,
+        "zero_count": 0,
+        "over_amount": "215908.2",
+        "under_amount": "151674289.64"
+      },
+      "last_value_l1_calibrated_10pct": {
+        "n": 12,
+        "mae": "5772569.946666666666666666666666666666667",
+        "rmse": "6844894.586753706451925184300005986231530",
+        "wape": "37.36355293009828837785772208513592105549",
+        "normalized_bias": "-2.454809907996252015994114156683600490284",
+        "over_count": 6,
+        "under_count": 6,
+        "zero_count": 0,
+        "over_amount": "32359849.914",
+        "under_amount": "36910989.446"
+      }
+    }
+  },
+  "unselected_calibration_changes": {
+    "development": {
+      "mae_absolute_reduction": "183443.1539351190666666666667",
+      "mae_relative_reduction_percent": "5.935767001316645991005285953",
+      "wape_percentage_point_reduction": "4.938520154410040135815567928"
+    },
+    "retrospective_audit": {
+      "mae_absolute_reduction": "61813.05500000000000000000000",
+      "mae_relative_reduction_percent": "1.059461728555398309025593535",
+      "wape_percentage_point_reduction": "0.4000913585459825422689459077"
+    }
+  },
+  "median_winner_changes": {
+    "development": {
+      "mae_absolute_reduction": "769510.9913333333333333333333",
+      "mae_relative_reduction_percent": "24.89947349641819090032515227",
+      "wape_percentage_point_reduction": "20.71620258493703694659374722",
+      "rmse_relative_reduction_percent": "19.37062863701369935240135527"
+    },
+    "retrospective_audit": {
+      "mae_absolute_reduction": "-6823133.485000000000000000000",
+      "mae_relative_reduction_percent": "-116.9469587966865394345078879",
+      "wape_percentage_point_reduction": "-44.16343352636808512992397316",
+      "rmse_relative_reduction_percent": "-106.3405111317274074727799247"
+    }
+  },
+  "source_release_frequency": "annual_user_reported",
+  "next_source_release_date": null,
+  "actuals_2026": null,
+  "assessment_2026": null,
+  "new_forecasts_issued": false,
+  "confirmation_protocol_status": "to_be_registered_before_later_actuals_are_inspected",
+  "clinical_or_inventory_benefit_established": false,
+  "original_o3_status": "open",
+  "external_message_sent": false,
+  "next_owner_actions": [
+    {
+      "owner": "CEO/client business owner and project lead",
+      "action": "Record intended operational decision, scoped MAE/PHP and WAPE/% limits and actual attribution"
+    },
+    {
+      "owner": "Source owner and Data Analyst",
+      "action": "Reconcile source timing, period closure/completeness and accepted data identity"
+    },
+    {
+      "owner": "Model owner",
+      "action": "Register confirmation protocol and real issue dates before sufficient later untouched targets; evaluate accepted actuals at required leads"
+    }
+  ],
+  "inherited_evidence": true,
+  "fitting_executed": false,
+  "preparation_command": [
+    "C:\\Users\\Adrian\\projects\\medshield1\\medshield\\.venv-predictive\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "outputs/predictive_client_decision_20261010/prepare.py"
+  ]
+}

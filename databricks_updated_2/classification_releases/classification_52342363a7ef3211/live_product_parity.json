@@ -1,0 +1,17 @@
+{
+  "status": "PASS_LIVE_PRODUCT_PARITY",
+  "checked_at": "2026-10-25T16:45:20.697Z",
+  "source_table": "workspace.medshield_gold_source_20261022.truth_48a447f8fe9556d3_fact",
+  "source_version": 0,
+  "current_product_groups": 5692,
+  "inactive_research_labels": 2,
+  "source_records": 40160,
+  "eligible_signed_net_php": "637922399.53",
+  "exact_keys_labels_records_finance_match": true,
+  "query_sha256": [
+    "3e25fbf1af05228309fa8836f653beb00930c18fe3a8db0ab29bf4c12ed8dcae",
+    "f10287aacb24d8f23bfa8ccc15cfd0b8045c4f7417294c44fbda4934dccd4fc7",
+    "b35c87e44428b50c8adf982e3afdb727f468258b9a54c6f0c51bf66eaf309ad5"
+  ],
+  "warehouse_writes": 0
+}

@@ -1,0 +1,209 @@
+{
+ "grid": [
+  {
+   "lead_days": 7,
+   "target": "default",
+   "family_months": 6896,
+   "cycle_service": 0.9463,
+   "fill_rate": 0.7158,
+   "uniform_months_needed": 5.35,
+   "saving_vs_uniform": 0.3962,
+   "avg_stock_per_family_month_at_cost": {
+    "policy": 30350,
+    "uniform": 50263
+   },
+   "yearly_carrying_cost_difference_per_family": {
+    "15%": 2987,
+    "25%": 4978,
+    "35%": 6970
+   }
+  },
+  {
+   "lead_days": 7,
+   "target": "90%",
+   "family_months": 6896,
+   "cycle_service": 0.9387,
+   "fill_rate": 0.7059,
+   "uniform_months_needed": 4.28,
+   "saving_vs_uniform": 0.2729,
+   "avg_stock_per_family_month_at_cost": {
+    "policy": 29235,
+    "uniform": 40210
+   },
+   "yearly_carrying_cost_difference_per_family": {
+    "15%": 1646,
+    "25%": 2744,
+    "35%": 3841
+   }
+  },
+  {
+   "lead_days": 7,
+   "target": "95%",
+   "family_months": 6896,
+   "cycle_service": 0.9629,
+   "fill_rate": 0.7719,
+   "uniform_months_needed": 11.18,
+   "saving_vs_uniform": 0.5203,
+   "avg_stock_per_family_month_at_cost": {
+    "policy": 50381,
+    "uniform": 105036
+   },
+   "yearly_carrying_cost_difference_per_family": {
+    "15%": 8198,
+    "25%": 13664,
+    "35%": 19129
+   }
+  },
+  {
+   "lead_days": 7,
+   "target": "98%",
+   "family_months": 6896,
+   "cycle_service": 0.9767,
+   "fill_rate": 0.8235,
+   "uniform_months_needed": null,
+   "saving_vs_uniform": null,
+   "avg_stock_per_family_month_at_cost": {
+    "policy": 83962,
+    "uniform": null
+   },
+   "yearly_carrying_cost_difference_per_family": null
+  },
+  {
+   "lead_days": 14,
+   "target": "default",
+   "family_months": 6896,
+   "cycle_service": 0.9443,
+   "fill_rate": 0.7317,
+   "uniform_months_needed": 5.99,
+   "saving_vs_uniform": 0.3413,
+   "avg_stock_per_family_month_at_cost": {
+    "policy": 37067,
+    "uniform": 56276
+   },
+   "yearly_carrying_cost_difference_per_family": {
+    "15%": 2881,
+    "25%": 4802,
+    "35%": 6723
+   }
+  },
+  {
+   "lead_days": 14,
+   "target": "90%",
+   "family_months": 6896,
+   "cycle_service": 0.9374,
+   "fill_rate": 0.7216,
+   "uniform_months_needed": 5.0,
+   "saving_vs_uniform": 0.2391,
+   "avg_stock_per_family_month_at_cost": {
+    "policy": 35744,
+    "uniform": 46975
+   },
+   "yearly_carrying_cost_difference_per_family": {
+    "15%": 1685,
+    "25%": 2808,
+    "35%": 3931
+   }
+  },
+  {
+   "lead_days": 14,
+   "target": "95%",
+   "family_months": 6896,
+   "cycle_service": 0.9642,
+   "fill_rate": 0.7938,
+   "uniform_months_needed": 13.9,
+   "saving_vs_uniform": 0.5006,
+   "avg_stock_per_family_month_at_cost": {
+    "policy": 65219,
+    "uniform": 130590
+   },
+   "yearly_carrying_cost_difference_per_family": {
+    "15%": 9806,
+    "25%": 16343,
+    "35%": 22880
+   }
+  },
+  {
+   "lead_days": 14,
+   "target": "98%",
+   "family_months": 6896,
+   "cycle_service": 0.9755,
+   "fill_rate": 0.8286,
+   "uniform_months_needed": null,
+   "saving_vs_uniform": null,
+   "avg_stock_per_family_month_at_cost": {
+    "policy": 93876,
+    "uniform": null
+   },
+   "yearly_carrying_cost_difference_per_family": null
+  },
+  {
+   "lead_days": 30,
+   "target": "default",
+   "family_months": 6896,
+   "cycle_service": 0.9424,
+   "fill_rate": 0.7325,
+   "uniform_months_needed": 7.43,
+   "saving_vs_uniform": 0.2691,
+   "avg_stock_per_family_month_at_cost": {
+    "policy": 51023,
+    "uniform": 69805
+   },
+   "yearly_carrying_cost_difference_per_family": {
+    "15%": 2817,
+    "25%": 4695,
+    "35%": 6574
+   }
+  },
+  {
+   "lead_days": 30,
+   "target": "90%",
+   "family_months": 6896,
+   "cycle_service": 0.9356,
+   "fill_rate": 0.7239,
+   "uniform_months_needed": 6.14,
+   "saving_vs_uniform": 0.1517,
+   "avg_stock_per_family_month_at_cost": {
+    "policy": 48932,
+    "uniform": 57685
+   },
+   "yearly_carrying_cost_difference_per_family": {
+    "15%": 1313,
+    "25%": 2188,
+    "35%": 3064
+   }
+  },
+  {
+   "lead_days": 30,
+   "target": "95%",
+   "family_months": 6896,
+   "cycle_service": 0.9642,
+   "fill_rate": 0.8056,
+   "uniform_months_needed": 20.19,
+   "saving_vs_uniform": 0.4473,
+   "avg_stock_per_family_month_at_cost": {
+    "policy": 104845,
+    "uniform": 189685
+   },
+   "yearly_carrying_cost_difference_per_family": {
+    "15%": 12726,
+    "25%": 21210,
+    "35%": 29694
+   }
+  },
+  {
+   "lead_days": 30,
+   "target": "98%",
+   "family_months": 6896,
+   "cycle_service": 0.9727,
+   "fill_rate": 0.8272,
+   "uniform_months_needed": null,
+   "saving_vs_uniform": null,
+   "avg_stock_per_family_month_at_cost": {
+    "policy": 122053,
+    "uniform": null
+   },
+   "yearly_carrying_cost_difference_per_family": null
+  }
+ ],
+ "note": "simulated, retrospective; not measured savings"
+}

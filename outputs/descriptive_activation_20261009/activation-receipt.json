@@ -1,0 +1,139 @@
+{
+  "generated_at_utc": "2026-10-09T08:05:24.211248+00:00",
+  "status": "local_descriptive_candidate_verified_not_business_release_approval",
+  "accountable_role": "Backend Engineer",
+  "review": "root self-review; separate final review not completed",
+  "saved_config": {
+    "file": "backend/.env",
+    "previous_fact_pin": 19,
+    "current_fact_pin": 20,
+    "full_environment_retained": false
+  },
+  "cloud_publication_performed": false,
+  "backup_changed": false,
+  "source": {
+    "table": "workspace.medshield_gold.sales_restart_fact_candidate",
+    "delta_version": 20,
+    "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+    "policy_version": "sales_restart_gold_v7_independent_catalog",
+    "area_mapping_sha256": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+    "product_master_sha256": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+    "publication_status": "CANDIDATE_PENDING_BUSINESS_AND_PRODUCT_MASTER_REVIEW"
+  },
+  "fresh_calculation": {
+    "path": "outputs\\descriptive_validation\\2026-10-09T07-40-39-615Z\\evidence.json",
+    "sha256": "19662860d526ca2efb5ccf4256645211bfb916fb8590060901e6e2573b991def",
+    "stl_months": 72
+  },
+  "checks": [
+    {
+      "evidence": "live-descriptive.json",
+      "status": "PASS",
+      "passed": 3,
+      "sha256": "150faf8251686d85dec73ad27f00faa7a604b6145187e6b8860257b55ff02ec4"
+    },
+    {
+      "evidence": "study-delivery.json",
+      "status": "PASS",
+      "passed": 1,
+      "sha256": "855072a76fbe71ef2670211e6e33fdf082f0b168ddfabe71bf8957192294f728"
+    },
+    {
+      "evidence": "live-layout-tests.json",
+      "status": "PASS",
+      "passed": 1,
+      "sha256": "012db4a304409a7d134564e94fc2b77840bf1a978c86e325a69cda9d0028d36f"
+    },
+    {
+      "evidence": "frontend-descriptive-fixtures-delivery-playwright.json",
+      "status": "PASS",
+      "passed": 45,
+      "sha256": "2421e22f4d2fcec96a088334b85d65e84f091f5138cc011793576a31b93601b1"
+    },
+    {
+      "evidence": "backend-delivery.log",
+      "status": "PASS",
+      "passed": 98,
+      "sha256": "c3f644a4c0aec8544bd24956cad519c31d1ce64ce93cddf0b69e1f9fc093c5c6"
+    },
+    {
+      "evidence": "backend-delivery-typecheck.log",
+      "status": "PASS",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "evidence": "frontend-delivery-typecheck.log",
+      "status": "PASS",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "evidence": "validator-typecheck-final.log",
+      "status": "PASS",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "study": {
+    "period": "2021-2025 TOTAL",
+    "net_sales_php": "438980304.07",
+    "gross_margin_amount_php": "196703155.65",
+    "margin_eligible_revenue_basis_php": "343154299.03",
+    "weighted_gross_margin_pct": "57.322072",
+    "gold_source_record_count": 20143,
+    "months_with_sales_activity": 60,
+    "calendar_months": 60,
+    "provenance": "includes_adjusted_allocation_evidence",
+    "fact_delta_version": 20,
+    "dataset_id": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+    "transformation_policy": "sales_restart_gold_v7_independent_catalog",
+    "source_receipt_sha256": "19662860d526ca2efb5ccf4256645211bfb916fb8590060901e6e2573b991def"
+  },
+  "code_and_guidance_sha256": {
+    "backend/src/databricksDashboard.ts": "10318903f77ab1879f6a690e9001bfe94e60aafa5dcf57c5cd4731fbad76f593",
+    "backend/src/databricksLiteral.ts": "eb2b6ac49375a54e6a4290487efc26e761994fc04274d17e7a68a4262f022d8a",
+    "backend/src/descriptiveMetrics.ts": "d9c73e8d3dc7c416147321f34e35bbd8cd277817f635046667126e98ea070fe3",
+    "backend/scripts/validate-descriptive.ts": "73dea2c5d1d1242f46ad72be2e045c9c30d88855dbfc1f87c1ff816cf154f8a7",
+    "backend/tests/descriptive-null-contract.test.ts": "ecc0d8c7701f26c2915fbdd2b4cf26faaaaa441e0fb853f57514fb647ce65aa6",
+    "backend/tests/dashboard-sql-string.test.ts": "48ffc070380f804b864ead9123ced00a7b013c40dd4d49c475d0f57353299571",
+    "backend/tests/forecastGateway.test.ts": "ec84717e2b5d4d32b8ba5391f487bf32147d0f342c2308bf035867c57c8db46f",
+    "backend/tests/planningGateway.test.ts": "fe57e17b85cabd887595c65e7a080e62c08bfe97305edb155862552caed3cbfd",
+    "frontend/services/api/dashboard.service.ts": "bbef93665d7aaf482b2edcdbf386ece6ea807a2512e140072d9fadafef03fa0d",
+    "frontend/services/api/dashboard-interactions.ts": "5481eabc0b00bb4007bd373e2d876399d6802c88fc604c0462b7ee0ca886d4ed",
+    "frontend/services/api/dashboard-decision-charts.ts": "42e0ebb82e4e7866de00ffc7be3b8563208971d66625e0f0edcae93ed71a705f",
+    "frontend/services/api/sales-view-helpers.ts": "e99e168f9b4a02c4d02bc0f09a75c572f35c860689b06e23f7f4a069f24ce90d",
+    "frontend/services/api/descriptive-products-runtime.ts": "cfc153cafb017ba857081dc0ce6ea70353601f6eb2501ec23e7be9589075763d",
+    "frontend/services/api/dashboard-enhancements.ts": "8a9323f16f6f76d222c87b0385b73277270d63dd72225468f106593ef88e5310",
+    "frontend/services/api/dashboard-enhancement-listeners.ts": "fcaaaa8a7f9b79fb5aefc2abd7d75895c74069c07d6ff7bee4870970c632ae0e",
+    "frontend/types/api.types.ts": "33348dd6f02171e92784146ddf350a897b0e148dc866e0c949251846376663ac",
+    "frontend/types/sales.types.ts": "b99a085e534d266ed494191b92aa838ef7a61d3b45ab7ea4b2e1fc65f6006e59",
+    "frontend/e2e/dashboard-null-contract.spec.ts": "7a854ad1c27e9710833420744037c7ddb59f8df8e1007e1324f97d15da32a5b1",
+    "frontend/e2e/descriptive-acceptance-live.spec.ts": "1617a25fce69d7dc62b738135fb419c2b6db72b65cc0dbbacac38361b9c5ae65",
+    "frontend/e2e/catalog-resolution.spec.ts": "59316090ac038c68babb5dd1a774580a0a38a8118e2ac93ebc8bf1868e6ab407",
+    "frontend/e2e/product-prioritization.spec.ts": "0af1d397a5cc9fb726a1520b5f32bb0441d47a513fd47fecdfdc79bea2f19e0c",
+    "frontend/e2e/diagnostic-drilldown.spec.ts": "c512d564c29e3b7c85b54183719b19a45fe65ede50f04218780b03b33921f58f",
+    "frontend/e2e/sales-data-view.spec.ts": "bc2086ee5121a328f0df15980bb8ff6eeb18a55ece7f591cd9751a24309a906b",
+    "docker-compose.yml": "58d505a5c1375bdd893822edc3d12ea766bbcb9cb4b3de2bd423cbd51e852a13",
+    ".env.example": "4d313ab2387ab2a18996c4e3d7034cb313c528530a47c6bc25232745059dbcda",
+    "docs/API.md": "7a26f23ddfe256fbd6364d365e345c23ad1e7254e3efb6c65cbb01dcf094a337",
+    "docs/SETUP.md": "73522822ff03b60f080980d14d558810d821566b6c143d87652bc204fec4c56d",
+    "docs/DEPLOYMENT.md": "8b3a42864b3d0addf3ab09e9a7439fe44aba998edca4d1fd1c9d6ef9e3d23f5f",
+    "docs/CURRENT_STATE.md": "ebd2ae8aff0543e6d26420009e71772c3d38f938fe4e811597068735003fc23f",
+    "docs/TESTING.md": "bcb11a97f8e4e1540122bbe6a37642e25f00403968499888012dd4418197ef24",
+    "docs/DESCRIPTIVE_ANALYTICS_LOGIC.md": "4e15c38bf18999ab16379d89a4a936a54bb98fef28c6ec7e1f608916e5052310",
+    "services/analytics_service/jobs/README.md": "06cdda4050c3768c6c620f2babbfb6f656fb03d4851e9d452d87d1262d7e6cc5"
+  },
+  "packet_sha256": {
+    "README.md": "e9ba5dfe739f7411b87776cbe1d139df985508b95963a56596979324feee22bc",
+    "STUDY_FINDINGS.md": "f4722abd80d6530d05f0c00e5cafd180a48e175ceb555f25a9886e99f2888142",
+    "study_financial_summary.csv": "f09693f8482849116fc3d1cef97591c8113b911066fcdf7f722216be5cff46c3",
+    "CHAPTER4_CHECKLIST.md": "af1d013e7b59002d8fe0e05a67c278d3969875c93afe61c093453b81b34594b0",
+    "build_study_packet.py": "a91d5ee97351c8b42d26293e7e91f05c5716e62d9e22876ffff7b9da5fb62b95"
+  },
+  "limits": [
+    "Local candidate, no remote hosting deployment",
+    "Final business release acceptance and recovery rehearsal remain open",
+    "Source activity does not certify completeness; 2025 adjusted evidence retained",
+    "Source-label reporting categories do not approve SKU/unit/demand identity",
+    "Forecast, external joins and operational procurement separately gated",
+    "Broader dated full-system QA findings are outside this bounded activation repair"
+  ]
+}

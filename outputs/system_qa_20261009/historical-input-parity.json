@@ -1,0 +1,401 @@
+{
+  "old_fact_version": 16,
+  "current_fact_version": 19,
+  "mode": "fresh finance-only comparison; not renewed model acceptance",
+  "compared_months": 98,
+  "matched": 98,
+  "checks": [
+    {
+      "period": "2017-01",
+      "matched": true
+    },
+    {
+      "period": "2017-02",
+      "matched": true
+    },
+    {
+      "period": "2017-03",
+      "matched": true
+    },
+    {
+      "period": "2017-04",
+      "matched": true
+    },
+    {
+      "period": "2017-09",
+      "matched": true
+    },
+    {
+      "period": "2017-11",
+      "matched": true
+    },
+    {
+      "period": "2017-12",
+      "matched": true
+    },
+    {
+      "period": "2018-03",
+      "matched": true
+    },
+    {
+      "period": "2018-04",
+      "matched": true
+    },
+    {
+      "period": "2018-05",
+      "matched": true
+    },
+    {
+      "period": "2018-06",
+      "matched": true
+    },
+    {
+      "period": "2018-07",
+      "matched": true
+    },
+    {
+      "period": "2018-08",
+      "matched": true
+    },
+    {
+      "period": "2018-09",
+      "matched": true
+    },
+    {
+      "period": "2018-10",
+      "matched": true
+    },
+    {
+      "period": "2018-11",
+      "matched": true
+    },
+    {
+      "period": "2018-12",
+      "matched": true
+    },
+    {
+      "period": "2019-01",
+      "matched": true
+    },
+    {
+      "period": "2019-02",
+      "matched": true
+    },
+    {
+      "period": "2019-03",
+      "matched": true
+    },
+    {
+      "period": "2019-04",
+      "matched": true
+    },
+    {
+      "period": "2019-05",
+      "matched": true
+    },
+    {
+      "period": "2019-06",
+      "matched": true
+    },
+    {
+      "period": "2019-07",
+      "matched": true
+    },
+    {
+      "period": "2019-08",
+      "matched": true
+    },
+    {
+      "period": "2019-09",
+      "matched": true
+    },
+    {
+      "period": "2020-01",
+      "matched": true
+    },
+    {
+      "period": "2020-02",
+      "matched": true
+    },
+    {
+      "period": "2020-03",
+      "matched": true
+    },
+    {
+      "period": "2020-04",
+      "matched": true
+    },
+    {
+      "period": "2020-05",
+      "matched": true
+    },
+    {
+      "period": "2020-06",
+      "matched": true
+    },
+    {
+      "period": "2020-07",
+      "matched": true
+    },
+    {
+      "period": "2020-08",
+      "matched": true
+    },
+    {
+      "period": "2020-09",
+      "matched": true
+    },
+    {
+      "period": "2020-10",
+      "matched": true
+    },
+    {
+      "period": "2020-11",
+      "matched": true
+    },
+    {
+      "period": "2020-12",
+      "matched": true
+    },
+    {
+      "period": "2021-01",
+      "matched": true
+    },
+    {
+      "period": "2021-02",
+      "matched": true
+    },
+    {
+      "period": "2021-03",
+      "matched": true
+    },
+    {
+      "period": "2021-04",
+      "matched": true
+    },
+    {
+      "period": "2021-05",
+      "matched": true
+    },
+    {
+      "period": "2021-06",
+      "matched": true
+    },
+    {
+      "period": "2021-07",
+      "matched": true
+    },
+    {
+      "period": "2021-08",
+      "matched": true
+    },
+    {
+      "period": "2021-09",
+      "matched": true
+    },
+    {
+      "period": "2021-10",
+      "matched": true
+    },
+    {
+      "period": "2021-11",
+      "matched": true
+    },
+    {
+      "period": "2021-12",
+      "matched": true
+    },
+    {
+      "period": "2022-01",
+      "matched": true
+    },
+    {
+      "period": "2022-02",
+      "matched": true
+    },
+    {
+      "period": "2022-03",
+      "matched": true
+    },
+    {
+      "period": "2022-04",
+      "matched": true
+    },
+    {
+      "period": "2022-05",
+      "matched": true
+    },
+    {
+      "period": "2022-06",
+      "matched": true
+    },
+    {
+      "period": "2022-07",
+      "matched": true
+    },
+    {
+      "period": "2022-08",
+      "matched": true
+    },
+    {
+      "period": "2022-09",
+      "matched": true
+    },
+    {
+      "period": "2022-10",
+      "matched": true
+    },
+    {
+      "period": "2022-11",
+      "matched": true
+    },
+    {
+      "period": "2022-12",
+      "matched": true
+    },
+    {
+      "period": "2023-01",
+      "matched": true
+    },
+    {
+      "period": "2023-02",
+      "matched": true
+    },
+    {
+      "period": "2023-03",
+      "matched": true
+    },
+    {
+      "period": "2023-04",
+      "matched": true
+    },
+    {
+      "period": "2023-05",
+      "matched": true
+    },
+    {
+      "period": "2023-06",
+      "matched": true
+    },
+    {
+      "period": "2023-07",
+      "matched": true
+    },
+    {
+      "period": "2023-08",
+      "matched": true
+    },
+    {
+      "period": "2023-09",
+      "matched": true
+    },
+    {
+      "period": "2023-10",
+      "matched": true
+    },
+    {
+      "period": "2023-11",
+      "matched": true
+    },
+    {
+      "period": "2023-12",
+      "matched": true
+    },
+    {
+      "period": "2024-01",
+      "matched": true
+    },
+    {
+      "period": "2024-02",
+      "matched": true
+    },
+    {
+      "period": "2024-03",
+      "matched": true
+    },
+    {
+      "period": "2024-04",
+      "matched": true
+    },
+    {
+      "period": "2024-05",
+      "matched": true
+    },
+    {
+      "period": "2024-06",
+      "matched": true
+    },
+    {
+      "period": "2024-07",
+      "matched": true
+    },
+    {
+      "period": "2024-08",
+      "matched": true
+    },
+    {
+      "period": "2024-09",
+      "matched": true
+    },
+    {
+      "period": "2024-10",
+      "matched": true
+    },
+    {
+      "period": "2024-11",
+      "matched": true
+    },
+    {
+      "period": "2024-12",
+      "matched": true
+    },
+    {
+      "period": "2025-01",
+      "matched": true
+    },
+    {
+      "period": "2025-02",
+      "matched": true
+    },
+    {
+      "period": "2025-03",
+      "matched": true
+    },
+    {
+      "period": "2025-04",
+      "matched": true
+    },
+    {
+      "period": "2025-05",
+      "matched": true
+    },
+    {
+      "period": "2025-06",
+      "matched": true
+    },
+    {
+      "period": "2025-07",
+      "matched": true
+    },
+    {
+      "period": "2025-08",
+      "matched": true
+    },
+    {
+      "period": "2025-09",
+      "matched": true
+    },
+    {
+      "period": "2025-10",
+      "matched": true
+    },
+    {
+      "period": "2025-11",
+      "matched": true
+    },
+    {
+      "period": "2025-12",
+      "matched": true
+    }
+  ]
+}

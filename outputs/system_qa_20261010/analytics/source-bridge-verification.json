@@ -1,0 +1,1532 @@
+{
+  "checked_at": "2026-10-10T04:59:54.203540+00:00",
+  "method": "Standalone Decimal/CSV calculations; no gateway/model/parser imports or warehouse calls.",
+  "inputs": {
+    "outputs\\system_qa_20261010\\live-profile.json": "5988e397e321d0febf6afc68bc7df79bd8d15bf0d8c2a13949d33eebfb204c7e",
+    "outputs\\predictive_validation\\2026-10-09T13-28-48-501Z\\input.json": "04be4f529101f2117a5045d686158708e2b39d55957a3b119b22a30aa72c63ba",
+    "databricks\\medshield_project\\references\\product_master_review.csv": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29"
+  },
+  "category_counts": {
+    "medicine": 598,
+    "unclassified": 2977,
+    "medical_equipment": 131,
+    "medical_supply": 646,
+    "non_medical": 209
+  },
+  "checks": [
+    {
+      "name": "monthly observed keys",
+      "observed": "['2017-01', '2017-02', '2017-03', '2017-04', '2017-09', '2017-11', '2017-12', '2018-03', '2018-04', '2018-05', '2018-06', '2018-07', '2018-08', '2018-09', '2018-10', '2018-11', '2018-12', '2019-01', '2019-02', '2019-03', '2019-04', '2019-05', '2019-06', '2019-07', '2019-08', '2019-09', '2020-01', '2020-02', '2020-03', '2020-04', '2020-05', '2020-06', '2020-07', '2020-08', '2020-09', '2020-10', '2020-11', '2020-12', '2021-01', '2021-02', '2021-03', '2021-04', '2021-05', '2021-06', '2021-07', '2021-08', '2021-09', '2021-10', '2021-11', '2021-12', '2022-01', '2022-02', '2022-03', '2022-04', '2022-05', '2022-06', '2022-07', '2022-08', '2022-09', '2022-10', '2022-11', '2022-12', '2023-01', '2023-02', '2023-03', '2023-04', '2023-05', '2023-06', '2023-07', '2023-08', '2023-09', '2023-10', '2023-11', '2023-12', '2024-01', '2024-02', '2024-03', '2024-04', '2024-05', '2024-06', '2024-07', '2024-08', '2024-09', '2024-10', '2024-11', '2024-12', '2025-01', '2025-02', '2025-03', '2025-04', '2025-05', '2025-06', '2025-07', '2025-08', '2025-09', '2025-10', '2025-11', '2025-12']",
+      "expected": "['2017-01', '2017-02', '2017-03', '2017-04', '2017-09', '2017-11', '2017-12', '2018-03', '2018-04', '2018-05', '2018-06', '2018-07', '2018-08', '2018-09', '2018-10', '2018-11', '2018-12', '2019-01', '2019-02', '2019-03', '2019-04', '2019-05', '2019-06', '2019-07', '2019-08', '2019-09', '2020-01', '2020-02', '2020-03', '2020-04', '2020-05', '2020-06', '2020-07', '2020-08', '2020-09', '2020-10', '2020-11', '2020-12', '2021-01', '2021-02', '2021-03', '2021-04', '2021-05', '2021-06', '2021-07', '2021-08', '2021-09', '2021-10', '2021-11', '2021-12', '2022-01', '2022-02', '2022-03', '2022-04', '2022-05', '2022-06', '2022-07', '2022-08', '2022-09', '2022-10', '2022-11', '2022-12', '2023-01', '2023-02', '2023-03', '2023-04', '2023-05', '2023-06', '2023-07', '2023-08', '2023-09', '2023-10', '2023-11', '2023-12', '2024-01', '2024-02', '2024-03', '2024-04', '2024-05', '2024-06', '2024-07', '2024-08', '2024-09', '2024-10', '2024-11', '2024-12', '2025-01', '2025-02', '2025-03', '2025-04', '2025-05', '2025-06', '2025-07', '2025-08', '2025-09', '2025-10', '2025-11', '2025-12']",
+      "pass_": true
+    },
+    {
+      "name": "2017-01 net sales",
+      "observed": "2288688.880000",
+      "expected": "2288688.880000",
+      "pass_": true
+    },
+    {
+      "name": "2017-01 source rows",
+      "observed": "515",
+      "expected": "515",
+      "pass_": true
+    },
+    {
+      "name": "2017-02 net sales",
+      "observed": "2478761.200000",
+      "expected": "2478761.200000",
+      "pass_": true
+    },
+    {
+      "name": "2017-02 source rows",
+      "observed": "454",
+      "expected": "454",
+      "pass_": true
+    },
+    {
+      "name": "2017-03 net sales",
+      "observed": "2697198.470000",
+      "expected": "2697198.470000",
+      "pass_": true
+    },
+    {
+      "name": "2017-03 source rows",
+      "observed": "589",
+      "expected": "589",
+      "pass_": true
+    },
+    {
+      "name": "2017-04 net sales",
+      "observed": "2655938.800000",
+      "expected": "2655938.800000",
+      "pass_": true
+    },
+    {
+      "name": "2017-04 source rows",
+      "observed": "401",
+      "expected": "401",
+      "pass_": true
+    },
+    {
+      "name": "2017-09 net sales",
+      "observed": "480.000000",
+      "expected": "480.000000",
+      "pass_": true
+    },
+    {
+      "name": "2017-09 source rows",
+      "observed": "1",
+      "expected": "1",
+      "pass_": true
+    },
+    {
+      "name": "2017-11 net sales",
+      "observed": "86200.000000",
+      "expected": "86200.000000",
+      "pass_": true
+    },
+    {
+      "name": "2017-11 source rows",
+      "observed": "9",
+      "expected": "9",
+      "pass_": true
+    },
+    {
+      "name": "2017-12 net sales",
+      "observed": "3900.000000",
+      "expected": "3900.000000",
+      "pass_": true
+    },
+    {
+      "name": "2017-12 source rows",
+      "observed": "9",
+      "expected": "9",
+      "pass_": true
+    },
+    {
+      "name": "2018-03 net sales",
+      "observed": "3457920.700000",
+      "expected": "3457920.700000",
+      "pass_": true
+    },
+    {
+      "name": "2018-03 source rows",
+      "observed": "418",
+      "expected": "418",
+      "pass_": true
+    },
+    {
+      "name": "2018-04 net sales",
+      "observed": "6403396.280000",
+      "expected": "6403396.280000",
+      "pass_": true
+    },
+    {
+      "name": "2018-04 source rows",
+      "observed": "682",
+      "expected": "682",
+      "pass_": true
+    },
+    {
+      "name": "2018-05 net sales",
+      "observed": "4591195.170000",
+      "expected": "4591195.170000",
+      "pass_": true
+    },
+    {
+      "name": "2018-05 source rows",
+      "observed": "634",
+      "expected": "634",
+      "pass_": true
+    },
+    {
+      "name": "2018-06 net sales",
+      "observed": "4599086.640000",
+      "expected": "4599086.640000",
+      "pass_": true
+    },
+    {
+      "name": "2018-06 source rows",
+      "observed": "515",
+      "expected": "515",
+      "pass_": true
+    },
+    {
+      "name": "2018-07 net sales",
+      "observed": "5034975.380000",
+      "expected": "5034975.380000",
+      "pass_": true
+    },
+    {
+      "name": "2018-07 source rows",
+      "observed": "587",
+      "expected": "587",
+      "pass_": true
+    },
+    {
+      "name": "2018-08 net sales",
+      "observed": "4085611.820000",
+      "expected": "4085611.820000",
+      "pass_": true
+    },
+    {
+      "name": "2018-08 source rows",
+      "observed": "585",
+      "expected": "585",
+      "pass_": true
+    },
+    {
+      "name": "2018-09 net sales",
+      "observed": "4066997.220000",
+      "expected": "4066997.220000",
+      "pass_": true
+    },
+    {
+      "name": "2018-09 source rows",
+      "observed": "684",
+      "expected": "684",
+      "pass_": true
+    },
+    {
+      "name": "2018-10 net sales",
+      "observed": "7274326.830000",
+      "expected": "7274326.830000",
+      "pass_": true
+    },
+    {
+      "name": "2018-10 source rows",
+      "observed": "807",
+      "expected": "807",
+      "pass_": true
+    },
+    {
+      "name": "2018-11 net sales",
+      "observed": "7571263.890000",
+      "expected": "7571263.890000",
+      "pass_": true
+    },
+    {
+      "name": "2018-11 source rows",
+      "observed": "845",
+      "expected": "845",
+      "pass_": true
+    },
+    {
+      "name": "2018-12 net sales",
+      "observed": "4534917.340000",
+      "expected": "4534917.340000",
+      "pass_": true
+    },
+    {
+      "name": "2018-12 source rows",
+      "observed": "424",
+      "expected": "424",
+      "pass_": true
+    },
+    {
+      "name": "2019-01 net sales",
+      "observed": "4459965.470000",
+      "expected": "4459965.470000",
+      "pass_": true
+    },
+    {
+      "name": "2019-01 source rows",
+      "observed": "737",
+      "expected": "737",
+      "pass_": true
+    },
+    {
+      "name": "2019-02 net sales",
+      "observed": "5473644.670000",
+      "expected": "5473644.670000",
+      "pass_": true
+    },
+    {
+      "name": "2019-02 source rows",
+      "observed": "484",
+      "expected": "484",
+      "pass_": true
+    },
+    {
+      "name": "2019-03 net sales",
+      "observed": "6995759.140000",
+      "expected": "6995759.140000",
+      "pass_": true
+    },
+    {
+      "name": "2019-03 source rows",
+      "observed": "539",
+      "expected": "539",
+      "pass_": true
+    },
+    {
+      "name": "2019-04 net sales",
+      "observed": "9438917.290000",
+      "expected": "9438917.290000",
+      "pass_": true
+    },
+    {
+      "name": "2019-04 source rows",
+      "observed": "799",
+      "expected": "799",
+      "pass_": true
+    },
+    {
+      "name": "2019-05 net sales",
+      "observed": "9568922.120000",
+      "expected": "9568922.120000",
+      "pass_": true
+    },
+    {
+      "name": "2019-05 source rows",
+      "observed": "646",
+      "expected": "646",
+      "pass_": true
+    },
+    {
+      "name": "2019-06 net sales",
+      "observed": "6948030.480000",
+      "expected": "6948030.480000",
+      "pass_": true
+    },
+    {
+      "name": "2019-06 source rows",
+      "observed": "540",
+      "expected": "540",
+      "pass_": true
+    },
+    {
+      "name": "2019-07 net sales",
+      "observed": "8694463.130000",
+      "expected": "8694463.130000",
+      "pass_": true
+    },
+    {
+      "name": "2019-07 source rows",
+      "observed": "647",
+      "expected": "647",
+      "pass_": true
+    },
+    {
+      "name": "2019-08 net sales",
+      "observed": "5568251.580000",
+      "expected": "5568251.580000",
+      "pass_": true
+    },
+    {
+      "name": "2019-08 source rows",
+      "observed": "513",
+      "expected": "513",
+      "pass_": true
+    },
+    {
+      "name": "2019-09 net sales",
+      "observed": "5394350.610000",
+      "expected": "5394350.610000",
+      "pass_": true
+    },
+    {
+      "name": "2019-09 source rows",
+      "observed": "541",
+      "expected": "541",
+      "pass_": true
+    },
+    {
+      "name": "2020-01 net sales",
+      "observed": "7514695.050000",
+      "expected": "7514695.050000",
+      "pass_": true
+    },
+    {
+      "name": "2020-01 source rows",
+      "observed": "614",
+      "expected": "614",
+      "pass_": true
+    },
+    {
+      "name": "2020-02 net sales",
+      "observed": "6298008.000000",
+      "expected": "6298008.000000",
+      "pass_": true
+    },
+    {
+      "name": "2020-02 source rows",
+      "observed": "460",
+      "expected": "460",
+      "pass_": true
+    },
+    {
+      "name": "2020-03 net sales",
+      "observed": "6637589.080000",
+      "expected": "6637589.080000",
+      "pass_": true
+    },
+    {
+      "name": "2020-03 source rows",
+      "observed": "467",
+      "expected": "467",
+      "pass_": true
+    },
+    {
+      "name": "2020-04 net sales",
+      "observed": "1525751.320000",
+      "expected": "1525751.320000",
+      "pass_": true
+    },
+    {
+      "name": "2020-04 source rows",
+      "observed": "207",
+      "expected": "207",
+      "pass_": true
+    },
+    {
+      "name": "2020-05 net sales",
+      "observed": "19394456.300000",
+      "expected": "19394456.300000",
+      "pass_": true
+    },
+    {
+      "name": "2020-05 source rows",
+      "observed": "420",
+      "expected": "420",
+      "pass_": true
+    },
+    {
+      "name": "2020-06 net sales",
+      "observed": "4471548.750000",
+      "expected": "4471548.750000",
+      "pass_": true
+    },
+    {
+      "name": "2020-06 source rows",
+      "observed": "330",
+      "expected": "330",
+      "pass_": true
+    },
+    {
+      "name": "2020-07 net sales",
+      "observed": "1553987.810000",
+      "expected": "1553987.810000",
+      "pass_": true
+    },
+    {
+      "name": "2020-07 source rows",
+      "observed": "170",
+      "expected": "170",
+      "pass_": true
+    },
+    {
+      "name": "2020-08 net sales",
+      "observed": "2983110.790000",
+      "expected": "2983110.790000",
+      "pass_": true
+    },
+    {
+      "name": "2020-08 source rows",
+      "observed": "269",
+      "expected": "269",
+      "pass_": true
+    },
+    {
+      "name": "2020-09 net sales",
+      "observed": "2102633.270000",
+      "expected": "2102633.270000",
+      "pass_": true
+    },
+    {
+      "name": "2020-09 source rows",
+      "observed": "174",
+      "expected": "174",
+      "pass_": true
+    },
+    {
+      "name": "2020-10 net sales",
+      "observed": "2469548.120000",
+      "expected": "2469548.120000",
+      "pass_": true
+    },
+    {
+      "name": "2020-10 source rows",
+      "observed": "421",
+      "expected": "421",
+      "pass_": true
+    },
+    {
+      "name": "2020-11 net sales",
+      "observed": "4870933.120000",
+      "expected": "4870933.120000",
+      "pass_": true
+    },
+    {
+      "name": "2020-11 source rows",
+      "observed": "252",
+      "expected": "252",
+      "pass_": true
+    },
+    {
+      "name": "2020-12 net sales",
+      "observed": "3771013.020000",
+      "expected": "3771013.020000",
+      "pass_": true
+    },
+    {
+      "name": "2020-12 source rows",
+      "observed": "196",
+      "expected": "196",
+      "pass_": true
+    },
+    {
+      "name": "2021-01 net sales",
+      "observed": "5364380.250000",
+      "expected": "5364380.250000",
+      "pass_": true
+    },
+    {
+      "name": "2021-01 source rows",
+      "observed": "258",
+      "expected": "258",
+      "pass_": true
+    },
+    {
+      "name": "2021-02 net sales",
+      "observed": "3682482.140000",
+      "expected": "3682482.140000",
+      "pass_": true
+    },
+    {
+      "name": "2021-02 source rows",
+      "observed": "213",
+      "expected": "213",
+      "pass_": true
+    },
+    {
+      "name": "2021-03 net sales",
+      "observed": "2318360.720000",
+      "expected": "2318360.720000",
+      "pass_": true
+    },
+    {
+      "name": "2021-03 source rows",
+      "observed": "207",
+      "expected": "207",
+      "pass_": true
+    },
+    {
+      "name": "2021-04 net sales",
+      "observed": "4928899.800000",
+      "expected": "4928899.800000",
+      "pass_": true
+    },
+    {
+      "name": "2021-04 source rows",
+      "observed": "258",
+      "expected": "258",
+      "pass_": true
+    },
+    {
+      "name": "2021-05 net sales",
+      "observed": "2012916.830000",
+      "expected": "2012916.830000",
+      "pass_": true
+    },
+    {
+      "name": "2021-05 source rows",
+      "observed": "183",
+      "expected": "183",
+      "pass_": true
+    },
+    {
+      "name": "2021-06 net sales",
+      "observed": "5225498.200000",
+      "expected": "5225498.200000",
+      "pass_": true
+    },
+    {
+      "name": "2021-06 source rows",
+      "observed": "253",
+      "expected": "253",
+      "pass_": true
+    },
+    {
+      "name": "2021-07 net sales",
+      "observed": "9573660.330000",
+      "expected": "9573660.330000",
+      "pass_": true
+    },
+    {
+      "name": "2021-07 source rows",
+      "observed": "345",
+      "expected": "345",
+      "pass_": true
+    },
+    {
+      "name": "2021-08 net sales",
+      "observed": "10533739.530000",
+      "expected": "10533739.530000",
+      "pass_": true
+    },
+    {
+      "name": "2021-08 source rows",
+      "observed": "305",
+      "expected": "305",
+      "pass_": true
+    },
+    {
+      "name": "2021-09 net sales",
+      "observed": "8287059.600000",
+      "expected": "8287059.600000",
+      "pass_": true
+    },
+    {
+      "name": "2021-09 source rows",
+      "observed": "286",
+      "expected": "286",
+      "pass_": true
+    },
+    {
+      "name": "2021-10 net sales",
+      "observed": "15279603.640000",
+      "expected": "15279603.640000",
+      "pass_": true
+    },
+    {
+      "name": "2021-10 source rows",
+      "observed": "381",
+      "expected": "381",
+      "pass_": true
+    },
+    {
+      "name": "2021-11 net sales",
+      "observed": "6713804.040000",
+      "expected": "6713804.040000",
+      "pass_": true
+    },
+    {
+      "name": "2021-11 source rows",
+      "observed": "503",
+      "expected": "503",
+      "pass_": true
+    },
+    {
+      "name": "2021-12 net sales",
+      "observed": "3939801.180000",
+      "expected": "3939801.180000",
+      "pass_": true
+    },
+    {
+      "name": "2021-12 source rows",
+      "observed": "215",
+      "expected": "215",
+      "pass_": true
+    },
+    {
+      "name": "2022-01 net sales",
+      "observed": "5270833.750000",
+      "expected": "5270833.750000",
+      "pass_": true
+    },
+    {
+      "name": "2022-01 source rows",
+      "observed": "371",
+      "expected": "371",
+      "pass_": true
+    },
+    {
+      "name": "2022-02 net sales",
+      "observed": "10568697.090000",
+      "expected": "10568697.090000",
+      "pass_": true
+    },
+    {
+      "name": "2022-02 source rows",
+      "observed": "453",
+      "expected": "453",
+      "pass_": true
+    },
+    {
+      "name": "2022-03 net sales",
+      "observed": "5791537.630000",
+      "expected": "5791537.630000",
+      "pass_": true
+    },
+    {
+      "name": "2022-03 source rows",
+      "observed": "298",
+      "expected": "298",
+      "pass_": true
+    },
+    {
+      "name": "2022-04 net sales",
+      "observed": "5638889.710000",
+      "expected": "5638889.710000",
+      "pass_": true
+    },
+    {
+      "name": "2022-04 source rows",
+      "observed": "314",
+      "expected": "314",
+      "pass_": true
+    },
+    {
+      "name": "2022-05 net sales",
+      "observed": "3871579.020000",
+      "expected": "3871579.020000",
+      "pass_": true
+    },
+    {
+      "name": "2022-05 source rows",
+      "observed": "324",
+      "expected": "324",
+      "pass_": true
+    },
+    {
+      "name": "2022-06 net sales",
+      "observed": "10350221.030000",
+      "expected": "10350221.030000",
+      "pass_": true
+    },
+    {
+      "name": "2022-06 source rows",
+      "observed": "489",
+      "expected": "489",
+      "pass_": true
+    },
+    {
+      "name": "2022-07 net sales",
+      "observed": "3049922.430000",
+      "expected": "3049922.430000",
+      "pass_": true
+    },
+    {
+      "name": "2022-07 source rows",
+      "observed": "295",
+      "expected": "295",
+      "pass_": true
+    },
+    {
+      "name": "2022-08 net sales",
+      "observed": "2138525.120000",
+      "expected": "2138525.120000",
+      "pass_": true
+    },
+    {
+      "name": "2022-08 source rows",
+      "observed": "194",
+      "expected": "194",
+      "pass_": true
+    },
+    {
+      "name": "2022-09 net sales",
+      "observed": "6498970.540000",
+      "expected": "6498970.540000",
+      "pass_": true
+    },
+    {
+      "name": "2022-09 source rows",
+      "observed": "418",
+      "expected": "418",
+      "pass_": true
+    },
+    {
+      "name": "2022-10 net sales",
+      "observed": "2788157.480000",
+      "expected": "2788157.480000",
+      "pass_": true
+    },
+    {
+      "name": "2022-10 source rows",
+      "observed": "296",
+      "expected": "296",
+      "pass_": true
+    },
+    {
+      "name": "2022-11 net sales",
+      "observed": "3642191.630000",
+      "expected": "3642191.630000",
+      "pass_": true
+    },
+    {
+      "name": "2022-11 source rows",
+      "observed": "306",
+      "expected": "306",
+      "pass_": true
+    },
+    {
+      "name": "2022-12 net sales",
+      "observed": "3625464.610000",
+      "expected": "3625464.610000",
+      "pass_": true
+    },
+    {
+      "name": "2022-12 source rows",
+      "observed": "222",
+      "expected": "222",
+      "pass_": true
+    },
+    {
+      "name": "2023-01 net sales",
+      "observed": "7844551.200000",
+      "expected": "7844551.200000",
+      "pass_": true
+    },
+    {
+      "name": "2023-01 source rows",
+      "observed": "435",
+      "expected": "435",
+      "pass_": true
+    },
+    {
+      "name": "2023-02 net sales",
+      "observed": "13794078.180000",
+      "expected": "13794078.180000",
+      "pass_": true
+    },
+    {
+      "name": "2023-02 source rows",
+      "observed": "753",
+      "expected": "753",
+      "pass_": true
+    },
+    {
+      "name": "2023-03 net sales",
+      "observed": "2344746.440000",
+      "expected": "2344746.440000",
+      "pass_": true
+    },
+    {
+      "name": "2023-03 source rows",
+      "observed": "357",
+      "expected": "357",
+      "pass_": true
+    },
+    {
+      "name": "2023-04 net sales",
+      "observed": "1559602.950000",
+      "expected": "1559602.950000",
+      "pass_": true
+    },
+    {
+      "name": "2023-04 source rows",
+      "observed": "215",
+      "expected": "215",
+      "pass_": true
+    },
+    {
+      "name": "2023-05 net sales",
+      "observed": "14537368.300000",
+      "expected": "14537368.300000",
+      "pass_": true
+    },
+    {
+      "name": "2023-05 source rows",
+      "observed": "625",
+      "expected": "625",
+      "pass_": true
+    },
+    {
+      "name": "2023-06 net sales",
+      "observed": "6910935.230000",
+      "expected": "6910935.230000",
+      "pass_": true
+    },
+    {
+      "name": "2023-06 source rows",
+      "observed": "1455",
+      "expected": "1455",
+      "pass_": true
+    },
+    {
+      "name": "2023-07 net sales",
+      "observed": "2337078.500000",
+      "expected": "2337078.500000",
+      "pass_": true
+    },
+    {
+      "name": "2023-07 source rows",
+      "observed": "295",
+      "expected": "295",
+      "pass_": true
+    },
+    {
+      "name": "2023-08 net sales",
+      "observed": "2588026.900000",
+      "expected": "2588026.900000",
+      "pass_": true
+    },
+    {
+      "name": "2023-08 source rows",
+      "observed": "348",
+      "expected": "348",
+      "pass_": true
+    },
+    {
+      "name": "2023-09 net sales",
+      "observed": "5029660.600000",
+      "expected": "5029660.600000",
+      "pass_": true
+    },
+    {
+      "name": "2023-09 source rows",
+      "observed": "240",
+      "expected": "240",
+      "pass_": true
+    },
+    {
+      "name": "2023-10 net sales",
+      "observed": "2411760.400000",
+      "expected": "2411760.400000",
+      "pass_": true
+    },
+    {
+      "name": "2023-10 source rows",
+      "observed": "243",
+      "expected": "243",
+      "pass_": true
+    },
+    {
+      "name": "2023-11 net sales",
+      "observed": "1975407.650000",
+      "expected": "1975407.650000",
+      "pass_": true
+    },
+    {
+      "name": "2023-11 source rows",
+      "observed": "262",
+      "expected": "262",
+      "pass_": true
+    },
+    {
+      "name": "2023-12 net sales",
+      "observed": "895750.500000",
+      "expected": "895750.500000",
+      "pass_": true
+    },
+    {
+      "name": "2023-12 source rows",
+      "observed": "153",
+      "expected": "153",
+      "pass_": true
+    },
+    {
+      "name": "2024-01 net sales",
+      "observed": "2124201.870000",
+      "expected": "2124201.870000",
+      "pass_": true
+    },
+    {
+      "name": "2024-01 source rows",
+      "observed": "271",
+      "expected": "271",
+      "pass_": true
+    },
+    {
+      "name": "2024-02 net sales",
+      "observed": "1079764.410000",
+      "expected": "1079764.410000",
+      "pass_": true
+    },
+    {
+      "name": "2024-02 source rows",
+      "observed": "167",
+      "expected": "167",
+      "pass_": true
+    },
+    {
+      "name": "2024-03 net sales",
+      "observed": "2060009.790000",
+      "expected": "2060009.790000",
+      "pass_": true
+    },
+    {
+      "name": "2024-03 source rows",
+      "observed": "371",
+      "expected": "371",
+      "pass_": true
+    },
+    {
+      "name": "2024-04 net sales",
+      "observed": "2078280.770000",
+      "expected": "2078280.770000",
+      "pass_": true
+    },
+    {
+      "name": "2024-04 source rows",
+      "observed": "182",
+      "expected": "182",
+      "pass_": true
+    },
+    {
+      "name": "2024-05 net sales",
+      "observed": "3608886.820000",
+      "expected": "3608886.820000",
+      "pass_": true
+    },
+    {
+      "name": "2024-05 source rows",
+      "observed": "247",
+      "expected": "247",
+      "pass_": true
+    },
+    {
+      "name": "2024-06 net sales",
+      "observed": "6998941.660000",
+      "expected": "6998941.660000",
+      "pass_": true
+    },
+    {
+      "name": "2024-06 source rows",
+      "observed": "246",
+      "expected": "246",
+      "pass_": true
+    },
+    {
+      "name": "2024-07 net sales",
+      "observed": "4065144.110000",
+      "expected": "4065144.110000",
+      "pass_": true
+    },
+    {
+      "name": "2024-07 source rows",
+      "observed": "262",
+      "expected": "262",
+      "pass_": true
+    },
+    {
+      "name": "2024-08 net sales",
+      "observed": "3762272.340000",
+      "expected": "3762272.340000",
+      "pass_": true
+    },
+    {
+      "name": "2024-08 source rows",
+      "observed": "264",
+      "expected": "264",
+      "pass_": true
+    },
+    {
+      "name": "2024-09 net sales",
+      "observed": "2626170.570000",
+      "expected": "2626170.570000",
+      "pass_": true
+    },
+    {
+      "name": "2024-09 source rows",
+      "observed": "206",
+      "expected": "206",
+      "pass_": true
+    },
+    {
+      "name": "2024-10 net sales",
+      "observed": "3030236.030000",
+      "expected": "3030236.030000",
+      "pass_": true
+    },
+    {
+      "name": "2024-10 source rows",
+      "observed": "243",
+      "expected": "243",
+      "pass_": true
+    },
+    {
+      "name": "2024-11 net sales",
+      "observed": "2080441.000000",
+      "expected": "2080441.000000",
+      "pass_": true
+    },
+    {
+      "name": "2024-11 source rows",
+      "observed": "175",
+      "expected": "175",
+      "pass_": true
+    },
+    {
+      "name": "2024-12 net sales",
+      "observed": "16744970.510000",
+      "expected": "16744970.510000",
+      "pass_": true
+    },
+    {
+      "name": "2024-12 source rows",
+      "observed": "197",
+      "expected": "197",
+      "pass_": true
+    },
+    {
+      "name": "2025-01 net sales",
+      "observed": "16374092.180000",
+      "expected": "16374092.180000",
+      "pass_": true
+    },
+    {
+      "name": "2025-01 source rows",
+      "observed": "232",
+      "expected": "232",
+      "pass_": true
+    },
+    {
+      "name": "2025-02 net sales",
+      "observed": "13408966.820000",
+      "expected": "13408966.820000",
+      "pass_": true
+    },
+    {
+      "name": "2025-02 source rows",
+      "observed": "350",
+      "expected": "350",
+      "pass_": true
+    },
+    {
+      "name": "2025-03 net sales",
+      "observed": "2612295.100000",
+      "expected": "2612295.100000",
+      "pass_": true
+    },
+    {
+      "name": "2025-03 source rows",
+      "observed": "241",
+      "expected": "241",
+      "pass_": true
+    },
+    {
+      "name": "2025-04 net sales",
+      "observed": "5670753.870000",
+      "expected": "5670753.870000",
+      "pass_": true
+    },
+    {
+      "name": "2025-04 source rows",
+      "observed": "206",
+      "expected": "206",
+      "pass_": true
+    },
+    {
+      "name": "2025-05 net sales",
+      "observed": "21382925.250000",
+      "expected": "21382925.250000",
+      "pass_": true
+    },
+    {
+      "name": "2025-05 source rows",
+      "observed": "231",
+      "expected": "231",
+      "pass_": true
+    },
+    {
+      "name": "2025-06 net sales",
+      "observed": "14924161.430000",
+      "expected": "14924161.430000",
+      "pass_": true
+    },
+    {
+      "name": "2025-06 source rows",
+      "observed": "525",
+      "expected": "525",
+      "pass_": true
+    },
+    {
+      "name": "2025-07 net sales",
+      "observed": "20352893.810000",
+      "expected": "20352893.810000",
+      "pass_": true
+    },
+    {
+      "name": "2025-07 source rows",
+      "observed": "265",
+      "expected": "265",
+      "pass_": true
+    },
+    {
+      "name": "2025-08 net sales",
+      "observed": "8934135.310000",
+      "expected": "8934135.310000",
+      "pass_": true
+    },
+    {
+      "name": "2025-08 source rows",
+      "observed": "253",
+      "expected": "253",
+      "pass_": true
+    },
+    {
+      "name": "2025-09 net sales",
+      "observed": "20654027.170000",
+      "expected": "20654027.170000",
+      "pass_": true
+    },
+    {
+      "name": "2025-09 source rows",
+      "observed": "507",
+      "expected": "507",
+      "pass_": true
+    },
+    {
+      "name": "2025-10 net sales",
+      "observed": "12512678.310000",
+      "expected": "12512678.310000",
+      "pass_": true
+    },
+    {
+      "name": "2025-10 source rows",
+      "observed": "360",
+      "expected": "360",
+      "pass_": true
+    },
+    {
+      "name": "2025-11 net sales",
+      "observed": "25076009.200000",
+      "expected": "25076009.200000",
+      "pass_": true
+    },
+    {
+      "name": "2025-11 source rows",
+      "observed": "545",
+      "expected": "545",
+      "pass_": true
+    },
+    {
+      "name": "2025-12 net sales",
+      "observed": "23493882.590000",
+      "expected": "23493882.590000",
+      "pass_": true
+    },
+    {
+      "name": "2025-12 source rows",
+      "observed": "829",
+      "expected": "829",
+      "pass_": true
+    },
+    {
+      "name": "missing calendar slots",
+      "observed": "['2017-05', '2017-06', '2017-07', '2017-08', '2017-10', '2018-01', '2018-02', '2019-10', '2019-11', '2019-12']",
+      "expected": "['2017-05', '2017-06', '2017-07', '2017-08', '2017-10', '2018-01', '2018-02', '2019-10', '2019-11', '2019-12']",
+      "pass_": true
+    },
+    {
+      "name": "calendar population",
+      "observed": "108",
+      "expected": "108",
+      "pass_": true
+    },
+    {
+      "name": "observed population",
+      "observed": "98",
+      "expected": "98",
+      "pass_": true
+    },
+    {
+      "name": "all monthly net sales conserved",
+      "observed": "626946741.810000",
+      "expected": "626946741.810000",
+      "pass_": true
+    },
+    {
+      "name": "all monthly source counts conserved",
+      "observed": "37728",
+      "expected": "37728",
+      "pass_": true
+    },
+    {
+      "name": "2017 annual sales",
+      "observed": "10211167.350000",
+      "expected": "10211167.350000",
+      "pass_": true
+    },
+    {
+      "name": "2017 annual records",
+      "observed": "1978",
+      "expected": "1978",
+      "pass_": true
+    },
+    {
+      "name": "2017 observed months",
+      "observed": "7",
+      "expected": "7",
+      "pass_": true
+    },
+    {
+      "name": "2018 annual sales",
+      "observed": "51619691.270000",
+      "expected": "51619691.270000",
+      "pass_": true
+    },
+    {
+      "name": "2018 annual records",
+      "observed": "6181",
+      "expected": "6181",
+      "pass_": true
+    },
+    {
+      "name": "2018 observed months",
+      "observed": "10",
+      "expected": "10",
+      "pass_": true
+    },
+    {
+      "name": "2019 annual sales",
+      "observed": "62542304.490000",
+      "expected": "62542304.490000",
+      "pass_": true
+    },
+    {
+      "name": "2019 annual records",
+      "observed": "5446",
+      "expected": "5446",
+      "pass_": true
+    },
+    {
+      "name": "2019 observed months",
+      "observed": "9",
+      "expected": "9",
+      "pass_": true
+    },
+    {
+      "name": "2020 annual sales",
+      "observed": "63593274.630000",
+      "expected": "63593274.630000",
+      "pass_": true
+    },
+    {
+      "name": "2020 annual records",
+      "observed": "3980",
+      "expected": "3980",
+      "pass_": true
+    },
+    {
+      "name": "2020 observed months",
+      "observed": "12",
+      "expected": "12",
+      "pass_": true
+    },
+    {
+      "name": "2021 annual sales",
+      "observed": "77860206.260000",
+      "expected": "77860206.260000",
+      "pass_": true
+    },
+    {
+      "name": "2021 annual records",
+      "observed": "3407",
+      "expected": "3407",
+      "pass_": true
+    },
+    {
+      "name": "2021 observed months",
+      "observed": "12",
+      "expected": "12",
+      "pass_": true
+    },
+    {
+      "name": "2022 annual sales",
+      "observed": "63234990.040000",
+      "expected": "63234990.040000",
+      "pass_": true
+    },
+    {
+      "name": "2022 annual records",
+      "observed": "3980",
+      "expected": "3980",
+      "pass_": true
+    },
+    {
+      "name": "2022 observed months",
+      "observed": "12",
+      "expected": "12",
+      "pass_": true
+    },
+    {
+      "name": "2023 annual sales",
+      "observed": "62228966.850000",
+      "expected": "62228966.850000",
+      "pass_": true
+    },
+    {
+      "name": "2023 annual records",
+      "observed": "5381",
+      "expected": "5381",
+      "pass_": true
+    },
+    {
+      "name": "2023 observed months",
+      "observed": "12",
+      "expected": "12",
+      "pass_": true
+    },
+    {
+      "name": "2024 annual sales",
+      "observed": "50259319.880000",
+      "expected": "50259319.880000",
+      "pass_": true
+    },
+    {
+      "name": "2024 annual records",
+      "observed": "2831",
+      "expected": "2831",
+      "pass_": true
+    },
+    {
+      "name": "2024 observed months",
+      "observed": "12",
+      "expected": "12",
+      "pass_": true
+    },
+    {
+      "name": "2025 annual sales",
+      "observed": "185396821.040000",
+      "expected": "185396821.040000",
+      "pass_": true
+    },
+    {
+      "name": "2025 annual records",
+      "observed": "4544",
+      "expected": "4544",
+      "pass_": true
+    },
+    {
+      "name": "2025 observed months",
+      "observed": "12",
+      "expected": "12",
+      "pass_": true
+    },
+    {
+      "name": "live/frozen dataset_id",
+      "observed": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+      "expected": "b1d48fb58a6d8bdfcfc8db303cfa87141e36ddb7af8b489049adb95fb75943c4",
+      "pass_": true
+    },
+    {
+      "name": "live/frozen fact_delta_version",
+      "observed": "20",
+      "expected": "20",
+      "pass_": true
+    },
+    {
+      "name": "live/frozen policy_version",
+      "observed": "sales_restart_gold_v7_independent_catalog",
+      "expected": "sales_restart_gold_v7_independent_catalog",
+      "pass_": true
+    },
+    {
+      "name": "live/frozen product_master_sha256",
+      "observed": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+      "expected": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+      "pass_": true
+    },
+    {
+      "name": "live/frozen area_mapping_sha256",
+      "observed": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+      "expected": "a40f380b50305ebeb9ab1fe21a3d7483750f56598de36b1dea1e85647a3ac949",
+      "pass_": true
+    },
+    {
+      "name": "no frozen publication approval",
+      "observed": "False",
+      "expected": "False",
+      "pass_": true
+    },
+    {
+      "name": "latest observed date",
+      "observed": "2025-12-31",
+      "expected": "2025-12-31",
+      "pass_": true
+    },
+    {
+      "name": "exact accepted category counts",
+      "observed": "{'medicine': 598, 'unclassified': 2977, 'medical_equipment': 131, 'medical_supply': 646, 'non_medical': 209}",
+      "expected": "{'medicine': 598, 'medical_supply': 646, 'medical_equipment': 131, 'non_medical': 209, 'unclassified': 2977}",
+      "pass_": true
+    },
+    {
+      "name": "unique category labels",
+      "observed": "4561",
+      "expected": "4561",
+      "pass_": true
+    },
+    {
+      "name": "all category dispositions approved",
+      "observed": "True",
+      "expected": "True",
+      "pass_": true
+    },
+    {
+      "name": "no sellable SKU or unit created",
+      "observed": "True",
+      "expected": "True",
+      "pass_": true
+    },
+    {
+      "name": "no additional demand approval",
+      "observed": "True",
+      "expected": "True",
+      "pass_": true
+    },
+    {
+      "name": "category revision preserves all other CSV cells",
+      "observed": "True",
+      "expected": "True",
+      "pass_": true
+    },
+    {
+      "name": "both master byte copies agree",
+      "observed": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+      "expected": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+      "pass_": true
+    },
+    {
+      "name": "live master checksum",
+      "observed": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+      "expected": "2e2e937215da5b7f7726fe1db89025df0f8eb8856815a850e53ede69ad4e5e29",
+      "pass_": true
+    },
+    {
+      "name": "live broad category labels match exact master",
+      "observed": "{'Medical': 1375, 'Non-Medical': 209, 'Unclassified': 2977}",
+      "expected": "{'Medical': 1375, 'Non-Medical': 209, 'Unclassified': 2977}",
+      "pass_": true
+    },
+    {
+      "name": "live category dispositions approved",
+      "observed": "True",
+      "expected": "True",
+      "pass_": true
+    },
+    {
+      "name": "live categories conserve signed sales",
+      "observed": "626946741.810000",
+      "expected": "626946741.810000",
+      "pass_": true
+    },
+    {
+      "name": "live categories conserve source records",
+      "observed": "37728",
+      "expected": "37728",
+      "pass_": true
+    },
+    {
+      "name": "no source quantity forecast readiness",
+      "observed": "0",
+      "expected": "0",
+      "pass_": true
+    },
+    {
+      "name": "no external join readiness",
+      "observed": "0",
+      "expected": "0",
+      "pass_": true
+    },
+    {
+      "name": "no active model pointer",
+      "observed": "0",
+      "expected": "0",
+      "pass_": true
+    }
+  ],
+  "summary": {
+    "passed": 251,
+    "failed": 0
+  },
+  "limitations": [
+    "Fresh SQL receipt binds the live source; frozen extraction predates this QA.",
+    "Equal amounts do not establish independent completeness, issue-time source vintages, SKU units, or business acceptance."
+  ]
+}
