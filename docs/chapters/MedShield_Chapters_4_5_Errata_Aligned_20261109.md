@@ -531,6 +531,16 @@
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The last observed value had the lowest reported audit WAPE among the listed baselines (37.76 percent). The earlier development WAPE for last observed value was 83.20 percent, demonstrating that performance varied across windows. A later 12-month median alternative reduced development MAE by 24.90 percent but increased audit MAE by 116.95 percent, with an audit bias of negative 81.69 percent. The results reinforced the need to preserve evaluation windows and avoid interpreting a development improvement as generalization.
 
+##### **4.2.3.3.5 Pre-Registered External Signal Tests and Planning Role**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decision 017 established that DOH disease surveillance, PAGASA observations, and NASA POWER weather proxies inform planning outputs—the risk calendar, risk indicator panel, and buffer scenario—and do not drive operational forecasts. The recent mean of six months (mean_6) remains the reference baseline. Only a new pre-registered challenger that beats mean_6 on held-out months can change the forecast reference.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Two pre-registered weather tests were conducted using data through September 2026. Test W1 assessed whether weather-regime ranges covered the target territory 75 to 85 percent of historical months; observed coverage was 66.1 percent, below the registered rule, and W1 failed. Test W2 assessed whether typhoon-season delivery disruption associated with monthly sales at a significance level of p ≤ 0.05; the observed p-value was 0.43, and W2 failed. Neither result authorized removing external data from planning inputs; both confirmed that the external variables could not qualify as forecast drivers under the registered criteria.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An association study examined whether diarrhoeal disease indexes (DII) and respiratory symptom indexes (RSI) independently predicted monthly pharmaceutical sales across eight territories after the multi-year trend was removed. The study found no significant association in any of the eight territories. DII and RSI therefore remained available as contextual planning indicators but did not enter the operational forecast.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Surge preparedness alerts were reviewed for the July-through-November main alert window. Of eight candidate alerts, zero were assessed as usable for procurement planning. The diarrhoeal disease pass was trend-confounded and was not considered actionable. The findings reinforced the planning-only role for external signals established by Decision 017.
+
 #### **4.2.3.4 Prophet Evaluation of Confirmed Regional Sales**
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prophet was fitted to confirmed regional monthly net sales and compared with five reference methods. The target was recorded signed financial activity in PHP. Nine confirmed delivery labels supplied the mapping, while unallocated channels and contract summaries remained excluded. The original regional experiment used an offline extraction of historical Delta version 0 after a source-version mismatch had interrupted dashboard access. The 2 November recovery subsequently restored access to the pinned original release.
@@ -622,6 +632,30 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The company comparison retained recent mean of six months as its development reference at lead one and seasonal naïve at leads three and six. The territorial comparison used 81 contiguous CALABARZON observations and retained recent mean of six months at leads one and three and direct ridge with alpha ten at lead six. In its four-case inspected extension, the territorial comparison recorded WAPE of 26.14 percent at lead one, 58.56 percent at lead three, and 63.37 percent at lead six. The small inspected cohort did not establish prospective superiority.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Independent checks recomputed 312 elementary-baseline predictions from dated source values and reconciled every reported MAE using decimal arithmetic within PHP 0.0000001. Common target sets and calendar leads were also verified. The checks established calculation consistency but did not establish prospective accuracy or operational approval. Follow-up bias correction improved some longer-lead errors, but activity, component, and grouped recipes failed the recorded acceptance guards. The separate ten percent and five percent WAPE research goals remained unmet; they described later forecast research and did not replace the capstone objectives stated in the errata.
+
+#### **4.2.3.5 Extended Model Evaluation Study**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An extended evaluation study assessed 36 models in total across the forecast research program. The study scorecard covered 79 cells and 5,123 paired rows. The evaluation confirmed the reference forecast mean_6 (recent mean of six months) at 49.67 percent WAPE with a mean bias of negative 10.76 percent. No model from the extended evaluation met the pre-registered win rule that would have replaced mean_6.
+
+##### **4.2.3.5.1 D3 Large-Document Split Study**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The D3 split study examined whether separating the sales series into a base component and a trailing large-order mean could reduce total forecast error. The base series achieved lead-1 WAPE in the range of 37.1 to 38.4 percent, compared with 49.7 percent for the total series. However, the approach of forecasting total demand as base series plus trailing large-order mean failed the registered win rule. Mean_6 remained the selected reference. The large-order versus routine split panel recorded retrospective lead-1 WAPE of 36.7 percent for the base series and 46.6 percent for the total series, confirming that large-order inclusion drove the bulk of total forecast error.
+
+##### **4.2.3.5.2 Models 1–5 Test**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Five candidate models were evaluated against the base series. Coverage ranges for leads one through six (69 to 71 percent) fell outside the registered rule bounds. The 95-percent safety stock achieved only 82 percent coverage, below its registration target. The Teunter-Syntetos-Babai (TSB) method performed worse than mean_6 on 366 intermittent-demand products. No model from this cohort was activated.
+
+##### **4.2.3.5.3 Day-20 WAPE and Backtest Replay**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The backtest replay panel reported day-20 WAPE of 30.3 percent against 37.0 percent over the most recent twelve months. Backtest replay analysis showed that the day-20 estimate cut the September 2025 error from negative 62 percent to positive 11 percent, and the July 2026 error from negative 51 percent to positive 20 percent. These results represented retrospective reconstruction of planning-horizon estimates and did not establish prospective forecast accuracy.
+
+##### **4.2.3.5.4 New Prediction Targets**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Four new prediction targets were evaluated. The government large-order range prediction passed registration with 77.8 percent and 78.8 percent coverage at the respective evaluation conditions. The late-reorder flag passed with 88 percent correct identification against a 7 percent base rate. The segment chance model, budget-cycle model, and survival model each failed their respective registration rules. No new target was placed in operational use.
+
+##### **4.2.3.5.5 Family ABC-XYZ Classification**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The family ABC-XYZ classification identified 728 product families in the 2025 data. Of these, 8 families were classified as AX (high-value, predictable), accounting for 3.4 percent of net sales, and 91 families as AZ (high-value, erratic), accounting for 72.8 percent of net sales. The concentration of net sales in AZ families reinforced the erratic-demand challenge for inventory management. The classification was retained as a demand-structure descriptor and did not change the reference forecast selection.
 
 ### **4.2.4 Prescriptive Analysis**
 
@@ -726,6 +760,14 @@
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A separate 42-case purchase-capacity comparison checked exact results and parity across three planning approaches. The shared purchase-capacity constraint was carried through ordinary allocation, dated fixed-plan review, bounded selection, drafts, and exports. The result established consistent constraint handling in the evaluated cases; it did not establish that weighted allocation produced better actual outcomes than balanced allocation. The branch also documented 31 synthetic MCDA probes. Verified clinical criteria remained unavailable, so the results did not establish clinical product priority.
 
+#### **4.2.4.4 Benefit and Sensitivity Simulation**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A simulated benefit analysis compared the DSS scenario approach against a uniform months-of-cover rule across a representative product set. Under the same target service level, the scenario-based planning approach required 15 to 52 percent less stock than the uniform months-of-cover rule. The simulation described behavior under the entered assumptions and did not establish that actual stock reductions or cost savings would be realized in operations. Actual benefit remained unverified because current inventory balances, supplier lead times, and historical fulfillment records were unavailable.
+
+#### **4.2.4.5 New Offline Analytical Modules**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Four new offline analytical modules were added to the services layer as part of the update_07 release: `horizon_routing.py` (selects the appropriate lead horizon for each product segment), `abc_cold_start_hybrid.py` (handles ABC classification for products without prior-year history using a hybrid approach), `tender_snapshots.py` (captures government tender order snapshots for large-order range analysis), and `external_signal_readiness.py` (assesses readiness of external data sources before they inform planning outputs). The modules ran offline as part of the Python analytics service and did not serve dashboard requests directly. Their outputs supplied evidence for the planning and risk-calendar panels without being treated as runtime data sources.
+
 ---
 
 ## **4.3 Dashboard Implementation and Evaluation**
@@ -822,19 +864,21 @@
 
 ### **4.3.6 Technical Evaluation and Client Acceptance**
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Technical correctness and client acceptance required different forms of evaluation. Client participation and measured operational outcomes remained separate evidence requirements. The final integrated local acceptance record dated 2 November 2026 contained 18 distinct authenticated browser cases, including a corrected accessibility rerun, 97 gateway fixture and authentication checks, and 11,283 independent source, model, and native-CSV assertions. Frontend and backend type checks and lint checks also passed in the recorded run. The counts described scoped technical verification; they did not establish client or adviser sign-off, production deployment, model activation, or measured operating benefit.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Technical correctness and client acceptance required different forms of evaluation. Client participation and measured operational outcomes remained separate evidence requirements. The November 2026 (update_07) verification record comprised 686 passing Python service tests, 309 passing Databricks analytical tests (databricks_updated_2 suite), 678 passing gateway tests, and 25 focused Playwright end-to-end cases across nine dashboard pages at five viewport widths. A UI quality review documented 37 fixed issues and 5 partly fixed issues. Frontend and backend type checks and lint checks also passed. The counts described scoped technical verification; they did not establish client or adviser sign-off, production deployment, model activation, or measured operating benefit.
 
 **Table 4.31 Evaluation evidence and its limits**
 
 | Evidence type | Recorded evidence | Interpretation |
 |---|---|---|
-| Source and analytical checks | 11,283 source, model, and native-CSV assertions in the 2 November integrated record | Supported the tested identities, calculations, and outputs |
-| Gateway checks | 97 fixture and authentication checks | Supported the tested API and access behavior |
-| Authenticated browser review | 18 distinct cases including the corrected accessibility rerun | Supported the recorded local workflows and recovery |
+| Python service tests | 686 passing tests (services suite, update_07) | Supported the tested offline analytical module behaviors |
+| Databricks analytical tests | 309 passing tests (databricks_updated_2 suite) | Supported the tested Gold-layer queries and analytical outputs |
+| Gateway checks | 678 passing gateway tests | Supported the tested API and access behavior |
+| End-to-end browser cases | 25 focused Playwright cases across 9 pages at 5 viewport widths | Supported the recorded dashboard rendering and interaction behavior |
+| UI quality review | 37 issues fixed, 5 partly fixed | Supported the visual and functional quality of the dashboard interface |
 | Client acceptance | No attributable completed client trial established | Client usability and formal acceptance required a separate trial |
 | Operating evaluation | No verified before-and-after stock or expiry study | Measured operating benefit remained unestablished |
 
-*Source: 2 November integrated acceptance record. Historical test counts were not added into a single total because suites overlapped and related to different versions and scopes.*
+*Source: November 2026 (update_07) verification record. Test suite counts reflected scoped verification at that version; suites addressed different system layers and are not additive.*
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The 31 October interface inspection captured the state of the dashboard before the November recovery. Table 4.32 summarizes the component status as of 31 October.
 
@@ -949,6 +993,8 @@
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The expanded 22-recipe territorial comparison recorded WAPE of 26.14 percent at lead-1, 58.56 percent at lead-3, and 63.37 percent at lead-6 in its four-case inspected extension, using recent mean of six months at leads one and three and direct ridge at lead six. The historical TRIVASC pilot found that quantity ridge (WAPE 42.75 percent) outperformed external-feature variants including disease surveillance and weather regressors on the six retrospective targets. The historical company-revenue experiment found last observed value WAPE of 37.76 percent over 12 audit observations in 2025.
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An extended evaluation study assessed 36 models in total across the forecast research program. The study scorecard covered 79 cells and 5,123 paired rows. The confirmed reference forecast mean_6 (recent mean of six months) recorded 49.67 percent WAPE with a mean bias of negative 10.76 percent. No model from the extended evaluation met the pre-registered win rule. The D3 large-document split study showed that the base series achieved lead-1 WAPE of 37.1 to 38.4 percent against 49.7 percent for the total series, but forecasting total demand as base plus trailing large-order mean failed the win rule. The day-20 WAPE panel recorded 30.3 percent against 37.0 percent over the most recent twelve months, and backtest replay reduced the September 2025 error from negative 62 percent to positive 11 percent. Two pre-registered weather tests both failed: W1 (weather-regime coverage 66.1 percent, below the 75 to 85 percent rule) and W2 (typhoon disruption association p = 0.43). An association study confirmed no significant association between DII/RSI and monthly pharmaceutical sales in any of the eight evaluated territories after trend removal. Among four new prediction targets, the government large-order range prediction and the late-reorder flag passed their registration rules; the segment chance, budget-cycle, and survival models failed.
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Limitations to SO3 included the small scored cohorts for unit research (6 and 4 targets), the absence of prospective accuracy evidence beyond the current sales cutoff, the conditional nature of SARIMAX external regressors, and the retrospective rather than prospective character of all evaluated comparisons. The results described method behavior on the available data and did not establish an approved operational forecast model.
 
 ### **5.1.4 SO4: Procurement Scenarios**
@@ -957,11 +1003,13 @@
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The 42-case purchase-capacity comparison confirmed consistent constraint handling across allocation methods. The 2,500 sensitivity rows and 27,000 BUPIRIGHT policy simulations documented the relationship between service level and stock turnover under varied input assumptions. A fresh local verification on 3 November 2026 passed all 47 existing tests across the inventory-policy, weighted-allocation, dated-selection, dated-review, feasibility-screen, and STL suites.
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A simulated benefit analysis compared the scenario-based approach against a uniform months-of-cover rule. Under the same target service level, the scenario-based planning required 15 to 52 percent less stock than the uniform rule. The simulation described behavior under entered assumptions and did not establish actual stock reductions in operations. Four new offline analytical modules were added: `horizon_routing.py`, `abc_cold_start_hybrid.py`, `tender_snapshots.py`, and `external_signal_readiness.py`. These ran offline within the Python analytics service and supplied evidence for planning and risk-calendar outputs without acting as runtime dashboard sources.
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Limitations to SO4 included the absence of verified current inventory, batch expiry, actual supplier costs, and historical demand-fulfillment records. Entered assumptions could not substitute for independently verified operating inputs. Simulated fill rates, projected expiry exposure, and boundary scenarios described behavior under those assumptions; they did not establish actual inventory improvements, stockout reductions, or cost savings. Procurement authorization remained outside the system's scope.
 
 ### **5.1.5 SO5: Integrated Dashboard**
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The study implemented and verified a multi-module DSS dashboard covering five analytical pages: Sales Diagnostics, Product Prioritization, Area Prioritization, Forecast Modeling, and Prescriptive Planning. Supporting pages included Executive Overview, Data Source, View Sales Data, and Weather API Validation. The 2 November 2026 integrated acceptance record documented 18 authenticated browser cases, 97 gateway and authentication checks, and 11,283 source, model, and native-CSV assertions. Frontend type checks, backend type checks, and lint checks also passed.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The study implemented and verified a multi-module DSS dashboard covering five analytical pages: Sales Diagnostics, Product Prioritization, Area Prioritization, Forecast Modeling, and Prescriptive Planning. Supporting pages included Executive Overview, Data Source, View Sales Data, and Weather API Validation. The November 2026 (update_07) verification record comprised 686 passing Python service tests, 309 passing Databricks analytical tests, 678 passing gateway tests, and 25 focused Playwright end-to-end cases across nine dashboard pages at five viewport widths. A UI quality review documented 37 fixed and 5 partly fixed issues. Frontend type checks, backend type checks, and lint checks also passed.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The 31 October 2026 interface captures documented partial availability at the time of capture: financial overview, sales diagnostics, product prioritization, revenue baseline, and data source pages loaded successfully, while the regional review, ABC and unit research panels, and planning shortlist were unavailable due to the source-version mismatch resolved on 2 November. The recovery established that dashboard access was restorable within the tested local configuration.
 
@@ -987,7 +1035,7 @@
 
 ### **5.2.4 Expand Forecast Evaluation Windows Before Operational Selection**
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No forecast method in the current study was evaluated over a window large enough to establish prospective reliability for a production procurement system. Before selecting an operational forecasting method, management should commission a prospective pilot covering at least 12 consecutive monthly predictions against realized outcomes. The evaluation should use the same target definition (net sales or confirmed quantity), the same lead time, and an independent scored cohort that was not observed at the time of model selection. The pilot should report WAPE, bias, and error-concentration analysis by product or area.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thirty-six models were evaluated across the forecast research program, and no model from the extended evaluation met the pre-registered win rule that would have replaced mean_6 as the reference forecast. The evaluation confirmed mean_6 at 49.67 percent WAPE and negative 10.76 percent bias. Before selecting an operational forecasting method, management should commission a prospective pilot covering at least 12 consecutive monthly predictions against realized outcomes. The evaluation should use the same target definition (net sales or confirmed quantity), the same lead time, and an independent scored cohort that was not observed at the time of model selection. The pilot should report WAPE, bias, and error-concentration analysis by product or area.
 
 ### **5.2.5 Deploy Clinical Prioritization Criteria for ABC Classification**
 
@@ -1011,7 +1059,7 @@
 
 ### **5.3.2 External Predictor Integration Under Prospective Conditions**
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The TRIVASC historical pilot found that disease surveillance and weather variables did not improve on quantity-ridge performance for that product under the available six-target retrospective cohort. Future research should systematically evaluate whether specific disease-burden indicators improve forecasting accuracy for therapeutically relevant product classes—for example, linking dengue and typhoid surveillance to relevant antimicrobial or antipyretic product demand—under prospective evaluation conditions with regressor values available at forecast issuance. SARIMAX or Prophet with regressors should be evaluated only when the regressor values can be confirmed available at the time of each prediction.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The TRIVASC historical pilot found that disease surveillance and weather variables did not improve on quantity-ridge performance for that product under the available six-target retrospective cohort. Pre-registered weather tests W1 and W2 both failed their respective registration criteria using data through September 2026 (see Section 4.2.3.3.5), and an association study confirmed no significant independent relationship between DII/RSI and monthly pharmaceutical sales in any of the eight evaluated territories after trend removal. Per Decision 017, DOH, PAGASA, and NASA POWER data therefore inform planning outputs—the risk calendar, risk indicator, and buffer scenario—and do not drive operational forecasts. Mean_6 remains the reference baseline unless a new pre-registered challenger beats it on held-out months. Future research should systematically evaluate whether specific disease-burden indicators improve forecasting accuracy for therapeutically relevant product classes—for example, linking dengue and typhoid surveillance to relevant antimicrobial or antipyretic product demand—under prospective evaluation conditions with regressor values available at forecast issuance. SARIMAX or Prophet with regressors should be evaluated only when the regressor values can be confirmed available at the time of each prediction and the regressor meets a pre-registered accuracy threshold on held-out data.
 
 ### **5.3.3 Regional Demand Disaggregation**
 
